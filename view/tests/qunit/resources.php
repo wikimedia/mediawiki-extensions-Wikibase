@@ -5,6 +5,7 @@
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 return array_merge(
+	include( __DIR__ . '/jquery/resources.php' ),
 	include( __DIR__ . '/wikibase/entityChangers/resources.php' ),
 	include( __DIR__ . '/wikibase/view/resources.php' )
 );

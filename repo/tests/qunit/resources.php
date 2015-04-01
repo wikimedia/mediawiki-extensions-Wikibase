@@ -126,7 +126,6 @@ return call_user_func( function() {
 
 	return array_merge(
 		$modules,
-		include( __DIR__ . '/jquery/resources.php' ),
 		include __DIR__ . '/store/resources.php',
 		include __DIR__ . '/utilities/resources.php'
 	);
