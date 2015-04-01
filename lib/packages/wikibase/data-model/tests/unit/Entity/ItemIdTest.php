@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -15,7 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemIdTest extends \PHPUnit_Framework_TestCase {
+class ItemIdTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider idSerializationProvider
@@ -68,6 +69,27 @@ class ItemIdTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetNumericId() {
+		$id = new ItemId( 'Q1' );
+		$this->assertSame( 1, $id->getNumericId() );
+	}
+
+	public function testGetEntityType() {
+		$id = new ItemId( 'Q1' );
+		$this->assertSame( 'item', $id->getEntityType() );
+	}
+
+	public function testSerialize() {
+		$id = new ItemId( 'Q1' );
+		$this->assertSame( '["item","Q1"]', $id->serialize() );
+	}
+
+	public function testUnserialize() {
+		$id = new ItemId( 'Q1' );
+		$id->unserialize( '["item","Q2"]' );
+		$this->assertSame( 'Q2', $id->getSerialization() );
+	}
+
 	/**
 	 * @dataProvider numericIdProvider
 	 */
@@ -97,6 +119,7 @@ class ItemIdTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidNumericIdProvider() {
 		return array(
+			array( 'Q1' ),
 			array( '42.1' ),
 			array( 42.1 ),
 			array( 2147483648.1 ),
