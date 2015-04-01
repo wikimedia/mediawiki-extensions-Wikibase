@@ -21,9 +21,9 @@ use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelLookup;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
-use Wikibase\Template\TemplateFactory;
 use Wikibase\View\EmptyEditSectionGenerator;
 use Wikibase\View\EntityViewFactory;
+use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**

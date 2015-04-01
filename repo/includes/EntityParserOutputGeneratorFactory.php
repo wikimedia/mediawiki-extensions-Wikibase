@@ -7,8 +7,8 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Template\TemplateFactory;
 use Wikibase\View\EntityViewFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * @since 0.5

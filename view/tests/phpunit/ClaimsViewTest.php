@@ -15,10 +15,10 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\View\ClaimHtmlGenerator;
 use Wikibase\View\StatementGroupListView;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\StatementGroupListView
@@ -41,10 +41,10 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @uses Wikibase\Template\Template
-	 * @uses Wikibase\Template\TemplateFactory
-	 * @uses Wikibase\Template\TemplateRegistry
 	 * @uses Wikibase\View\EditSectionGenerator
+	 * @uses Wikibase\View\Template\Template
+	 * @uses Wikibase\View\Template\TemplateFactory
+	 * @uses Wikibase\View\Template\TemplateRegistry
 	 */
 	public function testGetHtml() {
 		$propertyId = new PropertyId( 'P77' );

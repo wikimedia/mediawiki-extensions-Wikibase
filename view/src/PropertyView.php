@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
-use Wikibase\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Class for creating views for Property instances.

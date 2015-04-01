@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Template\Test;
+namespace Wikibase\View\Template\Test;
 
-use Wikibase\Template\TemplateRegistry;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\Template\TemplateRegistry
+ * @covers Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseLib

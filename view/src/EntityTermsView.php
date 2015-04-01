@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Generates HTML to display the fingerprint of an entity

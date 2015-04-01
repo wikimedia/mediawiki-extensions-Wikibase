@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Base class for generating Snak html.

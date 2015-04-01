@@ -11,7 +11,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Creates views for lists of site links.

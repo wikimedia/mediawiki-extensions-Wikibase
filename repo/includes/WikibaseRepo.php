@@ -80,14 +80,14 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store\TermBuffer;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\Template\TemplateFactory;
-use Wikibase\Template\TemplateRegistry;
 use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 use Wikibase\ValuesFinder;
 use Wikibase\View\EntityViewFactory;
+use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * Top level factory for the WikibaseRepo extension.
