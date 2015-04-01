@@ -27,6 +27,9 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 #### Enhancements
 * Consolidated code structure, updated and added code documentation to allow generating a proper documentation using JSDuck.
 
+### 0.6.3 (2015-04-01)
+* Remove explicit resource loader dependency on jquery.qunit.
+
 ### 0.6.1 (2014-11-07)
 
 #### Enhancements
