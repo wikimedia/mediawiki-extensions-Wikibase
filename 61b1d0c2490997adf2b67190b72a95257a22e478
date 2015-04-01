@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_904b4962",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-01T10:20:32Z",
+      "side": 1,
+      "message": "indeed :(",
+      "revId": "61b1d0c2490997adf2b67190b72a95257a22e478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b04e8570",
+        "filename": "view/src/EntityViewFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-01T10:20:32Z",
+      "side": 1,
+      "message": "just a nitpick, i would camel case the variable name... $plainTextIdFormatterFactory",
+      "revId": "61b1d0c2490997adf2b67190b72a95257a22e478",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
