@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\View\Module;
 
 use FormatJson;
 use ResourceLoaderContext;

@@ -26,15 +26,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'templates.tests' => $moduleBase + array(
-			'scripts' => array(
-				'templates.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.templates',
-			),
-		),
-
 		'wikibase.dataTypeStore.tests' => $moduleBase + array(
 			'scripts' => array(
 				'dataTypes/wikibase.dataTypeStore.tests.js',

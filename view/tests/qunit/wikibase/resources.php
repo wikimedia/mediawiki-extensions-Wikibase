@@ -24,6 +24,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.templates.tests' => $moduleBase + array(
+			'scripts' => array(
+				'templates.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.templates',
+			),
+		),
+
 		'wikibase.ValueViewBuilder.tests' => $moduleBase + array(
 			'scripts' => array(
 				'wikibase.ValueViewBuilder.tests.js'

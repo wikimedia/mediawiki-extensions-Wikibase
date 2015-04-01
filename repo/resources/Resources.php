@@ -59,11 +59,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.templates' => $moduleTemplate + array(
-			'class' => 'Wikibase\TemplateModule',
-			'scripts' => 'templates.js',
-		),
-
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
