@@ -757,16 +757,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
-	 * Exits edit mode and restores the value from before the edit mode has been started.
-	 * (Shortcut to `this.stopEditing( true )`)
-	 *
-	 * @return {undefined}
-	 */
-	cancelEditing: function() {
-		return this.stopEditing( true );
-	},
-
-	/**
 	 * @inheritdoc
 	 */
 	isEmpty: function() {
