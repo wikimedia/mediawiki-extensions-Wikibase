@@ -34,6 +34,11 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.templates' => $moduleTemplate + array(
+			'class' => 'Wikibase\View\Module\TemplateModule',
+			'scripts' => 'templates.js',
+		),
+
 		'wikibase.ValueViewBuilder' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ValueViewBuilder.js',
