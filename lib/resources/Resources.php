@@ -26,26 +26,6 @@ return call_user_func( function() {
 			'class' => 'Wikibase\RepoAccessModule',
 		),
 
-		// common styles independent from JavaScript being enabled or disabled
-		'wikibase.common' => $moduleTemplate + array(
-			'styles' => array(
-				// Order must be hierarchical, do not order alphabetically
-				'wikibase.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.aliasesview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.descriptionview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.entityview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.entitytermsview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.labelview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkgrouplistview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.statementgroupview.css',
-			)
-		),
-
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
@@ -98,7 +78,6 @@ return call_user_func( function() {
 	$modules = array_merge(
 		$modules,
 		include( __DIR__ . '/deprecated/resources.php' ),
-		include( __DIR__ . '/jquery.wikibase/resources.php' ),
 		include( __DIR__ . '/jquery.wikibase-shared/resources.php' ),
 		include( __DIR__ . '/utilities/resources.php' )
 	);
