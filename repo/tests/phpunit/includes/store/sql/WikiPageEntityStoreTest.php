@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use PHPUnit_Framework_TestCase;
+use MediaWikiTestCase;
 use Revision;
 use Status;
 use User;
@@ -34,7 +34,7 @@ use Wikibase\SqlIdGenerator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikiPageEntityStoreTest extends PHPUnit_Framework_TestCase {
+class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 	/**
 	 * @var EntityIdParser
