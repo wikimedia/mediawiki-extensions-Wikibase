@@ -78,8 +78,7 @@ return call_user_func( function() {
 	$modules = array_merge(
 		$modules,
 		include( __DIR__ . '/deprecated/resources.php' ),
-		include( __DIR__ . '/jquery.wikibase-shared/resources.php' ),
-		include( __DIR__ . '/utilities/resources.php' )
+		include( __DIR__ . '/jquery.wikibase-shared/resources.php' )
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {

@@ -58,9 +58,6 @@ return call_user_func( function() {
 
 	);
 
-	return array_merge(
-		$modules,
-		include __DIR__ . '/utilities/resources.php'
-	);
+	return $modules;
 
 } );
