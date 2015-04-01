@@ -9,6 +9,7 @@ return call_user_func( function() {
 		include( __DIR__ . '/jquery/resources.php' ),
 		include( __DIR__ . '/jquery/ui/resources.php' ),
 		include( __DIR__ . '/wikibase/entityChangers/resources.php' ),
+		include( __DIR__ . '/wikibase/store/resources.php' ),
 		include( __DIR__ . '/wikibase/view/resources.php' )
 	);
 } );
