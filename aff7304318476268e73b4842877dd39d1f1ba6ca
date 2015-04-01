@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f3bac704",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-04-01T12:43:58Z",
+      "side": 1,
+      "message": "The entityChangersFactory is only used for creating a referencesChanger. So, we shouldn\u0027t pass in an entityChangersFactory, but always a referencesChanger.\n\nAs for the different modes of operation: I think selecting them should be very explicit, and I think the statementview internally should be very explicit about where it branches according to this setting. I doubt we need both modes, though, anyway.",
+      "revId": "aff7304318476268e73b4842877dd39d1f1ba6ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_933593a5",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-04-01T12:43:58Z",
+      "side": 1,
+      "message": "Snakviews don\u0027t take referenceChangers, referenceviews do.",
+      "revId": "aff7304318476268e73b4842877dd39d1f1ba6ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d34eab3c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-04-01T12:43:58Z",
+      "side": 1,
+      "message": "I don\u0027t get this. Why is disabling only propagated to the references if a referencesChanger has been passed?",
+      "revId": "aff7304318476268e73b4842877dd39d1f1ba6ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
