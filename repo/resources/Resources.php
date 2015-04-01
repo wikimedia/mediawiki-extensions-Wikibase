@@ -25,55 +25,6 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'jquery.ui.closeable' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.ui/jquery.ui.closeable.js',
-			),
-			'styles' => array(
-				'jquery.ui/jquery.ui.closeable.css',
-			),
-			'dependencies' => array(
-				'jquery.ui.TemplatedWidget',
-			),
-		),
-
-		'jquery.ui.tagadata' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.ui/jquery.ui.tagadata.js',
-			),
-			'styles' => array(
-				'jquery.ui/jquery.ui.tagadata.css',
-			),
-			'dependencies' => array(
-				'jquery.event.special.eachchange',
-				'jquery.effects.blind',
-				'jquery.inputautoexpand',
-				'jquery.ui.widget',
-			),
-		),
-
-		'jquery.ui.EditableTemplatedWidget' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.ui/jquery.ui.EditableTemplatedWidget.js',
-			),
-			'dependencies' => array(
-				'jquery.ui.closeable',
-				'jquery.ui.TemplatedWidget',
-				'util.inherit',
-			),
-		),
-
-		'jquery.ui.TemplatedWidget' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.ui/jquery.ui.TemplatedWidget.js',
-			),
-			'dependencies' => array(
-				'wikibase.templates',
-				'jquery.ui.widget',
-				'util.inherit',
-			),
-		),
-
 		'jquery.wikibase.entitysearch' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.entitysearch.js',
