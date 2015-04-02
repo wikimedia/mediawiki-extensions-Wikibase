@@ -25,6 +25,7 @@
 
 #### Additions
 
+* Added `StatementByGuidMap`
 * Added `StatementList::getIndexByGuid`
 * `ReferenceList::addNewReference` and `Statement::addNewReference` support an array of Snaks now
 
