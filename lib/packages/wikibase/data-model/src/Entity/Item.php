@@ -110,7 +110,7 @@ class Item extends Entity implements StatementListProvider {
 	 * If there already is a site link with the site id of the provided site link,
 	 * then that one will be overridden by the provided one.
 	 *
-	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList()->addSiteLink() instead.
 	 * @since 0.6
 	 *
 	 * @param SiteLink $siteLink
@@ -126,7 +126,7 @@ class Item extends Entity implements StatementListProvider {
 	/**
 	 * Removes the sitelink with specified site ID if the Item has such a sitelink.
 	 *
-	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList()->removeLinkWithSiteId() instead.
 	 * @since 0.1
 	 *
 	 * @param string $siteId the target site's id
@@ -136,7 +136,7 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList() instead,
 	 * @since 0.6
 	 *
 	 * @return SiteLink[]
@@ -146,7 +146,7 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList()->getBySiteId() instead.
 	 * @since 0.6
 	 *
 	 * @param string $siteId
@@ -159,7 +159,7 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList()->hasLinkWithSiteId() instead.
 	 * @since 0.4
 	 *
 	 * @param string $siteId
@@ -171,7 +171,7 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList()->isEmpty() instead.
 	 * @since 0.5
 	 *
 	 * @return bool
@@ -201,7 +201,7 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 1.0
+	 * @deprecated since 1.0, use new Statement() instead.
 	 *
 	 * @param Snak $mainSnak
 	 *
