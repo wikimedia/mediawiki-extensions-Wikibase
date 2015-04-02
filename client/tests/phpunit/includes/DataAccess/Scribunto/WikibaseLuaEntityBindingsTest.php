@@ -1,15 +1,15 @@
 <?php
 
-namespace Wikibase\Client\Tests\Scribunto;
+namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
-use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
+use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\Client\Scribunto\WikibaseLuaEntityBindings
+ * @covers Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings
  *
  * @group Wikibase
  * @group WikibaseClient
