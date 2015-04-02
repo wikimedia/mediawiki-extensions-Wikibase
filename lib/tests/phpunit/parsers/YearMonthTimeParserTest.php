@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Parsers\Test;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use ValueParsers\TimeParser;
 use Wikibase\Lib\Parsers\YearMonthTimeParser;
 
 /**
@@ -42,83 +41,84 @@ class YearMonthTimeParserTest extends StringValueParserTest {
 	 * @return array
 	 */
 	public function validInputProvider() {
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+
 		$argLists = array();
 
 		$valid = array(
 			// leading zeros
 			'00001 1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'000000001 100001999' =>
-				array( '+0000000100001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000100001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 
 			// use string month names
 			'Jan/1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'January/1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'January/1' =>
-				array( '+0000000000000001-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1999 January' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'January 1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'January-1' =>
-				array( '+0000000000000001-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'JanuARY-1' =>
-				array( '+0000000000000001-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'JaN/1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'januARY-1' =>
-				array( '+0000000000000001-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'jan/1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 
 			// use different date separators
 			'1-1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1/1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1 / 1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1 1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1,1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1.1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1. 1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 
 			// presume mm/yy unless impossible month, in which case switch
 			'12/12' =>
-				array( '+0000000000000012-12-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000012-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'12/11' =>
-				array( '+0000000000000011-12-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000011-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'11/12' =>
-				array( '+0000000000000012-11-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000012-11-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'13/12' =>
-				array( '+0000000000000013-12-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000013-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'12/13' =>
-				array( '+0000000000000013-12-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000013-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'2000 1' =>
-				array( '+0000000000002000-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002000-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 
 			// big years
 			'April-1000000001' =>
-				array( '+0000001000000001-04-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000001000000001-04-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'April 1000000001' =>
-				array( '+0000001000000001-04-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000001000000001-04-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1000000001 April' =>
-				array( '+0000001000000001-04-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000001000000001-04-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'1 13000' =>
-				array( '+0000000000013000-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000013000-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 
 			// parse 0 month as if no month has been entered
 			'0.1999' =>
-				array( '+0000000000001999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'1999 0' =>
-				array( '+0000000000001999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
-
+				array( '+0000000000001999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 		);
 
 		foreach ( $valid as $value => $expected ) {

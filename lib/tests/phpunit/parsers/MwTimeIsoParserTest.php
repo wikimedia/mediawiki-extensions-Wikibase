@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Parsers\Test;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use ValueParsers\TimeParser;
 use Wikibase\Lib\Parsers\MWTimeIsoParser;
 
 /**
@@ -42,118 +41,119 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 	 * @return array
 	 */
 	public function validInputProvider() {
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+
 		$argLists = array();
 
 		$valid = array(
-
 			// + dates
 			'13 billion years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'130 billion years CE' =>
-				array( '+0000130000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000130000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13000 billion years CE' =>
-				array( '+0013000000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0013000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,000 billion years CE' =>
-				array( '+0013000000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0013000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,000 million years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,800 million years CE' =>
-				array( '+0000013800000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000013800000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $gregorian ),
 			'100 million years CE' =>
-				array( '+0000000100000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000100000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $gregorian ),
 			'70 million years CE' =>
-				array( '+0000000070000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000070000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10Ma, $gregorian ),
 			'77 million years CE' =>
-				array( '+0000000077000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000077000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'13 million years CE' =>
-				array( '+0000000013000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000013000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'1 million years CE' =>
-				array( '+0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'100000 years CE' =>
-				array( '+0000000000100000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $gregorian ),
 			'100,000 years CE' =>
-				array( '+0000000000100000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $gregorian ),
 			'10000 years CE' =>
-				array( '+0000000000010000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000010000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $gregorian ),
 			'99000 years CE' =>
-				array( '+0000000000099000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000099000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'99,000 years CE' =>
-				array( '+0000000000099000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000099000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'5. millennium' =>
-				array( '+0000000000005000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000005000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'55. millennium' =>
-				array( '+0000000000055000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000055000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'10. century' =>
-				array( '+0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $gregorian ),
 			'12. century' =>
-				array( '+0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $gregorian ),
 			'1980s' =>
-				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001980-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 			'2000s' =>
-				array( '+0000000000002000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 			'10s' =>
-				array( '+0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 			'12s' =>
-				array( '+0000000000000012-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 
 			// - dates
 			'13 billion years BCE' =>
-				array( '-0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'130 billion years BCE' =>
-				array( '-0000130000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000130000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13000 billion years BCE' =>
-				array( '-0013000000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0013000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,000 billion years BCE' =>
-				array( '-0013000000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0013000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,000 million years BCE' =>
-				array( '-0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,800 million years BCE' =>
-				array( '-0000013800000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000013800000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $gregorian ),
 			'100 million years BCE' =>
-				array( '-0000000100000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000100000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $gregorian ),
 			'70 million years BCE' =>
-				array( '-0000000070000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000070000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10Ma, $gregorian ),
 			'77 million years BCE' =>
-				array( '-0000000077000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000077000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'13 million years BCE' =>
-				array( '-0000000013000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000013000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'1 million years BCE' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'100000 years BCE' =>
-				array( '-0000000000100000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $gregorian ),
 			'100,000 years BCE' =>
-				array( '-0000000000100000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $gregorian ),
 			'10000 years BCE' =>
-				array( '-0000000000010000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000010000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $gregorian ),
 			'99000 years BCE' =>
-				array( '-0000000000099000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000099000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'99,000 years BCE' =>
-				array( '-0000000000099000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000099000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'5. millennium BCE' =>
-				array( '-0000000000005000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000005000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'55. millennium BCE' =>
-				array( '-0000000000055000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000055000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'10. century BCE' =>
-				array( '-0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000001000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $gregorian ),
 			'12. century BCE' =>
-				array( '-0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000001200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $gregorian ),
 			'10s BCE' =>
-				array( '-0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000000010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 			'12s BCE' =>
-				array( '-0000000000000012-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000000012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 			// also parse BC
 			'5. millennium BC' =>
-				array( '-0000000000005000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000005000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'55. millennium BC' =>
-				array( '-0000000000055000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000055000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'10. century BC' =>
-				array( '-0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000001000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $gregorian ),
 			'12. century BC' =>
-				array( '-0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000001200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $gregorian ),
 			'10s BC' =>
-				array( '-0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000000010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 			'12s BC' =>
-				array( '-0000000000000012-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000000012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
