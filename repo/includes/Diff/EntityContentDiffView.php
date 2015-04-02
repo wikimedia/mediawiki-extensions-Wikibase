@@ -23,7 +23,7 @@ use Wikibase\Lib\EscapingEntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -82,8 +82,8 @@ class EntityContentDiffView extends DifferenceEngine {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
-		$labelLookup = new LanguageLabelLookup( $termLookup, $langCode );
-		$labelFormatter = new EntityIdLabelFormatter( $labelLookup );
+		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, $langCode );
+		$labelFormatter = new EntityIdLabelFormatter( $labelDescriptionLookup );
 
 		$this->propertyNameFormatter = new EscapingEntityIdFormatter( $labelFormatter, 'htmlspecialchars' );
 
@@ -106,7 +106,7 @@ class EntityContentDiffView extends DifferenceEngine {
 			),
 			$wikibaseRepo->getSiteStore(),
 			new EntityIdHtmlLinkFormatter(
-				$labelLookup,
+				$labelDescriptionLookup,
 				$wikibaseRepo->getEntityTitleLookup(),
 				new LanguageNameLookup()
 			)

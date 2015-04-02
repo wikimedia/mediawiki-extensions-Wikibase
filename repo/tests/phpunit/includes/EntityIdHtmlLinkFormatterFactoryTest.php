@@ -36,7 +36,7 @@ class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 	public function testGetEntityIdFormatter() {
 		$factory = $this->getFormatterFactory();
 
-		$formatter = $factory->getEntityIdFormater( $this->getMock( 'Wikibase\Lib\Store\LabelLookup' ) );
+		$formatter = $factory->getEntityIdFormater( $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' ) );
 		$this->assertInstanceOf( 'Wikibase\Lib\EntityIdFormatter', $formatter );
 	}
 

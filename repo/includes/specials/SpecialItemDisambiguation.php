@@ -11,7 +11,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
 use Wikibase\TermIndex;
@@ -173,13 +173,13 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		// different places and maybe not necessary to be this way.
 
 		// @fixme inject this!
-		$labelLookup = new LanguageLabelLookup(
+		$labelDescriptionLookup = new LanguageLabelDescriptionLookup(
 			new EntityRetrievingTermLookup( $this->entityLookup ),
 			$this->getLanguage()->getCode()
 		);
 
 		$linkFormatter = new EntityIdHtmlLinkFormatter(
-			$labelLookup,
+			$labelDescriptionLookup,
 			$this->entityTitleLookup,
 			$this->languageNameLookup
 		);

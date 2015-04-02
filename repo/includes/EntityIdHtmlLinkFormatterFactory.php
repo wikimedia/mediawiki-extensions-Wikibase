@@ -6,7 +6,7 @@ use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -51,13 +51,13 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	/**
 	 * @see EntityIdFormatterFactory::getEntityIdFormater
 	 *
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return EntityIdHtmlLinkFormatter
 	 */
-	public function getEntityIdFormater( LabelLookup $labelLookup ) {
+	public function getEntityIdFormater( LabelDescriptionLookup $labelDescriptionLookup ) {
 		return new EntityIdHtmlLinkFormatter(
-			$labelLookup,
+			$labelDescriptionLookup,
 			$this->titleLookup,
 			$this->languageNameLookup
 		);
