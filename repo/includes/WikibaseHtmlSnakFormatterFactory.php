@@ -7,7 +7,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 use Wikibase\View\HtmlSnakFormatterFactory;
 
 /**
@@ -32,19 +32,19 @@ class WikibaseHtmlSnakFormatterFactory implements HtmlSnakFormatterFactory {
 	/**
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain $languageFallbackChain
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return FormatterOptions
 	 */
 	private function getFormatterOptions(
 		$languageCode,
 		LanguageFallbackChain $languageFallbackChain,
-		LabelLookup $labelLookup
+		LabelDescriptionLookup $labelDescriptionLookup
 	) {
 		$formatterOptions = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $languageCode,
 			'languages' => $languageFallbackChain,
-			'LabelLookup' => $labelLookup,
+			'LabelDescriptionLookup' => $labelDescriptionLookup,
 		) );
 		return $formatterOptions;
 	}
@@ -52,16 +52,16 @@ class WikibaseHtmlSnakFormatterFactory implements HtmlSnakFormatterFactory {
 	/**
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain $languageFallbackChain
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return SnakFormatter
 	 */
 	public function getSnakFormatter(
 		$languageCode,
 		LanguageFallbackChain $languageFallbackChain,
-		LabelLookup $labelLookup
+		LabelDescriptionLookup $labelDescriptionLookup
 	) {
-		$formatterOptions = $this->getFormatterOptions( $languageCode, $languageFallbackChain, $labelLookup );
+		$formatterOptions = $this->getFormatterOptions( $languageCode, $languageFallbackChain, $labelDescriptionLookup );
 
 		return $this->snakFormatterFactory->getSnakFormatter(
 			SnakFormatter::FORMAT_HTML_WIDGET,

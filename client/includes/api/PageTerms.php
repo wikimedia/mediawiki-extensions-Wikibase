@@ -28,7 +28,7 @@ use Wikibase\TermIndex;
 class PageTerms extends ApiQueryBase {
 
 	/**
-	 * @todo: use an (extended) LabelLookup, so we can apply language fallback.
+	 * @todo: Use LabelDescriptionLookup for labels/descriptions, so we can apply language fallback.
 	 * @var TermIndex
 	 */
 	private $termIndex;
