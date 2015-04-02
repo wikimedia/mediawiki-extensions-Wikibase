@@ -105,6 +105,9 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.14.3 (2015-04-02)
+* Fix premature afterparse handling (e.g. save) of parsed values.
+
 ### 0.14.2 (2015-03-31)
 
 ### Bugfixes
