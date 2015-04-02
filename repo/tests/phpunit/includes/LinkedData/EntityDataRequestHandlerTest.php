@@ -104,7 +104,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 				// using the API
 				'json', // default
 				'php',
-				'xml',
 
 				// using easyRdf
 				'rdfxml',
@@ -118,7 +117,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			// using the API
 			'json' => 'json', // default
 			'php' => 'php',
-			'xml' => 'xml',
 
 			// using easyRdf
 			'rdfxml' => 'rdf',

@@ -63,7 +63,6 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				// using the API
 				'json', // default
 				'php',
-				'xml',
 
 				// using RdfWriter
 				'rdfxml',
@@ -101,19 +100,16 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	private static $apiMimeTypes = array(
 		'application/vnd.php.serialized',
 		'application/json',
-		'text/xml'
 	);
 
 	private static $apiExtensions = array(
 		'php',
 		'json',
-		'xml'
 	);
 
 	private static $apiFormats = array(
 		'php',
 		'json',
-		'xml'
 	);
 
 	private static $rdfMimeTypes = array(
@@ -160,9 +156,6 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	private static $formatMappings = array(
 		'json' => 'json', // should be api json
 		'application/json' => 'json', // should be api json
-		'xml' => 'xml', // should be api xml, not rdfxml
-		'text/xml' => 'xml', // should be api xml, not rdfxml
-		'application/xml' => 'xml', // should be api xml, not rdfxml
 		'application/rdf+xml' => 'rdfxml', // should be rdfxml
 		'text/n-triples' => 'ntriples', // should be ntriples
 		'text/plain' => 'ntriples', // should be ntriples
