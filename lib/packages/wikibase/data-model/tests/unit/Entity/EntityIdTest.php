@@ -81,11 +81,4 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'string', $id->__toString() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetPrefixedId( EntityId $id ) {
-		$this->assertEquals( $id->getSerialization(), $id->getPrefixedId() );
-	}
-
 }

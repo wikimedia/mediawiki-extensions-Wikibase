@@ -27,17 +27,6 @@ abstract class EntityId implements \Comparable, \Serializable {
 	}
 
 	/**
-	 * Returns the id serialization.
-	 * @deprecated Use getSerialization instead.
-	 * (soft deprecation, this alias will stay until it is no longer used)
-	 *
-	 * @return string
-	 */
-	public function getPrefixedId() {
-		return $this->serialization;
-	}
-
-	/**
 	 * This is a human readable representation of the EntityId.
 	 * This format is allowed to change and should therefore not
 	 * be relied upon to be stable.
