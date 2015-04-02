@@ -33,9 +33,9 @@ class WikibaseValueFormatterBuilders {
 	private $defaultLanguage;
 
 	/**
-	 * @var FormatterLabelLookupFactory
+	 * @var FormatterLabelDescriptionLookupFactory
 	 */
-	private $labelLookupFactory;
+	private $labelDescriptionLookupFactory;
 
 	/**
 	 * @var EntityTitleLookup|null
@@ -117,18 +117,18 @@ class WikibaseValueFormatterBuilders {
 
 	/**
 	 * @param Language $defaultLanguage
-	 * @param FormatterLabelLookupFactory $labelLookupFactory
+	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
 		Language $defaultLanguage,
-		FormatterLabelLookupFactory $labelLookupFactory,
+		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
-		$this->labelLookupFactory = $labelLookupFactory;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
@@ -525,9 +525,9 @@ class WikibaseValueFormatterBuilders {
 	 * @return EntityIdLabelFormatter
 	 */
 	private function newEntityIdFormatter( FormatterOptions $options ) {
-		$labelLookup = $this->labelLookupFactory->getLabelLookup( $options );
+		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		return new EntityIdValueFormatter(
-			new EntityIdLabelFormatter( $labelLookup )
+			new EntityIdLabelFormatter( $labelDescriptionLookup )
 		);
 	}
 
@@ -547,10 +547,10 @@ class WikibaseValueFormatterBuilders {
 			);
 		}
 
-		$labelLookup = $this->labelLookupFactory->getLabelLookup( $options );
+		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		return new EntityIdValueFormatter(
 			new EntityIdHtmlLinkFormatter(
-				$labelLookup,
+				$labelDescriptionLookup,
 				$this->entityTitleLookup,
 				$this->languageNameLookup
 			)

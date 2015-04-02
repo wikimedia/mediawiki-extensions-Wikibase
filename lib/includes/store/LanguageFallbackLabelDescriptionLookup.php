@@ -13,8 +13,9 @@ use Wikibase\LanguageFallbackChain;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
-class LanguageFallbackLabelLookup implements LabelLookup {
+class LanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 
 	/**
 	 * @var TermLookup
@@ -47,7 +48,38 @@ class LanguageFallbackLabelLookup implements LabelLookup {
 	public function getLabel( EntityId $entityId ) {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
 		$labels = $this->termLookup->getLabels( $entityId, $fetchLanguages );
-		$extractedData = $this->languageFallbackChain->extractPreferredValue( $labels );
+		$termFallback = $this->getTermFallback( $labels, $fetchLanguages );
+		if ( $termFallback ) {
+			return $termFallback;
+		}
+
+		throw new OutOfBoundsException( 'Label not found for fallback chain.' );
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws OutOfBoundsException
+	 * @return Term
+	 */
+	public function getDescription( EntityId $entityId ) {
+		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
+		$descriptions = $this->termLookup->getDescriptions( $entityId, $fetchLanguages );
+		$termFallback = $this->getTermFallback( $descriptions, $fetchLanguages );
+		if ( $termFallback ) {
+			return $termFallback;
+		}
+
+		throw new OutOfBoundsException( 'Description not found for fallback chain.' );
+	}
+
+	/**
+	 * @param string[] $terms
+	 * @param string[] $fetchLanguages
+	 * @return TermFallback
+	 */
+	private function getTermFallback( array $terms, array $fetchLanguages ) {
+		$extractedData = $this->languageFallbackChain->extractPreferredValue( $terms );
 
 		if ( $extractedData ) {
 			// $fetchLanguages are in order of preference
@@ -61,8 +93,5 @@ class LanguageFallbackLabelLookup implements LabelLookup {
 				$extractedData['source']
 			);
 		}
-
-		throw new OutOfBoundsException( 'Label not found for fallback chain.' );
 	}
-
 }

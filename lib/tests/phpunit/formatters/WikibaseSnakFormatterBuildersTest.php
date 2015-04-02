@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\FormatterLabelLookupFactory;
+use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -66,7 +66,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$lang,
-			new FormatterLabelLookupFactory( $termLookup ),
+			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' )
 		);
 

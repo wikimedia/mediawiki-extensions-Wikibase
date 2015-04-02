@@ -4,7 +4,7 @@ namespace Wikibase\Repo;
 
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -27,12 +27,12 @@ class EntityIdLabelFormatterFactory implements EntityIdFormatterFactory {
 	/**
 	 * @see EntityIdFormatterFactory::getEntityIdFormater
 	 *
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return EntityIdLabelFormatter
 	 */
-	public function getEntityIdFormater( LabelLookup $labelLookup ) {
-		return new EntityIdLabelFormatter( $labelLookup );
+	public function getEntityIdFormater( LabelDescriptionLookup $labelDescriptionLookup ) {
+		return new EntityIdLabelFormatter( $labelDescriptionLookup );
 	}
 
 }

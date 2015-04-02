@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Test;
 
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -11,7 +10,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 
 /**
  * @covers Wikibase\Lib\EntityIdHtmlLinkFormatter
@@ -29,27 +28,27 @@ class EntityIdHtmlLinkFormatterTest extends \MediaWikiTestCase {
 	/**
 	 * @param Term $term
 	 *
-	 * @return LabelLookup
+	 * @return LabelDescriptionLookup
 	 */
-	private function getLabelLookup( Term $term = null ) {
-		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
-		$labelLookup->expects( $this->any() )
+	private function getLabelDescriptionLookup( Term $term = null ) {
+		$labelDescriptionLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
 
-		return $labelLookup;
+		return $labelDescriptionLookup;
 	}
 
 	/**
-	 * @return LabelLookup
+	 * @return LabelDescriptionLookup
 	 */
-	private function getLabelLookupNoLabel() {
-		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
-		$labelLookup->expects( $this->any() )
+	private function getLabelDescriptionLookupNoLabel() {
+		$labelDescriptionLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->throwException( new OutOfBoundsException( 'meep' ) ) );
 
-		return $labelLookup;
+		return $labelDescriptionLookup;
 	}
 
 	/**
@@ -95,9 +94,9 @@ class EntityIdHtmlLinkFormatterTest extends \MediaWikiTestCase {
 
 	private function getFormatter( $hasLabel, $exists, $term = null ) {
 		if ( $hasLabel ) {
-			$labelLookup = $this->getLabelLookup( $term );
+			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
 		} else {
-			$labelLookup = $this->getLabelLookupNoLabel();
+			$labelDescriptionLookup = $this->getLabelDescriptionLookupNoLabel();
 		}
 
 		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
@@ -117,7 +116,7 @@ class EntityIdHtmlLinkFormatterTest extends \MediaWikiTestCase {
 			} ) );
 
 		$entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter(
-			$labelLookup,
+			$labelDescriptionLookup,
 			$entityTitleLookup,
 			$languageNameLookup
 		);
