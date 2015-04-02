@@ -26,7 +26,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 
 		foreach ( $GLOBALS['wgAPIModules'] as $moduleClass ) {
 			// Make sure to only test Wikibase Api modules
-			if ( strpos( $moduleClass, 'Wikibase' ) !== false ) {
+			if ( is_string( $moduleClass ) &&  strpos( $moduleClass, 'Wikibase' ) !== false ) {
 				$argList[] = array( $moduleClass );
 			}
 		}
