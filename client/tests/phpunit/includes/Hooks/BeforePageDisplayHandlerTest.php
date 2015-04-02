@@ -89,6 +89,20 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testHandlePageConnectedToWikibase_noexternallinklinks() {
+		$skin = $this->getSkin( true, true ); // user logged in
+
+		// page connected, has links and noexternallanglinks
+		$output = $this->getOutputPage( $skin, array( 'de:Rom' ), 'Q4', array( '*' ) );
+		$namespaceChecker = $this->getNamespaceChecker( true );
+
+		$handler = new BeforePageDisplayHandler( $namespaceChecker );
+		$handler->addModules( $output, 'view' );
+
+		$this->assertEquals( array(), $output->getModules(), 'js modules' );
+		$this->assertEquals( array(), $output->getModuleStyles(), 'css modules' );
+	}
+
 	/**
 	 * @dataProvider pageNotConnectedToWikibaseProvider
 	 */
@@ -261,12 +275,18 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		return $namespaceChecker;
 	}
 
-	private function getOutputPage( Skin $skin, $langLinks, $prefixedId = null ) {
+	private function getOutputPage( Skin $skin, $langLinks, $prefixedId = null,
+		$noexternallanglinks = null
+	) {
 		$output = $skin->getOutput();
 		$output->setLanguageLinks( $langLinks );
 
 		if ( $prefixedId ) {
 			$output->setProperty( 'wikibase_item', $prefixedId );
+		}
+
+		if ( $noexternallanglinks ) {
+			$output->setProperty( 'noexternallanglinks', $noexternallanglinks );
 		}
 
 		return $output;

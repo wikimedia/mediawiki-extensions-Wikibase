@@ -67,14 +67,24 @@ class BeforePageDisplayHandler {
 
 	private function hasEditOrAddLinks( OutputPage $out, Title $title, $actionName ) {
 		if (
-			$out->getProperty( 'noexternallanglinks' ) ||
 			!in_array( $actionName, array( 'view', 'submit' ) ) ||
+			$this->allLinksAreSuppressed( $out ) ||
 			!$title->exists()
 		) {
 			return false;
 		}
 
 		return true;
+	}
+
+	private function allLinksAreSuppressed( OutputPage $out ) {
+		$noexternallanglinks = $out->getProperty( 'noexternallanglinks' );
+
+		if ( $noexternallanglinks !== null ) {
+			return in_array( '*', $noexternallanglinks );
+		}
+
+		return false;
 	}
 
 	private function hasLinkItemWidget( User $user, OutputPage $out, Title $title, $actionName ) {
