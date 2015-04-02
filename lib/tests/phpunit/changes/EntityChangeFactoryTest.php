@@ -14,7 +14,7 @@ use Wikibase\EntityFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 
 /**
- * @covers Wikibase\Lib\EntityChangeFactory
+ * @covers Wikibase\Lib\Changes\EntityChangeFactory
  *
  * @since 0.5
  *
