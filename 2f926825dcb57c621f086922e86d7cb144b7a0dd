@@ -16,6 +16,24 @@
       "revId": "2f926825dcb57c621f086922e86d7cb144b7a0dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5eb4d2ce",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-02T21:55:40Z",
+      "side": 1,
+      "message": "ok :) also added a test case in EntityDataTestProvider, though not sure it\u0027s necessary since we have this list here.",
+      "parentUuid": "6e7c4fa4_9e77ca35",
+      "revId": "2f926825dcb57c621f086922e86d7cb144b7a0dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
