@@ -77,16 +77,17 @@ class RepoItemLinkGenerator {
 	 * @return string|null HTML or null for no link
 	 */
 	public function getLink( Title $title, $action, $hasLangLinks, array $noExternalLangLinks = null, $prefixedId ) {
-		$entityId = null;
-		if ( is_string( $prefixedId ) ) {
-			$entityId = $this->entityIdParser->parse( $prefixedId );
-		}
-
-		if ( $entityId && $hasLangLinks ) {
-			return $this->getEditLinksLink( $entityId );
-		}
-
 		if ( $this->canHaveLink( $title, $action, $noExternalLangLinks ) ) {
+			$entityId = null;
+
+			if ( is_string( $prefixedId ) ) {
+				$entityId = $this->entityIdParser->parse( $prefixedId );
+			}
+
+			if ( $entityId && $hasLangLinks ) {
+				return $this->getEditLinksLink( $entityId );
+			}
+
 			return $this->getAddLinksLink( $title, $entityId );
 		}
 
