@@ -2,7 +2,7 @@
 namespace Wikibase\View;
 
 use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 
 /**
  * A factory interface for generating EntityIdFormatters.
@@ -27,10 +27,10 @@ interface EntityIdFormatterFactory {
 	public function getOutputFormat();
 
 	/**
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return EntityIdFormatter
 	 */
-	public function getEntityIdFormater( LabelLookup $labelLookup );
+	public function getEntityIdFormater( LabelDescriptionLookup $labelDescriptionLookup );
 
 }

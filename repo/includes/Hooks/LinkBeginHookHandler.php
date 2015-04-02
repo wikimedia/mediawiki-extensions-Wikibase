@@ -108,8 +108,7 @@ class LinkBeginHookHandler {
 	 * @param LanguageFallbackChain $languageFallback
 	 * @param Language $pageLanguage
 	 *
-	 * @todo: Would be nicer to take a LabelLookup instead of TermLookup + FallbackChain.
-	 *        But LabelLookup does not support descriptions at the moment.
+	 * @todo: Would be nicer to take a LabelDescriptionLookup instead of TermLookup + FallbackChain.
 	 */
 	public function __construct(
 		EntityIdLookup $entityIdLookup,
@@ -175,10 +174,8 @@ class LinkBeginHookHandler {
 			return;
 		}
 
-		// @todo: this re-implements the logic in LanguageFallbackLabelLookup,
-		//       just so it can be applied to descriptions as well as labels. Either
-		//       have two lookups with the same interface, or two methods in the lookup
-		//       interface.
+		// @todo: this re-implements the logic in LanguageFallbackLabelDescriptionLookup,
+		// as that didn't support descriptions back when this code was written.
 
 		// NOTE: keep in sync with with fallback languages in LabelPrefetchHookHandler::newFromGlobalState
 

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\SettingsArray;
@@ -49,9 +49,9 @@ class WikibaseLuaBindings {
 	private $settings;
 
 	/**
-	 * @var LabelLookup
+	 * @var LabelDescriptionLookup
 	 */
-	private $labelLookup;
+	private $labelDescriptionLookup;
 
 	/**
 	 * @var UsageAccumulator
@@ -73,7 +73,7 @@ class WikibaseLuaBindings {
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLinkLookup $siteLinkTable
 	 * @param SettingsArray $settings
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOptions $parserOptions
 	 * @param string $siteId
@@ -83,7 +83,7 @@ class WikibaseLuaBindings {
 		EntityLookup $entityLookup,
 		SiteLinkLookup $siteLinkTable,
 		SettingsArray $settings,
-		LabelLookup $labelLookup,
+		LabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator,
 		ParserOptions $parserOptions,
 		$siteId
@@ -92,7 +92,7 @@ class WikibaseLuaBindings {
 		$this->entityLookup = $entityLookup;
 		$this->siteLinkTable = $siteLinkTable;
 		$this->settings = $settings;
-		$this->labelLookup = $labelLookup;
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->parserOptions = $parserOptions;
 		$this->siteId = $siteId;
@@ -141,7 +141,7 @@ class WikibaseLuaBindings {
 		}
 
 		try {
-			$term = $this->labelLookup->getLabel( $entityId );
+			$term = $this->labelDescriptionLookup->getLabel( $entityId );
 		} catch ( StorageException $ex ) {
 			return null;
 		} catch ( OutOfBoundsException $ex ) {

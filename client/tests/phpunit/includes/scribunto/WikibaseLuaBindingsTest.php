@@ -63,8 +63,8 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 				} )
 			);
 
-		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
-		$labelLookup->expects( $this->any() )
+		$labelDescriptionLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'xy', 'LabelString' ) ) );
 
@@ -73,7 +73,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup ?: new MockRepository(),
 			$siteLinkTable,
 			new SettingsArray(),
-			$labelLookup,
+			$labelDescriptionLookup,
 			$usageAccumulator ?: new HashUsageAccumulator(),
 			$parserOptions ?: new ParserOptions(),
 			"enwiki" // siteId
