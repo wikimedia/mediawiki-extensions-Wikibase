@@ -9,13 +9,11 @@ use Wikibase\DataModel\Term\Term;
 /**
  * @since 0.5
  *
- * @todo: add a method for getting a description, or make this interface neutral
- * so we can use one instance for labels and one for descriptions.
- *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
-interface LabelLookup {
+interface LabelDescriptionLookup {
 
 	/**
 	 * @param EntityId $entityId
@@ -24,5 +22,13 @@ interface LabelLookup {
 	 * @return Term
 	 */
 	public function getLabel( EntityId $entityId );
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws OutOfBoundsException if no such description or entity could be found
+	 * @return Term
+	 */
+	public function getDescription( EntityId $entityId );
 
 }

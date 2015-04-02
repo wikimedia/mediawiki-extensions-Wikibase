@@ -11,7 +11,7 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -129,7 +129,7 @@ class EntityViewFactory {
 	 *
 	 * @param string $entityType
 	 * @param string $languageCode
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
@@ -139,7 +139,7 @@ class EntityViewFactory {
 	public function newEntityView(
 		$entityType,
 		$languageCode,
-		LabelLookup $labelLookup,
+		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	 ) {
@@ -148,7 +148,7 @@ class EntityViewFactory {
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
 			$fallbackChain,
-			$labelLookup,
+			$labelDescriptionLookup,
 			$editSectionGenerator
 		);
 
@@ -193,7 +193,7 @@ class EntityViewFactory {
 	/**
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementGroupListView
@@ -201,14 +201,14 @@ class EntityViewFactory {
 	private function newStatementGroupListView(
 		$languageCode,
 		LanguageFallbackChain $fallbackChain,
-		LabelLookup $labelLookup,
+		LabelDescriptionLookup $labelDescriptionLookup,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$propertyIdFormatter = $this->getPropertyIdFormatter( $labelLookup );
+		$propertyIdFormatter = $this->getPropertyIdFormatter( $labelDescriptionLookup );
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
-			$this->htmlSnakFormatterFactory->getSnakFormatter( $languageCode, $fallbackChain, $labelLookup ),
+			$this->htmlSnakFormatterFactory->getSnakFormatter( $languageCode, $fallbackChain, $labelDescriptionLookup ),
 			$propertyIdFormatter
 		);
 
@@ -241,12 +241,12 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return EntityIdFormatter
 	 */
-	private function getPropertyIdFormatter( LabelLookup $labelLookup ) {
-		return $this->idFormatterFactory->getEntityIdFormater( $labelLookup );
+	private function getPropertyIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
+		return $this->idFormatterFactory->getEntityIdFormater( $labelDescriptionLookup );
 	}
 
 }

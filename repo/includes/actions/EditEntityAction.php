@@ -22,7 +22,7 @@ use Wikibase\Lib\EscapingEntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
-use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -66,8 +66,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
-		$labelLookup = new LanguageLabelLookup( $termLookup, $languageCode );
-		$labelFormatter = new EntityIdLabelFormatter( $labelLookup );
+		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, $languageCode );
+		$labelFormatter = new EntityIdLabelFormatter( $labelDescriptionLookup );
 
 		$propertyIdFormatter = new EscapingEntityIdFormatter( $labelFormatter, 'htmlspecialchars' );
 
@@ -89,7 +89,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			),
 			$wikibaseRepo->getSiteStore(),
 			new EntityIdHtmlLinkFormatter(
-				$labelLookup,
+				$labelDescriptionLookup,
 				$wikibaseRepo->getEntityTitleLookup(),
 				new LanguageNameLookup()
 			)

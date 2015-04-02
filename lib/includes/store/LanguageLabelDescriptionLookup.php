@@ -11,8 +11,9 @@ use Wikibase\DataModel\Term\Term;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
-class LanguageLabelLookup implements LabelLookup {
+class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 
 	/**
 	 * @var TermLookup
@@ -44,4 +45,14 @@ class LanguageLabelLookup implements LabelLookup {
 		return new Term( $this->languageCode, $text );
 	}
 
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @throws OutOfBoundsException if no such description or entity could be found
+	 * @return Term
+	 */
+	public function getDescription( EntityId $entityId ) {
+		$text = $this->termLookup->getDescription( $entityId, $this->languageCode );
+		return new Term( $this->languageCode, $text );
+	}
 }

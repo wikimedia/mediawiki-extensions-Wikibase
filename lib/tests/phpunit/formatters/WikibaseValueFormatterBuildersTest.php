@@ -21,7 +21,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdValueFormatter;
-use Wikibase\Lib\FormatterLabelLookupFactory;
+use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PlainEntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
@@ -83,7 +83,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 		return new WikibaseValueFormatterBuilders(
 			Language::factory( 'en' ),
-			new FormatterLabelLookupFactory( $termLookup ),
+			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			$languageNameLookup,
 			$entityTitleLookup
 		);
@@ -283,9 +283,9 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider buildDispatchingValueFormatterProvider_LabelLookupOption
+	 * @dataProvider buildDispatchingValueFormatterProvider_LabelDescriptionLookupOption
 	 */
-	public function testBuildDispatchingValueFormatter_LabelLookupOption(
+	public function testBuildDispatchingValueFormatter_LabelDescriptionLookupOption(
 		FormatterOptions $options,
 		ItemId $value,
 		$expected
@@ -300,11 +300,11 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$this->assertRegExp( $expected, $text );
 	}
 
-	public function buildDispatchingValueFormatterProvider_LabelLookupOption() {
-		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelLookup' );
-		$labelLookup->expects( $this->any() )
+	public function buildDispatchingValueFormatterProvider_LabelDescriptionLookupOption() {
+		$labelDescriptionLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( new Term( 'xy', 'Custom LabelLookup' ) ) );
+			->will( $this->returnValue( new Term( 'xy', 'Custom LabelDescriptionLookup' ) ) );
 
 		$fallbackFactory = new LanguageFallbackChainFactory();
 		$fallbackChain = $fallbackFactory->newFromLanguage( Language::factory( 'de-ch' ) );
@@ -324,12 +324,12 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new ItemId( 'Q5' ),
 				'@>Name für Q5<@'
 			),
-			'LabelLookup option' => array(
+			'LabelDescriptionLookup option' => array(
 				new FormatterOptions( array(
-					'LabelLookup' => $labelLookup,
+					'LabelDescriptionLookup' => $labelDescriptionLookup,
 				) ),
 				new ItemId( 'Q5' ),
-				'@>Custom LabelLookup<@'
+				'@>Custom LabelDescriptionLookup<@'
 			),
 		);
 	}

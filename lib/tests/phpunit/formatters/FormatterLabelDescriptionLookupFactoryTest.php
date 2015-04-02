@@ -9,12 +9,12 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
-use Wikibase\Lib\FormatterLabelLookupFactory;
-use Wikibase\Lib\Store\LanguageLabelLookup;
+use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
 use Wikibase\Lib\Store\TermLookup;
 
 /**
- * @covers Wikibase\Lib\FormatterLabelLookupFactory
+ * @covers Wikibase\Lib\FormatterLabelDescriptionLookupFactory
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -24,22 +24,22 @@ use Wikibase\Lib\Store\TermLookup;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
+class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider provideGetLabelLookup
+	 * @dataProvider provideGetLabelDescriptionLookup
 	 */
-	public function testGetLabelLookup( TermLookup $termLookup, FormatterOptions $options, $expectedLabel ) {
-		$factory = new FormatterLabelLookupFactory( $termLookup );
-		$labelLookup = $factory->getLabelLookup( $options );
+	public function testGetLabelDescriptionLookup( TermLookup $termLookup, FormatterOptions $options, $expectedLabel ) {
+		$factory = new FormatterLabelDescriptionLookupFactory( $termLookup );
+		$labelDescriptionLookup = $factory->getLabelDescriptionLookup( $options );
 
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\LabelLookup', $labelLookup );
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\LabelDescriptionLookup', $labelDescriptionLookup );
 
-		$term = $labelLookup->getLabel( new ItemId( 'Q1' ) );
+		$term = $labelDescriptionLookup->getLabel( new ItemId( 'Q1' ) );
 		$this->assertEquals( $expectedLabel, $term->getText() );
 	}
 
-	public function provideGetLabelLookup() {
+	public function provideGetLabelDescriptionLookup() {
 		$termLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
 
 		$termLookup->expects( $this->any() )
@@ -56,7 +56,7 @@ class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLabels' )
 			->will( $this->returnValue( array( 'de' => 'Kätzchen' ) ) );
 
-		$labelLookup = new LanguageLabelLookup( $termLookup, 'de' );
+		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, 'de' );
 
 		$deChChain = new LanguageFallbackChain( array(
 			LanguageWithConversion::factory( 'de-ch' ),
@@ -83,12 +83,12 @@ class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 				) ),
 				'Kätzchen'
 			),
-			'language and fallback chain and LabelLookup' => array(
+			'language and fallback chain and LabelDescriptionLookup' => array(
 				$termLookup,
 				new FormatterOptions( array(
 					ValueFormatter::OPT_LANG => 'fr',
 					'languages' => $frChain,
-					'LabelLookup' => $labelLookup
+					'LabelDescriptionLookup' => $labelDescriptionLookup
 				) ),
 				'Kätzchen'
 			),
@@ -96,17 +96,17 @@ class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideGetLabelLookup_failure
+	 * @dataProvider provideGetLabelDescriptionLookup_failure
 	 */
-	public function testGetLabelLookup_failure( FormatterOptions $options ) {
+	public function testGetLabelDescriptionLookup_failure( FormatterOptions $options ) {
 		$termLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
-		$factory = new FormatterLabelLookupFactory( $termLookup );
+		$factory = new FormatterLabelDescriptionLookupFactory( $termLookup );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$factory->getLabelLookup( $options );
+		$factory->getLabelDescriptionLookup( $options );
 	}
 
-	public function provideGetLabelLookup_failure() {
+	public function provideGetLabelDescriptionLookup_failure() {
 		return array(
 			'bad language' => array(
 				new FormatterOptions( array(
@@ -118,9 +118,9 @@ class FormatterLabelLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 					'languages' => array( 'x', 'y', 'z' ),
 				) ),
 			),
-			'bad LabelLookup' => array(
+			'bad LabelDescriptionLookup' => array(
 				new FormatterOptions( array(
-					'LabelLookup' => new LanguageFallbackChain( array() )
+					'LabelDescriptionLookup' => new LanguageFallbackChain( array() )
 				) ),
 			),
 			'no options' => array(

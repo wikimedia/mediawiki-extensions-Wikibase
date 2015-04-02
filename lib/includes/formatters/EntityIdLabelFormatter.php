@@ -5,7 +5,7 @@ namespace Wikibase\Lib;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\LabelLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 
 /**
  * @since 0.4
@@ -18,17 +18,17 @@ use Wikibase\Lib\Store\LabelLookup;
 class EntityIdLabelFormatter implements EntityIdFormatter {
 
 	/**
-	 * @var LabelLookup
+	 * @var LabelDescriptionLookup
 	 */
-	private $labelLookup;
+	private $labelDescriptionLookup;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param LabelLookup $labelLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 */
-	public function __construct( LabelLookup $labelLookup ) {
-		$this->labelLookup = $labelLookup;
+	public function __construct( LabelDescriptionLookup $labelDescriptionLookup ) {
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 	}
 
 	/**
@@ -59,7 +59,7 @@ class EntityIdLabelFormatter implements EntityIdFormatter {
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
 		try {
-			return $this->labelLookup->getLabel( $entityId );
+			return $this->labelDescriptionLookup->getLabel( $entityId );
 		} catch ( OutOfBoundsException $e ) {
 			return null;
 		}

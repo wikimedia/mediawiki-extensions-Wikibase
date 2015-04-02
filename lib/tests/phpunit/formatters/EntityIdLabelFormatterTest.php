@@ -53,8 +53,8 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @param string $expectedString
 	 */
 	public function testParseWithValidArguments( EntityId $entityId, $languageCode, $expectedString ) {
-		$labelLookup = $this->getLabelLookup( $languageCode );
-		$formatter = new EntityIdLabelFormatter( $labelLookup );
+		$labelDescriptionLookup = $this->getLabelDescriptionLookup( $languageCode );
+		$formatter = new EntityIdLabelFormatter( $labelDescriptionLookup );
 
 		$formattedValue = $formatter->formatEntityId( $entityId );
 
@@ -62,12 +62,12 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedString, $formattedValue );
 	}
 
-	protected function getLabelLookup( $languageCode ) {
-		$labelLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelLookup' )
+	protected function getLabelDescriptionLookup( $languageCode ) {
+		$labelDescriptionLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelDescriptionLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$labelLookup->expects( $this->any() )
+		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $entityId ) use ( $languageCode ) {
 				if ( $entityId->getSerialization() === 'Q42' && $languageCode === 'es' ) {
@@ -77,7 +77,7 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 				}
 			} ) );
 
-		return $labelLookup;
+		return $labelDescriptionLookup;
 	}
 
 }

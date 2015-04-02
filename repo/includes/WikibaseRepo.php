@@ -38,7 +38,7 @@ use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
-use Wikibase\Lib\FormatterLabelLookupFactory;
+use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
@@ -547,7 +547,7 @@ class WikibaseRepo {
 
 		return new WikibaseValueFormatterBuilders(
 			$wgContLang,
-			new FormatterLabelLookupFactory( $termLookup ),
+			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			new LanguageNameLookup(),
 			$this->getEntityTitleLookup()
 		);
