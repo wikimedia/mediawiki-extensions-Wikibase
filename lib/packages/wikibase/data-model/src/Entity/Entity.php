@@ -350,7 +350,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 
 	/**
 	 * @since 0.3
-	 * @deprecated since 1.0
+	 * @deprecated since 1.0, use getStatements()->addStatement() instead.
 	 *
 	 * @param Claim $claim
 	 *
@@ -363,7 +363,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 
 	/**
 	 * @since 0.3
-	 * @deprecated since 1.0
+	 * @deprecated since 1.0, use getStatements()->toArray() instead.
 	 *
 	 * @return Claim[]
 	 */
@@ -378,7 +378,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
 	 *
 	 * @since 0.2
-	 * @deprecated since 1.0
+	 * @deprecated since 1.0, use getStatements()->isEmpty() instead.
 	 *
 	 * @return bool
 	 */
@@ -388,7 +388,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 
 	/**
 	 * @since 0.3
-	 * @deprecated since 1.0
+	 * @deprecated since 1.0, use new Statement() instead.
 	 *
 	 * @param Snak $mainSnak
 	 *
