@@ -799,13 +799,12 @@ $.widget( 'valueview.valueview', PARENT, {
 						throw new Error( 'Unexpected value parser result' );
 					}
 
-					if( self.__lastUpdateValue === undefined ) {
+					if( self.__lastUpdateValue === undefined || self.__lastUpdateValue !== rawValue ) {
 						// latest update job is done, this one must be a late response for some weird
-						// reason
+						// reason, or the value has since been updated, so should be re-parsed
+						// and this result be rejected and ignored.
 						deferred.reject();
-					}
-
-					if( self.__lastUpdateValue === rawValue ) {
+					} else {
 						// this is the response for the latest update! by setting this to undefined, we
 						// will ignore all responses which might come back late.
 						// Another reason for this could be something like "a", "ab", "a", where the
