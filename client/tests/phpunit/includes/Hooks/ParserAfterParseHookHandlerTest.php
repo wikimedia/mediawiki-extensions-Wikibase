@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use MediaWikiSite;
+use MediaWikiTestCase;
 use Parser;
 use ParserOptions;
 use ParserOutput;
@@ -38,21 +39,21 @@ use Wikibase\Test\MockSiteStore;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
+class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 
 	/**
 	 * @param string $globalId
 	 * @param string $group
-	 * @param $language
+	 * @param string $languageCode
 	 *
 	 * @return Site
 	 */
-	private function newSite( $globalId, $group, $language ) {
+	private function newSite( $globalId, $group, $languageCode ) {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( $globalId );
 		$site->setGroup( $group );
-		$site->setLanguageCode( $language );
-		$site->addNavigationId( $language );
+		$site->setLanguageCode( $languageCode );
+		$site->addNavigationId( $languageCode );
 		$site->setPagePath( 'wiki/' );
 		$site->setFilePath( 'w/' );
 		$site->setLinkPath( 'http://' . $globalId . '.test.com/wiki/$1' );
@@ -88,7 +89,7 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return Item
 	 */
-	private function newItem( ItemId $id, $links ) {
+	private function newItem( ItemId $id, array $links ) {
 		$item = new Item( $id );
 
 		foreach ( $links as $link ) {
@@ -192,7 +193,6 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 			$interwikiSorter,
 			$settings->getSetting( 'alwaysSort' )
 		);
-
 	}
 
 	private function getOtherProjectsSidebarGeneratorFactory(
@@ -343,7 +343,6 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 			'no-item' => array(
 				Title::makeTitle( NS_MAIN, 'Plutonium' ),
 			),
-
 			'ignored-namespace' => array(
 				Title::makeTitle( NS_USER, 'Foo' ),
 			),
@@ -354,7 +353,6 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 	 * @dataProvider parserAfterParseProvider_noItem
 	 */
 	public function testDoParserAfterParse_noItem( Title $title ) {
-
 		$parser = $this->newParser( $title, array(), array() );
 		$handler = $this->newParserAfterParseHookHandler();
 
@@ -383,7 +381,6 @@ class ParserAfterParseHookHandlerTest extends \MediaWikiTestCase {
 
 		$this->assertSameSize( $links, $actualLinks, 'Unmatched languageLinks!' );
 	}
-
 
 	private function assertSisterLinks( $expectedLinks, $actualLinks ) {
 		if ( !is_array( $expectedLinks ) ) {
