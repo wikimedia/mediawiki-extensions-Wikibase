@@ -141,17 +141,17 @@ class EntityDataTestProvider {
 			415,  // http code
 		);
 
-		$cases[] = array( // #8: xml, redirected id
+		$cases[] = array( // #8: redirected id
 			'',      // subpage
 			array( // parameters
 				'id' => 'Q22',
-				'format' => 'xml',
+				'format' => 'application/json',
 			),
 			array(), // headers
-			'!<entity!', // output regex
+			'!^\{.*Raarr!', // output regex
 			200,       // http code
 			array( // headers
-				'Content-Type' => '!^text/xml(;|$)!'
+				'Content-Type' => '!^application/json(;|$)!'
 			)
 		);
 
@@ -399,7 +399,7 @@ class EntityDataTestProvider {
 
 		// #35: IMS from the deep bast should return a 200 (revision timestamp is 20131211100908)
 		$cases[] = array(
-			'Q42.xml',	  // subpage
+			'Q42.json',	  // subpage
 			array(), // parameters
 			array( // headers
 				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' )
@@ -419,6 +419,15 @@ class EntityDataTestProvider {
 			304,  // http code
 		);
 
+		// #37: invalid, no longer supported XML format
+		$cases[] = array(
+			'Q42.xml',
+			array(),
+			array(),
+			'!!', // output regex
+			415, // http code
+		);
+
 		return $cases;
 	}
 
@@ -433,13 +442,6 @@ class EntityDataTestProvider {
 			$entityRev, // entityRev
 			'!^\{.*Raarrr!', // output regex
 			'application/json',       // expected mime
-		);
-
-		$cases[] = array( // #1: xml
-			'xml',      // format
-			$entityRev, // entityRev
-			'!<entity!', // output regex
-			'text/xml',       // expected mime
 		);
 
 		return $cases;
