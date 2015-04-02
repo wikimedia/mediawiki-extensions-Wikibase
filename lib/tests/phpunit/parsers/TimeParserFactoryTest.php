@@ -6,7 +6,6 @@ use DataValues\TimeValue;
 use Language;
 use PHPUnit_Framework_TestCase;
 use ValueParsers\ParserOptions;
-use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\Parsers\TimeParserFactory;
 
@@ -123,7 +122,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		foreach ( $valid as $value => $expected ) {
 			$timestamp = $expected[0];
 			$precision = isset( $expected[1] ) ? $expected[1] : TimeValue::PRECISION_DAY;
-			$calendarModel = isset( $expected[2] ) ? $expected[2] : IsoTimestampParser::CALENDAR_GREGORIAN;
+			$calendarModel = isset( $expected[2] ) ? $expected[2] : 'http://www.wikidata.org/entity/Q1985727';
 
 			$argLists[] = array(
 				(string)$value,

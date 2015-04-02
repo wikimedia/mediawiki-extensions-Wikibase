@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Parsers\Test;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use ValueParsers\TimeParser;
 use Wikibase\Lib\Parsers\EraParser;
 use Wikibase\Lib\Parsers\YearTimeParser;
 
@@ -64,36 +63,38 @@ class YearTimeParserTest extends StringValueParserTest {
 	 * @return array
 	 */
 	public function validInputProvider() {
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+
 		$argLists = array();
 
 		$valid = array(
 			'1999' =>
-				array( '+0000000000001999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000001999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'2000' =>
-				array( '+0000000000002000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'2010' =>
-				array( '+0000000000002010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000002010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'2000000' =>
-				array( '+0000000002000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000002000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'2000000000' =>
-				array( '+0000002000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000002000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'2000020000' =>
-				array( '+0000002000020000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10ka , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000002000020000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $gregorian ),
 			'2000001' =>
-				array( '+0000000002000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000002000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'02000001' =>
-				array( '+0000000002000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000002000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'1' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'000000001' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'-1000000' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'-1 000 000' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			// Digit grouping in the Indian numbering system
 			'-1,99,999' =>
-				array( '-0000000000199999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeParser::CALENDAR_GREGORIAN ),
+				array( '-0000000000199999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
