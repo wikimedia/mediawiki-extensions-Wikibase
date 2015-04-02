@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f32b9ed8",
+        "filename": "repo/includes/EntityIdLabelFormatterFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-02T12:35:31Z",
+      "side": 1,
+      "message": "Sounds legit :D",
+      "revId": "69ff1437c1cec92c68cd7d979f1fe4ccfb9a3a97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_33cb5622",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-02T12:35:31Z",
+      "side": 1,
+      "message": "YES... could be part of ReferencedEntitiesFinder or even an own class",
+      "revId": "69ff1437c1cec92c68cd7d979f1fe4ccfb9a3a97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_93c82a26",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-02T12:35:31Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this needs to be array_merge",
+      "revId": "69ff1437c1cec92c68cd7d979f1fe4ccfb9a3a97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53ce1231",
+        "filename": "view/src/EntityViewFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-02T12:35:31Z",
+      "side": 1,
+      "message": "missing space",
+      "revId": "69ff1437c1cec92c68cd7d979f1fe4ccfb9a3a97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
