@@ -59,7 +59,6 @@ return call_user_func( function() {
 			// using the API
 			'json', // default
 			'php',
-			'xml',
 
 			// using easyRdf
 			'rdfxml',
