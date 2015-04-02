@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b991859e",
+        "filename": "repo/includes/content/PropertyHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-02T15:06:12Z",
+      "side": 1,
+      "message": "ugh, the constructor is not very nice, having the required parameter third :/\n\nnot really much better, but what about Property::newFromType( \u0027\u0027 )?",
+      "revId": "c6b07f3678fbf1d9078be998796f5b61dbcb49f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
