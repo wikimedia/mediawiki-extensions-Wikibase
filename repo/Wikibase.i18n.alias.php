@@ -267,6 +267,21 @@ $specialPageAliases['lb'] = array(
 	'MyLanguageFallbackChain' => array( 'Meng_Ersatzsproochketten' ),
 );
 
+/** لوری (لوری) */
+$specialPageAliases['lrc'] = array(
+	'ListDatatypes' => array( 'میزونکاری_جور_داده_یا' ),
+	'SetLabel' => array( 'میزونکاری_ریتراز' ),
+	'SetDescription' => array( 'میزونکاری_توضیح' ),
+	'SetAliases' => array( 'میزونکاری_هوم_قطاریا' ),
+	'SetLabelDescriptionAliases' => array( 'میزونکاری_نیائن_ریتراز_توضیح_سی_هوم_قطاریا' ),
+	'SetSiteLink' => array( 'میزونکاری_هوم_پیوند_دیارگه' ),
+	'MergeItems' => array( 'سریک_سازی_چیا' ),
+	'EntitiesWithoutLabel' => array( 'چیایی_که_ریتراز_نارن' ),
+	'EntitiesWithoutDescription' => array( 'چیایی_که_شرح_نارن' ),
+	'ItemsWithoutSitelinks' => array( 'چیایی_که_هوم_پیوند_دیارگه_نارن' ),
+	'MyLanguageFallbackChain' => array( 'زنجیره_دماکاری_زون_مه' ),
+);
+
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
 	'DispatchStats' => array( 'СтатистикиСпроведување' ),

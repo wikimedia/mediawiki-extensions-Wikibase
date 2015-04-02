@@ -59,7 +59,7 @@
 	"wikibase-label-empty": "Pas de libellé défini",
 	"wikibase-label-edit-placeholder": "saisir un libellé",
 	"wikibase-label-edit-placeholder-language-aware": "entrer le libellé en $1",
-	"wikibase-description-empty": "Aucune description pour le moment",
+	"wikibase-description-empty": "Aucune description fournie",
 	"wikibase-description-edit-placeholder": "saisir une description",
 	"wikibase-description-edit-placeholder-language-aware": "entrer la description en $1",
 	"wikibase-diffview-reference": "référence",

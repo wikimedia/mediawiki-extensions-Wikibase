@@ -2,13 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Nullzero",
-			"Horus"
+			"Horus",
+			"Octahedron80"
 		]
 	},
 	"wikibase-editlinks": "แก้ไขลิงก์",
 	"wikibase-editlinkstitle": "แก้ไขลิงก์ข้ามภาษา",
 	"wikibase-linkitem-addlinks": "เพิ่มลิงก์ข้ามภาษา",
+	"wikibase-rc-hide-wikidata-hide": "ซ่อน",
 	"wikibase-rc-hide-wikidata-show": "แสดง",
 	"wikibase-rc-wikibase-edit-letter": "ด",
-	"wikibase-rc-wikibase-edit-title": "การแก้ไข {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "การแก้ไข {{WBREPONAME}}",
+	"wikibase-otherprojects": "โครงการอื่น"
 }
