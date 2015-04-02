@@ -199,7 +199,7 @@ class PropertyHandler extends EntityHandler {
 	 * @return EntityContent
 	 */
 	public function makeEmptyEntity() {
-		return Property::newEmpty();
+		return Property::newFromType( '' );
 	}
 
 	/**
