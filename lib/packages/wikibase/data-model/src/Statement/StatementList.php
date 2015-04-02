@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
 
 /**
- * Ordered, non-unique, collection of Statement objects.
+ * Ordered and non-unique collection of Statement objects.
  * Provides various filter operations.
  *
  * Does not do any indexing by default.
