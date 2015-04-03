@@ -239,6 +239,8 @@ class PageTerms extends ApiQueryBase {
 				ApiBase::PARAM_TYPE => 'integer',
 			),
 			'terms' => array(
+				// XXX Ought to get this list from Wikibase\Term, its setType() also hardcodes it.
+				ApiBase::PARAM_TYPE => array( Term::TYPE_ALIAS, Term::TYPE_DESCRIPTION, Term::TYPE_LABEL ),
 				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
 			),
