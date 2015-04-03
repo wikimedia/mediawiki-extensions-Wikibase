@@ -270,6 +270,11 @@ $.widget( 'wikibase.snakview', PARENT, {
 	_selectProperty: function() {
 		var self = this;
 
+		if ( this._variation !== null ) {
+			// already selected
+			return;
+		}
+
 		// Display spinner as long as the ValueView is loading:
 		this.$snakValue.empty().append(
 			$( '<div/>' ).append( $( '<span/>' ).addClass( 'mw-small-spinner' ) )
