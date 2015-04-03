@@ -248,17 +248,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 				self._trigger( 'change' );
 			}
 		} )
-		.on( 'keydown', function( event ) {
-			// When pressing TAB, ENTER or clicking in the property input element while the value
-			// input element does not yet exist, we assume that the user wants to
-			// auto-complete/select the currently suggested property and tab into the value
-			// element. Since the API needs to be queried to construct the correct value input,
-			// the intended action needs to be cached and triggered as soon as the value input
-			// has been created.
-			if ( event.keyCode === $.ui.keyCode.TAB || event.keyCode === $.ui.keyCode.ENTER ) {
-				self._selectProperty();
-			}
-		} )
 		.on( 'entityselectorselected', function( event, entityId ) {
 			self._selectProperty();
 		} );
