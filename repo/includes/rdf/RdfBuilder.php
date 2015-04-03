@@ -348,6 +348,15 @@ class RdfBuilder {
 	}
 
 	/**
+	 * Get Wikibase property name for ontology
+	 * @param Property $prop
+	 * @return string
+	 */
+	private function getPropertyTypeName( Property $prop ) {
+		return preg_replace( '/[^\w]/', '', ucwords( strtr($prop->getDataTypeId(), "-", " ") ) );
+	}
+
+	/**
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
 	 * @param Entity $entity
@@ -373,7 +382,7 @@ class RdfBuilder {
 			->a( self::NS_ONTOLOGY, $this->getEntityTypeName( $entity->getType() ) );
 
 		if( $entity instanceof Property ) {
-			$this->entityWriter->say( self::NS_ONTOLOGY, 'propertyType' )->value( $entity->getDataTypeId() );
+			$this->entityWriter->say( self::NS_ONTOLOGY, 'propertyType' )->is( self::NS_ONTOLOGY, $this->getPropertyTypeName( $entity ) );
 		}
 
 		$this->entityResolved( $entity->getId() );
