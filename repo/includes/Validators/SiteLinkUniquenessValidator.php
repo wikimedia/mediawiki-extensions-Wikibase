@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkCache;
 
 /**
  * Validator for checking that site links are unique across all Items.
@@ -21,15 +21,15 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class SiteLinkUniquenessValidator implements EntityValidator {
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var SiteLinkCache
 	 */
-	private $siteLinkLookup;
+	private $siteLinkCache;
 
 	/**
-	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param SiteLinkCache $siteLinkLookup
 	 */
-	public function __construct( SiteLinkLookup $siteLinkLookup ) {
-		$this->siteLinkLookup = $siteLinkLookup;
+	public function __construct( SiteLinkCache $siteLinkLookup ) {
+		$this->siteLinkCache = $siteLinkLookup;
 	}
 
 	/**
@@ -46,7 +46,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 			// TODO: do not use global state
 			$db = wfGetDB( DB_MASTER );
 
-			$conflicts = $this->siteLinkLookup->getConflictsForItem( $entity, $db );
+			$conflicts = $this->siteLinkCache->getConflictsForItem( $entity, $db );
 
 			/* @var ItemId $ignoreConflictsWith */
 			foreach ( $conflicts as $conflict ) {
@@ -60,7 +60,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	/**
 	 * Get Message for a conflict
 	 *
-	 * @param array $conflict A record as returned by SiteLinkLookup::getConflictsForItem()
+	 * @param array $conflict A record as returned by SiteLinkCache::getConflictsForItem()
 	 *
 	 * @return Error
 	 */
