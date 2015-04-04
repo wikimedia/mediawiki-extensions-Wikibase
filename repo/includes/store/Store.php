@@ -9,6 +9,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -129,5 +130,12 @@ interface Store {
 	 * @return ChangesTable
 	 */
 	public function getChangesTable();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return SiteLinkConflictLookup
+	 */
+	public function getSiteLinkConflictLookup();
 
 }

@@ -717,7 +717,7 @@ class WikibaseRepo {
 	public function getEntityConstraintProvider() {
 		return new EntityConstraintProvider(
 			$this->getLabelDescriptionDuplicateDetector(),
-			$this->getStore()->newSiteLinkCache()
+			$this->getStore()->getSiteLinkConflictLookup()
 		);
 	}
 

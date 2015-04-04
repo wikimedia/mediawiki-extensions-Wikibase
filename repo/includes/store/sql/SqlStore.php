@@ -22,6 +22,7 @@ use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
@@ -695,6 +696,13 @@ class SqlStore implements Store {
 		}
 
 		return $this->changesTable;
+	}
+
+	/**
+	 * @return SiteLinkConflictLookup
+	 */
+	public function getSiteLinkConflictLookup() {
+		return new SiteLinkTable( 'wb_items_per_site', false );
 	}
 
 }

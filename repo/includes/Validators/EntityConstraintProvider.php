@@ -5,7 +5,7 @@ namespace Wikibase\Validators;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkConflictLookup;
 
 /**
  * Provides constraints for each entity type.
@@ -24,20 +24,20 @@ class EntityConstraintProvider {
 	private $duplicateDetector;
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var SiteLinkConflictLookup
 	 */
-	private $siteLinkLookup;
+	private $siteLinkConflictLookup;
 
 	/**
 	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
-	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param SiteLinkConflictLookup $siteLinkConflictLookup
 	 */
 	public function __construct(
 		LabelDescriptionDuplicateDetector $duplicateDetector,
-		SiteLinkLookup $siteLinkLookup
+		SiteLinkConflictLookup $siteLinkConflictLookup
 	) {
 		$this->duplicateDetector = $duplicateDetector;
-		$this->siteLinkLookup = $siteLinkLookup;
+		$this->siteLinkConflictLookup = $siteLinkConflictLookup;
 
 		//TODO: Make validators configurable. Allow more types to register.
 	}
@@ -59,7 +59,7 @@ class EntityConstraintProvider {
 				break;
 
 			case Item::ENTITY_TYPE:
-				$validators[] = new SiteLinkUniquenessValidator( $this->siteLinkLookup );
+				$validators[] = new SiteLinkUniquenessValidator( $this->siteLinkConflictLookup );
 				break;
 		}
 
