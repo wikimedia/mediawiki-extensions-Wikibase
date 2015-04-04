@@ -26,6 +26,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
@@ -43,7 +44,8 @@ class MockRepository implements
 	EntityRevisionLookup,
 	EntityStore,
 	PropertyDataTypeLookup,
-	SiteLinkLookup
+	SiteLinkLookup,
+	SiteLinkConflictLookup
 {
 
 	/**
@@ -169,7 +171,7 @@ class MockRepository implements
 	}
 
 	/**
-	 * @see SiteLinkLookup::getConflictsForItem
+	 * @see SiteLinkConflictLookup::getConflictsForItem
 	 *
 	 * @param Item $item
 	 * @param DatabaseBase|null $db

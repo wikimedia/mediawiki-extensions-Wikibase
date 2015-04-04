@@ -434,9 +434,9 @@ class ChangeOpTestMockProvider {
 	/**
 	 * @param array $returnValue
 	 *
-	 * @return SiteLinkCache
+	 * @return SiteLinkConflictLookup
 	 */
-	public function getMockSitelinkCache( $returnValue = null ) {
+	public function getMockSiteLinkConflictLookup( $returnValue = null ) {
 		if ( is_array( $returnValue ) ) {
 			$getConflictsForItem = function() use ( $returnValue ) {
 				return $returnValue;
@@ -445,7 +445,7 @@ class ChangeOpTestMockProvider {
 			$getConflictsForItem = array( $this, 'getSiteLinkConflictsForItem' );
 		}
 
-		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkCache' );
+		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkConflictLookup' );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getConflictsForItem' )
 			->will( PHPUnit_Framework_TestCase::returnCallback( $getConflictsForItem ) );
