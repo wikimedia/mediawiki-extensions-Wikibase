@@ -118,7 +118,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 		);
 
 		$patterns['terms']['n3']  = array(
-			'!entity:Q2!s',
+			'!wd:Q2!s',
 			'!rdfs:label +"Berlin"@en *[,;.]!s',
 			'!skos:prefLabel +"Berlin"@en *[,;.]!s',
 			'!schema:name +"Berlin"@en *[,;.]!s',
