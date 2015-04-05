@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8fc1c95a",
+        "filename": "client/tests/phpunit/includes/RepoItemLinkGeneratorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-05T01:24:49Z",
+      "side": 0,
+      "message": "hehe :D",
+      "revId": "3a604f4794e8c8164fa2e5bf10e0f2328f79f0cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
