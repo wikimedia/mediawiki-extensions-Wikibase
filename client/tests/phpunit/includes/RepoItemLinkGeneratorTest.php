@@ -112,6 +112,15 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 			'hasLangLinks' => true
 		);
 
+		$data['edit link when had links and suppressing one link'] = array(
+			'expected' => $editLinksLinkRegex,
+			'title' => $title,
+			'action' => 'view',
+			'noExternalLangLinks' => array( 'fr' ),
+			'prefixedId' => $prefixedId,
+			'hasLangLinks' => true
+		);
+
 		$data['title does not exist'] = array(
 			'expected' => null,
 			'title' => $nonExistingTitle,
@@ -153,7 +162,7 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		if ( $expected === null ) {
-			$this->assertNull( $expected );
+			$this->assertNull( $link );
 		} else {
 			$this->assertRegexp( $expected, $link );
 		}
