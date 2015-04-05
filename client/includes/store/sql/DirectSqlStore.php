@@ -18,6 +18,7 @@ use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -122,9 +123,9 @@ class DirectSqlStore implements ClientStore {
 	private $propertyInfoTable = null;
 
 	/**
-	 * @var SiteLinkTable|null
+	 * @var SiteLinkLookup|null
 	 */
-	private $siteLinkTable = null;
+	private $siteLinkLookup = null;
 
 	/**
 	 * @var UsageTracker|null
@@ -269,11 +270,14 @@ class DirectSqlStore implements ClientStore {
 	 * @return SiteLinkLookup
 	 */
 	public function getSiteLinkLookup() {
-		if ( $this->siteLinkTable === null ) {
-			$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki );
+		if ( $this->siteLinkLookup === null ) {
+			$this->siteLinkLookup = new CachingSiteLinkLookup(
+				new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki ),
+				new HashBagOStuff()
+			);
 		}
 
-		return $this->siteLinkTable;
+		return $this->siteLinkLookup;
 	}
 
 	/**
