@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_14538d70",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2015-04-06T15:10:35Z",
+      "side": 1,
+      "message": "In this particular case, just do the code below unconditionally.",
+      "parentUuid": "6e7c4fa4_94dc7d1d",
+      "revId": "b4e42a448a7755708152ce3bf1910c9db1613ed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_34e24999",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2015-04-06T15:10:35Z",
+      "side": 1,
+      "message": "More troublesome for you are cases like this, where you\u0027re using getIsRawMode() (or indirectly via SerializationOptions::shouldIndexTags()) to actually vary your output beyond just skipping a call to setIndexedTagName().\n\nIf $values always has only numeric keys you\u0027re probably ok with just removing the array_values() call in this particular case, but if it has string keys you\u0027re probably going to have to break backwards compatibility.",
+      "revId": "b4e42a448a7755708152ce3bf1910c9db1613ed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_74d761f9",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 1
@@ -30,6 +65,24 @@
       "writtenOn": "2015-04-06T14:41:01Z",
       "side": 1,
       "message": "getIsRawMode() is deprecated, right? So what should we do here?",
+      "revId": "b4e42a448a7755708152ce3bf1910c9db1613ed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_74c1a100",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2015-04-06T15:10:35Z",
+      "side": 1,
+      "message": "In this particular case, you could just do the code below unconditionally.",
+      "parentUuid": "6e7c4fa4_74d761f9",
       "revId": "b4e42a448a7755708152ce3bf1910c9db1613ed9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
