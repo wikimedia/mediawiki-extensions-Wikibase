@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
