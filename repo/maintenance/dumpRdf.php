@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Title;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
 
@@ -22,11 +23,13 @@ class DumpRdf extends DumpScript {
 	 * @return DumpGenerator
 	 */
 	 protected function createDumper( $output ) {
-	 	return RdfDumpGenerator::createDumpGenerator(
+		$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
+
+		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
-			$GLOBALS['wgCanonicalServer']."/entity/",
-			$GLOBALS['wgCanonicalServer']."/Special:EntityData/",
+			$this->wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' ),
+			$entityDataTitle->getCanonicalURL() . '/',
 			$this->wikibaseRepo->getSiteStore()->getSites(),
 			$this->entityLookup, $this->revisionLookup,
 			$this->wikibaseRepo->getPropertyDataTypeLookup() );
