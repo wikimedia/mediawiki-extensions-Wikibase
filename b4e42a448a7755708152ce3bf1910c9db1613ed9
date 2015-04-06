@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_94dc7d1d",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-06T14:41:01Z",
+      "side": 1,
+      "message": "What should we use here instead of getIsRawMode()? Can it just be omitted?",
+      "revId": "b4e42a448a7755708152ce3bf1910c9db1613ed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_74d761f9",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-06T14:41:01Z",
+      "side": 1,
+      "message": "getIsRawMode() is deprecated, right? So what should we do here?",
+      "revId": "b4e42a448a7755708152ce3bf1910c9db1613ed9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
