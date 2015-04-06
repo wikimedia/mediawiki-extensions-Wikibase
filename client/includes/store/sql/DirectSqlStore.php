@@ -25,7 +25,8 @@ use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
-use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
+use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Store\EntityIdLookup;
 
@@ -310,9 +311,13 @@ class DirectSqlStore implements ClientStore {
 		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup in WikibaseRepo
 		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
+		$metaDataFetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
+			new WikiPageEntityMetaDataLookup( $this->entityIdParser, $this->repoWiki )
+		);
+
 		$rawLookup = new WikiPageEntityRevisionLookup(
 			$this->contentCodec,
-			new WikiPageEntityMetaDataLookup( $this->entityIdParser, $this->repoWiki ),
+			$metaDataFetcher,
 			$this->repoWiki
 		);
 

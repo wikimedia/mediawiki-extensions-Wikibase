@@ -6,7 +6,7 @@ use DBAccessBase;
 use MWContentSerializationException;
 use Revision;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\EntityRevision;
 
 /**
@@ -33,12 +33,12 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param WikiPageEntityMetaDataLookup $entityMetaDataLookup
+	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataLookup
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		WikiPageEntityMetaDataLookup $entityMetaDataLookup,
+		WikiPageEntityMetaDataAccessor $entityMetaDataLookup,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
@@ -75,7 +75,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		if ( is_int( $revisionId ) ) {
 			$row = $this->entityMetaDataLookup->loadRevisionInformationByRevisionId( $entityId, $revisionId );
 		} else {
-			$row = $this->entityMetaDataLookup->loadRevisionInformationByEntityId( $entityId, $revisionId );
+			$rows = $this->entityMetaDataLookup->loadRevisionInformation( array( $entityId ), $revisionId );
+			$row = $rows[$entityId->getSerialization()];
 		}
 
 		if ( $row ) {
