@@ -26,7 +26,7 @@ class DumpRdf extends DumpScript {
 			$this->getOption( 'format', 'ttl' ),
 			$output,
 			$GLOBALS['wgCanonicalServer']."/entity/",
-			$GLOBALS['wgCanonicalServer']."/Special:EntityData/",
+			wfExpandUrl( \Title::newFromText( 'Special:EntityData' )->getLocalURL(), PROTO_CANONICAL ),
 			$this->wikibaseRepo->getSiteStore()->getSites(),
 			$this->entityLookup, $this->revisionLookup,
 			$this->wikibaseRepo->getPropertyDataTypeLookup() );
