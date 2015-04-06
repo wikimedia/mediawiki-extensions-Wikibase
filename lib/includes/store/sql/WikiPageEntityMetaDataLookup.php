@@ -1,11 +1,12 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use DatabaseBase;
 use DBQueryError;
 use ResultWrapper;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
@@ -20,7 +21,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */
-class WikiPageEntityMetaDataLookup extends DBAccessBase {
+class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntityMetaDataAccessor {
 
 	/**
 	 * @var EntityIdParser

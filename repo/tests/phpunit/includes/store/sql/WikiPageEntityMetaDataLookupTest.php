@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Term;
@@ -21,7 +21,7 @@ use Wikibase\TermSqlIndex;
  * This test needs to be in repo, although the class is in lib as we can't alter
  * the data without repo functionality.
  *
- * @covers Wikibase\Lib\Store\WikiPageEntityMetaDataLookup
+ * @covers Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup
  *
  * @group Wikibase
  * @group WikibaseRepo
