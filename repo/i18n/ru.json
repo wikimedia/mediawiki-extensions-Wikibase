@@ -19,7 +19,8 @@
 			"Striking Blue",
 			"Oashnic",
 			"Batumski brodyaga",
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Mariya"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -40,10 +41,10 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Описание",
 	"wikibase-entitytermsforlanguagelistview-label": "Обозначение",
 	"wikibase-entitytermsforlanguagelistview-language": "Язык",
-	"wikibase-label-empty": "Метка (название) отсутствует.",
+	"wikibase-label-empty": "Метка (название) отсутствует",
 	"wikibase-label-edit-placeholder": "введите название",
 	"wikibase-label-edit-placeholder-language-aware": "введите метку ($1)",
-	"wikibase-description-empty": "Описание не заполнено.",
+	"wikibase-description-empty": "Описание не заполнено",
 	"wikibase-description-edit-placeholder": "введите описание",
 	"wikibase-description-edit-placeholder-language-aware": "введите описание ($1)",
 	"wikibase-diffview-reference": "источник",
@@ -66,7 +67,7 @@
 	"wikibase-statements": "Утверждения",
 	"wikibase-terms": "На других языках",
 	"wikibase-sitelinkgroupview-input-help-message": "Добавьте ссылку на сайт, указав сайт и страницу этого сайта, исправьте или удалите существующие ссылки на сайт.",
-	"wikibase-sitelinks-empty": "Ни одна страница ещё не ссылается сюда.",
+	"wikibase-sitelinks-empty": "Страницы по этой ссылке не существует.",
 	"wikibase-sitelinks-input-help-message": "Поставьте ссылку на страницу, относящуюся к этому элементу.",
 	"wikibase-sitelinks-special": "Другие сайты",
 	"wikibase-badgeselector-badge-placeholder-title": "Щелкните, чтобы назначить значок.",

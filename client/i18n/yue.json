@@ -1,16 +1,26 @@
 {
 	"@metadata": {
 		"authors": [
-			"Waihorace"
+			"Waihorace",
+			"Yueman"
 		]
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",
+	"tooltip-t-wikibase": "連到接住資料儲存庫嘅項目",
 	"wikibase-after-page-move": "你仲可以[$1 更新]有關嘅維基數據項目，將佢連結去搬咗之後嘅頁面。",
+	"wikibase-comment-update": "改好{{WBREPONAME}}項目",
+	"wikibase-dataitem": "{{WBREPONAME}}項目",
 	"wikibase-editlinks": "修改連結",
 	"wikibase-editlinkstitle": "修改跨語言連結",
 	"wikibase-linkitem-addlinks": "加新連結",
 	"wikibase-linkitem-input-site": "語言:",
 	"wikibase-linkitem-input-page": "頁面：",
 	"wikibase-linkitem-confirmitem-button": "確認",
-	"wikibase-linkitem-not-loggedin-title": "你要登入先"
+	"wikibase-linkitem-not-loggedin-title": "你要登入先",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "收埋",
+	"wikibase-rc-hide-wikidata-show": "顯示",
+	"wikibase-rc-wikibase-edit-letter": "數",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 修改",
+	"wikibase-otherprojects": "第啲項目"
 }

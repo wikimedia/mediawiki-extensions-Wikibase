@@ -43,7 +43,7 @@
 	"wikibase-error-invalid-entity-id": "Uneti identifikator je nepoznat sistemu. Molimo unesite važeći ID.",
 	"special-unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"wikibase-unconnectedpages-legend": "Mogućnosti nepovezanih stranica",
-	"wikibase-unconnectedpages-page": "Početak spiska rezultata stranicom:",
+	"wikibase-unconnectedpages-page": "Počni spiska rezultata stranicom:",
 	"wikibase-unconnectedpages-submit": "Idi",
 	"wikibase-unconnectedpages-invalid-language": "„$1“ nije ispravan kod za jezik.",
 	"wikibase-unconnectedpages-page-warning": "Naslov stranice ne može se koristi za upit i biće ignorisan.",

@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nepaboy"
+			"Nepaboy",
+			"Ganesh"
 		]
 	},
+	"tooltip-t-wikibase": "जड़ित डेटा भंडार वस्तु खातिर लिंक",
 	"wikibase-editlinks": "कड़ी संपादन करीं",
 	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी सम्पादन करीं"
 }

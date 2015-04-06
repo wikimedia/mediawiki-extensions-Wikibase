@@ -126,7 +126,7 @@
 	"wikibase-itembytitle-lookup-site": "Sito:",
 	"wikibase-itembytitle-lookup-page": "Pagina:",
 	"wikibase-itembytitle-submit": "Ricerca",
-	"wikibase-itembytitle-create": "È possibile [$1 creare l'elemento].",
+	"wikibase-itembytitle-create": "Puoi anche [$1 creare l'elemento].",
 	"special-gotolinkedpage": "Vai alla pagina collegata",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Vai alla pagina collegata dal sito ed elemento",
 	"wikibase-gotolinkedpage-lookup-site": "Sito:",

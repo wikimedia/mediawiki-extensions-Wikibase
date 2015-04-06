@@ -405,7 +405,7 @@
 	"wikibase-property-summary-wbsetclaimvalue": "{{wikibase summary messages|property-claims|Automatic edit summary when the main value of one or more claim is changed.}}\n\n{{related|Wikibase-property-summary-wbsetclaim}}",
 	"wikibase-property-summary-wbsetreference": "{{wikibase summary messages|property|Automatic edit summary generated when creating a reference or setting the value of an existing one.}} {{identical|wikibase-item-summary-wbsetreference}}",
 	"wikibase-property-summary-wbsetreference-add": "{{wikibase summary messages|property|Automatic edit summary generated when adding a reference.}} {{identical|wikibase-item-summary-wbsetreference-add}}",
-	"wikibase-property-summary-wbsetreference-set": "{{wikibase summary messages|property|Automatic edit summary generated when editing a reference.}} {{identical|wikibase-item-summary-wbsetreference-set}}",
+	"wikibase-property-summary-wbsetreference-set": "{{wikibase summary messages|property|Automatic edit summary generated when editing a reference.}}\n{{related|Wikibase-property-summary-wbsetreference}}",
 	"wikibase-property-summary-wbremoveclaims": "{{wikibase summary messages|property-claims|Automatic edit summary when one or more claim is removed.}} {{identical|wikibase-item-summary-wbremoveclaims}}",
 	"wikibase-property-summary-wbremoveclaims-remove": "Automatic edit summary generated when removing claims. Parameters:\n* $1 - number of claims that got removed {{identical|wikibase-item-summary-wbremoveclaims-remove}}",
 	"wikibase-property-summary-wbeditentity-create": "Automatic edit summary generated when creating a new property.",

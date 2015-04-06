@@ -3,10 +3,11 @@
 		"authors": [
 			"Darshan kandolkar",
 			"Santhosh.thottingal",
-			"Konknni mogi 24"
+			"Konknni mogi 24",
+			"Supriya kankumbikar"
 		]
 	},
-	"tooltip-t-wikibase": "म्हायती भांडारत जोडिल्ल्या कलमाचो नग",
+	"tooltip-t-wikibase": "म्हायती भांडारांत जोडिल्ल्या कलमाचो नग",
 	"wikibase-comment-update": "{{WBREPONAME}} नग बदल्ला",
 	"wikibase-dataitem": "{{WBREPONAME}}नग",
 	"wikibase-editlinks": "दुवो संस्करण",

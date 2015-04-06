@@ -1,8 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Erdemaslancan"
+			"Erdemaslancan",
+			"Amir a57"
 		]
 	},
+	"wikibase-edit": "دَییشدیر",
+	"wikibase-add": "آرتیرماق",
+	"wikibase-statements": "ایظهالار",
+	"wikibase-sitelinks-special": "آیری سایتلار",
+	"wikibase-aliases-empty": "هئچ بیر موستعار آدی سئچیلمییب.",
+	"wikibase-statementview-rank-normal": "نورمال درجه",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|قایناق|قایناقلار}}",
 	"wikibase-itembytitle-lookup-page": "مقاله:"
 }

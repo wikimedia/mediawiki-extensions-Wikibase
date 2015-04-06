@@ -29,7 +29,7 @@
 	"wikibase-addreference": "додати посилання на джерело",
 	"wikibase-save-inprogress": "Збереження…",
 	"wikibase-remove-inprogress": "Вилучення…",
-	"wikibase-label-empty": "Не названо.",
+	"wikibase-label-empty": "Назва ще не вказана.",
 	"wikibase-label-edit-placeholder": "введіть назву",
 	"wikibase-label-edit-placeholder-language-aware": "введіть назву мовою $1",
 	"wikibase-description-empty": "Жодного опису ще не визначено.",
