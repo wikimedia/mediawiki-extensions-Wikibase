@@ -402,6 +402,21 @@ class RdfBuilder {
 	}
 
 	/**
+	 * Write predicates linking property entity to property predicates
+	 * @param string $id
+	 */
+	private function writePropertyPredicates( $id ) {
+		$this->entityWriter->say( self::NS_ONTOLOGY, 'directClaim')->is(self::NSP_DIRECT_CLAIM, $id );
+		$this->entityWriter->say( self::NS_ONTOLOGY, 'claim')->is(self::NSP_CLAIM, $id );
+		$this->entityWriter->say( self::NS_ONTOLOGY, 'statementProperty' )->is( self::NSP_CLAIM_STATEMENT, $id );
+		$this->entityWriter->say( self::NS_ONTOLOGY, 'statementValue' )->is( self::NSP_CLAIM_VALUE, $id );
+		$this->entityWriter->say( self::NS_ONTOLOGY, 'qualifier' )->is( self::NSP_QUALIFIER, $id );
+		$this->entityWriter->say( self::NS_ONTOLOGY, 'qualifierValue' )->is( self::NSP_QUALIFIER_VALUE, $id );
+		$this->entityWriter->say( self::NS_ONTOLOGY, 'reference' )->is( self::NSP_REFERENCE, $id );
+		$this->entityWriter->say( self::NS_ONTOLOGY, 'referenceValue' )->is( self::NSP_REFERENCE_VALUE, $id );
+	}
+
+	/**
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
 	 * @param Entity $entity
@@ -428,6 +443,7 @@ class RdfBuilder {
 
 		if( $entity instanceof Property ) {
 			$this->entityWriter->say( self::NS_ONTOLOGY, 'propertyType' )->is( self::NS_ONTOLOGY, $this->getPropertyTypeName( $entity ) );
+			$this->writePropertyPredicates( $entity->getId()->getSerialization() );
 		}
 
 		$this->entityResolved( $entity->getId() );
