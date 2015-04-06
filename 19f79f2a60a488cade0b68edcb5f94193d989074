@@ -16,6 +16,24 @@
       "revId": "19f79f2a60a488cade0b68edcb5f94193d989074",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_01cb4d50",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-06T09:59:11Z",
+      "side": 1,
+      "message": "looked at this further.  i think keydown event is already handled in jquery.ui.suggester (_attachInputEventHandlers) and always triggers entityselectorselected.\n\nI think we can instead remove the keydown event above and as far as I can tell, property selection is always handled appropriately with focus in the value input box.",
+      "parentUuid": "6e7c4fa4_0fe61912",
+      "revId": "19f79f2a60a488cade0b68edcb5f94193d989074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
