@@ -35,7 +35,10 @@ class ChangesSubscriptionSchemaUpdater {
 	 * @return bool
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
-		if ( WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useLegacyChangesSubscription' ) ) {
+		$mode = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'subscriptionLookupMode' );
+
+		if ( $mode !== 'subscriptions' && $mode !== 'subscriptions+sitelinks' ) {
+			// Use of the wb_changes_subscription table is disabled.
 			return true;
 		}
 
