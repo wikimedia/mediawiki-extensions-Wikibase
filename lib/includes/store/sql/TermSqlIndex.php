@@ -312,7 +312,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param Term $term
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function getTermFields( Term $term ) {
 		$fields = array(
@@ -321,7 +321,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_text' => $term->getText(),
 		);
 
-		if ( !Settings::get( 'withoutTermSearchKey' ) ) {
+		if ( $this->supportsSearchKeys() ) {
 			$fields['term_search_key'] = $this->getSearchKey( $term->getText(), $term->getLanguage() );
 		}
 
@@ -561,9 +561,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$selectionFields = array( 'term_entity_id' );
 
-		// TODO instead of a DB query, get a setting. Should save on a few Database round trips.
 		$hasWeight = $this->supportsWeight();
-
 		if ( $hasWeight ) {
 			$selectionFields[] = 'term_weight';
 		}
@@ -686,35 +684,31 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$text = $term->getText();
 
 		if ( $text !== null ) {
-			if ( $options['caseSensitive']
-				|| Settings::get( 'withoutTermSearchKey' ) ) {
-				//NOTE: whether this match is *actually* case sensitive depends on the collation used in the database.
-				$textField = 'term_text';
-			}
-			else {
+			// NOTE: Whether this match is *actually* case sensitive depends on the collation
+			// used in the database.
+			$textField = 'term_text';
+
+			if ( !$options['caseSensitive'] && $this->supportsSearchKeys() ) {
 				$textField = 'term_search_key';
 				$text = $this->getSearchKey( $term->getText(), $term->getLanguage() );
 			}
 
 			if ( $options['prefixSearch'] ) {
 				$conditions[] = $textField . $db->buildLike( $text, $db->anyString() );
-			}
-			else {
+			} else {
 				$conditions[$textField] = $text;
 			}
 		}
 
 		if ( $term->getType() !== null ) {
 			$conditions['term_type'] = $term->getType();
-		}
-		elseif ( $termType !== null ) {
+		} elseif ( $termType !== null ) {
 			$conditions['term_type'] = $termType;
 		}
 
 		if ( $term->getEntityType() !== null ) {
 			$conditions['term_entity_type'] = $term->getEntityType();
-		}
-		elseif ( $entityType !== null ) {
+		} elseif ( $entityType !== null ) {
 			$conditions['term_entity_type'] = $entityType;
 		}
 
@@ -973,7 +967,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @return mixed
+	 * @return bool
+	 */
+	public function supportsSearchKeys() {
+		return !Settings::get( 'withoutTermSearchKey' );
+	}
+
+	/**
+	 * @return bool
 	 */
 	public function supportsWeight() {
 		return !Settings::get( 'withoutTermWeight' );

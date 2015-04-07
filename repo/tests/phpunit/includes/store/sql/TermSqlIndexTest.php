@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Term;
 use Wikibase\TermSqlIndex;
@@ -58,14 +57,12 @@ class TermSqlIndexTest extends TermIndexTest {
 	 * @dataProvider termProvider
 	 */
 	public function testGetMatchingTerms2( $languageCode, $termText, $searchText, $matches ) {
-		$withoutTermSearchKey = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'withoutTermSearchKey' );
+		$termIndex = $this->getTermIndex();
 
-		if ( $withoutTermSearchKey ) {
+		if ( !$termIndex->supportsSearchKeys() ) {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 
-		$termIndex = $this->getTermIndex();
 		$termIndex->clear();
 
 		$item = new Item( new ItemId( 'Q42' ) );

@@ -44,10 +44,10 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 	 * @param boolean $matches
 	 */
 	public function testRebuildSearchKey( $languageCode, $termText, $searchText, $matches ) {
-		$withoutTermSearchKey = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'withoutTermSearchKey' );
+		/* @var TermSqlIndex $termCache */
+		$termCache = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 
-		if ( $withoutTermSearchKey ) {
+		if ( !$termCache->supportsSearchKeys() ) {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 
@@ -56,8 +56,6 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		$item->setLabel( $languageCode, $termText );
 
 		// save term
-		/* @var TermSqlIndex $termCache */
-		$termCache = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$termCache->clear();
 		$termCache->saveTermsOfEntity( $item );
 
