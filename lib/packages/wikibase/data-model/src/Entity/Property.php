@@ -224,15 +224,6 @@ class Property extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getStatements()->isEmpty() instead.
-	 *
-	 * @return bool
-	 */
-	public function hasClaims() {
-		return !$this->statements->isEmpty();
-	}
-
-	/**
 	 * @deprecated since 1.0, use new Statement() instead.
 	 *
 	 * @param Snak $mainSnak

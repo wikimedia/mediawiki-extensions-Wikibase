@@ -11,6 +11,7 @@
 	* `Statement::setClaim` and `Statement::getClaim` have been removed
 	* Removed `ClaimList`
 	* Removed `ClaimListAccess`
+	* Removed `hasClaims` from all entity classes
 * Removed `Claims::getBestClaims` (you can use `StatementList::getBestStatements` instead)
 * Removed `Claims::getByRank` and `Claims::getByRanks` (you can use `StatementList::getWithRank` instead)
 * Removed `Claims::getMainSnaks` (you can use `StatementList::getMainSnaks` instead)

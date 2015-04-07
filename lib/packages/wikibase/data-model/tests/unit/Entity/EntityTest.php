@@ -403,17 +403,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $entity->getId(), $instance->getId() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 * @param Entity $entity
-	 */
-	public function testHasClaims( Entity $entity ) {
-		$has = $entity->hasClaims();
-		$this->assertInternalType( 'boolean', $has );
-
-		$this->assertEquals( count( $entity->getClaims() ) !== 0, $has );
-	}
-
 	public function diffProvider() {
 		$argLists = array();
 
