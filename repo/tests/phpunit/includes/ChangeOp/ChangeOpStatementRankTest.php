@@ -5,10 +5,10 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpStatementRank;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -51,12 +51,13 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$item = $this->newItemWithClaim( 'q123', $snak );
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
-		$claimGuid = $claim->getGuid();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
 		$rank = 1;
 
-		$changeOp = new ChangeOpStatementRank( $claimGuid, $rank );
+		$changeOp = new ChangeOpStatementRank( $guid, $rank );
 
 		$args[] = array ( $item, $changeOp, $rank );
 
@@ -65,16 +66,13 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpProvider
-	 *
-	 * @param Entity $item
-	 * @param ChangeOpStatementRank $changeOp
-	 * @param $expectedRank
 	 */
-	public function testApplyStatementRank( $item, $changeOp, $expectedRank ) {
+	public function testApplyStatementRank( Item $item, ChangeOpStatementRank $changeOp, $expectedRank ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
-		$rank = $claim->getRank();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$rank = $statement->getRank();
 		$this->assertEquals( $rank, $expectedRank, "No reference with expected hash" );
 	}
 

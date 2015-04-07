@@ -5,12 +5,10 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpQualifierRemove;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpQualifierRemove
@@ -45,17 +43,14 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$item = $this->newItemWithClaim( 'q345', $snak );
-		$claims = $item->getClaims();
-		/** @var Claim $claim */
-		$claim = reset( $claims );
-		$claimGuid = $claim->getGuid();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
 		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$qualifiers = $claim->getQualifiers();
-		$qualifiers->addSnak( $newQualifier );
-		$claim->setQualifiers( $qualifiers );
-		$item->setClaims( new Claims( $claims ) );
+		$statement->getQualifiers()->addSnak( $newQualifier );
 		$snakHash = $newQualifier->getHash();
-		$changeOp = new ChangeOpQualifierRemove( $claimGuid, $snakHash );
+		$changeOp = new ChangeOpQualifierRemove( $guid, $snakHash );
 		$args[] = array ( $item, $changeOp, $snakHash );
 
 		return $args;
@@ -63,17 +58,13 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpRemoveProvider
-	 *
-	 * @param Entity $item
-	 * @param ChangeOpQualifierRemove $changeOp
-	 * @param string $snakHash
 	 */
-	public function testApplyRemoveQualifier( $item, $changeOp, $snakHash ) {
+	public function testApplyRemoveQualifier( Item $item, ChangeOpQualifierRemove $changeOp, $snakHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = $item->getClaims();
-		/** @var Claim $claim */
-		$claim = reset( $claims );
-		$qualifiers = $claim->getQualifiers();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$qualifiers = $statement->getQualifiers();
 		$this->assertFalse( $qualifiers->hasSnakHash( $snakHash ), "Qualifier still exists" );
 	}
 

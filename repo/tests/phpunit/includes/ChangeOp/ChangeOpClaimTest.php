@@ -97,8 +97,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
 		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
 
-		$item777Statements = $item777->getClaims();
-		$item666Statements = $item666->getClaims();
+		$item777Statements = $item777->getStatements()->toArray();
+		$item666Statements = $item666->getStatements()->toArray();
 
 		$statement777 = reset( $item777Statements );
 		$statement666 = reset( $item666Statements );
@@ -242,8 +242,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$item777 = $this->makeNewItemWithStatement( 'Q777', new PropertyNoValueSnak( 45 ) );
 		$item666 = $this->makeNewItemWithStatement( 'Q666', new PropertySomeValueSnak( 44 ) );
 
-		$item777Statements = $item777->getClaims();
-		$item666Statements = $item666->getClaims();
+		$item777Statements = $item777->getStatements()->toArray();
+		$item666Statements = $item666->getStatements()->toArray();
 
 		$statement777 = reset( $item777Statements );
 		$statement666 = reset( $item666Statements );
@@ -283,7 +283,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	public function provideInvalidApply() {
 		$snak = new PropertyNoValueSnak( 67573284 );
 		$item = $this->makeNewItemWithStatement( 'Q777', $snak );
-		$statements = $item->getClaims();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
 		$statement = reset( $statements );
 
 		// change main snak to "some value"
