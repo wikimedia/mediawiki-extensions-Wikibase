@@ -6,6 +6,7 @@ use ApiBase;
 use ApiMain;
 use LogicException;
 use UsageException;
+use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -197,7 +198,7 @@ class MergeItems extends ApiBase {
 			),
 			'ignoreconflicts' => array(
 				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => ChangeOpsMerge::$conflictTypes,
 				ApiBase::PARAM_REQUIRED => false,
 			),
 			'summary' => array(
