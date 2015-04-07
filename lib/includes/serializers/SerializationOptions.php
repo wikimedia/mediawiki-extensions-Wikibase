@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use RuntimeException;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
@@ -350,8 +351,9 @@ class SerializationOptions {
 	 *
 	 * @since 0.2
 	 *
-	 * @param array|null $languages array of strings (back compat, as language codes)
-	 *                     or LanguageFallbackChain objects (requested language codes as keys, to identify chains)
+	 * @param LanguageFallbackChain[]|string[]|null $languages An array of LanguageFallbackChain
+	 * objects (requested language codes as keys, to identify chains) or an array of language codes
+	 * (for backwards compatibility).
 	 */
 	public function setLanguages( array $languages = null ) {
 		if ( $languages === null ) {
@@ -381,7 +383,7 @@ class SerializationOptions {
 	 *
 	 * @since 0.2
 	 *
-	 * @return array|null
+	 * @return string[]|null
 	 */
 	public function getLanguages() {
 		$languages = $this->getLanguageFallbackChains();
@@ -398,7 +400,7 @@ class SerializationOptions {
 	 *
 	 * @since 0.4
 	 *
-	 * @return array|null
+	 * @return LanguageFallbackChain[]|null
 	 */
 	public function getLanguageFallbackChains() {
 		return $this->getOption( self::OPT_LANGUAGES );
@@ -432,4 +434,5 @@ class SerializationOptions {
 	public function setLanguageFallbackChainFactory( LanguageFallbackChainFactory $factory ) {
 		$this->setOption( self::OPT_LANGUAGE_FALLBACK_CHAIN_FACTORY, $factory );
 	}
+
 }

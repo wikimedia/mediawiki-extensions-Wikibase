@@ -68,6 +68,10 @@ class LanguageFallbackChain {
 	 * ), or null when no "acceptable" data can be found.
 	 */
 	public function extractPreferredValue( array $data ) {
+		if ( empty( $data ) ) {
+			return null;
+		}
+
 		foreach ( $this->chain as $languageWithConversion ) {
 			$languageCode = $languageWithConversion->getFetchLanguageCode();
 

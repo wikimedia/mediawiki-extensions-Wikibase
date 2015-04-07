@@ -79,7 +79,7 @@ class DescriptionSerializer extends SerializerObject implements Unserializer {
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	final public function getSerializedMultilingualValues( $descriptions ) {
+	final public function getSerializedMultilingualValues( array $descriptions ) {
 		$descriptions = $this->multilingualSerializer->filterPreferredMultilingualValues( $descriptions );
 		return $this->getSerialized( $descriptions );
 	}
