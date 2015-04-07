@@ -101,11 +101,16 @@ return call_user_func( function() {
 			return $uri;
 		},
 
-		// Enable in case wb_changes_subscription does not exist or is not yet populated.
-        //
-		// @note: if Wikibase Repo and Client are enabled on the same wiki, then this only needs
-        // to be set in the repo or can be set the same in both. (repo settings override client settings)
-		'useLegacyChangesSubscription' => false,
+		// Determines how subscription lookup is handled. Possible values:
+		//
+		// - 'sitelinks': Use only sitelinks to determine which wiki is subscribed to which entity.
+		//                Use this mode if the wb_changes_subscription table does not exist.
+		// - 'subscriptions': use explicit subscriptions in the wb_changes_subscription table.
+		// - 'subscriptions+sitelinks': use a combination of both.
+		//
+		// @note: if Wikibase Repo and Client are enabled on the same wiki, this setting
+		//        needs to match the useLegacyChangesSubscription value in the client settings.
+		'subscriptionLookupMode' => 'subscriptions',
 
 		'allowEntityImport' => false,
 	);
