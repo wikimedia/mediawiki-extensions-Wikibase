@@ -3,14 +3,11 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
-use SpecialPage;
-use SpecialPageFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
@@ -58,7 +55,6 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 			$expectedMatch,
 			$generator->getLabelDescriptionAliasesEditSection( $languageCode, $entityId )
 		);
-
 	}
 
 	public function getLabelDescriptionAliasesEditSectionProvider() {
@@ -78,7 +74,6 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 		$generator = $this->newToolbarEditSectionGenerator();
 
 		$this->assertRegExp( $expectedMatch, $generator->getSiteLinksEditSection( $entityId ) );
-
 	}
 
 	public function getSiteLinksEditSectionProvider() {
@@ -97,7 +92,6 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 			'<span class="wikibase-toolbar-container"></span>',
 			$generator->getStatementEditSection( $statement )
 		);
-
 	}
 
 	public function getStatementEditSection() {
@@ -113,10 +107,10 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 			->will( $this->returnCallback( function( $specialPage, $params = array() ) {
 				return 'Special:' . $specialPage . '/' . implode( '/', $params );
 			} ) );
-		return new ToolbarEditSectionGenerator(
-			$specialPageLinker,
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() )
-		);
+
+		$templateFactory = TemplateFactory::getDefaultInstance();
+
+		return new ToolbarEditSectionGenerator( $specialPageLinker, $templateFactory );
 	}
 
 }

@@ -13,7 +13,6 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\SnakHtmlGenerator
@@ -39,8 +38,9 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		Snak $snak,
 		$patterns
 	) {
+		$templateFactory = TemplateFactory::getDefaultInstance();
 		$snakHtmlGenerator = new SnakHtmlGenerator(
-			new TemplateFactory( TemplateRegistry::getDefaultInstance() ),
+			$templateFactory,
 			$snakFormatter,
 			$propertyIdFormatter
 		);

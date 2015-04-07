@@ -17,7 +17,6 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\View\ClaimHtmlGenerator;
 use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\ClaimHtmlGenerator
@@ -77,10 +76,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		Claim $claim,
 		$patterns
 	) {
-		$templateFactory = new TemplateFactory(
-			TemplateRegistry::getDefaultInstance()
-		);
-
+		$templateFactory = TemplateFactory::getDefaultInstance();
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
 			$templateFactory,
 			$snakHtmlGenerator

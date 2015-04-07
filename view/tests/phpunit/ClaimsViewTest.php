@@ -18,7 +18,6 @@ use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\View\ClaimHtmlGenerator;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\StatementGroupListView
@@ -122,7 +121,7 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 * @return StatementGroupListView
 	 */
 	private function newStatementGroupListView( EntityIdFormatter $propertyIdFormatter ) {
-		$templateFactory = new TemplateFactory( TemplateRegistry::getDefaultInstance() );
+		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		return new StatementGroupListView(
 			$templateFactory,
