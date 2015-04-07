@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2fc74269",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T18:05:02Z",
+      "side": 1,
+      "message": "Please try to be consistent with punctuation. I suggest this style (no brackets, one comma).",
+      "revId": "0a7659e5d8b66dd453276b82f335425e38f0580d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cfbc8edb",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T18:05:02Z",
+      "side": 1,
+      "message": "rounded down",
+      "revId": "0a7659e5d8b66dd453276b82f335425e38f0580d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_efc14a59",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T18:05:02Z",
+      "side": 1,
+      "message": "rounded down",
+      "revId": "0a7659e5d8b66dd453276b82f335425e38f0580d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
