@@ -39,7 +39,7 @@ class SqlIdGenerator implements IdGenerator {
 	/**
 	 * @see IdGenerator::getNewId
 	 *
-	 * @param string $type
+	 * @param string $type normally is content model id (e.g. wikibase-item or wikibase-property)
 	 *
 	 * @return int
 	 */

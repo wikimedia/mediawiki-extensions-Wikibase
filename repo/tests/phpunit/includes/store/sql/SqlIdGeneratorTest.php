@@ -20,10 +20,17 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SqlIdGeneratorTest extends \MediaWikiTestCase {
 
+	public function testGetNewId() {
+		$generator = WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator();
+
+		$idType = 'wikibase-kittens';
+		$id = $generator->getNewId( $idType );
+
+		// 1 is in the blacklist, so count starts with 2
+		$this->assertEquals( 2, $id );
+	}
+
 	public function testIdBlacklisting() {
-		/**
-		 * @var IdGenerator $clone
-		 */
 		$generator = WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator();
 		$idBlacklist = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'idBlacklist' );
