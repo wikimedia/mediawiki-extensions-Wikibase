@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_427935c3",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:02:16Z",
+      "side": 1,
+      "message": "$title is now unused.",
+      "revId": "b7fac6797a32995c083371728e0634b951061fd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
