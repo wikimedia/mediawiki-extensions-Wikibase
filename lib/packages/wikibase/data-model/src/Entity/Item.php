@@ -291,15 +291,6 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getStatements()->isEmpty() instead.
-	 *
-	 * @return bool
-	 */
-	public function hasClaims() {
-		return !$this->statements->isEmpty();
-	}
-
-	/**
 	 * @see Comparable::equals
 	 *
 	 * Two items are considered equal if they are of the same

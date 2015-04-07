@@ -372,21 +372,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	}
 
 	/**
-	 * Convenience function to check if the entity contains any claims.
-	 *
-	 * On top of being a convenience function, this implementation allows for doing
-	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
-	 *
-	 * @since 0.2
-	 * @deprecated since 1.0, use getStatements()->isEmpty() instead.
-	 *
-	 * @return bool
-	 */
-	public function hasClaims() {
-		return false;
-	}
-
-	/**
 	 * @since 0.3
 	 * @deprecated since 1.0, use new Statement() instead.
 	 *
