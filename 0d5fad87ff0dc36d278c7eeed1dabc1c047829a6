@@ -33,6 +33,24 @@
       "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fb782cf0",
+        "filename": "lib/includes/store/SiteLinkCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-07T21:50:09Z",
+      "side": 1,
+      "message": "SiteLinkCache is a bad name for an interface. \"SiteLinkCache\" is what handles saving etc. I would be happy to see this renamed or replaced, but imho not in this patch",
+      "parentUuid": "6e7c4fa4_80f8a57b",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
