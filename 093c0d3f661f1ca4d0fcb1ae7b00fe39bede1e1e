@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5bc84051",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T21:37:21Z",
+      "side": 1,
+      "message": "It defaults to 0 in the EntityRevision class. Did you forgot to add something to this patch?",
+      "revId": "093c0d3f661f1ca4d0fcb1ae7b00fe39bede1e1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
