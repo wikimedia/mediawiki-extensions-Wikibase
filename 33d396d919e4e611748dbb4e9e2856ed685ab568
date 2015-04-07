@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7bcbbc21",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-07T21:56:22Z",
+      "side": 1,
+      "message": "not necessarily.  it\u0027s an interface, in this case using HashBagOStuff implementation which is simple. but this could also take a Memcached implementation.\n\ninjecting this allows this class to be somewhat more flexible.",
+      "parentUuid": "6e7c4fa4_60946947",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_25fa03b7",
         "filename": "lib/includes/store/CachingSiteLinkLookup.php",
         "patchSetId": 1
@@ -70,6 +88,23 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0f25b904",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-07T21:56:22Z",
+      "side": 1,
+      "message": "not super happy to have this here, uncached but understand the issues....\n\nonly places i see this used are in SiteLinkUsageLookup:\n\n$rows \u003d $this-\u003esiteLinkLookup-\u003egetLinks( $numericItemIds, array( $this-\u003eclientSiteId ) );\n\nand SpecialGoToLinkedPage, which can be replaced\n\n$links \u003d $this-\u003esiteLinkLookup-\u003egetLinks( array( $itemId-\u003egetNumericId() ), array( $site ) );\n\nnot necessarily in this patch, but maybe we can deprecate this method and replace this method with specific methods for those use cases or something else.",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_a51373b8",
         "filename": "lib/includes/store/CachingSiteLinkLookup.php",
         "patchSetId": 1
@@ -81,6 +116,24 @@
       "writtenOn": "2015-04-07T20:26:18Z",
       "side": 1,
       "message": "Returns an ItemId but is called getEntityId?",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fbf58c4e",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-07T21:56:22Z",
+      "side": 1,
+      "message": "this is in the SiteLinkLookup interface.\n\nthere are comments there afaik and in the implementation regarding @todo tasks.",
+      "parentUuid": "6e7c4fa4_a51373b8",
       "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
