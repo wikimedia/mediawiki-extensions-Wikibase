@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\StatementListProvider;
@@ -220,21 +219,6 @@ class Property extends Entity implements StatementListProvider {
 	 */
 	public function setClaims( Claims $claims ) {
 		$this->statements = new StatementList( iterator_to_array( $claims ) );
-	}
-
-	/**
-	 * @deprecated since 1.0, use getStatements()->addStatement() instead.
-	 *
-	 * @param Statement $statement
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function addClaim( Statement $statement ) {
-		if ( $statement->getGuid() === null ) {
-			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
-		}
-
-		$this->statements->addStatement( $statement );
 	}
 
 }

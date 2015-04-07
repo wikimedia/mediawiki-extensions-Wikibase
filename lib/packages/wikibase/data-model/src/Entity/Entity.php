@@ -3,11 +3,9 @@
 namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
-use RuntimeException;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\Diff\EntityPatcher;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -346,19 +344,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 */
 	public function copy() {
 		return unserialize( serialize( $this ) );
-	}
-
-	/**
-	 * @since 0.3
-	 * @deprecated since 1.0, use getStatements()->addStatement() instead.
-	 *
-	 * @param Statement $statement
-	 *
-	 * @throws InvalidArgumentException
-	 * @throws RuntimeException
-	 */
-	public function addClaim( Statement $statement ) {
-		throw new RuntimeException( 'Statements on entities are not supported any more.' );
 	}
 
 	/**

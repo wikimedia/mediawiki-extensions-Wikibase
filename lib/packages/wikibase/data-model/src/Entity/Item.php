@@ -7,7 +7,6 @@ use OutOfBoundsException;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\StatementListProvider;
@@ -223,21 +222,6 @@ class Item extends Entity implements StatementListProvider {
 		$this->fingerprint = new Fingerprint();
 		$this->siteLinks = new SiteLinkList();
 		$this->statements = new StatementList();
-	}
-
-	/**
-	 * @deprecated since 1.0, use getStatements()->addStatement() instead.
-	 *
-	 * @param Statement $statement
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function addClaim( Statement $statement ) {
-		if ( $statement->getGuid() === null ) {
-			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
-		}
-
-		$this->statements->addStatement( $statement );
 	}
 
 	/**
