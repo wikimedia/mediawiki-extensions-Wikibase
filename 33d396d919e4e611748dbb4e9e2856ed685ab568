@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2563e3a8",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:26:18Z",
+      "side": 1,
+      "message": "Please be bold. When does it makes sense?",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_60946947",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:26:18Z",
+      "side": 1,
+      "message": "Why does this need to be injected? Isn\u0027t this a trivial value object?",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_25fa03b7",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:26:18Z",
+      "side": 1,
+      "message": "Duration or timeout? Please pick one.",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c5b0efdd",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:26:18Z",
+      "side": 1,
+      "message": "I find this very confusing. Please call ItemId objects $itemId, but if it\u0027s a string, call it $id or $idString. Thanks.",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a51373b8",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:26:18Z",
+      "side": 1,
+      "message": "Returns an ItemId but is called getEntityId?",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_45d05f23",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:26:18Z",
+      "side": 1,
+      "message": "This does not return an ItemId. Please rename.",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_653ebb26",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:26:18Z",
+      "side": 1,
+      "message": "Please do not serialize the ItemId object, you need it as an ItemId object anyway. Return the object as it is and use $itemId-\u003egetSerialization() where appropriate.",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
