@@ -127,8 +127,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenStatement_itemHasStatement() {
 		$item = new Item();
-
-		$item->addClaim( $this->newStatement() );
+		$item->getStatements()->addStatement( $this->newStatement() );
 
 		$this->assertDeserialization(
 			array(
@@ -158,8 +157,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenStatementWithLegacyKey_itemHasStatement() {
 		$item = new Item();
-
-		$item->addClaim( $this->newStatement() );
+		$item->getStatements()->addStatement( $this->newStatement() );
 
 		$this->assertDeserialization(
 			array(
