@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use Parser;
+use PPFrame;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 
 class ParserFunctionRegistrant {
@@ -42,9 +43,10 @@ class ParserFunctionRegistrant {
 
 		$parser->setFunctionHook(
 			'property',
-			function( Parser $parser, $propertyLabel ) {
-				return Runner::render( $parser, $propertyLabel );
-			}
+			function( Parser $parser, PPFrame $frame, array $args ) {
+				return Runner::render( $parser, $frame, $args );
+			},
+			Parser::SFH_OBJECT_ARGS
 		);
 	}
 

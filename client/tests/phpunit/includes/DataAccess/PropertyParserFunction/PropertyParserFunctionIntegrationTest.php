@@ -67,6 +67,18 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result );
 	}
 
+	public function testPropertyParserFunction_arbitraryAccess() {
+		$result = $this->parseWikitextToHtml( '{{#property:P342|from=Q32488}}' );
+
+		$this->assertSame( "<p>Lua&#160;:)\n</p>", $result );
+	}
+
+	public function testPropertyParserFunction_arbitraryAccessNotFound() {
+		$result = $this->parseWikitextToHtml( '{{#property:P342|from=Q1234567}}' );
+
+		$this->assertSame( '', $result );
+	}
+
 	public function testPropertyParserFunction_byNonExistent() {
 		$result = $this->parseWikitextToHtml( '{{#property:P123456789111}}' );
 
