@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Item;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class ItemSearchTextGenerator {
 
@@ -18,8 +19,8 @@ class ItemSearchTextGenerator {
 	 * @return string
 	 */
 	public function generate( Item $item ) {
-		$entitySearchTextGenerator = new EntitySearchTextGenerator();
-		$text = $entitySearchTextGenerator->generate( $item );
+		$fingerprintGenerator = new FingerprintSearchTextGenerator();
+		$text = $fingerprintGenerator->generate( $item->getFingerprint() );
 
 		foreach ( $item->getSiteLinks() as $siteLink ) {
 			$text .= "\n" . $siteLink->getPageName();

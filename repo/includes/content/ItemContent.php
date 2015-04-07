@@ -194,8 +194,8 @@ class ItemContent extends EntityContent {
 			return '';
 		}
 
-		// TODO: refactor ItemSearchTextGenerator to share an interface with EntitySearchTextGenerator,
-		// so we don't have to re-implement getTextForSearchIndex() here.
+		// TODO: Refactor ItemSearchTextGenerator to share an interface with
+		// FingerprintSearchTextGenerator, so we don't have to re-implement getTextForSearchIndex() here.
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getItem() );
 
