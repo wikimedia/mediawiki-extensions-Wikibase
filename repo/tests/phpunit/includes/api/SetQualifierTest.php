@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -95,11 +94,11 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 			$prop = Property::newFromType( 'string' );
 			$propId = $this->makeProperty( $prop )->getId();
-			$claim = new Statement( new Claim( new PropertyValueSnak( $propId, new StringValue( '^_^' ) ) ) );
+			$snak = new PropertyValueSnak( $propId, new StringValue( '^_^' ) );
 
 			$guidGenerator = new ClaimGuidGenerator();
-			$claim->setGuid( $guidGenerator->newGuid( $newItem->getId() ) );
-			$newItem->addClaim( $claim );
+			$guid = $guidGenerator->newGuid( $newItem->getId() );
+			$newItem->getStatements()->addNewStatement( $snak, null, null, $guid );
 
 			$store->saveEntity( $newItem, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 			$item = $newItem;

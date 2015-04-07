@@ -81,7 +81,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 			$guidGenerator = new ClaimGuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
-			$item->addClaim( $statement );
+			$item->getStatements()->addStatement( $statement );
 
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 

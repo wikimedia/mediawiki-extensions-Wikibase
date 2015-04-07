@@ -72,7 +72,7 @@ class GetClaimsTest extends \ApiTestCase {
 
 		foreach ( $statements as $key => $statement ) {
 			$statement->setGuid( $item->getId()->getSerialization() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
-			$item->addClaim( $statement );
+			$item->getStatements()->addStatement( $statement );
 		}
 	}
 

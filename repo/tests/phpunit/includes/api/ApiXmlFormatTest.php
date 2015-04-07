@@ -5,11 +5,9 @@ namespace Wikibase\Test\Api;
 use ApiBase;
 use ApiMain;
 use FauxRequest;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -160,13 +158,12 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 		$item = new Item();
 		$entityRevision = $store->saveEntity( $item, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+		/** @var Item $item */
 		$item = $entityRevision->getEntity();
 
-		$snak = new PropertyNoValueSnak( $propertyId->getNumericId() );
-		$statement = new Statement( new Claim( $snak ) );
-
-		$statement->setGuid( $item->getId()->getSerialization() . '$kittens' );
-		$item->addClaim( $statement );
+		$snak = new PropertyNoValueSnak( $propertyId );
+		$guid = $item->getId()->getSerialization() . '$kittens';
+		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
 		$entityRevision = $store->saveEntity( $item, 'testing more!', $GLOBALS['wgUser'] );
 
 		return $entityRevision;
