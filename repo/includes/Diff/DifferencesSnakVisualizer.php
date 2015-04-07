@@ -152,6 +152,8 @@ class DifferencesSnakVisualizer {
 	 * Get a detailed formatted snak, including the snak's property label and value.
 	 *
 	 * @param Snak $snak
+	 *
+	 * @return string HTML
 	 */
 	public function getPropertyAndDetailedValue( Snak $snak ) {
 		return $this->getColonSeparatedHtml(
@@ -160,6 +162,12 @@ class DifferencesSnakVisualizer {
 		);
 	}
 
+	/**
+	 * @param string $before HTML
+	 * @param string $after HTML
+	 *
+	 * @return string HTML
+	 */
 	private function getColonSeparatedHtml( $before, $after ) {
 		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->languageCode )->escaped();
 
