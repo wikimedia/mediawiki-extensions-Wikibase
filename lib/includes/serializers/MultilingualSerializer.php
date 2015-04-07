@@ -2,8 +2,6 @@
 
 namespace Wikibase\Lib\Serializers;
 
-use Wikibase\LanguageFallbackChain;
-
 /**
  * Multilingual serializer, for serializer of labels and descriptions.
  *
@@ -36,9 +34,9 @@ class MultilingualSerializer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param array $data
+	 * @param string[]|array[] $data
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public function serializeMultilingualValues( array $data ) {
 		$values = array();
@@ -78,23 +76,22 @@ class MultilingualSerializer {
 	 *
 	 * @param array $allData
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public function filterPreferredMultilingualValues( array $allData ) {
-		$values = array();
-
 		$languageFallbackChains = $this->options->getLanguageFallbackChains();
 
-		if ( $languageFallbackChains ) {
-			/** @var LanguageFallbackChain[] $languageFallbackChains */
-			foreach ( $languageFallbackChains as $languageCode => $languageFallbackChain ) {
-				$data = $languageFallbackChain->extractPreferredValue( $allData );
-				if ( $data !== null ) {
-					$values[$languageCode] = $data;
-				}
+		if ( $languageFallbackChains === null || empty( $allData ) ) {
+			return $allData;
+		}
+
+		$values = array();
+
+		foreach ( $languageFallbackChains as $languageCode => $languageFallbackChain ) {
+			$data = $languageFallbackChain->extractPreferredValue( $allData );
+			if ( $data !== null ) {
+				$values[$languageCode] = $data;
 			}
-		} else {
-			$values = $allData;
 		}
 
 		return $values;

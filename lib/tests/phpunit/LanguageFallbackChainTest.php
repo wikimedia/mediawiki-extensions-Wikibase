@@ -172,6 +172,7 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 				'language' => 'en',
 				'source' => null,
 			) ),
+
 			array( 'fr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
 				'kk' => 'baz',
 			), array(
@@ -190,6 +191,7 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			array( 'sr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
 				':' => 'qux',
 			), null ),
+			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, array(), null ),
 			array( 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, array(), null ),
 
 			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, array(
