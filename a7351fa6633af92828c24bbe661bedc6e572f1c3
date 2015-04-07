@@ -16,6 +16,24 @@
       "revId": "a7351fa6633af92828c24bbe661bedc6e572f1c3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_252be379",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:08:23Z",
+      "side": 1,
+      "message": "There are probably a dozen ways to do this, and this is just Daniels coding style. ;-)",
+      "parentUuid": "6e7c4fa4_4f415eac",
+      "revId": "a7351fa6633af92828c24bbe661bedc6e572f1c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
