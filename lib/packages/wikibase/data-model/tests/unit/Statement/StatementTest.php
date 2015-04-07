@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Statement;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -198,19 +197,6 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	public function testSetInvalidRank( Statement $statement ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$statement->setRank( 9001 );
-	}
-
-	public function testStatementRankCompatibility() {
-		$this->assertEquals( Claim::RANK_DEPRECATED, Statement::RANK_DEPRECATED );
-		$this->assertEquals( Claim::RANK_PREFERRED, Statement::RANK_PREFERRED );
-		$this->assertEquals( Claim::RANK_NORMAL, Statement::RANK_NORMAL );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testIsClaim( Statement $statement ) {
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $statement );
 	}
 
 	/**
