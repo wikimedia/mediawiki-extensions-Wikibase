@@ -503,38 +503,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'array', $claims );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 * @param Entity $entity
-	 */
-	public function testGetAllSnaks( Entity $entity ) {
-		$snaks = $entity->getAllSnaks();
-		$claims = $entity->getClaims();
-
-		$this->assertInternalType( 'array', $snaks );
-
-		$this->assertGreaterThanOrEqual( count( $claims ), count( $snaks ), "At least one snak per Claim" );
-
-		foreach ( $claims as $claim ) {
-			$snak = $claim->getMainSnak();
-			$this->assertContains( $snak, $snaks, "main snak" );
-
-			$qualifiers = $claim->getQualifiers();
-
-			// check the first qualifier
-			foreach ( $qualifiers as $snak ) {
-				$this->assertContains( $snak, $snaks, "qualifier snak" );
-			}
-
-			// check the first reference
-			if ( $claim instanceof Statement ) {
-				foreach ( $claim->getAllSnaks() as $snak ) {
-					$this->assertContains( $snak, $snaks, "statement snak" );
-				}
-			}
-		}
-	}
-
 	public function testWhenNoStuffIsSet_getFingerprintReturnsEmptyFingerprint() {
 		$entity = $this->getNewEmpty();
 

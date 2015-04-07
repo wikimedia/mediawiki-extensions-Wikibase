@@ -428,30 +428,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	}
 
 	/**
-	 * Returns a list of all Snaks on this Entity. This includes at least the main snaks of
-	 * Claims, the snaks from Claim qualifiers, and the snaks from Statement References.
-	 *
-	 * This is a convenience method for use in code that needs to operate on all snaks, e.g.
-	 * to find all referenced Entities.
-	 *
-	 * @since 0.5
-	 * @deprecated since 1.0 - use StatementList::getAllSnaks instead
-	 *
-	 * @return Snak[]
-	 */
-	public function getAllSnaks() {
-		$snaks = array();
-
-		foreach ( $this->getClaims() as $claim ) {
-			foreach( $claim->getAllSnaks() as $snak ) {
-				$snaks[] = $snak;
-			}
-		}
-
-		return $snaks;
-	}
-
-	/**
 	 * @since 0.7.3
 	 *
 	 * @return Fingerprint
