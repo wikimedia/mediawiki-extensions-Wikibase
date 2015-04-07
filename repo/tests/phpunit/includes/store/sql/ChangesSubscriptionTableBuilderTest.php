@@ -25,9 +25,11 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 	const TABLE_NAME = 'wb_changes_subscription';
 
 	public function setUp() {
-		if ( WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useLegacyChangesSubscription' ) ) {
+		$mode = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'subscriptionLookupMode' );
+
+		if ( $mode !== 'subscriptions' && $mode !== 'subscriptions+sitelinks' ) {
 			$this->markTestSkipped( 'Skipping test for ChangesSubscriptionTableBuilder, '
-				. 'because the useLegacyChangesSubscription option is set.' );
+				. 'because usage of the wb_changes_subscription table is disabled.' );
 		}
 
 		$this->tablesUsed[] = self::TABLE_NAME;
