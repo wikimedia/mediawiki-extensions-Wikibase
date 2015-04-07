@@ -70,16 +70,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$item = new Item();
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[0] ) ) );
-		$statement->setGuid( $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P' );
-
-		$reference = new Reference( new SnakList(
-			array( new PropertySomeValueSnak( 100 ) )
-		) );
-
-		$statement->getReferences()->addReference( $reference );
-
-		$item->addClaim( $statement );
+		$snak = new PropertyNoValueSnak( self::$propertyIds[0] );
+		$reference = new Reference( array( new PropertySomeValueSnak( 100 ) ) );
+		$guid = $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P';
+		$item->getStatements()->addNewStatement( $snak, null, array( $reference ), $guid );
 
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
@@ -90,14 +84,14 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		) );
 
 		$serializedReference = $this->makeValidRequest(
-			$statement->getGuid(),
+			$guid,
 			$referenceHash,
 			$reference
 		);
 
 		// Since the reference got modified, the hash should no longer match
 		$this->makeInvalidRequest(
-			$statement->getGuid(),
+			$guid,
 			$referenceHash,
 			$reference
 		);
@@ -113,7 +107,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		// Set reference with two snaks:
 		$serializedReference = $this->makeValidRequest(
-			$statement->getGuid(),
+			$guid,
 			$referenceHash,
 			$reference
 		);
@@ -126,7 +120,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		// Make another request with reordered snaks-order:
 		$this->makeValidRequest(
-			$statement->getGuid(),
+			$guid,
 			$referenceHash,
 			$serializedReference
 		);
@@ -139,19 +133,16 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Create a statement to act upon:
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[0] ) ) );
-		$statement->setGuid(
-			$item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
-		);
-
-		$item->addClaim( $statement );
+		$snak = new PropertyNoValueSnak( self::$propertyIds[0] );
+		$guid = $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P';
+		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
 
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		$snak = new PropertySomeValueSnak( new PropertyId( 'P23728525' ) );
 		$reference = new Reference( new SnakList( array( $snak ) ) );
 
-		$this->makeInvalidRequest( $statement->getGuid(), null, $reference, 'modification-failed' );
+		$this->makeInvalidRequest( $guid, null, $reference, 'modification-failed' );
 	}
 
 	public function testSettingIndex() {
@@ -162,9 +153,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		// Create a statement to act upon:
 		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[0] ) ) );
-		$statement->setGuid(
-			$item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P'
-		);
+		$guid = $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P';
+		$statement->setGuid( $guid );
 
 		// Pre-fill statement with three references:
 		$references = array(
@@ -177,12 +167,12 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$statement->getReferences()->addReference( $reference );
 		}
 
-		$item->addClaim( $statement );
+		$item->getStatements()->addStatement( $statement );
 
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		$this->makeValidRequest(
-			$statement->getGuid(),
+			$guid,
 			$references[2]->getHash(),
 			$references[2],
 			0

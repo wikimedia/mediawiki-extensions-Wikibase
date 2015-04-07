@@ -15,7 +15,6 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -158,22 +157,20 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
 		$item->addSiteLink( new SiteLink( 'zh_classicalwiki', 'User:Addshore', array() ) );
 
-		$statement = new Statement( new Claim( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) ) );
-		$statement->setGuid( 'imaguid' );
+		$snak = new PropertySomeValueSnak( new PropertyId( 'P65' ) );
 
 		$qualifiers = new SnakList();
 		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
 		$qualifiers->addSnak( new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'string!' ) ) );
-		$statement->setQualifiers( $qualifiers );
 
 		$references = new ReferenceList();
 		$referenceSnaks = new SnakList();
 		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
 		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P68' ) ) );
 		$references->addReference( new Reference( $referenceSnaks ) );
-		$statement->setReferences( $references );
 
-		$item->addClaim( $statement );
+		$guid = 'imaguid';
+		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 

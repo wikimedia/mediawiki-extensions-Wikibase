@@ -420,20 +420,19 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$serializerFactory = new SerializerFactory();
 
-		// create property
 		$property = Property::newFromType( 'quantity' );
 		$property = $store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
-		// create item
 		$item = new Item();
+		/** @var Item $item */
 		$item = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
 		// add a claim
 		$guidGenerator = new ClaimGuidGenerator();
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( $property->getId() ) ) );
-		$claim->setGuid( $guidGenerator->newGuid( $item->getId() ) );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( $property->getId() ) ) );
+		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 
-		$item->addClaim( $claim );
+		$item->getStatements()->addStatement( $statement );
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		// try to change the main snak's property
@@ -442,7 +441,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$badClaim = new Statement( new Claim( new PropertyNoValueSnak( $badProperty->getId() ) ) );
 
-		$serializer = $serializerFactory->newSerializerForObject( $claim );
+		$serializer = $serializerFactory->newSerializerForObject( $statement );
 		$serializedBadClaim = $serializer->getSerialized( $badClaim );
 
 		$params = array(
