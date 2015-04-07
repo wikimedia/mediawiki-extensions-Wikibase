@@ -4,11 +4,11 @@ namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
 use RuntimeException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -352,20 +352,20 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @since 0.3
 	 * @deprecated since 1.0, use getStatements()->addStatement() instead.
 	 *
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws RuntimeException
 	 */
-	public function addClaim( Claim $claim ) {
-		throw new RuntimeException( 'Claims on entities are not supported any more.' );
+	public function addClaim( Statement $statement ) {
+		throw new RuntimeException( 'Statements on entities are not supported any more.' );
 	}
 
 	/**
 	 * @since 0.3
 	 * @deprecated since 1.0, use getStatements()->toArray() instead.
 	 *
-	 * @return Claim[]
+	 * @return Statement[]
 	 */
 	public function getClaims() {
 		return array();
@@ -377,10 +377,10 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 *
 	 * @param Snak $mainSnak
 	 *
-	 * @return Claim
+	 * @return Statement
 	 */
 	public function newClaim( Snak $mainSnak ) {
-		return new Claim( $mainSnak );
+		return new Statement( $mainSnak );
 	}
 
 	/**
