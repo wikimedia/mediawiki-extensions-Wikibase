@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ef1f0a6f",
+        "filename": "view/src/Template/TemplateFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-07T18:44:45Z",
+      "side": 1,
+      "message": "I\u0027m not sure Factory is a fitting name any longer... but I don\u0027t really have a better idea offhand... TemplateHandler?",
+      "revId": "041868f489176d45634cd17c2fccc10d2a153bb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
