@@ -305,8 +305,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @return EntityRevision
 	 */
 	private function getEntityRevision( Title $title, $revisionId = null ) {
-		if ( $revisionId === null || $revisionId === 0 ) {
-			$revisionId = $title->getLatestRevID();
+		// specify latest revision. sometimes getParserOutput is called during
+		// save before a revision is assigned, so we don't know it yet.
+		if ( $revisionId === null ) {
+			$revisionId = 0;
 		}
 
 		return new EntityRevision( $this->getEntity(), $revisionId );
