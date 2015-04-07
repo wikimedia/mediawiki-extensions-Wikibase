@@ -126,7 +126,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 			throw new OutOfBoundsException( "An Entity with the id $entityId could not be loaded" );
 		}
 
-		return $entity instanceof FingerprintProvider ? $entity->getFingerprint() : Fingerprint::newEmpty();
+		return $entity instanceof FingerprintProvider ? $entity->getFingerprint() : new Fingerprint();
 	}
 
 }

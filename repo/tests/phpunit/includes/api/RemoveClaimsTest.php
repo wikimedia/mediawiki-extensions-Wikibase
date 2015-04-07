@@ -72,7 +72,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @return Item[]
 	 */
 	public function itemProvider() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'kittens' );
 
 		$nonEmptyItem = new Item();

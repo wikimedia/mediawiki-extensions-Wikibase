@@ -69,7 +69,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	}
 
 	private function getFingerprint( $languageCode = 'en' ) {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( $languageCode, 'Example label' );
 		$fingerprint->setDescription( $languageCode, 'This is an example description' );
 		$fingerprint->setAliasGroup(
@@ -98,7 +98,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$fingerprint = $this->getFingerprint();
 
 		return array(
-			'empty' => array( Fingerprint::newEmpty(), new ItemId( 'Q42' ), 'en' ),
+			'empty' => array( new Fingerprint(), new ItemId( 'Q42' ), 'en' ),
 			'other language' => array( $fingerprint, new ItemId( 'Q42' ), 'de' ),
 			'other id' => array( $fingerprint, new ItemId( 'Q12' ), 'en' ),
 		);
@@ -116,7 +116,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 
 	public function testGetHtml_valuesAreEscaped() {
 		$entityTermsView = $this->getEntityTermsView();
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', '<a href="#">evil html</a>' );
 		$fingerprint->setDescription( 'en', '<script>alert( "xss" );</script>' );
 		$fingerprint->setAliasGroup( 'en', array( '<b>bold</b>', '<i>italic</i>' ) );
@@ -140,7 +140,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$noAliases->removeAliasGroup( 'en' );
 
 		return array(
-			array( Fingerprint::newEmpty(), 'No' ),
+			array( new Fingerprint(), 'No' ),
 			array( $noLabel, 'No label' ),
 			array( $noDescription, 'No description' ),
 			array( $noAliases, 'No aliases' ),
@@ -178,7 +178,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 
 	public function testGetHtml_withoutEntityId() {
 		$entityTermsView = $this->getEntityTermsView();
-		$html = $entityTermsView->getHtml( Fingerprint::newEmpty(), null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( new Fingerprint(), null, '', new TextInjector() );
 
 		$this->assertNotContains( '(new)', $html );
 		$this->assertNotContains( '<a ', $html );
