@@ -64,7 +64,7 @@ class LabelDescriptionDuplicateDetector {
 		EntityId $ignoreEntityId = null
 	) {
 		if ( !is_string( $entityType ) ) {
-			throw new InvalidArgumentException( '$labels must be an array' );
+			throw new InvalidArgumentException( '$entityType must be a string' );
 		}
 
 		if ( empty( $labels ) && empty( $descriptions ) ) {
@@ -102,12 +102,11 @@ class LabelDescriptionDuplicateDetector {
 	 * @param string $errorCode Error code (for later localization)
 	 * @param Term[] $terms The conflicting terms.
 	 *
-	 * @return array
+	 * @return UniquenessViolation[]
 	 */
-	private function termsToErrors( $message, $errorCode, $terms ) {
+	private function termsToErrors( $message, $errorCode, array $terms ) {
 		$errors = array();
 
-		/* @var Term $term */
 		foreach ( $terms as $term ) {
 			$errors[] = new UniquenessViolation(
 				$term->getEntityId(),
