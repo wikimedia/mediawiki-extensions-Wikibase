@@ -16,7 +16,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -166,9 +165,9 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) ) );
-		$claim->setGuid( $claimGuid );
-		$item->addClaim( $claim );
+		$snak = new PropertyNoValueSnak( $p11 );
+		$qualifiers = new SnakList( array( $oldSnak ) );
+		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $claimGuid );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
 		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
@@ -209,9 +208,9 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) ) );
-		$claim->setGuid( $claimGuid );
-		$item->addClaim( $claim );
+		$snak = new PropertyNoValueSnak( $p11 );
+		$qualifiers = new SnakList( array( $oldSnak ) );
+		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $claimGuid );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
 		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );

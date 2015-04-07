@@ -11,9 +11,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
 
@@ -127,25 +129,21 @@ class WikibaseDataAccessTestItemSetUpHelper {
 	/**
 	 * @param ItemId $id
 	 * @param string[] $labels
-	 * @param Claim[]|null $claims
+	 * @param Statement[]|null $statements
 	 * @param SiteLink[]|null $siteLinks
 	 *
 	 * @return Item
 	 */
-	private function createTestItem( ItemId $id, array $labels, array $claims = null, array $siteLinks = null ) {
+	private function createTestItem( ItemId $id, array $labels, array $statements = null, array $siteLinks = null ) {
 		$item = new Item( $id );
 		$item->setLabels( $labels );
 
-		if ( is_array( $siteLinks ) ) {
-			foreach( $siteLinks as $siteLink ) {
-				$item->addSiteLink( $siteLink );
-			}
+		if ( $statements !== null ) {
+			$item->setStatements( new StatementList( $statements ) );
 		}
 
-		if ( is_array( $claims ) ) {
-			foreach( $claims as $claim ) {
-				$item->addClaim( $claim );
-			}
+		if ( $siteLinks !== null ) {
+			$item->setSiteLinkList( new SiteLinkList( $siteLinks ) );
 		}
 
 		$this->mockRepository->putEntity( $item );

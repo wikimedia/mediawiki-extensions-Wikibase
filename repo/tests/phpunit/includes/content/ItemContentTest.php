@@ -7,7 +7,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use Title;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,7 +14,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -116,9 +114,9 @@ class ItemContentTest extends EntityContentTest {
 		// @todo this is needed in PropertyContentTest as well
 		//       once we have statements in properties
 		$contentWithClaim = $this->newEmpty();
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 83 ) ) );
-		$claim->setGuid( '$testing$' );
-		$contentWithClaim->getEntity()->addClaim( $claim );
+		$snak = new PropertyNoValueSnak( 83 );
+		$guid = '$testing$';
+		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
 
 		$cases['claims'] = array(
 			$contentWithClaim,
@@ -150,9 +148,9 @@ class ItemContentTest extends EntityContentTest {
 		// @todo this is needed in PropertyContentTest as well
 		//       once we have statements in properties
 		$contentWithClaim = $this->newEmpty();
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 83 ) ) );
-		$claim->setGuid( '$testing$' );
-		$contentWithClaim->getEntity()->addClaim( $claim );
+		$snak = new PropertyNoValueSnak( 83 );
+		$guid = '$testing$';
+		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
 
 		$cases['claims'] = array(
 			$contentWithClaim,

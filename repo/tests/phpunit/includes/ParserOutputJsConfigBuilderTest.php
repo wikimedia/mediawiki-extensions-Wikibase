@@ -4,14 +4,12 @@ namespace Wikibase\Test;
 
 use Language;
 use MediaWikiTestCase;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -105,11 +103,8 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 			new PropertyId( 'P794' ),
 			new EntityIdValue( new ItemId( 'Q9000' ) )
 		);
-
-		$statement = new Statement( new Claim( $snak ) );
-		$statement->setGuid( 'P794$muahahaha' );
-
-		$item->addClaim( $statement );
+		$guid = 'P794$muahahaha';
+		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
 
 		return $item;
 	}
