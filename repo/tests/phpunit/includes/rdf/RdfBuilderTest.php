@@ -34,14 +34,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * Initialize repository data
 	 */
-	private function getCodec()
-	{
-		if( empty($this->codec) ) {
+	private function getCodec() {
+		if ( empty( $this->codec ) ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 	        $wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
 	        $wikibaseRepo->getSettings()->setSetting( 'useRedirectTargetColumn', true );
 	        $this->codec = $wikibaseRepo->getEntityContentDataCodec();
 		}
+
 		return $this->codec;
 	}
 
@@ -63,29 +63,30 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Construct mock repository
-	 * @return \Wikibase\Test\MockRepository
+	 * @return MockRepository
 	 */
 	public static function getMockRepository() {
 		static $repo;
 
-		if ( !empty($repo) ) {
+		if ( !empty( $repo ) ) {
 			return $repo;
 		}
 
 		$repo = new MockRepository();
 
-		foreach( self::getTestProperties() as $prop ) {
-			list($id, $type) = $prop;
-			$fingerprint = Fingerprint::newEmpty();
+		foreach ( self::getTestProperties() as $prop ) {
+			list( $id, $type ) = $prop;
+			$fingerprint = new Fingerprint();
 			$fingerprint->setLabel( 'en', "Property$id" );
 			$entity = new Property( PropertyId::newFromNumber($id), $fingerprint, $type );
 			$repo->putEntity( $entity );
 		}
-		$fingerprint = Fingerprint::newEmpty();
+
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', "Item42" );
 		$entity = new Item( ItemId::newFromNumber(42), $fingerprint );
 		$repo->putEntity( $entity );
+
 		return $repo;
 	}
 
@@ -111,8 +112,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Get site list
-	 * @return \SiteList
+	 * @return SiteList
 	 */
 	public static function getSiteList() {
 		$list = new SiteList();
@@ -137,8 +137,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @param string $entityId
 	 * @return Entity
 	 */
-	public function getEntityData( $entityId )
-	{
+	public function getEntityData( $entityId ) {
 		return $this->getCodec()->decodeEntity(
 			file_get_contents(__DIR__ . "/../../data/rdf/$entityId.json"), CONTENT_FORMAT_JSON );
 	}
@@ -148,13 +147,13 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @param string $testName
 	 * @return array
 	 */
-	public function getSerializedData( $testName )
-	{
+	public function getSerializedData( $testName ) {
 		$filename = __DIR__ . "/../../data/rdf/$testName.nt";
-		if ( !file_exists( $filename ) )
-		{
-			return array ();
+
+		if ( !file_exists( $filename ) ) {
+			return array();
 		}
+
 		$data = trim( file_get_contents( $filename ) );
 		$data = explode( "\n", $data );
 		sort( $data );
@@ -231,7 +230,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$testData[$test[2]] = array( $this->getEntityData($test[0]), $test[1], $this->getSerializedData($test[2]) );
 		}
 		return $testData;
-
 	}
 
 	/**

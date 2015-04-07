@@ -347,7 +347,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	}
 
 	public function getEntityTermsProvider() {
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'kittens!!!:)' );
 		$fingerprint->setDescription( 'es', 'es un gato!' );
 		$fingerprint->setAliasGroup( 'en', array( 'kitten-alias' ) );
