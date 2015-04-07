@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_20e991a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:29:58Z",
+      "side": 1,
+      "message": "Removal of the unused method should be in a separate patch. Please.",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_80f8a57b",
+        "filename": "lib/includes/store/SiteLinkCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-07T20:29:58Z",
+      "side": 1,
+      "message": "How is this related to caching?",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
