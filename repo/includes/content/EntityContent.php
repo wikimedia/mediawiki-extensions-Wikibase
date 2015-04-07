@@ -288,7 +288,7 @@ abstract class EntityContent extends AbstractContent {
 			$options
 		);
 
-		$entityRevision = $this->getEntityRevision( $title, $revisionId );
+		$entityRevision = $this->getEntityRevision( $revisionId );
 
 		$output = $outputGenerator->getParserOutput( $entityRevision, $options, $generateHtml );
 
@@ -299,17 +299,21 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @param Title $title
 	 * @param int|null $revisionId
 	 *
 	 * @return EntityRevision
 	 */
-	private function getEntityRevision( Title $title, $revisionId = null ) {
-		if ( $revisionId === null || $revisionId === 0 ) {
-			$revisionId = $title->getLatestRevID();
+	private function getEntityRevision( $revisionId = null ) {
+		$entity = $this->getEntity();
+
+		if ( $revisionId !== null ) {
+			return new EntityRevision( $entity, $revisionId );
 		}
 
-		return new EntityRevision( $this->getEntity(), $revisionId );
+		// Revision defaults to 0 (latest), which is desired and suitable in cases where
+		// getParserOutput specifies no revision. (e.g. is called during save process
+		// when revision id is unknown or not assigned yet)
+		return new EntityRevision( $entity );
 	}
 
 	/**
