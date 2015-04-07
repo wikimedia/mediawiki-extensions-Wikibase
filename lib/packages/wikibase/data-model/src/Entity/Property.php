@@ -223,17 +223,6 @@ class Property extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 1.0, use new Statement() instead.
-	 *
-	 * @param Snak $mainSnak
-	 *
-	 * @return Statement
-	 */
-	public function newClaim( Snak $mainSnak ) {
-		return new Statement( $mainSnak );
-	}
-
-	/**
 	 * @deprecated since 1.0, use getStatements()->addStatement() instead.
 	 *
 	 * @param Statement $statement

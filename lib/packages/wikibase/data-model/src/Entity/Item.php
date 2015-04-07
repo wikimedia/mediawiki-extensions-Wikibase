@@ -200,17 +200,6 @@ class Item extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 1.0, use new Statement() instead.
-	 *
-	 * @param Snak $mainSnak
-	 *
-	 * @return Statement
-	 */
-	public function newClaim( Snak $mainSnak ) {
-		return new Statement( $mainSnak );
-	}
-
-	/**
 	 * Returns if the Item has no content.
 	 * Having an id set does not count as having content.
 	 *
