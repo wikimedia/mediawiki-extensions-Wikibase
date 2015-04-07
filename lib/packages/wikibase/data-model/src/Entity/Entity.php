@@ -372,18 +372,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	}
 
 	/**
-	 * @since 0.3
-	 * @deprecated since 1.0, use new Statement() instead.
-	 *
-	 * @param Snak $mainSnak
-	 *
-	 * @return Statement
-	 */
-	public function newClaim( Snak $mainSnak ) {
-		return new Statement( $mainSnak );
-	}
-
-	/**
 	 * Returns an EntityDiff between $this and the provided Entity.
 	 *
 	 * @since 0.1

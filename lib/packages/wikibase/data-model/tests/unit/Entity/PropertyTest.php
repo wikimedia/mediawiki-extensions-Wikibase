@@ -232,16 +232,6 @@ class PropertyTest extends EntityTest {
 		$this->assertFalse( $property->isEmpty() );
 	}
 
-	public function testNewClaimReturnsStatementWithProvidedMainSnak() {
-		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
-
-		$property = Property::newFromType( 'string' );
-		$statement = $property->newClaim( $snak );
-
-		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\Statement', $statement );
-		$this->assertEquals( $snak, $statement->getMainSnak() );
-	}
-
 	public function testSetClaims() {
 		$property = Property::newFromType( 'string' );
 
