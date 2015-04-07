@@ -78,6 +78,11 @@ $magicWords['fr'] = array(
 	'property' => array( 0, 'propriété' ),
 );
 
+/** Western Frisian (Frysk) */
+$magicWords['fy'] = array(
+	'property' => array( 0, 'eigenskip' ),
+);
+
 /** Hindi (हिन्दी) */
 $magicWords['hi'] = array(
 	'noexternallanglinks' => array( 0, 'कोई_अंतरविकी_कड़ियाँ_नहीं', 'कोई_अंतरविकि_कड़ियाँ_नहीं' ),

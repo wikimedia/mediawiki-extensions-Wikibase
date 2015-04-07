@@ -15,7 +15,8 @@
 			"أحمد المحمودي",
 			"Abanima",
 			"Sonic N800",
-			"Bibas"
+			"Bibas",
+			"Yahya Sakhnini"
 		]
 	},
 	"wikibase-entity-item": "عنصر",
@@ -28,10 +29,10 @@
 	"wikibase-addreference": "إضافة مصدر",
 	"wikibase-save-inprogress": "يحفظ...",
 	"wikibase-remove-inprogress": "يزيل...",
-	"wikibase-label-empty": "لم يتم تعريف أي وسوم بعد",
+	"wikibase-label-empty": "لم يتم تعريف أي وسوم",
 	"wikibase-label-edit-placeholder": "أدخل تعريفاً",
 	"wikibase-label-edit-placeholder-language-aware": "أدخل التعريف بـ$1",
-	"wikibase-description-empty": "لم يتم توفير وصف بعد",
+	"wikibase-description-empty": "لم يتم توفير وصف",
 	"wikibase-description-edit-placeholder": "أدخل وصفاً",
 	"wikibase-description-edit-placeholder-language-aware": "أدخل وصفاً بـ$1",
 	"wikibase-diffview-reference": "مرجع",
