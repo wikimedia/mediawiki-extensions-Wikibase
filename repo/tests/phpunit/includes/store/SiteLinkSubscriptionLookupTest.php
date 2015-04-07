@@ -15,7 +15,6 @@ use Wikibase\Store\SiteLinkSubscriptionLookup;
  * @group WikibaseStore
  * @group WikibaseChange
  * @group WikibaseRepo
- * @group Database
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
