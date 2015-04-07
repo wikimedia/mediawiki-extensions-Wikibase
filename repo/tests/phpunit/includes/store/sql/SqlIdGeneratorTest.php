@@ -2,7 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\SqlIdGenerator;
+use Wikibase\IdGenerator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\SqlIdGenerator
@@ -15,22 +16,28 @@ use Wikibase\SqlIdGenerator;
  * @group medium
  *
  * @licence GNU GPL v2+
- * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SqlIdGeneratorTest extends \MediaWikiTestCase {
 
 	public function testGetNewId() {
-		$generator = new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ), array() );
+		$generator = WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator();
 
-		$id = $generator->getNewId( 'wikibase-kittens' );
-		$this->assertEquals( 1, $id );
+		$idType = 'wikibase-kittens';
+		$id = $generator->getNewId( $idType );
+
+		// 1 is in the blacklist, so count starts with 2
+		$this->assertEquals( 2, $id );
 	}
 
 	public function testIdBlacklisting() {
-		$generator = new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ), array( 1, 2 ) );
+		$generator = WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator();
+		$idBlacklist = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'idBlacklist' );
 
-		$id = $generator->getNewId( 'wikibase-blacklist' );
-		$this->assertEquals( 3, $id );
+		for ( $i = 0; $i < 45; ++$i ) {
+			$this->assertFalse( in_array( $generator->getNewId( 'blacklisttest' ), $idBlacklist ) );
+		}
 	}
 
 }

@@ -28,19 +28,12 @@ class SqlIdGenerator implements IdGenerator {
 	private $db;
 
 	/**
-	 * @var int[]
-	 */
-	private $idBlacklist;
-
-	/**
 	 * @param string $tableName
 	 * @param DatabaseBase $database
-	 * @param int[] $idBlacklist
 	 */
-	public function __construct( $tableName, DatabaseBase $database, array $idBlacklist ) {
+	public function __construct( $tableName, DatabaseBase $database ) {
 		$this->table = $tableName;
 		$this->db = $database;
-		$this->idBlacklist = $idBlacklist;
 	}
 
 	/**
@@ -115,7 +108,10 @@ class SqlIdGenerator implements IdGenerator {
 			throw new MWException( 'Could not generate a reliably unique ID.' );
 		}
 
-		if ( in_array( $id, $this->idBlacklist ) ) {
+		$idBlacklist = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'idBlacklist' );
+
+		if ( in_array( $id, $idBlacklist ) ) {
 			$id = $this->generateNewId( $type );
 		}
 

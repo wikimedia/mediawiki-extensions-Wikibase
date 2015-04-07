@@ -119,11 +119,6 @@ class SqlStore implements Store {
 	private $useRedirectTargetColumn;
 
 	/**
-	 * @var int[]
-	 */
-	private $idBlacklist;
-
-	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
 	 */
@@ -141,7 +136,6 @@ class SqlStore implements Store {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->useRedirectTargetColumn = $settings->getSetting( 'useRedirectTargetColumn' );
-		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
 	}
 
 	/**
@@ -464,7 +458,7 @@ class SqlStore implements Store {
 	 * @return IdGenerator
 	 */
 	public function newIdGenerator() {
-		return new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ), $this->idBlacklist );
+		return new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ) );
 	}
 
 	/**
