@@ -5,10 +5,14 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 use Parser;
 use ParserOptions;
 use ParserOutput;
+use PHPUnit_Framework_TestCase;
+use PPFrame_Hash;
+use Preprocessor_Hash;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -21,20 +25,24 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
-class RunnerTest extends \PHPUnit_Framework_TestCase {
+class RunnerTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunPropertyParserFunction() {
 		$itemId = new ItemId( 'Q3' );
 
 		$runner = new Runner(
-			$this->getPropertyClaimsRendererFactory(),
+			$this->getPropertyClaimsRendererFactory( $itemId, 'Cat' ),
 			$this->getSiteLinkLookup( $itemId ),
-			'enwiki'
+			new BasicEntityIdParser(),
+			'enwiki',
+			true
 		);
 
 		$parser = $this->getParser();
-		$result = $runner->runPropertyParserFunction( $parser, 'Cat' );
+		$frame = new PPFrame_Hash( new Preprocessor_Hash( $parser ) );
+		$result = $runner->runPropertyParserFunction( $parser, $frame, array( 'Cat' ) );
 
 		$expected = array(
 			'meow!',
@@ -44,6 +52,61 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $expected, $result );
 		$this->assertUsageTracking( $itemId, EntityUsage::OTHER_USAGE, $parser->getOutput() );
+	}
+
+	public function testRunPropertyParserFunction_arbitraryAccess() {
+		$itemId = new ItemId( 'Q42' );
+
+		$runner = new Runner(
+			$this->getPropertyClaimsRendererFactory( $itemId, 'Cat' ),
+			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
+			new BasicEntityIdParser(),
+			'enwiki',
+			true
+		);
+
+		$parser = $this->getParser();
+		$frame = $this->getFromFrame( $itemId->getSerialization() );
+
+		$result = $runner->runPropertyParserFunction( $parser, $frame, array( 'Cat', $this->getMock( 'PPNode' ) ) );
+
+		$expected = array(
+			'meow!',
+			'noparse' => false,
+			'nowiki' => false
+		);
+
+		$this->assertEquals( $expected, $result );
+		$this->assertUsageTracking( $itemId, EntityUsage::OTHER_USAGE, $parser->getOutput() );
+	}
+
+	public function testRunPropertyParserFunction_arbitraryAccessNotFound() {
+		$rendererFactory = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$runner = new Runner(
+			$rendererFactory,
+			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
+			new BasicEntityIdParser(),
+			'enwiki',
+			true
+		);
+
+		$parser = $this->getParser();
+		$frame = $this->getFromFrame( 'ThisIsNotQuiteAnEntityId' );
+
+		$result = $runner->runPropertyParserFunction( $parser, $frame, array( 'Cat', $this->getMock( 'PPNode' ) ) );
+
+		$expected = array(
+			'',
+			'noparse' => false,
+			'nowiki' => false
+		);
+
+		$this->assertEquals( $expected, $result );
 	}
 
 	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ) {
@@ -67,15 +130,37 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		$siteLinkLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkLookup' )
 			->getMock();
 
-		$siteLinkLookup->expects( $this->any() )
+		$siteLinkLookup->expects( $this->once() )
 			->method( 'getEntityIdForSiteLink' )
 			->will( $this->returnValue( $itemId ) );
 
 		return $siteLinkLookup;
 	}
 
-	private function getPropertyClaimsRendererFactory() {
-		$renderer = $this->getRenderer();
+	private function getFromFrame( $itemIdSerialization ) {
+		$frame = $this->getMockBuilder( 'PPFrame' )
+			->getMock();
+		$frame->expects( $this->once() )
+			->method( 'expand' )
+			->with( 'Cat' )
+			->will( $this->returnValue( 'Cat' ) );
+
+		$childFrame = $this->getMockBuilder( 'PPFrame' )
+			->getMock();
+		$childFrame->expects( $this->once() )
+			->method( 'getArgument' )
+			->with( 'from' )
+			->will( $this->returnValue( $itemIdSerialization ) );
+
+		$frame->expects( $this->once() )
+			->method( 'newChild' )
+			->will( $this->returnValue( $childFrame ) );
+
+		return $frame;
+	}
+
+	private function getPropertyClaimsRendererFactory( $entityId, $propertyLabelOrId ) {
+		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId );
 
 		$rendererFactory = $this->getMockBuilder(
 				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
@@ -90,7 +175,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		return $rendererFactory;
 	}
 
-	private function getRenderer() {
+	private function getRenderer( $entityId, $propertyLabelOrId ) {
 		$renderer = $this->getMockBuilder(
 				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRenderer'
 			)
@@ -99,6 +184,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 		$renderer->expects( $this->any() )
 			->method( 'render' )
+			->with( $entityId, $propertyLabelOrId )
 			->will( $this->returnValue( 'meow!' ) );
 
 		return $renderer;

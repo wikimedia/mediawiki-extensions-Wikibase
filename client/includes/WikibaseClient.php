@@ -719,7 +719,9 @@ final class WikibaseClient {
 		return new Runner(
 			$this->getPropertyClaimsRendererFactory(),
 			$this->getStore()->getSiteLinkLookup(),
-			$this->settings->getSetting( 'siteGlobalID' )
+			$this->getEntityIdParser(),
+			$this->settings->getSetting( 'siteGlobalID' ),
+			$this->settings->getSetting( 'allowArbitraryDataAccess' )
 		);
 	}
 

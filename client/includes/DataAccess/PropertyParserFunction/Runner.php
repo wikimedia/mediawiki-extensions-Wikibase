@@ -3,9 +3,12 @@
 namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Parser;
+use PPFrame;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -19,6 +22,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class Runner {
 
@@ -33,39 +37,58 @@ class Runner {
 	private $siteLinkLookup;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
 
 	/**
+	 * @var bool
+	 */
+	private $allowArbitraryDataAccess;
+
+	/**
 	 * @param PropertyCLaimsRendererFactory $rendererFactory
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param EntityIdParser $entityIdParser
 	 * @param string $siteId
+	 * @param bool $allowArbitraryDataAccess
 	 */
 	public function __construct(
 		PropertyClaimsRendererFactory $rendererFactory,
 		SiteLinkLookup $siteLinkLookup,
-		$siteId
+		EntityIdParser $entityIdParser,
+		$siteId,
+		$allowArbitraryDataAccess
 	) {
 		$this->rendererFactory = $rendererFactory;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityIdParser = $entityIdParser;
 		$this->siteId = $siteId;
+		$this->allowArbitraryDataAccess = $allowArbitraryDataAccess;
 	}
 
 	/**
 	 * @param Parser $parser
-	 * @param string $propertyLabelOrId property label or ID (pXXX)
+	 * @param PPFrame $frame
+	 * @param array $args
 	 *
-	 * @return string Wikitext
+	 * @return array Wikitext
 	 */
-	public function runPropertyParserFunction( Parser $parser, $propertyLabelOrId ) {
-		// @todo use id provided as argument, if arbitrary access allowed,
-		// which means property ids might also be allowed here.
-		$entityId = $this->getItemIdForConnectedPage( $parser );
+	public function runPropertyParserFunction( Parser $parser, PPFrame $frame, array $args ) {
+		$propertyLabelOrId = $frame->expand( $args[0] );
+		unset( $args[0] );
 
-		// @todo handle when site link is not there, such as site link / entity has been deleted...
+		// Create a child frame, so that we can access arguments by name.
+		$childFrame = $frame->newChild( $args, $parser->getTitle() );
+		$entityId = $this->getEntityIdForStatementListProvider( $parser, $childFrame, $args );
+
 		if ( $entityId === null ) {
-			return '';
+			return $this->buildResult( '' );
 		}
 
 		$renderer = $this->rendererFactory->newRendererFromParser( $parser );
@@ -81,15 +104,30 @@ class Runner {
 
 	/**
 	 * @param Parser $parser
+	 * @param PPFrame $frame
+	 * @param array $args
 	 *
-	 * @return ItemId|null
+	 * @return EntityId|null
 	 */
-	private function getItemIdForConnectedPage( Parser $parser ) {
-		$title = $parser->getTitle();
-		$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
-		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+	private function getEntityIdForStatementListProvider( Parser $parser, PPFrame $frame, array $args ) {
+		$from = $frame->getArgument( 'from' );
+		if ( $from && $this->allowArbitraryDataAccess ) {
+			try {
+				$entityId = $this->entityIdParser->parse( $from );
+				// Accessing a foreign item is expensive.
+				// XXX: Only increment once per item? How?
+				$parser->incrementExpensiveFunctionCount();
+			} catch ( EntityIdParsingException $ex ) {
+				// Just ignore this
+				return null;
+			}
+		} else {
+			$title = $parser->getTitle();
+			$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
+			$entityId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+		}
 
-		return $itemId;
+		return $entityId;
 	}
 
 	/**
@@ -111,12 +149,13 @@ class Runner {
 	 * @since 0.4
 	 *
 	 * @param Parser $parser
-	 * @param string $propertyLabelOrId property label or ID (pXXX)
+	 * @param PPFrame $frame
+	 * @param array $args
 	 *
 	 * @return array
 	 */
-	public static function render( Parser $parser, $propertyLabelOrId ) {
+	public static function render( Parser $parser, PPFrame $frame, array $args ) {
 		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
-		return $runner->runPropertyParserFunction( $parser, $propertyLabelOrId );
+		return $runner->runPropertyParserFunction( $parser, $frame, $args );
 	}
 }
