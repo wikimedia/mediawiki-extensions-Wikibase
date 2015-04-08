@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5314a0ed",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T17:19:50Z",
+      "side": 1,
+      "message": "Fixed by introducing a cache key, like we do for the entity lookups.",
+      "parentUuid": "6e7c4fa4_88aa0316",
+      "revId": "4699a89e4f67ef5bedad04c459461b052bce6cc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0866f326",
         "filename": "lib/includes/store/CachingSiteLinkLookup.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-08T16:29:22Z",
       "side": 1,
       "message": "No negative caching?",
+      "revId": "4699a89e4f67ef5bedad04c459461b052bce6cc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_931a381c",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T17:19:50Z",
+      "side": 1,
+      "message": "Whoops... got lost from PS1 to PS2",
+      "parentUuid": "6e7c4fa4_0866f326",
       "revId": "4699a89e4f67ef5bedad04c459461b052bce6cc0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
