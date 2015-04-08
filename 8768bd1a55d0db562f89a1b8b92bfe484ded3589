@@ -16,6 +16,41 @@
       "revId": "8768bd1a55d0db562f89a1b8b92bfe484ded3589",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e84b7786",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:04:15Z",
+      "side": 1,
+      "message": "How about \"ThingyMaker\"...",
+      "parentUuid": "6e7c4fa4_7f6f2328",
+      "revId": "8768bd1a55d0db562f89a1b8b92bfe484ded3589",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b33174ec",
+        "filename": "lib/includes/formatters/FormatterLabelDescriptionLookupFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:04:15Z",
+      "side": 1,
+      "message": "Why pass in the entire $options object, instead of just the value that is needed?",
+      "revId": "8768bd1a55d0db562f89a1b8b92bfe484ded3589",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
