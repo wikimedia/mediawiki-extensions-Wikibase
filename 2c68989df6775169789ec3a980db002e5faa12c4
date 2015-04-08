@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7bcdee88",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T22:44:05Z",
+      "side": 1,
+      "message": "Scares me a little to have the suppress/restore pair not in the same lexical scope... easy to forget to restore them if an exception is thrown. That would be particularly bad for tests, which would start to ignore failures.",
+      "revId": "2c68989df6775169789ec3a980db002e5faa12c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
