@@ -32,7 +32,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 		$siteLinkLookupMock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 
 		$siteLinkLookupMock->expects( $this->any() )
-			->method( 'getEntityIdForSiteLink' )
+			->method( 'getItemIdForSiteLink' )
 			->will( $this->returnValue( $entityId ) );
 
 		return array(

@@ -87,7 +87,7 @@ class Runner {
 	private function getItemIdForConnectedPage( Parser $parser ) {
 		$title = $parser->getTitle();
 		$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
-		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+		$itemId = $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
 
 		return $itemId;
 	}
