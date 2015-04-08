@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
@@ -549,7 +548,7 @@ class ItemTest extends EntityTest {
 		$this->assertFalse( $item->isEmpty() );
 
 		$item = new Item();
-		$item->addClaim( $this->newStatement() );
+		$item->getStatements()->addStatement( $this->newStatement() );
 		$this->assertFalse( $item->isEmpty() );
 	}
 
@@ -574,7 +573,7 @@ class ItemTest extends EntityTest {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
-		$item->addClaim( $this->newStatement() );
+		$item->getStatements()->addStatement( $this->newStatement() );
 
 		$item->clear();
 
