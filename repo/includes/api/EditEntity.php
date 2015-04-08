@@ -70,6 +70,8 @@ class EditEntity extends ModifyEntity {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
+	 *
+	 * @throws MWException
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -85,19 +87,21 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ApiWikibase::getRequiredPermissions
 	 *
-	 * @param Entity $entity
-	 * @param array $params
+	 * @param EntityDocument $entity
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string[]
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
+	protected function getRequiredPermissions( EntityDocument $entity ) {
+		$permissions = parent::getRequiredPermissions( $entity );
 
 		if ( !$this->entityExists( $entity ) ) {
 			$permissions[] = 'createpage';
 
-			if ( $entity instanceof Property ) {
-				$permissions[] = 'property-create';
+			switch ( $entity->getType() ) {
+				case 'property':
+					$permissions[] = $entity->getType() . '-create'; //property-create
+					break;
 			}
 		}
 
@@ -797,10 +801,9 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( !$this->termsLanguages->hasLanguage( $arg['language'] ) ) {
-			$this->dieError(
-				"unknown language: {$arg['language']}",
-				'not-recognized-language' );
+			$this->dieError( 'Unknown language: ' . $arg['language'], 'not-recognized-language' );
 		}
+
 		if ( !array_key_exists( 'remove', $arg ) && !is_string( $arg['value'] ) ) {
 			$this->dieError(
 				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'value'",
@@ -813,7 +816,7 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @param array $arg The argument array to verify
 	 * @param string $siteCode The site code used in the argument
-	 * @param SiteList $sites The valid site codes as an assoc array
+	 * @param SiteList|null $sites The valid sites.
 	 */
 	private function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
 		if ( !is_array( $arg ) ) {
@@ -827,8 +830,8 @@ class EditEntity extends ModifyEntity {
 				$this->dieError( "inconsistent site: {$siteCode} is not equal to {$arg['site']}", 'inconsistent-site' );
 			}
 		}
-		if ( isset( $sites ) && !$sites->hasSite( $arg['site'] ) ) {
-			$this->dieError( "unknown site: {$arg['site']}", 'not-recognized-site' );
+		if ( $sites !== null && !$sites->hasSite( $arg['site'] ) ) {
+			$this->dieError( 'Unknown site: ' . $arg['site'], 'not-recognized-site' );
 		}
 		if ( isset( $arg['title'] ) && !is_string( $arg['title'] ) ) {
 			$this->dieError( 'A string was expected, but not found', 'not-recognized-string' );

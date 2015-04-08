@@ -10,6 +10,7 @@ use Status;
 use UsageException;
 use User;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
@@ -174,6 +175,8 @@ abstract class ApiWikibase extends ApiBase {
 
 	/**
 	 * @see ApiBase::needsToken()
+	 *
+	 * @return string|false
 	 */
 	public function needsToken() {
 		return $this->isWriteMode() ? 'csrf' : false;
@@ -181,6 +184,8 @@ abstract class ApiWikibase extends ApiBase {
 
 	/**
 	 * @see ApiBase::getTokenSalt()
+	 *
+	 * @return string|false
 	 */
 	public function getTokenSalt() {
 		return $this->needsToken() ? '' : false;
@@ -188,6 +193,8 @@ abstract class ApiWikibase extends ApiBase {
 
 	/**
 	 * @see ApiBase::mustBePosted()
+	 *
+	 * @return bool
 	 */
 	public function mustBePosted() {
 		return $this->isWriteMode();
@@ -195,6 +202,8 @@ abstract class ApiWikibase extends ApiBase {
 
 	/**
 	 * @see ApiBase::isReadMode
+	 *
+	 * @return bool Always true in this abstract base implementation.
 	 */
 	public function isReadMode() {
 		return true;
@@ -207,12 +216,11 @@ abstract class ApiWikibase extends ApiBase {
 	 * Per default, this will include the 'read' permission if $this->isReadMode() returns true,
 	 * and the 'edit' permission if $this->isWriteMode() returns true,
 	 *
-	 * @param Entity $entity The entity to check permissions for
-	 * @param array $params Arguments for the module, describing the operation to be performed
+	 * @param EntityDocument $entity The entity to check permissions for
 	 *
 	 * @return string[] A list of permissions
 	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
+	protected function getRequiredPermissions( EntityDocument $entity ) {
 		$permissions = array();
 
 		if ( $this->isReadMode() ) {
@@ -231,13 +239,12 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @param $entity Entity the entity to check
 	 * @param $user User doing the action
-	 * @param $params array of arguments for the module, passed for ModifyItem
 	 *
 	 * @return Status the check's result
 	 * @todo: use this also to check for read access in ApiGetEntities, etc
 	 */
-	protected function checkPermissions( Entity $entity, User $user, array $params ) {
-		$permissions = $this->getRequiredPermissions( $entity, $params );
+	protected function checkPermissions( Entity $entity, User $user ) {
+		$permissions = $this->getRequiredPermissions( $entity );
 		$status = Status::newGood();
 
 		foreach ( array_unique( $permissions ) as $perm ) {
@@ -393,7 +400,7 @@ abstract class ApiWikibase extends ApiBase {
 			$flags |= EDIT_FORCE_BOT;
 		}
 
-		$baseRevisionId = $this->evaluateBaseRevisionParam( $params );
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 
 		$editEntity = new EditEntity(
 			$this->titleLookup,
@@ -421,30 +428,16 @@ abstract class ApiWikibase extends ApiBase {
 	/**
 	 * @param array $params
 	 *
-	 * @return false|null|string
+	 * @return string|bool|null Token string, or false if not needed, or null if not set.
 	 */
 	private function evaluateTokenParam( array $params ) {
 		if ( !$this->needsToken() ) {
-			// false disabled the token check
-			$token = false;
-		} else {
-			// null fails the token check
-			$token = isset( $params['token'] ) ? $params['token'] : null;
+			// False disables the token check.
+			return false;
 		}
 
-		return $token;
-	}
-
-	/**
-	 * @param array $params
-	 *
-	 * @return null|false|int
-	 */
-	private function evaluateBaseRevisionParam( array $params ) {
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
-
-		return $baseRevisionId;
+		// Null fails the token check.
+		return isset( $params['token'] ) ? $params['token'] : null;
 	}
 
 	/**

@@ -341,7 +341,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		// At this point only change/edit rights should be checked
-		$status = $this->checkPermissions( $entity, $user, $params );
+		$status = $this->checkPermissions( $entity, $user );
 
 		if ( !$status->isOK() ) {
 			$this->dieError( 'You do not have sufficient permissions', 'permissiondenied' );
@@ -403,6 +403,8 @@ abstract class ModifyEntity extends ApiWikibase {
 
 	/**
 	 * @see ApiBase::isWriteMode()
+	 *
+	 * @return bool Always true.
 	 */
 	public function isWriteMode() {
 		return true;
