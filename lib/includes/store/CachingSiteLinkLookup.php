@@ -38,18 +38,27 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	private $cacheDuration;
 
 	/**
+	 * @var string
+	 */
+	private $cacheKeyPrefix;
+
+	/**
 	 * @param SiteLinkLookup $siteLinkLookup The lookup to use
 	 * @param BagOStuff $cache The cache to use
 	 * @param int $cacheDuration Cache duration in seconds. Defaults to 3600 (1 hour).
+	 * @param string $cacheKeyPrefix Cache key prefix to use.
+	 *     Important in case we're not in-process caching. Defaults to "wikibase"
 	 */
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
 		BagOStuff $cache,
-		$cacheDuration = 3600
+		$cacheDuration = 3600,
+		$cacheKeyPrefix = 'wikibase'
 	) {
 		$this->lookup = $siteLinkLookup;
 		$this->cache = $cache;
 		$this->cacheDuration = $cacheDuration;
+		$this->cacheKeyPrefix = $cacheKeyPrefix;
 	}
 
 	/**
@@ -98,7 +107,7 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	 * @return SiteLink[]
 	 */
 	public function getSiteLinksForItem( ItemId $itemId ) {
-		$cacheKey = 'wikibase-sitelinks:' . $itemId->getSerialization();
+		$cacheKey = $this->cacheKeyPrefix . ':sitelinks:' . $itemId->getSerialization();
 		$siteLinks = $this->cache->get( $cacheKey );
 
 		if ( !is_array( $siteLinks ) ) {
@@ -110,13 +119,13 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	}
 
 	/**
-	 * @see SiteLinkLookup::getEntityIdForSiteLink
+	 * @see SiteLinkLookup::getItemIdForSiteLink
 	 *
 	 * @param SiteLink $siteLink
 	 *
 	 * @return ItemId|null
 	 */
-	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
+	public function getItemIdForSiteLink( SiteLink $siteLink ) {
 		return $this->getItemIdForLink(
 			$siteLink->getSiteId(),
 			$siteLink->getPageName()
@@ -130,7 +139,7 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	 * @return string
 	 */
 	private function getByPageCacheKey( $globalSiteId, $pageTitle ) {
-		return 'wikibase-sitelinks-by-page:' . $globalSiteId . ':' . $pageTitle;
+		return $this->cacheKeyPrefix . ':sitelinks-by-page:' . $globalSiteId . ':' . $pageTitle;
 	}
 
 	/**
@@ -142,13 +151,11 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 	private function getAndCacheItemIdForLink( $globalSiteId, $pageTitle ) {
 		$itemId = $this->lookup->getItemIdForLink( $globalSiteId, $pageTitle );
 
-		if ( $itemId instanceof ItemId ) {
-			$this->cache->set(
-				$this->getByPageCacheKey( $globalSiteId, $pageTitle ),
-				$itemId->getSerialization(),
-				$this->cacheDuration
-			);
-		}
+		$this->cache->set(
+			$this->getByPageCacheKey( $globalSiteId, $pageTitle ),
+			$itemId instanceof ItemId ? $itemId->getSerialization() : null,
+			$this->cacheDuration
+		);
 
 		return $itemId;
 	}

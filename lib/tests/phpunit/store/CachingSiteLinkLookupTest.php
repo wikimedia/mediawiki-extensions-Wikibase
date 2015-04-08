@@ -22,7 +22,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetItemIdForLink_cacheHit() {
 		$cache = new HashBagOStuff();
-		$cache->set( 'wikibase-sitelinks-by-page:foowiki:bar', 'Q42' );
+		$cache->set( 'wikibase:sitelinks-by-page:foowiki:bar', 'Q42' );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
@@ -56,14 +56,14 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 		// Make sure the new value also made it into the cache
 		$this->assertSame(
 			'Q42',
-			$cache->get( 'wikibase-sitelinks-by-page:foowiki:bar' )
+			$cache->get( 'wikibase:sitelinks-by-page:foowiki:bar' )
 		);
 	}
 
 	public function testGetEntityIdForSiteLink_cacheHit() {
 		$siteLink = new SiteLink( 'foowiki', 'bar' );
 		$cache = new HashBagOStuff();
-		$cache->set( 'wikibase-sitelinks-by-page:foowiki:bar', 'Q42' );
+		$cache->set( 'wikibase:sitelinks-by-page:foowiki:bar', 'Q42' );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
@@ -72,7 +72,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			'Q42',
-			$cachingSiteLinkLookup->getEntityIdForSiteLink( $siteLink )->getSerialization()
+			$cachingSiteLinkLookup->getItemIdForSiteLink( $siteLink )->getSerialization()
 		);
 	}
 
@@ -92,13 +92,13 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			'Q42',
-			$cachingSiteLinkLookup->getEntityIdForSiteLink( $siteLink )->getSerialization()
+			$cachingSiteLinkLookup->getItemIdForSiteLink( $siteLink )->getSerialization()
 		);
 
 		// Make sure the new value also made it into the cache
 		$this->assertSame(
 			'Q42',
-			$cache->get( 'wikibase-sitelinks-by-page:foowiki:bar' )
+			$cache->get( 'wikibase:sitelinks-by-page:foowiki:bar' )
 		);
 	}
 
@@ -106,7 +106,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 		$siteLinks = array( new SiteLink( 'foowiki', 'bar' ) );
 
 		$cache = new HashBagOStuff();
-		$cache->set( 'wikibase-sitelinks:Q42', $siteLinks );
+		$cache->set( 'wikibase:sitelinks:Q42', $siteLinks );
 
 		$cachingSiteLinkLookup = new CachingSiteLinkLookup(
 			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
@@ -138,7 +138,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 		);
 
 		// Make sure the new value also made it into the cache
-		$this->assertSame( $siteLinks, $cache->get( 'wikibase-sitelinks:Q42' ) );
+		$this->assertSame( $siteLinks, $cache->get( 'wikibase:sitelinks:Q42' ) );
 	}
 
 	public function testGetLinks() {
