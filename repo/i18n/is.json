@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Snævar"
+			"Snævar",
+			"Sveinn í Felli"
 		]
 	},
 	"wikibase-desc": "Skipulagður gagnaþjónn",
@@ -22,10 +23,10 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Lýsing",
 	"wikibase-entitytermsforlanguagelistview-label": "Merkimiði",
 	"wikibase-entitytermsforlanguagelistview-language": "Tungumál",
-	"wikibase-label-empty": "Enginn merkimiði skilgreindur enn.",
+	"wikibase-label-empty": "Enginn merking skilgreind",
 	"wikibase-label-edit-placeholder": "bæta við merkimiða",
 	"wikibase-label-edit-placeholder-language-aware": "bæta við merkimiða á $1",
-	"wikibase-description-empty": "Engin lýsing skilgreind enn.",
+	"wikibase-description-empty": "Engin lýsing skilgreind",
 	"wikibase-description-edit-placeholder": "setja inn lýsingu",
 	"wikibase-description-edit-placeholder-language-aware": "bæta við lýsingu á $1",
 	"wikibase-diffview-reference": "heimild",

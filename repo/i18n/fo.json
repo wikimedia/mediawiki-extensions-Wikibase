@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"EileenSanda"
+		]
+	},
+	"wikibase-edit": "rætta",
+	"wikibase-add": "innset",
+	"wikibase-sitelinks-special": "Aðrar netsíður",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|kelda|keldur}}"
+}

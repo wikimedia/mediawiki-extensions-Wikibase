@@ -24,7 +24,7 @@
 	"apihelp-query+pageterms-description": "通过相关的数据项获取与页面相关的术语。",
 	"apihelp-query+pageterms-example-simple": "获取与页面“伦敦”相关的所有术语，在用户语言中。",
 	"apihelp-query+pageterms-example-label-en": "获取与页面“伦敦”相关的英语标签和别名。",
-	"apihelp-query+pageterms-param-terms": "要获取的术语类型，例如“标签”、“说明”或“别名”。",
+	"apihelp-query+pageterms-param-terms": "要获取的术语类型，例如“description”。如果未指定，就返回所有类型。",
 	"apihelp-query+wikibase-description": "获取相关Wikibase存储库的信息。",
 	"apihelp-query+wikibase-example": "从Wikibase存储库获得URL路径和其他信息。",
 	"apihelp-query+wikibase-param-prop": "要获得的属性：\n;<kbd>url</kbd>:Base URL，脚本路径和条目路径。",

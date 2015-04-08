@@ -27,6 +27,11 @@ $specialPageAliases['arz'] = array(
 	'UnconnectedPages' => array( 'صفحات_مش_متوصله', 'من_غير_وصله', 'من_غير_وصلات_موقع' ),
 );
 
+/** Western Balochi (بلوچی رخشانی) */
+$specialPageAliases['bgn'] = array(
+	'UnconnectedPages' => array( 'وسل_نه_بوته_ئین_تاکدیمان' ),
+);
+
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
 	'UnconnectedPages' => array( 'Nicht_verbundene_Seiten' ),
