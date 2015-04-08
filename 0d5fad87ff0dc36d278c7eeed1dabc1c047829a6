@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3f79abf2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T10:30:49Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "6e7c4fa4_20e991a7",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_80f8a57b",
         "filename": "lib/includes/store/SiteLinkCache.php",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "SiteLinkCache is a bad name for an interface. \"SiteLinkCache\" is what handles saving etc. I would be happy to see this renamed or replaced, but imho not in this patch",
       "parentUuid": "6e7c4fa4_80f8a57b",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9f6c7f33",
+        "filename": "lib/includes/store/SiteLinkCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T10:30:49Z",
+      "side": 1,
+      "message": "Yeah, this is actually not a cache... dunno why Jeroen chose this name. Could be renamed in a follow-up, but is out of scope for these patches.",
+      "parentUuid": "6e7c4fa4_fb782cf0",
       "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
