@@ -121,6 +121,15 @@ class ParserAfterParseHookHandler {
 	public function doParserAfterParse( Parser &$parser ) {
 		$title = $parser->getTitle();
 
+		// Doing this only makes sense when actually creating html for page views, not when
+		// for example substing a template.
+		// Please note: While all cases where this matches don't need to go through this many
+		// that don't match (have OT_HTML) still actually wouldn't need to go through this...
+		// for example message parses, but we don't have a good way to identify those.
+		if ( $parser->OutputType() !== Parser::OT_HTML ) {
+			return true;
+		}
+
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
 			return true;
