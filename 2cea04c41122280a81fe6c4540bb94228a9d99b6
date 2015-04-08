@@ -16,6 +16,24 @@
       "revId": "2cea04c41122280a81fe6c4540bb94228a9d99b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_42ecccb8",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T12:17:57Z",
+      "side": 1,
+      "message": "how does this relate to EntityId? please elaborate.",
+      "parentUuid": "6e7c4fa4_e2fdd86a",
+      "revId": "2cea04c41122280a81fe6c4540bb94228a9d99b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
