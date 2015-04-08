@@ -113,13 +113,13 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
-	public function testGetEntityIdForSiteLink( Item $item ) {
+	public function testGetItemIdForSiteLink( Item $item ) {
 		$siteLinks = $item->getSiteLinks();
 
 		foreach( $siteLinks as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
-				$this->siteLinkTable->getEntityIdForSiteLink( $siteLink )
+				$this->siteLinkTable->getItemIdForSiteLink( $siteLink )
 			);
 		}
 	}
