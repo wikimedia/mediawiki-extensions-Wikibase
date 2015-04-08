@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7b940e47",
+        "filename": "purtle/src/TurtleRdfWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T22:45:52Z",
+      "side": 1,
+      "message": "We don\u0027t really :)",
+      "revId": "f5acabfcd54a81255524dee4d877cc2dea16f17f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3b9e9667",
+        "filename": "purtle/src/TurtleRdfWriter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T22:45:52Z",
+      "side": 1,
+      "message": "There are no predicate IRIs",
+      "revId": "f5acabfcd54a81255524dee4d877cc2dea16f17f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
