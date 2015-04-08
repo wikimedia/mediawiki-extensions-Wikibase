@@ -24,7 +24,14 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EditEntityTest extends WikibaseApiTestCase {
 
+	/**
+	 * @var string[]
+	 */
 	private static $idMap;
+
+	/**
+	 * @var bool
+	 */
 	private static $hasSetup;
 
 	public function setup() {
