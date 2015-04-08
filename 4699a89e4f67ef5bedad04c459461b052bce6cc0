@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_88aa0316",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T16:29:22Z",
+      "side": 1,
+      "message": "SiteLink objects may get serialized using php object serialization here. That could break horribly if the cache is persistent... \n\nCould be fixed by having a version constant in SiteLink and putting it into the cache key. Or by manually serializing/deserializing.",
+      "revId": "4699a89e4f67ef5bedad04c459461b052bce6cc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0866f326",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T16:29:22Z",
+      "side": 1,
+      "message": "No negative caching?",
+      "revId": "4699a89e4f67ef5bedad04c459461b052bce6cc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
