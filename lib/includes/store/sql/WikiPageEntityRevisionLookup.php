@@ -44,16 +44,16 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		parent::__construct( $wiki );
 
 		$this->contentCodec = $contentCodec;
-
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
 	}
 
 	/**
 	 * @since 0.4
-	 * @see   EntityRevisionLookup::getEntityRevision
+	 * @see EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or
+	 * LATEST_FROM_MASTER. 0 is identical to LATEST_FROM_SLAVE.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
@@ -62,10 +62,12 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
 
-		// default changed from false to 0 and then to LATEST_FROM_SLAVE
-		if ( $revisionId === false || $revisionId === 0 ) {
-			wfWarn( 'getEntityRevision() called with $revisionId = false or 0, ' .
-				'use EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER instead.' );
+		if ( $revisionId === 0 || $revisionId === false ) {
+			if ( is_bool( $revisionId ) ) {
+				wfWarn( 'EntityRevisionLookup::getEntityRevision called with $revisionId = false, '
+					. 'use EntityRevisionLookup::LATEST_FROM_SLAVE instead.' );
+			}
+
 			$revisionId = self::LATEST_FROM_SLAVE;
 		}
 

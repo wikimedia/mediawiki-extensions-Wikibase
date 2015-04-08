@@ -88,14 +88,15 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
-	 * @see   EntityLookup::getEntity
+	 * @see EntityRevisionLookup::getEntityRevision
 	 *
 	 * @note: If this lookup is configured to verify revisions, getLatestRevisionId()
 	 * will be called on the underlying lookup to check whether the cached revision is
 	 * still the latest. Otherwise, any cached revision will be used if $revisionId=0.
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or
+	 * LATEST_FROM_MASTER. 0 is identical to LATEST_FROM_SLAVE.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
@@ -103,7 +104,12 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
 		$key = $this->getCacheKey( $entityId );
 
-		if ( $revisionId === 0 ) {
+		if ( $revisionId === 0 || $revisionId === false ) {
+			if ( is_bool( $revisionId ) ) {
+				wfWarn( 'EntityRevisionLookup::getEntityRevision called with $revisionId = false, '
+					. 'use EntityRevisionLookup::LATEST_FROM_SLAVE instead.' );
+			}
+
 			$revisionId = self::LATEST_FROM_SLAVE;
 		}
 
