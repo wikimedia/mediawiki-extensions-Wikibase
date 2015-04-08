@@ -391,19 +391,6 @@ class MockRepository implements
 	}
 
 	/**
-	 * @see SiteLinkLookup::countLinks
-	 *
-	 * @param int[] $numericIds Numeric (unprefixed) item ids
-	 * @param string[] $siteIds
-	 * @param string[] $pageNames
-	 *
-	 * @return int
-	 */
-	public function countLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
-		return count( $this->getLinks( $numericIds, $siteIds, $pageNames ) );
-	}
-
-	/**
 	 * @see SiteLinkLookup::getLinks
 	 *
 	 * @param int[] $numericIds Numeric (unprefixed) item ids

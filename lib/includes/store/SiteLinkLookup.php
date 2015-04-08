@@ -53,22 +53,6 @@ interface SiteLinkLookup {
 	public function getItemIdForLink( $globalSiteId, $pageTitle );
 
 	/**
-	 * Returns how many links match the provided conditions.
-	 *
-	 * Note: this is an exact count which is expensive if the result set is big.
-	 * This means you probably do not want to call this method without any conditions.
-	 *
-	 * @since 0.3
-	 *
-	 * @param int[] $numericIds Numeric (unprefixed) item ids
-	 * @param string[] $siteIds
-	 * @param string[] $pageNames
-	 *
-	 * @return int
-	 */
-	public function countLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() );
-
-	/**
 	 * Returns the links that match the provided conditions.
 	 * The links are returned as arrays with the following elements in specified order:
 	 * - string siteId

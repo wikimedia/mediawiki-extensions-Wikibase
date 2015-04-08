@@ -361,43 +361,6 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	}
 
 	/**
-	 * @see SiteLinkLookup::countLinks
-	 *
-	 * @param int[] $numericIds Numeric (unprefixed) item ids
-	 * @param string[] $siteIds
-	 * @param string[] $pageNames
-	 *
-	 * @return int
-	 */
-	public function countLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
-		$dbr = $this->getConnection( DB_SLAVE );
-
-		$conditions = array();
-
-		if ( $numericIds !== array() ) {
-			$conditions['ips_item_id'] = $numericIds;
-		}
-
-		if ( $siteIds !== array() ) {
-			$conditions['ips_site_id'] = $siteIds;
-		}
-
-		if ( $pageNames !== array() ) {
-			$conditions['ips_site_page'] = $pageNames;
-		}
-
-		$res = $dbr->selectRow(
-			$this->table,
-			array( 'COUNT(*) AS rowcount' ),
-			$conditions,
-			__METHOD__
-		)->rowcount;
-
-		$this->releaseConnection( $dbr );
-		return $res;
-	}
-
-	/**
 	 * @see SiteLinkLookup::getLinks
 	 *
 	 * @param int[] $numericIds Numeric (unprefixed) item ids

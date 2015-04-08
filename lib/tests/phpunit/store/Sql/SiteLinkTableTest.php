@@ -143,17 +143,6 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
-	public function testCountLinks( Item $item ) {
-		$this->assertEquals(
-			count( $item->getSiteLinks() ),
-			$this->siteLinkTable->countLinks( array( $item->getId()->getNumericId() ) )
-		);
-	}
-
-	/**
-	 * @depends testCountLinks
-	 * @dataProvider itemProvider
-	 */
 	 public function testDeleteLinksOfItem( Item $item ) {
 		$this->assertTrue(
 			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false

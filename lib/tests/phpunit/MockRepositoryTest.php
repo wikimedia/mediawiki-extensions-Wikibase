@@ -304,19 +304,6 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expectedLinks, $links );
 	}
 
-	/**
-	 * @dataProvider provideGetLinks
-	 */
-	public function testCountLinks( array $items, array $itemIds, array $sites, array $pages, array $expectedLinks ) {
-		foreach ( $items as $item ) {
-			$this->repo->putEntity( $item );
-		}
-
-		$n = $this->repo->countLinks( $itemIds, $sites, $pages );
-
-		$this->assertEquals( count( $expectedLinks ), $n );
-	}
-
 	public function provideGetEntities() {
 		return array(
 			array( // #0: empty
