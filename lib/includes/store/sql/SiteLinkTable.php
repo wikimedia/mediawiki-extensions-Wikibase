@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use DatabaseBase;
+use DBAccessBase;
 use MWException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,7 +19,7 @@ use Wikibase\DataModel\SiteLink;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
+class SiteLinkTable extends DBAccessBase implements SiteLinkCache, SiteLinkConflictLookup {
 
 	/**
 	 * @since 0.1
@@ -272,7 +273,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	}
 
 	/**
-	 * @see SiteLinkLookup::getConflictsForItem
+	 * @see SiteLinkConflictLookup::getConflictsForItem
 	 *
 	 * @param Item $item
 	 * @param DatabaseBase|null $db
