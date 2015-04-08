@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b3f9744d",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:45:13Z",
+      "side": 1,
+      "message": "spaces",
+      "revId": "4da370b0f37890266f8a5f600183bb3ca43f1753",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
