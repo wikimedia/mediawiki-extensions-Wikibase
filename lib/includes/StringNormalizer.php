@@ -90,7 +90,7 @@ class StringNormalizer {
 		// \p{Z} - whitespace
 		// \p{Cc} - control chars
 		// WARNING: *any* invalid UTF8 sequence causes preg_replace to return an empty string.
-		$trimmed = preg_replace( '/^[\p{Z}\p{Cc}]+|[\p{Z}\p{Cc}]+$/u', '', $inputString );
+		$trimmed = preg_replace( '/^(\p{Z}|\p{Cc})+|(\p{Z}|\p{Cc})+$/u', '', $inputString );
 		$trimmed = preg_replace( '/[\p{Cc}]+/u', ' ', $trimmed );
 		return $trimmed;
 	}
