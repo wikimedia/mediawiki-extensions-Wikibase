@@ -48,12 +48,12 @@ class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
 	public function testDoSpecialMovepageAfterMove( $expected, Title $oldTitle, Title $newTitle, $message ) {
 		$siteLinkLookup = $this->getMock(
 			'Wikibase\Lib\Store\SiteLinkTable',
-			array( 'getEntityIdForSiteLink' ),
+			array( 'getItemIdForSiteLink' ),
 			array( 'SiteLinkTable', true )
 		);
 
 		$siteLinkLookup->expects( $this->any() )
-			->method( 'getEntityIdForSiteLink' )
+			->method( 'getItemIdForSiteLink' )
 			->with( new SiteLink( 'dewiki', 'New Amsterdam' ) )
 			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
 

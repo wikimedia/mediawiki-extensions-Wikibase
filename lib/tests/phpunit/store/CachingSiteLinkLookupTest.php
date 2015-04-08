@@ -60,7 +60,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetEntityIdForSiteLink_cacheHit() {
+	public function testGetItemIdForSiteLink_cacheHit() {
 		$siteLink = new SiteLink( 'foowiki', 'bar' );
 		$cache = new HashBagOStuff();
 		$cache->set( 'wikibase:sitelinks-by-page:foowiki:bar', 'Q42' );
@@ -72,11 +72,11 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			'Q42',
-			$cachingSiteLinkLookup->getEntityIdForSiteLink( $siteLink )->getSerialization()
+			$cachingSiteLinkLookup->getItemIdForSiteLink( $siteLink )->getSerialization()
 		);
 	}
 
-	public function testGetEntityIdForSiteLink_cacheMiss() {
+	public function testGetItemIdForSiteLink_cacheMiss() {
 		$siteLink = new SiteLink( 'foowiki', 'bar' );
 		$cache = new HashBagOStuff();
 		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
@@ -92,7 +92,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			'Q42',
-			$cachingSiteLinkLookup->getEntityIdForSiteLink( $siteLink )->getSerialization()
+			$cachingSiteLinkLookup->getItemIdForSiteLink( $siteLink )->getSerialization()
 		);
 
 		// Make sure the new value also made it into the cache
