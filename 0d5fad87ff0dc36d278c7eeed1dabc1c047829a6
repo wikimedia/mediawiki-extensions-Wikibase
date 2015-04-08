@@ -141,6 +141,41 @@
       "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5fdca7e5",
+        "filename": "lib/includes/store/SiteLinkCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-08T10:39:09Z",
+      "side": 1,
+      "message": "But it\u0027s a lookup method: please have a look if there are conflicts. This is not related to *storing* stuff.",
+      "parentUuid": "6e7c4fa4_bfcb7b20",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3fdf6bdd",
+        "filename": "lib/includes/store/SiteLinkCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-08T10:39:09Z",
+      "side": 1,
+      "message": "Also: Why is this the *first* method in this interface? If it\u0027s some kind of \"SiteLinkStore\" interface, the actual *store* methods should be first, and service methods last.",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
