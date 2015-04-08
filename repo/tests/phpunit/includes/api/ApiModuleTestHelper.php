@@ -27,7 +27,7 @@ class ApiModuleTestHelper {
 	 *
 	 * @return ApiBase
 	 */
-	public function newApiModule( $instantiator, $name, $params, User $user = null ) {
+	public function newApiModule( $instantiator, $name, array $params, User $user = null ) {
 		if ( !$user ) {
 			$user = $GLOBALS['wgUser'];
 		}
@@ -54,7 +54,7 @@ class ApiModuleTestHelper {
 	 *
 	 * @param array $response
 	 */
-	public function assertResultSuccess( $response ) {
+	public function assertResultSuccess( array $response ) {
 		Assert::assertArrayHasKey( 'success', $response, "Missing 'success' marker in response." );
 	}
 
@@ -85,7 +85,7 @@ class ApiModuleTestHelper {
 	 * @param string[] $path
 	 * @param array $response
 	 */
-	public function assertResultHasKeyInPath( $path, $response ) {
+	public function assertResultHasKeyInPath( array $path, array $response ) {
 		$obj = $response;
 		$p = '/';
 

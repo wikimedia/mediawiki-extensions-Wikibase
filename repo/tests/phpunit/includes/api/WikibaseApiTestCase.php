@@ -12,6 +12,7 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
+ *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
@@ -19,10 +20,10 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class WikibaseApiTestCase extends ApiTestCase {
 
-	protected static $loginSession = null;
-	protected static $loginUser = null;
-	protected static $token = null;
-	protected static $wbTestUser = null;
+	/**
+	 * @var TestUser|null
+	 */
+	private static $wbTestUser = null;
 
 	protected function setUp() {
 		parent::setUp();
@@ -36,14 +37,10 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$sitesTable->clear();
 			$sitesTable->saveSites( TestSites::getSites() );
 
-			$this->login();
+			$this->doLogin( 'wbeditor' );
 
 			$isSetup = true;
 		}
-
-		//TODO: preserve session and token between calls?!
-		self::$loginSession = false;
-		self::$token = false;
 	}
 
 	private function setupUser() {
@@ -72,16 +69,13 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	/**
-	 * Performs a login, if necessary, and returns the resulting session.
-	 */
-	protected function login( $user = 'wbeditor' ) {
-		self::doLogin( $user );
-		self::$loginUser = self::$users[ $user ];
-		return self::$loginSession;
-	}
-
-	/**
-	 *  Appends an edit token to a request
+	 * Appends an edit token to a request.
+	 *
+	 * @param array $params
+	 * @param array|null $session
+	 * @param User|null $user
+	 *
+	 * @return array
 	 */
 	protected function doApiRequestWithToken( array $params, array $session = null, User $user = null ) {
 		if ( !$user ) {
@@ -95,6 +89,10 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
+	/**
+	 * @param string[] $handles
+	 * @param string[] $idMap
+	 */
 	protected function initTestEntities( array $handles, array $idMap = array() ) {
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
@@ -120,6 +118,10 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 	/**
 	 * Loads an entity from the database (via an API call).
+	 *
+	 * @param string $id
+	 *
+	 * @return array
 	 */
 	protected function loadEntity( $id ) {
 		list( $res, , ) = $this->doApiRequest(
@@ -136,20 +138,21 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @see doTestQueryExceptions in IndependentWikibaseApiTestCase
 	 *
 	 * Do the test for exceptions from Api queries.
-	 * @param $params array of params for the api query
-	 * @param $exception array details of the exception to expect (type,code,message)
+	 *
+	 * @param array $params Array of params for the API query.
+	 * @param array $exception Details of the exception to expect (type, code, message).
 	 */
-	public function doTestQueryExceptions( $params, $exception ) {
+	protected function doTestQueryExceptions( array $params, array $exception ) {
 		try {
 			if ( array_key_exists( 'code', $exception )
-					&& preg_match( '/^(no|bad)token$/', $exception['code'] ) ) {
-
+				&& preg_match( '/^(no|bad)token$/', $exception['code'] )
+			) {
 				$this->doApiRequest( $params );
 			} else {
 				$this->doApiRequestWithToken( $params );
 			}
-			$this->fail( "Failed to throw UsageException" );
 
+			$this->fail( "Failed to throw UsageException" );
 		} catch( UsageException $e ) {
 			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
@@ -178,13 +181,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param bool $multiValue whether the value in the flat structure shall be an indexed array of values instead of a single value.
 	 * @param array $into optional aggregator.
 	 *
-	 * @return array array the flat version of $data
+	 * @return array The flat version of $data.
 	 */
-	public static function flattenArray( $data, $keyField, $valueField, $multiValue = false, array &$into = null ) {
-		if ( $into === null ) {
-			$into = array();
-		}
-
+	protected function flattenArray( array $data, $keyField, $valueField, $multiValue = false, array &$into = array() ) {
 		foreach ( $data as $index => $value ) {
 			if ( is_array( $value ) ) {
 				if ( isset( $value[$keyField] ) && isset( $value[$valueField] ) ) {
@@ -197,7 +196,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 					$v = $value;
 				} else {
 					// found list, recurse
-					self::flattenArray( $value, $keyField, $valueField, $multiValue, $into );
+					$this->flattenArray( $value, $keyField, $valueField, $multiValue, $into );
 					continue;
 				}
 			} else {
@@ -228,7 +227,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array $actual
 	 * @param bool $expectEmptyArrays Should we expect empty arrays or just ignore them?
 	 */
-	public function assertEntityEquals( $expected, $actual, $expectEmptyArrays = true ) {
+	protected function assertEntityEquals( array $expected, array $actual, $expectEmptyArrays = true ) {
 		if ( isset( $expected['id'] ) && !empty( $expected['id'] ) ) {
 			$this->assertEquals( $expected['id'], $actual['id'], 'id' );
 		}
@@ -241,8 +240,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		if ( isset( $expected['labels'] ) ) {
 			if ( !( $expectEmptyArrays === false && $expected['labels'] === array() ) ) {
-				$data = self::flattenArray( $actual['labels'], 'language', 'value' );
-				$exp = self::flattenArray( $expected['labels'], 'language', 'value' );
+				$data = $this->flattenArray( $actual['labels'], 'language', 'value' );
+				$exp = $this->flattenArray( $expected['labels'], 'language', 'value' );
 
 				// keys are significant in flat form
 				$this->assertArrayEquals( $exp, $data, false, true );
@@ -251,8 +250,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		if ( isset( $expected['descriptions'] ) ) {
 			if ( !( $expectEmptyArrays === false && $expected['descriptions'] === array() ) ) {
-				$data = self::flattenArray( $actual['descriptions'], 'language', 'value' );
-				$exp = self::flattenArray( $expected['descriptions'], 'language', 'value' );
+				$data = $this->flattenArray( $actual['descriptions'], 'language', 'value' );
+				$exp = $this->flattenArray( $expected['descriptions'], 'language', 'value' );
 
 				// keys are significant in flat form
 				$this->assertArrayEquals( $exp, $data, false, true );
@@ -261,8 +260,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		if ( isset( $expected['sitelinks'] ) ) {
 			if ( !( $expectEmptyArrays === false && $expected['sitelinks'] === array() ) ) {
-				$data = self::flattenArray( isset( $actual['sitelinks'] ) ? $actual['sitelinks'] : array(), 'site', 'title' );
-				$exp = self::flattenArray( $expected['sitelinks'], 'site', 'title' );
+				$data = $this->flattenArray( isset( $actual['sitelinks'] ) ? $actual['sitelinks'] : array(), 'site', 'title' );
+				$exp = $this->flattenArray( $expected['sitelinks'], 'site', 'title' );
 
 				// keys are significant in flat form
 				$this->assertArrayEquals( $exp, $data, false, true );
@@ -271,8 +270,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		if ( isset( $expected['aliases'] ) ) {
 			if ( !( $expectEmptyArrays === false && $expected['aliases'] === array() ) ) {
-				$data = self::flattenArray( $actual['aliases'], 'language', 'value', true );
-				$exp = self::flattenArray( $expected['aliases'], 'language', 'value', true );
+				$data = $this->flattenArray( $actual['aliases'], 'language', 'value', true );
+				$exp = $this->flattenArray( $expected['aliases'], 'language', 'value', true );
 
 				// keys are significant in flat form
 				$this->assertArrayEquals( $exp, $data, false, true );
@@ -281,8 +280,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		if ( isset( $expected['claims'] ) ) {
 			if ( !( $expectEmptyArrays === false && $expected['claims'] === array() ) ) {
-				$data = self::flattenArray( $actual['claims'], 'mainsnak', 'value', true );
-				$exp = self::flattenArray( $expected['claims'], 'language', 'value', true );
+				$data = $this->flattenArray( $actual['claims'], 'mainsnak', 'value', true );
+				$exp = $this->flattenArray( $expected['claims'], 'language', 'value', true );
 				$count = count( $expected['claims'] );
 
 				for ( $i = 0; $i < $count; $i++ ) {
@@ -309,37 +308,17 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 *
 	 * @param array $response
 	 */
-	public function assertResultSuccess( $response ) {
+	protected function assertResultSuccess( array $response ) {
 		$this->assertArrayHasKey( 'success', $response, "Missing 'success' marker in response." );
 		$this->assertResultHasEntityType( $response );
 	}
 
 	/**
-	 * Asserts the existence of some path in the result, represented by any additional parameters.
+	 * Asserts that the given API response has a valid entity type if the result contains an entity
 	 *
 	 * @param array $response
-	 * @param string [$path,...] path elements (optional)
 	 */
-	public function assertResultHasKeyInPath( $response /*...*/ ) {
-		$path = func_get_args();
-		array_shift( $path );
-
-		$obj = $response;
-		$p = '/';
-
-		foreach ( $path as $key ) {
-			$this->assertArrayHasKey( $key, $obj, "Expected key $key under path $p in the response." );
-
-			$obj = $obj[ $key ];
-			$p .= "/$key";
-		}
-	}
-
-	/**
-	 * Asserts that the given API response has a valid entity type if the result contains an entity
-	 * @param array $response
-	 */
-	public function assertResultHasEntityType( $response ) {
+	protected function assertResultHasEntityType( array $response ) {
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 
 		if ( isset( $response['entity'] ) ) {
@@ -364,7 +343,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	/**
 	 * Asserts that the revision with the given ID has a summary matching $regex
 	 *
-	 * @param string $regex|array The regex to match, or an array to build a regex from
+	 * @param string|string[] $regex The regex to match, or an array to build a regex from.
 	 * @param int $revid
 	 */
 	protected function assertRevisionSummary( $regex, $revid ) {
@@ -372,7 +351,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$r = '';
 
 			foreach ( $regex as $s ) {
-				if ( strlen( $r ) > 0 ) {
+				if ( $r !== '' ) {
 					$r .= '.*';
 				}
 

@@ -104,7 +104,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 
 		if( array_key_exists( $params['language'], $expected['value'] ) ){
-			$resAliases = self::flattenArray( $result['entity']['aliases'], 'language', 'value', true );
+			$resAliases = $this->flattenArray( $result['entity']['aliases'], 'language', 'value', true );
 			$this->assertArrayHasKey( $params['language'], $resAliases );
 			$this->assertArrayEquals( $expected['value'][$params['language']], $resAliases[ $params['language'] ] );
 		}
@@ -120,7 +120,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
 		if( count( $expected['value'] ) ){
 			$this->assertArrayHasKey( 'aliases', $dbEntity );
-			$dbAliases = self::flattenArray( $dbEntity['aliases'], 'language', 'value', true );
+			$dbAliases = $this->flattenArray( $dbEntity['aliases'], 'language', 'value', true );
 			foreach( $expected['value'] as $valueLanguage => $value ){
 				$this->assertArrayEquals( $value, $dbAliases[ $valueLanguage ] );
 			}
