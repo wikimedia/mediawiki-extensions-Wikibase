@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8d56955f",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-08T14:38:42Z",
+      "side": 1,
+      "message": "I find \"given as year\" still misleading.",
+      "revId": "393992f011ce53b06b2c1334528c159573984081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
