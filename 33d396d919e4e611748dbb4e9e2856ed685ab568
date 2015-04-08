@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_c2aa1c69",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T12:19:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_2563e3a8",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_60946947",
         "filename": "lib/includes/store/CachingSiteLinkLookup.php",
         "patchSetId": 1
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_02d81427",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T12:19:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_25fa03b7",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c5b0efdd",
         "filename": "lib/includes/store/CachingSiteLinkLookup.php",
         "patchSetId": 1
@@ -88,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e2e638e3",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T12:19:02Z",
+      "side": 1,
+      "message": "Done, renamed to $itemIdSerialization",
+      "parentUuid": "6e7c4fa4_c5b0efdd",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0f25b904",
         "filename": "lib/includes/store/CachingSiteLinkLookup.php",
         "patchSetId": 1
@@ -99,6 +153,24 @@
       "writtenOn": "2015-04-07T21:56:22Z",
       "side": 1,
       "message": "not super happy to have this here, uncached but understand the issues....\n\nonly places i see this used are in SiteLinkUsageLookup:\n\n$rows \u003d $this-\u003esiteLinkLookup-\u003egetLinks( $numericItemIds, array( $this-\u003eclientSiteId ) );\n\nand SpecialGoToLinkedPage, which can be replaced\n\n$links \u003d $this-\u003esiteLinkLookup-\u003egetLinks( array( $itemId-\u003egetNumericId() ), array( $site ) );\n\nnot necessarily in this patch, but maybe we can deprecate this method and replace this method with specific methods for those use cases or something else.",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_82cbc44e",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T12:19:02Z",
+      "side": 1,
+      "message": "Yeah, guess we can do that in a follow-up",
+      "parentUuid": "6e7c4fa4_0f25b904",
       "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -140,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a23e0023",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T12:19:02Z",
+      "side": 1,
+      "message": "Yeah, can be done in a follow up",
+      "parentUuid": "6e7c4fa4_fbf58c4e",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_45d05f23",
         "filename": "lib/includes/store/CachingSiteLinkLookup.php",
         "patchSetId": 1
@@ -157,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_02ffb466",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T12:19:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_45d05f23",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_653ebb26",
         "filename": "lib/includes/store/CachingSiteLinkLookup.php",
         "patchSetId": 1
@@ -168,6 +276,24 @@
       "writtenOn": "2015-04-07T20:26:18Z",
       "side": 1,
       "message": "Please do not serialize the ItemId object, you need it as an ItemId object anyway. Return the object as it is and use $itemId-\u003egetSerialization() where appropriate.",
+      "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a2efe0ad",
+        "filename": "lib/includes/store/CachingSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T12:19:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_653ebb26",
       "revId": "33d396d919e4e611748dbb4e9e2856ed685ab568",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
