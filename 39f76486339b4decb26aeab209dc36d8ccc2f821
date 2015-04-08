@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fc4ca1a4",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T07:46:32Z",
+      "side": 1,
+      "message": "so, is this undeprecated now? please update the comment or remove.",
+      "revId": "39f76486339b4decb26aeab209dc36d8ccc2f821",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1c52bd3f",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T07:46:32Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "39f76486339b4decb26aeab209dc36d8ccc2f821",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dc4be586",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T07:46:32Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "39f76486339b4decb26aeab209dc36d8ccc2f821",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7c6091fd",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T07:46:32Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "39f76486339b4decb26aeab209dc36d8ccc2f821",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
