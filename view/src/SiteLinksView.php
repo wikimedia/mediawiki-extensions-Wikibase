@@ -2,15 +2,13 @@
 
 namespace Wikibase\View;
 
-use InvalidArgumentException;
 use Sanitizer;
 use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -23,6 +21,11 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SiteLinksView {
+
+	/**
+	 * @var EntityIdFormatter
+	 */
+	private $entityIdFormatter;
 
 	/**
 	 * @var TemplateFactory
@@ -40,11 +43,6 @@ class SiteLinksView {
 	private $sectionEditLinkGenerator;
 
 	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
-
-	/**
 	 * @var LanguageNameLookup
 	 */
 	private $languageNameLookup;
@@ -60,38 +58,30 @@ class SiteLinksView {
 	private $specialSiteLinkGroups;
 
 	/**
-	 * @var string
-	 */
-	private $languageCode;
-
-	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SiteList $sites
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
-	 * @param EntityLookup $entityLookup
+	 * @param EntityIdFormatter $entityIdFormatter A plaintext producing EntityIdFormatter
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param string[] $badgeItems
 	 * @param string[] $specialSiteLinkGroups
-	 * @param string $languageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		SiteList $sites,
 		EditSectionGenerator $sectionEditLinkGenerator,
-		EntityLookup $entityLookup,
+		EntityIdFormatter $entityIdFormatter,
 		LanguageNameLookup $languageNameLookup,
 		array $badgeItems,
-		array $specialSiteLinkGroups,
-		$languageCode
+		array $specialSiteLinkGroups
 	) {
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
-		$this->entityLookup = $entityLookup;
 		$this->badgeItems = $badgeItems;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
-		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->entityIdFormatter = $entityIdFormatter;
 	}
 
 	/**
@@ -104,13 +94,8 @@ class SiteLinksView {
 	 * @param string[] $groups An array of site group IDs
 	 *
 	 * @return string
-	 * @throws InvalidArgumentException
 	 */
-	public function getHtml( array $siteLinks, $itemId, array $groups ) {
-		if ( $itemId !== null && !( $itemId instanceof ItemId ) ) {
-			throw new InvalidArgumentException( '$itemId must be an ItemId or null.' );
-		}
-
+	public function getHtml( array $siteLinks, ItemId $itemId = null, array $groups ) {
 		$html = '';
 
 		if ( count( $groups ) === 0 ) {
@@ -135,7 +120,7 @@ class SiteLinksView {
 	 *
 	 * @return string
 	 */
-	private function getHtmlForSiteLinkGroup( array $siteLinks, $itemId, $group ) {
+	private function getHtmlForSiteLinkGroup( array $siteLinks, ItemId $itemId = null, $group ) {
 		return $this->templateFactory->render( 'wikibase-sitelinkgroupview',
 			// TODO: support entity-id as prefix for element IDs.
 			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ),
@@ -321,34 +306,12 @@ class SiteLinksView {
 
 			$html .= $this->templateFactory->render( 'wb-badge',
 				$classes,
-				$this->getTitleForBadge( $badge ),
+				$this->entityIdFormatter->formatEntityId( $badge ),
 				$badge
 			);
 		}
 
 		return $this->templateFactory->render( 'wikibase-badgeselector', $html );
-	}
-
-	/**
-	 * Returns the title for the given badge id.
-	 * @todo use TermLookup when we have one
-	 *
-	 * @param ItemId $badgeId
-	 *
-	 * @return string
-	 */
-	private function getTitleForBadge( ItemId $badgeId ) {
-		$badge = $this->entityLookup->getEntity( $badgeId );
-
-		if ( $badge instanceof FingerprintProvider ) {
-			$labels = $badge->getFingerprint()->getLabels();
-
-			if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
-				return $labels->getByLanguage( $this->languageCode )->getText();
-			}
-		}
-
-		return $badgeId->getSerialization();
 	}
 
 }

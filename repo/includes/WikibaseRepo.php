@@ -1017,8 +1017,8 @@ class WikibaseRepo {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
+			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
-			$this->getEntityLookup(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			$templateFactory,

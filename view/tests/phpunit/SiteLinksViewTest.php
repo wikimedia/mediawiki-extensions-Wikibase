@@ -165,14 +165,13 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 			$templateFactory,
 			$this->newSiteList(),
 			$this->getEditSectionGeneratorMock(),
-			$this->getEntityLookupMock(),
+			$this->getEntityIdFormatterMock(),
 			new LanguageNameLookup(),
 			array(
 				'Q42' => 'wb-badge-featuredarticle',
 				'Q12' => 'wb-badge-goodarticle'
 			),
-			array( 'special group' ),
-			'en'
+			array( 'special group' )
 		);
 	}
 
@@ -202,26 +201,22 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityLookup
+	 * @return EntityIdFormatter
 	 */
-	private function getEntityLookupMock() {
-		$entityLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityLookup' )
-			->disableOriginalConstructor()
-			->getMock();
+	private function getEntityIdFormatterMock() {
+		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
 
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
+		$entityIdFormatter->expects( $this->any() )
+			->method( 'formatEntityId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q42' ) {
-					$item = new Item();
-					$item->setLabel( 'en', 'Featured article' );
-					return $item;
+					return 'Featured article';
 				}
 
-				return null;
+				return $id->getSerialization();
 			} ) );
 
-		return $entityLookup;
+		return $entityIdFormatter;
 	}
 
 }

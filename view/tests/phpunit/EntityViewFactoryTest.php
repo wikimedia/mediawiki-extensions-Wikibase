@@ -82,7 +82,6 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		return new EntityViewFactory(
 			$this->getEntityIdFormatterFactory(),
 			$this->getSnakFormatterFactory(),
-			$this->getMock( 'Wikibase\Lib\Store\EntityLookup' ),
 			$this->getSiteStore(),
 			$this->getMock( 'DataTypes\DataTypeFactory' ),
 			$templateFactory,
