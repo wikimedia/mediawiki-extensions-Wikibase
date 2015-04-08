@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e2af1877",
+        "filename": "lib/maintenance/dispatchChanges.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "huh, awesome :D",
+      "parentUuid": "6e7c4fa4_5d994a20",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b3b76fd2",
         "filename": "repo/includes/ChangeDispatcher.php",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "Inconsistent with what we do in other places \"type: description\"",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_824184af",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "what do you mean? Do you think it should be @var $name type Bla bla bla?",
+      "parentUuid": "6e7c4fa4_b3b76fd2",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_022ed4f7",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "PhpStorm doesn\u0027t complain, and the intent is clear, I hope :)",
+      "parentUuid": "6e7c4fa4_73ad577e",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_33ca7f4a",
         "filename": "repo/includes/ChangeDispatcher.php",
         "patchSetId": 14
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "Why public?",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6248e8cf",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "So code that calls setMessageReporter can remember the previous reporter, and later restore it.\n\nGenerally, just for consistency and completeness: having a \"write only\" interface with only setters seems odd.",
+      "parentUuid": "6e7c4fa4_33ca7f4a",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +210,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0215749f",
+        "filename": "repo/includes/Notifications/ChangeNotificationSender.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_dd8c7ade",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7db3e694",
         "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
         "patchSetId": 14
@@ -149,6 +239,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "This is siteId -\u003e dbname AFAIS... a comment would be nice",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_221af0d0",
+        "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7db3e694",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a225a006",
+        "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Log group names work by prefix, right? So __METHOD__ allows you to enable logs by namespace, class, or method, as need be.",
+      "parentUuid": "6e7c4fa4_5d6f0af9",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1d2bd293",
         "filename": "repo/includes/store/ChangeDispatchCoordinator.php",
         "patchSetId": 14
@@ -183,6 +309,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "Does this really lock? That seems weird to me, given we have an extra lockClient function defined below.",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_027c94e7",
+        "filename": "repo/includes/store/ChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Yes, it does. And indeed, lockClient() is currently never called outside of the implementation of selectClient(). However, it seems sensible to provide the functionality of locking a client, for future use. Could be in a separate interface.\n\nIf you like, I can just drop this method from the interface. I\u0027d leave it public in the implementation, for testing.",
+      "parentUuid": "6e7c4fa4_1d2bd293",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -206,6 +350,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e28ab8e3",
+        "filename": "repo/includes/store/ChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7d40c659",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_9d37e2fb",
         "filename": "repo/includes/store/ChangeDispatchCoordinator.php",
         "patchSetId": 14
@@ -217,6 +379,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "make that a use, so that we don\u0027t need to use qualified names. Also more below.",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_826f4427",
+        "filename": "repo/includes/store/ChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_9d37e2fb",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +437,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_42792cf1",
+        "filename": "repo/includes/store/SiteLinkSubscriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_d0130104",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b08be570",
         "filename": "repo/includes/store/SubscriptionLookup.php",
         "patchSetId": 14
@@ -268,6 +466,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "What\u0027s the matter with this? Left over from a WIP state?",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6276a803",
+        "filename": "repo/includes/store/SubscriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Yea... it just seems logical to have this in this interface, but we currently do not need it anywhere. I\u0027ll remove it, interfaces should be driven by usage. Though perhaps the name of the interface should be more specific then.",
+      "parentUuid": "6e7c4fa4_b08be570",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +507,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_c25c5c85",
+        "filename": "repo/includes/store/SubscriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_106659ea",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_303a75c0",
         "filename": "repo/includes/store/SubscriptionLookup.php",
         "patchSetId": 14
@@ -302,6 +536,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "I don\u0027t think that would scale for anything larger than a small test instance... also use case?",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0263343f",
+        "filename": "repo/includes/store/SubscriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "No use case, currently. And you are right, getting *all* subscriptions of a site doesn\u0027t make sense.",
+      "parentUuid": "6e7c4fa4_303a75c0",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +577,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_a253606e",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Not sure what the \"correct\" for is for members, honestly.",
+      "parentUuid": "6e7c4fa4_10edf9ed",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b0c3e55f",
         "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 14
@@ -336,6 +606,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "Inconsistent with the default set from repo/maintenance/dispatchChanges.php (also in master this is 10 now)",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_624d48c7",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_b0c3e55f",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -359,6 +647,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_02c25406",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Just for completeness and sanity. Would also be needed for testing the setter.",
+      "parentUuid": "6e7c4fa4_d3f22bcd",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_10d41916",
         "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 14
@@ -370,6 +676,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "MessageReporter $messageReporter",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c2cbfc1f",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_10d41916",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -512,6 +836,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e2d078ce",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_f3ede7eb",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_53093bde",
         "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 14
@@ -529,6 +871,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_02e9f47d",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_53093bde",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_73879713",
         "filename": "repo/maintenance/dispatchChanges.php",
         "patchSetId": 14
@@ -540,6 +900,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "I know this is c\u0026p from the old script, but... yikes",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_82fc243e",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "I could move this to a helper function, but can\u0027t do more without introducing a breaking change. From docs/options.wiki:\n\nlocalClientDatabases: An array of locally accessible client databases, for use by the \u003ccode\u003edispatchChanges.php\u003c/code\u003e script. This setting determines which wikis changes are pushed to directly. It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases.",
+      "parentUuid": "6e7c4fa4_73879713",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -597,6 +975,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_62f3086a",
+        "filename": "repo/tests/phpunit/includes/Notifications/JobQueueChangeNotificationSenderTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "The implementation is currently using JobQueueGroup::singleton( $wikiDB );\nI actually tried to inject the JobQueueGroup, but abandoned that change for some reason. I don\u0027t remember why any more, I added @todo tags for now.",
+      "parentUuid": "6e7c4fa4_733a3733",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_931833d9",
         "filename": "repo/tests/phpunit/includes/store/SiteLinkSubscriptionLookupTest.php",
         "patchSetId": 14
@@ -608,6 +1004,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "Missing spaces \"))\", also this logic isn\u0027t needed as we only have on test case, but I\u0027m ok with leaving it here",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_029014f6",
+        "filename": "repo/tests/phpunit/includes/store/SiteLinkSubscriptionLookupTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_931833d9",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -631,6 +1045,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_229510e7",
+        "filename": "repo/tests/phpunit/includes/store/SiteLinkSubscriptionLookupTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_b31befd2",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7311d7ae",
         "filename": "repo/tests/phpunit/includes/store/SiteLinkSubscriptionLookupTest.php",
         "patchSetId": 14
@@ -642,6 +1074,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "as above",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e29e380a",
+        "filename": "repo/tests/phpunit/includes/store/SiteLinkSubscriptionLookupTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7311d7ae",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -665,6 +1115,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_628a28c2",
+        "filename": "repo/tests/phpunit/includes/store/sql/SqlChangeDispatchCoordinatorTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "I like to have setUp() and tearDown() in pairs, for symmetry, so I don\u0027t forget to tear down what I set up.",
+      "parentUuid": "6e7c4fa4_53cb7b20",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_53b05b88",
         "filename": "repo/tests/phpunit/includes/store/sql/SqlChangeDispatchCoordinatorTest.php",
         "patchSetId": 14
@@ -676,6 +1144,24 @@
       "writtenOn": "2015-04-01T13:57:56Z",
       "side": 1,
       "message": "This is weird... needed because *some* of the above rows don\u0027t have it set?! :S",
+      "revId": "150eff862be77487a280a4655956e00739d4b09d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6280e88e",
+        "filename": "repo/tests/phpunit/includes/store/sql/SqlChangeDispatchCoordinatorTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T12:49:28Z",
+      "side": 1,
+      "message": "$coordinator-\u003eselectClient() as called in line 428 doesn\u0027t return that field, so it\u0027s not in $expected. fetchChangesDispatchRows() does return all fields, so it\u0027s needed for the comparison.\n\nI\u0027ll try to make this a bit clearer.",
+      "parentUuid": "6e7c4fa4_53b05b88",
       "revId": "150eff862be77487a280a4655956e00739d4b09d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
