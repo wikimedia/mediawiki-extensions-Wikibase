@@ -16,6 +16,24 @@
       "revId": "2c68989df6775169789ec3a980db002e5faa12c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_db8a021f",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-08T22:45:09Z",
+      "side": 1,
+      "message": "it exception is caught, postDump will execute. If not, php is dead anyway, so who cares.",
+      "parentUuid": "6e7c4fa4_7bcdee88",
+      "revId": "2c68989df6775169789ec3a980db002e5faa12c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
