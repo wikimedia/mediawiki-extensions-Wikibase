@@ -50,6 +50,24 @@
       "revId": "7dd7d32f46d904478c30e3905c9315bd3902673f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f3404c0c",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T17:17:39Z",
+      "side": 1,
+      "message": "seems the patch *is* indirectly based on an outdated patch in the big refactoring.\n\nsuppose you didn\u0027t want to change this in that patch, but hope to see this changed in a follow up then.",
+      "parentUuid": "6e7c4fa4_b3c3b48c",
+      "revId": "7dd7d32f46d904478c30e3905c9315bd3902673f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
