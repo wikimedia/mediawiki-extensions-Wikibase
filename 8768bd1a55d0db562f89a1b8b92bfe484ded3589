@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7f6f2328",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T11:05:08Z",
+      "side": 1,
+      "message": "omg, long name :o  but don\u0027t have an alternative and think it\u0027s ok.",
+      "revId": "8768bd1a55d0db562f89a1b8b92bfe484ded3589",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
