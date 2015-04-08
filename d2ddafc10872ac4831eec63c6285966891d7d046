@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_33f1e4fe",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "This needs to be hooked up as a watcher to the WikiPageEntityStore, right?",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f3accced",
+        "filename": "lib/includes/store/EntityPrefetcher.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "I\u0027d prefer a separate method for puring all data, for clarity.\nI can\u0027t imagine that a caller would want to purge either one or all, depending on variable content...",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_93b1d845",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "wrap",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_93e9d8e4",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "Log this",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_33c2445e",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "why can we safely ignore these?",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_93cb184f",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "Use the serialization as the key here, to avoid duplicates.",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f3bb6cdc",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "Should this also clear $this-\u003etoFetch?",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f3984c6f",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "function calls inside [] hard hard to read. Please use $key \u003d ....;",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53a7c0a4",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "could remove it from $this-\u003etoFetch, in case it\u0027s there.",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_33dd6418",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "should say whether it supports 0 to mean \"current\". Well, the interface should say that, I suppose.",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_13ff0867",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "PHP is very stupid about array_unique on a list of objects, it\u0027s extremely slow, and has quadratic runtime iirc.\n\nJust use the id\u0027s serialized form as keys in the array to avoid dupes.",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d3f8b07c",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "why not use setMulti?",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f33ccc2f",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "Should explain what the contract of this method is, documenting guarantees for callers, and requirements for implementors.",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d3375049",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "Isn\u0027t this already covered by loadRevisionInformation()? Just a convenience? Redundant functions are not a good thing in an interface.",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b33e5423",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_93f23897",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T17:38:31Z",
+      "side": 1,
+      "message": "should say whether this supports 0 for \"current\".",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
