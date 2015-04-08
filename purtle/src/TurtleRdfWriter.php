@@ -9,6 +9,26 @@ namespace Wikimedia\Purtle;
  * @author Daniel Kinzler
  */
 class TurtleRdfWriter extends N3RdfWriterBase {
+	/**
+	 * @var bool
+	 */
+	private $trustIRIs = true;
+
+	/**
+	 *
+	 * @return bool
+	 */
+	public function getTrustIRIs() {
+		return $this->trustIRIs;
+	}
+
+	/**
+	 *
+	 * @param bool $trustIRIs
+	 */
+	public function setTrustIRIs( $trustIRIs ) {
+		$this->trustIRIs = $trustIRIs;
+	}
 
 	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null, N3Quoter $quoter = null ) {
 		parent::__construct( $role, $labeler, $quoter );
@@ -40,7 +60,7 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		if( $local !== null ) {
 			$this->write( "$base:$local" );
 		} else {
-			$this->writeIRI( $base );
+			$this->writeIRI( $base, $this->trustIRIs );
 		}
 	}
 
@@ -52,7 +72,7 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		if( $local !== null ) {
 			$this->write( "$base:$local" );
 		} else {
-			$this->writeIRI( $base );
+			$this->writeIRI( $base, $this->trustIRIs );
 		}
 	}
 
