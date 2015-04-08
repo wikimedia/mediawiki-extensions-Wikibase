@@ -40,7 +40,8 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		if( $local !== null ) {
 			$this->write( "$base:$local" );
 		} else {
-			$this->writeIRI( $base );
+			// We trust that subject IRIs are clean
+			$this->writeIRI( $base, 'trust' );
 		}
 	}
 
@@ -52,7 +53,8 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		if( $local !== null ) {
 			$this->write( "$base:$local" );
 		} else {
-			$this->writeIRI( $base );
+			// We trust that predicate IRIs are clean
+			$this->writeIRI( $base, 'trust' );
 		}
 	}
 
