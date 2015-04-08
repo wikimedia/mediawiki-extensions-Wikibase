@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bb838656",
+        "filename": "purtle/src/N3Quoter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T22:12:38Z",
+      "side": 1,
+      "message": "Needs a test case in N3QuoterTest",
+      "revId": "7ead2bb041bb242689c8a58fb57b5155a5160892",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3bb8d624",
+        "filename": "purtle/src/TurtleRdfWriter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T22:12:38Z",
+      "side": 1,
+      "message": "Why? Note that the subject may be an URL coming from a SiteLink. it could contain anything.",
+      "revId": "7ead2bb041bb242689c8a58fb57b5155a5160892",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_db844264",
+        "filename": "purtle/src/TurtleRdfWriter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-08T22:12:38Z",
+      "side": 1,
+      "message": "Redundant, since IRIs can\u0027t be used as predicates. Only prefix/suffix pairs, and shorthands like \"a\".",
+      "revId": "7ead2bb041bb242689c8a58fb57b5155a5160892",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
