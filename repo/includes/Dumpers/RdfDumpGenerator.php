@@ -70,6 +70,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * Do something before dumping data
 	 */
 	protected function preDump() {
+		wfSuppressWarnings();
 		$header = $this->entitySerializer->startDump( $this->timestamp );
 
 		$this->writeToDump( $header );
@@ -82,6 +83,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		$footer = $this->entitySerializer->finishDocument();
 
 		$this->writeToDump( $footer );
+		wfRestoreWarnings();
 	}
 
 	/**
