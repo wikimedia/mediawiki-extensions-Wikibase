@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53c0207f",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T17:15:00Z",
+      "side": 1,
+      "message": "act :)",
+      "revId": "7dd7d32f46d904478c30e3905c9315bd3902673f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b3dc1479",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T17:15:00Z",
+      "side": 1,
+      "message": "probably is okay to have \"+\" in the setting, but somewhat scary.\n\nmaybe a hyphen instead? \"subscriptions-sitelinks\"",
+      "revId": "7dd7d32f46d904478c30e3905c9315bd3902673f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b3c3b48c",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T17:15:00Z",
+      "side": 1,
+      "message": "realize this is legacy code that is gone, but think accessing Settings this way with this class (deprecated) is not ideal. hopefully this is gone in the big refactoring patch.",
+      "revId": "7dd7d32f46d904478c30e3905c9315bd3902673f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
