@@ -34,6 +34,24 @@
       "revId": "2cea04c41122280a81fe6c4540bb94228a9d99b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8d3bf5c4",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-08T12:58:55Z",
+      "side": 1,
+      "message": "As Aude explained: returning the revision id from the Title is, as far as I understand, also wrong and not acceptable and needs to be removed. I currently don\u0027t see an other solution.",
+      "parentUuid": "6e7c4fa4_e2fdd86a",
+      "revId": "2cea04c41122280a81fe6c4540bb94228a9d99b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
