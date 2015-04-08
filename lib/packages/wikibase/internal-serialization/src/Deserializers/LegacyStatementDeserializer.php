@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @licence GNU GPL v2+
- * @author Katie Filbert < @aude.wiki@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacyStatementDeserializer implements Deserializer {
