@@ -123,6 +123,24 @@
       "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bfcb7b20",
+        "filename": "lib/includes/store/SiteLinkCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-08T10:37:24Z",
+      "side": 1,
+      "message": "It should be SiteLinkStore or so... If you insist, we can move this method either to the implementation or to an own interface. But I don\u0027t want it to be part of the lookup",
+      "parentUuid": "6e7c4fa4_9f531f6f",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
