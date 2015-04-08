@@ -105,6 +105,24 @@
       "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dfd0b7ce",
+        "filename": "lib/includes/store/SiteLinkCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-08T10:37:23Z",
+      "side": 1,
+      "message": "@thiemo how about replace *and* rename the interface?",
+      "parentUuid": "6e7c4fa4_9f531f6f",
+      "revId": "0d5fad87ff0dc36d278c7eeed1dabc1c047829a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
