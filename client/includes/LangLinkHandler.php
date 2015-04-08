@@ -491,7 +491,7 @@ class LangLinkHandler {
 
 		if ( !isset( $this->itemIds[$key] ) ) {
 			$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
-			$this->itemIds[$key] = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+			$this->itemIds[$key] = $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
 		}
 
 		return $this->itemIds[$key];

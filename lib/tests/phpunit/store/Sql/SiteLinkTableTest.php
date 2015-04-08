@@ -119,7 +119,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		foreach( $siteLinks as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
-				$this->siteLinkTable->getEntityIdForSiteLink( $siteLink )
+				$this->siteLinkTable->getItemIdForSiteLink( $siteLink )
 			);
 		}
 	}

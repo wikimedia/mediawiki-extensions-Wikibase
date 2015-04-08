@@ -72,7 +72,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			'Q42',
-			$cachingSiteLinkLookup->getEntityIdForSiteLink( $siteLink )->getSerialization()
+			$cachingSiteLinkLookup->getItemIdForSiteLink( $siteLink )->getSerialization()
 		);
 	}
 
@@ -92,7 +92,7 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			'Q42',
-			$cachingSiteLinkLookup->getEntityIdForSiteLink( $siteLink )->getSerialization()
+			$cachingSiteLinkLookup->getItemIdForSiteLink( $siteLink )->getSerialization()
 		);
 
 		// Make sure the new value also made it into the cache

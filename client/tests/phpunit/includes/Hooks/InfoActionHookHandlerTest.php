@@ -100,7 +100,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$siteLinkLookup->expects( $this->any() )
-			->method( 'getEntityIdForSiteLink' )
+			->method( 'getItemIdForSiteLink' )
 			->will( $this->returnValue( $entityId ) );
 
 		$hookHandler = new InfoActionHookHandler(
