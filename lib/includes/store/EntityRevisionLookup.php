@@ -41,9 +41,10 @@ interface EntityRevisionLookup {
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER
-	 *        to indicate that the latest revision is required. LATEST_FROM_MASTER would force the
-	 *        revision to be determined from the canonical master database.
+	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or
+	 * LATEST_FROM_MASTER to indicate that the latest revision is required. LATEST_FROM_MASTER would
+	 * force the revision to be determined from the canonical master database. 0 is identical to
+	 * LATEST_FROM_SLAVE.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
