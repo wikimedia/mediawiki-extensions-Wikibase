@@ -197,7 +197,7 @@
                     "property": "P9",
                     "datatype": "url",
                     "datavalue": {
-                        "value": "http:\/\/url.acme.test\/",
+                        "value": "http:\/\/url.acme.test\\badurl?chars=\\привет< >\"",
                         "type": "string"
                     }
                 },
