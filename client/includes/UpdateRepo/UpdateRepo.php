@@ -85,7 +85,7 @@ abstract class UpdateRepo {
 	 */
 	public function getEntityId() {
 		if ( $this->entityId === false ) {
-			$this->entityId = $this->siteLinkLookup->getEntityIdForSiteLink(
+			$this->entityId = $this->siteLinkLookup->getItemIdForSiteLink(
 				new SiteLink(
 					$this->siteId,
 					$this->title->getFullText()
