@@ -61,12 +61,12 @@ interface SiteLinkLookup {
 	public function getSiteLinksForItem( ItemId $itemId );
 
 	/**
-	 * @since 0.4
+	 * @since 0.5
 	 *
 	 * @param SiteLink $siteLink
 	 *
 	 * @return ItemId|null
 	 */
-	public function getEntityIdForSiteLink( SiteLink $siteLink );
+	public function getItemIdForSiteLink( SiteLink $siteLink );
 
 }
