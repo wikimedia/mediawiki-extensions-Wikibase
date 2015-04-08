@@ -105,7 +105,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
 		if( count( $expected['value'] ) ){
 			$this->assertArrayHasKey( $attribute, $dbEntity );
-			$dbLabels = self::flattenArray( $dbEntity[$attribute], 'language', 'value', true );
+			$dbLabels = $this->flattenArray( $dbEntity[$attribute], 'language', 'value', true );
 			foreach( $expected['value'] as $valueLanguage => $value ){
 				$this->assertArrayHasKey( $valueLanguage, $dbLabels );
 				$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );
