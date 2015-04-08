@@ -16,7 +16,8 @@
 
 		var $entityview = $( '.wikibase-entityview' );
 		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
-		var canEdit = !mw.config.get( 'wbUserIsBlocked' ) && mw.config.get( 'wbUserCanEdit' );
+		var canEdit = !mw.config.get( 'wbUserIsBlocked' ) && mw.config.get( 'wbUserCanEdit' )
+			&& mw.config.get( 'wbIsEditView' );
 
 		if( canEdit ) {
 			initToolbarController( $entityview );
