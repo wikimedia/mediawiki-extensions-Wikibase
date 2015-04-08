@@ -201,7 +201,9 @@ abstract class DumpScript extends Maintenance {
 		$dumper->setBatchSize( $batchSize );
 
 		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
+		wfSuppressWarnings();
 		$dumper->generateDump( $idStream );
+		wfRestoreWarnings();
 
 		if ( $idStream instanceof Disposable ) {
 			// close stream / free resources
