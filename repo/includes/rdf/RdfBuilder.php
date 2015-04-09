@@ -650,7 +650,7 @@ class RdfBuilder {
 			case 'somevalue':
 				$propertyValueLName = $this->getEntityLName( $propertyId );
 
-				$writer->say( $propertyNamespace, $propertyValueLName )->is( self::NS_ONTOLOGY, 'Somevalue' );
+				$writer->say( $propertyNamespace, $propertyValueLName )->is( '_', $writer->blank() );
 				break;
 			case 'novalue':
 				$propertyValueLName = $this->getEntityLName( $propertyId );
