@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Provides validators for terms (like the maximum length of labels, etc).
@@ -41,16 +40,10 @@ class TermValidatorFactory {
 	private $duplicateDetector;
 
 	/**
-	 * @var SiteLinkLookup
-	 */
-	private $siteLinkLookup;
-
-	/**
 	 * @param int $maxLength The maximum length of terms.
 	 * @param string[] $languageCodes A list of valid language codes
 	 * @param EntityIdParser $idParser
 	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
-	 * @param SiteLinkLookup $siteLinkLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -58,8 +51,7 @@ class TermValidatorFactory {
 		$maxLength,
 		array $languageCodes,
 		EntityIdParser $idParser,
-		LabelDescriptionDuplicateDetector $duplicateDetector,
-		SiteLinkLookup $siteLinkLookup
+		LabelDescriptionDuplicateDetector $duplicateDetector
 	) {
 		if ( !is_int( $maxLength ) || $maxLength <= 0 ) {
 			throw new InvalidArgumentException( '$maxLength must be a positive integer.' );
@@ -69,7 +61,6 @@ class TermValidatorFactory {
 		$this->languageCodes = $languageCodes;
 		$this->idParser = $idParser;
 		$this->duplicateDetector = $duplicateDetector;
-		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
 	/**

@@ -706,8 +706,7 @@ class WikibaseRepo {
 			$maxLength,
 			$languages,
 			$this->getEntityIdParser(),
-			$this->getLabelDescriptionDuplicateDetector(),
-			$this->getStore()->newSiteLinkCache()
+			$this->getLabelDescriptionDuplicateDetector()
 		);
 	}
 
