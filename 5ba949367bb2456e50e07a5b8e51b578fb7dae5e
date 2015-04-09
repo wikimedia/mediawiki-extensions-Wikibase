@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6d5e8bee",
+        "filename": "repo/includes/store/DualSubscriptionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T16:35:24Z",
+      "side": 1,
+      "message": "The current implementations do, but the interface does not guarantee this.",
+      "parentUuid": "6e7c4fa4_cac6a59e",
+      "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0a3c9d8d",
         "filename": "repo/includes/store/DualSubscriptionLookup.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-09T14:57:09Z",
       "side": 1,
       "message": "Would it be worth to only pass the entityIds into this we know don\u0027t yet match? That way we could pass the slower lookup second... but I guess in the end it doesn\u0027t really matter, most of the things will be misses anyway",
+      "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4d006fb5",
+        "filename": "repo/includes/store/DualSubscriptionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T16:35:24Z",
+      "side": 1,
+      "message": "Good idea. Also, may be worth it to handle empty lists explicitly.",
+      "parentUuid": "6e7c4fa4_0a3c9d8d",
       "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0df9177e",
+        "filename": "repo/includes/store/sql/SqlSubscriptionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T16:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_eac3618b",
+      "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2a5879fc",
         "filename": "repo/tests/phpunit/includes/store/DualSubscriptionLookupTest.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-09T14:57:09Z",
       "side": 1,
       "message": "mh... this doesn\u0027t verify the keys as you throw them away above",
+      "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cdf23f98",
+        "filename": "repo/tests/phpunit/includes/store/DualSubscriptionLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T16:35:24Z",
+      "side": 1,
+      "message": "The keys are not guaranteed by the interface, they are an implementation detail.",
+      "parentUuid": "6e7c4fa4_2a5879fc",
       "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_8dec47ba",
+        "filename": "repo/tests/phpunit/includes/store/sql/SqlSubscriptionLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T16:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_caf305e3",
+      "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4a27f562",
         "filename": "repo/tests/phpunit/includes/store/sql/SqlSubscriptionLookupTest.php",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2015-04-09T14:57:09Z",
       "side": 1,
       "message": "keys?",
+      "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ade903a9",
+        "filename": "repo/tests/phpunit/includes/store/sql/SqlSubscriptionLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T16:35:24Z",
+      "side": 1,
+      "message": "the keys are not guaranteed",
+      "parentUuid": "6e7c4fa4_4a27f562",
       "revId": "5ba949367bb2456e50e07a5b8e51b578fb7dae5e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
