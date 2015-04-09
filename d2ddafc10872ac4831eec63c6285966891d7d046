@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_27a43547",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:28:38Z",
+      "side": 1,
+      "message": "oh, right",
+      "parentUuid": "6e7c4fa4_c7d0e1ce",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f3accced",
         "filename": "lib/includes/store/EntityPrefetcher.php",
         "patchSetId": 12
@@ -123,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2783d59d",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:28:38Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "6e7c4fa4_07eed986",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_93cb184f",
         "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
         "patchSetId": 12
@@ -169,6 +205,24 @@
       "side": 1,
       "message": "It could... not doing it is totally valid as we wont get any inconsistent data due to that.",
       "parentUuid": "6e7c4fa4_f3bb6cdc",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0752593f",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:28:38Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "6e7c4fa4_47dcd1e5",
       "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -312,6 +366,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_6760edfd",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:28:38Z",
+      "side": 1,
+      "message": "I\u0027d remove it, yes. It\u0027s not like this is going to be called in 100 places. or even in 10.",
+      "parentUuid": "6e7c4fa4_67fc6d3d",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b33e5423",
         "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
         "patchSetId": 12
@@ -341,6 +413,24 @@
       "side": 1,
       "message": "It\u0027s only being used for a debug log, can remove if you want",
       "parentUuid": "6e7c4fa4_b33e5423",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e7339d0e",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:28:38Z",
+      "side": 1,
+      "message": "Hm, not sure, really. Leave it for now.",
+      "parentUuid": "6e7c4fa4_47f37169",
       "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
