@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eaae01e2",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T14:45:27Z",
+      "side": 1,
+      "message": "Why did this get pulled out of the if block?",
+      "revId": "76d4b0d2cef8b5cdb8b41bb17e53319c4221274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4a85b55c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T14:45:27Z",
+      "side": 1,
+      "message": "Why and how would that ever not be the case?\nAnd if it is possible, wouldn\u0027t it be nicer to handle it with a brief if (!$rows ) return, or throw, instead of wrapping the entire code block in a conditional?",
+      "revId": "76d4b0d2cef8b5cdb8b41bb17e53319c4221274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
