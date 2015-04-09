@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c756a109",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T11:05:08Z",
+      "side": 1,
+      "message": "s/version/verbose/",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_275c351e",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T11:05:08Z",
+      "side": 1,
+      "message": "Think I pointed out a similar thing in another class in the same change: I\u0027m not a fan of the name as the functions also filters by entity type.",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_67b1cd42",
+        "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T11:05:08Z",
+      "side": 1,
+      "message": "When faced with this problem in CentralAuth, I chose to pass a callable \"factory\" for the jobqueuegroup in order to make stuff testable.",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8795098d",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T11:05:08Z",
+      "side": 1,
+      "message": "Still not a fan of this function name as this is not only about an override... how about (get|set)ArrayRandomizer?",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c7d1c159",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T11:05:08Z",
+      "side": 1,
+      "message": "use Maintenance",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a7ccc5c1",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T11:05:08Z",
+      "side": 1,
+      "message": "Use MWException... or just remove this rather pointless left over",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_87dc2979",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T11:05:08Z",
+      "side": 1,
+      "message": "use Exception…",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
