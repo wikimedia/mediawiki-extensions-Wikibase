@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e7315ceb",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:43:38Z",
+      "side": 1,
+      "message": "Ooooohhh! But it shouldn\u0027t do that any more! \nSeems like I missed this, will make a follow-up.\nThe name should stay, but I\u0027ll fix the functionality.",
+      "parentUuid": "6e7c4fa4_275c351e",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_67b1cd42",
         "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
         "patchSetId": 16
@@ -47,6 +65,24 @@
       "writtenOn": "2015-04-09T11:05:08Z",
       "side": 1,
       "message": "When faced with this problem in CentralAuth, I chose to pass a callable \"factory\" for the jobqueuegroup in order to make stuff testable.",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_47485066",
+        "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:43:38Z",
+      "side": 1,
+      "message": "Yea, could do that. Do you think it\u0027s essential to this patch?",
+      "parentUuid": "6e7c4fa4_67b1cd42",
       "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_674d4c75",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:43:38Z",
+      "side": 1,
+      "message": "But it *is* an override?....\nI don\u0027t like \"Randomizer\" in the name, since I\u0027d rather have the name of the original function there.",
+      "parentUuid": "6e7c4fa4_8795098d",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c7d1c159",
         "filename": "repo/maintenance/dispatchChanges.php",
         "patchSetId": 16
@@ -81,6 +135,24 @@
       "writtenOn": "2015-04-09T11:05:08Z",
       "side": 1,
       "message": "use Maintenance",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0769f8bb",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:43:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_c7d1c159",
       "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_67746c97",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:43:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_a7ccc5c1",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_87dc2979",
         "filename": "repo/maintenance/dispatchChanges.php",
         "patchSetId": 16
@@ -115,6 +205,24 @@
       "writtenOn": "2015-04-09T11:05:08Z",
       "side": 1,
       "message": "use Exception…",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_476ff0c3",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T12:43:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_87dc2979",
       "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
