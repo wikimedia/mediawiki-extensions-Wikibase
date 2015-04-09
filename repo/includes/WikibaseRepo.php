@@ -1033,9 +1033,9 @@ class WikibaseRepo {
 			$this->getDataTypeFactory(),
 			$templateFactory,
 			new LanguageNameLookup(),
-			$this->getSettings()->getSetting( 'siteLinkGroups' ),
-			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
-			$this->getSettings()->getSetting( 'badgeItems' )
+			$this->settings->getSetting( 'siteLinkGroups' ),
+			$this->settings->getSetting( 'specialSiteLinkGroups' ),
+			$this->settings->getSetting( 'badgeItems' )
 		);
 
 		return new EntityParserOutputGeneratorFactory(
