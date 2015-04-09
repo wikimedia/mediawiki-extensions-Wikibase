@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 
 use ApiTestCase;
 use DataValues\DataValue;
+use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
@@ -92,6 +93,20 @@ class FormatSnakValueTest extends ApiTestCase {
 				SnakFormatter::FORMAT_PLAIN,
 				null,
 				'@^http://acme\.test$@'
+			),
+			array(
+				QuantityValue::newFromNumber( '+12.33', '1' ),
+				'quantity',
+				SnakFormatter::FORMAT_PLAIN,
+				array( 'lang' => 'de' ),
+				'@^12,33$@' // german decimal separator
+			),
+			array(
+				QuantityValue::newFromNumber( '+12.33', '1' ),
+				'quantity',
+				SnakFormatter::FORMAT_PLAIN,
+				array( 'lang' => 'de-ch' ), // fallback
+				'@^12,33$@' // german decimal separator
 			),
 			array(
 				new StringValue( 'http://acme.test' ),
