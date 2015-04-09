@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_478a9018",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T13:33:19Z",
+      "side": 1,
+      "message": "entity ids",
+      "revId": "c0c83ac829dd539a91b93ba922ae9fdc7490c6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_27999471",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T13:33:19Z",
+      "side": 1,
+      "message": "What could it be otherwise? Worth a log/ warn?",
+      "revId": "c0c83ac829dd539a91b93ba922ae9fdc7490c6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c7cb004e",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T13:33:19Z",
+      "side": 1,
+      "message": "getSubscriptions needs numeric entity ids",
+      "revId": "c0c83ac829dd539a91b93ba922ae9fdc7490c6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
