@@ -47,83 +47,88 @@ class YearMonthTimeParserTest extends StringValueParserTest {
 		$valid = array(
 			// leading zeros
 			'00001 1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'000000001 100001999' =>
-				array( '+100001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+100001999-01-00T00:00:00Z' ),
 
 			// use string month names
 			'Jan/1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'January/1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'January/1' =>
-				array( '+0001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0001-01-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'1999 January' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'January 1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'January-1' =>
-				array( '+0001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0001-01-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'JanuARY-1' =>
-				array( '+0001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0001-01-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'JaN/1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'januARY-1' =>
-				array( '+0001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0001-01-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'jan/1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 
 			// use different date separators
 			'1-1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'1/1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'1 / 1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'1 1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'1,1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'1.1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 			'1. 1999' =>
-				array( '+1999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1999-01-00T00:00:00Z' ),
 
 			// presume mm/yy unless impossible month, in which case switch
 			'12/12' =>
-				array( '+0012-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0012-12-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'12/11' =>
-				array( '+0011-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0011-12-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'11/12' =>
-				array( '+0012-11-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0012-11-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'13/12' =>
-				array( '+0013-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0013-12-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'12/13' =>
-				array( '+0013-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
+				array( '+0013-12-00T00:00:00Z', TimeValue::PRECISION_MONTH, $julian ),
 			'2000 1' =>
-				array( '+2000-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+2000-01-00T00:00:00Z' ),
 
 			// big years
 			'April-1000000001' =>
-				array( '+1000000001-04-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1000000001-04-00T00:00:00Z' ),
 			'April 1000000001' =>
-				array( '+1000000001-04-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1000000001-04-00T00:00:00Z' ),
 			'1000000001 April' =>
-				array( '+1000000001-04-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+1000000001-04-00T00:00:00Z' ),
 			'1 13000' =>
-				array( '+13000-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+13000-01-00T00:00:00Z' ),
 
 			// parse 0 month as if no month has been entered
 			'0.1999' =>
-				array( '+1999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+1999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'1999 0' =>
-				array( '+1999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+1999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
-			// $time, $timezone, $before, $after, $precision, $calendarModel
-			$expected = new TimeValue( $expected[0], $expected[1], $expected[2], $expected[3], $expected[4], $expected[5]  );
-			$argLists[] = array( (string)$value, $expected );
+			$timestamp = $expected[0];
+			$precision = isset( $expected[1] ) ? $expected[1] : TimeValue::PRECISION_MONTH;
+			$calendarModel = isset( $expected[2] ) ? $expected[2] : $gregorian;
+
+			$argLists[] = array(
+				(string)$value,
+				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel )
+			);
 		}
 
 		return $argLists;

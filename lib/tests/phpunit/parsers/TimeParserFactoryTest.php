@@ -41,6 +41,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function validInputProvider() {
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 		$julian = 'http://www.wikidata.org/entity/Q1985786';
 
 		$valid = array(
@@ -147,7 +148,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		foreach ( $valid as $value => $expected ) {
 			$timestamp = $expected[0];
 			$precision = isset( $expected[1] ) ? $expected[1] : TimeValue::PRECISION_DAY;
-			$calendarModel = isset( $expected[2] ) ? $expected[2] : 'http://www.wikidata.org/entity/Q1985727';
+			$calendarModel = isset( $expected[2] ) ? $expected[2] : $gregorian;
 
 			$argLists[] = array(
 				(string)$value,
