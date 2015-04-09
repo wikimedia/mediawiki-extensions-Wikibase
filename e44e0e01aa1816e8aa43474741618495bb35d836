@@ -16,6 +16,24 @@
       "revId": "e44e0e01aa1816e8aa43474741618495bb35d836",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0c203ea7",
+        "filename": "client/tests/phpunit/includes/DataAccess/WikibaseDataAccessTestItemSetUpHelper.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-09T10:43:50Z",
+      "side": 1,
+      "message": "No, because of the putEntity() calls below. This is *meant* as a replacement for a real siteLinkLookup. That\u0027s why I changed the variable name. But it is *used* as a MockRepository, at least partly.",
+      "parentUuid": "6e7c4fa4_6e59af2c",
+      "revId": "e44e0e01aa1816e8aa43474741618495bb35d836",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
