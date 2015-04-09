@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_c7d0e1ce",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T12:23:16Z",
+      "side": 1,
+      "message": "Yes, but only on repo... like for EntityRevisionLookup",
+      "parentUuid": "6e7c4fa4_33f1e4fe",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f3accced",
         "filename": "lib/includes/store/EntityPrefetcher.php",
         "patchSetId": 12
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_07eed986",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T12:23:16Z",
+      "side": 1,
+      "message": "Because we can just load these on demand at some other time... to fulfill the current request, we only need *really* need $entityIds, everything on top of that is speed up",
+      "parentUuid": "6e7c4fa4_33c2445e",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_93cb184f",
         "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
         "patchSetId": 12
@@ -115,6 +151,24 @@
       "writtenOn": "2015-04-08T17:38:31Z",
       "side": 1,
       "message": "Should this also clear $this-\u003etoFetch?",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_47dcd1e5",
+        "filename": "lib/includes/store/sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T12:23:16Z",
+      "side": 1,
+      "message": "It could... not doing it is totally valid as we wont get any inconsistent data due to that.",
+      "parentUuid": "6e7c4fa4_f3bb6cdc",
       "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -240,6 +294,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_67fc6d3d",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T12:23:16Z",
+      "side": 1,
+      "message": "Yes, this is just for convenience of the caller... shall I remove it?",
+      "parentUuid": "6e7c4fa4_d3375049",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b33e5423",
         "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
         "patchSetId": 12
@@ -251,6 +323,24 @@
       "writtenOn": "2015-04-08T17:38:31Z",
       "side": 1,
       "message": "Why is this needed?",
+      "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_47f37169",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T12:23:16Z",
+      "side": 1,
+      "message": "It\u0027s only being used for a debug log, can remove if you want",
+      "parentUuid": "6e7c4fa4_b33e5423",
       "revId": "d2ddafc10872ac4831eec63c6285966891d7d046",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
