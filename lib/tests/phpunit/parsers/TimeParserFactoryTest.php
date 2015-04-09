@@ -42,7 +42,9 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function validInputProvider() {
 		$valid = array(
-			// Wikibase\Lib\YearTimeParser
+			/**
+			 * @see Wikibase\Lib\Parsers\YearTimeParser
+			 */
 			'1999' =>
 				array( '+0000000000001999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'2000' =>
@@ -65,10 +67,10 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '-0000000000011999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'1,000,000 BC' =>
 				array( '-0000000001000000-00-00T00:00:00Z', TimeValue::PRECISION_Ma ),
-			'1,11,111 BC' =>
-				array( '-0000000000111111-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 
-			// Wikibase\Lib\YearMonthTimeParser
+			/**
+			 * @see Wikibase\Lib\Parsers\YearMonthTimeParser
+			 */
 			'1 1999' =>
 				array( '+0000000000001999-01-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
 			'March 1999' =>
@@ -76,13 +78,17 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			'1999 March' =>
 				array( '+0000000000001999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
 
-			// ValueParsers\TimeParser
+			/**
+			 * @see ValueParsers\TimeParser
+			 */
 			'+0000000000000000-01-01T00:00:00Z (Gregorian)' =>
 				array( '+0000000000000000-01-01T00:00:00Z' ),
 			'+0-00-20T00:00:00Z' =>
 				array( '+0000000000000000-00-20T00:00:00Z' ),
 
-			// Wikibase\Lib\ParsersMwTimeIsoParser
+			/**
+			 * @see Wikibase\Lib\Parsers\MwTimeIsoParser
+			 */
 			'13 billion years CE' =>
 				array( '+0000013000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga ),
 			'13,000 million years CE' =>
@@ -92,7 +98,9 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			'1980s' =>
 				array( '+0000000000001980-00-00T00:00:00Z', TimeValue::PRECISION_10a ),
 
-			// Wikibase\Lib\PhpDateTimeParser
+			/**
+			 * @see Wikibase\Lib\Parsers\PhpDateTimeParser
+			 */
 			'10/10/10' =>
 				array( '+0000000000000010-10-10T00:00:00Z' ),
 			'1 July 2013' =>
@@ -112,6 +120,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			'-1.11.111' =>
 				array( '-0000000000000111-11-01T00:00:00Z' ),
 			'1.11.111 BC' =>
+				array( '-0000000000000111-11-01T00:00:00Z' ),
+			'1,11,111 BC' =>
 				array( '-0000000000000111-11-01T00:00:00Z' ),
 			'1 11 111 BC' =>
 				array( '-0000000000000111-11-01T00:00:00Z' ),
