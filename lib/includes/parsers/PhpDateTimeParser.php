@@ -140,7 +140,9 @@ class PhpDateTimeParser extends StringValueParser {
 	 * @return mixed
 	 */
 	private function getValueWithFixedSeparators( $value ) {
-		return preg_replace( '/(?<=\d)[.\s]\s*/', '.', $value );
+		// Meant to match separator characters after day and month. \p{L} matches letters outside
+		// the ASCII range.
+		return preg_replace( '/(?<=[\d\p{L}])[.,\s]\s*/', '.', $value );
 	}
 
 	/**
