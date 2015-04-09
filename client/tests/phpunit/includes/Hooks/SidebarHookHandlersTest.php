@@ -17,6 +17,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -61,9 +62,9 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @param array[] $siteLinksPerItem
 	 *
-	 * @return MockRepository
+	 * @return EntityLookup
 	 */
-	private function getMockRepository( $siteLinksPerItem ) {
+	private function getEntityLookup( array $siteLinksPerItem ) {
 		$repo = new MockRepository();
 
 		foreach ( $siteLinksPerItem as $idString => $siteLinks ) {
@@ -71,6 +72,8 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			$item = $this->newItem( $itemId, $siteLinks );
 			$repo->putEntity( $item );
 		}
+
+		$repo->putEntity( $this->getBadgeItem() );
 
 		return $repo;
 	}
@@ -159,11 +162,10 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$namespaces = $settings->getSetting( 'namespaces' );
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 
-		$mockRepo = $this->getMockRepository( $siteLinksPerItem );
-		$mockRepo->putEntity( $this->getBadgeItem() );
+		$entityLookup = $this->getEntityLookup( $siteLinksPerItem );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$mockRepo,
+			$entityLookup,
 			array( 'Q17' => 'featured' ),
 			$en
 		);

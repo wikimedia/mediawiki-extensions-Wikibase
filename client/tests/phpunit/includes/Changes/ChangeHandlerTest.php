@@ -65,8 +65,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		array $pageNamesPerItemId = array(),
 		PageUpdater $updater = null
 	) {
-		$mockRepository = $this->getMockRepository( $pageNamesPerItemId );
-		$usageLookup = $this->getUsageLookup( $mockRepository );
+		$siteLinkLookup = $this->getSiteLinkLookup( $pageNamesPerItemId );
+		$usageLookup = $this->getUsageLookup( $siteLinkLookup );
 		$titleFactory = $this->getTitleFactory( $pageNamesPerItemId );
 		$affectedPagesFinder = $this->getAffectedPagesFinder( $usageLookup, $titleFactory );
 		$changeListTransformer = $this->getChangeListTransformer();
@@ -83,7 +83,12 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		return $handler;
 	}
 
-	private function getMockRepository( array $pageNamesPerItemId ) {
+	/**
+	 * @param array $pageNamesPerItemId
+	 *
+	 * @return SiteLinkLookup
+	 */
+	private function getSiteLinkLookup( array $pageNamesPerItemId ) {
 		$repo = new MockRepository();
 
 		// entity 1, revision 11
@@ -120,7 +125,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$entity1->setDescription( 'en', 'the second' );
 		$repo->putEntity( $entity1, 1211 );
 
-		$this->updateMockRepo( $repo, $pageNamesPerItemId );
+		$this->updateMockRepository( $repo, $pageNamesPerItemId );
 
 		return $repo;
 	}
@@ -469,7 +474,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	 * @param array $pageNamesPerItemId Associative array of item id string => either Item object
 	 * or array of site id => page name.
 	 */
-	private function updateMockRepo( MockRepository $mockRepository, array $pageNamesPerItemId ) {
+	private function updateMockRepository( MockRepository $mockRepository, array $pageNamesPerItemId ) {
 		foreach ( $pageNamesPerItemId as $idString => $pageNames ) {
 			if ( is_array( $pageNames ) ) {
 				$item = new Item( new ItemId( $idString ) );

@@ -68,8 +68,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @return EntityDataRequestHandler
 	 */
 	protected function newHandler() {
-		$entityLookup = EntityDataTestProvider::getMockRepository();
-
+		$mockRepository = EntityDataTestProvider::getMockRepository();
 		$idParser = new BasicEntityIdParser(); // we only test for items and properties here.
 
 		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
@@ -92,7 +91,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$service = new EntityDataSerializationService(
 			EntityDataSerializationServiceTest::URI_BASE,
 			EntityDataSerializationServiceTest::URI_DATA,
-			$entityLookup,
+			$mockRepository,
 			$titleLookup,
 			$serializerFactory,
 			$propertyLookup,
@@ -135,7 +134,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$uriManager,
 			$titleLookup,
 			$idParser,
-			$entityLookup,
+			$mockRepository,
 			$service,
 			'json',
 			1800,
