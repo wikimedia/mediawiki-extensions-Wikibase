@@ -155,6 +155,12 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^Label for Q5$@' // compare mock object created in newBuilders()
 			),
+			'plain item label (with language fallback)' => array(
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions( 'de-ch' ), // should fall back to 'de'
+				new EntityIdValue( new ItemId( 'Q5' ) ),
+				'@^Name für Q5$@' // compare mock object created in newBuilders()
+			),
 			'widget item link (with entity lookup)' => array(
 				SnakFormatter::FORMAT_HTML_WIDGET,
 				$this->newFormatterOptions(),
