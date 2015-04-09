@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2d8bb3e9",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-09T16:46:10Z",
+      "side": 1,
+      "message": "Action::getActionName is somewhat expensive, from performance perspective. On a history page, I think this would be called 100\u0027s of times. \n\nWouldn\u0027t it be the same thing (\"history\") for an entire request?\n\nCould we in process cache this or put these context-derived things in the constructor?",
+      "revId": "15278ba33692bc9a57b343361167c1da788fc11f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
