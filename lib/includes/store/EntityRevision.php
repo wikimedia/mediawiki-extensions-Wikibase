@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Entity;
 
 /**
- * Represents a revision of a Wikibase entity.
+ * Represents a specific revision of a Wikibase entity.
  *
  * @since 0.4
  *
@@ -32,18 +32,18 @@ class EntityRevision {
 
 	/**
 	 * @param Entity $entity
-	 * @param int $revisionId Revision ID or 0 for none
+	 * @param int $revisionId Non-zero revision number.
 	 * @param string $mwTimestamp in MediaWiki format or an empty string for none
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( Entity $entity, $revisionId = 0, $mwTimestamp = '' ) {
-		if ( !is_int( $revisionId ) || $revisionId < 0 ) {
-			throw new InvalidArgumentException( 'Revision ID must be a non-negative integer.' );
+	public function __construct( Entity $entity, $revisionId, $mwTimestamp = '' ) {
+		if ( !is_int( $revisionId ) || $revisionId <= 0 ) {
+			throw new InvalidArgumentException( '$revisionId must be a positive integer.' );
 		}
 
 		if ( $mwTimestamp !== '' && !preg_match( '/^\d{14}$/', $mwTimestamp ) ) {
-			throw new InvalidArgumentException( 'Timestamp must be a string of 14 digits or empty.' );
+			throw new InvalidArgumentException( '$mwTimestamp must be a string of 14 digits or empty.' );
 		}
 
 		$this->entity = $entity;
