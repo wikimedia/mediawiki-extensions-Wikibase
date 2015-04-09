@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6c83f2ae",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-09T10:30:42Z",
+      "side": 1,
+      "message": "suppose this is just artifact of rebase, but...\n\nwhat, we don\u0027t have SiteLinkProvider? :o",
+      "revId": "8ed1d98b9bf54f815e670a3245739b49cf1c632b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
