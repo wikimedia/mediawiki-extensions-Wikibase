@@ -77,12 +77,11 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityViewFactory() {
-		$entityIdFormatterFactory = $this->getEntityIdFormatterFactory();
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		return new EntityViewFactory(
-			$entityIdFormatterFactory,
-			$entityIdFormatterFactory,
+			$this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML ),
+			$this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
 			$this->getSiteStore(),
 			$this->getMock( 'DataTypes\DataTypeFactory' ),
@@ -94,13 +93,14 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getEntityIdFormatterFactory() {
+	private function getEntityIdFormatterFactory( $format ) {
 		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
 
 		$formatterFactory = $this->getMock( 'Wikibase\View\EntityIdFormatterFactory' );
+
 		$formatterFactory->expects( $this->any() )
 			->method( 'getOutputFormat' )
-			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
+			->will( $this->returnValue( $format ) );
 
 		$formatterFactory->expects( $this->any() )
 			->method( 'getEntityIdFormater' )
