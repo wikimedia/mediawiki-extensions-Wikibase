@@ -337,7 +337,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			// Preserve punctuation as given in MessagesXx.php but skip suffixes and words
 			array(
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
-				'16 Avgust. 2013',
+				'16 Avgust, 2013',
 				true,
 				'kaa'
 			),
@@ -492,17 +492,17 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 		$argLists = array();
 
 		foreach ( $tests as $args ) {
-			$timeValue = new TimeValue(
-				$args[0],
-				0, 0, 0,
-				$args[1],
-				TimeFormatter::CALENDAR_GREGORIAN
-			);
+			$timestamp = $args[0];
+			$precision = $args[1];
+			$expected = isset( $args[2] ) ? $args[2] : $timestamp;
+			$roundtrip = isset( $args[3] );
+			$languageCode = isset( $args[4] ) ? $args[4] : 'en';
+
 			$argLists[] = array(
-				isset( $args[2] ) ? $args[2] : $args[0],
-				$timeValue,
-				isset( $args[3] ),
-				isset( $args[4] ) ? $args[4] : 'en'
+				$expected,
+				new TimeValue( $timestamp, 0, 0, 0, $precision, TimeFormatter::CALENDAR_GREGORIAN ),
+				$roundtrip,
+				$languageCode
 			);
 		}
 
