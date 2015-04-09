@@ -85,7 +85,7 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 			case 'somevalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
-				$this->writer->say( RdfVocabulary::NSP_DIRECT_CLAIM, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Somevalue' );
+				$this->writer->say( RdfVocabulary::NSP_DIRECT_CLAIM, $propertyValueLName )->is( '_', $this->writer->blank() );
 				break;
 			case 'novalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
