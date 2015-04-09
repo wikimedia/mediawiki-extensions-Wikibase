@@ -26,7 +26,7 @@
 	"wikibase-label-empty": "정의한 레이블이 없습니다.",
 	"wikibase-label-edit-placeholder": "레이블 입력",
 	"wikibase-label-edit-placeholder-language-aware": "$1로 번역",
-	"wikibase-description-empty": "아직 정의한 설명이 없습니다.",
+	"wikibase-description-empty": "설명이 없습니다.",
 	"wikibase-description-edit-placeholder": "설명 입력",
 	"wikibase-description-edit-placeholder-language-aware": "$1로 설명 입력",
 	"wikibase-diffview-reference": "참고",

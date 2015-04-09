@@ -3,7 +3,8 @@
 		"authors": [
 			"George Animal",
 			"Ghybu",
-			"Gomada"
+			"Gomada",
+			"Bikarhêner"
 		]
 	},
 	"wikibase-after-page-move": "Tu dikarî beşa têkilîdar a Wîkîdaneyê, ku girêdanên zimanan ên li ser rûpela gerandî têde ne, [$1 rojane bikî].",
@@ -16,5 +17,6 @@
 	"wikibase-linkitem-input-page": "Rûpel:",
 	"wikibase-rc-hide-wikidata": "Wikidatayê $1",
 	"wikibase-rc-hide-wikidata-hide": "veşêre",
-	"wikibase-rc-hide-wikidata-show": "nîşan bide"
+	"wikibase-rc-hide-wikidata-show": "nîşan bide",
+	"wikibase-otherprojects": "Projeyên din"
 }

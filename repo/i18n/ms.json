@@ -4,7 +4,8 @@
 			"Anakmalaysia",
 			"Aurora",
 			"Shirayuki",
-			"Macofe"
+			"Macofe",
+			"Pizza1016"
 		]
 	},
 	"wikibase-desc": "Repositori data berstruktur",
@@ -26,9 +27,9 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Keterangan",
 	"wikibase-entitytermsforlanguagelistview-label": "Label",
 	"wikibase-entitytermsforlanguagelistview-language": "Bahasa",
-	"wikibase-label-empty": "Label belum ditetapkan.",
+	"wikibase-label-empty": "Tiada label ditetapkan.",
 	"wikibase-label-edit-placeholder": "taipkan label",
-	"wikibase-description-empty": "Keterangan belum dinyatakan.",
+	"wikibase-description-empty": "Tiada butiran dinyatakan.",
 	"wikibase-description-edit-placeholder": "taipkan keterangan",
 	"wikibase-description-edit-placeholder-language-aware": "isikan keterangan di $1",
 	"wikibase-diffview-reference": "rujukan",
@@ -48,6 +49,7 @@
 	"wikibase-sitelinkgroupview-input-help-message": "Tambah pautan tapak web dengan menyatakan satu tapak dan satu halaman daripada tapak itu, menyunting atau mengalih keluar pautan-pautan sedia ada.",
 	"wikibase-sitelinks-empty": "Perkara ini belum ada pautan tapak.",
 	"wikibase-sitelinks-input-help-message": "Tetapkan pautan kepada halaman yang berkaitan dengan perkara ini.",
+	"wikibase-sitelinks-special": "Tapak-tapak lain",
 	"wikibase-badgeselector-badge-placeholder-title": "Klik untuk berikan lencana.",
 	"wikibase-remove": "buang",
 	"wikibase-undo-title": "Membalikkan suntingan kepada \"$1\"",
@@ -70,7 +72,7 @@
 	"wikibase-propertypage-datatype": "Jenis data",
 	"wikibase-claimview-snak-tooltip": "Isikan nilai yang berkenaan dengan sifat yang bernama \"$1\". Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",
 	"wikibase-claimview-snak-new-tooltip": "Setelah menyatakan sifat, anda boleh mengisikan nilai yang berkenaan. Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|sumber|sumber-sumber}}",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|rujukan|rujukan-rujukan}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Satu|$1}} sumber belum disimpan",
 	"wikibase-snakview-property-input-placeholder": "sifat",
 	"wikibase-snakview-unsupportedsnaktype": "Snak jenis \"$1\". Pengelolaan untuk jenis Snak ini belum disokong.",

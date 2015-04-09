@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"George Animal",
-			"Macofe"
+			"Macofe",
+			"Bikarhêner"
 		]
 	},
 	"wikibase-entity-item": "obje",
@@ -20,6 +21,7 @@
 	"wikibase-description-input-help-message": "Danasîneka kurt têkeve $1",
 	"wikibase-statements": "Vegotin",
 	"wikibase-terms": "Bi zimanên din",
+	"wikibase-sitelinks-special": "Sîteyên din",
 	"wikibase-remove": "jê bibe",
 	"wikibase-aliases-label": "Herwiha tê zanîn wek:",
 	"wikibase-itembytitle-lookup-page": "Rûpel:",

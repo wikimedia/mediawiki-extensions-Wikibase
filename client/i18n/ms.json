@@ -4,7 +4,8 @@
 			"Anakmalaysia",
 			"Aurora",
 			"Aviator",
-			"SNN95"
+			"SNN95",
+			"Pizza1016"
 		]
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
@@ -41,6 +42,7 @@
 	"wikibase-linkitem-success-link": "Halaman-halaman ini telah berjaya dipautkan. Anda boleh mendapati perkara yang mengandungi pautan-pautannya di dalam [$1 repositori data pusat] kami.",
 	"wikibase-property-notfound": "Sifat $1 tidak dijumpai.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Sorokkan",
 	"wikibase-rc-hide-wikidata-show": "Paparkan",
 	"wikibase-rc-show-wikidata-pref": "Paparkan suntingan Wikidata dalam perubahan terkini",
 	"wikibase-rc-wikibase-edit-letter": "D",
@@ -59,5 +61,6 @@
 	"wikibase-unconnectedpages-format-row": "($1 pautan antara bahasa pada halaman ini)",
 	"wikibase-pageinfo-entity-id": "ID Perkara Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Tiada",
-	"wikibase-property-render-error": "Sifat $1 gagal dihasilkan: $2"
+	"wikibase-property-render-error": "Sifat $1 gagal dihasilkan: $2",
+	"wikibase-otherprojects": "Projek-projek lain"
 }
