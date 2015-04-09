@@ -10,6 +10,7 @@ use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\DualSubscriptionLookup;
 use Wikibase\Store\SiteLinkSubscriptionLookup;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
@@ -61,15 +62,20 @@ class DispatchChanges extends Maintenance {
 
 	/**
 	 * Initializes members from command line options and configuration settings.
+	 *
+	 * @param SettingsArray $settings
+	 *
+	 * @return ChangeDispatcher
+	 * @throws MWException
 	 */
-	private function newChangeDispatcher() {
+	private function newChangeDispatcher( SettingsArray $settings ) {
 		$changesTable = new ChangesTable(); //TODO: allow injection of a mock instance for testing
 
-		$repoDB = Settings::get( 'changesDatabase' );
-		$clientWikis = Settings::get( 'localClientDatabases' );
-		$batchChunkFactor = Settings::get( 'dispatchBatchChunkFactor' );
-		$batchCacheFactor = Settings::get( 'dispatchBatchCacheFactor' );
-		$subscriptionLookupMode = Settings::get( 'subscriptionLookupMode' );
+		$repoDB = $settings->getSetting( 'changesDatabase' );
+		$clientWikis = $settings->getSetting( 'localClientDatabases' );
+		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
+		$batchCacheFactor = $settings->getSetting( 'dispatchBatchCacheFactor' );
+		$subscriptionLookupMode = $settings->getSetting( 'subscriptionLookupMode' );
 
 		$batchSize = intval( $this->getOption( 'batch-size', 1000 ) );
 		$dispatchInterval = intval( $this->getOption( 'dispatch-interval', 60 ) );
@@ -147,7 +153,8 @@ class DispatchChanges extends Maintenance {
 		$maxPasses = intval( $this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 ) );
 		$delay = intval( $this->getOption( 'idle-delay', 10 ) );
 
-		$dispatcher = $this->newChangeDispatcher();
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$dispatcher = $this->newChangeDispatcher( $settings );
 
 		$dispatcher->getDispatchCoordinator()->initState();
 
