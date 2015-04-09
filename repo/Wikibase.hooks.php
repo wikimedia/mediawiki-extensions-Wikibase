@@ -1178,4 +1178,37 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Called during WikiPage::doEditUpdates, when revision id is known and before the
+	 * edit is cached in ParserCache.
+	 *
+	 * @param WikiPage $page
+	 * @param Revision $revision
+	 * @param &$editInfo data structure that contains ParserOutput and other info about an edit.
+	 *
+	 * @return bool
+	 */
+	public static function onWikiPageDoEditUpdatesBeforeCache( WikiPage $page, Revision $revision, &$editInfo ) {
+		$wikibaseViewChunks = $editInfo->output->getExtensionData( 'wikibase-view-chunks' );
+
+		foreach( $wikibaseViewChunks as $key => $data ) {
+			// @fixme super nasty that wikibase-view-chunks is based on an array,
+			// with numerical, positional indices, and having to deal with $editInfo
+			// also doesn't make this the least bit nice.  but this works and is
+			// right place and time to update the termbox placeholder.
+			//
+			// We check if the revision id is 0, which means unknown, and may have
+			// been set via EntityContent::getParserOutput before the revision id
+			// got set.
+			if ( isset( $data[0] ) && $data[0] === 'termbox' && isset( $data[2] ) && $data[2] === 0 ) {
+				$wikibaseViewChunks[$key][2] = $revision->getId();
+				$editInfo->output->setExtensionData( 'wikibase-view-chunks', $wikibaseViewChunks );
+			}
+
+			break;
+		}
+
+		return true;
+	}
+
 }
