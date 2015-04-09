@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8a2e6d88",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T14:32:07Z",
+      "side": 1,
+      "message": "Do we really want a new blank node every time? \nWhat\u0027s the advantage over having a single URI for representing \"some value\"?",
+      "revId": "f7472d79a304d1b579539aa1a14e5c3032b48b31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
