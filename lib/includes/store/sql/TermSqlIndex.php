@@ -968,12 +968,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			wfWarn( "Unicode normalization failed for `$text`" );
 		}
 
-		// \p{Z} - whitespace
-		// \p{C} - control chars
 		// WARNING: *any* invalid UTF8 sequence causes preg_replace to return an empty string.
-		$strippedText = $nfcText;
-		$strippedText = preg_replace( '/[\p{Cc}\p{Cf}\p{Cn}\p{Cs}]+/u', ' ', $strippedText );
-		$strippedText = preg_replace( '/^[\p{Z}]+|[\p{Z}]+$/u', '', $strippedText );
+		// Control character classes excluding private use areas.
+		$strippedText = preg_replace( '/[\p{Cc}\p{Cf}\p{Cn}\p{Cs}]+/u', ' ', $nfcText );
+		// \p{Z} includes all whitespace characters and invisible separators.
+		$strippedText = preg_replace( '/^\p{Z}+|\p{Z}+$/u', '', $strippedText );
 
 		if ( $strippedText === '' ) {
 			// NOTE: This happens when there is only whitespace in the string.
