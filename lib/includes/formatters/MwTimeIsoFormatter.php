@@ -56,24 +56,10 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		$isoTimestamp = $timeValue->getTime();
 
 		try {
-			return $this->getUnlocalizedDate( $isoTimestamp, $timeValue->getPrecision() );
+			return $this->getLocalizedDate( $isoTimestamp, $timeValue->getPrecision() );
 		} catch ( InvalidArgumentException $ex ) {
 			return $isoTimestamp;
 		}
-	}
-
-	/**
-	 * @param string $isoTimestamp
-	 * @param int $precision
-	 *
-	 * @throws InvalidArgumentException
-	 * @return string Formatted date
-	 */
-	private function getUnlocalizedDate( $isoTimestamp, $precision ) {
-		// We do not handle parsing arabic, farsi, etc. digits (bug 63732)
-		return $this->language->parseFormattedNumber(
-			$this->getLocalizedDate( $isoTimestamp, $precision )
-		);
 	}
 
 	/**
@@ -286,16 +272,14 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			$isBCE = $isBCE && !empty( $number );
 		}
 
-		$formattedNumber = $this->language->formatNum( $number, true );
-
 		if ( empty( $msg ) ) {
 			// TODO: This needs a message.
-			return $formattedNumber . ( $isBCE ? ' BCE' : '' );
+			return $number . ( $isBCE ? ' BCE' : '' );
 		}
 
 		return $this->getMessage(
 			'wikibase-time-precision-' . ( $isBCE ? 'BCE-' : '' ) . $msg,
-			$formattedNumber
+			$number
 		);
 	}
 

@@ -68,8 +68,6 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '-0000000000011999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'1,000,000 BC' =>
 				array( '-0000000001000000-00-00T00:00:00Z', TimeValue::PRECISION_Ma ),
-			'1,11,111 BC' =>
-				array( '-0000000000111111-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 
 			/**
 			 * @see Wikibase\Lib\Parsers\YearMonthTimeParser
@@ -135,6 +133,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			'-1.11.111' =>
 				array( '-0000000000000111-11-01T00:00:00Z' ),
 			'1.11.111 BC' =>
+				array( '-0000000000000111-11-01T00:00:00Z' ),
+			'1,11,111 BC' =>
 				array( '-0000000000000111-11-01T00:00:00Z' ),
 			'1 11 111 BC' =>
 				array( '-0000000000000111-11-01T00:00:00Z' ),
