@@ -80,4 +80,14 @@ class SiteLinkSubscriptionLookupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
+	public function testGetSubscriptions_none() {
+		$lookup = new SiteLinkSubscriptionLookup( $this->getSiteLinkLookup() );
+
+		$subscriptions = $lookup->getSubscriptions( 'enwiki', array(
+			new PropertyId( 'P3' ), // will be skipped
+		) );
+
+		$this->assertEmpty( $subscriptions );
+	}
+
 }

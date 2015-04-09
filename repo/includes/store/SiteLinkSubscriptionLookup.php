@@ -43,6 +43,10 @@ class SiteLinkSubscriptionLookup implements SubscriptionLookup {
 		$entityIds = $this->getItemIds( $entityIds );
 		$numericIds = array_keys( $entityIds );
 
+		if ( empty( $numericIds ) ) {
+			return array();
+		}
+
 		$links = $this->siteLinkLookup->getLinks( $numericIds, array( $siteId ) );
 
 		// collect the item IDs present in these links
