@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_eac84153",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T15:17:49Z",
+      "side": 1,
+      "message": "It\u0027s actually not of the wrong type, it\u0027s just PhpStorm beign stupid. Inside the if-block, $entity is known to implement FingerprintProvider AND EntityDocument.\n\n$extraFields is never used outside the if block.\n\nSuggestion for simplifying the control flow in this method: Put a guard statement at the top.\n\n  if ( !( $entity instanceof FingerprintProvider ) )  {\n    return array();\n  }",
+      "parentUuid": "6e7c4fa4_2ad2b95d",
+      "revId": "76d4b0d2cef8b5cdb8b41bb17e53319c4221274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4a85b55c",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 8
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "I like to do positive tests when calling code that scares me. select() scares me. Could return anything, true, a string, who knows. Checking for false via ( $rows !\u003d\u003d false ) wouldn\u0027t be wrong, sure.\n\nAbout the \"brief\" idea: No, does not work because of the \"finally\" stuff below.",
       "parentUuid": "6e7c4fa4_4a85b55c",
+      "revId": "76d4b0d2cef8b5cdb8b41bb17e53319c4221274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2afe3967",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-09T15:17:49Z",
+      "side": 1,
+      "message": "select() returns a ResultWrapper. The only exception is if the db connection is set to ignore errors, which should be extremely rare in general, and never happen here. If it does, just let it cause a fatal.\n\nDoing positive tests should not mean hiding error conditions by doing nothing.",
+      "parentUuid": "6e7c4fa4_ea17e1f1",
       "revId": "76d4b0d2cef8b5cdb8b41bb17e53319c4221274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
