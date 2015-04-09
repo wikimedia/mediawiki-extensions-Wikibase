@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Parsers\Test;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use Wikibase\Lib\Parsers\EraParser;
 use Wikibase\Lib\Parsers\YearTimeParser;
 
 /**
@@ -45,10 +44,10 @@ class YearTimeParserTest extends StringValueParserTest {
 			->with( $this->isType( 'string' ) )
 			->will( $this->returnCallback(
 				function( $value ) {
-					$sign = EraParser::CURRENT_ERA;
+					$sign = '+';
 					// Tiny parser that supports a single negative sign only
-					if ( $value[0] === EraParser::BEFORE_CURRENT_ERA ) {
-						$sign = EraParser::BEFORE_CURRENT_ERA;
+					if ( $value[0] === '-' ) {
+						$sign = '-';
 						$value = substr( $value, 1 );
 					}
 					return array( $sign, $value ) ;
@@ -68,38 +67,43 @@ class YearTimeParserTest extends StringValueParserTest {
 
 		$valid = array(
 			'1999' =>
-				array( '+0000000000001999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+1999-00-00T00:00:00Z' ),
 			'2000' =>
-				array( '+0000000000002000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+2000-00-00T00:00:00Z' ),
 			'2010' =>
-				array( '+0000000000002010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+2010-00-00T00:00:00Z' ),
 			'2000000' =>
-				array( '+0000000002000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1M, $gregorian ),
+				array( '+2000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M ),
 			'2000000000' =>
-				array( '+0000002000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1G, $gregorian ),
+				array( '+2000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ),
 			'2000020000' =>
-				array( '+0000002000020000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR10K, $gregorian ),
+				array( '+2000020000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10K ),
 			'2000001' =>
-				array( '+0000000002000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+2000001-00-00T00:00:00Z' ),
 			'02000001' =>
-				array( '+0000000002000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+2000001-00-00T00:00:00Z' ),
 			'1' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
+				array( '+0001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 			'000000001' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
+				array( '+0001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 			'-1000000' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1M, $julian ),
+				array( '-1000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, $julian ),
 			'-1 000 000' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR1M, $julian ),
+				array( '-1000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, $julian ),
 			// Digit grouping in the Indian numbering system
 			'-1,99,999' =>
-				array( '-0000000000199999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
+				array( '-199999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
-			// $time, $timezone, $before, $after, $precision, $calendarModel
-			$expected = new TimeValue( $expected[0], $expected[1], $expected[2], $expected[3], $expected[4], $expected[5]  );
-			$argLists[] = array( (string)$value, $expected );
+			$timestamp = $expected[0];
+			$precision = isset( $expected[1] ) ? $expected[1] : TimeValue::PRECISION_YEAR;
+			$calendarModel = isset( $expected[2] ) ? $expected[2] : $gregorian;
+
+			$argLists[] = array(
+				(string)$value,
+				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel )
+			);
 		}
 
 		return $argLists;
