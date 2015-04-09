@@ -268,7 +268,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 			case 'somevalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
-				$writer->say( $propertyNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Somevalue' );
+				$writer->say( $propertyNamespace, $propertyValueLName )->is( '_', $writer->blank() );
 				break;
 			case 'novalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
