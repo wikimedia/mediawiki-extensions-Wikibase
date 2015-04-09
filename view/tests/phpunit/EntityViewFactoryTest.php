@@ -77,10 +77,12 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityViewFactory() {
+		$entityIdFormatterFactory = $this->getEntityIdFormatterFactory();
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		return new EntityViewFactory(
-			$this->getEntityIdFormatterFactory(),
+			$entityIdFormatterFactory,
+			$entityIdFormatterFactory,
 			$this->getSnakFormatterFactory(),
 			$this->getSiteStore(),
 			$this->getMock( 'DataTypes\DataTypeFactory' ),
