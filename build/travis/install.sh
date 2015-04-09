@@ -19,10 +19,8 @@ tar -zxf $MW.tar.gz
 mv mediawiki-$MW phase3
 
 cd phase3
-composer install --no-dev
-wget https://phar.phpunit.de/phpunit.phar
-chmod +x phpunit.phar
-mv phpunit.phar tests/phpunit/
+composer self-update
+composer install
 
 mysql -e 'create database its_a_mw;'
 php maintenance/install.php --dbtype $DBTYPE --dbuser root --dbname its_a_mw --dbpath $(pwd) --pass nyan TravisWiki admin
@@ -38,5 +36,4 @@ cp -r $originalDirectory Wikibase
 
 cd Wikibase
 
-composer self-update
 composer install --prefer-source
