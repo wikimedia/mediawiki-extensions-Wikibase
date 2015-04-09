@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use Title;
-use Wikibase\Client\Hooks\MovePageNoticeCreator;
+use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -18,6 +18,7 @@ use Wikibase\DataModel\SiteLink;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
 
@@ -42,9 +43,9 @@ class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider getMovePageNoticeHtmlProvider
+	 * @dataProvider getMovePageNoticeCaseProvider
 	 */
-	public function testGetMovePageNoticeHtml( $expected, Title $oldTitle, Title $newTitle, $message ) {
+	public function testDoSpecialMovepageAfterMove( $expected, Title $oldTitle, Title $newTitle, $message ) {
 		$siteLinkLookup = $this->getMock(
 			'Wikibase\Lib\Store\SiteLinkTable',
 			array( 'getEntityIdForSiteLink' ),
@@ -56,20 +57,35 @@ class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
 			->with( new SiteLink( 'dewiki', 'New Amsterdam' ) )
 			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
 
-		$movePageNotice = new MovePageNoticeCreator(
+		$movePageNotice = new MovePageNotice(
 			$siteLinkLookup,
 			'dewiki',
 			$this->getRepoLinker()
 		);
 
-		$this->assertEquals(
-			$expected,
-			$movePageNotice->getPageMoveNoticeHtml( $oldTitle, $newTitle ),
-			$message
-		);
+		$outputPage = $this->getMockBuilder( 'OutputPage' )
+				->disableOriginalConstructor()
+				->getMock();
+
+		$outputPage->expects( $this->once() )
+				->method( 'addHtml' )
+				->with( $expected );
+
+		$outputPage->expects( $this->once() )
+				->method( 'addModules' )
+				->with( 'wikibase.client.page-move' );
+
+		$movePageForm = $this->getMock( 'MovePageForm' );
+		$movePageForm->expects( $this->once() )
+				->method( 'getOutput' )
+				->will( $this->returnValue( $outputPage ) );
+
+		$movePageNotice->doSpecialMovepageAfterMove( $movePageForm, $oldTitle, $newTitle );
+
+		$this->assertTrue( true ); // The mocks do the assertions we need
 	}
 
-	public function getMovePageNoticeHtmlProvider() {
+	public function getMovePageNoticeCaseProvider() {
 		$oldTitle = Title::newFromText( 'New Amsterdam' );
 		$newTitle = Title::newFromText( 'New York City' );
 		$expected = $this->getParsedMessage( 'wikibase-after-page-move' );

@@ -3,8 +3,10 @@
 namespace Wikibase\Client\Hooks;
 
 use Html;
+use MovePageForm;
 use Title;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -17,7 +19,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class MovePageNoticeCreator {
+class MovePageNotice {
 
 	/**
 	 * @var SiteLinkLookup
@@ -43,6 +45,61 @@ class MovePageNoticeCreator {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
 		$this->repoLinker = $repoLinker;
+	}
+
+	private static function newFromGlobalState() {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
+		$repoLinker = $wikibaseClient->newRepoLinker();
+
+		return new self(
+			$siteLinkLookup,
+			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
+			$repoLinker
+		);
+	}
+
+	/**
+	 * Hook for injecting a message on [[Special:MovePage]]
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialMovepageAfterMove
+	 *
+	 * @since 0.5
+	 *
+	 * @param MovePageForm $movePage
+	 * @param Title &$oldTitle
+	 * @param Title &$newTitle
+	 *
+	 * @return bool
+	 */
+	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
+		Title &$newTitle ) {
+		$self = self::newFromGlobalState();
+
+		$self->doSpecialMovepageAfterMove( $movePage, $oldTitle, $newTitle );
+
+		return true;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param MovePageForm $movePage
+	 * @param Title &$oldTitle
+	 * @param Title &$newTitle
+	 *
+	 * @return bool
+	 */
+	public function doSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
+		Title &$newTitle ) {
+
+		$html = $this->getPageMoveNoticeHtml(
+			$oldTitle,
+			$newTitle
+		);
+
+		$out = $movePage->getOutput();
+		$out->addModules( 'wikibase.client.page-move' );
+		$out->addHTML( $html );
 	}
 
 	/**
@@ -74,7 +131,7 @@ class MovePageNoticeCreator {
 	 *
 	 * @return string|null
 	 */
-	public function getPageMoveNoticeHtml( Title $oldTitle, Title $newTitle ) {
+	private function getPageMoveNoticeHtml( Title $oldTitle, Title $newTitle ) {
 		$itemLink = $this->getItemUrl( $oldTitle );
 
 		if ( !$itemLink ) {

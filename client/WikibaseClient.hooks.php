@@ -8,7 +8,6 @@ use ChangesList;
 use FormOptions;
 use IContextSource;
 use Message;
-use MovePageForm;
 use OutputPage;
 use Parser;
 use QuickTemplate;
@@ -24,7 +23,6 @@ use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\ChangesPageWikibaseFilterHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
-use Wikibase\Client\Hooks\MovePageNoticeCreator;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
@@ -103,42 +101,6 @@ final class ClientHooks {
 		);
 
 		$reportMessage( "done!\n" );
-
-		return true;
-	}
-
-	/**
-	 * Hook for injecting a message on [[Special:MovePage]]
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialMovepageAfterMove
-	 *
-	 * @since 0.3
-	 *
-	 * @param MovePageForm $movePage
-	 * @param Title &$oldTitle
-	 * @param Title &$newTitle
-	 *
-	 * @return bool
-	 */
-	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
-		Title &$newTitle ) {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
-		$repoLinker = $wikibaseClient->newRepoLinker();
-
-		$movePageNotice = new MovePageNoticeCreator(
-			$siteLinkLookup,
-			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
-			$repoLinker
-		);
-
-		$html = $movePageNotice->getPageMoveNoticeHtml(
-			$oldTitle,
-			$newTitle
-		);
-
-		$out = $movePage->getOutput();
-		$out->addModules( 'wikibase.client.page-move' );
-		$out->addHTML( $html );
 
 		return true;
 	}
