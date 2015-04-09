@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ea6cc133",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-09T15:30:45Z",
+      "side": 1,
+      "message": "Yea, calling things stupid helps.\n\nThis code is broken (see the OCP FIXME) anyway. Not worth our time.",
+      "parentUuid": "6e7c4fa4_eac84153",
+      "revId": "76d4b0d2cef8b5cdb8b41bb17e53319c4221274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4a85b55c",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 8
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "select() returns a ResultWrapper. The only exception is if the db connection is set to ignore errors, which should be extremely rare in general, and never happen here. If it does, just let it cause a fatal.\n\nDoing positive tests should not mean hiding error conditions by doing nothing.",
       "parentUuid": "6e7c4fa4_ea17e1f1",
+      "revId": "76d4b0d2cef8b5cdb8b41bb17e53319c4221274b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4a63753e",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-09T15:30:45Z",
+      "side": 1,
+      "message": "Sorry? \"Hiding\" what? select() can return stuff that\u0027s not iterable. That\u0027s part of it\u0027s interface, not an error. If there is an error, it should throw an exception. It\u0027s not the job of this code to handle errors.",
+      "parentUuid": "6e7c4fa4_2afe3967",
       "revId": "76d4b0d2cef8b5cdb8b41bb17e53319c4221274b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
