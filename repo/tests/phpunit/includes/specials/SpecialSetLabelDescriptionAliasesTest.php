@@ -70,8 +70,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$maxLength,
 				self::$languageCodes,
 				$this->getIdParser(),
-				$this->getLabelDescriptionDuplicateDetector(),
-				$this->mockRepository
+				$this->getLabelDescriptionDuplicateDetector()
 			)
 		);
 	}
