@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8792e8a0",
+        "filename": "lib/includes/parsers/PhpDateTimeParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T12:49:26Z",
+      "side": 1,
+      "message": "\\p{L} also matches ASCII characters:\n\nphp \u003e echo preg_match( \u0027/\\p{L}/\u0027, \u0027a\u0027 );\n1\nphp \u003e echo preg_match( \u0027/\\p{L}/\u0027, \u0027д\u0027 );\n1\nphp \u003e echo preg_match( \u0027/\\p{L}/\u0027, \u00271\u0027 );\n0",
+      "revId": "6b5b77a5472e8fa826858f6842b4a43b69ad03e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
