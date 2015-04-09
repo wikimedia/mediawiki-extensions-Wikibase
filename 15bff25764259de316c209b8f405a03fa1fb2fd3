@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_87fd08b1",
+        "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T13:03:23Z",
+      "side": 1,
+      "message": "No, just popped into my mind",
+      "parentUuid": "6e7c4fa4_47485066",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8795098d",
         "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 16
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "But it *is* an override?....\nI don\u0027t like \"Randomizer\" in the name, since I\u0027d rather have the name of the original function there.",
       "parentUuid": "6e7c4fa4_8795098d",
+      "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4727f062",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T13:03:23Z",
+      "side": 1,
+      "message": "Mh ok... let\u0027s just keep this for now, this is not going to see wide usage in the code base anyway.",
+      "parentUuid": "6e7c4fa4_674d4c75",
       "revId": "15bff25764259de316c209b8f405a03fa1fb2fd3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
