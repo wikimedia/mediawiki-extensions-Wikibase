@@ -287,6 +287,8 @@ class WikibaseValueFormatterBuilders {
 	 * @return DispatchingValueFormatter
 	 */
 	public function buildDispatchingValueFormatter( OutputFormatValueFormatterFactory $factory, $format, FormatterOptions $options ) {
+		$this->applyLanguageDefaults( $options );
+
 		switch ( $format ) {
 			case SnakFormatter::FORMAT_PLAIN:
 				$formatters = $this->getPlainTextFormatters( $options );
