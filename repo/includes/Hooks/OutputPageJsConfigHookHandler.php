@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
 use Wikibase\OutputPageJsConfigBuilder;
-use Wikibase\Settings;
+use Wikibase\SettingsArray;
 
 /**
  * @since 0.5
@@ -15,7 +15,7 @@ use Wikibase\Settings;
 class OutputPageJsConfigHookHandler {
 
 	/**
-	 * @var Settings
+	 * @var SettingsArray
 	 */
 	protected $settings;
 
@@ -25,9 +25,11 @@ class OutputPageJsConfigHookHandler {
 	protected $outputPageConfigBuilder;
 
 	/**
-	 * @param Settings $settings
+	 * @todo: don't pass around SettingsArray, just take specific constructor params.
+	 *
+	 * @param SettingsArray $settings
 	 */
-	public function __construct( Settings $settings ) {
+	public function __construct( SettingsArray $settings ) {
 		$this->settings = $settings;
 		$this->outputPageConfigBuilder = new OutputPageJsConfigBuilder();
 	}
@@ -49,9 +51,9 @@ class OutputPageJsConfigHookHandler {
 	 * @return array
 	 */
 	private function buildConfigVars( OutputPage $out, $isExperimental ) {
-		$rightsUrl = $this->settings->get( 'dataRightsUrl' );
-		$rightsText = $this->settings->get( 'dataRightsText' );
-		$badgeItems = $this->settings->get( 'badgeItems' );
+		$rightsUrl = $this->settings->getSetting( 'dataRightsUrl' );
+		$rightsText = $this->settings->getSetting( 'dataRightsText' );
+		$badgeItems = $this->settings->getSetting( 'badgeItems' );
 
 		$configVars = $this->outputPageConfigBuilder->build(
 			$out,
