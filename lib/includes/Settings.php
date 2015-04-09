@@ -14,12 +14,10 @@ namespace Wikibase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class Settings extends SettingsArray {
+final class Settings extends SettingsArray {
 
 	/**
-	 * @see Settings::singleton
-	 *
-	 * @since 0.1
+	 * @deprecated
 	 *
 	 * @return Settings
 	 */
@@ -27,7 +25,7 @@ class Settings extends SettingsArray {
 		static $instance = null;
 
 		if ( $instance === null ) {
-			$instance = new static();
+			$instance = new self();
 			$instance->initFromGlobals();
 		}
 
@@ -38,10 +36,8 @@ class Settings extends SettingsArray {
 	 * Initializes this Settings object from the global configuration variables.
 	 * Default settings are loaded from the appropriate files.
 	 * The hook WikibaseDefaultSettings can be used to manipulate the defaults.
-	 *
-	 * @since 0.4
 	 */
-	public function initFromGlobals() {
+	private function initFromGlobals() {
 		$settings = array();
 
 		//NOTE: Repo overrides client. This is important especially for
@@ -64,14 +60,14 @@ class Settings extends SettingsArray {
 	/**
 	 * Shortcut to ::singleton()->getSetting
 	 *
-	 * @since 0.1
+	 * @deprecated
 	 *
 	 * @param string $settingName
 	 *
 	 * @return mixed
 	 */
 	public static function get( $settingName ) {
-		return static::singleton()->getSetting( $settingName );
+		return self::singleton()->getSetting( $settingName );
 	}
 
 }
