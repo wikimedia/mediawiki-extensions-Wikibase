@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4a6ff5c3",
+        "filename": "repo/tests/phpunit/includes/ChangeDispatcherTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-09T14:34:43Z",
+      "side": 1,
+      "message": "Unrelated... took me quite a bit to verify this is correct",
+      "revId": "1e06518f97c746387bfb61353c309b0466c6f06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
