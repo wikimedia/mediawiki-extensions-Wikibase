@@ -7,11 +7,12 @@ use Diff\DiffOp\Diff\MapDiff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Tests\DiffOp\DiffOpAddTest;
 use Wikibase\Change;
 use Wikibase\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\ChangeNotificationSender;
 use Wikibase\Store\ChangeDispatchCoordinator;
@@ -138,8 +139,8 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			// index 0 is ignored, or used as the base change.
 			$this->newChange( 0, new ItemId( 'Q99999' ), sprintf( '201403030100', 0 ) ),
-			$this->newChange( ++$changeId, new ItemId( 'Q11' ), sprintf( '2014030301%02d', $changeId ) ),
-			$this->newChange( ++$changeId, new ItemId( 'Q11' ), sprintf( '2014030301%02d', $changeId ) ),
+			$this->newChange( ++$changeId, new PropertyId( 'P11' ), sprintf( '2014030301%02d', $changeId ) ),
+			$this->newChange( ++$changeId, new PropertyId( 'P11' ), sprintf( '2014030301%02d', $changeId ) ),
 			$this->newChange( ++$changeId, new ItemId( 'Q22' ), sprintf( '2014030301%02d', $changeId ) ),
 			$this->newChange( ++$changeId, new ItemId( 'Q22' ), sprintf( '2014030301%02d', $changeId ) ),
 			$this->newChange( ++$changeId, new ItemId( 'Q33' ), sprintf( '2014030301%02d', $changeId ) , $addEn ),
@@ -151,7 +152,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 	public function setUp() {
 		$this->subscriptions['enwiki'] = array(
-			new ItemId( 'Q11' ),
+			new PropertyId( 'P11' ),
 			new ItemId( 'Q22' ),
 			// changes to Q33 are relevant because they affect enwiki
 		);
@@ -173,8 +174,10 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 * @return Change
 	 */
 	private function newChange( $changeId, EntityId $entityId, $time, Diff $siteLinkDiff = null ) {
-		//FIXME: test non-items too!
-		$change = $this->getMockBuilder( 'Wikibase\ItemChange' )
+		$changeClass = ( $entityId->getEntityType() === Item::ENTITY_TYPE )
+			? 'Wikibase\ItemChange' : 'Wikibase\EntityChange';
+
+		$change = $this->getMockBuilder( $changeClass )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -202,7 +205,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$change->expects( $this->any() )
 			->method( 'getObjectId' )
-			->will(  $this->returnValue( $entityId->getNumericId() ) );
+			->will(  $this->returnValue( $entityId->getSerialization() ) );
 
 		$change->expects( $this->any() )
 			->method( 'getEntityId' )

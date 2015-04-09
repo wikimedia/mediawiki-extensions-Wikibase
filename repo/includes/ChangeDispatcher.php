@@ -5,7 +5,7 @@ namespace Wikibase\Repo;
 use Wikibase\Change;
 use Wikibase\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
@@ -338,8 +338,8 @@ class ChangeDispatcher {
 	/**
 	 * Filters a list of changes, removing changes not relevant to the given client wiki.
 	 *
-	 * Currently, we only keep ItemChanges for items that have a sitelink to the
-	 * target client wiki.
+	 * Currently, we keep EntityChanges for entities the client wiki is subscribed to, or
+	 * that modify a sitelink to the client wiki.
 	 *
 	 * @param string   $siteID : The client wiki's global site identifier, as used by sitelinks.
 	 * @param Change[] $changes: The list of changes to filter.
@@ -351,40 +351,43 @@ class ChangeDispatcher {
 	 */
 	private function filterChanges( $siteID, $changes, $limit ) {
 		// collect all item IDs mentioned in the changes
-		$itemSet = array();
+		$entitySet = array();
 		foreach ( $changes as $change ) {
-			if ( $change instanceof ItemChange ) {
-				$id = $change->getEntityId();
-				$itemId = $id->getNumericId();
-				$itemSet[$itemId] = $id;
+			if ( !( $change instanceof EntityChange ) ) {
+				continue;
 			}
+
+			$id = $change->getEntityId();
+			$idString = $id->getSerialization();
+			$entitySet[$idString] = $id;
 		}
 
-		$this->trace( "Checking sitelinks to $siteID for " . count( $itemSet ) . " items." );
+		$this->trace( "Checking sitelinks to $siteID for " . count( $entitySet ) . " entities." );
 
-		$linkedItems = $this->subscriptionLookup->getSubscriptions( $siteID, $itemSet );
-		$linkedItems = $this->reIndexEntityIds( $linkedItems );
+		$subscribedEntities = $this->subscriptionLookup->getSubscriptions( $siteID, $entitySet );
+		$subscribedEntities = $this->reIndexEntityIds( $subscribedEntities );
 
-		$this->trace( "Retaining changes for " . count( $linkedItems ) . " relevant items." );
+		$this->trace( "Retaining changes for " . count( $subscribedEntities ) . " relevant entities." );
 
 		// find all changes that relate to an item that has a sitelink to $siteID.
 		$filteredChanges = array();
 		$numberOfChangesFound = 0;
 		$lastIdSeen = 0;
 		foreach ( $changes as $change ) {
+			if ( !( $change instanceof EntityChange ) ) {
+				continue;
+			}
+
 			$lastIdSeen = $change->getId();
+			$idString = $change->getEntityId()->getSerialization();
 
-			if ( $change instanceof ItemChange) {
-				$itemId = $change->getEntityId()->getNumericId();
+			// The change is relevant if it alters any sitelinks referring to $siteID,
+			// or the item currently links to $siteID.
+			if ( isset( $subscribedEntities[$idString] )
+				|| $this->isRelevantChange( $change, $siteID ) ) {
 
-				// The change is relevant if it alters any sitelinks referring to $siteID,
-				// or the item currently links to $siteID.
-				if ( isset( $linkedItems[$itemId] )
-					|| $this->isRelevantChange( $change, $siteID ) ) {
-
-					$filteredChanges[] = $change;
-					$numberOfChangesFound++;
-				}
+				$filteredChanges[] = $change;
+				$numberOfChangesFound++;
 			}
 
 			if ( $numberOfChangesFound >= $limit ) {
@@ -400,16 +403,14 @@ class ChangeDispatcher {
 	/**
 	 * @param EntityId[] $entityIds
 	 *
-	 * @return ItemId[] The ItemIds from EntityId[], keyed by numeric id.
+	 * @return EntityId[] $entityIds re-keyed by id string.
 	 */
 	private function reIndexEntityIds( array $entityIds ) {
 		$reindexed = array();
 
 		foreach ( $entityIds as $id ) {
-			if ( $id instanceof ItemId ) {
-				$key = $id->getNumericId();
-				$reindexed[$key] = $id;
-			}
+			$key = $id->getSerialization();
+			$reindexed[$key] = $id;
 		}
 
 		return $reindexed;
