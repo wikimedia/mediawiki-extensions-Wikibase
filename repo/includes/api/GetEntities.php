@@ -252,11 +252,16 @@ class GetEntities extends ApiWikibase {
 	private function getSerializationOptions( $params, $props ){
 		$options = new SerializationOptions();
 		if ( $params['languagefallback'] ) {
+			$fallbackMode = (
+				LanguageFallbackChainFactory::FALLBACK_VARIANTS
+				| LanguageFallbackChainFactory::FALLBACK_OTHERS
+				| LanguageFallbackChainFactory::FALLBACK_SELF );
+
 			$languages = array();
 			foreach ( $params['languages'] as $languageCode ) {
 				// $languageCode is already filtered as valid ones
 				$languages[$languageCode] = $this->languageFallbackChainFactory
-					->newFromContextAndLanguageCode( $this, $languageCode );
+					->newFromLanguageCode( $languageCode, $fallbackMode );
 			}
 		} else {
 			$languages = $params['languages'];

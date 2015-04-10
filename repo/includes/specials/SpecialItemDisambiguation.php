@@ -294,6 +294,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			'LIMIT' => $this->limit
 		);
 
+		//FIXME use getMatchingTerms
 		$entityIds = $this->termIndex->getMatchingIDs( $protoTerms, Item::ENTITY_TYPE, $options );
 		$entities = array();
 

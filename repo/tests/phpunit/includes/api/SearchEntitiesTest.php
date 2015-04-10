@@ -73,6 +73,33 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 		$this->assertApiResultHasExpected( $result['search'], $params, $expected );
 	}
 
+
+	public function testSearchFallback() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'BER',
+			'language' => 'de-ch',
+			'languagefallback' => true
+		);
+
+		list( $result,, ) = $this->doApiRequest( $params );
+		$this->assertCount( 1, $result['search'] );
+
+		$resultEntry = reset( $result['search'] );
+		$this->assertEquals( 'de', $resultEntry['language'] );
+	}
+
+	public function testSearchNoFallback() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'Berlin',
+			'language' => 'de-ch'
+		);
+
+		list( $result,, ) = $this->doApiRequest( $params );
+		$this->assertEmpty( $result['search'] );
+	}
+
 	public function testSearchContinue() {
 		$params = array(
 			'action' => 'wbsearchentities',
@@ -96,6 +123,7 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 			$this->assertInternalType( 'integer', $key );
 			$this->assertArrayHasKey( 'id', $searchresult );
 			$this->assertArrayHasKey( 'url', $searchresult );
+			$this->assertArrayHasKey( 'language', $searchresult );
 		}
 
 	}
