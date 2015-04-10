@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store\SQL;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\EntityIdPager;
 
@@ -29,6 +30,11 @@ class ItemsPerSiteBuilder {
 	private $entityLookup;
 
 	/**
+	 * @var EntityPrefetcher
+	 */
+	private $entityPrefetcher;
+
+	/**
 	 * @var MessageReporter|null
 	 */
 	private $reporter = null;
@@ -39,9 +45,15 @@ class ItemsPerSiteBuilder {
 	 */
 	private $batchSize = 100;
 
-	public function __construct( SiteLinkTable $siteLinkTable, EntityLookup $entityLookup ) {
+	/**
+	 * @param SiteLinkTable $siteLinkTable
+	 * @param EntityLookup $entityLookup
+	 * @param EntityPrefetcher $entityPrefetcher
+	 */
+	public function __construct( SiteLinkTable $siteLinkTable, EntityLookup $entityLookup, EntityPrefetcher $entityPrefetcher ) {
 		$this->siteLinkTable = $siteLinkTable;
 		$this->entityLookup = $entityLookup;
+		$this->entityPrefetcher = $entityPrefetcher;
 	}
 
 	/**
@@ -88,6 +100,8 @@ class ItemsPerSiteBuilder {
 	 * @return int
 	 */
 	private function rebuildSiteLinks( array $itemIds ) {
+		$this->entityPrefetcher->prefetch( $itemIds );
+
 		$c = 0;
 		foreach ( $itemIds as $itemId ) {
 			if ( !( $itemId instanceof ItemId ) ) {
