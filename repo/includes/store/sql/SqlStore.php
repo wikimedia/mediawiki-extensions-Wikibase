@@ -466,7 +466,7 @@ class SqlStore implements Store {
 	 * @return IdGenerator
 	 */
 	public function newIdGenerator() {
-		return new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ), $this->idBlacklist );
+		return new SqlIdGenerator( wfGetLB(), $this->idBlacklist );
 	}
 
 	/**
