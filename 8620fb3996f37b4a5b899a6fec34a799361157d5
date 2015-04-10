@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_06ad71e7",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-10T10:43:47Z",
+      "side": 1,
+      "message": "as shouldCOnvert is relatively expensive, it would probably be betetr to do the namespace check first. And/or move the namespace check into shouldConvert.",
+      "revId": "8620fb3996f37b4a5b899a6fec34a799361157d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c6c3f98b",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-10T10:43:47Z",
+      "side": 1,
+      "message": "Applying link rewrites to diff pages is somewhat scary, since diff shows the full page content. Depending on how that content is generated, we may end up rewriting links there, even though we should not.  This doesn\u0027t currently seem to be a problem, but may very well become a hard to spot issue in the future. I wonder how to safeguard against that...",
+      "revId": "8620fb3996f37b4a5b899a6fec34a799361157d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e6ccf5c2",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-10T10:43:47Z",
+      "side": 1,
+      "message": "now we need label prefetching for history pages, see T95672",
+      "revId": "8620fb3996f37b4a5b899a6fec34a799361157d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
