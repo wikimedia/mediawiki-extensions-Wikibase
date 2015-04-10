@@ -75,6 +75,12 @@
 	"datatypes-type-wikibase-item": "Элемент",
 	"datatypes-type-commonsMedia": "Медиафайл на Викискладе",
 	"version-wikibase": "Вики-база",
+	"wikibase-time-precision-Gannum": "$1 миллиард{{PLURAL:$1||ов|а}} лет",
+	"wikibase-time-precision-Mannum": "$1 миллион{{PLURAL:$1||ов|а}} лет н.э.",
+	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|год|лет|года}} н.э.",
+	"wikibase-time-precision-millennium": "в $1 тысячелети{{PLURAL:$1|е|й|я}}",
+	"wikibase-time-precision-century": "в $1 век{{PLURAL:$1||ов|а}}",
+	"wikibase-time-precision-10annum": "в $1 десятилети{{PLURAL:$1|е|й|я}}",
 	"wikibase-snakformatter-valuetype-mismatch": "Тип значения «$1» не соответствует типу свойства «$2».",
 	"wikibase-snakformatter-property-not-found": "Свойство $1 не найдено, невозможно определить тип данных для использования."
 }
