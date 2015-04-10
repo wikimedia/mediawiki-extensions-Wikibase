@@ -15,6 +15,7 @@ use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
 
@@ -115,7 +116,12 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 				return $entities[$key];
 			} ) );
 
-		return new JsonDumpGenerator( $out, $entityLookup, $serializer );
+		return new JsonDumpGenerator(
+			$out,
+			$entityLookup,
+			$serializer,
+			new NullEntityPrefetcher()
+		);
 	}
 
 	/**
@@ -193,7 +199,12 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$out = fopen( 'php://output', 'w' );
 		$serializer = new DispatchingEntitySerializer( $this->serializerFactory );
 
-		$jsonDumper = new JsonDumpGenerator( $out, $entityLookup, $serializer );
+		$jsonDumper = new JsonDumpGenerator(
+			$out,
+			$entityLookup,
+			$serializer,
+			new NullEntityPrefetcher()
+		);
 
 		$exceptionHandler = $this->getMock( 'Wikibase\Lib\Reporting\ExceptionHandler' );
 		$exceptionHandler->expects( $this->exactly( count( $ids ) ) )

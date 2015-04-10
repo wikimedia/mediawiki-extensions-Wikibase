@@ -100,6 +100,11 @@ class SqlStore implements Store {
 	private $termIndex = null;
 
 	/**
+	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
+	 */
+	private $entityPrefetcher = null;
+
+	/**
 	 * @var string
 	 */
 	private $cacheKeyPrefix;
@@ -584,9 +589,7 @@ class SqlStore implements Store {
 		/** @var WikiPageEntityStore $dispatcher */
 		$dispatcher = $this->getEntityStoreWatcher();
 
-		$metaDataFetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
-			new WikiPageEntityMetaDataLookup( $this->entityIdParser )
-		);
+		$metaDataFetcher = $this->getEntityPrefetcher();
 		$dispatcher->registerWatcher( $metaDataFetcher );
 
 		$rawLookup = new WikiPageEntityRevisionLookup(
@@ -695,6 +698,19 @@ class SqlStore implements Store {
 		}
 
 		return $this->changesTable;
+	}
+
+	/**
+	 * @return PrefetchingWikiPageEntityMetaDataAccessor
+	 */
+	public function getEntityPrefetcher() {
+		if ( $this->entityPrefetcher === null ) {
+			$this->entityPrefetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
+				new WikiPageEntityMetaDataLookup( $this->entityIdParser )
+			);
+		}
+
+		return $this->entityPrefetcher;
 	}
 
 }

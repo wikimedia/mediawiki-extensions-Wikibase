@@ -54,6 +54,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			array( 'getUsageLookup', 'Wikibase\Client\Usage\UsageLookup' ),
 			array( 'getSubscriptionManager', 'Wikibase\Client\Usage\SubscriptionManager' ),
 			array( 'getEntityIdLookup', 'Wikibase\Store\EntityIdLookup' ),
+			array( 'getEntityPrefetcher', 'Wikibase\Lib\Store\EntityPrefetcher' ),
 		);
 	}
 
