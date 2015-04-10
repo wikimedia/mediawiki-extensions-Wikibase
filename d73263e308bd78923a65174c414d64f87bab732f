@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e66875ba",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-10T10:33:58Z",
+      "side": 1,
+      "message": "This should not make a difference in production because buildDispatchingValueFormatter() is called in a single place (outside of tests) and that place already applies applyLanguageDefaults(). So I think this patch does nothing (outside of tests).",
+      "revId": "d73263e308bd78923a65174c414d64f87bab732f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_46f129fd",
+        "filename": "repo/tests/phpunit/includes/api/FormatSnakValueTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-10T10:33:58Z",
+      "side": 1,
+      "message": "I find it odd that we call this a \"fallback\". This relies on the fact that core\u0027s MessagesDe_ch.php contains the line $fallback \u003d \u0027de\u0027;, which might change in the future.\n\nAlso note that the tests in this file are unrelated to the patch, they run without the additional line.",
+      "revId": "d73263e308bd78923a65174c414d64f87bab732f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
