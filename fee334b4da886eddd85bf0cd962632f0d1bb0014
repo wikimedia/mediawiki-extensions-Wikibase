@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_868ae1be",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-10T13:48:52Z",
+      "side": 1,
+      "message": "I want to check here whether the \"subscriptions\" mode is set, because it tells me whether wb_changes_subscription is needed. I don\u0027t know or care here what other modes exist.",
+      "parentUuid": "6e7c4fa4_2690adf6",
+      "revId": "fee334b4da886eddd85bf0cd962632f0d1bb0014",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_a6835dad",
         "filename": "repo/tests/phpunit/includes/store/sql/ChangesSubscriptionTableBuilderTest.php",
         "patchSetId": 8
@@ -83,6 +101,24 @@
       "writtenOn": "2015-04-10T13:46:49Z",
       "side": 1,
       "message": "we could just check for $mode \u003d\u003d\u003d \u0027sitelinks\u0027",
+      "revId": "fee334b4da886eddd85bf0cd962632f0d1bb0014",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_26b74d86",
+        "filename": "repo/tests/phpunit/includes/store/sql/ChangesSubscriptionTableBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-10T13:48:52Z",
+      "side": 1,
+      "message": "because there may be more modes. It\u0027s not a closed set.",
+      "parentUuid": "6e7c4fa4_a6835dad",
       "revId": "fee334b4da886eddd85bf0cd962632f0d1bb0014",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
