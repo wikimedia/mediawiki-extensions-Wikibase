@@ -26,6 +26,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 	private static $idMap;
 	private static $hasSetup;
+	private static $oldBadgeItems;
+
+	protected function tearDown() {
+		parent::tearDown();
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$oldBadgeItems );
+	}
 
 	public function setup() {
 		parent::setup();
@@ -61,6 +67,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 
+			self::$oldBadgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
 			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
 				self::$idMap['%Q42%'] => '',
 				self::$idMap['%Q149%'] => '',

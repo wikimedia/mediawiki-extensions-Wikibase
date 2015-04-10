@@ -25,17 +25,23 @@ use Wikibase\Summary;
  */
 class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
-	private function applySettings() {
+	private static $oldBadgeItems;
+
+	protected function setUp() {
 		// Allow some badges for testing
+		self::$oldBadgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
 			'Q42' => '',
 			'Q149' => '',
 		) );
 	}
 
-	public function invalidConstructorProvider() {
-		$this->applySettings();
+	protected function tearDown() {
+		parent::tearDown();
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$oldBadgeItems );
+	}
 
+	public function invalidConstructorProvider() {
 		$argLists = array();
 
 		$argLists[] = array( 'enwiki', 1234 );
@@ -58,8 +64,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpSiteLinkProvider() {
-		$this->applySettings();
-
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$enSiteLink = new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
@@ -150,8 +154,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidChangeOpSiteLinkProvider() {
-		$this->applySettings();
-
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
 
@@ -189,8 +191,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function summaryTestProvider() {
-		$this->applySettings();
-
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$item->getSiteLinkList()->addNewSiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) );

@@ -36,6 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SetSiteLinkTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
+	private static $oldBadgeItems;
 
 	/* @var ItemId */
 	private static $gaItemId;
@@ -43,6 +44,11 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	private static $faItemId;
 	/* @var ItemId */
 	private static $otherItemId;
+
+	protected function tearDown() {
+		parent::tearDown();
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$oldBadgeItems );
+	}
 
 	public function provideData() {
 		return array(
@@ -157,6 +163,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$otherItemId = $badge->getId();
 
+			self::$oldBadgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
 			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
 				self::$gaItemId->getSerialization() => '',
 				self::$faItemId->getSerialization() => '',
