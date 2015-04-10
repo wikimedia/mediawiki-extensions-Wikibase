@@ -66,7 +66,9 @@ class LinkTitles extends ApiBase {
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
@@ -75,10 +77,10 @@ class LinkTitles extends ApiBase {
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
-		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 	}
 
 	/**

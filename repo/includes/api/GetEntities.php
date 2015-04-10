@@ -83,7 +83,9 @@ class GetEntities extends ApiBase {
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
@@ -95,10 +97,10 @@ class GetEntities extends ApiBase {
 
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
-		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->entityPrefetcher = $wikibaseRepo->getStore()->getEntityPrefetcher();
 	}
 
