@@ -54,6 +54,8 @@ class PruneChanges extends Maintenance {
 
 		$this->addOption( 'ignore-dispatch', 'Ignore whether changes have been dispatched or not.',
 						false, false, 'D' );
+
+		$this->setBatchSize( 1000 );
 	}
 
 	public function execute() {
@@ -93,12 +95,7 @@ class PruneChanges extends Maintenance {
 
 		$this->pruneLimit = intval( $this->getOption( 'limit', 25000 ) );
 
-		$until = $this->getCutoffTimestamp();
-		$this->output( date( 'H:i:s' ) . " pruning entries older than "
-			. wfTimestamp( TS_ISO_8601, $until ) . "\n" );
-
-		$deleted = $this->pruneChanges( $until );
-		$this->output( date( 'H:i:s' ) . " $deleted rows pruned.\n" );
+		$this->doPrune();
 
 		$pidLock->removeLock(); // delete lockfile on normal exit
 	}
@@ -157,6 +154,24 @@ class PruneChanges extends Maintenance {
 		return $changeTime ? intval( $changeTime ) : $until;
 	}
 
+	private function doPrune() {
+		$until = $this->getCutoffTimestamp();
+
+		$this->output( date( 'H:i:s' ) . " pruning entries older than "
+			. wfTimestamp( TS_ISO_8601, $until ) . "\n" );
+
+		while( true ) {
+			wfWaitForSlaves();
+
+			$affected = $this->pruneChanges( $until );
+			$this->output( date( 'H:i:s' ) . " $affected rows pruned.\n" );
+
+			if ( $affected === 0 ) {
+				break;
+			}
+		}
+	}
+
 	/**
 	 * Prunes all changes older than $until from the changes table.
 	 *
@@ -170,7 +185,10 @@ class PruneChanges extends Maintenance {
 		$dbw->delete(
 			'wb_changes',
 			array( 'change_time < ' . $dbw->addQuotes( wfTimestamp( TS_MW, $until ) ) ),
-			__METHOD__
+			__METHOD__,
+			array(
+				'LIMIT' => intval( $this->mBatchSize )
+			)
 		);
 
 		return $dbw->affectedRows();
