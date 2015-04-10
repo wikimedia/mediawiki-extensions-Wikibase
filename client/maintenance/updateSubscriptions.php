@@ -46,10 +46,12 @@ class UpdateSubscriptions extends Maintenance {
 			$this->error( "You need to have WikibaseClient enabled in order to use this maintenance script!", 1 );
 		}
 
-		$repoDB = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoDatabase' );
-		$clientId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' );
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+		$repoDB = $settings->getSetting( 'repoDatabase' );
+		$clientId = $settings->getSetting( 'siteGlobalID' );
 
-		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
+		$idParser = $wikibaseClient->getEntityIdParser();
 		$startItemOption = $this->getOption( 'start-item' );
 
 		$startItem = $startItemOption === null ? null : $idParser->parse( $startItemOption );

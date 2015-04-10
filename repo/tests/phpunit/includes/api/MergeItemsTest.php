@@ -122,28 +122,28 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param MergeItems $module
+	 * @param EntityRedirect|null $expectedRedirect
 	 */
 	private function overrideServices( MergeItems $module, EntityRedirect $expectedRedirect = null ) {
 		$idParser = new BasicEntityIdParser();
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$errorReporter = new ApiErrorReporter(
 			$module,
-			WikibaseRepo::getDefaultInstance()->getExceptionLocalizer(),
+			$wikibaseRepo->getExceptionLocalizer(),
 			Language::factory( 'en' )
 		);
 
 		$mockContext = $this->getMock( 'RequestContext' );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mockContext );
 
 		$resultBuilder = $apiHelperFactory->getResultBuilder( $module );
-		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
 			$this->getConstraintProvider(),
 			new GuidGenerator(),
-			WikibaseRepo::getDefaultInstance()->getStatementGuidValidator(),
-			WikibaseRepo::getDefaultInstance()->getStatementGuidParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$wikibaseRepo->getStatementGuidParser(),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
 			new MockSiteStore( TestSites::getSites() )
@@ -158,7 +158,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
-				$summaryFormatter,
+				$wikibaseRepo->getSummaryFormatter(),
 				$module->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect )
 			)

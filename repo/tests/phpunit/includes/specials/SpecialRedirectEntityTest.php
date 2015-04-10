@@ -84,8 +84,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 * @param User $user
 	 */
 	private function overrideServices( SpecialRedirectEntity $page, User $user ) {
-		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$exceptionLocalizer = $this->getMock( 'Wikibase\Repo\Localizer\ExceptionLocalizer' );
 		$exceptionLocalizer->expects( $this->any() )
@@ -111,14 +110,14 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			} ) );
 
 		$page->initServices(
-			$idParser,
+			$wikibaseRepo->getEntityIdParser(),
 			$exceptionLocalizer,
 			new TokenCheckInteractor( $user ),
 			new RedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
-				$summaryFormatter,
+				$wikibaseRepo->getSummaryFormatter(),
 				$user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository

@@ -38,7 +38,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 		parent::setup();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$store = $wikibaseRepo->getEntityStore();
 
 			$prop = Property::newFromType( 'string' );
 			$store->saveEntity( $prop, 'EditEntityTestP56', $GLOBALS['wgUser'], EDIT_NEW );
@@ -68,7 +69,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 
-			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
+			$wikibaseRepo->getSettings()->setSetting( 'badgeItems', array(
 				self::$idMap['%Q42%'] => '',
 				self::$idMap['%Q149%'] => '',
 				'Q99999' => '', // Just in case we have a wrong config

@@ -48,19 +48,20 @@ class RebuildItemsPerSite extends Maintenance {
 		);
 
 		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// Use an uncached EntityLookup here to avoid memory leaks
-		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
-		$entityPrefetcher = WikibaseRepo::getDefaultInstance()->getStore()->getEntityPrefetcher();
+		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
+		$store = $wikibaseRepo->getStore();
 		$builder = new ItemsPerSiteBuilder(
 			$siteLinkTable,
 			$entityLookup,
-			$entityPrefetcher
+			$store->getEntityPrefetcher()
 		);
 
 		$builder->setReporter( $reporter );
 		$builder->setBatchSize( $batchSize );
 
-		$entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
+		$entityPerPage = $store->newEntityPerPage();
 		$stream = new EntityPerPageIdPager( $entityPerPage, 'item' );
 
 		// Now <s>kill</s> fix the table

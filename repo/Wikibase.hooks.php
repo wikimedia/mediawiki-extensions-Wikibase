@@ -282,7 +282,8 @@ final class RepoHooks {
 		Content $content = null,
 		LogEntry $logEntry
 	) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
 		if ( !$content || !$entityContentFactory->isEntityContentModel( $content->getModel() ) ) {
@@ -293,11 +294,9 @@ final class RepoHooks {
 
 		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
 		// May be redundant in some cases. Take care not to cause infinite regress.
-		WikibaseRepo::getDefaultInstance()
-			->getEntityStoreWatcher()
-			->entityDeleted( $content->getEntityId() );
+		$wikibaseRepo->getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
 
-		$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
+		$notifier = $wikibaseRepo->getChangeNotifier();
 		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
 	}
 
@@ -313,7 +312,8 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onArticleUndelete( Title $title, $created, $comment ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
 
 		// Bail out if we are not looking at an entity
 		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
@@ -329,12 +329,12 @@ final class RepoHooks {
 		}
 
 		//XXX: EntityContent::save() also does this. Why are we doing this twice?
-		WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage()->addEntityPage(
+		$wikibaseRepo->getStore()->newEntityPerPage()->addEntityPage(
 			$content->getEntityId(),
 			$title->getArticleID()
 		);
 
-		$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
+		$notifier = $wikibaseRepo->getChangeNotifier();
 		$notifier->notifyOnPageUndeleted( $revision );
 
 		return true;
@@ -556,9 +556,10 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$outputPageEntityIdReader = new OutputPageEntityIdReader(
-			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+			$wikibaseRepo->getEntityContentFactory(),
+			$wikibaseRepo->getEntityIdParser()
 		);
 
 		$entityId = $outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
@@ -942,14 +943,15 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentHandlerForModelID( $modelId, &$handler ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// FIXME: a mechanism for registering additional entity types needs to be put in place.
 		switch ( $modelId ) {
 			case CONTENT_MODEL_WIKIBASE_ITEM:
-				$handler = WikibaseRepo::getDefaultInstance()->newItemHandler();
+				$handler = $wikibaseRepo->newItemHandler();
 				return false;
 
 			case CONTENT_MODEL_WIKIBASE_PROPERTY:
-				$handler = WikibaseRepo::getDefaultInstance()->newPropertyHandler();
+				$handler = $wikibaseRepo->newPropertyHandler();
 				return false;
 
 			default:
@@ -1020,10 +1022,9 @@ final class RepoHooks {
 	 */
 	public static function onImportHandleRevisionXMLTag( $importer, $pageInfo, $revisionInfo ) {
 		if ( isset( $revisionInfo['model'] ) ) {
-			$contentModels = WikibaseRepo::getDefaultInstance()->getContentModelMappings();
-			$allowImport = WikibaseRepo::getDefaultInstance()
-				->getSettings()
-				->getSetting( 'allowEntityImport' );
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$contentModels = $wikibaseRepo->getContentModelMappings();
+			$allowImport = $wikibaseRepo->getSettings()->getSetting( 'allowEntityImport' );
 
 			if ( !$allowImport && in_array( $revisionInfo['model'], $contentModels ) ) {
 				// Skip entities.

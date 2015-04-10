@@ -577,7 +577,7 @@ final class ClientHooks {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
-		$namespaceChecker = WikibaseClient::getDefaultInstance()->getNamespaceChecker();
+		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 
 		if ( !$namespaceChecker->isWikibaseEnabled( $context->getTitle()->getNamespace() ) ) {
 			// shorten out

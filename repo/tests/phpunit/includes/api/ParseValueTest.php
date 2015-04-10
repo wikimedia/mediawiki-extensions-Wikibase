@@ -41,8 +41,9 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 
 		$module = new ParseValue( $main, 'wbparsevalue' );
 
-		$exceptionLocalizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
-		$validatorErrorLocalizer = WikibaseRepo::getDefaultInstance()->getValidatorErrorLocalizer();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$exceptionLocalizer = $wikibaseRepo->getExceptionLocalizer();
+		$validatorErrorLocalizer = $wikibaseRepo->getValidatorErrorLocalizer();
 
 		$errorReporter = new ApiErrorReporter(
 			$module,

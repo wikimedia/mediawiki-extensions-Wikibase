@@ -178,12 +178,12 @@ class GetEntities extends ApiBase {
 	 * @return ItemByTitleHelper
 	 */
 	private function getItemByTitleHelper() {
-		$siteLinkStore = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkStore();
-		$siteStore = WikibaseRepo::getDefaultInstance()->getSiteStore();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$siteLinkStore = $wikibaseRepo->getStore()->newSiteLinkStore();
 		return new ItemByTitleHelper(
 			$this->resultBuilder,
 			$siteLinkStore,
-			$siteStore,
+			$wikibaseRepo->getSiteStore(),
 			$this->stringNormalizer
 		);
 	}

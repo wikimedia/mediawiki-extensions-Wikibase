@@ -112,27 +112,24 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 		$module = new CreateRedirect( $main, 'wbcreateredirect' );
 
-		$idParser = new BasicEntityIdParser();
-
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$errorReporter = new ApiErrorReporter(
 			$module,
-			WikibaseRepo::getDefaultInstance()->getExceptionLocalizer(),
+			$wikibaseRepo->getExceptionLocalizer(),
 			Language::factory( 'en' )
 		);
-
-		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
 		$module->setServices(
-			$idParser,
+			new BasicEntityIdParser(),
 			$errorReporter,
 			new RedirectCreationInteractor(
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
-				$summaryFormatter,
+				$wikibaseRepo->getSummaryFormatter(),
 				$user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository

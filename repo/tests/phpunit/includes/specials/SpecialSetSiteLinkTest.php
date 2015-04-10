@@ -80,7 +80,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	private static $redirectId = null;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private static $oldBadgeItemsSetting;
 
@@ -102,12 +102,15 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$this->addBadgeMatcher();
 		}
 
-		self::$oldBadgeItemsSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array( self::$badgeId => '' ) );
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		self::$oldBadgeItemsSetting = $settings->getSetting( 'badgeItems' );
+		$settings->setSetting( 'badgeItems', array( self::$badgeId => '' ) );
 	}
 
 	protected function tearDown() {
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
+
 		parent::tearDown();
 	}
 
