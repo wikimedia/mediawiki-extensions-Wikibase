@@ -20,14 +20,14 @@ use Wikibase\SqlIdGenerator;
 class SqlIdGeneratorTest extends \MediaWikiTestCase {
 
 	public function testGetNewId() {
-		$generator = new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ), array() );
+		$generator = new SqlIdGenerator( wfGetLB(), array() );
 
 		$id = $generator->getNewId( 'wikibase-kittens' );
 		$this->assertSame( 1, $id );
 	}
 
 	public function testIdBlacklisting() {
-		$generator = new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ), array( 1, 2 ) );
+		$generator = new SqlIdGenerator( wfGetLB(), array( 1, 2 ) );
 
 		$id = $generator->getNewId( 'wikibase-blacklist' );
 		$this->assertSame( 3, $id );
