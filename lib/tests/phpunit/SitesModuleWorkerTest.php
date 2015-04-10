@@ -30,7 +30,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return SitesModuleWorker
 	 */
-	private function newSitesModuleWorker( $sites, $groups, $specialGroups ) {
+	private function newSitesModuleWorker( array $sites, array $groups, array $specialGroups ) {
 		$siteStore = $this->getMock( '\SiteStore' );
 		$siteStore->expects( $this->any() )
 			->method( 'getSites' )
@@ -49,7 +49,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @dataProvider getScriptProvider
 	 */
-	public function testGetScript( $sites, $groups, $specialGroups, $expected ) {
+	public function testGetScript( array $sites, array $groups, array $specialGroups, $expected ) {
 		$worker = $this->newSitesModuleWorker( $sites, $groups, $specialGroups );
 
 		$result = $worker->getScript();
@@ -94,8 +94,10 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getModifiedHashProvider
 	 */
-	public function testGetModifiedHash( $workerLists ) {
+	public function testGetModifiedHash( array $workerLists ) {
 		$results = array();
+
+		/** @var SitesModuleWorker[] $workers */
 		foreach ( $workerLists as $name => $workers ) {
 			foreach ( $workers as $worker ) {
 				$value = $worker->getModifiedHash();

@@ -61,7 +61,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		$this->initSettings(
 			$settings->getSetting( 'normalizeItemByTitlePageNames' ),
-			$settings->getSetting( 'siteLinkGroups' )
+			$settings->getSetting( 'siteLinkGroups' ) ?: array()
 		);
 
 		$this->initServices(

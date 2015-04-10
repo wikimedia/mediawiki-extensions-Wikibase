@@ -1022,8 +1022,8 @@ class WikibaseRepo {
 			$this->getDataTypeFactory(),
 			$templateFactory,
 			new LanguageNameLookup(),
-			$this->settings->getSetting( 'siteLinkGroups' ),
-			$this->settings->getSetting( 'specialSiteLinkGroups' ),
+			$this->settings->getSetting( 'siteLinkGroups' ) ?: array(),
+			$this->settings->getSetting( 'specialSiteLinkGroups' ) ?: array(),
 			$this->settings->getSetting( 'badgeItems' ) ?: array()
 		);
 

@@ -45,14 +45,14 @@ class SitesModuleWorker {
 	 * @return string[]
 	 */
 	private function getSiteLinkGroups() {
-		return $this->settings->getSetting( 'siteLinkGroups' );
+		return $this->settings->getSetting( 'siteLinkGroups' ) ?: array();
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
 	private function getSpecialSiteLinkGroups() {
-		return $this->settings->getSetting( 'specialSiteLinkGroups' );
+		return $this->settings->getSetting( 'specialSiteLinkGroups' ) ?: array();
 	}
 
 	/**
