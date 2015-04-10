@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -137,5 +138,15 @@ interface Store {
 	 * @return SiteLinkConflictLookup
 	 */
 	public function getSiteLinkConflictLookup();
+
+	/**
+	 * Returns an EntityPrefetcher which can be used to prefetch a list of entity
+	 * ids in case we need to for example load a batch of entity ids.
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityPrefetcher
+	 */
+	public function getEntityPrefetcher();
 
 }

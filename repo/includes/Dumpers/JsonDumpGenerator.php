@@ -8,6 +8,7 @@ use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
@@ -47,11 +48,12 @@ class JsonDumpGenerator extends DumpGenerator {
 	 * @param resource $out
 	 * @param EntityLookup $lookup Must not resolve redirects
 	 * @param Serializer $entitySerializer
+	 * @param EntityPrefetcher $entityPrefetcher
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $out, EntityLookup $lookup, Serializer $entitySerializer ) {
-		parent::__construct( $out );
+	public function __construct( $out, EntityLookup $lookup, Serializer $entitySerializer, EntityPrefetcher $entityPrefetcher ) {
+		parent::__construct( $out, $entityPrefetcher );
 		if ( $lookup instanceof RedirectResolvingEntityLookup ) {
 			throw new InvalidArgumentException( '$lookup must not resolve redirects!' );
 		}

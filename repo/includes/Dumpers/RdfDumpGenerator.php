@@ -10,6 +10,7 @@ use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
@@ -53,11 +54,12 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param resource $out
 	 * @param EntityRevisionLookup $lookup Must not resolve redirects
 	 * @param RdfSerializer $entitySerializer
+	 * @param EntityPrefetcher $entityPrefetcher
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $out, EntityRevisionLookup $lookup, RdfSerializer $entitySerializer ) {
-		parent::__construct( $out );
+	public function __construct( $out, EntityRevisionLookup $lookup, RdfSerializer $entitySerializer, EntityPrefetcher $entityPrefetcher ) {
+		parent::__construct( $out, $entityPrefetcher );
 		if ( $lookup instanceof RedirectResolvingEntityLookup ) {
 			throw new InvalidArgumentException( '$lookup must not resolve redirects!' );
 		}
@@ -136,7 +138,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			SiteList $sites,
 			EntityLookup $entityLookup,
 			EntityRevisionLookup $entityRevisionLookup,
-			PropertyDataTypeLookup $propertyLookup
+			PropertyDataTypeLookup $propertyLookup,
+			EntityPrefetcher $entityPrefetcher
 	) {
 		$rdfFormat = RdfSerializer::getRdfWriter( $format );
 		if( !$rdfFormat ) {
@@ -153,7 +156,7 @@ class RdfDumpGenerator extends DumpGenerator {
 				RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES,
 				new HashBagOStuff()
 		);
-		return new RdfDumpGenerator( $output, $entityRevisionLookup, $entitySerializer );
+		return new RdfDumpGenerator( $output, $entityRevisionLookup, $entitySerializer, $entityPrefetcher );
 	}
 
 }
