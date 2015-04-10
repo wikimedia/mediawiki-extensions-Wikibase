@@ -50,9 +50,11 @@ class RebuildItemsPerSite extends Maintenance {
 		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
 		// Use an uncached EntityLookup here to avoid memory leaks
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
+		$entityPrefetcher = WikibaseRepo::getDefaultInstance()->getStore()->getEntityPrefetcher();
 		$builder = new ItemsPerSiteBuilder(
 			$siteLinkTable,
-			$entityLookup
+			$entityLookup,
+			$entityPrefetcher
 		);
 
 		$builder->setReporter( $reporter );
