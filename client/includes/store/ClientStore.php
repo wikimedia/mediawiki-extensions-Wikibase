@@ -113,4 +113,14 @@ interface ClientStore {
 	 * @since 0.2
 	 */
 	public function rebuild();
+
+	/**
+	 * Returns an EntityPrefetcher which can be used to prefetch a list of entity
+	 * ids in case we need to for example load a batch of entity ids.
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityPrefetcher
+	 */
+	public function getEntityPrefetcher();
 }

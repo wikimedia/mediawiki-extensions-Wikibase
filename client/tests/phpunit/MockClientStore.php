@@ -11,6 +11,7 @@ use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\ClientStore;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\PropertyLabelResolver;
@@ -175,6 +176,15 @@ class MockClientStore implements ClientStore {
 		}
 
 		return self::$propertyInfoStore;
+	}
+
+	/**
+	 * @see ClientStore::getEntityPrefetcher
+	 *
+	 * @return EntityPrefetcher
+	 */
+	public function getEntityPrefetcher() {
+		return new NullEntityPrefetcher();
 	}
 
 }

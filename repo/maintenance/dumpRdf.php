@@ -32,7 +32,8 @@ class DumpRdf extends DumpScript {
 			$entityDataTitle->getCanonicalURL() . '/',
 			$this->wikibaseRepo->getSiteStore()->getSites(),
 			$this->entityLookup, $this->revisionLookup,
-			$this->wikibaseRepo->getPropertyDataTypeLookup() );
+			$this->wikibaseRepo->getPropertyDataTypeLookup(),
+			$this->wikibaseRepo->getStore()->getEntityPrefetcher() );
 	}
 }
 

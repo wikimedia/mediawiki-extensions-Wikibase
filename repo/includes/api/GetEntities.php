@@ -44,6 +44,11 @@ class GetEntities extends ApiWikibase {
 	private $siteLinkTargetProvider;
 
 	/**
+	 * @var EntityPrefetcher
+	 */
+	private $entityPrefetcher;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -68,6 +73,7 @@ class GetEntities extends ApiWikibase {
 		);
 
 		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->entityPrefetcher = $wikibaseRepo->getStore()->getEntityPrefetcher();
 	}
 
 	/**
@@ -192,6 +198,8 @@ class GetEntities extends ApiWikibase {
 	 */
 	private function getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects = false ) {
 		$revisionArray = array();
+
+		$this->entityPrefetcher->prefetch( $entityIds );
 
 		foreach ( $entityIds as $entityId ) {
 			$key = $entityId->getSerialization();
