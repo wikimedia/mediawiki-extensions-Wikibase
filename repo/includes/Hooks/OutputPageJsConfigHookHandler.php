@@ -53,7 +53,7 @@ class OutputPageJsConfigHookHandler {
 	private function buildConfigVars( OutputPage $out, $isExperimental ) {
 		$rightsUrl = $this->settings->getSetting( 'dataRightsUrl' );
 		$rightsText = $this->settings->getSetting( 'dataRightsText' );
-		$badgeItems = $this->settings->getSetting( 'badgeItems' );
+		$badgeItems = $this->settings->getSetting( 'badgeItems' ) ?: array();
 
 		$configVars = $this->outputPageConfigBuilder->build(
 			$out,

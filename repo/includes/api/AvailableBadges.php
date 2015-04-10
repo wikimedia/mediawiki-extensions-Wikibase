@@ -23,13 +23,12 @@ class AvailableBadges extends ApiBase {
 	 */
 	public function execute() {
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$badgeItems = array_keys( $settings->getSetting( 'badgeItems' ) );
-		$this->getResult()->setIndexedTagName( $badgeItems, 'badge' );
-		$this->getResult()->addValue(
-			null,
-			'badges',
-			$badgeItems
-		);
+		$badgeItems = $settings->getSetting( 'badgeItems' ) ?: array();
+		$idStrings = array_keys( $badgeItems );
+
+		$result = $this->getResult();
+		$result->setIndexedTagName( $idStrings, 'badge' );
+		$result->addValue( null, 'badges', $idStrings );
 	}
 
 	/**

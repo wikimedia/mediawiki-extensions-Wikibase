@@ -21,23 +21,27 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class AvailabeBadgesTest extends ApiTestCase {
 
-	static $badgeItems = array(
+	private static $badgeItems = array(
 		'Q123' => '',
 		'Q999' => ''
 	);
 
-	static $oldBadgeItems;
+	private static $oldBadgeItems;
 
 	protected function setUp() {
 		parent::setUp();
+
 		// Allow some badges for testing
-		self::$oldBadgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$badgeItems );
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		self::$oldBadgeItems = $settings->getSetting( 'badgeItems' );
+		$settings->setSetting( 'badgeItems', self::$badgeItems );
 	}
 
 	protected function tearDown() {
 		parent::tearDown();
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', self::$oldBadgeItems );
+
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'badgeItems', self::$oldBadgeItems );
 	}
 
 	public function testExecute() {

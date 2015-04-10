@@ -27,7 +27,8 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	private function applySettings() {
 		// Allow some badges for testing
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'badgeItems', array(
 			'Q42' => '',
 			'Q149' => '',
 		) );
