@@ -130,7 +130,7 @@ class EntityPerPageBuilder {
 		$this->report( 'Start rebuild...' );
 
 		while ( $numPages > 0 ) {
-			$this->waitForSlaves( $dbw );
+			wfWaitForSlaves();
 
 			$pages = $dbw->select(
 				array( 'page', 'redirect', 'wb_entity_per_page' ),
@@ -246,29 +246,6 @@ class EntityPerPageBuilder {
 			$this->entityPerPageTable->addRedirectPage( $entityId, $pageId, $targetId );
 		} else {
 			$this->entityPerPageTable->addEntityPage( $entityId, $pageId );
-		}
-	}
-
-	/**
-	 * Wait for slaves (quietly)
-	 *
-	 * @todo: this should be in the Database class.
-	 * @todo: thresholds should be configurable
-	 *
-	 * @author Tim Starling (stolen from recompressTracked.php)
-	 */
-	protected function waitForSlaves() {
-		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->table
-
-		while ( true ) {
-			list( , $maxLag ) = $lb->getMaxLag();
-			if ( $maxLag < 2 ) {
-				break;
-			}
-
-			$this->report( "Slaves are lagged by $maxLag seconds, sleeping..." );
-			sleep( 5 );
-			$this->report( "Resuming..." );
 		}
 	}
 
