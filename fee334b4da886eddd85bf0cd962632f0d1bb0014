@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c6f9b94c",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-10T13:44:08Z",
+      "side": 1,
+      "message": "ugh :(\n\nhow about \u0027both\u0027 or \u0027all\u0027?",
+      "revId": "fee334b4da886eddd85bf0cd962632f0d1bb0014",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
