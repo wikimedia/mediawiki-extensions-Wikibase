@@ -96,7 +96,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->siteLinkLookup = $wikibaseRepo->getStore()->newSiteLinkCache();
-		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+		$this->badgeItems = $settings->getSetting( 'badgeItems' ) ?: array();
 	}
 
 	/**

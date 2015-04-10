@@ -76,7 +76,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
 
-		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+		$this->badgeItems = $settings->getSetting( 'badgeItems' ) ?: array();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 
 		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();

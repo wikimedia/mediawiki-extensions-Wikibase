@@ -72,7 +72,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @return ItemId[]
 	 */
 	private function validateBadges( array $badges ) {
-		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$badgeItems = $settings->getSetting( 'badgeItems' ) ?: array();
 		$uniqueBadges = array();
 
 		foreach ( $badges as $id ) {

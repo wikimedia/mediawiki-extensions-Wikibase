@@ -157,7 +157,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$otherItemId = $badge->getId();
 
-			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
+			$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+			$settings->setSetting( 'badgeItems', array(
 				self::$gaItemId->getSerialization() => '',
 				self::$faItemId->getSerialization() => '',
 				'Q99999' => '', // Just in case we have a wrong config

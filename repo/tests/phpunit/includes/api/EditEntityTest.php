@@ -61,7 +61,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 
-			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
+			$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+			$settings->setSetting( 'badgeItems', array(
 				self::$idMap['%Q42%'] => '',
 				self::$idMap['%Q149%'] => '',
 				'Q99999' => '', // Just in case we have a wrong config
