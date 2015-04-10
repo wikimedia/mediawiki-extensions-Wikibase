@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Term;
@@ -21,7 +21,7 @@ use Wikibase\TermSqlIndex;
  * This test needs to be in repo, although the class is in lib as we can't alter
  * the data without repo functionality.
  *
- * @covers Wikibase\Lib\Store\WikiPageEntityMetaDataLookup
+ * @covers Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -103,26 +103,6 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			->loadRevisionInformationByRevisionId(
 				new ItemId( 'Q823487354' ),
 				823487354
-			);
-
-		$this->assertSame( false, $result );
-	}
-
-	public function testLoadRevisionInformationByEntityId_found() {
-		$result = $this->getWikiPageEntityMetaDataLookup()
-			->loadRevisionInformationByEntityId(
-				$this->data[0]->getEntity()->getId(),
-				'master'
-			);
-
-		$this->assertEquals( $this->data[0]->getRevisionId(), $result->rev_id );
-	}
-
-	public function testLoadRevisionInformationByEntityId_notFound() {
-		$result = $this->getWikiPageEntityMetaDataLookup()
-			->loadRevisionInformationByEntityId(
-				new ItemId( 'Q823487354' ),
-				'master'
 			);
 
 		$this->assertSame( false, $result );

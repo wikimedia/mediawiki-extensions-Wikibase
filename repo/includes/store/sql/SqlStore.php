@@ -24,8 +24,9 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
-use Wikibase\Lib\Store\WikiPageEntityMetaDataLookup;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
@@ -585,16 +586,21 @@ class SqlStore implements Store {
 		// NOTE: Keep cache key in sync with DirectSqlStore::newEntityRevisionLookup in WikibaseClient
 		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
-		$rawLookup = new WikiPageEntityRevisionLookup(
-			$this->contentCodec,
-			new WikiPageEntityMetaDataLookup( $this->entityIdParser ),
-			false
-		);
-
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.
 		/** @var WikiPageEntityStore $dispatcher */
 		$dispatcher = $this->getEntityStoreWatcher();
+
+		$metaDataFetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
+			new WikiPageEntityMetaDataLookup( $this->entityIdParser )
+		);
+		$dispatcher->registerWatcher( $metaDataFetcher );
+
+		$rawLookup = new WikiPageEntityRevisionLookup(
+			$this->contentCodec,
+			$metaDataFetcher,
+			false
+		);
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
