@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_13b055d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-10T08:44:08Z",
+      "side": 1,
+      "message": "in none of these cases, do i see the setting be null. badgeItems is an empty array by default.",
+      "revId": "d82113d819808684bcd18fa39e11b3dada6f29da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
