@@ -77,12 +77,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$settings = $wikibaseRepo->getSettings();
 
 		$this->badgeItems = $settings->getSetting( 'badgeItems' ) ?: array();
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
+		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' ) ?: array();
 
 		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$this->siteStore,
-			$settings->getSetting( 'specialSiteLinkGroups' )
+			$settings->getSetting( 'specialSiteLinkGroups' ) ?: array()
 		);
 	}
 

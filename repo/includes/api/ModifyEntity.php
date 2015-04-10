@@ -91,10 +91,10 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteStore(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
+			$settings->getSetting( 'specialSiteLinkGroups' ) ?: array()
 		);
 
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
+		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' ) ?: array();
 		$this->siteLinkLookup = $wikibaseRepo->getStore()->newSiteLinkCache();
 		$this->badgeItems = $settings->getSetting( 'badgeItems' ) ?: array();
 	}
