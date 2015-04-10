@@ -106,12 +106,13 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			$user = $GLOBALS['wgUser'];
 		}
 
-		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		//XXX: we may want or need to mock some of these services
 		$changeOpsFactory = new MergeChangeOpsFactory(
-			WikibaseRepo::getDefaultInstance()->getEntityConstraintProvider(),
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider(),
+			$wikibaseRepo->getEntityConstraintProvider(),
+			$wikibaseRepo->getChangeOpFactoryProvider(),
 			MockSiteStore::newFromTestSites()
 		);
 

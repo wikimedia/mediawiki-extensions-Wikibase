@@ -60,9 +60,10 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
 
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
-		$this->termsLanguages = WikibaseRepo::getDefaultInstance()->getTermsLanguages();
+		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
 	}
 
 	/**

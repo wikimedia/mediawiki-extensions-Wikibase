@@ -72,7 +72,7 @@ abstract class ModifyClaim extends ApiBase {
 			$apiHelperFactory->getErrorReporter( $this )
 		);
 
-		$this->guidParser = WikibaseRepo::getDefaultInstance()->getStatementGuidParser();
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );

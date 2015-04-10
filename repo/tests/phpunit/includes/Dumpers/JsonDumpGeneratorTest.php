@@ -48,12 +48,13 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
 		$this->serializerFactory = new SerializerFactory( new DataValueSerializer(), $serializerOptions );
 		$this->deserializerFactory = new DeserializerFactory(
-			WikibaseRepo::getDefaultInstance()->getDataValueDeserializer(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+			$wikibaseRepo->getDataValueDeserializer(),
+			$wikibaseRepo->getEntityIdParser()
 		);
 	}
 

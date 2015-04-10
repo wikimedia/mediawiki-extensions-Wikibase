@@ -122,7 +122,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	public function doTestValidRequest( Entity $entity, $guid, $value, $expectedSummary ) {
-		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityLookup = $wikibaseRepo->getEntityLookup();
 		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
 		$claimCount = count( $obtainedEntity->getClaims() );
 
@@ -146,7 +147,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		/** @var StatementListProvider $obtainedEntity */
 		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
 
-		$page = new WikiPage( WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $entity->getId() ) );
+		$page = new WikiPage( $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $entity->getId() ) );
 		$generatedSummary = $page->getRevision()->getComment( Revision::RAW );
 		$this->assertEquals( $expectedSummary, $generatedSummary, 'Summary mismatch' );
 
@@ -158,7 +159,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertNotNull( $obtainedClaim );
 
-		$dataValue = WikibaseRepo::getDefaultInstance()->getDataValueFactory()->newFromArray( $claim['mainsnak']['datavalue'] );
+		$dataValue = $wikibaseRepo->getDataValueFactory()->newFromArray( $claim['mainsnak']['datavalue'] );
 
 		$this->assertTrue( $obtainedClaim->getMainSnak()->getDataValue()->equals( $dataValue ) );
 	}

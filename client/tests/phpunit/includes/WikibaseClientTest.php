@@ -198,9 +198,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetDefaultInstance() {
-		$this->assertSame(
-			WikibaseClient::getDefaultInstance(),
-			WikibaseClient::getDefaultInstance() );
+		$instance = WikibaseClient::getDefaultInstance();
+		$this->assertInstanceOf( 'Wikibase\Client\WikibaseClient', $instance );
 	}
 
 	public function testGetEntityContentDataCodec() {

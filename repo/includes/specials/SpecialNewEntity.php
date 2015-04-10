@@ -74,11 +74,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	public function __construct( $name, $restriction = 'createpage' ) {
 		parent::__construct( $name, $restriction );
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// TODO: find a way to inject these
-		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
-		$this->languageCodes = WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages();
+		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
+		$this->languageCodes = $wikibaseRepo->getTermsLanguages()->getLanguages();
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = $wikibaseRepo->getSettings();
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );

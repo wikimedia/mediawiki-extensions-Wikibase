@@ -48,10 +48,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 */
 	protected function createStoreAndLookup() {
 		// make sure the term index is empty to avoid conflicts.
-		WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->clear();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo->getStore()->getTermIndex()->clear();
 
 		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
-		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
+		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
@@ -59,10 +60,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			false
 		);
 
-		$typeMap = WikibaseRepo::getDefaultInstance()->getContentModelMappings();
-
 		$store = new WikiPageEntityStore(
-			new EntityContentFactory( $typeMap ),
+			new EntityContentFactory( $wikibaseRepo->getContentModelMappings() ),
 			new SqlIdGenerator( wfGetLB() )
 		);
 

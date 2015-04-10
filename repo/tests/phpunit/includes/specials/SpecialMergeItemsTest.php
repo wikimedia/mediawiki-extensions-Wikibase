@@ -98,12 +98,12 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @param User $user
 	 */
 	private function overrideServices( SpecialMergeItems $page, User $user ) {
-		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		$changeOpsFactory = new MergeChangeOpsFactory(
-			WikibaseRepo::getDefaultInstance()->getEntityConstraintProvider(),
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider(),
+			$wikibaseRepo->getEntityConstraintProvider(),
+			$wikibaseRepo->getChangeOpFactoryProvider(),
 			MockSiteStore::newFromTestSites()
 		);
 
@@ -131,7 +131,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			} ) );
 
 		$page->initServices(
-			$idParser,
+			$wikibaseRepo->getEntityIdParser(),
 			$exceptionLocalizer,
 			new TokenCheckInteractor( $user ),
 			new ItemMergeInteractor(

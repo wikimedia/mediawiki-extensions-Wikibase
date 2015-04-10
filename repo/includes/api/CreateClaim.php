@@ -40,7 +40,7 @@ class CreateClaim extends ModifyClaim {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();

@@ -51,20 +51,20 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		//TODO: remove global TestSites DB setup once we can inject sites sanely.
 		static $hasSites = false;
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
 		if ( !$hasSites ) {
-			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable = $wikibaseRepo->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( TestSites::getSites() );
 			$hasSites = true;
 		}
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
 		$item = new Item();
-		$this->entityRevision = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$this->entityRevision = $wikibaseRepo->getEntityStore()->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$id = $this->entityRevision->getEntity()->getId();
-		$this->itemTitle = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $id );
+		$this->itemTitle = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $id );
 
 		$title = Title::newFromText( 'wbmovetest', $this->getDefaultWikitextNS() );
 		$this->page =  new WikiPage( $title );

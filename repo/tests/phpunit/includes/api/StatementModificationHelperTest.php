@@ -84,6 +84,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 	}
 
 	private function getNewInstance() {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$api = new ApiMain();
 
 		$errorReporter = new ApiErrorReporter(
@@ -92,14 +93,12 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 			$api->getLanguage()
 		);
 
-		$helper = new StatementModificationHelper(
-			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			WikibaseRepo::getDefaultInstance()->getStatementGuidValidator(),
+		return new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
 			$errorReporter
 		);
-
-		return $helper;
 	}
 
 }

@@ -30,7 +30,8 @@ class EditPageTest extends WikibaseApiTestCase {
 	 * @group API
 	 */
 	public function testEditItemDirectly() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$store = $wikibaseRepo->getEntityStore();
 
 		$item = new Item(); //@todo: do this with all kinds of entities.
 		$item->setLabel( "en", "EditPageTest" );
@@ -38,10 +39,10 @@ class EditPageTest extends WikibaseApiTestCase {
 
 		$item->setLabel( "de", "EditPageTest" );
 
-		$data = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer()->serialize( $item );
+		$data = $wikibaseRepo->getInternalEntitySerializer()->serialize( $item );
 		$text = json_encode( $data );
 
-		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $item->getId() );
+		$title = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $item->getId() );
 
 		// try to update the item with valid data via the edit action
 		$this->setExpectedException( 'UsageException' );

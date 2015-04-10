@@ -47,9 +47,10 @@ class EntityModificationTestHelper {
 	private $redirectResolvingEntityLookup;
 
 	public function __construct() {
-		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-		$this->serializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
-		$this->deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$this->idParser = $wikibaseRepo->getEntityIdParser();
+		$this->serializer = $wikibaseRepo->getInternalEntitySerializer();
+		$this->deserializer = $wikibaseRepo->getInternalEntityDeserializer();
 		$this->mockRepository = new MockRepository();
 		$this->redirectResolvingEntityLookup  = new RedirectResolvingEntityLookup( $this->mockRepository );
 	}

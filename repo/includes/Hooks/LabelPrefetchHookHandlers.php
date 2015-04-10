@@ -56,25 +56,24 @@ class LabelPrefetchHookHandlers {
 	 * @return null|LabelPrefetchHookHandlers
 	 */
 	private static function newFromGlobalState() {
-		$termBuffer = WikibaseRepo::getDefaultInstance()->getTermBuffer();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$termBuffer = $wikibaseRepo->getTermBuffer();
 
 		if ( $termBuffer === null ) {
 			return null;
 		}
 
-		$idLookup = WikibaseRepo::getDefaultInstance()->getEntityIdLookup();
-		$titleFactory = new TitleFactory();
 		$termTypes = array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION );
 
 		// NOTE: keep in sync with fallback chain construction in LinkBeginHookHandler::newFromGlobalState
 		$context = RequestContext::getMain();
-		$languageFallbackChainFactory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
 
 		return new LabelPrefetchHookHandlers(
 			$termBuffer,
-			$idLookup,
-			$titleFactory,
+			$wikibaseRepo->getEntityIdLookup(),
+			new TitleFactory(),
 			$termTypes,
 			$languageFallbackChain->getFetchLanguageCodes()
 		);

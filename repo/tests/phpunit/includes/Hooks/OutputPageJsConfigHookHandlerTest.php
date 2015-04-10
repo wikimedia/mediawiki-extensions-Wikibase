@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use MediaWikiTestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -21,7 +22,7 @@ use Wikibase\SettingsArray;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class OutputPageJsConfigHookHandlerTest extends \MediaWikiTestCase {
+class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider handleProvider

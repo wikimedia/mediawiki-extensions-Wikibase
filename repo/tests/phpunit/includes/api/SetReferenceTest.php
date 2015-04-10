@@ -58,7 +58,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$store = $wikibaseRepo->getEntityStore();
 
 		if ( !self::$propertyIds ) {
 			self::$propertyIds = array();
@@ -78,8 +79,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 		$this->deserializerFactory = new DeserializerFactory(
-			WikibaseRepo::getDefaultInstance()->getDataValueDeserializer(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+			$wikibaseRepo->getDataValueDeserializer(),
+			$wikibaseRepo->getEntityIdParser()
 		);
 	}
 

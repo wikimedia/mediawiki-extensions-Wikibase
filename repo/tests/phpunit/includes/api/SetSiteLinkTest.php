@@ -362,7 +362,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		parent::setup();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$store = $wikibaseRepo->getEntityStore();
 
 			$this->initTestEntities( array( 'StringProp', 'Leipzig', 'Berlin' ) );
 
@@ -378,7 +379,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$otherItemId = $badge->getId();
 
-			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
+			$wikibaseRepo->getSettings()->setSetting( 'badgeItems', array(
 				self::$gaItemId->getSerialization() => '',
 				self::$faItemId->getSerialization() => '',
 				'Q99999' => '', // Just in case we have a wrong config

@@ -22,12 +22,13 @@ use Wikibase\Repo\WikibaseRepo;
 class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 
 	public function testTransmitChange() {
-		$factory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$factory = $wikibaseRepo->getEntityChangeFactory();
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 		$change->setField( 'time', wfTimestamp( TS_MW ) );
 
 		$db = wfGetDB( DB_MASTER );
-		$tableName = WikibaseRepo::getDefaultInstance()->getStore()->getChangesTable()->getName();
+		$tableName = $wikibaseRepo->getStore()->getChangesTable()->getName();
 
 		$db->delete( $tableName, '*', __METHOD__ );
 		$this->tablesUsed[] = $tableName;
