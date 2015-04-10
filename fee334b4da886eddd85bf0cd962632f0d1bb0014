@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_668d45d8",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-10T13:48:50Z",
+      "side": 1,
+      "message": "oh really?",
+      "parentUuid": "6e7c4fa4_e6995523",
+      "revId": "fee334b4da886eddd85bf0cd962632f0d1bb0014",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2690adf6",
         "filename": "repo/includes/store/sql/ChangesSubscriptionSchemaUpdater.php",
         "patchSetId": 8
