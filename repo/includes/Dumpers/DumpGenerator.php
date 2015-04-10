@@ -8,6 +8,7 @@ use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
+use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityIdPager;
 
@@ -53,6 +54,11 @@ abstract class DumpGenerator {
 	protected $exceptionHandler;
 
 	/**
+	 * @var EntityPrefetcher
+	 */
+	protected $entityPrefetcher;
+
+	/**
 	 * @var string
 	 */
 	protected $entityType;
@@ -66,16 +72,18 @@ abstract class DumpGenerator {
 
 	/**
 	 * @param resource $out
+	 * @param EntityPrefetcher $entityPrefetcher
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $out ) {
+	public function __construct( $out, EntityPrefetcher $entityPrefetcher ) {
 		if ( !is_resource( $out ) ) {
 			throw new InvalidArgumentException( '$out must be a file handle!' );
 		}
 
 		$this->out = $out;
 
+		$this->entityPrefetcher = $entityPrefetcher;
 		$this->progressReporter = new NullMessageReporter();
 		$this->exceptionHandler = new RethrowingExceptionHandler();
 	}
@@ -276,11 +284,15 @@ abstract class DumpGenerator {
 	 * @param int &$dumpCount The number of entities already dumped (will be updated).
 	 */
 	private function dumpEntities( array $entityIds, &$dumpCount ) {
+		$toLoad = array();
 		foreach ( $entityIds as $entityId ) {
-			if ( !$this->idMatchesFilters( $entityId ) ) {
-				continue;
+			if ( $this->idMatchesFilters( $entityId ) ) {
+				$toLoad[] = $entityId;
 			}
+		}
+		$this->entityPrefetcher->prefetch( $entityIds );
 
+		foreach ( $toLoad as $entityId ) {
 			try {
 				$data = $this->generateDumpForEntityId( $entityId );
 				if ( !$data ) {

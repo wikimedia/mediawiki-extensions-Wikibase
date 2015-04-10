@@ -144,6 +144,11 @@ class DirectSqlStore implements ClientStore {
 	private $subscriptionManager = null;
 
 	/**
+	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
+	 */
+	private $entityPrefetcher = null;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -315,10 +320,7 @@ class DirectSqlStore implements ClientStore {
 		// NOTE: Keep cache key in sync with SqlStore::newEntityRevisionLookup in WikibaseRepo
 		$cacheKeyPrefix = $this->cacheKeyPrefix . ':WikiPageEntityRevisionLookup';
 
-		$metaDataFetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
-			new WikiPageEntityMetaDataLookup( $this->entityIdParser, $this->repoWiki )
-		);
-
+		$metaDataFetcher = $this->getEntityPrefetcher();
 		$rawLookup = new WikiPageEntityRevisionLookup(
 			$this->contentCodec,
 			$metaDataFetcher,
@@ -451,4 +453,16 @@ class DirectSqlStore implements ClientStore {
 		return $this->propertyInfoTable;
 	}
 
+	/**
+	 * @return PrefetchingWikiPageEntityMetaDataAccessor
+	 */
+	public function getEntityPrefetcher() {
+		if ( $this->entityPrefetcher === null ) {
+			$this->entityPrefetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
+				new WikiPageEntityMetaDataLookup( $this->entityIdParser )
+			);
+		}
+
+		return $this->entityPrefetcher;
+	}
 }

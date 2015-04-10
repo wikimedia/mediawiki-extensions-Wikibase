@@ -177,4 +177,13 @@ class MockClientStore implements ClientStore {
 		return self::$propertyInfoStore;
 	}
 
+	/**
+	 * @see ClientStore::getEntityPrefetcher
+	 *
+	 * @return EntityPrefetcher
+	 */
+	public function getEntityPrefetcher() {
+		// FIXME: Incomplete
+	}
+
 }
