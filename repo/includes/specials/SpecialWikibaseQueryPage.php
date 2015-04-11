@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Linker;
-use MWException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -18,6 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Thomas Pellissier Tanon
  */
 abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
+
 	/**
 	 * Max server side caching time in seconds.
 	 *
@@ -57,6 +58,22 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	protected $numRows;
 
 	/**
+	 * @var EntityContentFactory
+	 */
+	private $entityContentFactory;
+
+	/**
+	 * @param string $name
+	 * @param string $restriction
+	 * @param bool   $listed
+	 */
+	public function __construct( $name = '', $restriction = '', $listed = true ) {
+		parent::__construct( $name, $restriction, $listed );
+
+		$this->entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+	}
+
+	/**
 	 * @see SpecialWikibasePage::execute
 	 *
 	 * @since 0.5
@@ -72,22 +89,16 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 
 	/**
 	 * Formats a row for display.
-	 * If the function returns false, the line output will be skipped.
 	 *
 	 * @since 0.4 (as abstract function with same interface in 0.3)
 	 *
 	 * @param $entry
 	 *
-	 * @return string|false
+	 * @return string
 	 */
 	protected function formatRow( $entry ) {
-		try {
-			$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entry );
-			return Linker::linkKnown( $title );
-		} catch ( MWException $e ) {
-			wfWarn( "Error formatting result row: " . $e->getMessage() );
-			return false;
-		}
+		$title = $this->entityContentFactory->getTitleForId( $entry );
+		return Linker::linkKnown( $title );
 	}
 
 	/**
@@ -170,10 +181,8 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 		if ( $num > 0 ) {
 			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
 			for ( $i = 0; $i < $num; $i++ ) {
-				$line = $this->formatRow( $results[$i] );
-				if ( $line ) {
-					$html .= Html::rawElement( 'li', array(), $line );
-				}
+				$row = $this->formatRow( $results[$i] );
+				$html .= Html::rawElement( 'li', array(), $row );
 			}
 			$html .= Html::closeElement( 'ol' );
 
