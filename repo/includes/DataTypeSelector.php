@@ -55,10 +55,11 @@ class DataTypeSelector {
 	 *
 	 * @param string $id
 	 * @param string $name
+	 * @param string $selectedTypeId
 	 *
 	 * @return string
 	 */
-	public function getHtml( $id = 'datatype', $name = 'datatype' ) {
+	public function getHtml( $id = 'datatype', $name = 'datatype', $selectedTypeId = '' ) {
 		$dataTypes = array();
 
 		foreach ( $this->dataTypes as $dataType ) {
@@ -70,9 +71,15 @@ class DataTypeSelector {
 		$html = '';
 
 		foreach ( $dataTypes as $typeId => $typeLabel ) {
+			$attrs = array( 'value' => $typeId );
+
+			if ( $typeId === $selectedTypeId ) {
+				$attrs['selected'] = true;
+			}
+
 			$html .= Html::element(
 				'option',
-				array( 'value' => $typeId ),
+				$attrs,
 				$typeLabel
 			);
 		}
