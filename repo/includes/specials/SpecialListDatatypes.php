@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use Linker;
+use Title;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -71,8 +73,14 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		return Html::rawElement(
 			'dt',
 			array(),
-			$this->msg( $baseKey . '-head' )->parse() )
-				. Html::rawElement( 'dd', array(), $this->msg( $baseKey . '-body' )->parse()
+			$this->msg( $baseKey . '-head' )->parse()
+		)
+		. Html::rawElement( 'dd', array(),
+			$this->msg( $baseKey . '-body' )->parse()
+			. Html::rawElement( 'p', array(),
+				Linker::linkKnown( Title::newFromText( 'Special:ListProperties/' . $dataTypeId ),
+					$this->msg( 'wikibase-listdatatypes-listproperties' )->parse() )
+			)
 		);
 	}
 
