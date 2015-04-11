@@ -5,6 +5,7 @@ namespace Wikibase;
 use DBAccessBase;
 use DBError;
 use InvalidArgumentException;
+use ResultWrapper;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @license GPL 2+
  * @author Daniel Kinzler
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
@@ -42,55 +44,20 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 
+		parent::__construct( $wiki );
 		$this->tableName = 'wb_property_info';
 		$this->isReadonly = $isReadonly;
-		$this->wiki = $wiki;
-	}
-
-	/**
-	 * @see PropertyInfoStore::getPropertyInfo
-	 *
-	 * @param PropertyId $propertyId
-	 *
-	 * @return array|null
-	 *
-	 * @throws InvalidArgumentException
-	 * @throws DBError
-	 */
-	public function getPropertyInfo( PropertyId $propertyId ) {
-		$dbw = $this->getConnection( DB_SLAVE );
-
-		$res = $dbw->selectField(
-			$this->tableName,
-			'pi_info',
-			array( 'pi_property_id' => $propertyId->getNumericId() ),
-			__METHOD__
-		);
-
-		$this->releaseConnection( $dbw );
-
-		if ( $res === false ) {
-			$info = null;
-		} else {
-			$info = $this->decodeInfo( $res );
-
-			if ( $info === null ) {
-				wfLogWarning( "failed to decode property info blob for " . $propertyId . ": " . substr( $res, 0, 200 ) );
-			}
-		}
-
-		return $info;
 	}
 
 	/**
 	 * Decodes an info blob.
 	 *
-	 * @param string|null|bool  $blob
+	 * @param string|null|bool $blob
 	 *
 	 * @return array|null The decoded blob as an associative array, or null if the blob
 	 *         could not be decoded.
 	 */
-	protected function decodeInfo( $blob ) {
+	private function decodeBlob( $blob ) {
 		if ( $blob === false || $blob === null ) {
 			return null;
 		}
@@ -105,26 +72,17 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	}
 
 	/**
-	 * @see   PropertyInfoStore::getAllPropertyInfo
+	 * Decodes a result with info blobs.
 	 *
-	 * @return array[]
+	 * @param ResultWrapper $res
 	 *
-	 * @throws DBError
+	 * @return array[] The array of decoded blobs
 	 */
-	public function getAllPropertyInfo() {
-		$dbw = $this->getConnection( DB_SLAVE );
-
-		$res = $dbw->select(
-			$this->tableName,
-			array( 'pi_property_id', 'pi_info' ),
-			array(),
-			__METHOD__
-		);
-
+	private function decodeResult( ResultWrapper $res ) {
 		$infos = array();
 
 		while ( ( $row = $res->fetchObject() ) !== false ) {
-			$info = $this->decodeInfo( $row->pi_info );
+			$info = $this->decodeBlob( $row->pi_info );
 
 			if ( $info === null ) {
 				wfLogWarning( "failed to decode property info blob for property "
@@ -135,7 +93,90 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 			$infos[$row->pi_property_id] = $info;
 		}
 
-		$this->releaseConnection( $dbw );
+		return $infos;
+	}
+
+	/**
+	 * @see PropertyInfoStore::getPropertyInfo
+	 *
+	 * @param PropertyId $propertyId
+	 *
+	 * @return array|null
+	 *
+	 * @throws InvalidArgumentException
+	 * @throws DBError
+	 */
+	public function getPropertyInfo( PropertyId $propertyId ) {
+		$dbr = $this->getConnection( DB_SLAVE );
+
+		$res = $dbr->selectField(
+			$this->tableName,
+			'pi_info',
+			array( 'pi_property_id' => $propertyId->getNumericId() ),
+			__METHOD__
+		);
+
+		$this->releaseConnection( $dbr );
+
+		if ( $res === false ) {
+			$info = null;
+		} else {
+			$info = $this->decodeBlob( $res );
+
+			if ( $info === null ) {
+				wfLogWarning( "failed to decode property info blob for " . $propertyId . ": " . substr( $res, 0, 200 ) );
+			}
+		}
+
+		return $info;
+	}
+
+	/**
+	 * @see PropertyDataTypeLookup::getPropertyInfoForDataType
+	 *
+	 * @param string $dataType
+	 *
+	 * @return array[]
+	 *
+	 * @throws DBError
+	 */
+	public function getPropertyInfoForDataType( $dataType ) {
+		$dbr = $this->getConnection( DB_SLAVE );
+
+		$res = $dbr->select(
+			$this->tableName,
+			array( 'pi_property_id', 'pi_info' ),
+			array( 'pi_type' => $dataType ),
+			__METHOD__
+		);
+
+		$infos = $this->decodeResult( $res );
+
+		$this->releaseConnection( $dbr );
+
+		return $infos;
+	}
+
+	/**
+	 * @see PropertyInfoStore::getAllPropertyInfo
+	 *
+	 * @return array[]
+	 *
+	 * @throws DBError
+	 */
+	public function getAllPropertyInfo() {
+		$dbr = $this->getConnection( DB_SLAVE );
+
+		$res = $dbr->select(
+			$this->tableName,
+			array( 'pi_property_id', 'pi_info' ),
+			array(),
+			__METHOD__
+		);
+
+		$infos = $this->decodeResult( $res );
+
+		$this->releaseConnection( $dbr );
 
 		return $infos;
 	}

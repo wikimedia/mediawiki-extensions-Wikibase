@@ -81,9 +81,9 @@ class SqlStore implements Store {
 	private $entityInfoBuilderFactory = null;
 
 	/**
-	 * @var PropertyInfoTable|null
+	 * @var PropertyInfoStore|null
 	 */
-	private $propertyInfoTable = null;
+	private $propertyInfoStore = null;
 
 	/**
 	 * @var ChangesTable|null
@@ -660,19 +660,19 @@ class SqlStore implements Store {
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
-		if ( !$this->propertyInfoTable ) {
-			$this->propertyInfoTable = $this->newPropertyInfoTable();
+		if ( !$this->propertyInfoStore ) {
+			$this->propertyInfoStore = $this->newPropertyInfoStore();
 		}
 
-		return $this->propertyInfoTable;
+		return $this->propertyInfoStore;
 	}
 
 	/**
-	 * Creates a new PropertyInfoTable
+	 * Creates a new PropertyInfoStore
 	 *
-	 * @return PropertyInfoTable
+	 * @return PropertyInfoStore
 	 */
-	private function newPropertyInfoTable() {
+	private function newPropertyInfoStore() {
 		$usePropertyInfoTable = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'usePropertyInfoTable' );
 
