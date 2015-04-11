@@ -828,6 +828,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$entityType,
 			array(
 				'LIMIT' => $this->maxConflicts,
+				'caseSensitive' => false
 			)
 		);
 
@@ -886,8 +887,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 			$matchConditions = array(
 				'L.term_language' => $lang,
-				'L.term_text' => $label,
-				'D.term_text' => $description,
+				'L.term_search_key' => $this->getSearchKey( $label, $lang ),
+				'D.term_search_key' => $this->getSearchKey( $description, $lang )
 			);
 
 			$termConditions[] = $dbr->makeList( $matchConditions, LIST_AND );
