@@ -828,6 +828,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$entityType,
 			array(
 				'LIMIT' => $this->maxConflicts,
+				'caseSensitive' => false
 			)
 		);
 

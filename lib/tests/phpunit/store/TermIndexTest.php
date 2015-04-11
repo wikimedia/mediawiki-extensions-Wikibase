@@ -389,6 +389,12 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( 'de' => 'Foo' ),
 				array( 'P6' ),
 			),
+			'by label, different case' => array(
+				$entities,
+				Property::ENTITY_TYPE,
+				array( 'de' => 'foo' ),
+				array( 'P6' ),
+			),
 			'by label mismatch' => array(
 				$entities,
 				Item::ENTITY_TYPE,
