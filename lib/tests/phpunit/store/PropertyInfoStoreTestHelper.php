@@ -85,6 +85,28 @@ class PropertyInfoStoreTestHelper {
 		$this->test->assertEquals( $info23, $table->getPropertyInfo( $p23 ), "should return what was set" );
 	}
 
+	public function testGetPropertyInfoForDataType() {
+		$table = $this->newPropertyInfoStore();
+		$p23 = new PropertyId( 'P23' );
+		$p42 = new PropertyId( 'P42' );
+		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
+		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' );
+
+		$this->test->assertEquals( array(), $table->getPropertyInfoForDataType( 'commonsMedia' ), "should initially be empty" );
+
+		$table->setPropertyInfo( $p23, $info23 );
+		$this->test->assertEquals( array(), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after adding one property" );
+
+		$table->setPropertyInfo( $p42, $info42 );
+		$this->test->assertEquals( array( 42 => $info42 ), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after adding the second property" );
+
+		$table->removePropertyInfo( $p23 );
+		$this->test->assertEquals( array( 42 => $info42 ), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after removing one property" );
+
+		$table->removePropertyInfo( $p42 );
+		$this->test->assertEquals( array(), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after removing the second property" );
+	}
+
 	public function testGetAllPropertyInfo() {
 		$table = $this->newPropertyInfoStore();
 		$p23 = new PropertyId( 'P23' );
@@ -92,16 +114,16 @@ class PropertyInfoStoreTestHelper {
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
 
-		$this->test->assertCount( 0, $table->getAllPropertyInfo(), "should initially be empty" );
+		$this->test->assertEquals( array(), $table->getAllPropertyInfo(), "should initially be empty" );
 
 		$table->setPropertyInfo( $p23, $info23 );
-		$this->test->assertCount( 1, $table->getAllPropertyInfo(), "after adding one property" );
+		$this->test->assertEquals( array( 23 => $info23 ), $table->getAllPropertyInfo(), "after adding one property" );
 
 		$table->setPropertyInfo( $p42, $info42 );
-		$this->test->assertCount( 2, $table->getAllPropertyInfo(), "after adding the second property" );
+		$this->test->assertEquals( array( 23 => $info23, 42 => $info42 ), $table->getAllPropertyInfo(), "after adding the second property" );
 
 		$table->removePropertyInfo( $p23 );
-		$this->test->assertCount( 1, $table->getAllPropertyInfo(), "after removing one property" );
+		$this->test->assertEquals( array( 42 => $info42 ), $table->getAllPropertyInfo(), "after removing one property" );
 	}
 
 	public function testRemovePropertyInfo() {

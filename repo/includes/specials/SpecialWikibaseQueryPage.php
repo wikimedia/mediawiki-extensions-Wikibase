@@ -72,22 +72,16 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 
 	/**
 	 * Formats a row for display.
-	 * If the function returns false, the line output will be skipped.
 	 *
 	 * @since 0.4 (as abstract function with same interface in 0.3)
 	 *
 	 * @param $entry
 	 *
-	 * @return string|false
+	 * @return string
 	 */
 	protected function formatRow( $entry ) {
-		try {
-			$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entry );
-			return Linker::linkKnown( $title );
-		} catch ( MWException $e ) {
-			wfWarn( "Error formatting result row: " . $e->getMessage() );
-			return false;
-		}
+		$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entry );
+		return Linker::linkKnown( $title );
 	}
 
 	/**
@@ -170,10 +164,8 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 		if ( $num > 0 ) {
 			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
 			for ( $i = 0; $i < $num; $i++ ) {
-				$line = $this->formatRow( $results[$i] );
-				if ( $line ) {
-					$html .= Html::rawElement( 'li', array(), $line );
-				}
+				$row = $this->formatRow( $results[$i] );
+				$html .= Html::rawElement( 'li', array(), $row );
 			}
 			$html .= Html::closeElement( 'ol' );
 
