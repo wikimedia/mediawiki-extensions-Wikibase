@@ -125,19 +125,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return false;
 		}
 
-		// to provide removing after posting the full form
+		// If the user just enters an item id and a language, dont remove the term.
+		// The user can remove the term in the second form where it has to be
+		// actually removed. This prevents users from removing terms accidentally.
 		if ( $request->getVal( 'remove' ) === null && $this->value === '' ) {
-			$id = $this->entityRevision->getEntity()->getId();
-
-			$this->showErrorHTML(
-			// Messages: wikibase-setlabel-warning-remove, wikibase-setdescription-warning-remove,
-			// wikibase-setaliases-warning-remove
-				$this->msg(
-					'wikibase-' . strtolower( $this->getName() ) . '-warning-remove',
-					$this->getEntityTitle( $id )->getText()
-				)->parse(),
-				'warning'
-			);
+			$this->value = null;
 			return false;
 		}
 
