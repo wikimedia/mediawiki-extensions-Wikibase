@@ -38,6 +38,10 @@ class SpecialListDatatypesTest extends SpecialPageTestBase {
 		$this->assertInternalType( 'string', $output );
 		$this->assertContains( 'wikibase-listdatatypes-summary', $output );
 		$this->assertContains( 'wikibase-listdatatypes-intro', $output );
+
+		$this->assertContains( 'wikibase-item', $output );
+		$this->assertContains( 'wikibase-listdatatypes-listproperties', $output );
+		$this->assertContains( 'Special:ListProperties/wikibase-item', $output );
 	}
 
 }
