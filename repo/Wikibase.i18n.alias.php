@@ -22,6 +22,7 @@ $specialPageAliases['en'] = array(
 	'GoToLinkedPage' => array( 'GoToLinkedPage' ),
 	'ItemDisambiguation' => array( 'ItemDisambiguation' ),
 	'ListDatatypes' => array( 'ListDatatypes' ),
+	'ListProperties' => array( 'ListProperties' ),
 	'SetLabel' => array( 'SetLabel' ),
 	'SetDescription' => array( 'SetDescription' ),
 	'SetAliases' => array( 'SetAliases' ),
