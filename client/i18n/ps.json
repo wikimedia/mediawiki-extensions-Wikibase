@@ -23,5 +23,6 @@
 	"wikibase-rc-wikibase-edit-letter": "اومتوک",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون",
 	"wikibase-pageinfo-entity-id": "د {{WBREPONAME}} توکي پېژند",
-	"wikibase-otherprojects": "نورې پروژې"
+	"wikibase-otherprojects": "نورې پروژې",
+	"wikibase-otherprojects-beta-message": "د نورو پروژو څنگپټه"
 }

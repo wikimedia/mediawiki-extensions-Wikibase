@@ -8,5 +8,7 @@
 	"wikibase-editlinks": "Rætta leinkjur",
 	"wikibase-editlinkstitle": "Rætta leinkjur til onnur mál",
 	"wikibase-rc-hide-wikidata-hide": "Fjal",
-	"wikibase-rc-hide-wikidata-show": "Vís"
+	"wikibase-rc-hide-wikidata-show": "Vís",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} rætting"
 }

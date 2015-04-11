@@ -5,7 +5,7 @@
 		]
 	},
 	"wikibase-client-desc": "Klient za rozšěrjenje Wikibase",
-	"specialpages-group-wikibaseclient": "Klient {{WBREPONAME}}",
+	"tooltip-t-wikibase": "Wotkaz k zwjazanemu objektej w datowym repozitoriju",
 	"wikibase-after-page-move": "Móžeš tež přirjadowany element {{WBREPONAME}} [$1 aktualizować], zo by mjezyrěčne wotkazy na přesunjenej stronje zarjadował.",
 	"wikibase-after-page-move-queued": "[$1 Element {{WBREPONAME}}] zwjazany z tutej stronu budźe so bórze awtomatisce aktualizować.",
 	"wikibase-comment-add": "Zapisk {{WBREPONAME}} je so wutworił.",
@@ -18,7 +18,7 @@
 	"wikibase-comment-sitelink-change": "Mjezyrěčny wotkaz změnjeny wot $1 do $2",
 	"wikibase-comment-sitelink-remove": "Mjezyrěčny wotkaz wotstronjeny: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|změna|změnje|změny|změnow}}",
-	"wikibase-dataitem": "Datowy element",
+	"wikibase-dataitem": "Datowy element {{WBREPONAME}}",
 	"wikibase-editlinks": "Wotkazy wobdźěłać",
 	"wikibase-editlinkstitle": "Mjezyrěčne wotkazy wobdźěłać",
 	"wikibase-linkitem-addlinks": "Wotkazy přidać",
@@ -42,6 +42,7 @@
 	"wikibase-rc-show-wikidata-pref": "Změny {{WBREPONAME}} w aktualnych změnach pokazać",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Změna {{WBREPONAME}}",
+	"wikibase-replicationnote": "Prošu dźiwaj na to, zo móže wjacore mjeńšiny trać, doniž změny na wšěch wikijach widźomne njejsu.",
 	"wikibase-watchlist-show-changes-pref": "Změny {{WBREPONAME}} w twojich wobkedźbowankach pokazać",
 	"wikibase-error-invalid-entity-id": "Zapodaty ID je systemej njeznaty. Prošu wužij płaćiwy entitowy ID.",
 	"special-unconnectedpages": "Strony, kotrež njejsu ze zapiskami zwjazane",
@@ -53,5 +54,6 @@
 	"wikibase-unconnectedpages-iwdata-label": "Jenož strony z mjezyrěčnymi wotkazami",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|mjezyrěčny wotkaz|mjezyrěčnej wotkazaj|mjezyrěcne wotkazy|mjezyrěčnych wotkazow}} na stronje)",
 	"wikibase-pageinfo-entity-id": "ID elementa {{WBREPONAME}}",
-	"wikibase-pageinfo-entity-id-none": "Žadyn"
+	"wikibase-pageinfo-entity-id-none": "Žadyn",
+	"wikibase-otherprojects": "Druhe projekty"
 }
