@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use FauxRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
@@ -39,7 +40,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 	public function testExecute() {
 		$id = $this->createNewItem();
 
-		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true ) ) );
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true, 'item-term' => true ) ) );
 
 		$page = $this->newSpecialPage();
 
@@ -112,6 +113,26 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
 		}
+	}
+
+	public function testValuePreservesWhenNothingEntered() {
+		$id = $this->createNewItem();
+
+		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'edit' => true, 'item-term' => true ) ) );
+
+		$request = new FauxRequest( array( 'id' => $id, 'language' => 'de', 'value' => '' ), true );
+
+		list( $output, ) = $this->executeSpecialPage( '', $request );
+
+		$this->assertTag( array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wb-modifyterm-value',
+				'class' => 'wb-input',
+				'name' => 'value',
+				'value' => 'foo',
+			)
+		), $output, 'Value still preserves when no value was entered in the big form' );
 	}
 
 }
