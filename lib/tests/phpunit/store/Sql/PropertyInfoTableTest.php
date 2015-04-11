@@ -64,6 +64,10 @@ class PropertyInfoTableTest extends \MediaWikiTestCase {
 		$this->helper->testGetPropertyInfo();
 	}
 
+	public function testGetPropertyInfoForDataType() {
+		$this->helper->testGetPropertyInfoForDataType();
+	}
+
 	public function testGetAllPropertyInfo() {
 		$this->helper->testGetAllPropertyInfo();
 	}
