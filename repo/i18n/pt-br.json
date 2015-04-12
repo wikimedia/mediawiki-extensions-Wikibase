@@ -12,7 +12,8 @@
 			"Luckas",
 			"Mordecool",
 			"Fasouzafreitas",
-			"Macofe"
+			"Macofe",
+			"TheEduGobi"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -32,7 +33,7 @@
 	"wikibase-entitytermsforlanguagelistview-aliases": "Também conhecido como",
 	"wikibase-entitytermsforlanguagelistview-label": "Rótulo",
 	"wikibase-entitytermsforlanguagelistview-language": "Idioma",
-	"wikibase-label-empty": "Rótulo ainda não definido",
+	"wikibase-label-empty": "Nenhum rótulo definido",
 	"wikibase-label-edit-placeholder": "insira um rótulo",
 	"wikibase-description-empty": "Descrição ainda não definida",
 	"wikibase-description-edit-placeholder": "insira uma descrição",

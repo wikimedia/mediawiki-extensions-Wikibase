@@ -5,14 +5,23 @@
 		]
 	},
 	"wikibase-desc": "Repositorium vu strukturierte Date",
+	"wikibase-entity-item": "Objäkt",
+	"wikibase-entity-property": "Eigeschaft",
+	"wikibase-entity-query": "Abfrog",
 	"wikibase-edit": "bearbeite",
 	"wikibase-save": "spyychere",
 	"wikibase-cancel": "abbräche",
 	"wikibase-add": "zuefiege",
 	"wikibase-label-edit-placeholder": "Bezeichnig yygee",
+	"wikibase-description-empty": "S git kei Bschrybig",
 	"wikibase-description-edit-placeholder": "Bschryybig yygee",
 	"wikibase-label-input-help-message": "Gib dr Name fir dää Datesatz in $1 aa.",
 	"wikibase-description-input-help-message": "Gib e churzi Bschryybig in $1 aa.",
+	"wikibase-statements": "Uussage",
 	"wikibase-sitelinks-empty": "Bishär sin kei {{SITENAME}}-Syte mit däm Datenelemänt verchnipft.",
-	"wikibase-remove": "uuseneh"
+	"wikibase-sitelinks-special": "Anderi Websyte",
+	"wikibase-remove": "uuseneh",
+	"wikibase-aliases-empty": "S kei Alias definiert wore.",
+	"wikibase-statementview-rank-normal": "Normale Rang",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Fueßnote|Fueßnote}}"
 }

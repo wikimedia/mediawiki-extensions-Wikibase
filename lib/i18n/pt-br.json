@@ -6,12 +6,13 @@
 			"Luckas",
 			"555",
 			"Macofe",
-			"Fasouzafreitas"
+			"Fasouzafreitas",
+			"TheEduGobi"
 		]
 	},
 	"wikibase-lib-desc": "Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client",
 	"specialpages-group-wikibase": "Wikibase",
-	"wikibase-error-unexpected": "Ocorreu um erro inesperado.",
+	"wikibase-error-unexpected": "Erro: $1.",
 	"wikibase-error-save-generic": "Ocorreu um erro ao tentar salvar e, por isso, as alterações não puderam ser completadas.",
 	"wikibase-error-remove-generic": "Ocorreu um erro ao tentar remover e, por isso, as alterações não puderam ser completadas.",
 	"wikibase-error-save-connection": "Ocorreu um erro de conexão ao tentar salvar e, por isso, as alterações não puderam ser completadas. Por favor, verifique sua conexão com a Internet.",
