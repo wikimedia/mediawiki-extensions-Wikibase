@@ -13,14 +13,15 @@ are also triggered down the document */
 	position: fixed;
 }
 
-/* since a custom heading is being used on the entity pages, the native h1 tag has to be hidden */
-.wb-entitypage .firstHeading {
-	display: none;
+h1 .wikibase-title .wikibase-title-id {
+	color: grey;
+	font-size: 0.6em;
+	margin-left: 0.4em;
 }
-/* on special entity pages, the native heading is still being used and shall be shown */
-.wb-diffpage .firstHeading,
-.wb-oldrevpage .firstHeading {
-	display: block;
+
+h1 .wikibase-title .wikibase-title-id:before {
+	/* Prevent id being hidden in ellipsis on very long labels: */
+	content: ' ';
 }
 
 .wb-entitypage .ui-state-disabled {

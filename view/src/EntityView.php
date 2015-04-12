@@ -106,6 +106,22 @@ abstract class EntityView {
 		return $html;
 	}
 
+	/**
+	 * Returns the html used for the title of the page.
+	 * @see ParserOutput::setDisplayTitle
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityRevision $entityRevision
+	 *
+	 * @return string HTML
+	 */
+	public function getTitleHtml( EntityRevision $entityRevision ) {
+		$entity = $entityRevision->getEntity();
+
+		return $this->entityTermsView->getTitleHtml( $entity->getFingerprint(), $entity->getId() );
+	}
+
 	private function getLoadingSpinnerInlineScript() {
 		// Show loading spinner as long as JavaScript is initialising.
 		// The fastest way to show it is placing the script right after the corresponding HTML.

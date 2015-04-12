@@ -9,16 +9,6 @@
 	width: 100%;
 }
 
-.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label .wikibase-entitytermsview-heading-label-id {
-	color: grey;
-	font-size: 0.6em;
-	margin-left: 0.4em;
-}
-.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label .wikibase-entitytermsview-heading-label-id:before {
-	/* Prevent id being hidden in ellipsis on very long labels: */
-	content: ' ';
-}
-
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-aliases ul {
 	color: grey;
 	margin: 0;
@@ -37,7 +27,6 @@
 	padding: 0;
 }
 
-.wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-label,
 .wikibase-entitytermsview .wikibase-entitytermsview-heading .wikibase-entitytermsview-heading-description {
 	word-wrap: break-word;
 }
