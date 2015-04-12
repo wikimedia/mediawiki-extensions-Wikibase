@@ -23,7 +23,7 @@
 * Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
 * Removed `Claims::indexOf` (you can use `StatementList::getIndexByGuid` instead)
 * Removed `Entity::getAllSnaks`, use `StatementList::getAllSnaks` instead
-* Removed `EntityId::getPrefixedId`, use `getSerialization` instead
+* Removed `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
 
 #### Additions
 
