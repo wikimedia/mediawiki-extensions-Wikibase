@@ -153,16 +153,20 @@ HTML;
 <li class="wikibase-aliasesview-list-item">$1</li>
 HTML;
 
+	$templates['wikibase-title'] =
+<<<HTML
+<span class="wikibase-entitytermsview-heading-label $1"><!-- wikibase-entitytermsview-label -->$2</span>
+HTML;
+
 	$templates['wikibase-entitytermsview'] =
 <<<HTML
 <div class="wikibase-entitytermsview">
 	<div class="wikibase-entitytermsview-heading">
-		<h1 class="wikibase-entitytermsview-heading-label $1"><!-- wikibase-entitytermsview-label -->$2</h1>
-		<div class="wikibase-entitytermsview-heading-description $3">$4</div>
-		<div class="wikibase-entitytermsview-heading-aliases $5"><!-- wikibase-entitytermsview-aliases -->$6</div>
+		<div class="wikibase-entitytermsview-heading-description $1">$2</div>
+		<div class="wikibase-entitytermsview-heading-aliases $3"><!-- wikibase-entitytermsview-aliases -->$4</div>
 	</div>
-	<!-- ? wikibase-toolbar -->$9
-	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $8"><!-- wikibase-entitytermsforlanguagelistview -->$7</div>
+	<!-- ? wikibase-toolbar -->$7
+	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $6"><!-- wikibase-entitytermsforlanguagelistview -->$5</div>
 </div>
 HTML;
 
