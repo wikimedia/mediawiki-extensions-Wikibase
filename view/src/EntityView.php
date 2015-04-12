@@ -5,7 +5,9 @@ namespace Wikibase\View;
 use Html;
 use InvalidArgumentException;
 use Language;
+use ParserOutput;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -104,6 +106,29 @@ abstract class EntityView {
 		$html .= $this->getLoadingSpinnerInlineScript();
 
 		return $html;
+	}
+
+	/**
+	 * Returns the html used for the title of the page.
+	 * @see ParserOutput::setDisplayTitle
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityRevision $entityRevision
+	 *
+	 * @return string HTML
+	 */
+	public function getTitleHtml( EntityRevision $entityRevision ) {
+		$entity = $entityRevision->getEntity();
+
+		if ( $entity instanceof FingerprintProvider ) {
+			return $this->entityTermsView->getTitleHtml(
+				$entity->getFingerprint(),
+				$entity->getId()
+			);
+		}
+
+		return '';
 	}
 
 	private function getLoadingSpinnerInlineScript() {

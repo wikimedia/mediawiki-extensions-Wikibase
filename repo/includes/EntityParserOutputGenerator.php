@@ -182,9 +182,8 @@ class EntityParserOutputGenerator {
 		}
 
 		//@todo: record sitelinks as iwlinks
-		//@todo: record CommonsMedia values as imagelinks
 
-		$this->addModules( $parserOutput, $editable );
+		$this->addModules( $parserOutput );
 
 		//FIXME: some places, like Special:NewItem, don't want to override the page title.
 		//	 But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
@@ -359,6 +358,10 @@ class EntityParserOutputGenerator {
 			$editSectionGenerator
 		);
 
+		// Set the display title to display the label together with the item's id
+		$titleHtml = $entityView->getTitleHtml( $entityRevision );
+		$parserOutput->setDisplayTitle( $titleHtml );
+
 		$html = $entityView->getHtml( $entityRevision );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
@@ -377,9 +380,8 @@ class EntityParserOutputGenerator {
 
 	/**
 	 * @param ParserOutput $parserOutput
-	 * @param bool $editable
 	 */
-	private function addModules( ParserOutput $parserOutput, $editable = true ) {
+	private function addModules( ParserOutput $parserOutput ) {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( array(
 			'wikibase.common',
