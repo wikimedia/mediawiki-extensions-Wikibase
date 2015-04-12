@@ -30,6 +30,14 @@ HTML;
 <hr class="wb-hr" />
 HTML;
 
+	$templates['wikibase-title'] =
+<<<HTML
+<span class="wikibase-title $1">
+	<span class="wikibase-title-label">$2</span>
+	<span class="wikibase-title-id">$3</span>
+</span>
+HTML;
+
 // $1: Text of the heading.
 // $2: Optional ID for the heading.
 	$templates['wb-section-heading'] =
@@ -157,18 +165,12 @@ HTML;
 <<<HTML
 <div class="wikibase-entitytermsview">
 	<div class="wikibase-entitytermsview-heading">
-		<h1 class="wikibase-entitytermsview-heading-label $1"><!-- wikibase-entitytermsview-label -->$2</h1>
-		<div class="wikibase-entitytermsview-heading-description $3">$4</div>
-		<div class="wikibase-entitytermsview-heading-aliases $5"><!-- wikibase-entitytermsview-aliases -->$6</div>
+		<div class="wikibase-entitytermsview-heading-description $1">$2</div>
+		<div class="wikibase-entitytermsview-heading-aliases $3"><!-- wikibase-entitytermsview-aliases -->$4</div>
 	</div>
-	<!-- ? wikibase-toolbar -->$9
-	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $8"><!-- wikibase-entitytermsforlanguagelistview -->$7</div>
+	<!-- ? wikibase-toolbar -->$7
+	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $6"><!-- wikibase-entitytermsforlanguagelistview -->$5</div>
 </div>
-HTML;
-
-	$templates['wikibase-entitytermsview-heading-label'] =
-<<<HTML
-$1<span class="wikibase-entitytermsview-heading-label-id">$2</span>
 HTML;
 
 	$templates['wikibase-entitytermsview-aliases'] =

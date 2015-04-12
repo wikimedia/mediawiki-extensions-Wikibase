@@ -76,13 +76,10 @@ class EntityTermsView {
 		$termBoxHtml,
 		TextInjector $textInjector
 	) {
-		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
 		$aliasGroups = $fingerprint->getAliasGroups();
 
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$labels->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
-			$this->getHtmlForLabel( $labels, $entityId ),
 			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
 			$this->getDescriptionText( $descriptions ),
 			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
@@ -96,12 +93,16 @@ class EntityTermsView {
 	}
 
 	/**
-	 * @param TermList $labels the list of labels to render
-	 * @param EntityId|null $entityId the id of the fingerprint's entity
+	 * @param Fingerprint $fingerprint
+	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
-	private function getHtmlForLabel( TermList $labels, EntityId $entityId = null ) {
+	public function getTitleHtml(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null
+	) {
+		$labels = $fingerprint->getLabels();
 		$idInParentheses = '';
 
 		if( !is_null( $entityId ) ) {
@@ -109,12 +110,23 @@ class EntityTermsView {
 			$idInParentheses = wfMessage( 'parentheses', $id )->text();
 		}
 
-		return $this->templateFactory->render( 'wikibase-entitytermsview-heading-label',
-			$labels->hasTermForLanguage( $this->languageCode )
-				? htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() )
-				: wfMessage( 'wikibase-label-empty' )->escaped(),
-			$idInParentheses
-		);
+		$title = '';
+
+		if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
+			$title = $this->templateFactory->render( 'wikibase-title',
+				'',
+				htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() ),
+				$idInParentheses
+			);
+		} else {
+			$title = $this->templateFactory->render( 'wikibase-title',
+				'wb-empty',
+				wfMessage( 'wikibase-label-empty' )->escaped(),
+				$idInParentheses
+			);
+		}
+
+		return $title;
 	}
 
 	/**
