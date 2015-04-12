@@ -53,6 +53,11 @@
 						mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
 					);
 
+					$( 'h1' ).find( '.wikibase-title' )
+						.toggleClass( 'wb-empty', label === '' )
+						.find( '.wikibase-title-label' )
+						.text( label !== '' ? label : mw.msg( 'wikibase-label-empty' ) );
+
 					return false;
 				} );
 			} );
