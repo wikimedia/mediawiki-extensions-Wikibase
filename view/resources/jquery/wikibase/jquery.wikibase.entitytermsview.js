@@ -64,7 +64,9 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			'' // toolbar placeholder
 		],
 		templateShortCuts: {
-			$headingLabel: '.wikibase-entitytermsview-heading-label',
+			// The label is not included in this container but in h1.firstHeading
+			// However, we must provide an existing element, so the container
+			$headingLabel: '.wikibase-entitytermsview-heading',
 			$headingAliases: '.wikibase-entitytermsview-heading-aliases',
 			$headingDescription: '.wikibase-entitytermsview-heading-description',
 			$entitytermsforlanguagelistviewContainer:
@@ -104,6 +106,8 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		}
 
 		PARENT.prototype._create.call( this );
+
+		this.$headingLabel = $( '.firstHeading .wikibase-entitytermsview-heading-label' );
 
 		var self = this;
 
