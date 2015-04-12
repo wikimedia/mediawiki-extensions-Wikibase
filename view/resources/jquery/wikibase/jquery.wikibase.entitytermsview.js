@@ -53,8 +53,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	options: {
 		template: 'wikibase-entitytermsview',
 		templateParams: [
-			'', // label class
-			'', // labelview
 			'', // description class
 			'', // descriptionview
 			'', // aliases class
@@ -64,7 +62,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			'' // toolbar placeholder
 		],
 		templateShortCuts: {
-			$headingLabel: '.wikibase-entitytermsview-heading-label',
 			$headingAliases: '.wikibase-entitytermsview-heading-aliases',
 			$headingDescription: '.wikibase-entitytermsview-heading-description',
 			$entitytermsforlanguagelistviewContainer:
@@ -117,15 +114,8 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 						return true;
 					}
 
-					var $labelChildren = self.$headingLabel.children(),
-						labelText = this.label.getText(),
-						descriptionText = this.description.getText(),
+					var descriptionText = this.description.getText(),
 						aliasesTexts = this.aliases.getTexts();
-
-					self.$headingLabel
-						.toggleClass( 'wb-empty', labelText === '' )
-						.text( labelText === '' ? mw.msg( 'wikibase-label-empty' ) : labelText )
-						.append( $labelChildren );
 
 					self.$headingDescription
 						.toggleClass( 'wb-empty', descriptionText === '' )
