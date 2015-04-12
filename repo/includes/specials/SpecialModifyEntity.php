@@ -138,7 +138,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$this->rightsText
 		);
 
-		$html = $copyrightView->getHtml( $this->getLanguage() );
+		$html = $copyrightView->getHtml( $this->getLanguage(), 'wikibase-' . strtolower( $this->getName() ) . '-submit' );
 		$this->getOutput()->addHTML( $html );
 	}
 
