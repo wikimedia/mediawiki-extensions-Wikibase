@@ -44,7 +44,7 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$cases[] = array(
 			'Berlin',
-			'/Berlin/'
+			'/Stadt in Deutschland/'
 		);
 
 		if ( self::shouldTestRedirects() ) {

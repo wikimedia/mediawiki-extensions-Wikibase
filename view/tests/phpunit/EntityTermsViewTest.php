@@ -81,12 +81,11 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		return $fingerprint;
 	}
 
-	public function testGetHtml_containsTermsAndAliases() {
+	public function testGetHtml_containsDescriptionAndAliases() {
 		$entityTermsView = $this->getEntityTermsView();
 		$fingerprint = $this->getFingerprint();
 		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
-		$this->assertContains( htmlspecialchars( $fingerprint->getLabel( 'en' )->getText() ), $html );
 		$this->assertContains( htmlspecialchars( $fingerprint->getDescription( 'en' )->getText() ), $html );
 		foreach ( $fingerprint->getAliasGroup( 'en' )->getAliases() as $alias ) {
 			$this->assertContains( htmlspecialchars( $alias ), $html );
@@ -116,9 +115,8 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	public function testGetHtml_valuesAreEscaped() {
 		$entityTermsView = $this->getEntityTermsView();
 		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( 'en', '<a href="#">evil html</a>' );
 		$fingerprint->setDescription( 'en', '<script>alert( "xss" );</script>' );
-		$fingerprint->setAliasGroup( 'en', array( '<b>bold</b>', '<i>italic</i>' ) );
+		$fingerprint->setAliasGroup( 'en', array( '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ) );
 		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
 		$this->assertContains( 'evil html', $html, 'make sure it works' );
@@ -129,9 +127,6 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	}
 
 	public function emptyFingerprintProvider() {
-		$noLabel = $this->getFingerprint();
-		$noLabel->removeLabel( 'en' );
-
 		$noDescription = $this->getFingerprint();
 		$noDescription->removeDescription( 'en' );
 
@@ -140,7 +135,6 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 
 		return array(
 			array( new Fingerprint(), 'No' ),
-			array( $noLabel, 'No label' ),
 			array( $noDescription, 'No description' ),
 			array( $noAliases, 'No aliases' ),
 		);
@@ -164,26 +158,6 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @dataProvider entityFingerprintProvider
-	 */
-	public function testGetHtml_withEntityId( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$entityTermsView = $this->getEntityTermsView( $languageCode, $this->once() );
-		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
-		$idString = $entityId->getSerialization();
-
-		$this->assertContains( '(' . $idString . ')', $html );
-		$this->assertContains( '~EDITSECTION~', $html );
-	}
-
-	public function testGetHtml_withoutEntityId() {
-		$entityTermsView = $this->getEntityTermsView();
-		$html = $entityTermsView->getHtml( new Fingerprint(), null, '', new TextInjector() );
-
-		$this->assertNotContains( '(new)', $html );
-		$this->assertNotContains( '<a ', $html );
-	}
-
-	/**
 	 * @dataProvider emptyFingerprintProvider
 	 */
 	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $message ) {
@@ -193,6 +167,62 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$this->assertContains( $message, $html );
 		$this->assertContains( 'strong', $html, 'make sure the setUp works' );
 		$this->assertNotContains( '<strong class="test">', $html );
+	}
+
+	public function testGetTitleHtml_containsLabel() {
+		$entityTermsView = $this->getEntityTermsView();
+		$fingerprint = $this->getFingerprint();
+		$html = $entityTermsView->getTitleHtml( $fingerprint, null );
+
+		$this->assertContains( htmlspecialchars( $fingerprint->getLabel( 'en' )->getText() ), $html );
+	}
+
+	/**
+	 * @dataProvider entityFingerprintProvider
+	 */
+	public function testGetTitleHtml_withEntityId( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
+		$entityTermsView = $this->getEntityTermsView();
+		$html = $entityTermsView->getTitleHtml( $fingerprint, $entityId );
+		$idString = $entityId->getSerialization();
+
+		$this->assertContains( '(' . $idString . ')', $html );
+	}
+
+	public function testGetTitleHtml_withoutEntityId() {
+		$entityTermsView = $this->getEntityTermsView();
+		$html = $entityTermsView->getTitleHtml( new Fingerprint(), null );
+
+		$this->assertNotContains( '(new)', $html );
+		$this->assertNotContains( '<a ', $html );
+	}
+
+	public function testGetTitleHtml_labelIsEscaped() {
+		$entityTermsView = $this->getEntityTermsView();
+		$fingerprint = new Fingerprint();
+		$fingerprint->setLabel( 'en', '<a href="#">evil html</a>' );
+		$html = $entityTermsView->getTitleHtml( $fingerprint, null );
+
+		$this->assertContains( 'evil html', $html, 'make sure it works' );
+		$this->assertNotContains( 'href="#"', $html );
+	}
+
+	public function testGetTitleHtml_isMarkedAsEmptyValue() {
+		$fingerprint = $this->getFingerprint();
+		$fingerprint->removeLabel( 'en' );
+
+		$entityTermsView = $this->getEntityTermsView();
+		$html = $entityTermsView->getTitleHtml( $fingerprint, null );
+
+		$this->assertContains( 'wb-empty', $html );
+	}
+
+	public function testGetTitleHtml_isNotMarkedAsEmpty() {
+		$fingerprint = $this->getFingerprint();
+
+		$entityTermsView = $this->getEntityTermsView();
+		$html = $entityTermsView->getTitleHtml( $fingerprint, null );
+
+		$this->assertNotContains( 'wb-empty', $html );
 	}
 
 }
