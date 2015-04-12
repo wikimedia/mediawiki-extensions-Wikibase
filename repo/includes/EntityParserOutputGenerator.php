@@ -363,6 +363,10 @@ class EntityParserOutputGenerator {
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
 
+		// Set the display title to display the label together with the item's id
+		$titleHtml = $entityView->getTitleHtml( $entityRevision );
+		$parserOutput->setDisplayTitle( $titleHtml );
+
 		// Force parser cache split by whether edit links are show.
 		// MediaWiki core has the ability to split on editsection, but does not trigger it
 		// automatically when $parserOptions->getEditSection() is called. Presumably this
