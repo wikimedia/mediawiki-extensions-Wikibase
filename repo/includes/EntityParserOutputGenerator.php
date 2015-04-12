@@ -359,6 +359,10 @@ class EntityParserOutputGenerator {
 			$editSectionGenerator
 		);
 
+		// Set the display title to display the label together with the item's id
+		$titleHtml = $entityView->getTitleHtml( $entityRevision );
+		$parserOutput->setDisplayTitle( $titleHtml );
+
 		$html = $entityView->getHtml( $entityRevision );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
