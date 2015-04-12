@@ -263,7 +263,9 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			}
 		} );
 
-		this.$link.find( '.wikibase-sitelinkview-page' ).empty().append( $pageNameInput );
+		this.$link.find( '.wikibase-sitelinkview-page' )
+			.empty().append( $pageNameInput )
+			.attr( 'dir', dir );
 
 		if( this.options.value ) {
 			this.updatePageNameInputAutoExpand();
