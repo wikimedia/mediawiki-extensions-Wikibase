@@ -81,8 +81,6 @@ class EntityTermsView {
 		$aliasGroups = $fingerprint->getAliasGroups();
 
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$labels->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
-			$this->getHtmlForLabel( $labels, $entityId ),
 			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
 			$this->getDescriptionText( $descriptions ),
 			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
@@ -92,6 +90,24 @@ class EntityTermsView {
 				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
 			),
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $entityId )
+		);
+	}
+
+	/**
+	 * @param Fingerprint $fingerprint
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	public function getTitleHtml(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null
+	) {
+		$labels = $fingerprint->getLabels();
+
+		return $this->templateFactory->render( 'wikibase-title',
+			$labels->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
+			$this->getHtmlForLabel( $labels, $entityId )
 		);
 	}
 
