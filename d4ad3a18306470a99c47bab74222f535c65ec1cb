@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_46283b96",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T14:13:29Z",
+      "side": 1,
+      "message": "Why do we need a separate copyright message for each type of edit we support? That seems excessive",
+      "revId": "d4ad3a18306470a99c47bab74222f535c65ec1cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
