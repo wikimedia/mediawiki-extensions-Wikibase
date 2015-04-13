@@ -34,6 +34,23 @@
       "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a5054d8",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T19:44:48Z",
+      "side": 1,
+      "message": "\"count( $claim-\u003egetQualifiers()-\u003ecount() )\": please remove the outer count",
+      "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
