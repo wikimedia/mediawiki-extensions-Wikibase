@@ -620,7 +620,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 /********** SITE LINKS **********/
 
-h2.wb-sitelinks-heading {
+h3.wb-sitelinks-heading {
 	float: left;
 	width: 100%;
 	margin-top: 2em;
@@ -629,7 +629,7 @@ h2.wb-sitelinks-heading {
 	border-bottom: none;
 }
 
-.wb-section-heading .sitelinklistview-counter {
+.wb-sitelinks-heading .sitelinklistview-counter {
 	font-size: 67%; /* reset to standard font size */
 	margin-left: 0.6em;
 	line-height: 100%; /* prevent white space below heading */
