@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_327a1eba",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-13T10:24:40Z",
+      "side": 1,
+      "message": "\"Cannot\" is one word :)",
+      "revId": "d39af8ed887b051f3685a340276c5922a30ad12a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
