@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7acce88d",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T20:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_1a67f4b5",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7a686885",
         "filename": "lib/tests/phpunit/store/MockTermIndex.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-13T20:08:38Z",
       "side": 1,
       "message": "ugh",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5ad1ec25",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T20:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7a686885",
       "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3a10b0f7",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T20:18:12Z",
+      "side": 1,
+      "message": "exactly",
+      "parentUuid": "6e7c4fa4_9a0a24d4",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5af48ccb",
         "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9ab784f2",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T20:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_5af48ccb",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7aef08f7",
         "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2015-04-13T20:08:38Z",
       "side": 1,
       "message": "The mix of single and double quotes in here looks a little weird to me. But acceptable in a test, no need to change that.",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9ae0e4f8",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T20:18:12Z",
+      "side": 1,
+      "message": "copy\u0026paste from the old EntityTestHelper class that was used here previously.",
+      "parentUuid": "6e7c4fa4_7aef08f7",
       "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
