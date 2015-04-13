@@ -62,12 +62,13 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );
-		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
+		$claim = $claims->getClaimWithGuid( $this->claimGuid );
+
+		if ( $claim === null ) {
 			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
 		}
 
-		$claim = $claims->getClaimWithGuid( $this->claimGuid );
-		if ( ! ( $claim instanceof Statement ) ) {
+		if ( !( $claim instanceof Statement ) ) {
 			throw new ChangeOpException( 'The referenced claim is not a statement and thus cannot have references' );
 		}
 

@@ -177,10 +177,9 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 		$claims = new Claims( $entity->getClaims() );
 
-		$this->assertTrue( $claims->hasClaimWithGuid( $params['claim'] ) );
-
 		$claim = $claims->getClaimWithGuid( $params['claim'] );
 
+		$this->assertNotNull( $claim );
 		$this->assertTrue(
 			$claim->getQualifiers()->hasSnak( $qualifier ),
 			'The qualifier should exist in the qualifier list after making the request'
