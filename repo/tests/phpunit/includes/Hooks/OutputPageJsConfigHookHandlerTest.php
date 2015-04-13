@@ -70,6 +70,7 @@ class OutputPageJsConfigHookHandlerTest extends \MediaWikiTestCase {
 		$settings = new Settings();
 		$settings->setSetting( 'dataRightsUrl', 'https://creativecommons.org' );
 		$settings->setSetting( 'dataRightsText', 'CC-0' );
+		$settings->setSetting( 'badgeItems', array() );
 
 		return $settings;
 	}
