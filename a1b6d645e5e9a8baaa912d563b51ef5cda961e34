@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_bab120f6",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-13T20:28:05Z",
+      "side": 1,
+      "message": "these are generally not unit tests here, but imho rather integration tests. it\u0027s using the global EntityLookup instance, global api, etc.\n\nfor all of SetClaimTest, there ought to be at least one test case here that includes some other type of StatementProvider than just Item.\n\nit\u0027s unfortunate that we don\u0027t (yet) have a StatementProviderId or such interface for this. :/",
+      "parentUuid": "6e7c4fa4_466d9b95",
+      "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1a5054d8",
         "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
         "patchSetId": 1
