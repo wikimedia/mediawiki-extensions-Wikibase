@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_dca17cf5",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-13T15:51:53Z",
+      "side": 1,
+      "message": "haha! :o  fixed",
+      "parentUuid": "6e7c4fa4_095014d8",
+      "revId": "e2ba56ff751d6c63042499d8284c231ad773e4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_496dac95",
         "filename": "client/tests/phpunit/ClientDefaultsTest.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-13T14:50:19Z",
       "side": 1,
       "message": "looks done",
+      "revId": "e2ba56ff751d6c63042499d8284c231ad773e4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3cb2f048",
+        "filename": "client/tests/phpunit/ClientDefaultsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-13T15:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_496dac95",
       "revId": "e2ba56ff751d6c63042499d8284c231ad773e4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
