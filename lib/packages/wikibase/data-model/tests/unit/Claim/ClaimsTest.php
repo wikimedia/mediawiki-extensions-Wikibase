@@ -85,27 +85,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testHasClaim() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
-
-		$this->assertFalse( $claims->hasClaim( $claim1 ) );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
-
-		$claims->addClaim( $claim1 );
-		$this->assertTrue( $claims->hasClaim( $claim1 ) );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
-
-		$claims->addClaim( $claim2 );
-		$this->assertTrue( $claims->hasClaim( $claim1 ) );
-		$this->assertTrue( $claims->hasClaim( $claim2 ) );
-
-		// no guid
-		$claim0 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$this->assertFalse( $claims->hasClaim( $claim0 ) );
-	}
-
 	public function testHasClaimWithGuid() {
 		$claims = new Claims();
 		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
@@ -133,13 +112,9 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( 2, $claims->count() );
 
 		$claims->removeClaimWithGuid( $claim1->getGuid() );
-		$this->assertFalse( $claims->hasClaim( $claim1 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
 		$this->assertSame( 1, $claims->count() );
 
 		$claims->removeClaimWithGuid( $claim2->getGuid() );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
 		$this->assertSame( 0, $claims->count() );
 	}
 
@@ -153,13 +128,9 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( 2, $claims->count() );
 
 		$claims->offsetUnset( $claim1->getGuid() );
-		$this->assertFalse( $claims->hasClaim( $claim1 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
 		$this->assertSame( 1, $claims->count() );
 
 		$claims->offsetUnset( $claim2->getGuid() );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
 		$this->assertSame( 0, $claims->count() );
 	}
 
