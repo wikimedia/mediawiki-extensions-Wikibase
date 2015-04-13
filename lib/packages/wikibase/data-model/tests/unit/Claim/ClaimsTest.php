@@ -123,30 +123,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $claims->hasClaimWithGuid( $claim2->getGuid() ) );
 	}
 
-	public function testRemoveClaim() {
-		$claims = new Claims();
-		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claim2 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P16' ) ) );
-
-		$claims->addClaim( $claim1 );
-		$claims->addClaim( $claim2 );
-		$this->assertSame( 2, $claims->count() );
-
-		$claims->removeClaim( $claim1 );
-		$this->assertFalse( $claims->hasClaim( $claim1 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
-		$this->assertSame( 1, $claims->count() );
-
-		$claims->removeClaim( $claim2 );
-		$this->assertFalse( $claims->hasClaim( $claim2 ) );
-		$this->assertNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
-		$this->assertSame( 0, $claims->count() );
-
-		// no guid
-		$claim0 = new Claim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
-		$claims->removeClaim( $claim0 );
-	}
-
 	public function testRemoveClaimWithGuid() {
 		$claims = new Claims();
 		$claim1 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P15' ) ) );
