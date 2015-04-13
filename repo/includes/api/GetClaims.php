@@ -100,8 +100,8 @@ class GetClaims extends ApiWikibase {
 		$claimsList = new Claims( $entity->getClaims() );
 
 		if ( $claimGuid !== null ) {
-			return $claimsList->hasClaimWithGuid( $claimGuid ) ?
-				array( $claimsList->getClaimWithGuid( $claimGuid ) ) : array();
+			$claim = $claimsList->getClaimWithGuid( $claimGuid );
+			return $claim !== null ? array( $claim ) : array();
 		}
 
 		$claims = array();

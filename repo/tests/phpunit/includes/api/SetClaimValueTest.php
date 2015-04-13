@@ -158,11 +158,13 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( $claimCount, $claims->count(), 'Claim count should not change after doing a setclaimvalue request' );
 
-		$this->assertTrue( $claims->hasClaimWithGuid( $claimGuid ) );
+		$obtainedClaim = $claims->getClaimWithGuid( $claimGuid );
+
+		$this->assertNotNull( $obtainedClaim );
 
 		$dataValue = DataValueFactory::singleton()->newFromArray( $claim['mainsnak']['datavalue'] );
 
-		$this->assertTrue( $claims->getClaimWithGuid( $claimGuid )->getMainSnak()->getDataValue()->equals( $dataValue ) );
+		$this->assertTrue( $obtainedClaim->getMainSnak()->getDataValue()->equals( $dataValue ) );
 	}
 
 	/**

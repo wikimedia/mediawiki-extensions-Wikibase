@@ -97,12 +97,13 @@ class ClaimModificationHelper {
 	 */
 	public function getClaimFromEntity( $claimGuid, Entity $entity ) {
 		$claims = new Claims( $entity->getClaims() );
+		$claim = $claims->getClaimWithGuid( $claimGuid );
 
-		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
+		if ( $claim === null ) {
 			$this->errorReporter->dieError( 'Could not find the claim' , 'no-such-claim' );
 		}
 
-		return $claims->getClaimWithGuid( $claimGuid );
+		return $claim;
 	}
 
 	/**
