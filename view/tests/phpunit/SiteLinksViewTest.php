@@ -39,7 +39,9 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 
 		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups );
 		$this->assertInternalType( 'string', $value );
-		MediaWikiTestCase::assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
+		$this->assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
+
+		$this->assertContains( '<h2 class="wb-section-heading section-heading" dir="auto"><span id="sitelinks"', $value, 'Html should contain section heading' );
 	}
 
 	public function getHtmlProvider() {
