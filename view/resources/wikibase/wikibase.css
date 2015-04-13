@@ -70,6 +70,15 @@ are also triggered down the document */
 	cursor: pointer;
 }
 
+.wb-clear {
+	clear: both;
+}
+
+span.wb-itemlink-id { /* item id within a link to an item (especially on special pages) */
+	font-size: .85em;
+	unicode-bidi: embed;
+}
+
 
 /********** BASIC LAYOUT **********/
 
@@ -620,32 +629,17 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 /********** SITE LINKS **********/
 
-h2.wb-sitelinks-heading {
-	float: left;
-	width: 100%;
-	margin-top: 2em;
-	margin-bottom: 0.2em;
-	padding-left: 10px;
-	border-bottom: none;
+.wikibase-sitelinks {
+	display: none;
 }
 
-.wb-section-heading .sitelinklistview-counter {
+.wb-sitelinks-heading .sitelinklistview-counter {
 	font-size: 67%; /* reset to standard font size */
 	margin-left: 0.6em;
 	line-height: 100%; /* prevent white space below heading */
 }
 
 /********** /SITE LINKS **********/
-
-
-.wb-clear {
-	clear: both;
-}
-
-span.wb-itemlink-id { /* item id within a link to an item (especially on special pages) */
-	font-size: .85em;
-	unicode-bidi: embed;
-}
 
 
 /********** PROPERTY PAGE **********/
