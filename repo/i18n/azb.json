@@ -2,11 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Erdemaslancan",
-			"Amir a57"
+			"Amir a57",
+			"Koroğlu"
 		]
 	},
 	"wikibase-edit": "دَییشدیر",
 	"wikibase-add": "آرتیرماق",
+	"wikibase-label-empty": "هئچ بیر آد تعریف اولونماییب‌دیر.",
+	"wikibase-description-empty": "هئچ بیر آچیقلاما تعریف اولماییب‌دیر.",
 	"wikibase-statements": "ایظهالار",
 	"wikibase-sitelinks-special": "آیری سایتلار",
 	"wikibase-aliases-empty": "هئچ بیر موستعار آدی سئچیلمییب.",

@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rachitrali"
+		]
+	},
+	"tooltip-t-wikibase": "متعلقہ ڈیٹاری منسلک کورے",
+	"wikibase-comment-update": "{{WBREPONAME}} مواد تبدیل کورونو ہوئے",
+	"wikibase-dataitem": "{{WBREPONAME}} مواد",
+	"wikibase-editlinks": "روابطہ ترمیم کورے",
+	"wikibase-editlinkstitle": "بین الزبان روابطا ترمیم",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "کھوشتاوے",
+	"wikibase-rc-hide-wikidata-show": "پشاوے",
+	"wikibase-rc-wikibase-edit-letter": "ڈی",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ترمیم",
+	"wikibase-otherprojects": "دیگر منصوبہ"
+}
