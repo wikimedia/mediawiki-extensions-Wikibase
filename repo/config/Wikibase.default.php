@@ -113,6 +113,33 @@ return call_user_func( function() {
 		'subscriptionLookupMode' => 'subscriptions',
 
 		'allowEntityImport' => false,
+
+		// Prefix to use for cache keys that should be shared among a Wikibase Repo instance
+		// and all its clients. This is for things like caching entity blobs in memcached.
+		//
+		// The default setting assumes Wikibase Repo + Client installed together on the same wiki.
+		// For a multiwiki / wikifarm setup, to configure shared caches between clients and repo,
+		// this needs to be set to the same value in both client and repo wiki settings.
+		//
+		// For Wikidata production, we set it to 'wikidatawiki:wikibase_shared/wikidata_1_25wmf24',
+		// which is repo database name + ':wikibase_shared/' + deployment branch name, and
+		// have it set in both $wgWBClientSettings and $wgWBRepoSettings.
+		//
+		// Please note that $wgWBClientSettings overrides settings such as this one in the repo,
+		// if client is enabled on the same wiki.
+		'sharedCacheKeyPrefix' => $GLOBALS['wgDBname'] . ':wikibase_shared/' . WBL_VERSION,
+
+		// The duration of the object cache, in seconds.
+		//
+		// As with sharedCacheKeyPrefix, this is both client and repo setting. On a multiwiki
+		// setup, this should be set to the same value in both the repo and clients.
+		// Also note that the setting value in $wgWBClientSettings overrides the one here.
+		'sharedCacheDuration' => 60 * 60,
+
+		// The type of object cache to use. Use CACHE_XXX constants.
+		// This is both a repo and client setting, and should be set to the same value in
+		// repo and clients for multiwiki setups.
+		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
 	);
 
 	return $defaults;
