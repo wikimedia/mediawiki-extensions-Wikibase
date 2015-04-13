@@ -222,7 +222,7 @@ HTML;
 <div class="wikibase-sitelinkgroupview" data-wb-sitelinks-group="$5">
 	<div class="wikibase-sitelinkgroupview-heading-section">
 		<div class="wikibase-sitelinkgroupview-heading-container">
-			<h2 class="wb-section-heading" dir="auto" id="$1">$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h2>
+			<h3 class="wb-sitelinks-heading" dir="auto" id="$1">$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h3>
 			<!-- wikibase-toolbar -->$6
 		</div>
 	</div>
