@@ -58,6 +58,30 @@ return call_user_func( function() {
 		// to be set in the repo or can be set the same in both. (repo settings override client settings)
 		'useLegacyChangesSubscription' => false,
 
+		// Prefix to use for cache keys that should be shared among a Wikibase Repo instance
+		// and all its clients. This is for things like caching entity blobs in memcached.
+		//
+		// The default here assumes Wikibase Repo + Client installed together on the same wiki.
+		// For a multiwiki / wikifarm setup, to configure shared caches between clients and repo,
+		// this needs to be set to the same value in both client and repo wiki settings.
+		//
+		// For Wikidata production, we set it to 'wikibase-shared/wikidata_1_25wmf24-wikidatawiki',
+		// which is 'wikibase_shared/' + deployment branch name + '-' + repo database name,
+		// and have it set in both $wgWBClientSettings and $wgWBRepoSettings.
+		'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION . '-' . $GLOBALS['wgDBname'],
+
+		// The duration of the object cache, in seconds.
+		//
+		// As with sharedCacheKeyPrefix, this is both client and repo setting. On a multiwiki
+		// setup, this should be set to the same value in both the repo and clients.
+		// Also note that the setting value in $wgWBClientSettings overrides the one here.
+		'sharedCacheDuration' => 60 * 60,
+
+		// The type of object cache to use. Use CACHE_XXX constants.
+		// This is both a repo and client setting, and should be set to the same value in
+		// repo and clients for multiwiki setups.
+		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
+
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
 		 * such as mediawiki-config, mediawiki messages for custom orders, or somewhere.
@@ -254,32 +278,6 @@ return call_user_func( function() {
 	$defaults['otherProjectsLinks'] = function ( SettingsArray $settings ) {
 		$otherProjectsSitesProvider = WikibaseClient::getDefaultInstance()->getOtherProjectsSitesProvider();
 		return $otherProjectsSitesProvider->getOtherProjectsSiteIds( $settings->getSetting( 'siteLinkGroups' ) );
-	};
-
-	// Prefix to use for cache keys that should be shared among
-	// a wikibase repo and all its clients.
-	// In order to share caches between clients (and the repo)
-	// the default includes WBL_VERSION and the repo's DB name.
-	$defaults['sharedCacheKeyPrefix'] = function ( SettingsArray $settings ) {
-		// Per default, the database for tracking changes is the repo's database.
-		// Note that the value for the repoDatabase setting may be calculated dynamically,
-		// see above.
-
-		//NOTE: keep in sync with the default value for sharedCacheKeyPrefix defined
-		//      in WikibaseLib.default.php, since that's the key the repo is using per
-		//      default.
-
-		$repoId = $settings->getSetting( 'repoDatabase' );
-
-		if ( $repoId === false ) {
-			// false means the local wiki's DB (this is the case when the local wiki is the repo)
-			$repoId = $GLOBALS['wgDBname'];
-		} elseif ( $repoId === null ) {
-			// null means no direct access to the repo's DB, so use the repo's URL instead
-			$repoId = 'repoUrl:' . $settings->getSetting( 'repoUrl' );
-		}
-
-		return $repoId . ':WBL/' . WBL_VERSION;
 	};
 
 	return $defaults;
