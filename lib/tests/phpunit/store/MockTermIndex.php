@@ -291,21 +291,49 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 			if ( ( $language === null || $term->getLanguage() === $language )
 				&& ( $entityType === null || $term->getEntityType() === $entityType )
 				&& ( $termType === null || $term->getType() === $termType )
-				&& $this->termMatchesTemplates( $term, $terms )
+				&& $this->termMatchesTemplates( $term, $terms, $options )
 			) {
 
 				$matchingTerms[] = $term;
 			}
 		}
 
+		$limit = isset( $options['LIMIT'] ) ? $options['LIMIT'] : 0;
+
+		if ( $limit > 0 ) {
+			$matchingTerms = array_slice( $matchingTerms, 0, $limit );
+		}
+
 		return $matchingTerms;
 	}
 
 	/**
-	 * @throws Exception always
+	 * @param Term[] $terms
+	 * @param string|null $entityType
+	 * @param array $options
+	 *
+	 * @return EntityId[]
 	 */
 	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() ) {
-		throw new Exception( 'not implemented by mock class ' );
+		// We can't pass the limit on to getMatchingTerms, since getMatchingTerms may
+		// return multiple terms for an EntityId.
+		$limit = isset( $options['LIMIT'] ) ? $options['LIMIT'] : 0;
+		unset( $options['LIMIT'] );
+
+		$terms = $this->getMatchingTerms( $terms, null, $entityType, $options );
+
+		$ids = array();
+		foreach ( $terms as $term ) {
+			$id = $term->getEntityId();
+			$key = $id->getSerialization();
+			$ids[$key] = $id;
+		}
+
+		if ( $limit > 0 ) {
+			$ids = array_slice( $ids, 0, $limit );
+		}
+
+		return $ids;
 	}
 
 	/**
@@ -353,10 +381,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @param Term $term
 	 * @param Term[] $templates
+	 * @param array $options
 	 *
 	 * @return bool
 	 */
-	private function termMatchesTemplates( Term $term, array $templates ) {
+	private function termMatchesTemplates( Term $term, array $templates, array $options = array() ) {
 		foreach ( $templates as $template ) {
 			if ( $template->getType() !== null && $template->getType() != $term->getType() ) {
 				continue;
@@ -370,7 +399,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 				continue;
 			}
 
-			if ( $template->getText() !== null && $template->getText() != $term->getText() ) {
+			if ( $template->getText() !== null && !$this->textMatches( $template->getText(), $term->getText(), $options ) ) {
 				continue;
 			}
 
@@ -384,4 +413,17 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		return false;
 	}
 
+	private function textMatches( $find, $text, array $options = array() ) {
+
+		if ( isset( $options[ 'caseSensitive' ] ) && !$options[ 'caseSensitive' ] ) {
+			$find = strtolower( $find );
+			$text = strtolower( $text );
+		}
+
+		if ( isset( $options[ 'prefixSearch' ] ) && $options[ 'prefixSearch' ] ) {
+			$text = substr( $text, 0, strlen( $find ) );
+		}
+
+		return $find === $text;
+	}
 }
