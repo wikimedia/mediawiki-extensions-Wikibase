@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a95560fe",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T14:27:01Z",
+      "side": 1,
+      "message": "This means any label conflicts anywhere will always be case insensitive. \nIt would be better to specify that detail somewhere where we have actual knowledge about the context of the query.",
+      "revId": "31dfe674203093400b9c91d8ff30876c536fd1db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
