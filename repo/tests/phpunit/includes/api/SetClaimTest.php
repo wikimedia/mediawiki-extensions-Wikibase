@@ -376,13 +376,14 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$claimCount,
 		$requestLabel
 	) {
+		$this->assertNotNull( $claim->getGuid(), 'Cannot search for claims with no GUID' );
+
 		/** @var Item $item */
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
 		$claims = new Claims( $item->getClaims() );
-		$this->assertTrue( $claims->hasClaim( $claim ), "Claims list does not have claim after {$requestLabel}" );
-
 		$savedClaim = $claims->getClaimWithGuid( $claim->getGuid() );
+		$this->assertNotNull( $savedClaim, "Claims list does not have claim after {$requestLabel}" );
 		if( count( $claim->getQualifiers() ) ) {
 			$this->assertTrue( $claim->getQualifiers()->equals( $savedClaim->getQualifiers() ) );
 		}
