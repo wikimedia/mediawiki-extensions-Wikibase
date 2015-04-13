@@ -45,7 +45,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		templateShortCuts: {
 			$headingSection: '.wikibase-sitelinkgroupview-heading-section',
 			headingContainer: '.wikibase-sitelinkgroupview-heading-container',
-			$h: 'h2',
+			$h: 'h2,h3', // TODO: Remove h2 after 30 days
 			$counter: '.wikibase-sitelinkgroupview-counter'
 		},
 		value: null,

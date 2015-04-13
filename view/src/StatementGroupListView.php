@@ -95,7 +95,8 @@ class StatementGroupListView {
 		$html = $this->templateFactory->render(
 			'wb-section-heading',
 			wfMessage( $heading )->escaped(),
-			'claims' // ID - TODO: should not be added if output page is not the entity's page
+			'claims', // ID - TODO: should not be added if output page is not the entity's page
+			$heading
 		);
 
 		return $html;
