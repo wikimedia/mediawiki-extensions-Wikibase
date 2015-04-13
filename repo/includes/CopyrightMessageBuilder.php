@@ -20,11 +20,12 @@ class CopyrightMessageBuilder {
 	 * @param string $rightsUrl
 	 * @param string $rightsText
 	 * @param Language $language
+	 * @param string $saveMessageKey defaults to 'wikibase-save'
 	 *
 	 * @return Message
 	 */
-	public function build( $rightsUrl, $rightsText, Language $language ) {
-		$renderedSaveMessage = $this->renderSaveMessage( $language );
+	public function build( $rightsUrl, $rightsText, Language $language, $saveMessageKey = 'wikibase-save' ) {
+		$renderedSaveMessage = $this->renderSaveMessage( $language, $saveMessageKey );
 		$renderedCopyrightPageMessage = $this->renderCopyrightPageMessage();
 
 		$rightsWarningMessage = new Message(
@@ -37,11 +38,12 @@ class CopyrightMessageBuilder {
 
 	/**
 	 * @param Language $language
+	 * @param string $saveMessageKey
 	 *
 	 * @return string
 	 */
-	private function renderSaveMessage( Language $language ) {
-		$saveMessage = new Message( 'wikibase-save' );
+	private function renderSaveMessage( Language $language, $saveMessageKey ) {
+		$saveMessage = new Message( $saveMessageKey );
 		return $saveMessage->inLanguage( $language )->text();
 	}
 

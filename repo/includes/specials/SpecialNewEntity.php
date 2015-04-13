@@ -318,7 +318,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			$this->rightsText
 		);
 
-		$html = $copyrightView->getHtml( $this->getLanguage() );
+		$html = $copyrightView->getHtml( $this->getLanguage(), 'wikibase-newentity-submit' );
 
 		$this->getOutput()->addHTML( $html );
 	}

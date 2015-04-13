@@ -28,7 +28,7 @@ class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 			$this->getCopyrightMessageBuilder( $message ), 'x', 'y'
 		);
 
-		$html = $specialPageCopyrightView->getHtml( $lang );
+		$html = $specialPageCopyrightView->getHtml( $lang, 'wikibase-submit' );
 		$this->assertEquals( $expected, $html );
 	}
 
@@ -46,12 +46,12 @@ class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 	public function getHtmlProvider() {
 		$message = new Message(
 			'wikibase-shortcopyrightwarning',
-			array( 'wikibase-save', 'copyrightpage', 'copyrightlink' )
+			array( 'wikibase-submit', 'copyrightpage', 'copyrightlink' )
 		);
 
 		return array(
 			array(
-				'<div>(wikibase-shortcopyrightwarning: wikibase-save, copyrightpage, copyrightlink)</div>',
+				'<div>(wikibase-shortcopyrightwarning: wikibase-submit, copyrightpage, copyrightlink)</div>',
 				$message,
 				'qqx'
 			)

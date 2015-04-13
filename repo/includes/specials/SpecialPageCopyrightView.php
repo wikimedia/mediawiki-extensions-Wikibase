@@ -43,11 +43,12 @@ class SpecialPageCopyrightView {
 
 	/**
 	 * @param Language $language
+	 * @param string $saveMessageKey
 	 *
 	 * @return string
 	 */
-	public function getHtml( Language $language ) {
-		$message = $this->getCopyrightMessage( $language );
+	public function getHtml( Language $language, $saveMessageKey ) {
+		$message = $this->getCopyrightMessage( $language, $saveMessageKey );
 		$renderedMessage = $this->render( $message, $language );
 
 		return $this->wrapMessage( $renderedMessage );
@@ -55,14 +56,16 @@ class SpecialPageCopyrightView {
 
 	/**
 	 * @param Language $language
+	 * @param string $saveMessageKey
 	 *
 	 * @return Message
 	 */
-	private function getCopyrightMessage( Language $language ) {
+	private function getCopyrightMessage( Language $language, $saveMessageKey ) {
 		$copyrightMessage = $this->messageBuilder->build(
 			$this->rightsUrl,
 			$this->rightsText,
-			$language
+			$language,
+			$saveMessageKey
 		);
 
 		return $copyrightMessage;
