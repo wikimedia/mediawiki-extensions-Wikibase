@@ -16,10 +16,6 @@ use Wikibase\SettingsArray;
 class ClientDefaultsTest extends \MediaWikiTestCase {
 
 	public function settingsProvider() {
-		//TODO: repoDatabase
-		//TODO: changesDatabase
-		//TODO: sharedCacheKeyPrefix
-
 		return array(
 			array( // #0: no local repo, all values set
 				array( // $settings
@@ -29,7 +25,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'xoo:WBL/' . WBL_VERSION,
+					'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION,
 				),
 				array( // $wg
 					'wgServer' => 'http://www.acme.com',
@@ -45,7 +41,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'xoo:WBL/' . WBL_VERSION,
+					'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION,
 				)
 			),
 
@@ -66,7 +62,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mw_mywiki',
 					'repoDatabase' => null,
 					'changesDatabase' => null,
-					'sharedCacheKeyPrefix' => 'repoUrl://www.wikidata.org:WBL/' . WBL_VERSION,
+					'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION . '-mw_mywiki',
 				)
 			),
 
@@ -115,7 +111,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mw_mywiki',
 					'repoDatabase' => false,
 					'changesDatabase' => false,
-					'sharedCacheKeyPrefix' => 'mw_mywiki:WBL/' . WBL_VERSION,
+					'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION . '-mw_mywiki',
 				)
 			),
 
@@ -131,46 +127,25 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'changesDatabase' => 'mw_foowiki',
 				)
 			),
-
-			array( // #5: derive sharedCacheKeyPrefix from repoDatabase value
+			array( // #5: sharedCacheKeyPrefix explicitly set
 				array( // $settings
-					'repoDatabase' => 'mw_foowiki',
-					'repoUrl' => 'http://www.acme.com',
+					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24'
 				),
 				array( // $wg
+					'wgServer' => 'http://www.acme.com',
+					'wgArticlePath' => '/mywiki',
+					'wgScriptPath' => '/mediawiki',
 					'wgDBname' => 'mw_mywiki',
 				),
-				false, // $repoIsLocal
+				true, // $repoIsLocal
 				array( // $expected
-					'sharedCacheKeyPrefix' => 'mw_foowiki:WBL/' . WBL_VERSION,
-				)
-			),
-
-			array( // #6: derive sharedCacheKeyPrefix from repoUrl
-				array( // $settings
-					'repoDatabase' => null,
 					'repoUrl' => 'http://www.acme.com',
-				),
-				array( // $wg
-					'wgDBname' => 'mw_mywiki',
-				),
-				false, // $repoIsLocal
-				array( // $expected
-					'sharedCacheKeyPrefix' => 'repoUrl:http://www.acme.com:WBL/' . WBL_VERSION,
-				)
-			),
-
-			array( // #7: derive sharedCacheKeyPrefix from wgDBname
-				array( // $settings
+					'repoArticlePath' => '/mywiki',
+					'repoScriptPath' => '/mediawiki',
+					'siteGlobalID' => 'mw_mywiki',
 					'repoDatabase' => false,
-					'repoUrl' => 'http://www.acme.com',
-				),
-				array( // $wg
-					'wgDBname' => 'mw_mywiki',
-				),
-				false, // $repoIsLocal
-				array( // $expected
-					'sharedCacheKeyPrefix' => 'mw_mywiki:WBL/' . WBL_VERSION,
+					'changesDatabase' => false,
+					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24',
 				)
 			),
 		);
