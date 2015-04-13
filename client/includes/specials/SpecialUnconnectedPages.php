@@ -66,7 +66,7 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 * @return string
 	 */
 	public function getDescription() {
-		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
+		return $this->msg( 'special-unconnectedpages' )->text();
 	}
 
 	public function setHeaders() {
@@ -82,7 +82,7 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 */
 	public function execute( $subPage ) {
 		$this->setHeaders();
-		$this->outputHeader( 'wikibase-' . strtolower( $this->getName() ) . '-summary' );
+		$this->outputHeader( 'wikibase-unconnectedpages-summary' );
 
 		// If the user is authorized, display the page, if not, show an error.
 		if ( !$this->userCanExecute( $this->getUser() ) ) {

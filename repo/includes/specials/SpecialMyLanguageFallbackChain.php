@@ -33,6 +33,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 */
 	public function __construct() {
 		parent::__construct( 'MyLanguageFallbackChain' );
+
 		$this->factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
 	}
 
@@ -53,8 +54,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 * @return string
 	 */
 	public function getDescription() {
-		// Message: special-mylanguagefallbackchain
-		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
+		return $this->msg( 'special-mylanguagefallbackchain' )->text();
 	}
 
 	/**

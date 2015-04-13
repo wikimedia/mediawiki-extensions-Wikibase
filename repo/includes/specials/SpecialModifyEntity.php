@@ -138,7 +138,8 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$this->rightsText
 		);
 
-		$html = $copyrightView->getHtml( $this->getLanguage(), 'wikibase-' . strtolower( $this->getName() ) . '-submit' );
+		$submitKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
+		$html = $copyrightView->getHtml( $this->getLanguage(), $submitKey );
 		$this->getOutput()->addHTML( $html );
 	}
 
@@ -189,10 +190,11 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$this->getOutput()->addHTML( $this->getFormElements( $entity ) );
 
 		// Form body
+		$submitKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
 		$this->getOutput()->addHTML(
 			Html::input(
-				'wikibase-' . strtolower( $this->getName() ) . '-submit',
-				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-submit' )->text(),
+				$submitKey,
+				$this->msg( $submitKey )->text(),
 				'submit',
 				array(
 					'id' => 'wb-' . strtolower( $this->getName() ) . '-submit',
