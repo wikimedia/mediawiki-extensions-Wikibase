@@ -9,6 +9,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
 use Wikibase\TermIndex;
 use Wikibase\Api\SearchEntities;
@@ -40,7 +41,6 @@ class SearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 			),
 			"aliases" => array(
 				array( array( "language" => "de", "value" => "Dickes B" ) ),
-				array( array( "language" => "en", "value" => "Dickes B" ) ),
 			),
 			"descriptions" => array(
 				array( "language" => "en", "value" => "Capital city and a federated state of the Federal Republic of Germany." ),
@@ -58,6 +58,7 @@ class SearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 			"aliases" => array(
 			),
 			"descriptions" => array(
+				array( "language" => "en", "value" => "City in Switzerland." ),
 				array( "language" => "de", "value" => "Stadt in der Schweiz." ),
 			),
 		),
@@ -180,8 +181,8 @@ class SearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 			$this->getTitleLookup(),
 			new BasicEntityIdParser(),
 			array( 'item', 'property' ),
-			$this->getContentLanguages()
-
+			$this->getContentLanguages(),
+			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
 		);
 
 		$module->execute();
@@ -200,8 +201,11 @@ class SearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 		$testCases[] = array( array( 'search' => '广州市', 'language' => 'zh-cn' ), array( 'handle' => 'Guangzhou' ) );
 
 		//Search via partial Labels
-		$testCases[] = array( array( 'search' => 'BER', 'language' => 'de' ), array( 'handle' => 'Berlin' ) );
+		$testCases[] = array( array( 'search' => 'Guang', 'language' => 'de' ), array( 'handle' => 'Guangzhou' ) );
 		$testCases[] = array( array( 'search' => '广', 'language' => 'zh-cn' ), array( 'handle' => 'Guangzhou' ) );
+
+		//Match alias
+		$testCases[] = array( array( 'search' => 'Dickes', 'language' => 'de' ), array( 'handle' => 'Berlin' ) );
 
 		return $testCases;
 	}
@@ -229,6 +233,34 @@ class SearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $this->callApiModule( $params );
 		$this->assertApiResultHasExpected( $result['search'], $params, $expected );
+	}
+
+
+	public function testSearchFallback() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'BERN',
+			'language' => 'de-ch',
+		);
+
+		$result = $this->callApiModule( $params );
+		$this->assertCount( 1, $result['search'] );
+
+		$resultEntry = reset( $result['search'] );
+		$this->assertEquals( 'Bern', $resultEntry['label'] );
+		$this->assertEquals( 'Stadt in der Schweiz.', $resultEntry['description'] );
+	}
+
+	public function testSearchStrictLanguage() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'Berlin',
+			'language' => 'de-ch',
+			'strictlanguage' => true
+		);
+
+		$result = $this->callApiModule( $params );
+		$this->assertEmpty( $result['search'] );
 	}
 
 	public function testSearchContinue() {

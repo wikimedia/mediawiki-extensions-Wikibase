@@ -285,11 +285,8 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	) {
 		$matchingTerms = array();
 
-		$language = $terms[0]->getLanguage();
-
 		foreach ( $this->terms as $term ) {
-			if ( ( $language === null || $term->getLanguage() === $language )
-				&& ( $entityType === null || $term->getEntityType() === $entityType )
+			if ( ( $entityType === null || $term->getEntityType() === $entityType )
 				&& ( $termType === null || $term->getType() === $termType )
 				&& $this->termMatchesTemplates( $term, $terms, $options )
 			) {
