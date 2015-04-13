@@ -34,6 +34,24 @@
       "revId": "166b451fabee7849ec022dca9d0ff3a24f887dba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_29e870a2",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-13T15:09:20Z",
+      "side": 1,
+      "message": "I didn\u0027t find a way to use the localized name but didn\u0027t search a lot for it. Furthermore, the localized aliasses don\u0027t seem to work on Wikidata anyways (cf. https://www.wikidata.org/wiki/Special:Neues_Datenelement_erstellen) I don\u0027t think it\u0027s high priority to make the link localized because the special page\u0027s title will localize automatically and the link\u0027s text is also localized.",
+      "parentUuid": "6e7c4fa4_6994288f",
+      "revId": "166b451fabee7849ec022dca9d0ff3a24f887dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
