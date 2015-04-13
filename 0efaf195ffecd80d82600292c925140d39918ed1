@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5cc24c8a",
+        "filename": "lib/includes/store/PropertyInfoStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-13T16:05:40Z",
+      "side": 1,
+      "message": "Hmm, copy \u0026 paste from below.",
+      "parentUuid": "6e7c4fa4_69e50804",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_a9ba40d8",
         "filename": "lib/includes/store/sql/PropertyInfoTable.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-13T15:16:28Z",
       "side": 1,
       "message": "$dbw is usually used as a variable name for write (master) connections",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1cbcd400",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-13T16:05:40Z",
+      "side": 1,
+      "message": "Also copied from below. Which name do you suggest? Just $db?",
+      "parentUuid": "6e7c4fa4_a9ba40d8",
       "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_dc35fca3",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-13T16:05:40Z",
+      "side": 1,
+      "message": "As we have a \u003cselect\u003e field and no plain text field this case should not be reachable when using the form. Therefore, I don\u0027t think an error message is necessary here.",
+      "parentUuid": "6e7c4fa4_09233401",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_49428cb3",
         "filename": "repo/includes/specials/SpecialListProperties.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9c3f8482",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-13T16:05:40Z",
+      "side": 1,
+      "message": "By \"inject\" you mean set it in the constructor from global state, right? :P",
+      "parentUuid": "6e7c4fa4_49428cb3",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_4957ec5c",
         "filename": "repo/includes/specials/SpecialListProperties.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2015-04-13T15:16:28Z",
       "side": 1,
       "message": "This seems like a very rare edge case to me that actually points out a problem... why not just have it throw up?",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3c467027",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-13T16:05:40Z",
+      "side": 1,
+      "message": "This code fragment is tagen from SpecialWikibaseQueryPage (cf @see annotation). Perhaps both functions should be changed accordingly.",
+      "parentUuid": "6e7c4fa4_4957ec5c",
       "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
