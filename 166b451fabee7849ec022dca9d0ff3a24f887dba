@@ -16,6 +16,24 @@
       "revId": "166b451fabee7849ec022dca9d0ff3a24f887dba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6994288f",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T14:30:45Z",
+      "side": 1,
+      "message": "Oh, missed the dependency on the other patch, never mind :)\nSo, isn\u0027t there a better way to link to special pages? One that uses the localized name?",
+      "parentUuid": "6e7c4fa4_095d741a",
+      "revId": "166b451fabee7849ec022dca9d0ff3a24f887dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
