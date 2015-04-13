@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rachitrali"
+		]
+	},
+	"wikibase-edit": "ترمیم",
+	"wikibase-add": "شامل کورے",
+	"wikibase-label-empty": "کیہ لیبل ڈیفائن کورونو نو بیتی شیر",
+	"wikibase-statements": "بیانات",
+	"wikibase-sitelinks-special": "دیگر ویب سائٹ",
+	"wikibase-statementview-rank-normal": "عام درجہ بندی",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|references}}"
+}

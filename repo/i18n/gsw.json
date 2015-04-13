@@ -12,6 +12,7 @@
 	"wikibase-save": "spyychere",
 	"wikibase-cancel": "abbräche",
 	"wikibase-add": "zuefiege",
+	"wikibase-label-empty": "S git kei Uusdruck",
 	"wikibase-label-edit-placeholder": "Bezeichnig yygee",
 	"wikibase-description-empty": "S git kei Bschrybig",
 	"wikibase-description-edit-placeholder": "Bschryybig yygee",
@@ -23,5 +24,5 @@
 	"wikibase-remove": "uuseneh",
 	"wikibase-aliases-empty": "S kei Alias definiert wore.",
 	"wikibase-statementview-rank-normal": "Normale Rang",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Fueßnote|Fueßnote}}"
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Fueßnote}}"
 }
