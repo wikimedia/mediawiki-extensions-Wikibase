@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b2662e25",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-13T10:23:49Z",
+      "side": 1,
+      "message": "this works for the existing code, but would be nice if we had test cases here for statements on properties.\n\nmaybe add a fixme?",
+      "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
