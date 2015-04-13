@@ -231,6 +231,34 @@ class SearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 		$this->assertApiResultHasExpected( $result['search'], $params, $expected );
 	}
 
+
+	public function testSearchFallback() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'BER',
+			'language' => 'de-ch',
+		);
+
+		list( $result,, ) = $this->doApiRequest( $params );
+		$this->assertCount( 1, $result['search'] );
+
+		$resultEntry = reset( $result['search'] );
+		$this->assertEquals( 'Berlin', $resultEntry['label'] );
+		$this->assertEquals( 'Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland.', $resultEntry['description'] );
+	}
+
+	public function testSearchStrictLanguage() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'Berlin',
+			'language' => 'de-ch',
+			'strictlanguage' => true
+		);
+
+		list( $result,, ) = $this->doApiRequest( $params );
+		$this->assertEmpty( $result['search'] );
+	}
+
 	public function testSearchContinue() {
 		$params = array(
 			'action' => 'wbsearchentities',
