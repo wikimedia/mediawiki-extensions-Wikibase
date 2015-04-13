@@ -35,7 +35,7 @@ abstract class HashArrayTest extends \PHPUnit_Framework_TestCase {
 		$instances = [];
 
 		foreach ( $this->constructorProvider() as $args ) {
-			$instances[] = [ new $class( array_key_exists( 0, $args ) ? $args[0] : null ) ];
+			$instances[] = [ new $class( array_key_exists( 0, $args ) ? $args[0] : [] ) ];
 		}
 
 		return $instances;
