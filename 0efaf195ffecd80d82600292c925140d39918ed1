@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_dc03bcbf",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-13T16:08:13Z",
+      "side": 1,
+      "message": "$dbr? normally used for read connections, which slave provides\n\nor maybe $db or $database (although it\u0027s somewhat strange thing and could also be a $connection).",
+      "parentUuid": "6e7c4fa4_1cbcd400",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_09233401",
         "filename": "repo/includes/specials/SpecialListProperties.php",
         "patchSetId": 2
