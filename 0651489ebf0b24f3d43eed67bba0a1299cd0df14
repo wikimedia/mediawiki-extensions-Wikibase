@@ -16,6 +16,24 @@
       "revId": "0651489ebf0b24f3d43eed67bba0a1299cd0df14",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3f9982c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-13T17:42:48Z",
+      "side": 1,
+      "message": "Yes, removing sitelinks did not work since some other change.\nRemoved safety check huh? Where do you see that?",
+      "parentUuid": "6e7c4fa4_1c7ff4a7",
+      "revId": "0651489ebf0b24f3d43eed67bba0a1299cd0df14",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
