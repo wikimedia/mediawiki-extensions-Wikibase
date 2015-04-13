@@ -16,6 +16,24 @@
       "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_466d9b95",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-13T12:05:27Z",
+      "side": 1,
+      "message": "Sorry, I disagree. This is a test for the set claims API. It\u0027s not the job of this test to check if all entity types that are supposed to support statements do that properly.",
+      "parentUuid": "6e7c4fa4_b2662e25",
+      "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
