@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_69e50804",
+        "filename": "lib/includes/store/PropertyInfoStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T15:16:28Z",
+      "side": 1,
+      "message": "ionfo?",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a9ba40d8",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T15:16:28Z",
+      "side": 1,
+      "message": "$dbw is usually used as a variable name for write (master) connections",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_09233401",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T15:16:28Z",
+      "side": 1,
+      "message": "Shall we show an error here?",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_49428cb3",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T15:16:28Z",
+      "side": 1,
+      "message": "Inject the entity content factory",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4957ec5c",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T15:16:28Z",
+      "side": 1,
+      "message": "This seems like a very rare edge case to me that actually points out a problem... why not just have it throw up?",
+      "revId": "0efaf195ffecd80d82600292c925140d39918ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
