@@ -33,6 +33,24 @@
       "revId": "d73263e308bd78923a65174c414d64f87bab732f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_128922cb",
+        "filename": "repo/tests/phpunit/includes/api/FormatSnakValueTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-13T10:07:59Z",
+      "side": 1,
+      "message": "You are right, this already works via MW\u0027s internal fallback mechanism. The test needs to be changed to check whether label fallback works.",
+      "parentUuid": "6e7c4fa4_46f129fd",
+      "revId": "d73263e308bd78923a65174c414d64f87bab732f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
