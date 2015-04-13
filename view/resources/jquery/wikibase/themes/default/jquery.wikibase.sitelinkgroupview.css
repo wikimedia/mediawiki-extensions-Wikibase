@@ -33,10 +33,11 @@
 	background-color: #D6F3FF;
 }
 
-.wikibase-sitelinkgroupview h2 {
+.wikibase-sitelinkgroupview h3 {
 	display: inline;
 	float: none;
 	width: auto;
+	padding-left: 0.5em;
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container > .wikibase-toolbar-container {
