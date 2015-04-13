@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1a67f4b5",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T20:08:38Z",
+      "side": 1,
+      "message": "Only null?",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7a686885",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T20:08:38Z",
+      "side": 1,
+      "message": "ugh",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9a0a24d4",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T20:08:38Z",
+      "side": 1,
+      "message": "This is needed because the getMatchingTerms might return multiple terms with the same entity id, thus we can\u0027t just pass the limit on... right?",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5af48ccb",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T20:08:38Z",
+      "side": 1,
+      "message": "fully qualified class name",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7aef08f7",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-13T20:08:38Z",
+      "side": 1,
+      "message": "The mix of single and double quotes in here looks a little weird to me. But acceptable in a test, no need to change that.",
+      "revId": "83e2c448d788674718eb77f4f496e42ed900939b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
