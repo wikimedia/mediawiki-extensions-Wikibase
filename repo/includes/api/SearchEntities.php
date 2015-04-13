@@ -7,9 +7,11 @@ use ApiMain;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
+use Wikibase\TermIndex;
 
 /**
  * API module to search for Wikibase entities.
@@ -42,6 +44,21 @@ class SearchEntities extends ApiBase {
 	private $idParser;
 
 	/**
+	 * @var TermIndex
+	 */
+	private $termIndex;
+
+	/**
+	 * @var ContentLanguages
+	 */
+	private $termsLanguages;
+
+	/**
+	 * @var string[]
+	 */
+	private $entityTypes;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -51,9 +68,37 @@ class SearchEntities extends ApiBase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		//TODO: provide a mechanism to override the services
-		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$repo = WikibaseRepo::getDefaultInstance();
+		$this->setServices(
+			$repo->getStore()->getTermIndex(),
+			$repo->getEntityTitleLookup(),
+			$repo->getEntityIdParser(),
+			$repo->getEntityFactory()->getEntityTypes(),
+			$repo->getTermsLanguages()
+		);
+	}
+
+	/**
+	 * Override services, for use for testing.
+	 *
+	 * @param TermIndex $termIndex
+	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityIdParser $idParser
+	 * @param array $entityTypes
+	 * @param ContentLanguages $termLanguages
+	 */
+	public function setServices(
+		TermIndex $termIndex,
+		EntityTitleLookup $titleLookup,
+		EntityIdParser $idParser,
+		array $entityTypes,
+		ContentLanguages $termLanguages
+	) {
+		$this->termIndex = $termIndex;
+		$this->titleLookup = $titleLookup;
+		$this->idParser = $idParser;
+		$this->entityTypes = $entityTypes;
+		$this->termsLanguages = $termLanguages;
 	}
 
 	/**
@@ -69,17 +114,17 @@ class SearchEntities extends ApiBase {
 	 * @return EntityId[]
 	 */
 	private function searchEntities( $term, $entityType, $language, $limit, $prefixSearch ) {
-		return WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getMatchingIDs(
+		return $this->termIndex->getMatchingIDs(
 			array(
 				new Term( array(
-					'termType' 		=> Term::TYPE_LABEL,
-					'termLanguage' 	=> $language,
-					'termText' 		=> $term
+				'termType' 		=> Term::TYPE_LABEL,
+				'termLanguage' 	=> $language,
+				'termText' 		=> $term
 				) ),
 				new Term( array(
-					'termType' 		=> Term::TYPE_ALIAS,
-					'termLanguage' 	=> $language,
-					'termText' 		=> $term
+				'termType' 		=> Term::TYPE_ALIAS,
+				'termLanguage' 	=> $language,
+				'termText' 		=> $term
 				) )
 			),
 			$entityType,
@@ -204,7 +249,7 @@ class SearchEntities extends ApiBase {
 		}
 
 		// Find all the remaining terms for the given entities
-		$terms = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getTermsOfEntities(
+		$terms = $this->termIndex->getTermsOfEntities(
 			$entityIds, null, array( $languageCode ) );
 		// TODO: This needs to be rethought when a different search engine is used
 		$aliasPattern = '/^' . preg_quote( $search, '/' ) . '/i';
@@ -305,7 +350,6 @@ class SearchEntities extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 
 		return array(
 			'search' => array(
@@ -313,11 +357,11 @@ class SearchEntities extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
+				ApiBase::PARAM_TYPE => $this->termsLanguages->getLanguages(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'type' => array(
-				ApiBase::PARAM_TYPE => $entityFactory->getEntityTypes(),
+				ApiBase::PARAM_TYPE => $this->entityTypes,
 				ApiBase::PARAM_DFLT => 'item',
 			),
 			'limit' => array(
