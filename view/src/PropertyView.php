@@ -92,7 +92,8 @@ class PropertyView extends EntityView {
 	private function getHtmlForDataType( DataType $dataType ) {
 		return $this->templateFactory->render( 'wb-section-heading',
 			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
-			'datatype'
+			'datatype',
+			'wikibase-propertypage-datatype'
 		)
 		. $this->templateFactory->render( 'wikibase-propertyview-datatype',
 			htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
