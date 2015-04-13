@@ -174,7 +174,7 @@ class PropertyInfoTableBuilder {
 		while ( true ) {
 			// Make sure we are not running too far ahead of the slaves,
 			// as that would cause the site to be rendered read only.
-			$this->waitForSlaves( $dbw );
+			wfWaitForSlaves();
 
 			if ( $this->useTransactions ) {
 				$dbw->begin();
@@ -229,29 +229,6 @@ class PropertyInfoTableBuilder {
 		}
 
 		return $total;
-	}
-
-	/**
-	 * Wait for slaves (quietly)
-	 *
-	 * @todo: this should be in the Database class.
-	 * @todo: thresholds should be configurable
-	 *
-	 * @author Tim Starling (stolen from recompressTracked.php)
-	 */
-	private function waitForSlaves() {
-		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->propertyInfoTable
-
-		while ( true ) {
-			list( , $maxLag ) = $lb->getMaxLag();
-			if ( $maxLag < 2 ) {
-				break;
-			}
-
-			$this->reportMessage( "Slaves are lagged by $maxLag seconds, sleeping..." );
-			sleep( 5 );
-			$this->reportMessage( "Resuming..." );
-		}
 	}
 
 	/**
