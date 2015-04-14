@@ -55,11 +55,15 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 
 		$formatted = $this->dateTimeFormatter->format( $value );
 
-		if ( $this->calendarNameNeeded( $value ) ) {
-			$formatted .= '<sup class="wb-calendar-name">'
-				. $this->formatCalendarName( $value->getCalendarModel() )
-				. '</sup>';
-		}
+		// FIXME: The current logic below uses the calendar model field as "actual calendar model of
+		// the timestamp", not as "prefered". The later was the original intention of the field and
+		// needs conversion from the "always Gregorian" timestamp to the "prefered" calendar model.
+		// FIXME: Temporarily disabled.
+		//if ( $this->calendarNameNeeded( $value ) ) {
+		//	$formatted .= '<sup class="wb-calendar-name">'
+		//		. $this->formatCalendarName( $value->getCalendarModel() )
+		//		. '</sup>';
+		//}
 
 		return $formatted;
 	}
