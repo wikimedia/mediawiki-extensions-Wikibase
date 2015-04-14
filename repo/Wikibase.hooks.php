@@ -1178,4 +1178,23 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Disable mobile editor for entity pages.
+	 *
+	 * @param Skin $skin
+	 * @param array& $modules
+	 *
+	 * @return bool
+	 */
+	public static function onSkinMinervaDefaultModules( Skin $skin, array& $modules ) {
+		$title = $skin->getTitle();
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+			unset( $modules['editor'] );
+		}
+
+		return true;
+	}
+
 }
