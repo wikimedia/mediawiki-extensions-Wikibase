@@ -77,10 +77,13 @@ class ChangeOpClaimRemove extends ChangeOpBase {
 	 * @throws ChangeOpException
 	 */
 	protected function removeClaim( Claims $claims, Summary $summary = null ) {
-		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
+		$claim = $claims->getClaimWithGuid( $this->claimGuid );
+
+		if ( $claim === null ) {
 			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
 		}
-		$removedSnak = $claims->getClaimWithGuid( $this->claimGuid )->getMainSnak();
+
+		$removedSnak = $claim->getMainSnak();
 		$claims->removeClaimWithGuid( $this->claimGuid );
 		$this->updateSummary( $summary, 'remove', '', $this->getClaimSummaryArgs( $removedSnak ) );
 	}

@@ -119,11 +119,12 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * @throws ChangeOpException
 	 */
 	private function setClaim( Claims $claims, Summary $summary = null ) {
-		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
+		$claim = $claims->getClaimWithGuid( $this->claimGuid );
+
+		if ( $claim === null ) {
 			throw new ChangeOpException( "Entity does not have claim with GUID " . $this->claimGuid );
 		}
 
-		$claim = $claims->getClaimWithGuid( $this->claimGuid );
 		$propertyId = $claim->getMainSnak()->getPropertyId();
 
 		if ( !$propertyId->equals( $this->snak->getPropertyId() ) ) {

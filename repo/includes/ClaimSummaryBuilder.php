@@ -58,18 +58,19 @@ class ClaimSummaryBuilder {
 	 * @return Summary
 	 */
 	public function buildClaimSummary( Claims $existingClaims, Claim $newClaim ) {
-		$summary = new Summary( $this->apiModuleName );
+		$guid = $newClaim->getGuid();
+		$oldClaim = $existingClaims->getClaimWithGuid( $guid );
 
+		$summary = new Summary( $this->apiModuleName );
 		$summary->addAutoCommentArgs( 1 ); // only one claim touched, so we're always having singular here
 		$summaryArgs = $this->buildSummaryArgs(
 			new Claims( array( $newClaim ) ),
-			array($newClaim->getGuid())
+			array( $guid )
 		);
 		$summary->addAutoSummaryArgs( $summaryArgs );
 
-		if ( $existingClaims->hasClaimWithGuid( $newClaim->getGuid() ) ) {
+		if ( $oldClaim !== null ) {
 			//claim is changed
-			$oldClaim = $existingClaims->getClaimWithGuid( $newClaim->getGuid() );
 			$claimDifference = $this->claimDiffer->diffClaims( $oldClaim, $newClaim );
 
 			if ( $claimDifference->isAtomic() ) {
@@ -112,9 +113,11 @@ class ClaimSummaryBuilder {
 	private function buildSummaryArgs( Claims $claims, array $guids ) {
 		$pairs = array();
 
-		foreach( $guids as $guid ) {
-			if ( $claims->hasClaimWithGuid( $guid ) ) {
-				$snak = $claims->getClaimWithGuid( $guid )->getMainSnak();
+		foreach ( $guids as $guid ) {
+			$claim = $claims->getClaimWithGuid( $guid );
+
+			if ( $claim !== null ) {
+				$snak = $claim->getMainSnak();
 				$key = $snak->getPropertyId()->getSerialization();
 
 				if ( !array_key_exists( $key, $pairs ) ) {

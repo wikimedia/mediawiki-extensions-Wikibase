@@ -81,12 +81,12 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$claims = new Claims( $entity->getClaims() );
+		$claim = $claims->getClaimWithGuid( $this->claimGuid );
 
-		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
+		if ( $claim === null ) {
 			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
 		}
 
-		$claim = $claims->getClaimWithGuid( $this->claimGuid );
 		$qualifiers = $claim->getQualifiers();
 
 		if ( $this->snakHash === '' ) {
