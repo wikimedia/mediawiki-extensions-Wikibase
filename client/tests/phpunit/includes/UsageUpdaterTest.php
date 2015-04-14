@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Test\Store;
 
+use PHPUnit_Framework_Assert;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\SubscriptionManager;
@@ -24,10 +25,11 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param EntityUsage[]|null $oldUsage
+	 * @param string $expectedTouched timestamp
 	 *
 	 * @return UsageTracker
 	 */
-	private function getUsageTracker( array $oldUsage = null ) {
+	private function getUsageTracker( array $oldUsage = null, $expectedTouched = '' ) {
 		$usage = $oldUsage;
 
 		$mock = $this->getMock( 'Wikibase\Client\Usage\UsageTracker' );
@@ -39,7 +41,9 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 			$mock->expects( $this->once() )
 				->method( 'trackUsedEntities' )
 				->will( $this->returnCallback(
-					function ( $pageId, $newUsage ) use ( &$usage ) {
+					function ( $pageId, $newUsage, $touched ) use ( &$usage, $expectedTouched ) {
+						PHPUnit_Framework_Assert::assertEquals( $expectedTouched, $touched, 'touched' );
+
 						$oldUsage = $usage;
 						$usage = $newUsage;
 						return $oldUsage;
@@ -111,13 +115,14 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityId[]|null $unusedEntities
 	 * @param EntityId[] $subscribe
 	 * @param EntityId[] $unsubscribe
+	 * @param string $touched timestamp
 	 *
 	 * @return UsageUpdater
 	 */
-	private function getUsageUpdater( $oldUsage, $unusedEntities, array $subscribe, array $unsubscribe ) {
+	private function getUsageUpdater( $oldUsage, $unusedEntities, array $subscribe, array $unsubscribe, $touched ) {
 		return new UsageUpdater(
 			'testwiki',
-			$this->getUsageTracker( $oldUsage ),
+			$this->getUsageTracker( $oldUsage, $touched ),
 			$this->getUsageLookup( $unusedEntities ),
 			$this->getSubscriptionManager( 'testwiki', $subscribe, $unsubscribe )
 		);
@@ -177,10 +182,12 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityId[] $unsubscribe
 	 */
 	public function testUpdateUsageForPage( $oldUsage, $newUsage, $unusedEntities, $subscribe, $unsubscribe ) {
-		$updater = $this->getUsageUpdater( $oldUsage, $unusedEntities, $subscribe, $unsubscribe );
+		$touched = wfTimestamp( TS_MW );
+
+		$updater = $this->getUsageUpdater( $oldUsage, $unusedEntities, $subscribe, $unsubscribe, $touched );
 
 		// assertions are done by the mock double
-		$updater->updateUsageForPage( 23, $newUsage );
+		$updater->updateUsageForPage( 23, $newUsage, $touched );
 	}
 
 }

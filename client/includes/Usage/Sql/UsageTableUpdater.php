@@ -79,10 +79,11 @@ class UsageTableUpdater {
 	 * @param int $pageId
 	 * @param EntityUsage[] $oldUsages
 	 * @param EntityUsage[] $newUsages
+	 * @param string $touched timestamp
 	 *
 	 * @return int The number of usages added or removed
 	 */
-	public function updateUsage( $pageId, array $oldUsages, array $newUsages ) {
+	public function updateUsage( $pageId, array $oldUsages, array $newUsages, $touched ) {
 		$newUsages = $this->reindexEntityUsages( $newUsages );
 		$oldUsages = $this->reindexEntityUsages( $oldUsages );
 
@@ -91,7 +92,11 @@ class UsageTableUpdater {
 
 		$mod = 0;
 		$mod += $this->removeUsageForPage( $pageId, $removed );
-		$mod += $this->addUsageForPage( $pageId, $added );
+
+		// update the "touched" timestamp for the remaining entries
+		$this->touchUsageForPage( $pageId, $touched );
+
+		$mod += $this->addUsageForPage( $pageId, $added, $touched );
 
 		return $mod;
 	}
@@ -115,6 +120,23 @@ class UsageTableUpdater {
 		}
 
 		return $c;
+	}
+
+	/**
+	 * @param int $pageId
+	 * @param string $touched timestamp
+	 */
+	private function touchUsageForPage( $pageId, $touched ) {
+		$this->connection->update(
+			$this->tableName,
+			array(
+				'eu_touched' => $touched,
+			),
+			array(
+				'eu_page_id' => (int)$pageId,
+			),
+			__METHOD__
+		);
 	}
 
 	/**
@@ -144,11 +166,11 @@ class UsageTableUpdater {
 	/**
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
+	 * @param string $touched timestamp
 	 *
-	 * @throws InvalidArgumentException
-	 * @return array[] A list of rows for use with DatabaseBase::insert
+	 * @return array[]
 	 */
-	private function makeUsageRows( $pageId, array $usages ) {
+	private function makeUsageRows( $pageId, array $usages, $touched ) {
 		$rows = array();
 
 		foreach ( $usages as $usage ) {
@@ -160,6 +182,7 @@ class UsageTableUpdater {
 				'eu_page_id' => (int)$pageId,
 				'eu_aspect' => $usage->getAspect(),
 				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
+				'eu_touched' => wfTimestamp( TS_MW, $touched ),
 			);
 		}
 
@@ -200,16 +223,17 @@ class UsageTableUpdater {
 	/**
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
+	 * @param string $touched timestamp
 	 *
 	 * @return int The number of entries added
 	 */
-	private function addUsageForPage( $pageId, array $usages ) {
+	private function addUsageForPage( $pageId, array $usages, $touched ) {
 		if ( empty( $usages ) ) {
 			return 0;
 		}
 
 		$batches = array_chunk(
-			$this->makeUsageRows( $pageId, $usages ),
+			$this->makeUsageRows( $pageId, $usages, $touched ),
 			$this->batchSize
 		);
 

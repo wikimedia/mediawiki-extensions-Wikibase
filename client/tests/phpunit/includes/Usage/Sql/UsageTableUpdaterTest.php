@@ -67,10 +67,11 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * @param EntityUsage[] $usages
 	 * @param int $pageId
+	 * @param string|null $touched timestamp
 	 *
-	 * @return array[]
+	 * @return \array[]
 	 */
-	private function getUsageRows( array $usages, $pageId = 0 ) {
+	private function getUsageRows( array $usages, $pageId = 0, $touched = null ) {
 		$rows = array();
 
 		foreach ( $usages as $key => $usage ) {
@@ -81,6 +82,10 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 
 			if ( $pageId > 0 ) {
 				$row['eu_page_id'] = $pageId;
+			}
+
+			if ( $pageId > 0 ) {
+				$row['eu_touched'] = wfTimestamp( TS_MW, $touched );
 			}
 
 			if ( is_int( $key ) ) {
@@ -118,6 +123,8 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateUsage() {
+		$touched = wfTimestamp( TS_MW );
+
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
@@ -129,19 +136,21 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$rows = $this->getUsageRows( $usages, 23 );
+		$rows = $this->getUsageRows( $usages, 23, $touched );
 
 		$tableUpdater = $this->getUsageTableUpdater();
-		$tableUpdater->updateUsage( 23, array(), $usages );
+		$tableUpdater->updateUsage( 23, array(), $usages, $touched );
 
 		$this->assertUsageTableContains( $rows );
 
-		$tableUpdater->updateUsage( 23, $usages, array() );
+		$tableUpdater->updateUsage( 23, $usages, array(), $touched );
 
 		$this->assertUsageTableDoesNotContain( $rows );
 	}
 
 	public function testRemoveEntities() {
+		$touched = wfTimestamp( TS_MW );
+
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
@@ -154,7 +163,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		);
 
 		$tableUpdater = $this->getUsageTableUpdater();
-		$tableUpdater->updateUsage( 23, array(), $usages );
+		$tableUpdater->updateUsage( 23, array(), $usages, $touched );
 
 		$rows = $this->getUsageRows( $usages, 23 );
 		$itemsToRemove = array( $q4, $q5 );
@@ -169,28 +178,30 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testTrackUsedEntities_batching() {
+		$touched = wfTimestamp( TS_MW );
 		$usages = $this->makeUsages( 10 );
-		$rows = $this->getUsageRows( $usages, 7 );
+		$rows = $this->getUsageRows( $usages, 7, $touched );
 
 		$tableUpdater = $this->getUsageTableUpdater( 3 );
 
 		// inserting more rows than fit into a single batch
-		$tableUpdater->updateUsage( 7, array(), $usages );
+		$tableUpdater->updateUsage( 7, array(), $usages, $touched );
 		$this->assertUsageTableContains( $rows );
 
 		// removing more rows than fit into a single batch
-		$tableUpdater->updateUsage( 7, $usages, array() );
+		$tableUpdater->updateUsage( 7, $usages, array(), $touched );
 		$this->assertUsageTableDoesNotContain( $rows );
 	}
 
 	public function testRemoveEntities_batching() {
+		$touched = wfTimestamp( TS_MW );
 		$usages = $this->makeUsages( 10 );
-		$rows7 = $this->getUsageRows( $usages, 7 );
-		$rows8 = $this->getUsageRows( $usages, 8 );
+		$rows7 = $this->getUsageRows( $usages, 7, $touched );
+		$rows8 = $this->getUsageRows( $usages, 8, $touched );
 
 		$tableUpdater = $this->getUsageTableUpdater( 3 );
-		$tableUpdater->updateUsage( 7, array(), $usages );
-		$tableUpdater->updateUsage( 8, array(), $usages );
+		$tableUpdater->updateUsage( 7, array(), $usages, $touched );
+		$tableUpdater->updateUsage( 8, array(), $usages, $touched );
 
 		// removing more rows than fit into a single batch
 		$entitiesToRemove = array_slice( $this->getItemIds( $usages ), 0, 5 );

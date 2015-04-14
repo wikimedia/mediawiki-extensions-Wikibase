@@ -22,10 +22,11 @@ interface UsageTracker {
 	 *
 	 * See docs/usagetracking.wiki for details.
 	 *
+	 * @param string $touched Timestamp corresponding to page.page_touched.
+	 *
 	 * @return EntityUsage[] Usages before the update
-	 * @throws UsageTrackerException
 	 */
-	public function trackUsedEntities( $pageId, array $usages );
+	public function trackUsedEntities( $pageId, array $usages, $touched );
 
 	/**
 	 * Removes usage tracking for the given set of entities.
