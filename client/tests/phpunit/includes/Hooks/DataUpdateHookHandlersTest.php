@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
+use WikiPage;
 
 /**
  * @covers Wikibase\Client\Hooks\DataUpdateHookHandlers
@@ -44,6 +45,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @param Title $title
 	 * @param array[]|null $expectedUsages
+	 * @param string $expectedTouched timestamp
 	 *
 	 * @return UsageUpdater
 	 */
@@ -59,7 +61,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			$expectedEntityUsageList = $this->makeEntityUsageList( $expectedUsages );
 			$usageUpdater->expects( $this->once() )
 				->method( 'updateUsageForPage' )
-				->with( $title->getArticleID(), $expectedEntityUsageList );
+				->with( $title->getArticleID(), $expectedEntityUsageList, $title->getTouched() );
 		}
 
 		return $usageUpdater;
@@ -129,24 +131,28 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @param Title $title
 	 *
-	 * @return Parser
+	 * @return WikiPage
 	 */
 	private function newWikiPage( Title $title ) {
-		$parser = $this->getMockBuilder( 'WikiPage' )
+		$page = $this->getMockBuilder( 'WikiPage' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$parser->expects( $this->any() )
+		$page->expects( $this->any() )
 			->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
 
-		return $parser;
+		$page->expects( $this->any() )
+			->method( 'getTouched' )
+			->will( $this->returnValue( $title->getTouched() ) );
+
+		return $page;
 	}
 
 	/**
 	 * @param array[]|null $usages
 	 *
-	 * @return Parser
+	 * @return object
 	 */
 	private function newEditInfo( array $usages = null ) {
 		$output = $this->newParserOutput( $usages );
