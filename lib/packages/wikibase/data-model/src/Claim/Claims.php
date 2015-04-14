@@ -136,25 +136,6 @@ class Claims extends ArrayObject {
 	}
 
 	/**
-	 * @since 0.1
-	 *
-	 * @param Claim $claim
-	 */
-	public function removeClaim( Claim $claim ) {
-		$guid = $claim->getGuid();
-
-		if ( $guid === null ) {
-			return;
-		}
-
-		$key = $this->getGuidKey( $guid );
-
-		if ( $this->offsetExists( $key ) ) {
-			$this->offsetUnset( $key );
-		}
-	}
-
-	/**
 	 * @since 0.3
 	 *
 	 * @param string $claimGuid

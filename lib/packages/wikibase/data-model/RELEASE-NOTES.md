@@ -22,6 +22,7 @@
 * Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
 * Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
 * Removed `Claims::indexOf` (you can use `StatementList::getIndexByGuid` instead)
+* Removed `Claims::removeClaim`
 * Removed `Entity::getAllSnaks`, use `StatementList::getAllSnaks` instead
 * Removed `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
 
