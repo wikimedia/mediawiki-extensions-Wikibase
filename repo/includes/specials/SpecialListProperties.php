@@ -62,97 +62,14 @@ class SpecialListProperties extends SpecialWikibasePage {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
-		$this->prepareArguments( $subPage );
-		$this->showForm();
+		$propertyLister = new PropertyLister();
 
-		if ( $this->dataType !== null ) {
-			$this->showQuery();
-		}
-	}
-
-	private function prepareArguments( $subPage ) {
+		$output = $this->getOutput();
 		$request = $this->getRequest();
+		$title = $this->getPageTitle();
+		$languageCode = $this->getLanguage()->getCode();
 
-		$this->dataType = $request->getText( 'datatype', $subPage );
-		if ( !in_array( $this->dataType, $this->dataTypeFactory->getTypeIds() ) ) {
-			$this->dataType = null;
-		}
-	}
-
-	private function showForm() {
-		$dataTypeSelect = new DataTypeSelector(
-			$this->dataTypeFactory->getTypes(),
-			$this->getLanguage()->getCode()
-		);
-
-		$this->getOutput()->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'action' => $this->getPageTitle()->getLocalURL(),
-					'name' => 'listproperties',
-					'id' => 'wb-listproperties-form'
-				)
-			) .
-			Html::input (
-				'title',
-				$this->getPageTitle()->getPrefixedText(),
-				'hidden',
-				array()
-			) .
-			Html::openElement( 'fieldset' ) .
-			Html::element(
-				'legend',
-				array(),
-				$this->msg( 'wikibase-listproperties-legend' )->text()
-			) .
-			Html::openElement( 'p' ) .
-			Html::element(
-				'label',
-				array(
-					'for' => 'wb-listproperties-datatype'
-				),
-				$this->msg( 'wikibase-listproperties-label-datatype' )->text()
-			) . ' ' .
-			$dataTypeSelect->getHTML( 'wb-listproperties-datatype', 'datatype', $this->dataType ) . ' ' .
-			Html::input(
-				'submit',
-				$this->msg( 'wikibase-listproperties-submit' )->text(),
-				'submit',
-				array(
-					'id' => 'wikibase-listproperties-submit',
-					'class' => 'wb-input-button'
-				)
-			) .
-			Html::closeElement( 'p' ) .
-			Html::closeElement( 'fieldset' ) .
-			Html::closeElement( 'form' )
-		);
-	}
-
-	private function showQuery() {
-		$propertyInfoForDataType = $this->propertyInfoStore->getPropertyInfoForDataType( $this->dataType );
-
-		if ( empty( $propertyInfoForDataType ) ) {
-			$this->getOutput()->addWikiMsg( 'specialpage-empty' );
-			return;
-		}
-
-		$html = Html::openElement( 'ul' );
-
-		foreach ( $propertyInfoForDataType as $numericId => $info ) {
-			$row = $this->formatRow( PropertyId::newFromNumber( $numericId ) );
-			$html .= Html::rawElement( 'li', array(), $row );
-		}
-
-		$html .= Html::closeElement( 'ul' );
-		$this->getOutput()->addHTML( $html );
-	}
-
-	private function formatRow( PropertyId $propertyId ) {
-		$title = $this->entityContentFactory->getTitleForId( $propertyId );
-		return Linker::linkKnown( $title );
+		$propertyLister->doExecute( $output, $request, $title, $languageCode, $subPage );
 	}
 
 }
-
