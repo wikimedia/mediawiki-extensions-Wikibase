@@ -52,6 +52,24 @@
       "revId": "166b451fabee7849ec022dca9d0ff3a24f887dba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b47930f4",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-14T16:52:01Z",
+      "side": 1,
+      "message": "Would be nicer for data wikis that don\u0027t have en as their content language. But it isn\u0027t a big issue.",
+      "parentUuid": "6e7c4fa4_29e870a2",
+      "revId": "166b451fabee7849ec022dca9d0ff3a24f887dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
