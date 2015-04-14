@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9103e6c0",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-14T13:47:27Z",
+      "side": 1,
+      "message": "Ok. Still, the FIXME you are asking for would be needed in like a hundred places. This is not the job of this patch.",
+      "parentUuid": "6e7c4fa4_bab120f6",
+      "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1a5054d8",
         "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "writtenOn": "2015-04-13T19:44:48Z",
       "side": 1,
       "message": "\"count( $claim-\u003egetQualifiers()-\u003ecount() )\": please remove the outer count",
+      "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_71008ab5",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-14T13:47:27Z",
+      "side": 1,
+      "message": "Ouch. Mistake. Will fix.",
+      "parentUuid": "6e7c4fa4_1a5054d8",
       "revId": "a1b6d645e5e9a8baaa912d563b51ef5cda961e34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
