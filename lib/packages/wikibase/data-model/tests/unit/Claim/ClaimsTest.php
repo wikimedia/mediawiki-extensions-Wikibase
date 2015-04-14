@@ -210,25 +210,19 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNotNull( $claims->getClaimWithGuid( $claim1->getGuid() ) );
 		$this->assertNotNull( $claims->getClaimWithGuid( $claim2->getGuid() ) );
 
-		// Insert claim at the beginning:
-		$claim3 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P17' ) ) );
-		$claims->addClaim( $claim3, 0 );
-
-		// Insert claim at another index:
-		$claim4 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P18' ) ) );
-		$claims->addClaim( $claim4, 1 );
-
-		// Insert claim with an index out of bounds:
-		$claim5 = $this->makeClaim( new PropertyNoValueSnak( new PropertyId( 'P19' ) ) );
-		$claims->addClaim( $claim5, 99999 );
-
 		$this->assertSame( array(
-			'TEST$CLAIM-3' => $claim3,
-			'TEST$CLAIM-4' => $claim4,
 			'TEST$CLAIM-1' => $claim1,
 			'TEST$CLAIM-2' => $claim2,
-			'TEST$CLAIM-5' => $claim5,
 		), $claims->getArrayCopy() );
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testAddClaimWithIndexFails() {
+		$claims = new Claims();
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claims->addClaim( $claim, 0 );
 	}
 
 	public function testAppend() {

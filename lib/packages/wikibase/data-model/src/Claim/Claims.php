@@ -7,10 +7,6 @@ use Comparable;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\DataModel\ByPropertyIdGrouper;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\Statement;
 
 /**
  * A claim (identified using it's GUID) can only be added once.
@@ -83,38 +79,15 @@ class Claims extends ArrayObject {
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
-	 * @param int|null $index
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addClaim( Claim $claim, $index = null ) {
-		if ( !is_null( $index ) && !is_integer( $index ) ) {
-			throw new InvalidArgumentException( '$index must be an integer or null; got ' . gettype( $index ) );
-		} elseif ( is_null( $index ) || $index >= count( $this ) ) {
-			$this[] = $claim;
-		} else {
-			$this->insertClaimAtIndex( $claim, $index );
-		}
-	}
-
-	/**
-	 * @param Claim $claim
-	 * @param int $index
-	 */
-	private function insertClaimAtIndex( Claim $claim, $index ) {
-		// Determine the claims to shift and remove them from the array:
-		$claimsToShift = array_slice( (array)$this, $index );
-
-		foreach ( $claimsToShift as $object ) {
-			$this->offsetUnset( $this->getClaimKey( $object ) );
+	public function addClaim( Claim $claim ) {
+		if ( func_num_args() > 1 ) {
+			throw new InvalidArgumentException( '$index is not supported any more' );
 		}
 
-		// Append the new claim and re-append the previously removed claims:
 		$this[] = $claim;
-
-		foreach ( $claimsToShift as $object ) {
-			$this[] = $object;
-		}
 	}
 
 	/**

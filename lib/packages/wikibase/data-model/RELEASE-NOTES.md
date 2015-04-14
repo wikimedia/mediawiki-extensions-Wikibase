@@ -12,6 +12,7 @@
 	* Removed `ClaimList`
 	* Removed `ClaimListAccess`
 	* Removed `addClaim`, `hasClaims` and `newClaim` from all entity classes
+* `Claims::addClaim` no longer supports setting an index
 * Removed `Claims::getBestClaims` (you can use `StatementList::getBestStatements` instead)
 * Removed `Claims::getByRank` and `Claims::getByRanks` (you can use `StatementList::getWithRank` instead)
 * Removed `Claims::getMainSnaks` (you can use `StatementList::getMainSnaks` instead)
