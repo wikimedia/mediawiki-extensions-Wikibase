@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_14c0242f",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-14T17:27:29Z",
+      "side": 1,
+      "message": "Here I would just say \"List properties\"\n\nmaybe someday we can enhance the functionality to list all properties, if that is okay performance-wise. (probably is ok, if paging is by QID perhaps label)",
+      "revId": "480fcba1c8e95d64d0086a2a76b256f05fa43a45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f4c48847",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-14T17:27:29Z",
+      "side": 1,
+      "message": "\"Get a list of properties by data type.\"",
+      "revId": "480fcba1c8e95d64d0086a2a76b256f05fa43a45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1452646b",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-14T17:27:29Z",
+      "side": 1,
+      "message": "ideally would like one instance of EntityContentFactory per special page, instead of per row. but then you didn\u0027t introduce this here, so can be done another time. (T96039)",
+      "revId": "480fcba1c8e95d64d0086a2a76b256f05fa43a45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b4505062",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialListPropertiesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-14T17:27:29Z",
+      "side": 1,
+      "message": "I realize testing special pages isn\u0027t easy but am somewhat dissatisfied by not having not having much tests for the special page.\n\nI think most of the logic in the special page class can be put into it\u0027s own class, with the dependencies injected more nicely and arguments passed to it.\n\nthen it is probably much easier to have tests to cover more aspects, with a mock PropertyInfoStore thing.  The tests would also run faster :)",
+      "revId": "480fcba1c8e95d64d0086a2a76b256f05fa43a45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
