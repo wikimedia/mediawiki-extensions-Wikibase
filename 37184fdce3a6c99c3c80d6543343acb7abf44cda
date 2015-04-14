@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bf8d8981",
+        "filename": "repo/includes/specials/PropertyLister.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-14T17:41:49Z",
+      "side": 1,
+      "message": "these would all be injected in the constructor.",
+      "revId": "37184fdce3a6c99c3c80d6543343acb7abf44cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
