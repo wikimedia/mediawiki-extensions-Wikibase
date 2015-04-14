@@ -414,6 +414,7 @@
 	"apihelp-wbgetclaims-example-1": "Ruft Behauptungen für das Objekt mit der Kennung Q42 ab",
 	"apihelp-wbgetentities-description": "Ruft die Daten für mehrere Wikibase-Objekte ab.",
 	"apihelp-wbgetentities-param-ids": "Die Kennungen der Objekte, von denen die Daten abgerufen werden sollen",
+	"apihelp-wbmergeitems-example-1": "Führt Daten von Q42 in Q222 zusammen",
 	"apihelp-wbparsevalue-param-parser": "Kennung des zu verwendenden Werteparsers",
 	"apihelp-wbparsevalue-param-values": "Die zu parsenden Werte",
 	"apihelp-wbparsevalue-example-1": "Keine Änderung am Format der Zeichenfolge.",
