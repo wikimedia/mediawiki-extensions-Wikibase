@@ -208,7 +208,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 					TimeValue::PRECISION_DAY,
 					'http://www.wikidata.org/entity/Q1985727'
 				),
-				'/^1 May 1520<sup class="wb-calendar-name">Gregorian<\/sup>$/'
+				'/^1 May 1520$/'
 			),
 			'a julian day in 1980' => array(
 				SnakFormatter::FORMAT_HTML,
@@ -219,7 +219,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 					TimeValue::PRECISION_DAY,
 					'http://www.wikidata.org/entity/Q1985786'
 				),
-				'/^1 May 1980<sup class="wb-calendar-name">Julian<\/sup>$/'
+				'/^1 May 1980$/'
 			),
 			'text in english' => array(
 				SnakFormatter::FORMAT_PLAIN,
