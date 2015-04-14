@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Test\RdfBuilderTest;
@@ -91,7 +92,8 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 			$this->getSiteList(),
 			$entityLookup,
 			$entityRevisionLookup,
-			$propertyLookup
+			$propertyLookup,
+			new NullEntityPrefetcher()
 		);
 	}
 
