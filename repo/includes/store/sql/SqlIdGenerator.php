@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DatabaseBase;
+use LoadBalancer;
 use MWException;
 
 /**
@@ -17,14 +18,9 @@ use MWException;
 class SqlIdGenerator implements IdGenerator {
 
 	/**
-	 * @var string
+	 * @var LoadBalancer
 	 */
-	private $table;
-
-	/**
-	 * @var DatabaseBase
-	 */
-	private $db;
+	private $loadBalancer;
 
 	/**
 	 * @var int[]
@@ -32,13 +28,11 @@ class SqlIdGenerator implements IdGenerator {
 	private $idBlacklist;
 
 	/**
-	 * @param string $tableName
-	 * @param DatabaseBase $database
+	 * @param LoadBalancer $loadBalancer
 	 * @param int[] $idBlacklist
 	 */
-	public function __construct( $tableName, DatabaseBase $database, array $idBlacklist ) {
-		$this->table = $tableName;
-		$this->db = $database;
+	public function __construct( LoadBalancer $loadBalancer, array $idBlacklist ) {
+		$this->loadBalancer = $loadBalancer;
 		$this->idBlacklist = $idBlacklist;
 	}
 
@@ -50,47 +44,50 @@ class SqlIdGenerator implements IdGenerator {
 	 * @return int
 	 */
 	public function getNewId( $type ) {
-		return $this->generateNewId( $type );
+		$database = $this->loadBalancer->getConnection( DB_MASTER );
+		$id = $this->generateNewId( $database, $type );
+		$this->loadBalancer->reuseConnection( $database );
+
+		return $id;
 	}
 
 	/**
 	 * Generates and returns a new ID.
 	 *
-	 * @since 0,1
+	 * @since 0.1
 	 *
+	 * @param DatabaseBase $database
 	 * @param string $type
 	 * @param bool $retry Retry once in case of e.g. race conditions. Defaults to true.
 	 *
 	 * @throws MWException
 	 * @return int
 	 */
-	private function generateNewId( $type, $retry = true ) {
-		$trx = $this->db->trxLevel();
+	private function generateNewId( DatabaseBase $database, $type, $retry = true ) {
+		$trx = $database->trxLevel();
 
 		if ( $trx == 0 ) {
-			$this->db->begin( __METHOD__ );
+			$database->begin( __METHOD__ );
 		}
 
-		$currentId = $this->db->selectRow(
-			$this->table,
+		$currentId = $database->selectRow(
+			'wb_id_counters',
 			'id_value',
 			array( 'id_type' => $type )
 		);
 
 		if ( is_object( $currentId ) ) {
 			$id = $currentId->id_value + 1;
-
-			$success = $this->db->update(
-				$this->table,
+			$success = $database->update(
+				'wb_id_counters',
 				array( 'id_value' => $id ),
 				array( 'id_type' => $type )
 			);
-		}
-		else {
+		} else {
 			$id = 1;
 
-			$success = $this->db->insert(
-				$this->table,
+			$success = $database->insert(
+				'wb_id_counters',
 				array(
 					'id_value' => $id,
 					'id_type' => $type,
@@ -101,13 +98,13 @@ class SqlIdGenerator implements IdGenerator {
 			// Race condition is possible due to occurrence of phantom reads is possible
 			// at non serializable transaction isolation level.
 			if ( !$success && $retry ) {
-				$id = $this->getNewId( $type, false );
+				$id = $this->generateNewId( $database, $type, false );
 				$success = true;
 			}
 		}
 
 		if ( $trx == 0 ) {
-			$this->db->commit( __METHOD__ );
+			$database->commit( __METHOD__ );
 		}
 
 		if ( !$success ) {
@@ -115,7 +112,7 @@ class SqlIdGenerator implements IdGenerator {
 		}
 
 		if ( in_array( $id, $this->idBlacklist ) ) {
-			$id = $this->generateNewId( $type );
+			$id = $this->generateNewId( $database, $type );
 		}
 
 		return $id;
