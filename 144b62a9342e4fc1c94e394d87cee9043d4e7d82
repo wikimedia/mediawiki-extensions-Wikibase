@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0ee57104",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-14T09:41:27Z",
+      "side": 1,
+      "message": "Please add that this is for [[mw:Extension:MobileFrontend]].",
+      "revId": "144b62a9342e4fc1c94e394d87cee9043d4e7d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8ec0a155",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-14T09:41:27Z",
+      "side": 1,
+      "message": "Please move the space, \"array\u0026\" is not a type. I know this formatting is common in other languages but it\u0027s not used in MediaWiki code.",
+      "revId": "144b62a9342e4fc1c94e394d87cee9043d4e7d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eee915e3",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-14T09:41:27Z",
+      "side": 1,
+      "message": "Documented as \"SkinMinerva $skin, array \u0026$modules\". I agree that it\u0027s probably better to use Skin. The only detail I find odd is the placement of the space. ;-)",
+      "revId": "144b62a9342e4fc1c94e394d87cee9043d4e7d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6ebd05d4",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-14T09:41:27Z",
+      "side": 1,
+      "message": "This line is odd and needs a comment. Which code sets this and what happens if it\u0027s unset? Why is it not possible to hook in earlier, before this is set? Isn\u0027t this wasting time if it\u0027s set and unset later?",
+      "revId": "144b62a9342e4fc1c94e394d87cee9043d4e7d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
