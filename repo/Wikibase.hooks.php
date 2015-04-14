@@ -1178,4 +1178,25 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Disable mobile editor for entity pages in Extension:MobileFrontend.
+	 * @see https://www.mediawiki.org/wiki/Extension:MobileFrontend
+	 *
+	 * @param Skin $skin
+	 * @param array &$modules associative array of resource loader modules
+	 *
+	 * @return bool
+	 */
+	public static function onSkinMinervaDefaultModules( Skin $skin, array &$modules ) {
+		$title = $skin->getTitle();
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		// remove the editor module so that it does not get loaded on entity pages
+		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+			unset( $modules['editor'] );
+		}
+
+		return true;
+	}
+
 }
