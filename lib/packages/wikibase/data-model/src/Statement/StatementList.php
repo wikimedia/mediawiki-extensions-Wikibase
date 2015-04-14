@@ -285,15 +285,19 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	/**
 	 * @since 3.0
 	 *
-	 * @param Statement $statement
+	 * @param string|null $statementGuid
 	 *
 	 * @return int|bool
 	 */
-	public function getIndexByGuid( Statement $statement ) {
+	public function getIndexByGuid( $statementGuid ) {
+		if ( !is_string( $statementGuid ) && !is_null( $statementGuid ) ) {
+			throw new InvalidArgumentException( '$statementGuid needs to be string or null' );
+		}
+
 		$index = 0;
 
 		foreach ( $this->statements as $s ) {
-			if ( $s->getGuid() === $statement->getGuid() ) {
+			if ( $s->getGuid() === $statementGuid ) {
 				return $index;
 			}
 			$index++;

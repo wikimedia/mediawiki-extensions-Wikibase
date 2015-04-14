@@ -543,7 +543,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenNotPresentStatement_getIndexByGuidReturnsFalse() {
 		$statements = new StatementList();
 
-		$this->assertFalse( $statements->getIndexByGuid( $this->getStatement( 1, 'kittens' ) ) );
+		$this->assertFalse( $statements->getIndexByGuid( 'kittens' ) );
 	}
 
 	public function testGivenPresentStatement_getIndexByGuidReturnsItsIndex() {
@@ -555,7 +555,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			1,
-			$statements->getIndexByGuid( $this->getStatement( 42, 'kittens42' ) )
+			$statements->getIndexByGuid( 'kittens42' )
 		);
 	}
 
@@ -569,7 +569,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			1,
-			$statements->getIndexByGuid( $this->getStatement( 42, 'kittens42' ) )
+			$statements->getIndexByGuid( 'kittens42' )
 		);
 	}
 
@@ -582,8 +582,15 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertSame(
 			2,
-			$statements->getIndexByGuid( $this->getStatement( 42, 'kittens41' ) )
+			$statements->getIndexByGuid( 'kittens41' )
 		);
+	}
+
+	public function testGivenInvalidGuid_getIndexByGuidThrowsException() {
+		$statements = new StatementList();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$statements->getIndexByGuid( false );
 	}
 
 }
