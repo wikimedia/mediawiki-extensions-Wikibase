@@ -125,7 +125,8 @@ class DataUpdateHookHandlers {
 
 		$this->usageUpdater->updateUsageForPage(
 			$title->getArticleId(),
-			$usageAcc->getUsages()
+			$usageAcc->getUsages(),
+			$page->getTouched()
 		);
 	}
 
@@ -143,7 +144,8 @@ class DataUpdateHookHandlers {
 
 		$this->usageUpdater->updateUsageForPage(
 			$pageId,
-			array()
+			array(),
+			false
 		);
 	}
 

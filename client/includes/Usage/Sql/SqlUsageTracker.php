@@ -98,15 +98,19 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
+	 * @param string|false $touched
 	 *
+	 * @return EntityUsage[]
 	 * @throws InvalidArgumentException
 	 * @throws UsageTrackerException
-	 * @throws Exception
-	 * @return EntityUsage[] Usages before the update, in the same form as $usages
 	 */
-	public function trackUsedEntities( $pageId, array $usages ) {
+	public function trackUsedEntities( $pageId, array $usages, $touched ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+
+		if ( !empty( $usages ) && ( $touched === false ) ) {
+			throw new InvalidArgumentException( '$touched is false, but $usages is not empty.' );
 		}
 
 		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
@@ -115,7 +119,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			$oldUsages = $this->queryUsagesForPage( $db, $pageId );
 
 			$tableUpdater = $this->newTableUpdater( $db );
-			$tableUpdater->updateUsage( $pageId, $oldUsages, $usages );
+			$tableUpdater->updateUsage( $pageId, $oldUsages, $usages, $touched );
 
 			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
 			return $oldUsages;

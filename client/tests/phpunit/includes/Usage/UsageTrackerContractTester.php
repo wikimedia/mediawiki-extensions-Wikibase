@@ -37,14 +37,14 @@ class UsageTrackerContractTester {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$oldUsages = $this->tracker->trackUsedEntities( 23, $usages );
+		$oldUsages = $this->tracker->trackUsedEntities( 23, $usages, '20150102030405' );
 		Assert::assertEmpty( $oldUsages, 'No previous usages expected' );
 
-		$oldUsages = $this->tracker->trackUsedEntities( 23, array() );
+		$oldUsages = $this->tracker->trackUsedEntities( 23, array(), '20150102030405' );
 
 		$this->assertSameUsages( $usages, $oldUsages );
 
-		$this->tracker->trackUsedEntities( 24, array() );
+		$this->tracker->trackUsedEntities( 24, array(), '20150102030405' );
 	}
 
 	public function testRemoveEntities() {
@@ -64,15 +64,15 @@ class UsageTrackerContractTester {
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
 		);
 
-		$this->tracker->trackUsedEntities( 23, $usages );
+		$this->tracker->trackUsedEntities( 23, $usages, '20150102030405' );
 		$this->tracker->removeEntities( $entitiesToRemove );
 
 		// (ab)use trackUsedEntities() to read the current usage back.
-		$oldUsages = $this->tracker->trackUsedEntities( 23, array() );
+		$oldUsages = $this->tracker->trackUsedEntities( 23, array(), '20150102030405' );
 
 		$this->assertSameUsages( $expectedUsage, $oldUsages );
 
-		$this->tracker->trackUsedEntities( 24, array() );
+		$this->tracker->trackUsedEntities( 24, array(), '20150102030405' );
 	}
 
 	/**
