@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Store;
 use BagOStuff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * SiteLinkLookup implementation that caches the obtained data (except for data obtained
@@ -159,4 +158,5 @@ class CachingSiteLinkLookup implements SiteLinkLookup {
 
 		return $itemId;
 	}
+
 }
