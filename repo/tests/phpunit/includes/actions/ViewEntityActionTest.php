@@ -101,10 +101,10 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	public function testShowNonExistingRevision() {
 		$page = $this->getTestItemPage( 'Berlin' );
-		$params = array( 'oldid' => 95829689425 );
+		$params = array( 'oldid' => 2147483647 );
 
 		$html = $this->executeViewAction( $page, $params );
-		$this->assertContains( 'Die Version 95829689425', $html, 'non-existing revision' );
+		$this->assertContains( 'Die Version 2147483647', $html, 'non-existing revision' );
 	}
 
 	/**
