@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4aab4c6d",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-15T10:28:42Z",
+      "side": 0,
+      "message": "had slight concern about removing this, but....\n\nlooking at it in more detail, SpecialWikibaseQueryPage appears only used by SpecialItemsWithoutSitelinks.php and SpecialEntitiesWithoutPage.php.  neither call formatRow. \n\nWere you intending to have SpecialListProperties extend this class? might be a good idea since it provides some caching that I think we want.\n\nalso, the implementation is now would be exactly the same here as what is in SpecialListProperties. I think it is useless to override the method there.",
+      "revId": "52979794a70afbd330d3c01983800e70358e794f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
