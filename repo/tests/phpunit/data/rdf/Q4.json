@@ -175,7 +175,7 @@
                     "datatype": "time",
                     "datavalue": {
                         "value": {
-                            "time": "-00000000200-00-00T00:00:00Z",
+                            "time": "-0200-00-00T00:00:00Z",
                             "timezone": 0,
                             "before": 0,
                             "after": 0,
