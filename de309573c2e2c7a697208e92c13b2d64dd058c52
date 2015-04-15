@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cae99c11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-15T08:50:22Z",
+      "side": 1,
+      "message": "babel :)",
+      "revId": "de309573c2e2c7a697208e92c13b2d64dd058c52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2adb7081",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-15T08:50:22Z",
+      "side": 1,
+      "message": "I would like more comments, to say why the keys might not work without reindexing. (e.g. \"javascript still works, in case of a missing index, caused by an unknown language code a babel box.\")",
+      "revId": "de309573c2e2c7a697208e92c13b2d64dd058c52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
