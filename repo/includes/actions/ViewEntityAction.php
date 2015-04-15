@@ -7,6 +7,7 @@ use LogEventsList;
 use OutputPage;
 use SpecialPage;
 use ViewAction;
+use Wikibase\Repo\Content\EntityHandler;
 
 /**
  * Handles the view action for Wikibase entities.

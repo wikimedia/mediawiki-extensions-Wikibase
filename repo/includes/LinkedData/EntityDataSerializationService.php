@@ -101,7 +101,7 @@ class EntityDataSerializationService {
 	private $serializerFactory;
 
 	/**
-	 * @var PropertyInfoDataTypeLookup
+	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyLookup;
 

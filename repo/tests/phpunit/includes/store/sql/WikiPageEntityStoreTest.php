@@ -185,7 +185,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @dataProvider provideSaveEntityError
 	 */
 	public function testSaveEntityError( Entity $entity, $flags, $baseRevId, $error ) {
-		/* @var EntityStore $store */
+		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 

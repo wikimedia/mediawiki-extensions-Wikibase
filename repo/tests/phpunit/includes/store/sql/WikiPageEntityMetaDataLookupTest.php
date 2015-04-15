@@ -4,18 +4,11 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\TermList;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StringNormalizer;
-use Wikibase\Term;
-use Wikibase\TermSqlIndex;
 
 /**
  * This test needs to be in repo, although the class is in lib as we can't alter
@@ -141,4 +134,5 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		// Verify that Q823487354 (doesn't exist) is not part of the result
 		$this->assertFalse( $result['Q823487354'] );
 	}
+
 }

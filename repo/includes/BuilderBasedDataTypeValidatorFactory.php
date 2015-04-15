@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo;
 
+use ValueValidators\ValueValidator;
+
 /**
  * A factory providing ValueValidators based on DataType id that uses ValidatorBuilders.
  *
