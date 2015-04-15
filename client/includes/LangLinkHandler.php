@@ -113,36 +113,23 @@ class LangLinkHandler {
 	 * @return SiteLink[] A map of SiteLinks, indexed by global site id.
 	 */
 	public function getEntityLinks( Title $title ) {
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the "
-			. "corresponding item on the wikibase repo." );
-
 		$links = array();
 
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId !== null ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': Item ID for ' . $title->getFullText()
-				. ' is ' . $itemId->getSerialization() );
-
 			//NOTE: SiteLinks we could get from $this->siteLinkLookup do not contain badges,
 			//      so we have to fetch the links from the Item.
 
 			/* @var Item $item */
+			$itemId = new ItemId( 'Q38295' );
 			$item = $this->entityLookup->getEntity( $itemId );
 
 			if ( $item ) {
 				$links = iterator_to_array( $item->getSiteLinkList() );
 				$links = $this->indexLinksBySiteId( $links );
-			} else {
-				wfWarn( __METHOD__ . ": Could not load item " . $itemId->getSerialization()
-					. " for " . $title->getFullText() );
 			}
-		} else {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for "
-				. $title->getFullText() );
 		}
-
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Found " . count( $links ) . " links." );
 
 		return $links;
 	}
@@ -273,8 +260,6 @@ class LangLinkHandler {
 	public function filterRepoLinksByGroup( array $repoLinks, array $allowedGroups ) {
 		foreach ( $repoLinks as $wiki => $link ) {
 			if ( !$this->siteStore->getSite( $wiki ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': skipping link to unknown site ' . $wiki );
-
 				unset( $repoLinks[$wiki] );
 				continue;
 			}
@@ -282,9 +267,6 @@ class LangLinkHandler {
 			$site = $this->siteStore->getSite( $wiki );
 
 			if ( !in_array( $site->getGroup(), $allowedGroups ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': skipping link to other group: ' . $wiki
-					. ' belongs to ' . $site->getGroup() );
-
 				unset( $repoLinks[$wiki] );
 				continue;
 			}
@@ -332,8 +314,6 @@ class LangLinkHandler {
 					$site = $sites->getSiteByNavigationId( $lang );
 					$wiki = $site->getGlobalId();
 					$links[$wiki] = $page;
-				} else {
-					wfWarn( "Failed to map interlanguage prefix $lang to a global site ID." );
 				}
 			}
 		}
@@ -411,7 +391,6 @@ class LangLinkHandler {
 			$targetSite = $this->siteStore->getSite( $siteId );
 
 			if ( !$targetSite ) {
-				wfLogWarning( "Unknown wiki '$siteId' used as sitelink target" );
 				continue;
 			}
 
@@ -420,8 +399,6 @@ class LangLinkHandler {
 			if ( $interwikiCode ) {
 				$link = "$interwikiCode:$page";
 				$out->addLanguageLink( $link );
-			} else {
-				wfWarn( "No interlanguage prefix found for $siteId." );
 			}
 		}
 	}
