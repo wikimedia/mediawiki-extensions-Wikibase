@@ -13,9 +13,9 @@ use Language;
 class WikibaseContentLanguages implements ContentLanguages {
 
 	/**
-	 * @var string|null
+	 * @var string[]|null Array of language codes => language names.
 	 */
-	private $languageMap;
+	private $languageMap = null;
 
 	/**
 	 * @return string[] Array of language codes supported as content language
@@ -26,7 +26,7 @@ class WikibaseContentLanguages implements ContentLanguages {
 	}
 
 	/**
-	 * @return string $languageCode
+	 * @param string $languageCode
 	 *
 	 * @return bool
 	 */
@@ -34,6 +34,9 @@ class WikibaseContentLanguages implements ContentLanguages {
 		return array_key_exists( $languageCode, $this->getLanguageMap() );
 	}
 
+	/**
+	 * @return string[] Array of language codes => language names.
+	 */
 	private function getLanguageMap() {
 		if ( $this->languageMap === null ) {
 			$this->languageMap = Language::fetchLanguageNames();
