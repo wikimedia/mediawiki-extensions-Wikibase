@@ -128,7 +128,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		// If the user just enters an item id and a language, dont remove the term.
 		// The user can remove the term in the second form where it has to be
 		// actually removed. This prevents users from removing terms accidentally.
-		if ( $request->getVal( 'remove' ) === null && $this->value === '' ) {
+		if ( !$request->getCheck( 'remove' ) && $this->value === '' ) {
 			$this->value = null;
 			return false;
 		}

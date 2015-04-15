@@ -143,7 +143,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		}
 
 		// to provide removing after posting the full form
-		if ( $request->getVal( 'remove' ) === null && $this->page === '' ) {
+		if ( !$request->getCheck( 'remove' ) && $this->page === '' ) {
 			$this->showErrorHTML(
 				$this->msg(
 					'wikibase-setsitelink-warning-remove',
