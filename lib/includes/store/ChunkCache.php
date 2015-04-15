@@ -49,16 +49,6 @@ class ChunkCache implements ChunkAccess {
 	private $chunkSize;
 
 	/**
-	 * @var int
-	 */
-	private $hitCount = 0;
-
-	/**
-	 * @var int
-	 */
-	private $missCount = 0;
-
-	/**
 	 * modification counter (logical clock)
 	 *
 	 * @var int
@@ -154,8 +144,6 @@ class ChunkCache implements ChunkAccess {
 
 				$entry = $this->entries[ $pos ];
 				$this->entries[ $pos ]['touched'] = ++$this->modCount; // bump
-
-				$hit = true;
 			} else {
 				// the desired start key is not cached
 
@@ -181,8 +169,6 @@ class ChunkCache implements ChunkAccess {
 					// If we are < $maxPos, we could advance $start by 1 and try again...
 					break;
 				}
-
-				$hit = false;
 			}
 
 			$offset = $start - $entry['start']; // offset inside the cached data
@@ -194,12 +180,6 @@ class ChunkCache implements ChunkAccess {
 			// update start and remaining
 			$start = $entry['next'];
 			$remaining -= $partSize;
-
-			if ( $hit ) {
-				$this->hitCount += $partSize;
-			} else {
-				$this->missCount += $partSize;
-			}
 		}
 
 		return $result;
@@ -316,36 +296,6 @@ class ChunkCache implements ChunkAccess {
 	 */
 	public function getRecordId( $rec ) {
 		return $this->source->getRecordId( $rec );
-	}
-
-	/**
-	 * Returns the current size of the cache.
-	 *
-	 * @return int
-	 */
-	public function getSize() {
-		return $this->size;
-	}
-
-	/**
-	 * Resets internal hit/miss statistics
-	 */
-	public function resetStarts() {
-		$this->hitCount = 0;
-		$this->missCount = 0;
-	}
-
-	/**
-	 * Returns this cache's hit ratio
-	 */
-	public function getHitRatio() {
-		$total = $this->hitCount + $this->missCount;
-
-		if ( $total === 0 ) {
-			return 0;
-		}
-
-		return $this->hitCount / $total;
 	}
 
 }

@@ -81,7 +81,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return ChunkAccess<Change>
+	 * @return ChunkAccess
 	 */
 	private function getChunkedChangesAccess() {
 		$chunkedAccess = $this->getMock( 'Wikibase\ChunkAccess' );
