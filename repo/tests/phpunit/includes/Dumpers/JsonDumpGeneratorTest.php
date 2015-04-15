@@ -15,6 +15,7 @@ use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
@@ -215,6 +216,9 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		return $jsonDumper;
 	}
 
+	/**
+	 * @return EntityLookup
+	 */
 	private function getEntityLookupThrowsMWContentSerializationException() {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )

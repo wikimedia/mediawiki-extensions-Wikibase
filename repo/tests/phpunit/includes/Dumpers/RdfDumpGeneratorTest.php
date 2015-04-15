@@ -9,9 +9,10 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Test\RdfBuilderTest;
 
 /**
@@ -76,16 +77,18 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$entityRevisionLookup->expects( $this->any() )
 			->method ( 'getEntityRevision' )
-			->will( $this->returnCallback( function( EntityId $id ) use( $entityLookup ) {
-				$e = $entityLookup->getEntity( $id );
-				if ( !$e ) {
+			->will( $this->returnCallback( function( EntityId $id ) use ( $entityLookup ) {#
+				/** @var EntityLookup $entityLookup */
+				$entity = $entityLookup->getEntity( $id );
+				if ( !$entity ) {
 					return null;
 				}
-				return new EntityRevision( $e, 12, wfTimestamp( TS_MW, 1000000 ) );
+				return new EntityRevision( $entity, 12, wfTimestamp( TS_MW, 1000000 ) );
 			}
 		));
 
-		return RdfDumpGenerator::createDumpGenerator('ntriples',
+		return RdfDumpGenerator::createDumpGenerator(
+			'ntriples',
 			$out,
 			self::URI_BASE,
 			self::URI_DATA,
@@ -161,13 +164,18 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider loadDataProvider
+	 * @param EntityId[] $ids
+	 * @param string $dumpname
 	 */
 	public function testReferenceDedup( array $ids, $dumpname ) {
+		$entities = array();
 		$rdfTest = new RdfBuilderTest();
-		foreach( $ids as $id ) {
+
+		foreach ( $ids as $id ) {
 			$id = $id->getSerialization();
 			$entities[$id] = $rdfTest->getEntityData( $id );
 		}
+
 		$dumper = $this->newDumpGenerator( $entities );
 		$dumper->setTimestamp(1000000);
 		$jsonTest = new JsonDumpGeneratorTest();
@@ -176,8 +184,8 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		ob_start();
 		$dumper->generateDump( $pager );
 		$dump = ob_get_clean();
-		$dump = $this->normalizeData($dump);
-		$this->assertEquals($this->getSerializedData($dumpname), $dump);
+		$dump = $this->normalizeData( $dump );
+		$this->assertEquals($this->getSerializedData( $dumpname ), $dump);
 	}
 
 }
