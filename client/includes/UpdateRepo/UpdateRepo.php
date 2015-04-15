@@ -155,10 +155,7 @@ abstract class UpdateRepo {
 	 */
 	public function injectJob( JobQueueGroup $jobQueueGroup ) {
 		$job = $this->createJob( $jobQueueGroup );
-
-		wfProfileIn( __METHOD__ . '#push' );
 		$jobQueueGroup->push( $job );
-		wfProfileOut( __METHOD__ . '#push' );
 	}
 
 	/**
