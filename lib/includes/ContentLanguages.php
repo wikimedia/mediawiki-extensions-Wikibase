@@ -16,7 +16,7 @@ interface ContentLanguages {
 	public function getLanguages();
 
 	/**
-	 * @return string $languageCode
+	 * @param string $languageCode
 	 *
 	 * @return bool
 	 */
