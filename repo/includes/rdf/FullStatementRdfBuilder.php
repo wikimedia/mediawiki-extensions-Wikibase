@@ -2,8 +2,10 @@
 
 namespace Wikibase\Rdf;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
@@ -179,6 +181,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 		// XXX: separate builder for references?
 		if ( $this->produceReferences ) {
+			/** @var Reference $reference */
 			foreach ( $statement->getReferences() as $reference ) { //FIXME: split body into separate method
 				$hash = $reference->getSnaks()->getHash();
 				$refLName = $hash;
@@ -231,7 +234,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		} else {
 			wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 		}
-
 	}
 
 	/**
@@ -242,9 +244,10 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 * @param RdfWriter $writer
 	 * @param Snak $snak
 	 * @param $propertyNamespace
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function addSnak( RdfWriter $writer, Snak $snak, $propertyNamespace ) {
-
 		$propertyId = $snak->getPropertyId();
 		switch ( $snak->getType() ) {
 			case 'value':
@@ -262,7 +265,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 				$writer->say( $propertyNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Novalue' );
 				break;
 			default:
-				throw new \InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
+				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
 		}
 	}
 
