@@ -964,10 +964,12 @@ final class RepoHooks {
 			$out->addJsConfigVars(
 				'wbUserSpecifiedLanguages',
 				// All user-specified languages, that are valid term languages
-				array_intersect(
+				// Reindex the keys so that javascript still works if an unknown
+				// language code in the babel box causes an index to miss
+				array_values( array_intersect(
 					$userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
 					$termsLanguages->getLanguages()
-				)
+				) )
 			);
 		}
 
