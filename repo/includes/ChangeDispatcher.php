@@ -62,7 +62,7 @@ class ChangeDispatcher {
 	private $messageReporter;
 
 	/**
-	 * @var ChunkAccess<Change> : access to the changes tablchangesCachechangesCachee
+	 * @var ChunkAccess Access to the changes table.
 	 */
 	private $chunkedChangesAccess;
 
@@ -74,7 +74,8 @@ class ChangeDispatcher {
 	/**
 	 * @param ChangeDispatchCoordinator $coordinator
 	 * @param ChangeNotificationSender $notificationSender
-	 * @param ChunkAccess<Change> $chunkedChangesAccess
+	 * @param ChunkAccess $chunkedChangesAccess Access to the changes table. Should only return
+	 * Change objects from loadChunk.
 	 * @param SubscriptionLookup $subscriptionLookup
 	 */
 	public function __construct(
