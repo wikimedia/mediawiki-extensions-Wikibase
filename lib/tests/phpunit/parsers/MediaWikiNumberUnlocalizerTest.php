@@ -108,6 +108,10 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 			array( '+.2' ),
 			array( '-.77' ),
 
+			array( '3e9' ),
+			array( '3.1E-9' ),
+			array( '-.7E+3' ),
+
 			array( '1,335.3' ),
 			array( '+1,333.2' ),
 			array( '-1,315.77' ),
@@ -153,6 +157,8 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 			array( '.e' ),
 			array( '12e' ),
 			array( 'E17' ),
+			array( '2e2.3' ),
+			array( '2e3e4' ),
 
 			array( '+-3' ),
 			array( '++7' ),
