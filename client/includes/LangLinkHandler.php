@@ -113,17 +113,11 @@ class LangLinkHandler {
 	 * @return SiteLink[] A map of SiteLinks, indexed by global site id.
 	 */
 	public function getEntityLinks( Title $title ) {
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the "
-			. "corresponding item on the wikibase repo." );
-
 		$links = array();
 
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId !== null ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': Item ID for ' . $title->getFullText()
-				. ' is ' . $itemId->getSerialization() );
-
 			//NOTE: SiteLinks we could get from $this->siteLinkLookup do not contain badges,
 			//      so we have to fetch the links from the Item.
 
@@ -137,12 +131,7 @@ class LangLinkHandler {
 				wfWarn( __METHOD__ . ": Could not load item " . $itemId->getSerialization()
 					. " for " . $title->getFullText() );
 			}
-		} else {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for "
-				. $title->getFullText() );
 		}
-
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Found " . count( $links ) . " links." );
 
 		return $links;
 	}
@@ -273,8 +262,6 @@ class LangLinkHandler {
 	public function filterRepoLinksByGroup( array $repoLinks, array $allowedGroups ) {
 		foreach ( $repoLinks as $wiki => $link ) {
 			if ( !$this->siteStore->getSite( $wiki ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': skipping link to unknown site ' . $wiki );
-
 				unset( $repoLinks[$wiki] );
 				continue;
 			}
@@ -282,9 +269,6 @@ class LangLinkHandler {
 			$site = $this->siteStore->getSite( $wiki );
 
 			if ( !in_array( $site->getGroup(), $allowedGroups ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': skipping link to other group: ' . $wiki
-					. ' belongs to ' . $site->getGroup() );
-
 				unset( $repoLinks[$wiki] );
 				continue;
 			}
