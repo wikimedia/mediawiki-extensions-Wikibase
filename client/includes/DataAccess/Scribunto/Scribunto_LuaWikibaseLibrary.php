@@ -187,6 +187,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'renderSnaks' => array( $this, 'renderSnaks' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
 			'getUserLang' => array( $this, 'getUserLang' ),
+			'getDescription' => array( $this, 'getDescription' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
 			'incrementExpensiveFunctionCount' => array( $this, 'incrementExpensiveFunctionCount' ),
 		);
@@ -260,6 +261,20 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getLabel( $prefixedEntityId ) {
 		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
 		return array( $this->getLuaBindings()->getLabel( $prefixedEntityId ) );
+	}
+
+	/**
+	 * Wrapper for getDescription in Scribunto_LuaWikibaseLibraryImplementation
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $prefixedEntityId
+	 *
+	 * @return string[]
+	 */
+	public function getDescription( $prefixedEntityId ) {
+		$this->checkType( 'getDescription', 1, $prefixedEntityId, 'string' );
+		return array( $this->getLuaBindings()->getDescription( $prefixedEntityId ) );
 	}
 
 	/**

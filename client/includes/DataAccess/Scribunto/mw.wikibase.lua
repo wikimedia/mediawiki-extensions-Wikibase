@@ -91,6 +91,17 @@ function wikibase.setupInterface()
 		return php.getLabel( id )
 	end
 
+	-- Get the description for the given entity id (in content language)
+	--
+	-- @param id
+	wikibase.description = function( id )
+		if type( id ) ~= 'string' then
+			error( 'id must be of type string, ' .. type( id ) .. ' given', 2 )
+		end
+
+		return php.getDescription( id )
+	end
+
 	-- Get the local sitelink title for the given entity id (if one exists)
 	--
 	-- @param id

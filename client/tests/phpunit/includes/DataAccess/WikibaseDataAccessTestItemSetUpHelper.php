@@ -138,6 +138,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 	private function createTestItem( ItemId $id, array $labels, array $statements = null, array $siteLinks = null ) {
 		$item = new Item( $id );
 		$item->setLabels( $labels );
+		$item->getFingerprint()->setDescription( 'de', 'Description of ' . $id->getSerialization() );
 
 		if ( $statements !== null ) {
 			$item->setStatements( new StatementList( $statements ) );

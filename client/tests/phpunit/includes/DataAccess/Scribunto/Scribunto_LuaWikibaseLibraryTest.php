@@ -79,6 +79,12 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 					)
 				),
 				'schemaVersion' => 2,
+				'descriptions' => array( 'de' =>
+					array(
+						'language' => 'de',
+						'value' => 'Description of Q885588'
+					)
+				)
 			)
 		);
 
