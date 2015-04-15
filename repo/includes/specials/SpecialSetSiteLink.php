@@ -145,7 +145,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		// If the user just enters an item id and a site, dont remove the site link.
 		// The user can remove the site link in the second form where it has to be
 		// actually removed. This prevents users from removing site links accidentally.
-		if ( $request->getVal( 'remove' ) === null && $this->page === '' ) {
+		if ( !$request->getCheck( 'remove' ) && $this->page === '' ) {
 			$this->page = null;
 			return false;
 		}
