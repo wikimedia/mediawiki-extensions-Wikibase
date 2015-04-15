@@ -24,6 +24,7 @@ class Claims extends ArrayObject {
 	 * @see GenericArrayObject::__construct
 	 *
 	 * @since 0.3
+	 * @deprecated since 1.0, use StatementList instead.
 	 *
 	 * @param Claim[]|Traversable|null $input
 	 *
@@ -77,6 +78,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @since 0.1
+	 * @deprecated since 1.0, use StatementList::addStatement() instead.
 	 *
 	 * @param Claim $claim
 	 *
@@ -92,6 +94,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @since 0.1
+	 * @deprecated since 1.0, should not be needed any more.
 	 *
 	 * @param Claim $claim
 	 *
@@ -110,6 +113,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @since 0.3
+	 * @deprecated since 1.0, use StatementList::getIndexByGuid() instead.
 	 *
 	 * @param string $claimGuid
 	 *
@@ -121,6 +125,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @since 0.3
+	 * @deprecated since 1.0, should not be needed any more.
 	 *
 	 * @param string $claimGuid
 	 */
@@ -132,6 +137,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @since 0.3
+	 * @deprecated since 1.0, use StatementList::getIndexByGuid() instead.
 	 *
 	 * @param string $claimGuid
 	 *
@@ -147,6 +153,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @see ArrayAccess::offsetExists
+	 * @deprecated since 1.0, should never be called.
 	 *
 	 * @param string $guid
 	 *
@@ -161,6 +168,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @see ArrayAccess::offsetGet
+	 * @deprecated since 1.0, should never be called.
 	 *
 	 * @param string $guid
 	 *
@@ -175,6 +183,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @see ArrayAccess::offsetSet
+	 * @deprecated since 1.0, should never be called.
 	 *
 	 * @param string $guid
 	 * @param Claim $claim
@@ -201,6 +210,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @see ArrayAccess::offsetUnset
+	 * @deprecated since 1.0, should never be called.
 	 *
 	 * @param string $guid
 	 */
