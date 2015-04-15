@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
