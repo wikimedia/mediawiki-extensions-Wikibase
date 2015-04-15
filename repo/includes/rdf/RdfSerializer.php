@@ -63,7 +63,7 @@ class RdfSerializer implements RdfProducer {
 	private $dedupBag;
 
 	/**
-	 * @param EasyRdf_Format $format
+	 * @param RdfWriter $emitter
 	 * @param string $baseUri
 	 * @param string $dataUri
 	 * @param SiteList $sites;
@@ -172,10 +172,10 @@ class RdfSerializer implements RdfProducer {
 
 	/**
 	 * Start RDF document
-	 * @param int $ts Timestamp (for testing)
+	 *
 	 * @return string RDF
 	 */
-	public function startDocument( ) {
+	public function startDocument() {
 		$builder = $this->newRdfBuilder();
 		$builder->startDocument();
 		return $builder->getRDF();
@@ -195,10 +195,10 @@ class RdfSerializer implements RdfProducer {
 
 	/**
 	 * Finish RDF document
-	 * @param int $ts Timestamp (for testing)
+	 *
 	 * @return string RDF
 	 */
-	public function finishDocument( ) {
+	public function finishDocument() {
 		$builder = $this->newRdfBuilder();
 		$builder->finishDocument();
 		return $builder->getRDF();
