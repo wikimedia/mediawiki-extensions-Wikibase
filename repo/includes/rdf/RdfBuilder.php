@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use BagOStuff;
 use DataValues\DataValue;
+use InvalidArgumentException;
 use SiteList;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
@@ -13,6 +14,9 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\StatementListProvider;
@@ -497,7 +501,6 @@ class RdfBuilder {
 						->is( self::NS_ENTITY, $this->getEntityLName( $badge ) );
 			}
 		}
-
 	}
 
 	/**
@@ -512,6 +515,8 @@ class RdfBuilder {
 			$statementList = $entity->getStatements();
 			$bestList = array();
 			$produceTruthy = $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ;
+
+			/** @var Statement $statement */
 			foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
 				$bestList[$statement->getGuid()] = true;
 				if ( $produceTruthy ) {
@@ -569,6 +574,7 @@ class RdfBuilder {
 		}
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) ) {
+			/** @var Reference $reference */
 			foreach ( $statement->getReferences() as $reference ) { //FIXME: split body into separate method
 				$hash = $reference->getSnaks()->getHash();
 				$refLName = $hash;
@@ -628,7 +634,6 @@ class RdfBuilder {
 			} else {
 				wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 			}
-
 		}
 	}
 
@@ -639,6 +644,8 @@ class RdfBuilder {
 	 * @param Snak $snak Snak object
 	 * @param string $propertyNamespace The property namespace for this snak
 	 * @param bool $simpleValue
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function addSnak( RdfWriter $writer, Snak $snak, $propertyNamespace, $simpleValue = false ) {
 		$propertyId = $snak->getPropertyId();
@@ -658,7 +665,7 @@ class RdfBuilder {
 				$writer->say( $propertyNamespace, $propertyValueLName )->is( self::NS_ONTOLOGY, 'Novalue' );
 				break;
 			default:
-				throw new \InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
+				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
 		}
 	}
 
@@ -717,15 +724,32 @@ class RdfBuilder {
 		}
 
 		//FIXME: use a proper registry / dispatching builder
-		$typeFunc = 'addStatementFor' . preg_replace( '/[^\w]/', '', ucwords( $typeId ) );
-
-		if ( !is_callable( array( $this, $typeFunc ) ) ) {
-			wfLogWarning( __METHOD__ . ": Unsupported data type: $typeId" );
-		} else {
-			//TODO: RdfWriter could support aliases -> instead of passing around $propertyNamespace
-			//      and $propertyValueLName, we could define an alias for that and use e.g. '%property' to refer to them.
-			$this->$typeFunc( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value, $simpleValue );
+		//TODO: RdfWriter could support aliases -> instead of passing around $propertyNamespace
+		//      and $propertyValueLName, we could define an alias for that and use e.g. '%property' to refer to them.
+		// TODO: boolean, multilingualtext, number, unknown
+		switch ( $typeId ) {
+			case 'wikibase-entityid':
+				$this->addStatementForWikibaseEntityid( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value, $simpleValue );
+				break;
+			case '':
+				$this->addStatementForString( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value, $simpleValue );
+				break;
+			case 'monolingualtext':
+				$this->addStatementForMonolingualtext( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value, $simpleValue );
+				break;
+			case 'time':
+				$this->addStatementForTime( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value, $simpleValue );
+				break;
+			case 'quantity':
+				$this->addStatementForQuantity( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value, $simpleValue );
+				break;
+			case 'globecoordinate':
+				$this->addStatementForGlobecoordinate( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value, $simpleValue );
+				break;
+			default:
+				wfLogWarning( __METHOD__ . ": Unsupported data type: $typeId" );
 		}
+
 		// TODO: add special handling like in WDTK?
 		// https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-rdf/src/main/java/org/wikidata/wdtk/rdf/extensions/SimpleIdExportExtension.java
 	}
@@ -742,7 +766,6 @@ class RdfBuilder {
 	 */
 	private function addStatementForWikibaseEntityid( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			EntityIdValue $value, $simpleValue = false ) {
-
 		$entityId = $value->getValue()->getEntityId();
 		$entityLName = $this->getEntityLName( $entityId );
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( self::NS_ENTITY, $entityLName );
@@ -777,7 +800,8 @@ class RdfBuilder {
 	 * This function does massaging needed for RDF data types.
 	 *
 	 * @param RdfWriter $writer
-	 * @param string $propertyName
+	 * @param string $propertyValueNamespace
+	 * @param string $propertyValueLName
 	 * @param string $type
 	 * @param mixed $value
 	 */
@@ -820,7 +844,6 @@ class RdfBuilder {
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->text( $value->getText(), $value->getLanguageCode() );
 	}
 
-
 	/**
 	 * Produce literal that reperesent the date in RDF
 	 * If we can convert it to xsd:dateTime, we'll do that.
@@ -849,7 +872,6 @@ class RdfBuilder {
 	 */
 	private function addStatementForTime( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			TimeValue $value, $simpleValue = false ) {
-
 		$this->addValueToNode( $writer, $propertyValueNamespace, $propertyValueLName, 'dateTime', $value );
 
 		if ( !$simpleValue && $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) { //FIXME: register separate generators for different output flavors.
@@ -906,7 +928,6 @@ class RdfBuilder {
 	 */
 	private function addStatementForGlobecoordinate( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			GlobeCoordinateValue $value, $simpleValue = false ) {
-
 		$point = "Point({$value->getLatitude()} {$value->getLongitude()})";
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $point, self::NS_GEO, "wktLiteral" );
 
