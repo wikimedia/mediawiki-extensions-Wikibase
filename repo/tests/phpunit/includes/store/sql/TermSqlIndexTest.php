@@ -197,10 +197,11 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item2 );
 
+		// The number of labels counts too
 		$item3 = new Item( new ItemId( 'Q108' ) );
 		$item3->setLabel( $languageCode, $termText );
-		$item3->getSiteLinkList()->addNewSiteLink( 'hrwiki', 'C' );
-		$item3->getSiteLinkList()->addNewSiteLink( 'uzwiki', 'C' );
+		$item3->setLabel( 'qxy', $termText );
+		$item3->setLabel( 'qxz', $termText );
 
 		$termIndex->saveTermsOfEntity( $item3 );
 
