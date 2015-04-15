@@ -93,25 +93,6 @@ class Claims extends ArrayObject {
 	}
 
 	/**
-	 * @since 0.1
-	 * @deprecated since 1.0, should not be needed any more.
-	 *
-	 * @param Claim $claim
-	 *
-	 * @return bool
-	 */
-	public function hasClaim( Claim $claim ) {
-		$guid = $claim->getGuid();
-
-		if ( $guid === null ) {
-			return false;
-		}
-
-		$key = $this->getGuidKey( $guid );
-		return $this->offsetExists( $key );
-	}
-
-	/**
 	 * @since 0.3
 	 * @deprecated since 1.0, use StatementList::getIndexByGuid() instead.
 	 *
