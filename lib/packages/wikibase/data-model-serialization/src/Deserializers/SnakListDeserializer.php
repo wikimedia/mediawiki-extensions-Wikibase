@@ -31,8 +31,8 @@ class SnakListDeserializer implements Deserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return SnakList
 	 * @throws DeserializationException
+	 * @return SnakList
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertHasGoodFormat( $serialization );
@@ -40,11 +40,16 @@ class SnakListDeserializer implements Deserializer {
 		return $this->getDeserialized( $serialization );
 	}
 
+	/**
+	 * @param array[] $serialization
+	 *
+	 * @return SnakList
+	 */
 	private function getDeserialized( array $serialization ) {
 		$snakList = new SnakList();
 
-		foreach( $serialization as $snakArray ) {
-			foreach( $snakArray as $snakSerialization ) {
+		foreach ( $serialization as $snakArray ) {
+			foreach ( $snakArray as $snakSerialization ) {
 				$snakList->addElement( $this->snakDeserializer->deserialize( $snakSerialization ) );
 			}
 		}
@@ -52,6 +57,11 @@ class SnakListDeserializer implements Deserializer {
 		return $snakList;
 	}
 
+	/**
+	 * @param mixed $serialization
+	 *
+	 * @throws DeserializationException
+	 */
 	private function assertHasGoodFormat( $serialization ) {
 		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'The SnakList serialization should be an array' );

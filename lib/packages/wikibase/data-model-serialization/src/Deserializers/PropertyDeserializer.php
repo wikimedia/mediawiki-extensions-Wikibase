@@ -52,8 +52,8 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return Property
 	 * @throws DeserializationException
+	 * @return Property
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertCanDeserialize( $serialization );
@@ -61,6 +61,11 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 		return $this->getDeserialized( $serialization );
 	}
 
+	/**
+	 * @param array $serialization
+	 *
+	 * @return Property
+	 */
 	private function getDeserialized( array $serialization ) {
 		$this->requireAttribute( $serialization, 'datatype' );
 		$this->assertAttributeInternalType( $serialization, 'datatype', 'string' );

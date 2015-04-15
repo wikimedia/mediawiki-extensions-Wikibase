@@ -66,8 +66,8 @@ class StatementSerializer implements DispatchableSerializer {
 	 *
 	 * @param Statement $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {

@@ -7,6 +7,7 @@ use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * Package private
@@ -48,8 +49,8 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return Reference
 	 * @throws DeserializationException
+	 * @return Reference
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertCanDeserialize( $serialization );
@@ -59,16 +60,26 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 		return $reference;
 	}
 
+	/**
+	 * @param array $serialization
+	 *
+	 * @return Reference
+	 */
 	private function getDeserialized( array $serialization ) {
 		return new Reference(
 			$this->deserializeSnaks( $serialization )
 		);
 	}
 
+	/**
+	 * @param array $serialization
+	 *
+	 * @return Snaks
+	 */
 	private function deserializeSnaks( array $serialization ) {
 		$snaks = $this->snaksDeserializer->deserialize( $serialization['snaks'] );
 
-		if( array_key_exists( 'snaks-order', $serialization ) ) {
+		if ( array_key_exists( 'snaks-order', $serialization ) ) {
 			$this->assertSnaksOrderIsArray( $serialization );
 
 			$snaks->orderByProperty( $serialization['snaks-order'] );

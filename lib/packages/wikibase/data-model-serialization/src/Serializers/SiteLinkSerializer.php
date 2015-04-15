@@ -32,8 +32,8 @@ class SiteLinkSerializer implements DispatchableSerializer {
 	 *
 	 * @param SiteLink $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {
@@ -62,7 +62,7 @@ class SiteLinkSerializer implements DispatchableSerializer {
 	private function serializeBadges( array $badges ) {
 		$serialization = array();
 
-		foreach( $badges as $badge ) {
+		foreach ( $badges as $badge ) {
 			$serialization[] = $badge->getSerialization();
 		}
 

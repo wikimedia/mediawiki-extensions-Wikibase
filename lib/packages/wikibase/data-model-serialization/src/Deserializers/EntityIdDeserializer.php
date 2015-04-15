@@ -33,8 +33,8 @@ class EntityIdDeserializer implements Deserializer {
 	 *
 	 * @param string $serialization
 	 *
-	 * @return EntityId
 	 * @throws DeserializationException
+	 * @return EntityId
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertEntityIdIsString( $serialization );
@@ -46,6 +46,11 @@ class EntityIdDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param mixed $serialization
+	 *
+	 * @throws DeserializationException
+	 */
 	private function assertEntityIdIsString( $serialization ) {
 		if ( !is_string( $serialization ) ) {
 			throw new DeserializationException( 'The serialization of an entity ID should be a string' );

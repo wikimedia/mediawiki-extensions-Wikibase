@@ -24,8 +24,8 @@ class FingerprintDeserializer implements Deserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return Fingerprint
 	 * @throws DeserializationException
+	 * @return Fingerprint
 	 */
 	public function deserialize( $serialization ) {
 		if ( !is_array( $serialization ) ) {

@@ -31,8 +31,8 @@ class ReferenceListDeserializer implements Deserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return ReferenceList
 	 * @throws DeserializationException
+	 * @return ReferenceList
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertIsArray( $serialization );
@@ -40,10 +40,15 @@ class ReferenceListDeserializer implements Deserializer {
 		return $this->getDeserialized( $serialization );
 	}
 
+	/**
+	 * @param array $serialization
+	 *
+	 * @return ReferenceList
+	 */
 	private function getDeserialized( array $serialization ) {
 		$referenceList = new ReferenceList();
 
-		foreach( $serialization as $referenceSerialization ) {
+		foreach ( $serialization as $referenceSerialization ) {
 			$referenceList->addReference( $this->referenceDeserializer->deserialize( $referenceSerialization ) );
 		}
 

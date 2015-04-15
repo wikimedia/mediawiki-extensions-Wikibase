@@ -70,8 +70,8 @@ class StatementDeserializer implements DispatchableDeserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return Statement
 	 * @throws DeserializationException
+	 * @return Statement
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertCanDeserialize( $serialization );
@@ -80,6 +80,11 @@ class StatementDeserializer implements DispatchableDeserializer {
 		return $this->getDeserialized( $serialization );
 	}
 
+	/**
+	 * @param array $serialization
+	 *
+	 * @return Statement
+	 */
 	private function getDeserialized( array $serialization ) {
 		$mainSnak = $this->snakDeserializer->deserialize( $serialization['mainsnak'] );
 
@@ -112,7 +117,7 @@ class StatementDeserializer implements DispatchableDeserializer {
 
 		$qualifiers = $this->snaksDeserializer->deserialize( $serialization['qualifiers'] );
 
-		if( array_key_exists( 'qualifiers-order', $serialization ) ) {
+		if ( array_key_exists( 'qualifiers-order', $serialization ) ) {
 			$this->assertQualifiersOrderIsArray( $serialization );
 
 			$qualifiers->orderByProperty( $serialization['qualifiers-order'] );

@@ -71,8 +71,8 @@ class ItemSerializer implements DispatchableSerializer {
 	 *
 	 * @param Item $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {
@@ -106,7 +106,7 @@ class ItemSerializer implements DispatchableSerializer {
 
 		$serialization['sitelinks'] = array();
 
-		foreach( $siteLinks as $siteLink ) {
+		foreach ( $siteLinks as $siteLink ) {
 			$serialization['sitelinks'][$siteLink->getSiteId()] = $this->siteLinkSerializer->serialize( $siteLink );
 		}
 		if ( $this->useObjectsForMaps ) {

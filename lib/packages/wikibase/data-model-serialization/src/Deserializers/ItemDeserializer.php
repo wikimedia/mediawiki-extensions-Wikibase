@@ -61,8 +61,8 @@ class ItemDeserializer extends TypedObjectDeserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return Item
 	 * @throws DeserializationException
+	 * @return Item
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertCanDeserialize( $serialization );
@@ -109,7 +109,7 @@ class ItemDeserializer extends TypedObjectDeserializer {
 
 		$this->assertAttributeIsArray( $serialization, 'sitelinks' );
 
-		foreach( $serialization['sitelinks'] as $siteLinksSerialization ) {
+		foreach ( $serialization['sitelinks'] as $siteLinksSerialization ) {
 			$siteLinkList->addSiteLink(
 				$this->siteLinkDeserializer->deserialize( $siteLinksSerialization )
 			);

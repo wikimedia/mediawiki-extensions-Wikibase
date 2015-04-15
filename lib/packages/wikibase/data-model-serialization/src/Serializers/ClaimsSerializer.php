@@ -52,8 +52,8 @@ class ClaimsSerializer implements DispatchableSerializer {
 	 *
 	 * @param Claims $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {
@@ -72,7 +72,7 @@ class ClaimsSerializer implements DispatchableSerializer {
 		/**
 		 * @var Claim $claim
 		 */
-		foreach( $claims as $claim ) {
+		foreach ( $claims as $claim ) {
 			$serialization[$claim->getMainSnak()->getPropertyId()->getSerialization()][] = $this->claimSerializer->serialize( $claim );
 		}
 

@@ -34,8 +34,8 @@ class SiteLinkDeserializer implements Deserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return SiteLink
 	 * @throws DeserializationException
+	 * @return SiteLink
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertCanDeserialize( $serialization );
@@ -43,6 +43,11 @@ class SiteLinkDeserializer implements Deserializer {
 		return $this->getDeserialized( $serialization );
 	}
 
+	/**
+	 * @param array $serialization
+	 *
+	 * @return SiteLink
+	 */
 	private function getDeserialized( array $serialization ) {
 		return new SiteLink(
 			$serialization['site'],
@@ -58,7 +63,7 @@ class SiteLinkDeserializer implements Deserializer {
 		$this->assertBadgesIsArray( $serialization );
 
 		$badges = array();
-		foreach( $serialization['badges'] as $badgeSerialization ) {
+		foreach ( $serialization['badges'] as $badgeSerialization ) {
 			$badges[] = $this->deserializeItemId( $badgeSerialization );
 		}
 		return $badges;

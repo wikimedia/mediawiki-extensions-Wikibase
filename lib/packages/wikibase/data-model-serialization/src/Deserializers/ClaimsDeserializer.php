@@ -31,8 +31,8 @@ class ClaimsDeserializer implements Deserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return Claims
 	 * @throws DeserializationException
+	 * @return Claims
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertHasGoodFormat( $serialization );
@@ -40,11 +40,16 @@ class ClaimsDeserializer implements Deserializer {
 		return $this->getDeserialized( $serialization );
 	}
 
+	/**
+	 * @param array[] $serialization
+	 *
+	 * @return Claims
+	 */
 	private function getDeserialized( array $serialization ) {
 		$claimList = new Claims();
 
-		foreach( $serialization as $claimArray ) {
-			foreach( $claimArray as $claimSerialization ) {
+		foreach ( $serialization as $claimArray ) {
+			foreach ( $claimArray as $claimSerialization ) {
 				$claimList->addClaim( $this->claimDeserializer->deserialize( $claimSerialization ) );
 			}
 		}
@@ -53,12 +58,12 @@ class ClaimsDeserializer implements Deserializer {
 	}
 
 	private function assertHasGoodFormat( $serialization ) {
-		if( !is_array( $serialization ) ) {
+		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'The Claims serialization should be an array' );
 		}
 
-		foreach( $serialization as $claimsArray ) {
-			if( !is_array( $claimsArray ) ) {
+		foreach ( $serialization as $claimsArray ) {
+			if ( !is_array( $claimsArray ) ) {
 				throw new DeserializationException( 'The claims per property should be an array' );
 			}
 		}
