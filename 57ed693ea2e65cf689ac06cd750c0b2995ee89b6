@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_030e9f37",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-15T16:36:39Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the title be set before everything else?",
+      "revId": "57ed693ea2e65cf689ac06cd750c0b2995ee89b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_43049717",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-15T16:36:39Z",
+      "side": 1,
+      "message": "This does not belong here. If the heading is not in the entityterms container any more, it should not be accessed from here. This violates the scope of these widgets.",
+      "revId": "57ed693ea2e65cf689ac06cd750c0b2995ee89b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_68189085",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-15T16:36:39Z",
+      "side": 1,
+      "message": "A span that forms a title?",
+      "revId": "57ed693ea2e65cf689ac06cd750c0b2995ee89b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
