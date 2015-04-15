@@ -258,6 +258,7 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 		$id1 = new PropertyId( 'P1' );
 
 		return array(
+			array( null ),
 			array( false ),
 			array( 1 ),
 			array( 0.1 ),

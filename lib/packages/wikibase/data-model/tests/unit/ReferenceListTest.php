@@ -43,7 +43,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	public function getConstructorArg() {
 		return array(
-			null,
 			array(),
 			$this->getElementInstances(),
 		);
@@ -61,7 +60,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$id1 = new PropertyId( 'P1' );
 
 		return array(
-			// TODO: Disallow array( null ),
+			array( null ),
 			array( false ),
 			array( 1 ),
 			array( 0.1 ),
@@ -95,7 +94,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 			$this->assertFalse( $array->hasReference( $hashable ) );
 		}
 	}
-
 
 	public function testGivenCloneOfReferenceInList_hasReferenceReturnsTrue() {
 		$list = new ReferenceList();
