@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8db17ee1",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-15T14:01:44Z",
+      "side": 1,
+      "message": "I find the architecture of these parsers/unlocalizers scary. This method here is completely unconnected to the other methods in this class. It\u0027s used in a single place: in the QuantityParser. Why is it here and not there?\n\nOr maybe a better question is: Why does DecimalParser use a completely different regex?\n\nAll these questions are not really in the scope of this patch, I know.",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0d7fae12",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-15T14:01:44Z",
+      "side": 1,
+      "message": "This also allows whacky stuff like \",...,\", but this is not a new issue.",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0dc56e41",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-15T14:01:44Z",
+      "side": 1,
+      "message": "DecimalParser also allows the notation 2x10^2 in addition to 2e2.",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cdec56bb",
+        "filename": "lib/tests/phpunit/parsers/MediaWikiNumberUnlocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-15T14:01:44Z",
+      "side": 1,
+      "message": "Please add:\n12e-\n12e,\n2E+-2",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
