@@ -108,6 +108,14 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 			array( '+.2' ),
 			array( '-.77' ),
 
+			array( '3e9' ),
+			array( '3.1E-9' ),
+			array( '-.7E+3' ),
+
+			array( '3x10^9' ),
+			array( '3.1x10^-9' ),
+			array( '-.7x10^+3' ),
+
 			array( '1,335.3' ),
 			array( '+1,333.2' ),
 			array( '-1,315.77' ),
@@ -129,7 +137,10 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 		$regex = $unlocalizer->getNumberRegex();
 
 		$hex = utf8ToHexSequence( $regex );
-		$this->assertTrue( (bool)preg_match( "/^($regex)$/u", $value ), "Hex: $hex" );
+
+		$match = (bool)preg_match( "/^(?:$regex)$/u", $value, $m );
+		$this->assertTrue( $match, "Hex $value: $hex" );
+		$this->assertCount( 1, $m, 'There should be no capturing groups' );
 	}
 
 	/**
@@ -141,6 +152,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 			array( ' ' ),
 			array( '+' ),
 			array( 'e' ),
+			array( '123+456' ),
 
 			array( '.-' ),
 
@@ -152,7 +164,22 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 			array( 'e.' ),
 			array( '.e' ),
 			array( '12e' ),
+			array( '12e-' ),
+			array( '12e,' ),
 			array( 'E17' ),
+			array( '2E+-2' ),
+			array( '2e2.3' ),
+			array( '2e3e4' ),
+
+			array( 'x10^' ),
+			array( '.x10^' ),
+			array( '12x10^' ),
+			array( '12x10^-' ),
+			array( '12x10^,' ),
+			array( 'x10^17' ),
+			array( '2x10^+-2' ),
+			array( '2x10^2.3' ),
+			array( '2x10^3x10^4' ),
 
 			array( '+-3' ),
 			array( '++7' ),
