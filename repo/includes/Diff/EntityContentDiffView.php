@@ -17,6 +17,7 @@ use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityContent;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EscapingEntityIdFormatter;

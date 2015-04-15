@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use FauxResponse;
 use Site;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;

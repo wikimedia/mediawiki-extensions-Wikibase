@@ -63,7 +63,7 @@ class RdfSerializer implements RdfProducer {
 	private $dedupBag;
 
 	/**
-	 * @param EasyRdf_Format $format
+	 * @param RdfWriter $emitter
 	 * @param string $baseUri
 	 * @param string $dataUri
 	 * @param SiteList $sites;

@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\UnloggedHttpError;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
