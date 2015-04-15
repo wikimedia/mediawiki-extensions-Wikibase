@@ -140,17 +140,13 @@ class ParserAfterParseHookHandler {
 		$parserOutput = $parser->getOutput();
 		$useRepoLinks = $this->langLinkHandler->useRepoLinks( $title, $parserOutput );
 
-		try {
-			if ( $useRepoLinks ) {
-				// add links
-				$this->langLinkHandler->addLinksFromRepository( $title, $parserOutput );
-			}
-
-			$this->langLinkHandler->updateItemIdProperty( $title, $parserOutput );
-			$this->langLinkHandler->updateOtherProjectsLinksData( $title, $parserOutput );
-		} catch ( Exception $e ) {
-			wfWarn( 'Failed to add repo links: ' . $e->getMessage() );
+		if ( $useRepoLinks ) {
+			// add links
+			$this->langLinkHandler->addLinksFromRepository( $title, $parserOutput );
 		}
+
+		$this->langLinkHandler->updateItemIdProperty( $title, $parserOutput );
+		$this->langLinkHandler->updateOtherProjectsLinksData( $title, $parserOutput );
 
 		if ( $useRepoLinks || $this->alwaysSort ) {
 			$interwikiLinks = $parserOutput->getLanguageLinks();
