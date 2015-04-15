@@ -90,8 +90,6 @@ class ChangeNotificationJob extends Job {
 	 */
 	public function getChanges() {
 		if ( $this->changes === null ) {
-			wfProfileIn( __METHOD__ . '#load' );
-
 			$params = $this->getParams();
 			$ids = $params['changeIds'];
 
@@ -112,8 +110,6 @@ class ChangeNotificationJob extends Job {
 					. " Some changes were lost, possibly due to premature pruning.",
 					E_USER_WARNING );
 			}
-
-			wfProfileOut( __METHOD__ . '#load' );
 		}
 
 		return $this->changes;
