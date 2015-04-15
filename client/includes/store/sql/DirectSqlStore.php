@@ -459,7 +459,10 @@ class DirectSqlStore implements ClientStore {
 	public function getEntityPrefetcher() {
 		if ( $this->entityPrefetcher === null ) {
 			$this->entityPrefetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
-				new WikiPageEntityMetaDataLookup( $this->entityIdParser )
+				new WikiPageEntityMetaDataLookup(
+					$this->entityIdParser,
+					$this->repoWiki
+				)
 			);
 		}
 
