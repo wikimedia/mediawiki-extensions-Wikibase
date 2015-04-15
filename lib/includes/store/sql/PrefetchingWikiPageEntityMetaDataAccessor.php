@@ -125,7 +125,8 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	/**
 	 * @see EntityStoreWatcher::redirectUpdated
 	 *
-	 * @param EntityRevision $entityRevision
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
 	 */
 	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
 		$this->purge( $entityRedirect->getEntityId() );
@@ -137,7 +138,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 * @param EntityId[] $entityIds
 	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
-	 * @return array entity id serialization -> stdClass or false if no such entity exists
+	 * @return array of entity id serialization => object or false if no such entity exists.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
 		if ( $mode === EntityRevisionLookup::LATEST_FROM_MASTER ) {

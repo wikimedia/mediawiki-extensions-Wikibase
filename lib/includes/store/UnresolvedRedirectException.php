@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Store;
 
 use Exception;
@@ -22,7 +23,7 @@ class UnresolvedRedirectException extends StorageException {
 	 * @param EntityId $redirectTargetId The ID of the target Entity of the redirect
 	 * @param string|null $message
 	 * @param int $code
-	 * @param Exception $previous
+	 * @param Exception|null $previous
 	 */
 	public function __construct( EntityId $redirectTargetId, $message = null, $code = 0, Exception $previous = null ) {
 		if ( $message === null ) {
@@ -42,4 +43,5 @@ class UnresolvedRedirectException extends StorageException {
 	public function getRedirectTargetId() {
 		return $this->redirectTargetId;
 	}
+
 }

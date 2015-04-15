@@ -49,11 +49,12 @@ class LanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
 		$labels = $this->termLookup->getLabels( $entityId, $fetchLanguages );
 		$termFallback = $this->getTermFallback( $labels, $fetchLanguages );
-		if ( $termFallback ) {
-			return $termFallback;
+
+		if ( $termFallback === null ) {
+			throw new OutOfBoundsException( 'Label not found for fallback chain.' );
 		}
 
-		throw new OutOfBoundsException( 'Label not found for fallback chain.' );
+		return $termFallback;
 	}
 
 	/**
@@ -66,32 +67,37 @@ class LanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
 		$descriptions = $this->termLookup->getDescriptions( $entityId, $fetchLanguages );
 		$termFallback = $this->getTermFallback( $descriptions, $fetchLanguages );
-		if ( $termFallback ) {
-			return $termFallback;
+
+		if ( $termFallback === null ) {
+			throw new OutOfBoundsException( 'Description not found for fallback chain.' );
 		}
 
-		throw new OutOfBoundsException( 'Description not found for fallback chain.' );
+		return $termFallback;
 	}
 
 	/**
 	 * @param string[] $terms
 	 * @param string[] $fetchLanguages
-	 * @return TermFallback
+	 *
+	 * @return TermFallback|null
 	 */
 	private function getTermFallback( array $terms, array $fetchLanguages ) {
 		$extractedData = $this->languageFallbackChain->extractPreferredValue( $terms );
 
-		if ( $extractedData ) {
-			// $fetchLanguages are in order of preference
-			$requestLanguage = reset( $fetchLanguages );
-
-			// see extractPreferredValue for array keys
-			return new TermFallback(
-				$requestLanguage,
-				$extractedData['value'],
-				$extractedData['language'],
-				$extractedData['source']
-			);
+		if ( $extractedData === null ) {
+			return null;
 		}
+
+		// $fetchLanguages are in order of preference
+		$requestLanguage = reset( $fetchLanguages );
+
+		// see extractPreferredValue for array keys
+		return new TermFallback(
+			$requestLanguage,
+			$extractedData['value'],
+			$extractedData['language'],
+			$extractedData['source']
+		);
 	}
+
 }

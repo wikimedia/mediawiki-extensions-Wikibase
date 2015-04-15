@@ -324,7 +324,7 @@ class ChunkCache implements ChunkAccess {
 	 * @return int
 	 */
 	public function getSize() {
-		return $this->size();
+		return $this->size;
 	}
 
 	/**

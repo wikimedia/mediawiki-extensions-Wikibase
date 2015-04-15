@@ -24,7 +24,7 @@ interface WikiPageEntityMetaDataAccessor {
 	 * @param EntityId[] $entityIds
 	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
-	 * @return array entity id serialization -> stdClass or false if no such entity exists
+	 * @return array of entity id serialization => object or false if no such entity exists.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode );
 

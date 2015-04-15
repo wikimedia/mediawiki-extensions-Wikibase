@@ -27,25 +27,25 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $contentCodec;
 
 	/**
-	 * @var WikiPageEntityMetaDataLookup
+	 * @var WikiPageEntityMetaDataAccessor
 	 */
-	private $entityMetaDataLookup;
+	private $entityMetaDataAccessor;
 
 	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataLookup
+	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		WikiPageEntityMetaDataAccessor $entityMetaDataLookup,
+		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
 
 		$this->contentCodec = $contentCodec;
 
-		$this->entityMetaDataLookup = $entityMetaDataLookup;
+		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
 	}
 
 	/**
@@ -73,9 +73,9 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$entityRevision = null;
 
 		if ( is_int( $revisionId ) ) {
-			$row = $this->entityMetaDataLookup->loadRevisionInformationByRevisionId( $entityId, $revisionId );
+			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityId, $revisionId );
 		} else {
-			$rows = $this->entityMetaDataLookup->loadRevisionInformation( array( $entityId ), $revisionId );
+			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $revisionId );
 			$row = $rows[$entityId->getSerialization()];
 		}
 
@@ -123,7 +123,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
-		$rows = $this->entityMetaDataLookup->loadRevisionInformation( array( $entityId ), $mode );
+		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $mode );
 		$row = $rows[$entityId->getSerialization()];
 
 		if ( $row && $row->page_latest ) {

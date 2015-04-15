@@ -123,7 +123,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$infos = array();
 
-		while ( $row = $res->fetchObject() ) {
+		while ( ( $row = $res->fetchObject() ) !== false ) {
 			$info = $this->decodeInfo( $row->pi_info );
 
 			if ( $info === null ) {

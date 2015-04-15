@@ -47,7 +47,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
-	 * @return array entity id serialization -> stdClass or false if no such entity exists
+	 * @return array of entity id serialization => object or false if no such entity exists.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
 		$rows = array();
@@ -154,7 +154,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param int $connType DB_SLAVE or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
-	 * @return array entity id serialization -> stdClass or false if no such entity exists
+	 * @return array of entity id serialization => object or false if no such entity exists.
 	 */
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
 		$db = $this->getConnection( $connType );
@@ -190,7 +190,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param EntityId[] $entityIds
 	 * @param ResultWrapper $res
 	 *
-	 * @return array entity id serialization -> stdClass or false if no such entity exists
+	 * @return array of entity id serialization => object or false if no such entity exists.
 	 */
 	private function indexResultByEntityId( array $entityIds, ResultWrapper $res ) {
 		$rows = array();
@@ -216,9 +216,12 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	/**
 	 * @param EntityId[] $entityIds
 	 * @param DatabaseBase $db
+	 *
 	 * @return string
 	 */
 	private function getEppWhere( array $entityIds, DatabaseBase $db ) {
+		$where = array();
+
 		foreach ( $entityIds as &$entityId ) {
 			$where[] = $db->makeList( array(
 				'epp_entity_id' => $entityId->getNumericId(),
