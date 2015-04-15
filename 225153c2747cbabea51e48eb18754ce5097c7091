@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_88272c62",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-15T15:29:06Z",
+      "side": 1,
+      "message": "\u003e Why is the id not in the \u003ch2\u003e any more?\n\nSee commit message... \"Because MobileFrontend won\u0027t recognize the heading otherwise,\na \u003cspan\u003e is inserted with the id of the heading containing the\nactual text.\"\n\n\u003e Also, why is this still a \u003ch2\u003e? Doesn\u0027t this need to be a \u003ch3\u003e now?\n\nThis is still a section heading and thus \u003ch2\u003e. The template was used for the \u003ch2\u003eStatements\u003c/h2\u003e heading before and now is also used for the \u003ch2\u003eSite links\u003c/h2\u003e heading.",
+      "parentUuid": "6e7c4fa4_a80308c0",
+      "revId": "225153c2747cbabea51e48eb18754ce5097c7091",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_08f47cca",
         "filename": "view/resources/templates.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-15T15:26:24Z",
       "side": 1,
       "message": "Here the id is in the \u003ch3\u003e, this seems to be inconsistent now.",
+      "revId": "225153c2747cbabea51e48eb18754ce5097c7091",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c81444f0",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-15T15:29:06Z",
+      "side": 1,
+      "message": "This heading does have to be recognized by MobileFrontend and thus the id can also be in the \u003ch3\u003e itself. I don\u0027t care where we put it actually.",
+      "parentUuid": "6e7c4fa4_08f47cca",
       "revId": "225153c2747cbabea51e48eb18754ce5097c7091",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
