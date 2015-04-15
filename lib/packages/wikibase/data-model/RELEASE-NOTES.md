@@ -26,6 +26,7 @@
 * Removed `Claims::removeClaim`
 * Removed `Entity::getAllSnaks`, use `StatementList::getAllSnaks` instead
 * Removed `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
+* `Reference`s and `ReferenceList`s can not be instantiated with `null` any more
 
 #### Additions
 
