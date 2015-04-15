@@ -36,6 +36,15 @@ An example call might look like this:
 mw.wikibase.sitelink( 'Q42' ) -- Returns the given items page title in the current Wiki as a string, like "Berlin".
 </source>
 
+=== mw.wikibase.description ===
+<code>wikibase.description( id )</code><br>
+Takes an item ID and returns the description in the language of the local Wiki.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.description( 'Q42' ) -- Returns the description of the item as a string, like "capital of Germany"
+</source>
+
 === mw.wikibase.renderSnak ===
 <code>wikibase.renderSnak( snakSerialization )</code><br>
 Renders a serialized Snak to text. This is useful for displaying References or Qualifiers.
