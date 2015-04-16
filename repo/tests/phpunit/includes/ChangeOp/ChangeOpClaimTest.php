@@ -90,7 +90,20 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$changeOpClaim->apply( $item );
 
 		$expectedStatementList = new StatementList( $expected );
-		$this->assertTrue( $item->getStatements()->equals( $expectedStatementList ) );
+		$this->assertSame( count( $expected ), $item->getStatements()->count(), 'Same number of statements' );
+		if(!$item->getStatements()->equals( $expectedStatementList )){
+			/** @var Statement $statement */
+			echo "\n";
+			foreach($expectedStatementList as $statement){
+				echo $statement->getGuid().', ';
+			};
+			echo "\n";
+			foreach($item->getStatements() as $statement){
+				echo $statement->getGuid().', ';
+			};
+//			die();
+		}
+		$this->assertTrue( $item->getStatements()->equals( $expectedStatementList ), 'Equal statements' );
 	}
 
 	public function provideTestApply() {
