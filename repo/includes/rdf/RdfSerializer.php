@@ -58,7 +58,7 @@ class RdfSerializer implements RdfProducer {
 
 	/**
 	 * Hash to store seen references/values for deduplication
-	 * @var BagOStuff
+	 * @var DedupeBag
 	 */
 	private $dedupBag;
 
@@ -70,7 +70,7 @@ class RdfSerializer implements RdfProducer {
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param int $flavor
-	 * @param BagOStuff|null $dedupBag
+	 * @param DedupeBag|null $dedupBag
 	 */
 	public function __construct(
 		RdfWriter $emitter,
@@ -80,7 +80,7 @@ class RdfSerializer implements RdfProducer {
 		PropertyDataTypeLookup $propertyLookup,
 		EntityLookup $entityLookup,
 		$flavor,
-		BagOStuff $dedupBag = null
+		DedupeBag $dedupBag = null
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
@@ -89,7 +89,7 @@ class RdfSerializer implements RdfProducer {
 		$this->entityLookup = $entityLookup;
 		$this->propertyLookup = $propertyLookup;
 		$this->flavor = $flavor;
-		$this->dedupBag = $dedupBag;
+		$this->dedupBag = $dedupBag ?: new HashDedupeBag();
 	}
 
 	/**
