@@ -6,6 +6,7 @@ use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangeOp\ClaimChangeOpFactory
@@ -36,9 +37,9 @@ class ClaimChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewAddClaimOp() {
 		$snak = new PropertyNoValueSnak( new PropertyId( 'P7' ) );
-		$claim = new Claim( $snak );
+		$statement = new Statement( new Claim( $snak ) );
 
-		$op = $this->newChangeOpFactory()->newAddClaimOp( $claim );
+		$op = $this->newChangeOpFactory()->newAddClaimOp( $statement );
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
 	}
 

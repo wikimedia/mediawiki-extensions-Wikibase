@@ -19,18 +19,14 @@ abstract class ChangeOpBase implements ChangeOp {
 	/**
 	 * @since 0.4
 	 *
-	 * @param Summary $summary
+	 * @param Summary|null $summary
 	 * @param string $action
 	 * @param string $language
 	 * @param string|array $args
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function updateSummary( $summary, $action, $language = '', $args = '' ) {
-		if ( $summary !== null && !$summary instanceof Summary ) {
-			throw new InvalidArgumentException( '$summary needs to be an instance of Summary or null' );
-		}
-
+	protected function updateSummary( Summary $summary = null, $action, $language = '', $args = '' ) {
 		if ( $summary !== null ) {
 			$summary->setAction( $action );
 			$summary->setLanguage( $language );
