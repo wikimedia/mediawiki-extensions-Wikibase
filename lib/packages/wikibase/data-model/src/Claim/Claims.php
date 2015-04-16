@@ -3,8 +3,6 @@
 namespace Wikibase\DataModel\Claim;
 
 use ArrayObject;
-use Comparable;
-use Hashable;
 use InvalidArgumentException;
 use Traversable;
 

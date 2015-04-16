@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
-use DataValues\StringValue;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;

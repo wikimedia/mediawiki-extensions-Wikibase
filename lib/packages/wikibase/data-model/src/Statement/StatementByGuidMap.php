@@ -38,6 +38,7 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 	 * If the provided statement has a GUID not yet in the map, it will be appended to the map.
 	 * If the GUID is already in the map, the statement with this guid will be replaced.
 	 *
+	 * @throws InvalidArgumentException
 	 * @param Statement $statement
 	 */
 	public function addStatement( Statement $statement ) {
