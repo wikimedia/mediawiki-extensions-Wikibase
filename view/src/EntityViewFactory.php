@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use Language;
 use SiteStore;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LabelDescriptionLookup;
@@ -239,15 +238,6 @@ class EntityViewFactory {
 			$this->languageNameLookup,
 			$languageCode
 		);
-	}
-
-	/**
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 *
-	 * @return EntityIdFormatter
-	 */
-	private function getPropertyIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
-		return $this->idFormatterFactory->getEntityIdFormater( $labelDescriptionLookup );
 	}
 
 }

@@ -210,7 +210,6 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 
 		foreach ( $entries as $entry ) {
 			list( $entityId, $pageId ) = $entry;
-			$entityType = self::$entityTypeMap[ $entityId[0] ];
 			$aspect = 'X';
 
 			$db->insert( 'wbc_entity_usage', array(
