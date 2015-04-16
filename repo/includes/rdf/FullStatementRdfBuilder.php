@@ -25,9 +25,9 @@ use Wikimedia\Purtle\RdfWriter;
 class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 	/**
-	 * @var callable
+	 * @var MentionedEntityTracker
 	 */
-	private $propertyMentionCallback = null;
+	private $mentionedEntityTracker;
 
 	/**
 	 * @var callable
@@ -78,20 +78,22 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		$this->referenceWriter = $writer;
 
 		$this->valueBuilder = $valueBuilder;
+
+		$this->mentionedEntityTracker = new NullMentionedEntityTracker();
 	}
 
 	/**
-	 * @return callable
+	 * @return MentionedEntityTracker
 	 */
-	public function getPropertyMentionCallback() {
-		return $this->propertyMentionCallback;
+	public function getMentionedEntityTracker() {
+		return $this->mentionedEntityTracker;
 	}
 
 	/**
-	 * @param callable $propertyMentionCallback
+	 * @param MentionedEntityTracker $mentionedEntityTracker
 	 */
-	public function setPropertyMentionCallback( $propertyMentionCallback ) {
-		$this->propertyMentionCallback = $propertyMentionCallback;
+	public function setMentionedEntityTracker( $mentionedEntityTracker ) {
+		$this->mentionedEntityTracker = $mentionedEntityTracker;
 	}
 
 	/**
@@ -230,7 +232,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName );
 		$this->addSnak( $this->statementWriter, $snak, RdfVocabulary::NS_VALUE );
 
-		$this->propertyMentioned( $snak->getPropertyId() );
+		$this->mentionedEntityTracker->propertyUsed( $snak->getPropertyId() );
 
 		$rank = $statement->getRank();
 		if ( isset( RdfVocabulary::$rankMap[$rank] ) ) {
@@ -274,15 +276,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 				break;
 			default:
 				throw new \InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
-		}
-	}
-
-	/**
-	 * @param EntityId $propertyId
-	 */
-	private function propertyMentioned( EntityId $propertyId ) {
-		if ( $this->propertyMentionCallback ) {
-			call_user_func( $this->propertyMentionCallback, $propertyId );
 		}
 	}
 
