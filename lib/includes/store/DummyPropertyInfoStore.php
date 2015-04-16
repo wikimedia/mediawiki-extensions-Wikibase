@@ -27,6 +27,17 @@ class DummyPropertyInfoStore implements PropertyInfoStore {
 	}
 
 	/**
+	 * @see PropertyInfoStore::getPropertyInfoForDataType
+	 *
+	 * @param string $dataType
+	 *
+	 * @return array[]
+	 */
+	public function getPropertyInfoForDataType( $dataType ) {
+		return array();
+	}
+
+	/**
 	 * @see PropertyInfoStore::getAllPropertyInfo
 	 *
 	 * @return array[]
