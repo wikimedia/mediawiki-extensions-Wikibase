@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_30d0bacb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2015-04-16T14:03:53Z",
+      "side": 1,
+      "message": "You have to add \u0026formatversion\u003d2 to get non-* output in json and php formats. Xml of course doesn\u0027t have a difference there, and the deprecated formats aren\u0027t getting \u0026formatversion\u003d2 since they\u0027re going away relatively soon anyway.",
+      "revId": "0a11db685d123b98d6b8e5c790f5d66abc428f78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
