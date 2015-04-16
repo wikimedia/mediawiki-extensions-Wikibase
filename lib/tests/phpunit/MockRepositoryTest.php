@@ -79,6 +79,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->repo->putEntity( $prop );
 
 		// test latest item
+		/** @var Item $item */
 		$item = $this->repo->getEntity( $itemId );
 		$this->assertNotNull( $item, "Entity " . $itemId );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $item, "Entity " . $itemId );

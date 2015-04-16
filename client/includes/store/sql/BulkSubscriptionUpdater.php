@@ -51,10 +51,15 @@ class BulkSubscriptionUpdater {
 	private $progressReporter;
 
 	/**
-	 * @param ConsistentReadConnectionManager $localConnectionManager ConnectionManager for DB connections to the local wiki
-	 * @param ConsistentReadConnectionManager $repoConnectionManager ConnectionManager for DB connections to the repo
-	 * @param string $subscriberWikiId The local wiki's global ID, to be used as the subscriber ID in the repo's subscription table.
+	 * @param ConsistentReadConnectionManager $localConnectionManager Connection manager for DB
+	 * connections to the local wiki.
+	 * @param ConsistentReadConnectionManager $repoConnectionManager Connection manager for DB
+	 * connections to the repo.
+	 * @param string $subscriberWikiId The local wiki's global ID, to be used as the subscriber ID
+	 * in the repo's subscription table.
 	 * @param int $batchSize
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		ConsistentReadConnectionManager $localConnectionManager,

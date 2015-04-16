@@ -46,8 +46,10 @@ class ConsistentReadConnectionManager {
 
 	/**
 	 * @param LoadBalancer $loadBalancer
-	 * @param string|false $dbName Optional, defaults to current wiki.
+	 * @param string|bool $dbName Optional, defaults to current wiki.
 	 *        This follows the convention for database names used by $loadBalancer.
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( LoadBalancer $loadBalancer, $dbName = false ) {
 		if ( !is_string( $dbName ) && $dbName !== false ) {

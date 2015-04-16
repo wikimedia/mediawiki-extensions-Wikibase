@@ -5,7 +5,6 @@ namespace Wikibase;
 use Action;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
-use FormlessAction;
 use Html;
 use IContextSource;
 use Linker;

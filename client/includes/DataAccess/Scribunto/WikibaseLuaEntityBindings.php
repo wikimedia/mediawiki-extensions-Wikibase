@@ -64,8 +64,6 @@ class WikibaseLuaEntityBindings {
 	 * @param string $propertyLabelOrId
 	 * @param int[]|null $acceptableRanks
 	 *
-	 * @throws PropertyLabelNotResolvedException
-	 *
 	 * @return string
 	 */
 	public function formatPropertyValues( $entityId, $propertyLabelOrId, array $acceptableRanks = null ) {
