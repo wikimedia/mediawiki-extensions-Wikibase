@@ -8,9 +8,8 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -25,7 +24,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class RdfBuilder {
+class RdfBuilder implements MentionedEntityTracker {
 
 	/**
 	 * A list of entities mentioned/touched to or by this builder.
@@ -110,10 +109,7 @@ class RdfBuilder {
 	 */
 	private function newSimpleValueRdfBuilder( RdfVocabulary $vocabulary, PropertyDataTypeLookup $propertyLookup ) {
 		$simpleValueBuilder = new SimpleValueRdfBuilder( $vocabulary, $propertyLookup );
-
-		if ( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
-			$simpleValueBuilder->setEntityMentionCallback( array( $this, 'entityMentioned' ) );
-		}
+		$simpleValueBuilder->setMentionedEntityTracker( $this );
 
 		return $simpleValueBuilder;
 	}
@@ -139,10 +135,7 @@ class RdfBuilder {
 
 			$statementValueBuilder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $propertyLookup );
 			$statementValueBuilder->setValueSeenCallback( $valueSeen );
-
-			if ( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
-				$statementValueBuilder->setEntityMentionCallback( array( $this, 'entityMentioned' ) );
-			}
+			$statementValueBuilder->setMentionedEntityTracker( $this );
 		} else {
 			$statementValueBuilder = $simpleValueBuilder;
 		}
@@ -183,11 +176,7 @@ class RdfBuilder {
 
 		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $statementValueBuilder );
 		$statementBuilder->setReferenceSeenCallback( $referenceSeen );
-
-		if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES ) ) {
-			$statementBuilder->setPropertyMentionCallback( array( $this, 'entityMentioned' ) );
-		}
-
+		$statementBuilder->setMentionedEntityTracker( $this );
 		$statementBuilder->setProduceQualifiers( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) );
 		$statementBuilder->setProduceReferences( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) );
 
@@ -244,15 +233,35 @@ class RdfBuilder {
 	}
 
 	/**
+	 * @see MentionedEntityTracker::entityReferenceMentioned
+	 *
+	 * @param EntityId $id
+	 */
+	public function entityReferenceMentioned( EntityId $id ) {
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
+			$this->entityToResolve( $id );
+		}
+	}
+
+	/**
+	 * @see MentionedEntityTracker::propertyUsed
+	 *
+	 * @param PropertyId $id
+	 */
+	public function propertyUsed( PropertyId $id ) {
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES ) ) {
+			$this->entityToResolve( $id );
+		}
+	}
+
+	/**
 	 * Registers an entity as mentioned.
 	 * Will be recorded as unresolved
 	 * if it wasn't already marked as resolved.
 	 *
-	 * @todo Make callback private once we drop PHP 5.3 compat.
-	 *
 	 * @param EntityId $entityId
 	 */
-	public function entityMentioned( EntityId $entityId ) {
+	private function entityToResolve( EntityId $entityId ) {
 		$prefixedId = $entityId->getSerialization();
 
 		if ( !isset( $this->entitiesResolved[$prefixedId] ) ) {
