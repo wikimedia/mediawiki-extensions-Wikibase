@@ -9,6 +9,8 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\StatementListProvider;
+use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -30,9 +32,9 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	private $propertyMentionCallback = null;
 
 	/**
-	 * @var callable
+	 * @var DedupeBag
 	 */
-	private $referenceSeenCallback = null;
+	private $dedupeBag;
 
 	/**
 	 * @var bool
@@ -78,6 +80,8 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		$this->referenceWriter = $writer;
 
 		$this->valueBuilder = $valueBuilder;
+
+		$this->dedupeBag = new NullDedupeBag();
 	}
 
 	/**
@@ -95,10 +99,17 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	}
 
 	/**
-	 * @return callable
+	 * @return DedupeBag
 	 */
-	public function getReferenceSeenCallback() {
-		return $this->referenceSeenCallback;
+	public function getDedupeBag() {
+		return $this->dedupeBag;
+	}
+
+	/**
+	 * @param DedupeBag $dedupeBag
+	 */
+	public function setDedupeBag( DedupeBag $dedupeBag ) {
+		$this->dedupeBag = $dedupeBag;
 	}
 
 	/**
@@ -196,7 +207,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 				$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
 					->say( RdfVocabulary::NS_PROV, 'wasDerivedFrom' )->is( RdfVocabulary::NS_REFERENCE, $refLName );
-				if ( $this->referenceSeen( $hash ) !== false ) {
+				if ( $this->dedupeBag->alreadySeen( $hash, 'R' ) !== false ) {
 					continue;
 				}
 
@@ -242,7 +253,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		} else {
 			wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 		}
-
 	}
 
 	/**
@@ -284,21 +294,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		if ( $this->propertyMentionCallback ) {
 			call_user_func( $this->propertyMentionCallback, $propertyId );
 		}
-	}
-
-	/**
-	 * @param string $hash
-	 *
-	 * @return bool
-	 */
-	private function referenceSeen( $hash ) {
-		if ( $this->referenceSeenCallback ) {
-			if ( call_user_func( $this->referenceSeenCallback, $hash ) ) {
-				return $hash;
-			}
-		}
-
-		return false;
 	}
 
 	/**

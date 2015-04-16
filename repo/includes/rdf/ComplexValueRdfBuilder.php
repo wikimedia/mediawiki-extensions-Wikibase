@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use DataValues\DataValue;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -19,15 +21,14 @@ use Wikimedia\Purtle\RdfWriter;
 class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 
 	/**
-	 * @var callable
+	 * @var DedupeBag
 	 */
-	private $valueSeenCallback = null;
+	private $dedupeBag;
 
 	/**
 	 * @var RdfWriter
 	 */
 	private $valueWriter;
-
 
 	/**
 	 * @param RdfVocabulary $vocabulary
@@ -36,21 +37,23 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	 */
 	public function __construct( RdfVocabulary $vocabulary, RdfWriter $valueWriter, PropertyDataTypeLookup $propertyLookup ) {
 		parent::__construct( $vocabulary, $propertyLookup );
+
+		$this->dedupeBag = new NullDedupeBag();
 		$this->valueWriter = $valueWriter;
 	}
 
 	/**
-	 * @return callable
+	 * @return DedupeBag
 	 */
-	public function getValueSeenCallback() {
-		return $this->valueSeenCallback;
+	public function getDedupeBag() {
+		return $this->dedupeBag;
 	}
 
 	/**
-	 * @param callable $valueSeenCallback
+	 * @param DedupeBag $dedupeBag
 	 */
-	public function setValueSeenCallback( $valueSeenCallback ) {
-		$this->valueSeenCallback = $valueSeenCallback;
+	public function setDedupeBag( DedupeBag $dedupeBag ) {
+		$this->dedupeBag = $dedupeBag;
 	}
 
 	/**
@@ -119,10 +122,8 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	private function addExpandedValue( DataValue $value, $prefix, array $props ) {
 		$valueLName = $value->getHash();
 
-		if ( $this->valueSeenCallback ) {
-			if ( call_user_func( $this->valueSeenCallback, $valueLName ) !== false ) {
+		if ( $this->dedupeBag->alreadySeen( $valueLName, 'V' ) !== false ) {
 				return $valueLName;
-			}
 		}
 
 		$this->valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )->a( RdfVocabulary::NS_ONTOLOGY, 'Value' );
