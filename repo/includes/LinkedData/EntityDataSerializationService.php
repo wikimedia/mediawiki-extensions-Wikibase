@@ -13,6 +13,7 @@ use RequestContext;
 use SiteList;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\EntityRevision;
+use Wikibase\HashDedupeBag;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
@@ -538,7 +539,7 @@ class EntityDataSerializationService {
 			$this->entityLookup,
 			$this->getFlavor( $flavor ),
 			// needed to eliminate duplicate refs/values within entity
-			new \HashBagOStuff()
+			new HashDedupeBag()
 		);
 
 		return $serializer;
