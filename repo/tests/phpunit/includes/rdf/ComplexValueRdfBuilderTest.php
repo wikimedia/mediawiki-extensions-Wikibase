@@ -57,10 +57,13 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @return ComplexValueRdfBuilder
 	 */
 	private function newBuilder( array &$mentioned = array(), array $valuesSeen = array() ) {
-		$entityMentioned = function( EntityId $id ) use ( &$mentioned ) {
-			$key = $id->getSerialization();
-			$mentioned[$key] = $id;
-		};
+		$mentionTracker = $this->getMock( 'Wikibase\MentionedEntityTracker' );
+		$mentionTracker->expects( $this->any() )
+			->method( 'entityReferenceMentioned' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
+				$key = $id->getSerialization();
+				$mentioned[$key] = $id;
+			} ) );
 
 		$vocabulary = $this->getTestData()->getVocabulary();
 		$valueWriter = $this->getTestData()->getNTriplesWriter();
@@ -70,7 +73,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		};
 
 		$builder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $this->getTestData()->getMockRepository() );
-		$builder->setEntityMentionCallback( $entityMentioned );
+		$builder->setMentionedEntityTracker( $mentionTracker );
 		$builder->setValueSeenCallback( $valueSeenCallback );
 
 		// HACK: glue on the value writer as a public field, so we can evaluate it later.
