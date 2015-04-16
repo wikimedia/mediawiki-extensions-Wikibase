@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_d6c76299",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-16T17:43:43Z",
+      "side": 1,
+      "message": "We want to prefetch the labels for all the properties here, with language fallback. \n\nFor prefetching, use a TermBuffer from WikibaseRepo::getDefaultInstance()-\u003egetTermBuffer().\n\nTo construct the languages to prefetch, use:\n\n    $languageFallbackChainFactory \u003d WikibaseRepo::getDefaultInstance()-\u003egetLanguageFallbackChainFactory();\n    $languageFallbackChain \u003d $languageFallbackChainFactory-\u003enewFromContext( $context );\n    $languages \u003d $languageFallbackChain-\u003egetFetchLanguageCodes();",
+      "revId": "b6eadac3aea19b4a5c89ad63950c9269e44e82ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_b6e7463b",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-16T17:43:43Z",
+      "side": 1,
+      "message": "Please use an EntityIdFormatter here to generate the link HTML. You can get one from WikibaseRepo::getEntityIdHtmlLinkFormatterFactory(). \n\nThe formatter you get that way should automatically be using a LabelLookup that is wired to the TermBuffer i mentioned above, so it will benefit from the prefetching. Perhaps verify manually that this actually works.\n\nUPDATE: by virtue of our magic link rewriter, the plain ID links are already being replaced by labels if possible. That mechanism also benefits from pre-fetching. However, it gives you little control over the formatting. I would prefer to use an EntityIdFormatter wherever we can. The magic linker hook is intended for cases where we have no control over the rendering.",
+      "revId": "b6eadac3aea19b4a5c89ad63950c9269e44e82ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
