@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8a7abbe5",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpSiteLinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-16T06:57:36Z",
+      "side": 1,
+      "message": "needs to call parent\u0027s setup",
+      "revId": "5409761f85a2fecadde7a6581cd0db36d57e3a5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aa7537f6",
+        "filename": "repo/tests/phpunit/includes/api/SetSiteLinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-16T06:57:36Z",
+      "side": 1,
+      "message": "Where do you propagate this?",
+      "revId": "5409761f85a2fecadde7a6581cd0db36d57e3a5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
