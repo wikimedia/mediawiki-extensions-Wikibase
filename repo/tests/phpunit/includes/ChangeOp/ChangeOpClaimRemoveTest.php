@@ -7,10 +7,10 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpClaimRemove
@@ -50,10 +50,11 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$item = $this->newItemWithClaim( 'q345', $snak );
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
-		$claimGuid = $claim->getGuid();
-		$changeOp = new ChangeOpClaimRemove( $claimGuid );
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
+		$changeOp = new ChangeOpClaimRemove( $guid );
 		$expected = null;
 		$args[] = array ( $item, $changeOp, $expected );
 
@@ -62,12 +63,8 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpProvider
-	 *
-	 * @param Entity $item
-	 * @param ChangeOpClaimRemove $changeOp
-	 * @param DataValue|null $expected
 	 */
-	public function testApplyAddNewClaim( $item, $changeOp, $expected ) {
+	public function testApplyAddNewClaim( Item $item, ChangeOpClaimRemove $changeOp, DataValue $expected = null ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$this->assertNotEmpty( $changeOp->getClaimGuid() );
 		$claims = new Claims( $item->getClaims() );

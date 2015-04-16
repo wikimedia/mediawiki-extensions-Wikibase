@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -120,16 +121,18 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 */
 	public function testAddRequests( $snakType, $data = null ) {
 		$item = $this->getTestItem();
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
 
 		$snak = $this->getTestSnak( $snakType, $data );
 
-		$this->makeSetQualifierRequest( $claim->getGuid(), null, $snak, $item->getId() );
+		$this->makeSetQualifierRequest( $guid, null, $snak, $item->getId() );
 
 		// now the hash exists, so the same request should fail
 		$this->setExpectedException( 'UsageException' );
-		$this->makeSetQualifierRequest( $claim->getGuid(), null, $snak, $item->getId() );
+		$this->makeSetQualifierRequest( $guid, null, $snak, $item->getId() );
 	}
 
 	public function provideChangeRequests() {
@@ -141,8 +144,10 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 */
 	public function testChangeRequests( $snakType, $data = null ) {
 		$item = $this->getTestItem();
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
 
 		$snak = $this->getTestSnak( $snakType, $data );
 
@@ -150,11 +155,11 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$hash = $snak->getHash();
 		$newQualifier = new PropertyValueSnak( $snak->getPropertyId(), new StringValue( __METHOD__ . '#' . $counter++ ) );
 
-		$this->makeSetQualifierRequest( $claim->getGuid(), $hash, $newQualifier, $item->getId() );
+		$this->makeSetQualifierRequest( $guid, $hash, $newQualifier, $item->getId() );
 
 		// now the hash changed, so the same request should fail
 		$this->setExpectedException( 'UsageException' );
-		$this->makeSetQualifierRequest( $claim->getGuid(), $hash, $newQualifier, $item->getId() );
+		$this->makeSetQualifierRequest( $guid, $hash, $newQualifier, $item->getId() );
 	}
 
 	protected function makeSetQualifierRequest( $statementGuid, $snakhash, Snak $qualifier, EntityId $entityId ) {

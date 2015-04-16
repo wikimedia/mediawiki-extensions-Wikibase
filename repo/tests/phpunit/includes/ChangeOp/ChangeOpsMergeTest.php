@@ -169,8 +169,9 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	}
 
 	private function removeClaimsGuids( Item $item ) {
-		foreach ( $item->getClaims() as $claim ) {
-			$claim->setGuid( null );
+		/** @var Statement $statement */
+		foreach ( $item->getStatements() as $statement ) {
+			$statement->setGuid( null );
 		}
 	}
 

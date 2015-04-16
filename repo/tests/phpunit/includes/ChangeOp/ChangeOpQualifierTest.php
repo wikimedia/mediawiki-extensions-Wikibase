@@ -6,8 +6,6 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpQualifier;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -16,6 +14,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -77,11 +76,12 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$item = $this->newItemWithClaim( $snak );
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
-		$claimGuid = $claim->getGuid();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
 		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '', $this->mockProvider->getMockSnakValidator() );
+		$changeOp = new ChangeOpQualifier( $guid, $newQualifier, '', $this->mockProvider->getMockSnakValidator() );
 		$snakHash = $newQualifier->getHash();
 		$args[] = array ( $item, $changeOp, $snakHash );
 
@@ -90,17 +90,13 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpAddProvider
-	 *
-	 * @param Entity $item
-	 * @param ChangeOpQualifier $changeOp
-	 * @param string $snakHash
 	 */
-	public function testApplyAddNewQualifier( $item, $changeOp, $snakHash ) {
+	public function testApplyAddNewQualifier( Item $item, ChangeOpQualifier $changeOp, $snakHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = $item->getClaims();
-		/** @var Claim $claim */
-		$claim = reset( $claims );
-		$qualifiers = $claim->getQualifiers();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$qualifiers = $statement->getQualifiers();
 		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), "No qualifier with expected hash" );
 	}
 
@@ -109,18 +105,15 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$item = $this->newItemWithClaim( $snak );
-		$claims = $item->getClaims();
-		/** @var Claim $claim */
-		$claim = reset( $claims );
-		$claimGuid = $claim->getGuid();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$guid = $statement->getGuid();
 		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$qualifiers = $claim->getQualifiers();
-		$qualifiers->addSnak( $newQualifier );
-		$claim->setQualifiers( $qualifiers );
-		$item->setClaims( new Claims( $claims ) );
+		$statement->getQualifiers()->addSnak( $newQualifier );
 		$snakHash = $newQualifier->getHash();
 		$changedQualifier = new PropertyValueSnak( 78462378, new StringValue( 'changedQualifier' ) );
-		$changeOp = new ChangeOpQualifier( $claimGuid, $changedQualifier, $snakHash, $this->mockProvider->getMockSnakValidator() );
+		$changeOp = new ChangeOpQualifier( $guid, $changedQualifier, $snakHash, $this->mockProvider->getMockSnakValidator() );
 		$args[] = array ( $item, $changeOp, $changedQualifier->getHash() );
 
 		return $args;
@@ -128,17 +121,13 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpSetProvider
-	 *
-	 * @param Entity $item
-	 * @param ChangeOpQualifier $changeOp
-	 * @param string $snakHash
 	 */
-	public function testApplySetQualifier( $item, $changeOp, $snakHash ) {
+	public function testApplySetQualifier( Item $item, ChangeOpQualifier $changeOp, $snakHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = $item->getClaims();
-		/** @var Claim $claim */
-		$claim = reset( $claims );
-		$qualifiers = $claim->getQualifiers();
+		$statements = $item->getStatements()->toArray();
+		/** @var Statement $statement */
+		$statement = reset( $statements );
+		$qualifiers = $statement->getQualifiers();
 		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), "No qualifier with expected hash" );
 	}
 
