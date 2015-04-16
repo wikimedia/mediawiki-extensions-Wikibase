@@ -59,12 +59,12 @@ class DirectSqlStore implements ClientStore {
 	private $repoWiki;
 
 	/**
-	 * @var ConnectionManager|null
+	 * @var ConsistentReadConnectionManager|null
 	 */
 	private $repoConnectionManager = null;
 
 	/**
-	 * @var ConnectionManager|null
+	 * @var ConsistentReadConnectionManager|null
 	 */
 	private $localConnectionManager = null;
 
@@ -203,7 +203,7 @@ class DirectSqlStore implements ClientStore {
 	 * Returns a LoadBalancer that acts as a factory for connections to the repo wiki's
 	 * database.
 	 *
-	 * @return ConnectionManager
+	 * @return ConsistentReadConnectionManager
 	 */
 	private function getRepoConnectionManager() {
 		if ( $this->repoConnectionManager === null ) {
@@ -217,7 +217,7 @@ class DirectSqlStore implements ClientStore {
 	 * Returns a LoadBalancer that acts as a factory for connections to the local (client) wiki's
 	 * database.
 	 *
-	 * @return ConnectionManager
+	 * @return ConsistentReadConnectionManager
 	 */
 	private function getLocalConnectionManager() {
 		if ( $this->localConnectionManager === null ) {
