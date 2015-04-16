@@ -55,10 +55,13 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 
-		$entityMentioned = function( EntityId $id ) use ( &$mentioned ) {
-			$key = $id->getSerialization();
-			$mentioned[$key] = $id;
-		};
+		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
+		$mentionTracker->expects( $this->any() )
+			->method( 'propertyMentioned' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
+				$key = $id->getSerialization();
+				$mentioned[$key] = $id;
+			} ) );
 
 		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
 			$valueWriter = $writer->sub();
@@ -72,7 +75,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$statementBuilder->setDedupeBag( $dedupe ?: new NullDedupeBag() );
 
 		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES  ) {
-			$statementBuilder->setPropertyMentionCallback( $entityMentioned );
+			$statementBuilder->setEntityMentionListener( $mentionTracker );
 		}
 
 		$statementBuilder->setProduceQualifiers( $flavor & RdfProducer::PRODUCE_QUALIFIERS );
