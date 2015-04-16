@@ -69,7 +69,13 @@ class ChangeOpReference extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, Reference $reference, $referenceHash, SnakValidator $snakValidator, $index = null ) {
+	public function __construct(
+		$claimGuid,
+		Reference $reference,
+		$referenceHash,
+		SnakValidator $snakValidator,
+		$index = null
+	) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
 		}
@@ -82,8 +88,8 @@ class ChangeOpReference extends ChangeOpBase {
 			throw new InvalidArgumentException( '$reference needs to be an instance of Reference' );
 		}
 
-		if( !is_null( $index ) && !is_integer( $index ) ) {
-			throw new InvalidArgumentException( '$index needs to be null or an integer value' );
+		if ( !is_int( $index ) && $index !== null ) {
+			throw new InvalidArgumentException( '$index must be an integer or null' );
 		}
 
 		$this->claimGuid = $claimGuid;

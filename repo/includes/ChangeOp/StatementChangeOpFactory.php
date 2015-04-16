@@ -25,15 +25,15 @@ class StatementChangeOpFactory {
 
 	/**
 	 * @param string $claimGuid
-	 * @param Reference|null $reference
+	 * @param Reference $reference
 	 * @param string $referenceHash (if empty '' a new reference will be created)
-	 * @param int|null $index Indicates the new desired position in the list of references. Currently not implemented.
+	 * @param int|null $index Indicates the new desired position in the list of references.
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
 	public function newSetReferenceOp( $claimGuid, Reference $reference, $referenceHash, $index = null ) {
-		return new ChangeOpReference( $claimGuid, $reference, $referenceHash, $this->referenceSnakValidator );
+		return new ChangeOpReference( $claimGuid, $reference, $referenceHash, $this->referenceSnakValidator, $index );
 	}
 
 	/**
