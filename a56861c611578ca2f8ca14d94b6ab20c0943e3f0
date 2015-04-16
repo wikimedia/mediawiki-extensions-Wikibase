@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_f6f13edb",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-16T17:48:20Z",
+      "side": 1,
+      "message": "This should not continue but use the serialized item id instead of the label if no label could be found.\n\n  try {\n    $label \u003d $labelLookup-\u003egetLabel( new ItemId( $badgeId ) )-\u003egetText();\n  } catch ( OutOfBoundsException $ex ) {\n    $label \u003d $badgeId;\n  }",
+      "revId": "a56861c611578ca2f8ca14d94b6ab20c0943e3f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
