@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_a75b9256",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-16T22:59:53Z",
+      "side": 1,
+      "message": "Again count( int …) … Looks like a rebase went wrong here :S",
+      "revId": "a7d5f6563a110bd09230d8b2c75ecb8421882655",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
