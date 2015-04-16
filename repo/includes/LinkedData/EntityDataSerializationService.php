@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\LinkedData;
 
 use ApiFormatBase;
-use ApiFormatXml;
 use ApiMain;
 use ApiResult;
 use DerivativeContext;
