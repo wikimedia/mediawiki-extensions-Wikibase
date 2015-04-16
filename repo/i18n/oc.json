@@ -140,7 +140,6 @@
 	"wikibase-setsitelink-label": "Ligam de site :",
 	"wikibase-setsitelink-badges": "Badges :",
 	"wikibase-setsitelink-submit": "Definir lo ligam de site",
-	"wikibase-setsitelink-warning-remove": "Sètz segur que volètz suprimir lo libellat de site de [[$1]] ?",
 	"wikibase-setsitelink-invalid-site": "L’id de site « $1 » es desconegut. Utilizatz un id de site existent, coma « enwiki ».",
 	"wikibase-setsitelink-add-failed": "Lo ligam del site a pas pogut èsser enregistrat.",
 	"wikibase-setsitelink-remove-failed": "Lo ligam del site a pas pogut èsser suprimit.",

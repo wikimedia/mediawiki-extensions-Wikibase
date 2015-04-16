@@ -201,7 +201,6 @@
 	"wikibase-setsitelink-label": "网站链接：",
 	"wikibase-setsitelink-badges": "星章：",
 	"wikibase-setsitelink-submit": "设置网站链接",
-	"wikibase-setsitelink-warning-remove": "您确实想要删除[[$1]]的网站链接吗？",
 	"wikibase-setsitelink-invalid-site": "网站ID“$1”未知。请使用现存的网站ID，例如“zhwiki”。",
 	"wikibase-setsitelink-not-item": "ID$1不属于任何项。",
 	"wikibase-setsitelink-not-badge": "项$1不是徽章。",

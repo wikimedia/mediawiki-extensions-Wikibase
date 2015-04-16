@@ -183,7 +183,6 @@
 	"wikibase-setsitelink-label": "Odnośnik:",
 	"wikibase-setsitelink-badges": "Odznaki:",
 	"wikibase-setsitelink-submit": "Ustaw link do strony",
-	"wikibase-setsitelink-warning-remove": "Czy na pewno chcesz usunąć link do strony dla [[$1]]?",
 	"wikibase-setsitelink-not-badge": "Element $1 nie jest odznaką.",
 	"wikibase-setsitelink-add-failed": "Link do strony nie został zapisany.",
 	"wikibase-setsitelink-remove-failed": "Link do strony nie został usunięty.",

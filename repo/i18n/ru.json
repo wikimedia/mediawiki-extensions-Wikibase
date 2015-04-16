@@ -186,7 +186,6 @@
 	"wikibase-setsitelink-label": "Ссылка на сайт:",
 	"wikibase-setsitelink-badges": "Значки:",
 	"wikibase-setsitelink-submit": "Задать ссылку на сайт",
-	"wikibase-setsitelink-warning-remove": "Вы действительно хотите удалить ссылку на сайт для [[$1]]?",
 	"wikibase-setsitelink-invalid-site": "Неизвестный идентификатор сайта «$1». Пожалуйста, используйте один из существующих идентификаторов сайта, например «enwiki».",
 	"wikibase-setsitelink-not-item": "Идентификатор $1 не принадлежит к элементу.",
 	"wikibase-setsitelink-not-badge": "Элемент $1 не является значком.",

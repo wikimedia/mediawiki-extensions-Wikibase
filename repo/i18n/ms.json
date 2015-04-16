@@ -144,7 +144,6 @@
 	"wikibase-setsitelink-site": "ID laman:",
 	"wikibase-setsitelink-label": "Pautan laman:",
 	"wikibase-setsitelink-submit": "Tetapkan",
-	"wikibase-setsitelink-warning-remove": "Adakah anda benar-benar mahu menggugurkan pautan laman [[$1]]?",
 	"wikibase-setsitelink-invalid-site": "ID laman \"$1\" tidak dikenali. Sila gunakan ID laman sedia ada seperti \"enwiki\".",
 	"wikibase-setsitelink-not-badge": "Perkara $1 bukanlah lencana.",
 	"wikibase-setsitelink-add-failed": "Pautan laman tidak dapat disimpan.",

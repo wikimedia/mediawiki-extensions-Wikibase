@@ -162,7 +162,6 @@
 	"wikibase-setsitelink-label": "Nettstedlenke:",
 	"wikibase-setsitelink-badges": "Emblemer:",
 	"wikibase-setsitelink-submit": "Lagre nettstedlenke",
-	"wikibase-setsitelink-warning-remove": "Vil du virkelig fjerne nettstedlenken for [[$1]]?",
 	"wikibase-setsitelink-invalid-site": "Nettsted-IDen «$1» er ukjent. Du må bruke en eksisterende nettsted-ID, som f.eks. «nowiki».",
 	"wikibase-setsitelink-not-item": "Id $1 hører ikke til et element.",
 	"wikibase-setsitelink-not-badge": "Elementet $1 er ikke et emblem.",

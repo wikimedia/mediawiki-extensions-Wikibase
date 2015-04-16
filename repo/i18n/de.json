@@ -195,7 +195,6 @@
 	"wikibase-setsitelink-label": "Websitelink:",
 	"wikibase-setsitelink-badges": "Auszeichnungen:",
 	"wikibase-setsitelink-submit": "Den Websitelink festlegen",
-	"wikibase-setsitelink-warning-remove": "Möchtest du den Websitelink von [[$1]] wirklich entfernen?",
 	"wikibase-setsitelink-invalid-site": "Die Websitekennung „$1“ ist unbekannt. Bitte verwende eine vorhandene Kennung, bspw. „dewiki“.",
 	"wikibase-setsitelink-not-item": "Die Kennung $1 gehört zu keinem Datenobjekt.",
 	"wikibase-setsitelink-not-badge": "Das Datenobjekt $1 ist keine Auszeichnung.",
@@ -411,6 +410,7 @@
 	"apihelp-wbgetclaims-example-1": "Ruft Behauptungen für das Objekt mit der Kennung Q42 ab",
 	"apihelp-wbgetentities-description": "Ruft die Daten für mehrere Wikibase-Objekte ab.",
 	"apihelp-wbgetentities-param-ids": "Die Kennungen der Objekte, von denen die Daten abgerufen werden sollen",
+	"apihelp-wbmergeitems-description": "Führt mehrere Objekte zusammen.",
 	"apihelp-wbmergeitems-example-1": "Führt Daten von Q42 in Q222 zusammen",
 	"apihelp-wbparsevalue-param-parser": "Kennung des zu verwendenden Werteparsers",
 	"apihelp-wbparsevalue-param-values": "Die zu parsenden Werte",
@@ -427,6 +427,7 @@
 	"apihelp-wbsetdescription-description": "Legt eine Beschreibung für ein einzelnes Wikibase-Objekt fest.",
 	"apihelp-wbsetdescription-param-language": "Sprache der Beschreibung",
 	"apihelp-wbsetdescription-param-value": "Der Wert, der für die Beschreibung festgelegt werden soll",
+	"apihelp-wbsetlabel-description": "Legt eine Bezeichnung für ein einzelnes Wikibase-Objekt fest.",
 	"apihelp-wbsetlabel-param-language": "Sprache der Bezeichnung",
 	"apihelp-wbsetlabel-param-value": "Der Wert der Bezeichnung",
 	"apihelp-wbsetreference-example-1": "Erstellt eine neue Referenz für die Behauptung mit der GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF"

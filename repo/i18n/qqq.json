@@ -222,7 +222,6 @@
 	"wikibase-setsitelink-label": "Label for the input field to type the site link to set the item to.",
 	"wikibase-setsitelink-badges": "Label for the input field to type the badges to set the item to.\n{{Identical|Badge}}",
 	"wikibase-setsitelink-submit": "Label for the button that activates the action.",
-	"wikibase-setsitelink-warning-remove": "A warning message to ask the user if he wants to remove the site link.\n\nParameters:\n* $1 - the id that links to the entity",
 	"wikibase-setsitelink-invalid-site": "Response informing that the site id is not valid. Could give an example of a valid site id.\n\nParameters:\n* $1 - the invalid id",
 	"wikibase-setsitelink-not-item": "Response informing that the given id does not belong to an item.\n\nParameters:\n* $1 - the invalid id",
 	"wikibase-setsitelink-not-badge": "Response informing that the given item is not specified to be used as a badge.\n\nParameters:\n* $1 - the invalid item's id",

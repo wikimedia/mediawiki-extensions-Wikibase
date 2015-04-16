@@ -188,7 +188,6 @@
 	"wikibase-setsitelink-label": "Odkaz na článek:",
 	"wikibase-setsitelink-badges": "Odznaky:",
 	"wikibase-setsitelink-submit": "Nastavit odkaz na článek",
-	"wikibase-setsitelink-warning-remove": "Opravdu chcete odstranit odkaz pro [[$1]]?",
 	"wikibase-setsitelink-invalid-site": "„$1“ není platná zkratka webu. Příkladem správně zadané zkratky webu je „enwiki“.",
 	"wikibase-setsitelink-not-item": "ID $1 nemá žádná položka.",
 	"wikibase-setsitelink-not-badge": "Položka $1 není odznak.",

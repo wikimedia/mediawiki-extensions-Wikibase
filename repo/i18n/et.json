@@ -178,7 +178,6 @@
 	"wikibase-setsitelink-label": "Võrgukohalink:",
 	"wikibase-setsitelink-badges": "Äramärkimised:",
 	"wikibase-setsitelink-submit": "Määra võrgukohalink",
-	"wikibase-setsitelink-warning-remove": "Kas soovid tõesti üksuse [[$1]] võrgukohalingi eemaldada?",
 	"wikibase-setsitelink-invalid-site": "Võrgukoha identifikaator \"$1\" on tundmatu. Palun kasuta olemasolevat võrgukoha identifikaatorit nagu \"etwiki\".",
 	"wikibase-setsitelink-not-item": "$1 pole üksuse identifikaator.",
 	"wikibase-setsitelink-not-badge": "Üksus $1 pole äramärkimine.",

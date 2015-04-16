@@ -164,7 +164,6 @@
 	"wikibase-setsitelink-label": "Vefsvæðistengill:",
 	"wikibase-setsitelink-badges": "Merki:",
 	"wikibase-setsitelink-submit": "Setja vefsvæðis tengilinn",
-	"wikibase-setsitelink-warning-remove": "Ertu viss um að þú viljir fjarlægja vefsvæðistengillinn á „[[$1]]“ ?",
 	"wikibase-setsitelink-invalid-site": "Síðu auðkennið „$1“ er óþekkt. Vinsamlegast notaðu auðkenni sem er til fyrir, eins og „enwiki“.",
 	"wikibase-setsitelink-not-item": "Auðkennið $1 tilheyrir ekki hlut.",
 	"wikibase-setsitelink-not-badge": "Hluturinn $1 er ekki merki.",

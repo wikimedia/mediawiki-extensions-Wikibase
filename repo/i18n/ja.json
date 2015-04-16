@@ -168,7 +168,6 @@
 	"wikibase-setsitelink-label": "サイトリンク:",
 	"wikibase-setsitelink-badges": "バッジ:",
 	"wikibase-setsitelink-submit": "サイトリンクを設定",
-	"wikibase-setsitelink-warning-remove": "[[$1]] のサイトリンクを本当に除去しますか?",
 	"wikibase-setsitelink-invalid-site": "サイト ID「$1」は不明です。既存のサイト ID (「jawiki」など) を使用してください。",
 	"wikibase-setsitelink-not-item": "ID $1 は項目に割り当てられていません。",
 	"wikibase-setsitelink-not-badge": "項目 $1 はバッジではありません。",

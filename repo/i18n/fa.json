@@ -197,7 +197,6 @@
 	"wikibase-setsitelink-label": "پیوند تارنما:",
 	"wikibase-setsitelink-badges": "نشان‌ها:",
 	"wikibase-setsitelink-submit": "ثبت پیوند تارنما",
-	"wikibase-setsitelink-warning-remove": "مطمئنید که می‌خواهید پیوند تارنمای [[$1]] را حذف کنید؟",
 	"wikibase-setsitelink-invalid-site": "شناسه تارنمای «$1» نامعلوم است. خواهشمند است از یک شناسه موجود بهره گیرید، چیزی همچون «fawiki».",
 	"wikibase-setsitelink-not-item": "شناسهٔ $1 متعلق به یک مورد نیست.",
 	"wikibase-setsitelink-not-badge": "مورد $1 یک نشان نیست.",

@@ -164,7 +164,6 @@
 	"wikibase-setsitelink-label": "사이트 링크:",
 	"wikibase-setsitelink-badges": "배지:",
 	"wikibase-setsitelink-submit": "사이트 링크 설정",
-	"wikibase-setsitelink-warning-remove": "[[$1]]의 사이트 링크를 제거하겠습니까?",
 	"wikibase-setsitelink-invalid-site": "\"$1\" 사이트 id를 알 수 없습니다. \"kowiki\"와 같은 기존 사이트 id를 사용하세요.",
 	"wikibase-setsitelink-not-item": "ID $1은 항목에 속하지 않습니다.",
 	"wikibase-setsitelink-not-badge": "$1 항목은 뱃지가 아닙니다.",
