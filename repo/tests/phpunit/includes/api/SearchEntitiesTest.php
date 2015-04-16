@@ -10,6 +10,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
 use Wikibase\TermIndex;
 use Wikibase\Api\SearchEntities;
@@ -41,7 +42,6 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			),
 			'aliases' => array(
 				array( array( 'language' => 'de', 'value' => 'Dickes B' ) ),
-				array( array( 'language' => 'en', 'value' => 'Dickes B' ) ),
 			),
 			'descriptions' => array(
 				array( 'language' => 'en', 'value' => 'Capital city and a federated state of the Federal Republic of Germany.' ),
@@ -59,6 +59,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'aliases' => array(
 			),
 			'descriptions' => array(
+				array( 'language' => 'en', 'value' => 'City in Switzerland.' ),
 				array( 'language' => 'de', 'value' => 'Stadt in der Schweiz.' ),
 			),
 		),
@@ -76,15 +77,54 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				array( 'language' => 'zh-hk', 'value' => '廣東的省會。' ),
 			),
 		),
+		'X1' => array(
+			'id' => 'Q1001',
+			'labels' => array(
+				array( 'language' => 'en', 'value' => 'label:x1:en' ),
+			),
+			'aliases' => array(
+				array( array( 'language' => 'en', 'value' => 'alias1:x1:en' ) ),
+			),
+			'descriptions' => array(
+				array( 'language' => 'en', 'value' => 'description:x1:en' ),
+			),
+		),
+		'X2' => array(
+			'id' => 'Q1002',
+			'labels' => array(
+				array( 'language' => 'en', 'value' => 'label:x2:en' ),
+				array( 'language' => 'de', 'value' => 'label:x2:de' ),
+			),
+			'aliases' => array(
+				array( array( 'language' => 'en', 'value' => 'alias1:x2:en' ) ),
+			),
+			'descriptions' => array(
+				array( 'language' => 'en', 'value' => 'description:x2:en' ),
+			),
+		),
+		'X3' => array(
+			'id' => 'Q1003',
+			'labels' => array(
+				array( 'language' => 'en', 'value' => 'label:x3:en' ),
+				array( 'language' => 'de', 'value' => 'label:x3:de' ),
+				array( 'language' => 'de-ch', 'value' => 'label:x3:de-ch' ),
+			),
+			'aliases' => array(
+				array( array( 'language' => 'en', 'value' => 'alias1:x3:en' ) ),
+				array( array( 'language' => 'en', 'value' => 'description:x3:en' ) ),
+				array( array( 'language' => 'de', 'value' => 'description:x3:de' ) ),
+				array( array( 'language' => 'de-ch', 'value' => 'description:x3:de-ch' ) ),
+			),
+			'descriptions' => array(
+				array( 'language' => 'en', 'value' => 'description:x3:en' ),
+				array( 'language' => 'de', 'value' => 'description:x3:de' ),
+				array( 'language' => 'de-ch', 'value' => 'description:x3:de-ch' ),
+			),
+		),
 	);
 
 	private function getEntityId( $handle ) {
-		$parser = new BasicEntityIdParser();
-		return $parser->parse( self::$terms[$handle]['id'] );
-	}
-
-	private function getEntityData( $handle ) {
-		return self::$terms[$handle];
+		return self::$terms[$handle]['id'];
 	}
 
 	/**
@@ -181,8 +221,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->getTitleLookup(),
 			new BasicEntityIdParser(),
 			array( 'item', 'property' ),
-			$this->getContentLanguages()
-
+			$this->getContentLanguages(),
+			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
 		);
 
 		$module->execute();
@@ -192,19 +232,26 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideData() {
-		$testCases = array();
+		return array(
+			//Search via full Labels
+			'en:Berlin' => array( array( 'search' => 'Berlin', 'language' => 'en' ), array( array( 'label' => 'Berlin' ) ) ),
+			'en:bERliN' => array( array( 'search' => 'bERliN', 'language' => 'en' ), array( array( 'label' => 'Berlin' ) ) ),
+			'zh-cn:广州市' => array( array( 'search' => '广州市', 'language' => 'zh-cn' ), array( array( 'label' => '广州市' ) ) ),
 
-		//Search via full Labels
-		$testCases[] = array( array( 'search' => 'berlin', 'language' => 'en' ), array( 'handle' => 'Berlin' ) );
-		$testCases[] = array( array( 'search' => 'bERliN', 'language' => 'en' ), array( 'handle' => 'Berlin' ) );
-		$testCases[] = array( array( 'search' => 'BERLIN', 'language' => 'en' ), array( 'handle' => 'Berlin' ) );
-		$testCases[] = array( array( 'search' => '广州市', 'language' => 'zh-cn' ), array( 'handle' => 'Guangzhou' ) );
+			//Search via partial Labels
+			'de:Guang' => array( array( 'search' => 'Guang', 'language' => 'de' ), array( array( 'label' => 'Guangzhou' ) ) ),
+			'zh-cn:广' => array( array( 'search' => '广', 'language' => 'zh-cn' ), array( array( 'label' => '广州市' ) ) ),
 
-		//Search via partial Labels
-		$testCases[] = array( array( 'search' => 'BER', 'language' => 'de' ), array( 'handle' => 'Berlin' ) );
-		$testCases[] = array( array( 'search' => '广', 'language' => 'zh-cn' ), array( 'handle' => 'Guangzhou' ) );
+			//Match alias
+			'de:Dickes' => array( array( 'search' => 'Dickes', 'language' => 'de' ), array( array( 'label' => 'Berlin', 'aliases' => array( 'Dickes B' ) ) ) ),
 
-		return $testCases;
+			//Multi-match language fallback
+			'de:x' => array( array( 'search' => 'alias1:x', 'language' => 'de-ch' ), array(
+				array( 'label' => 'label:x1:en' ),
+				array( 'label' => 'label:x2:de' ),
+				array( 'label' => 'label:x3:de-ch' ),
+			) ),
+		);
 	}
 
 	/**
@@ -216,7 +263,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$result = $this->callApiModule( $params );
 
 		$this->assertResultLooksGood( $result );
-		$this->assertApiResultHasExpected( $result['search'], $params, $expected );
+		$this->assertResultSet( $expected, $result['search'] );
 	}
 
 	public function testSearchExactMatch() {
@@ -226,10 +273,41 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'language' => 'en'
 		);
 
-		$expected = array( 'handle' => 'Berlin' );
+		$expected = array( array(
+			'label' => 'Berlin',
+			'description' => 'Capital city and a federated state of the Federal Republic of Germany.',
+		) );
 
 		$result = $this->callApiModule( $params );
-		$this->assertApiResultHasExpected( $result['search'], $params, $expected );
+		$this->assertResultSet( $expected, $result['search'] );
+	}
+
+
+	public function testSearchFallback() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'BERN',
+			'language' => 'de-ch',
+		);
+
+		$result = $this->callApiModule( $params );
+		$this->assertCount( 1, $result['search'] );
+
+		$resultEntry = reset( $result['search'] );
+		$this->assertEquals( 'Bern', $resultEntry['label'] );
+		$this->assertEquals( 'Stadt in der Schweiz.', $resultEntry['description'] );
+	}
+
+	public function testSearchStrictLanguage() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'Berlin',
+			'language' => 'de-ch',
+			'strictlanguage' => true
+		);
+
+		$result = $this->callApiModule( $params );
+		$this->assertEmpty( $result['search'] );
 	}
 
 	public function testSearchContinue() {
@@ -258,50 +336,27 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 
 	}
 
-	private function assertApiResultHasExpected( $searchResults, $params, $expected ) {
-		$foundResult = 0;
+	private function assertResultSet( $expected, $actual ) {
+		reset( $actual );
+		foreach ( $expected as $expectedEntry ) {
+			$actualEntry = current( $actual );
+			next( $actual );
 
-		$expectedId = $this->getEntityId( $expected['handle'] )->getSerialization();
-		$expectedData = $this->getEntityData( $expected['handle'] );
-
-		foreach( $searchResults as $searchResult ) {
-			$assertFound = $this->assertSearchResultHasExpected( $searchResult, $params, $expectedId, $expectedData );
-			$foundResult = $foundResult + $assertFound;
+			$this->assertTrue( $actualEntry !== false, 'missing result entry ' . var_export( $expectedEntry, true ) );
+			$this->assertResultEntry( $expectedEntry, $actualEntry );
 		}
-		$this->assertEquals( 1, $foundResult, 'Could not find expected search result in array of results' );
+
+		$actualEntry = next( $actual );
+		$this->assertFalse( $actualEntry, 'extra result entry ' . var_export( $actualEntry, true ) );
 	}
 
-	private function assertSearchResultHasExpected( $searchResult, $params, $expectedId, $expectedData  ){
-		if( $expectedId === $searchResult['id'] ) {
-			$this->assertEquals( $expectedId, $searchResult['id'] );
-			$this->assertStringEndsWith( $expectedId, $searchResult['url'] );
-			if( array_key_exists( 'descriptions', $expectedData ) ) {
-				$this->assertSearchResultHasExpectedDescription( $searchResult, $params, $expectedData );
-			}
-			if( array_key_exists( 'labels', $expectedData ) ) {
-				$this->assertSearchResultHasExpectedLabel( $searchResult, $params, $expectedData );
-			}
-			return 1;
-		}
-		return 0;
-	}
+	private function assertResultEntry( $expected, $actual ) {
+		$actual = array_intersect_key( $actual, $expected );
 
-	private function assertSearchResultHasExpectedDescription( $searchResult, $params, $expectedData ) {
-		foreach( $expectedData['descriptions'] as $description ) {
-			if( $description['language'] == $params['language'] ) {
-				$this->assertArrayHasKey( 'description', $searchResult );
-				$this->assertEquals( $description['value'], $searchResult['description'] );
-			}
-		}
-	}
+		ksort( $expected );
+		ksort( $actual );
 
-	private function assertSearchResultHasExpectedLabel( $searchResult, $params, $expectedData ) {
-		foreach( $expectedData['labels'] as $description ) {
-			if( $description['language'] == $params['language'] ) {
-				$this->assertArrayHasKey( 'label', $searchResult );
-				$this->assertEquals( $description['value'], $searchResult['label'] );
-			}
-		}
+		$this->assertEquals( $expected, $actual );
 	}
 
 }
