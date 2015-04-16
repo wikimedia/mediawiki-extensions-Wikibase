@@ -494,4 +494,5 @@ class EntityDataRequestHandler {
 
 		// exit normally here, keeping all levels of output buffering.
 	}
+
 }

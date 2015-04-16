@@ -6,7 +6,6 @@ use DatabaseBase;
 use LoadBalancer;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Store\SubscriptionLookup;
 
 /**
@@ -124,6 +123,5 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 
 		return $values;
 	}
-
 
 }

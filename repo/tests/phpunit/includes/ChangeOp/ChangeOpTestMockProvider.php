@@ -26,7 +26,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Validators\CompositeFingerprintValidator;
