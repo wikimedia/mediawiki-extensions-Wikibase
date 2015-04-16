@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test;
 
+use FauxRequest;
+use FauxResponse;
+use TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -93,7 +96,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		if ( !self::$badgeId ) {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
-			$sitesTable->saveSites( \TestSites::getSites() );
+			$sitesTable->saveSites( TestSites::getSites() );
 
 			$this->createItems();
 			$this->addBadgeMatcher();
@@ -210,6 +213,53 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( self::$redirectId  . '/dewiki', null, 'qqx' );
 
 		$this->assertRegExp( '@<p class="error">\(wikibase-wikibaserepopage-unresolved-redirect: .*?\)</p>@', $output, "Expected error message" );
+	}
+
+	public function testExecutePostPreserveSiteLinkWhenNothingEntered() {
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => '' ), true );
+
+		list( $output, ) = $this->executeSpecialPage( '', $request );
+
+		$this->assertTag( array(
+			'tag' => 'input',
+			'attributes' => array(
+				'id' => 'wb-setsitelink-page',
+				'class' => 'wb-input',
+				'name' => 'page',
+				'value' => 'Wikidata',
+			)
+		), $output, 'Value still preserves when no value was entered in the big form' );
+	}
+
+	public function testExecutePostModifySiteLink() {
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => 'Wikipedia' ), true );
+
+		list( $output, $response ) = $this->executeSpecialPage( '', $request );
+		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
+
+		$this->assertContains( self::$itemId, $redirect, "Should redirect to item page" );
+
+		/** @var Item $item */
+		$item = $lookup->getEntity( new ItemId( self::$itemId) );
+
+		$this->assertEquals( 'Wikipedia', $item->getSitelink( 'dewiki' )->getPageName(), "Should contain new site link" );
+	}
+
+	public function testExecutePostRemoveSiteLink() {
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => '', 'remove' => true ), true );
+
+		list( $output, $response ) = $this->executeSpecialPage( '', $request );
+		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
+
+		$this->assertContains( self::$itemId, $redirect, "Should redirect to item page" );
+
+		/** @var Item $item */
+		$item = $lookup->getEntity( new ItemId( self::$itemId ) );
+
+		$this->assertFalse( $item->hasLinkToSite( 'dewiki' ), "Should no longer contain site link" );
 	}
 
 }

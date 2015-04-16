@@ -142,15 +142,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return false;
 		}
 
-		// to provide removing after posting the full form
+		// If the user just enters an item id and a site, dont remove the site link.
+		// The user can remove the site link in the second form where it has to be
+		// actually removed. This prevents users from removing site links accidentally.
 		if ( $request->getVal( 'remove' ) === null && $this->page === '' ) {
-			$this->showErrorHTML(
-				$this->msg(
-					'wikibase-setsitelink-warning-remove',
-					$this->getEntityTitle( $this->entityRevision->getEntity()->getId() )
-				)->parse(),
-				'warning'
-			);
+			$this->page = null;
 			return false;
 		}
 
@@ -239,6 +235,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$site = $this->siteStore->getSite( $this->site );
 
 		if ( $entity !== null && $this->site !== null && $site !== null ) {
+			// show the detailed form which also allows users to remove site links
 			return Html::rawElement(
 				'p',
 				array(),
@@ -436,12 +433,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param Item $item
 	 * @param string $siteId
 	 * @param string $pageName
-	 * @param string[] $badges
+	 * @param string[] $badgeIds
 	 * @param Summary &$summary The summary for this edit will be saved here.
 	 *
 	 * @return Status
 	 */
-	private function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
+	private function setSiteLink( Item $item, $siteId, $pageName, $badgeIds, &$summary ) {
 		$status = Status::newGood();
 		$site = $this->siteStore->getSite( $siteId );
 
@@ -452,9 +449,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$summary = new Summary( 'wbsetsitelink' );
 
+		// when $pageName is an empty string, we want to remove the site link
 		if ( $pageName === '' ) {
-			$pageName = null;
-
 			if ( !$item->hasLinkToSite( $siteId ) ) {
 				$status->fatal( 'wikibase-setsitelink-remove-failed' );
 				return $status;
@@ -468,7 +464,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			}
 		}
 
-		$badges = $this->parseBadges( $badges, $status );
+		$badges = $this->parseBadges( $badgeIds, $status );
 
 		if ( !$status->isGood() ) {
 			return $status;
