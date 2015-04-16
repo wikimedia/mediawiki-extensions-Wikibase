@@ -14,6 +14,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DedupeBag;
+use Wikibase\HashDedupeBag;
+use Wikibase\NullDedupeBag;
 use Wikimedia\Purtle\RdfWriter;
 use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\RdfVocabulary;
@@ -56,22 +59,22 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return ComplexValueRdfBuilder
 	 */
-	private function newBuilder( array &$mentioned = array(), array $valuesSeen = array() ) {
+	private function newBuilder( array &$mentioned = array(), DedupeBag $bag = null ) {
 		$entityMentioned = function( EntityId $id ) use ( &$mentioned ) {
 			$key = $id->getSerialization();
 			$mentioned[$key] = $id;
 		};
 
+		if ( !$bag ) {
+			$bag = new NullDedupeBag();
+		}
+
 		$vocabulary = $this->getTestData()->getVocabulary();
 		$valueWriter = $this->getTestData()->getNTriplesWriter();
 
-		$valueSeenCallback = function( $hash ) use ( $valuesSeen ) {
-			return in_array( $hash, $valuesSeen );
-		};
-
 		$builder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $this->getTestData()->getMockRepository() );
 		$builder->setEntityMentionCallback( $entityMentioned );
-		$builder->setValueSeenCallback( $valueSeenCallback );
+		$builder->setDedupeBag( $bag );
 
 		// HACK: glue on the value writer as a public field, so we can evaluate it later.
 		$builder->test_value_writer = $valueWriter;
@@ -338,7 +341,10 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
 		$mentioned = array();
-		$seen = array( $value->getHash() );
+
+		$seen = new HashDedupeBag();
+		$seen->alreadySeen( $value->getHash(), 'V' );
+
 		$builder = $this->newBuilder( $mentioned, $seen );
 		$builder->addSnakValue( $writer, $propertyId, $value, RdfVocabulary::NS_DIRECT_CLAIM );
 
