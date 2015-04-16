@@ -5,7 +5,6 @@ namespace Wikibase\View;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Template\TemplateFactory;
 
 /**

@@ -18,7 +18,7 @@ if ( !defined( 'WB_REPO_EXAMPLE_ENTRY' ) ) {
 
 call_user_func( function() {
 	global $wgContentHandlerUseDB, $wgExtraNamespaces, $wgWBRepoSettings;
-	global $wgDBname, $wgNamespacesToBeSearchedDefault, $wgGroupPermissions;
+	global $wgDBname, $wgNamespacesToBeSearchedDefault;
 
 	$wgContentHandlerUseDB = true;
 

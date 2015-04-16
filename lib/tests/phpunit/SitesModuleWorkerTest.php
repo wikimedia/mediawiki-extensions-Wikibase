@@ -96,6 +96,8 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetModifiedHash( $workerLists ) {
 		$results = array();
+
+		/** @var SitesModuleWorker[] $workers */
 		foreach ( $workerLists as $name => $workers ) {
 			foreach ( $workers as $worker ) {
 				$value = $worker->getModifiedHash();

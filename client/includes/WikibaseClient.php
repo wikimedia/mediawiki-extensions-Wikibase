@@ -778,7 +778,7 @@ final class WikibaseClient {
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
 	 *
-	 * @return ContentLanguages
+	 * @return WikibaseContentLanguages
 	 */
 	public function getTermsLanguages() {
 		return new WikibaseContentLanguages();
@@ -793,4 +793,5 @@ final class WikibaseClient {
 			$this->getEntityIdParser()
 		);
 	}
+
 }

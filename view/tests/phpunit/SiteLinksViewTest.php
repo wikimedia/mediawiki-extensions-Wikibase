@@ -136,6 +136,7 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 			array(),
 		);
 
+		/** @var Item $item */
 		$item = $item->copy();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'test' );
 

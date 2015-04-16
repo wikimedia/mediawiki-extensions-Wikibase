@@ -82,7 +82,8 @@ final class TestChanges {
 		return $factory;
 	}
 
-	protected static function getInstances() {
+	private static function getInstances() {
+		/** @var EntityChange[] $changes */
 		static $changes = array();
 
 		$changeFactory = self::getEntityChangeFactory();
@@ -206,7 +207,6 @@ final class TestChanges {
 
 			$rev = 1000;
 
-			/* @var EntityChange $change */
 			foreach ( $changes as $key => $change ) {
 				$change->setComment( "$key:1|" );
 
@@ -278,7 +278,7 @@ final class TestChanges {
 		return $changes;
 	}
 
-	protected static function applyDefaults( Change $change, array $defaults ) {
+	private static function applyDefaults( EntityChange $change, array $defaults ) {
 		foreach ( $defaults as $name => $value ) {
 			if ( !$change->hasField( $name ) ) {
 				$change->setField( $name, $value );
