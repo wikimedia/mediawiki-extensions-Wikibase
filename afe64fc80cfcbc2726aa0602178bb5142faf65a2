@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_b07feaa5",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-16T14:20:21Z",
+      "side": 1,
+      "message": "This doesn\u0027t answer the question why *this* class does have a getRegex method that\u0027s *exclusively* used in an *other* class.\n\nThis doesn\u0027t answer the question why the two classes do not use the same regex.",
+      "parentUuid": "6e7c4fa4_303c3a2d",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0d7fae12",
         "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
         "patchSetId": 1
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_70515239",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-16T14:20:21Z",
+      "side": 1,
+      "message": "Something in the line of \"must contain at least 1 digit\" would be nice.",
+      "parentUuid": "6e7c4fa4_501696ad",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0dc56e41",
         "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
         "patchSetId": 1
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "Oh, good point, I\u0027ll add that.",
       "parentUuid": "6e7c4fa4_0dc56e41",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_10481e8b",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-16T14:20:21Z",
+      "side": 1,
+      "message": "Again, why not reuse the regex???",
+      "parentUuid": "6e7c4fa4_3013daba",
       "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
