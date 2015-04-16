@@ -3,6 +3,8 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\HashDedupeBag;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\Rdf\RdfBuilder;
@@ -40,10 +42,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @return RdfBuilder
 	 */
-	private function newRdfBuilder( $produce, \BagOStuff $dedup = null ) {
+	private function newRdfBuilder( $produce, DedupeBag $dedup = null ) {
 		if( !$dedup ) {
-			$dedup = new \HashBagOStuff();
+			$dedup = new HashDedupeBag();
 		}
+
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(
 			$this->getTestData()->getSiteList(),
@@ -53,6 +56,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$emitter,
 			$dedup
 		);
+
 		$builder->startDocument();
 		return $builder;
 	}
@@ -165,7 +169,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testDeduplication() {
-		$bag = new \HashBagOStuff();
+		$bag = new HashDedupeBag();
+
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
 		$builder->addEntity( $this->getEntityData( 'Q7' ) );
 		$data1 = $this->getDataFromBuilder( $builder );

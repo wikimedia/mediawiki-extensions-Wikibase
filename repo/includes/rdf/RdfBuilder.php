@@ -2,7 +2,6 @@
 
 namespace Wikibase\Rdf;
 
-use BagOStuff;
 use SiteList;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
@@ -48,8 +47,7 @@ class RdfBuilder {
 	private $writer;
 
 	/**
-	 * Hash to store seen references/values for deduplication
-	 * @var BagOStuff
+	 * @var DedupeBag
 	 */
 	private $dedupBag;
 
@@ -77,7 +75,7 @@ class RdfBuilder {
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param integer $flavor
 	 * @param RdfWriter $writer
-	 * @param BagOStuff|null $dedupBag Container used for deduplication of refs/values
+	 * @param DedupeBag $dedupBag
 	 */
 	public function __construct(
 		SiteList $sites,
@@ -85,7 +83,7 @@ class RdfBuilder {
 		PropertyDataTypeLookup $propertyLookup,
 		$flavor,
 		RdfWriter $writer,
-		BagOStuff $dedupBag = null
+			DedupeBag $dedupBag
 	) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;
@@ -136,16 +134,11 @@ class RdfBuilder {
 		$simpleValueBuilder = $this->newSimpleValueRdfBuilder( $vocabulary, $propertyLookup );
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
-			$self = $this; // PHP 5.3 compat
-			$valueSeen = function( $hash ) use ( $self ) {
-				return $self->alreadySeen( $hash, 'V' );
-			};
-
 			// NOTE: us sub-writers for nested structures
 			$valueWriter = $writer->sub();
 
 			$statementValueBuilder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $propertyLookup );
-			$statementValueBuilder->setValueSeenCallback( $valueSeen );
+			$statementValueBuilder->setDedupeBag( $this->dedupBag );
 
 			if ( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
 				$statementValueBuilder->setEntityMentionCallback( array( $this, 'entityMentioned' ) );
@@ -183,13 +176,8 @@ class RdfBuilder {
 	public function newFullStatementRdfBuilder( RdfVocabulary $vocabulary, PropertyDataTypeLookup $propertyLookup, RdfWriter $writer ) {
 		$statementValueBuilder = $this->newSnakValueBuilder( $vocabulary, $propertyLookup, $writer );
 
-		$self = $this; // PHP 5.3 compat
-		$referenceSeen = function ( $hash ) use ( $self ) {
-			return $self->alreadySeen( $hash, 'R' );
-		};
-
 		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $statementValueBuilder );
-		$statementBuilder->setReferenceSeenCallback( $referenceSeen );
+		$statementBuilder->setDedupeBag( $this->dedupBag );
 
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_PROPERTIES ) ) {
 			$statementBuilder->setPropertyMentionCallback( array( $this, 'entityMentioned' ) );
@@ -275,28 +263,6 @@ class RdfBuilder {
 	private function entityResolved( EntityId $entityId ) {
 		$prefixedId = $entityId->getSerialization();
 		$this->entitiesResolved[$prefixedId] = true;
-	}
-
-	/**
-	 * Did we already see this value? If yes, we may need to skip it
-	 *
-	 * @todo Make callback private once we drop PHP 5.3 compat.
-	 *
-	 * @param string $hash hash value to check
-	 * @param string $namespace
-	 *
-	 * @return bool
-	 */
-	public function alreadySeen( $hash, $namespace ) {
-		if ( !$this->dedupBag ) {
-			return false;
-		}
-		$key = $namespace . substr($hash, 0, 5);
-		if ( $this->dedupBag->get( $key ) !== $hash ) {
-			$this->dedupBag->set( $key, $hash );
-			return false;
-		}
-		return true;
 	}
 
 	/**
