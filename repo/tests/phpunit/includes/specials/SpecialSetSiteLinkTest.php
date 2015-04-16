@@ -162,7 +162,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	public function testExecuteOneValuePreset() {
 		$matchers = self::$matchers;
 		// Execute with one subpage value
-		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'en' );
+		// Note: use language fallback en-gb => en
+		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'en-gb' );
 
 		$matchers['id']['attributes']['value'] = self::$itemId;
 
@@ -174,7 +175,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	public function testExecuteTwoValuesPreset() {
 		$matchers = self::$matchers;
 		// Execute with two subpage values
-		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'en' );
+		// Note: use language fallback en-gb => en
+		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'en-gb' );
 
 		$matchers['id'] = array(
 			'tag' => 'input',
