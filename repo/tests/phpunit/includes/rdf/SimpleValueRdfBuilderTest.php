@@ -56,15 +56,18 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @return SimpleValueRdfBuilder
 	 */
 	private function newBuilder( array &$mentioned = array() ) {
-		$entityMentioned = function( EntityId $id ) use ( &$mentioned ) {
+		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
+		$mentionTracker->expects( $this->any() )
+			->method( 'entityReferenceMentioned' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
 			$key = $id->getSerialization();
 			$mentioned[$key] = $id;
-		};
+		} ) );
 
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		$builder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
-		$builder->setEntityMentionCallback( $entityMentioned );
+		$builder->setEntityMentionListener( $mentionTracker );
 
 		return $builder;
 	}
