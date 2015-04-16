@@ -6,13 +6,14 @@ use Html;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Status;
-use UserInputException;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -68,6 +69,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $siteLinkTargetProvider;
 
 	/**
+	 * @var TermLookup
+	 */
+	private $termLookup;
+
+	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	private $fallbackChainFactory;
+
+	/**
 	 * @since 0.4
 	 */
 	public function __construct() {
@@ -84,6 +95,9 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->siteStore,
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
+
+		$this->fallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+		$this->termLookup = $wikibaseRepo->getTermLookup();
 	}
 
 	/**
@@ -293,12 +307,23 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private function getHtmlForBadges() {
 		$options = '';
 
+		$fallbackChain = $this->fallbackChainFactory->newFromLanguage(
+			$this->getLanguage(),
+			LanguageFallbackChainFactory::FALLBACK_SELF
+				| LanguageFallbackChainFactory::FALLBACK_VARIANTS
+				| LanguageFallbackChainFactory::FALLBACK_OTHERS
+		);
+
+		$labelLookup = new LanguageFallbackLabelDescriptionLookup( $this->termLookup, $fallbackChain );
+
 		foreach ( $this->badgeItems as $badgeId => $value ) {
 			$name = 'badge-' . $badgeId;
-			$title = $this->getTitleForBadge( new ItemId( $badgeId ) );
 
-			if ( $title === null ) {
-				continue;
+			try {
+				$term = $labelLookup->getLabel( new ItemId( $badgeId ) );
+				$label = $term->getText();
+			} catch ( OutOfBoundsException $ex ) {
+				$label = $badgeId;
 			}
 
 			$options .= Html::rawElement(
@@ -318,37 +343,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 					array(
 						'for' => $name
 					),
-					$title
+					$label
 				)
 			);
 		}
 
 		return $options;
-	}
-
-	/**
-	 * Returns the title for the given badge id.
-	 * @todo use TermLookup when we have one
-	 *
-	 * @param EntityId $badgeId
-	 * @return string|null
-	 */
-	private function getTitleForBadge( EntityId $badgeId ) {
-		try {
-			$entity = $this->loadEntity( $badgeId )->getEntity();
-			$languageCode = $this->getLanguage()->getCode();
-
-			$labels = $entity->getFingerprint()->getLabels();
-			if ( $labels->hasTermForLanguage( $languageCode ) ) {
-				return $labels->getByLanguage( $languageCode )->getText();
-			} else {
-				return $badgeId->getSerialization();
-			}
-		} catch ( UserInputException $ex ) {
-			// log a warning because this indicates a wrong configuration
-			wfLogWarning( 'Error fetching title for badge: ' . $ex->getMessage() );
-			return null;
-		}
 	}
 
 	/**
