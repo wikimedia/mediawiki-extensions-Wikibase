@@ -3,10 +3,8 @@
 namespace Wikibase\Lib\Test;
 
 use PHPUnit_Framework_TestCase;
-use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EscapingEntityIdFormatter;
-use Wikibase\Lib\PlainEntityIdFormatter;
 
 /**
  * @covers Wikibase\Lib\EscapingValueFormatter

@@ -6,7 +6,6 @@ use ApiTestCase;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use ValueFormatters\TimeFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SnakFormatter;

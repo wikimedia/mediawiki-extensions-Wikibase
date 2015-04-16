@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Hooks;
 
 use BaseTemplate;
-use Html;
 
 /**
  * @since 0.5
