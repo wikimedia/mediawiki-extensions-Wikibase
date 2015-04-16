@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b004ca1b",
+        "filename": "lib/tests/phpunit/parsers/MediaWikiNumberUnlocalizerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-16T14:42:11Z",
+      "side": 1,
+      "message": "Add sth like 123+456 to catch missing e/E",
+      "revId": "f8987d2128b62c0e58feda73a1c2431a9e660e88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
