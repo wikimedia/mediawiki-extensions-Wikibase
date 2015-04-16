@@ -95,6 +95,7 @@ class PropertyDiffer implements EntityDifferStrategy {
 	public function getConstructionDiff( EntityDocument $entity ) {
 		$this->assertIsProperty( $entity );
 
+		/** @var Property $entity */
 		$diffOps = $this->diffPropertyArrays( array(), $this->toDiffArray( $entity ) );
 		$diffOps['claim'] = $this->statementListDiffer->getDiff( new StatementList(), $entity->getStatements() );
 
@@ -110,6 +111,7 @@ class PropertyDiffer implements EntityDifferStrategy {
 	public function getDestructionDiff( EntityDocument $entity ) {
 		$this->assertIsProperty( $entity );
 
+		/** @var Property $entity */
 		$diffOps = $this->diffPropertyArrays( $this->toDiffArray( $entity ), array() );
 		$diffOps['claim'] = $this->statementListDiffer->getDiff( $entity->getStatements(), new StatementList() );
 
