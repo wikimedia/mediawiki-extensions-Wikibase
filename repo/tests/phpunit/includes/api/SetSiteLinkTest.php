@@ -347,7 +347,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		list( $result, ) = $this->doApiRequestWithToken( $params );
 
-		$warning = $result['warnings']['wbsetsitelink']['*'];
+		$warning = $result['warnings']['wbsetsitelink']['warnings'];
 		$this->assertRegExp( "/Unrecognized value for parameter 'badges'/", $warning );
 	}
 
