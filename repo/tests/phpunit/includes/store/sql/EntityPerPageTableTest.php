@@ -189,4 +189,59 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->assertEquals( $targetId, $targetIdFromEpp );
 	}
 
+	/**
+	 * @dataProvider getItemsWithoutSitelinksProvider
+	 *
+	 * @param Item[] $items
+	 * @param string|null $siteId
+	 * @param Item[] $expected
+	 */
+	public function testGetItemsWithoutSitelinks( array $items, $siteId, array $expected ) {
+		$epp = $this->newEntityPerPageTable( $items );
+		$withoutSitelinks = $epp->getItemsWithoutSitelinks( $siteId );
+
+		$expectedIds = array();
+		foreach ( $expected as $item ) {
+			$expectedIds[] = $item->getId();
+		}
+
+		$this->assertEquals( $expectedIds, $withoutSitelinks );
+	}
+
+	public function getItemsWithoutSitelinksProvider() {
+		$items = array();
+
+		$foo = new Item();
+		$foo->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo_en' );
+		$items[] = $foo;
+
+		$bar = new Item();
+		$bar->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Bar_en' );
+		$bar->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar_de' );
+		$items[] = $bar;
+
+		$baz = new Item();
+		$baz->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Baz_en' );
+		$baz->getSiteLinkList()->addNewSiteLink( 'frwiki', 'Baz_fr' );
+		$baz->getSiteLinkList()->addNewSiteLink( 'eswiki', 'Baz_es' );
+		$baz->getSiteLinkList()->addNewSiteLink( 'itwiki', 'Baz_it' );
+		$items[] = $baz;
+
+		$boo = new Item();
+		$boo->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Boo_en' );
+		$boo->getSiteLinkList()->addNewSiteLink( 'frwiki', 'Boo_fr' );
+		$boo->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'Boo_nl' );
+		$items[] = $boo;
+
+		$empty = new Item();
+		$items[] = $empty;
+
+		return array(
+			'no sitelinks' => array( $items, null, array( $empty ) ),
+			'no enwiki links' => array( $items, 'enwiki', array( $empty ) ),
+			'no dewiki links' => array( $items, 'dewiki', array( $baz, $boo, $foo, $empty ) ),
+			'no nnwiki links' => array( $items, 'nnwiki', array( $baz, $boo, $bar, $foo, $empty ) )
+		);
+	}
+
 }
