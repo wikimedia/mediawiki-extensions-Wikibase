@@ -9,6 +9,7 @@ use MWException;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\HashDedupeBag;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -154,7 +155,7 @@ class RdfDumpGenerator extends DumpGenerator {
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 				RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
 				RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES,
-				new HashBagOStuff()
+				new HashDedupeBag()
 		);
 		return new RdfDumpGenerator( $output, $entityRevisionLookup, $entitySerializer, $entityPrefetcher );
 	}
