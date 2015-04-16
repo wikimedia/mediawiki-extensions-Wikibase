@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Validators\SnakValidator;
@@ -58,15 +59,15 @@ class ClaimChangeOpFactory {
 	}
 
 	/**
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 * @param int|null $index
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newAddClaimOp( Claim $claim, $index = null ) {
+	public function newAddClaimOp( Statement $statement, $index = null ) {
 		return new ChangeOpClaim(
-			$claim,
+			$statement,
 			$this->guidGenerator,
 			$this->guidValidator,
 			$this->guidParser,
