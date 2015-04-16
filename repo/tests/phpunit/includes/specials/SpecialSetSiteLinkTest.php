@@ -115,7 +115,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$badge = new Item();
-		$badge->setLabel( 'en', 'Good article' );
+		$badge->setLabel( 'de', 'Guter Artikel' );
 		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$item = new Item();
@@ -145,14 +145,14 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			'attributes' => array(
 				'for' => $name
 			),
-			'content' => 'Good article'
+			'content' => 'Guter Artikel'
 		);
 	}
 
 	public function testExecuteEmptyForm() {
 		$matchers = self::$matchers;
 		// Execute with no subpage value
-		list( $output, ) = $this->executeSpecialPage( '', null, 'en' );
+		list( $output, ) = $this->executeSpecialPage( '', null, 'de' );
 
 		foreach( $matchers as $key => $matcher ){
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
@@ -162,7 +162,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	public function testExecuteOneValuePreset() {
 		$matchers = self::$matchers;
 		// Execute with one subpage value
-		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'en' );
+		// Note: use language fallback de-ch => de
+		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'de-ch' );
 
 		$matchers['id']['attributes']['value'] = self::$itemId;
 
@@ -174,7 +175,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	public function testExecuteTwoValuesPreset() {
 		$matchers = self::$matchers;
 		// Execute with two subpage values
-		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'en' );
+		// Note: use language fallback de-ch => de
+		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'de-ch' );
 
 		$matchers['id'] = array(
 			'tag' => 'input',
@@ -209,6 +211,26 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		}
 	}
 
+	public function testExecuteTwoValuesPreset_no_label() {
+		$matchers = self::$matchers;
+		// Execute with two subpage values
+		// Note: language fallback will fail, no label for en
+		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'en' );
+
+		// already covered by testExecuteTwoValuesPreset()
+		unset( $matchers['id'] );
+		unset( $matchers['site'] );
+		unset( $matchers['remove'] );
+
+		$matchers['badgelabel']['content'] = self::$badgeId;
+		$matchers['value']['attributes']['value'] = 'Wikidata';
+		$matchers['badges']['children']['only']['attributes']['selected'] = '';
+
+		foreach( $matchers as $key => $matcher ) {
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
+		}
+	}
+
 	public function testExecuteRedirect() {
 		list( $output, ) = $this->executeSpecialPage( self::$redirectId  . '/dewiki', null, 'qqx' );
 
@@ -216,7 +238,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	public function testExecutePostPreserveSiteLinkWhenNothingEntered() {
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => '' ), true );
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
@@ -236,7 +257,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => 'Wikipedia' ), true );
 
-		list( $output, $response ) = $this->executeSpecialPage( '', $request );
+		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 
 		$this->assertContains( self::$itemId, $redirect, "Should redirect to item page" );
@@ -255,7 +276,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => '', 'remove' => true ), true );
 
-		list( $output, $response ) = $this->executeSpecialPage( '', $request );
+		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 
 		$this->assertContains( self::$itemId, $redirect, "Should redirect to item page" );
