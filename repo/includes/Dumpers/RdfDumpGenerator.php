@@ -41,11 +41,6 @@ class RdfDumpGenerator extends DumpGenerator {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var bool[] List of the prefixes we've seen in the dump.
-	 */
-	private $prefixes;
-
-	/**
 	 * @var int Fixed timestamp for tests.
 	 */
 	private $timestamp;

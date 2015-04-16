@@ -175,7 +175,6 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 	}
 
 	public function provideSerializeEntityRevision() {
-		$this->rdfTest = new RdfBuilderTest();
 		$entityRevs = $this->getTestEntityRevisions();
 		$patterns = $this->getTestDataPatterns();
 
