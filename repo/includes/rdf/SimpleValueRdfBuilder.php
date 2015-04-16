@@ -28,9 +28,9 @@ use Wikimedia\Purtle\RdfWriter;
 class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 
 	/**
-	 * @var callable
+	 * @var MentionedEntityTracker
 	 */
-	private $entityMentionCallback = null;
+	private $mentionedEntityTracker;
 
 	/**
 	 * @var RdfVocabulary
@@ -58,20 +58,21 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 		// TODO: if data is fixed to be always Gregorian, replace with
 		// DateTimeValueCleaner
 		$this->dateCleaner = new JulianDateTimeValueCleaner();
+		$this->mentionedEntityTracker = new NullMentionedEntityTracker();
 	}
 
 	/**
-	 * @return callable
+	 * @return MentionedEntityTracker
 	 */
-	public function getEntityMentionCallback() {
-		return $this->entityMentionCallback;
+	public function getMentionedEntityTracker() {
+		return $this->mentionedEntityTracker;
 	}
 
 	/**
-	 * @param callable $entityMentionCallback
+	 * @param MentionedEntityTracker $mentionedEntityTracker
 	 */
-	public function setEntityMentionCallback( $entityMentionCallback ) {
-		$this->entityMentionCallback = $entityMentionCallback;
+	public function setMentionedEntityTracker( $mentionedEntityTracker ) {
+		$this->mentionedEntityTracker = $mentionedEntityTracker;
 	}
 
 	/**
@@ -145,9 +146,7 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ENTITY, $entityLName );
 
-		if ( $this->entityMentionCallback ) {
-			call_user_func( $this->entityMentionCallback, $entityId );
-		}
+		$this->mentionedEntityTracker->entityReferenceMentioned( $entityId );
 	}
 
 	/**
