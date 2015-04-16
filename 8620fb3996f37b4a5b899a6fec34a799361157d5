@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e76d7c5_2716a25b",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-16T23:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_06ad71e7",
+      "revId": "8620fb3996f37b4a5b899a6fec34a799361157d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_c6c3f98b",
         "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2e76d7c5_8200c405",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-16T23:07:00Z",
+      "side": 1,
+      "message": "Well... our code should (and does right now) always explicitly set a display text for entity id links (as otherwise a namespace might be shown along if the entity isn\u0027t in NS0)",
+      "parentUuid": "6e7c4fa4_c6c3f98b",
+      "revId": "8620fb3996f37b4a5b899a6fec34a799361157d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_e6ccf5c2",
         "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2015-04-10T10:43:47Z",
       "side": 1,
       "message": "now we need label prefetching for history pages, see T95672",
+      "revId": "8620fb3996f37b4a5b899a6fec34a799361157d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_22053014",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-16T23:07:00Z",
+      "side": 1,
+      "message": "Yeah",
+      "parentUuid": "6e7c4fa4_e6ccf5c2",
       "revId": "8620fb3996f37b4a5b899a6fec34a799361157d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
