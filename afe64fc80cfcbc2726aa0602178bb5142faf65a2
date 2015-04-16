@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_303c3a2d",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-16T13:48:27Z",
+      "side": 1,
+      "message": "QuantityParser (and all the DataValue components) should have no dependency on MediaWiki, that\u0027s why this is here. The connection between the \nmethods here is that they are based on the same values/mechanisms in the Language object.\n\nWe have discussed this at length when this class was introduced.",
+      "parentUuid": "6e7c4fa4_8db17ee1",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0d7fae12",
         "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-15T14:01:44Z",
       "side": 1,
       "message": "This also allows whacky stuff like \",...,\", but this is not a new issue.",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_501696ad",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-16T13:48:27Z",
+      "side": 1,
+      "message": "Indeed. And we don\u0027t have enough knowledge here to decide which combinations of separators would be legal (e.g. .03 is legal in English, but not German)",
+      "parentUuid": "6e7c4fa4_0d7fae12",
       "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3013daba",
+        "filename": "lib/includes/parsers/MediaWikiNumberUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-16T13:48:27Z",
+      "side": 1,
+      "message": "Oh, good point, I\u0027ll add that.",
+      "parentUuid": "6e7c4fa4_0dc56e41",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_cdec56bb",
         "filename": "lib/tests/phpunit/parsers/MediaWikiNumberUnlocalizerTest.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-15T14:01:44Z",
       "side": 1,
       "message": "Please add:\n12e-\n12e,\n2E+-2",
+      "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_708072c4",
+        "filename": "lib/tests/phpunit/parsers/MediaWikiNumberUnlocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-16T13:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_cdec56bb",
       "revId": "afe64fc80cfcbc2726aa0602178bb5142faf65a2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
