@@ -514,6 +514,8 @@ class RdfBuilder {
 			$statementList = $entity->getStatements();
 			$bestList = array();
 			$produceTruthy = $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ;
+
+			/** @var Statement $statement */
 			foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
 				$bestList[$statement->getGuid()] = true;
 				if ( $produceTruthy ) {

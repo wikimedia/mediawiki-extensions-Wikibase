@@ -7,6 +7,7 @@ use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -123,4 +124,5 @@ interface ClientStore {
 	 * @return EntityPrefetcher
 	 */
 	public function getEntityPrefetcher();
+
 }
