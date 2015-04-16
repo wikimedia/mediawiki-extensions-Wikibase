@@ -4,35 +4,35 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Summary;
 
 /**
- * Class for claim remove operation
+ * Class for statement remove operation.
  *
  * @since 0.5
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Thiemo Mättig
  */
 class ChangeOpClaimRemove extends ChangeOpBase {
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string
 	 */
-	protected $claimGuid;
+	private $guid;
 
 	/**
 	 * @return string
 	 */
 	public function getClaimGuid() {
-		return $this->claimGuid;
+		return $this->guid;
 	}
 
 	/**
@@ -40,62 +40,91 @@ class ChangeOpClaimRemove extends ChangeOpBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $claimGuid
+	 * @param string $guid
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claimGuid ) {
-		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
-			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
+	public function __construct( $guid ) {
+		if ( !is_string( $guid ) || $guid === '' ) {
+			throw new InvalidArgumentException( '$guid must be a non-empty string' );
 		}
 
-		$this->claimGuid = $claimGuid;
+		$this->guid = $guid;
 	}
 
 	/**
-	 * @see ChangeOp::apply()
+	 * @see ChangeOp::apply
+	 *
+	 * @param Entity $entity
+	 * @param Summary|null $summary
+	 *
+	 * @throws InvalidArgumentException
+	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		if ( $entity instanceof Item || $entity instanceof Property ) {
-			$claims = new Claims( $entity->getStatements() );
-			$this->removeClaim( $claims, $summary );
-			$entity->setStatements( new StatementList( $claims ) );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
-		else {
-			throw new InvalidArgumentException( 'This code only works with items and properties' );
-		}
+
+		$statements = $this->removeStatement( $entity->getStatements()->toArray(), $summary );
+		$this->setStatements( $entity, $statements );
 
 		return true;
 	}
 
 	/**
-	 * @since 0.4
-	 *
-	 * @param Claims $claims
-	 * @param Summary $summary
+	 * @param Statement[] $statements
+	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
+	 * @return Statement[]
 	 */
-	protected function removeClaim( Claims $claims, Summary $summary = null ) {
-		$claim = $claims->getClaimWithGuid( $this->claimGuid );
+	private function removeStatement( array $statements, Summary $summary = null ) {
+		$newStatements = array();
+		$removedStatement = null;
 
-		if ( $claim === null ) {
-			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
+		foreach ( $statements as $statement ) {
+			if ( $statement->getGuid() === $this->guid && $removedStatement === null ) {
+				$removedStatement = $statement;
+			} else {
+				$newStatements[] = $statement;
+			}
 		}
 
-		$removedSnak = $claim->getMainSnak();
-		$claims->removeClaimWithGuid( $this->claimGuid );
-		$this->updateSummary( $summary, 'remove', '', $this->getClaimSummaryArgs( $removedSnak ) );
+		if ( $removedStatement === null ) {
+			throw new ChangeOpException( "Entity does not have statement with GUID $this->guid" );
+		}
+
+		$removedSnak = $removedStatement->getMainSnak();
+		$this->updateSummary( $summary, 'remove', '', $this->getSummaryArgs( $removedSnak ) );
+
+		return $newStatements;
 	}
 
 	/**
-	 * @since 0.4
+	 * @param Entity $entity
+	 * @param Statement[] $statements
 	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function setStatements( Entity $entity, array $statements ) {
+		$statementList = new StatementList( $statements );
+
+		if ( $entity instanceof Item ) {
+			$entity->setStatements( $statementList );
+		} elseif ( $entity instanceof Property ) {
+			$entity->setStatements( $statementList );
+		} else {
+			throw new InvalidArgumentException( '$entity must be an Item or Property' );
+		}
+	}
+
+	/**
 	 * @param Snak $mainSnak
 	 *
 	 * @return array
 	 */
-	protected function getClaimSummaryArgs( Snak $mainSnak ) {
+	private function getSummaryArgs( Snak $mainSnak ) {
 		$propertyId = $mainSnak->getPropertyId();
 		return array( array( $propertyId->getSerialization() => $mainSnak ) );
 	}
