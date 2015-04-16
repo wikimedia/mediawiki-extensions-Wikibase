@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8a515b67",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-16T08:42:04Z",
+      "side": 1,
+      "message": "this doesn\u0027t decode an array... how about decodeResult or so (and rename decodeInfo -\u003e decodeRow maybe)",
+      "revId": "f1ef3722ef0debe9abc46d6b54a8e0123b5b94f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
