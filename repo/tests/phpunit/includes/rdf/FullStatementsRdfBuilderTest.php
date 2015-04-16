@@ -4,6 +4,9 @@ namespace Wikibase\Test\Rdf;
 
 use Wikibase\Rdf\ComplexValueRdfBuilder;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\HashDedupeBag;
+use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\RdfProducer;
 use Wikibase\Rdf\SimpleValueRdfBuilder;
@@ -43,11 +46,11 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param int $flavor Bitmap for the output flavor, use RdfProducer::PRODUCE_XXX constants.
 	 * @param EntityId[] &$mentioned Receives any entity IDs being mentioned.
-	 * @param string[] $referencesSeen A list of reference hashes that should be considered "already seen".
+	 * @param DedupeBag $dedupe A bag of reference hashes that should be considered "already seen".
 	 *
 	 * @return FullStatementRdfBuilder
 	 */
-	private function newBuilder( $flavor, array &$mentioned = array(), array $referencesSeen = array() ) {
+	private function newBuilder( $flavor, array &$mentioned = array(), DedupeBag $dedupe = null ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		$writer = $this->getTestData()->getNTriplesWriter();
@@ -65,12 +68,8 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$statementValueBuilder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
 		}
 
-		$referenceSeenCallback = function( $hash ) use ( $referencesSeen ) {
-			return in_array( $hash, $referencesSeen );
-		};
-
 		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $statementValueBuilder );
-		$statementBuilder->setReferenceSeenCallback( $referenceSeenCallback );
+		$statementBuilder->setDedupeBag( $dedupe ?: new NullDedupeBag() );
 
 		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES  ) {
 			$statementBuilder->setPropertyMentionCallback( $entityMentioned );
@@ -153,8 +152,14 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntity_seen( $entityName, $dataSetName, array $referencesSeen ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
+		$dedupe = new HashDedupeBag();
+
+		foreach ( $referencesSeen as $hash ) {
+			$dedupe->alreadySeen( $hash, 'R' );
+		}
+
 		$mentioned = array();
-		$builder = $this->newBuilder( RdfProducer::PRODUCE_ALL, $mentioned, $referencesSeen );
+		$builder = $this->newBuilder( RdfProducer::PRODUCE_ALL, $mentioned, $dedupe );
 		$builder->addEntity( $entity );
 
 		$this->assertOrCreateNTriples( $dataSetName, $builder );

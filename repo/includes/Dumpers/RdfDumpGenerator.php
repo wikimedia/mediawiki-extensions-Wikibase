@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\RdfProducer;
@@ -176,7 +177,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			$propertyLookup,
 			$flavor,
 			$rdfWriter,
-			new HashBagOStuff()
+			new HashDedupeBag()
 		);
 
 		return new RdfDumpGenerator( $output, $entityRevisionLookup, $rdfBuilder, $entityPrefetcher );
