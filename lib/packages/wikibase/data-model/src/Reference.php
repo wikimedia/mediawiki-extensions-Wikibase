@@ -70,6 +70,7 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	 * @return bool
 	 */
 	public function isEmpty() {
+		// FIXME: Not all implementations of Snaks are guaranteed to have an isEmpty method.
 		return $this->snaks->isEmpty();
 	}
 
