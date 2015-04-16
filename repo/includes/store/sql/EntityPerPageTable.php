@@ -299,29 +299,35 @@ class EntityPerPageTable implements EntityPerPage {
 		);
 		$conditions['epp_entity_type'] = Item::ENTITY_TYPE;
 
-		$joinConditions = 'ips_item_id = epp_entity_id';
+		$leftJoinConditions = 'ips_item_id = epp_entity_id';
 
 		if ( $this->useRedirectTargetColumn ) {
-			$joinConditions .= ' AND epp_redirect_target IS NULL';
+			$leftJoinConditions .= ' AND epp_redirect_target IS NULL';
 		}
 
 		if ( $siteId !== null ) {
-			$joinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
+			$leftJoinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
 		}
 
+		$innerJoinConditions = 'pp_page = epp_page_id AND pp_propname = \'wb-sitelinks\'';
+
 		$rows = $dbr->select(
-			array( 'wb_entity_per_page', 'wb_items_per_site' ),
+			array( 'wb_entity_per_page', 'wb_items_per_site', 'page_props' ),
 			array(
-				'entity_id' => 'epp_entity_id'
+				'entity_id' => 'epp_entity_id',
+				'sitelinks' => 'pp_value'
 			),
 			$conditions,
 			__METHOD__,
 			array(
 				'OFFSET' => $offset,
 				'LIMIT' => $limit,
-				'ORDER BY' => 'epp_page_id DESC'
+				'ORDER BY' => 'sitelinks DESC'
 			),
-			array( 'wb_items_per_site' => array( 'LEFT JOIN', $joinConditions ) )
+			array(
+				'wb_items_per_site' => array( 'LEFT JOIN', $leftJoinConditions ),
+				'page_props' => array( 'INNER JOIN', $innerJoinConditions )
+			)
 		);
 
 		return $this->getItemIdsFromRows( $rows );
