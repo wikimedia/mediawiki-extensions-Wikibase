@@ -15,6 +15,7 @@ use UsageException;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimGuidParsingException;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -64,7 +65,11 @@ class SetClaim extends ModifyClaim {
 			$this->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
 		}
 
-		$claimGuid = $this->claimGuidParser->parse( $guid );
+		try {
+			$claimGuid = $this->claimGuidParser->parse( $guid );
+		} catch ( ClaimGuidParsingException $ex ) {
+			$this->dieException( $ex, 'invalid-claim' );
+		}
 
 		$entityId = $claimGuid->getEntityId();
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
