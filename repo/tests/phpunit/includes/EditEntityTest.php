@@ -313,35 +313,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function testEditFilterMergedContentHook_withNewEntity() {
-		$hooks = array_merge(
-			$GLOBALS['wgHooks'],
-			array( 'EditFilterMergedContent' => array() )
-		);
-
-		$testCase = $this;
-
-		$hooks['EditFilterMergedContent'][] = function( IContextSource $context ) use( $testCase ) {
-			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-			$page = $context->getWikiPage();
-			$title = $page->getTitle();
-			$contentModel = $title->getContentModel();
-			$testCase->assertTrue( $entityContentFactory->isEntityContentModel( $contentModel ) );
-		};
-
-		$this->setMwGlobals( array(
-			'wgHooks' => $hooks
-		) );
-
-		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-
-		$item = new Item();
-		$item->setLabel( 'en', 'omg' );
-		$editEntity = $this->makeEditEntity( $this->getMockRepository(), $item, $titleLookup );
-		$editEntity->attemptSave( "Testing", EDIT_NEW, false );
-	}
-
 	private function fingerprintToPartialArray( Fingerprint $fingerprint ) {
 		return array(
 			'label' => $fingerprint->getLabels()->toTextArray(),
