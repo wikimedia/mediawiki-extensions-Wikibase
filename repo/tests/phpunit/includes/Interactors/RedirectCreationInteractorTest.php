@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test\Interactors;
 
+use FauxRequest;
+use PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount;
+use RequestContext;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
@@ -84,23 +87,51 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount $calls
+	 * @param Status|null $hookReturn
+	 *
+	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 */
+	public function getMockEditFilterHookRunner( $invokeCount = null, $hookReturn = null ) {
+		if( $invokeCount === null ) {
+			$invokeCount = $this->any();
+		}
+		if( $hookReturn === null ){
+			$hookReturn = Status::newGood();
+		}
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $invokeCount )
+			->method( 'run' )
+			->will( $this->returnValue( $hookReturn ) );
+		return $mock;
+	}
+
+	/**
+	 * @param PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount $efHookCalls
+	 * @param Status|null $efHookStatus return value of the efHook
 	 * @param User $user
 	 *
 	 * @return RedirectCreationInteractor
 	 */
-	private function newInteractor( User $user = null ) {
+	private function newInteractor( $efHookCalls = null, $efHookStatus = null, User $user = null ) {
 		if ( !$user ) {
 			$user = $GLOBALS['wgUser'];
 		}
 
 		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest() );
+
 		$interactor = new RedirectCreationInteractor(
 			$this->mockRepository,
 			$this->mockRepository,
 			$this->getPermissionCheckers(),
 			$summaryFormatter,
-			$user
+			$user,
+			$this->getMockEditFilterHookRunner( $efHookCalls, $efHookStatus )
 		);
 
 		return $interactor;
@@ -117,7 +148,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider createRedirectProvider_success
 	 */
 	public function testCreateRedirect_success( EntityId $fromId, EntityId $toId ) {
-		$interactor = $this->newInteractor();
+		$interactor = $this->newInteractor( $this->once() );
 
 		$interactor->createRedirect( $fromId, $toId, false );
 
@@ -138,14 +169,15 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 
 			'source not empty' => array( new ItemId( 'Q12' ), new ItemId( 'Q11' ), 'target-not-empty' ),
 			'can\'t redirect' => array( new PropertyId( 'P11' ), new PropertyId( 'P12' ), 'cant-redirect' ),
+			'can\'t redirect EditFilter' => array( new ItemId( 'Q11' ), new ItemId( 'Q12' ), 'cant-redirect', Status::newFatal( 'EF' ) ),
 		);
 	}
 
 	/**
 	 * @dataProvider createRedirectProvider_failure
 	 */
-	public function testCreateRedirect_failure( EntityId $fromId, EntityId $toId, $expectedCode ) {
-		$interactor = $this->newInteractor();
+	public function testCreateRedirect_failure( EntityId $fromId, EntityId $toId, $expectedCode, $efStatus = null ) {
+		$interactor = $this->newInteractor( null, $efStatus );
 
 		try {
 			$interactor->createRedirect( $fromId, $toId, false );
@@ -170,7 +202,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 
 		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
 
-		$interactor = $this->newInteractor( $user );
+		$interactor = $this->newInteractor( null, null, $user );
 		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ), false );
 	}
 

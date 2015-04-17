@@ -5,6 +5,7 @@ namespace Wikibase\Test\Api;
 use ApiMain;
 use FauxRequest;
 use Language;
+use RequestContext;
 use Status;
 use UsageException;
 use User;
@@ -84,6 +85,16 @@ class CreateRedirectModuleTest extends \MediaWikiTestCase {
 		return $permissionChecker;
 	}
 
+	public function getMockEditFilterHookRunner() {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+		return $mock;
+	}
+
 	/**
 	 * @param array $params
 	 * @param User $user
@@ -111,6 +122,9 @@ class CreateRedirectModuleTest extends \MediaWikiTestCase {
 
 		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest() );
+
 		$module->setServices(
 			$idParser,
 			$errorReporter,
@@ -119,7 +133,8 @@ class CreateRedirectModuleTest extends \MediaWikiTestCase {
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
-				$user
+				$user,
+				$this->getMockEditFilterHookRunner()
 			)
 		);
 
