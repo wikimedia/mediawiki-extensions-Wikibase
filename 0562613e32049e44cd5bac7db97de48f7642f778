@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_12872cde",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-17T20:27:43Z",
+      "side": 1,
+      "message": "+ needs comment.",
+      "parentUuid": "2e76d7c5_cb67b0b3",
+      "revId": "0562613e32049e44cd5bac7db97de48f7642f778",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e76d7c5_0bd2882c",
         "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-17T19:17:39Z",
       "side": 1,
       "message": "Give yourself some credit? (Well... or take the blame :P)",
+      "revId": "0562613e32049e44cd5bac7db97de48f7642f778",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f2f06890",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-17T20:27:43Z",
+      "side": 1,
+      "message": "Haha, will do ;-)",
+      "parentUuid": "2e76d7c5_0bd2882c",
       "revId": "0562613e32049e44cd5bac7db97de48f7642f778",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_d24204b2",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-17T20:27:43Z",
+      "side": 1,
+      "message": "A getFormatter method would be nice indeed.",
+      "parentUuid": "2e76d7c5_0bf5a8c7",
+      "revId": "0562613e32049e44cd5bac7db97de48f7642f778",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e76d7c5_4b0ba0d9",
         "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-17T19:17:39Z",
       "side": 1,
       "message": "We do this in several places... worth putting into WikibaseRepo?",
+      "revId": "0562613e32049e44cd5bac7db97de48f7642f778",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7205587c",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-17T20:27:43Z",
+      "side": 1,
+      "message": "I already discussed this with Daniel, will try to find a nice solution for this code duplication, but in another patch ;-)",
+      "parentUuid": "2e76d7c5_4b0ba0d9",
       "revId": "0562613e32049e44cd5bac7db97de48f7642f778",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
