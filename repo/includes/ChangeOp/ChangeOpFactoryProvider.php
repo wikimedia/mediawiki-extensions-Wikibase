@@ -2,6 +2,7 @@
 
 namespace Wikibase\ChangeOp;
 
+use SiteLookup;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -50,12 +51,18 @@ class ChangeOpFactoryProvider {
 	private $termValidatorFactory;
 
 	/**
+	 * @var SiteLookup
+	 */
+	private $siteLookup;
+
+	/**
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param ClaimGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
 	 * @param TermValidatorFactory $termValidatorFactory
+	 * @param SiteLookup $siteLookup
 	 */
 	public function __construct(
 		EntityConstraintProvider $constraintProvider,
@@ -63,7 +70,8 @@ class ChangeOpFactoryProvider {
 		ClaimGuidValidator $guidValidator,
 		ClaimGuidParser $guidParser,
 		SnakValidator $snakValidator,
-		TermValidatorFactory $termValidatorFactory
+		TermValidatorFactory $termValidatorFactory,
+		SiteLookup $siteLookup
 	) {
 		$this->constraintProvider = $constraintProvider;
 
@@ -73,6 +81,8 @@ class ChangeOpFactoryProvider {
 
 		$this->snakValidator = $snakValidator;
 		$this->termValidatorFactory = $termValidatorFactory;
+
+		$this->siteLookup = $siteLookup;
 	}
 
 	/**
@@ -117,7 +127,8 @@ class ChangeOpFactoryProvider {
 	public function getMergeChangeOpFactory() {
 		return new MergeChangeOpsFactory(
 			$this->constraintProvider,
-			$this
+			$this,
+			$this->siteLookup
 		);
 	}
 }
