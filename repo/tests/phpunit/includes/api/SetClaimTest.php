@@ -231,6 +231,10 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$claim->setReferences( new ReferenceList( array( $reference ) ) );
 		$cases['mismatching value in reference'] = array( $q17, $claim, 'modification-failed' );
 
+		$claim = new Statement( new Claim( $goodSnak ) );
+		$claim->setGuid( 'XXXX' );
+		$cases['invalid claim GUID'] = array( $qx, $claim, 'invalid-claim' );
+
 		return $cases;
 	}
 
