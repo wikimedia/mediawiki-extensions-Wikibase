@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e76d7c5_55633f3b",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-17T17:16:05Z",
+      "side": 1,
+      "message": "good catch!",
+      "parentUuid": "2e76d7c5_dc4d3c41",
+      "revId": "7dac790e7c063fba101a8eecd7dd132a545a5c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e76d7c5_3c5470c9",
         "filename": "repo/tests/phpunit/includes/specials/SpecialSetSiteLinkTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-17T11:23:51Z",
       "side": 1,
       "message": "Maybe also test with another language where no language is found for the LanguageFallbackChain or a badge without labels to test if the badge id is shown correctly in that case.",
+      "revId": "7dac790e7c063fba101a8eecd7dd132a545a5c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_f557eb5a",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSiteLinkTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-17T17:16:05Z",
+      "side": 1,
+      "message": "If you can explain to me how to do that... I find the test setup rather confusing.",
+      "parentUuid": "2e76d7c5_3c5470c9",
       "revId": "7dac790e7c063fba101a8eecd7dd132a545a5c44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
