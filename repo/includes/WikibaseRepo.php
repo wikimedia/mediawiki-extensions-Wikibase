@@ -414,7 +414,8 @@ class WikibaseRepo {
 			$this->getClaimGuidValidator(),
 			$this->getClaimGuidParser(),
 			$this->getSnakValidator(),
-			$this->getTermValidatorFactory()
+			$this->getTermValidatorFactory(),
+			$this->getSiteStore()
 		);
 	}
 

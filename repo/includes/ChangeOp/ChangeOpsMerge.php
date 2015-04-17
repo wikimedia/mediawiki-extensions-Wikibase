@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use SiteLookup;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claim;
@@ -59,6 +60,11 @@ class ChangeOpsMerge {
 	 */
 	private $changeOpFactoryProvider;
 
+	/**
+	 * @var SiteLookup
+	 */
+	private $siteLookup;
+
 	public static $conflictTypes = array( 'description', 'sitelink' );
 
 	/**
@@ -68,6 +74,7 @@ class ChangeOpsMerge {
 	 *        can only contain 'label' and or 'description' and or 'sitelink'
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ChangeOpFactoryProvider $changeOpFactoryProvider
+	 * @param SiteLookup $siteLookup
 	 *
 	 * @todo: Injecting ChangeOpFactoryProvider is an Abomination Unto Nuggan, we'll
 	 *        need a MergeChangeOpsSequenceBuilder or some such. This will allow us
@@ -78,7 +85,8 @@ class ChangeOpsMerge {
 		Item $toItem,
 		array $ignoreConflicts,
 		EntityConstraintProvider $constraintProvider,
-		ChangeOpFactoryProvider $changeOpFactoryProvider
+		ChangeOpFactoryProvider $changeOpFactoryProvider,
+		SiteLookup $siteLookup
 	) {
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 
@@ -88,6 +96,7 @@ class ChangeOpsMerge {
 		$this->toChangeOps = new ChangeOps();
 		$this->ignoreConflicts = $ignoreConflicts;
 		$this->constraintProvider = $constraintProvider;
+		$this->siteLookup = $siteLookup;
 
 		$this->changeOpFactoryProvider = $changeOpFactoryProvider;
 	}
@@ -197,19 +206,39 @@ class ChangeOpsMerge {
 	}
 
 	private function generateSitelinksChangeOps() {
-		foreach ( $this->fromItem->getSiteLinks() as $simpleSiteLink ) {
-			$siteId = $simpleSiteLink->getSiteId();
+		foreach ( $this->fromItem->getSiteLinks() as $fromSiteLink ) {
+			$siteId = $fromSiteLink->getSiteId();
 			if ( !$this->toItem->hasLinkToSite( $siteId ) ) {
 				$this->fromChangeOps->add( $this->getSiteLinkChangeOpFactory()->newRemoveSiteLinkOp( $siteId ) );
 				$this->toChangeOps->add(
 					$this->getSiteLinkChangeOpFactory()->newSetSiteLinkOp(
 						$siteId,
-						$simpleSiteLink->getPageName(),
-						$simpleSiteLink->getBadges()
+						$fromSiteLink->getPageName(),
+						$fromSiteLink->getBadges()
 					)
 				);
 			} else {
-				if ( !in_array( 'sitelink', $this->ignoreConflicts ) ) {
+				$toSiteLink = $this->toItem->getSiteLink( $siteId );
+				$fromPageName = $fromSiteLink->getPageName();
+				$toPageName = $toSiteLink->getPageName();
+				if( $fromPageName !== $toPageName ) {
+					$site = $this->siteLookup->getSite( $siteId );
+					if( $site === null ) {
+						throw new ChangeOpException( "Conflicting sitelinks for {$siteId}, Failed to normalize" );
+					}
+					$fromPageName = $site->normalizePageName( $fromPageName );
+					$toPageName = $site->normalizePageName( $toPageName );
+				}
+				if( $fromPageName === $toPageName ) {
+					$this->fromChangeOps->add( $this->getSiteLinkChangeOpFactory()->newRemoveSiteLinkOp( $siteId ) );
+					$this->toChangeOps->add(
+						$this->getSiteLinkChangeOpFactory()->newSetSiteLinkOp(
+							$siteId,
+							$fromPageName,
+							array_unique( array_merge( $fromSiteLink->getBadges(), $toSiteLink->getBadges() ) )
+						)
+					);
+				} elseif ( !in_array( 'sitelink', $this->ignoreConflicts ) ) {
 					throw new ChangeOpException( "Conflicting sitelinks for {$siteId}" );
 				}
 			}
