@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ed113e2_18e3cdd5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T23:11:52Z",
+      "side": 1,
+      "message": "I think it has been commonly agreed to not list this in the commit summary, but in comments on the change (that\u0027s because this is going to appear outside of the gerrit context).",
+      "revId": "d9957c24bf55b50ee1704a1b14ded1b5bde8e5b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_38b1f1dc",
         "filename": "repo/i18n/en.json",
         "patchSetId": 11
