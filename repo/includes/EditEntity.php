@@ -3,9 +3,7 @@
 namespace Wikibase;
 
 use DerivativeContext;
-use Hooks;
 use Html;
-use IContextSource;
 use InvalidArgumentException;
 use MWException;
 use ReadOnlyError;
@@ -14,15 +12,13 @@ use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
@@ -618,7 +614,14 @@ class EditEntity {
 			return $this->status;
 		}
 
-		$this->runEditFilterHooks( $summary );
+		$editFilterHookRunner = new EditFilterHookRunner(
+			$this->titleLookup,
+			$this->context
+		);
+		$hookStatus = $editFilterHookRunner->run( $this->newEntity, $this->user, $summary );
+		if ( !$hookStatus->isOK() ) {
+			$this->errorType |= self::FILTERED;
+		}
 
 		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );
@@ -658,73 +661,6 @@ class EditEntity {
 		}
 
 		return $this->status;
-	}
-
-	/**
-	 * Call EditFilterMergedContent hook, if registered.
-	 *
-	 * @param string $summary
-	 *
-	 * @todo: move the implementation elsewhere, it depends on WikiPage.
-	 */
-	private function runEditFilterHooks( $summary ) {
-		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {
-			return;
-		}
-
-		// Run edit filter hooks
-		$filterStatus = Status::newGood();
-
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->newFromEntity( $this->newEntity );
-
-		$context = $this->getContextForEditFilter( $this->newEntity );
-
-		if ( !wfRunHooks( 'EditFilterMergedContent',
-			array( $context, $entityContent, &$filterStatus, $summary, $this->user, false ) ) ) {
-
-			# Error messages etc. were handled inside the hook.
-			$filterStatus->setResult( false, $filterStatus->getValue() );
-		}
-
-		if ( !$filterStatus->isOK() ) {
-			$this->errorType |= self::FILTERED;
-		}
-
-		$this->status->merge( $filterStatus );
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return IContextSource
-	 */
-	private function getContextForEditFilter( EntityDocument $entity ) {
-		$title = $this->getTitle();
-
-		if ( $title !== null ) {
-			$context = clone $this->context;
-		} else {
-			$context = $this->context;
-			$entityType = $entity->getType();
-
-			// This constructs a "fake" title of the form Property:NewProperty,
-			// where the title text is assumed to be name of the special page used
-			// to create entities of the given type. This is used by the
-			// LinkBeginHookHandler::doOnLinkBegin to replace the link to the
-			// fake title with a link to the respective special page.
-			// The effect is that e.g. the AbuseFilter log will show a link to
-			// "Special:NewProperty" instead of "Property:NewProperty", while
-			// the AbuseFilter itself will get a Title object with the correct
-			// namespace IDs for Property entities.
-			$namespace = $this->titleLookup->getNamespaceForType( $entityType );
-			$title = Title::makeTitle( $namespace, 'New' . ucfirst( $entityType ) );
-		}
-
-		$context->setTitle( $title );
-		$context->setWikiPage( new WikiPage( $title ) );
-
-		return $context;
 	}
 
 	private function applyPreSaveChecks() {
