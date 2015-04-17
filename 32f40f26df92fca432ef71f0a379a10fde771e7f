@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_f56dab97",
+        "filename": "repo/includes/ChangePruner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T17:01:28Z",
+      "side": 1,
+      "message": "Weird name for a public method... in core the do* functions are usually those that do the real work and not the public interfaces AFAIR. Also some some doc. would be nice.",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_755afbfa",
+        "filename": "repo/includes/ChangePruner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T17:01:28Z",
+      "side": 1,
+      "message": "type hint?",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_f51b6b1f",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T17:01:28Z",
+      "side": 1,
+      "message": "Wouldn\u0027t just array( $this, \u0027log\u0027 ) work instead of the anonymous function?",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_b515f3eb",
+        "filename": "repo/tests/phpunit/includes/ChangePrunerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T17:01:28Z",
+      "side": 1,
+      "message": "use MediaWikiTestCase",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_f5ea8bd6",
+        "filename": "repo/tests/phpunit/includes/ChangePrunerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T17:01:28Z",
+      "side": 1,
+      "message": "Nice one :)",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
