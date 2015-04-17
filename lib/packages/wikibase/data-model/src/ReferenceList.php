@@ -55,9 +55,11 @@ class ReferenceList extends HashableObjectStorage {
 	 * @throws InvalidArgumentException
 	 */
 	public function addReference( Reference $reference, $index = null ) {
-		if( !is_null( $index ) && !is_integer( $index ) ) {
-			throw new InvalidArgumentException( '$index must be an integer or null; got ' . gettype( $index ) );
-		} elseif ( is_null( $index ) || $index >= count( $this ) ) {
+		if ( !is_int( $index ) && $index !== null ) {
+			throw new InvalidArgumentException( '$index must be an integer or null' );
+		}
+
+		if ( $index === null || $index >= count( $this ) ) {
 			// Append object to the end of the reference list.
 			$this->attach( $reference );
 		} else {

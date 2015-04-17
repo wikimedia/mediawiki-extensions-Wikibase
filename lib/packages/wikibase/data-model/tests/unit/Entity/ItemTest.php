@@ -50,11 +50,9 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testGetId() {
-		/**
-		 * @var Item $item
-		 */
 		foreach ( TestItems::getItems() as $item ) {
-			$this->assertTrue( is_null( $item->getId() ) || $item->getId() instanceof ItemId );
+			$id = $item->getId();
+			$this->assertTrue( $id === null || $id instanceof ItemId );
 		}
 	}
 
@@ -81,6 +79,7 @@ class ItemTest extends EntityTest {
 		$item->setAliases( 'de', array( 'bar', 'baz' ) );
 		$items[] = $item;
 
+		/** @var Item $item */
 		$item = $item->copy();
 		$item->getStatements()->addNewStatement(
 			new PropertyNoValueSnak( new PropertyId( 'P42' ) )
