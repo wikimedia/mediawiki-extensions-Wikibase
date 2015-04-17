@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiResult;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -24,7 +25,7 @@ class AvailableBadges extends ApiBase {
 	public function execute() {
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$badgeItems = array_keys( $settings->getSetting( 'badgeItems' ) );
-		$this->getResult()->setIndexedTagName( $badgeItems, 'badge' );
+		ApiResult::setIndexedTagName( $badgeItems, 'badge' );
 		$this->getResult()->addValue(
 			null,
 			'badges',

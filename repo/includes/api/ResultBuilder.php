@@ -138,7 +138,7 @@ class ResultBuilder {
 			unset( $values['_element'] );
 
 			$values = array_values( $values );
-			$this->result->setIndexedTagName( $values, $tag );
+			ApiResult::setIndexedTagName( $values, $tag );
 		}
 
 		$this->result->addValue( $path, $name, $values );
@@ -203,10 +203,7 @@ class ResultBuilder {
 		}
 
 		$this->result->addValue( $path, $key, $value );
-
-		if ( $this->result->getIsRawMode() && !is_string( $key ) ) {
-			$this->result->setIndexedTagName_internal( $path, $tag );
-		}
+		$this->result->addIndexedTagName( $path, $tag );
 	}
 
 	/**

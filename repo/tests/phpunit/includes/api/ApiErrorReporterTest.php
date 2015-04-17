@@ -109,7 +109,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$expectedData' => array(
 					'fruit' => 'Banana',
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
-					'messages/0/html/content' => '/gefunden/', // in German
+					'messages/0/html' => '/gefunden/', // in German
 				),
 			),
 
@@ -123,7 +123,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$infoPattern' => '/^Malformed value\./',
 				'$expectedData' => array(
 					'messages/0/name' => 'wikibase-parse-error',
-					'messages/0/html/content' => '/Wert/', // in German
+					'messages/0/html' => '/Wert/', // in German
 				),
 			),
 		);
@@ -159,7 +159,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$infoPattern' => '/sitelink/',
 				'$expectedDataFields' => array(
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
-					'messages/0/html/content' => '/gefunden/', // in German
+					'messages/0/html' => '/gefunden/', // in German
 					'messages/0/parameters/0' => '/Foo/',
 				),
 			)
@@ -201,10 +201,10 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$infoPattern' => '/sitelink/',
 				'$expectedData' => array(
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
-					'messages/0/html/content' => '/gefunden/', // in German
+					'messages/0/html' => '/gefunden/', // in German
 					'messages/1/name' => 'wikibase-noentity',
 					'messages/1/parameters/0' => 'Q123',
-					'messages/1/html/content' => '/ist nicht vorhanden/', // in German
+					'messages/1/html' => '/ist nicht vorhanden/', // in German
 				),
 			),
 
@@ -297,9 +297,9 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$status' => $status,
 				'$expectedData' => array(
 					'warnings/main_int/messages/0/name' => 'wikibase-conflict-patched',
-					'warnings/main_int/messages/0/html/content' => '/Version/', // in German
+					'warnings/main_int/messages/0/html' => '/Version/', // in German
 					'warnings/main_int/messages/1/name' => 'undo-nochange',
-					'warnings/main_int/messages/1/html/content' => '/Bearbeitung.*bereits/', // in German
+					'warnings/main_int/messages/1/html' => '/Bearbeitung.*bereits/', // in German
 				),
 			),
 		);
