@@ -446,6 +446,22 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
+	public function testAddRevisionId() {
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result );
+
+		$revision = $this->getMockBuilder( '\Wikibase\EntityRevision' )
+			->disableOriginalConstructor()
+			->getMock();
+		$revision->expects( $this->once() )
+			->method( 'getRevisionId' )
+			->will( $this->returnValue( 123 ) );
+
+		$resultBuilder->addRevisionId( $revision, null );
+		$this->assertEquals( array( 'lastrevid' => 123, ), $result->getData() );
+
+	}
+
 	public function testAddLabels(){
 		$result = $this->getDefaultResult();
 		$labels = array( 'en' => 'foo', 'de' => 'bar' );

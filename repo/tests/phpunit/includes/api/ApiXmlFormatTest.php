@@ -65,6 +65,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			$xml,
 			$entityRevision->getEntity()->getId()->getSerialization()
 		);
+		$xml = $this->replaceRevisionId( $xml, $entityRevision->getRevisionId() );
 
 		return $xml;
 	}
@@ -81,6 +82,10 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		}
 
 		return str_replace( 'P1491009', $propertyIdText, $xml );
+	}
+
+	private function replaceRevisionId( $xml, $revisionId ) {
+		return str_replace( 'lastrevid="1234567890"', "lastrevid=\"$revisionId\"", $xml );
 	}
 
 	private function removeGetEntitiesAttributes( $xml, $entityId ) {

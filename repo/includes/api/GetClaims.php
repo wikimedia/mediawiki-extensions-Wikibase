@@ -82,6 +82,7 @@ class GetClaims extends ApiWikibase {
 
 		$claims = $this->getClaims( $entity, $claimGuid );
 		$this->getResultBuilder()->addClaims( $claims, null );
+		$this->getResultBuilder()->addRevisionId( $entityRevision, null );
 	}
 
 	private function validateParameters( array $params ) {
