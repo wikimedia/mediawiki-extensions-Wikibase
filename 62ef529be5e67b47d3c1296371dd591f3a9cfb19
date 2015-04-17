@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_9879fd2c",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:57:33Z",
+      "side": 1,
+      "message": "missing @throws",
+      "revId": "62ef529be5e67b47d3c1296371dd591f3a9cfb19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_389a5167",
+        "filename": "repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:57:33Z",
+      "side": 1,
+      "message": "s/calls/invokeCount/",
+      "revId": "62ef529be5e67b47d3c1296371dd591f3a9cfb19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7890d946",
+        "filename": "repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:57:33Z",
+      "side": 1,
+      "message": "not very useful",
+      "revId": "62ef529be5e67b47d3c1296371dd591f3a9cfb19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_18950d36",
+        "filename": "repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:57:33Z",
+      "side": 1,
+      "message": "type hints?",
+      "revId": "62ef529be5e67b47d3c1296371dd591f3a9cfb19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d89ea559",
+        "filename": "repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:57:33Z",
+      "side": 1,
+      "message": "type hints?",
+      "revId": "62ef529be5e67b47d3c1296371dd591f3a9cfb19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
