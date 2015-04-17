@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use SiteLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Validators\EntityConstraintProvider;
 
@@ -25,15 +26,23 @@ class MergeChangeOpsFactory {
 	private $factoryProvider;
 
 	/**
+	 * @var SiteLookup
+	 */
+	private $siteLookup;
+
+	/**
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ChangeOpFactoryProvider $factoryProvider
+	 * @param SiteLookup $siteLookup
 	 */
 	public function __construct(
 		EntityConstraintProvider $constraintProvider,
-		ChangeOpFactoryProvider $factoryProvider
+		ChangeOpFactoryProvider $factoryProvider,
+		SiteLookup $siteLookup
 	) {
 		$this->constraintProvider = $constraintProvider;
 		$this->factoryProvider = $factoryProvider;
+		$this->siteLookup = $siteLookup;
 	}
 
 	/**
@@ -58,7 +67,8 @@ class MergeChangeOpsFactory {
 			$toItem,
 			$ignoreConflicts,
 			$this->constraintProvider,
-			$this->factoryProvider
+			$this->factoryProvider,
+			$this->siteLookup
 		);
 	}
 

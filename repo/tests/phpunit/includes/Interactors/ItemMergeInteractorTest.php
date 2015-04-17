@@ -13,6 +13,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
+use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Repo\Interactors\ItemMergeInteractor
@@ -95,7 +96,8 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		//XXX: we may want or need to mock some of these services
 		$changeOpsFactory = new MergeChangeOpsFactory(
 			WikibaseRepo::getDefaultInstance()->getEntityConstraintProvider(),
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
+			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider(),
+			MockSiteStore::newFromTestSites()
 		);
 
 		$interactor = new ItemMergeInteractor(
