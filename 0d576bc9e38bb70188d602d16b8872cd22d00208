@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_b21509ec",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-17T15:40:23Z",
+      "side": 0,
+      "message": "This is not used anymore.",
+      "revId": "0d576bc9e38bb70188d602d16b8872cd22d00208",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
