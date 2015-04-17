@@ -23,6 +23,8 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -91,6 +93,11 @@ abstract class ApiWikibase extends ApiBase {
 	private $permissionChecker;
 
 	/**
+	 * @var EditFilterHookRunner
+	 */
+	private $editFilterHookRunner;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -118,6 +125,12 @@ abstract class ApiWikibase extends ApiBase {
 		$this->errorReporter = WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getErrorReporter( $this );
 
 		$this->resultBuilder = WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getResultBuilder( $this );
+
+		$this->editFilterHookRunner = new EditFilterHookRunner(
+			$this->titleLookup,
+			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
+			$this->getContext()
+		);
 	}
 
 	/**
@@ -409,6 +422,7 @@ abstract class ApiWikibase extends ApiBase {
 			$this->permissionChecker,
 			$entity,
 			$user,
+			$this->editFilterHookRunner,
 			$baseRevisionId,
 			$this->getContext()
 		);
