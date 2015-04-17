@@ -68,6 +68,17 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		return $specialPage;
 	}
 
+	public function getMockEditFilterHookRunner() {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->setMethods( array( 'run' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+		return $mock;
+	}
+
 	/**
 	 * @param SpecialRedirectEntity $page
 	 * @param User $user
@@ -108,7 +119,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
-				$user
+				$user,
+				$this->getMockEditFilterHookRunner()
 			)
 		);
 	}
