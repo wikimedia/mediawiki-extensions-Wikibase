@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e76d7c5_5cbdacd0",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-17T11:57:37Z",
+      "side": 1,
+      "message": "Hehe, out of practise! :)\n\nWill fix in followup",
+      "parentUuid": "2e76d7c5_1cf2d4df",
+      "revId": "481b2582a1a6258c6884e4d9205be8e9368958fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e76d7c5_7c28a832",
         "filename": "repo/includes/api/SetClaim.php",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "Hmm, how does a ClaimGuidParsingException\" imply that it did not contain a valid entity id? This is guessing information which we do not have at this point, or am I missing something?",
       "parentUuid": "2e76d7c5_7c28a832",
+      "revId": "481b2582a1a6258c6884e4d9205be8e9368958fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_3cb8f0e1",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-17T11:57:37Z",
+      "side": 1,
+      "message": "Indeed, we are catching all errors that throw ClaimGuidParsingException for which there are 3.\nThey generally just mean there is something wrong with the claim GUID\nWe could append the message of the exception to the error message? but that could be ugly?",
+      "parentUuid": "2e76d7c5_7cd74829",
       "revId": "481b2582a1a6258c6884e4d9205be8e9368958fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
