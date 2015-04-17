@@ -9,6 +9,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -20,6 +21,7 @@ use Wikibase\SummaryFormatter;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Addshore
  */
 class RedirectCreationInteractor {
 
@@ -49,24 +51,32 @@ class RedirectCreationInteractor {
 	private $user;
 
 	/**
+	 * @var EditFilterHookRunner
+	 */
+	private $editFilterHookRunner;
+
+	/**
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param User $user
+	 * @param EditFilterHookRunner $editFilterHookRunner
 	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
-		User $user
+		User $user,
+		EditFilterHookRunner $editFilterHookRunner
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->user = $user;
+		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
 
 	/**
@@ -213,14 +223,24 @@ class RedirectCreationInteractor {
 	 * @throws RedirectCreationException
 	 */
 	private function saveRedirect( EntityRedirect $redirect, Summary $summary, $bot ) {
+		$summary = $this->summaryFormatter->formatSummary( $summary );
 		$flags = EDIT_UPDATE;
 		if ( $bot ) {
 			$flags = $flags | EDIT_FORCE_BOT;
 		}
+
+		$hookStatus = $this->editFilterHookRunner->run( $redirect, $this->user, $summary );
+		if ( !$hookStatus->isOK() ) {
+			throw new RedirectCreationException(
+				'EditFilterHook stopped redirect creation',
+				'cant-redirect'
+			);
+		}
+
 		try {
 			$this->entityStore->saveRedirect(
 				$redirect,
-				$this->summaryFormatter->formatSummary( $summary ),
+				$summary,
 				$this->user,
 				$flags
 			);

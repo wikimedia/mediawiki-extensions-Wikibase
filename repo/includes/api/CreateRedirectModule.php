@@ -9,6 +9,7 @@ use UsageException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\WikibaseRepo;
@@ -56,7 +57,12 @@ class CreateRedirectModule extends ApiBase {
 				WikibaseRepo::getDefaultInstance()->getEntityStore(),
 				WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker(),
 				WikibaseRepo::getDefaultInstance()->getSummaryFormatter(),
-				$this->getUser()
+				$this->getUser(),
+				new EditFilterHookRunner(
+					WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+					WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
+					$this->getContext()
+				)
 			)
 		);
 	}
