@@ -16,6 +16,7 @@ use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\ChainRedirectHandler;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
@@ -337,7 +338,8 @@ class EntityDataRequestHandler {
 
 		if ( is_string( $revision ) ) {
 			// If no specific revision is requested, enable automatic redirect resolution.
-			$lookup = new EntityRedirectResolvingDecorator( $lookup );
+			$handler = new ChainRedirectHandler( $lookup );
+			$lookup->setRedirectHandler( $handler );
 		}
 
 		try {
