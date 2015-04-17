@@ -12,6 +12,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
@@ -52,13 +53,13 @@ class EditFilterHookRunner {
 	/**
 	 * Call EditFilterMergedContent hook, if registered.
 	 *
-	 * @param Entity|null $newEntity The modified entity we are trying to save
+	 * @param Entity|EntityRedirect|null $new The entity or redirect we are trying to save
 	 * @param User $user the user performing the edit
 	 * @param string $summary The edit summary
 	 *
 	 * @return Status
 	 */
-	public function run( $newEntity, User $user, $summary ) {
+	public function run( $new, User $user, $summary ) {
 		$filterStatus = Status::newGood();
 
 		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {
@@ -66,9 +67,15 @@ class EditFilterHookRunner {
 		}
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->newFromEntity( $newEntity );
+		if( $new instanceof Entity ) {
+			$entityContent = $entityContentFactory->newFromEntity( $new );
+		} elseif( $new instanceof EntityRedirect ){
+			$entityContent = $entityContentFactory->newFromRedirect( $new );
+		} else {
+			throw new InvalidArgumentException( '$new must be instance of Entity or EntityRedirect' );
+		}
 
-		$context = $this->getContextForEditFilter( $newEntity );
+		$context = $this->getContextForEditFilter( $new );
 
 		if ( !wfRunHooks( 'EditFilterMergedContent',
 			array( $context, $entityContent, &$filterStatus, $summary, $user, false ) ) ) {

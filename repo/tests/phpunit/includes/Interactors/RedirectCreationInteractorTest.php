@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Interactors;
 
+use FauxRequest;
+use RequestContext;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
@@ -83,6 +85,16 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		return $permissionChecker;
 	}
 
+	public function getMockEditFilterHookRunner() {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+		return $mock;
+	}
+
 	/**
 	 * @param User $user
 	 *
@@ -95,12 +107,16 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 
 		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 
+		$context = new RequestContext();
+		$context->setRequest( new FauxRequest() );
+
 		$interactor = new RedirectCreationInteractor(
 			$this->mockRepository,
 			$this->mockRepository,
 			$this->getPermissionCheckers(),
 			$summaryFormatter,
-			$user
+			$user,
+			$this->getMockEditFilterHookRunner()
 		);
 
 		return $interactor;
