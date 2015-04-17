@@ -34,6 +34,24 @@
       "revId": "c81abb61fb29f10ced73b1d29647f0ea36374df8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_5cd28cd6",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-17T12:42:12Z",
+      "side": 1,
+      "message": "There is no exception in line 65...",
+      "parentUuid": "2e76d7c5_fc2918e3",
+      "revId": "c81abb61fb29f10ced73b1d29647f0ea36374df8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
