@@ -56,6 +56,7 @@ class ClaimGuidParserTest extends \PHPUnit_Framework_TestCase {
 			array( '' ),
 			array( 'q0' ),
 			array( '1p' ),
+			array( 'Q0$5627445f-43cb-ed6d-3adb-760e85bd17ee' ),
 		);
 	}
 
