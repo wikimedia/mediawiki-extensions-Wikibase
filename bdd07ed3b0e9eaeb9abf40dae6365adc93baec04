@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_1c0c143d",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-17T10:15:21Z",
+      "side": 1,
+      "message": "These options are the same everywhere. Would be nice to have them in a (private) static member.",
+      "revId": "bdd07ed3b0e9eaeb9abf40dae6365adc93baec04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
