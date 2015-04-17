@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\LinkedData;
 
 use ApiFormatBase;
-use ApiFormatXml;
 use ApiMain;
 use ApiResult;
 use DerivativeContext;
@@ -17,8 +16,8 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\RdfBuilder;
 use Wikimedia\Purtle\RdfWriterFactory;
-use Wikibase\RdfSerializer;
 use Wikibase\RdfProducer;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
@@ -29,7 +28,7 @@ use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
  * representation of data entities. Using the ContentHandler to serialize the entity would expose
  * internal implementation details.
  *
- * For RDF output, this relies on the RdfSerializer class.
+ * For RDF output, this relies on the RdfBuilder class.
  *
  * @since 0.4
  *
@@ -111,6 +110,11 @@ class EntityDataSerializationService {
 	private $sites;
 
 	/**
+	 * @var RdfWriterFactory
+	 */
+	private $rdfWriterFactory;
+
+	/**
 	 * @param string $rdfBaseURI
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
@@ -136,6 +140,8 @@ class EntityDataSerializationService {
 		$this->serializerFactory = $serializerFactory;
 		$this->propertyLookup = $propertyLookup;
 		$this->sites = $sites;
+
+		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
 
 	/**
@@ -328,8 +334,7 @@ class EntityDataSerializationService {
 			$this->fileExtensions[ $ext ] = $name;
 		}
 
-		$rdfWriterFactory = new RdfWriterFactory(); //FIXME: inject
-		$formats = $rdfWriterFactory->getSupportedFormats();
+		$formats = $this->rdfWriterFactory->getSupportedFormats();
 
 		foreach ( $formats as $name ) {
 
@@ -342,14 +347,14 @@ class EntityDataSerializationService {
 			}
 
 			// use all mime types. to improve content negotiation
-			foreach ( $rdfWriterFactory->getMimeTypes( $name ) as $mime ) {
+			foreach ( $this->rdfWriterFactory->getMimeTypes( $name ) as $mime ) {
 				if ( !isset( $this->mimeTypes[$mime]) ) {
 					$this->mimeTypes[$mime] = $name;
 				}
 			}
 
 			// only one file extension, to keep purging simple
-			$ext = $rdfWriterFactory->getFileExtension( $name );
+			$ext = $this->rdfWriterFactory->getFileExtension( $name );
 			if ( !isset( $this->fileExtensions[$ext]) ) {
 				$this->fileExtensions[$ext] = $name;
 			}
@@ -378,25 +383,47 @@ class EntityDataSerializationService {
 
 		$serializer = $this->createApiSerializer( $formatName );
 
-		if ( !$serializer ) {
-			$serializer = $this->createRdfSerializer( $formatName, $flavor );
-		}
-
-		if ( !$serializer ) {
-			throw new MWException( "Could not create serializer for $formatName" );
-		}
-
-		if( $serializer instanceof ApiFormatBase ) {
+		if( $serializer ) {
 			$data = $this->apiSerialize( $entityRevision, $serializer );
 			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
 		} else {
-			$data = $serializer->startDocument() .
-				$serializer->serializeEntityRevision( $entityRevision ) .
-				$serializer->finishDocument();
-			$contentType = $serializer->getDefaultMimeType();
+			$rdfBuilder = $this->createRdfBuilder( $formatName, $flavor );
+
+			if ( !$rdfBuilder ) {
+				throw new MWException( "Could not create serializer for $formatName" );
+			} else {
+				$data = $this->rdfSerialize( $entityRevision, $rdfBuilder );
+
+				$mimeTypes = $this->rdfWriterFactory->getMimeTypes( $formatName );
+				$contentType = reset( $mimeTypes );
+			}
 		}
 
 		return array( $data, $contentType );
+	}
+
+	/**
+	 * @param EntityRevision $entityRevision
+	 * @param RdfBuilder $rdfBuilder
+	 *
+	 * @return string RDF
+	 */
+	private function rdfSerialize( EntityRevision $entityRevision, RdfBuilder $rdfBuilder ) {
+		$rdfBuilder->startDocument();
+		$rdfBuilder->addDumpHeader();
+
+		$rdfBuilder->addEntityRevisionInfo(
+			$entityRevision->getEntity()->getId(),
+			$entityRevision->getRevisionId(),
+			$entityRevision->getTimestamp()
+		);
+
+		$rdfBuilder->addEntity( $entityRevision->getEntity() );
+
+		$rdfBuilder->resolveMentionedEntities( $this->entityLookup );
+		$rdfBuilder->finishDocument();
+
+		return $rdfBuilder->getRDF();
 	}
 
 	/**
@@ -474,9 +501,9 @@ class EntityDataSerializationService {
 	 * Creates an API printer that can generate the given output format.
 	 *
 	 * @param string $formatName The desired serialization format,
-	 *           as a format name understood by ApiBase or EasyRdf_Format
+	 *           as a format name understood by ApiBase or RdfWriterFactory.
 	 *
-	 * @return \ApiFormatBase|null A suitable result printer, or null
+	 * @return ApiFormatBase|null A suitable result printer, or null
 	 *           if the given format is not supported by the API.
 	 */
 	public function createApiSerializer( $formatName ) {
@@ -492,8 +519,11 @@ class EntityDataSerializationService {
 
 	/**
 	 * Get the producer setting for current data format
+	 *
 	 * @param string|null $flavorName
-	 * @return integer
+	 *
+	 * @return int
+	 * @throws MWException
 	 */
 	private function getFlavor( $flavorName ) {
 		switch( $flavorName ) {
@@ -514,34 +544,32 @@ class EntityDataSerializationService {
 	/**
 	 * Creates an Rdf Serializer that can generate the given output format.
 	 *
-	 * @param String $format The desired serialization format, as a format name understood by ApiBase or EasyRdf_Format
-	 * @param String $dataFormat The type of the output data, as understood by RdfSerializer
-	 * @param String|null $flavor Flavor name
+	 * @param string $format The desired serialization format, as a format name understood by ApiBase or RdfWriterFactory
+	 * @param string|null $flavorName Flavor name (used for RDF output)
 	 *
-	 * @return RdfSerializer|null A suitable result printer, or null
+	 * @return RdfBuilder|null A suitable result printer, or null
 	 *   if the given format is not supported.
 	 */
-	public function createRdfSerializer( $format, $flavor = null ) {
-		//MediaWiki formats
-		$rdfFormat = RdfSerializer::getRdfWriter( $format );
+	public function createRdfBuilder( $format, $flavorName = null ) {
+		$canonicalFormat = $this->rdfWriterFactory->getFormatName( $format );
 
-		if ( !$rdfFormat ) {
+		if ( !$canonicalFormat ) {
 			return null;
 		}
 
-		$serializer = new RdfSerializer(
-			$rdfFormat,
+		$rdfWriter = $this->rdfWriterFactory->getWriter( $format );
+
+		$rdfBuilder = new RdfBuilder(
+			$this->sites,
 			$this->rdfBaseURI,
 			$this->rdfDataURI,
-			$this->sites,
 			$this->propertyLookup,
-			$this->entityLookup,
-			$this->getFlavor( $flavor ),
-			// needed to eliminate duplicate refs/values within entity
+			$this->getFlavor( $flavorName ),
+			$rdfWriter,
 			new \HashBagOStuff()
 		);
 
-		return $serializer;
+		return $rdfBuilder;
 	}
 
 	/**
