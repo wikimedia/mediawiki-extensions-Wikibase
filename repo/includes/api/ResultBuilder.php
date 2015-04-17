@@ -349,6 +349,18 @@ class ResultBuilder {
 	}
 
 	/**
+	 * Add revision id of EntityRevision to result
+	 *
+	 * @param EntityRevision $entityRevision
+	 * @param string|array|null $path
+	 *
+	 * @since 0.5
+	 */
+	public function addRevisionId( EntityRevision $entityRevision, $path ) {
+		$this->setValue( $path, 'lastrevid', $entityRevision->getRevisionId() );
+	}
+
+	/**
 	 * Get serialized labels and add them to result
 	 *
 	 * @since 0.5
