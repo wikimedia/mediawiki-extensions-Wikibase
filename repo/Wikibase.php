@@ -184,6 +184,7 @@ call_user_func( function() {
 	$wgSpecialPages['EntityData'] 						= 'Wikibase\Repo\Specials\SpecialEntityData';
 	$wgSpecialPages['MyLanguageFallbackChain'] 			= 'Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain';
 	$wgSpecialPages['MergeItems'] 						= 'Wikibase\Repo\Specials\SpecialMergeItems';
+	$wgSpecialPages['RedirectEntity'] 					= 'Wikibase\Repo\Specials\SpecialRedirectEntity';
 
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob';
