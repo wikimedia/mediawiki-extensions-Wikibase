@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_38ffb164",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-17T23:15:45Z",
+      "side": 1,
+      "message": "Yeah, no global access to anything part of Wikibase should happen here, since we have full control over how the object gets instantiated.",
+      "parentUuid": "0ed113e2_b8f161ca",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_18af4d93",
         "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
         "patchSetId": 4
