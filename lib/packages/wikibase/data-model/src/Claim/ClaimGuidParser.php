@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Claim;
 
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * @since 0.5
@@ -40,7 +41,12 @@ class ClaimGuidParser {
 			throw new ClaimGuidParsingException( '$serialization does not have the correct number of parts' );
 		}
 
-		return new ClaimGuid( $this->entityIdParser->parse( $keyParts[0] ), $keyParts[1] );
+		try {
+			return new ClaimGuid( $this->entityIdParser->parse( $keyParts[0] ), $keyParts[1] );
+		}
+		catch( EntityIdParsingException $exception ) {
+			throw new ClaimGuidParsingException( '$serialization contains invalid EntityId: ' . $exception->getMessage() );
+		}
 	}
 
 }
