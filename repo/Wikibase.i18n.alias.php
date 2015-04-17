@@ -28,6 +28,7 @@ $specialPageAliases['en'] = array(
 	'SetLabelDescriptionAliases' => array( 'SetLabelDescriptionAliases' ),
 	'SetSiteLink' => array( 'SetSiteLink' ),
 	'MergeItems' => array( 'MergeItems', 'MergeItem' ),
+	'RedirectEntity' => array( 'RedirectEntity', 'EntityRedirect', 'ItemRedirect', 'RedirectItem' ),
 	'EntitiesWithoutLabel' => array( 'EntitiesWithoutLabel' ),
 	'EntitiesWithoutDescription' => array( 'EntitiesWithoutDescription' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsWithoutSitelinks' ),
