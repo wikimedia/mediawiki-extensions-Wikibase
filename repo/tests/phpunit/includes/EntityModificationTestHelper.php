@@ -6,9 +6,11 @@ use Deserializers\Deserializer;
 use PHPUnit_Framework_Assert as Assert;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -39,11 +41,17 @@ class EntityModificationTestHelper {
 	 */
 	private $mockRepository;
 
+	/**
+	 * @var RedirectResolvingEntityLookup
+	 */
+	private $redirectResolvingEntityLookup;
+
 	public function __construct() {
 		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 		$this->serializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
 		$this->deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
 		$this->mockRepository = new MockRepository();
+		$this->redirectResolvingEntityLookup  = new RedirectResolvingEntityLookup( $this->mockRepository );
 	}
 
 	/**
@@ -114,12 +122,22 @@ class EntityModificationTestHelper {
 		$this->mockRepository->putEntity( $entity );
 	}
 
-	public function getEntity( $id ) {
+	/**
+	 * @param string|EntityId $id
+	 * @param bool $resolveRedirects
+	 *
+	 * @return null|EntityDocument
+	 */
+	public function getEntity( $id, $resolveRedirects = false ) {
 		if ( is_string( $id ) ) {
 			$id = $this->idParser->parse( $id );
 		}
 
-		return $this->mockRepository->getEntity( $id );
+		if ( $resolveRedirects ) {
+			return $this->redirectResolvingEntityLookup->getEntity( $id );
+		} else {
+			return $this->mockRepository->getEntity( $id );
+		}
 	}
 
 	/**
