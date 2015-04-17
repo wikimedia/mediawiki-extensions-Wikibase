@@ -4,12 +4,15 @@ namespace Wikibase\Test\Api;
 
 use ApiTestCase;
 use DataValues\DataValue;
+use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use ValueFormatters\TimeFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\FormatSnakValue
@@ -25,12 +28,6 @@ use Wikibase\Lib\SnakFormatter;
  * @author Daniel Kinzler
  */
 class FormatSnakValueTest extends ApiTestCase {
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setMwGlobals( 'wgArticlePath', '/wiki/$1' );
-	}
 
 	public function provideApiRequest() {
 		$november11 = new TimeValue(
@@ -94,6 +91,13 @@ class FormatSnakValueTest extends ApiTestCase {
 				'@^http://acme\.test$@'
 			),
 			array(
+				QuantityValue::newFromNumber( '+12.33', '1' ),
+				'quantity',
+				SnakFormatter::FORMAT_PLAIN,
+				array( 'lang' => 'de' ),
+				'@^12,33$@' // german decimal separator
+			),
+			array(
 				new StringValue( 'http://acme.test' ),
 				'url',
 				SnakFormatter::FORMAT_WIKI,
@@ -108,21 +112,68 @@ class FormatSnakValueTest extends ApiTestCase {
 				'@commons\.wikimedia\.org\/wiki\/File:Example\.jpg@'
 			),
 			array(
-				new EntityIdValue( new ItemId( 'Q2147483647' ) ),
+				new EntityIdValue( new ItemId( 'Q404' ) ),
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'/^Q2147483647' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( $deletedItem,  '/' ) . '\)<\/span>$/'
+				'/^Q404' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( $deletedItem,  '/' ) . '\)<\/span>$/'
+			),
+			array(
+				new EntityIdValue( new ItemId( 'Q23' ) ),
+				'wikibase-item',
+				SnakFormatter::FORMAT_HTML,
+				null,
+				'/^<a title="[^"]*Q23" href="[^"]+Q23">George Washington<\/a>$/'
+			),
+			array(
+				new EntityIdValue( new ItemId( 'Q23' ) ),
+				'wikibase-item',
+				SnakFormatter::FORMAT_HTML,
+				array( 'lang' => 'de-ch' ), // fallback
+				'/^<a title="[^"]*Q23" href="[^"]+Q23" lang="en">George Washington<\/a><sup class="wb-language-fallback-indicator">[^<>]+<\/sup>$/'
 			),
 
 			// @TODO: Test an existing Item id
 		);
 	}
 
+	private function setUpEntities() {
+		global $wgUser;
+
+		static $setup = false;
+
+		if ( $setup ) {
+			return;
+		}
+
+		$setup = true;
+
+		$store = WikibaseRepo::getDefaultInstance()->getStore()->getEntityStore();
+
+		// remove entities we care about
+		$idsToDelete = array( new ItemId( 'Q404' ), new ItemId( 'Q23' ) );
+		foreach ( $idsToDelete as $id ) {
+			try {
+				$store->deleteEntity( $id, 'test', $wgUser );
+			} catch ( StorageException $ex ) {
+				// ignore
+			}
+		}
+
+		// set up Q23
+		$item = new Item();
+		$item->setId( new ItemId( 'Q23' ) );
+		$item->getFingerprint()->setLabel( 'en', 'George Washington' );
+
+		$store->saveEntity( $item, 'testing', $wgUser, EDIT_NEW );
+	}
+
 	/**
 	 * @dataProvider provideApiRequest
 	 */
 	public function testApiRequest( DataValue $value, $dataType, $format, $options, $pattern ) {
+		$this->setUpEntities();
+
 		$params = array(
 			'action' => 'wbformatvalue',
 			'generate' => $format,
