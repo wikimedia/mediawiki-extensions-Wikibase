@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f8184925",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:50:40Z",
+      "side": 1,
+      "message": "Can\u0027t we inject this? AFAIS it should be possible",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_38bd71d2",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:50:40Z",
+      "side": 1,
+      "message": "Not sure this namespace is appropriate... until now it only featured hook handlers, not callers. I guess one could interpret it to feature hook interactors in general...",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b812c1ff",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:50:40Z",
+      "side": 1,
+      "message": "Entity $newEntity \u003d null",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b8f161ca",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:50:40Z",
+      "side": 1,
+      "message": "Yikes, can\u0027t we inject this?",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_18af4d93",
+        "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:50:40Z",
+      "side": 1,
+      "message": "type hint?",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f895a943",
+        "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:50:40Z",
+      "side": 1,
+      "message": "If the hook is not getting fired this wont even be executed... you need to make sure this actually fires (pass in a variable from the outer scope, change its value here and then do an assertion on that value in the test case).",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
