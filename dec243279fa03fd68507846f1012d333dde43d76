@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_bc93a0a5",
+        "filename": "repo/tests/phpunit/includes/EntityModificationTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-17T11:05:13Z",
+      "side": 1,
+      "message": "My only thoughts here are rather than a bool opt this could be in a separate method.\nNot really a concern given this is only a helper class..",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
