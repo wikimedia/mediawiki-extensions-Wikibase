@@ -268,12 +268,11 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	private function getMultilangTexts( $fieldKey, array $languageCodes = null ) {
 		if ( $fieldKey === 'label' ) {
 			$textList = $this->fingerprint->getLabels()->toTextArray();
-		}
-		else {
+		} else {
 			$textList = $this->fingerprint->getDescriptions()->toTextArray();
 		}
 
-		if ( !is_null( $languageCodes ) ) {
+		if ( $languageCodes !== null ) {
 			$textList = array_intersect_key( $textList, array_flip( $languageCodes ) );
 		}
 
