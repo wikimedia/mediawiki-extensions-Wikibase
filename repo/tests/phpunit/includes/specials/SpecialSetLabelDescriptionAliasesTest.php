@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use FauxResponse;
+use Status;
 use ValueValidators\Result;
 use WebRequest;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
@@ -53,10 +54,22 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$this->getEntityPermissionChecker(),
 			$this->getSiteStore(),
 			$this->getFingerprintChangeOpsFactory(),
-			$this->getContentLanguages()
+			$this->getContentLanguages(),
+			$this->getMockEditFitlerHookRunner()
 		);
 
 		return $page;
+	}
+
+	private function getMockEditFitlerHookRunner () {
+		$runner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->setMethods( array( 'run' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$runner->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+		return $runner;
 	}
 
 	/**

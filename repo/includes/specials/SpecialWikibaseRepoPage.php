@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -64,6 +65,11 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	protected $siteStore;
 
 	/**
+	 * @var EditFilterHookRunner
+	 */
+	private $editFilterHookRunner;
+
+	/**
 	 * @since 0.5
 	 *
 	 * @param string $title The title of the special page
@@ -73,13 +79,20 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		parent::__construct( $title, $restriction );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
+		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
+
 		$this->setSpecialWikibaseRepoPageServices(
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$wikibaseRepo->getEntityTitleLookup(),
+			$titleLookup,
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getEntityPermissionChecker(),
-			$wikibaseRepo->getSiteStore()
+			$wikibaseRepo->getSiteStore(),
+			new EditFilterHookRunner(
+				$titleLookup,
+				$wikibaseRepo->getEntityContentFactory(),
+				$this->getContext()
+			)
 		);
 	}
 
@@ -92,6 +105,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
 	 * @param SiteStore $siteStore
+	 * @param EditFilterHookRunner $editFilterHookRunner
 	 */
 	public function setSpecialWikibaseRepoPageServices(
 		SummaryFormatter $summaryFormatter,
@@ -99,7 +113,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		EntityTitleLookup $entityTitleLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
-		SiteStore $siteStore
+		SiteStore $siteStore,
+		EditFilterHookRunner $editFilterHookRunner
 	) {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityRevisionLookup = $entityRevisionLookup;
@@ -107,6 +122,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
 		$this->siteStore = $siteStore;
+		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
 
 	/**
@@ -228,6 +244,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 			$this->permissionChecker,
 			$entity,
 			$this->getUser(),
+			$this->editFilterHookRunner,
 			$baseRev,
 			$this->getContext()
 		);

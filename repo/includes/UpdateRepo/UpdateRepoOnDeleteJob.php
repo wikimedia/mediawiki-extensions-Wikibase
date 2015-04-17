@@ -10,6 +10,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -49,13 +50,20 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		parent::__construct( 'UpdateRepoOnDelete', $title, $params );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
+
 		$this->initServices(
-			$wikibaseRepo->getEntityTitleLookup(),
+			$titleLookup,
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityPermissionChecker(),
-			$wikibaseRepo->getSiteStore()
+			$wikibaseRepo->getSiteStore(),
+			new EditFilterHookRunner(
+				$titleLookup,
+				$wikibaseRepo->getEntityContentFactory()
+			)
 		);
 	}
 
@@ -65,14 +73,16 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
 		EntityPermissionChecker $entityPermissionChecker,
-		SiteStore $siteStore
+		SiteStore $siteStore,
+		EditFilterHookRunner $editFilterHookRunner
 	) {
 		$this->initRepoJobServices(
 			$entityTitleLookup,
 			$entityRevisionLookup,
 			$entityStore,
 			$summaryFormatter,
-			$entityPermissionChecker
+			$entityPermissionChecker,
+			$editFilterHookRunner
 		);
 		$this->siteStore = $siteStore;
 	}

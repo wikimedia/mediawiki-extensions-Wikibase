@@ -15,6 +15,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -81,6 +82,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @param SiteStore $siteStore
 	 * @param FingerprintChangeOpFactory $changeOpFactory
 	 * @param ContentLanguages $termsLanguages
+	 * @param EditFilterHookRunner $editFilterHookRunner
 	 */
 	public function setServices(
 		SummaryFormatter $summaryFormatter,
@@ -90,7 +92,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		EntityPermissionChecker $permissionChecker,
 		SiteStore $siteStore,
 		FingerprintChangeOpFactory $changeOpFactory,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		EditFilterHookRunner $editFilterHookRunner
 	) {
 		$this->setSpecialWikibaseRepoPageServices(
 			$summaryFormatter,
@@ -98,7 +101,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$entityTitleLookup,
 			$entityStore,
 			$permissionChecker,
-			$siteStore
+			$siteStore,
+			$editFilterHookRunner
 		);
 
 		$this->changeOpFactory = $changeOpFactory;
