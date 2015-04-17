@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f8fa893f",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T23:46:18Z",
+      "side": 1,
+      "message": "This change in semantic is fine given that only GetEntities seems to use this. Maybe the doc could be more explicit about this (along the lines of \"this must be the entity id before any redirects were resolved\").",
+      "revId": "7eed04bf714ad76ef3e2c18c070834f68ac60cf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_185e6d7c",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T23:46:18Z",
+      "side": 1,
+      "message": "$sourceEntityIdSerialization as this is not an EntityId object",
+      "revId": "7eed04bf714ad76ef3e2c18c070834f68ac60cf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_781bf9d4",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T23:46:18Z",
+      "side": 1,
+      "message": "missing space after if",
+      "revId": "7eed04bf714ad76ef3e2c18c070834f68ac60cf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
