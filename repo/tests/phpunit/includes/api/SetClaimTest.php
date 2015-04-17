@@ -8,7 +8,6 @@ use FormatJson;
 use UsageException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -163,7 +162,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function getInvalidCases() {
+	private function getInvalidCases() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = new Item();
@@ -281,13 +280,13 @@ class SetClaimTest extends WikibaseApiTestCase {
 	/**
 	 * @param Claim|array $claim Native or serialized claim object.
 	 * @param ItemId $itemId
-	 * @param $claimCount
-	 * @param $requestLabel string a label to identify requests that are made in errors
+	 * @param int $claimCount
+	 * @param string $requestLabel A label to identify requests that are made in errors.
 	 * @param int|null $index
 	 * @param int|null $baserevid
 	 * @param string $error
 	 */
-	protected function makeRequest(
+	private function makeRequest(
 		$claim,
 		ItemId $itemId,
 		$claimCount,
@@ -298,7 +297,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	) {
 		$serializerFactory = new SerializerFactory();
 
-		if ( $claim instanceof Claim ) {
+		if ( $claim instanceof Statement ) {
 			$serializer = $serializerFactory->newSerializerForObject( $claim );
 			$serializedClaim = $serializer->getSerialized( $claim );
 		} else {
@@ -334,7 +333,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 *
 	 * @return array|bool
 	 */
-	protected function assertApiRequest( $params, $error ) {
+	private function assertApiRequest( $params, $error ) {
 		$resultArray = false;
 
 		try {
@@ -354,7 +353,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		return $resultArray;
 	}
 
-	protected function assertValidResponse( array $resultArray ) {
+	private function assertValidResponse( array $resultArray ) {
 		$this->assertResultSuccess( $resultArray );
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
@@ -367,17 +366,18 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	/**
 	 * @param Claim $claim
-	 * @param EntityId $entityId
-	 * @param $claimCount
-	 * @param $requestLabel string a label to identify requests that are made in errors
+	 * @param ItemId $itemId
+	 * @param int $claimCount
+	 * @param string $requestLabel A label to identify requests that are made in errors.
 	 */
-	protected function assertClaimWasSet(
+	private function assertClaimWasSet(
 		Claim $claim,
-		EntityId $entityId,
+		ItemId $itemId,
 		$claimCount,
 		$requestLabel
 	) {
-		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+		/** @var Item $item */
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
 		$claims = new Claims( $item->getClaims() );
 		$this->assertTrue( $claims->hasClaim( $claim ), "Claims list does not have claim after {$requestLabel}" );
@@ -387,7 +387,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$this->assertTrue( $claim->getQualifiers()->equals( $savedClaim->getQualifiers() ) );
 		}
 
-		$this->assertEquals( $claimCount, $claims->count(), "Claims count is wrong after {$requestLabel}" );
+		$this->assertSame( $claimCount, $claims->count(), "Claims count is wrong after {$requestLabel}" );
 	}
 
 	/**
