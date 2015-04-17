@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_f535abd8",
+        "filename": "repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-17T16:38:24Z",
+      "side": 1,
+      "message": "$this-\u003eonce() to make sure the method gets called.",
+      "revId": "a6eec0318ea3d3265aa2dbe9c7bccbe7ebe06b26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
