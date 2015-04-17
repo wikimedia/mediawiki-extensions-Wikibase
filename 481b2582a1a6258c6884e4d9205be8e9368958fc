@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_1cf2d4df",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-17T11:46:23Z",
+      "side": 1,
+      "message": "Spaces missing. :-(",
+      "revId": "481b2582a1a6258c6884e4d9205be8e9368958fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_7c28a832",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-17T11:46:23Z",
+      "side": 1,
+      "message": "Should be more like \"Claim GUID must contain a valid entity id\".",
+      "revId": "481b2582a1a6258c6884e4d9205be8e9368958fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
