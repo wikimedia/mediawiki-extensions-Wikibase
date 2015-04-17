@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_38b1f1dc",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T23:10:38Z",
+      "side": 1,
+      "message": "missing Qqq (also for the following)",
+      "revId": "d9957c24bf55b50ee1704a1b14ded1b5bde8e5b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d8c54543",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T23:10:38Z",
+      "side": 1,
+      "message": "Should show an error (given this can be passed in using a \"subpage\")",
+      "revId": "d9957c24bf55b50ee1704a1b14ded1b5bde8e5b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b8bc01b3",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialListPropertiesTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T23:10:38Z",
+      "side": 1,
+      "message": "could be split up into 3 test cases easily AFAIS",
+      "revId": "d9957c24bf55b50ee1704a1b14ded1b5bde8e5b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
