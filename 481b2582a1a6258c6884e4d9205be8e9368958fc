@@ -105,6 +105,24 @@
       "revId": "481b2582a1a6258c6884e4d9205be8e9368958fc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e76d7c5_5cb4cce4",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-17T12:00:55Z",
+      "side": 1,
+      "message": "So also pass in the exception message?",
+      "parentUuid": "2e76d7c5_7ca508b1",
+      "revId": "481b2582a1a6258c6884e4d9205be8e9368958fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
