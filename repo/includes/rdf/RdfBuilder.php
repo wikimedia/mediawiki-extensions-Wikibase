@@ -60,6 +60,8 @@ class RdfBuilder {
 	const NS_CC = 'cc'; // Creative Commons
 	const NS_GEO = 'geo'; // prefix for geolocations
 	const NS_PROV = 'prov'; // for provenance
+	const NS_OWL = 'owl'; // document uris
+
 	const SKOS_URI = 'http://www.w3.org/2004/02/skos/core#';
 	const SCHEMA_ORG_URI = 'http://schema.org/';
 	const CC_URI = 'http://creativecommons.org/ns#';
@@ -183,6 +185,7 @@ class RdfBuilder {
 				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
+				'owl' => 'http://www.w3.org/2002/07/owl#',
 				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#" ,
 				self::NS_DIRECT_CLAIM => $this->baseUri . 'assert/',
 				self::NS_VALUE => $this->baseUri . 'value/',
@@ -996,6 +999,24 @@ class RdfBuilder {
 			->say( self::NS_CC, 'license' )->is( self::LICENSE )
 			->say( self::NS_SCHEMA_ORG, 'softwareVersion' )->value( self::FORMAT_VERSION )
 			->say( self::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $timestamp ), 'xsd', 'dateTime'  );
+	}
+
+	/**
+	 * Produce short redirect data for redirect entity
+	 * @param RedirectEntityRevision $entityRevision
+	 * @return boolean true if short data was produced, false otherwise
+	 */
+	public function addRedirect( RedirectEntityRevision $entityRevision ) {
+		if( $this->shouldProduce( RdfProducer::PRODUCE_SHORT_REDIRECTS ) ) {
+			$sourceId = $entityRevision->getSource();
+			$targetId = $entityRevision->getEntity()->getId();
+
+			$this->entityWriter->about( self::NS_DATA, $sourceId )->say(self::NS_OWL, 'sameAs')->is( self::NS_DATA, $targetId );
+			$this->entityWriter->about( self::NS_ENTITY, $sourceId )->say(self::NS_OWL, 'sameAs')->is( self::NS_ENTITY, $targetId );
+
+			return true;
+		}
+		return false;
 	}
 
 }

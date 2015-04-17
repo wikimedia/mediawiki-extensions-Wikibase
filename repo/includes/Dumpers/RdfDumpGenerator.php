@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\RdfProducer;
 use Wikibase\RdfSerializer;
+use Wikibase\Lib\Store\ChainRedirectHandler;
 
 /**
  * RdfDumpGenerator generates an RDF dump of a given set of entities, excluding
@@ -66,6 +67,8 @@ class RdfDumpGenerator extends DumpGenerator {
 
 		$this->entitySerializer = $entitySerializer;
 		$this->entityRevisionLookup = $lookup;
+		$handler = new ChainRedirectHandler( $lookup );
+		$lookup->setRedirectHandler( $handler );
 	}
 
 	/**
@@ -153,7 +156,7 @@ class RdfDumpGenerator extends DumpGenerator {
 				$entityLookup,
 				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 				RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
-				RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES,
+				RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES | RdfProducer::PRODUCE_SHORT_REDIRECTS,
 				new HashBagOStuff()
 		);
 		return new RdfDumpGenerator( $output, $entityRevisionLookup, $entitySerializer, $entityPrefetcher );

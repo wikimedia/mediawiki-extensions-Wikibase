@@ -156,6 +156,11 @@ class RdfSerializer implements RdfProducer {
 
 		$builder = $this->newRdfBuilder();
 
+		if( $entityRevision instanceof RedirectEntityRevision && $builder->addRedirect( $entityRevision )) {
+			// only produce short redirect data here
+			return $builder->getRDF();
+		}
+
 		$builder->addEntityRevisionInfo(
 			$entityRevision->getEntity()->getId(),
 			$entityRevision->getRevisionId(),

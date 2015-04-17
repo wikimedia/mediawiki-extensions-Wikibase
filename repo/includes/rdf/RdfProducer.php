@@ -56,6 +56,11 @@ interface RdfProducer {
 	const PRODUCE_RESOLVED_ENTITIES = 256;
 
 	/**
+	 * Produce only short data on redirect
+	 */
+	const PRODUCE_SHORT_REDIRECTS = 512;
+
+	/**
 	 * All options turned on.
 	 */
 	const PRODUCE_ALL = 0xFFFF;

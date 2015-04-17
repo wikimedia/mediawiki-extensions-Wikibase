@@ -347,7 +347,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @throws InvalidArgumentException
 	 * @return EntityId[]
 	 */
-	public function listEntities( $entityType, $limit, EntityId $after = null ) {
+	public function listEntities( $entityType, $limit, EntityId $after = null, $allowRedirects = false ) {
 		if ( $entityType == null  ) {
 			$where = array();
 			//NOTE: needs to be id/type, not type/id, according to the definition of the relevant
@@ -362,7 +362,7 @@ class EntityPerPageTable implements EntityPerPage {
 			$orderBy = array( 'epp_entity_id' );
 		}
 
-		if ( $this->useRedirectTargetColumn ) {
+		if ( $this->useRedirectTargetColumn && !$allowRedirects ) {
 			$where[ 'epp_redirect_target' ] = null;
 		}
 

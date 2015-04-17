@@ -238,7 +238,7 @@ abstract class DumpScript extends Maintenance {
 	 * @return EntityIdPager
 	 */
 	private function makeIdQueryStream( $entityType ) {
-		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType );
+		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType, true );
 		return $stream;
 	}
 

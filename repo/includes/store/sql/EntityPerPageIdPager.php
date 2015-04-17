@@ -31,12 +31,19 @@ class EntityPerPageIdPager implements EntityIdPager {
 	protected $position = null;
 
 	/**
+	 * Allow redirect IDs
+	 * @var boolean
+	 */
+	protected $allowRedirects;
+
+	/**
 	 * @param EntityPerPage $entityPerPage
 	 * @param null|string $entityType The desired entity type, or null for any type.
 	 */
-	public function __construct( EntityPerPage $entityPerPage, $entityType = null ) {
+	public function __construct( EntityPerPage $entityPerPage, $entityType = null, $allowRedirects = false ) {
 		$this->entityPerPage = $entityPerPage;
 		$this->entityType = $entityType;
+		$this->allowRedirects = $allowRedirects;
 	}
 
 	/**
@@ -55,7 +62,7 @@ class EntityPerPageIdPager implements EntityIdPager {
 	 * be empty if there are no more entities to list from the given offset.
 	 */
 	public function fetchIds( $limit ) {
-		$ids = $this->entityPerPage->listEntities( $this->entityType, $limit, $this->position );
+		$ids = $this->entityPerPage->listEntities( $this->entityType, $limit, $this->position, $this->allowRedirects );
 
 		if ( !empty( $ids ) ) {
 			$this->position = end( $ids );

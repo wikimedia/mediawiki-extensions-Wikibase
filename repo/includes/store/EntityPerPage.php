@@ -50,11 +50,12 @@ interface EntityPerPage {
 	 * @param null|string $entityType The entity type to look for.
 	 * @param int $limit The maximum number of IDs to return.
 	 * @param EntityId $after Only return entities with IDs greater than this.
+	 * @param boolean $allowRedirects Allow entities which are redirect IDs
 	 *
 	 * @throws InvalidArgumentException
 	 * @return EntityId[]
 	 */
-	public function listEntities( $entityType, $limit, EntityId $after = null );
+	public function listEntities( $entityType, $limit, EntityId $after = null, $allowRedirects = false );
 
 	/**
 	 * Removes a link between an entity (or entity redirect) and a page
