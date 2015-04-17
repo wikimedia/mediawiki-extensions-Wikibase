@@ -25,7 +25,10 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		foreach ( $lines as $s ) {
 			$s = trim( $s, "\r\n" );
-			$normalized[] = $s;
+
+			if ( $s !== '' ) {
+				$normalized[] = $s;
+			}
 		}
 
 		return $normalized;
@@ -98,6 +101,90 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'Predicates', $rdf );
+	}
+
+	public function testPredicates_drain() {
+		$writer = $this->newWriter();
+
+		$writer->prefix( '', 'http://acme.test/' ); // empty prefix
+		$writer->start();
+
+		$writer->about( 'http://foobar.test/Bananas' )
+			->a( 'http://foobar.test/Fruit' ) // shorthand function a()
+			->say( '', 'name' ) // empty prefix
+			->text( 'Banana' )
+			->say( '', 'name' ) // redundant say( '', 'name' )
+			->text( 'Banane', 'de' );
+
+		$rdf1 = $writer->drain();
+		$this->assertNotEmpty( $rdf1 );
+
+		$writer->about( 'http://foobar.test/Apples' )
+			->say( '', 'name' ) // subsequent call to say( '', 'name' ) for a different subject
+			->text( 'Apple' );
+		$writer->finish();
+
+		$rdf2 = $writer->drain();
+		$this->assertNotEmpty( $rdf2 );
+
+		$this->assertOutputLines( 'Predicates', $rdf1 . "\n" . $rdf2 );
+	}
+
+	public function testPredicates_sub() {
+		$writer = $this->newWriter();
+
+		$writer->prefix( '', 'http://acme.test/' ); // empty prefix
+		$writer->start();
+
+		$sub = $writer->sub();
+
+		// output of the sub writer will appear after the output of the main writer.
+		$sub->about( 'http://foobar.test/Apples' )
+			->say( '', 'name' ) // subsequent call to say( '', 'name' ) for a different subject
+			->text( 'Apple' );
+
+		$writer->about( 'http://foobar.test/Bananas' )
+			->a( 'http://foobar.test/Fruit' ) // shorthand function a()
+			->say( '', 'name' ) // empty prefix
+			->text( 'Banana' )
+			->say( '', 'name' ) // redundant say( '', 'name' )
+			->text( 'Banane', 'de' );
+
+		$writer->finish();
+
+		$rdf = $writer->drain();
+		$this->assertOutputLines( 'Predicates', $rdf );
+	}
+
+	public function testPredicates_sub_drain() {
+		$writer = $this->newWriter();
+
+		$writer->prefix( '', 'http://acme.test/' ); // empty prefix
+		$writer->start();
+
+		$sub = $writer->sub();
+
+		$writer->about( 'http://foobar.test/Bananas' )
+			->a( 'http://foobar.test/Fruit' ) // shorthand function a()
+			->say( '', 'name' ) // empty prefix
+			->text( 'Banana' )
+			->say( '', 'name' ) // redundant say( '', 'name' )
+			->text( 'Banane', 'de' );
+
+		$rdf1 = $writer->drain();
+		$this->assertNotEmpty( $rdf1 );
+
+		// sub-writer should still be usable after drain()
+		$sub->about( 'http://foobar.test/Apples' )
+			->say( '', 'name' ) // subsequent call to say( '', 'name' ) for a different subject
+			->text( 'Apple' );
+
+		$writer->finish();
+
+		$rdf2 = $writer->drain();
+		$this->assertNotEmpty( $rdf2 );
+
+		$this->assertOutputLines( 'Predicates', $rdf1 . "\n" . $rdf2 );
 	}
 
 	public function testValues() {
