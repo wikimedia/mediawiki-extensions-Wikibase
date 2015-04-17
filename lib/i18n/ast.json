@@ -70,6 +70,12 @@
 	"datatypes-type-wikibase-item": "Elementu",
 	"datatypes-type-commonsMedia": "Ficheru multimedia de Commons",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "en $1 miles de millones d'años",
+	"wikibase-time-precision-Mannum": "en $1 millones d'años",
+	"wikibase-time-precision-annum": "en $1 años",
+	"wikibase-time-precision-millennium": "$1. mileniu",
+	"wikibase-time-precision-century": "$1. sieglu",
+	"wikibase-time-precision-10annum": "$1 décaes",
 	"wikibase-snakformatter-valuetype-mismatch": "El tipu de valor \"$1\" nun casa col tipu de propiedá \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Nun s'alcontró la propiedá $1, nun pudo determinase'l tipu de datos a usar."
 }

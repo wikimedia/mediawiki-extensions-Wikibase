@@ -6,7 +6,6 @@
 		]
 	},
 	"wikibase-client-desc": "Cliente pa la estensión Wikibase",
-	"specialpages-group-wikibaseclient": "Cliente de {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Enllaz al elementu del depósitu de datos coneutáu",
 	"wikibase-after-page-move": "Tamién pue [$1 anovar] l'elementu asociáu de {{WBREPONAME}} pa caltener los enllaces d'idioma na páxina treslladada.",
 	"wikibase-after-page-move-queued": "L'[$1 elementu de {{WBREPONAME}}] asociáu con esta páxina pronto s'actualizará automáticamente.",
@@ -44,6 +43,7 @@
 	"wikibase-rc-show-wikidata-pref": "Amosar les ediciones de {{WBREPONAME}} nos cambios recientes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edición de {{WBREPONAME}}",
+	"wikibase-replicationnote": "Tenga en cuenta que puen pasar dellos minutos fasta que los cambeos se vean en toles wikis",
 	"wikibase-watchlist-show-changes-pref": "Amosar les ediciones de {{WBREPONAME}} na so llista de vixilancia",
 	"wikibase-error-serialize-error": "Falló la serialización de los datos",
 	"wikibase-error-invalid-entity-id": "La ID qu'escribió ye desconocida pal sistema. Por favor, use una ID d'entidá válida.",

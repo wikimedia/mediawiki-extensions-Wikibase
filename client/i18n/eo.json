@@ -15,7 +15,7 @@
 	"wikibase-comment-linked": "Vikidatuma ero estis ligita al ĉi tiu paĝo.",
 	"wikibase-comment-unlink": "Ĉi tiu paĝo estis malligita de la Vikidatuma ero. La lingvaj ligiloj estas forigitaj.",
 	"wikibase-comment-restore": "Ligita vikidatuma ero estis restarigita. La lingvaj ligiloj ankaŭ estis restarigitaj.",
-	"wikibase-comment-update": "Vikidatuma ero ĝisdatigita.",
+	"wikibase-comment-update": "Ero en {{WBREPONAME}} ĝisdatigita.",
 	"wikibase-comment-sitelink-add": "Lingva ligilo aldonita: $1",
 	"wikibase-comment-sitelink-change": "Lingva ligilo ŝanĝita de $1 al $2",
 	"wikibase-comment-sitelink-remove": "Lingva ligilo forigita: $1",
