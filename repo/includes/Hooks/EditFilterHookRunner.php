@@ -7,20 +7,22 @@ use Hooks;
 use IContextSource;
 use InvalidArgumentException;
 use RequestContext;
+use RuntimeException;
 use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
-use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
  * Class to run the EditFilterMergedContent hook
  *
  * @since 0.5
+ *
  * @author Addshore
  */
 class EditFilterHookRunner {
@@ -62,22 +64,41 @@ class EditFilterHookRunner {
 	/**
 	 * Call EditFilterMergedContent hook, if registered.
 	 *
-	 * @param Entity $newEntity The modified entity we are trying to save
+	 * @param Entity|EntityRedirect|null $new The entity or redirect we are trying to save
 	 * @param User $user the user performing the edit
 	 * @param string $summary The edit summary
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	public function run( Entity $newEntity, User $user, $summary ) {
+	public function run( $new, User $user, $summary ) {
 		$filterStatus = Status::newGood();
 
 		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {
 			return $filterStatus;
 		}
 
-		$entityContent = $this->entityContentFactory->newFromEntity( $newEntity );
+		if ( $new instanceof Entity ) {
+			$entityContent = $this->entityContentFactory->newFromEntity( $new );
+			$context = $this->getContextForEditFilter( $new->getId(), $new->getType() );
 
-		$context = $this->getContextForEditFilter( $newEntity );
+		} elseif ( $new instanceof EntityRedirect ){
+			$entityContent = $this->entityContentFactory->newFromRedirect( $new );
+			if ( $entityContent === null ) {
+				throw new RuntimeException(
+					'Cannot get EntityContent from EntityRedirect of type ' .
+					$new->getEntityId()->getEntityType()
+				);
+			}
+
+			$context = $this->getContextForEditFilter(
+				$new->getEntityId(),
+				$new->getEntityId()->getEntityType()
+			);
+
+		} else {
+			throw new InvalidArgumentException( '$new must be instance of Entity or EntityRedirect' );
+		}
 
 		if ( !wfRunHooks( 'EditFilterMergedContent',
 			array( $context, $entityContent, &$filterStatus, $summary, $user, false ) ) ) {
@@ -90,18 +111,17 @@ class EditFilterHookRunner {
 	}
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param EntityId|null $entityId
+	 * @param string $entityType
 	 *
 	 * @return IContextSource
 	 */
-	private function getContextForEditFilter( EntityDocument $entity ) {
-		$entityId = $entity->getId();
+	private function getContextForEditFilter( EntityId $entityId = null, $entityType ) {
 		if( $entityId !== null ) {
 			$title = $this->titleLookup->getTitleForId( $entityId );
 			$context = clone $this->context;
 		} else {
 			$context = $this->context;
-			$entityType = $entity->getType();
 
 			// This constructs a "fake" title of the form Property:NewProperty,
 			// where the title text is assumed to be name of the special page used
