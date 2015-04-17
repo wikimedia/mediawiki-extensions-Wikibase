@@ -32,11 +32,6 @@ class PruneChanges extends Maintenance {
 	 */
 	private $ignoreDispatch = false;
 
-	/**
-	 * @var int The amount of rows to delete at once.
-	 */
-	private $pruneLimit = 0;
-
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Prune the Wikibase changes table to a maximum number of entries";
@@ -47,13 +42,13 @@ class PruneChanges extends Maintenance {
 		$this->addOption( 'keep-minutes', 'Keep changes at least N minutes.', false, true, 'm' );
 		$this->addOption( 'grace-minutes', 'Keep changes at least N more minutes after they have been dispatched.', false, true, 'g' );
 
-		$this->addOption( 'limit', 'Only prune up to N rows at once.', false, true, 'l' );
-
 		$this->addOption( 'force', 'Run regardless of whether the PID file says it is running already.',
 						 false, false, 'f' );
 
 		$this->addOption( 'ignore-dispatch', 'Ignore whether changes have been dispatched or not.',
 						false, false, 'D' );
+
+		$this->setBatchSize( 500 );
 	}
 
 	public function execute() {
@@ -91,14 +86,7 @@ class PruneChanges extends Maintenance {
 			$this->graceSeconds = 1 * 60 * 60;
 		}
 
-		$this->pruneLimit = intval( $this->getOption( 'limit', 25000 ) );
-
-		$until = $this->getCutoffTimestamp();
-		$this->output( date( 'H:i:s' ) . " pruning entries older than "
-			. wfTimestamp( TS_ISO_8601, $until ) . "\n" );
-
-		$deleted = $this->pruneChanges( $until );
-		$this->output( date( 'H:i:s' ) . " $deleted rows pruned.\n" );
+		$this->doPrune();
 
 		$pidLock->removeLock(); // delete lockfile on normal exit
 	}
@@ -134,7 +122,7 @@ class PruneChanges extends Maintenance {
 	}
 
 	/**
-	 * Changes the cutoff timestamp to not affect more than $this->pruneLimit
+	 * Changes the cutoff timestamp to not affect more than $this->mBatchSize
 	 * rows, if needed.
 	 *
 	 * @param int $until
@@ -149,12 +137,30 @@ class PruneChanges extends Maintenance {
 			array( 'change_time < ' . $dbr->addQuotes( wfTimestamp( TS_MW, $until ) ) ),
 			__METHOD__,
 			array(
-				'OFFSET' => $this->pruneLimit,
+				'OFFSET' => $this->mBatchSize,
 				'ORDER BY' => 'change_time ASC',
 			)
 		);
 
 		return $changeTime ? intval( $changeTime ) : $until;
+	}
+
+	private function doPrune() {
+		while( true ) {
+			wfWaitForSlaves();
+
+			$until = $this->getCutoffTimestamp();
+
+			$this->output( date( 'H:i:s' ) . " pruning entries older than "
+				. wfTimestamp( TS_ISO_8601, $until ) . "\n" );
+
+			$affected = $this->pruneChanges( $until );
+			$this->output( date( 'H:i:s' ) . " $affected rows pruned.\n" );
+
+			if ( $affected === 0 ) {
+				break;
+			}
+		}
 	}
 
 	/**
