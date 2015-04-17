@@ -29,6 +29,8 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RedirectHandler;
+use Wikibase\Lib\Store\ThrowingRedirectHandler;
 
 /**
  * Mock repository for use in tests.
@@ -95,6 +97,15 @@ class MockRepository implements
 	private $maxRevisionId = 0;
 
 	/**
+	 * @var RedirectHandler
+	 */
+	private $redirectHandler;
+
+	public function __construct() {
+		$this->redirectHandler = new ThrowingRedirectHandler();
+	}
+
+	/**
 	 * @see EntityLookup::getEntity
 	 *
 	 * @param EntityId $entityId
@@ -123,7 +134,7 @@ class MockRepository implements
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
-			throw new UnresolvedRedirectException( $this->redirects[$key]->getTargetId() );
+			return $this->redirectHandler->handleRedirect( $entityId, $this->redirects[$key]->getTargetId() );
 		}
 
 		if ( empty( $this->entities[$key] ) ) {
@@ -805,4 +816,11 @@ class MockRepository implements
 		return null;
 	}
 
+	/**
+	 * (non-PHPdoc)
+	 * @see \Wikibase\Lib\Store\EntityRevisionLookup::setRedirectHandler()
+	 */
+	public function setRedirectHandler( RedirectHandler $handler ) {
+		$this->redirectHandler = $handler;
+	}
 }
