@@ -95,9 +95,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
-	/**
-	 * @deprecated Please override the services in the API and use getTestEntity instead
-	 */
 	protected function initTestEntities( array $handles, array $idMap = array() ) {
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
@@ -122,8 +119,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	/**
-	 * @deprecated Please override the services in the API and use getTestEntity instead
-	 *
 	 * Loads an entity from the database (via an API call).
 	 */
 	protected function loadEntity( $id ) {
@@ -138,7 +133,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	/**
-	 * @deprecated Please override the services in the API and use getTestEntity instead
 	 * @see doTestQueryExceptions in IndependentWikibaseApiTestCase
 	 *
 	 * Do the test for exceptions from Api queries.
