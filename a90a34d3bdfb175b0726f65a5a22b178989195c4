@@ -88,6 +88,23 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_f8f04990",
+        "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-17T23:25:32Z",
+      "side": 1,
+      "message": "That var really does not pay for itself :)",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_18af4d93",
         "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
         "patchSetId": 4
@@ -116,6 +133,23 @@
       "writtenOn": "2015-04-17T22:50:40Z",
       "side": 1,
       "message": "If the hook is not getting fired this wont even be executed... you need to make sure this actually fires (pass in a variable from the outer scope, change its value here and then do an assertion on that value in the test case).",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1810adac",
+        "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-17T23:25:32Z",
+      "side": 1,
+      "message": "I\u0027m finding it quite hard to understand what is actually being tested.\n\nThe first test just asserts the status is good, which is odd. I\u0027m not seeing any assertion in the second test method. Am I missing something there, or will you get a warning in strict mode? \n\nBoth methods specify that they test the run method. They also specify some condition, one being the absence of registered hooks and the other the presence of a new entity. They do not specify what the desired behaviour they test is though.\n\nJust spotted the assertion in the second method.\n\nThese tests basically just execute the code and do some very rudimentary assertion. That\u0027s an integration test essentially. No problem with having them, though we should keep them separate from the unit tests. Also, the new class you introduced probably should have unit tests.\n\nOh nvm, it uses too much MediaWiki code. Since you just moved out the code from EditEntity and are not adding something new, you are not responsible for tackling this anyway.",
       "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
