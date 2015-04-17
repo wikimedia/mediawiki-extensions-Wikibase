@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_183d0d8b",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:29:26Z",
+      "side": 1,
+      "message": "this method is getting large... time to split it?",
+      "revId": "2852b1b85141caa74bf7754312d4e3f71accea9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_583395c0",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:29:26Z",
+      "side": 1,
+      "message": "space after if",
+      "revId": "2852b1b85141caa74bf7754312d4e3f71accea9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7838d99b",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:29:26Z",
+      "side": 1,
+      "message": "space after if",
+      "revId": "2852b1b85141caa74bf7754312d4e3f71accea9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d846a526",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:29:26Z",
+      "side": 1,
+      "message": "array_unique works on the string representation of these itemids... probably ok",
+      "revId": "2852b1b85141caa74bf7754312d4e3f71accea9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_3859f101",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:29:26Z",
+      "side": 1,
+      "message": "missing space",
+      "revId": "2852b1b85141caa74bf7754312d4e3f71accea9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d86d4598",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:29:26Z",
+      "side": 1,
+      "message": "why not pass this to the constructor?",
+      "revId": "2852b1b85141caa74bf7754312d4e3f71accea9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_780699d3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:29:26Z",
+      "side": 1,
+      "message": "a new line after this would greatly help readability IMO",
+      "revId": "2852b1b85141caa74bf7754312d4e3f71accea9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f86a897d",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-17T22:29:26Z",
+      "side": 1,
+      "message": "why not pass this to the constructor?",
+      "revId": "2852b1b85141caa74bf7754312d4e3f71accea9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
