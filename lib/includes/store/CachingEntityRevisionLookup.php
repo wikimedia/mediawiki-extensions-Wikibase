@@ -221,4 +221,12 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		// XXX: if $this->lookup supports purging, purge?
 	}
 
+	/**
+	 * (non-PHPdoc)
+	 * @see \Wikibase\Lib\Store\EntityRevisionLookup::setRedirectHandler()
+	 */
+	public function setRedirectHandler( RedirectHandler $handler ) {
+		$this->lookup->setRedirectHandler( $handler );
+	}
+
 }

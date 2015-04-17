@@ -18,17 +18,17 @@ class EntityRevision {
 	/**
 	 * @var Entity
 	 */
-	private $entity;
+	protected $entity;
 
 	/**
 	 * @var int
 	 */
-	private $revisionId;
+	protected $revisionId;
 
 	/**
 	 * @var string
 	 */
-	private $mwTimestamp;
+	protected $mwTimestamp;
 
 	/**
 	 * @param Entity $entity

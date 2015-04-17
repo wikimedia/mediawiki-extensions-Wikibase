@@ -63,4 +63,9 @@ interface EntityRevisionLookup {
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE );
 
+	/**
+	 * Set redirect handler for the lookup.
+	 * @param RedirectHandler $handler
+	 */
+	public function setRedirectHandler( RedirectHandler $handler );
 }

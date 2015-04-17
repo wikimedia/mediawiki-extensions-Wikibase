@@ -32,6 +32,11 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	private $entityMetaDataAccessor;
 
 	/**
+	 * @var RedirectHandler
+	 */
+	private $redirectHandler;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
@@ -46,6 +51,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$this->contentCodec = $contentCodec;
 
 		$this->entityMetaDataAccessor = $entityMetaDataAccessor;
+
+		$this->redirectHandler = new ThrowingRedirectHandler();
 	}
 
 	/**
@@ -84,8 +91,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			list( $entityRevision, $redirect ) = $this->loadEntity( $row );
 
 			if ( $redirect !== null ) {
-				// TODO: Optionally follow redirects. Doesn't make sense if a revision ID is given.
-				throw new UnresolvedRedirectException( $redirect->getTargetId() );
+				return $this->redirectHandler->handleRedirect( $entityId, $redirect->getTargetId() );
 			}
 
 			if ( $entityRevision === null ) {
@@ -201,4 +207,11 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		return $blob;
 	}
 
+	/**
+	 * (non-PHPdoc)
+	 * @see \Wikibase\Lib\Store\EntityRevisionLookup::setRedirectHandler()
+	 */
+	public function setRedirectHandler( RedirectHandler $handler ) {
+		$this->redirectHandler = $handler;
+	}
 }
