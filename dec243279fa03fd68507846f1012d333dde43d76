@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ed113e2_bb907b99",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "What about FormSpecialPage? I haven\u0027t looked at it myself to much, but this seems to be what it\u0027s made for.",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_fb6043ce",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "this variable seems pointless to me",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1bf747f4",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "Equivalent to $this-\u003eshowErrorHTML( $msg-\u003eparse(), \u0027error\u0027 );",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_bbb95b2b",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the third parameter depend on the user\u0027s rights to to be consistent with the UI (and core) which marks changes as bot if the user has the right per default?",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_3844916e",
+        "filename": "repo/tests/phpunit/includes/EntityModificationTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "fully qualified class name is kind of ugly here",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e76d7c5_bc93a0a5",
         "filename": "repo/tests/phpunit/includes/EntityModificationTestHelper.php",
         "patchSetId": 1
@@ -13,6 +98,143 @@
       "writtenOn": "2015-04-17T11:05:13Z",
       "side": 1,
       "message": "My only thoughts here are rather than a bool opt this could be in a separate method.\nNot really a concern given this is only a helper class..",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d828e598",
+        "filename": "repo/tests/phpunit/includes/EntityModificationTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "Ok with me given this is only a test helper",
+      "parentUuid": "2e76d7c5_bc93a0a5",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_98325d05",
+        "filename": "repo/tests/phpunit/includes/EntityModificationTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "space after if",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7b00d304",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "array $params",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5b706fa3",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "SpecialPageTestBase is part of Wikibase, so modifying it would have been easy enough, I guess",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1b050714",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "qualified class name :(",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_9b46d753",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "nice hack",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_9b2fb785",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "what?",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1b53c71b",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T01:00:03Z",
+      "side": 1,
+      "message": "wuut?",
       "revId": "dec243279fa03fd68507846f1012d333dde43d76",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
