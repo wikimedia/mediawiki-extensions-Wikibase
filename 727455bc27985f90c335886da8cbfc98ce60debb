@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_d87a25b9",
+        "filename": "repo/tests/phpunit/data/api/getclaims.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T00:09:45Z",
+      "side": 1,
+      "message": "Is there any kind of precedence to add this to the api tag directly? The only other lastrevid in an api module I\u0027m aware of is action\u003dquery\u0026prop\u003dinfo (eg. https://www.wikidata.org/w/api.php?action\u003dquery\u0026titles\u003dQ1%7CQ42\u0026prop\u003dinfo\u0026format\u003dxml ) but that\u0027s not on the api tag directly. I\u0027m not fundamentally opposed to this, just needs considerations and I\u0027d prefer to have more opinions on this.",
+      "revId": "727455bc27985f90c335886da8cbfc98ce60debb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b88ba1c3",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T00:09:45Z",
+      "side": 1,
+      "message": "should replace more than just the revid (like lastrevid\u003d\"...\"), otherwise this might fail from time to time, given there are more numbers in the expected output.",
+      "revId": "727455bc27985f90c335886da8cbfc98ce60debb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
