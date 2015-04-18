@@ -67,7 +67,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$this->initServices(
 			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
 			WikibaseRepo::getDefaultInstance()->getSiteStore(),
-			WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache()
+			WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkStore()
 		);
 	}
 

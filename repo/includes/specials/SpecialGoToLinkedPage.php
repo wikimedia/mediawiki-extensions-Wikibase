@@ -44,7 +44,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 		$this->initServices(
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getStore()->newSiteLinkCache(),
+			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$wikibaseRepo->getStore()->newEntityPerPage()
 		);
 	}

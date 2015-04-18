@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * Implementation of SubscriptionLookup based on a SiteLinkCache.
+ * Implementation of SubscriptionLookup based on a SiteLinkStore.
  *
  * @since 0.5
  *

@@ -19,7 +19,7 @@ use Wikibase\DataModel\SiteLink;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SiteLinkTable extends DBAccessBase implements SiteLinkCache, SiteLinkConflictLookup {
+class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConflictLookup {
 
 	/**
 	 * @since 0.1
@@ -84,7 +84,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkCache, SiteLinkConfl
 	}
 
 	/**
-	 * @see SiteLinkCache::saveLinksOfItem
+	 * @see SiteLinkStore::saveLinksOfItem
 	 *
 	 * @since 0.1
 	 *
@@ -203,7 +203,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkCache, SiteLinkConfl
 
 
 	/**
-	 * @see SiteLinkCache::deleteLinksOfItem
+	 * @see SiteLinkStore::deleteLinksOfItem
 	 *
 	 * @since 0.1
 	 *
@@ -340,7 +340,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkCache, SiteLinkConfl
 	}
 
 	/**
-	 * @see SiteLinkCache::clear
+	 * @see SiteLinkStore::clear
 	 *
 	 * @since 0.2
 	 *

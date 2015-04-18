@@ -6,14 +6,14 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * Contains methods for interaction with the entity cache.
+ * Contains methods for write actions on the sitelink store.
  *
  * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface SiteLinkCache extends SiteLinkLookup {
+interface SiteLinkStore extends SiteLinkLookup {
 
 	/**
 	 * Saves the links for the provided item.

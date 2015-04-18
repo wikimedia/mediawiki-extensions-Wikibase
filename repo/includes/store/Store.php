@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
@@ -30,9 +30,9 @@ interface Store {
 	/**
 	 * @since 0.1
 	 *
-	 * @return SiteLinkCache
+	 * @return SiteLinkStore
 	 */
-	public function newSiteLinkCache();
+	public function newSiteLinkStore();
 
 	/**
 	 * Removes all data from the store.
