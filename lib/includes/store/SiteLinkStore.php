@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface SiteLinkCache extends SiteLinkLookup {
+interface SiteLinkStore extends SiteLinkLookup {
 
 	/**
 	 * Saves the links for the provided item.

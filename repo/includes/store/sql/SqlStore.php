@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -191,7 +191,7 @@ class SqlStore implements Store {
 	 * @since 0.1
 	 */
 	public function clear() {
-		$this->newSiteLinkCache()->clear();
+		$this->newSiteLinkStore()->clear();
 		$this->getTermIndex()->clear();
 		$this->newEntityPerPage()->clear();
 	}
@@ -475,13 +475,13 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::newSiteLinkCache
+	 * @see Store::newSiteLinkStore
 	 *
 	 * @since 0.1
 	 *
-	 * @return SiteLinkCache
+	 * @return SiteLinkStore
 	 */
-	public function newSiteLinkCache() {
+	public function newSiteLinkStore() {
 		return new SiteLinkTable( 'wb_items_per_site', false );
 	}
 
