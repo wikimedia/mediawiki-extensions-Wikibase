@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_66b83675",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:22:32Z",
+      "side": 1,
+      "message": "$new is no longer guaranteed to be an Entity (or an EntityDocument)",
+      "revId": "bca8adfd87e36d555b3cc4b434a84d80784433cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
