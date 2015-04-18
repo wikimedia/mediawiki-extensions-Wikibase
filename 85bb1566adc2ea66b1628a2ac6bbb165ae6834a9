@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_e6618602",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:57:22Z",
+      "side": 1,
+      "message": "Without would have been nicer, IMO",
+      "revId": "85bb1566adc2ea66b1628a2ac6bbb165ae6834a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_a65b7e56",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:57:22Z",
+      "side": 1,
+      "message": "new line before the if would have been nice",
+      "revId": "85bb1566adc2ea66b1628a2ac6bbb165ae6834a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_065fea45",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:57:22Z",
+      "side": 1,
+      "message": "missing space after if",
+      "revId": "85bb1566adc2ea66b1628a2ac6bbb165ae6834a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
