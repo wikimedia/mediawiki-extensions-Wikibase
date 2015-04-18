@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_c606c223",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T14:39:13Z",
+      "side": 1,
+      "message": "The reason I didn\u0027t do this is upon visiting the page we don\u0027t know what type of entity the user wants to redirect. (Could be item, property, or even something else)\nThus we cant really just assume item-redirect needs to be checked.",
+      "parentUuid": "0ed113e2_06784abe",
+      "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_2671cedd",
         "filename": "repo/includes/specials/SpecialRedirectEntity.php",
         "patchSetId": 2
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_21053814",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T14:39:13Z",
+      "side": 1,
+      "message": ":)",
+      "parentUuid": "0ed113e2_2671cedd",
+      "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_a684dea4",
         "filename": "repo/includes/specials/SpecialRedirectEntity.php",
         "patchSetId": 2
@@ -81,6 +117,24 @@
       "writtenOn": "2015-04-18T13:47:05Z",
       "side": 1,
       "message": "You call $this-\u003egetOutput() a lot... why not put it into $out or something like that?",
+      "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8100a405",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T14:39:13Z",
+      "side": 1,
+      "message": "Willdo",
+      "parentUuid": "0ed113e2_a684dea4",
       "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
