@@ -265,7 +265,6 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		// -- set up params ---------------------------------
 		$params = array(
-			'action' => 'wbmergeitems',
 			'fromid' => 'Q1',
 			'toid' => 'Q2',
 			'summary' => 'CustomSummary!',
@@ -318,9 +317,6 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @dataProvider provideExceptionParamsData
 	 */
 	public function testMergeItemsParamsExceptions( $params, $expected ) {
-		// -- set any defaults ------------------------------------
-		$params['action'] = 'wbmergeitems';
-
 		$html = $this->executeSpecialMergeItems( $params );
 		$this->assertError( $expected, $html );
 	}
