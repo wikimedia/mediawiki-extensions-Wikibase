@@ -178,7 +178,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
-		$expected = array( 'entities' => array( 'Q123098' => array(
+		$expected = array( 'entities' => array( 'Q1230000' => array(
 			'pageid' => 123, //mocked
 			'ns' => 456, //mocked
 			'title' => 'MockPrefixedText', //mocked
@@ -186,6 +186,10 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			'type' => 'item',
 			'lastrevid' => 33,
 			'modified' => '2013-11-26T20:29:23Z',
+			'redirects' => array(
+				'from' => 'Q1230000',
+				'to' => 'Q123098',
+			),
 			'aliases' => array(
 				'en' => array(
 					array(
@@ -296,7 +300,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		) ) );
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addEntityRevision( null, $entityRevision, new SerializationOptions(), $props );
+		$resultBuilder->addEntityRevision( 'Q1230000', $entityRevision, new SerializationOptions(), $props );
 
 		$data = $result->getResultData( null, array(
 			'BC' => array(),

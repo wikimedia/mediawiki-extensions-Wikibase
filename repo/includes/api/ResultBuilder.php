@@ -268,8 +268,10 @@ class ResultBuilder {
 	/**
 	 * Get serialized entity for the EntityRevision and add it to the result
 	 *
-	 * @param string|null $key The key for the entity in the 'entities' structure.
+	 * @param string|null $sourceEntityIdSerialization EntityId used to retreive $entityRevision
+	 *        Used as the key for the entity in the 'entities' structure and for adding redirect info
 	 *        Will default to the entity's serialized ID if null.
+	 *        If given this must be the entity id before any redirects were resolved.
 	 * @param EntityRevision $entityRevision
 	 * @param SerializationOptions|null $options
 	 * @param array|string $props a list of fields to include, or "all"
@@ -278,7 +280,7 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addEntityRevision(
-		$key,
+		$sourceEntityIdSerialization,
 		EntityRevision $entityRevision,
 		SerializationOptions
 		$options = null,
@@ -288,8 +290,8 @@ class ResultBuilder {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
 
-		if ( $key === null ) {
-			$key = $entityId->getSerialization();
+		if ( $sourceEntityIdSerialization === null ) {
+			$sourceEntityIdSerialization = $entityId->getSerialization();
 		}
 
 		$record = array();
@@ -312,6 +314,12 @@ class ResultBuilder {
 				$record['lastrevid'] = intval( $entityRevision->getRevisionId() );
 				$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
 			}
+			if ( $sourceEntityIdSerialization !== $entityId->getSerialization() ) {
+				$record['redirects'] = array(
+					'from' => $sourceEntityIdSerialization,
+					'to' => $entityId->getSerialization()
+				);
+			}
 
 			//FIXME: $props should be used to filter $entitySerialization!
 			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
@@ -329,7 +337,7 @@ class ResultBuilder {
 			$record = array_merge( $record, $entitySerialization );
 		}
 
-		$this->appendValue( array( 'entities' ), $key, $record, 'entity' );
+		$this->appendValue( array( 'entities' ), $sourceEntityIdSerialization, $record, 'entity' );
 	}
 
 	/**
