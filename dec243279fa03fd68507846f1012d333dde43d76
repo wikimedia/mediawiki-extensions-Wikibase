@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_46217299",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T09:17:40Z",
+      "side": 1,
+      "message": "Does this even happen in special pages?\nThe way I see it a bot shouldn\u0027t be using a special page.\nAnd no fast editing is going to be taking place through the special page.",
+      "parentUuid": "0ed113e2_bbb95b2b",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_3844916e",
         "filename": "repo/tests/phpunit/includes/EntityModificationTestHelper.php",
         "patchSetId": 1
@@ -173,6 +191,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_06336af4",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T09:17:40Z",
+      "side": 1,
+      "message": "This is copied from another one of our special page tests (merge) this could likely be fixed in both at once after this is merged.",
+      "parentUuid": "0ed113e2_5b706fa3",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_1b050714",
         "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
         "patchSetId": 1
@@ -201,6 +237,24 @@
       "writtenOn": "2015-04-18T01:00:03Z",
       "side": 1,
       "message": "nice hack",
+      "revId": "dec243279fa03fd68507846f1012d333dde43d76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_c62c8292",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialRedirectEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T09:17:40Z",
+      "side": 1,
+      "message": "again, stolen from somewhere else :)",
+      "parentUuid": "0ed113e2_9b46d753",
       "revId": "dec243279fa03fd68507846f1012d333dde43d76",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
