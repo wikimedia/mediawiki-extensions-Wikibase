@@ -40,8 +40,8 @@ class SpecialNewItem extends SpecialNewEntity {
 	protected function prepareArguments() {
 		parent::prepareArguments();
 
-		$this->site = $this->getRequest()->getVal( 'site', null );
-		$this->page = $this->getRequest()->getVal( 'page', null );
+		$this->site = $this->getRequest()->getVal( 'site' );
+		$this->page = $this->getRequest()->getVal( 'page' );
 	}
 
 	/**
