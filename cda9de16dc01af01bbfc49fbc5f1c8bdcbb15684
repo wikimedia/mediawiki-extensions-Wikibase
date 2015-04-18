@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_6667d623",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:47:05Z",
+      "side": 1,
+      "message": "missing Qqq",
+      "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_e67ae6b8",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:47:05Z",
+      "side": 1,
+      "message": "message keys are actually wikibase-entityredirect-*",
+      "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_06784abe",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:47:05Z",
+      "side": 1,
+      "message": "\"parent::__construct( \u0027RedirectEntity\u0027, \u0027item-redirect\u0027 );\" otherwise the form will also show up for users that can\u0027t actually create redirects (they still wont be able to save, though).",
+      "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2671cedd",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:47:05Z",
+      "side": 1,
+      "message": "missing space between parentheses",
+      "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_a684dea4",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-18T13:47:05Z",
+      "side": 1,
+      "message": "You call $this-\u003egetOutput() a lot... why not put it into $out or something like that?",
+      "revId": "cda9de16dc01af01bbfc49fbc5f1c8bdcbb15684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
