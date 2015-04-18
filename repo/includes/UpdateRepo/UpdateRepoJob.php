@@ -13,6 +13,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -54,6 +55,11 @@ abstract class UpdateRepoJob extends Job {
 	protected $entityPermissionChecker;
 
 	/**
+	 * @var EditFilterHookRunner
+	 */
+	private $editFilterHookRunner;
+
+	/**
 	 * @see Job::__construct
 	 *
 	 * @param string $command
@@ -64,12 +70,18 @@ abstract class UpdateRepoJob extends Job {
 		parent::__construct( $command, $title, $params );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
+		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
+
 		$this->initRepoJobServices(
-			$wikibaseRepo->getEntityTitleLookup(),
+			$titleLookup,
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityPermissionChecker()
+			$wikibaseRepo->getEntityPermissionChecker(),
+			new EditFilterHookRunner(
+				$titleLookup,
+				$wikibaseRepo->getEntityContentFactory()
+			)
 		);
 	}
 
@@ -78,13 +90,15 @@ abstract class UpdateRepoJob extends Job {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
-		EntityPermissionChecker $entityPermissionChecker
+		EntityPermissionChecker $entityPermissionChecker,
+		EditFilterHookRunner $editFilterHookRunner
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityPermissionChecker = $entityPermissionChecker;
+		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
 
 	/**
@@ -170,6 +184,7 @@ abstract class UpdateRepoJob extends Job {
 			$this->entityPermissionChecker,
 			$item,
 			$user,
+			$this->editFilterHookRunner,
 			true
 		);
 

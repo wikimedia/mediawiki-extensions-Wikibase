@@ -88,6 +88,17 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		return $summaryFormatter;
 	}
 
+	private function getMockEditFitlerHookRunner () {
+		$runner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->setMethods( array( 'run' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$runner->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+		return $runner;
+	}
+
 	public function runProvider() {
 		return array(
 			array( true, false, 'Delete me' ),
@@ -132,7 +143,8 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$this->getSummaryFormatter(),
 			$this->getEntityPermissionChecker(),
-			$this->getSiteStore( $titleExists )
+			$this->getSiteStore( $titleExists ),
+			$this->getMockEditFitlerHookRunner()
 		);
 
 		$job->run();
