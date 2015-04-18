@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_3b448b6e",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T10:23:15Z",
+      "side": 1,
+      "message": "Yes!",
+      "parentUuid": "0ed113e2_f8184925",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_38bd71d2",
         "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-17T22:50:40Z",
       "side": 1,
       "message": "Not sure this namespace is appropriate... until now it only featured hook handlers, not callers. I guess one could interpret it to feature hook interactors in general...",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_e69986c9",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T10:23:15Z",
+      "side": 1,
+      "message": "I was also unsure about the NS and nearly just stuck the first version in Wikibase\\Repo.\n\nOpen to suggestions.",
+      "parentUuid": "0ed113e2_38bd71d2",
       "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -82,6 +118,24 @@
       "side": 1,
       "message": "Yeah, no global access to anything part of Wikibase should happen here, since we have full control over how the object gets instantiated.",
       "parentUuid": "0ed113e2_b8f161ca",
+      "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1b3f47d5",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-18T10:23:15Z",
+      "side": 1,
+      "message": "Wow, yes, this is one that I missed...",
+      "parentUuid": "0ed113e2_38ffb164",
       "revId": "a90a34d3bdfb175b0726f65a5a22b178989195c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
