@@ -24,5 +24,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون",
 	"wikibase-pageinfo-entity-id": "د {{WBREPONAME}} توکي پېژند",
 	"wikibase-otherprojects": "نورې پروژې",
-	"wikibase-otherprojects-beta-message": "د نورو پروژو څنگپټه"
+	"wikibase-otherprojects-beta-message": "د نورو پروژو څنگپټه",
+	"wikibase-otherprojects-beta-description": "د \"{{int:wikibase-otherprojects}}\" يوه برخه څنگپټې کې ورگډوي چې د ويکيمېډيا د نورو پروژو سره تړنې د {{WBREPONAME}} اومتوک پر بنسټ وربرابروي."
 }

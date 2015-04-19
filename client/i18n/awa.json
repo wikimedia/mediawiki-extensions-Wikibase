@@ -5,7 +5,14 @@
 		]
 	},
 	"tooltip-t-wikibase": "सम्बद्ध डाटा भण्डार प्रविष्टि की कड़ी",
+	"wikibase-comment-update": "{{WBREPONAME}} आइटम परिवर्तित",
 	"wikibase-dataitem": "{{WBREPONAME}} प्रविष्टि",
 	"wikibase-editlinks": "कड़ी संपादित करें",
-	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी संपादित करें"
+	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी संपादित करें",
+	"wikibase-rc-hide-wikidata": "विकिडेटा $1",
+	"wikibase-rc-hide-wikidata-hide": "लुकुआवा जाय",
+	"wikibase-rc-hide-wikidata-show": "देखावा जाय",
+	"wikibase-rc-wikibase-edit-letter": "डा",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} सम्पादन",
+	"wikibase-otherprojects": "अउर प्रोजेक्ट"
 }
