@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f9704809",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-19T22:50:38Z",
+      "side": 1,
+      "message": "missing space after if",
+      "revId": "b7b01b5aaa2fa1f795bc15c26517d04603bee9d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b98e40d4",
+        "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-19T22:50:38Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "b7b01b5aaa2fa1f795bc15c26517d04603bee9d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1982eca9",
+        "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-19T22:50:38Z",
+      "side": 1,
+      "message": "Putting a random NS here is not a good idea... either use a well known one or none (well NS_MAIN)... but this namespace might or might not exist, but you assume it doesn\u0027t exist.",
+      "revId": "b7b01b5aaa2fa1f795bc15c26517d04603bee9d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f984c8b7",
+        "filename": "repo/tests/phpunit/includes/Hooks/EditFilterHookRunnerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-19T22:50:38Z",
+      "side": 1,
+      "message": "missing space",
+      "revId": "b7b01b5aaa2fa1f795bc15c26517d04603bee9d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
