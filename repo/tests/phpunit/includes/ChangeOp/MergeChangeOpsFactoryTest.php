@@ -38,12 +38,14 @@ class MergeChangeOpsFactoryTest extends PHPUnit_Framework_TestCase {
 			$mockProvider->getMockGuidValidator(),
 			$mockProvider->getMockGuidParser( $toItemId ),
 			$mockProvider->getMockSnakValidator(),
-			$mockProvider->getMockTermValidatorFactory()
+			$mockProvider->getMockTermValidatorFactory(),
+			MockSiteStore::newFromTestSites()
 		);
 
 		return new MergeChangeOpsFactory(
 			$constraintProvider,
-			$changeOpFactoryProvider
+			$changeOpFactoryProvider,
+			MockSiteStore::newFromTestSites()
 		);
 	}
 
