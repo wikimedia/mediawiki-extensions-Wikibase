@@ -1070,4 +1070,15 @@ class WikibaseRepo {
 		return new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() );
 	}
 
+	/**
+	 * @return EntityIdFormatterProvider
+	 */
+	public function newEntityIdFormatterProvider() {
+		return new EntityIdFormatterProvider(
+			$this->getLanguageFallbackChainFactory(),
+			$this->getTermLookup(),
+			$this->getTermBuffer()
+		);
+	}
+
 }
