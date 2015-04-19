@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_dc2c5292",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-19T23:37:16Z",
+      "side": 1,
+      "message": "Don\u0027t show the error in case no data type was given (like when just accessing Special:ListProperties) or (and I think I\u0027d prefer that) just show all properties in that case.",
+      "revId": "b54d590df1efb0356027949c0460e26743e0e309",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5c214299",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialListPropertiesTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-19T23:37:16Z",
+      "side": 1,
+      "message": "we usually use a naming scheme like testFunctionName_blah",
+      "revId": "b54d590df1efb0356027949c0460e26743e0e309",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
