@@ -17,6 +17,7 @@
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
+	"wikibase-entity": "encja",
 	"wikibase-entity-item": "element",
 	"wikibase-entity-property": "właściwość",
 	"wikibase-entity-query": "zapytanie",
@@ -244,6 +245,8 @@
 	"wikibase-entitydata-unsupported-format": "Ten interfejs nie obsługuje formatu danych $1.",
 	"wikibase-entitydata-storage-error": "Nie udało się pobrać encji $1.",
 	"wikibase-entitydata-title": "Dane encji",
+	"special-redirectentity": "Przekierowanie encji",
+	"wikibase-redirectentity-submit": "Przekieruj",
 	"wikibase-mylanguagefallbackchain-babel": "Możesz to zmienić wstawiając <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|swojej}} [[Special:MyPage|stronie użytkownika]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, przekonwertowano z $3 - $4",
 	"wikibase-api-no-such-sitelink": "Nie udało się znaleźć takiego linku do strony",

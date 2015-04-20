@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Toliño"
+			"Toliño",
+			"Banjo"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensión Wikibase",
@@ -21,6 +22,7 @@
 	"wikibase-dataitem": "Elemento de {{WBREPONAME}}",
 	"wikibase-editlinks": "Editar as ligazóns",
 	"wikibase-editlinkstitle": "Editar as ligazóns interlingüísticas",
+	"wikibase-addlinkstitle": "Engadir ligazóns interlingüísticas",
 	"wikibase-linkitem-addlinks": "Engadir ligazóns",
 	"wikibase-linkitem-alreadylinked": "A páxina coa que quería ligar xa está anexada a un [$1 elemento] no repositorio central de datos, que liga con \"$2\" neste sitio. Os elementos unicamente poden ter unha páxina por sitio. Escolla unha páxina diferente coa que ligar.",
 	"wikibase-linkitem-close": "Pechar o diálogo e recargar a páxina",

@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"NehalDaveND"
+			"NehalDaveND",
+			"Shubha"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} वस्तु",
 	"wikibase-editlinks": "भाषापरिसन्धिः सम्पाद्यताम्",
 	"wikibase-editlinkstitle": "भाषापरिसन्धिः सम्पाद्यताम्",
 	"wikibase-linkitem-addlinks": "भाषापरिसन्धिः योज्यताम्",

@@ -15,7 +15,7 @@
 	"apihelp-query+pageterms-description": "קבלת מונחים שמשויכים לדף דרך פשיט נתונים משויך.",
 	"apihelp-query+pageterms-example-simple": "קבלת כל הפריטים המשויכים לדף 'London', בשפה של המשתמש.",
 	"apihelp-query+pageterms-example-label-en": "קבלת תוויות וכינויים שמשויעכים לדף 'London', באנגלית.",
-	"apihelp-query+pageterms-param-terms": "איזה סוג של פריטים לקבל, למשל 'label'‏, 'description' או 'alias'.",
+	"apihelp-query+pageterms-param-terms": "איזה סוג של פריטים לקבל, למשל 'description'. אם לא צוין, יוחזרו כל הסוגים.",
 	"apihelp-query+wikibase-description": "קבלת מידע על מאגר הוויקיבייס המשויך.",
 	"apihelp-query+wikibase-example": "קבלת נתיב URL ומידע אחר עבור מאגר ויקיבייס.",
 	"apihelp-query+wikibase-param-prop": "אילו מאפיינים להגדיר:\n;<kbd>url</kbd>: כתובת URL בסיסית, נתיב תסריטים (script path) ונתיב ערכים (article path).",

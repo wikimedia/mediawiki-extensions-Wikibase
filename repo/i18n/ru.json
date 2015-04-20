@@ -253,6 +253,7 @@
 	"wikibase-entitydata-storage-error": "Не удалось загрузить сущность $1.",
 	"wikibase-entitydata-title": "Данные сущности",
 	"wikibase-entitydata-text": "Эта страница предоставляет интерфейс связанных данных для значений сущности. Просьба предоставить идентификатор сущности в URL, используя синтаксис подстраниц.",
+	"wikibase-redirectentity-success": "$1 был успешно перенаправлен на $2.",
 	"special-mylanguagefallbackchain": "Моя цепочка резервных языков",
 	"wikibase-mylanguagefallbackchain-text": "Ниже показана цепочка резервных языков, действующая для вас при отображении меток сущностей.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].",

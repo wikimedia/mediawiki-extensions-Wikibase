@@ -23,7 +23,8 @@
 			"Impersonator 1",
 			"NigelSoft",
 			"王庭茂",
-			"Duolaimi"
+			"Duolaimi",
+			"凡人丶"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -268,6 +269,8 @@
 	"wikibase-entitydata-storage-error": "无法载入实体$1。",
 	"wikibase-entitydata-title": "实体数据",
 	"wikibase-entitydata-text": "本页面提供实体值的链接数据界面。请使用子页面句法提供URl中的实体ID。",
+	"wikibase-redirectentity-success": "$1已成功重定向至$2。",
+	"wikibase-redirectentity-submit": "重定向",
 	"special-mylanguagefallbackchain": "我的语言备选链",
 	"wikibase-mylanguagefallbackchain-text": "用于为您显示实体标签的语言备选链显示在下方。",
 	"wikibase-mylanguagefallbackchain-babel": "您可以通过在{{GENDER:$1|您的}}[[Special:MyPage|用户页]]加入<nowiki>{{#babel: }}</nowiki>来编辑。",
