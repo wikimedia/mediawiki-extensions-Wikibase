@@ -65,7 +65,8 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 				$this->getUser(),
 				new EditFilterHookRunner(
 					$wikibaseRepo->getEntityTitleLookup(),
-					$wikibaseRepo->getEntityContentFactory()
+					$wikibaseRepo->getEntityContentFactory(),
+					$this->getContext()
 				)
 			)
 		);
