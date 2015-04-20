@@ -101,6 +101,40 @@
       "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_40614ccf",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:23:22Z",
+      "side": 1,
+      "message": "All of these changes in this file should instead either be a string or false.",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_209a08be",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:23:22Z",
+      "side": 1,
+      "message": "All of these changes in this file should instead either be a string or false.",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
