@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_68e6bc15",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-20T16:54:46Z",
+      "side": 1,
+      "message": "We are doing it like this all over our code base. This is not a new issue and not exclusive to this patch. If having a StatementList class turns out to be an issue I will happily remove it. But we have it.",
+      "parentUuid": "0ed113e2_cd501adc",
+      "revId": "425d070b157316c4833574be80c5abf9ee795420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_8d5a12f8",
         "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_08d2902c",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-20T16:54:46Z",
+      "side": 1,
+      "message": "I actually tried to remove it in this patch but could not because it\u0027s used as an important feature: group statements by PropertyId and keep that grouping, even if the user tries to insert a statement with an other PropertyId in the middle of an existing group.",
+      "parentUuid": "0ed113e2_8d5a12f8",
+      "revId": "425d070b157316c4833574be80c5abf9ee795420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_0d470224",
         "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2015-04-20T15:25:53Z",
       "side": 1,
       "message": "Maybe it would be easier if `StatementListProvider` also had a method `setStatements` defined. This way we could avoid calling `Item` and `Property` directly here.",
+      "revId": "425d070b157316c4833574be80c5abf9ee795420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_28cf5484",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-20T16:54:46Z",
+      "side": 1,
+      "message": "This is unrelated to this patch. Please make this suggestion a Phabricator ticket.",
+      "parentUuid": "0ed113e2_0d470224",
       "revId": "425d070b157316c4833574be80c5abf9ee795420",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +135,24 @@
       "writtenOn": "2015-04-20T15:25:53Z",
       "side": 1,
       "message": "Debug code?",
+      "revId": "425d070b157316c4833574be80c5abf9ee795420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4822d851",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-20T16:54:46Z",
+      "side": 1,
+      "message": "Yes. Good catch, thanks.",
+      "parentUuid": "0ed113e2_2d6be683",
       "revId": "425d070b157316c4833574be80c5abf9ee795420",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
