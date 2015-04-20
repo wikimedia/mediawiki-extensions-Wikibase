@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_0091049c",
+        "filename": "client/includes/Usage/NullUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_3e878ede",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_63d25dd7",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-20T19:09:17Z",
       "side": 1,
       "message": "client/includes/store/UsageUpdater.php updateUsageForPage() calls this with false.",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_40c5cc8f",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_63d25dd7",
       "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_c038dc9d",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_a31b65d3",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_defbe2b8",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-20T19:09:17Z",
       "side": 1,
       "message": "Only execute the 2 above lines if ( !empty( $usages ) ) {\n\nPerhaps check that $touched is a string here instead?",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_600b30da",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 1,
+      "message": "Solved this a bit differently, for symmetry and safety.",
+      "parentUuid": "0ed113e2_defbe2b8",
       "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_e0fe40ab",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_be5dbe1c",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_9e823acc",
         "filename": "client/includes/Usage/UsageTracker.php",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2015-04-20T19:09:17Z",
       "side": 1,
       "message": "|false",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_c0dc5c4e",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_9e823acc",
       "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_00c9047b",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_40614ccf",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_209a08be",
         "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2015-04-20T19:23:22Z",
       "side": 1,
       "message": "All of these changes in this file should instead either be a string or false.",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_a0a598b3",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_209a08be",
       "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

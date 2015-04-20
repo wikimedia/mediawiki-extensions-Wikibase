@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_a03358bf",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 0,
+      "message": "because it\u0027s redundant to @throws Exception I guess...",
+      "parentUuid": "0ed113e2_237d3518",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_1ef16a92",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-20T19:09:17Z",
       "side": 0,
       "message": "But it does?",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_a0283833",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0ed113e2_1ef16a92",
       "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_c02d3c43",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 0,
+      "message": "keeping it, for symmetry.",
+      "parentUuid": "0ed113e2_7e7d16e4",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_03991180",
         "filename": "client/includes/Usage/UsageTracker.php",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_a0d7d827",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 0,
+      "message": "Exception declaratiosn in php are a bit strange, it\u0027S never clear what may or may not be thrown. I\u0027ll add UsageTrackerException. Exception isn\u0027t really true. InvalidArgumentException is nearly always true.",
+      "parentUuid": "0ed113e2_03991180",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_63101d05",
         "filename": "client/includes/store/UsageUpdater.php",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2015-04-20T19:09:17Z",
       "side": 0,
       "message": "But it does?",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_40e86cdd",
+        "filename": "client/includes/store/UsageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T19:39:02Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0ed113e2_63101d05",
       "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
