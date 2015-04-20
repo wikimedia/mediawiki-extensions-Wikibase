@@ -92,7 +92,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @since 0.3
-	 * @deprecated since 1.0, use StatementList::getIndexByGuid() instead.
+	 * @deprecated since 1.0, use StatementList::getFirstStatementByGuid() instead.
 	 *
 	 * @param string $claimGuid
 	 *
@@ -116,7 +116,7 @@ class Claims extends ArrayObject {
 
 	/**
 	 * @since 0.3
-	 * @deprecated since 1.0, use StatementList::getIndexByGuid() instead.
+	 * @deprecated since 1.0, use StatementList::getFirstStatementByGuid() instead.
 	 *
 	 * @param string $claimGuid
 	 *

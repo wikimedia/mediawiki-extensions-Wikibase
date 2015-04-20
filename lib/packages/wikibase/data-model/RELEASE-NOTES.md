@@ -23,7 +23,7 @@
 * Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
 * Removed `Claims::hasClaim`
 * Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
-* Removed `Claims::indexOf` (you can use `StatementList::getIndexByGuid` instead)
+* Removed `Claims::indexOf`, use `StatementList::getFirstStatementByGuid` or `StatementByGuidMap` instead
 * Removed `Claims::removeClaim`
 * Removed `Entity::getAllSnaks`, use `StatementList::getAllSnaks` instead
 * Removed `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
@@ -32,7 +32,7 @@
 #### Additions
 
 * Added `StatementByGuidMap`
-* Added `StatementList::getIndexByGuid`
+* Added `StatementList::getFirstStatementByGuid`
 * `ReferenceList::addNewReference` and `Statement::addNewReference` support an array of Snaks now
 
 ## Version 2.6.0 (2015-03-08)
