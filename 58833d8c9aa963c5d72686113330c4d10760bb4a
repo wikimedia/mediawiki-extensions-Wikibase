@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_6da00e3f",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T16:07:49Z",
+      "side": 1,
+      "message": "I\u0027d rather see this fixed completely, instead of changing it around \"for neatness\", just to remove it soon.  The issue at hand should be resolved by a registry, see T92517.",
+      "revId": "58833d8c9aa963c5d72686113330c4d10760bb4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
