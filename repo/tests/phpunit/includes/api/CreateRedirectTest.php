@@ -10,7 +10,7 @@ use Status;
 use UsageException;
 use User;
 use Wikibase\Api\ApiErrorReporter;
-use Wikibase\Api\CreateRedirectModule;
+use Wikibase\Api\CreateRedirect;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -23,7 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\Api\CreateRedirectModule
+ * @covers Wikibase\Api\CreateRedirect
  *
  * @group API
  * @group Wikibase
@@ -34,7 +34,7 @@ use Wikibase\Test\MockRepository;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class CreateRedirectModuleTest extends \MediaWikiTestCase {
+class CreateRedirectTest extends \MediaWikiTestCase {
 
 	/**
 	 * @var MockRepository|null
@@ -100,7 +100,7 @@ class CreateRedirectModuleTest extends \MediaWikiTestCase {
 	 * @param array $params
 	 * @param User $user
 	 *
-	 * @return CreateRedirectModule
+	 * @return CreateRedirect
 	 */
 	private function newApiModule( $params, User $user = null ) {
 		if ( !$user ) {
@@ -111,7 +111,7 @@ class CreateRedirectModuleTest extends \MediaWikiTestCase {
 		$main = new ApiMain( $request );
 		$main->getContext()->setUser( $user );
 
-		$module = new CreateRedirectModule( $main, 'wbcreateredirect' );
+		$module = new CreateRedirect( $main, 'wbcreateredirect' );
 
 		$idParser = new BasicEntityIdParser();
 

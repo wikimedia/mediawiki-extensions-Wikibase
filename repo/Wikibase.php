@@ -163,7 +163,7 @@ call_user_func( function() {
 	$wgAPIModules['wbformatvalue']						= 'Wikibase\Api\FormatSnakValue';
 	$wgAPIModules['wbparsevalue']						= 'Wikibase\Api\ParseValue';
 	$wgAPIModules['wbavailablebadges']					= 'Wikibase\Api\AvailableBadges';
-	$wgAPIModules['wbcreateredirect']					= 'Wikibase\Api\CreateRedirectModule';
+	$wgAPIModules['wbcreateredirect']					= 'Wikibase\Api\CreateRedirect';
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';

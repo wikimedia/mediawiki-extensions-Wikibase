@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class CreateRedirectModule extends ApiBase {
+class CreateRedirect extends ApiBase {
 
 	/**
 	 * @var EntityIdParser
