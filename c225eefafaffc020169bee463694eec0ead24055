@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_6f7d66e4",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T10:46:03Z",
+      "side": 1,
+      "message": "Not sure this is semantically correct. Both entity URIs refer to the same object. But when if we consider the documents to be the wiki pages, they would have different revision history, etc. On the other hand, resolving the entity URI should return the same data (document). \n\nI\u0027d just not say anything about the documents for now, if that is not really needed anywhere. Instead, we could output the inverse sameas relationship for for the entity URIs. That\u0027s implicit by the OWL spec, but it may be useful to put it here explicitly.",
+      "revId": "c225eefafaffc020169bee463694eec0ead24055",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_8f1bead3",
         "filename": "repo/includes/rdf/RdfSerializer.php",
         "patchSetId": 1
