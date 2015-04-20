@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_be513e67",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2015-04-20T19:10:18Z",
+      "side": 1,
+      "message": "Please add message documentation, Thanks.",
+      "revId": "17a687c5a985524129bd37b465cf0958c21d8303",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
