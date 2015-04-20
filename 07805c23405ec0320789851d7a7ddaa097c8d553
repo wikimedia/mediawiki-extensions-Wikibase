@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_e84dcc40",
+        "filename": "repo/includes/rdf/DedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-20T16:50:46Z",
+      "side": 1,
+      "message": "The name and docs do not make it entirely clear that a command query segregation violation is intended here. Not objecting to having it, though making this more explicit would be good. I now had to check an implementation to verify they are indeed supposed to track calls to alreadySeen.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_286bd483",
+        "filename": "repo/includes/rdf/NullDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-20T16:50:46Z",
+      "side": 1,
+      "message": "The returning of false is not really \"doing nothing\". Not a big deal though.\n\nIf this was added for the tests, then putting it in a fixtures directory is preferred over putting it with the production code",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_485418ca",
+        "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-20T16:50:46Z",
+      "side": 1,
+      "message": "Explicit check please, now it looks like a badly named bool in the predicate",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
