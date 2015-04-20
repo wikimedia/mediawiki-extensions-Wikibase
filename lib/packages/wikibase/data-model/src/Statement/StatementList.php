@@ -54,7 +54,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 				throw new InvalidArgumentException( 'Every element in $statements must be an instance of Statement' );
 			}
 
-			$this->statements[] = $statement;
+			$this->addStatement( $statement );
 		}
 	}
 

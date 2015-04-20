@@ -17,8 +17,65 @@ use Wikibase\DataModel\Statement\StatementList;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class StatementListTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @param int $propertyId
+	 * @param string|null $guid
+	 * @param int $rank
+	 *
+	 * @return Statement
+	 */
+	private function getStatement( $propertyId, $guid, $rank = Statement::RANK_NORMAL ) {
+		$statement = $this->getMockBuilder( 'Wikibase\DataModel\Statement\Statement' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$statement->expects( $this->any() )
+			->method( 'getGuid' )
+			->will( $this->returnValue( $guid ) );
+
+		$statement->expects( $this->any() )
+			->method( 'getPropertyId' )
+			->will( $this->returnValue( PropertyId::newFromNumber( $propertyId ) ) );
+
+		$statement->expects( $this->any() )
+			->method( 'getRank' )
+			->will( $this->returnValue( $rank ) );
+
+		return $statement;
+	}
+
+	private function getStatementWithSnak( $propertyId, $stringValue ) {
+		$snak = $this->newSnak( $propertyId, $stringValue );
+		$statement = new Statement( $snak );
+		$statement->setGuid( sha1( $snak->getHash() ) );
+		return $statement;
+	}
+
+	private function newSnak( $propertyId, $stringValue ) {
+		return new PropertyValueSnak( $propertyId, new StringValue( $stringValue ) );
+	}
+
+	public function testConstructorAcceptsDuplicatesWithNoGuid() {
+		$list = new StatementList(
+			$this->getStatement( 1, null ),
+			$this->getStatement( 1, null )
+		);
+
+		$this->assertSame( 2, $list->count() );
+	}
+
+	public function testConstructorAcceptsDuplicatesWithSameGuid() {
+		$list = new StatementList(
+			$this->getStatement( 1, 'duplicate' ),
+			$this->getStatement( 1, 'duplicate' )
+		);
+
+		$this->assertSame( 2, $list->count() );
+	}
 
 	public function testGivenNoStatements_getPropertyIdsReturnsEmptyArray() {
 		$list = new StatementList();
@@ -44,37 +101,18 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenStatementsWithArrayKeys_reindexesArray() {
+	public function testGivenStatementsWithArrayKeys_toArrayReturnsReindexedArray() {
 		$statement = $this->getStatement( 1, 'guid' );
 		$list = new StatementList( array( 'ignore-me' => $statement ) );
 
 		$this->assertSame( array( 0 => $statement ), $list->toArray() );
 	}
 
-	/**
-	 * @param int $propertyId
-	 * @param string $guid
-	 * @param int $rank
-	 *
-	 * @return Statement
-	 */
-	private function getStatement( $propertyId, $guid, $rank = Statement::RANK_NORMAL ) {
-		$statement = $this->getMockBuilder( 'Wikibase\DataModel\Statement\Statement' )
-			->disableOriginalConstructor()->getMock();
+	public function testGivenSparseArray_toArrayReturnsReindexedArray() {
+		$statement = $this->getStatement( 1, 'guid' );
+		$list = new StatementList( array( 1 => $statement ) );
 
-		$statement->expects( $this->any() )
-			->method( 'getGuid' )
-			->will( $this->returnValue( $guid ) );
-
-		$statement->expects( $this->any() )
-			->method( 'getPropertyId' )
-			->will( $this->returnValue( PropertyId::newFromNumber( $propertyId ) ) );
-
-		$statement->expects( $this->any() )
-			->method( 'getRank' )
-			->will( $this->returnValue( $rank ) );
-
-		return $statement;
+		$this->assertSame( array( 0 => $statement ), $list->toArray() );
 	}
 
 	public function testCanIterate() {
@@ -152,17 +190,6 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 			),
 			$list->getAllSnaks()
 		);
-	}
-
-	private function getStatementWithSnak( $propertyId, $stringValue ) {
-		$snak = $this->newSnak( $propertyId, $stringValue );
-		$statement = new Statement( $snak );
-		$statement->setGuid( sha1( $snak->getHash() ) );
-		return $statement;
-	}
-
-	private function newSnak( $propertyId, $stringValue ) {
-		return new PropertyValueSnak( $propertyId, new StringValue( $stringValue ) );
 	}
 
 	public function testAddStatementWithOnlyMainSnak() {
