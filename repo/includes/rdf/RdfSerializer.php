@@ -151,9 +151,6 @@ class RdfSerializer implements RdfProducer {
 	 * @return string rdf
 	 */
 	private function buildGraphForEntityRevision( EntityRevision $entityRevision ) {
-		// reset the emitter's output buffer
-		$this->emitter->reset();
-
 		$builder = $this->newRdfBuilder();
 
 		$builder->addEntityRevisionInfo(

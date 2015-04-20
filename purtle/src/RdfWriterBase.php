@@ -19,9 +19,14 @@ use LogicException;
 abstract class RdfWriterBase implements RdfWriter {
 
 	/**
-	 * @var array An array of strings or RdfWriters.
+	 * @var array An array of strings, RdfWriters, or closures.
 	 */
 	private $buffer = array();
+
+	/**
+	 * @var RdfWriter[] sub-writers.
+	 */
+	private $subs = array();
 
 	const STATE_START = 0;
 	const STATE_DOCUMENT = 5;
@@ -181,15 +186,13 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @return RdfWriter
 	 */
 	final public function sub() {
-		//FIXME: don't mess with the state, enqueue the writer to be placed in the buffer
-		// later, on the next transtion to subject|document|drain
 		$writer = $this->newSubWriter( self::SUBDOCUMENT_ROLE, $this->labeler );
 		$writer->state = self::STATE_DOCUMENT;
 
 		// share registered prefixes
 		$writer->prefixes =& $this->prefixes;
 
-		$this->write( $writer );
+		$this->subs[] = $writer;
 		return $writer;
 	}
 
@@ -275,8 +278,16 @@ abstract class RdfWriterBase implements RdfWriter {
 	final public function finish() {
 		// close all unclosed states
 		$this->state( self::STATE_DOCUMENT );
+
+		// ...then insert output of sub-writers into the buffer,
+		// so it gets placed before the footer...
+		$this->drainSubs();
+
 		// and then finalize
 		$this->state( self::STATE_FINISH );
+
+		// Detaches all subs.
+		$this->subs = array();
 	}
 
 	/**
@@ -289,29 +300,14 @@ abstract class RdfWriterBase implements RdfWriter {
 		if( $this->state != self::STATE_FINISH ) {
 			$this->state( self::STATE_DOCUMENT );
 		}
+
+		$this->drainSubs();
 		$this->flattenBuffer();
 
 		$rdf = join( '', $this->buffer );
 		$this->buffer = array();
 
 		return $rdf;
-	}
-
-	/**
-	 * @see RdfWriter::reset()
-	 *
-	 * @note Does not reset the blank node counter, because it may be shared.
-	 */
-	public function reset() {
-		$this->buffer = array();
-		$this->state = self::STATE_DOCUMENT; //TODO: may depend on role
-
-		$this->currentSubject = array( null, null );
-		$this->currentPredicate = array( null, null );
-
-// 		$this->prefixes = array();
-// 		$this->prefix( 'rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' );
-// 		$this->prefix( 'xsd', 'http://www.w3.org/2001/XMLSchema#' );
 	}
 
 	/**
@@ -327,6 +323,17 @@ abstract class RdfWriterBase implements RdfWriter {
 			if ( $b instanceof RdfWriter ) {
 				$b = $b->drain();
 			}
+		}
+	}
+
+	/**
+	 * Drains all subwriters, and appends their output to this writer's buffer.
+	 * Subwriters remain usable.
+	 */
+	private function drainSubs() {
+		foreach ( $this->subs as $sub ) {
+			$rdf = $sub->drain();
+			$this->write( $rdf );
 		}
 	}
 
