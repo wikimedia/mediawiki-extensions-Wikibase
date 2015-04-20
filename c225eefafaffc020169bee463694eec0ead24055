@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_ef42b6b1",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T10:41:52Z",
+      "side": 1,
+      "message": "\"// document uris\"?",
+      "revId": "c225eefafaffc020169bee463694eec0ead24055",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0f405aa7",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T10:41:52Z",
+      "side": 1,
+      "message": "self::NS_OWL \u003d\u003e",
+      "revId": "c225eefafaffc020169bee463694eec0ead24055",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_af4caee5",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T10:41:52Z",
+      "side": 1,
+      "message": "Why introduce RedirectEntityRevision? EntityRedirect seems sufficient here.",
+      "revId": "c225eefafaffc020169bee463694eec0ead24055",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8f1bead3",
+        "filename": "repo/includes/rdf/RdfSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T10:41:52Z",
+      "side": 1,
+      "message": "Redirects are not special entities. Entities are not redirects. Redirects and entities should not be handled by the same code path. Instead, there should be a function for adding redirect info, on the same level as the function for adding entities.",
+      "revId": "c225eefafaffc020169bee463694eec0ead24055",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
