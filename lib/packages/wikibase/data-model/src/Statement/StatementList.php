@@ -74,7 +74,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * Returns the property ids used by the statements.
 	 * The keys of the returned array hold the serializations of the property ids.
 	 *
-	 * @return PropertyId[]
+	 * @return PropertyId[] Array indexed by property id serialization.
 	 */
 	public function getPropertyIds() {
 		$propertyIds = array();
@@ -127,7 +127,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 *
 	 * @param PropertyId $id
 	 *
-	 * @return StatementList
+	 * @return self
 	 */
 	public function getWithPropertyId( PropertyId $id ) {
 		$statements = array();
@@ -146,7 +146,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 *
 	 * @param int|int[] $acceptableRanks
 	 *
-	 * @return StatementList
+	 * @return self
 	 */
 	public function getWithRank( $acceptableRanks ) {
 		$acceptableRanks = array_flip( (array)$acceptableRanks );
@@ -168,7 +168,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 *
 	 * @since 2.4
 	 *
-	 * @return StatementList
+	 * @return self
 	 */
 	public function getBestStatements() {
 		$statements = $this->getWithRank( Statement::RANK_PREFERRED );
@@ -189,7 +189,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 *
 	 * @since 1.1
 	 *
-	 * @return Snak[]
+	 * @return Snak[] Numerically indexed (non-sparse) array.
 	 */
 	public function getAllSnaks() {
 		$snaks = array();
@@ -206,7 +206,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	/**
 	 * @since 2.3
 	 *
-	 * @return Snak[]
+	 * @return Snak[] Numerically indexed (non-sparse) array.
 	 */
 	public function getMainSnaks() {
 		$snaks = array();
@@ -234,6 +234,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 	/**
 	 * @see Countable::count
+	 *
 	 * @return int
 	 */
 	public function count() {
