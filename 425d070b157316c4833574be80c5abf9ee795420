@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_e8a5cc9b",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-20T17:03:25Z",
+      "side": 1,
+      "message": "I have a PR on github to rewrite `ByPropertyIdArray` which is a bit outdated though. Perhaps the ordering feature should be rebuilt from scratch, in PHP as well as in Javascript.",
+      "parentUuid": "0ed113e2_08d2902c",
+      "revId": "425d070b157316c4833574be80c5abf9ee795420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_0d470224",
         "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
         "patchSetId": 5
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "This is unrelated to this patch. Please make this suggestion a Phabricator ticket.",
       "parentUuid": "0ed113e2_0d470224",
+      "revId": "425d070b157316c4833574be80c5abf9ee795420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_88b200e3",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-04-20T17:03:25Z",
+      "side": 1,
+      "message": "https://github.com/wmde/WikibaseDataModel/pull/455",
+      "parentUuid": "0ed113e2_28cf5484",
       "revId": "425d070b157316c4833574be80c5abf9ee795420",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
