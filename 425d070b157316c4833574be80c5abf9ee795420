@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_c8bfa8a6",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-20T17:05:22Z",
+      "side": 1,
+      "message": "This is already tracked to some extend by https://phabricator.wikimedia.org/T75500\n\nThe new code here makes the OCP violation more clear, though it definitely was there already. Indeed not something to tackle in this commit.\n\nInteresting suggestion Bene. Something to consider when fixing this. Perhaps suggest it on the linked issue?",
+      "parentUuid": "0ed113e2_28cf5484",
+      "revId": "425d070b157316c4833574be80c5abf9ee795420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_6d59ee00",
         "filename": "repo/includes/ChangeOp/ChangeOpClaimRemove.php",
         "patchSetId": 5
