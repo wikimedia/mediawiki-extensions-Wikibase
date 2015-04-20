@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_2fac3e84",
+        "filename": "repo/includes/ChangePruner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-20T10:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e76d7c5_f56dab97",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e76d7c5_755afbfa",
         "filename": "repo/includes/ChangePruner.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-17T17:01:28Z",
       "side": 1,
       "message": "type hint?",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8fb76ad3",
+        "filename": "repo/includes/ChangePruner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-20T10:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e76d7c5_755afbfa",
       "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_6fd9e62b",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-20T10:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e76d7c5_f51b6b1f",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e76d7c5_b515f3eb",
         "filename": "repo/tests/phpunit/includes/ChangePrunerTest.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-17T17:01:28Z",
       "side": 1,
       "message": "use MediaWikiTestCase",
+      "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4fe8a2af",
+        "filename": "repo/tests/phpunit/includes/ChangePrunerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-20T10:24:11Z",
+      "side": 1,
+      "message": "done, although I expect someone to come along and change it back.\n\nwhen we extend PHPUnit_Framework_TestCase, we never put \"use PHPUnit_Framework_TestCase\" and often not for MediaWikiTestCase.",
+      "parentUuid": "2e76d7c5_b515f3eb",
       "revId": "32f40f26df92fca432ef71f0a379a10fde771e7f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
