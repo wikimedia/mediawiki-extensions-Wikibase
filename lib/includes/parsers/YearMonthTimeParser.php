@@ -5,10 +5,10 @@ namespace Wikibase\Lib\Parsers;
 use DataValues\TimeValue;
 use Language;
 use ValueParsers\CalendarModelParser;
+use ValueParsers\IsoTimestampParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
-use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 
 /**
