@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use DataTypes\DataType;
 use Html;
 use MWException;
@@ -55,10 +56,36 @@ class DataTypeSelector {
 	 *
 	 * @param string $id
 	 * @param string $name
+	 * @param string $selectedTypeId
 	 *
 	 * @return string
 	 */
-	public function getHtml( $id = 'datatype', $name = 'datatype' ) {
+	public function getHtml( $id = 'datatype', $name = 'datatype', $selectedTypeId = '' ) {
+		$options = $this->getOptionsHtml( $selectedTypeId );
+
+		$html = Html::rawElement(
+			'select',
+			array(
+				'name' => $name,
+				'id' => $id,
+				'class' => 'wb-select'
+			),
+			$options
+		);
+
+		return $html;
+	}
+
+	/**
+	 * Builds and returns the html for the options of the DataType selector.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $selectedTypeId
+	 *
+	 * @return string
+	 */
+	public function getOptionsHtml( $selectedTypeId = '' ) {
 		$dataTypes = array();
 
 		foreach ( $this->dataTypes as $dataType ) {
@@ -72,20 +99,13 @@ class DataTypeSelector {
 		foreach ( $dataTypes as $typeId => $typeLabel ) {
 			$html .= Html::element(
 				'option',
-				array( 'value' => $typeId ),
+				array(
+					'value' => $typeId,
+					'selected' => $typeId === $selectedTypeId
+				),
 				$typeLabel
 			);
 		}
-
-		$html = Html::rawElement(
-			'select',
-			array(
-				'name' => $name,
-				'id' => $id,
-				'class' => 'wb-select'
-			),
-			$html
-		);
 
 		return $html;
 	}

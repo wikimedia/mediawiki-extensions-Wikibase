@@ -1003,7 +1003,10 @@ class WikibaseRepo {
 		return $this->entityNamespaceLookup;
 	}
 
-	private function getEntityIdHtmlLinkFormatterFactory() {
+	/**
+	 * @return EntityIdHtmlLinkFormatterFactory
+	 */
+	public function getEntityIdHtmlLinkFormatterFactory() {
 		return new EntityIdHtmlLinkFormatterFactory(
 			$this->getEntityTitleLookup(),
 			new LanguageNameLookup()
