@@ -16,6 +16,24 @@
       "revId": "4d3ed88d11e916154ebbac6b13087548631fd290",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_e85aac21",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-20T16:27:16Z",
+      "side": 1,
+      "message": "It hurts. PHPStorm complains. Maybe not in this line but in @return.\n\nAlso I find this confusing and not helpful. What does ChunkAccess\u003cChange\u003e mean? I know generics from Java but such a concept does not exist at all in PHP. I really have no idea what you want to express with that. Please write a sentence instead.",
+      "parentUuid": "0ed113e2_ed8b9ec2",
+      "revId": "4d3ed88d11e916154ebbac6b13087548631fd290",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
