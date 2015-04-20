@@ -130,15 +130,15 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @return StatementList
 	 */
 	public function getWithPropertyId( PropertyId $id ) {
-		$statements = array();
+		$statementList = new self();
 
 		foreach ( $this->statements as $statement ) {
 			if ( $statement->getPropertyId()->equals( $id ) ) {
-				$statements[] = $statement;
+				$statementList->addStatement( $statement );
 			}
 		}
 
-		return new self( $statements );
+		return $statementList;
 	}
 
 	/**
@@ -150,15 +150,15 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 */
 	public function getWithRank( $acceptableRanks ) {
 		$acceptableRanks = array_flip( (array)$acceptableRanks );
-		$statements = array();
+		$statementList = new self();
 
 		foreach ( $this->statements as $statement ) {
 			if ( array_key_exists( $statement->getRank(), $acceptableRanks ) ) {
-				$statements[] = $statement;
+				$statementList->addStatement( $statement );
 			}
 		}
 
-		return new self( $statements );
+		return $statementList;
 	}
 
 	/**
