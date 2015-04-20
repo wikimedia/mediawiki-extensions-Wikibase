@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_237d3518",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 0,
+      "message": "Why remove this?",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1ef16a92",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 0,
+      "message": "But it does?",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7e7d16e4",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 0,
+      "message": "Then remove this.",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_03991180",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 0,
+      "message": "Why remove it? Shouldn\u0027t exceptions that implementations may (and do) throw be declared here? Also missing: InvalidArgumentException and Exception.",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_63101d05",
+        "filename": "client/includes/store/UsageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 0,
+      "message": "But it does?",
+      "revId": "636b313f1e251c99e569cd74198d0d65d8ebbf99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

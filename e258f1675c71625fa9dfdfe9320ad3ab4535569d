@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_3e878ede",
+        "filename": "client/includes/Usage/NullUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 1,
+      "message": "|false",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_63d25dd7",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 1,
+      "message": "client/includes/store/UsageUpdater.php updateUsageForPage() calls this with false.",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_a31b65d3",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 1,
+      "message": "client/includes/Usage/Sql/SqlUsageTracker.php trackUsedEntities() calls this with false.",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_defbe2b8",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 1,
+      "message": "Only execute the 2 above lines if ( !empty( $usages ) ) {\n\nPerhaps check that $touched is a string here instead?",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_be5dbe1c",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 1,
+      "message": "wfTimestamp( TS_MW, $touched )",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_9e823acc",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-04-20T19:09:17Z",
+      "side": 1,
+      "message": "|false",
+      "revId": "e258f1675c71625fa9dfdfe9320ad3ab4535569d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
