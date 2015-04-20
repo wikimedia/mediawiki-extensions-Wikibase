@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_ed8b9ec2",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-20T16:11:08Z",
+      "side": 1,
+      "message": "Even though the \u003cChange\u003e bit isn\u0027t valid PHP, I think it\u0027S useful information, and doesn\u0027t hurt. PhpStorm doesn\u0027t complain either. Why remove it? The expected element type for the ChunkAccess is part of the contructor\u0027s contract, and must be documented as a requirement/precondition.",
+      "revId": "4d3ed88d11e916154ebbac6b13087548631fd290",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
