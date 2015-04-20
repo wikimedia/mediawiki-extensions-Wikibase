@@ -119,7 +119,8 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 
 					var $labelChildren = self.$headingLabel.children(),
 						labelText = this.label.getText(),
-						descriptionText = this.description.getText();
+						descriptionText = this.description.getText(),
+						aliasesTexts = this.aliases.getTexts();
 
 					self.$headingLabel
 						.toggleClass( 'wb-empty', labelText === '' )
@@ -127,14 +128,19 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 						.append( $labelChildren );
 
 					self.$headingDescription
-						.toggleClass( 'wb-empty', labelText === '' )
+						.toggleClass( 'wb-empty', descriptionText === '' )
 						.text( descriptionText === ''
 							? mw.msg( 'wikibase-description-empty' )
 							: descriptionText
 						);
 
-					var aliasesTexts = this.aliases.getTexts(),
-						$ul = self.$headingAliases.children( 'ul' ).empty();
+					var $ul = self.$headingAliases
+						.toggleClass( 'wb-empty', aliasesTexts.length === 0 )
+						.children( 'ul' )
+						.text( aliasesTexts.length === 0
+							? mw.msg( 'wikibase-aliases-empty' )
+							: ''
+						);
 
 					for( var i = 0; i < aliasesTexts.length; i++ ) {
 						$ul.append(
