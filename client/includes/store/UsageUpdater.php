@@ -63,16 +63,22 @@ class UsageUpdater {
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of EntityUsage objects.
 	 * See docs/usagetracking.wiki for details.
+	 * @param string|false $touched timestamp (or optionally false, if $usages is empty)
+	 *
+	 * @see UsageTracker::trackUsedEntities
 	 *
 	 * @throws InvalidArgumentException
-	 * @see UsageTracker::trackUsedEntities
 	 */
-	public function updateUsageForPage( $pageId, array $usages ) {
+	public function updateUsageForPage( $pageId, array $usages, $touched ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int!' );
 		}
 
-		$oldUsage = $this->usageTracker->trackUsedEntities( $pageId, $usages );
+		if ( !is_string( $touched ) && !empty( $usages ) ) {
+			throw new InvalidArgumentException( '$touched must be a string if $usages isn\'t empty!' );
+		}
+
+		$oldUsage = $this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
 
 		$currentlyUsedEntities = $this->getEntityIds( $usages );
 		$previouslyUsedEntities = $this->getEntityIds( $oldUsage );

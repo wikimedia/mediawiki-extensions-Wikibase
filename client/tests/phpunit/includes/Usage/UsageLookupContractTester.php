@@ -47,7 +47,7 @@ class UsageLookupContractTester {
 
 		$usages = array( $u3i, $u3l, $u4l );
 
-		$this->tracker->trackUsedEntities( 23, $usages );
+		$this->tracker->trackUsedEntities( 23, $usages, '20150102030405' );
 
 		Assert::assertEmpty( $this->lookup->getUsagesForPage( 24 ) );
 
@@ -58,7 +58,7 @@ class UsageLookupContractTester {
 		$expectedUsageStrings = $this->getUsageStrings( $usages );
 		Assert::assertEquals( $expectedUsageStrings, $actualUsageStrings );
 
-		$this->tracker->trackUsedEntities( 23, array() );
+		$this->tracker->trackUsedEntities( 23, array(), '20150102030405' );
 	}
 
 	public function testGetPagesUsing() {
@@ -71,8 +71,8 @@ class UsageLookupContractTester {
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
-		$this->tracker->trackUsedEntities( 23, array( $u3s, $u3l, $u4l ) );
-		$this->tracker->trackUsedEntities( 42, array( $u4l, $u4t ) );
+		$this->tracker->trackUsedEntities( 23, array( $u3s, $u3l, $u4l ), '20150102030405' );
+		$this->tracker->trackUsedEntities( 42, array( $u4l, $u4t ), '20150102030405' );
 
 		Assert::assertEmpty(
 			iterator_to_array( $this->lookup->getPagesUsing( array( $q6 ) ) )
@@ -108,7 +108,7 @@ class UsageLookupContractTester {
 			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
 
-		$this->tracker->trackUsedEntities( 23, array() );
+		$this->tracker->trackUsedEntities( 23, array(), '20150102030405' );
 	}
 
 	/**
@@ -143,7 +143,7 @@ class UsageLookupContractTester {
 
 		$usages = array( $u3i, $u3l, $u4l );
 
-		$this->tracker->trackUsedEntities( 23, $usages );
+		$this->tracker->trackUsedEntities( 23, $usages, '20150102030405' );
 
 		Assert::assertEmpty( $this->lookup->getUnusedEntities( array( $q4 ) ), 'Q4 should not be unused' );
 
