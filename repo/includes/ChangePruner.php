@@ -80,7 +80,8 @@ class ChangePruner {
 	/**
 	 * Calculates the timestamp up to which changes can be pruned.
 	 *
-	 * @return int Timestamp up to which changes can be pruned (as Unix period).
+	 * @return string Timestamp up to which changes can be pruned (as MediaWiki concatenated string
+	 * timestamp).
 	 */
 	private function getCutoffTimestamp() {
 		$until = time() - $this->keepSeconds;
@@ -104,23 +105,23 @@ class ChangePruner {
 			}
 		}
 
-		return $this->limitCutoffTimestamp( $until );
+		return $this->limitCutoffTimestamp( wfTimestamp( TS_MW, $until ) );
 	}
 
 	/**
 	 * Changes the cutoff timestamp to not affect more than $this->batchSize
 	 * rows, if needed.
 	 *
-	 * @param int $until
+	 * @param string $until MediaWiki concatenated string timestamp
 	 *
-	 * @return int
+	 * @return string MediaWiki concatenated string timestamp
 	 */
 	private function limitCutoffTimestamp( $until ) {
 		$dbr = wfGetDB( DB_SLAVE );
 		$changeTime = $dbr->selectField(
 			'wb_changes',
 			'change_time',
-			array( 'change_time < ' . $dbr->addQuotes( wfTimestamp( TS_MW, $until ) ) ),
+			array( 'change_time < ' . $dbr->addQuotes( $until ) ),
 			__METHOD__,
 			array(
 				'OFFSET' => $this->batchSize,
@@ -128,13 +129,13 @@ class ChangePruner {
 			)
 		);
 
-		return $changeTime ? intval( $changeTime ) : $until;
+		return $changeTime ?: $until;
 	}
 
 	/**
 	 * Prunes all changes older than $until from the changes table.
 	 *
-	 * @param int $until
+	 * @param string $until MediaWiki concatenated string timestamp
 	 *
 	 * @return int the number of changes deleted.
 	 */
@@ -143,7 +144,7 @@ class ChangePruner {
 
 		$dbw->delete(
 			'wb_changes',
-			array( 'change_time < ' . $dbw->addQuotes( wfTimestamp( TS_MW, $until ) ) ),
+			array( 'change_time < ' . $dbw->addQuotes( $until ) ),
 			__METHOD__
 		);
 
