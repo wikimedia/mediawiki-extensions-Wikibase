@@ -914,7 +914,7 @@ class WikibaseRepo {
 		$codec = $this->getEntityContentDataCodec();
 		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
-		$siteLinkStore = $this->getStore()->newSiteLinkCache();
+		$siteLinkStore = $this->getStore()->newSiteLinkStore();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		$handler = new ItemHandler(

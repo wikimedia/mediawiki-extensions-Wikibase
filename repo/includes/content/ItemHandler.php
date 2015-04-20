@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
@@ -28,7 +28,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 class ItemHandler extends EntityHandler {
 
 	/**
-	 * @var SiteLinkCache
+	 * @var SiteLinkStore
 	 */
 	private $siteLinkStore;
 
@@ -39,7 +39,7 @@ class ItemHandler extends EntityHandler {
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser
-	 * @param SiteLinkCache $siteLinkStore
+	 * @param SiteLinkStore $siteLinkStore
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
@@ -49,7 +49,7 @@ class ItemHandler extends EntityHandler {
 		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
-		SiteLinkCache $siteLinkStore,
+		SiteLinkStore $siteLinkStore,
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(

@@ -7,7 +7,7 @@ use Site;
 use SiteStore;
 use UsageException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\StringNormalizer;
 
 /**
@@ -26,9 +26,9 @@ class ItemByTitleHelper {
 	private $resultBuilder;
 
 	/**
-	 * @var SiteLinkCache
+	 * @var SiteLinkStore
 	 */
-	private $siteLinkCache;
+	private $siteLinkStore;
 
 	/**
 	 * @var SiteStore
@@ -42,18 +42,18 @@ class ItemByTitleHelper {
 
 	/**
 	 * @param ResultBuilder $resultBuilder
-	 * @param SiteLinkCache $siteLinkCache
+	 * @param SiteLinkStore $siteLinkStore
 	 * @param SiteStore $siteStore
 	 * @param StringNormalizer $stringNormalizer
 	 */
 	public function __construct(
 		ResultBuilder $resultBuilder,
-		SiteLinkCache $siteLinkCache,
+		SiteLinkStore $siteLinkStore,
 		SiteStore $siteStore,
 		StringNormalizer $stringNormalizer
 	) {
 		$this->resultBuilder = $resultBuilder;
-		$this->siteLinkCache = $siteLinkCache;
+		$this->siteLinkStore = $siteLinkStore;
 		$this->siteStore = $siteStore;
 		$this->stringNormalizer = $stringNormalizer;
 	}
@@ -124,14 +124,14 @@ class ItemByTitleHelper {
 	 */
 	private function getItemId( $siteId, $title, $normalize ) {
 		$title = $this->stringNormalizer->trimToNFC( $title );
-		$id = $this->siteLinkCache->getItemIdForLink( $siteId, $title );
+		$id = $this->siteLinkStore->getItemIdForLink( $siteId, $title );
 
 		// Try harder by requesting normalization on the external site.
 		if ( $id === null && $normalize === true ) {
 			$siteObj = $this->siteStore->getSite( $siteId );
 			//XXX: this passes the normalized title back into $title by reference...
 			$this->normalizeTitle( $title, $siteObj );
-			$id = $this->siteLinkCache->getItemIdForLink( $siteObj->getGlobalId(), $title );
+			$id = $this->siteLinkStore->getItemIdForLink( $siteObj->getGlobalId(), $title );
 		}
 
 		return $id;

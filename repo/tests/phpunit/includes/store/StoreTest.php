@@ -47,8 +47,8 @@ class StoreTest extends \MediaWikiTestCase {
 	 * @dataProvider instanceProvider
 	 * @param Store $store
 	 */
-	public function testNewSiteLinkCache( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\Lib\Store\SiteLinkLookup', $store->newSiteLinkCache() );
+	public function testNewSiteLinkStore( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\Lib\Store\SiteLinkLookup', $store->newSiteLinkStore() );
 	}
 
 	/**

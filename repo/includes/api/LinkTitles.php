@@ -81,9 +81,9 @@ class LinkTitles extends ApiWikibase {
 			$params['totitle']
 		);
 
-		$siteLinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
-		$fromId = $siteLinkCache->getItemIdForLink( $fromSite->getGlobalId(), $fromPage );
-		$toId = $siteLinkCache->getItemIdForLink( $toSite->getGlobalId(), $toPage );
+		$siteLinkStore = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkStore();
+		$fromId = $siteLinkStore->getItemIdForLink( $fromSite->getGlobalId(), $fromPage );
+		$toId = $siteLinkStore->getItemIdForLink( $toSite->getGlobalId(), $toPage );
 
 		$return = array();
 		$flags = 0;
