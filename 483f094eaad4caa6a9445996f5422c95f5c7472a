@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f5d35c03",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T12:50:54Z",
+      "side": 0,
+      "message": "To me it looks like dropping these three properties is unrelated to what the patch does. Can you please move this to a separate patch?",
+      "revId": "483f094eaad4caa6a9445996f5422c95f5c7472a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

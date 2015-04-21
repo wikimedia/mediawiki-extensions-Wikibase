@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_d5d658f6",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T12:50:54Z",
+      "side": 1,
+      "message": "This is an unrelated fix that could be in a separate patch.",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_75ff6c63",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T12:50:54Z",
+      "side": 1,
+      "message": "Why is this here? This is completely unconnected to everything else in this class.",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_15cdc062",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithoutSitelinksTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T12:50:54Z",
+      "side": 1,
+      "message": "How is this related to whats described in the commit message?",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
