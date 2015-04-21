@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_31c811aa",
+        "filename": "repo/includes/rdf/ComplexValueRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-21T23:20:59Z",
+      "side": 1,
+      "message": "I think a simple array should be enough here...",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
