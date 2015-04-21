@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ed113e2_e7916f53",
+        "filename": "repo/includes/rdf/EntityRdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T14:23:11Z",
+      "side": 1,
+      "message": "Why do you still squish everything in the main namespace? Please use RDF. Same for all classes and tests.",
+      "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_26cd4063",
         "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
         "patchSetId": 17
@@ -19,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_c78c6b3d",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T14:23:11Z",
+      "side": 1,
+      "message": "$vocabulary is created dynamically. Not a big issue but not nice.",
+      "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_06d4bceb",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 17
@@ -30,6 +64,23 @@
       "writtenOn": "2015-04-20T21:38:02Z",
       "side": 1,
       "message": "omg :)",
+      "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_07ccb38b",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T14:23:11Z",
+      "side": 1,
+      "message": "This does not exist.",
       "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
