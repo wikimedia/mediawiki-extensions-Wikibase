@@ -300,7 +300,7 @@
 	"wikibase-redirectentity-success": "Message shown when an entity has successfully been redirect to another entity.\nParameters:\n* $1: the ID of the entity being redirect from\n* $2: the ID of the target entity",
 	"wikibase-redirectentity-fromid": "Label for the input field to select the ID of the entity to redirect from. See also:\n* {{msg-mw|Wikibase-redirectentity-toid}}",
 	"wikibase-redirectentity-toid": "Label for the input field to select the ID of the entity to redirect to. See also:\n* {{msg-mw|Wikibase-redirectentity-fromid}}",
-	"wikibase-redirectentity-submit": "Label for the button that activates the action.\n\nPreceded by the following input box labels:\n* {{msg-mw|Wikibase-redirectentity-fromid}}\n* {{msg-mw|Wikibase-redirectentity-toid}}",
+	"wikibase-redirectentity-submit": "Label for the button that activates the action.\n\nPreceded by the following input box labels:\n* {{msg-mw|Wikibase-redirectentity-fromid}}\n* {{msg-mw|Wikibase-redirectentity-toid}}\n\n{{Identical|Redirect}}",
 	"special-mylanguagefallbackchain": "{{doc-special|MyLanguageFallbackChain}}\nThe special page display the language fallback chain used to display Wikibase data for current context.",
 	"wikibase-mylanguagefallbackchain-text": "Explanatory text shown on the special page.",
 	"wikibase-mylanguagefallbackchain-babel": "More explanatory text shown on the special page. Only displayed when Extension:Babel is installed and the user is logged in.\n\nParameters:\n* $1 - User name for GENDER",

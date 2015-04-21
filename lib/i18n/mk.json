@@ -72,6 +72,18 @@
 	"datatypes-type-wikibase-property": "Својство",
 	"datatypes-type-commonsMedia": "Податотека од Ризницата",
 	"version-wikibase": "Викибаза",
+	"wikibase-time-precision-Gannum": "$1 {{PLURAL:$1|милијарда|милијадри}} години н.е.",
+	"wikibase-time-precision-Mannum": "$1 {{PLURAL:$1|милион|милиони}} години н.е.",
+	"wikibase-time-precision-annum": "за $1 години н.е.",
+	"wikibase-time-precision-millennium": "$1. илјадалетие",
+	"wikibase-time-precision-century": "$1. век",
+	"wikibase-time-precision-10annum": "$1 децении",
+	"wikibase-time-precision-BCE-Gannum": "$1 {{PLURAL:$1|милијарда|милијадри}} години п.н.е.",
+	"wikibase-time-precision-BCE-Mannum": "$1 {{PLURAL:$1|милион|милиони}} години п.н.е.",
+	"wikibase-time-precision-BCE-annum": "$1 години п.н.е.",
+	"wikibase-time-precision-BCE-millennium": "$1. илјадалетие п.н.е.",
+	"wikibase-time-precision-BCE-century": "$1. век п.н.е.",
+	"wikibase-time-precision-BCE-10annum": "$1-ти п.н.е.",
 	"wikibase-snakformatter-valuetype-mismatch": "Типит на вредноста („$1“) не одговара на типот на својството („$2“).",
 	"wikibase-snakformatter-property-not-found": "Не го најдов својството $1. Не можам да го одредам податочниот тип што треба да се користи."
 }

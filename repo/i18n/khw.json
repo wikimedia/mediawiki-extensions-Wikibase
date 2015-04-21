@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "دیگر ویب سائٹ",
 	"wikibase-aliases-empty": "ھیچ کیہ مثال موجود نیکی",
 	"wikibase-statementview-rank-normal": "عام درجہ بندی",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|references}}"
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|حوالہ|حوالہ جات}}"
 }

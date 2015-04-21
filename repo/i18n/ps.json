@@ -33,6 +33,8 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "څرگندونه:",
 	"wikibase-modifyentity-id": "پېژند:",
 	"wikibase-modifyterm-language": "د ژبې کوډ:",
+	"special-listproperties": "د ځانگړنو لړليک",
+	"wikibase-listproperties-submit": "موندل",
 	"wikibase-entitieswithoutlabel-label-language": "د ژبې کوډ:",
 	"wikibase-entitieswithoutlabel-submit": "موندل",
 	"wikibase-restoreold": "بيازېرمل",
