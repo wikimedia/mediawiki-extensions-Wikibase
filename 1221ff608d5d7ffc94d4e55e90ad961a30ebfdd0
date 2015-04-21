@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_fdc10284",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T17:48:22Z",
+      "side": 1,
+      "message": "Yes. Want a separate patch just for that?",
+      "parentUuid": "0ed113e2_d5d658f6",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_75ff6c63",
         "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-21T12:50:54Z",
       "side": 1,
       "message": "Why is this here? This is completely unconnected to everything else in this class.",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5dc5ae8f",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T17:48:22Z",
+      "side": 1,
+      "message": "It\u0027s not unconnected. It pre-fetches the labels, so the LabelLookup will not need to run a database query for each label. The relationship between the lookup and the prefetcher is hidden by necessity. The LabelDescriptionLookup interface can\u0027t know about prefetching.",
+      "parentUuid": "0ed113e2_75ff6c63",
       "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
