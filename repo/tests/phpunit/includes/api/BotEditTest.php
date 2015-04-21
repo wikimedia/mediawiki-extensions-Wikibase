@@ -43,7 +43,7 @@ class BotEditTest extends WikibaseApiTestCase {
 			array( 'bot' )
 		);
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'Empty' ) );
 		}
 
@@ -99,7 +99,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		$this->login( 'wbbot' );
 
 		// -- do the request --------------------------------------------------
-		if( array_key_exists( 'handle', $params ) ){
+		if ( array_key_exists( 'handle', $params ) ) {
 			$params['id'] = EntityTestHelper::getId( $params['handle'] );
 			unset( $params['handle'] );
 		}
@@ -147,13 +147,17 @@ class BotEditTest extends WikibaseApiTestCase {
 
 		$this->assertNotNull( $change, 'no change matching ID ' . $myid . ' found in recentchanges feed!' );
 
-		if ( array_key_exists( 'new', $expected ) ){
+		if ( array_key_exists( 'new', $expected ) ) {
 			$this->assertTrue( $expected['new'] == array_key_exists( 'new', $change ),
 				"Must " . ( $expected['new'] ? '' : 'not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
 		}
-		if ( array_key_exists( 'bot', $expected ) ){
-			$this->assertTrue( $expected['bot'] == array_key_exists( 'bot', $change ),
-				"Must " . ( $expected['bot'] ? '' : 'not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
+
+		if ( array_key_exists( 'bot', $expected ) ) {
+			$actual = array_key_exists( 'bot', $change ) ? $change['bot'] : false;
+			$this->assertTrue(
+				$expected['bot'] === $actual,
+				"The 'bot' flag in the rc-entry of the result from the API must match"
+			);
 		}
 	}
 
