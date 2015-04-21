@@ -151,9 +151,11 @@ class BotEditTest extends WikibaseApiTestCase {
 			$this->assertTrue( $expected['new'] == array_key_exists( 'new', $change ),
 				"Must " . ( $expected['new'] ? '' : 'not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
 		}
+
 		if ( array_key_exists( 'bot', $expected ) ){
-			$this->assertTrue( $expected['bot'] == array_key_exists( 'bot', $change ),
-				"Must " . ( $expected['bot'] ? '' : 'not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
+			$this->assertTrue( $expected['bot'] === $change['bot'], "Value of 'bot' key in the "
+				. 'in the rc-entry of the result was expected to be ' . $expected['bot']
+				. ' but was ' . $change['bot'] );
 		}
 	}
 
