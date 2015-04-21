@@ -147,14 +147,28 @@ class BotEditTest extends WikibaseApiTestCase {
 
 		$this->assertNotNull( $change, 'no change matching ID ' . $myid . ' found in recentchanges feed!' );
 
-		if ( array_key_exists( 'new', $expected ) ){
-			$this->assertTrue( $expected['new'] == array_key_exists( 'new', $change ),
-				"Must " . ( $expected['new'] ? '' : 'not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
+		$this->assertResultValue( $expected, 'new', $change );
+		$this->assertResultValue( $expected, 'bot', $change );
+	}
+
+	private function assertResultValue( $expected, $key, $change ) {
+		if ( array_key_exists( $key, $expected ) ){
+			if ( $expected[$key] === true ) {
+				$this->assertResultValueTrue( $key, $change );
+			} else {
+				$this->assertResultValueFalse( $key, $change );
+			}
 		}
-		if ( array_key_exists( 'bot', $expected ) ){
-			$this->assertTrue( $expected['bot'] == array_key_exists( 'bot', $change ),
-				"Must " . ( $expected['bot'] ? '' : 'not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
-		}
+	}
+
+	private function assertResultValueTrue( $key, $change ) {
+		$this->assertTrue( $change[$key], "Value of '$key' key in the in the rc-entry"
+			. ' of the result was expected to be true, but was ' . $change[$key] );
+	}
+
+	private function assertResultValueFalse( $key, $change ) {
+		$this->assertFalse( $change[$key], "Value of '$key' key in the in the rc-entry"
+			. ' of the result was expected to be false, but was ' . $change[$key] );
 	}
 
 }
