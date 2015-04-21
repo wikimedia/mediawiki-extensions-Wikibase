@@ -7,10 +7,10 @@ use Language;
 use Message;
 use RuntimeException;
 use ValueParsers\CalendarModelParser;
+use ValueParsers\IsoTimestampParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
-use ValueParsers\TimeParser as IsoTimestampParser;
 use ValueParsers\ValueParser;
 
 /**
