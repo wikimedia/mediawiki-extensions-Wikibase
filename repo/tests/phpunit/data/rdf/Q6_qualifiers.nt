@@ -16,6 +16,7 @@
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/qualifier/P8-value> <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/qualifier/P8> "-0200-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/qualifier/P9> <http://url.acme.test/> .
+<http://acme.test/statement/TEST-Qualifiers> <http://acme.test/qualifier/P9> <http://url.acme2.test/> .
 <http://acme.test/statement/TEST-Qualifiers> <http://acme.test/value/P7> "string" .
 <http://acme.test/statement/TEST-Qualifiers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.wikidata.org/ontology-beta#Statement> .
 <http://acme.test/statement/TEST-Qualifiers> <http://www.wikidata.org/ontology-beta#rank> <http://www.wikidata.org/ontology-beta#NormalRank> .
