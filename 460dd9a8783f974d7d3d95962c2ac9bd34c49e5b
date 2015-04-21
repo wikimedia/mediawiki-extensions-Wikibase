@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_67401fa9",
+        "filename": "repo/includes/rdf/EntityRdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T14:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_e7916f53",
+      "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_26cd4063",
         "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
         "patchSetId": 17
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-20T21:38:02Z",
       "side": 1,
       "message": "is :)",
+      "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6727bf0e",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T14:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_26cd4063",
       "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_a715a79e",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T14:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_c78c6b3d",
+      "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_06d4bceb",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 17
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_8710a3ae",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T14:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_06d4bceb",
+      "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_07ccb38b",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 17
@@ -81,6 +153,24 @@
       "writtenOn": "2015-04-21T14:23:11Z",
       "side": 1,
       "message": "This does not exist.",
+      "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_472abbd8",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T14:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_07ccb38b",
       "revId": "460dd9a8783f974d7d3d95962c2ac9bd34c49e5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
