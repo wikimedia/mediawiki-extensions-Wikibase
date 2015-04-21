@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ed113e2_957d30e7",
+        "filename": "repo/includes/rdf/ComplexValueRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "Where does the \u0027V\u0027 come from? Should this be a named constant or something?",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5587c8dc",
+        "filename": "repo/includes/rdf/DedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "I think RDF is missing here.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1571400b",
+        "filename": "repo/includes/rdf/DedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "\"was need\"?",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_e84dcc40",
         "filename": "repo/includes/rdf/DedupeBag.php",
         "patchSetId": 5
@@ -13,6 +64,159 @@
       "writtenOn": "2015-04-20T16:50:46Z",
       "side": 1,
       "message": "The name and docs do not make it entirely clear that a command query segregation violation is intended here. Not objecting to having it, though making this more explicit would be good. I now had to check an implementation to verify they are indeed supposed to track calls to alreadySeen.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_356ec42b",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "RDF missing.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d57ad8e6",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "What does this mean? Does it always return true? Please describe.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b569541f",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "string[]",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_15d700c6",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "And if there is a collision, what happens? Will it always return true? False? Throw an exception?",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d5e09895",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "This has nothing to do with a \"null\" implementation. Please fix the class docs.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_555ee87c",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "This is not true.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d5517866",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "This concatenation is not sufficient. Collisions are possible.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f5dd9ce2",
+        "filename": "repo/includes/rdf/NullDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "Namespace is insufficient again.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_95ea1072",
+        "filename": "repo/includes/rdf/NullDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "What does this mean? Please describe.",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -36,6 +240,40 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_b5ef1482",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "This is dead code now, right?",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d5f73855",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "Dead code. Remove.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_485418ca",
         "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
         "patchSetId": 5
@@ -47,6 +285,57 @@
       "writtenOn": "2015-04-20T16:50:46Z",
       "side": 1,
       "message": "Explicit check please, now it looks like a badly named bool in the predicate",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f5f4bc52",
+        "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "Do ...( $bag ?: new NullDedupeBag() ); instead of the if() above.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_9591b0fd",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "As before, make use of ?:",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d58e58d5",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T13:08:54Z",
+      "side": 1,
+      "message": "Looks like this code was moved here, but from where did it came from?",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
