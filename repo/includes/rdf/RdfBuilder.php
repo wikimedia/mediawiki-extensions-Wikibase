@@ -787,7 +787,8 @@ class RdfBuilder {
 	 */
 	private function addValueToNode( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $type, $value ) {
 		if( $type == 'url' ) {
-			$writer->say( $propertyValueNamespace, $propertyValueLName )->is( $value );
+			// Trims extra whitespace since we had a bug in wikidata where some URLs end up having it
+			$writer->say( $propertyValueNamespace, $propertyValueLName )->is( trim( $value ) );
 		} elseif( $type == 'dateTime' && $value instanceof TimeValue ) {
 			$writer->say( $propertyValueNamespace, $propertyValueLName );
 			$this->sayDateLiteral( $writer, $value );
