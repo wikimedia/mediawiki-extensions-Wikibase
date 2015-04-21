@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_d518987c",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T10:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_8800c06e",
+      "revId": "8d4c3dc26c8c2ccede46e3579c051e061d85fa64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_08f4d082",
         "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-20T17:08:21Z",
       "side": 1,
       "message": "Negation can be dropped by flipping the body",
+      "revId": "8d4c3dc26c8c2ccede46e3579c051e061d85fa64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_952210a1",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-21T10:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_08f4d082",
       "revId": "8d4c3dc26c8c2ccede46e3579c051e061d85fa64",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
