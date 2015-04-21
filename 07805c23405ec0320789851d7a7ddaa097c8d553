@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_eaf29602",
+        "filename": "repo/includes/rdf/ComplexValueRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "It\u0027s a prefix for the key used in the bag - essentially, a namespace. It\u0027s not new, it was in the original code. Could make a constant, but it\u0027s only used here, that\u0027s it.",
+      "parentUuid": "0ed113e2_957d30e7",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_5587c8dc",
         "filename": "repo/includes/rdf/DedupeBag.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-21T13:08:54Z",
       "side": 1,
       "message": "I think RDF is missing here.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ea5ff6e6",
+        "filename": "repo/includes/rdf/DedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_5587c8dc",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_ea0616d1",
+        "filename": "repo/includes/rdf/DedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "s/need/seen/",
+      "parentUuid": "0ed113e2_1571400b",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_e84dcc40",
         "filename": "repo/includes/rdf/DedupeBag.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-20T16:50:46Z",
       "side": 1,
       "message": "The name and docs do not make it entirely clear that a command query segregation violation is intended here. Not objecting to having it, though making this more explicit would be good. I now had to check an implementation to verify they are indeed supposed to track calls to alreadySeen.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4a6e4295",
+        "filename": "repo/includes/rdf/DedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Yes, the intent is to check whether alreadySeen has been called with the same parameter before.\n\nThe top of the documentation if from the original function Stas write for RdfBuilder, I just move it. I\u0027ll see if I can make it clearer.",
+      "parentUuid": "0ed113e2_e84dcc40",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_4ad2c22d",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_356ec42b",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_d57ad8e6",
         "filename": "repo/includes/rdf/HashDedupeBag.php",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2015-04-21T13:08:54Z",
       "side": 1,
       "message": "What does this mean? Does it always return true? Please describe.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_aabd6ed3",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "It\u0027s wrong, i\u0027ll fix it :)",
+      "parentUuid": "0ed113e2_d57ad8e6",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_8ab8aae3",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_b569541f",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_15d700c6",
         "filename": "repo/includes/rdf/HashDedupeBag.php",
         "patchSetId": 5
@@ -132,6 +258,24 @@
       "writtenOn": "2015-04-21T13:08:54Z",
       "side": 1,
       "message": "And if there is a collision, what happens? Will it always return true? False? Throw an exception?",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_eac3765f",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "As the interface spec says, false negatives are permitted, false positives are not. I\u0027ll describe the algorithm in the class level docs.",
+      "parentUuid": "0ed113e2_15d700c6",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_aae6ce11",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "yea, copy\u0026paste...",
+      "parentUuid": "0ed113e2_d5e09895",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_555ee87c",
         "filename": "repo/includes/rdf/HashDedupeBag.php",
         "patchSetId": 5
@@ -166,6 +328,24 @@
       "writtenOn": "2015-04-21T13:08:54Z",
       "side": 1,
       "message": "This is not true.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8ae18afd",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "oops, copy\u0026paste",
+      "parentUuid": "0ed113e2_555ee87c",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_eadcd64d",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Yes, this is intentional.\n\nI\u0027ll describe the algorithm in the class level docs.",
+      "parentUuid": "0ed113e2_d5517866",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f5dd9ce2",
         "filename": "repo/includes/rdf/NullDedupeBag.php",
         "patchSetId": 5
@@ -200,6 +398,24 @@
       "writtenOn": "2015-04-21T13:08:54Z",
       "side": 1,
       "message": "Namespace is insufficient again.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4af40284",
+        "filename": "repo/includes/rdf/NullDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_f5dd9ce2",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_2aebbea1",
+        "filename": "repo/includes/rdf/NullDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_95ea1072",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_286bd483",
         "filename": "repo/includes/rdf/NullDedupeBag.php",
         "patchSetId": 5
@@ -234,6 +468,24 @@
       "writtenOn": "2015-04-20T16:50:46Z",
       "side": 1,
       "message": "The returning of false is not really \"doing nothing\". Not a big deal though.\n\nIf this was added for the tests, then putting it in a fixtures directory is preferred over putting it with the production code",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4a43a2b6",
+        "filename": "repo/includes/rdf/NullDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "It\u0027s not for tests, it\u0027s the default  implementation used by various rdf builders.",
+      "parentUuid": "0ed113e2_286bd483",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_4a58828c",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_b5ef1482",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_d5f73855",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 5
@@ -268,6 +538,24 @@
       "writtenOn": "2015-04-21T13:08:54Z",
       "side": 1,
       "message": "Dead code. Remove.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8a5e6a7a",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_d5f73855",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_aa156e9e",
+        "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Bah, I hate explicit null checks for objects that have type hints.",
+      "parentUuid": "0ed113e2_485418ca",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f5f4bc52",
         "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
         "patchSetId": 5
@@ -302,6 +608,24 @@
       "writtenOn": "2015-04-21T13:08:54Z",
       "side": 1,
       "message": "Do ...( $bag ?: new NullDedupeBag() ); instead of the if() above.",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6a27860e",
+        "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "But then that\u0027s not an explicit null check! It relies on interpolation to boolean! Evil!",
+      "parentUuid": "0ed113e2_f5f4bc52",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_8a874adc",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_9591b0fd",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_d58e58d5",
         "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
         "patchSetId": 5
@@ -336,6 +678,24 @@
       "writtenOn": "2015-04-21T13:08:54Z",
       "side": 1,
       "message": "Looks like this code was moved here, but from where did it came from?",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0a7b5aec",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T16:52:45Z",
+      "side": 1,
+      "message": "It wasn\u0027t moved. It primes a HashDedupeBag with values from $referencesSeen, so we can pretend, for the sake of testing, that some specific values had already been seen.",
+      "parentUuid": "0ed113e2_d58e58d5",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
