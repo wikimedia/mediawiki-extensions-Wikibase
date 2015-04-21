@@ -54,34 +54,34 @@ class BotEditTest extends WikibaseApiTestCase {
 		return array(
 			array(//0
 				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetlabel', 'language' => 'en', 'value' => 'ALabel' ),
-				'e' => array( 'bot' => true ) ),
+				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//1
 				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetlabel', 'language' => 'en', 'value' => 'ALabel2' ),
-				'e' => array( 'bot' => false ) ),
+				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//2
 				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetdescription', 'language' => 'de', 'value' => 'ADesc' ),
-				'e' => array( 'bot' => true ) ),
+				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//3
 				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetdescription', 'language' => 'de', 'value' => 'ADesc2' ),
-				'e' => array( 'bot' => false ) ),
+				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//4
 				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetaliases', 'language' => 'de', 'set' => 'ali1' ),
-				'e' => array( 'bot' => true ) ),
+				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//5
 				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetaliases', 'language' => 'de', 'set' => 'ali2' ),
-				'e' => array( 'bot' => false ) ),
+				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//6
 				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetsitelink', 'linksite' => 'enwiki', 'linktitle' => 'PageEn' ),
-				'e' => array( 'bot' => true ) ),
+				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//7
 				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetsitelink', 'linksite' => 'dewiki', 'linktitle' => 'PageDe' ),
-				'e' => array( 'bot' => false ) ),
+				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//8
 				'p' => array( 'bot' => '', 'action' => 'wblinktitles', 'tosite' => 'enwiki', 'totitle' => 'PageEn', 'fromsite' => 'svwiki', 'fromtitle' => 'SvPage' ),
-				'e' => array( 'bot' => true ) ),
+				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//9
 				'p' => array( 'action' => 'wblinktitles', 'tosite' => 'dewiki', 'totitle' => 'PageDe', 'fromsite' => 'nowiki', 'fromtitle' => 'NoPage' ),
-				'e' => array( 'bot' => false ) ),
+				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//10
 				'p' => array( 'bot' => '', 'action' => 'wbeditentity', 'new' => 'item', 'data' => '{}' ),
 				'e' => array( 'bot' => true, 'new' => true ) ),
@@ -147,14 +147,26 @@ class BotEditTest extends WikibaseApiTestCase {
 
 		$this->assertNotNull( $change, 'no change matching ID ' . $myid . ' found in recentchanges feed!' );
 
-		if ( array_key_exists( 'new', $expected ) ){
-			$this->assertTrue( $expected['new'] == array_key_exists( 'new', $change ),
-				"Must " . ( $expected['new'] ? '' : 'not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
+		$this->assertResultValue( $expected, 'new', $change );
+		$this->assertResultValue( $expected, 'bot', $change );
+	}
+
+	private function assertResultValue( $expected, $key, $change ) {
+		if ( $expected[$key] === true ) {
+			$this->assertResultValueTrue( $key, $change );
+		} else {
+			$this->assertResultValueFalse( $key, $change );
 		}
-		if ( array_key_exists( 'bot', $expected ) ){
-			$this->assertTrue( $expected['bot'] == array_key_exists( 'bot', $change ),
-				"Must " . ( $expected['bot'] ? '' : 'not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
-		}
+	}
+
+	private function assertResultValueTrue( $key, $change ) {
+		$this->assertTrue( $change[$key], "Value of '$key' key in the in the rc-entry"
+			. ' of the result was expected to be true, but was ' . $change[$key] );
+	}
+
+	private function assertResultValueFalse( $key, $change ) {
+		$this->assertFalse( $change[$key], "Value of '$key' key in the in the rc-entry"
+			. ' of the result was expected to be false, but was ' . $change[$key] );
 	}
 
 }
