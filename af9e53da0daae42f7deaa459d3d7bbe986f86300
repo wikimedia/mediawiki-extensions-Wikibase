@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_d54c18e7",
+        "filename": "repo/tests/phpunit/includes/api/BotEditTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-04-21T12:53:32Z",
+      "side": 1,
+      "message": "this also needs to be adjusted.  not sure why jenkins is not failing in this though",
+      "revId": "af9e53da0daae42f7deaa459d3d7bbe986f86300",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
