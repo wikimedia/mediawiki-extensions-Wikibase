@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_aa76ced3",
+        "filename": "purtle/src/N3Quoter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-21T17:04:03Z",
+      "side": 1,
+      "message": "Ignoring line breaks here is odd. They should get property encoded as %0A. We should probably also encode \\r and \\t.\n\nWe could also trim all whitespace from beginning and end, but that would be even more expensive, right?",
+      "revId": "70f46ff8c8001de549693399b03c45c757d26045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
