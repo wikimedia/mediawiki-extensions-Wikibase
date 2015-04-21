@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_3df54ac8",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-04-21T17:52:07Z",
+      "side": 1,
+      "message": "ID should be in capitals.",
+      "revId": "d7890dde27b0d6d74963df15c1864bcddebe571b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
