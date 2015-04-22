@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_91fbfa43",
+        "filename": "repo/includes/rdf/ComplexValueRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:45:38Z",
+      "side": 1,
+      "message": "Ok, not introduced in this patch.",
+      "parentUuid": "0ed113e2_eaf29602",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_5587c8dc",
         "filename": "repo/includes/rdf/DedupeBag.php",
         "patchSetId": 5
@@ -381,6 +399,24 @@
       "side": 1,
       "message": "Yes, this is intentional.\n\nI\u0027ll describe the algorithm in the class level docs.",
       "parentUuid": "0ed113e2_d5517866",
+      "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_91a9ba23",
+        "filename": "repo/includes/rdf/HashDedupeBag.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:45:38Z",
+      "side": 1,
+      "message": "What I meant was: this causes collisions between different namespaces. I will add a test. Luckily this does not cause false positives but false negatives, which is ok. And it\u0027s not introduced in this patch.",
+      "parentUuid": "0ed113e2_eadcd64d",
       "revId": "07805c23405ec0320789851d7a7ddaa097c8d553",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
