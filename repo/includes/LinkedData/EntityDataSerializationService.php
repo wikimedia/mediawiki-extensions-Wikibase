@@ -16,6 +16,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriterFactory;
@@ -566,7 +567,7 @@ class EntityDataSerializationService {
 			$this->propertyLookup,
 			$this->getFlavor( $flavorName ),
 			$rdfWriter,
-			new \HashBagOStuff()
+			new HashDedupeBag()
 		);
 
 		return $rdfBuilder;
