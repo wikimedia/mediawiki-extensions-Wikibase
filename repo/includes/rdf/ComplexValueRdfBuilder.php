@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\RdfWriter;
+use Cdb\Exception;
 
 /**
  * RDF mapping for wikibase data values, using the fully expanded data representation.
@@ -106,7 +107,7 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 
 		if ( !empty( $fields ) ) {
 			$valueLName = $this->addExpandedValue( $value, $prefix, $fields );
-			$writer->say( $propertyValueNamespace, $propertyValueLName."-value" )->is( RdfVocabulary::NS_VALUE, $valueLName );
+			$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )->is( RdfVocabulary::NS_VALUE, $valueLName );
 		}
 	}
 

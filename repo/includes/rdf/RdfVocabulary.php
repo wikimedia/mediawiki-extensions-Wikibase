@@ -25,13 +25,22 @@ class RdfVocabulary {
 	//FIXME: this is the wikibase ontology, NOT the wikidata ontology!
 	const ONTOLOGY_BASE_URI = 'http://www.wikidata.org/ontology';
 	const NS_ONTOLOGY = 'wikibase'; // wikibase ontology (shared)
-	const NS_ENTITY = 'entity'; // concept uris
-	const NS_DATA = 'data'; // document uris
-	const NS_VALUE = 'v'; // statement -> value
-	const NS_QUALIFIER = 'q'; // statement -> qualifier
-	const NS_STATEMENT = 's'; // entity -> statement
-	const NS_DIRECT_CLAIM = 'wdt'; // direct assertion entity -> value
-	const NS_REFERENCE = 'ref';
+	// Nodes
+	const NS_ENTITY = 'wd'; // concept uris
+	const NS_DATA = 'wdata'; // document uris
+	const NS_STATEMENT = 'wds'; // statement
+	const NS_REFERENCE = 'wdref'; // reference
+	const NS_VALUE = 'wdv'; // value
+	// Predicates
+	const NSP_DIRECT_CLAIM = 'wdt'; // direct assertion entity -> value
+	const NSP_CLAIM = 'p'; // entity -> statement
+	const NSP_CLAIM_STATEMENT = 'ps'; // statement -> simple value
+	const NSP_CLAIM_VALUE = 'psv'; // statement -> deep value
+	const NSP_QUALIFIER = 'pq'; // statement -> qualifier
+	const NSP_QUALIFIER_VALUE = 'pqv'; // statement ->  qualifier deep value
+	const NSP_REFERENCE = 'pr'; // reference -> simple value
+	const NSP_REFERENCE_VALUE = 'prv'; // reference -> deep value
+	// other prefixes
 	const NS_SKOS = 'skos'; // SKOS vocabulary
 	const NS_SCHEMA_ORG = 'schema'; // schema.org vocabulary
 	const NS_CC = 'cc'; // Creative Commons
@@ -40,8 +49,7 @@ class RdfVocabulary {
 	const SKOS_URI = 'http://www.w3.org/2004/02/skos/core#';
 	const SCHEMA_ORG_URI = 'http://schema.org/';
 	const CC_URI = 'http://creativecommons.org/ns#';
-	const WIKIBASE_RANK_BEST = 'BestRank';
-
+	// External URIs
 	const COMMONS_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/'; //FIXME: get from config
 	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
 	const PROV_URI = 'http://www.w3.org/ns/prov#';
@@ -53,11 +61,18 @@ class RdfVocabulary {
 	// See also DataValues\TimeValue\TimeFormatter::XXX_CALENDAR constants.
 	const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
 	const JULIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985786';
-
+	// Ranks
+	const WIKIBASE_RANK_BEST = 'BestRank';
 	public static $rankMap = array(
 		Statement::RANK_DEPRECATED => 'DeprecatedRank',
 		Statement::RANK_NORMAL => 'NormalRank',
 		Statement::RANK_PREFERRED => 'PreferredRank',
+	);
+	// Value properties
+	public static $claimToValue = array(
+			self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE,
+			self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE,
+			self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE,
 	);
 
 	/**
@@ -84,23 +99,39 @@ class RdfVocabulary {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 
+		if( substr($this->baseUri, -7) === 'entity/') {
+			$topUri = substr($this->baseUri, 0, -7);
+		} else {
+			$topUri = $this->baseUri;
+		}
+		$propUri = $topUri."prop/";
+
 		$this->namespaces = array (
 				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
 				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
-				self::NS_DIRECT_CLAIM => $this->baseUri . 'assert/',
-				self::NS_VALUE => $this->baseUri . 'value/',
-				self::NS_QUALIFIER => $this->baseUri . 'qualifier/',
-				self::NS_STATEMENT => $this->baseUri . 'statement/',
-				self::NS_REFERENCE => $this->baseUri . 'reference/',
+				// nodes
 				self::NS_DATA => $this->dataUri,
 				self::NS_ENTITY => $this->baseUri,
+				self::NS_STATEMENT => $this->baseUri . 'statement/',
+				self::NS_REFERENCE => $topUri . 'reference/',
+				self::NS_VALUE => $topUri . 'value/',
+				// predicates
+				self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
+				self::NSP_CLAIM => $propUri,
+				self::NSP_CLAIM_STATEMENT => $propUri . 'statement/',
+				self::NSP_CLAIM_VALUE => $propUri . 'statement/value/',
+				self::NSP_QUALIFIER => $propUri . 'qualifier/',
+				self::NSP_QUALIFIER_VALUE => $propUri . 'qualifier/value/',
+				self::NSP_REFERENCE => $propUri . 'reference/',
+				self::NSP_REFERENCE_VALUE => $propUri . 'reference/value/',
+				// external
 				self::NS_SKOS => self::SKOS_URI,
 				self::NS_SCHEMA_ORG => self::SCHEMA_ORG_URI,
 				self::NS_CC => self::CC_URI,
 				self::NS_GEO => self::GEO_URI,
-				self::NS_PROV => self::PROV_URI
+				self::NS_PROV => self::PROV_URI,
 		);
 	}
 
