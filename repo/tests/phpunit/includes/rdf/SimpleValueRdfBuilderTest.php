@@ -99,14 +99,14 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				new PropertyId( 'P2' ),
 				new EntityIdValue( new ItemId( 'Q42' ) ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P2> <http://acme.test/Q42> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P2> <http://acme.test/Q42> .',
 				)
 			),
 			'commonsMedia' => array(
 				new PropertyId( 'P3' ),
 				new StringValue( 'Test.jpg' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Test.jpg> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Test.jpg> .',
 				)
 			),
 			'globecoordinate' => array(
@@ -117,14 +117,14 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'https://www.wikidata.org/entity/Q2'
 				),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P4> "Point(12.25 -45.5)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P4> "Point(12.25 -45.5)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .',
 				)
 			),
 			'monolingualtext' => array(
 				new PropertyId( 'P5' ),
 				new MonolingualTextValue( 'ru', 'Берлин' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P5> "\u0411\u0435\u0440\u043B\u0438\u043D"@ru .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P5> "\u0411\u0435\u0440\u043B\u0438\u043D"@ru .',
 				)
 			),
 			'quantity' => array(
@@ -135,7 +135,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					new DecimalValue( '+0.00013' ),
 					new DecimalValue( '+0.00010' ) ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P6> "+0.00011"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P6> "+0.00011"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
 				)
 			),
 			'quantity-unit' => array(
@@ -146,35 +146,35 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					new DecimalValue( '-2.3' ),
 					new DecimalValue( '-2.3' ) ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P6> "-2.3"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P6> "-2.3"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
 				)
 			),
 			'string' => array(
 				new PropertyId( 'P7' ),
 				new StringValue( 'Kittens' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P7> "Kittens" .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P7> "Kittens" .',
 				)
 			),
 			'time' => array(
 				new PropertyId( 'P8' ),
 				new TimeValue( '+2015-03-03T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 				)
 			),
 			'time-year' => array( // NOTE: may changed to use xsd:gYear
 				new PropertyId( 'P8' ),
 				new TimeValue( '+2015-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P8> "2015-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "2015-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 				)
 			),
 			'time-margin' => array(
 				new PropertyId( 'P8' ),
 				new TimeValue( '+2015-03-03T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 				)
 			),
 			'time-bce' => array( // NOTE: This assumes that internal data and the RDF data use the
@@ -185,7 +185,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				new PropertyId( 'P8' ),
 				new TimeValue( '-0044-03-15T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P8> "-0044-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "-0044-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 				)
 			),
 			'time-julian' => array( // NOTE: Currently, giving a calendar other than gregorian
@@ -196,21 +196,21 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				new PropertyId( 'P8' ),
 				new TimeValue( '+1492-10-12T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::JULIAN_CALENDAR ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P8> "1492-10-21T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "1492-10-21T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 				)
 			),
 			'url' => array(
 				new PropertyId( 'P9' ),
 				new StringValue( 'http://quux.test/xyzzy' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P9> <http://quux.test/xyzzy> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P9> <http://quux.test/xyzzy> .',
 				)
 			),
 			'url-mailto' => array(
 				new PropertyId( 'P9' ),
 				new StringValue( 'mailto:xyzzy@quux.test' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/assert/P9> <mailto:xyzzy@quux.test> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P9> <mailto:xyzzy@quux.test> .',
 				)
 			),
 		);
@@ -225,7 +225,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
 		$builder = $this->newBuilder();
-		$builder->addSnakValue( $writer, $propertyId, $value, RdfVocabulary::NS_DIRECT_CLAIM );
+		$builder->addSnakValue( $writer, $propertyId, $value, RdfVocabulary::NSP_DIRECT_CLAIM );
 
 		$this->assertTriplesEqual( $expectedTriples, $writer );
 	}
@@ -240,7 +240,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$mentioned = array();
 		$builder = $this->newBuilder( $mentioned );
-		$builder->addSnakValue( $writer, $propertyId, $value, RdfVocabulary::NS_DIRECT_CLAIM );
+		$builder->addSnakValue( $writer, $propertyId, $value, RdfVocabulary::NSP_DIRECT_CLAIM );
 
 		$this->assertEquals( array( 'Q42' ), array_keys( $mentioned ) );
 	}
