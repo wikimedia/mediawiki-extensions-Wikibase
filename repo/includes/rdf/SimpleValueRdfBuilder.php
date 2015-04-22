@@ -13,8 +13,6 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
-use Wikibase\DateTimeValueCleaner;
-use Wikibase\JulianDateTimeValueCleaner;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -56,8 +54,7 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 		$this->vocabulary = $vocabulary;
 		$this->propertyLookup = $propertyLookup;
 
-		// TODO: if data is fixed to be always Gregorian, replace with
-		// DateTimeValueCleaner
+		// TODO: if data is fixed to be always Gregorian, replace with DateTimeValueCleaner
 		$this->dateCleaner = new JulianDateTimeValueCleaner();
 		$this->mentionedEntityTracker = new NullEntityMentionListener();
 	}
@@ -84,8 +81,11 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param DataValue $value
 	 * @param string $propertyNamespace The property namespace for this snak
 	 */
-	public function addSnakValue( RdfWriter $writer, PropertyId $propertyId,
-			DataValue $value, $propertyNamespace
+	public function addSnakValue(
+		RdfWriter $writer,
+		PropertyId $propertyId,
+		DataValue $value,
+		$propertyNamespace
 	) {
 		$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
@@ -160,8 +160,13 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param EntityIdValue $value
 	 */
-	private function addStatementForWikibaseEntityid( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
-			EntityIdValue $value ) {
+	private function addStatementForWikibaseEntityid(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		EntityIdValue $value
+	) {
 		$entityId = $value->getValue()->getEntityId();
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ENTITY, $entityLName );
@@ -178,11 +183,16 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param StringValue $value
 	 */
-	private function addStatementForString( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
-			StringValue $value ) {
-		if ( $dataType == 'commonsMedia' ) {
+	private function addStatementForString(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		StringValue $value
+	) {
+		if ( $dataType === 'commonsMedia' ) {
 			$this->addValueToNode( $writer, $propertyValueNamespace, $propertyValueLName, 'url', $this->vocabulary->getCommonsURI( $value->getValue() ) );
-		} elseif ( $dataType == 'url' ) {
+		} elseif ( $dataType === 'url' ) {
 			$this->addValueToNode( $writer, $propertyValueNamespace, $propertyValueLName, 'url', $value->getValue() );
 		} else {
 			$writer->say( $propertyValueNamespace, $propertyValueLName )->text( $value->getValue() );
@@ -200,13 +210,13 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param mixed $value
 	 */
 	protected function addValueToNode( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $type, $value ) {
-		if( $type == 'url' ) {
+		if ( $type === 'url' ) {
 			// Trims extra whitespace since we had a bug in wikidata where some URLs end up having it
 			$writer->say( $propertyValueNamespace, $propertyValueLName )->is( trim( $value ) );
-		} elseif( $type == 'dateTime' && $value instanceof TimeValue ) {
+		} elseif ( $type === 'dateTime' && $value instanceof TimeValue ) {
 			$writer->say( $propertyValueNamespace, $propertyValueLName );
 			$this->sayDateLiteral( $writer, $value );
-		} elseif( $type == 'decimal' ) {
+		} elseif ( $type === 'decimal' ) {
 			// TODO: handle precision here?
 			if ( $value instanceof DecimalValue ) {
 				$value = $value->getValue();
@@ -233,8 +243,13 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param MonolingualTextValue $value
 	 */
-	private function addStatementForMonolingualtext( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
-			MonolingualTextValue $value ) {
+	private function addStatementForMonolingualtext(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		MonolingualTextValue $value
+	) {
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->text( $value->getText(), $value->getLanguageCode() );
 	}
 
@@ -264,9 +279,13 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param TimeValue $value
 	 */
-	private function addStatementForTime( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
-			TimeValue $value ) {
-
+	private function addStatementForTime(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		TimeValue $value
+	) {
 		$this->addValueToNode( $writer, $propertyValueNamespace, $propertyValueLName, 'dateTime', $value );
 	}
 
@@ -279,9 +298,13 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param GlobeCoordinateValue $value
 	 */
-	private function addStatementForGlobecoordinate( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
-			GlobeCoordinateValue $value ) {
-
+	private function addStatementForGlobecoordinate(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		GlobeCoordinateValue $value
+	) {
 		$point = "Point({$value->getLatitude()} {$value->getLongitude()})";
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $point, RdfVocabulary::NS_GEO, "wktLiteral" );
 	}
@@ -295,8 +318,13 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param QuantityValue $value
 	 */
-	private function addStatementForQuantity( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
-		QuantityValue $value ) {
+	private function addStatementForQuantity(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		QuantityValue $value
+	) {
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->value( $value->getAmount(), 'xsd', 'decimal' );
 	}
 

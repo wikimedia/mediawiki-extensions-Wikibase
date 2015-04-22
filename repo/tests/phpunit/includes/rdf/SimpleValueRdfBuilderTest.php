@@ -15,12 +15,11 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikimedia\Purtle\RdfWriter;
-use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SimpleValueRdfBuilder;
 
 /**
- * @covers Wikibase\SimpleValueRdfBuilder
+ * @covers Wikibase\Rdf\SimpleValueRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -32,21 +31,24 @@ use Wikibase\Rdf\SimpleValueRdfBuilder;
  */
 class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
-	private $testData;
+	/**
+	 * @var RdfBuilderTestData|null
+	 */
+	private $testData = null;
 
 	/**
 	 * Initialize repository data
 	 *
 	 * @return RdfBuilderTestData
 	 */
-	private function getTestData()
-	{
-		if( empty( $this->testData ) ) {
+	private function getTestData() {
+		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
 				__DIR__ . "/../../data/rdf",
 				__DIR__ . "/../../data/rdf/SimpleValueRdfBuilder"
 			);
 		}
+
 		return $this->testData;
 	}
 

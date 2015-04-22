@@ -68,6 +68,8 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param Statement $statement
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function addMainSnak( EntityId $entityId, Statement $statement ) {
 		$snak = $statement->getMainSnak();

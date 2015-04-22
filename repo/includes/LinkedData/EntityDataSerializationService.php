@@ -20,9 +20,9 @@ use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriterFactory;
-use Wikibase\RdfProducer;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
 /**
