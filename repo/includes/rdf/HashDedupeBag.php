@@ -82,12 +82,13 @@ class HashDedupeBag implements DedupeBag {
 	 */
 	public function alreadySeen( $hash, $namespace = '' ) {
 		$key = $namespace . substr( $hash, 0, $this->cutoff );
-		if ( !isset( $this->bag[$key] ) || $this->bag[$key] !== $hash ) {
-			$this->bag[$key] = $hash;
-			return false;
+
+		if ( array_key_exists( $key, $this->bag ) && $this->bag[$key] === $hash ) {
+			return true;
 		}
 
-		return true;
+		$this->bag[$key] = $hash;
+		return false;
 	}
 
 }
