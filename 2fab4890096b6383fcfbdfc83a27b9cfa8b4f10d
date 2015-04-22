@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f467d420",
+        "filename": "repo/includes/rdf/EntityMentionListener.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T15:36:37Z",
+      "side": 1,
+      "message": "* \"are were\"?\n* Why is the explanation about stubs here?",
+      "revId": "2fab4890096b6383fcfbdfc83a27b9cfa8b4f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d44df09c",
+        "filename": "repo/includes/rdf/EntityMentionListener.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T15:36:37Z",
+      "side": 1,
+      "message": "Why not use EntityIdValue as the type of the parameter then?",
+      "revId": "2fab4890096b6383fcfbdfc83a27b9cfa8b4f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_34855ca0",
+        "filename": "repo/includes/rdf/EntityMentionListener.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T15:36:37Z",
+      "side": 1,
+      "message": "How is the fact that a PropertyId is mentioned different from the fact that an EntityId is mentioned? They are subclasses. One method uses the word \"reference\", the other does not.",
+      "revId": "2fab4890096b6383fcfbdfc83a27b9cfa8b4f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
