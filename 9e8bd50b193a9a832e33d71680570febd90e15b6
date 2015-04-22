@@ -16,6 +16,431 @@
       "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b100816e",
+        "filename": "repo/includes/rdf/EntityRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Why EntityDocument? The API for RdfBuilder addEntity() only accepts Entity, so how can we get anything else into builder? If we should handle non-Entity documents, then we should handle them consistently, not?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d138a59d",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Why we need to split flavor into booleans?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_3147b124",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "why statement write is a sub and reference writer is not? Shouldn\u0027t it be the other way around?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_31d2512d",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Do we need such function? It is only used in one place (well, two but it should be one, see below). Also, we have another getStatementLName in RdfVocabulary - why?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f1fe09ab",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "!\u003d\u003d false looks redundant",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b1be41d0",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "We already do getStatementLName() in addStatement(), and second time here. We should either pass it here or return it from here and reuse.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_710bf9d9",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "The only place referenceSeen() is called is if(), where it is compared to false. Why return $hash and not true?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d12d0543",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "I still don\u0027t understand how it works that we pass vocabulary but also use it statically.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_11138d06",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "If we moved to using common builder for whole dump with elimination of RdfSerializer, we can actually create the bag inside the builder.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d1dc254e",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Please don\u0027t... Having API where you need to construct a whole bunch of builders before you can actually do anything is not good. Information about builders should be in the builder class, not outside.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_51cfd582",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "TermsRdfBuilder has capability of getting languages list, but it seems to be ignored, is it on purpose?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b11641ab",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be simpler to make $vocabulary and $propertyLookup object properties and not pass them around so many times?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d1918553",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Why we create $simpleValueBuilder outside of the if() when we only use it in \"else\" branch?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f1a289a3",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "ITYM \"use\"",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_314331b8",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Why this one is public and other new*Builder are private?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_913e9d25",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Why we need to pass it a builder if it always use the same one? Why wouldn\u0027t it just create one internally?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_114aadc8",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "This is public too, so 2 public new*Builder and 2 private. A bit confusinh. Is there a reason beahind that?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_71e3f9d4",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "If everything is a builder, shouldn\u0027t this be a builder too?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_312a51d8",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "I think we should use either both http or both https. Not sure how come they\u0027re different, probably my fault. But we should check which one is right in the data and use that.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_11c94d7b",
+        "filename": "repo/includes/rdf/SimpleValueRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Should be DateTimeValueCleaner in the definition probably.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_11770d37",
+        "filename": "repo/includes/rdf/SnakValueRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Why we need this interface? As far as I can see, it is used exactly once by SimpleValueRdfBuilder.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_31eb31dd",
+        "filename": "repo/includes/rdf/TermsRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "$languages ? array_flip( $languages ) : array() looks better to me.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_71e1b9fa",
+        "filename": "repo/includes/rdf/TermsRdfBuilder.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Do we really need a separate function to call isset?",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5127d50d",
+        "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Didn\u0027t we agree to use JSON source data? Now we\u0027re moving back to programmatic building? I\u0027m confused.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f17a89e6",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTestData.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-04-22T00:28:14Z",
+      "side": 1,
+      "message": "Nice! I never got to actually implementing it in a consistent way, that\u0027d help when refactoring and adding new features.",
+      "revId": "9e8bd50b193a9a832e33d71680570febd90e15b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
