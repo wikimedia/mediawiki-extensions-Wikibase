@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_3451dcdd",
+        "filename": "repo/includes/rdf/MentionedEntityTracker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:53:31Z",
+      "side": 1,
+      "message": "What is the use of this interface? It does not contain any method to make use of the collected information. I find this odd.",
+      "revId": "72a2bfc0ad72f2a88a0f5b078456d20a877fae62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_14da9878",
+        "filename": "repo/includes/rdf/MentionedEntityTracker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:53:31Z",
+      "side": 1,
+      "message": "Why did you changed the name? Now it\u0027s inconsistent to the name of the interface.\n\nI think this can also track \"mentions\" of properties that do not exist any more. Therefor I think \"mentioned\" is better.",
+      "revId": "72a2bfc0ad72f2a88a0f5b078456d20a877fae62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
