@@ -6,14 +6,12 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikimedia\Purtle\NTriplesRdfWriter;
-use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\Rdf\RdfBuilder;
-use Wikibase\RdfProducer;
+use Wikibase\Rdf\RdfProducer;
 
 /**
- * @covers Wikibase\RdfBuilder
+ * @covers Wikibase\Rdf\RdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -34,7 +32,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	private function getTestData()
 	{
-		if( empty( $this->testData ) ) {
+		if ( empty( $this->testData ) ) {
 			$this->testData = new RdfBuilderTestData( __DIR__ . "/../../data/rdf", __DIR__ . "/../../data/rdf" );
 		}
 
@@ -48,7 +46,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 * @return RdfBuilder
 	 */
 	private function newRdfBuilder( $produce, DedupeBag $dedup = null ) {
-		if( !$dedup ) {
+		if ( $dedup === null ) {
 			$dedup = new HashDedupeBag();
 		}
 
@@ -69,34 +67,36 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 	/**
 	 * Load entity from JSON
-	 * @param string $entityId
+	 *
+	 * @param string $idString
+	 *
 	 * @return Entity
 	 */
-	public function getEntityData( $entityId )
-	{
-		return $this->getTestData()->getEntity( $entityId );
+	public function getEntityData( $idString ) {
+		return $this->getTestData()->getEntity( $idString );
 	}
 
 	/**
 	 * Load serialized ntriples
+	 *
 	 * @param string $testName
-	 * @return array
+	 *
+	 * @return string[]|null
 	 */
-	public function getSerializedData( $testName )
-	{
+	public function getSerializedData( $testName ) {
 		return $this->getTestData()->getNTriples( $testName );
 	}
 
 	public function getRdfTests() {
 		$rdfTests = array(
-				array('Q1', 'Q1_simple'),
-				array('Q2', 'Q2_labels'),
-				array('Q3', 'Q3_links'),
-				array('Q4', 'Q4_claims'),
-				array('Q5', 'Q5_badges'),
-				array('Q6', 'Q6_qualifiers'),
-				array('Q7', 'Q7_references'),
-				array('Q8', 'Q8_baddates'),
+			array( 'Q1', 'Q1_simple' ),
+			array( 'Q2', 'Q2_labels' ),
+			array( 'Q3', 'Q3_links' ),
+			array( 'Q4', 'Q4_claims' ),
+			array( 'Q5', 'Q5_badges' ),
+			array( 'Q6', 'Q6_qualifiers' ),
+			array( 'Q7', 'Q7_references' ),
+			array( 'Q8', 'Q8_baddates' ),
 		);
 
 		return $rdfTests;

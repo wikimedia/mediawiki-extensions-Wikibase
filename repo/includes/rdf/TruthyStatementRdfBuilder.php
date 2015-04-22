@@ -13,6 +13,7 @@ use Wikimedia\Purtle\RdfWriter;
 
 /**
  * "Truthy" RDF mapping for wikibase statements.
+ * FIXME: What does "truthy" mean?
  *
  * @since 0.5
  *
@@ -68,6 +69,8 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param Statement $statement
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function addMainSnak( EntityId $entityId, Statement $statement ) {
 		$snak = $statement->getMainSnak();

@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * Interface for an RDF mapping for (some aspect of) wikibase entities.
+ * FIXME: What exactly does "some" mean?
  *
  * @since 0.5
  *

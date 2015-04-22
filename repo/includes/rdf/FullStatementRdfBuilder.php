@@ -17,6 +17,7 @@ use Wikimedia\Purtle\RdfWriter;
 
 /**
  * Fully reified RDF mapping for wikibase statements.
+ * FIXME: Rewhat?
  * This does not output simple statements. If both forms (simple and full) are desired,
  * use SimpleStatementRdfBuilder in addition to FullStatementRdfBuilder.
  *
@@ -159,6 +160,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	public function addStatements( EntityId $entityId, StatementList $statementList ) {
 		$bestList = array();
 
+		/** @var Statement $statement */
 		// FIXME: getBestStatementPerProperty() is expensive, share the result with TruthyStatementRdfBuilder!
 		foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
 			$bestList[$statement->getGuid()] = true;
@@ -282,9 +284,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	}
 
 	/**
-	}
-
-	/**
 	 * Add fully reified statements for the given entity to the RDF graph.
 	 * This may include qualifiers and references, depending on calls to
 	 * setProduceQualifiers() resp. setProduceReferences().
@@ -293,8 +292,10 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 */
 	public function addEntity( EntityDocument $entity ) {
 		if ( $entity instanceof StatementListProvider ) {
-			$entityId = $entity->getId();
-			$this->addStatements( $entityId, $entity->getStatements() );
+			$statementList = $entity->getStatements();
+
+			/** @var EntityDocument $entity */
+			$this->addStatements( $entity->getId(), $statementList );
 		}
 	}
 

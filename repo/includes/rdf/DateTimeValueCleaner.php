@@ -1,5 +1,6 @@
 <?php
-namespace Wikibase;
+
+namespace Wikibase\Rdf;
 
 use DataValues\TimeValue;
 
@@ -10,6 +11,7 @@ use DataValues\TimeValue;
  * @licence GNU GPL v2+
  */
 class DateTimeValueCleaner {
+
 	/**
 	 * Clean up Wikidata date value in Gregorian calendar
 	 * - remove + from the start - not all data stores like that
@@ -79,4 +81,5 @@ class DateTimeValueCleaner {
 	public function getStandardValue( TimeValue $value ) {
 		return $this->cleanupGregorianValue( $value->getTime() );
 	}
+
 }
