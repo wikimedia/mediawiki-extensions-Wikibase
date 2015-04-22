@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_34331c0c",
+        "filename": "repo/includes/rdf/EntityMentionListener.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-22T15:41:10Z",
+      "side": 1,
+      "message": "Because that\u0027s the primary use case of this interface.",
+      "parentUuid": "0ed113e2_f467d420",
+      "revId": "2fab4890096b6383fcfbdfc83a27b9cfa8b4f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_d44df09c",
         "filename": "repo/includes/rdf/EntityMentionListener.php",
         "patchSetId": 13
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_142298b1",
+        "filename": "repo/includes/rdf/EntityMentionListener.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-22T15:41:10Z",
+      "side": 1,
+      "message": "Hm... could do that, but I don\u0027t think it would add value. Also, the interface should use as little information as it can. Which is the ID, not the Value object.",
+      "parentUuid": "0ed113e2_d44df09c",
+      "revId": "2fab4890096b6383fcfbdfc83a27b9cfa8b4f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_34855ca0",
         "filename": "repo/includes/rdf/EntityMentionListener.php",
         "patchSetId": 13
@@ -47,6 +83,24 @@
       "writtenOn": "2015-04-22T15:36:37Z",
       "side": 1,
       "message": "How is the fact that a PropertyId is mentioned different from the fact that an EntityId is mentioned? They are subclasses. One method uses the word \"reference\", the other does not.",
+      "revId": "2fab4890096b6383fcfbdfc83a27b9cfa8b4f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d41bb080",
+        "filename": "repo/includes/rdf/EntityMentionListener.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-22T15:41:10Z",
+      "side": 1,
+      "message": "entityReferenceMentioned is used when an ID (item or property) is mentioned as the *value* of a snak. propertyMentioned is used when a property is used as the snak\u0027s *proeprty*.\n\nThe two functions distinguish *how* the entity is used, not what kind of entity it is.",
+      "parentUuid": "0ed113e2_34855ca0",
       "revId": "2fab4890096b6383fcfbdfc83a27b9cfa8b4f10d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
