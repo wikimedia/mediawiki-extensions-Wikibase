@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_d18c2202",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "Rewhat?",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_515b5226",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "Copy paste creep?",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f19fe6b7",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "+2! :-)",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_11838ad2",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "This is not even a sentence. :-(",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f17da6e5",
+        "filename": "repo/includes/rdf/TermsRdfBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "Could be a lot more descriptive.",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b1107eae",
+        "filename": "repo/includes/rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "Please describe what this means.",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_91f1ba94",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "We usually call this $idString or $serialization. It\u0027s an identifier, not a \"name\". Not a problem here, just to let you know.",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_31248e07",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "Please avoid calling things $entityId that are not Entityid objects. Fixed in my follow-up.",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b1fabe71",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTestData.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "I was told (I think it was Krinkle) that empty() should be avoided. The problem is, if you have a typo somewhere, it will never fail. Better do an explicit $this-\u003ecodec \u003d\u003d\u003d null check. Same for other places in this code. All fixed in my follow-up.",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_31d7aef4",
+        "filename": "repo/tests/phpunit/includes/rdf/SimpleValueRdfBuilderTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "Probably not relevant in this test, but should be trim( ..., \"\\n\" );",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_91ca1a49",
+        "filename": "repo/tests/phpunit/includes/rdf/SiteLinksRdfBuilderTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:14:01Z",
+      "side": 1,
+      "message": "I wonder why this code snippet is repeated so often in all tests. Can\u0027t this be part of the ...TestData\" class?",
+      "revId": "48b7b31b4e8bde18c220009679b3333efd9d4fbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
