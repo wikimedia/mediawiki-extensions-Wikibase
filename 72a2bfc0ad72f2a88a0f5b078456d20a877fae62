@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_9496884e",
+        "filename": "repo/includes/rdf/MentionedEntityTracker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-22T15:19:06Z",
+      "side": 1,
+      "message": "It\u0027s a listener interface. A thing that is interested in knowing which entities where mentioned can implement this, and register as a callback, to be notified about such mentions.",
+      "parentUuid": "0ed113e2_3451dcdd",
+      "revId": "72a2bfc0ad72f2a88a0f5b078456d20a877fae62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_14da9878",
         "filename": "repo/includes/rdf/MentionedEntityTracker.php",
         "patchSetId": 10
