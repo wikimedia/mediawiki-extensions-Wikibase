@@ -100,10 +100,6 @@ class RdfBuilder implements EntityRdfBuilder {
 		$this->termsBuilder = new TermsRdfBuilder( $vocabulary, $writer );
 		$this->builders[] = $this->termsBuilder;
 
-		if ( $this->shouldProduce( RdfProducer::PRODUCE_SITELINKS ) ) {
-			$this->builders[] = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
-		}
-
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_TRUTHY_STATEMENTS ) ) {
 			$this->builders[] = $this->newTruthyStatementRdfBuilder();
 		}
@@ -111,6 +107,12 @@ class RdfBuilder implements EntityRdfBuilder {
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_ALL_STATEMENTS ) ) {
 			$this->builders[] = $this->newFullStatementRdfBuilder();
 		}
+
+		// placing this last produces more readable output since all entity things are together
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_SITELINKS ) ) {
+			$this->builders[] = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
+		}
+
 	}
 
 	/**
