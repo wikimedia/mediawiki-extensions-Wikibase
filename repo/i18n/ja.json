@@ -8,10 +8,12 @@
 			"Zolo",
 			"아라",
 			"Los688",
-			"朝彦"
+			"朝彦",
+			"赤城。"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
+	"wikibase-entity": "実体",
 	"wikibase-entity-item": "項目",
 	"wikibase-entity-property": "プロパティ",
 	"wikibase-entity-query": "クエリ",
@@ -215,6 +217,8 @@
 	"wikibase-listdatatypes-intro": "ここでは、インストールされているもので利用できるデータ型をすべて列挙しています:",
 	"wikibase-history-title-with-label": "「$2」($1) の変更履歴",
 	"wikibase-history-title-without-label": "($1) の変更履歴",
+	"special-listproperties": "プロパティ一覧",
+	"wikibase-listproperties-submit": "見つける",
 	"special-entitieswithoutdescription": "説明がないエンティティ",
 	"wikibase-entitieswithoutdescription-legend": "説明がないエンティティ一覧の取得",
 	"special-entitieswithoutlabel": "ラベルがないエンティティ",
@@ -235,6 +239,7 @@
 	"wikibase-entitydata-storage-error": "エンティティ $1 を読み込めませんでした。",
 	"wikibase-entitydata-title": "エンティティのデータ",
 	"wikibase-entitydata-text": "このページではエンティティの値にリンクされたデータ インターフェイスを提供します。下位ページの構文を使用して、URL にエンティティ ID を指定してください。",
+	"wikibase-redirectentity-submit": "リダイレクト",
 	"special-mylanguagefallbackchain": "言語フォールバックチェイン",
 	"wikibase-mylanguagefallbackchain-text": "エンティティのラベルをあなた向けに表示するために使われている言語フォールバックチェインを以下に表示します。",
 	"wikibase-mylanguagefallbackchain-babel": "<nowiki>{{#babel: }}</nowiki> を{{GENDER:$1|自分の}}[[Special:MyPage|利用者ページ]]に置くことで編集できます。",

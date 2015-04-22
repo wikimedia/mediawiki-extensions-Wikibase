@@ -175,6 +175,7 @@
 	"special-listdatatypes": "Lëscht vun allen disponibelen Type vun Donnéeën",
 	"wikibase-history-title-with-label": "Versioune vun \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Versioune vun ($1)",
+	"wikibase-listproperties-datatype": "Datentyp:",
 	"wikibase-listproperties-submit": "Sichen",
 	"special-entitieswithoutdescription": "Objeten ouni Beschreiwung",
 	"special-entitieswithoutlabel": "Objeten ouni Etikett",
