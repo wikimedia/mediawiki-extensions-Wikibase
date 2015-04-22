@@ -2,8 +2,10 @@
 
 namespace Wikibase\Rdf;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
@@ -13,6 +15,7 @@ use Wikimedia\Purtle\RdfWriter;
 
 /**
  * Fully reified RDF mapping for wikibase statements.
+ * FIXME: Rewhat?
  * This does not output simple statements. If both forms (simple and full) are desired,
  * use SimpleStatementRdfBuilder in addition to FullStatementRdfBuilder.
  *
@@ -147,6 +150,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	public function addStatements( EntityId $entityId, StatementList $statementList ) {
 		$bestList = array();
 
+		/** @var Statement $statement */
 		// FIXME: getBestStatementPerProperty() is expensive, share the result with TruthyStatementRdfBuilder!
 		foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
 			$bestList[$statement->getGuid()] = true;
@@ -181,13 +185,14 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 		// XXX: separate builder for references?
 		if ( $this->produceReferences ) {
+			/** @var Reference $reference */
 			foreach ( $statement->getReferences() as $reference ) { //FIXME: split body into separate method
 				$hash = $reference->getSnaks()->getHash();
 				$refLName = $hash;
 
 				$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
 					->say( RdfVocabulary::NS_PROV, 'wasDerivedFrom' )->is( RdfVocabulary::NS_REFERENCE, $refLName );
-				if ( $this->referenceSeen( $hash ) !== false ) {
+				if ( $this->referenceSeen( $hash ) ) {
 					continue;
 				}
 
@@ -244,6 +249,8 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 * @param RdfWriter $writer
 	 * @param Snak $snak
 	 * @param $propertyNamespace
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function addSnak( RdfWriter $writer, Snak $snak, $propertyNamespace ) {
 
@@ -264,7 +271,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 				$writer->say( $propertyNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Novalue' );
 				break;
 			default:
-				throw new \InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
+				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
 		}
 	}
 
@@ -274,13 +281,10 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 * @return bool
 	 */
 	private function referenceSeen( $hash ) {
-		if ( $this->referenceSeenCallback ) {
-			if ( call_user_func( $this->referenceSeenCallback, $hash ) ) {
-				return $hash;
-			}
-		}
+		$seen = $this->referenceSeenCallback !== null
+			&& call_user_func( $this->referenceSeenCallback, $hash );
 
-		return false;
+		return $seen;
 	}
 
 	/**
@@ -292,8 +296,10 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 */
 	public function addEntity( EntityDocument $entity ) {
 		if ( $entity instanceof StatementListProvider ) {
-			$entityId = $entity->getId();
-			$this->addStatements( $entityId, $entity->getStatements() );
+			$statementList = $entity->getStatements();
+
+			/** @var EntityDocument $entity */
+			$this->addStatements( $entity->getId(), $statementList );
 		}
 	}
 

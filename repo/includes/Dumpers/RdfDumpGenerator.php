@@ -15,8 +15,8 @@ use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Rdf\RdfBuilder;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\RdfProducer;
 use Wikimedia\Purtle\RdfWriterFactory;
 
 /**

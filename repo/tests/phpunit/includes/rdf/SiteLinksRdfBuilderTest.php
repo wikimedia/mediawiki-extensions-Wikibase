@@ -2,11 +2,11 @@
 
 namespace Wikibase\Test\Rdf;
 
-use Wikibase\Rdf\Test\RdfBuilderTestData;
+use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
 
 /**
- * @covers Wikibase\SiteLinksRdfBuilder
+ * @covers Wikibase\Rdf\SiteLinksRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -16,23 +16,26 @@ use Wikibase\Rdf\SiteLinksRdfBuilder;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class SiteLinksRdfBuilderTest extends PHPUnit_Framework_TestCase {
 
-	private $testData;
+	/**
+	 * @var RdfBuilderTestData|null
+	 */
+	private $testData = null;
 
 	/**
 	 * Initialize repository data
 	 *
 	 * @return RdfBuilderTestData
 	 */
-	private function getTestData()
-	{
-		if( empty( $this->testData ) ) {
+	private function getTestData() {
+		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
 				__DIR__ . "/../../data/rdf",
 				__DIR__ . "/../../data/rdf/SiteLinksRdfBuilder"
 			);
 		}
+
 		return $this->testData;
 	}
 

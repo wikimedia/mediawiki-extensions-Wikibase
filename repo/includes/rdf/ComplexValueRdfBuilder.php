@@ -28,7 +28,6 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	 */
 	private $valueWriter;
 
-
 	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param RdfWriter $valueWriter
@@ -97,14 +96,11 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 				break;
 
 			default:
-				$prefix = null;
-				$fields = null;
+				return;
 		}
 
-		if ( !empty( $fields ) ) {
-			$valueLName = $this->addExpandedValue( $value, $prefix, $fields );
-			$writer->say( $propertyValueNamespace, $propertyValueLName."-value" )->is( RdfVocabulary::NS_VALUE, $valueLName );
-		}
+		$valueLName = $this->addExpandedValue( $value, $prefix, $fields );
+		$writer->say( $propertyValueNamespace, $propertyValueLName."-value" )->is( RdfVocabulary::NS_VALUE, $valueLName );
 	}
 
 	/**
@@ -118,11 +114,11 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	 */
 	private function addExpandedValue( DataValue $value, $prefix, array $props ) {
 		$valueLName = $value->getHash();
+		$seen = $this->valueSeenCallback !== null
+			&& call_user_func( $this->valueSeenCallback, $valueLName );
 
-		if ( $this->valueSeenCallback ) {
-			if ( call_user_func( $this->valueSeenCallback, $valueLName ) !== false ) {
-				return $valueLName;
-			}
+		if ( $seen ) {
+			return $valueLName;
 		}
 
 		$this->valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )->a( RdfVocabulary::NS_ONTOLOGY, 'Value' );

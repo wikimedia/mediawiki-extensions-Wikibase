@@ -2,14 +2,16 @@
 
 namespace Wikibase\Test\Rdf;
 
+use BagOStuff;
+use HashBagOStuff;
+use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\Entity;
-use Wikimedia\Purtle\NTriplesRdfWriter;
-use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\Rdf\RdfBuilder;
-use Wikibase\RdfProducer;
+use Wikibase\Rdf\RdfProducer;
+use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
- * @covers Wikibase\RdfBuilder
+ * @covers Wikibase\Rdf\RdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -19,7 +21,7 @@ use Wikibase\RdfProducer;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class RdfBuilderTest extends \MediaWikiTestCase {
+class RdfBuilderTest extends MediaWikiTestCase {
 
 	private $testData;
 
@@ -38,11 +40,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param int $produce
+	 * @param BagOStuff|null $dedup
+	 *
 	 * @return RdfBuilder
 	 */
-	private function newRdfBuilder( $produce, \BagOStuff $dedup = null ) {
+	private function newRdfBuilder( $produce, BagOStuff $dedup = null ) {
 		if( !$dedup ) {
-			$dedup = new \HashBagOStuff();
+			$dedup = new HashBagOStuff();
 		}
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(
@@ -60,34 +65,36 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 	/**
 	 * Load entity from JSON
-	 * @param string $entityId
+	 *
+	 * @param string $idString
+	 *
 	 * @return Entity
 	 */
-	public function getEntityData( $entityId )
-	{
-		return $this->getTestData()->getEntity( $entityId );
+	public function getEntityData( $idString ) {
+		return $this->getTestData()->getEntity( $idString );
 	}
 
 	/**
 	 * Load serialized ntriples
+	 *
 	 * @param string $testName
-	 * @return array
+	 *
+	 * @return string[]|null
 	 */
-	public function getSerializedData( $testName )
-	{
+	public function getSerializedData( $testName ) {
 		return $this->getTestData()->getNTriples( $testName );
 	}
 
 	public function getRdfTests() {
 		$rdfTests = array(
-				array('Q1', 'Q1_simple'),
-				array('Q2', 'Q2_labels'),
-				array('Q3', 'Q3_links'),
-				array('Q4', 'Q4_claims'),
-				array('Q5', 'Q5_badges'),
-				array('Q6', 'Q6_qualifiers'),
-				array('Q7', 'Q7_references'),
-				array('Q8', 'Q8_baddates'),
+			array( 'Q1', 'Q1_simple' ),
+			array( 'Q2', 'Q2_labels' ),
+			array( 'Q3', 'Q3_links' ),
+			array( 'Q4', 'Q4_claims' ),
+			array( 'Q5', 'Q5_badges' ),
+			array( 'Q6', 'Q6_qualifiers' ),
+			array( 'Q7', 'Q7_references' ),
+			array( 'Q8', 'Q8_baddates' ),
 		);
 
 		return $rdfTests;
@@ -165,7 +172,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function testDeduplication() {
-		$bag = new \HashBagOStuff();
+		$bag = new HashBagOStuff();
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
 		$builder->addEntity( $this->getEntityData( 'Q7' ) );
 		$data1 = $this->getDataFromBuilder( $builder );
