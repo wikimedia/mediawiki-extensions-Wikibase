@@ -2,12 +2,12 @@
 
 namespace Wikibase\Test\Rdf;
 
-use Wikibase\Rdf\Test\RdfBuilderTestData;
+use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\SimpleValueRdfBuilder;
 use Wikibase\Rdf\TruthyStatementRdfBuilder;
 
 /**
- * @covers Wikibase\TruthyStatementRdfBuilder
+ * @covers Wikibase\Rdf\TruthyStatementRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -17,23 +17,26 @@ use Wikibase\Rdf\TruthyStatementRdfBuilder;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
 
-	private $testData;
+	/**
+	 * @var RdfBuilderTestData|null
+	 */
+	private $testData = null;
 
 	/**
 	 * Initialize repository data
 	 *
 	 * @return RdfBuilderTestData
 	 */
-	private function getTestData()
-	{
-		if( empty( $this->testData ) ) {
+	private function getTestData() {
+		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
 				__DIR__ . "/../../data/rdf",
 				__DIR__ . "/../../data/rdf/TruthyStatementRdfBuilder"
 			);
 		}
+
 		return $this->testData;
 	}
 

@@ -3,6 +3,7 @@
 namespace Wikibase\Rdf;
 
 use BagOStuff;
+use HashBagOStuff;
 use SiteList;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -12,7 +13,6 @@ use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\RdfProducer;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -34,13 +34,14 @@ class RdfBuilder implements EntityRdfBuilder, MentionedEntityTracker {
 	 * is used to indicate that the entity has been resolved, 'false' indicates
 	 * that the entity was mentioned but not resolved (defined).
 	 *
-	 * @var array
+	 * @var bool[]
 	 */
-	private $entitiesResolved = array ();
+	private $entitiesResolved = array();
 
 	/**
 	 * What the serializer would produce?
-	 * @var integer
+	 *
+	 * @var int
 	 */
 	private $produceWhat;
 
@@ -77,11 +78,10 @@ class RdfBuilder implements EntityRdfBuilder, MentionedEntityTracker {
 	private $propertyLookup;
 
 	/**
-	 *
 	 * @param SiteList $sites
 	 * @param RdfVocabulary $vocabulary
 	 * @param PropertyDataTypeLookup $propertyLookup
-	 * @param integer $flavor
+	 * @param int $flavor
 	 * @param RdfWriter $writer
 	 * @param BagOStuff|null $dedupBag Container used for deduplication of refs/values
 	 */
@@ -97,7 +97,7 @@ class RdfBuilder implements EntityRdfBuilder, MentionedEntityTracker {
 		$this->propertyLookup = $propertyLookup;
 		$this->writer = $writer;
 		$this->produceWhat = $flavor;
-		$this->dedupBag = $dedupBag ?: new \HashBagOStuff();
+		$this->dedupBag = $dedupBag ?: new HashBagOStuff();
 
 		// XXX: move construction of sub-builders to a factory class.
 		$this->termsBuilder = new TermsRdfBuilder( $vocabulary, $writer );
@@ -144,7 +144,6 @@ class RdfBuilder implements EntityRdfBuilder, MentionedEntityTracker {
 			$statementValueBuilder->setMentionedEntityTracker( $this );
 		} else {
 			$statementValueBuilder = $this->newSimpleValueRdfBuilder();
-
 		}
 
 		return $statementValueBuilder;
@@ -252,8 +251,7 @@ class RdfBuilder implements EntityRdfBuilder, MentionedEntityTracker {
 	}
 
 	/**
-	 * Registers an entity as mentioned.
-	 * Will be recorded as unresolved
+	 * Registers an entity as mentioned. Will be recorded as unresolved
 	 * if it wasn't already marked as resolved.
 	 *
 	 * @param EntityId $entityId
@@ -319,7 +317,6 @@ class RdfBuilder implements EntityRdfBuilder, MentionedEntityTracker {
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
 	 * @todo: extract into MetaDataRdfBuilder
-			$writer->say( $propertyValueNamespace, $propertyValueLName )->is( trim( $value ) );
 	 *
 	 * @param EntityDocument $entity
 	 * @param bool $produceData Should we also produce Dataset node?
@@ -366,8 +363,7 @@ class RdfBuilder implements EntityRdfBuilder, MentionedEntityTracker {
 	}
 
 	/**
-	 * Add stubs for any entities that were previously mentioned (e.g.
-	 * as properties
+	 * Add stubs for any entities that were previously mentioned (e.g. as properties
 	 * or data values).
 	 *
 	 * @param EntityLookup $entityLookup

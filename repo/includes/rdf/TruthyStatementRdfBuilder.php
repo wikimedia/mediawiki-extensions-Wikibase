@@ -2,6 +2,7 @@
 
 namespace Wikibase\Rdf;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -12,6 +13,7 @@ use Wikimedia\Purtle\RdfWriter;
 
 /**
  * "Truthy" RDF mapping for wikibase statements.
+ * FIXME: What does "truthy" mean?
  *
  * @since 0.5
  *
@@ -67,6 +69,8 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 	 *
 	 * @param EntityId $entityId
 	 * @param Statement $statement
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function addMainSnak( EntityId $entityId, Statement $statement ) {
 		$snak = $statement->getMainSnak();
@@ -92,7 +96,7 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 				$this->writer->say( RdfVocabulary::NS_DIRECT_CLAIM, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Novalue' );
 				break;
 			default:
-				throw new \InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
+				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
 		}
 	}
 

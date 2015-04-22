@@ -10,17 +10,17 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikimedia\Purtle\RdfWriter;
-use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ComplexValueRdfBuilder;
 
 /**
- * @covers Wikibase\ComplexValueRdfBuilder
+ * @covers Wikibase\Rdf\ComplexValueRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -30,23 +30,26 @@ use Wikibase\Rdf\ComplexValueRdfBuilder;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class ComplexValueRdfBuilderTest extends PHPUnit_Framework_TestCase {
 
-	private $testData;
+	/**
+	 * @var RdfBuilderTestData|null
+	 */
+	private $testData = null;
 
 	/**
 	 * Initialize repository data
 	 *
 	 * @return RdfBuilderTestData
 	 */
-	private function getTestData()
-	{
-		if( empty( $this->testData ) ) {
+	private function getTestData() {
+		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
 				__DIR__ . "/../../data/rdf",
 				__DIR__ . "/../../data/rdf/ComplexValueRdfBuilder"
 			);
 		}
+
 		return $this->testData;
 	}
 

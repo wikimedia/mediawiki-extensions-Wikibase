@@ -1,9 +1,14 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Rdf;
 
 /**
  * RDF producer options
+ *
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
+ * @author Stas Malyshev
  */
 interface RdfProducer {
 
@@ -59,4 +64,5 @@ interface RdfProducer {
 	 * All options turned on.
 	 */
 	const PRODUCE_ALL = 0xFFFF;
+
 }
