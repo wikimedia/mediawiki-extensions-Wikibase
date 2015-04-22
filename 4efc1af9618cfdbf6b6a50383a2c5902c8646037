@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_b4806c4c",
+        "filename": "repo/includes/rdf/NullDedupeBag.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:46:53Z",
+      "side": 1,
+      "message": "has has",
+      "revId": "4efc1af9618cfdbf6b6a50383a2c5902c8646037",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_749a04bf",
+        "filename": "repo/includes/rdf/NullDedupeBag.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-22T14:46:53Z",
+      "side": 1,
+      "message": "caller",
+      "revId": "4efc1af9618cfdbf6b6a50383a2c5902c8646037",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
