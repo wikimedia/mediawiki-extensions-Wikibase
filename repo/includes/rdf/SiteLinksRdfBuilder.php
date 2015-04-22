@@ -101,7 +101,6 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 						->is( RdfVocabulary::NS_ENTITY, $this->vocabulary->getEntityLName( $badge ) );
 			}
 		}
-
 	}
 
 	/**

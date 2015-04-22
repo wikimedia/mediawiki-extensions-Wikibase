@@ -113,21 +113,41 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param DataValue $value
 	 */
-	protected function addValueForDataType( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value ) {
-
+	protected function addValueForDataType(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		$value
+	) {
 		//FIXME: use a proper registry / dispatching builder
-		$typeFunc = 'addStatementFor' . preg_replace( '/[^\w]/', '', ucwords( $value->getType() ) );
-
-		if ( !is_callable( array( $this, $typeFunc ) ) ) {
-			wfLogWarning( __METHOD__ . ": Unsupported data type: $dataType" );
-		} else {
+		switch ( $value->getType() ) {
 			//TODO: RdfWriter could support aliases -> instead of passing around $propertyNamespace
 			//      and $propertyValueLName, we could define an alias for that and use e.g. '%property' to refer to them.
-			$this->$typeFunc( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+			case 'wikibase-entityid':
+				$this->addStatementForWikibaseEntityid( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+				break;
+			case 'string':
+				$this->addStatementForString( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+				break;
+			case 'monolingualtext':
+				$this->addStatementForMonolingualtext( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+				break;
+			case 'time':
+				$this->addStatementForTime( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+				break;
+			case 'quantity':
+				$this->addStatementForQuantity( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+				break;
+			case 'globecoordinate':
+				$this->addStatementForGlobecoordinate( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+				break;
+			default:
+				wfLogWarning( __METHOD__ . ': Unsupported data value type: ' . $value->getType() );
 		}
+
 		// TODO: add special handling like in WDTK?
 		// https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-rdf/src/main/java/org/wikidata/wdtk/rdf/extensions/SimpleIdExportExtension.java
-
 	}
 
 	/**
@@ -141,7 +161,6 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 */
 	private function addStatementForWikibaseEntityid( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType,
 			EntityIdValue $value ) {
-
 		$entityId = $value->getValue()->getEntityId();
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ENTITY, $entityLName );

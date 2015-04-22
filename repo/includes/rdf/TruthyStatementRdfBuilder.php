@@ -2,6 +2,7 @@
 
 namespace Wikibase\Rdf;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -92,7 +93,7 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 				$this->writer->say( RdfVocabulary::NS_DIRECT_CLAIM, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Novalue' );
 				break;
 			default:
-				throw new \InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
+				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
 		}
 	}
 
