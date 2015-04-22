@@ -177,8 +177,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 */
 	private function addStatement( EntityId $entityId, Statement $statement, $isBest ) {
 		$statementLName = $this->vocabulary->getStatementLName( $statement );
-		$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
-			->a( RdfVocabulary::NS_ONTOLOGY, 'Statement' );
 
 		$this->addMainSnak( $entityId, $statementLName, $statement, $isBest );
 
@@ -186,7 +184,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		if ( $this->produceQualifiers ) {
 			// this assumes statement was added by addMainSnak
 			foreach ( $statement->getQualifiers() as $q ) {
-				$this->addSnak( $this->statementWriter, $q, RdfVocabulary::NS_QUALIFIER );
+				$this->addSnak( $this->statementWriter, $q, RdfVocabulary::NSP_QUALIFIER );
 			}
 		}
 
@@ -207,7 +205,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 					->a( RdfVocabulary::NS_ONTOLOGY, 'Reference' );
 
 				foreach ( $reference->getSnaks() as $refSnak ) {
-					$this->addSnak( $this->referenceWriter, $refSnak, RdfVocabulary::NS_VALUE );
+					$this->addSnak( $this->referenceWriter, $refSnak, RdfVocabulary::NSP_REFERENCE );
 				}
 			}
 		}
@@ -228,10 +226,11 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		$propertyLName = $this->vocabulary->getEntityLName( $snak->getPropertyId() );
 
 		$this->statementWriter->about( RdfVocabulary::NS_ENTITY,  $entityLName )
-			->say( RdfVocabulary::NS_ENTITY, $propertyLName )->is( RdfVocabulary::NS_STATEMENT, $statementLName );
+			->say( RdfVocabulary::NSP_CLAIM, $propertyLName )->is( RdfVocabulary::NS_STATEMENT, $statementLName );
 
-		$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName );
-		$this->addSnak( $this->statementWriter, $snak, RdfVocabulary::NS_VALUE );
+		$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
+			->a( RdfVocabulary::NS_ONTOLOGY, 'Statement' );
+		$this->addSnak( $this->statementWriter, $snak, RdfVocabulary::NSP_CLAIM_STATEMENT );
 
 		$this->propertyMentioned( $snak->getPropertyId() );
 
@@ -245,6 +244,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		} else {
 			wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 		}
+
 	}
 
 	/**

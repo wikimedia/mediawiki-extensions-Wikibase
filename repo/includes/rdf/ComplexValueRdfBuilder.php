@@ -106,7 +106,7 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 
 		if ( !empty( $fields ) ) {
 			$valueLName = $this->addExpandedValue( $value, $prefix, $fields );
-			$writer->say( $propertyValueNamespace, $propertyValueLName."-value" )->is( RdfVocabulary::NS_VALUE, $valueLName );
+			$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )->is( RdfVocabulary::NS_VALUE, $valueLName );
 		}
 	}
 

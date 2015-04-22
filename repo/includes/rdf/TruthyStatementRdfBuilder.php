@@ -80,17 +80,17 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 		switch ( $snak->getType() ) {
 			case 'value':
 				/** @var PropertyValueSnak $snak */
-				$this->valueBuilder->addSnakValue( $this->writer, $propertyId, $snak->getDataValue(), RdfVocabulary::NS_DIRECT_CLAIM );
+				$this->valueBuilder->addSnakValue( $this->writer, $propertyId, $snak->getDataValue(), RdfVocabulary::NSP_DIRECT_CLAIM );
 				break;
 			case 'somevalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
-				$this->writer->say( RdfVocabulary::NS_DIRECT_CLAIM, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Somevalue' );
+				$this->writer->say( RdfVocabulary::NSP_DIRECT_CLAIM, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Somevalue' );
 				break;
 			case 'novalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
-				$this->writer->say( RdfVocabulary::NS_DIRECT_CLAIM, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Novalue' );
+				$this->writer->say( RdfVocabulary::NSP_DIRECT_CLAIM, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Novalue' );
 				break;
 			default:
 				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
