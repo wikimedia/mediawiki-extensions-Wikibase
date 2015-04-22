@@ -1,14 +1,20 @@
 <?php
-namespace Wikibase;
+
+namespace Wikibase\Rdf;
 
 use DataValues\TimeValue;
 
 /**
  * Clean datetime value to conform to RDF/XML standards
  * This class supports Julian->Gregorian conversion
+ *
+ * @since 0.5
+ *
  * @licence GNU GPL v2+
+ * @author Stas Malyshev
  */
 class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
+
 	// I'm not very happy about hardcoding it here but see no better way so far
 	// Gregorian calendar link.
 	const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
@@ -61,4 +67,5 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 		}
 		return null;
 	}
+
 }

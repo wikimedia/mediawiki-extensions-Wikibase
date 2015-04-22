@@ -7,13 +7,12 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
-use Wikibase\Rdf\Test\RdfBuilderTestData;
-use Wikibase\RdfProducer;
 use Wikibase\Rdf\SimpleValueRdfBuilder;
 use Wikibase\Rdf\FullStatementRdfBuilder;
+use Wikibase\Rdf\RdfProducer;
 
 /**
- * @covers Wikibase\FullStatementRdfBuilder
+ * @covers Wikibase\Rdf\FullStatementRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -25,21 +24,24 @@ use Wikibase\Rdf\FullStatementRdfBuilder;
  */
 class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
-	private $testData;
+	/**
+	 * @var RdfBuilderTestData|null
+	 */
+	private $testData = null;
 
 	/**
 	 * Initialize repository data
 	 *
 	 * @return RdfBuilderTestData
 	 */
-	private function getTestData()
-	{
-		if( empty( $this->testData ) ) {
+	private function getTestData() {
+		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
 				__DIR__ . "/../../data/rdf",
 				__DIR__ . "/../../data/rdf/FullStatementRdfBuilder"
 			);
 		}
+
 		return $this->testData;
 	}
 
@@ -65,7 +67,6 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
 			$valueWriter = $writer->sub();
-
 			$statementValueBuilder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $this->getTestData()->getMockRepository() );
 		} else {
 			$statementValueBuilder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );

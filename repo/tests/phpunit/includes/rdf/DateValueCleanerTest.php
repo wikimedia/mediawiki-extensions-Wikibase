@@ -1,10 +1,22 @@
 <?php
-namespace Wikibase\Test;
+
+namespace Wikibase\Test\Rdf;
 
 use DataValues\TimeValue;
-use Wikibase\DateTimeValueCleaner;
-use Wikibase\JulianDateTimeValueCleaner;
+use Wikibase\Rdf\DateTimeValueCleaner;
+use Wikibase\Rdf\JulianDateTimeValueCleaner;
 
+/**
+ * @covers Wikibase\Rdf\DateTimeValueCleaner
+ * @covers Wikibase\Rdf\JulianDateTimeValueCleaner
+ *
+ * @group Wikibase
+ * @group WikibaseRepo
+ * @group WikibaseRdf
+ *
+ * @licence GNU GPL v2+
+ * @author Stas Malyshev
+ */
 class DateValueCleanerTest extends \PHPUnit_Framework_TestCase {
 
 	public function getDates() {
@@ -36,18 +48,19 @@ class DateValueCleanerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getDates
 	 */
-	public function testCleanDate($date, $calendar, $expected) {
-		$jCleaner = new JulianDateTimeValueCleaner();
-		$gCleaner = new DateTimeValueCleaner();
+	public function testCleanDate( $date, $calendar, $expected ) {
+		$julianCleaner = new JulianDateTimeValueCleaner();
+		$gregorianCleaner = new DateTimeValueCleaner();
 
-		$value = new TimeValue($date, 0, 0, 0, TimeValue::PRECISION_SECOND, $calendar);
+		$value = new TimeValue( $date, 0, 0, 0, TimeValue::PRECISION_SECOND, $calendar );
 
-		$result = $jCleaner->getStandardValue($value);
-		$this->assertEquals($expected, $result);
+		$result = $julianCleaner->getStandardValue( $value );
+		$this->assertEquals( $expected, $result );
 
-		if($calendar == 'http://www.wikidata.org/entity/Q1985727') {
-			$result = $gCleaner->getStandardValue($value);
-			$this->assertEquals($expected, $result);
+		if ( $calendar == 'http://www.wikidata.org/entity/Q1985727' ) {
+			$result = $gregorianCleaner->getStandardValue( $value );
+			$this->assertEquals( $expected, $result );
 		}
 	}
+
 }

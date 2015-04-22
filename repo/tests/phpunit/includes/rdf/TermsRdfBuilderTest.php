@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Rdf\Test;
+namespace Wikibase\Test\Rdf;
 
 use Wikibase\Rdf\TermsRdfBuilder;
 
 /**
- * @covers Wikibase\TermsRdfBuilder
+ * @covers Wikibase\Rdf\TermsRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -17,21 +17,24 @@ use Wikibase\Rdf\TermsRdfBuilder;
  */
 class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
-	private $testData;
+	/**
+	 * @var RdfBuilderTestData|null
+	 */
+	private $testData = null;
 
 	/**
 	 * Initialize repository data
 	 *
 	 * @return RdfBuilderTestData
 	 */
-	private function getTestData()
-	{
-		if( empty( $this->testData ) ) {
+	private function getTestData() {
+		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
 				__DIR__ . "/../../data/rdf",
 				__DIR__ . "/../../data/rdf/TermsRdfBuilder"
 			);
 		}
+
 		return $this->testData;
 	}
 

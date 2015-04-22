@@ -1,7 +1,8 @@
 <?php
 
-namespace Wikibase\Rdf\Test;
+namespace Wikibase\Test\Rdf;
 
+use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -10,6 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\Repo\WikibaseRepo;
@@ -31,8 +33,19 @@ class RdfBuilderTestData {
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
 
-	private $codec;
+	/**
+	 * @var EntityContentDataCodec|null
+	 */
+	private $codec = null;
+
+	/**
+	 * @var string
+	 */
 	private $dataDir;
+
+	/**
+	 * @var string
+	 */
 	private $entityDir;
 
 	/**
@@ -45,28 +58,31 @@ class RdfBuilderTestData {
 	}
 
 	/**
-	 * Initialize repository data
+	 * @return EntityContentDataCodec
 	 */
-	private function getCodec()
-	{
-		if( empty($this->codec) ) {
+	private function getCodec() {
+		if ( $this->codec === null ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
 			$wikibaseRepo->getSettings()->setSetting( 'useRedirectTargetColumn', true );
 			$this->codec = $wikibaseRepo->getEntityContentDataCodec();
 		}
+
 		return $this->codec;
 	}
 
 	/**
 	 * Load entity from JSON
-	 * @param string $entityName
+	 *
+	 * @param string $idString
+	 *
 	 * @return Entity
 	 */
-	public function getEntity( $entityName )
-	{
+	public function getEntity( $idString ) {
 		return $this->getCodec()->decodeEntity(
-			file_get_contents( "{$this->entityDir}/$entityName.json" ), CONTENT_FORMAT_JSON );
+			file_get_contents( "{$this->entityDir}/$idString.json" ),
+			CONTENT_FORMAT_JSON
+		);
 	}
 
 	/**
@@ -76,13 +92,12 @@ class RdfBuilderTestData {
 	 * @return string[]|null ntriples lines, sorted, or null if
 	 *         no data file was found with the given name.
 	 */
-	public function getNTriples( $dataSetName )
-	{
+	public function getNTriples( $dataSetName ) {
 		$filename = "{$this->dataDir}/$dataSetName.nt";
-		if ( !file_exists( $filename ) )
-		{
+		if ( !file_exists( $filename ) ) {
 			return null;
 		}
+
 		$data = trim( file_get_contents( $filename ) );
 		$data = explode( "\n", $data );
 		sort( $data );
@@ -105,8 +120,7 @@ class RdfBuilderTestData {
 	 */
 	public function putTestData( $dataSetName, $lines, $suffix = '' ) {
 		$filename = "{$this->dataDir}/$dataSetName.nt$suffix";
-		if ( file_exists( $filename ) )
-		{
+		if ( file_exists( $filename ) ) {
 			return false;
 		}
 
@@ -147,18 +161,18 @@ class RdfBuilderTestData {
 	/**
 	 * Get site definitions matching the test data.
 	 *
-	 * @return \SiteList
+	 * @return SiteList
 	 */
 	public function getSiteList() {
 		$list = new SiteList();
 
-		$wiki = new \Site();
+		$wiki = new Site();
 		$wiki->setGlobalId( 'enwiki' );
 		$wiki->setLanguageCode( 'en' );
 		$wiki->setLinkPath( 'http://enwiki.acme.test/$1' );
 		$list['enwiki'] = $wiki;
 
-		$wiki = new \Site();
+		$wiki = new Site();
 		$wiki->setGlobalId( 'ruwiki' );
 		$wiki->setLanguageCode( 'ru' );
 		$wiki->setLinkPath( 'http://ruwiki.acme.test/$1' );
@@ -173,14 +187,14 @@ class RdfBuilderTestData {
 	 */
 	private static function getTestProperties() {
 		return array(
-			array(2, 'wikibase-entityid'),
-			array(3, 'commonsMedia'),
-			array(4, 'globecoordinate'),
-			array(5, 'monolingualtext'),
-			array(6, 'quantity'),
-			array(7, 'string'),
-			array(8, 'time'),
-			array(9, 'url'),
+			array( 2, 'wikibase-entityid' ),
+			array( 3, 'commonsMedia' ),
+			array( 4, 'globecoordinate' ),
+			array( 5, 'monolingualtext' ),
+			array( 6, 'quantity' ),
+			array( 7, 'string' ),
+			array( 8, 'time' ),
+			array( 9, 'url' ),
 		);
 	}
 
@@ -192,23 +206,23 @@ class RdfBuilderTestData {
 	public function getMockRepository() {
 		static $repo;
 
-		if ( !empty($repo) ) {
+		if ( !empty( $repo ) ) {
 			return $repo;
 		}
 
 		$repo = new MockRepository();
 
-		foreach( self::getTestProperties() as $prop ) {
-			list($id, $type) = $prop;
-			$fingerprint = Fingerprint::newEmpty();
+		foreach ( self::getTestProperties() as $prop ) {
+			list( $id, $type ) = $prop;
+			$fingerprint = new Fingerprint();
 			$fingerprint->setLabel( 'en', "Property$id" );
-			$entity = new Property( PropertyId::newFromNumber($id), $fingerprint, $type );
+			$entity = new Property( PropertyId::newFromNumber( $id ), $fingerprint, $type );
 			$repo->putEntity( $entity );
 		}
 
 		$q42 = new ItemId( 'Q42' );
-		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setLabel( 'en', "Item42" );
+		$fingerprint = new Fingerprint();
+		$fingerprint->setLabel( 'en', 'Item42' );
 		$entity = new Item( $q42, $fingerprint );
 		$repo->putEntity( $entity );
 

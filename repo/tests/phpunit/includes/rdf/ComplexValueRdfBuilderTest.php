@@ -18,12 +18,11 @@ use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\RdfWriter;
-use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ComplexValueRdfBuilder;
 
 /**
- * @covers Wikibase\ComplexValueRdfBuilder
+ * @covers Wikibase\Rdf\ComplexValueRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -35,21 +34,24 @@ use Wikibase\Rdf\ComplexValueRdfBuilder;
  */
 class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
-	private $testData;
+	/**
+	 * @var RdfBuilderTestData|null
+	 */
+	private $testData = null;
 
 	/**
 	 * Initialize repository data
 	 *
 	 * @return RdfBuilderTestData
 	 */
-	private function getTestData()
-	{
-		if( empty( $this->testData ) ) {
+	private function getTestData() {
+		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
 				__DIR__ . "/../../data/rdf",
 				__DIR__ . "/../../data/rdf/ComplexValueRdfBuilder"
 			);
 		}
+
 		return $this->testData;
 	}
 
