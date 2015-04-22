@@ -4,8 +4,6 @@ namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use Wikibase\Rdf\DedupeBag;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -100,14 +98,11 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 				break;
 
 			default:
-				$prefix = null;
-				$fields = null;
+				return;
 		}
 
-		if ( !empty( $fields ) ) {
-			$valueLName = $this->addExpandedValue( $value, $prefix, $fields );
-			$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )->is( RdfVocabulary::NS_VALUE, $valueLName );
-		}
+		$valueLName = $this->addExpandedValue( $value, $prefix, $fields );
+		$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )->is( RdfVocabulary::NS_VALUE, $valueLName );
 	}
 
 	/**
@@ -123,7 +118,7 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 		$valueLName = $value->getHash();
 
 		if ( $this->dedupeBag->alreadySeen( $valueLName, 'V' ) !== false ) {
-				return $valueLName;
+			return $valueLName;
 		}
 
 		$this->valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )->a( RdfVocabulary::NS_ONTOLOGY, 'Value' );
