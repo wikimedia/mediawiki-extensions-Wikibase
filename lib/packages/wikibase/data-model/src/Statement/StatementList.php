@@ -285,27 +285,20 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 	/**
 	 * @since 3.0
+	 * @see StatementByGuidMap
 	 *
 	 * @param string|null $statementGuid
 	 *
-	 * @throws InvalidArgumentException
-	 * @return int|bool Zero-based index or false if not found.
+	 * @return Statement|null The first statement with the given GUID or null if not found.
 	 */
-	public function getIndexByGuid( $statementGuid ) {
-		if ( !is_string( $statementGuid ) && $statementGuid !== null ) {
-			throw new InvalidArgumentException( '$statementGuid needs to be string or null' );
-		}
-
-		$index = 0;
-
-		foreach ( $this->statements as $s ) {
-			if ( $s->getGuid() === $statementGuid ) {
-				return $index;
+	public function getFirstStatementByGuid( $statementGuid ) {
+		foreach ( $this->statements as $statement ) {
+			if ( $statement->getGuid() === $statementGuid ) {
+				return $statement;
 			}
-			$index++;
 		}
 
-		return false;
+		return null;
 	}
 
 }

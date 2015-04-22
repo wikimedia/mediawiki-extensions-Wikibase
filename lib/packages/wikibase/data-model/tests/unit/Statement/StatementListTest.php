@@ -567,57 +567,46 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenNotPresentStatement_getIndexByGuidReturnsFalse() {
+	public function testGivenNotPresentStatement_getFirstStatementByGuidReturnsNull() {
 		$statements = new StatementList();
 
-		$this->assertFalse( $statements->getIndexByGuid( 'kittens' ) );
+		$this->assertNull( $statements->getFirstStatementByGuid( 'kittens' ) );
 	}
 
-	public function testGivenPresentStatement_getIndexByGuidReturnsItsIndex() {
-		$statements = new StatementList( array(
-			$this->getStatement( 43, 'kittens43' ),
-			$this->getStatement( 42, 'kittens42' ),
-			$this->getStatement( 41, 'kittens41' ),
-		) );
+	public function testGivenPresentStatement_getFirstStatementByGuidReturnsStatement() {
+		$statement1 = $this->getStatement( 1, 'guid1' );
+		$statement2 = $this->getStatement( 2, 'guid2' );
+		$statement3 = $this->getStatement( 3, 'guid3' );
+		$statements = new StatementList( $statement1, $statement2, $statement3 );
 
-		$this->assertSame(
-			1,
-			$statements->getIndexByGuid( 'kittens42' )
-		);
+		$actual = $statements->getFirstStatementByGuid( 'guid2' );
+		$this->assertSame( $statement2, $actual );
 	}
 
-	public function testGivenDoublyPresentStatement_getIndexByGuidReturnsTheFirstIndex() {
-		$statements = new StatementList( array(
-			$this->getStatement( 43, 'kittens43' ),
-			$this->getStatement( 42, 'kittens42' ),
-			$this->getStatement( 41, 'kittens41' ),
-			$this->getStatement( 42, 'kittens42' ),
-		) );
+	public function testGivenDoublyPresentStatement_getFirstStatementByGuidReturnsFirstMatch() {
+		$statement1 = $this->getStatement( 1, 'guid1' );
+		$statement2 = $this->getStatement( 2, 'guid2' );
+		$statement3 = $this->getStatement( 3, 'guid3' );
+		$statement4 = $this->getStatement( 2, 'guid2' );
+		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
 
-		$this->assertSame(
-			1,
-			$statements->getIndexByGuid( 'kittens42' )
-		);
+		$actual = $statements->getFirstStatementByGuid( 'guid2' );
+		$this->assertSame( $statement2, $actual );
 	}
 
-	public function testGivenDifferentStatementWithSameGuid_getIndexByGuidReturnsItsIndex() {
-		$statements = new StatementList( array(
-			$this->getStatement( 1, 'kittens43' ),
-			$this->getStatement( 2, 'kittens42' ),
-			$this->getStatement( 3, 'kittens41' ),
-		) );
+	public function testGivenStatementsWithNoGuid_getFirstStatementByGuidReturnsFirstMatch() {
+		$statement1 = $this->getStatement( 1, null );
+		$statement2 = $this->getStatement( 2, null );
+		$statements = new StatementList( $statement1, $statement2 );
 
-		$this->assertSame(
-			2,
-			$statements->getIndexByGuid( 'kittens41' )
-		);
+		$actual = $statements->getFirstStatementByGuid( null );
+		$this->assertSame( $statement1, $actual );
 	}
 
-	public function testGivenInvalidGuid_getIndexByGuidThrowsException() {
+	public function testGivenInvalidGuid_getFirstStatementByGuidReturnsNull() {
 		$statements = new StatementList();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$statements->getIndexByGuid( false );
+		$this->assertNull( $statements->getFirstStatementByGuid( false ) );
 	}
 
 }
