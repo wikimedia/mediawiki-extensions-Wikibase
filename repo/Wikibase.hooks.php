@@ -24,11 +24,10 @@ use SkinTemplate;
 use SpecialSearch;
 use Title;
 use User;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityViewPlaceholderExpander;
@@ -609,7 +608,12 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
-		$entityId = self::getEntityIdFromOutputPage( $out );
+		$outputPageEntityIdReader = new OutputPageEntityIdReader(
+			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+		);
+
+		$entityId = $outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 
 		if ( $entityId === null ) {
 			return true;
@@ -632,34 +636,6 @@ final class RepoHooks {
 		}
 
 		return true;
-	}
-
-	/**
-	 * @param OutputPage $out
-	 *
-	 * @return EntityId|null
-	 */
-	private static function getEntityIdFromOutputPage( OutputPage $out ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
-
-		if ( !$entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
-			return null;
-		}
-
-		$jsConfigVars = $out->getJsConfigVars();
-
-		if ( array_key_exists( 'wbEntityId', $jsConfigVars ) ) {
-			$idString = $jsConfigVars['wbEntityId'];
-
-			try {
-				return $wikibaseRepo->getEntityIdParser()->parse( $idString );
-			} catch ( EntityIdParsingException $ex ) {
-				wfLogWarning( 'Failed to parse EntityId config var: ' . $idString );
-			}
-		}
-
-		return null;
 	}
 
 	/**
