@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\Repo\WikibaseRepo;
@@ -204,10 +205,15 @@ class RdfBuilderTestData {
 			$entity = new Property( PropertyId::newFromNumber($id), $fingerprint, $type );
 			$repo->putEntity( $entity );
 		}
+
+		$q42 = new ItemId( 'Q42' );
 		$fingerprint = Fingerprint::newEmpty();
 		$fingerprint->setLabel( 'en', "Item42" );
-		$entity = new Item( ItemId::newFromNumber(42), $fingerprint );
+		$entity = new Item( $q42, $fingerprint );
 		$repo->putEntity( $entity );
+
+		$repo->putRedirect( new EntityRedirect( new ItemId( 'Q4242' ), $q42 ) );
+
 		return $repo;
 	}
 
