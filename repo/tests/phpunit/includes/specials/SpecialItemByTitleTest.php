@@ -95,7 +95,6 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$page = new SpecialItemByTitle();
 
 		$page->initSettings(
-			true,
 			array( 'wikipedia' )
 		);
 

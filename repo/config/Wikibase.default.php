@@ -40,9 +40,6 @@ return call_user_func( function() {
 			'length' => 250, // length constraint
 		),
 
-		// Should the page names (titles) be normalized against the external site
-		'normalizeItemByTitlePageNames' => true,
-
 		// Items allowed to be used as badges pointing to their CSS class names
 		'badgeItems' => array(),
 
