@@ -92,11 +92,21 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityId $entityId
 	 *
 	 * @throws StorageException
-	 * @return string|null
+	 * @return string|null RDF
 	 */
 	protected function generateDumpForEntityId( EntityId $entityId ) {
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
+
+			$this->rdfBuilder->addEntityRevisionInfo(
+				$entityRevision->getEntity()->getId(),
+				$entityRevision->getRevisionId(),
+				$entityRevision->getTimestamp()
+			);
+
+			$this->rdfBuilder->addEntity(
+				$entityRevision->getEntity()
+			);
 
 			if ( !$entityRevision ) {
 				throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
@@ -104,18 +114,11 @@ class RdfDumpGenerator extends DumpGenerator {
 		} catch ( MWContentSerializationException $ex ) {
 			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
 		} catch ( UnresolvedRedirectException $e ) {
-			return null;
+			$this->rdfBuilder->addEntityRedirect(
+				$entityId,
+				$e->getRedirectTargetId()
+			);
 		}
-
-		$this->rdfBuilder->addEntityRevisionInfo(
-			$entityRevision->getEntity()->getId(),
-			$entityRevision->getRevisionId(),
-			$entityRevision->getTimestamp()
-		);
-
-		$this->rdfBuilder->addEntity(
-			$entityRevision->getEntity()
-		);
 
 		$rdf = $this->rdfBuilder->getRDF();
 		return $rdf;
