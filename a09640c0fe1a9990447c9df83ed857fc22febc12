@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_eedcd84d",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-23T08:46:20Z",
+      "side": 1,
+      "message": "might be worth removing the duplicate test here?",
+      "revId": "a09640c0fe1a9990447c9df83ed857fc22febc12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
