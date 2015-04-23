@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\RdfProducer;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -69,6 +70,7 @@ class RdfBuilder implements EntityRdfBuilder {
 	 * @var RdfVocabulary
 	 */
 	private $vocabulary;
+
 	/**
 	 * @var PropertyDataTypeLookup
 	 */
@@ -346,15 +348,41 @@ class RdfBuilder implements EntityRdfBuilder {
 	 *
 	 * @param EntityLookup $entityLookup
 	 */
-	public function resolveMentionedEntities( EntityLookup $entityLookup ) { //FIXME: needs test
-		foreach ( $this->entitiesResolved as $entityId => $value ) {
-			if ( $value instanceof EntityId ) {
+	public function resolveMentionedEntities( EntityLookup $entityLookup ) {
+		$hasRedirect = false;
+
+		foreach ( $this->entitiesResolved as $key => $value ) {
+			// $value is true if the entity has already been resolved,
+			// or an EntityId to resolve.
+			if ( !( $value instanceof EntityId ) ) {
+				continue;
+			}
+
+			try {
 				$entity = $entityLookup->getEntity( $value );
+
 				if ( !$entity ) {
 					continue;
 				}
+
 				$this->addEntityStub( $entity );
+			} catch ( UnresolvedRedirectException $ex ) {
+				// NOTE: this may add more entries to the end of entitiesResolved
+				$target = $ex->getRedirectTargetId();
+				$this->addEntityRedirect( $value, $target );
+				$hasRedirect = true;
 			}
+		}
+
+		// If we encountered redirects, the redirect targets may now need resolving.
+		// They actually got added to $this->entitiesResolved, but may not have been 
+		// processed by the loop above, because they got added while the loop was in progress.
+		if ( $hasRedirect ) {
+			// Call resolveMentionedEntities() recursively to resolve any yet unresolved
+			// redirect targets. The regress will eventually terminate even for circular
+			// redirect chains, because the second time an entity ID is encountered, it
+			// will be marked as already resolved.
+			$this->resolveMentionedEntities( $entityLookup );
 		}
 	}
 
@@ -377,6 +405,27 @@ class RdfBuilder implements EntityRdfBuilder {
 
 			$this->termsBuilder->addLabels( $entityLName, $fingerprint->getLabels() );
 			$this->termsBuilder->addDescriptions( $entityLName, $fingerprint->getDescriptions() );
+		}
+	}
+
+	/**
+	 * Declares $from to be an alias for $to, using the owl:sameAs relationship.
+	 *
+	 * @param EntityId $from
+	 * @param EntityId $to
+	 */
+	public function addEntityRedirect( EntityId $from, EntityId $to ) {
+		$fromLName = $this->vocabulary->getEntityLName( $from );
+		$toLName = $this->vocabulary->getEntityLName( $to );
+
+		$this->writer->about( RdfVocabulary::NS_ENTITY, $fromLName )
+			->say( 'owl', 'sameAs' )
+			->is( RdfVocabulary::NS_ENTITY, $toLName );
+
+		$this->entityResolved( $from );
+
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_RESOLVED_ENTITIES ) ) {
+			$this->entityMentioned( $to );
 		}
 	}
 
