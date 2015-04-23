@@ -3,8 +3,10 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\Rdf\Test\RdfBuilderTestData;
 use Wikibase\Rdf\RdfBuilder;
@@ -128,6 +130,17 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$this->assertEquals( $correctData, $this->getDataFromBuilder( $builder ) );
 	}
 
+	public function testAddEntityRedirect() {
+		$builder = self::newRdfBuilder( 0 );
+
+		$q1 = new ItemId( 'Q1' );
+		$q11 = new ItemId( 'Q11' );
+		$builder->addEntityRedirect( $q11, $q1 );
+
+		$correctData = array( '<http://acme.test/Q11> <http://www.w3.org/2002/07/owl#sameAs> <http://acme.test/Q1> .' );
+		$this->assertEquals( $correctData, $this->getDataFromBuilder( $builder ) );
+	}
+
 	public function getProduceOptions() {
 		$produceTests = array(
 			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q4_all_statements' ),
@@ -141,6 +154,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, 'Q4_values' ),
 			array( 'Q1', RdfProducer::PRODUCE_VERSION_INFO, 'Q1_info' ),
 			array( 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES, 'Q4_resolved' ),
+			array( 'Q10', RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES, 'Q10_redirect' ),
 		);
 
 		return $produceTests;
@@ -158,7 +172,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
 		$builder->resolveMentionedEntities( $this->getTestData()->getMockRepository() );
 		$data = $this->getDataFromBuilder( $builder );
-		$this->assertEquals( $correctData, $data);
+		$this->assertEquals( $correctData, $data );
 	}
 
 	public function testDumpHeader() {
