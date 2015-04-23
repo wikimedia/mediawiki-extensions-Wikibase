@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Dumpers;
 
+use MWException;
 use PHPUnit_Framework_TestCase;
 use Site;
 use SiteList;
@@ -12,6 +13,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Test\Rdf\RdfBuilderTest;
 
@@ -59,10 +61,12 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param Entity[] $entities
+	 * @param EntityId[] $redirects
 	 *
 	 * @return RdfDumpGenerator
+	 * @throws MWException
 	 */
-	protected function newDumpGenerator( array $entities = array() ) {
+	protected function newDumpGenerator( array $entities = array(), array $redirects = array() ) {
 		$out = fopen( 'php://output', 'w' );
 
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
@@ -71,9 +75,18 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $entities ) {
+			->will( $this->returnCallback( function( EntityId $id ) use ( $entities, $redirects ) {
 				$key = $id->getSerialization();
-				return $entities[$key];
+
+				if ( isset( $redirects[$key] ) ) {
+					throw new UnresolvedRedirectException( $redirects[$key] );
+				}
+
+				if ( isset( $entities[$key] ) ) {
+					return $entities[$key];
+				}
+
+				return null;
 			} ) );
 
 		$entityRevisionLookup->expects( $this->any() )
@@ -103,10 +116,12 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	public function idProvider() {
 		$p10 = new PropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
+		$q4242 = new ItemId( 'Q4242' ); // hardcoded to be a redirect
 
 		return array(
 			'empty' => array( array(), 'empty' ),
 			'some entities' => array( array( $p10, $q30 ), 'entities' ),
+			'redirect' => array( array( $p10, $q4242 ), 'redirect' ),
 		);
 	}
 
@@ -144,7 +159,8 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	public function testGenerateDump( array $ids, $dumpname ) {
 		$jsonTest = new JsonDumpGeneratorTest();
 		$entities = $jsonTest->makeEntities( $ids );
-		$dumper = $this->newDumpGenerator( $entities );
+		$redirects = array( 'Q4242' => new ItemId( 'Q42' ) );
+		$dumper = $this->newDumpGenerator( $entities, $redirects );
 		$dumper->setTimestamp(1000000);
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );
