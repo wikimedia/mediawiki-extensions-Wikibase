@@ -273,6 +273,21 @@ class RdfBuilder implements EntityRdfBuilder {
 	}
 
 	/**
+	 * Write predicates linking property entity to property predicates
+	 * @param string $id
+	 */
+	private function writePropertyPredicates( $id ) {
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim')->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim')->is( RdfVocabulary::NSP_CLAIM, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is( RdfVocabulary::NSP_CLAIM_VALUE, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is( RdfVocabulary::NSP_QUALIFIER, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( RdfVocabulary::NSP_REFERENCE, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( RdfVocabulary::NSP_REFERENCE_VALUE, $id );
+	}
+
+	/**
 	 * Adds meta-information about an entity (such as the ID and type) to the RDF graph.
 	 *
 	 * @todo: extract into MetaDataRdfBuilder
@@ -303,6 +318,7 @@ class RdfBuilder implements EntityRdfBuilder {
 		if( $entity instanceof Property ) {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
 				->is( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getDataTypeName( $entity ) );
+			$this->writePropertyPredicates( $entity->getId()->getSerialization() );
 		}
 	}
 
