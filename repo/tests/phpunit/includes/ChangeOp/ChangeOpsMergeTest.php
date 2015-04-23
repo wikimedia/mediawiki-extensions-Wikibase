@@ -112,10 +112,10 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$to = $this->newItemWithId( 'Q222' );
 		return array(
 			array( $from, $to, array() ),
-			array( $from, $to, array( 'label' ) ),
+			array( $from, $to, array( 'sitelink' ) ),
 			array( $from, $to, array( 'description' ) ),
-			array( $from, $to, array( 'description', 'label' ) ),
-			array( $from, $to, array( 'description', 'label', 'sitelink' ) ),
+			array( $from, $to, array( 'description' ) ),
+			array( $from, $to, array( 'description', 'sitelink' ) ),
 		);
 	}
 
@@ -135,8 +135,9 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$from = $this->newItemWithId( 'Q111' );
 		$to = $this->newItemWithId( 'Q222' );
 		return array(
+			array( $from, $to, array( 'label' ) ),
 			array( $from, $to, array( 'foo' ) ),
-			array( $from, $to, array( 'label', 'foo' ) ),
+			array( $from, $to, array( 'description', 'foo' ) ),
 		);
 	}
 
@@ -372,7 +373,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$smallerItem->copy(),
 			$smallerMergedItem->copy(),
 			$bigMergedItem->copy(),
-			array( 'label', 'description', 'sitelink' )
+			array( 'description', 'sitelink' )
 		);
 		return $testCases;
 	}
