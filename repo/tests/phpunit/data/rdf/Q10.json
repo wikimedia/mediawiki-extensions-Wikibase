@@ -1,0 +1,25 @@
+{
+    "id": "Q10",
+    "type": "item",
+    "claims": {
+        "P2": [
+            {
+                "id": "TEST-Statement-2-423614cd831ed4e8da1138c9229cb65cf96f9366",
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P2",
+                    "datatype": "wikibase-entityid",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": 4242
+                        },
+                        "type": "wikibase-entityid"
+                    }
+                },
+                "type": "statement",
+                "rank": "preferred"
+            }
+        ]
+    }
+}
