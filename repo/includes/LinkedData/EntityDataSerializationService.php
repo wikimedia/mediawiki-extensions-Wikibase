@@ -587,8 +587,6 @@ class EntityDataSerializationService {
 	 * @return ApiResult
 	 */
 	protected function generateApiResult( EntityRevision $entityRevision, ApiFormatBase $printer ) {
-		$entityKey = 'entity'; //XXX: perhaps better: $entity->getType();
-
 		$res = $printer->getResult();
 
 		// Make sure result is empty. May still be full if this
