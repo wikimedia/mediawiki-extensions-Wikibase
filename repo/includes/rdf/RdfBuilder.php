@@ -28,9 +28,10 @@ class RdfBuilder implements EntityRdfBuilder {
 
 	/**
 	 * A list of entities mentioned/touched to or by this builder.
-	 * The prefixed entity IDs are used as keys in the array, the values 'true'
-	 * is used to indicate that the entity has been resolved, 'false' indicates
-	 * that the entity was mentioned but not resolved (defined).
+	 * The prefixed entity IDs are used as keys in the array, the value 'true'
+	 * is used to indicate that the entity has been resolved. If the value
+	 * is an EntityId, this indicates that the entity has not yet been resolved
+	 * (defined).
 	 *
 	 * @var array
 	 */
@@ -241,7 +242,7 @@ class RdfBuilder implements EntityRdfBuilder {
 		$prefixedId = $entityId->getSerialization();
 
 		if ( !isset( $this->entitiesResolved[$prefixedId] ) ) {
-			$this->entitiesResolved[$prefixedId] = false;
+			$this->entitiesResolved[$prefixedId] = $entityId;
 		}
 	}
 
@@ -346,13 +347,9 @@ class RdfBuilder implements EntityRdfBuilder {
 	 * @param EntityLookup $entityLookup
 	 */
 	public function resolveMentionedEntities( EntityLookup $entityLookup ) { //FIXME: needs test
-		// @todo FIXME inject a DispatchingEntityIdParser
-		$idParser = new BasicEntityIdParser();
-
-		foreach ( $this->entitiesResolved as $entityId => $resolved ) {
-			if ( !$resolved ) {
-				$entityId = $idParser->parse( $entityId );
-				$entity = $entityLookup->getEntity( $entityId );
+		foreach ( $this->entitiesResolved as $entityId => $value ) {
+			if ( $value instanceof EntityId ) {
+				$entity = $entityLookup->getEntity( $value );
 				if ( !$entity ) {
 					continue;
 				}
