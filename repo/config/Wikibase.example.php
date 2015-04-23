@@ -48,8 +48,6 @@ call_user_func( function() {
 	// Tell MediaWIki to search the item namespace
 	$wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
 
-	$wgWBRepoSettings['normalizeItemByTitlePageNames'] = true;
-
 	// the special group includes all the sites in the specialSiteLinkGroups,
 	// grouped together in a 'Pages linked to other sites' section.
 	$wgWBRepoSettings['siteLinkGroups'] = array(

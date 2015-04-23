@@ -37,11 +37,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	private $siteLinkLookup;
 
 	/**
-	 * @var bool
-	 */
-	private $normalizeItemByTitlePageNames;
-
-	/**
 	 * site link groups
 	 *
 	 * @var string[]
@@ -60,7 +55,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 
 		$this->initSettings(
-			$settings->getSetting( 'normalizeItemByTitlePageNames' ),
 			$settings->getSetting( 'siteLinkGroups' )
 		);
 
@@ -75,14 +69,11 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * Initialize essential settings for this special page.
 	 * may be used by unit tests to override global settings.
 	 *
-	 * @param bool $normalizeItemByTitlePageNames
 	 * @param string[] $siteLinkGroups
 	 */
 	public function initSettings(
-		$normalizeItemByTitlePageNames,
 		array $siteLinkGroups
 	) {
-		$this->normalizeItemByTitlePageNames = $normalizeItemByTitlePageNames;
 		$this->groups = $siteLinkGroups;
 	}
 
@@ -142,7 +133,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			$itemId = $this->siteLinkLookup->getItemIdForLink( $siteId, $pageName );
 
 			// Do we have an item content, and if not can we try harder?
-			if ( $itemId === null && $this->normalizeItemByTitlePageNames === true ) {
+			if ( $itemId === null ) {
 				// Try harder by requesting normalization on the external site
 				$siteObj = $this->sites->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
