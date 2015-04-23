@@ -6,7 +6,8 @@
 			"Shanmugamp7",
 			"கௌசிக் பிரபு",
 			"மதனாஹரன்",
-			"Macofe"
+			"Macofe",
+			"கலைவாணன்"
 		]
 	},
 	"wikibase-entity-item": "உருப்படி",
@@ -22,6 +23,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "பக்கம்",
 	"wikibase-remove": "நீக்கு",
 	"wikibase-disambiguation-title": "\"$1\" க்கான பக்க நெறிப்படுத்தல்",
+	"wikibase-aliases-empty": "மாற்றுகள் வரையறுக்கப்படவில்லை",
 	"wikibase-propertypage-datatype": "தரவு வகை",
 	"special-itembytitle": "தலைப்பு வாரியாக உருப்படி",
 	"wikibase-itembytitle-lookup-site": "தளம்:",

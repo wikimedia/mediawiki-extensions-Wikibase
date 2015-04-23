@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Calak"
+			"Calak",
+			"Asoxor"
 		]
 	},
 	"tooltip-t-wikibase": "بەستەر بۆ بەندی خەزێنەی دراوەی پەیوەندیدار",
@@ -37,7 +38,9 @@
 	"wikibase-rc-show-wikidata-pref": "دەستکارییەکانی {{WBREPONAME}} لە دوایین گۆڕانکارییەکاندا نیشان بدە",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "دەستکاریی {{WBREPONAME}}",
+	"wikibase-replicationnote": "تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.",
 	"wikibase-watchlist-show-changes-pref": "دەستکارییەکانی {{WBREPONAME}} لە پێرستی چاودێرییەکەت نیشان بدە",
 	"wikibase-unconnectedpages-submit": "بڕۆ",
-	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}"
+	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}",
+	"wikibase-otherprojects": "پرۆژەکانی تر"
 }

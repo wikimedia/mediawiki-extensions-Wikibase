@@ -4,7 +4,8 @@
 			"Eitvys200",
 			"Hugo.arg",
 			"Aswanas",
-			"Pofka"
+			"Pofka",
+			"Vogone"
 		]
 	},
 	"wikibase-entity-item": "įrašas",
@@ -18,6 +19,11 @@
 	"wikibase-addreference": "pridėti šaltinį",
 	"wikibase-save-inprogress": "Saugoma...",
 	"wikibase-remove-inprogress": "Šalinama...",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Kitomis kalbomis",
+	"wikibase-entitytermsforlanguagelistview-aliases": "Taip pat žinomas kaip",
+	"wikibase-entitytermsforlanguagelistview-description": "Aprašymas",
+	"wikibase-entitytermsforlanguagelistview-label": "Etiketė",
+	"wikibase-entitytermsforlanguagelistview-language": "Kalba",
 	"wikibase-label-empty": "Dar nėra žymos",
 	"wikibase-label-edit-placeholder": "įvesti žymą",
 	"wikibase-description-empty": "Dar nėra aprašo",

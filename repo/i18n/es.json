@@ -225,7 +225,7 @@
 	"wikibase-listproperties-datatype": "Tipo de dato:",
 	"wikibase-listproperties-all": "Todos los tipos de datos",
 	"wikibase-listproperties-submit": "Buscar",
-	"wikibase-listproperties-invalid-datatype": "\"$1\" no es un tipo de datos válido.",
+	"wikibase-listproperties-invalid-datatype": "«$1» no es un tipo de datos válido.",
 	"special-entitieswithoutlabel": "Entidades sin etiqueta",
 	"wikibase-entitieswithoutlabel-legend": "Obtener la lista de entidades sin etiqueta",
 	"wikibase-entitieswithoutlabel-label-language": "Código de idioma:",
