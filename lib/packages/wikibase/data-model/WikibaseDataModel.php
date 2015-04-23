@@ -22,3 +22,6 @@ if ( defined( 'MEDIAWIKI' ) ) {
 
 // Aliases introduced in 3.0.0
 class_alias( 'Wikibase\DataModel\Statement\Statement', 'Wikibase\DataModel\Claim\Claim' );
+class_alias( 'Wikibase\DataModel\Statement\StatementGuid', 'Wikibase\DataModel\Claim\ClaimGuid' );
+class_alias( 'Wikibase\DataModel\Statement\StatementGuidParser', 'Wikibase\DataModel\Claim\ClaimGuidParser' );
+class_alias( 'Wikibase\DataModel\Statement\StatementGuidParsingException', 'Wikibase\DataModel\Claim\ClaimGuidParsingException' );

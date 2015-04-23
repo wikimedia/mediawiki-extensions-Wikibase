@@ -2,13 +2,13 @@
 
 namespace Wikibase\DataModel\Tests\Claim;
 
-use Wikibase\DataModel\Claim\ClaimGuid;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Statement\StatementGuid;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\DataModel\Claim\ClaimGuidParser
+ * @covers Wikibase\DataModel\Statement\StatementGuidParser
  *
  * @group Wikibase
  * @group WikibaseDataModel
@@ -16,26 +16,26 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ClaimGuidParserTest extends \PHPUnit_Framework_TestCase {
+class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider guidProvider
 	 */
-	public function testCanParseClaimGuid( ClaimGuid $expected ) {
+	public function testCanParseStatementGuid( StatementGuid $expected ) {
 		$actual = $this->newParser()->parse( $expected->getSerialization() );
 
 		$this->assertEquals( $actual, $expected );
 	}
 
 	protected function newParser() {
-		return new ClaimGuidParser( new BasicEntityIdParser() );
+		return new StatementGuidParser( new BasicEntityIdParser() );
 	}
 
 	public function guidProvider() {
 		return array(
-			array( new ClaimGuid( new ItemId( 'q42' ), 'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ) ),
-			array( new ClaimGuid( new ItemId( 'Q1234567' ), 'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF' ) ),
-			array( new ClaimGuid( new ItemId( 'Q1' ), 'foo' ) ),
+			array( new StatementGuid( new ItemId( 'q42' ), 'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ) ),
+			array( new StatementGuid( new ItemId( 'Q1234567' ), 'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF' ) ),
+			array( new StatementGuid( new ItemId( 'Q1' ), 'foo' ) ),
 		);
 	}
 
@@ -43,7 +43,7 @@ class ClaimGuidParserTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidIdSerializationProvider
 	 */
 	public function testCannotParserInvalidId( $invalidIdSerialization ) {
-		$this->setExpectedException( 'Wikibase\DataModel\Claim\ClaimGuidParsingException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Statement\StatementGuidParsingException' );
 		$this->newParser()->parse( $invalidIdSerialization );
 	}
 

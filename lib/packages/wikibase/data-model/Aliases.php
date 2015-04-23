@@ -13,4 +13,19 @@ namespace Wikibase\DataModel\Claim {
 	 */
 	class Claim extends \Wikibase\DataModel\Statement\Statement {}
 
+	/**
+	 * @deprecated since 3.0.0, use the base class instead.
+	 */
+	class ClaimGuid extends \Wikibase\DataModel\Statement\StatementGuid {}
+
+	/**
+	 * @deprecated since 3.0.0, use the base class instead.
+	 */
+	class ClaimGuidParser extends \Wikibase\DataModel\Statement\StatementGuidParser {}
+
+	/**
+	 * @deprecated since 3.0.0, use the base class instead.
+	 */
+	class ClaimGuidParsingException extends \Wikibase\DataModel\Statement\StatementGuidParsingException {}
+
 }

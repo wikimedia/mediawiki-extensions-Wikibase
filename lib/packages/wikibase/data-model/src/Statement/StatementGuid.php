@@ -1,18 +1,18 @@
 <?php
 
-namespace Wikibase\DataModel\Claim;
+namespace Wikibase\DataModel\Statement;
 
 use Comparable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * @since 0.5
+ * @since 3.0
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ClaimGuid implements Comparable {
+class StatementGuid implements Comparable {
 
 	/**
 	 * The separator for the prefix and suffix of the GUID.
@@ -55,7 +55,7 @@ class ClaimGuid implements Comparable {
 	}
 
 	/**
-	 * @param ClaimGuid $target
+	 * @param StatementGuid $target
 	 *
 	 * @return bool
 	 */

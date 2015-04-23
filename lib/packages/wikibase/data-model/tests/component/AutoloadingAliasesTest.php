@@ -25,8 +25,10 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 			},
 			array(
 				// Full qualified aliases go here.
-				// Remove the dummy get_class call if new aliases are introduced.
-				get_class()
+				'Wikibase\DataModel\Claim\Claim',
+				'Wikibase\DataModel\Claim\ClaimGuid',
+				'Wikibase\DataModel\Claim\ClaimGuidParser',
+				'Wikibase\DataModel\Claim\ClaimGuidParsingException',
 			)
 		);
 	}
