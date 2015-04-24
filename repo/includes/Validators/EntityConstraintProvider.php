@@ -55,7 +55,8 @@ class EntityConstraintProvider {
 
 		switch ( $entityType ) {
 			case Property::ENTITY_TYPE:
-				$validators[] = new LabelUniquenessValidator( $this->duplicateDetector );
+				// Property label conflict checks aren't case sensitive. T73785/T97129
+				$validators[] = new LabelUniquenessValidator( $this->duplicateDetector, 'case insensitive' );
 				break;
 
 			case Item::ENTITY_TYPE:

@@ -809,11 +809,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param string $entityType
 	 * @param string[] $labels
+	 * @param string Either "case sensitive" (default) or "case insensitive".
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Term[]
 	 */
-	public function getLabelConflicts( $entityType, array $labels ) {
+	public function getLabelConflicts( $entityType, array $labels, $caseSensitive = 'case sensitive' ) {
 		if ( !is_string( $entityType ) ) {
 			throw new InvalidArgumentException( '$entityType must be a string' );
 		}
@@ -830,7 +831,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$entityType,
 			array(
 				'LIMIT' => $this->maxConflicts,
-				'caseSensitive' => false
+				'caseSensitive' => $caseSensitive === 'case sensitive'
 			)
 		);
 
@@ -848,6 +849,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string $entityType
 	 * @param string[] $labels
 	 * @param string[] $descriptions
+	 * @param string Either "case sensitive" (default) or "case insensitive".
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Term[]
@@ -855,7 +857,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	public function getLabelWithDescriptionConflicts(
 		$entityType,
 		array $labels,
-		array $descriptions
+		array $descriptions,
+		$caseSensitive = 'case sensitive'
 	) {
 		$labels = array_intersect_key( $labels, $descriptions );
 		$descriptions = array_intersect_key( $descriptions, $labels );
@@ -887,11 +890,15 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			// Due to the array_intersect_key call earlier, we know a corresponding description exists.
 			$description = $descriptions[$lang];
 
-			$matchConditions = array(
-				'L.term_language' => $lang,
-				'L.term_search_key' => $this->getSearchKey( $label, $lang ),
-				'D.term_search_key' => $this->getSearchKey( $description, $lang )
-			);
+			$matchConditions = array( 'L.term_language' => $lang );
+
+			if ( $caseSensitive === 'case sensitive' ) {
+				$matchConditions['L.term_text'] = $label;
+				$matchConditions['D.term_text'] = $description;
+			} else {
+				$matchConditions['L.term_search_key'] = $this->getSearchKey( $label, $lang );
+				$matchConditions['D.term_search_key'] = $this->getSearchKey( $description, $lang );
+			}
 
 			$termConditions[] = $dbr->makeList( $matchConditions, LIST_AND );
 		}
