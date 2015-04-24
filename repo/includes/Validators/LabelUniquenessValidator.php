@@ -2,6 +2,7 @@
 
 namespace Wikibase\Validators;
 
+use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -27,10 +28,33 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 	private $duplicateDetector;
 
 	/**
-	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
+	 * @var string Either "case sensitive" or "case insensitive"
 	 */
-	public function __construct( LabelDescriptionDuplicateDetector $duplicateDetector ) {
+	private $caseSensitivity;
+
+	/**
+	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
+	 * @param string $caseSensitivity Either "case sensitive" (default) or "case insensitive"
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function __construct(
+		LabelDescriptionDuplicateDetector $duplicateDetector,
+		$caseSensitivity = 'case sensitive'
+	) {
 		$this->duplicateDetector = $duplicateDetector;
+
+		$this->validateCaseSensitivity( $caseSensitivity );
+
+		$this->caseSensitivity = $caseSensitivity;
+	}
+
+	private function validateCaseSensitivity( $caseSensitivity ) {
+		if ( $caseSensitivity !== 'case sensitive' && $caseSensitivity !== 'case insensitive' ) {
+			throw new InvalidArgumentException(
+				'$caseSensitivity must be either "case sensitive" or "case insensitive".'
+			);
+		}
 	}
 
 	/**
@@ -46,7 +70,8 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 				$entity->getType(),
 				$entity->getFingerprint()->getLabels()->toTextArray(),
 				null,
-				$entity->getId()
+				$entity->getId(),
+				$this->caseSensitivity
 			);
 		}
 
@@ -87,7 +112,8 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 			$entityId->getEntityType(),
 			$labels,
 			null,
-			$entityId
+			$entityId,
+			$this->caseSensitivity
 		);
 	}
 

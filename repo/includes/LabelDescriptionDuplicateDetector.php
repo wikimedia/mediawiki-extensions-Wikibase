@@ -49,6 +49,7 @@ class LabelDescriptionDuplicateDetector {
 	 *        with language codes as the keys.
 	 * @param EntityId|null $ignoreEntityId Conflicts with this entity will be
 	 *        considered self-conflicts and ignored.
+	 * @param string $caseSensitive Either "case sensitive" (default) or "case insensitive".
 	 *
 	 * @throws InvalidArgumentException
 	 *
@@ -61,7 +62,8 @@ class LabelDescriptionDuplicateDetector {
 		$entityType,
 		array $labels,
 		array $descriptions = null,
-		EntityId $ignoreEntityId = null
+		EntityId $ignoreEntityId = null,
+		$caseSensitive = 'case sensitive'
 	) {
 		if ( !is_string( $entityType ) ) {
 			throw new InvalidArgumentException( '$entityType must be a string' );
@@ -74,13 +76,15 @@ class LabelDescriptionDuplicateDetector {
 		if ( $descriptions === null ) {
 			$conflictingTerms = $this->conflictFinder->getLabelConflicts(
 				$entityType,
-				$labels
+				$labels,
+				$caseSensitive
 			);
 		} else {
 			$conflictingTerms = $this->conflictFinder->getLabelWithDescriptionConflicts(
 				$entityType,
 				$labels,
-				$descriptions
+				$descriptions,
+				$caseSensitive
 			);
 		}
 

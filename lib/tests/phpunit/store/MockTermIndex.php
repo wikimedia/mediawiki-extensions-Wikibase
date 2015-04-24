@@ -44,11 +44,12 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @param string[] $entityType The relevant entity type
 	 * @param string[] $labels The label to look for
+	 * @param bool $caseSensitive Defaults to true
 	 *
 	 * @throws \InvalidArgumentException
 	 * @return EntityId[]
 	 */
-	public function getLabelConflicts( $entityType, array $labels ) {
+	public function getLabelConflicts( $entityType, array $labels, $caseSensitive = true ) {
 		if ( !is_string( $entityType ) ) {
 			throw new InvalidArgumentException( '$entityType must be a string' );
 		}
@@ -62,7 +63,8 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		$conflicts = $this->getMatchingTerms(
 			$templates,
 			Term::TYPE_LABEL,
-			$entityType
+			$entityType,
+			array( 'caseSensitive' => $caseSensitive )
 		);
 
 		return $conflicts;
@@ -74,13 +76,15 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @param string $entityType The relevant entity type
 	 * @param string[] $labels The label to look for
 	 * @param string[] $descriptions The description to consider, if descriptions are relevant.
+	 * @param bool $caseSensitive Defaults to true
 	 *
 	 * @return EntityId[]
 	 */
 	public function getLabelWithDescriptionConflicts(
 		$entityType,
 		array $labels,
-		array $descriptions
+		array $descriptions,
+		$caseSensitive = true
 	) {
 		$labels = array_intersect_key( $labels, $descriptions );
 		$descriptions = array_intersect_key( $descriptions, $labels );
@@ -91,7 +95,8 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 		$labelConflicts = $this->getLabelConflicts(
 			$entityType,
-			$labels
+			$labels,
+			$caseSensitive
 		);
 
 		if ( empty( $labelConflicts ) ) {
@@ -103,7 +108,8 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		$descriptionConflicts = $this->getMatchingTerms(
 			$templates,
 			Term::TYPE_DESCRIPTION,
-			$entityType
+			$entityType,
+			array( 'caseSensitive' => $caseSensitive )
 		);
 
 		$conflicts = $this->intersectConflicts( $labelConflicts, $descriptionConflicts );

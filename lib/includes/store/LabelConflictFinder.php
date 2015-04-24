@@ -23,10 +23,11 @@ interface LabelConflictFinder {
 	 *
 	 * @param string $entityType The entity type to consider for conflicts.
 	 * @param string[] $labels The labels to look for, with language codes as keys.
+	 * @param string $caseSensitive Either "case sensitive" (default) or "case insensitive".
 	 *
 	 * @return Term[]
 	 */
-	public function getLabelConflicts( $entityType, array $labels );
+	public function getLabelConflicts( $entityType, array $labels, $caseSensitive = 'case sensitive' );
 
 	/**
 	 * Returns a list of Terms that conflict with (that is, match) the given labels
@@ -41,9 +42,10 @@ interface LabelConflictFinder {
 	 * @param string|null $entityType The relevant entity type
 	 * @param string[] $labels The labels to look for, with language codes as keys.
 	 * @param string[] $descriptions The descriptions to consider (if desired), with language codes as keys.
+	 * @param string $caseSensitive Either "case sensitive" (default) or "case insensitive".
 	 *
 	 * @return Term[]
 	 */
-	public function getLabelWithDescriptionConflicts( $entityType, array $labels, array $descriptions );
+	public function getLabelWithDescriptionConflicts( $entityType, array $labels, array $descriptions, $caseSensitive = 'case sensitive' );
 
 }

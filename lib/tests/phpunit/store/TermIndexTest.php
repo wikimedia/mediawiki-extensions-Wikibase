@@ -11,7 +11,8 @@ use Wikibase\Term;
 use Wikibase\TermIndex;
 
 /**
- * Base class for tests for classes implementing Wikibase\TermIndex.
+ * Base class for tests for classes implementing Wikibase\TermIndex and
+ * Wikibase\Lib\Store\LabelConflictFinder. This should probably be split.
  *
  * @group Wikibase
  *
@@ -382,24 +383,28 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				$entities,
 				Property::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
+				true,
 				array( 'P6' ),
 			),
-			'by label, different case' => array(
+			'by label, different case, case insensitive' => array(
 				$entities,
 				Property::ENTITY_TYPE,
 				array( 'de' => 'fOO' ),
+				false,
 				array( 'P6' ),
 			),
 			'by label mismatch' => array(
 				$entities,
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Nope' ),
+				true,
 				array(),
 			),
 			'two languages for label' => array(
 				$entities,
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo', 'en' => 'Foo' ),
+				true,
 				array( 'Q1', 'Q3', 'Q5' ),
 			),
 		);
@@ -408,7 +413,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider labelConflictProvider
 	 */
-	public function testGetLabelConflicts( $entities, $entityType, $labels, $expected ) {
+	public function testGetLabelConflicts( $entities, $entityType, $labels, $caseSensitive, $expected ) {
 		$termIndex = $this->getTermIndex();
 		$termIndex->clear();
 
@@ -416,7 +421,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$termIndex->saveTermsOfEntity( $entity );
 		}
 
-		$matches = $termIndex->getLabelConflicts( $entityType, $labels );
+		$matches = $termIndex->getLabelConflicts( $entityType, $labels, $caseSensitive );
 		$actual = $this->getEntityIdStrings( $matches );
 
 		$this->assertArrayEquals( $expected, $actual, false, false );
@@ -431,6 +436,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
 				array(),
+				true,
 				array(),
 			),
 			'by label, mismatching description' => array(
@@ -438,6 +444,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
 				array( 'de' => 'XYZ' ),
+				true,
 				array(),
 			),
 			'by label and description' => array(
@@ -445,20 +452,23 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
 				array( 'de' => 'Bar' ),
+				true,
 				array( 'Q1' ),
 			),
-			'by label and description, different label capitalization' => array(
+			'by label and description, different label capitalization, case insensitive' => array(
 				$entities,
-				Item::ENTITY_TYPE,
+				Property::ENTITY_TYPE,
 				array( 'de' => 'fOO' ),
 				array( 'de' => 'Bar' ),
-				array( 'Q1' ),
+				false,
+				array( 'P6' ),
 			),
-			'by label and description, different description capitalization' => array(
+			'by label and description, different description capitalization, case insensitive' => array(
 				$entities,
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
 				array( 'de' => 'bAR' ),
+				false,
 				array( 'Q1' ),
 			),
 			'two languages for label and description' => array(
@@ -466,6 +476,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo', 'en' => 'Foo' ),
 				array( 'de' => 'Bar', 'en' => 'Bar' ),
+				true,
 				array( 'Q1', 'Q3' ),
 			),
 		);
@@ -474,7 +485,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider labelWithDescriptionConflictProvider
 	 */
-	public function testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected ) {
+	public function testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $caseSensitive, $expected ) {
 		$termIndex = $this->getTermIndex();
 		$termIndex->clear();
 
@@ -482,7 +493,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$termIndex->saveTermsOfEntity( $entity );
 		}
 
-		$matches = $termIndex->getLabelWithDescriptionConflicts( $entityType, $labels, $descriptions );
+		$matches = $termIndex->getLabelWithDescriptionConflicts( $entityType, $labels, $descriptions, $caseSensitive );
 		$actual = $this->getEntityIdStrings( $matches );
 
 		$this->assertArrayEquals( $expected, $actual, false, false );
