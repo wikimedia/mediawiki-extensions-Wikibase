@@ -221,7 +221,7 @@ call_user_func( function() {
 	$wgHooks['SpecialPage_reorderPages'][]				= 'Wikibase\RepoHooks::onSpecialPage_reorderPages';
 	$wgHooks['OutputPageParserOutput'][]				= 'Wikibase\RepoHooks::onOutputPageParserOutput';
 	$wgHooks['ContentModelCanBeUsedOn'][]				= 'Wikibase\RepoHooks::onContentModelCanBeUsedOn';
-	$wgHooks['OutputPageBeforeHTML'][]				= 'Wikibase\RepoHooks::onOutputPageBeforeHTML';
+	$wgHooks['OutputPageBeforeHTML'][]				= 'Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler::onOutputPageBeforeHTML';
 	$wgHooks['OutputPageBeforeHTML'][]				= 'Wikibase\RepoHooks::onOutputPageBeforeHtmlRegisterConfig';
 	$wgHooks['ContentHandlerForModelID'][]			= 'Wikibase\RepoHooks::onContentHandlerForModelID';
 	$wgHooks['APIQuerySiteInfoStatisticsInfo'][]	= 'Wikibase\RepoHooks::onAPIQuerySiteInfoStatisticsInfo';
