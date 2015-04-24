@@ -10,6 +10,7 @@ use MWException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -827,13 +828,16 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$templates = $this->makeQueryTerms( $labels, Term::TYPE_LABEL );
 
+		// Property label conflict checks aren't case sensitive. T73785/T97129
+		// XXX: This knowledge should probably not be here :/
+		$caseSensitive = $entityType !== Property::ENTITY_TYPE;
 		$labelConflicts = $this->getMatchingTerms(
 			$templates,
 			Term::TYPE_LABEL,
 			$entityType,
 			array(
 				'LIMIT' => $this->maxConflicts,
-				'caseSensitive' => false
+				'caseSensitive' => $caseSensitive
 			)
 		);
 
@@ -890,11 +894,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			// Due to the array_intersect_key call earlier, we know a corresponding description exists.
 			$description = $descriptions[$lang];
 
-			$matchConditions = array(
-				'L.term_language' => $lang,
-				'L.term_search_key' => $this->getSearchKey( $label, $lang ),
-				'D.term_search_key' => $this->getSearchKey( $description, $lang )
-			);
+			$matchConditions = array( 'L.term_language' => $lang );
+
+			// Property conflict checks aren't case sensitive. T73785/T97129
+			// XXX: This knowledge should probably not be here :/
+			if ( $entityType === Property::ENTITY_TYPE ) {
+				$matchConditions['L.term_text'] = $label;
+				$matchConditions['D.term_text'] = $description;
+			} else {
+				$matchConditions['L.term_search_key'] = $this->getSearchKey( $label, $lang );
+				$matchConditions['D.term_search_key'] = $this->getSearchKey( $description, $lang );
+			}
 
 			$termConditions[] = $dbr->makeList( $matchConditions, LIST_AND );
 		}
