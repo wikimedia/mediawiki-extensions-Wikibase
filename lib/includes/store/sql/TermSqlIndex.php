@@ -10,6 +10,7 @@ use MWException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -812,11 +813,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param string $entityType
 	 * @param string[] $labels
+	 * @param bool $caseSensitive Defaults to true
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Term[]
 	 */
-	public function getLabelConflicts( $entityType, array $labels ) {
+	public function getLabelConflicts( $entityType, array $labels, $caseSensitive = true ) {
 		if ( !is_string( $entityType ) ) {
 			throw new InvalidArgumentException( '$entityType must be a string' );
 		}
@@ -833,7 +835,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$entityType,
 			array(
 				'LIMIT' => $this->maxConflicts,
-				'caseSensitive' => false
+				'caseSensitive' => $caseSensitive
 			)
 		);
 
@@ -851,6 +853,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string $entityType
 	 * @param string[] $labels
 	 * @param string[] $descriptions
+	 * @param bool $caseSensitive Defaults to true
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Term[]
@@ -858,7 +861,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	public function getLabelWithDescriptionConflicts(
 		$entityType,
 		array $labels,
-		array $descriptions
+		array $descriptions,
+		$caseSensitive = true
 	) {
 		$labels = array_intersect_key( $labels, $descriptions );
 		$descriptions = array_intersect_key( $descriptions, $labels );
@@ -890,11 +894,15 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			// Due to the array_intersect_key call earlier, we know a corresponding description exists.
 			$description = $descriptions[$lang];
 
-			$matchConditions = array(
-				'L.term_language' => $lang,
-				'L.term_search_key' => $this->getSearchKey( $label, $lang ),
-				'D.term_search_key' => $this->getSearchKey( $description, $lang )
-			);
+			$matchConditions = array( 'L.term_language' => $lang );
+
+			if ( $caseSensitive ) {
+				$matchConditions['L.term_text'] = $label;
+				$matchConditions['D.term_text'] = $description;
+			} else {
+				$matchConditions['L.term_search_key'] = $this->getSearchKey( $label, $lang );
+				$matchConditions['D.term_search_key'] = $this->getSearchKey( $description, $lang );
+			}
 
 			$termConditions[] = $dbr->makeList( $matchConditions, LIST_AND );
 		}
