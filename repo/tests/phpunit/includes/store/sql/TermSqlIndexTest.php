@@ -92,7 +92,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	/**
 	 * @dataProvider labelWithDescriptionConflictProvider
 	 */
-	public function testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected ) {
+	public function testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $caseSensitive, $expected ) {
 
 		if ( wfGetDB( DB_MASTER )->getType() === 'mysql' ) {
 			// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
@@ -101,7 +101,7 @@ class TermSqlIndexTest extends TermIndexTest {
 			return;
 		}
 
-		parent::testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected );
+		parent::testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $caseSensitive, $expected );
 	}
 
 	public function getMatchingTermsOptionsProvider() {

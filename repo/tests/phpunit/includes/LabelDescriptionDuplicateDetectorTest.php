@@ -84,6 +84,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'foo' ),
 				null,
 				null,
+				true,
 				array()
 			),
 
@@ -93,6 +94,17 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				null,
 				null,
+				true,
+				array( $labelError )
+			),
+
+			'label conflict, case insensitive' => array(
+				$world,
+				Item::ENTITY_TYPE,
+				array( 'en' => 'ITEM label' ),
+				null,
+				null,
+				false,
 				array( $labelError )
 			),
 
@@ -102,6 +114,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				null,
 				null,
+				true,
 				array()
 			),
 
@@ -111,6 +124,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				null,
 				new ItemId( 'Q42' ),
+				true,
 				array()
 			),
 
@@ -120,6 +134,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				array(),
 				null,
+				true,
 				array()
 			),
 
@@ -129,6 +144,17 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				array( 'en' => 'item description' ),
 				null,
+				true,
+				array( $descriptionError )
+			),
+
+			'label/description conflict, case insensitive' => array(
+				$world,
+				Item::ENTITY_TYPE,
+				array( 'en' => 'item LABEL' ),
+				array( 'en' => 'item DEscription' ),
+				null,
+				false,
 				array( $descriptionError )
 			),
 
@@ -138,6 +164,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				array( 'en' => 'item description' ),
 				new ItemId( 'Q42' ),
+				true,
 				array()
 			),
 		);
@@ -146,10 +173,10 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	/**
 	 * @dataProvider provideDetectTermConflicts
 	 */
-	public function testDetectTermConflicts( $world, $entityType, $labels, $descriptions, $ignore, $expectedErrors ) {
+	public function testDetectTermConflicts( $world, $entityType, $labels, $descriptions, $ignore, $caseSensitive, $expectedErrors ) {
 		$detector = new LabelDescriptionDuplicateDetector( new MockTermIndex( $world ) );
 
-		$result = $detector->detectTermConflicts( $entityType, $labels, $descriptions, $ignore );
+		$result = $detector->detectTermConflicts( $entityType, $labels, $descriptions, $ignore, $caseSensitive );
 
 		$this->assertResult( $result, $expectedErrors );
 	}
