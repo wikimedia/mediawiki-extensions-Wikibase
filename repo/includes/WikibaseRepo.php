@@ -882,20 +882,27 @@ class WikibaseRepo {
 	 */
 	protected function getInternalDeserializerFactory() {
 		return new DeserializerFactory(
-			new DataValueDeserializer( array(
-				'boolean' => 'DataValues\BooleanValue',
-				'number' => 'DataValues\NumberValue',
-				'string' => 'DataValues\StringValue',
-				'unknown' => 'DataValues\UnknownValue',
-				'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
-				'monolingualtext' => 'DataValues\MonolingualTextValue',
-				'multilingualtext' => 'DataValues\MultilingualTextValue',
-				'quantity' => 'DataValues\QuantityValue',
-				'time' => 'DataValues\TimeValue',
-				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
-			) ),
+			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
+	}
+
+	/**
+	 * @return Deserializer
+	 */
+	public function getDataValueDeserializer() {
+		return new DataValueDeserializer( array(
+			'boolean' => 'DataValues\BooleanValue',
+			'number' => 'DataValues\NumberValue',
+			'string' => 'DataValues\StringValue',
+			'unknown' => 'DataValues\UnknownValue',
+			'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
+			'monolingualtext' => 'DataValues\MonolingualTextValue',
+			'multilingualtext' => 'DataValues\MultilingualTextValue',
+			'quantity' => 'DataValues\QuantityValue',
+			'time' => 'DataValues\TimeValue',
+			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+		) );
 	}
 
 	/**
