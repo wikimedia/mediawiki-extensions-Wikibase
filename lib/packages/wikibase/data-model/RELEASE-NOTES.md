@@ -35,6 +35,10 @@
 * Added `StatementList::getFirstStatementByGuid`
 * `ReferenceList::addNewReference` and `Statement::addNewReference` support an array of Snaks now
 
+## Version 2.6.1 (2015-04-25)
+
+* Allow installation together with Diff 2.x.
+
 ## Version 2.6.0 (2015-03-08)
 
 * Added `Reference::isEmpty`
