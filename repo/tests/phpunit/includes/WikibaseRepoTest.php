@@ -259,4 +259,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\ContentLanguages', $service );
 	}
 
+	public function testGetDataValueDeserializer() {
+		$service = $this->getWikibaseRepo()->getDataValueDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $service );
+	}
+
 }
