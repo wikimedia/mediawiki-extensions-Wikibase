@@ -189,6 +189,7 @@
 	"special-itemswithoutsitelinks": "Elementer ouni Linke mat Siten",
 	"wikibase-entitydata-bad-revision": "D'Versioun $2 vun der Eenheet $1 kann net gewise ginn.",
 	"wikibase-entitydata-unsupported-format": "Den Dateformat $1 gëtt net vun dësem Interface ënnerstëtzt.",
+	"wikibase-redirectentity-success": "$1 gouf op $2 virugeleet.",
 	"wikibase-redirectentity-submit": "Viruleedung",
 	"special-mylanguagefallbackchain": "Meng Lëscht vun Ersatz-Sproochen",
 	"wikibase-mylanguagefallbackchain-babel": "Dir kënnt et änneren andeems Dir <nowiki>{{#babel: }}</nowiki> op {{GENDER:$1|Är}} [[Special:MyPage|Benotzersäit]] setzt.",

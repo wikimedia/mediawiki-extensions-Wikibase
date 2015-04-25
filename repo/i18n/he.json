@@ -9,7 +9,8 @@
 			"חיים",
 			"ערן",
 			"פוילישער",
-			"Guycn2"
+			"Guycn2",
+			"LaG roiL"
 		]
 	},
 	"wikibase-desc": "מאגר נתונים מובנה",
@@ -261,8 +262,8 @@
 	"wikibase-entitydata-text": "הדף הזה מספק ממשק נתונים מקושר לערכי ישויות. נא לספר את מזהה הישות בכתובת URL באמצעות תחביר דפי־משנה.",
 	"special-redirectentity": "הפניית ישות",
 	"wikibase-redirectentity-success": "הישות $1 הופנתה בהצלחה לישות $2",
-	"wikibase-redirectentity-fromid": "מאיזה מזהה להפנות",
-	"wikibase-redirectentity-toid": "לאיזה מזהה להפנות",
+	"wikibase-redirectentity-fromid": "המזהה שממנו להפנות",
+	"wikibase-redirectentity-toid": "המזהה שאליו להפנות",
 	"wikibase-redirectentity-submit": "הפניה",
 	"special-mylanguagefallbackchain": "שרשרת שפות הגיבוי שלי",
 	"wikibase-mylanguagefallbackchain-text": "שרשרת שפות הגיבוי שמציגה לך את תוויות הישות מוצגת להלן.",

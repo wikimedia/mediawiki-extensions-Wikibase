@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"ଶିତିକଣ୍ଠ ଦାଶ"
+			"ଶିତିକଣ୍ଠ ଦାଶ",
+			"Jnanaranjan Sahu"
 		]
 	},
-	"wikibase-error-unexpected": "କିଛି ଗୋଟେ ଅଜଣା ଅସୁବିଧା ହେଲା: $1 ।"
+	"wikibase-error-unexpected": "କିଛି ଗୋଟେ ଅଜଣା ଅସୁବିଧା ହେଲା: $1 ।",
+	"wikibase-sitelinks-wikipedia": "ଉଇକିପିଡ଼ିଆ"
 }

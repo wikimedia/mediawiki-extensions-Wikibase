@@ -10,6 +10,7 @@
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estruturados",
+	"wikibase-entity": "entidade",
 	"wikibase-entity-item": "elemento",
 	"wikibase-entity-property": "propiedade",
 	"wikibase-entity-query": "pescuda",

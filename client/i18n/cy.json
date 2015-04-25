@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lloffiwr"
+			"Lloffiwr",
+			"Ham II"
 		]
 	},
-	"specialpages-group-wikibaseclient": "Cleient {{WBREPONAME}}",
 	"wikibase-after-page-move": "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar {{WBREPONAME}} er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.",
 	"wikibase-comment-linked": "Cysylltwyd eitem {{WBREPONAME}} â'r dudalen hon.",
 	"wikibase-comment-update": "Newidiwyd yr eitem {{WBREPONAME}}.",
@@ -12,7 +12,7 @@
 	"wikibase-comment-sitelink-change": "Newidiwyd y cyswllt rhwng ieithoedd o $1 i $2",
 	"wikibase-comment-sitelink-remove": "Tynnwyd cyswllt rhwng ieithoedd i ffwrdd: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|newid}}",
-	"wikibase-dataitem": "Eitem o ddata",
+	"wikibase-dataitem": "Eitem {{WBREPONAME}}",
 	"wikibase-editlinks": "Golygu cysylltau",
 	"wikibase-editlinkstitle": "Golygu cysylltau rhyngwici rhwng ieithoedd",
 	"wikibase-linkitem-addlinks": "Ychwanegu cysylltau",
@@ -27,6 +27,7 @@
 	"wikibase-property-notfound": "Ni ddaethpwyd o hyd i'r nodwedd $1.",
 	"wikibase-rc-hide-wikidata": "$1 y golygiadau ar {{WBREPONAME}}",
 	"wikibase-rc-show-wikidata-pref": "Dangos golygiadau i {{WBREPONAME}} ymhlith y newidiadau diweddar",
+	"wikibase-replicationnote": "Dalier sylw: efallai na welwch y newidiadau ar bob wici cyn pen rhai munudau.",
 	"wikibase-watchlist-show-changes-pref": "Dangos golygiadau {{WBREPONAME}} ar eich rhestr wylio",
 	"wikibase-error-invalid-entity-id": "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",
 	"wikibase-unconnectedpages-submit": "Gwneler",

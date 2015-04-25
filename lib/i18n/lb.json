@@ -52,5 +52,11 @@
 	"wikibase-validator-no-validators": "Verbueden",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Media-Fichier op Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "$1 Milliarde Joer n. Chr.",
+	"wikibase-time-precision-Mannum": "$1 Millioune Joer n. Chr.",
+	"wikibase-time-precision-annum": "$1 Joer no Christus",
+	"wikibase-time-precision-millennium": "$1. Joerdausend",
+	"wikibase-time-precision-century": "$1. Joerhonnert",
+	"wikibase-time-precision-10annum": "$1s"
 }
