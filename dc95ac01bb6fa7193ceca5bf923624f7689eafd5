@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_52681784",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-26T01:58:33Z",
+      "side": 1,
+      "message": "Could also just have a getOutputPageEntityIdReader",
+      "revId": "dc95ac01bb6fa7193ceca5bf923624f7689eafd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
