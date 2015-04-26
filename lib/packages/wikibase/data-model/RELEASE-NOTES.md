@@ -12,22 +12,23 @@
 	* Removed `ClaimList`
 	* Removed `ClaimListAccess`
 	* Removed `addClaim`, `hasClaims` and `newClaim` from all entity classes
-* `Claims::addClaim` no longer supports setting an index
-* Removed `Claims::getBestClaims` (you can use `StatementList::getBestStatements` instead)
-* Removed `Claims::getByRank` and `Claims::getByRanks` (you can use `StatementList::getWithRank` instead)
-* Removed `Claims::getMainSnaks` (you can use `StatementList::getMainSnaks` instead)
-* Removed `Claims::getClaimsForProperty` (you can use `StatementList::getWithPropertyId` instead)
-* Removed `Claims::getHashes`
-* Removed `Claims::getGuids`
-* Removed `Claims::equals` (and `Claims` no longer implements `Comparable`)
-* Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
-* Removed `Claims::hasClaim`
-* Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
-* Removed `Claims::indexOf`, use `StatementList::getFirstStatementByGuid` or `StatementByGuidMap` instead
-* Removed `Claims::removeClaim`
-* Removed `Entity::getAllSnaks`, use `StatementList::getAllSnaks` instead
-* Removed `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
-* `Reference`s and `ReferenceList`s can not be instantiated with `null` any more
+* Phasing out of `Claims`
+	* `Claims::addClaim` no longer supports setting an index
+	* Removed `Claims::getBestClaims` (you can use `StatementList::getBestStatements` instead)
+	* Removed `Claims::getByRank` and `Claims::getByRanks` (you can use `StatementList::getWithRank` instead)
+	* Removed `Claims::getMainSnaks` (you can use `StatementList::getMainSnaks` instead)
+	* Removed `Claims::getClaimsForProperty` (you can use `StatementList::getWithPropertyId` instead)
+	* Removed `Claims::getHashes`
+	* Removed `Claims::getGuids`
+	* Removed `Claims::equals` (and `Claims` no longer implements `Comparable`)
+	* Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
+	* Removed `Claims::hasClaim`
+	* Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
+	* Removed `Claims::indexOf`, use `StatementList::getFirstStatementByGuid` or `StatementByGuidMap` instead
+	* Removed `Claims::removeClaim`
+* Removed previously deprecated `Entity::getAllSnaks`, use `StatementList::getAllSnaks` instead
+* Removed previously deprecated `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
+* `Reference` and `ReferenceList`s no longer can not be instantiated with `null`
 
 #### Additions
 
