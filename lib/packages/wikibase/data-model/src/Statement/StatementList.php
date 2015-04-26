@@ -226,7 +226,10 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
-	 * @return Statement[] Numerically indexed (non-sparse) array.
+	 * Returns the wrapped array of statements. This retrieval operation is cheap.
+	 * No guarantees are given about the keys of the returned array.
+	 *
+	 * @return Statement[]
 	 */
 	public function toArray() {
 		return $this->statements;
