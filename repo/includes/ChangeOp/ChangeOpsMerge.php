@@ -73,7 +73,7 @@ class ChangeOpsMerge {
 	 * @param Item $fromItem
 	 * @param Item $toItem
 	 * @param string[] $ignoreConflicts list of elements to ignore conflicts for
-	 *        can only contain 'label' and or 'description' and or 'sitelink'
+	 *        can only contain 'description' and or 'sitelink'
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ChangeOpFactoryProvider $changeOpFactoryProvider
 	 * @param SiteLookup $siteLookup
@@ -104,19 +104,14 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * @param array $ignoreConflicts can contain strings 'label', 'description', 'sitelink'
+	 * @param string[] $ignoreConflicts can contain strings 'description' or 'sitelink'
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function assertValidIgnoreConflictValues( $ignoreConflicts ) {
-		if ( !is_array( $ignoreConflicts ) ) {
-			throw new InvalidArgumentException( '$ignoreConflicts must be an array' );
-		}
-
-		//TODO remove the adition of 'label' below. This was added to allow a soft deprecation 11-12-14
-		if ( array_diff( $ignoreConflicts, array_merge( self::$conflictTypes, array( 'label' ) ) ) ) {
+	private function assertValidIgnoreConflictValues( array $ignoreConflicts ) {
+		if ( array_diff( $ignoreConflicts, self::$conflictTypes ) ) {
 			throw new InvalidArgumentException(
-				'$ignoreConflicts array can only contain "label", "description" and or "sitelink" values'
+				'$ignoreConflicts array can only contain "description" and or "sitelink" values'
 			);
 		}
 	}
