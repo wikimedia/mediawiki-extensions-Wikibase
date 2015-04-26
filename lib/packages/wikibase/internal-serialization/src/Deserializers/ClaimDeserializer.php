@@ -5,7 +5,7 @@ namespace Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Claim\Claim;
 
 /**
  * @licence GNU GPL v2+
@@ -39,7 +39,7 @@ class ClaimDeserializer implements Deserializer {
 	/**
 	 * @param mixed $serialization
 	 *
-	 * @return Entity
+	 * @return Claim
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
