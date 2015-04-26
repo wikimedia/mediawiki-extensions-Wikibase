@@ -106,6 +106,10 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
+### 1.4 (dev)
+
+* Added PHPMD and PHPCS support
+
 ### 1.3.1 (2015-01-06)
 
 * Installation together with DataValues Geo 1.x is now supported
