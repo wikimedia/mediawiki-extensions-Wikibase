@@ -29,6 +29,9 @@
 * Removed previously deprecated `Entity::getAllSnaks`, use `StatementList::getAllSnaks` instead
 * Removed previously deprecated `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
 * `Reference` and `ReferenceList`s no longer can not be instantiated with `null`
+* Renamed `Claim\ClaimGuid` to `Statement\StatementGuid`, leaving a b/c alias in place
+* Renamed `Claim\ClaimGuidParser` to `Statement\StatementGuidParser`, leaving a b/c alias in place
+* Renamed `Claim\ClaimGuidParsingException` to `Statement\StatementGuidParsingException`, leaving a b/c alias in place
 
 #### Additions
 
