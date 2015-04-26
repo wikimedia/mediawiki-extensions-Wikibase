@@ -4,7 +4,6 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
 
 /**
