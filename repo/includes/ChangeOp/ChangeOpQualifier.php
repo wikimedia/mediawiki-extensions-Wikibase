@@ -7,7 +7,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Summary;
 use Wikibase\Validators\SnakValidator;
 
@@ -104,12 +104,12 @@ class ChangeOpQualifier extends ChangeOpBase {
 	/**
 	 * @since 0.4
 	 *
-	 * @param Snaks $qualifiers
+	 * @param SnakList $qualifiers
 	 * @param Summary $summary
 	 *
 	 * @throws ChangeOpException
 	 */
-	protected function addQualifier( Snaks $qualifiers, Summary $summary = null ) {
+	protected function addQualifier( SnakList $qualifiers, Summary $summary = null ) {
 		if ( $qualifiers->hasSnak( $this->snak ) ) {
 			throw new ChangeOpException( 'Claim has already a qualifier with hash ' . $this->snak->getHash() );
 		}
@@ -121,12 +121,12 @@ class ChangeOpQualifier extends ChangeOpBase {
 	/**
 	 * @since 0.4
 	 *
-	 * @param Snaks $qualifiers
+	 * @param SnakList $qualifiers
 	 * @param Summary $summary
 	 *
 	 * @throws ChangeOpException
 	 */
-	protected function setQualifier( Snaks $qualifiers, Summary $summary = null ) {
+	protected function setQualifier( SnakList $qualifiers, Summary $summary = null ) {
 		if ( !$qualifiers->hasSnakHash( $this->snakHash ) ) {
 			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
 		}

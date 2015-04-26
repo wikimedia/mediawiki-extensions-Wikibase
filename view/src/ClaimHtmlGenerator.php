@@ -7,7 +7,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\View\Template\TemplateFactory;
@@ -116,11 +116,11 @@ class ClaimHtmlGenerator {
 	/**
 	 * Generates and returns the HTML representing a claim's qualifiers.
 	 *
-	 * @param Snaks $qualifiers
+	 * @param SnakList $qualifiers
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForQualifiers( Snaks $qualifiers ) {
+	protected function getHtmlForQualifiers( SnakList $qualifiers ) {
 		$qualifiersByProperty = new ByPropertyIdArray( iterator_to_array( $qualifiers ) );
 		$qualifiersByProperty->buildIndex();
 
