@@ -8,7 +8,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
+use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
  * @covers Wikibase\Repo\LinkedData\EntityDataSerializationService
@@ -55,7 +57,8 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$titleLookup,
 			$serializerFactory,
 			$dataTypeLookup,
-			new SiteList()
+			new SiteList(),
+			new EntityDataFormatProvider( new RdfWriterFactory() )
 		);
 
 		$service->setFormatWhiteList(

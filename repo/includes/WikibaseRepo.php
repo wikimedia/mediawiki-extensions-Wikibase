@@ -64,6 +64,9 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
+use Wikibase\Repo\LinkedData\CachingEntityDataFormatAccessor;
+use Wikibase\Repo\LinkedData\EntityDataFormatAccessor;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
@@ -88,6 +91,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 use Wikibase\ValuesFinder;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -177,12 +181,16 @@ class WikibaseRepo {
 	/**
 	 * @var TermLookup|null
 	 */
-	private $termLookup;
+	private $termLookup = null;
 
 	/**
 	 * @var ContentLanguages|null
 	 */
 	private $monolingualTextLanguages = null;
+	/**
+	 * @var EntityDataFormatAccessor|null
+	 */
+	private $entityDataFormatAccessor = null;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -1074,4 +1082,21 @@ class WikibaseRepo {
 		return new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() );
 	}
 
+	/**
+	 * Get a cached EntityDataFormatAccessor
+	 *
+	 * @return EntityDataFormatAccessor
+	 */
+	public function getEntityDataFormatAccessor() {
+		if ( !$this->entityDataFormatAccessor ) {
+			$this->entityDataFormatAccessor = new CachingEntityDataFormatAccessor(
+				new EntityDataFormatProvider( new RdfWriterFactory() ),
+				wfGetCache( $this->getSettings()->getSetting( 'sharedCacheType' ) ),
+				$this->getSettings()->getSetting( 'sharedCacheDuration' ),
+				$this->getSettings()->getSetting( 'sharedCacheKeyPrefix' )
+			);
+		}
+
+		return $this->entityDataFormatAccessor;
+	}
 }

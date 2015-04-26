@@ -259,4 +259,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\ContentLanguages', $service );
 	}
 
+	public function testGetEntityDataFormatAccessor() {
+		$service = $this->getWikibaseRepo()->getEntityDataFormatAccessor();
+		$this->assertInstanceOf( 'Wikibase\Repo\LinkedData\EntityDataFormatAccessor', $service );
+	}
+
 }

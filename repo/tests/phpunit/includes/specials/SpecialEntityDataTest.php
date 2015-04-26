@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
-use FauxResponse;
 use HttpError;
 use OutputPage;
 use SiteList;
@@ -14,10 +13,12 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
+use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntityData
@@ -80,7 +81,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$titleLookup,
 			$serializerFactory,
 			$dataTypeLookup,
-			new SiteList()
+			new SiteList(),
+			new EntityDataFormatProvider( new RdfWriterFactory() )
 		);
 
 		$maxAge = 60*60;
