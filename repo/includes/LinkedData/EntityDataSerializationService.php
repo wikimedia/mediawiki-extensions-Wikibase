@@ -117,12 +117,18 @@ class EntityDataSerializationService {
 	private $rdfWriterFactory;
 
 	/**
+	 * @var EntityDataFormatAccessor
+	 */
+	private $entityDataFormatAccessor;
+
+	/**
 	 * @param string $rdfBaseURI
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteList $sites
+	 * @param EntityDataFormatAccessor $entityDataFormatAccessor
 	 *
 	 * @since 0.4
 	 */
@@ -133,7 +139,8 @@ class EntityDataSerializationService {
 		EntityTitleLookup $entityTitleLookup,
 		SerializerFactory $serializerFactory,
 		PropertyDataTypeLookup $propertyLookup,
-		SiteList $sites
+		SiteList $sites,
+		EntityDataFormatAccessor $entityDataFormatAccessor
 	) {
 		$this->rdfBaseURI = $rdfBaseURI;
 		$this->rdfDataURI = $rdfDataURI;
@@ -142,6 +149,7 @@ class EntityDataSerializationService {
 		$this->serializerFactory = $serializerFactory;
 		$this->propertyLookup = $propertyLookup;
 		$this->sites = $sites;
+		$this->entityDataFormatAccessor = $entityDataFormatAccessor;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
@@ -166,7 +174,7 @@ class EntityDataSerializationService {
 	public function setFormatWhiteList( $formatWhiteList ) {
 		$this->formatWhiteList = $formatWhiteList;
 
-		// force re-init of format maps
+		// Force re-init of format maps
 		$this->fileExtensions = null;
 		$this->mimeTypes = null;
 	}
@@ -307,60 +315,14 @@ class EntityDataSerializationService {
 	/**
 	 * Initializes the internal mapping of MIME types and file extensions to format names.
 	 */
-	protected function initFormats() {
+	private function initFormats() {
 		if ( $this->mimeTypes !== null
 			&& $this->fileExtensions !== null ) {
 			return;
 		}
 
-		$this->mimeTypes = array();
-		$this->fileExtensions = array();
-
-		$api = $this->newApiMain( "dummy" );
-		$formatNames = $api->getModuleManager()->getNames( 'format' );
-
-		foreach ( $formatNames as $name ) {
-			if ( $this->formatWhiteList !== null && !in_array( $name, $this->formatWhiteList ) ) {
-				continue;
-			}
-
-			$mimes = self::getApiMimeTypes( $name );
-			$ext = self::getApiFormatName( $name );
-
-			foreach ( $mimes as $mime ) {
-				if ( !isset( $this->mimeTypes[$mime]) ) {
-					$this->mimeTypes[$mime] = $name;
-				}
-			}
-
-			$this->fileExtensions[ $ext ] = $name;
-		}
-
-		$formats = $this->rdfWriterFactory->getSupportedFormats();
-
-		foreach ( $formats as $name ) {
-
-			// check whitelist, and don't override API formats
-			if ( ( $this->formatWhiteList !== null
-					&& !in_array( $name, $this->formatWhiteList ) )
-				|| in_array( $name, $this->mimeTypes )
-				|| in_array( $name, $this->fileExtensions )) {
-				continue;
-			}
-
-			// use all mime types. to improve content negotiation
-			foreach ( $this->rdfWriterFactory->getMimeTypes( $name ) as $mime ) {
-				if ( !isset( $this->mimeTypes[$mime]) ) {
-					$this->mimeTypes[$mime] = $name;
-				}
-			}
-
-			// only one file extension, to keep purging simple
-			$ext = $this->rdfWriterFactory->getFileExtension( $name );
-			if ( !isset( $this->fileExtensions[$ext]) ) {
-				$this->fileExtensions[$ext] = $name;
-			}
-		}
+		$this->mimeTypes = $this->entityDataFormatAccessor->getMimeTypes( $this->formatWhiteList );
+		$this->fileExtensions = $this->entityDataFormatAccessor->getFileExtensions( $this->formatWhiteList );
 	}
 
 	/**
@@ -429,61 +391,13 @@ class EntityDataSerializationService {
 	}
 
 	/**
-	 * Normalizes the format specifier; Converts mime types to API format names.
-	 *
-	 * @param String $format the format as supplied in the request
-	 *
-	 * @return String|null the normalized format name, or null if the format is unknown
-	 */
-	protected static function getApiFormatName( $format ) {
-		$format = trim( strtolower( $format ) );
-
-		if ( $format === 'application/vnd.php.serialized' ) {
-			$format = 'php';
-		} elseif ( $format === 'text/text' || $format === 'text/plain' ) {
-			$format = 'txt';
-		} else {
-			// hack: just trip the major part of the mime type
-			$format = preg_replace( '@^(text|application)?/@', '', $format );
-		}
-
-		return $format;
-	}
-
-	/**
-	 * Converts API format names to MIME types.
-	 *
-	 * @param String $format the API format name
-	 *
-	 * @return String[]|null the MIME types for the given format
-	 */
-	protected static function getApiMimeTypes( $format ) {
-		$format = trim( strtolower( $format ) );
-		$type = null;
-
-		switch ( $format ) {
-			case 'php':
-				return array( 'application/vnd.php.serialized' );
-
-			case 'txt':
-				return array( "text/text", "text/plain" );
-
-			case 'javascript':
-				return array( "text/javascript" );
-
-			default:
-				return array( "application/$format" );
-		}
-	}
-
-	/**
 	 * Returns an ApiMain module that acts as a context for the formatting and serialization.
 	 *
 	 * @param String $format The desired output format, as a format name that ApiBase understands.
 	 *
 	 * @return ApiMain
 	 */
-	protected function newApiMain( $format ) {
+	private function newApiMain( $format ) {
 		// Fake request params to ApiMain, with forced format parameters.
 		// We can override additional parameters here, as needed.
 		$params = array(
