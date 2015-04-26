@@ -3,12 +3,12 @@
 namespace Wikibase\DataModel\Tests\Claim;
 
 use Exception;
-use Wikibase\DataModel\Claim\ClaimGuid;
+use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\DataModel\Claim\ClaimGuid
+ * @covers Wikibase\DataModel\Statement\StatementGuid
  *
  * @group Wikibase
  * @group WikibaseDataModel
@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
+class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideConstructionData
@@ -26,10 +26,10 @@ class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expected
 	 */
 	public function testConstructor( EntityId $entityId, $guid, $expected ) {
-		$claimGuid = new ClaimGuid( $entityId, $guid );
+		$statementGuid = new StatementGuid( $entityId, $guid );
 
-		$this->assertEquals( $expected, $claimGuid->getSerialization() );
-		$this->assertEquals( $entityId, $claimGuid->getEntityId());
+		$this->assertEquals( $expected, $statementGuid->getSerialization() );
+		$this->assertEquals( $entityId, $statementGuid->getEntityId());
 	}
 
 	public function provideConstructionData() {
@@ -59,7 +59,7 @@ class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testBadConstruction( $entityId, $guid ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new ClaimGuid( $entityId, $guid );
+		new StatementGuid( $entityId, $guid );
 	}
 
 	public function provideBadConstruction() {
@@ -74,35 +74,37 @@ class ClaimGuidTest extends \PHPUnit_Framework_TestCase {
 		return $argLists;
 	}
 
-	public function provideClaimGuids() {
+	public function provideStatementGuids() {
 		$constructionDatas = $this->provideConstructionData();
 		$argLists = array();
 
 		foreach( $constructionDatas as $constructionData ){
-			$argLists[] = array( new ClaimGuid( $constructionData[0], $constructionData[1] ) );
+			$argLists[] = array( new StatementGuid( $constructionData[0], $constructionData[1] ) );
 		}
 
 		return $argLists;
 	}
 
 	/**
-	 * @dataProvider provideClaimGuids
-	 * @param ClaimGuid $claimGuid
+	 * @dataProvider provideStatementGuids
+	 *
+	 * @param StatementGuid $statementGuid
 	 */
-	public function testEquals( ClaimGuid $claimGuid ) {
-		$claimGuidCopy = clone $claimGuid;
-		$this->assertTrue( $claimGuid->equals( $claimGuidCopy ) );
-		$this->assertTrue( $claimGuidCopy->equals( $claimGuid ) );
+	public function testEquals( StatementGuid $statementGuid ) {
+		$statementGuidCopy = clone $statementGuid;
+		$this->assertTrue( $statementGuid->equals( $statementGuidCopy ) );
+		$this->assertTrue( $statementGuidCopy->equals( $statementGuid ) );
 	}
 
 	/**
-	 * @dataProvider provideClaimGuids
-	 * @param ClaimGuid $claimGuid
+	 * @dataProvider provideStatementGuids
+	 *
+	 * @param StatementGuid $statementGuid
 	 */
-	public function testNotEquals( ClaimGuid $claimGuid ) {
-		$notEqualClaimGuid = new ClaimGuid( new ItemId( 'q9999' ), 'someguid' );
-		$this->assertFalse( $claimGuid->equals( $notEqualClaimGuid ) );
-		$this->assertFalse( $notEqualClaimGuid->equals( $claimGuid ) );
+	public function testNotEquals( StatementGuid $statementGuid ) {
+		$notEqualStatementGuid = new StatementGuid( new ItemId( 'q9999' ), 'someguid' );
+		$this->assertFalse( $statementGuid->equals( $notEqualStatementGuid ) );
+		$this->assertFalse( $notEqualStatementGuid->equals( $statementGuid ) );
 	}
 
 }
