@@ -7,6 +7,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "Հղում տվյալների աղբյուրի համապատասխան գրառմանը",
+	"wikibase-comment-update": "{{WBREPONAME}} տարրը փոփոխվել է",
 	"wikibase-dataitem": "{{WBREPONAME}} միույթ",
 	"wikibase-editlinks": "Փոխել հղումները",
 	"wikibase-editlinkstitle": "Խմբագրել միջլեզվային հղումները",
@@ -26,6 +27,7 @@
 	"wikibase-rc-hide-wikidata-hide": "Թաքցնել",
 	"wikibase-rc-hide-wikidata-show": "Ցուցադրել",
 	"wikibase-rc-show-wikidata-pref": "Վերջին փոփոխություններում ցույց տալ {{grammar:genitive|{{WBREPONAME}}}} խմբագրումները",
+	"wikibase-rc-wikibase-edit-letter": "Դ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
 	"wikibase-otherprojects": "Քույր նախագծերում"
 }

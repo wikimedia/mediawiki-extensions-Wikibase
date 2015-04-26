@@ -5,7 +5,8 @@
 			"KartikMistry",
 			"Kondi",
 			"Vyom",
-			"Macofe"
+			"Macofe",
+			"Arbhatt"
 		]
 	},
 	"wikibase-desc": "માળખાગત માહિતીનો સંગ્રહ",
@@ -16,14 +17,15 @@
 	"wikibase-addreference": "સ્રોત ઉમેરો",
 	"wikibase-save-inprogress": "સચવાઈ રહ્યું છે…",
 	"wikibase-remove-inprogress": "રદ્દ રહ્યું છે…",
-	"wikibase-label-empty": "કોઇ લેબલ વ્યાખ્યાયિત થયું નથી",
+	"wikibase-label-empty": "કોઇ મથાળું વ્યાખ્યાયિત થયું નથી",
 	"wikibase-label-edit-placeholder": "લેબલ દાખલ કરો",
 	"wikibase-description-empty": "કોઈ વર્ણન વ્યાખ્યાયિત થયું નથી",
 	"wikibase-description-edit-placeholder": "વર્ણન ઉમેરો",
 	"wikibase-sitelink-site-edit-placeholder": "સાઈટ",
 	"wikibase-sitelink-page-edit-placeholder": "પાનું",
+	"wikibase-statements": "વિધાનો",
 	"wikibase-terms": "અન્ય ભાષાઓમાં",
-	"wikibase-sitelinks-special": "બીજી વેબસાઇટ્સ",
+	"wikibase-sitelinks-special": "અન્ય જાળસ્થળો",
 	"wikibase-remove": "હટાવો",
 	"wikibase-undo-title": "\"$1\"ના ફેરફારો પાછા વાળી રહ્યા છીએ",
 	"wikibase-restore-title": "\"$1\"નું જૂનું સંસ્કરણ પુન:સ્થાપિત કરી રહ્યા છીએ..",

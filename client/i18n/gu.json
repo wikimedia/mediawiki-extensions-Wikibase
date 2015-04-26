@@ -3,9 +3,12 @@
 		"authors": [
 			"Ashok modhvadia",
 			"KartikMistry",
-			"Vyom"
+			"Vyom",
+			"Arbhatt"
 		]
 	},
+	"tooltip-t-wikibase": "ડેટા રીપોઝીટરીમાંની વસ્તુને સંકળતી કડી",
+	"wikibase-comment-update": "વસ્તુ {{WBREPONAME}} બદલાઇ ગઇ છે",
 	"wikibase-dataitem": "{{WBREPONAME}} વસ્તુ",
 	"wikibase-editlinks": "કડીઓમાં ફેરફાર કરો",
 	"wikibase-editlinkstitle": "આંતરવિકિ ભાષાઓની કડીમાં ફેરફાર કરો",

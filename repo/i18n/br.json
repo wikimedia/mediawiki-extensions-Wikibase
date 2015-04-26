@@ -5,7 +5,8 @@
 			"Fulup",
 			"Y-M D",
 			"Macofe",
-			"Gwenn-Ael"
+			"Gwenn-Ael",
+			"Pymouss"
 		]
 	},
 	"wikibase-edit": "kemmañ",
@@ -25,6 +26,7 @@
 	"wikibase-remove": "Dilemel",
 	"wikibase-aliases-label": "Anvet ivez :",
 	"wikibase-aliases-empty": "Alias termenet ebet",
+	"wikibase-statementview-rank-normal": "Renk voutin",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|daveenn|daveennoù}}",
 	"wikibase-entityselector-more": "muioc'h",
 	"special-itembytitle": "Elfenn dre ditl",

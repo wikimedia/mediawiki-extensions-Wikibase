@@ -4,11 +4,11 @@
 			"JAn Dudík",
 			"KuboF",
 			"Teslaton",
-			"Sudo77(new)"
+			"Sudo77(new)",
+			"TomášPolonec"
 		]
 	},
 	"wikibase-client-desc": "Klient pre rozšírenie Wikibase",
-	"specialpages-group-wikibaseclient": "Klient {{GRAMMAR:genitív|{{WBREPONAME}}}}",
 	"tooltip-t-wikibase": "Odkaz na prepojenú položku dátového úložiska",
 	"wikibase-after-page-move": "Môžete tiež [$1 aktualizovať] súvisiacu položku {{GRAMMAR:genitív|{{WBREPONAME}}}}, aby na presunutej stránke zostali odkazy na iné jazyky.",
 	"wikibase-after-page-move-queued": "Súvisiaca [$1 položka {{GRAMMAR:genitív|{{WBREPONAME}}}}] bude zakrátko automaticky aktualizovaná.",
@@ -41,7 +41,9 @@
 	"wikibase-rc-hide-wikidata-hide": "Skryť",
 	"wikibase-rc-hide-wikidata-show": "Zobraziť",
 	"wikibase-rc-show-wikidata-pref": "Zobraziť úpravy Wikiúdajov v posledných úpravách",
+	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Úprava Wikiúdajov",
+	"wikibase-replicationnote": "Môže trvať niekoľko minút, než sa zmeny prejavia na všetkých wiki.",
 	"wikibase-watchlist-show-changes-pref": "Zobraziť úpravy Wikiúdajov v sledovaných stránkach",
 	"special-unconnectedpages": "Stránky bez prepojení",
 	"wikibase-unconnectedpages-legend": "Stránky bez prepojení",

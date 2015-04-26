@@ -2,11 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Xabier Armendaritz",
-			"Subi"
+			"Subi",
+			"Sator"
 		]
 	},
+	"wikibase-editlinks": "Aldatu loturak",
+	"wikibase-editlinkstitle": "Aldatu hizkuntzen arteko loturak",
 	"wikibase-linkitem-input-site": "Hizkuntza:",
 	"wikibase-rc-hide-wikidata-hide": "Ezkutatu",
 	"wikibase-rc-hide-wikidata-show": "Erakutsi",
-	"wikibase-rc-wikibase-edit-title": "Aldaketa hau Wikidatan egin da"
+	"wikibase-rc-wikibase-edit-title": "Aldaketa hau Wikidatan egin da",
+	"wikibase-otherprojects": "Beste proiektuak"
 }

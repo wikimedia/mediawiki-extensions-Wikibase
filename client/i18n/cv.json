@@ -6,5 +6,7 @@
 	},
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "кăтартмалла мар",
-	"wikibase-rc-hide-wikidata-show": "кăтартмалла"
+	"wikibase-rc-hide-wikidata-show": "кăтартмалла",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} тӳрлетни"
 }

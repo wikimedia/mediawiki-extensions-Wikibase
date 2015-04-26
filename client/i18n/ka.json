@@ -3,10 +3,12 @@
 		"authors": [
 			"David1010",
 			"Tokoko",
-			"Otogi"
+			"Otogi",
+			"SHOTHA"
 		]
 	},
 	"wikibase-client-desc": "ვიკიბაზის გაფართოების კლიენტი",
+	"tooltip-t-wikibase": "მონაცემთა საცავის დაკავშირებული ელემენტის ბმული",
 	"wikibase-after-page-move": "გადარქმეულ გვერდზე ენის ბმულების გასასწორებლად, თქვენ აგრეთვე შეგიძლიათ [$1 განაახლოთ] ვიკიმონაცემების დაკავშირებული ელემენტი.",
 	"wikibase-after-page-move-queued": "ამ გვერდთან დაკავშირებული [$1 ვიკიმონაცემების ელემენტი] მალე ავტომატურად განახლდება.",
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}}-ს ელემენტი] დაკავშირებული ამ გვერდთან სწრაფად განახლდება ავტომატურად.",
@@ -19,7 +21,7 @@
 	"wikibase-comment-sitelink-change": "ენის ბმული შეცვლილია $1-დან $2-ზე",
 	"wikibase-comment-sitelink-remove": "ენის ბმული წაშლილია: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ცვლილება|ცვლილება}}",
-	"wikibase-dataitem": "ელემენტის მონაცემი",
+	"wikibase-dataitem": "ელემენტი {{WBREPONAME}}",
 	"wikibase-editlinks": "ბმულების რედაქტირება",
 	"wikibase-editlinkstitle": "ენათშორისი ბმულების რედაქტირება",
 	"wikibase-linkitem-addlinks": "ბმულების დამატება",

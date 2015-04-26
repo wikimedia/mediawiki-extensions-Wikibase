@@ -78,6 +78,7 @@
 	"wikibase-setlabel-intro": "Met heh däm Fommolaa kam_mer enem Objäk sing Bezeischnong faßlähje. Mer moss en Kännong för dät Objäk aanjävve (för e Beijschpell „Q23“), e Schprohcheköözel (för e Beijschpell „ksh“ för Kölsch) un de Bezeischnong.",
 	"wikibase-setaliases-label": "Ander Nahme:",
 	"wikibase-setaliases-submit": "Donn de ander Nahme faßhallde",
+	"wikibase-setlabeldescriptionaliases-intro": "Heh dat Fommolaa määd et müjjelesch, en Ätikättsche, en Äkliehrong, un zohsäzlejje Nahme för en Saach enzejävve. Mer moß eets de Kännong för di Saach aanjävve, för e Beijschpell „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">Q23</code>“, un e Köözel för di Schprooch, för e Beijschpell „<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">en</code>“",
 	"wikibase-modifyentity-id": "Kännong",
 	"wikibase-modifyterm-language": "Köözel fö de Schprohch:",
 	"wikibase-itemmerge-missing-parameter": "Onkumplatte Enjahbe.",

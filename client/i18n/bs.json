@@ -2,21 +2,24 @@
 	"@metadata": {
 		"authors": [
 			"DzWiki",
-			"Edinwiki"
+			"Edinwiki",
+			"Palapa",
+			"Semso98"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
-	"specialpages-group-wikibaseclient": "Klijent Wikipodataka",
+	"tooltip-t-wikibase": "Link na povezane podatke spremišnih stavki",
 	"wikibase-after-page-move": "Možete također [$1 ažurirati] asociranu stavku Wikipodataka za održavanje jezičnih veza na premještenoj stranici.",
 	"wikibase-comment-remove": "Asocirana stavka Wikipodataka je izbrisana. Jezične veze su uklonjene.",
 	"wikibase-comment-linked": "Neka stavka Wikipodataka je povezana prema ovoj stranici.",
 	"wikibase-comment-unlink": "Ova stranica je odvojena od stavke sa Wikipodataka. Jezične veze su uklonjene.",
 	"wikibase-comment-restore": "Asocirana stavka Wikipodataka je vraćena. Jezične veze su sada isto vraćene.",
-	"wikibase-comment-update": "Jezične veze su ažurirane.",
+	"wikibase-comment-update": "{{WBREPONAME}} promijenjena stavka",
 	"wikibase-comment-sitelink-add": "Jezična veza dodana: $1",
 	"wikibase-comment-sitelink-change": "Jezična veza izmjenjena sa $1 u $2",
 	"wikibase-comment-sitelink-remove": "Jezična veza uklonjena: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|izmjena|izmjene}}",
+	"wikibase-dataitem": "{{WBREPONAME}} stavka",
 	"wikibase-editlinks": "Uredi veze",
 	"wikibase-editlinkstitle": "Uredi međujezične veze",
 	"wikibase-linkitem-addlinks": "Dodaj veze",
@@ -34,9 +37,13 @@
 	"wikibase-linkitem-not-loggedin": "Morate biti prijavljeni na ovom wiki projektu i na [$1 centralnom skladištu podataka] da bi mogli koristiti ovu funkciju.",
 	"wikibase-linkitem-success-link": "Stranice su uspješno povezane. Možete pronaći ovu stavku koja sadrži ove poveznice u našom [$1 centralnom skladištu podataka].",
 	"wikibase-property-notfound": "Osobina $1 nije pronađena.",
-	"wikibase-rc-hide-wikidata": "$1 Wikipodaci",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Sakrij",
+	"wikibase-rc-hide-wikidata-show": "Pokaži",
 	"wikibase-rc-show-wikidata-pref": "Pokaži izmjene Wikipodataka u nedavnim izmjenama",
-	"wikibase-rc-wikibase-edit-title": "Uređivanje Wikipodataka",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
+	"wikibase-replicationnote": "Budite svjesni da može potrajati nekoliko minuta dok izmjene budu vidljive na svim wiki strancima",
 	"wikibase-watchlist-show-changes-pref": "Prikaži izmjene Wikipodataka kod vašeg spiska praćenih članaka",
 	"wikibase-error-serialize-error": "Neuspješna serijalizacija podataka",
 	"wikibase-error-invalid-entity-id": "Unešen ID nije poznat u sistemu. Koristite validan ID.",
@@ -50,5 +57,6 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|međuwiki veza|međuwiki veze|međuwiki veza}} na stranici)",
 	"wikibase-pageinfo-entity-id": "ID stavke Wikipodataka",
 	"wikibase-pageinfo-entity-id-none": "Ništa",
-	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2"
+	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2",
+	"wikibase-otherprojects": "Drugi projekti"
 }

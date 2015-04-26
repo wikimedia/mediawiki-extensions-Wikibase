@@ -7,7 +7,8 @@
 			"கௌசிக் பிரபு",
 			"மதனாஹரன்",
 			"Macofe",
-			"கலைவாணன்"
+			"கலைவாணன்",
+			"Jayarathina"
 		]
 	},
 	"wikibase-entity-item": "உருப்படி",
@@ -21,6 +22,7 @@
 	"wikibase-description-edit-placeholder": "விவரங்களை உள்ளிடவும்",
 	"wikibase-sitelink-site-edit-placeholder": "தளம்",
 	"wikibase-sitelink-page-edit-placeholder": "பக்கம்",
+	"wikibase-sitelinks-special": "பிற தளங்கள்",
 	"wikibase-remove": "நீக்கு",
 	"wikibase-disambiguation-title": "\"$1\" க்கான பக்க நெறிப்படுத்தல்",
 	"wikibase-aliases-empty": "மாற்றுகள் வரையறுக்கப்படவில்லை",

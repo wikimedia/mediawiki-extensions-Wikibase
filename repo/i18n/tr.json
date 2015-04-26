@@ -10,7 +10,8 @@
 			"Violetanka",
 			"Ozerk",
 			"Aşilleus",
-			"Macofe"
+			"Macofe",
+			"Ömer Berkay"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -34,9 +35,11 @@
 	"wikibase-statements": "İfadeler",
 	"wikibase-sitelinkgroupview-input-help-message": "Bir siteyi veya o sitedeki bir sayfayı belirterek bağlantı ekleyin, var olan site bağlantılarını düzenleyin veya  kaldırın.",
 	"wikibase-sitelinks-input-help-message": "Bu ögeyle ilgili olan bir sayfanın bağlantsını ekle.",
+	"wikibase-sitelinks-special": "Diğer siteler",
 	"wikibase-badgeselector-badge-placeholder-title": "Bir kimlik kartı atamak için tıklayın.",
 	"wikibase-remove": "kaldır",
 	"wikibase-aliases-label": "Şu şekilde de bilinir:",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{ÇOĞUL:$1|başvuru|kaynaklar}}",
 	"wikibase-shortcopyrightwarning": "\"$1\" düğmesine tıkladığınızda, [[$2|kullanım şartlarını]] kabul ederek katkınızı, $3 kapsamında geri döndürülemez bir biçimde sağlamış olacaksınız.",
 	"special-itembytitle": "Başlığına göre öge",
 	"wikibase-gotolinkedpage-lookup-site": "Site:",

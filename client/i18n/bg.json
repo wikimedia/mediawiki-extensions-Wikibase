@@ -8,8 +8,10 @@
 			"Borislav"
 		]
 	},
+	"tooltip-t-wikibase": "Препратка към свързаният обект от хранилището за данни",
 	"wikibase-after-page-move": "Можете да [$1 актуализирате] свързания обект от {{WBREPONAME}} с цел поддръжка на междуезиковите препратки към преместената страница.",
 	"wikibase-comment-remove": "Асоциираният обект от {{WBREPONAME}} е изтрит. Междуезиковите препратки са премахнати.",
+	"wikibase-comment-update": "Елемент {{WBREPONAME}} е променен",
 	"wikibase-comment-sitelink-add": "Добавена междуезикова препратка: $1",
 	"wikibase-comment-sitelink-change": "Променена междуезикова препратка: от $1 на $2",
 	"wikibase-comment-sitelink-remove": "Премахната междуезикова препратка: $1",
@@ -28,6 +30,7 @@
 	"wikibase-rc-hide-wikidata-hide": "Скриване",
 	"wikibase-rc-hide-wikidata-show": "Показване",
 	"wikibase-rc-show-wikidata-pref": "Показване на редакции от {{WBREPONAME}} в последните промени",
+	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Редакция от {{WBREPONAME}}",
 	"wikibase-replicationnote": "Може да отнеме няколко минути, докато промените се отразят във всички уикита.",
 	"wikibase-watchlist-show-changes-pref": "Показване на редакции от {{WBREPONAME}} в списъка ми за наблюдение",

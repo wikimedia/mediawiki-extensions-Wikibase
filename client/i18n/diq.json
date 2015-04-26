@@ -16,7 +16,7 @@
 	"wikibase-comment-sitelink-change": "Gıreyê zıwani be $1 ra vuriya $2",
 	"wikibase-comment-sitelink-remove": "Gıreyê zıwani berd: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|vurnayış|vurnayışi}}",
-	"wikibase-dataitem": "Unsurê melumati",
+	"wikibase-dataitem": "Unsurê {{WBREPONAME}}",
 	"wikibase-editlinks": "Gıreyan bıvurne",
 	"wikibase-editlinkstitle": "Gıreyanê miyanzıwani bıvurne",
 	"wikibase-linkitem-addlinks": "Gıreyan cı ke",

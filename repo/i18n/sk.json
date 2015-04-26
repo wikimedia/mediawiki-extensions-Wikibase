@@ -3,7 +3,8 @@
 		"authors": [
 			"KuboF",
 			"Sudo77(new)",
-			"Macofe"
+			"Macofe",
+			"TomášPolonec"
 		]
 	},
 	"wikibase-desc": "Úložisko štruktúrovaných údajov",
@@ -25,10 +26,14 @@
 	"wikibase-description-input-help-message": "Zadajte stručný popis v jazyku $1.",
 	"wikibase-statements": "Výroky",
 	"wikibase-terms": "V iných jazykoch",
+	"wikibase-sitelinks-special": "Iné projekty",
 	"wikibase-remove": "odstrániť",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|položka|položky|položiek}}",
 	"wikibase-aliases-label": "Tiež známy ako:",
+	"wikibase-aliases-empty": "Žiadne iné názvy neboli definované",
 	"wikibase-propertypage-datatype": "Typ údaju",
+	"wikibase-statementview-rank-normal": "Normálne hodnoty",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referencia|referencie|referencií}}",
 	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ potvrdzujete súhlas s [[$2|podmienkami použitia]] a neodvolateľne zverejňujete svoj príspevok za podmienok $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Prijímam tieto podmienky pre svoje budúce úpravy. Túto správu už nabudúce nezobrazovať.",
 	"special-itembytitle": "Položky podľa názvu",

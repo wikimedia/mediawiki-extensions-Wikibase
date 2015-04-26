@@ -5,7 +5,8 @@
 			"Ydyashad",
 			"संतोष दहिवळ",
 			"BPositive",
-			"Macofe"
+			"Macofe",
+			"अभय नातू"
 		]
 	},
 	"wikibase-desc": "संरचित माहिती भंडार",
@@ -110,15 +111,12 @@
 	"special-setlabel": "लेबल स्थापा",
 	"wikibase-setlabel-label": "लेबल:",
 	"wikibase-setlabel-submit": "लेबल स्थापा",
-	"wikibase-setlabel-warning-remove": "काय आपणास खरेच  [[$1]]चे लेबल हटवायचे आहे?",
 	"special-setdescription": "वर्णन टाका",
 	"wikibase-setdescription-label": "वर्णन:",
 	"wikibase-setdescription-submit": "वर्णन टाका",
-	"wikibase-setdescription-warning-remove": "काय आपणास खरेच  [[$1]]चे वर्णन हटवायचे आहे?",
 	"special-setaliases": "पर्याय टाका",
 	"wikibase-setaliases-label": "पर्याय:",
 	"wikibase-setaliases-submit": "पर्याय टाका",
-	"wikibase-setaliases-warning-remove": "काय आपणास खरेच  [[$1]]चे सर्व पर्याय हटवायचे आहे?",
 	"special-setsitelink": "संकेतस्थळ दुवा स्थापा",
 	"wikibase-setsitelink-badges": "बिल्ले:",
 	"wikibase-setsitelink-submit": "संकेतस्थळ दुवा स्थापा",
