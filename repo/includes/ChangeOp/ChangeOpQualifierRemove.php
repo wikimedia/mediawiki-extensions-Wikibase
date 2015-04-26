@@ -7,7 +7,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Summary;
 
 /**
@@ -78,12 +78,12 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 	}
 
 	/**
-	 * @param Snaks $qualifiers
+	 * @param SnakList $qualifiers
 	 * @param Summary $summary
 	 *
 	 * @throws ChangeOpException
 	 */
-	protected function removeQualifier( Snaks $qualifiers, Summary $summary = null ) {
+	protected function removeQualifier( SnakList $qualifiers, Summary $summary = null ) {
 		if ( !$qualifiers->hasSnakHash( $this->snakHash ) ) {
 			throw new ChangeOpException( "Qualifier with hash $this->snakHash does not exist" );
 		}

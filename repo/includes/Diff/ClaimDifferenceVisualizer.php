@@ -9,7 +9,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
@@ -250,11 +250,11 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
-	 * @param Snaks $snaks
+	 * @param SnakList $snaks
 	 *
 	 * @return string[] HTML
 	 */
-	private function visualizeSnaks( Snaks $snaks ) {
+	private function visualizeSnaks( SnakList $snaks ) {
 		$html = array();
 
 		foreach ( $snaks as $snak ) {
