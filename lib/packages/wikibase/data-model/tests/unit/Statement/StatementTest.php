@@ -290,7 +290,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	public function testStatementClaimWithDifferentReferences_equalsReturnsFalse() {
 		$statement = new Statement(
 			new PropertyNoValueSnak( 42 ),
-			new SnakList( array() ),
+			new SnakList(),
 			new ReferenceList( array(
 				new Reference( array( new PropertyNoValueSnak( 1337 ) ) ),
 			) )
@@ -298,7 +298,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 
 		$differentStatement = new Statement(
 			new PropertyNoValueSnak( 42 ),
-			new SnakList( array() ),
+			new SnakList(),
 			new ReferenceList( array(
 				new Reference( array( new PropertyNoValueSnak( 32202 ) ) ),
 			) )
