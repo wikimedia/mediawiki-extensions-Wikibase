@@ -1,7 +1,7 @@
 {
 	"name": "wikibase/internal-serialization",
 	"type": "library",
-	"description": "Library containing serializers and deserializers for the data access layer of Wikibase Repo.",
+	"description": "Serializers and deserializers for the data access layer of Wikibase Repository",
 	"keywords": [
 		"wikibase",
 		"DataModel",
@@ -39,7 +39,10 @@
 	"autoload": {
 		"psr-4": {
 			"Wikibase\\InternalSerialization\\": "src/"
-		}
+		},
+		"files" : [
+			"mediawiki.php"
+		]
 	},
 	"extra": {
 		"branch-alias": {
