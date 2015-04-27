@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_48686684",
+        "filename": "repo/includes/LinkedData/EntityDataFormatProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-27T00:30:30Z",
+      "side": 1,
+      "message": "Split this into function for mime types and file extensions each and also for api formats and RdfWriterFactory formats",
+      "parentUuid": "0ed113e2_68bf6af7",
+      "revId": "fed7a9f45a599a342a12b2ec0673cce8928216e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_48c2a689",
         "filename": "repo/includes/LinkedData/EntityDataFormatProvider.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-27T00:10:10Z",
       "side": 1,
       "message": "[$ext]",
+      "revId": "fed7a9f45a599a342a12b2ec0673cce8928216e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_085b3efe",
+        "filename": "repo/includes/LinkedData/EntityDataFormatProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-27T00:30:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_48c2a689",
       "revId": "fed7a9f45a599a342a12b2ec0673cce8928216e5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
