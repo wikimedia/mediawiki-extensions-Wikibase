@@ -8,6 +8,7 @@ use PHPUnit_Framework_Error;
 use RawMessage;
 use Status;
 use User;
+use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -82,7 +83,11 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 
-		$changeOpsFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()->getMergeChangeOpFactory();
+		$changeOpsFactory = new MergeChangeOpsFactory(
+			WikibaseRepo::getDefaultInstance()->getEntityConstraintProvider(),
+			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider(),
+			MockSiteStore::newFromTestSites()
+		);
 
 		$exceptionLocalizer = $this->getMock( 'Wikibase\Lib\Localizer\ExceptionLocalizer' );
 		$exceptionLocalizer->expects( $this->any() )
