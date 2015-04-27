@@ -35,6 +35,7 @@
 	"wikibase-aliases-label": "આ નામે પણ જાણીતા:",
 	"wikibase-aliases-empty": "કોઈ ઉપનામ દર્શાવેલ નથી",
 	"wikibase-propertypage-datatype": "ડેટા પ્રકાર",
+	"wikibase-statementview-rank-normal": "સામાન્ય પદ",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|સંદર્ભ|સંદર્ભો}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|સ્રોત હજુ સચવાયો|$1 સ્રોતો હજુ સચવાયા}} નથી",
 	"wikibase-snakview-property-input-placeholder": "ગુણધર્મ",

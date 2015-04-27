@@ -349,6 +349,7 @@
 	"content-model-wikibase-query": "ウィキベース クエリ",
 	"right-item-merge": "項目を統合",
 	"right-property-create": "プロパティを作成",
+	"action-property-create": "プロパティの作成",
 	"apihelp-wbmergeitems-description": "複数の項目を統合する。",
 	"apihelp-wbmergeitems-param-fromid": "統合元の ID",
 	"apihelp-wbmergeitems-param-toid": "統合先の ID",

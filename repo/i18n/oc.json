@@ -268,5 +268,6 @@
 	"content-model-wikibase-item": "Element de Wikibase",
 	"content-model-wikibase-property": "Propietat de Wikibase",
 	"content-model-wikibase-query": "Requèsta de Wikibase",
-	"right-property-create": "Crear de proprietats"
+	"right-property-create": "Crear de proprietats",
+	"action-property-create": "crear de proprietats"
 }

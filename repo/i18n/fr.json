@@ -385,5 +385,6 @@
 	"right-item-merge": "Fusionner les éléments",
 	"right-item-redirect": "Créer des redirections d’élément",
 	"right-property-term": "Modifier les termes de la propriété (libellés, descriptions, alias)",
-	"right-property-create": "Créer des propriétés"
+	"right-property-create": "Créer des propriétés",
+	"action-property-create": "créer des propriétés"
 }

@@ -5,5 +5,7 @@
 		]
 	},
 	"wikibase-edit": "რედაქტირაფა",
-	"wikibase-add": "გეძინა"
+	"wikibase-add": "გეძინა",
+	"wikibase-sitelinks-special": "შხვა საიტეფი",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|სქოლიო|სქოლიო}}"
 }

@@ -248,5 +248,6 @@
 	"content-model-wikibase-item": "Wikibase-element",
 	"content-model-wikibase-property": "Wikibase-eigenskap",
 	"content-model-wikibase-query": "Wikibase-spørjing",
-	"right-property-create": "Oppretta eigenskapar"
+	"right-property-create": "Oppretta eigenskapar",
+	"action-property-create": "oppretta eigenskapar"
 }

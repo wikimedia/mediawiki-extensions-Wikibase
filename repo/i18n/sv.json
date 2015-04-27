@@ -382,6 +382,7 @@
 	"right-property-create": "Skapa egenskaper",
 	"wikibase-entity-not-viewable-title": "Innehållstypsfel: Kan inte visa inehåll",
 	"wikibase-entity-not-viewable": "Det angivna innehållet av typen \"$1\" är inte en entitet och kan inte visas av Wikibase.",
+	"action-property-create": "skapa egenskaper",
 	"apihelp-wbcreateclaim-description": "Skapar Wikibase påståenden.",
 	"apihelp-wbcreateclaim-param-entity": "ID av entiteten du lägger till ett påstående till",
 	"apihelp-wbcreateclaim-param-property": "ID av snaks-egenskapen",

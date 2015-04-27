@@ -154,5 +154,6 @@
 	"content-model-wikibase-item": "विकिबेस कलम",
 	"content-model-wikibase-property": "विकिबेस गुणधर्म",
 	"content-model-wikibase-query": "विकिबेस पृच्छा",
-	"right-property-create": "गुणधर्म तयार करा"
+	"right-property-create": "गुणधर्म तयार करा",
+	"action-property-create": "गुणधर्म तयार करा"
 }

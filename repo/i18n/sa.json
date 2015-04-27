@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "सम्पाद्यताम्",
-	"wikibase-add": "योज्यताम्"
+	"wikibase-add": "योज्यताम्",
+	"wikibase-sitelinks-special": "अन्यानि जालस्थानानि",
+	"wikibase-statementview-rank-normal": "सामान्यश्रेणी",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|उल्लेखः|उल्लेखाः}}"
 }

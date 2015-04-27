@@ -352,6 +352,7 @@
 	"right-item-merge": "Fundir itens",
 	"right-property-term": "Altere termos de propriedade (rótulos, descrições, nomes alternativos)",
 	"right-property-create": "Criar propriedades",
+	"action-property-create": "criar propriedades",
 	"apihelp-wbcreateclaim-description": "Cria alegações do Wikidata.",
 	"apihelp-wbmergeitems-description": "Faz a fusão de vários itens.",
 	"apihelp-wbremoveclaims-description": "Remove alegações do Wikidata.",

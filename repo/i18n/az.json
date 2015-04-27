@@ -2,12 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Khan27",
-			"Dağlı95"
+			"Dağlı95",
+			"Wertuose"
 		]
 	},
 	"wikibase-edit": "redaktə",
 	"wikibase-add": "əlavə et",
-	"wikibase-description-empty": "İzahı yoxdur",
+	"wikibase-label-empty": "Yarlıq (etiket) yoxdur",
+	"wikibase-description-empty": "İzah verilməyib",
 	"wikibase-sitelink-page-edit-placeholder": "səhifə",
 	"wikibase-statements": "İddialar",
 	"wikibase-sitelinks-special": "Digər saytlar",

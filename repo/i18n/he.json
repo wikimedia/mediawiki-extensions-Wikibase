@@ -401,6 +401,7 @@
 	"right-property-create": "יצירת מאפיינים",
 	"wikibase-entity-not-viewable-title": "חוסר־התאמה בסוג התוכן: לא ניתן להציג את התוכן",
 	"wikibase-entity-not-viewable": "סוג התוכן \"$1\" אינו ישות ולכן אי־אפשר להציג אותו בוויקיבייס.",
+	"action-property-create": "ליצור מאפיינים",
 	"apihelp-wbmergeitems-description": "ממזג מספר רב של פריטים.",
 	"apihelp-wbparsevalue-example-1": "לא לשנות את העיצוב של המחרוזת.",
 	"apihelp-wbsearchentities-param-search": "חיפוש עבור הטקסט הזה.",

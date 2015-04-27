@@ -335,6 +335,7 @@
 	"right-item-redirect": "Crear redireiciones d'elementos",
 	"right-property-term": "Camudar los términos de la propiedá (etiquetes, descripciones, alcuños)",
 	"right-property-create": "Crear propiedaes",
+	"action-property-create": "crear propiedaes",
 	"apihelp-wbsetlabel-param-language": "Llingua de la etiqueta",
 	"apihelp-wbsetlabel-param-value": "El valor de la etiqueta"
 }

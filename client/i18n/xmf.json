@@ -4,6 +4,13 @@
 			"Silovan"
 		]
 	},
+	"tooltip-t-wikibase": "მუნაჩემეფიშ ოჩუაშეს მიკორსხილი ელემენტიშ რცხუ",
+	"wikibase-comment-update": "{{WBREPONAME}} ელემენტი თირელი რე",
+	"wikibase-dataitem": "ელემენტი {{WBREPONAME}}",
+	"wikibase-editlinks": "რცხუეფიშ რედაქტირაფა",
+	"wikibase-editlinkstitle": "ნინეფს შქას რცხუეფიშ რედაქტირაფა",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-show": "ძირაფა"
+	"wikibase-rc-hide-wikidata-show": "ძირაფა",
+	"wikibase-rc-wikibase-edit-letter": "ვ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} რედაქტირაფა"
 }

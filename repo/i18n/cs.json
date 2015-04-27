@@ -388,5 +388,6 @@
 	"right-property-term": "Měnit označení vlastností (štítky, popisy, aliasy)",
 	"right-property-create": "Vytváření vlastností",
 	"wikibase-entity-not-viewable-title": "Nesouhlasí typ obsahu: Obsah nelze zobrazit",
-	"wikibase-entity-not-viewable": "Zadaný typ obsahu „$1“ není entita a Wikibase ho nemůže zobrazit."
+	"wikibase-entity-not-viewable": "Zadaný typ obsahu „$1“ není entita a Wikibase ho nemůže zobrazit.",
+	"action-property-create": "vytvořit vlastnosti"
 }

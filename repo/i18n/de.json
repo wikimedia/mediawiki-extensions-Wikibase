@@ -411,6 +411,8 @@
 	"right-property-create": "Eigenschaften erstellen",
 	"wikibase-entity-not-viewable-title": "Inhaltstypfehler: Inhalt kann nicht angezeigt werden",
 	"wikibase-entity-not-viewable": "Der angegebene Inhalt des Typs „$1“ ist kein Objekt und kann von Wikibase nicht angezeigt werden.",
+	"action-item-merge": "Objekte zusammenzuführen",
+	"action-property-create": "Eigenschaften zu erstellen",
 	"apihelp-wbcreateredirect-description": "Erstellt Objektweiterleitungen.",
 	"apihelp-wbcreateredirect-example-1": "Wandelt Q11 in eine Weiterleitung nach Q12 um",
 	"apihelp-wbeditentity-example-2": "Erstellt ein neues Objekt und legt die Bezeichnungen für de und en fest",

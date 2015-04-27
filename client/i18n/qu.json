@@ -4,6 +4,7 @@
 			"AlimanRuna"
 		]
 	},
+	"tooltip-t-wikibase": "T'inkinakusqa taqi qallawawan t'inki",
 	"wikibase-after-page-move": "T'inkisqa {{WBREPONAME}} qallawatapas [$1 musuqchaytam] atinki astasqa p'anqapi rimay t'inkikunata hat'allinaykipaq.",
 	"wikibase-after-page-move-queued": "Kay p'anqawan t'inkisqa [$1 {{WBREPONAME}} qallawaqa] utqaylla musuqchasqam kanqa.",
 	"wikibase-dataitem": "{{WBREPONAME}} willa qallawa",

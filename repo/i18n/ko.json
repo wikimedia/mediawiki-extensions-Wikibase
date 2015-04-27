@@ -344,5 +344,6 @@
 	"right-item-merge": "항목 병합",
 	"right-item-redirect": "항목 넘겨주기를 생성하기",
 	"right-property-term": "속성 용어 바꾸기 (레이블, 설명, 별명)",
-	"right-property-create": "속성 만들기"
+	"right-property-create": "속성 만들기",
+	"action-property-create": "속성 만들기"
 }

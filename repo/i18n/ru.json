@@ -369,5 +369,6 @@
 	"right-item-merge": "Объединить элементы",
 	"right-item-redirect": "Создание перенаправлений для элементов",
 	"right-property-term": "Изменять термины свойств (метки, описания, псевдонимы)",
-	"right-property-create": "создание свойств"
+	"right-property-create": "создание свойств",
+	"action-property-create": "создание свойств"
 }

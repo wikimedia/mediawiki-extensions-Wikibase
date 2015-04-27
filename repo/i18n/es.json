@@ -320,6 +320,7 @@
 	"right-item-merge": "Fusionar elementos",
 	"right-item-redirect": "Crear redirecciones de elementos",
 	"right-property-create": "Crear propiedades",
+	"action-property-create": "crear propiedades",
 	"apihelp-wbsearchentities-param-search": "Buscar este texto.",
 	"apihelp-wbsearchentities-param-language": "Buscar en este idioma.",
 	"apihelp-wbsetdescription-param-language": "Idioma de la descripción",

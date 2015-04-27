@@ -4,7 +4,8 @@
 			"Arman musikyan",
 			"GrigorGB",
 			"Աշոտ1997",
-			"Xelgen"
+			"Xelgen",
+			"Դավիթ Սարոյան"
 		]
 	},
 	"wikibase-edit": "խմբագրել",
@@ -17,5 +18,6 @@
 	"wikibase-label-empty": "Պիտակը (անվանումը) դեռ նշված չէ",
 	"wikibase-statements": "Պնդումներ",
 	"wikibase-sitelinks-special": "Այլ կայքեր",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|աղբյուր|աղբյուրներ}}",
 	"wikibase-entityselector-more": "Ավելին"
 }

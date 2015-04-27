@@ -4,6 +4,14 @@
 			"Leli Forte"
 		]
 	},
+	"wikibase-edit": "immodifika",
+	"wikibase-add": "Żid",
+	"wikibase-description-empty": "M'hemm l-ebda deskrizzjoni definita",
+	"wikibase-statements": "Dikjarazzjonijiet",
+	"wikibase-sitelinks-special": "Siti oħra",
+	"wikibase-aliases-empty": "M'hemm l-ebda aliases definiti",
+	"wikibase-statementview-rank-normal": "Klassifikazzjoni normali",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referenza|referenzi}}",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 hi ridirezzjoni.",
 	"wikibase-wikibaserepopage-storage-exception": "Sar żball waqt it-tlugħ ta' $1:$2."
 }

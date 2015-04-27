@@ -10,7 +10,9 @@
 	"wikibase-save": "waqaychay",
 	"wikibase-cancel": "ama niy",
 	"wikibase-add": "yapay",
+	"wikibase-label-empty": "Huqari qillqaqa manam sut'ichasqachu",
 	"wikibase-remove": "qichuy",
+	"wikibase-statementview-rank-normal": "Chhasku ñiqi",
 	"wikibase-itembytitle-lookup-page": "P'anqa:",
 	"wikibase-modifyterm-language": "Rimay tuyru:",
 	"wikibase-dispatchstats-change-timestamp": "Pacha q'illpay"

@@ -25,6 +25,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Dil",
 	"wikibase-label-empty": "Henüz bir etiket tanımlanmadı",
 	"wikibase-label-edit-placeholder": "etiket girin",
+	"wikibase-description-empty": "Açıklama bulunamadı",
 	"wikibase-description-edit-placeholder": "açıklama girin",
 	"wikibase-diffview-rank": "rütbe",
 	"wikibase-diffview-label": "etiket",

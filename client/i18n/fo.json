@@ -4,11 +4,15 @@
 			"EileenSanda"
 		]
 	},
+	"tooltip-t-wikibase": "Leinkja til atknýttan lut í dátugrunni",
+	"wikibase-comment-update": "{{WBREPONAME}} luturin er broyttur",
 	"wikibase-dataitem": "{{WBREPONAME}} lutur",
 	"wikibase-editlinks": "Rætta leinkjur",
 	"wikibase-editlinkstitle": "Rætta leinkjur til onnur mál",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Fjal",
 	"wikibase-rc-hide-wikidata-show": "Vís",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} rætting"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} rætting",
+	"wikibase-otherprojects": "Aðrar verkætlanir"
 }

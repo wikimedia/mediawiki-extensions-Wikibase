@@ -4,10 +4,10 @@
 			"Emperyan",
 			"Rapsar",
 			"Sadrettin",
-			"Sayginer"
+			"Sayginer",
+			"Ömer Berkay"
 		]
 	},
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} istemcisi",
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
 	"wikibase-after-page-move-queued": "Bu sayfa ile ilişkili [$1 Vikiveri öğesi] kısa bir süre içinde otomatik olarak güncellenecektir.",
 	"wikibase-comment-update": "{{WBREPONAME}} ögesi değiştirildi",
@@ -29,6 +29,7 @@
 	"wikibase-rc-hide-wikidata-hide": "gizle",
 	"wikibase-rc-hide-wikidata-show": "göster",
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} değişikliklerini son değişikliklerde göster",
+	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} değişikliği",
 	"wikibase-watchlist-show-changes-pref": "İzleme listemde {{WBREPONAME}} değişikliklerini göster",
 	"special-unconnectedpages": "Öğelerine bağlanmamış sayfalar",

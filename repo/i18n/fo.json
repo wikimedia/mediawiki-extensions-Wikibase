@@ -6,6 +6,11 @@
 	},
 	"wikibase-edit": "rætta",
 	"wikibase-add": "innset",
+	"wikibase-label-empty": "Onki spjaldur er ásett",
+	"wikibase-description-empty": "Ongin frágreiðing er útgreinað",
+	"wikibase-statements": "Frásøgnir",
 	"wikibase-sitelinks-special": "Aðrar netsíður",
+	"wikibase-aliases-empty": "Onki kallinavn er ásett",
+	"wikibase-statementview-rank-normal": "Vanlig støða",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|kelda|keldur}}"
 }

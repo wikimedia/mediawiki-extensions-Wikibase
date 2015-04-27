@@ -6,6 +6,7 @@
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэння Wikibase",
+	"tooltip-t-wikibase": "Спасылка на звязаны элемент рэпазітара даных",
 	"wikibase-after-page-move": "Каб захаваць міжмоўныя спасылкі на перанесеную старонку, вы можаце [$1 абнавіць] злучаны аб'ект у Вікідадзеных.",
 	"wikibase-comment-remove": "Злучаны аб'ект выдалены з Вікізвестак. Моўныя спасылкі былі выдалены.",
 	"wikibase-comment-linked": "Аб'ект Вікізвестак быў злучаны з гэтай старонкай.",
@@ -16,6 +17,7 @@
 	"wikibase-comment-sitelink-change": "Моўная спасылка зменена з $1 на $2",
 	"wikibase-comment-sitelink-remove": "Моўная спасылка выдалена: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|змена|змены|змен}}",
+	"wikibase-dataitem": "Элемент {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Правіць спасылкі",
 	"wikibase-editlinkstitle": "Правіць міжмоўныя спасылкі",
 	"wikibase-linkitem-addlinks": "Дадаць спасылкі",
@@ -35,5 +37,9 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Схаваць",
 	"wikibase-rc-hide-wikidata-show": "Паказаць",
-	"wikibase-rc-show-wikidata-pref": "Паказваць праўкі Вікізвестак у спісе апошніх змен"
+	"wikibase-rc-show-wikidata-pref": "Паказваць праўкі Вікізвестак у спісе апошніх змен",
+	"wikibase-rc-wikibase-edit-letter": "д",
+	"wikibase-rc-wikibase-edit-title": "Праўка {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-replicationnote": "Калі ласка, звернеце ўвагу, што можа прайсці некалькі хвілін, пакуль змены стануць бачнымі ва ўсіх вікі-праектах",
+	"wikibase-otherprojects": "Іншыя праекты"
 }

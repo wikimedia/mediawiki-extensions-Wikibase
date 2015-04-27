@@ -386,6 +386,7 @@
 	"right-item-redirect": "Crea elementi redirect",
 	"right-property-term": "Modifica termini proprietà (etichette, descrizioni, alias)",
 	"right-property-create": "Crea proprietà",
+	"action-property-create": "creare le proprietà",
 	"apihelp-wbcreateclaim-description": "Crea asserzioni Wikibase.",
 	"apihelp-wbcreateclaim-param-entity": "ID dell'entità a cui stai aggiungendo l'asserzione",
 	"apihelp-wbremoveclaims-description": "Rimuove asserzioni Wikibase.",
