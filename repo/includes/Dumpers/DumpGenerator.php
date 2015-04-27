@@ -290,7 +290,7 @@ abstract class DumpGenerator {
 				$toLoad[] = $entityId;
 			}
 		}
-		$this->entityPrefetcher->prefetch( $entityIds );
+		$this->entityPrefetcher->prefetch( $toLoad );
 
 		foreach ( $toLoad as $entityId ) {
 			try {
