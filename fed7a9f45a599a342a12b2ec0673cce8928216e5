@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_68bf6af7",
+        "filename": "repo/includes/LinkedData/EntityDataFormatProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-27T00:10:10Z",
+      "side": 1,
+      "message": "Method is doing a lot of stuff and on different levels of abstraction. Should be split several times.",
+      "revId": "fed7a9f45a599a342a12b2ec0673cce8928216e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_48c2a689",
+        "filename": "repo/includes/LinkedData/EntityDataFormatProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-04-27T00:10:10Z",
+      "side": 1,
+      "message": "[$ext]",
+      "revId": "fed7a9f45a599a342a12b2ec0673cce8928216e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
