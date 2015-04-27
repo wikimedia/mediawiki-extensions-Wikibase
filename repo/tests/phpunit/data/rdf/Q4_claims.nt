@@ -12,7 +12,7 @@
 <http://acme.test/Q4> <http://acme.test/prop/P9> <http://acme.test/statement/TEST-Statement-9-2669d541dfd2d6cc0105927bff02bbe0eec0e921> .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P2> <http://acme.test/Q42> .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Universe.svg> .
-<http://acme.test/Q4> <http://acme.test/prop/direct/P3> <http://www.wikidata.org/ontology-beta#Novalue> .
+<http://acme.test/Q4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P3> .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P4> "Point(12.345 67.89)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P5> "\u043F\u0440\u0435\u0432\u0435\u0434"@ru .
 <http://acme.test/Q4> <http://acme.test/prop/direct/P5> _:genid1 .
@@ -28,7 +28,7 @@
 <http://acme.test/statement/TEST-Statement-2-475ae31b07cff4f0e33531030b1ba58f004fcd4b> <http://acme.test/prop/statement/P2> <http://acme.test/Q666> .
 <http://acme.test/statement/TEST-Statement-2-475ae31b07cff4f0e33531030b1ba58f004fcd4b> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.wikidata.org/ontology-beta#Statement> .
 <http://acme.test/statement/TEST-Statement-2-475ae31b07cff4f0e33531030b1ba58f004fcd4b> <http://www.wikidata.org/ontology-beta#rank> <http://www.wikidata.org/ontology-beta#NormalRank> .
-<http://acme.test/statement/TEST-Statement-3-12914044e0dbab210aa9d81168bd50471bbde12d> <http://acme.test/prop/statement/P3> <http://www.wikidata.org/ontology-beta#Novalue> .
+<http://acme.test/statement/TEST-Statement-3-12914044e0dbab210aa9d81168bd50471bbde12d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://acme.test/prop/novalue/P3> .
 <http://acme.test/statement/TEST-Statement-3-12914044e0dbab210aa9d81168bd50471bbde12d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.wikidata.org/ontology-beta#Statement> .
 <http://acme.test/statement/TEST-Statement-3-12914044e0dbab210aa9d81168bd50471bbde12d> <http://www.wikidata.org/ontology-beta#rank> <http://www.wikidata.org/ontology-beta#NormalRank> .
 <http://acme.test/statement/TEST-Statement-3-12914044e0dbab210aa9d81168bd50471bbde12d> <http://www.wikidata.org/ontology-beta#rank> <http://www.wikidata.org/ontology-beta#BestRank> .
