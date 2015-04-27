@@ -389,12 +389,6 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				array( 'de' => 'Foo' ),
 				array( 'P6' ),
 			),
-			'by label, different case' => array(
-				$entities,
-				Property::ENTITY_TYPE,
-				array( 'de' => 'fOO' ),
-				array( 'P6' ),
-			),
 			'by label mismatch' => array(
 				$entities,
 				Item::ENTITY_TYPE,
@@ -450,20 +444,6 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
 				array( 'de' => 'Bar' ),
-				array( 'Q1' ),
-			),
-			'by label and description, different label capitalization' => array(
-				$entities,
-				Item::ENTITY_TYPE,
-				array( 'de' => 'fOO' ),
-				array( 'de' => 'Bar' ),
-				array( 'Q1' ),
-			),
-			'by label and description, different description capitalization' => array(
-				$entities,
-				Item::ENTITY_TYPE,
-				array( 'de' => 'Foo' ),
-				array( 'de' => 'bAR' ),
 				array( 'Q1' ),
 			),
 			'two languages for label and description' => array(
