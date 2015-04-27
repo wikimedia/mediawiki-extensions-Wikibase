@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f0f020c6",
+        "filename": "lib/includes/store/LabelConflictFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-27T16:46:59Z",
+      "side": 1,
+      "message": "I suggest to either have an options array (or object; do we still use these?) or a string property $caseSensitive \u003d \u0027sensitive\u0027 or something. Daniel, for example, prefers such.",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_90bf54cd",
+        "filename": "lib/includes/store/LabelConflictFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-27T16:46:59Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_10d36431",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-27T16:46:59Z",
+      "side": 1,
+      "message": "This code was wrong before and is wrong now. Please check supportsSearchKeys() and act accordingly.",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f0c7c065",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-27T16:46:59Z",
+      "side": 1,
+      "message": "These test cases suggest that you could drop the $caseSensitive parameter and check the entity type instead. This is strongly bound to the entity type anyway.",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5011ecaf",
+        "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-27T16:46:59Z",
+      "side": 1,
+      "message": "Why is the external interface a string but then turned into a bool?\n\nSpace missing.",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
