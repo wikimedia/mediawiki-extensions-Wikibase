@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_73d19acf",
+        "filename": "lib/includes/store/LabelConflictFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-27T18:29:29Z",
+      "side": 1,
+      "message": "Changed it to a string property",
+      "parentUuid": "0ed113e2_f0f020c6",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_90bf54cd",
         "filename": "lib/includes/store/LabelConflictFinder.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-27T16:46:59Z",
       "side": 1,
       "message": "As above.",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_53ced632",
+        "filename": "lib/includes/store/LabelConflictFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-27T18:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_90bf54cd",
       "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_33c2323a",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-27T18:29:29Z",
+      "side": 1,
+      "message": "Dropped that setting, it\u0027s of no use anyway.",
+      "parentUuid": "0ed113e2_10d36431",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f0c7c065",
         "filename": "lib/tests/phpunit/store/TermIndexTest.php",
         "patchSetId": 5
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_d31646f6",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-27T18:29:29Z",
+      "side": 1,
+      "message": "That was rejected in PS1",
+      "parentUuid": "0ed113e2_f0c7c065",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_5011ecaf",
         "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
         "patchSetId": 5
@@ -81,6 +153,24 @@
       "writtenOn": "2015-04-27T16:46:59Z",
       "side": 1,
       "message": "Why is the external interface a string but then turned into a bool?\n\nSpace missing.",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_13d84ef3",
+        "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-27T18:29:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_5011ecaf",
       "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
