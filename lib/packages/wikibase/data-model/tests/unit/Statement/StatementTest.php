@@ -38,7 +38,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructorWithValidArguments(
 		Snak $mainSnak,
-		Snaks $qualifiers = null,
+		SnakList $qualifiers = null,
 		ReferenceList $references = null,
 		$guid
 	) {

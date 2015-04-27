@@ -5,7 +5,6 @@ namespace Wikibase\DataModel;
 use InvalidArgumentException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * Object that represents a single Wikibase reference.
@@ -19,14 +18,14 @@ use Wikibase\DataModel\Snak\Snaks;
 class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 
 	/**
-	 * @var Snaks
+	 * @var SnakList
 	 */
 	private $snaks;
 
 	/**
 	 * An array of Snak objects is only supported since version 1.1.
 	 *
-	 * @param Snak[]|Snaks $snaks
+	 * @param Snak[]|SnakList $snaks
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $snaks = array() ) {
@@ -34,8 +33,8 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 			$snaks = new SnakList( $snaks );
 		}
 
-		if ( !( $snaks instanceof Snaks ) ) {
-			throw new InvalidArgumentException( '$snaks must be an array or an instance of Snaks' );
+		if ( !( $snaks instanceof SnakList ) ) {
+			throw new InvalidArgumentException( '$snaks must be an array or an instance of SnakList' );
 		}
 
 		$this->snaks = $snaks;
@@ -47,7 +46,7 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	 *
 	 * @since 0.1
 	 *
-	 * @return Snaks
+	 * @return SnakList
 	 */
 	public function getSnaks() {
 		return $this->snaks;
@@ -70,7 +69,6 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	 * @return bool
 	 */
 	public function isEmpty() {
-		// FIXME: Not all implementations of Snaks are guaranteed to have an isEmpty method.
 		return $this->snaks->isEmpty();
 	}
 

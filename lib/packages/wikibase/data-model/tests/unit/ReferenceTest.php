@@ -10,7 +10,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * @covers Wikibase\DataModel\Reference
@@ -73,9 +72,8 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider snakListProvider
-	 * @param Snaks $snaks
 	 */
-	public function testConstructor( Snaks $snaks ) {
+	public function testConstructor( SnakList $snaks ) {
 		$omnomnomReference = new Reference( $snaks );
 
 		$this->assertInstanceOf( 'Wikibase\DataModel\Reference', $omnomnomReference );
@@ -111,7 +109,7 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSnaks( Reference $reference ) {
 		$snaks = $reference->getSnaks();
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\Snaks', $snaks );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\SnakList', $snaks );
 	}
 
 	/**
