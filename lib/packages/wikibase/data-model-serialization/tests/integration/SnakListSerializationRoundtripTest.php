@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\SnakList;
 class SnakListSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider snaksProvider
+	 * @dataProvider snakListProvider
 	 */
 	public function testSnakSerializationRoundtrips( SnakList $snaks ) {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
@@ -33,7 +33,7 @@ class SnakListSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $snaks, $newSnaks );
 	}
 
-	public function snaksProvider() {
+	public function snakListProvider() {
 		return array(
 			array(
 				new SnakList( array() )
