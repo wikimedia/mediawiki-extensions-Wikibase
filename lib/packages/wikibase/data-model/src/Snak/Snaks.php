@@ -7,6 +7,7 @@ namespace Wikibase\DataModel\Snak;
  * Indexes the snaks by hash and ensures no more the one snak with the same hash are in the list.
  *
  * @since 0.1
+ * @deprecated since 3.0, use SnakList instead
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
