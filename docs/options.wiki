@@ -53,7 +53,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 
 === Expert Settings ===
 ;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities. '''Note:''' this may change in the future to allow separate blacklists for different kinds of entities.
-;withoutTermSearchKey: Allow the terms table to work without the term_search_key field, for sites that can not easily roll out schema changes on large tables. This means that all searches will use exact matching (depending on the database's collation). Default: <code>false</code>. This is only needed for compatibility with old database layouts.
 ;withoutTermWeight: Allow the terms table to work without the term_weight field, for sites that can not easily roll out schema changes on large tables. This means that all searches will return the results in an undefined order (depending on how the database works). Default: <code>false</code>. This is only needed for compatibility with old database layouts.
 ;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
 :;length: the maximum length of the string, in characters.
