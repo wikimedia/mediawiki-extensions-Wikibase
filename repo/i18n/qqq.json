@@ -475,6 +475,8 @@
 	"right-property-create": "{{doc-right|property-create}}\nRight to create new [[d:Wikidata:Glossary#Property|properties]].",
 	"wikibase-entity-not-viewable-title": "Page title on the error page saying that content can't be displayed.",
 	"wikibase-entity-not-viewable": "Error message saying that some content can't be rendered. $1 is the content model of the content that can't be displayed (eg. wikitext).",
+	"action-item-merge": "{{Doc-action|item-merge}}",
+	"action-property-create": "{{Doc-action|property-create}}",
 	"apihelp-wbavailablebadges-description": "{{doc-apihelp-description|wbavailablebadges}}",
 	"apihelp-wbavailablebadges-example-1": "{{doc-apihelp-example|wbavailablebadges}}",
 	"apihelp-wbcreateclaim-description": "{{doc-apihelp-description|wbcreateclaim}}",

@@ -448,6 +448,8 @@
 	"right-property-create": "Create properties",
 	"wikibase-entity-not-viewable-title": "Content type mismatch: Can not display content",
 	"wikibase-entity-not-viewable": "The given content of type \"$1\" is not an Entity and can not be displayed by Wikibase.",
+	"action-item-merge": "merge items",
+	"action-property-create": "create properties",
 	"apihelp-wbavailablebadges-description": "Queries available badge items.",
 	"apihelp-wbavailablebadges-example-1": "Queries all available badge items",
 	"apihelp-wbcreateclaim-description": "Creates Wikibase claims.",
