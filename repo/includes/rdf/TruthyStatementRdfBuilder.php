@@ -90,7 +90,7 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 			case 'novalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
-				$this->writer->say( RdfVocabulary::NSP_DIRECT_CLAIM, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Novalue' );
+				$this->writer->say( 'a' )->is( RdfVocabulary::NSP_NOVALUE, $propertyValueLName );
 				break;
 			default:
 				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );

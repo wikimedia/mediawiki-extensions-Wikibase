@@ -285,6 +285,19 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
+	 * Write definition for wdno:P123 class to use as novalue
+	 * @param string $id
+	 */
+	private function writeNovalueClass( $id ) {
+		$this->writer->about( RdfVocabulary::NSP_NOVALUE, $id )->say( 'a' )->is( 'owl', 'Class' );
+		$internalClass = $this->writer->blank();
+		$this->writer->say( 'owl', 'complementOf' )->is( '_', $internalClass );
+		$this->writer->about( '_', $internalClass )->say( 'a' )->is( 'owl', 'Restriction' );
+		$this->writer->say( 'owl', 'onProperty' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
+		$this->writer->say( 'owl', 'someValuesFrom' )->is( 'owl', 'Thing' );
+	}
+
+	/**
 	 * Write predicates linking property entity to property predicates
 	 * @param string $id
 	 */
@@ -297,6 +310,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( RdfVocabulary::NSP_REFERENCE, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( RdfVocabulary::NSP_REFERENCE_VALUE, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is( RdfVocabulary::NSP_NOVALUE, $id );
 	}
 
 	/**
@@ -330,7 +344,9 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		if( $entity instanceof Property ) {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
 				->is( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getDataTypeName( $entity ) );
-			$this->writePropertyPredicates( $entity->getId()->getSerialization() );
+			$id = $entity->getId()->getSerialization();
+			$this->writePropertyPredicates( $id );
+			$this->writeNovalueClass( $id );
 		}
 	}
 

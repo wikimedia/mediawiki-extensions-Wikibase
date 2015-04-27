@@ -274,7 +274,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 			case 'novalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
-				$writer->say( $propertyNamespace, $propertyValueLName )->is( RdfVocabulary::NS_ONTOLOGY, 'Novalue' );
+				$writer->say( 'a' )->is( RdfVocabulary::NSP_NOVALUE, $propertyValueLName );
 				break;
 			default:
 				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );

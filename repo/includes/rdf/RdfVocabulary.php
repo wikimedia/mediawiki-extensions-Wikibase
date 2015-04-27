@@ -40,6 +40,7 @@ class RdfVocabulary {
 	const NSP_QUALIFIER_VALUE = 'pqv'; // statement ->  qualifier deep value
 	const NSP_REFERENCE = 'pr'; // reference -> simple value
 	const NSP_REFERENCE_VALUE = 'prv'; // reference -> deep value
+	const NSP_NOVALUE = 'wdno'; // novalue class
 	// other prefixes
 	const NS_SKOS = 'skos'; // SKOS vocabulary
 	const NS_SCHEMA_ORG = 'schema'; // schema.org vocabulary
@@ -110,6 +111,7 @@ class RdfVocabulary {
 				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
+				'owl' => 'http://www.w3.org/2002/07/owl#',
 				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
 				// nodes
 				self::NS_DATA => $this->dataUri,
@@ -126,6 +128,7 @@ class RdfVocabulary {
 				self::NSP_QUALIFIER_VALUE => $propUri . 'qualifier/value/',
 				self::NSP_REFERENCE => $propUri . 'reference/',
 				self::NSP_REFERENCE_VALUE => $propUri . 'reference/value/',
+				self::NSP_NOVALUE => $propUri . 'novalue/',
 				// external
 				self::NS_SKOS => self::SKOS_URI,
 				self::NS_SCHEMA_ORG => self::SCHEMA_ORG_URI,
