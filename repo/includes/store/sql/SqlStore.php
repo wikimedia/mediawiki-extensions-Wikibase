@@ -413,11 +413,8 @@ class SqlStore implements Store {
 	 * @param DatabaseBase $db
 	 */
 	private function updateTermsTable( DatabaseUpdater $updater, DatabaseBase $db ) {
-		$withoutTermSearchKey = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'withoutTermSearchKey' );
-
 		// ---- Update from 0.1 or 0.2. ----
-		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) && !$withoutTermSearchKey ) {
+		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
 
 			$updater->addExtensionField(
 				'wb_terms',
