@@ -43,10 +43,10 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 	 *
 	 * @return ChangesSubscriptionTableBuilder
 	 */
-	private function getChangesSubscriptionTableBuilder( $batchSize = 10 ) {
+	private function getChangesSubscriptionTableBuilder( $batchSize, $verbose ) {
 		$loadBalancer = wfGetLB();
 
-		return new ChangesSubscriptionTableBuilder( $loadBalancer, self::TABLE_NAME, $batchSize );
+		return new ChangesSubscriptionTableBuilder( $loadBalancer, self::TABLE_NAME, $batchSize, $verbose );
 	}
 
 	public function testFillSubscriptionTable() {
@@ -58,7 +58,7 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 			array( 22, 'frwiki' ),
 		) );
 
-		$primer = $this->getChangesSubscriptionTableBuilder( 3 );
+		$primer = $this->getChangesSubscriptionTableBuilder( 3, false );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 2 ) ) );
 		$primer->setExceptionHandler( $this->getExceptionHandler( $this->exactly( 0 ) ) );
 
@@ -86,8 +86,8 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 			array( 22, 'frwiki' ),
 		) );
 
-		$primer = $this->getChangesSubscriptionTableBuilder( 3 );
-		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 1 ) ) );
+		$primer = $this->getChangesSubscriptionTableBuilder( 3, true );
+		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 4 ) ) );
 		$primer->setExceptionHandler( $this->getExceptionHandler( $this->exactly( 0 ) ) );
 
 		$primer->fillSubscriptionTable( new ItemId( 'Q20' ) );
