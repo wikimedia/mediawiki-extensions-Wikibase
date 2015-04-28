@@ -231,11 +231,11 @@ class ChangesSubscriptionTableBuilder {
 	) {
 		$subscriptionsPerItem = array();
 
-		$currentId = 0;
+		$currentItemId = 0;
 		$itemId = null;
 
 		foreach ( $res as $row ) {
-			if ( $row->ips_item_id != $currentId ) {
+			if ( $row->ips_item_id != $currentItemId ) {
 				$currentItemId = $row->ips_item_id;
 				$itemId = ItemId::newFromNumber( $currentItemId )->getSerialization();
 			}
