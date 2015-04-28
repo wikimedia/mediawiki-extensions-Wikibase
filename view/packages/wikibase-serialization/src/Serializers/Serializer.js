@@ -13,7 +13,7 @@
 	 *
 	 * @constructor
 	 */
-	var SELF = MODULE.Serializer = function WbSerializer() {};
+	var SELF = MODULE.Serializer = function WbSerializationSerializer() {};
 
 	$.extend( SELF.prototype, {
 		/**
