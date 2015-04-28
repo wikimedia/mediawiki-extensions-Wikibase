@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Calak",
-			"Macofe"
+			"Macofe",
+			"Asoxor"
 		]
 	},
 	"wikibase-entity-item": "بەند",
@@ -14,10 +15,10 @@
 	"wikibase-addreference": "سەرچاوە زیاد بکە",
 	"wikibase-save-inprogress": "پاشەکەوتکردن…",
 	"wikibase-remove-inprogress": "سڕینەوە…",
-	"wikibase-label-empty": "ھێشتا سەرناوێک دیاری نەکراوە",
+	"wikibase-label-empty": "سەرناوێک دیاری نەکراوە",
 	"wikibase-label-edit-placeholder": "سەرناوێک بنووسە",
 	"wikibase-label-edit-placeholder-language-aware": "سەرناوێک بە $1 بنووسە",
-	"wikibase-description-empty": "ھێشتا شیکردنەوەیەک دیاری نەکراوە",
+	"wikibase-description-empty": "وەسفێک دیاری نەکراوە",
 	"wikibase-description-edit-placeholder": "شیکردنەوەیەک بنووسە",
 	"wikibase-description-edit-placeholder-language-aware": "شیکردنەوەیەک بە $1 بنووسە",
 	"wikibase-diffview-reference": "سەرچاوە",
@@ -35,7 +36,8 @@
 	"wikibase-aliases-label": "ھەروەھا ناسراوە بە:",
 	"wikibase-aliases-empty": "نازناوێک دیاری نەکراوە.",
 	"wikibase-propertypage-datatype": "جۆری دراوە",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|سەرچاوە}}",
+	"wikibase-statementview-rank-normal": "پلەی ئاسایی",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|سەرچاوە|سەرچاوە}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "ھێشتا {{PLURAL:$1|یەک سەرچاوە|$1 سەرچاوە}} پاشەکەوت نەکراوە",
 	"wikibase-snakview-property-input-placeholder": "تایبەتمەندی",
 	"wikibase-snakview-choosesnaktype": "جۆرێکی نرخ ھەڵبژێرە.",

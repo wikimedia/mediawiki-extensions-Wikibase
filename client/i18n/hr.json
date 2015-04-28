@@ -4,12 +4,14 @@
 			"MaGa",
 			"Roberta F.",
 			"SpeedyGonsales",
-			"Ex13"
+			"Ex13",
+			"Fraxinus"
 		]
 	},
 	"tooltip-t-wikibase": "Poveznica na stavku na projektu Wikidata",
 	"wikibase-after-page-move-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
 	"wikibase-after-page-delete-queued": "[$1 Stavka na Wikidati] povezana s ovom stranicom uskoro će biti automatski ažurirana.",
+	"wikibase-comment-update": "{{WBREPONAME}} predmet se promijenio",
 	"wikibase-comment-sitelink-add": "Dodana jezična poveznica: $1",
 	"wikibase-comment-sitelink-change": "Jezična poveznica je promjenjena iz $1 u $2",
 	"wikibase-comment-sitelink-remove": "Uklonjena jezična poveznica: $1",

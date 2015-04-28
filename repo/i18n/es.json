@@ -27,7 +27,8 @@
 			"Mor",
 			"Jonathan rrr",
 			"JasterTDC",
-			"Kroji"
+			"Kroji",
+			"Larjona"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -320,6 +321,7 @@
 	"right-item-merge": "Fusionar elementos",
 	"right-item-redirect": "Crear redirecciones de elementos",
 	"right-property-create": "Crear propiedades",
+	"action-item-merge": "fusionar elementos",
 	"action-property-create": "crear propiedades",
 	"apihelp-wbsearchentities-param-search": "Buscar este texto.",
 	"apihelp-wbsearchentities-param-language": "Buscar en este idioma.",

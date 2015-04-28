@@ -6,7 +6,8 @@
 			"Vivaelcelta",
 			"Ex13",
 			"E.coli",
-			"Macofe"
+			"Macofe",
+			"Fraxinus"
 		]
 	},
 	"wikibase-desc": "Repozitorij strukturiranih podataka",
@@ -26,7 +27,9 @@
 	"wikibase-entitytermsforlanguagelistview-aliases": "Poznato i kao",
 	"wikibase-entitytermsforlanguagelistview-description": "Opis",
 	"wikibase-entitytermsforlanguagelistview-language": "Jezik",
+	"wikibase-label-empty": "Oznaka na upit",
 	"wikibase-label-edit-placeholder": "unesite naziv",
+	"wikibase-description-empty": "Opis nije definiran.",
 	"wikibase-diffview-reference": "referenca",
 	"wikibase-diffview-qualifier": "atribut",
 	"wikibase-diffview-label": "naziv",
@@ -46,6 +49,7 @@
 	"wikibase-aliases-input-help-message": "Da biste olakšali nalaženje jedinice, možete unijeti zamjenske nazive.",
 	"wikibase-aliases-empty": "Sinonimi nisu definirani.",
 	"wikibase-propertypage-datatype": "Vrsta podataka",
+	"wikibase-statementview-rank-normal": "Normalni rang",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|izvor|izvori}}",
 	"wikibase-snakview-property-input-placeholder": "svojstvo",
 	"wikibase-entityselector-more": "više",
@@ -79,7 +83,6 @@
 	"special-setaliases": "Postavi sinonime",
 	"wikibase-setaliases-introfull": "Postavljate sinonime za [[$1]] u $2. Više sinonima odvojite znakom za uspravnu crtu (<code>|</code>).",
 	"wikibase-setaliases-submit": "Postavi sinonime",
-	"wikibase-setaliases-warning-remove": "Želite li stvarno ukloniti sve sinonime za [[$1]]?",
 	"wikibase-setlabeldescriptionaliases-introfull": "Postavljate naziv, opis i sinonime za [[$1]] u $2. Više sinonima se odjeljuje znakom za uspravnu crtu (<code>|</code>).",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Sinonimi:",
 	"wikibase-setlabeldescriptionaliases-submit": "Postavi naziv, opis i sinonime",

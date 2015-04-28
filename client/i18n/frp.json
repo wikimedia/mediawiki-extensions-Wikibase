@@ -11,5 +11,8 @@
 	"wikibase-editlinks": "Changiér los lims",
 	"wikibase-editlinkstitle": "Changiér los lims entèrlengoua",
 	"wikibase-rc-hide-wikidata": "Wikidata $1",
-	"wikibase-rc-show-wikidata-pref": "Montrar los changements de Wikidata dedens los dèrriérs changements"
+	"wikibase-rc-hide-wikidata-hide": "Cachiér",
+	"wikibase-rc-hide-wikidata-show": "Montrar",
+	"wikibase-rc-show-wikidata-pref": "Montrar los changements de Wikidata dedens los dèrriérs changements",
+	"wikibase-otherprojects": "Ôtros projèts"
 }

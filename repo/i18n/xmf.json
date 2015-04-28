@@ -6,6 +6,8 @@
 	},
 	"wikibase-edit": "რედაქტირაფა",
 	"wikibase-add": "გეძინა",
+	"wikibase-description-empty": "ეჭარუა ვა რე გოთანჯილი",
 	"wikibase-sitelinks-special": "შხვა საიტეფი",
+	"wikibase-statementview-rank-normal": "ნორმალური რანგი",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|სქოლიო|სქოლიო}}"
 }

@@ -17,10 +17,10 @@
 	"wikibase-comment-sitelink-change": "بەستەری زمان لە $1 گۆڕدرا بۆ $2",
 	"wikibase-comment-sitelink-remove": "بەستەری زمانی سڕدراو: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|گۆڕانکاری}}",
-	"wikibase-dataitem": "بەندی دراوە",
+	"wikibase-dataitem": "بەندی {{WBREPONAME}}",
 	"wikibase-editlinks": "دەستکاریی گرێدانەکان بکە",
 	"wikibase-editlinkstitle": "بەستەرەکانی نێوانویکی دەستکاری بکە",
-	"wikibase-linkitem-addlinks": "بەستەرەکان زیاد بکە",
+	"wikibase-linkitem-addlinks": "گرێدانەکان زیاد بکە",
 	"wikibase-linkitem-close": "وتووێژەکە ببەستە و دیسان پەڕەکە بار بکەوە",
 	"wikibase-linkitem-title": "بەستەر بدە بۆ پەڕە",
 	"wikibase-linkitem-linkpage": "بەستەر بدە بۆ پەڕە",
@@ -41,6 +41,8 @@
 	"wikibase-replicationnote": "تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.",
 	"wikibase-watchlist-show-changes-pref": "دەستکارییەکانی {{WBREPONAME}} لە پێرستی چاودێرییەکەت نیشان بدە",
 	"wikibase-unconnectedpages-submit": "بڕۆ",
+	"wikibase-unconnectedpages-invalid-language": "«$1» کۆدێکی دروستی زمانی نییە.",
 	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-id-none": "ھیچ",
 	"wikibase-otherprojects": "پرۆژەکانی تر"
 }
