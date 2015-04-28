@@ -43,13 +43,19 @@ class ChangesSubscriptionTableBuilder {
 	private $progressReporter;
 
 	/**
+	 * @var bool
+	 */
+	private $verbose;
+
+	/**
 	 * @param LoadBalancer $loadBalancer
 	 * @param string $tableName
 	 * @param int $batchSize
+	 * @param bool $verbose
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( LoadBalancer $loadBalancer, $tableName, $batchSize = 1000 ) {
+	public function __construct( LoadBalancer $loadBalancer, $tableName, $batchSize, $verbose ) {
 		if ( !is_string( $tableName ) ) {
 			throw new InvalidArgumentException( '$tableName must be a string' );
 		}
@@ -58,9 +64,14 @@ class ChangesSubscriptionTableBuilder {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
+		if ( !is_bool( $verbose ) ) {
+			throw new InvalidArgumentException( '$verbose must be a boolean' );
+		}
+
 		$this->loadBalancer = $loadBalancer;
 		$this->tableName = $tableName;
 		$this->batchSize = $batchSize;
+		$this->verbose = $verbose;
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
 		$this->progressReporter = new NullMessageReporter();
@@ -157,6 +168,11 @@ class ChangesSubscriptionTableBuilder {
 				)
 			);
 
+			if ( $this->verbose === true ) {
+				$this->progressReporter->reportMessage( 'Inserted ' . count( $rows )
+					. ' into wb_changes_subscription' );
+			}
+
 			$c+= count( $rows );
 		}
 
@@ -171,7 +187,6 @@ class ChangesSubscriptionTableBuilder {
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
 	private function getSubscriptionsPerItemBatch( DatabaseBase $db, &$continuation = array() ) {
-
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
 		} else {
@@ -194,6 +209,11 @@ class ChangesSubscriptionTableBuilder {
 				'ORDER BY' => 'ips_item_id, ips_site_id'
 			)
 		);
+
+		if ( $this->verbose === true ) {
+			$this->progressReporter->reportMessage( 'Selected ' . $res->numRows() . ' wb_item_per_site records'
+				. ' with continuation: ' . $continuationCondition );
+		}
 
 		return $this->getSubscriptionsPerItemFromRows( $res, $continuation );
 	}

@@ -52,6 +52,8 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 			throw new EntityIdParsingException( 'Not an Item ID: ' . $startItemOption );
 		}
 
+		$verbose = (bool) $this->getOption( 'verbose', false );
+
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			array( $this, 'report' )
@@ -60,7 +62,8 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 		$builder = new ChangesSubscriptionTableBuilder(
 			wfGetLB(),
 			'wb_changes_subscription',
-			$this->mBatchSize
+			$this->mBatchSize,
+			$verbose
 		);
 
 		$builder->setProgressReporter( $reporter );
@@ -85,7 +88,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 	 * @param string $msg
 	 */
 	public function report( $msg ) {
-		$this->output( "$msg\n" );
+		$this->output( date( 'H:i:s' ) . ": $msg\n" );
 	}
 
 }

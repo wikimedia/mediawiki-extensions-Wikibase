@@ -79,7 +79,8 @@ class ChangesSubscriptionSchemaUpdater {
 		$primer = new ChangesSubscriptionTableBuilder(
 			wfGetLB(), // would be nice to pass in $dbUpdater->getDB().
 			$table,
-			1000
+			1000,
+			false
 		);
 
 		$reporter = new ObservableMessageReporter();
