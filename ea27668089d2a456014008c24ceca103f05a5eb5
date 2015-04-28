@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_94e50109",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-28T14:21:59Z",
+      "side": 1,
+      "message": "What does that mean? It\u0027s for compatibility with older database schemes that do not have and do not want this table column. How is that of \"no use\"?",
+      "parentUuid": "0ed113e2_33c2323a",
+      "revId": "ea27668089d2a456014008c24ceca103f05a5eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f0c7c065",
         "filename": "lib/tests/phpunit/store/TermIndexTest.php",
         "patchSetId": 5
