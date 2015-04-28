@@ -43,13 +43,24 @@ class ChangesSubscriptionTableBuilder {
 	private $progressReporter;
 
 	/**
+	 * @var string 'verbose' or 'standard'
+	 */
+	private $verbosity;
+
+	/**
 	 * @param LoadBalancer $loadBalancer
 	 * @param string $tableName
 	 * @param int $batchSize
+	 * @param string $verbosity Either 'standard' or 'verbose'
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( LoadBalancer $loadBalancer, $tableName, $batchSize = 1000 ) {
+	public function __construct(
+		LoadBalancer $loadBalancer,
+		$tableName,
+		$batchSize,
+		$verbosity = 'standard'
+	) {
 		if ( !is_string( $tableName ) ) {
 			throw new InvalidArgumentException( '$tableName must be a string' );
 		}
@@ -58,9 +69,15 @@ class ChangesSubscriptionTableBuilder {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
+		if ( $verbosity !== 'standard' && $verbosity !== 'verbose' ) {
+			throw new InvalidArgumentException( '$verbosity must be either "verbose"'
+				. ' or "standard".' );
+		}
+
 		$this->loadBalancer = $loadBalancer;
 		$this->tableName = $tableName;
 		$this->batchSize = $batchSize;
+		$this->verbosity = $verbosity;
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
 		$this->progressReporter = new NullMessageReporter();
@@ -157,6 +174,11 @@ class ChangesSubscriptionTableBuilder {
 				)
 			);
 
+			if ( $this->verbosity === 'verbose' ) {
+				$this->progressReporter->reportMessage( 'Inserted ' . $db->affectedRows()
+					. ' into wb_changes_subscription' );
+			}
+
 			$c+= count( $rows );
 		}
 
@@ -171,7 +193,6 @@ class ChangesSubscriptionTableBuilder {
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
 	private function getSubscriptionsPerItemBatch( DatabaseBase $db, &$continuation = array() ) {
-
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
 		} else {
@@ -194,6 +215,11 @@ class ChangesSubscriptionTableBuilder {
 				'ORDER BY' => 'ips_item_id, ips_site_id'
 			)
 		);
+
+		if ( $this->verbosity === 'verbose' ) {
+			$this->progressReporter->reportMessage( 'Selected ' . $res->numRows() . ' wb_item_per_site records'
+				. ' with continuation: ' . $continuationCondition );
+		}
 
 		return $this->getSubscriptionsPerItemFromRows( $res, $continuation );
 	}
