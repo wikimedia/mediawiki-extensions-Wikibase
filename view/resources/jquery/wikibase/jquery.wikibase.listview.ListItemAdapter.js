@@ -38,7 +38,7 @@
 	 * @throws {Error} if the widget specified in the `listItemWidget` option does not feature a
 	 *         `value` function.
 	 */
-	var SELF = $.wikibase.listview.ListItemAdapter = function( options ) {
+	var SELF = $.wikibase.listview.ListItemAdapter = function WbListviewListItemAdapter( options ) {
 		if(
 			!$.isFunction( options.listItemWidget )
 			|| !options.listItemWidget.prototype.widgetName

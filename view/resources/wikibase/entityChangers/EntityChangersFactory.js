@@ -15,7 +15,7 @@ var MODULE = wb.entityChangers;
  * @param {wikibase.RevisionStore} revisionStore
  * @param {wikibase.datamodel.Entity} entity
  */
-var SELF = MODULE.EntityChangersFactory = function( api, revisionStore, entity ) {
+var SELF = MODULE.EntityChangersFactory = function WbEntityChangersEntityChangersFactory( api, revisionStore, entity ) {
 	this._api = api;
 	this._revisionStore = revisionStore;
 	this._entity = entity;

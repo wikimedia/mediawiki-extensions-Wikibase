@@ -19,7 +19,7 @@ var MODULE = wb.entityChangers;
  * @param {wikibase.serialization.StatementSerializer} statementSerializer
  * @param {wikibase.serialization.StatementDeserializer} statementDeserializer
  */
-var SELF = MODULE.ClaimsChanger = function( api, revisionStore, entity, claimSerializer, claimDeserializer, statementSerializer, statementDeserializer ) {
+var SELF = MODULE.ClaimsChanger = function WbEntityChangersClaimsChanger( api, revisionStore, entity, claimSerializer, claimDeserializer, statementSerializer, statementDeserializer ) {
 	this._api = api;
 	this._revisionStore = revisionStore;
 	this._entity = entity;

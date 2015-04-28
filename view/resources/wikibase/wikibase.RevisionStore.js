@@ -13,7 +13,7 @@
  * @constructor
  * @since 0.1
  */
-var SELF = wb.RevisionStore = function( baseRev ) {
+var SELF = wb.RevisionStore = function WbRevisionStore( baseRev ) {
 	this._revisions = {
 		baseRevision: baseRev,
 		labelRevision: baseRev,

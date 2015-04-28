@@ -17,7 +17,7 @@ var MODULE = wb.entityChangers;
  * @param {wikibase.serialization.ReferenceSerializer} referenceSerializer
  * @param {wikibase.serialization.ReferenceDeserializer} referenceDeserializer
  */
-var SELF = MODULE.ReferencesChanger = function(
+var SELF = MODULE.ReferencesChanger = function WbEntityChangersReferencesChanger(
 	api,
 	revisionStore,
 	entity,
