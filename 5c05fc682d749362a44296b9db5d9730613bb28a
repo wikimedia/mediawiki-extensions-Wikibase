@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f4a32da6",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-28T14:22:08Z",
+      "side": 1,
+      "message": "This line suggests you should simply reuse the existing string \u0027caseSensitive\u0027 and add \u0027caseInsensitive\u0027.",
+      "revId": "5c05fc682d749362a44296b9db5d9730613bb28a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_74b97de5",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-28T14:22:08Z",
+      "side": 1,
+      "message": "Rename to $caseSensitivity? Same for all methods and variable names. You already did this with some.",
+      "revId": "5c05fc682d749362a44296b9db5d9730613bb28a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b4bfe5cc",
+        "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-04-28T14:22:08Z",
+      "side": 1,
+      "message": "Wikipedia suggests that the terms are \"case-sensitive\" and \"case-insensitive\" with dashes.",
+      "revId": "5c05fc682d749362a44296b9db5d9730613bb28a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
