@@ -100,7 +100,7 @@ class ChangesSubscriptionTableBuilder {
 	 * @param ItemId $startItem The item to start with.
 	 */
 	public function fillSubscriptionTable( ItemId $startItem = null ) {
-		$continuation = $startItem === null ? null : array( $startItem->getNumericId(), '' );
+		$continuation = $startItem === null ? null : array( $startItem->getNumericId(), 0 );
 
 		while ( true ) {
 			$count = $this->processSubscriptionBatch( $continuation );
@@ -175,23 +175,23 @@ class ChangesSubscriptionTableBuilder {
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
 		} else {
-			list( $fromItemId, $fromSiteId ) = $continuation;
+			list( $fromItemId, $fromRowId ) = $continuation;
 			$continuationCondition = 'ips_item_id > ' . (int)$fromItemId
 				. ' OR ( '
 					. 'ips_item_id = ' . (int)$fromItemId
 					. ' AND '
-					. 'ips_site_id > ' . $db->addQuotes( $fromSiteId )
+					. 'ips_row_id > ' . $fromRowId
 				. ' )';
 		}
 
 		$res = $db->select(
 			'wb_items_per_site',
-			array( 'ips_item_id', 'ips_site_id' ),
+			array( 'ips_row_id', 'ips_item_id', 'ips_site_id' ),
 			$continuationCondition,
 			__METHOD__,
 			array(
 				'LIMIT' => $this->batchSize,
-				'ORDER BY' => 'ips_item_id, ips_site_id'
+				'ORDER BY' => 'ips_item_id, ips_row_id'
 			)
 		);
 
@@ -221,7 +221,7 @@ class ChangesSubscriptionTableBuilder {
 			}
 
 			$subscriptionsPerItem[$itemId][] = $row->ips_site_id;
-			$continuation = array( $currentItemId, $row->ips_site_id );
+			$continuation = array( $currentItemId, $row->ips_row_id );
 		}
 
 		return $subscriptionsPerItem;
