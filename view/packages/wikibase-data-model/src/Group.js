@@ -29,7 +29,7 @@ var SELF = wb.datamodel.Group = function WbDataModelGroup(
 	if( !$.isFunction( GroupableCollectionConstructor ) ) {
 		throw new Error( 'Item container constructor needs to be a Function' );
 	}
-	if( !( new GroupableCollectionConstructor() ) instanceof wb.datamodel.GroupableCollection ) {
+	if( !( ( new GroupableCollectionConstructor() ) instanceof wb.datamodel.GroupableCollection ) ) {
 		throw new Error( 'Item container constructor needs to implement GroupableCollection' );
 	}
 	if( !$.isFunction(
