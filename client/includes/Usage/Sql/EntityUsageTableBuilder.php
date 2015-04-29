@@ -134,6 +134,8 @@ class EntityUsageTableBuilder {
 	 * @return int The number of entity usages inserted.
 	 */
 	private function processUsageBatch( &$fromPageId = 0 ) {
+		wfWaitForSlaves();
+
 		$db = $this->loadBalancer->getConnection( DB_MASTER );
 
 		$entityPerPage = $this->getUsageBatch( $db, $fromPageId );
