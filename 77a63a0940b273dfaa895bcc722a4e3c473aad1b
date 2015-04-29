@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_4d4a9f60",
+        "filename": "repo/includes/LinkedData/EntityDataFormatAccessor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-29T15:56:57Z",
+      "side": 1,
+      "message": "The naming is odd, see my comment on EntityDataFormatProvider. I think the interface should be called EntityDataFormatProvider, and the implementation something else.\n\nThe names of interfaces are important. The names of implementations are not.",
+      "revId": "77a63a0940b273dfaa895bcc722a4e3c473aad1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2d207b95",
+        "filename": "repo/includes/LinkedData/EntityDataFormatProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-29T15:56:57Z",
+      "side": 1,
+      "message": "Why is one an \"accessor\" and one a \"provider\"? They are used as synonyms really, one for the interface, one for the implementation. That\u0027s rather confusing, and it doesn\u0027t make clear which is which.\n\nI suggest to call the interface EntityDataFormatProvider, and the implementation something like \"DefaultEntityDataFormatProvider\" or \"BasicEntityDataFormatProvider\" or even \"EntityDataFormatProviderImpl\".\n\nThe names of interfaces are important. The names of implementations are not. Ideally, the name of the implementation is used only twice: once in the test case, and once in the factory.",
+      "revId": "77a63a0940b273dfaa895bcc722a4e3c473aad1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4d713fa6",
+        "filename": "repo/includes/LinkedData/EntityDataFormatProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-29T15:56:57Z",
+      "side": 1,
+      "message": "The init logic should be here, no need for a separate function.\nBut I\u0027m confused... the result depends on $whitelist, right? So we can\u0027t put it into a member...",
+      "revId": "77a63a0940b273dfaa895bcc722a4e3c473aad1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6d744397",
+        "filename": "repo/includes/LinkedData/EntityDataFormatProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-29T15:56:57Z",
+      "side": 1,
+      "message": "Please declare the return type.",
+      "revId": "77a63a0940b273dfaa895bcc722a4e3c473aad1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
