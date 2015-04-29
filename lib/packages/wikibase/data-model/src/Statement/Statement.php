@@ -67,15 +67,18 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	 * @param Snak $mainSnak
 	 * @param Snaks|null $qualifiers
 	 * @param ReferenceList|null $references
+	 * @param string|null $guid
 	 */
 	public function __construct(
 		Snak $mainSnak,
 		Snaks $qualifiers = null,
-		ReferenceList $references = null
+		ReferenceList $references = null,
+		$guid = null
 	) {
 		$this->mainSnak = $mainSnak;
 		$this->qualifiers = $qualifiers ?: new SnakList();
 		$this->references = $references ?: new ReferenceList();
+		$this->setGuid( $guid );
 	}
 
 	/**
