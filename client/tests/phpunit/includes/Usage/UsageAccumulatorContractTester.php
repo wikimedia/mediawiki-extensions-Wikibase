@@ -47,8 +47,8 @@ class UsageAccumulatorContractTester  {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 		$expected = array(
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q2, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'xx' ),
+			new EntityUsage( $q2, EntityUsage::LABEL_USAGE, 'xx' ),
 			new EntityUsage( $q2, EntityUsage::TITLE_USAGE ),
 			new EntityUsage( $q2, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q2, EntityUsage::OTHER_USAGE ),
@@ -64,9 +64,9 @@ class UsageAccumulatorContractTester  {
 		$this->usageAccumulator->addLabelUsageForSnaks( array(
 			new PropertyValueSnak( new PropertyId( 'P4' ), new EntityIdValue( $q4 ) ),
 			new PropertyValueSnak( new PropertyId( 'P5' ), new StringValue( 'string' ) ),
-		) );
+		), 'xx' );
 
-		$expected = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
+		$expected = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'xx' );
 
 		$usages = $this->usageAccumulator->getUsages();
 		$this->assertContainsUsage( $expected, $usages );
@@ -74,9 +74,9 @@ class UsageAccumulatorContractTester  {
 
 	private function testAddAndGetLabelUsage() {
 		$q2 = new ItemId( 'Q2' );
-		$this->usageAccumulator->addLabelUsage( $q2 );
+		$this->usageAccumulator->addLabelUsage( $q2, 'xx' );
 
-		$expected = new EntityUsage( $q2, EntityUsage::LABEL_USAGE );
+		$expected = new EntityUsage( $q2, EntityUsage::LABEL_USAGE, 'xx' );
 
 		$usages = $this->usageAccumulator->getUsages();
 		$this->assertContainsUsage( $expected, $usages );
