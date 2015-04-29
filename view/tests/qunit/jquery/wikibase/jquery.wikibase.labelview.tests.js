@@ -98,7 +98,7 @@ QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
 	labelview.startEditing();
 
 	assert.ok(
-		labelview.$text.find( 'input' ).length === 1,
+		labelview.$text.find( 'textarea' ).length === 1,
 		'Generated input element.'
 	);
 
@@ -108,7 +108,7 @@ QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
 	labelview.stopEditing(); // should not trigger event
 	labelview.startEditing();
 
-	labelview.$text.find( 'input' ).val( '' );
+	labelview.$text.find( 'textarea' ).val( '' );
 
 	labelview.stopEditing();
 } );
@@ -124,14 +124,14 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 		'Verified isInitialValue() returning true.'
 	);
 
-	labelview.$text.find( 'input' ).val( 'changed' );
+	labelview.$text.find( 'textarea' ).val( 'changed' );
 
 	assert.ok(
 		!labelview.isInitialValue(),
 		'Verified isInitialValue() returning false after changing value.'
 	);
 
-	labelview.$text.find( 'input' ).val( 'test label' );
+	labelview.$text.find( 'textarea' ).val( 'test label' );
 
 	assert.ok(
 		labelview.isInitialValue(),
