@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_123ef687",
+        "filename": "repo/includes/rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-04-29T14:20:14Z",
+      "side": 1,
+      "message": "You can use -\u003ea() instead of \u003esay( \u0027a\u0027 )-\u003eis()",
+      "revId": "15b4b35a3ad83f8c5f8e1b4bf9094fa13c482527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
