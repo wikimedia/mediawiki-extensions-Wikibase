@@ -18,11 +18,272 @@
   <owl:Ontology rdf:about="&wikibase;">
     <rdfs:label>Wikibase system ontology</rdfs:label>
     <rdfs:comment>The system ontology of Wikibase, which is used to describe the user-created content.</rdfs:comment>
+	<rdfs:seeAlso rdf:resource="https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format" />
   </owl:Ontology>
+
+  <!--
+  ///////////////////////////////////////////////////////////////////////////////////////
+  //
+  // Classes
+  //
+  ///////////////////////////////////////////////////////////////////////////////////////
+   -->
+
+  <owl:Class rdf:about="&wikibase;Dump">
+    <rdfs:label>Dump</rdfs:label>
+    <rdfs:comment>A dump of wikidata content.</rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="&wikibase;Entity">
+    <rdfs:label>Entity</rdfs:label>
+    <rdfs:comment>Wikibase entity.</rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="&wikibase;Item">
+    <rdfs:label>Item</rdfs:label>
+    <rdfs:comment>Wikibase item.</rdfs:comment>
+	<rdfs:subClassOf rdf:resource="&wikibase;Entity"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="&wikibase;Property">
+      <rdfs:label>Property</rdfs:label>
+      <rdfs:comment>Wikibase property.</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&wikibase;Entity"/>
+  </owl:Class>
+
 
   <owl:Class rdf:about="&wikibase;Statement">
     <rdfs:label>Statement</rdfs:label>
     <rdfs:comment>A reified statement.</rdfs:comment>
   </owl:Class>
+
+  <owl:Class rdf:about="&wikibase;Reference">
+    <rdfs:label>Reference</rdfs:label>
+    <rdfs:comment>A reference to external sources.</rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="&wikibase;Value">
+    <rdfs:label>Value</rdfs:label>
+    <rdfs:comment>Wikibase extended value.</rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="&wikibase;PropertyType">
+    <rdfs:label>PropertyType</rdfs:label>
+    <rdfs:comment>Type of a wikibase property.</rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="&wikibase;Rank">
+    <rdfs:label>Rank</rdfs:label>
+    <rdfs:comment>Wikibase statement rank.</rdfs:comment>
+  </owl:Class>
+
+  <!--
+  ///////////////////////////////////////////////////////////////////////////////////////
+  //
+  // Individuals
+  //
+  ///////////////////////////////////////////////////////////////////////////////////////
+   -->
+
+  <owl:NamedIndividual rdf:about="&wikibase;BestRank">
+      <rdfs:label>BestRank</rdfs:label>
+      <rdfs:comment>Statement of best rank for this property.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;Rank"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;DeprecatedRank">
+      <rdfs:label>DeprecatedRank</rdfs:label>
+      <rdfs:comment>Deprecated rank.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;Rank"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;NormalRank">
+      <rdfs:label>NormalRank</rdfs:label>
+      <rdfs:comment>Normal rank.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;Rank"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;PreferredRank">
+      <rdfs:label>PreferredRank</rdfs:label>
+      <rdfs:comment>Preferred rank.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;Rank"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;CommonsMedia">
+      <rdfs:label>CommonsMedia</rdfs:label>
+      <rdfs:comment>Wikimedia Commons reference type.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;Globecoordinate">
+      <rdfs:label>Globecoordinate</rdfs:label>
+      <rdfs:comment>Coordinate type.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;Monolingualtext">
+      <rdfs:label>Monolingualtext</rdfs:label>
+      <rdfs:comment>Type for text in single language.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;Quantity">
+      <rdfs:label>Quantity</rdfs:label>
+      <rdfs:comment>Type for numerical quantity.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;String">
+      <rdfs:label>String</rdfs:label>
+      <rdfs:comment>Basic string type.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;Time">
+      <rdfs:label>Time</rdfs:label>
+      <rdfs:comment>Date and time value type.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;Url">
+      <rdfs:label>Url</rdfs:label>
+      <rdfs:comment>URL link type.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;WikibaseEntityid">
+      <rdfs:label>WikibaseEntityid</rdfs:label>
+      <rdfs:comment>Type for referring to another Wikibase entity.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <!--
+  ///////////////////////////////////////////////////////////////////////////////////////
+  //
+  // Properties
+  //
+  ///////////////////////////////////////////////////////////////////////////////////////
+   -->
+
+  <owl:ObjectProperty rdf:about="&wikibase;rank">
+      <rdfs:label>rank</rdfs:label>
+      <rdfs:comment>Statement rank.</rdfs:comment>
+      <rdfs:range rdf:resource="&wikibase;Rank"/>
+      <rdfs:domain rdf:resource="&wikibase;Statement"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&wikibase;badge">
+      <rdfs:label>badge</rdfs:label>
+      <rdfs:comment>Badge on the Wiki page.</rdfs:comment>
+      <rdfs:range rdf:resource="&wikibase;Item"/>
+      <rdfs:domain rdf:resource="&xsd;anyURI"/>
+  </owl:ObjectProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;valueParts">
+      <rdfs:label>valueParts</rdfs:label>
+      <rdfs:comment>Predicates used for describing extended value.</rdfs:comment>
+      <rdfs:domain rdf:resource="&wikibase;Value"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;geoValues">
+      <rdfs:label>geoValues</rdfs:label>
+      <rdfs:comment>Predicates used for describing coordinate value.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;valueParts"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;geoGlobe">
+      <rdfs:label>geoGlobe</rdfs:label>
+      <rdfs:comment>Globe reference URL.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;geoValues"/>
+      <rdfs:range rdf:resource="&xsd;anyURI"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;geoLatitude">
+      <rdfs:label>geoLatitude</rdfs:label>
+      <rdfs:comment>Coordinate latitude.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;geoValues"/>
+      <rdfs:range rdf:resource="&xsd;decimal"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;geoLongitude">
+      <rdfs:label>geoLongitude</rdfs:label>
+      <rdfs:comment>Coordinate longitude.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;geoValues"/>
+      <rdfs:range rdf:resource="&xsd;decimal"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;geoPrecision">
+      <rdfs:label>geoPrecision</rdfs:label>
+      <rdfs:comment>Coordinate precision.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;geoValues"/>
+      <rdfs:range rdf:resource="&xsd;decimal"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;quantityValues">
+      <rdfs:label>quantityValues</rdfs:label>
+      <rdfs:comment>Predicates used for describing quantity value.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;valueParts"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;quantityAmount">
+      <rdfs:label>quantityAmount</rdfs:label>
+      <rdfs:comment>Amount of quantity.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;quantityValues"/>
+      <rdfs:range rdf:resource="&xsd;decimal"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;quantityLowerBound">
+      <rdfs:label>quantityLowerBound</rdfs:label>
+      <rdfs:comment>Lower bound of the value.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;quantityValues"/>
+      <rdfs:range rdf:resource="&xsd;decimal"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;quantityUpperBound">
+      <rdfs:label>quantityUpperBound</rdfs:label>
+      <rdfs:comment>Upper bound of the value.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;quantityValues"/>
+      <rdfs:range rdf:resource="&xsd;decimal"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;quantityUnit">
+      <rdfs:label>quantityUnit</rdfs:label>
+      <rdfs:comment>Unit of measurement.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;quantityValues"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;timeValues">
+      <rdfs:label>timeValues</rdfs:label>
+      <rdfs:comment>Predicates to describe datetime values.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;valueParts"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;timeCalendarModel">
+      <rdfs:label>timeCalendarModel</rdfs:label>
+      <rdfs:comment>Calendar used for this date in Wikibase.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;timeValues"/>
+      <rdfs:range rdf:resource="&wikibase;Item"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;timePrecision">
+      <rdfs:label>timePrecision</rdfs:label>
+      <rdfs:comment>Datetime precision.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;timeValues"/>
+      <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;timeTimezone">
+      <rdfs:label>timeTimezone</rdfs:label>
+      <rdfs:comment>Timezone offset from GMT in minutes.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;timeValues"/>
+      <rdfs:range rdf:resource="&xsd;decimal"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;timeValue">
+      <rdfs:label>timeValue</rdfs:label>
+      <rdfs:comment>Time value as datetime string.</rdfs:comment>
+      <rdfs:subPropertyOf rdf:resource="&wikibase;timeValues"/>
+      <rdfs:range rdf:resource="&xsd;dateTime"/>
+  </owl:DatatypeProperty>
 
 </rdf:RDF>
