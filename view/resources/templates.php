@@ -70,7 +70,7 @@ HTML;
 	</div>
 	<div class="wikibase-snakview-value-container" dir="auto">
 		<div class="wikibase-snakview-typeselector"></div>
-		<div class="wikibase-snakview-value $2">$3</div>
+		<div class="wikibase-snakview-value $2">$3<span class="wb-indicator"></span></div>
 	</div>
 </div>
 HTML;
