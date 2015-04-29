@@ -53,10 +53,10 @@ class UsageAspectTransformer {
 	 * Gets EntityUsage objects for each aspect in $aspects that is relevant according to
 	 * getRelevantAspects( $entityId ).
 	 *
-	 * @example: If was called with setRelevantAspects( $q3, array( 'T', 'L' ) ),
-	 * getFilteredUsages( $q3, array( 'S', 'L' ) ) will return EntityUsage( $q3, 'L'),
-	 * while getFilteredUsages( $q3, array( 'X' ) ) will return EntityUsage( $q3, 'T')
-	 * and EntityUsage( $q3, 'L').
+	 * @example: If was called with setRelevantAspects( $q3, array( 'T', 'L.de', 'L.en' ) ),
+	 * getFilteredUsages( $q3, array( 'S', 'L' ) ) will return EntityUsage( $q3, 'L.de', 'L.en' ),
+	 * while getFilteredUsages( $q3, array( 'X' ) ) will return EntityUsage( $q3, 'T' )
+	 * and EntityUsage( $q3, 'L' ).
 	 *
 	 * @param EntityId $entityId
 	 * @param string[] $aspects
@@ -86,7 +86,7 @@ class UsageAspectTransformer {
 		$transformedPageEntityUsages = new PageEntityUsages( $pageEntityUsages->getPageId(), array() );
 
 		foreach ( $entityIds as $id ) {
-			$aspects = $pageEntityUsages->getUsageAspects( $id );
+			$aspects = $pageEntityUsages->getUsageAspectKeys( $id );
 			$usages = $this->getFilteredUsages( $id, $aspects );
 			$transformedPageEntityUsages->addUsages( $usages );
 		}
@@ -118,12 +118,17 @@ class UsageAspectTransformer {
 	 * Filter $aspects based on the aspects provided by $relevant, according to the rules
 	 * defined for combining aspects (see class level documentation).
 	 *
-	 * @note This returns the intersection of $aspects and $relevant,
-	 * except if on of the list contains the ALL_USAGE code (X).
-	 * If X is present in $aspects, this method will return $relevant (if "all" is in the
+	 * @note This basically returns the intersection of $aspects and $relevant,
+	 * except for special treatment of ALL_USAGE and of modified aspects:
+	 *
+	 * - If X is present in $aspects, this method will return $relevant (if "all" is in the
 	 * base set, the filtered set will be the filter itself).
-	 * If X is present in $relevant, this method returns $aspects (if all aspects are relevant,
+	 * - If X is present in $relevant, this method returns $aspects (if all aspects are relevant,
 	 * nothing is filtered out).
+	 * - If a modified aspect A.xx is present in $relevant and the unmodified aspect A is present in
+	 *   $aspects, A is included in the result.
+	 * - If a modified aspect A.xx is present in $aspect and the unmodified aspect A is present in
+	 *   $relevant, the modified aspect A.xx is included in the result.
 	 *
 	 * @param string[] $aspects
 	 * @param string[] $relevant
@@ -141,7 +146,50 @@ class UsageAspectTransformer {
 			return $aspects;
 		}
 
-		return array_intersect( $aspects, $relevant );
+		$aspectBins = $this->binAspects( $aspects );
+		$relevantBins = $this->binAspects( $relevant );
+
+		// Match modified aspects to unmodified aspects
+		$leftMatches = $this->matchBins( $aspectBins, $relevant );
+		$rightMatches = $this->matchBins( $relevantBins, $aspects );
+		$directMatches = array_intersect( $relevant, $aspects );
+
+		$matches = array_merge(
+			$directMatches,
+			$leftMatches,
+			$rightMatches
+		);
+
+		sort( $matches );
+		return array_unique( $matches );
+	}
+
+	/**
+	 * Collects aspects into bins, each bin containing all the modifications of a given aspect.
+	 *
+	 * @param string[] $aspects
+	 *
+	 * @return string[][] A list of lists of modified aspects, e.g. 'L' => ( 'L.de', 'L.en', 'L.ru' )
+	 */
+	private function binAspects( $aspects ) {
+		$bags = array();
+
+		foreach ( $aspects as $a ) {
+			$key = preg_replace( '/\..*$/', '', $a );
+			$bags[$key][] = $a;
+		}
+
+		return $bags;
+	}
+
+	/**
+	 * @param string[][] $bins
+	 * @param string[] $aspects
+	 *
+	 * @return string[]
+	 */
+	private function matchBins( array $bins, array $aspects ) {
+		return array_merge( array_intersect_key( $bins, array_flip( $aspects ) ) );
 	}
 
 }

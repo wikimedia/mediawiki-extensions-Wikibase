@@ -75,6 +75,36 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 				array( 'X' ),
 				array( 'Q1#L', 'Q1#S' )
 			),
+			'modifier: direct match' => array(
+				$q1,
+				array( 'L.de', 'L.en' ),
+				array( 'L.en', 'L.ru' ),
+				array( 'Q1#L.en' )
+			),
+			'modifier: mismatch' => array(
+				$q1,
+				array( 'L.ru' ),
+				array( 'L.en' ),
+				array()
+			),
+			'modifier: match unmodified relevant' => array(
+				$q1,
+				array( 'L', 'L.ru' ),
+				array( 'L.en' ),
+				array( 'Q1#L.en' )
+			),
+			'modifier: match unmodified aspect' => array(
+				$q1,
+				array( 'L.en' ),
+				array( 'L', 'L.ru' ),
+				array( 'Q1#L.en' )
+			),
+			'modifier: mixed' => array(
+				$q1,
+				array( 'L.en', 'L' ),
+				array( 'L', 'L.ru' ),
+				array( 'Q1#L', 'Q1#L.en' )
+			),
 		);
 	}
 

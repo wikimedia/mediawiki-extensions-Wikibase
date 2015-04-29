@@ -18,16 +18,42 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class EntityUsageTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetters() {
+
+	public function testGetEntityId() {
 		$id = new ItemId( 'Q7' );
 		$aspect = EntityUsage::ALL_USAGE;
 
 		$usage = new EntityUsage( $id, $aspect );
 
 		$this->assertEquals( $id, $usage->getEntityId() );
-		$this->assertEquals( $aspect, $usage->getAspect() );
+	}
 
+	public function testGetAspect() {
+		$id = new ItemId( 'Q7' );
+		$aspect = EntityUsage::ALL_USAGE;
+
+		$usage = new EntityUsage( $id, $aspect );
+		$this->assertEquals( $aspect, $usage->getAspect() );
+	}
+
+	public function testGetIdentityString() {
+		$id = new ItemId( 'Q7' );
+		$aspect = EntityUsage::ALL_USAGE;
+
+		$usage = new EntityUsage( $id, $aspect );
 		$this->assertInternalType( 'string', $usage->getIdentityString() );
+	}
+
+	public function testGetAspectKey() {
+		$id = new ItemId( 'Q7' );
+		$aspect = EntityUsage::LABEL_USAGE;
+		$modifier = 'ru';
+
+		$usage = new EntityUsage( $id, $aspect );
+		$this->assertEquals( $aspect, $usage->getAspectKey() );
+
+		$usage = new EntityUsage( $id, $aspect, $modifier );
+		$this->assertEquals( "$aspect.$modifier", $usage->getAspectKey() );
 	}
 
 }

@@ -28,7 +28,8 @@ class EntityUsage {
 
 	/**
 	 * Usage flag indicating that the entity's label in the local content language was used.
-	 * This would be the case when showing the label of a referenced entity.
+	 * This would be the case when showing the label of a referenced entity. Note that
+	 * label usage is typically tracked with a modifier specifying the label's language code.
 	 */
 	const LABEL_USAGE = 'L';
 
@@ -77,18 +78,26 @@ class EntityUsage {
 	private $aspect;
 
 	/**
+	 * @var null|string
+	 */
+	private $modifier;
+
+	/**
 	 * @param EntityId $entityId
 	 * @param string $aspect use the EntityUsage::XXX_USAGE constants
+	 * @param string|null $modifier for further qualifying the usage aspect (e.g. a language code
+	 *        may be used along with the LABEL_USAGE aspect.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityId $entityId, $aspect ) {
+	public function __construct( EntityId $entityId, $aspect, $modifier = null ) {
 		if ( !array_key_exists( $aspect, self::$aspects ) ) {
 			throw new InvalidArgumentException( '$aspect must use one of the XXX_USAGE constants!' );
 		}
 
 		$this->entityId = $entityId;
 		$this->aspect = $aspect;
+		$this->modifier = $modifier;
 	}
 
 	/**
@@ -96,6 +105,29 @@ class EntityUsage {
 	 */
 	public function getAspect() {
 		return $this->aspect;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getModifier() {
+		return $this->modifier;
+	}
+
+	/**
+	 * Returns the aspect with the modifier applied.
+	 * If a modifier is present, it will be appended to the aspect, using "." as a separator.
+	 *
+	 * @return string
+	 */
+	public function getAspectKey() {
+		$key = $this->getAspect();
+
+		if ( $this->modifier !== null ) {
+			$key .= '.' . $this->getModifier();
+		}
+
+		return $key;
 	}
 
 	/**
@@ -109,7 +141,7 @@ class EntityUsage {
 	 * @return string
 	 */
 	public function getIdentityString() {
-		return $this->getEntityId()->getSerialization() . '#' . $this->getAspect();
+		return $this->getEntityId()->getSerialization() . '#' . $this->getAspectKey();
 	}
 
 	/**
