@@ -77,10 +77,10 @@ class DispatchChanges extends Maintenance {
 		$batchCacheFactor = $settings->getSetting( 'dispatchBatchCacheFactor' );
 		$subscriptionLookupMode = $settings->getSetting( 'subscriptionLookupMode' );
 
-		$batchSize = intval( $this->getOption( 'batch-size', 1000 ) );
-		$dispatchInterval = intval( $this->getOption( 'dispatch-interval', 60 ) );
-		$lockGraceInterval = intval( $this->getOption( 'lock-grace-interval', 60 ) );
-		$randomness = intval( $this->getOption( 'randomness', 10 ) );
+		$batchSize = (int)$this->getOption( 'batch-size', 1000 );
+		$dispatchInterval = (int)$this->getOption( 'dispatch-interval', 60 );
+		$lockGraceInterval = (int)$this->getOption( 'lock-grace-interval', 60 );
+		$randomness = (int)$this->getOption( 'randomness', 10 );
 
 		$this->verbose = $this->getOption( 'verbose', false );
 
@@ -149,9 +149,9 @@ class DispatchChanges extends Maintenance {
 			throw new MWException( "WikibaseLib has not been loaded." );
 		}
 
-		$maxTime = intval( $this->getOption( 'max-time', PHP_INT_MAX ) );
-		$maxPasses = intval( $this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 ) );
-		$delay = intval( $this->getOption( 'idle-delay', 10 ) );
+		$maxTime = (int)$this->getOption( 'max-time', PHP_INT_MAX );
+		$maxPasses = (int)$this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 );
+		$delay = (int)$this->getOption( 'idle-delay', 10 );
 
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$dispatcher = $this->newChangeDispatcher( $settings );

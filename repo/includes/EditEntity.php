@@ -187,7 +187,7 @@ class EditEntity {
 		$this->newEntity = $newEntity;
 
 		if ( is_string( $baseRevId ) ) {
-			$baseRevId = intval( $baseRevId );
+			$baseRevId = (int)$baseRevId;
 		}
 
 		if ( $baseRevId === 0 ) {

@@ -64,10 +64,10 @@ class PruneChanges extends Maintenance {
 
 	private function getKeepSeconds() {
 		$keepSeconds = 0;
-		$keepSeconds += intval( $this->getOption( 'number-of-days', 0 ) ) * 24 * 60 * 60;
-		$keepSeconds += intval( $this->getOption( 'keep-days', 0 ) ) * 24 * 60 * 60;
-		$keepSeconds += intval( $this->getOption( 'keep-hours', 0 ) ) * 60 * 60;
-		$keepSeconds += intval( $this->getOption( 'keep-minutes', 0 ) ) * 60;
+		$keepSeconds += (int)$this->getOption( 'number-of-days', 0 ) * 24 * 60 * 60;
+		$keepSeconds += (int)$this->getOption( 'keep-days', 0 ) * 24 * 60 * 60;
+		$keepSeconds += (int)$this->getOption( 'keep-hours', 0 ) * 60 * 60;
+		$keepSeconds += (int)$this->getOption( 'keep-minutes', 0 ) * 60;
 
 		if ( $keepSeconds === 0 ) {
 			// one day
@@ -79,7 +79,7 @@ class PruneChanges extends Maintenance {
 
 	private function getGraceSeconds() {
 		$graceSeconds = 0;
-		$graceSeconds += intval( $this->getOption( 'grace-minutes', 0 ) ) * 60;
+		$graceSeconds += (int)$this->getOption( 'grace-minutes', 0 ) * 60;
 
 		if ( $graceSeconds === 0 ) {
 			// one hour

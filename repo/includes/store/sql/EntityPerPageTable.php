@@ -426,7 +426,7 @@ class EntityPerPageTable implements EntityPerPage {
 			return false;
 		}
 
-		return intval( $row->epp_page_id );
+		return (int)$row->epp_page_id;
 	}
 
 	/**

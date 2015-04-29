@@ -147,10 +147,11 @@ class DispatchStats {
 		$n = count( $this->clientStates );
 
 		if ( $n > 0 ) {
-			$this->average->chd_untouched = intval( $this->average->chd_untouched / $n );
-			$this->average->chd_pending = intval( $this->average->chd_pending / $n );
+			$this->average->chd_untouched = (int)( $this->average->chd_untouched / $n );
+			$this->average->chd_pending = (int)( $this->average->chd_pending / $n );
 			$this->average->chd_lag = $this->average->chd_lag === null
-										? null : intval( $this->average->chd_lag / $n );
+				? null
+				: (int)( $this->average->chd_lag / $n );
 		}
 
 		return $n;
@@ -277,7 +278,7 @@ class DispatchStats {
 	 * @return int
 	 */
 	public function getMaxChangeId() {
-		return intval( $this->changeStats->max_id );
+		return (int)$this->changeStats->max_id;
 	}
 
 	/**
@@ -286,7 +287,7 @@ class DispatchStats {
 	 * @return int
 	 */
 	public function getMinChangeId() {
-		return intval( $this->changeStats->min_id );
+		return (int)$this->changeStats->min_id;
 	}
 
 	/**

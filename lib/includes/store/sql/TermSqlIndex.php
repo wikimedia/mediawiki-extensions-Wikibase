@@ -529,7 +529,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$queryOptions = array();
 
 		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
-			$queryOptions['LIMIT'] = intval( $options['LIMIT'] );
+			$queryOptions['LIMIT'] = (int)$options['LIMIT'];
 		}
 
 		$obtainedTerms = $dbr->select(
@@ -586,7 +586,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'LIMIT' => $internalLimit,
 		);
 
-		$requestedLimit = isset( $options['LIMIT'] ) ? max( intval( $options['LIMIT'] ), 0 ) : 0;
+		$requestedLimit = isset( $options['LIMIT'] ) ? max( (int)$options['LIMIT'], 0 ) : 0;
 		// if we take the weight into account, we need to grab basically all hits in order
 		// to allow for the post-search sorting below.
 		if ( !$hasWeight && $requestedLimit > 0 && $requestedLimit < $queryOptions['LIMIT'] ) {

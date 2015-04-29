@@ -203,13 +203,12 @@ class EntityViewPlaceholderExpander {
 	 * @return string
 	 */
 	protected function expandPlaceholder( $name, array $args ) {
-
 		switch ( $name ) {
 			case 'termbox':
 				$entityId = $this->getEntityIdFromString( $args[0] );
 				return $this->renderTermBox(
 					$entityId,
-					isset( $args[1] ) ? intval( $args[1] ) : 0
+					isset( $args[1] ) ? (int)$args[1] : 0
 				);
 			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
 				return

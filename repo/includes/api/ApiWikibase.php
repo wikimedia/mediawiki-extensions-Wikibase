@@ -413,7 +413,7 @@ abstract class ApiWikibase extends ApiBase {
 			$flags |= EDIT_FORCE_BOT;
 		}
 
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 
 		$editEntity = new EditEntity(
 			$this->titleLookup,

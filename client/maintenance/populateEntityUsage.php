@@ -43,7 +43,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 			exit;
 		}
 
-		$startPage = intval( $this->getOption( 'start-page', 0 ) );
+		$startPage = (int)$this->getOption( 'start-page', 0 );
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(

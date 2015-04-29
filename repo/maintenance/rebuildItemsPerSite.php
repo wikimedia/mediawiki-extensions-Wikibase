@@ -40,7 +40,7 @@ class RebuildItemsPerSite extends Maintenance {
 			exit;
 		}
 
-		$batchSize = intval( $this->getOption( 'batch-size', 100 ) );
+		$batchSize = (int)$this->getOption( 'batch-size', 100 );
 
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(

@@ -53,9 +53,9 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $useRedirectTargetColumn );
 		$builder->setReporter( $reporter );
 
-		$builder->setBatchSize( intval( $this->getOption( 'batch-size', 100 ) ) );
+		$builder->setBatchSize( (int)$this->getOption( 'batch-size', 100 ) );
 		$builder->setRebuildAll( $this->getOption( 'rebuild-all', false ) );
-		$builder->setFromId( intval( $this->getOption( 'start-row', 1 ) ) );
+		$builder->setFromId( (int)$this->getOption( 'start-row', 1 ) );
 
 		$n = $builder->rebuildPropertyInfo();
 

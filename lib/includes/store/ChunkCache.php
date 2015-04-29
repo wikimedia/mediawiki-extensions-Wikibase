@@ -115,7 +115,7 @@ class ChunkCache implements ChunkAccess {
 			assert( '$high >= 0' );
 			assert( '$low >= 0' );
 
-			$mid = intval( floor( ( $low + $high ) / 2 ) );
+			$mid = (int)( ( $low + $high ) / 2 );
 
 			$entry = $this->entries[$mid];
 

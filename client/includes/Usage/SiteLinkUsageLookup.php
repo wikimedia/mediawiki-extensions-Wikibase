@@ -161,7 +161,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	private function getItemIdsFromSiteLinkRows( array $rows ) {
 		$itemIds = array_map(
 			function ( array $row ) {
-				return intval( $row[2] );
+				return (int)$row[2];
 			},
 			$rows
 		);
