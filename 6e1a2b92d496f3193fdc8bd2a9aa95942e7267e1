@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_deacff34",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-29T01:09:08Z",
+      "side": 1,
+      "message": "Please document the allowed values and the default here",
+      "revId": "6e1a2b92d496f3193fdc8bd2a9aa95942e7267e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
