@@ -81,6 +81,9 @@ class PageEntityUsages {
 
 	/**
 	 * Collects all usage aspects present on the page.
+	 * Modifiers are not considered, use getAspectKeys() if modifiers should be included.
+	 *
+	 * @see getAspectKeys()
 	 *
 	 * string[] aspect names (sorted)
 	 */
@@ -89,6 +92,26 @@ class PageEntityUsages {
 
 		foreach ( $this->usages as $usage ) {
 			$aspect = $usage->getAspect();
+			$aspects[$aspect] = true;
+		}
+
+		ksort( $aspects );
+		return array_keys( $aspects );
+	}
+
+	/**
+	 * Collects all usage aspects present on the page.
+	 * Aspect keys will include modifiers, use getAspects() if modifiers are not desired.
+	 *
+	 * @see getAspects()
+	 *
+	 * string[] aspect names (sorted)
+	 */
+	public function getAspectKeys() {
+		$aspects = array();
+
+		foreach ( $this->usages as $usage ) {
+			$aspect = $usage->getAspectKey();
 			$aspects[$aspect] = true;
 		}
 
@@ -132,18 +155,19 @@ class PageEntityUsages {
 
 	/**
 	 * Returns the aspects used by the given entity on the page
-	 * represented by this PageEntityUsages object.
+	 * represented by this PageEntityUsages object. They aspects
+	 * will include any modifiers.
 	 *
 	 * @param EntityId $id
 	 *
-	 * @return string[] List of aspect names, sorted.
+	 * @return string[] List of aspect keys, sorted.
 	 */
-	public function getUsageAspects( EntityId $id ) {
+	public function getUsageAspectKeys( EntityId $id ) {
 		$aspects = array();
 
 		foreach ( $this->usages as $usage ) {
 			if ( $id->equals( $usage->getEntityId() ) ) {
-				$aspects[] = $usage->getAspect();
+				$aspects[] = $usage->getAspectKey();
 			}
 		}
 

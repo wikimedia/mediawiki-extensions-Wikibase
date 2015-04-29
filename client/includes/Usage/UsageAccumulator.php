@@ -24,7 +24,7 @@ abstract class UsageAccumulator {
 	abstract public function addUsage( EntityUsage $usage );
 
 	/**
-	 * Registers the usage of entity's labels (in the local content language), if the provided
+	 * Registers the usage of entity's labels (in the given language), if the provided
 	 * snaks are PropertyValueSnaks that contain EntityIdValues.
 	 *
 	 * @note We track any EntityIdValue as a label usage. This is making assumptions about what the
@@ -32,15 +32,16 @@ abstract class UsageAccumulator {
 	 * but that seems nasty to model.
 	 *
 	 * @param Snak[] $snaks
+	 * @param string|null $language
 	 */
-	public function addLabelUsageForSnaks( array $snaks ) {
+	public function addLabelUsageForSnaks( array $snaks, $language = null ) {
 		foreach ( $snaks as $snak ) {
-			$this->addLabelUsageForSnak( $snak );
+			$this->addLabelUsageForSnak( $snak, $language );
 		}
 	}
 
 	/**
-	 * Registers the usage of an entity's label (in the local content language), if the provided
+	 * Registers the usage of an entity's label (in the given language), if the provided
 	 * snak is a PropertyValueSnak that contains an EntityIdValue.
 	 *
 	 * @note We track any EntityIdValue as a label usage. This is making assumptions about what the
@@ -48,24 +49,26 @@ abstract class UsageAccumulator {
 	 * but that seems nasty to model.
 	 *
 	 * @param Snak $snak
+	 * @param string|null $language
 	 */
-	public function addLabelUsageForSnak( Snak $snak ) {
+	public function addLabelUsageForSnak( Snak $snak, $language = null ) {
 		if ( $snak instanceof PropertyValueSnak ) {
 			$value = $snak->getDataValue();
 
 			if ( $value instanceof EntityIdValue ) {
-				$this->addLabelUsage( $value->getEntityId() );
+				$this->addLabelUsage( $value->getEntityId(), $language );
 			}
 		}
 	}
 
 	/**
-	 * Registers the usage of an entity's label (in the local content language).
+	 * Registers the usage of an entity's label (in the given language).
 	 *
 	 * @param EntityId $id
+	 * @param string|null $language
 	 */
-	public function addLabelUsage( EntityId $id ) {
-		$this->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE ) );
+	public function addLabelUsage( EntityId $id, $language = null ) {
+		$this->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE, $language ) );
 	}
 
 	/**
