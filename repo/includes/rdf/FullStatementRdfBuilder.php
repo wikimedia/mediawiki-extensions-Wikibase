@@ -29,9 +29,9 @@ use Wikimedia\Purtle\RdfWriter;
 class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 	/**
-	 * @var callable
+	 * @var EntityMentionListener
 	 */
-	private $propertyMentionCallback = null;
+	private $mentionedEntityTracker;
 
 	/**
 	 * @var DedupeBag
@@ -83,21 +83,22 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 		$this->valueBuilder = $valueBuilder;
 
+		$this->mentionedEntityTracker = new NullEntityMentionListener();
 		$this->dedupeBag = new NullDedupeBag();
 	}
 
 	/**
-	 * @return callable
+	 * @return EntityMentionListener
 	 */
-	public function getPropertyMentionCallback() {
-		return $this->propertyMentionCallback;
+	public function getEntityMentionListener() {
+		return $this->mentionedEntityTracker;
 	}
 
 	/**
-	 * @param callable $propertyMentionCallback
+	 * @param EntityMentionListener $mentionedEntityTracker
 	 */
-	public function setPropertyMentionCallback( $propertyMentionCallback ) {
-		$this->propertyMentionCallback = $propertyMentionCallback;
+	public function setEntityMentionListener( $mentionedEntityTracker ) {
+		$this->mentionedEntityTracker = $mentionedEntityTracker;
 	}
 
 	/**
@@ -232,7 +233,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 			->a( RdfVocabulary::NS_ONTOLOGY, 'Statement' );
 		$this->addSnak( $this->statementWriter, $snak, RdfVocabulary::NSP_CLAIM_STATEMENT );
 
-		$this->propertyMentioned( $snak->getPropertyId() );
+		$this->mentionedEntityTracker->propertyMentioned( $snak->getPropertyId() );
 
 		$rank = $statement->getRank();
 		if ( isset( RdfVocabulary::$rankMap[$rank] ) ) {
@@ -281,12 +282,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	}
 
 	/**
-	 * @param EntityId $propertyId
-	 */
-	private function propertyMentioned( EntityId $propertyId ) {
-		if ( $this->propertyMentionCallback ) {
-			call_user_func( $this->propertyMentionCallback, $propertyId );
-		}
 	}
 
 	/**
