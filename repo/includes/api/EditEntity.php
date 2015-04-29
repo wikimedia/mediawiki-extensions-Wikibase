@@ -339,7 +339,7 @@ class EditEntity extends ModifyEntity {
 		$indexedAliases = array();
 
 		foreach ( $aliases as $langCode => $arg ) {
-			if ( intval( $langCode ) ) {
+			if ( !is_string( $langCode ) ) {
 				$indexedAliases[] = ( array_values( $arg ) === $arg ) ? $arg : array( $arg );
 			} else {
 				$indexedAliases[$langCode] = ( array_values( $arg ) === $arg ) ? $arg : array( $arg );

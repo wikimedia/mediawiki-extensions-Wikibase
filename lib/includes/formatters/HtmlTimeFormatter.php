@@ -71,7 +71,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 */
 	private function calendarNameNeeded( TimeValue $value ) {
 		preg_match( '/^[-+]\d+/', $value->getTime(), $matches );
-		$year = intval( $matches[0] );
+		$year = $matches[0];
 
 		// This is how the original JavaScript UI decided this:
 		// year <= 1581 && calendar === 'Gregorian' ||

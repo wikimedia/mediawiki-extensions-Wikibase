@@ -56,7 +56,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 					throw new StorageException( 'Bad title text: ' . $text );
 				}
 
-				$title->resetArticleID( intval( $text ) );
+				$title->resetArticleID( $text );
 				return $title;
 			} ) );
 

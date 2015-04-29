@@ -373,14 +373,16 @@ class EntityPerPageTable implements EntityPerPage {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		if ( $after ) {
+			$numericId = (int)$after->getNumericId();
+
 			if ( $entityType === null ) {
 				// Ugly. About time we switch to qualified, string based IDs!
 				// NOTE: this must be consistent with the sort order, see above!
-				$where[] = '( ( epp_entity_type > ' . $dbr->addQuotes( $after->getEntityType() ) .
-						' AND epp_entity_id = ' . $after->getNumericId() . ' )' .
-						' OR epp_entity_id > ' . $after->getNumericId() . ' )';
+				$where[] = '( ( epp_entity_type > ' . $dbr->addQuotes( $after->getEntityType() )
+					. ' AND epp_entity_id = ' . $numericId . ' )'
+					. ' OR epp_entity_id > ' . $numericId . ' )';
 			} else {
-				$where[] = 'epp_entity_id > ' . $after->getNumericId();
+				$where[] = 'epp_entity_id > ' . $numericId;
 			}
 		}
 

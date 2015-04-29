@@ -68,9 +68,8 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
 			->will( $this->returnCallback( function ( $text ) {
-				$id = intval( $text );
 				$title = Title::newFromText( $text );
-				$title->resetArticleID( $id );
+				$title->resetArticleID( $text );
 				return $title;
 			} ) );
 

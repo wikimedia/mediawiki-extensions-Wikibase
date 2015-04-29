@@ -759,7 +759,7 @@ class MockRepository implements
 		}
 
 		$this->log[$revisionId] = array(
-			'revision' => intval( $revisionId ),
+			'revision' => $revisionId,
 			'entity' => $entityId,
 			'summary' => $summary,
 			'user' => $user,
