@@ -54,8 +54,8 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$numericValidator = new TestValidator( '/^[0-9]+$/' );
-		$alphabeticValidator = new TestValidator( '/^[a-zA-Z]+$/' );
+		$numericValidator = new TestValidator( '/^\d+$/' );
+		$alphabeticValidator = new TestValidator( '/^[A-Z]+$/i' );
 		$lengthValidator = new TestValidator( '/^.{1,10}$/' );
 
 		$this->dataTypeFactory = new DataTypeFactory();

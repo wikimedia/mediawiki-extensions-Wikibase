@@ -83,9 +83,9 @@ class ClaimGuidValidator {
 	 * @return boolean
 	 */
 	protected function validateGuid( $guid ) {
-		$guidFormat = '/^\{?[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}\}?$/';
+		$guidFormat = '/^\{?[A-Z\d]{8}-[A-Z\d]{4}-[A-Z\d]{4}-[A-Z\d]{4}-[A-Z\d]{12}\}?$/i';
 
-		if ( ! ( preg_match( $guidFormat, $guid ) ) ) {
+		if ( !preg_match( $guidFormat, $guid ) ) {
 			wfDebugLog( __CLASS__, __METHOD__ . ': claim guid param has an invalid format.' );
 			return false;
 		}

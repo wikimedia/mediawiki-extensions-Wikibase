@@ -114,8 +114,8 @@ class PidLock {
 	 * @return string File path
 	 */
 	private function getStateFile() {
-		$fileName = preg_replace('/[^a-z\d]/i', '', $this->module ) . '_'
-			. preg_replace('/[^a-z\d]/i', '', $this->wikiId ?: wfWikiID() ) . '.pid';
+		$fileName = preg_replace( '/[^a-z\d]+/i', '', $this->module ) . '_'
+			. preg_replace( '/[^a-z\d]+/i', '', $this->wikiId ?: wfWikiID() ) . '.pid';
 
 		// Directory /var/run/ with system specific separators
 		$dir = DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'run' . DIRECTORY_SEPARATOR;

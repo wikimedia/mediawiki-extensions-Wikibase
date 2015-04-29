@@ -93,7 +93,7 @@ class SerializationOptions {
 			throw new InvalidArgumentException( 'option keys must be strings' );
 		}
 
-		if ( !preg_match( '/^[-.\/:_+*!$#@0-9a-zA-Z]+$/', $key ) ) {
+		if ( !preg_match( '/^[-.\/:+*!$#@\w]+$/i', $key ) ) {
 			throw new InvalidArgumentException( 'malformed option key: ' . $key );
 		}
 	}
