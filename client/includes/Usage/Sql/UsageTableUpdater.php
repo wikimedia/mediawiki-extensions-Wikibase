@@ -155,7 +155,7 @@ class UsageTableUpdater {
 
 	/**
 	 * Collects the entity id strings contained in the given list of EntityUsages into
-	 * bins based on the usage's aspect.
+	 * bins based on the usage's aspect and modifier.
 	 *
 	 * @param EntityUsage[] $usages
 	 *
@@ -170,7 +170,7 @@ class UsageTableUpdater {
 				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
 			}
 
-			$aspect = $usage->getAspect();
+			$aspect = $usage->getAspectKey();
 			$bins[$aspect][] = $usage->getEntityId()->getSerialization();
 		}
 
@@ -195,7 +195,7 @@ class UsageTableUpdater {
 
 			$rows[] = array(
 				'eu_page_id' => (int)$pageId,
-				'eu_aspect' => $usage->getAspect(),
+				'eu_aspect' => $usage->getAspectKey(),
 				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
 				'eu_touched' => wfTimestamp( TS_MW, $touched ),
 			);

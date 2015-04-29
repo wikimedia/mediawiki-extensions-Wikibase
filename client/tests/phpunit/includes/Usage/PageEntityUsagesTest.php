@@ -24,7 +24,8 @@ class PageEntityUsagesTest extends PHPUnit_Framework_TestCase {
 
 		$usages = array(
 			new EntityUsage( $q7, EntityUsage::ALL_USAGE ),
-			new EntityUsage( $q11, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q11, EntityUsage::LABEL_USAGE, 'de' ),
+			new EntityUsage( $q11, EntityUsage::LABEL_USAGE, 'en' ),
 			new EntityUsage( $q11, EntityUsage::TITLE_USAGE ),
 		);
 
@@ -38,11 +39,24 @@ class PageEntityUsagesTest extends PHPUnit_Framework_TestCase {
 			EntityUsage::ALL_USAGE,
 		);
 
-		$this->assertEquals( $expectedAspects, $pageUsages->getAspects() );
-		$this->assertEquals( array( 'Q11' => $q11, 'Q7' => $q7 ), $pageUsages->getEntityIds() );
-		$this->assertEquals( array( 'Q11#L', 'Q11#T', 'Q7#X' ), array_keys( $pageUsages->getUsages() ) );
+		$expectedAspectKeys = array(
+			EntityUsage::LABEL_USAGE . '.de',
+			EntityUsage::LABEL_USAGE . '.en',
+			EntityUsage::TITLE_USAGE,
+			EntityUsage::ALL_USAGE,
+		);
 
-		$this->assertEquals( array( EntityUsage::ALL_USAGE ), $pageUsages->getUsageAspects( $q7 ) );
+		$expectedAspectsQ11 = array(
+			EntityUsage::LABEL_USAGE,
+			EntityUsage::TITLE_USAGE,
+		);
+
+		$this->assertEquals( $expectedAspects, $pageUsages->getAspects(), 'getAspects' );
+		$this->assertEquals( $expectedAspectKeys, $pageUsages->getAspectKeys(), 'getAspectKeys' );
+		$this->assertEquals( array( 'Q11' => $q11, 'Q7' => $q7 ), $pageUsages->getEntityIds(), 'getEntityIds' );
+		$this->assertEquals( array( 'Q11#L.de', 'Q11#L.en', 'Q11#T', 'Q7#X' ), array_keys( $pageUsages->getUsages() ), 'getUsages' );
+
+		$this->assertEquals( $expectedAspectsQ11, $pageUsages->getUsageAspects( $q11 ), 'getUsageAspects' );
 	}
 
 }
