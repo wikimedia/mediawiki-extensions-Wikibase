@@ -16,7 +16,7 @@
  * @throws {Error} if item constructor is not a Function.
  * @throws {Error} if item constructor prototype does not feature an equals() function.
  */
-var SELF = wb.datamodel.Map = function( ItemConstructor, map ) {
+var SELF = wb.datamodel.Map = function WbDataModelMap( ItemConstructor, map ) {
 	map = map || {};
 
 	if( !$.isFunction( ItemConstructor ) ) {
