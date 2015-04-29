@@ -12,7 +12,7 @@ var MODULE = wb.serialization;
  *
  * @constructor
  */
-var SELF = MODULE.DeserializerFactory = function wbDeserializerFactory() {
+var SELF = MODULE.DeserializerFactory = function WbSerializationDeserializerFactory() {
 	this._strategyProvider = new MODULE.StrategyProvider();
 
 	this.registerDeserializer( MODULE.ClaimDeserializer, wb.datamodel.Claim );

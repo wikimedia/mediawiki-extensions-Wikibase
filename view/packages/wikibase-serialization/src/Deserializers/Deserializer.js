@@ -13,7 +13,7 @@
 	 *
 	 * @constructor
 	 */
-	var SELF = MODULE.Deserializer = function WbDeserializer() {};
+	var SELF = MODULE.Deserializer = function WbSerializationDeserializer() {};
 
 	$.extend( SELF.prototype, {
 		/**
