@@ -38,6 +38,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 			$entityId: '.wikibase-labelview-entityid'
 		},
 		value: null,
+		inputNodeName: 'TEXTAREA',
 		helpMessage: mw.msg( 'wikibase-label-input-help-message' ),
 		entityId: null,
 		showEntityId: false
@@ -54,6 +55,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 			!( this.options.value instanceof wb.datamodel.Term )
 			|| !this.options.entityId
 			|| !this.options.labelsChanger
+			|| this.options.inputNodeName !== 'INPUT' && this.options.inputNodeName !== 'TEXTAREA'
 		) {
 			throw new Error( 'Required option not specified properly' );
 		}
@@ -142,7 +144,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 			return deferred.resolve().promise();
 		}
 
-		var $input = $( '<input />' );
+		var $input = $( document.createElement( this.options.inputNodeName ) );
 
 		$input
 		.addClass( this.widgetFullName + '-input' )
@@ -154,6 +156,11 @@ $.widget( 'wikibase.labelview', PARENT, {
 		)
 		.attr( 'lang', languageCode )
 		.attr( 'dir', $.util.getDirectionality( languageCode ) )
+		.on( 'keydown.' + this.widgetName, function( event ) {
+			if( event.keyCode === $.ui.keyCode.ENTER ) {
+				event.preventDefault();
+			}
+		} )
 		.on( 'eachchange.' + this.widgetName, function( event ) {
 			self._trigger( 'change' );
 		} );
@@ -163,7 +170,10 @@ $.widget( 'wikibase.labelview', PARENT, {
 		}
 
 		if( $.fn.inputautoexpand ) {
-			$input.inputautoexpand();
+			$input.inputautoexpand( {
+				expandHeight: true,
+				suppressNewLine: true
+			} );
 		}
 
 		this.$text.empty().append( $input );
@@ -193,7 +203,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 */
 	_afterStopEditing: function( dropValue ) {
 		if( dropValue && this.options.value.getText() === '' ) {
-			this.$text.children( 'input' ).val( '' );
+			this.$text.children( '.' + this.widgetFullName + '-input' ).val( '' );
 		}
 		return PARENT.prototype._afterStopEditing.call( this, dropValue );
 	},
@@ -227,7 +237,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 		var response = PARENT.prototype._setOption.call( this, key, value );
 
 		if( key === 'disabled' && this.isInEditMode() ) {
-			this.$text.children( 'input' ).prop( 'disabled', value );
+			this.$text.children( '.' + this.widgetFullName + '-input' ).prop( 'disabled', value );
 		}
 
 		return response;
@@ -251,7 +261,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 
 		return new wb.datamodel.Term(
 			this.options.value.getLanguageCode(),
-			$.trim( this.$text.children( 'input' ).val() )
+			$.trim( this.$text.children( '.' + this.widgetFullName + '-input' ).val() )
 		);
 	},
 
@@ -260,7 +270,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 */
 	focus: function() {
 		if( this.isInEditMode() ) {
-			this.$text.children( 'input' ).focus();
+			this.$text.children( '.' + this.widgetFullName + '-input' ).focus();
 		} else {
 			this.element.focus();
 		}
