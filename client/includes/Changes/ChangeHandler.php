@@ -184,7 +184,7 @@ class ChangeHandler {
 	}
 
 	/**
-	 * @param string[] $aspects
+	 * @param string[] $aspects Usage aspects (without modifier), see EntityUsage.
 	 *
 	 * @return string[] A list of actions, as defined by the self::XXXX_ACTION constants.
 	 */
