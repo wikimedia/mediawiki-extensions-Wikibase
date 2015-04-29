@@ -68,7 +68,7 @@ class EntityUsageTableBuilder {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $idParser, LoadBalancer $loadBalancer, $usageTableName, $batchSize = 1000 ) {
+	public function __construct( EntityIdParser $idParser, LoadBalancer $loadBalancer, $usageTableName, $batchSize = 200 ) {
 		if ( !is_string( $usageTableName ) ) {
 			throw new InvalidArgumentException( '$usageTableName must be a string' );
 		}
@@ -163,26 +163,26 @@ class EntityUsageTableBuilder {
 	private function insertUsageBatch( DatabaseBase $db, array $entityPerPage ) {
 		$db->startAtomic( __METHOD__ );
 
-		$c = 0;
-		foreach ( $entityPerPage as $pageId => $entityId ) {
-			$db->insert(
-				$this->usageTableName,
-				array(
-					'eu_page_id' => (int)$pageId,
-					'eu_aspect' => EntityUsage::ALL_USAGE,
-					'eu_entity_id' => $entityId->getSerialization()
-				),
-				__METHOD__,
-				array(
-					'IGNORE'
-				)
-			);
+		$entityUsageRows = array();
 
-			$c++;
+		foreach ( $entityPerPage as $pageId => $entityId ) {
+			$entityUsageRows[] = array(
+				'eu_page_id' => (int)$pageId,
+				'eu_aspect' => EntityUsage::ALL_USAGE,
+				'eu_entity_id' => $entityId->getSerialization()
+			);
 		}
 
+		$db->insert(
+			$this->usageTableName,
+			$entityUsageRows,
+			__METHOD__,
+			array( 'IGNORE' )
+		);
+
 		$db->endAtomic( __METHOD__ );
-		return $c;
+
+		return count( $entityUsageRows );
 	}
 
 	/**

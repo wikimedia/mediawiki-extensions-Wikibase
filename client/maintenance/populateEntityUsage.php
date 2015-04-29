@@ -29,7 +29,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 		parent::__construct();
 
-		$this->setBatchSize( 1000 );
+		$this->setBatchSize( 200 );
 	}
 
 	/**
