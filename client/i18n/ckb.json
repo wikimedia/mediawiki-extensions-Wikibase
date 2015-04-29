@@ -24,7 +24,7 @@
 	"wikibase-linkitem-close": "وتووێژەکە ببەستە و دیسان پەڕەکە بار بکەوە",
 	"wikibase-linkitem-title": "بەستەر بدە بۆ پەڕە",
 	"wikibase-linkitem-linkpage": "بەستەر بدە بۆ پەڕە",
-	"wikibase-linkitem-selectlink": "تکایە پێگە و پەڕەیەک کە دەتەوێ بەم پەڕەیە بەستەر بدرێ ھەڵبژێرە.",
+	"wikibase-linkitem-selectlink": "تکایە پێگە و پەڕەیەک کە دەتھەوێت بەم پەڕەیەوە پەیوەندیی ھەبێت ھەڵبژێرە.",
 	"wikibase-linkitem-input-site": "زمان:",
 	"wikibase-linkitem-input-page": "پەڕە:",
 	"wikibase-linkitem-confirmitem-text": "پەڕەیەک کە ھەڵت‌بژاردووە پێشتر بۆ [$1 بەندێکی خەزێنەی ناوەندیی داروەکانمان] پەیوەندی دراوە. تکایە پشتدار بکەرەوە ئەم {{PLURAL:$2|پەڕەیە|پەڕانە}}ی لە ژێرەوە نیشان {{PLURAL:$2|دراوە|دراون}} ھەر {{PLURAL:$2|ئەوەیە|ئەوانەن}} تۆ دەتەوێ بەم پەڕەیە بەستەر {{PLURAL:$2|بدرێ|بدرێن}}.",

@@ -26,6 +26,8 @@
 	"wikibase-linkitem-not-loggedin-title": "Rhaid mewngofnodi i barhau",
 	"wikibase-property-notfound": "Ni ddaethpwyd o hyd i'r nodwedd $1.",
 	"wikibase-rc-hide-wikidata": "$1 y golygiadau ar {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Cuddio",
+	"wikibase-rc-hide-wikidata-show": "Dangos",
 	"wikibase-rc-show-wikidata-pref": "Dangos golygiadau i {{WBREPONAME}} ymhlith y newidiadau diweddar",
 	"wikibase-replicationnote": "Dalier sylw: efallai na welwch y newidiadau ar bob wici cyn pen rhai munudau.",
 	"wikibase-watchlist-show-changes-pref": "Dangos golygiadau {{WBREPONAME}} ar eich rhestr wylio",
@@ -33,5 +35,6 @@
 	"wikibase-unconnectedpages-submit": "Gwneler",
 	"wikibase-unconnectedpages-invalid-language": "Nid yw \"$1\" yn gôd iaith dilys",
 	"wikibase-pageinfo-entity-id": "ID yr Eitem {{WBREPONAME}}",
-	"wikibase-pageinfo-entity-id-none": "Dim"
+	"wikibase-pageinfo-entity-id-none": "Dim",
+	"wikibase-otherprojects": "Prosiectau eraill"
 }

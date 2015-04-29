@@ -8,7 +8,8 @@
 			"Vks",
 			"Matěj Suchánek",
 			"DobyvatelCZ",
-			"Macofe"
+			"Macofe",
+			"Cvanca"
 		]
 	},
 	"wikibase-lib-desc": "Obsahuje společné funkce pro rozšíření Wikibase a Klient Wikibase",
@@ -86,7 +87,7 @@
 	"wikibase-time-precision-10annum": "Desetiletí od $1",
 	"wikibase-time-precision-BCE-Gannum": "$1 {{PLURAL:$1|miliarda|miliardy|miliard}} let př. n. l.",
 	"wikibase-time-precision-BCE-Mannum": "$1 {{PLURAL:$1|milion|miliony|milionů}} let př. n. l.",
-	"wikibase-time-precision-BCE-annum": "$1 let př. n. l.",
+	"wikibase-time-precision-BCE-annum": "$1 {{PLURAL:$1|rok|roky|let}} př. n. l.",
 	"wikibase-time-precision-BCE-millennium": "$1. tisíciletí př. n. l.",
 	"wikibase-time-precision-BCE-century": "$1. století př. n. l.",
 	"wikibase-time-precision-BCE-10annum": "Desetiletí končící $1 př. n. l.",

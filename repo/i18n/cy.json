@@ -4,7 +4,8 @@
 			"Cymrodor",
 			"Lloffiwr",
 			"Robin Owain",
-			"Macofe"
+			"Macofe",
+			"Ham II"
 		]
 	},
 	"wikibase-entity-item": "yr eitem",
@@ -37,6 +38,7 @@
 	"wikibase-statements": "Mynegiadau",
 	"wikibase-terms": "Mewn ieithoedd eraill",
 	"wikibase-sitelinks-input-help-message": "Gosod cyswllt at dudalen sy'n perthyn i'r eitem hon.",
+	"wikibase-sitelinks-special": "Gwefannau eraill",
 	"wikibase-remove": "datgysyllter",
 	"wikibase-move-up": "symud lan",
 	"wikibase-move-down": "symud i lawr",
@@ -85,7 +87,6 @@
 	"wikibase-setdescription-submit": "Gosoder y disgrifiad",
 	"wikibase-setaliases-label": "Arallenwau:",
 	"wikibase-setaliases-submit": "Gosoder yr arallenwau",
-	"wikibase-setaliases-warning-remove": "Ydych chi wir am dynnu holl arallenwau [[$1]] i ffwrdd?",
 	"wikibase-setsitelink-site": "Id y wefan:",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Côd iaith:",
