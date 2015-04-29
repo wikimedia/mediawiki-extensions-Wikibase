@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_ded2bf2b",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-29T00:32:59Z",
+      "side": 1,
+      "message": "This should probably be a named flag like \"verbose\"/\"terse\" (?)",
+      "revId": "6fad59abc65697c8412ede2014b46a3b2e412ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_9ecc378e",
+        "filename": "repo/includes/store/sql/ChangesSubscriptionTableBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-29T00:32:59Z",
+      "side": 1,
+      "message": "mh... seems like we rather want the affected rows here? Or maybe both?",
+      "revId": "6fad59abc65697c8412ede2014b46a3b2e412ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1eb047f0",
+        "filename": "repo/maintenance/populateChangesSubscription.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-04-29T00:32:59Z",
+      "side": 1,
+      "message": "This option is not defined/ documented.",
+      "revId": "6fad59abc65697c8412ede2014b46a3b2e412ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
