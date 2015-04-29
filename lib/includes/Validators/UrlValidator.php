@@ -58,7 +58,7 @@ class UrlValidator implements ValueValidator {
 		}
 
 		// See RFC 3986, section-3.1.
-		if ( !preg_match( '/^([-+.a-zA-Z0-9]+):(.*)$/', $url, $matches ) ) {
+		if ( !preg_match( '/^([-+.a-z\d]+):/i', $url, $matches ) ) {
 			return Result::newError( array(
 				Error::newError( 'Malformed URL, can\'t find scheme name.', null, 'bad-url', array( $url ) )
 			) );

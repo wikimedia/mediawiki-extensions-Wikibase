@@ -44,7 +44,7 @@ class HttpAcceptParser {
 
 		// Break up string into pieces (values and q factors)
 		$value_parse = null;
-		preg_match_all( '@([a-z0-9*]+([-+/.][a-z0-9*]+)*)\s*(;\s*q\s*=\s*(1(\.0{0,3})?|0(\.[0-9]{0,3})?)?)?@',
+		preg_match_all( '@([a-z\d*]+([-+/.][a-z\d*]+)*)\s*(;\s*q\s*=\s*(1(\.0{0,3})?|0(\.\d{0,3})?)?)?@',
 			$rawHeader, $value_parse );
 
 		if ( !count( $value_parse[1] ) ) {

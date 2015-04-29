@@ -45,7 +45,7 @@ class MediaWikiNumberUnlocalizer extends BasicNumberUnlocalizer {
 		$canonicalizedNumber = strtr( $canonicalizedNumber, self::$unlocalizerMap );
 
 		// strip any remaining whitespace
-		$canonicalizedNumber = preg_replace( '/\s/u', '', $canonicalizedNumber );
+		$canonicalizedNumber = preg_replace( '/\s+/u', '', $canonicalizedNumber );
 
 		return $canonicalizedNumber;
 	}

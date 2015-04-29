@@ -180,11 +180,13 @@ class RdfVocabulary {
 
 	/**
 	 * Get Wikibase property name for ontology
+	 *
 	 * @param Property $prop
+	 *
 	 * @return string
 	 */
 	public function getDataTypeName( Property $prop ) {
-		return preg_replace( '/[^\w]/', '', ucwords( strtr($prop->getDataTypeId(), "-", " ") ) );
+		return preg_replace( '/\W+/', '', ucwords( strtr( $prop->getDataTypeId(), '-', ' ' ) ) );
 	}
 
 	/**
