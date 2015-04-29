@@ -39,7 +39,8 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 			$key = "Q$i";
 			$id = new ItemId( $key );
 
-			$usages["$key#L"] = new EntityUsage( $id, EntityUsage::LABEL_USAGE );
+			$usages["$key#L.de"] = new EntityUsage( $id, EntityUsage::LABEL_USAGE, 'de' );
+			$usages["$key#L.en"] = new EntityUsage( $id, EntityUsage::LABEL_USAGE, 'en' );
 			$usages["$key#T"] = new EntityUsage( $id, EntityUsage::TITLE_USAGE );
 		}
 
@@ -77,7 +78,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		foreach ( $usages as $key => $usage ) {
 			$row = array(
 				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
-				'eu_aspect' => $usage->getAspect()
+				'eu_aspect' => $usage->getAspectKey()
 			);
 
 			if ( $pageId > 0 ) {
@@ -89,7 +90,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 			}
 
 			if ( is_int( $key ) ) {
-				$key = $usage->getEntityId()->getSerialization() . '#' . $usage->getAspect();
+				$key = $usage->getEntityId()->getSerialization() . '#' . $usage->getAspectKey();
 			}
 
 			$rows[$key] = $row;
