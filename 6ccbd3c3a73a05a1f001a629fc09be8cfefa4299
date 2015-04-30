@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_498b6ce8",
+        "filename": "repo/includes/store/sql/DispatchStats.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-04-30T07:51:13Z",
+      "side": 1,
+      "message": "Will this ever be negative really?",
+      "revId": "6ccbd3c3a73a05a1f001a629fc09be8cfefa4299",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
