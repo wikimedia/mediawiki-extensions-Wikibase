@@ -298,7 +298,7 @@ class WikiPageEntityStore implements EntityStore {
 				'rev_page' => $pageId,
 				'rev_id > ' . intval( $lastRevId )
 				. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
-				'rev_user != ' . intval( $user->getId() )
+				'rev_user != ' . (int)$user->getId()
 				. ' OR rev_user_text != ' . $dbw->addQuotes( $user->getName() ),
 			),
 			__METHOD__,

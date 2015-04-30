@@ -75,6 +75,7 @@ class MockChunkAccess implements ChunkAccess {
 	 * @return int
 	 */
 	public function getRecordId( $rec ) {
-		return intval( $rec );
+		return (int)$rec;
 	}
+
 }

@@ -57,7 +57,7 @@ class PidLock {
 				}
 
 				if ( preg_match( '/\d+/', $process, $matches )
-					&& intval( $pid ) === intval( $matches[0] )
+					&& (int)$pid === (int)$matches[0]
 				) {
 					return true;
 				}

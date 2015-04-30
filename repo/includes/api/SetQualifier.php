@@ -49,7 +49,7 @@ class SetQualifier extends ModifyClaim {
 		$this->validateParameters( $params );
 
 		$entityId = $this->claimGuidParser->parse( $params['claim'] )->getEntityId();
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 

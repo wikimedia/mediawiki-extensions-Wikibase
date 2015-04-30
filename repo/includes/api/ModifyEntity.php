@@ -112,7 +112,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		// Things that use this method assume null means we want a new entity
 		if ( $entityId !== null ) {
-			$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : 0;
+			$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : 0;
 
 			if ( $baseRevisionId === 0 ) {
 				$baseRevisionId = EntityRevisionLookup::LATEST_FROM_MASTER;

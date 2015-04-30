@@ -151,7 +151,7 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 		return $this->selectObjects(
 			null,
 			array(
-				'id >= ' . intval( $start )
+				'id >= ' . (int)$start
 			),
 			array(
 				'LIMIT' => $size,

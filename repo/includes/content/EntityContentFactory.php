@@ -203,7 +203,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	 * @return EntityContent|null
 	 */
 	public function getFromRevision( $revisionId ) {
-		$revision = Revision::newFromId( intval( $revisionId ) );
+		$revision = Revision::newFromId( (int)$revisionId );
 
 		if ( $revision === null ) {
 			return null;

@@ -46,7 +46,7 @@ class SetClaimValue extends ModifyClaim {
 
 		$claimGuid = $params['claim'];
 		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 

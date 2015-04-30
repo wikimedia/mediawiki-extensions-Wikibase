@@ -42,7 +42,7 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 			exit;
 		}
 
-		$batchSize = intval( $this->getOption( 'batch-size', 100 ) );
+		$batchSize = (int)$this->getOption( 'batch-size', 100 );
 		$rebuildAll = $this->getOption( 'rebuild-all', false );
 
 		$reporter = new ObservableMessageReporter();

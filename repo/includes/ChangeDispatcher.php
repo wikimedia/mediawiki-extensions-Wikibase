@@ -212,7 +212,7 @@ class ChangeDispatcher {
 	 */
 	public function dispatchTo( $wikiState ) {
 		$siteID = $wikiState['chd_site'];
-		$after = intval( $wikiState['chd_seen'] );
+		$after = (int)$wikiState['chd_seen'];
 
 		// get relevant changes
 		$this->trace( "Finding pending changes for $siteID" );

@@ -173,7 +173,7 @@ class MergeItems extends ApiBase {
 		$this->resultBuilder->setValue(
 			$name,
 			'lastrevid',
-			intval( $revisionId )
+			(int)$revisionId
 		);
 	}
 
