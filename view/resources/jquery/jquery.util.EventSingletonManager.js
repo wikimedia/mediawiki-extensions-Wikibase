@@ -13,7 +13,7 @@ $.util = $.util || {};
  * event name/event namespace) may not be overwritten later on.
  * @constructor
  */
-var SELF = $.util.EventSingletonManager = function() {
+var SELF = $.util.EventSingletonManager = function UtilEventSingletonManager() {
 	this._registry = [];
 };
 

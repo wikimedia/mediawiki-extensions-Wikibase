@@ -11,7 +11,7 @@
 	 * @param {wikibase.RevisionStore}
 	 * @param {wikibase.datamodel.Entity}
 	 */
-	var SELF = MODULE.DescriptionsChanger = function( api, revisionStore, entity ) {
+	var SELF = MODULE.DescriptionsChanger = function WbEntityChangersDescriptionsChanger( api, revisionStore, entity ) {
 		this._api = api;
 		this._revisionStore = revisionStore;
 		this._entity = entity;

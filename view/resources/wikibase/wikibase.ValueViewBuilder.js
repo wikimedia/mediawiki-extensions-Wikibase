@@ -15,7 +15,7 @@
 	 * @param {util.MessageProvider} messageProvider
 	 * @param {util.ContentLanguages} contentLanguages
 	 */
-	var SELF = wb.ValueViewBuilder = function(
+	var SELF = wb.ValueViewBuilder = function WbValueViewBuilder(
 		expertStore, formatterStore, parserStore, language, messageProvider, contentLanguages
 	) {
 		this._baseOptions = {
