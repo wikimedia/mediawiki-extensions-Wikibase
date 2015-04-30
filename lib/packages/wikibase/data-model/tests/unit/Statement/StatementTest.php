@@ -62,28 +62,6 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testConstructorWithInvalidArguments(
-		$mainSnak,
-		$qualifiers,
-		$references,
-		$guid
-	) {
-		new Statement( $mainSnak, $qualifiers, $references, $guid );
-	}
-
-	public function invalidConstructorArgumentsProvider() {
-		$snak = new PropertyNoValueSnak( 1 );
-
-		return array(
-			array( $snak, null, null, false ),
-			array( $snak, null, null, 1 ),
-		);
-	}
-
-	/**
 	 * @dataProvider instanceProvider
 	 */
 	public function testSetGuid( Statement $statement ) {
@@ -141,11 +119,32 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $statement0->getHash(), $statement1->getHash() );
 	}
 
-	public function testSetInvalidGuidCausesException() {
-		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+	/**
+	 * @dataProvider invalidGuidProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidGuid_constructorThrowsException( $guid ) {
+		new Statement( new PropertyNoValueSnak( 1 ), null, null, $guid );
+	}
 
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$statement->setGuid( 42 );
+	/**
+	 * @dataProvider invalidGuidProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGivenInvalidGuid_setGuidThrowsException( $guid ) {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( $guid );
+	}
+
+	public function invalidGuidProvider() {
+		$snak = new PropertyNoValueSnak( 1 );
+
+		return array(
+			array( false ),
+			array( 1 ),
+			array( $snak ),
+			array( new Statement( $snak ) ),
+		);
 	}
 
 	public function instanceProvider() {
