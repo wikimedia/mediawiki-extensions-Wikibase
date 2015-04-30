@@ -15,9 +15,10 @@
 	"wikibase-entitytermsforlanguagelistview-aliases": "Նաև հայտնի որպես",
 	"wikibase-entitytermsforlanguagelistview-description": "Նկարագրություն",
 	"wikibase-entitytermsforlanguagelistview-language": "Լեզու",
-	"wikibase-label-empty": "Պիտակը (անվանումը) դեռ նշված չէ",
+	"wikibase-label-empty": "Պիտակը (անվանումը) նշված չէ",
 	"wikibase-statements": "Պնդումներ",
 	"wikibase-sitelinks-special": "Այլ կայքեր",
+	"wikibase-aliases-empty": "Այլ անվանումներ (հոմանիշներ) նշված չեն",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|աղբյուր|աղբյուրներ}}",
 	"wikibase-entityselector-more": "Ավելին"
 }

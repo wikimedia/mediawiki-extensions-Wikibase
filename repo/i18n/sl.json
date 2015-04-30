@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Dbc334",
-			"Eleassar"
+			"Eleassar",
+			"Skalcaa"
 		]
 	},
 	"wikibase-desc": "Zbirka strukturiranih podatkov",
@@ -37,7 +38,7 @@
 	"wikibase-description-input-help-message": "Vnesite kratek opis v jeziku $1.",
 	"wikibase-statements": "Izjave",
 	"wikibase-terms": "V drugih jezikih",
-	"wikibase-sitelinks-empty": "Na predmet se ne povezuje nobena stran.",
+	"wikibase-sitelinks-empty": "Na ta predmet se ne povezuje nobena stran.",
 	"wikibase-sitelinks-input-help-message": "Določite povezavo na stran, povezano s tem predmetom.",
 	"wikibase-sitelinks-special": "Druge strani",
 	"wikibase-remove": "odstrani",

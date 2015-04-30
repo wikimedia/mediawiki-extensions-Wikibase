@@ -353,5 +353,6 @@
 	"right-item-redirect": "Item-doorverwijzingen aanmaken",
 	"right-property-term": "Eigenschapswaarden wijzigen (labels, beschrijvingen, aliassen)",
 	"right-property-create": "Eigenschappen aanmaken",
+	"action-item-merge": "items samenvoegen",
 	"action-property-create": "eigenschappen aan te maken"
 }

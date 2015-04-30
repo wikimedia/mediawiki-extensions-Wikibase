@@ -3,17 +3,20 @@
 		"authors": [
 			"Sahan.ssw",
 			"පසිඳු කාවින්ද",
-			"Roonyh"
+			"Roonyh",
+			"හරිත"
 		]
 	},
 	"wikibase-client-desc": "විකිපාදක දිගුව සඳහා සේවාදායකයා",
+	"tooltip-t-wikibase": "සම්බන්ධිත දත්ත ගබඩා උපාංගය වෙත සබැඳිය",
 	"wikibase-comment-update": "{{WBREPONAME}} අයිතමය වෙනස් කරන ලදී.",
 	"wikibase-comment-sitelink-add": "භාෂා සබැඳිය එක් කරන ලදී: $1",
 	"wikibase-comment-sitelink-change": "භාෂා සබැඳිය $1 ගෙන් $2 වෙත වෙනස් වෙන ලදී",
 	"wikibase-comment-sitelink-remove": "භාෂා සබැඳිය ඉවත් කරන ලදී: $1",
+	"wikibase-dataitem": "{{WBREPONAME}} උපාංගය",
 	"wikibase-editlinks": "සබැඳි සංස්කරණය කරන්න",
 	"wikibase-editlinkstitle": "අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න",
-	"wikibase-rc-hide-wikidata": "$1 විකිදත්ත",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "සඟවන්න",
 	"wikibase-rc-show-wikidata-pref": "මෑත වෙනස්කම්වල විකිදත්ත සංස්කරණ පෙන්වන්න",
 	"wikibase-otherprojects": "වෙනත් ව්‍යාපෘති"

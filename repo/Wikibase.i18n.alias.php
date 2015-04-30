@@ -52,6 +52,7 @@ $specialPageAliases['ar'] = array(
 	'SetLabelDescriptionAliases' => array( 'ضبط_كنى_وصف_العلامات' ),
 	'SetSiteLink' => array( 'ضبط_وصلة_الموقع' ),
 	'MergeItems' => array( 'دمج_المدخلات' ),
+	'RedirectEntity' => array( 'كينونة_تحويل', 'مدخلة_تحويل' ),
 	'EntitiesWithoutLabel' => array( 'الكيانات_بدون_علامة' ),
 	'EntitiesWithoutDescription' => array( 'الكيانات_بدون_وصف' ),
 	'ItemsWithoutSitelinks' => array( 'المدخلات_بدون_وصلات_موقع' ),

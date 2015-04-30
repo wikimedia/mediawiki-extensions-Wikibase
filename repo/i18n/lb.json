@@ -252,6 +252,7 @@
 	"content-model-wikibase-query": "Wikibase-Ufro",
 	"right-item-merge": "Elementer zesummeleeën",
 	"right-property-create": "Eegeschaften uleeën",
+	"action-item-merge": "Elementer zesummeleeën",
 	"action-property-create": "Eegeschaften uleeën",
 	"apihelp-wbmergeitems-example-1": "Fusionéiert Date vun Q42 an Q222",
 	"apihelp-wbmergeitems-example-2": "Fusionéiert Date vun Q555 an Q3",

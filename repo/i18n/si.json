@@ -6,7 +6,8 @@
 			"පසිඳු කාවින්ද",
 			"Susith Chandira Gts",
 			"Sandaru",
-			"Macofe"
+			"Macofe",
+			"හරිත"
 		]
 	},
 	"wikibase-desc": "ව්‍යූහගත දත්ත කෝෂ්ඨාගාරය",
@@ -30,6 +31,7 @@
 	"wikibase-statements": "ප්‍රකාශන",
 	"wikibase-sitelinks-empty": "මෙම අයිතමය සඳහා අඩවි-සබැඳියක් තවමත් නොමැත.",
 	"wikibase-sitelinks-input-help-message": "මෙම අයිතමයට සම්බන්ධ පිටුවකට සබැඳියක් සකසන්න.",
+	"wikibase-sitelinks-special": "වෙනත් අඩවි",
 	"wikibase-remove": "ඉවත් කරන්න",
 	"wikibase-undo-title": "\"$1\" වෙත සංස්කරණය නිෂ්ප්‍රභ කරමින්",
 	"wikibase-partial-undo": "මෙම සංස්කරණය අඩවශයෙන් නොකරන ලද කල හැක.",
