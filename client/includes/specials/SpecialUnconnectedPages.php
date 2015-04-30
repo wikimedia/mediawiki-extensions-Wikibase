@@ -293,7 +293,7 @@ class SpecialUnconnectedPages extends SpecialPage {
 		}
 		if ( $title !== null ) {
 			$conds[] = 'page_title >= ' . $dbr->addQuotes( $title->getDBkey() );
-			$conds[] = 'page_namespace = ' . $title->getNamespace();
+			$conds[] = 'page_namespace = ' . (int)$title->getNamespace();
 		}
 		$conds[] = 'page_namespace IN (' . implode( ',', $checker->getWikibaseNamespaces() ) . ')';
 

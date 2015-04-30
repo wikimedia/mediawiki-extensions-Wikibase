@@ -288,15 +288,13 @@ class WikiPageEntityStore implements EntityStore {
 			return false;
 		}
 
-		$pageId = intval( $revision->getPage() );
-
 		// Scan through the revision table
 		$dbw = wfGetDB( DB_MASTER );
 		$res = $dbw->select( 'revision',
 			'rev_user',
 			array(
-				'rev_page' => $pageId,
-				'rev_id > ' . intval( $lastRevId )
+				'rev_page' => $revision->getPage(),
+				'rev_id > ' . (int)$lastRevId
 				. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
 				'rev_user != ' . (int)$user->getId()
 				. ' OR rev_user_text != ' . $dbw->addQuotes( $user->getName() ),

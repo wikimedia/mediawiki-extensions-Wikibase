@@ -155,7 +155,6 @@ class YearMonthTimeParser extends StringValueParser {
 	 * @return bool can the given value be a month?
 	 */
 	private function canBeMonth( $value ) {
-		$value = intval( $value );
 		return $value >= 0 && $value <= 12;
 	}
 

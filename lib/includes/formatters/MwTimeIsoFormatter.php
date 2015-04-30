@@ -190,14 +190,11 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Unable to parse time value.' );
 		}
 
-		// The year can easily exceed the 32 bit integer limit
-		$year  = floatval( $matches[1] );
-		$month =   intval( $matches[2] );
-		$day   =   intval( $matches[3] );
+		list( , $year, $month, $day ) = $matches;
 
-		if (   empty( $year  ) && $precision <  TimeValue::PRECISION_YEAR
-			|| empty( $month ) && $precision >= TimeValue::PRECISION_MONTH
-			|| empty( $day   ) && $precision >= TimeValue::PRECISION_DAY
+		if ( $year == 0 && $precision < TimeValue::PRECISION_YEAR
+			|| $month == 0 && $precision >= TimeValue::PRECISION_MONTH
+			|| $day == 0 && $precision >= TimeValue::PRECISION_DAY
 		) {
 			throw new InvalidArgumentException( 'Time value insufficient for precision.' );
 		}

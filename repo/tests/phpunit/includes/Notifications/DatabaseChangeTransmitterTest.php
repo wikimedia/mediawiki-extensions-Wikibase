@@ -37,7 +37,7 @@ class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 
 		$count = $db->selectField( $tableName, 'count(*)', array(), __METHOD__ );
 
-		$this->assertEquals( 1, intval( $count ), 'row count' );
+		$this->assertEquals( 1, $count, 'row count' );
 	}
 
 }
