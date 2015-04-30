@@ -14,7 +14,7 @@ matrix:
     - env: DBTYPE=mysql LANG=en MW=master WB=repo
       php: 5.6
     - env: DBTYPE=sqlite LANG=en MW=master WB=both
-      php: hhvm-nightly
+      php: hhvm
 
 before_script:
     - bash ./build/travis/install.sh
