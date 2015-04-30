@@ -15,6 +15,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\TypedSnak;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @licence GNU GPL v2+
@@ -54,6 +55,13 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newClaimsSerializer(),
 			new Claims()
+		);
+	}
+
+	public function testNewStatementListSerializer() {
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newStatementListSerializer(),
+			new StatementList()
 		);
 	}
 

@@ -6,7 +6,6 @@ use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 
 /**
@@ -26,7 +25,7 @@ class ItemSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	private $claimsSerializer;
+	private $statementListSerializer;
 
 	/**
 	 * @var Serializer
@@ -40,13 +39,18 @@ class ItemSerializer implements DispatchableSerializer {
 
 	/**
 	 * @param FingerprintSerializer $fingerprintSerializer
-	 * @param Serializer $claimsSerializer
+	 * @param Serializer $statementListSerializer
 	 * @param Serializer $siteLinkSerializer
 	 * @param bool $useObjectsForMaps
 	 */
-	public function __construct( FingerprintSerializer $fingerprintSerializer, Serializer $claimsSerializer, Serializer $siteLinkSerializer, $useObjectsForMaps ) {
+	public function __construct(
+		FingerprintSerializer $fingerprintSerializer,
+		Serializer $statementListSerializer,
+		Serializer $siteLinkSerializer,
+		$useObjectsForMaps
+	) {
 		$this->fingerprintSerializer = $fingerprintSerializer;
-		$this->claimsSerializer = $claimsSerializer;
+		$this->statementListSerializer = $statementListSerializer;
 		$this->siteLinkSerializer = $siteLinkSerializer;
 		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
@@ -87,16 +91,14 @@ class ItemSerializer implements DispatchableSerializer {
 		);
 
 		$this->fingerprintSerializer->addBasicsToSerialization( $item, $serialization );
-		$this->addClaimsToSerialization( $item, $serialization );
+		$this->addStatementListToSerialization( $item, $serialization );
 		$this->addSiteLinksToSerialization( $item, $serialization );
 
 		return $serialization;
 	}
 
-	private function addClaimsToSerialization( Item $item, array &$serialization ) {
-		$claims = new Claims( $item->getClaims() );
-
-		$serialization['claims'] = $this->claimsSerializer->serialize( $claims );
+	private function addStatementListToSerialization( Item $item, array &$serialization ) {
+		$serialization['claims'] = $this->statementListSerializer->serialize( $item->getStatements() );
 	}
 
 	private function addSiteLinksToSerialization( Item $item, array &$serialization ) {

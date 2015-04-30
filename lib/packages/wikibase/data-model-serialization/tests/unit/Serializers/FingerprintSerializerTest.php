@@ -3,12 +3,12 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use stdClass;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroupFallback;
 use Wikibase\DataModel\Term\TermFallback;
 
@@ -22,10 +22,10 @@ use Wikibase\DataModel\Term\TermFallback;
 class FingerprintSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
-		$claimsSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$claimsSerializerMock->expects( $this->any() )
+		$statementListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( new Claims() ) )
+			->with( $this->equalTo( new StatementList() ) )
 			->will( $this->returnValue( array() ) );
 
 		$siteLinkSerializerMock = $this->getMock( '\Serializers\Serializer' );
@@ -34,7 +34,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 
 		$entitySerializer = new FingerprintSerializer( false );
 
-		return new ItemSerializer( $entitySerializer, $claimsSerializerMock, $siteLinkSerializerMock, false );
+		return new ItemSerializer( $entitySerializer, $statementListSerializerMock, $siteLinkSerializerMock, false );
 	}
 
 	public function serializableProvider() {
