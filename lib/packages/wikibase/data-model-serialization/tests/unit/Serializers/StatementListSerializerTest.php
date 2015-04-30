@@ -62,7 +62,7 @@ class StatementListSerializerTest extends SerializerBaseTest {
 				array()
 			),
 			array(
-				new Statement( new PropertyNoValueSnak( 42 ) )
+				new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) )
 			),
 		);
 	}
