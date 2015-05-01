@@ -608,11 +608,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param MessageParameterFormatter $formatter
+	 * @param ValueFormatter $formatter
 	 *
 	 * @return ExceptionLocalizer[]
 	 */
-	private function getExceptionLocalizers( MessageParameterFormatter $formatter ) {
+	private function getExceptionLocalizers( ValueFormatter $formatter ) {
 		return array(
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
