@@ -169,11 +169,11 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return bool
 	 */
-	protected function entityExists( Entity $entity ) {
+	protected function entityExists( EntityDocument $entity ) {
 		$entityId = $entity->getId();
 		$title = $entityId === null ? null : $this->titleLookup->getTitleForId( $entityId );
 		return ( $title !== null && $title->exists() );
