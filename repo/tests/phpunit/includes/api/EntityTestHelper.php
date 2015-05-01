@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Api;
 
-use DataValues\StringValue;
 use OutOfBoundsException;
 
 /**
