@@ -76,12 +76,14 @@ class ClaimDeserializer implements Deserializer {
 		try {
 			return $this->fromLegacySerialization();
 		}
-		catch ( DeserializationException $ex ) {}
+		catch ( DeserializationException $ex ) {
+		}
 
 		try {
 			return $this->fromCurrentSerialization();
 		}
-		catch ( DeserializationException $ex ) {}
+		catch ( DeserializationException $ex ) {
+		}
 
 		throw new DeserializationException( 'The provided serialization is not a valid claim' );
 	}
