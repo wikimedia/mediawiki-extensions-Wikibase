@@ -2,8 +2,6 @@
 
 namespace Wikimedia\Purtle;
 
-use InvalidArgumentException;
-
 /**
  * Base class for RdfWriter implementations that output an N3 dialect.
  *
@@ -36,21 +34,10 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 	}
 
 	protected function writeShorthand( $shorthand ) {
-// 		if ( $shorthand === null || $shorthand === '' ) {
-// 			throw new InvalidArgumentException( '$shorthand must not be empty' );
-// 		}
-
 		$this->write( $shorthand );
 	}
 
 	protected function writeIRI( $iri, $trustIRI = false ) {
-// 		if ( $iri === null || $iri === '' ) {
-// 			throw new InvalidArgumentException( '$iri must not be empty' );
-// 		}
-
-// 		if ( $iri[0] === '_' || $iri[0] === ':' || $iri[0] === '/' || $iri[0] === '#' ) {
-// 			throw new InvalidArgumentException( '$iri must be an absolute iri: ' . $iri );
-// 		}
 		if ( !$trustIRI ) {
 			$iri = $this->quoter->escapeIRI( $iri );
 		}
@@ -58,14 +45,6 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 	}
 
 	protected function writeQName( $base, $local ) {
-// 		if ( $base === null ) {
-// 			throw new InvalidArgumentException( '$base must not be null' );
-// 		}
-
-// 		if ( $local === null || $local === '' ) {
-// 			throw new InvalidArgumentException( '$local must not be empty' );
-// 		}
-
 		$this->write( "$base:$local" );
 	}
 
