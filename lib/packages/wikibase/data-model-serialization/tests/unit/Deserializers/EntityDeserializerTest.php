@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\EntityDeserializer
@@ -27,6 +28,12 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'Q42' ) )
 			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
+
+		$fingerprintDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$fingerprintDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->will( $this->returnValue( new Fingerprint() ) );
+		
 
 		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setGuid( 'test' );
@@ -50,7 +57,7 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 
 		$entityDeserializerMock = $this->getMockForAbstractClass(
 			'\Wikibase\DataModel\Deserializers\EntityDeserializer',
-			array( 'item', $entityIdDeserializerMock, $claimsDeserializerMock )
+			array( 'item', $entityIdDeserializerMock, $fingerprintDeserializerMock, $claimsDeserializerMock )
 		);
 		$entityDeserializerMock->expects( $this->any() )
 			->method( 'getPartiallyDeserialized' )
@@ -105,78 +112,6 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$entity = new Item();
-		$entity->setLabels( array(
-			'en' => 'Nyan Cat',
-			'fr' => 'Nyan Cat'
-		) );
-		$provider[] = array(
-			$entity,
-			array(
-				'type' => 'item',
-				'labels' => array(
-					'en' => array(
-						'language' => 'en',
-						'value' => 'Nyan Cat'
-					),
-					'fr' => array(
-						'language' => 'fr',
-						'value' => 'Nyan Cat'
-					)
-				)
-			)
-		);
-
-		$entity = new Item();
-		$entity->setDescriptions( array(
-			'en' => 'A Nyan Cat',
-			'fr' => 'A Nyan Cat'
-		) );
-		$provider[] = array(
-			$entity,
-			array(
-				'type' => 'item',
-				'descriptions' => array(
-					'en' => array(
-						'language' => 'en',
-						'value' => 'A Nyan Cat'
-					),
-					'fr' => array(
-						'language' => 'fr',
-						'value' => 'A Nyan Cat'
-					)
-				)
-			)
-		);
-
-		$entity = new Item();
-		$entity->setAliases( 'en', array( 'Cat', 'My cat' ) );
-		$entity->setAliases( 'fr', array( 'Cat' ) );
-		$provider[] = array(
-			$entity,
-			array(
-				'type' => 'item',
-				'aliases' => array(
-					'en' => array(
-						array(
-							'language' => 'en',
-							'value' => 'Cat'
-						),
-						array(
-							'language' => 'en',
-							'value' => 'My cat'
-						)
-					),
-					'fr' => array(
-						array(
-							'language' => 'fr',
-							'value' => 'Cat'
-						)
-					)
-				)
-			)
-		);
-
-		$entity = new Item();
 		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
 		$provider[] = array(
 			$entity,
@@ -198,173 +133,6 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 		);
 
 		return $provider;
-	}
-
-	/**
-	 * @dataProvider invalidDeserializationProvider
-	 */
-	public function testInvalidSerialization( $serialization ) {
-		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
-		$this->buildDeserializer()->deserialize( $serialization );
-	}
-
-	public function invalidDeserializationProvider() {
-		return array(
-			'label with integer language code' => array(
-				array(
-					'type' => 'item',
-					'labels' => array(
-						8 => array(
-							'language' => 8,
-							'value' => 'Cat',
-						),
-					),
-				),
-			),
-			'label without array key for language code' => array(
-				array(
-					'type' => 'item',
-					'labels' => array(
-						array(
-							'language' => 'en',
-							'value' => 'Cat',
-						),
-					),
-				),
-			),
-			'label with integer value' => array(
-				array(
-					'type' => 'item',
-					'labels' => array(
-						'en' => array(
-							'language' => 'en',
-							'value' => 8,
-						),
-					),
-				),
-			),
-			'alias with interger language code' => array(
-				array(
-					'type' => 'item',
-					'aliases' => array(
-						8 =>
-							array(
-								array(
-									'language' =>  8,
-									'value' => 'Cat',
-								),
-							),
-					),
-				)
-			),
-			'alias without array key for language code' => array(
-				array(
-					'type' => 'item',
-					'aliases' => array(
-						array(
-							array(
-								'language' =>  'en',
-								'value' => 'Cat',
-							),
-						),
-					),
-				)
-			),
-			'alias as a string only' => array(
-				array(
-					'type' => 'item',
-					'aliases' => array(
-						'en' => 'Cat'
-					)
-				)
-			),
-			'label fallback language term' => array(
-				array(
-					'type' => 'item',
-					'labels' => array(
-						'en' => array(
-							'language' => 'en-cat',
-							'value' => 'mew',
-						),
-					),
-				),
-			),
-			'label with integer fallback language code' => array(
-				array(
-					'type' => 'item',
-					'labels' => array(
-						'en' => array(
-							'language' => 8,
-							'value' => 'Cat',
-						),
-					),
-				),
-			),
-			'label language term with source' => array(
-				array(
-					'type' => 'item',
-					'labels' => array(
-						'en-cat' => array(
-							'language' => 'en-cat',
-							'value' => 'mew',
-							'source' => 'en',
-						),
-					),
-				),
-			),
-			'description fallback language term' => array(
-				array(
-					'type' => 'item',
-					'descriptions' => array(
-						'en' => array(
-							'language' => 'en-cat',
-							'value' => 'mew',
-						),
-					),
-				),
-			),
-			'description language term with source' => array(
-				array(
-					'type' => 'item',
-					'descriptions' => array(
-						'en-cat' => array(
-							'language' => 'en-cat',
-							'value' => 'mew',
-							'source' => 'en',
-						),
-					),
-				),
-			),
-			'alias fallback language term' => array(
-				array(
-					'type' => 'item',
-					'aliases' => array(
-						'en' =>
-							array(
-								array(
-									'language' =>  'en-cat',
-									'value' => 'mew',
-								),
-							),
-					),
-				)
-			),
-			'alias language term with source' => array(
-				array(
-					'type' => 'item',
-					'aliases' => array(
-						'en-cat' =>
-							array(
-								array(
-									'language' =>  'en-cat',
-									'value' => 'mew',
-									'source' => 'en',
-								),
-							),
-					),
-				)
-			),
-		);
 	}
 
 }

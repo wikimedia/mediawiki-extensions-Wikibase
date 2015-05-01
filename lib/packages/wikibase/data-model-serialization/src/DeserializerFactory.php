@@ -8,6 +8,7 @@ use Deserializers\DispatchingDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
+use Wikibase\DataModel\Deserializers\FingerprintDeserializer;
 use Wikibase\DataModel\Deserializers\ItemDeserializer;
 use Wikibase\DataModel\Deserializers\PropertyDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
@@ -53,8 +54,8 @@ class DeserializerFactory {
 	 */
 	public function newEntityDeserializer() {
 		return new DispatchingDeserializer( array(
-			new ItemDeserializer( $this->newEntityIdDeserializer(), $this->newClaimsDeserializer(), $this->newSiteLinkDeserializer() ),
-			new PropertyDeserializer( $this->newEntityIdDeserializer(), $this->newClaimsDeserializer() )
+			new ItemDeserializer( $this->newEntityIdDeserializer(), $this->newFingerprintDeserializer(), $this->newClaimsDeserializer(), $this->newSiteLinkDeserializer() ),
+			new PropertyDeserializer( $this->newEntityIdDeserializer(), $this->newFingerprintDeserializer(), $this->newClaimsDeserializer() )
 		) );
 	}
 
@@ -132,6 +133,15 @@ class DeserializerFactory {
 	 */
 	public function newEntityIdDeserializer() {
 		return new EntityIdDeserializer( $this->entityIdParser );
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize Fingerprint objects.
+	 *
+	 * @return Deserializer
+	 */
+	public function newFingerprintDeserializer() {
+		return new FingerprintDeserializer();
 	}
 
 }

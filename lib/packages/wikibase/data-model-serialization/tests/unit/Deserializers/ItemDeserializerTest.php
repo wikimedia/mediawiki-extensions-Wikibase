@@ -5,6 +5,7 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 use Wikibase\DataModel\Deserializers\ItemDeserializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\ItemDeserializer
@@ -16,6 +17,12 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+
+		$fingerprintDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$fingerprintDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->will( $this->returnValue( new Fingerprint() ) );
+
 		$claimsDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 
 		$siteLinkDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
@@ -29,7 +36,7 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( new SiteLink( 'enwiki', 'Nyan Cat' ) ) );
 
-		return new ItemDeserializer( $entityIdDeserializerMock, $claimsDeserializerMock, $siteLinkDeserializerMock );
+		return new ItemDeserializer( $entityIdDeserializerMock, $fingerprintDeserializerMock, $claimsDeserializerMock, $siteLinkDeserializerMock );
 	}
 
 	public function deserializableProvider() {
