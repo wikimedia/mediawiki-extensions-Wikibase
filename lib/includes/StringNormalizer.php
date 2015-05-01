@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use UtfNormal;
+use UtfNormal\Validator;
 
 /**
  * StringNormalizer provides several methods for normalizing strings.
@@ -105,7 +105,7 @@ class StringNormalizer {
 	public function cleanupToNFC( $inputString ) {
 		$cleaned = $inputString;
 		$cleaned = $this->trimBadChars( $cleaned );
-		$cleaned = UtfNormal::cleanUp( $cleaned );
+		$cleaned = Validator::cleanUp( $cleaned );
 		return $cleaned;
 	}
 
