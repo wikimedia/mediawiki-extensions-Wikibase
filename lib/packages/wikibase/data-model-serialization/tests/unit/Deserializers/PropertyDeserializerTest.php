@@ -3,11 +3,11 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Deserializers\PropertyDeserializer;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\PropertyDeserializer
@@ -20,11 +20,11 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 	public function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setGuid( 'test' );
+		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement->setGuid( 'test' );
 
-		$claimsDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
-		$claimsDeserializerMock->expects( $this->any() )
+		$statementListDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$statementListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(
 				'P42' => array(
@@ -38,10 +38,10 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 					)
 				)
 			) ) )
-			->will( $this->returnValue( new Claims( array( $claim ) ) ) );
+			->will( $this->returnValue( new StatementList( array( $statement ) ) ) );
 
 
-		return new PropertyDeserializer( $entityIdDeserializerMock, $claimsDeserializerMock );
+		return new PropertyDeserializer( $entityIdDeserializerMock, $statementListDeserializerMock );
 	}
 
 	public function deserializableProvider() {

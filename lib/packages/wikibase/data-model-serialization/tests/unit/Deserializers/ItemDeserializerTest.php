@@ -16,7 +16,7 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
-		$claimsDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$statementListDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 
 		$siteLinkDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 
@@ -29,7 +29,7 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( new SiteLink( 'enwiki', 'Nyan Cat' ) ) );
 
-		return new ItemDeserializer( $entityIdDeserializerMock, $claimsDeserializerMock, $siteLinkDeserializerMock );
+		return new ItemDeserializer( $entityIdDeserializerMock, $statementListDeserializerMock, $siteLinkDeserializerMock );
 	}
 
 	public function deserializableProvider() {

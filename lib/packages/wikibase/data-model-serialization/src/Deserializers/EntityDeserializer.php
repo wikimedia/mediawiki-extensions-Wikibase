@@ -7,7 +7,6 @@ use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\TypedObjectDeserializer;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * Package private
@@ -25,18 +24,18 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 	/**
 	 * @var Deserializer
 	 */
-	private $claimsDeserializer;
+	private $statementListDeserializer;
 
 	/**
 	 * @param string $entityType
 	 * @param Deserializer $entityIdDeserializer
-	 * @param Deserializer $claimsDeserializer
+	 * @param Deserializer $statementListDeserializer
 	 */
-	public function __construct( $entityType, Deserializer $entityIdDeserializer, Deserializer $claimsDeserializer ) {
+	public function __construct( $entityType, Deserializer $entityIdDeserializer, Deserializer $statementListDeserializer ) {
 		parent::__construct( $entityType, 'type' );
 
 		$this->entityIdDeserializer = $entityIdDeserializer;
-		$this->claimsDeserializer = $claimsDeserializer;
+		$this->statementListDeserializer = $statementListDeserializer;
 	}
 
 	/**
@@ -66,7 +65,7 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 		$this->setLabelsFromSerialization( $serialization, $entity );
 		$this->setDescriptionsFromSerialization( $serialization, $entity );
 		$this->setAliasesFromSerialization( $serialization, $entity );
-		$this->setClaimsFromSerialization( $serialization, $entity );
+		$this->setStatementListFromSerialization( $serialization, $entity );
 
 		return $entity;
 	}
@@ -156,13 +155,12 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 		$this->assertRequestedAndActualLanguageMatch( $serialization, $requestedLanguage );
 	}
 
-	private function setClaimsFromSerialization( array $serialization, Entity $entity ) {
+	private function setStatementListFromSerialization( array $serialization, Entity $entity ) {
 		if ( !array_key_exists( 'claims', $serialization ) || !method_exists( $entity, 'setStatements' ) ) {
 			return;
 		}
 
-		$claims = $this->claimsDeserializer->deserialize( $serialization['claims'] );
-		$statements = new StatementList( iterator_to_array( $claims ) );
+		$statements = $this->statementListDeserializer->deserialize( $serialization['claims'] );
 		$entity->setStatements( $statements );
 	}
 

@@ -15,6 +15,7 @@ use Wikibase\DataModel\Deserializers\ReferenceListDeserializer;
 use Wikibase\DataModel\Deserializers\SiteLinkDeserializer;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnakListDeserializer;
+use Wikibase\DataModel\Deserializers\StatementListDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
@@ -53,8 +54,8 @@ class DeserializerFactory {
 	 */
 	public function newEntityDeserializer() {
 		return new DispatchingDeserializer( array(
-			new ItemDeserializer( $this->newEntityIdDeserializer(), $this->newClaimsDeserializer(), $this->newSiteLinkDeserializer() ),
-			new PropertyDeserializer( $this->newEntityIdDeserializer(), $this->newClaimsDeserializer() )
+			new ItemDeserializer( $this->newEntityIdDeserializer(), $this->newStatementListDeserializer(), $this->newSiteLinkDeserializer() ),
+			new PropertyDeserializer( $this->newEntityIdDeserializer(), $this->newStatementListDeserializer() )
 		) );
 	}
 
@@ -74,6 +75,15 @@ class DeserializerFactory {
 	 */
 	public function newClaimsDeserializer() {
 		return new ClaimsDeserializer( $this->newClaimDeserializer() );
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize StatementList objects.
+	 *
+	 * @return Deserializer
+	 */
+	public function newStatementListDeserializer() {
+		return new StatementListDeserializer( $this->newClaimDeserializer() );
 	}
 
 	/**
