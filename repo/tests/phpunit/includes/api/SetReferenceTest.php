@@ -370,10 +370,13 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
 		if ( $claimGuid === null ) {
-			$claims = $item->getClaims();
+			/**
+			 * @var $item Item
+			 */
+			$statements = $item->getStatements()->toArray();
 
 			/* @var Claim $claim */
-			$claim = reset( $claims );
+			$claim = reset( $statements );
 			$claimGuid = $claim->getGuid();
 		}
 
