@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Test\Store;
 
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
@@ -141,6 +142,10 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 			->method( 'loadRevisionInformation' )
 			->will( $this->returnCallback( function( array $entityIds, $mode ) {
 				$ret = array();
+
+				/**
+				 * @var EntityId $entityId
+				 */
 				foreach ( $entityIds as $entityId ) {
 					$ret[$entityId->getSerialization()] = $mode . ':' . $entityId->getSerialization();
 				}
