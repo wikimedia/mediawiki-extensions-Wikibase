@@ -5,9 +5,7 @@ namespace Wikibase\Client\Tests\Store\Sql;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
@@ -197,11 +195,6 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 		$db = wfGetDB( DB_MASTER );
 		$db->delete( 'wbc_entity_usage', '*' );
 	}
-
-	private static $entityTypeMap = array(
-		'Q' => Item::ENTITY_TYPE,
-		'P' => Property::ENTITY_TYPE,
-	);
 
 	private function putEntityUsage( array $entries ) {
 		$db = wfGetDB( DB_MASTER );
