@@ -11,7 +11,6 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * Class representing a Wikibase statement.
@@ -47,7 +46,7 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	/**
 	 * The property value snaks making up the qualifiers for this statement.
 	 *
-	 * @var Snaks
+	 * @var SnakList
 	 */
 	private $qualifiers;
 
@@ -65,13 +64,13 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	 * @since 2.0
 	 *
 	 * @param Snak $mainSnak
-	 * @param Snaks|null $qualifiers
+	 * @param SnakList|null $qualifiers
 	 * @param ReferenceList|null $references
 	 * @param string|null $guid
 	 */
 	public function __construct(
 		Snak $mainSnak,
-		Snaks $qualifiers = null,
+		SnakList $qualifiers = null,
 		ReferenceList $references = null,
 		$guid = null
 	) {
@@ -136,7 +135,7 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	 *
 	 * @since 0.1
 	 *
-	 * @return Snaks
+	 * @return SnakList
 	 */
 	public function getQualifiers() {
 		return $this->qualifiers;
@@ -147,9 +146,9 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Snaks $propertySnaks
+	 * @param SnakList $propertySnaks
 	 */
-	public function setQualifiers( Snaks $propertySnaks ) {
+	public function setQualifiers( SnakList $propertySnaks ) {
 		$this->qualifiers = $propertySnaks;
 	}
 

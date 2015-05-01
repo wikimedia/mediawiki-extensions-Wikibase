@@ -13,7 +13,6 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * Ordered and non-unique collection of Statement objects.
@@ -92,7 +91,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 	/**
 	 * @param Snak $mainSnak
-	 * @param Snak[]|Snaks|null $qualifiers
+	 * @param Snak[]|SnakList|null $qualifiers
 	 * @param Reference[]|ReferenceList|null $references
 	 * @param string|null $guid
 	 */

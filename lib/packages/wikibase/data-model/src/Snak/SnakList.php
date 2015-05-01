@@ -6,8 +6,8 @@ use Wikibase\DataModel\HashArray;
 use Wikibase\DataModel\Internal\MapValueHasher;
 
 /**
- * Implementation of the Snaks interface.
- * @see Snaks
+ * List of Snak objects.
+ * Indexes the snaks by hash and ensures no more the one snak with the same hash are in the list.
  *
  * @since 0.1
  *
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Adam Shorland
  */
-class SnakList extends HashArray implements Snaks {
+class SnakList extends HashArray {
 
 	/**
 	 * @see GenericArrayObject::getObjectType
