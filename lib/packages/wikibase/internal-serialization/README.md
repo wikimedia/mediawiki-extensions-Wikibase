@@ -109,6 +109,7 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 ### 1.4 (dev)
 
 * Added PHPMD and PHPCS support
+* Added support for showing the component version when loaded via MediaWiki
 
 ### 1.3.1 (2015-01-06)
 
