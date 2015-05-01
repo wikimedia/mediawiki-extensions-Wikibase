@@ -92,7 +92,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenLinks_itemHasSiteLinks() {
 		$item = new Item();
 
-		$item->getSiteLinkList()->addNewSiteLink( 'foo', 'bar' ) ;
+		$item->getSiteLinkList()->addNewSiteLink( 'foo', 'bar' );
 		$item->getSiteLinkList()->addNewSiteLink( 'baz', 'bah' );
 
 		$this->assertDeserialization(
