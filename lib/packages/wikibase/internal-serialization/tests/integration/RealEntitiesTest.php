@@ -83,7 +83,10 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 		$expectedEntity = TestFactoryBuilder::newCurrentDeserializerFactory()
 			->newEntityDeserializer()->deserialize( $serialization );
 
-		$this->assertTrue( $entity->equals( $expectedEntity ) );
+		$this->assertTrue(
+			$entity->equals( $expectedEntity ),
+			$fileName . ' should be deserialized into the same entity by both deserializers'
+		);
 	}
 
 	public function currentEntitySerializationProvider() {
