@@ -5,7 +5,8 @@ namespace Wikibase\Lib\Changes;
 use InvalidArgumentException;
 use MWException;
 use Wikibase\ChangesTable;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Diff\EntityDiffer;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
@@ -36,17 +37,26 @@ class EntityChangeFactory {
 	private $entityFactory;
 
 	/**
+	 * @var EntityDiffer
+	 */
+	private $entityDiffer;
+
+	/**
 	 * @param ChangesTable $changesTable
 	 * @param EntityFactory $entityFactory
+	 * @param EntityDiffer $entityDiffer
 	 * @param array $changeClasses maps entity type IDs to subclasses of EntityChange.
 	 * Entity types not mapped explicitly are assumed to use EntityChange itself.
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( ChangesTable $changesTable, EntityFactory $entityFactory, array $changeClasses = array() ) {
+	public function __construct( ChangesTable $changesTable, EntityFactory $entityFactory,
+		EntityDiffer $entityDiffer, array $changeClasses = array() ) {
+
 		$this->changeClasses = $changeClasses;
 		$this->changesTable = $changesTable;
 		$this->entityFactory = $entityFactory;
+		$this->entityDiffer = $entityDiffer;
 	}
 
 	/**
@@ -97,14 +107,14 @@ class EntityChangeFactory {
 	 * @since 0.5
 	 *
 	 * @param string      $action The action name
-	 * @param Entity|null $oldEntity
-	 * @param Entity|null $newEntity
+	 * @param EntityDocument|null $oldEntity
+	 * @param EntityDocument|null $newEntity
 	 * @param array|null  $fields additional fields to set
 	 *
 	 * @return EntityChange
 	 * @throws MWException
 	 */
-	public function newFromUpdate( $action, Entity $oldEntity = null, Entity $newEntity = null, array $fields = null ) {
+	public function newFromUpdate( $action, EntityDocument $oldEntity = null, EntityDocument $newEntity = null, array $fields = null ) {
 		if ( $oldEntity === null && $newEntity === null ) {
 			throw new MWException( 'Either $oldEntity or $newEntity must be give.' );
 		}
@@ -121,10 +131,12 @@ class EntityChangeFactory {
 			$theEntity = $newEntity;
 		}
 
+
+		$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
+
 		/**
 		 * @var EntityChange $instance
 		 */
-		$diff = $oldEntity->getDiff( $newEntity );
 		$instance = self::newForEntity( $action, $theEntity->getId(), $fields );
 		$instance->setDiff( $diff );
 
