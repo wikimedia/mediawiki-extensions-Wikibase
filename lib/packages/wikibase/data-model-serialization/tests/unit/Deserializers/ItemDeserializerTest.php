@@ -23,8 +23,7 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 			->method( 'deserialize' )
 			->will( $this->returnValue( new Fingerprint() ) );
 
-		$claimsDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
-
+		$statementListDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$siteLinkDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 
 		$siteLinkDeserializerMock->expects( $this->any() )
@@ -36,7 +35,7 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( new SiteLink( 'enwiki', 'Nyan Cat' ) ) );
 
-		return new ItemDeserializer( $entityIdDeserializerMock, $fingerprintDeserializerMock, $claimsDeserializerMock, $siteLinkDeserializerMock );
+		return new ItemDeserializer( $entityIdDeserializerMock, $fingerprintDeserializerMock, $statementListDeserializerMock, $siteLinkDeserializerMock );
 	}
 
 	public function deserializableProvider() {
