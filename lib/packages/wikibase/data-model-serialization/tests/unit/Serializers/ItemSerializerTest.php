@@ -3,13 +3,13 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use stdClass;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @covers Wikibase\DataModel\Serializers\ItemSerializer
@@ -21,11 +21,11 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 class ItemSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
-		$claimsSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$claimsSerializerMock->expects( $this->any() )
+		$statementListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->will( $this->returnCallback( function( Claims $claims ) {
-				if ( $claims->isEmpty() ) {
+			->will( $this->returnCallback( function( StatementList $statementList ) {
+				if ( $statementList->isEmpty() ) {
 					return array();
 				}
 
@@ -55,7 +55,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 
 		$fingerprintSerializer = new FingerprintSerializer( false );
 
-		return new ItemSerializer( $fingerprintSerializer, $claimsSerializerMock, $siteLinkSerializerMock, false );
+		return new ItemSerializer( $fingerprintSerializer, $statementListSerializerMock, $siteLinkSerializerMock, false );
 	}
 
 	public function serializableProvider() {
@@ -144,10 +144,10 @@ class ItemSerializerTest extends SerializerBaseTest {
 	}
 
 	public function testItemSerializerWithOptionObjectsForMaps() {
-		$claimsSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$claimsSerializerMock->expects( $this->any() )
+		$statementListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( new Claims() ) )
+			->with( $this->equalTo( new StatementList() ) )
 			->will( $this->returnValue( array() ) );
 
 		$siteLinkSerializerMock = $this->getMock( '\Serializers\Serializer' );
@@ -162,7 +162,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 
 		$fingerprintSerializer = new FingerprintSerializer( false );
 
-		$serializer = new ItemSerializer( $fingerprintSerializer, $claimsSerializerMock, $siteLinkSerializerMock, true );
+		$serializer = new ItemSerializer( $fingerprintSerializer, $statementListSerializerMock, $siteLinkSerializerMock, true );
 
 		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );

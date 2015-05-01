@@ -15,6 +15,7 @@ use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\SnaksSerializer;
+use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
 
 /**
@@ -70,8 +71,8 @@ class SerializerFactory {
 	public function newEntitySerializer() {
 		$fingerprintSerializer = new FingerprintSerializer( $this->shouldUseObjectsForMaps() );
 		return new DispatchingSerializer( array(
-			new ItemSerializer( $fingerprintSerializer, $this->newClaimsSerializer(), $this->newSiteLinkSerializer(), $this->shouldUseObjectsForMaps() ),
-			new PropertySerializer( $fingerprintSerializer, $this->newClaimsSerializer() ),
+			new ItemSerializer( $fingerprintSerializer, $this->newStatementListSerializer(), $this->newSiteLinkSerializer(), $this->shouldUseObjectsForMaps() ),
+			new PropertySerializer( $fingerprintSerializer, $this->newStatementListSerializer() ),
 		) );
 	}
 
@@ -91,6 +92,15 @@ class SerializerFactory {
 	 */
 	public function newClaimsSerializer() {
 		return new ClaimsSerializer( $this->newClaimSerializer(), $this->shouldUseObjectsForMaps() );
+	}
+
+	/**
+	 * Returns a Serializer that can serialize StatementList objects.
+	 *
+	 * @return Serializer
+	 */
+	public function newStatementListSerializer() {
+		return new StatementListSerializer( $this->newClaimSerializer(), $this->shouldUseObjectsForMaps() );
 	}
 
 	/**
