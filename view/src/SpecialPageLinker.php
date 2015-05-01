@@ -15,6 +15,7 @@ interface SpecialPageLinker {
 	 * @since 0.5
 	 * @param string $pageName
 	 * @param string[] $subPageParams Parameters to be added as slash-separated sub pages
+	 * @return string
 	 */
 	public function getLink( $pageName, array $subPageParams = array() );
 
