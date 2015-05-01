@@ -107,6 +107,10 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
+### 1.4.0 (dev)
+
+* Added support for showing the component version when loaded via MediaWiki
+
 ### 1.3.0 (2015-01-28)
 
 * `FingerprintSerializer` now supports serializing `AliasGroupFallback`s and `TermFallback`s
