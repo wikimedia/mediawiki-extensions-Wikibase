@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use ResourceLoaderContext;
 use ResourceLoaderModule;
 use Xml;
@@ -30,7 +31,7 @@ class RepoAccessModule extends ResourceLoaderModule {
 	public function getScript( ResourceLoaderContext $context ) {
 		global $wgServer, $wgScriptPath, $wgArticlePath;
 
-		$settings = Settings::singleton();
+		$settings = new SettingsArray( $GLOBALS['wgWBRepoSettings'] );
 
 		if ( $settings->hasSetting( 'repoUrl' ) ) {
 			// We're on a client (or at least the client configuration is available)
