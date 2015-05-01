@@ -3,7 +3,7 @@
 namespace Wikibase\Content;
 
 use RuntimeException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -15,14 +15,14 @@ use Wikibase\DataModel\Entity\EntityId;
 class EntityInstanceHolder implements EntityHolder {
 
 	/**
-	 * @var Entity
+	 * @var EntityDocument
 	 */
 	private $entity;
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 */
-	public function __construct( Entity $entity ) {
+	public function __construct( EntityDocument $entity ) {
 		$this->entity = $entity;
 	}
 
@@ -33,9 +33,9 @@ class EntityInstanceHolder implements EntityHolder {
 	 * Defaults to Entity.
 	 *
 	 * @throws RuntimeException If the entity held by this EntityHolder is not compatible with $expectedClass.
-	 * @return Entity
+	 * @return EntityDocument
 	 */
-	public function getEntity( $expectedClass = 'Wikibase\DataModel\Entity\Entity' ) {
+	public function getEntity( $expectedClass = 'Wikibase\DataModel\Entity\EntityDocument' ) {
 		if ( !( $this->entity instanceof $expectedClass ) ) {
 			throw new RuntimeException( 'Contained entity is not compatible with ' . $expectedClass );
 		}
