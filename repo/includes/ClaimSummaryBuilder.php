@@ -52,14 +52,13 @@ class ClaimSummaryBuilder {
 	 * constructs an edit-summary based upon that information and returns
 	 * a Summary object holding this edit-summary
 	 *
-	 * @param Claims $existingClaims
+	 * @param Claim $oldClaim
 	 * @param Claim $newClaim
 	 *
 	 * @return Summary
 	 */
-	public function buildClaimSummary( Claims $existingClaims, Claim $newClaim ) {
+	public function buildClaimSummary( Claim $oldClaim, Claim $newClaim ) {
 		$guid = $newClaim->getGuid();
-		$oldClaim = $existingClaims->getClaimWithGuid( $guid );
 
 		$summary = new Summary( $this->apiModuleName );
 		$summary->addAutoCommentArgs( 1 ); // only one claim touched, so we're always having singular here
