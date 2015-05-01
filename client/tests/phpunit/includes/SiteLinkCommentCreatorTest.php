@@ -118,7 +118,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
 		$item2 = $this->getNewItem();
-		$item2->addSiteLink( new SiteLink( 'enwiki', 'Japan', array( new ItemId( 'Q17' ) ) ) );
+		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan', array( new ItemId( 'Q17' ) ) );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
