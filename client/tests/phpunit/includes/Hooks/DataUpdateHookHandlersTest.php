@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use Parser;
 use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\DataUpdateHookHandlers;
