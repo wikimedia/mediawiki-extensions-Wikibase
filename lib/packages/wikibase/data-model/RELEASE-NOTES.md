@@ -50,7 +50,6 @@ Other breaking changes:
 * Renamed `Claim\ClaimGuid` to `Statement\StatementGuid`, leaving a b/c alias in place
 * Renamed `Claim\ClaimGuidParser` to `Statement\StatementGuidParser`, leaving a b/c alias in place
 * Renamed `Claim\ClaimGuidParsingException` to `Statement\StatementGuidParsingException`, leaving a b/c alias in place
-* Derprecated `Snaks` in favour of `SnakList`
 
 ## Version 2.6.1 (2015-04-25)
 
