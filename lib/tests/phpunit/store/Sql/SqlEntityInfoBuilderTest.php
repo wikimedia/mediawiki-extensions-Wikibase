@@ -34,7 +34,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 			$this->markTestSkipped( 'Entity info tables are not available locally on the client' );
 		}
 
-		$this->useRedirectTargetColumn = Settings::singleton()->getSetting( 'useRedirectTargetColumn' );
+		$this->useRedirectTargetColumn = $GLOBALS['wgWBRepoSettings']['useRedirectTargetColumn'];
 
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->tablesUsed[] = 'wb_terms';
