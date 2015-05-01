@@ -3,7 +3,7 @@
 namespace Wikibase\Content;
 
 use RuntimeException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -22,7 +22,7 @@ interface EntityHolder {
 	 * Defaults to Entity.
 	 *
 	 * @throws RuntimeException If the entity held by this EntityHolder is not compatible with $expectedClass.
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	public function getEntity( $expectedClass = 'Wikibase\DataModel\Entity\Entity' );
 

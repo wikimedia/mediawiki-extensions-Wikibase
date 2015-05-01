@@ -3,7 +3,7 @@
 namespace Wikibase\Content;
 
 use RuntimeException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -20,7 +20,7 @@ class DeferredCopyEntityHolder implements EntityHolder {
 	private $entityHolder;
 
 	/**
-	 * @var Entity|null
+	 * @var EntityDocument|null
 	 */
 	private $entity = null;
 
@@ -43,12 +43,12 @@ class DeferredCopyEntityHolder implements EntityHolder {
 	 * Defaults to Entity.
 	 *
 	 * @throws RuntimeException If the entity held by this EntityHolder is not compatible with $expectedClass.
-	 * @return Entity
+	 * @return EntityDocument
 	 */
-	public function getEntity( $expectedClass = 'Wikibase\DataModel\Entity\Entity' ) {
+	public function getEntity( $expectedClass = 'Wikibase\DataModel\Entity\EntityDocument' ) {
 		if ( !$this->entity ) {
 			$entity = $this->entityHolder->getEntity( $expectedClass );
-			$this->entity = $entity->copy();
+			$this->entity = unserialize( serialize( $entity ) );
 		}
 
 		return $this->entity;
