@@ -177,15 +177,6 @@ class Property extends Entity implements StatementListProvider {
 	}
 
 	/**
-	 * @deprecated since 0.7.3. Use Property::newFromType
-	 *
-	 * @return Property
-	 */
-	public static function newEmpty() {
-		return self::newFromType( '' );
-	}
-
-	/**
 	 * @since 1.1
 	 *
 	 * @return StatementList
