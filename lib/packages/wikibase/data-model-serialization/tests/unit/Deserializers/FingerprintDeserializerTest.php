@@ -31,6 +31,9 @@ class FingerprintDeserializerTest extends DeserializerBaseTest {
 
 	public function nonDeserializableProvider() {
 		return array(
+			array(
+				array()
+			),
 		);
 	}
 
