@@ -8,6 +8,7 @@ use Wikibase\DataModel\Deserializers\PropertyDeserializer;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\PropertyDeserializer
@@ -19,6 +20,11 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+
+		$fingerprintDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$fingerprintDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->will( $this->returnValue( new Fingerprint() ) );
 
 		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$claim->setGuid( 'test' );
@@ -41,7 +47,7 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			->will( $this->returnValue( new Claims( array( $claim ) ) ) );
 
 
-		return new PropertyDeserializer( $entityIdDeserializerMock, $claimsDeserializerMock );
+		return new PropertyDeserializer( $entityIdDeserializerMock, $fingerprintDeserializerMock, $claimsDeserializerMock );
 	}
 
 	public function deserializableProvider() {

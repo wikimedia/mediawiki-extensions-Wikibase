@@ -21,15 +21,17 @@ class ItemDeserializer extends EntityDeserializer {
 
 	/**
 	 * @param Deserializer $entityIdDeserializer
+	 * @param Deserializer $fingerprintDeserializer
 	 * @param Deserializer $claimsDeserializer
 	 * @param Deserializer $siteLinkDeserializer
 	 */
 	public function __construct(
 		Deserializer $entityIdDeserializer,
+		Deserializer $fingerprintDeserializer,
 		Deserializer $claimsDeserializer,
 		Deserializer $siteLinkDeserializer
 	) {
-		parent::__construct( 'item', $entityIdDeserializer, $claimsDeserializer );
+		parent::__construct( 'item', $entityIdDeserializer, $fingerprintDeserializer, $claimsDeserializer );
 
 		$this->siteLinkDeserializer = $siteLinkDeserializer;
 	}

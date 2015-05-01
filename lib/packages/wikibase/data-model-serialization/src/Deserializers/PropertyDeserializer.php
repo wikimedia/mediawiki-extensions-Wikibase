@@ -15,10 +15,11 @@ class PropertyDeserializer extends EntityDeserializer {
 
 	/**
 	 * @param Deserializer $entityIdDeserializer
+	 * @param Deserializer $fingerprintDeserializer
 	 * @param Deserializer $claimsDeserializer
 	 */
-	public function __construct( Deserializer $entityIdDeserializer, Deserializer $claimsDeserializer ) {
-		parent::__construct( 'property', $entityIdDeserializer, $claimsDeserializer );
+	public function __construct( Deserializer $entityIdDeserializer, Deserializer $fingerprintDeserializer, Deserializer $claimsDeserializer ) {
+		parent::__construct( 'property', $entityIdDeserializer, $fingerprintDeserializer, $claimsDeserializer );
 	}
 
 	protected function getPartiallyDeserialized( array $serialization ) {
