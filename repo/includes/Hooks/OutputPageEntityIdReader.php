@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\Content\EntityContentFactory;
 
 /**
