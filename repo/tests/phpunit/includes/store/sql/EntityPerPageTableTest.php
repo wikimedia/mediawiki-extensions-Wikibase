@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -67,7 +67,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param Entity[] $entities
+	 * @param EntityDocument[] $entities
 	 *
 	 * @return EntityPerPageTable
 	 */
@@ -107,7 +107,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 	protected function getIdStrings( array $entities ) {
 		$ids = array_map( function ( $entity ) {
-			if ( $entity instanceof Entity ) {
+			if ( $entity instanceof EntityDocument ) {
 				$entity = $entity->getId();
 			}
 			return $entity->getSerialization();
