@@ -43,7 +43,8 @@ class UnicodeEscaper {
 	private $escChars = array(); // Character encoding cache
 
 	/**
-	 * @ignore
+	 * @param string $str
+	 * @return string
 	 */
 	public function escapeString( $str ) {
 		$result = '';
@@ -58,10 +59,7 @@ class UnicodeEscaper {
 		return $result;
 	}
 
-	/**
-	 * @ignore
-	 */
-	protected function unicodeCharNo( $cUtf ) {
+	private function unicodeCharNo( $cUtf ) {
 		$bl = strlen( $cUtf ); /* binary length */
 		$r = 0;
 		switch ( $bl ) {
@@ -87,10 +85,7 @@ class UnicodeEscaper {
 		return $r;
 	}
 
-	/**
-	 * @ignore
-	 */
-	protected function escapedChar( $c ) {
+	private function escapedChar( $c ) {
 		$no = $this->unicodeCharNo( $c );
 		/* see http://www.w3.org/TR/rdf-testcases/#ntrip_strings */
 		if ( $no < 9 ) {
