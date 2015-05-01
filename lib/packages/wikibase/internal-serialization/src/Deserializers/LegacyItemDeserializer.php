@@ -5,7 +5,6 @@ namespace Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
@@ -135,7 +134,7 @@ class LegacyItemDeserializer implements Deserializer {
 
 	private function normalizeStatementRankKey( array $claimSerialization ) {
 		if ( !isset( $claimSerialization['rank'] ) ) {
-			$claimSerialization['rank'] = Claim::RANK_NORMAL;
+			$claimSerialization['rank'] = Statement::RANK_NORMAL;
 		}
 
 		return $claimSerialization;
