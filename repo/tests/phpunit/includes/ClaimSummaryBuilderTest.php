@@ -7,7 +7,6 @@ use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -134,11 +133,10 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
-		$claims = new Claims();
 		$newClaims = $this->claimProvider();
 
 		foreach ( $newClaims as $newClaim ) {
-			$summary = $claimSummaryBuilder->buildClaimSummary( $claims, $newClaim );
+			$summary = $claimSummaryBuilder->buildClaimSummary( null, $newClaim );
 			$this->assertInstanceOf( 'Wikibase\Summary', $summary, "this should return a Summary object" );
 			$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
 			$this->assertEquals( 'create', $summary->getActionName() );
@@ -158,10 +156,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
-		$claims = new Claims();
-		$claims->addClaim( $originalClaim );
-
-		$summary = $claimSummaryBuilder->buildClaimSummary( $claims, $modifiedClaim );
+		$summary = $claimSummaryBuilder->buildClaimSummary( $originalClaim, $modifiedClaim );
 		$this->assertInstanceOf( 'Wikibase\Summary', $summary, "this should return a Summary object" );
 		$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
 		$this->assertEquals( $action, $summary->getActionName() );

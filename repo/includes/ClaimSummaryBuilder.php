@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\Repo\Diff\ClaimDiffer;
 
 /**
@@ -52,20 +51,19 @@ class ClaimSummaryBuilder {
 	 * constructs an edit-summary based upon that information and returns
 	 * a Summary object holding this edit-summary
 	 *
-	 * @param Claims $existingClaims
+	 * @param Claim|null $oldClaim
 	 * @param Claim $newClaim
 	 *
 	 * @return Summary
 	 */
-	public function buildClaimSummary( Claims $existingClaims, Claim $newClaim ) {
+	public function buildClaimSummary( Claim $oldClaim = null, Claim $newClaim ) {
 		$guid = $newClaim->getGuid();
-		$oldClaim = $existingClaims->getClaimWithGuid( $guid );
 
 		$summary = new Summary( $this->apiModuleName );
 		$summary->addAutoCommentArgs( 1 ); // only one claim touched, so we're always having singular here
 		$summaryArgs = $this->buildSummaryArgs(
-			new Claims( array( $newClaim ) ),
-			array( $guid )
+			$newClaim,
+			$guid
 		);
 		$summary->addAutoSummaryArgs( $summaryArgs );
 
@@ -105,27 +103,23 @@ class ClaimSummaryBuilder {
 	 * Builds an associative array that can be used as summary arguments. It uses property IDs as
 	 * array keys and builds arrays of the main Snaks of all Claims given by the GUIDs.
 	 *
-	 * @param Claims $claims
-	 * @param string[] $guids
+	 * @param Claim $newClaim
+	 * @param string $guid
 	 *
 	 * @return array[] Associative array that contains property ID => array of main Snaks
 	 */
-	private function buildSummaryArgs( Claims $claims, array $guids ) {
+	private function buildSummaryArgs( Claim $newClaim, $guid ) {
 		$pairs = array();
 
-		foreach ( $guids as $guid ) {
-			$claim = $claims->getClaimWithGuid( $guid );
+		if ( $newClaim->getGuid() === $guid ) {
+			$snak = $newClaim->getMainSnak();
+			$key = $snak->getPropertyId()->getSerialization();
 
-			if ( $claim !== null ) {
-				$snak = $claim->getMainSnak();
-				$key = $snak->getPropertyId()->getSerialization();
-
-				if ( !array_key_exists( $key, $pairs ) ) {
-					$pairs[$key] = array();
-				}
-
-				$pairs[$key][] = $snak;
+			if ( !array_key_exists( $key, $pairs ) ) {
+				$pairs[$key] = array();
 			}
+
+			$pairs[$key][] = $snak;
 		}
 
 		return array( $pairs );
