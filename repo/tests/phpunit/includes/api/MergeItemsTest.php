@@ -119,7 +119,6 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		$module->execute();
 
-		$result = $module->getResult();
 		$data = $module->getResult()->getResultData( null, array(
 			'BC' => array(),
 			'Types' => array(),
