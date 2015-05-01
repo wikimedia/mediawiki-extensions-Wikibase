@@ -69,6 +69,24 @@
       "revId": "4fdab8cd281789c7321f9a5a066315b0dd03054c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_a30b0925",
+        "filename": "lib/tests/phpunit/formatters/HtmlTimeFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-01T09:19:30Z",
+      "side": 1,
+      "message": "Is it supported now a new release has been made?",
+      "parentUuid": "6e7c4fa4_ae02a273",
+      "revId": "4fdab8cd281789c7321f9a5a066315b0dd03054c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
