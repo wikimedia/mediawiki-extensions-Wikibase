@@ -17,7 +17,7 @@
 		]
 	},
 	"wikibase-lib-desc": "نگهداری قابلیت‌های اساسی برای ویکی‌بیس و افزونه‌های کارخواه ویکی‌بیس",
-	"specialpages-group-wikibase": "مخزن ویکی‌داده",
+	"specialpages-group-wikibase": "ویکی‌بیس",
 	"wikibase-deletedentity-item": "آیتم حذف‌شده",
 	"wikibase-deletedentity-property": "خصوصیات حذف شده",
 	"wikibase-deletedentity-query": "جستار حذف‌شده",
@@ -83,6 +83,18 @@
 	"datatypes-type-wikibase-property": "خاصیت",
 	"datatypes-type-commonsMedia": "پرونده‌های ویکی‌انبار",
 	"version-wikibase": "ویکی‌بیس",
-	"wikibase-snakformatter-valuetype-mismatch": "نوع مقداری «$1» با نوع ویژگی «$2» انطباق ندارد.",
-	"wikibase-snakformatter-property-not-found": "ویژگی $1 یافت نشد، نمی‌تواند نوع داده‌ای را برای استفاده مشخص کرد."
+	"wikibase-time-precision-Gannum": "در $1 میلیارد سال",
+	"wikibase-time-precision-Mannum": "در $1 میلیون سال",
+	"wikibase-time-precision-annum": "در $1 سال",
+	"wikibase-time-precision-millennium": "$1. هزاره",
+	"wikibase-time-precision-century": "$1. قرن",
+	"wikibase-time-precision-10annum": "$1 ثانیه",
+	"wikibase-time-precision-BCE-Gannum": "در $1 میلیارد سال پیش از میلاد",
+	"wikibase-time-precision-BCE-Mannum": "در $1 میلیون سال پیش از میلاد",
+	"wikibase-time-precision-BCE-annum": "در $1 سال پیش از میلاد",
+	"wikibase-time-precision-BCE-millennium": "در $1 هزار سال پیش از میلاد",
+	"wikibase-time-precision-BCE-century": "در $1 صد سال پیش از میلاد",
+	"wikibase-time-precision-BCE-10annum": "در $1 سال پیش از میلاد",
+	"wikibase-snakformatter-valuetype-mismatch": "نوع مقداری «$1» با نوع خصوصیت «$2» انطباق ندارد.",
+	"wikibase-snakformatter-property-not-found": "خصوصیت $1 یافت نشد، نمی‌تواند نوع داده‌ای را برای استفاده مشخص کرد."
 }

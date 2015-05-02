@@ -42,6 +42,8 @@
 	"wikibase-aliases-label": "මෙසේද ගම්‍ය වේ:",
 	"wikibase-aliases-empty": "අන්වර්ථ නාම කිසිවක් අර්ථ දක්වා නොමැත.",
 	"wikibase-propertypage-datatype": "දත්ත වර්ගය",
+	"wikibase-statementview-rank-normal": "සාමාන්‍ය ස්ථානය",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|යොමුව|යොමු}}",
 	"wikibase-snakview-property-input-placeholder": "ගුණාංගය",
 	"special-itembytitle": "ශීර්ෂය අනුව අයිතමය",
 	"wikibase-itembytitle-lookup-fieldset": "අඩවිය සහ ශීර්ෂය අනුව අයිතමයන් සඳහා සොයන්න",

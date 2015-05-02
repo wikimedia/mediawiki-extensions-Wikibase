@@ -29,6 +29,8 @@
 	"wikibase-rc-hide-wikidata-hide": "Cuddio",
 	"wikibase-rc-hide-wikidata-show": "Dangos",
 	"wikibase-rc-show-wikidata-pref": "Dangos golygiadau i {{WBREPONAME}} ymhlith y newidiadau diweddar",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "golygiad {{WBREPONAME}}",
 	"wikibase-replicationnote": "Dalier sylw: efallai na welwch y newidiadau ar bob wici cyn pen rhai munudau.",
 	"wikibase-watchlist-show-changes-pref": "Dangos golygiadau {{WBREPONAME}} ar eich rhestr wylio",
 	"wikibase-error-invalid-entity-id": "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",

@@ -18,6 +18,9 @@
 	"wikibase-editlinkstitle": "අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "සඟවන්න",
+	"wikibase-rc-hide-wikidata-show": "පෙන්වන්න",
 	"wikibase-rc-show-wikidata-pref": "මෑත වෙනස්කම්වල විකිදත්ත සංස්කරණ පෙන්වන්න",
+	"wikibase-rc-wikibase-edit-letter": "ද",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} සංස්කරණය",
 	"wikibase-otherprojects": "වෙනත් ව්‍යාපෘති"
 }

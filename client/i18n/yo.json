@@ -4,12 +4,17 @@
 			"Demmy"
 		]
 	},
-	"specialpages-group-wikibaseclient": "Àlejò wikidata",
+	"tooltip-t-wikibase": "Àjápọ̀ sí dátà àjápọ̀mọ́ra ẹyọ ìnú ìkọ́pamọ́",
+	"wikibase-comment-update": "Ẹyọ inú {{WBREPONAME}} ti yíradà",
+	"wikibase-dataitem": "Ẹyọ inú {{WBREPONAME}}",
 	"wikibase-editlinks": "Àtúnṣe àjápọ̀",
 	"wikibase-editlinkstitle": "Àtúnṣe àwọn àjápọ̀ èdè míràn",
 	"wikibase-linkitem-addlinks": "Àfikún àjápọ̀",
 	"wikibase-linkitem-input-site": "Èdè:",
 	"wikibase-linkitem-input-page": "Ojúewé:",
 	"wikibase-linkitem-confirmitem-button": "Ìfidájú",
-	"wikibase-rc-hide-wikidata": "$1 Wikidata"
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Ìfihàn",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Àtúnṣe {{WBREPONAME}}"
 }

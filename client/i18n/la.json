@@ -2,9 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Autokrator",
-			"UV"
+			"UV",
+			"Lesgles"
 		]
 	},
+	"tooltip-t-wikibase": "Nexus ad rem repositorii Vicibasis",
+	"wikibase-comment-update": "Res {{WBREPONAME}} mutata",
+	"wikibase-dataitem": "Res {{WBREPONAME}}",
 	"wikibase-editlinks": "Nexus recensere",
 	"wikibase-editlinkstitle": "Nexus inter linguas recensere",
 	"wikibase-rc-hide-wikidata": "$1 Vicidata",

@@ -24,6 +24,7 @@
 	"apihelp-query+pageterms-param-terms": "Els tipus de termes que s'obtindran. P. ex., 'etiqueta', 'descripció', 'àlies'.",
 	"wikibase-after-page-move": "També podeu [$1 actualitzar] l'element associat de {{WBREPONAME}} per tal de mantenir els enllaços d'idioma a la pàgina que s'ha desplaçat.",
 	"wikibase-after-page-move-queued": "L'[$1 element de {{WBREPONAME}}] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
+	"wikibase-after-page-delete-queued": "L'[$1 element de {{WBREPONAME}}] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
 	"wikibase-comment-add": "S’ha creat un element a {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Element associat de Wikidata eliminat. Enllaços de llengua suprimits.",
 	"wikibase-comment-linked": "S'ha enllaçat un element de Wikidata a aquesta pàgina.",

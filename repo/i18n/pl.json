@@ -13,7 +13,8 @@
 			"WTM",
 			"Wizardist",
 			"Alan ffm",
-			"Darellur"
+			"Darellur",
+			"Devwebtel"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -371,6 +372,7 @@
 	"right-item-redirect": "Tworzenie przekierowań elementu",
 	"right-property-term": "Zmiana określeń właściwości (etykiet, opisów, aliasów)",
 	"right-property-create": "Tworzenie właściwości",
+	"action-item-merge": "połącz elementy",
 	"action-property-create": "tworzenia właściwości",
 	"apihelp-wbcreateclaim-description": "Tworzy stwierdzenia Wikibase.",
 	"apihelp-wbcreateclaim-param-snaktype": "Typ łącznika",

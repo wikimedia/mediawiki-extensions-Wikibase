@@ -4,6 +4,7 @@
 			"Leeheonjin"
 		]
 	},
+	"wikibase-entity": "entidad",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "King aliwa pang amanu/pamyalita",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Alilan (i-konpigura)",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Awsan da muring",
@@ -12,5 +13,9 @@
 	"wikibase-itemdisambiguation-lookup-language": "Amanu-kodigu (language code)",
 	"wikibase-setlabeldescriptionaliases-description-label": "Pamilarawan (deskripsyun)",
 	"wikibase-modifyterm-language": "Amanu-kodigu (language code)",
-	"wikibase-entitieswithoutlabel-label-language": "Amanu-kodigu (language code)"
+	"wikibase-listproperties-all": "Deng eganaganang uri ning data",
+	"wikibase-listproperties-submit": "Mayintun",
+	"wikibase-entitieswithoutlabel-label-language": "Amanu-kodigu (language code)",
+	"special-redirectentity": "I-redirekta ing entidad",
+	"wikibase-redirectentity-submit": "Redirekta"
 }

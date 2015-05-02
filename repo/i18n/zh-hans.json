@@ -276,7 +276,7 @@
 	"wikibase-entitydata-unsupported-format": "该界面不支持数据格式$1。",
 	"wikibase-entitydata-storage-error": "无法载入实体$1。",
 	"wikibase-entitydata-title": "实体数据",
-	"wikibase-entitydata-text": "本页面提供实体值的链接数据界面。请使用子页面句法提供URl中的实体ID。",
+	"wikibase-entitydata-text": "本页面提供实体值的链接数据界面。请使用子页面句法提供URl中的实体ID。\n* Content negotiation applies based on you client's Accept header. This means that the entity data will be provided in the format preferred by your client. For a web browser, this will be HTML, causing your browser to be redirected to the regular entity page.\n* You can explicitly request a specific data format by adding the appropriate file extension to the entity ID: Q23.json will return data in the JSON format, Q23.ttl will return RDF/Turtle, and so on.",
 	"special-redirectentity": "重定向一个实体",
 	"wikibase-redirectentity-success": "$1已成功重定向至$2。",
 	"wikibase-redirectentity-fromid": "重定向的来自ID",

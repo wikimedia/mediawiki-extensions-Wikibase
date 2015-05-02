@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Amir a57",
-			"Koroğlu"
+			"Koroğlu",
+			"Mousa"
 		]
 	},
 	"tooltip-t-wikibase": "آیتمه باغلانتی وئری مخزنی ایله ایلگی سی وار",
 	"wikibase-comment-update": "{{WBREPONAME}} آیتمی دَییشیلدی",
 	"wikibase-dataitem": "آیتم {{WBREPONAME}}",
-	"wikibase-editlinks": "باغلانتی‌لاری دَییشدیر",
-	"wikibase-editlinkstitle": "داها دیل‌لردکی باغلانتی‌لاری دَییشدیر",
+	"wikibase-editlinks": "باغلانتیلاری دَییشدیر",
+	"wikibase-editlinkstitle": "آیری دیل‌لره باغلانتیلاری دَییشدیر",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "گیزلت",
 	"wikibase-rc-hide-wikidata-show": "گؤرست",
