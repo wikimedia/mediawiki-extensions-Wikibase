@@ -222,7 +222,7 @@
 	"wikibase-entitydata-unsupported-format": "El formatu de datos $1 nun tien sofitu d'esta interfaz.",
 	"wikibase-entitydata-storage-error": "Nun pudo cargase la entidá $1.",
 	"wikibase-entitydata-title": "Datos de la entidá",
-	"wikibase-entitydata-text": "Esta páxina ufre una interfaz de datos enllazaos a los valores de la entidá. Por favor proporcione la ID de la entidá na URL, usando la sintaxis de subpáxina.",
+	"wikibase-entitydata-text": "Esta páxina ufre una interfaz de datos enllazaos a los valores de la entidá. Por favor da la ID de la entidá na URL, usando la sintaxis de subpáxina.\n* La negociación de conteníu aplícase basada na testera Accept del to veceru. Esto significa que los datos de la entidá daránse nel formatu preferíu pol veceru. Pa un restolador web, esti sedrá HTML, causando que'l restolador se redirixa a la páxina regular de la entidá.\n* Puedes solicitar esplícitamente un formatu de datos específicu amestando la estensión de ficheru apropiada a la ID de la entidá: Q23.json devolverá los datos nel formatu JSON, Q23.ttl devolverá RDF/Turtle, y asina toos.",
 	"special-mylanguagefallbackchain": "Cadena predeterminada na mio llingua",
 	"wikibase-mylanguagefallbackchain-text": "La cadena predeterminada de llingua que s'usa p'amosa-y les etiquetes apaez abaxo.",
 	"wikibase-mylanguagefallbackchain-babel": "Pue editala poniendo <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|so}} [[Special:MyPage|páxina d'usuariu]].",

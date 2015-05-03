@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Silovan"
+			"Silovan",
+			"David1010"
 		]
 	},
 	"tooltip-t-wikibase": "მუნაჩემეფიშ ოჩუაშეს მიკორსხილი ელემენტიშ რცხუ",
 	"wikibase-comment-update": "{{WBREPONAME}} ელემენტი თირელი რე",
-	"wikibase-dataitem": "ელემენტი {{WBREPONAME}}",
+	"wikibase-dataitem": "{{WBREPONAME}}ს ელემენტი",
 	"wikibase-editlinks": "რცხუეფიშ რედაქტირაფა",
 	"wikibase-editlinkstitle": "ნინეფს შქას რცხუეფიშ რედაქტირაფა",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
