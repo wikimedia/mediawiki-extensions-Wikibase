@@ -535,7 +535,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @param EntityContent $toContent
 	 *
-	 * @return Diff
+	 * @return EntityContentDiff
 	 */
 	public function getDiff( EntityContent $toContent ) {
 		$fromContent = $this;
