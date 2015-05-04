@@ -20,7 +20,7 @@ class SnakSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	protected $dataValueSerializer;
+	private $dataValueSerializer;
 
 	/**
 	 * @param Serializer $dataValueSerializer

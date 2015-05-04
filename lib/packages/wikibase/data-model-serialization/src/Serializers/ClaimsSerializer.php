@@ -20,12 +20,12 @@ class ClaimsSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	protected $claimSerializer;
+	private $claimSerializer;
 
 	/**
 	 * @var bool
 	 */
-	protected $useObjectsForMaps;
+	private $useObjectsForMaps;
 
 	/**
 	 * @param Serializer $claimSerializer

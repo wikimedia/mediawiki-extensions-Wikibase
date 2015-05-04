@@ -21,7 +21,7 @@ class ReferenceSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	protected $snaksSerializer;
+	private $snaksSerializer;
 
 	/**
 	 * @param Serializer $snaksSerializer

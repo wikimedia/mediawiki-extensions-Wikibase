@@ -18,7 +18,7 @@ class TypedSnakSerializer implements Serializer {
 	/**
 	 * @var Serializer
 	 */
-	protected $snakSerializer;
+	private $snakSerializer;
 
 	/**
 	 * @param Serializer $snakSerializer

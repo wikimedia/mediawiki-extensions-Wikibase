@@ -148,7 +148,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 		}
 	}
 
-	protected function requireAttribute( array $array, $attributeName ) {
+	private function requireAttribute( array $array, $attributeName ) {
 		if ( !array_key_exists( $attributeName, $array ) ) {
 			throw new MissingAttributeException(
 				$attributeName

@@ -19,7 +19,7 @@ class ReferenceListSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	protected $referenceSerializer;
+	private $referenceSerializer;
 
 	/**
 	 * @param Serializer $referenceSerializer

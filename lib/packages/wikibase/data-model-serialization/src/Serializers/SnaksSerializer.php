@@ -20,12 +20,12 @@ class SnaksSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	protected $snakSerializer;
+	private $snakSerializer;
 
 	/**
 	 * @var bool
 	 */
-	protected $useObjectsForMaps;
+	private $useObjectsForMaps;
 
 	/**
 	 * @param Serializer $snakSerializer

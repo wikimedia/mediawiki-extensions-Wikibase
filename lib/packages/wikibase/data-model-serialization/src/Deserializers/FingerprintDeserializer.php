@@ -125,11 +125,11 @@ class FingerprintDeserializer implements Deserializer {
 		$this->assertRequestedAndActualLanguageMatch( $serialization, $requestedLanguage );
 	}
 
-	protected function assertAttributeIsArray( array $array, $attributeName ) {
+	private function assertAttributeIsArray( array $array, $attributeName ) {
 		$this->assertAttributeInternalType( $array, $attributeName, 'array' );
 	}
 
-	protected function assertAttributeInternalType( array $array, $attributeName, $internalType ) {
+	private function assertAttributeInternalType( array $array, $attributeName, $internalType ) {
 		if ( gettype( $array[$attributeName] ) !== $internalType ) {
 			throw new InvalidAttributeException(
 				$attributeName,
