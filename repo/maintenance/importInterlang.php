@@ -201,4 +201,4 @@ class importInterlang extends Maintenance {
 }
 
 $maintClass = 'importInterlang';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;

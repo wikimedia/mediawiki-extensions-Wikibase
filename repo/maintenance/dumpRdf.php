@@ -38,4 +38,4 @@ class DumpRdf extends DumpScript {
 }
 
 $maintClass = 'Wikibase\DumpRdf';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;

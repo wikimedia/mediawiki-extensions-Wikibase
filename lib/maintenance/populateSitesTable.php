@@ -111,4 +111,4 @@ class PopulateSitesTable extends Maintenance {
 }
 
 $maintClass = 'PopulateSitesTable';
-require_once ( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;

@@ -267,4 +267,4 @@ class DispatchChanges extends Maintenance {
 }
 
 $maintClass = 'Wikibase\DispatchChanges';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;

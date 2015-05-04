@@ -65,7 +65,7 @@ call_user_func( function() {
 
 /*
 // Include Wikibase.searchindex.php to include string and text values in the full text index:
-require_once( __DIR__ . '/Wikibase.searchindex.php' );
+require_once __DIR__ . '/Wikibase.searchindex.php';
 */
 
 /*

@@ -112,4 +112,4 @@ class PruneChanges extends Maintenance {
 }
 
 $maintClass = 'Wikibase\PruneChanges';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;

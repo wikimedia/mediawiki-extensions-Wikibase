@@ -80,4 +80,4 @@ class RebuildItemsPerSite extends Maintenance {
 }
 
 $maintClass = 'Wikibase\Repo\Maintenance\RebuildItemsPerSite';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;

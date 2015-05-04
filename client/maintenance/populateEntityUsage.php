@@ -87,4 +87,4 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 }
 
 $maintClass = 'Wikibase\PopulateEntityUsage';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;
