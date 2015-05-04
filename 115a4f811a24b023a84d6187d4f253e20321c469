@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_3e7724ff",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-05-04T11:44:58Z",
+      "side": 0,
+      "message": "Then please remove the 2nd as it is not recognized and 3rd argument as it is the default.",
+      "revId": "115a4f811a24b023a84d6187d4f253e20321c469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
