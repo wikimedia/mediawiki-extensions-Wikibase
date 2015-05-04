@@ -52,9 +52,9 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
-	 * @return object
+	 * @return Entity
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {

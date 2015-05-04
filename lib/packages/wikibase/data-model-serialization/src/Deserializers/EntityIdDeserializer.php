@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 
@@ -30,9 +31,9 @@ class EntityIdDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param mixed $serialization
+	 * @param string $serialization
 	 *
-	 * @return object
+	 * @return EntityId
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {

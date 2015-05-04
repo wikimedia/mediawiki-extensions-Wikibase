@@ -29,9 +29,9 @@ class StatementListDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
-	 * @return object
+	 * @return StatementList
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {

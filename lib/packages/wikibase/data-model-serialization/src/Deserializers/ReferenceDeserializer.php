@@ -46,9 +46,9 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
-	 * @return object
+	 * @return Reference
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
