@@ -106,7 +106,7 @@ class AffectedPagesFinder {
 	 *
 	 * @param Change $change
 	 *
-	 * @return Iterator<PageEntityUsages>
+	 * @return Iterator of PageEntityUsage
 	 */
 	public function getAffectedUsagesByPage( Change $change ) {
 		if ( $change instanceof EntityChange ) {
@@ -114,7 +114,7 @@ class AffectedPagesFinder {
 			return $this->filterUpdates( $usages );
 		}
 
-		return array();
+		return new \ArrayIterator();
 	}
 
 	/**
