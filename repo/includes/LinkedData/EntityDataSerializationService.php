@@ -15,6 +15,7 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
@@ -368,12 +369,13 @@ class EntityDataSerializationService {
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
 	 * @param EntityRevision $entityRevision The entity
+	 * @param EntityRedirect|null $redirect The redirect that led to the entity, or null
 	 * @param string|null $flavor The type of the output provided by serializer
 	 *
 	 * @return array tuple of ( $data, $contentType )
-	 * @throws MWException if the format is not supported
+	 * @throws MWException
 	 */
-	public function getSerializedData( $format, EntityRevision $entityRevision, $flavor = null ) {
+	public function getSerializedData( $format, EntityRevision $entityRevision, EntityRedirect $redirect = null, $flavor = null ) {
 
 		//TODO: handle IfModifiedSince!
 
@@ -386,7 +388,7 @@ class EntityDataSerializationService {
 		$serializer = $this->createApiSerializer( $formatName );
 
 		if( $serializer ) {
-			$data = $this->apiSerialize( $entityRevision, $serializer );
+			$data = $this->apiSerialize( $entityRevision, $redirect, $serializer );
 			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
 		} else {
 			$rdfBuilder = $this->createRdfBuilder( $formatName, $flavor );
@@ -394,7 +396,7 @@ class EntityDataSerializationService {
 			if ( !$rdfBuilder ) {
 				throw new MWException( "Could not create serializer for $formatName" );
 			} else {
-				$data = $this->rdfSerialize( $entityRevision, $rdfBuilder );
+				$data = $this->rdfSerialize( $entityRevision, $redirect, $rdfBuilder, $flavor );
 
 				$mimeTypes = $this->rdfWriterFactory->getMimeTypes( $formatName );
 				$contentType = reset( $mimeTypes );
@@ -406,13 +408,19 @@ class EntityDataSerializationService {
 
 	/**
 	 * @param EntityRevision $entityRevision
+	 * @param EntityRedirect|null $redirect a redirect leading to the entity for use in the output
 	 * @param RdfBuilder $rdfBuilder
+	 * @param string|null $flavor The type of the output provided by serializer
 	 *
 	 * @return string RDF
 	 */
-	private function rdfSerialize( EntityRevision $entityRevision, RdfBuilder $rdfBuilder ) {
+	private function rdfSerialize( EntityRevision $entityRevision, EntityRedirect $redirect = null, RdfBuilder $rdfBuilder, $flavor = null ) {
 		$rdfBuilder->startDocument();
 		$rdfBuilder->addDumpHeader();
+
+		if ( $redirect ) {
+			$rdfBuilder->addEntityRedirect( $redirect->getEntityId(), $redirect->getTargetId() );
+		}
 
 		$rdfBuilder->addEntityRevisionInfo(
 			$entityRevision->getEntity()->getId(),
@@ -614,11 +622,12 @@ class EntityDataSerializationService {
 	 * expose internal implementation details.
 	 *
 	 * @param EntityRevision $entityRevision the entity to output.
+	 * @param EntityRedirect|null $redirect a redirect leading to the entity for use in the output
 	 * @param ApiFormatBase $printer the printer to use to generate the output
 	 *
 	 * @return string the serialized data
 	 */
-	public function apiSerialize( EntityRevision $entityRevision, ApiFormatBase $printer ) {
+	public function apiSerialize( EntityRevision $entityRevision, EntityRedirect $redirect = null, ApiFormatBase $printer ) {
 		// NOTE: The way the ApiResult is provided to $printer is somewhat
 		//       counter-intuitive. Basically, the relevant ApiResult object
 		//       is owned by the ApiMain module provided by newApiMain().
