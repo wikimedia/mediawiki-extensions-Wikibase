@@ -65,7 +65,7 @@ class ClaimSerializer implements DispatchableSerializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param Claim $object
 	 *
 	 * @return array
 	 * @throws SerializationException

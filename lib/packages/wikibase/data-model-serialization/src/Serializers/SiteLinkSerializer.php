@@ -30,7 +30,7 @@ class SiteLinkSerializer implements DispatchableSerializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param SiteLink $object
 	 *
 	 * @return array
 	 * @throws SerializationException

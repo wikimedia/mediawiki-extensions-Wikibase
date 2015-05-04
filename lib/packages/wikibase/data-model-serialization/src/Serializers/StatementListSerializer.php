@@ -50,7 +50,7 @@ class StatementListSerializer implements DispatchableSerializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param StatementList $object
 	 *
 	 * @return array
 	 * @throws SerializationException

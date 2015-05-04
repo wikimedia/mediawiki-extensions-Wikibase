@@ -30,7 +30,7 @@ class TypedSnakSerializer implements Serializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param TypedSnak $object
 	 *
 	 * @return array
 	 * @throws SerializationException

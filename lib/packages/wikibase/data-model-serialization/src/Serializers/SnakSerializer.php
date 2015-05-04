@@ -43,7 +43,7 @@ class SnakSerializer implements DispatchableSerializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param Snak $object
 	 *
 	 * @return array
 	 * @throws SerializationException
