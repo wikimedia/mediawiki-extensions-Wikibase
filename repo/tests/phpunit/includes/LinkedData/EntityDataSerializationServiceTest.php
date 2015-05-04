@@ -221,10 +221,11 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				'dump', // flavor
 				array( // output regex
 					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+				),
+				array(
 					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
 					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
 				),
-				array(),
 				'application/n-triples', // expected mime
 			),
 
