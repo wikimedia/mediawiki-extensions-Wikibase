@@ -3,7 +3,6 @@
 namespace Tests\Integration\Wikibase\InternalSerialization\Deserializers;
 
 use DataValues\NumberValue;
-use DataValues\StringValue;
 use Deserializers\Deserializer;
 use Serializers\Serializer;
 use Tests\Integration\Wikibase\InternalSerialization\TestFactoryBuilder;
@@ -47,7 +46,7 @@ class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newTestClaim() {
-		$claim = new Claim( new PropertySomeValueSnak( 42, new StringValue( 'kittens' ) ) );
+		$claim = new Claim( new PropertySomeValueSnak( 42 ) );
 
 		$claim->setQualifiers( new SnakList( array(
 			new PropertyNoValueSnak( 1337 ),
