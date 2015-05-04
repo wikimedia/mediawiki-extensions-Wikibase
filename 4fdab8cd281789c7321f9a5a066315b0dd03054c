@@ -87,6 +87,24 @@
       "revId": "4fdab8cd281789c7321f9a5a066315b0dd03054c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5ead482d",
+        "filename": "lib/tests/phpunit/formatters/HtmlTimeFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-04T12:14:47Z",
+      "side": 1,
+      "message": "No. I can\u0027t inject HTML special chars into a TimeValue but I want to test this formatter if it correctly applies htmlspecialchars.",
+      "parentUuid": "0ed113e2_a30b0925",
+      "revId": "4fdab8cd281789c7321f9a5a066315b0dd03054c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
