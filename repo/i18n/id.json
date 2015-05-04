@@ -124,19 +124,16 @@
 	"wikibase-setlabel-intro": "Formulir ini membolehkan Anda untuk menetapkan label entitas. Anda harus memberikan ID dari entitas (misalnya Q23), kode bahasa (misalnya \"en\") dan label untuk menetapkannya.",
 	"wikibase-setlabel-label": "Label:",
 	"wikibase-setlabel-submit": "Buat label",
-	"wikibase-setlabel-warning-remove": "Apakah Anda ingin menghapus label [[$1]]?",
 	"special-setdescription": "Buat deskripsi",
 	"wikibase-setdescription-introfull": "Anda menetapkan deskripsi $2 untuk [[$1]].",
 	"wikibase-setdescription-intro": "Formulir ini membolehkan Anda untuk menetapkan deskripsi entitas. Anda harus memberikan ID dari entitas (misalnya Q23), kode bahasa (misalnya \"en\") dan deskripsi untuk menetapkannya.",
 	"wikibase-setdescription-label": "Deskripsi:",
 	"wikibase-setdescription-submit": "Buat deskripsi",
-	"wikibase-setdescription-warning-remove": "Apakah Anda ingin menghapus deskripsi [[$1]]?",
 	"special-setaliases": "Buat nama lain",
 	"wikibase-setaliases-introfull": "Anda menetapkan nama lain $2 untuk [[$1]]. Beberapa nama lain dipisahkan oleh sebuah karakter pipa (<code>|</code>).",
 	"wikibase-setaliases-intro": "Formulir ini membolehkan Anda untuk menetapkan nama lain entitas. Anda harus memberikan ID dari entitas (misalnya Q23), kode bahasa (misalnya \"en\"), dan nama lain untuk menetapkannya. Beberapa nama lain dipisahkan oleh karakter pipa (<code>|</code>).",
 	"wikibase-setaliases-label": "Nama lain:",
 	"wikibase-setaliases-submit": "Buat nama lain",
-	"wikibase-setaliases-warning-remove": "Apakah Anda ingin menghapus semua nama lain [[$1]]?",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Kode bahasa:",
 	"special-dispatchstats": "Perubahan pengiriman statistik",
@@ -244,5 +241,6 @@
 	"content-model-wikibase-item": "Item Wikibase",
 	"content-model-wikibase-property": "Properti Wikibase",
 	"content-model-wikibase-query": "Permintaan Wikibase",
-	"right-property-create": "Buat properti"
+	"right-property-create": "Buat properti",
+	"action-property-create": "buat properti"
 }

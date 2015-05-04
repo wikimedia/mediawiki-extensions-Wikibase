@@ -79,6 +79,12 @@
 	"datatypes-type-wikibase-property": "Властивість",
 	"datatypes-type-commonsMedia": "Медіафайл з Вікісховища",
 	"version-wikibase": "Вікібаза",
+	"wikibase-time-precision-Gannum": "у $1 млрд. років",
+	"wikibase-time-precision-Mannum": "у $1 мільйон років",
+	"wikibase-time-precision-annum": "у $1 років",
+	"wikibase-time-precision-millennium": "$1. тисячоліття",
+	"wikibase-time-precision-century": "$1. століття",
+	"wikibase-time-precision-10annum": "$1 десятиріччя",
 	"wikibase-snakformatter-valuetype-mismatch": "Тип значення «$1», не відповідає типу властивості «$2».",
 	"wikibase-snakformatter-property-not-found": "Властивість $1 не знайдено, не вдалося визначити тип даних для використання."
 }

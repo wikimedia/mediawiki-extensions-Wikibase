@@ -63,5 +63,8 @@
 	"datatypes-type-wikibase-item": "Kohde",
 	"datatypes-type-wikibase-property": "Ominaisuus",
 	"datatypes-type-commonsMedia": "Commonsin mediatiedosto",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-millennium": "$1. vuosituhat",
+	"wikibase-time-precision-century": "$1. vuosisata",
+	"wikibase-time-precision-10annum": "$1. vuosikymmen"
 }

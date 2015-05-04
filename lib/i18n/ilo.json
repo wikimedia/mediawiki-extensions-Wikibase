@@ -69,6 +69,12 @@
 	"datatypes-type-wikibase-item": "Banag",
 	"datatypes-type-commonsMedia": "Midia a papeles ti Commons",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "iti $1 bilion a tawtawen",
+	"wikibase-time-precision-Mannum": "iti $1 riwriw a tawtawen",
+	"wikibase-time-precision-annum": "iti $1 a tawtawen",
+	"wikibase-time-precision-millennium": "$1. milenio",
+	"wikibase-time-precision-century": "$1. siglo",
+	"wikibase-time-precision-10annum": "$1 a tawtawen",
 	"wikibase-snakformatter-valuetype-mismatch": "Ti kita ti pateg ti \"$1\" ket saan a maipada iti kita ti tagikua ti \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Ti tagikua ti $1 ket saan a nabirukan, saan a maikeddeng ti usaren a kita ti datos."
 }

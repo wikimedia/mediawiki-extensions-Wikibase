@@ -70,5 +70,10 @@
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-wikibase-property": "Eigenschap",
 	"datatypes-type-commonsMedia": "Mediabestand van Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "in $1 miljard jaar",
+	"wikibase-time-precision-Mannum": "in $1 miljoen jaar",
+	"wikibase-time-precision-annum": "in $1 jaar",
+	"wikibase-time-precision-millennium": "$1e millennium",
+	"wikibase-time-precision-century": "$1e eeuw"
 }

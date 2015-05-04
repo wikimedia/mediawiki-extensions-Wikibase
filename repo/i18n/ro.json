@@ -131,19 +131,16 @@
 	"wikibase-setlabel-intro": "Acest formular vă permite să definiți eticheta unei entități. Trebuie să furnizați identificatorul entității (de ex. Q23), un cod de limbă (de ex. „en”) și eticheta de definit.",
 	"wikibase-setlabel-label": "Etichetă:",
 	"wikibase-setlabel-submit": "Definește eticheta",
-	"wikibase-setlabel-warning-remove": "Sigur doriți să eliminați eticheta pentru [[$1]]?",
 	"special-setdescription": "Creare descriere",
 	"wikibase-setdescription-introfull": "Sunteți pe cale să creați o descriere în $2 pentru [[$1]].",
 	"wikibase-setdescription-intro": "Acest formular vă permite să creați descrierea unei entități. Trebuie să furnizați identificatorul entității (de ex. Q23), un cod de limbă (de ex. „en”) și descrierea de creat.",
 	"wikibase-setdescription-label": "Descriere:",
 	"wikibase-setdescription-submit": "Creează descrierea",
-	"wikibase-setdescription-warning-remove": "Sigur doriți să eliminați descrierea pentru [[$1]]?",
 	"special-setaliases": "Creare aliasuri",
 	"wikibase-setaliases-introfull": "Sunteți pe cale să definiți aliasurile în $2 pentru [[$1]]. Mai multe aliasuri sunt separate de o bară verticală (<code>|</code>).",
 	"wikibase-setaliases-intro": "Acest formular vă permite să definiți aliasurile unei entități. Trebuie să furnizați identificatorul entității (de ex. Q23), un cod de limbă (de ex. „en”) și aliasurile de definit. Mai multe aliasuri sunt separate de o bară verticală (<code>|</code>).",
 	"wikibase-setaliases-label": "Aliasuri:",
 	"wikibase-setaliases-submit": "Definește aliasurile",
-	"wikibase-setaliases-warning-remove": "Sigur doriți să eliminați aliasurile pentru [[$1]]?",
 	"wikibase-setsitelink-site": "ID site:",
 	"wikibase-modifyentity-id": "Identificator:",
 	"wikibase-modifyterm-language": "Codul limbii:",
@@ -219,5 +216,6 @@
 	"content-model-wikibase-item": "Element Wikibase",
 	"content-model-wikibase-property": "Proprietate Wikibase",
 	"content-model-wikibase-query": "Interogare Wikibase",
-	"right-property-create": "Creează proprietăți"
+	"right-property-create": "Creează proprietăți",
+	"action-property-create": "creați proprietăți"
 }

@@ -116,11 +116,9 @@
 	"special-setlabel": "লেবেল যোগ",
 	"wikibase-setlabel-label": "লেবেল:",
 	"wikibase-setlabel-submit": "লেবেল নির্ধারণ করুন",
-	"wikibase-setlabel-warning-remove": "আপনি কি সত্যিই [[$1]]-এর লেভেল সরাতে চান?",
 	"special-setdescription": "বিবরণ যোগ",
 	"wikibase-setdescription-label": "বিবরণ:",
 	"wikibase-setdescription-submit": "বিবরণ নির্ধারণ করুন",
-	"wikibase-setdescription-warning-remove": "আপনি কি সত্যিই [[$1]]-এর বিবরণ সরাতে চান?",
 	"special-setaliases": "উপনাম ধার্য করুন",
 	"wikibase-setlabeldescriptionaliases-label-label": "লেবেল:",
 	"wikibase-setlabeldescriptionaliases-description-label": "বিবরণ:",
@@ -131,7 +129,6 @@
 	"wikibase-setsitelink-label": "সাইট লিংক:",
 	"wikibase-setsitelink-badges": "ব্যাজ:",
 	"wikibase-setsitelink-submit": "সাইট লিংক নির্ধারণ করুন",
-	"wikibase-setsitelink-warning-remove": "আপনি কি সত্যিই [[$1]]-এর সাইট লিংক সরাতে চান?",
 	"wikibase-setsitelink-invalid-site": "সাইট আইডি \"$1\" আজানা। একটি বিদ্যমান সাইট আইডি ব্যবহার করুন, যেমন \"bnwiki\"।",
 	"wikibase-setsitelink-not-badge": "আইটেম $1 কোন ব্যাজ নয়।",
 	"wikibase-setsitelink-add-failed": "সাইট লিঙ্ক সংরক্ষণ করা যায়নি।",
@@ -230,5 +227,6 @@
 	"content-model-wikibase-query": "উইকিবেজ কোয়েরি",
 	"right-item-merge": "আইটেম একত্রীকারক",
 	"right-item-redirect": "আইটেম পুননির্দেশনা তৈরি",
-	"right-property-create": "বৈশিষ্ট্য তৈরি"
+	"right-property-create": "বৈশিষ্ট্য তৈরি",
+	"action-property-create": "বৈশিষ্ট্য তৈরি"
 }

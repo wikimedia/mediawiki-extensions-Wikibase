@@ -100,5 +100,6 @@
 	"content-model-wikibase-item": "Item Wikibase",
 	"content-model-wikibase-property": "Properti Wikibase",
 	"content-model-wikibase-query": "Pamintaan Wikibase",
-	"right-property-create": "Buek properti"
+	"right-property-create": "Buek properti",
+	"action-property-create": "buek properti"
 }

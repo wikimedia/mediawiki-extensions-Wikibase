@@ -80,6 +80,18 @@
 	"datatypes-type-wikibase-property": "属性",
 	"datatypes-type-commonsMedia": "共享资源媒体文件",
 	"version-wikibase": "维基数据库",
+	"wikibase-time-precision-Gannum": "公元$1十亿年",
+	"wikibase-time-precision-Mannum": "公元$1百万年",
+	"wikibase-time-precision-annum": "公元$1年",
+	"wikibase-time-precision-millennium": "$1千年",
+	"wikibase-time-precision-century": "$1世纪",
+	"wikibase-time-precision-10annum": "$1",
+	"wikibase-time-precision-BCE-Gannum": "公元前$1十亿年",
+	"wikibase-time-precision-BCE-Mannum": "公元前$1百万年",
+	"wikibase-time-precision-BCE-annum": "公元前$1年",
+	"wikibase-time-precision-BCE-millennium": "公元前$1千年",
+	"wikibase-time-precision-BCE-century": "公元前$1世纪",
+	"wikibase-time-precision-BCE-10annum": "公元前$1年",
 	"wikibase-snakformatter-valuetype-mismatch": "值类型“$1”不匹配属性类型“$2”。",
 	"wikibase-snakformatter-property-not-found": "未找到属性$1，无法决定要使用的数据类型。"
 }

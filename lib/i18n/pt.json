@@ -80,6 +80,12 @@
 	"datatypes-type-wikibase-property": "Propriedade",
 	"datatypes-type-commonsMedia": "Ficheiro de média do Commons",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "em  $1  biliões de anos",
+	"wikibase-time-precision-Mannum": "em $1 milhões de anos",
+	"wikibase-time-precision-annum": "em $1 anos",
+	"wikibase-time-precision-millennium": "$1. milénio",
+	"wikibase-time-precision-century": "$1. século",
+	"wikibase-time-precision-10annum": "$1s",
 	"wikibase-snakformatter-valuetype-mismatch": "Tipo do valor, \"$1\", não coincide com o tipo da propriedade, \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Propriedade $1 não encontrada, não é possível determinar o tipo de dados a usar."
 }

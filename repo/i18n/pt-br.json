@@ -230,5 +230,6 @@
 	"content-model-wikibase-item": "Item do Wikibase",
 	"content-model-wikibase-property": "Propriedade do Wikibase",
 	"content-model-wikibase-query": "Consulta do Wikibase",
-	"right-property-create": "criar propriedades"
+	"right-property-create": "criar propriedades",
+	"action-property-create": "criar propriedades"
 }

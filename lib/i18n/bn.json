@@ -39,5 +39,7 @@
 	"wikibase-validator-not-allowed": "অবৈধ মান: $1",
 	"datatypes-type-wikibase-item": "আইটেম",
 	"datatypes-type-commonsMedia": "কমন্স মিডিয়া ফাইল",
-	"version-wikibase": "উইকিবেজ"
+	"version-wikibase": "উইকিবেজ",
+	"wikibase-time-precision-annum": "$1 বছরে",
+	"wikibase-time-precision-10annum": "$1"
 }

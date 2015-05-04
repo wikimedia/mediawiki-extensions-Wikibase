@@ -16,5 +16,11 @@
 	"wikibase-globedetails-latitude": "Latitude",
 	"wikibase-globedetails-precision": "Preceesion",
 	"wikibase-globedetails-globe": "Globe",
-	"wikibase-parse-error": "Malformed value."
+	"wikibase-parse-error": "Malformed value.",
+	"wikibase-time-precision-Gannum": "in $1 billion year",
+	"wikibase-time-precision-Mannum": "in $1 million year",
+	"wikibase-time-precision-annum": "in $1 year",
+	"wikibase-time-precision-millennium": "$1. millennium",
+	"wikibase-time-precision-century": "$1. yearhunner",
+	"wikibase-time-precision-10annum": "$1s"
 }

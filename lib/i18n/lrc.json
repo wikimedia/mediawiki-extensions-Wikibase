@@ -25,5 +25,8 @@
 	"wikibase-validator-invalid": "انازه نادیار",
 	"wikibase-validator-bad-type": "$2 وه جا $1",
 	"datatypes-type-wikibase-item": "قلم",
-	"datatypes-type-commonsMedia": "فایل پرنمون رسانه"
+	"datatypes-type-commonsMedia": "فایل پرنمون رسانه",
+	"wikibase-time-precision-Gannum": "د $1 بیلیون سال",
+	"wikibase-time-precision-Mannum": "د $1 میلیون سال",
+	"wikibase-time-precision-annum": "د سالیا $1"
 }

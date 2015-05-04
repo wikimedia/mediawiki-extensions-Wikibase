@@ -188,5 +188,6 @@
 	"content-model-wikibase-query": "Ερώτημα Wikibase",
 	"right-item-merge": "Συγχώνευση αντικειμένων",
 	"right-property-term": "Αλλαγή όρων ιδιοτήτων (ετικέτες, περιγραφές, ψευδώνυμα)",
-	"right-property-create": "Δημιουργία ιδιοτήτων"
+	"right-property-create": "Δημιουργία ιδιοτήτων",
+	"action-property-create": "δημιουργήσετε ιδιότητες"
 }

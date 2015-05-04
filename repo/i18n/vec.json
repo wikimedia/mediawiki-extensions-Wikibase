@@ -113,19 +113,16 @@
 	"wikibase-setlabel-intro": "Sto modulo el te consente de inpostar l'eticheta par na entità. Te devi fornir l'ID de l'entità (par esenpio \"Q23\"), el còdese de la lengua (par esenpio \"vec\") e l'eticheta da inpostar.",
 	"wikibase-setlabel-label": "Eticheta:",
 	"wikibase-setlabel-submit": "Inposta eticheta",
-	"wikibase-setlabel-warning-remove": "Vuto dal bon cavar l'eticheta de [[$1]]?",
 	"special-setdescription": "Inposta na descrission",
 	"wikibase-setdescription-introfull": "Te sì drio inpostar la descrission in $2 par [[$1]].",
 	"wikibase-setdescription-intro": "Sto modulo el te consente de inpostar la descrision de na entità. Te devi fornir l'ID de l'entità (par esenpio \"Q23\"), el còdese de la lengua (par esenpio \"vec\") e la descrision da inpostar.",
 	"wikibase-setdescription-label": "Descrision:",
 	"wikibase-setdescription-submit": "Inposta descrission",
-	"wikibase-setdescription-warning-remove": "Vuto dal bon cavar la descrission de [[$1]]?",
 	"special-setaliases": "Inposta alias",
 	"wikibase-setaliases-introfull": "Te sì drio inpostar i alias in $2 par [[$1]]. Alias difarenti xe separà da na sbara vertical <code>|</code>.",
 	"wikibase-setaliases-intro": "Sto modulo el te consente de inpostar i alias de na entità. Te devi fornir l'ID de l'entità (par esenpio \"Q23\"), el còdese de la lengua (par esenpio \"vec\") e i alias da inpostar. Se pol métar più alias separandoli da na sbara vertical <code>|</code>.",
 	"wikibase-setaliases-label": "Alias:",
 	"wikibase-setaliases-submit": "Imposta i alias",
-	"wikibase-setaliases-warning-remove": "Vuto dal bon cavar tuti i alias de [[$1]]?",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Còdese lengoa:",
 	"special-dispatchstats": "Statistiche propagasion modifiche",
@@ -237,5 +234,6 @@
 	"content-model-wikibase-item": "Elemento Wikibase",
 	"content-model-wikibase-property": "Proprietà Wikibase",
 	"content-model-wikibase-query": "Interogasion Wikibase",
-	"right-property-create": "Crea proprietà"
+	"right-property-create": "Crea proprietà",
+	"action-property-create": "crear le proprietà"
 }

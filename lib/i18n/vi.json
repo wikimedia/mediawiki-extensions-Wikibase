@@ -74,6 +74,12 @@
 	"datatypes-type-wikibase-property": "Thuộc tính",
 	"datatypes-type-commonsMedia": "Tập tin phương tiện Commons",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "cách đây $1 tỷ năm",
+	"wikibase-time-precision-Mannum": "cách đây $1 triệu năm",
+	"wikibase-time-precision-annum": "cách đây $1 năm",
+	"wikibase-time-precision-millennium": "thiên niên kỷ $1",
+	"wikibase-time-precision-century": "thế kỷ $1",
+	"wikibase-time-precision-10annum": "thập niên $1",
 	"wikibase-snakformatter-valuetype-mismatch": "Kiểu giá trị “$1” không hợp kiểu thuộc tính “$2”.",
 	"wikibase-snakformatter-property-not-found": "Không thể xác định kiểu dữ liệu vì không tìm thấy thuộc tính $1."
 }

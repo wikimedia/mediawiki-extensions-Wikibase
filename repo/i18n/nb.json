@@ -323,5 +323,6 @@
 	"right-item-merge": "Slå sammen elementer",
 	"right-item-redirect": "Opprett elementomdirigeringer",
 	"right-property-term": "Endre egenskapenes termer (etikett, beskrivelse, kallenavn)",
-	"right-property-create": "Oprett egenskaper"
+	"right-property-create": "Oprett egenskaper",
+	"action-property-create": "opprett egenskaper"
 }

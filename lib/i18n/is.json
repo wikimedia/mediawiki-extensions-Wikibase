@@ -49,5 +49,11 @@
 	"wikibase-validator-unknown-unit": "Óþekkt eining: $1",
 	"wikibase-validator-not-allowed": "Ógilt gildi: $1",
 	"datatypes-type-wikibase-item": "Hlutur",
-	"datatypes-type-commonsMedia": "Commons margmiðlunarskrá"
+	"datatypes-type-commonsMedia": "Commons margmiðlunarskrá",
+	"wikibase-time-precision-Gannum": "í $1 milljarða ára",
+	"wikibase-time-precision-Mannum": "í $1 milljón ár",
+	"wikibase-time-precision-annum": "í $1 ár",
+	"wikibase-time-precision-millennium": "$1. árþúsundið",
+	"wikibase-time-precision-century": "$1. öldin",
+	"wikibase-time-precision-10annum": "$1 áratugurinn"
 }

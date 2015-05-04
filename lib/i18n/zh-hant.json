@@ -79,6 +79,12 @@
 	"datatypes-type-wikibase-property": "屬性",
 	"datatypes-type-commonsMedia": "共享資源媒體檔案",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "$1 十億年 CE",
+	"wikibase-time-precision-Mannum": "$1 百萬年 CE",
+	"wikibase-time-precision-annum": "$1 年 CE",
+	"wikibase-time-precision-millennium": "$1千年",
+	"wikibase-time-precision-century": "$1世紀",
+	"wikibase-time-precision-10annum": "$1",
 	"wikibase-snakformatter-valuetype-mismatch": "數值型態 \"$1\" 與屬性型態 \"$2\" 不符。",
 	"wikibase-snakformatter-property-not-found": "查無屬性 $1，無法辨識要使用的資料型態。"
 }

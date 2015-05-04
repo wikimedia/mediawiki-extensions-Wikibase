@@ -50,5 +50,11 @@
 	"wikibase-validator-not-allowed": "Valor vietà: $1",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Archivi ëd mojen ëd Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "da-sì $1 miliard d'agn",
+	"wikibase-time-precision-Mannum": "da-sì $1 milion d'agn",
+	"wikibase-time-precision-annum": "da-sì $1 agn",
+	"wikibase-time-precision-millennium": "$1. milen-a d'agn",
+	"wikibase-time-precision-century": "$1. sécol",
+	"wikibase-time-precision-10annum": "$1 desen-e d'agn"
 }

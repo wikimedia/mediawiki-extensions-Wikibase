@@ -54,5 +54,11 @@
 	"wikibase-validator-not-allowed": "Ugyldig værdi: $1",
 	"datatypes-type-wikibase-item": "Emne",
 	"datatypes-type-commonsMedia": "Commons media-fil",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "i $1 milliarder år",
+	"wikibase-time-precision-Mannum": "i $1 millioner år",
+	"wikibase-time-precision-annum": "i $1 år",
+	"wikibase-time-precision-millennium": "$1. årtusind",
+	"wikibase-time-precision-century": "$1. århundrede",
+	"wikibase-time-precision-10annum": "$1. årti"
 }

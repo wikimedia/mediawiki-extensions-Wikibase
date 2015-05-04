@@ -222,5 +222,6 @@
 	"content-model-wikibase-item": "Element z Wikibase",
 	"content-model-wikibase-property": "Kajkosć Wikibase",
 	"content-model-wikibase-query": "Naprašowanje Wikibase",
-	"right-property-create": "Kajkosće wutworić"
+	"right-property-create": "Kajkosće wutworić",
+	"action-property-create": "kajkosće wutworić"
 }

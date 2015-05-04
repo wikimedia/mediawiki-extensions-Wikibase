@@ -71,6 +71,12 @@
 	"datatypes-type-wikibase-item": "element",
 	"datatypes-type-commonsMedia": "mediafil fra Commons",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "i $1 milliarder år",
+	"wikibase-time-precision-Mannum": "i $1 millioner år",
+	"wikibase-time-precision-annum": "i $1 år",
+	"wikibase-time-precision-millennium": "$1. årtusen",
+	"wikibase-time-precision-century": "$1. århundre",
+	"wikibase-time-precision-10annum": "$1-årene",
 	"wikibase-snakformatter-valuetype-mismatch": "Verdiens type «$1» matcher ikke egenskapens type «$2».",
 	"wikibase-snakformatter-property-not-found": "Egenskapen $1 ble ikke funnet, kan ikke avgjøre hvilken datatype som skal brukes."
 }

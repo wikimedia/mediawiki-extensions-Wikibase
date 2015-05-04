@@ -72,6 +72,9 @@
 	"datatypes-type-wikibase-property": "Probbietà",
 	"datatypes-type-commonsMedia": "File media de Commons",
 	"version-wikibase": "Uicchibase",
+	"wikibase-time-precision-Mannum": "jndr'à $1 milione de anne",
+	"wikibase-time-precision-century": "$1. sechele",
+	"wikibase-time-precision-10annum": "$1",
 	"wikibase-snakformatter-valuetype-mismatch": "'U tipe d'u valore \"$1\" non ge se iacchie cu 'u tipe d'a probbietà \"$2\".",
 	"wikibase-snakformatter-property-not-found": "'A probbietà $1 non ge stè, no se pò capìe 'u tipe de date da ausà."
 }

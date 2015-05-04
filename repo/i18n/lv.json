@@ -83,7 +83,6 @@
 	"wikibase-setaliases-introfull": "Jūs norādāt $2 citus nosaukumus [[$1]]. Vairākus nosaukumus var atdalīt ar vertikālās svītras (<code>|</code>) simbolu.",
 	"wikibase-setaliases-label": "Citi nosaukumi:",
 	"wikibase-setaliases-submit": "Norādīt citus nosaukumus",
-	"wikibase-setaliases-warning-remove": "Vai tiešām vēlaties noņemt visus [[$1]] citus nosaukumus?",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Valodas kods:",
 	"wikibase-dispatchstats-change-id": "ID",

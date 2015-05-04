@@ -108,19 +108,16 @@
 	"wikibase-setlabel-intro": "Toś ten formular śi zmóžnja , pomjenjenje entity póstajiś. Musyš ID entity pódaś (na pś. Q23), a rěcny code (na pś. dsb) a pomjenjenje, kótarež ma se póstajiś.",
 	"wikibase-setlabel-label": "Pomjenjenje:",
 	"wikibase-setlabel-submit": "Pomjenjenje póstajiś",
-	"wikibase-setlabel-warning-remove": "Coš napšawdu pomjenjenje z [[$1]] wótpóraś?",
 	"special-setdescription": "Wopisanje póstajiś",
 	"wikibase-setdescription-introfull": "Pódawaš wopisanje $2 za [[$1]].",
 	"wikibase-setdescription-intro": "Tós te formular śi zmóžnja , wopisanje entity pódaś. Musyš ID entity pódaś (na pś. Q23), a rěcny code (na pś. dsb) a wopisanje, kótarež ma se pódaś.",
 	"wikibase-setdescription-label": "Wopisanje:",
 	"wikibase-setdescription-submit": "Wopisanje póstajiś",
-	"wikibase-setdescription-warning-remove": "Coš napšawdu wopisanje z [[$1]] wótpóraś?",
 	"special-setaliases": "Aliase póstajiś",
 	"wikibase-setaliases-introfull": "Pódawaš aliase w $2 za [[$1]]. Někotare aliase źěle se pśez padorownu smužku <code>|</code>.",
 	"wikibase-setaliases-intro": "Toś ten formular śi zmóžnja, aliase entity pódaś. Musyš ID entity pódaś (na pś. Q23), rěcny code (na pś. \"dsb\") a aliase, kótarež maju se pódaś. Někotare aliase źěle se pśez znamuško <code>|</code>.",
 	"wikibase-setaliases-label": "Aliase:",
 	"wikibase-setaliases-submit": "Aliase póstajiś",
-	"wikibase-setaliases-warning-remove": "Coš napšawdu wšykne aliase z [[$1]] wótpóraś?",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Rěcny kod:",
 	"special-listdatatypes": "Lisćina wšych k dispoziciji stojecych datowych typow",
@@ -196,5 +193,6 @@
 	"content-model-wikibase-item": "Element z Wikibase",
 	"content-model-wikibase-property": "Kakosć Wikibase",
 	"content-model-wikibase-query": "Napšašowanje Wikibase",
-	"right-property-create": "Kakosći napóraś"
+	"right-property-create": "Kakosći napóraś",
+	"action-property-create": "kakosći napóraś"
 }

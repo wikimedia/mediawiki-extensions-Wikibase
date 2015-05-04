@@ -79,6 +79,10 @@
 	"datatypes-type-wikibase-property": "Właściwość",
 	"datatypes-type-commonsMedia": "Plik multimedialny na Commons",
 	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "w $1 mld lat",
+	"wikibase-time-precision-Mannum": "w $1 mln lat",
+	"wikibase-time-precision-millennium": "$1. tysiąclecie",
+	"wikibase-time-precision-century": "$1. wiek",
 	"wikibase-snakformatter-valuetype-mismatch": "Typ wartości „$1” nie jest zgodny z typem właściwości „$2”.",
 	"wikibase-snakformatter-property-not-found": "Właściwość „$1” nie została znaleziona, nie można określić typ danych."
 }

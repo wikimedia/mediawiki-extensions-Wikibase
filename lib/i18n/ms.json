@@ -42,5 +42,11 @@
 	"datatypes-type-wikibase-item": "Perkara",
 	"datatypes-type-wikibase-property": "Ciri-ciri",
 	"datatypes-type-commonsMedia": "Fail media Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-time-precision-Gannum": "dalam $1 bilion tahun",
+	"wikibase-time-precision-Mannum": "dalam $1 juta tahun",
+	"wikibase-time-precision-annum": "dalam $1 tahun",
+	"wikibase-time-precision-millennium": "$1 alaf",
+	"wikibase-time-precision-century": "$1 abad",
+	"wikibase-time-precision-10annum": "$1-an"
 }

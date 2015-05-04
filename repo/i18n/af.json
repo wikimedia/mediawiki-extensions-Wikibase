@@ -137,5 +137,6 @@
 	"content-model-wikibase-item": "Wikibase-item",
 	"content-model-wikibase-property": "Wikibase-eienskap",
 	"content-model-wikibase-query": "Wikibase-soekopdrag",
-	"right-property-create": "Skep eienskappe"
+	"right-property-create": "Skep eienskappe",
+	"action-property-create": "skep eienskappe"
 }

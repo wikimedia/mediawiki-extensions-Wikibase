@@ -109,7 +109,7 @@
 	"wikibase-snakview-variations-somevalue-label": "valor desconocido",
 	"wikibase-snakview-variations-novalue-label": "sin valor",
 	"wikibase-snakview-snaktypeselector-value": "valor personalizado",
-	"wikibase-shortcopyrightwarning": "Al hacer clic en \"$1\", aceptas [[$2|los términos de uso]] y aceptas liberar irrevocablemente tus contribuciones bajo la $3.",
+	"wikibase-shortcopyrightwarning": "Al pulsar en «$1» aceptas los [[$2|términos de uso]] y aceptas liberar irrevocablemente tu contribución bajo la $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Acepto estos términos para mis futuras contribuciones. No volver a mostrar este mensaje otra vez.",
 	"wikibase-entityselector-more": "más",
 	"wikibase-anonymouseditwarning": "Aviso: No has iniciado sesión.\nTu dirección IP quedará registrada en el historial de revisiones de esta entidad.",

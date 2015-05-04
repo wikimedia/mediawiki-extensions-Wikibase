@@ -120,17 +120,14 @@
 	"wikibase-setlabel-introfull": "Постављате назив у $2 за [[$1]].",
 	"wikibase-setlabel-label": "Назив:",
 	"wikibase-setlabel-submit": "Постави назив",
-	"wikibase-setlabel-warning-remove": "Да ли заиста желите да уклоните назив за [[$1]]?",
 	"special-setdescription": "Додај опис",
 	"wikibase-setdescription-introfull": "Постављате опис у $2 за [[$1]].",
 	"wikibase-setdescription-label": "Опис:",
 	"wikibase-setdescription-submit": "Додај опис",
-	"wikibase-setdescription-warning-remove": "Да ли заиста желите да уклоните опис за [[$1]]?",
 	"special-setaliases": "Постављање псеудонима",
 	"wikibase-setaliases-introfull": "Постављате песеудоним на $2 за [[$1]]. Више псеудонима одвојите усправном цртом (<code>|</code>).",
 	"wikibase-setaliases-label": "Псеудоними:",
 	"wikibase-setaliases-submit": "Постави псеудоним",
-	"wikibase-setaliases-warning-remove": "Да ли заиста желите да уклоните све псеудониме за [[$1]]?",
 	"wikibase-setlabeldescriptionaliases-introfull": "Постављате назив, опис и псеудониме за [[$1]] на $2. Више псеудонима одвојите усправном цртом (<code>|</code>).",
 	"wikibase-setlabeldescriptionaliases-label-label": "Назив:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Опис:",
@@ -250,5 +247,6 @@
 	"content-model-wikibase-item": "Ставка Викибазе",
 	"content-model-wikibase-property": "Својство Викибазе",
 	"content-model-wikibase-query": "Упит Викибазе",
-	"right-property-create": "прављење својстава"
+	"right-property-create": "прављење својстава",
+	"action-property-create": "правите својства"
 }

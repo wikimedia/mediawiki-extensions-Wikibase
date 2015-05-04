@@ -323,5 +323,6 @@
 	"right-item-redirect": "Búa til tilvísanir hluta",
 	"right-property-term": "Breyta hugtökum eiginleika (merkimiða, lýsingar, samheiti)",
 	"right-property-create": "Búa til eiginleika",
-	"wikibase-entity-not-viewable": "Tilgreint innihald „$1\" er ekki eining og er ekki hægt að sýna af Wikibase."
+	"wikibase-entity-not-viewable": "Tilgreint innihald „$1\" er ekki eining og er ekki hægt að sýna af Wikibase.",
+	"action-property-create": "búa til eiginleika"
 }

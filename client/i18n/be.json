@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Дзяніс Тутэйшы",
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Maksim L."
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэння Wikibase",
@@ -12,7 +13,7 @@
 	"wikibase-comment-linked": "Аб'ект Вікізвестак быў злучаны з гэтай старонкай.",
 	"wikibase-comment-unlink": "Гэта старонка была аддзелена ад аб'екта Вікізвестак. Моўныя спасылкі выдалены.",
 	"wikibase-comment-restore": "Выдаленне злучанага аб'екта Вікізвестак скасавана. Моўныя спасылкі адноўлены.",
-	"wikibase-comment-update": "Моўныя спасылкі абноўлены.",
+	"wikibase-comment-update": "{{WBREPONAME}} спасылкі абноўлены.",
 	"wikibase-comment-sitelink-add": "Дададзена моўная спасылка: $1",
 	"wikibase-comment-sitelink-change": "Моўная спасылка зменена з $1 на $2",
 	"wikibase-comment-sitelink-remove": "Моўная спасылка выдалена: $1",

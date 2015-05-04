@@ -304,6 +304,7 @@
 	"content-model-wikibase-property": "Sifat Wikibase",
 	"content-model-wikibase-query": "Pertanyaan Wikibase",
 	"right-property-create": "Mewujudkan sifat",
+	"action-property-create": "mewujudkan sifat",
 	"apihelp-wbsetclaimvalue-param-snaktype": "Jenis snak",
 	"apihelp-wbsetdescription-param-language": "Bahasa huraian",
 	"apihelp-wbsetlabel-param-language": "Bahasa label"
