@@ -84,7 +84,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		);
 
 		$maxAge = 60*60;
-		$formats = array( 'json', 'rdf', 'n3' );
+		$formats = array( 'json', 'rdfxml', 'ntriples' );
 		$serializationService->setFormatWhiteList( $formats );
 
 		$defaultFormat = 'rdf';
