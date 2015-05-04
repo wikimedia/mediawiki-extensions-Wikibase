@@ -5,6 +5,7 @@ namespace Wikibase;
 use Title;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
+use Wikibase\Repo\Store\EntityPerPage;
 
 require_once __DIR__ . '/dumpEntities.php';
 
@@ -13,6 +14,15 @@ class DumpRdf extends DumpScript {
 	public function __construct() {
 		parent::__construct();
 		$this->addOption( 'format', "Set the dump format.", false, true );
+	}
+
+	/**
+	 * Returns EntityPerPage::INCLUDE_REDIRECTS.
+	 *
+	 * @return mixed a EntityPerPage::XXX_REDIRECTS constant
+	 */
+	protected function getRedirectMode() {
+		return EntityPerPage::INCLUDE_REDIRECTS;
 	}
 
 	/**

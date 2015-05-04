@@ -233,12 +233,21 @@ abstract class DumpScript extends Maintenance {
 	}
 
 	/**
+	 * Returns EntityPerPage::NO_REDIRECTS.
+	 *
+	 * @return mixed a EntityPerPage::XXX_REDIRECTS constant
+	 */
+	protected function getRedirectMode() {
+		return EntityPerPage::NO_REDIRECTS;
+	}
+
+	/**
 	 * @param string|null $entityType
 	 *
 	 * @return EntityIdPager
 	 */
 	private function makeIdQueryStream( $entityType ) {
-		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType );
+		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType, $this->getRedirectMode() );
 		return $stream;
 	}
 
