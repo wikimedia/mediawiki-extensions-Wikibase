@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use Action;
 use DummyLinker;
 use Language;
 use Linker;
-use OutputPage;
 use RequestContext;
 use SpecialPageFactory;
 use Title;
@@ -18,8 +18,8 @@ use Wikibase\Store\EntityIdLookup;
 
 /**
  * Handler for the LinkBegin hook, used to change the default link text of links to wikibase Entity
- * pages to the respective entity's label. This is used mainly for listings on special pages, where
- * it is useful to see pages listed by label rather than their entity ID.
+ * pages to the respective entity's label. This is used mainly for listings on special pages or for
+ * edit summaries, where it is useful to see pages listed by label rather than their entity ID.
  *
  * Label lookups are relatively expensive if done repeatedly for individual labels. If possible,
  * labels should be pre-loaded and buffered for later use via the LinkBegin hook.
@@ -96,7 +96,7 @@ class LinkBeginHookHandler {
 		$handler = self::newFromGlobalState();
 		$context = RequestContext::getMain();
 
-		$handler->doOnLinkBegin( $target, $html, $customAttribs, $context->getOutput() );
+		$handler->doOnLinkBegin( $target, $html, $customAttribs, $context );
 
 		return true;
 	}
@@ -128,19 +128,17 @@ class LinkBeginHookHandler {
 	 * @param Title $target
 	 * @param string &$html
 	 * @param array &$customAttribs
-	 * @param OutputPage $out
+	 * @param RequestContext $context
 	 */
-	public function doOnLinkBegin( Title $target, &$html, array &$customAttribs, OutputPage $out ) {
-		$currentTitle = $out->getTitle();
+	public function doOnLinkBegin( Title $target, &$html, array &$customAttribs, RequestContext $context ) {
+		$out = $context->getOutput();
 
-		if ( $currentTitle === null || !$currentTitle->isSpecialPage() ) {
-			// Note: this may not work right with special page transclusion. If $out->getTitle()
-			// doesn't return the transcluded special page's title, the transcluded text will
-			// not have entity IDs resolved to labels.
+		if ( !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() ) ) {
 			return;
 		}
 
-		if ( !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() ) ) {
+		// Only continue on pages with edit summaries (histories / diffs) or on special pages.
+		if ( !$this->shouldConvert( $out->getTitle(), $context ) ) {
 			return;
 		}
 
@@ -210,6 +208,42 @@ class LinkBeginHookHandler {
 		return $this->languageFallback->extractPreferredValueOrAny(
 			$termsByLanguage
 		);
+	}
+
+	/**
+	 * Whether we should try to convert links on this page.
+	 * This caches that result within a static variable,
+	 * thus it can't change (except in phpunit tests).
+	 *
+	 * @param Title|null $currentTitle
+	 * @param RequestContext $context
+	 * @return bool
+	 */
+	private function shouldConvert( Title $currentTitle = null, RequestContext $context ) {
+		static $shouldConvert = null;
+		if ( $shouldConvert !== null && !defined( 'MW_PHPUNIT_TEST' ) ) {
+			return $shouldConvert;
+		}
+
+		$actionName = Action::getActionName( $context );
+		 // This is how Article detects diffs
+		$isDiff = $actionName === 'view' && $context->getRequest()->getCheck( 'diff' );
+
+		// Only continue on pages with edit summaries (histories / diffs) or on special pages.
+		if (
+			( $currentTitle === null || !$currentTitle->isSpecialPage() )
+			&& $actionName !== 'history'
+			&& !$isDiff )
+		{
+			// Note: this may not work right with special page transclusion. If $out->getTitle()
+			// doesn't return the transcluded special page's title, the transcluded text will
+			// not have entity IDs resolved to labels.
+			$shouldConvert = false;
+			return false;
+		}
+
+		$shouldConvert = true;
+		return true;
 	}
 
 	/**

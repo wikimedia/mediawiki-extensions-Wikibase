@@ -29,6 +29,7 @@ use Wikibase\Store\EntityIdLookup;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
+ * @author Marius Hoch < hoo@online.de >
  */
 class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
@@ -36,8 +37,32 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	const ITEM_WITHOUT_LABEL = 'Q11';
 	const ITEM_DELETED = 'Q111';
 
-	public function testDoOnLinkBegin() {
-		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
+	public function validContextProvider() {
+		$historyContext = RequestContext::newExtraneousContext(
+			Title::newFromText( 'Foo' )
+		);
+		$historyContext->getRequest()->setVal( 'action', 'history' );
+
+		$diffContext = RequestContext::newExtraneousContext(
+			Title::newFromText( 'Foo' )
+		);
+		$diffContext->getRequest()->setVal( 'diff', 123 );
+
+		return array(
+			"Special page" => array(
+				RequestContext::newExtraneousContext(
+					Title::newFromText( 'Special:Recentchanges' )
+				)
+			),
+			"Action history" => array( $historyContext ),
+			"Diff" => array( $diffContext )
+		);
+	}
+
+	/**
+	 * @dataProvider validContextProvider
+	 */
+	public function testDoOnLinkBegin_validContext( RequestContext $context ) {
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
 		$title = Title::makeTitle( NS_MAIN, self::ITEM_WITH_LABEL );
@@ -47,8 +72,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$html = $title->getFullText();
 		$customAttribs = array();
 
-		$out = $this->getOutputPage( $contextTitle );
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$expectedHtml = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
@@ -59,10 +83,36 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$this->assertContains( 'linkbegin-label', $customAttribs['title'] );
 		$this->assertContains( 'linkbegin-description', $customAttribs['title'] );
 
-		$this->assertContains( 'wikibase.common', $out->getModuleStyles() );
+		$this->assertContains( 'wikibase.common', $context->getOutput()->getModuleStyles() );
 	}
 
-	public function testDoOnLinkBegin_onNonSpecialPage() {
+	public function invalidContextProvider() {
+		$deleteContext = RequestContext::newExtraneousContext(
+			Title::newFromText( 'Foo' )
+		);
+		$deleteContext->getRequest()->setVal( 'action', 'delete' );
+
+		$diffNonViewContext = RequestContext::newExtraneousContext(
+			Title::newFromText( 'Foo' )
+		);
+		$diffNonViewContext->getRequest()->setVal( 'action', 'protect' );
+		$diffNonViewContext->getRequest()->setVal( 'diff', 123 );
+
+		return array(
+			"Action delete" => array( $deleteContext ),
+			"Non-special page" => array( RequestContext::newExtraneousContext(
+				Title::newFromText( 'Foo' )
+			) ),
+			"Edge case: diff parameter set, but action != view" => array(
+				$diffNonViewContext
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider invalidContextProvider
+	 */
+	public function testDoOnLinkBegin_invalidContext( RequestContext $context ) {
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
 		$title = Title::makeTitle( NS_MAIN, self::ITEM_WITH_LABEL );
@@ -73,8 +123,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$html = $titleText;
 		$customAttribs = array();
 
-		$out = $this->getOutputPage( Title::newMainPage() );
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -101,10 +150,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$title = Title::makeTitle( NS_MAIN, $linkTitle );
 		$html = $title->getFullText();
-		$out = $this->getOutputPage( $contextTitle );
+		$context = RequestContext::newExtraneousContext( $contextTitle );
 		$attribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $out );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $context );
 
 		$specialPageTitle = Title::makeTitle(
 			NS_SPECIAL,
@@ -127,8 +176,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$html = $titleText;
 		$customAttribs = array();
 
-		$out = $this->getOutputPage( $contextTitle );
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
+		$context = RequestContext::newExtraneousContext( $contextTitle );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -146,8 +195,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$html = $titleText;
 		$customAttribs = array();
 
-		$out = $this->getOutputPage( $contextTitle );
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
+		$context = RequestContext::newExtraneousContext( $contextTitle );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -164,8 +213,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$html = $title->getFullText();
 		$customAttribs = array();
 
-		$out = $this->getOutputPage( $contextTitle );
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $out );
+		$context = RequestContext::newExtraneousContext( $contextTitle );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$expected = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr"></span> '
@@ -173,11 +222,6 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $expected, $html );
 		$this->assertContains( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
-	}
-
-	private function getOutputPage( Title $title ) {
-		$context = RequestContext::newExtraneousContext( $title );
-		return $context->getOutput();
 	}
 
 	/**
