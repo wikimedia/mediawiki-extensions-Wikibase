@@ -67,7 +67,7 @@ class EntityDataTestProvider {
 			'',      // subpage
 			array( 'id' => 'Q42', 'format' => 'json' ), // parameters
 			array(), // headers
-			'!^\{.*Raarrr!', // output regex
+			'!^\{.*Raarrr!s', // output regex
 			200,       // http code
 		);
 
@@ -87,7 +87,7 @@ class EntityDataTestProvider {
 				'format' => 'json',
 			),
 			array(), // headers
-			'!^\{.*Raarr!', // output regex
+			'!^\{.*Raarr!s', // output regex
 			200,       // http code
 		);
 
@@ -123,7 +123,7 @@ class EntityDataTestProvider {
 				'format' => 'application/json',
 			),
 			array(), // headers
-			'!^\{.*Raarr!', // output regex
+			'!^\{.*Raarr!s', // output regex
 			200,       // http code
 			array( // headers
 				'Content-Type' => '!^application/json(;|$)!'
@@ -148,7 +148,7 @@ class EntityDataTestProvider {
 				'format' => 'application/json',
 			),
 			array(), // headers
-			'!^\{.*Raarr!', // output regex
+			'!^\{.*Raarr!s', // output regex
 			200,       // http code
 			array( // headers
 				'Content-Type' => '!^application/json(;|$)!'
@@ -228,7 +228,7 @@ class EntityDataTestProvider {
 			)
 		);
 
-		// #22: format=html&revision=1234 does trigger a 303 to the correct rev
+		// #22: format=html&revision=4242 does trigger a 303 to the correct rev
 		$cases[] = array(
 			'',      // subpage
 			array( // parameters
@@ -244,7 +244,7 @@ class EntityDataTestProvider {
 			)
 		);
 
-		// #23: id=q5&format=json does not trigger a redirect
+		// #23: id=q42&format=json does not trigger a redirect
 		$cases[] = array(
 			'',      // subpage
 			array( // parameters
@@ -397,7 +397,7 @@ class EntityDataTestProvider {
 
 		// If-Modified-Since handling
 
-		// #35: IMS from the deep bast should return a 200 (revision timestamp is 20131211100908)
+		// #35: IMS from the deep past should return a 200 (revision timestamp is 20131211100908)
 		$cases[] = array(
 			'Q42.json',	  // subpage
 			array(), // parameters
@@ -428,20 +428,20 @@ class EntityDataTestProvider {
 			415, // http code
 		);
 
-		return $cases;
-	}
+		$cases[] = array( // #38: requesting a redirect item does not trigger an HTTP redirect
+			'',      // subpage
+			array( 'id' => 'Q22', 'format' => 'json' ), // parameters
+			array(), // headers
+			'!^\{.*Raarrr!s', // output regex
+			200,       // http code
+		);
 
-	public static function provideGetSerializedData() {
-		$cases = array();
-
-		$entityRevisions = self::getEntityRevisions();
-		$entityRev = $entityRevisions[0];
-
-		$cases[] = array( // #0: json
-			'json',      // format
-			$entityRev, // entityRev
-			'!^\{.*Raarrr!', // output regex
-			'application/json',       // expected mime
+		$cases[] = array( // #39: flavors are passed on
+			'',      // subpage
+			array( 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'full' ), // parameters
+			array(), // headers
+			'!<http://data\.acme\.test/Q42> *<http://schema.org/softwareVersion> *"0\.0\.1" *\.!s', // output regex
+			200,       // http code
 		);
 
 		return $cases;
