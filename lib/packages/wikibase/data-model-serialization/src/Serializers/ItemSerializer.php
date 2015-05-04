@@ -35,7 +35,7 @@ class ItemSerializer implements DispatchableSerializer {
 	/**
 	 * @var bool
 	 */
-	protected $useObjectsForMaps;
+	private $useObjectsForMaps;
 
 	/**
 	 * @param FingerprintSerializer $fingerprintSerializer

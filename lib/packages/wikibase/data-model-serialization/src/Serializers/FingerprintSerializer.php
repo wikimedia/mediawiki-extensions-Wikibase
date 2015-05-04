@@ -22,7 +22,7 @@ class FingerprintSerializer {
 	/**
 	 * @var bool
 	 */
-	protected $useObjectsForMaps;
+	private $useObjectsForMaps;
 
 	/**
 	 * @param bool $useObjectsForMaps

@@ -20,12 +20,12 @@ class StatementListSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	protected $statementSerializer;
+	private $statementSerializer;
 
 	/**
 	 * @var bool
 	 */
-	protected $useObjectsForMaps;
+	private $useObjectsForMaps;
 
 	/**
 	 * @param Serializer $statementSerializer
