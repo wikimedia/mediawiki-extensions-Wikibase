@@ -416,21 +416,30 @@ class EntityDataSerializationService {
 	 */
 	private function rdfSerialize( EntityRevision $entityRevision, EntityRedirect $redirect = null, RdfBuilder $rdfBuilder, $flavor = null ) {
 		$rdfBuilder->startDocument();
-		$rdfBuilder->addDumpHeader();
+
+		if ( $flavor !== 'dump' ) {
+			// $flavor === 'dump' indicates that the output is requested as part of creating or updating a dump,
+			// so an extra dump header is not needed.
+			$rdfBuilder->addDumpHeader();
+		}
 
 		if ( $redirect ) {
 			$rdfBuilder->addEntityRedirect( $redirect->getEntityId(), $redirect->getTargetId() );
 		}
 
-		$rdfBuilder->addEntityRevisionInfo(
-			$entityRevision->getEntity()->getId(),
-			$entityRevision->getRevisionId(),
-			$entityRevision->getTimestamp()
-		);
+		if ( $redirect && $flavor === 'dump' ) {
+			// For redirects, don't output the target entity data if the "dump" flavor is requested.
+		} else {
+			$rdfBuilder->addEntityRevisionInfo(
+				$entityRevision->getEntity()->getId(),
+				$entityRevision->getRevisionId(),
+				$entityRevision->getTimestamp()
+			);
 
-		$rdfBuilder->addEntity( $entityRevision->getEntity() );
+			$rdfBuilder->addEntity( $entityRevision->getEntity() );
+			$rdfBuilder->resolveMentionedEntities( $this->entityLookup );
+		}
 
-		$rdfBuilder->resolveMentionedEntities( $this->entityLookup );
 		$rdfBuilder->finishDocument();
 
 		return $rdfBuilder->getRDF();
