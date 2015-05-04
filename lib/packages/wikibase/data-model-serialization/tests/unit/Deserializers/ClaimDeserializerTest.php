@@ -43,7 +43,6 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 				new PropertyNoValueSnak( 42 )
 			) ) ) );
 
-
 		$referencesDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$referencesDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )

@@ -63,4 +63,5 @@ class ClaimsDeserializer implements Deserializer {
 			}
 		}
 	}
+
 }

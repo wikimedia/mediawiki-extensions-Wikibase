@@ -63,4 +63,5 @@ class ReferencesSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	public function assertReferenceListEquals( ReferenceList $expected, ReferenceList $actual ) {
 		$this->assertTrue( $actual->equals( $expected ), 'The two ReferenceList are different' );
 	}
+
 }

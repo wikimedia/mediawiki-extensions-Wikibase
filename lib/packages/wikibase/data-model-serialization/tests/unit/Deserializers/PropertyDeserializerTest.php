@@ -46,7 +46,6 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( new StatementList( array( $statement ) ) ) );
 
-
 		return new PropertyDeserializer( $entityIdDeserializerMock, $fingerprintDeserializerMock, $statementListDeserializerMock );
 	}
 

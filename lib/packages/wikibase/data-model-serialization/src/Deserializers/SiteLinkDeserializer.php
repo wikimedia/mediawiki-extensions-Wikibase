@@ -98,4 +98,5 @@ class SiteLinkDeserializer implements Deserializer {
 			throw new MissingAttributeException( $attribute );
 		}
 	}
+
 }

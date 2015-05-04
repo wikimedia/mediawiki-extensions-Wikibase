@@ -49,4 +49,5 @@ class SiteLinkSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			)
 		);
 	}
+
 }

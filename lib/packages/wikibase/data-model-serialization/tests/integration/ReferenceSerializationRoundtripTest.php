@@ -53,4 +53,5 @@ class ReferenceSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			),
 		);
 	}
+
 }

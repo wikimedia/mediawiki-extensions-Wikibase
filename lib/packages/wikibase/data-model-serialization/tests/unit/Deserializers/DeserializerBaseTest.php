@@ -35,7 +35,7 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return mixed[] things that are deserialized by the deserializer
+	 * @return array[] things that are deserialized by the deserializer
 	 */
 	public abstract function deserializableProvider();
 
@@ -62,7 +62,7 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return mixed[] things that aren't deserialized by the deserializer
+	 * @return array[] things that aren't deserialized by the deserializer
 	 */
 	public abstract function nonDeserializableProvider();
 
@@ -77,7 +77,8 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return array an array of array( object deserialized, serialization)
+	 * @return array[] an array of array( object deserialized, serialization )
 	 */
 	public abstract function deserializationProvider();
+
 }

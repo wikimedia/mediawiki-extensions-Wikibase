@@ -63,4 +63,5 @@ class SnakListDeserializer implements Deserializer {
 			}
 		}
 	}
+
 }

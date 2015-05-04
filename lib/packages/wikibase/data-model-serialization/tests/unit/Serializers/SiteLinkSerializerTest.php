@@ -78,4 +78,5 @@ class SiteLinkSerializerTest extends SerializerBaseTest {
 			),
 		);
 	}
+
 }

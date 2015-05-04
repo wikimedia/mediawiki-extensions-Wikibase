@@ -284,6 +284,4 @@ class FingerprintDeserializerTest extends DeserializerBaseTest {
 		);
 	}
 
-
 }
-
