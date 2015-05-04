@@ -14,7 +14,9 @@ use Wikibase\DataModel\Term\TermList;
  * Package private
  *
  * @licence GNU GPL v2+
+ * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 class FingerprintDeserializer implements Deserializer {
 
@@ -27,6 +29,10 @@ class FingerprintDeserializer implements Deserializer {
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'Fingerprint serialization must be an array' );
+		}
+
 		$fingerprint = new Fingerprint();
 
 		$this->setLabelsFromSerialization( $serialization, $fingerprint );
@@ -105,7 +111,7 @@ class FingerprintDeserializer implements Deserializer {
 		}
 	}
 
-	private function assertRequestedAndActualLanguageMatch( $serialization, $requestedLanguage ) {
+	private function assertRequestedAndActualLanguageMatch( array $serialization, $requestedLanguage ) {
 		if ( $serialization['language'] !== $requestedLanguage ) {
 			throw new DeserializationException(
 				'Deserialization of a value of the attribute language (actual)'
@@ -116,6 +122,10 @@ class FingerprintDeserializer implements Deserializer {
 	}
 
 	private function assertIsValidValueSerialization( $serialization, $requestedLanguage ) {
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'Term serializations must be arrays' );
+		}
+
 		$this->requireAttribute( $serialization, 'language' );
 		$this->requireAttribute( $serialization, 'value' );
 		$this->assertNotAttribute( $serialization, 'source' );

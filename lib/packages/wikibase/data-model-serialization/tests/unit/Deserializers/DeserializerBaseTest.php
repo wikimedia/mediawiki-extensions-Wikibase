@@ -57,15 +57,8 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider nonDeserializableProvider
 	 */
 	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
-		$deserializer = $this->buildDeserializer();
-
-		if ( $deserializer instanceof DispatchableDeserializer ) {
-			$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
-			$deserializer->deserialize( $nonSerializable );
-		}
-		else {
-			$this->assertTrue( true );
-		}
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->buildDeserializer()->deserialize( $nonSerializable );
 	}
 
 	/**

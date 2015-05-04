@@ -10,7 +10,9 @@ use Wikibase\DataModel\Term\Fingerprint;
  * @covers Wikibase\DataModel\Deserializers\FingerprintDeserializer
  *
  * @licence GNU GPL v2+
+ * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 class FingerprintDeserializerTest extends DeserializerBaseTest {
 
@@ -32,7 +34,19 @@ class FingerprintDeserializerTest extends DeserializerBaseTest {
 	public function nonDeserializableProvider() {
 		return array(
 			array(
-				array()
+				5
+			),
+			array(
+				array( 'labels' => array( 5 ) )
+			),
+			array(
+				array( 'descriptions' => array( 5 ) )
+			),
+			array(
+				array( 'aliases' => array( 5 ) )
+			),
+			array(
+				array( 'aliases' => array( 'en' => array( 5 ) ) )
 			),
 		);
 	}
