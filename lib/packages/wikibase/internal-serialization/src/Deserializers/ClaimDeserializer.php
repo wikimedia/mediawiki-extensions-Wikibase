@@ -75,10 +75,16 @@ class ClaimDeserializer implements Deserializer {
 	private function fromUnknownSerialization() {
 		try {
 			return $this->fromLegacySerialization();
-		}
-		catch ( DeserializationException $ex ) {
-			// Try again:
-			return $this->fromCurrentSerialization();
+		} catch ( DeserializationException $legacyEx ) {
+			try {
+				return $this->fromCurrentSerialization();
+			} catch ( DeserializationException $currentEx ) {
+				throw new DeserializationException(
+					'The provided claim serialization is neither legacy ('
+					. $legacyEx->getMessage() . ') nor current ('
+					. $currentEx->getMessage() . ')'
+				);
+			}
 		}
 	}
 
