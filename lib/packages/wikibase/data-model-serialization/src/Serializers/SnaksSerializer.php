@@ -50,7 +50,7 @@ class SnaksSerializer implements DispatchableSerializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param Snaks $object
 	 *
 	 * @return array
 	 * @throws SerializationException

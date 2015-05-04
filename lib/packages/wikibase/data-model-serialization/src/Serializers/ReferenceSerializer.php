@@ -44,7 +44,7 @@ class ReferenceSerializer implements DispatchableSerializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param Reference $object
 	 *
 	 * @return array
 	 * @throws SerializationException

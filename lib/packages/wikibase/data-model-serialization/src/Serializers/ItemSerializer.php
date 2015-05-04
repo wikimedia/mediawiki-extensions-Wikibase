@@ -69,7 +69,7 @@ class ItemSerializer implements DispatchableSerializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param Item $object
 	 *
 	 * @return array
 	 * @throws SerializationException

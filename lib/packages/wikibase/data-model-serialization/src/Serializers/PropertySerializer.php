@@ -50,7 +50,7 @@ class PropertySerializer implements DispatchableSerializer {
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param mixed $object
+	 * @param Property $object
 	 *
 	 * @return array
 	 * @throws SerializationException
