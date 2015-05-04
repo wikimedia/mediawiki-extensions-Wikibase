@@ -1,18 +1,21 @@
 # Wikibase DataModel Serialization
 
+[![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModelSerialization.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModelSerialization)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/badges/quality-score.png?s=d56b9477c29f4799b3834c4fbcc3731687feae95)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/)
+[![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/badges/coverage.png?s=916d21028b031abe2e685192ccef46c6f47ba76a)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/)
+[![Dependency Status](https://www.versioneye.com/php/wikibase:data-model-serialization/badge.png)](https://www.versioneye.com/php/wikibase:data-model-serialization)
+[![Download count](https://poser.pugx.org/wikibase/data-model-serialization/d/total.png)](https://packagist.org/packages/wikibase/data-model-serialization)
+[![License](https://poser.pugx.org/wikibase/data-model-serialization/license.svg)](https://packagist.org/packages/wikibase/data-model-serialization)
+
+[![Latest Stable Version](https://poser.pugx.org/wikibase/data-model-serialization/version.png)](https://packagist.org/packages/wikibase/data-model-serialization)
+[![Latest Unstable Version](https://poser.pugx.org/wikibase/data-model-serialization/v/unstable.svg)](//packagist.org/packages/wikibase/data-model-serialization)
+
 Library containing serializers and deserializers for the Wikibase DataModel.
 The supported formats are limited to public ones, ie those used by a web API.
 Serialization code for private formats, such as the format used by the Wikibase
 Repo data access layer, belongs in other components.
 
-[![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModelSerialization.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModelSerialization)
-[![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/badges/coverage.png?s=916d21028b031abe2e685192ccef46c6f47ba76a)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/badges/quality-score.png?s=d56b9477c29f4799b3834c4fbcc3731687feae95)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelSerialization/)
-[![Dependency Status](https://www.versioneye.com/php/wikibase:data-model-serialization/badge.png)](https://www.versioneye.com/php/wikibase:data-model-serialization)
-
-On [Packagist](https://packagist.org/packages/wikibase/data-model-serialization):
-[![Latest Stable Version](https://poser.pugx.org/wikibase/data-model-serialization/version.png)](https://packagist.org/packages/wikibase/data-model-serialization)
-[![Download count](https://poser.pugx.org/wikibase/data-model-serialization/d/total.png)](https://packagist.org/packages/wikibase/data-model-serialization)
+Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 ## Installation
 
@@ -104,68 +107,6 @@ By default the slow tests are not run. You can run them with
 Wikibase DataModel Serialization has been written by [Thomas PT](https://github.com/Tpt) as volunteer
 and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [Wikimedia Germany]
 (https://wikimedia.de) employee for the [Wikidata project](https://wikidata.org/).
-
-## Release notes
-
-### 1.4.0 (dev)
-
-* Added support for showing the component version when loaded via MediaWiki
-
-### 1.3.0 (2015-01-28)
-
-* `FingerprintSerializer` now supports serializing `AliasGroupFallback`s and `TermFallback`s
-* `EntityDeserializer` now fails if the given serialization contains a term or alias that was either
-  the result of a fallback or transliteration
-* Added `newTypedSnakSerializer` to `SerializerFactory`
-
-### 1.2.0 (2014-10-15)
-
-* Compatibility with DataModel 2.x added
-* Support statements on properties
-* Add option to serialize maps as objects instead of arrays so as to be able to
-  differentiate empty maps from empty lists
-
-### 1.1.1 (2014-09-09)
-
-* Use UnDeserializable error from serialization in SnakDeserializer
-
-### 1.1.0 (2014-09-02)
-
-* Compatibility with DataModel 1.x was added
-* DataModel 1.x is now required
-
-### 1.0.3 (2014-07-28)
-
-* Hashes are now ignored by the SnakDeserializer
-* Compatibility with Wikibase DataModel 1.x was improved
-
-### 1.0.2 (2014-07-21)
-
-* Fixed issue where invalid snaks-order elements in reference serialization caused an error rather
- than a deserialization exception
-* Hashes are now ignored by the ReferenceDeserializer
-
-### 1.0.1 (2014-06-16)
-
-* The Deserializer for snaks now constructs UnDeserializableValue objects for invalid data values
-
-### 1.0 (2014-05-27)
-
-* Usage of DataModel 0.7.x rather than 0.6.x.
-* Usage of Serialization ~3.1 rather than ~2.1.
-* Snaks now always have a 'hash' element in their serialization
-* Added `snaks-order` support to `ReferenceSerializer` and `ReferenceDeserializer`
-* Added `qualifiers-order` support to `ClaimDeserializer`
-* Added `TypedSnakSerializer`
-* Added hash validation for references and snaks
-* Added additional tests to ensure old serializations can still be deserialized
-
-### 0.1 (2014-02-22)
-
-Initial release with these features:
-
-* Serializers for the main Wikibase DataModel (0.6) objects
-* Deserializers for the main Wikibase DataModel (0.6) objects
 
 ## Links
 
