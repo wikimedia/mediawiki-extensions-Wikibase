@@ -117,7 +117,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	private function getSiteStore() {
 		$siteStore = new MockSiteStore();
 
-		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
+		$site = new MediaWikiSite();
+		$site->setGlobalId( 'enwiki' );
 		$site->setGroup( 'wikipedia' );
 
 		$siteStore->saveSite( $site );
