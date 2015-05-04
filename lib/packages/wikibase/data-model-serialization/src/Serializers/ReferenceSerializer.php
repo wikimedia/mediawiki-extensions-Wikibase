@@ -53,7 +53,7 @@ class ReferenceSerializer implements DispatchableSerializer {
 		if ( !$this->isSerializerFor( $object ) ) {
 			throw new UnsupportedObjectException(
 				$object,
-				'ReferenceSerializer can only serialize References objects'
+				'ReferenceSerializer can only serialize Reference objects'
 			);
 		}
 

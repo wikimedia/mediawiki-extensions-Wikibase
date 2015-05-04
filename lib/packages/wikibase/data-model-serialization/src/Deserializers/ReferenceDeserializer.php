@@ -79,7 +79,7 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 
 	private function assertCanDeserialize( $serialization ) {
 		if ( !$this->isValidSerialization( $serialization ) ) {
-			throw new DeserializationException( 'The serialization is invalid!' );
+			throw new DeserializationException( 'The serialization is invalid' );
 		}
 	}
 

@@ -99,4 +99,5 @@ class SnakListDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 	}
+
 }

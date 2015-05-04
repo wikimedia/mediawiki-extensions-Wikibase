@@ -52,7 +52,8 @@ class ReferenceListDeserializer implements Deserializer {
 
 	private function assertIsArray( $serialization ) {
 		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'The ReferenceList serialization should be an array!' );
+			throw new DeserializationException( 'The ReferenceList serialization should be an array' );
 		}
 	}
+
 }

@@ -59,4 +59,5 @@ class SnaksSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			),
 		);
 	}
+
 }

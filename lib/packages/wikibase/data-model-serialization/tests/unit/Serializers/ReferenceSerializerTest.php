@@ -98,4 +98,5 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 			$referenceSerializer->serialize( $reference )
 		);
 	}
+
 }

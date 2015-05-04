@@ -78,4 +78,5 @@ class ReferenceListSerializerTest extends SerializerBaseTest {
 			),
 		);
 	}
+
 }

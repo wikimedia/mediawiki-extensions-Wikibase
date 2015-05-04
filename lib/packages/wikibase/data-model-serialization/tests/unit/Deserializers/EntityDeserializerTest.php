@@ -33,7 +33,7 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 		$fingerprintDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->will( $this->returnValue( new Fingerprint() ) );
-		
+
 		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
 		$statement->setGuid( 'test' );
 

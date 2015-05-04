@@ -125,4 +125,5 @@ class ClaimsDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 	}
+
 }

@@ -6,7 +6,6 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
-use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
 
@@ -134,9 +133,9 @@ class FingerprintDeserializer implements Deserializer {
 			throw new InvalidAttributeException(
 				$attributeName,
 				$array[$attributeName],
-				"The internal type of attribute '$attributeName'  needs to be '$internalType'"
+				"The internal type of attribute '$attributeName' needs to be '$internalType'"
 			);
 		}
 	}
-	
+
 }

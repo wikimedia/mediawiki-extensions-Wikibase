@@ -82,4 +82,5 @@ class SnakSerializerTest extends SerializerBaseTest {
 			),
 		);
 	}
+
 }

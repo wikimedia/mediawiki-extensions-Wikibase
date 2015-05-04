@@ -126,4 +126,5 @@ class StatementListDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 	}
+
 }

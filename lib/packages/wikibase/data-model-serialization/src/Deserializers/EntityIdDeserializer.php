@@ -50,4 +50,5 @@ class EntityIdDeserializer implements Deserializer {
 			throw new DeserializationException( 'The serialization of an entity ID should be a string' );
 		}
 	}
+
 }
