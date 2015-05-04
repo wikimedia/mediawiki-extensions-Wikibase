@@ -193,4 +193,4 @@ class importProperties extends Maintenance {
 }
 
 $maintClass = 'importProperties';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;

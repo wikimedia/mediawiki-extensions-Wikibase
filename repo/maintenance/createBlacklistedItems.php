@@ -81,4 +81,4 @@ class CreateBlacklistedItems extends \Maintenance {
 }
 
 $maintClass = 'Wikibase\CreateBlacklistedItems';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;

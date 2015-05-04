@@ -48,4 +48,4 @@ class DumpJson extends DumpScript {
 }
 
 $maintClass = 'Wikibase\DumpJson';
-require_once( RUN_MAINTENANCE_IF_MAIN );
+require_once RUN_MAINTENANCE_IF_MAIN;
