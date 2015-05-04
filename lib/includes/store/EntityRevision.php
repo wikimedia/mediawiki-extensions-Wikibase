@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * Represents a revision of a Wikibase entity.
@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\Entity;
 class EntityRevision {
 
 	/**
-	 * @var Entity
+	 * @var EntityDocument
 	 */
 	private $entity;
 
@@ -31,13 +31,13 @@ class EntityRevision {
 	private $mwTimestamp;
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param int $revisionId Revision ID or 0 for none
 	 * @param string $mwTimestamp in MediaWiki format or an empty string for none
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( Entity $entity, $revisionId = 0, $mwTimestamp = '' ) {
+	public function __construct( EntityDocument $entity, $revisionId = 0, $mwTimestamp = '' ) {
 		if ( !is_int( $revisionId ) || $revisionId < 0 ) {
 			throw new InvalidArgumentException( 'Revision ID must be a non-negative integer.' );
 		}
@@ -52,9 +52,7 @@ class EntityRevision {
 	}
 
 	/**
-	 * TODO: change return type to EntityDocument
-	 *
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	public function getEntity() {
 		return $this->entity;
