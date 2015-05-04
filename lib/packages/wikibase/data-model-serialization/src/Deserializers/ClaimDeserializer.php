@@ -69,9 +69,9 @@ class ClaimDeserializer implements DispatchableDeserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
-	 * @return object
+	 * @return Claim|Statement
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {

@@ -29,9 +29,9 @@ class SnakListDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
-	 * @return object
+	 * @return SnakList
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {

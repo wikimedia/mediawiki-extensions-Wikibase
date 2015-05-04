@@ -29,9 +29,9 @@ class ReferenceListDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
-	 * @return object
+	 * @return ReferenceList
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
