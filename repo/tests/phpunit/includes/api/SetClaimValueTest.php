@@ -13,12 +13,12 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
@@ -86,11 +86,11 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 *
-	 * @return Entity[]
+	 * @return Item[]
 	 */
-	protected function getEntities( EntityId $propertyId ) {
+	protected function getItems( PropertyId $propertyId ) {
 		$item = new Item();
 
 		return array(
@@ -106,17 +106,14 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-		foreach( $this->getEntities( $property->getId() ) as $entity ) {
-			/**
-			 * @var Claim $claim
-			 */
-			foreach ( $entity->getClaims() as $claim ) {
+		foreach( $this->getItems( $property->getId() ) as $item ) {
+			foreach ( $item->getStatements()->toArray() as $statement ) {
 				$value = new StringValue( 'Kittens.png' );
 				$argLists[] = array(
-					'entity' => $entity,
-					'claimGuid' => $claim->getGuid(),
+					'entity' => $item,
+					'claimGuid' => $statement->getGuid(),
 					'value' => $value->getArrayValue(),
-					'expectedSummary' => $this->getExpectedSummary( $claim, $value )
+					'expectedSummary' => $this->getExpectedSummary( $statement, $value )
 				);
 			}
 		}
@@ -211,8 +208,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		);
 	}
 
-	private function getExpectedSummary( Claim $oldClaim, DataValue $value = null ) {
-		$oldSnak = $oldClaim->getMainSnak();
+	private function getExpectedSummary( Statement $oldStatement, DataValue $value = null ) {
+		$oldSnak = $oldStatement->getMainSnak();
 		$property = $this->getEntityIdFormatter()->formatEntityId( $oldSnak->getPropertyId() );
 
 		//NOTE: new snak is always a PropertyValueSnak
