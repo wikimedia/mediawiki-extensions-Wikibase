@@ -31,6 +31,7 @@ class EntityPerPageTable implements EntityPerPage {
 
 	/**
 	 * @var bool
+	 * @todo Drop this backwards compat flag.
 	 */
 	private $useRedirectTargetColumn;
 
@@ -343,11 +344,11 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @param null|string $entityType The entity type to look for.
 	 * @param int $limit The maximum number of IDs to return.
 	 * @param EntityId $after Only return entities with IDs greater than this.
+	 * @param mixed $redirects A XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 *
-	 * @throws InvalidArgumentException
 	 * @return EntityId[]
 	 */
-	public function listEntities( $entityType, $limit, EntityId $after = null ) {
+	public function listEntities( $entityType, $limit, EntityId $after = null, $redirects = self::NO_REDIRECTS ) {
 		if ( $entityType == null  ) {
 			$where = array();
 			//NOTE: needs to be id/type, not type/id, according to the definition of the relevant
@@ -363,7 +364,11 @@ class EntityPerPageTable implements EntityPerPage {
 		}
 
 		if ( $this->useRedirectTargetColumn ) {
-			$where[ 'epp_redirect_target' ] = null;
+			if ( $redirects === self::NO_REDIRECTS ) {
+				$where[] = 'epp_redirect_target IS NULL';
+			} elseif ( $redirects === self::ONLY_REDIRECTS ) {
+				$where[] = 'epp_redirect_target IS NOT NULL';
+			}
 		}
 
 		if ( !is_int( $limit ) || $limit < 1 ) {

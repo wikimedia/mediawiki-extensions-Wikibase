@@ -4,9 +4,13 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -68,38 +72,25 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Entity[] $entities
+	 * @param EntityRedirect[] $redirects
 	 *
 	 * @return EntityPerPageTable
 	 */
-	protected function newEntityPerPageTable( array $entities = array() ) {
+	protected function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
 		$useRedirectTargetColumn = $this->isRedirectTargetColumnSupported();
 		$idParser = new BasicEntityIdParser();
 
 		$table = new EntityPerPageTable( $idParser, $useRedirectTargetColumn );
 		$table->clear();
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-
 		foreach ( $entities as $entity ) {
-			if ( $entity instanceof Property ) {
-				$entity->setDataTypeId( 'string' );
-			}
+			$pageId = $entity->getId()->getNumericId();
+			$table->addEntityPage( $entity->getId(), $pageId );
+		}
 
-			$title = null;
-
-			if ( $entity->getId() !== null ) {
-				$title = $titleLookup->getTitleForId( $entity->getId() );
-			}
-
-			if ( !$title || !$title->exists() ) {
-				$rev = $store->saveEntity( $entity, "test", $GLOBALS['wgUser'], EDIT_NEW );
-
-				$entity = $rev->getEntity();
-				$title = $titleLookup->getTitleForId( $entity->getId() );
-			}
-
-			$table->addEntityPage( $entity->getId(), $title->getArticleID() );
+		foreach ( $redirects as $redirect ) {
+			$pageId = $redirect->getEntityId()->getNumericId();
+			$table->addRedirectPage( $redirect->getEntityId(), $pageId, $redirect->getTargetId() );
 		}
 
 		return $table;
@@ -107,9 +98,12 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 	protected function getIdStrings( array $entities ) {
 		$ids = array_map( function ( $entity ) {
-			if ( $entity instanceof Entity ) {
+			if ( $entity instanceof EntityDocument ) {
 				$entity = $entity->getId();
+			} elseif ( $entity instanceof EntityRedirect ) {
+				$entity = $entity->getEntityId();
 			}
+
 			return $entity->getSerialization();
 		}, $entities );
 
@@ -126,36 +120,97 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider listEntitiesProvider
 	 */
-	public function testListEntities( array $entities, $type, $limit, array $expected ) {
-		$table = $this->newEntityPerPageTable( $entities );
+	public function testListEntities( array $entities, array $redirects, $type, $limit, $after, $redirectMode, array $expected ) {
+		$table = $this->newEntityPerPageTable( $entities, $redirects );
 
-		$actual = $table->listEntities( $type, $limit );
+		$actual = $table->listEntities( $type, $limit, $after, $redirectMode );
 
 		$this->assertEqualIds( $expected, $actual );
 	}
 
 	public function listEntitiesProvider() {
-		$property = Property::newFromType( 'string' );
-		$item = new Item();
+		$property = new Property( new PropertyId( 'P1' ), null, 'string' );
+		$item = new Item( new ItemId( 'Q5' ) );
+		$redirect = new EntityRedirect( new ItemId( 'Q55' ), new ItemId( 'Q5' ) );
 
 		return array(
 			'empty' => array(
-				array(), null, 100, array()
+				array(),
+				array(),
+				null,
+				100,
+				null,
+				EntityPerPage::NO_REDIRECTS,
+				array()
 			),
 			'some entities' => array(
-				array( $item, $property ), null, 100, array( $property, $item )
+				array( $item, $property ),
+				array( $redirect ),
+				null,
+				100,
+				null,
+				EntityPerPage::NO_REDIRECTS,
+				array( $property, $item )
+			),
+			'entities after' => array(
+				array( $item, $property ),
+				array( $redirect ),
+				null,
+				100,
+				$property->getId(),
+				EntityPerPage::NO_REDIRECTS,
+				array( $item )
+			),
+			'include redirects' => array(
+				array( $item, $property ),
+				array( $redirect ),
+				null,
+				100,
+				null,
+				EntityPerPage::INCLUDE_REDIRECTS,
+				array( $property, $item, $redirect )
+			),
+			'only redirects' => array(
+				array( $item, $property ),
+				array( $redirect ),
+				null,
+				100,
+				null,
+				EntityPerPage::ONLY_REDIRECTS,
+				array( $redirect )
 			),
 			'just properties' => array(
-				array( $item, $property ), Property::ENTITY_TYPE, 100, array( $property )
+				array( $item, $property ),
+				array( $redirect ),
+				Property::ENTITY_TYPE,
+				100,
+				null,
+				EntityPerPage::NO_REDIRECTS,
+				array( $property )
+			),
+			'limit' => array(
+				array( $item, $property ),
+				array( $redirect ),
+				Property::ENTITY_TYPE,
+				1,
+				null,
+				EntityPerPage::NO_REDIRECTS,
+				array( $property ) // current sort order is by numeric id, then type.
 			),
 			'no matches' => array(
-				array( $property ), Item::ENTITY_TYPE, 100, array()
+				array( $property ),
+				array( $redirect ),
+				Item::ENTITY_TYPE,
+				100,
+				null,
+				EntityPerPage::NO_REDIRECTS,
+				array()
 			),
 		);
 	}
 
 	public function testGetPageIdForEntityId() {
-		$entity = new Item();
+		$entity = new Item( new ItemId( 'Q5' ) );
 
 		$epp = $this->newEntityPerPageTable( array( $entity ) );
 		$entityId = $entity->getId();
@@ -172,8 +227,8 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( 'Redirects not supported' );
 		}
 
-		$entity = new Item();
-		$entity2 = new Item();
+		$entity = new Item( new ItemId( 'Q1' ) );
+		$entity2 = new Item( new ItemId( 'Q2' ) );
 
 		$epp = $this->newEntityPerPageTable( array( $entity, $entity2 ) );
 		$redirectId = $entity->getId();
