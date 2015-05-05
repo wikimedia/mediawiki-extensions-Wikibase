@@ -10,6 +10,7 @@ use Wikibase\DataModel\Claim\Claim;
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class StatementDeserializer implements Deserializer {
 
@@ -22,11 +23,6 @@ class StatementDeserializer implements Deserializer {
 	 * @var DispatchableDeserializer
 	 */
 	private $currentDeserializer;
-
-	/**
-	 * @var mixed
-	 */
-	private $serialization;
 
 	public function __construct(
 		Deserializer $legacyDeserializer,
@@ -47,41 +43,38 @@ class StatementDeserializer implements Deserializer {
 			throw new DeserializationException( 'Claim serialization must be an array' );
 		}
 
-		$this->serialization = $serialization;
-
-		if ( $this->isLegacySerialization() ) {
-			return $this->fromLegacySerialization();
-		}
-		elseif ( $this->isCurrentSerialization() ) {
-			return $this->fromCurrentSerialization();
-		}
-		else {
-			return $this->fromUnknownSerialization();
+		if ( $this->isLegacySerialization( $serialization ) ) {
+			return $this->fromLegacySerialization( $serialization );
+		} elseif ( $this->isCurrentSerialization( $serialization ) ) {
+			return $this->fromCurrentSerialization( $serialization );
+		} else {
+			return $this->fromUnknownSerialization( $serialization );
 		}
 	}
 
-	private function isLegacySerialization() {
-		return array_key_exists( 'm', $this->serialization );
+	private function isLegacySerialization( array $serialization ) {
+		// This element is called 'mainsnak' in the current serialization.
+		return array_key_exists( 'm', $serialization );
 	}
 
-	private function isCurrentSerialization() {
-		return $this->currentDeserializer->isDeserializerFor( $this->serialization );
+	private function isCurrentSerialization( array $serialization ) {
+		return $this->currentDeserializer->isDeserializerFor( $serialization );
 	}
 
-	private function fromLegacySerialization() {
-		return $this->legacyDeserializer->deserialize( $this->serialization );
+	private function fromLegacySerialization( array $serialization ) {
+		return $this->legacyDeserializer->deserialize( $serialization );
 	}
 
-	private function fromCurrentSerialization() {
-		return $this->currentDeserializer->deserialize( $this->serialization );
+	private function fromCurrentSerialization( array $serialization ) {
+		return $this->currentDeserializer->deserialize( $serialization );
 	}
 
-	private function fromUnknownSerialization() {
+	private function fromUnknownSerialization( array $serialization ) {
 		try {
-			return $this->fromLegacySerialization();
+			return $this->fromLegacySerialization( $serialization );
 		} catch ( DeserializationException $legacyEx ) {
 			try {
-				return $this->fromCurrentSerialization();
+				return $this->fromCurrentSerialization( $serialization );
 			} catch ( DeserializationException $currentEx ) {
 				throw new DeserializationException(
 					'The provided claim serialization is neither legacy ('
