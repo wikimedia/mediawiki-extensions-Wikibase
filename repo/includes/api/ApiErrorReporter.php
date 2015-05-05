@@ -440,7 +440,7 @@ class ApiErrorReporter {
 		ApiResult::setIndexedTagName( $row['parameters'], 'parameter' );
 
 		$html = $this->forceMessageLanguage( $message, $this->language )->useDatabase( true )->parse();
-		ApiResult::setContentValue( $row, 'html', $html );
+		ApiResult::setValue( $row, 'html', $html );
 		$row[ApiResult::META_BC_SUBELEMENTS][] = 'html';
 
 		return $row;
