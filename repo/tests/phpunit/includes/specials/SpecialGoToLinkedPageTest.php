@@ -6,9 +6,9 @@ use FauxResponse;
 use Site;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
-use Wikibase\Repo\Store\EntityPerPage;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialGoToLinkedPage
@@ -66,10 +66,10 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return EntityPerPage
+	 * @return EntityRedirectLookup
 	 */
-	private function getEntityPerPage() {
-		$mock = $this->getMock( 'Wikibase\Repo\Store\EntityPerPage' );
+	private function getEntityRedirectLookup() {
+		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityRedirectLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getRedirectForEntityId' )
 			->will( $this->returnCallback( function( ItemId $itemId ) {
@@ -92,7 +92,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$page->initServices(
 			$this->getMockSiteStore(),
 			$this->getMockSiteLinkLookup(),
-			$this->getEntityPerPage()
+			$this->getEntityRedirectLookup()
 		);
 
 		return $page;
