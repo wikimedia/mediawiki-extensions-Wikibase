@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
+use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
@@ -57,6 +57,11 @@ class EntityDataRequestHandler {
 	private $entityRevisionLookup;
 
 	/**
+	 * @var EntityRedirectLookup
+	 */
+	private $entityRedirectLookup;
+
+	/**
 	 * @var EntityTitleLookup
 	 */
 	private $entityTitleLookup;
@@ -79,21 +84,23 @@ class EntityDataRequestHandler {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityDataUriManager           $uriManager
-	 * @param EntityTitleLookup              $entityTitleLookup
-	 * @param EntityIdParser                 $entityIdParser
-	 * @param EntityRevisionLookup           $entityRevisionLookup
+	 * @param EntityDataUriManager $uriManager
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdParser $entityIdParser
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityRedirectLookup $entityRedirectLookup
 	 * @param EntityDataSerializationService $serializationService
-	 * @param string                         $defaultFormat
-	 * @param int                            $maxAge number of seconds to cache entity data
-	 * @param bool                           $useSquids do we have web caches configured?
-	 * @param string|null                    $frameOptionsHeader for X-Frame-Options
+	 * @param string $defaultFormat
+	 * @param int $maxAge number of seconds to cache entity data
+	 * @param bool $useSquids do we have web caches configured?
+	 * @param string|null $frameOptionsHeader for X-Frame-Options
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
+		EntityRedirectLookup $entityRedirectLookup,
 		EntityDataSerializationService $serializationService,
 		$defaultFormat,
 		$maxAge,
@@ -104,6 +111,7 @@ class EntityDataRequestHandler {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->entityRedirectLookup = $entityRedirectLookup;
 		$this->serializationService = $serializationService;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
@@ -370,6 +378,25 @@ class EntityDataRequestHandler {
 	}
 
 	/**
+	 * Loads incoming redirects referring to the given entity ID.
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return EntityId[]
+	 * @throws HttpError
+	 */
+	private function getIncomingRedirects( EntityId $id ) {
+		$prefixedId = $id->getSerialization();
+
+		try {
+			return $this->entityRedirectLookup->getRedirectIds( $id );
+		} catch ( StorageException $ex ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load incoming redirects of $prefixedId: $ex"  );
+			return array();
+		}
+	}
+
+	/**
 	 * Output entity data.
 	 *
 	 * @param WebRequest $request
@@ -382,7 +409,11 @@ class EntityDataRequestHandler {
 	 */
 	public function showData( WebRequest $request, OutputPage $output, $format, EntityId $id, $revision ) {
 
-		list( $entityRevision, $entityRedirect ) = $this->getEntityRevision( $id, $revision );
+		$flavor = $request->getVal("flavor");
+
+		/** @var EntityRevision $entityRevision */
+		/** @var EntityRedirect $entityRedirect */
+		list( $entityRevision, $followedRedirect ) = $this->getEntityRevision( $id, $revision );
 
 		// handle If-Modified-Since
 		$imsHeader = $request->getHeader( 'IF-MODIFIED-SINCE' );
@@ -396,8 +427,20 @@ class EntityDataRequestHandler {
 			}
 		}
 
+		if ( $flavor === 'dump' || $revision > 0  ) {
+			// In dump more and when fetching a specific revision, don't include incoming redirects.
+			$incomingRedirects = array();
+		} else {
+			// Get the incoming redirects of the entity (if we followed a redirect, use the target id).
+			$incomingRedirects = $this->getIncomingRedirects( $entityRevision->getEntity()->getId() );
+		}
+
 		list( $data, $contentType ) = $this->serializationService->getSerializedData(
-			$format, $entityRevision, $entityRedirect, $request->getVal("flavor")
+			$format,
+			$entityRevision,
+			$followedRedirect,
+			$incomingRedirects,
+			$flavor
 		);
 
 		$output->disable();

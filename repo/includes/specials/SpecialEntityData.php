@@ -75,6 +75,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
+		$entityRedirectLookup = $wikibaseRepo->getStore()->getEntityRedirectLookup();
 		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 
@@ -123,6 +124,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$titleLookup,
 			$entityIdParser,
 			$entityRevisionLookup,
+			$entityRedirectLookup,
 			$serializationService,
 			$defaultFormat,
 			$maxAge,
