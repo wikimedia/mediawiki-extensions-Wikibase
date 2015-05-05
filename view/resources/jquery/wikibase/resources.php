@@ -431,6 +431,7 @@ return call_user_func( function() {
 		),
 
 		'jquery.wikibase.statementview' => $moduleTemplate + array(
+			'position' => 'top',
 			'scripts' => array(
 				'jquery.wikibase.statementview.js',
 				'jquery.wikibase.statementview.RankSelector.js',

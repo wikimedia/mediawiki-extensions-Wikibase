@@ -38,6 +38,7 @@ return call_user_func( function() {
 			'styles' => 'wikibase.client.page-move.css'
 		),
 		'wikibase.client.changeslist.css' => $moduleTemplate + array(
+			'position' => 'top',
 			'styles' => 'wikibase.client.changeslist.css'
 		),
 		'wikibase.client.linkitem.init' => $moduleTemplate + array(

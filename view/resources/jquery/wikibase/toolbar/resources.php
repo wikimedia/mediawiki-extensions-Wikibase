@@ -91,6 +91,7 @@ return call_user_func( function() {
 		),
 
 		'jquery.wikibase.toolbar' => $moduleTemplate + array(
+			'position' => 'top',
 			'scripts' => array(
 				'jquery.wikibase.toolbar.js',
 			),
