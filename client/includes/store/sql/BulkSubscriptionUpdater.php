@@ -124,6 +124,8 @@ class BulkSubscriptionUpdater {
 		$continuation = $startEntity === null ? null : array( $startEntity->getSerialization() );
 
 		while ( true ) {
+			wfWaitForSlaves();
+
 			$count = $this->processUpdateBatch( $continuation );
 
 			if ( $count > 0 ) {
@@ -263,6 +265,8 @@ class BulkSubscriptionUpdater {
 		$this->repoConnectionManager->forceMaster();
 
 		while ( true ) {
+			wfWaitForSlaves();
+
 			$count = $this->processDeletionBatch( $continuation );
 
 			if ( $count > 0 ) {
