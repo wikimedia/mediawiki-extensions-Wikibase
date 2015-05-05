@@ -260,7 +260,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( new StatementList( $statement ), $list );
 	}
 
-	public function testGivenGuidOfPresenStatement_statementIsRemoved() {
+	public function testGivenGuidOfPresentStatement_statementIsRemoved() {
 		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
@@ -275,7 +275,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $statements, $list->toArray() );
 	}
 
-	public function testGivenGuidOfMulitpleStatements_multipleStatementsAreRemoved() {
+	public function testGivenGuidOfMultipleStatements_multipleStatementsAreRemoved() {
 		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
