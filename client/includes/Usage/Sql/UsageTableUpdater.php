@@ -137,7 +137,7 @@ class UsageTableUpdater {
 	 * @param string|false $touched timestamp
 	 */
 	private function touchUsageForPage( $pageId, $touched ) {
-		if ( $touched === false ) {
+		if ( $touched === false || !$this->hasTouchedField() ) {
 			return;
 		}
 
@@ -150,6 +150,18 @@ class UsageTableUpdater {
 				'eu_page_id' => (int)$pageId,
 			),
 			__METHOD__
+		);
+	}
+
+	/**
+	 * Check if the usage tracking table has the touched field.
+	 *
+	 * @return bool
+	 */
+	private function hasTouchedField() {
+		return $this->connection->fieldExists(
+			$this->tableName,
+			'eu_touched'
 		);
 	}
 
