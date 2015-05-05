@@ -7,7 +7,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
-use Wikibase\Settings;
+use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler
@@ -26,7 +26,7 @@ class OutputPageJsConfigHookHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider handleProvider
 	 */
-	public function testHandle( array $expected, Title $title, Settings $settings, $experimental,
+	public function testHandle( array $expected, Title $title, SettingsArray $settings, $experimental,
 		$message
 	) {
 		$hookHandler = new OutputPageJsConfigHookHandler( $settings );
@@ -64,10 +64,10 @@ class OutputPageJsConfigHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return Settings
+	 * @return SettingsArray
 	 */
 	private function getSettings() {
-		$settings = new Settings();
+		$settings = new SettingsArray();
 		$settings->setSetting( 'dataRightsUrl', 'https://creativecommons.org' );
 		$settings->setSetting( 'dataRightsText', 'CC-0' );
 		$settings->setSetting( 'badgeItems', array() );
