@@ -16,6 +16,24 @@
       "revId": "115a4f811a24b023a84d6187d4f253e20321c469",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_913cf6bc",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-05T09:39:40Z",
+      "side": 0,
+      "message": "heh... not sure what happened here... I certainly did remove those, and even re-ran the tests to verify the warning was gone...",
+      "parentUuid": "0ed113e2_3e7724ff",
+      "revId": "115a4f811a24b023a84d6187d4f253e20321c469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
