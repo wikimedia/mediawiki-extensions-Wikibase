@@ -53,6 +53,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 			new ConsistentReadConnectionManager( $loadBalancer, false ),
 			new ConsistentReadConnectionManager( $loadBalancer, false ),
 			'testwiki',
+			false,
 			$batchSize
 		);
 	}
