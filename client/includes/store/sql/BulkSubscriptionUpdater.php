@@ -36,6 +36,13 @@ class BulkSubscriptionUpdater {
 	private $subscriberWikiId;
 
 	/**
+	 * @var string|false The repo wiki's id, as used by the LoadBalancer. Used for wait for slaves.
+	 *                   False indicates to use the local wiki's database, and is the default
+	 *                   for the repoWiki setting.
+	 */
+	private $repoWiki;
+
+	/**
 	 * @var int
 	 */
 	private $batchSize;
@@ -57,6 +64,9 @@ class BulkSubscriptionUpdater {
 	 * connections to the repo.
 	 * @param string $subscriberWikiId The local wiki's global ID, to be used as the subscriber ID
 	 * in the repo's subscription table.
+	 * @param string|false $repoWiki The repo wiki's id, as used by the LoadBalancer.
+	 *                               False (default of the repoWiki setting) indicates to
+	 *                               use local wiki database.
 	 * @param int $batchSize
 	 *
 	 * @throws InvalidArgumentException
@@ -65,10 +75,15 @@ class BulkSubscriptionUpdater {
 		ConsistentReadConnectionManager $localConnectionManager,
 		ConsistentReadConnectionManager $repoConnectionManager,
 		$subscriberWikiId,
+		$repoWiki,
 		$batchSize = 1000
 	) {
 		if ( !is_string( $subscriberWikiId ) ) {
 			throw new InvalidArgumentException( '$subscriberWikiId must be a string' );
+		}
+
+		if ( !is_string( $repoWiki ) && $repoWiki !== false ) {
+			throw new InvalidArgumentException( '$repoWiki must be a string or false' );
 		}
 
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
@@ -79,6 +94,7 @@ class BulkSubscriptionUpdater {
 		$this->repoConnectionManager = $repoConnectionManager;
 
 		$this->subscriberWikiId = $subscriberWikiId;
+		$this->repoWiki = $repoWiki;
 		$this->batchSize = $batchSize;
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
@@ -124,6 +140,8 @@ class BulkSubscriptionUpdater {
 		$continuation = $startEntity === null ? null : array( $startEntity->getSerialization() );
 
 		while ( true ) {
+			wfWaitForSlaves( null, $this->repoWiki );
+
 			$count = $this->processUpdateBatch( $continuation );
 
 			if ( $count > 0 ) {
@@ -263,6 +281,8 @@ class BulkSubscriptionUpdater {
 		$this->repoConnectionManager->forceMaster();
 
 		while ( true ) {
+			wfWaitForSlaves( null, $this->repoWiki );
+
 			$count = $this->processDeletionBatch( $continuation );
 
 			if ( $count > 0 ) {
