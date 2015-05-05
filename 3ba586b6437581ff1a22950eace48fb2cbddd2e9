@@ -33,6 +33,24 @@
       "revId": "3ba586b6437581ff1a22950eace48fb2cbddd2e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7cc8495a",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-05T13:54:13Z",
+      "side": 1,
+      "message": "You are right this is an OCP violation. It was already there before this change, though in less explicit form.",
+      "parentUuid": "0ed113e2_7cca89a4",
+      "revId": "3ba586b6437581ff1a22950eace48fb2cbddd2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
