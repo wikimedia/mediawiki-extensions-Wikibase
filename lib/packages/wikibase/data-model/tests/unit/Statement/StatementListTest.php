@@ -260,6 +260,50 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( new StatementList( $statement ), $list );
 	}
 
+	public function testRemoveStatementsWithGuid_singleStatementRemoved() {
+		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
+		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+
+		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
+		$list->removeStatementsWithGuid( 'foo' );
+
+		$statements = array();
+		$statements[1] = $statement2;
+		$statements[2] = $statement3;
+
+		$this->assertEquals( $statements, $list->toArray() );
+	}
+
+	public function testRemoveStatementsWithGuid_multipleStatementsRemoved() {
+		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
+		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+
+		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
+		$list->removeStatementsWithGuid( 'bar' );
+
+		$this->assertEquals(
+			new StatementList( array( $statement1 ) ),
+			$list
+		);
+	}
+
+	public function testRemoveStatementsWithGuid_nowStatementRemoved() {
+		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
+		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
+
+		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
+		$list->removeStatementsWithGuid( 'baz' );
+
+		$this->assertEquals(
+			new StatementList( array( $statement1, $statement2, $statement3 ) ),
+			$list
+		);
+	}
+
+
 	public function testCanConstructWithClaimsObjectContainingOnlyStatements() {
 		$statementArray = array(
 			$this->getStatementWithSnak( 1, 'foo' ),
