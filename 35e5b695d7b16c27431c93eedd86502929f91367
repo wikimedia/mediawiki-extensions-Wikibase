@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_6957262a",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-05-05T18:07:45Z",
+      "side": 1,
+      "message": "ITYM \"If $this-\u003euseRedirectTargetColumn is not set\"",
+      "revId": "35e5b695d7b16c27431c93eedd86502929f91367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
