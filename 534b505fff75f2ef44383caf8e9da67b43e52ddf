@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_2c560c34",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-05-05T19:19:53Z",
+      "side": 1,
+      "message": "maybe move this to inside catch() since it is the only place it is used?",
+      "revId": "534b505fff75f2ef44383caf8e9da67b43e52ddf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
