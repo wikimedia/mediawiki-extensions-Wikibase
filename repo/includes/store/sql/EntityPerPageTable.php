@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -22,7 +23,7 @@ use Wikibase\Repo\Store\EntityPerPage;
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
  */
-class EntityPerPageTable implements EntityPerPage {
+class EntityPerPageTable implements EntityPerPage, EntityRedirectLookup {
 
 	/**
 	 * @var EntityIdParser
@@ -401,6 +402,43 @@ class EntityPerPageTable implements EntityPerPage {
 				// MySQL tends to use the epp_redirect_target key which has a very low selectivity
 				'USE INDEX' => 'wb_epp_entity',
 				'LIMIT' => $limit
+			)
+		);
+
+		$ids = $this->getEntityIdsFromRows( $rows );
+		return $ids;
+	}
+
+	/**
+	 * Returns the IDs that redirect to (are aliases of) the given target entity.
+	 *
+	 * @note If $this->useRedirectTargetColumn, this returns the empty array.
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $targetId
+	 *
+	 * @return EntityId[]
+	 */
+	public function getRedirectIds( EntityId $targetId ) {
+		if ( !$this->useRedirectTargetColumn ) {
+			return array();
+		}
+
+		$where = array(
+			'epp_entity_type' => $targetId->getEntityType(),
+			'epp_redirect_target' => $targetId->getSerialization(),
+		);
+
+		$dbr = wfGetDB( DB_SLAVE );
+
+		$rows = $dbr->select(
+			'wb_entity_per_page',
+			array( 'entity_type' => 'epp_entity_type', 'entity_id' => 'epp_entity_id' ),
+			$where,
+			__METHOD__,
+			array(
+				'LIMIT' => 1000 // everything should have a hard limit
 			)
 		);
 
