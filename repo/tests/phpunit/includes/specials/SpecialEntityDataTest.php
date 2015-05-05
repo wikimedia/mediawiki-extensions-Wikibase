@@ -106,6 +106,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$titleLookup,
 			$idParser,
 			$mockRepository,
+			$mockRepository,
 			$serializationService,
 			$defaultFormat,
 			$maxAge,

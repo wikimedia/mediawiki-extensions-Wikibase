@@ -39,6 +39,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	 * - Items Q23
 	 * - Item Q42
 	 * - Redirect Q2233 -> Q23
+	 * - Redirect Q222333 -> Q23
 	 * - Property P5 (item reference)
 	 *
 	 * @return MockRepository
@@ -56,6 +57,9 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 
 		$q2233 = new EntityRedirect( new ItemId( 'Q2233' ), new ItemId( 'Q23' ) );
 		$mockRepo->putRedirect( $q2233 );
+
+		$q222333 = new EntityRedirect( new ItemId( 'Q222333' ), new ItemId( 'Q23' ) );
+		$mockRepo->putRedirect( $q222333 );
 
 		$q42 = new Item( new ItemId( 'Q42' ) );
 		$q42->getFingerprint()->setLabel( 'en', 'Label42' );
@@ -125,11 +129,15 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 		$entityRevQ23 = $mockRepo->getEntityRevision( new ItemId( 'Q23' ) );
 		$entityRedirQ2233 = new EntityRedirect( new ItemId( 'Q2233' ), new ItemId( 'Q23' ) );
 
+		$q2233 = new ItemId( 'Q2233' );
+		$q222333 = new ItemId( 'Q222333' );
+
 		return array(
 			'Q42.json' => array(
 				'json', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
+				array(), // incoming
 				null, // flavor
 				array( // output regex
 					'start' => '!^\s*\{!s',
@@ -145,6 +153,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				'rdfxml', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
+				array(), // incoming
 				null, // flavor
 				array( // output regex
 					'start' => '!^<\?xml!s',
@@ -160,6 +169,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				'turtle', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
+				array(), // incoming
 				null, // flavor
 				array( // output regex
 					'start' => '!^\s*@prefix !s',
@@ -174,6 +184,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				'ntriples', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
+				array(), // incoming
 				null, // flavor
 				array( // output regex
 					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> *<http://acme\.test/Q42> *\.!s',
@@ -187,6 +198,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				'ntriples', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
+				array(), // incoming
 				'full', // flavor
 				array( // output regex
 					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> *<http://acme\.test/Q42> *\.!s',
@@ -196,7 +208,9 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 					'item-ref Q2233' => '!<http://acme\.test/statement/Q42-DEADBEEF> *<http://acme\.test/prop/statement/P5> *<http://acme\.test/Q2233> *\.!s',
 					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
 				),
-				array(),
+				array(
+					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+				),
 				'application/n-triples', // expected mime
 			),
 
@@ -204,11 +218,13 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				'ntriples', // format
 				$entityRevQ23, // entityRev
 				$entityRedirQ2233, // redirect
+				array( $q2233, $q222333 ), // incoming
 				null, // flavor
 				array( // output regex
 					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
 					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
 					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
 				),
 				array(),
 				'application/n-triples', // expected mime
@@ -218,6 +234,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				'ntriples', // format
 				$entityRevQ23, // entityRev
 				$entityRedirQ2233, // redirect
+				array( $q2233, $q222333 ), // incoming
 				'dump', // flavor
 				array( // output regex
 					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
@@ -225,6 +242,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
 					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
 				),
 				'application/n-triples', // expected mime
 			),
@@ -233,14 +251,32 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 				'ntriples', // format
 				$entityRevQ23, // entityRev
 				null, // redirect
+				array( $q2233, $q222333 ), // incoming
 				null, // flavor
+				array( // output regex
+					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
+					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
+					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+				),
+				array(
+				),
+				'application/n-triples', // expected mime
+			),
+
+			'Q23.nt?flavor=dump' => array(
+				'ntriples', // format
+				$entityRevQ23, // entityRev
+				null, // redirect
+				array( $q2233, $q222333 ), // incoming
+				'dump', // flavor
 				array( // output regex
 					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
 					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
 				),
 				array(
-					//TODO: once we support inclusion of incoming redirects, this check should be moved into the list of expected patterns above.
 					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
 				),
 				'application/n-triples', // expected mime
 			),
@@ -253,14 +289,15 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSerializedData(
 		$format,
 		EntityRevision $entityRev,
-		EntityRedirect $redirect = null,
+		EntityRedirect $followedRedirect = null,
+		array $incomingRedirects,
 		$flavor,
 		array $expectedDataExpressions,
 		array $unexpectedDataExpressions,
 		$expectedMimeType
 	) {
 		$service = $this->newService();
-		list( $data, $mimeType ) = $service->getSerializedData( $format, $entityRev, $redirect, $flavor );
+		list( $data, $mimeType ) = $service->getSerializedData( $format, $entityRev, $followedRedirect, $incomingRedirects, $flavor );
 
 		$this->assertEquals( $expectedMimeType, $mimeType );
 
