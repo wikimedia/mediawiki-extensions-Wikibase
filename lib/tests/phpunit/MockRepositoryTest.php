@@ -671,4 +671,33 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevisionId() ), 'other user was no longer last to edit' );
 	}
 
+	public function testGetRedirectIds() {
+		$mock = new MockRepository();
+
+		$q5 = new ItemId( 'Q5' );
+		$q55 = new ItemId( 'Q55' );
+		$q555 = new ItemId( 'Q555' );
+
+		$mock->putRedirect( new EntityRedirect( $q55, $q5 ) );
+		$mock->putRedirect( new EntityRedirect( $q555, $q5 ) );
+
+		$this->assertEmpty( $mock->getRedirectIds( $q55 ), 'no redirects to redirect' );
+		$this->assertEquals( array( $q55, $q555 ), $mock->getRedirectIds( $q5 ), 'two redirects' );
+	}
+
+	public function testGetRedirectForEntityId() {
+		$mock = new MockRepository();
+
+		$q5 = new ItemId( 'Q5' );
+		$q55 = new ItemId( 'Q55' );
+		$q77 = new ItemId( 'Q77' );
+
+		$mock->putEntity( new Item( $q5 ) );
+		$mock->putRedirect( new EntityRedirect( $q55, $q5 ) );
+
+		$this->assertFalse( $mock->getRedirectForEntityId( $q77 ), 'unknown id' );
+		$this->assertNull( $mock->getRedirectForEntityId( $q5 ), 'not a redirect' );
+		$this->assertEquals( $q5, $mock->getRedirectForEntityId( $q55 ) );
+	}
+
 }
