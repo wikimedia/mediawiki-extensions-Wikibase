@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_4ca4b047",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-05-05T19:14:55Z",
+      "side": 1,
+      "message": "I think this should be $followedRedirect in the comment too",
+      "revId": "499c6fdcce8d74494d670274b8054ddf2b7e69de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6c8ad4c1",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-05-05T19:14:55Z",
+      "side": 1,
+      "message": "typo: ITYM \"dump mode\"",
+      "revId": "499c6fdcce8d74494d670274b8054ddf2b7e69de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
