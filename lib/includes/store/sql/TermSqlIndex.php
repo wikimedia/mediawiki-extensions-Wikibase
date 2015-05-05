@@ -261,6 +261,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
 		$entityIdentifiers = array(
+			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entityId->getNumericId(),
 			'term_entity_type' => $entityId->getEntityType()
 		);
@@ -355,6 +356,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$success = $dbw->delete(
 			$this->tableName,
 			array(
+				// FIXME: this will fail for IDs that do not have a numeric form
 				'term_entity_id' => $entityId->getNumericId(),
 				'term_entity_type' => $entityId->getEntityType()
 			),
@@ -443,6 +445,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				throw new MWException( "ID $id does not refer to an entity of type $entityType" );
 			}
 
+			// FIXME: this will fail for IDs that do not have a numeric form
 			$numericIds[] = $id->getNumericId();
 		}
 
