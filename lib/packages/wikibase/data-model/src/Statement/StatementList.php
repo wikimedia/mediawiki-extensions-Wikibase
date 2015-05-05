@@ -293,7 +293,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 *
 	 * @return Statement|null The first statement with the given GUID or null if not found.
 	 */
-	public function getFirstStatementByGuid( $statementGuid ) {
+	public function getFirstStatementWithGuid( $statementGuid ) {
 		foreach ( $this->statements as $statement ) {
 			if ( $statement->getGuid() === $statementGuid ) {
 				return $statement;

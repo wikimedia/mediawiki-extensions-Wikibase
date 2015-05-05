@@ -567,46 +567,46 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenNotPresentStatement_getFirstStatementByGuidReturnsNull() {
+	public function testGivenNotPresentStatement_getFirstStatementWithGuidReturnsNull() {
 		$statements = new StatementList();
 
-		$this->assertNull( $statements->getFirstStatementByGuid( 'kittens' ) );
+		$this->assertNull( $statements->getFirstStatementWithGuid( 'kittens' ) );
 	}
 
-	public function testGivenPresentStatement_getFirstStatementByGuidReturnsStatement() {
+	public function testGivenPresentStatement_getFirstStatementWithGuidReturnsStatement() {
 		$statement1 = $this->getStatement( 1, 'guid1' );
 		$statement2 = $this->getStatement( 2, 'guid2' );
 		$statement3 = $this->getStatement( 3, 'guid3' );
 		$statements = new StatementList( $statement1, $statement2, $statement3 );
 
-		$actual = $statements->getFirstStatementByGuid( 'guid2' );
+		$actual = $statements->getFirstStatementWithGuid( 'guid2' );
 		$this->assertSame( $statement2, $actual );
 	}
 
-	public function testGivenDoublyPresentStatement_getFirstStatementByGuidReturnsFirstMatch() {
+	public function testGivenDoublyPresentStatement_getFirstStatementWithGuidReturnsFirstMatch() {
 		$statement1 = $this->getStatement( 1, 'guid1' );
 		$statement2 = $this->getStatement( 2, 'guid2' );
 		$statement3 = $this->getStatement( 3, 'guid3' );
 		$statement4 = $this->getStatement( 2, 'guid2' );
 		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
 
-		$actual = $statements->getFirstStatementByGuid( 'guid2' );
+		$actual = $statements->getFirstStatementWithGuid( 'guid2' );
 		$this->assertSame( $statement2, $actual );
 	}
 
-	public function testGivenStatementsWithNoGuid_getFirstStatementByGuidReturnsFirstMatch() {
+	public function testGivenStatementsWithNoGuid_getFirstStatementWithGuidReturnsFirstMatch() {
 		$statement1 = $this->getStatement( 1, null );
 		$statement2 = $this->getStatement( 2, null );
 		$statements = new StatementList( $statement1, $statement2 );
 
-		$actual = $statements->getFirstStatementByGuid( null );
+		$actual = $statements->getFirstStatementWithGuid( null );
 		$this->assertSame( $statement1, $actual );
 	}
 
-	public function testGivenInvalidGuid_getFirstStatementByGuidReturnsNull() {
+	public function testGivenInvalidGuid_getFirstStatementWithGuidReturnsNull() {
 		$statements = new StatementList();
 
-		$this->assertNull( $statements->getFirstStatementByGuid( false ) );
+		$this->assertNull( $statements->getFirstStatementWithGuid( false ) );
 	}
 
 }
