@@ -5,7 +5,8 @@
 			"Rapsar",
 			"Sadrettin",
 			"Sayginer",
-			"Ömer Berkay"
+			"Ömer Berkay",
+			"Stultiwikia"
 		]
 	},
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
@@ -16,7 +17,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|değişiklik|değişiklik}}",
 	"wikibase-dataitem": "{{WBREPONAME}} öğesi",
 	"wikibase-editlinks": "Bağlantıları düzenle",
-	"wikibase-editlinkstitle": "Diğer dillerdeki bağlantıları düzenle",
+	"wikibase-editlinkstitle": "Dillerarası bağlantıları düzenle",
 	"wikibase-linkitem-addlinks": "Bağlantı ekle",
 	"wikibase-linkitem-title": "Sayfaya bağlantı",
 	"wikibase-linkitem-linkpage": "Sayfaya bağlantı",

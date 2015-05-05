@@ -3,9 +3,11 @@
 		"authors": [
 			"Shanmugamp7",
 			"மதனாஹரன்",
-			"Jayarathina"
+			"Jayarathina",
+			"கலைவாணன்"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}}உருப்படி",
 	"wikibase-editlinks": "இணைப்புக்களைத் தொகு",
 	"wikibase-editlinkstitle": "பிற மொழி விக்கி இணைப்புகளைத் தொகு",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

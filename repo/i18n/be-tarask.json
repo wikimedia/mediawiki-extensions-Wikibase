@@ -27,6 +27,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Мова",
 	"wikibase-label-empty": "Метка ня вызначаная",
 	"wikibase-label-edit-placeholder": "увядзіце метку",
+	"wikibase-label-edit-placeholder-language-aware": "увядзіце метку мовай: $1",
 	"wikibase-description-empty": "Апісаньне ня вызначанае",
 	"wikibase-description-edit-placeholder": "увядзіце апісаньне",
 	"wikibase-diffview-reference": "крыніца",
