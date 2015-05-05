@@ -43,6 +43,12 @@ class LegacyEntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $deserialized );
 	}
 
+	public function testGivenInvalidSerialization_exceptionIsThrown() {
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+
+		$this->deserializer->deserialize( 5 );
+	}
+
 	public function testGivenInvalidProperty_exceptionIsThrown() {
 		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
 
