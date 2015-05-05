@@ -260,7 +260,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( new StatementList( $statement ), $list );
 	}
 
-	public function testRemoveStatementsWithGuid_singleStatementRemoved() {
+	public function testGivenGuidOfPresenStatement_statementIsRemoved() {
 		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
@@ -275,7 +275,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $statements, $list->toArray() );
 	}
 
-	public function testRemoveStatementsWithGuid_multipleStatementsRemoved() {
+	public function testGivenGuidOfMulitpleStatements_multipleStatementsAreRemoved() {
 		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
@@ -289,7 +289,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testRemoveStatementsWithGuid_nowStatementRemoved() {
+	public function testGivenNotPresentGuid_listIsNotModified() {
 		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
 		$statement3 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
@@ -303,6 +303,19 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGivenNullGuid_allStatementsWithNoGuidAreRemoved() {
+		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
+		$statement2 = new Statement( $this->newSnak( 32, 'bar' ) );
+		$statement3 = new Statement( $this->newSnak( 32, 'bar' ) );
+
+		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
+		$list->removeStatementsWithGuid( null );
+
+		$this->assertEquals(
+			new StatementList( array( $statement1 ) ),
+			$list
+		);
+	}
 
 	public function testCanConstructWithClaimsObjectContainingOnlyStatements() {
 		$statementArray = array(
