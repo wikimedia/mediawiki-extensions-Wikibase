@@ -31,7 +31,7 @@ class LegacyPropertyDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return Property
 	 * @throws DeserializationException

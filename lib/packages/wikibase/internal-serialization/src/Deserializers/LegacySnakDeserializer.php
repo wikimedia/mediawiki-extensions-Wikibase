@@ -25,7 +25,7 @@ class LegacySnakDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return Snak
 	 * @throws DeserializationException
