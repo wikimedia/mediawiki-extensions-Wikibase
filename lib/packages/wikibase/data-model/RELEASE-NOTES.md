@@ -42,7 +42,7 @@ Other breaking changes:
 #### Additions
 
 * Added `StatementByGuidMap`
-* Added `StatementList::getFirstStatementByGuid`
+* Added `StatementList::getFirstStatementByGuid` and `StatementList::removeStatementsWithGuid`
 * `ReferenceList::addNewReference` and `Statement::addNewReference` support an array of Snaks now
 * Added PHPMD support
 
