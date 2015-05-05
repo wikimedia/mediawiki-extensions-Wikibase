@@ -244,7 +244,11 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		/** @var Item $item */
 		$item = $lookup->getEntity( new ItemId( self::$itemId) );
 
-		$this->assertEquals( 'Wikipedia', $item->getSitelink( 'dewiki' )->getPageName(), "Should contain new site link" );
+		$this->assertEquals(
+			'Wikipedia',
+			$item->getSiteLinkList()->getBySiteId( 'dewiki' )->getPageName(),
+			"Should contain new site link"
+		);
 	}
 
 	public function testExecutePostRemoveSiteLink() {
