@@ -109,8 +109,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $item );
 
-		$item2 = $item->newEmpty();
-		$item2->setId( new ItemId( 'Q9999' ) );
+		$item2 = new Item( new ItemId( 'Q9999' ) );
 
 		return array(
 			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $entityLookup ),
