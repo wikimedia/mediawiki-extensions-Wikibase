@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -205,6 +206,54 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 				null,
 				EntityPerPage::NO_REDIRECTS,
 				array()
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider getRedirectIdsProvider
+	 */
+	public function testGetRedirectIds( array $entities, array $redirects, EntityId $targetId, array $expected ) {
+		$table = $this->newEntityPerPageTable( $entities, $redirects );
+		$actual = $table->getRedirectIds( $targetId );
+
+		$this->assertEqualIds( $expected, $actual );
+	}
+
+	public function getRedirectIdsProvider() {
+		$property = new Property( new PropertyId( 'P5' ), null, 'string' );
+		$item = new Item( new ItemId( 'Q5' ) );
+		$redirect = new EntityRedirect( new ItemId( 'Q55' ), new ItemId( 'Q5' ) );
+
+		$q1 = new ItemId( 'Q1' );
+		$q5 = new ItemId( 'Q5' );
+		$p5 = new PropertyId( 'P5' );
+		$q55 = new ItemId( 'Q55' );
+
+		return array(
+			'empty' => array(
+				array(),
+				array(),
+				$q55,
+				array()
+			),
+			'none' => array(
+				array( $item, $property ),
+				array( $redirect ),
+				$q1,
+				array(),
+			),
+			'redirects' => array(
+				array( $item, $property ),
+				array( $redirect ),
+				$q5,
+				array( $q55 ),
+			),
+			'wrong type' => array(
+				array( $item, $property ),
+				array( $redirect ),
+				$p5,
+				array(),
 			),
 		);
 	}
