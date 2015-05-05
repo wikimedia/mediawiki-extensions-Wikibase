@@ -115,6 +115,8 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 				unset( $this->statements[$index] );
 			}
 		}
+
+		$this->statements = array_values( $this->statements );
 	}
 
 	/**

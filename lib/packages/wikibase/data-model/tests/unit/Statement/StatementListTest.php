@@ -268,11 +268,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
 		$list->removeStatementsWithGuid( 'foo' );
 
-		$statements = array();
-		$statements[1] = $statement2;
-		$statements[2] = $statement3;
-
-		$this->assertEquals( $statements, $list->toArray() );
+		$this->assertEquals( new StatementList( $statement2, $statement3 ), $list );
 	}
 
 	public function testGivenGuidOfMultipleStatements_multipleStatementsAreRemoved() {
@@ -283,10 +279,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
 		$list->removeStatementsWithGuid( 'bar' );
 
-		$this->assertEquals(
-			new StatementList( array( $statement1 ) ),
-			$list
-		);
+		$this->assertEquals( new StatementList( $statement1 ), $list );
 	}
 
 	public function testGivenNotPresentGuid_listIsNotModified() {
@@ -297,10 +290,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
 		$list->removeStatementsWithGuid( 'baz' );
 
-		$this->assertEquals(
-			new StatementList( array( $statement1, $statement2, $statement3 ) ),
-			$list
-		);
+		$this->assertEquals( new StatementList( $statement1, $statement2, $statement3 ), $list );
 	}
 
 	public function testGivenNullGuid_allStatementsWithNoGuidAreRemoved() {
@@ -311,10 +301,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$list = new StatementList( array( $statement1, $statement2, $statement3 ) );
 		$list->removeStatementsWithGuid( null );
 
-		$this->assertEquals(
-			new StatementList( array( $statement1 ) ),
-			$list
-		);
+		$this->assertEquals( new StatementList( $statement1 ), $list );
 	}
 
 	public function testCanConstructWithClaimsObjectContainingOnlyStatements() {
