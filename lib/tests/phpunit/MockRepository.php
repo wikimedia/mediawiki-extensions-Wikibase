@@ -22,6 +22,7 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
@@ -42,6 +43,7 @@ class MockRepository implements
 	EntityInfoBuilderFactory,
 	EntityLookup,
 	EntityRevisionLookup,
+	EntityRedirectLookup,
 	EntityStore,
 	PropertyDataTypeLookup,
 	SiteLinkLookup,
@@ -805,4 +807,48 @@ class MockRepository implements
 		return null;
 	}
 
+	/**
+	 * Returns the IDs that redirect to (are aliases of) the given target entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $targetId
+	 *
+	 * @return EntityId[]
+	 */
+	public function getRedirectIds( EntityId $targetId ) {
+		$redirects = array();
+
+		foreach ( $this->redirects as $redir ) {
+			if ( $redir->getTargetId()->equals( $targetId ) ) {
+				$redirects[] = $redir->getEntityId();
+			}
+		}
+
+		return $redirects;
+	}
+
+	/**
+	 * Returns the redirect target associated with the given redirect ID.
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
+	 *         does not refer to a redirect, or false if $entityId is not known.
+	 */
+	public function getRedirectForEntityId( EntityId $entityId ) {
+		$key = $entityId->getSerialization();
+
+		if ( isset( $this->redirects[$key] ) ) {
+			return $this->redirects[$key]->getTargetId();
+		}
+
+		if ( isset( $this->entities[$key] ) ) {
+			return null;
+		}
+
+		return false;
+	}
 }

@@ -428,19 +428,19 @@ class EntityDataTestProvider {
 			415, // http code
 		);
 
-		$cases[] = array( // #38: requesting a redirect item does not trigger an HTTP redirect
+		$cases[] = array( // #38: requesting a redirect includes the followed redirect in the output
 			'',      // subpage
-			array( 'id' => 'Q22', 'format' => 'json' ), // parameters
+			array( 'id' => 'Q22', 'format' => 'ntriples' ), // parameters
 			array(), // headers
-			'!^\{.*Raarrr!s', // output regex
+			'!^<http://acme\.test/Q22> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q42> *.$!m', // output regex
 			200,       // http code
 		);
 
-		$cases[] = array( // #39: flavors are passed on
+		$cases[] = array( // #39: flavors are passed on, incoming redirects are included
 			'',      // subpage
 			array( 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'full' ), // parameters
 			array(), // headers
-			'!<http://data\.acme\.test/Q42> *<http://schema.org/softwareVersion> *"0\.0\.1" *\.!s', // output regex
+			'!^<http://data\.acme\.test/Q42> *<http://schema.org/softwareVersion> *"0\.0\.1" *\.$.*^<http://acme\.test/Q22> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q42> *.$!sm', // output regex
 			200,       // http code
 		);
 
