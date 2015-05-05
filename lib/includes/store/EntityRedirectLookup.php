@@ -25,4 +25,16 @@ interface EntityRedirectLookup {
 	 */
 	public function getRedirectIds( EntityId $targetId );
 
+	/**
+	 * Returns the redirect target associated with the given redirect ID.
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
+	 *         does not refer to a redirect, or false if $entityId is not known.
+	 */
+	public function getRedirectForEntityId( EntityId $entityId );
+
 }
