@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_bccc71c1",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-05T12:52:47Z",
+      "side": 1,
+      "message": "This method is quite ugly. A simple `remove` method in `StatementList` could simplify this a lot.",
+      "revId": "3ba586b6437581ff1a22950eace48fb2cbddd2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7cca89a4",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-05T12:52:47Z",
+      "side": 1,
+      "message": "This is a OCP violation. We want to allow other types of entities which should also contain statements.\n\nWe can neither guarantee that those classes will contain a `setStatements` method nor can we remove a statement using `StatementList`.\n\nIn my opinion, this class should only deal with `StatementListProvider` instances and do all modifications using a `StatementList`.",
+      "revId": "3ba586b6437581ff1a22950eace48fb2cbddd2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
