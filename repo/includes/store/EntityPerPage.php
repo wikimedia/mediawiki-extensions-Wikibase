@@ -136,13 +136,4 @@ interface EntityPerPage {
 	 */
 	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 );
 
-	/**
-	 * @since 0.5
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
-	 *         does not refer to a redirect, or false if $entityId is not known.
-	 */
-	public function getRedirectForEntityId( EntityId $entityId );
 }

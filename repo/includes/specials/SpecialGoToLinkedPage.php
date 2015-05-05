@@ -6,7 +6,7 @@ use Html;
 use InvalidArgumentException;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -30,9 +30,9 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	private $siteLinkLookup;
 
 	/**
-	 * @var EntityPerPage
+	 * @var EntityRedirectLookup
 	 */
-	private $entityPerPage;
+	private $redirectLookup;
 
 	/**
 	 * @see SpecialWikibasePage::__construct
@@ -45,7 +45,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		$this->initServices(
 			$wikibaseRepo->getSiteStore(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
-			$wikibaseRepo->getStore()->newEntityPerPage()
+			$wikibaseRepo->getStore()->getEntityRedirectLookup()
 		);
 	}
 
@@ -55,16 +55,16 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 *
 	 * @param SiteStore $siteStore
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param EntityPerPage $entityPerPage
+	 * @param EntityRedirectLookup $redirectLookup
 	 */
 	public function initServices(
 		SiteStore $siteStore,
 		SiteLinkLookup $siteLinkLookup,
-		EntityPerPage $entityPerPage
+		EntityRedirectLookup $redirectLookup
 	) {
 		$this->siteStore = $siteStore;
 		$this->siteLinkLookup = $siteLinkLookup;
-		$this->entityPerPage = $entityPerPage;
+		$this->redirectLookup = $redirectLookup;
 	}
 
 	/**
@@ -135,7 +135,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 		// Maybe the item is a redirect: Try to resolve the redirect and load
 		// the links from there.
-		$redirectTarget = $this->entityPerPage->getRedirectForEntityId( $itemId );
+		$redirectTarget = $this->redirectLookup->getRedirectForEntityId( $itemId );
 
 		if ( $redirectTarget instanceof ItemId ) {
 			return $this->siteLinkLookup->getLinks( array( $redirectTarget->getNumericId() ), array( $site ) );
