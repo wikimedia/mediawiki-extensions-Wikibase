@@ -115,14 +115,26 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 		) );
 	}
 
-	public function testGivenInvalidSerialization_exceptionIsThrown() {
+	/**
+	 * @dataProvider invalidSerializationProvider
+	 */
+	public function testGivenInvalidSerialization_exceptionIsThrown( $serialization ) {
 		$deserializer = new EntityDeserializer(
 			$this->getThrowingDeserializer(),
 			$this->getThrowingDeserializer()
 		);
 
 		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
-		$deserializer->deserialize( array() );
+		$deserializer->deserialize( $serialization );
+	}
+
+	public function invalidSerializationProvider() {
+		return array(
+			array( null ),
+			array( 5 ),
+			array( array() ),
+			array( array( 'entity' => 'P42', 'datatype' => null ) ),
+		);
 	}
 
 }
