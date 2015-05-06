@@ -80,6 +80,17 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 			return true;
 		}
 
+		// If we don't care about anything smaller than a year, show no calendar.
+		if ( $value->getPrecision() < TimeValue::PRECISION_YEAR ) {
+			return false;
+		}
+
+		// If the date is inside the "critical" range where Julian and Gregorian were used
+		// in parallel, always show the calendar.
+		if ( strlen( $year ) === 5 && (int)$year > 1580 && (int)$year < 1930 ) {
+			return true;
+		}
+
 		// Otherwise, the calendar is "unsurprising", so don't show it.
 		return false;
 	}
