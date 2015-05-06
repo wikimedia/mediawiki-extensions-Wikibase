@@ -52,7 +52,7 @@ class UsageTableUpdater {
 	}
 
 	/**
-	 * Re-indexes the given list of EntityUsagess so that each EntityUsage can be found by using its
+	 * Re-indexes the given list of EntityUsages so that each EntityUsage can be found by using its
 	 * string representation as a key.
 	 *
 	 * @param EntityUsage[] $usages
