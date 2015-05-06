@@ -27,12 +27,6 @@ return call_user_func( function() {
 			720101010,
 		),
 
-		// Allow the TermIndex table to work without the term_search_key field,
-		// for sites that can not easily roll out schema changes on large tables.
-		// This means that all searches will use exact matching
-		// (depending on the database's collation).
-		'withoutTermSearchKey' => false,
-
 		'entityNamespaces' => array(),
 
 		// Define constraints for multilingual terms (such as labels, descriptions and aliases).

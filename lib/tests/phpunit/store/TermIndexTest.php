@@ -146,23 +146,18 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		);
 
 		/** @var Term[] $expectedTerms */
-		$expectedTerms = array();
-
-		if ( ! Settings::get( 'withoutTermSearchKey' ) ) {
-			// case insensitive match is (probably) only found if SearchKey can be used.
-			// See comment in TermSqlIndex::termsToConditions
-			$expectedTerms[$id0] = new Term( array(
+		$expectedTerms = array(
+			$id0 => new Term( array(
 				'termLanguage' => 'en',
 				'termText' => 'prefix',
-			) );
-		}
-
-		$expectedTerms[$id1] = new Term( array(
-			'termText' => 'postfix',
-		) );
+			) ),
+			$id1 => new Term( array(
+				'termText' => 'postfix',
+			) )
+		);
 
 		$options = array(
-			'caseSensitive' => Settings::get( 'withoutTermSearchKey' ),
+			'caseSensitive' => false,
 			'prefixSearch' => true,
 		);
 

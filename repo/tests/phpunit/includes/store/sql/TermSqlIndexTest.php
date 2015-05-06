@@ -58,11 +58,6 @@ class TermSqlIndexTest extends TermIndexTest {
 	 */
 	public function testGetMatchingTerms2( $languageCode, $termText, $searchText, $matches ) {
 		$termIndex = $this->getTermIndex();
-
-		if ( !$termIndex->supportsSearchKeys() ) {
-			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
-		}
-
 		$termIndex->clear();
 
 		$item = new Item( new ItemId( 'Q42' ) );

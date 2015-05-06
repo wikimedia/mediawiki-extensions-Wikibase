@@ -47,10 +47,6 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		/* @var TermSqlIndex $termCache */
 		$termCache = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 
-		if ( !$termCache->supportsSearchKeys() ) {
-			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
-		}
-
 		// make term in item
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( $languageCode, $termText );

@@ -332,11 +332,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_language' => $term->getLanguage(),
 			'term_type' => $term->getType(),
 			'term_text' => $term->getText(),
+			'term_search_key' => $this->getSearchKey( $term->getText(), $term->getLanguage() )
 		);
-
-		if ( $this->supportsSearchKeys() ) {
-			$fields['term_search_key'] = $this->getSearchKey( $term->getText(), $term->getLanguage() );
-		}
 
 		return $fields;
 	}
@@ -725,7 +722,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			// used in the database.
 			$textField = 'term_text';
 
-			if ( !$options['caseSensitive'] && $this->supportsSearchKeys() ) {
+			if ( !$options['caseSensitive'] ) {
 				$textField = 'term_search_key';
 				$text = $this->getSearchKey( $term->getText(), $term->getLanguage() );
 			}
@@ -1001,13 +998,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		return $normalized;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function supportsSearchKeys() {
-		return !Settings::get( 'withoutTermSearchKey' );
 	}
 
 	/**
