@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_18c10259",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-05-06T02:04:08Z",
+      "side": 1,
+      "message": "okay, good point. i think we can specify the database name here",
+      "parentUuid": "0ed113e2_38308699",
+      "revId": "fcefadbc5fac0308ecc8c685a7f1df9ef16ea64b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_182b4230",
         "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
         "patchSetId": 1
