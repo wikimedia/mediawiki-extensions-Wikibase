@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_38308699",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-06T01:55:58Z",
+      "side": 1,
+      "message": "We alter the repo database here, so waiting for the client\u0027s slaves doesn\u0027t make sense.",
+      "revId": "fcefadbc5fac0308ecc8c685a7f1df9ef16ea64b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_182b4230",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-06T01:55:58Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "fcefadbc5fac0308ecc8c685a7f1df9ef16ea64b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
