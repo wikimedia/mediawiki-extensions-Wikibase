@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_6e9e4468",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-06T12:15:47Z",
+      "side": 1,
+      "message": "At least in our use case, most clients are not repos. Do we need a default here? this seems error prone.",
+      "revId": "3feb52883b668b8fc520246e17ca42a67206ec7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
