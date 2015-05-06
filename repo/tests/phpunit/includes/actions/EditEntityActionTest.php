@@ -3,9 +3,11 @@
 namespace Wikibase\Test;
 
 use MWException;
+use Status;
 use Title;
 use User;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SubmitEntityAction;
 use WikiPage;
 
 /**
@@ -361,6 +363,7 @@ class EditEntityActionTest extends ActionTestCase {
 				array(
 					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 				),
+				true,     //EditFilter hook called
 			),
 
 			array( //3: // undo form with legal undo and undoafter
@@ -378,6 +381,7 @@ class EditEntityActionTest extends ActionTestCase {
 				array(
 					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 				),
+				true,     //EditFilter hook called
 			),
 
 			array( //4: // undo form with illegal undo == undoafter
@@ -408,6 +412,7 @@ class EditEntityActionTest extends ActionTestCase {
 				array(
 					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 				),
+				true,     //EditFilter hook called
 			),
 
 			array( //6: // undo form with illegal undo
@@ -451,6 +456,7 @@ class EditEntityActionTest extends ActionTestCase {
 				array(
 					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 				),
+				true,     //EditFilter hook called
 			),
 
 			array( //9: // restore form with illegal restore
@@ -606,12 +612,12 @@ class EditEntityActionTest extends ActionTestCase {
 	/**
 	 * @dataProvider provideUndoSubmit
 	 */
-	public function testUndoSubmit( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null ) {
+	public function testUndoSubmit( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null, $expectHookCall = false ) {
 		if ( is_string( $page ) ) {
 			self::resetTestItem( $page );
 		}
 
-		$this->tryUndoAction( $action, $page, $params, $post, $user, $htmlPattern, $expectedProps );
+		$this->tryUndoAction( $action, $page, $params, $post, $user, $htmlPattern, $expectedProps, $expectHookCall );
 
 		if ( is_string( $page ) ) {
 			self::resetTestItem( $page );
@@ -626,8 +632,9 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @param User $user
 	 * @param null $htmlPattern
 	 * @param null $expectedProps
+	 * @param bool $expectHookCall
 	 */
-	protected function tryUndoAction( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null ) {
+	protected function tryUndoAction( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null, $expectHookCall = false ) {
 		if ( $user ) {
 			$this->setUser( $user );
 		}
@@ -644,6 +651,20 @@ class EditEntityActionTest extends ActionTestCase {
 
 		if ( isset( $params['wpEditToken'] ) && $params['wpEditToken'] === true ) {
 			$params['wpEditToken'] = $this->getToken( $page->getTitle(), 'edit' ); //TODO: $user
+		}
+
+		$action = $this->createAction( $action, $page, $params, $post );
+
+		if( $expectHookCall ) {
+			$hookRunner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+				->setMethods( array( 'run' ) )
+				->disableOriginalConstructor()
+				->getMock();
+			$hookRunner->expects( $this->once() )
+				->method( 'run' )
+				->will( $this->returnValue( Status::newGood() ) );
+			/** @var $action SubmitEntityAction */
+			$action->setServices( $hookRunner );
 		}
 
 		$out = $this->callAction( $action, $page, $params, $post );

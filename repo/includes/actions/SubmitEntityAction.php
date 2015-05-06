@@ -2,12 +2,15 @@
 
 namespace Wikibase;
 
-use Content;
+use IContextSource;
 use MWException;
+use Page;
 use Revision;
 use Status;
 use Title;
 use WatchAction;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -22,6 +25,25 @@ use WikiPage;
  * @author Daniel Kinzler
  */
 class SubmitEntityAction extends EditEntityAction {
+
+	/**
+	 * @var EditFilterHookRunner
+	 */
+	private $editFilterHookRunner;
+
+	public function __construct( Page $page, IContextSource $context = null ) {
+		parent::__construct( $page, $context );
+
+		$this->setServices( new EditFilterHookRunner(
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
+			$this->getContext()
+		) );
+	}
+
+	public function setServices( EditFilterHookRunner $editFilterHookRunner ) {
+		$this->editFilterHookRunner = $editFilterHookRunner;
+	}
 
 	public function getName() {
 		return 'submit';
@@ -142,13 +164,13 @@ class SubmitEntityAction extends EditEntityAction {
 
 	/**
 	 * @param Title $title
-	 * @param Content $content
+	 * @param EntityContent $content
 	 * @param string $summary
 	 * @param string $editToken
 	 *
 	 * @return Status
 	 */
-	private function attemptSave( Title $title, Content $content, $summary, $editToken ) {
+	private function attemptSave( Title $title, EntityContent $content, $summary, $editToken ) {
 		$status = $this->getEditTokenStatus( $editToken );
 
 		if ( !$status->isOK() ) {
@@ -163,6 +185,15 @@ class SubmitEntityAction extends EditEntityAction {
 
 		// save edit
 		$page = new WikiPage( $title );
+
+		$hookStatus = $this->editFilterHookRunner->run(
+			$content->getEntity(),
+			$this->getUser(),
+			$summary
+		);
+		if ( !$hookStatus->isOK() ) {
+			return $hookStatus;
+		}
 
 		// NOTE: Constraint checks are performed automatically via EntityContent::prepareSave.
 		$status = $page->doEditContent( $content, $summary );
