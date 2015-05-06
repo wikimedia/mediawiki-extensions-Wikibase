@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f8bbdedb",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-06T02:09:53Z",
+      "side": 1,
+      "message": "subscriberWikiId is the id of the local (\u003d client) wiki. Also ids don\u0027t necessarily match up with database names.",
+      "revId": "70626fe2f4d3789446ed49d8270ea94c72b28bca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_98d41219",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-06T02:09:53Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "70626fe2f4d3789446ed49d8270ea94c72b28bca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
