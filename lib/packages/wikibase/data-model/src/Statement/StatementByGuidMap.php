@@ -72,7 +72,7 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 	 *
 	 * @return Statement|null
 	 */
-	public function getStatementByGuid( $statementGuid ) {
+	public function getStatementWithGuid( $statementGuid ) {
 		$this->assertIsStatementGuid( $statementGuid );
 
 		if ( array_key_exists( $statementGuid, $this->statements ) ) {
