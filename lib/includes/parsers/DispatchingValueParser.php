@@ -64,7 +64,7 @@ class DispatchingValueParser implements ValueParser {
 		}
 
 		throw new ParseException(
-			'The value is not recognitzed by the configured parsers',
+			'The value is not recognized by the configured parsers',
 			$value,
 			$this->format
 		);
