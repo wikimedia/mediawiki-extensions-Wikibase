@@ -16,6 +16,24 @@
       "revId": "3feb52883b668b8fc520246e17ca42a67206ec7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f0e21297",
+        "filename": "client/includes/store/sql/BulkSubscriptionUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-05-06T16:16:03Z",
+      "side": 1,
+      "message": "i think it is more clear, but can remove the default.",
+      "parentUuid": "0ed113e2_6e9e4468",
+      "revId": "3feb52883b668b8fc520246e17ca42a67206ec7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
