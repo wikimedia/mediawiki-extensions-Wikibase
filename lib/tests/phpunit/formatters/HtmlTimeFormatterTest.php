@@ -72,7 +72,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
 					TimeFormatter::CALENDAR_GREGORIAN ),
-				'/^MOCKDATE$/'
+				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
 			),
 			'a julian day in 1920' => array(
 				new TimeValue( '+1920-05-01T00:00:00Z',
