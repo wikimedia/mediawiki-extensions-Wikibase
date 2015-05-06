@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\DataModel\ByPropertyIdArray;
+use Wikibase\DataModel\ByPropertyIdGrouper;
 
 /**
  * Serializer for Traversable objects that need to be grouped
@@ -66,15 +66,12 @@ class ByPropertyListSerializer extends SerializerObject {
 
 		$serialization = array();
 
-		$objects = clone $objects; // Don't mangle the original
-		// FIXME: "iterator => array => iterator" is stupid
-		$objects = new ByPropertyIdArray( iterator_to_array( $objects ) );
-		$objects->buildIndex();
+		$byPropertyIdGrouper = new ByPropertyIdGrouper( $objects );
 
-		foreach ( $objects->getPropertyIds() as $propertyId ) {
+		foreach ( $byPropertyIdGrouper->getPropertyIds() as $propertyId ) {
 			$serializedObjects = array();
 
-			foreach ( $objects->getByPropertyId( $propertyId ) as $object ) {
+			foreach ( $byPropertyIdGrouper->getByPropertyId( $propertyId ) as $object ) {
 				$serializedObjects[] = $this->elementSerializer->getSerialized( $object );
 			}
 
