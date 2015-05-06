@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f6520add",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-06T18:48:47Z",
+      "side": 1,
+      "message": "Please stick to the [-+] order so searching for this regex is easier.",
+      "revId": "a0e81f9cbf64c474e6aca065dc596620eeddb9f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_96637ea6",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-06T18:48:47Z",
+      "side": 1,
+      "message": "All this is not necessary, see below.",
+      "revId": "a0e81f9cbf64c474e6aca065dc596620eeddb9f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_76661aba",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-06T18:48:47Z",
+      "side": 1,
+      "message": "I still find this strlen based thingy odd. It\u0027s not necessary. If an overflow happens, PHP will not jump to the opposite side of the INT32 range, instead a limit to MIN/MAX_INT will be applied. This is irrelevant for the check below. It\u0027s impossible to have a test case that does not succeed. Simply do a \u003c 1583 comparison, done.",
+      "revId": "a0e81f9cbf64c474e6aca065dc596620eeddb9f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d6f4a6cc",
+        "filename": "lib/tests/phpunit/formatters/HtmlTimeFormatterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-06T18:48:47Z",
+      "side": 1,
+      "message": "This behavior is new. Before the calendar model was always shown before the split. Just a reminder, I think this is a good change.",
+      "revId": "a0e81f9cbf64c474e6aca065dc596620eeddb9f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
