@@ -53,27 +53,6 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 
 	public function timeFormatProvider() {
 		return array(
-			'a gregorian day in 1920' => array(
-				new TimeValue( '+1920-05-01T00:00:00Z',
-					1 * 60 * 60, 0, 0,
-					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
-				'/^MOCKDATE$/'
-			),
-			'a julian day in 1920' => array(
-				new TimeValue( '+1920-05-01T00:00:00Z',
-					1 * 60 * 60, 0, 0,
-					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_JULIAN ),
-				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
-			),
-			'a month in 1920' => array(
-				new TimeValue( '+1920-05-01T00:00:00Z',
-					1 * 60 * 60, 0, 0,
-					TimeValue::PRECISION_MONTH,
-					TimeFormatter::CALENDAR_GREGORIAN ),
-				'/^MOCKDATE$/'
-			),
 			'a gregorian day in 1520' => array(
 				new TimeValue( '+1520-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
@@ -86,6 +65,20 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
 					TimeFormatter::CALENDAR_JULIAN ),
+				'/^MOCKDATE$/'
+			),
+			'a gregorian day in 1920' => array(
+				new TimeValue( '+1920-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_DAY,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
+			),
+			'a julian day in 1920' => array(
+				new TimeValue( '+1920-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_DAY,
+					TimeFormatter::CALENDAR_JULIAN ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
 			),
 			'a julian day in 1980' => array(
@@ -95,6 +88,87 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 					TimeFormatter::CALENDAR_JULIAN ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
 			),
+			'a gregorian day in 1980' => array(
+				new TimeValue( '+1980-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_DAY,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				'/^MOCKDATE$/'
+			),
+
+			'a gregorian year in -1000000' => array(
+				new TimeValue( '-1000000-00-00T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
+			),
+			'a julian year in -1000000' => array(
+				new TimeValue( '-1000000-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_JULIAN ),
+				'/^MOCKDATE$/'
+			),
+			'a gregorian year in 1520' => array(
+				new TimeValue( '+1520-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
+			),
+			'a julian year in 1520' => array(
+				new TimeValue( '+1520-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_JULIAN ),
+				'/^MOCKDATE$/'
+			),
+			'a gregorian year in 1920' => array(
+				new TimeValue( '+1920-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
+			),
+			'a julian year in 1920' => array(
+				new TimeValue( '+1920-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_JULIAN ),
+				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
+			),
+			'a julian year in 1980' => array(
+				new TimeValue( '+1980-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_JULIAN ),
+				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
+			),
+			'a gregorian year in 1980' => array(
+				new TimeValue( '+1980-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				'/^MOCKDATE$/'
+			),
+
+			'a month in 1980' => array(
+				new TimeValue( '+1980-05-01T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_MONTH,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				'/^MOCKDATE$/'
+			),
+
+			'14th century' => array(
+				new TimeValue( '+1300-00-00T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_100a,
+					TimeFormatter::CALENDAR_JULIAN ),
+				'/^MOCKDATE$/'
+			),
+
 			'2014-10-10' => array(
 				new TimeValue( '+2014-10-10T00:00:00Z',
 					1 * 60 * 60, 0, 0,
