@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_f8b2fef7",
+        "filename": "client/includes/Usage/Sql/EntityUsageTableBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-06T02:22:43Z",
+      "side": 1,
+      "message": "I think we want to return $db-\u003eaffectedRows() given that we ignore potential key conflicts (to match the function\u0027s contract).",
+      "revId": "a60e097d83374d37942456354de0a8e86ef8fc93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
