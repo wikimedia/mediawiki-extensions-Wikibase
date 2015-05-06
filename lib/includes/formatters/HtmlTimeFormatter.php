@@ -73,10 +73,27 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	private function calendarNameNeeded( TimeValue $value ) {
 		// We assume this is an ISO-ish timestamp.
 		preg_match( '/^([-+]?0*\d+)-/', $value->getTime(), $m );
-		$guessedCalendar = $this->getDefaultCalendar( $m[1] );
+
+		// NOTE: PHP will limit overly large values to PHP_INT_MAX. No overflow or wrap-around occurs.
+		$year = (int)$m[1];
+
+		$guessedCalendar = $this->getDefaultCalendar( $year );
 
 		// Always show the calendar if it's different from the "guessed" default.
 		if ( $value->getCalendarModel() !== $guessedCalendar ) {
+			return true;
+		}
+
+		// If we don't care about anything smaller than a year, show no calendar.
+		if ( $value->getPrecision() < TimeValue::PRECISION_YEAR ) {
+			return false;
+		}
+
+		// If the date is inside the "critical" range where Julian and Gregorian were used
+		// in parallel, always show the calendar. Gregorian started to be used in the 1580s,
+		// but the Julian calendar continued to be used into the 1920s (in Russia and Greece).
+		// See https://en.wikipedia.org/wiki/Julian_calendar
+		if ( $year > 1580 && $year < 1930 ) {
 			return true;
 		}
 
@@ -91,7 +108,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 *
 	 * @see IsoTimestampParser::getCalendarModel()
 	 *
-	 * @param string|int $year The year as a decimal string with a mandatory leading sign
+	 * @param int $year The year as a decimal string with a mandatory leading sign
 	 *        and no leading zeros.
 	 *
 	 * @return string Calendar URI
@@ -99,8 +116,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	private function getDefaultCalendar( $year ) {
 		// The Gregorian calendar was introduced in October 1582,
 		// so we'll default to Julian for all years before 1583.
-		// NOTE: PHP will limit overly large values to PHP_INT_MAX. No overflow or wrap-around occurs.
-		return (int)$year < 1583 ? TimeFormatter::CALENDAR_JULIAN : TimeFormatter::CALENDAR_GREGORIAN;
+		return $year < 1583 ? TimeFormatter::CALENDAR_JULIAN : TimeFormatter::CALENDAR_GREGORIAN;
 	}
 
 	/**

@@ -194,16 +194,16 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
 				'commonsMedia'
 			),
-			'a month in 1920' => array(
+			'a month in 1980' => array(
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new TimeValue(
-					'+1920-05-01T00:00:00Z',
+					'+1980-05-01T00:00:00Z',
 					0, 0, 0,
 					TimeValue::PRECISION_MONTH,
 					'http://www.wikidata.org/entity/Q1985727'
 				),
-				'/^May 1920$/'
+				'/^May 1980$/'
 			),
 			'a gregorian day in 1520' => array(
 				SnakFormatter::FORMAT_HTML,
