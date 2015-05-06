@@ -5,8 +5,6 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -66,57 +64,28 @@ class ChangeOpClaimRemove extends ChangeOpBase {
 			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
 
-		$statements = $this->removeStatement( $entity->getStatements()->toArray(), $summary );
-		$this->setStatements( $entity, $statements );
+		$this->removeStatement( $entity->getStatements(), $summary );
 
 		return true;
 	}
 
 	/**
-	 * @param Statement[] $statements
+	 * @param StatementList $statements
 	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
-	 * @return Statement[]
 	 */
-	private function removeStatement( array $statements, Summary $summary = null ) {
-		$newStatements = array();
-		$removedStatement = null;
+	private function removeStatement( StatementList $statements, Summary $summary = null ) {
+		$statement = $statements->getFirstStatementWithGuid( $this->guid );
 
-		foreach ( $statements as $statement ) {
-			if ( $statement->getGuid() === $this->guid && $removedStatement === null ) {
-				$removedStatement = $statement;
-			} else {
-				$newStatements[] = $statement;
-			}
-		}
-
-		if ( $removedStatement === null ) {
+		if ( $statement === null ) {
 			throw new ChangeOpException( "Entity does not have statement with GUID $this->guid" );
 		}
 
-		$removedSnak = $removedStatement->getMainSnak();
+		$statements->removeStatementsWithGuid( $this->guid );
+
+		$removedSnak = $statement->getMainSnak();
 		$this->updateSummary( $summary, 'remove', '', $this->getSummaryArgs( $removedSnak ) );
-
-		return $newStatements;
-	}
-
-	/**
-	 * @param Entity $entity
-	 * @param Statement[] $statements
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function setStatements( Entity $entity, array $statements ) {
-		$statementList = new StatementList( $statements );
-
-		if ( $entity instanceof Item ) {
-			$entity->setStatements( $statementList );
-		} elseif ( $entity instanceof Property ) {
-			$entity->setStatements( $statementList );
-		} else {
-			throw new InvalidArgumentException( '$entity must be an Item or Property' );
-		}
 	}
 
 	/**
