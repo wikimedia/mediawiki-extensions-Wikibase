@@ -61,6 +61,7 @@ class UpdateSubscriptions extends Maintenance {
 			new ConsistentReadConnectionManager( wfGetLB() ),
 			new ConsistentReadConnectionManager( wfGetLB( $repoDB ), $repoDB ),
 			$clientId,
+			$repoDB,
 			$this->mBatchSize
 		);
 
