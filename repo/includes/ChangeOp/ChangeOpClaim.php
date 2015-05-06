@@ -142,7 +142,7 @@ class ChangeOpClaim extends ChangeOpBase {
 		}
 		catch ( OutOfBoundsException $e ) {
 			if ( $this->index < 0 ) {
-				throw new ChangeOpException( 'Can not add claim at given index: '. $this->index );
+				throw new ChangeOpException( 'Cannot add claim at given index: '. $this->index );
 			} else {
 				// XXX: hack below to retry adding the object at a new index
 				// If we fail with the user supplied index and the index is greater than 0

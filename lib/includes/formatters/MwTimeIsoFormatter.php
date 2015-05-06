@@ -96,10 +96,10 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		$localizedDate = $this->language->sprintfDate( $dateFormat, $mwTimestamp );
 
 		if ( $mwYear !== $localizedYear ) {
-			// If we can not reliably fix the year, return the full time stamp. This should
+			// If we cannot reliably fix the year, return the full time stamp. This should
 			// never happen as Language::sprintfDate should always return a 4 digit year.
 			if ( substr_count( $localizedDate, $mwYear ) !== 1 ) {
-				throw new InvalidArgumentException( 'Can not identify year in formatted date.' );
+				throw new InvalidArgumentException( 'Cannot identify year in formatted date.' );
 			}
 
 			$localizedDate = str_replace( $mwYear, $localizedYear, $localizedDate );
@@ -307,7 +307,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 */
 	private function getMessage( $key, $param ) {
 		$message = new Message( $key );
-		// FIXME: As the frontend can not parse the translated precisions we only want to
+		// FIXME: As the frontend cannot parse the translated precisions we only want to
 		// present the English for now. Once the frontend is using backend parsers we can
 		// turn the translation on. See the FIXME in MwTimeIsoParser::reconvertOutputString.
 		// $message->inLanguage( $this->language );

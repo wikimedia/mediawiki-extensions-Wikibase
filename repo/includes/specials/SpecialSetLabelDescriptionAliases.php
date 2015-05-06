@@ -261,7 +261,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		$aliasesText = $request->getVal( 'aliases', '' );
 		$this->aliases = $aliasesText === '' ? array() : explode( '|', $aliasesText );
 
-		// Parse the 'id' parameter and throw an exception if the entity can not be loaded
+		// Parse the 'id' parameter and throw an exception if the entity cannot be loaded
 		parent::prepareArguments( $subPage );
 
 		if ( $this->languageCode === '' ) {
