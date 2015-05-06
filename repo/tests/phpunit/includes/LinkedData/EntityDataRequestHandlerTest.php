@@ -135,6 +135,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$titleLookup,
 			$idParser,
 			$mockRepository,
+			$mockRepository,
 			$service,
 			'json',
 			1800,
