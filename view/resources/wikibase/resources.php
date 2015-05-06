@@ -18,6 +18,7 @@ return call_user_func( function() {
 
 		// common styles independent from JavaScript being enabled or disabled
 		'wikibase.common' => $moduleTemplate + array(
+			'position' => 'top',
 			'styles' => array(
 				// Order must be hierarchical, do not order alphabetically
 				'wikibase.css',

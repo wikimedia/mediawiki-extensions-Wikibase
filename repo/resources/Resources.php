@@ -140,6 +140,7 @@ return call_user_func( function() {
 		/* Wikibase special pages */
 
 		'wikibase.special' => $moduleTemplate + array(
+			'position' => 'top',
 			'styles' => array(
 				'wikibase.special/wikibase.special.css'
 			),
