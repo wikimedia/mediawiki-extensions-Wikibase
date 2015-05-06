@@ -272,7 +272,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * Load the entity content of the given revision.
 	 *
 	 * Will fail by calling dieError() on the ApiErrorReporter if the revision
-	 * can not be found or can not be loaded.
+	 * cannot be found or cannot be loaded.
 	 *
 	 * @since 0.5
 	 *
@@ -399,7 +399,7 @@ abstract class ApiWikibase extends ApiBase {
 	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
 		if ( !$this->isWriteMode() ) {
 			// sanity/safety check
-			throw new LogicException( 'attemptSaveEntity() can not be used by API modules that do not return true from isWriteMode()!' );
+			throw new LogicException( 'attemptSaveEntity() cannot be used by API modules that do not return true from isWriteMode()!' );
 		}
 
 		if ( $summary instanceof Summary ) {

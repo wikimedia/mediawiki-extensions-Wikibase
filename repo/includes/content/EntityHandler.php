@@ -189,7 +189,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityContent
 	 */
 	public function makeEmptyContent() {
-		throw new MWException( 'Can not make an empty EntityContent, since we require at least an ID to be set.' );
+		throw new MWException( 'Cannot make an empty EntityContent, since we require at least an ID to be set.' );
 	}
 
 	/**

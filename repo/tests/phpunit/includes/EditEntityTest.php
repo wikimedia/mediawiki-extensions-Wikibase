@@ -415,7 +415,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$repo = $this->getMockRepository();
 		$permissions = array();
 		$context = new RequestContext();
-		// Can not reuse makeEditEntity because we need the access the context
+		// Cannot reuse makeEditEntity because we need the access the context
 		$editEntity = new EditEntity(
 			$this->getEntityTitleLookup(),
 			$repo,

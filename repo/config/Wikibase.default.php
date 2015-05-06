@@ -38,7 +38,7 @@ return call_user_func( function() {
 		'badgeItems' => array(),
 
 		// Number of seconds for which data output shall be cached.
-		// Note: keep that low, because such caches can not always be purged easily.
+		// Note: keep that low, because such caches cannot always be purged easily.
 		'dataSquidMaxage' => $wgSquidMaxage,
 
 		// Formats that shall be available via SpecialEntityData.
