@@ -80,6 +80,12 @@
 	"wikibase-time-precision-millennium": "milenio $1",
 	"wikibase-time-precision-century": "século $1",
 	"wikibase-time-precision-10annum": "anos $1",
+	"wikibase-time-precision-BCE-Gannum": "$1 mil millóns de anos AEC",
+	"wikibase-time-precision-BCE-Mannum": "$1 millóns de anos AEC",
+	"wikibase-time-precision-BCE-annum": "$1 anos AEC",
+	"wikibase-time-precision-BCE-millennium": "$1. milenio AEC",
+	"wikibase-time-precision-BCE-century": "$1. século AEC",
+	"wikibase-time-precision-BCE-10annum": "os anos $1 AEC",
 	"wikibase-snakformatter-valuetype-mismatch": "O tipo de valor \"$1\" non coincide co tipo de propiedade \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Non se atopou a propiedade $1. Non se pode determinar o tipo de datos a utilizar."
 }

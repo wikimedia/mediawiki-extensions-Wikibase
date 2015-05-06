@@ -8,14 +8,15 @@
 		]
 	},
 	"wikibase-after-page-move": "Tu dikarî beşa têkilîdar a Wîkîdaneyê, ku girêdanên zimanan ên li ser rûpela gerandî têde ne, [$1 rojane bikî].",
-	"wikibase-comment-update": "Girêdanên ziman hatin rojanekirin.",
+	"wikibase-comment-update": "endamê/a {{WBREPONAME}}",
 	"wikibase-comment-sitelink-add": "Girêdana ziman lê hat zêdekirin:$1",
 	"wikibase-comment-sitelink-remove": "Girêdana ziman hat jêbirin:$1",
+	"wikibase-dataitem": "hêmana {{WBREPONAME}}",
 	"wikibase-editlinks": "Girêdanan biguherîne",
 	"wikibase-linkitem-addlinks": "Girêdanan lê zêde bike",
 	"wikibase-linkitem-input-site": "Ziman:",
 	"wikibase-linkitem-input-page": "Rûpel:",
-	"wikibase-rc-hide-wikidata": "Wikidatayê $1",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "veşêre",
 	"wikibase-rc-hide-wikidata-show": "nîşan bide",
 	"wikibase-otherprojects": "Projeyên din"

@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"GeekEmad"
+			"GeekEmad",
+			"Csisc"
 		]
 	},
-	"wikibase-edit": "beddil",
-	"wikibase-add": "zîd"
+	"wikibase-edit": "baddil",
+	"wikibase-add": "zîd",
+	"wikibase-sitelinks-special": "Sîtêt uxrîne"
 }

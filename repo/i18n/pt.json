@@ -17,6 +17,7 @@
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
+	"wikibase-entity": "entidade",
 	"wikibase-entity-item": "item",
 	"wikibase-entity-property": "propriedade",
 	"wikibase-entity-query": "consulta",
