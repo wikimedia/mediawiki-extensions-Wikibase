@@ -130,7 +130,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'Q7' );
 		$wikibaseLuaBindings->getLabel( $itemId->getSerialization() );
 
-		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::LABEL_USAGE ), 'label usage' );
+		//NOTE: label usage is not tracked directly, this is done via the LabelDescriptionLookup
 		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ), 'title usage' );
 		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ), 'all usage' );
 	}
