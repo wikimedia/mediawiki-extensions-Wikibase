@@ -67,6 +67,19 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider invalidIndexProvider
+	 */
+	public function testConstructionWithInvalidGroupIndex( $invalidIndex ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+
+		$this->newChangeOpClaim(
+			$this->mockProvider->makeStatement( 'P7' ),
+			null,
+			$invalidIndex
+		);
+	}
+
 	public function invalidIndexProvider() {
 		return array(
 			array( 'foo' ),
@@ -82,11 +95,12 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @param Statement $statement
 	 * @param Statement[] $expected
 	 * @param int|null $index
+	 * @param int|null $groupIndex
 	 */
 	public function testApply( Item $item, Statement $statement, array $expected,
-		$index = null
+		$index = null, $groupIndex = null
 	) {
-		$changeOpClaim = $this->newChangeOpClaim( $statement, $index );
+		$changeOpClaim = $this->newChangeOpClaim( $statement, $index, $groupIndex );
 		$changeOpClaim->apply( $item );
 
 		$expectedStatementList = new StatementList( $expected );
@@ -264,10 +278,11 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param Statement $statement
 	 * @param int|null $index
+	 * @param int|null $groupIndex
 	 *
 	 * @return ChangeOpClaim
 	 */
-	private function newChangeOpClaim( Statement $statement, $index = null ) {
+	private function newChangeOpClaim( Statement $statement, $index = null, $groupIndex = null ) {
 		$idParser = new BasicEntityIdParser();
 
 		return new ChangeOpClaim(
@@ -276,7 +291,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			new ClaimGuidValidator( $idParser ),
 			new ClaimGuidParser( $idParser ),
 			$this->mockProvider->getMockSnakValidator(),
-			$index
+			$index,
+			$groupIndex
 		);
 	}
 

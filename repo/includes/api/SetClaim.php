@@ -80,7 +80,8 @@ class SetClaim extends ModifyClaim {
 
 		$changeop = $this->claimChangeOpFactory->newSetClaimOp(
 			$claim,
-			isset( $params['index'] ) ? $params['index'] : null
+			isset( $params['index'] ) ? $params['index'] : null,
+			isset( $params['groupindex'] ) ? $params['groupindex'] : null
 		);
 
 		$this->claimModificationHelper->applyChangeOp( $changeop, $entity, $summary );
@@ -161,6 +162,9 @@ class SetClaim extends ModifyClaim {
 				'index' => array(
 					ApiBase::PARAM_TYPE => 'integer',
 				),
+				'groupindex' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
 			),
 			parent::getAllowedParams()
 		);
@@ -173,7 +177,7 @@ class SetClaim extends ModifyClaim {
 		return array(
 			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}'
 			=> 'apihelp-wbsetclaim-example-1',
-			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}&index=0'
+			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}&index=0&groupindex=0'
 			=> 'apihelp-wbsetclaim-example-2',
 			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"statement","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}},"references":[{"snaks":{"P2":[{"snaktype":"value","property":"P2","datavalue":{"value":"The Economy of Cities","type":"string"}}]},"snaks-order":["P2"]}],"rank":"normal"}'
 			=> 'apihelp-wbsetclaim-example-3',
