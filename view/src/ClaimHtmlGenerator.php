@@ -2,7 +2,7 @@
 
 namespace Wikibase\View;
 
-use Wikibase\DataModel\ByPropertyIdArray;
+use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -121,8 +121,7 @@ class ClaimHtmlGenerator {
 	 * @return string
 	 */
 	protected function getHtmlForQualifiers( SnakList $qualifiers ) {
-		$qualifiersByProperty = new ByPropertyIdArray( iterator_to_array( $qualifiers ) );
-		$qualifiersByProperty->buildIndex();
+		$qualifiersByProperty = new ByPropertyIdGrouper( $qualifiers );
 
 		$snaklistviewsHtml = '';
 
@@ -170,8 +169,7 @@ class ClaimHtmlGenerator {
 	protected function getHtmlForReference( $reference ) {
 		$snaks = $reference->getSnaks();
 
-		$referenceSnaksByProperty = new ByPropertyIdArray( iterator_to_array( $snaks ) );
-		$referenceSnaksByProperty->buildIndex();
+		$referenceSnaksByProperty = new ByPropertyIdGrouper( $snaks );
 
 		$snaklistviewsHtml = '';
 
