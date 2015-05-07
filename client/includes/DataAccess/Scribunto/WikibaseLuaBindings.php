@@ -74,9 +74,12 @@ class WikibaseLuaBindings {
 	 * @param SiteLinkLookup $siteLinkTable
 	 * @param SettingsArray $settings
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param UsageAccumulator $usageAccumulator
+	 * @param UsageAccumulator $usageAccumulator for tracking title usage via getEntityId.
 	 * @param ParserOptions $parserOptions
 	 * @param string $siteId
+	 *
+	 * @note: label usage is not tracked in $usageAccumulator. This should be done inside
+	 *        the $labelDescriptionLookup or an underlying TermsLookup.
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -149,11 +152,6 @@ class WikibaseLuaBindings {
 		}
 
 		// NOTE: This tracks a label usage in the wiki's content language.
-		//       If the actual label is derived via language fallback,
-		//       updates to the source language will not be seen to apply
-		//       to this usage. We would need to trigger on changes to
-		//       *all* languages to fix that.
-		$this->usageAccumulator->addLabelUsage( $entityId );
 		return $term->getText();
 	}
 
