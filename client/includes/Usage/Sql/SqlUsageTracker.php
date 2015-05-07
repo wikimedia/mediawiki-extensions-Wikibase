@@ -218,9 +218,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		foreach ( $rows as $object ) {
 			$entityId = $this->idParser->parse( $object->eu_entity_id );
-			list( $aspect, ) = EntityUsage::splitAspectKey( $object->eu_aspect );
+			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $object->eu_aspect );
 
-			$usage = new EntityUsage( $entityId, $aspect );
+			$usage = new EntityUsage( $entityId, $aspect, $modifier );
 			$key = $usage->getIdentityString();
 			$usages[$key] = $usage;
 		}
@@ -284,9 +284,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			}
 
 			$entityId = $this->idParser->parse( $row->eu_entity_id );
-			list( $aspect, ) = EntityUsage::splitAspectKey( $row->eu_aspect );
+			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $row->eu_aspect );
 
-			$usage = new EntityUsage( $entityId, $aspect );
+			$usage = new EntityUsage( $entityId, $aspect, $modifier );
 			$pageEntityUsages->addUsages( array( $usage ) );
 
 			$usagesPerPage[$pageId] = $pageEntityUsages;
