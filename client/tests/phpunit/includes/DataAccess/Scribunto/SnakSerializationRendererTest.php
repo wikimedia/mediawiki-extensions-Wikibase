@@ -95,7 +95,7 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertCount( 1, $usages );
 		$this->assertEquals(
-			new EntityUsage( $Q42, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $Q42, EntityUsage::LABEL_USAGE, 'en' ),
 			array_shift( $usages )
 		);
 	}
@@ -144,11 +144,11 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertCount( 2, $usages );
 		$this->assertEquals(
-			new EntityUsage( $Q42, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $Q42, EntityUsage::LABEL_USAGE, 'en' ),
 			array_shift( $usages )
 		);
 		$this->assertEquals(
-			new EntityUsage( $Q43, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $Q43, EntityUsage::LABEL_USAGE, 'en' ),
 			array_shift( $usages )
 		);
 	}
