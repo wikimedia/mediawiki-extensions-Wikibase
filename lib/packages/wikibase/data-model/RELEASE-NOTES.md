@@ -17,16 +17,16 @@ The concept of `Claim` is no longer modelled:
 Phasing out of `Claims`:
 
 * `Claims::addClaim` no longer supports setting an index
-* Removed `Claims::getBestClaims` (you can use `StatementList::getBestStatements` instead)
-* Removed `Claims::getByRank` and `Claims::getByRanks` (you can use `StatementList::getWithRank` instead)
-* Removed `Claims::getMainSnaks` (you can use `StatementList::getMainSnaks` instead)
-* Removed `Claims::getClaimsForProperty` (you can use `StatementList::getWithPropertyId` instead)
+* Removed `Claims::getBestClaims`, use `StatementList::getBestStatements` instead
+* Removed `Claims::getByRank` and `Claims::getByRanks`, use `StatementList::getWithRank` instead
+* Removed `Claims::getMainSnaks`, use `StatementList::getMainSnaks` instead
+* Removed `Claims::getClaimsForProperty`, use `StatementList::getWithPropertyId` instead
 * Removed `Claims::getHashes`
 * Removed `Claims::getGuids`
 * Removed `Claims::equals` (and `Claims` no longer implements `Comparable`)
 * Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
 * Removed `Claims::hasClaim`
-* Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
+* Removed `Claims::isEmpty`, use `StatementList::isEmpty` instead
 * Removed `Claims::indexOf`, use `StatementList::getFirstStatementWithGuid` or `StatementByGuidMap` instead
 * Removed `Claims::removeClaim`
 
