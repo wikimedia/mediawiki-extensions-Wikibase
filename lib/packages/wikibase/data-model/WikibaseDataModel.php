@@ -25,3 +25,4 @@ class_alias( 'Wikibase\DataModel\Statement\Statement', 'Wikibase\DataModel\Claim
 class_alias( 'Wikibase\DataModel\Statement\StatementGuid', 'Wikibase\DataModel\Claim\ClaimGuid' );
 class_alias( 'Wikibase\DataModel\Statement\StatementGuidParser', 'Wikibase\DataModel\Claim\ClaimGuidParser' );
 class_alias( 'Wikibase\DataModel\Statement\StatementGuidParsingException', 'Wikibase\DataModel\Claim\ClaimGuidParsingException' );
+class_alias( 'Wikibase\DataModel\Statement\StatementListProvider', 'Wikibase\DataModel\StatementListProvider' );

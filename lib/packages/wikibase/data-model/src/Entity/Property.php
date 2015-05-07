@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\StatementListProvider;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**

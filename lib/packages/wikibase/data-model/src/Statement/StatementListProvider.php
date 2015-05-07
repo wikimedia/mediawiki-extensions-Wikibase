@@ -1,8 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel;
-
-use Wikibase\DataModel\Statement\StatementList;
+namespace Wikibase\DataModel\Statement;
 
 /**
  * Interface for classes that contain a StatementList.
