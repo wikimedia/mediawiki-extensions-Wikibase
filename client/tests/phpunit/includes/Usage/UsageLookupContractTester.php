@@ -50,8 +50,8 @@ class UsageLookupContractTester {
 		$q4 = new ItemId( 'Q4' );
 
 		$u3i = new EntityUsage( $q3, EntityUsage::SITELINK_USAGE );
-		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE );
-		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
+		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' );
+		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' );
 
 		$usages = array( $u3i, $u3l, $u4l );
 
@@ -75,8 +75,8 @@ class UsageLookupContractTester {
 		$q6 = new ItemId( 'Q6' );
 
 		$u3s = new EntityUsage( $q3, EntityUsage::SITELINK_USAGE );
-		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE );
-		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
+		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' );
+		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' );
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
 		$this->putUsages( 23, array( $u3s, $u3l, $u4l ), '20150102030405' );
@@ -97,7 +97,7 @@ class UsageLookupContractTester {
 				23 => new PageEntityUsages( 23, array( $u3l, $u4l ) ),
 				42 => new PageEntityUsages( 42, array( $u4l ) ),
 			),
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q4, $q3 ), array( EntityUsage::LABEL_USAGE ) ) ),
+			iterator_to_array( $this->lookup->getPagesUsing( array( $q4, $q3 ), array( EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'de' ) ) ) ),
 			'Pages using "label" on Q4 or Q3'
 		);
 
@@ -131,6 +131,7 @@ class UsageLookupContractTester {
 		}
 
 		foreach ( $expected as $key => $expectedUsages ) {
+			Assert::assertArrayHasKey( $key, $actual, 'Page ID' );
 			$actualUsages = $actual[$key];
 
 			Assert::assertEquals( $expectedUsages->getPageId(), $actualUsages->getPageId(), $message . "[Page $key] " . 'Page ID mismatches!' );
@@ -146,8 +147,8 @@ class UsageLookupContractTester {
 		$q6 = new ItemId( 'Q6' );
 
 		$u3i = new EntityUsage( $q3, EntityUsage::SITELINK_USAGE );
-		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE );
-		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
+		$u3l = new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' );
+		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' );
 
 		$usages = array( $u3i, $u3l, $u4l );
 

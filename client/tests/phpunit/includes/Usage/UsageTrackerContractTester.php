@@ -61,8 +61,8 @@ class UsageTrackerContractTester {
 
 		$usagesT1 = array(
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
 		);
 
 		$usagesT2 = array(
@@ -94,14 +94,14 @@ class UsageTrackerContractTester {
 
 		$usages = array(
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
 		$entitiesToRemove = array( $q3, $q5 );
 		$expectedUsage = array(
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
 		);
 
 		$this->tracker->trackUsedEntities( 23, $usages, '20150102030405' );

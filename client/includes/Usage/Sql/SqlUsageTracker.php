@@ -259,7 +259,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		return $pages;
 
-			$usage = new EntityUsage( $entityId, $aspect );
+			$usage = new EntityUsage( $entityId, $aspect, $modifier );
 	}
 
 	/**
