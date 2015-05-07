@@ -2,6 +2,7 @@
 
 use Deserializers\Exceptions\DeserializationException;
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\Store\UsageTrackingTermLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings;
@@ -122,9 +123,13 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function newLuaBindings() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+		$usageAccumulator = $this->getUsageAccumulator();
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			new EntityRetrievingTermLookup( $entityLookup ),
+			new UsageTrackingTermLookup(
+				new EntityRetrievingTermLookup( $entityLookup ),
+				$usageAccumulator
+			),
 			$this->getLanguageFallbackChain()
 		);
 
@@ -134,7 +139,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$wikibaseClient->getSettings(),
 			$labelDescriptionLookup,
-			$this->getUsageAccumulator(),
+			$usageAccumulator,
 			$this->getParserOptions(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
@@ -159,7 +164,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * @return ParserOutputUsageAccumulator
 	 */
-	private function getUsageAccumulator() {
+	public function getUsageAccumulator() {
 		if ( $this->usageAccumulator === null ) {
 			$parserOutput = $this->getParser()->getOutput();
 			$this->usageAccumulator = new ParserOutputUsageAccumulator( $parserOutput );
