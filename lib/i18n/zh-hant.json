@@ -85,6 +85,7 @@
 	"wikibase-time-precision-millennium": "$1千年",
 	"wikibase-time-precision-century": "$1世紀",
 	"wikibase-time-precision-10annum": "$1",
+	"wikibase-time-precision-BCE-Mannum": "$1 百萬年 BCE",
 	"wikibase-snakformatter-valuetype-mismatch": "數值型態 \"$1\" 與屬性型態 \"$2\" 不符。",
 	"wikibase-snakformatter-property-not-found": "查無屬性 $1，無法辨識要使用的資料型態。"
 }

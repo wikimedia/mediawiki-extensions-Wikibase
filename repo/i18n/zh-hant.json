@@ -230,6 +230,7 @@
 	"wikibase-listdatatypes-intro": "此為目前所有可用的資料型態：",
 	"wikibase-history-title-with-label": "\"$2\" ($1) 的修訂歷史",
 	"wikibase-history-title-without-label": "($1) 的修訂歷史",
+	"wikibase-listproperties-submit": "尋找",
 	"special-entitieswithoutdescription": "無描述的實體",
 	"wikibase-entitieswithoutdescription-legend": "取得無描述的實體清單",
 	"special-entitieswithoutlabel": "無標籤的實體",

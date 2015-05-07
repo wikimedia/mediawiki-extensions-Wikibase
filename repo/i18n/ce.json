@@ -111,7 +111,7 @@
 	"wikibase-setaliases-label": "Харц цӀе:",
 	"wikibase-setaliases-submit": "Язъе харц цӀерш",
 	"wikibase-setlabeldescriptionaliases-description-label": "Цуьнах лаьцна:",
-	"wikibase-setlabeldescriptionaliases-aliases-label": "Харц цӀераш:",
+	"wikibase-setlabeldescriptionaliases-aliases-label": "Харц цӀерш:",
 	"wikibase-setsitelink-site": "Сайтан id:",
 	"wikibase-setsitelink-label": "Сайтан тӀе хьажорг:",
 	"wikibase-setsitelink-badges": "Беджи:",
@@ -190,8 +190,8 @@
 	"content-model-wikibase-item": "Wikibase репозиторин элемент",
 	"content-model-wikibase-property": "Wikibase элементан билгало",
 	"content-model-wikibase-query": "Wikibase дехар",
-	"right-item-term": "Хийца элементийн терминаш (билгалонаш, хаамаш, харц цӀераш)",
+	"right-item-term": "Хийца элементийн терминаш (билгалонаш, хаамаш, харц цӀерш)",
 	"right-item-merge": "Цхьаьнатоха элементаш",
-	"right-property-term": "Хийца башхаллийн терминаш (билгалонаш, хаамаш, харц цӀераш)",
+	"right-property-term": "Хийца башхаллийн терминаш (билгалонаш, хаамаш, харц цӀерш)",
 	"right-property-create": "билгало кхоллар"
 }
