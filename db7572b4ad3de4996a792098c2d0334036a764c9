@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_50a2f3fa",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-07T18:49:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_1a156c4d",
+      "revId": "db7572b4ad3de4996a792098c2d0334036a764c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_da128463",
         "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-07T16:30:53Z",
       "side": 1,
       "message": "Wait, this can\u0027t be right. The calendar model only matters if the precision is DAY or more precise. So this should probably be \u003c PRECISION_DAY. This is also consistent to the old JS formatter.",
+      "revId": "db7572b4ad3de4996a792098c2d0334036a764c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_70a7f709",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-07T18:49:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_da128463",
       "revId": "db7572b4ad3de4996a792098c2d0334036a764c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_d0b58330",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-07T18:49:04Z",
+      "side": 1,
+      "message": "It is, it\u0027s just a bit more \"sloppy\". The fact that the Gregorian calendar was introduced in October 1582 doesn\u0027t mean nobody used the Gregorian for the dates slightly before that time. We could even go back to 1550 or 1500.",
+      "parentUuid": "0ed113e2_ba054018",
+      "revId": "db7572b4ad3de4996a792098c2d0334036a764c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_4d257ca8",
         "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2015-05-07T16:30:53Z",
       "side": 1,
       "message": "Documentation does not fit any more.",
+      "revId": "db7572b4ad3de4996a792098c2d0334036a764c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f0b20746",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-07T18:49:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_4d257ca8",
       "revId": "db7572b4ad3de4996a792098c2d0334036a764c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
