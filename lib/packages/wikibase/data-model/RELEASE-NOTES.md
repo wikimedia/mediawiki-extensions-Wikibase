@@ -27,7 +27,7 @@ Phasing out of `Claims`:
 * Removed `Claims::getHash` (and `Claims` no longer implements `Hashable`)
 * Removed `Claims::hasClaim`
 * Removed `Claims::isEmpty` (you can use `StatementList::isEmpty` instead)
-* Removed `Claims::indexOf`, use `StatementList::getFirstStatementByGuid` or `StatementByGuidMap` instead
+* Removed `Claims::indexOf`, use `StatementList::getFirstStatementWithGuid` or `StatementByGuidMap` instead
 * Removed `Claims::removeClaim`
 
 Other breaking changes:
