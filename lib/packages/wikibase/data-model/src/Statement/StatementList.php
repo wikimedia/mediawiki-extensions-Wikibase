@@ -60,14 +60,17 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 			throw new InvalidArgumentException( '$statements must be an array or an instance of Traversable' );
 		}
 
-		$this->statements = array();
+		$statementsToSet = array();
+
 		foreach ( $statements as $statement ) {
 			if ( !( $statement instanceof Statement ) ) {
 				throw new InvalidArgumentException( 'Every element in $statements must be an instance of Statement' );
 			}
 
-			$this->addStatement( $statement );
+			$statementsToSet[] = $statement;
 		}
+
+		$this->statements = $statementsToSet;
 	}
 
 	/**
@@ -119,6 +122,8 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
+	 * @since 3.0
+	 *
 	 * @param string|null $guid
 	 */
 	public function removeStatementsWithGuid( $guid ) {
