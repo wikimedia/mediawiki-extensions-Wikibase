@@ -442,7 +442,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 								// we use the numeric item id as the fake page id of the local page!
 								$usages = array(
 									new EntityUsage( $id, EntityUsage::SITELINK_USAGE ),
-									new EntityUsage( $id, EntityUsage::LABEL_USAGE )
+									new EntityUsage( $id, EntityUsage::LABEL_USAGE, 'en' )
 								);
 								$pages[] = new PageEntityUsages( $id->getNumericId(), $usages );
 							}
