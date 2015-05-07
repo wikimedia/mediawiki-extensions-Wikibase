@@ -144,14 +144,30 @@ class AffectedPagesFinder {
 		if ( $diff instanceof EntityDiff && !$diff->getLabelsDiff()->isEmpty() ) {
 			$labelsDiff = $diff->getLabelsDiff();
 
-			if ( isset( $labelsDiff[$this->contentLanguageCode] ) ) {
-				$aspects[] = EntityUsage::LABEL_USAGE;
-				$remainingDiffOps--;
+			if ( !empty( $labelsDiff ) ) {
+				$labelAspects = $this->getChangedLabelAspects( $labelsDiff );
+				$aspects = array_merge( $aspects, $labelAspects );
+				$remainingDiffOps -= count( $labelAspects );
 			}
 		}
 
 		if ( $remainingDiffOps > 0 ) {
 			$aspects[] = EntityUsage::OTHER_USAGE;
+		}
+
+		return $aspects;
+	}
+
+	/**
+	 * @param Diff $labelsDiff
+	 *
+	 * @return string[]
+	 */
+	private function getChangedLabelAspects( Diff $labelsDiff ) {
+		$aspects = array();
+
+		foreach ( $labelsDiff as $lang => $diffOp ) {
+			$aspects[] = EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, $lang );
 		}
 
 		return $aspects;

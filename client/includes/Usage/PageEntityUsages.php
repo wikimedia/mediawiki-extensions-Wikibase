@@ -158,23 +158,21 @@ class PageEntityUsages {
 	 * represented by this PageEntityUsages object. They aspects
 	 * will include any modifiers.
 	 *
-	 * @todo: change this into getUsageAspectKeys
-	 *
 	 * @param EntityId $id
 	 *
 	 * @return string[] List of aspect keys, sorted.
 	 */
-	public function getUsageAspects( EntityId $id ) {
+	public function getUsageAspectKeys( EntityId $id ) {
 		$aspects = array();
 
 		foreach ( $this->usages as $usage ) {
 			if ( $id->equals( $usage->getEntityId() ) ) {
-				$aspects[] = $usage->getAspect();
+				$aspects[] = $usage->getAspectKey();
 			}
 		}
 
 		sort( $aspects );
-		return array_values( array_unique( $aspects ) );
+		return $aspects;
 	}
 
 	public function __toString() {
