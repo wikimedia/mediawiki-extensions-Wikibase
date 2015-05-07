@@ -49,6 +49,8 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
+	 * @since 3.0
+	 * 
 	 * @param Statement[]|Traversable
 	 *
 	 * @throws InvalidArgumentException
