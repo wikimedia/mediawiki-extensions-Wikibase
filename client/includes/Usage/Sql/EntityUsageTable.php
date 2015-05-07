@@ -232,9 +232,9 @@ class EntityUsageTable {
 
 		foreach ( $rows as $object ) {
 			$entityId = $this->idParser->parse( $object->eu_entity_id );
-			list( $aspect, ) = EntityUsage::splitAspectKey( $object->eu_aspect );
+			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $object->eu_aspect );
 
-			$usage = new EntityUsage( $entityId, $aspect );
+			$usage = new EntityUsage( $entityId, $aspect, $modifier );
 			$key = $usage->getIdentityString();
 			$usages[$key] = $usage;
 		}
@@ -357,9 +357,9 @@ class EntityUsageTable {
 			}
 
 			$entityId = $this->idParser->parse( $row->eu_entity_id );
-			list( $aspect, ) = EntityUsage::splitAspectKey( $row->eu_aspect );
+			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $row->eu_aspect );
 
-			$usage = new EntityUsage( $entityId, $aspect );
+			$usage = new EntityUsage( $entityId, $aspect, $modifier );
 			$pageEntityUsages->addUsages( array( $usage ) );
 
 			$usagesPerPage[$pageId] = $pageEntityUsages;

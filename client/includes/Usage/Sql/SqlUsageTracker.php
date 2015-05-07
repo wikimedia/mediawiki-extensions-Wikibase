@@ -258,8 +258,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$this->connectionManager->releaseConnection( $db );
 
 		return $pages;
-
-			$usage = new EntityUsage( $entityId, $aspect );
 	}
 
 	/**
