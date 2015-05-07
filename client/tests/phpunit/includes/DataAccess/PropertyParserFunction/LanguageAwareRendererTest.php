@@ -105,8 +105,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		$renderer->render( $q42, 'p1337' );
 
 		$expectedUsage = array(
-			new EntityUsage( $q22, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q23, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q22, EntityUsage::LABEL_USAGE, 'en' ),
+			new EntityUsage( $q23, EntityUsage::LABEL_USAGE, 'en' ),
 		);
 
 		$this->assertSameUsages( $expectedUsage, $accumulator->getUsages() );
