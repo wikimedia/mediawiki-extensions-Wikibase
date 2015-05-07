@@ -3,14 +3,10 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use ValueValidators\Result;
-use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\StatementListProvider;
@@ -61,6 +57,11 @@ class ChangeOpClaim extends ChangeOpBase {
 	private $index;
 
 	/**
+	 * @var int|null
+	 */
+	private $groupIndex;
+
+	/**
 	 * @param Claim $claim
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
@@ -76,11 +77,11 @@ class ChangeOpClaim extends ChangeOpBase {
 		ClaimGuidValidator $guidValidator,
 		ClaimGuidParser $guidParser,
 		SnakValidator $snakValidator,
-		$index = null
+		$index = null,
+		$groupIndex = null
 	) {
-		if ( !is_int( $index ) && $index !== null ) {
-			throw new InvalidArgumentException( '$index must be an integer or null' );
-		}
+		$this->assertIsIndex( $index );
+		$this->assertIsIndex( $groupIndex );
 
 		$this->claim = $claim;
 		$this->guidGenerator = $guidGenerator;
@@ -88,6 +89,13 @@ class ChangeOpClaim extends ChangeOpBase {
 		$this->guidParser = $guidParser;
 		$this->snakValidator = $snakValidator;
 		$this->index = $index;
+		$this->groupIndex = $groupIndex;
+	}
+
+	private function assertIsIndex( $index ) {
+		if (  ( !is_int( $index ) || $index < 0 ) && $index !== null ) {
+			throw new InvalidArgumentException( '$index must be a non-negative integer or null' );
+		}
 	}
 
 	/**
@@ -128,42 +136,22 @@ class ChangeOpClaim extends ChangeOpBase {
 			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
 
-		$statements = $this->removeStatement( $entity->getStatements()->toArray(), $summary );
-		$statements = $this->addStatement( $statements );
-		$this->setStatements( $entity, $statements );
-	}
+		$statement = $entity->getStatements()->getFirstStatementWithGuid( $this->claim->getGuid() );
 
-	/**
-	 * @param Statement[] $statements
-	 * @param Summary|null $summary
-	 *
-	 * @return Statement[]
-	 */
-	private function removeStatement( array $statements, Summary $summary = null ) {
-		$guid = $this->claim->getGuid();
-		$newStatements = array();
-		$oldStatement = null;
+		$byPropertyIdMap = new ByPropertyIdMap( $entity->getStatements() );
 
-		foreach ( $statements as $statement ) {
-			if ( $statement->getGuid() === $guid && $oldStatement === null ) {
-				$oldStatement = $statement;
-
-				if ( $this->index === null ) {
-					$this->index = count( $newStatements );
-				}
-			} else {
-				$newStatements[] = $statement;
-			}
-		}
-
-		if ( $oldStatement === null ) {
+		if ( $statement === null ) {
 			$this->updateSummary( $summary, 'create' );
+			$byPropertyIdMap->addElementAtIndex( $this->claim, $this->index );
 		} else {
-			$this->checkMainSnakUpdate( $oldStatement );
+			$this->checkMainSnakUpdate( $statement );
 			$this->updateSummary( $summary, 'update' );
+			$byPropertyIdMap->moveElementToIndex( $this->claim, $this->index );
 		}
 
-		return $newStatements;
+		$byPropertyIdMap->moveGroupToIndex( $this->claim->getPropertyId(), $this->groupIndex );
+
+		$entity->getStatements()->setStatements( $byPropertyIdMap->getflatArray() );
 	}
 
 	/**
@@ -185,50 +173,6 @@ class ChangeOpClaim extends ChangeOpBase {
 			throw new ChangeOpException( "Claim with GUID $guid uses property "
 				. $oldPropertyId . ", can't change to "
 				. $newMainSnak->getPropertyId() );
-		}
-	}
-
-	/**
-	 * @param Statement[] $statements
-	 *
-	 * @throws ChangeOpException
-	 * @return Statement[]
-	 */
-	private function addStatement( array $statements ) {
-		// If we fail with the user supplied index and the index is greater than or equal 0
-		// presume the user wants to have the index at the end of the list.
-		if ( $this->index < 0 ) {
-			throw new ChangeOpException( 'Can not add claim at given index: '. $this->index );
-		}
-
-		$indexedStatements = new ByPropertyIdArray( $statements );
-		$indexedStatements->buildIndex();
-
-		try {
-			$indexedStatements->addObjectAtIndex( $this->claim, $this->index );
-			$statements = $indexedStatements->toFlatArray();
-		} catch ( OutOfBoundsException $ex ) {
-			$statements[] = $this->claim;
-		}
-
-		return $statements;
-	}
-
-	/**
-	 * @param Entity $entity
-	 * @param Statement[] $statements
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function setStatements( Entity $entity, array $statements ) {
-		$statementList = new StatementList( $statements );
-
-		if ( $entity instanceof Item ) {
-			$entity->setStatements( $statementList );
-		} elseif ( $entity instanceof Property ) {
-			$entity->setStatements( $statementList );
-		} else {
-			throw new InvalidArgumentException( '$entity must be an Item or Property' );
 		}
 	}
 
