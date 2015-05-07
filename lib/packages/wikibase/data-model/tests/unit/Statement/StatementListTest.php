@@ -666,4 +666,40 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNull( $statements->getFirstStatementWithGuid( false ) );
 	}
 
+	public function testGivenEmptyStatementList_setStatementsFillsIt() {
+		$statement1 = $this->getStatement( 1, 'guid1' );
+		$statement2 = $this->getStatement( 2, 'guid2' );
+		$statement3 = $this->getStatement( 3, 'guid3' );
+		$statement4 = $this->getStatement( 2, 'guid5' );
+		$statements = new StatementList();
+
+		$statements->setStatements( array( $statement1, $statement2, $statement3, $statement4 ) );
+		$this->assertEquals(
+			new StatementList( $statement1, $statement2, $statement3, $statement4 ),
+			$statements
+		);
+	}
+
+	public function testGivenFilledStatementList_setStatementsOverridesIt() {
+		$statement1 = $this->getStatement( 1, 'guid1' );
+		$statement2 = $this->getStatement( 2, 'guid2' );
+		$statement3 = $this->getStatement( 3, 'guid3' );
+		$statement4 = $this->getStatement( 2, 'guid5' );
+		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
+
+		$statements->setStatements( array( $statement1, $statement4 ) );
+		$this->assertEquals(
+			new StatementList( $statement1, $statement4 ),
+			$statements
+		);
+	}
+
+	public function testGivenNoTraversable_setStatementsThrowsException() {
+		$statement1 = $this->getStatement( 1, 'guid1' );
+		$statements = new StatementList();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$statements->setStatements( $statement1 );
+	}
+
 }
