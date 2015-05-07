@@ -100,7 +100,7 @@ class StatementTransclusionInteractor {
 			$acceptableRanks
 		);
 
-		$usageAccumulator->addLabelUsageForSnaks( $snaks );
+		$usageAccumulator->addLabelUsageForSnaks( $snaks, $this->language->getCode() );
 
 		return $this->formatSnaks( $snaks );
 	}
