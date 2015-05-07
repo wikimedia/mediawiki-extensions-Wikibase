@@ -77,7 +77,7 @@ class SnakSerializationRenderer {
 	public function renderSnak( array $snakSerialization ) {
 		$snak = $this->snakDeserializer->deserialize( $snakSerialization );
 
-		$this->usageAccumulator->addLabelUsageForSnaks( array( $snak ) );
+		$this->usageAccumulator->addLabelUsageForSnak( $snak, $this->language->getCode() );
 
 		return $this->snakFormatter->formatSnak( $snak );
 	}
@@ -100,7 +100,7 @@ class SnakSerializationRenderer {
 
 		$snaks = iterator_to_array( $snaks );
 
-		$this->usageAccumulator->addLabelUsageForSnaks( $snaks );
+		$this->usageAccumulator->addLabelUsageForSnaks( $snaks, $this->language->getCode() );
 
 		return $this->formatSnakList( $snaks );
 	}
