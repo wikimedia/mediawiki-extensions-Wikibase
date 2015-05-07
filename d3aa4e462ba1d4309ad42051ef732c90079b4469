@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_37996971",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-07T14:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_f6df6a3d",
+      "revId": "d3aa4e462ba1d4309ad42051ef732c90079b4469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_7614daed",
         "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-06T18:51:53Z",
       "side": 1,
       "message": "$year \u003d (int)$matches[0]; done. See the previous patch.",
+      "revId": "d3aa4e462ba1d4309ad42051ef732c90079b4469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d7a1fd91",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-07T14:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_7614daed",
       "revId": "d3aa4e462ba1d4309ad42051ef732c90079b4469",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
