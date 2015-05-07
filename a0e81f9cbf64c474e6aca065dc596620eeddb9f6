@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_9714d5ee",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-07T14:09:12Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t know that! That makes things a lot simpler indeed.",
+      "parentUuid": "0ed113e2_76661aba",
+      "revId": "a0e81f9cbf64c474e6aca065dc596620eeddb9f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_d6f4a6cc",
         "filename": "lib/tests/phpunit/formatters/HtmlTimeFormatterTest.php",
         "patchSetId": 3
