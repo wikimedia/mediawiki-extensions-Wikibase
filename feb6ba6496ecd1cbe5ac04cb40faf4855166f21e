@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_9a839c9b",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-07T16:30:21Z",
+      "side": 1,
+      "message": "Why the change? The 0* does nothing and can be omitted. Making the sign optional is fine for me. The dash? Hm. What about /^[-+]?\\d+\\b/ That way you can keep the $matches[0]. Also please keep the variable name. I used to use $m but find it odd nowadays. Today it looks like BASIC code to me.",
+      "revId": "feb6ba6496ecd1cbe5ac04cb40faf4855166f21e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8d2e0488",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-07T16:30:21Z",
+      "side": 1,
+      "message": "The \"leading zero\" thing is irrelevant here.",
+      "revId": "feb6ba6496ecd1cbe5ac04cb40faf4855166f21e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_cd388cd2",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-07T16:30:21Z",
+      "side": 1,
+      "message": "\u003c\u003d 1582 would be easier to read and to grep.",
+      "revId": "feb6ba6496ecd1cbe5ac04cb40faf4855166f21e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
