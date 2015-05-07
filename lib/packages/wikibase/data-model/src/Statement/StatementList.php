@@ -45,10 +45,20 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 			$statements = func_get_args();
 		}
 
+		$this->setStatements( $statements );
+	}
+
+	/**
+	 * @param Statement[]|Traversable
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function setStatements( $statements ) {
 		if ( !is_array( $statements ) && !( $statements instanceof Traversable ) ) {
 			throw new InvalidArgumentException( '$statements must be an array or an instance of Traversable' );
 		}
 
+		$this->statements = array();
 		foreach ( $statements as $statement ) {
 			if ( !( $statement instanceof Statement ) ) {
 				throw new InvalidArgumentException( 'Every element in $statements must be an instance of Statement' );
