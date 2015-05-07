@@ -61,36 +61,40 @@ class ClaimChangeOpFactory {
 	/**
 	 * @param Statement $statement
 	 * @param int|null $index
+	 * @param int|null $groupIndex
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newAddClaimOp( Statement $statement, $index = null ) {
+	public function newAddClaimOp( Statement $statement, $index = null, $groupIndex = null ) {
 		return new ChangeOpClaim(
 			$statement,
 			$this->guidGenerator,
 			$this->guidValidator,
 			$this->guidParser,
 			$this->snakValidator,
-			$index
+			$index,
+			$groupIndex
 		);
 	}
 
 	/**
 	 * @param Claim $claim
 	 * @param int|null $index
+	 * @param int|null $groupIndex
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newSetClaimOp( Claim $claim, $index = null ) {
+	public function newSetClaimOp( Claim $claim, $index = null, $groupIndex = null ) {
 		return new ChangeOpClaim(
 			$claim,
 			$this->guidGenerator,
 			$this->guidValidator,
 			$this->guidParser,
 			$this->snakValidator,
-			$index
+			$index,
+			$groupIndex
 		);
 	}
 
