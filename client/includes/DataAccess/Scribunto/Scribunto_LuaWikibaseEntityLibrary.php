@@ -1,13 +1,14 @@
 <?php
 
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 
@@ -42,15 +43,20 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
+		$languageFallbackChain = $wikibaseClient->getLanguageFallbackChainFactory()->newFromLanguage(
+			$wgContLang,
+			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+		);
+
 		$formatterOptions = new FormatterOptions( array( SnakFormatter::OPT_LANG => $wgContLang->getCode() ) );
-		$usageAccumulator = new ParserOutputUsageAccumulator( $this->getParser()->getOutput() );
 
 		$snakFormatter = new UsageTrackingSnakFormatter(
 			$wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
-				SnakFormatter::FORMAT_WIKI, $formatterOptions
+				SnakFormatter::FORMAT_WIKI,
+				$formatterOptions
 			),
-			$usageAccumulator,
-			array( $wgContLang->getCode() ) //FIXME: fallback
+			$this->getUsageAccumulator(),
+			$languageFallbackChain->getFetchLanguageCodes()
 		);
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
@@ -71,9 +77,15 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		return new WikibaseLuaEntityBindings(
 			$entityStatementsRenderer,
 			$wikibaseClient->getEntityIdParser(),
-			$usageAccumulator,
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
+	}
+
+	/**
+	 * @return ParserOutputUsageAccumulator
+	 */
+	public function getUsageAccumulator() {
+		return new ParserOutputUsageAccumulator( $this->getParser()->getOutput() );
 	}
 
 	/**
