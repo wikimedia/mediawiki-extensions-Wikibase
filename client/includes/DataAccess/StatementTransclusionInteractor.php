@@ -3,7 +3,6 @@
 namespace Wikibase\DataAccess;
 
 use Language;
-use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\StatementListProvider;
@@ -70,7 +69,6 @@ class StatementTransclusionInteractor {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param UsageAccumulator $usageAccumulator
 	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 * @param int[]|null $acceptableRanks
 	 *
@@ -79,7 +77,6 @@ class StatementTransclusionInteractor {
 	 */
 	public function render(
 		EntityId $entityId,
-		UsageAccumulator $usageAccumulator,
 		$propertyLabelOrId,
 		$acceptableRanks = null
 	) {
@@ -99,8 +96,6 @@ class StatementTransclusionInteractor {
 			$propertyId,
 			$acceptableRanks
 		);
-
-		$usageAccumulator->addLabelUsageForSnaks( $snaks, $this->language->getCode() );
 
 		return $this->formatSnaks( $snaks );
 	}
