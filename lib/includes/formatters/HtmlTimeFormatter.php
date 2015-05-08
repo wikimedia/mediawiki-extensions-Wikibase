@@ -15,6 +15,7 @@ use ValueFormatters\ValueFormatterBase;
  * @license GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  * @author Thiemo Mättig
+ * @author Daniel Kinzler
  */
 class HtmlTimeFormatter extends ValueFormatterBase {
 
@@ -70,16 +71,37 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * @return bool
 	 */
 	private function calendarNameNeeded( TimeValue $value ) {
-		preg_match( '/^[-+]\d+/', $value->getTime(), $matches );
-		$year = $matches[0];
+		// We assume this is an ISO-ish timestamp.
+		preg_match( '/^[-+]\d+\D/', $value->getTime(), $m );
 
-		// This is how the original JavaScript UI decided this:
-		// year <= 1581 && calendar === 'Gregorian' ||
-		// year > 1581 && year < 1930 ||
-		// year >= 1930 && calendar === 'Julian'
-		return $value->getPrecision() >= TimeValue::PRECISION_DAY && (
-			$year <= 1581 || $value->getCalendarModel() !== TimeFormatter::CALENDAR_GREGORIAN
-		);
+		// NOTE: PHP will limit overly large values to PHP_INT_MAX. No overflow or wrap-around occurs.
+		$year = (int)$m[0];
+		$guessedCalendar = $this->getDefaultCalendar( $year );
+
+		// Always show the calendar if it's different from the "guessed" default.
+		if ( $value->getCalendarModel() !== $guessedCalendar ) {
+			return true;
+		}
+
+		// Otherwise, the calendar is "unsurprising", so don't show it.
+		return false;
+	}
+
+	/**
+	 * This guesses the most likely calendar model based on the given TimeValue,
+	 * ignoring the calendar given in the TimeValue. This should always implement the
+	 * exact same heuristic as IsoTimestampParser::getCalendarModel().
+	 *
+	 * @see IsoTimestampParser::getCalendarModel()
+	 *
+	 * @param int $year
+	 *
+	 * @return string Calendar URI
+	 */
+	private function getDefaultCalendar( $year ) {
+		// The Gregorian calendar was introduced in October 1582,
+		// so we'll default to Julian for all years before 1583.
+		return $year <= 1582 ? TimeFormatter::CALENDAR_JULIAN : TimeFormatter::CALENDAR_GREGORIAN;
 	}
 
 	/**
