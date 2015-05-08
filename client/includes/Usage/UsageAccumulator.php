@@ -3,9 +3,6 @@
 namespace Wikibase\Client\Usage;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 
 /**
  * Interface and base class for objects accumulating usage tracking information for a given page.
@@ -22,44 +19,6 @@ abstract class UsageAccumulator {
 	 * @param EntityUsage $usage
 	 */
 	abstract public function addUsage( EntityUsage $usage );
-
-	/**
-	 * Registers the usage of entity's labels (in the given language), if the provided
-	 * snaks are PropertyValueSnaks that contain EntityIdValues.
-	 *
-	 * @note We track any EntityIdValue as a label usage. This is making assumptions about what the
-	 * respective formatter actually does. Ideally, the formatter itself would perform the tracking,
-	 * but that seems nasty to model.
-	 *
-	 * @param Snak[] $snaks
-	 * @param string|null $languageCode
-	 */
-	public function addLabelUsageForSnaks( array $snaks, $languageCode = null ) {
-		foreach ( $snaks as $snak ) {
-			$this->addLabelUsageForSnak( $snak, $languageCode );
-		}
-	}
-
-	/**
-	 * Registers the usage of an entity's label (in the given language), if the provided
-	 * snak is a PropertyValueSnak that contains an EntityIdValue.
-	 *
-	 * @note We track any EntityIdValue as a label usage. This is making assumptions about what the
-	 * respective formatter actually does. Ideally, the formatter itself would perform the tracking,
-	 * but that seems nasty to model.
-	 *
-	 * @param Snak $snak
-	 * @param string|null $languageCode
-	 */
-	public function addLabelUsageForSnak( Snak $snak, $languageCode = null ) {
-		if ( $snak instanceof PropertyValueSnak ) {
-			$value = $snak->getDataValue();
-
-			if ( $value instanceof EntityIdValue ) {
-				$this->addLabelUsage( $value->getEntityId(), $languageCode );
-			}
-		}
-	}
 
 	/**
 	 * Registers the usage of an entity's label (in the given language).
