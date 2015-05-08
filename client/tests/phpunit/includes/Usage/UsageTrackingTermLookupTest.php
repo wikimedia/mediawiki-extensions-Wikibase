@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests\Usage;
 
-use Wikibase\Client\Store\UsageTrackingTermLookup;
+use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\TermLookup;
 
 /**
- * @covers Wikibase\Lib\Store\UsageTrackingTermLookup
+ * @covers Wikibase\Client\Usage\UsageTrackingTermLookup
  *
  * @group Wikibase
  * @group WikibaseLib

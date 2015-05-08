@@ -1,9 +1,8 @@
 <?php
 
-namespace Wikibase\Client\Store;
+namespace Wikibase\Client\Usage;
 
 use OutOfBoundsException;
-use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\TermLookup;
 
