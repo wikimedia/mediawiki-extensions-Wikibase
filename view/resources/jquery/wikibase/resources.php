@@ -431,7 +431,6 @@ return call_user_func( function() {
 		),
 
 		'jquery.wikibase.statementview' => $moduleTemplate + array(
-			'position' => 'top',
 			'scripts' => array(
 				'jquery.wikibase.statementview.js',
 				'jquery.wikibase.statementview.RankSelector.js',
@@ -463,6 +462,30 @@ return call_user_func( function() {
 				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-referencesheading-pendingcountersubject',
 				'wikibase-statementview-referencesheading-pendingcountertooltip',
+			),
+		),
+
+		// This declaration is redundant for the sake of addModuleStyles
+		'jquery.wikibase.statementview.styles' => $moduleTemplate + array(
+			'position' => 'top',
+			'styles' => array(
+				'themes/default/jquery.wikibase.statementview.RankSelector.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.EditableTemplatedWidget',
+				'jquery.ui.menu',
+				'jquery.ui.position',
+				'jquery.ui.toggler',
+				'util.inherit',
+				'jquery.wikibase.listview',
+				'jquery.wikibase.referenceview',
+				'jquery.wikibase.snakview',
+				'jquery.wikibase.snaklistview',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.SnakList',
+				'wikibase.datamodel.Statement',
+				'wikibase.utilities',
 			),
 		),
 

@@ -91,10 +91,20 @@ return call_user_func( function() {
 		),
 
 		'jquery.wikibase.toolbar' => $moduleTemplate + array(
-			'position' => 'top',
 			'scripts' => array(
 				'jquery.wikibase.toolbar.js',
 			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.toolbar.css',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.toolbaritem',
+			),
+		),
+
+		// This declaration is redundant for the sake of addModuleStyles
+		'jquery.wikibase.toolbar.styles' => $moduleTemplate + array(
+			'position' => 'top',
 			'styles' => array(
 				'themes/default/jquery.wikibase.toolbar.css',
 			),
