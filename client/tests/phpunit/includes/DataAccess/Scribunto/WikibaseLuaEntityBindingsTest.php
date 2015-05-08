@@ -32,7 +32,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 
 		$entityStatementsRenderer->expects( $this->any() )
 				->method( 'render' )
-				->with( new ItemId( 'Q12' ), $usageAccumulator, 'some label', array( Statement::RANK_DEPRECATED ) )
+				->with( new ItemId( 'Q12' ), 'some label', array( Statement::RANK_DEPRECATED ) )
 				->will( $this->returnValue( 'Kittens > Cats' ) );
 
 		return new WikibaseLuaEntityBindings(
