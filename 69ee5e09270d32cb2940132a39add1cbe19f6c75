@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_a4775a9a",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-08T14:30:12Z",
+      "side": 1,
+      "message": "I would feel better if that would be an array_key_exists or some other hash lookup instead of a nested loop.",
+      "revId": "69ee5e09270d32cb2940132a39add1cbe19f6c75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
