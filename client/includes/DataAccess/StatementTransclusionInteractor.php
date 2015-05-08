@@ -70,7 +70,6 @@ class StatementTransclusionInteractor {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param UsageAccumulator $usageAccumulator
 	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 * @param int[]|null $acceptableRanks
 	 *
@@ -79,7 +78,6 @@ class StatementTransclusionInteractor {
 	 */
 	public function render(
 		EntityId $entityId,
-		UsageAccumulator $usageAccumulator,
 		$propertyLabelOrId,
 		$acceptableRanks = null
 	) {
@@ -99,8 +97,6 @@ class StatementTransclusionInteractor {
 			$propertyId,
 			$acceptableRanks
 		);
-
-		$usageAccumulator->addLabelUsageForSnaks( $snaks, $this->language->getCode() );
 
 		return $this->formatSnaks( $snaks );
 	}
