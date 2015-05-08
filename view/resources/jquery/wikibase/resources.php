@@ -431,13 +431,9 @@ return call_user_func( function() {
 		),
 
 		'jquery.wikibase.statementview' => $moduleTemplate + array(
-			'position' => 'top',
 			'scripts' => array(
 				'jquery.wikibase.statementview.js',
 				'jquery.wikibase.statementview.RankSelector.js',
-			),
-			'styles' => array(
-				'themes/default/jquery.wikibase.statementview.RankSelector.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.EditableTemplatedWidget',
@@ -449,6 +445,7 @@ return call_user_func( function() {
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.snakview',
 				'jquery.wikibase.snaklistview',
+				'jquery.wikibase.statementview.RankSelector.styles',
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.ReferenceList',
 				'wikibase.datamodel.SnakList',
@@ -463,6 +460,13 @@ return call_user_func( function() {
 				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-referencesheading-pendingcountersubject',
 				'wikibase-statementview-referencesheading-pendingcountertooltip',
+			),
+		),
+
+		'jquery.wikibase.statementview.RankSelector.styles' => $moduleTemplate + array(
+			'position' => 'top',
+			'styles' => array(
+				'themes/default/jquery.wikibase.statementview.RankSelector.css',
 			),
 		),
 

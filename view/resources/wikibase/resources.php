@@ -70,6 +70,18 @@ return call_user_func( function() {
 			),
 		),
 
+		// This declaration is redundant for the sake of addModuleStyles
+		'jquery.ui.core.styles' => array(
+			'position' => 'top',
+			'skinStyles' => array(
+				'default' => array(
+					'resources/lib/jquery.ui/themes/smoothness/jquery.ui.core.css',
+					'resources/lib/jquery.ui/themes/smoothness/jquery.ui.theme.css',
+				),
+			),
+			'group' => 'jquery.ui',
+		),
+
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {
