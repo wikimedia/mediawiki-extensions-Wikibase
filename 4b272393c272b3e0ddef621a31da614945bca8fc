@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_2157dc5c",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-08T13:59:14Z",
+      "side": 1,
+      "message": "Replacing \"smaller\" with \"lower\" does not really make a difference.",
+      "revId": "4b272393c272b3e0ddef621a31da614945bca8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
