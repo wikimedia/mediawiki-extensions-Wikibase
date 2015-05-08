@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -52,6 +53,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		}
 
 		$stringProperty = $this->getTestProperty( new PropertyId( 'P342' ), 'string', 'LuaTestStringProperty' );
+		$itemProperty = $this->getTestProperty( new PropertyId( 'P456' ), 'wikibase-item', 'LuaTestItemProperty' );
 
 		$stringSnak = $this->getTestSnak(
 			$stringProperty->getId(),
@@ -82,6 +84,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 
 		$stringProperty->getStatements()->addStatement( $statement1 );
 		$this->siteLinkLookup->putEntity( $stringProperty );
+		$this->siteLinkLookup->putEntity( $itemProperty );
 
 		$stringSnak2 = $this->getTestSnak(
 			$stringProperty->getId(),
@@ -90,6 +93,14 @@ class WikibaseDataAccessTestItemSetUpHelper {
 
 		$statement2 = $this->getTestStatement( $stringSnak2 );
 		$statement2->setRank( Statement::RANK_NORMAL );
+
+		$itemSnak = $this->getTestSnak(
+			$itemProperty->getId(),
+			new EntityIdValue( new ItemId( 'Q885588' ) )
+		);
+
+		$statement3 = $this->getTestStatement( $itemSnak );
+		$statement3->setRank( Statement::RANK_NORMAL );
 
 		$siteLinks = array( $siteLink );
 		$siteLinks[] = new SiteLink(
@@ -104,7 +115,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 
 		$this->createTestItem( new ItemId( 'Q32487' ), $labels, array( $statement1, $statement2 ), $siteLinks );
 
-		$this->createTestItem( new ItemId( 'Q32488' ), array(), array( $statement1 ), array() );
+		$this->createTestItem( new ItemId( 'Q32488' ), array(), array( $statement1, $statement3 ), array() );
 
 		// Create another test item to test arbitrary access
 		$this->createTestItem( new ItemId( 'Q199024' ), array( 'de' => 'Arbitrary access \o/' ) );
