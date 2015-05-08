@@ -2,7 +2,7 @@
 
 use Deserializers\Exceptions\DeserializationException;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Client\Store\UsageTrackingTermLookup;
+use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings;
