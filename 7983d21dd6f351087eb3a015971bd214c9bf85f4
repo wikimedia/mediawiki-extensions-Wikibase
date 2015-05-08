@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_418540d2",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-08T14:00:41Z",
+      "side": 1,
+      "message": "Why the \\D and not \\b? I would like to exclude stuff like \"1st\" here.\nAnd the sign is non-optional again?\nAnd why the variable name change?",
+      "revId": "7983d21dd6f351087eb3a015971bd214c9bf85f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
