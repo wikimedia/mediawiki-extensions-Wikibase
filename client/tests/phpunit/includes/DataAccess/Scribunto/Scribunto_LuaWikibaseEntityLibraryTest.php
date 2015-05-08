@@ -72,6 +72,19 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		);
 	}
 
+	public function testFormatPropertyValues_usage() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->assertSame(
+			array( 'Q885588' ),
+			$luaWikibaseLibrary->formatPropertyValues( 'Q32488', 'P456', null )
+		);
+
+		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
+		$this->assertArrayHasKey( 'Q885588#L.de', $usages );
+		$this->assertArrayHasKey( 'Q885588#T', $usages );
+	}
+
 	private function newScribuntoLuaWikibaseLibrary() {
 		$title =  Title::newFromText( 'Whatever' );
 		$parser = new Parser();
