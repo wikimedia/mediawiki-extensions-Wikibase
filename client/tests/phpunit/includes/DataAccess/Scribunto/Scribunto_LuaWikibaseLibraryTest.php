@@ -122,13 +122,19 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	public function testRenderSnak() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487', false );
+		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488', false );
 
-		$snak = $entityArr[0]['claims']['P342'][1]['qualifiers']['P342'][1];
+		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
 		$this->assertSame(
-			array( 'A qualifier Snak' ),
+			array( 'Q885588' ),
 			$luaWikibaseLibrary->renderSnak( $snak )
 		);
+
+		// When rendering the item reference in the snak,
+		// track table and title usage.
+		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
+		$this->assertArrayHasKey( 'Q885588#L.de', $usage );
+		$this->assertArrayHasKey( 'Q885588#T', $usage );
 	}
 
 	public function testRenderSnak_invalidSerialization() {

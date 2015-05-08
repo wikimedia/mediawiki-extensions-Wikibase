@@ -2,14 +2,10 @@
 
 namespace Wikibase\Client\Usage\Tests;
 
-use DataValues\StringValue;
 use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * Contract tester for implementations of the UsageAccumulator interface.
@@ -36,7 +32,6 @@ class UsageAccumulatorContractTester  {
 	}
 
 	public function testAddGetUsage() {
-		$this->testAddAndGetLabelUsageForSnaks();
 		$this->testAddAndGetLabelUsage();
 		$this->testAddAndGetTitleUsage();
 		$this->testAddAndGetSiteLinksUsage();
@@ -45,9 +40,7 @@ class UsageAccumulatorContractTester  {
 
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
-		$q4 = new ItemId( 'Q4' );
 		$expected = array(
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'xx' ),
 			new EntityUsage( $q2, EntityUsage::LABEL_USAGE, 'xx' ),
 			new EntityUsage( $q2, EntityUsage::TITLE_USAGE ),
 			new EntityUsage( $q2, EntityUsage::SITELINK_USAGE ),
@@ -57,19 +50,6 @@ class UsageAccumulatorContractTester  {
 
 		$usages = $this->usageAccumulator->getUsages();
 		$this->assertSameUsages( $expected, $usages );
-	}
-
-	private function testAddAndGetLabelUsageForSnaks() {
-		$q4 = new ItemId( 'Q4' );
-		$this->usageAccumulator->addLabelUsageForSnaks( array(
-			new PropertyValueSnak( new PropertyId( 'P4' ), new EntityIdValue( $q4 ) ),
-			new PropertyValueSnak( new PropertyId( 'P5' ), new StringValue( 'string' ) ),
-		), 'xx' );
-
-		$expected = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'xx' );
-
-		$usages = $this->usageAccumulator->getUsages();
-		$this->assertContainsUsage( $expected, $usages );
 	}
 
 	private function testAddAndGetLabelUsage() {
