@@ -40,11 +40,9 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	}
 
 	/**
-	 * Format a time data value
-	 *
 	 * @since 0.5
 	 *
-	 * @param TimeValue $value The time to format
+	 * @param TimeValue $value
 	 *
 	 * @return string HTML
 	 * @throws InvalidArgumentException
@@ -71,11 +69,13 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * @return bool
 	 */
 	private function calendarNameNeeded( TimeValue $value ) {
-		// We assume this is an ISO-ish timestamp.
-		preg_match( '/^[-+]\d+\D/', $value->getTime(), $m );
+		// Loose check if the timestamp string is ISO-ish and starts with a year.
+		if ( !preg_match( '/^[-+]?\d+\b/', $value->getTime(), $matches ) ) {
+			return true;
+		}
 
-		// NOTE: PHP will limit overly large values to PHP_INT_MAX. No overflow or wrap-around occurs.
-		$year = (int)$m[0];
+		// NOTE: PHP limits overly large values to PHP_INT_MAX. No overflow or wrap-around occurs.
+		$year = (int)$matches[0];
 		$guessedCalendar = $this->getDefaultCalendar( $year );
 
 		// Always show the calendar if it's different from the "guessed" default.
@@ -83,15 +83,15 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 			return true;
 		}
 
-		// If precision is year or lower, don't show the calendar
+		// If precision is year or less precise, don't show the calendar.
 		if ( $value->getPrecision() <= TimeValue::PRECISION_YEAR ) {
 			return false;
 		}
 
 		// If the date is inside the "critical" range where Julian and Gregorian were used
-		// in parallel, always show the calendar. Gregorian started to be used in the 1580s,
-		// but the Julian calendar continued to be used into the 1920s (in Russia and Greece).
-		// See https://en.wikipedia.org/wiki/Julian_calendar
+		// in parallel, always show the calendar. Gregorian was made "official" in October 1582 but
+		// may already be used earlier. Julian continued to be official until the 1920s in Russia
+		// and Greece, see https://en.wikipedia.org/wiki/Julian_calendar.
 		if ( $year > 1580 && $year < 1930 ) {
 			return true;
 		}

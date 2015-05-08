@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Test;
 use DataValues\TimeValue;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\HtmlTimeFormatter;
 
@@ -52,47 +51,50 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function timeFormatProvider() {
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+		$julian = 'http://www.wikidata.org/entity/Q1985786';
+
 		return array(
 			'a gregorian day in 1520' => array(
 				new TimeValue( '+1520-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
 			),
 			'a julian day in 1520' => array(
 				new TimeValue( '+1520-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_JULIAN ),
+					$julian ),
 				'/^MOCKDATE$/'
 			),
 			'a gregorian day in 1920' => array(
 				new TimeValue( '+1920-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
 			),
 			'a julian day in 1920' => array(
 				new TimeValue( '+1920-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_JULIAN ),
+					$julian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
 			),
 			'a julian day in 1980' => array(
 				new TimeValue( '+1980-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_JULIAN ),
+					$julian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
 			),
 			'a gregorian day in 1980' => array(
 				new TimeValue( '+1980-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE$/'
 			),
 
@@ -100,56 +102,56 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				new TimeValue( '-1000000-00-00T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
 			),
 			'a julian year in -1000000' => array(
 				new TimeValue( '-1000000-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_JULIAN ),
+					$julian ),
 				'/^MOCKDATE$/'
 			),
 			'a gregorian year in 1520' => array(
 				new TimeValue( '+1520-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
 			),
 			'a julian year in 1520' => array(
 				new TimeValue( '+1520-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_JULIAN ),
+					$julian ),
 				'/^MOCKDATE$/'
 			),
 			'a gregorian year in 1920' => array(
 				new TimeValue( '+1920-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE$/'
 			),
 			'a julian year in 1920' => array(
 				new TimeValue( '+1920-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_JULIAN ),
+					$julian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
 			),
 			'a julian year in 1980' => array(
 				new TimeValue( '+1980-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_JULIAN ),
+					$julian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-julian\)<\/sup>$/'
 			),
 			'a gregorian year in 1980' => array(
 				new TimeValue( '+1980-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE$/'
 			),
 
@@ -157,7 +159,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				new TimeValue( '+1980-05-01T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_MONTH,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE$/'
 			),
 
@@ -165,7 +167,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				new TimeValue( '+1300-00-00T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_100a,
-					TimeFormatter::CALENDAR_JULIAN ),
+					$julian ),
 				'/^MOCKDATE$/'
 			),
 
@@ -173,35 +175,35 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 				new TimeValue( '+2014-10-10T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE$/'
 			),
 			'2014-10-10 with leading zeros' => array(
 				new TimeValue( '+00000002014-10-10T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE$/'
 			),
 			'massive year' => array(
 				new TimeValue( '+00123452014-10-10T00:00:00Z',
 					1 * 60 * 60, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE$/'
 			),
 			'negative' => array(
 				new TimeValue( '-1-01-01T00:00:00Z',
 					0, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
 			),
 			'32-bit integer overflow' => array(
 				new TimeValue( '-2147483649-01-01T00:00:00Z',
 					0, 0, 0,
 					TimeValue::PRECISION_DAY,
-					TimeFormatter::CALENDAR_GREGORIAN ),
+					$gregorian ),
 				'/^MOCKDATE<sup class="wb-calendar-name">\(valueview-expert-timevalue-calendar-gregorian\)<\/sup>$/'
 			),
 			'unknown calendar model' => array(
