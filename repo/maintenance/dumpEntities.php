@@ -270,4 +270,5 @@ abstract class DumpScript extends Maintenance {
 
 		return $stream;
 	}
+
 }

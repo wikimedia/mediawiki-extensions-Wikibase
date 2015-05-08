@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Exception;
 use Parser;
 use StripState;
 use StubUserLang;
