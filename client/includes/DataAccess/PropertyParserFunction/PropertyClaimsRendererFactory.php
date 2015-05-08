@@ -7,6 +7,7 @@ use Parser;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataAccess\SnaksFinder;
@@ -93,7 +94,7 @@ class PropertyClaimsRendererFactory {
 
 	/**
 	 * @param Language $language
-	 * @param UsageAccumulator|null $usageAccumulator
+	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
 	 */
@@ -102,20 +103,19 @@ class PropertyClaimsRendererFactory {
 			$language,
 			$this->propertyIdResolver,
 			$this->snaksFinder,
-			$this->newSnakFormatterForLanguage( $language ),
+			$this->newSnakFormatterForLanguage( $language, $usageAccumulator ),
 			$this->entityLookup
 		);
 
 		return new LanguageAwareRenderer(
 			$language,
-			$entityStatementsRenderer,
-			$usageAccumulator
+			$entityStatementsRenderer
 		);
 	}
 
 	/**
 	 * @param string $languageCode
-	 * @param UsageAccumulator|null $usageAccumulator
+	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
 	 */
@@ -130,7 +130,7 @@ class PropertyClaimsRendererFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param UsageAccumulator|null $usageAccumulator
+	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
 	 */
@@ -145,7 +145,7 @@ class PropertyClaimsRendererFactory {
 
 	/**
 	 * @param string[] $variants
-	 * @param UsageAccumulator|null $usageAccumulator
+	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return VariantsAwareRenderer
 	 */
@@ -187,10 +187,11 @@ class PropertyClaimsRendererFactory {
 
 	/**
 	 * @param Language $language
+	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return SnakFormatter
 	 */
-	private function newSnakFormatterForLanguage( Language $language ) {
+	private function newSnakFormatterForLanguage( Language $language, UsageAccumulator $usageAccumulator ) {
 		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
 			$language,
 			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
@@ -201,9 +202,13 @@ class PropertyClaimsRendererFactory {
 			// ...more options... (?)
 		) );
 
-		$snakFormatter = $this->snakFormatterFactory->getSnakFormatter(
-			SnakFormatter::FORMAT_WIKI,
-			$options
+		$snakFormatter = new UsageTrackingSnakFormatter(
+			$this->snakFormatterFactory->getSnakFormatter(
+				SnakFormatter::FORMAT_WIKI,
+				$options
+			),
+			$usageAccumulator,
+			$languageFallbackChain->getFetchLanguageCodes()
 		);
 
 		return $snakFormatter;

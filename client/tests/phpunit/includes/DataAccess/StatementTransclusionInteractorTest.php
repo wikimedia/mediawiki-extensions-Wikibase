@@ -69,7 +69,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$q42 = new ItemId( 'Q42' );
-		$result = $renderer->render( $q42, new HashUsageAccumulator(), 'p1337' );
+		$result = $renderer->render( $q42, 'p1337' );
 
 		$expected = 'a kitten!, two kittens!!';
 		$this->assertEquals( $expected, $result );
@@ -83,30 +83,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$this->setExpectedException( 'Wikibase\Lib\PropertyLabelNotResolvedException' );
-		$renderer->render( new ItemId( 'Q42' ), new HashUsageAccumulator(), 'blah' );
-	}
-
-	public function testRender_trackUsage() {
-		$q22 = new ItemId( 'Q22' );
-		$q23 = new ItemId( 'Q23' );
-		$propertyId = new PropertyId( 'P1337' );
-		$snaks = array(
-			'Q42$22' => new PropertyValueSnak( $propertyId, new EntityIdValue( $q22 ) ),
-			'Q42$23' => new PropertyValueSnak( $propertyId, new EntityIdValue( $q23 ) )
-		);
-
-		$accumulator = new HashUsageAccumulator();
-		$renderer = $this->getInteractor( $this->getPropertyIdResolver(), $this->getSnaksFinder( $snaks ), 'en' );
-
-		$q42 = new ItemId( 'Q42' );
-		$renderer->render( $q42, $accumulator, 'p1337' );
-
-		$expectedUsage = array(
-			new EntityUsage( $q22, EntityUsage::LABEL_USAGE, 'en' ),
-			new EntityUsage( $q23, EntityUsage::LABEL_USAGE, 'en' ),
-		);
-
-		$this->assertSameUsages( $expectedUsage, $accumulator->getUsages() );
+		$renderer->render( new ItemId( 'Q42' ), 'blah' );
 	}
 
 	/**
