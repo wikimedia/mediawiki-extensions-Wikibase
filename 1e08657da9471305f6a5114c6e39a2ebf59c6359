@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_243ccaba",
+        "filename": "repo/includes/ClaimSummaryBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-08T14:27:15Z",
+      "side": 1,
+      "message": "Would not call this \"new\" at this point, but not critical obviously.",
+      "revId": "1e08657da9471305f6a5114c6e39a2ebf59c6359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2435aad6",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-08T14:27:15Z",
+      "side": 1,
+      "message": "Feels odd to introduce this, but overall this patch does have much more on the \"win\" side.",
+      "revId": "1e08657da9471305f6a5114c6e39a2ebf59c6359",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
