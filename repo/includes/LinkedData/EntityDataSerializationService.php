@@ -431,12 +431,6 @@ class EntityDataSerializationService {
 	) {
 		$rdfBuilder->startDocument();
 
-		if ( $flavor !== 'dump' ) {
-			// $flavor === 'dump' indicates that the output is requested as part of creating
-			// or updating a dump, so an extra dump header is not needed.
-			$rdfBuilder->addDumpHeader();
-		}
-
 		if ( $followedRedirect ) {
 			$rdfBuilder->addEntityRedirect( $followedRedirect->getEntityId(), $followedRedirect->getTargetId() );
 		}
