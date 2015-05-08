@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
-use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
@@ -27,11 +26,6 @@ class WikibaseLuaEntityBindings {
 	private $entityIdParser;
 
 	/**
-	 * @var UsageAccumulator
-	 */
-	private $usageAccumulator;
-
-	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -39,18 +33,15 @@ class WikibaseLuaEntityBindings {
 	/**
 	 * @param StatementTransclusionInteractor $statementTransclusionInteractor
 	 * @param EntityIdParser $entityIdParser
-	 * @param UsageAccumulator $usageAccumulator
 	 * @param string $siteId
 	 */
 	public function __construct(
 		StatementTransclusionInteractor $statementTransclusionInteractor,
 		EntityIdParser $entityIdParser,
-		UsageAccumulator $usageAccumulator,
 		$siteId
 	) {
 		$this->statementTransclusionInteractor = $statementTransclusionInteractor;
 		$this->entityIdParser = $entityIdParser;
-		$this->usageAccumulator = $usageAccumulator;
 		$this->siteId = $siteId;
 	}
 
@@ -71,7 +62,6 @@ class WikibaseLuaEntityBindings {
 
 		return $this->statementTransclusionInteractor->render(
 			$entityId,
-			$this->usageAccumulator,
 			$propertyLabelOrId,
 			$acceptableRanks
 		);

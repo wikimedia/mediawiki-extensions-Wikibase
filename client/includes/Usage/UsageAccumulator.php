@@ -41,27 +41,6 @@ abstract class UsageAccumulator {
 	}
 
 	/**
-	 * Registers the usage of an entity's label (in the given language), if the provided
-	 * snak is a PropertyValueSnak that contains an EntityIdValue.
-	 *
-	 * @note We track any EntityIdValue as a label usage. This is making assumptions about what the
-	 * respective formatter actually does. Ideally, the formatter itself would perform the tracking,
-	 * but that seems nasty to model.
-	 *
-	 * @param Snak $snak
-	 * @param string|null $language
-	 */
-	public function addLabelUsageForSnak( Snak $snak, $language = null ) {
-		if ( $snak instanceof PropertyValueSnak ) {
-			$value = $snak->getDataValue();
-
-			if ( $value instanceof EntityIdValue ) {
-				$this->addLabelUsage( $value->getEntityId(), $language );
-			}
-		}
-	}
-
-	/**
 	 * Registers the usage of an entity's label (in the given language).
 	 *
 	 * @param EntityId $id

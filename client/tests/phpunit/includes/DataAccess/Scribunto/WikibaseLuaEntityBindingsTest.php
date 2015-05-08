@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
-use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\Statement;
@@ -24,21 +23,18 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseLuaEntityBindings
 	 */
 	private function getWikibaseLuaEntityBindings() {
-		$usageAccumulator = new HashUsageAccumulator();
-
 		$entityStatementsRenderer = $this->getMockBuilder( 'Wikibase\DataAccess\StatementTransclusionInteractor' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$entityStatementsRenderer->expects( $this->any() )
 				->method( 'render' )
-				->with( new ItemId( 'Q12' ), $usageAccumulator, 'some label', array( Statement::RANK_DEPRECATED ) )
+				->with( new ItemId( 'Q12' ), 'some label', array( Statement::RANK_DEPRECATED ) )
 				->will( $this->returnValue( 'Kittens > Cats' ) );
 
 		return new WikibaseLuaEntityBindings(
 			$entityStatementsRenderer,
 			new BasicEntityIdParser(),
-			$usageAccumulator,
 			'enwiki'
 		);
 	}

@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 use InvalidArgumentException;
 use Language;
 use Status;
-use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
@@ -35,23 +34,15 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	private $statementTransclusionInteractor;
 
 	/**
-	 * @var UsageAccumulator
-	 */
-	private $usageAccumulator;
-
-	/**
 	 * @param Language $language
 	 * @param StatementTransclusionInteractor $statementTransclusionInteractor
-	 * @param UsageAccumulator $usageAccumulator
 	 */
 	public function __construct(
 		Language $language,
-		StatementTransclusionInteractor $statementTransclusionInteractor,
-		UsageAccumulator $usageAccumulator
+		StatementTransclusionInteractor $statementTransclusionInteractor
 	) {
 		$this->language = $language;
 		$this->statementTransclusionInteractor = $statementTransclusionInteractor;
-		$this->usageAccumulator = $usageAccumulator;
 	}
 
 	/**
@@ -65,7 +56,6 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 			$status = Status::newGood(
 				$this->statementTransclusionInteractor->render(
 					$entityId,
-					$this->usageAccumulator,
 					$propertyLabelOrId
 				)
 			);
