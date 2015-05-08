@@ -10,6 +10,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class DispatchStats {
 
@@ -138,7 +139,7 @@ class DispatchStats {
 	 * @return bool
 	 */
 	public function hasStats() {
-		return is_array( $this->clientStates ) && !empty( $this->clientStates );
+		return !empty( $this->clientStates );
 	}
 
 	/**
@@ -167,7 +168,7 @@ class DispatchStats {
 	 * @return int
 	 */
 	public function getClientCount() {
-		return count( $this->clientStates );
+		return $this->clientStates ? count( $this->clientStates ) : 0;
 	}
 
 	/**
@@ -176,10 +177,10 @@ class DispatchStats {
 	 *
 	 * See getClientStates() for the structure of the status object.
 	 *
-	 * @return object
+	 * @return object|null
 	 */
 	public function getFreshest() {
-		return end( $this->clientStates );
+		return $this->clientStates ? end( $this->clientStates ) : null;
 	}
 
 	/**
@@ -188,10 +189,10 @@ class DispatchStats {
 	 *
 	 * See getClientStates() for the structure of the status object.
 	 *
-	 * @return object
+	 * @return object|null
 	 */
 	public function getStalest() {
-		return reset( $this->clientStates );
+		return $this->clientStates ? reset( $this->clientStates ) : null;
 	}
 
 	/**
@@ -203,13 +204,11 @@ class DispatchStats {
 	 * @return object|null
 	 */
 	public function getMedian() {
-		$count = $this->getClientCount();
-
-		if ( $count <= 0 ) {
+		if ( empty( $this->clientStates ) ) {
 			return null;
 		}
 
-		$i = (int)( $count / 2 );
+		$i = (int)( count( $this->clientStates ) / 2 );
 		return $this->clientStates[$i];
 	}
 
@@ -239,9 +238,11 @@ class DispatchStats {
 	public function getLockedCount() {
 		$c = 0;
 
-		foreach ( $this->clientStates as $row ) {
-			if ( $row->chd_lock !== null ) {
-				$c++;
+		if ( !empty( $this->clientStates ) ) {
+			foreach ( $this->clientStates as $row ) {
+				if ( $row->chd_lock !== null ) {
+					$c++;
+				}
 			}
 		}
 
