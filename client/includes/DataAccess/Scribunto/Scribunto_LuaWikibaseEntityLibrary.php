@@ -1,6 +1,7 @@
 <?php
 
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\SnaksFinder;
@@ -41,10 +42,15 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$formatterOptions = new FormatterOptions( array( "language" => $wgContLang ) );
+		$formatterOptions = new FormatterOptions( array( SnakFormatter::OPT_LANG => $wgContLang->getCode() ) );
+		$usageAccumulator = new ParserOutputUsageAccumulator( $this->getParser()->getOutput() );
 
-		$snakFormatter = $wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
-			SnakFormatter::FORMAT_WIKI, $formatterOptions
+		$snakFormatter = new UsageTrackingSnakFormatter(
+			$wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
+				SnakFormatter::FORMAT_WIKI, $formatterOptions
+			),
+			$usageAccumulator,
+			array( $wgContLang->getCode() ) //FIXME: fallback
 		);
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
@@ -65,7 +71,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		return new WikibaseLuaEntityBindings(
 			$entityStatementsRenderer,
 			$wikibaseClient->getEntityIdParser(),
-			new ParserOutputUsageAccumulator( $this->getParser()->getOutput() ),
+			$usageAccumulator,
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
