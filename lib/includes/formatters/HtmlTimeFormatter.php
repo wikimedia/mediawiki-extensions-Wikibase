@@ -83,6 +83,19 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 			return true;
 		}
 
+		// If precision is year or lower, don't show the calendar
+		if ( $value->getPrecision() <= TimeValue::PRECISION_YEAR ) {
+			return false;
+		}
+
+		// If the date is inside the "critical" range where Julian and Gregorian were used
+		// in parallel, always show the calendar. Gregorian started to be used in the 1580s,
+		// but the Julian calendar continued to be used into the 1920s (in Russia and Greece).
+		// See https://en.wikipedia.org/wiki/Julian_calendar
+		if ( $year > 1580 && $year < 1930 ) {
+			return true;
+		}
+
 		// Otherwise, the calendar is "unsurprising", so don't show it.
 		return false;
 	}
