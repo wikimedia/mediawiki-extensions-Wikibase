@@ -71,7 +71,6 @@ class WikibaseLuaEntityBindings {
 
 		return $this->statementTransclusionInteractor->render(
 			$entityId,
-			$this->usageAccumulator,
 			$propertyLabelOrId,
 			$acceptableRanks
 		);

@@ -6,7 +6,6 @@ use DataValues\StringValue;
 use Language;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
-use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\DataAccess\SnaksFinder;
@@ -37,15 +36,13 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param string $languageCode
-	 * @param UsageAccumulator|null $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
 	 */
 	private function getRenderer(
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
-		$languageCode,
-		UsageAccumulator $usageAccumulator = null
+		$languageCode
 	) {
 		$targetLanguage = Language::factory( $languageCode );
 
@@ -59,8 +56,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 		return new LanguageAwareRenderer(
 			$targetLanguage,
-			$entityStatementsRenderer,
-			$usageAccumulator ?: new HashUsageAccumulator()
+			$entityStatementsRenderer
 		);
 	}
 
@@ -82,34 +78,6 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 		$expected = 'a kitten!, two kittens!!';
 		$this->assertEquals( $expected, $result );
-	}
-
-	public function testRender_trackUsage() {
-		$q22 = new ItemId( 'Q22' );
-		$q23 = new ItemId( 'Q23' );
-		$propertyId = new PropertyId( 'P1337' );
-		$snaks = array(
-			'Q42$22' => new PropertyValueSnak( $propertyId, new EntityIdValue( $q22 ) ),
-			'Q42$23' => new PropertyValueSnak( $propertyId, new EntityIdValue( $q23 ) )
-		);
-
-		$accumulator = new HashUsageAccumulator();
-		$renderer = $this->getRenderer(
-			$this->getPropertyIdResolver(),
-			$this->getSnaksFinder( $snaks ),
-			'en',
-			$accumulator
-		);
-
-		$q42 = new ItemId( 'Q42' );
-		$renderer->render( $q42, 'p1337' );
-
-		$expectedUsage = array(
-			new EntityUsage( $q22, EntityUsage::LABEL_USAGE, 'en' ),
-			new EntityUsage( $q23, EntityUsage::LABEL_USAGE, 'en' ),
-		);
-
-		$this->assertSameUsages( $expectedUsage, $accumulator->getUsages() );
 	}
 
 	/**
