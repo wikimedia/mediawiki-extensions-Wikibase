@@ -104,8 +104,11 @@ class SetClaim extends ModifyClaim {
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
+
+		$claims = new Claims( $entity->getClaims() );
+
 		$summary = $claimSummaryBuilder->buildClaimSummary(
-			new Claims( $entity->getClaims() ),
+			$claims->getClaimWithGuid( $claim->getGuid() ),
 			$claim
 		);
 
