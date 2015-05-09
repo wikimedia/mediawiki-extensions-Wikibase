@@ -23,8 +23,6 @@
  *           }[, ...]
  *         ]
  *
- * @option {string} entityId
- *
  * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
  *
  * @option {string} [helpMessage]
@@ -71,7 +69,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 				'.wikibase-entitytermsview-entitytermsforlanguagelistview'
 		},
 		value: [],
-		entityId: null,
 		entityChangersFactory: null,
 		helpMessage: 'Edit label, description and aliases per language.'
 	},
@@ -97,7 +94,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	_create: function() {
 		if(
 			!$.isArray( this.options.value )
-			|| !this.options.entityId
 			|| !this.options.entityChangersFactory
 		) {
 			throw new Error( 'Required option(s) missing' );
@@ -360,7 +356,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		)
 		.entitytermsforlanguagelistview( {
 			value: this.options.value,
-			entityId: this.options.entityId,
 			entityChangersFactory: this.options.entityChangersFactory
 		} );
 
