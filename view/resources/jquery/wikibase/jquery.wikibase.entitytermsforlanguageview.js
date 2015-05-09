@@ -24,8 +24,6 @@
  * @option {string} [helpMessage]
  *         Default: mw.msg( 'wikibase-entitytermsforlanguageview-input-help-message' )
  *
- * @option {string} entityId
- *
  * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
  *
  * @event change
@@ -79,7 +77,6 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 		},
 		value: null,
 		helpMessage: mw.msg( 'wikibase-entitytermsforlanguageview-input-help-message' ),
-		entityId: null,
 		entityChangersFactory: null
 	},
 
@@ -107,7 +104,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if( !this.options.entityId || !this.options.entityChangersFactory ) {
+		if( !this.options.entityChangersFactory ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -201,7 +198,6 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 				options.descriptionsChanger = self.options.entityChangersFactory.getDescriptionsChanger();
 			} else if( widgetName === 'labelview' ) {
 				options.labelsChanger = self.options.entityChangersFactory.getLabelsChanger();
-				options.entityId = self.options.entityId;
 			}
 
 			self['$' + widgetName][widgetName]( options );

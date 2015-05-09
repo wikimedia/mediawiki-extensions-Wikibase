@@ -17,8 +17,6 @@
  * @param {wikibase.datamodel.Term} options.value
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-label-input-help-message' )]
  * @param {wikibase.entityChangers.LabelsChanger} options.labelsChanger
- * @param {string} options.entityId
- * @param {boolean} [options.showEntityId=false]
  */
 $.widget( 'wikibase.labelview', PARENT, {
 	/**
@@ -30,17 +28,13 @@ $.widget( 'wikibase.labelview', PARENT, {
 		templateParams: [
 			'', // additional class
 			'', // text
-			'', // entity id
 			'' // toolbar
 		],
 		templateShortCuts: {
-			$text: '.wikibase-labelview-text',
-			$entityId: '.wikibase-labelview-entityid'
+			$text: '.wikibase-labelview-text'
 		},
 		value: null,
-		helpMessage: mw.msg( 'wikibase-label-input-help-message' ),
-		entityId: null,
-		showEntityId: false
+		helpMessage: mw.msg( 'wikibase-label-input-help-message' )
 	},
 
 	/**
@@ -52,7 +46,6 @@ $.widget( 'wikibase.labelview', PARENT, {
 	_create: function() {
 		if(
 			!( this.options.value instanceof wb.datamodel.Term )
-			|| !this.options.entityId
 			|| !this.options.labelsChanger
 		) {
 			throw new Error( 'Required option not specified properly' );
@@ -112,12 +105,6 @@ $.widget( 'wikibase.labelview', PARENT, {
 
 		if( labelText === '' ) {
 			labelText = null;
-		}
-
-		if( this.options.showEntityId && !( this.isInEditMode() && labelText ) ) {
-			this.$entityId.text( mw.msg( 'parentheses', this.options.entityId ) );
-		} else {
-			this.$entityId.empty();
 		}
 
 		this.element[labelText ? 'removeClass' : 'addClass']( 'wb-empty' );
