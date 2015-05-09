@@ -435,5 +435,7 @@
 	"apihelp-wbsetaliases-description": "הגדרת כינויים לישות ויקיבייס.",
 	"apihelp-wbsetclaim-param-claim": "הסדרה של קביעה או טענה",
 	"apihelp-wbsetclaimvalue-description": "הגדרת הערך של טענה בוויקיבייס.",
-	"apihelp-wbsetdescription-param-language": "השפה של התיאור"
+	"apihelp-wbsetdescription-param-language": "השפה של התיאור",
+	"apihelp-wbsetlabel-param-language": "השפה של התווית",
+	"apihelp-wbsetlabel-param-value": "הערך של התווית"
 }

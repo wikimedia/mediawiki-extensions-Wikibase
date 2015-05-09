@@ -10,7 +10,9 @@
 	"wikibase-editlinks": "Sprowjej linki",
 	"wikibase-editlinkstitle": "Sprowjej linki godkowych wersyji",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Schrůń",
 	"wikibase-rc-hide-wikidata-show": "Pokoż",
 	"wikibase-rc-wikibase-edit-letter": "d",
-	"wikibase-rc-wikibase-edit-title": "Sprowjyńy we Wikidanych"
+	"wikibase-rc-wikibase-edit-title": "Sprowjyńy we Wikidanych",
+	"wikibase-otherprojects": "Inksze projekty"
 }
