@@ -23,8 +23,6 @@
  *           }[, ...]
  *         ]
  *
- * @option {string} entityId
- *
  * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
  *
  * @event change
@@ -61,7 +59,6 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			$listview: '.wikibase-entitytermsforlanguagelistview-listview'
 		},
 		value: [],
-		entityId: null,
 		entityChangersFactory: null
 	},
 
@@ -76,7 +73,6 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	_create: function() {
 		if(
 			!$.isArray( this.options.value )
-			|| !this.options.entityId
 			|| !this.options.entityChangersFactory
 		) {
 			throw new Error( 'Required option(s) missing' );
@@ -145,7 +141,6 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 				newItemOptionsFn: function( value ) {
 					return {
 						value: value,
-						entityId: self.options.entityId,
 						entityChangersFactory: self.options.entityChangersFactory,
 						helpMessage: mw.msg(
 							'wikibase-entitytermsforlanguageview-input-help-message',

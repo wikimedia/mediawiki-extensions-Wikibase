@@ -110,7 +110,6 @@ $.widget( 'wikibase.itemview', PARENT, {
 
 		this.$siteLinks.sitelinkgrouplistview( {
 			value: value,
-			entityId: self.options.value.getId(),
 			siteLinksChanger: self.options.entityChangersFactory.getSiteLinksChanger(),
 			entityStore: self.options.entityStore
 		} );

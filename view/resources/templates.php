@@ -124,8 +124,7 @@ HTML;
 <div class="wikibase-labelview $1" dir="auto">
 	<div class="wikibase-labelview-container">
 		<span class="wikibase-labelview-text">$2</span>
-		<span class="wikibase-labelview-entityid">$3</span>
-		<!-- wikibase-toolbar -->$4
+		<!-- wikibase-toolbar -->$3
 	</div>
 </div>
 HTML;
