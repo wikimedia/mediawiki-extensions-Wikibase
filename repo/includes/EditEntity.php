@@ -627,6 +627,7 @@ class EditEntity {
 		if ( !$hookStatus->isOK() ) {
 			$this->errorType |= self::FILTERED;
 		}
+		$this->status->merge( $hookStatus );
 
 		if ( !$this->status->isOK() ) {
 			$this->status->setResult( false, array( 'errorFlags' => $this->errorType ) );

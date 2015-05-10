@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use FauxRequest;
 use HashBagOStuff;
 use IContextSource;
+use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use ReflectionMethod;
 use RequestContext;
 use Status;
@@ -18,6 +19,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -101,14 +103,23 @@ class EditEntityTest extends \MediaWikiTestCase {
 		return $permissionChecker;
 	}
 
-	private function getMockEditFitlerHookRunner () {
+	private function getMockEditFitlerHookRunner (
+		Status $status = null,
+		PHPUnit_Framework_MockObject_Matcher_Invocation $expects = null
+	) {
+		if( is_null( $status ) ) {
+			$status = Status::newGood();
+		}
+		if( is_null( $expects ) ) {
+			$expects = $this->any();
+		}
 		$runner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()
 			->getMock();
-		$runner->expects( $this->any() )
+		$runner->expects( $expects )
 			->method( 'run' )
-			->will( $this->returnValue( Status::newGood() ) );
+			->will( $this->returnValue( $status ) );
 		return $runner;
 	}
 
@@ -118,6 +129,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @param EntityTitleLookup $titleLookup
 	 * @param User|null $user
 	 * @param bool $baseRevId
+	 * @param EditFilterHookRunner $editFilterHookRunner
 	 *
 	 * @param null|array $permissions map of actions to bool, indicating which actions are allowed.
 	 *
@@ -129,13 +141,17 @@ class EditEntityTest extends \MediaWikiTestCase {
 		EntityTitleLookup $titleLookup,
 		User $user = null,
 		$baseRevId = false,
-		$permissions = null
+		$permissions = null,
+		$editFilterHookRunner = null
 	) {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest() );
 
 		if ( $user === null ) {
 			$user = User::newFromName( 'EditEntityTestUser' );
+		}
+		if( $editFilterHookRunner === null ) {
+			$editFilterHookRunner = $this->getMockEditFitlerHookRunner();
 		}
 
 		$permissionChecker = $this->getEntityPermissionChecker( $permissions );
@@ -147,7 +163,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$permissionChecker,
 			$entity,
 			$user,
-			$this->getMockEditFitlerHookRunner(),
+			$editFilterHookRunner,
 			$baseRevId,
 			$context
 		);
@@ -771,5 +787,36 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$repo->saveEntity( $item, 'testIsNew', $this->getUser( 'EditEntityTestUser1' ) );
 		$edit = $this->makeEditEntity( $repo, $item, $titleLookup );
 		$this->assertFalse( $isNew->invoke( $edit ), "Entity exists" );
+	}
+
+	public function provideHookRunnerReturnStatus() {
+		return array(
+			array( Status::newGood() ),
+			array( Status::newFatal( 'OMG' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideHookRunnerReturnStatus
+	 */
+	public function testEditFilterHookRunnerInteraction( Status $hookReturnStatus ) {
+		$edit = $this->makeEditEntity(
+			$this->getMockRepository(),
+			new Item(),
+			$this->getEntityTitleLookup(),
+			null,
+			false,
+			null,
+			$this->getMockEditFitlerHookRunner( $hookReturnStatus, $this->once() )
+		);
+		$user = $this->getUser( 'EditEntityTestUser' );
+
+		$saveStatus = $edit->attemptSave(
+			'some Summary',
+			EDIT_MINOR,
+			$user->getEditToken()
+		);
+
+		$this->assertEquals( $hookReturnStatus->isGood(), $saveStatus->isGood() );
 	}
 }
