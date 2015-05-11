@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_aabf18f6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.itemview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-11T15:49:30Z",
+      "side": 0,
+      "message": "Not a mistake, but unused. If we actually want to have an entity id in here, we can add it again. However, if there is none currently, we should remove it for now. Setting a non-defined setting is confusing. It would be the same as putting all the labels in here, just because they might be useful at some point. We should really follow KISS here.",
+      "parentUuid": "0ed113e2_7937d4fc",
+      "revId": "405b301e755ba686cdcbb29c3e12812aa96e0af8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f963c407",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.labelview.js",
         "patchSetId": 2
