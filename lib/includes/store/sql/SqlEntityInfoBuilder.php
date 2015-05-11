@@ -31,7 +31,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @var string[]
 	 */
-	static $termTypeFields = array(
+	private static $termTypeFields = array(
 		'label' => 'labels',
 		'description' => 'descriptions',
 		'alias' => 'aliases',

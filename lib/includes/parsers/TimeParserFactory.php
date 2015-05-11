@@ -28,7 +28,7 @@ class TimeParserFactory {
 	/**
 	 * @param ParserOptions|null $options
 	 */
-	function __construct( ParserOptions $options = null ) {
+	public function __construct( ParserOptions $options = null ) {
 		$this->options = $options ?: new ParserOptions();
 
 		$this->options->defaultOption( ValueParser::OPT_LANG, 'en' );
