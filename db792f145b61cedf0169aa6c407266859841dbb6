@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_cfb70e34",
+        "filename": "view/resources/jquery/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T14:00:19Z",
+      "side": 1,
+      "message": "Please replace this with a dependency on the CSS-only module below.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2f7eda67",
+        "filename": "view/resources/jquery/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T14:00:19Z",
+      "side": 1,
+      "message": "Comment not needed if resolved via dependency, as described above.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8fa6e60b",
+        "filename": "view/resources/jquery/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T14:00:19Z",
+      "side": 1,
+      "message": "Since this contains only the RankSelector CSS I recommend to call this module \"jquery.wikibase.statementview.RankSelector.styles\".",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8f77c69a",
+        "filename": "view/resources/jquery/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T14:00:19Z",
+      "side": 1,
+      "message": "How does the RankSelector CSS depend on these modules? I think this whole copy and paste (?) block can simply be omitted.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_cf8e2e7c",
+        "filename": "view/resources/jquery/wikibase/toolbar/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T14:00:19Z",
+      "side": 1,
+      "message": "As in the other file, please replace this with a dependency.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6fef021c",
+        "filename": "view/resources/jquery/wikibase/toolbar/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T14:00:19Z",
+      "side": 1,
+      "message": "toolbar CSS does not depend on toolbaritem CSS, please remove.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2ff57ae9",
+        "filename": "view/resources/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T14:00:19Z",
+      "side": 1,
+      "message": "This does not belong here. Please apply this change to /core/resources/Resources.php. And do the same there: introduce a new \"jquery.ui.core.styles\" module and use that as a dependency in the \"jquery.ui.core\" module.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
