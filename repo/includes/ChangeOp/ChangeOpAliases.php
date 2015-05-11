@@ -143,7 +143,7 @@ class ChangeOpAliases extends ChangeOpBase {
 					return $result;
 				}
 			}
-		} elseif ( $this->action !== 'remove' )  {
+		} elseif ( $this->action !== 'remove' ) {
 			throw new ChangeOpException( 'Bad action: ' . $this->action );
 		}
 

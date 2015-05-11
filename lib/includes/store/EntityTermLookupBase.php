@@ -15,7 +15,6 @@ use Wikibase\Term;
  */
 abstract class EntityTermLookupBase implements TermLookup {
 
-
 	/**
 	 * @see TermLookup::getLabel
 	 *

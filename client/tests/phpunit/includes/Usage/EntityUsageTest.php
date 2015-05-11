@@ -18,7 +18,6 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class EntityUsageTest extends PHPUnit_Framework_TestCase {
 
-
 	public function testGetEntityId() {
 		$id = new ItemId( 'Q7' );
 		$aspect = EntityUsage::ALL_USAGE;

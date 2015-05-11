@@ -154,7 +154,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		// Execute with no subpage value
 		list( $output, ) = $this->executeSpecialPage( '', null, 'de' );
 
-		foreach( $matchers as $key => $matcher ){
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
 		}
 	}

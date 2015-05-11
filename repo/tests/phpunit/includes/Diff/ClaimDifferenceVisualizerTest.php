@@ -79,7 +79,9 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Repo\Diff\ClaimDifferenceVisualizer', $instance );
 	}
 
-	//TODO come up with a better way of testing this.... EWW at all the html...
+	/**
+	 * @todo come up with a better way of testing this.... EWW at all the html...
+	 */
 	public function provideDifferenceAndClaim() {
 		return array(
 			'no change' => array(

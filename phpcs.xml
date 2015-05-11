@@ -46,6 +46,27 @@
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
 		<severity>0</severity>
 	</rule>
+	<rule ref="Squiz.ControlStructures.ControlSignature" />
+	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<rule ref="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace">
+		<severity>0</severity>
+	</rule>
+	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<rule ref="Squiz.ControlStructures.ControlSignature.SpaceAfterKeyword">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
+		<properties>
+			<property name="spacing" value="1" />
+		</properties>
+	</rule>
+	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing.After">
+		<severity>0</severity>
+	</rule>
 
 	<rule ref="Zend.Files.ClosingTag" />
 </ruleset>

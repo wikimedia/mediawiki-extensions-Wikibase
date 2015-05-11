@@ -173,7 +173,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			'toid' => 'Q2',
 			'summary' => 'CustomSummary!',
 		);
-		if( $ignoreConflicts !== null ){
+		if ( $ignoreConflicts !== null ) {
 			$params['ignoreconflicts'] = $ignoreConflicts;
 		}
 

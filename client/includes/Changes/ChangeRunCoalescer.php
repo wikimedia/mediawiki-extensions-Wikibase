@@ -116,9 +116,9 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * @return Change a combined change representing the activity from all the original changes.
 	 */
 	private function mergeChanges( array $changes ) {
-		if ( empty( $changes ) )  {
+		if ( empty( $changes ) ) {
 			return null;
-		} elseif ( count( $changes ) === 1 )  {
+		} elseif ( count( $changes ) === 1 ) {
 			return reset( $changes );
 		}
 

@@ -61,7 +61,7 @@ class SetClaim extends ModifyClaim {
 		$claim = $this->getClaimFromParams( $params );
 		$guid = $claim->getGuid();
 
-		if ( $guid === null ){
+		if ( $guid === null ) {
 			$this->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
 		}
 
@@ -133,7 +133,7 @@ class SetClaim extends ModifyClaim {
 
 		try {
 			$serializedClaim = FormatJson::decode( $params['claim'], true );
-			if ( !is_array( $serializedClaim ) ){
+			if ( !is_array( $serializedClaim ) ) {
 				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
 			}
 			$claim = $unserializer->newFromSerialization( $serializedClaim );

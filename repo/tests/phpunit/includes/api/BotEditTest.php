@@ -44,7 +44,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		);
 		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', array( 'user' => array( 'item-merge' => true ) ) );
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'Empty', 'Leipzig', 'Osaka' ) );
 		}
 
@@ -116,7 +116,7 @@ class BotEditTest extends WikibaseApiTestCase {
 			$params['fromid'] = EntityTestHelper::getId( $params['fromid'] );
 			$params['toid'] = EntityTestHelper::getId( $params['toid'] );
 		}
-		list( $result,, ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->user );
+		list( $result, , ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->user );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );

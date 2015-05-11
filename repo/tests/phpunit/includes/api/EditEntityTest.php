@@ -37,7 +37,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	public function setup() {
 		parent::setup();
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 			$prop = Property::newFromType( 'string' );
@@ -349,23 +349,26 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbeditentity';
-		if( !array_key_exists( 'id', $params )
+		if ( !array_key_exists( 'id', $params )
 			&& !array_key_exists( 'new', $params )
 			&& !array_key_exists( 'site', $params )
-			&& !array_key_exists( 'title', $params) ){
+			&& !array_key_exists( 'title', $params )
+		) {
 			$params['id'] = self::$idMap['!lastEntityId!'];
 		}
 
 		// -- do the request --------------------------------------------------
-		list($result,,) = $this->doApiRequestWithToken( $params );
+		list( $result, , ) = $this->doApiRequestWithToken( $params );
 
 		// -- steal ids for later tests -------------------------------------
-		if( array_key_exists( 'new', $params ) && stristr( $params['new'], 'item' ) ){
+		if ( array_key_exists( 'new', $params ) && stristr( $params['new'], 'item' ) ) {
 			self::$idMap['!lastEntityId!'] = $result['entity']['id'];
 		}
-		if( array_key_exists( 'claims', $result['entity'] ) && array_key_exists( $p56, $result['entity']['claims'] ) ){
-			foreach( $result['entity']['claims'][$p56] as $claim ){
-				if( array_key_exists( 'id', $claim ) ){
+		if ( array_key_exists( 'claims', $result['entity'] )
+			&& array_key_exists( $p56, $result['entity']['claims'] )
+		) {
+			foreach ( $result['entity']['claims'][$p56] as $claim ) {
+				if ( array_key_exists( 'id', $claim ) ) {
 					self::$idMap['%lastClaimId%'] = $claim['id'];
 				}
 			}
@@ -383,9 +386,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->assertEntityEquals( $expected, $dbEntity, false );
 
 		// -- check the edit summary --------------------------------------------
-		if( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ){
+		if ( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ) {
 			$this->assertRevisionSummary( array( 'wbeditentity' ), $result['entity']['lastrevid'] );
-			if( array_key_exists( 'summary', $params) ){
+			if ( array_key_exists( 'summary', $params) ) {
 				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
 			}
 		}

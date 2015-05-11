@@ -515,15 +515,15 @@ abstract class EditEntityAction extends ViewEntityAction {
 			'action' => 'submit',
 		);
 
-		if ( $req->getInt( 'undo' ) )  {
+		if ( $req->getInt( 'undo' ) ) {
 			$args[ 'undo' ] = $req->getInt( 'undo' );
 		}
 
-		if ( $req->getInt( 'undoafter' ) )  {
+		if ( $req->getInt( 'undoafter' ) ) {
 			$args[ 'undoafter' ] = $req->getInt( 'undoafter' );
 		}
 
-		if ( $req->getInt( 'restore' ) )  {
+		if ( $req->getInt( 'restore' ) ) {
 			$args[ 'restore' ] = $req->getInt( 'restore' );
 		}
 
