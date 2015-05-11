@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_b256ae07",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T19:55:28Z",
+      "side": 1,
+      "message": "Other \"then\" in this script are on their own line.",
+      "revId": "e5746187810cb121924707e4f23a5102f2b9636d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
