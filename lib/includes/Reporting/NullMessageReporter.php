@@ -21,4 +21,5 @@ class NullMessageReporter implements MessageReporter {
 	public function reportMessage( $message ) {
 		// no-op
 	}
+
 }

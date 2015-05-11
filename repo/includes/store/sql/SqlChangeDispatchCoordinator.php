@@ -507,7 +507,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$db->begin( __METHOD__ );
 
 		try {
-
 			$this->trace( 'Loaded repo db master' );
 
 			// get client state
@@ -531,7 +530,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			}
 
 			if ( $state['chd_lock'] !== null ) {
-
 				// bail out if another dispatcher instance is holding a lock for that wiki
 				if ( $this->isClientLockUsed( $wikiDB, $state['chd_lock'] ) ) {
 					$this->trace( "$siteID is already being handled by another process."
@@ -751,4 +749,5 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private function trace( $message ) {
 		wfDebugLog( __CLASS__, $message );
 	}
+
 }

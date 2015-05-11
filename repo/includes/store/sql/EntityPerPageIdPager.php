@@ -71,4 +71,5 @@ class EntityPerPageIdPager implements EntityIdPager {
 
 		return $ids;
 	}
+
 }

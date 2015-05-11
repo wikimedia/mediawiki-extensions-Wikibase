@@ -58,7 +58,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		);
 	}
 	
-	public function doTestSetTerm( $attribute ,$params, $expected ) {
+	public function doTestSetTerm( $attribute, $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
 		if ( !array_key_exists( 'id', $params ) ) {
@@ -84,7 +84,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		if ( array_key_exists( $params['language'], $expected['value'] ) ) {
 			$this->assertEquals(
 				$expected['value'][ $params['language'] ],
-				$result['entity'][$attribute][$params['language']]['value'] , "Returned incorrect attribute {$attribute}"
+				$result['entity'][$attribute][$params['language']]['value'], "Returned incorrect attribute {$attribute}"
 			);
 		} elseif ( empty( $value ) ) {
 			$this->assertArrayHasKey(
@@ -118,7 +118,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		if ( empty( $expected['edit-no-change'] ) ) {
 			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
 			if ( array_key_exists( 'summary', $params) ) {
-				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
+				$this->assertRevisionSummary( "/{$params['summary']}/", $result['entity']['lastrevid'] );
 			}
 		}
 	}
@@ -159,10 +159,12 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 	}
 
 	public function doTestSetTermExceptions( $params, $expected ) {
-
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
-		if ( !array_key_exists( 'id', $params )  && !array_key_exists( 'site', $params ) && !array_key_exists( 'title', $params ) ) {
+		if ( !array_key_exists( 'id', $params )
+			&& !array_key_exists( 'site', $params )
+			&& !array_key_exists( 'title', $params )
+		) {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
