@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Trivial EntityHolder holding an Entity object.
+ * Trivial EntityHolder holding an entity object.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
@@ -30,7 +30,7 @@ class EntityInstanceHolder implements EntityHolder {
 	 * @see EntityHolder::getEntityId
 	 *
 	 * @param string $expectedClass The class the result is expected to be compatible with.
-	 * Defaults to Entity.
+	 * Defaults to EntityDocument.
 	 *
 	 * @throws RuntimeException If the entity held by this EntityHolder is not compatible with $expectedClass.
 	 * @return EntityDocument
