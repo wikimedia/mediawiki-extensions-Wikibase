@@ -5,6 +5,7 @@ namespace Wikibase;
 use MWException;
 use RecentChange;
 use Revision;
+use RuntimeException;
 use User;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Claim\Claim;
@@ -302,10 +303,9 @@ class EntityChange extends DiffChange {
 		if ( defined( 'WB_VERSION' ) ) {
 			return WikibaseRepo::getDefaultInstance()->getInternalClaimSerializer();
 		} elseif ( defined( 'WBC_VERSION' ) ) {
-			throw new \RuntimeException( 'Cannot serialize claims on the client' );
-		}
-		else {
-			throw new \RuntimeException( 'Need either client or repo loaded' );
+			throw new RuntimeException( 'Cannot serialize claims on the client' );
+		} else {
+			throw new RuntimeException( 'Need either client or repo loaded' );
 		}
 	}
 
@@ -316,9 +316,8 @@ class EntityChange extends DiffChange {
 			return WikibaseRepo::getDefaultInstance()->getInternalClaimDeserializer();
 		} elseif ( defined( 'WBC_VERSION' ) ) {
 			return WikibaseClient::getDefaultInstance()->getInternalClaimDeserializer();
-		}
-		else {
-			throw new \RuntimeException( 'Need either client or repo loaded' );
+		} else {
+			throw new RuntimeException( 'Need either client or repo loaded' );
 		}
 	}
 

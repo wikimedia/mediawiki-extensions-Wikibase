@@ -61,7 +61,7 @@ class SetClaim extends ModifyClaim {
 		$claim = $this->getClaimFromParams( $params );
 		$guid = $claim->getGuid();
 
-		if ( $guid === null ){
+		if ( $guid === null ) {
 			$this->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
 		}
 
@@ -99,7 +99,7 @@ class SetClaim extends ModifyClaim {
 	 *
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
-	private function getSummary( array $params, Claim $claim, Entity $entity ){
+	private function getSummary( array $params, Claim $claim, Entity $entity ) {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
@@ -133,7 +133,7 @@ class SetClaim extends ModifyClaim {
 
 		try {
 			$serializedClaim = FormatJson::decode( $params['claim'], true );
-			if ( !is_array( $serializedClaim ) ){
+			if ( !is_array( $serializedClaim ) ) {
 				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
 			}
 			$claim = $unserializer->newFromSerialization( $serializedClaim );

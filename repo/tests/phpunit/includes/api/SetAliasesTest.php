@@ -26,7 +26,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		self::$testAction = 'wbsetaliases';
 		parent::setUp();
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'Empty' ) );
 		}
 		self::$hasSetup = true;
@@ -85,32 +85,32 @@ class SetAliasesTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testSetAliases( $params, $expected ){
+	public function testSetAliases( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
-		if( !array_key_exists( 'id', $params ) ){
+		if ( !array_key_exists( 'id', $params ) ) {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
-		if( !array_key_exists( 'value', $expected ) ){
+		if ( !array_key_exists( 'value', $expected ) ) {
 			$expected['value'] = array();
 		}
 
 		// -- do the request --------------------------------------------------
-		list( $result,, ) = $this->doApiRequestWithToken( $params );
+		list( $result, , ) = $this->doApiRequestWithToken( $params );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
 		$this->assertResultHasEntityType( $result );
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 
-		if( array_key_exists( $params['language'], $expected['value'] ) ){
+		if ( array_key_exists( $params['language'], $expected['value'] ) ) {
 			$resAliases = self::flattenArray( $result['entity']['aliases'], 'language', 'value', true );
 			$this->assertArrayHasKey( $params['language'], $resAliases );
 			$this->assertArrayEquals( $expected['value'][$params['language']], $resAliases[ $params['language'] ] );
 		}
 
 		// -- check any warnings ----------------------------------------------
-		if( array_key_exists( 'warning', $expected ) ){
+		if ( array_key_exists( 'warning', $expected ) ) {
 			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
 			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name']);
 			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
@@ -118,10 +118,10 @@ class SetAliasesTest extends ModifyTermTestCase {
 
 		// -- check item in database -------------------------------------------
 		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
-		if( count( $expected['value'] ) ){
+		if ( count( $expected['value'] ) ) {
 			$this->assertArrayHasKey( 'aliases', $dbEntity );
 			$dbAliases = self::flattenArray( $dbEntity['aliases'], 'language', 'value', true );
-			foreach( $expected['value'] as $valueLanguage => $value ){
+			foreach ( $expected['value'] as $valueLanguage => $value ) {
 				$this->assertArrayEquals( $value, $dbAliases[ $valueLanguage ] );
 			}
 		} else {
@@ -129,9 +129,9 @@ class SetAliasesTest extends ModifyTermTestCase {
 		}
 
 		// -- check the edit summary --------------------------------------------
-		if( empty( $expected['edit-no-change'] ) ){
+		if ( empty( $expected['edit-no-change'] ) ) {
 			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
-			if( array_key_exists( 'summary', $params) ){
+			if ( array_key_exists( 'summary', $params) ) {
 				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
 			}
 		}
@@ -175,7 +175,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetAliasesExceptions( $params, $expected ){
+	public function testSetAliasesExceptions( $params, $expected ) {
 		self::doTestSetTermExceptions( $params, $expected );
 	}
+
 }

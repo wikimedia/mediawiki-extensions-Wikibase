@@ -31,7 +31,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	public function setup() {
 		parent::setup();
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( self::$usedHandles );
 		}
 		self::$hasSetup = true;
@@ -145,7 +145,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 				$testCase['p']['props'] = $propData;
 				$testCases[] = $testCase;
 
-				if( in_array( 'claims', explode( '|', $propData ) ) ){
+				if ( in_array( 'claims', explode( '|', $propData ) ) ) {
 					$testCase['p']['ungroupedlist'] = true;
 					$testCases[] = $testCase;
 				}
