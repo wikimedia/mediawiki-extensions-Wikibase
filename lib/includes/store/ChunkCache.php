@@ -121,7 +121,7 @@ class ChunkCache implements ChunkAccess {
 
 			if ( $key < $entry['start'] ) {
 				$high = $mid -1;
-			} else if ( $key >= $entry['next'] ) {
+			} elseif ( $key >= $entry['next'] ) {
 				$low = $mid +1;
 			} else {
 				return $mid;

@@ -168,7 +168,7 @@ class GetEntities extends ApiWikibase {
 	/**
 	 * @param array $missingItems Array of arrays, Each internal array has a key 'site' and 'title'
 	 */
-	private function addMissingItemsToResult( $missingItems ){
+	private function addMissingItemsToResult( $missingItems ) {
 		foreach( $missingItems as $missingItem ) {
 			$this->getResultBuilder()->addMissingEntity( null, $missingItem );
 		}
@@ -256,7 +256,7 @@ class GetEntities extends ApiWikibase {
 	 *
 	 * @return SerializationOptions
 	 */
-	private function getSerializationOptions( $params, $props ){
+	private function getSerializationOptions( $params, $props ) {
 		$fallbackMode = (
 			LanguageFallbackChainFactory::FALLBACK_VARIANTS
 			| LanguageFallbackChainFactory::FALLBACK_OTHERS

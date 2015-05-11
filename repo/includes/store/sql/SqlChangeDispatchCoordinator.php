@@ -751,4 +751,5 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private function trace( $message ) {
 		wfDebugLog( __CLASS__, $message );
 	}
+
 }

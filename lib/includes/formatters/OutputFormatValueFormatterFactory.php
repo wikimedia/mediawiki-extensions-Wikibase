@@ -1,5 +1,7 @@
 <?php
+
 namespace Wikibase\Lib;
+
 use InvalidArgumentException;
 use RuntimeException;
 use ValueFormatters\FormatterOptions;

@@ -60,7 +60,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 		$clonedReference = clone $reference;
 		$serialization['hash'] = $clonedReference->getHash();
 
-		if( in_array( 'references', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+		if ( in_array( 'references', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ) {
 			$listSerializer = new ByPropertyListSerializer( 'snak', $this->snakSerializer, $this->options );
 		} else {
 			$listSerializer = new ListSerializer( 'snak', $this->snakSerializer, $this->options );
@@ -71,9 +71,9 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['snaks-order'] = array();
 		/** @var Snak $snak */
-		foreach( $snaks as $snak ) {
+		foreach ( $snaks as $snak ) {
 			$id = $snak->getPropertyId()->getSerialization();
-			if( !in_array( $id, $serialization['snaks-order'] ) ) {
+			if ( !in_array( $id, $serialization['snaks-order'] ) ) {
 				$serialization['snaks-order'][] = $id;
 			}
 		}
@@ -101,7 +101,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$snakUnserializer = new SnakSerializer( null, $this->options );
 
-		if( $this->isAssociative( $serialization['snaks'] ) ){
+		if ( $this->isAssociative( $serialization['snaks'] ) ) {
 			$unserializer = new ByPropertyListUnserializer( $snakUnserializer );
 		} else {
 			$unserializer = new ListUnserializer( $snakUnserializer );
@@ -109,7 +109,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$snakList = new SnakList( $unserializer->newFromSerialization( $serialization['snaks'] ) );
 
-		if( array_key_exists( 'snaks-order', $serialization ) ) {
+		if ( array_key_exists( 'snaks-order', $serialization ) ) {
 			$snakList->orderByProperty( $serialization['snaks-order'] );
 		}
 

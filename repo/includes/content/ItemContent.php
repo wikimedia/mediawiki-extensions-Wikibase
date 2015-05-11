@@ -243,7 +243,7 @@ class ItemContent extends EntityContent {
 
 		if ( $status === self::STATUS_EMPTY && $hasSiteLinks ) {
 			$status = self::STATUS_LINKSTUB;
-		} else if ( $status === self::STATUS_STUB && $hasSiteLinks ) {
+		} elseif ( $status === self::STATUS_STUB && $hasSiteLinks ) {
 			$status = self::STATUS_LINKSTUB;
 		}
 

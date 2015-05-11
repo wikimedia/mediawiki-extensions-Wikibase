@@ -90,7 +90,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		if ( $this->claim->getGuid() === null ){
+		if ( $this->claim->getGuid() === null ) {
 			$this->claim->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
 		}
 
@@ -98,7 +98,7 @@ class ChangeOpClaim extends ChangeOpBase {
 
 		if ( $this->guidValidator->validate( $guid->getSerialization() ) === false ) {
 			throw new ChangeOpException( "Claim does not have a valid GUID" );
-		} else if ( !$entity->getId()->equals( $guid->getEntityId() ) ){
+		} elseif ( !$entity->getId()->equals( $guid->getEntityId() ) ) {
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
 		}
 
@@ -115,7 +115,7 @@ class ChangeOpClaim extends ChangeOpBase {
 		$statements = $entity->getStatements();
 		$claims = new Claims( iterator_to_array( $statements ) );
 
-		if( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
+		if ( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
 			$newClaims = $this->addClaim( $claims, $summary );
 		} else {
 			$newClaims = $this->setClaim( $claims, $summary );

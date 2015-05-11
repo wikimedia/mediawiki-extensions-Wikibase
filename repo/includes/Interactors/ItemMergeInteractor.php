@@ -184,7 +184,7 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( 'One or more of the entities are not items', 'not-item' );
 		}
 
-		if( $toEntity->getId()->equals( $fromEntity->getId() ) ){
+		if ( $toEntity->getId()->equals( $fromEntity->getId() ) ) {
 			throw new ItemMergeException( 'You must provide unique ids' , 'cant-merge-self' );
 		}
 	}

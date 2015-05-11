@@ -43,7 +43,7 @@ class BotEditTest extends WikibaseApiTestCase {
 			array( 'bot' )
 		);
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'Empty' ) );
 		}
 
@@ -99,11 +99,11 @@ class BotEditTest extends WikibaseApiTestCase {
 		$this->login( 'wbbot' );
 
 		// -- do the request --------------------------------------------------
-		if( array_key_exists( 'handle', $params ) ){
+		if ( array_key_exists( 'handle', $params ) ) {
 			$params['id'] = EntityTestHelper::getId( $params['handle'] );
 			unset( $params['handle'] );
 		}
-		list( $result,, ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->user );
+		list( $result, , ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->user );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );

@@ -163,9 +163,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @throws InvalidArgumentException
 	 */
 	private function checkTermChangePermissions( Entity $entity ) {
-		if( $entity instanceof Item ) {
+		if ( $entity instanceof Item ) {
 			$type = 'item';
-		} else if ( $entity instanceof Property ) {
+		} elseif ( $entity instanceof Property ) {
 			$type = 'property';
 		} else {
 			throw new InvalidArgumentException( 'Unexpected Entity type when checking special page term change permissions' );

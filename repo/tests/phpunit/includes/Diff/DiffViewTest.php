@@ -73,9 +73,9 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 		$diffOps = array();
 		if ( $oldValue !== null && $newValue !== null ) {
 			$diffOps['change'] = new DiffOpChange( $oldValue, $newValue );
-		} else if ( $oldValue !== null ) {
+		} elseif ( $oldValue !== null ) {
 			$diffOps['remove'] = new DiffOpRemove( $oldValue );
-		} else if ( $newValue !== null ) {
+		} elseif ( $newValue !== null ) {
 			$diffOps['add'] = new DiffOpAdd( $newValue );
 		}
 		return $diffOps;
