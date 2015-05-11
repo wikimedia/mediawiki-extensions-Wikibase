@@ -130,7 +130,6 @@ class PropertyHandler extends EntityHandler {
 		return Property::ENTITY_TYPE;
 	}
 
-
 	/**
 	 * Returns deletion updates for the given EntityContent.
 	 *

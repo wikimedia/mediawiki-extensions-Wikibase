@@ -100,7 +100,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		if ( $invokeCount === null ) {
 			$invokeCount = $this->any();
 		}
-		if ( $hookReturn === null ){
+		if ( $hookReturn === null ) {
 			$hookReturn = Status::newGood();
 		}
 		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )

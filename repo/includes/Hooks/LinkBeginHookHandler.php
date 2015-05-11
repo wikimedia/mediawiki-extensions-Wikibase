@@ -233,8 +233,8 @@ class LinkBeginHookHandler {
 		if (
 			( $currentTitle === null || !$currentTitle->isSpecialPage() )
 			&& $actionName !== 'history'
-			&& !$isDiff )
-		{
+			&& !$isDiff
+		) {
 			// Note: this may not work right with special page transclusion. If $out->getTitle()
 			// doesn't return the transcluded special page's title, the transcluded text will
 			// not have entity IDs resolved to labels.

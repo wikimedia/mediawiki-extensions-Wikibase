@@ -82,7 +82,7 @@ class EditFilterHookRunner {
 			$entityContent = $this->entityContentFactory->newFromEntity( $new );
 			$context = $this->getContextForEditFilter( $new->getId(), $new->getType() );
 
-		} elseif ( $new instanceof EntityRedirect ){
+		} elseif ( $new instanceof EntityRedirect ) {
 			$entityContent = $this->entityContentFactory->newFromRedirect( $new );
 			if ( $entityContent === null ) {
 				throw new RuntimeException(
@@ -95,7 +95,6 @@ class EditFilterHookRunner {
 				$new->getEntityId(),
 				$new->getEntityId()->getEntityType()
 			);
-
 		} else {
 			throw new InvalidArgumentException( '$new must be instance of Entity or EntityRedirect' );
 		}

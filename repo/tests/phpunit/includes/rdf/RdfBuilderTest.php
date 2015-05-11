@@ -30,8 +30,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 *
 	 * @return RdfBuilderTestData
 	 */
-	private function getTestData()
-	{
+	private function getTestData() {
 		if ( empty( $this->testData ) ) {
 			$this->testData = new RdfBuilderTestData( __DIR__ . "/../../data/rdf", __DIR__ . "/../../data/rdf" );
 		}

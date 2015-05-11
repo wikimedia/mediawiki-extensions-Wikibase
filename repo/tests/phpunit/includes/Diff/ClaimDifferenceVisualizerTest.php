@@ -79,7 +79,9 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Repo\Diff\ClaimDifferenceVisualizer', $instance );
 	}
 
-	//TODO come up with a better way of testing this.... EWW at all the html...
+	/**
+	 * @todo come up with a better way of testing this.... EWW at all the html...
+	 */
 	public function provideDifferenceAndClaim() {
 		return array(
 			'no change' => array(
@@ -238,13 +240,13 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideDifferenceAndClaim
 	 */
-	public function testVisualizeClaimChange( $difference, $baseClaim, $expectedHtml ){
+	public function testVisualizeClaimChange( $difference, $baseClaim, $expectedHtml ) {
 		$visualizer = $this->newClaimDifferenceVisualizer();
 		$html = $visualizer->visualizeClaimChange( $difference, $baseClaim );
 		$this->assertHtmlEquals( $expectedHtml, $html );
 	}
 
-	public function testVisualizeNewClaim(){
+	public function testVisualizeNewClaim() {
 		$expect =
 			// main snak
 			'<tr><td colspan="2" class="diff-lineno"></td>'.
@@ -286,7 +288,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 		$this->assertHtmlEquals( $expect, $html );
 	}
 
-	public function testVisualizeRemovedClaim(){
+	public function testVisualizeRemovedClaim() {
 		$expect =
 			// main snak
 			'<tr><td colspan="2" class="diff-lineno">property / P12</td>'.

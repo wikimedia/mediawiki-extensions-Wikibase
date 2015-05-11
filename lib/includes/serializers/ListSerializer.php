@@ -53,7 +53,7 @@ class ListSerializer extends SerializerObject {
 
 		$serialization = array();
 
-		foreach( $objects as $object ){
+		foreach ( $objects as $object ) {
 			$serializedObject = $this->elementSerializer->getSerialized( $object );
 			$serialization[] = $serializedObject;
 		}

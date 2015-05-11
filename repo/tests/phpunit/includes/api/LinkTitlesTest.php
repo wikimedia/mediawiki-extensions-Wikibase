@@ -26,7 +26,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'StringProp', 'Oslo', 'Berlin' ) );
 		}
 		self::$hasSetup = true;
@@ -65,14 +65,14 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 		$this->assertArrayHasKey( 'lastrevid', $result['entity'] , 'entity should contain lastrevid key' );
 
-		$this->assertEquals( $expected['inresult'] , count( $result['entity']['sitelinks'] ), "Result has wrong number of sitelinks" );
+		$this->assertEquals( $expected['inresult'], count( $result['entity']['sitelinks'] ), "Result has wrong number of sitelinks" );
 		foreach ( $result['entity']['sitelinks'] as $link ) {
 			$this->assertTrue( $params['fromsite'] === $link['site'] || $params['tosite'] === $link['site'] );
 			$this->assertTrue( $params['fromtitle'] === $link['title'] || $params['totitle'] === $link['title'] );
 		}
 
 		// check the item in the database -------------------------------
-		if ( array_key_exists( 'id', $result['entity'] )  ) {
+		if ( array_key_exists( 'id', $result['entity'] ) ) {
 			$item = $this->loadEntity( $result['entity']['id'] );
 			$links = $this->flattenArray( $item['sitelinks'], 'site', 'title' );
 			$this->assertEquals( $params['fromtitle'], $links[ $params['fromsite'] ], 'wrong link target' );
@@ -80,7 +80,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		}
 
 		// -- check the edit summary --------------------------------------------
-		if( array_key_exists( 'summary', $params) ){
+		if ( array_key_exists( 'summary', $params) ) {
 			$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
 		}
 	}
@@ -120,7 +120,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideLinkTitleExceptions
 	 */
-	public function testLinkTitlesExceptions( $params, $expected ){
+	public function testLinkTitlesExceptions( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wblinktitles';
 		$this->doTestQueryExceptions( $params, $expected['exception'] );

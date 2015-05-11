@@ -22,7 +22,9 @@ class DataUpdateAdapterTest extends \PHPUnit_Framework_TestCase {
 		$reporter->expects( $this->once() )
 			->method( 'reportMessage' );
 
-		$update = new DataUpdateAdapter( function() { throw new RuntimeException( 'Test' ); } );
+		$update = new DataUpdateAdapter( function() {
+			throw new RuntimeException( 'Test' );
+		} );
 		$update->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
 
 		// Should call the callback provided to the constructor, which will throw an exception,

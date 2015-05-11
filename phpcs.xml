@@ -5,11 +5,17 @@
 -->
 <ruleset name="MediaWiki">
 
+	<rule ref="Generic.ControlStructures" />
+
 	<rule ref="Generic.Files.ByteOrderMark" />
 	<rule ref="Generic.Files.InlineHTML" />
 	<rule ref="Generic.Files.LineEndings" />
 	<rule ref="Generic.Files.OneInterfacePerFile" />
 	<rule ref="Generic.Files.OneTraitPerFile" />
+
+	<rule ref="Generic.Formatting.DisallowMultipleStatements" />
+
+	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
 
 	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
 	<rule ref="Generic.PHP.DeprecatedFunctions" />
@@ -21,7 +27,7 @@
 	<rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
 		<severity>0</severity>
 	</rule>
-    <!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
 		<severity>0</severity>
 	</rule>
@@ -33,11 +39,32 @@
 	</rule>
 
 	<!-- TODO: Enable PSR2 sniffs. -->
-    <rule ref="PSR2.ControlStructures.ElseIfDeclaration" />
+	<rule ref="PSR2.ControlStructures.ElseIfDeclaration" />
 
 	<!-- TODO: Enable Squiz sniffs. -->
 	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Squiz.ControlStructures.ControlSignature" />
+	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<rule ref="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace">
+		<severity>0</severity>
+	</rule>
+	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<rule ref="Squiz.ControlStructures.ControlSignature.SpaceAfterKeyword">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
+		<properties>
+			<property name="spacing" value="1" />
+		</properties>
+	</rule>
+	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing.After">
 		<severity>0</severity>
 	</rule>
 

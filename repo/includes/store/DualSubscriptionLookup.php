@@ -85,4 +85,5 @@ class DualSubscriptionLookup implements SubscriptionLookup {
 
 		return $reindexed;
 	}
+
 }

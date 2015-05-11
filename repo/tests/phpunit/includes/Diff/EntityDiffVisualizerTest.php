@@ -26,7 +26,6 @@ use Wikibase\Repo\Diff\EntityDiffVisualizer;
  */
 class EntityDiffVisualizerTest extends MediaWikiTestCase {
 
-
 	public function diffProvider() {
 		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff() );
 

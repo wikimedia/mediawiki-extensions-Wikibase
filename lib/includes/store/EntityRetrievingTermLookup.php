@@ -112,9 +112,9 @@ class EntityRetrievingTermLookup implements TermLookup {
 	private function fetchFingerprint( EntityId $entityId ) {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
-		} catch ( UnresolvedRedirectException $ex )  {
+		} catch ( UnresolvedRedirectException $ex ) {
 			$entity = null;
-		} catch ( StorageException $ex )  {
+		} catch ( StorageException $ex ) {
 			$entity = null;
 			wfLogWarning( 'Failed to load entity: '
 				. $entityId->getSerialization() . ': '

@@ -165,7 +165,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $ignoreConflicts = null ){
+	public function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $ignoreConflicts = null ) {
 		// -- set up params ---------------------------------
 		$params = array(
 			'action' => 'wbmergeitems',
@@ -173,7 +173,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			'toid' => 'Q2',
 			'summary' => 'CustomSummary!',
 		);
-		if( $ignoreConflicts !== null ){
+		if ( $ignoreConflicts !== null ) {
 			$params['ignoreconflicts'] = $ignoreConflicts;
 		}
 
@@ -249,7 +249,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideExceptionParamsData
 	 */
-	public function testMergeItemsParamsExceptions( $params, $expected ){
+	public function testMergeItemsParamsExceptions( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbmergeitems';
 
@@ -277,7 +277,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideExceptionConflictsData
 	 */
-	public function testMergeItemsConflictsExceptions( $pre1, $pre2 ){
+	public function testMergeItemsConflictsExceptions( $pre1, $pre2 ) {
 		$expected = array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) );
 
 		// -- prefill the entities --------------------------------------------
