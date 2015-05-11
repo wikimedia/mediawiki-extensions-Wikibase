@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ed113e2_ef10d254",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-05-11T14:14:59Z",
+      "side": 1,
+      "message": "I think it is fine if the position definition applies in both cases.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_cfb70e34",
         "filename": "view/resources/jquery/wikibase/resources.php",
         "patchSetId": 1
