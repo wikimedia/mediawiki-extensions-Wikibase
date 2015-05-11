@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Trivial EntityHolder holding an Entity object.
+ * Trivial EntityHolder holding an entity object.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
