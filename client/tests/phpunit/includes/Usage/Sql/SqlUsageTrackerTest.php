@@ -6,6 +6,7 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
+use Wikibase\Client\Usage\Sql\UsageTableUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
@@ -43,6 +44,7 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 		}
 
 		$this->tablesUsed[] = 'wbc_entity_usage';
+		$this->tablesUsed[] = 'page';
 
 		parent::setUp();
 
@@ -51,8 +53,20 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 			new ConsistentReadConnectionManager( wfGetLB() )
 		);
 
-		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker );
-		$this->lookupTester = new UsageLookupContractTester( $this->sqlUsageTracker, $this->sqlUsageTracker );
+		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker, array( $this, 'getUsages' ) );
+		$this->lookupTester = new UsageLookupContractTester( $this->sqlUsageTracker, array( $this, 'putUsages' )  );
+	}
+
+	public function getUsages( $pageId, $timestamp ) {
+		$db = wfGetDB( DB_SLAVE );
+		$updater = new UsageTableUpdater( $db, 'wbc_entity_usage', 1000, new BasicEntityIdParser() );
+		return $updater->queryUsages( $pageId, '>=', $timestamp );
+	}
+
+	public function putUsages( $pageId, array $usages, $timestamp ) {
+		$db = wfGetDB( DB_MASTER );
+		$updater = new UsageTableUpdater( $db, 'wbc_entity_usage', 1000, new BasicEntityIdParser() );
+		return $updater->addUsages( $pageId, $usages, $timestamp );
 	}
 
 	public function testTrackUsedEntities() {
@@ -61,6 +75,10 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 
 	public function testRemoveEntities() {
 		$this->trackerTester->testRemoveEntities();
+	}
+
+	public function testPruneStaleUsages() {
+		$this->trackerTester->testPruneStaleUsages();
 	}
 
 	public function testGetUsageForPage() {
