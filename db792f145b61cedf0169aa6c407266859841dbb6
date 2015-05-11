@@ -279,6 +279,24 @@
       "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0f42f6b0",
+        "filename": "view/resources/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-05-11T14:42:47Z",
+      "side": 1,
+      "message": "Still present in PS4.",
+      "parentUuid": "0ed113e2_8fdee642",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
