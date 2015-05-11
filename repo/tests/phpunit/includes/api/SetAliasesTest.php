@@ -96,7 +96,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		}
 
 		// -- do the request --------------------------------------------------
-		list( $result,, ) = $this->doApiRequestWithToken( $params );
+		list( $result, , ) = $this->doApiRequestWithToken( $params );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -178,4 +178,5 @@ class SetAliasesTest extends ModifyTermTestCase {
 	public function testSetAliasesExceptions( $params, $expected ) {
 		self::doTestSetTermExceptions( $params, $expected );
 	}
+
 }

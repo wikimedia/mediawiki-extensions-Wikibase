@@ -76,4 +76,5 @@ class SiteLinkSubscriptionLookup implements SubscriptionLookup {
 
 		return $reindexed;
 	}
+
 }

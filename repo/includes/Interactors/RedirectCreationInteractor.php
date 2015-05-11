@@ -248,4 +248,5 @@ class RedirectCreationInteractor {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', $ex );
 		}
 	}
+
 }

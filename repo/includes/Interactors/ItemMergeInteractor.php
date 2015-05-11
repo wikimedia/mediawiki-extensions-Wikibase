@@ -85,7 +85,6 @@ class ItemMergeInteractor {
 		$this->user = $user;
 	}
 
-
 	/**
 	 * Check all applicable permissions for redirecting the given $entityId.
 	 *
@@ -135,7 +134,6 @@ class ItemMergeInteractor {
 	 * @throws ItemMergeException
 	 */
 	public function mergeItems( ItemId $fromId, ItemId $toId, $ignoreConflicts = array(), $summary = null, $bot = false ) {
-
 		$this->checkPermissions( $fromId );
 		$this->checkPermissions( $toId );
 
@@ -147,7 +145,7 @@ class ItemMergeInteractor {
 		// strip any bad values from $ignoreConflicts
 		$ignoreConflicts = array_intersect( $ignoreConflicts, ChangeOpsMerge::$conflictTypes );
 
-		try{
+		try {
 			$changeOps = $this->changeOpFactory->newMergeOps(
 				$fromEntity,
 				$toEntity,
@@ -155,8 +153,7 @@ class ItemMergeInteractor {
 			);
 
 			$changeOps->apply();
-		}
-		catch( ChangeOpException $e ) {
+		} catch ( ChangeOpException $e ) {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}
 

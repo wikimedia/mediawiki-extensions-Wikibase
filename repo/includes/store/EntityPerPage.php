@@ -120,7 +120,6 @@ interface EntityPerPage {
 	 */
 	public function getEntitiesWithoutTerm( $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 );
 
-
 	/**
 	 * Return all items without sitelinks
 	 *
