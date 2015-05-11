@@ -22,8 +22,7 @@ class RdfVocabulary {
 	// Change this when changing data format!
 	const FORMAT_VERSION = '0.0.1';
 
-	//FIXME: this is the wikibase ontology, NOT the wikidata ontology!
-	const ONTOLOGY_BASE_URI = 'http://www.wikidata.org/ontology';
+	const ONTOLOGY_BASE_URI = 'http://wikiba.se/ontology';
 	const NS_ONTOLOGY = 'wikibase'; // wikibase ontology (shared)
 	// Nodes
 	const NS_ENTITY = 'wd'; // concept uris
@@ -112,6 +111,7 @@ class RdfVocabulary {
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
 				'owl' => 'http://www.w3.org/2002/07/owl#',
+				// TODO: drop beta once we have stable ontology
 				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
 				// nodes
 				self::NS_DATA => $this->dataUri,
