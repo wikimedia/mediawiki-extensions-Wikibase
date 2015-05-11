@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_8cb6f1f4",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:52:29Z",
+      "side": 1,
+      "message": "This is a $languageCode, isn\u0027t it?",
+      "revId": "9add81284fe276777778c6596ef5ebbcf0cf2a67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ec845dda",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:52:29Z",
+      "side": 1,
+      "message": "I find replacing a single array_intersect with all these array methods (7 instead of 1) scary. I can\u0027t easily tell if this is correct.",
+      "revId": "9add81284fe276777778c6596ef5ebbcf0cf2a67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
