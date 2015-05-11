@@ -54,7 +54,14 @@ function apply_experimental_settings {
 
 cd $WORKSPACE/src
 
-echo '<?php' >> LocalSettings.php
+if [ "$(tail -n1 LocalSettings.php)" = "?>" ]
+then
+  PHPTAGS=true
+fi
+if [ -v PHPTAGS ]
+then
+  echo '<?php' >> LocalSettings.php
+fi
 
 apply_experimental_settings
 
@@ -68,4 +75,7 @@ else
   usage
 fi
 
-echo '?>' >> LocalSettings.php
+if [ -v PHPTAGS ]
+then
+  echo '?>' >> LocalSettings.php
+fi
