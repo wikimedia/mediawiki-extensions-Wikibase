@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_6c7f0d11",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:48:23Z",
+      "side": 1,
+      "message": "To what does this refer to?",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2ca4a59d",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:48:23Z",
+      "side": 1,
+      "message": "I suggest to use substr and no dot because all aspects are CHAR(1) anyway and this is very unlikely to ever change.",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ecb9bdc7",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:48:23Z",
+      "side": 1,
+      "message": "Typo.",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8ce111cd",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:48:23Z",
+      "side": 1,
+      "message": "\"Sorted list of aspect names without modifiers.\"",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ece0ddc9",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:48:23Z",
+      "side": 1,
+      "message": "\"Sorted list of full aspect names with modifiers.\"",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ec077d83",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:48:23Z",
+      "side": 1,
+      "message": "I\u0027m not sure about these two method names. Both are keys. What about something like getUnmodifiedAspects() and getModifiedAspects()? Or getBasicAspects() and getComplexAspects()/getCompositeAspects()?",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ec369d4e",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:48:23Z",
+      "side": 1,
+      "message": "I really like to call these $languageCode because we have a heavily used Language class.",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
