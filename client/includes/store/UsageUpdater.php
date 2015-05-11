@@ -63,50 +63,58 @@ class UsageUpdater {
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of EntityUsage objects.
 	 * See docs/usagetracking.wiki for details.
-	 * @param string|false $touched timestamp (or optionally false, if $usages is empty)
+	 * @param string $touched timestamp. Timestamp of the update that contained the given usages.
 	 *
 	 * @see UsageTracker::trackUsedEntities
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function updateUsageForPage( $pageId, array $usages, $touched ) {
+	public function addUsagesForPage( $pageId, array $usages, $touched ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int!' );
 		}
 
-		if ( !is_string( $touched ) && !empty( $usages ) ) {
-			throw new InvalidArgumentException( '$touched must be a string if $usages isn\'t empty!' );
+		if ( !is_string( $touched ) || $touched === '' ) {
+			throw new InvalidArgumentException( '$touched must be a timestamp string!' );
 		}
 
-		$oldUsage = $this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
-
+		$this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
 		$currentlyUsedEntities = $this->getEntityIds( $usages );
-		$previouslyUsedEntities = $this->getEntityIds( $oldUsage );
-
-		$added = array_diff_key( $currentlyUsedEntities, $previouslyUsedEntities );
-		$removed = array_diff_key( $previouslyUsedEntities, $currentlyUsedEntities );
 
 		// Subscribe to anything that was added
-		if ( !empty( $added ) ) {
-			$this->subscriptionManager->subscribe( $this->clientId, $added );
+		if ( !empty( $currentlyUsedEntities ) ) {
+			$this->subscriptionManager->subscribe( $this->clientId, $currentlyUsedEntities );
 		}
-
-		$this->unsubscribeUnused( $removed );
 	}
 
 	/**
-	 * Unsubscribe from anything that was removed and is otherwise unused.
+	 * Removes stale usage information for the given page, and removes
+	 * any subscriptions that have become unnecessary.
 	 *
-	 * @param EntityId[] $removedIds
+	 * @param int $pageId The ID of the page the entities are used on.
+	 * @param string $lastUpdatedBefore timestamp. Entries older than this timestamp will be removed.
+	 *
+	 * @see UsageTracker::trackUsedEntities
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	private function unsubscribeUnused( array $removedIds ) {
-		if ( !empty( $removedIds ) ) {
-			$unusedIds =  $this->usageLookup->getUnusedEntities( $removedIds );
+	public function pruneUsagesForPage( $pageId, $lastUpdatedBefore = '00000000000000' ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int!' );
+		}
 
-			if ( !empty( $unusedIds ) ) {
-				// Unsubscribe from anything that was removed and is otherwise unused.
-				$this->subscriptionManager->unsubscribe( $this->clientId, $unusedIds );
-			}
+		if ( !is_string( $lastUpdatedBefore ) || $lastUpdatedBefore === '' ) {
+			throw new InvalidArgumentException( '$lastUpdatedBefore must be a timestamp string!' );
+		}
+
+		$prunedUsages = $this->usageTracker->pruneStaleUsages( $pageId, $lastUpdatedBefore );
+
+		$prunedEntityIds = $this->getEntityIds( $prunedUsages );
+		$unusedIds =  $this->usageLookup->getUnusedEntities( $prunedEntityIds );
+
+		if ( !empty( $unusedIds ) ) {
+			// Unsubscribe from anything that was pruned and is otherwise unused.
+			$this->subscriptionManager->unsubscribe( $this->clientId, $unusedIds );
 		}
 	}
 

@@ -4,7 +4,9 @@ namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseBase;
 use InvalidArgumentException;
+use Iterator;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * Helper class for updating the wb_entity_usage table.
@@ -31,13 +33,17 @@ class UsageTableUpdater {
 	private $batchSize;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
 	 * @param DatabaseBase $connection
 	 * @param string $tableName
 	 * @param int $batchSize
-	 *
-	 * @throws InvalidArgumentException
+	 * @param EntityIdParser $idParser
 	 */
-	public function __construct( DatabaseBase $connection, $tableName, $batchSize ) {
+	public function __construct( DatabaseBase $connection, $tableName, $batchSize, EntityIdParser $idParser ) {
 		if ( !is_string( $tableName ) ) {
 			throw new InvalidArgumentException( '$tableName must be a string' );
 		}
@@ -49,98 +55,33 @@ class UsageTableUpdater {
 		$this->connection = $connection;
 		$this->tableName = $tableName;
 		$this->batchSize = $batchSize;
+		$this->idParser = $idParser;
 	}
 
 	/**
-	 * Re-indexes the given list of EntityUsages so that each EntityUsage can be found by using its
-	 * string representation as a key.
-	 *
-	 * @param EntityUsage[] $usages
-	 *
-	 * @throws InvalidArgumentException
-	 * @return EntityUsage[]
-	 */
-	private function reindexEntityUsages( array $usages ) {
-		$reindexed = array();
-
-		foreach ( $usages as $usage ) {
-			if ( !( $usage instanceof EntityUsage ) ) {
-				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
-			}
-
-			$key = $usage->getIdentityString();
-			$reindexed[$key] = $usage;
-		}
-
-		return $reindexed;
-	}
-
-	/**
-	 * Updates the recorded usage, removing all obsolete usages.
+	 * Sets the "touched" timestamp for the given usages.
 	 *
 	 * @param int $pageId
-	 * @param EntityUsage[] $oldUsages Existing usage entries in the database.
-	 * @param EntityUsage[] $newUsages Desired usage entries whish should be in the database.
-	 * @param string|false $touched timestamp, or false in case $newUsages is empty.
-	 *
-	 * @return int The number of usages added or removed
-	 */
-	public function updateUsage( $pageId, array $oldUsages, array $newUsages, $touched ) {
-		if ( !empty( $newUsages ) && $touched === false ) {
-			throw new InvalidArgumentException( '$touched is false, but $newUsages is not empty.' );
-		}
-
-		$newUsages = $this->reindexEntityUsages( $newUsages );
-		$oldUsages = $this->reindexEntityUsages( $oldUsages );
-
-		$removed = array_diff_key( $oldUsages, $newUsages );
-		$added = array_diff_key( $newUsages, $oldUsages );
-
-		$mod = 0;
-		$mod += $this->removeUsageForPage( $pageId, $removed );
-
-		// update the "touched" timestamp for the remaining entries
-		$this->touchUsageForPage( $pageId, $touched );
-
-		$mod += $this->addUsageForPage( $pageId, $added, $touched );
-
-		return $mod;
-	}
-
-	/**
-	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 *
-	 * @return int The number of entries removed
+	 * @param string $touched timestamp
 	 */
-	private function removeUsageForPage( $pageId, array $usages ) {
+	public function touchUsages( $pageId, array $usages, $touched ) {
 		if ( empty( $usages ) ) {
-			return 0;
-		}
-
-		$bins = $this->binUsages( $usages );
-		$c = 0;
-
-		foreach ( $bins as $aspect => $bin ) {
-			$c += $this->removeAspectForPage( $pageId, $aspect, $bin );
-		}
-
-		return $c;
-	}
-
-	/**
-	 * Sets the "touched" timestamp for all usage entries for the given page to $touched.
-	 * If $touched is false, this does nothing. This is intended to be used in cases where
-	 * it is already known that no usage records remain in the database.
-	 *
-	 * @param int $pageId
-	 * @param string|false $touched timestamp
-	 */
-	private function touchUsageForPage( $pageId, $touched ) {
-		if ( $touched === false ) {
 			return;
 		}
 
+		$db = $this->connection;
+
+		$usageConditions = array();
+
+		foreach ( $usages as $usage ) {
+			$usageConditions[] = $db->makeList( array(
+				'eu_aspect' => $usage->getAspectKey(),
+				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
+			), LIST_AND );
+		}
+
+		// XXX: Do we need batching here? List pages may be using hundreds of entities...
 		$this->connection->update(
 			$this->tableName,
 			array(
@@ -148,33 +89,10 @@ class UsageTableUpdater {
 			),
 			array(
 				'eu_page_id' => (int)$pageId,
+				$this->connection->makeList( $usageConditions, LIST_OR )
 			),
 			__METHOD__
 		);
-	}
-
-	/**
-	 * Collects the entity id strings contained in the given list of EntityUsages into
-	 * bins based on the usage's aspect and modifier.
-	 *
-	 * @param EntityUsage[] $usages
-	 *
-	 * @throws InvalidArgumentException
-	 * @return array[] an associative array mapping aspect ids to lists of entity id strings.
-	 */
-	private function binUsages( array $usages ) {
-		$bins = array();
-
-		foreach ( $usages as $usage ) {
-			if ( !( $usage instanceof EntityUsage ) ) {
-				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
-			}
-
-			$aspect = $usage->getAspectKey();
-			$bins[$aspect][] = $usage->getEntityId()->getSerialization();
-		}
-
-		return $bins;
 	}
 
 	/**
@@ -206,49 +124,18 @@ class UsageTableUpdater {
 
 	/**
 	 * @param int $pageId
-	 * @param string $aspect
-	 * @param string[] $idStrings Id strings of the entities to be removed.
-	 *
-	 * @return int The number of entries removed
-	 */
-	private function removeAspectForPage( $pageId, $aspect, array $idStrings ) {
-		if ( empty( $idStrings ) ) {
-			return 0;
-		}
-
-		$batches = array_chunk( $idStrings, $this->batchSize );
-		$c = 0;
-
-		foreach ( $batches as $batch ) {
-			$this->connection->delete(
-				$this->tableName,
-				array(
-					'eu_page_id' => (int)$pageId,
-					'eu_aspect' => $aspect,
-					'eu_entity_id' => $batch,
-				),
-				__METHOD__
-			);
-			$c += $this->connection->affectedRows();
-		}
-
-		return $c;
-	}
-
-	/**
-	 * @param int $pageId
 	 * @param EntityUsage[] $usages
 	 * @param string|false $touched timestamp, may be false only if $usages is empty.
 	 *
 	 * @return int The number of entries added
 	 */
-	private function addUsageForPage( $pageId, array $usages, $touched ) {
+	public function addUsages( $pageId, array $usages, $touched ) {
 		if ( empty( $usages ) ) {
 			return 0;
 		}
 
 		if ( !is_string( $touched ) || $touched === '' ) {
-			throw new InvalidArgumentException( '$touched is not a timestamp, but $usages is not empty.' );
+			throw new InvalidArgumentException( '$touched must be a timestamp string.' );
 		}
 
 		$batches = array_chunk(
@@ -267,8 +154,103 @@ class UsageTableUpdater {
 	}
 
 	/**
+	 * @param int $pageId
+	 * @param string|null $timeOp Operator to use with $timestamp, e.g. "<" or ">=".
+	 * @param string|null $timestamp
+	 *
+	 * @return EntityUsage[]
+	 *
+	 */
+	public function queryUsages( $pageId, $timeOp = null, $timestamp = null ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+
+		if ( $timeOp !== null && ( !is_string( $timeOp ) || !preg_match( '/^(<|>|=|<>|>=|<=)$/', $timeOp ) ) ) {
+			throw new InvalidArgumentException( '$timeOp must be a valid operator.' );
+		}
+
+		if ( $timestamp !== null && ( !is_string( $timestamp ) || $timestamp === '' ) ) {
+			throw new InvalidArgumentException( '$timestamp must be a timestamp string.' );
+		}
+
+		$timestamp = wfTimestamp( TS_MW, $timestamp );
+
+		$where = array(
+			'eu_page_id' => $pageId,
+		);
+
+		if ( $timeOp !== null && $timestamp !== null ) {
+			$where[] = 'eu_touched ' . $timeOp . $this->connection->addQuotes( $timestamp );
+		}
+
+		$res = $this->connection->select(
+			'wbc_entity_usage',
+			array( 'eu_aspect', 'eu_entity_id' ),
+			$where,
+			__METHOD__
+		);
+
+		$usages = $this->convertRowsToUsages( $res );
+		return $usages;
+	}
+
+	/**
+	 * @param array|Iterator $rows
+	 *
+	 * @return EntityUsage[]
+	 */
+	private function convertRowsToUsages( $rows ) {
+		$usages = array();
+
+		foreach ( $rows as $object ) {
+			$entityId = $this->idParser->parse( $object->eu_entity_id );
+			$usage = new EntityUsage( $entityId, $object->eu_aspect );
+			$key = $usage->getIdentityString();
+			$usages[$key] = $usage;
+		}
+
+		return $usages;
+	}
+
+	/**
+	 * Removes usage tracking entries that were last updated before the given
+	 * timestamp.
+	 *
+	 * @see UsageTracker::pruneStaleUsages
+	 *
+	 * @param int $pageId
+	 * @param string $lastUpdatedBefore timestamp
+	 *
+	 * @return EntityUsage[]
+	 */
+	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
+		if ( empty( $lastUpdatedBefore ) ) {
+			return array();
+		}
+
+		$lastUpdatedBefore = wfTimestamp( TS_MW, $lastUpdatedBefore );
+
+		$old = $this->queryUsages( $pageId, '<', $lastUpdatedBefore );
+
+		// XXX: we may want to batch this, based on the data in $old
+		$this->connection->delete(
+			$this->tableName,
+			array(
+				'eu_page_id' => (int)$pageId,
+				'eu_touched < ' . $this->connection->addQuotes( $lastUpdatedBefore ),
+			),
+			__METHOD__
+		);
+
+		return $old;
+	}
+
+	/**
 	 * Removes usage tracking for the given set of entities.
 	 * This is used typically when entities were deleted.
+	 *
+	 * @see UsageTracker::removeEntities
 	 *
 	 * @param string[] $idStrings
 	 */
