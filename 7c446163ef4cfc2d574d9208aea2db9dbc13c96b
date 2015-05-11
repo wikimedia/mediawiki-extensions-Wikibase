@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_0c2201fc",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T18:50:17Z",
+      "side": 1,
+      "message": "Defined in EntityUsage. Should probably have a @see tag.",
+      "parentUuid": "0ed113e2_6c7f0d11",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_2ca4a59d",
         "filename": "client/includes/Usage/EntityUsage.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_2c1fc5bb",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T18:50:17Z",
+      "side": 1,
+      "message": "They are no longer CHAR(1) in the database. We changed that to accommodate the modifiers. relying on string length feels really bad - at least we should check that $aspectKey[1] \u003d\u003d\u003d \u0027.\u0027, then.",
+      "parentUuid": "0ed113e2_2ca4a59d",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ecb9bdc7",
         "filename": "client/includes/Usage/PageEntityUsages.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2015-05-11T17:48:23Z",
       "side": 1,
       "message": "Typo.",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_cc7f19dc",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T18:50:17Z",
+      "side": 1,
+      "message": "orrr...",
+      "parentUuid": "0ed113e2_ecb9bdc7",
       "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_8c8591d5",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T18:50:17Z",
+      "side": 1,
+      "message": "I don\u0027t really like any of these names, and think they are all confusing/meaningless :)",
+      "parentUuid": "0ed113e2_ec077d83",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ec369d4e",
         "filename": "client/includes/Usage/UsageAccumulator.php",
         "patchSetId": 5
@@ -115,6 +187,24 @@
       "writtenOn": "2015-05-11T17:48:23Z",
       "side": 1,
       "message": "I really like to call these $languageCode because we have a heavily used Language class.",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4c5a4986",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T18:50:17Z",
+      "side": 1,
+      "message": "But parameters and variables should be named after their function, not their type.",
+      "parentUuid": "0ed113e2_ec369d4e",
       "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
