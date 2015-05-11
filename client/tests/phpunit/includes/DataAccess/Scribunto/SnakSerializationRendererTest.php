@@ -30,6 +30,8 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * @param DataValue $value
+	 *
 	 * @return array
 	 */
 	private function getSnakSerialization( DataValue $value ) {
@@ -45,6 +47,8 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param UsageAccumulator $usageAccumulator
+	 *
 	 * @return SnakSerializationRenderer
 	 */
 	private function getSnakRenderer( UsageAccumulator $usageAccumulator ) {
@@ -152,4 +156,5 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 			array_shift( $usages )
 		);
 	}
+
 }

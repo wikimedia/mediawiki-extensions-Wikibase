@@ -88,6 +88,9 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param PHPUnit_Framework_MockObject_Matcher_InvokedRecorder|null $invokeCount
+	 * @param Status|null $hookReturn
+	 *
 	 * @return EditFilterHookRunner
 	 */
 	public function getMockEditFilterHookRunner(
@@ -111,6 +114,10 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param PHPUnit_Framework_MockObject_Matcher_InvokedRecorder|null $efHookCalls
+	 * @param Status|null $efHookStatus
+	 * @param User|null $user
+	 *
 	 * @return RedirectCreationInteractor
 	 */
 	private function newInteractor(

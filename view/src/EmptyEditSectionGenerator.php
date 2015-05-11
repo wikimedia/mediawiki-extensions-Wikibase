@@ -14,36 +14,38 @@ use Wikibase\DataModel\Statement\Statement;
 class EmptyEditSectionGenerator implements EditSectionGenerator {
 
 	/**
-	 * Get an empty string
+	 * @param Statement $statement
 	 *
-	 * @return string
+	 * @return string Always an empty string.
 	 */
 	public function getStatementEditSection( Statement $statement ) {
 		return '';
 	}
 
 	/**
-	 * Get an empty string
+	 * @param string $languageCode Unused.
+	 * @param EntityId|null $entityId Unused.
 	 *
-	 * @return string
+	 * @return string Always an empty string.
 	 */
 	public function getLabelDescriptionAliasesEditSection( $languageCode, EntityId $entityId = null ) {
 		return '';
 	}
 
 	/**
-	 * Get an empty string
+	 * @param EntityId|null $entityId Unused.
 	 *
-	 * @return string
+	 * @return string Always an empty string.
 	 */
 	public function getSiteLinksEditSection( EntityId $entityId = null ) {
 		return '';
 	}
 
 	/**
-	 * Get an empty string
+	 * @param PropertyId $propertyId Unused.
+	 * @param EntityId|null $entityId Unused.
 	 *
-	 * @return string
+	 * @return string Always an empty string.
 	 */
 	public function getAddStatementToGroupSection( PropertyId $propertyId, EntityId $entityId = null ) {
 		return '';

@@ -42,6 +42,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param int $produce One of the RdfProducer::PRODUCE_... constants.
+	 * @param DedupeBag|null $dedup
+	 *
 	 * @return RdfBuilder
 	 */
 	private function newRdfBuilder( $produce, DedupeBag $dedup = null ) {
