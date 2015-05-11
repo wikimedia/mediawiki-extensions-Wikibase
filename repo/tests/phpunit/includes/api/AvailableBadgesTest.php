@@ -21,12 +21,12 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class AvailabeBadgesTest extends ApiTestCase {
 
-	static $badgeItems = array(
+	private static $badgeItems = array(
 		'Q123' => '',
 		'Q999' => ''
 	);
 
-	static $oldBadgeItems;
+	private static $oldBadgeItems;
 
 	protected function setUp() {
 		parent::setUp();

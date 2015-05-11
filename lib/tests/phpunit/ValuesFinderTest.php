@@ -24,7 +24,7 @@ use Wikibase\ValuesFinder;
  */
 class ValuesFinderTest extends \MediaWikiTestCase {
 
-	static $propertyDataTypes = array(
+	private static $propertyDataTypes = array(
 		'P23' => 'string',
 		'P42' => 'url',
 		'P44' => 'boolean'
