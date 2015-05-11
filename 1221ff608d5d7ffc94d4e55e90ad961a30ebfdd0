@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ed113e2_8fe026c9",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:35:48Z",
+      "side": 1,
+      "message": "Please create a public method called setQueryPageServices for setting (overriding) these for testing.",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_d5d658f6",
         "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
         "patchSetId": 4
@@ -37,6 +54,74 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_0fc51640",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:35:48Z",
+      "side": 1,
+      "message": "Fetching $limit+1 row allows is to show links to the next page only if there is a next page. That functionality is now gone, please restore it.",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8fb906c9",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:35:48Z",
+      "side": 1,
+      "message": "Make this protected, to it can be overridden.",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_cfa38e95",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:35:48Z",
+      "side": 1,
+      "message": "Move this top a separate protected method, so it can be overridden.",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_afa64aa6",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:35:48Z",
+      "side": 1,
+      "message": "Please import the class, it\u0027s currently unknown.",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_75ff6c63",
         "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
         "patchSetId": 4
@@ -66,6 +151,24 @@
       "side": 1,
       "message": "It\u0027s not unconnected. It pre-fetches the labels, so the LabelLookup will not need to run a database query for each label. The relationship between the lookup and the prefetcher is hidden by necessity. The LabelDescriptionLookup interface can\u0027t know about prefetching.",
       "parentUuid": "0ed113e2_75ff6c63",
+      "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_cfbaaeb5",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:35:48Z",
+      "side": 1,
+      "message": "That being said: prefetching is a surprising side-effect for a getter to have. Should at least be documented, or indicated by changing the name to prepareFormatter or some such.",
+      "parentUuid": "0ed113e2_5dc5ae8f",
       "revId": "1221ff608d5d7ffc94d4e55e90ad961a30ebfdd0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
