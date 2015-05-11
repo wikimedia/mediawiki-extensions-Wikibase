@@ -17,7 +17,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'Empty') );
 		}
 		self::$hasSetup = true;
@@ -58,13 +58,13 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		);
 	}
 	
-	public function doTestSetTerm( $attribute ,$params, $expected ){
+	public function doTestSetTerm( $attribute, $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
-		if( !array_key_exists( 'id', $params ) ){
+		if ( !array_key_exists( 'id', $params ) ) {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
-		if( !array_key_exists( 'value', $expected ) ){
+		if ( !array_key_exists( 'value', $expected ) ) {
 			$expected['value'] = array();
 		}
 
@@ -81,10 +81,10 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( $params['language'], $result['entity'][$attribute], "Entity doesn't return expected language");
 		$this->assertEquals( $params['language'], $result['entity'][$attribute][ $params['language'] ]['language'], "Returned incorrect language" );
 
-		if( array_key_exists( $params['language'], $expected['value'] ) ){
+		if ( array_key_exists( $params['language'], $expected['value'] ) ) {
 			$this->assertEquals(
 				$expected['value'][ $params['language'] ],
-				$result['entity'][$attribute][$params['language']]['value'] , "Returned incorrect attribute {$attribute}"
+				$result['entity'][$attribute][$params['language']]['value'], "Returned incorrect attribute {$attribute}"
 			);
 		} elseif ( empty( $value ) ) {
 			$this->assertArrayHasKey(
@@ -95,7 +95,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		}
 
 		// -- check any warnings ----------------------------------------------
-		if( array_key_exists( 'warning', $expected ) ){
+		if ( array_key_exists( 'warning', $expected ) ) {
 			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
 			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name']);
 			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
@@ -103,10 +103,10 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 
 		// -- check item in database -------------------------------------------
 		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
-		if( count( $expected['value'] ) ){
+		if ( count( $expected['value'] ) ) {
 			$this->assertArrayHasKey( $attribute, $dbEntity );
 			$dbLabels = self::flattenArray( $dbEntity[$attribute], 'language', 'value', true );
-			foreach( $expected['value'] as $valueLanguage => $value ){
+			foreach ( $expected['value'] as $valueLanguage => $value ) {
 				$this->assertArrayHasKey( $valueLanguage, $dbLabels );
 				$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );
 			}
@@ -117,8 +117,8 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		// -- check the edit summary --------------------------------------------
 		if ( empty( $expected['edit-no-change'] ) ) {
 			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
-			if( array_key_exists( 'summary', $params) ){
-				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
+			if ( array_key_exists( 'summary', $params) ) {
+				$this->assertRevisionSummary( "/{$params['summary']}/", $result['entity']['lastrevid'] );
 			}
 		}
 	}
@@ -158,11 +158,13 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		);
 	}
 
-	public function doTestSetTermExceptions( $params, $expected ){
-
+	public function doTestSetTermExceptions( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
-		if( !array_key_exists( 'id', $params )  && !array_key_exists( 'site', $params ) && !array_key_exists( 'title', $params ) ){
+		if ( !array_key_exists( 'id', $params )
+			&& !array_key_exists( 'site', $params )
+			&& !array_key_exists( 'title', $params )
+		) {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
 		$this->doTestQueryExceptions( $params, $expected['exception'] );

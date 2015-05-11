@@ -90,7 +90,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		if ( $this->claim->getGuid() === null ){
+		if ( $this->claim->getGuid() === null ) {
 			$this->claim->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
 		}
 
@@ -115,7 +115,7 @@ class ChangeOpClaim extends ChangeOpBase {
 		$statements = $entity->getStatements();
 		$claims = new Claims( iterator_to_array( $statements ) );
 
-		if( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
+		if ( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
 			$newClaims = $this->addClaim( $claims, $summary );
 		} else {
 			$newClaims = $this->setClaim( $claims, $summary );

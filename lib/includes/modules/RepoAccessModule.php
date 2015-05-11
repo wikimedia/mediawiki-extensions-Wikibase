@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use ResourceLoaderContext;
 use ResourceLoaderModule;
 use Xml;
@@ -50,4 +51,5 @@ class RepoAccessModule extends ResourceLoaderModule {
 
 		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbRepo', $wbRepo ) );
 	}
+
 }

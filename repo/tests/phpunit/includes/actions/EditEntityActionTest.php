@@ -858,4 +858,5 @@ class EditEntityActionTest extends ActionTestCase {
 		 $entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 		 return $entityNamespaceLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
 	}
+
 }
