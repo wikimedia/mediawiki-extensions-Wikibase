@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_7937d4fc",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.itemview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T10:45:06Z",
+      "side": 0,
+      "message": "Huh, what? Is the presence of this property a mistake?",
+      "revId": "405b301e755ba686cdcbb29c3e12812aa96e0af8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f963c407",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.labelview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T10:45:06Z",
+      "side": 0,
+      "message": "I double checked and it really looks like this is unused.",
+      "revId": "405b301e755ba686cdcbb29c3e12812aa96e0af8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_39462c81",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T10:45:06Z",
+      "side": 0,
+      "message": "Actually a bug. Good catch.",
+      "revId": "405b301e755ba686cdcbb29c3e12812aa96e0af8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
