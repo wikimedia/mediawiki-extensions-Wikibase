@@ -93,7 +93,7 @@ class DataUpdateHookHandlers {
 		$title = $article->getTitle();
 
 		$handler = self::newFromGlobalState();
-		$handler->doArticleDeleteComplete( $title->getNamespace(), $id );
+		$handler->doArticleDeleteComplete( $title->getNamespace(), $id, $logEntry->getTimestamp() );
 	}
 
 	public function __construct(
@@ -106,7 +106,8 @@ class DataUpdateHookHandlers {
 	}
 
 	/**
-	 * Hook run after a new revision was stored
+	 * Hook run after a new revision was stored.
+	 * Implemented to update usage tracking information via UsageUpdater.
 	 *
 	 * @param WikiPage $page The WikiPage object managing the edit
 	 * @param object $editInfo The current edit info object.
@@ -123,30 +124,37 @@ class DataUpdateHookHandlers {
 
 		$usageAcc = new ParserOutputUsageAccumulator( $editInfo->output );
 
-		$this->usageUpdater->updateUsageForPage(
+		// Add or touch any usages present in the new revision
+		$this->usageUpdater->addUsagesForPage(
 			$title->getArticleId(),
 			$usageAcc->getUsages(),
+			$page->getTouched()
+		);
+
+		// Prune any usages older than the new revision's timestamp.
+		// NOTE: only prune after adding the new updates, to avoid unsubscribing and then
+		// immediately re-subscribing to the used entities.
+		$this->usageUpdater->pruneUsagesForPage(
+			$title->getArticleId(),
 			$page->getTouched()
 		);
 	}
 
 	/**
 	 * Hook run after a page was deleted.
+	 * Implemented to prune usage tracking information via UsageUpdater.
 	 *
 	 * @param int $namespace
 	 * @param int $pageId
+	 * @param string $timestamp
 	 */
-	public function doArticleDeleteComplete( $namespace, $pageId ) {
+	public function doArticleDeleteComplete( $namespace, $pageId, $timestamp ) {
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $namespace ) ) {
 			// shorten out
 			return;
 		}
 
-		$this->usageUpdater->updateUsageForPage(
-			$pageId,
-			array(),
-			false
-		);
+		$this->usageUpdater->pruneUsagesForPage( $pageId, $timestamp );
 	}
 
 }
