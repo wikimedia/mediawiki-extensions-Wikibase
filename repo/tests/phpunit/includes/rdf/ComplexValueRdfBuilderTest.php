@@ -55,7 +55,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param EntityId[] &$mentioned receives the IDs of any mentioned entities.
-	 * @param string[] $valuesSeen A list of value hashes that should be considered "already seen".
+	 * @param DedupeBag|null $bag A list of value hashes that should be considered "already seen".
 	 *
 	 * @return ComplexValueRdfBuilder
 	 */

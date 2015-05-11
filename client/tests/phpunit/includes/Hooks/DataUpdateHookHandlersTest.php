@@ -44,7 +44,6 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @param Title $title
 	 * @param array[]|null $expectedUsages
-	 * @param string $expectedTouched timestamp
 	 *
 	 * @return UsageUpdater
 	 */

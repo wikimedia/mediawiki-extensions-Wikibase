@@ -126,11 +126,6 @@ class EntityIdHtmlLinkFormatterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider formatProvider
-	 *
-	 * @param string $expectedRegex
-	 * @param bool $lookupLabel
-	 * @param bool $hasLabel
-	 * @param bool $exists
 	 */
 	public function testFormat( $expectedRegex, $hasLabel = true, $exists = true ) {
 		$entityIdHtmlLinkFormatter = $this->getFormatter( $hasLabel, $exists );
@@ -189,9 +184,6 @@ class EntityIdHtmlLinkFormatterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider formatProvider_fallback
-	 *
-	 * @param string $expectedRegex
-	 * @param TermFallback $term
 	 */
 	public function testFormat_fallback( $expectedRegex, $term ) {
 		$entityIdHtmlLinkFormatter = $this->getFormatter( true, true, $term );

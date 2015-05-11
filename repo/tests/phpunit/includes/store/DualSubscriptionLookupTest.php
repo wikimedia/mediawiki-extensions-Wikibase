@@ -22,6 +22,8 @@ use Wikibase\Store\SubscriptionLookup;
 class DualSubscriptionLookupTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @param EntityId[] $subscriptions
+	 *
 	 * @return SubscriptionLookup
 	 */
 	private function getSubscriptionLookup( array $subscriptions ) {
