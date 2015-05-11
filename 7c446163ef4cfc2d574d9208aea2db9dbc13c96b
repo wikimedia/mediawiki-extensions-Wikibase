@@ -244,6 +244,24 @@
       "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f293d658",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T19:58:15Z",
+      "side": 1,
+      "message": "And the Language objects are not languages either. So we should call them $languageRepresentationObject.",
+      "parentUuid": "0ed113e2_8fcb4320",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
