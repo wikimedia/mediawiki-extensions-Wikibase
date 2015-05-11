@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EscapingEntityIdFormatter;
 
 /**
- * @covers Wikibase\Lib\EscapingValueFormatter
+ * @covers Wikibase\Lib\EscapingEntityIdFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions

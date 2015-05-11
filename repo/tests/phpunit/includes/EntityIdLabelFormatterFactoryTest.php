@@ -7,7 +7,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntityIdLabelFormatterFactory;
 
 /**
- * @covers Wikibase\Repo\EntityIdHtmlLinkFormatterFactory
+ * @covers Wikibase\Repo\EntityIdLabelFormatterFactory
  *
  * @group ValueFormatters
  * @group WikibaseLib

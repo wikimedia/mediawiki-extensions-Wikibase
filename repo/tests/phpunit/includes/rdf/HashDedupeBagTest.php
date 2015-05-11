@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\HashDedupeBag;
 
 /**
- * @covers Wikibase\Rdf\HashDedupeBagTest
+ * @covers Wikibase\Rdf\HashDedupeBag
  *
  * @group Wikibase
  * @group WikibaseRepo
