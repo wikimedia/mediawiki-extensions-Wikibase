@@ -58,11 +58,11 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 * @see UsageLookup::getUsagesForPage
 	 *
 	 * @param int $pageId
+	 * @param string $touchedSince
 	 *
 	 * @return EntityUsage[]
-	 * @throws UsageTrackerException
 	 */
-	public function getUsagesForPage( $pageId ) {
+	public function getUsagesForPage( $pageId, $touchedSince ) {
 		$usages = array();
 
 		$id = $this->siteLinkLookup->getItemIdForLink( $this->clientSiteId, $pageId );
