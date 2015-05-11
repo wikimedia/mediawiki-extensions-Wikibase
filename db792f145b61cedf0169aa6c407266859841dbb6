@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_8fc58666",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1357
+      },
+      "writtenOn": "2015-05-11T14:28:13Z",
+      "side": 1,
+      "message": "It\u0027s a bad idea for performance purposes to make the JS top-loaded when it\u0027s unnecessary. Maybe the CSS doesn\u0027t need to be top-loaded either, but it was up until now, which is why I\u0027m defining it as such, to minimize the chances of a breakage. If both JS and CSS can use the bottom position, then sure, they can be in the same module. But I\u0027m letting each extension maintainer figure out if the styles added via addModuleStyles can be moved to the bottom or not (which in itself needs Ie4287e17d6f298cc63f42f257b1f67ee36961b77 to truly load at the bottom of the page).",
+      "parentUuid": "0ed113e2_ef10d254",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_cfb70e34",
         "filename": "view/resources/jquery/wikibase/resources.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-11T14:00:19Z",
       "side": 1,
       "message": "Please replace this with a dependency on the CSS-only module below.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8f93465a",
+        "filename": "view/resources/jquery/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1357
+      },
+      "writtenOn": "2015-05-11T14:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_cfb70e34",
       "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_2f849a0e",
+        "filename": "view/resources/jquery/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1357
+      },
+      "writtenOn": "2015-05-11T14:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_2f7eda67",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_8fa6e60b",
         "filename": "view/resources/jquery/wikibase/resources.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-05-11T14:00:19Z",
       "side": 1,
       "message": "Since this contains only the RankSelector CSS I recommend to call this module \"jquery.wikibase.statementview.RankSelector.styles\".",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4f89de25",
+        "filename": "view/resources/jquery/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1357
+      },
+      "writtenOn": "2015-05-11T14:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_8fa6e60b",
       "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_ef81b2fd",
+        "filename": "view/resources/jquery/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1357
+      },
+      "writtenOn": "2015-05-11T14:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_8f77c69a",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_cf8e2e7c",
         "filename": "view/resources/jquery/wikibase/toolbar/resources.php",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2015-05-11T14:00:19Z",
       "side": 1,
       "message": "As in the other file, please replace this with a dependency.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_afc96a7d",
+        "filename": "view/resources/jquery/wikibase/toolbar/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1357
+      },
+      "writtenOn": "2015-05-11T14:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_cf8e2e7c",
       "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_cfc62e6b",
+        "filename": "view/resources/jquery/wikibase/toolbar/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1357
+      },
+      "writtenOn": "2015-05-11T14:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_6fef021c",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_2ff57ae9",
         "filename": "view/resources/wikibase/resources.php",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2015-05-11T14:00:19Z",
       "side": 1,
       "message": "This does not belong here. Please apply this change to /core/resources/Resources.php. And do the same there: introduce a new \"jquery.ui.core.styles\" module and use that as a dependency in the \"jquery.ui.core\" module.",
+      "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8fdee642",
+        "filename": "view/resources/wikibase/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1357
+      },
+      "writtenOn": "2015-05-11T14:28:13Z",
+      "side": 1,
+      "message": "Moved to Ie4287e17d6f298cc63f42f257b1f67ee36961b77",
+      "parentUuid": "0ed113e2_2ff57ae9",
       "revId": "db792f145b61cedf0169aa6c407266859841dbb6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
