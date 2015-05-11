@@ -19,12 +19,20 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 * @param string $touched|false
-	 *
-	 * @return EntityUsage[]
+	 * @param string $touched
 	 */
 	public function trackUsedEntities( $pageId, array $usages, $touched ) {
-		return array();
+		// no-op
+	}
+
+	/**
+	 * @see UsageTracker::pruneStaleUsages
+	 *
+	 * @param int $pageId
+	 * @param string $lastUpdatedBefore
+	 */
+	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
+		// no-op
 	}
 
 	/**
@@ -40,10 +48,11 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 * @see UsageTracker::getUsagesForPage
 	 *
 	 * @param int $pageId
+	 * @param string $touchedSince
 	 *
 	 * @return EntityUsage[]
 	 */
-	public function getUsagesForPage( $pageId ) {
+	public function getUsagesForPage( $pageId, $touchedSince = '00000000000000' ) {
 		return array();
 	}
 

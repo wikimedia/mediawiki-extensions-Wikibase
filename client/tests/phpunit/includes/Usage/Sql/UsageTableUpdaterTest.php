@@ -66,13 +66,13 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityUsage[] $usages
 	 * @param int $pageId
-	 * @param string|null $touched timestamp
+	 * @param EntityUsage[] $usages
+	 * @param string $touched timestamp
 	 *
-	 * @return \array[]
+	 * @return array[]
 	 */
-	private function getUsageRows( array $usages, $pageId = 0, $touched = null ) {
+	private function getUsageRows( $pageId, array $usages, $touched ) {
 		$rows = array();
 
 		foreach ( $usages as $key => $usage ) {
@@ -124,29 +124,84 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateUsage() {
-		$touched = wfTimestamp( TS_MW );
+		$t1 = '20150111000000';
+		$t2 = '20150222000000';
 
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
 
-		$usages = array(
+		$usagesT1 = array(
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
+		);
+
+		$usagesT2 = array(
+			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$rows = $this->getUsageRows( $usages, 23, $touched );
+		$tableUpdater = $this->getUsageTableUpdater();
+
+		// adding usages should put them into the database
+		$tableUpdater->updateUsage( 23, array(), $usagesT1, $t1 );
+
+		$rowsT1 = $this->getUsageRows( 23, $usagesT1, $t1 );
+		$this->assertUsageTableContains( $rowsT1 );
+
+		// adding usages that were already tracked should updated the timestamp
+		$tableUpdater->updateUsage( 23, $usagesT1, $usagesT2, $t2 );
+
+		$rowsT2 = $this->getUsageRows( 23, $usagesT2, $t2 );
+		$rowsT1_stale = $this->getUsageRows( 23, array_diff( $usagesT1, $usagesT2 ), $t1 );
+
+		$this->assertUsageTableContains( $rowsT1_stale );
+		$this->assertUsageTableContains( $rowsT2 );
+
+		// adding nothing should change nothing
+		$tableUpdater->updateUsage( 23, $usagesT2, array(), $t2 );
+
+		$this->assertUsageTableContains( $rowsT1_stale );
+		$this->assertUsageTableContains( $rowsT2 );
+	}
+
+	public function testPruneStaleUsages() {
+		$t1 = '20150111000000';
+		$t2 = '20150222000000';
+
+		$q3 = new ItemId( 'Q3' );
+		$q4 = new ItemId( 'Q4' );
+		$q5 = new ItemId( 'Q5' );
+
+		$usagesT1 = array(
+			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
+		);
+
+		$usagesT2 = array(
+			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
+			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
+		);
 
 		$tableUpdater = $this->getUsageTableUpdater();
-		$tableUpdater->updateUsage( 23, array(), $usages, $touched );
 
-		$this->assertUsageTableContains( $rows );
+		// init database: $usagesT2 get timestamp $t2,
+		// array_diff( $usagesT1, $usagesT2 ) get timestamp $t1.
+		$tableUpdater->updateUsage( 23, array(), $usagesT1, $t1 );
+		$tableUpdater->updateUsage( 23, $usagesT1, $usagesT2, $t2 );
 
-		$tableUpdater->updateUsage( 23, $usages, array(), $touched );
+		// pruning should remove entries with a timestamp < $t2
+		$tableUpdater->pruneStaleUsages( 23, $t2 );
 
-		$this->assertUsageTableDoesNotContain( $rows );
+		$rowsT1_stale = $this->getUsageRows( 23, array_diff( $usagesT1, $usagesT2 ), $t1 );
+		$rowsT2 = $this->getUsageRows( 23, $usagesT2, $t2 );
+
+		$this->assertUsageTableDoesNotContain( $rowsT1_stale );
+		$this->assertUsageTableContains( $rowsT2 );
 	}
 
 	public function testRemoveEntities() {
@@ -166,7 +221,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		$tableUpdater = $this->getUsageTableUpdater();
 		$tableUpdater->updateUsage( 23, array(), $usages, $touched );
 
-		$rows = $this->getUsageRows( $usages, 23 );
+		$rows = $this->getUsageRows( 23, $usages, $touched );
 		$itemsToRemove = array( $q4, $q5 );
 
 		$retainedRows = array_intersect_key( $rows, array( 'Q3#S' => 1, 'Q3#L' => 1 ) );
@@ -179,26 +234,29 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testTrackUsedEntities_batching() {
-		$touched = wfTimestamp( TS_MW );
+		$t1 = '20150111000000';
+		$t2 = '20150222000000';
+
 		$usages = $this->makeUsages( 10 );
-		$rows = $this->getUsageRows( $usages, 7, $touched );
+		$rowsT1 = $this->getUsageRows( 7, $usages, $t1 );
+		$rowsT2 = $this->getUsageRows( 7, $usages, $t2 );
 
 		$tableUpdater = $this->getUsageTableUpdater( 3 );
 
 		// inserting more rows than fit into a single batch
-		$tableUpdater->updateUsage( 7, array(), $usages, $touched );
-		$this->assertUsageTableContains( $rows );
+		$tableUpdater->updateUsage( 7, array(), $usages, $t1 );
+		$this->assertUsageTableContains( $rowsT1 );
 
-		// removing more rows than fit into a single batch
-		$tableUpdater->updateUsage( 7, $usages, array(), $touched );
-		$this->assertUsageTableDoesNotContain( $rows );
+		// touching more rows than fit into a single batch
+		$tableUpdater->updateUsage( 7, $usages, $usages, $t2 );
+		$this->assertUsageTableContains( $rowsT2 );
 	}
 
 	public function testRemoveEntities_batching() {
 		$touched = wfTimestamp( TS_MW );
 		$usages = $this->makeUsages( 10 );
-		$rows7 = $this->getUsageRows( $usages, 7, $touched );
-		$rows8 = $this->getUsageRows( $usages, 8, $touched );
+		$rows7 = $this->getUsageRows( 7, $usages, $touched );
+		$rows8 = $this->getUsageRows( 8, $usages, $touched );
 
 		$tableUpdater = $this->getUsageTableUpdater( 3 );
 		$tableUpdater->updateUsage( 7, array(), $usages, $touched );
@@ -219,7 +277,8 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		$db = wfGetDB( DB_SLAVE );
 
 		foreach ( $rows as $row ) {
-			$this->assertTrue( $this->rowExists( $db, $row ), print_r( $row, true ) );
+			$name = preg_replace( '/\s+/s', ' ', print_r( $row, true ) );
+			$this->assertTrue( $this->rowExists( $db, $row ), "Missing row: $name" );
 		}
 	}
 
@@ -230,8 +289,8 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		$db = wfGetDB( DB_SLAVE );
 
 		foreach ( $rows as $row ) {
-			$name = preg_replace( '/[\r\n]/m', ' ', print_r( $row, true ) );
-			$this->assertFalse( $this->rowExists( $db, $row ), $name );
+			$name = preg_replace( '/\s+/s', ' ', print_r( $row, true ) );
+			$this->assertFalse( $this->rowExists( $db, $row ), "Unexpected row: $name" );
 		}
 	}
 

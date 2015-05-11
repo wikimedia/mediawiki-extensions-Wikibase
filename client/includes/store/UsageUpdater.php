@@ -63,24 +63,28 @@ class UsageUpdater {
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of EntityUsage objects.
 	 * See docs/usagetracking.wiki for details.
-	 * @param string|false $touched timestamp (or optionally false, if $usages is empty)
+	 * @param string $touched timestamp
 	 *
 	 * @see UsageTracker::trackUsedEntities
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function updateUsageForPage( $pageId, array $usages, $touched ) {
+	public function resetUsagesForPage( $pageId, array $usages, $touched ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int!' );
 		}
 
-		if ( !is_string( $touched ) && !empty( $usages ) ) {
-			throw new InvalidArgumentException( '$touched must be a string if $usages isn\'t empty!' );
+		if ( !is_string( $touched ) || $touched === '' ) {
+			throw new InvalidArgumentException( '$touched must be a timestamp string!' );
 		}
 
-		$oldUsage = $this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
+		$oldUsage = $this->usageLookup->getUsagesForPage( $pageId, '' );
+		$this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
 
-		$currentlyUsedEntities = $this->getEntityIds( $usages );
+		$this->usageTracker->pruneStaleUsages( $pageId, $touched );
+		$newUsage = $this->usageLookup->getUsagesForPage( $pageId, '' );
+
+		$currentlyUsedEntities = $this->getEntityIds( $newUsage );
 		$previouslyUsedEntities = $this->getEntityIds( $oldUsage );
 
 		$added = array_diff_key( $currentlyUsedEntities, $previouslyUsedEntities );

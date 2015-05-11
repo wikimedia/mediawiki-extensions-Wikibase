@@ -93,7 +93,7 @@ class DataUpdateHookHandlers {
 		$title = $article->getTitle();
 
 		$handler = self::newFromGlobalState();
-		$handler->doArticleDeleteComplete( $title->getNamespace(), $id );
+		$handler->doArticleDeleteComplete( $title->getNamespace(), $id, $logEntry->getTimestamp() );
 	}
 
 	public function __construct(
@@ -123,7 +123,7 @@ class DataUpdateHookHandlers {
 
 		$usageAcc = new ParserOutputUsageAccumulator( $editInfo->output );
 
-		$this->usageUpdater->updateUsageForPage(
+		$this->usageUpdater->resetUsagesForPage(
 			$title->getArticleId(),
 			$usageAcc->getUsages(),
 			$page->getTouched()
@@ -135,17 +135,18 @@ class DataUpdateHookHandlers {
 	 *
 	 * @param int $namespace
 	 * @param int $pageId
+	 * @param string $timestamp
 	 */
-	public function doArticleDeleteComplete( $namespace, $pageId ) {
+	public function doArticleDeleteComplete( $namespace, $pageId, $timestamp ) {
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $namespace ) ) {
 			// shorten out
 			return;
 		}
 
-		$this->usageUpdater->updateUsageForPage(
+		$this->usageUpdater->resetUsagesForPage(
 			$pageId,
 			array(),
-			false
+			$timestamp
 		);
 	}
 
