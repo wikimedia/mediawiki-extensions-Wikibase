@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_6c6dcd94",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:29:26Z",
+      "side": 0,
+      "message": "You can\u0027t remove this, this is used above.",
+      "revId": "69a548293f5d0a8a7c8c6fd00d65822890b5136f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0c6681b8",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:29:26Z",
+      "side": 0,
+      "message": "This method is still there but now untested.",
+      "revId": "69a548293f5d0a8a7c8c6fd00d65822890b5136f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
