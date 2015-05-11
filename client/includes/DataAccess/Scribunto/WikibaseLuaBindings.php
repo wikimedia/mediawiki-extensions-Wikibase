@@ -161,6 +161,33 @@ class WikibaseLuaBindings {
 	 * @param string $prefixedEntityId
 	 *
 	 * @since 0.5
+	 * @return string|null Null if entity couldn't be found/ no description present
+	 */
+	public function getDescription( $prefixedEntityId ) {
+		try {
+			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
+		} catch( EntityIdParsingException $e ) {
+			return null;
+		}
+
+		try {
+			$term = $this->labelDescriptionLookup->getDescription( $entityId );
+		} catch ( StorageException $ex ) {
+			return null;
+		} catch ( OutOfBoundsException $ex ) {
+			return null;
+		}
+
+		// XXX: This. Sucks. A lot.
+		// Also notes about language fallbacks from getLabel apply
+		$this->usageAccumulator->addOtherUsage( $entityId );
+		return $term->getText();
+	}
+
+	/**
+	 * @param string $prefixedEntityId
+	 *
+	 * @since 0.5
 	 * @return string|null Null if entity couldn't be found/ no label present
 	 */
 	public function getSiteLinkPageName( $prefixedEntityId ) {

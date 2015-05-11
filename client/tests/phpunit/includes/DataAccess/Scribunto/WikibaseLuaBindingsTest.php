@@ -68,6 +68,10 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'xy', 'LabelString' ) ) );
 
+		$labelDescriptionLookup->expects( $this->any() )
+			->method( 'getDescription' )
+			->will( $this->returnValue( new Term( 'xy', 'DescriptionString' ) ) );
+
 		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),
 			$entityLookup ?: new MockRepository(),
@@ -127,6 +131,38 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseLuaBindings->getLabel( $itemId->getSerialization() );
 
 		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::LABEL_USAGE ), 'label usage' );
+		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ), 'title usage' );
+		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ), 'all usage' );
+	}
+
+	public function getDescriptionProvider() {
+		return array(
+			array( 'DescriptionString', 'Q123' ),
+			array( null, 'DoesntExist' )
+		);
+	}
+
+	/**
+	 * @dataProvider getDescriptionProvider
+	 *
+	 * @param string $expected
+	 * @param string $itemId
+	 */
+	public function testGetDescription( $expected, $itemId ) {
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings();
+
+		$this->assertSame( $expected, $wikibaseLuaBindings->getDescription( $itemId ) );
+	}
+
+	public function testGetDescription_usage() {
+		$usages = new HashUsageAccumulator();
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( null, $usages );
+
+		$itemId = new ItemId( 'Q7' );
+		$wikibaseLuaBindings->getDescription( $itemId->getSerialization() );
+
+		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::OTHER_USAGE ), 'other usage' );
+		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::LABEL_USAGE ), 'label usage' );
 		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ), 'title usage' );
 		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ), 'all usage' );
 	}
