@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_ef1d3215",
+        "filename": "lib/includes/ClaimGuidValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:20:49Z",
+      "side": 1,
+      "message": "Are you sure /i this faster than explicit sets of characters? At least when utf8 is involved, case-insensitive matching can be a lot more expensive.",
+      "revId": "c2482281bfee8377fbd5dc4ec4aeffce965fef38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_af13aa04",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:20:49Z",
+      "side": 1,
+      "message": "/i isn\u0027t needed here, is it?",
+      "revId": "c2482281bfee8377fbd5dc4ec4aeffce965fef38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_cf106efa",
+        "filename": "repo/includes/LinkedData/HttpAcceptParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-11T14:20:49Z",
+      "side": 1,
+      "message": "Is \\d actually faster in any way than [0-9]? I\u0027d expect it to be exactly the same, except that [0-9] is more readable and portable...",
+      "revId": "c2482281bfee8377fbd5dc4ec4aeffce965fef38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
