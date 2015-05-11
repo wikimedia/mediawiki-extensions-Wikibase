@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_8a0814de",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.itemview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T16:00:14Z",
+      "side": 0,
+      "message": "I\u0027m afraid it\u0027s either you or me confusing something here. This constructs a sitelinkgrouplistview. I can\u0027t think of a reason why this needs an entityId. I think this is a bug and should have it\u0027s own patch.",
+      "parentUuid": "0ed113e2_aabf18f6",
+      "revId": "405b301e755ba686cdcbb29c3e12812aa96e0af8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f963c407",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.labelview.js",
         "patchSetId": 2
