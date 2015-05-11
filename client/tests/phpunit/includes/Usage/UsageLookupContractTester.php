@@ -2,16 +2,16 @@
 
 namespace Wikibase\Client\Tests\Usage;
 
+use InvalidArgumentException;
 use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * Helper class for unit tests for UsageLookup implementations, providing
- * generic tests for the interface's contract.
+ * Helper class for testing UsageLookup implementations,
+ * providing generic tests for the interface's contract.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
@@ -24,17 +24,25 @@ class UsageLookupContractTester {
 	private $lookup;
 
 	/**
-	 * @var UsageTracker
+	 * @var callable function( $pageId, EntityUsage[] $usages, $timestamp )
 	 */
-	private $tracker;
+	private $putUsagesCallback;
 
 	/**
 	 * @param UsageLookup $lookup The lookup under test
-	 * @param UsageTracker $tracker A tracker to supply data to the lookup.
+	 * @param callable $putUsagesCallback function( $pageId, EntityUsage[] $usages, $timestamp )
 	 */
-	public function __construct( UsageLookup $lookup, UsageTracker $tracker ) {
+	public function __construct( UsageLookup $lookup, $putUsagesCallback ) {
+		if ( !is_callable( $putUsagesCallback ) ) {
+			throw new InvalidArgumentException( '$putUsagesCallback must be callable' );
+		}
+
 		$this->lookup = $lookup;
-		$this->tracker = $tracker;
+		$this->putUsagesCallback = $putUsagesCallback;
+	}
+
+	private function putUsages( $pageId, array $usages, $timestamp ) {
+		call_user_func( $this->putUsagesCallback, $pageId, $usages, $timestamp );
 	}
 
 	public function testGetUsageForPage() {
@@ -47,7 +55,7 @@ class UsageLookupContractTester {
 
 		$usages = array( $u3i, $u3l, $u4l );
 
-		$this->tracker->trackUsedEntities( 23, $usages, '20150102030405' );
+		$this->putUsages( 23, $usages, '20150102030405' );
 
 		Assert::assertEmpty( $this->lookup->getUsagesForPage( 24 ) );
 
@@ -58,7 +66,7 @@ class UsageLookupContractTester {
 		$expectedUsageStrings = $this->getUsageStrings( $usages );
 		Assert::assertEquals( $expectedUsageStrings, $actualUsageStrings );
 
-		$this->tracker->trackUsedEntities( 23, array(), '20150102030405' );
+		$this->putUsages( 23, array(), '20150102030405' );
 	}
 
 	public function testGetPagesUsing() {
@@ -71,8 +79,8 @@ class UsageLookupContractTester {
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE );
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
-		$this->tracker->trackUsedEntities( 23, array( $u3s, $u3l, $u4l ), '20150102030405' );
-		$this->tracker->trackUsedEntities( 42, array( $u4l, $u4t ), '20150102030405' );
+		$this->putUsages( 23, array( $u3s, $u3l, $u4l ), '20150102030405' );
+		$this->putUsages( 42, array( $u4l, $u4t ), '20150102030405' );
 
 		Assert::assertEmpty(
 			iterator_to_array( $this->lookup->getPagesUsing( array( $q6 ) ) )
@@ -108,7 +116,7 @@ class UsageLookupContractTester {
 			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
 
-		$this->tracker->trackUsedEntities( 23, array(), '20150102030405' );
+		$this->putUsages( 23, array(), '20150102030405' );
 	}
 
 	/**
@@ -143,7 +151,7 @@ class UsageLookupContractTester {
 
 		$usages = array( $u3i, $u3l, $u4l );
 
-		$this->tracker->trackUsedEntities( 23, $usages, '20150102030405' );
+		$this->putUsages( 23, $usages, '20150102030405' );
 
 		Assert::assertEmpty( $this->lookup->getUnusedEntities( array( $q4 ) ), 'Q4 should not be unused' );
 
