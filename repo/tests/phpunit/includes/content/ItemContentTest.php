@@ -38,10 +38,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ItemContentTest extends EntityContentTest {
 
-	protected function setUp() {
-		parent::setUp();
-	}
-
 	/**
 	 * @return ItemId
 	 */
