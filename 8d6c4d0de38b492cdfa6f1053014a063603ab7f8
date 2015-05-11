@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_cad13cfd",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T16:26:05Z",
+      "side": 1,
+      "message": "Look at the tests. What you are suggesting must break at least 1 test and therefor is impossible.",
+      "parentUuid": "0ed113e2_6f0382c2",
+      "revId": "8d6c4d0de38b492cdfa6f1053014a063603ab7f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_cf62aea2",
         "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-11T14:10:58Z",
       "side": 1,
       "message": "If the class is correct, why check the entity type string? the type string is really only relevant when representing the entity externally. In PHP, we should care about classes and interfaces.",
+      "revId": "8d6c4d0de38b492cdfa6f1053014a063603ab7f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2af80879",
+        "filename": "repo/includes/content/DeferredDecodingEntityHolder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T16:26:05Z",
+      "side": 1,
+      "message": "Why is it passed to the constructor then? Again, this must be done to make the tests pass. I\u0027m not saying there is no other way of fixing this class but simply removing code is no solution.",
+      "parentUuid": "0ed113e2_cf62aea2",
       "revId": "8d6c4d0de38b492cdfa6f1053014a063603ab7f8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
