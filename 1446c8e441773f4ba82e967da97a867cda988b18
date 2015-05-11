@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_2c2b4579",
+        "filename": "client/includes/Hooks/ParserAfterParseHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:13:07Z",
+      "side": 0,
+      "message": "Why not keep this?",
+      "revId": "1446c8e441773f4ba82e967da97a867cda988b18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

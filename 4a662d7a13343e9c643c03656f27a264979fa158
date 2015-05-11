@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_6c35cdd5",
+        "filename": "client/includes/Hooks/ParserAfterParseHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:13:07Z",
+      "side": 1,
+      "message": "-4",
+      "revId": "4a662d7a13343e9c643c03656f27a264979fa158",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_acac15ec",
+        "filename": "client/includes/Hooks/ParserAfterParseHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T17:13:07Z",
+      "side": 1,
+      "message": "This will be reported as a bug and was already reported as such in the past, as far as I\u0027m aware of.",
+      "revId": "4a662d7a13343e9c643c03656f27a264979fa158",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
