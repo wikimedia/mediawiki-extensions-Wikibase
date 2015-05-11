@@ -69,7 +69,9 @@ class UsageUpdater {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function updateUsageForPage( $pageId, array $usages, $touched ) {
+	public function resetUsagesForPage( $pageId, array $usages, $touched ) {
+		//FIXME: TEST ME!
+
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int!' );
 		}
@@ -78,7 +80,9 @@ class UsageUpdater {
 			throw new InvalidArgumentException( '$touched must be a string if $usages isn\'t empty!' );
 		}
 
-		$oldUsage = $this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
+		$oldUsage = $this->usageLookup->getUsagesForPage( $pageId, '' );
+		$this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
+		$this->usageTracker->pruneStaleUsages( $pageId, $touched );
 
 		$currentlyUsedEntities = $this->getEntityIds( $usages );
 		$previouslyUsedEntities = $this->getEntityIds( $oldUsage );
@@ -92,6 +96,33 @@ class UsageUpdater {
 		}
 
 		$this->unsubscribeUnused( $removed );
+	}
+
+	/**
+	 * Updates entity usage information for the given page, and automatically adjusts
+	 * any subscriptions based on that usage.
+	 *
+	 * @param int $pageId The ID of the page the entities are used on.
+	 * @param EntityUsage[] $usages A list of EntityUsage objects.
+	 * See docs/usagetracking.wiki for details.
+	 * @param string|false $touched timestamp (or optionally false, if $usages is empty)
+	 *
+	 * @see UsageTracker::trackUsedEntities
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function addUsagesForPage( $pageId, array $usages, $touched ) {
+		//FIXME: TEST ME!
+
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int!' );
+		}
+
+		if ( !is_string( $touched ) && !empty( $usages ) ) {
+			throw new InvalidArgumentException( '$touched must be a string if $usages isn\'t empty!' );
+		}
+
+		$this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
 	}
 
 	/**

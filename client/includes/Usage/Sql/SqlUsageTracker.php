@@ -100,7 +100,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityUsage[] $usages
 	 * @param string|false $touched
 	 *
-	 * @return EntityUsage[]
 	 * @throws InvalidArgumentException
 	 * @throws UsageTrackerException
 	 */
@@ -116,13 +115,46 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
 
 		try {
-			$oldUsages = $this->queryUsagesForPage( $db, $pageId );
-
+			$oldUsages = $this->queryUsagesForPage( $db, $pageId, '' );
 			$tableUpdater = $this->newTableUpdater( $db );
 			$tableUpdater->updateUsage( $pageId, $oldUsages, $usages, $touched );
 
 			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
 			return $oldUsages;
+		} catch ( Exception $ex ) {
+			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
+
+			if ( $ex instanceof DBError ) {
+				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
+			} else {
+				throw $ex;
+			}
+		}
+	}
+
+	/**
+	 * @see UsageTracker::pruneStaleUsages
+	 *
+	 * @param int $pageId
+	 * @param string $lastUpdatedBefore timestamp
+	 *
+	 * @throws Exception
+	 * @throws UsageTrackerException
+	 */
+	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
+		//FIXME: test me!
+
+		if ( empty( $lastUpdatedBefore ) ) {
+			return;
+		}
+
+		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
+
+		try {
+			$tableUpdater = $this->newTableUpdater( $db );
+			$tableUpdater->pruneStaleUsages( $pageId, $lastUpdatedBefore );
+
+			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
 		} catch ( Exception $ex ) {
 			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
 
@@ -171,14 +203,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @see UsageLookup::getUsagesForPage
 	 *
 	 * @param int $pageId
+	 * @param string $touchedSince timestamp
 	 *
 	 * @return EntityUsage[]
-	 * @throws UsageTrackerException
 	 */
-	public function getUsagesForPage( $pageId ) {
+	public function getUsagesForPage( $pageId, $touchedSince ) {
 		$db = $this->connectionManager->getReadConnection();
 
-		$usages = $this->queryUsagesForPage( $db, $pageId );
+		$usages = $this->queryUsagesForPage( $db, $pageId, $touchedSince );
 
 		$this->connectionManager->releaseConnection( $db );
 
@@ -188,19 +220,24 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @param DatabaseBase $db
 	 * @param int $pageId
+	 * @param string $touchedSince
 	 *
-	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
-	private function queryUsagesForPage( DatabaseBase $db, $pageId ) {
+	private function queryUsagesForPage( DatabaseBase $db, $pageId, $touchedSince ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
+		$touchedSince = wfTimestamp( TS_MW, $touchedSince );
+
 		$res = $db->select(
 			'wbc_entity_usage',
 			array( 'eu_aspect', 'eu_entity_id' ),
-			array( 'eu_page_id' => $pageId ),
+			array(
+				'eu_page_id' => $pageId,
+				'eu_touched >= ' . $db->addQuotes( $touchedSince )
+			),
 			__METHOD__
 		);
 

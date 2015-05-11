@@ -19,11 +19,13 @@ interface UsageLookup {
 	 * Get the entities used on the given page.
 	 *
 	 * @param int $pageId
+	 * @param string $touchedSince Usage entries older than the given
+	 *        timestamp should be ignored.
 	 *
 	 * @return EntityUsage[]
 	 * @throws UsageTrackerException
 	 */
-	public function getUsagesForPage( $pageId );
+	public function getUsagesForPage( $pageId, $touchedSince );
 
 	/**
 	 * Returns the pages that use any of the given entities.
