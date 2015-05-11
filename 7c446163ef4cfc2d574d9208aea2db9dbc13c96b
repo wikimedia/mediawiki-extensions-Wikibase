@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_0f50b35f",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T19:41:36Z",
+      "side": 1,
+      "message": "I suggest to *not* include the dot to save space. There will be a lot of these strings in the database.",
+      "parentUuid": "0ed113e2_2c1fc5bb",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ecb9bdc7",
         "filename": "client/includes/Usage/PageEntityUsages.php",
         "patchSetId": 5
@@ -205,6 +223,24 @@
       "side": 1,
       "message": "But parameters and variables should be named after their function, not their type.",
       "parentUuid": "0ed113e2_ec369d4e",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8fcb4320",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T19:41:36Z",
+      "side": 1,
+      "message": "Yes, and \u0027de\u0027 is not a \"language\", it\u0027s a language code. Naming after the type would be $string.",
+      "parentUuid": "0ed113e2_4c5a4986",
       "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
