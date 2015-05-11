@@ -51,7 +51,7 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 			new ConsistentReadConnectionManager( wfGetLB() )
 		);
 
-		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker );
+		$this->trackerTester = new UsageTrackerContractTester( $this->sqlUsageTracker, $this->sqlUsageTracker );
 		$this->lookupTester = new UsageLookupContractTester( $this->sqlUsageTracker, $this->sqlUsageTracker );
 	}
 
@@ -61,6 +61,10 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 
 	public function testRemoveEntities() {
 		$this->trackerTester->testRemoveEntities();
+	}
+
+	public function testPruneStaleUsages() {
+		$this->trackerTester->testPruneStaleUsages();
 	}
 
 	public function testGetUsageForPage() {

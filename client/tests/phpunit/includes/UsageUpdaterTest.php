@@ -54,12 +54,17 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param EntityUsage[] $usages
 	 * @param EntityId[]|null $unusedEntities
 	 *
 	 * @return UsageLookup
 	 */
-	private function getUsageLookup( array $unusedEntities = null ) {
+	private function getUsageLookup( array $usages, array $unusedEntities = null ) {
 		$mock = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
+
+		$mock->expects( $this->any() )
+			->method( 'getUsagesForPage' )
+			->will( $this->returnValue( $usages ) );
 
 		if ( $unusedEntities === null ) {
 			$mock->expects( $this->never() )
@@ -123,12 +128,12 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 		return new UsageUpdater(
 			'testwiki',
 			$this->getUsageTracker( $oldUsage, $touched ),
-			$this->getUsageLookup( $unusedEntities ),
+			$this->getUsageLookup( $oldUsage, $unusedEntities ),
 			$this->getSubscriptionManager( 'testwiki', $subscribe, $unsubscribe )
 		);
 	}
 
-	public function updateUsageForPageProvider() {
+	public function resetUsagesForPageProvider() {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -174,20 +179,20 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider updateUsageForPageProvider
+	 * @dataProvider resetUsagesForPageProvider
 	 * @param EntityUsage[] $oldUsage
 	 * @param EntityUsage[] $newUsage
 	 * @param EntityId[]|null $unusedEntities
 	 * @param EntityId[] $subscribe
 	 * @param EntityId[] $unsubscribe
 	 */
-	public function testUpdateUsageForPage( $oldUsage, $newUsage, $unusedEntities, $subscribe, $unsubscribe ) {
+	public function testResetUsagesForPage( $oldUsage, $newUsage, $unusedEntities, $subscribe, $unsubscribe ) {
 		$touched = wfTimestamp( TS_MW );
 
 		$updater = $this->getUsageUpdater( $oldUsage, $unusedEntities, $subscribe, $unsubscribe, $touched );
 
 		// assertions are done by the mock double
-		$updater->updateUsageForPage( 23, $newUsage, $touched );
+		$updater->resetUsagesForPage( 23, $newUsage, $touched );
 	}
 
 }
