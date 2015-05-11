@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_8ab9f4c8",
+        "filename": "lib/includes/ClaimGuidValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T16:21:59Z",
+      "side": 1,
+      "message": "UTF8 is not involved, there is no /u.",
+      "parentUuid": "0ed113e2_ef1d3215",
+      "revId": "c2482281bfee8377fbd5dc4ec4aeffce965fef38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_af13aa04",
         "filename": "lib/includes/serializers/SerializationOptions.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_0a9e6458",
+        "filename": "lib/includes/serializers/SerializationOptions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T16:21:59Z",
+      "side": 1,
+      "message": "Correct, but doesn\u0027t hurt to have it.",
+      "parentUuid": "0ed113e2_af13aa04",
+      "revId": "c2482281bfee8377fbd5dc4ec4aeffce965fef38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_cf106efa",
         "filename": "repo/includes/LinkedData/HttpAcceptParser.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-05-11T14:20:49Z",
       "side": 1,
       "message": "Is \\d actually faster in any way than [0-9]? I\u0027d expect it to be exactly the same, except that [0-9] is more readable and portable...",
+      "revId": "c2482281bfee8377fbd5dc4ec4aeffce965fef38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6ab4d0cf",
+        "filename": "repo/includes/LinkedData/HttpAcceptParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-11T16:21:59Z",
+      "side": 1,
+      "message": "Portability of the basic \\d shortcut is pretty much guaranteed.",
+      "parentUuid": "0ed113e2_cf106efa",
       "revId": "c2482281bfee8377fbd5dc4ec4aeffce965fef38",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
