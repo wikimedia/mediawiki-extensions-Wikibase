@@ -11,14 +11,10 @@ local php = mw_interface
 local entity = {}
 local metatable = {}
 local methodtable = {}
+local util = require 'libraryUtil'
+local checkTypeMulti = util.checkTypeMulti
 
 metatable.__index = methodtable
-
-local function verifyStringNumNil( val, name )
-	if val ~= nil and type( val ) ~= 'string' and type( val ) ~= 'number' then
-		error( name .. ' must be either of type string, number or nil' )
-	end
-end
 
 -- Claim ranks (Claim::RANK_* in PHP)
 entity.claimRanks = {
@@ -50,7 +46,7 @@ end
 --
 -- @param langCode
 methodtable.getLabel = function( entity, langCode )
-	verifyStringNumNil( langCode, 'langCode' )
+	checkTypeMulti( 'getLabel', 1, langCode, { 'string', 'number', 'nil' } )
 
 	langCode = langCode or mw.language.getContentLanguage():getCode()
 
@@ -75,7 +71,7 @@ end
 --
 -- @param globalSiteId
 methodtable.getSitelink = function( entity, globalSiteId )
-	verifyStringNumNil( globalSiteId, 'globalSiteId' )
+	checkTypeMulti( 'getSitelink', 1, globalSiteId, { 'string', 'number', 'nil' } )
 
 	if entity.sitelinks == nil then
 		return nil

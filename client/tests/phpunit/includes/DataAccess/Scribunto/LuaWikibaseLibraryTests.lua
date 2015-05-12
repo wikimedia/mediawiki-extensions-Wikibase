@@ -77,7 +77,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.getEntityObject (id must be string)', func = mw.wikibase.getEntityObject,
 	  args = { 123 },
-	  expect = 'id must be either of type string or nil, number given'
+	  expect = "bad argument #1 to 'getEntity' (string or nil expected, got number)"
 	},
 	{ name = 'mw.wikibase.label', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32487' },
@@ -116,14 +116,14 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.renderSnak - (must be table)', func = mw.wikibase.renderSnak,
 	  args = { 'meep' },
-	  expect = 'snakSerialization must be a table, string given'
+	  expect = "bad argument #1 to 'renderSnak' (table expected, got string)"
 	},
 	{ name = 'mw.wikibase.renderSnaks', func = testRenderSnaks, type='ToString',
 	  expect = { 'A qualifier Snak, Moar qualifiers' }
 	},
 	{ name = 'mw.wikibase.renderSnaks - (must be table)', func = mw.wikibase.renderSnaks,
 	  args = { 'meep' },
-	  expect = 'snaksSerialization must be a table, string given'
+	  expect = "bad argument #1 to 'renderSnaks' (table expected, got string)"
 	},
 }
 

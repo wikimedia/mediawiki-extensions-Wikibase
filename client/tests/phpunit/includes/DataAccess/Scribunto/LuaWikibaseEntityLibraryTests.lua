@@ -142,7 +142,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.getLabel 3', func = testGetLabel, type='ToString',
 	  args = { function() end },
-	  expect = 'langCode must be either of type string, number or nil'
+	  expect = "bad argument #1 to 'getLabel' (string, number or nil expected, got function)"
 	},
 	{ name = 'mw.wikibase.entity.getLabel 4 (content language)', func = testGetLabel, type='ToString',
 	  expect = { 'LabelDE' }
@@ -157,7 +157,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.entity.getSitelink 3', func = testGetSitelink, type='ToString',
 	  args = { {} },
-	  expect = 'globalSiteId must be either of type string, number or nil'
+	  expect = "bad argument #1 to 'getSitelink' (string, number or nil expected, got table)"
 	},
 	{ name = 'mw.wikibase.entity.getProperties', func = testGetProperties,
 	  expect = { { 'P4321', 'P321' } }
