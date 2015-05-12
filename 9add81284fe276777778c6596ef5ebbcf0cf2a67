@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_0c80b68c",
+        "filename": "client/includes/Changes/AffectedPagesFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T18:33:51Z",
+      "side": 1,
+      "message": "You are using an array key as an aspect here. I think it\u0027s crucial to know what \"aspect\" that is.",
+      "parentUuid": "0ed113e2_ac42d560",
+      "revId": "9add81284fe276777778c6596ef5ebbcf0cf2a67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ec845dda",
         "filename": "client/includes/Usage/UsageAspectTransformer.php",
         "patchSetId": 4
