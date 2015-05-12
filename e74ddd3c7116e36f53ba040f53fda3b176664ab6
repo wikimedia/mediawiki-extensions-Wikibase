@@ -68,6 +68,23 @@
       "revId": "e74ddd3c7116e36f53ba040f53fda3b176664ab6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_134d39c7",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T12:25:11Z",
+      "side": 1,
+      "message": "I suggest to add font-weight: normal to either this section (only the counter) or the section above (the whole headline). I think this would look better.",
+      "revId": "e74ddd3c7116e36f53ba040f53fda3b176664ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
