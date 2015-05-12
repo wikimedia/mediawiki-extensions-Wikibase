@@ -51,6 +51,24 @@
       "revId": "9add81284fe276777778c6596ef5ebbcf0cf2a67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ac664a4c",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-12T17:48:49Z",
+      "side": 1,
+      "message": "I added a bunch of documentation now to make this easier to follow",
+      "parentUuid": "0ed113e2_ec845dda",
+      "revId": "9add81284fe276777778c6596ef5ebbcf0cf2a67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
