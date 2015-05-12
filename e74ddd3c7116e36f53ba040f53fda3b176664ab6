@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_5342e1b1",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T12:20:08Z",
+      "side": 1,
+      "message": "This could have it\u0027s own patch if you want this to be merged faster.",
+      "revId": "e74ddd3c7116e36f53ba040f53fda3b176664ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d38491da",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T12:20:08Z",
+      "side": 1,
+      "message": "Was this a bug?",
+      "revId": "e74ddd3c7116e36f53ba040f53fda3b176664ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_73aa856a",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T12:20:08Z",
+      "side": 1,
+      "message": "This is odd: this repeats all styles from wb-section-heading, *BUT* this CSS class was not used before this patch. This was a bug, wasn\u0027t it?\n\nI suggest to remove the h3 completely. The CSS class should be enough.",
+      "revId": "e74ddd3c7116e36f53ba040f53fda3b176664ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
