@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_6c206247",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-12T17:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_0c2201fc",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_2ca4a59d",
         "filename": "client/includes/Usage/EntityUsage.php",
         "patchSetId": 5
@@ -90,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_acd96a5d",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-12T17:30:26Z",
+      "side": 1,
+      "message": "Oh no please, no position based coding. Let\u0027s save nerves, not bits.",
+      "parentUuid": "0ed113e2_0f50b35f",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ecb9bdc7",
         "filename": "client/includes/Usage/PageEntityUsages.php",
         "patchSetId": 5
@@ -125,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_4cd1de24",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-12T17:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_cc7f19dc",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_8ce111cd",
         "filename": "client/includes/Usage/PageEntityUsages.php",
         "patchSetId": 5
@@ -142,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_2cd49a16",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-12T17:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_8ce111cd",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ece0ddc9",
         "filename": "client/includes/Usage/PageEntityUsages.php",
         "patchSetId": 5
@@ -153,6 +225,24 @@
       "writtenOn": "2015-05-11T17:48:23Z",
       "side": 1,
       "message": "\"Sorted list of full aspect names with modifiers.\"",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8cbb46dd",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-12T17:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_ece0ddc9",
       "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -187,6 +277,24 @@
       "writtenOn": "2015-05-11T18:50:17Z",
       "side": 1,
       "message": "I don\u0027t really like any of these names, and think they are all confusing/meaningless :)",
+      "parentUuid": "0ed113e2_ec077d83",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ecf212cd",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-12T17:30:26Z",
+      "side": 1,
+      "message": "The aspect keys are keys in the sense that they are unique (per entity/page), while the \"unmodified\" aspect isn\u0027t.",
       "parentUuid": "0ed113e2_ec077d83",
       "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -258,6 +366,24 @@
       "writtenOn": "2015-05-11T19:58:15Z",
       "side": 1,
       "message": "And the Language objects are not languages either. So we should call them $languageRepresentationObject.",
+      "parentUuid": "0ed113e2_8fcb4320",
+      "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ccacee9f",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-12T17:30:26Z",
+      "side": 1,
+      "message": "This method will be dropped in one of the follow-ups anyway.",
       "parentUuid": "0ed113e2_8fcb4320",
       "revId": "7c446163ef4cfc2d574d9208aea2db9dbc13c96b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
