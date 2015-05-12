@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_335abd85",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T12:21:26Z",
+      "side": 1,
+      "message": "Oh, also make sure that this new span is covered by a test.",
+      "parentUuid": "0ed113e2_5342e1b1",
+      "revId": "e74ddd3c7116e36f53ba040f53fda3b176664ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_d38491da",
         "filename": "view/resources/templates.php",
         "patchSetId": 6
