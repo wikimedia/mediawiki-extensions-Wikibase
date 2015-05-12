@@ -25,10 +25,6 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		$this->tablesUsed[] = 'wb_changes_dispatch';
 	}
 
-	public function tearDown() {
-		parent::tearDown();
-	}
-
 	private function getCoordinator() {
 		$clientWikis = array(
 			'dewiki' => 'dewikidb',
