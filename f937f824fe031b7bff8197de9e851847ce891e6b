@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_d63a3f93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T14:09:14Z",
+      "side": 1,
+      "message": "The headline of this message seems to be unrelated to the description below. If possibly try to split these two changes into separate patches or reword the message accordingly.",
+      "revId": "f937f824fe031b7bff8197de9e851847ce891e6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_164c4742",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T14:09:14Z",
+      "side": 1,
+      "message": "Documentation missing. Also pleas describe the new parameter and try to make the difference between the two parameters obvious. From whats written in the commit message I thing the description in this line is now wrong.",
+      "revId": "f937f824fe031b7bff8197de9e851847ce891e6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_96891729",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T14:09:14Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this reuse the $statement? How is it possible to \"move\" $this-\u003eclaim which was set in the constructor?",
+      "revId": "f937f824fe031b7bff8197de9e851847ce891e6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_76b6f3f7",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T14:09:14Z",
+      "side": 1,
+      "message": "getFlatArray",
+      "revId": "f937f824fe031b7bff8197de9e851847ce891e6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_567f2f10",
+        "filename": "repo/includes/ChangeOp/ClaimChangeOpFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T14:09:14Z",
+      "side": 1,
+      "message": "Please copy and paste the descriptions of these two parameters from the other class.",
+      "revId": "f937f824fe031b7bff8197de9e851847ce891e6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f6774334",
+        "filename": "repo/includes/ChangeOp/ClaimChangeOpFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-12T14:09:14Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "f937f824fe031b7bff8197de9e851847ce891e6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
