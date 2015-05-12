@@ -22,7 +22,7 @@ $specialPageAliases['ar'] = array(
 	'UnconnectedPages' => array( 'صفحات_غير_متصلة', 'بدون_اتصال', 'بدون_وصلات_موقع' ),
 );
 
-/** Egyptian Spoken Arabic (مصرى) */
+/** Egyptian Arabic (مصرى) */
 $specialPageAliases['arz'] = array(
 	'UnconnectedPages' => array( 'صفحات_مش_متوصله', 'من_غير_وصله', 'من_غير_وصلات_موقع' ),
 );

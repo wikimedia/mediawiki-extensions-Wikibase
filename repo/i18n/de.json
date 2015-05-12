@@ -427,6 +427,7 @@
 	"apihelp-wbgetentities-param-ids": "Die Kennungen der Objekte, von denen die Daten abgerufen werden sollen",
 	"apihelp-wbmergeitems-description": "Führt mehrere Objekte zusammen.",
 	"apihelp-wbmergeitems-example-1": "Führt Daten von Q42 in Q222 zusammen",
+	"apihelp-wbmergeitems-example-2": "Führt Daten von Q555 in Q3 zusammen",
 	"apihelp-wbparsevalue-param-parser": "Kennung des zu verwendenden Werteparsers",
 	"apihelp-wbparsevalue-param-values": "Die zu parsenden Werte",
 	"apihelp-wbparsevalue-example-1": "Keine Änderung am Format der Zeichenfolge.",

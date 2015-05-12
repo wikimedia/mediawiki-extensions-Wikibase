@@ -24,7 +24,7 @@ $magicWords['ar'] = array(
 	'wbreponame' => array( 0, 'اسم_مستودع_وب' ),
 );
 
-/** Egyptian Spoken Arabic (مصرى) */
+/** Egyptian Arabic (مصرى) */
 $magicWords['arz'] = array(
 	'noexternallanglinks' => array( 0, 'من_غير_وصلات_لغه_خارجيه' ),
 	'property' => array( 0, 'خاصيه' ),

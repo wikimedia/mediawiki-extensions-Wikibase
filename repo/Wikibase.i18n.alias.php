@@ -64,7 +64,7 @@ $specialPageAliases['arc'] = array(
 	'NewProperty' => array( 'ܕܝܠܝܘ̈ܬܐ_ܚܕ̈ܬܬܐ' ),
 );
 
-/** Egyptian Spoken Arabic (مصرى) */
+/** Egyptian Arabic (مصرى) */
 $specialPageAliases['arz'] = array(
 	'DispatchStats' => array( 'احصاءات_الوصول' ),
 	'EntityData' => array( 'بيانات_الكيانات' ),
@@ -270,7 +270,7 @@ $specialPageAliases['lb'] = array(
 	'MyLanguageFallbackChain' => array( 'Meng_Ersatzsproochketten' ),
 );
 
-/** لوری (لوری) */
+/** لوری مینجایی (لوری مینجایی) */
 $specialPageAliases['lrc'] = array(
 	'ListDatatypes' => array( 'میزونکاری_جور_داده_یا' ),
 	'SetLabel' => array( 'میزونکاری_ریتراز' ),
