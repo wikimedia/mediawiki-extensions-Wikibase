@@ -30,7 +30,7 @@ class EntityInstanceHolder implements EntityHolder {
 	 * @see EntityHolder::getEntityId
 	 *
 	 * @param string $expectedClass The class the result is expected to be compatible with.
-	 * Defaults to Entity.
+	 * Defaults to EntityDocument.
 	 *
 	 * @throws RuntimeException If the entity held by this EntityHolder is not compatible with $expectedClass.
 	 * @return EntityDocument

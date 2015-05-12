@@ -42,20 +42,26 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 	private $entityType;
 
 	/**
-	 * @var EntityId
+	 * @var EntityId|null
 	 */
 	private $entityId;
 
 	/**
 	 * @param EntityContentDataCodec $codec
 	 * @param string $blob
-	 * @param string $format
-	 * @param $entityType
-	 * @param EntityId $entityId
+	 * @param string $format Serialization format to decode the blob, typically CONTENT_FORMAT_JSON.
+	 * @param string $entityType
+	 * @param EntityId|null $entityId
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityContentDataCodec $codec, $blob, $format, $entityType, EntityId $entityId = null ) {
+	public function __construct(
+		EntityContentDataCodec $codec,
+		$blob,
+		$format,
+		$entityType,
+		EntityId $entityId = null
+	) {
 		if ( !is_string( $blob ) ) {
 			throw new InvalidArgumentException( '$blob must be a string' );
 		}
@@ -78,13 +84,10 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 	/**
 	 * @see EntityHolder::getEntityId
 	 *
-	 * This implements lazy initialization of the entity: when called for the first time,
-	 * this method will call getEntity() on the EntityHolder passed to the constructor,
-	 * and then calls copy() on the entity returned. The resulting copy is returned.
-	 * Subsequent calls will return the same entity.
+	 * This implements lazy deserialization of the blob passed to the constructor.
 	 *
 	 * @param string $expectedClass The class with which the result is expected to be compatible.
-	 * Defaults to Entity.
+	 * Defaults to EntityDocument.
 	 *
 	 * @throws RuntimeException If the entity held by this EntityHolder is not compatible with $expectedClass.
 	 * @return EntityDocument
