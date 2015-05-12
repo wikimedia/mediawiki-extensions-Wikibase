@@ -77,13 +77,13 @@ class PageTermsTest extends \MediaWikiTestCase {
 		$titles = array();
 
 		foreach ( $names as $name ) {
-			if ( !preg_match( '/^[^\d]+/', $name ) ) {
+			if ( !preg_match( '/^\D+/', $name ) ) {
 				continue;
 			}
 
 			$title = Title::makeTitle( NS_MAIN, $name );
 
-			$pid = (int)preg_replace( '/^[^\d]+/', '', $name );
+			$pid = (int)preg_replace( '/^\D+/', '', $name );
 			$title->resetArticleID( $pid );
 
 			$titles[$pid] = $title;
