@@ -75,6 +75,16 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Site', $returnValue );
 	}
 
+	public function testGetLangLinkHandlerReturnType() {
+		$returnValue = $this->getWikibaseClient()->getLangLinkHandler();
+		$this->assertInstanceOf( 'Wikibase\LangLinkHandler', $returnValue );
+	}
+
+	public function testGetParserOutputDataUpdaterType() {
+		$returnValue = $this->getWikibaseClient()->getParserOutputDataUpdater();
+		$this->assertInstanceOf( 'Wikibase\Client\ParserOutputDataUpdater', $returnValue );
+	}
+
 	/**
 	 * @dataProvider getLangLinkSiteGroupProvider
 	 */
