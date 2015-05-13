@@ -123,6 +123,8 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * Statements that have a main snak already in the list are filtered out.
 	 * The last occurrences are retained.
 	 *
+	 * @since 1.0
+	 *
 	 * @return self
 	 */
 	public function getWithUniqueMainSnaks() {
