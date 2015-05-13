@@ -56,28 +56,28 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenGuidOfPresentStatement_getStatementWithGuidReturnsStatement() {
+	public function testGivenGuidOfPresentStatement_getStatementByGuidReturnsStatement() {
 		$statement = $this->newStatement( 1, 'some guid' );
 
 		$statements = new StatementByGuidMap( array( $statement ) );
 
-		$this->assertEquals( $statement, $statements->getStatementWithGuid( 'some guid' ) );
+		$this->assertEquals( $statement, $statements->getStatementByGuid( 'some guid' ) );
 	}
 
-	public function testGivenGuidOfNotPresentStatement_getStatementWithGuidReturnsNull() {
+	public function testGivenGuidOfNotPresentStatement_getStatementByGuidReturnsNull() {
 		$statements = new StatementByGuidMap();
 
-		$this->assertNull( $statements->getStatementWithGuid( 'some guid' ) );
+		$this->assertNull( $statements->getStatementByGuid( 'some guid' ) );
 	}
 
 	/**
 	 * @dataProvider nonStringProvider
 	 */
-	public function testGivenNonStringGuid_getStatementWithGuidThrowsException( $nonString ) {
+	public function testGivenNonStringGuid_getStatementByGuidThrowsException( $nonString ) {
 		$statements = new StatementByGuidMap();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$statements->getStatementWithGuid( $nonString );
+		$statements->getStatementByGuid( $nonString );
 	}
 
 	public function testGivenGuidOfPresentStatement_removeStatementWithGuidRemovesTheStatement() {
@@ -177,7 +177,7 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 
 		$statements->addStatement( $statement2 );
 
-		$this->assertEquals( $statement2, $statements->getStatementWithGuid( 'some guid' ) );
+		$this->assertEquals( $statement2, $statements->getStatementByGuid( 'some guid' ) );
 	}
 
 	public function testToArray() {
