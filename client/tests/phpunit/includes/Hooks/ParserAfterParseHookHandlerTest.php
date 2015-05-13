@@ -15,6 +15,7 @@ use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserAfterParseHookHandler;
+use Wikibase\Client\ParserOutputDataAccessor;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
@@ -170,12 +171,18 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 			Language::factory( 'en' )
 		);
 
-		$langLinkHandler = new LangLinkHandler(
+		$parserOutputDataAccessor = new ParserOutputDataAccessor(
 			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
+			$mockRepo,
+			$this->getSetting( 'siteGlobalID' )
+		);
+
+		$langLinkHandler = new LangLinkHandler(
 			$badgeDisplay,
 			$namespaceChecker,
 			$mockRepo,
 			$mockRepo,
+			$parserOutputDataAccessor,
 			$this->getSiteStore(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'languageLinkSiteGroup' )
