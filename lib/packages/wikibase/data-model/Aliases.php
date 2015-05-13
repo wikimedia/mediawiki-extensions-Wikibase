@@ -35,6 +35,6 @@ namespace Wikibase\DataModel {
 	/**
 	 * @deprecated since 3.0.0, use the base class instead.
 	 */
-	class StatementListProvider extends \Wikibase\DataModel\Statement\StatementListProvider {}
+	interface StatementListProvider extends \Wikibase\DataModel\Statement\StatementListProvider {}
 
 }
