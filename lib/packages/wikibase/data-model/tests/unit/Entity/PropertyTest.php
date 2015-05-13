@@ -93,7 +93,7 @@ class PropertyTest extends EntityTest {
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyId', $property->getId() );
 	}
 
-	public function testWhenIdSetWithEntityId_GetIdReturnsPropertyId() {
+	public function testWhenIdSetWithPropertyId_GetIdReturnsPropertyId() {
 		$property = Property::newFromType( 'string' );
 		$property->setId( new PropertyId( 'P42' ) );
 
