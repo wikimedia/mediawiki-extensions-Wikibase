@@ -503,17 +503,17 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenNotKnownPropertyId_getWithPropertyIdReturnsEmptyList() {
+	public function testGivenNotKnownPropertyId_getByPropertyIdReturnsEmptyList() {
 		$list = new StatementList();
 		$list->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
 		$this->assertEquals(
 			new StatementList(),
-			$list->getWithPropertyId( new PropertyId( 'P2' ) )
+			$list->getByPropertyId( new PropertyId( 'P2' ) )
 		);
 	}
 
-	public function testGivenKnownPropertyId_getWithPropertyIdReturnsListWithOnlyMatchingStatements() {
+	public function testGivenKnownPropertyId_getByPropertyIdReturnsListWithOnlyMatchingStatements() {
 		$list = new StatementList();
 		$list->addNewStatement( new PropertyNoValueSnak( 42 ) );
 		$list->addNewStatement( new PropertyNoValueSnak( 9001 ) );
@@ -526,7 +526,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			$expected,
-			$list->getWithPropertyId( new PropertyId( 'P42' ) )
+			$list->getByPropertyId( new PropertyId( 'P42' ) )
 		);
 	}
 

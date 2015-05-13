@@ -36,6 +36,7 @@ Other breaking changes:
 * Removed previously deprecated `Entity::getAllSnaks`, use `StatementList::getAllSnaks` instead
 * Removed previously deprecated `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
 * Removed previously deprecated `Property::newEmpty`, use `Property::newFromType` or `new Property()` instead
+* Renamed `StatementList::getWithPropertyId` to `StatementList::getByPropertyId`
 * `Reference` and `ReferenceList`s no longer can not be instantiated with `null`
 * Added `setId` method to `EntityDocument`
 
