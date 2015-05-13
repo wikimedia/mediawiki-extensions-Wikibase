@@ -110,20 +110,17 @@ Other methods an `Expert` needs to provide:
 
 ### 0.14.2 (2015-03-31)
 
-### Bugfixes
-
+#### Bugfixes
 * Remove qunit dependency to make QUnit tests work in Karma
 
 ### 0.14.1 (2015-03-16)
 
-### Bugfixes
-
+#### Bugfixes
 * Make QUnit tests pass in PhantomJS
 
 ### 0.14.0 (2015-03-12)
 
-### Breaking changes
-
+#### Breaking changes
 * Removed `jQuery.NativeEventHandler`.
 
 #### Bugfixes
