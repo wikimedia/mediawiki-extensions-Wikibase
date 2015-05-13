@@ -42,6 +42,7 @@ Other breaking changes:
 #### Additions
 
 * Added `StatementByGuidMap`
+* Added `StatementListHolder`
 * Added `StatementList::getFirstStatementWithGuid`
 * Added `StatementList::removeStatementsWithGuid`
 * `ReferenceList::addNewReference` and `Statement::addNewReference` support an array of Snaks now
