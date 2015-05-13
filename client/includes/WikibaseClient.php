@@ -540,11 +540,11 @@ final class WikibaseClient {
 			$this->langLinkHandler = new LangLinkHandler(
 				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getLanguageLinkBadgeDisplay(),
-				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
 				$this->getSiteStore(),
+				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getLangLinkSiteGroup()
 			);
 		}

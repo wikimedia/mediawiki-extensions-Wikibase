@@ -173,11 +173,11 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 		$langLinkHandler = new LangLinkHandler(
 			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
 			$badgeDisplay,
-			$settings->getSetting( 'siteGlobalID' ),
 			$namespaceChecker,
 			$mockRepo,
 			$mockRepo,
 			$this->getSiteStore(),
+			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'languageLinkSiteGroup' )
 		);
 
