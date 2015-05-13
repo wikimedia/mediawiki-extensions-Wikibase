@@ -6,6 +6,7 @@
 			"Sator"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} itema",
 	"wikibase-editlinks": "Aldatu loturak",
 	"wikibase-editlinkstitle": "Aldatu hizkuntzen arteko loturak",
 	"wikibase-linkitem-input-site": "Hizkuntza:",
