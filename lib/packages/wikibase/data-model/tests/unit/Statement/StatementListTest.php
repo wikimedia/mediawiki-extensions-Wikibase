@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Statement;
 
 use DataValues\StringValue;
-use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -665,86 +664,6 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statements = new StatementList();
 
 		$this->assertNull( $statements->getFirstStatementWithGuid( false ) );
-	}
-
-	public function testGivenEmptyStatementList_setStatementsFillsIt() {
-		$statement1 = $this->getStatement( 1, 'guid1' );
-		$statement2 = $this->getStatement( 2, 'guid2' );
-		$statement3 = $this->getStatement( 3, 'guid3' );
-		$statement4 = $this->getStatement( 2, 'guid5' );
-		$statements = new StatementList();
-
-		$statements->setStatements( array( $statement1, $statement2, $statement3, $statement4 ) );
-		$this->assertEquals(
-			new StatementList( $statement1, $statement2, $statement3, $statement4 ),
-			$statements
-		);
-	}
-
-	public function testGivenFilledStatementList_setStatementsOverridesIt() {
-		$statement1 = $this->getStatement( 1, 'guid1' );
-		$statement2 = $this->getStatement( 2, 'guid2' );
-		$statement3 = $this->getStatement( 3, 'guid3' );
-		$statement4 = $this->getStatement( 2, 'guid5' );
-		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
-
-		$statements->setStatements( array( $statement1, $statement4 ) );
-		$this->assertEquals(
-			new StatementList( $statement1, $statement4 ),
-			$statements
-		);
-	}
-
-	public function testGivenNonTraversable_setStatementsThrowsException() {
-		$statement1 = $this->getStatement( 1, 'guid1' );
-		$statements = new StatementList();
-
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$statements->setStatements( $statement1 );
-	}
-
-	public function testGivenNonStatement_setStatementsThrowsException() {
-		$statement1 = $this->getStatement( 1, 'guid1' );
-		$statements = new StatementList();
-
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$statements->setStatements( array( $statement1, false ) );
-	}
-
-	public function testGivenNonTraversable_setStatementsDoesNotEditList() {
-		$statement1 = $this->getStatement( 1, 'guid1' );
-		$statement2 = $this->getStatement( 2, 'guid2' );
-		$statement3 = $this->getStatement( 3, 'guid3' );
-		$statement4 = $this->getStatement( 2, 'guid5' );
-		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
-
-		try {
-			$statements->setStatements( $statement1 );
-		}
-		catch ( InvalidArgumentException $e ) {
-			$this->assertEquals(
-				new StatementList( $statement1, $statement2, $statement3, $statement4 ),
-				$statements
-			);
-		}
-	}
-
-	public function testGivenNonStatement_setStatementsDoesNotEditList() {
-		$statement1 = $this->getStatement( 1, 'guid1' );
-		$statement2 = $this->getStatement( 2, 'guid2' );
-		$statement3 = $this->getStatement( 3, 'guid3' );
-		$statement4 = $this->getStatement( 2, 'guid5' );
-		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
-
-		try {
-			$statements->setStatements( array( $statement4, false ) );
-		}
-		catch ( InvalidArgumentException $e ) {
-			$this->assertEquals(
-				new StatementList( $statement1, $statement2, $statement3, $statement4 ),
-				$statements
-			);
-		}
 	}
 
 }
