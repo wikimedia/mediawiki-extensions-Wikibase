@@ -72,22 +72,17 @@ class ParserAfterParseHookHandler {
 	 * @return bool
 	 */
 	public static function onParserAfterParse( Parser &$parser = null, &$text = null, StripState $stripState = null ) {
-		if ( $parser === null ) {
+		// this hook tries to access repo SiteLinkTable
+		// it interferes with any test that parses something, like a page or a message
+		if ( $parser === null || defined( 'MW_PHPUNIT_TEST' ) ) {
 			return true;
 		}
 
-		// This hook tries to access repo SiteLinkTable
-		// it interferes with any test that parses something, like a page or a message.
-		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-			return true;
-		}
+		// Only run this once, for the article content and not interface stuff
 
-		// We only care about existing page content being rendered to HTML, not interface
-		// messages or dynamic text or template expansion via the API.
-		if ( $parser->getRevisionId() === null || $parser->OutputType() !== Parser::OT_HTML ) {
-			// CAVEAT: This means we also bail out on edit previews. To fix that, we would need
-			// a way to detect preview parses by looking at the Parser object.
-			// Perhaps WikitextContent could set some flag in the ParserOptions.
+		// This check needs to be here as this method is being invoked a lot,
+		// thus calling self::newFromGlobalState would be quite heavy
+		if ( $parser->getOptions()->getInterfaceMessage() ) {
 			return true;
 		}
 
@@ -124,6 +119,15 @@ class ParserAfterParseHookHandler {
 	 */
 	public function doParserAfterParse( Parser &$parser ) {
 		$title = $parser->getTitle();
+
+		// Doing this only makes sense when actually creating html for page views, not when
+		// for example substing a template.
+		// Please note: While all cases where this matches don't need to go through this many
+		// that don't match (have OT_HTML) still actually wouldn't need to go through this...
+		// for example message parses, but we don't have a good way to identify those.
+		if ( $parser->OutputType() !== Parser::OT_HTML ) {
+			return true;
+		}
 
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
