@@ -8,6 +8,7 @@ use SiteStore;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\ParserOutputDataAccessor;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,11 +28,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class LangLinkHandler {
-
-	/**
-	 * @var OtherProjectsSidebarGeneratorFactory
-	 */
-	private $otherProjectsSidebarGeneratorFactory;
 
 	/**
 	 * @var LanguageLinkBadgeDisplay
@@ -54,6 +50,11 @@ class LangLinkHandler {
 	private $entityLookup;
 
 	/**
+	 * @var ParserOutputDataAccessor
+	 */
+	private $parserOutputDataAccessor;
+
+	/**
 	 * @var SiteStore
 	 */
 	private $siteStore;
@@ -69,30 +70,30 @@ class LangLinkHandler {
 	private $siteGroup;
 
 	/**
-	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
 	 * @param LanguageLinkBadgeDisplay $badgeDisplay
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
 	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
 	 * @param EntityLookup $entityLookup An entity lookup service
+	 * @param ParserOutputDataAccessor $parserOutputDataAccessor
 	 * @param SiteStore $sites
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
 	 */
 	public function __construct(
-		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
 		LanguageLinkBadgeDisplay $badgeDisplay,
 		NamespaceChecker $namespaceChecker,
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
+		ParserOutputDataAccessor $parserOutputDataAccessor,
 		SiteStore $siteStore,
 		$siteId,
 		$siteGroup
 	) {
-		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
 		$this->badgeDisplay = $badgeDisplay;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityLookup = $entityLookup;
+		$this->parserOutputDataAccessor = $parserOutputDataAccessor;
 		$this->siteStore = $siteStore;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
@@ -110,7 +111,10 @@ class LangLinkHandler {
 	public function getEntityLinks( Title $title ) {
 		$links = array();
 
-		$itemId = $this->getItemIdForTitle( $title );
+		$itemId = $this->siteLinkLookup->getItemIdForLink(
+			$this->siteId,
+			$title->getFullText()
+		);
 
 		if ( $itemId !== null ) {
 			//NOTE: SiteLinks we could get from $this->siteLinkLookup do not contain badges,
@@ -430,16 +434,7 @@ class LangLinkHandler {
 	 * @param ParserOutput $out
 	 */
 	public function updateItemIdProperty( Title $title, ParserOutput $out ) {
-		$itemId = $this->getItemIdForTitle( $title );
-
-		if ( $itemId ) {
-			$out->setProperty( 'wikibase_item', $itemId->getSerialization() );
-
-			$usageAccumulator = new ParserOutputUsageAccumulator( $out );
-			$usageAccumulator->addSiteLinksUsage( $itemId );
-		} else {
-			$out->unsetProperty( 'wikibase_item' );
-		}
+		$this->parserOutputDataAccessor->updateItemIdProperty( $title, $out );
 	}
 
 	/**
@@ -447,29 +442,7 @@ class LangLinkHandler {
 	 * @param ParserOutput $out
 	 */
 	public function updateOtherProjectsLinksData( Title $title, ParserOutput $out ) {
-		$itemId = $this->getItemIdForTitle( $title );
-
-		if ( $itemId ) {
-			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory->
-				getOtherProjectsSidebarGenerator();
-
-			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
-			$out->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
-		} else {
-			$out->setExtensionData( 'wikibase-otherprojects-sidebar', array() );
-		}
-	}
-
-	/**
-	 * @param Title $title
-	 *
-	 * @return ItemId|null
-	 */
-	private function getItemIdForTitle( Title $title ) {
-		return $this->siteLinkLookup->getItemIdForLink(
-			$this->siteId,
-			$title->getFullText()
-		);
+		$this->parserOutputDataAccessor->updateOtherProjectsLinksData( $title, $out );
 	}
 
 }
