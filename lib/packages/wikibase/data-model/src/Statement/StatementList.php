@@ -138,13 +138,13 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
-	 * @since 2.3
+	 * @since 3.0
 	 *
 	 * @param PropertyId $id
 	 *
 	 * @return self
 	 */
-	public function getWithPropertyId( PropertyId $id ) {
+	public function getByPropertyId( PropertyId $id ) {
 		$statementList = new self();
 
 		foreach ( $this->statements as $statement ) {
