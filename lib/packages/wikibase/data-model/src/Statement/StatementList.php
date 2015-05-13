@@ -117,6 +117,8 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 				unset( $this->statements[$index] );
 			}
 		}
+
+		$this->statements = array_values( $this->statements );
 	}
 
 	/**
@@ -241,10 +243,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
-	 * Returns the wrapped array of statements. This retrieval operation is cheap.
-	 * No guarantees are given about the keys of the returned array.
-	 *
-	 * @return Statement[]
+	 * @return Statement[] Numerically indexed (non-sparse) array.
 	 */
 	public function toArray() {
 		return $this->statements;
