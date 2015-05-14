@@ -32,6 +32,15 @@ function wikibase.setupInterface()
 		return pageEntityId
 	end
 
+	-- Get the entity id of the connected item, if id is nil. Cached.
+	local getIdOfConnectedItemIfNil = function( id )
+		if id == nil then
+			return getEntityIdForCurrentPage()
+		end
+
+		return id
+	end
+
 	-- Get the mw.wikibase.entity object for a given id. Cached.
 	local getEntityObject = function( id )
 		if entities[ id ] == nil then
@@ -63,9 +72,7 @@ function wikibase.setupInterface()
 	wikibase.getEntity = function( id )
 		checkTypeMulti( 'getEntity', 1, id, { 'string', 'nil' } )
 
-		if id == nil then
-			id = getEntityIdForCurrentPage()
-		end
+		id = getIdOfConnectedItemIfNil( id )
 
 		if not php.getSetting( 'allowArbitraryDataAccess' ) and id ~= getEntityIdForCurrentPage() then
 			error( 'Access to arbitrary items has been disabled.', 2 )
@@ -85,7 +92,13 @@ function wikibase.setupInterface()
 	--
 	-- @param id
 	wikibase.label = function( id )
-		checkType( 'label', 1, id, 'string' )
+		checkTypeMulti( 'label', 1, id { 'string', 'nil' } )
+
+		id = getIdOfConnectedItemIfNil( id )
+
+		if id == nil then
+			return nil
+		end
 
 		return php.getLabel( id )
 	end
@@ -94,7 +107,13 @@ function wikibase.setupInterface()
 	--
 	-- @param id
 	wikibase.description = function( id )
-		checkType( 'description', 1, id, 'string' )
+		checkTypeMulti( 'description', 1, id, { 'string', 'nil' } )
+
+		id = getIdOfConnectedItemIfNil( id )
+
+		if id == nil then
+			return nil
+		end
 
 		return php.getDescription( id )
 	end
@@ -103,7 +122,13 @@ function wikibase.setupInterface()
 	--
 	-- @param id
 	wikibase.sitelink = function( id )
-		checkType( 'sitelink', 1, id, 'string' )
+		checkTypeMulti( 'sitelink', 1, id, { 'string', 'nil' } )
+
+		id = getIdOfConnectedItemIfNil( id )
+
+		if id == nil then
+			return nil
+		end
 
 		return php.getSiteLinkPageName( id )
 	end
