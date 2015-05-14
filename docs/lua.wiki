@@ -22,6 +22,8 @@ Alias for [[#mw.wikibase.getEntity|mw.wikibase.getEntity]].
 <code>wikibase.label( id )</code><br>
 Takes an item ID and returns the label in the language of the local Wiki.
 
+If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists in the wiki's language or in a fallback language.
+
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.label( 'Q42' ) -- Returns the label of the item as a string, like "Berlin"
@@ -39,6 +41,8 @@ mw.wikibase.sitelink( 'Q42' ) -- Returns the given items page title in the curre
 === mw.wikibase.description ===
 <code>wikibase.description( id )</code><br>
 Takes an item ID and returns the description in the language of the local Wiki.
+
+If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists in the wiki's language or in a fallback language.
 
 An example call might look like this:
 <source lang="lua">
