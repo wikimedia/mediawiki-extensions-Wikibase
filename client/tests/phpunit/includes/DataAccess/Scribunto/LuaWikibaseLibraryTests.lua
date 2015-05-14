@@ -87,12 +87,20 @@ local tests = {
 	  args = { 'Q1224342342' },
 	  expect = { nil }
 	},
+	{ name = 'mw.wikibase.label (connected item)', func = mw.wikibase.label, type='ToString',
+	  args = {},
+	  expect = { 'Lua Test Item' }
+	},
 	{ name = 'mw.wikibase.label (no label)', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32488' },
 	  expect = { nil }
 	},
 	{ name = 'mw.wikibase.description', func = mw.wikibase.description, type='ToString',
 	  args = { 'Q32487' },
+	  expect = { 'Description of Q32487' }
+	},
+	{ name = 'mw.wikibase.description (connected item)', func = mw.wikibase.description, type='ToString',
+	  args = {},
 	  expect = { 'Description of Q32487' }
 	},
 	{ name = 'mw.wikibase.description (no such item)', func = mw.wikibase.description, type='ToString',
@@ -105,6 +113,10 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32487' },
+	  expect = { 'WikibaseClientDataAccessTest' }
+	},
+	{ name = 'mw.wikibase.sitelink (connected item)', func = mw.wikibase.sitelink, type='ToString',
+	  args = {},
 	  expect = { 'WikibaseClientDataAccessTest' }
 	},
 	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
