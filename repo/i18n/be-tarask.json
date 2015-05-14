@@ -195,6 +195,7 @@
 	"wikibase-item-summary-wbeditentity-update": "Абноўлены аб’ект",
 	"wikibase-item-summary-wbeditentity-override": "Перавызначаны аб’ект",
 	"wikibase-item-summary-wbsetreference": "Пазначаная крыніца",
+	"wikibase-item-summary-wbsetreference-add": "Дададзеная крыніца сьцьверджаньня",
 	"wikibase-item-summary-wbsetlabel-add": "Дададзеная метка на [$2]",
 	"wikibase-item-summary-wbsetlabel-set": "Зьмененая метка для [$2]",
 	"wikibase-item-summary-wbsetlabel-remove": "Выдаленая метка для [$2]",
