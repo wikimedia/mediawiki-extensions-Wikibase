@@ -182,7 +182,7 @@
 	"wikibase-setaliases-submit": "Set aliases",
 	"special-setlabeldescriptionaliases": "Set label, description and aliases",
 	"wikibase-setlabeldescriptionaliases-introfull": "You are setting label, description and aliases in $2 for [[$1]]. Several aliases are separated by a pipe (<code>|</code>) character.",
-	"wikibase-setlabeldescriptionaliases-intro": "This form allows you to set label, description and aliases of an entity. You need to first provide the id of the entity (e.g. Q23) and a language code (e.g. \"en\").",
+	"wikibase-setlabeldescriptionaliases-intro": "This form allows you to set label, description and aliases of an entity. You need to first provide the id of the entity (e.g. \"Q23\") and a language code (e.g. \"en\").",
 	"wikibase-setlabeldescriptionaliases-label-label": "Label:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Description:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliases:",
