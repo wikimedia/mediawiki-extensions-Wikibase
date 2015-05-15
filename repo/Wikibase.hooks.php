@@ -8,6 +8,7 @@ use BaseTemplate;
 use Content;
 use ContentHandler;
 use DatabaseUpdater;
+use Exception;
 use HistoryPager;
 use Html;
 use Linker;

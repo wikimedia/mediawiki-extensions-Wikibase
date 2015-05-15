@@ -53,7 +53,6 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) { // Needs to be 1
  */
 $GLOBALS['wgValueParsers'] = array();
 
-// Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
 	include_once( __DIR__ . '/../lib/WikibaseLib.php' );
 }
@@ -67,7 +66,7 @@ if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 }
 
 if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-    throw new Exception( 'Wikibase depends on WikibaseView.' );
+	throw new Exception( 'Wikibase depends on WikibaseView.' );
 }
 
 if ( !defined( 'PURTLE_VERSION' ) ) {
@@ -213,7 +212,7 @@ call_user_func( function() {
 	$wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
 	$wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteData';
 	$wgHooks['ApiCheckCanExecute'][] 					= 'Wikibase\RepoHooks::onApiCheckCanExecute';
-	$wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
+	$wgHooks['SetupAfterCache'][] 						= '\Wikibase\RepoHooks::onSetupAfterCache';
 	$wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
 	$wgHooks['ShowSearchHitTitle'][]					= 'Wikibase\RepoHooks::onShowSearchHitTitle';
 	$wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
