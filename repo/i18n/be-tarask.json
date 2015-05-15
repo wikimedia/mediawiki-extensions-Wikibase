@@ -227,6 +227,8 @@
 	"wikibase-item-summary-wbsetclaim-update-rank": "Зьменены ранг {{PLURAL:$3|1=сьцьверджаньня|сьцьверджаньняў}}",
 	"wikibase-item-summary-clientsitelink-update": "Старонка перанесеная з [$3] у [$4]",
 	"wikibase-item-summary-clientsitelink-remove": "Старонка ў [$3] выдаленая",
+	"wikibase-item-summary-wbmergeitems-from": "Далучаны аб’ект «$3»",
+	"wikibase-item-summary-wbmergeitems-to": "Далучаны да аб’екту «$3»",
 	"wikibase-property-summary-wbcreate-new": "Створаная новая ўласьцівасьць",
 	"wikibase-property-summary-wbeditentity-create": "Створаная новая ўласьцівасьць",
 	"wikibase-property-summary-wbeditentity-update": "Абноўленая ўласьцівасьць",

@@ -8,7 +8,6 @@
 		]
 	},
 	"wikibase-client-desc": "Client pentru extensia Wikibase",
-	"specialpages-group-wikibaseclient": "Client {{WBREPONAME}}",
 	"tooltip-t-wikibase": "Legătură către elementul asociat din depozitul de date",
 	"wikibase-after-page-move": "Puteți, de asemenea, [$1 să actualizați] elementul {{WBREPONAME}} asociat pentru a menține legăturile linguale pe pagina redenumită.",
 	"wikibase-after-page-move-queued": "[$1 Elementul {{WBREPONAME}}] asociat acestei pagini va fi în curând actualizat în mod automat.",
@@ -41,6 +40,7 @@
 	"wikibase-rc-show-wikidata-pref": "Arată modificările de la {{WBREPONAME}} în lista cu schimbări recente",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modificare la {{WBREPONAME}}",
+	"wikibase-replicationnote": "Rețineți că pot trece câteva minute până când modificările sunt vizibile pe toate wikiurile.",
 	"wikibase-watchlist-show-changes-pref": "Arată modificările de la {{WBREPONAME}} în lista dumneavoastră de pagini urmărite",
 	"wikibase-error-serialize-error": "Imposibil de serializat datele.",
 	"wikibase-error-invalid-entity-id": "ID-ul introdus nu este recunoscut de sistem. Utilizați un ID de entitate valid.",
