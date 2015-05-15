@@ -44,6 +44,14 @@ use WikiPage;
  */
 final class RepoHooks {
 
+	public static function onExtensionSetup() {
+		// Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
+		if ( !defined( 'WBL_VERSION' ) &&
+			!\ExtensionRegistry::getInstance()->isLoaded( 'Wikibase/lib' ) ) {
+				throw new Exception( 'Wikibase depends on the WikibaseLib extension.' );
+		}
+	}
+
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
 	 * replacing the native search box with the entity selector widget.
