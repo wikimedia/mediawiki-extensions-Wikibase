@@ -21,7 +21,7 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"php": ">=5.3.2",
+		"php": ">=5.3.3",
 
 		"data-values/data-values": "~1.0.0",
 		"data-values/common": "~0.2.0",
@@ -57,7 +57,6 @@
 			"client/tests/phpunit/",
 
 			"lib/includes/",
-			"lib/WikibaseLib.hooks.php",
 			"lib/tests/phpunit/",
 
 			"repo/includes/",
