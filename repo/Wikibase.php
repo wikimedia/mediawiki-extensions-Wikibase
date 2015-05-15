@@ -53,21 +53,12 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) { // Needs to be 1
  */
 $GLOBALS['wgValueParsers'] = array();
 
-// Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
-if ( !defined( 'WBL_VERSION' ) ) {
-	include_once( __DIR__ . '/../lib/WikibaseLib.php' );
-}
-
-if ( !defined( 'WBL_VERSION' ) ) {
-	throw new Exception( 'Wikibase depends on the WikibaseLib extension.' );
-}
-
 if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 	include_once( __DIR__ . '/../view/WikibaseView.php' );
 }
 
 if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-    throw new Exception( 'Wikibase depends on WikibaseView.' );
+	throw new Exception( 'Wikibase depends on WikibaseView.' );
 }
 
 if ( !defined( 'PURTLE_VERSION' ) ) {
@@ -77,6 +68,8 @@ if ( !defined( 'PURTLE_VERSION' ) ) {
 if ( !defined( 'PURTLE_VERSION' ) ) {
 	throw new Exception( 'Wikibase depends on Purtle.' );
 }
+
+$GLOBALS['wgExtensionFunctions'][] = 'Wikibase\RepoHooks::onExtensionSetup';
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
