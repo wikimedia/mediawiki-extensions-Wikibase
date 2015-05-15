@@ -530,12 +530,12 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenInvalidRank_getWithRankReturnsEmptyList() {
+	public function testGivenInvalidRank_getByRankReturnsEmptyList() {
 		$list = new StatementList();
-		$this->assertEquals( new StatementList(), $list->getWithRank( 42 ) );
+		$this->assertEquals( new StatementList(), $list->getByRank( 42 ) );
 	}
 
-	public function testGivenValidRank_getWithRankReturnsOnlyMatchingStatements() {
+	public function testGivenValidRank_getByRankReturnsOnlyMatchingStatements() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setRank( Statement::RANK_PREFERRED );
 
@@ -549,12 +549,12 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			new StatementList( $statement ),
-			$list->getWithRank( Statement::RANK_PREFERRED )
+			$list->getByRank( Statement::RANK_PREFERRED )
 		);
 
 		$this->assertEquals(
 			new StatementList( $secondStatement, $thirdStatement ),
-			$list->getWithRank( array( Statement::RANK_NORMAL, Statement::RANK_DEPRECATED ) )
+			$list->getByRank( array( Statement::RANK_NORMAL, Statement::RANK_DEPRECATED ) )
 		);
 	}
 
