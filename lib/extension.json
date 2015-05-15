@@ -1,0 +1,22 @@
+{
+	"callback": "LibHooks::registerExtension",
+	"JobClasses": {
+		"ChangeNotification": "Wikibase\\ChangeNotificationJob"
+	},
+	"MessagesDirs": {
+		"WikibaseLib": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"LibHooks": "WikibaseLib.hooks.php",
+	},
+	"Hooks": {
+		"UnitTestsList": [
+			"LibHooks::registerPhpUnitTests"
+		],
+		"ResourceLoaderTestModules": [
+			"LibHooks::registerQUnitTests"
+		]
+	}
+}
