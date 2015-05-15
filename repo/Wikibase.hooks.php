@@ -8,6 +8,7 @@ use BaseTemplate;
 use Content;
 use ContentHandler;
 use DatabaseUpdater;
+use Exception;
 use HistoryPager;
 use Html;
 use Linker;
@@ -43,6 +44,17 @@ use WikiPage;
  * @author Jens Ohlig
  */
 final class RepoHooks {
+
+	public static function onExtensionSetup() {
+		// Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
+		if ( !defined( 'WBL_VERSION' ) ) {
+			include_once( __DIR__ . '/../lib/WikibaseLib.php' );
+		}
+
+		if ( !defined( 'WBL_VERSION' ) ) {
+			throw new Exception( 'Wikibase depends on the WikibaseLib extension.' );
+		}
+	}
 
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
