@@ -270,7 +270,7 @@ $specialPageAliases['lb'] = array(
 	'MyLanguageFallbackChain' => array( 'Meng_Ersatzsproochketten' ),
 );
 
-/** لوری مینجایی (لوری مینجایی) */
+/** Northern Luri (لوری مینجایی) */
 $specialPageAliases['lrc'] = array(
 	'ListDatatypes' => array( 'میزونکاری_جور_داده_یا' ),
 	'SetLabel' => array( 'میزونکاری_ریتراز' ),
