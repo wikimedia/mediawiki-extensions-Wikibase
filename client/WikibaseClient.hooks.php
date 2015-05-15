@@ -49,6 +49,66 @@ use Wikibase\DataModel\SiteLink;
  */
 final class ClientHooks {
 
+	public static function registerExtension() {
+		global $wgAPIPropModules, $wgAPIMetaModules, $wgResourceModules, $wgWBClientSettings;
+
+		if ( defined( 'WBC_VERSION' ) ) {
+			// Do not initialize more than once.
+			return;
+		}
+
+		define( 'WBC_VERSION', '0.5 alpha'
+			. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
+
+		define( 'WBC_DIR', __DIR__ );
+
+		// Include the WikibaseLib extension if that hasn't been done yet, since it's required for WikibaseClient to work.
+		if ( !defined( 'WBL_VERSION' ) ) {
+			include_once( __DIR__ . '/../lib/WikibaseLib.php' );
+		}
+
+		if ( !defined( 'WBL_VERSION' ) ) {
+			throw new Exception( 'WikibaseClient depends on the WikibaseLib extension.' );
+		}
+
+		// api modules
+		$wgAPIMetaModules['wikibase'] = array(
+			'class' => 'Wikibase\ApiClientInfo',
+			'factory' => function( ApiQuery $apiQuery, $moduleName ) {
+				return new Wikibase\ApiClientInfo(
+					Wikibase\Client\WikibaseClient::getDefaultInstance()->getSettings(),
+					$apiQuery,
+					$moduleName
+				);
+			}
+		);
+
+		$wgAPIPropModules['pageterms'] = array(
+			'class' => 'Wikibase\Client\Api\PageTerms',
+			'factory' => function ( ApiQuery $query, $moduleName ) {
+				$client = \Wikibase\Client\WikibaseClient::getDefaultInstance();
+				return new Wikibase\Client\Api\PageTerms(
+					$client->getStore()->getTermIndex(),
+					$client->getStore()->getEntityIdLookup(),
+					$query,
+					$moduleName
+				);
+			}
+		);
+
+		// Resource loader modules
+		$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__. "/resources/Resources.php" ) );
+
+		$wgWBClientSettings = array_merge(
+			require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
+			require( __DIR__ . '/config/WikibaseClient.default.php' )
+		);
+
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			include_once( __DIR__ . 'config/WikibaseClient.experimental.php' );
+		}
+	}
+
 	/**
 	 * @see NamespaceChecker::isWikibaseEnabled
 	 *
