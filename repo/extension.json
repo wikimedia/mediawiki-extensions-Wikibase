@@ -1,0 +1,195 @@
+{
+	"name": "Wikibase Repository",
+	"version": "0.5 alpha",
+	"author": [
+		"The Wikidata team"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Wikibase_Repository",
+	"descriptionmsg": "wikibase-desc",
+	"type": "wikibase",
+	"callback": "RepoHooks::registerExtension",
+	"AutoloadClasses": {
+		"RepoHooks": "Wikibase.hooks.php"
+	},
+	"GroupPermissions": {
+		"*": {
+			"item-term": true,
+			"property-term": true,
+			"item-merge": true,
+			"item-redirect": true,
+			"property-create": true
+		}
+	},
+	"AvailableRights": [
+		"item-term",
+		"property-term",
+		"item-merge",
+		"item-redirect",
+		"property-create"
+	],
+	"SpecialPages": {
+		"NewItem": "Wikibase\\Repo\\Specials\\SpecialNewItem",
+		"NewProperty": "Wikibase\\Repo\\Specials\\SpecialNewProperty",
+		"ItemByTitle": "Wikibase\\Repo\\Specials\\SpecialItemByTitle",
+		"GoToLinkedPage": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage",
+		"ItemDisambiguation": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
+		"ItemsWithoutSitelinks": "Wikibase\\Repo\\Specials\\SpecialItemsWithoutSitelinks",
+		"SetLabel": "Wikibase\\Repo\\Specials\\SpecialSetLabel",
+		"SetDescription": "Wikibase\\Repo\\Specials\\SpecialSetDescription",
+		"SetAliases": "Wikibase\\Repo\\Specials\\SpecialSetAliases",
+		"SetLabelDescriptionAliases": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases",
+		"SetSiteLink": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink",
+		"EntitiesWithoutLabel": [
+			"Wikibase\\Repo\\Specials\\SpecialEntitiesWithoutPageFactory",
+			"newSpecialEntitiesWithoutLabel"
+		],
+		"EntitiesWithoutDescription": [
+			"Wikibase\\Repo\\Specials\\SpecialEntitiesWithoutPageFactory",
+			"newSpecialEntitiesWithoutDescription"
+		],
+		"ListDatatypes": "Wikibase\\Repo\\Specials\\SpecialListDatatypes",
+		"ListProperties": "Wikibase\\Repo\\Specials\\SpecialListProperties",
+		"DispatchStats": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
+		"EntityData": "Wikibase\\Repo\\Specials\\SpecialEntityData",
+		"MyLanguageFallbackChain": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain",
+		"MergeItems": "Wikibase\\Repo\\Specials\\SpecialMergeItems",
+		"RedirectEntity": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity"
+	},
+	"JobClasses": {
+		"UpdateRepoOnMove": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnMoveJob",
+		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob"
+	},
+	"APIModules": {
+		"wbgetentities": "Wikibase\\Api\\GetEntities",
+		"wbsetlabel": "Wikibase\\Api\\SetLabel",
+		"wbsetdescription": "Wikibase\\Api\\SetDescription",
+		"wbsearchentities": "Wikibase\\Api\\SearchEntities",
+		"wbsetaliases": "Wikibase\\Api\\SetAliases",
+		"wbeditentity": "Wikibase\\Api\\EditEntity",
+		"wblinktitles": "Wikibase\\Api\\LinkTitles",
+		"wbsetsitelink": "Wikibase\\Api\\SetSiteLink",
+		"wbcreateclaim": "Wikibase\\Api\\CreateClaim",
+		"wbgetclaims": "Wikibase\\Api\\GetClaims",
+		"wbremoveclaims": "Wikibase\\Api\\RemoveClaims",
+		"wbsetclaimvalue": "Wikibase\\Api\\SetClaimValue",
+		"wbsetreference": "Wikibase\\Api\\SetReference",
+		"wbremovereferences": "Wikibase\\Api\\RemoveReferences",
+		"wbsetclaim": "Wikibase\\Api\\SetClaim",
+		"wbremovequalifiers": "Wikibase\\Api\\RemoveQualifiers",
+		"wbsetqualifier": "Wikibase\\Api\\SetQualifier",
+		"wbmergeitems": "Wikibase\\Api\\MergeItems",
+		"wbformatvalue": "Wikibase\\Api\\FormatSnakValue",
+		"wbparsevalue": "Wikibase\\Api\\ParseValue",
+		"wbavailablebadges": "Wikibase\\Api\\AvailableBadges",
+		"wbcreateredirect": "Wikibase\\Api\\CreateRedirect"
+	},
+	"MessagesDirs": {
+		"Wikibase": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"WikibaseAlias": "Wikibase.i18n.alias.php",
+		"WikibaseNS": "Wikibase.i18n.namespaces.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"RepoHooks::onBeforePageDisplay"
+		],
+		"LoadExtensionSchemaUpdates": [
+			"RepoHooks::onSchemaUpdate",
+			"\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater::onSchemaUpdate"
+		],
+		"UnitTestsList": [
+			"RepoHooks::registerUnitTests"
+		],
+		"ResourceLoaderTestModules": [
+			"RepoHooks::registerQUnitTests"
+		],
+		"NamespaceIsMovable": [
+			"RepoHooks::onNamespaceIsMovable"
+		],
+		"NewRevisionFromEditComplete": [
+			"RepoHooks::onNewRevisionFromEditComplete"
+		],
+		"SkinTemplateNavigation": [
+			"RepoHooks::onPageTabs"
+		],
+		"RecentChange_save": [
+			"RepoHooks::onRecentChangeSave"
+		],
+		"ArticleDeleteComplete": [
+			"RepoHooks::onArticleDeleteComplete"
+		],
+		"ArticleUndelete": [
+			"RepoHooks::onArticleUndelete"
+		],
+		"GetPreferences": [
+			"RepoHooks::onGetPreferences"
+		],
+		"LinkBegin": [
+			"Wikibase\\Repo\\Hooks\\LinkBeginHookHandler::onLinkBegin"
+		],
+		"ChangesListInitRows": [
+			"Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandlers::onChangesListInitRows"
+		],
+		"OutputPageBodyAttributes": [
+			"RepoHooks::onOutputPageBodyAttributes"
+		],
+		"PageHistoryLineEnding": [
+			"RepoHooks::onPageHistoryLineEnding"
+		],
+		"WikibaseDeleteData": [
+			"RepoHooks::onWikibaseDeleteData"
+		],
+		"ApiCheckCanExecute": [
+			"RepoHooks::onApiCheckCanExecute"
+		],
+		"SetupAfterCache": [
+			"RepoHooks::onSetupAfterCache"
+		],
+		"ShowSearchHit": [
+			"RepoHooks::onShowSearchHit"
+		],
+		"ShowSearchHitTitle": [
+			"RepoHooks::onShowSearchHitTitle"
+		],
+		"TitleGetRestrictionTypes": [
+			"RepoHooks::onTitleGetRestrictionTypes"
+		],
+		"AbuseFilter-contentToString": [
+			"RepoHooks::onAbuseFilterContentToString"
+		],
+		"SpecialPage_reorderPages": [
+			"RepoHooks::onSpecialPage_reorderPages"
+		],
+		"OutputPageParserOutput": [
+			"RepoHooks::onOutputPageParserOutput"
+		],
+		"ContentModelCanBeUsedOn": [
+			"RepoHooks::onContentModelCanBeUsedOn"
+		],
+		"OutputPageBeforeHTML": [
+			"Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler::onOutputPageBeforeHTML",
+			"RepoHooks::onOutputPageBeforeHtmlRegisterConfig"
+		],
+		"ContentHandlerForModelID": [
+			"RepoHooks::onContentHandlerForModelID"
+		],
+		"APIQuerySiteInfoStatisticsInfo": [
+			"RepoHooks::onAPIQuerySiteInfoStatisticsInfo"
+		],
+		"ImportHandleRevisionXMLTag": [
+			"RepoHooks::onImportHandleRevisionXMLTag"
+		],
+		"BaseTemplateToolbox": [
+			"RepoHooks::onBaseTemplateToolbox"
+		],
+		"SkinTemplateBuildNavUrlsNav_urlsAfterPermalink": [
+			"RepoHooks::onSkinTemplateBuildNavUrlsNav_urlsAfterPermalink"
+		],
+		"SkinMinervaDefaultModules": [
+			"RepoHooks::onSkinMinervaDefaultModules"
+		]
+	}
+}
