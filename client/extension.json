@@ -1,0 +1,120 @@
+{
+	"name": "Wikibase Client",
+	"version": "0.5 alpha",
+	"author": [
+		"The Wikidata team"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Wikibase_Client",
+	"descriptionmsg": "wikibase-client-desc",
+	"type": "wikibase",
+	"callback": "ClientHooks::registerExtension",
+	"AutoloadClasses": {
+		"ClientHooks": "WikibaseClient.hooks.php"
+	},
+	"RecentChangesFlags": {
+		"wikibase-edit": {
+			"letter": "wikibase-rc-wikibase-edit-letter",
+			"title": "wikibase-rc-wikibase-edit-title"
+		}
+	},
+	"SpecialPages": {
+		"UnconnectedPages": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages"
+	},
+	"MessagesDirs": {
+		"wikibaseclient": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"Wikibaseclientalias": "WikibaseClient.i18n.alias.php",
+		"wikibaseclientmagic": "WikibaseClient.i18n.magic.php"
+	},
+	"Hooks": {
+		"UnitTestsList": [
+			"ClientHooks::registerUnitTests"
+		],
+		"BaseTemplateToolbox": [
+			"ClientHooks::onBaseTemplateToolbox"
+		],
+		"OldChangesListRecentChangesLine": [
+			"ClientHooks::onOldChangesListRecentChangesLine"
+		],
+		"OutputPageParserOutput": [
+			"\\Wikibase\\Client\\Hooks\\SidebarHookHandlers::onOutputPageParserOutput"
+		],
+		"SkinTemplateGetLanguageLink": [
+			"\\Wikibase\\Client\\Hooks\\SidebarHookHandlers::onSkinTemplateGetLanguageLink"
+		],
+		"ContentAlterParserOutput": [
+			"\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandlers::onContentAlterParserOutput"
+		],
+		"SidebarBeforeOutput": [
+			"\\Wikibase\\Client\\Hooks\\SidebarHookHandlers::onSidebarBeforeOutput"
+		],
+		"ArticleEditUpdates": [
+			"\\Wikibase\\Client\\Hooks\\DataUpdateHookHandlers::onArticleEditUpdates"
+		],
+		"ArticleDeleteComplete": [
+			"\\Wikibase\\Client\\Hooks\\DataUpdateHookHandlers::onArticleDeleteComplete",
+			"\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandlers::onArticleDeleteComplete"
+		],
+		"ParserFirstCallInit": [
+			"ClientHooks::onParserFirstCallInit"
+		],
+		"MagicWordwgVariableIDs": [
+			"ClientHooks::onMagicWordwgVariableIDs"
+		],
+		"ParserGetVariableValueSwitch": [
+			"ClientHooks::onParserGetVariableValueSwitch"
+		],
+		"SkinTemplateOutputPageBeforeExec": [
+			"ClientHooks::onSkinTemplateOutputPageBeforeExec"
+		],
+		"SpecialMovepageAfterMove": [
+			"\\Wikibase\\Client\\Hooks\\MovePageNotice::onSpecialMovepageAfterMove"
+		],
+		"SpecialWatchlistQuery": [
+			"ClientHooks::onSpecialWatchlistQuery"
+		],
+		"SpecialRecentChangesQuery": [
+			"ClientHooks::onSpecialRecentChangesQuery"
+		],
+		"SpecialRecentChangesFilters": [
+			"ClientHooks::onSpecialRecentChangesFilters"
+		],
+		"GetPreferences": [
+			"ClientHooks::onGetPreferences"
+		],
+		"BeforePageDisplay": [
+			"ClientHooks::onBeforePageDisplay",
+			"ClientHooks::onBeforePageDisplayAddJsConfig"
+		],
+		"ScribuntoExternalLibraries": [
+			"ClientHooks::onScribuntoExternalLibraries"
+		],
+		"SpecialWatchlistFilters": [
+			"ClientHooks::onSpecialWatchlistFilters"
+		],
+		"InfoAction": [
+			"ClientHooks::onInfoAction"
+		],
+		"TitleMoveComplete": [
+			"\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandlers::onTitleMoveComplete"
+		],
+		"BaseTemplateAfterPortlet": [
+			"ClientHooks::onBaseTemplateAfterPortlet"
+		],
+		"GetBetaFeaturePreferences": [
+			"ClientHooks::onGetBetaFeaturePreferences"
+		],
+		"ArticleDeleteAfterSuccess": [
+			"ClientHooks::onArticleDeleteAfterSuccess"
+		],
+		"LoadExtensionSchemaUpdates": [
+			"\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater::onSchemaUpdate"
+		],
+		"WikibaseDeleteData": [
+			"ClientHooks::onWikibaseDeleteData"
+		]
+	}
+}
