@@ -2,6 +2,10 @@
 
 ## Release notes
 
+### 1.0.3 (2015-05-21)
+
+* Made installable with DataValues JavaScript 0.7.0.
+
 ### 1.0.2 (2015-05-20)
 
 #### Enhancements
