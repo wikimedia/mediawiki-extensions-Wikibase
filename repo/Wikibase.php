@@ -67,7 +67,7 @@ if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 }
 
 if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-    throw new Exception( 'Wikibase depends on WikibaseView.' );
+	throw new Exception( 'Wikibase depends on WikibaseView.' );
 }
 
 if ( !defined( 'PURTLE_VERSION' ) ) {
@@ -213,7 +213,8 @@ call_user_func( function() {
 	$wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
 	$wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteData';
 	$wgHooks['ApiCheckCanExecute'][] 					= 'Wikibase\RepoHooks::onApiCheckCanExecute';
-	$wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
+	$wgHooks['SetupAfterCache'][]                       = 'Wikibase\RepoHooks::onSetupAfterCache';
+
 	$wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
 	$wgHooks['ShowSearchHitTitle'][]					= 'Wikibase\RepoHooks::onShowSearchHitTitle';
 	$wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
