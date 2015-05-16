@@ -98,6 +98,10 @@ class RdfDumpGenerator extends DumpGenerator {
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 
+			if ( !$entityRevision ) {
+				throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
+			}
+
 			$this->rdfBuilder->addEntityRevisionInfo(
 				$entityRevision->getEntity()->getId(),
 				$entityRevision->getRevisionId(),
@@ -108,9 +112,6 @@ class RdfDumpGenerator extends DumpGenerator {
 				$entityRevision->getEntity()
 			);
 
-			if ( !$entityRevision ) {
-				throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
-			}
 		} catch ( MWContentSerializationException $ex ) {
 			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
 		} catch ( UnresolvedRedirectException $e ) {
