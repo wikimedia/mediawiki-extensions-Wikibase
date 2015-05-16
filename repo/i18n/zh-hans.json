@@ -308,7 +308,7 @@
 	"wikibase-item-summary-wbeditentity-update": "更改项",
 	"wikibase-item-summary-wbeditentity-override": "清除项",
 	"wikibase-item-summary-wbsetreference": "设置参考",
-	"wikibase-item-summary-wbsetreference-add": "添加参考至声称",
+	"wikibase-item-summary-wbsetreference-add": "添加参考文献至声称",
 	"wikibase-item-summary-wbsetreference-set": "更改声称的参考",
 	"wikibase-item-summary-wbsetlabel-add": "添加[$2]标签",
 	"wikibase-item-summary-wbsetlabel-set": "更改[$2]标签",

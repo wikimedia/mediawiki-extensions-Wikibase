@@ -190,6 +190,7 @@
 	"wikibase-noentity-createone": "Вы можаце таксама [[$1|стварыць яго]].",
 	"wikibase-item-summary-wbsetitem": "Створаны новы прадмет",
 	"wikibase-item-summary-wbcreate-new": "Створаны новы аб’ект",
+	"wikibase-item-summary-wbcreateredirect": "Перанакіраваны на $4",
 	"wikibase-item-summary-wbeditentity": "Створаны новы аб’ект",
 	"wikibase-item-summary-wbeditentity-create": "Створаны новы аб’ект",
 	"wikibase-item-summary-wbeditentity-update": "Абноўлены аб’ект",
