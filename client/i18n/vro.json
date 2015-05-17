@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Võrok"
+		]
+	},
+	"tooltip-t-wikibase": "Link andmõkogoga köüdedü ütsüse mano",
+	"wikibase-comment-update": "Ütsüst {{WBREPONAME}} om muudõt",
+	"wikibase-dataitem": "Andmõütsüs",
+	"wikibase-editlinks": "Toimõndaq linke",
+	"wikibase-editlinkstitle": "Toimõndaq keelelinke",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Käkiq ärq",
+	"wikibase-rc-hide-wikidata-show": "Näütäq",
+	"wikibase-rc-wikibase-edit-letter": "A",
+	"wikibase-rc-wikibase-edit-title": "Ütsüse {{WBREPONAME}} muutminõ",
+	"wikibase-otherprojects": "Teisin projekten"
+}

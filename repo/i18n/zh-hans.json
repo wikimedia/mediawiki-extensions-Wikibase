@@ -472,6 +472,7 @@
 	"apihelp-wbgetentities-example-12": "获取项Q42的网站链接",
 	"apihelp-wbgetentities-example-13": "获取ID为Q42的实体，只显示来自英语维基的网站链接",
 	"apihelp-wblinktitles-description": "将两个不同wiki上的两个条目分配至一个Wikibase项中。",
+	"apihelp-wblinktitles-example-1": "从英语页面添加链接“Hydrogen”至德语页面“Wasserstoff”。",
 	"apihelp-wbmergeitems-description": "合并重复项。",
 	"apihelp-wbmergeitems-param-fromid": "要合并自的ID",
 	"apihelp-wbmergeitems-param-toid": "要合并到的ID",

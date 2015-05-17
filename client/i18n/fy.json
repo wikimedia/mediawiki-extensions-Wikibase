@@ -4,10 +4,14 @@
 			"Robin0van0der0vliet"
 		]
 	},
+	"wikibase-comment-update": "Item fan {{WBREPONAME}} bywurke",
 	"wikibase-dataitem": "{{WBREPONAME}}-item",
 	"wikibase-editlinks": "Keppelings bewurkje",
+	"wikibase-editlinkstitle": "Yntertaalkeppelings bewurkje",
 	"wikibase-linkitem-input-site": "Taal:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "ferbergje",
+	"wikibase-rc-hide-wikidata-show": "werjaan",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Bewurking fan {{WBREPONAME}}",
 	"wikibase-otherprojects": "Oare projekten"
