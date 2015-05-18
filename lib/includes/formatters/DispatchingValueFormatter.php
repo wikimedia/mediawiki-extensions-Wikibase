@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib;
 
 use DataValues\DataValue;

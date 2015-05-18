@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Client\Usage\Tests;
 
 use Wikibase\Client\Usage\EntityUsage;

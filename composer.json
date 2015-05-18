@@ -70,5 +70,8 @@
 			"Wikimedia\\Purtle\\": "purtle/src",
 			"Wikimedia\\Purtle\\Tests\\": "purtle/tests/phpunit"
 		}
+	},
+	"scripts": {
+		"phpcs": "phpcs $PHPCS_ARGS -s --standard=phpcs.xml --ignore=extensions/ValueView,vendor --encoding=utf-8 --extensions=php"
 	}
 }
