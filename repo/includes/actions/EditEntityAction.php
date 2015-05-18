@@ -169,7 +169,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 			// ignore undo, even if set
 			$newerRevision = $latestRevision;
-		} else if ( $req->getCheck( 'undo' ) ) {
+		} elseif ( $req->getCheck( 'undo' ) ) {
 			$newerRevision = Revision::newFromId( $req->getInt( 'undo' ) );
 
 			if ( !$newerRevision ) {
@@ -189,7 +189,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 					return Status::newFatal( 'wikibase-undo-firstrev' );
 				}
 			}
-		} else if ( $req->getCheck( 'undoafter' ) ) {
+		} elseif ( $req->getCheck( 'undoafter' ) ) {
 			$olderRevision = Revision::newFromId( $req->getInt( 'undoafter' ) );
 
 			if ( !$olderRevision ) {
