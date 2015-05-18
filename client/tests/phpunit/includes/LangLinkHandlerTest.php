@@ -88,11 +88,11 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		return new LangLinkHandler(
 			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
 			$this->getLanguageLinkBadgeDisplay(),
-			'srwiki',
 			new NamespaceChecker( array( NS_TALK ), array() ),
 			$this->mockRepo,
 			$this->mockRepo,
 			$siteStore,
+			'srwiki',
 			'wikipedia'
 		);
 	}
