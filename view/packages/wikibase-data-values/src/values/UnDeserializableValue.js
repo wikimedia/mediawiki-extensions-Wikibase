@@ -15,35 +15,35 @@ var PARENT = dv.DataValue;
  *
  * @constructor
  *
- * @param {string} ofType The data value type the structure should have been unserialized to.
- * @param {Object} unUnserializableStructure Plain object assumingly representing some data value
- *        but the responsible unserializer was not able to unserialize it.
- * @param {Error} unserializeError The error thrown during the attempt to unserialize the given
+ * @param {string} ofType The data value type the structure should have been deserialized to.
+ * @param {Object} unDeserializableStructure Plain object assumingly representing some data value
+ *        but the responsible deserializer was not able to deserialize it.
+ * @param {string} deserializeError The error thrown during the attempt to deserialize the given
  *        structure.
  */
 var SELF = dv.UnDeserializableValue = util.inherit(
 	'DvUnDeserializableValue',
 	PARENT,
-	function( ofType, unUnserializableStructure, unserializeError ) {
-		if( !$.isPlainObject( unUnserializableStructure ) ) {
-			throw new Error( 'The un-unserializable structure has to be a plain object' );
+	function( unDeserializableStructure, ofType, deserializeError ) {
+		if( !$.isPlainObject( unDeserializableStructure ) ) {
+			throw new Error( 'The undeserializable structure has to be a plain object.' );
 		}
 		if( typeof ofType !== 'string' ) {
-			throw new Error( '' );
+			throw new Error( 'The undeserializable type must be a string.' );
 		}
-		if( !unserializeError || !( unserializeError instanceof Error ) ) {
-			throw new Error( 'No Error object given' );
+		if( typeof deserializeError !== 'string' ) {
+			throw new Error( 'The undeserializable error param must be a string.' );
 		}
-		this._unUnserializableStructure = $.extend( {}, unUnserializableStructure );
+		this._unDeserializableStructure = $.extend( {}, unDeserializableStructure );
 		this._targetType = ofType;
-		this._unserializeError = unserializeError;
+		this._deserializeError = deserializeError;
 	},
 {
 	/**
 	 * @property {Object}
 	 * @private
 	 */
-	_unUnserializableStructure: null,
+	_unDeserializableStructure: null,
 
 	/**
 	 * @property {string}
@@ -52,10 +52,10 @@ var SELF = dv.UnDeserializableValue = util.inherit(
 	_targetType: null,
 
 	/**
-	 * @property {Error}
+	 * @property {string}
 	 * @private
 	 */
-	_unserializeError: null,
+	_deserializeError: null,
 
 	/**
 	 * @inheritdoc
@@ -63,7 +63,7 @@ var SELF = dv.UnDeserializableValue = util.inherit(
 	 * @return {string}
 	 */
 	getSortKey: function() {
-		return this.getReason().name;
+		return this.getReason();
 	},
 
 	/**
@@ -76,16 +76,16 @@ var SELF = dv.UnDeserializableValue = util.inherit(
 	},
 
 	/**
-	 * Returns the structure not possible to unserialize.
+	 * Returns the structure not possible to deserialize.
 	 *
 	 * @return {Object}
 	 */
 	getStructure: function() {
-		return $.extend( {}, this._unUnserializableStructure );
+		return $.extend( {}, this._unDeserializableStructure );
 	},
 
 	/**
-	 * Returns the data value type into which the structure should have been unserialized.
+	 * Returns the data value type into which the structure should have been deserialized.
 	 *
 	 * @return {string}
 	 */
@@ -94,53 +94,58 @@ var SELF = dv.UnDeserializableValue = util.inherit(
 	},
 
 	/**
-	 * Returns the error object stating why some unserializer was not able to unserialize the
+	 * Returns the error object stating why some deserializer was not able to deserialize the
 	 * structure.
 	 *
-	 * @return {Error}
+	 * @return {string}
 	 */
 	getReason: function() {
-		return this._unserializeError;
+		return this._deserializeError;
 	},
 
 	/**
 	 * @inheritdoc
 	 */
 	equals: function( other ) {
-		// TODO: Do deep equal of the structures and reasons instead.
-		return this === other;
+		if( !( other instanceof SELF ) ) {
+			return false;
+		}
+
+		return JSON.stringify( this.toJSON() ) === JSON.stringify( other.toJSON() );
 	},
 
 	/**
 	 * @inheritdoc
-	 *
-	 * @throws {Error} whenever the function is called (implementation missing).
 	 */
 	toJSON: function() {
-		// TODO
-		throw new Error( 'Not implemented yet.' );
+		return {
+			value: this.getStructure(),
+			type: this.getTargetType(),
+			error: this.getReason()
+		};
 	}
 } );
 
 /**
  * @inheritdoc
- *
- * @throws {Error} whenever the function is called (implementation missing).
  */
 SELF.newFromJSON = function( json ) {
-	// TODO
-	throw new Error( 'Not implemented yet.' );
+	return new SELF(
+		json.value,
+		json.type,
+		json.error
+	);
 };
 
 /**
  * @inheritdoc
- * @property {string} [TYPE='ununserializable']
+ * @property {string} [TYPE='undeserializable']
  * @static
  */
-SELF.TYPE = 'ununserializable';
+SELF.TYPE = 'undeserializable';
 
 // NOTE: we don't have to register this one globally since this one is constructed on demand rather
 //  than being provided by some store or builder.
-//dv.registerDataValue( SELF );
+dv.registerDataValue( SELF );
 
 }( dataValues, util, jQuery ) );
