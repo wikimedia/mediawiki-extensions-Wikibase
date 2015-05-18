@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Test;
 
 use DataValues\UnDeserializableValue;

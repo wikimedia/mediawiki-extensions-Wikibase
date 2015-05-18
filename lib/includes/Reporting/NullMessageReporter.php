@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Lib\Reporting;
+
 /**
  * Mock implementation of the MessageReporter interface that
  * does nothing with messages it receives.

@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase;
 
 use DataValues\TimeValue;

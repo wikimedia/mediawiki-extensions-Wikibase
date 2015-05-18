@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Test\Validators;
 
 use Wikibase\Validators\NumberRangeValidator;
