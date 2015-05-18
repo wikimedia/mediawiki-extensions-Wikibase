@@ -1,12 +1,11 @@
 <?php
+
 /**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
  * @codeCoverageIgnoreStart
  */
-
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( 'Not an entry point.' );
-}
-
 return call_user_func( function() {
 	global $wgResourceModules;
 
