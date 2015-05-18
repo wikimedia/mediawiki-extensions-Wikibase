@@ -13,6 +13,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|cangiamende|cangiaminde}}",
 	"wikibase-dataitem": "Vôsce de {{WBREPONAME}}",
 	"wikibase-editlinks": "Cange le collegaminde",
+	"wikibase-editlinkstitle": "Cange le collegaminde inder lènghe",
 	"wikibase-linkitem-addlinks": "Aggiunge le collegaminde",
 	"wikibase-linkitem-title": "Collegate cu 'a pàgene",
 	"wikibase-linkitem-linkpage": "Collegate cu 'a pàgene",

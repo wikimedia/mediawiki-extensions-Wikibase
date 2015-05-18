@@ -482,6 +482,7 @@
 	"apihelp-wbparsevalue-param-parser": "要使用的ValueParser的ID",
 	"apihelp-wbparsevalue-param-values": "要解析的值",
 	"apihelp-wbparsevalue-example-1": "不对字符串的格式做出更改。",
+	"apihelp-wbparsevalue-example-2": "解析1994-02-08为日期格式，精度为9（年）。",
 	"apihelp-wbremoveclaims-description": "移除Wikibase声称。",
 	"apihelp-wbremoveclaims-example-1": "移除带GUID“Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N”的声称",
 	"apihelp-wbremovequalifiers-description": "从一个声称中移除一个限定符。",

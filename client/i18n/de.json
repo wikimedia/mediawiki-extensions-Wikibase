@@ -4,11 +4,16 @@
 			"Kghbln",
 			"Metalhead64",
 			"Purodha",
-			"Inkowik"
+			"Inkowik",
+			"Tiin"
 		]
 	},
 	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",
 	"tooltip-t-wikibase": "Link zum verbundenen Objekt im Datenrepositorium",
+	"apihelp-query+pageterms-description": "Ruft Begriffe im Zusammenhang mit einer Seite über ein damit verbundenes Datenelement ab.",
+	"apihelp-query+pageterms-example-simple": "Ruft alle Begriffe im Zusammenhang mit der Seite „London“ in der Benutzersprache ab.",
+	"apihelp-query+pageterms-example-label-en": "Ruft Bezeichnungen und Aliasse im Zusammenhang mit der Seite „London“ in Englisch ab.",
+	"apihelp-query+pageterms-param-terms": "Die Art der Begriffe, die abgerufen werden soll, z.&nbsp;B. „Beschreibung“. Wenn es nicht festgelegt wird, werden alle Arten zurückgegeben.",
 	"apihelp-query+wikibase-description": "Bezieht Informationen zum verknüpften Wikibase-Repositorium.",
 	"apihelp-query+wikibase-example": "Bezieht den URL-Pfad und weitere Informationen zum Wikibase-Repositorium.",
 	"apihelp-query+wikibase-param-prop": "Informationen, die zurückgegeben werden sollen:\n;<kbd>url</kbd>: Basis-URL, Skriptpfad und Artikelpfad.",

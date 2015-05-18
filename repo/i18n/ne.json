@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"बिप्लब आनन्द"
+			"बिप्लब आनन्द",
+			"Nirjal stha"
 		]
 	},
 	"wikibase-edit": "सम्पादन",
 	"wikibase-add": "जोड्ने",
 	"wikibase-sitelinks-special": "अन्य साइटहरू",
 	"wikibase-statementview-rank-normal": "सामान्य ओहदा",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|सन्दर्भहरू}}"
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|सन्दर्भहरू}}",
+	"action-item-merge": "चिजहरू जोड्नुहोस्"
 }

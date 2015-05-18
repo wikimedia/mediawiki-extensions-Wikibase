@@ -183,7 +183,7 @@
 	"wikibase-setaliases-submit": "Aliasse festlegen",
 	"special-setlabeldescriptionaliases": "Bezeichnung, Beschreibung und Aliasse festlegen",
 	"wikibase-setlabeldescriptionaliases-introfull": "Du setzt die Bezeichnung, Beschreibung und Aliasse in $2 für [[$1]] fest. Mehrere Aliasse werden durch ein Pipe-Zeichen (<code>|</code>) getrennt.",
-	"wikibase-setlabeldescriptionaliases-intro": "Dieses Formular ermöglicht dir das Festlegen der Bezeichnung, Beschreibung und Aliasse eines Objektes. Du musst zuerst die Objektkennung (z.&nbsp;B. Q23) und einen Sprachcode (z.&nbsp;B. „de“) angeben.",
+	"wikibase-setlabeldescriptionaliases-intro": "Dieses Formular ermöglicht dir das Festlegen der Bezeichnung, Beschreibung und Aliasse eines Objektes. Du musst zuerst die Objektkennung (z.&nbsp;B. „Q23“) und einen Sprachcode (z.&nbsp;B. „de“) angeben.",
 	"wikibase-setlabeldescriptionaliases-label-label": "Bezeichnung:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Beschreibung:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliasse:",

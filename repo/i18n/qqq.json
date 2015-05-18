@@ -38,7 +38,8 @@
 			"Robby",
 			"KuboF",
 			"Umherirrender",
-			"Macofe"
+			"Macofe",
+			"Legoktm"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=https://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -268,6 +269,7 @@
 	"wikibase-dispatchstats-average": "Row header for average lag values\n{{Identical|Average}}",
 	"special-listdatatypes": "{{doc-special|ListDataTypes}}\nThis special page returns a list of available datatypes (such as commonsMedia)",
 	"wikibase-listdatatypes-intro": "Intro text for the ListDatatypes special page.",
+	"wikibase-listdatatypes-listproperties": "Text of a link that goes to a list of properties for that data type",
 	"wikibase-history-title-with-label": "The title of the history page with label and prefixed id. Parameters:\n* $1 - the prefixed id, the id is usually in parenthesis\n* $2 - the localized label, it is usually in quotes",
 	"wikibase-history-title-without-label": "The title of the history page with only a prefixed id. Parameters:\n* $1 - the prefixed id, the id is usually in parenthesis",
 	"special-listproperties": "{{doc-special|ListProperties}}\nThis special page returns a list of properties for a given datatype (such as commonsMedia)",

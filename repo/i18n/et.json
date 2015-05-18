@@ -166,7 +166,7 @@
 	"wikibase-setaliases-submit": "Määra rööpkujud",
 	"special-setlabeldescriptionaliases": "Sildi, kirjelduse ja rööpkujude määramine",
 	"wikibase-setlabeldescriptionaliases-introfull": "Oled määramas antud keeles ($2) olemi [[$1]] silti, kirjeldust ja rööpkujusid. Mitut rööpkuju eraldab püstkriips (<code>|</code>).",
-	"wikibase-setlabeldescriptionaliases-intro": "See vorm võimaldab määrata olemi sildi, kirjelduse ja röökujud. Pead kõigepealt ära tooma olemi identifikaatori (nt Q23) ja keelekoodi (nt \"et\").",
+	"wikibase-setlabeldescriptionaliases-intro": "See vorm võimaldab määrata olemi sildi, kirjelduse ja röökujud. Pead kõigepealt ära tooma olemi identifikaatori (nt \"Q23\") ja keelekoodi (nt \"et\").",
 	"wikibase-setlabeldescriptionaliases-label-label": "Silt:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Kirjeldus:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Rööpkujud:",
