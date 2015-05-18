@@ -69,11 +69,6 @@ class LangLinkHandler {
 	private $siteGroup;
 
 	/**
-	 * @var ItemId[]
-	 */
-	private $itemIds;
-
-	/**
 	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
 	 * @param LanguageLinkBadgeDisplay $badgeDisplay
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
@@ -471,14 +466,10 @@ class LangLinkHandler {
 	 * @return ItemId|null
 	 */
 	private function getItemIdForTitle( Title $title ) {
-		$key = $title->getFullText();
-
-		if ( !isset( $this->itemIds[$key] ) ) {
-			$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
-			$this->itemIds[$key] = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
-		}
-
-		return $this->itemIds[$key];
+		return $this->siteLinkLookup->getItemIdForLink(
+			$this->siteId,
+			$title->getFullText()
+		);
 	}
 
 }
