@@ -8,9 +8,10 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
-### 1.0.2 (dev)
+### 1.0.2 (2015-05-28)
 
 #### Enhancements
+* Adapt to DataValuesJavaScript 0.7.0.
 * SnakList.merge() accepts null.
 * Updated code documentation for being able to automatically generate a proper documentation using JSDuck.
 
