@@ -57,7 +57,7 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 		$calendar = $value->getCalendarModel();
 		if( $calendar == self::GREGORIAN_CALENDAR ) {
 			return $this->cleanupGregorianValue( $value->getTime() );
-		} else if( $calendar == self::JULIAN_CALENDAR ) {
+		} elseif ( $calendar == self::JULIAN_CALENDAR ) {
 			return $this->julianDateValue( $value->getTime() );
 		}
 		return null;
