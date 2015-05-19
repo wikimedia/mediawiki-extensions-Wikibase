@@ -59,7 +59,7 @@ class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDoHandle() {
-		$handler = new NoLangLinkHandler( new NamespaceChecker( array(), array() ) );
+		$handler = new NoLangLinkHandler( new NamespaceChecker( array() ) );
 		$parser = new Parser();
 		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
 
