@@ -59,7 +59,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected a TimeValue.' );
 		}
 
-		$timeHtml = $this->getTimeHtml( $value->getTime() );
+		$timeHtml = $this->getTimestampHtml( $value->getTime() );
 
 		$timeZone = $value->getTimezone();
 		$timeZoneHtml = is_int( $timeZone )
@@ -102,14 +102,14 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	}
 
 	/**
-	 * @param string $time
+	 * @param string $timestamp
 	 *
 	 * @return string HTML
 	 */
-	private function getTimeHtml( $time ) {
+	private function getTimestampHtml( $timestamp ) {
 		// Loose check if the ISO-like string contains at least year, month, day and hour.
-		if ( !preg_match( '/^([-+]?)(\d+)(-\d+-\d+T\d+(?::\d+)*)Z?$/i', $time, $matches ) ) {
-			return htmlspecialchars( $time );
+		if ( !preg_match( '/^([-+]?)(\d+)(-\d+-\d+T\d+(?::\d+)*)Z?$/i', $timestamp, $matches ) ) {
+			return htmlspecialchars( $timestamp );
 		}
 
 		// Actual MINUS SIGN (U+2212) instead of HYPHEN-MINUS (U+002D)
@@ -121,20 +121,20 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	}
 
 	/**
-	 * @param int $timezone
+	 * @param int $timezone in minutes
 	 *
 	 * @return string HTML
 	 */
 	private function getTimeZoneHtml( $timezone ) {
 		// Actual MINUS SIGN (U+2212) instead of HYPHEN-MINUS (U+002D)
 		$sign = $timezone < 0 ? "\xE2\x88\x92" : '+';
-		$hour = floor( abs( $timezone ) / 60 );
+		$hour = (int)( abs( $timezone ) / 60 );
 		$minute = abs( $timezone ) - $hour * 60;
 		return $sign . sprintf( '%02d:%02d', $hour, $minute );
 	}
 
 	/**
-	 * @param string $calendarModel
+	 * @param string $calendarModel URI
 	 *
 	 * @return string HTML
 	 */
@@ -154,7 +154,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	}
 
 	/**
-	 * @param int $precision
+	 * @param int $precision One of the TimeValue::PRECISION_... constants.
 	 * @param int $amount
 	 *
 	 * @return string HTML
