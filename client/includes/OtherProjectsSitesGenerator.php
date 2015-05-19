@@ -36,7 +36,7 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	 * @param string $localSiteId
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, $localSiteId, array $specialSiteGroups ) {
+	public function __construct( SiteStore $siteStore, $localSiteId, array $specialSiteGroups = array() ) {
 		$this->siteStore = $siteStore;
 		$this->localSiteId = $localSiteId;
 		$this->specialSiteGroups = $specialSiteGroups;

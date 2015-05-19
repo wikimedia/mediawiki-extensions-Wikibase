@@ -86,10 +86,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getSiteStore(),
 			$this->getMock( 'DataTypes\DataTypeFactory' ),
 			$templateFactory,
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
-			array(),
-			array(),
-			array()
+			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' )
 		);
 	}
 

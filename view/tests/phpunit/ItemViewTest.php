@@ -61,8 +61,7 @@ class ItemViewTest extends EntityViewTest {
 			$this->getMock( 'Language' ),
 			$this->getMockBuilder( 'Wikibase\View\SiteLinksView' )
 				->disableOriginalConstructor()
-				->getMock(),
-			array()
+				->getMock()
 		);
 
 		return array(
