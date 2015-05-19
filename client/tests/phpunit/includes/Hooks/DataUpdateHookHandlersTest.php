@@ -86,8 +86,10 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 *
 	 * @return ParserOutput
 	 */
-	private function newParserOutput( array $usages = null ) {
+	private function newParserOutput( array $usages = null, $timestamp ) {
 		$output = new ParserOutput();
+
+		$output->setTimestamp( $timestamp );
 
 		if ( $usages ) {
 			$acc = new ParserOutputUsageAccumulator( $output );
@@ -102,37 +104,27 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Title $title
+	 * @param EntityUsage[]|null $usages
+	 * @param string $touched
 	 *
 	 * @return WikiPage
 	 */
-	private function newWikiPage( Title $title, $touched ) {
-		$page = $this->getMockBuilder( 'WikiPage' )
+	private function newLinksUpdate( Title $title, array $usages = null, $touched ) {
+		$pout = $this->newParserOutput( $usages, $touched );
+
+		$linksUpdate = $this->getMockBuilder( 'LinksUpdate' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$page->expects( $this->any() )
+		$linksUpdate->expects( $this->any() )
 			->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );
 
-		$page->expects( $this->any() )
-			->method( 'getTouched' )
-			->will( $this->returnValue( $touched ) );
+		$linksUpdate->expects( $this->any() )
+			->method( 'getParserOutput' )
+			->will( $this->returnValue( $pout ) );
 
-		return $page;
-	}
-
-	/**
-	 * @param array[]|null $usages
-	 *
-	 * @return object
-	 */
-	private function newEditInfo( array $usages = null ) {
-		$output = $this->newParserOutput( $usages );
-
-		$editInfo = new \stdClass();
-		$editInfo->output = $output;
-
-		return $editInfo;
+		return $linksUpdate;
 	}
 
 	public function testNewFromGlobalState() {
@@ -171,12 +163,11 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$timestamp = '20150505000000';
 		$expectBailout = ( $title->getNamespace() !== NS_MAIN );
 
-		$page = $this->newWikiPage( $title, $timestamp );
-		$editInfo = $this->newEditInfo( $usage );
+		$linksUpdate = $this->newLinksUpdate( $title, $usage, $timestamp );
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, $expectBailout, $usage, $timestamp );
-		$handler->doArticleEditUpdates( $page, $editInfo, true );
+		$handler->doLinksUpdateComplete( $linksUpdate );
 	}
 
 	public function provideDoArticleDeleteComplete() {
