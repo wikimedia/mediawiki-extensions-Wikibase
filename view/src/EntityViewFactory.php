@@ -90,9 +90,9 @@ class EntityViewFactory {
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
-		array $siteLinkGroups,
-		array $specialSiteLinkGroups,
-		array $badgeItems
+		array $siteLinkGroups = array(),
+		array $specialSiteLinkGroups = array(),
+		array $badgeItems = array()
 	) {
 		$this->checkOutputFormat( $htmlIdFormatterFactory->getOutputFormat(), 'HTML' );
 		$this->checkOutputFormat( $plainTextIdFormatterFactory->getOutputFormat(), 'Plain' );
@@ -102,11 +102,11 @@ class EntityViewFactory {
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
+		$this->templateFactory = $templateFactory;
+		$this->languageNameLookup = $languageNameLookup;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
-		$this->templateFactory = $templateFactory;
-		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**

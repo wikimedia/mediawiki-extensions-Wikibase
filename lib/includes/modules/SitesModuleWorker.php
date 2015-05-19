@@ -115,9 +115,10 @@ class SitesModuleWorker {
 	/**
 	 * @param MediaWikiSite $site
 	 * @param string[] $specialGroups
+	 *
 	 * @return string[]
 	 */
-	private function getSiteDetails( MediaWikiSite $site, array $specialGroups ) {
+	private function getSiteDetails( MediaWikiSite $site, array $specialGroups = array() ) {
 		$languageNameLookup = new LanguageNameLookup();
 
 		$group = $site->getGroup();

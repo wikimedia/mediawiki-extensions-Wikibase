@@ -72,16 +72,16 @@ class SiteLinksView {
 		EditSectionGenerator $sectionEditLinkGenerator,
 		EntityIdFormatter $entityIdFormatter,
 		LanguageNameLookup $languageNameLookup,
-		array $badgeItems,
-		array $specialSiteLinkGroups
+		array $badgeItems = array(),
+		array $specialSiteLinkGroups = array()
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
+		$this->entityIdFormatter = $entityIdFormatter;
+		$this->languageNameLookup = $languageNameLookup;
 		$this->badgeItems = $badgeItems;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
-		$this->templateFactory = $templateFactory;
-		$this->languageNameLookup = $languageNameLookup;
-		$this->entityIdFormatter = $entityIdFormatter;
 	}
 
 	/**
@@ -95,7 +95,7 @@ class SiteLinksView {
 	 *
 	 * @return string
 	 */
-	public function getHtml( array $siteLinks, ItemId $itemId = null, array $groups ) {
+	public function getHtml( array $siteLinks, ItemId $itemId = null, array $groups = array() ) {
 		$html = '';
 
 		if ( count( $groups ) === 0 ) {
