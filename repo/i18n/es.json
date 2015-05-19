@@ -172,7 +172,7 @@
 	"wikibase-setaliases-label": "Alias:",
 	"wikibase-setaliases-submit": "Establecer o alias",
 	"special-setlabeldescriptionaliases": "Establecer etiqueta, descripción y alias",
-	"wikibase-setlabeldescriptionaliases-intro": "Este formulario te permite establecer la etiqueta, la descripción y los alias de una entidad. Primero debes proporcionar el identificador de la entidad (p. ej., Q23) y un código de idioma (p. ej., \"es\").",
+	"wikibase-setlabeldescriptionaliases-intro": "Este formulario te permite establecer la etiqueta, la descripción y los alias de una entidad. Primero debes proporcionar el identificador de la entidad (p. ej., \"Q23\") y un código de idioma (p. ej., \"es\").",
 	"wikibase-setlabeldescriptionaliases-label-label": "Etiqueta:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Descripción:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Alias:",

@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tisave"
+		]
+	},
+	"wikibase-dataitem": "Eleman {{WBREPONAME}}",
+	"wikibase-editlinks": "Chanje lyen yo",
+	"wikibase-editlinkstitle": "Chanje lyen entèlang yo",
+	"wikibase-rc-hide-wikidata-hide": "Kache",
+	"wikibase-rc-hide-wikidata-show": "Montre",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Chanjman {{WBREPONAME}}"
+}

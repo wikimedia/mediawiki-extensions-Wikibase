@@ -171,6 +171,7 @@
 	"wikibase-setaliases-label": "Aliassen",
 	"wikibase-setaliases-submit": "Aliassen aanmaken",
 	"special-setlabeldescriptionaliases": "Label, omschrijving en aliassen instellen",
+	"wikibase-setlabeldescriptionaliases-intro": "Via dit formulier kunt u het label, de beschrijving en de aliassen van een entiteit instellen. Eerst moet u het ID van de entiteit opgeven (bijvoorbeeld \"Q23\") en een taalcode (bijvoorbeeld \"nl\").",
 	"wikibase-setlabeldescriptionaliases-label-label": "Label:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Beschrijving:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Aliassen:",

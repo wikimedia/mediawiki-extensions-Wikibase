@@ -6,6 +6,7 @@
 			"Macofe"
 		]
 	},
+	"wikibase-entity-property": "eigenskip",
 	"wikibase-edit": "bewurkje",
 	"wikibase-save": "bewarje",
 	"wikibase-cancel": "Annulearje",
@@ -14,6 +15,7 @@
 	"wikibase-sitelinks-special": "Oare webstees",
 	"wikibase-statementview-rank-normal": "Normale rang",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|boarne|boarnen}}",
+	"wikibase-snakview-property-input-placeholder": "eigenskip",
 	"wikibase-entityselector-more": "mear",
 	"wikibase-itembytitle-submit": "Sykje",
 	"wikibase-itemdisambiguation-lookup-language": "Taalkoade:",
@@ -23,5 +25,7 @@
 	"wikibase-entitieswithoutlabel-label-language": "Taalkoade:",
 	"wikibase-entitieswithoutlabel-submit": "Sykje",
 	"wikibase-listdatatypes-wikibase-property-head": "Eigenskip",
-	"wikibase-listdatatypes-time-head": "Tiid"
+	"wikibase-listdatatypes-time-head": "Tiid",
+	"wikibase-listdatatypes-url-head": "URL",
+	"datatypes-type-url": "URL"
 }

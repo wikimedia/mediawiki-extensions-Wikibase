@@ -33,5 +33,6 @@
 	"wikibase-error-serialize-error": "'A serializzazzione de le date ave sciute a male.",
 	"wikibase-unconnectedpages-submit": "Véje",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" non g'è 'nu codece de lènghe valide.",
-	"wikibase-pageinfo-entity-id-none": "Ninde"
+	"wikibase-pageinfo-entity-id-none": "Ninde",
+	"wikibase-otherprojects": "Otre pruggette"
 }

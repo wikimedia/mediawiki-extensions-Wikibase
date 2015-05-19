@@ -73,6 +73,7 @@
 	"wikibase-validator-unknown-unit": "Неизвестная единица измерения: $1",
 	"wikibase-validator-not-allowed": "Недопустимое значение: $1",
 	"datatypes-type-wikibase-item": "Элемент",
+	"datatypes-type-wikibase-property": "Свойство",
 	"datatypes-type-commonsMedia": "Медиафайл на Викискладе",
 	"version-wikibase": "Вики-база",
 	"wikibase-time-precision-Gannum": "$1 миллиард{{PLURAL:$1||ов|а}} лет",

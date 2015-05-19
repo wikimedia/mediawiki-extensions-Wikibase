@@ -233,6 +233,10 @@
 	"wikibase-listdatatypes-intro": "Это список всех типов данных, доступных в этой инсталляции:",
 	"wikibase-history-title-with-label": "История изменений для «$2» ($1)",
 	"wikibase-history-title-without-label": "$1 — история изменений",
+	"wikibase-listproperties-datatype": "Тип данных:",
+	"wikibase-listproperties-all": "Все типы данных",
+	"wikibase-listproperties-submit": "Найти",
+	"wikibase-listproperties-invalid-datatype": "«$1» — это недопустимый тип данных.",
 	"special-entitieswithoutdescription": "Сущности без описаний",
 	"wikibase-entitieswithoutdescription-legend": "Получить список сущностей, у которых нет описаний",
 	"special-entitieswithoutlabel": "Сущности без меток (названий)",
@@ -254,6 +258,7 @@
 	"wikibase-entitydata-title": "Данные сущности",
 	"wikibase-entitydata-text": "Эта страница предоставляет интерфейс связанных данных для значений сущности. Просьба предоставить идентификатор сущности в URL, используя синтаксис подстраниц.",
 	"wikibase-redirectentity-success": "$1 был успешно перенаправлен на $2.",
+	"wikibase-redirectentity-submit": "Перенаправление",
 	"special-mylanguagefallbackchain": "Моя цепочка резервных языков",
 	"wikibase-mylanguagefallbackchain-text": "Ниже показана цепочка резервных языков, действующая для вас при отображении меток сущностей.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].",
@@ -370,5 +375,6 @@
 	"right-item-redirect": "Создание перенаправлений для элементов",
 	"right-property-term": "Изменять термины свойств (метки, описания, псевдонимы)",
 	"right-property-create": "создание свойств",
+	"action-item-merge": "объединение элементов",
 	"action-property-create": "создание свойств"
 }
