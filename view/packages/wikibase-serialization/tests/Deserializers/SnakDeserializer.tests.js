@@ -31,6 +31,25 @@ var testSets = [
 			}
 		},
 		new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'some string' ) )
+	], [
+		{
+			snaktype: 'value',
+			property: 'P1',
+			datavalue: {
+				type: 'undeserializable',
+				value: {
+					value: { foo: 'bar' },
+					type: 'string',
+					error: 'String is invalid.'
+				}
+			}
+		},
+		new wb.datamodel.PropertyValueSnak( 'P1', new dv.UnDeserializableValue(
+				{ foo: 'bar' },
+				'string',
+				'String is invalid.'
+			)
+		)
 	]
 ];
 

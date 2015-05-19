@@ -35,7 +35,7 @@ MODULE.SnakDeserializer = util.inherit( 'WbSnakDeserializer', PARENT, {
 			try {
 				dataValue = dv.newDataValue( type, value );
 			} catch( error ) {
-				dataValue = new dv.UnDeserializableValue( value, type, error );
+				dataValue = new dv.UnDeserializableValue( value, type, error.message );
 			}
 
 			return new wb.datamodel.PropertyValueSnak( serialization.property, dataValue );
