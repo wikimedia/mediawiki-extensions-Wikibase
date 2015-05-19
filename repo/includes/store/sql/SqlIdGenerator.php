@@ -31,7 +31,7 @@ class SqlIdGenerator implements IdGenerator {
 	 * @param LoadBalancer $loadBalancer
 	 * @param int[] $idBlacklist
 	 */
-	public function __construct( LoadBalancer $loadBalancer, array $idBlacklist ) {
+	public function __construct( LoadBalancer $loadBalancer, array $idBlacklist = array() ) {
 		$this->loadBalancer = $loadBalancer;
 		$this->idBlacklist = $idBlacklist;
 	}
