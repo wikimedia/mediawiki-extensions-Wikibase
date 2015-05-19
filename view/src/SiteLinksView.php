@@ -98,7 +98,7 @@ class SiteLinksView {
 	public function getHtml( array $siteLinks, ItemId $itemId = null, array $groups ) {
 		$html = '';
 
-		if ( count( $groups ) === 0 ) {
+		if ( empty( $groups ) ) {
 			return $html;
 		}
 
@@ -192,6 +192,8 @@ class SiteLinksView {
 		$sortOk = usort(
 			$siteLinksForTable,
 			function( array $a, array $b ) {
+				/** @var SiteLink[] $a */
+				/** @var SiteLink[] $b */
 				return strcmp( $a['siteLink']->getSiteId(), $b['siteLink']->getSiteId() );
 			}
 		);
@@ -290,7 +292,7 @@ class SiteLinksView {
 		// FIXME: No need for separate template; Use 'wikibase-sitelinkview' template.
 		return $this->templateFactory->render( 'wikibase-sitelinkview-unknown',
 			htmlspecialchars( $siteLink->getSiteId() ),
-			htmlspecialchars(  $siteLink->getPageName() )
+			htmlspecialchars( $siteLink->getPageName() )
 		);
 	}
 
