@@ -94,7 +94,7 @@ call_user_func( function() {
 	$wgHooks['SkinTemplateGetLanguageLink'][]		= '\Wikibase\Client\Hooks\SidebarHookHandlers::onSkinTemplateGetLanguageLink';
 	$wgHooks['ContentAlterParserOutput'][]				= '\Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers::onContentAlterParserOutput';
 	$wgHooks['SidebarBeforeOutput'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onSidebarBeforeOutput';
-	$wgHooks['ArticleEditUpdates'][]				= '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onArticleEditUpdates';
+	$wgHooks['LinksUpdateComplete'][]				= '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onLinksUpdateComplete';
 	$wgHooks['ArticleDeleteComplete'][]				= '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onArticleDeleteComplete';
 	$wgHooks['ParserFirstCallInit'][]			= '\Wikibase\ClientHooks::onParserFirstCallInit';
 	$wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\ClientHooks::onMagicWordwgVariableIDs';
