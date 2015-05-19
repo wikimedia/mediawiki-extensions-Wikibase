@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_560a9dd5",
+        "filename": "repo/includes/rdf/EntityRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-19T15:32:11Z",
+      "side": 1,
+      "message": "Some. Any. The interface doesn\u0027t care. It\u0027s up to the implementation to decide what information about an entity it will output.",
+      "revId": "7f1e4742c709781cf0af07b3b4be086d62350c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f6f871be",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-19T15:32:11Z",
+      "side": 1,
+      "message": "\"Verdinglichung\" :)\nhttp://www.w3.org/2007/02/turtle/primer/#L3155\nhttps://en.wikipedia.org/wiki/Reification_%28computer_science%29",
+      "revId": "7f1e4742c709781cf0af07b3b4be086d62350c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b6dd0949",
+        "filename": "repo/includes/rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-19T15:32:11Z",
+      "side": 1,
+      "message": "https://en.wikipedia.org/wiki/Truthiness\n\nIn the context, it means \"represent (best) statements as facts in RDF\". It\u0027s documented as https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format#Truthy_statements",
+      "revId": "7f1e4742c709781cf0af07b3b4be086d62350c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
