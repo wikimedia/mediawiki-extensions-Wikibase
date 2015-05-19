@@ -17,22 +17,22 @@ use MWNamespace;
 class NamespaceChecker {
 
 	/**
-	 * @var array
+	 * @var int[]
 	 */
 	private $excludedNamespaces;
 
 	/**
-	 * @var array
+	 * @var int[]
 	 */
 	private $enabledNamespaces;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param array $excludedNamespaces
-	 * @param array $enabledNamespaces if empty, setting not in use and all namespaces enabled
+	 * @param int[] $excludedNamespaces
+	 * @param int[] $enabledNamespaces if empty, setting not in use and all namespaces enabled
 	 */
-	public function __construct( array $excludedNamespaces, array $enabledNamespaces ) {
+	public function __construct( array $excludedNamespaces, array $enabledNamespaces = array() ) {
 		$this->excludedNamespaces = $excludedNamespaces;
 		$this->enabledNamespaces = $enabledNamespaces;
 	}
@@ -46,7 +46,7 @@ class NamespaceChecker {
 	 * @param int $namespace
 	 *
 	 * @throws InvalidArgumentException
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isWikibaseEnabled( $namespace ) {
 		if ( !is_int( $namespace ) ) {
@@ -92,7 +92,7 @@ class NamespaceChecker {
 	 *
 	 * @since 0.4
 	 *
-	 * @return array|bool
+	 * @return int[]
 	 */
 	public function getEnabledNamespaces() {
 		return $this->enabledNamespaces;
@@ -103,7 +103,7 @@ class NamespaceChecker {
 	 *
 	 * @since 0.4
 	 *
-	 * @return array
+	 * @return int[]
 	 */
 	public function getExcludedNamespaces() {
 		return $this->excludedNamespaces;
@@ -114,7 +114,7 @@ class NamespaceChecker {
 	 *
 	 * @since 0.4
 	 *
-	 * @return array
+	 * @return int[]
 	 */
 	public function getWikibaseNamespaces() {
 		$enabled = $this->enabledNamespaces;
