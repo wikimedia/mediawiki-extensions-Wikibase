@@ -51,13 +51,13 @@ class ItemView extends EntityView {
 		StatementGroupListView $statementGroupListView,
 		Language $language,
 		SiteLinksView $siteLinksView,
-		array $siteLinkGroups
+		array $siteLinkGroups = array()
 	) {
 		parent::__construct( $templateFactory, $entityTermsView, $language );
 
 		$this->statementGroupListView = $statementGroupListView;
-		$this->siteLinkGroups = $siteLinkGroups;
 		$this->siteLinksView = $siteLinksView;
+		$this->siteLinkGroups = $siteLinkGroups;
 	}
 
 	/**
