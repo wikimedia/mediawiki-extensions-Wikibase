@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use Content;
+use LinksUpdate;
 use ManualLogEntry;
 use User;
 use Wikibase\Client\Store\UsageUpdater;
@@ -47,18 +48,15 @@ class DataUpdateHookHandlers {
 	}
 
 	/**
-	 * Static handler for the ArticleEditUpdates hook.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleEditUpdates
-	 * @see doArticleEditUpdates
+	 * Static handler for the LinksUpdateComplete hook.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinksUpdateComplete
+	 * @see doLinksUpdateComplete
 	 *
-	 * @param WikiPage $page The WikiPage object managing the edit
-	 * @param object $editInfo The current edit info object.
-	 *        $editInfo->output is an ParserOutput object.
-	 * @param bool $changed False if this is a null edit
+	 * @param LinksUpdate $linksUpdate
 	 */
-	public static function onArticleEditUpdates( WikiPage $page, &$editInfo, $changed ) {
+	public static function onLinksUpdateComplete( LinksUpdate $linksUpdate ) {
 		$handler = self::newFromGlobalState();
-		$handler->doArticleEditUpdates( $page, $editInfo, $changed );
+		$handler->doLinksUpdateComplete( $linksUpdate );
 	}
 
 	/**
@@ -99,21 +97,23 @@ class DataUpdateHookHandlers {
 	 * Hook run after a new revision was stored.
 	 * Implemented to update usage tracking information via UsageUpdater.
 	 *
-	 * @param WikiPage $page The WikiPage object managing the edit
-	 * @param object $editInfo The current edit info object.
-	 *        $editInfo->output is an ParserOutput object.
-	 * @param bool $changed False if this is a null edit
+	 * @param LinksUpdate $linksUpdate
 	 */
-	public function doArticleEditUpdates( WikiPage $page, &$editInfo, $changed ) {
-		$title = $page->getTitle();
+	public function doLinksUpdateComplete( LinksUpdate $linksUpdate ) {
+		$title = $linksUpdate->getTitle();
 
-		$usageAcc = new ParserOutputUsageAccumulator( $editInfo->output );
+		$parserOutput = $linksUpdate->getParserOutput();
+		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
+
+		// The parser output should tell us when it was parsed. If not, ask the Title object.
+		// These timestamps should usually be the same, but asking $title may cause a database query.
+		$touched = $parserOutput->getTimestamp() ?: $title->getTouched();
 
 		// Add or touch any usages present in the new revision
 		$this->usageUpdater->addUsagesForPage(
 			$title->getArticleId(),
 			$usageAcc->getUsages(),
-			$page->getTouched()
+			$touched
 		);
 
 		// Prune any usages older than the new revision's timestamp.
@@ -121,7 +121,7 @@ class DataUpdateHookHandlers {
 		// immediately re-subscribing to the used entities.
 		$this->usageUpdater->pruneUsagesForPage(
 			$title->getArticleId(),
-			$page->getTouched()
+			$touched
 		);
 	}
 
