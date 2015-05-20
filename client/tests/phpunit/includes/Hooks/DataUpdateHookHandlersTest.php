@@ -10,9 +10,6 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\NamespaceChecker;
-use Wikibase\Settings;
-use Wikibase\SettingsArray;
 use WikiPage;
 
 /**
@@ -26,20 +23,6 @@ use WikiPage;
  * @author Daniel Kinzler
  */
 class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
-
-	/**
-	 * @param array $settings
-	 *
-	 * @return Settings
-	 */
-	private function newSettings( array $settings ) {
-		$defaults = array(
-			'namespaces' => array( NS_MAIN, NS_CATEGORY ),
-			'siteGlobalid' => 'enwiki',
-		);
-
-		return new SettingsArray( array_merge( $defaults, $settings ) );
-	}
 
 	/**
 	 * @param Title $title
@@ -92,15 +75,9 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 * @return DataUpdateHookHandlers
 	 */
 	private function newDataUpdateHookHandlers( Title $title, array $expectedUsages = null, array $settings = array() ) {
-		$settings = $this->newSettings( $settings );
-
-		$namespaces = $settings->getSetting( 'namespaces' );
-		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
-
 		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages );
 
 		return new DataUpdateHookHandlers(
-			$namespaceChecker,
 			$usageUpdater
 		);
 	}
@@ -178,9 +155,9 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 				array(),
 			),
 
-			'ignored-namespace' => array(
-				Title::makeTitle( NS_USER, 'Foo' ),
-				null,
+			'other namespace' => array(
+				Title::makeTitle( NS_USER_TALK, 'Foo' ),
+				array(),
 			),
 		);
 	}

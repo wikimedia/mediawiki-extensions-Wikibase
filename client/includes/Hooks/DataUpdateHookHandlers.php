@@ -26,11 +26,6 @@ use WikiPage;
 class DataUpdateHookHandlers {
 
 	/**
-	 * @var NamespaceChecker
-	 */
-	private $namespaceChecker;
-
-	/**
 	 * @var UsageUpdater
 	 */
 	private $usageUpdater;
@@ -39,7 +34,6 @@ class DataUpdateHookHandlers {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
-		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 		$usageUpdater = new UsageUpdater(
 			$settings->getSetting( 'siteGlobalID' ),
 			$wikibaseClient->getStore()->getUsageTracker(),
@@ -48,7 +42,6 @@ class DataUpdateHookHandlers {
 		);
 
 		return new DataUpdateHookHandlers(
-			$namespaceChecker,
 			$usageUpdater
 		);
 	}
@@ -97,11 +90,8 @@ class DataUpdateHookHandlers {
 	}
 
 	public function __construct(
-		NamespaceChecker $namespaceChecker,
 		UsageUpdater $usageUpdater
 	) {
-
-		$this->namespaceChecker = $namespaceChecker;
 		$this->usageUpdater = $usageUpdater;
 	}
 
@@ -115,11 +105,6 @@ class DataUpdateHookHandlers {
 	 */
 	public function doArticleEditUpdates( WikiPage $page, &$editInfo, $changed ) {
 		$title = $page->getTitle();
-
-		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
-			// shorten out
-			return;
-		}
 
 		$usageAcc = new ParserOutputUsageAccumulator( $editInfo->output );
 
@@ -137,11 +122,6 @@ class DataUpdateHookHandlers {
 	 * @param int $pageId
 	 */
 	public function doArticleDeleteComplete( $namespace, $pageId ) {
-		if ( !$this->namespaceChecker->isWikibaseEnabled( $namespace ) ) {
-			// shorten out
-			return;
-		}
-
 		$this->usageUpdater->updateUsageForPage(
 			$pageId,
 			array(),
