@@ -11,14 +11,16 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\StatementListProvider;
-use Wikibase\Rdf\DedupeBag;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * Fully reified RDF mapping for wikibase statements.
- * This does not output simple statements. If both forms (simple and full) are desired,
- * use SimpleStatementRdfBuilder in addition to FullStatementRdfBuilder.
+ * Fully reified RDF mapping for wikibase statements, including deprecated and non-"best"
+ * statements, ranks, qualifiers, and references. This modells statements as identifiable objects
+ * and does not output a direct property to value mapping as the TruthyStatementRdfBuilder does. If
+ * both forms (direct and full) are desired, use TruthyStatementRdfBuilder in addition to
+ * FullStatementRdfBuilder.
+ *
+ * @see TruthyStatementRdfBuilder
  *
  * @since 0.5
  *
@@ -290,11 +292,10 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 * @param EntityDocument $entity the entity to output.
 	 */
 	public function addEntity( EntityDocument $entity ) {
-		if ( $entity instanceof StatementListProvider ) {
-			$statementList = $entity->getStatements();
+		$entityId = $entity->getId();
 
-			/** @var EntityDocument $entity */
-			$this->addStatements( $entity->getId(), $statementList );
+		if ( $entity instanceof StatementListProvider ) {
+			$this->addStatements( $entityId, $entity->getStatements() );
 		}
 	}
 
