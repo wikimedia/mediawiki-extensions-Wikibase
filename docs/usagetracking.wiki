@@ -14,22 +14,23 @@ This is used to optimize change notifications on two levels:
 Each client wiki tracks which pages use (which aspect of) which entity (from which repo). The "aspect" is used to decide which kind of change is relevant for the given kind of usage, and what kind of update is needed for the page in question. The following aspects are defined:
 
 * sitelinks: only an item's sitelinks are used. This would be the case for a client page that is connected to an item on the repo via an incoming sitelink, but does not access any data of the item directly. A change to the sitelinks may be applied without re-parsing the page, by overwriting the sitelinks in the cached ParserOutput opbject.
-* label: only the entity's label (in the wiki's content language) is used. This would be the case if a reference to the entity is shown on a page. It's also used in cases when a property is referenced by label. A page that uses a label should be updated when that label chances, but this kind of update my be considered low priority. (Caveat: this may be extended to included the description in the local language, in case that is typically used for rendering references).
+* label: only the entity's label is used. This would be the case when a localized reference to the entity is shown on a page. It's also used in cases when a property is referenced by label. A page that uses a label should be updated when that label chances, but this kind of update my be considered low priority. The language in which the label is used is tracked along as a "modification" of the label aspect. In case language fallback is applied, all relevant languages are considered to be used on the page.
 * all: any and all aspects of the entity may be used on the given page. This includes statements, claims, and labels. This kind of usage triggers a full re-parse on any change to the entity. This aspect of use is recorded when entity data is accessed via Lua or the #property parser function.
 
-Any change notifications received by the client will be classified to be relevant to one or more aspects. Well known aspects are:
+Entity usage on client pages is tracked using the following codes:
 * sitelinks (S): the entity's sitelinks are used.
-* label (L): the entity's label in the local content language is used.
+* label (L.xx): the entity's label in in language xx changed.
 * title (T): the title of the local page corresponding to the entity is used.
 * all (X): other aspects (such as statement data), or all aspects, are or may be used.
 
 Changes result in updates to pages that use the respective entity based on the aspect that is used. Changes are classified accordingly:
 * sitelinks (S): any change to the entity's sitelinks. Pages that use the S or X aspect are updated.
-* label (L): the label in the local content language changed. Pages that use the L or X aspect are updated.
+* label (L.xx): the label in the language "xx" changed. Pages that use the L.xx or X aspect are updated.
 * title (T): the sitelink corresponding to the local wiki was changed. Pages that use the S, T, or X aspect are updated.
-* other (X): something else about the entity (such as statement data) changed. Only pages that use the X aspect are updated.
+* all (X): Everything about the entity changed, all pages using the entity are updated.
+* other (O): something else about the entity (such as statement data) changed. Only pages that use the X aspect are updated.
 
-This way, editing statements will not cause pages that just show the entities label to be purged.
+This way, editing e.g. statements will not cause pages that just show the entities label to be purged.
 
 The database table for tracking client side usage is called wbc_entity_usage, and can be thought of
 as a links table, just like templatelinks or imagelinks. It has the following fields:
@@ -47,6 +48,23 @@ The following indexes are provided for efficient access:
 NOTE: when tracking usage of entities from multiple repos, we either need distinct ID prefixes,
 or one table per repo, or both. An additional eu_entity_repo column would introduce a huge
 amount of redundant data, and would not play well with indexes.
+
+
+== Updating of usage entries ==
+
+Usage tracking information on the client has to be updated when pages are edited (resp. created, deleted, or renamed) and when pages are re-rendered due to a change in a template. This corresponds to cases in which the page_touched field is updated in the page table. In addition to that, usages that become apparent only when the page is rendered with a specific target language need to be tracked when such a language specific rendering is committed to the parser cache. This is particularly important for per-language tracking of label usage on multilingual wikis.
+
+To allow tracking information to be added as new renderings of a page materialize, these updates have to be disconnected from the process of pruning outdated tracking information. This is achieved using a passive purging strategy, similar to the mechanism used to discard stale parser cache entries based on the timestamp in the page_touched field: When a new rendering of a page becomes available, all usages present in that rendering are recorded in wbc_entity_usage, with eu_touched set to the page's touch date (or a later timestamp, e.g. the current time). When looking up usages, entries with a stale page_touched timestamp can be ignored. Furthermore, such stale usage entries can be pruned when a page is edited.
+
+This implies that entity usage tracking is actually tracking usage in page renderings (technically, entries in the parser cache). It does not directly correspond to what is or is not present in a pages wikitext or templates. However, since a page is always rendered in at least one language when it is edited, this distinction is somewhat academic.
+
+Overview of events that trigger updates to usage tracking:
+* ArticleEditUpdates: add/touch usage entries from ParserOutput (deprecated in favor of LinksUpdateComplete)
+* ArticleEditUpdates: prune stale entries, unsubscribe unused entries (deprecated in favor of LinksUpdateComplete)
+* LinksUpdateComplete: add/touch usage entries from ParserOutput (planned to replace ArticleEditUpdates)
+* LinksUpdateComplete: prune stale entries unsubscribe unused entries (planned to replace ArticleEditUpdates)
+* ParserCacheSave: add/touch usage entries from ParserOutput (planned, needs core patch)
+* ArticleDeleteComplete: prune all entries, unsubscribe unused entries
 
 
 == Repo side usage tracking ==
