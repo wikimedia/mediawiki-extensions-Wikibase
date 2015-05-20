@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_4eb4367c",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-05-20T23:58:01Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "0ed113e2_4d38c339",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_0df71b89",
         "filename": "docs/ontology.owl",
         "patchSetId": 6
@@ -47,6 +65,24 @@
       "writtenOn": "2015-05-20T13:25:49Z",
       "side": 1,
       "message": "Please avoid explaining \"direct\" with \"direct\", be more descriptive please.",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2eb1b28c",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-05-20T23:58:01Z",
+      "side": 1,
+      "message": "That\u0027s the name of the thing, \"direct claim predicate\". I don\u0027t think we should copy whole data model description here.",
+      "parentUuid": "0ed113e2_0df71b89",
       "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_0e270ec6",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-05-20T23:58:01Z",
+      "side": 1,
+      "message": "predicate is the middle thing of the subject-predicate-object triple. This property links wikibase property (like wd:P123) to a predicate (like rv:P123): so that it says \"wd:P123 wikibase:referenceValue rv:P123\" and when we later see wdref:blah rv:P123 wv:blah, we know that rv:P123 is linked to wd:P123.",
+      "parentUuid": "0ed113e2_ad35af43",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_8d322b5a",
         "filename": "docs/ontology.owl",
         "patchSetId": 6
@@ -81,6 +135,24 @@
       "writtenOn": "2015-05-20T13:25:49Z",
       "side": 1,
       "message": "These are the integer constants we use internally, right? Isn\u0027t it possible to be more descriptive here? E.g. use string identifiers like \"DAY\", URIs or something like that instead of the numbers? Or maybe turn the constants into numbers of minutes, similar to the timezone?",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ae312202",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-05-20T23:58:01Z",
+      "side": 1,
+      "message": "We could, but it\u0027s not what is happening now, so OWL can only describe what is going on in the code right now. If we change the generator code, we\u0027ll update the OWL accordingly.",
+      "parentUuid": "0ed113e2_8d322b5a",
       "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
