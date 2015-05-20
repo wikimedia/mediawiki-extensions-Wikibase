@@ -12,7 +12,17 @@ use Wikibase\DataModel\StatementListProvider;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * "Truthy" RDF mapping for wikibase statements.
+ * "Truthy" RDF mapping for wikibase statements, directly mapping properties to "best" values
+ * without modelling statements as identifiable objects. "Best" statements per property are
+ * statements that have the best non-deprecated rank.
+ *
+ * This simple property to value mapping excludes deprecated and non-"best" statements, ranks,
+ * qualifiers, and references. This allows for a much simpler, much easier to query RDF structure
+ * that allows searching for values similar to what would have been shown in infoboxes via Lua.
+ *
+ * If more information is needed, use FullStatementRdfBuilder instead.
+ *
+ * @see FullStatementRdfBuilder
  *
  * @since 0.5
  *
