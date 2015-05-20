@@ -14,7 +14,7 @@ use StripState;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
-use Wikibase\Client\Hooks\ParserAfterParseHookHandler;
+use Wikibase\Client\Hooks\LinkInjectionHookHandlers;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
@@ -30,7 +30,7 @@ use Wikibase\Test\MockRepository;
 use Wikibase\Test\MockSiteStore;
 
 /**
- * @covers Wikibase\Client\Hooks\ParserAfterParseHookHandler
+ * @covers Wikibase\Client\Hooks\LinkInjectionHookHandlers
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -39,7 +39,7 @@ use Wikibase\Test\MockSiteStore;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
+class LinkInjectionHookHandlersTest extends MediaWikiTestCase {
 
 	/**
 	 * @param string $globalId
@@ -140,7 +140,7 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 		return new SettingsArray( array_merge( $defaults, $settings ) );
 	}
 
-	private function newParserAfterParseHookHandler( array $settings = array() ) {
+	private function newLinkInjectionHookHandlers( array $settings = array() ) {
 		$badgeId = $this->getBadgeItem()->getId();
 
 		$links = array(
@@ -187,7 +187,7 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 			$settings->getSetting( 'sortPrepend' )
 		);
 
-		return new ParserAfterParseHookHandler(
+		return new LinkInjectionHookHandlers(
 			$namespaceChecker,
 			$langLinkHandler,
 			$interwikiSorter,
@@ -234,8 +234,8 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 		$oldSiteGroupValue = $settings->getSetting( 'siteGroup' );
 		$settings->setSetting( 'siteGroup', 'NYAN' );
 
-		$handler = ParserAfterParseHookHandler::newFromGlobalState();
-		$this->assertInstanceOf( 'Wikibase\Client\Hooks\ParserAfterParseHookHandler', $handler );
+		$handler = LinkInjectionHookHandlers::newFromGlobalState();
+		$this->assertInstanceOf( 'Wikibase\Client\Hooks\LinkInjectionHookHandlers', $handler );
 
 		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );
 	}
@@ -304,7 +304,7 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 		$expectedBadges
 	) {
 		$parser = $this->newParser( $title, $pagePropsBefore, array() );
-		$handler = $this->newParserAfterParseHookHandler();
+		$handler = $this->newLinkInjectionHookHandlers();
 
 		$handler->doParserAfterParse( $parser );
 
@@ -335,7 +335,7 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 	 * @see https://bugzilla.wikimedia.org/show_bug.cgi?id=71772
 	 */
 	public function testOnParserAfterParse_withoutParameters() {
-		$this->assertTrue( ParserAfterParseHookHandler::onParserAfterParse() );
+		$this->assertTrue( LinkInjectionHookHandlers::onParserAfterParse() );
 	}
 
 	public function parserAfterParseProvider_noItem() {
@@ -354,7 +354,7 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 	 */
 	public function testDoParserAfterParse_noItem( Title $title ) {
 		$parser = $this->newParser( $title, array(), array() );
-		$handler = $this->newParserAfterParseHookHandler();
+		$handler = $this->newLinkInjectionHookHandlers();
 
 		$text = '';
 		$stripState = new StripState( 'x' );

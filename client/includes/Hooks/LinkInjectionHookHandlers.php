@@ -19,7 +19,7 @@ use Wikibase\NamespaceChecker;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class ParserAfterParseHookHandler {
+class LinkInjectionHookHandlers {
 
 	/**
 	 * @var NamespaceChecker
@@ -54,7 +54,7 @@ class ParserAfterParseHookHandler {
 			$settings->getSetting( 'sortPrepend' )
 		);
 
-		return new ParserAfterParseHookHandler(
+		return new LinkInjectionHookHandlers(
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLangLinkHandler(),
 			$interwikiSorter,
