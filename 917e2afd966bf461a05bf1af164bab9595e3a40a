@@ -16,6 +16,24 @@
       "revId": "917e2afd966bf461a05bf1af164bab9595e3a40a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_adab6f84",
+        "filename": "repo/includes/rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:32:42Z",
+      "side": 1,
+      "message": "\"uses statements, but drops the idea of them being statements\"? \"bypassing the reification level\"? Whoot? http://bloggar.nwt.se/genusbooden/files/2014/06/wait-what.jpg You can\u0027t explain an unclear term with an other unclear term and vice versa.",
+      "parentUuid": "0ed113e2_0dee3beb",
+      "revId": "917e2afd966bf461a05bf1af164bab9595e3a40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
