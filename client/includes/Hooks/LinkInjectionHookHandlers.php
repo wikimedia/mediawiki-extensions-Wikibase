@@ -2,9 +2,10 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Parser;
-use StripState;
+use Content;
+use ParserOutput;
 use StubUserLang;
+use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
@@ -63,31 +64,21 @@ class LinkInjectionHookHandlers {
 	}
 
 	/**
-	 * Static handler for the ParserAfterParse hook.
+	 * Static handler for the ContentAlterParserOutput hook.
 	 *
-	 * @param Parser|null &$parser
-	 * @param string|null &$text Unused.
-	 * @param StripState|null $stripState Unused.
-	 *
-	 * @return bool
+	 * @param Content $content
+	 * @param Title $title
+	 * @param ParserOutput $parserOutput
 	 */
-	public static function onParserAfterParse( Parser &$parser = null, &$text = null, StripState $stripState = null ) {
+	public static function onContentAlterParserOutput( Content $content, Title $title, ParserOutput $parserOutput ) {
 		// this hook tries to access repo SiteLinkTable
 		// it interferes with any test that parses something, like a page or a message
-		if ( $parser === null || defined( 'MW_PHPUNIT_TEST' ) ) {
-			return true;
-		}
-
-		// Only run this once, for the article content and not interface stuff
-
-		// This check needs to be here as this method is being invoked a lot,
-		// thus calling self::newFromGlobalState would be quite heavy
-		if ( $parser->getOptions()->getInterfaceMessage() ) {
-			return true;
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return;
 		}
 
 		$handler = self::newFromGlobalState();
-		return $handler->doParserAfterParse( $parser );
+		$handler->doContentAlterParserOutput( $title, $parserOutput );
 	}
 
 	/**
@@ -111,32 +102,19 @@ class LinkInjectionHookHandlers {
 
 	/**
 	 * Hook runs after internal parsing
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ContentAlterParserOutput
 	 *
-	 * @param Parser &$parser
+	 * @param Title $title
+	 * @param ParserOutput $parserOutput
 	 *
 	 * @return bool
 	 */
-	public function doParserAfterParse( Parser &$parser ) {
-		$title = $parser->getTitle();
-
-		// Doing this only makes sense when actually creating html for page views, not when
-		// for example substing a template.
-		// Please note: While all cases where this matches don't need to go through this many
-		// that don't match (have OT_HTML) still actually wouldn't need to go through this...
-		// for example message parses, but we don't have a good way to identify those.
-		if ( $parser->OutputType() !== Parser::OT_HTML ) {
-			return true;
-		}
-
+	public function doContentAlterParserOutput( Title $title, ParserOutput $parserOutput ) {
 		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
 			return true;
 		}
 
-		// @todo split up the multiple responsibilities here and in lang link handler
-
-		$parserOutput = $parser->getOutput();
 		$useRepoLinks = $this->langLinkHandler->useRepoLinks( $title, $parserOutput );
 
 		if ( $useRepoLinks ) {
