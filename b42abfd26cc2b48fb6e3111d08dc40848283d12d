@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_d89f93f8",
+        "filename": "client/tests/phpunit/includes/UsageTrackingIntegrationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T17:01:56Z",
+      "side": 1,
+      "message": "Please move this file to the \"Usage\" directory.",
+      "revId": "b42abfd26cc2b48fb6e3111d08dc40848283d12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_589de30b",
+        "filename": "client/tests/phpunit/includes/UsageTrackingIntegrationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T17:01:56Z",
+      "side": 1,
+      "message": "namespace Wikibase\\Client\\Usage\\Tests; please.",
+      "revId": "b42abfd26cc2b48fb6e3111d08dc40848283d12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b8a40f48",
+        "filename": "client/tests/phpunit/includes/UsageTrackingIntegrationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T17:01:56Z",
+      "side": 1,
+      "message": "No @covers? Probably on purpose.",
+      "revId": "b42abfd26cc2b48fb6e3111d08dc40848283d12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5873a3e4",
+        "filename": "client/tests/phpunit/includes/UsageTrackingIntegrationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T17:01:56Z",
+      "side": 1,
+      "message": "Unused parameter, please remove.",
+      "revId": "b42abfd26cc2b48fb6e3111d08dc40848283d12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b883af9a",
+        "filename": "client/tests/phpunit/includes/UsageTrackingIntegrationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T17:01:56Z",
+      "side": 1,
+      "message": "Why is something deleted in this test? Should probably be articleTitle for sanity.",
+      "revId": "b42abfd26cc2b48fb6e3111d08dc40848283d12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_781f8771",
+        "filename": "client/tests/phpunit/includes/UsageTrackingIntegrationTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T17:01:56Z",
+      "side": 1,
+      "message": "1. Ouch!\n2. Please add the missing spaces.\n3. Please move this up because this is not needed between the two updatePage calls in this test but as a delay between the depending tests.\n4. Please make the test titles much more descriptive to make it clear that you want to test timestamp based pruning here. Or add comments.",
+      "revId": "b42abfd26cc2b48fb6e3111d08dc40848283d12d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
