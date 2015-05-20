@@ -2,7 +2,7 @@
 
 ## Release notes
 
-### 1.0.2 (dev)
+### 1.0.2 (2015-05-20)
 
 #### Enhancements
 * Updated code documentation to be able to generate documentation using JSDuck.
