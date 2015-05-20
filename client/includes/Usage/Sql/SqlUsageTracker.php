@@ -55,7 +55,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return UsageTableUpdater
 	 */
 	private function newTableUpdater( DatabaseBase $db ) {
-		return new UsageTableUpdater( $db, 'wbc_entity_usage', $this->batchSize );
+		return new UsageTableUpdater( $this->idParser, $db, 'wbc_entity_usage', $this->batchSize );
 	}
 
 	/**
@@ -94,14 +94,37 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
+	 * Re-indexes the given list of EntityUsages so that each EntityUsage can be found by using its
+	 * string representation as a key.
+	 *
+	 * @param EntityUsage[] $usages
+	 *
+	 * @throws InvalidArgumentException
+	 * @return EntityUsage[]
+	 */
+	private function reindexEntityUsages( array $usages ) {
+		$reindexed = array();
+
+		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+
+			$key = $usage->getIdentityString();
+			$reindexed[$key] = $usage;
+		}
+
+		return $reindexed;
+	}
+
+	/**
 	 * @see UsageTracker::trackUsedEntities
 	 *
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 * @param string|false $touched
+	 * @param string $touched
 	 *
-	 * @return EntityUsage[]
-	 * @throws InvalidArgumentException
+	 * @throws Exception
 	 * @throws UsageTrackerException
 	 */
 	public function trackUsedEntities( $pageId, array $usages, $touched ) {
@@ -109,20 +132,61 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
-		if ( !empty( $usages ) && ( $touched === false ) ) {
-			throw new InvalidArgumentException( '$touched is false, but $usages is not empty.' );
+		if ( !is_string( $touched ) || $touched === '' ) {
+			throw new InvalidArgumentException( '$touched must be a timestamp string.' );
+		}
+
+		if ( empty( $usages ) ) {
+			return;
 		}
 
 		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
 
 		try {
-			$oldUsages = $this->queryUsagesForPage( $db, $pageId );
-
 			$tableUpdater = $this->newTableUpdater( $db );
-			$tableUpdater->updateUsage( $pageId, $oldUsages, $usages, $touched );
+			$oldUsages = $tableUpdater->queryUsages( $pageId );
+
+			$newUsages = $this->reindexEntityUsages( $usages );
+			$oldUsages = $this->reindexEntityUsages( $oldUsages );
+
+			$keep = array_intersect_key( $oldUsages, $newUsages );
+			$added = array_diff_key( $newUsages, $oldUsages );
+
+			// update the "touched" timestamp for the remaining entries
+			$tableUpdater->touchUsages( $pageId, $keep, $touched );
+			$tableUpdater->addUsages( $pageId, $added, $touched );
 
 			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
-			return $oldUsages;
+		} catch ( Exception $ex ) {
+			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
+
+			if ( $ex instanceof DBError ) {
+				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
+			} else {
+				throw $ex;
+			}
+		}
+	}
+
+	/**
+	 * @see UsageTracker::pruneStaleUsages
+	 *
+	 * @param int $pageId
+	 * @param string $lastUpdatedBefore timestamp
+	 *
+	 * @return EntityUsage[]
+	 * @throws Exception
+	 * @throws UsageTrackerException
+	 */
+	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
+		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
+
+		try {
+			$tableUpdater = $this->newTableUpdater( $db );
+			$pruned = $tableUpdater->pruneStaleUsages( $pageId, $lastUpdatedBefore );
+
+			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
+			return $pruned;
 		} catch ( Exception $ex ) {
 			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
 
@@ -178,52 +242,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	public function getUsagesForPage( $pageId ) {
 		$db = $this->connectionManager->getReadConnection();
 
-		$usages = $this->queryUsagesForPage( $db, $pageId );
+		$tableUpdater = $this->newTableUpdater( $db );
+		$usages = $tableUpdater->queryUsages( $pageId );
 
 		$this->connectionManager->releaseConnection( $db );
-
-		return $usages;
-	}
-
-	/**
-	 * @param DatabaseBase $db
-	 * @param int $pageId
-	 *
-	 * @throws InvalidArgumentException
-	 * @return EntityUsage[]
-	 */
-	private function queryUsagesForPage( DatabaseBase $db, $pageId ) {
-		if ( !is_int( $pageId ) ) {
-			throw new InvalidArgumentException( '$pageId must be an int.' );
-		}
-
-		$res = $db->select(
-			'wbc_entity_usage',
-			array( 'eu_aspect', 'eu_entity_id' ),
-			array( 'eu_page_id' => $pageId ),
-			__METHOD__
-		);
-
-		$usages = $this->convertRowsToUsages( $res );
-		return $usages;
-	}
-
-	/**
-	 * @param array|Iterator $rows
-	 *
-	 * @return EntityUsage[]
-	 */
-	private function convertRowsToUsages( $rows ) {
-		$usages = array();
-
-		foreach ( $rows as $object ) {
-			$entityId = $this->idParser->parse( $object->eu_entity_id );
-			list( $aspect, ) = EntityUsage::splitAspectKey( $object->eu_aspect );
-
-			$usage = new EntityUsage( $entityId, $aspect );
-			$key = $usage->getIdentityString();
-			$usages[$key] = $usage;
-		}
 
 		return $usages;
 	}
@@ -284,9 +306,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			}
 
 			$entityId = $this->idParser->parse( $row->eu_entity_id );
-			list( $aspect, ) = EntityUsage::splitAspectKey( $row->eu_aspect );
+			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $row->eu_aspect );
 
-			$usage = new EntityUsage( $entityId, $aspect );
+			$usage = new EntityUsage( $entityId, $aspect, $modifier );
 			$pageEntityUsages->addUsages( array( $usage ) );
 
 			$usagesPerPage[$pageId] = $pageEntityUsages;
