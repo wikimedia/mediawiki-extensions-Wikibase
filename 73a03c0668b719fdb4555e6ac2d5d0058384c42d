@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_4d0f638d",
+        "filename": "client/includes/ParserOutputDataUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:37:52Z",
+      "side": 1,
+      "message": "Can I ask for a description of this parameter? In the other class it\u0027s described as \"The global site ID for the local wiki\".",
+      "revId": "73a03c0668b719fdb4555e6ac2d5d0058384c42d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8d80ebc5",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:37:52Z",
+      "side": 1,
+      "message": "|null",
+      "revId": "73a03c0668b719fdb4555e6ac2d5d0058384c42d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_cd7913f3",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:37:52Z",
+      "side": 1,
+      "message": "I wonder how you decided on the position of the new property, new constructor parameter and this new method within the existing properties, constructor parameters and methods? Just asking out of curiosity.",
+      "revId": "73a03c0668b719fdb4555e6ac2d5d0058384c42d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6d97c73d",
+        "filename": "client/tests/phpunit/includes/ParserOutputDataUpdaterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:37:52Z",
+      "side": 1,
+      "message": "Not Aude?",
+      "revId": "73a03c0668b719fdb4555e6ac2d5d0058384c42d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4d944339",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:37:52Z",
+      "side": 1,
+      "message": "Would prefer to have these tests in the same order as the methods in the class, but that\u0027s really nitpicky, isn\u0027t it? ;-)",
+      "revId": "73a03c0668b719fdb4555e6ac2d5d0058384c42d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
