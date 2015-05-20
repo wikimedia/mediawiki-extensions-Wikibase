@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_0d463bc6",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:25:49Z",
+      "side": 1,
+      "message": "According to RdfBuilder::addDumpHeader this is not about \"a dump of Wikidata content\" but about a description of (or metadata about) such a dump.",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4d38c339",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:25:49Z",
+      "side": 1,
+      "message": "References are not necessarily \"external\".",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0df71b89",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:25:49Z",
+      "side": 1,
+      "message": "Please avoid explaining \"direct\" with \"direct\", be more descriptive please.",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ad35af43",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:25:49Z",
+      "side": 1,
+      "message": "To what does the word \"predicate\" refer to? It\u0027s repeated in many descriptions. Are you sure it\u0027s correctly used in all of them?",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8d322b5a",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T13:25:49Z",
+      "side": 1,
+      "message": "These are the integer constants we use internally, right? Isn\u0027t it possible to be more descriptive here? E.g. use string identifiers like \"DAY\", URIs or something like that instead of the numbers? Or maybe turn the constants into numbers of minutes, similar to the timezone?",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
