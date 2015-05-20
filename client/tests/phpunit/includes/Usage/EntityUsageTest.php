@@ -56,7 +56,7 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( "$aspect.$modifier", $usage->getAspectKey() );
 	}
 
-	public function provideSplitAspectKey() {
+	public function aspectKeyProvider() {
 		return array(
 			array( 'L', array( 'L', null ) ),
 			array( 'L.x', array( 'L', 'x' ) ),
@@ -65,7 +65,15 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideSplitAspectKey
+	 * @dataProvider aspectKeyProvider
+	 */
+	public function testStripModifier( $aspectKey, $expectedParts ) {
+		$aspect = EntityUsage::stripModifier( $aspectKey );
+		$this->assertEquals( $expectedParts[0], $aspect );
+	}
+
+	/**
+	 * @dataProvider aspectKeyProvider
 	 */
 	public function testSplitAspectKey( $aspectKey, $expectedParts ) {
 		$parts = EntityUsage::splitAspectKey( $aspectKey );
