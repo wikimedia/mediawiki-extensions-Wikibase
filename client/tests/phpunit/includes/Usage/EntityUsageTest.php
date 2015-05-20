@@ -67,6 +67,14 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideSplitAspectKey
 	 */
+	public function testSplitAspect( $aspectKey, $expectedParts ) {
+		$aspect = EntityUsage::splitAspect( $aspectKey );
+		$this->assertEquals( $expectedParts[0], $aspect );
+	}
+
+	/**
+	 * @dataProvider provideSplitAspectKey
+	 */
 	public function testSplitAspectKey( $aspectKey, $expectedParts ) {
 		$parts = EntityUsage::splitAspectKey( $aspectKey );
 		$this->assertEquals( $expectedParts, $parts );

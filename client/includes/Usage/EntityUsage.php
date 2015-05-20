@@ -146,6 +146,16 @@ class EntityUsage {
 	}
 
 	/**
+	 * @param string $aspectKey
+	 *
+	 * @return string One of the EntityUsage::..._USAGE constants with the modifier split off.
+	 */
+	public static function splitAspect( $aspectKey ) {
+		list( $aspect ) = explode( '.', $aspectKey, 2 );
+		return $aspect;
+	}
+
+	/**
 	 * Splits the given aspect key into aspect and modifier (if any).
 	 * This is the inverse of makeAspectKey().
 	 *
@@ -162,6 +172,7 @@ class EntityUsage {
 
 		return $parts;
 	}
+
 	/**
 	 * Composes an aspect key from aspect and modifier (if any).
 	 * This is the inverse of splitAspectKey().
@@ -171,12 +182,12 @@ class EntityUsage {
 	 *
 	 * @return string "$aspect.$modifier"
 	 */
-	public static function makeAspectKey( $aspect, $modifier ) {
-		if ( $modifier !== null ) {
-			return "$aspect.$modifier";
-		} else {
+	public static function makeAspectKey( $aspect, $modifier = null ) {
+		if ( $modifier === null ) {
 			return $aspect;
 		}
+
+		return "$aspect.$modifier";
 	}
 
 }
