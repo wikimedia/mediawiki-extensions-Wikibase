@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_ed61779e",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:28Z",
+      "side": 0,
+      "message": "Please do not remove this comment.",
+      "revId": "2b5baa09537f3b15521d91d58908913117a95b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8d046bca",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:28Z",
+      "side": 0,
+      "message": "Please do not remove this documentation.",
+      "revId": "2b5baa09537f3b15521d91d58908913117a95b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ad07efcb",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:28Z",
+      "side": 0,
+      "message": "Please do not remove this.",
+      "revId": "2b5baa09537f3b15521d91d58908913117a95b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_cd66f3b7",
+        "filename": "composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:28Z",
+      "side": 0,
+      "message": "What\u0027s the reason for this change?",
+      "revId": "2b5baa09537f3b15521d91d58908913117a95b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

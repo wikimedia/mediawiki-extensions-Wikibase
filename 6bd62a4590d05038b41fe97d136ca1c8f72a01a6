@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_6d0d87ea",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:28Z",
+      "side": 1,
+      "message": "Please do not change the version number in a patch that\u0027s about something else.",
+      "revId": "6bd62a4590d05038b41fe97d136ca1c8f72a01a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4d0a03d6",
+        "filename": "client/extension.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:28Z",
+      "side": 1,
+      "message": "Please do not change the version number in a patch that\u0027s about something else.",
+      "revId": "6bd62a4590d05038b41fe97d136ca1c8f72a01a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2d6c5f98",
+        "filename": "composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:28Z",
+      "side": 1,
+      "message": "What\u0027s the reason for this change? I\u0027m sure there is a reason but it seems unrelated to the rest of the commit and should have it\u0027s own patch.",
+      "revId": "6bd62a4590d05038b41fe97d136ca1c8f72a01a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
