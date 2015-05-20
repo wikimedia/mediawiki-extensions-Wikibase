@@ -2,13 +2,8 @@
 
 namespace Wikibase\Client\Test\Store;
 
-use PHPUnit_Framework_Assert;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\SubscriptionManager;
-use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\Usage\UsageTracker;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -23,171 +18,149 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @param EntityUsage[]|null $oldUsage
-	 * @param string $expectedTouched timestamp
-	 *
-	 * @return UsageTracker
-	 */
-	private function getUsageTracker( array $oldUsage = null, $expectedTouched = '' ) {
-		$usage = $oldUsage;
-
-		$mock = $this->getMock( 'Wikibase\Client\Usage\UsageTracker' );
-
-		if ( $oldUsage === null ) {
-			$mock->expects( $this->never() )
-				->method( 'trackUsedEntities' );
-		} else {
-			$mock->expects( $this->once() )
-				->method( 'trackUsedEntities' )
-				->will( $this->returnCallback(
-					function ( $pageId, $newUsage, $touched ) use ( &$usage, $expectedTouched ) {
-						PHPUnit_Framework_Assert::assertEquals( $expectedTouched, $touched, 'touched' );
-
-						$oldUsage = $usage;
-						$usage = $newUsage;
-						return $oldUsage;
-					} ) );
-		}
-
-		return $mock;
-	}
-
-	/**
-	 * @param EntityId[]|null $unusedEntities
-	 *
-	 * @return UsageLookup
-	 */
-	private function getUsageLookup( array $unusedEntities = null ) {
-		$mock = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
-
-		if ( $unusedEntities === null ) {
-			$mock->expects( $this->never() )
-				->method( 'getUnusedEntities' );
-		} else {
-			$mock->expects( $this->once() )
-				->method( 'getUnusedEntities' )
-				->will( $this->returnValue( $unusedEntities ) );
-		}
-
-		return $mock;
-	}
-
-	/**
-	 * @param string $wiki
-	 * @param EntityId[] $subscribe
-	 * @param EntityId[] $unsubscribe
-	 *
-	 * @return SubscriptionManager
-	 */
-	private function getSubscriptionManager( $wiki, $subscribe, $unsubscribe ) {
-		$mock = $this->getMock( 'Wikibase\Client\Usage\SubscriptionManager' );
-
-		if ( empty( $subscribe ) && empty( $unsubscribe ) ) {
-			$mock->expects( $this->never() )
-				->method( 'subscribe' );
-
-			$mock->expects( $this->never() )
-				->method( 'unsubscribe' );
-		} else {
-			$mock->expects( $this->once() )
-				->method( 'subscribe' )
-				->with( $this->equalTo( $wiki ), $this->callback(
-					function ( $actualSubscribe ) use ( $subscribe ) {
-						return !count( array_diff( $subscribe, $actualSubscribe ) );
-					}
-				) );
-
-			$mock->expects( $this->once() )
-				->method( 'unsubscribe' )
-				->with( $this->equalTo( $wiki ), $this->callback(
-					function ( $actualUnsubscribe ) use ( $unsubscribe ) {
-						return !count( array_diff( $unsubscribe, $actualUnsubscribe ) );
-					}
-				) );
-		}
-
-		return $mock;
-	}
-
-	/**
-	 * @param EntityUsage[] $oldUsage
-	 * @param EntityId[]|null $unusedEntities
-	 * @param EntityId[] $subscribe
-	 * @param EntityId[] $unsubscribe
-	 * @param string $touched timestamp
-	 *
-	 * @return UsageUpdater
-	 */
-	private function getUsageUpdater( $oldUsage, $unusedEntities, array $subscribe, array $unsubscribe, $touched ) {
-		return new UsageUpdater(
-			'testwiki',
-			$this->getUsageTracker( $oldUsage, $touched ),
-			$this->getUsageLookup( $unusedEntities ),
-			$this->getSubscriptionManager( 'testwiki', $subscribe, $unsubscribe )
-		);
-	}
-
-	public function updateUsageForPageProvider() {
+	public function addUsagesForPageProvider() {
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
-		$q3 = new ItemId( 'Q3' );
+
+		$t1 = '20150523054223';
 
 		return array(
 			'empty' => array(
 				array(),
-				array(),
-				null, // null means "bail out before checking unused entities"
-				array(),
+				$t1,
 				array(),
 			),
 
-			'unchanged' => array(
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::LABEL_USAGE ) ),
+			'add usages' => array(
 				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
 					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
-				null, // null means "bail out before checking unused entities"
+				$t1,
+				array( $q1, $q2 ),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider addUsagesForPageProvider
+	 */
+	public function testAddUsagesForPage( $newUsage, $touched, $subscribe ) {
+		$usageTracker = $this->getMock( 'Wikibase\Client\Usage\UsageTracker' );
+		$usageTracker->expects( $this->once() )
+			->method( 'trackUsedEntities' )
+			->with( 23, $newUsage, $touched );
+
+		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
+		$usageLookup->expects( $this->never() )
+			->method( 'getUsagesForPage' );
+		$usageLookup->expects( $this->never() )
+			->method( 'getUnusedEntities' );
+
+		$subscriptionManager = $this->getMock( 'Wikibase\Client\Usage\SubscriptionManager' );
+		$subscriptionManager->expects( $this->never() )
+			->method( 'unsubscribe' );
+
+		if ( empty( $subscribe ) ) {
+			// PHPUnit 3.7 doesn't like a with() assertion combined with an exactly( 0 ) assertion.
+			$subscriptionManager->expects( $this->never() )
+				->method( 'subscribe' );
+		} else {
+			$subscriptionManager->expects( $this->once() )
+				->method( 'subscribe' )
+				->with( 'testwiki', $this->callback(
+					function ( $actualSubscribe ) use ( $subscribe ) {
+						return UsageUpdaterTest::arraysHaveSameContent( $actualSubscribe, $subscribe );
+					}
+				) );
+		}
+
+		$updater = new UsageUpdater(
+			'testwiki',
+			$usageTracker,
+			$usageLookup,
+			$subscriptionManager
+		);
+
+		// assertions are done by the mock double
+		$updater->addUsagesForPage( 23, $newUsage, $touched );
+	}
+
+	public function pruneUsagesForPageProvider() {
+		$q1 = new ItemId( 'Q1' );
+		$q2 = new ItemId( 'Q2' );
+
+		$t1 = '20150523054223';
+
+		return array(
+			'empty' => array(
+				$t1,
+				array(),
 				array(),
 				array(),
 			),
 
-			'no added or unused' => array(
+			'pruned usages' => array(
+				$t1,
 				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::LABEL_USAGE ) ),
-				array(),
-				array(), // entities were removed, but none are now unused
-				array(),
-				array(),
-			),
-
-			'subscriptions updated' => array(
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::LABEL_USAGE ) ),
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q3, EntityUsage::LABEL_USAGE ) ),
-				array( $q2 ),
-				array( $q3 ),
+					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
+				array( $q1, $q2 ),
 				array( $q2 ),
 			),
 		);
 	}
 
 	/**
-	 * @dataProvider updateUsageForPageProvider
-	 * @param EntityUsage[] $oldUsage
-	 * @param EntityUsage[] $newUsage
-	 * @param EntityId[]|null $unusedEntities
-	 * @param EntityId[] $subscribe
-	 * @param EntityId[] $unsubscribe
+	 * @dataProvider pruneUsagesForPageProvider
 	 */
-	public function testUpdateUsageForPage( $oldUsage, $newUsage, $unusedEntities, $subscribe, $unsubscribe ) {
-		$touched = wfTimestamp( TS_MW );
+	public function testPruneUsagesForPage( $lastUpdatedBefore, $prunedUsages, $prunedEntityIds, $unused ) {
+		$usageTracker = $this->getMock( 'Wikibase\Client\Usage\UsageTracker' );
+		$usageTracker->expects( $this->once() )
+			->method( 'pruneStaleUsages' )
+			->with( 23, $lastUpdatedBefore )
+			->will( $this->returnValue( $prunedUsages ) );
 
-		$updater = $this->getUsageUpdater( $oldUsage, $unusedEntities, $subscribe, $unsubscribe, $touched );
+		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
+		$usageLookup->expects( $this->never() )
+			->method( 'getUsagesForPage' );
+		$usageLookup->expects( $this->once() )
+			->method( 'getUnusedEntities' )
+			->with( $this->callback(
+				function ( $actualEntities ) use ( $prunedEntityIds ) {
+					return UsageUpdaterTest::arraysHaveSameContent( $prunedEntityIds, $actualEntities );
+				}
+			) )
+			->will( $this->returnValue( $unused ) );
+
+		$subscriptionManager = $this->getMock( 'Wikibase\Client\Usage\SubscriptionManager' );
+		$subscriptionManager->expects( $this->never() )
+			->method( 'subscribe' );
+
+		if ( empty( $prunedUsages ) ) {
+			// PHPUnit 3.7 doesn't like a with() assertion combined with an exactly( 0 ) assertion.
+			$subscriptionManager->expects( $this->never() )
+				->method( 'unsubscribe' );
+		} else {
+			$subscriptionManager->expects( $this->once() )
+				->method( 'unsubscribe' )
+				->with( 'testwiki', $this->callback(
+					function ( $actualUnsubscribe ) use ( $unused ) {
+						return UsageUpdaterTest::arraysHaveSameContent( $unused, $actualUnsubscribe );
+					}
+				) );
+		}
+
+		$updater = new UsageUpdater(
+			'testwiki',
+			$usageTracker,
+			$usageLookup,
+			$subscriptionManager
+		);
 
 		// assertions are done by the mock double
-		$updater->updateUsageForPage( 23, $newUsage, $touched );
+		$updater->pruneUsagesForPage( 23, $lastUpdatedBefore );
+	}
+
+	public static function arraysHaveSameContent( $a, $b ) {
+		return !count( array_diff( $a, $b ) ) && !count( array_diff( $b, $a ) );
 	}
 
 }
