@@ -167,7 +167,7 @@
 	"wikibase-setaliases-submit": "Definir os nomes alternativos",
 	"special-setlabeldescriptionaliases": "Definir rótulo, descrição e nomes alternativos",
 	"wikibase-setlabeldescriptionaliases-introfull": "Está a definir o rótulo, a descrição e os nomes alternativos em $2 para [[$1]]. Nomes alternativos são separados por uma barra vertical (<code>|</code>).",
-	"wikibase-setlabeldescriptionaliases-intro": "Este formulário permite-lhe definir o rótulo, a descrição e nomes alternativos de uma entidade. Precisa de fornecer o identificador da entidade (ex: Q23) e o código de idioma (ex: \"pt\").",
+	"wikibase-setlabeldescriptionaliases-intro": "Este formulário permite-lhe definir o rótulo, a descrição e nomes alternativos de uma entidade. Precisa de fornecer primeiro o identificador da entidade (ex: \"Q23\") e o código de idioma (ex: \"pt\").",
 	"wikibase-setlabeldescriptionaliases-label-label": "Rótulo:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Descrição:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Nomes alternativos:",

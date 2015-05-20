@@ -2,12 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Praveenp",
-			"Santhosh.thottingal"
+			"Santhosh.thottingal",
+			"Vssun"
 		]
 	},
 	"wikibase-client-desc": "വിക്കിബേസ് അനുബന്ധത്തിനുള്ള ക്ലയന്റ്",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} ക്ലയന്റ്",
 	"tooltip-t-wikibase": "ബന്ധപ്പെട്ട ഡേറ്റാ ശേഖര ഇനത്തിലേയ്ക്കുള്ള കണ്ണി",
+	"apihelp-query+pageterms-description": "ബന്ധപ്പെട്ട  ഡേറ്റാ ഇനം വഴി താളുമായി ബന്ധപ്പെട്ട പദങ്ങൾ ലഭ്യമാക്കുക.",
+	"apihelp-query+pageterms-example-simple": "ഉപയോക്താവിന്റെ ഭാഷയിൽ 'ലണ്ടൻ' എന്ന താളുമായി ബന്ധപ്പെട്ട എല്ലാ പദങ്ങളും ലഭ്യമാക്കുക.",
 	"wikibase-after-page-move": "മാറ്റിയ താളിലെ ഭാഷാ കണ്ണികൾ പരിപാലിക്കുന്നതിനായി ബന്ധപ്പെട്ട {{WBREPONAME}} ഇനം താങ്കൾക്ക് [$1 പുതുക്കുകയും] ചെയ്യാവുന്നതാണ്.",
 	"wikibase-after-page-move-queued": "ഈ താളുമായി ബന്ധമുള്ള [$1 {{WBREPONAME}} ഇനം] ഉടൻ തന്നെ പുതുക്കപ്പെടുന്നതാണ്.",
 	"wikibase-comment-add": "ഒരു {{WBREPONAME}} ഇനം സൃഷ്ടിക്കപ്പെട്ടിരിക്കുന്നു.",
@@ -23,6 +25,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} ഇനം",
 	"wikibase-editlinks": "കണ്ണികൾ തിരുത്തുക",
 	"wikibase-editlinkstitle": "അന്തർഭാഷാ കണ്ണികൾ തിരുത്തുക",
+	"wikibase-addlinkstitle": "അന്തർഭാഷാകണ്ണികൾ ചേർക്കുക",
 	"wikibase-linkitem-addlinks": "കണ്ണികൾ ചേർക്കുക",
 	"wikibase-linkitem-alreadylinked": "കേന്ദ്രീകൃത വിവര ശേഖരത്തിൽ നിന്ന് ഈ താളുമായി ബന്ധപ്പെടുത്താൻ താങ്കൾ ശ്രമിക്കുന്ന ഒരു [$1 ഇനം], ഈ സൈറ്റിൽ $2 എന്നതിലേയ്ക്ക് കണ്ണിചേർക്കപ്പെട്ടിരിക്കുന്നു. ഒരു സൈറ്റിൽ ഒരൊറ്റ താളിലേയ്ക്കേ ഇനങ്ങൾ ചേർക്കപ്പെടാവൂ. ദയവായി കണ്ണി ചേർക്കാൻ വ്യത്യസ്തമായ ഒരു താൾ തിരഞ്ഞെടുക്കുക.",
 	"wikibase-linkitem-close": "അറിയിപ്പ് അടച്ച ശേഷം താൾ വീണ്ടും എടുക്കുക",
@@ -44,7 +47,9 @@
 	"wikibase-rc-show-wikidata-pref": "സമീപകാല മാറ്റങ്ങളിൽ {{WBREPONAME}} തിരുത്തലുകളും പ്രദർശിപ്പിക്കുക",
 	"wikibase-rc-wikibase-edit-letter": "(ഡേ.)",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} തിരുത്ത്",
+	"wikibase-replicationnote": "മാറ്റങ്ങൾ എല്ലാ വിക്കികളിലും പ്രത്യക്ഷപ്പെടാൻ കുറച്ച് മിനിറ്റുകൾ എടുത്തേക്കും എന്നത് പ്രത്യേകം ശ്രദ്ധിക്കുക",
 	"wikibase-watchlist-show-changes-pref": "താങ്കൾ ശ്രദ്ധിക്കുന്നവയുടെ പട്ടികയിൽ {{WBREPONAME}} തിരുത്തുകളും പ്രദർശിപ്പിക്കുക",
+	"wikibase-error-deserialize-error": "ഡേറ്റാ അനുക്രമമാക്കിയത് ഒഴിവാക്കൽ പരാജയപ്പെട്ടു.",
 	"wikibase-error-serialize-error": "ഡേറ്റാ അനുക്രമമാക്കൽ പരാജയപ്പെട്ടു.",
 	"wikibase-error-invalid-entity-id": "നൽകിയ ഐ.ഡി. വ്യവസ്ഥയിൽ അപരിചിതമാണ്. ദയവായി സാധുവായ ഐ.ഡി. നൽകുക.",
 	"special-unconnectedpages": "താളുകൾ ഇനങ്ങളുമായി ബന്ധപ്പെടുത്തിയിട്ടില്ല",

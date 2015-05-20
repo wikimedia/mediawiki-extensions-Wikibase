@@ -173,7 +173,7 @@
 	"wikibase-setaliases-submit": "קביעת כינויים",
 	"special-setlabeldescriptionaliases": "הגדרת תווית, תיאור וכינויים",
 	"wikibase-setlabeldescriptionaliases-introfull": "כאן נעשית הגדרה של תווית, תיאור וכינויים ב$2 עבור [[$1]]. כינויים מרובי מופרדים בתו מקל (<code>|</code>).",
-	"wikibase-setlabeldescriptionaliases-intro": "הטופס הזה מאפשר לך להגדיר תווית, תיאור וכינויי של ישות. תחילה יש לספק את המזהה של הישות (למשל Q23) ואת קוד שפה (למשל \"en\").",
+	"wikibase-setlabeldescriptionaliases-intro": "הטופס הזה מאפשר לך להגדיר תווית, תיאור וכינויי של ישות. תחילה יש לספק את המזהה של הישות (למשל \"Q23\") ואת קוד שפה (למשל \"en\").",
 	"wikibase-setlabeldescriptionaliases-label-label": "תווית:",
 	"wikibase-setlabeldescriptionaliases-description-label": "תיאור:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "כינויים:",

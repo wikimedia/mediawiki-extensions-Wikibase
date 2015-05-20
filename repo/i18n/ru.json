@@ -233,6 +233,8 @@
 	"wikibase-listdatatypes-intro": "Это список всех типов данных, доступных в этой инсталляции:",
 	"wikibase-history-title-with-label": "История изменений для «$2» ($1)",
 	"wikibase-history-title-without-label": "$1 — история изменений",
+	"special-listproperties": "Список свойств",
+	"wikibase-listproperties-legend": "Получить список свойств по типу данных",
 	"wikibase-listproperties-datatype": "Тип данных:",
 	"wikibase-listproperties-all": "Все типы данных",
 	"wikibase-listproperties-submit": "Найти",
@@ -257,7 +259,10 @@
 	"wikibase-entitydata-storage-error": "Не удалось загрузить сущность $1.",
 	"wikibase-entitydata-title": "Данные сущности",
 	"wikibase-entitydata-text": "Эта страница предоставляет интерфейс связанных данных для значений сущности. Просьба предоставить идентификатор сущности в URL, используя синтаксис подстраниц.",
+	"special-redirectentity": "Перенаправление сущности",
 	"wikibase-redirectentity-success": "$1 был успешно перенаправлен на $2.",
+	"wikibase-redirectentity-fromid": "Id, с которого идёт перенаправление",
+	"wikibase-redirectentity-toid": "Id, на которое идёт перенаправление",
 	"wikibase-redirectentity-submit": "Перенаправление",
 	"special-mylanguagefallbackchain": "Моя цепочка резервных языков",
 	"wikibase-mylanguagefallbackchain-text": "Ниже показана цепочка резервных языков, действующая для вас при отображении меток сущностей.",
@@ -376,5 +381,12 @@
 	"right-property-term": "Изменять термины свойств (метки, описания, псевдонимы)",
 	"right-property-create": "создание свойств",
 	"action-item-merge": "объединение элементов",
-	"action-property-create": "создание свойств"
+	"action-property-create": "создание свойств",
+	"apihelp-wbcreateredirect-example-1": "Превратить Q11 в перенаправление на Q12",
+	"apihelp-wbmergeitems-description": "Объединяет несколько элементов.",
+	"apihelp-wbmergeitems-param-fromid": "Идентификатор для слияния из",
+	"apihelp-wbmergeitems-param-toid": "Идентификатор для слияния в",
+	"apihelp-wbmergeitems-example-1": "Объединяет данные из Q42 в Q222",
+	"apihelp-wbmergeitems-example-2": "Объединяет данные из Q555 в Q3",
+	"apihelp-wbmergeitems-example-3": "Объединяет данные из Q66 в Q99, игнорируя любые конфликтующие описания"
 }
