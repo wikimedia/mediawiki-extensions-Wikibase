@@ -11,14 +11,14 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\StatementListProvider;
-use Wikibase\Rdf\DedupeBag;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * Fully reified RDF mapping for wikibase statements.
+ * Fully RDF mapping for wikibase statements, including non-"truthy" and deprecated values.
  * This does not output simple statements. If both forms (simple and full) are desired,
- * use SimpleStatementRdfBuilder in addition to FullStatementRdfBuilder.
+ * use TruthyStatementRdfBuilder in addition to FullStatementRdfBuilder.
+ *
+ * @see TruthyStatementRdfBuilder
  *
  * @since 0.5
  *

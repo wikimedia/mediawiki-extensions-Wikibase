@@ -12,7 +12,11 @@ use Wikibase\DataModel\StatementListProvider;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * "Truthy" RDF mapping for wikibase statements.
+ * "Truthy" RDF mapping for wikibase statements. The concept of "truthy" or "best" statements per
+ * property only incorporates values that have the best non-deprecated rank. If an RDF output must
+ * contain all values, use FullStatementRdfBuilder instead.
+ *
+ * @see FullStatementRdfBuilder
  *
  * @since 0.5
  *
