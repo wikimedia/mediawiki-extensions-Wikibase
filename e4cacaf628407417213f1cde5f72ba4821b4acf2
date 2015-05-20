@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_7389e878",
+        "filename": "client/includes/Hooks/LinkInjectionHookHandlers.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T17:18:47Z",
+      "side": 1,
+      "message": "\"Link\" is a bad term, could mean a dozen things. Can you please be more specific, e.g. \"LanguageLinks\" if that\u0027s what this is about?\n\nSame problem with \"injection\". Injected where?",
+      "revId": "e4cacaf628407417213f1cde5f72ba4821b4acf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
