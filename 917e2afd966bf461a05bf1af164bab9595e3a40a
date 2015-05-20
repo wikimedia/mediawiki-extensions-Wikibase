@@ -34,6 +34,24 @@
       "revId": "917e2afd966bf461a05bf1af164bab9595e3a40a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6d882723",
+        "filename": "repo/includes/rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-20T12:01:50Z",
+      "side": 1,
+      "message": "\"Truthy\" is the term we use for what Markus calls \"simple statements\", see http://korrekt.org/papers/Wikidata-RDF-export-2014.pdf\n\nIn particular, see section 3.2 and 4.3",
+      "parentUuid": "0ed113e2_adab6f84",
+      "revId": "917e2afd966bf461a05bf1af164bab9595e3a40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
