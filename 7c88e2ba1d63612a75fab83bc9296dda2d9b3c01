@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_0d9cfb6e",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:42:41Z",
+      "side": 1,
+      "message": "I find it awkward to assign a return value to a function parameter. I prefer a straight\n\n return getEntityIdForCurrentPage()\n\nbut that\u0027s a matter of taste. Or even simpler:\n\n return id ~\u003d nil ? id : getEntityIdForCurrentPage()",
+      "revId": "7c88e2ba1d63612a75fab83bc9296dda2d9b3c01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6db107f3",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:42:41Z",
+      "side": 1,
+      "message": "I think this should be\n\n checkType( \u0027getEntity\u0027, 1, id, \u0027string\u0027 )\n\nnow. Either that or you could switch the two line around, check for \"string or nil\" first and then resolve the id. Note that the 3 corresponding calls below should be similar to this one.",
+      "revId": "7c88e2ba1d63612a75fab83bc9296dda2d9b3c01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
