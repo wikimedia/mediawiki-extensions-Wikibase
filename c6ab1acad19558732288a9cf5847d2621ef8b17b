@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_ed0f37d6",
+        "filename": "composer.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:55Z",
+      "side": 1,
+      "message": "What\u0027s the reason for this change? I\u0027m sure there is a reason but it seems unrelated to the rest of the commit and should have it\u0027s own patch.",
+      "revId": "c6ab1acad19558732288a9cf5847d2621ef8b17b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0df87bbe",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:55Z",
+      "side": 1,
+      "message": "Please do not change the version number in a patch that\u0027s about something else.",
+      "revId": "c6ab1acad19558732288a9cf5847d2621ef8b17b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_edf897be",
+        "filename": "lib/extension.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-20T11:14:55Z",
+      "side": 1,
+      "message": "Please do not change the version number in a patch that\u0027s about something else.",
+      "revId": "c6ab1acad19558732288a9cf5847d2621ef8b17b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
