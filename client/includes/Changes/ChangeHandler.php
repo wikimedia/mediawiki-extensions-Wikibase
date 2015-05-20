@@ -17,8 +17,7 @@ use Wikibase\SiteLinkCommentCreator;
 
 /**
  * Interface for change handling. Whenever a change is detected,
- * it should be fed to this service which then takes care handling
- * it.
+ * it should be fed to this service which then takes care handling it.
  *
  * @since 0.1
  *
@@ -184,11 +183,12 @@ class ChangeHandler {
 	}
 
 	/**
-	 * @param string[] $aspects Usage aspects (without modifier), see EntityUsage.
+	 * @param string[] $aspects List of usage aspects (without modifiers), as defined by the
+	 * EntityUsage::..._USAGE constants.
 	 *
-	 * @return string[] A list of actions, as defined by the self::XXXX_ACTION constants.
+	 * @return string[] List of actions, as defined by the ChangeHandler::..._ACTION constants.
 	 */
-	public function getUpdateActions( $aspects ) {
+	public function getUpdateActions( array $aspects ) {
 		$actions = array();
 		$aspects = array_flip( $aspects );
 
@@ -230,7 +230,7 @@ class ChangeHandler {
 	 * @param int $pageId The page ID
 	 * @param string[] $actions Actions to perform on the page
 	 */
-	private function updateActionBuckets( &$buckets, $pageId, $actions ) {
+	private function updateActionBuckets( array &$buckets, $pageId, array $actions ) {
 		foreach ( $actions as $action ) {
 			$buckets[$action][] = $pageId;
 		}
@@ -281,7 +281,7 @@ class ChangeHandler {
 	 *
 	 * @return Title[]
 	 */
-	private function getTitlesForPageIds( $pageIds ) {
+	private function getTitlesForPageIds( array $pageIds ) {
 		$titles = array();
 
 		foreach ( $pageIds as $id ) {
