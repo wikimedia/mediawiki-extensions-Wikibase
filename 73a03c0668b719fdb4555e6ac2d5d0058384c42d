@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ed113e2_b3f67058",
+        "filename": "client/includes/ParserOutputDataUpdater.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-20T19:05:27Z",
+      "side": 1,
+      "message": "Why does this take a factory, instead of the ProjectsSidebarGenerator itself?\nIs it just to allow for deferred instantiation? So we don\u0027t fetch the Sites if we don\u0027t need them? If so, that should be documented somewhere.",
+      "revId": "73a03c0668b719fdb4555e6ac2d5d0058384c42d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_4d0f638d",
         "filename": "client/includes/ParserOutputDataUpdater.php",
         "patchSetId": 7
@@ -64,6 +81,23 @@
       "writtenOn": "2015-05-20T13:37:52Z",
       "side": 1,
       "message": "Not Aude?",
+      "revId": "73a03c0668b719fdb4555e6ac2d5d0058384c42d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b38d10da",
+        "filename": "client/tests/phpunit/includes/ParserOutputDataUpdaterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-20T19:05:27Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand what each case tests for.\nYou can use the array keys to give each param set a name that gets shown when the test fails. Useful for debugging, and especially for understanding and maintaining data providers.",
       "revId": "73a03c0668b719fdb4555e6ac2d5d0058384c42d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
