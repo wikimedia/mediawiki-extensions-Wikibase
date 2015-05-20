@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_0dee3beb",
+        "filename": "repo/includes/rdf/TruthyStatementRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-20T11:13:46Z",
+      "side": 1,
+      "message": "\"truthy\" is not the same as \"best\". Truthy uses best statements, but drops the idea of them being statements with sources and qualifiers. It just claims them as facts directly, bypassing the reification level of statements.\n\nThe idea is that it\u0027s easier to query for \"population of berlin\" than for \"main values of statements about the population of berlin\".",
+      "revId": "917e2afd966bf461a05bf1af164bab9595e3a40a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
