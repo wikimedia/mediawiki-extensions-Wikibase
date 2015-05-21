@@ -59,7 +59,12 @@
 			} );
 
 			if( dataType ) {
-				valueViewOptions.dataTypeId    = dataType.getId();
+				valueViewOptions.dataTypeId = dataType.getId();
+			}
+
+			if ( dataValue && dataValue.getType() === 'undeserializable' ) {
+				valueViewOptions.dataValueType = dataValue.getType();
+			} else if( dataType ) {
 				valueViewOptions.dataValueType = dataType.getDataValueType();
 			} else if( dataValue ) {
 				valueViewOptions.dataValueType = dataValue.getType();
