@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_3f3b1e37",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-21T14:20:12Z",
+      "side": 1,
+      "message": "Needs an additional \u003ccode\u003ewikibase.label()\u003c/code\u003e\u003cbr\u003e line above",
+      "revId": "4e6ec375d33891abb3ba4226e8b68c768381a57f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1f389a38",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-21T14:20:12Z",
+      "side": 1,
+      "message": "Should have: \u003ccode\u003ewikibase.description()\u003c/code\u003e\u003cbr\u003e",
+      "revId": "4e6ec375d33891abb3ba4226e8b68c768381a57f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
