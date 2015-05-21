@@ -138,6 +138,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.UnDeserializableValue' => $moduleTemplate + array(
+			'scripts' => array(
+				'UnDeserializableValue.js'
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts',
+				'jquery.valueview.Expert',
+			)
+		),
+
 		'jquery.valueview.experts.UnsupportedValue' => $moduleTemplate + array(
 			'scripts' => array(
 				'UnsupportedValue.js',

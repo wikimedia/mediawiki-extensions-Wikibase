@@ -105,6 +105,9 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.14.4 (2015-06-08)
+* Added expert for `UnDeserializableValue`s.
+
 ### 0.14.3 (2015-04-02)
 * Fix premature afterparse handling (e.g. save) of parsed values.
 
