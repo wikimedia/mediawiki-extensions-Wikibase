@@ -175,7 +175,8 @@
 
 					// If the new value's type is not the data value type used by the Snak's
 					// property data type, something is very wrong. Display warning!
-					if( newValue && dataType && newValue.getType() !== dataType.getDataValueType() ) {
+					if( newValue && dataType && newValue.getType() !== dataType.getDataValueType()
+						&& newValue.getType() !== dv.UnDeserializableValue.TYPE ) {
 						handleDataValueTypeMismatch(
 							newValue.getType(),
 							dataType.getDataValueType()
