@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_555da1ee",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-21T16:43:38Z",
+      "side": 1,
+      "message": "I don\u0027t undertsand why you changed this, now it\u0027s just as inconsistent as before :)",
+      "revId": "dc13be73c3f122e4336f75c529f6d3f22ed2167b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
