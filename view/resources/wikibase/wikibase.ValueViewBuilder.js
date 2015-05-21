@@ -58,11 +58,17 @@
 				value: dataValue
 			} );
 
-			if( dataType ) {
-				valueViewOptions.dataTypeId    = dataType.getId();
+			if( !dataType || ( dataValue && dataValue.getType() === 'undeserializable' ) ) {
+				// FIXME: For now, treat value with unknown data type (e.g. the property is
+				// deleted) in same way as undeserializable and not allow it to be editable.
+				// If we allow it to be edited, it might be something like commons media but
+				// when treated as a string (based on value type only), then it might be
+				// edited in a way that it becomes an invalid commons media value. Then
+				// the property is undeleted and we have unexpected behavior.
+				valueViewOptions.dataValueType = 'undeserializable';
+			} else {
+				valueViewOptions.dataTypeId = dataType.getId();
 				valueViewOptions.dataValueType = dataType.getDataValueType();
-			} else if( dataValue ) {
-				valueViewOptions.dataValueType = dataValue.getType();
 			}
 
 			return valueViewOptions;
