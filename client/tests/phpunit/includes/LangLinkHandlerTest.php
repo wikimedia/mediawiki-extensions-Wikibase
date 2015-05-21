@@ -94,7 +94,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		return new LangLinkHandler(
 			$this->getLanguageLinkBadgeDisplay(),
-			new NamespaceChecker( array( NS_TALK ), array() ),
+			new NamespaceChecker( array( NS_TALK ) ),
 			$this->mockRepo,
 			$this->mockRepo,
 			$parserOutputDataUpdater,

@@ -36,7 +36,7 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	protected function getNamespaceChecker() {
-		return new NamespaceChecker( array(), array() );
+		return new NamespaceChecker( array() );
 	}
 
 	protected function getEntityIdParser() {
