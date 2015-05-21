@@ -32,11 +32,11 @@ abstract class UsageAccumulator {
 	 * but that seems nasty to model.
 	 *
 	 * @param Snak[] $snaks
-	 * @param string|null $language
+	 * @param string|null $languageCode
 	 */
-	public function addLabelUsageForSnaks( array $snaks, $language = null ) {
+	public function addLabelUsageForSnaks( array $snaks, $languageCode = null ) {
 		foreach ( $snaks as $snak ) {
-			$this->addLabelUsageForSnak( $snak, $language );
+			$this->addLabelUsageForSnak( $snak, $languageCode );
 		}
 	}
 
@@ -49,14 +49,14 @@ abstract class UsageAccumulator {
 	 * but that seems nasty to model.
 	 *
 	 * @param Snak $snak
-	 * @param string|null $language
+	 * @param string|null $languageCode
 	 */
-	public function addLabelUsageForSnak( Snak $snak, $language = null ) {
+	public function addLabelUsageForSnak( Snak $snak, $languageCode = null ) {
 		if ( $snak instanceof PropertyValueSnak ) {
 			$value = $snak->getDataValue();
 
 			if ( $value instanceof EntityIdValue ) {
-				$this->addLabelUsage( $value->getEntityId(), $language );
+				$this->addLabelUsage( $value->getEntityId(), $languageCode );
 			}
 		}
 	}
@@ -65,10 +65,10 @@ abstract class UsageAccumulator {
 	 * Registers the usage of an entity's label (in the given language).
 	 *
 	 * @param EntityId $id
-	 * @param string|null $language
+	 * @param string|null $languageCode
 	 */
-	public function addLabelUsage( EntityId $id, $language = null ) {
-		$this->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE, $language ) );
+	public function addLabelUsage( EntityId $id, $languageCode = null ) {
+		$this->addUsage( new EntityUsage( $id, EntityUsage::LABEL_USAGE, $languageCode ) );
 	}
 
 	/**

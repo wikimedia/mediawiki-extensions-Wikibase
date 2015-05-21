@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
+use MediaWikiTestCase;
 use Title;
 use Wikibase\Change;
 use Wikibase\Client\Changes\AffectedPagesFinder;
@@ -35,7 +36,7 @@ use Wikibase\Test\TestChanges;
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ChangeHandlerTest extends \MediaWikiTestCase {
+class ChangeHandlerTest extends MediaWikiTestCase {
 
 	private function getAffectedPagesFinder( UsageLookup $usageLookup, TitleFactory $titleFactory ) {
 		$namespaceChecker = new NamespaceChecker( array(), array( NS_MAIN ) );
@@ -190,10 +191,9 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				array(),
 				array(),
 			),
-			'sitelink usage' => array( // #1
+			'sitelink usage' => array(
 				array( EntityUsage::SITELINK_USAGE ),
 				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-				array( )
 			),
 			'label usage' => array(
 				array( EntityUsage::LABEL_USAGE ),
@@ -213,12 +213,10 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			'all usage' => array(
 				array( EntityUsage::ALL_USAGE ),
 				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-				array()
 			),
 			'sitelink and other usage (does links update)' => array(
 				array( EntityUsage::SITELINK_USAGE, EntityUsage::OTHER_USAGE ),
 				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
-				array()
 			),
 		);
 	}
@@ -226,7 +224,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetUpdateActions
 	 */
-	public function testGetUpdateActions( $aspects, $expected, $not = array() ) {
+	public function testGetUpdateActions( array $aspects, array $expected, array $not = array() ) {
 		$handler = $this->getChangeHandler();
 		$actions = $handler->getUpdateActions( $aspects );
 
