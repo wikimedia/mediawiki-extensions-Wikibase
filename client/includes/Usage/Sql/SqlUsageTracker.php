@@ -52,10 +52,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @param DatabaseBase $db
 	 *
-	 * @return UsageTableUpdater
+	 * @return EntityUsageTable
 	 */
 	private function newTableUpdater( DatabaseBase $db ) {
-		return new UsageTableUpdater( $this->idParser, $db, 'wbc_entity_usage', $this->batchSize );
+		return new EntityUsageTable( $this->idParser, $db, 'wbc_entity_usage', $this->batchSize );
 	}
 
 	/**

@@ -4,14 +4,14 @@ namespace Wikibase\Client\Tests\Usage\Sql;
 
 use DatabaseBase;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\Sql\UsageTableUpdater;
+use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\Usage\Sql\UsageTableUpdater
+ * @covers Wikibase\Client\Usage\Sql\EntityUsageTable
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -21,13 +21,13 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class UsageTableUpdaterTest extends \MediaWikiTestCase {
+class EntityUsageTableTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
 
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
-			$this->markTestSkipped( 'Skipping test for UsageTableUpdater, because the useLegacyUsageIndex option is set.' );
+			$this->markTestSkipped( 'Skipping test for EntityUsageTable, because the useLegacyUsageIndex option is set.' );
 		}
 
 		$this->tablesUsed[] = 'wbc_entity_usage';
@@ -120,8 +120,8 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		return $rows;
 	}
 
-	private function getUsageTableUpdater( $batchSize = 1000 ) {
-		return new UsageTableUpdater(
+	private function getEntityUsageTable( $batchSize = 1000 ) {
+		return new EntityUsageTable(
 			new BasicEntityIdParser(), wfGetDB( DB_MASTER ), 'wbc_entity_usage', $batchSize
 		);
 	}
@@ -146,7 +146,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$tableUpdater = $this->getUsageTableUpdater();
+		$tableUpdater = $this->getEntityUsageTable();
 
 		// adding usages should put them into the database
 		$tableUpdater->addUsages( 23, $usagesT1, $t1 );
@@ -188,7 +188,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$tableUpdater = $this->getUsageTableUpdater();
+		$tableUpdater = $this->getEntityUsageTable();
 		$tableUpdater->addUsages( 23, $usagesT1, $t1 );
 
 		// touch usage entries (some non-existing)
@@ -276,7 +276,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$tableUpdater = $this->getUsageTableUpdater();
+		$tableUpdater = $this->getEntityUsageTable();
 
 		$tableUpdater->addUsages( 23, $usagesT1, $t1 );
 		$tableUpdater->addUsages( 23, $usagesT2, $t2 );
@@ -315,7 +315,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	 * @dataProvider provideQueryUsages_InvalidArgumentException
 	 */
 	public function testQueryUsages_InvalidArgumentException( $pageId, $timeOp, $timestamp ) {
-		$tableUpdater = $this->getUsageTableUpdater();
+		$tableUpdater = $this->getEntityUsageTable();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$tableUpdater->queryUsages( $pageId, $timeOp, $timestamp );
@@ -339,7 +339,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$tableUpdater = $this->getUsageTableUpdater();
+		$tableUpdater = $this->getEntityUsageTable();
 
 		// init database: $usagesT2 get timestamp $t2,
 		// array_diff( $usagesT1, $usagesT2 ) get timestamp $t1.
@@ -377,7 +377,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$tableUpdater = $this->getUsageTableUpdater();
+		$tableUpdater = $this->getEntityUsageTable();
 		$tableUpdater->addUsages( 23, $usages, $touched );
 
 		$rows = $this->getUsageRows( 23, $usages, $touched );
@@ -400,7 +400,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		$rowsT1 = $this->getUsageRows( 7, $usages, $t1 );
 		$rowsT2 = $this->getUsageRows( 7, $usages, $t2 );
 
-		$tableUpdater = $this->getUsageTableUpdater( 3 );
+		$tableUpdater = $this->getEntityUsageTable( 3 );
 
 		// inserting more rows than fit into a single batch
 		$tableUpdater->addUsages( 7, $usages, $t1 );
@@ -417,7 +417,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		$rows7 = $this->getUsageRows( 7, $usages, $touched );
 		$rows8 = $this->getUsageRows( 8, $usages, $touched );
 
-		$tableUpdater = $this->getUsageTableUpdater( 3 );
+		$tableUpdater = $this->getEntityUsageTable( 3 );
 		$tableUpdater->addUsages( 7, $usages, $touched );
 		$tableUpdater->addUsages( 8, $usages, $touched );
 
