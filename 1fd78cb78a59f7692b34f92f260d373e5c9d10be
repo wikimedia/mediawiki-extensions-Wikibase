@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_fa4044a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T15:43:51Z",
+      "side": 1,
+      "message": "What does \"now\" mean? Does this depend on an other change? Which one? Why did we used that other hook before and what changed that it needs to change now?",
+      "revId": "1fd78cb78a59f7692b34f92f260d373e5c9d10be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_3afc8c6c",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T15:43:51Z",
+      "side": 1,
+      "message": "What\u0027s the reason for this fallback? Why in this order?",
+      "revId": "1fd78cb78a59f7692b34f92f260d373e5c9d10be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_faf12492",
+        "filename": "client/tests/phpunit/includes/Hooks/DataUpdateHookHandlersTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T15:43:51Z",
+      "side": 1,
+      "message": "@param string $timestamp missing.",
+      "revId": "1fd78cb78a59f7692b34f92f260d373e5c9d10be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
