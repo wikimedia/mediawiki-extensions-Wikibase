@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_7a7694a0",
+        "filename": "client/includes/Hooks/ParserOutputUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T15:08:56Z",
+      "side": 1,
+      "message": "Do a fulltext search for the replaced \"onParserAfterParse\" please, as well as the public \"doParserAfterParse\".",
+      "revId": "e6119f4f802c2b712c3e68cf014f8e6dee094d6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
