@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_9508e930",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T18:46:08Z",
+      "side": 1,
+      "message": "Could do this first, because the other two checks are irrelevant in this case.",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_905c771f",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T18:46:08Z",
+      "side": 1,
+      "message": "* Reads like \"WHERE pageId \u003e\u003d 0\". :-(\n* Please remove the two parameters, they are optional anyway.\n* I suggest to change the operator parameter to a bool because there are only 2 cases. No, wait, this is not well readable. I suggest to have a switch with only two cases, \u0027\u003c\u0027 and \u0027\u003e\u003d\u0027, nothing else.",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_708c7389",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T18:46:08Z",
+      "side": 1,
+      "message": "Empty? How? This can\u0027t be empty. It\u0027s checked to not be an empty string in UsageUpdater::pruneUsagesForPage.\n\nIf you want to allow null here you should document this and check for null.",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_b0bbbb08",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T18:46:08Z",
+      "side": 1,
+      "message": "The order is a bit arbitary. I prefer services first.",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f096234e",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T18:46:08Z",
+      "side": 1,
+      "message": "This is used a single time below, so ...?",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_70dd5346",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T18:46:08Z",
+      "side": 1,
+      "message": "See other comment (switch with \u0027\u003c\u0027, \u0027\u003e\u003d\u0027 and default throw new Exception).",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_300d8beb",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T18:46:08Z",
+      "side": 1,
+      "message": "Empty? How? This can\u0027t be empty. It\u0027s checked to not be an empty string in UsageUpdater::pruneUsagesForPage.\n\nIf you want to allow null here you should document this and check for null.",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7554652a",
+        "filename": "client/includes/store/UsageUpdater.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T18:46:08Z",
+      "side": 1,
+      "message": "Could check for strlen 14. ;-)",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
