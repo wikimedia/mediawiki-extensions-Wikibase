@@ -33,6 +33,11 @@ MODULE.getStore = function( dataTypeStore ) {
 		dv.TimeValue.TYPE
 	);
 
+	expertStore.registerDataValueExpert(
+		vv.experts.UnDeserializableValue,
+		dv.UnDeserializableValue.TYPE
+	);
+
 	// Register experts for data types defined in Wikibase. Since those data types are defined by a
 	// setting, it needs to be checked whether they are actually defined.
 
