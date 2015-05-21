@@ -2,10 +2,13 @@
 
 namespace Wikibase\Client\Usage\Sql;
 
+use ArrayIterator;
 use DatabaseBase;
 use InvalidArgumentException;
 use Iterator;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\PageEntityUsages;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
@@ -211,6 +214,17 @@ class EntityUsageTable {
 	}
 
 	/**
+	 * @param EntityId[] $entityIds
+	 *
+	 * @return string[]
+	 */
+	private function getEntityIdStrings( array $entityIds ) {
+		return array_map( function( EntityId $entityId ) {
+			return $entityId->getSerialization();
+		}, $entityIds );
+	}
+
+	/**
 	 * @param array|Iterator $rows
 	 *
 	 * @return EntityUsage[]
@@ -272,12 +286,14 @@ class EntityUsageTable {
 	 *
 	 * @see UsageTracker::removeEntities
 	 *
-	 * @param string[] $idStrings
+	 * @param EntityId[] $entityIds
 	 */
-	public function removeEntities( array $idStrings ) {
-		if ( empty( $idStrings ) ) {
+	public function removeEntities( array $entityIds ) {
+		if ( empty( $entityIds ) ) {
 			return;
 		}
+
+		$idStrings = $this->getEntityIdStrings( $entityIds );
 
 		$batches = array_chunk( $idStrings, $this->batchSize );
 
@@ -290,6 +306,128 @@ class EntityUsageTable {
 				__METHOD__
 			);
 		}
+	}
+
+	/**
+	 * @see UsageLookup::getPagesUsing
+	 *
+	 * @param EntityId[] $entityIds
+	 * @param string[] $aspects
+	 *
+	 * @return Iterator<PageEntityUsages> An iterator over entity usages grouped by page
+	 */
+	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
+		if ( empty( $entityIds ) ) {
+			return new ArrayIterator();
+		}
+
+		$idStrings = $this->getEntityIdStrings( $entityIds );
+		$where = array( 'eu_entity_id' => $idStrings );
+
+		if ( !empty( $aspects ) ) {
+			$where['eu_aspect'] = $aspects;
+		}
+
+		$res = $this->connection->select(
+			'wbc_entity_usage',
+			array( 'eu_page_id', 'eu_entity_id', 'eu_aspect' ),
+			$where,
+			__METHOD__
+		);
+
+		$pages = $this->foldRowsIntoPageEntityUsages( $res );
+
+		//TODO: use paging for large page sets!
+		return new ArrayIterator( $pages );
+	}
+
+	/**
+	 * @param array|Iterator $rows
+	 *
+	 * @return PageEntityUsages[]
+	 */
+	private function foldRowsIntoPageEntityUsages( $rows ) {
+		$usagesPerPage = array();
+
+		foreach ( $rows as $row ) {
+			$pageId = (int)$row->eu_page_id;
+
+			if ( isset( $usagesPerPage[$pageId] ) ) {
+				$pageEntityUsages = $usagesPerPage[$pageId];
+			} else {
+				$pageEntityUsages = new PageEntityUsages( $pageId );
+			}
+
+			$entityId = $this->idParser->parse( $row->eu_entity_id );
+			$usage = new EntityUsage( $entityId, $row->eu_aspect );
+			$pageEntityUsages->addUsages( array( $usage ) );
+
+			$usagesPerPage[$pageId] = $pageEntityUsages;
+		}
+
+		return $usagesPerPage;
+	}
+
+	/**
+	 * @see UsageLookup::getUnusedEntities
+	 *
+	 * @param EntityId[] $entityIds
+	 *
+	 * @return EntityId[]
+	 */
+	public function getUnusedEntities( array $entityIds ) {
+		if ( empty( $entityIds ) ) {
+			return array();
+		}
+
+		$entityIdMap = array();
+
+		foreach ( $entityIds as $entityId ) {
+			$idString = $entityId->getSerialization();
+			$entityIdMap[$idString] = $entityId;
+		}
+
+		$usedIdStrings = $this->getUsedEntityIdStrings( array_keys( $entityIdMap ) );
+
+		return array_diff_key( $entityIdMap, array_flip( $usedIdStrings ) );
+	}
+
+	/**
+	 * Returns those entity ids which are used from a given set of entity ids.
+	 *
+	 * @param string[] $idStrings
+	 *
+	 * @return string[]
+	 */
+	private function getUsedEntityIdStrings( array $idStrings ) {
+		$where = array( 'eu_entity_id' => $idStrings );
+
+		$res = $this->connection->select(
+			'wbc_entity_usage',
+			array( 'eu_entity_id' ),
+			$where,
+			__METHOD__
+		);
+
+		return $this->extractProperty( $res, 'eu_entity_id' );
+	}
+
+	/**
+	 * Returns an array of values extracted from the $key property from each object.
+	 *
+	 * @param array|Iterator $objects
+	 * @param string $key
+	 *
+	 * @return array
+	 */
+	private function extractProperty( $objects, $key ) {
+		$array = array();
+
+		foreach ( $objects as $object ) {
+			$array[] = $object->$key;
+		}
+
+		return $array;
 	}
 
 }
