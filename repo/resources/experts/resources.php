@@ -37,6 +37,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.MonolingualText',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.experts.TimeInput',
+				'jquery.valueview.experts.UnDeserializableValue',
 				'jquery.valueview.experts.UnsupportedValue',
 				'wikibase.datamodel.EntityId',
 				'wikibase.experts.__namespace',
