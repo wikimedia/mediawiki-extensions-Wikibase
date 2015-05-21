@@ -14,8 +14,9 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  *
  * @license GPL 2+
  * @author Daniel Kinzler
+ * @internal
  */
-class UsageTableUpdater {
+class EntityUsageTable {
 
 	/**
 	 * @var DatabaseBase

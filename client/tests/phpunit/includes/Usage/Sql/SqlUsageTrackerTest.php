@@ -6,7 +6,7 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Tests\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
-use Wikibase\Client\Usage\Sql\UsageTableUpdater;
+use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
@@ -59,13 +59,13 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 
 	public function getUsages( $pageId, $timestamp ) {
 		$db = wfGetDB( DB_SLAVE );
-		$updater = new UsageTableUpdater( $db, 'wbc_entity_usage', 1000, new BasicEntityIdParser() );
+		$updater = new EntityUsageTable( $db, 'wbc_entity_usage', 1000, new BasicEntityIdParser() );
 		return $updater->queryUsages( $pageId, '>=', $timestamp );
 	}
 
 	public function putUsages( $pageId, array $usages, $timestamp ) {
 		$db = wfGetDB( DB_MASTER );
-		$updater = new UsageTableUpdater( $db, 'wbc_entity_usage', 1000, new BasicEntityIdParser() );
+		$updater = new EntityUsageTable( $db, 'wbc_entity_usage', 1000, new BasicEntityIdParser() );
 		return $updater->addUsages( $pageId, $usages, $timestamp );
 	}
 
