@@ -21,6 +21,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\ParserOutputDataUpdater;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataAccess\PropertyIdResolver;
@@ -140,6 +141,11 @@ final class WikibaseClient {
 	 * @var LangLinkHandler|null
 	 */
 	private $langLinkHandler = null;
+
+	/**
+	 * @var ParserOutputDataUpdater|null
+	 */
+	private $parserOutputDataUpdater = null;
 
 	/**
 	 * @var NamespaceChecker|null
@@ -538,11 +544,11 @@ final class WikibaseClient {
 	public function getLangLinkHandler() {
 		if ( $this->langLinkHandler === null ) {
 			$this->langLinkHandler = new LangLinkHandler(
-				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getLanguageLinkBadgeDisplay(),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),
+				$this->getParserOutputDataUpdater(),
 				$this->getSiteStore(),
 				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getLangLinkSiteGroup()
@@ -550,6 +556,21 @@ final class WikibaseClient {
 		}
 
 		return $this->langLinkHandler;
+	}
+
+	/**
+	 * @return ParserOutputDataUpdater
+	 */
+	public function getParserOutputDataUpdater() {
+		if ( $this->parserOutputDataUpdater === null ) {
+			$this->parserOutputDataUpdater = new ParserOutputDataUpdater(
+				$this->getOtherProjectsSidebarGeneratorFactory(),
+				$this->getStore()->getSiteLinkLookup(),
+				$this->settings->getSetting( 'siteGlobalID' )
+			);
+		}
+
+		return $this->parserOutputDataUpdater;
 	}
 
 	/**
