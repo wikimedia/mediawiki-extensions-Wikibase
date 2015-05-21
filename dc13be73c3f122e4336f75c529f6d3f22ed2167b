@@ -16,6 +16,24 @@
       "revId": "dc13be73c3f122e4336f75c529f6d3f22ed2167b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_15e2b9cf",
+        "filename": "repo/includes/rdf/FullStatementRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T17:16:28Z",
+      "side": 1,
+      "message": "How \"inconsistent\"? I changed this to make it equal to the other statement builder. This avoids the @var hack at pretty much no cost.",
+      "parentUuid": "0ed113e2_555da1ee",
+      "revId": "dc13be73c3f122e4336f75c529f6d3f22ed2167b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
