@@ -127,13 +127,14 @@ class ItemMergeInteractor {
 	 * @param ItemId $toId
 	 * @param array $ignoreConflicts The kinds of conflicts to ignore
 	 * @param string|null $summary
+	 * @param bool $bot Mark the edit as bot edit
 	 *
 	 * @return array A list of exactly two EntityRevision objects. The first one represents
 	 * the modified source item, the second one represents the modified target item.
 	 *
 	 * @throws ItemMergeException
 	 */
-	public function mergeItems( ItemId $fromId, ItemId $toId, $ignoreConflicts = array(), $summary = null ) {
+	public function mergeItems( ItemId $fromId, ItemId $toId, $ignoreConflicts = array(), $summary = null, $bot = false ) {
 
 		$this->checkPermissions( $fromId );
 		$this->checkPermissions( $toId );
@@ -159,7 +160,7 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}
 
-		return $this->attemptSaveMerge( $fromEntity, $toEntity, $summary );
+		return $this->attemptSaveMerge( $fromEntity, $toEntity, $summary, $bot );
 	}
 
 	private function loadEntity( EntityId $entityId ) {
@@ -207,27 +208,33 @@ class ItemMergeInteractor {
 	 * @param Item $fromItem
 	 * @param Item $toItem
 	 * @param string|null $summary
+	 * @param bool $bot
 	 *
 	 * @return array A list of exactly two EntityRevision objects. The first one represents
 	 * the modified source item, the second one represents the modified target item.
 	 */
-	private function attemptSaveMerge( Item $fromItem, Item $toItem, $summary = null ) {
+	private function attemptSaveMerge( Item $fromItem, Item $toItem, $summary, $bot ) {
 		$toSummary = $this->getSummary( 'to', $toItem->getId(), $summary );
-		$fromRev = $this->saveEntity( $fromItem, $toSummary );
+		$fromRev = $this->saveEntity( $fromItem, $toSummary, $bot );
 
 		$fromSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
-		$toRev = $this->saveEntity( $toItem, $fromSummary );
+		$toRev = $this->saveEntity( $toItem, $fromSummary, $bot );
 
 		return array( $fromRev, $toRev );
 	}
 
-	private function saveEntity( Entity $entity, Summary $summary ) {
+	private function saveEntity( Entity $entity, Summary $summary, $bot ) {
+		$flags = EDIT_UPDATE;
+		if ( $bot && $this->user->isAllowed( 'bot' ) ) {
+			$flags |= EDIT_FORCE_BOT;
+		}
+
 		try {
 			return $this->entityStore->saveEntity(
 				$entity,
 				$this->summaryFormatter->formatSummary( $summary ),
 				$this->user,
-				EDIT_UPDATE
+				$flags
 			);
 		} catch ( StorageException $ex ) {
 			throw new ItemMergeException( $ex->getMessage(), 'failed-save', $ex );

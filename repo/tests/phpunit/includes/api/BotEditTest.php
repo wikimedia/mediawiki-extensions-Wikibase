@@ -42,9 +42,10 @@ class BotEditTest extends WikibaseApiTestCase {
 			'api_test_bot@example.com',
 			array( 'bot' )
 		);
+		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', array( 'user' => array( 'item-merge' => true ) ) );
 
 		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( array( 'Empty' ) );
+			$this->initTestEntities( array( 'Empty', 'Leipzig', 'Osaka' ) );
 		}
 
 		self::$hasSetup = true;
@@ -88,6 +89,12 @@ class BotEditTest extends WikibaseApiTestCase {
 			array(//11
 				'p' => array( 'action' => 'wbeditentity', 'new' => 'item', 'data' => '{}' ),
 				'e' => array( 'bot' => false, 'new' => true ) ),
+			array(//12
+				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Osaka', 'toid' => 'Empty', 'bot' => '' ),
+				'e' => array( 'bot' => true, 'new' => false ) ),
+			array(//13
+				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Leipzig', 'toid' => 'Empty', 'ignoreconflicts' => 'description' ),
+				'e' => array( 'bot' => false, 'new' => false ) ),
 			//todo claims, references, qualifiers
 		);
 	}
@@ -99,18 +106,29 @@ class BotEditTest extends WikibaseApiTestCase {
 		$this->login( 'wbbot' );
 
 		// -- do the request --------------------------------------------------
-		if( array_key_exists( 'handle', $params ) ){
+		if ( array_key_exists( 'handle', $params ) ) {
 			$params['id'] = EntityTestHelper::getId( $params['handle'] );
 			unset( $params['handle'] );
+		}
+
+		// wbmergeitems needs special treatment as it takes two entities
+		if ( $params['action'] === 'wbmergeitems' ) {
+			$params['fromid'] = EntityTestHelper::getId( $params['fromid'] );
+			$params['toid'] = EntityTestHelper::getId( $params['toid'] );
 		}
 		list( $result,, ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->user );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
 		$this->assertResultHasEntityType( $result );
-		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
-		$this->assertArrayHasKey( 'lastrevid', $result['entity'] , 'entity should contain lastrevid key' );
-		$myid = $result['entity']['id'];
+		if ( $params['action'] !== 'wbmergeitems' ) {
+			$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
+			$this->assertArrayHasKey( 'lastrevid', $result['entity'] , 'entity should contain lastrevid key' );
+			$myid = $result['entity']['id'];
+		} else {
+			$this->assertArrayHasKey( 'from', $result, "Missing 'from' section in response." );
+			$myid = $result['from']['id'];
+		}
 
 		// -- get the recentchanges -------------------------------------------
 		$rcRequest = array(
