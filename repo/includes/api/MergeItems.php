@@ -125,8 +125,9 @@ class MergeItems extends ApiBase {
 			if ( $ignoreConflicts === null ) {
 				$ignoreConflicts = array();
 			}
+			$bot = isset( $params['bot'] );
 
-			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $bot );
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
 		} catch ( ItemMergeException $ex ) {
@@ -139,9 +140,10 @@ class MergeItems extends ApiBase {
 	 * @param ItemId $toId
 	 * @param array $ignoreConflicts
 	 * @param string $summary
+	 * @param bool $bot
 	 */
-	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
-		list( $newRevisionFrom, $newRevisionTo ) = $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary, $bot ) {
+		list( $newRevisionFrom, $newRevisionTo ) = $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $bot );
 
 		$this->resultBuilder->setValue( null, 'success', 1 );
 
