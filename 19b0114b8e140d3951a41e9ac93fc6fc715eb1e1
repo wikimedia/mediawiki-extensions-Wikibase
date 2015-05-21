@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_d5a19191",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T17:14:47Z",
+      "side": 1,
+      "message": "This splits an aspect off an aspect key and returns it.\n\nLet me remind you that *I* almost blocked you when you introduced these names. Now we should either stick with \"aspect\" vs. \"aspectKey\" or change it everywhere. What do you suggest?",
+      "parentUuid": "0ed113e2_d5e3d12f",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f5de156f",
         "filename": "client/includes/Usage/EntityUsage.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-21T16:40:28Z",
       "side": 1,
       "message": "Why not call splitAspectKey here?",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_95a789a3",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T17:14:47Z",
+      "side": 1,
+      "message": "Uh? What?",
+      "parentUuid": "0ed113e2_f5de156f",
       "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_75b8e5c2",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T17:14:47Z",
+      "side": 1,
+      "message": "Correct. This maps aspects to nothing because all this code cares about are the array keys. In other words: This is a HashSet. Should I call it \"set\" then?",
+      "parentUuid": "0ed113e2_f5c5b590",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_95c0e97f",
         "filename": "client/includes/Usage/UsageAspectTransformer.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_d5c8b15b",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T17:14:47Z",
+      "side": 1,
+      "message": "Yes. All private. Would be bad in a public interface, I agree on that.",
+      "parentUuid": "0ed113e2_95c0e97f",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_153cf98c",
         "filename": "client/includes/Usage/UsageAspectTransformer.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2015-05-21T16:40:28Z",
       "side": 1,
       "message": "you could check for the aspect as well as the full aspect key, to cover direct matches here.",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f5c3753a",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T17:14:47Z",
+      "side": 1,
+      "message": "Direct matches are already in the array, see above.",
+      "parentUuid": "0ed113e2_153cf98c",
       "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
