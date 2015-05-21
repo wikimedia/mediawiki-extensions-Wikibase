@@ -1,13 +1,13 @@
 <?php
+
 /**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ *
  * @codeCoverageIgnoreStart
  */
-
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( 'Not an entry point.' );
-}
-
-$GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
+global $wgHooks;
+$wgHooks['ResourceLoaderTestModules'][] = function(
 	array &$testModules,
 	\ResourceLoader &$resourceLoader
 ) {
