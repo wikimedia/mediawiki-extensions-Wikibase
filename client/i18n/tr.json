@@ -6,7 +6,8 @@
 			"Sadrettin",
 			"Sayginer",
 			"Ömer Berkay",
-			"Stultiwikia"
+			"Stultiwikia",
+			"Mavrikant"
 		]
 	},
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
@@ -23,6 +24,7 @@
 	"wikibase-linkitem-linkpage": "Sayfaya bağlantı",
 	"wikibase-linkitem-input-site": "Dil:",
 	"wikibase-linkitem-input-page": "Sayfa:",
+	"wikibase-linkitem-confirmitem-text": "Seçtiğiniz sayfa VikiVeri üzerinde üzerinde bir [$1 öğe] ile ilişkilendirmiş. Lütfen aşağıdaki {{PLURAL:$2|sayfanın|sayfaların}} bağlantı kurmak istediğiniz {{PLURAL:$2|sayfa|sayfalar}} olduğunu onaylayınız.",
 	"wikibase-linkitem-confirmitem-button": "Onayla",
 	"wikibase-linkitem-not-loggedin-title": "Oturum açmış olmanız gerekiyor",
 	"wikibase-property-notfound": "$1 özellik bulunamadı.",

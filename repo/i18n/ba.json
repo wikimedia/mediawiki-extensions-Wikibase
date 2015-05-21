@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Рустам Нурыев"
+		]
+	},
+	"wikibase-edit": "үҙгәртергә",
+	"wikibase-add": "өҫтәргә",
+	"wikibase-label-empty": "Тамға (исем) юҡ",
+	"wikibase-description-empty": "Тасуирлама тултырылмаған",
+	"wikibase-statements": "Раҫлауҙар",
+	"wikibase-sitelinks-special": "Башҡа сайттар",
+	"wikibase-statementview-rank-normal": "Нормаль ранг",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|сығанаҡ}}"
+}

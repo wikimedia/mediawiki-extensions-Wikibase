@@ -372,6 +372,7 @@
 	"right-item-redirect": "Tworzenie przekierowań elementu",
 	"right-property-term": "Zmiana określeń właściwości (etykiet, opisów, aliasów)",
 	"right-property-create": "Tworzenie właściwości",
+	"wikibase-entity-not-viewable-title": "Niezgodność typu treści: Nie można wyświetlić treści",
 	"action-item-merge": "połącz elementy",
 	"action-property-create": "tworzenia właściwości",
 	"apihelp-wbcreateclaim-description": "Tworzy stwierdzenia Wikibase.",

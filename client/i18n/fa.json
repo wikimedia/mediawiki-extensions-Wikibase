@@ -23,6 +23,7 @@
 	"apihelp-query+wikibase-description": "اطلاعاتی درباره مخزن ویکی‌بیس مرتبط دریافت کن.",
 	"wikibase-after-page-move": "شما ممکن است در عین حال بخواهید آیتم وابستهٔ {{WBREPONAME}} را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.",
 	"wikibase-after-page-move-queued": "[$1 آیتم {{WBREPONAME}}] مرتبط با این صفحه  به صورت خودکار به‌زودی به‌روز خواهد شد.",
+	"wikibase-after-page-delete-queued": "[$1 آیتم {{WBREPONAME}}] مرتبط با این صفحه  به صورت خودکار به‌زودی به‌روز خواهد شد.",
 	"wikibase-comment-add": "یک مورد {{WBREPONAME}} ایجاد شده‌‌است.",
 	"wikibase-comment-remove": "آیتم مرتبط {{WBREPONAME}} حذف شد. پیوندهای زبانی حذف شد.",
 	"wikibase-comment-linked": "مورد {{WBREPONAME}} در این صفحه مرتبط شده‌است.",

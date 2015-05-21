@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nepaboy"
+			"Nepaboy",
+			"SatyamMishra"
 		]
 	},
-	"wikibase-edit": "सम्पादन",
+	"wikibase-edit": "संपादन",
 	"wikibase-statements": "कथन",
 	"wikibase-sitelinks-special": "अन्य वेबसाइट",
 	"wikibase-item-summary-wbsetlabeldescriptionaliases": "[$2] लेबल, विवरण आ उपनाम बदल दिहल गईल बा",

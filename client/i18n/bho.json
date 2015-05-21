@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Nepaboy",
-			"Ganesh"
+			"Ganesh",
+			"SatyamMishra"
 		]
 	},
-	"tooltip-t-wikibase": "जड़ित डेटा भंडार वस्तु खातिर लिंक",
+	"tooltip-t-wikibase": "जुड़ल डेटा भंडार के चीज खातिर लिंक",
+	"wikibase-dataitem": "{{WBREPONAME}} चीज",
 	"wikibase-editlinks": "कड़ी संपादन करीं",
-	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी सम्पादन करीं",
+	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी संपादन करीं",
 	"wikibase-rc-wikibase-edit-letter": "डा"
 }
