@@ -115,7 +115,7 @@ class LanguageFallbackChain {
 
 		foreach ( $data as $languageCode => $value ) {
 			if ( Language::isValidCode( $languageCode ) ) {
-				// We can not translate here, we do not have a LanguageWithConversion object
+				// We cannot translate here, we do not have a LanguageWithConversion object
 				return $this->getValueArray( $value, $languageCode );
 			}
 		}

@@ -48,7 +48,7 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 
 	/**
 	 * Get standardized dateTime value, compatible with xsd:dateTime
-	 * If the value can not be converted to it, returns null
+	 * If the value cannot be converted to it, returns null
 	 * @param TimeValue $value
 	 * @return string|null
 	 */

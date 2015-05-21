@@ -239,7 +239,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( array_key_exists( 'sitelinks', $data ) ) {
 			if ( !( $entity instanceof Item ) ) {
-				$this->dieError( 'Non Items can not have sitelinks', 'not-recognized' );
+				$this->dieError( 'Non Items cannot have sitelinks', 'not-recognized' );
 			}
 
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $entity ) );
