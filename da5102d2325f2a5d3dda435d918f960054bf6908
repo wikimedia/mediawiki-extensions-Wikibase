@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_7f1c46cb",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T14:56:34Z",
+      "side": 1,
+      "message": "I\u0027m sorry? All I\u0027m asking for is a tiny sentence that helps readers to understand. Thanks to Daniel I now know what \"direct\" refers to, but since this is not part of DataModel (not mentioned at https://www.mediawiki.org/wiki/Wikibase/DataModel) it\u0027s hard to understand for others.\n\nSee https://gerrit.wikimedia.org/r/#/c/212268/3/repo/includes/rdf/TruthyStatementRdfBuilder.php . You can copy text from there if you want.",
+      "parentUuid": "0ed113e2_2eb1b28c",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ad35af43",
         "filename": "docs/ontology.owl",
         "patchSetId": 6
@@ -124,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_1f865ae0",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T14:56:34Z",
+      "side": 1,
+      "message": "Ok, thank you for the explanation.",
+      "parentUuid": "0ed113e2_0e270ec6",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_8d322b5a",
         "filename": "docs/ontology.owl",
         "patchSetId": 6
@@ -153,6 +189,24 @@
       "side": 1,
       "message": "We could, but it\u0027s not what is happening now, so OWL can only describe what is going on in the code right now. If we change the generator code, we\u0027ll update the OWL accordingly.",
       "parentUuid": "0ed113e2_8d322b5a",
+      "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_df73f211",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 6
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-05-21T14:56:34Z",
+      "side": 1,
+      "message": "You are right, this is not part of this patch. Just asking. I created T99907 for that.",
+      "parentUuid": "0ed113e2_ae312202",
       "revId": "da5102d2325f2a5d3dda435d918f960054bf6908",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
