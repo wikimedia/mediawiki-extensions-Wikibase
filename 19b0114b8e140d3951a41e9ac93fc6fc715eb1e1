@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_d5e3d12f",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-21T16:40:28Z",
+      "side": 1,
+      "message": "Bad name. splitAspect vs splitSpect key is confusing. Also, this this doesn\u0027t split an aspect. It Splits an aspect key an returns the base aspect.",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f5de156f",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-21T16:40:28Z",
+      "side": 1,
+      "message": "Why not call splitAspectKey here?",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f5c5b590",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-21T16:40:28Z",
+      "side": 1,
+      "message": "this doesn\u0027t map aspects to anything, does it?",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_95c0e97f",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-21T16:40:28Z",
+      "side": 1,
+      "message": "So, the first two params have the aspect keys as values, and the third param has the aspect keys as keys? confusing...",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_153cf98c",
+        "filename": "client/includes/Usage/UsageAspectTransformer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-05-21T16:40:28Z",
+      "side": 1,
+      "message": "you could check for the aspect as well as the full aspect key, to cover direct matches here.",
+      "revId": "19b0114b8e140d3951a41e9ac93fc6fc715eb1e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
