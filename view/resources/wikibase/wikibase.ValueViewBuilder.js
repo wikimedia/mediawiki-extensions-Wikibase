@@ -59,13 +59,26 @@
 			} );
 
 			if( dataType ) {
-				valueViewOptions.dataTypeId    = dataType.getId();
-				valueViewOptions.dataValueType = dataType.getDataValueType();
-			} else if( dataValue ) {
-				valueViewOptions.dataValueType = dataValue.getType();
+				valueViewOptions.dataTypeId = dataType.getId();
+			}
+
+			if( dataType || dataValue ) {
+				valueViewOptions.dataValueType = this._getDataValueType( dataType, dataValue );
 			}
 
 			return valueViewOptions;
+		},
+
+		_getDataValueType: function( dataType, dataValue ) {
+			// If the value is undeserializable, then we need an UnDeserializableValue expert
+			// regardless of the snak's data type.
+			if( dataValue && dataValue.getType() === 'undeserializable' ) {
+				return dataValue.getType();
+			} else if( dataType ) {
+				return dataType.getDataValueType();
+			}
+
+			return dataValue.getType();
 		}
 	} );
 
