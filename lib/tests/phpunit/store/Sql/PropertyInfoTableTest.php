@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoTable;
 use Wikibase\Settings;
@@ -18,7 +19,7 @@ use Wikibase\Settings;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class PropertyInfoTableTest extends \MediaWikiTestCase {
+class PropertyInfoTableTest extends MediaWikiTestCase {
 
 	/**
 	 * @var PropertyInfoStoreTestHelper
@@ -38,7 +39,8 @@ class PropertyInfoTableTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_property_info table." );
 		}
 
-		if ( !Settings::get( 'usePropertyInfoTable' ) ) {
+		$settings = Settings::singleton();
+		if ( !$settings->getSetting( 'usePropertyInfoTable' ) ) {
 			$this->markTestSkipped( "Skipping because wb_property_info isn't configured." );
 		}
 

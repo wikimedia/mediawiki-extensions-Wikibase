@@ -57,17 +57,4 @@ final class Settings extends SettingsArray {
 		}
 	}
 
-	/**
-	 * Shortcut to ::singleton()->getSetting
-	 *
-	 * @deprecated
-	 *
-	 * @param string $settingName
-	 *
-	 * @return mixed
-	 */
-	public static function get( $settingName ) {
-		return self::singleton()->getSetting( $settingName );
-	}
-
 }
