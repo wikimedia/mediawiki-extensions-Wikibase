@@ -6,6 +6,7 @@ use Wikibase\Change;
 use Wikibase\ChangeRow;
 use Wikibase\ChangesTable;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -76,6 +77,7 @@ final class TestChanges {
 		$factory = new EntityChangeFactory(
 			new ChangesTable( $changesDatabase ),
 			new EntityFactory( $entityClasses ),
+			new EntityDiffer(),
 			$changeClasses
 		);
 

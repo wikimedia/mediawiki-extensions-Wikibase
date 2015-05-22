@@ -18,6 +18,7 @@ use Wikibase\Api\ApiHelperFactory;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -264,6 +265,7 @@ class WikibaseRepo {
 		return new EntityChangeFactory(
 			$this->getStore()->getChangesTable(),
 			$this->getEntityFactory(),
+			new EntityDiffer(),
 			$changeClasses
 		);
 	}

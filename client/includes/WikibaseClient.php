@@ -30,6 +30,7 @@ use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -700,6 +701,7 @@ final class WikibaseClient {
 		return new EntityChangeFactory(
 			$this->getStore()->newChangesTable(),
 			$this->getEntityFactory(),
+			new EntityDiffer(),
 			$changeClasses
 		);
 	}
