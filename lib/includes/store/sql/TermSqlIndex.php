@@ -1004,7 +1004,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return bool
 	 */
 	public function supportsWeight() {
-		return !Settings::get( 'withoutTermWeight' );
+		$settings = Settings::singleton();
+		return !$settings->getSetting( 'withoutTermWeight' );
 	}
 
 }

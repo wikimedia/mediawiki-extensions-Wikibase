@@ -680,8 +680,8 @@ class SqlStore implements Store {
 	 * @return PropertyInfoStore
 	 */
 	private function newPropertyInfoStore() {
-		$usePropertyInfoTable = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'usePropertyInfoTable' );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$usePropertyInfoTable = $wikibaseRepo->getSettings()->getSetting( 'usePropertyInfoTable' );
 
 		if ( $usePropertyInfoTable ) {
 			$table = new PropertyInfoTable( false );
