@@ -197,7 +197,7 @@ class WikibaseRepo {
 		static $instance = null;
 
 		if ( $instance === null ) {
-			$instance = new self( Settings::singleton() );
+			$instance = new self( new SettingsArray( $GLOBALS['wgWBRepoSettings'] ) );
 		}
 
 		return $instance;
