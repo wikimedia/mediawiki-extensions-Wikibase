@@ -9,6 +9,7 @@ use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Repo\WikibaseRepo;
@@ -105,22 +106,25 @@ class RemoveClaims extends ModifyClaim {
 	}
 
 	/**
-	 * Checks whether the claims can be found
-	 *
 	 * @param StatementList $statements
-	 * @param string[] $guidsThatShouldExist
+	 * @param string[] $requiredGuids
 	 */
-	private function assertStatementListContainsGuids( StatementList $statements, array $guidsThatShouldExist ) {
+	private function assertStatementListContainsGuids( StatementList $statements, array $requiredGuids ) {
 		$existingGuids = array();
 
-		foreach ( $statements->toArray() as $statement ) {
-			$existingGuids[] = $statement->getGuid();
+		/** @var Statement $statement */
+		foreach ( $statements as $statement ) {
+			$guid = $statement->getGuid();
+			$existingGuids[$guid] = null;
 		}
 
-		foreach ( $guidsThatShouldExist as $guid ) {
-			if ( !in_array( $guid, $existingGuids ) ) {
-				$this->dieError( "Claim with guid $guid not found" , 'invalid-guid' );
-			}
+		$missingGuids = array_diff_key( array_flip( $requiredGuids ), $existingGuids );
+
+		if ( !empty( $missingGuids ) ) {
+			$this->dieError(
+				'Statement(s) with GUID(s) ' . implode( ', ', array_keys( $missingGuids ) ) . ' not found',
+				'invalid-guid'
+			);
 		}
 	}
 
