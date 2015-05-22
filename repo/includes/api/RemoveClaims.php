@@ -8,9 +8,9 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
-use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -53,7 +53,10 @@ class RemoveClaims extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
-		$this->checkClaims( $entity, $params['claim'] );
+		if ( $entity instanceof StatementListProvider ) {
+			$this->assertStatementListContainsGuids( $entity->getStatements(), $params['claim'] );
+		}
+
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		$changeOps = new ChangeOps();
@@ -104,14 +107,18 @@ class RemoveClaims extends ModifyClaim {
 	/**
 	 * Checks whether the claims can be found
 	 *
-	 * @param Entity $entity
-	 * @param array $guids
+	 * @param StatementList $statements
+	 * @param string[] $guidsThatShouldExist
 	 */
-	private function checkClaims( Entity $entity, array $guids ) {
-		$claims = new Claims( $entity->getClaims() );
+	private function assertStatementListContainsGuids( StatementList $statements, array $guidsThatShouldExist ) {
+		$existingGuids = array();
 
-		foreach ( $guids as $guid) {
-			if ( !$claims->hasClaimWithGuid( $guid ) ) {
+		foreach ( $statements->toArray() as $statement ) {
+			$existingGuids[] = $statement->getGuid();
+		}
+
+		foreach ( $guidsThatShouldExist as $guid ) {
+			if ( !in_array( $guid, $existingGuids ) ) {
 				$this->dieError( "Claim with guid $guid not found" , 'invalid-guid' );
 			}
 		}
