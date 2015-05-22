@@ -349,7 +349,7 @@ final class WikibaseClient {
 	private static function newInstance() {
 		global $wgContLang;
 
-		return new self( Settings::singleton(), $wgContLang );
+		return new self( new SettingsArray( $GLOBALS['wgWBClientSettings'] ), $wgContLang );
 	}
 
 	/**
