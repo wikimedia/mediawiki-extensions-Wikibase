@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_6763503f",
+        "filename": "composer.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2015-05-23T11:14:10Z",
+      "side": 0,
+      "message": "It is now loaded through the wikibase.php file in repo.",
+      "parentUuid": "0ed113e2_6de34703",
+      "revId": "2b5baa09537f3b15521d91d58908913117a95b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ad2e0f3c",
         "filename": "repo/Wikibase.php",
         "patchSetId": 11
