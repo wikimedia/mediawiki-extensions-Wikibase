@@ -10,7 +10,16 @@
 	"wikibase-editlinks": "भाषापरिसन्धिः सम्पाद्यताम्",
 	"wikibase-editlinkstitle": "भाषापरिसन्धिः सम्पाद्यताम्",
 	"wikibase-linkitem-addlinks": "भाषापरिसन्धिः योज्यताम्",
+	"wikibase-linkitem-title": "पृष्ठेन सह परिसन्धिः",
+	"wikibase-linkitem-linkpage": "पृष्ठेन सह परिसन्धिः",
+	"wikibase-linkitem-input-site": "भाषा :",
+	"wikibase-linkitem-input-page": "पृष्ठम् :",
+	"wikibase-linkitem-confirmitem-button": "दृढीकरोतु",
 	"wikibase-rc-hide-wikidata-hide": "गोप्यताम्",
 	"wikibase-rc-hide-wikidata-show": "दृश्यताम्",
+	"wikibase-rc-wikibase-edit-letter": "डेटा",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} स्पाद्यताम्",
+	"wikibase-unconnectedpages-submit": "गम्यताम्",
+	"wikibase-pageinfo-entity-id-none": "नैकमपि",
 	"wikibase-otherprojects": "अन्ये प्रकल्पाः"
 }

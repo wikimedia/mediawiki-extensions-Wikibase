@@ -11,6 +11,7 @@
 	"wikibase-save": "bewarje",
 	"wikibase-cancel": "Annulearje",
 	"wikibase-add": "tafoegje",
+	"wikibase-label-empty": "Gjin label definearre",
 	"wikibase-statements": "Ferklearringen",
 	"wikibase-sitelinks-special": "Oare webstees",
 	"wikibase-statementview-rank-normal": "Normale rang",

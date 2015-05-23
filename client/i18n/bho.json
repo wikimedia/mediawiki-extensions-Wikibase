@@ -7,8 +7,14 @@
 		]
 	},
 	"tooltip-t-wikibase": "जुड़ल डेटा भंडार के चीज खातिर लिंक",
+	"wikibase-comment-update": "{{WBREPONAME}} चीज बदलल गइल",
 	"wikibase-dataitem": "{{WBREPONAME}} चीज",
 	"wikibase-editlinks": "कड़ी संपादन करीं",
 	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी संपादन करीं",
-	"wikibase-rc-wikibase-edit-letter": "डा"
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "छिपाईं",
+	"wikibase-rc-hide-wikidata-show": "देखाईं",
+	"wikibase-rc-wikibase-edit-letter": "डा",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संपादन",
+	"wikibase-otherprojects": "दूसर प्रोजेक्टसब"
 }

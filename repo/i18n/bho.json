@@ -6,8 +6,13 @@
 		]
 	},
 	"wikibase-edit": "संपादन",
+	"wikibase-add": "जोड़ीं",
+	"wikibase-label-empty": "लेबल परिभाषित नइखे",
+	"wikibase-description-empty": "कौनों विवरण नइखे परिभाषित",
 	"wikibase-statements": "कथन",
 	"wikibase-sitelinks-special": "अन्य वेबसाइट",
+	"wikibase-aliases-empty": "उपनाँव परिभाषित नइखे",
+	"wikibase-statementview-rank-normal": "सामान्य रैंक",
 	"wikibase-item-summary-wbsetlabeldescriptionaliases": "[$2] लेबल, विवरण आ उपनाम बदल दिहल गईल बा",
 	"wikibase-property-summary-wbsetlabeldescriptionaliases": "[$2] लेबल, विवरण आ उपनाम बदल दिहल गईल बा"
 }

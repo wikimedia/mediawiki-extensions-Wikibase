@@ -1,10 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"AnakngAraw"
+			"AnakngAraw",
+			"Sky Harbor"
 		]
 	},
 	"wikibase-client-desc": "Kliyente para sa dugtong na Wikibase",
+	"tooltip-t-wikibase": "Kawing patungo sa konektadong aytem sa repositoryo ng datos",
+	"wikibase-dataitem": "Aytem na {{WBREPONAME}}",
 	"wikibase-editlinks": "Baguhin ang mga kawing",
-	"wikibase-editlinkstitle": "Baguhin ang mga kawing na para sa interwika"
+	"wikibase-editlinkstitle": "Baguhin ang mga kawing inter-wika",
+	"wikibase-rc-hide-wikidata-show": "Ipakita"
 }

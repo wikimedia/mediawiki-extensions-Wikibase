@@ -34,7 +34,8 @@
 			"Benjozork",
 			"Weft",
 			"Brenloch56",
-			"Spasmedevivre"
+			"Spasmedevivre",
+			"Freak2fast4u"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -386,5 +387,8 @@
 	"right-item-redirect": "Créer des redirections d’élément",
 	"right-property-term": "Modifier les termes de la propriété (libellés, descriptions, alias)",
 	"right-property-create": "Créer des propriétés",
-	"action-property-create": "créer des propriétés"
+	"wikibase-entity-not-viewable-title": "Le type de contenu diverge : Impossible d'afficher le contenu",
+	"wikibase-entity-not-viewable": "Le contenu fourni de type \"$1\" n'est pas une Entité ne peut pas être affiché par Wikibase.",
+	"action-property-create": "créer des propriétés",
+	"apihelp-wbsetaliases-param-set": "Une liste d'alias qui remplacera la liste courante (les éléments de cette liste ne peuvent être ni complétés ni supprimés)"
 }

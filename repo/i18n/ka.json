@@ -22,6 +22,8 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "სხვა ენებზე",
 	"wikibase-entitytermsforlanguagelistview-aliases": "აგრეთვე ცნობილი როგორც",
 	"wikibase-entitytermsforlanguagelistview-description": "აღწერა",
+	"wikibase-entitytermsforlanguagelistview-label": "სახელი",
+	"wikibase-entitytermsforlanguagelistview-language": "ენა",
 	"wikibase-label-empty": "სახელი არ არის განსაზღვრული",
 	"wikibase-label-edit-placeholder": "სახელის შეყვანა",
 	"wikibase-description-empty": "აღწერა არ არის განსაზღვრული",

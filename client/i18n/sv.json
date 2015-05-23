@@ -10,7 +10,6 @@
 		]
 	},
 	"wikibase-client-desc": "Klient för tillägget Wikibase",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}}klient",
 	"tooltip-t-wikibase": "Länk till anslutet databasobjekt",
 	"apihelp-query+pageterms-description": "Få termer associerade med en sida via ett associerat dataobjekt.",
 	"apihelp-query+pageterms-example-simple": "Få alla termer associerade med sidan 'London', på användarens språk.",
@@ -33,6 +32,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}objekt",
 	"wikibase-editlinks": "Redigera länkar",
 	"wikibase-editlinkstitle": "Redigera interwikilänkar",
+	"wikibase-addlinkstitle": "Lägg till interwikilänkar",
 	"wikibase-linkitem-addlinks": "Lägg till länkar",
 	"wikibase-linkitem-alreadylinked": "Sidan du vill länka med är redan kopplad till ett [$1 objekt] i den centrala databasen som länkar till $2 på denna webbplats. Objekt kan endast ha en bifogad sida per webbplats. Välj en annan sida att länka med.",
 	"wikibase-linkitem-close": "Stäng dialogruta och uppdatera sidan",

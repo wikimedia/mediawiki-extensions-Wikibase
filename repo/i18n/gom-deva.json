@@ -3,14 +3,17 @@
 		"authors": [
 			"Darshan kandolkar",
 			"Konknni mogi 24",
-			"Supriya kankumbikar"
+			"Supriya kankumbikar",
+			"Vaishali Parab"
 		]
 	},
 	"wikibase-edit": "संस्करण",
 	"wikibase-add": "जोड",
+	"wikibase-label-empty": "कुरू निश्चीत करुं ना",
 	"wikibase-description-empty": "आतां मेरेन खंयचेंच वर्णन दिवूंक ना",
 	"wikibase-statements": "विधानां",
 	"wikibase-sitelinks-special": "हेर वेबसायट",
+	"wikibase-aliases-empty": "खंयचीच उर्फ परिभाशा ना",
 	"wikibase-statementview-rank-normal": "सामान्य क्रम",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|संदर्भ|संदर्भ}}"
 }

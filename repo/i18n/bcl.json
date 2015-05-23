@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 sarong pabalikwat.",
-	"wikibase-item-summary-wbmergeitems-to": "Pinagkasararong aytem pasiring sa \"$3\""
+	"wikibase-item-summary-wbmergeitems-to": "Pinagkasararong aytem pasiring sa \"$3\"",
+	"wikibase-entity-not-viewable-title": "Tipo nin laman dae tarampad: Dae maipapahiling an laman",
+	"wikibase-entity-not-viewable": "An itinaong laman kan tipong \"$1\" bako sarong Entidad asin dae maipagpahiling sa paagi kan datulan nin Wiki.",
+	"apihelp-wbsetaliases-param-set": "Sarong listahan kan mga alyas na magriribay kan presenteng listahan (dae makukumbina dawa sa pagdugang o paghalion)"
 }

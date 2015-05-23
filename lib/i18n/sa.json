@@ -1,8 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Shubha"
+			"Shubha",
+			"NehalDaveND"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "विकिपीडिया"
+	"wikibase-quantitydetails-amount": "धनराशिः",
+	"wikibase-timedetails-time": "समयः",
+	"wikibase-timedetails-isotime": "समयमुद्रा",
+	"wikibase-timedetails-timezone": "समयवलयः (time zone)",
+	"wikibase-timedetails-calendar": "दिनदर्शिका",
+	"wikibase-timedetails-before": "पुरा",
+	"wikibase-timedetails-after": "पश्चात्",
+	"wikibase-globedetails-longitude": "रेखांशः",
+	"wikibase-globedetails-latitude": "अक्षांशः",
+	"wikibase-sitelinks-wikipedia": "विकिपीडिया",
+	"wikibase-sitelinks-sitename-columnheading": "भाषा",
+	"wikibase-tooltip-error-details": "विवरणम्",
+	"datatypes-type-wikibase-item": "वस्तु"
 }
