@@ -40,21 +40,29 @@ class OtherProjectsSidebarGenerator {
 	private $siteIdsToOutput;
 
 	/**
+	 * @var SidebarLinkBadgeDisplay
+	 */
+	private $sidebarLinkBadgeDisplay;
+
+	/**
 	 * @param string $localSiteId
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteStore $siteStore
 	 * @param string[] $siteIdsToOutput
+	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	 */
 	public function __construct(
 		$localSiteId,
 		SiteLinkLookup $siteLinkLookup,
 		SiteStore $siteStore,
-		array $siteIdsToOutput
+		array $siteIdsToOutput,
+		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	) {
 		$this->localSiteId = $localSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteStore = $siteStore;
 		$this->siteIdsToOutput = $siteIdsToOutput;
+		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 	}
 
 	/**
@@ -158,6 +166,11 @@ class OtherProjectsSidebarGenerator {
 		if ( $siteLanguageCode !== null ) {
 			$attributes['hreflang'] = $siteLanguageCode;
 		}
+
+		$this->sidebarLinkBadgeDisplay->applyBadgeToLink(
+			$attributes,
+			$this->sidebarLinkBadgeDisplay->getBadgeInfo( $siteLink->getBadges() )
+		);
 
 		return $attributes;
 	}
