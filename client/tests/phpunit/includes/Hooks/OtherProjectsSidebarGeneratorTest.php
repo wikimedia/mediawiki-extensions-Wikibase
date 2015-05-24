@@ -33,7 +33,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'enwiki',
 			$this->getSiteLinkLookup(),
 			$this->getSiteStore(),
-			$siteIdsToOutput
+			$siteIdsToOutput,
+			$this->getSidebarLinkBadgeDisplay()
 		);
 
 		$this->assertEquals(
@@ -115,10 +116,31 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			->with( $Q123 )
 			->will( $this->returnValue( array(
 				new SiteLink( 'enwikiquote', 'Nyan Cat' ),
-				new SiteLink( 'enwiki', 'Nyan Cat' ),
+				new SiteLink( 'enwiki', 'Nyan Cat', array( new ItemId( 'Q4242' ) ) ),
 				new SiteLink( 'enwiktionary', 'Nyan Cat' )
 			) ) );
 
 		return $lookup;
+	}
+
+	private function getSidebarLinkBadgeDisplay() {
+		$sidebarLinkBadgeDisplay = $this->getMock( 'Wikibase\Client\Hooks\SidebarLinkBadgeDisplay' );
+		$sidebarLinkBadgeDisplay->expects( $this->any() )
+			->method( 'getBadgeInfo' )
+			->with( $this->equalsTo( array( new ItemId( 'Q4242' ) ) ) )
+			->will( $this->returnValue( $this->equalsTo( array( 'data' ) ) ) );
+		$sidebarLinkBadgeDisplay->expects( $this->any() )
+			->method( 'applyBadgeToLink' )
+			->with(
+				$this->equalsTo( array(
+					'msg' => 'wikibase-otherprojects-wikipedia',
+					'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
+					'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
+					'hreflang' => 'en'
+				) ),
+				$this->equalsTo( array( 'data' ) )
+			);
+
+		return $sidebarLinkBadgeDisplay;
 	}
 }
