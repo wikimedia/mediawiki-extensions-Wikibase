@@ -32,7 +32,8 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 		$factory = new OtherProjectsSidebarGeneratorFactory(
 			$settings,
 			$siteLinkLookup,
-			$siteStore
+			$siteStore,
+			$this->getMock( 'Wikibase\Client\Hooks\SidebarLinkBadgeDisplay' )
 		);
 
 		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator();

@@ -21,7 +21,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
-use Wikibase\Client\ParserOutputDataUpdater;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataAccess\PropertyIdResolver;
@@ -578,12 +578,21 @@ final class WikibaseClient {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	public function getLanguageLinkBadgeDisplay() {
+		return new LanguageLinkBadgeDisplay(
+			$this->getSidebarLinkBadgeDisplay()
+		);
+	}
+
+	/**
+	 * @return SidebarLinkBadgeDisplay
+	 */
+	private function getSidebarLinkBadgeDisplay() {
 		global $wgLang;
 		StubObject::unstub( $wgLang );
 
 		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
 
-		return new LanguageLinkBadgeDisplay(
+		return new SidebarLinkBadgeDisplay(
 			$this->getEntityLookup(),
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
@@ -682,7 +691,8 @@ final class WikibaseClient {
 		return new OtherProjectsSidebarGeneratorFactory(
 			$this->settings,
 			$this->getStore()->getSiteLinkLookup(),
-			$this->getSiteStore()
+			$this->getSiteStore(),
+			$this->getSidebarLinkBadgeDisplay()
 		);
 	}
 
