@@ -8,6 +8,7 @@ use ParserOutput;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -69,9 +70,11 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
 		return new LanguageLinkBadgeDisplay(
-			$entityLookup,
-			$badgeClassNames,
-			Language::factory( 'de' )
+			new SidebarLinkBadgeDisplay(
+				$entityLookup,
+				$badgeClassNames,
+				Language::factory( 'de' )
+			)
 		);
 	}
 

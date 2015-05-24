@@ -65,27 +65,13 @@ class SidebarHookHandlers {
 	}
 
 	public static function newFromGlobalState() {
-		global $wgLang;
-		StubUserLang::unstub( $wgLang );
-
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
-		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
-
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
-
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$entityLookup,
-			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
-			$wgLang
-		);
-
 		return new SidebarHookHandlers(
-			$namespaceChecker,
-			$badgeDisplay,
-			$wikibaseClient->getOtherProjectsSidebarGeneratorFactory(),
+			$wikibaseClient->getNamespaceChecker(),
+			$wikibaseClient->getLanguageLinkBadgeDisplay(),
+			$wikibaseClient->getOtherProjectsSidebarGenerator(),
 			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);
@@ -136,13 +122,13 @@ class SidebarHookHandlers {
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LanguageLinkBadgeDisplay $badgeDisplay,
-		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
+		OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator,
 		$otherProjectsLinksBeta,
 		$otherProjectsLinksDefault
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->badgeDisplay = $badgeDisplay;
-		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
+		$this->otherProjectsSidebarGenerator = $otherProjectsSidebarGenerator;
 		$this->otherProjectsLinksBeta = $otherProjectsLinksBeta;
 		$this->otherProjectsLinksDefault = $otherProjectsLinksDefault;
 	}
@@ -237,9 +223,7 @@ class SidebarHookHandlers {
 
 			// in case of stuff in cache without the other projects
 			if ( $otherProjectsSidebar === null ) {
-				$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
-					->getOtherProjectsSidebarGenerator();
-				$otherProjectsSidebar = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
+				$otherProjectsSidebar = $this->otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
 			}
 
 			if ( !empty( $otherProjectsSidebar ) ) {

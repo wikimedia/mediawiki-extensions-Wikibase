@@ -13,8 +13,9 @@ use SiteStore;
 use StripState;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
@@ -165,20 +166,21 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$mockRepo = $this->getMockRepo( $links );
 		$mockRepo->putEntity( $this->getBadgeItem() );
 
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
+		$sidebardBadgeDisplay = new SidebarLinkBadgeDisplay(
 			$mockRepo,
 			array( 'Q17' => 'featured' ),
 			Language::factory( 'en' )
 		);
+		$languageBadgeDisplay = new LanguageLinkBadgeDisplay( $sidebardBadgeDisplay );
 
 		$parserOutputDataUpdater = new ParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
+			$this->getOtherProjectsSidebarGenerator( $settings, $mockRepo, $sidebardBadgeDisplay ),
 			$mockRepo,
 			$settings->getSetting( 'siteGlobalID' )
 		);
 
 		$langLinkHandler = new LangLinkHandler(
-			$badgeDisplay,
+			$languageBadgeDisplay,
 			$namespaceChecker,
 			$mockRepo,
 			$mockRepo,
@@ -202,15 +204,18 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function getOtherProjectsSidebarGeneratorFactory(
+	private function getOtherProjectsSidebarGenerator(
 		SettingsArray $settings,
-		SiteLinkLookup $siteLinkLookup
+		SiteLinkLookup $siteLinkLookup,
+		SidebarLinkBadgeDisplay $badgeDisplay
 	) {
-		return  new OtherProjectsSidebarGeneratorFactory(
-			$settings,
+		return new OtherProjectsSidebarGenerator(
+			$settings->getSetting( 'siteGlobalID' ),
 			$siteLinkLookup,
-            $this->getSiteStore()
-        );
+			$this->getSiteStore(),
+			$settings->getSetting( 'otherProjectsLinks' ),
+			$badgeDisplay
+		);
 	}
 
 	private function newParser( Title $title, array $pageProps, array $extensionData ) {
@@ -250,9 +255,10 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	public function parserAfterParseProvider() {
 		$commonsOxygen = array(
 			'msg' => 'wikibase-otherprojects-commons',
-			'class' => 'wb-otherproject-link wb-otherproject-commons',
+			'class' => 'wb-otherproject-link wb-otherproject-commons ',
 			'href' => 'http://commonswiki.test.com/wiki/Oxygen',
 			'hreflang' => 'en',
+			'itemtitle' => ''
 		);
 
 		$badgesQ1 = array(

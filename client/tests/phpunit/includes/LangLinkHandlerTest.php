@@ -7,7 +7,6 @@ use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -87,7 +86,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$siteStore = MockSiteStore::newFromTestSites();
 
 		$parserOutputDataUpdater = new ParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
+			$this->getOtherProjectsSidebarGenerator( $otherProjects ),
 			$this->mockRepo,
 			'srwiki'
 		);
@@ -102,27 +101,6 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			'srwiki',
 			'wikipedia'
 		);
-	}
-
-	/**
-	 * @param string[] $otherProjects
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ) {
-		$otherProjectsSidebarGenerator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
-
-		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
-				'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory'
-			)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
-			->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
-
-		return $otherProjectsSidebarGeneratorFactory;
 	}
 
 	/**

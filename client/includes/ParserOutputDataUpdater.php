@@ -5,7 +5,7 @@ namespace Wikibase\Client;
 use InvalidArgumentException;
 use ParserOutput;
 use Title;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -23,9 +23,9 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class ParserOutputDataUpdater {
 
 	/**
-	 * @var OtherProjectsSidebarGeneratorFactory
+	 * @var OtherProjectsSidebarGenerator
 	 */
-	private $otherProjectsSidebarGeneratorFactory;
+	private $otherProjectsSidebarGenerator;
 
 	/**
 	 * @var SiteLinkLookup
@@ -38,13 +38,13 @@ class ParserOutputDataUpdater {
 	private $siteId;
 
 	/**
-	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
+	 * @param OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator
 	 *            Use the factory here to defer initialization of things like Site objects.
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param string $siteId The global site ID for the local wiki
 	 */
 	public function __construct(
-		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
+		OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator,
 		SiteLinkLookup $siteLinkLookup,
 		$siteId
 	) {
@@ -52,7 +52,7 @@ class ParserOutputDataUpdater {
 			throw new InvalidArgumentException( '$siteId must be a string.' );
 		}
 
-		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
+		$this->otherProjectsSidebarGenerator = $otherProjectsSidebarGenerator;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
 	}
@@ -84,10 +84,7 @@ class ParserOutputDataUpdater {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory->
-				getOtherProjectsSidebarGenerator();
-
-			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
+			$otherProjects = $this->otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
 			$out->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
 		} else {
 			$out->setExtensionData( 'wikibase-otherprojects-sidebar', array() );
