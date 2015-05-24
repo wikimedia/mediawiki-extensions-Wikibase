@@ -4,7 +4,8 @@
 			"Ashok modhvadia",
 			"KartikMistry",
 			"Vyom",
-			"Arbhatt"
+			"Arbhatt",
+			"NehalDaveND"
 		]
 	},
 	"tooltip-t-wikibase": "ડેટા રીપોઝીટરીમાંની વસ્તુને સંકળતી કડી",
@@ -12,6 +13,10 @@
 	"wikibase-dataitem": "{{WBREPONAME}} વસ્તુ",
 	"wikibase-editlinks": "કડીઓમાં ફેરફાર કરો",
 	"wikibase-editlinkstitle": "આંતરવિકિ ભાષાઓની કડીમાં ફેરફાર કરો",
+	"wikibase-linkitem-title": "પાનાં સાથે જોડો",
+	"wikibase-linkitem-linkpage": "પાનાં સે જોડાયેલ",
+	"wikibase-linkitem-input-site": "ભાષા:",
+	"wikibase-linkitem-confirmitem-button": "પુષ્ટી કરો",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "છુપાવો",
 	"wikibase-rc-hide-wikidata-show": "દર્શાવો",

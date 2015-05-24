@@ -4,7 +4,8 @@
 			"Adithyavr",
 			"Bill william compton",
 			"Siddhartha Ghai",
-			"बिप्लब आनन्द"
+			"बिप्लब आनन्द",
+			"NehalDaveND"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस एक्सटेंशन के लिए क्लाइन्ट",
@@ -46,5 +47,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} परिवर्तन्",
 	"wikibase-unconnectedpages-submit": "जाएँ",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" एक मान्य भाषा कोड नहीं है।",
+	"wikibase-pageinfo-entity-id-none": "कुछ नहीं",
 	"wikibase-otherprojects": "अन्य परियोजनाएँ"
 }

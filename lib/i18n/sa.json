@@ -5,6 +5,7 @@
 			"NehalDaveND"
 		]
 	},
+	"wikibase-error-unexpected": "दोषः: $1",
 	"wikibase-quantitydetails-amount": "धनराशिः",
 	"wikibase-timedetails-time": "समयः",
 	"wikibase-timedetails-isotime": "समयमुद्रा",
