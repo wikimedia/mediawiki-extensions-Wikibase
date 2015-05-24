@@ -77,9 +77,11 @@ class SidebarHookHandlers {
 		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$entityLookup,
-			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
-			$wgLang
+			new SidebarLinkBadgeDisplay(
+				$entityLookup,
+				is_array( $badgeClassNames ) ? $badgeClassNames : array(),
+				$wgLang
+			)
 		);
 
 		return new SidebarHookHandlers(

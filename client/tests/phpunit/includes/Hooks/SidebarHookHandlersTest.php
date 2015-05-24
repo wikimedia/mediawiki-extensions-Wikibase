@@ -13,6 +13,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -165,9 +166,11 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$entityLookup = $this->getEntityLookup( $siteLinksPerItem );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$entityLookup,
-			array( 'Q17' => 'featured' ),
-			$en
+			new SidebarLinkBadgeDisplay(
+				$entityLookup,
+				array( 'Q17' => 'featured' ),
+				$en
+			)
 		);
 
 		return new SidebarHookHandlers(
