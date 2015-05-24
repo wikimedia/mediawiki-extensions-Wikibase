@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests;
 use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\ParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -69,31 +68,10 @@ class ParserOutputDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		return new ParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
+			$this->getOtherProjectsSidebarGenerator( $otherProjects ),
 			$this->mockRepo,
 			'srwiki'
 		);
-	}
-
-	/**
-	 * @param string[] $otherProjects
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ) {
-		$otherProjectsSidebarGenerator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
-
-		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
-				'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory'
-			)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
-			->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
-
-		return $otherProjectsSidebarGeneratorFactory;
 	}
 
 	/**

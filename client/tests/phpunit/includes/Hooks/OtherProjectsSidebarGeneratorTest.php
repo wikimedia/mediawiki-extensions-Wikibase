@@ -6,6 +6,7 @@ use Title;
 use SiteStore;
 use MediaWikiSite;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -28,12 +29,17 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider projectLinkSidebarProvider
 	 */
-	public function testBuildProjectLinkSidebar( array $siteIdsToOutput, array $result ) {
+	public function testBuildProjectLinkSidebar(
+		array $siteIdsToOutput,
+		array $result,
+		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
+	) {
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
 			$this->getSiteStore(),
-			$siteIdsToOutput
+			$siteIdsToOutput,
+			$sidebarLinkBadgeDisplay
 		);
 
 		$this->assertEquals(
@@ -65,20 +71,29 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		return array(
 			array(
 				array(),
-				array()
+				array(),
+				$this->getSidebarLinkBadgeDisplayWithoutBadge()
 			),
 			array(
 				array( 'spam', 'spam2' ),
-				array()
+				array(),
+				$this->getSidebarLinkBadgeDisplayWithoutBadge()
 			),
 			array(
 				array( 'enwiktionary' ),
-				array( $wiktionaryLink )
+				array( $wiktionaryLink ),
+				$this->getSidebarLinkBadgeDisplayWithoutBadge()
 			),
 			array(
 				// Make sure results are sorted alphabetically by their group names
-				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
-				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink )
+				array( 'enwiktionary', 'enwikiquote' ),
+				array( $wikiquoteLink, $wiktionaryLink ),
+				$this->getSidebarLinkBadgeDisplayWithoutBadge()
+			),
+			array(
+				array( 'enwiki' ),
+				array( $wikipediaLink ),
+				$this->getSidebarLinkBadgeDisplayWithBadge()
 			)
 		);
 	}
@@ -102,7 +117,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @return SiteLinkLookup
 	 */
-	private function getSiteLinkLookup( ) {
+	private function getSiteLinkLookup() {
 		$Q123 = new ItemId( 'Q123' );
 
 		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
@@ -115,10 +130,45 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			->with( $Q123 )
 			->will( $this->returnValue( array(
 				new SiteLink( 'enwikiquote', 'Nyan Cat' ),
-				new SiteLink( 'enwiki', 'Nyan Cat' ),
+				new SiteLink( 'enwiki', 'Nyan Cat', array( new ItemId( 'Q4242' ) ) ),
 				new SiteLink( 'enwiktionary', 'Nyan Cat' )
 			) ) );
 
 		return $lookup;
+	}
+
+	private function getSidebarLinkBadgeDisplayWithBadge() {
+		$sidebarLinkBadgeDisplay = $this->getMockBuilder( 'Wikibase\Client\Hooks\SidebarLinkBadgeDisplay' )
+			->disableOriginalConstructor()
+			->getMock();
+		$sidebarLinkBadgeDisplay->expects( $this->any() )
+			->method( 'getBadgeInfo' )
+			->with( $this->equalTo( array( new ItemId( 'Q4242' ) ) ) )
+			->will( $this->returnValue(  array( 'data' ) ) );
+		$sidebarLinkBadgeDisplay->expects( $this->any() )
+			->method( 'applyBadgeToLink' )
+			->with(
+				$this->equalTo( array(
+					'msg' => 'wikibase-otherprojects-wikipedia',
+					'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
+					'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
+					'hreflang' => 'en'
+				) ),
+				$this->equalTo( array( 'data' ) )
+			);
+
+		return $sidebarLinkBadgeDisplay;
+	}
+
+	private function getSidebarLinkBadgeDisplayWithoutBadge() {
+		$sidebarLinkBadgeDisplay = $this->getMockBuilder( 'Wikibase\Client\Hooks\SidebarLinkBadgeDisplay' )
+			->disableOriginalConstructor()
+			->getMock();
+		$sidebarLinkBadgeDisplay->expects( $this->any() )
+			->method( 'getBadgeInfo' )
+			->with( $this->equalTo( array() ) )
+			->will( $this->returnValue(  array() ) );
+
+		return $sidebarLinkBadgeDisplay;
 	}
 }

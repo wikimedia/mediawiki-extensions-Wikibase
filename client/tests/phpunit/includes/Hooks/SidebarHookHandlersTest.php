@@ -11,8 +11,8 @@ use Skin;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -91,7 +91,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 *
 	 * @return OtherProjectsSidebarGenerator
 	 */
-	private function getSidebarGenerator( array $projects ) {
+	private function getOtherProjectsSidebarGenerator( array $projects ) {
 		$sidebarGenerator = $this->getMockBuilder( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -101,27 +101,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( $projects ) );
 
 		return $sidebarGenerator;
-	}
-
-	/**
-	 * @param array $projects
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	private function getOtherProjectsSidebarGeneratorFactory( array $projects ) {
-		$otherProjectsSidebarGenerator = $this->getSidebarGenerator( $projects );
-
-		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
-				'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory'
-			)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
-			->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
-
-		return $otherProjectsSidebarGeneratorFactory;
 	}
 
 	private function newSidebarHookHandlers( array $settings = array() ) {
@@ -149,15 +128,17 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$entityLookup = $this->getEntityLookup( $siteLinksPerItem );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$entityLookup,
-			array( 'Q17' => 'featured' ),
-			$en
+			new SidebarLinkBadgeDisplay(
+				$entityLookup,
+				array( 'Q17' => 'featured' ),
+				$en
+			)
 		);
 
 		return new SidebarHookHandlers(
 			$namespaceChecker,
 			$badgeDisplay,
-			$this->getOtherProjectsSidebarGeneratorFactory( array( 'dummy' => 'xyz' ) ),
+			$this->getOtherProjectsSidebarGenerator( array( 'dummy' => 'xyz' ) ),
 			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )
 		);

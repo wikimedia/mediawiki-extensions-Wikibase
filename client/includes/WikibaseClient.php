@@ -19,8 +19,9 @@ use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataAccess\PropertyIdResolver;
@@ -575,7 +576,7 @@ final class WikibaseClient {
 	public function getParserOutputDataUpdater() {
 		if ( $this->parserOutputDataUpdater === null ) {
 			$this->parserOutputDataUpdater = new ParserOutputDataUpdater(
-				$this->getOtherProjectsSidebarGeneratorFactory(),
+				$this->getOtherProjectsSidebarGenerator(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->settings->getSetting( 'siteGlobalID' )
 			);
@@ -588,15 +589,37 @@ final class WikibaseClient {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	public function getLanguageLinkBadgeDisplay() {
+		return new LanguageLinkBadgeDisplay(
+			$this->getSidebarLinkBadgeDisplay()
+		);
+	}
+
+	/**
+	 * @return SidebarLinkBadgeDisplay
+	 */
+	private function getSidebarLinkBadgeDisplay() {
 		global $wgLang;
 		StubObject::unstub( $wgLang );
 
 		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
 
-		return new LanguageLinkBadgeDisplay(
+		return new SidebarLinkBadgeDisplay(
 			$this->getEntityLookup(),
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
+		);
+	}
+
+	/**
+	 * @return OtherProjectsSidebarGenerator
+	 */
+	public function getOtherProjectsSidebarGenerator() {
+		return new OtherProjectsSidebarGenerator(
+			$this->settings->getSetting( 'siteGlobalID' ),
+			$this->getStore()->getSiteLinkLookup(),
+			$this->getSiteStore(),
+			$this->settings->getSetting( 'otherProjectsLinks' ),
+			$this->getSidebarLinkBadgeDisplay()
 		);
 	}
 
@@ -681,19 +704,6 @@ final class WikibaseClient {
 			'time' => 'DataValues\TimeValue',
 			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
 		) );
-	}
-
-	/**
-	 * @since 0.5
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	public function getOtherProjectsSidebarGeneratorFactory() {
-		return new OtherProjectsSidebarGeneratorFactory(
-			$this->settings,
-			$this->getStore()->getSiteLinkLookup(),
-			$this->getSiteStore()
-		);
 	}
 
 	/**
