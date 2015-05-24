@@ -35,18 +35,26 @@ class OtherProjectsSidebarGeneratorFactory {
 	private $siteStore;
 
 	/**
+	 * @var SidebarLinkBadgeDisplay
+	 */
+	private $sidebarLinkBadgeDisplay;
+
+	/**
 	 * @param SettingsArray $settings
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteStore $siteStore
+	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		SiteLinkLookup $siteLinkLookup,
-		SiteStore $siteStore
+		SiteStore $siteStore,
+		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	) {
 		$this->settings = $settings;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteStore = $siteStore;
+		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 	}
 
 	/**
@@ -68,7 +76,8 @@ class OtherProjectsSidebarGeneratorFactory {
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->siteLinkLookup,
 			$this->siteStore,
-			$this->settings->getSetting( 'otherProjectsLinks' )
+			$this->settings->getSetting( 'otherProjectsLinks' ),
+			$this->sidebarLinkBadgeDisplay
 		);
 	}
 
