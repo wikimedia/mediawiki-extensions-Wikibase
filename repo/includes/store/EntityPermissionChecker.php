@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Store;
 
 use Status;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -23,7 +23,7 @@ interface EntityPermissionChecker {
 	 *
 	 * @param User $user
 	 * @param string $permission
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string $quick Flag for allowing quick permission checking. If set to
 	 * 'quick', implementations may return inaccurate results if determining the accurate result
 	 * would be slow (e.g. checking for cascading protection).
@@ -32,7 +32,7 @@ interface EntityPermissionChecker {
 	 *
 	 * @return Status a status object representing the check's result.
 	 */
-	public function getPermissionStatusForEntity( User $user, $permission, Entity $entity, $quick = '' );
+	public function getPermissionStatusForEntity( User $user, $permission, EntityDocument $entity, $quick = '' );
 
 	/**
 	 * Check whether the given user has the given permission on an entity.
