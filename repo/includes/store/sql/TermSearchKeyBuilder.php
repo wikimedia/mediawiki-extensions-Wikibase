@@ -156,7 +156,7 @@ class TermSearchKeyBuilder {
 			$cError = 0;
 
 			foreach ( $terms as $row ) {
-				$key = $this->updateSearchKey( $dbw, $row->term_row_id, $row->term_text, $row->term_language );
+				$key = $this->updateSearchKey( $dbw, $row->term_row_id, $row->term_text );
 
 				if ( $key === false ) {
 					$this->report( "Unable to calculate search key for " . $row->term_text );
@@ -193,12 +193,11 @@ class TermSearchKeyBuilder {
 	 * @param \DatabaseBase $dbw the database connection to use
 	 * @param int $rowId the row to update
 	 * @param string $text the term's text
-	 * @param string $lang the term's language
 	 *
 	 * @return string|bool the search key, or false if no search key could be calculated.
 	 */
-	protected function updateSearchKey( \DatabaseBase $dbw, $rowId, $text, $lang ) {
-		$key = $this->table->getSearchKey( $text, $lang );
+	protected function updateSearchKey( \DatabaseBase $dbw, $rowId, $text ) {
+		$key = $this->table->getSearchKey( $text );
 
 		if ( $key === '' ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to normalized term: $text" );
