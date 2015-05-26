@@ -17,6 +17,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
@@ -44,22 +45,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param ItemId $id
-	 * @param SiteLink[] $links
-	 *
-	 * @return Item
-	 */
-	private function newItem( ItemId $id, $links ) {
-		$item = new Item( $id );
-
-		foreach ( $links as $link ) {
-			$item->addSiteLink( $link );
-		}
-
-		return $item;
-	}
-
-	/**
 	 * @param array[] $siteLinksPerItem
 	 *
 	 * @return EntityLookup
@@ -68,8 +53,8 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$repo = new MockRepository();
 
 		foreach ( $siteLinksPerItem as $idString => $siteLinks ) {
-			$itemId = new ItemId( $idString );
-			$item = $this->newItem( $itemId, $siteLinks );
+			$item = new Item( new ItemId( $idString ) );
+			$item->setSiteLinkList( new SiteLinkList( $siteLinks ) );
 			$repo->putEntity( $item );
 		}
 
