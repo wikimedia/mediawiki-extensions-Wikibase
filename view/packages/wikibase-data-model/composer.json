@@ -1,9 +1,6 @@
 {
 	"name": "wikibase/data-model-javascript",
 	"description": "Wikibase datamodel implementation in JavaScript",
-	"require": {
-		"data-values/javascript": "~0.6.0"
-	},
 	"license": "GPL-2.0+",
 	"authors": [
 		{
@@ -18,6 +15,9 @@
 	"support": {
 		"issues": "https://bugzilla.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata"
+	},
+	"require": {
+		"data-values/javascript": "~0.6.0"
 	},
 	"autoload": {
 		"files": [
