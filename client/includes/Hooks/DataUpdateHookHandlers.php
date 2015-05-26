@@ -8,7 +8,6 @@ use User;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\NamespaceChecker;
 use WikiPage;
 
 /**
