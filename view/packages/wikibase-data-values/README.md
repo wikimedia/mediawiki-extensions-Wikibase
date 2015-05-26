@@ -9,10 +9,6 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 [![Latest Stable Version](https://poser.pugx.org/data-values/javascript/version.png)](https://packagist.org/packages/data-values/javascript)
 [![Download count](https://poser.pugx.org/data-values/javascript/d/total.png)](https://packagist.org/packages/data-values/javascript)
 
-## TODOs
-
-* Write high level description and documentation in this README file.
-
 ## Release notes
 
 ### 0.7.0 (dev)
