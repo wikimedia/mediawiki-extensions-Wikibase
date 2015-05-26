@@ -1,8 +1,30 @@
 {
 	"@metadata": {
 		"authors": [
-			"बिप्लब आनन्द"
+			"बिप्लब आनन्द",
+			"NehalDaveND"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "विकिपीडिया"
+	"wikibase-error-unexpected": "त्रुटि: $1",
+	"wikibase-quantitydetails-amount": "राशि",
+	"wikibase-timedetails-time": "समय",
+	"wikibase-timedetails-isotime": "समयछाप",
+	"wikibase-timedetails-timezone": "समय क्षेत्र",
+	"wikibase-timedetails-calendar": "पंचाङ्ग",
+	"wikibase-timedetails-precision": "यथार्थता",
+	"wikibase-timedetails-before": "पहिले",
+	"wikibase-timedetails-after": "पछि",
+	"wikibase-globedetails-longitude": "अक्षांश:",
+	"wikibase-globedetails-latitude": "रेखांश",
+	"wikibase-globedetails-precision": "यथार्थता",
+	"wikibase-globedetails-globe": "ग्लोब",
+	"wikibase-sitelinks-wikipedia": "विकिपीडिया",
+	"wikibase-sitelinks-sitename-columnheading": "भाषा",
+	"wikibase-snakview-snaktypeselector-somevalue": "अज्ञात मिति",
+	"wikibase-snakview-snaktypeselector-novalue": "कुनै मिति",
+	"wikibase-tooltip-error-details": "विवरणहरू",
+	"wikibase-validator-invalid": "गलत मिति",
+	"datatypes-type-wikibase-property": "गुणधर्म",
+	"wikibase-time-precision-10annum": "$1s",
+	"wikibase-time-precision-BCE-10annum": "$1s BCE"
 }

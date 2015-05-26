@@ -4,11 +4,15 @@
 			"Arystanbek"
 		]
 	},
-	"specialpages-group-wikibase": "Уикибаза қоймасы",
+	"specialpages-group-wikibase": "Уикиқор",
 	"wikibase-deletedentity-item": "Жойылған элемент",
 	"wikibase-deletedentity-property": "Жойылған сипат",
 	"wikibase-deletedentity-query": "Жойылған сұрау",
-	"wikibase-error-unexpected": "Күтпеген қате шықты: $1",
+	"wikibase-error-unexpected": "Қате: $1",
+	"wikibase-error-save-generic": "Сақтау кезінде қате кездесті. Өзгертулеріңізді бітіре алмайсыз.",
+	"wikibase-error-remove-generic": "Жылжыту кезінде қате кездесті. Өзгертулеріңізді бітіре алмайсыз.",
+	"wikibase-error-save-connection": "Сақтау кезінде байланыс қатесі кездесті. Өзгертулеріңізді бітіре алмайсыз.\nИнтернетке байланысыңызды тексеріңіз.",
+	"wikibase-error-remove-connection": "Жылжыту кезінде байланыс қатесі кездесті. Өзгертулеріңізді бітіре алмайсыз.\nИнтернетке байланысыңызды тексеріңіз.",
 	"wikibase-error-ui-edit-conflict": "Осында өңдеу қақтығысы. Қайта жүктеңіз және қайтадан сақтаңыз.",
 	"wikibase-quantitydetails-amount": "Сома",
 	"wikibase-quantitydetails-unit": "Бірлік",
@@ -27,8 +31,12 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "белгісіз мән",
 	"wikibase-snakview-snaktypeselector-novalue": "мәні жоқ",
 	"wikibase-tooltip-error-details": "Бөлшектер",
+	"wikibase-undeserializable-value": "Бұл мән жарамсыз және көрсетілмейді.",
 	"wikibase-validator-invalid": "Жарамсыз мән",
+	"wikibase-validator-missing-field": "«$1» жолағын қажет етеді",
 	"wikibase-validator-bad-type": "$1 дегеннің орнына $2",
+	"wikibase-validator-too-long": "{{PLURAL:$1|бір таңбадан|$1 таңбадан}} ұзын болмауы керек",
+	"wikibase-validator-too-short": "Кем дегенде {{PLURAL:$1|бір таңбадан|$1 таңбадан}} ұзын болуы керек",
 	"wikibase-validator-bad-entity-id": "Көріксіз ID: $1",
 	"wikibase-validator-no-such-entity": "$1 табылмады",
 	"wikibase-validator-unknown-unit": "Белгісіз бірлік: $1",
@@ -37,5 +45,8 @@
 	"datatypes-type-wikibase-item": "элемент",
 	"datatypes-type-wikibase-property": "Сипат",
 	"datatypes-type-commonsMedia": "Ортаққор медиа файлы",
-	"version-wikibase": "Уикиқор"
+	"version-wikibase": "Уикиқор",
+	"wikibase-time-precision-century": "$1. ғасыр",
+	"wikibase-time-precision-10annum": "$1лер",
+	"wikibase-time-precision-BCE-Gannum": "$1 миллион БЗБ"
 }

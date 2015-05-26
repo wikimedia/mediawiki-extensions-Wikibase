@@ -5,6 +5,7 @@
 		]
 	},
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 sarong pabalikwat.",
+	"wikibase-setlabeldescriptionaliases-intro": "Ining porma minatugot saimo na magkaag nin panandaan, deskripsyon asin mga alyas kan entidad. Ika kaipo enot na magtao nin ID kan entidad (e.g. \"Q23\") asin sarong kodigo nin lengguwahe (e.g. \"en\").",
 	"wikibase-item-summary-wbmergeitems-to": "Pinagkasararong aytem pasiring sa \"$3\"",
 	"wikibase-entity-not-viewable-title": "Tipo nin laman dae tarampad: Dae maipapahiling an laman",
 	"wikibase-entity-not-viewable": "An itinaong laman kan tipong \"$1\" bako sarong Entidad asin dae maipagpahiling sa paagi kan datulan nin Wiki.",

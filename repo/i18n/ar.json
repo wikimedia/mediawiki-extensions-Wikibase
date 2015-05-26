@@ -323,6 +323,7 @@
 	"apihelp-wbsearchentities-param-language": "ابحث بهذه اللغة",
 	"apihelp-wbsearchentities-param-type": "البحث عن نمط الكائنات التالي",
 	"apihelp-wbsearchentities-param-limit": "العدد الأعظم للنتائج",
+	"apihelp-wbsetdescription-param-language": "لغة الوصف",
 	"apihelp-wbsetlabel-param-language": "لغة الوسم",
 	"apihelp-wbsetlabel-param-value": "قيمة الوسم"
 }
