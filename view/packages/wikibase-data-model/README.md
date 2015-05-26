@@ -4,8 +4,7 @@
 [Data Model](https://www.mediawiki.org/wiki/Wikibase/DataModel)
 at the heart of the [Wikibase software](http://wikiba.se/).
 
-![Wikibase JavaScript Data Model UML diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Wikibase_JavaScript_Data_Model_1.0.svg/600px-Wikibase_JavaScript_Data_Model_1.0.svg.png)
-https://commons.wikimedia.org/wiki/File:Wikibase_JavaScript_Data_Model_1.0.svg
+[![Wikibase JavaScript Data Model UML diagram](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Wikibase_JavaScript_Data_Model_1.0.svg/600px-Wikibase_JavaScript_Data_Model_1.0.svg.png)](https://commons.wikimedia.org/wiki/File:Wikibase_JavaScript_Data_Model_1.0.svg)
 
 ## Release notes
 
