@@ -159,13 +159,13 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
-	 * @since 2.4
+	 * @since 3.0
 	 *
 	 * @param int|int[] $acceptableRanks
 	 *
 	 * @return self
 	 */
-	public function getWithRank( $acceptableRanks ) {
+	public function getByRank( $acceptableRanks ) {
 		$acceptableRanks = array_flip( (array)$acceptableRanks );
 		$statementList = new self();
 
@@ -188,13 +188,13 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * @return self
 	 */
 	public function getBestStatements() {
-		$statements = $this->getWithRank( Statement::RANK_PREFERRED );
+		$statements = $this->getByRank( Statement::RANK_PREFERRED );
 
 		if ( !$statements->isEmpty() ) {
 			return $statements;
 		}
 
-		return $this->getWithRank( Statement::RANK_NORMAL );
+		return $this->getByRank( Statement::RANK_NORMAL );
 	}
 
 	/**

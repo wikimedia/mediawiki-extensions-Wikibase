@@ -18,7 +18,7 @@ Phasing out of `Claims`:
 
 * `Claims::addClaim` no longer supports setting an index
 * Removed `Claims::getBestClaims`, use `StatementList::getBestStatements` instead
-* Removed `Claims::getByRank` and `Claims::getByRanks`, use `StatementList::getWithRank` instead
+* Removed `Claims::getByRank` and `Claims::getByRanks`, use `StatementList::getByRank` instead
 * Removed `Claims::getMainSnaks`, use `StatementList::getMainSnaks` instead
 * Removed `Claims::getClaimsForProperty`, use `StatementList::getWithPropertyId` instead
 * Removed `Claims::getHashes`
@@ -37,6 +37,7 @@ Other breaking changes:
 * Removed previously deprecated `EntityId::getPrefixedId`, use `EntityId::getSerialization` instead
 * Removed previously deprecated `Property::newEmpty`, use `Property::newFromType` or `new Property()` instead
 * Renamed `StatementList::getWithPropertyId` to `StatementList::getByPropertyId`
+* Renamed `StatementList::getWithRank` to `StatementList::getByRank`
 * `Reference` and `ReferenceList`s no longer can not be instantiated with `null`
 * Added `setId` method to `EntityDocument`
 
