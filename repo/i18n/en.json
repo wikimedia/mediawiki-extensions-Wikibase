@@ -464,7 +464,7 @@
 	"apihelp-wbcreateredirect-description": "Creates Entity redirects.",
 	"apihelp-wbcreateredirect-param-from": "Entity ID to make a redirect",
 	"apihelp-wbcreateredirect-param-to": "Entity ID to point the redirect to",
-	"apihelp-wbcreateredirect-param-bot": "Mark this edit as bot\nThis URL flag will only be respected if the user belongs to the group \"bot\".",
+	"apihelp-wbcreateredirect-param-bot": "Mark this edit as bot. This URL flag will only be respected if the user belongs to the group \"bot\".",
 	"apihelp-wbcreateredirect-example-1": "Turn Q11 into a redirect to Q12",
 	"apihelp-wbeditentity-description": "Creates a single new Wikibase entity and modifies it with serialised information.",
 	"apihelp-wbeditentity-param-id": "The identifier for the entity, including the prefix.\nUse either 'id' or 'site' and 'title' together.",
