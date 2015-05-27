@@ -16,6 +16,7 @@
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
+	"wikibase-entity": "實體",
 	"wikibase-entity-item": "項目",
 	"wikibase-entity-property": "屬性",
 	"wikibase-entity-query": "查詢",

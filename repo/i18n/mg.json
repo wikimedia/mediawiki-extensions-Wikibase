@@ -4,5 +4,12 @@
 			"Jagwar"
 		]
 	},
+	"wikibase-edit": "hanova",
+	"wikibase-add": "ampiana",
+	"wikibase-description-empty": "Tsy misy famisavisana voafaritra",
+	"wikibase-statements": "Filazana",
+	"wikibase-sitelinks-special": "Tranonkala hafa",
+	"wikibase-aliases-empty": "Tsy misy solonanarana voafaritra",
+	"wikibase-statementview-rank-normal": "Filaharana tsotra",
 	"wikibase-item-summary-wblinktitles-connect": "Nanampy rohim-piteny hampifandray pejy"
 }

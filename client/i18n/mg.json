@@ -4,6 +4,14 @@
 			"Jagwar"
 		]
 	},
+	"tooltip-t-wikibase": "Rohy mankany amin'ny zava-petrak'angona",
+	"wikibase-comment-update": "Voaova ny zavatra {{WBREPONAME}}",
+	"wikibase-dataitem": "Zavatra {{WBREPONAME}}",
 	"wikibase-editlinks": "Hanova ny rohy",
-	"wikibase-editlinkstitle": "Hanova ny rohy iraisam-piteny"
+	"wikibase-editlinkstitle": "Hanova ny rohy iraisam-piteny",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Aseho",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Fanovana an'i {{WBREPONAME}}",
+	"wikibase-otherprojects": "Tetikasa hafa"
 }
