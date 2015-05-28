@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_0b15839c",
+        "filename": "lib/includes/ChangesTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-28T21:20:43Z",
+      "side": 1,
+      "message": "I\u0027m somewhat dubious about the changes of this type in this commit. To me this code is less good than what was there before. And I do not see how it helps with getting rid of the settings class.",
+      "revId": "99d3bb3312d7e62524bb471b69cbfd37c2006767",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
