@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_0be823ae",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGeneratorFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-28T21:14:15Z",
+      "side": 1,
+      "message": "This is one seriously odd factory class. It has one factory method which uses a pile of things injected in the constructor. And it does caching of a service. ????",
+      "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6b79af29",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-28T21:14:15Z",
+      "side": 1,
+      "message": "why not private?",
+      "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_eb94bf3b",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-28T21:14:15Z",
+      "side": 1,
+      "message": "string[]",
+      "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ab9eb757",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-28T21:14:15Z",
+      "side": 1,
+      "message": "string[]",
+      "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_2bd9672c",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-05-28T21:14:15Z",
+      "side": 1,
+      "message": "Don\u0027t we have a service to do this? (also without retrieving the whole item just for the label...)",
+      "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
