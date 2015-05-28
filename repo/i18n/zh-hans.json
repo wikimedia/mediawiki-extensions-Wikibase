@@ -190,7 +190,7 @@
 	"wikibase-setaliases-submit": "设置别名",
 	"special-setlabeldescriptionaliases": "设置标签、说明和别名",
 	"wikibase-setlabeldescriptionaliases-introfull": "您正在设置[[$1]]的$2别名、说明和别名。多个别名请用竖线（<code>|</code>）分隔。",
-	"wikibase-setlabeldescriptionaliases-intro": "此表格允许您设置实体的标签、说明和别名。您需要首先提供实体的ID（如Q23）和一个语言代码（如“zh”）。",
+	"wikibase-setlabeldescriptionaliases-intro": "此表格允许您设置实体的标签、说明和别名。您需要首先提供实体的ID（如“Q23”）和一个语言代码（如“zh”）。",
 	"wikibase-setlabeldescriptionaliases-label-label": "标签：",
 	"wikibase-setlabeldescriptionaliases-description-label": "说明：",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "别名：",
