@@ -32,10 +32,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 			),
-			'messages' => array(
-				'special-createitem',
-				'wb-special-newitem-new-item-notification',
-			),
 		),
 
 		'wikibase.buildErrorOutput' => $moduleTemplate + array(
