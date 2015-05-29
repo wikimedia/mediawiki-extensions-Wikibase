@@ -24,7 +24,8 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	 */
 	public function __construct( $changesDatabase = null ) {
 		if ( $changesDatabase === null ) {
-			$changesDatabase = Settings::get( 'changesDatabase' );
+			$settings = Settings::singleton();
+			$changesDatabase = $settings->getSetting( 'changesDatabase' );
 		}
 
 		$this->setTargetWiki( $changesDatabase );
@@ -78,7 +79,8 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	 * @return string
 	 */
 	public static function getClassForType( $type ) {
-		$typeMap = Settings::get( 'changeHandlers' );
+		$settings = Settings::singleton();
+		$typeMap = $settings->getSetting( 'changeHandlers' );
 		return array_key_exists( $type, $typeMap ) ? $typeMap[$type] : 'Wikibase\ChangeRow';
 	}
 

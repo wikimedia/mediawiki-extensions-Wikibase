@@ -72,7 +72,6 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
 use Wikibase\SqlStore;
