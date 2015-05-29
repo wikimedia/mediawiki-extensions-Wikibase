@@ -8,7 +8,7 @@
 	cursor: default;
 }
 
-.wikibase-rankselector .ui-icon {
+.wikibase-rankselector .ui-icon.ui-icon-rankselector {
 	/* @embed */ background-image: url(images/rankselector.png);
 	width: 6px;
 	height: 20px;
