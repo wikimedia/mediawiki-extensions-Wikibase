@@ -464,7 +464,6 @@ return call_user_func( function() {
 		),
 
 		'jquery.wikibase.statementview.RankSelector.styles' => $moduleTemplate + array(
-			'position' => 'top',
 			'styles' => array(
 				'themes/default/jquery.wikibase.statementview.RankSelector.css',
 			),
