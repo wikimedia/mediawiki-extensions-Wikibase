@@ -5,7 +5,6 @@ namespace Wikibase;
 use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * Provides url and path information for the associated Wikibase repo
@@ -16,6 +15,7 @@ use Wikibase\Client\WikibaseClient;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch < hoo@online.de >
  */
 class ApiClientInfo extends ApiQueryBase {
 
@@ -27,14 +27,14 @@ class ApiClientInfo extends ApiQueryBase {
 	/**
 	 * @since 0.4
 	 *
+	 * @param SettingsArray $settings
 	 * @param ApiQuery $apiQuery
 	 * @param string $moduleName
 	 */
-	public function __construct( ApiQuery $apiQuery, $moduleName ) {
+	public function __construct( SettingsArray $settings, ApiQuery $apiQuery, $moduleName ) {
 		parent::__construct( $apiQuery, $moduleName, 'wb' );
 
-		// @todo inject this instead of using singleton here
-		$this->settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$this->settings = $settings;
 	}
 
 	/**
@@ -45,44 +45,29 @@ class ApiClientInfo extends ApiQueryBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		$apiData = $this->getRepoInfo( $params );
+		$apiData = $this->getInfo( $params );
 
 		$this->getResult()->addValue( 'query', 'wikibase', $apiData );
 	}
 
 	/**
-	 * Set settings for api module
-	 *
-	 * @since 0.4
-	 *
-	 * @param SettingsArray $settings
-	 */
-	public function setSettings( SettingsArray $settings ) {
-		$this->settings = $settings;
-	}
-
-	/**
 	 * Gets repo url info to inject into the api module
 	 *
-	 * @since 0.4
-	 *
-	 * @param array $params[]
+	 * @param array $params
 	 *
 	 * @return array
 	 */
-	public function getRepoInfo( array $params ) {
-		$data = array( 'repo' => array() );
-
-		$repoUrlArray = array(
-			'base' => $this->settings->getSetting( 'repoUrl' ),
-			'scriptpath' => $this->settings->getSetting( 'repoScriptPath' ),
-			'articlepath' => $this->settings->getSetting( 'repoArticlePath' ),
-		);
+	private function getInfo( array $params ) {
+		$data = array();
 
 		foreach ( $params['prop'] as $p ) {
 			switch ( $p ) {
 				case 'url':
-					$data['repo']['url'] = $repoUrlArray;
+					$data['repo'] = array();
+					$data['repo']['url'] = $this->getRepoUrls();
+					break;
+				case 'siteid':
+					$data['siteid'] = $this->settings->getSetting( 'siteGlobalID' );
 					break;
 				default;
 					break;
@@ -93,15 +78,26 @@ class ApiClientInfo extends ApiQueryBase {
 	}
 
 	/**
+	 * @return string[]
+	 */
+	private function getRepoUrls() {
+		return array(
+			'base' => $this->settings->getSetting( 'repoUrl' ),
+			'scriptpath' => $this->settings->getSetting( 'repoScriptPath' ),
+			'articlepath' => $this->settings->getSetting( 'repoArticlePath' ),
+		);
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
 		return array(
 			'prop' => array(
-				ApiBase::PARAM_DFLT => 'url',
+				ApiBase::PARAM_DFLT => 'url|siteid',
 				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_TYPE => array(
-					'url',
+					'url', 'siteid'
 				)
 			),
 		);
