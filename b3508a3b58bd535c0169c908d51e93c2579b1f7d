@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_cd7a25e7",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:17:43Z",
+      "side": 1,
+      "message": "We generally use single quotes",
+      "revId": "b3508a3b58bd535c0169c908d51e93c2579b1f7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ed75a9f5",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:17:43Z",
+      "side": 1,
+      "message": "We generally use single quotes",
+      "revId": "b3508a3b58bd535c0169c908d51e93c2579b1f7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ad67a148",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:17:43Z",
+      "side": 1,
+      "message": "Could be statements \u003d { statement }",
+      "revId": "b3508a3b58bd535c0169c908d51e93c2579b1f7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8d641d47",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:17:43Z",
+      "side": 1,
+      "message": "We generally use single quotes",
+      "revId": "b3508a3b58bd535c0169c908d51e93c2579b1f7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4d5e357d",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:17:43Z",
+      "side": 1,
+      "message": "Link to https://www.mediawiki.org/wiki/Wikibase/DataModel#Ranks_of_Statements maybe?",
+      "revId": "b3508a3b58bd535c0169c908d51e93c2579b1f7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
