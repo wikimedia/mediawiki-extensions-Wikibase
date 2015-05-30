@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_4de4f5a3",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:39:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_2d3e5125",
+      "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_ed47e9bd",
         "filename": "client/i18n/en.json",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-30T19:05:15Z",
       "side": 1,
       "message": "about the Wikibase repository and client",
+      "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8d917dfd",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:39:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_ed47e9bd",
       "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_ad9481eb",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:39:35Z",
+      "side": 1,
+      "message": "PHP even allows us to not initialize \u0027repo\u0027 as an array... but that\u0027s once of the convenience features I don\u0027t like.",
+      "parentUuid": "0ed113e2_ad19e1dc",
+      "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_6d13f9b9",
         "filename": "client/tests/phpunit/includes/api/ApiClientInfoTest.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-05-30T19:05:15Z",
       "side": 1,
       "message": "what happens if no params are passed? should be covered as well",
+      "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_8db89d75",
+        "filename": "client/tests/phpunit/includes/api/ApiClientInfoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:39:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_6d13f9b9",
       "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
