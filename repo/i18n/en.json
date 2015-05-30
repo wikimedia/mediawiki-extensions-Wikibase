@@ -511,7 +511,7 @@
 	"apihelp-wbgetentities-param-redirects": "Whether redirects shall be resolved.\nIf set to \"no\", redirects will be treated like deleted entities.",
 	"apihelp-wbgetentities-param-props": "The names of the properties to get back from each entity.\nWill be further filtered by any languages given.",
 	"apihelp-wbgetentities-param-languages": "By default the internationalized values are returned in all available languages.\nThis parameter allows filtering these down to one or more languages by providing one or more language codes.",
-	"apihelp-wbgetentities-param-languagefallback": "Apply language fallback for languages defined in the \"languages\" parameter,\nwith the current context of API call.",
+	"apihelp-wbgetentities-param-languagefallback": "Apply language fallback for languages defined in the \"languages\" parameter, with the current context of API call.",
 	"apihelp-wbgetentities-param-normalize": "Try to normalize the page title against the client site.\nThis only works if exactly one site and one page have been given.",
 	"apihelp-wbgetentities-param-ungroupedlist": "Do not group snaks by property ID.",
 	"apihelp-wbgetentities-param-sitefilter": "Filter sitelinks in entities to those with these siteids.",
