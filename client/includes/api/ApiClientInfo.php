@@ -70,8 +70,6 @@ class ApiClientInfo extends ApiQueryBase {
 				case 'siteid':
 					$data['siteid'] = $this->settings->getSetting( 'siteGlobalID' );
 					break;
-				default;
-					break;
 			}
 		}
 
