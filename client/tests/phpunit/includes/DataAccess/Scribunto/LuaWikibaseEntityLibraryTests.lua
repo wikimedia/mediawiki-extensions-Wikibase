@@ -3,6 +3,7 @@
 
 	@license GNU GPL v2+
 	@author Marius Hoch < hoo@online.de >
+	@author Bene* < benestar.wikimedia@gmail.com >
 ]]
 
 local testframework = require 'Module:TestFramework'
@@ -59,6 +60,10 @@ local function testGetSitelink( globalSiteId )
 	return getNewTestItem():getSitelink( globalSiteId )
 end
 
+local function testGetBestStatements( propertyId )
+	return getNewTestItem():getBestStatements( propertyId )
+end
+
 local function testGetProperties()
 	return getNewTestItem():getProperties()
 end
@@ -83,6 +88,18 @@ end
 
 local function integrationTestGetSitelink( globalSiteId )
 	return mw.wikibase.getEntityObject():getSitelink( globalSiteId )
+end
+
+local function integrationTestGetBestStatements( propertyId )
+	local entity = mw.wikibase.getEntityObject()
+	local statements = entity:getBestStatements( propertyId )
+	local result = {}
+
+	for i, statement in pairs( statements ) do
+		result[#result + 1] = statement.mainsnak.datavalue.value
+	end
+
+	return result
 end
 
 local function integrationTestFormatPropertyValues( ranks )
@@ -159,6 +176,14 @@ local tests = {
 	  args = { {} },
 	  expect = "bad argument #1 to 'getSitelink' (string, number or nil expected, got table)"
 	},
+	{ name = 'mw.wikibase.entity.getBestStatements 1', func = testGetBestStatements,
+	  args = { 'P321' },
+	  expect = { {} }
+	},
+	{ name = 'mw.wikibase.entity.getBestStatements 2', func = testGetBestStatements,
+	  args = { 'P123' },
+	  expect = { {} }
+	},
 	{ name = 'mw.wikibase.entity.getProperties', func = testGetProperties,
 	  expect = { { 'P4321', 'P321' } }
 	},
@@ -185,6 +210,14 @@ local tests = {
 	{ name = 'mw.wikibase.entity.getSitelink integration 2', func = integrationTestGetSitelink, type='ToString',
 	  args = { 'fooSiteId' },
 	  expect = { 'FooBarFoo' }
+	},
+	{ name = 'mw.wikibase.entity.getBestStatements integration 1', func = integrationTestGetBestStatements,
+	  args = { 'P342' },
+	  expect = { { 'Lua :)' } }
+	},
+	{ name = 'mw.wikibase.entity.getBestStatements integration 2', func = integrationTestGetBestStatements,
+	  args = { 'P123' },
+	  expect = { {} }
 	},
 	{ name = 'mw.wikibase.entity.getProperties integration', func = integrationTestGetPropertiesCount,
 	  expect = { 1 }
