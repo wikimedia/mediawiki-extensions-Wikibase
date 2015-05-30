@@ -7,6 +7,7 @@
 	@licence GNU GPL v2+
 	@author Jens Ohlig < jens.ohlig@wikimedia.de >
 	@author Marius Hoch < hoo@online.de >
+	@author Bene* < benestar.wikimedia@gmail.com >
 ]]
 
 local wikibase = {}
@@ -125,6 +126,15 @@ function wikibase.setupInterface()
 		checkType( 'renderSnaks', 1, snaksSerialization, 'table' )
 
 		return php.renderSnaks( snaksSerialization )
+	end
+
+	-- Returns a property id for the given label or id
+	--
+	-- @param propertyLabelOrId
+	wikibase.resolvePropertyId = function( propertyLabelOrId )
+		checkType( 'resolvePropertyId', 1, propertyLabelOrId, 'string' )
+
+		return php.resolvePropertyId( propertyLabelOrId )
 	end
 
 	mw = mw or {}
