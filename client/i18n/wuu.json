@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Poiuyt"
+		]
+	},
+	"tooltip-t-wikibase": "链接到有关数据存储库项",
+	"wikibase-comment-update": "{{WBREPONAME}}项更改",
+	"wikibase-dataitem": "{{WBREPONAME}}项",
+	"wikibase-editlinks": "编辑链接",
+	"wikibase-editlinkstitle": "编辑跨语言链接"
+}

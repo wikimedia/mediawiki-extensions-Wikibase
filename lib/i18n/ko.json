@@ -11,11 +11,11 @@
 		]
 	},
 	"wikibase-lib-desc": "위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다",
-	"specialpages-group-wikibase": "위키베이스 저장소",
+	"specialpages-group-wikibase": "위키베이스",
 	"wikibase-deletedentity-item": "삭제된 항목",
 	"wikibase-deletedentity-property": "삭제된 속성",
 	"wikibase-deletedentity-query": "삭제된 쿼리",
-	"wikibase-error-unexpected": "예기치 않은 오류가 발생했습니다: $1.",
+	"wikibase-error-unexpected": "오류: $1.",
 	"wikibase-error-save-generic": "저장을 수행하는 동안 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다.",
 	"wikibase-error-remove-generic": "삭제를 수행하는 동안 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다.",
 	"wikibase-error-save-connection": "저장을 수행하는 동안 연결 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다. 인터넷 연결을 확인하세요.",
@@ -84,6 +84,9 @@
 	"wikibase-time-precision-BCE-Gannum": "기원전 $1십억년",
 	"wikibase-time-precision-BCE-Mannum": "기원전 $1백만년",
 	"wikibase-time-precision-BCE-annum": "기원전 $1년",
+	"wikibase-time-precision-BCE-millennium": "기원전 $1.백만년",
+	"wikibase-time-precision-BCE-century": "기원전 $1.세기",
+	"wikibase-time-precision-BCE-10annum": "기원전 $1년대",
 	"wikibase-snakformatter-valuetype-mismatch": "값의 종류 \"$1\"이 속성의 종류 \"$2\"와 일치하지 않습니다.",
 	"wikibase-snakformatter-property-not-found": "속성 $1을 찾을 수 없으므로, 사용할 데이터타입을 결정할 수 없습니다."
 }

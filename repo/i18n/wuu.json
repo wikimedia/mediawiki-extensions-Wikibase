@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Benojan",
-			"十弌"
+			"十弌",
+			"Poiuyt"
 		]
 	},
+	"wikibase-edit": "编辑",
 	"wikibase-sitelink-page-edit-placeholder": "頁",
 	"wikibase-move-up": "移上去",
 	"wikibase-move-down": "移落去"
