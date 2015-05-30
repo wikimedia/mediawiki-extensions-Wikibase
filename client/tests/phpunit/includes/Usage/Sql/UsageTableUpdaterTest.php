@@ -68,11 +68,11 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * @param EntityUsage[] $usages
 	 * @param int $pageId
-	 * @param string|null $touched timestamp
+	 * @param string $touched timestamp
 	 *
-	 * @return \array[]
+	 * @return array[]
 	 */
-	private function getUsageRows( array $usages, $pageId = 0, $touched = null ) {
+	private function getUsageRows( array $usages, $pageId, $touched ) {
 		$rows = array();
 
 		foreach ( $usages as $key => $usage ) {
@@ -166,7 +166,7 @@ class UsageTableUpdaterTest extends \MediaWikiTestCase {
 		$tableUpdater = $this->getUsageTableUpdater();
 		$tableUpdater->updateUsage( 23, array(), $usages, $touched );
 
-		$rows = $this->getUsageRows( $usages, 23 );
+		$rows = $this->getUsageRows( $usages, 23, $touched );
 		$itemsToRemove = array( $q4, $q5 );
 
 		$retainedRows = array_intersect_key( $rows, array( 'Q3#S' => 1, 'Q3#L' => 1 ) );
