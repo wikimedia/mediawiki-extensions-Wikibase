@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_eda04934",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-30T19:45:10Z",
+      "side": 1,
+      "message": "Just noticed: default*;* This doesn\u0027t make sense ^^ Just remove the whole default, not introduced by this patch though.",
+      "revId": "53484bd7d15a0b29de73eca75d2aa943dc9df1d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
