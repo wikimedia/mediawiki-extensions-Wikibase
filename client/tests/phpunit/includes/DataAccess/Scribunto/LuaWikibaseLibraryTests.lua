@@ -44,11 +44,11 @@ local function testRenderSnak()
 	return mw.wikibase.renderSnak( snak )
 end
 
-local function testRenderSnaks()
+local function testRenderSnaks( propertyLabelOrId )
 	local entity = mw.wikibase.getEntityObject( 'Q32487' )
 	local snaks = entity['claims']['P342'][1]['qualifiers']
 
-	return mw.wikibase.renderSnaks( snaks )
+	return mw.wikibase.renderSnaks( snaks, propertyLabelOrId )
 end
 
 local tests = {
@@ -121,6 +121,14 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.renderSnaks', func = testRenderSnaks, type='ToString',
 	  expect = { 'A qualifier Snak, Moar qualifiers' }
+	},
+	{ name = 'mw.wikibase.renderSnaks (finds property id)', func = testRenderSnaks, type='ToString',
+	  args = { 'LuaTestStringProperty' },
+	  expect = { 'A qualifier Snak, Moar qualifiers' }
+	},
+	{ name = 'mw.wikibase.renderSnaks (not existing property id)', func = testRenderSnaks, type='ToString',
+	  args = { 'P123' },
+	  expect = { '' }
 	},
 	{ name = 'mw.wikibase.renderSnaks (must be table)', func = mw.wikibase.renderSnaks,
 	  args = { 'meep' },

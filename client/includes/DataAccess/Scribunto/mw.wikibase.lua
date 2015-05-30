@@ -122,10 +122,22 @@ function wikibase.setupInterface()
 	-- Render a list of Snaks from their serialization
 	--
 	-- @param snaksSerialization
-	wikibase.renderSnaks = function( snaksSerialization )
+	-- @param propertyLabelOrId
+	wikibase.renderSnaks = function( snaksSerialization, propertyLabelOrId )
 		checkType( 'renderSnaks', 1, snaksSerialization, 'table' )
+		checkType( 'renderSnaks', 2, propertyLabelOrId, 'string', true )
 
-		return php.renderSnaks( snaksSerialization )
+		if propertyLabelOrId == nil then
+			return php.renderSnaks( snaksSerialization )
+		end
+
+		local propertyId = mw.wikibase.resolvePropertyId( propertyLabelOrId )
+
+		if propertyId ~= nil and snaksSerialization[propertyId] then
+			return php.renderSnaks( { snaksSerialization[propertyId] } )
+		end
+
+		return ''
 	end
 
 	-- Returns a property id for the given label
