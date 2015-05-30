@@ -662,7 +662,7 @@
 	"apihelp-wbsetsitelink-example-3": "Add a sitelink \"Wasserstoff\" for the German page on item with the link for the English page to \"Hydrogen\", if the site link does not exist",
 	"apihelp-wbsetsitelink-example-4": "Removes the German sitelink from the item",
 	"apihelp-wbsetsitelink-example-5": "Add a sitelink \"Wodór\" for the Polish page on item with the link for the English page to \"Hydrogen\" with one badge pointing to the item with ID \"Q149\"",
-	"apihelp-wbsetsitelink-example-6": "Change badges for the link to Polish page from the item with ID \"Q42\" to two badges pointing to the items with IDs \"Q2\" and \"Q149\" wothout providing the link title",
-	"apihelp-wbsetsitelink-example-7": "Change the link to Polish page from the item with ID\"Q42\" without changing badges",
-	"apihelp-wbsetsitelink-example-8": "Change the link to Polish page from the item with ID \"Q42\" and remove all of its badges"
+	"apihelp-wbsetsitelink-example-6": "Change badges for the link to the Polish page from the item with ID \"Q42\" to two badges pointing to the items with IDs \"Q2\" and \"Q149\" without providing the link title",
+	"apihelp-wbsetsitelink-example-7": "Change the link to the Polish page from the item with ID \"Q42\" without changing badges",
+	"apihelp-wbsetsitelink-example-8": "Change the link to the Polish page from the item with ID \"Q42\" and remove all of its badges"
 }
