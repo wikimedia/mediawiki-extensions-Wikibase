@@ -123,7 +123,17 @@ call_user_func( function() {
 	$wgHooks['WikibaseDeleteData'][]			= '\Wikibase\ClientHooks::onWikibaseDeleteData';
 
 	// api modules
-	$wgAPIMetaModules['wikibase'] = 'Wikibase\ApiClientInfo';
+	$wgAPIMetaModules['wikibase'] = array(
+		'class' => 'Wikibase\ApiClientInfo',
+		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
+			return new Wikibase\ApiClientInfo(
+				Wikibase\Client\WikibaseClient::getDefaultInstance()->getSettings(),
+				$apiQuery,
+				$moduleName
+			);
+		}
+	);
+
 	$wgAPIPropModules['pageterms'] = array(
 		'class' => 'Wikibase\Client\Api\PageTerms',
 		'factory' => function ( ApiQuery $query, $moduleName ) {

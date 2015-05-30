@@ -38,11 +38,10 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param array $params
-	 * @param SettingsArray $settings
 	 *
 	 * @return ApiClientInfo
 	 */
-	public function getApiModule( array $params, SettingsArray $settings ) {
+	public function getApiModule( array $params ) {
 		$request = new FauxRequest( $params, true );
 
 		$user = User::newFromName( 'zombie' );
@@ -51,8 +50,7 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 		$apiMain = new ApiMain( $context, true );
 		$apiQuery = new ApiQuery( $apiMain, 'wikibase' );
 
-		$apiModule = new ApiClientInfo( $apiQuery, 'query' );
-		$apiModule->setSettings( $settings );
+		$apiModule = new ApiClientInfo( $this->getSettings(), $apiQuery, 'query' );
 
 		return $apiModule;
 	}
@@ -60,73 +58,63 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider executeProvider
 	 */
-	public function testExecute( $params ) {
-		$settings = $this->getSettings();
-
-		$module = $this->getApiModule( $params, $settings );
+	public function testExecute( array $expected, array $params ) {
+		$module = $this->getApiModule( $params );
 		$module->execute();
 
 		$result = $module->getResult()->getResultData();
 
-		$this->assertInternalType( 'array', $result, 'top level element is an array' );
-
-		$this->assertArrayHasKey( 'query', $result, 'top level element has a query key' );
-		$this->assertArrayHasKey( 'wikibase', $result['query'], 'second level element has a wikibase key' );
-	}
-
-	/**
-	 * @dataProvider getRepoInfoProvider
-	 */
-	public function testGetRepoInfo( array $params, SettingsArray $settings ) {
-		$module = $this->getApiModule( $params, $settings );
-		$reqParams = $module->extractRequestParams();
-		$repoInfo = $module->getRepoInfo( $reqParams );
-
-		$this->assertArrayHasKey( 'repo', $repoInfo, 'top level element has repo key' );
-		$urlInfo = $repoInfo['repo']['url'];
-
-		$this->assertArrayHasKey( 'base', $urlInfo );
-		$this->assertArrayHasKey( 'scriptpath', $urlInfo );
-		$this->assertArrayHasKey( 'articlepath', $urlInfo );
-
-		$this->assertInternalType( 'string', $urlInfo['base'],
-			"The repo URL information for 'base' should be a string" );
-		$this->assertInternalType( 'string', $urlInfo['scriptpath'],
-			"The repo URL information for 'scriptpath' should be a string" );
-		$this->assertInternalType( 'string', $urlInfo['articlepath'],
-			"The repo URL information for 'articlepath' should be a string" );
-
-		$this->assertEquals( $settings->getSetting( 'repoUrl' ), $urlInfo['base'] );
-		$this->assertEquals( $settings->getSetting( 'repoScriptPath' ), $urlInfo['scriptpath'] );
-		$this->assertEquals( $settings->getSetting( 'repoArticlePath' ), $urlInfo['articlepath'] );
-
+		$this->assertEquals( $expected, $result['query']['wikibase'] );
 	}
 
 	public function executeProvider() {
-		$params = $this->getApiRequestParams();
-
-		return array(
-			array( $params )
-		);
-	}
-
-	public function getRepoInfoProvider() {
-		$params = $this->getApiRequestParams();
 		$settings = $this->getSettings();
 
+		$repo = array( 'repo' => array(
+				'url' => array(
+					'base' => $settings->getSetting( 'repoUrl' ),
+					'scriptpath' => $settings->getSetting( 'repoScriptPath' ),
+					'articlepath' => $settings->getSetting( 'repoArticlePath' ),
+				)
+			)
+		);
+
+		$siteid = array( 'siteid' => $settings->getSetting( 'siteGlobalID' ) );
+
 		return array(
-			array( $params, $settings )
+			array(
+				array(),
+				$this->getApiRequestParams( '' )
+			),
+			array(
+				$repo + $siteid,
+				$this->getApiRequestParams( null )
+			),
+			array(
+				$repo + $siteid,
+				$this->getApiRequestParams( 'url|siteid' )
+			),
+			array(
+				$repo,
+				$this->getApiRequestParams( 'url' )
+			),
+			array(
+				$siteid,
+				$this->getApiRequestParams( 'siteid' )
+			)
 		);
 	}
 
 	/**
+	 * @param string $wbprop
+	 *
 	 * @return array
 	 */
-	protected function getApiRequestParams() {
+	private function getApiRequestParams( $wbprop ) {
 		$params = array(
 			'action' => 'query',
 			'meta' => 'wikibase',
-			'wbprop' => 'url'
+			'wbprop' => $wbprop
 		);
 
 		return $params;
@@ -135,11 +123,12 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 	/**
 	 * @return SettingsArray
 	 */
-	protected function getSettings() {
+	private function getSettings() {
 		return new SettingsArray( array(
 			'repoUrl' => 'http://www.example.org',
 			'repoScriptPath' => '/w',
-			'repoArticlePath' => '/wiki/$1'
+			'repoArticlePath' => '/wiki/$1',
+			'siteGlobalID' => 'somerandomwiki',
 		) );
 	}
 
