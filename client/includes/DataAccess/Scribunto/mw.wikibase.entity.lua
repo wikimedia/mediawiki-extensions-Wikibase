@@ -5,6 +5,7 @@
 
 	@license GNU GPL v2+
 	@author Marius Hoch < hoo@online.de >
+	@author Bene* < benestar.wikimedia@gmail.com >
 ]]
 
 local php = mw_interface
@@ -90,6 +91,29 @@ methodtable.getSitelink = function( entity, globalSiteId )
 	end
 
 	return sitelink.title
+end
+
+-- Get the best statements with the given property id
+--
+-- @param propertyId
+methodtable.getBestStatements = function( entity, propertyId )
+	if entity.claims == nil or not entity.claims[propertyId] then
+		return {}
+	end
+
+	local statements = {}
+	local bestRank = 'normal'
+
+	for k, statement in pairs( entity.claims[propertyId] ) do
+		if statement.rank == bestRank then
+			statements[#statements + 1] = statement
+		elseif statement.rank == 'preferred' then
+			statements = { statement }
+			bestRank = 'preferred'
+		end
+	end
+
+	return statements
 end
 
 -- Get a table with all property ids attached to the entity.

@@ -119,6 +119,17 @@ An example call might look like this:
 entity:getProperties() -- Returns a table like: { "P123", "P1337" }
 </source>
 
+=== mw.wikibase.entity:getBestStatements ===
+<code>entity:getBestStatements( propertyId )</code><br>
+Get the best statements with the given property id.
+This includes all statements with rank "preferred" or, if no preferred ones exist, all statements with rank "normal".
+Statements with rank "deprecated" are never included.
+
+An example call might look like this:
+<source lang="lua">
+entity:getStatements( 'P12' ) -- Returns a table containing the serialization of the best statements with the property id P12
+</source>
+
 === mw.wikibase.entity:formatPropertyValues ===
 <code>entity:formatPropertyValues( propertyLabelOrId )</code><br>
 <code>entity:formatPropertyValues( propertyLabelOrId, acceptableRanks )</code><br>
