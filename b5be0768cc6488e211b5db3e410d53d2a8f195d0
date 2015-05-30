@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_2d3e5125",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-30T19:05:15Z",
+      "side": 1,
+      "message": "-the\n\nWikibase installation -\u003e Wikibase client (installation?)\n\n(I\u0027d like to avoid the word \"installation\" in this message)",
+      "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ed47e9bd",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-30T19:05:15Z",
+      "side": 1,
+      "message": "about the Wikibase repository and client",
+      "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_ad19e1dc",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-30T19:05:15Z",
+      "side": 1,
+      "message": "The following might be more convenient here, not important though. ;-)\n\n  $data[\u0027repo\u0027] \u003d array(\n    \u0027url\u0027 \u003d\u003e $this-\u003egetRepoUrls()\n  );",
+      "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6d13f9b9",
+        "filename": "client/tests/phpunit/includes/api/ApiClientInfoTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-30T19:05:15Z",
+      "side": 1,
+      "message": "what happens if no params are passed? should be covered as well",
+      "revId": "b5be0768cc6488e211b5db3e410d53d2a8f195d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

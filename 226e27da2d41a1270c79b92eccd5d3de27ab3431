@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_8d165dab",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-30T19:05:15Z",
+      "side": 0,
+      "message": "\\o/",
+      "revId": "226e27da2d41a1270c79b92eccd5d3de27ab3431",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
