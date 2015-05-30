@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_caa8cb76",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGeneratorFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-05-30T12:02:34Z",
+      "side": 1,
+      "message": "Perhaps this whole class should be moved into WikibaseClient instead.",
+      "parentUuid": "0ed113e2_0be823ae",
+      "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_6b79af29",
         "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
         "patchSetId": 6
