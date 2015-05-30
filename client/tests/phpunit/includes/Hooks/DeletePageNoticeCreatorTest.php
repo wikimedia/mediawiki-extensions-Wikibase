@@ -46,12 +46,12 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 	public function testGetPageDeleteNoticeHtml( $expected, Title $title, $message ) {
 		$siteLinkLookup = $this->getMock(
 			'Wikibase\Lib\Store\SiteLinkTable',
-			array( 'getEntityIdForSiteLink' ),
+			array( 'getItemIdForSiteLink' ),
 			array( 'SiteLinkTable', true )
 		);
 
 		$siteLinkLookup->expects( $this->any() )
-			->method( 'getEntityIdForSiteLink' )
+			->method( 'getItemIdForSiteLink' )
 			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
 
 		$deletePageNotice = new DeletePageNoticeCreator(

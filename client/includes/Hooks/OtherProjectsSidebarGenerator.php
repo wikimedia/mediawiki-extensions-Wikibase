@@ -123,7 +123,7 @@ class OtherProjectsSidebarGenerator {
 	 */
 	private function getSiteLinks( Title $title ) {
 		$siteLink = new SiteLink( $this->localSiteId, $title->getFullText() );
-		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+		$itemId = $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
 
 		if ( $itemId === null ) {
 			return array();

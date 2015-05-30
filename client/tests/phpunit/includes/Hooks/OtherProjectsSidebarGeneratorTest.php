@@ -107,7 +107,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 
 		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 		$lookup->expects( $this->any() )
-				->method( 'getEntityIdForSiteLink' )
+				->method( 'getItemIdForSiteLink' )
 				->will( $this->returnValue( $Q123 ) );
 
 		$lookup->expects( $this->any() )

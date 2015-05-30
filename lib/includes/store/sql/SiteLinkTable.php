@@ -259,13 +259,13 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 	}
 
 	/**
-	 * @see SiteLinkLookup::getEntityIdForSiteLink
+	 * @see SiteLinkLookup::getItemIdForSiteLink
 	 *
 	 * @param SiteLink $siteLink
 	 *
 	 * @return ItemId|null
 	 */
-	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
+	public function getItemIdForSiteLink( SiteLink $siteLink ) {
 		$siteId = $siteLink->getSiteId();
 		$pageName = $siteLink->getPageName();
 

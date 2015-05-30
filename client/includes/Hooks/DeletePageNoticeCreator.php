@@ -54,7 +54,7 @@ class DeletePageNoticeCreator {
 	 * @return string|null
 	 */
 	private function getItemUrl( Title $title ) {
-		$entityId = $this->siteLinkLookup->getEntityIdForSiteLink(
+		$entityId = $this->siteLinkLookup->getItemIdForSiteLink(
 			new SiteLink(
 				$this->siteId,
 				$title->getFullText()

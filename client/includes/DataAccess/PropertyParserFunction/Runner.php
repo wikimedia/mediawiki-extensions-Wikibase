@@ -124,7 +124,7 @@ class Runner {
 		} else {
 			$title = $parser->getTitle();
 			$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
-			$entityId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+			$entityId = $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
 		}
 
 		return $entityId;

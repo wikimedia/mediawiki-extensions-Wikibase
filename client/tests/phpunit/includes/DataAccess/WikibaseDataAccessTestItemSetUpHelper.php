@@ -46,7 +46,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 			'WikibaseClientDataAccessTest'
 		);
 
-		if ( $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink ) ) {
+		if ( $this->siteLinkLookup->getItemIdForSiteLink( $siteLink ) ) {
 			// Already set up for this MockRepository
 			return;
 		}
