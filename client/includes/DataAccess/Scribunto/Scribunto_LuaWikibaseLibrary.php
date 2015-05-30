@@ -2,15 +2,17 @@
 
 use Deserializers\Exceptions\DeserializationException;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
-use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
+use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\PropertyLabelNotResolvedException;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
@@ -22,23 +24,24 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  * @licence GNU GPL v2+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
 	 * @var WikibaseLuaBindings|null
 	 */
-	private $luaBindings;
+	private $luaBindings = null;
 
 	/**
 	 * @var EntityAccessor|null
 	 */
-	private $entityAccessor;
+	private $entityAccessor = null;
 
 	/**
-	 * @var ParserOutputUsageAccumulator|null
+	 * @var SnakSerializationRenderer|null
 	 */
-	private $usageAccumulator = null;
+	private $snakSerializationRenderer = null;
 
 	/**
 	 * @var LanguageFallbackChain|null
@@ -46,32 +49,89 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $fallbackChain = null;
 
 	/**
-	 * @var SnakSerializationRenderer|null
+	 * @var ParserOutputUsageAccumulator|null
 	 */
-	private $snakSerializationRenderer;
+	private $usageAccumulator = null;
 
+	/**
+	 * @var PropertyIdResolver|null
+	 */
+	private $propertyIdResolver = null;
+
+	/**
+	 * @return WikibaseLuaBindings
+	 */
 	private function getLuaBindings() {
-		if ( !$this->luaBindings ) {
+		if ( $this->luaBindings === null ) {
 			$this->luaBindings = $this->newLuaBindings();
 		}
 
 		return $this->luaBindings;
 	}
 
+	/**
+	 * @return EntityAccessor
+	 */
 	private function getEntityAccessor() {
-		if ( !$this->entityAccessor ) {
+		if ( $this->entityAccessor === null ) {
 			$this->entityAccessor = $this->newEntityAccessor();
 		}
 
 		return $this->entityAccessor;
 	}
 
+	/**
+	 * @return SnakSerializationRenderer
+	 */
 	private function getSnakSerializationRenderer() {
-		if ( !$this->snakSerializationRenderer ) {
+		if ( $this->snakSerializationRenderer === null ) {
 			$this->snakSerializationRenderer = $this->newSnakSerializationRenderer();
 		}
 
 		return $this->snakSerializationRenderer;
+	}
+
+	/**
+	 * @return LanguageFallbackChain
+	 */
+	private function getLanguageFallbackChain() {
+		if ( $this->fallbackChain === null ) {
+			$fallbackChainFactory = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory();
+
+			$this->fallbackChain = $fallbackChainFactory->newFromLanguage(
+				$this->getLanguage(),
+				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+			);
+		}
+
+		return $this->fallbackChain;
+	}
+
+	/**
+	 * @return ParserOutputUsageAccumulator
+	 */
+	private function getUsageAccumulator() {
+		if ( $this->usageAccumulator === null ) {
+			$parserOutput = $this->getParser()->getOutput();
+			$this->usageAccumulator = new ParserOutputUsageAccumulator( $parserOutput );
+		}
+
+		return $this->usageAccumulator;
+	}
+
+	/**
+	 * @return PropertyIdResolver
+	 */
+	private function getPropertyIdResolver() {
+		if ( $this->propertyIdResolver === null ) {
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+			$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
+
+			$this->propertyIdResolver = new PropertyIdResolver( $entityLookup, $propertyLabelResolver );
+		}
+
+		return $this->propertyIdResolver;
 	}
 
 	/**
@@ -141,34 +201,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @return LanguageFallbackChain
-	 */
-	private function getLanguageFallbackChain() {
-		if ( $this->fallbackChain === null ) {
-			$fallbackChainFactory = WikibaseClient::getDefaultInstance()->getLanguageFallbackChainFactory();
-
-			$this->fallbackChain = $fallbackChainFactory->newFromLanguage(
-				$this->getLanguage(),
-				LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-			);
-		}
-
-		return $this->fallbackChain;
-	}
-
-	/**
-	 * @return ParserOutputUsageAccumulator
-	 */
-	private function getUsageAccumulator() {
-		if ( $this->usageAccumulator === null ) {
-			$parserOutput = $this->getParser()->getOutput();
-			$this->usageAccumulator = new ParserOutputUsageAccumulator( $parserOutput );
-		}
-
-		return $this->usageAccumulator;
-	}
-
-	/**
 	 * Register mw.wikibase.lua library
 	 *
 	 * @since 0.4
@@ -188,6 +220,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getEntityId' => array( $this, 'getEntityId' ),
 			'getUserLang' => array( $this, 'getUserLang' ),
 			'getDescription' => array( $this, 'getDescription' ),
+			'resolvePropertyId' => array( $this, 'resolvePropertyId' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
 			'incrementExpensiveFunctionCount' => array( $this, 'incrementExpensiveFunctionCount' ),
 		);
@@ -328,6 +361,27 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return $ret;
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
+		}
+	}
+
+	/**
+	 * Wrapper for PropertyIdResolver
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $propertyLabelOrId
+	 *
+	 * @return string[]|null[]
+	 */
+	public function resolvePropertyId( $propertyLabelOrId ) {
+		$this->checkType( 'resolvePropertyId', 1, $propertyLabelOrId, 'string' );
+		try {
+			$languageCode = $this->getLanguage()->getCode();
+			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId( $propertyLabelOrId, $languageCode );
+			$ret = array( $propertyId->getSerialization() );
+			return $ret;
+		} catch ( PropertyLabelNotResolvedException $e ) {
+			return array( null );
 		}
 	}
 
