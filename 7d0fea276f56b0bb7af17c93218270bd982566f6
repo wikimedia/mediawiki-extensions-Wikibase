@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_8d7dfde6",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:12:10Z",
+      "side": 1,
+      "message": "string[]|null[]",
+      "revId": "7d0fea276f56b0bb7af17c93218270bd982566f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_4d1075ad",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:12:10Z",
+      "side": 1,
+      "message": "You can save a Lua-PHP round trip by using:\nif propertyLabelOrId:match( \u0027^P%d+$\u0027 ) then return propertyLabelOrId end",
+      "revId": "7d0fea276f56b0bb7af17c93218270bd982566f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0d434db7",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-05-30T19:12:10Z",
+      "side": 1,
+      "message": "What does this return, if the property label couldn\u0027t be resolved? How do we resolve? Do fallbacks apply? I think that should be answered here.",
+      "revId": "7d0fea276f56b0bb7af17c93218270bd982566f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
