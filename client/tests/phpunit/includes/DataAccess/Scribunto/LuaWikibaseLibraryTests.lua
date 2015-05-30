@@ -3,6 +3,7 @@
 
 	@license GNU GPL v2+
 	@author Marius Hoch < hoo@online.de >
+	@author Bene* < benestar.wikimedia@gmail.com >
 ]]
 
 local testframework = require 'Module:TestFramework'
@@ -126,16 +127,28 @@ local tests = {
 	{ name = 'mw.wikibase.renderSnak', func = testRenderSnak, type='ToString',
 	  expect = { 'A qualifier Snak' }
 	},
-	{ name = 'mw.wikibase.renderSnak - (must be table)', func = mw.wikibase.renderSnak,
+	{ name = 'mw.wikibase.renderSnak (must be table)', func = mw.wikibase.renderSnak,
 	  args = { 'meep' },
 	  expect = "bad argument #1 to 'renderSnak' (table expected, got string)"
 	},
 	{ name = 'mw.wikibase.renderSnaks', func = testRenderSnaks, type='ToString',
 	  expect = { 'A qualifier Snak, Moar qualifiers' }
 	},
-	{ name = 'mw.wikibase.renderSnaks - (must be table)', func = mw.wikibase.renderSnaks,
+	{ name = 'mw.wikibase.renderSnaks (must be table)', func = mw.wikibase.renderSnaks,
 	  args = { 'meep' },
 	  expect = "bad argument #1 to 'renderSnaks' (table expected, got string)"
+	},
+	{ name = 'mw.wikibase.resolvePropertyId', func = mw.wikibase.resolvePropertyId,
+	  args = { 'LuaTestStringProperty' },
+	  expect = { 'P342' }
+	},
+	{ name = 'mw.wikibase.resolvePropertyId (property id passed)', func = mw.wikibase.resolvePropertyId,
+	  args = { 'P342' },
+	  expect = { 'P342' }
+	},
+	{ name = 'mw.wikibase.resolvePropertyId (label not found)', func = mw.wikibase.resolvePropertyId,
+	  args = { 'foo' },
+	  expect = { nil }
 	},
 }
 
