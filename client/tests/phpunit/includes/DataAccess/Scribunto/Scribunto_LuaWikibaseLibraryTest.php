@@ -148,6 +148,33 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary->renderSnaks( array( 'a' => 'b' ) );
 	}
 
+	public function testResolvePropertyId() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->assertSame(
+			array( 'P342' ),
+			$luaWikibaseLibrary->resolvePropertyId( 'LuaTestStringProperty' )
+		);
+	}
+
+	public function testResolvePropertyId_propertyIdGiven() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->assertSame(
+			array( 'P342' ),
+			$luaWikibaseLibrary->resolvePropertyId( 'P342' )
+		);
+	}
+
+	public function testResolvePropertyId_labelNotFound() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$this->assertSame(
+			array( null ),
+			$luaWikibaseLibrary->resolvePropertyId( 'foo' )
+		);
+	}
+
 	public function testGetUserLang() {
 		$parserOptions = new ParserOptions();
 		$parserOptions->setUserLang( Language::factory( 'ru' ) );

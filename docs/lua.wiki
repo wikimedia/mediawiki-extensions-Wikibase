@@ -24,7 +24,7 @@ Takes an item ID and returns the label in the language of the local Wiki.
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.label( 'Q42' ) -- Returns the label of the item as a string, like "Berlin"
+mw.wikibase.label( 'Q42' ) -- Returns the label of the item as a string, like "Berlin".
 </source>
 
 === mw.wikibase.sitelink ===
@@ -42,7 +42,7 @@ Takes an item ID and returns the description in the language of the local Wiki.
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.description( 'Q42' ) -- Returns the description of the item as a string, like "capital of Germany"
+mw.wikibase.description( 'Q42' ) -- Returns the description of the item as a string, like "capital of Germany".
 </source>
 
 === mw.wikibase.renderSnak ===
@@ -67,6 +67,15 @@ local entity = mw.wikibase.getEntityObject()
 local snaks = entity['claims']['P342'][1]['qualifiers']
 
 mw.wikibase.renderSnaks( snaks ) -- Returns the given Snaks formatted as wiki text.
+</source>
+
+=== mw.wikibase.resolvePropertyId ===
+<code>wikibase.resolvePropertyId( propertyLabelOrId )</code><br>
+Returns a property id for the given label or id. This allows using the property's labels instead of ids in all places. If no property was found for the label, a nil value is returned.
+
+An exmple call might look like this:
+<source lang="lua">
+mw.wikibase.resolvePropertyId( 'father' ) -- Returns the property id for the property with label "father", like "P12".
 </source>
 
 == mw.wikibase.entity ==
