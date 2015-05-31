@@ -5,11 +5,14 @@ namespace Wikibase\Test\Api;
 use Language;
 use Status;
 use User;
+use UsageException;
 use Wikibase\Api\ApiErrorReporter;
 use Wikibase\Api\MergeItems;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
@@ -81,6 +84,18 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		return $permissionChecker;
 	}
 
+
+	public function getMockEditFilterHookRunner() {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->setMethods( array( 'run' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+		return $mock;
+	}
+
 	/**
 	 * @param MergeItems $module
 	 */
@@ -98,6 +113,9 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		$changeOpsFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()->getMergeChangeOpFactory();
 
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+
 		$module->setServices(
 			$idParser,
 			$errorReporter,
@@ -109,6 +127,14 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$module->getUser()
+			),
+			new RedirectCreationInteractor(
+				$this->mockRepository,
+				$this->mockRepository,
+				$this->getPermissionCheckers(),
+				$summaryFormatter,
+				$module->getUser(),
+				$this->getMockEditFilterHookRunner()
 			)
 		);
 	}
@@ -164,6 +190,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideData
+	 * 
+	 * @todo refactor: all assertion blocks in own methods
 	 */
 	public function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $ignoreConflicts = null ){
 		// -- set up params ---------------------------------
@@ -184,7 +212,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		// -- do the request --------------------------------------------
 		$result = $this->callApiModule( $params );
 
-		// -- check the result --------------------------------------------
+		// -- check the result -------------------------------------------- 
 		$this->apiModuleTestHelper->assertResultSuccess( $result );
 
 		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'from', 'id' ), $result );
@@ -198,10 +226,10 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$this->assertGreaterThan( 0, $result['to']['lastrevid'] );
 
 		// -- check the items --------------------------------------------
-		$actualFrom = $this->entityModificationTestHelper->getEntity( $result['from']['id'] );
+		$actualFrom = $this->entityModificationTestHelper->getEntity( $result['from']['id'], true ); //resolve redirects
 		$this->entityModificationTestHelper->assertEntityEquals( $expectedFrom, $actualFrom );
 
-		$actualTo = $this->entityModificationTestHelper->getEntity( $result['to']['id'] );
+		$actualTo = $this->entityModificationTestHelper->getEntity( $result['to']['id'], true );
 		$this->entityModificationTestHelper->assertEntityEquals( $expectedTo, $actualTo );
 
 		// -- check the edit summaries --------------------------------------------
@@ -291,9 +319,9 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		);
 
 		// -- do the request --------------------------------------------
-		try {
+		try {	
 			$this->callApiModule( $params );
-			$this->fail( 'Expected UsageException!' );
+			$this->fail( 'Expected UsageException!' );	
 		} catch ( \UsageException $ex ) {
 			$this->apiModuleTestHelper->assertUsageException( $expected, $ex );
 		}
