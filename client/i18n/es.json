@@ -23,6 +23,8 @@
 	"apihelp-query+pageterms-example-label-en": "Obtener etiquetas y alias asociados con la página 'London', en inglés.",
 	"apihelp-query+pageterms-param-terms": "Los tipos de términos que obtener, p. ej. 'description'. Si no se especifica, todos los tipos se devuelven.",
 	"apihelp-query+wikibase-description": "Obtener información acerca del repositorio Wikibase asociado.",
+	"apihelp-query+wikibase-example": "Obtener la ruta de URL y otra información acerca del cliente y repositorio de Wikibase.",
+	"apihelp-query+wikibase-param-prop": "Qué propiedades se obtendrán:\n;<kbd>url</kbd>: URL de base, ruta de secuencia de órdenes y ruta de artículo del repositorio de Wikibase.\n;<kbd>siteid</kbd>: el identificador de este sitio.",
 	"wikibase-after-page-move": "Usted también puede [ $1  actualizar] el elemento  {{WBREPONAME}} asociado para mantener los enlaces de idiomas en la página movida.",
 	"wikibase-after-page-move-queued": "El [ $1  elemento {{WBREPONAME}}] asociado a esta página se actualizará automáticamente pronto.",
 	"wikibase-comment-add": "Se ha creado un elemento de {{WBREPONAME}}.",

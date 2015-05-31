@@ -8,5 +8,11 @@
 	"wikibase-comment-update": "{{WBREPONAME}}项更改",
 	"wikibase-dataitem": "{{WBREPONAME}}项",
 	"wikibase-editlinks": "编辑链接",
-	"wikibase-editlinkstitle": "编辑跨语言链接"
+	"wikibase-editlinkstitle": "编辑跨语言链接",
+	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "囥脱",
+	"wikibase-rc-hide-wikidata-show": "显示",
+	"wikibase-rc-wikibase-edit-letter": "数",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}编辑",
+	"wikibase-otherprojects": "其他项目"
 }

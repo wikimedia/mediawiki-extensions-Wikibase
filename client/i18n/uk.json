@@ -24,7 +24,7 @@
 	"apihelp-query+pageterms-example-simple": "Отримати всі терміни, пов'язані зі сторінкою «London» мовою користувача.",
 	"apihelp-query+pageterms-example-label-en": "Отримати мітки й аліаси, пов'язані з англійськомовною сторінкою «London».",
 	"apihelp-query+pageterms-param-terms": "Типи термінів для отримання, наприклад, «description». Якщо не вказано, видаються усі типи.",
-	"apihelp-query+wikibase-description": "Отримати інформацію про пов'язаний репозиторій Wikibase.",
+	"apihelp-query+wikibase-description": "Отримати інформацію про клієнт Wikibase і пов'язаний репозиторій Wikibase.",
 	"apihelp-query+wikibase-example": "Отримати URL-адресу та іншу інформацію для Wikibase репозиторія.",
 	"apihelp-query+wikibase-param-prop": "Які властивості отримати:\n;<kbd>url</kbd>: Базовий URL, шлях скрипту і шлях статті.",
 	"wikibase-after-page-move": "Щоб виправити мовні посилання на перейменованій сторінці, Ви також можете [$1 оновити] пов'язаний елемент {{grammar:genitive|{{WBREPONAME}}}}.",

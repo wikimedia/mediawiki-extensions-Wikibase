@@ -313,7 +313,7 @@
 	"wikibase-api-cant-load-entity-content": "!!DO NOT TRANSLATE!! Shown when we can't access the content revision. This could be because it has been deleted, or because it belongs to a different entity.",
 	"wikibase-api-unresolved-redirect": "Error message returned from the API when trying to use an entity ID that refers to a redirect in a context where redirects are not supported.",
 	"wikibase-api-editconflict": "There is an edit conflict that that could not be resolved. This can have several reasons, but there is only a generic message for all of them.",
-	"wikibase-api-failed-add-sitelink": "This is an error message where the system of some unspecific reason could not add the site link to the temporary store.\n\nSee also:\n* {{msg-mw|Wikibase-newitem-add-sitelink-failed}}",
+	"wikibase-api-failed-add-sitelink": "This is an error message where the system of some unspecific reason could not add the sitelink to the temporary store.\n\nSee also:\n* {{msg-mw|Wikibase-newitem-add-sitelink-failed}}",
 	"wikibase-api-failed-modify": "!!DO NOT TRANSLATE!! This is an error message for a situation where the API tries to modify an item but the operation cannot be completed. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the database is in maintenance mode.",
 	"wikibase-api-failed-save": "!!DO NOT TRANSLATE!! This is an error message for a situation where the API tries to save an item but the operation cannot be completed.",
 	"wikibase-api-inconsistent-language": "!!DO NOT TRANSLATE!! Inconsistent language detected",
