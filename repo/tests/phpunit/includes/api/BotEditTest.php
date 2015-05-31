@@ -42,7 +42,7 @@ class BotEditTest extends WikibaseApiTestCase {
 			'api_test_bot@example.com',
 			array( 'bot' )
 		);
-		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', array( 'user' => array( 'item-merge' => true ) ) );
+		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', array( 'user' => array( 'item-merge' => true, 'item-redirect' => true ) ) );
 
 		if( !isset( self::$hasSetup ) ){
 			$this->initTestEntities( array( 'Empty', 'Leipzig', 'Osaka' ) );
