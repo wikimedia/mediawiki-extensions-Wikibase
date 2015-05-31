@@ -57,6 +57,11 @@ Other breaking changes:
 * Renamed `Claim\ClaimGuidParsingException` to `Statement\StatementGuidParsingException`, leaving a b/c alias in place
 * Renamed `StatementListProvider` to `Statement\StatementListProvider`, leaving a b/c alias in place
 
+#### Other changes
+
+* `Item::setLabel`, `Item::setDescription` and `Item::setAliases` are no longer deprecated
+* `Property::setLabel`, `Property::setDescription` and `Property::setAliases` are no longer deprecated
+
 ## Version 2.6.1 (2015-04-25)
 
 * Allow installation together with Diff 2.x.
