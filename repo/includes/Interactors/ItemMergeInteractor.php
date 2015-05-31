@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
+use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 
 /**
  * @since 0.5
@@ -24,9 +25,7 @@ use Wikibase\SummaryFormatter;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Daniel Kinzler
- *
- * @todo allow merging of specific parts of an item only (eg. sitelinks,aliases,claims)
- * @todo allow optional redirect creation after merging
+ * @author Lucie-Aimée Kaffee
  */
 class ItemMergeInteractor {
 
@@ -61,12 +60,18 @@ class ItemMergeInteractor {
 	private $user;
 
 	/**
+	* @var RedirectCreationInteractor
+	*/
+	private $interactorRedirect;
+
+	/**
 	 * @param MergeChangeOpsFactory $changeOpFactory
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param User $user
+	 * @param RedirectCreationInteractor $interactorRedirect
 	 */
 	public function __construct(
 		MergeChangeOpsFactory $changeOpFactory,
@@ -74,7 +79,8 @@ class ItemMergeInteractor {
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
-		User $user
+		User $user,
+		RedirectCreationInteractor $interactorRedirect
 	) {
 
 		$this->changeOpFactory = $changeOpFactory;
@@ -83,6 +89,7 @@ class ItemMergeInteractor {
 		$this->permissionChecker = $permissionChecker;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->user = $user;
+		$this->interactorRedirect = $interactorRedirect;
 	}
 
 	/**
@@ -120,7 +127,7 @@ class ItemMergeInteractor {
 	}
 
 	/**
-	 * Merges the content of the first item into the second.
+	 * Merges the content of the first item into the second and creates a redirect if the first item is empty after the merge.
 	 *
 	 * @param ItemId $fromId
 	 * @param ItemId $toId
@@ -128,8 +135,9 @@ class ItemMergeInteractor {
 	 * @param string|null $summary
 	 * @param bool $bot Mark the edit as bot edit
 	 *
-	 * @return array A list of exactly two EntityRevision objects. The first one represents
-	 * the modified source item, the second one represents the modified target item.
+	 * @return array A list of exactly two EntityRevision objects and a boolean. The first EntityRevision
+	 * object represents the modified source item, the second one represents the modified target item.
+	 * The boolean indicates whether the redirect was successful.
 	 *
 	 * @throws ItemMergeException
 	 */
@@ -157,9 +165,34 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}
 
-		return $this->attemptSaveMerge( $fromEntity, $toEntity, $summary, $bot );
+		$result = $this->attemptSaveMerge( $fromEntity, $toEntity, $summary, $bot );
+
+		$redirected = false;
+
+		if ( $this->isEmpty( $fromId ) ) {
+			$this->interactorRedirect->createRedirect( $fromId, $toId, $bot );
+			$redirected = true;
+		}
+
+		array_push( $result, $redirected );
+		return $result;
 	}
 
+	/**
+	 * @param EntityId $entityId
+	 * @return bool isEmpty
+	 */
+	private function isEmpty( EntityId $entityId ) {
+		return $this->loadEntity( $entityId )->isEmpty();
+	}
+
+	/**
+	 * Either throws an exception or returns a EntityDocument object.
+	 *
+	 * @param EntityId $entityId
+	 * @return EntityDocument
+	 * @throws ItemMergeException
+	 */
 	private function loadEntity( EntityId $entityId ) {
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER );
@@ -177,6 +210,11 @@ class ItemMergeInteractor {
 		}
 	}
 
+	/**
+	 * @param EntityDocument $fromEntity
+	 * @param EntityDocument $toEntity
+	 * @throws ItemMergeException
+	 */
 	private function validateEntities( EntityDocument $fromEntity, EntityDocument $toEntity ) {
 		if ( !( $fromEntity instanceof Item && $toEntity instanceof Item ) ) {
 			throw new ItemMergeException( 'One or more of the entities are not items', 'not-item' );
@@ -207,8 +245,8 @@ class ItemMergeInteractor {
 	 * @param string|null $summary
 	 * @param bool $bot
 	 *
-	 * @return array A list of exactly two EntityRevision objects. The first one represents
-	 * the modified source item, the second one represents the modified target item.
+	 * @return array A list of exactly two EntityRevision objects.
+	 * The first one represents the modified source item, the second one represents the modified target item.
 	 */
 	private function attemptSaveMerge( Item $fromItem, Item $toItem, $summary, $bot ) {
 		$toSummary = $this->getSummary( 'to', $toItem->getId(), $summary );

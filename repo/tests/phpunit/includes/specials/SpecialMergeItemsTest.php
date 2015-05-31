@@ -12,6 +12,7 @@ use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Specials\SpecialMergeItems;
@@ -30,6 +31,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
+ * @author Lucie-Aimée Kaffee
  */
 class SpecialMergeItemsTest extends SpecialPageTestBase {
 
@@ -73,6 +75,21 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->overrideServices( $specialMergeItems, $this->user );
 
 		return $specialMergeItems;
+	}
+
+	/**
+	 * @return EditFilterHookRunner
+	 */
+	public function getMockEditFilterHookRunner() {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$mock->expects( $this->any() )
+			->method( 'run' )
+			 ->will( $this->returnValue( Status::newGood() ) );
+
+		return $mock;
 	}
 
 	/**
@@ -122,7 +139,16 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
-				$user
+				$user,
+				new RedirectCreationInteractor(
+						$this->mockRepository,
+						$this->mockRepository,
+						$this->getPermissionCheckers(),
+						$summaryFormatter,
+						$user,
+						$this->getMockEditFilterHookRunner(),
+						$this->mockRepository
+				)
 			)
 		);
 	}
@@ -288,10 +314,10 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->assertRegExp( '!\(wikibase-mergeitems-success: Q1, \d+, Q2, \d+\)!', $html, 'Expected success message' );
 
 		// -- check the items --------------------------------------------
-		$actualFrom = $this->entityModificationTestHelper->getEntity( 'Q1' );
+		$actualFrom = $this->entityModificationTestHelper->getEntity( 'Q1', true );
 		$this->entityModificationTestHelper->assertEntityEquals( $fromAfter, $actualFrom );
 
-		$actualTo = $this->entityModificationTestHelper->getEntity( 'Q2' );
+		$actualTo = $this->entityModificationTestHelper->getEntity( 'Q2', true );
 		$this->entityModificationTestHelper->assertEntityEquals( $toAfter, $actualTo );
 	}
 
