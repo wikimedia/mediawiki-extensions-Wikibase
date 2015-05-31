@@ -7,8 +7,10 @@ use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
@@ -27,6 +29,7 @@ use Wikibase\Test\MockSiteStore;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Daniel Kinzler
+ * @author Lucie-Aimée Kaffee
  */
 class ItemMergeInteractorTest extends \MediaWikiTestCase {
 
@@ -58,6 +61,18 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			'Q11' => 'Q1',
 			'Q12' => 'Q2',
 		) );
+	}
+
+	public function getMockEditFilterHookRunner() {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->setMethods( array( 'run' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+
+		return $mock;
 	}
 
 	/**
@@ -106,7 +121,16 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			$this->mockRepository,
 			$this->getPermissionCheckers(),
 			$summaryFormatter,
-			$user
+			$user,
+			new RedirectCreationInteractor(
+				$this->mockRepository,
+				$this->mockRepository,
+				$this->getPermissionCheckers(),
+				$summaryFormatter,
+				$user,
+				$this->getMockEditFilterHookRunner(),
+				$this->mockRepository
+			)
 		);
 
 		return $interactor;
@@ -281,15 +305,30 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		$actualTo = $this->testHelper->getEntity( $toId );
 		$this->testHelper->assertEntityEquals( $expectedTo, $actualTo, 'modified target item' );
 
-		$actualFrom = $this->testHelper->getEntity( $fromId );
-		$this->testHelper->assertEntityEquals( $expectedFrom, $actualFrom, 'modified source item' );
+		$this->assertRedirectWorks( $expectedFrom, $fromId, $toId  );
 
 		// -- check the edit summaries --------------------------------------------
-		$fromRevId = $this->mockRepository->getLatestRevisionId( $fromId );
+		//$fromRevId = $this->mockRepository->getLatestRevisionId( $fromId );
 		$toRevId = $this->mockRepository->getLatestRevisionId( $toId );
 
-		$this->testHelper->assertRevisionSummary( '@^/\* *wbmergeitems-to:0\|\|Q2 *\*/ *CustomSummary$@', $fromRevId, 'summary for source item' );
+		//$this->testHelper->assertRevisionSummary( '@^/\* *wbmergeitems-to:0\|\|Q2 *\*/ *CustomSummary$@', $fromRevId, 'summary for source item' );
 		$this->testHelper->assertRevisionSummary( '@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@', $toRevId, 'summary for target item' );
+	}
+
+	private function assertRedirectWorks( $expectedFrom, $fromId, $toId ) {
+		if ( empty( $expectedFrom ) ) {
+
+			try {
+				$this->testHelper->getEntity( $fromId );
+				$this->fail( 'getEntity( ' . $fromId->getSerialization() . ' ) did not throw an UnresolvedRedirectException' );
+			} catch ( UnresolvedRedirectException $ex ) {
+				$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
+			}
+
+		} else {
+			$actualFrom = $this->testHelper->getEntity( $fromId );
+			$this->testHelper->assertEntityEquals( $expectedFrom, $actualFrom, 'modified source item' );
+		}
 	}
 
 	public function mergeFailureProvider() {
