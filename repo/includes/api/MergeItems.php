@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -22,6 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Daniel Kinzler
+ * @author Lucie-Aimée Kaffee
  */
 class MergeItems extends ApiBase {
 
@@ -67,10 +67,10 @@ class MergeItems extends ApiBase {
 				$wikibaseRepo->getEntityStore(),
 				$wikibaseRepo->getEntityPermissionChecker(),
 				$wikibaseRepo->getSummaryFormatter(),
-				$this->getUser()
-			)
+				$this->getUser(),
+                                $wikibaseRepo->getRedirectCreator( $this->getUser(), $this->getContext() )
+                        )
 		);
-
 	}
 
 	public function setServices(
@@ -130,8 +130,10 @@ class MergeItems extends ApiBase {
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
 		} catch ( ItemMergeException $ex ) {
-			$this->handleItemMergeException( $ex );
-		}
+			$this->handleException( $ex );
+		} catch ( RedirectCreationException $ex ) {
+                        $this->handleException( $ex );
+                }
 	}
 
 	/**
@@ -151,11 +153,11 @@ class MergeItems extends ApiBase {
 	}
 
 	/**
-	 * @param ItemMergeException $ex
+	 * @param Exception $ex
 	 *
 	 * @throws UsageException always
 	 */
-	private function handleItemMergeException( ItemMergeException $ex ) {
+	private function handleException( Exception $ex ) {
 		$cause = $ex->getPrevious();
 
 		if ( $cause ) {
@@ -206,7 +208,14 @@ class MergeItems extends ApiBase {
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'bot' => false
+			'bot' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
+			),
+			'token' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => 'true',
+			)
 		);
 	}
 
@@ -234,5 +243,4 @@ class MergeItems extends ApiBase {
 	public function isWriteMode() {
 		return true;
 	}
-
 }
