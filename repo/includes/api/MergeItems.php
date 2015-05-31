@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -22,6 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Daniel Kinzler
+ * @author Lucie-Aimée Kaffee
  */
 class MergeItems extends ApiBase {
 
@@ -38,7 +38,7 @@ class MergeItems extends ApiBase {
 	/**
 	 * @var ItemMergeInteractor
 	 */
-	private $interactor;
+	private $interactorMerge;
 
 	/**
 	 * @var ResultBuilder
@@ -68,7 +68,8 @@ class MergeItems extends ApiBase {
 				$wikibaseRepo->getEntityPermissionChecker(),
 				$wikibaseRepo->getSummaryFormatter(),
 				$this->getUser()
-			)
+			),
+                        $wikibaseRepo->getRedirectCreator( $this->getUser(), $this->getContext() )
 		);
 
 	}
@@ -77,12 +78,12 @@ class MergeItems extends ApiBase {
 		EntityIdParser $idParser,
 		ApiErrorReporter $errorReporter,
 		ResultBuilder $resultBuilder,
-		ItemMergeInteractor $interactor
+		ItemMergeInteractor $interactorMerge
 	) {
 		$this->idParser = $idParser;
 		$this->errorReporter = $errorReporter;
 		$this->resultBuilder = $resultBuilder;
-		$this->interactor = $interactor;
+		$this->interactorMerge = $interactorMerge;
 	}
 
 	/**
@@ -129,8 +130,8 @@ class MergeItems extends ApiBase {
 			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $params['bot'] );
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
-		} catch ( ItemMergeException $ex ) {
-			$this->handleItemMergeException( $ex );
+		} catch ( Exception $ex ) {
+			$this->handleException( $ex );
 		}
 	}
 
@@ -142,7 +143,7 @@ class MergeItems extends ApiBase {
 	 * @param bool $bot
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary, $bot ) {
-		list( $newRevisionFrom, $newRevisionTo ) = $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $bot );
+		list( $newRevisionFrom, $newRevisionTo ) = $this->interactorMerge->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $bot );
 
 		$this->resultBuilder->setValue( null, 'success', 1 );
 
@@ -151,11 +152,11 @@ class MergeItems extends ApiBase {
 	}
 
 	/**
-	 * @param ItemMergeException $ex
+	 * @param Exception $ex
 	 *
 	 * @throws UsageException always
 	 */
-	private function handleItemMergeException( ItemMergeException $ex ) {
+	private function handleException( Exception $ex ) {
 		$cause = $ex->getPrevious();
 
 		if ( $cause ) {
@@ -206,7 +207,14 @@ class MergeItems extends ApiBase {
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'bot' => false
+			'bot' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
+			),
+			'token' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => 'true',
+			)
 		);
 	}
 
@@ -234,5 +242,4 @@ class MergeItems extends ApiBase {
 	public function isWriteMode() {
 		return true;
 	}
-
 }
