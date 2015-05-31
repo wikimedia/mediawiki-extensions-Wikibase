@@ -39,11 +39,6 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_property_info table." );
 		}
 
-		$settings = Settings::singleton();
-		if ( !$settings->getSetting( 'usePropertyInfoTable' ) ) {
-			$this->markTestSkipped( "Skipping because wb_property_info isn't configured." );
-		}
-
 		$this->tablesUsed[] = 'wb_property_info';
 	}
 
