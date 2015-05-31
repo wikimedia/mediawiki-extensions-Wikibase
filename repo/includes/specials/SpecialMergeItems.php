@@ -64,7 +64,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 				$wikibaseRepo->getEntityStore(),
 				$wikibaseRepo->getEntityPermissionChecker(),
 				$wikibaseRepo->getSummaryFormatter(),
-				$this->getUser()
+				$this->getUser(),
+				$wikibaseRepo->getRedirectCreator( $this->getUser(), $this->getContext() )
 			)
 		);
 	}
