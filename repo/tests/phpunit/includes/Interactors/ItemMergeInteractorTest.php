@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
@@ -60,6 +61,17 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		) );
 	}
 
+	public function getMockEditFilterHookRunner() {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+			->setMethods( array( 'run' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+		return $mock;
+	}
+
 	/**
 	 * @return EntityPermissionChecker
 	 */
@@ -106,7 +118,15 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			$this->mockRepository,
 			$this->getPermissionCheckers(),
 			$summaryFormatter,
-			$user
+			$user,
+			new RedirectCreationInteractor(
+				$this->mockRepository,
+				$this->mockRepository,
+				$this->getPermissionCheckers(),
+				$summaryFormatter,
+				$user,
+				$this->getMockEditFilterHookRunner()
+			)
 		);
 
 		return $interactor;
