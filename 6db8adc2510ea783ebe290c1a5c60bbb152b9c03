@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_1e7b75be",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-05-31T15:37:36Z",
+      "side": 1,
+      "message": "$InteractorRedirect;\nto\n$interactorRedirect;\n\nAlso phpdoc",
+      "revId": "6db8adc2510ea783ebe290c1a5c60bbb152b9c03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_7e7401cd",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-05-31T15:37:36Z",
+      "side": 1,
+      "message": "$wikibaseRepo \u003d WikibaseRepo::getDefaultInstance();\n\nThus there is no need to keep calling getDefaultInstance() with all of this new stuff! :)",
+      "revId": "6db8adc2510ea783ebe290c1a5c60bbb152b9c03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_9e676522",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-05-31T15:37:36Z",
+      "side": 1,
+      "message": "The code in both of these handle exception methods is Identical, the only difference is the typehint.\n\nProbably best to have a general handleItemMergeException with no typehint.\n\nWe always know what type of exceptions we are passing into the method on around line 150!",
+      "revId": "6db8adc2510ea783ebe290c1a5c60bbb152b9c03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_fe89d1cb",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-05-31T15:37:36Z",
+      "side": 1,
+      "message": "token doesn\u0027t seem to be specified in any of our API modules\nThere could be a reason for this, maybe not\n\nSome core API modules (that require a token) also dont specify \u0027token\u0027 in this method (again, some do)!\n\nMight be worth doing some digging and see if this is needed or not across the board and changing them all at once!",
+      "revId": "6db8adc2510ea783ebe290c1a5c60bbb152b9c03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5e9b3d1b",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-05-31T15:37:36Z",
+      "side": 1,
+      "message": "This is already set by the base as we set needsToken above (line 224ish) thus not needed here",
+      "revId": "6db8adc2510ea783ebe290c1a5c60bbb152b9c03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
