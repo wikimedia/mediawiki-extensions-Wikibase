@@ -14,7 +14,7 @@ use Traversable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapValueHasher implements MapHasher {
+class MapValueHasher {
 
 	private $isOrdered;
 
