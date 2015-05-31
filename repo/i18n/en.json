@@ -210,7 +210,7 @@
 	"wikibase-mergeitems-fromid": "The id to merge from",
 	"wikibase-mergeitems-toid": "The id to merge to",
 	"wikibase-mergeitems-submit": "Merge items",
-	"wikibase-mergeitems-success": "$1 was successfully merged into $3.",
+	"wikibase-mergeitems-success": "$1 was successfully merged into $3 and redirected.",
 	"wikibase-itemmerge-missing-parameter": "Incomplete input.",
 	"wikibase-itemmerge-not-item": "The specified entity is not an Item.",
 	"wikibase-itemmerge-failed-save": "Failed to save item.",
