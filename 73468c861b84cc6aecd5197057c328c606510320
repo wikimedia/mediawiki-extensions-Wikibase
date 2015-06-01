@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_149ef166",
+        "filename": "repo/includes/EntityIdFormatterProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T13:40:36Z",
+      "side": 1,
+      "message": "I don\u0027t like the term \"Provider\" here; it should be reserved for an interface that has a getEntityIdFormatter() method with no parameters.\n\nThis is really an EntityIdFormatterFactory, though with a different signature from the existing EntityIdFormatterFactory. Maybe FallbackEntityIdFormatterFactory would be a good name?",
+      "revId": "73468c861b84cc6aecd5197057c328c606510320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_54e6b912",
+        "filename": "repo/includes/EntityIdFormatterProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T13:40:36Z",
+      "side": 1,
+      "message": "could be optional",
+      "revId": "73468c861b84cc6aecd5197057c328c606510320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_14f031c3",
+        "filename": "repo/includes/EntityIdFormatterProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T13:40:36Z",
+      "side": 1,
+      "message": "Why pass the EntityIdFormatterFactory here, and not in the constructor? Is it expected that a single EntityIdFormatterProvider instance will operate with multiple different EntityIdFormatterFactories?",
+      "revId": "73468c861b84cc6aecd5197057c328c606510320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_3499b580",
+        "filename": "repo/includes/EntityIdFormatterProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T13:40:36Z",
+      "side": 1,
+      "message": "The flags should be in a member and there should be getters/setters. The default should be what is given here, though.",
+      "revId": "73468c861b84cc6aecd5197057c328c606510320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_34ebf5dc",
+        "filename": "repo/includes/EntityIdFormatterProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T13:40:36Z",
+      "side": 1,
+      "message": "The buffer should probably be optional.",
+      "revId": "73468c861b84cc6aecd5197057c328c606510320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f4a80d76",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T13:40:36Z",
+      "side": 1,
+      "message": "Not sure this is needed in the top level factory. Maybe static composition would be ok for constructing a EntityIdFormatterProvider. It\u0027s essentially a helper/glue class, not really a service.",
+      "revId": "73468c861b84cc6aecd5197057c328c606510320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_14a4b19d",
+        "filename": "repo/tests/phpunit/includes/EntityIdFormatterProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T13:40:36Z",
+      "side": 1,
+      "message": "ws",
+      "revId": "73468c861b84cc6aecd5197057c328c606510320",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
