@@ -20,7 +20,7 @@ use Wikibase\SqlIdGenerator;
 class SqlIdGeneratorTest extends \MediaWikiTestCase {
 
 	public function testGetNewId() {
-		$generator = new SqlIdGenerator( wfGetLB(), array() );
+		$generator = new SqlIdGenerator( wfGetLB() );
 
 		$id = $generator->getNewId( 'wikibase-kittens' );
 		$this->assertSame( 1, $id );

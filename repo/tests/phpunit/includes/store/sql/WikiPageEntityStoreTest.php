@@ -70,7 +70,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory( $typeMap ),
-			new SqlIdGenerator( wfGetLB(), array() )
+			new SqlIdGenerator( wfGetLB() )
 		);
 
 		return array( $store, $lookup );
