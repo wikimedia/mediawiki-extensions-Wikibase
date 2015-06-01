@@ -17,7 +17,7 @@
 
   <owl:Ontology rdf:about="&wikibase;">
     <rdfs:label>Wikibase system ontology</rdfs:label>
-    <rdfs:comment>The system ontology of Wikibase, which is used to describe the user-created content.</rdfs:comment>
+    <rdfs:comment>The system ontology of Wikibase</rdfs:comment>
     <rdfs:seeAlso rdf:resource="https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format" />
   </owl:Ontology>
 
