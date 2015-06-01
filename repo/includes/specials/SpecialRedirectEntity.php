@@ -57,17 +57,9 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 			new TokenCheckInteractor(
 				$this->getUser()
 			),
-			new RedirectCreationInteractor(
-				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-				$wikibaseRepo->getEntityStore(),
-				$wikibaseRepo->getEntityPermissionChecker(),
-				$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getRedirectCreator(
 				$this->getUser(),
-				new EditFilterHookRunner(
-					$wikibaseRepo->getEntityTitleLookup(),
-					$wikibaseRepo->getEntityContentFactory(),
-					$this->getContext()
-				)
+				$this->getContext()
 			)
 		);
 	}

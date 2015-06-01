@@ -7,11 +7,13 @@ use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
+use IContextSource;
 use RuntimeException;
 use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
 use StubObject;
+use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Api\ApiHelperFactory;
@@ -65,6 +67,8 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
@@ -305,6 +309,21 @@ class WikibaseRepo {
 	 */
 	public function getEntityRevisionLookup( $uncached = '' ) {
 		return $this->getStore()->getEntityRevisionLookup( $uncached );
+	}
+
+	public function getRedirectCreator( User $user, IContextSource $context ) {
+		return new RedirectCreationInteractor(
+			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityStore(),
+			$this->getEntityPermissionChecker(),
+			$this->getSummaryFormatter(),
+			$user,
+			new EditFilterHookRunner(
+				$this->getEntityTitleLookup(),
+				$this->getEntityContentFactory(),
+				$context
+			)
+		);
 	}
 
 	/**
