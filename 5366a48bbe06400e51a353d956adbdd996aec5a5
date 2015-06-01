@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_a0bb1bdd",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGeneratorFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-01T19:03:21Z",
+      "side": 1,
+      "message": "There is something to be said for not having one huge factory. For instance having the SerializerFactory is great, since otherwise we\u0027d need to stuff a bunch of additional things in WikibaseClient and WikibaseRepo (and have less encapsulation). This factory currently does not seem to be helping much with that though. So yeah, putting it into the top level factory and then perhaps considering a better way to organize things seems like a good idea to me.",
+      "parentUuid": "0ed113e2_caa8cb76",
+      "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_6b79af29",
         "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
         "patchSetId": 6
