@@ -19,12 +19,12 @@ class DataTypeSelector {
 	/**
 	 * @var DataType[]
 	 */
-	protected $dataTypes;
+	private $dataTypes;
 
 	/**
 	 * @var string
 	 */
-	protected $languageCode;
+	private $languageCode;
 
 	/**
 	 * @since 0.4
