@@ -14,7 +14,7 @@ use Traversable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapValueHasher implements MapHasher {
+class MapValueHasher {
 
 	private $isOrdered;
 
@@ -23,7 +23,7 @@ class MapValueHasher implements MapHasher {
 	}
 
 	/**
-	 * @see MapHasher::hash
+	 * Computes and returns the hash of the provided map.
 	 *
 	 * @since 0.1
 	 *
