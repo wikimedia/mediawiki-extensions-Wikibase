@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_b44e059a",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-01T14:44:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure I really agree with this new @throws tag\nThe Exception isn\u0027t really thrown here, all seems a bit odd",
+      "revId": "aea9527b114dc090e0b335f962cc27241ccb6de4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f409ed34",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdater.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-01T14:44:44Z",
+      "side": 1,
+      "message": "This is not unused",
+      "revId": "aea9527b114dc090e0b335f962cc27241ccb6de4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_e7185d7c",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-01T14:44:44Z",
+      "side": 1,
+      "message": "This probably belongs in SqlUsageTracker, it is and SQL table name after all.\nclasses that implement this interface may not do anything with SQL",
+      "revId": "aea9527b114dc090e0b335f962cc27241ccb6de4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
