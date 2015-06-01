@@ -1,5 +1,9 @@
 # Wikibase JavaScript API
 
+JavaScript client for the Wikibase Repository web API.
+
+[![Latest Stable Version](https://poser.pugx.org/wikibase/javascript-api/version.png)](https://packagist.org/packages/wikibase/javascript-api)
+
 ## Release notes
 
 ### 1.0.3 (2015-05-21)
