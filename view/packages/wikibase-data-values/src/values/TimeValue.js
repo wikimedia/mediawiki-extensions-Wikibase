@@ -29,17 +29,17 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	this._time = {};
 
 	try {
-		var matches = /^([-+]?\d+)-(\d+)-(\d+)T(\d{2}):(\d{2}):(\d{2})Z$/.exec( timestamp );
+		var matches = /^([-+]?\d+)-(\d+)-(\d+)T(?:(\d+):(\d+)(?::(\d+))?Z?)?$/.exec( timestamp );
 
 		// Strip additional leading zeros from the year, but keep 4 digits.
 		this._time.year = matches[1].replace( /\b0+(?=\d{4})/, '' );
 		this._time.month = parseInt( matches[2], 10 );
 		this._time.day = parseInt( matches[3], 10 );
-		this._time.hour = parseInt( matches[4], 10 );
-		this._time.minute = parseInt( matches[5], 10 );
-		this._time.second = parseInt( matches[6], 10 );
+		this._time.hour = parseInt( matches[4] || 0, 10 );
+		this._time.minute = parseInt( matches[5] || 0, 10 );
+		this._time.second = parseInt( matches[6] || 0, 10 );
 	} catch( e ) {
-		throw new Error( 'Unable to process supposed timestamp string' );
+		throw new Error( 'Unable to process timestamp "' + timestamp + '"' );
 	}
 
 	this._options = {

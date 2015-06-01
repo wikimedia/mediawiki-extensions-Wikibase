@@ -16,6 +16,7 @@
 	"unused": "vars",
 	"laxbreak": true,
 	"laxcomma": false,
+	"loopfunc": true,
 	"onevar": false,
 	"bitwise": false,
 	"forin": false,
