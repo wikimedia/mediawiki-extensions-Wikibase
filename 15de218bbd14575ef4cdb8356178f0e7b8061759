@@ -16,6 +16,24 @@
       "revId": "15de218bbd14575ef4cdb8356178f0e7b8061759",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_c72519aa",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-01T14:53:33Z",
+      "side": 1,
+      "message": "I implemented and benchmarked both. It\u0027s incredible how much faster a hash table lookup is. As said in the commit message I belief this is relevant. Both the arrays of $requiredGuids and $existingGuids may contain several hundred elements. I belief this is worth the additional milliseconds needed for the flip.",
+      "parentUuid": "0ed113e2_b41605ab",
+      "revId": "15de218bbd14575ef4cdb8356178f0e7b8061759",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
