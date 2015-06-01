@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_b41605ab",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-01T13:52:41Z",
+      "side": 1,
+      "message": "Rather than confusingly making the guid the array key and value null\nand then flipping the requiredGuids and then using array_diff_key\n\nWhy not just add the guids to an array and use array_diff (without the need to flip)?",
+      "revId": "15de218bbd14575ef4cdb8356178f0e7b8061759",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
