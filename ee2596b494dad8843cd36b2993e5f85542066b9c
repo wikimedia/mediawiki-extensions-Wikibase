@@ -16,6 +16,24 @@
       "revId": "ee2596b494dad8843cd36b2993e5f85542066b9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_477609d5",
+        "filename": "composer.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2015-06-01T15:41:09Z",
+      "side": 0,
+      "message": "It is loaded here https://gerrit.wikimedia.org/r/#/c/211384/16/repo/extension.json If you go down to autoload it should show there.",
+      "parentUuid": "0ed113e2_e7f4ddbb",
+      "revId": "ee2596b494dad8843cd36b2993e5f85542066b9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
