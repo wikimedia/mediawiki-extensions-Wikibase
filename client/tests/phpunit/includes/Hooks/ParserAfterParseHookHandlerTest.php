@@ -357,7 +357,7 @@ class ParserAfterParseHookHandlerTest extends MediaWikiTestCase {
 		$handler = $this->newParserAfterParseHookHandler();
 
 		$text = '';
-		$stripState = new StripState( 'x' );
+		$stripState = new StripState;
 		$handler->doParserAfterParse( $parser, $text, $stripState );
 
 		$parserOutput = $parser->getOutput();
