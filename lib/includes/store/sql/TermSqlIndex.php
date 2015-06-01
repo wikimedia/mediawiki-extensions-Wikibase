@@ -332,7 +332,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			'term_language' => $term->getLanguage(),
 			'term_type' => $term->getType(),
 			'term_text' => $term->getText(),
-			'term_search_key' => $this->getSearchKey( $term->getText(), $term->getLanguage() )
+			'term_search_key' => $this->getSearchKey( $term->getText() )
 		);
 
 		return $fields;
@@ -724,7 +724,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 			if ( !$options['caseSensitive'] ) {
 				$textField = 'term_search_key';
-				$text = $this->getSearchKey( $term->getText(), $term->getLanguage() );
+				$text = $this->getSearchKey( $term->getText() );
 			}
 
 			if ( $options['prefixSearch'] ) {
@@ -892,8 +892,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 			$matchConditions = array(
 				'L.term_language' => $lang,
-				'L.term_search_key' => $this->getSearchKey( $label, $lang ),
-				'D.term_search_key' => $this->getSearchKey( $description, $lang )
+				'L.term_search_key' => $this->getSearchKey( $label ),
+				'D.term_search_key' => $this->getSearchKey( $description )
 			);
 
 			$termConditions[] = $dbr->makeList( $matchConditions, LIST_AND );
@@ -953,12 +953,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @since 0.4
 	 *
 	 * @param string $text
-	 * @param string $lang language code of the text's language, may be used
-	 *                     for specialized normalization.
 	 *
 	 * @return string
 	 */
-	public function getSearchKey( $text, $lang = 'en' ) {
+	public function getSearchKey( $text ) {
 		if ( $text === null ) {
 			return null;
 		}
