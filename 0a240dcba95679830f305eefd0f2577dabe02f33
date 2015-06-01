@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_e594d5ec",
+        "filename": "client/includes/Usage/PageEntityUsages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-06-01T18:34:32Z",
+      "side": 1,
+      "message": "the comment is confusing. do you mean \"use getAspectKeys()\"?",
+      "revId": "0a240dcba95679830f305eefd0f2577dabe02f33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
