@@ -34,8 +34,8 @@ define( [
 		 */
 		getConstructorArguments: function() {
 			return [
-				[ 'sometype', {}, new Error( 'some error' ) ],
-				[ 'another-type', { foo: 'bar' }, new Error( 'another error' ) ]
+				[ {}, 'sometype', 'some error' ],
+				[ { foo: 'bar' }, 'another-type', 'another error' ]
 			];
 		},
 
@@ -65,27 +65,6 @@ define( [
 				);
 			}
 		},
-
-		/**
-		 * @see dv.tests.DataValueTest.testNewFromJSON
-		 *
-		 * skip
-		 */
-		testNewFromJSON: null,
-
-		/**
-		 * @see dv.tests.DataValueTest.testToJSON
-		 *
-		 * skip
-		 */
-		testToJSON: null,
-
-		/**
-		 * @see dv.tests.DataValueTest.testJsonRoundtripping
-		 *
-		 * skip
-		 */
-		testJsonRoundtripping: null,
 
 		/**
 		 * @see dv.tests.DataValueTest.testJsonRoundtripping
