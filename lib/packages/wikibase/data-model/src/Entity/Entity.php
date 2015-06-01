@@ -58,7 +58,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return string
 	 */
 	public function setLabel( $languageCode, $value ) {
-		$this->fingerprint->getLabels()->setTerm( new Term( $languageCode, $value ) );
+		$this->fingerprint->setLabel( $languageCode, $value );
 		return $value;
 	}
 
@@ -73,7 +73,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return string
 	 */
 	public function setDescription( $languageCode, $value ) {
-		$this->fingerprint->getDescriptions()->setTerm( new Term( $languageCode, $value ) );
+		$this->fingerprint->setDescription( $languageCode, $value );
 		return $value;
 	}
 
@@ -85,7 +85,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string $languageCode
 	 */
 	public function removeLabel( $languageCode ) {
-		$this->fingerprint->getLabels()->removeByLanguage( $languageCode );
+		$this->fingerprint->removeLabel( $languageCode );
 	}
 
 	/**
@@ -96,7 +96,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string $languageCode
 	 */
 	public function removeDescription( $languageCode ) {
-		$this->fingerprint->getDescriptions()->removeByLanguage( $languageCode );
+		$this->fingerprint->removeDescription( $languageCode );
 	}
 
 	/**
@@ -154,7 +154,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string[] $aliases
 	 */
 	public function setAliases( $languageCode, array $aliases ) {
-		$this->fingerprint->getAliasGroups()->setGroup( new AliasGroup( $languageCode, $aliases ) );
+		$this->fingerprint->setAliasGroup( $languageCode, $aliases );
 	}
 
 	/**
@@ -232,11 +232,11 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return string|bool
 	 */
 	public function getDescription( $languageCode ) {
-		if ( !$this->fingerprint->getDescriptions()->hasTermForLanguage( $languageCode ) ) {
+		if ( !$this->fingerprint->hasDescription( $languageCode ) ) {
 			return false;
 		}
 
-		return $this->fingerprint->getDescriptions()->getByLanguage( $languageCode )->getText();
+		return $this->fingerprint->getDescription( $languageCode )->getText();
 	}
 
 	/**
@@ -250,11 +250,11 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return string|bool
 	 */
 	public function getLabel( $languageCode ) {
-		if ( !$this->fingerprint->getLabels()->hasTermForLanguage( $languageCode ) ) {
+		if ( !$this->fingerprint->hasLabel( $languageCode ) ) {
 			return false;
 		}
 
-		return $this->fingerprint->getLabels()->getByLanguage( $languageCode )->getText();
+		return $this->fingerprint->getLabel( $languageCode )->getText();
 	}
 
 	/**
