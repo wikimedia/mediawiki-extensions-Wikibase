@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_d48e292a",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-01T13:39:52Z",
+      "side": 1,
+      "message": "Unused.",
+      "revId": "68c986471fbf30eb4fd4fe731869b93e2502999d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_54947946",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-01T13:39:52Z",
+      "side": 1,
+      "message": "Unused.",
+      "revId": "68c986471fbf30eb4fd4fe731869b93e2502999d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
