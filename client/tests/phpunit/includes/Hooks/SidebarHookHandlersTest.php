@@ -19,7 +19,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\NamespaceChecker;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
 
@@ -81,7 +80,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @param array $settings
 	 *
-	 * @return Settings
+	 * @return SettingsArray
 	 */
 	private function newSettings( array $settings ) {
 		$defaults = array(
