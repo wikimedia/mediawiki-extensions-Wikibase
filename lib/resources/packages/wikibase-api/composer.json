@@ -1,6 +1,6 @@
 {
 	"name": "wikibase/javascript-api",
-	"description": "Wikibase API client in JavaScript",
+	"description": "JavaScript client for the Wikibase Repository web API",
 	"require": {
 		"data-values/javascript": "~0.6.0|~0.7.0"
 	},
