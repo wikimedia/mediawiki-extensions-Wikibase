@@ -524,7 +524,7 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @param FormatterOptions $options
 	 *
-	 * @return EntityIdLabelFormatter
+	 * @return ValueFormatter
 	 */
 	private function newEntityIdFormatter( FormatterOptions $options ) {
 		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
