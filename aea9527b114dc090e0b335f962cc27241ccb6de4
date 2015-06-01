@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_eabfc4a5",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-01T16:33:31Z",
+      "side": 1,
+      "message": "Sure it is: catch ( Exception $ex ) ... throw $ex. PHPStorm understands this code and complains, that\u0027s why I added this line.",
+      "parentUuid": "0ed113e2_b44e059a",
+      "revId": "aea9527b114dc090e0b335f962cc27241ccb6de4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f409ed34",
         "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdater.php",
         "patchSetId": 10
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_ead6e4f5",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdater.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-01T16:33:31Z",
+      "side": 1,
+      "message": "What have I done? o_O Will fix.",
+      "parentUuid": "0ed113e2_f409ed34",
+      "revId": "aea9527b114dc090e0b335f962cc27241ccb6de4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_e7185d7c",
         "filename": "client/includes/Usage/UsageTracker.php",
         "patchSetId": 10
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-01T14:44:44Z",
       "side": 1,
       "message": "This probably belongs in SqlUsageTracker, it is and SQL table name after all.\nclasses that implement this interface may not do anything with SQL",
+      "revId": "aea9527b114dc090e0b335f962cc27241ccb6de4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_aa00dc6d",
+        "filename": "client/includes/Usage/UsageTracker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-01T16:33:31Z",
+      "side": 1,
+      "message": "Sounds good. I remember Daniel saying the same. Thanks! Will do.",
+      "parentUuid": "0ed113e2_e7185d7c",
       "revId": "aea9527b114dc090e0b335f962cc27241ccb6de4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
