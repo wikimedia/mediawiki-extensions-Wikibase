@@ -23,7 +23,7 @@ class MapValueHasher {
 	}
 
 	/**
-	 * @see MapHasher::hash
+	 * Computes and returns the hash of the provided map.
 	 *
 	 * @since 0.1
 	 *
