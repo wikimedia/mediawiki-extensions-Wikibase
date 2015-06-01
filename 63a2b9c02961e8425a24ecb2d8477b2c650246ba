@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_71a98fdb",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T10:53:26Z",
+      "side": 1,
+      "message": "That would hide violations of the method\u0027s interface. Parameter assertions go first, bore any short-cirquit checks.",
+      "parentUuid": "0ed113e2_9508e930",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_905c771f",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-21T18:46:08Z",
       "side": 1,
       "message": "* Reads like \"WHERE pageId \u003e\u003d 0\". :-(\n* Please remove the two parameters, they are optional anyway.\n* I suggest to change the operator parameter to a bool because there are only 2 cases. No, wait, this is not well readable. I suggest to have a switch with only two cases, \u0027\u003c\u0027 and \u0027\u003e\u003d\u0027, nothing else.",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_91ac33ed",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T10:53:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_905c771f",
       "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_51aecbe3",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T10:53:26Z",
+      "side": 1,
+      "message": "It\u0027s a public method, you don\u0027t know how, when and where it\u0027s going to be called.\nempty() with a string is however bad. I\u0027ll change it to a more explicit check.",
+      "parentUuid": "0ed113e2_708c7389",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_b0bbbb08",
         "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
         "patchSetId": 12
@@ -64,6 +118,24 @@
       "writtenOn": "2015-05-21T18:46:08Z",
       "side": 1,
       "message": "The order is a bit arbitary. I prefer services first.",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_31e1c729",
+        "filename": "client/includes/Usage/Sql/UsageTableUpdater.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T10:53:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_b0bbbb08",
       "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +204,24 @@
       "writtenOn": "2015-05-21T18:46:08Z",
       "side": 1,
       "message": "Could check for strlen 14. ;-)",
+      "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_5169eb87",
+        "filename": "client/includes/store/UsageUpdater.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-01T10:53:26Z",
+      "side": 1,
+      "message": "Well, $touched really supports any format suported by wfTimestamp.",
+      "parentUuid": "0ed113e2_7554652a",
       "revId": "63a2b9c02961e8425a24ecb2d8477b2c650246ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
