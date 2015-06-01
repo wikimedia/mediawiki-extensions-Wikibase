@@ -249,13 +249,13 @@ abstract class ApiWikibase extends ApiBase {
 	/**
 	 * Check the rights for the user accessing the module.
 	 *
-	 * @param $entity Entity the entity to check
+	 * @param $entity EntityDocument the entity to check
 	 * @param $user User doing the action
 	 *
 	 * @return Status the check's result
 	 * @todo: use this also to check for read access in ApiGetEntities, etc
 	 */
-	protected function checkPermissions( Entity $entity, User $user ) {
+	protected function checkPermissions( EntityDocument $entity, User $user ) {
 		$permissions = $this->getRequiredPermissions( $entity );
 		$status = Status::newGood();
 
