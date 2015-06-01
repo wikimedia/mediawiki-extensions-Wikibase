@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_e7f4ddbb",
+        "filename": "composer.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-01T15:08:13Z",
+      "side": 0,
+      "message": "You say this is now loaded in Wikibase.php, but I don\u0027t see it there.",
+      "revId": "ee2596b494dad8843cd36b2993e5f85542066b9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
