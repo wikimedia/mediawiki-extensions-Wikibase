@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Toliño",
-			"Banjo"
+			"Banjo",
+			"Elisardojm"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensión Wikibase",
@@ -11,9 +12,9 @@
 	"apihelp-query+pageterms-example-simple": "Obter todos os termos asociados á páxina \"London\", na lingua do usuario.",
 	"apihelp-query+pageterms-example-label-en": "Obter as etiquetas e os pseudónimos asociados á páxina \"London\", en inglés.",
 	"apihelp-query+pageterms-param-terms": "O tipo de termos que se obteñen; por exemplo, \"description\". Se non se especifica, devólvense todos os tipos.",
-	"apihelp-query+wikibase-description": "Obter a información sobre o repositorio de Wikibase asociado.",
-	"apihelp-query+wikibase-example": "Obter a ruta URL e outra información para o repositorio de Wikibase.",
-	"apihelp-query+wikibase-param-prop": "As propiedades que se obteñen:\n;<kbd>url</kbd>: URL base, ruta da escritura e ruta do artigo.",
+	"apihelp-query+wikibase-description": "Obter a información sobre o cliente Wikibase e o repositorio de Wikibase asociado.",
+	"apihelp-query+wikibase-example": "Obter a ruta URL e outra información sobre o cliente e o repositorio de Wikibase.",
+	"apihelp-query+wikibase-param-prop": "As propiedades que se obteñen:\n;<kbd>url</kbd>: URL base, ruta da de secuencia de ordes e ruta do artigo do repositorio de Wikibase.\n;<kbd>siteid</kbd>: o identificador deste sitio.",
 	"wikibase-after-page-move": "Tamén pode [$1 actualizar] o elemento asociado de {{WBREPONAME}} para manter as ligazóns lingüísticas na páxina trasladada.",
 	"wikibase-after-page-move-queued": "O [$1 elemento de {{WBREPONAME}}] asociado a esta páxina ha actualizarse automaticamente axiña.",
 	"wikibase-after-page-delete": "Tamén pode eliminar a ligazón cara a esta páxina do [$1 {{WBREPONAME}} elemento] asociado para manter as ligazóns lingüísticas.",
