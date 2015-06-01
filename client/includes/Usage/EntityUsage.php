@@ -172,11 +172,11 @@ class EntityUsage {
 	 * @return string "$aspect.$modifier"
 	 */
 	public static function makeAspectKey( $aspect, $modifier ) {
-		if ( $modifier !== null ) {
-			return "$aspect.$modifier";
-		} else {
+		if ( $modifier === null ) {
 			return $aspect;
 		}
+
+		return "$aspect.$modifier";
 	}
 
 }
