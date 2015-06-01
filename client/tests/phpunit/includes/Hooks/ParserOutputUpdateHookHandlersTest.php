@@ -18,6 +18,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -89,11 +90,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	 */
 	private function newItem( ItemId $id, array $links ) {
 		$item = new Item( $id );
-
-		foreach ( $links as $link ) {
-			$item->addSiteLink( $link );
-		}
-
+		$item->setSiteLinkList( new SiteLinkList( $links ) );
 		return $item;
 	}
 
