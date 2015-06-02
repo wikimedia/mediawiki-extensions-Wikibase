@@ -131,7 +131,7 @@ class SpecialListProperties extends SpecialWikibasePage {
 
 	private function showForm() {
 		$dataTypeSelect = new DataTypeSelector(
-			$this->dataTypeFactory->getTypes() + array( 'all' ),
+			$this->dataTypeFactory->getTypes(),
 			$this->getLanguage()->getCode()
 		);
 
