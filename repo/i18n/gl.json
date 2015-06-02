@@ -543,6 +543,7 @@
 	"apihelp-wbsetclaim-param-bot": "Marcar esta edición como bot. Esta etiqueta de URL só será respectada se o usuario pertence ó grupo \"bot\".",
 	"apihelp-wbsetclaim-example-1": "Fixar a afirmación co identificador indicado e a propiedade P1 coa cadea de texto co valor de \"City\" (cidade)",
 	"apihelp-wbsetclaim-example-2": "Asignar a afirmación co identificador dado á propiedade P1 coa cadea de texto con valor \"City\" (cidade) e mover a afirmación á posición superior dentro do subgrupo de afirmacións da entidade que presentan a propiedade snak P1 principal. Adicionalmente, move todo o subgrupo á parte superior de todos os subgrupos engadidos por propiedade.",
+	"apihelp-wbsetclaim-example-3": "Asignar a declaración co identificador dado á propiedade P1 cunha cadea de texto de valor \"City\" (cidade) e asignar as referencias da declaración a unha referencia simple coa cadea de texto de valor \"The Economy of Cities\" (A economía das cidades) asignada á propiedade P2.",
 	"apihelp-wbsetclaimvalue-description": "Fixa o valor dunha afirmación Wikibase.",
 	"apihelp-wbsetclaimvalue-param-claim": "GUID que identifica a afirmación",
 	"apihelp-wbsetclaimvalue-param-snaktype": "O tipo do snak",

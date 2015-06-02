@@ -15,7 +15,8 @@
 			"Zolo",
 			"Macofe",
 			"Ricordisamoa",
-			"FRacco"
+			"FRacco",
+			"Alexmar983"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -402,6 +403,7 @@
 	"apihelp-wbsearchentities-param-language": "Ricerca in questa lingua.",
 	"apihelp-wbsearchentities-param-limit": "Numero massimo di risultati",
 	"apihelp-wbsetaliases-description": "Imposta gli alias per un'entità Wikibase.",
+	"apihelp-wbsetaliases-param-bot": "Segnala questa modifica come bot. Questo flag di URL dovrà essere rispettato solo se l'utente appartiene al gruppo \"bot\".",
 	"apihelp-wbsetaliases-param-add": "Elenco degli alias da aggiungere (può essere combinato con remove)",
 	"apihelp-wbsetaliases-param-remove": "Elenco degli alias da rimuovere (può essere combinato con add)",
 	"apihelp-wbsetclaimvalue-description": "Imposta il valore di un'asserzione Wikibase.",
