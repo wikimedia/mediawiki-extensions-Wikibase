@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_e7c05232",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/UsageTableUpdaterTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-02T15:15:26Z",
+      "side": 0,
+      "message": "Ouch!",
+      "revId": "5d57a7d649653be9e02cdbb4758efd0744e0f00e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
