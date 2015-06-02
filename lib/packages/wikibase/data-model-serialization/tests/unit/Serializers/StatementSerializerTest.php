@@ -2,23 +2,22 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Serializers\ClaimSerializer;
+use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\Serializers\ClaimSerializer
+ * @covers Wikibase\DataModel\Serializers\StatementSerializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ClaimSerializerTest extends SerializerBaseTest {
+class StatementSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
 		$snakSerializerFake = $this->getMock( '\Serializers\Serializer' );
@@ -51,16 +50,13 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				)
 			) ) );
 
-		return new ClaimSerializer( $snakSerializerFake, $snaksSerializerFake, $referencesSerializerFake );
+		return new StatementSerializer( $snakSerializerFake, $snaksSerializerFake, $referencesSerializerFake );
 	}
 
 	public function serializableProvider() {
 		return array(
 			array(
-				new Claim( new PropertyNoValueSnak( 42 ) )
-			),
-			array(
-				new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) )
+				new Statement( new PropertyNoValueSnak( 42 ) )
 			),
 		);
 	}
@@ -88,9 +84,10 @@ class ClaimSerializerTest extends SerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => 'P42'
 				),
-				'type' => 'claim'
+				'type' => 'statement',
+				'rank' => 'normal'
 			),
-			new Claim( new PropertyNoValueSnak( 42 ) )
+			new Statement( new PropertyNoValueSnak( 42 ) )
 		);
 
 		$serializations[] = array(
@@ -102,39 +99,40 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'type' => 'statement',
 				'rank' => 'normal'
 			),
-			new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) )
+			new Statement( new PropertyNoValueSnak( 42 ) )
 		);
 
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'q42' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'q42' );
 		$serializations[] = array(
 			array(
 				'id' => 'q42',
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
-					'property' => "P42"
+					'property' => 'P42'
 				),
-				'type' => 'claim'
+				'type' => 'statement',
+				'rank' => 'normal'
 			),
-			$claim
+			$statement
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Statement::RANK_PREFERRED );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setRank( Statement::RANK_PREFERRED );
 		$serializations[] = array(
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
-					'property' => "P42"
+					'property' => 'P42'
 				),
 				'type' => 'statement',
 				'rank' => 'preferred'
 			),
-			$claim
+			$statement
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Statement::RANK_DEPRECATED );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setRank( Statement::RANK_DEPRECATED );
 		$serializations[] = array(
 			array(
 				'mainsnak' => array(
@@ -144,11 +142,11 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'type' => 'statement',
 				'rank' => 'deprecated'
 			),
-			$claim
+			$statement
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setQualifiers( new SnakList( array() ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setQualifiers( new SnakList( array() ) );
 		$serializations[] = array(
 			array(
 				'mainsnak' => array(
@@ -158,11 +156,11 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'type' => 'statement',
 				'rank' => 'normal'
 			),
-			$claim
+			$statement
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setQualifiers( new SnakList( array(
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setQualifiers( new SnakList( array(
 			new PropertyNoValueSnak( 42 )
 		) ) );
 		$serializations[] = array(
@@ -185,11 +183,11 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'type' => 'statement',
 				'rank' => 'normal'
 			),
-			$claim
+			$statement
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setReferences( new ReferenceList( array(
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setReferences( new ReferenceList( array(
 			new Reference( array( new PropertyNoValueSnak( 1 ) ) )
 		) ) );
 		$serializations[] = array(
@@ -207,7 +205,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 				'type' => 'statement',
 				'rank' => 'normal'
 			),
-			$claim
+			$statement
 		);
 
 		return $serializations;
@@ -228,10 +226,10 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			->will( $this->returnValue( array() ) );
 
 		$referencesSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$claimSerializer = new ClaimSerializer( $snakSerializerMock, $snaksSerializerMock, $referencesSerializerMock );
+		$statementSerializer = new StatementSerializer( $snakSerializerMock, $snaksSerializerMock, $referencesSerializerMock );
 
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setQualifiers( new SnakList( array(
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setQualifiers( new SnakList( array(
 			new PropertyNoValueSnak( 42 ),
 			new PropertySomeValueSnak( 24 ),
 			new PropertyNoValueSnak( 24 )
@@ -247,9 +245,10 @@ class ClaimSerializerTest extends SerializerBaseTest {
 					'P42',
 					'P24'
 				),
-				'type' => 'claim'
+				'type' => 'statement',
+				'rank' => 'normal'
 			),
-			$claimSerializer->serialize( $claim )
+			$statementSerializer->serialize( $statement )
 		);
 	}
 

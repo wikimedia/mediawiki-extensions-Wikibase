@@ -4,7 +4,6 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -34,14 +33,11 @@ class ClaimsSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function snaksProvider() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'test' );
 
-		$claim2 = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim2->setGuid( 'test2' );
-
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$statement->setGuid( 'teststatement' );
+		$statement2 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement2->setGuid( 'test2' );
 
 		return array(
 			array(
@@ -49,19 +45,13 @@ class ClaimsSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				new Claims( array(
-					$claim
-				) )
-			),
-			array(
-				new Claims( array(
-					$claim,
-					$claim2
-				) )
-			),
-			array(
-				new Claims( array(
-					$claim,
 					$statement
+				) )
+			),
+			array(
+				new Claims( array(
+					$statement,
+					$statement2
 				) )
 			),
 		);

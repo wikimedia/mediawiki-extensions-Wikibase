@@ -7,7 +7,7 @@ use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * Package private
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\Snaks;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SnaksSerializer implements DispatchableSerializer {
+class SnakListSerializer implements DispatchableSerializer {
 
 	/**
 	 * @var Serializer
@@ -44,13 +44,13 @@ class SnaksSerializer implements DispatchableSerializer {
 	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return $object instanceof Snaks;
+		return $object instanceof SnakList;
 	}
 
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param Snaks $object
+	 * @param SnakList $object
 	 *
 	 * @return array
 	 * @throws SerializationException
@@ -59,14 +59,14 @@ class SnaksSerializer implements DispatchableSerializer {
 		if ( !$this->isSerializerFor( $object ) ) {
 			throw new UnsupportedObjectException(
 				$object,
-				'SnaksSerializer can only serialize Snaks objects'
+				'SnakListSerializer can only serialize SnakList objects'
 			);
 		}
 
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( Snaks $snaks ) {
+	private function getSerialized( SnakList $snaks ) {
 		$serialization = array();
 
 		/**

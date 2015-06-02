@@ -3,7 +3,6 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use stdClass;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -18,7 +17,7 @@ use Wikibase\DataModel\Statement\StatementList;
 class StatementListSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
 		$statementSerializerMock = $this->getMock( '\Serializers\Serializer' );
@@ -38,7 +37,7 @@ class StatementListSerializerTest extends SerializerBaseTest {
 	}
 
 	public function serializableProvider() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
 		return array(
@@ -62,13 +61,13 @@ class StatementListSerializerTest extends SerializerBaseTest {
 				array()
 			),
 			array(
-				new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) )
+				new Statement( new PropertyNoValueSnak( 42 ) )
 			),
 		);
 	}
 
 	public function serializationProvider() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
 		return array(
@@ -97,7 +96,7 @@ class StatementListSerializerTest extends SerializerBaseTest {
 	}
 
 	public function testStatementListSerializerWithOptionObjectsForMaps() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 		$statementSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$statementSerializerMock->expects( $this->any() )

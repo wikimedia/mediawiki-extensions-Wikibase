@@ -2,7 +2,6 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Deserializers\StatementListDeserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -17,7 +16,7 @@ use Wikibase\DataModel\Statement\StatementList;
 class StatementListDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
 		$statementDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
@@ -99,7 +98,7 @@ class StatementListDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function deserializationProvider() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
 		return array(

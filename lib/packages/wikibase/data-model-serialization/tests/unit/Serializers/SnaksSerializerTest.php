@@ -3,7 +3,7 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use stdClass;
-use Wikibase\DataModel\Serializers\SnaksSerializer;
+use Wikibase\DataModel\Serializers\SnakListSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
@@ -25,7 +25,7 @@ class SnaksSerializerTest extends SerializerBaseTest {
 				'property' => "P42"
 			) ) );
 
-		return new SnaksSerializer( $snakSerializerMock, false );
+		return new SnakListSerializer( $snakSerializerMock, false );
 	}
 
 	public function serializableProvider() {
@@ -86,7 +86,7 @@ class SnaksSerializerTest extends SerializerBaseTest {
 				'snaktype' => 'novalue',
 				'property' => "P42"
 			) ) );
-		$serializer = new SnaksSerializer( $snakSerializerMock, true );
+		$serializer = new SnakListSerializer( $snakSerializerMock, true );
 
 		$snaklist = new SnakList( array( new PropertyNoValueSnak( 42 ) ) );
 
