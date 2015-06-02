@@ -127,7 +127,7 @@ Statements with rank "deprecated" are never included.
 
 An example call might look like this:
 <source lang="lua">
-entity:getStatements( 'P12' ) -- Returns a table containing the serialization of the best statements with the property id P12
+entity:getBestStatements( 'P12' ) -- Returns a table containing the serialization of the best statements with the property id P12
 </source>
 
 === mw.wikibase.entity:formatPropertyValues ===
