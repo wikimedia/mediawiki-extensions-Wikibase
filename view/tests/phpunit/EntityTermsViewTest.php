@@ -18,6 +18,7 @@ use Wikibase\View\TextInjector;
  * @uses Wikibase\View\Template\TemplateRegistry
  * @uses Wikibase\View\TextInjector
  *
+ * @group Database
  * @group Wikibase
  * @group WikibaseView
  *
