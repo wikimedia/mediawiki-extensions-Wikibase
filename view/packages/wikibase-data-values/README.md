@@ -11,11 +11,12 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
-### 0.7.0 (dev)
+### 0.7.0 (2015-06-03)
 
 #### Breaking changes
 * Renamed `dataValues.UnUnserializableValue` to `dataValues.UnDeserializableValue`.
 * Changed constructor parameter order of `dataValues.UnDeserializableValue` (formerly `dataValues.UnUnserializableValue`).
+* Implemented toJSON and newFromJSON in `dataValues.UnDeserializableValue`.
 * Removed `time.js` legacy code, including `time.Time` and `time.Parser`. Every "vital" functionality has been ported to `dataValues.TimeValue` which now may be interacted with directly instead of having to retrieve the encapsulated `time.Time` object first.
 * Removed obsolete `valueParsers.TimeParser`. Back-end parser is to be used via API.
 * Removed obsolete `mw.ext.dataValues` module as it was just overwriting the obsolete `time.js` settings. Dependencies should be updated to point directly to the `dataValues.values` module.
