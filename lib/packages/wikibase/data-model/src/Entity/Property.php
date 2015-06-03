@@ -74,6 +74,36 @@ class Property extends Entity implements StatementListHolder {
 	}
 
 	/**
+	 * @param string $languageCode
+	 * @param string $value
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function setLabel( $languageCode, $value ) {
+		$this->fingerprint->setLabel( $languageCode, $value );
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @param string $value
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function setDescription( $languageCode, $value ) {
+		$this->fingerprint->setDescription( $languageCode, $value );
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @param string[] $aliases
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function setAliases( $languageCode, array $aliases ) {
+		$this->fingerprint->setAliasGroup( $languageCode, $aliases );
+	}
+
+	/**
 	 * @since 0.1 return type changed in 0.3
 	 *
 	 * @return PropertyId|null
