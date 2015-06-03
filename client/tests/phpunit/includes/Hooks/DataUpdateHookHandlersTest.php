@@ -28,10 +28,11 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 * @param Title $title
 	 * @param EntityUsage[]|null $expectedUsages
 	 * @param string|null $touched
+	 * @param bool $prune
 	 *
 	 * @return UsageUpdater
 	 */
-	private function newUsageUpdater( Title $title, array $expectedUsages = null, $touched = null ) {
+	private function newUsageUpdater( Title $title, array $expectedUsages = null, $touched = null, $prune = true ) {
 		$usageUpdater = $this->getMockBuilder( 'Wikibase\Client\Store\UsageUpdater' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -49,9 +50,14 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 				->with( $title->getArticleID(), $expectedUsages, $touched );
 		}
 
-		$usageUpdater->expects( $this->once() )
-			->method( 'pruneUsagesForPage' )
-			->with( $title->getArticleID(), $touched );
+		if ( $prune ) {
+			$usageUpdater->expects( $this->once() )
+				->method( 'pruneUsagesForPage' )
+				->with( $title->getArticleID(), $touched );
+		} else {
+			$usageUpdater->expects( $this->never() )
+				->method( 'pruneUsagesForPage' );
+		}
 
 		return $usageUpdater;
 	}
@@ -60,11 +66,12 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 * @param Title $title
 	 * @param EntityUsage[]|null $expectedUsages
 	 * @param string|null $touched timestamp
+	 * @param bool $prune
 	 *
 	 * @return DataUpdateHookHandlers
 	 */
-	private function newDataUpdateHookHandlers( Title $title, array $expectedUsages = null, $touched = null ) {
-		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $touched );
+	private function newDataUpdateHookHandlers( Title $title, array $expectedUsages = null, $touched = null, $prune = true ) {
+		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $touched, $prune );
 
 		return new DataUpdateHookHandlers(
 			$usageUpdater
@@ -123,7 +130,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\DataUpdateHookHandlers', $handler );
 	}
 
-	public function provideDoArticleEditUpdates() {
+	public function provideLinksUpdateComplete() {
 		return array(
 			'usage' => array(
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
@@ -142,17 +149,31 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideDoArticleEditUpdates
+	 * @dataProvider provideLinksUpdateComplete
 	 */
-	public function testDoArticleEditUpdates( Title $title, $usage ) {
+	public function testLinksUpdateComplete( Title $title, $usage ) {
 		$title->resetArticleID( 23 );
 		$timestamp = '20150505000000';
 
 		$linksUpdate = $this->newLinksUpdate( $title, $usage, $timestamp );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp );
+		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, true );
 		$handler->doLinksUpdateComplete( $linksUpdate );
+	}
+
+	/**
+	 * @dataProvider provideLinksUpdateComplete
+	 */
+	public function testDoParserCacheSaveComplete( Title $title, $usage ) {
+		$title->resetArticleID( 23 );
+		$timestamp = '20150505000000';
+
+		$parserOutput = $this->newParserOutput( $usage, $timestamp );
+
+		// Assertions are done by the UsageUpdater mock
+		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, false );
+		$handler->doParserCacheSaveComplete( $parserOutput, $title );
 	}
 
 	public function testDoArticleDeleteComplete() {
@@ -161,7 +182,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$timestamp = '20150505000000';
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, null, $timestamp );
+		$handler = $this->newDataUpdateHookHandlers( $title, null, $timestamp, true );
 		$handler->doArticleDeleteComplete( $title->getNamespace(), $title->getArticleID(), $timestamp );
 	}
 
