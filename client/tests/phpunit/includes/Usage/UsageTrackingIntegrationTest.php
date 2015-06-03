@@ -8,7 +8,6 @@ use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -102,7 +101,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		global $wgUser;
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
 
 		$flags = $lookup->hasEntity( $entity->getId() ) ? EDIT_UPDATE : EDIT_NEW;
 		$store->saveEntity( $entity, 'TEST', $wgUser, $flags );
