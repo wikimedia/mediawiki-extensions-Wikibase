@@ -7,6 +7,8 @@ use MediaWikiTestCase;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -83,23 +85,27 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	}
 
 	private function createItem( ItemId $id, $label ) {
-		global $wgUser;
-
 		$item = new Item( $id );
 		$item->getFingerprint()->setLabel( 'en', $label );
 
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, 'TEST', $wgUser, EDIT_NEW );
+		$this->saveEntity( $item );
 	}
 
 	private function createProperty( PropertyId $id, $label, $type ) {
-		global $wgUser;
-
 		$property = new Property( $id, null, $type );
 		$property->getFingerprint()->setLabel( 'en', $label );
 
+		$this->saveEntity( $property );
+	}
+
+	private function saveEntity( EntityDocument $entity ) {
+		global $wgUser;
+
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $property, 'TEST', $wgUser, EDIT_NEW );
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+
+		$flags = $lookup->hasEntity( $entity->getId() ) ? EDIT_UPDATE : EDIT_NEW;
+		$store->saveEntity( $entity, 'TEST', $wgUser, $flags );
 	}
 
 	private function setUpEntities() {
