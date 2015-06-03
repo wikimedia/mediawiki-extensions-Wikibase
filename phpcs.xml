@@ -33,6 +33,7 @@
 	</rule>
 
 	<!-- TODO: Enable PSR2 sniffs. -->
+    <rule ref="PSR2.ControlStructures.ElseIfDeclaration" />
 
 	<!-- TODO: Enable Squiz sniffs. -->
 	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->

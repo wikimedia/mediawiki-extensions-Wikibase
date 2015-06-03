@@ -107,7 +107,7 @@ class InterwikiSorter {
 
 		if ( $sort === 'alphabetic' ) {
 			// do nothing
-		} else if ( $sort === 'code' ) {
+		} elseif ( $sort === 'code' ) {
 			sort( $sortOrder );
 		} else {
 			if ( array_key_exists( $sort, $sortOrders ) ) {

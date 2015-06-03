@@ -634,7 +634,7 @@ class EditEntityActionTest extends ActionTestCase {
 
 		if ( is_string( $page ) ) {
 			$page = $this->getTestItemPage( $page );
-		} else if ( $page instanceof Title ) {
+		} elseif ( $page instanceof Title ) {
 			$page = WikiPage::factory( $page );
 		}
 
@@ -659,7 +659,7 @@ class EditEntityActionTest extends ActionTestCase {
 
 				if ( $pattern === true ) {
 					$this->assertNotEmpty( $act, $p );
-				} else if ( $pattern === false ) {
+				} elseif ( $pattern === false ) {
 					$this->assertEmpty( $act, $p );
 				} else {
 					$this->assertRegExp( $pattern, $act, $p );

@@ -145,7 +145,7 @@ class MockRepository implements
 		if ( !is_int( $revisionId ) ) {
 			$revisionIds = array_keys( $revisions );
 			$revisionId = end( $revisionIds );
-		} else if ( !isset( $revisions[$revisionId] ) ) {
+		} elseif ( !isset( $revisions[$revisionId] ) ) {
 			throw new StorageException( "no such revision for entity $key: $revisionId" );
 		}
 

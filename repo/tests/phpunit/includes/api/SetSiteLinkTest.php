@@ -255,7 +255,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 			$this->assertArrayHasKey( 'badges', $siteLink );
 			$this->assertArrayEquals( $expectedSiteLink['badges'], $siteLink['badges'] );
-		} else if ( empty( $expected['value'] ) ) {
+		} elseif ( empty( $expected['value'] ) ) {
 			$this->assertArrayHasKey( 'removed', $siteLink,
 				"Entity doesn't return expected 'removed' marker"
 			);

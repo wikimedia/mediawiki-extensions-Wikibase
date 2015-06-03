@@ -98,7 +98,7 @@ class ChangeOpClaim extends ChangeOpBase {
 
 		if ( $this->guidValidator->validate( $guid->getSerialization() ) === false ) {
 			throw new ChangeOpException( "Claim does not have a valid GUID" );
-		} else if ( !$entity->getId()->equals( $guid->getEntityId() ) ){
+		} elseif ( !$entity->getId()->equals( $guid->getEntityId() ) ) {
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
 		}
 
