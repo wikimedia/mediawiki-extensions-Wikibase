@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_29fce507",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-03T16:16:05Z",
+      "side": 1,
+      "message": "Gnahhh...",
+      "revId": "7f5aa9c538fd0eacc0abc25f5ae3de132cedc457",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
