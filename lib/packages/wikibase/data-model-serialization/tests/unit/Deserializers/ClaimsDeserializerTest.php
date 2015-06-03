@@ -3,7 +3,7 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 class ClaimsDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
 
 		$claimDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
@@ -98,7 +98,7 @@ class ClaimsDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function deserializationProvider() {
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
 
 		return array(

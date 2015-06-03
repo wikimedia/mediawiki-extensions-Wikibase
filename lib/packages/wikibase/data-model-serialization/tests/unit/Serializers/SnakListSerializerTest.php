@@ -8,12 +8,12 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Serializers\SnaksSerializer
+ * @covers Wikibase\DataModel\Serializers\SnakListSerializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SnaksSerializerTest extends SerializerBaseTest {
+class SnakListSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
 		$snakSerializerMock = $this->getMock( '\Serializers\Serializer' );
@@ -77,7 +77,7 @@ class SnaksSerializerTest extends SerializerBaseTest {
 		);
 	}
 
-	public function testSnaksSerializerWithOptionObjectsForMaps() {
+	public function testSnakListSerializerWithOptionObjectsForMaps() {
 		$snakSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
