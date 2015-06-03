@@ -54,12 +54,9 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 *
 	 * @param string $languageCode
 	 * @param string $value
-	 *
-	 * @return string
 	 */
 	public function setLabel( $languageCode, $value ) {
 		$this->fingerprint->setLabel( $languageCode, $value );
-		return $value;
 	}
 
 	/**
@@ -69,12 +66,9 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 *
 	 * @param string $languageCode
 	 * @param string $value
-	 *
-	 * @return string
 	 */
 	public function setDescription( $languageCode, $value ) {
 		$this->fingerprint->setDescription( $languageCode, $value );
-		return $value;
 	}
 
 	/**

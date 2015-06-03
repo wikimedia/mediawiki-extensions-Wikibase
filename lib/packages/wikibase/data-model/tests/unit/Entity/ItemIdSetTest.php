@@ -91,14 +91,14 @@ class ItemIdSetTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider setProvider
+	 * @dataProvider itemIdSetProvider
 	 */
 	public function testGivenTheSameSet_equalsReturnsTrue( ItemIdSet $set ) {
 		$this->assertTrue( $set->equals( $set ) );
 		$this->assertTrue( $set->equals( clone $set ) );
 	}
 
-	public function setProvider() {
+	public function itemIdSetProvider() {
 		return array(
 			array(
 				new ItemIdSet(),
