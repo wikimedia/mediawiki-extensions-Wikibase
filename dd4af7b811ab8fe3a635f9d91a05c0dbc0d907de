@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_041789f4",
+        "filename": "client/includes/store/UsageTrackingTermLookup.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-06-03T12:19:10Z",
+      "side": 1,
+      "message": "no tracking for descriptions? (be it all aspects or whatever)",
+      "revId": "dd4af7b811ab8fe3a635f9d91a05c0dbc0d907de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
