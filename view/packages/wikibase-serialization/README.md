@@ -21,7 +21,7 @@ version 2.0 of this package:
 
 ## Release notes
 
-### 2.0.3 (2015-05-18)
+### 2.0.3 (2015-06-03)
 
 * Updated to DataValues JavaScript 0.7.0.
 
