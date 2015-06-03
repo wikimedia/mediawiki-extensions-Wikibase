@@ -6,7 +6,7 @@
 	},
 	"wikibase-client-desc": "Mäd en Aanwendong vun däm Projrammzohsaz „Wikibase“ müjjelesch.",
 	"tooltip-t-wikibase": "Di Saach en {{GRAMMAR: Dative |{{udfirst:{{WBREPONAME}}}}}}",
-	"apihelp-query+wikibase-param-prop": "Wat förm Eijeschaffte holle:\n;<kbd>url</kbd>: De <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Uniform Ressource Locator\">URL</i>, Däm Skrepp singe Pahd un däm Atikel singe Pahd.",
+	"apihelp-query+wikibase-param-prop": "Wat förm Eijeschaffte holle:\n;<kbd>url</kbd>: De <i lang=\"en\" xml:lang=\"en\" dir=\"ltr\" title=\"Uniform Ressource Locator\">URL</i>, Däm Skrepp singe Pahd un däm Atikel singe Pahd.\n;<kbd>siteid</kbd>: De Kännong vun dä ẞait.",
 	"wikibase-after-page-move": "Mer kann och dä zohjehühreje Endraach op {{WBREPONAME}} [$1 aanpaße], öm de Lengks op Schprohche vun ömjenannte Sigge aschuur ze hallde.",
 	"wikibase-comment-remove": "Dä verbonge Endraach op {{WBREPONAME}} wood fottjeschmeße. Alle Lengks op ander Schprohche woodte fottjenumme.",
 	"wikibase-comment-linked": "Ene Wikidata-Endraach wood met heh dä Sigg verbonge.",

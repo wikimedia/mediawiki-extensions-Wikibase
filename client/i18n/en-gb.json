@@ -2,8 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Felicilijonas",
-			"Shirayuki"
+			"Shirayuki",
+			"Chase me ladies, I'm the Cavalry"
 		]
 	},
+	"tooltip-t-wikibase": "Link to connected data repository item",
+	"wikibase-comment-update": "{{WBREPONAME}} item changed",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
+	"wikibase-editlinks": "Edit links",
+	"wikibase-editlinkstitle": "Edit interlanguage links",
+	"wikibase-rc-wikibase-edit-letter": "WD",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit",
 	"wikibase-error-serialize-error": "Failed to serialise data"
 }
