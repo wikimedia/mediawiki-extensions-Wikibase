@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test\Api;
+
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRedirect;

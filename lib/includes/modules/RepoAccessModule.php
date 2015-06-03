@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use ResourceLoaderContext;
 use ResourceLoaderModule;
 use Xml;

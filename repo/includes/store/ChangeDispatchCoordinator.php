@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Store;
+
 use Exception;
 use MWException;
 

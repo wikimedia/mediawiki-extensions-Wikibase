@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\View;
 
 use Wikibase\Lib\EntityIdFormatter;

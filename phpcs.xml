@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+	For now this is mostly a subset of MediaWiki core's rule set, see
+	https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml
+-->
+<ruleset name="MediaWiki">
+
+	<rule ref="Generic.Files.ByteOrderMark" />
+	<rule ref="Generic.Files.InlineHTML" />
+	<rule ref="Generic.Files.LineEndings" />
+	<rule ref="Generic.Files.OneInterfacePerFile" />
+	<rule ref="Generic.Files.OneTraitPerFile" />
+
+	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
+	<rule ref="Generic.PHP.DeprecatedFunctions" />
+	<rule ref="Generic.PHP.DisallowShortOpenTag" />
+	<rule ref="Generic.PHP.ForbiddenFunctions" />
+	<rule ref="Generic.PHP.NoSilencedErrors" />
+
+	<rule ref="PSR1" />
+	<rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+		<severity>0</severity>
+	</rule>
+    <!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
+		<severity>0</severity>
+	</rule>
+	<rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+		<severity>0</severity>
+	</rule>
+	<rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+		<severity>0</severity>
+	</rule>
+
+	<!-- TODO: Enable PSR2 sniffs. -->
+
+	<!-- TODO: Enable Squiz sniffs. -->
+	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
+		<severity>0</severity>
+	</rule>
+
+	<rule ref="Zend.Files.ClosingTag" />
+</ruleset>
