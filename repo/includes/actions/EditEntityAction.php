@@ -159,7 +159,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @return Status
 	 */
-	private function getStatus( WebRequest $req, Revision $latestRevision ){
+	private function getStatus( WebRequest $req, Revision $latestRevision ) {
 		if ( $req->getCheck( 'restore' ) ) { // nearly the same as undoafter without undo
 			$olderRevision = Revision::newFromId( $req->getInt( 'restore' ) );
 

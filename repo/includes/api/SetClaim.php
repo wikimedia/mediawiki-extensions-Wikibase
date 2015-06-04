@@ -99,7 +99,7 @@ class SetClaim extends ModifyClaim {
 	 *
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
-	private function getSummary( array $params, Claim $claim, Entity $entity ){
+	private function getSummary( array $params, Claim $claim, Entity $entity ) {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )

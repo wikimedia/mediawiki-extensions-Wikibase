@@ -526,7 +526,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testEditEntityExceptions( $params, $expected ){
+	public function testEditEntityExceptions( $params, $expected ) {
 		$this->injectIds( $params );
 		$this->injectIds( $expected );
 

@@ -58,7 +58,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		);
 	}
 	
-	public function doTestSetTerm( $attribute ,$params, $expected ){
+	public function doTestSetTerm( $attribute ,$params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
 		if( !array_key_exists( 'id', $params ) ){
@@ -158,7 +158,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		);
 	}
 
-	public function doTestSetTermExceptions( $params, $expected ){
+	public function doTestSetTermExceptions( $params, $expected ) {
 
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
