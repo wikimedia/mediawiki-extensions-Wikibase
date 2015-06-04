@@ -163,11 +163,21 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		$key = 'years';
 
 		switch ( $precision ) {
-			case TimeValue::PRECISION_MONTH: $key = 'months'; break;
-			case TimeValue::PRECISION_DAY: $key = 'days'; break;
-			case TimeValue::PRECISION_HOUR: $key = 'hours'; break;
-			case TimeValue::PRECISION_MINUTE: $key = 'minutes'; break;
-			case TimeValue::PRECISION_SECOND: $key = 'seconds'; break;
+			case TimeValue::PRECISION_MONTH:
+				$key = 'months';
+				break;
+			case TimeValue::PRECISION_DAY:
+				$key = 'days';
+				break;
+			case TimeValue::PRECISION_HOUR:
+				$key = 'hours';
+				break;
+			case TimeValue::PRECISION_MINUTE:
+				$key = 'minutes';
+				break;
+			case TimeValue::PRECISION_SECOND:
+				$key = 'seconds';
+				break;
 		}
 
 		if ( $precision < TimeValue::PRECISION_YEAR ) {
