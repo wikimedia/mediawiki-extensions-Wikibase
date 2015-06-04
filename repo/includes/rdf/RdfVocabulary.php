@@ -5,6 +5,7 @@ namespace Wikibase\Rdf;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
+use DataValues\DataValue;
 
 /**
  * RDF vocabulary for use in mapping for wikibase data model.
@@ -190,6 +191,17 @@ class RdfVocabulary {
 	 */
 	public function getDataTypeName( Property $prop ) {
 		return preg_replace( '/\W+/', '', ucwords( strtr( $prop->getDataTypeId(), '-', ' ' ) ) );
+	}
+
+	/**
+	 * Get Wikibase value type name for ontology
+	 *
+	 * @param DataValue $prop
+	 *
+	 * @return string
+	 */
+	public function getValueTypeName( DataValue $val ) {
+		return ucfirst( $val->getType() ) . 'Value';
 	}
 
 	/**

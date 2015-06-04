@@ -79,3 +79,6 @@
 <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> <http://wikiba.se/ontology-beta#timePrecision> "9"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> <http://wikiba.se/ontology-beta#timeValue> "-0200-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> <http://wikiba.se/ontology-beta#timeTimezone> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://acme.test/value/1e09d673624819aacd170165aae555a1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#QuantityValue> .
+<http://acme.test/value/974afffbe8c12ab5579f4b521ae2bd5d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#GlobecoordinateValue> .
+<http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#TimeValue> .

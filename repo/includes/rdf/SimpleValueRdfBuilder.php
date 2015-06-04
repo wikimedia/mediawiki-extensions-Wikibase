@@ -34,7 +34,7 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	/**
 	 * @var RdfVocabulary
 	 */
-	private $vocabulary;
+	protected $vocabulary;
 
 	/**
 	 * @var PropertyDataTypeLookup
