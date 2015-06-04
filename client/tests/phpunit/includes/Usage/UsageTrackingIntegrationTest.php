@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use WikitextContent;
@@ -101,10 +102,14 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		global $wgUser;
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
 
-		$flags = $lookup->hasEntity( $entity->getId() ) ? EDIT_UPDATE : EDIT_NEW;
-		$store->saveEntity( $entity, 'TEST', $wgUser, $flags );
+		try {
+			$store->deleteEntity( $entity->getId(), 'CLEANUP', $wgUser );
+		} catch ( StorageException $ex ) {
+			// never mind
+		}
+
+		$store->saveEntity( $entity, 'TEST', $wgUser, EDIT_NEW );
 	}
 
 	private function setUpEntities() {
