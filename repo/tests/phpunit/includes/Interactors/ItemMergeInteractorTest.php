@@ -261,7 +261,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider mergeProvider
 	 */
-	public function testMergeItems( $fromData, $toData, $expectedFrom, $expectedTo, $ignoreConflicts = array() ){
+	public function testMergeItems( $fromData, $toData, $expectedFrom, $expectedTo, $ignoreConflicts = array() ) {
 		$interactor = $this->newInteractor();
 
 		$fromId = new ItemId( 'Q1' );
@@ -305,7 +305,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider mergeFailureProvider
 	 */
-	public function testMergeItems_failure( $fromId, $toId, $ignoreConflicts, $expectedErrorCode ){
+	public function testMergeItems_failure( $fromId, $toId, $ignoreConflicts, $expectedErrorCode ) {
 		try {
 			$interactor = $this->newInteractor();
 			$interactor->mergeItems( $fromId, $toId, $ignoreConflicts );
@@ -334,7 +334,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider mergeConflictsProvider
 	 */
-	public function testMergeItems_conflict( $fromData, $toData, $ignoreConflicts ){
+	public function testMergeItems_conflict( $fromData, $toData, $ignoreConflicts ) {
 		$fromId = new ItemId( 'Q1' );
 		$toId = new ItemId( 'Q2' );
 

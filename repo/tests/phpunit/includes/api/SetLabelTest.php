@@ -37,14 +37,14 @@ class SetLabelTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testSetLabel( $params, $expected ){
+	public function testSetLabel( $params, $expected ) {
 		self::doTestSetTerm( 'labels' ,$params, $expected );
 	}
 
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetLabelExceptions( $params, $expected ){
+	public function testSetLabelExceptions( $params, $expected ) {
 		self::doTestSetTermExceptions( $params, $expected );
 	}
 }

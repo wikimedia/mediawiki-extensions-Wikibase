@@ -120,7 +120,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideLinkTitleExceptions
 	 */
-	public function testLinkTitlesExceptions( $params, $expected ){
+	public function testLinkTitlesExceptions( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wblinktitles';
 		$this->doTestQueryExceptions( $params, $expected['exception'] );

@@ -33,7 +33,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
  */
 class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
-	protected function getDefaultResult( $indexedMode = false ){
+	protected function getDefaultResult( $indexedMode = false ) {
 		$result = new ApiResult( false );
 
 		if ( $indexedMode ) {
@@ -43,7 +43,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return $result;
 	}
 
-	protected function getResultBuilder( $result, $options = null ){
+	protected function getResultBuilder( $result, $options = null ) {
 		$mockTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -90,7 +90,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return $builder;
 	}
 
-	public function testCanConstruct(){
+	public function testCanConstruct() {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$this->assertInstanceOf( '\Wikibase\Api\ResultBuilder', $resultBuilder );
@@ -99,7 +99,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideBadConstructionData
 	 */
-	public function testBadConstruction( $result ){
+	public function testBadConstruction( $result ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$this->getResultBuilder( $result );
 	}
@@ -116,7 +116,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideMarkResultSuccess
 	 */
-	public function testMarkResultSuccess( $param, $expected ){
+	public function testMarkResultSuccess( $param, $expected ) {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->markSuccess( $param );
@@ -135,7 +135,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideMarkResultSuccessExceptions
 	 */
-	public function testMarkResultSuccessExceptions( $param ){
+	public function testMarkResultSuccessExceptions( $param ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
@@ -446,7 +446,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddLabels(){
+	public function testAddLabels() {
 		$result = $this->getDefaultResult();
 		$labels = array( 'en' => 'foo', 'de' => 'bar' );
 		$path = array( 'entities', 'Q1' );
@@ -478,7 +478,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddDescriptions(){
+	public function testAddDescriptions() {
 		$result = $this->getDefaultResult();
 		$descriptions = array( 'en' => 'foo', 'de' => 'bar' );
 		$path = array( 'entities', 'Q1' );
@@ -510,7 +510,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddAliases(){
+	public function testAddAliases() {
 		$result = $this->getDefaultResult();
 		$aliases = array( 'en' => array( 'boo', 'hoo' ), 'de' => array( 'ham', 'cheese' ) );
 		$path = array( 'entities', 'Q1' );
@@ -554,7 +554,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddSiteLinks(){
+	public function testAddSiteLinks() {
 		$result = $this->getDefaultResult();
 		$siteLinks = array(
 			new SiteLink( 'enwiki', 'User:Addshore' ),
@@ -591,7 +591,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddClaims(){
+	public function testAddClaims() {
 		$result = $this->getDefaultResult();
 		$claim1 = new Claim( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
 		$claim1->setGuid( 'fooguidbar' );
@@ -632,7 +632,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddClaim(){
+	public function testAddClaim() {
 		$result = $this->getDefaultResult();
 		$claim = new Claim( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
 		$claim->setGuid( 'fooguidbar' );
@@ -663,7 +663,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddReference(){
+	public function testAddReference() {
 		$result = $this->getDefaultResult();
 		$reference = new Reference( new SnakList( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) ) ) );
 		$hash = $reference->getHash();
@@ -701,7 +701,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideMissingEntity
 	 */
-	public function testAddMissingEntity( $missingEntities, $expected ){
+	public function testAddMissingEntity( $missingEntities, $expected ) {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 
@@ -787,7 +787,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testAddNormalizedTitle(){
+	public function testAddNormalizedTitle() {
 		$result = $this->getDefaultResult();
 		$from = 'berlin';
 		$to = 'Berlin';

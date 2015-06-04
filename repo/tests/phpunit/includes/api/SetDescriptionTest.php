@@ -37,14 +37,14 @@ class SetDescriptionTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testSetDescription( $params, $expected ){
+	public function testSetDescription( $params, $expected ) {
 		self::doTestSetTerm( 'descriptions' ,$params, $expected );
 	}
 
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetDescriptionExceptions( $params, $expected ){
+	public function testSetDescriptionExceptions( $params, $expected ) {
 		self::doTestSetTermExceptions( $params, $expected );
 	}
 }
