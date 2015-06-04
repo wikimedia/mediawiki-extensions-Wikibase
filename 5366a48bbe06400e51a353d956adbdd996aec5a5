@@ -120,6 +120,24 @@
       "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aedf27f1_358b3822",
+        "filename": "client/includes/Hooks/SidebarLinkBadgeDisplay.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-04T10:41:45Z",
+      "side": 1,
+      "message": "Yes, should definitly look a LabelLookup.",
+      "parentUuid": "0ed113e2_2bd9672c",
+      "revId": "5366a48bbe06400e51a353d956adbdd996aec5a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
