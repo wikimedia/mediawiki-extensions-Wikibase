@@ -127,7 +127,9 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$entityContent->getEntity()->setLabel( 'en', "cake" );
 
 		$this->stashMwGlobals( 'wgHooks' );
-		$wgHooks['WikibaseTextForSearchIndex'][] = function () { return false; };
+		$wgHooks['WikibaseTextForSearchIndex'][] = function() {
+			return false;
+		};
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertEquals( '', $text, 'Text for search index should be empty if the hook returned false' );
