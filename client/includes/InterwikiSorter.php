@@ -79,7 +79,9 @@ class InterwikiSorter {
 		$a = $a[0];
 		$b = $b[0];
 
-		if( $a == $b ) return 0;
+		if ( $a == $b ) {
+			return 0;
+		}
 
 		// If we encounter an unknown language, which may happen if the sort table is not updated, we move it to the bottom.
 		$a = array_key_exists( $a, $this->sortOrder ) ? $this->sortOrder[$a] : 999999;
