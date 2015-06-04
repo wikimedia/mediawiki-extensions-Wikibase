@@ -77,6 +77,20 @@
     <rdfs:comment>Wikibase statement rank.</rdfs:comment>
   </owl:Class>
 
+  <owl:Class rdf:about="&wikibase;QuantityValue">
+    <rdfs:label>QuantityValue</rdfs:label>
+    <rdfs:comment>Wikibase extended value representing quantity.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="&wikibase;TimeValue">
+    <rdfs:label>TimeValue</rdfs:label>
+    <rdfs:comment>Wikibase extended value representing time.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="&wikibase;GlobecoordinateValue">
+    <rdfs:label>GlobecoordinateValue</rdfs:label>
+    <rdfs:comment>Wikibase extended value representing geographic coordinate.</rdfs:comment>
+  </owl:Class>
+
+
   <!--
   ///////////////////////////////////////////////////////////////////////////////////////
   //
