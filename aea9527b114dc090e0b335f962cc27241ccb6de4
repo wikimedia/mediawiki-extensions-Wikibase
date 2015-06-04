@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "aedf27f1_f5185025",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-04T09:35:01Z",
+      "side": 1,
+      "message": "The table name should be injected and kept in a member, because a client may track usages of entities from different repositories in separate database tables. This isn\u0027t fully implemented yet, but should be supported on the level of UsageTableUpdater at least.",
+      "revId": "aea9527b114dc090e0b335f962cc27241ccb6de4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_b44e059a",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 10
