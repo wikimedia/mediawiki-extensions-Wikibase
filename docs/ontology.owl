@@ -249,83 +249,83 @@
   <owl:ObjectProperty rdf:about="&wikibase;geoGlobe">
       <rdfs:label>geoGlobe</rdfs:label>
       <rdfs:comment>Globe reference URL.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;GlobecoordinateValue"/>
       <rdfs:range rdf:resource="&wikibase;Item"/>
   </owl:ObjectProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;geoLatitude">
       <rdfs:label>geoLatitude</rdfs:label>
       <rdfs:comment>Coordinate latitude.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;GlobecoordinateValue"/>
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;geoLongitude">
       <rdfs:label>geoLongitude</rdfs:label>
       <rdfs:comment>Coordinate longitude.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;GlobecoordinateValue"/>
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;geoPrecision">
       <rdfs:label>geoPrecision</rdfs:label>
       <rdfs:comment>Coordinate precision.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;GlobecoordinateValue"/>
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;quantityAmount">
       <rdfs:label>quantityAmount</rdfs:label>
       <rdfs:comment>Amount of quantity.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;QuantityValue"/>
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;quantityLowerBound">
       <rdfs:label>quantityLowerBound</rdfs:label>
       <rdfs:comment>Lower bound of the value.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;QuantityValue"/>
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;quantityUpperBound">
       <rdfs:label>quantityUpperBound</rdfs:label>
       <rdfs:comment>Upper bound of the value.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;QuantityValue"/>
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;quantityUnit">
       <rdfs:label>quantityUnit</rdfs:label>
       <rdfs:comment>Unit of measurement.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;QuantityValue"/>
   </owl:DatatypeProperty>
 
   <owl:ObjectProperty rdf:about="&wikibase;timeCalendarModel">
       <rdfs:label>timeCalendarModel</rdfs:label>
       <rdfs:comment>Preferred calendar used to display this date to the user.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;TimeValue"/>
       <rdfs:range rdf:resource="&wikibase;Item"/>
   </owl:ObjectProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;timePrecision">
       <rdfs:label>timePrecision</rdfs:label>
       <rdfs:comment>Datetime precision.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;TimeValue"/>
       <rdfs:range rdf:resource="&xsd;nonNegativeInteger"/>
   </owl:DatatypeProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;timeTimezone">
       <rdfs:label>timeTimezone</rdfs:label>
       <rdfs:comment>Timezone offset from UTC in minutes.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;TimeValue"/>
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
   <owl:DatatypeProperty rdf:about="&wikibase;timeValue">
       <rdfs:label>timeValue</rdfs:label>
       <rdfs:comment>Time value as datetime literal.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;Value"/>
+      <rdfs:domain rdf:resource="&wikibase;TimeValue"/>
       <rdfs:range rdf:resource="&xsd;dateTime"/>
   </owl:DatatypeProperty>
 
