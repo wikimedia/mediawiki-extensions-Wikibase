@@ -4,5 +4,9 @@
 			"Kandar"
 		]
 	},
-	"wikibase-edit": "édit"
+	"wikibase-edit": "édit",
+	"wikibase-add": "tambah",
+	"wikibase-sitelinks-special": "Loka lianna",
+	"wikibase-setsitelink-submit": "Atur tutumbu loka",
+	"wikibase-setsitelink-remove-failed": "Tutumbu loka teu bisa disingkahkeun."
 }

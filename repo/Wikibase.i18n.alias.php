@@ -272,17 +272,17 @@ $specialPageAliases['lb'] = array(
 
 /** Northern Luri (لوری مینجایی) */
 $specialPageAliases['lrc'] = array(
-	'ListDatatypes' => array( 'میزونکاری_جور_داده_یا' ),
-	'SetLabel' => array( 'میزونکاری_ریتراز' ),
-	'SetDescription' => array( 'میزونکاری_توضیح' ),
-	'SetAliases' => array( 'میزونکاری_هوم_قطاریا' ),
-	'SetLabelDescriptionAliases' => array( 'میزونکاری_نیائن_ریتراز_توضیح_سی_هوم_قطاریا' ),
-	'SetSiteLink' => array( 'میزونکاری_هوم_پیوند_دیارگه' ),
-	'MergeItems' => array( 'سریک_سازی_چیا' ),
-	'EntitiesWithoutLabel' => array( 'چیایی_که_ریتراز_نارن' ),
-	'EntitiesWithoutDescription' => array( 'چیایی_که_شرح_نارن' ),
-	'ItemsWithoutSitelinks' => array( 'چیایی_که_هوم_پیوند_دیارگه_نارن' ),
-	'MyLanguageFallbackChain' => array( 'زنجیره_دماکاری_زون_مه' ),
+	'ListDatatypes' => array( 'میزوٙنکاری_جوٙر_دادە_یا' ),
+	'SetLabel' => array( 'میزوٙنکاری_ریتئراز' ),
+	'SetDescription' => array( 'میزوٙنکاری_توضی' ),
+	'SetAliases' => array( 'میزوٙنکاری_ھوم_قأطاریا' ),
+	'SetLabelDescriptionAliases' => array( 'میزوٙنکاری_نیائن_ریتئراز_توضی_سی_ھوم_قأطاریا' ),
+	'SetSiteLink' => array( 'میزوٙنکاری_ھوم_پئیڤأند_دیارگھ' ),
+	'MergeItems' => array( 'سأریأک_سازی_چیا' ),
+	'EntitiesWithoutLabel' => array( 'چیایی_کە_ریتئراز_نارئن' ),
+	'EntitiesWithoutDescription' => array( 'چیایی_کە_توضی_نارئن' ),
+	'ItemsWithoutSitelinks' => array( 'چیایی_کئ_ھوم_پئیڤأند_دیارگە_نارئن' ),
+	'MyLanguageFallbackChain' => array( 'زأنجیرە_دئماکاری_زوٙن_مئ' ),
 );
 
 /** Macedonian (македонски) */

@@ -65,7 +65,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "Inserisci l'etichetta di questa entità, una breve descrizione e gli alias in $1.",
 	"wikibase-statements": "Dichiarazioni",
 	"wikibase-terms": "In altre lingue",
-	"wikibase-sitelinkgroupview-input-help-message": "Aggiungi un collegamento al sito specificando un sito ed una pagina, modifica o rimuovi collegamenti ai siti esistenti.",
+	"wikibase-sitelinkgroupview-input-help-message": "Aggiungi un collegamento al sito specificando un sito ed una pagina del sito, modifica o rimuovi i collegamenti ai siti esistenti.",
 	"wikibase-sitelinks-empty": "Nessuna pagina è collegata a questo elemento.",
 	"wikibase-sitelinks-input-help-message": "Imposta un collegamento ad una pagina relativa a questo elemento.",
 	"wikibase-sitelinks-special": "Altri siti",

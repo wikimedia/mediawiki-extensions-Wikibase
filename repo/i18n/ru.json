@@ -179,7 +179,7 @@
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Синонимы:",
 	"wikibase-setlabeldescriptionaliases-submit": "Установить метку, описание и синонимы",
 	"special-setsitelink": "Задать ссылку на сайт",
-	"wikibase-setsitelink-introfull": "Вы задали для [[$1]] ссылку на сайт «$2».",
+	"wikibase-setsitelink-introfull": "Вы задали для [[$1]] ссылку на сайт $2.",
 	"wikibase-setsitelink-intro": "Эта форма позволяет вам задать ссылку на сайт для какого-либо элемента. Необходимо ввести идентификатор элемента (например, Q23), идентификатор сайта (например, «ruwiki») и название страницы этого сайта, на которую вы хотите сослаться.",
 	"wikibase-setsitelink-intro-badges": "Вы также можете выбрать для данной ссылки значок из списка, приведённого ниже.",
 	"wikibase-setsitelink-site": "Идентификатор сайта:",
