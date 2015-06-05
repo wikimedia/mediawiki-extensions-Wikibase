@@ -13,17 +13,6 @@ are also triggered down the document */
 	position: fixed;
 }
 
-h1 .wikibase-title .wikibase-title-id {
-	color: grey;
-	font-size: 0.6em;
-	margin-left: 0.4em;
-}
-
-h1 .wikibase-title .wikibase-title-id:before {
-	/* Prevent id being hidden in ellipsis on very long labels: */
-	content: ' ';
-}
-
 .wb-entitypage .ui-state-disabled {
 	opacity: 1;
 }
@@ -154,6 +143,45 @@ h2.wb-section-heading {
 
 /********** /BASIC LAYOUT **********/
 
+/********** TERMS ***********/
+
+h1 .wikibase-title .wikibase-title-id {
+	color: grey;
+	font-size: 0.6em;
+	margin-left: 0.4em;
+}
+
+h1 .wikibase-title .wikibase-title-id:before {
+	/* Prevent id being hidden in ellipsis on very long labels: */
+	content: ' ';
+}
+
+#contentSub .wikibase-subtitle .wikibase-subtitle-description {
+	word-wrap: break-word;
+}
+
+#contentSub .wikibase-subtitle .wikibase-subtitle-aliases ul {
+	color: grey;
+	margin: 0;
+	word-wrap: break-word;
+}
+
+#contentSub .wikibase-subtitle .wikibase-subtitle-aliases li {
+	display: inline;
+}
+
+#contentSub .wikibase-subtitle .wikibase-subtitle-aliases li::before,
+#contentSub .wikibase-subtitle .wikibase-subtitle-aliases li:before {
+	content: '|';
+	padding: 0 0.4em;
+}
+
+#contentSub .wikibase-subtitle .wikibase-subtitle-aliases li:first-child:before {
+	content: '';
+	padding: 0;
+}
+
+/********** /TERMS **********/
 
 /********** CLAIMS **********/
 

@@ -38,6 +38,14 @@ HTML;
 </span>
 HTML;
 
+	$templates['wikibase-subtitle'] =
+<<<HTML
+<div class="wikibase-subtitle">
+	<div class="wikibase-subtitle-description $1">$2</div>
+	<div class="wikibase-subtitle-aliases $3"><!-- wikibase-entitytermsview-aliases -->$4</div>
+</div>
+HTML;
+
 // $1: Text of the heading.
 // $2: Optional ID for the heading.
 	$templates['wb-section-heading'] =
@@ -164,12 +172,8 @@ HTML;
 	$templates['wikibase-entitytermsview'] =
 <<<HTML
 <div class="wikibase-entitytermsview">
-	<div class="wikibase-entitytermsview-heading">
-		<div class="wikibase-entitytermsview-heading-description $1">$2</div>
-		<div class="wikibase-entitytermsview-heading-aliases $3"><!-- wikibase-entitytermsview-aliases -->$4</div>
-	</div>
-	<!-- ? wikibase-toolbar -->$7
-	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $6"><!-- wikibase-entitytermsforlanguagelistview -->$5</div>
+	<!-- ? wikibase-toolbar -->$3
+	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $2"><!-- wikibase-entitytermsforlanguagelistview -->$1</div>
 </div>
 HTML;
 

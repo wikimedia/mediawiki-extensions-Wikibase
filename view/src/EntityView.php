@@ -84,7 +84,6 @@ abstract class EntityView {
 	 * @since 0.1
 	 *
 	 * @param EntityRevision $entityRevision the entity to render
-	 *
 	 * @return string HTML
 	 */
 	public function getHtml( EntityRevision $entityRevision ) {
@@ -107,19 +106,31 @@ abstract class EntityView {
 	}
 
 	/**
-	 * Returns the html used for the title of the page.
-	 * @see ParserOutput::setDisplayTitle
+	 * Returns the HTML used for the title of the page.
 	 *
 	 * @since 0.5
 	 *
 	 * @param EntityRevision $entityRevision
-	 *
 	 * @return string HTML
 	 */
 	public function getTitleHtml( EntityRevision $entityRevision ) {
 		$entity = $entityRevision->getEntity();
 
 		return $this->entityTermsView->getTitleHtml( $entity->getFingerprint(), $entity->getId() );
+	}
+
+	/**
+	 * Returns the HTML added to the subtitle of the page.
+	 *
+	 * @since 0.5
+	 * 
+	 * @param EntityRevision $entityRevision
+	 * @return string HTML
+	 */
+	public function getSubtitleHtml( EntityRevision $entityRevision ) {
+		$entity = $entityRevision->getEntity();
+
+		return $this->entityTermsView->getSubtitleHtml( $entity->getFingerprint() );
 	}
 
 	private function getLoadingSpinnerInlineScript() {
@@ -151,11 +162,10 @@ if ( $ ) {
 	 * @return string
 	 */
 	protected function getMainHtml( EntityRevision $entityRevision ) {
-		$entity = $entityRevision->getEntity();
-
-		return $this->getHtmlForFingerprint(
-			$entity,
-			$this->getHtmlForTermBox( $entityRevision )
+		return $this->entityTermsView->getHtml(
+			$entityRevision->getEntity()->getId(),
+			$this->getHtmlForTermBox( $entityRevision ),
+			$this->textInjector
 		);
 	}
 
@@ -163,7 +173,6 @@ if ( $ ) {
 	 * Builds and Returns HTML to put into the sidebar of the entity's HTML structure.
 	 *
 	 * @param EntityRevision $entityRevision
-	 *
 	 * @return string
 	 */
 	protected function getSideHtml( EntityRevision $entityRevision ) {
@@ -171,25 +180,7 @@ if ( $ ) {
 	}
 
 	/**
-	 * Builds and returns the HTML for the entity's fingerprint.
-	 *
-	 * @param Entity $entity
-	 * @param string $termBoxHtml
-	 *
-	 * @return string
-	 */
-	private function getHtmlForFingerprint( Entity $entity, $termBoxHtml ) {
-		return $this->entityTermsView->getHtml(
-			$entity->getFingerprint(),
-			$entity->getId(),
-			$termBoxHtml,
-			$this->textInjector
-		);
-	}
-
-	/**
 	 * @param EntityRevision $entityRevision
-	 *
 	 * @return string
 	 */
 	private function getHtmlForTermBox( EntityRevision $entityRevision ) {

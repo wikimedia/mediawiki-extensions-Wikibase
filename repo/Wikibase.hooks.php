@@ -888,6 +888,11 @@ final class RepoHooks {
 			$out->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
 
+		$subtitle = $parserOutput->getExtensionData( 'wikibase-subtitle' );
+		if ( $subtitle !== null ) {
+			$out->setProperty( 'wikibase-subtitle', $subtitle );
+		}
+
 		// Used in ViewEntityAction and EditEntityAction to override the page HTML title
 		// with the label, if available, or else the id. Passed via parser output
 		// and output page to save overhead of fetching content and accessing an entity

@@ -7,7 +7,6 @@ use LogEventsList;
 use OutputPage;
 use SpecialPage;
 use ViewAction;
-use Wikibase\Repo\Content\EntityHandler;
 
 /**
  * Handles the view action for Wikibase entities.
@@ -70,7 +69,19 @@ abstract class ViewEntityAction extends ViewAction {
 		$this->page->setParserOptions( $parserOptions );
 		$this->page->view();
 
+		$this->addSubtitle( $outputPage );
 		$this->overrideTitleText( $outputPage );
+	}
+
+	private function addSubtitle( OutputPage $outputPage ) {
+		$subtitle = $this->getOutput()->getProperty( 'wikibase-subtitle' );
+
+		if ( $subtitle === null ) {
+			return;
+		}
+
+		$oldSubtitle = $outputPage->getSubtitle();
+		$outputPage->setSubtitle( $subtitle . $oldSubtitle );
 	}
 
 	/**

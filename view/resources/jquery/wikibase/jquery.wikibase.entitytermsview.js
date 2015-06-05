@@ -62,8 +62,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			'' // toolbar placeholder
 		],
 		templateShortCuts: {
-			$headingAliases: '.wikibase-entitytermsview-heading-aliases',
-			$headingDescription: '.wikibase-entitytermsview-heading-description',
 			$entitytermsforlanguagelistviewContainer:
 				'.wikibase-entitytermsview-entitytermsforlanguagelistview'
 		},
@@ -101,49 +99,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		}
 
 		PARENT.prototype._create.call( this );
-
-		var self = this;
-
-		this.element
-		.on(
-			this.widgetEventPrefix + 'change.' + this.widgetName
-				+ ' ' + this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
-			function() {
-				$.each( self.value(), function() {
-					if( this.language !== self.options.value[0].language ) {
-						return true;
-					}
-
-					var descriptionText = this.description.getText(),
-						aliasesTexts = this.aliases.getTexts();
-
-					self.$headingDescription
-						.toggleClass( 'wb-empty', descriptionText === '' )
-						.text( descriptionText === ''
-							? mw.msg( 'wikibase-description-empty' )
-							: descriptionText
-						);
-
-					var $ul = self.$headingAliases
-						.toggleClass( 'wb-empty', aliasesTexts.length === 0 )
-						.children( 'ul' )
-						.text( aliasesTexts.length === 0
-							? mw.msg( 'wikibase-aliases-empty' )
-							: ''
-						);
-
-					for( var i = 0; i < aliasesTexts.length; i++ ) {
-						$ul.append(
-							mw.wbTemplate( 'wikibase-entitytermsview-aliases-alias',
-								aliasesTexts[i]
-							)
-						);
-					}
-
-					return false;
-				} );
-			}
-		);
 
 		this.draw();
 	},

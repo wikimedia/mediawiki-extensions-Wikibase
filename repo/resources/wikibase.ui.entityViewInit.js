@@ -47,7 +47,9 @@
 						return true;
 					}
 
-					var label = this.label.getText();
+					var label = this.label.getText(),
+						descriptionText = this.description.getText(),
+						aliasesTexts = this.aliases.getTexts();
 
 					$( 'title' ).text(
 						mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
@@ -57,6 +59,29 @@
 						.toggleClass( 'wb-empty', label === '' )
 						.find( '.wikibase-title-label' )
 						.text( label !== '' ? label : mw.msg( 'wikibase-label-empty' ) );
+
+					$( '#contentSub' ).find( '.wikibase-subtitle-description' )
+						.toggleClass( 'wb-empty', descriptionText === '' )
+						.text( descriptionText === ''
+							? mw.msg( 'wikibase-description-empty' )
+							: descriptionText
+						);
+
+					var $ul = $( '#contentSub' ).find( '.wikibase-subtitle-aliases' )
+						.toggleClass( 'wb-empty', aliasesTexts.length === 0 )
+						.children( 'ul' )
+						.text( aliasesTexts.length === 0
+							? mw.msg( 'wikibase-aliases-empty' )
+							: ''
+						);
+
+					for( var i = 0; i < aliasesTexts.length; i++ ) {
+						$ul.append(
+							mw.wbTemplate( 'wikibase-entitytermsview-aliases-alias',
+								aliasesTexts[i]
+							)
+						);
+					}
 
 					return false;
 				} );

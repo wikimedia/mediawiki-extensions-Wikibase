@@ -339,7 +339,6 @@ class EntityParserOutputGenerator {
 		EntityInfo $entityInfo,
 		$editable = true
 	) {
-
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			new EntityInfoTermLookup( $entityInfo ),
 			$this->languageFallbackChain
@@ -361,6 +360,9 @@ class EntityParserOutputGenerator {
 		// Set the display title to display the label together with the item's id
 		$titleHtml = $entityView->getTitleHtml( $entityRevision );
 		$parserOutput->setDisplayTitle( $titleHtml );
+
+		$subtitle = $entityView->getSubtitleHtml( $entityRevision );
+		$parserOutput->setExtensionData( 'wikibase-subtitle', $subtitle );
 
 		$html = $entityView->getHtml( $entityRevision );
 		$parserOutput->setText( $html );

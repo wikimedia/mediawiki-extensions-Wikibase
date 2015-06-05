@@ -63,36 +63,6 @@ class EntityTermsView {
 	}
 
 	/**
-	 * @param Fingerprint $fingerprint the fingerprint to render
-	 * @param EntityId|null $entityId the id of the fingerprint's entity
-	 * @param string $termBoxHtml
-	 * @param TextInjector $textInjector
-	 *
-	 * @return string
-	 */
-	public function getHtml(
-		Fingerprint $fingerprint,
-		EntityId $entityId = null,
-		$termBoxHtml,
-		TextInjector $textInjector
-	) {
-		$descriptions = $fingerprint->getDescriptions();
-		$aliasGroups = $fingerprint->getAliasGroups();
-
-		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
-			$this->getDescriptionText( $descriptions ),
-			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
-			$this->getHtmlForAliases( $aliasGroups ),
-			$termBoxHtml,
-			$textInjector->newMarker(
-				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
-			),
-			$this->getHtmlForLabelDescriptionAliasesEditSection( $entityId )
-		);
-	}
-
-	/**
 	 * @param Fingerprint $fingerprint
 	 * @param EntityId $entityId
 	 *
@@ -127,6 +97,44 @@ class EntityTermsView {
 		}
 
 		return $title;
+	}
+
+	/**
+	 * @param Fingerprint $fingerprint the fingerprint to render
+	 *
+	 * @return string
+	 */
+	public function getSubtitleHtml( Fingerprint $fingerprint ) {
+		$descriptions = $fingerprint->getDescriptions();
+		$aliasGroups = $fingerprint->getAliasGroups();
+
+		return $this->templateFactory->render( 'wikibase-subtitle',
+			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
+			$this->getDescriptionText( $descriptions ),
+			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
+			$this->getHtmlForAliases( $aliasGroups )
+		);
+	}
+
+	/**
+	 * @param EntityId|null $entityId the id of the fingerprint's entity
+	 * @param string $termBoxHtml
+	 * @param TextInjector $textInjector
+	 *
+	 * @return string
+	 */
+	public function getHtml(
+		EntityId $entityId = null,
+		$termBoxHtml,
+		TextInjector $textInjector
+	) {
+		return $this->templateFactory->render( 'wikibase-entitytermsview',
+			$termBoxHtml,
+			$textInjector->newMarker(
+				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
+			),
+			$this->getHtmlForLabelDescriptionAliasesEditSection( $entityId )
+		);
 	}
 
 	/**
