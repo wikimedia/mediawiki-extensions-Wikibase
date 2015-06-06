@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"रमेश सिंह बोहरा"
+		]
+	},
+	"tooltip-t-wikibase": "जडान अरियाका डाटा भराण प्रकारखि लेखा लिङ्क",
+	"wikibase-comment-update": "{{WBREPONAME}} आइटम परिवर्तन",
+	"wikibase-dataitem": "{{WBREPONAME}} प्रकार",
+	"wikibase-editlinks": "लिंक सम्पादन अरिदिय",
+	"wikibase-editlinkstitle": "अन्तरभाषिक लिङ्क सम्पादन गरिदिय",
+	"wikibase-rc-wikibase-edit-letter": "डि",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} सम्पादन"
+}
