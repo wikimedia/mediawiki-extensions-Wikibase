@@ -38,12 +38,12 @@ Other breaking changes:
 * Removed previously deprecated `Property::newEmpty`, use `Property::newFromType` or `new Property()` instead
 * Renamed `StatementList::getWithPropertyId` to `StatementList::getByPropertyId`
 * Renamed `StatementList::getWithRank` to `StatementList::getByRank`
+* Added `EntityDocument::setId`
 * `Entity::setLabel` and `Entity::setDescription` no longer return anything
 * `Reference` and `ReferenceList`s no longer can be instantiated with `null`
 
 #### Additions
 
-* Added `EntityDocument::setId`
 * Added `StatementByGuidMap`
 * Added `StatementListHolder`
 * Added `StatementList::getFirstStatementWithGuid`
