@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e37f3010",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "Needs to be updated",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c39f9461",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "$redirected is not defined here. Also should be $mergeResult... you didn\u0027t yet merge the results of the two operations.",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_83918c54",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "missing space, also below",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_23869819",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "missing type hints",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_438ba420",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "missing space",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0396fc4f",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "type hint?",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e398907e",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "could just be return $this-\u003eloadEntity( $entityId )-\u003eisEmpty()",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c376b439",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "Save this into a variable please, to much indentation.",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_638b401c",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "why did you change this? Needed?",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_23953836",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "this line is not needed",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_439ac467",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "space after this would be nice",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_039cbc5e",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "space after this would be nice",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a3a84875",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "to many tabs",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c3a5549c",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "just make this non-optional",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_83b74cd3",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-06T15:12:00Z",
+      "side": 1,
+      "message": "see my comment in ItemMergeInteractorTest",
+      "revId": "3f01bbe1fe012aa7be8ff9316a76f4f9d676b00c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
