@@ -322,7 +322,8 @@ class WikibaseRepo {
 				$this->getEntityTitleLookup(),
 				$this->getEntityContentFactory(),
 				$context
-			)
+			),
+			$this->getStore()->getEntityRedirectLookup()
 		);
 	}
 

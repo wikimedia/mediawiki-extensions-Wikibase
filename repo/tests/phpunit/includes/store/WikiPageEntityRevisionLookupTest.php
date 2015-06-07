@@ -26,9 +26,11 @@ use Wikibase\Repo\WikibaseRepo;
 class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 	/**
-	 * @var EntityRevision[]
+	 * Revision ids as used by the test to real revision id map.
+	 *
+	 * @var int[]
 	 */
-	private static $testEntities = array();
+	private static $revisionIdMap = array();
 
 	protected static function storeTestEntity( Entity $entity ) {
 		global $wgUser;
@@ -52,7 +54,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
 	 * @param EntityRevision[] $entityRevisions
-	 * @param EntityRedirect[] $entityRedirects
+	 * @param EntityRedirect[] $entityRedirects Revision id => EntityRedirect
 	 *
 	 * @return EntityLookup
 	 */
@@ -62,15 +64,18 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		foreach ( $entityRevisions as $entityRev ) {
 			$logicalRev = $entityRev->getRevisionId();
 
-			if ( !isset( self::$testEntities[$logicalRev] ) ) {
+			if ( !isset( self::$revisionIdMap[$logicalRev] ) ) {
 				$rev = self::storeTestEntity( $entityRev->getEntity() );
-				self::$testEntities[$logicalRev] = $rev;
+				self::$revisionIdMap[$logicalRev] = $rev->getRevisionId();
 			}
 		}
 
 		if ( $this->itemSupportsRedirect() ) {
-			foreach ( $entityRedirects as $entityRedir ) {
-				self::storeTestRedirect( $entityRedir );
+			foreach ( $entityRedirects as $logicalRev => $entityRedir ) {
+				if ( !isset( self::$revisionIdMap[$logicalRev] ) ) {
+					$rev = self::storeTestRedirect( $entityRedir );
+					self::$revisionIdMap[$logicalRev] = $rev;
+				}
 			}
 		}
 
@@ -82,8 +87,8 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	}
 
 	protected function resolveLogicalRevision( $revision ) {
-		if ( is_int( $revision ) && isset( self::$testEntities[$revision] ) ) {
-			$revision = self::$testEntities[$revision]->getRevisionId();
+		if ( isset( self::$revisionIdMap[$revision] ) ) {
+			return self::$revisionIdMap[$revision];
 		}
 
 		return $revision;
