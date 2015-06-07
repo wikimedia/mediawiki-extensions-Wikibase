@@ -52,19 +52,7 @@ class CreateRedirect extends ApiBase {
 		$this->setServices(
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getErrorReporter( $this ),
-			new RedirectCreationInteractor(
-				WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' ),
-				WikibaseRepo::getDefaultInstance()->getEntityStore(),
-				WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker(),
-				WikibaseRepo::getDefaultInstance()->getSummaryFormatter(),
-				$this->getUser(),
-				new EditFilterHookRunner(
-					WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
-					WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
-					$this->getContext()
-				),
-				WikibaseRepo::getDefaultInstance()->getStore()->getEntityRedirectLookup()
-			)
+			WikibaseRepo::getDefaultInstance()->getRedirectCreator( $this->getUser(), $this->getContext() )
 		);
 	}
 
