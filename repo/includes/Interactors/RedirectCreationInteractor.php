@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Interactors;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
@@ -56,12 +57,18 @@ class RedirectCreationInteractor {
 	private $editFilterHookRunner;
 
 	/**
+	 * @var EntityRedirectLookup
+	 */
+	private $entityRedirectLookup;
+
+	/**
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param User $user
 	 * @param EditFilterHookRunner $editFilterHookRunner
+	 * @param EntityRedirectLookup $entityRedirectLookup
 	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
@@ -69,7 +76,8 @@ class RedirectCreationInteractor {
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
 		User $user,
-		EditFilterHookRunner $editFilterHookRunner
+		EditFilterHookRunner $editFilterHookRunner,
+		EntityRedirectLookup $entityRedirectLookup
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
@@ -77,6 +85,7 @@ class RedirectCreationInteractor {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->user = $user;
 		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->entityRedirectLookup = $entityRedirectLookup;
 	}
 
 	/**
@@ -98,7 +107,7 @@ class RedirectCreationInteractor {
 		$this->checkCompatible( $fromId, $toId );
 		$this->checkPermissions( $fromId );
 
-		$this->checkExists( $toId );
+		$this->checkExistsNotRedirect( $toId );
 		$this->checkEmpty( $fromId );
 
 		$summary = new Summary( 'wbcreateredirect' );
@@ -178,25 +187,22 @@ class RedirectCreationInteractor {
 	}
 
 	/**
+	 * Check whether the given entity exists and is not a redirect.
+	 *
 	 * @param EntityId $entityId
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function checkExists( EntityId $entityId ) {
-		try {
-			$revision = $this->entityRevisionLookup->getLatestRevisionId(
-				$entityId,
-				EntityRevisionLookup::LATEST_FROM_MASTER
-			);
+	private function checkExistsNotRedirect( EntityId $entityId ) {
+		$redirect = $this->entityRedirectLookup->getRedirectForEntityId( $entityId );
 
-			if ( !$revision ) {
-				throw new RedirectCreationException(
-					"Entity $entityId not found",
-					'no-such-entity'
-				);
-			}
-		} catch ( UnresolvedRedirectException $ex ) {
-			throw new RedirectCreationException( $ex->getMessage(), 'target-is-redirect', $ex );
+		if ( $redirect === false ) {
+			throw new RedirectCreationException(
+				"Entity $entityId not found",
+				'no-such-entity'
+			);
+		} elseif ( $redirect !== null ) {
+			throw new RedirectCreationException( "Unresolved redirect to $entityId", 'target-is-redirect' );
 		}
 	}
 

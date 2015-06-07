@@ -62,7 +62,8 @@ class CreateRedirect extends ApiBase {
 					WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
 					WikibaseRepo::getDefaultInstance()->getEntityContentFactory(),
 					$this->getContext()
-				)
+				),
+				WikibaseRepo::getDefaultInstance()->getStore()->getEntityRedirectLookup()
 			)
 		);
 	}

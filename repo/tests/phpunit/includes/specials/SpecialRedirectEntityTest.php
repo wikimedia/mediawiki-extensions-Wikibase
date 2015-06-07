@@ -120,7 +120,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$user,
-				$this->getMockEditFilterHookRunner()
+				$this->getMockEditFilterHookRunner(),
+				$this->mockRepository
 			)
 		);
 	}
