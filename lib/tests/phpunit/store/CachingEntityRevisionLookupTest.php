@@ -26,7 +26,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
 	 * @param EntityRevision[] $entityRevisions
-	 * @param EntityRedirect[] $entityRedirects
+	 * @param EntityRedirect[] $entityRedirects Revision id => EntityRedirect
 	 *
 	 * @return EntityLookup
 	 */
@@ -37,8 +37,8 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 			$mock->putEntity( $entityRev->getEntity(), $entityRev->getRevisionId() );
 		}
 
-		foreach ( $entityRedirects as $entityRedir ) {
-			$mock->putRedirect( $entityRedir );
+		foreach ( $entityRedirects as $revisionId => $entityRedir ) {
+			$mock->putRedirect( $entityRedir, $revisionId );
 		}
 
 		return new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );

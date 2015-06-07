@@ -47,12 +47,12 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityRedirect[]
+	 * @return EntityRedirect[] Revision id => EntityRedirect
 	 */
 	protected function getTestRedirects() {
 		$redirects = array();
 
-		$redirects[] = new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) );
+		$redirects[14] = new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) );
 
 		return $redirects;
 	}
@@ -75,7 +75,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param EntityRevision[] $entityRevisions
-	 * @param EntityRedirect[] $entityRedirects
+	 * @param EntityRedirect[] $entityRedirects Revision id => EntityRedirect
 	 *
 	 * @return EntityRevisionLookup
 	 */
@@ -183,6 +183,9 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 			array( // #1
 				new PropertyId( 'p753' ), 13,
 			),
+			'redirect' => array(
+				new ItemId( 'Q23' ), 14,
+			),
 		);
 
 		return $cases;
@@ -202,9 +205,6 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 
 		$this->assertInternalType( 'int', $result );
 		$this->assertEquals( $expected, $result );
-
-		$entityRev = $lookup->getEntityRevision( $id );
-		$this->assertInstanceOf( 'Wikibase\EntityRevision', $entityRev );
 	}
 
 	public function testGetLatestRevisionForMissing() {
