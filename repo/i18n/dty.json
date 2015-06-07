@@ -4,5 +4,10 @@
 			"रमेश सिंह बोहरा"
 		]
 	},
-	"wikibase-edit": "सम्पादन गर्न्या"
+	"wikibase-edit": "सम्पादन गर्न्या",
+	"wikibase-add": "जोड्या",
+	"wikibase-label-empty": "नामपत्र परिभाषित कोई",
+	"wikibase-sitelinks-special": "और साइटहरू",
+	"wikibase-statementview-rank-normal": "सानतिनो ओहदा",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|सन्दर्भहरू}}"
 }
