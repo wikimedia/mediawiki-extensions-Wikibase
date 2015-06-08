@@ -1,14 +1,14 @@
 # Wikibase DataModel Serialization release notes
 
-## 1.4.0 (dev)
+## 1.4.0 (2015-06-08)
 
 * Added support for showing the component version when loaded via MediaWiki
 * Compatibility with DataModel 3.x added
 * DataModel 3.x is now required
 * Renamed `SerializerFactory::newClaimSerializer` to `SerializerFactory::newStatementSerializer`, leaving a b/c alias
 * Renamed `SerializerFactory::newSnaksSerializer` to `SerializerFactory::newSnakListSerializer`, leaving a b/c alias
-* Renamed `SerializerFactory::newClaimDeserializer` to `SerializerFactory::newStatementDeserializer`, leaving a b/c alias
-* Renamed `SerializerFactory::newSnaksDeserializer` to `SerializerFactory::newSnakListDeserializer`, leaving a b/c alias
+* Renamed `DeserializerFactory::newClaimDeserializer` to `DeserializerFactory::newStatementDeserializer`, leaving a b/c alias
+* Renamed `DeserializerFactory::newSnaksDeserializer` to `DeserializerFactory::newSnakListDeserializer`, leaving a b/c alias
 
 ## 1.3.0 (2015-01-28)
 
