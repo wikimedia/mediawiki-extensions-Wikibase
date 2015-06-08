@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c4f79755",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-08T10:19:16Z",
+      "side": 1,
+      "message": "Well this could still return true? is $this-\u003eredirects[$key] is not empty?\nBut this should never return true?",
+      "revId": "4fc45fb82e05eb0ceaed85a6dcb7382bea1f9495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
