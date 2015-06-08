@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_44b2c793",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-08T10:23:56Z",
+      "side": 1,
+      "message": "This states why this is bad, but it doesn\u0027t explain why it is how it is. Why are the indices 0 and 2, for example?",
+      "revId": "6f9788ecea0d18f86cd1d3a3777f64401697b667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a4bdab65",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1208,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-08T10:23:56Z",
+      "side": 1,
+      "message": "The break is outside the foreach. This either means it\u0027s accidentally misplaced or this code doesn\u0027t need to loop in the first place.",
+      "revId": "6f9788ecea0d18f86cd1d3a3777f64401697b667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
