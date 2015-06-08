@@ -101,7 +101,7 @@ class ClaimChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveClaimOp( $claimGuid ) {
-		return new ChangeOpClaimRemove( $claimGuid );
+		return new ChangeOpStatementRemove( $claimGuid );
 	}
 
 	/**
