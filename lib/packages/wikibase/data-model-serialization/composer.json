@@ -50,5 +50,15 @@
 		"branch-alias": {
 			"dev-master": "1.4.x-dev"
 		}
+	},
+	"scripts": {
+		"test": [
+			"composer validate --no-interaction",
+			"phpunit",
+			"phpunit --group slow"
+		],
+		"ci": [
+			"composer test"
+		]
 	}
 }
