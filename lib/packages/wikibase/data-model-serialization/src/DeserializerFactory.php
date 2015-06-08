@@ -54,9 +54,10 @@ class DeserializerFactory {
 	 * @return DispatchableDeserializer
 	 */
 	public function newEntityDeserializer() {
+		$fingerprintDeserializer = new FingerprintDeserializer();
 		return new DispatchingDeserializer( array(
-			new ItemDeserializer( $this->newEntityIdDeserializer(), new FingerprintDeserializer(), $this->newStatementListDeserializer(), $this->newSiteLinkDeserializer() ),
-			new PropertyDeserializer( $this->newEntityIdDeserializer(), new FingerprintDeserializer(), $this->newStatementListDeserializer() )
+			new ItemDeserializer( $this->newEntityIdDeserializer(), $fingerprintDeserializer, $this->newStatementListDeserializer(), $this->newSiteLinkDeserializer() ),
+			new PropertyDeserializer( $this->newEntityIdDeserializer(), $fingerprintDeserializer, $this->newStatementListDeserializer() )
 		) );
 	}
 
