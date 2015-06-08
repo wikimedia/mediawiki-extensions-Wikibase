@@ -235,7 +235,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 			),
 			'HTML entities' => array(
 				'<a>injection</a>',
-				'<a>injection</a>',
+				9001,
 				'<a>injection</a>',
 				'/^MOCKDATE<sup class="wb-calendar-name">&lt;a&gt;injection&lt;\/a&gt;<\/sup>$/'
 			),
