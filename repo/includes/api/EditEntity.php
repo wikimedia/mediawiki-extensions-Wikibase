@@ -444,7 +444,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $claims
+	 * @param array[] $claims
 	 *
 	 * @return ChangeOp[]
 	 */
@@ -458,12 +458,12 @@ class EditEntity extends ModifyEntity {
 		if ( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ) {
 			foreach ( $claims as $subClaims ) {
 				$changeOps = array_merge( $changeOps,
-					$this->getRemoveClaimsChangeOps( $subClaims ),
+					$this->getRemoveStatementChangeOps( $subClaims ),
 					$this->getModifyClaimsChangeOps( $subClaims ) );
 			}
 		} else {
 			$changeOps = array_merge( $changeOps,
-				$this->getRemoveClaimsChangeOps( $claims ),
+				$this->getRemoveStatementChangeOps( $claims ),
 				$this->getModifyClaimsChangeOps( $claims ) );
 		}
 
@@ -471,7 +471,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array $claims array of serialized claims
+	 * @param array[] $claims array of serialized claims
 	 *
 	 * @return ChangeOp[]
 	 */
@@ -504,16 +504,16 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * Get changeops that remove all claims that have the 'remove' key in the array
 	 *
-	 * @param array $claims array of serialized claims
+	 * @param array[] $claims array of serialized claims
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getRemoveClaimsChangeOps( array $claims ) {
+	private function getRemoveStatementChangeOps( array $claims ) {
 		$opsToReturn = array();
 		foreach ( $claims as $claimArray ) {
 			if ( array_key_exists( 'remove', $claimArray ) ) {
 				if ( array_key_exists( 'id', $claimArray ) ) {
-					$opsToReturn[] = $this->claimChangeOpFactory->newRemoveClaimOp( $claimArray['id'] );
+					$opsToReturn[] = $this->claimChangeOpFactory->newRemoveStatementOp( $claimArray['id'] );
 				} else {
 					$this->dieError( 'Cannot remove a claim with no GUID', 'invalid-claim' );
 				}

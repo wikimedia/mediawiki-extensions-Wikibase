@@ -21,7 +21,7 @@ use Wikibase\Summary;
  * @author Adam Shorland
  * @author Thiemo Mättig
  */
-class ChangeOpClaimRemove extends ChangeOpBase {
+class ChangeOpRemoveStatement extends ChangeOpBase {
 
 	/**
 	 * @var string
@@ -31,7 +31,7 @@ class ChangeOpClaimRemove extends ChangeOpBase {
 	/**
 	 * @return string
 	 */
-	public function getClaimGuid() {
+	public function getStatementGuid() {
 		return $this->guid;
 	}
 

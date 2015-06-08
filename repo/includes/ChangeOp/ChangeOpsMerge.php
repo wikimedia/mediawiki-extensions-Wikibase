@@ -266,7 +266,7 @@ class ChangeOpsMerge {
 
 	private function generateClaimsChangeOps() {
 		foreach ( $this->fromItem->getClaims() as $fromClaim ) {
-			$this->fromChangeOps->add( $this->getClaimChangeOpFactory()->newRemoveClaimOp( $fromClaim->getGuid() ) );
+			$this->fromChangeOps->add( $this->getClaimChangeOpFactory()->newRemoveStatementOp( $fromClaim->getGuid() ) );
 
 			$toClaim = clone $fromClaim;
 			$toClaim->setGuid( null );
