@@ -12,6 +12,7 @@ use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -36,6 +37,11 @@ class WikibaseValueFormatterBuilders {
 	 * @var FormatterLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $repoUriParser;
 
 	/**
 	 * @var EntityTitleLookup|null
@@ -119,18 +125,21 @@ class WikibaseValueFormatterBuilders {
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param EntityIdParser $repoUriParser
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
 		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
+		EntityIdParser $repoUriParser,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->repoUriParser = $repoUriParser;
 	}
 
 	/**
@@ -584,7 +593,9 @@ class WikibaseValueFormatterBuilders {
 		$language = Language::factory( $options->getOption( ValueFormatter::OPT_LANG ) );
 		$localizer = new MediaWikiNumberLocalizer( $language );
 		$decimalFormatter = new DecimalFormatter( $options, $localizer );
-		return new QuantityFormatter( $decimalFormatter, $options );
+		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
+		$unitFormatter = new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup );
+		return new QuantityFormatter( $unitFormatter, $decimalFormatter, $options );
 	}
 
 	/**

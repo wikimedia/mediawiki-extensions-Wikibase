@@ -530,7 +530,7 @@ final class WikibaseClient {
 	 */
 	private function getRepoEntityUriParser() {
 		return ExtractingEntityIdParser::newFrombaseUri(
-			$this->getSettings()->getSetting( 'conceptBaseUri' ),
+			$this->getSettings()->getSetting( 'repoConceptBaseUri' ),
 			$this->getEntityIdParser()
 		);
 	}
