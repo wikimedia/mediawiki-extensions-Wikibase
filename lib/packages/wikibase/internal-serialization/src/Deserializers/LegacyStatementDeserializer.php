@@ -13,13 +13,24 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacyStatementDeserializer implements Deserializer {
 
+	/**
+	 * @var Deserializer
+	 */
 	private $snakDeserializer;
+
+	/**
+	 * @var Deserializer
+	 */
 	private $snakListDeserializer;
 
+	/**
+	 * @var array
+	 */
 	private $serialization;
 
 	public function __construct( Deserializer $snakDeserializer, Deserializer $snakListDeserializer ) {
@@ -30,26 +41,23 @@ class LegacyStatementDeserializer implements Deserializer {
 	/**
 	 * @param array $serialization
 	 *
-	 * @return Claim
+	 * @return Statement
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'Statement serialization should be an array' );
+		}
+
 		$this->serialization = $serialization;
 
-		$this->assertIsArray();
 		$this->assertHasKey( 'm', 'Mainsnak serialization is missing' );
 		$this->assertHasKey( 'q', 'Qualifiers serialization is missing' );
-		$this->assertHasKey( 'g', 'Guid is missing in Claim serialization' );
+		$this->assertHasKey( 'g', 'Guid is missing in serialization' );
 		$this->assertHasKey( 'rank', 'Rank is missing in serialization' );
 		$this->assertHasKey( 'refs', 'Refs are missing in serialization' );
 
-		return $this->newStatementFormSerialization();
-	}
-
-	private function assertIsArray() {
-		if ( !is_array( $this->serialization ) ) {
-			throw new DeserializationException( 'Statement serialization should be an array' );
-		}
+		return $this->newStatement();
 	}
 
 	private function assertHasKey( $key, $message ) {
@@ -58,17 +66,25 @@ class LegacyStatementDeserializer implements Deserializer {
 		}
 	}
 
-	private function newStatementFormSerialization() {
+	private function newStatement() {
 		$statement = new Statement(
 			$this->getMainSnak(),
 			$this->getQualifiers(),
 			$this->getReferences()
 		);
 
-		$this->setGuid( $statement );
 		$this->setRank( $statement );
+		$this->setGuid( $statement );
 
 		return $statement;
+	}
+
+	private function getMainSnak() {
+		return $this->snakDeserializer->deserialize( $this->serialization['m'] );
+	}
+
+	private function getQualifiers() {
+		return $this->snakListDeserializer->deserialize( $this->serialization['q'] );
 	}
 
 	private function setRank( Statement $statement ) {
@@ -78,14 +94,6 @@ class LegacyStatementDeserializer implements Deserializer {
 		catch ( InvalidArgumentException $ex ) {
 			throw new DeserializationException( $ex->getMessage(), $ex );
 		}
-	}
-
-	private function getMainSnak() {
-		return $this->snakDeserializer->deserialize( $this->serialization['m'] );
-	}
-
-	private function getQualifiers() {
-		return $this->snakListDeserializer->deserialize( $this->serialization['q'] );
 	}
 
 	private function setGuid( Statement $statement ) {

@@ -68,7 +68,8 @@ class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function claimsInLegacyFormatProvider() {
 		return array(
 			array( '{"m":["somevalue",42],"q":[],"g":"some guid be here","rank":1,"refs":[]}' ),
-			array( '{"m":["somevalue",42],"q":[["novalue",1337],["value",23,"number",42]],"g":"some guid be here","rank":1,"refs":[]}' ),
+			array( '{"m":["somevalue",42],"q":[["novalue",1337],["value",23,"number",42]],'
+				. '"g":"some guid be here","rank":1,"refs":[]}' ),
 		);
 	}
 
