@@ -65,6 +65,11 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param array $siteLinkArray
+	 *
+	 * @return SiteLinkList
+	 */
 	private function getDeserialized( array $siteLinkArray ) {
 		$siteLinks = array();
 
@@ -75,6 +80,13 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 		return new SiteLinkList( $siteLinks );
 	}
 
+	/**
+	 * @param string $siteId
+	 * @param string|array $siteLinkData
+	 *
+	 * @throws DeserializationException
+	 * @return SiteLink
+	 */
 	private function newSiteLinkFromSerialization( $siteId, $siteLinkData ) {
 		try {
 			return $this->tryNewSiteLinkFromSerialization( $siteId, $siteLinkData );
@@ -84,6 +96,12 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @param string $siteId
+	 * @param string|array $siteLinkData
+	 *
+	 * @return SiteLink
+	 */
 	private function tryNewSiteLinkFromSerialization( $siteId, $siteLinkData ) {
 		if ( is_array( $siteLinkData ) ) {
 			$pageName = $siteLinkData['name'];
@@ -97,6 +115,11 @@ class LegacySiteLinkListDeserializer implements Deserializer {
 		return new SiteLink( $siteId, $pageName, $badges );
 	}
 
+	/**
+	 * @param string[] $badgesSerialization
+	 *
+	 * @return ItemId[]
+	 */
 	private function getDeserializedBadges( array $badgesSerialization ) {
 		$badges = array();
 
