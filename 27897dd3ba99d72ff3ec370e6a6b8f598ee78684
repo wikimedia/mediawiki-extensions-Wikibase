@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_42b0743e",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-08T16:38:23Z",
+      "side": 1,
+      "message": "You actually need to pass this into ItemMergeInteractor\u0027s constructor above",
+      "revId": "27897dd3ba99d72ff3ec370e6a6b8f598ee78684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
