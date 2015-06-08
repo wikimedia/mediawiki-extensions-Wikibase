@@ -12,6 +12,7 @@ use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -36,6 +37,11 @@ class WikibaseValueFormatterBuilders {
 	 * @var FormatterLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $repoUriParser;
 
 	/**
 	 * @var EntityTitleLookup|null
@@ -109,7 +115,7 @@ class WikibaseValueFormatterBuilders {
 		// Formatters to use for HTML in diffs.
 		// Falls back to HTML display formatters.
 		SnakFormatter::FORMAT_HTML_DIFF => array(
-			'PT:quantity' => 'Wikibase\Lib\QuantityDetailsFormatter',
+			'PT:quantity' => array( 'this', 'newQuantityDetailsFormatter' ),
 			'PT:time' => 'Wikibase\Lib\TimeDetailsFormatter',
 			'PT:globe-coordinate' => 'Wikibase\Lib\GlobeCoordinateDetailsFormatter',
 		),
@@ -119,18 +125,21 @@ class WikibaseValueFormatterBuilders {
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param EntityIdParser $repoUriParser
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
 		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
+		EntityIdParser $repoUriParser,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->repoUriParser = $repoUriParser;
 	}
 
 	/**
@@ -571,6 +580,11 @@ class WikibaseValueFormatterBuilders {
 		return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
 	}
 
+	private function getNumberLocalizer( FormatterOptions $options ) {
+		$language = Language::factory( $options->getOption( ValueFormatter::OPT_LANG ) );
+		return new MediaWikiNumberLocalizer( $language );
+	}
+
 	/**
 	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
 	 * Used to compose the QuantityFormatter.
@@ -581,10 +595,25 @@ class WikibaseValueFormatterBuilders {
 	 */
 	private function newQuantityFormatter( FormatterOptions $options ) {
 		//TODO: use a builder for this DecimalFormatter
-		$language = Language::factory( $options->getOption( ValueFormatter::OPT_LANG ) );
-		$localizer = new MediaWikiNumberLocalizer( $language );
-		$decimalFormatter = new DecimalFormatter( $options, $localizer );
-		return new QuantityFormatter( $decimalFormatter, $options );
+		$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
+		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
+		$unitFormatter = new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup );
+		return new QuantityFormatter( $decimalFormatter, $unitFormatter, $options );
+	}
+
+	/**
+	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
+	 * Used to compose the QuantityDetailsFormatter.
+	 *
+	 * @param FormatterOptions $options
+	 *
+	 * @return QuantityDetailsFormatter
+	 */
+	private function newQuantityDetailsFormatter( FormatterOptions $options ) {
+		$localizer = $this->getNumberLocalizer( $options );
+		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
+		$unitFormatter = new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup );
+		return new QuantityDetailsFormatter( $localizer, $unitFormatter, $options );
 	}
 
 	/**
