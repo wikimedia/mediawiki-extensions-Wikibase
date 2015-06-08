@@ -113,7 +113,11 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newStatementSerializer() {
-		return new StatementSerializer( $this->newSnakSerializer(), $this->newSnaksSerializer(), $this->newReferencesSerializer() );
+		return new StatementSerializer(
+			$this->newSnakSerializer(),
+			$this->newSnakListSerializer(),
+			$this->newReferencesSerializer()
+		);
 	}
 
 	/**
