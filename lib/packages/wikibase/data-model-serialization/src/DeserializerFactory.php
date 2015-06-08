@@ -54,9 +54,10 @@ class DeserializerFactory {
 	 * @return DispatchableDeserializer
 	 */
 	public function newEntityDeserializer() {
+		$fingerprintDeserializer = new FingerprintDeserializer();
 		return new DispatchingDeserializer( array(
-			new ItemDeserializer( $this->newEntityIdDeserializer(), $this->newFingerprintDeserializer(), $this->newStatementListDeserializer(), $this->newSiteLinkDeserializer() ),
-			new PropertyDeserializer( $this->newEntityIdDeserializer(), $this->newFingerprintDeserializer(), $this->newStatementListDeserializer() )
+			new ItemDeserializer( $this->newEntityIdDeserializer(), $fingerprintDeserializer, $this->newStatementListDeserializer(), $this->newSiteLinkDeserializer() ),
+			new PropertyDeserializer( $this->newEntityIdDeserializer(), $fingerprintDeserializer, $this->newStatementListDeserializer() )
 		) );
 	}
 
@@ -80,6 +81,8 @@ class DeserializerFactory {
 
 	/**
 	 * Returns a Deserializer that can deserialize StatementList objects.
+	 *
+	 * @since 1.4
 	 *
 	 * @return Deserializer
 	 */
@@ -134,6 +137,8 @@ class DeserializerFactory {
 	/**
 	 * Returns a Deserializer that can deserialize SnakList objects.
 	 *
+	 * @since 1.4
+	 *
 	 * @return Deserializer
 	 */
 	public function newSnakListDeserializer() {
@@ -144,6 +149,7 @@ class DeserializerFactory {
 	 * b/c alias for newSnakListDeserializer
 	 *
 	 * @deprecated since 1.4 - use newSnakListDeserializer instead
+	 *
 	 * @return Deserializer
 	 */
 	public function newSnaksDeserializer() {
@@ -166,15 +172,6 @@ class DeserializerFactory {
 	 */
 	public function newEntityIdDeserializer() {
 		return new EntityIdDeserializer( $this->entityIdParser );
-	}
-
-	/**
-	 * Returns a Deserializer that can deserialize Fingerprint objects.
-	 *
-	 * @return Deserializer
-	 */
-	public function newFingerprintDeserializer() {
-		return new FingerprintDeserializer();
 	}
 
 }

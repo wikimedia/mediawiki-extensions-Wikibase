@@ -9,6 +9,8 @@
 * Renamed `SerializerFactory::newSnaksSerializer` to `SerializerFactory::newSnakListSerializer`, leaving a b/c alias
 * Renamed `DeserializerFactory::newClaimDeserializer` to `DeserializerFactory::newStatementDeserializer`, leaving a b/c alias
 * Renamed `DeserializerFactory::newSnaksDeserializer` to `DeserializerFactory::newSnakListDeserializer`, leaving a b/c alias
+* Added `SerializerFactory::newStatementListSerializer`
+* Added `DeserializerFactory::newStatementListDeserializer`
 
 ## 1.3.0 (2015-01-28)
 
