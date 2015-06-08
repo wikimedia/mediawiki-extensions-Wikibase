@@ -300,8 +300,9 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	/**
 	 * Write predicates linking property entity to property predicates
 	 * @param string $id
+	 * @param boolean $isObjectProperty Is the property data or object property?
 	 */
-	private function writePropertyPredicates( $id ) {
+	private function writePropertyPredicates( $id, $isObjectProperty ) {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim')->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim')->is( RdfVocabulary::NSP_CLAIM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
@@ -311,6 +312,33 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( RdfVocabulary::NSP_REFERENCE, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( RdfVocabulary::NSP_REFERENCE_VALUE, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is( RdfVocabulary::NSP_NOVALUE, $id );
+		// Always object properties
+		$this->writer->about( RdfVocabulary::NSP_CLAIM, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE, $id )->a( 'owl', 'ObjectProperty' );
+		// Depending on property type
+		if( $isObjectProperty ) {
+			$datatype = 'ObjectProperty';
+		} else {
+			$datatype = 'DatatypeProperty';
+		}
+		$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM, $id )->a( 'owl', $datatype );
+		$this->writer->about( RdfVocabulary::NSP_CLAIM_STATEMENT, $id )->a( 'owl', $datatype );
+		$this->writer->about( RdfVocabulary::NSP_QUALIFIER, $id )->a( 'owl', $datatype );
+		$this->writer->about( RdfVocabulary::NSP_REFERENCE, $id )->a( 'owl', $datatype );
+	}
+
+	/**
+	 * Check if the property describes link between objects
+	 * or just data item.
+	 *
+	 * @param Property $property
+	 * @return boolean
+	 */
+	private function propertyIsLink( Property $property ) {
+		// For now, it's very simple but can be more complex later
+		return $property->getDataTypeId() == 'wikibase-entityid';
 	}
 
 	/**
@@ -344,7 +372,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
 				->is( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getDataTypeName( $entity ) );
 			$id = $entity->getId()->getSerialization();
-			$this->writePropertyPredicates( $id );
+			$this->writePropertyPredicates( $id, $this->propertyIsLink( $entity ) );
 			$this->writeNovalueClass( $id );
 		}
 	}
@@ -398,7 +426,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		}
 
 		// If we encountered redirects, the redirect targets may now need resolving.
-		// They actually got added to $this->entitiesResolved, but may not have been 
+		// They actually got added to $this->entitiesResolved, but may not have been
 		// processed by the loop above, because they got added while the loop was in progress.
 		if ( $hasRedirect ) {
 			// Call resolveMentionedEntities() recursively to resolve any yet unresolved

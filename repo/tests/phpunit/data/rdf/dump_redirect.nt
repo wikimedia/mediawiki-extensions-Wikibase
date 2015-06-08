@@ -26,3 +26,11 @@ _:genid1 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#referenceValue> <http://acme.test/prop/reference/value/P10> .
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#statementProperty> <http://acme.test/prop/statement/P10> .
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#statementValue> <http://acme.test/prop/statement/value/P10> .
+<http://acme.test/prop/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://acme.test/prop/direct/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://acme.test/prop/qualifier/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://acme.test/prop/qualifier/value/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://acme.test/prop/reference/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://acme.test/prop/reference/value/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://acme.test/prop/statement/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://acme.test/prop/statement/value/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
