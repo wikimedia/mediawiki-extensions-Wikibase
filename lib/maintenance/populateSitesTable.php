@@ -25,6 +25,8 @@ if ( !class_exists( 'SiteMatrixParser' ) ) {
 class PopulateSitesTable extends Maintenance {
 
 	public function __construct() {
+		parent::__construct();
+
 		$this->mDescription = 'Populate the sites table from another wiki that runs the SiteMatrix extension';
 
 		$this->addOption( 'strip-protocols', "Strip http/https from URLs to make them protocol relative." );
@@ -41,8 +43,6 @@ class PopulateSitesTable extends Maintenance {
 				. ' and populate interwiki ids for sites in that group.', false, true );
 		$this->addOption( 'no-expand-group', 'Do not expand site group codes in site matrix. '
 				. ' By default, "wiki" is expanded to "wikipedia".' );
-
-		parent::__construct();
 	}
 
 	public function execute() {
