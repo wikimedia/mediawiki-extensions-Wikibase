@@ -16,6 +16,24 @@
       "revId": "de93d93ec560291e0767c639703834c39317eec7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9cb80776",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-08T14:49:42Z",
+      "side": 1,
+      "message": "This micro optimization here probably does not matter compared to the big picture. However, the fact that other code is wasting resources does not mean one shouldn\u0027t care.",
+      "parentUuid": "8ec42329_dafbf2b8",
+      "revId": "de93d93ec560291e0767c639703834c39317eec7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
