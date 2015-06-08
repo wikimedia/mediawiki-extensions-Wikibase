@@ -8,9 +8,12 @@ use ValueValidators\Result;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\StatementListProvider;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
@@ -23,6 +26,7 @@ use Wikibase\Validators\SnakValidator;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author H. Snater < mediawiki@snater.com >
+ * @author Thiemo Mättig
  */
 class ChangeOpClaim extends ChangeOpBase {
 
@@ -74,8 +78,8 @@ class ChangeOpClaim extends ChangeOpBase {
 		SnakValidator $snakValidator,
 		$index = null
 	) {
-		if( !is_null( $index ) && !is_integer( $index ) ) {
-			throw new InvalidArgumentException( '$index needs to be null or an integer value' );
+		if ( !is_int( $index ) && $index !== null ) {
+			throw new InvalidArgumentException( '$index must be an integer or null' );
 		}
 
 		$this->claim = $claim;
@@ -87,7 +91,13 @@ class ChangeOpClaim extends ChangeOpBase {
 	}
 
 	/**
-	 * @see ChangeOp::apply()
+	 * @see ChangeOp::apply
+	 *
+	 * @param Entity $entity
+	 * @param Summary|null $summary
+	 *
+	 * @throws ChangeOpException
+	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( $this->claim->getGuid() === null ){
@@ -110,69 +120,50 @@ class ChangeOpClaim extends ChangeOpBase {
 	/**
 	 * @param Entity $entity
 	 * @param Summary|null $summary
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function applyClaimToEntity( Entity $entity, Summary $summary = null ) {
-		$statements = $entity->getStatements();
-		$claims = new Claims( iterator_to_array( $statements ) );
-
-		if( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
-			$newClaims = $this->addClaim( $claims, $summary );
-		} else {
-			$newClaims = $this->setClaim( $claims, $summary );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
 
-		$entity->setStatements( new StatementList( $newClaims ) );
+		$statements = $this->removeStatement( $entity->getStatements()->toArray(), $summary );
+		$statements = $this->addStatement( $statements );
+		$this->setStatements( $entity, $statements );
 	}
 
 	/**
-	 * @param Claims $claims
-	 * @param Summary $summary
+	 * @param Statement[] $statements
+	 * @param Summary|null $summary
 	 *
-	 * @throws ChangeOpException
-	 * @return Claim[]
+	 * @return Statement[]
 	 */
-	protected function addClaim( Claims $claims, Summary $summary = null ) {
-		$this->updateSummary( $summary, 'create' );
+	private function removeStatement( array $statements, Summary $summary = null ) {
+		$guid = $this->claim->getGuid();
+		$newStatements = array();
+		$oldStatement = null;
 
-		$indexedClaimList = new ByPropertyIdArray( (array)$claims );
-		$indexedClaimList->buildIndex();
+		foreach ( $statements as $statement ) {
+			if ( $statement->getGuid() === $guid && $oldStatement === null ) {
+				$oldStatement = $statement;
 
-		try {
-			$indexedClaimList->addObjectAtIndex( $this->claim, $this->index );
-		}
-		catch ( OutOfBoundsException $e ) {
-			if ( $this->index < 0 ) {
-				throw new ChangeOpException( 'Cannot add claim at given index: '. $this->index );
+				if ( $this->index === null ) {
+					$this->index = count( $newStatements );
+				}
 			} else {
-				// XXX: hack below to retry adding the object at a new index
-				// If we fail with the user supplied index and the index is greater than 0
-				// presume the user wants to have the index at the end of the list
-				$this->addObjectAtEndOfList( $indexedClaimList );
+				$newStatements[] = $statement;
 			}
 		}
 
-		return $indexedClaimList->toFlatArray();
-	}
-
-	/**
-	 * @param Claims $claims
-	 * @param Summary $summary
-	 *
-	 * @return Claim[]
-	 */
-	protected function setClaim( Claims $claims, Summary $summary = null ) {
-		$this->updateSummary( $summary, 'update' );
-
-		$claimGuid = $this->claim->getGuid();
-		$oldClaim = $claims->getClaimWithGuid( $claimGuid );
-		$this->checkMainSnakUpdate( $oldClaim );
-
-		if ( $this->index === null ) {
-			$this->index = $claims->indexOf( $this->claim );
+		if ( $oldStatement === null ) {
+			$this->updateSummary( $summary, 'create' );
+		} else {
+			$this->checkMainSnakUpdate( $oldStatement );
+			$this->updateSummary( $summary, 'update' );
 		}
 
-		$claims->removeClaimWithGuid( $claimGuid );
-		return $this->addClaim( $claims );
+		return $newStatements;
 	}
 
 	/**
@@ -181,29 +172,64 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * This checks that the main snaks of the old and the new claim
 	 * refer to the same property.
 	 *
-	 * @param Claim $oldClaim
+	 * @param Statement $oldStatement
 	 *
 	 * @throws ChangeOpException If the main snak update is illegal.
 	 */
-	protected function checkMainSnakUpdate( Claim $oldClaim ) {
+	private function checkMainSnakUpdate( Statement $oldStatement ) {
 		$newMainSnak = $this->claim->getMainSnak();
-		$oldPropertyId = $oldClaim->getMainSnak()->getPropertyId();
+		$oldPropertyId = $oldStatement->getMainSnak()->getPropertyId();
 
 		if ( !$oldPropertyId->equals( $newMainSnak->getPropertyId() ) ) {
-			$claimGuid = $this->claim->getGuid();
-			throw new ChangeOpException( "Claim with GUID $claimGuid uses property "
+			$guid = $this->claim->getGuid();
+			throw new ChangeOpException( "Claim with GUID $guid uses property "
 				. $oldPropertyId . ", can't change to "
 				. $newMainSnak->getPropertyId() );
 		}
 	}
 
 	/**
-	 * @see Bug 58394
-	 * @param ByPropertyIdArray $indexedClaimList
+	 * @param Statement[] $statements
+	 *
+	 * @throws ChangeOpException
+	 * @return Statement[]
 	 */
-	private function addObjectAtEndOfList( $indexedClaimList ) {
-		$newIndex = $indexedClaimList->count() + 1;
-		$indexedClaimList->addObjectAtIndex( $this->claim, $newIndex );
+	private function addStatement( array $statements ) {
+		// If we fail with the user supplied index and the index is greater than or equal 0
+		// presume the user wants to have the index at the end of the list.
+		if ( $this->index < 0 ) {
+			throw new ChangeOpException( 'Can not add claim at given index: '. $this->index );
+		}
+
+		$indexedStatements = new ByPropertyIdArray( $statements );
+		$indexedStatements->buildIndex();
+
+		try {
+			$indexedStatements->addObjectAtIndex( $this->claim, $this->index );
+			$statements = $indexedStatements->toFlatArray();
+		} catch ( OutOfBoundsException $ex ) {
+			$statements[] = $this->claim;
+		}
+
+		return $statements;
+	}
+
+	/**
+	 * @param Entity $entity
+	 * @param Statement[] $statements
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function setStatements( Entity $entity, array $statements ) {
+		$statementList = new StatementList( $statements );
+
+		if ( $entity instanceof Item ) {
+			$entity->setStatements( $statementList );
+		} elseif ( $entity instanceof Property ) {
+			$entity->setStatements( $statementList );
+		} else {
+			throw new InvalidArgumentException( '$entity must be an Item or Property' );
+		}
 	}
 
 	/**
