@@ -519,7 +519,18 @@ final class WikibaseClient {
 		return new WikibaseValueFormatterBuilders(
 			$this->contentLanguage,
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
-			new LanguageNameLookup()
+			new LanguageNameLookup(),
+			$this->getRepoEntityUriParser()
+		);
+	}
+
+	/**
+	 * @return ExtractingEntityIdParser
+	 */
+	private function getRepoEntityUriParser() {
+		return ExtractingEntityIdParser::newFrombaseUri(
+			$this->getSettings()->getSetting( 'repoConceptBaseUri' ),
+			$this->getEntityIdParser()
 		);
 	}
 
