@@ -7,6 +7,7 @@ use DataValues\StringValue;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -67,7 +68,8 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$lang,
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' )
+			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
+			new BasicEntityIdParser()
 		);
 
 		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );
