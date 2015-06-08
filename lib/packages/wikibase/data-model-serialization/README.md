@@ -96,11 +96,15 @@ an instance of Serializers\Serializer.
 This library comes with a set up PHPUnit tests that cover all non-trivial code. You can run these
 tests using the PHPUnit configuration file found in the root directory.
 
-    phpunit
+    composer test
     
-By default the slow tests are not run. You can run them with
+If you just want to run the fast tests, execute
 
-    phpunit --group slow
+    phpunit
+
+To run the tests and style checks, which is recommended before committing, execute
+
+    composer ci
 
 ## Authors
 
