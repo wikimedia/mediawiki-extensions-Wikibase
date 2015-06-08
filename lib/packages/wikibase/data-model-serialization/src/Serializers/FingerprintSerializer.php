@@ -21,6 +21,16 @@ use Wikibase\DataModel\Term\TermList;
 class FingerprintSerializer {
 
 	/**
+	 * @since 1.5
+	 */
+	const USE_OBJECTS_FOR_MAPS = true;
+
+	/**
+	 * @since 1.5
+	 */
+	const USE_ARRAYS_FOR_MAPS = false;
+
+	/**
 	 * @var bool
 	 */
 	private $useObjectsForMaps;

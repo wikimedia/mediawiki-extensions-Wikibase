@@ -40,7 +40,7 @@ class PropertySerializerTest extends SerializerBaseTest {
 				);
 			} ) );
 
-		$fingerprintSerializer = new FingerprintSerializer( false );
+		$fingerprintSerializer = new FingerprintSerializer( FingerprintSerializer::USE_ARRAYS_FOR_MAPS );
 
 		return new PropertySerializer( $fingerprintSerializer, $statementListSerializerMock );
 	}

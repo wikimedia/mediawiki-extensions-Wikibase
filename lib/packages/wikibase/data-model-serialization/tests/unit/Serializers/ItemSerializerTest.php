@@ -53,7 +53,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 				'badges' => array()
 			) ) );
 
-		$fingerprintSerializer = new FingerprintSerializer( false );
+		$fingerprintSerializer = new FingerprintSerializer( FingerprintSerializer::USE_ARRAYS_FOR_MAPS );
 
 		return new ItemSerializer( $fingerprintSerializer, $statementListSerializerMock, $siteLinkSerializerMock, false );
 	}
@@ -160,7 +160,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 				'badges' => array()
 			) ) );
 
-		$fingerprintSerializer = new FingerprintSerializer( false );
+		$fingerprintSerializer = new FingerprintSerializer( FingerprintSerializer::USE_ARRAYS_FOR_MAPS );
 
 		$serializer = new ItemSerializer( $fingerprintSerializer, $statementListSerializerMock, $siteLinkSerializerMock, true );
 

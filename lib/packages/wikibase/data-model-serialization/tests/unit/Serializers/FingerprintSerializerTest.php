@@ -33,7 +33,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 		$siteLinkSerializerMock->expects( $this->any() )
 			->method( 'serialize' );
 
-		$entitySerializer = new FingerprintSerializer( false );
+		$entitySerializer = new FingerprintSerializer( FingerprintSerializer::USE_ARRAYS_FOR_MAPS );
 
 		return new ItemSerializer( $entitySerializer, $statementListSerializerMock, $siteLinkSerializerMock, false );
 	}
@@ -313,7 +313,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 	}
 
 	public function testDescriptionWithOptionObjectsForMaps() {
-		$serializer = new FingerprintSerializer( true );
+		$serializer = new FingerprintSerializer( FingerprintSerializer::USE_OBJECTS_FOR_MAPS );
 
 		$descriptions = new TermList();
 		$descriptions->setTextForLanguage( 'en', 'A Nyan Cat' );
@@ -334,7 +334,7 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 	}
 
 	public function testAliasesWithOptionObjectsForMaps() {
-		$serializer = new FingerprintSerializer( true );
+		$serializer = new FingerprintSerializer( FingerprintSerializer::USE_OBJECTS_FOR_MAPS );
 
 		$aliases = new AliasGroupList();
 		$aliases->setAliasesForLanguage( 'fr', array( 'Cat' ) );
