@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e458935b",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaimRemove.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-08T10:41:34Z",
+      "side": 1,
+      "message": "Well, you have changed the doc for the class to class for removing statements, perhaps this class should then re renamed?\nNot worth blocking over though",
+      "revId": "b072cbad63e3f50ab63252d610c33d0c534b6ed7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
