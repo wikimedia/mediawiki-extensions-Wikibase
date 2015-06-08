@@ -90,18 +90,6 @@ class StatementSerializerTest extends SerializerBaseTest {
 			new Statement( new PropertyNoValueSnak( 42 ) )
 		);
 
-		$serializations[] = array(
-			array(
-				'mainsnak' => array(
-					'snaktype' => 'novalue',
-					'property' => 'P42'
-				),
-				'type' => 'statement',
-				'rank' => 'normal'
-			),
-			new Statement( new PropertyNoValueSnak( 42 ) )
-		);
-
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'q42' );
 		$serializations[] = array(

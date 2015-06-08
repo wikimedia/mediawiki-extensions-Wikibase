@@ -90,6 +90,8 @@ class DeserializerFactory {
 	/**
 	 * Returns a Deserializer that can deserialize Statement objects.
 	 *
+	 * @since 1.4
+	 *
 	 * @return DispatchableDeserializer
 	 */
 	public function newStatementDeserializer() {
@@ -101,9 +103,10 @@ class DeserializerFactory {
 	}
 
 	/**
-	 * b/c alias for newStatementDeserializer
+	 * Returns a Deserializer that can deserialize claims.
 	 *
-	 * @deprecated since 1.4 - use newStatementDeserializer instead
+	 * @deprecated since 1.4, use newStatementDeserializer instead
+	 *
 	 * @return DispatchableDeserializer
 	 */
 	public function newClaimDeserializer() {
