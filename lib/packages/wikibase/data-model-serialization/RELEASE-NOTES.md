@@ -11,7 +11,6 @@
 * Renamed `DeserializerFactory::newSnaksDeserializer` to `DeserializerFactory::newSnakListDeserializer`, leaving a b/c alias
 * Added `SerializerFactory::newStatementListSerializer`
 * Added `DeserializerFactory::newStatementListDeserializer`
-* Added `DeserializerFactory::newFingerprintDeserializer`
 
 ## 1.3.0 (2015-01-28)
 

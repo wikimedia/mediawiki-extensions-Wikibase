@@ -130,11 +130,4 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewFingerprintDeserializer() {
-		$this->assertDeserializesWithoutException(
-			$this->buildDeserializerFactory()->newFingerprintDeserializer(),
-			array()
-		);
-	}
-
 }
