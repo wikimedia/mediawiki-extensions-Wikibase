@@ -7,6 +7,7 @@ use Language;
 use MediaWikiTestCase;
 use ParserOptions;
 use Title;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\Item;
@@ -16,6 +17,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\ValuesFinder;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -109,6 +111,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 	private function newEntityParserOutputGenerator() {
 		$templateFactory = TemplateFactory::getDefaultInstance();
+		$referencedEntitiesFinder = new ReferencedEntitiesFinder( new BasicEntityIdParser() );
 
 		return new EntityParserOutputGenerator(
 			$this->getEntityViewFactory(),
@@ -118,6 +121,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			new SqlEntityInfoBuilderFactory(),
 			$this->newLanguageFallbackChain(),
 			'en',
+			$referencedEntitiesFinder,
 			$templateFactory
 		);
 	}
