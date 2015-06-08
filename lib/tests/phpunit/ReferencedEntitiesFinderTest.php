@@ -2,7 +2,9 @@
 
 namespace Wikibase\Lib\Test;
 
+use DataValues\QuantityValue;
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -11,6 +13,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\Parsers\ExtractingEntityIdParser;
 use Wikibase\ReferencedEntitiesFinder;
 
 /**
@@ -32,9 +35,11 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 		$p11 = new PropertyId( 'p11' );
 		$p27 = new PropertyId( 'p27' );
 		$p44 = new PropertyId( 'p44' );
+		$q800 = new ItemId( 'Q800' );
 
 		$q23Value = new EntityIdValue( new ItemId( 'q23' ) );
 		$q24Value = new EntityIdValue( new ItemId( 'q24' ) );
+		$quantityValueUnitQ800 = QuantityValue::newFromNumber( 3, 'http://acme.test/entity/Q800' );
 
 		$argLists[] = array(
 			array(),
@@ -63,7 +68,13 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array(
 			array( new PropertyValueSnak( $p27, $q23Value ) ),
 			array( $p27, $q23Value->getEntityId() ),
-			"PropertyValueSnak with EntityId"
+			"PropertyValueSnak with EntityIdValue"
+		);
+
+		$argLists[] = array(
+			array( new PropertyValueSnak( $p27, $quantityValueUnitQ800 ) ),
+			array( $p27, $q800 ),
+			"PropertyValueSnak with unit URI in a QuantityValue"
 		);
 
 		$argLists[] = array(
@@ -89,7 +100,11 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $message
 	 */
 	public function testFindSnakLinks( array $snaks, array $expected, $message ) {
-		$linkFinder = new ReferencedEntitiesFinder();
+		$linkFinder = new ReferencedEntitiesFinder(
+			ExtractingEntityIdParser::newFromBaseUri(
+				'http://acme.test/entity/',
+				new BasicEntityIdParser()
+			) );
 
 		$actual = $linkFinder->findSnakLinks( $snaks );
 
