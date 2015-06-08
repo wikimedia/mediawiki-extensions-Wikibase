@@ -10,28 +10,27 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
  */
-class SnaksSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
+class SnakListSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider snaksProvider
 	 */
-	public function testSnakSerializationRoundtrips( Snaks $snak ) {
+	public function testSnakSerializationRoundtrips( SnakList $snaks ) {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(),
 			new BasicEntityIdParser()
 		);
 
-		$serialization = $serializerFactory->newSnaksSerializer()->serialize( $snak );
+		$serialization = $serializerFactory->newSnaksSerializer()->serialize( $snaks );
 		$newSnaks = $deserializerFactory->newSnaksDeserializer()->deserialize( $serialization );
-		$this->assertEquals( $snak, $newSnaks );
+		$this->assertEquals( $snaks, $newSnaks );
 	}
 
 	public function snaksProvider() {

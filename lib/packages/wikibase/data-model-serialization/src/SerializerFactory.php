@@ -5,7 +5,7 @@ namespace Wikibase\DataModel;
 use InvalidArgumentException;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
-use Wikibase\DataModel\Serializers\ClaimSerializer;
+use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
@@ -14,7 +14,7 @@ use Wikibase\DataModel\Serializers\ReferenceListSerializer;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
-use Wikibase\DataModel\Serializers\SnaksSerializer;
+use Wikibase\DataModel\Serializers\SnakListSerializer;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
 
@@ -91,7 +91,7 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newClaimsSerializer() {
-		return new ClaimsSerializer( $this->newClaimSerializer(), $this->shouldUseObjectsForMaps() );
+		return new ClaimsSerializer( $this->newStatementSerializer(), $this->shouldUseObjectsForMaps() );
 	}
 
 	/**
@@ -100,16 +100,26 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newStatementListSerializer() {
-		return new StatementListSerializer( $this->newClaimSerializer(), $this->shouldUseObjectsForMaps() );
+		return new StatementListSerializer( $this->newStatementSerializer(), $this->shouldUseObjectsForMaps() );
 	}
 
 	/**
-	 * Returns a Serializer that can serialize Claim objects.
+	 * Returns a Serializer that can serialize Statement objects.
 	 *
 	 * @return Serializer
 	 */
+	public function newStatementSerializer() {
+		return new StatementSerializer( $this->newSnakSerializer(), $this->newSnaksSerializer(), $this->newReferencesSerializer() );
+	}
+
+	/**
+	 * b/c alias of newStatementSerializer
+	 *
+	 * @deprecated since 1.4 - use newStatementSerializer instead
+	 * @return Serializer
+	 */
 	public function newClaimSerializer() {
-		return new ClaimSerializer( $this->newSnakSerializer(), $this->newSnaksSerializer(), $this->newReferencesSerializer() );
+		return $this->newStatementSerializer();
 	}
 
 	/**
@@ -127,16 +137,26 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newReferenceSerializer() {
-		return new ReferenceSerializer( $this->newSnaksSerializer() );
+		return new ReferenceSerializer( $this->newSnakListSerializer() );
 	}
 
 	/**
-	 * Returns a Serializer that can serialize Snaks objects.
+	 * Returns a Serializer that can serialize SnakList objects.
 	 *
 	 * @return Serializer
 	 */
+	public function newSnakListSerializer() {
+		return new SnakListSerializer( $this->newSnakSerializer(), $this->shouldUseObjectsForMaps() );
+	}
+
+	/**
+	 * b/c alias for newSnakListSerializer
+	 *
+	 * @deprecated since 1.4 - use newSnakListSerializer instead
+	 * @return Serializer
+	 */
 	public function newSnaksSerializer() {
-		return new SnaksSerializer( $this->newSnakSerializer(), $this->shouldUseObjectsForMaps() );
+		return $this->newSnakListSerializer();
 	}
 
 	/**

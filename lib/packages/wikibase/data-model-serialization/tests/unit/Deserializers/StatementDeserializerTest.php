@@ -2,8 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Deserializers\ClaimDeserializer;
+use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -11,12 +10,12 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\ClaimDeserializer
+ * @covers Wikibase\DataModel\Deserializers\StatementDeserializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ClaimDeserializerTest extends DeserializerBaseTest {
+class StatementDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
 		$snakDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
@@ -49,7 +48,7 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			->with( $this->equalTo( array() ) )
 			->will( $this->returnValue( new ReferenceList() ) );
 
-		return new ClaimDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
+		return new StatementDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
 	}
 
 	public function deserializableProvider() {
@@ -98,7 +97,7 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 		$serializations = array();
 
 		$serializations[] = array(
-			new Claim( new PropertyNoValueSnak( 42 ) ),
+			new Statement( new PropertyNoValueSnak( 42 ) ),
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -109,7 +108,7 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$serializations[] = array(
-			new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) ),
+			new Statement( new PropertyNoValueSnak( 42 ) ),
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -119,10 +118,10 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'q42' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'q42' );
 		$serializations[] = array(
-			$claim,
+			$statement,
 			array(
 				'id' => 'q42',
 				'mainsnak' => array(
@@ -133,10 +132,10 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Statement::RANK_PREFERRED );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setRank( Statement::RANK_PREFERRED );
 		$serializations[] = array(
-			$claim,
+			$statement,
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -147,10 +146,10 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Statement::RANK_NORMAL );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setRank( Statement::RANK_NORMAL );
 		$serializations[] = array(
-			$claim,
+			$statement,
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -161,10 +160,10 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setRank( Statement::RANK_DEPRECATED );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setRank( Statement::RANK_DEPRECATED );
 		$serializations[] = array(
-			$claim,
+			$statement,
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -175,10 +174,10 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setQualifiers( new SnakList( array() ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setQualifiers( new SnakList( array() ) );
 		$serializations[] = array(
-			$claim,
+			$statement,
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -189,12 +188,12 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setQualifiers( new SnakList( array(
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setQualifiers( new SnakList( array(
 			new PropertyNoValueSnak( 42 )
 		) ) );
 		$serializations[] = array(
-			$claim,
+			$statement,
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -213,10 +212,10 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$claim = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
-		$claim->setReferences( new ReferenceList() );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setReferences( new ReferenceList() );
 		$serializations[] = array(
-			$claim,
+			$statement,
 			array(
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
@@ -308,10 +307,10 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			) ) ) );
 
 		$referencesDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
-		$claimDeserializer = new ClaimDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
+		$statementDeserializer = new StatementDeserializer( $snakDeserializerMock, $snaksDeserializerMock, $referencesDeserializerMock );
 
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setQualifiers( new SnakList( array(
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setQualifiers( new SnakList( array(
 			new PropertySomeValueSnak( 42 ),
 			new PropertyNoValueSnak( 42 ),
 			new PropertyNoValueSnak( 24 )
@@ -347,7 +346,7 @@ class ClaimDeserializerTest extends DeserializerBaseTest {
 			'type' => 'claim'
 		);
 
-		$this->assertEquals( $claim->getHash(), $claimDeserializer->deserialize( $serialization )->getHash() );
+		$this->assertEquals( $statement->getHash(), $statementDeserializer->deserialize( $serialization )->getHash() );
 	}
 
 	public function testQualifiersOrderDeserializationWithTypeError() {

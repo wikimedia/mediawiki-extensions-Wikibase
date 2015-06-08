@@ -3,17 +3,17 @@
 namespace Tests\Wikibase\DataModel\Serializers;
 
 use stdClass;
-use Wikibase\DataModel\Serializers\SnaksSerializer;
+use Wikibase\DataModel\Serializers\SnakListSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Serializers\SnaksSerializer
+ * @covers Wikibase\DataModel\Serializers\SnakListSerializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SnaksSerializerTest extends SerializerBaseTest {
+class SnakListSerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
 		$snakSerializerMock = $this->getMock( '\Serializers\Serializer' );
@@ -25,7 +25,7 @@ class SnaksSerializerTest extends SerializerBaseTest {
 				'property' => "P42"
 			) ) );
 
-		return new SnaksSerializer( $snakSerializerMock, false );
+		return new SnakListSerializer( $snakSerializerMock, false );
 	}
 
 	public function serializableProvider() {
@@ -77,7 +77,7 @@ class SnaksSerializerTest extends SerializerBaseTest {
 		);
 	}
 
-	public function testSnaksSerializerWithOptionObjectsForMaps() {
+	public function testSnakListSerializerWithOptionObjectsForMaps() {
 		$snakSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
@@ -86,7 +86,7 @@ class SnaksSerializerTest extends SerializerBaseTest {
 				'snaktype' => 'novalue',
 				'property' => "P42"
 			) ) );
-		$serializer = new SnaksSerializer( $snakSerializerMock, true );
+		$serializer = new SnakListSerializer( $snakSerializerMock, true );
 
 		$snaklist = new SnakList( array( new PropertyNoValueSnak( 42 ) ) );
 

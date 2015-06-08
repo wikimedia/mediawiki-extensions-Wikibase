@@ -9,7 +9,6 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Deserializers\Exceptions\MissingTypeException;
 use Deserializers\Exceptions\UnsupportedTypeException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -18,7 +17,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ClaimDeserializer implements DispatchableDeserializer {
+class StatementDeserializer implements DispatchableDeserializer {
 
 	private $rankIds = array(
 		'deprecated' => Statement::RANK_DEPRECATED,
@@ -71,7 +70,7 @@ class ClaimDeserializer implements DispatchableDeserializer {
 	 *
 	 * @param array $serialization
 	 *
-	 * @return Claim|Statement
+	 * @return Statement
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
@@ -84,20 +83,17 @@ class ClaimDeserializer implements DispatchableDeserializer {
 	private function getDeserialized( array $serialization ) {
 		$mainSnak = $this->snakDeserializer->deserialize( $serialization['mainsnak'] );
 
-		$claim = $serialization['type'] === 'statement' ? new Statement( new Claim( $mainSnak ) ) : new Claim( $mainSnak );
+		$statement = new Statement( $mainSnak );
 
-		$this->setGuidFromSerialization( $serialization, $claim );
-		$this->setQualifiersFromSerialization( $serialization, $claim );
+		$this->setGuidFromSerialization( $serialization, $statement );
+		$this->setQualifiersFromSerialization( $serialization, $statement );
+		$this->setRankFromSerialization( $serialization, $statement );
+		$this->setReferencesFromSerialization( $serialization, $statement );
 
-		if ( $serialization['type'] === 'statement' ) {
-			$this->setRankFromSerialization( $serialization, $claim );
-			$this->setReferencesFromSerialization( $serialization, $claim );
-		}
-
-		return $claim;
+		return $statement;
 	}
 
-	private function setGuidFromSerialization( array &$serialization, Claim $claim ) {
+	private function setGuidFromSerialization( array &$serialization, Statement $statement ) {
 		if ( !array_key_exists( 'id', $serialization ) ) {
 			return;
 		}
@@ -106,10 +102,10 @@ class ClaimDeserializer implements DispatchableDeserializer {
 			throw new DeserializationException( 'The id ' . $serialization['id'] . ' is not a valid GUID.' );
 		}
 
-		$claim->setGuid( $serialization['id'] );
+		$statement->setGuid( $serialization['id'] );
 	}
 
-	private function setQualifiersFromSerialization( array &$serialization, Claim $claim ) {
+	private function setQualifiersFromSerialization( array &$serialization, Statement $statement ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return;
 		}
@@ -122,7 +118,7 @@ class ClaimDeserializer implements DispatchableDeserializer {
 			$qualifiers->orderByProperty( $serialization['qualifiers-order'] );
 		}
 
-		$claim->setQualifiers( $qualifiers );
+		$statement->setQualifiers( $qualifiers );
 	}
 
 	private function setRankFromSerialization( array &$serialization, Statement $statement ) {

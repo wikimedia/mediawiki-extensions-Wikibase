@@ -2,7 +2,6 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Deserializers\ItemDeserializer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -31,7 +30,7 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 			->method( 'deserialize' )
 			->will( $this->returnValue( new Fingerprint() ) );
 
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
 		$statementListDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );

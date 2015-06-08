@@ -6,9 +6,8 @@ use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -17,7 +16,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ClaimSerializer implements DispatchableSerializer {
+class StatementSerializer implements DispatchableSerializer {
 
 	private $rankLabels = array(
 		Statement::RANK_DEPRECATED => 'deprecated',
@@ -59,13 +58,13 @@ class ClaimSerializer implements DispatchableSerializer {
 	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return $object instanceof Claim;
+		return $object instanceof Statement;
 	}
 
 	/**
 	 * @see Serializer::serialize
 	 *
-	 * @param Claim $object
+	 * @param Statement $object
 	 *
 	 * @return array
 	 * @throws SerializationException
@@ -74,50 +73,48 @@ class ClaimSerializer implements DispatchableSerializer {
 		if ( !$this->isSerializerFor( $object ) ) {
 			throw new UnsupportedObjectException(
 				$object,
-				'ClaimSerializer can only serialize Claim objects'
+				'StatementSerializer can only serialize Statement objects'
 			);
 		}
 
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( Claim $claim ) {
+	private function getSerialized( Statement $statement ) {
 		$serialization = array(
-			'mainsnak' => $this->snakSerializer->serialize( $claim->getMainSnak() ),
-			'type' => $claim instanceof Statement ? 'statement' : 'claim'
+			'mainsnak' => $this->snakSerializer->serialize( $statement->getMainSnak() ),
+			'type' => 'statement'
 		);
-		$this->addQualifiersToSerialization( $claim, $serialization );
-		$this->addGuidToSerialization( $claim, $serialization );
 
-		if ( $claim instanceof Statement ) {
-			$this->addRankToSerialization( $claim, $serialization );
-			$this->addReferencesToSerialization( $claim, $serialization );
-		}
+		$this->addQualifiersToSerialization( $statement, $serialization );
+		$this->addGuidToSerialization( $statement, $serialization );
+		$this->addRankToSerialization( $statement, $serialization );
+		$this->addReferencesToSerialization( $statement, $serialization );
 
 		return $serialization;
 	}
 
-	private function addGuidToSerialization( Claim $claim, array &$serialization ) {
-		$guid = $claim->getGuid();
+	private function addGuidToSerialization( Statement $statement, array &$serialization ) {
+		$guid = $statement->getGuid();
 		if ( $guid !== null ) {
 			$serialization['id'] = $guid;
 		}
 	}
 
-	private function addRankToSerialization( Claim $claim, array &$serialization ) {
-		$serialization['rank'] = $this->rankLabels[$claim->getRank()];
+	private function addRankToSerialization( Statement $statement, array &$serialization ) {
+		$serialization['rank'] = $this->rankLabels[$statement->getRank()];
 	}
 
-	private function addReferencesToSerialization( Statement $claim, array &$serialization ) {
-		$references = $claim->getReferences();
+	private function addReferencesToSerialization( Statement $statement, array &$serialization ) {
+		$references = $statement->getReferences();
 
 		if ( $references->count() != 0 ) {
-			$serialization['references'] = $this->referencesSerializer->serialize( $claim->getReferences() );
+			$serialization['references'] = $this->referencesSerializer->serialize( $statement->getReferences() );
 		}
 	}
 
-	private function addQualifiersToSerialization( Claim $claim, &$serialization ) {
-		$qualifiers = $claim->getQualifiers();
+	private function addQualifiersToSerialization( Statement $statement, &$serialization ) {
+		$qualifiers = $statement->getQualifiers();
 
 		if ( $qualifiers->count() !== 0 ) {
 			$serialization['qualifiers'] = $this->snaksSerializer->serialize( $qualifiers );
@@ -125,7 +122,7 @@ class ClaimSerializer implements DispatchableSerializer {
 		}
 	}
 
-	private function buildQualifiersOrderList( Snaks $snaks ) {
+	private function buildQualifiersOrderList( SnakList $snaks ) {
 		$list = array();
 
 		/**
