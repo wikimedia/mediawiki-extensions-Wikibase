@@ -48,14 +48,14 @@ class RemoveReferences extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$claimGuid = $params['statement'];
-		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
+		$guid = $params['statement'];
+		$entityId = $this->claimGuidParser->parse( $guid )->getEntityId();
 		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $guid, $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {
 			$this->dieError( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
@@ -64,7 +64,7 @@ class RemoveReferences extends ModifyClaim {
 		$referenceHashes = $this->getReferenceHashesFromParams( $params, $claim );
 
 		$changeOps = new ChangeOps();
-		$changeOps->add( $this->getChangeOps( $claimGuid, $referenceHashes ) );
+		$changeOps->add( $this->getChangeOps( $guid, $referenceHashes ) );
 
 		try {
 			$changeOps->apply( $entity, $summary );
@@ -86,16 +86,16 @@ class RemoveReferences extends ModifyClaim {
 	}
 
 	/**
-	 * @param string $claimGuid
+	 * @param string $guid
 	 * @param string[] $referenceHashes
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getChangeOps( $claimGuid, array $referenceHashes ) {
+	private function getChangeOps( $guid, array $referenceHashes ) {
 		$changeOps = array();
 
 		foreach ( $referenceHashes as $referenceHash ) {
-			$changeOps[] = $this->statementChangeOpFactory->newRemoveReferenceOp( $claimGuid, $referenceHash );
+			$changeOps[] = $this->statementChangeOpFactory->newRemoveReferenceOp( $guid, $referenceHash );
 		}
 
 		return $changeOps;

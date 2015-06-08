@@ -27,12 +27,12 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 
 		$guidGenerator = new ClaimGuidGenerator();
-		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
+		$validGuid = $guidGenerator->newGuid( $item->getId() );
 		$validRank = 1;
 
 		$args = array();
 		$args[] = array( 123, $validRank );
-		$args[] = array( $validClaimGuid, ':-)' );
+		$args[] = array( $validGuid, ':-)' );
 
 		return $args;
 	}
@@ -42,8 +42,8 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $rank ) {
-		new ChangeOpStatementRank( $claimGuid, $rank );
+	public function testInvalidConstruct( $guid, $rank ) {
+		new ChangeOpStatementRank( $guid, $rank );
 	}
 
 	public function changeOpProvider() {

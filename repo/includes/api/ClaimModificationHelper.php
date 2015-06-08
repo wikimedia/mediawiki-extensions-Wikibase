@@ -77,27 +77,27 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $claimGuid
+	 * @param string $guid
 	 *
 	 * @throws UsageException
 	 * @return bool
 	 */
-	public function validateClaimGuid( $claimGuid ) {
-		return $this->claimGuidValidator->validate( $claimGuid );
+	public function validateClaimGuid( $guid ) {
+		return $this->claimGuidValidator->validate( $guid );
 	}
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $claimGuid
+	 * @param string $guid
 	 * @param Entity $entity
 	 *
 	 * @throws UsageException
 	 * @return Claim
 	 */
-	public function getClaimFromEntity( $claimGuid, Entity $entity ) {
+	public function getClaimFromEntity( $guid, Entity $entity ) {
 		$claims = new Claims( $entity->getClaims() );
-		$claim = $claims->getClaimWithGuid( $claimGuid );
+		$claim = $claims->getClaimWithGuid( $guid );
 
 		if ( $claim === null ) {
 			$this->errorReporter->dieError( 'Could not find the claim' , 'no-such-claim' );

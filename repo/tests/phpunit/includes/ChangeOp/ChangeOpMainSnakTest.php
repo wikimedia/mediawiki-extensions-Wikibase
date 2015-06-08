@@ -65,9 +65,9 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $snak ) {
+	public function testInvalidConstruct( $guid, $snak ) {
 		new ChangeOpMainSnak(
-			$claimGuid,
+			$guid,
 			$snak,
 			$this->mockProvider->getGuidGenerator(),
 			$this->mockProvider->getMockSnakValidator()
@@ -75,14 +75,14 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param string $claimGuid
+	 * @param string $guid
 	 * @param Snak $snak
 	 *
 	 * @return ChangeOpMainSnak
 	 */
-	protected function newChangeOpMainSnak( $claimGuid, Snak $snak ) {
+	protected function newChangeOpMainSnak( $guid, Snak $snak ) {
 		return new ChangeOpMainSnak(
-			$claimGuid,
+			$guid,
 			$snak,
 			$this->mockProvider->getGuidGenerator(),
 			$this->mockProvider->getMockSnakValidator()
@@ -96,8 +96,8 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		// add a new claim
 		$item = $this->makeNewItemWithClaim( 'Q123', $snak );
 		$newSnak =  $this->makeSnak( 'P8', 'newSnak' );
-		$claimGuid = '';
-		$changeOp = $this->newChangeOpMainSnak( $claimGuid, $newSnak );
+		$guid = '';
+		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
 		$args['add new claim'] = array ( $item, $changeOp, $expected );
 
@@ -107,8 +107,8 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 
-		$claimGuid = $claim->getGuid();
-		$changeOp = $this->newChangeOpMainSnak( $claimGuid, $newSnak );
+		$guid = $claim->getGuid();
+		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
 		$args['update claim by guid'] = array ( $item, $changeOp, $expected );
 
@@ -230,9 +230,9 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider validateProvider
 	 */
-	public function testValidate( EntityId $entityId, $claimGuid, Snak $snak ) {
+	public function testValidate( EntityId $entityId, $guid, Snak $snak ) {
 		$changeOpMainSnak = new ChangeOpMainSnak(
-			$claimGuid,
+			$guid,
 			$snak,
 			new ClaimGuidGenerator(),
 			$this->mockProvider->getMockSnakValidator()

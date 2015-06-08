@@ -95,48 +95,48 @@ class ClaimChangeOpFactory {
 	}
 
 	/**
-	 * @param string $claimGuid
+	 * @param string $guid
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newRemoveStatementOp( $claimGuid ) {
-		return new ChangeOpRemoveStatement( $claimGuid );
+	public function newRemoveStatementOp( $guid ) {
+		return new ChangeOpRemoveStatement( $guid );
 	}
 
 	/**
-	 * @param string $claimGuid
+	 * @param string $statementGuid
 	 * @param Snak $snak
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newSetMainSnakOp( $claimGuid, Snak $snak ) {
-		return new ChangeOpMainSnak( $claimGuid, $snak, $this->guidGenerator, $this->snakValidator );
+	public function newSetMainSnakOp( $statementGuid, Snak $snak ) {
+		return new ChangeOpMainSnak( $statementGuid, $snak, $this->guidGenerator, $this->snakValidator );
 	}
 
 	/**
-	 * @param string $claimGuid
+	 * @param string $statementGuid
 	 * @param Snak $snak
 	 * @param string $snakHash (if not empty '', the old snak is replaced)
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newSetQualifierOp( $claimGuid, Snak $snak, $snakHash ) {
+	public function newSetQualifierOp( $statementGuid, Snak $snak, $snakHash ) {
 		//XXX: index??
-		return new ChangeOpQualifier( $claimGuid, $snak, $snakHash, $this->snakValidator );
+		return new ChangeOpQualifier( $statementGuid, $snak, $snakHash, $this->snakValidator );
 	}
 
 	/**
-	 * @param string $claimGuid
+	 * @param string $statementGuid
 	 * @param string $snakHash
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newRemoveQualifierOp( $claimGuid, $snakHash ) {
-		return new ChangeOpQualifierRemove( $claimGuid, $snakHash );
+	public function newRemoveQualifierOp( $statementGuid, $snakHash ) {
+		return new ChangeOpQualifierRemove( $statementGuid, $snakHash );
 	}
 
 }

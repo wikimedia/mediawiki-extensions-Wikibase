@@ -31,7 +31,7 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	/**
 	 * @return string
 	 */
-	public function getStatementGuid() {
+	public function getGuid() {
 		return $this->guid;
 	}
 

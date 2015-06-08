@@ -34,8 +34,8 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorProvider
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $snakHash ) {
-		new ChangeOpQualifierRemove( $claimGuid, $snakHash );
+	public function testInvalidConstruct( $guid, $snakHash ) {
+		new ChangeOpQualifierRemove( $guid, $snakHash );
 	}
 
 	public function changeOpRemoveProvider() {

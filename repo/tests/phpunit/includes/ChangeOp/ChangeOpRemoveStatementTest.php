@@ -35,14 +35,14 @@ class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorProvider
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid ) {
-		new ChangeOpRemoveStatement( $claimGuid );
+	public function testInvalidConstruct( $guid ) {
+		new ChangeOpRemoveStatement( $guid );
 	}
 
 	public function testGetClaimGuid() {
-		$claimguid = 'foobar';
-		$changeop = new ChangeOpRemoveStatement( $claimguid );
-		$this->assertEquals( $claimguid, $changeop->getStatementGuid() );
+		$guid = 'foobar';
+		$changeop = new ChangeOpRemoveStatement( $guid );
+		$this->assertEquals( $guid, $changeop->getGuid() );
 	}
 
 	public function changeOpProvider() {
@@ -66,9 +66,9 @@ class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApplyAddNewClaim( Item $item, ChangeOpRemoveStatement $changeOp, DataValue $expected = null ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$this->assertNotEmpty( $changeOp->getStatementGuid() );
+		$this->assertNotEmpty( $changeOp->getGuid() );
 		$claims = new Claims( $item->getClaims() );
-		$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getStatementGuid() ) );
+		$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getGuid() ) );
 	}
 
 	private function newItemWithClaim( $itemIdString, $snak ) {

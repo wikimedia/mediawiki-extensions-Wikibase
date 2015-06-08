@@ -36,8 +36,8 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorProvider
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $referenceHash ) {
-		new ChangeOpReferenceRemove( $claimGuid, $referenceHash );
+	public function testInvalidConstruct( $guid, $referenceHash ) {
+		new ChangeOpReferenceRemove( $guid, $referenceHash );
 	}
 
 	public function changeOpRemoveProvider() {

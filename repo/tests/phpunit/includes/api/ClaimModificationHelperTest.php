@@ -77,9 +77,9 @@ class ClaimModificationHelperTest extends \MediaWikiTestCase {
 		$statement = new Statement( new Claim( $snak ) );
 		$statement->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
 		$item->getStatements()->addStatement( $statement );
-		$claimGuid = $statement->getGuid();
+		$guid = $statement->getGuid();
 
-		$this->assertEquals( $statement, $claimModificationHelper->getClaimFromEntity( $claimGuid, $item ) );
+		$this->assertEquals( $statement, $claimModificationHelper->getClaimFromEntity( $guid, $item ) );
 		$this->setExpectedException( '\UsageException' );
 		$claimModificationHelper->getClaimFromEntity( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N', $item );
 	}
