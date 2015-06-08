@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @license GPL 2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class UsageAspectTransformer {
 
@@ -132,94 +133,54 @@ class UsageAspectTransformer {
 	 * - If a modified aspect A.xx is present in $aspect and the unmodified aspect A is present in
 	 *   $relevant, the modified aspect A.xx is included in the result.
 	 *
-	 * @param string[] $aspects
-	 * @param string[] $relevant
+	 * @param string[] $aspectKeys Array of aspect keys, with modifiers applied.
+	 * @param string[] $relevant Array of aspect keys, with modifiers applied.
 	 *
-	 * @return string[] Aspect keys, with modifiers applied
+	 * @return string[] Array of aspect keys, with modifiers applied.
 	 */
-	private function getFilteredAspects( array $aspects, array $relevant ) {
-		if ( empty( $aspects ) || empty( $relevant ) ) {
+	private function getFilteredAspects( array $aspectKeys, array $relevant ) {
+		if ( empty( $aspectKeys ) || empty( $relevant ) ) {
 			return array();
 		}
 
-		if ( in_array( 'X', $aspects ) ) {
+		if ( in_array( EntityUsage::ALL_USAGE, $aspectKeys ) ) {
 			return $relevant;
-		} elseif ( in_array( 'X', $relevant ) ) {
-			return $aspects;
+		} elseif ( in_array( EntityUsage::ALL_USAGE, $relevant ) ) {
+			return $aspectKeys;
 		}
 
-		// group modified aspects into "bins" for matching with unmodified aspects, e.g.
-		// array( 'X' => array( 'X' ), 'L' => array( 'L.de', 'L.ru' ) )
-		$aspectBins = $this->binAspects( $aspects );
-		$relevantBins = $this->binAspects( $relevant );
+		$directMatches = array_intersect( $relevant, $aspectKeys );
 
-		// matches 'L.xx' in $aspects to 'L' in  $relevant
-		$leftMatches = $this->matchBins( $aspectBins, $relevant );
+		// This turns the array into an associative array of aspect keys (with modifiers) as keys,
+		// the values being meaningless (a.k.a. HashSet).
+		$aspects = array_flip( $directMatches );
 
-		// matches 'L.xx' in $relevant to 'L' in  $aspects
-		$rightMatches = $this->matchBins( $relevantBins, $aspects );
+		// Matches 'L.xx' in $aspects to 'L' in $relevant.
+		$this->intersectAspectsIntoKeys( $aspectKeys, $relevant, $aspects );
 
-		// matches 'L.xx' in $relevant to 'L.xx' in $aspects
-		$directMatches = array_intersect( $relevant, $aspects );
+		// Matches 'L.xx' in $relevant to 'L' in $aspects.
+		$this->intersectAspectsIntoKeys( $relevant, $aspectKeys, $aspects );
 
-		// combine, sort, and uniquify the results
-		$matches = array_merge(
-			$directMatches,
-			$leftMatches,
-			$rightMatches
-		);
-
-		sort( $matches );
-		return array_unique( $matches );
+		ksort( $aspects );
+		return array_keys( $aspects );
 	}
 
 	/**
-	 * Collects aspects into bins, each bin containing all the modifications of a given aspect.
-	 * This is useful for matching modified aspects against unmodified ones.
-	 *
-	 * @example array( 'X', 'L.de', 'L.ru' ) becomes
-	 *   array( 'X' => array( 'X' ), 'L' => array( 'L.de', 'L.ru' ) ).
-	 *
-	 * @param string[] $aspects
-	 *
-	 * @return string[][] An associative array mapping aspect names to groups of modifications
-	 *         of that aspect.
+	 * @param string[] $aspectKeys Array of aspect keys, with modifiers applied.
+	 * @param string[] $relevant Array of aspects (without modifiers).
+	 * @param array &$aspects Associative array of aspect keys (with modifiers) as keys, the values
+	 * being meaningless (a.k.a. HashSet).
 	 */
-	private function binAspects( $aspects ) {
-		$bags = array();
+	private function intersectAspectsIntoKeys( array $aspectKeys, array $relevant, array &$aspects ) {
+		$relevant = array_flip( $relevant );
 
-		foreach ( $aspects as $a ) {
-			list( $key, ) = EntityUsage::splitAspectKey( $a );
-			$bags[$key][] = $a;
+		foreach ( $aspectKeys as $aspectKey ) {
+			$aspect = EntityUsage::stripModifier( $aspectKey );
+
+			if ( array_key_exists( $aspect, $relevant ) ) {
+				$aspects[$aspectKey] = null;
+			}
 		}
-
-		return $bags;
-	}
-
-	/**
-	 * Match the names $aspects against the aspects used as keys to in $bins.
-	 * The result is constructed by merging the bins associated with matching keys.
-	 *
-	 * @example: If $aspects = array( 'T', 'L', 'S' ) and
-	 * $bins = array( 'L' => array( 'L.de', 'L.ru' ), 'T' => array( 'T' ), 'X' => array( 'X' ) ),
-	 * the result would be array( 'L.de', 'L.ru', 'T' ), which is the union of the bins
-	 * associated with the 'L' and 'T' keys.
-	 *
-	 * @param string[][] $bins An associative array mapping aspect names to groups of modifications
-	 *         of that aspect, as returned by binAspects().
-	 *
-	 * @param string[] $aspects A list of aspect names
-	 *
-	 * @return string[]
-	 */
-	private function matchBins( array $bins, array $aspects ) {
-		// keep the bins with keys also present in $aspects
-		$matchingBins = array_intersect_key( $bins, array_flip( $aspects ) );
-
-		// merge the matching bins into a single list
-		$matchingAspects = array_reduce( $matchingBins, 'array_merge', array() );
-
-		return $matchingAspects;
 	}
 
 }
