@@ -1,6 +1,6 @@
 # ValueView
 
-ValueView introduces the <code>jQuery.valueview</code> widget which may be used to display and edit data values (`DataValue` objects defined in the [DataValues](https://github.com/DataValues/DataValues) library and supported via the [DataValuesJavaScript](https://github.com/wmde/DataValuesJavascript) package). The `jQuery.valueview` widget and its resources may be extended to support custom `DataValue` implementations.
+ValueView introduces the <code>jQuery.valueview</code> widget which may be used to display and edit data values (`DataValue` objects defined in the [DataValues](https://github.com/DataValues/DataValues) library and supported via the [DataValues JavaScript](https://github.com/wmde/DataValuesJavascript) package). The `jQuery.valueview` widget and its resources may be extended to support custom `DataValue` implementations.
 
 ## Components
 
@@ -28,7 +28,7 @@ ValueView introduces the <code>jQuery.valueview</code> widget which may be used 
 
 For the usage examples, it is assumed the following packages are installed:
 * [DataValues](https://github.com/DataValues/DataValues)
-* [DataValuesJavaScript](https://github.com/wmde/DataValuesJavascript)
+* [DataValues JavaScript](https://github.com/wmde/DataValuesJavascript)
 * [DataTypes](https://github.com/wmde/DataTypes)
 
 When using `jQuery.valueview` for handling a `DataValue`, a `jQuery.valueview.ExpertStore` with knowledge about an `Expert` dedicated to the `DataValue`'s type is required and can be set up as follows:
@@ -87,7 +87,7 @@ Setting a `jQuery.valueview` instance's value to a `DataValue` it cannot handle 
 
 ## Architecture
 
-`jQuery.valueview` heavily depends on `ValueFormatter`s and `ValueParser`s defined via the [DataValuesJavaScript](https://github.com/wmde/DataValuesJavascript) library. `ValueFormatter`s are used to convert `DataValue` instances to DOM elements, and `ValueParser`s are used to convert plain strings (which may be accompanied by some options) to `DataValue` instances.
+`jQuery.valueview` heavily depends on `ValueFormatter`s and `ValueParser`s defined via the [DataValues JavaScript](https://github.com/wmde/DataValuesJavascript) library. `ValueFormatter`s are used to convert `DataValue` instances to DOM elements, and `ValueParser`s are used to convert plain strings (which may be accompanied by some options) to `DataValue` instances.
 Since `Expert`s only are used for editing values, they are constructed when starting edit mode and destroyed after leaving edit mode. `Expert`s have the following lifecycle:
 * `_init()`: Load parsed, formatted and raw (text) values from the `jQuery.valueview` instance linked via `jQuery.valueview.ViewState` and initialize DOM.
 * Edit loop
@@ -199,7 +199,7 @@ Other methods an `Expert` needs to provide:
 * Input extender extension will not be hidden on mousedown event.
 
 #### Breaking changes
-* Use version 0.6.0 of DataValuesJavascript
+* Updated DataValues JavaScript dependency to version 0.6.
 * Renamed jQuery.ui.suggestCommons to jQuery.ui.commonssuggester.
 * When pressing ESC on a suggester enhanced input element while the suggester menu is visible, the key event's propagation is stopped.
 
@@ -279,8 +279,8 @@ Other methods an `Expert` needs to provide:
 * Renamed jQuery.valueView option "expertProvider" to "expertStore".
 * Renamed jQuery.valueView option "valueFormatterProvider" to "formatterStore".
 * Renamed jQuery valueView option "valueParserProvider" to "parserStore".
-* Updated DataValuesJavaScript dependency to version 0.5.0.
-* Removed setting default formatter provider/store and parser provider/store of jQuery.valueView in mw.ext.valueView since no defaults are provided by DataValuesJavaScript as of version 0.5.0.
+* Updated DataValues JavaScript dependency to version 0.5.
+* Removed setting default formatter provider/store and parser provider/store of jQuery.valueView in mw.ext.valueView since no defaults are provided by DataValues JavaScript as of version 0.5.0.
 * Removed mw.ext.valueView module.
 * Fixed ValueView to again support setting value to null
 * jQuery.valueview expects the rejected promise that may be returned by ValueParser's parse() and ValueFormatter's format() to feature a single parameter only.
@@ -292,7 +292,7 @@ Other methods an `Expert` needs to provide:
 
 ### 0.4.1 (2014-03-26)
 
-* Require data-values/javascript 0.4
+* Updated DataValues JavaScript dependency to version 0.4.
 
 ### 0.4 (2014-03-26)
 
@@ -342,7 +342,7 @@ Other methods an `Expert` needs to provide:
 
 #### Enhancements
 
-* Adapted changes of data-values/javascript version 0.3.
+* Updated DataValues JavaScript dependency to version 0.3.
 * Renamed jQuery.valueview.preview to jQuery.ui.preview
 
 ### 0.2 (2014-01-29)
