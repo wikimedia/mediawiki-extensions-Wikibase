@@ -44,6 +44,11 @@ class EntityParserOutputGeneratorFactory {
 	private $valuesFinder;
 
 	/**
+	 * @var ReferencedEntitiesFinder
+	 */
+	private $referencedEntitiesFinder;
+
+	/**
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
@@ -54,6 +59,7 @@ class EntityParserOutputGeneratorFactory {
 		EntityTitleLookup $entityTitleLookup,
 		ValuesFinder $valuesFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		ReferencedEntitiesFinder $referencedEntitiesFinder,
 		TemplateFactory $templateFactory
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -61,6 +67,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->valuesFinder = $valuesFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
 		$this->templateFactory = $templateFactory;
 	}
 
@@ -82,6 +89,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityInfoBuilderFactory,
 			$this->getLanguageFallbackChain( $languageCode ),
 			$languageCode,
+			$this->referencedEntitiesFinder,
 			$this->templateFactory
 		);
 	}
