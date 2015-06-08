@@ -28,9 +28,7 @@ sudo: false
 before_script:
   - travis_retry composer require "wikibase/data-model=$DM" --prefer-source
 
-script:
-  - phpunit
-  - phpunit --group slow
+script: composer ci
 
 notifications:
   irc:
