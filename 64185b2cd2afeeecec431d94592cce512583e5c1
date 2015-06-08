@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_a2bef8cf",
+        "filename": "repo/includes/ChangeOp/ChangeOpRemoveStatement.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-08T17:08:10Z",
+      "side": 1,
+      "message": "maybe just getGuid?",
+      "revId": "64185b2cd2afeeecec431d94592cce512583e5c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_62b810e3",
+        "filename": "repo/includes/ChangeOp/ClaimChangeOpFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-08T17:08:10Z",
+      "side": 1,
+      "message": "ClaimGuid or StatementGuid?",
+      "revId": "64185b2cd2afeeecec431d94592cce512583e5c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
