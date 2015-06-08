@@ -90,7 +90,12 @@ class ItemSerializer implements DispatchableSerializer {
 			'type' => $item->getType()
 		);
 
-		$this->fingerprintSerializer->addBasicsToSerialization( $item, $serialization );
+		$this->fingerprintSerializer->addBasicsToSerialization(
+			$item->getId(),
+			$item->getFingerprint(),
+			$serialization
+		);
+
 		$this->addStatementListToSerialization( $item, $serialization );
 		$this->addSiteLinksToSerialization( $item, $serialization );
 
