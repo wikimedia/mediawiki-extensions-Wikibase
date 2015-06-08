@@ -50,6 +50,7 @@ use Wikibase\Lib\Localizer\MessageExceptionLocalizer;
 use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\Parsers\ExtractingEntityIdParser;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
@@ -569,7 +570,18 @@ class WikibaseRepo {
 			$wgContLang,
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			new LanguageNameLookup(),
+			$this->getLocalEntityUriParser(),
 			$this->getEntityTitleLookup()
+		);
+	}
+
+	/**
+	 * @return EntityIdParser
+	 */
+	private function getLocalEntityUriParser() {
+		return ExtractingEntityIdParser::newFrombaseUri(
+			$this->getSettings()->getSetting( 'conceptBaseUri' ),
+			$this->getEntityIdParser()
 		);
 	}
 
