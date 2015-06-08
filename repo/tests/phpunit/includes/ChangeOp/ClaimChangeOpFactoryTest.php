@@ -51,8 +51,8 @@ class ClaimChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
 	}
 
-	public function testNewRemoveClaimOp() {
-		$op = $this->newChangeOpFactory()->newRemoveClaimOp( 'DEADBEEF' );
+	public function testNewRemoveStatementOp() {
+		$op = $this->newChangeOpFactory()->newRemoveStatementOp( 'DEADBEEF' );
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
 	}
 

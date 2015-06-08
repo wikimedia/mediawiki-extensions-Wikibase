@@ -133,7 +133,7 @@ class RemoveClaims extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $params['claim'] as $guid ) {
-			$changeOps[] = $this->claimChangeOpFactory->newRemoveClaimOp( $guid );
+			$changeOps[] = $this->claimChangeOpFactory->newRemoveStatementOp( $guid );
 		}
 
 		return $changeOps;

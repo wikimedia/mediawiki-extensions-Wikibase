@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOpClaimRemove;
+use Wikibase\ChangeOp\ChangeOpRemoveStatement;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOpClaimRemove
+ * @covers Wikibase\ChangeOp\ChangeOpRemoveStatement
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidConstructorProvider() {
 		$args = array();
@@ -36,13 +36,13 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $claimGuid ) {
-		new ChangeOpClaimRemove( $claimGuid );
+		new ChangeOpRemoveStatement( $claimGuid );
 	}
 
 	public function testGetClaimGuid() {
 		$claimguid = 'foobar';
-		$changeop = new ChangeOpClaimRemove( $claimguid );
-		$this->assertEquals( $claimguid, $changeop->getClaimGuid() );
+		$changeop = new ChangeOpRemoveStatement( $claimguid );
+		$this->assertEquals( $claimguid, $changeop->getStatementGuid() );
 	}
 
 	public function changeOpProvider() {
@@ -54,7 +54,7 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$guid = $statement->getGuid();
-		$changeOp = new ChangeOpClaimRemove( $guid );
+		$changeOp = new ChangeOpRemoveStatement( $guid );
 		$expected = null;
 		$args[] = array ( $item, $changeOp, $expected );
 
@@ -64,11 +64,11 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider changeOpProvider
 	 */
-	public function testApplyAddNewClaim( Item $item, ChangeOpClaimRemove $changeOp, DataValue $expected = null ) {
+	public function testApplyAddNewClaim( Item $item, ChangeOpRemoveStatement $changeOp, DataValue $expected = null ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$this->assertNotEmpty( $changeOp->getClaimGuid() );
+		$this->assertNotEmpty( $changeOp->getStatementGuid() );
 		$claims = new Claims( $item->getClaims() );
-		$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getClaimGuid() ) );
+		$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getStatementGuid() ) );
 	}
 
 	private function newItemWithClaim( $itemIdString, $snak ) {

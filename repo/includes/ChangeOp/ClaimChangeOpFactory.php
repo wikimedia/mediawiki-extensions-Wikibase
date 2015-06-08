@@ -100,8 +100,8 @@ class ClaimChangeOpFactory {
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newRemoveClaimOp( $claimGuid ) {
-		return new ChangeOpClaimRemove( $claimGuid );
+	public function newRemoveStatementOp( $claimGuid ) {
+		return new ChangeOpRemoveStatement( $claimGuid );
 	}
 
 	/**
