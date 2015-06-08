@@ -43,6 +43,10 @@ class EntityDeserializer implements Deserializer {
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'Entity serialization must be an array' );
+		}
+
 		$this->serialization = $serialization;
 
 		if ( $this->isLegacySerialization() ) {
