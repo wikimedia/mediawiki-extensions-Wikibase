@@ -74,6 +74,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;namespaces: List of namespaces on the client wiki that should have access to repository items. Default: <code>array()</code> (treated as setting is not set; all namespaces enabled)
 ;excludeNamespaces: List of namespaces on the client wiki to disable wikibase links, etc. for.  Default: <code>array()</code>  Example: <code>array( NS_USER_TALK )</code>
 ;repoUrl: The repository's base URL, including the schema (protocol) and domain; This URL can be protocol-relative. Default is <code>'//wikidata.org'</code>. '''Note:''' this may be removed once we can get this information from the sites table.
+;repoConceptBaseUri: The base of the repository's concept URIs. Default is <code>'<i>repoUrl</i>/entity/'</code>. '''Note:''' this may be removed once we can get this information from the sites table.
 ;repoScriptPath: The repository's script path. Default is $wgScriptPath, assuming that the repo's script path is the same as this wiki's script path. '''Note:''' this may be removed once we can get this information from the sites table.
 ;repoArticlePath: The repository's article path. Default is $wgArticlePath, assuming that the repo's article path is the same as this wiki's script path. '''Note:''' this may be removed once we can get this information from the sites table.
 ;sort: How to sort language links in the side bar. Possible values:
