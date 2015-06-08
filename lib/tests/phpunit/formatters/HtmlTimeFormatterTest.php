@@ -40,28 +40,26 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param string $time
+	 * @param string $timestamp
 	 * @param int $precision
 	 * @param string $calendarModel
 	 *
 	 * @return TimeValue
 	 */
-	private function getTimeValue( $time, $precision, $calendarModel ) {
-		$value = $this->getMockBuilder( 'DataValues\TimeValue' )
-			->disableOriginalConstructor()
-			->getMock();
+	private function getTimeValue( $timestamp, $precision, $calendarModel ) {
+		$timeValue = new TimeValue( '+1-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $calendarModel );
 
-		$value->expects( $this->any() )
-			->method( 'getTime' )
-			->will( $this->returnValue( $time ) );
-		$value->expects( $this->any() )
-			->method( 'getPrecision' )
-			->will( $this->returnValue( $precision ) );
-		$value->expects( $this->any() )
-			->method( 'getCalendarModel' )
-			->will( $this->returnValue( $calendarModel ) );
+		$class = new \ReflectionClass( 'DataValues\TimeValue' );
 
-		return $value;
+		$timestampProperty = $class->getProperty( 'timestamp' );
+		$timestampProperty->setAccessible( true );
+		$timestampProperty->setValue( $timeValue, $timestamp );
+
+		$precisionProperty = $class->getProperty( 'precision' );
+		$precisionProperty->setAccessible( true );
+		$precisionProperty->setValue( $timeValue, $precision );
+
+		return $timeValue;
 	}
 
 	/**
@@ -235,7 +233,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 			),
 			'HTML entities' => array(
 				'<a>injection</a>',
-				9001,
+				'<a>injection</a>',
 				'<a>injection</a>',
 				'/^MOCKDATE<sup class="wb-calendar-name">&lt;a&gt;injection&lt;\/a&gt;<\/sup>$/'
 			),
@@ -244,10 +242,10 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 		$testCases = array();
 
 		foreach ( $tests as $name => $data ) {
-			list( $time, $precision, $calendarModel, $pattern ) = $data;
+			list( $timestamp, $precision, $calendarModel, $pattern ) = $data;
 
 			$testCases[$name] = array(
-				$this->getTimeValue( $time, $precision, $calendarModel ),
+				$this->getTimeValue( $timestamp, $precision, $calendarModel ),
 				$pattern
 			);
 		}
