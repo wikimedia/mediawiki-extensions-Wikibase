@@ -6,7 +6,6 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\MissingAttributeException;
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Statement\Statement;
@@ -18,19 +17,9 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class LegacyStatementDeserializer implements Deserializer {
 
-	/**
-	 * @var Deserializer
-	 */
 	private $snakDeserializer;
-
-	/**
-	 * @var Deserializer
-	 */
 	private $snakListDeserializer;
 
-	/**
-	 * @var array
-	 */
 	private $serialization;
 
 	public function __construct( Deserializer $snakDeserializer, Deserializer $snakListDeserializer ) {
@@ -45,12 +34,9 @@ class LegacyStatementDeserializer implements Deserializer {
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
-		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'Statement serialization should be an array' );
-		}
-
 		$this->serialization = $serialization;
 
+		$this->assertIsArray();
 		$this->assertHasKey( 'm', 'Mainsnak serialization is missing' );
 		$this->assertHasKey( 'q', 'Qualifiers serialization is missing' );
 		$this->assertHasKey( 'g', 'Guid is missing in serialization' );
@@ -58,6 +44,12 @@ class LegacyStatementDeserializer implements Deserializer {
 		$this->assertHasKey( 'refs', 'Refs are missing in serialization' );
 
 		return $this->newStatement();
+	}
+
+	private function assertIsArray() {
+		if ( !is_array( $this->serialization ) ) {
+			throw new DeserializationException( 'Statement serialization should be an array' );
+		}
 	}
 
 	private function assertHasKey( $key, $message ) {
