@@ -44,7 +44,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param string $time
+	 * @param string $timestamp
 	 * @param int|string $timezone
 	 * @param int|string $before
 	 * @param int|string $after
@@ -54,35 +54,36 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @return TimeValue
 	 */
 	private function getTimeValue(
-		$time = '<a>time</a>',
+		$timestamp = '<a>time</a>',
 		$timezone = '<a>timezone</a>',
 		$before = '<a>before</a>',
 		$after = '<a>after</a>',
 		$precision = '<a>precision</a>',
 		$calendarModel = '<a>calendarmodel</a>'
 	) {
-		$value = $this->getMockBuilder( 'DataValues\TimeValue' )
-			->disableOriginalConstructor()
-			->getMock();
+		$value = new TimeValue( '+1-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $calendarModel );
 
-		$value->expects( $this->any() )
-			->method( 'getTime' )
-			->will( $this->returnValue( $time ) );
-		$value->expects( $this->any() )
-			->method( 'getTimezone' )
-			->will( $this->returnValue( $timezone ) );
-		$value->expects( $this->any() )
-			->method( 'getBefore' )
-			->will( $this->returnValue( $before ) );
-		$value->expects( $this->any() )
-			->method( 'getAfter' )
-			->will( $this->returnValue( $after ) );
-		$value->expects( $this->any() )
-			->method( 'getPrecision' )
-			->will( $this->returnValue( $precision ) );
-		$value->expects( $this->any() )
-			->method( 'getCalendarModel' )
-			->will( $this->returnValue( $calendarModel ) );
+		$class = new \ReflectionClass( 'DataValues\TimeValue' );
+
+		$timestampProperty = $class->getProperty( 'timestamp' );
+		$timestampProperty->setAccessible( true );
+		$timestampProperty->setValue( $value, $timestamp );
+
+		$timezoneProperty = $class->getProperty( 'timezone' );
+		$timezoneProperty->setAccessible( true );
+		$timezoneProperty->setValue( $value, $timezone );
+
+		$beforeProperty = $class->getProperty( 'before' );
+		$beforeProperty->setAccessible( true );
+		$beforeProperty->setValue( $value, $before );
+
+		$afterProperty = $class->getProperty( 'after' );
+		$afterProperty->setAccessible( true );
+		$afterProperty->setValue( $value, $after );
+
+		$precisionProperty = $class->getProperty( 'precision' );
+		$precisionProperty->setAccessible( true );
+		$precisionProperty->setValue( $value, $precision );
 
 		return $value;
 	}
