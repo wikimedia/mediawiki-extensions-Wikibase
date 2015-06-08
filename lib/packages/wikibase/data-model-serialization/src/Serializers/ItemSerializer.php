@@ -107,13 +107,12 @@ class ItemSerializer implements DispatchableSerializer {
 	}
 
 	private function addSiteLinksToSerialization( Item $item, array &$serialization ) {
-		$siteLinks = $item->getSiteLinks();
-
 		$serialization['sitelinks'] = array();
-
-		foreach ( $siteLinks as $siteLink ) {
+		
+		foreach( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$serialization['sitelinks'][$siteLink->getSiteId()] = $this->siteLinkSerializer->serialize( $siteLink );
 		}
+
 		if ( $this->useObjectsForMaps ) {
 			$serialization['sitelinks'] = (object)$serialization['sitelinks'];
 		}
