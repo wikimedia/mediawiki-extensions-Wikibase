@@ -233,6 +233,11 @@ return call_user_func( function() {
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgServer'] : '//www.wikidata.org';
 	};
 
+	$defaults['repoConceptBaseUri'] = function ( SettingsArray $settings ) {
+		// use $wgServer if this wiki is the repo, otherwise default to wikidata.org
+		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgServer'] : '//www.wikidata.org';
+	};
+
 	$defaults['repoArticlePath'] = function ( SettingsArray $settings ) {
 		// use $wgArticlePath if this wiki is the repo, otherwise default to /wiki/$1
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgArticlePath'] : '/wiki/$1';
