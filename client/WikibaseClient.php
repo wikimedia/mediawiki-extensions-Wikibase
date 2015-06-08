@@ -96,6 +96,7 @@ call_user_func( function() {
 	$wgHooks['SidebarBeforeOutput'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onSidebarBeforeOutput';
 	$wgHooks['LinksUpdateComplete'][]				= '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onLinksUpdateComplete';
 	$wgHooks['ArticleDeleteComplete'][]				= '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onArticleDeleteComplete';
+	$wgHooks['ParserCacheSaveComplete'][]				= '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onParserCacheSaveComplete';
 	$wgHooks['ParserFirstCallInit'][]			= '\Wikibase\ClientHooks::onParserFirstCallInit';
 	$wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\ClientHooks::onMagicWordwgVariableIDs';
 	$wgHooks['ParserGetVariableValueSwitch'][]		= '\Wikibase\ClientHooks::onParserGetVariableValueSwitch';

@@ -5,6 +5,10 @@ namespace Wikibase\Client\Hooks;
 use Content;
 use LinksUpdate;
 use ManualLogEntry;
+use ParserCache;
+use ParserOptions;
+use ParserOutput;
+use Title;
 use User;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -69,8 +73,6 @@ class DataUpdateHookHandlers {
 	 * @param int $id id of the article that was deleted
 	 * @param Content $content
 	 * @param ManualLogEntry $logEntry
-	 *
-	 * @return bool
 	 */
 	public static function onArticleDeleteComplete(
 		WikiPage &$article,
@@ -86,6 +88,30 @@ class DataUpdateHookHandlers {
 		$handler->doArticleDeleteComplete( $title->getNamespace(), $id, $logEntry->getTimestamp() );
 	}
 
+	/**
+	 * Static handler for ParserCacheSaveComplete
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserCacheSaveComplete
+	 * @see doParserCacheSaveComplete
+	 *
+	 *
+	 * @param ParserCache $parserCache
+	 * @param ParserOutput $pout
+	 * @param Title $title
+	 * @param ParserOptions $pops
+	 * @param int $revId
+	 */
+	public static function onParserCacheSaveComplete(
+		ParserCache $parserCache,
+		ParserOutput $pout,
+		Title $title,
+		ParserOptions $pops,
+		$revId
+	) {
+		$handler = self::newFromGlobalState();
+		$handler->doParserCacheSaveComplete( $pout, $title );
+	}
+
 	public function __construct(
 		UsageUpdater $usageUpdater
 	) {
@@ -93,7 +119,7 @@ class DataUpdateHookHandlers {
 	}
 
 	/**
-	 * Hook run after a new revision was stored.
+	 * Triggered when a page gets re-rendered to update secondary link tables.
 	 * Implemented to update usage tracking information via UsageUpdater.
 	 *
 	 * @param LinksUpdate $linksUpdate
@@ -108,14 +134,14 @@ class DataUpdateHookHandlers {
 		// These timestamps should usually be the same, but asking $title may cause a database query.
 		$touched = $parserOutput->getTimestamp() ?: $title->getTouched();
 
-		// Add or touch any usages present in the new revision
+		// Add or touch any usages present in the rendering
 		$this->usageUpdater->addUsagesForPage(
 			$title->getArticleId(),
 			$usageAcc->getUsages(),
 			$touched
 		);
 
-		// Prune any usages older than the new revision's timestamp.
+		// Prune any usages older than the new rendering's timestamp.
 		// NOTE: only prune after adding the new updates, to avoid unsubscribing and then
 		// immediately re-subscribing to the used entities.
 		$this->usageUpdater->pruneUsagesForPage(
@@ -125,7 +151,30 @@ class DataUpdateHookHandlers {
 	}
 
 	/**
-	 * Hook run after a page was deleted.
+	 * Triggered when a new rendering of a page is committed to the ParserCache.
+	 * Implemented to update usage tracking information via UsageUpdater.
+	 *
+	 * @param ParserOutput $parserOutput
+	 * @param $title $title
+	 */
+	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
+		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
+
+		// The parser output should tell us when it was parsed. If not, ask the Title object.
+		// These timestamps should usually be the same, but asking $title may cause a database query.
+		$touched = $parserOutput->getTimestamp() ?: $title->getTouched();
+
+		// Add or touch any usages present in the new rendering.
+		// This allows us to track usages in each user language separately, for multilingual sites.
+		$this->usageUpdater->addUsagesForPage(
+			$title->getArticleId(),
+			$usageAcc->getUsages(),
+			$touched
+		);
+	}
+
+	/**
+	 * Triggered after a page was deleted.
 	 * Implemented to prune usage tracking information via UsageUpdater.
 	 *
 	 * @param int $namespace
