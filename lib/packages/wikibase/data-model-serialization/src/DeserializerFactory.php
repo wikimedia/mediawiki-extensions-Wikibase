@@ -81,6 +81,8 @@ class DeserializerFactory {
 	/**
 	 * Returns a Deserializer that can deserialize StatementList objects.
 	 *
+	 * @since 1.4
+	 *
 	 * @return Deserializer
 	 */
 	public function newStatementListDeserializer() {
@@ -134,6 +136,8 @@ class DeserializerFactory {
 	/**
 	 * Returns a Deserializer that can deserialize SnakList objects.
 	 *
+	 * @since 1.4
+	 *
 	 * @return Deserializer
 	 */
 	public function newSnakListDeserializer() {
@@ -144,6 +148,7 @@ class DeserializerFactory {
 	 * b/c alias for newSnakListDeserializer
 	 *
 	 * @deprecated since 1.4 - use newSnakListDeserializer instead
+	 *
 	 * @return Deserializer
 	 */
 	public function newSnaksDeserializer() {
@@ -170,6 +175,8 @@ class DeserializerFactory {
 
 	/**
 	 * Returns a Deserializer that can deserialize Fingerprint objects.
+	 *
+	 * @since 1.4
 	 *
 	 * @return Deserializer
 	 */

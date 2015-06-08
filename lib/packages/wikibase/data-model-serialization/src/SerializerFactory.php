@@ -97,6 +97,8 @@ class SerializerFactory {
 	/**
 	 * Returns a Serializer that can serialize StatementList objects.
 	 *
+	 * @since 1.4
+	 *
 	 * @return Serializer
 	 */
 	public function newStatementListSerializer() {
@@ -146,6 +148,8 @@ class SerializerFactory {
 	/**
 	 * Returns a Serializer that can serialize SnakList objects.
 	 *
+	 * @since 1.4
+	 *
 	 * @return Serializer
 	 */
 	public function newSnakListSerializer() {
@@ -156,6 +160,7 @@ class SerializerFactory {
 	 * b/c alias for newSnakListSerializer
 	 *
 	 * @deprecated since 1.4 - use newSnakListSerializer instead
+	 *
 	 * @return Serializer
 	 */
 	public function newSnaksSerializer() {
