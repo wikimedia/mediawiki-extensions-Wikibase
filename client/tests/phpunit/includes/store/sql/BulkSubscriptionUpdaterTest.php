@@ -58,6 +58,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 
 	public function testPurgeSubscriptions() {
 		$this->truncateEntityUsage();
+		$this->truncateSubscriptions();
 		$this->putSubscriptions( array(
 			array( 'P11', 'dewiki' ),
 			array( 'Q11', 'dewiki' ),
@@ -214,6 +215,11 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$db->endAtomic( __METHOD__ );
+	}
+
+	private function truncateSubscriptions() {
+		$db = wfGetDB( DB_MASTER );
+		$db->delete( 'wb_changes_subscription', '*' );
 	}
 
 	private function putSubscriptions( array $entries ) {
