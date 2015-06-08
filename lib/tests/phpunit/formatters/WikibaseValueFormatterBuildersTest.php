@@ -13,6 +13,7 @@ use Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -85,6 +86,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			Language::factory( 'en' ),
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			$languageNameLookup,
+			new BasicEntityIdParser(),
 			$entityTitleLookup
 		);
 	}
