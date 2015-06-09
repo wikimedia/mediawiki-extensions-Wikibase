@@ -85,7 +85,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 			if ( $redirect !== null ) {
 				// TODO: Optionally follow redirects. Doesn't make sense if a revision ID is given.
-				throw new UnresolvedRedirectException( $redirect->getTargetId() );
+				throw new UnresolvedRedirectRevisionException( $redirect->getTargetId(), (int)$row->rev_id, $row->rev_timestamp );
 			}
 
 			if ( $entityRevision === null ) {

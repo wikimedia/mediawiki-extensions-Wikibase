@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\UnresolvedRedirectRevisionException;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
@@ -353,7 +354,11 @@ class EntityDataRequestHandler {
 				throw new HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
 			}
 		} catch ( UnresolvedRedirectException $ex ) {
-			$entityRedirect = new EntityRedirect( $id, $ex->getRedirectTargetId() );
+			if($ex instanceof UnresolvedRedirectRevisionException ) {
+				$entityRedirect = new EntityRedirect( $id, $ex->getRedirectTargetId(), $ex->getRevisionId(), $ex->getTimestamp() );
+			} else {
+				$entityRedirect = new EntityRedirect( $id, $ex->getRedirectTargetId() );
+			}
 
 			if ( is_string( $revision ) ) {
 				// If no specific revision is requested, resolve the redirect.

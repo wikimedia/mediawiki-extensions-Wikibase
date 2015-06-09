@@ -433,11 +433,17 @@ class EntityDataSerializationService {
 
 		if ( $followedRedirect ) {
 			$rdfBuilder->addEntityRedirect( $followedRedirect->getEntityId(), $followedRedirect->getTargetId() );
+			$rdfBuilder->addEntityRevisionInfo(
+				$followedRedirect->getEntityId(),
+				$followedRedirect->getRevisionId(),
+				$followedRedirect->getTimestamp()
+			);
 		}
 
 		if ( $followedRedirect && $flavor === 'dump' ) {
 			// For redirects, don't output the target entity data if the "dump" flavor is requested.
 			// @todo: In this case, avoid loading the Entity all together.
+			// However we want to output the revisions for redirects
 		} else {
 			$rdfBuilder->addEntityRevisionInfo(
 				$entityRevision->getEntity()->getId(),
