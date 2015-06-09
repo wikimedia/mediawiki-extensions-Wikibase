@@ -26,18 +26,30 @@ class EntityRedirect  {
 	private $targetId;
 
 	/**
+	 * @var int
+	 */
+	private $revisionId;
+
+	/**
+	 * @var string
+	 */
+	private $mwTimestamp;
+
+	/**
 	 * @param EntityId $entityId
 	 * @param EntityId $targetId
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityId $entityId, EntityId $targetId ) {
+	public function __construct( EntityId $entityId, EntityId $targetId, $revisionId = 0, $mwTimestamp = '' ) {
 		if ( $entityId->getEntityType() !== $targetId->getEntityType() ) {
 			throw new InvalidArgumentException( '$entityId and $targetId must refer to the same kind of entity.' );
 		}
 
 		$this->entityId = $entityId;
 		$this->targetId = $targetId;
+		$this->revisionId = $revisionId;
+		$this->mwTimestamp = $mwTimestamp;
 	}
 
 	/**
@@ -55,6 +67,24 @@ class EntityRedirect  {
 	}
 
 	/**
+	 * @see Revision::getId
+	 *
+	 * @return int
+	 */
+	public function getRevisionId() {
+		return $this->revisionId;
+	}
+
+	/**
+	 * @see Revision::getTimestamp
+	 *
+	 * @return string in MediaWiki format or an empty string
+	 */
+	public function getTimestamp() {
+		return $this->mwTimestamp;
+	}
+
+	/**
 	 * @param EntityRedirect $that
 	 *
 	 * @return bool
@@ -67,7 +97,10 @@ class EntityRedirect  {
 		return is_object( $that )
 			&& get_class( $that ) === get_called_class()
 			&& $this->entityId->equals( $that->entityId )
-			&& $this->targetId->equals( $that->targetId );
+			&& $this->targetId->equals( $that->targetId )
+			&& $this->revisionId == $that->revisionId
+			&& $this->mwTimestamp == $that->mwTimestamp
+			;
 	}
 
 }

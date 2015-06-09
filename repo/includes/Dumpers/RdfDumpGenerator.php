@@ -19,6 +19,7 @@ use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriterFactory;
+use Wikibase\Lib\Store\UnresolvedRedirectRevisionException;
 
 /**
  * RdfDumpGenerator generates an RDF dump of a given set of entities, excluding
@@ -115,6 +116,13 @@ class RdfDumpGenerator extends DumpGenerator {
 		} catch ( MWContentSerializationException $ex ) {
 			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
 		} catch ( UnresolvedRedirectException $e ) {
+			if( $e instanceof UnresolvedRedirectRevisionException ) {
+				$this->rdfBuilder->addEntityRevisionInfo(
+						$entityId,
+						$e->getRevisionId(),
+						$e->getTimestamp()
+				);
+			}
 			$this->rdfBuilder->addEntityRedirect(
 				$entityId,
 				$e->getRedirectTargetId()
