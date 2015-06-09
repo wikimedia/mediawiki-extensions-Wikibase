@@ -11,7 +11,7 @@ use Wikibase\DataModel\Claim\Claim;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimDeserializer implements Deserializer {
+class StatementDeserializer implements Deserializer {
 
 	/**
 	 * @var Deserializer
