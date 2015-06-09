@@ -44,8 +44,8 @@ class ReferenceListSerializer implements DispatchableSerializer {
 	 *
 	 * @param ReferenceList $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {
@@ -61,7 +61,7 @@ class ReferenceListSerializer implements DispatchableSerializer {
 	private function getSerialized( ReferenceList $references ) {
 		$serialization = array();
 
-		foreach( $references as $reference ) {
+		foreach ( $references as $reference ) {
 			$serialization[] = $this->referenceSerializer->serialize( $reference );
 		}
 

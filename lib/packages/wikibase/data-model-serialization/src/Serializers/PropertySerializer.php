@@ -52,8 +52,8 @@ class PropertySerializer implements DispatchableSerializer {
 	 *
 	 * @param Property $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {

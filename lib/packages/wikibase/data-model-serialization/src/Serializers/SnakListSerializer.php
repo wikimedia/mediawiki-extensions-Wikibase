@@ -52,8 +52,8 @@ class SnakListSerializer implements DispatchableSerializer {
 	 *
 	 * @param SnakList $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {
@@ -72,7 +72,7 @@ class SnakListSerializer implements DispatchableSerializer {
 		/**
 		 * @var Snak $snak
 		 */
-		foreach( $snaks as $snak ) {
+		foreach ( $snaks as $snak ) {
 			$serialization[$snak->getPropertyId()->getSerialization()][] = $this->snakSerializer->serialize( $snak );
 		}
 

@@ -52,8 +52,8 @@ class StatementListSerializer implements DispatchableSerializer {
 	 *
 	 * @param StatementList $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {
@@ -71,7 +71,7 @@ class StatementListSerializer implements DispatchableSerializer {
 
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $statementList );
 
-		foreach( $byPropertyIdGrouper->getPropertyIds() as $propertyId ) {
+		foreach ( $byPropertyIdGrouper->getPropertyIds() as $propertyId ) {
 			$serialization[$propertyId->getSerialization()] = $this->getSerializedStatements(
 				$byPropertyIdGrouper->getByPropertyId( $propertyId )
 			);

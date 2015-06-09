@@ -32,8 +32,8 @@ class TypedSnakSerializer implements Serializer {
 	 *
 	 * @param TypedSnak $object
 	 *
-	 * @return array
 	 * @throws SerializationException
+	 * @return array
 	 */
 	public function serialize( $object ) {
 		$this->assertIsSerializerFor( $object );
