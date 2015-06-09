@@ -100,7 +100,7 @@ class DeserializerFactory {
 	public function newStatementDeserializer() {
 		return new StatementDeserializer(
 			$this->newSnakDeserializer(),
-			$this->newSnaksDeserializer(),
+			$this->newSnakListDeserializer(),
 			$this->newReferencesDeserializer()
 		);
 	}
@@ -131,7 +131,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newReferenceDeserializer() {
-		return new ReferenceDeserializer( $this->newSnaksDeserializer() );
+		return new ReferenceDeserializer( $this->newSnakListDeserializer() );
 	}
 
 	/**
