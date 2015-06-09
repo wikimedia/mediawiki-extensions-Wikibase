@@ -55,8 +55,8 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		$runner->run( array(
 			'type'     => false,
-			'maxJobs'  => 20,
-			'maxTime'  => 20,
+			'maxJobs'  => false,
+			'maxTime'  => false,
 			'throttle' => false,
 		) );
 	}
@@ -133,11 +133,19 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->assertTrackedUsages( $expected, $this->articleTitle );
 	}
 
+	private function waitForNextTimestamp() {
+		$timestamp = wfTimestampNow();
+
+		while ( ( $now = wfTimestampNow() ) === $timestamp ) {
+			usleep( 100 * 1000 );
+		}
+	}
+
 	/**
 	 * @depends testUpdateUsageOnCreation
 	 */
 	public function testUpdateUsageOnEdit() {
-		sleep( 1 ); // make sure we don't get the same timestamp as the edit before!
+		$this->waitForNextTimestamp(); // make sure we don't get the same timestamp as the edit before!
 
 		// Create the template we'll use below.
 		$text = "{{#property:P2|from=Q22}}\n";
@@ -162,14 +170,15 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	 * @depends testUpdateUsageOnEdit
 	 */
 	public function testUpdateUsageOnTemplateChange() {
-		sleep(1); // Make sure we don't get the same timestamp as the edit before!
+		$this->waitForNextTimestamp(); // Make sure we don't get the same timestamp as the edit before!
 
 		// Assume the state created by testUpdateUsageOnEdit().
 		// Change the template to use Q33.
 		$text = "{{#property:P3|from=Q33}}\n";
+
 		$this->updatePage( $this->templateTitle, $text );
 
-		// Check that Q33, now used by the template, is tracked.
+		// Check that Q33, now used via the template, is tracked.
 		// Check that Q22 is no longer tracked, due to timestamp-based pruning.
 		$expected = array(
 			new EntityUsage( new ItemId( 'Q33' ), EntityUsage::OTHER_USAGE ),
@@ -182,7 +191,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	 * @depends testUpdateUsageOnTemplateChange
 	 */
 	public function testUpdateUsageOnDelete() {
-		sleep(1); // make sure we don't get the same timestamp as the edit before!
+		$this->waitForNextTimestamp(); // make sure we don't get the same timestamp as the edit before!
 
 		// Assume the state created by testUpdateUsageOnTemplateChange().
 		// Delete the page.
