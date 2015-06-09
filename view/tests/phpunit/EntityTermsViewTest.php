@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use MediaWikiLangTestCase;
-use MessageCache;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\View\EntityTermsView;
@@ -31,20 +31,9 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$msgCache = MessageCache::singleton();
-		$msgCache->enable();
-
-		// Mocks for all "this is empty" placeholders
-		$msgCache->replace( 'Wikibase-label-empty', '<strong class="test">No label</strong>' );
-		$msgCache->replace( 'Wikibase-description-empty', '<strong class="test">No description</strong>' );
-		$msgCache->replace( 'Wikibase-aliases-empty', '<strong class="test">No aliases</strong>' );
-	}
-
-	protected function tearDown() {
-		$msgCache = MessageCache::singleton();
-		$msgCache->disable();
-
-		parent::tearDown();
+		$this->setMwGlobals( array(
+			'wgLang' => Language::factory( 'qqx' ),
+		) );
 	}
 
 	private function getEntityTermsView( $languageCode = 'en', $called = null ) {
@@ -140,17 +129,17 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$noAliases->removeAliasGroup( 'en' );
 
 		return array(
-			array( new Fingerprint(), 'No' ),
-			array( $noLabel, 'No label' ),
-			array( $noDescription, 'No description' ),
-			array( $noAliases, 'No aliases' ),
+			array( new Fingerprint(), '-empty)' ),
+			array( $noLabel, '(wikibase-label-empty)' ),
+			array( $noDescription, '(wikibase-description-empty)' ),
+			array( $noAliases, '(wikibase-aliases-empty)' ),
 		);
 	}
 
 	/**
 	 * @dataProvider emptyFingerprintProvider
 	 */
-	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint ) {
+	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint, $expectedPlaceholder ) {
 		$entityTermsView = $this->getEntityTermsView();
 		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
@@ -172,7 +161,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
 		$idString = $entityId->getSerialization();
 
-		$this->assertContains( '(' . $idString . ')', $html );
+		$this->assertContains( '(parentheses: ' . $idString . ')', $html );
 		$this->assertContains( '~EDITSECTION~', $html );
 	}
 
@@ -180,20 +169,20 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$entityTermsView = $this->getEntityTermsView();
 		$html = $entityTermsView->getHtml( new Fingerprint(), null, '', new TextInjector() );
 
-		$this->assertNotContains( '(new)', $html );
+		$this->assertNotContains( '(parentheses', $html );
 		$this->assertNotContains( '<a ', $html );
 	}
 
 	/**
 	 * @dataProvider emptyFingerprintProvider
 	 */
-	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $message ) {
+	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $expectedPlaceholder ) {
 		$entityTermsView = $this->getEntityTermsView();
 		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
-		$this->assertContains( $message, $html );
-		$this->assertContains( 'strong', $html, 'make sure the setUp works' );
-		$this->assertNotContains( '<strong class="test">', $html );
+		$this->assertContains( $expectedPlaceholder, $html );
+		$numberOfPlaceholders = $fingerprint->isEmpty() ? 3 : 1;
+		$this->assertSame( $numberOfPlaceholders, substr_count( $html, $expectedPlaceholder ) );
 	}
 
 }
