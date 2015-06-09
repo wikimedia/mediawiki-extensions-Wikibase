@@ -10,7 +10,10 @@ use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroupFallback;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\DataModel\Serializers\FingerprintSerializer
@@ -312,41 +315,47 @@ class FingerprintSerializerTest extends SerializerBaseTest {
 	}
 
 	public function testDescriptionWithOptionObjectsForMaps() {
-		$entitySerializer = new FingerprintSerializer( true );
+		$serializer = new FingerprintSerializer( true );
 
-		$entity = new Item();
-		$entity->setDescriptions( array(
-			'en' => 'A Nyan Cat',
-		) );
+		$descriptions = new TermList();
+		$descriptions->setTextForLanguage( 'en', 'A Nyan Cat' );
 
 		$result = array();
 
-		$descriptions = new stdClass();
-		$descriptions->en = array(
-			'language' => 'en',
-			'value' => 'A Nyan Cat'
+		$expectedSerialization = array(
+			'descriptions' => (object)array(
+				'en' => array(
+					'language' => 'en',
+					'value' => 'A Nyan Cat'
+				)
+			)
 		);
-		$serial = array( 'descriptions' => $descriptions );
-		$entitySerializer->addDescriptionsToSerialization( $entity, $result );
-		$this->assertEquals( $serial, $result );
+
+		$serializer->addDescriptionsToSerialization( $descriptions, $result );
+		$this->assertEquals( $expectedSerialization, $result );
 	}
 
 	public function testAliasesWithOptionObjectsForMaps() {
-		$entitySerializer = new FingerprintSerializer( true );
+		$serializer = new FingerprintSerializer( true );
 
-		$entity = new Item();
-		$entity->setAliases( 'fr', array( 'Cat' ) );
+		$aliases = new AliasGroupList();
+		$aliases->setAliasesForLanguage( 'fr', array( 'Cat' ) );
 
 		$result = array();
 
-		$aliases = new stdClass();
-		$aliases->fr = array( array(
-			'language' => 'fr',
-			'value' => 'Cat'
-		) );
-		$serial = array( 'aliases' => $aliases );
-		$entitySerializer->addAliasesToSerialization( $entity, $result );
-		$this->assertEquals( $serial, $result );
+		$expectedSerialization = array(
+			'aliases' => (object)array(
+				'fr' => array(
+					array(
+						'language' => 'fr',
+						'value' => 'Cat'
+					)
+				)
+			)
+		);
+
+		$serializer->addAliasesToSerialization( $aliases, $result );
+		$this->assertEquals( $expectedSerialization, $result );
 	}
 
 }

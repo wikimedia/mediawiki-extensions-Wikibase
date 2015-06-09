@@ -72,7 +72,12 @@ class PropertySerializer implements DispatchableSerializer {
 			'datatype' => $entity->getDataTypeId(),
 		);
 
-		$this->fingerprintSerializer->addBasicsToSerialization( $entity, $serialization );
+		$this->fingerprintSerializer->addBasicsToSerialization(
+			$entity->getId(),
+			$entity->getFingerprint(),
+			$serialization
+		);
+
 		$this->addStatementListToSerialization( $entity, $serialization );
 
 		return $serialization;

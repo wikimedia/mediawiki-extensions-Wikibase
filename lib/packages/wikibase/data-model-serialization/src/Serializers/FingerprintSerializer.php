@@ -2,10 +2,11 @@
 
 namespace Wikibase\DataModel\Serializers;
 
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupFallback;
 use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\DataModel\Term\TermList;
@@ -31,16 +32,14 @@ class FingerprintSerializer {
 		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
-	public function addBasicsToSerialization( Entity $entity, array &$serialization ) {
-		$this->addIdToSerialization( $entity, $serialization );
-		$this->addLabelsToSerialization( $entity, $serialization );
-		$this->addDescriptionsToSerialization( $entity, $serialization );
-		$this->addAliasesToSerialization( $entity, $serialization );
+	public function addBasicsToSerialization( EntityId $id = null, Fingerprint $fingerprint, array &$serialization ) {
+		$this->addIdToSerialization( $id, $serialization );
+		$this->addLabelsToSerialization( $fingerprint->getLabels(), $serialization );
+		$this->addDescriptionsToSerialization( $fingerprint->getDescriptions(), $serialization );
+		$this->addAliasesToSerialization( $fingerprint->getAliasGroups(), $serialization );
 	}
 
-	public function addIdToSerialization( Entity $entity, array &$serialization ) {
-		$id = $entity->getId();
-
+	public function addIdToSerialization( EntityId $id = null, array &$serialization ) {
 		if ( $id === null ) {
 			return;
 		}
@@ -48,15 +47,11 @@ class FingerprintSerializer {
 		$serialization['id'] = $id->getSerialization();
 	}
 
-	public function addLabelsToSerialization( Entity $entity, array &$serialization ) {
-		$labels = $entity->getFingerprint()->getLabels();
-
+	public function addLabelsToSerialization( TermList $labels, array &$serialization ) {
 		$serialization['labels'] = $this->serializeValuePerTermList( $labels );
 	}
 
-	public function addDescriptionsToSerialization( Entity $entity, array &$serialization ) {
-		$descriptions = $entity->getFingerprint()->getDescriptions();
-
+	public function addDescriptionsToSerialization( TermList $descriptions, array &$serialization ) {
 		$serialization['descriptions'] = $this->serializeValuePerTermList( $descriptions );
 	}
 
@@ -86,9 +81,7 @@ class FingerprintSerializer {
 		$serialization[$language] = $result;
 	}
 
-	public function addAliasesToSerialization( Entity $entity, array &$serialization ) {
-		$aliases = $entity->getFingerprint()->getAliasGroups();
-
+	public function addAliasesToSerialization( AliasGroupList $aliases, array &$serialization ) {
 		$serialization['aliases'] = $this->serializeAliasGroupList( $aliases );
 	}
 
