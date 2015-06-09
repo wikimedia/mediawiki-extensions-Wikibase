@@ -41,9 +41,8 @@ class HtmlUrlFormatter implements ValueFormatter {
 	 *
 	 * @param StringValue $value The URL to turn into a link
 	 *
-	 * @return string
-	 *
 	 * @throws InvalidArgumentException
+	 * @return string HTML
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof StringValue ) ) {

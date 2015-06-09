@@ -34,10 +34,15 @@ class MonolingualHtmlFormatter extends ValueFormatterBase {
 
 	/**
 	 * @see ValueFormatter::format
+	 *
+	 * @param MonolingualTextValue $value
+	 *
+	 * @throws InvalidArgumentException
+	 * @return string HTML
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof MonolingualTextValue ) ) {
-			throw new InvalidArgumentException( '$value must be a MonolingualTextValue' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected a MonolingualTextValue.' );
 		}
 
 		$userLanguage = $this->getOption( ValueFormatter::OPT_LANG );
