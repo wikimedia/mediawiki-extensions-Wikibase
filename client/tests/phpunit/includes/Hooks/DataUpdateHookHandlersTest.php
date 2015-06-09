@@ -41,19 +41,25 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			$touched = $title->getTouched();
 		}
 
+		// NOTE: doLinksUpdateComplete currently uses wfTimestampNow() as the touch date,
+		// instead of $title->getTouched(), since that proved to be unreliable. Once that is
+		// fixed, this test should check for the exact timestamp, instead of accepting any
+		// greater timestamp.
+		$touchedMatcher = $this->greaterThanOrEqual( $touched );
+
 		if ( $expectedUsages === null ) {
 			$usageUpdater->expects( $this->never() )
 				->method( 'addUsagesForPage' );
 		} else {
 			$usageUpdater->expects( $this->once() )
 				->method( 'addUsagesForPage' )
-				->with( $title->getArticleID(), $expectedUsages, $touched );
+				->with( $title->getArticleID(), $expectedUsages, $touchedMatcher );
 		}
 
 		if ( $prune ) {
 			$usageUpdater->expects( $this->once() )
 				->method( 'pruneUsagesForPage' )
-				->with( $title->getArticleID(), $touched );
+				->with( $title->getArticleID(), $touchedMatcher );
 		} else {
 			$usageUpdater->expects( $this->never() )
 				->method( 'pruneUsagesForPage' );
