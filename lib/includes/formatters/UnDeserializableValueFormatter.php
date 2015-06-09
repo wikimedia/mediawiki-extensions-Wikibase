@@ -33,7 +33,7 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param DataValue $dataValue
+	 * @param DataValue $dataValue Unused in this implementation.
 	 *
 	 * @return string
 	 */

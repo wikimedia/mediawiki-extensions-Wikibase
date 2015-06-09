@@ -40,12 +40,14 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	}
 
 	/**
+	 * @see ValueFormatter::format
+	 *
 	 * @since 0.5
 	 *
 	 * @param TimeValue $value
 	 *
-	 * @return string HTML
 	 * @throws InvalidArgumentException
+	 * @return string HTML
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof TimeValue ) ) {

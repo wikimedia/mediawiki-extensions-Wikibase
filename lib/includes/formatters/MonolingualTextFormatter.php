@@ -16,10 +16,15 @@ class MonolingualTextFormatter extends ValueFormatterBase {
 
 	/**
 	 * @see ValueFormatter::format
+	 *
+	 * @param MonolingualTextValue $value
+	 *
+	 * @throws InvalidArgumentException
+	 * @return string Text
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof MonolingualTextValue ) ) {
-			throw new InvalidArgumentException( '$value must be a MonolingualTextValue' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected a MonolingualTextValue.' );
 		}
 
 		return $value->getText();

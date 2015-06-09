@@ -37,6 +37,8 @@ class CommonsLinkFormatter implements ValueFormatter {
 	}
 
 	/**
+	 * @see ValueFormatter::format
+	 *
 	 * Formats the given commons file name as an HTML link
 	 *
 	 * @since 0.5
@@ -44,7 +46,7 @@ class CommonsLinkFormatter implements ValueFormatter {
 	 * @param StringValue $value The commons file name to turn into a link
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string
+	 * @return string HTML
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof StringValue ) ) {

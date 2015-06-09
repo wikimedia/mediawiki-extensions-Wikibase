@@ -38,6 +38,11 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 
 	/**
 	 * @see ValueFormatter::format
+	 *
+	 * @param TimeValue $value
+	 *
+	 * @throws InvalidArgumentException
+	 * @return string Text
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof TimeValue ) ) {
@@ -50,7 +55,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	/**
 	 * @param TimeValue $timeValue
 	 *
-	 * @return string
+	 * @return string Text
 	 */
 	private function formatTimeValue( TimeValue $timeValue ) {
 		$isoTimestamp = $timeValue->getTime();
