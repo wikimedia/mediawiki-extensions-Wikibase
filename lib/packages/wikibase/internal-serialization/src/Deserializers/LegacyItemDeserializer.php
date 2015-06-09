@@ -40,7 +40,7 @@ class LegacyItemDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return Item
 	 * @throws DeserializationException

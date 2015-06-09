@@ -22,7 +22,7 @@ class LegacySnakListDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return SnakList
 	 * @throws DeserializationException

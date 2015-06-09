@@ -17,7 +17,7 @@ use Wikibase\DataModel\SiteLinkList;
 class LegacySiteLinkListDeserializer implements Deserializer {
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return SiteLink[]
 	 * @throws DeserializationException

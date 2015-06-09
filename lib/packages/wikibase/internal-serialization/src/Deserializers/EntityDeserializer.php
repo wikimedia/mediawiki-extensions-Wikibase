@@ -37,7 +37,7 @@ class EntityDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return Entity
 	 * @throws DeserializationException

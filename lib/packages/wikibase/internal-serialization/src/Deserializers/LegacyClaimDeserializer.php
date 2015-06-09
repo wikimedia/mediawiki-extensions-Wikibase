@@ -28,7 +28,7 @@ class LegacyClaimDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return Claim
 	 * @throws DeserializationException

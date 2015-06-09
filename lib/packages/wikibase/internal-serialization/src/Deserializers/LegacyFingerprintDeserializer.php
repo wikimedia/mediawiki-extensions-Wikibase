@@ -22,7 +22,7 @@ class LegacyFingerprintDeserializer implements Deserializer {
 	private $serialization;
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return Item
 	 * @throws DeserializationException

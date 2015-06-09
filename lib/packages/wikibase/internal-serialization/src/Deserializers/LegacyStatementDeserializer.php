@@ -32,7 +32,7 @@ class LegacyStatementDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param array $serialization
 	 *
 	 * @return Statement
 	 * @throws DeserializationException

@@ -23,7 +23,7 @@ class LegacyEntityIdDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param string|array $serialization
 	 *
 	 * @return EntityId
 	 * @throws DeserializationException
