@@ -24,8 +24,8 @@
 	},
 	"require": {
 		"php": ">=5.3.0",
-		"wikibase/data-model": "~2.5",
-		"wikibase/data-model-serialization": "~1.1",
+		"wikibase/data-model": "~3.0",
+		"wikibase/data-model-serialization": "~1.4",
 		"serialization/serialization": "~3.2"
 	},
 	"require-dev": {

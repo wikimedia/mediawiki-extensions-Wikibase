@@ -4,7 +4,6 @@ namespace Wikibase\InternalSerialization;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\InternalSerialization\Deserializers\LegacyClaimDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
@@ -86,10 +85,18 @@ class LegacyDeserializerFactory {
 	}
 
 	/**
+	 * @deprecated since 1.4 - use newStatementDeserializer instead
 	 * @return Deserializer
 	 */
 	public function newClaimDeserializer() {
-		return new LegacyClaimDeserializer(
+		return $this->newStatementDeserializer();
+	}
+
+	/**
+	 * @return Deserializer
+	 */
+	public function newStatementDeserializer() {
+		return new LegacyStatementDeserializer(
 			$this->newSnakDeserializer(),
 			$this->newSnakListDeserializer()
 		);
@@ -98,20 +105,8 @@ class LegacyDeserializerFactory {
 	/**
 	 * @return Deserializer
 	 */
-	public function newStatementDeserializer() {
-		return new LegacyStatementDeserializer(
-			$this->newClaimDeserializer(),
-			$this->newSnakListDeserializer()
-		);
-	}
-
-	/**
-	 * @return Deserializer
-	 */
 	public function newSnakListDeserializer() {
-		$snakDeserializer = $this->newSnakDeserializer();
-
-		return new LegacySnakListDeserializer( $snakDeserializer );
+		return new LegacySnakListDeserializer( $this->newSnakDeserializer() );
 	}
 
 	/**

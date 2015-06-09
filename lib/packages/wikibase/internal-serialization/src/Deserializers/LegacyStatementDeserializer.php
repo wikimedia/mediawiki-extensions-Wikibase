@@ -6,7 +6,6 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\MissingAttributeException;
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Statement\Statement;
@@ -18,16 +17,13 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class LegacyStatementDeserializer implements Deserializer {
 
-	private $claimDeserializer;
+	private $snakDeserializer;
 	private $snakListDeserializer;
 
 	private $serialization;
 
-	public function __construct(
-		Deserializer $claimDeserializer,
-		Deserializer $snakListDeserializer
-	) {
-		$this->claimDeserializer = $claimDeserializer;
+	public function __construct( Deserializer $snakDeserializer, Deserializer $snakListDeserializer ) {
+		$this->snakDeserializer = $snakDeserializer;
 		$this->snakListDeserializer = $snakListDeserializer;
 	}
 
@@ -63,29 +59,38 @@ class LegacyStatementDeserializer implements Deserializer {
 	}
 
 	private function newStatement() {
-		/** @var Claim $claim */
-		$claim = $this->claimDeserializer->deserialize( $this->serialization );
+		$statement = new Statement(
+			$this->getMainSnak(),
+			$this->getQualifiers(),
+			$this->getReferences()
+		);
 
-		$statement = $this->newStatementFromClaim( $claim );
-		$statement->setReferences( $this->getReferences() );
 		$this->setRank( $statement );
+		$this->setGuid( $statement );
 
 		return $statement;
 	}
 
-	private function newStatementFromClaim( Claim $claim ) {
-		$statement = new Statement(
-			new Claim( $claim->getMainSnak(), $claim->getQualifiers() )
-		);
+	private function getMainSnak() {
+		return $this->snakDeserializer->deserialize( $this->serialization['m'] );
+	}
 
-		$statement->setGuid( $claim->getGuid() );
-
-		return $statement;
+	private function getQualifiers() {
+		return $this->snakListDeserializer->deserialize( $this->serialization['q'] );
 	}
 
 	private function setRank( Statement $statement ) {
 		try {
 			$statement->setRank( $this->serialization['rank'] );
+		}
+		catch ( InvalidArgumentException $ex ) {
+			throw new DeserializationException( $ex->getMessage(), $ex );
+		}
+	}
+
+	private function setGuid( Statement $statement ) {
+		try {
+			$statement->setGuid( $this->serialization['g'] );
 		}
 		catch ( InvalidArgumentException $ex ) {
 			throw new DeserializationException( $ex->getMessage(), $ex );

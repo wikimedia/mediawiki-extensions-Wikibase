@@ -3,12 +3,11 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\InternalSerialization\Deserializers\LegacyClaimDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyStatementDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer;
@@ -34,7 +33,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
 
-		$claimDeserializer = new LegacyClaimDeserializer(
+		$statementDeserializer = new LegacyStatementDeserializer(
 			$snakDeserializer,
 			new LegacySnakListDeserializer( $snakDeserializer )
 		);
@@ -42,7 +41,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->deserializer = new LegacyItemDeserializer(
 			$idDeserializer,
 			new LegacySiteLinkListDeserializer(),
-			$claimDeserializer,
+			$statementDeserializer,
 			new LegacyFingerprintDeserializer()
 		);
 	}
@@ -139,7 +138,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newStatement() {
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( 42 ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'foo' );
 		return $statement;
 	}
@@ -149,7 +148,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 			'm' => array( 'novalue', 42 ),
 			'q' => array(),
 			'g' => 'foo',
-			'rank' => Claim::RANK_NORMAL,
+			'rank' => Statement::RANK_NORMAL,
 			'refs' => array()
 		);
 	}
