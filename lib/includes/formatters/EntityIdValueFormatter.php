@@ -28,6 +28,8 @@ class EntityIdValueFormatter implements ValueFormatter {
 	}
 
 	/**
+	 * @see ValueFormatter::format
+	 *
 	 * Format an EntityIdValue
 	 *
 	 * @since 0.5
@@ -35,7 +37,7 @@ class EntityIdValueFormatter implements ValueFormatter {
 	 * @param EntityIdValue $value
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string
+	 * @return string Text
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityIdValue ) ) {

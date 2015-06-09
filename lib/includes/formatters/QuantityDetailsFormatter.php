@@ -48,10 +48,10 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param QuantityValue $value The ID to format
+	 * @param QuantityValue $value
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string
+	 * @return string HTML
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof QuantityValue ) ) {
