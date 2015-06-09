@@ -2,7 +2,6 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use stdClass;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
@@ -11,7 +10,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroupFallback;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\DataModel\Term\TermList;
 

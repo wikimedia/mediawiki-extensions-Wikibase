@@ -66,25 +66,25 @@ class PropertySerializer implements DispatchableSerializer {
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( Property $entity ) {
+	private function getSerialized( Property $property ) {
 		$serialization = array(
-			'type' => $entity->getType(),
-			'datatype' => $entity->getDataTypeId(),
+			'type' => $property->getType(),
+			'datatype' => $property->getDataTypeId(),
 		);
 
 		$this->fingerprintSerializer->addBasicsToSerialization(
-			$entity->getId(),
-			$entity->getFingerprint(),
+			$property->getId(),
+			$property->getFingerprint(),
 			$serialization
 		);
 
-		$this->addStatementListToSerialization( $entity, $serialization );
+		$this->addStatementListToSerialization( $property, $serialization );
 
 		return $serialization;
 	}
 
-	private function addStatementListToSerialization( Property $entity, array &$serialization ) {
-		$serialization['claims'] = $this->statementListSerializer->serialize( $entity->getStatements() );
+	private function addStatementListToSerialization( Property $property, array &$serialization ) {
+		$serialization['claims'] = $this->statementListSerializer->serialize( $property->getStatements() );
 	}
 
 }
