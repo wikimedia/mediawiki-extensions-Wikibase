@@ -130,9 +130,14 @@ class DataUpdateHookHandlers {
 		$parserOutput = $linksUpdate->getParserOutput();
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
-		// The parser output should tell us when it was parsed. If not, ask the Title object.
-		// These timestamps should usually be the same, but asking $title may cause a database query.
-		$touched = $parserOutput->getTimestamp() ?: $title->getTouched();
+		// For now, use the current timestamp as the touch date.
+		// $parserOutput->getTimestamp() sounds good, but is documented as "timestamp of the revision",
+		// which is not what we want. $title->getTouched() sounds good, but it may not have been
+		// updated reflecting the current run of LinksUpdate yet. Since on LinksUpdateComplete we
+		// actually want to purge all old tracking entries and only care about keeping the ones
+		// now present in $parserOutput, using the current timestamp should be fine.
+		// NOTE: adjust DataUpdateHookHandlerTest::newUsageUpdater when fixing this.
+		$touched = wfTimestampNow();
 
 		// Add or touch any usages present in the rendering
 		$this->usageUpdater->addUsagesForPage(
