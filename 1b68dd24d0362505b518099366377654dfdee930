@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_edbce81c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:46:28Z",
+      "side": 1,
+      "message": "Where does this parser come from?",
+      "revId": "1b68dd24d0362505b518099366377654dfdee930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ad7020a4",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:46:28Z",
+      "side": 1,
+      "message": "I think it\u0027s more obvious to make the $unit \u003d\u003d\u003d \u0027\u0027 check explicit and not hide it in the regex. Same could be done with $unit \u003d\u003d\u003d \u00271\u0027.",
+      "revId": "1b68dd24d0362505b518099366377654dfdee930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ad3340bf",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:46:28Z",
+      "side": 1,
+      "message": "This code is odd. At this point this can be any parser. All we know is that it returns an entity id. But the format of the input is a mystery. There are several references to \"URIs\" in this class. But in fact this class can not know.\n\nI think it should now. I think it must require a specific parser in the constructor (or not require it at all, just use it).",
+      "revId": "1b68dd24d0362505b518099366377654dfdee930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_72f777f3",
+        "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:46:28Z",
+      "side": 1,
+      "message": "This confuses me. Are we supporting URIs or entity ids or both? I can\u0027t tell from these test cases. I had the impression we agreed on supporting URIs. So a test case that resolves \"Q7\" into a label should not be here.",
+      "revId": "1b68dd24d0362505b518099366377654dfdee930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
