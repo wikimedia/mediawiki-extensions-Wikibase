@@ -4,7 +4,7 @@ namespace Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * @licence GNU GPL v2+
@@ -23,7 +23,7 @@ class LegacyEntityDeserializer implements Deserializer {
 	/**
 	 * @param mixed $serialization
 	 *
-	 * @return Entity
+	 * @return EntityDocument
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
