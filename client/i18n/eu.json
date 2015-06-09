@@ -3,7 +3,8 @@
 		"authors": [
 			"Xabier Armendaritz",
 			"Subi",
-			"Sator"
+			"Sator",
+			"An13sa"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} itema",
@@ -12,6 +13,7 @@
 	"wikibase-linkitem-input-site": "Hizkuntza:",
 	"wikibase-rc-hide-wikidata-hide": "Ezkutatu",
 	"wikibase-rc-hide-wikidata-show": "Erakutsi",
+	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Aldaketa hau Wikidatan egin da",
 	"wikibase-otherprojects": "Beste proiektuak"
 }

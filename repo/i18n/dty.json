@@ -1,12 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"रमेश सिंह बोहरा"
+			"रमेश सिंह बोहरा",
+			"राम प्रसाद जोशी"
 		]
 	},
 	"wikibase-edit": "सम्पादन गर्न्या",
 	"wikibase-add": "जोड्या",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "अन्य भाषामी",
 	"wikibase-label-empty": "नामपत्र परिभाषित कोई",
+	"wikibase-terms": "अन्य भाषामी",
 	"wikibase-sitelinks-special": "और साइटहरू",
 	"wikibase-statementview-rank-normal": "सानतिनो ओहदा",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|सन्दर्भहरू}}"

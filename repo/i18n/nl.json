@@ -204,7 +204,7 @@
 	"wikibase-itemmerge-cant-load-entity-content": "Fout bij het laden van het item.",
 	"wikibase-itemmerge-cant-merge-self": "Kan item niet met zichzelf samenvoegen.",
 	"special-dispatchstats": "Statistieken over wijzigingenverwerking",
-	"wikibase-dispatchstats-intro": "Deze pagina toont  statistieken over de verzending van wijzigingen aan de cliënten.\nEen wiki-client is in kennis gesteld van een wijziging op {{SITENAME}}, zodra de wijziging is verzonden op die wiki, en de wachtrij op die wiki die kennisgeving heeft verwerkt.\n* {{int:wikidata-dispatchstats-wijzigingen}} toont het nummer en de datum voor de oudste en de meest recente items die momenteel in de wachtrij.\n* {{int:wikidata-dispatchstats-statistieken}} geeft informatie over de meest en minst vertraagde wiki-client, en de mediaan. Voor elke wiki wordt de volgende informatie verstrekt:\n** \"{{int:wikidata-dispatchstats-site-id}}\" de interne ID van de wiki-client.\n** \"{{int:wikidata-dispatchstats-pos}}\" de ID van de laatste wijziging in wiki.\n** \"{{int:wikidata-dispatchstats-lag-num}} ' het aantal wijzigingen dat nog niet is verzonden naar de wiki.\n** \"{{int:wikidata-dispatchstats-lag-time}}\" de tijd tussen de laatst verzonden wijziging naar de wiki, en de laatste wijziging uitgevoerd op {{SITENAME}}.\n** \"{{int:wikidata-dispatchstats geraakt}}\" de tijd waarop de laatste groep wijzigingen is verzonden naar de wiki.",
+	"wikibase-dispatchstats-intro": "Op deze pagina worden statistieken weergegeven over de verzending van wijzigingen aan de clients.\nEen wikiclient krijgt een notificatie van een wijziging op {{SITENAME}}, zodra de wijziging is verzonden op die wiki, en de wachtrij op die wiki die notificatie heeft verwerkt.\n* {{int:wikidata-dispatchstats-wijzigingen}} geeft het aantal en de datum weer voor de oudste en de meest recente items die momenteel in de wachtrij staan.\n* {{int:wikidata-dispatchstats-statistieken}} geeft informatie over de meest en minst vertraagde wikiclient, en de mediaan. Voor elke wiki wordt de volgende informatie verstrekt:\n** \"{{int:wikidata-dispatchstats-site-id}}\" is de interne ID van de wikiclient;\n** \"{{int:wikidata-dispatchstats-pos}}\" is de ID van de laatste wijziging in wiki;\n** \"{{int:wikidata-dispatchstats-lag-num}}\" is het aantal wijzigingen dat nog niet is verzonden naar de wiki;\n** \"{{int:wikidata-dispatchstats-lag-time}}\" is de tijd tussen de laatst verzonden wijziging naar de wiki, en de laatste wijziging uitgevoerd op {{SITENAME}};\n** \"{{int:wikidata-dispatchstats geraakt}}\" de tijd waarop de laatste groep wijzigingen is verzonden naar de wiki.",
 	"wikibase-dispatchstats-no-stats": "Er zijn momenteel geen statistieken beschikbaar.",
 	"wikibase-dispatchstats-changes": "Wijzigingenstatistieken",
 	"wikibase-dispatchstats-stats": "Verwerkingsstatistieken",
@@ -367,5 +367,17 @@
 	"right-property-term": "Eigenschapswaarden wijzigen (labels, beschrijvingen, aliassen)",
 	"right-property-create": "Eigenschappen aanmaken",
 	"action-item-merge": "items samenvoegen",
-	"action-property-create": "eigenschappen aan te maken"
+	"action-property-create": "eigenschappen aan te maken",
+	"apihelp-wbcreateredirect-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbeditentity-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wblinktitles-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbmergeitems-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbsetaliases-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbsetclaim-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbsetclaimvalue-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbsetdescription-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbsetlabel-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbsetqualifier-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbsetreference-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep.",
+	"apihelp-wbsetsitelink-param-bot": "Deze bewerking zo markeren dat deze door een bot is gedaan. Deze optie wordt alleen gebruikt indien de gebruiker lid is van de bot-gebruikersgroep."
 }
