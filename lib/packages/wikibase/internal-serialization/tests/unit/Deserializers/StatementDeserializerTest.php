@@ -4,15 +4,15 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use PHPUnit_Framework_TestCase;
-use Wikibase\InternalSerialization\Deserializers\ClaimDeserializer;
+use Wikibase\InternalSerialization\Deserializers\StatementDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\ClaimDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\StatementDeserializer
  *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class ClaimDeserializerTest extends PHPUnit_Framework_TestCase {
+class StatementDeserializerTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer
@@ -22,7 +22,7 @@ class ClaimDeserializerTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$legacyDeserializer = $this->getMock( 'Deserializers\Deserializer' );
 		$currentDeserializer = $this->getMock( 'Deserializers\DispatchableDeserializer' );
-		$this->deserializer = new ClaimDeserializer( $legacyDeserializer, $currentDeserializer );
+		$this->deserializer = new StatementDeserializer( $legacyDeserializer, $currentDeserializer );
 	}
 
 	/**
