@@ -78,33 +78,29 @@ detail which users should not know about.
 ## Library structure
 
 The Wikibase DataModel objects can all be serialized to a generic format from which the objects
-can later be reconstructed. This is done via a set of Serializers/Serializer implementing objects.
-These objects turn for instance a Claim object into a data structure containing only primitive
-types and arrays. This data structure can thus be readily fed to json_encode, serialize, or the
+can later be reconstructed. This is done via a set of `Serializers/Serializer` implementing objects.
+These objects turn for instance a `Statement` object into a data structure containing only primitive
+types and arrays. This data structure can thus be readily fed to `json_encode`, `serialize`, or the
 like. The process of reconstructing the objects from such a serialization is provided by
-objects implementing the Deserializers/Deserializer interface.
+objects implementing the `Deserializers/Deserializer` interface.
 
-Serializers can be obtained via an instance of SerializerFactory and deserializers can be obtained
-via an instance of DeserializerFactory. You are not allowed to construct these serializers and
+Serializers can be obtained via an instance of `SerializerFactory` and deserializers can be obtained
+via an instance of `DeserializerFactory`. You are not allowed to construct these serializers and
 deserializers directly yourself or to have any kind of knowledge of them (ie type hinting). These
 objects are internal to this component and might change name or structure at any time. All you
-are allowed to know when calling $serializerFactory->newEntitySerializer() is that you get back
-an instance of Serializers\Serializer.
+are allowed to know when calling `$serializerFactory->newEntitySerializer()` is that you get back
+an instance of `Serializers\Serializer`.
 
 ## Tests
 
 This library comes with a set up PHPUnit tests that cover all non-trivial code. You can run these
 tests using the PHPUnit configuration file found in the root directory.
 
-    composer test
-    
-If you just want to run the fast tests, execute
-
     phpunit
+    
+By default the slow tests are not run. You can run them with
 
-To run the tests and style checks, which is recommended before committing, execute
-
-    composer ci
+    phpunit --group slow
 
 ## Authors
 
