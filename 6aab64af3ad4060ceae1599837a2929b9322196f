@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_cd2d6c43",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:55:50Z",
+      "side": 1,
+      "message": "The name of the variables and properties as well as the implementation suggests that this should not allow other classes implementing this interface. This should require the specific parser for URIs and not allow anything else.",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8dbd24d4",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:55:50Z",
+      "side": 1,
+      "message": "I suggest to do use a placeholder, e.g. $1 or %s similar to what\u0027s done in search engine URL patterns. This is much more flexible.",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8db444e6",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:55:50Z",
+      "side": 1,
+      "message": "This can not happen.",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_adb260e2",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:55:50Z",
+      "side": 1,
+      "message": "Please add tests with a valid regex and plain entity ids (not URIs), e.g. \u0027Q14\u0027.",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0dde14df",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-09T20:55:50Z",
+      "side": 1,
+      "message": "This is called \u0027repoConceptBaseUri\u0027 in the other patch. Why the different naming scheme?\n\nMissing documentation?\n\nMissing default?",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
