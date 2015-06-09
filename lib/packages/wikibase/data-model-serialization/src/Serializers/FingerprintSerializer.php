@@ -39,7 +39,7 @@ class FingerprintSerializer {
 		$this->addAliasesToSerialization( $fingerprint->getAliasGroups(), $serialization );
 	}
 
-	public function addIdToSerialization( EntityId $id = null, array &$serialization ) {
+	private function addIdToSerialization( EntityId $id = null, array &$serialization ) {
 		if ( $id === null ) {
 			return;
 		}
@@ -47,7 +47,7 @@ class FingerprintSerializer {
 		$serialization['id'] = $id->getSerialization();
 	}
 
-	public function addLabelsToSerialization( TermList $labels, array &$serialization ) {
+	private function addLabelsToSerialization( TermList $labels, array &$serialization ) {
 		$serialization['labels'] = $this->serializeValuePerTermList( $labels );
 	}
 
