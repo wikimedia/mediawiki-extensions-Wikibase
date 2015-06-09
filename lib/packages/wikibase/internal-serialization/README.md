@@ -70,11 +70,11 @@ detail which users are not allowed to know about.
 ## Library structure
 
 The Wikibase DataModel objects can all be serialized to a generic format from which the objects
-can later be reconstructed. This is done via a set of `Serializers/Serializer` implementing objects.
+can later be reconstructed. This is done via a set of `Serializers\Serializer` implementing objects.
 These objects turn for instance a `Claim` object into a data structure containing only primitive
-types and arrays. This data structure can thus be readily fed to `json_encode`, serialize, or the
+types and arrays. This data structure can thus be readily fed to `json_encode`, `serialize`, or the
 like. The process of reconstructing the objects from such a serialization is provided by
-objects implementing the `Deserializers/Deserializer` interface.
+objects implementing the `Deserializers\Deserializer` interface.
 
 Serializers can be obtained via an instance of `SerializerFactory` and deserializers can be obtained
 via an instance of `DeserializerFactory`. You are not allowed to construct these serializers and
