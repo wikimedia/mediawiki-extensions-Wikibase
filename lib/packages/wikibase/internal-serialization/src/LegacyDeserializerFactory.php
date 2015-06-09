@@ -86,6 +86,7 @@ class LegacyDeserializerFactory {
 
 	/**
 	 * @deprecated since 1.4 - use newStatementDeserializer instead
+	 *
 	 * @return Deserializer
 	 */
 	public function newClaimDeserializer() {

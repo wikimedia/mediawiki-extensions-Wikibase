@@ -50,7 +50,8 @@ class DeserializerFactory {
 	}
 
 	/**
-	 * @deprecated since 1.4, use newStatementDeserializer instead
+	 * @since 1.1
+	 * @deprecated since 1.4 - use newStatementDeserializer instead
 	 *
 	 * @return Deserializer
 	 */
