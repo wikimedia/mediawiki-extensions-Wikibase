@@ -7,7 +7,7 @@ use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * Package private
@@ -74,7 +74,7 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 	/**
 	 * @param array $serialization
 	 *
-	 * @return Snaks
+	 * @return SnakList
 	 */
 	private function deserializeSnaks( array $serialization ) {
 		$snaks = $this->snaksDeserializer->deserialize( $serialization['snaks'] );
