@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_fb49ff6a",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T08:10:00Z",
+      "side": 1,
+      "message": "From ExtractingEntityIdParser.php?.... what do you mean?",
+      "parentUuid": "8ec42329_edbce81c",
+      "revId": "1b68dd24d0362505b518099366377654dfdee930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_ad7020a4",
         "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
         "patchSetId": 6
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_5b2db38a",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T08:10:00Z",
+      "side": 1,
+      "message": "I disagree. All references to URIs should be removed, this class should not know or care about the format of the unit ID.",
+      "parentUuid": "8ec42329_ad3340bf",
+      "revId": "1b68dd24d0362505b518099366377654dfdee930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_72f777f3",
         "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
         "patchSetId": 6
@@ -64,6 +100,24 @@
       "writtenOn": "2015-06-09T20:46:28Z",
       "side": 1,
       "message": "This confuses me. Are we supporting URIs or entity ids or both? I can\u0027t tell from these test cases. I had the impression we agreed on supporting URIs. So a test case that resolves \"Q7\" into a label should not be here.",
+      "revId": "1b68dd24d0362505b518099366377654dfdee930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_db58c337",
+        "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T08:10:00Z",
+      "side": 1,
+      "message": "The \"quantity\" data type supports URIs. QuantityValue supports any string as a unit ID. EntityLabelUnitFormatter does not care about the form of the unit ID, it can use anything the EntityIdParser accepts.",
+      "parentUuid": "8ec42329_72f777f3",
       "revId": "1b68dd24d0362505b518099366377654dfdee930",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
