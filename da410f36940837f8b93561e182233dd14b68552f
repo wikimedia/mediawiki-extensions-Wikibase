@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3b246707",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T10:04:52Z",
+      "side": 1,
+      "message": "This is a circular dependency, and the wrong way around. EntityUsageTable has detail knowledge about the table (hence the name). SqlUsageTracker should use EntityUsageTable::DEFAULT_TABLE_NAME, if needed at all.",
+      "revId": "da410f36940837f8b93561e182233dd14b68552f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
