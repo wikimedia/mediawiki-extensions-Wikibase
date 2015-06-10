@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_fb86df69",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T08:36:51Z",
+      "side": 1,
+      "message": "lia is not a common shortcut. I had to look in detail to understand it means \"ListItemAdapter\". Please don\u0027t use such shortcuts.",
+      "revId": "d1828214c63a59322cab751d2ea9017ad1273524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_bb80574c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T08:36:51Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "d1828214c63a59322cab751d2ea9017ad1273524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_3bbd4717",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T08:36:51Z",
+      "side": 1,
+      "message": "Please don\u0027t do this. The variable declaration should stay in the for loop.",
+      "revId": "d1828214c63a59322cab751d2ea9017ad1273524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5bba931f",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T08:36:51Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "d1828214c63a59322cab751d2ea9017ad1273524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
