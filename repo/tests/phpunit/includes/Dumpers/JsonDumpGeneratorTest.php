@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Dumpers;
 
+use InvalidArgumentException;
 use MWContentSerializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
@@ -11,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Dumpers\JsonDumpGenerator;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -70,20 +70,20 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param EntityId $id
 	 *
-	 * @return Entity
+	 * @throws InvalidArgumentException
+	 * @return Item|Property
 	 */
 	protected function makeEntity( EntityId $id ) {
-		$entity = EntityFactory::singleton()->newEmpty( $id->getEntityType() );
-		$entity->setId( $id );
-		$entity->setLabel( 'en', 'label:' . $id->getSerialization() );
-
-		if ( $entity instanceof Property ) {
-			$entity->setDataTypeId( 'wibblywobbly' );
-		}
-
-		if ( $entity instanceof Item ) {
+		if ( $id instanceof ItemId ) {
+			$entity = new Item( $id );
 			$entity->getSiteLinkList()->addNewSiteLink( 'test', 'Foo' );
+		} elseif ( $id instanceof PropertyId ) {
+			$entity = new Property( $id, null, 'wibblywobbly' );
+		} else {
+			throw new InvalidArgumentException( 'Unsupported entity type ' . $id->getEntityType() );
 		}
+
+		$entity->setLabel( 'en', 'label:' . $id->getSerialization() );
 
 		return $entity;
 	}

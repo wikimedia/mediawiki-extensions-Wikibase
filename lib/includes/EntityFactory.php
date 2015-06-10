@@ -5,8 +5,6 @@ namespace Wikibase;
 use MWException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 
 /**
  * Factory for Entity objects.
@@ -35,28 +33,6 @@ class EntityFactory {
 	 */
 	public function __construct( array $typeToClass ) {
 		$this->typeMap = $typeToClass;
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @deprecated Use WikibaseRepo::getEntityFactory() resp. WikibaseClient::getEntityFactory()
-	 *
-	 * @return EntityFactory
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$typeToClass = array(
-				Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-				Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
-			);
-
-			$instance = new static( $typeToClass );
-		}
-
-		return $instance;
 	}
 
 	/**

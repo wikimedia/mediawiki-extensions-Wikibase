@@ -4,7 +4,7 @@ namespace Wikibase\Test\Api;
 
 use Language;
 use Wikibase\Api\ApiHelperFactory;
-use Wikibase\EntityFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\ApiHelperFactory
@@ -22,12 +22,13 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$exceptionLocalizer = $this->getMock( 'Wikibase\Lib\Localizer\ExceptionLocalizer' );
 		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 
 		return new ApiHelperFactory(
 			$titleLookup,
 			$exceptionLocalizer,
 			$dataTypeLookup,
-			EntityFactory::singleton()
+			$entityFactory
 		);
 	}
 

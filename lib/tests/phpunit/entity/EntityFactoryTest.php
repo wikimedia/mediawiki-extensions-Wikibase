@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
 
 /**
@@ -19,15 +17,18 @@ use Wikibase\EntityFactory;
 class EntityFactoryTest extends \MediaWikiTestCase {
 
 	private function getEntityFactory() {
-		return EntityFactory::singleton();
+		return new EntityFactory( array(
+			'item' => 'Wikibase\DataModel\Entity\Item',
+			'property' => 'Wikibase\DataModel\Entity\Property',
+		) );
 	}
 
 	public function testGetEntityTypes() {
 		$types = $this->getEntityFactory()->getEntityTypes();
 
 		$this->assertInternalType( 'array', $types );
-		$this->assertTrue( in_array( Item::ENTITY_TYPE, $types ), "must contain item type" );
-		$this->assertTrue( in_array( Property::ENTITY_TYPE, $types ), "must contain property type" );
+		$this->assertTrue( in_array( 'item', $types ), 'must contain item type' );
+		$this->assertTrue( in_array( 'property', $types ), 'must contain property type' );
 	}
 
 	public function provideIsEntityType() {
@@ -55,8 +56,8 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 
 	public function provideNewEmpty() {
 		return array(
-			array( Item::ENTITY_TYPE, 'Wikibase\DataModel\Entity\Item' ),
-			array( Property::ENTITY_TYPE, 'Wikibase\DataModel\Entity\Property' ),
+			array( 'item', 'Wikibase\DataModel\Entity\Item' ),
+			array( 'property', 'Wikibase\DataModel\Entity\Property' ),
 		);
 	}
 
@@ -67,7 +68,7 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 		$entity = $this->getEntityFactory()->newEmpty( $type );
 
 		$this->assertInstanceOf( $class, $entity );
-		$this->assertTrue( $entity->isEmpty(), "should be empty" );
+		$this->assertTrue( $entity->isEmpty(), 'should be empty' );
 	}
 
 }
