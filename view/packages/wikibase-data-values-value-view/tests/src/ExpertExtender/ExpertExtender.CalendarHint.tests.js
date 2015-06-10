@@ -7,7 +7,7 @@
 	$,
 	ExpertExtender,
 	testExpertExtenderExtension,
-	Time,
+	TimeValue,
 	HashMessageProvider,
 	sinon,
 	QUnit,
@@ -37,11 +37,11 @@
 				'valueview-expertextender-calendarhint-switch-julian': 'MSG2'
 			} ),
 			function() {
-				return new time.Time( '2014-01-01' );
+				return new TimeValue( '2014-01-01T00:00:00Z' );
 			},
 			null
 		);
-		var $extender = $( '<div />' ).appendTo( 'body' ) ;
+		var $extender = $( '<div />' ).appendTo( 'body' );
 
 		calendarHint.init( $extender );
 		calendarHint.draw();
@@ -58,7 +58,7 @@
 				'valueview-expertextender-calendarhint-switch-julian': 'MSG2'
 			} ),
 			function() {
-				return new Time( '1901-01-01' );
+				return new TimeValue( '1901-01-01T00:00:00Z' );
 			},
 			null
 		);
@@ -74,7 +74,7 @@
 
 	QUnit.test( 'switch switches the calendar model', function( assert ) {
 		var setSpy = sinon.spy();
-		var timeValue = new Time( '1901-01-01' );
+		var timeValue = new TimeValue( '1901-01-01T00:00:00Z' );
 		var calendarHint = new ExpertExtender.CalendarHint(
 			new HashMessageProvider( {
 				'valueview-expertextender-calendarhint-gregorian': 'MSG1',
@@ -102,7 +102,7 @@
 
 	QUnit.test( 'switch twice switches the calendar model back', function( assert ) {
 		var setSpy = sinon.spy();
-		var timeValue = new Time( '1901-01-01' );
+		var timeValue = new TimeValue( '1901-01-01T00:00:00Z' );
 		var calendarHint = new ExpertExtender.CalendarHint(
 			new HashMessageProvider( {
 				'valueview-expertextender-calendarhint-gregorian': 'MSG1',
@@ -125,12 +125,9 @@
 		sinon.assert.calledOnce( setSpy );
 		assert.equal( setSpy.firstCall.args[0], 'Julian' );
 
-		timeValue = new Time( {
-			year: timeValue.year(),
-			month: timeValue.month(),
-			day: timeValue.day(),
-			calendarname: Time.CALENDAR.JULIAN,
-			precision: timeValue.precision()
+		timeValue = new TimeValue( timeValue.toJSON().time, {
+			calendarModel: TimeValue.CALENDARS.JULIAN,
+			precision: timeValue.getOption( 'precision' )
 		} );
 		calendarHint.draw();
 
@@ -146,7 +143,7 @@
 	jQuery,
 	jQuery.valueview.ExpertExtender,
 	jQuery.valueview.tests.testExpertExtenderExtension,
-	time.Time,
+	dataValues.TimeValue,
 	util.HashMessageProvider,
 	sinon,
 	QUnit,

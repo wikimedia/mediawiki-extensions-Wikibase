@@ -119,6 +119,7 @@ return call_user_func( function() {
 				'TimeInput.css',
 			),
 			'dependencies' => array(
+				'dataValues.TimeValue',
 				'jquery.valueview.ExpertExtender',
 				'jquery.valueview.ExpertExtender.CalendarHint',
 				'jquery.valueview.ExpertExtender.Container',
@@ -127,7 +128,6 @@ return call_user_func( function() {
 				'jquery.valueview.ExpertExtender.Toggler',
 				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
-				'time.js',
 				'util.MessageProvider',
 			),
 			'messages' => array(

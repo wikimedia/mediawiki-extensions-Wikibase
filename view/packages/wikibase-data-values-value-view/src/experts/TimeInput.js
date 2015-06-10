@@ -1,8 +1,5 @@
-( function( $, vv, time ) {
+( function( $, vv, TimeValue ) {
 	'use strict';
-
-	var Time = time.Time,
-		timeSettings = time.settings;
 
 	var PARENT = vv.experts.StringValue;
 
@@ -38,7 +35,7 @@
 			$.proxy( this._onRotatorChange, this ),
 			function() {
 				var value = self.viewState().value();
-				return value && value.getValue().precision();
+				return value && value.getOption( 'precision' );
 			}
 		);
 
@@ -53,7 +50,7 @@
 			$.proxy( this._onRotatorChange, this ),
 			function() {
 				var value = self.viewState().value();
-				return value && value.getValue().calendar();
+				return value && value.getOption( 'calendarModel' );
 			}
 		);
 
@@ -64,8 +61,7 @@
 				new vv.ExpertExtender.CalendarHint(
 					this._messageProvider,
 					function() {
-						var value = self.viewState().value();
-						return value && value.getValue();
+						return self.viewState().value();
 					},
 					function( value ) {
 						// FIXME: Do not use private function:
@@ -143,13 +139,13 @@
 		valueCharacteristics: function() {
 			var options = {},
 				precision = this.precisionRotator && this.precisionRotator.getValue() || null,
-				calendarname = this.calendarRotator && this.calendarRotator.getValue() || null;
+				calendarUri = this.calendarRotator && this.calendarRotator.getValue() || null;
 
 			if( precision !== null ) {
 				options.precision = precision;
 			}
-			if( calendarname !== null ) {
-				options.calendar = calendarNameToUri( calendarname );
+			if( calendarUri !== null ) {
+				options.calendar = calendarUri;
 			}
 
 			return options;
@@ -162,11 +158,12 @@
 	 * @return {Object[]} [{ value: <{number}>, label: <{string}>}, ...]
 	 */
 	function getPrecisionValues() {
-		var precisionValues = [];
-		$.each( timeSettings.precisiontexts, function( i, text ) {
-			if( i <= Time.PRECISION.DAY ) {
+		var precisionValues = [],
+			dayPrecision = TimeValue.getPrecisionById( 'DAY' );
+		$.each( TimeValue.PRECISIONS, function( precisionValue, precision ) {
+			if( precisionValue <= dayPrecision ) {
 				// TODO: Remove this check as soon as time values are supported.
-				precisionValues.unshift( { value: i, label: text } );
+				precisionValues.unshift( { value: precisionValue, label: precision.text } );
 			}
 		} );
 		return precisionValues;
@@ -180,23 +177,13 @@
 	 */
 	function getCalendarValues( messageProvider ) {
 		var calendarValues = [];
-		$.each( timeSettings.calendarnames, function( calendarKey, calendarTerms ) {
+		$.each( TimeValue.CALENDARS, function( key, uri ) {
 			var label = messageProvider.getMessage(
-				'valueview-expert-timevalue-calendar-' + calendarTerms[0].toLowerCase()
-			) || calendarTerms[0];
-			calendarValues.push( { value: calendarTerms[0], label: label } );
+				'valueview-expert-timevalue-calendar-' + key.toLowerCase()
+			) || key.toLowerCase();
+			calendarValues.push( { value: uri, label: label } );
 		} );
 		return calendarValues;
 	}
 
-	/**
-	 * @ignore
-	 *
-	 * @param {string} calendarname
-	 * @return {string}
-	 */
-	function calendarNameToUri( calendarname ) {
-		return new Time( { calendarname: calendarname, precision: 0, year: 0 } ).calendarURI();
-	}
-
-}( jQuery, jQuery.valueview, time ) );
+}( jQuery, jQuery.valueview, dataValues.TimeValue ) );

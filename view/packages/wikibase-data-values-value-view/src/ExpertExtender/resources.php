@@ -33,8 +33,8 @@ return call_user_func( function() {
 				'ExpertExtender.CalendarHint.css',
 			),
 			'dependencies' => array(
+				'dataValues.TimeValue',
 				'jquery.valueview.ExpertExtender',
-				'time.js'
 			),
 			'messages' => array(
 				'valueview-expertextender-calendarhint-gregorian',

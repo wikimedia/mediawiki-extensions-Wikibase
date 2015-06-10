@@ -1,4 +1,4 @@
-( function( $, ExpertExtender, Time ) {
+( function( $, ExpertExtender, TimeValue ) {
 	'use strict';
 
 	/**
@@ -94,15 +94,17 @@
 				return;
 			}
 
-			// Are we in the interesting range
-			if( !( value.year() > 1581 && value.year() < 1930 && value.precision() > 10 ) ) {
+			var assumeCalendar = value.getYear() <= 1581 || value.getYear() >= 1930;
+
+			if( assumeCalendar || value.getOption( 'precision' ) <= 10 ) {
 				this.$calendarhint.hide();
 				return;
 			}
 
-			var msg = this._messageProvider.getMessage(
-				this._prefix + '-' + value.calendar().toLowerCase()
-			);
+			var calendarModel = value.getOption( 'calendarModel' ),
+				msg = this._messageProvider.getMessage(
+					this._prefix + '-' + TimeValue.getCalendarModelKeyByUri( calendarModel )
+				);
 
 			if( !msg ) {
 				return;
@@ -110,12 +112,12 @@
 
 			this.$calendarhint.children( '.' + this._prefix + '-message' ).text( msg );
 
-			this._otherCalendar = ( value.calendar() === Time.CALENDAR.GREGORIAN )
-				? Time.CALENDAR.JULIAN
-				: Time.CALENDAR.GREGORIAN;
+			this._otherCalendar = calendarModel === TimeValue.CALENDARS.GREGORIAN
+				? TimeValue.CALENDARS.JULIAN
+				: TimeValue.CALENDARS.GREGORIAN;
 
 			msg = this._messageProvider.getMessage(
-				this._prefix + '-switch-' + this._otherCalendar.toLowerCase()
+				this._prefix + '-switch-' + TimeValue.getCalendarModelKeyByUri( this._otherCalendar )
 			);
 			if( msg ) {
 				this.$calendarhint.children( '.' + this._prefix + '-switch' ).html( msg );
@@ -138,4 +140,4 @@
 			this._otherCalendar = null;
 		}
 	} );
-}( jQuery, jQuery.valueview.ExpertExtender, time.Time ) );
+}( jQuery, jQuery.valueview.ExpertExtender, dataValues.TimeValue ) );
