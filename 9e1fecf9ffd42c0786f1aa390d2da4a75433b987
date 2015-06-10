@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3b8547a0",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-06-10T10:48:18Z",
+      "side": 1,
+      "message": "Remove duplicate.",
+      "revId": "9e1fecf9ffd42c0786f1aa390d2da4a75433b987",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
