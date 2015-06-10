@@ -98,7 +98,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		$self = $this;
 		$detector->expects( $this->any() )
-			->method( 'detectTermConflicts' )
+			->method( 'detectLabelDescriptionConflicts' )
 			->will( $this->returnCallback( function(
 				$entityType,
 				array $labels,
