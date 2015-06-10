@@ -11,8 +11,8 @@ use Wikibase\Lib\Store\TermLookup;
  * @covers Wikibase\Client\Usage\UsageTrackingTermLookup
  *
  * @group Wikibase
- * @group WikibaseLib
- * @group WikibaseStore
+ * @group WikibaseClient
+ * @group WikibaseUsageTracking
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

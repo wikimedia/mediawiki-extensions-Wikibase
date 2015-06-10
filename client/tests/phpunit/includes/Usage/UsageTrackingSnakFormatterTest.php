@@ -16,8 +16,8 @@ use Wikibase\Lib\SnakFormatter;
  * @covers Wikibase\Lib\Store\UsageTrackingSnakFormatter
  *
  * @group Wikibase
- * @group WikibaseLib
- * @group WikibaseStore
+ * @group WikibaseClient
+ * @group WikibaseUsageTracking
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
