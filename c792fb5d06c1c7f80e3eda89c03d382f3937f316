@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_fb2fbff1",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T09:41:55Z",
+      "side": 1,
+      "message": "Should say that it does prefetching, if possible. Without that info, it doesn\u0027t make sense to see $entityIds in the parameter list.",
+      "revId": "c792fb5d06c1c7f80e3eda89c03d382f3937f316",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_7bf42f84",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T09:41:55Z",
+      "side": 1,
+      "message": "we should also prefetch descriptions, no?",
+      "revId": "c792fb5d06c1c7f80e3eda89c03d382f3937f316",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_7b43cfb6",
+        "filename": "repo/tests/phpunit/includes/LanguageFallbackLabelDescriptionLookupFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T09:41:55Z",
+      "side": 1,
+      "message": "...",
+      "revId": "c792fb5d06c1c7f80e3eda89c03d382f3937f316",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
