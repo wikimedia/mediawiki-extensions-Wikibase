@@ -11,9 +11,8 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\TermLookup;
+use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -69,14 +68,9 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $siteLinkTargetProvider;
 
 	/**
-	 * @var TermLookup
+	 * @var LanguageFallbackLabelDescriptionLookupFactory
 	 */
-	private $termLookup;
-
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $fallbackChainFactory;
+	private $labelDescriptionLookupFactory;
 
 	/**
 	 * @since 0.4
@@ -96,8 +90,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
-		$this->fallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$this->termLookup = $wikibaseRepo->getTermLookup();
+		$this->labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
+			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$wikibaseRepo->getTermLookup(),
+			$wikibaseRepo->getTermBuffer()
+		);
 	}
 
 	/**
@@ -307,23 +304,24 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private function getHtmlForBadges() {
 		$options = '';
 
-		$fallbackChain = $this->fallbackChainFactory->newFromLanguage(
+		/** @var ItemId[] $badgeItemIds */
+		$badgeItemIds = array_map( function( $badgeId ) {
+			return new ItemId( $badgeId );
+		}, array_keys( $this->badgeItems ) );
+
+		$labelLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
 			$this->getLanguage(),
-			LanguageFallbackChainFactory::FALLBACK_SELF
-				| LanguageFallbackChainFactory::FALLBACK_VARIANTS
-				| LanguageFallbackChainFactory::FALLBACK_OTHERS
+			$badgeItemIds
 		);
 
-		$labelLookup = new LanguageFallbackLabelDescriptionLookup( $this->termLookup, $fallbackChain );
-
-		foreach ( $this->badgeItems as $badgeId => $value ) {
-			$name = 'badge-' . $badgeId;
+		foreach ( $badgeItemIds as $badgeId ) {
+			$name = 'badge-' . $badgeId->getSerialization();
 
 			try {
-				$term = $labelLookup->getLabel( new ItemId( $badgeId ) );
-				$label = $term->getText();
+				$label = $labelLookup->getLabel( $badgeId )->getText();
 			} catch ( OutOfBoundsException $ex ) {
-				$label = $badgeId;
+				// show plain id if no label has been found
+				$label = $badgeId->getSerialization();
 			}
 
 			$options .= Html::rawElement(
@@ -333,7 +331,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				),
 				Html::check(
 					$name,
-					in_array( $badgeId, $this->badges ),
+					in_array( $badgeId->getSerialization(), $this->badges ),
 					array(
 						'id' => $name
 					)
