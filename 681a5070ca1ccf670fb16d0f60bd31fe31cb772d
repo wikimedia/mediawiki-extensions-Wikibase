@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_7b850fb1",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T10:26:57Z",
+      "side": 1,
+      "message": "\\o/",
+      "parentUuid": "8ec42329_1b972bf1",
+      "revId": "681a5070ca1ccf670fb16d0f60bd31fe31cb772d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_bb9b771a",
         "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-10T10:25:03Z",
       "side": 1,
       "message": "Why is this a setter and not a) in the constructor above or b) in the function below?",
+      "revId": "681a5070ca1ccf670fb16d0f60bd31fe31cb772d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9b823ba8",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T10:26:57Z",
+      "side": 1,
+      "message": "Daniel suggested this to be a setter. However, putting it into the constructor makes perhaps much more sense. ;-)",
+      "parentUuid": "8ec42329_bb9b771a",
       "revId": "681a5070ca1ccf670fb16d0f60bd31fe31cb772d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
