@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_4cc0972f",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T17:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_ad7020a4",
+      "revId": "1b68dd24d0362505b518099366377654dfdee930",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_ad3340bf",
         "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
         "patchSetId": 6
