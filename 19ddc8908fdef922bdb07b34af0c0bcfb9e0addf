@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_9b26bbc8",
+        "filename": "client/includes/DataAccess/Scribunto/SnakSerializationRenderer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-10T10:57:51Z",
+      "side": 1,
+      "message": "unused include\nuse Wikibase\\Client\\Usage\\UsageAccumulator;",
+      "revId": "19ddc8908fdef922bdb07b34af0c0bcfb9e0addf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
