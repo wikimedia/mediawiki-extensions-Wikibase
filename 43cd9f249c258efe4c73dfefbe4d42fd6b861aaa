@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_26da0a79",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T11:45:40Z",
+      "side": 1,
+      "message": "The mode is for the chain factory. I would prefer to have the two together.",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
