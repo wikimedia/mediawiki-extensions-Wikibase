@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_81fe4834",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T15:50:01Z",
+      "side": 1,
+      "message": "This is a breaking change that may cause JavaScript errors on pages that are not purged yet. We could set this to \u0027h2,h3\u0027 with a \"TODO: Remove h2 after 30 days\" to avoid that. This sound a bit scary but I tested it and it works. It can\u0027t reach the outer \u003ch2\u003eSite links\u003c/h2\u003e accidentally.",
+      "revId": "05cb7db1ac0430a9f22cd609b869e2107facb280",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a1fb4443",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T15:50:01Z",
+      "side": 1,
+      "message": "See my comment on T95889.",
+      "revId": "05cb7db1ac0430a9f22cd609b869e2107facb280",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
