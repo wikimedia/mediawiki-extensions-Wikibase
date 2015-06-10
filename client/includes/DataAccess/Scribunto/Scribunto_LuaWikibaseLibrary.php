@@ -2,6 +2,7 @@
 
 use Deserializers\Exceptions\DeserializationException;
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
 use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
@@ -162,10 +163,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private function newSnakSerializationRenderer() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$formatterOptions = new FormatterOptions( array( 'language' => $this->getLanguage() ) );
+		$formatterOptions = new FormatterOptions( array(
+			SnakFormatter::OPT_LANG => $this->getLanguage()->getCode()
+		) );
 
-		$snakFormatter = $wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
-			SnakFormatter::FORMAT_WIKI, $formatterOptions
+		$snakFormatter = new UsageTrackingSnakFormatter(
+			$wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
+				SnakFormatter::FORMAT_WIKI, $formatterOptions
+			),
+			$this->getUsageAccumulator(),
+			$this->getLanguageFallbackChain()->getFetchLanguageCodes()
 		);
 
 		$snakDeserializer = $wikibaseClient->getDeserializerFactory()->newSnakDeserializer();
@@ -175,8 +182,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$snakFormatter,
 			$snakDeserializer,
 			$this->getLanguage(),
-			$snaksDeserializer,
-			$this->getUsageAccumulator()
+			$snaksDeserializer
 		);
 	}
 
