@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_9b3a3bbf",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T08:16:13Z",
+      "side": 1,
+      "message": "We can have an `interface EntityUriParser extends EntityIdParser`, if you like. Or rename the parameter. The assertion that the unit IDs are URIs is currently only enforced by the validators used for the quantity data type. QuantityValue itself doesn\u0027t know or care.",
+      "parentUuid": "8ec42329_cd2d6c43",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_8dbd24d4",
         "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_3b478752",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T08:16:13Z",
+      "side": 1,
+      "message": "Yes that would be more flexible, but that\u0027s not how our conceptBaseUri setting currently works. If we change conceptBaseUri to use $1 (the placeholder used by wgArticlePath and friends), we need to support that here, too.",
+      "parentUuid": "8ec42329_8dbd24d4",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_8db444e6",
         "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-09T20:55:50Z",
       "side": 1,
       "message": "This can not happen.",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5b44d34a",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T08:16:13Z",
+      "side": 1,
+      "message": "Sure it can. The regex passed to the constructor may not have any capturing group. It would be better to check that in the constructor, but I don\u0027t know of a good way to do that.",
+      "parentUuid": "8ec42329_8db444e6",
       "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +135,24 @@
       "writtenOn": "2015-06-09T20:55:50Z",
       "side": 1,
       "message": "This is called \u0027repoConceptBaseUri\u0027 in the other patch. Why the different naming scheme?\n\nMissing documentation?\n\nMissing default?",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fb701fa5",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T08:16:13Z",
+      "side": 1,
+      "message": "conceptBaseUri has been a repo config setting for a long time. It\u0027s used in RDF output. We are just re-using it here. \n\nrepoConceptBaseUri is the equivalent setting on the client.",
+      "parentUuid": "8ec42329_0dde14df",
       "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
