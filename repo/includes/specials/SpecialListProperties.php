@@ -6,12 +6,9 @@ use DataTypes\DataTypeFactory;
 use Html;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataTypeSelector;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\TermLookup;
 use Wikibase\PropertyInfoStore;
+use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\TermBuffer;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -41,24 +38,14 @@ class SpecialListProperties extends SpecialWikibasePage {
 	private $propertyInfoStore;
 
 	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageFallbackChainFactory;
-
-	/**
-	 * @var TermLookup
-	 */
-	private $termLookup;
-
-	/**
-	 * @var TermBuffer
-	 */
-	private $termBuffer;
-
-	/**
 	 * @var EntityIdFormatterFactory
 	 */
 	private $entityIdFormatterFactory;
+
+	/**
+	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	private $labelDescriptionLookupFactory;
 
 	/**
 	 * @var string
@@ -71,10 +58,12 @@ class SpecialListProperties extends SpecialWikibasePage {
 		$this->initServices(
 			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
 			WikibaseRepo::getDefaultInstance()->getStore()->getPropertyInfoStore(),
-			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory(),
-			WikibaseRepo::getDefaultInstance()->getTermLookup(),
-			WikibaseRepo::getDefaultInstance()->getTermBuffer(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdHtmlLinkFormatterFactory()
+			WikibaseRepo::getDefaultInstance()->getEntityIdHtmlLinkFormatterFactory(),
+			new LanguageFallbackLabelDescriptionLookupFactory(
+				WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory(),
+				WikibaseRepo::getDefaultInstance()->getTermLookup(),
+				WikibaseRepo::getDefaultInstance()->getTermBuffer()
+			)
 		);
 	}
 
@@ -85,17 +74,13 @@ class SpecialListProperties extends SpecialWikibasePage {
 	public function initServices(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoStore $propertyInfoStore,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		TermLookup $termLookup,
-		TermBuffer $termBuffer,
-		EntityIdFormatterFactory $entityIdFormatterFactory
+		EntityIdFormatterFactory $entityIdFormatterFactory,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	) {
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyInfoStore = $propertyInfoStore;
-		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->termLookup = $termLookup;
-		$this->termBuffer = $termBuffer;
 		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 	}
 
 	/**
@@ -198,20 +183,12 @@ class SpecialListProperties extends SpecialWikibasePage {
 			return;
 		}
 
-		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
+		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
 			$this->getLanguage(),
-			LanguageFallbackChainFactory::FALLBACK_SELF
-				| LanguageFallbackChainFactory::FALLBACK_VARIANTS
-				| LanguageFallbackChainFactory::FALLBACK_OTHERS
+			$propertyIds
 		);
-		$languages = $languageFallbackChain->getFetchLanguageCodes();
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			$this->termLookup,
-			$languageFallbackChain
-		);
-		$formatter = $this->entityIdFormatterFactory->getEntityIdFormater( $labelDescriptionLookup );
 
-		$this->termBuffer->prefetchTerms( $propertyIds, array( 'label' ), $languages );
+		$formatter = $this->entityIdFormatterFactory->getEntityIdFormater( $labelDescriptionLookup );
 
 		$html = Html::openElement( 'ul' );
 
