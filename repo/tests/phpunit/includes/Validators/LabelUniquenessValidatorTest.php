@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -104,14 +105,21 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidFingerprintProvider() {
-		$badFingerprint = new Fingerprint(
+		$dupeLabelFingerprint = new Fingerprint(
 			new TermList( array( new Term( 'de', 'DUPE' ) ) ),
 			new TermList(),
 			new AliasGroupList()
 		);
 
+		$dupeAliasFingerprint = new Fingerprint(
+			new TermList( array( new Term( 'de', 'good' ) ) ),
+			new TermList(),
+			new AliasGroupList( array( new AliasGroup( 'de', array( 'DUPE' )) ) )
+		);
+
 		return array(
-			array( $badFingerprint, 'label-conflict' ),
+			'conflicting label' => array( $dupeLabelFingerprint, 'label-conflict' ),
+			'conflicting alias' => array( $dupeAliasFingerprint, 'label-conflict' ),
 		);
 	}
 
