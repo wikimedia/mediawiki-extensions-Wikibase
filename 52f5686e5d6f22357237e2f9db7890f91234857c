@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_818088fa",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-10T14:53:11Z",
+      "side": 1,
+      "message": "Likely needs to be mocked, this is probably causing the test failures",
+      "revId": "52f5686e5d6f22357237e2f9db7890f91234857c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e18b8c1e",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-10T14:53:11Z",
+      "side": 1,
+      "message": "Likely needs to be mocked, this is probably causing the test failures",
+      "revId": "52f5686e5d6f22357237e2f9db7890f91234857c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
