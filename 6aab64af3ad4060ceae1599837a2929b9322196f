@@ -107,6 +107,23 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_4ccc178d",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T17:34:14Z",
+      "side": 1,
+      "message": "whoops, should be using $input and $expected here!",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_adb260e2",
         "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
         "patchSetId": 4
@@ -118,6 +135,24 @@
       "writtenOn": "2015-06-09T20:55:50Z",
       "side": 1,
       "message": "Please add tests with a valid regex and plain entity ids (not URIs), e.g. \u0027Q14\u0027.",
+      "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ecbdc3d2",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T17:34:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_adb260e2",
       "revId": "6aab64af3ad4060ceae1599837a2929b9322196f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
