@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c6e1c6fc",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T12:14:04Z",
+      "side": 1,
+      "message": "Isn\u0027t this redundant to the Popups integration in Wikidata?",
+      "parentUuid": "8ec42329_1bbe4b61",
+      "revId": "c792fb5d06c1c7f80e3eda89c03d382f3937f316",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_7b43cfb6",
         "filename": "repo/tests/phpunit/includes/LanguageFallbackLabelDescriptionLookupFactoryTest.php",
         "patchSetId": 3
