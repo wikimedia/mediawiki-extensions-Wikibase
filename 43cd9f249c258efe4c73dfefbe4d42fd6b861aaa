@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_262e8a3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T12:11:59Z",
+      "side": 1,
+      "message": "This refers to the term prefetching, so that all needed labels are fetched at once instead of fetching them one by one.",
+      "parentUuid": "8ec42329_664ed23e",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_465156dc",
         "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-10T11:59:50Z",
       "side": 1,
       "message": "A factory that \"provides A and returns A\"? This sentence is a bit odd.",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c6222650",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T12:11:59Z",
+      "side": 1,
+      "message": "Hah, good catch. I will rewrite this description.",
+      "parentUuid": "8ec42329_465156dc",
       "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_e627225e",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T12:11:59Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "8ec42329_a644ba1d",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e642c212",
         "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2015-06-10T11:59:50Z",
       "side": 1,
       "message": "Some more docs about what the parameters mean and do would be nice. Especially the fact that it defaults to something.",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_861c1e1a",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-10T12:11:59Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "8ec42329_e642c212",
       "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
