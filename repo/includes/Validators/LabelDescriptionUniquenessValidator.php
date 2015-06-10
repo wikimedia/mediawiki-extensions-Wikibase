@@ -42,7 +42,7 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 	 */
 	public function validateEntity( EntityDocument $entity ) {
 		if ( $entity instanceof FingerprintProvider ) {
-			return $this->duplicateDetector->detectTermConflicts(
+			return $this->duplicateDetector->detectLabelDescriptionConflicts(
 				$entity->getType(),
 				$entity->getFingerprint()->getLabels()->toTextArray(),
 				$entity->getFingerprint()->getDescriptions()->toTextArray(),

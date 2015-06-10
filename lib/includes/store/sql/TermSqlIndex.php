@@ -503,8 +503,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @since 0.2
 	 *
 	 * @param Term[] $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
+	 * @param string|string[]|null $termType
+	 * @param string|string[]|null $entityType
 	 * @param array $options
 	 *
 	 * @return Term[]
@@ -660,8 +660,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param DatabaseBase $db
 	 * @param Term[] $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
+	 * @param string|string[]|null $termType
+	 * @param string|string[]|null $entityType
 	 * @param array $options
 	 *
 	 * @return string[]
@@ -686,8 +686,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param DatabaseBase $db
 	 * @param Term $term
-	 * @param string|null $termType
-	 * @param string|null $entityType
+	 * @param string|string[]|null $termType
+	 * @param string|string[]|null $entityType
 	 * @param array $options
 	 *
 	 * @return array
@@ -812,24 +812,32 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param string $entityType
 	 * @param string[] $labels
+	 * @param string[][]|null $aliases
 	 *
-	 * @throws InvalidArgumentException
 	 * @return Term[]
 	 */
-	public function getLabelConflicts( $entityType, array $labels ) {
+	public function getLabelConflicts( $entityType, array $labels, array $aliases = null ) {
 		if ( !is_string( $entityType ) ) {
 			throw new InvalidArgumentException( '$entityType must be a string' );
 		}
 
-		if ( empty( $labels ) ) {
+		if ( empty( $labels ) && empty( $aliases ) ) {
 			return array();
 		}
 
-		$templates = $this->makeQueryTerms( $labels, Term::TYPE_LABEL );
+		$termTypes = ( $aliases === null )
+			? array( Term::TYPE_LABEL )
+			: array( Term::TYPE_LABEL, Term::TYPE_ALIAS );
+
+		$termTexts = ( $aliases === null )
+			? $labels
+			: array_merge( $labels, $aliases );
+
+		$templates = $this->makeQueryTerms( $termTexts, $termTypes );
 
 		$labelConflicts = $this->getMatchingTerms(
 			$templates,
-			Term::TYPE_LABEL,
+			$termTypes,
 			$entityType,
 			array(
 				'LIMIT' => $this->maxConflicts,
@@ -921,13 +929,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @param string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
-	 * @param string $type
+	 * @param string[]|string[][] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
+	 * @param string[] $types
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Term[]
 	 */
-	private function makeQueryTerms( $textsByLanguage, $type ) {
+	private function makeQueryTerms( $textsByLanguage, array $types ) {
 		$terms = array();
 
 		foreach ( $textsByLanguage as $lang => $texts ) {
@@ -938,11 +946,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 					throw new InvalidArgumentException( '$textsByLanguage must contain string values only' );
 				}
 
-				$terms[] = new Term( array(
-					'termText' => $text,
-					'termLanguage' => $lang,
-					'termType' => $type,
-				) );
+				foreach ( $types as $type ) {
+					$terms[] = new Term( array(
+						'termText' => $text,
+						'termLanguage' => $lang,
+						'termType' => $type,
+					) );
+				}
 			}
 		}
 

@@ -416,6 +416,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$termIndex->saveTermsOfEntity( $entity );
 		}
 
+		//FIXME: test with aliases
+		//FIXME: move this test case
 		$matches = $termIndex->getLabelConflicts( $entityType, $labels );
 		$actual = $this->getEntityIdStrings( $matches );
 
