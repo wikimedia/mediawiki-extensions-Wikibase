@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_1b972bf1",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T10:25:03Z",
+      "side": 1,
+      "message": "Announcing the winner of the \"Longest Class Name in the Code Base\" award (excluding tests):\n\n 1. LanguageFallbackLabelDescriptionLookupFactory\n 2. PrefetchingWikiPageEntityMetaDataAccessor\n 3. FormatterLabelDescriptionLookupFactory\n 3. LanguageFallbackLabelDescriptionLookup\n 4. WikibaseDataAccessTestItemSetUpHelper\n 5. BuilderBasedDataTypeValidatorFactory\n 5. ChangeOpValidationExceptionLocalizer\n 5. OtherProjectsSidebarGeneratorFactory\n\nThe fun thing is, the name makes sense. :-)",
+      "revId": "681a5070ca1ccf670fb16d0f60bd31fe31cb772d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_bb9b771a",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T10:25:03Z",
+      "side": 1,
+      "message": "Why is this a setter and not a) in the constructor above or b) in the function below?",
+      "revId": "681a5070ca1ccf670fb16d0f60bd31fe31cb772d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
