@@ -44,24 +44,32 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @param string[] $entityType The relevant entity type
 	 * @param string[] $labels The label to look for
+	 * @param string[][] $aliases
 	 *
-	 * @throws \InvalidArgumentException
 	 * @return EntityId[]
 	 */
-	public function getLabelConflicts( $entityType, array $labels ) {
+	public function getLabelConflicts( $entityType, array $labels, array $aliases = null ) {
 		if ( !is_string( $entityType ) ) {
 			throw new InvalidArgumentException( '$entityType must be a string' );
 		}
 
-		if ( empty( $labels ) ) {
+		if ( empty( $labels ) && empty( $aliases ) ) {
 			return array();
 		}
 
-		$templates = $this->makeTemplateTerms( $labels, TermIndexEntry::TYPE_LABEL );
+		$termTypes = ( $aliases === null )
+			? array( TermIndexEntry::TYPE_LABEL )
+			: array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS );
+
+		$termTexts = ( $aliases === null )
+			? $labels
+			: array_merge( $labels, $aliases );
+
+		$templates = $this->makeTemplateTerms( $termTexts, $termTypes );
 
 		$conflicts = $this->getMatchingTerms(
 			$templates,
-			TermIndexEntry::TYPE_LABEL,
+			$termTypes,
 			$entityType
 		);
 
@@ -98,7 +106,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 			return array();
 		}
 
-		$templates = $this->makeTemplateTerms( $descriptions, TermIndexEntry::TYPE_DESCRIPTION );
+		$templates = $this->makeTemplateTerms( $descriptions, array( TermIndexEntry::TYPE_DESCRIPTION ) );
 
 		$descriptionConflicts = $this->getMatchingTerms(
 			$templates,
@@ -113,22 +121,24 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 	/**
 	 * @param string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
-	 * @param string $type
+	 * @param string[] $types
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	private function makeTemplateTerms( $textsByLanguage, $type ) {
+	private function makeTemplateTerms( $textsByLanguage, array $types ) {
 		$terms = array();
 
 		foreach ( $textsByLanguage as $lang => $texts ) {
 			$texts = (array)$texts;
 
 			foreach ( $texts as $text ) {
-				$terms[] = new TermIndexEntry( array(
-					'termText' => $text,
-					'termLanguage' => $lang,
-					'termType' => $type,
-				) );
+				foreach ( $types as $type ) {
+					$terms[] = new TermIndexEntry( array(
+						'termText' => $text,
+						'termLanguage' => $lang,
+						'termType' => $type,
+					) );
+				}
 			}
 		}
 
@@ -271,8 +281,8 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * but the termType and entityType fields of the Terms in $terms are ignored.
 	 *
 	 * @param TermIndexEntry[] $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
+	 * @param string|string[]|null $termType
+	 * @param string|string[]|null $entityType
 	 * @param array $options
 	 *
 	 * @return TermIndexEntry[]
@@ -285,9 +295,12 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	) {
 		$matchingTerms = array();
 
+		$termType = $termType === null ? null : (array)$termType;
+		$entityType = $entityType === null ? null : (array)$entityType;
+
 		foreach ( $this->terms as $term ) {
-			if ( ( $entityType === null || $term->getEntityType() === $entityType )
-				&& ( $termType === null || $term->getType() === $termType )
+			if ( ( $entityType === null || in_array( $term->getEntityType(), $entityType ) )
+				&& ( $termType === null || in_array( $term->getType(), $termType ) )
 				&& $this->termMatchesTemplates( $term, $terms, $options )
 			) {
 
