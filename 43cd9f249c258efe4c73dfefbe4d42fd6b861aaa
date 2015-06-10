@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_664ed23e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T11:59:50Z",
+      "side": 1,
+      "message": "To which concept in the new class does \"performance improvement\" refer to?",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_465156dc",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T11:59:50Z",
+      "side": 1,
+      "message": "A factory that \"provides A and returns A\"? This sentence is a bit odd.",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a644ba1d",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T11:59:50Z",
+      "side": 1,
+      "message": "Please add a line of doc about what happens if it\u0027s null.",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e642c212",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T11:59:50Z",
+      "side": 1,
+      "message": "Some more docs about what the parameters mean and do would be nice. Especially the fact that it defaults to something.",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_26da0a79",
         "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
         "patchSetId": 6
@@ -31,6 +99,24 @@
       "side": 1,
       "message": "I prefer to have the optional parameters at the end so that users who want to use the default fallback mode don\u0027t have to pass null parameters.",
       "parentUuid": "8ec42329_26da0a79",
+      "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_86473e22",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-10T11:59:50Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "8ec42329_a6c59a92",
       "revId": "43cd9f249c258efe4c73dfefbe4d42fd6b861aaa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
