@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_61d47ced",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-06-10T19:35:52Z",
+      "side": 1,
+      "message": "Please deal with the fact that $entity may not be a FingerprintProvider.",
+      "revId": "9f5471d2278a553a1646b23faaea023eb40d307e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
