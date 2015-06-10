@@ -54,7 +54,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsageTable
 	 */
 	private function newUsageTable( DatabaseBase $db ) {
-		return new EntityUsageTable( $this->idParser, $db, 'wbc_entity_usage', $this->batchSize );
+		return new EntityUsageTable( $this->idParser, $db, $this->batchSize );
 	}
 
 	/**
@@ -114,6 +114,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @throws Exception
 	 * @throws UsageTrackerException
+	 * @throws Exception
 	 */
 	public function trackUsedEntities( $pageId, array $usages, $touched ) {
 		if ( !is_int( $pageId ) ) {
@@ -282,6 +283,5 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		return $unused;
 	}
-
 
 }

@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
+use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -22,14 +23,12 @@ use Wikibase\Lib\Reporting\MessageReporter;
  */
 class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 
-	const TABLE_NAME = 'wbc_entity_usage';
-
 	public function setUp() {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
 			$this->markTestSkipped( 'Skipping test for EntityUsageTableBuilder, because the useLegacyUsageIndex option is set.' );
 		}
 
-		$this->tablesUsed[] = self::TABLE_NAME;
+		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
 		$this->tablesUsed[] = 'page_props';
 
 		parent::setUp();
@@ -39,7 +38,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 		$loadBalancer = wfGetLB();
 		$idParser = new BasicEntityIdParser();
 
-		return new EntityUsageTableBuilder( $idParser, $loadBalancer, self::TABLE_NAME, $batchSize );
+		return new EntityUsageTableBuilder( $idParser, $loadBalancer, $batchSize );
 	}
 
 	public function testFillUsageTable() {
@@ -90,7 +89,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 	private function fetchAllUsageStrings() {
 		$db = wfGetDB( DB_MASTER );
 
-		$res = $db->select( self::TABLE_NAME, "*", '', __METHOD__ );
+		$res = $db->select( EntityUsageTable::DEFAULT_TABLE_NAME, '*', '', __METHOD__ );
 
 		$usages = array();
 		foreach ( $res as $row ) {
