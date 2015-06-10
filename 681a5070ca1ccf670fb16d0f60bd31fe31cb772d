@@ -69,6 +69,41 @@
       "revId": "681a5070ca1ccf670fb16d0f60bd31fe31cb772d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5b8cd3db",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T11:51:44Z",
+      "side": 1,
+      "message": "It\u0027s not in the constructor because it\u0027s a \"mode\" with a sensible default. No need to ask for it in the constructor. However, a setter allows this to be changed at any time, by any code, which is indeed a bit scary. So a constructor param also has advantages.\n\nIt could also be a param to the newLabelDescriptionLookup(), but we should double-check whether it\u0027s really knowledge the caller of that methods can and should have. Also, we should try to keep the param list of the factory method short.",
+      "parentUuid": "8ec42329_bb9b771a",
+      "revId": "681a5070ca1ccf670fb16d0f60bd31fe31cb772d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_3ba6a751",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-10T11:51:44Z",
+      "side": 1,
+      "message": "I think $termTypes should not be defined by the caller of this methods. At least it should be investigated whether this is knowledge which the calling code and and should have.",
+      "revId": "681a5070ca1ccf670fb16d0f60bd31fe31cb772d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
