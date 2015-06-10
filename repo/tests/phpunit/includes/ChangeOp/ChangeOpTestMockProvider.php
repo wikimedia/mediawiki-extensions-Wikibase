@@ -326,16 +326,60 @@ class ChangeOpTestMockProvider {
 		return Result::newSuccess();
 	}
 
-	public function detectTermConflicts( $entityType, $labels, $descriptions, EntityId $entityId = null ) {
-		$code = ( ( $descriptions === null ) ? 'label-conflict' : 'label-with-description-conflict' );
-
+	public function detectLabelConflicts( $entityType, $labels, $aliases, EntityId $entityId = null ) {
 		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
 			// simulated conflicts always conflict with P666, so if these are
 			// ignored as self-conflicts, we don't need to check any labels.
 			$labels = array();
 		}
 
-		foreach ( $labels as $lang => $label ) {
+		foreach ( $labels as $lang => $text ) {
+			if ( $text === 'DUPE' ) {
+				return Result::newError( array(
+					Error::newError(
+						'found conflicting terms',
+						'label',
+						'label-conflict',
+						array(
+							'label',
+							$lang,
+							$text,
+							'P666'
+						)
+					)
+				) );
+			}
+		}
+
+		foreach ( $aliases as $lang => $texts ) {
+			if ( in_array( 'DUPE', $texts ) ) {
+				return Result::newError( array(
+					Error::newError(
+						'found conflicting terms',
+						'alias',
+						'label-conflict',
+						array(
+							'alias',
+							$lang,
+							'DUPE',
+							'P666'
+						)
+					)
+				) );
+			}
+		}
+
+		return Result::newSuccess();
+	}
+
+	public function detectLabelDescriptionConflicts( $entityType, $labels, $descriptions, EntityId $entityId = null ) {
+		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
+			// simulated conflicts always conflict with P666, so if these are
+			// ignored as self-conflicts, we don't need to check any labels.
+			$labels = array();
+		}
+
+		foreach ( $labels as $lang => $text ) {
 
 			if ( $descriptions !== null
 				&& ( !isset( $descriptions[$lang] )
@@ -344,16 +388,16 @@ class ChangeOpTestMockProvider {
 				continue;
 			}
 
-			if ( $label === 'DUPE' ) {
+			if ( $text === 'DUPE' ) {
 				return Result::newError( array(
 					Error::newError(
 						'found conflicting terms',
 						'label',
-						$code,
+						'label-with-description-conflict',
 						array(
 							'label',
 							$lang,
-							$label,
+							$text,
 							'P666'
 						)
 					)
@@ -366,7 +410,8 @@ class ChangeOpTestMockProvider {
 
 	/**
 	 * Returns a duplicate detector that will, consider the string "DUPE" to be a duplicate,
-	 * unless a specific $returnValue is given.
+	 * unless a specific $returnValue is given. The same value is returned for calls to
+	 * detectLabelConflicts() and detectLabelDescriptionConflicts().
 	 *
 	 * @param null|Result|Error[] $returnValue
 	 *
@@ -382,11 +427,12 @@ class ChangeOpTestMockProvider {
 		}
 
 		if ( $returnValue instanceof Result ) {
-			$detectTermConflicts = function() use ( $returnValue ) {
+			$detectLabelConflicts = $detectLabelDescriptionConflicts = function() use ( $returnValue ) {
 				return $returnValue;
 			};
 		} else {
-			$detectTermConflicts = array( $this, 'detectTermConflicts' );
+			$detectLabelConflicts = array( $this, 'detectLabelConflicts' );
+			$detectLabelDescriptionConflicts = array( $this, 'detectLabelDescriptionConflicts' );
 		}
 
 		$dupeDetector = $this->getMockBuilder( 'Wikibase\LabelDescriptionDuplicateDetector' )
@@ -394,8 +440,12 @@ class ChangeOpTestMockProvider {
 			->getMock();
 
 		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
-			->method( 'detectTermConflicts' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( $detectTermConflicts ) );
+			->method( 'detectLabelConflicts' )
+			->will( PHPUnit_Framework_TestCase::returnCallback( $detectLabelConflicts ) );
+
+		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'detectLabelDescriptionConflicts' )
+			->will( PHPUnit_Framework_TestCase::returnCallback( $detectLabelDescriptionConflicts ) );
 
 		return $dupeDetector;
 	}

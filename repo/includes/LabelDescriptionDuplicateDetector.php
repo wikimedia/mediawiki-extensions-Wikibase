@@ -34,33 +34,27 @@ class LabelDescriptionDuplicateDetector {
 	}
 
 	/**
-	 * Validates the uniqueness constraints on the combination of label and description given
-	 * for all the languages in $terms. This will apply a different logic for
-	 * Items than for Properties: while the label of a Property must be unique (per language),
-	 * only an Item's combination of label and description must be unique, and even that only
-	 * if the description is actually set.
+	 * Detects conflicting labels and aliases. A conflict arises when another entity has the same
+	 * label or alias for a given language as is present in $label or $aliases. If $aliases is null,
+	 * only conflicts between labels are considered. If $aliases is not null, conflicts are also
+	 * detected between labels and aliases.
 	 *
 	 * @since 0.5
 	 *
 	 * @param string $entityType The type of entity to search for conflicts.
 	 * @param string[] $labels An associative array of labels,
 	 *        with language codes as the keys.
-	 * @param string[]|null $descriptions An associative array of descriptions,
-	 *        with language codes as the keys.
+	 * @param string[][]|null $aliases Aliases to be considered to be conflicting with labels.
+	 *        Ignored if descriptions are given.
 	 * @param EntityId|null $ignoreEntityId Conflicts with this entity will be
 	 *        considered self-conflicts and ignored.
 	 *
-	 * @throws InvalidArgumentException
-	 *
-	 * @return Result. If there are conflicts, $result->isValid() will return false and
-	 *         $result->getErrors() will return a non-empty list of Error objects.
-	 *         The error code will be either 'label-conflict' or 'label-with-description-conflict',
-	 *         depending on whether descriptions where given.
+	 * @return Result
 	 */
-	public function detectTermConflicts(
+	public function detectLabelConflicts(
 		$entityType,
 		array $labels,
-		array $descriptions = null,
+		array $aliases = null,
 		EntityId $ignoreEntityId = null
 	) {
 		if ( !is_string( $entityType ) ) {
@@ -71,26 +65,68 @@ class LabelDescriptionDuplicateDetector {
 			return Result::newSuccess();
 		}
 
-		if ( $descriptions === null ) {
-			$conflictingTerms = $this->conflictFinder->getLabelConflicts(
-				$entityType,
-				$labels
-			);
-		} else {
-			$conflictingTerms = $this->conflictFinder->getLabelWithDescriptionConflicts(
-				$entityType,
-				$labels,
-				$descriptions
-			);
-		}
+		$conflictingTerms = $this->conflictFinder->getLabelConflicts(
+			$entityType,
+			$labels,
+			$aliases
+		);
 
 		if ( $ignoreEntityId ) {
 			$conflictingTerms = $this->filterSelfConflicts( $conflictingTerms, $ignoreEntityId );
 		}
 
 		if ( !empty( $conflictingTerms ) ) {
-			$errorCode = $descriptions === null ? 'label-conflict' : 'label-with-description-conflict';
-			$errors = $this->termsToErrors( 'found conflicting terms', $errorCode, $conflictingTerms );
+			$errors = $this->termsToErrors( 'found conflicting terms', 'label-conflict', $conflictingTerms );
+			return Result::newError( $errors );
+		} else {
+			return Result::newSuccess();
+		}
+	}
+
+	/**
+	 * Detects conflicting combinations of labels and descriptions. A conflict arises when an entity
+	 * (other than the one given by $ignoreEntityId, if any) has the same combination of label and
+	 * non-empty description for a given language as is present tin the $label and $description
+	 * parameters.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $entityType The type of entity to search for conflicts.
+	 * @param string[] $labels An associative array of labels,
+	 *        with language codes as the keys.
+	 * @param string[] $descriptions An associative array of descriptions,
+	 *        with language codes as the keys.
+	 * @param EntityId|null $ignoreEntityId Conflicts with this entity will be
+	 *        considered self-conflicts and ignored.
+	 *
+	 * @return Result
+	 */
+	public function detectLabelDescriptionConflicts(
+		$entityType,
+		array $labels,
+		array $descriptions,
+		EntityId $ignoreEntityId = null
+	) {
+		if ( !is_string( $entityType ) ) {
+			throw new InvalidArgumentException( '$entityType must be a string' );
+		}
+
+		if ( empty( $labels ) ) {
+			return Result::newSuccess();
+		}
+
+		$conflictingTerms = $this->conflictFinder->getLabelWithDescriptionConflicts(
+			$entityType,
+			$labels,
+			$descriptions
+		);
+
+		if ( $ignoreEntityId ) {
+			$conflictingTerms = $this->filterSelfConflicts( $conflictingTerms, $ignoreEntityId );
+		}
+
+		if ( !empty( $conflictingTerms ) ) {
+			$errors = $this->termsToErrors( 'found conflicting terms', 'label-with-description-conflict', $conflictingTerms );
 			return Result::newError( $errors );
 		} else {
 			return Result::newSuccess();

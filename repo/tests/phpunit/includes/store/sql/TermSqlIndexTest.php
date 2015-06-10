@@ -73,6 +73,7 @@ class TermSqlIndexTest extends TermIndexTest {
 			'caseSensitive' => false,
 		);
 
+		//FIXME: test with arrays for term types and entity types!
 		$obtainedTerms = $termIndex->getMatchingTerms( array( $term ), Term::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );

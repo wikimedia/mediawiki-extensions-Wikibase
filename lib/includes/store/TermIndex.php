@@ -89,8 +89,8 @@ interface TermIndex {
 	 * @since 0.2
 	 *
 	 * @param Term[] $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
+	 * @param string|string[]|null $termType
+	 * @param string|string[]|null $entityType
 	 * @param array $options
 	 *        Accepted options are:
 	 *        - caseSensitive: boolean, default true

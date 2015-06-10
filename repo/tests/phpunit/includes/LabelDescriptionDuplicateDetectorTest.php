@@ -149,6 +149,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	public function testDetectTermConflicts( $world, $entityType, $labels, $descriptions, $ignore, $expectedErrors ) {
 		$detector = new LabelDescriptionDuplicateDetector( new MockTermIndex( $world ) );
 
+		//FIXME: split test case, test with and without aliases
 		$result = $detector->detectTermConflicts( $entityType, $labels, $descriptions, $ignore );
 
 		$this->assertResult( $result, $expectedErrors );
