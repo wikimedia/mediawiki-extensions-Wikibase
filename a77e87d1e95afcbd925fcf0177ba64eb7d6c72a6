@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_03dfb511",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-11T15:53:19Z",
+      "side": 1,
+      "message": "So again:\n\nThe code calling `EntityView` has no access to this `EntityTermsView` (as it is created in a factory) and this is good because the `EntityParserOutputGenerator` should not know about terms.\n\nThis method is specific to a Fingerprint so it clearly belongs into EntityTermsView.\n\nTo make the title html available for the parser output (where it is set) we have to pass it through the `EntityView` which allows us to override it for other entity types (and therefore other types of entity views).",
+      "parentUuid": "8ec42329_cdff9e61",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_cd21de9b",
         "filename": "view/src/EntityTermsView.php",
         "patchSetId": 13
@@ -297,6 +315,24 @@
       "side": 1,
       "message": "Things like `if ( $entity instanceof FingerprintProvider )` can be found multiple times in the Wikibase repository.",
       "parentUuid": "8ec42329_0d06068a",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_43a61da9",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-11T15:53:19Z",
+      "side": 1,
+      "message": "I know that this is done in many places but I\u0027m not sure if this is the right way to do it :S Certainly better than just assuming that Entity implements FingerprintProvider but I think we can do better!",
+      "parentUuid": "8ec42329_e81608ac",
       "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
