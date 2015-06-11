@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_2dcc228c",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-11T11:33:38Z",
+      "side": 1,
+      "message": "It needs to be public as this method is called in EntityView.",
+      "parentUuid": "8ec42329_8d33d6f2",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_cd21de9b",
         "filename": "view/src/EntityTermsView.php",
         "patchSetId": 13
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_0dab6687",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-11T11:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_cd21de9b",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_6d36aae6",
         "filename": "view/src/EntityTermsView.php",
         "patchSetId": 13
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-11T09:40:25Z",
       "side": 1,
       "message": "Duplicate code can be avoided.",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6dd22a2e",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-11T11:33:38Z",
+      "side": 1,
+      "message": "I decided to duplicate this line of code for the sake of better readability. Another option would be to use lots of ?: constructions which makes the code much more complex and hard to understand.",
+      "parentUuid": "8ec42329_6d36aae6",
       "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -153,6 +207,24 @@
       "side": 1,
       "message": "This code is calling an undefined method on an Entity object. This error is so obvious, even my PHPStorm complains.",
       "parentUuid": "8ec42329_720d2941",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_cdb47ee7",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-11T11:33:38Z",
+      "side": 1,
+      "message": "I\u0027m not sure if EntityView should know that there are Fingerprints. It should rather get a list of \"views\" which can be configured at a nice place. However, writing `if ( $entity instanceof FingerprintProvider )` is not the best way to solve this.",
+      "parentUuid": "8ec42329_0d284680",
       "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
