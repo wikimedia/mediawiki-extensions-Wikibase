@@ -173,7 +173,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		foreach ( $siteLinks as $link ) {
 			$badges = $link->getBadges();
 
-			if ( empty( $badges ) )  {
+			if ( empty( $badges ) ) {
 				continue;
 			}
 

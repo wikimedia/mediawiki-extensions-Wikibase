@@ -112,7 +112,7 @@ class SetQualifier extends ModifyClaim {
 		$claimGuid = $params['claim'];
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
-		if( !$propertyId instanceof PropertyId ){
+		if ( !$propertyId instanceof PropertyId ) {
 			$this->dieError(
 				$propertyId->getSerialization() . ' does not appear to be a property ID',
 				'param-illegal'

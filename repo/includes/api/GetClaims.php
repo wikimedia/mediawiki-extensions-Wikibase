@@ -127,7 +127,7 @@ class GetClaims extends ApiWikibase {
 		}
 		$params = $this->extractRequestParams();
 
-		if( isset( $params['rank'] ) ){
+		if ( isset( $params['rank'] ) ) {
 			$unserializedRank = ClaimSerializer::unserializeRank( $params['rank'] );
 			$matchFilter = $rank === $unserializedRank;
 			return $matchFilter;
@@ -139,7 +139,7 @@ class GetClaims extends ApiWikibase {
 	private function propertyMatchesFilter( EntityId $propertyId ) {
 		$params = $this->extractRequestParams();
 
-		if ( isset( $params['property'] ) ){
+		if ( isset( $params['property'] ) ) {
 			try {
 				$parsedProperty = $this->getIdParser()->parse( $params['property'] );
 			} catch ( EntityIdParsingException $e ) {

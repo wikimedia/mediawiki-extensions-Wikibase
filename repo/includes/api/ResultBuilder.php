@@ -64,7 +64,7 @@ class ResultBuilder {
 		EntityTitleLookup $entityTitleLookup,
 		SerializerFactory $serializerFactory
 	) {
-		if( !$result instanceof ApiResult ){
+		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiWikibase' );
 		}
 

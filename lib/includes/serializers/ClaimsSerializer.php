@@ -51,7 +51,7 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 
 		//NOTE: when changing the serialization structure, update docs/json.wiki too!
 
-		if( in_array( 'claims', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+		if ( in_array( 'claims', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ) {
 			$listSerializer = new ByPropertyListSerializer( 'claim', $this->claimSerializer, $this->options );
 		} else {
 			$listSerializer = new ListSerializer( 'claim', $this->claimSerializer, $this->options );
@@ -72,7 +72,7 @@ class ClaimsSerializer extends SerializerObject implements Unserializer {
 	 * @throws OutOfBoundsException
 	 */
 	public function newFromSerialization( array $serialization ) {
-		if( $this->isAssociative( $serialization ) ){
+		if ( $this->isAssociative( $serialization ) ) {
 			$unserializer = new ByPropertyListUnserializer( $this->claimSerializer );
 		} else {
 			$unserializer = new ListUnserializer( $this->claimSerializer );

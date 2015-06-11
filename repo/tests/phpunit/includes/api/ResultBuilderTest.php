@@ -705,7 +705,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 
-		foreach( $missingEntities as $key => $missingDetails ){
+		foreach ( $missingEntities as $key => $missingDetails ) {
 			if ( is_int( $key ) ) {
 				// string keys are kept for use in the result structure, integer keys aren't
 				$key = null;

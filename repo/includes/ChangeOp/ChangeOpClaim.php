@@ -100,7 +100,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		if ( $this->claim->getGuid() === null ){
+		if ( $this->claim->getGuid() === null ) {
 			$this->claim->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
 		}
 
