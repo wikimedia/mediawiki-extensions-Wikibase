@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e3fb890f",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T15:05:03Z",
+      "side": 1,
+      "message": "PS6 also covered https. Did you removed this on purpose?",
+      "revId": "0c4559221c3c079b4771ece9f29a6f7591733c0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_280ad029",
+        "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T15:05:03Z",
+      "side": 1,
+      "message": "This can\u0027t be right. One tests case works with URIs and an other test case works with entity id strings. I already tried to ask this as a question in PS6 but your answer did not helped me.",
+      "revId": "0c4559221c3c079b4771ece9f29a6f7591733c0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
