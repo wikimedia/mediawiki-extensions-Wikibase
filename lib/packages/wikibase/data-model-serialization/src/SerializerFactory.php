@@ -69,8 +69,10 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newEntitySerializer() {
-		$options = $this->shouldUseObjectsForMaps() ? FingerprintSerializer::USE_OBJECTS_FOR_MAPS : FingerprintSerializer::USE_ARRAYS_FOR_MAPS;
-		$fingerprintSerializer = new FingerprintSerializer( $options );
+		$mapOption = $this->shouldUseObjectsForMaps()
+			? FingerprintSerializer::USE_OBJECTS_FOR_MAPS
+			: FingerprintSerializer::USE_ARRAYS_FOR_MAPS;
+		$fingerprintSerializer = new FingerprintSerializer( $mapOption );
 		return new DispatchingSerializer( array(
 			new ItemSerializer( $fingerprintSerializer, $this->newStatementListSerializer(), $this->newSiteLinkSerializer(), $this->shouldUseObjectsForMaps() ),
 			new PropertySerializer( $fingerprintSerializer, $this->newStatementListSerializer() ),
