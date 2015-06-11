@@ -44,9 +44,9 @@ class StatementDeserializer implements Deserializer {
 		}
 
 		if ( $this->isLegacySerialization( $serialization ) ) {
-			return $this->fromLegacySerialization( $serialization );
-		} elseif ( $this->isCurrentSerialization( $serialization ) ) {
-			return $this->fromCurrentSerialization( $serialization );
+			return $this->legacyDeserializer->deserialize( $serialization );
+		} elseif ( $this->currentDeserializer->isDeserializerFor( $serialization ) ) {
+			return $this->currentDeserializer->deserialize( $serialization );
 		} else {
 			return $this->fromUnknownSerialization( $serialization );
 		}
@@ -57,24 +57,12 @@ class StatementDeserializer implements Deserializer {
 		return array_key_exists( 'm', $serialization );
 	}
 
-	private function isCurrentSerialization( array $serialization ) {
-		return $this->currentDeserializer->isDeserializerFor( $serialization );
-	}
-
-	private function fromLegacySerialization( array $serialization ) {
-		return $this->legacyDeserializer->deserialize( $serialization );
-	}
-
-	private function fromCurrentSerialization( array $serialization ) {
-		return $this->currentDeserializer->deserialize( $serialization );
-	}
-
 	private function fromUnknownSerialization( array $serialization ) {
 		try {
-			return $this->fromLegacySerialization( $serialization );
+			return $this->legacyDeserializer->deserialize( $serialization );
 		} catch ( DeserializationException $legacyEx ) {
 			try {
-				return $this->fromCurrentSerialization( $serialization );
+				return $this->currentDeserializer->deserialize( $serialization );
 			} catch ( DeserializationException $currentEx ) {
 				throw new DeserializationException(
 					'The provided claim serialization is neither legacy ('

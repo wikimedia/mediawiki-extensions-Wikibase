@@ -12,7 +12,14 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 class LegacyEntityDeserializer implements Deserializer {
 
+	/**
+	 * @var Deserializer
+	 */
 	private $itemDeserializer;
+
+	/**
+	 * @var Deserializer
+	 */
 	private $propertyDeserializer;
 
 	public function __construct( Deserializer $itemDeserializer, Deserializer $propertyDeserializer ) {
