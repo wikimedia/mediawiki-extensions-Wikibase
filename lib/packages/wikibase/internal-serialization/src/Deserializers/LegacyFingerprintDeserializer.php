@@ -16,10 +16,9 @@ use Wikibase\DataModel\Term\TermList;
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class LegacyFingerprintDeserializer implements Deserializer {
-
-	private $serialization;
 
 	/**
 	 * @param array $serialization
@@ -32,10 +31,12 @@ class LegacyFingerprintDeserializer implements Deserializer {
 			throw new DeserializationException( 'Term serialization should be an array' );
 		}
 
-		$this->serialization = $serialization;
-
 		try {
-			return new Fingerprint( $this->getLabels(), $this->getDescriptions(), $this->getAliases() );
+			return new Fingerprint(
+				$this->getLabels( $serialization ),
+				$this->getDescriptions( $serialization ),
+				$this->getAliases( $serialization )
+			);
 		}
 		catch ( InvalidArgumentException $ex ) {
 			throw new DeserializationException(
@@ -45,30 +46,30 @@ class LegacyFingerprintDeserializer implements Deserializer {
 		}
 	}
 
-	private function getLabels() {
+	private function getLabels( array $serialization ) {
 		$labels = array();
 
-		foreach ( $this->getArrayFromKey( 'label' ) as $langCode => $text ) {
+		foreach ( $this->getArrayFromKey( 'label', $serialization ) as $langCode => $text ) {
 			$labels[] = new Term( $langCode, $text );
 		}
 
 		return new TermList( $labels );
 	}
 
-	private function getDescriptions() {
+	private function getDescriptions( array $serialization ) {
 		$descriptions = array();
 
-		foreach ( $this->getArrayFromKey( 'description' ) as $langCode => $text ) {
+		foreach ( $this->getArrayFromKey( 'description', $serialization ) as $langCode => $text ) {
 			$descriptions[] = new Term( $langCode, $text );
 		}
 
 		return new TermList( $descriptions );
 	}
 
-	private function getAliases() {
+	private function getAliases( array $serialization ) {
 		$descriptions = array();
 
-		foreach ( $this->getArrayFromKey( 'aliases' ) as $langCode => $texts ) {
+		foreach ( $this->getArrayFromKey( 'aliases', $serialization ) as $langCode => $texts ) {
 			if ( $texts !== array() ) {
 				$descriptions[] = new AliasGroup( $langCode, $texts );
 			}
@@ -77,24 +78,20 @@ class LegacyFingerprintDeserializer implements Deserializer {
 		return new AliasGroupList( $descriptions );
 	}
 
-	private function getArrayFromKey( $key ) {
-		if ( !array_key_exists( $key, $this->serialization ) ) {
+	private function getArrayFromKey( $key, array $serialization ) {
+		if ( !array_key_exists( $key, $serialization ) ) {
 			return array();
 		}
 
-		$this->assertKeyIsArray( $key );
-
-		return $this->serialization[$key];
-	}
-
-	private function assertKeyIsArray( $key ) {
-		if ( !is_array( $this->serialization[$key] ) ) {
+		if ( !is_array( $serialization[$key] ) ) {
 			throw new InvalidAttributeException(
 				$key,
-				$this->serialization[$key],
+				$serialization[$key],
 				'The ' . $key . ' key should point to an array'
 			);
 		}
+
+		return $serialization[$key];
 	}
 
 }
