@@ -185,7 +185,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		return $lookup;
 	}
 
-	/***
+	/**
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter() {
