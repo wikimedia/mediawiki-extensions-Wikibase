@@ -105,6 +105,9 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.14.5 (2015-06-11)
+* Fixed `jQuery.valueview.ExpertExtender.CalendarHint` test broken due to DataValues JavaScript dependency update.
+
 ### 0.14.4 (2015-06-10)
 * Added expert for `UnDeserializableValue`s.
 * Updated DataValues JavaScript dependency to version 0.7.
@@ -143,7 +146,7 @@ Other methods an `Expert` needs to provide:
 * Introduced `utils.ContentLanguages`
 
 #### Breaking changes
-* `ExpertExtender.LanguageSelector` constructor requires `utils.ContentLanguages` now
+* `jQuery.valueview.ExpertExtender.LanguageSelector` constructor requires `utils.ContentLanguages` now.
 
 ### 0.11.0 (2015-01-21)
 * `jQuery.ui.toggler`: Added parameter to `animation` event determining whether the toggler's subject will be visible or hidden.
