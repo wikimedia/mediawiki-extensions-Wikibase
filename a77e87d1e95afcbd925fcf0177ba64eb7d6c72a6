@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_8d33d6f2",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T09:40:25Z",
+      "side": 1,
+      "message": "This does not need to be public. For testing, I see. Hm. Do we have a best-practice for this situation?",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_cd21de9b",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T09:40:25Z",
+      "side": 1,
+      "message": "Unused.",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6d36aae6",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T09:40:25Z",
+      "side": 1,
+      "message": "Duplicate code can be avoided.",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_92169559",
         "filename": "view/src/EntityView.php",
         "patchSetId": 13
@@ -37,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_ad1c926b",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T09:40:25Z",
+      "side": 1,
+      "message": "Ok, never mind, I misread some code.",
+      "parentUuid": "8ec42329_120aa529",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_b21b9181",
         "filename": "view/src/EntityView.php",
         "patchSetId": 13
@@ -66,6 +135,24 @@
       "side": 1,
       "message": "Why should I do this in this patch? This is not related in any way to this patch and we don\u0027t do such a check below. Also, adding instanceof FingerprintProvider is maybe not the best solution, we should discuss this first before adding it everywhere.",
       "parentUuid": "8ec42329_b21b9181",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0d284680",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T09:40:25Z",
+      "side": 1,
+      "message": "This code is calling an undefined method on an Entity object. This error is so obvious, even my PHPStorm complains.",
+      "parentUuid": "8ec42329_720d2941",
       "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
