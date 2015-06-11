@@ -282,6 +282,24 @@
       "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e81608ac",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-06-11T14:22:08Z",
+      "side": 1,
+      "message": "Things like `if ( $entity instanceof FingerprintProvider )` can be found multiple times in the Wikibase repository.",
+      "parentUuid": "8ec42329_0d06068a",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
