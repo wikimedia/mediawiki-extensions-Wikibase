@@ -26,7 +26,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		if( !isset( self::$hasSetup ) ){
+		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( array( 'StringProp', 'Oslo', 'Berlin' ) );
 		}
 		self::$hasSetup = true;
@@ -80,7 +80,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		}
 
 		// -- check the edit summary --------------------------------------------
-		if( array_key_exists( 'summary', $params) ){
+		if ( array_key_exists( 'summary', $params ) ) {
 			$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
 		}
 	}

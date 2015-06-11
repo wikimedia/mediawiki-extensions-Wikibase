@@ -194,11 +194,11 @@ class LinkTitles extends ApiWikibase {
 	 */
 	protected function validateParameters( array $params ) {
 		if ( $params['fromsite'] === $params['tosite'] ) {
-			$this->dieError( 'The from site cannot match the to site' , 'param-illegal' );
+			$this->dieError( 'The from site cannot match the to site', 'param-illegal' );
 		}
 
-		if( !( strlen( $params['fromtitle'] ) > 0) || !( strlen( $params['totitle'] ) > 0) ){
-			$this->dieError( 'The from title and to title must have a value' , 'param-illegal' );
+		if ( $params['fromtitle'] === '' || $params['totitle'] === '' ) {
+			$this->dieError( 'The from title and to title must have a value', 'param-illegal' );
 		}
 	}
 
