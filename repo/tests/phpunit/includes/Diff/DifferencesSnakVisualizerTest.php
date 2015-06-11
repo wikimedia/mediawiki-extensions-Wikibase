@@ -47,7 +47,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 		return $instance;
 	}
 
-	public function newDifferencesSnakVisualizer(){
+	public function newDifferencesSnakVisualizer() {
 		return new DifferencesSnakVisualizer(
 			$this->newEntityIdLabelFormatter(),
 			$this->newSnakFormatter( '<i>DETAILED SNAK</i>' ),
@@ -56,7 +56,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function testConstruction(){
+	public function testConstruction() {
 		$instance = $this->newDifferencesSnakVisualizer();
 		$this->assertInstanceOf( 'Wikibase\Repo\Diff\DifferencesSnakVisualizer', $instance );
 	}

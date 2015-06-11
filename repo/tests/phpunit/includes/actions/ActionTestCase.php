@@ -276,6 +276,8 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Creates a test item defined by $revisions.
 	 *
+	 * @todo Provide this for all kinds of entities.
+	 *
 	 * @param string $handle
 	 * @param array $revisions List of Entity or string. String values represent redirects.
 	 *
@@ -283,7 +285,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @throws MWException
 	 * @throws RuntimeException
 	 */
-	private function createTestContent( $handle, array $revisions ) { //@todo: provide this for all kinds of entities.
+	private function createTestContent( $handle, array $revisions ) {
 		global $wgUser;
 
 		/** @var EntityRevision $rev */

@@ -85,7 +85,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testSetAliases( $params, $expected ){
+	public function testSetAliases( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
 		if( !array_key_exists( 'id', $params ) ){
@@ -175,7 +175,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetAliasesExceptions( $params, $expected ){
+	public function testSetAliasesExceptions( $params, $expected ) {
 		self::doTestSetTermExceptions( $params, $expected );
 	}
 }
