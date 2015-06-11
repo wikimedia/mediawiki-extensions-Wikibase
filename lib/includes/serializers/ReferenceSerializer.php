@@ -71,9 +71,9 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$serialization['snaks-order'] = array();
 		/** @var Snak $snak */
-		foreach( $snaks as $snak ) {
+		foreach ( $snaks as $snak ) {
 			$id = $snak->getPropertyId()->getSerialization();
-			if( !in_array( $id, $serialization['snaks-order'] ) ) {
+			if ( !in_array( $id, $serialization['snaks-order'] ) ) {
 				$serialization['snaks-order'][] = $id;
 			}
 		}
@@ -109,7 +109,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$snakList = new SnakList( $unserializer->newFromSerialization( $serialization['snaks'] ) );
 
-		if( array_key_exists( 'snaks-order', $serialization ) ) {
+		if ( array_key_exists( 'snaks-order', $serialization ) ) {
 			$snakList->orderByProperty( $serialization['snaks-order'] );
 		}
 

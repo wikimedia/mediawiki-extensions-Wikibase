@@ -398,7 +398,7 @@ final class RepoHooks {
 			'type' => 'api'
 		);
 
-		if( class_exists( 'Babel' ) ) {
+		if ( class_exists( 'Babel' ) ) {
 			$preferences['wikibase-entitytermsview-showEntitytermslistview'] = array(
 				'type' => 'toggle',
 				'label-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview',

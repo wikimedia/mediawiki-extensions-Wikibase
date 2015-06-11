@@ -61,7 +61,7 @@ class SetClaim extends ModifyClaim {
 		$claim = $this->getClaimFromParams( $params );
 		$guid = $claim->getGuid();
 
-		if  ( $guid === null ) {
+		if ( $guid === null ) {
 			$this->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
 		}
 

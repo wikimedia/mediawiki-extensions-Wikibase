@@ -72,4 +72,5 @@ class SiteLinkTargetProvider {
 		$groups = array_diff( $groups, array( 'special' ) );
 		$groups = array_merge( $groups, $this->specialSiteGroups );
 	}
+
 }

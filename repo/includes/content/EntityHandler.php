@@ -292,7 +292,6 @@ abstract class EntityHandler extends ContentHandler {
 		return $options;
 	}
 
-
 	/**
 	 * @see ContentHandler::exportTransform
 	 *

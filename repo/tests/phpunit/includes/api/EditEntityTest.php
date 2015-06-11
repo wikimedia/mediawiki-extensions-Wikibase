@@ -358,13 +358,15 @@ class EditEntityTest extends WikibaseApiTestCase {
 		}
 
 		// -- do the request --------------------------------------------------
-		list($result,,) = $this->doApiRequestWithToken( $params );
+		list( $result, , ) = $this->doApiRequestWithToken( $params );
 
 		// -- steal ids for later tests -------------------------------------
 		if ( array_key_exists( 'new', $params ) && stristr( $params['new'], 'item' ) ) {
 			self::$idMap['!lastEntityId!'] = $result['entity']['id'];
 		}
-		if ( array_key_exists( 'claims', $result['entity'] ) && array_key_exists( $p56, $result['entity']['claims'] ) ) {
+		if ( array_key_exists( 'claims', $result['entity'] )
+			&& array_key_exists( $p56, $result['entity']['claims'] )
+		) {
 			foreach ( $result['entity']['claims'][$p56] as $claim ) {
 				if ( array_key_exists( 'id', $claim ) ) {
 					self::$idMap['%lastClaimId%'] = $claim['id'];

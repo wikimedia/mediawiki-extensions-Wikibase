@@ -95,7 +95,6 @@ class EditFilterHookRunner {
 				$new->getEntityId(),
 				$new->getEntityId()->getEntityType()
 			);
-
 		} else {
 			throw new InvalidArgumentException( '$new must be instance of Entity or EntityRedirect' );
 		}
