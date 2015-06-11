@@ -87,7 +87,7 @@
 		);
 		var $extender = $( '<div />' ).appendTo( 'body' ) ;
 
-		assert.equal( timeValue.calendar(), 'Gregorian' );
+		assert.equal( timeValue.getOption( 'calendarModel' ), 'http://www.wikidata.org/entity/Q1985727' );
 
 		calendarHint.init( $extender );
 		calendarHint.draw();
@@ -95,7 +95,7 @@
 		$( '.valueview-expertextender-calendarhint-switch', $extender[0] ).click();
 
 		sinon.assert.calledOnce( setSpy );
-		assert.equal( setSpy.firstCall.args[0], 'Julian' );
+		assert.equal( setSpy.firstCall.args[0], 'http://www.wikidata.org/entity/Q1985786' );
 
 		$extender.remove();
 	} );
@@ -123,7 +123,7 @@
 		$( '.valueview-expertextender-calendarhint-switch', $extender[0] ).click();
 
 		sinon.assert.calledOnce( setSpy );
-		assert.equal( setSpy.firstCall.args[0], 'Julian' );
+		assert.equal( setSpy.firstCall.args[0], 'http://www.wikidata.org/entity/Q1985786' );
 
 		timeValue = new TimeValue( timeValue.toJSON().time, {
 			calendarModel: TimeValue.CALENDARS.JULIAN,
@@ -134,7 +134,7 @@
 		$( '.valueview-expertextender-calendarhint-switch', $extender[0] ).click();
 
 		sinon.assert.calledTwice( setSpy );
-		assert.equal( setSpy.secondCall.args[0], 'Gregorian' );
+		assert.equal( setSpy.secondCall.args[0], 'http://www.wikidata.org/entity/Q1985727' );
 
 		$extender.remove();
 	} );
