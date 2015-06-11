@@ -21,7 +21,6 @@ use Wikibase\ItemContent;
  */
 class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 
-
 	private function getTermValidatorFactory() {
 		$mockProvider = new ChangeOpTestMockProvider( $this );
 		return $mockProvider->getMockTermValidatorFactory();

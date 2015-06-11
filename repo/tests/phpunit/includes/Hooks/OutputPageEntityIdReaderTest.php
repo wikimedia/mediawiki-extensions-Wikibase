@@ -20,6 +20,7 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
  * @author Marius Hoch < hoo@online.de >
  */
 class OutputPageEntityIdReaderTest extends PHPUnit_Framework_TestCase {
+
 	/**
 	 * @dataProvider getEntityIdFromOutputPageProvider
 	 */
