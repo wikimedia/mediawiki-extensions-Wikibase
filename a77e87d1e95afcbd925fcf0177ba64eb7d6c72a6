@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_cdff9e61",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T12:04:49Z",
+      "side": 1,
+      "message": "So I have to ask again. Why is this code split over two classes and not in one class?",
+      "parentUuid": "8ec42329_2dcc228c",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_cd21de9b",
         "filename": "view/src/EntityTermsView.php",
         "patchSetId": 13
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "I decided to duplicate this line of code for the sake of better readability. Another option would be to use lots of ?: constructions which makes the code much more complex and hard to understand.",
       "parentUuid": "8ec42329_6d36aae6",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_adfa5271",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T12:04:49Z",
+      "side": 1,
+      "message": "Yea, just a suggestion.",
+      "parentUuid": "8ec42329_6dd22a2e",
       "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -225,6 +261,24 @@
       "side": 1,
       "message": "I\u0027m not sure if EntityView should know that there are Fingerprints. It should rather get a list of \"views\" which can be configured at a nice place. However, writing `if ( $entity instanceof FingerprintProvider )` is not the best way to solve this.",
       "parentUuid": "8ec42329_0d284680",
+      "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0d06068a",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-11T12:04:49Z",
+      "side": 1,
+      "message": "But it already knows there are fingerprints. It calls getFingerprint without knowing it can call it.",
+      "parentUuid": "8ec42329_cdb47ee7",
       "revId": "a77e87d1e95afcbd925fcf0177ba64eb7d6c72a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
