@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_833ac5be",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-11T15:14:46Z",
+      "side": 1,
+      "message": "Yes, but I\u0027m not sure whether that was a good idea. The rationale is that URIs very rarely use https. Having this hardcoded here is nasty anyway. But we need it for now, I\u0027m afraid.",
+      "parentUuid": "8ec42329_e3fb890f",
+      "revId": "0c4559221c3c079b4771ece9f29a6f7591733c0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_280ad029",
         "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-11T15:05:03Z",
       "side": 1,
       "message": "This can\u0027t be right. One tests case works with URIs and an other test case works with entity id strings. I already tried to ask this as a question in PS6 but your answer did not helped me.",
+      "revId": "0c4559221c3c079b4771ece9f29a6f7591733c0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_633d59b8",
+        "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-11T15:14:46Z",
+      "side": 1,
+      "message": "This one specific URI is actually hardcoded to mean \"no unit\" (Q199 is the item about the natural number 1). That what is tested here. Other URIs are not supported in the test setup, since we use a BasicEntityIdParser here.\n\nBut this will fail now, since it uses https, which isn\u0027t supported for the URI.",
+      "parentUuid": "8ec42329_280ad029",
       "revId": "0c4559221c3c079b4771ece9f29a6f7591733c0a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
