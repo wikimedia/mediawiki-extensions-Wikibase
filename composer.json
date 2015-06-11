@@ -44,6 +44,9 @@
 
 		"diff/diff": "~2.0|~1.0"
 	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "~2.1"
+	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.23"
 	},
@@ -72,6 +75,6 @@
 		}
 	},
 	"scripts": {
-		"phpcs": "phpcs $PHPCS_ARGS -s --standard=phpcs.xml --ignore=extensions/ValueView,vendor --encoding=utf-8 --extensions=php"
+		"phpcs": "vendor/bin/phpcs $PHPCS_ARGS -sp --standard=phpcs.xml --ignore=extensions,vendor --encoding=utf-8 --extensions=php"
 	}
 }
