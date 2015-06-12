@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3a1d2f79",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-12T10:07:32Z",
+      "side": 1,
+      "message": "if ( empty( $labels ) \u0026\u0026 empty( $descriptions ) ) {",
+      "revId": "34f076a30d4f656f769258666516ef48c51fb3a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_da0d0b43",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-12T10:07:32Z",
+      "side": 1,
+      "message": "If there is a conflict in a label, but the description is empty, this will result in a false negative (no error found when it should fine one).",
+      "revId": "34f076a30d4f656f769258666516ef48c51fb3a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_7a0ad72a",
+        "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-12T10:07:32Z",
+      "side": 1,
+      "message": "Aliases, not descriptions.",
+      "revId": "34f076a30d4f656f769258666516ef48c51fb3a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
