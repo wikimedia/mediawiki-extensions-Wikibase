@@ -73,6 +73,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "在$1输入此实体的标签，一段简短描述和别名。",
 	"wikibase-statements": "声明",
 	"wikibase-terms": "其他语言",
+	"wikibase-sitelinks": "链接到该项的页面列表",
 	"wikibase-sitelinkgroupview-input-help-message": "通过指定一个网站和对应网站的一个页面添加、编辑站点链接，或移除现有的网站链接。",
 	"wikibase-sitelinks-empty": "没有页面连接至该项。",
 	"wikibase-sitelinks-input-help-message": "请设置至该项相关页面的链接。",

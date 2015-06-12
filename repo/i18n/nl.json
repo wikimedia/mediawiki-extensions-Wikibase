@@ -66,6 +66,7 @@
 	"wikibase-description-input-help-message": "Voer een korte omschrijving in voor deze entiteit in het $1.",
 	"wikibase-statements": "Verklaringen",
 	"wikibase-terms": "In andere talen",
+	"wikibase-sitelinks": "Lijst met pagina's gekoppeld aan dit item",
 	"wikibase-sitelinks-empty": "Er is geen pagina gekoppeld aan dit item.",
 	"wikibase-sitelinks-input-help-message": "Geef een koppeling op naar een pagina over dit item.",
 	"wikibase-sitelinks-special": "Andere sites",

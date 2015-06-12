@@ -59,6 +59,8 @@
 	"wikibase-validator-invalid": "Valor no válido",
 	"wikibase-validator-missing-field": "Falta el campo obligatorio «$1»",
 	"wikibase-validator-bad-type": "$2 en lugar de $1",
+	"wikibase-validator-too-long": "Debe tener {{PLURAL:$1|un caracter|$1 caracteres}} como máximo",
+	"wikibase-validator-too-short": "Debe tener {{PLURAL:$1|un caracter|$1 caracteres}} como mínimo",
 	"wikibase-validator-malformed-value": "Entrada incorrecta: $1",
 	"wikibase-validator-bad-entity-id": "Identificador incorrecto: $1",
 	"wikibase-validator-bad-entity-type": "Tipo de entidad inesperado $1",

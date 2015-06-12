@@ -4,7 +4,8 @@
 			"Sahan.ssw",
 			"පසිඳු කාවින්ද",
 			"Roonyh",
-			"හරිත"
+			"හරිත",
+			"Singhalawap"
 		]
 	},
 	"wikibase-client-desc": "විකිපාදක දිගුව සඳහා සේවාදායකයා",
@@ -13,7 +14,7 @@
 	"wikibase-comment-sitelink-add": "භාෂා සබැඳිය එක් කරන ලදී: $1",
 	"wikibase-comment-sitelink-change": "භාෂා සබැඳිය $1 ගෙන් $2 වෙත වෙනස් වෙන ලදී",
 	"wikibase-comment-sitelink-remove": "භාෂා සබැඳිය ඉවත් කරන ලදී: $1",
-	"wikibase-dataitem": "{{WBREPONAME}} උපාංගය",
+	"wikibase-dataitem": "{{WBREPONAME}} අයිතමය",
 	"wikibase-editlinks": "සබැඳි සංස්කරණය කරන්න",
 	"wikibase-editlinkstitle": "අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

@@ -50,6 +50,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "Внесете го натписот на оваа единица, краток опис и алијаси на $1.",
 	"wikibase-statements": "Искази",
 	"wikibase-terms": "На други јазици",
+	"wikibase-sitelinks": "Список на страници сврзани со овој предмет",
 	"wikibase-sitelinkgroupview-input-help-message": "Додајте викиврска укажувајќи мрежно место и страницата на него, изменете или отстранете ги постоечките.",
 	"wikibase-sitelinks-empty": "Нема страници поврзани со овој предмет.",
 	"wikibase-sitelinks-input-help-message": "Задајте врска до страница поврзана со овој предмет.",
