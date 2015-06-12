@@ -106,9 +106,31 @@ class SiteLinksView {
 			$html .= $this->getHtmlForSiteLinkGroup( $siteLinks, $itemId, $group );
 		}
 
-		return $this->templateFactory->render( 'wikibase-sitelinkgrouplistview',
+		$html = $this->templateFactory->render( 'wikibase-sitelinkgrouplistview',
 			$this->templateFactory->render( 'wikibase-listview', $html )
 		);
+
+		$sectionHeading = $this->getHtmlForSectionHeading( 'wikibase-sitelinks' );
+
+		return $sectionHeading . $html;
+	}
+
+	/**
+	 * Returns the HTML for the heading of the sitelinks section
+	 *
+	 * @param string $heading message key of the heading
+	 *
+	 * @return string
+	 */
+	private function getHtmlForSectionHeading( $heading ) {
+		$html = $this->templateFactory->render(
+			'wb-section-heading',
+			wfMessage( $heading )->escaped(),
+			'sitelinks', // ID - TODO: should not be added if output page is not the entity's page
+			$heading
+		);
+
+		return $html;
 	}
 
 	/**
