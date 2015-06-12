@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_3df3e608",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-12T18:05:22Z",
+      "side": 1,
+      "message": "new self",
+      "revId": "90c27775f3d537fa311bbbd9ec77219ebc6410b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_1d238aa7",
         "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
         "patchSetId": 5
