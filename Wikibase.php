@@ -30,9 +30,11 @@
  * @licence GNU GPL v2+
  */
 
-//TODO: Use a different file for jenkins, use this for a standard repo+client setup.
-
-if ( !isset( $wgWikimediaJenkinsCI ) || !$wgWikimediaJenkinsCI ) {
-	die( "This entry point is for use by the Jenkins testing framework only.\n"
-		. "Use repo/Wikibase.php resp. client/WikibaseClient.php instead.\n" );
+if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
+	require_once __DIR__ . '/repo/Wikibase.php';
 }
+
+if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnableWikibaseClient'] ) {
+	require_once __DIR__ . '/client/WikibaseClient.php';
+}
+
