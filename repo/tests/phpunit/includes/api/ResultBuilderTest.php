@@ -613,7 +613,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 									),
 									'datatype' => 'DtIdFor_P12',
 								),
-								'type' => 'claim',
+								'type' => 'statement',
+								'rank' => 'normal',
 							)
 						)
 					),
@@ -648,7 +649,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					),
 					'datatype' => 'DtIdFor_P12',
 				),
-				'type' => 'claim',
+				'type' => 'statement',
+				'rank' => 'normal',
 			),
 		);
 

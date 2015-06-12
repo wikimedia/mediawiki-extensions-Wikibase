@@ -96,7 +96,7 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 
 	public function getStatementEditSection() {
 		return array(
-			array( new Statement( new Claim( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ) ) )
+			array( new Statement( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ) )
 		);
 	}
 
