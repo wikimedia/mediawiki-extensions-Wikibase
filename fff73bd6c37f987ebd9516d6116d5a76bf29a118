@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_ea3fd2d1",
+        "filename": "build/travis/script.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-12T17:55:57Z",
+      "side": 1,
+      "message": "Previous directory",
+      "parentUuid": "8ec42329_3aebef78",
+      "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_dacaeb49",
         "filename": "composer.json",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-12T09:56:42Z",
       "side": 1,
       "message": "The \"extensions\" pattern will exclude the whole extensions/Wikibase/ folder. That\u0027s why I wrote it how I wrote it.",
+      "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4a22a6b2",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-12T17:55:57Z",
+      "side": 1,
+      "message": "Are you running the command from outside the Wikibase folder? If so, why not run it inside the folder?",
+      "parentUuid": "8ec42329_dacaeb49",
       "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
