@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use ApiMain;
 use DataValues\IllegalValueException;
+use Exception;
 use Language;
 use Status;
 use UsageException;
@@ -23,10 +24,24 @@ use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class ApiErrorReporterTest extends \MediaWikiTestCase {
 
-	protected function assertUsageException( $info, $code, $httpStatusCode, $expectedDataFields, UsageException $ex ) {
+	/**
+	 * @param string $info Regular expression
+	 * @param string $code
+	 * @param int $httpStatusCode
+	 * @param string[] $expectedDataFields
+	 * @param UsageException $ex
+	 */
+	private function assertUsageException(
+		$info,
+		$code,
+		$httpStatusCode,
+		array $expectedDataFields,
+		UsageException $ex
+	) {
 		$messageArray = $ex->getMessageArray();
 
 		$this->assertArrayHasKey( 'code', $messageArray );
@@ -52,7 +67,12 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		}
 	}
 
-	protected function assertValueAtPath( $expected, $path, $data ) {
+	/**
+	 * @param string $expected Text or regular expression
+	 * @param string[] $path
+	 * @param string[] $data
+	 */
+	private function assertValueAtPath( $expected, array $path, array $data ) {
 		$name = '';
 		foreach ( $path as $step ) {
 			$this->assertArrayHasKey( $step, $data );
@@ -105,11 +125,11 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$code' => 'no-such-sitelink',
 				'$httpStatusCode' => 0,
 				'$extradata' => array( 'fruit' => 'Banana' ),
-				'$infoPattern' => '/sitelink.*\(ugh!\)$/',
+				'$infoPattern' => '/^Could not find a site ?link.*\(ugh!\)$/',
 				'$expectedData' => array(
 					'fruit' => 'Banana',
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
-					'messages/0/html' => '/gefunden/', // in German
+					'messages/0/html' => '(wikibase-api-no-such-sitelink)',
 				),
 			),
 
@@ -123,7 +143,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$infoPattern' => '/^Malformed value\./',
 				'$expectedData' => array(
 					'messages/0/name' => 'wikibase-parse-error',
-					'messages/0/html' => '/Wert/', // in German
+					'messages/0/html' => '(wikibase-parse-error)',
 				),
 			),
 		);
@@ -132,10 +152,17 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider exceptionProvider
 	 */
-	public function testDieException( $exception, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
+	public function testDieException(
+		Exception $exception,
+		$code,
+		$httpStatusCode,
+		array $extradata = null,
+		$infoPattern,
+		array $expectedDataFields
+	) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'qqx' ) );
 
 		try {
 			$reporter->dieException( $exception, $code, $httpStatusCode, $extradata );
@@ -152,14 +179,14 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		return array(
 			// The appropriate message should be included in the extra data.
 			// Most importantly, the info field should contain the message text in English,
-			// while the HTML should be in German. Any Message parameters must be present.
+			// while the HTML should be localized. Any Message parameters must be present.
 			'known error code' => array(
 				'$code' => $code,
 				'$param' => $param,
-				'$infoPattern' => '/sitelink/',
+				'$infoPattern' => '/^Could not find a site ?link/',
 				'$expectedDataFields' => array(
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
-					'messages/0/html' => '/gefunden/', // in German
+					'messages/0/html' => '(wikibase-api-no-such-sitelink: Foo)',
 					'messages/0/parameters/0' => '/Foo/',
 				),
 			)
@@ -169,10 +196,10 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider messageProvider
 	 */
-	public function testDieMessage( $code, $param, $infoPattern, $expectedDataFields ) {
+	public function testDieMessage( $code, $param, $infoPattern, array $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'qqx' ) );
 
 		try {
 			$reporter->dieMessage( $code, $param );
@@ -190,7 +217,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 			// Using an (existing) message, the message should be included in the extra data.
 			// The code string should be unchanged.
 			// Most importantly, the info field should contain the message text in English,
-			// while the HTML should be in German.
+			// while the HTML should be localized.
 			// All error messages from the Status object should be present, all message
 			// parameters must be present.
 			'known error code' => array(
@@ -198,13 +225,13 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 0,
 				'$extradata' => null,
-				'$infoPattern' => '/sitelink/',
+				'$infoPattern' => '/^Could not find a site ?link/',
 				'$expectedData' => array(
 					'messages/0/name' => 'wikibase-api-no-such-sitelink',
-					'messages/0/html' => '/gefunden/', // in German
+					'messages/0/html' => '(wikibase-api-no-such-sitelink)',
 					'messages/1/name' => 'wikibase-noentity',
 					'messages/1/parameters/0' => 'Q123',
-					'messages/1/html' => '/ist nicht vorhanden/', // in German
+					'messages/1/html' => '(wikibase-noentity: Q123)',
 				),
 			),
 
@@ -226,10 +253,17 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider statusProvider
 	 */
-	public function testDieStatus( Status $status, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
+	public function testDieStatus(
+		Status $status,
+		$code,
+		$httpStatusCode,
+		array $extradata = null,
+		$infoPattern,
+		array $expectedDataFields
+	) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'qqx' ) );
 
 		try {
 			$reporter->dieStatus( $status, $code, $httpStatusCode, $extradata );
@@ -273,10 +307,17 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider errorProvider
 	 */
-	public function testDieError( $description, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
+	public function testDieError(
+		$description,
+		$code,
+		$httpStatusCode,
+		array $extradata = null,
+		$infoPattern,
+		array $expectedDataFields
+	) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'qqx' ) );
 
 		try {
 			$reporter->dieError( $description, $code, $httpStatusCode, $extradata );
@@ -297,9 +338,9 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$status' => $status,
 				'$expectedData' => array(
 					'warnings/main_int/messages/0/name' => 'wikibase-conflict-patched',
-					'warnings/main_int/messages/0/html' => '/Version/', // in German
+					'warnings/main_int/messages/0/html' => '(wikibase-conflict-patched)',
 					'warnings/main_int/messages/1/name' => 'undo-nochange',
-					'warnings/main_int/messages/1/html' => '/Bearbeitung.*bereits/', // in German
+					'warnings/main_int/messages/1/html' => '(undo-nochange)',
 				),
 			),
 		);
@@ -308,10 +349,10 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider warningProvider
 	 */
-	public function testReportStatusWarnings( Status $status, $expectedDataFields ) {
+	public function testReportStatusWarnings( Status $status, array $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
-		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
+		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'qqx' ) );
 
 		$reporter->reportStatusWarnings( $status );
 
