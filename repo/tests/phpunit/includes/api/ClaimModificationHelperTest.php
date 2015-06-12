@@ -74,7 +74,7 @@ class ClaimModificationHelperTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$statement = new Statement( new Claim( $snak ) );
+		$statement = new Statement( $snak );
 		$statement->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );
 		$item->getStatements()->addStatement( $statement );
 		$guid = $statement->getGuid();

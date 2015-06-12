@@ -291,11 +291,11 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			array( 'sitelink' ),
 		);
 
-		$claim = new Claim( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) );
+		$claim = new Statement( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) );
 		$claim->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithStatement = new Item();
-		$itemWithStatement->getStatements()->addStatement( new Statement( $claim ) );
+		$itemWithStatement->getStatements()->addStatement( $claim );
 		$testCases['claimMerge'] = array(
 			$itemWithStatement->copy(),
 			new Item(),
@@ -303,14 +303,14 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$itemWithStatement->copy()
 		);
 
-		$qualifiedClaim = new Claim(
+		$qualifiedClaim = new Statement(
 			new PropertyNoValueSnak( new PropertyId( 'P56' ) ),
 			new SnakList( array( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) ) )
 		);
 		$qualifiedClaim->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithQualifiedStatement = new Item();
-		$itemWithQualifiedStatement->getStatements()->addStatement( new Statement( $qualifiedClaim ) );
+		$itemWithQualifiedStatement->getStatements()->addStatement( $qualifiedClaim );
 
 		$testCases['claimWithQualifierMerge'] = array(
 			$itemWithQualifiedStatement->copy(),
@@ -333,7 +333,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$bigItem->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
 		$bigItem->getFingerprint()->setAliasGroup( 'de', array( 'defoo', 'debar' ) );
 		$bigItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
-		$bigItem->getStatements()->addStatement( new Statement( $anotherQualifiedClaim ) );
+		$bigItem->getStatements()->addStatement( $anotherQualifiedClaim );
 
 		$testCases['itemMerge'] = array(
 			$bigItem->copy(),
@@ -364,7 +364,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$bigMergedItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
 		$bigMergedItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'toLink' );
-		$bigMergedItem->setStatements( new StatementList( new Statement( $anotherQualifiedClaim ) ) );
+		$bigMergedItem->setStatements( new StatementList( $anotherQualifiedClaim ) );
 
 		$testCases['ignoreConflictItemMerge'] = array(
 			$bigItem->copy(),
