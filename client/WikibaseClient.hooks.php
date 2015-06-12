@@ -116,9 +116,15 @@ final class ClientHooks {
 	 */
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
 		$allowDataTransclusion = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'allowDataTransclusion' );
+
 		if ( $engine == 'lua' && $allowDataTransclusion === true ) {
 			$extraLibraries['mw.wikibase'] = 'Scribunto_LuaWikibaseLibrary';
 			$extraLibraries['mw.wikibase.entity'] = 'Scribunto_LuaWikibaseEntityLibrary';
+
+			// @todo define proper constant in Capiunto
+			if ( class_exists( 'Capiunto\LuaLibrary' ) ) {
+				$extraLibraries['mw.wikibase.capiunto'] = 'Scribunto_LuaWikibaseCapiuntoLibrary';
+			}
 		}
 
 		return true;
