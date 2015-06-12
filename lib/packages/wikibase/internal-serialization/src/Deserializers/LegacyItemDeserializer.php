@@ -10,29 +10,41 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class LegacyItemDeserializer implements Deserializer {
 
+	/**
+	 * @var Deserializer
+	 */
 	private $idDeserializer;
-	private $siteLinkListDeserializer;
-	private $statementDeserializer;
-	private $fingerprintDeserializer;
 
 	/**
-	 * @var Item
+	 * @var Deserializer
 	 */
-	private $item;
-	private $serialization;
+	private $siteLinkListDeserializer;
 
-	public function __construct( Deserializer $idDeserializer, Deserializer $siteLinkListDeserializer,
-		Deserializer $statementDeserializer, Deserializer $fingerprintDeserializer ) {
+	/**
+	 * @var Deserializer
+	 */
+	private $statementDeserializer;
 
+	/**
+	 * @var Deserializer
+	 */
+	private $fingerprintDeserializer;
+
+	public function __construct(
+		Deserializer $idDeserializer,
+		Deserializer $siteLinkListDeserializer,
+		Deserializer $statementDeserializer,
+		Deserializer $fingerprintDeserializer
+	) {
 		$this->idDeserializer = $idDeserializer;
 		$this->siteLinkListDeserializer = $siteLinkListDeserializer;
 		$this->statementDeserializer = $statementDeserializer;
@@ -50,48 +62,51 @@ class LegacyItemDeserializer implements Deserializer {
 			throw new DeserializationException( 'Item serialization should be an array' );
 		}
 
-		$this->serialization = $serialization;
-		$this->item = new Item(
-			$this->getItemId(),
-			$this->getFingerprint(),
-			$this->getSiteLinkList(),
-			$this->getStatementList()
+		return new Item(
+			$this->getItemId( $serialization ),
+			$this->fingerprintDeserializer->deserialize( $serialization ),
+			$this->getSiteLinkList( $serialization ),
+			$this->getStatementList( $serialization )
 		);
-
-		return $this->item;
 	}
 
 	/**
+	 * @param array $serialization
+	 *
 	 * @return ItemId|null
 	 */
-	private function getItemId() {
-		if ( array_key_exists( 'entity', $this->serialization ) ) {
-			return $this->idDeserializer->deserialize( $this->serialization['entity'] );
+	private function getItemId( array $serialization ) {
+		if ( array_key_exists( 'entity', $serialization ) ) {
+			return $this->idDeserializer->deserialize( $serialization['entity'] );
 		}
 
 		return null;
 	}
 
 	/**
+	 * @param array $serialization
+	 *
 	 * @return SiteLinkList|null
 	 */
-	private function getSiteLinkList() {
-		if ( array_key_exists( 'links', $this->serialization ) ) {
-			return $this->siteLinkListDeserializer->deserialize( $this->serialization['links'] );
+	private function getSiteLinkList( array $serialization ) {
+		if ( array_key_exists( 'links', $serialization ) ) {
+			return $this->siteLinkListDeserializer->deserialize( $serialization['links'] );
 		}
 
 		return null;
 	}
 
 	/**
+	 * @param array $serialization
+	 *
 	 * @return StatementList
 	 */
-	private function getStatementList() {
-		$this->normalizeLegacyClaimKeys();
+	private function getStatementList( array $serialization ) {
+		$serialization = $this->normalizeLegacyClaimKeys( $serialization );
 
 		$statementList = new StatementList();
 
-		foreach ( $this->getArrayFromKey( 'claims' ) as $claimSerialization ) {
+		foreach ( $this->getArrayFromKey( 'claims', $serialization ) as $claimSerialization ) {
 			$this->assertClaimValueIsArray( $claimSerialization );
 			$statementList->addStatement( $this->getStatement( $claimSerialization ) );
 		}
@@ -116,63 +131,43 @@ class LegacyItemDeserializer implements Deserializer {
 		}
 	}
 
-	private function normalizeLegacyClaimKeys() {
+	private function normalizeLegacyClaimKeys( array $serialization ) {
 		// Compatibility with DataModel 0.2 and 0.3 ItemObjects.
 		// (statements key got renamed to claims)
-		if ( array_key_exists( 'statements', $this->serialization ) ) {
-			$this->serialization['claims'] = $this->serialization['statements'];
-			unset( $this->serialization['statements'] );
-		}
-	}
-
-	private function normalizeStatementSerialization( array $claimSerialization ) {
-		$statementSerialization = $this->normalizeStatementRankKey( $claimSerialization );
-		$statementSerialization = $this->normalizeReferencesKey( $statementSerialization );
-
-		return $statementSerialization;
-	}
-
-	private function normalizeStatementRankKey( array $claimSerialization ) {
-		if ( !isset( $claimSerialization['rank'] ) ) {
-			$claimSerialization['rank'] = Statement::RANK_NORMAL;
+		if ( array_key_exists( 'statements', $serialization ) ) {
+			$serialization['claims'] = $serialization['statements'];
+			unset( $serialization['statements'] );
 		}
 
-		return $claimSerialization;
+		return $serialization;
 	}
 
-	private function normalizeReferencesKey( array $claimSerialization ) {
-		if ( !isset( $claimSerialization['refs'] ) ) {
-			$claimSerialization['refs'] = array();
+	private function normalizeStatementSerialization( array $seralization ) {
+		if ( !isset( $seralization['rank'] ) ) {
+			$seralization['rank'] = Statement::RANK_NORMAL;
 		}
 
-		return $claimSerialization;
+		if ( !isset( $seralization['refs'] ) ) {
+			$seralization['refs'] = array();
+		}
+
+		return $seralization;
 	}
 
-	private function getArrayFromKey( $key ) {
-		if ( !array_key_exists( $key, $this->serialization ) ) {
+	private function getArrayFromKey( $key, array $serialization ) {
+		if ( !array_key_exists( $key, $serialization ) ) {
 			return array();
 		}
 
-		$this->assertKeyIsArray( $key );
-
-		return $this->serialization[$key];
-	}
-
-	private function assertKeyIsArray( $key ) {
-		if ( !is_array( $this->serialization[$key] ) ) {
+		if ( !is_array( $serialization[$key] ) ) {
 			throw new InvalidAttributeException(
 				$key,
-				$this->serialization[$key],
+				$serialization[$key],
 				'The ' . $key . ' key should point to an array'
 			);
 		}
-	}
 
-	/**
-	 * @return Fingerprint
-	 */
-	private function getFingerprint() {
-		return $this->fingerprintDeserializer->deserialize( $this->serialization );
+		return $serialization[$key];
 	}
 
 }
