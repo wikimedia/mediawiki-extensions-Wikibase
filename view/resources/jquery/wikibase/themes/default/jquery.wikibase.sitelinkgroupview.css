@@ -18,7 +18,7 @@
 }
 
 .wikibase-sitelinkgroupview.wb-edit {
-	border-color: #2779aa;
+	border-color: #2779AA;
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-section {
@@ -33,17 +33,19 @@
 	background-color: #D6F3FF;
 }
 
+.wikibase-sitelinkgroupview h2, /* TODO: Temporarily kept for compatibility, remove after July 2015 */
 .wikibase-sitelinkgroupview h3 {
+	border-bottom: 0; /* TODO: Temporarily kept for compatibility, remove after July 2015 */
 	display: inline;
 	float: none;
-	width: auto;
 	font-weight: normal;
 	padding-left: 0.5em;
+	width: auto;
 }
 
 .wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container > .wikibase-toolbar-container {
 	display: inline;
-	position: static;
 	padding-left: 0.5em;
+	position: static;
 	width: auto;
 }
