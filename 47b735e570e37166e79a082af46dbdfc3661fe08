@@ -34,6 +34,23 @@
       "revId": "47b735e570e37166e79a082af46dbdfc3661fe08",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a65b4c25",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-06-12T07:18:18Z",
+      "side": 1,
+      "message": "I thought \"sitelinks\" was the preferred term.",
+      "revId": "47b735e570e37166e79a082af46dbdfc3661fe08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
