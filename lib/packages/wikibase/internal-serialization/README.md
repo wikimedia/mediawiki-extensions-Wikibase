@@ -106,13 +106,13 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
-### 1.4 (dev)
+### 1.4 (2015-06-12)
 
-* Added PHPMD and PHPCS support
-* Added support for showing the component version when loaded via MediaWiki
-* Added compatibility with DataModel 3.x and DataModelSerialization 1.4
+* Added compatibility with DataModel 3.x
 * Deprecated `LegacyDeserializerFactory::newClaimDeserializer` in favour of `LegacyDeserializerFactory::newStatementDeserializer`
 * Deprecated `DeserializerFactory::newClaimDeserializer` in favour of `DeserializerFactory::newStatementDeserializer`
+* Added support for showing the component version when loaded via MediaWiki
+* Added PHPMD and PHPCS support
 
 ### 1.3.1 (2015-01-06)
 
