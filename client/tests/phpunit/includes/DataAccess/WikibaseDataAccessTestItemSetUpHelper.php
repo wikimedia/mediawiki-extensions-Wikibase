@@ -183,7 +183,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 	 * @return Statement
 	 */
 	private function getTestStatement( Snak $mainSnak ) {
-		$statement = new Statement( new Claim( $mainSnak ) );
+		$statement = new Statement( $mainSnak );
 		$statement->setGuid( uniqid( 'kittens', true ) );
 
 		return $statement;

@@ -29,7 +29,7 @@ class SnaksFinder {
 		if ( $acceptableRanks === null ) {
 			return $statementList->getBestStatements()->getMainSnaks();
 		} else {
-			return $statementList->getWithRank( $acceptableRanks )->getMainSnaks();
+			return $statementList->getByRank( $acceptableRanks )->getMainSnaks();
 		}
 	}
 
@@ -42,6 +42,6 @@ class SnaksFinder {
 	private function getStatementsWithPropertyId( StatementListProvider $statementListProvider, PropertyId $propertyId ) {
 		return $statementListProvider
 			->getStatements()
-			->getWithPropertyId( $propertyId );
+			->getByPropertyId( $propertyId );
 	}
 }
