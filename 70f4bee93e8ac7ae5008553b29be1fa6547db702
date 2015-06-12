@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_5a011b07",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2015-06-12T08:07:50Z",
+      "side": 1,
+      "message": "I don\u0027t know, how wikibase works, so maybe may comment sounds a little bit dumb, but i want to be sure that this change doesn\u0027t introduce regressions :)\n\nIn jquery.wikibase.sitelinkgroupview.js you cover the caching behavior of changing the h2 to a h3 tag, so i think, that the heading is cache related (and i\u0027m pretty sure it is).\n\nSo, the CSS of Wikibase is delivered through resourceloader (I assume), so if you change the css here, you would get unstyled h2 elements on cached pages, while h3 tags are styled correctly. Shouldn\u0027t you cover cached versions of wikibase pages here, too, or is this minor and doesn\u0027t need some workaround until the cache is cleared?",
+      "revId": "70f4bee93e8ac7ae5008553b29be1fa6547db702",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
