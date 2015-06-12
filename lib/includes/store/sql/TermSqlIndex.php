@@ -42,7 +42,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @var int
 	 */
-	private $maxConflicts = 10;
+	private $maxConflicts = 500;
 
 	/**
 	 * Maps table fields to TermIndex interface field names.
