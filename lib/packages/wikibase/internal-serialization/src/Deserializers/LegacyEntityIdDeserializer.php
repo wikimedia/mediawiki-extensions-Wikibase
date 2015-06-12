@@ -16,6 +16,9 @@ use Wikibase\DataModel\LegacyIdInterpreter;
  */
 class LegacyEntityIdDeserializer implements Deserializer {
 
+	/**
+	 * @var EntityIdParser
+	 */
 	private $idParser;
 
 	public function __construct( EntityIdParser $idParser ) {
