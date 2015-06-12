@@ -11,6 +11,9 @@
 local capiunto = require 'capiunto'
 local util = require 'libraryUtil'
 
+-- Callback function to render references
+local referenceRenderer
+
 -- Adds a row containing the best statements found for the given property.
 -- The parameter can be the id or the label of a property. Calls addRow internally.
 --
@@ -59,9 +62,45 @@ function renderStatements( statements )
 		else
 			value = value .. mw.wikibase.renderSnak( statement.mainsnak )
 		end
+
+		if statement.references then
+			value = value .. renderReferences( statement.references )
+		end
 	end
 
 	return value
+end
+
+-- Renders a list of references.
+--
+-- @param references
+function renderReferences( references )
+	local value = ''
+	local frame = mw.getCurrentFrame()
+
+	for k, reference in pairs( references ) do
+		local renderedReference = referenceRenderer( reference.snaks )
+
+		if renderedReference then
+			-- @todo frame is nil in unit tests only
+			if frame ~= nil then
+				value = value .. frame:preprocess(
+					'<ref name="' .. reference.hash .. '">' .. renderedReference .. '</ref>'
+				)
+			else
+				value = value .. '<ref name="' .. reference.hash .. '">' .. renderedReference .. '</ref>'
+			end
+		end
+	end
+
+	return value
+end
+
+-- Default renderer which just calls renderSnaks.
+--
+-- @param snaks
+function defaultReferenceRenderer( snaks )
+	return mw.wikibase.renderSnaks( snaks )
 end
 
 local create = capiunto.create
@@ -72,6 +111,10 @@ local create = capiunto.create
 capiunto.create = function( options )
 	local infobox = create( options )
 	infobox.addStatement = addStatement
+
+	options = options or {}
+	referenceRenderer = options.referenceRenderer or defaultReferenceRenderer
+	util.checkType( 'referenceRenderer', 1, referenceRenderer, 'function' )
 
 	return infobox
 end
