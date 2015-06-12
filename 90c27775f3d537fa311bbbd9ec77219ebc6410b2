@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_1d238aa7",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-12T17:59:58Z",
+      "side": 1,
+      "message": "double space",
+      "revId": "90c27775f3d537fa311bbbd9ec77219ebc6410b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
