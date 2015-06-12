@@ -185,11 +185,9 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 		);
 
 		$statement = new Statement(
-			new Claim(
-				new PropertyValueSnak(
-					new PropertyId( 'P42' ),
-					new StringValue( 'foobar!' )
-				)
+			new PropertyValueSnak(
+				new PropertyId( 'P42' ),
+				new StringValue( 'foobar!' )
 			)
 		);
 

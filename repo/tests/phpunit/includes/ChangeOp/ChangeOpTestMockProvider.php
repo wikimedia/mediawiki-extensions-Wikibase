@@ -107,7 +107,7 @@ class ChangeOpTestMockProvider {
 			$snak = new PropertyValueSnak( $propertyId, $value );
 		}
 
-		return new Statement( new Claim( $snak ) );
+		return new Statement( $snak );
 	}
 
 	/**

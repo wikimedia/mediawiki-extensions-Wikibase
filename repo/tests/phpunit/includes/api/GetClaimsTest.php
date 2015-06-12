@@ -65,10 +65,10 @@ class GetClaimsTest extends \ApiTestCase {
 		}
 
 		/** @var $statements Statement[] */
-		$statements[0] = new Statement( new Claim( new PropertyNoValueSnak( $propertyId ) ) );
-		$statements[1] = new Statement( new Claim( new PropertyNoValueSnak( $propertyId ) ) );
-		$statements[2] = new Statement( new Claim( new PropertySomeValueSnak( $propertyId ) ) );
-		$statements[3] = new Statement( new Claim( new PropertyValueSnak( $propertyId, new StringValue( 'o_O' ) ) ) );
+		$statements[0] = new Statement( new PropertyNoValueSnak( $propertyId ) );
+		$statements[1] = new Statement( new PropertyNoValueSnak( $propertyId ) );
+		$statements[2] = new Statement( new PropertySomeValueSnak( $propertyId ) );
+		$statements[3] = new Statement( new PropertyValueSnak( $propertyId, new StringValue( 'o_O' ) ) );
 
 		foreach ( $statements as $key => $statement ) {
 			$statement->setGuid( $item->getId()->getSerialization() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );

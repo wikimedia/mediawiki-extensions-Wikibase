@@ -44,27 +44,13 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$id = new PropertyId( 'P42' );
 
-		$validArgs[] = new Claim( new PropertyNoValueSnak( $id ) );
+		$validArgs[] = new Statement( new PropertyNoValueSnak( $id ) );
 
-		$validArgs[] = new Claim( new PropertySomeValueSnak( $id ) );
+		$validArgs[] = new Statement( new PropertySomeValueSnak( $id ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
-		$claim = new Claim( new PropertyNoValueSnak( $id ) );
-
-		$validArgs[] = array(
-			$claim,
-			array(
-				'id' => $claim->getGuid(),
-				'mainsnak' => array(
-					'snaktype' => 'novalue',
-					'property' => 'P42',
-				),
-				'type' => 'claim',
-			),
-		);
-
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( $id ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( $id ) );
 
 		$validArgs['statement'] = array(
 			$statement,
@@ -79,7 +65,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 			),
 		);
 
-		$claim = new Claim(
+		$claim = new Statement(
 			new PropertyNoValueSnak( $id ),
 			new SnakList( array(
 				new PropertyNoValueSnak( $id ),
@@ -110,7 +96,8 @@ class ClaimSerializerTest extends SerializerBaseTest {
 					),
 				),
 				'qualifiers-order' => array( 'P42', 'P1' ),
-				'type' => 'claim',
+				'type' => 'statement',
+				'rank' => 'normal',
 			),
 		);
 
@@ -128,7 +115,8 @@ class ClaimSerializerTest extends SerializerBaseTest {
 					$qualifierSerializer->getSerialized( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) ),
 				),
 				'qualifiers-order' => array( 'P42', 'P1' ),
-				'type' => 'claim',
+				'type' => 'statement',
+				'rank' => 'normal',
 			),
 			$opts
 		);
@@ -151,7 +139,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 	 */
 	public function testRankSerialization( $rank ) {
 		$id = new PropertyId( 'P42' );
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( $id ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( $id ) );
 
 		$statement->setRank( $rank );
 

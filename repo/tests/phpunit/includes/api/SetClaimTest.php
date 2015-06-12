@@ -96,7 +96,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$snaks = $this->getSnaks();
 		$snakList = new SnakList( $snaks );
 		$mainSnak = $snaks[0];
-		$statement = new Statement( new Claim( $mainSnak ) );
+		$statement = new Statement( $mainSnak );
 		$statement->setRank( $ranks[array_rand( $ranks )] );
 		$statements[] = $statement;
 
@@ -154,7 +154,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			}
 
 			$newSnak = new PropertyValueSnak( $statement->getPropertyId(), new StringValue( '\o/' ) );
-			$newClaim = new Statement( new Claim( $newSnak ) );
+			$newClaim = new Statement( $newSnak );
 			$newClaim->setGuid( $guid );
 
 			// Update request
@@ -192,45 +192,45 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$cases = array();
 
-		$claim = new Statement( new Claim( $badSnak ) );
+		$claim = new Statement( $badSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$cases['invalid value in main snak'] = array( $q17, $claim, 'modification-failed' );
 
-		$claim = new Statement( new Claim( $brokenSnak ) );
+		$claim = new Statement( $brokenSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$cases['mismatching value in main snak'] = array( $q17, $claim, 'modification-failed' );
 
-		$claim = new Statement( new Claim( $obsoleteSnak ) );
+		$claim = new Statement( $obsoleteSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$cases['obsolete snak using deleted property'] = array( $q17, $claim, 'modification-failed' );
 
-		$claim = new Statement( new Claim( $goodSnak ) );
+		$claim = new Statement( $goodSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $qx ) );
 		$cases['good claim for deleted item'] = array( $qx, $claim, 'cant-load-entity-content' );
 
-		$claim = new Statement( new Claim( $goodSnak ) );
+		$claim = new Statement( $goodSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$claim->setQualifiers( new SnakList( array( $badSnak ) ) );
 		$cases['bad snak in qualifiers'] = array( $q17, $claim, 'modification-failed' );
 
-		$claim = new Statement( new Claim( $goodSnak ) );
+		$claim = new Statement( $goodSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$claim->setQualifiers( new SnakList( array( $brokenSnak ) ) );
 		$cases['mismatching value in qualifier'] = array( $q17, $claim, 'modification-failed' );
 
-		$claim = new Statement( new Claim( $goodSnak ) );
+		$claim = new Statement( $goodSnak );
 		$reference = new Reference( new SnakList( array( $badSnak ) ) );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$claim->setReferences( new ReferenceList( array( $reference ) ) );
 		$cases['bad snak in reference'] = array( $q17, $claim, 'modification-failed' );
 
-		$claim = new Statement( new Claim( $goodSnak ) );
+		$claim = new Statement( $goodSnak );
 		$reference = new Reference( new SnakList( array( $badSnak ) ) );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$claim->setReferences( new ReferenceList( array( $reference ) ) );
 		$cases['mismatching value in reference'] = array( $q17, $claim, 'modification-failed' );
 
-		$claim = new Statement( new Claim( $goodSnak ) );
+		$claim = new Statement( $goodSnak );
 		$claim->setGuid( 'XXXX' );
 		$cases['invalid claim GUID'] = array( $qx, $claim, 'invalid-claim' );
 
@@ -416,7 +416,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$revision = $store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		// Add new claim at index 3 using the baserevid and a different property id
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( self::$propertyIds[2] ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( self::$propertyIds[2] ) );
 		$statement->setGuid( $guidGenerator->newGuid( $itemId ) );
 		$this->makeRequest( $statement, $itemId, 2, 'addition request', 3, $revision->getRevisionId() );
 	}
@@ -434,7 +434,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		// add a claim
 		$guidGenerator = new ClaimGuidGenerator();
-		$statement = new Statement( new Claim( new PropertyNoValueSnak( $property->getId() ) ) );
+		$statement = new Statement( new PropertyNoValueSnak( $property->getId() ) );
 		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 
 		$item->getStatements()->addStatement( $statement );
@@ -444,7 +444,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$badProperty = Property::newFromType( 'string' );
 		$badProperty = $store->saveEntity( $badProperty, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
-		$badClaim = new Statement( new Claim( new PropertyNoValueSnak( $badProperty->getId() ) ) );
+		$badClaim = new Statement( new PropertyNoValueSnak( $badProperty->getId() ) );
 
 		$serializer = $serializerFactory->newSerializerForObject( $statement );
 		$serializedBadClaim = $serializer->getSerialized( $badClaim );
