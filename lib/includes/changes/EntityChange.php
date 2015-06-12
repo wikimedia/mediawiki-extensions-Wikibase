@@ -337,8 +337,8 @@ class EntityChange extends DiffChange {
 		if ( is_array( $data ) && isset( $data['_claimclass_'] ) ) {
 			$class = $data['_claimclass_'];
 
-			if ( $class === 'Wikibase\DataModel\Claim\Claim'
-				|| is_subclass_of( $class, 'Wikibase\DataModel\Claim\Claim' )
+			if ( $class === 'Wikibase\DataModel\Statement\Statement'
+				|| is_subclass_of( $class, 'Wikibase\DataModel\Statement\Statement' )
 			) {
 				unset( $data['_claimclass_'] );
 

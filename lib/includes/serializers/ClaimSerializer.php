@@ -221,11 +221,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		$snakUnserializer = new SnakSerializer(); // FIXME: derp injection
 		$mainSnak = $snakUnserializer->newFromSerialization( $serialization['mainsnak'] );
 
-		if ( $isStatement ) {
-			$claim = new Statement( new Claim( $mainSnak ) );
-		} else {
-			$claim = new Claim( $mainSnak );
-		}
+		$claim = new Statement( $mainSnak );
 
 		if ( array_key_exists( 'id', $serialization ) ) {
 			$claim->setGuid( $serialization['id'] );

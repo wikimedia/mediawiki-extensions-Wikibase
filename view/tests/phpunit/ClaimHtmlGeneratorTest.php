@@ -118,10 +118,8 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$snakHtmlGenerator,
 			new Statement(
-				new Claim(
-					new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
-					new SnakList()
-				),
+				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
+				new SnakList(),
 				new ReferenceList( array( new Reference( new SnakList( array (
 					new PropertyValueSnak( 50, new StringValue( 'second snak' ) )
 				) ) ) ) )
