@@ -59,6 +59,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "נא להזין את התווית של הישות הזאת, תיאור קצר וכינויים ב־$1.",
 	"wikibase-statements": "קביעוֹת",
 	"wikibase-terms": "בשפות אחרות",
+	"wikibase-sitelinks": "קישורי אתר",
 	"wikibase-sitelinkgroupview-input-help-message": "הוספת קישור אתר על־ידי ציון אתר ודף באותו האתר, עריכה או הסרה של קישורי אתר קיימים.",
 	"wikibase-sitelinks-empty": "שום דף אינו מקושר לפריט הזה",
 	"wikibase-sitelinks-input-help-message": "הגדרת קישור לדף שקשור לפריט הזה.",

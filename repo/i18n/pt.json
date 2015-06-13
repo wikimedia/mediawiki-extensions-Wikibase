@@ -60,6 +60,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "Insira o rótulo, uma breve descrição e nomes alternativos para esta entidade em $1.",
 	"wikibase-statements": "Declarações",
 	"wikibase-terms": "Noutras línguas",
+	"wikibase-sitelinks": "Ligações de sítio",
 	"wikibase-sitelinkgroupview-input-help-message": "Adicione uma ligação de sítio, especificando um sítio e uma respetiva página, edite ou remova ligações de sítio existentes.",
 	"wikibase-sitelinks-empty": "Nenhuma página está ligada a este item.",
 	"wikibase-sitelinks-input-help-message": "Defina uma ligação para uma página relacionada com este item.",

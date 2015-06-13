@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"बिप्लब आनन्द"
+			"बिप्लब आनन्द",
+			"राम प्रसाद जोशी"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस वृद्दिको लागि क्लाइन्ट",
@@ -15,7 +16,7 @@
 	"wikibase-comment-sitelink-add": "भाषा लिङ्क जोडियो: $1",
 	"wikibase-comment-sitelink-change": "भाषा लिङ्क $1 देखि $2 मा परिवर्तन भयो",
 	"wikibase-comment-sitelink-remove": "भाषा लिङ्क मेटियो: $1",
-	"wikibase-comment-multi": "$1 {{PLURAL:$1|परिवर्तन|परिवर्तनहरु}}",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|परिवर्तन|परिवर्तनहरू}}",
 	"wikibase-dataitem": "{{WBREPONAME}} आइटम",
 	"wikibase-editlinks": "लिङ्क सम्पादन गर्नुहोस्",
 	"wikibase-editlinkstitle": "अन्तरभाषिक लिङ्क सम्पादन गर्नुहोस्",
