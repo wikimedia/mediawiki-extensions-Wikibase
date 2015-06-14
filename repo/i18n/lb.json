@@ -41,6 +41,7 @@
 	"wikibase-description-input-help-message": "Gitt eng kuerz Beschreiwung fir dës Eenheet op $1",
 	"wikibase-statements": "Declaratiounen",
 	"wikibase-terms": "An anere Sproochen",
+	"wikibase-sitelinks": "Linke vum Site",
 	"wikibase-sitelinks-empty": "Et ass keng Säit mat dësem Element verlinkt.",
 	"wikibase-sitelinks-input-help-message": "Setzt e Link op eng Säit déi mat dësem Element verbonn sinn.",
 	"wikibase-sitelinks-special": "Aner Siten",

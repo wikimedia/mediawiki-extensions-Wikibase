@@ -270,7 +270,7 @@ $specialPageAliases['lb'] = array(
 	'MyLanguageFallbackChain' => array( 'Meng_Ersatzsproochketten' ),
 );
 
-/** Northern Luri (لوری مینجایی) */
+/** Northern Luri (لۊری شومالی) */
 $specialPageAliases['lrc'] = array(
 	'ListDatatypes' => array( 'میزوٙنکاری_جوٙر_دادە_یا' ),
 	'SetLabel' => array( 'میزوٙنکاری_ریتئراز' ),
