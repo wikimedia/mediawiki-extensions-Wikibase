@@ -16,6 +16,24 @@
       "revId": "fba2dbf288457decf13fa65a0be212b4167dcd83",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2dade62e",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-15T13:01:39Z",
+      "side": 1,
+      "message": "Looks like a breaking change to me, though I doubt many clients actually rely on this.",
+      "parentUuid": "8ec42329_2d108652",
+      "revId": "fba2dbf288457decf13fa65a0be212b4167dcd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
