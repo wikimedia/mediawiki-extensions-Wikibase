@@ -769,6 +769,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
+		if( this.$mainSnak.data( 'snakview' ) && !this.$mainSnak.data( 'snakview' ).isValid() ) {
+			return false;
+		}
+
 		if( this._qualifiers ) {
 			var snaklistviews = this._qualifiers.value();
 
