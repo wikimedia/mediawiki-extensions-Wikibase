@@ -69,6 +69,24 @@
       "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5be4afdb",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T09:34:10Z",
+      "side": 1,
+      "message": "I\u0027m running it inside the Wikibase folder, but I don\u0027t understand why this is relevant. As I already explained the pattern \"extensions\" does exclude the whole \"extensions/Wikibase/...\" folder.",
+      "parentUuid": "8ec42329_4a22a6b2",
+      "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
