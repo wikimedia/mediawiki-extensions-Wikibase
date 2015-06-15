@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_63177d57",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T16:12:28Z",
+      "side": 1,
+      "message": "Based on the fact that this is the first global (?) variable in this file I assume there is an other way of doing this.",
+      "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_460b6f26",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T16:12:28Z",
+      "side": 1,
+      "message": "These hashes are really ugly, but are actually shown to the user in the URL bar. Can\u0027t we come up with something better?",
+      "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_46328ff0",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T16:12:28Z",
+      "side": 1,
+      "message": "I suggest to add at least the propertyId to the list of parameters, possibly the statements guid.",
+      "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
