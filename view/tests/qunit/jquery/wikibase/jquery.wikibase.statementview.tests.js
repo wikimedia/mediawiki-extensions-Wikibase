@@ -118,6 +118,13 @@ QUnit.test( 'isValid', function( assert ) {
 	assert.ok( statementview.isValid(), 'isValid should return true' );
 } );
 
+QUnit.test( 'isValid on new statementview is false', function( assert ) {
+	var $statementview = createStatementview(),
+		statementview = $statementview.data( 'statementview' );
+
+	assert.ok( statementview.isValid() === false, 'isValid should return false' );
+} );
+
 QUnit.test( 'remove', function( assert ) {
 	var referencesChanger = {
 			removeReference: sinon.spy( function() { return $.Deferred().resolve().promise(); } )
