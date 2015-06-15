@@ -33,6 +33,23 @@
       "revId": "90c27775f3d537fa311bbbd9ec77219ebc6410b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_266503de",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T16:16:47Z",
+      "side": 1,
+      "message": "This is not an indicator for a bad URI but for a bad regex.",
+      "revId": "90c27775f3d537fa311bbbd9ec77219ebc6410b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
