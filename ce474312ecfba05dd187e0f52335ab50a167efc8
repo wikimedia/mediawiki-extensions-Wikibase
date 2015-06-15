@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3b2523bd",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T10:58:35Z",
+      "side": 1,
+      "message": "Is it said somewhere that this is actually allowed?\nThe doc for PARAM_TYPE reads \"Can be either a string type (e.g.: \u0027integer\u0027) or an array of allowed values\"\n\nI can not find any examples of \"ApiBase::PARAM_TYPE \u003d\u003e \u0027text\u0027\" in core or extensions",
+      "revId": "ce474312ecfba05dd187e0f52335ab50a167efc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fb2ebb9f",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T10:58:35Z",
+      "side": 1,
+      "message": "Same comment as in CreateClaim",
+      "revId": "ce474312ecfba05dd187e0f52335ab50a167efc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9b1d377b",
+        "filename": "repo/includes/api/FormatSnakValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T10:58:35Z",
+      "side": 1,
+      "message": "Same comment as in CreateClaim",
+      "revId": "ce474312ecfba05dd187e0f52335ab50a167efc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_bb2033a9",
+        "filename": "repo/includes/api/FormatSnakValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T10:58:35Z",
+      "side": 1,
+      "message": "Same comment as in CreateClaim",
+      "revId": "ce474312ecfba05dd187e0f52335ab50a167efc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5b17cf56",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T10:58:35Z",
+      "side": 1,
+      "message": "Same comment as in CreateClaim",
+      "revId": "ce474312ecfba05dd187e0f52335ab50a167efc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_7b1acb7f",
+        "filename": "repo/includes/api/SetClaimValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T10:58:35Z",
+      "side": 1,
+      "message": "Same comment as in CreateClaim",
+      "revId": "ce474312ecfba05dd187e0f52335ab50a167efc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_1b11475f",
+        "filename": "repo/includes/api/SetQualifier.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T10:58:35Z",
+      "side": 1,
+      "message": "Same comment as in CreateClaim",
+      "revId": "ce474312ecfba05dd187e0f52335ab50a167efc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_db0adf28",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T10:58:35Z",
+      "side": 1,
+      "message": "Same comment as in CreateClaim",
+      "revId": "ce474312ecfba05dd187e0f52335ab50a167efc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
