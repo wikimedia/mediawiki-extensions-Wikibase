@@ -296,9 +296,10 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		}
 
 		$limit = isset( $options['LIMIT'] ) ? $options['LIMIT'] : 0;
+		$offset = isset( $options['OFFSET'] ) ? $options['OFFSET'] : 0;
 
 		if ( $limit > 0 ) {
-			$matchingTerms = array_slice( $matchingTerms, 0, $limit );
+			$matchingTerms = array_slice( $matchingTerms, $offset, $limit );
 		}
 
 		return $matchingTerms;
@@ -315,7 +316,9 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		// We can't pass the limit on to getMatchingTerms, since getMatchingTerms may
 		// return multiple terms for an EntityId.
 		$limit = isset( $options['LIMIT'] ) ? $options['LIMIT'] : 0;
+		$offset = isset( $options['OFFSET'] ) ? $options['OFFSET'] : 0;
 		unset( $options['LIMIT'] );
+		unset( $options['OFFSET'] );
 
 		$terms = $this->getMatchingTerms( $terms, null, $entityType, $options );
 
@@ -327,7 +330,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		}
 
 		if ( $limit > 0 ) {
-			$ids = array_slice( $ids, 0, $limit );
+			$ids = array_slice( $ids, $offset, $limit );
 		}
 
 		return $ids;
