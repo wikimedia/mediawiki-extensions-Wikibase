@@ -44,20 +44,20 @@ class SetClaimValue extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$claimGuid = $params['claim'];
-		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
+		$statementGuid = $params['claim'];
+		$entityId = $this->claimGuidParser->parse( $statementGuid )->getEntityId();
 		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
-		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $statementGuid, $entity );
 
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $claim->getMainSnak()->getPropertyId() );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		$changeOp = $this->claimChangeOpFactory->newSetMainSnakOp(
-			$claimGuid,
+			$statementGuid,
 			$snak
 		);
 
@@ -88,7 +88,7 @@ class SetClaimValue extends ModifyClaim {
 					ApiBase::PARAM_REQUIRED => true,
 				),
 				'value' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_TYPE => 'text',
 					ApiBase::PARAM_REQUIRED => false,
 				),
 				'snaktype' => array(

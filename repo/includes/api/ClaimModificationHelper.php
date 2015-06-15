@@ -109,17 +109,19 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
-	 * @param array $params
+	 * @param string[] $params Array with a 'snaktype' and an optional 'value' element.
 	 * @param PropertyId $propertyId
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
 	 * @return Snak
 	 */
-	public function getSnakInstance( $params, PropertyId $propertyId ) {
+	public function getSnakInstance( array $params, PropertyId $propertyId ) {
 		$valueData = null;
+
 		if ( isset( $params['value'] ) ) {
 			$valueData = FormatJson::decode( $params['value'], true );
+
 			if ( $valueData === null ) {
 				$this->errorReporter->dieError( 'Could not decode snak value', 'invalid-snak' );
 			}

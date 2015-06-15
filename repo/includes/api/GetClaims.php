@@ -165,26 +165,26 @@ class GetClaims extends ApiWikibase {
 	 */
 	private function getIdentifiers( $params ) {
 		if ( isset( $params['claim'] ) ) {
-			$claimGuid = $params['claim'];
-			$entityId = $this->getEntityIdFromClaimGuid( $params['claim'] );
+			$statementGuid = $params['claim'];
+			$entityId = $this->getEntityIdFromStatementGuid( $params['claim'] );
 
-			if( isset( $params['entity'] ) && $entityId !== $params['entity'] ) {
+			if ( isset( $params['entity'] ) && $entityId !== $params['entity'] ) {
 				$this->dieError( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
 			}
 		} else {
-			$claimGuid = null;
+			$statementGuid = null;
 			$entityId = $params['entity'];
 		}
 
-		return array( $entityId, $claimGuid );
+		return array( $entityId, $statementGuid );
 	}
 
-	private function getEntityIdFromClaimGuid( $claimGuid ) {
-		if ( $this->claimGuidValidator->validateFormat( $claimGuid ) === false ) {
+	private function getEntityIdFromStatementGuid( $guid ) {
+		if ( $this->claimGuidValidator->validateFormat( $guid ) === false ) {
 			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
-		return $this->claimGuidParser->parse( $claimGuid )->getEntityId()->getSerialization();
+		return $this->claimGuidParser->parse( $guid )->getEntityId()->getSerialization();
 	}
 
 	/**

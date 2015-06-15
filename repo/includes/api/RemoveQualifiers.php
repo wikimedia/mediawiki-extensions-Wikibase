@@ -48,19 +48,19 @@ class RemoveQualifiers extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$claimGuid = $params['claim'];
-		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
+		$statementGuid = $params['claim'];
+		$entityId = $this->claimGuidParser->parse( $statementGuid )->getEntityId();
 		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
+		$claim = $this->claimModificationHelper->getClaimFromEntity( $statementGuid, $entity );
 
 		$qualifierHashes = $this->getQualifierHashesFromParams( $params, $claim );
 
 		$changeOps = new ChangeOps();
-		$changeOps->add( $this->getChangeOps( $claimGuid, $qualifierHashes ) );
+		$changeOps->add( $this->getChangeOps( $statementGuid, $qualifierHashes ) );
 
 		try {
 			$changeOps->apply( $entity, $summary );
@@ -82,16 +82,16 @@ class RemoveQualifiers extends ModifyClaim {
 	}
 
 	/**
-	 * @param string $claimGuid
+	 * @param string $statementGuid
 	 * @param string[] $qualifierHashes
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getChangeOps( $claimGuid, array $qualifierHashes ) {
+	private function getChangeOps( $statementGuid, array $qualifierHashes ) {
 		$changeOps = array();
 
 		foreach ( $qualifierHashes as $qualifierHash ) {
-			$changeOps[] = $this->claimChangeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
+			$changeOps[] = $this->claimChangeOpFactory->newRemoveQualifierOp( $statementGuid, $qualifierHash );
 		}
 
 		return $changeOps;

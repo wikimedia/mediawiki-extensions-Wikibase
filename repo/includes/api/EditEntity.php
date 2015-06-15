@@ -724,7 +724,7 @@ class EditEntity extends ModifyEntity {
 			parent::getAllowedParams(),
 			array(
 				'data' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_TYPE => 'text',
 				),
 				'clear' => array(
 					ApiBase::PARAM_TYPE => 'boolean',

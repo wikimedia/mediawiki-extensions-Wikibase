@@ -109,7 +109,7 @@ class SetQualifier extends ModifyClaim {
 	private function getChangeOp() {
 		$params = $this->extractRequestParams();
 
-		$claimGuid = $params['claim'];
+		$statementGuid = $params['claim'];
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !$propertyId instanceof PropertyId ) {
@@ -118,13 +118,11 @@ class SetQualifier extends ModifyClaim {
 				'param-illegal'
 			);
 		}
+
 		$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
-		if ( isset( $params['snakhash'] ) ) {
-			$changeOp = $this->claimChangeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, $params['snakhash'] );
-		} else {
-			$changeOp = $this->claimChangeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, '' );
-		}
+		$snakHash = isset( $params['snakhash'] ) ? $params['snakhash'] : '';
+		$changeOp = $this->claimChangeOpFactory->newSetQualifierOp( $statementGuid, $newQualifier, $snakHash );
 
 		return $changeOp;
 	}
@@ -144,7 +142,7 @@ class SetQualifier extends ModifyClaim {
 					ApiBase::PARAM_REQUIRED => false,
 				),
 				'value' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_TYPE => 'text',
 					ApiBase::PARAM_REQUIRED => false,
 				),
 				'snaktype' => array(
