@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_2d108652",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T11:01:33Z",
+      "side": 1,
+      "message": "Hmm, this will mean changes API output then?\nPerhaps needs to be announced? Even though it is small",
+      "revId": "fba2dbf288457decf13fa65a0be212b4167dcd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
