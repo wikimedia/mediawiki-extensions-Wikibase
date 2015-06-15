@@ -130,8 +130,14 @@ class TermSqlIndexTest extends TermIndexTest {
 				$fingerprint,
 				array( $labelFooEn, $descriptionBarEn ),
 				array( 'LIMIT' => 1 ),
-				array( $descriptionBarEn ), // FIXME: This is not really well defined. Could be either of the two.
-			)
+				array( $descriptionBarEn ),
+			),
+			'LIMIT and OFFSET options' => array(
+				$fingerprint,
+				array( $labelFooEn, $descriptionBarEn ),
+				array( 'LIMIT' => 1, 'OFFSET' => 1 ),
+				array( $labelFooEn ),
+			),
 		);
 	}
 

@@ -96,6 +96,7 @@ interface TermIndex {
 	 *        - caseSensitive: boolean, default true
 	 *        - prefixSearch: boolean, default false
 	 *        - LIMIT: int, defaults to none
+	 *        - OFFSET: int, defaults to none
 	 *
 	 * @return Term[]
 	 */
@@ -123,6 +124,7 @@ interface TermIndex {
 	 *        - caseSensitive: boolean, default true
 	 *        - prefixSearch: boolean, default false
 	 *        - LIMIT: int, defaults to none
+	 *        - OFFSET: int, defaults to none
 	 *
 	 * @return EntityId[]
 	 */

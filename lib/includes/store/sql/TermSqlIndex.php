@@ -532,6 +532,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$queryOptions['LIMIT'] = (int)$options['LIMIT'];
 		}
 
+		if ( isset( $options['OFFSET'] ) && $options['OFFSET'] > 0 ) {
+			$queryOptions['OFFSET'] = (int)$options['OFFSET'];
+		}
+
 		$obtainedTerms = $dbr->select(
 			$this->tableName,
 			$selectionFields,
@@ -587,10 +591,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		);
 
 		$requestedLimit = isset( $options['LIMIT'] ) ? max( (int)$options['LIMIT'], 0 ) : 0;
+		$requestedOffset = isset( $options['OFFSET'] ) ? max( (int)$options['OFFSET'], 0 ) : 0;
 		// if we take the weight into account, we need to grab basically all hits in order
 		// to allow for the post-search sorting below.
 		if ( !$hasWeight && $requestedLimit > 0 && $requestedLimit < $queryOptions['LIMIT'] ) {
 			$queryOptions['LIMIT'] = $requestedLimit;
+			$queryOptions['OFFSET'] = $requestedOffset;
 		}
 
 		$rows = $dbr->select(
@@ -604,7 +610,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityIds = array();
 
 		if ( $hasWeight ) {
-			$entityIds = $this->getEntityIdsOrderedByWeight( $rows, $requestedLimit );
+			$entityIds = $this->getEntityIdsOrderedByWeight( $rows, $requestedLimit, $requestedOffset );
 		} else {
 			foreach ( $rows as $row ) {
 				// FIXME: this only works for items and properties
@@ -622,10 +628,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param Iterator $rows
 	 * @param int $limit
+	 * @param int $offset
 	 *
 	 * @return EntityId[]
 	 */
-	private function getEntityIdsOrderedByWeight( Iterator $rows, $limit = 0 ) {
+	private function getEntityIdsOrderedByWeight( Iterator $rows, $limit = 0, $offset = 0 ) {
 		$weights = array();
 		$idMap = array();
 
@@ -644,9 +651,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		// weight to it here (which would allow us to delegate the sorting to SQL itself)
 		arsort( $weights, SORT_NUMERIC );
 
-		if ( $limit > 0 ) {
-			$weights = array_slice( $weights, 0, $limit, true );
-		}
+		$weights = array_slice( $weights, $offset, ( $limit > 0 ) ? $limit : null, true );
 
 		$entityIds = array();
 
