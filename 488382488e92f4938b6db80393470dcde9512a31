@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_a336c5fe",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T16:06:36Z",
+      "side": 1,
+      "message": "There actually is a limit to the limit. How the offset works unfortunately is completely unclear from this documentation. At first look I expected a behavior similar to MySQLs \"LIMIT offset,count\", but when looking at the array_slice code and how the array is constructed this is obviously not the case.",
+      "parentUuid": "8ec42329_23adf52e",
+      "revId": "488382488e92f4938b6db80393470dcde9512a31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_63721de4",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 1
