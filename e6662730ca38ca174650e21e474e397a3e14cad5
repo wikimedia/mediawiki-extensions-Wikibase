@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3259bd90",
+        "filename": "repo/extension.json",
+        "patchSetId": 47
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2015-06-15T21:24:59Z",
+      "side": 1,
+      "message": "Needs to be double \\ so it should be \\\\",
+      "revId": "e6662730ca38ca174650e21e474e397a3e14cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
