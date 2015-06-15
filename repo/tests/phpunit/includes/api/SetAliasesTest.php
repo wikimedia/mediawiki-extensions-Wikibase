@@ -156,7 +156,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'Invalid token' ) ) ),
 			array( //4
 				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id', 'message' => 'is not valid' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id', 'message' => 'Could not find such an entity id' ) ) ),
 			array( //5
 				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site', 'message' => "Unrecognized value for parameter 'site'" ) ) ),

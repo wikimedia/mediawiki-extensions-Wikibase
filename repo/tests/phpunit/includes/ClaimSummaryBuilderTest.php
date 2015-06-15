@@ -49,7 +49,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 		$statements = array();
 
 		$mainSnak = new PropertyValueSnak( 112358, new StringValue( "don't panic" ) );
-		$statement = new Statement( new Claim( $mainSnak ) );
+		$statement = new Statement( $mainSnak );
 		$statements[] = $statement;
 
 		foreach ( $this->snakProvider() as $snak ) {
