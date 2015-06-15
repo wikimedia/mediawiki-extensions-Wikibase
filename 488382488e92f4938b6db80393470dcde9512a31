@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e3f84d48",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T16:00:14Z",
+      "side": 1,
+      "message": "This is actually very scary. Stuff like \"LIMIT 100000,10\" with a big offset already caused major trouble on the clusters. We should not introduce new code that allows the same DoS vector.",
+      "revId": "488382488e92f4938b6db80393470dcde9512a31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
