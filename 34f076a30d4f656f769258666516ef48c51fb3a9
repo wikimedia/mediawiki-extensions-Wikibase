@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_26c7434c",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-15T16:55:05Z",
+      "side": 1,
+      "message": "No. A conflict con only arise if there is a label *and* a description in a given language. So, it should really be: \n\n  if ( empty( $labels ) || empty( $descriptions ) ) {\n    return Result::newSuccess();\n  }\n\n...if either list is empty, there can be no conflicts. We could even check if the intersection of the array keys is empty. Even then there can be no conflicts.",
+      "parentUuid": "8ec42329_3a1d2f79",
+      "revId": "34f076a30d4f656f769258666516ef48c51fb3a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_da0d0b43",
         "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_e6c05b31",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-15T16:55:05Z",
+      "side": 1,
+      "message": "If the label is a duplicate but there is no label, then there is no conflict. Items only conflict if label AND description in a given language are the same as on another item.\n\nNote that this code is used only for items, not for properties.",
+      "parentUuid": "8ec42329_da0d0b43",
+      "revId": "34f076a30d4f656f769258666516ef48c51fb3a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_7a0ad72a",
         "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-12T10:07:32Z",
       "side": 1,
       "message": "Aliases, not descriptions.",
+      "revId": "34f076a30d4f656f769258666516ef48c51fb3a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_06bc87b0",
+        "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-15T16:55:05Z",
+      "side": 1,
+      "message": "true",
+      "parentUuid": "8ec42329_7a0ad72a",
       "revId": "34f076a30d4f656f769258666516ef48c51fb3a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
