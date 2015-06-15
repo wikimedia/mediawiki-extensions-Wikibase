@@ -79,7 +79,7 @@ TEXT;
 		}
 
 		$json = Http::get( $url );
-		$data = FormatJson::decode( $json, true );
+		$data = json_decode( $json, true );
 
 		if ( is_array( $data ) ) {
 			return $data['query']['interwikimap'];

@@ -130,7 +130,7 @@ class ParseValue extends ApiWikibase {
 		$parserOptions->setOption( ValueParser::OPT_LANG, $this->getLanguage()->getCode() );
 
 		if ( $optionsParam !== null && $optionsParam !== '' ) {
-			$options = \FormatJson::decode( $optionsParam, true );
+			$options = json_decode( $optionsParam, true );
 
 			if ( !is_array( $options ) ) {
 				$this->dieError( 'Malformed options parameter', 'malformed-options' );

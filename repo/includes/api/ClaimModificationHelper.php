@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use DataValues\IllegalValueException;
-use FormatJson;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
@@ -118,8 +117,10 @@ class ClaimModificationHelper {
 	 */
 	public function getSnakInstance( $params, PropertyId $propertyId ) {
 		$valueData = null;
+
 		if ( isset( $params['value'] ) ) {
-			$valueData = FormatJson::decode( $params['value'], true );
+			$valueData = json_decode( $params['value'], true );
+
 			if ( $valueData === null ) {
 				$this->errorReporter->dieError( 'Could not decode snak value', 'invalid-snak' );
 			}

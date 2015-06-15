@@ -98,7 +98,7 @@ class CreateClaim extends ModifyClaim {
 			$this->dieError( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
 		}
 
-		if ( isset( $params['value'] ) && \FormatJson::decode( $params['value'], true ) == null ) {
+		if ( isset( $params['value'] ) && json_decode( $params['value'], true ) === null ) {
 			$this->dieError( 'Could not decode snak value', 'invalid-snak' );
 		}
 	}

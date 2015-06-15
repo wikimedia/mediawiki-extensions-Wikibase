@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use FormatJson;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\ChangeOp\ChangeOpReference;
@@ -115,7 +114,7 @@ class SetReference extends ModifyClaim {
 	 * @return array
 	 */
 	private function getArrayFromParam( $arrayParam ) {
-		$rawArray = FormatJson::decode( $arrayParam, true );
+		$rawArray = json_decode( $arrayParam, true );
 
 		if ( !is_array( $rawArray ) || !count( $rawArray ) ) {
 			$this->dieError( 'No array or invalid JSON given', 'invalid-json' );

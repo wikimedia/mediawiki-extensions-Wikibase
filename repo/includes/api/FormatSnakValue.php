@@ -112,7 +112,7 @@ class FormatSnakValue extends ApiWikibase {
 	 * @return DataValue
 	 */
 	private function decodeDataValue( $json ) {
-		$data = \FormatJson::decode( $json, true );
+		$data = json_decode( $json, true );
 
 		if ( !is_array( $data ) ) {
 			$this->dieError( 'Failed to decode datavalue', 'baddatavalue' );
@@ -137,7 +137,7 @@ class FormatSnakValue extends ApiWikibase {
 		$formatterOptions = new FormatterOptions();
 		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->getLanguage()->getCode() );
 
-		$options = \FormatJson::decode( $optionsParam, true );
+		$options = json_decode( $optionsParam, true );
 
 		if ( is_array( $options ) ) {
 			foreach ( $options as $name => $value ) {
