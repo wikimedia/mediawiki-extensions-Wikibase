@@ -11,8 +11,6 @@ use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -20,14 +18,16 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Summary;
 
 /**
- * Helper class for modifying claims
+ * Helper class for modifying an entities statements.
  *
- * @since 0.4
+ * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
@@ -35,7 +35,7 @@ use Wikibase\Summary;
  * @author Adam Shorland
  * @author Daniel Kinzler
  */
-class ClaimModificationHelper {
+class StatementModificationHelper {
 
 	/**
 	 * @var SnakConstructionService
@@ -50,72 +50,67 @@ class ClaimModificationHelper {
 	/**
 	 * @var ClaimGuidValidator
 	 */
-	private $claimGuidValidator;
+	private $guidValidator;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var ApiErrorReporter
 	 * @param SnakConstructionService $snakConstructionService
 	 * @param EntityIdParser $entityIdParser
-	 * @param ClaimGuidValidator $claimGuidValidator
+	 * @param ClaimGuidValidator $guidValidator
 	 * @param ApiErrorReporter $errorReporter
 	 */
 	public function __construct(
 		SnakConstructionService $snakConstructionService,
 		EntityIdParser $entityIdParser,
-		ClaimGuidValidator $claimGuidValidator,
+		ClaimGuidValidator $guidValidator,
 		ApiErrorReporter $errorReporter
 	) {
 		$this->snakConstructionService = $snakConstructionService;
 		$this->entityIdParser = $entityIdParser;
-		$this->claimGuidValidator = $claimGuidValidator;
+		$this->guidValidator = $guidValidator;
 		$this->errorReporter = $errorReporter;
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $guid
 	 *
 	 * @throws UsageException
 	 * @return bool
 	 */
-	public function validateClaimGuid( $guid ) {
-		return $this->claimGuidValidator->validate( $guid );
+	public function validateStatementGuid( $guid ) {
+		return $this->guidValidator->validate( $guid );
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $guid
 	 * @param Entity $entity
 	 *
 	 * @throws UsageException
-	 * @return Claim
+	 * @return Statement
 	 */
-	public function getClaimFromEntity( $guid, Entity $entity ) {
-		$claims = new Claims( $entity->getClaims() );
-		$claim = $claims->getClaimWithGuid( $guid );
-
-		if ( $claim === null ) {
-			$this->errorReporter->dieError( 'Could not find the claim' , 'no-such-claim' );
+	public function getStatementFromEntity( $guid, Entity $entity ) {
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			$this->errorReporter->dieError( 'Entity type does not support statements', 'no-such-claim' );
 		}
 
-		return $claim;
+		$statement = $entity->getStatements()->getFirstStatementWithGuid( $guid );
+
+		if ( $statement === null ) {
+			$this->errorReporter->dieError( 'Could not find the statement', 'no-such-claim' );
+		}
+
+		return $statement;
 	}
 
 	/**
-	 * @since 0.4
-	 *
-	 * @param array $params
+	 * @param string[] $params Array with a 'snaktype' and an optional 'value' element.
 	 * @param PropertyId $propertyId
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
 	 * @return Snak
 	 */
-	public function getSnakInstance( $params, PropertyId $propertyId ) {
+	public function getSnakInstance( array $params, PropertyId $propertyId ) {
 		$valueData = null;
 
 		if ( isset( $params['value'] ) ) {
@@ -139,13 +134,11 @@ class ClaimModificationHelper {
 			$this->errorReporter->dieException( $ex, 'invalid-snak' );
 		}
 
-		throw new LogicException( 'ClaimModificationHelper::throwUsageException did not throw a UsageException.' );
+		throw new LogicException( 'ApiErrorReporter::dieException did not throw an exception' );
 	}
 
 	/**
 	 * Parses an entity id string coming from the user
-	 *
-	 * @since 0.4
 	 *
 	 * @param string $entityIdParam
 	 *
@@ -166,8 +159,6 @@ class ClaimModificationHelper {
 
 	/**
 	 * Creates a new Summary instance suitable for representing the action performed by this module.
-	 *
-	 * @since 0.4
 	 *
 	 * @param array $params
 	 * @param ApiBase $module

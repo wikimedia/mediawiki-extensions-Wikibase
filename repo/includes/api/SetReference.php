@@ -56,9 +56,9 @@ class SetReference extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
-		$summary = $this->claimModificationHelper->createSummary( $params, $this );
+		$summary = $this->modificationHelper->createSummary( $params, $this );
 
-		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['statement'], $entity );
+		$claim = $this->modificationHelper->getStatementFromEntity( $params['statement'], $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {
 			$this->dieError( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
@@ -82,7 +82,7 @@ class SetReference extends ModifyClaim {
 		);
 
 		$changeOp = $this->getChangeOp( $newReference );
-		$this->claimModificationHelper->applyChangeOp( $changeOp, $entity, $summary );
+		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
@@ -93,7 +93,7 @@ class SetReference extends ModifyClaim {
 	 * Check the provided parameters
 	 */
 	private function validateParameters( array $params ) {
-		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['statement'] ) ) ) {
+		if ( !( $this->modificationHelper->validateStatementGuid( $params['statement'] ) ) ) {
 			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}

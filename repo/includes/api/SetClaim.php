@@ -82,7 +82,7 @@ class SetClaim extends ModifyClaim {
 			isset( $params['index'] ) ? $params['index'] : null
 		);
 
-		$this->claimModificationHelper->applyChangeOp( $changeop, $entity, $summary );
+		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();

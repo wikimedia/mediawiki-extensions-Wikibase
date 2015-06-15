@@ -53,16 +53,16 @@ class SetQualifier extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
-		$summary = $this->claimModificationHelper->createSummary( $params, $this );
+		$summary = $this->modificationHelper->createSummary( $params, $this );
 
-		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['claim'], $entity );
+		$claim = $this->modificationHelper->getStatementFromEntity( $params['claim'], $entity );
 
 		if ( isset( $params['snakhash'] ) ) {
 			$this->validateQualifierHash( $claim, $params['snakhash'] );
 		}
 
 		$changeOp = $this->getChangeOp();
-		$this->claimModificationHelper->applyChangeOp( $changeOp, $entity, $summary );
+		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
@@ -74,7 +74,7 @@ class SetQualifier extends ModifyClaim {
 	 * snaktype value are not set.
 	 */
 	private function validateParameters( array $params ) {
-		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['claim'] ) ) ) {
+		if ( !( $this->modificationHelper->validateStatementGuid( $params['claim'] ) ) ) {
 			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
@@ -111,14 +111,14 @@ class SetQualifier extends ModifyClaim {
 
 		$claimGuid = $params['claim'];
 
-		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !$propertyId instanceof PropertyId ) {
 			$this->dieError(
 				$propertyId->getSerialization() . ' does not appear to be a property ID',
 				'param-illegal'
 			);
 		}
-		$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
+		$newQualifier = $this->modificationHelper->getSnakInstance( $params, $propertyId );
 
 		if ( isset( $params['snakhash'] ) ) {
 			$changeOp = $this->claimChangeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, $params['snakhash'] );

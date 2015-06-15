@@ -57,7 +57,7 @@ class RemoveClaims extends ModifyClaim {
 			$this->assertStatementListContainsGuids( $entity->getStatements(), $params['claim'] );
 		}
 
-		$summary = $this->claimModificationHelper->createSummary( $params, $this );
+		$summary = $this->modificationHelper->createSummary( $params, $this );
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $params ) );
@@ -84,7 +84,7 @@ class RemoveClaims extends ModifyClaim {
 		$entityId = null;
 
 		foreach ( $params['claim'] as $guid ) {
-			if ( !$this->claimModificationHelper->validateClaimGuid( $guid ) ) {
+			if ( !$this->modificationHelper->validateStatementGuid( $guid ) ) {
 				$this->dieError( "Invalid claim guid $guid" , 'invalid-guid' );
 			}
 

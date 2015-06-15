@@ -48,12 +48,12 @@ class CreateClaim extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$entityId = $this->claimModificationHelper->getEntityIdFromString( $params['entity'] );
+		$entityId = $this->modificationHelper->getEntityIdFromString( $params['entity'] );
 		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
-		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
+		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !$propertyId instanceof PropertyId ) {
 			$this->dieError(
 				$propertyId->getSerialization() . ' does not appear to be a property ID',
@@ -61,14 +61,14 @@ class CreateClaim extends ModifyClaim {
 			);
 		}
 
-		$snak = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
+		$snak = $this->modificationHelper->getSnakInstance( $params, $propertyId );
 
-		$summary = $this->claimModificationHelper->createSummary( $params, $this );
+		$summary = $this->modificationHelper->createSummary( $params, $this );
 
 		/* @var ChangeOpMainSnak $changeOp */
 		$changeOp = $this->claimChangeOpFactory->newSetMainSnakOp( '', $snak );
 
-		$this->claimModificationHelper->applyChangeOp( $changeOp, $entity, $summary );
+		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$claims = new Claims( $entity->getClaims() );
 		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );

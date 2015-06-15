@@ -6,9 +6,8 @@ use ApiMain;
 use DataValues\StringValue;
 use UsageException;
 use Wikibase\Api\ApiErrorReporter;
-use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\CreateClaim;
-use Wikibase\DataModel\Claim\Claim;
+use Wikibase\Api\StatementModificationHelper;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -17,7 +16,7 @@ use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\ClaimModificationHelper
+ * @covers Wikibase\Api\StatementModificationHelper
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -27,15 +26,15 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ClaimModificationHelperTest extends \MediaWikiTestCase {
+class StatementModificationHelperTest extends \MediaWikiTestCase {
 
 	public function testValidGetEntityIdFromString() {
 		$validEntityIdString = 'q55';
 
-		$claimModificationHelper = $this->getNewInstance();
+		$helper = $this->getNewInstance();
 		$this->assertInstanceOf(
 			'Wikibase\DataModel\Entity\EntityId',
-			$claimModificationHelper->getEntityIdFromString( $validEntityIdString )
+			$helper->getEntityIdFromString( $validEntityIdString )
 		);
 	}
 
@@ -44,23 +43,23 @@ class ClaimModificationHelperTest extends \MediaWikiTestCase {
 	 */
 	public function testInvalidGetEntityIdFromString() {
 		$invalidEntityIdString = 'no!';
-		$claimModificationHelper = $this->getNewInstance();
-		$claimModificationHelper->getEntityIdFromString( $invalidEntityIdString );
+		$helper = $this->getNewInstance();
+		$helper->getEntityIdFromString( $invalidEntityIdString );
 	}
 
 	public function testCreateSummary() {
 		$apiMain = new ApiMain();
-		$claimModificationHelper = $this->getNewInstance();
+		$helper = $this->getNewInstance();
 		$customSummary = 'I did it!';
 
-		$summary = $claimModificationHelper->createSummary(
+		$summary = $helper->createSummary(
 			array( 'summary' => $customSummary ),
 			new CreateClaim( $apiMain, 'wbcreateclaim' )
 		);
 		$this->assertEquals( 'wbcreateclaim', $summary->getModuleName() );
 		$this->assertEquals( $customSummary, $summary->getUserSummary() );
 
-		$summary = $claimModificationHelper->createSummary(
+		$summary = $helper->createSummary(
 			array(),
 			new CreateClaim( $apiMain, 'wbcreateclaim' )
 		);
@@ -68,8 +67,8 @@ class ClaimModificationHelperTest extends \MediaWikiTestCase {
 		$this->assertNull( $summary->getUserSummary() );
 	}
 
-	public function testGetClaimFromEntity() {
-		$claimModificationHelper = $this->getNewInstance();
+	public function testGetStatementFromEntity() {
+		$helper = $this->getNewInstance();
 
 		$item = new Item( new ItemId( 'Q42' ) );
 
@@ -79,9 +78,9 @@ class ClaimModificationHelperTest extends \MediaWikiTestCase {
 		$item->getStatements()->addStatement( $statement );
 		$guid = $statement->getGuid();
 
-		$this->assertEquals( $statement, $claimModificationHelper->getClaimFromEntity( $guid, $item ) );
+		$this->assertEquals( $statement, $helper->getStatementFromEntity( $guid, $item ) );
 		$this->setExpectedException( '\UsageException' );
-		$claimModificationHelper->getClaimFromEntity( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N', $item );
+		$helper->getStatementFromEntity( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N', $item );
 	}
 
 	private function getNewInstance() {
@@ -93,14 +92,14 @@ class ClaimModificationHelperTest extends \MediaWikiTestCase {
 			$api->getLanguage()
 		);
 
-		$claimModificationHelper = new ClaimModificationHelper(
+		$helper = new StatementModificationHelper(
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
 			$errorReporter
 		);
 
-		return $claimModificationHelper;
+		return $helper;
 	}
 
 }

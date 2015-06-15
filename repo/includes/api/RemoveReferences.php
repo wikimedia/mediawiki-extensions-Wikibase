@@ -53,9 +53,9 @@ class RemoveReferences extends ModifyClaim {
 		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
-		$summary = $this->claimModificationHelper->createSummary( $params, $this );
+		$summary = $this->modificationHelper->createSummary( $params, $this );
 
-		$claim = $this->claimModificationHelper->getClaimFromEntity( $guid, $entity );
+		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {
 			$this->dieError( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
@@ -80,7 +80,7 @@ class RemoveReferences extends ModifyClaim {
 	 * Check the provided parameters
 	 */
 	private function validateParameters( array $params ) {
-		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['statement'] ) ) ) {
+		if ( !( $this->modificationHelper->validateStatementGuid( $params['statement'] ) ) ) {
 			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}
