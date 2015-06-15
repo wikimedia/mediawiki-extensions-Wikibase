@@ -16,6 +16,24 @@
       "revId": "488382488e92f4938b6db80393470dcde9512a31",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_23adf52e",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T16:02:53Z",
+      "side": 1,
+      "message": "Well, it could easily be made less scary by having a limit to the limit and a limit to the offset.\nThis would perhaps be implemented in things that use the TermIndex though rather than its implementations.",
+      "parentUuid": "8ec42329_e3f84d48",
+      "revId": "488382488e92f4938b6db80393470dcde9512a31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
