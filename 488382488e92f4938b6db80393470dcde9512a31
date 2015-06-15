@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c320b1aa",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-15T16:10:36Z",
+      "side": 1,
+      "message": "The limit to the limit is only in one implementation of the getMatchingIDs method I believe (where a limit of 5000 is used).\nAlso if weighting is not turned on then this limit for the limit is not used.\n\nWill update the patch now for the other comments.",
+      "parentUuid": "8ec42329_a336c5fe",
+      "revId": "488382488e92f4938b6db80393470dcde9512a31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_63721de4",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 1
