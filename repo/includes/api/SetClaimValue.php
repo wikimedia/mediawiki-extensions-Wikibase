@@ -85,7 +85,7 @@ class SetClaimValue extends ModifyClaim {
 					ApiBase::PARAM_REQUIRED => true,
 				),
 				'value' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_TYPE => 'text',
 					ApiBase::PARAM_REQUIRED => false,
 				),
 				'snaktype' => array(
