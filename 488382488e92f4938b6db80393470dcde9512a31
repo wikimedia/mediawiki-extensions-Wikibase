@@ -34,6 +34,40 @@
       "revId": "488382488e92f4938b6db80393470dcde9512a31",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_63721de4",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T16:03:53Z",
+      "side": 1,
+      "message": "The offset is not considered in the calculation of the limit. This works when the offset is 0, but not when it\u0027s bigger than 0.",
+      "revId": "488382488e92f4938b6db80393470dcde9512a31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a36805f3",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T16:03:53Z",
+      "side": 1,
+      "message": "Same problem as in the other class. This will return incomplete results.",
+      "revId": "488382488e92f4938b6db80393470dcde9512a31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
