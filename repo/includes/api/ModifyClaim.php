@@ -32,7 +32,7 @@ abstract class ModifyClaim extends ApiWikibase {
 	 *
 	 * @var ClaimGuidParser
 	 */
-	protected $claimGuidParser;
+	protected $guidParser;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -51,7 +51,7 @@ abstract class ModifyClaim extends ApiWikibase {
 			$this->getErrorReporter()
 		);
 
-		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+		$this->guidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 	}
 
 	/**

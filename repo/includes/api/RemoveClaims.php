@@ -89,9 +89,9 @@ class RemoveClaims extends ModifyClaim {
 			}
 
 			if ( is_null( $entityId ) ) {
-				$entityId = $this->claimGuidParser->parse( $guid )->getEntityId();
+				$entityId = $this->guidParser->parse( $guid )->getEntityId();
 			} else {
-				if ( !$this->claimGuidParser->parse( $guid )->getEntityId()->equals( $entityId ) ) {
+				if ( !$this->guidParser->parse( $guid )->getEntityId()->equals( $entityId ) ) {
 					$this->dieError( 'All claims must belong to the same entity' , 'invalid-guid' );
 				}
 			}

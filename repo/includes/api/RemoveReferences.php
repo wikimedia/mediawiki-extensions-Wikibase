@@ -49,7 +49,7 @@ class RemoveReferences extends ModifyClaim {
 		$this->validateParameters( $params );
 
 		$guid = $params['statement'];
-		$entityId = $this->claimGuidParser->parse( $guid )->getEntityId();
+		$entityId = $this->guidParser->parse( $guid )->getEntityId();
 		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();

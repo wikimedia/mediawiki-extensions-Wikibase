@@ -65,7 +65,7 @@ class SetClaim extends ModifyClaim {
 		}
 
 		try {
-			$claimGuid = $this->claimGuidParser->parse( $guid );
+			$claimGuid = $this->guidParser->parse( $guid );
 		} catch ( ClaimGuidParsingException $ex ) {
 			$this->dieException( $ex, 'invalid-claim' );
 		}

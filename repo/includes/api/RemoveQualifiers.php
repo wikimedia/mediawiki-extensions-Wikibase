@@ -48,19 +48,19 @@ class RemoveQualifiers extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$claimGuid = $params['claim'];
-		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
+		$guid = $params['claim'];
+		$entityId = $this->guidParser->parse( $guid )->getEntityId();
 		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 		$summary = $this->modificationHelper->createSummary( $params, $this );
 
-		$claim = $this->modificationHelper->getStatementFromEntity( $claimGuid, $entity );
+		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
 
 		$qualifierHashes = $this->getQualifierHashesFromParams( $params, $claim );
 
 		$changeOps = new ChangeOps();
-		$changeOps->add( $this->getChangeOps( $claimGuid, $qualifierHashes ) );
+		$changeOps->add( $this->getChangeOps( $guid, $qualifierHashes ) );
 
 		try {
 			$changeOps->apply( $entity, $summary );
