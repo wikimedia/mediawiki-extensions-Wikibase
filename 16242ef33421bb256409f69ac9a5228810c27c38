@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_43d361d7",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-15T15:57:46Z",
+      "side": 1,
+      "message": "I find these if\u0027s very confusing now. Can you please try to do this in a different way that\u0027s more readable and makes the intention more clear?",
+      "revId": "16242ef33421bb256409f69ac9a5228810c27c38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
