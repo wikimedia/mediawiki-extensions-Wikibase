@@ -34,6 +34,24 @@
       "revId": "fba2dbf288457decf13fa65a0be212b4167dcd83",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_30e21d2f",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-15T13:26:33Z",
+      "side": 1,
+      "message": "It is a breaking change if a wiki has things that are Claims and not Statements. So for Wikidata there should be no breaking change.",
+      "parentUuid": "8ec42329_2dade62e",
+      "revId": "fba2dbf288457decf13fa65a0be212b4167dcd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
