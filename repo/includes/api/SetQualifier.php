@@ -141,7 +141,7 @@ class SetQualifier extends ModifyClaim {
 					ApiBase::PARAM_REQUIRED => false,
 				),
 				'value' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_TYPE => 'text',
 					ApiBase::PARAM_REQUIRED => false,
 				),
 				'snaktype' => array(

@@ -176,7 +176,7 @@ class FormatSnakValue extends ApiWikibase {
 				ApiBase::PARAM_REQUIRED => false,
 			),
 			'datavalue' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => 'text',
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'datatype' => array(
@@ -184,7 +184,7 @@ class FormatSnakValue extends ApiWikibase {
 				ApiBase::PARAM_REQUIRED => false,
 			),
 			'options' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => 'text',
 				ApiBase::PARAM_REQUIRED => false,
 			),
 		);

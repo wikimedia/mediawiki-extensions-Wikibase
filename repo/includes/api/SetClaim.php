@@ -157,7 +157,7 @@ class SetClaim extends ModifyClaim {
 		return array_merge(
 			array(
 				'claim' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_TYPE => 'text',
 					ApiBase::PARAM_REQUIRED => true
 				),
 				'index' => array(
