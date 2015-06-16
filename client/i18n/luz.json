@@ -6,5 +6,8 @@
 	},
 	"tooltip-t-wikibase": "لینک متصل به داده آیتم مخزن",
 	"wikibase-editlinks": "اصلاح لینک یل",
-	"wikibase-editlinkstitle": "اصلاح لینک یل زوون یل بین المللی"
+	"wikibase-editlinkstitle": "اصلاح لینک یل زوون یل بین المللی",
+	"wikibase-rc-hide-wikidata-hide": "قائم کردن",
+	"wikibase-rc-hide-wikidata-show": "نشو دائن",
+	"wikibase-otherprojects": "پروجه یل دیه"
 }

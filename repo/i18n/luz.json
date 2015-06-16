@@ -4,5 +4,13 @@
 			"علی ساکی لرستانی"
 		]
 	},
-	"wikibase-edit": "اصلاح"
+	"wikibase-edit": "اصلاح",
+	"wikibase-add": "اضاف کردن",
+	"wikibase-label-empty": "برچسبی تعریف نوابیده",
+	"wikibase-description-empty": "شرحی تعریف نوابیده",
+	"wikibase-statements": "بیانیه",
+	"wikibase-sitelinks-special": "سایتل دیه",
+	"wikibase-aliases-empty": "بدون نام مستعار تعریف وابیده",
+	"wikibase-statementview-rank-normal": "رتبه عادی",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|سرچشمه|سرچشمه یل}}"
 }
