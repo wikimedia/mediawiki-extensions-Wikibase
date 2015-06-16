@@ -752,7 +752,7 @@ final class WikibaseClient {
 	public function getOtherProjectsSitesProvider() {
 		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator(
 			$this->getSiteStore(),
-			$this->getSettings()->getSetting( 'siteGlobalID' ),
+			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
