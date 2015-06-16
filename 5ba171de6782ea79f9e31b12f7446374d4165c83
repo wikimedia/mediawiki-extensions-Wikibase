@@ -16,6 +16,24 @@
       "revId": "5ba171de6782ea79f9e31b12f7446374d4165c83",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0e96d542",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-06-16T14:55:06Z",
+      "side": 1,
+      "message": "i am making another patchset",
+      "parentUuid": "8ec42329_aec78166",
+      "revId": "5ba171de6782ea79f9e31b12f7446374d4165c83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
