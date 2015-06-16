@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_6e1af9d1",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:27:45Z",
+      "side": 1,
+      "message": "No. Any URI is valid. We just track the ones we know the ones to be local item references. The others simply aren\u0027t.",
+      "parentUuid": "8ec42329_a8145945",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_2809492f",
         "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
         "patchSetId": 6
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_aedc61e6",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:27:45Z",
+      "side": 1,
+      "message": "Why?",
+      "parentUuid": "8ec42329_1d17f157",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_fd0b052c",
         "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
         "patchSetId": 6
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_ee258905",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:27:45Z",
+      "side": 1,
+      "message": "You requested this test for a trivial \"extraction\" to be added, see previous patches :)",
+      "parentUuid": "8ec42329_fd0b052c",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_bd057d18",
         "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
         "patchSetId": 6
@@ -115,6 +169,24 @@
       "writtenOn": "2015-06-16T08:26:39Z",
       "side": 1,
       "message": "The string to parse must be part of the provider, otherwise it\u0027s trivial that the regex and the string to parse do not match. More specifically: The second regex doesn\u0027t even tries to parse an URI.",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0e8815eb",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:27:45Z",
+      "side": 1,
+      "message": "That\u0027s not under test here. The regex passed to the constructor is *invalid* because it doesn\u0027t define a capture group. The actual string parsed is irrelevant.",
+      "parentUuid": "8ec42329_bd057d18",
       "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
