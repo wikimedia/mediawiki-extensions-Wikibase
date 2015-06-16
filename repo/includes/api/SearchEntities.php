@@ -12,7 +12,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
@@ -122,20 +122,20 @@ class SearchEntities extends ApiBase {
 	 * @param int $limit
 	 * @param bool $prefixSearch
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function searchEntities( $term, $entityType, array $languages, $limit, $prefixSearch ) {
 		$termTemplates = array();
 
 		foreach ( $languages as $language ) {
-			$termTemplates[] = new Term( array(
-				'termType' 		=> Term::TYPE_LABEL,
+			$termTemplates[] = new TermIndexEntry( array(
+				'termType' 		=> TermIndexEntry::TYPE_LABEL,
 				'termLanguage' 	=> $language,
 				'termText' 		=> $term
 			) );
 
-			$termTemplates[] = new Term( array(
-				'termType' 		=> Term::TYPE_ALIAS,
+			$termTemplates[] = new TermIndexEntry( array(
+				'termType' 		=> TermIndexEntry::TYPE_ALIAS,
 				'termLanguage' 	=> $language,
 				'termText' 		=> $term
 			) );
@@ -299,7 +299,7 @@ class SearchEntities extends ApiBase {
 			);
 		}
 
-		$termTypes = array( Term::TYPE_LABEL, Term::TYPE_DESCRIPTION, Term::TYPE_ALIAS );
+		$termTypes = array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION, TermIndexEntry::TYPE_ALIAS );
 
 		// Find all the remaining terms for the given entities
 		$terms = $this->termIndex->getTermsOfEntities(
@@ -332,15 +332,15 @@ class SearchEntities extends ApiBase {
 			$entry = $entries[$key];
 
 			switch ( $type ) {
-				case Term::TYPE_LABEL:
+				case TermIndexEntry::TYPE_LABEL:
 					$entry['label'] = $term->getText();
 					$bestLangPerSlot[$key][$type] = $currentLang;
 					break;
-				case Term::TYPE_DESCRIPTION:
+				case TermIndexEntry::TYPE_DESCRIPTION:
 					$entry['description'] = $term->getText();
 					$bestLangPerSlot[$key][$type] = $currentLang;
 					break;
-				case Term::TYPE_ALIAS:
+				case TermIndexEntry::TYPE_ALIAS:
 					// Only include matching aliases
 					if ( preg_match( $termPattern, $term->getText() ) ) {
 						if ( !isset( $entry['aliases'] ) ) {

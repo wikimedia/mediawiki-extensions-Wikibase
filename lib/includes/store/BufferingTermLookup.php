@@ -6,7 +6,7 @@ use MapCacheLRU;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
@@ -175,7 +175,7 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 	}
 
 	/**
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 *
 	 * @return string[] The buffer keys to which the terms were assigned.
 	 */

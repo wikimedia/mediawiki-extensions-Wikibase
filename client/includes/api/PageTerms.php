@@ -10,7 +10,7 @@ use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
@@ -102,7 +102,7 @@ class PageTerms extends ApiQueryBase {
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		$entityIdGroups = $this->splitPageEntityMapByType( $entityIds );
@@ -158,7 +158,7 @@ class PageTerms extends ApiQueryBase {
 
 	/**
 	 * @param int[] $entityToPageMap
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 *
 	 * @return array[][] An associative array, mapping pageId + entity type to a list of strings.
 	 */
@@ -178,7 +178,7 @@ class PageTerms extends ApiQueryBase {
 				$termsPerPage[$pageId][$type][] = $text;
 			} else {
 				// $text should never be null, but let's be vigilant.
-				wfWarn( __METHOD__ . ': Encountered null text in Term object!' );
+				wfWarn( __METHOD__ . ': Encountered null text in TermIndexEntry object!' );
 			}
 		}
 
@@ -239,8 +239,12 @@ class PageTerms extends ApiQueryBase {
 				ApiBase::PARAM_TYPE => 'integer',
 			),
 			'terms' => array(
-				// XXX Ought to get this list from Wikibase\Term, its setType() also hardcodes it.
-				ApiBase::PARAM_TYPE => array( Term::TYPE_ALIAS, Term::TYPE_DESCRIPTION, Term::TYPE_LABEL ),
+				// XXX Ought to get this list from Wikibase\TermIndexEntry, its setType() also hardcodes it.
+				ApiBase::PARAM_TYPE => array(
+					TermIndexEntry::TYPE_ALIAS,
+					TermIndexEntry::TYPE_DESCRIPTION,
+					TermIndexEntry::TYPE_LABEL
+				),
 				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
 			),

@@ -128,28 +128,28 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 
 	protected function getTermIndex() {
 		$terms = array(
-			new \Wikibase\Term( array(
+			new \Wikibase\TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'New York City'
 			) ),
-			new \Wikibase\Term( array(
+			new \Wikibase\TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'es',
 				'termText' => 'Nueva York'
 			) ),
-			new \Wikibase\Term( array(
+			new \Wikibase\TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'en',
 				'termText' => 'largest city in New York and the United States of America'
 			) ),
-			new \Wikibase\Term( array(
+			new \Wikibase\TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'description',

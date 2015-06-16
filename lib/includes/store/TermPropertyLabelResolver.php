@@ -121,7 +121,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	}
 
 	protected function loadProperties() {
-		$termTemplate = new Term( array(
+		$termTemplate = new TermIndexEntry( array(
 			'termType' => 'label',
 			'termLanguage' => $this->languageCode,
 			'entityType' => Property::ENTITY_TYPE

@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 
 /**
  * @since 0.5
@@ -87,7 +87,7 @@ abstract class EntityTermLookupBase implements TermLookup {
 	abstract protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes );
 
 	/**
-	 * @param Term[] $wikibaseTerms
+	 * @param TermIndexEntry[] $wikibaseTerms
 	 *
 	 * @return string[] strings keyed by language code
 	 */

@@ -95,8 +95,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$newTerms = $this->getEntityTerms( $entity );
 		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
 
-		$termsToInsert = array_udiff( $newTerms, $oldTerms, 'Wikibase\Term::compare' );
-		$termsToDelete = array_udiff( $oldTerms, $newTerms, 'Wikibase\Term::compare' );
+		$termsToInsert = array_udiff( $newTerms, $oldTerms, 'Wikibase\TermIndexEntry::compare' );
+		$termsToDelete = array_udiff( $oldTerms, $newTerms, 'Wikibase\TermIndexEntry::compare' );
 
 		if ( !$termsToInsert && !$termsToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': terms did not change, returning.' );
@@ -130,7 +130,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return bool Success indicator
@@ -173,7 +173,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * @param EntityDocument $entity
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getEntityTerms( EntityDocument $entity ) {
 		// FIXME: OCP violation. No support for new types of entities can be registered
@@ -201,26 +201,26 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param Fingerprint $fingerprint
 	 * @param array $extraFields
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function getFingerprintTerms( Fingerprint $fingerprint, array $extraFields = array() ) {
 		$terms = array();
 
 		foreach ( $fingerprint->getDescriptions()->toTextArray() as $languageCode => $description ) {
-			$term = new Term( $extraFields );
+			$term = new TermIndexEntry( $extraFields );
 
 			$term->setLanguage( $languageCode );
-			$term->setType( Term::TYPE_DESCRIPTION );
+			$term->setType( TermIndexEntry::TYPE_DESCRIPTION );
 			$term->setText( $description );
 
 			$terms[] = $term;
 		}
 
 		foreach ( $fingerprint->getLabels()->toTextArray() as $languageCode => $label ) {
-			$term = new Term( $extraFields );
+			$term = new TermIndexEntry( $extraFields );
 
 			$term->setLanguage( $languageCode );
-			$term->setType( Term::TYPE_LABEL );
+			$term->setType( TermIndexEntry::TYPE_LABEL );
 			$term->setText( $label );
 
 			$terms[] = $term;
@@ -229,10 +229,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		/** @var AliasGroup $aliasGroup */
 		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
 			foreach ( $aliasGroup->getAliases() as $alias ) {
-				$term = new Term( $extraFields );
+				$term = new TermIndexEntry( $extraFields );
 
 				$term->setLanguage( $aliasGroup->getLanguageCode() );
-				$term->setType( Term::TYPE_ALIAS );
+				$term->setType( TermIndexEntry::TYPE_ALIAS );
 				$term->setText( $alias );
 
 				$terms[] = $term;
@@ -251,7 +251,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return bool Success indicator
@@ -323,11 +323,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	/**
 	 * Returns an array with the database table fields for the provided term.
 	 *
-	 * @param Term $term
+	 * @param TermIndexEntry $term
 	 *
 	 * @return string[]
 	 */
-	private function getTermFields( Term $term ) {
+	private function getTermFields( TermIndexEntry $term ) {
 		$fields = array(
 			'term_language' => $term->getLanguage(),
 			'term_type' => $term->getType(),
@@ -378,7 +378,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getTermsOfEntity(
 		EntityId $entityId,
@@ -402,7 +402,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string[]|null $languageCodes
 	 *
 	 * @throws MWException
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getTermsOfEntities(
 		array $entityIds,
@@ -418,7 +418,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string[]|null $languageCodes
 	 *
 	 * @throws MWException
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function fetchTerms(
 		array $entityIds,
@@ -502,12 +502,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.2
 	 *
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
 	 * @param array $options
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getMatchingTerms(
 		array $terms,
@@ -552,7 +552,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.4
 	 *
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 * @param string|null $entityType
 	 * @param array $options There is an implicit LIMIT of 5000 items in this implementation
 	 *
@@ -659,7 +659,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * @param DatabaseBase $db
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
 	 * @param array $options
@@ -685,7 +685,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * @param DatabaseBase $db
-	 * @param Term $term
+	 * @param TermIndexEntry $term
 	 * @param string|null $termType
 	 * @param string|null $entityType
 	 * @param array $options
@@ -694,7 +694,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 */
 	private function termMatchConditions(
 		DatabaseBase $db,
-		Term $term,
+		TermIndexEntry $term,
 		$termType = null,
 		$entityType = null,
 		array $options = array()
@@ -761,7 +761,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param Iterator|array $obtainedTerms PHP fails for not having a common iterator/array thing :<0
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function buildTermResult( $obtainedTerms ) {
 		$matchingTerms = array();
@@ -782,7 +782,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				$matchingTerm[$this->termFieldMap[$key]] = $value;
 			}
 
-			$matchingTerms[] = new Term( $matchingTerm );
+			$matchingTerms[] = new TermIndexEntry( $matchingTerm );
 		}
 
 		return $matchingTerms;
@@ -814,7 +814,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string[] $labels
 	 *
 	 * @throws InvalidArgumentException
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getLabelConflicts( $entityType, array $labels ) {
 		if ( !is_string( $entityType ) ) {
@@ -825,11 +825,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return array();
 		}
 
-		$templates = $this->makeQueryTerms( $labels, Term::TYPE_LABEL );
+		$templates = $this->makeQueryTerms( $labels, TermIndexEntry::TYPE_LABEL );
 
 		$labelConflicts = $this->getMatchingTerms(
 			$templates,
-			Term::TYPE_LABEL,
+			TermIndexEntry::TYPE_LABEL,
 			$entityType,
 			array(
 				'LIMIT' => $this->maxConflicts,
@@ -853,7 +853,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string[] $descriptions
 	 *
 	 * @throws InvalidArgumentException
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getLabelWithDescriptionConflicts(
 		$entityType,
@@ -878,8 +878,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$where = array();
 		$where['L.term_entity_type'] = $entityType;
-		$where['L.term_type'] = Term::TYPE_LABEL;
-		$where['D.term_type'] = Term::TYPE_DESCRIPTION;
+		$where['L.term_type'] = TermIndexEntry::TYPE_LABEL;
+		$where['D.term_type'] = TermIndexEntry::TYPE_DESCRIPTION;
 
 		$where[] = 'D.term_entity_id=' . 'L.term_entity_id';
 		$where[] = 'D.term_entity_type=' . 'L.term_entity_type';
@@ -925,7 +925,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string $type
 	 *
 	 * @throws InvalidArgumentException
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function makeQueryTerms( $textsByLanguage, $type ) {
 		$terms = array();
@@ -938,7 +938,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 					throw new InvalidArgumentException( '$textsByLanguage must contain string values only' );
 				}
 
-				$terms[] = new Term( array(
+				$terms[] = new TermIndexEntry( array(
 					'termText' => $text,
 					'termLanguage' => $lang,
 					'termType' => $type,

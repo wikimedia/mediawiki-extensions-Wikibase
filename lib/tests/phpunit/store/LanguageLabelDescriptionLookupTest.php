@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
@@ -81,35 +81,35 @@ class LanguageLabelDescriptionLookupTest extends MediaWikiTestCase {
 
 	private function getTermIndex() {
 		$terms = array(
-			new Term( array(
+			new TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'New York City'
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'es',
 				'termText' => 'New York City'
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'en',
 				'termText' => 'Big Apple'
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'entityId' => 117,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'Berlin'
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'entityId' => 118,
 				'entityType' => 'item',
 				'termType' => 'label',

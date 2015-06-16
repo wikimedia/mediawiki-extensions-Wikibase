@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\StringNormalizer;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermSqlIndex;
 
 /**
@@ -65,7 +65,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item );
 
-		$term = new Term();
+		$term = new TermIndexEntry();
 		$term->setLanguage( $languageCode );
 		$term->setText( $searchText );
 
@@ -73,7 +73,7 @@ class TermSqlIndexTest extends TermIndexTest {
 			'caseSensitive' => false,
 		);
 
-		$obtainedTerms = $termIndex->getMatchingTerms( array( $term ), Term::TYPE_LABEL, Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termIndex->getMatchingTerms( array( $term ), TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 
@@ -116,8 +116,8 @@ class TermSqlIndexTest extends TermIndexTest {
 			new AliasGroupList()
 		);
 
-		$labelFooEn = new Term( array( 'termLanguage' => 'en', 'termType' => Term::TYPE_LABEL, 'termText' => 'Foo' ) );
-		$descriptionBarEn = new Term( array( 'termLanguage' => 'en', 'termType' => Term::TYPE_DESCRIPTION, 'termText' => 'Bar' ) );
+		$labelFooEn = new TermIndexEntry( array( 'termLanguage' => 'en', 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'Foo' ) );
+		$descriptionBarEn = new TermIndexEntry( array( 'termLanguage' => 'en', 'termType' => TermIndexEntry::TYPE_DESCRIPTION, 'termText' => 'Bar' ) );
 
 		return array(
 			'no options' => array(
@@ -137,10 +137,11 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider getMatchingTermsOptionsProvider
-	 * @param Fingerprint $fingerprint
-	 * @param Term[] $queryTerms
+	 *
+*@param Fingerprint $fingerprint
+	 * @param TermIndexEntry[] $queryTerms
 	 * @param array $options
-	 * @param Term[] $expected
+	 * @param TermIndexEntry[] $expected
 	 */
 	public function testGetMatchingTerms_options( Fingerprint $fingerprint, array $queryTerms, array $options, array $expected ) {
 		$termIndex = $this->getTermIndex();
@@ -200,7 +201,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item3 );
 
-		$term = new Term();
+		$term = new TermIndexEntry();
 		$term->setLanguage( $languageCode );
 		$term->setText( $searchText );
 
@@ -230,7 +231,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item1 );
 
-		$term = new Term();
+		$term = new TermIndexEntry();
 		$term->setLanguage( $languageCode );
 		$term->setText( $termText );
 
@@ -251,7 +252,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item1 );
 
-		$term = new Term();
+		$term = new TermIndexEntry();
 		$term->setLanguage( $languageCode );
 		$term->setText( substr( $termText, 0, -1 ) ); //last character stripped
 
@@ -277,7 +278,7 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		$termIndex->saveTermsOfEntity( $item1 );
 
-		$term = new Term();
+		$term = new TermIndexEntry();
 		$term->setLanguage( $languageCode );
 		$term->setText( '%' . $termText ); //must be used as a character and no LIKE placeholder
 
@@ -363,21 +364,21 @@ class TermSqlIndexTest extends TermIndexTest {
 		$item->setFingerprint( $fingerprint );
 
 		$expectedTerms = array(
-			new Term( array(
+			new TermIndexEntry( array(
 				'entityId' => 999,
 				'entityType' => 'item',
 				'termText' => 'es un gato!',
 				'termLanguage' => 'es',
 				'termType' => 'description'
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'entityId' => 999,
 				'entityType' => 'item',
 				'termText' => 'kittens!!!:)',
 				'termLanguage' => 'en',
 				'termType' => 'label'
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'entityId' => 999,
 				'entityType' => 'item',
 				'termText' => 'kitten-alias',

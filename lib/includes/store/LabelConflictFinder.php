@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 
 /**
  * Service interface for detecting label conflicts.
@@ -24,7 +24,7 @@ interface LabelConflictFinder {
 	 * @param string $entityType The entity type to consider for conflicts.
 	 * @param string[] $labels The labels to look for, with language codes as keys.
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getLabelConflicts( $entityType, array $labels );
 
@@ -42,7 +42,7 @@ interface LabelConflictFinder {
 	 * @param string[] $labels The labels to look for, with language codes as keys.
 	 * @param string[] $descriptions The descriptions to consider (if desired), with language codes as keys.
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getLabelWithDescriptionConflicts( $entityType, array $labels, array $descriptions );
 

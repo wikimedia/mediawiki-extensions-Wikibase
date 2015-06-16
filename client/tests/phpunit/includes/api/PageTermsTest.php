@@ -13,7 +13,7 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
@@ -144,7 +144,7 @@ class PageTermsTest extends \MediaWikiTestCase {
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getTermsOfEntities( array $termObjectsByEntityId, array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		$result = array();
@@ -156,7 +156,7 @@ class PageTermsTest extends \MediaWikiTestCase {
 				continue;
 			}
 
-			/** @var Term $term */
+			/** @var TermIndexEntry $term */
 			foreach ( $termObjectsByEntityId[$key] as $term ) {
 				if ( ( is_array( $termTypes ) && !in_array( $term->getType(), $termTypes ) )
 					|| ( is_array( $languageCodes ) && !in_array( $term->getLanguage(), $languageCodes ) )
@@ -175,14 +175,14 @@ class PageTermsTest extends \MediaWikiTestCase {
 	 * @param EntityId $entityId
 	 * @param array[] $termGroups
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function makeTermsFromGroups( EntityId $entityId, $termGroups ) {
 		$terms = array();
 
 		foreach ( $termGroups as $type => $group ) {
 			foreach ( $group as $lang => $text ) {
-				$terms[] = new Term( array(
+				$terms[] = new TermIndexEntry( array(
 					'termType' => $type,
 					'termLanguage' => $lang,
 					'termText' => $text,

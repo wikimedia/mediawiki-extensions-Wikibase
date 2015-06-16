@@ -6,7 +6,7 @@ use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 
 /**
  * Factory to create special pages.
@@ -69,7 +69,7 @@ class SpecialEntitiesWithoutPageFactory {
 	public function createSpecialEntitiesWithoutLabel() {
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
-			Term::TYPE_LABEL,
+			TermIndexEntry::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
 			$this->entityPerPage,
 			$this->entityFactory,
@@ -85,7 +85,7 @@ class SpecialEntitiesWithoutPageFactory {
 	public function createSpecialEntitiesWithoutDescription() {
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutDescription',
-			Term::TYPE_DESCRIPTION,
+			TermIndexEntry::TYPE_DESCRIPTION,
 			'wikibase-entitieswithoutdescription-legend',
 			$this->entityPerPage,
 			$this->entityFactory,

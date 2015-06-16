@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermSearchKeyBuilder;
 use Wikibase\TermSqlIndex;
 
@@ -65,7 +65,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 		$builder->rebuildSearchKey();
 
 		// remove search key
-		$term = new Term();
+		$term = new TermIndexEntry();
 		$term->setLanguage( $languageCode );
 		$term->setText( $searchText );
 
@@ -73,7 +73,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 			'caseSensitive' => false,
 		);
 
-		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), Term::TYPE_LABEL, Item::ENTITY_TYPE, $options );
+		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 

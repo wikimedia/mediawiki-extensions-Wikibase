@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Store\BufferingTermLookup;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
@@ -54,9 +54,9 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 	 */
 	private function getRestrictedTermIndex( $getTermsOfEntityCalls, $getTermsOfEntitiesCalls ) {
 		$terms = array(
-			'en' => new Term( array( 'termType' => 'label', 'termLanguage' => 'en', 'termText' => 'Vienna', 'entityType' => 'item', 'entityId' => 123 ) ),
-			'de' => new Term( array( 'termType' => 'label', 'termLanguage' => 'de', 'termText' => 'Wien',   'entityType' => 'item', 'entityId' => 123 ) ),
-			'fr' => new Term( array( 'termType' => 'label', 'termLanguage' => 'fr', 'termText' => 'Vienne', 'entityType' => 'item', 'entityId' => 123 ) ),
+			'en' => new TermIndexEntry( array( 'termType' => 'label', 'termLanguage' => 'en', 'termText' => 'Vienna', 'entityType' => 'item', 'entityId' => 123 ) ),
+			'de' => new TermIndexEntry( array( 'termType' => 'label', 'termLanguage' => 'de', 'termText' => 'Wien',   'entityType' => 'item', 'entityId' => 123 ) ),
+			'fr' => new TermIndexEntry( array( 'termType' => 'label', 'termLanguage' => 'fr', 'termText' => 'Vienne', 'entityType' => 'item', 'entityId' => 123 ) ),
 		);
 
 		$termIndex = $this->getMock( 'Wikibase\TermIndex' );
