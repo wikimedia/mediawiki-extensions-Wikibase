@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_8e240509",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T15:05:35Z",
+      "side": 1,
+      "message": "It\u0027s not obvious to what \"ids\" refers to. Why not $unitlessUnitIds?\n\nIs this used in the current implementation?\n\nI suggest to add http://qudt.org/vocab/unit#Unitless to the place that creates this set of default ids, but I don\u0027t know where it is now.",
+      "revId": "83929b5da7474f88beec5752d13615ab07e247e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4e17fda8",
+        "filename": "lib/includes/formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T15:05:35Z",
+      "side": 1,
+      "message": "Please add a TODO. This formatter should also know about all the \"meaningless\" unit values. I think this is crucial. Otherwise the formatter (used in the h4 above) will omit some \"random\" units, but the user has no idea why.",
+      "revId": "83929b5da7474f88beec5752d13615ab07e247e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ce43edb4",
+        "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T15:05:35Z",
+      "side": 1,
+      "message": "Please add more tests:\n\n \u0027unknown int\u0027 \u003d\u003e array( \u00272\u0027, \u0027123\u0027, \u0027123 2\u0027 ),\n \u0027unknown URI\u0027 \u003d\u003e array( \u0027http://www.wikidata.org/entity/Q200\u0027, \u0027123\u0027, \u0027123 http://www.wikidata.org/entity/Q200\u0027 ),\n \u0027property id\u0027 \u003d\u003e array( \u0027P7\u0027, \u0027123\u0027, \u0027123 P7\u0027 ),",
+      "revId": "83929b5da7474f88beec5752d13615ab07e247e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
