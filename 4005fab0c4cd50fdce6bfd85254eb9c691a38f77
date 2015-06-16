@@ -16,6 +16,24 @@
       "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_143263ef",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-16T20:44:45Z",
+      "side": 1,
+      "message": "Would that be the case if no fallbacks should apply? Then we should make the default $fallbackMode \u003d -1 and check $fallbackMode \u003c 0",
+      "parentUuid": "8ec42329_b4190f80",
+      "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
