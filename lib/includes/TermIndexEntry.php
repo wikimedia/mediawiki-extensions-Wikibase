@@ -5,6 +5,7 @@ namespace Wikibase;
 use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\DataModel\Term\Term;
 
 /**
  * Object representing a term index entry.
@@ -218,6 +219,13 @@ class TermIndexEntry {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * @return Term
+	 */
+	public function getTerm() {
+		return new Term( $this->getLanguage(), $this->getText() );
 	}
 
 }
