@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b4190f80",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T20:43:18Z",
+      "side": 1,
+      "message": "This means that  $fallbackMode \u003d 0 will always be overwritten with the default. Is that what we want?",
+      "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
