@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ee6ca933",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T15:09:10Z",
+      "side": 1,
+      "message": "\"This page\" with no \"s\".",
+      "revId": "85254b872bed46ab6f2ecf33b6787e50312006e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ae76a1ff",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T15:09:10Z",
+      "side": 1,
+      "message": "Legend needs to be removed now, doesn\u0027t it?",
+      "revId": "85254b872bed46ab6f2ecf33b6787e50312006e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ee53496d",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T15:09:10Z",
+      "side": 1,
+      "message": "Please keep the class properties before the constructor and all methods, please.",
+      "revId": "85254b872bed46ab6f2ecf33b6787e50312006e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
