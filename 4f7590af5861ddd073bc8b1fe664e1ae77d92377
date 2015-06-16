@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_88e15d99",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T10:57:46Z",
+      "side": 1,
+      "message": "Please describe what this thing takes and what it returns (plain text?).\n\nPlease describe that this only formats units that refer (via URI) to entities in the local Wikibase repo.",
+      "revId": "4f7590af5861ddd073bc8b1fe664e1ae77d92377",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e8d261d2",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T10:57:46Z",
+      "side": 1,
+      "message": "@return string Text",
+      "revId": "4f7590af5861ddd073bc8b1fe664e1ae77d92377",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c8ac4535",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T10:57:46Z",
+      "side": 1,
+      "message": "Looking up symbols does not belong to a \"label\" based formatter.",
+      "revId": "4f7590af5861ddd073bc8b1fe664e1ae77d92377",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
