@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_69bc3368",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "Will kill it (in this class)",
+      "parentUuid": "8ec42329_e97b4322",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e917c3f1",
         "filename": "repo/includes/Interactors/TermSearchInteractor.php",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_49b93777",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8ec42329_29e5cb06",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_69dbd354",
         "filename": "repo/includes/Interactors/TermSearchInteractor.php",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2015-06-16T15:59:28Z",
       "side": 1,
       "message": "Needs to be \u003e 0",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a9e9bba8",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8ec42329_69dbd354",
       "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c9fe8735",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8ec42329_09e48fda",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_29e70be1",
         "filename": "repo/includes/Interactors/TermSearchInteractor.php",
         "patchSetId": 3
@@ -98,6 +170,24 @@
       "writtenOn": "2015-06-16T15:59:28Z",
       "side": 1,
       "message": "The actual type needs to be clear.",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_29e86b76",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8ec42329_29e70be1",
       "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c92a07d7",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "Yep!",
+      "parentUuid": "8ec42329_e9f023d8",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_89ff1fa7",
         "filename": "repo/includes/Interactors/TermSearchInteractor.php",
         "patchSetId": 3
@@ -132,6 +240,24 @@
       "writtenOn": "2015-06-16T15:59:28Z",
       "side": 1,
       "message": "Would be nice to have that functionality in here, instead of relyong on the caller to collect the fallback chain and supply it as $languageCodes. Perhaps the interactor should (optionally) have a FallbackChainFactory, and determine the languages to look for automatically, based on a single search language?",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c9ac4735",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "Will implement something for you to look at!",
+      "parentUuid": "8ec42329_89ff1fa7",
       "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_293dcb29",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "done done done",
+      "parentUuid": "8ec42329_298aab1c",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_09b00ff0",
         "filename": "repo/includes/Interactors/TermSearchInteractor.php",
         "patchSetId": 3
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_093a4f33",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8ec42329_09b00ff0",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_89c07f30",
         "filename": "repo/includes/Interactors/TermSearchInteractor.php",
         "patchSetId": 3
@@ -183,6 +345,24 @@
       "writtenOn": "2015-06-16T15:59:28Z",
       "side": 1,
       "message": "Careful: LabelDescriptionLookup returns a Wikibase\\DataModel\\Term\\Term, while TermIndex uses Wikibase\\Term.",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_89a63f4f",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-16T17:02:44Z",
+      "side": 1,
+      "message": "ergh! :)",
+      "parentUuid": "8ec42329_89c07f30",
       "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
