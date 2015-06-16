@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -171,6 +172,15 @@ class TermIndexEntryTest extends \MediaWikiTestCase {
 			$this->assertNotEquals( 0, $ab, "Comparison of unequal terms is expected to not return 0" );
 			$this->assertEquals( -$ab, $ba, "Comparing A to B should return the inverse of comparing B to A" );
 		}
+	}
+
+	public function testToTerm() {
+		$termIndexEntry = new TermIndexEntry( array(
+			'termLanguage' => 'en',
+			'termText' => 'foo',
+		) );
+		$expectedTerm = new Term( 'en', 'foo' );
+		$this->assertEquals( $expectedTerm, $termIndexEntry->getTerm() );
 	}
 
 }
