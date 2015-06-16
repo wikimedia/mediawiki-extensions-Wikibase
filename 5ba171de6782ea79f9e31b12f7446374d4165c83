@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_aec78166",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T14:51:38Z",
+      "side": 1,
+      "message": "Unfortunately this is not much better than before (it checks dataValue, then dataType, then dataValue again). But the comment helps and it\u0027s a private implementation detail anyway. Thanks for that.",
+      "revId": "5ba171de6782ea79f9e31b12f7446374d4165c83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
