@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e97b4322",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "This thing should die, let\u0027s try and not use it in the interface of new code.",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e917c3f1",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "Why is this optional? Would be nice to always have it. But it\u0027s somewhat redundant to TermIndex...",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_29e5cb06",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "Use Assert::propertyType and friends",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_69dbd354",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "Needs to be \u003e 0",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_09e48fda",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "The actual type needs to be clear.",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_29e70be1",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "The actual type needs to be clear.",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e9f023d8",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "We should have an interface for this. TermSearcher? Something like that.",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_89ff1fa7",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "Would be nice to have that functionality in here, instead of relyong on the caller to collect the fallback chain and supply it as $languageCodes. Perhaps the interactor should (optionally) have a FallbackChainFactory, and determine the languages to look for automatically, based on a single search language?",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_298aab1c",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "Instead of omitting the last field, set it to null. Also, perhaps use string keys?\nIn any case, please use the new Term class here for the public interface.",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_09b00ff0",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "Would be nicer if getDisplayTerms just returned null in that case",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_89c07f30",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T15:59:28Z",
+      "side": 1,
+      "message": "Careful: LabelDescriptionLookup returns a Wikibase\\DataModel\\Term\\Term, while TermIndex uses Wikibase\\Term.",
+      "revId": "626a2a38667d24f434d3955474915ad44e52cb1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
