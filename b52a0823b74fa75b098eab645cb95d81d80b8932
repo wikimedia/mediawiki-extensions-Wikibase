@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_715bb9fd",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-16T19:52:20Z",
+      "side": 1,
+      "message": "If I understand lua correctly this variable isn\u0027t global but only visible in this file. However, you\u0027re right that this should be an actual property of capiunto. Let\u0027s see how this can be achieved.",
+      "parentUuid": "8ec42329_63177d57",
+      "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_460b6f26",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_b1c28186",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-16T19:52:20Z",
+      "side": 1,
+      "message": "I thought this was useful so that duplicate references aren\u0027t shown twice but get grouped as intended by \u003creferences /\u003e. We might consider using a substring (the first 5 chars?). That would very likely still be unique but is a bit hackish. Thoughts?",
+      "parentUuid": "8ec42329_460b6f26",
+      "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_46328ff0",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-15T16:12:28Z",
       "side": 1,
       "message": "I suggest to add at least the propertyId to the list of parameters, possibly the statements guid.",
+      "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d1bdcdfe",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-16T19:52:20Z",
+      "side": 1,
+      "message": "What would be the usecase? Why should a method rendering a reference care what the statement of that reference is about?",
+      "parentUuid": "8ec42329_46328ff0",
       "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
