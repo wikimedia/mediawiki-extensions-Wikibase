@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_a8145945",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "Not even a log entry?",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2809492f",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "When looking at this implementation I have to ask why this is a regex? It does nothing but:\n* Check if the string starts with the prefix. It\u0027s even case-sensitive.\n* Drops the prefix.\n* And makes sure there is at least 1 character left.\n\nAll this is possible with very basic string functions and does not need the power of the regex engine.\n\nThis class doesn\u0027t even need to know about \"URIs\".",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_48fcd508",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "Can we please stick to the default delimiter character \u0027/\u0027? There is no need to use an other character here.",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_88195d80",
+        "filename": "lib/includes/parsers/ExtractingEntityIdParser.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "Remember, I found this check odd. You can totally avoid it if the constructor does not accept *any* regex but a string prefix instead.",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_1d17f157",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "In production the (.*?) bit would not be acceptable, it must be ([^#]*). But this is a test, so not an issue.",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fd0b052c",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "How is this \"extracting\" anything? This is identical to the existing BasicEntityIdParser.",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_bd057d18",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "The string to parse must be part of the provider, otherwise it\u0027s trivial that the regex and the string to parse do not match. More specifically: The second regex doesn\u0027t even tries to parse an URI.",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_dd29699b",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "What\u0027s an \"entity URI parser\"? The interface and class are named very different.\n\nTo what does \"local\" refer to?",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fd2465c2",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-16T08:26:39Z",
+      "side": 1,
+      "message": "Upper case \"B\" please.",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
