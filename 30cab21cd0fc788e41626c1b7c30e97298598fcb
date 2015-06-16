@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_d18aadbf",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-16T20:36:47Z",
+      "side": 1,
+      "message": "I don\u0027t really like these options in the constructor. It seems to me that the code that has the services to inject doesn\u0027t generally know the desired limit, etc.\n\nFor instance, the API module gets the interactor injected, or creates it in the constructor. But the options are only known when the execute() method is run. So either we use setters to re-configure the interactor, or we put these into the searchForTerms() method. But then we\u0027d probably want a SearchOptions class.\n\nAlternatively, we can have a TermIndexSearchInteractorFactory, inject that, and then call newTermIndexSearchInteractor(...options...). \n\nWith the setters, the interactor is no longer stateless, but we wouldn\u0027t need any extra classes.",
+      "revId": "30cab21cd0fc788e41626c1b7c30e97298598fcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
