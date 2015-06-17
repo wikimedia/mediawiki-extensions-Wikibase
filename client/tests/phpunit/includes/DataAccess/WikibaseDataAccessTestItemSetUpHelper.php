@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\DataAccess;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
