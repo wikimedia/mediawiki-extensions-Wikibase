@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use HttpError;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
@@ -86,6 +87,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getEntityFactory()
 		);
 
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+
 		$serializationService = new EntityDataSerializationService(
 			$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' ),
 			$this->getPageTitle()->getCanonicalURL() . '/',
@@ -93,20 +96,21 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$titleLookup,
 			$serializerFactory,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
-			$wikibaseRepo->getSiteStore()->getSites()
+			$wikibaseRepo->getSiteStore()->getSites(),
+			$entityDataFormatProvider
 		);
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataSquidMaxage' );
 		$formats = $wikibaseRepo->getSettings()->getSetting( 'entityDataFormats' );
-		$serializationService->setFormatWhiteList( $formats );
+		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
 		// build a mapping of formats to file extensions and include HTML
 		$supportedExtensions = array();
 		$supportedExtensions['html'] = 'html';
-		foreach ( $serializationService->getSupportedFormats() as $format ) {
-			$ext = $serializationService->getExtension( $format );
+		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
+			$ext = $entityDataFormatProvider->getExtension( $format );
 
 			if ( $ext !== null ) {
 				$supportedExtensions[$format] = $ext;
@@ -126,6 +130,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$entityRevisionLookup,
 			$entityRedirectLookup,
 			$serializationService,
+			$entityDataFormatProvider,
 			$defaultFormat,
 			$maxAge,
 			$wgUseSquid,

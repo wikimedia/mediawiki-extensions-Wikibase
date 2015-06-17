@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
-use FauxResponse;
 use HttpError;
 use OutputPage;
 use SiteList;
@@ -13,6 +12,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
@@ -72,6 +72,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$entityFactory
 		);
 
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+
 		$serializationService = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
@@ -79,12 +81,13 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$titleLookup,
 			$serializerFactory,
 			$dataTypeLookup,
-			new SiteList()
+			new SiteList(),
+			$entityDataFormatProvider
 		);
 
 		$maxAge = 60*60;
 		$formats = array( 'json', 'rdfxml', 'ntriples' );
-		$serializationService->setFormatWhiteList( $formats );
+		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		$defaultFormat = 'rdf';
 		$supportedExtensions = array_combine( $formats, $formats );
@@ -107,6 +110,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$mockRepository,
 			$mockRepository,
 			$serializationService,
+			$entityDataFormatProvider,
 			$defaultFormat,
 			$maxAge,
 			$useSquid,

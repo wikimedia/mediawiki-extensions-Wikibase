@@ -67,6 +67,11 @@ class EntityDataRequestHandler {
 	private $entityTitleLookup;
 
 	/**
+	 * @var EntityDataFormatProvider
+	 */
+	private $entityDataFormatProvider;
+
+	/**
 	 * @var string
 	 */
 	private $defaultFormat;
@@ -102,6 +107,7 @@ class EntityDataRequestHandler {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityRedirectLookup $entityRedirectLookup,
 		EntityDataSerializationService $serializationService,
+		EntityDataFormatProvider $entityDataFormatProvider,
 		$defaultFormat,
 		$maxAge,
 		$useSquids,
@@ -113,6 +119,7 @@ class EntityDataRequestHandler {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityRedirectLookup = $entityRedirectLookup;
 		$this->serializationService = $serializationService;
+		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
 		$this->useSquids = $useSquids;
@@ -254,7 +261,7 @@ class EntityDataRequestHandler {
 		}
 
 		// normalize format name (note that HTML may not be known to the service)
-		$canonicalFormat = $this->serializationService->getFormatName( $format );
+		$canonicalFormat = $this->entityDataFormatProvider->getFormatName( $format );
 
 		if ( $canonicalFormat === null ) {
 			throw new \HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
@@ -300,8 +307,8 @@ class EntityDataRequestHandler {
 				'*' => 0.1 // just to make extra sure
 			);
 
-			$defaultFormat = $this->serializationService->getFormatName( $this->defaultFormat );
-			$defaultMime = $this->serializationService->getMimeType( $defaultFormat );
+			$defaultFormat = $this->entityDataFormatProvider->getFormatName( $this->defaultFormat );
+			$defaultMime = $this->entityDataFormatProvider->getMimeType( $defaultFormat );
 
 			// prefer the default
 			if ( $defaultMime != null ) {
@@ -309,14 +316,14 @@ class EntityDataRequestHandler {
 			}
 		}
 
-		$mimeTypes = $this->serializationService->getSupportedMimeTypes();
+		$mimeTypes = $this->entityDataFormatProvider->getSupportedMimeTypes();
 		$mimeTypes[] = 'text/html'; // HTML is handled by the normal page URL
 
 		$negotiator = new HttpAcceptNegotiator( $mimeTypes );
 		$format = $negotiator->getBestSupportedKey( $accept, null );
 
 		if ( $format === null ) {
-			$mimeTypes = implode( ', ', $this->serializationService->getSupportedMimeTypes() );
+			$mimeTypes = implode( ', ', $this->entityDataFormatProvider->getSupportedMimeTypes() );
 			throw new \HttpError( 406, wfMessage( 'wikibase-entitydata-not-acceptable' )->params( $mimeTypes ) );
 		}
 
