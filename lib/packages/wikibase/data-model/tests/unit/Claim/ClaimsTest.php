@@ -328,10 +328,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testIterator() {
 		$expected = array(
-			'TESTCLAIM1' => $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P42' ) ), 'testclaim1' ),
-			'TESTCLAIM2' => $this->makeStatement( new PropertySomeValueSnak( new PropertyId( 'P42' ) ), 'testclaim2' ),
-			'TESTCLAIM3' => $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P23' ) ), 'testclaim3' ),
-			'TESTCLAIM4' => $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ), 'testclaim4' ),
+			'GUID1' => $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P42' ) ), 'guid1' ),
+			'GUID2' => $this->makeStatement( new PropertySomeValueSnak( new PropertyId( 'P42' ) ), 'guid2' ),
+			'GUID3' => $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P23' ) ), 'guid3' ),
+			'GUID4' => $this->makeStatement( new PropertyNoValueSnak( new PropertyId( 'P9000' ) ), 'guid4' ),
 		);
 
 		$claims = new Claims( $expected );
