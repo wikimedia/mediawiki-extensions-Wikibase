@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
@@ -28,12 +28,12 @@ use Wikibase\TermIndex;
 class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 	/**
-	 * @var Term[]
+	 * @var TermIndexEntry[]
 	 */
 	protected $terms;
 
 	/**
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 */
 	public function __construct( array $terms ) {
 		$this->terms = $terms;
@@ -57,11 +57,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 			return array();
 		}
 
-		$templates = $this->makeTemplateTerms( $labels, Term::TYPE_LABEL );
+		$templates = $this->makeTemplateTerms( $labels, TermIndexEntry::TYPE_LABEL );
 
 		$conflicts = $this->getMatchingTerms(
 			$templates,
-			Term::TYPE_LABEL,
+			TermIndexEntry::TYPE_LABEL,
 			$entityType
 		);
 
@@ -98,11 +98,11 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 			return array();
 		}
 
-		$templates = $this->makeTemplateTerms( $descriptions, Term::TYPE_DESCRIPTION );
+		$templates = $this->makeTemplateTerms( $descriptions, TermIndexEntry::TYPE_DESCRIPTION );
 
 		$descriptionConflicts = $this->getMatchingTerms(
 			$templates,
-			Term::TYPE_DESCRIPTION,
+			TermIndexEntry::TYPE_DESCRIPTION,
 			$entityType
 		);
 
@@ -115,7 +115,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @param string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
 	 * @param string $type
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function makeTemplateTerms( $textsByLanguage, $type ) {
 		$terms = array();
@@ -124,7 +124,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 			$texts = (array)$texts;
 
 			foreach ( $texts as $text ) {
-				$terms[] = new Term( array(
+				$terms[] = new TermIndexEntry( array(
 					'termText' => $text,
 					'termLanguage' => $lang,
 					'termType' => $type,
@@ -194,7 +194,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getTermsOfEntity(
 		EntityId $entityId,
@@ -232,7 +232,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getTermsOfEntities(
 		array $entityIds,
@@ -270,12 +270,12 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 * language of the first Term in $terms. $The termType and $entityType parameters are used,
 	 * but the termType and entityType fields of the Terms in $terms are ignored.
 	 *
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
 	 * @param array $options
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	public function getMatchingTerms(
 		array $terms,
@@ -305,7 +305,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 * @param string|null $entityType
 	 * @param array $options
 	 *
@@ -343,9 +343,9 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * Rekeys a list of Terms based on EntityId and language.
 	 *
-	 * @param Term[] $conflicts
+	 * @param TermIndexEntry[] $conflicts
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function rekeyConflicts( array $conflicts ) {
 		$rekeyed = array();
@@ -363,10 +363,10 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * Intersects two lists of Terms based on EntityId and language.
 	 *
-	 * @param Term[] $base
-	 * @param Term[] $filter
+	 * @param TermIndexEntry[] $base
+	 * @param TermIndexEntry[] $filter
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function intersectConflicts( array $base, array $filter ) {
 		$base = $this->rekeyConflicts( $base );
@@ -376,13 +376,13 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
-	 * @param Term $term
-	 * @param Term[] $templates
+	 * @param TermIndexEntry $term
+	 * @param TermIndexEntry[] $templates
 	 * @param array $options
 	 *
 	 * @return bool
 	 */
-	private function termMatchesTemplates( Term $term, array $templates, array $options = array() ) {
+	private function termMatchesTemplates( TermIndexEntry $term, array $templates, array $options = array() ) {
 		foreach ( $templates as $template ) {
 			if ( $template->getType() !== null && $template->getType() != $term->getType() ) {
 				continue;

@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store\TermBuffer;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 
 /**
  * Hook handlers for triggering prefetching of labels.
@@ -64,7 +64,7 @@ class LabelPrefetchHookHandlers {
 
 		$idLookup = WikibaseRepo::getDefaultInstance()->getEntityIdLookup();
 		$titleFactory = new TitleFactory();
-		$termTypes = array( Term::TYPE_LABEL, Term::TYPE_DESCRIPTION );
+		$termTypes = array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION );
 
 		// NOTE: keep in sync with fallback chain construction in LinkBeginHookHandler::newFromGlobalState
 		$context = RequestContext::getMain();

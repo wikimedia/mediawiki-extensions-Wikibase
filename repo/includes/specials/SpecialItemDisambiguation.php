@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 
 /**
@@ -280,8 +280,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private function findLabelUsage( $languageCode, $label ) {
 		//@todo: optionally
 		$protoTerms = array(
-			new Term( array(
-				'termType' 		=> Term::TYPE_LABEL,
+			new TermIndexEntry( array(
+				'termType' 		=> TermIndexEntry::TYPE_LABEL,
 				'termLanguage' 	=> $languageCode,
 				'termText' 		=> $label
 			) ),

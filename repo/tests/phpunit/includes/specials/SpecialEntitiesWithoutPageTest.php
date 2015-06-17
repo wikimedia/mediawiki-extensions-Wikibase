@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\Repo\Specials\SpecialEntitiesWithoutPage;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutPage
@@ -38,7 +38,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
-			Term::TYPE_LABEL,
+			TermIndexEntry::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
 			$wikibaseRepo->getStore()->newEntityPerPage(),
 			$wikibaseRepo->getEntityFactory(),

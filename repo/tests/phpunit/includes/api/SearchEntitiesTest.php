@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
 use Wikibase\Api\SearchEntities;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -176,16 +176,16 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$id = $idParser->parse( $entity['id'] );
 
 			foreach ( $entity['labels'] as $row ) {
-				$termObjects[] = $this->newTermFromDataRow( $id, Term::TYPE_LABEL, $row );
+				$termObjects[] = $this->newTermFromDataRow( $id, TermIndexEntry::TYPE_LABEL, $row );
 			}
 
 			foreach ( $entity['descriptions'] as $row ) {
-				$termObjects[] = $this->newTermFromDataRow( $id, Term::TYPE_DESCRIPTION, $row );
+				$termObjects[] = $this->newTermFromDataRow( $id, TermIndexEntry::TYPE_DESCRIPTION, $row );
 			}
 
 			foreach ( $entity['aliases'] as $rows ) {
 				foreach ( $rows as $row ) {
-					$termObjects[] = $this->newTermFromDataRow( $id, Term::TYPE_ALIAS, $row );
+					$termObjects[] = $this->newTermFromDataRow( $id, TermIndexEntry::TYPE_ALIAS, $row );
 				}
 			}
 		}
@@ -196,7 +196,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function newTermFromDataRow( EntityId $entityId, $type, $row ) {
-		return new Term( array(
+		return new TermIndexEntry( array(
 			'termType' => $type,
 			'termLanguage' => $row['language'],
 			'termText' => $row['value'],

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\Validators\UniquenessViolation;
 
 /**
@@ -25,24 +25,24 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	private function getWorld() {
 		$world = array();
 
-		$world[] = new Term( array(
-			'termType' => Term::TYPE_LABEL,
+		$world[] = new TermIndexEntry( array(
+			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => 42,
 			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item label',
 		) );
 
-		$world[] = new Term( array(
-			'termType' => Term::TYPE_DESCRIPTION,
+		$world[] = new TermIndexEntry( array(
+			'termType' => TermIndexEntry::TYPE_DESCRIPTION,
 			'termLanguage' => 'en',
 			'entityId' => 42,
 			'entityType' => Item::ENTITY_TYPE,
 			'termText' => 'item description',
 		) );
 
-		$world[] = new Term( array(
-			'termType' => Term::TYPE_LABEL,
+		$world[] = new TermIndexEntry( array(
+			'termType' => TermIndexEntry::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => 17,
 			'entityType' => Property::ENTITY_TYPE,

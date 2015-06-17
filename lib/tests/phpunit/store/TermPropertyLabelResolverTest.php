@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyLabelResolver;
-use Wikibase\Term;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermPropertyLabelResolver;
 
 /**
@@ -24,7 +24,7 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $lang
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 *
 	 * @return PropertyLabelResolver
 	 */
@@ -58,28 +58,28 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 	public function provideGetPropertyIdsForLabels() {
 		$terms = array(
 			// de
-			new Term( array(
+			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => 1,
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Eins',
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => 2,
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Zwei',
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => 3,
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Drei',
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'de',
 				'entityId' => 4,
@@ -88,28 +88,28 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 			) ),
 
 			// en
-			new Term( array(
+			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'entityId' => 1,
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'One',
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'entityId' => 2,
 				'entityType' => Item::ENTITY_TYPE, // not a property
 				'termText' => 'Two',
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'termType' => 'alias', // not a label
 				'termLanguage' => 'en',
 				'entityId' => 3,
 				'entityType' => Property::ENTITY_TYPE,
 				'termText' => 'Three',
 			) ),
-			new Term( array(
+			new TermIndexEntry( array(
 				'termType' => 'description', // not a label
 				'termLanguage' => 'en',
 				'entityId' => 4,

@@ -100,7 +100,7 @@ class LabelDescriptionDuplicateDetector {
 	/**
 	 * @param string $message Plain text message (English)
 	 * @param string $errorCode Error code (for later localization)
-	 * @param Term[] $terms The conflicting terms.
+	 * @param TermIndexEntry[] $terms The conflicting terms.
 	 *
 	 * @return UniquenessViolation[]
 	 */
@@ -124,15 +124,15 @@ class LabelDescriptionDuplicateDetector {
 	}
 
 	/**
-	 * @param Term[] $terms
+	 * @param TermIndexEntry[] $terms
 	 * @param EntityId $entityId
 	 *
-	 * @return Term[]
+	 * @return TermIndexEntry[]
 	 */
 	private function filterSelfConflicts( array $terms, EntityId $entityId ) {
 		return array_filter(
 			$terms,
-			function ( Term $term ) use ( $entityId ) {
+			function ( TermIndexEntry $term ) use ( $entityId ) {
 				return !$entityId->equals( $term->getEntityId() );
 			}
 		);
