@@ -49,7 +49,14 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	 * @return string[]
 	 */
 	public function getOtherProjectsSiteIds( array $siteLinkGroups ) {
-		$currentGroupId = $this->getLocalSite()->getGroup();
+		$localSite = $this->getLocalSite();
+
+		if ( $localSite === null ) {
+			wfWarn( 'Site not found for ' . $this->localSiteId );
+			return array();
+		}
+
+		$currentGroupId = $localSite->getGroup();
 		$otherProjectsSiteIds = array();
 
 		$this->expandSpecialGroups( $siteLinkGroups );
@@ -58,7 +65,7 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 				continue;
 			}
 
-			$siteToAdd = $this->getSiteForGroup( $groupId );
+			$siteToAdd = $this->getSiteForGroup( $groupId, $localSite->getLanguageCode() );
 			if ( $siteToAdd ) {
 				$otherProjectsSiteIds[] = $siteToAdd->getGlobalId();
 			}
@@ -74,16 +81,16 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	 * as the current site is returned
 	 *
 	 * @param string $groupId
+	 * @param string $currentLanguageCode
 	 *
 	 * @return Site|null
 	 */
-	private function getSiteForGroup( $groupId ) {
+	private function getSiteForGroup( $groupId, $currentLanguageCode ) {
 		$siteGroupList = $this->siteStore->getSites()->getGroup( $groupId );
 		if ( $siteGroupList->count() === 1 ) {
 			return $siteGroupList[0];
 		}
 
-		$currentLanguageCode = $this->getLocalSite()->getLanguageCode();
 		/** @var Site $site */
 		foreach ( $siteGroupList as $site ) {
 			if ( $site->getLanguageCode() === $currentLanguageCode ) {
