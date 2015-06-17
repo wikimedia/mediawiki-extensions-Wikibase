@@ -80,13 +80,13 @@ class ValidatorBuilders {
 		$types = array(
 			'commonsMedia'      => array( $this, 'buildMediaValidators' ),
 			'globe-coordinate'  => array( $this, 'buildCoordinateValidators' ),
+			'monolingualtext'   => array( $this, 'buildMonolingualTextValidators' ),
 			'quantity'          => array( $this, 'buildQuantityValidators' ),
 			'string'            => array( $this, 'buildStringValidators' ),
 			'time'              => array( $this, 'buildTimeValidators' ),
 			'url'               => array( $this, 'buildUrlValidators' ),
 			'wikibase-item'     => array( $this, 'buildItemValidators' ),
 			'wikibase-property' => array( $this, 'buildPropertyValidators' ),
-			'monolingualtext'   => array( $this, 'buildMonolingualTextValidators' ),
 		);
 
 		$experimental = array(
@@ -104,24 +104,27 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	public function buildItemValidators() {
-		$validators = array();
-
-		//NOTE: The DataValue in question is going to be an instance of EntityId!
-		$validators[] = new TypeValidator( 'Wikibase\DataModel\Entity\EntityIdValue' );
-		$validators[] = new EntityExistsValidator( $this->entityLookup, Item::ENTITY_TYPE );
-
-		return $validators;
+		return $this->getEntityValidators( Item::ENTITY_TYPE );
 	}
 
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildPropertyValidators( ) {
+	public function buildPropertyValidators() {
+		return $this->getEntityValidators( Property::ENTITY_TYPE );
+	}
+
+	/**
+	 * @param string $entityType
+	 *
+	 * @return ValueValidator[]
+	 */
+	private function getEntityValidators( $entityType ) {
 		$validators = array();
 
 		//NOTE: The DataValue in question is going to be an instance of EntityId!
 		$validators[] = new TypeValidator( 'Wikibase\DataModel\Entity\EntityIdValue' );
-		$validators[] = new EntityExistsValidator( $this->entityLookup, Property::ENTITY_TYPE );
+		$validators[] = new EntityExistsValidator( $this->entityLookup, $entityType );
 
 		return $validators;
 	}
@@ -294,7 +297,7 @@ class ValidatorBuilders {
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildUrlValidators( ) {
+	public function buildUrlValidators() {
 		$urlValidator = $this->getUrlValidator( $this->urlSchemes );
 
 		$topValidator = new DataValueValidator(
@@ -307,7 +310,7 @@ class ValidatorBuilders {
 	/**
 	 * @return ValueValidator[]
 	 */
-	public function buildQuantityValidators( ) {
+	public function buildQuantityValidators() {
 		$validators = array();
 		$validators[] = new TypeValidator( 'array' );
 

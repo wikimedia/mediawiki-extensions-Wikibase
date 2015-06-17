@@ -11,11 +11,14 @@ use DataTypes\DataType;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class WikibaseDataTypeBuilders {
 
 	/**
-	 * @return array DataType builder specs
+	 * @see DataTypeFactory::buildType
+	 *
+	 * @return callable[] DataType builder specs
 	 */
 	public function getDataTypeBuilders() {
 		//XXX: Using callbacks here is somewhat pointless, we could just as well have a
@@ -40,15 +43,15 @@ class WikibaseDataTypeBuilders {
 
 		// Update ValidatorBuilders in repo if you change this
 		$types = array(
-			'commonsMedia'      => array( $this, 'buildMediaType' ),
+			'commonsMedia'      => array( $this, 'buildStringType' ),
 			'globe-coordinate'  => array( $this, 'buildCoordinateType' ),
+			'monolingualtext'   => array( $this, 'buildMonolingualTextType' ),
 			'quantity'          => array( $this, 'buildQuantityType' ),
 			'string'            => array( $this, 'buildStringType' ),
 			'time'              => array( $this, 'buildTimeType' ),
-			'url'               => array( $this, 'buildUrlType' ),
-			'wikibase-item'     => array( $this, 'buildItemType' ),
-			'wikibase-property' => array( $this, 'buildPropertyType' ),
-			'monolingualtext'   => array( $this, 'buildMonolingualTextType' ),
+			'url'               => array( $this, 'buildStringType' ),
+			'wikibase-item'     => array( $this, 'buildWikibaseEntityIdType' ),
+			'wikibase-property' => array( $this, 'buildWikibaseEntityIdType' ),
 		);
 
 		$experimental = array(
@@ -63,35 +66,16 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, typically 'wikibase-item'
+	 * @param string $id Data type ID, typically 'wikibase-item', or 'wikibase-property'
 	 *
 	 * @return DataType
 	 */
-	public function buildItemType( $id ) {
+	public function buildWikibaseEntityIdType( $id ) {
 		return new DataType( $id, 'wikibase-entityid', array() );
 	}
 
 	/**
-	 * @param string $id Data type ID, typically 'wikibase-property'
-	 *
-	 * @return DataType
-	 */
-	public function buildPropertyType( $id ) {
-		return new DataType( $id, 'wikibase-entityid', array() );
-	}
-
-	/**
-	 * @param string $id Data type ID, typically 'commonsMedia'
-	 *
-	 * @return DataType
-	 */
-	public function buildMediaType( $id ) {
-
-		return new DataType( $id, 'string', array() );
-	}
-
-	/**
-	 * @param string $id Data type ID, typically 'string'
+	 * @param string $id Data type ID, typically 'string', 'commonsMedia' or 'url'
 	 *
 	 * @return DataType
 	 */
@@ -124,15 +108,6 @@ class WikibaseDataTypeBuilders {
 	 */
 	public function buildCoordinateType( $id ) {
 		return new DataType( $id, 'globecoordinate', array() );
-	}
-
-	/**
-	 * @param string $id Data type ID, typically 'url'
-	 *
-	 * @return DataType
-	 */
-	public function buildUrlType( $id ) {
-		return new DataType( $id, 'string', array() );
 	}
 
 	/**
