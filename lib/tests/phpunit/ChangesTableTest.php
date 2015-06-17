@@ -6,10 +6,10 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Wikibase\ChangesTable;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangesTable
@@ -65,9 +65,9 @@ class ChangesTableTest extends \MediaWikiTestCase {
 		// even if they contain objects as values.
 		$diff2 = new ItemDiff(
 			array(
-				'claim' => new Diff(
+				'statement' => new Diff(
 					array(
-						new DiffOpAdd( new Claim( new PropertyNoValueSnak( 77 ) ) ),
+						new DiffOpAdd( new Statement( new PropertyNoValueSnak( 77 ) ) ),
 					)
 				)
 			)

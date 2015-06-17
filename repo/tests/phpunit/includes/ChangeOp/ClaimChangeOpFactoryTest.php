@@ -45,9 +45,9 @@ class ClaimChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewSetClaimOp() {
 		$snak = new PropertyNoValueSnak( new PropertyId( 'P7' ) );
-		$claim = new Claim( $snak );
+		$statement = new Statement( $snak );
 
-		$op = $this->newChangeOpFactory()->newSetClaimOp( $claim );
+		$op = $this->newChangeOpFactory()->newSetClaimOp( $statement );
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
 	}
 
