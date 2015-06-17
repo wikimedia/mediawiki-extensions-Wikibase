@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_f109db2f",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T21:23:27Z",
+      "side": 1,
+      "message": "This is about 40% faster:\n\n if ( strncasecmp( $uri, \u0027https://\u0027, 8 ) \u003d\u003d\u003d 0 ) {",
+      "revId": "020f1beb686707c65d05ea1c2326a64a893a3b96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b16033cd",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T21:23:27Z",
+      "side": 1,
+      "message": "This is not faster but does not manipulate the casing:\n\n return substr_replace( $uri, \u0027\u0027, 4, 1 );",
+      "revId": "020f1beb686707c65d05ea1c2326a64a893a3b96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
