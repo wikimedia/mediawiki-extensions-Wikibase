@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_aace835d",
+        "filename": "lib/includes/formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-17T12:34:47Z",
+      "side": 1,
+      "message": "I do not see anything to do here, see my previous reply. The unit id should be shown here as-is.",
+      "parentUuid": "8ec42329_80d84980",
+      "revId": "a559fdabde2f108b2231bb8cae764b5a5ad3fd58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_40fb41de",
         "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-17T09:21:13Z",
       "side": 1,
       "message": "Wait, what? Properties are resolved? Why? I can\u0027t think of a reason why properties should be allowed as units. This is wrong.",
+      "revId": "a559fdabde2f108b2231bb8cae764b5a5ad3fd58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4a34bf46",
+        "filename": "lib/tests/phpunit/formatters/EntityLabelUnitFormatterTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-17T12:34:47Z",
+      "side": 1,
+      "message": "The formatter does not currently know or care about entity types. Do you want to hard code \"items only\" there?\n\nWe allow *any* URI. For URIs we understand, we try to get a label, and show it. \nWith the prefix based parser, I see no good way to exclude properties without hardcoding stuff. With a regex based id parser, we could have simply matched (Q\\d+), that would have fixed it.",
+      "parentUuid": "8ec42329_40fb41de",
       "revId": "a559fdabde2f108b2231bb8cae764b5a5ad3fd58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
