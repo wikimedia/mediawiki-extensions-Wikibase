@@ -4,7 +4,7 @@ namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\StatementListProvider;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**

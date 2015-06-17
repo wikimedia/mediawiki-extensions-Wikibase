@@ -7,7 +7,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\StatementListProvider;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Summary;
 use Wikibase\Validators\SnakValidator;
