@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_2055d5c5",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T09:31:27Z",
+      "side": 1,
+      "message": "Backtracking. Performance. The pattern .*? is almost always a bad idea. Also: How is a string with multiple # characters supposed to be split?",
+      "parentUuid": "8ec42329_aedc61e6",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_fd0b052c",
         "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
         "patchSetId": 6
@@ -187,6 +205,24 @@
       "side": 1,
       "message": "That\u0027s not under test here. The regex passed to the constructor is *invalid* because it doesn\u0027t define a capture group. The actual string parsed is irrelevant.",
       "parentUuid": "8ec42329_bd057d18",
+      "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6002fdbf",
+        "filename": "lib/tests/phpunit/parsers/ExtractingEntityIdParserTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T09:31:27Z",
+      "side": 1,
+      "message": "We discussed this. It\u0027s just confusing to pass a string that\u0027s obviously an URI into a regex that obviously can\u0027t match URIs.",
+      "parentUuid": "8ec42329_0e8815eb",
       "revId": "725eb133890e828c1b5a170be0d4c06ca759db88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
