@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_e0d26d2b",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T09:59:22Z",
+      "side": 1,
+      "message": "Technically that\u0027s exactly what the hash should be used for. But it\u0027s not nice to show these long SHA1 strings to the user. But I do not have a good idea. Substringing is not nice. I think we need to stick with this solution for now.",
+      "parentUuid": "8ec42329_b1c28186",
+      "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_46328ff0",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "What would be the usecase? Why should a method rendering a reference care what the statement of that reference is about?",
       "parentUuid": "8ec42329_46328ff0",
+      "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_20add580",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T09:59:22Z",
+      "side": 1,
+      "message": "I don\u0027t know. Let the users that will create new renderers decide.",
+      "parentUuid": "8ec42329_d1bdcdfe",
       "revId": "b52a0823b74fa75b098eab645cb95d81d80b8932",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
