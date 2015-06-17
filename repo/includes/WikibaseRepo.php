@@ -612,18 +612,8 @@ class WikibaseRepo {
 			$wgContLang,
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			new LanguageNameLookup(),
-			$this->getLocalEntityUriParser(),
+			$this->settings->getSetting( 'conceptBaseUri' ),
 			$this->getEntityTitleLookup()
-		);
-	}
-
-	/**
-	 * @return EntityIdParser
-	 */
-	private function getLocalEntityUriParser() {
-		return new SuffixEntityIdParser(
-			$this->getSettings()->getSetting( 'conceptBaseUri' ),
-			$this->getEntityIdParser()
 		);
 	}
 
@@ -1112,6 +1102,10 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' )
 		);
+		$idParser = new SuffixEntityIdParser(
+			$this->settings->getSetting( 'conceptBaseUri' ),
+			$this->getEntityIdParser()
+		);
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
@@ -1123,7 +1117,7 @@ class WikibaseRepo {
 			$this->getEntityContentFactory(),
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory(),
-			new ReferencedEntitiesFinder( $this->getLocalEntityUriParser() ),
+			new ReferencedEntitiesFinder( $idParser ),
 			$templateFactory,
 			$entityDataFormatProvider
 		);

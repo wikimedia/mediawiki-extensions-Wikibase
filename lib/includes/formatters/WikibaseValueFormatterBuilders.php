@@ -39,11 +39,6 @@ class WikibaseValueFormatterBuilders {
 	private $labelDescriptionLookupFactory;
 
 	/**
-	 * @var EntityIdParser
-	 */
-	private $repoUriParser;
-
-	/**
 	 * @var EntityTitleLookup|null
 	 */
 	private $entityTitleLookup;
@@ -52,6 +47,11 @@ class WikibaseValueFormatterBuilders {
 	 * @var LanguageNameLookup
 	 */
 	private $languageNameLookup;
+
+	/**
+	 * @var string
+	 */
+	private $conceptBaseUri;
 
 	/**
 	 * Unit URIs that represent "unitless" or "one".
@@ -88,7 +88,6 @@ class WikibaseValueFormatterBuilders {
 	 * @var callable[][]
 	 */
 	protected $valueFormatterSpecs = array(
-
 		// formatters to use for plain text output
 		SnakFormatter::FORMAT_PLAIN => array(
 			'VT:string' => 'ValueFormatters\StringFormatter',
@@ -137,21 +136,21 @@ class WikibaseValueFormatterBuilders {
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
-	 * @param EntityIdParser $repoUriParser
+	 * @param string $conceptBaseUri
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
 		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
-		EntityIdParser $repoUriParser,
+		$conceptBaseUri = '',
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->conceptBaseUri = $conceptBaseUri;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->repoUriParser = $repoUriParser;
 	}
 
 	/**
@@ -600,7 +599,7 @@ class WikibaseValueFormatterBuilders {
 	private function getQuantityUnitFormatter( FormatterOptions $options ) {
 		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 
-		return new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup, $this->unitOneUris );
+		return new ItemLabelUnitFormatter( $labelDescriptionLookup, $this->conceptBaseUri, $this->unitOneUris );
 	}
 
 	/**
@@ -615,7 +614,7 @@ class WikibaseValueFormatterBuilders {
 		//TODO: use a builder for this DecimalFormatter
 		$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
 		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-		$unitFormatter = new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup );
+		$unitFormatter = new ItemLabelUnitFormatter( $labelDescriptionLookup, $this->conceptBaseUri );
 		return new QuantityFormatter( $decimalFormatter, $unitFormatter, $options );
 	}
 
