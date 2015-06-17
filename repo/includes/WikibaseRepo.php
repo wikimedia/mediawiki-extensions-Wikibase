@@ -22,6 +22,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\DataValue\ValuesFinder;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -312,7 +313,7 @@ class WikibaseRepo {
 			$this->getDefaultLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup(),
-			$this->getLocalEntityUriParser(),
+			$this->getLocalItemUriParser(),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -747,10 +748,10 @@ class WikibaseRepo {
 	/**
 	 * @return EntityIdParser
 	 */
-	private function getLocalEntityUriParser() {
+	private function getLocalItemUriParser() {
 		return new SuffixEntityIdParser(
-			$this->getSettings()->getSetting( 'conceptBaseUri' ),
-			$this->getEntityIdParser()
+			$this->getVocabularyBaseUri(),
+			new ItemIdParser()
 		);
 	}
 
@@ -1342,7 +1343,7 @@ class WikibaseRepo {
 			$this->getEntityContentFactory(),
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory(),
-			new ReferencedEntitiesFinder( $this->getLocalEntityUriParser() ),
+			new ReferencedEntitiesFinder( $this->getLocalItemUriParser() ),
 			$templateFactory,
 			$entityDataFormatProvider
 		);
