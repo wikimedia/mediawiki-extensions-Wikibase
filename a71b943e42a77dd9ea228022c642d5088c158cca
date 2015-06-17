@@ -34,6 +34,24 @@
       "revId": "a71b943e42a77dd9ea228022c642d5088c158cca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_bf9a3f73",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T20:23:02Z",
+      "side": 1,
+      "message": "What I meant is that the class uses \"Creation\" but the method \"Creator\".\n\nGenerally, \"Creation\" is a very, very rare term in class names. \"Creator\" is a bit more common (also used in other extensions).",
+      "parentUuid": "8ec42329_0441c65e",
+      "revId": "a71b943e42a77dd9ea228022c642d5088c158cca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
