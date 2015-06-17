@@ -2,9 +2,12 @@
 
 namespace Wikibase\Tests;
 
-use ImportStringSource;
 use ConfigFactory;
+use DerivativeContext;
 use Exception;
+use ImportStringSource;
+use OutputPage;
+use RequestContext;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
 use WikiImporter;
@@ -163,4 +166,35 @@ XML
 		$this->assertTrue( true ); // make PHPUnit happy
 	}
 
+	public function testOnOutputPageParserOutput() {
+		$altLinks = array( array( 'a' => 'b' ), array( 'c', 'd' ) );
+
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$out = new OutputPage( $context );
+
+		$parserOutput = $this->getMock( 'ParserOutput' );
+		$parserOutput->expects( $this->exactly( 3 ) )
+			->method( 'getExtensionData' )
+			->will( $this->returnCallback( function ( $key ) use ( $altLinks ) {
+				if ( $key === 'wikibase-alternate-links' ) {
+					return $altLinks;
+				} else {
+					return $key;
+				}
+			} ) );
+
+		RepoHooks::onOutputPageParserOutput( $out, $parserOutput );
+
+		$this->assertSame(
+			'wikibase-view-chunks',
+			$out->getProperty( 'wikibase-view-chunks' )
+		);
+
+		$this->assertSame(
+			'wikibase-titletext',
+			$out->getProperty( 'wikibase-titletext' )
+		);
+
+		$this->assertSame( $altLinks, $out->getLinkTags() );
+	}
 }

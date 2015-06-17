@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Language;
 use MediaWikiTestCase;
 use ParserOptions;
+use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -17,6 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\ValuesFinder;
 use Wikibase\View\Template\TemplateFactory;
@@ -89,6 +91,26 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$missingOptions,
 			'Missing cache-split flags: ' . join( '|', $missingOptions ) . '. Options: ' . join( '|', $actualOptions )
 		);
+
+		$jsonHref = SpecialPage::getTitleFor( 'EntityData', $item->getId()->getSerialization() . '.json' )->getCanonicalURL();
+		$ntHref = SpecialPage::getTitleFor( 'EntityData', $item->getId()->getSerialization() . '.nt' )->getCanonicalURL();
+
+		$this->assertEquals(
+			array(
+				array(
+					'rel' => 'alternate',
+					'href' => $jsonHref,
+					'type' => 'application/json'
+				),
+				array(
+					'rel' => 'alternate',
+					'href' => $ntHref,
+					'type' => 'application/n-triples'
+				)
+			),
+			$parserOutput->getExtensionData( 'wikibase-alternate-links' ),
+			'alternate links (extension data)'
+		);
 	}
 
 	public function testTitleText_ItemHasNolabel() {
@@ -112,6 +134,10 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	private function newEntityParserOutputGenerator() {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$referencedEntitiesFinder = new ReferencedEntitiesFinder( new BasicEntityIdParser() );
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+
+		$formats = array( 'json', 'ntriples' );
+		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		return new EntityParserOutputGenerator(
 			$this->getEntityViewFactory(),
@@ -122,7 +148,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->newLanguageFallbackChain(),
 			'en',
 			$referencedEntitiesFinder,
-			$templateFactory
+			$templateFactory,
+			$entityDataFormatProvider
 		);
 	}
 

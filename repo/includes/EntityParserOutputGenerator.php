@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use LinkBatch;
 use ParserOptions;
 use ParserOutput;
+use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -20,6 +21,7 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
 use Wikibase\View\EntityViewFactory;
@@ -85,6 +87,11 @@ class EntityParserOutputGenerator {
 	 */
 	private $templateFactory;
 
+	/**
+	 * @var EntityDataFormatProvider
+	 */
+	private $entityDataFormatProvider;
+
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
@@ -94,7 +101,8 @@ class EntityParserOutputGenerator {
 		LanguageFallbackChain $languageFallbackChain,
 		$languageCode,
 		ReferencedEntitiesFinder $referencedEntitiesFinder,
-		TemplateFactory $templateFactory
+		TemplateFactory $templateFactory,
+		EntityDataFormatProvider $entityDataFormatProvider
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
@@ -105,6 +113,7 @@ class EntityParserOutputGenerator {
 		$this->languageCode = $languageCode;
 		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
 		$this->templateFactory = $templateFactory;
+		$this->entityDataFormatProvider = $entityDataFormatProvider;
 	}
 
 	/**
@@ -190,6 +199,8 @@ class EntityParserOutputGenerator {
 		//	 So, for now, we leave it to the caller to override the display title, if desired.
 		// set the display title
 		//$parserOutput->setTitleText( $entity>getLabel( $langCode ) );
+
+		$this->addAlternateLinks( $parserOutput, $entity->getId() );
 
 		return $parserOutput;
 	}
@@ -397,4 +408,33 @@ class EntityParserOutputGenerator {
 		$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
 	}
 
+	/**
+	 * Add alternate links as extension data.
+	 * OutputPageBeforeHTMLHookHandler will add these to the OutputPage.
+	 *
+	 * @param ParserOutput $parserOutput
+	 * @param EntityId $entityId
+	 */
+	private function addAlternateLinks( ParserOutput $parserOutput, EntityId $entityId ) {
+		$entityDataFormatProvider = $this->entityDataFormatProvider;
+		$subPagePrefix = $entityId->getSerialization() . '.';
+
+		$links = array();
+
+		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
+			$ext = $entityDataFormatProvider->getExtension( $format );
+
+			if ( $ext !== null ) {
+				$entityDataTitle = SpecialPage::getTitleFor( 'EntityData', $subPagePrefix . $ext );
+
+				$links[] = array(
+					'rel' => 'alternate',
+					'href' => $entityDataTitle->getCanonicalURL(),
+					'type' => $entityDataFormatProvider->getMimeType( $format )
+				);
+			}
+		}
+
+		$parserOutput->setExtensionData( 'wikibase-alternate-links', $links );
+	}
 }
