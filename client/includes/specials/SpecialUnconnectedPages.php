@@ -20,6 +20,11 @@ use Wikibase\NamespaceChecker;
 class SpecialUnconnectedPages extends QueryPage {
 
 	/**
+	 * @var int maximum supported offset
+	 */
+	const MAX_OFFSET = 10000;
+
+	/**
 	 * Title object build from the $startPageName parameter
 	 *
 	 * @var Title|null
@@ -156,6 +161,22 @@ class SpecialUnconnectedPages extends QueryPage {
 
 	function sortDescending() {
 		return false;
+	}
+
+	function reallyDoQuery( $limit, $offset = false ) {
+		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
+			$offset = self::MAX_OFFSET;
+		}
+
+		return parent::reallyDoQuery( $limit, $offset );
+	}
+
+	function fetchFromCache( $limit, $offset = false ) {
+		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
+			$offset = self::MAX_OFFSET;
+		}
+
+		return parent::fetchFromCache( $limit, $offset );
 	}
 
 	function formatResult( $skin, $result ) {
