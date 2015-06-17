@@ -5,8 +5,10 @@ namespace Wikibase\Client\Tests;
 use Language;
 use MediaWikiSite;
 use SiteStore;
+use Wikibase\Client\ParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\LangLinkHandler;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockSiteStore;
 
