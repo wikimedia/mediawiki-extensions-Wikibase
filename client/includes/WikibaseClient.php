@@ -31,6 +31,7 @@ use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -204,7 +205,7 @@ final class WikibaseClient {
 			$this->contentLanguage,
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup(),
-			$this->getRepoEntityUriParser()
+			$this->getRepoItemUriParser()
 		);
 	}
 
@@ -627,12 +628,12 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return SuffixEntityIdParser
+	 * @return EntityIdParser
 	 */
-	private function getRepoEntityUriParser() {
+	private function getRepoItemUriParser() {
 		return new SuffixEntityIdParser(
 			$this->getSettings()->getSetting( 'repoConceptBaseUri' ),
-			$this->getEntityIdParser()
+			new ItemIdParser()
 		);
 	}
 
