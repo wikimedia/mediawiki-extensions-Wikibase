@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_60343da8",
+        "filename": "lib/includes/parsers/SuffixEntityIdParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T09:27:40Z",
+      "side": 1,
+      "message": "I wonder why this is: My eye immediately catches the wrong order of these two lines compared to the order of constructor arguments. Don\u0027t you see this?\n\nNot the reason for the -1 and no need to change this, just asking.",
+      "revId": "4279e859284fc5d792701f1264631b5cab7d4fb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_203e3588",
+        "filename": "lib/includes/parsers/SuffixEntityIdParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T09:27:40Z",
+      "side": 1,
+      "message": "strncmp",
+      "revId": "4279e859284fc5d792701f1264631b5cab7d4fb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a0c22586",
+        "filename": "lib/tests/phpunit/parsers/SuffixEntityIdParserTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T09:27:40Z",
+      "side": 1,
+      "message": "It\u0027s not a regex any more, isn\u0027t it? Same in the code below.",
+      "revId": "4279e859284fc5d792701f1264631b5cab7d4fb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
