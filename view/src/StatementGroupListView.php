@@ -2,13 +2,12 @@
 
 namespace Wikibase\View;
 
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * Generates HTML to display claims.
+ * Generates HTML to display statements.
  *
  * @since 0.5
  *
@@ -57,28 +56,27 @@ class StatementGroupListView {
 	}
 
 	/**
-	 * Builds and returns the HTML representing a WikibaseEntity's claims.
+	 * Builds and returns the HTML representing a WikibaseEntity's statements.
 	 *
 	 * @since 0.5
 	 *
-	 * @param Claim[] $claims the claims to render
-	 * @return string
+	 * @param Statement[] $statements
+	 * @return string HTML
 	 */
-	public function getHtml( array $claims ) {
-		// aggregate claims by properties
-		$claimsByProperty = $this->groupClaimsByProperties( $claims );
+	public function getHtml( array $statements ) {
+		$statementsByProperty = $this->groupStatementsByProperties( $statements );
 
-		$claimsHtml = '';
-		foreach ( $claimsByProperty as $claims ) {
-			$claimsHtml .= $this->getHtmlForStatementGroupView( $claims );
+		$statementsHtml = '';
+		foreach ( $statementsByProperty as $statements ) {
+			$statementsHtml .= $this->getHtmlForStatementGroupView( $statements );
 		}
 
 		$html = $this->templateFactory->render(
 			'wikibase-statementgrouplistview',
-			$this->templateFactory->render( 'wikibase-listview', $claimsHtml )
+			$this->templateFactory->render( 'wikibase-listview', $statementsHtml )
 		);
 
-		// TODO: Add link to SpecialPage that allows adding a new claim.
+		// TODO: Add link to SpecialPage that allows adding a new statement.
 		$sectionHeading = $this->getHtmlForSectionHeading( 'wikibase-statements' );
 
 		return $sectionHeading . $html;
@@ -103,51 +101,52 @@ class StatementGroupListView {
 	}
 
 	/**
-	 * Groups claims by their properties.
+	 * @param Statement[] $statements
 	 *
-	 * @param Claim[] $claims
-	 * @return Claim[][]
+	 * @return array[]
 	 */
-	private function groupClaimsByProperties( array $claims ) {
-		$claimsByProperty = array();
-		/** @var Claim $claim */
-		foreach ( $claims as $claim ) {
-			$propertyId = $claim->getMainSnak()->getPropertyId();
-			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
+	private function groupStatementsByProperties( array $statements ) {
+		$byProperty = array();
+
+		foreach ( $statements as $statement ) {
+			$propertyId = $statement->getMainSnak()->getPropertyId();
+			$byProperty[$propertyId->getSerialization()][] = $statement;
 		}
-		return $claimsByProperty;
+
+		return $byProperty;
 	}
 
 	/**
-	 * @param Claim[] $claims
-	 * @return string
+	 * @param Statement[] $statements
+	 *
+	 * @return string HTML
 	 */
-	private function getHtmlForStatementGroupView( array $claims ) {
-		$propertyId = $claims[0]->getMainSnak()->getPropertyId();
+	private function getHtmlForStatementGroupView( array $statements ) {
+		$propertyId = $statements[0]->getMainSnak()->getPropertyId();
 		$addStatementHtml = $this->editSectionGenerator->getAddStatementToGroupSection( $propertyId );
 
 		return $this->templateFactory->render(
 			'wikibase-statementgroupview',
 			$this->propertyIdFormatter->formatEntityId( $propertyId ),
-			$this->getHtmlForStatementListView( $claims, $addStatementHtml ),
+			$this->getHtmlForStatementListView( $statements, $addStatementHtml ),
 			$propertyId->getSerialization()
 		);
 	}
 
 	/**
-	 * @param Claim[] $claims
+	 * @param Statement[] $statements
 	 * @param string $addStatementHtml
-	 * @return string
+	 *
+	 * @return string HTML
 	 */
-	private function getHtmlForStatementListView( array $claims, $addStatementHtml ) {
+	private function getHtmlForStatementListView( array $statements, $addStatementHtml ) {
 		$statementViewsHtml = '';
 
-
-		foreach( $claims as $claim ) {
+		foreach( $statements as $statement ) {
 			$statementViewsHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
-				$claim,
+				$statement,
 				$this->editSectionGenerator->getStatementEditSection(
-					$claim instanceof Statement ? $claim : new Statement( $claim )
+					$statement instanceof Statement ? $statement : new Statement( $statement )
 				)
 			);
 		}

@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\View\ClaimHtmlGenerator;
 use Wikibase\View\StatementGroupListView;
@@ -47,17 +48,17 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 */
 	public function testGetHtml() {
 		$propertyId = new PropertyId( 'P77' );
-		$claims = $this->makeClaims( $propertyId );
+		$statements = $this->makeStatements( $propertyId );
 
 		$propertyIdFormatter = $this->getEntityIdFormatter();
 		$link = $this->getLinkForId( $propertyId );
 
 		$statementGroupListView = $this->newStatementGroupListView( $propertyIdFormatter );
 
-		$html = $statementGroupListView->getHtml( $claims );
+		$html = $statementGroupListView->getHtml( $statements );
 
-		foreach ( $claims as $claim ) {
-			$this->assertContains( $claim->getGuid(), $html );
+		foreach ( $statements as $statement ) {
+			$this->assertContains( $statement->getGuid(), $html );
 		}
 
 		$this->assertContains( $link, $html );
@@ -66,29 +67,29 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	/**
 	 * @param PropertyId $propertyId
 	 *
-	 * @return Claim[]
+	 * @return Statement[]
 	 */
-	private function makeClaims( PropertyId $propertyId ) {
+	private function makeStatements( PropertyId $propertyId ) {
 		return array(
-			$this->makeClaim( new PropertyNoValueSnak(
+			$this->makeStatement( new PropertyNoValueSnak(
 				$propertyId
 			) ),
-			$this->makeClaim( new PropertyValueSnak(
+			$this->makeStatement( new PropertyValueSnak(
 				$propertyId,
 				new EntityIdValue( new ItemId( 'Q22' ) )
 			) ),
-			$this->makeClaim( new PropertyValueSnak(
+			$this->makeStatement( new PropertyValueSnak(
 				$propertyId,
 				new StringValue( 'test' )
 			) ),
-			$this->makeClaim( new PropertyValueSnak(
+			$this->makeStatement( new PropertyValueSnak(
 				$propertyId,
 				new StringValue( 'File:Image.jpg' )
 			) ),
-			$this->makeClaim( new PropertySomeValueSnak(
+			$this->makeStatement( new PropertySomeValueSnak(
 				$propertyId
 			) ),
-			$this->makeClaim( new PropertyValueSnak(
+			$this->makeStatement( new PropertyValueSnak(
 				$propertyId,
 				new EntityIdValue( new ItemId( 'Q555' ) )
 			) ),
@@ -99,9 +100,9 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 * @param Snak $mainSnak
 	 * @param string|null $guid
 	 *
-	 * @return Claim
+	 * @return Statement
 	 */
-	private function makeClaim( Snak $mainSnak, $guid = null ) {
+	private function makeStatement( Snak $mainSnak, $guid = null ) {
 		static $guidCounter = 0;
 
 		if ( $guid === null ) {
@@ -109,10 +110,10 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 			$guid = 'EntityViewTest$' . $guidCounter;
 		}
 
-		$claim = new Claim( $mainSnak );
-		$claim->setGuid( $guid );
+		$statement = new Statement( $mainSnak );
+		$statement->setGuid( $guid );
 
-		return $claim;
+		return $statement;
 	}
 
 	/**
@@ -151,7 +152,7 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	/**
 	 * @param EntityId $id
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function getLinkForId( EntityId $id ) {
 		$name = $id->getEntityType() . ':' . $id->getSerialization();
