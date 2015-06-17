@@ -101,6 +101,7 @@ class ItemContentTest extends EntityContentTest {
 
 		$contentLinkStub = ItemContent::newEmpty();
 		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+		$contentLinkStub->getEntity()->setId( $this->getDummyId() );
 
 		$cases['sitelinks'] = array(
 			$contentLinkStub,
@@ -113,6 +114,7 @@ class ItemContentTest extends EntityContentTest {
 		$snak = new PropertyNoValueSnak( 83 );
 		$guid = '$testing$';
 		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );
+		$contentWithClaim->getEntity()->setId( $this->getDummyId() );
 
 		$cases['claims'] = array(
 			$contentWithClaim,

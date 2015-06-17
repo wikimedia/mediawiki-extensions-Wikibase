@@ -151,14 +151,17 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function providePageProperties() {
 		$cases = array();
+		$emptyContent = $this->newEmpty();
+		$emptyContent->getEntity()->setId( $this->getDummyId() );
 
 		$cases['empty'] = array(
-			$this->newEmpty(),
+			$emptyContent,
 			array( 'wb-status' => EntityContent::STATUS_EMPTY, 'wb-claims' => 0 )
 		);
 
 		$contentWithLabel = $this->newEmpty();
 		$contentWithLabel->getEntity()->setLabel( 'en', 'Foo' );
+		$contentWithLabel->getEntity()->setId( $this->getDummyId() );
 
 		$cases['labels'] = array(
 			$contentWithLabel,

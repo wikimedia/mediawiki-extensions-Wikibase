@@ -9,6 +9,7 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 
 /**
  * @since 0.5
@@ -53,6 +54,16 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	private $languageFallbackChainFactory;
 
+	/**
+	 * @var EntityDataFormatProvider
+	 */
+	private $entityDataFormatProvider;
+
+	/**
+	 * @var string
+	 */
+	private $conceptBaseUri;
+
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
@@ -60,7 +71,9 @@ class EntityParserOutputGeneratorFactory {
 		ValuesFinder $valuesFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		ReferencedEntitiesFinder $referencedEntitiesFinder,
-		TemplateFactory $templateFactory
+		TemplateFactory $templateFactory,
+		EntityDataFormatProvider $entityDataFormatProvider,
+		$conceptBaseUri
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -69,6 +82,8 @@ class EntityParserOutputGeneratorFactory {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
 		$this->templateFactory = $templateFactory;
+		$this->entityDataFormatProvider = $entityDataFormatProvider;
+		$this->conceptBaseUri = $conceptBaseUri;
 	}
 
 	/**
@@ -90,7 +105,9 @@ class EntityParserOutputGeneratorFactory {
 			$this->getLanguageFallbackChain( $languageCode ),
 			$languageCode,
 			$this->referencedEntitiesFinder,
-			$this->templateFactory
+			$this->templateFactory,
+			$this->entityDataFormatProvider,
+			$this->conceptBaseUri
 		);
 	}
 
