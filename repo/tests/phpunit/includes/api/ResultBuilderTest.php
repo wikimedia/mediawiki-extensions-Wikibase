@@ -5,7 +5,6 @@ namespace Wikibase\Test\Api;
 use ApiResult;
 use DataValues\StringValue;
 use Wikibase\Api\ResultBuilder;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -15,6 +14,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -593,9 +593,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddClaims() {
 		$result = $this->getDefaultResult();
-		$claim1 = new Claim( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
-		$claim1->setGuid( 'fooguidbar' );
-		$claims = array( $claim1 );
+		$statement = new Statement( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
+		$statement->setGuid( 'fooguidbar' );
+		$claims = array( $statement );
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
 			'entities' => array(
@@ -635,8 +635,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddClaim() {
 		$result = $this->getDefaultResult();
-		$claim = new Claim( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
-		$claim->setGuid( 'fooguidbar' );
+		$statement = new Statement( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
+		$statement->setGuid( 'fooguidbar' );
 		$expected = array(
 			'claim' => array(
 				'id' => 'fooguidbar',
@@ -655,7 +655,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addClaim( $claim );
+		$resultBuilder->addClaim( $statement );
 
 		$data = $result->getResultData( null, array(
 			'BC' => array(),
