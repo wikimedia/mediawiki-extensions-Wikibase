@@ -81,8 +81,8 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
 use Wikibase\SqlStore;
-use Wikibase\Store;
 use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store\TermBuffer;
 use Wikibase\StringNormalizer;
@@ -571,18 +571,8 @@ class WikibaseRepo {
 			$wgContLang,
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			new LanguageNameLookup(),
-			$this->getLocalEntityUriParser(),
+			$this->settings->getSetting( 'conceptBaseUri' ),
 			$this->getEntityTitleLookup()
-		);
-	}
-
-	/**
-	 * @return EntityIdParser
-	 */
-	private function getLocalEntityUriParser() {
-		return new SuffixEntityIdParser(
-			$this->getSettings()->getSetting( 'conceptBaseUri' ),
-			$this->getEntityIdParser()
 		);
 	}
 
@@ -1066,9 +1056,13 @@ class WikibaseRepo {
 			$this->getDataTypeFactory(),
 			$templateFactory,
 			new LanguageNameLookup(),
-			$this->getSettings()->getSetting( 'siteLinkGroups' ),
-			$this->getSettings()->getSetting( 'specialSiteLinkGroups' ),
-			$this->getSettings()->getSetting( 'badgeItems' )
+			$this->settings->getSetting( 'siteLinkGroups' ),
+			$this->settings->getSetting( 'specialSiteLinkGroups' ),
+			$this->settings->getSetting( 'badgeItems' )
+		);
+		$idParser = new SuffixEntityIdParser(
+			$this->settings->getSetting( 'conceptBaseUri' ),
+			$this->getEntityIdParser()
 		);
 
 		return new EntityParserOutputGeneratorFactory(
@@ -1077,7 +1071,7 @@ class WikibaseRepo {
 			$this->getEntityContentFactory(),
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory(),
-			new ReferencedEntitiesFinder( $this->getLocalEntityUriParser() ),
+			new ReferencedEntitiesFinder( $idParser ),
 			$templateFactory
 		);
 	}
