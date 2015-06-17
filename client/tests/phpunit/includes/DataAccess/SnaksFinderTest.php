@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\StringValue;
 use Wikibase\DataAccess\SnaksFinder;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
