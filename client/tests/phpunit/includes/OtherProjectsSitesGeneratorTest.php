@@ -75,6 +75,12 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 			array()
 		);
 
+		$tests['Unknown site'] = array(
+			array( 'wikipedia', 'wikisource' ),
+			'kittenswiki',
+			array()
+		);
+
 		return $tests;
 	}
 
