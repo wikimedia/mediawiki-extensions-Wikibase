@@ -17,17 +17,17 @@ use StubObject;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\DataValue\ValuesFinder;
-use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\DataValue\ValuesFinder;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
@@ -45,6 +45,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
@@ -91,8 +92,8 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
 use Wikibase\SqlStore;
-use Wikibase\Store;
 use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\Store\TermBuffer;
 use Wikibase\StringNormalizer;
@@ -312,7 +313,7 @@ class WikibaseRepo {
 			$this->getDefaultLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup(),
-			$this->getLocalEntityUriParser(),
+			$this->getLocalItemUriParser(),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -747,10 +748,10 @@ class WikibaseRepo {
 	/**
 	 * @return EntityIdParser
 	 */
-	private function getLocalEntityUriParser() {
+	private function getLocalItemUriParser() {
 		return new SuffixEntityIdParser(
-			$this->getSettings()->getSetting( 'conceptBaseUri' ),
-			$this->getEntityIdParser()
+			$this->getVocabularyBaseUri(),
+			new ItemIdParser()
 		);
 	}
 
@@ -1342,7 +1343,7 @@ class WikibaseRepo {
 			$this->getEntityContentFactory(),
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory(),
-			new ReferencedEntitiesFinder( $this->getLocalEntityUriParser() ),
+			new ReferencedEntitiesFinder( $this->getEntityIdParser() ),
 			$templateFactory,
 			$entityDataFormatProvider
 		);
