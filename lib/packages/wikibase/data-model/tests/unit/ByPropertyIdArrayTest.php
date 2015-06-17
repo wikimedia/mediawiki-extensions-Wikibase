@@ -6,7 +6,6 @@ use DataValues\StringValue;
 use ReflectionClass;
 use ReflectionMethod;
 use Wikibase\DataModel\ByPropertyIdArray;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -29,18 +28,18 @@ use Wikibase\DataModel\Statement\Statement;
 class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	public function testArrayObjectNotConstructedFromObject() {
-		$claim1 = new Claim( new PropertyNoValueSnak( 1 ) );
-		$claim1->setGuid( '1' );
-		$claim2 = new Claim( new PropertyNoValueSnak( 2 ) );
-		$claim2->setGuid( '2' );
+		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statement1->setGuid( '1' );
+		$statement2 = new Statement( new PropertyNoValueSnak( 2 ) );
+		$statement2->setGuid( '2' );
 
 		$claims = new Claims();
-		$claims->append( $claim1 );
+		$claims->append( $statement1 );
 
 		$byPropertyIdArray = new ByPropertyIdArray( $claims );
 		// According to the documentation append() "cannot be called when the ArrayObject was
 		// constructed from an object." This test makes sure it was not constructed from an object.
-		$byPropertyIdArray->append( $claim2 );
+		$byPropertyIdArray->append( $statement2 );
 
 		$this->assertCount( 2, $byPropertyIdArray );
 	}
@@ -73,13 +72,6 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 		$lists[] = array_map(
 			function( Snak $snak ) {
-				return new Claim( $snak );
-			},
-			$snaks
-		);
-
-		$lists[] = array_map(
-			function( Snak $snak ) {
 				return new Statement( $snak );
 			},
 			$snaks
@@ -95,9 +87,9 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return Claim[]
+	 * @return Statement[]
 	 */
-	protected function claimsProvider() {
+	protected function statementsProvider() {
 		$snaks = array(
 			new PropertyNoValueSnak( new PropertyId( 'P1' ) ),
 			new PropertySomeValueSnak( new PropertyId( 'P1' ) ),
@@ -109,7 +101,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 		return array_map(
 			function( Snak $snak ) {
-				return new Claim( $snak );
+				return new Statement( $snak );
 			},
 			$snaks
 		);
@@ -247,7 +239,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function moveProvider() {
-		$c = $this->claimsProvider();
+		$c = $this->statementsProvider();
 		$argLists = array();
 
 		$argLists[] = array( $c, $c[0], 0, $c );
@@ -330,27 +322,27 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testMoveThrowingOutOfBoundsExceptionIfObjectNotPresent() {
-		$claims = $this->claimsProvider();
-		$indexedArray = new ByPropertyIdArray( $claims );
+		$statements = $this->statementsProvider();
+		$indexedArray = new ByPropertyIdArray( $statements );
 		$indexedArray->buildIndex();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 
-		$indexedArray->moveObjectToIndex( new Claim( new PropertyNoValueSnak( new PropertyId( 'P9999' ) ) ), 0 );
+		$indexedArray->moveObjectToIndex( new Statement( new PropertyNoValueSnak( new PropertyId( 'P9999' ) ) ), 0 );
 	}
 
 	public function testMoveThrowingOutOfBoundsExceptionOnInvalidIndex() {
-		$claims = $this->claimsProvider();
-		$indexedArray = new ByPropertyIdArray( $claims );
+		$statements = $this->statementsProvider();
+		$indexedArray = new ByPropertyIdArray( $statements );
 		$indexedArray->buildIndex();
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 
-		$indexedArray->moveObjectToIndex( $claims[0], 9999 );
+		$indexedArray->moveObjectToIndex( $statements[0], 9999 );
 	}
 
 	public function addProvider() {
-		$c = $this->claimsProvider();
+		$c = $this->statementsProvider();
 
 		$argLists = array();
 
