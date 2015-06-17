@@ -86,7 +86,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			Language::factory( 'en' ),
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			$languageNameLookup,
-			new BasicEntityIdParser(),
+			'',
 			$entityTitleLookup
 		);
 	}

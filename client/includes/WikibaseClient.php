@@ -528,17 +528,7 @@ final class WikibaseClient {
 			$this->contentLanguage,
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup(),
-			$this->getRepoEntityUriParser()
-		);
-	}
-
-	/**
-	 * @return SuffixEntityIdParser
-	 */
-	private function getRepoEntityUriParser() {
-		return new SuffixEntityIdParser(
-			$this->getSettings()->getSetting( 'repoConceptBaseUri' ),
-			$this->getEntityIdParser()
+			$this->settings->getSetting( 'repoConceptBaseUri' )
 		);
 	}
 

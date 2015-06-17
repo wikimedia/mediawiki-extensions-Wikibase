@@ -7,10 +7,10 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\EntityLabelUnitFormatter;
+use Wikibase\Lib\ItemLabelUnitFormatter;
 
 /**
- * @covers Wikibase\Lib\EntityLabelUnitFormatter
+ * @covers Wikibase\Lib\ItemLabelUnitFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -20,7 +20,7 @@ use Wikibase\Lib\EntityLabelUnitFormatter;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityLabelUnitFormatterTest extends PHPUnit_Framework_TestCase {
+class ItemLabelUnitFormatterTest extends PHPUnit_Framework_TestCase {
 
 	public function provideApplyUnit() {
 		return array(
@@ -32,7 +32,7 @@ class EntityLabelUnitFormatterTest extends PHPUnit_Framework_TestCase {
 			'unit has no label' => array( 'Q112233', '12345', '12345 Q112233' ),
 			'unknown int' => array( '2', '123', '123 2' ),
 			'unknown URI' => array( 'http://www.wikidata.org/entity/Q200', '123', '123 http://www.wikidata.org/entity/Q200' ),
-			'property id' => array( 'P7', '123', '123 LABEL:P7' ),
+			'property id' => array( 'P7', '123', '123 P7' ),
 		);
 	}
 
@@ -50,9 +50,7 @@ class EntityLabelUnitFormatterTest extends PHPUnit_Framework_TestCase {
 				return new Term( 'en', 'LABEL:' . $id->getSerialization() );
 			} ) );
 
-		$idParser = new BasicEntityIdParser();
-
-		$formatter = new EntityLabelUnitFormatter( $idParser, $labelLookup, array( 'NotAUnit' ) );
+		$formatter = new ItemLabelUnitFormatter( $labelLookup, '', array( 'NotAUnit' ) );
 		$this->assertEquals( $expected, $formatter->applyUnit( $unit, $number ) );
 	}
 
