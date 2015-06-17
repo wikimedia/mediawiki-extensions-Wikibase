@@ -93,6 +93,7 @@ class EntityParserOutputGenerator {
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		LanguageFallbackChain $languageFallbackChain,
 		$languageCode,
+		ReferencedEntitiesFinder $referencedEntitiesFinder,
 		TemplateFactory $templateFactory
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -102,8 +103,7 @@ class EntityParserOutputGenerator {
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->languageCode = $languageCode;
-
-		$this->referencedEntitiesFinder = new ReferencedEntitiesFinder();
+		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
 		$this->templateFactory = $templateFactory;
 	}
 
