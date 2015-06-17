@@ -311,7 +311,7 @@ class WikibaseRepo {
 		return $this->getStore()->getEntityRevisionLookup( $uncached );
 	}
 
-	public function getRedirectCreator( User $user, IContextSource $context ) {
+	public function newRedirectCreatorInteractor( User $user, IContextSource $context ) {
 		return new RedirectCreationInteractor(
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->getEntityStore(),

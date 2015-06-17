@@ -57,7 +57,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 			new TokenCheckInteractor(
 				$this->getUser()
 			),
-			$wikibaseRepo->getRedirectCreator(
+			$wikibaseRepo->newRedirectCreatorInteractor(
 				$this->getUser(),
 				$this->getContext()
 			)
