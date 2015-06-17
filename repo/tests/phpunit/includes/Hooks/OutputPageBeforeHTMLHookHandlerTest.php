@@ -27,9 +27,9 @@ use Wikibase\View\Template\TemplateFactory;
 class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * Integration test mostly testing that things don't fatal/ throw.
+	 * @return OutputPageBeforeHTMLHookHandler
 	 */
-	public function testOutputPageBeforeHTMLHookHandler() {
+	private function getHookHandler() {
 		$userLanguageLookup = $this->getMock( 'Wikibase\Lib\UserLanguageLookup' );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
@@ -50,6 +50,15 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			new EntityContentFactory( array() )
 		);
 
+		return $outputPageBeforeHTMLHookHandler;
+	}
+
+	/**
+	 * Integration test mostly testing that things don't fatal/ throw.
+	 */
+	public function testOutputPageBeforeHTMLHookHandler() {
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler();
+
 		$html = '';
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$out = new OutputPage( $context );
@@ -59,6 +68,12 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			array( array( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ) )
 		);
 
+		$alternateLinks = array( array( 'a' => 'b' ), array( 'c', 'd' ) );
+		$out->setProperty(
+			'wikibase-alternate-links',
+			$alternateLinks
+		);
+
 		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
 
 		// Verify the wbUserSpecifiedLanguages JS variable
@@ -66,5 +81,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 		$wbUserSpecifiedLanguages = $jsConfigVars['wbUserSpecifiedLanguages'];
 
 		$this->assertSame( array( 'es', 'ru' ), $wbUserSpecifiedLanguages );
+
+		$this->assertSame( $alternateLinks, $out->getLinkTags() );
 	}
 }

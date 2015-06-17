@@ -149,6 +149,13 @@ class OutputPageBeforeHTMLHookHandler {
 				) )
 			);
 		}
+
+		$alternateLinks = $out->getProperty( 'wikibase-alternate-links' );
+		if ( $alternateLinks !== null ) {
+			foreach ( $alternateLinks as $link ) {
+				$out->addLink( $link );
+			}
+		}
 	}
 
 	/**
