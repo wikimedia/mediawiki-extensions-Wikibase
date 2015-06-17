@@ -4,12 +4,13 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
-use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -91,32 +92,37 @@ class GetClaims extends ApiWikibase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param null|string $claimGuid
 	 *
-	 * @return Claim[]
+	 * @return Statement[]
 	 */
-	private function getClaims( Entity $entity, $claimGuid ) {
-		$claimsList = new Claims( $entity->getClaims() );
-
-		if ( $claimGuid !== null ) {
-			$claim = $claimsList->getClaimWithGuid( $claimGuid );
-			return $claim !== null ? array( $claim ) : array();
+	private function getClaims( EntityDocument $entity, $claimGuid ) {
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			return array();
 		}
 
-		$claims = array();
+		if ( $claimGuid === null ) {
+			return $this->getMatchingStatements( $entity->getStatements() );
+		}
 
-		/** @var Claim $claim */
-		foreach ( $claimsList as $claim ) {
-			if ( $this->claimMatchesFilters( $claim ) ) {
-				$claims[] = $claim;
+		$statement = $entity->getStatements()->getFirstStatementWithGuid( $claimGuid );
+		return $statement === null ? array() : array( $statement );
+	}
+
+	private function getMatchingStatements( StatementList $statementList ) {
+		$statements = array();
+
+		foreach ( $statementList->toArray() as $statement ) {
+			if ( $this->claimMatchesFilters( $statement ) ) {
+				$statements[] = $statement;
 			}
 		}
 
-		return $claims;
+		return $statements;
 	}
 
-	private function claimMatchesFilters( Claim $claim ) {
+	private function claimMatchesFilters( Statement $claim ) {
 		return $this->rankMatchesFilter( $claim->getRank() )
 			&& $this->propertyMatchesFilter( $claim->getPropertyId() );
 	}
