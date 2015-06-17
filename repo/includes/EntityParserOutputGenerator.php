@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
 use Wikibase\View\EntityViewFactory;
@@ -85,6 +86,16 @@ class EntityParserOutputGenerator {
 	 */
 	private $templateFactory;
 
+	/**
+	 * @var EntityDataFormatProvider
+	 */
+	private $entityDataFormatProvider;
+
+	/**
+	 * @var string
+	 */
+	private $conceptBaseUri;
+
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
@@ -94,7 +105,9 @@ class EntityParserOutputGenerator {
 		LanguageFallbackChain $languageFallbackChain,
 		$languageCode,
 		ReferencedEntitiesFinder $referencedEntitiesFinder,
-		TemplateFactory $templateFactory
+		TemplateFactory $templateFactory,
+		EntityDataFormatProvider $entityDataFormatProvider,
+		$conceptBaseUri
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
@@ -105,6 +118,8 @@ class EntityParserOutputGenerator {
 		$this->languageCode = $languageCode;
 		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
 		$this->templateFactory = $templateFactory;
+		$this->entityDataFormatProvider = $entityDataFormatProvider;
+		$this->conceptBaseUri = $conceptBaseUri;
 	}
 
 	/**
@@ -190,6 +205,8 @@ class EntityParserOutputGenerator {
 		//	 So, for now, we leave it to the caller to override the display title, if desired.
 		// set the display title
 		//$parserOutput->setTitleText( $entity>getLabel( $langCode ) );
+
+		$this->addAlternateLinks( $parserOutput, $entity->getId() );
 
 		return $parserOutput;
 	}
@@ -397,4 +414,30 @@ class EntityParserOutputGenerator {
 		$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
 	}
 
+	/**
+	 * Add alternate links as extension data.
+	 * OutputPageBeforeHTMLHookHandler will add these to the OutputPage.
+	 *
+	 * @param ParserOutput $parserOutput
+	 * @param EntityId $entityId
+	 */
+	private function addAlternateLinks( ParserOutput $parserOutput, EntityId $entityId ) {
+		$entityDataFormatProvider = $this->entityDataFormatProvider;
+		$baseUri = $this->conceptBaseUri;
+		$links = array();
+
+		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
+			$ext = $entityDataFormatProvider->getExtension( $format );
+
+			if ( $ext !== null ) {
+				$links[] = array(
+					'rel' => 'alternate',
+					'href' => $baseUri . $entityId->getSerialization() . '.' . $ext,
+					'type' => $entityDataFormatProvider->getMimeType( $format )
+				);
+			}
+		}
+
+		$parserOutput->setExtensionData( 'wikibase-alternate-links', $links );
+	}
 }

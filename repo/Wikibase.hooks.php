@@ -897,6 +897,12 @@ final class RepoHooks {
 			$out->setProperty( 'wikibase-titletext', $titleText );
 		}
 
+		// Array with <link rel="alternate"> tags for the page HEAD.
+		$alternateLinks = $parserOutput->getExtensionData( 'wikibase-alternate-links' );
+		if ( $alternateLinks !== null ) {
+			$out->setProperty( 'wikibase-alternate-links', $alternateLinks );
+		}
+
 		return true;
 	}
 
