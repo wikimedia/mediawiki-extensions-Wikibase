@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b1959344",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-17T21:56:03Z",
+      "side": 1,
+      "message": "Please rename method and variable to \"statement\".",
+      "revId": "70673683894411cb88ac1c829d206ad8a8ee177b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
