@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Specials;
 
 use DatabaseBase;
+use FakeResultWrapper;
 use Linker;
 use QueryPage;
 use Title;
@@ -18,6 +19,11 @@ use Wikibase\NamespaceChecker;
  * @author Amir Sarabadani < ladsgroup@gmail.com >
  */
 class SpecialUnconnectedPages extends QueryPage {
+
+	/**
+	 * @var int maximum supported offset
+	 */
+	const MAX_OFFSET = 10000;
 
 	/**
 	 * Title object build from the $startPageName parameter
@@ -156,6 +162,23 @@ class SpecialUnconnectedPages extends QueryPage {
 
 	function sortDescending() {
 		return false;
+	}
+
+	function reallyDoQuery( $limit, $offset = false ) {
+
+		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
+			return new FakeResultWrapper( array() );
+		}
+
+		return parent::reallyDoQuery( $limit, $offset );
+	}
+
+	function fetchFromCache( $limit, $offset = false ) {
+		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
+			return new FakeResultWrapper( array() );
+		}
+
+		return parent::fetchFromCache( $limit, $offset );
 	}
 
 	function formatResult( $skin, $result ) {
