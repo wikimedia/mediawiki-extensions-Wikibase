@@ -648,6 +648,7 @@ class WikibaseRepo {
 	private function getLocalEntityUriParser() {
 		return new SuffixEntityIdParser(
 			$this->getSettings()->getSetting( 'conceptBaseUri' ),
+			// FIXME: This should be a parser that only accepts ItemIds.
 			$this->getEntityIdParser()
 		);
 	}

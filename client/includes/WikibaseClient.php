@@ -532,11 +532,12 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return SuffixEntityIdParser
+	 * @return EntityIdParser
 	 */
 	private function getRepoEntityUriParser() {
 		return new SuffixEntityIdParser(
 			$this->getSettings()->getSetting( 'repoConceptBaseUri' ),
+			// FIXME: This should be a parser that only accepts ItemIds.
 			$this->getEntityIdParser()
 		);
 	}

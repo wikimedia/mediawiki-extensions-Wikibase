@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 
 /**
- * QuantityUnitFormatter for representing units by their respective entity label.
+ * QuantityUnitFormatter for representing units by their respective item label.
  *
  * @since 0.5
  *
@@ -21,7 +21,7 @@ class EntityLabelUnitFormatter implements QuantityUnitFormatter {
 	/**
 	 * @var EntityIdParser
 	 */
-	private $externalEntityIdParser;
+	private $externalItemIdParser;
 
 	/**
 	 * @var LabelDescriptionLookup
@@ -34,14 +34,14 @@ class EntityLabelUnitFormatter implements QuantityUnitFormatter {
 	private $unitlessUnitIds;
 
 	/**
-	 * @param EntityIdParser $externalEntityIdParser
+	 * @param EntityIdParser $externalItemIdParser
 	 * @param LabelDescriptionLookup $labelLookup
 	 * @param string[] $unitlessUnitIds A list of IDs that represent the "unitless" unit (one),
 	 *        e.g. "http://www.wikidata.org/entity/Q199". The strings "" and "1" are always
 	 *        treated as "non-units".
 	 */
 	public function __construct(
-		EntityIdParser $externalEntityIdParser,
+		EntityIdParser $externalItemIdParser,
 		LabelDescriptionLookup $labelLookup,
 		array $unitlessUnitIds = array()
 	) {
@@ -49,16 +49,16 @@ class EntityLabelUnitFormatter implements QuantityUnitFormatter {
 		$this->unitlessUnitIds[''] = true;
 		$this->unitlessUnitIds['1'] = true;
 
-		$this->externalEntityIdParser = $externalEntityIdParser;
+		$this->externalItemIdParser = $externalItemIdParser;
 		$this->labelLookup = $labelLookup;
 	}
 
 	/**
 	 * @see QuantityUnitFormatter::applyUnit()
 	 *
-	 * This implementation will interpret $unit as an external entity ID (typically a URI), which
+	 * This implementation will interpret $unit as an external item ID (typically a URI), which
 	 * can be parsed using the EntityIdParser supplied to the constructor. If $unit is successfully
-	 * parsed, the label of the entity is looked up, and appended to $numberText with a single
+	 * parsed, the label of the item is looked up, and appended to $numberText with a single
 	 * space as a separator.
 	 *
 	 * @param string $unit
@@ -72,15 +72,15 @@ class EntityLabelUnitFormatter implements QuantityUnitFormatter {
 		}
 
 		try {
-			$entityId = $this->externalEntityIdParser->parse( $unit );
+			$itemId = $this->externalItemIdParser->parse( $unit );
 
 			try {
 				// TODO: Ideally we would show unit *symbols*, taking from a config file,
 				// a system message, or a statement on the unit's item. Then the
 				// name "EntityLabelUnitFormatter" doesn't apply any more, though.
-				$label = $this->labelLookup->getLabel( $entityId )->getText();
+				$label = $this->labelLookup->getLabel( $itemId )->getText();
 			} catch ( OutOfBoundsException $ex ) {
-				$label = $entityId->getSerialization();
+				$label = $itemId->getSerialization();
 			}
 
 			// TODO: localizable pattern for placement (before/after, separator)

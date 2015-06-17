@@ -42,7 +42,7 @@ class WikibaseValueFormatterBuilders {
 	/**
 	 * @var EntityIdParser
 	 */
-	private $repoUriParser;
+	private $repoItemUriParser;
 
 	/**
 	 * @var EntityTitleLookup|null
@@ -138,21 +138,21 @@ class WikibaseValueFormatterBuilders {
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
-	 * @param EntityIdParser $repoUriParser
+	 * @param EntityIdParser $repoItemUriParser
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
 		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
-		EntityIdParser $repoUriParser,
+		EntityIdParser $repoItemUriParser,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->repoItemUriParser = $repoItemUriParser;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->repoUriParser = $repoUriParser;
 	}
 
 	/**
@@ -602,10 +602,12 @@ class WikibaseValueFormatterBuilders {
 		return new MediaWikiNumberLocalizer( $language );
 	}
 
-	private function getQuantityUnitFormatter( FormatterOptions $options ) {
-		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-
-		return new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup, $this->unitOneUris );
+	private function getQuantityUnitFormatter(
+		FormatterOptions $options,
+		array $unitlessUnitIds = array()
+	) {
+		$lookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
+		return new EntityLabelUnitFormatter( $this->repoItemUriParser, $lookup, $unitlessUnitIds );
 	}
 
 	/**
@@ -615,8 +617,7 @@ class WikibaseValueFormatterBuilders {
 	 */
 	private function newQuantityFormatter( FormatterOptions $options ) {
 		$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
-		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-		$unitFormatter = new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup );
+		$unitFormatter = $this->getQuantityUnitFormatter( $options );
 		return new QuantityFormatter( $decimalFormatter, $unitFormatter, $options );
 	}
 
@@ -630,7 +631,7 @@ class WikibaseValueFormatterBuilders {
 	 */
 	private function newQuantityDetailsFormatter( FormatterOptions $options ) {
 		$localizer = $this->getNumberLocalizer( $options );
-		$unitFormatter = $this->getQuantityUnitFormatter( $options );
+		$unitFormatter = $this->getQuantityUnitFormatter( $options, $this->unitOneUris );
 		return new QuantityDetailsFormatter( $localizer, $unitFormatter, $options );
 	}
 
