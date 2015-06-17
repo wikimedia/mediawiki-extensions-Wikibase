@@ -46,6 +46,7 @@ use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\Parsers\SuffixEntityIdParser;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -519,7 +520,18 @@ final class WikibaseClient {
 		return new WikibaseValueFormatterBuilders(
 			$this->contentLanguage,
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
-			new LanguageNameLookup()
+			new LanguageNameLookup(),
+			$this->getRepoEntityUriParser()
+		);
+	}
+
+	/**
+	 * @return SuffixEntityIdParser
+	 */
+	private function getRepoEntityUriParser() {
+		return new SuffixEntityIdParser(
+			$this->getSettings()->getSetting( 'repoConceptBaseUri' ),
+			$this->getEntityIdParser()
 		);
 	}
 

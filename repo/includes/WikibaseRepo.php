@@ -571,6 +571,7 @@ class WikibaseRepo {
 			$wgContLang,
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			new LanguageNameLookup(),
+			$this->getLocalEntityUriParser(),
 			$this->getEntityTitleLookup()
 		);
 	}
