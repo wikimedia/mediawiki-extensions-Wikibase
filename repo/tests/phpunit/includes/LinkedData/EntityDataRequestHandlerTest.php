@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
@@ -87,6 +88,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 
 		$serializerOptions = new SerializationOptions();
 		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
+		$entityDataFormatProvider = new EntityDataFormatProvider();
 
 		$service = new EntityDataSerializationService(
 			EntityDataSerializationServiceTest::URI_BASE,
@@ -95,10 +97,11 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$titleLookup,
 			$serializerFactory,
 			$propertyLookup,
-			new SiteList()
+			new SiteList(),
+			$entityDataFormatProvider
 		);
 
-		$service->setFormatWhiteList(
+		$entityDataFormatProvider->setFormatWhiteList(
 			array(
 				// using the API
 				'json', // default
@@ -137,6 +140,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$mockRepository,
 			$mockRepository,
 			$service,
+			$entityDataFormatProvider,
 			'json',
 			1800,
 			false,
