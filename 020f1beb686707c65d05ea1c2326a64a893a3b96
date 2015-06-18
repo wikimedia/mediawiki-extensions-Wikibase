@@ -69,6 +69,24 @@
       "revId": "020f1beb686707c65d05ea1c2326a64a893a3b96",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e1581eff",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T20:37:05Z",
+      "side": 1,
+      "message": "Just a suggestion, all is good. :-) What you can do instead is shortening the replacement by one character.\n\n $uri \u003d \u0027http\u0027 . substr( $uri, 5 );",
+      "parentUuid": "8ec42329_5e2f939c",
+      "revId": "020f1beb686707c65d05ea1c2326a64a893a3b96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
