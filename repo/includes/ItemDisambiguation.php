@@ -3,9 +3,10 @@
 namespace Wikibase;
 
 use Html;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Repo\Interactors\TermSearchInteractor;
 
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
@@ -17,8 +18,14 @@ use Wikibase\Lib\LanguageNameLookup;
  * @author jeblad
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @authro Adam Shorland
  */
 class ItemDisambiguation {
+
+	/**
+	 * @var EntityIdFormatter
+	 */
+	private $linkFormatter;
 
 	/**
 	 * @var LanguageNameLookup
@@ -28,37 +35,23 @@ class ItemDisambiguation {
 	/**
 	 * @var string
 	 */
-	private $searchLangCode;
-
-	/**
-	 * @var string
-	 */
-	private $userLangCode;
-
-	/**
-	 * @var EntityIdFormatter
-	 */
-	private $linkFormatter;
+	private $displayLanguageCode;
 
 	/**
 	 * @since 0.5
 	 *
-	 * @param string $searchLangCode The language the search was performed for.
-	 * @param string $userLangCode The user's interface language.
-	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdFormatter $linkFormatter A formatter for generating HTML links for a given EntityId.
+	 * @param LanguageNameLookup $languageNameLookup
+	 * @param string $displayLanguageCode
 	 */
 	public function __construct(
-		$searchLangCode,
-		$userLangCode,
+		EntityIdFormatter $linkFormatter,
 		LanguageNameLookup $languageNameLookup,
-		EntityIdFormatter $linkFormatter
+		$displayLanguageCode
 	) {
-		$this->searchLangCode = $searchLangCode;
-		$this->userLangCode = $userLangCode;
-
 		$this->linkFormatter = $linkFormatter;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->displayLanguageCode = $displayLanguageCode;
 	}
 
 	/**
@@ -66,69 +59,70 @@ class ItemDisambiguation {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Item[] $items
+	 * @param array[] $searchResults as returned by TermSearchInteractor
 	 *
 	 * @return string HTML
 	 */
-	public function getHTML( array $items ) {
+	public function getHTML( array $searchResults ) {
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
-					array( $this, 'getItemHtml' ),
-					$items
+					array( $this, 'getResultHtml' ),
+					$searchResults
 				) ).
 			'</ul>';
 	}
 
 	/**
-	 * @param Item $item
+	 * @param array[] $searchResult
 	 *
 	 * @return string HTML
 	 */
-	public function getItemHtml( Item $item ) {
-		$userLang = $this->userLangCode;
-		$searchLang = $this->searchLangCode;
-
-		$result = $this->linkFormatter->formatEntityId( $item->getId() );
-
-		// Display the label in the searched language in case it is different than in
-		// the user language.
-		if ( $userLang !== $searchLang
-			&& $item->getLabel( $userLang ) !== $item->getLabel( $searchLang )  ) {
-			$result .= $this->getLabelHtml( $item, $searchLang );
-		};
-
-		$result .= $this->getDescriptionHtml( $item, $userLang );
-
+	public function getResultHtml( array $searchResult ) {
+		$result = $this->linkFormatter->formatEntityId( $searchResult['entityId'] );
+		$result .= $this->getLabelHtml(
+			$searchResult[TermSearchInteractor::DISPLAYTERMS_KEY],
+			$searchResult[TermSearchInteractor::MATCHEDTERM_KEY]
+		);
+		$result .= $this->getDescriptionHtml(
+			$searchResult[TermSearchInteractor::DISPLAYTERMS_KEY],
+			$searchResult[TermSearchInteractor::ENTITYID_KEY]
+		);
 		$result = Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
-
 		return $result;
 	}
 
 	/**
-	 * Returns HTML representing the label in the given language.
+	 * Returns HTML representing the label in the search language.
 	 * The result will include the language's name in the user language.
 	 *
-	 * @param Item $item
-	 * @param string $language
+	 * If the label is the same as the label already displayed by the formatted
+	 * ItemID link then no additional label will be displayed
+	 *
+	 * @param Term[] $displayTerms
+	 * @param Term $matchedTerm
 	 *
 	 * @return string HTML
 	 */
-	private function getLabelHtml( Item $item, $language ) {
-		$label = $item->getLabel( $language );
-
+	private function getLabelHtml( $displayTerms, $matchedTerm ) {
+		if( array_key_exists( TermIndexEntry::TYPE_LABEL, $displayTerms ) ) {
+			$displayLabel = $displayTerms[TermIndexEntry::TYPE_LABEL];
+		}
+		if( isset( $displayLabel ) && $displayLabel->getText() == $matchedTerm->getText() ) {
+			return '';
+		}
+		$label = $matchedTerm->getText();
+		$language = $matchedTerm->getLanguageCode();
 		$labelElement = Html::element(
 			'span',
 			array( 'class' => 'wb-itemlink-query-lang', 'lang' => $language ),
 			$label
 		);
-
 		$msg = wfMessage( 'wikibase-itemlink-userlang-wrapper' )
 			->rawParams(
-				$this->languageNameLookup->getName( $language, $this->userLangCode ),
+				$this->languageNameLookup->getName( $language, $this->displayLanguageCode ),
 				$labelElement
 			);
-
 		return $msg->parse();
 	}
 
@@ -139,34 +133,26 @@ class ItemDisambiguation {
 	 * returns an empty string, because the entity ID was already used as
 	 * a label.
 	 *
-	 * @param Item $item
-	 * @param string $language
+	 * @param Term[] $displayTerms
+	 * @param string $entityId
 	 *
 	 * @return string HTML
 	 */
-	private function getDescriptionHtml( Item $item, $language ) {
-
-		// display the description in the user's language
-		$description = $item->getDescription( $language );
-		if ( $description === false || $description === '' ) {
-			// Display the ID if no description is available
-			// do not display it if the ID was already displayed, i.e. if it was used instead of the label previously
-			$userLabel = $item->getLabel( $language );
-			$idLabel = $item->getId()->getSerialization();
-
-			$html = $userLabel ? ' ' . $idLabel : '';
-		} else {
+	private function getDescriptionHtml( $displayTerms, $entityId ) {
+		if ( isset( $displayTerms[TermIndexEntry::TYPE_DESCRIPTION] ) ) {
 			$descriptionElement = Html::element(
 				'span',
 				array( 'class' => 'wb-itemlink-description' ),
-				$description
+				$displayTerms[TermIndexEntry::TYPE_DESCRIPTION]->getText()
 			);
-
-			$html = htmlspecialchars( wfMessage( 'colon-separator' )->plain() )
-				. $descriptionElement;
+			return htmlspecialchars( wfMessage( 'colon-separator' )->plain() ) . $descriptionElement;
+		} else {
+			if ( array_key_exists( TermIndexEntry::TYPE_LABEL, $displayTerms ) ) {
+				$entityIdElement = Html::element( 'span', array(), $entityId );
+				return htmlspecialchars( wfMessage( 'colon-separator' )->plain() ) . $entityIdElement;
+			}
+			return '';
 		}
-
-		return $html;
 	}
 
 }
