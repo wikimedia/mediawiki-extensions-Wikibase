@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b6c26137",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T15:36:13Z",
+      "side": 1,
+      "message": "This fails with an InvalidArgumentException if one is null. Both can be null according to the getters. I think this is ok, just want to let you know and ask for test cases that cover this.",
+      "revId": "538dc64a1659f8968e0ae7a5f4e6cc1baa33cd4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_76bcf9b1",
+        "filename": "lib/tests/phpunit/TermIndexEntryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T15:36:13Z",
+      "side": 1,
+      "message": "getTerm",
+      "revId": "538dc64a1659f8968e0ae7a5f4e6cc1baa33cd4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
