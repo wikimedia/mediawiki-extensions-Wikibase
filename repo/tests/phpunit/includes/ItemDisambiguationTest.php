@@ -3,10 +3,12 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\ItemDisambiguation
@@ -19,101 +21,126 @@ use Wikibase\Lib\LanguageNameLookup;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 class ItemDisambiguationTest extends \MediaWikiTestCase {
 
 	/**
-	 * @param string $searchLanguageCode
-	 * @param string $userLanguageCode
-	 *
-	 * @return ItemDisambiguation
+	 * @return EntityIdFormatter
 	 */
-	private function newItemDisambiguation( $searchLanguageCode, $userLanguageCode ) {
+	private function getMockEntityIdFormatter() {
 		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
-
 		$entityIdFormatter->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnCallback( function( ItemId $itemId ) {
 				return $itemId->getSerialization();
 			} ) );
+		return $entityIdFormatter;
+	}
 
+	/**
+	 * @return ItemDisambiguation
+	 */
+	private function newItemDisambiguation() {
 		return new ItemDisambiguation(
-			$searchLanguageCode,
-			$userLanguageCode,
+			$this->getMockEntityIdFormatter(),
 			new LanguageNameLookup(),
-			$entityIdFormatter
+			'en'
 		);
 	}
 
 	public function getHTMLProvider() {
-		$one = new Item( new ItemId( 'Q1' ) );
-		$one->setLabel( 'en', 'one' );
-		$one->setLabel( 'de', 'eins' );
-		$one->setDescription( 'en', 'number' );
-		$one->setDescription( 'de', 'Zahl' );
-
-		$oneone = new Item( new ItemId( 'Q11' ) );
-		$oneone->setLabel( 'en', 'oneone' );
-		$oneone->setLabel( 'de', 'einseins' );
-
 		$cases = array();
 		$matchers = array();
 
+		// No results
 		$matchers['matches'] = array(
 			'tag' => 'ul',
 			'content' => '',
 			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
 		);
+		$cases['No Results'] = array( array(), $matchers );
 
-		$cases['empty'] = array( 'en', 'en', array(), $matchers );
+		// One Normal Result
+		$matchers['matches'] = array(
+			'tag' => 'ul',
+			'children' => array( 'count' => 1 ),
+			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
+		);
+		$matchers['one'] = array(
+			'tag' => 'li',
+			'content' => 'regexp:/^Q1[^1]/s',
+		);
+		$matchers['one/desc'] = array(
+			'tag' => 'span',
+			'content' => 'DisplayDescription',
+			'attributes' => array( 'class' => 'wb-itemlink-description' ),
+		);
+		$cases['One Normal Result'] = array(
+			array(
+				array(
+					'entityId' => new ItemId( 'Q1' ),
+					'matchedTerm' => new Term( 'de', 'Foo'),
+					'matchedTermType' => array( 'label' ),
+					'displayTerms' => array(
+						TermIndexEntry::TYPE_LABEL => new Term( 'en', 'DisplayLabel' ),
+						TermIndexEntry::TYPE_DESCRIPTION => new Term( 'en', 'DisplayDescription' ),
+						),
+					),
+				),
+			$matchers
+		);
 
-		// en/one
+		// Two Results - (1 - No Label in display Language, 2 - No Description)
 		$matchers['matches'] = array(
 			'tag' => 'ul',
 			'children' => array( 'count' => 2 ),
 			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
 		);
-
 		$matchers['one'] = array(
 			'tag' => 'li',
-			'content' => 'regexp:/^Q1[^1]/s',
+			'content' => 'regexp:/^Q2[^1]/s',
 		);
-
+		$matchers['one/label'] = array(
+			'tag' => 'span',
+			'content' => 'Foo',
+			'attributes' => array( 'class' => 'wb-itemlink-query-lang', 'lang' => 'de' ),
+		);
 		$matchers['one/desc'] = array(
 			'tag' => 'span',
-			'content' => 'number',
+			'content' => 'DisplayDescription',
 			'attributes' => array( 'class' => 'wb-itemlink-description' ),
 		);
-
-		$matchers['oneone'] = array(
+		$matchers['two'] = array(
 			'tag' => 'li',
-			'content' => 'regexp:/^Q11/s',
+			'content' => 'regexp:/^Q3[^1]/s',
 		);
-
-		$matchers['oneone/desc'] = array(
+		$matchers['two/desc'] = array(
 			'tag' => 'span',
-			//'content' => 'Q11',
-			'attributes' => array( 'class' => 'wb-itemlink-description' ),
+			'content' => 'Q3',
+			'attributes' => array( ),
 		);
-
-		$cases['en/one'] = array( 'en', 'en', array( $one, $oneone ), $matchers );
-
-		// de/eins
-		$matchers['one/de'] = array(
-			'tag' => 'span',
-			'parent' => array( 'tag' => 'li' ),
-			'content' => 'eins',
-			'attributes' => array( 'lang' => 'de' ),
+		$cases['Two Results'] = array(
+			array(
+				array(
+					'entityId' => new ItemId( 'Q2' ),
+					'matchedTermType' => 'label',
+					'matchedTerm' => new Term( 'de', 'Foo' ),
+					'displayTerms' => array(
+						TermIndexEntry::TYPE_DESCRIPTION => new Term( 'en', 'DisplayDescription' ),
+					),
+				),
+				array(
+					'entityId' => new ItemId( 'Q3' ),
+					'matchedTermType' => 'label',
+					'matchedTerm' => new Term( 'de', 'Foo' ),
+					'displayTerms' => array(
+						TermIndexEntry::TYPE_LABEL => new Term( 'en', 'DisplayLabel' ),
+					),
+				),
+			),
+			$matchers
 		);
-
-		$matchers['oneone/de'] = array(
-			'tag' => 'span',
-			//'parent' => array( 'tag' => 'li' ), // PHPUnit's assertTag doesnt like this here
-			'content' => 'einseins',
-			'attributes' => array( 'lang' => 'de' ),
-		);
-
-		$cases['de/eins'] = array( 'de', 'en', array( $one, $oneone ), $matchers );
 
 		return $cases;
 	}
@@ -121,10 +148,10 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getHTMLProvider
 	 */
-	public function testGetHTML( $searchLanguageCode, $userLanguageCode, array $items, array $matchers ) {
-		$disambig = $this->newItemDisambiguation( $searchLanguageCode, $userLanguageCode );
+	public function testGetHTML( array $searchResults, array $matchers ) {
+		$disambig = $this->newItemDisambiguation();
 
-		$html = $disambig->getHTML( $items );
+		$html = $disambig->getHTML( $searchResults );
 
 		foreach ( $matchers as $key => $matcher ) {
 			MediaWikiTestCase::assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );

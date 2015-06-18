@@ -3,14 +3,12 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
-use Title;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\ItemDisambiguation;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
-use Wikibase\TermIndex;
+use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemDisambiguation
@@ -25,97 +23,68 @@ use Wikibase\TermIndex;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return ItemDisambiguation
 	 */
-	private function getEntityTitleLookup() {
-		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+	private function getMockItemDisambiguation( ) {
+		$mock = $this->getMockBuilder( 'Wikibase\ItemDisambiguation' )
+			->disableOriginalConstructor()
+			->getMock();
 		$mock->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback(
-				function ( EntityId $id ) {
-					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
-				}
-			) );
-
+			->method( 'getHTML' )
+			->will( $this->returnCallback( function ( $searchResult ) {
+				return '<span class="mock-span" >ItemDisambiguationHTML-' . count( $searchResult ) . '</span>';
+			} ) );
 		return $mock;
 	}
 
 	/**
-	 * @return TermIndex
+	 * @return TermIndexSearchInteractor
 	 */
-	private function getTermIndex() {
-		// Matches TermIndex::getEntityIdsForLabel shall return.
-		// Array keys are derived from the function parameters
-		$matches = array(
-			'one,en,item,' => array(
-				new ItemId( 'Q1' ),
-				new ItemId( 'Q11' ),
+	private function getMockSearchInteractor() {
+		$returnResults = array(
+			array(
+				'entityId' => new ItemId( 'Q2' ),
+				'matchedTermType' => 'label',
+				'matchedTerm' => new Term( 'fr', 'Foo' ),
+				'displayTerms' => array(
+					TermIndexEntry::TYPE_DESCRIPTION => new Term( 'en', 'DisplayDescription' ),
+				),
 			),
-			'eins,de,item,' => array(
-				new ItemId( 'Q1' ),
-				new ItemId( 'Q11' ),
+			array(
+				'entityId' => new ItemId( 'Q3' ),
+				'matchedTermType' => 'label',
+				'matchedTerm' => new Term( 'fr', 'Foo' ),
+				'displayTerms' => array(
+					TermIndexEntry::TYPE_LABEL => new Term( 'en', 'DisplayLabel' ),
+				),
 			),
 		);
-
-		$mock = $this->getMock( 'Wikibase\TermIndex' );
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\TermIndexSearchInteractor' )
+			->disableOriginalConstructor()
+			->getMock();
 		$mock->expects( $this->any() )
-			->method( 'getMatchingIDs' )
-			->will( $this->returnCallback(
-				function ( array $terms, $entityType, array $options = array() )
-					use ( $matches )
-				{
-					$term = reset( $terms );
-					$fuzzySearch = isset( $options['caseSensitive'] ) && !$options['caseSensitive'];
-					$key = $term->getText() . ',' . $term->getLanguage() . ',' . $entityType . ',' . $fuzzySearch;
-					return isset( $matches[$key] ) ? $matches[$key] : array();
-				}
-			) );
-
+			->method( 'searchForEntities' )
+			->with(
+				$this->equalTo( 'Foo' ),
+				$this->equalTo( 'fr' ),
+				$this->equalTo( 'item' ),
+				$this->equalTo( array( TermIndexEntry::TYPE_LABEL ) )
+			)
+			->will( $this->returnValue( $returnResults ) );
 		return $mock;
-	}
-
-	/**
-	 * @return EntityLookup
-	 */
-	private function getEntityLookup() {
-		$repo = new MockRepository();
-
-		$one = new Item( new ItemId( 'Q1' ) );
-		$one->setLabel( 'en', 'one' );
-		$one->setLabel( 'de', 'eins' );
-		$one->setDescription( 'en', 'number' );
-		$one->setDescription( 'de', 'Zahl' );
-
-		$repo->putEntity( $one );
-
-		$oneone = new Item( new ItemId( 'Q11' ) );
-		$oneone->setLabel( 'en', 'oneone' );
-		$oneone->setLabel( 'de', 'einseins' );
-
-		$repo->putEntity( $oneone );
-
-		return $repo;
 	}
 
 	protected function newSpecialPage() {
 		$page = new SpecialItemDisambiguation();
-
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
-		$languageNameLookup->expects( $this->any() )
-			->method( 'getName' )
-			->will( $this->returnValue( 'LANGUAGE NAME' ) );
-
 		$page->initServices(
-			$this->getTermIndex(),
-			$this->getEntityLookup(),
-			$this->getEntityTitleLookup(),
-			$languageNameLookup
+			$this->getMockItemDisambiguation(),
+			$this->getMockSearchInteractor()
 		);
-
 		return $page;
 	}
 
@@ -148,103 +117,15 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 		$cases['empty'] = array( '', array(), null, $matchers );
 
-		// en/one
-		$matchers['language']['attributes']['value'] = 'en';
-		$matchers['label']['attributes']['value'] = 'one';
-
+		// fr/Foo
+		$matchers['language']['attributes']['value'] = 'fr';
+		$matchers['label']['attributes']['value'] = 'Foo';
 		$matchers['matches'] = array(
-			'tag' => 'ul',
-			'children' => array( 'count' => 2 ),
-			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
-		);
-
-		$matchers['one'] = array(
-			'tag' => 'a',
-			'parent' => array( 'tag' => 'li' ),
-			'content' => 'one',
-			'attributes' => array( 'title' => 'Q1' ),
-		);
-
-		$matchers['one/desc'] = array(
 			'tag' => 'span',
-			'content' => 'number',
-			'attributes' => array( 'class' => 'wb-itemlink-description' ),
+			'content' => 'ItemDisambiguationHTML-2',
+			'attributes' => array( 'class' => 'mock-span' ),
 		);
-
-		$matchers['oneone'] = array(
-			'tag' => 'a',
-			//'parent' => array( 'tag' => 'li' ), // PHPUnit's assertTag doesnt like this here
-			'content' => 'oneone',
-			'attributes' => array( 'title' => 'Q11' ),
-		);
-
-		$matchers['oneone/desc'] = array(
-			'tag' => 'span',
-			//'content' => 'Q11',
-			'attributes' => array( 'class' => 'wb-itemlink-description' ),
-		);
-
-		$cases['en/one'] = array( 'en/one', array(), 'en', $matchers );
-
-		// de/eins
-		$matchers['language']['attributes']['value'] = 'de';
-		$matchers['label']['attributes']['value'] = 'eins';
-
-		$matchers['one'] = array(
-			'tag' => 'a',
-			'parent' => array( 'tag' => 'li' ),
-			'content' => 'one',
-			'attributes' => array( 'title' => 'Q1' ),
-		);
-
-		$matchers['oneone'] = array(
-			'tag' => 'a',
-			//'parent' => array( 'tag' => 'li' ), // PHPUnit's assertTag doesnt like this here
-			'content' => 'oneone',
-			'attributes' => array( 'title' => 'Q11' ),
-		);
-
-		$matchers['one/de'] = array(
-			'tag' => 'span',
-			'parent' => array( 'tag' => 'li' ),
-			'content' => 'eins',
-			'attributes' => array( 'lang' => 'de' ),
-		);
-
-		$matchers['oneone/de'] = array(
-			'tag' => 'span',
-			//'parent' => array( 'tag' => 'li' ), // PHPUnit's assertTag doesnt like this here
-			'content' => 'einseins',
-			'attributes' => array( 'lang' => 'de' ),
-		);
-
-		$cases['de/eins'] = array( 'de/eins', array(), 'en', $matchers );
-
-		// en/unknown
-		$matchers['language']['attributes']['value'] = 'en';
-		$matchers['label']['attributes']['value'] = 'unknown';
-
-		unset( $matchers['matches'] );
-		unset( $matchers['one'] );
-		unset( $matchers['one/desc'] );
-		unset( $matchers['oneone'] );
-		unset( $matchers['one/de'] );
-		unset( $matchers['oneone/de'] );
-		unset( $matchers['oneone/desc'] );
-
-		$matchers['sorry'] = array(
-			'tag' => 'p',
-			'content' => 'regexp:/^Sorry.*found/'
-		);
-
-		$cases['en/unknown'] = array( 'en/unknown', array(), 'en', $matchers );
-
-		// invalid/unknown
-		$matchers['language']['attributes']['value'] = 'invalid';
-		$matchers['label']['attributes']['value'] = 'unknown';
-		$matchers['sorry']['content'] = 'regexp:/^Sorry.*language/';
-
-		$cases['invalid/unknown'] = array( 'invalid/unknown', array(), 'en', $matchers );
+		$cases['en/Foo'] = array( 'fr/Foo', array(), 'en', $matchers );
 
 		return $cases;
 	}
