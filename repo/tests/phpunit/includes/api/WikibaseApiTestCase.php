@@ -3,12 +3,15 @@
 namespace Wikibase\Test\Api;
 
 use ApiTestCase;
+use OutOfBoundsException;
 use Revision;
 use TestSites;
 use TestUser;
+use Title;
 use UsageException;
 use User;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
@@ -97,9 +100,11 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
 		foreach ( $activeHandles as $handle => $id ) {
-			$params = EntityTestHelper::getEntityClear( $handle );
-			$params['action'] = 'wbeditentity';
-			$this->doApiRequestWithToken( $params );
+			$title = $this->getTestEntityTitle( $handle );
+
+			$page = WikiPage::factory( $title );
+			$page->doDeleteArticle( 'Test reset' );
+			EntityTestHelper::unRegisterEntity( $handle );
 		}
 
 		foreach ( $handles as $handle ) {
@@ -114,6 +119,23 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 			$idMap["%$handle%"] = $res['entity']['id'];
 		}
+	}
+
+	/**
+	 * @param string $handle
+	 *
+	 * @return null|Title
+	 */
+	protected function getTestEntityTitle( $handle ) {
+		try {
+			$idString = EntityTestHelper::getId( $handle );
+			$id = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $idString );
+			$title =  WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $id );
+		} catch ( OutOfBoundsException $ex ) {
+			$title = null;
+		}
+
+		return $title;
 	}
 
 	/**
