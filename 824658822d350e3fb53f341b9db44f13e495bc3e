@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c140825d",
+        "filename": "repo/tests/phpunit/includes/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T21:09:57Z",
+      "side": 1,
+      "message": "I would be interested to see what other test cases people think I should include here!\nI think I cover most things but there may be some odd edge cases with lang fallback etc.",
+      "revId": "824658822d350e3fb53f341b9db44f13e495bc3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
