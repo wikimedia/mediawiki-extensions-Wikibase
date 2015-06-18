@@ -8,14 +8,18 @@ use TestSites;
 use User;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
+use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
+use Wikibase\Test\MockSiteStore;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
  * @covers Wikibase\Repo\Api\MergeItems
@@ -51,8 +55,6 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setUpSites();
-
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();
 		$this->apiModuleTestHelper = new ApiModuleTestHelper();
 
@@ -71,18 +73,9 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		) );
 	}
 
-	private function setUpSites() {
-		static $isSetup = false;
-
-		if ( !$isSetup ) {
-			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
-			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
-
-			$isSetup = true;
-		}
-	}
-
+	/**
+	 * @return EntityPermissionChecker
+	 */
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 
@@ -143,14 +136,22 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$resultBuilder = $apiHelperFactory->getResultBuilder( $module );
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
-		$changeOpsFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getMergeChangeOpFactory();
+		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
+			$this->getConstraintProvider(),
+			new ClaimGuidGenerator(),
+			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
+			WikibaseRepo::getDefaultInstance()->getStatementGuidParser(),
+			$this->getSnakValidator(),
+			$this->getTermValidatorFactory(),
+			new MockSiteStore( TestSites::getSites() )
+		);
 
 		$module->setServices(
 			$idParser,
 			$errorReporter,
 			$resultBuilder,
 			new ItemMergeInteractor(
-				$changeOpsFactory,
+				$changeOpsFactoryProvider->getMergeChangeOpFactory(),
 				$this->mockRepository,
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
@@ -158,6 +159,56 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				$module->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect )
 			)
+		);
+	}
+
+	/**
+	 * @return EntityConstraintProvider
+	 */
+	private function getConstraintProvider() {
+		$constraintProvider = $this->getMockBuilder( 'Wikibase\Validators\EntityConstraintProvider' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$constraintProvider->expects( $this->any() )
+			->method( 'getUpdateValidators' )
+			->will( $this->returnValue( array() ) );
+
+		return $constraintProvider;
+	}
+
+	/**
+	 * @return SnakValidator
+	 */
+	private function getSnakValidator() {
+		$snakValidator = $this->getMockBuilder( 'Wikibase\Validators\SnakValidator' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$snakValidator->expects( $this->any() )
+			->method( 'validate' )
+			->will( $this->returnValue( Status::newGood() ) );
+
+		return $snakValidator;
+	}
+
+	/**
+	 * @return TermValidatorFactory
+	 */
+	private function getTermValidatorFactory() {
+		$dupeDetector = $this->getMockBuilder( 'Wikibase\LabelDescriptionDuplicateDetector' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$dupeDetector->expects( $this->any() )
+			->method( 'detectTermConflicts' )
+			->will( $this->returnValue( Status::newGood() ) );
+
+		return new TermValidatorFactory(
+			100,
+			array( 'en', 'de', 'fr' ),
+			new BasicEntityIdParser(),
+			$dupeDetector
 		);
 	}
 
