@@ -135,7 +135,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
 				$user,
-				$this->getMockEditFilterHookRunner()
+				$this->getMockEditFilterHookRunner(),
+				$this->mockRepository
 			)
 		);
 

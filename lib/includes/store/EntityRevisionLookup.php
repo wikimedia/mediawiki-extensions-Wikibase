@@ -59,7 +59,7 @@ interface EntityRevisionLookup {
 	 * @param string $mode LATEST_FROM_SLAVE or LATEST_FROM_MASTER. LATEST_FROM_MASTER would force the
 	 *        revision to be determined from the canonical master database.
 	 *
-	 * @return int|false
+	 * @return int|false Returns false in case the entity doesn't exist (this includes redirects).
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE );
 
