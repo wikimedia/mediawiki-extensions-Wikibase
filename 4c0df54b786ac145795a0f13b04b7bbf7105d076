@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_7bfb84ba",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.variations.Value.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-06-18T14:08:56Z",
+      "side": 0,
+      "message": "i think this block of code is unused.",
+      "revId": "4c0df54b786ac145795a0f13b04b7bbf7105d076",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
