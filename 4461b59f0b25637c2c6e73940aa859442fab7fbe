@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_e049ff90",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T13:46:13Z",
+      "side": 1,
+      "message": "*agrees* will do",
+      "parentUuid": "8ec42329_e011ffb1",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_80203bf3",
         "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
         "patchSetId": 16
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-18T13:05:40Z",
       "side": 1,
       "message": "Method names that differ only by a trailing \"s\" are confusing and should be avoided in my oppinion.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a063f708",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T13:46:13Z",
+      "side": 1,
+      "message": "will try to think of something",
+      "parentUuid": "8ec42329_80203bf3",
       "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c05e4348",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T13:46:13Z",
+      "side": 1,
+      "message": "will look at doing this",
+      "parentUuid": "8ec42329_c0264311",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_00152b9c",
         "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
         "patchSetId": 16
@@ -64,6 +118,24 @@
       "writtenOn": "2015-06-18T13:05:40Z",
       "side": 1,
       "message": "convertToSearchResult? newSearchresult? \"get\" implies a database lookup in this context, or a getter for a member/setting.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_605d0f4a",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T13:46:13Z",
+      "side": 1,
+      "message": "will do",
+      "parentUuid": "8ec42329_00152b9c",
       "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_bb0b2c25",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T13:46:13Z",
+      "side": 1,
+      "message": "yup",
+      "parentUuid": "8ec42329_60250f03",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_207f07df",
         "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
         "patchSetId": 16
@@ -98,6 +188,24 @@
       "writtenOn": "2015-06-18T13:05:40Z",
       "side": 1,
       "message": "Why do we need all the aliases? We only really need the alias(es) that were matched by the original query, now? And we should already have them. It would be really nice if we could avoid db queries that get run in a loop.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_bb324ced",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T13:46:13Z",
+      "side": 1,
+      "message": "wbsearchentities returns all aliases but only performs a search on labels.\nI didn\u0027t return aliases in my first versions of the interactor.\nI could perhaps move the logic of retrieving aliases to SearchEntities only?",
+      "parentUuid": "8ec42329_207f07df",
       "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
