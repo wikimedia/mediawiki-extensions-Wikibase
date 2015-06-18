@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_a0ec57f3",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T12:22:43Z",
+      "side": 1,
+      "message": "Isn\u0027t \"unregister\" one word? The camel case \"R\" looks odd.",
+      "revId": "5606c4f8f028135f37bc586960c0ed91c6338f13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_20c06754",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T12:22:43Z",
+      "side": 1,
+      "message": "WikiPage::factory doesn\u0027t accept null.",
+      "revId": "5606c4f8f028135f37bc586960c0ed91c6338f13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_40c33361",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T12:22:43Z",
+      "side": 1,
+      "message": "Why protected?",
+      "revId": "5606c4f8f028135f37bc586960c0ed91c6338f13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
