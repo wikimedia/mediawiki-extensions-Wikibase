@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_3b4e5c73",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T13:47:56Z",
+      "side": 1,
+      "message": "getTestEntityTitle explicitly returns null. If this should crash the test, please replace the \"return null\" below with an exception.",
+      "parentUuid": "8ec42329_c00c0348",
+      "revId": "5606c4f8f028135f37bc586960c0ed91c6338f13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_40c33361",
         "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
         "patchSetId": 1
