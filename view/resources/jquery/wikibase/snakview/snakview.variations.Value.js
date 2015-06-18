@@ -331,23 +331,8 @@
 				this._valueView = null;
 				this.$viewPort.empty();
 			}
+
 			$valueViewDom = this.$viewPort.wrapInner( '<div/>' ).children();
-
-			// Can't choose a view for displaying empty value without indication by data type
-			// definition which kind of value should be creatable by the new valueview.
-			// NOTE: We run into this situation if we have a Snak which is using a deleted property,
-			//  so the DataType can not be determined while we still want to display the valueview.
-			if( !dataType && dataValue === null ) {
-				// This message will be shown if the initial value uses a different Snak type but
-				// the user tries to change the snak type to value Snak. This simply doesn't make
-				// any sense since we have no indicator for what kind of value should be entered
-				// if the Property doesn't provide us with that info.
-				$valueViewDom
-				.text( mw.msg( 'wikibase-snakview-variation-nonewvaluefordeletedproperty' ) )
-				.addClass( this.variationBaseClass + '-nonewvaluefordeletedproperty' );
-
-				return false; // no valueview created!
-			}
 
 			this._valueView = this._valueViewBuilder.initValueView(
 				$valueViewDom,
