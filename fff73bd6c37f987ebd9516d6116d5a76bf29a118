@@ -123,6 +123,24 @@
       "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5e81d390",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T20:15:41Z",
+      "side": 1,
+      "message": "The ignore patterns are literally patterns, used in a preg_match call. And by default, the patterns provided via the \"--ignore\u003d\" parameter are executed on the absolute path, not on a relative path.\n\nhttps://github.com/squizlabs/PHP_CodeSniffer/blob/master/CodeSniffer/CLI.php#L697\nhttps://github.com/squizlabs/PHP_CodeSniffer/blob/master/CodeSniffer.php#L1620\n\nSo I still think this change will also cause Travis to always succeed because it never checked any files.",
+      "parentUuid": "8ec42329_7e6fef8f",
+      "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
