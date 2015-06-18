@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_85c84d78",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T09:12:28Z",
+      "side": 1,
+      "message": "Indeed.",
+      "parentUuid": "8ec42329_dea8711f",
+      "revId": "75b39559b66ef1a76e819cd02b2a4ba77e0f4e26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_be86c5bc",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-17T18:18:22Z",
       "side": 1,
       "message": "This is already limited via the guard in reallyDoQuery. Can be removed with no consequences, as far as I can tell.",
+      "revId": "75b39559b66ef1a76e819cd02b2a4ba77e0f4e26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_65cd2188",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T09:12:28Z",
+      "side": 1,
+      "message": "It\u0027s needed for consistency. If reallyDoQuery got offset 20000 and chanegd it to 10000, calling fetchFromCache should return the result for offset 10000, not the (empty) result for offset 20000.",
+      "parentUuid": "8ec42329_be86c5bc",
       "revId": "75b39559b66ef1a76e819cd02b2a4ba77e0f4e26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
