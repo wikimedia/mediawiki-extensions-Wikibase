@@ -31,10 +31,12 @@ interface EntityRedirectLookup {
 	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
+	 * @param string $forUpdate If "for update" is given the redirect will be
+	 *        determined from the canonical master database.
 	 *
 	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
 	 *         does not refer to a redirect, or false if $entityId is not known.
 	 */
-	public function getRedirectForEntityId( EntityId $entityId );
+	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' );
 
 }

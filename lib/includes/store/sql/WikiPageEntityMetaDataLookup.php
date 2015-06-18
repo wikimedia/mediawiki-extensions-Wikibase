@@ -105,6 +105,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			'rev_content_format',
 			'rev_timestamp',
 			'page_latest',
+			'page_is_redirect',
 			'old_id',
 			'old_text',
 			'old_flags'

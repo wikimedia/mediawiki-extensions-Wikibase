@@ -575,7 +575,11 @@ class MockRepository implements
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
-		$revision = $this->getEntityRevision( $entityId, $mode );
+		try {
+			$revision = $this->getEntityRevision( $entityId, $mode );
+		} catch ( UnresolvedRedirectException $e ) {
+			return false;
+		}
 
 		return $revision === null ? false : $revision->getRevisionId();
 	}
@@ -834,11 +838,12 @@ class MockRepository implements
 	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
+	 * @parma string $forUpdate
 	 *
 	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
 	 *         does not refer to a redirect, or false if $entityId is not known.
 	 */
-	public function getRedirectForEntityId( EntityId $entityId ) {
+	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
