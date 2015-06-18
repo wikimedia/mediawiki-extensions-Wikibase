@@ -357,7 +357,7 @@ class EntityTestHelper {
 	 * @param string $handle
 	 * @throws OutOfBoundsException
 	 */
-	private static function unRegisterEntity( $handle ) {
+	public static function unRegisterEntity( $handle ) {
 		unset( self::$activeIds[ self::$activeHandles[ $handle ] ] );
 		unset( self::$activeHandles[ $handle ] );
 	}
