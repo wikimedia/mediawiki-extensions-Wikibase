@@ -4,17 +4,14 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Language;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
-use Wikibase\TermIndex;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
@@ -25,28 +22,19 @@ use Wikibase\TermIndex;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 class SpecialItemDisambiguation extends SpecialWikibasePage {
 
 	/**
-	 * @var TermIndex
+	 * @var ItemDisambiguation DO NOT ACCESS DIRECTLY use this->getItemDisambiguation
 	 */
-	private $termIndex;
+	private $itemDisambiguation;
 
 	/**
-	 * @var EntityLookup
+	 * @var TermIndexSearchInteractor|null DO NOT ACCESS DIRECTLY use this->getSearchInteractor
 	 */
-	private $entityLookup;
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
+	private $searchInteractor = null;
 
 	/**
 	 * @var int
@@ -60,14 +48,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 */
 	public function __construct() {
 		parent::__construct( 'ItemDisambiguation', '', true );
-
-		$this->initServices(
-			WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex(),
-			WikibaseRepo::getDefaultInstance()->getEntityLookup(),
-			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
-			new LanguageNameLookup()
-		);
-
 		//@todo: make this configurable
 		$this->limit = 100;
 	}
@@ -75,17 +55,51 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	/**
 	 * Set service objects to use. Unit tests may call this to substitute mock
 	 * services.
+	 *
+	 * @param ItemDisambiguation $itemDisambiguation
+	 * @param TermIndexSearchInteractor|null $searchInteractor
 	 */
 	public function initServices(
-		TermIndex $termIndex,
-		EntityLookup $entityLookup,
-		EntityTitleLookup $entityTitleLookup,
-		LanguageNameLookup $languageNameLookup
+		ItemDisambiguation $itemDisambiguation,
+		TermIndexSearchInteractor $searchInteractor
 	) {
-		$this->termIndex = $termIndex;
-		$this->entityLookup = $entityLookup;
-		$this->entityTitleLookup = $entityTitleLookup;
-		$this->languageNameLookup = $languageNameLookup;
+		$this->itemDisambiguation = $itemDisambiguation;
+		$this->searchInteractor = $searchInteractor;
+	}
+
+	/**
+	 * @param string $displayLanguageCode Only used if the service does not already exist
+	 *
+	 * @return TermIndexSearchInteractor
+	 */
+	private function getSearchInteractor( $displayLanguageCode ) {
+		if( $this->searchInteractor === null ) {
+			$interactor = WikibaseRepo::getDefaultInstance()->newTermSearchInteractor( $displayLanguageCode );
+			$this->searchInteractor = $interactor;
+		}
+		return $this->searchInteractor;
+	}
+
+	/**
+	 * @return ItemDisambiguation
+	 */
+	private function getItemDisambiguation() {
+		if( $this->itemDisambiguation === null ) {
+			$languageNameLookup = new LanguageNameLookup();
+			$entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter(
+				new LanguageLabelDescriptionLookup(
+					new EntityRetrievingTermLookup( WikibaseRepo::getDefaultInstance()->getEntityLookup() ),
+					$this->getLanguage()->getCode()
+				),
+				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+				$languageNameLookup );
+			$this->itemDisambiguation = new ItemDisambiguation(
+				$entityIdHtmlLinkFormatter,
+				$languageNameLookup,
+				$this->getLanguage()->getCode()
+			);
+		}
+		return $this->itemDisambiguation;
 	}
 
 	/**
@@ -102,7 +116,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		$request = $this->getRequest();
 		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
 		$languageCode = $request->getVal( 'language', isset( $parts[0] ) ? $parts[0] : '' );
-
 		if ( $languageCode === '' ) {
 			$languageCode = $this->getLanguage()->getCode();
 		}
@@ -118,15 +131,22 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 
 		// Display the result set
 		if ( isset( $languageCode ) && isset( $label ) && $label !== '' ) {
-			$items = $this->findLabelUsage(
+			$searchInteractor = $this->getSearchInteractor( $this->getLanguage()->getCode() );
+			$searchInteractor->setLimit( $this->limit );
+			$searchInteractor->setIsCaseSensitive( true );
+			$searchInteractor->setIsPrefixSearch( false );
+			$searchInteractor->setUseLanguageFallback( false );
+			// TODO also match aliases here T45962
+			$searchResult = $searchInteractor->searchForEntities(
+				$label,
 				$languageCode,
-				$label
+				'item',
+				array( TermIndexEntry::TYPE_LABEL )
 			);
 
-			//@todo: show a message if count( $items ) > $this->limit.
-			if ( 0 < count( $items ) ) {
+			if ( 0 < count( $searchResult ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );
-				$this->displayDisambiguationPage( $items, $languageCode );
+				$this->displayDisambiguationPage( $searchResult );
 			} else {
 				$this->showNothingFound( $languageCode, $label );
 			}
@@ -165,33 +185,11 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	/**
 	 * Display disambiguation page.
 	 *
-	 * @param Item[] $items
-	 * @param string $languageCode
+	 * @param array[] $searchResult
 	 */
-	private function displayDisambiguationPage( array $items, $languageCode ) {
-		// @fixme it is confusing to have so many $langCodes here, coming from
-		// different places and maybe not necessary to be this way.
-
-		// @fixme inject this!
-		$labelDescriptionLookup = new LanguageLabelDescriptionLookup(
-			new EntityRetrievingTermLookup( $this->entityLookup ),
-			$this->getLanguage()->getCode()
-		);
-
-		$linkFormatter = new EntityIdHtmlLinkFormatter(
-			$labelDescriptionLookup,
-			$this->entityTitleLookup,
-			$this->languageNameLookup
-		);
-
-		$disambiguationList = new ItemDisambiguation(
-			$languageCode,
-			$this->getContext()->getLanguage()->getCode(),
-			$this->languageNameLookup,
-			$linkFormatter
-		);
-
-		$html = $disambiguationList->getHTML( $items );
+	private function displayDisambiguationPage( array $searchResult ) {
+		$itemDisambiguation = $this->getItemDisambiguation();
+		$html = $itemDisambiguation->getHTML( $searchResult );
 		$this->getOutput()->addHTML( $html );
 	}
 
@@ -264,56 +262,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
-	}
-
-	/**
-	 * Finds items that use the given label in the given language.
-	 *
-	 * @todo: Make this use an EntityInfoBuilder or similar instead of loading full entities.
-	 * @todo: Should search over aliases as well, not just labels! Needs smart display though...
-	 *
-	 * @param string $languageCode
-	 * @param string $label
-	 *
-	 * @return Item[]
-	 */
-	private function findLabelUsage( $languageCode, $label ) {
-		//@todo: optionally
-		$protoTerms = array(
-			new TermIndexEntry( array(
-				'termType' 		=> TermIndexEntry::TYPE_LABEL,
-				'termLanguage' 	=> $languageCode,
-				'termText' 		=> $label
-			) ),
-		);
-
-		//@todo: expose options
-		$options = array(
-			'caseSensitive' => true,
-			'prefixSearch' => false,
-			'LIMIT' => $this->limit
-		);
-
-		$entityIds = $this->termIndex->getMatchingIDs( $protoTerms, Item::ENTITY_TYPE, $options );
-		$entities = array();
-
-		$count = 0;
-
-		foreach ( $entityIds as $entityId ) {
-			$entity = $this->entityLookup->getEntity( $entityId );
-
-			if ( $entity !== null ) {
-				$entities[] = $entity;
-			}
-
-			$count++;
-
-			if ( $count >= $this->limit ) {
-				break;
-			}
-		}
-
-		return $entities;
 	}
 
 }
