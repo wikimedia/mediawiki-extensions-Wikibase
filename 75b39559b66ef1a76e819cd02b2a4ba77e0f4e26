@@ -69,6 +69,24 @@
       "revId": "75b39559b66ef1a76e819cd02b2a4ba77e0f4e26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0058cb33",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:29:06Z",
+      "side": 1,
+      "message": "Oh, right. This is not a limit but an offset. Which raises an other question: Isn\u0027t is confusing when a series of queries with increasing offset start returning the same result over and over again at a certain offset? This will lead to endless loops. Instead the queries should stop at that limit and return nothing.",
+      "parentUuid": "8ec42329_65cd2188",
+      "revId": "75b39559b66ef1a76e819cd02b2a4ba77e0f4e26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
