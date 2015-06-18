@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e011ffb1",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:05:40Z",
+      "side": 1,
+      "message": "makeTermIndexEntries? makeTermIndexEntryTemplates? \"get\" implies a database lookup in this context.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_80203bf3",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:05:40Z",
+      "side": 1,
+      "message": "Method names that differ only by a trailing \"s\" are confusing and should be avoided in my oppinion.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c0264311",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:05:40Z",
+      "side": 1,
+      "message": "Pre-fetch labels and descriptions here, using a TermBuffer, if available.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_00152b9c",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:05:40Z",
+      "side": 1,
+      "message": "convertToSearchResult? newSearchresult? \"get\" implies a database lookup in this context, or a getter for a member/setting.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_60250f03",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:05:40Z",
+      "side": 1,
+      "message": "This is potentially expensive, pre-fetch in getSearchResults if possible.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_207f07df",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:05:40Z",
+      "side": 1,
+      "message": "Why do we need all the aliases? We only really need the alias(es) that were matched by the original query, now? And we should already have them. It would be really nice if we could avoid db queries that get run in a loop.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_408253ce",
+        "filename": "repo/includes/Interactors/TermSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:05:40Z",
+      "side": 1,
+      "message": "Using constants here seems like overkill, string literals should be fine. But they don\u0027t hurt, I guess.",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
