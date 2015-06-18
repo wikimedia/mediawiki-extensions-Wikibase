@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_20a147f5",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:42:32Z",
+      "side": 1,
+      "message": "Please add either an\n\n if ( !is_string( $conceptBaseUri ) || $conceptBaseUri \u003d\u003d\u003d \u0027\u0027 ) {\n \tthrow ...\n\ncheck here, or an\n\n if ( !is_string( $conceptBaseUri ) || $conceptBaseUri \u003d\u003d\u003d \u0027\u0027 ) {\n \treturn;\n\ncheck in the function below.",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2072a7ac",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:42:32Z",
+      "side": 1,
+      "message": "This is a simple string property, why have a local copy for it?",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c0af23dd",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:42:32Z",
+      "side": 1,
+      "message": "Isn\u0027t this redundant? If you are checking for null here, please make this explicit with !\u003d\u003d null or is_array.",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_60be6f15",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:42:32Z",
+      "side": 1,
+      "message": "Please avoid calling the trivial getSettings() here, $this-\u003esettings please. Same below.",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_20886775",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:42:32Z",
+      "side": 1,
+      "message": "newEmpty accepts an id. Why not use that?",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_408b3372",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:42:32Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_00852b5a",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:42:32Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
