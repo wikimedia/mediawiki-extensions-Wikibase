@@ -410,6 +410,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 			'caseSensitive' => $this->isCaseSensitive,
 			'prefixSearch' => $this->isPrefixSearch,
 			'LIMIT' => $this->limit,
+			'orderByWeight' => true,
 		);
 	}
 
