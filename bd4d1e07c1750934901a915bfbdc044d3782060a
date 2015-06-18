@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_85584d5a",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:22:22Z",
+      "side": 1,
+      "message": "This is unused now, please remove.",
+      "revId": "bd4d1e07c1750934901a915bfbdc044d3782060a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_852fed9b",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:22:22Z",
+      "side": 1,
+      "message": "This is unused now, please remove.",
+      "revId": "bd4d1e07c1750934901a915bfbdc044d3782060a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a010d753",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:22:22Z",
+      "side": 1,
+      "message": "I think overriding the default with \"false\" is not a good idea. This should fall back to the default.",
+      "revId": "bd4d1e07c1750934901a915bfbdc044d3782060a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c00ba324",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:22:22Z",
+      "side": 1,
+      "message": "This is \"false\" by default anyway, why repeat it?",
+      "revId": "bd4d1e07c1750934901a915bfbdc044d3782060a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c50c1548",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:22:22Z",
+      "side": 1,
+      "message": "Copy paste mistake? Doesn\u0027t belong here.",
+      "revId": "bd4d1e07c1750934901a915bfbdc044d3782060a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e006df1f",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:22:22Z",
+      "side": 1,
+      "message": "Newline missing.",
+      "revId": "bd4d1e07c1750934901a915bfbdc044d3782060a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_20fdc704",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T11:22:22Z",
+      "side": 1,
+      "message": "Why did this line changed? I think it\u0027s more safe to stick to the $conds[\u0027field\u0027] \u003d $value; format if possible.",
+      "revId": "bd4d1e07c1750934901a915bfbdc044d3782060a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
