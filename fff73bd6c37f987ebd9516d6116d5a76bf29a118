@@ -87,6 +87,24 @@
       "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9eaf3bde",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-18T19:30:22Z",
+      "side": 1,
+      "message": "Are you saying that when you run this command inside extensions/Wikibase/, it will end up ignoring that directory? Or do you have something like extensions/Wikibase/extensions/Wikibase/ ??? I don\u0027t get it.",
+      "parentUuid": "8ec42329_5be4afdb",
+      "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
