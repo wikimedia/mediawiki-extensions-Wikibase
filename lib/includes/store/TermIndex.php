@@ -42,7 +42,7 @@ interface TermIndex {
 	 *
 	 * @param EntityId $entityId
 	 * @param string[]|null $termTypes The types of terms to return, e.g. "label", "description",
-	 *        or "alias". Compare the Term::TYPE_XXX constants. If null, all types are returned.
+	 *        or "alias". Compare the TermIndexEntry::TYPE_XXX constants. If null, all types are returned.
 	 * @param string[]|null $languageCodes The desired languages, given as language codes.
 	 *        If null, all languages are returned.
 	 *
@@ -62,7 +62,7 @@ interface TermIndex {
 	 *
 	 * @param EntityId[] $entityIds Entity ids of one type only.
 	 * @param string[]|null $termTypes The types of terms to return, e.g. "label", "description",
-	 *        or "alias". Compare the Term::TYPE_XXX constants. If null, all types are returned.
+	 *        or "alias". Compare the TermIndexEntry::TYPE_XXX constants. If null, all types are returned.
 	 * @param string[]|null $languageCodes The desired languages, given as language codes.
 	 *        If null, all languages are returned.
 	 *
