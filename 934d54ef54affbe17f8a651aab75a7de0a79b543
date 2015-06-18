@@ -16,6 +16,24 @@
       "revId": "934d54ef54affbe17f8a651aab75a7de0a79b543",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9bc990b0",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2015-06-18T14:01:23Z",
+      "side": 1,
+      "message": "Hi it has to because it causes other errors for other software like translatewiki would have problems. And all other extension do this and they recommend you do it this way and it can load this way.",
+      "parentUuid": "8ec42329_60866fae",
+      "revId": "934d54ef54affbe17f8a651aab75a7de0a79b543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
