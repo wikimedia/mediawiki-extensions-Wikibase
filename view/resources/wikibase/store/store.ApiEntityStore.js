@@ -57,15 +57,21 @@
 			this._repoApi.getEntities( entityIds, null, this._languages )
 			.done( function( result ) {
 				$.each( result.entities, function( id, entityData ) {
-					if( entityData.missing === '' ) {
-						return; // missing entity
+					// return entities not found (e.g. deleted) as null, and allow
+					// valueViewBuilder to select appropriate expert for such case.
+					var entity = null,
+						entityId = id;
+
+					if( entityData.missing !== '' ) {
+						entity = self._fetchedEntityUnserializer.deserialize( {
+							title: entityData.title,
+							content: entityData
+						} );
+
+						entityId = entity.getContent().getId();
 					}
 
-					var entity = self._fetchedEntityUnserializer.deserialize( {
-						title: entityData.title,
-						content: entityData
-					} );
-					deferreds[ entityIdToIndex[ entity.getContent().getId() ] ].resolve( entity );
+					deferreds[ entityIdToIndex[ entityId ] ].resolve( entity );
 				} );
 			} )
 			// FIXME: Evaluate failing promise
