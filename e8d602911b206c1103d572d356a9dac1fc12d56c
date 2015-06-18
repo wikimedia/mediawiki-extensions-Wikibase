@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_1631f556",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T15:57:15Z",
+      "side": 1,
+      "message": "Unused.",
+      "revId": "e8d602911b206c1103d572d356a9dac1fc12d56c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f6fea965",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T15:57:15Z",
+      "side": 1,
+      "message": "Please make it more clear what this means. Why not $useLanguageFallback?\n\nUpper case \"L\".",
+      "revId": "e8d602911b206c1103d572d356a9dac1fc12d56c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_363af1e4",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T15:57:15Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "e8d602911b206c1103d572d356a9dac1fc12d56c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
