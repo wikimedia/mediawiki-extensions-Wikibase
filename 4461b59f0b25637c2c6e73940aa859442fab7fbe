@@ -230,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_9bb43035",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:54:19Z",
+      "side": 1,
+      "message": "wbsearchentities loosk at the aliases, and then returns the ones that matched the original search. The idea is to show the user *why* a specific match was found. Basically, we want to have these things for every matching entity:\n\n* The entity ID\n* A Term that \"explains\" why that entity matches (may come from a label or an alias). If there are multiple TermIndexEntries for the entitiy, just use the first one for now (ideally, use the \"best\" match, but whatever).\n* Label and description terms that can be used for display (or null). Currently this is a list... is that really needed? I\u0027d really want just one label term and one description term.\n* some sort of score (not implemented yet, but should be easy to add later).",
+      "parentUuid": "8ec42329_bb324ced",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_408253ce",
         "filename": "repo/includes/Interactors/TermSearchInteractor.php",
         "patchSetId": 16
