@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_05e9bd7a",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T10:31:51Z",
+      "side": 1,
+      "message": "With a mock MergeChangeOpsFactory, this should not be needed any more.",
+      "revId": "39dc486924da5b1e399a828cc0360898fe9febc7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_25ecf98d",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T10:31:51Z",
+      "side": 1,
+      "message": "Create a mock ChangeOpFactoryProvider and/or MergeChangeOpFactory. Using the one from WikibaseRepo will hit the database.",
+      "revId": "39dc486924da5b1e399a828cc0360898fe9febc7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
