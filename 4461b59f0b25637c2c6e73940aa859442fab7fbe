@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_dbaab8d0",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T13:53:35Z",
+      "side": 1,
+      "message": "Another point is currently once the interactor returns a set of results, and that result gets passed around etc it is hard to know what the requested display language was, this is currently set on construction.\n\nWhen re-factoring ItemDisambiguation I nearly added an extra element to the return array for the search method which would have provided details of the search, text, entitytype, seach lang etc. Perhaps that is the right way to go with this and then let searchentites get the aliases?",
+      "parentUuid": "8ec42329_bb324ced",
+      "revId": "4461b59f0b25637c2c6e73940aa859442fab7fbe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_408253ce",
         "filename": "repo/includes/Interactors/TermSearchInteractor.php",
         "patchSetId": 16
