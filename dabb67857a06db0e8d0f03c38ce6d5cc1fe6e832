@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_4091f350",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T12:35:10Z",
+      "side": 1,
+      "message": "Assert::paramterType( \u0027string\u0027, $conceptBaseUri, \u0027$conceptBaseUri\u0027 );\nAssert::paramter( !empty( $conceptBaseUri ), \u0027$conceptBaseUri\u0027, \u0027must not be empty\u0027 );",
+      "parentUuid": "8ec42329_20a147f5",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_2072a7ac",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 2
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c07c031e",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T12:35:10Z",
+      "side": 1,
+      "message": "It can be null (or false?!) if we get an old ParserOutput object from the cache.",
+      "parentUuid": "8ec42329_c0af23dd",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_60be6f15",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 2
@@ -64,6 +100,24 @@
       "writtenOn": "2015-06-18T11:42:32Z",
       "side": 1,
       "message": "Please avoid calling the trivial getSettings() here, $this-\u003esettings please. Same below.",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8076fb37",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T12:35:10Z",
+      "side": 1,
+      "message": "I disagree. Getters should be used when available, even internally, so lazy initialization can be introduced later without causing breakage.",
+      "parentUuid": "8ec42329_60be6f15",
       "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
