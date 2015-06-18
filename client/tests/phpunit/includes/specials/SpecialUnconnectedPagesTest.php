@@ -19,6 +19,7 @@ use Wikibase\Test\SpecialPageTestBase;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Thiemo Mättig
  */
 class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
@@ -72,6 +73,26 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 			array( 'user:foo', array( "page_title >= 'Foo'", "page_namespace = 2", 'page_namespace IN (0)' ) ),
 			array( 'user talk:foo', array( "page_title >= 'Foo'", "page_namespace = 3", 'page_namespace IN (0)' ) ),
 		);
+	}
+
+	public function testGetQueryInfo() {
+		$page = $this->newSpecialPage();
+		$queryInfo = $page->getQueryInfo();
+		$this->assertInternalType( 'array', $queryInfo );
+		$this->assertNotEmpty( $queryInfo );
+		$this->assertArrayHasKey( 'conds', $queryInfo );
+	}
+
+	public function testReallyDoQueryReturnsEmptyResultWhenExceedingLimit() {
+		$page = $this->newSpecialPage();
+		$result = $page->reallyDoQuery( 1, 10001 );
+		$this->assertSame( 0, $result->numRows() );
+	}
+
+	public function testFetchFromCacheReturnsEmptyResultWhenExceedingLimit() {
+		$page = $this->newSpecialPage();
+		$result = $page->fetchFromCache( 1, 10001 );
+		$this->assertSame( 0, $result->numRows() );
 	}
 
 }

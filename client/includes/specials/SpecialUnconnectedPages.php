@@ -6,6 +6,8 @@ use DatabaseBase;
 use FakeResultWrapper;
 use Linker;
 use QueryPage;
+use ResultWrapper;
+use Skin;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;
@@ -17,6 +19,7 @@ use Wikibase\NamespaceChecker;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Amir Sarabadani < ladsgroup@gmail.com >
+ * @author Daniel Kinzler
  */
 class SpecialUnconnectedPages extends QueryPage {
 
@@ -26,39 +29,29 @@ class SpecialUnconnectedPages extends QueryPage {
 	const MAX_OFFSET = 10000;
 
 	/**
-	 * Title object build from the $startPageName parameter
-	 *
-	 * @var Title|null
-	 */
-	private $startTitle = null;
-
-	/**
 	 * @var NamespaceChecker|null
 	 */
 	private $namespaceChecker = null;
 
 	/**
-	 * Set to 'only' if the search should only include pages with inter wiki links
+	 * @see SpecialPage::__construct
 	 *
-	 * @var string
+	 * @param string $name
 	 */
-	private $iwData = '';
-
-	public function __construct() {
-		parent::__construct( 'UnconnectedPages' );
+	public function __construct( $name = 'UnconnectedPages' ) {
+		parent::__construct( $name );
 	}
 
-	function isExpensive() {
-		return false;
-	}
-
+	/**
+	 * @see QueryPage::isSyndicated
+	 *
+	 * @return bool Always false because we do not want to build RSS/Atom feeds for this page.
+	 */
 	function isSyndicated() {
 		return false;
 	}
 
 	/**
-	 * Set the NamespaceChecker
-	 *
 	 * @since 0.4
 	 *
 	 * @param NamespaceChecker $namespaceChecker
@@ -68,11 +61,6 @@ class SpecialUnconnectedPages extends QueryPage {
 	}
 
 	/**
-	 * @see SpecialPage::getDescription
-	 *
-	/**
-	 * Get the NamespaceChecker
-	 *
 	 * @since 0.4
 	 *
 	 * @return NamespaceChecker
@@ -89,6 +77,7 @@ class SpecialUnconnectedPages extends QueryPage {
 
 		return $this->namespaceChecker;
 	}
+
 	/**
 	 * Build conditionals for namespace
 	 *
@@ -103,9 +92,6 @@ class SpecialUnconnectedPages extends QueryPage {
 	public function buildConditionals( DatabaseBase $dbr, Title $title = null, NamespaceChecker $checker = null ) {
 		$conds = array();
 
-		if ( $title === null ) {
-			$title = $this->startTitle;
-		}
 		if ( $checker === null ) {
 			$checker = $this->getNamespaceChecker();
 		}
@@ -118,22 +104,26 @@ class SpecialUnconnectedPages extends QueryPage {
 		return $conds;
 	}
 
+	/**
+	 * @see QueryPage::getQueryInfo
+	 *
+	 * @return array[]
+	 */
 	function getQueryInfo() {
 		$dbr = wfGetDB( DB_SLAVE );
+
 		$conds = $this->buildConditionals( $dbr );
-		$conds[] = 'page_is_redirect = 0';
+		$conds['page_is_redirect'] = 0;
 		$conds[] = 'pp_propname IS NULL';
-		if ( $this->iwData === 'only' ) {
-			$conds[] = 'll_from IS NOT NULL';
-		}
-		$dbrg = array (
+
+		return array(
 			'tables' => array(
 				'page',
 				'page_props',
 				'langlinks'
 			),
 			'fields' => array(
-                                'value' => 'page_id',
+				'value' => 'page_id',
 				'page_namespace',
 				'page_title',
 				'page_id',
@@ -153,19 +143,35 @@ class SpecialUnconnectedPages extends QueryPage {
 				'langlinks' => array( 'LEFT JOIN', 'll_from = page_id' )
 			)
 		);
-		return $dbrg;
 	}
 
+	/**
+	 * @see QueryPage::getOrderFields
+	 *
+	 * @return string[]
+	 */
 	function getOrderFields() {
 		return array( 'value' );
 	}
 
+	/**
+	 * @see QueryPage::sortDescending
+	 *
+	 * @return bool Always false for this page.
+	 */
 	function sortDescending() {
 		return false;
 	}
 
+	/**
+	 * @see QueryPage::reallyDoQuery
+	 *
+	 * @param int|bool $limit
+	 * @param int|bool $offset
+	 *
+	 * @return ResultWrapper
+	 */
 	function reallyDoQuery( $limit, $offset = false ) {
-
 		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
 			return new FakeResultWrapper( array() );
 		}
@@ -173,6 +179,14 @@ class SpecialUnconnectedPages extends QueryPage {
 		return parent::reallyDoQuery( $limit, $offset );
 	}
 
+	/**
+	 * @see QueryPage::fetchFromCache
+	 *
+	 * @param int|bool $limit
+	 * @param int|bool $offset
+	 *
+	 * @return ResultWrapper
+	 */
 	function fetchFromCache( $limit, $offset = false ) {
 		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
 			return new FakeResultWrapper( array() );
@@ -181,9 +195,18 @@ class SpecialUnconnectedPages extends QueryPage {
 		return parent::fetchFromCache( $limit, $offset );
 	}
 
+	/**
+	 * @see QueryPage::formatResult
+	 *
+	 * @param Skin $skin
+	 * @param object $result
+	 *
+	 * @return string
+	 */
 	function formatResult( $skin, $result ) {
 		$title = Title::newFromID( $result->value );
 		$out = Linker::linkKnown( $title );
+
 		if ( $result->page_num_iwlinks > 0 ) {
 			$out .= ' ' . $this->msg( 'wikibase-unconnectedpages-format-row' )
 				->numParams( $result->page_num_iwlinks )->text();
@@ -192,7 +215,13 @@ class SpecialUnconnectedPages extends QueryPage {
 		return $out;
 	}
 
+	/**
+	 * @see SpecialPage::getGroupName
+	 *
+	 * @return string
+	 */
 	protected function getGroupName() {
 		return 'pages';
 	}
+
 }
