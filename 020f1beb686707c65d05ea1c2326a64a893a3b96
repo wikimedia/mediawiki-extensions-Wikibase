@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_fe1d1f79",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-06-18T20:18:59Z",
+      "side": 1,
+      "message": "ok, makes sense.",
+      "parentUuid": "8ec42329_f109db2f",
+      "revId": "020f1beb686707c65d05ea1c2326a64a893a3b96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_b16033cd",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-17T21:23:27Z",
       "side": 1,
       "message": "This is not faster but does not manipulate the casing:\n\n return substr_replace( $uri, \u0027\u0027, 4, 1 );",
+      "revId": "020f1beb686707c65d05ea1c2326a64a893a3b96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5e2f939c",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-06-18T20:18:59Z",
+      "side": 1,
+      "message": "I don\u0027t like this one - completely unobvious what happens there. I don\u0027t think preserving the case of schema in the URL is that important.",
+      "parentUuid": "8ec42329_b16033cd",
       "revId": "020f1beb686707c65d05ea1c2326a64a893a3b96",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
