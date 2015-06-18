@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_1ef26b03",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T20:34:20Z",
+      "side": 1,
+      "message": "Is this relevant for the bug in question?",
+      "revId": "f4bd3ea6301a9f9d23094b011b2514a4aeb56a0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_81c91ab0",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T20:34:20Z",
+      "side": 1,
+      "message": "I don\u0027t think this.$mainSnak can be undefined here. The check is probably not needed.",
+      "revId": "f4bd3ea6301a9f9d23094b011b2514a4aeb56a0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_81659adf",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T20:34:20Z",
+      "side": 1,
+      "message": "Just use an other \u0026\u0026, no need for a second if.",
+      "revId": "f4bd3ea6301a9f9d23094b011b2514a4aeb56a0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
