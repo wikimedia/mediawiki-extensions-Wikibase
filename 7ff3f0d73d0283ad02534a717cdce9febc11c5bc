@@ -16,6 +16,24 @@
       "revId": "7ff3f0d73d0283ad02534a717cdce9febc11c5bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_1b312057",
+        "filename": "client/tests/phpunit/includes/OtherProjectsSitesGeneratorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-18T14:38:41Z",
+      "side": 1,
+      "message": "I was surprised as well... but apparently the global function has been deprecated in favour of this.",
+      "parentUuid": "8ec42329_5bc1e831",
+      "revId": "7ff3f0d73d0283ad02534a717cdce9febc11c5bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
