@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e0f81fe4",
+        "filename": "view/src/StatementGroupListView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-18T11:47:03Z",
+      "side": 1,
+      "message": "this one too!!!!\n(then that\u0027s all the comments in the file!)",
+      "revId": "2f8d69c04b591cd49773c3f7e49567ac7a3d53c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
