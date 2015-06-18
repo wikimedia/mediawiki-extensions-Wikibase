@@ -105,6 +105,24 @@
       "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_7e6fef8f",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-18T19:41:33Z",
+      "side": 1,
+      "message": "When I\u0027m running \"composer phpcs .\" it filters everything and does nothing. At least on my local machine. And since I want to run this on my machine the \"/ValueView\" bit from the filter should not be removed, otherwise the command is useless for me.\n\nWhy are you removing it? Just keep it and I will merge this.\n\nThe folder is /var/www/mediawiki/core/extensions/Wikibase/.",
+      "parentUuid": "8ec42329_9eaf3bde",
+      "revId": "fff73bd6c37f987ebd9516d6116d5a76bf29a118",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
