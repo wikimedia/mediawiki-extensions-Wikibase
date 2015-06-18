@@ -75,13 +75,20 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 			array()
 		);
 
-		$tests['Unknown site'] = array(
-			array( 'wikipedia', 'wikisource' ),
-			'kittenswiki',
-			array()
-		);
-
 		return $tests;
+	}
+
+	public function testOtherProjectSiteIds_unknownSite() {
+		$siteStore = $this->getSiteStoreMock();
+		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, 'kittenswiki', array( 'wikidata' ) );
+
+		// getOtherProjectsSiteIds does wfWarn in case it's being called with a siteid
+		// it doesn't know about. That's fine, we can just ignore that.
+		\MediaWiki\suppressWarnings();
+		$result = $otherProjectsSitesProvider->getOtherProjectsSiteIds( array( 'wikipedia', 'wikisource' ) );
+		\MediaWiki\restoreWarnings();
+
+		$this->assertSame( array(), $result );
 	}
 
 	/**
