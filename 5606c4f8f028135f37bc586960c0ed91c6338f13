@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_60342ff2",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:44:48Z",
+      "side": 1,
+      "message": "This class is horrible, it should be taken out back and shot. I\u0027m not about to worry about making the names nicer :)",
+      "parentUuid": "8ec42329_a0ec57f3",
+      "revId": "5606c4f8f028135f37bc586960c0ed91c6338f13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_20c06754",
         "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c00c0348",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:44:48Z",
+      "side": 1,
+      "message": "AT least in theory, EntityTestHelper::getActiveHandles() guarantees that this will not be null. If it is, something is wrong, and it\u0027s fine to let this crash. We could just skip the deletion if we get null back, but I supsect it would hide problems. Issues with these test entities are already hard to debug.",
+      "parentUuid": "8ec42329_20c06754",
+      "revId": "5606c4f8f028135f37bc586960c0ed91c6338f13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_40c33361",
         "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-18T12:22:43Z",
       "side": 1,
       "message": "Why protected?",
+      "revId": "5606c4f8f028135f37bc586960c0ed91c6338f13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fb09b42f",
+        "filename": "repo/tests/phpunit/includes/api/WikibaseApiTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:44:48Z",
+      "side": 1,
+      "message": "So subclasses can use it. The entire purpose of this class is to provide this kind of functionality to subclasses.",
+      "parentUuid": "8ec42329_40c33361",
       "revId": "5606c4f8f028135f37bc586960c0ed91c6338f13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
