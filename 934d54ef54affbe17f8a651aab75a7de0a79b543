@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_60866fae",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 54
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-18T13:35:43Z",
+      "side": 1,
+      "message": "Registering message files can\u0027t be done via extension.json?! That means we can\u0027t really use extension.json, right?",
+      "revId": "934d54ef54affbe17f8a651aab75a7de0a79b543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
