@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_62ff4932",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-19T14:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_4091f350",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_2072a7ac",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2015-06-18T11:42:32Z",
       "side": 1,
       "message": "This is a simple string property, why have a local copy for it?",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e29259ff",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-19T14:12:26Z",
+      "side": 1,
+      "message": "Done: Pulled the whole \"$this-\u003econceptBaseUri . $entityId-\u003egetSerialization() . \u0027.\u0027\" up here, because the loop doesn\u0027t alter it.",
+      "parentUuid": "8ec42329_2072a7ac",
       "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -83,6 +119,24 @@
       "side": 1,
       "message": "It can be null (or false?!) if we get an old ParserOutput object from the cache.",
       "parentUuid": "8ec42329_c0af23dd",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a29c5113",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-19T14:12:26Z",
+      "side": 1,
+      "message": "Changed to an explicit !\u003d\u003d null, because it can only be that or an array.",
+      "parentUuid": "8ec42329_c07c031e",
       "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -141,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_026c4504",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-19T14:12:26Z",
+      "side": 1,
+      "message": "Thanks for the hint :) Done",
+      "parentUuid": "8ec42329_20886775",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_408b3372",
         "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
         "patchSetId": 2
@@ -158,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c275ddc9",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-19T14:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_408b3372",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_00852b5a",
         "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
         "patchSetId": 2
@@ -169,6 +259,24 @@
       "writtenOn": "2015-06-18T11:42:32Z",
       "side": 1,
       "message": "Same here.",
+      "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c24cfda1",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-19T14:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_00852b5a",
       "revId": "dabb67857a06db0e8d0f03c38ce6d5cc1fe6e832",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
