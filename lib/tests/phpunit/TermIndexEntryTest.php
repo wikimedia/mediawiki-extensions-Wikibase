@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -171,6 +172,35 @@ class TermIndexEntryTest extends \MediaWikiTestCase {
 			$this->assertNotEquals( 0, $ab, "Comparison of unequal terms is expected to not return 0" );
 			$this->assertEquals( -$ab, $ba, "Comparing A to B should return the inverse of comparing B to A" );
 		}
+	}
+
+	public function testGetTerm() {
+		$termIndexEntry = new TermIndexEntry( array(
+			'termLanguage' => 'en',
+			'termText' => 'foo',
+		) );
+		$expectedTerm = new Term( 'en', 'foo' );
+		$this->assertEquals( $expectedTerm, $termIndexEntry->getTerm() );
+	}
+
+	public function provideTermIndexEntryData() {
+		return array(
+			array( array(
+				'termText' => 'foo',
+			) ),
+			array( array(
+				'termLanguage' => 'en',
+			) ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideTermIndexEntryData
+	 */
+	public function testGetTerm_throwsException( $termIndexEntryData ) {
+		$termIndexEntry = new TermIndexEntry( $termIndexEntryData );
+		$this->setExpectedException( 'MWException', 'Can not construct Term from partial TermIndexEntry' );
+		$termIndexEntry->getTerm();
 	}
 
 }

@@ -2,9 +2,11 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\DataModel\Term\Term;
 
 /**
  * Object representing a term index entry.
@@ -218,6 +220,19 @@ class TermIndexEntry {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * @return Term
+	 *
+	 * @throws MWException
+	 */
+	public function getTerm() {
+		try{
+			return new Term( $this->getLanguage(), $this->getText() );
+		} catch( InvalidArgumentException $e ) {
+			throw new MWException( 'Can not construct Term from partial TermIndexEntry' );
+		}
 	}
 
 }
