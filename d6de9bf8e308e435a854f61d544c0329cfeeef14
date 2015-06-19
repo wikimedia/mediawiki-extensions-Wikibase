@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ffbc3669",
+        "filename": "repo/includes/api/GetClaims.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-19T12:03:10Z",
+      "side": 1,
+      "message": "It\u0027s just a $guid now. Fixed in my follow up.",
+      "revId": "d6de9bf8e308e435a854f61d544c0329cfeeef14",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
