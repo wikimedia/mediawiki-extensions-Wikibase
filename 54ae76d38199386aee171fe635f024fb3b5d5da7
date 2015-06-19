@@ -106,6 +106,24 @@
       "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5f9b0ac1",
+        "filename": "lib/tests/phpunit/ChangesTableTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-19T10:30:31Z",
+      "side": 1,
+      "message": "Ugh, so that means that any key can be passed to an ItemDiff and it is not verified that it is valid. o.O Then this isn\u0027t wrong but still confusing as ItemDiff expects the \u0027claim\u0027 key to be set.",
+      "parentUuid": "8ec42329_9faad2cf",
+      "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
