@@ -161,17 +161,7 @@
 						return;
 					}
 
-					// If the set property is not there, we have to display a warning. This can
-					// happen if a property got deleted but the Snaks using it didn't change the
-					// property.
-					var dataTypeId = fetchedProperty
-						? fetchedProperty.getContent().getDataTypeId()
-						: false;
-					var dataType = null;
-
-					if( dataTypeId ) {
-						dataType = self._dataTypeStore.getDataType( dataTypeId );
-					}
+					var dataType = self._getDataType( fetchedProperty );
 
 					// If the new value's type is not the data value type used by the Snak's
 					// property data type, something is very wrong. Display warning!
@@ -209,6 +199,24 @@
 			} else {
 				_render();
 			}
+		},
+
+		/**
+		 * @param {wikibase.store.FetchedContent} property|null
+		 * @private
+		 */
+		_getDataType: function( property ) {
+			// If the set property is not there, we have to display a warning. This can happen
+			// if a property got deleted but the Snaks using it didn't change the property.
+			var dataTypeId = property
+				? property.getContent().getDataTypeId()
+				: false;
+
+			if( dataTypeId ) {
+				return this._dataTypeStore.getDataType( dataTypeId );
+			}
+
+			return null;
 		},
 
 		/**
