@@ -734,7 +734,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 			this.options.entityStore.get( propertyId )
 			.done( function( fetchedProperty ) {
 				deferred.resolve( self._createPropertyDOM(
-					fetchedProperty ? fetchedProperty.getContent() : undefined,
+					fetchedProperty ? fetchedProperty.getContent() : propertyId,
 					fetchedProperty ? fetchedProperty.getTitle() : undefined
 				) );
 			} )
