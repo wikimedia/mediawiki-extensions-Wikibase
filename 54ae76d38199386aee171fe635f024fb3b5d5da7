@@ -160,6 +160,24 @@
       "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_bf146ea1",
+        "filename": "lib/tests/phpunit/ChangesTableTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-19T11:33:34Z",
+      "side": 1,
+      "message": "\"Wasted time\" referred to the blocking -1 still being there, which was not the case any more. I missed the fact that you already removed it. Sorry.",
+      "parentUuid": "8ec42329_ff0516c5",
+      "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
