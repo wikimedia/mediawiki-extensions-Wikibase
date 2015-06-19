@@ -4,11 +4,11 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -34,7 +34,7 @@ class GetClaims extends ApiWikibase {
 	private $guidValidator;
 
 	/**
-	 * @var ClaimGuidParser
+	 * @var StatementGuidParser
 	 */
 	private $guidParser;
 
@@ -73,7 +73,7 @@ class GetClaims extends ApiWikibase {
 		$entityRevision = $entityId ? $this->loadEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_SLAVE ) : null;
 		$entity = $entityRevision->getEntity();
 
-		if( $params['ungroupedlist'] ) {
+		if ( $params['ungroupedlist'] ) {
 			$this->getResultBuilder()->getOptions()
 				->setOption(
 					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
@@ -93,20 +93,20 @@ class GetClaims extends ApiWikibase {
 
 	/**
 	 * @param EntityDocument $entity
-	 * @param null|string $claimGuid
+	 * @param string|null $guid
 	 *
 	 * @return Statement[]
 	 */
-	private function getClaims( EntityDocument $entity, $claimGuid ) {
+	private function getClaims( EntityDocument $entity, $guid = null ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			return array();
 		}
 
-		if ( $claimGuid === null ) {
+		if ( $guid === null ) {
 			return $this->getMatchingStatements( $entity->getStatements() );
 		}
 
-		$statement = $entity->getStatements()->getFirstStatementWithGuid( $claimGuid );
+		$statement = $entity->getStatements()->getFirstStatementWithGuid( $guid );
 		return $statement === null ? array() : array( $statement );
 	}
 
@@ -186,12 +186,12 @@ class GetClaims extends ApiWikibase {
 		return array( $idString, $guid );
 	}
 
-	private function getEntityIdFromStatementGuid( $claimGuid ) {
-		if ( $this->guidValidator->validateFormat( $claimGuid ) === false ) {
+	private function getEntityIdFromStatementGuid( $guid ) {
+		if ( $this->guidValidator->validateFormat( $guid ) === false ) {
 			$this->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
 
-		return $this->guidParser->parse( $claimGuid )->getEntityId()->getSerialization();
+		return $this->guidParser->parse( $guid )->getEntityId()->getSerialization();
 	}
 
 	/**
