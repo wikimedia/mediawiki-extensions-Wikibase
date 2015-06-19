@@ -2,11 +2,11 @@
 
 namespace Wikibase\Test\Api;
 
+use ApiTestCase;
 use DataValues\StringValue;
 use UsageException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
@@ -15,6 +15,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -37,16 +38,13 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adam Shorland
  */
-class GetClaimsTest extends \ApiTestCase {
+class GetClaimsTest extends ApiTestCase {
 
 	/**
-	 * @param Entity $entity
-	 * @param int $flags
+	 * @param EntityDocument $entity
 	 */
-	private function save( Entity $entity, $flags = null ) {
-		if ( $flags === null ) {
-			$flags = $entity->getId() ? EDIT_UPDATE : EDIT_NEW;
-		}
+	private function save( EntityDocument $entity ) {
+		$flags = $entity->getId() ? EDIT_UPDATE : EDIT_NEW;
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
@@ -77,7 +75,7 @@ class GetClaimsTest extends \ApiTestCase {
 	}
 
 	/**
-	 * @return Entity[]
+	 * @return EntityDocument[]
 	 */
 	private function getNewEntities() {
 		$property = Property::newFromType( 'string' );
@@ -108,49 +106,46 @@ class GetClaimsTest extends \ApiTestCase {
 		return $lookup;
 	}
 
+	/**
+	 * @return array( $params, $statements, $groupedByProperty )
+	 */
 	public function validRequestProvider() {
 		$entities = $this->getNewEntities();
 
 		$argLists = array();
 
 		foreach ( $entities as $entity ) {
+			$idSerialization = $entity->getId()->getSerialization();
+			/** @var StatementListProvider $entity */
+			$statements = $entity->getStatements();
+
 			$params = array(
 				'action' => 'wbgetclaims',
-				'entity' => $entity->getId()->getSerialization(),
+				'entity' => $idSerialization,
 			);
 
-			$argLists[] = array( $params, $entity->getClaims(), true );
+			$argLists[] = array( $params, $statements->toArray(), true );
 
-			/**
-			 * @var Claim $claim
-			 */
-			foreach ( $entity->getClaims() as $claim ) {
+			foreach ( $statements->toArray() as $statement ) {
 				$params = array(
 					'action' => 'wbgetclaims',
-					'claim' => $claim->getGuid(),
+					'claim' => $statement->getGuid(),
 				);
-				$argLists[] = array( $params, array( $claim ), true );
+				$argLists[] = array( $params, array( $statement ), true );
 
 				$params['ungroupedlist'] = true;
-				$argLists[] = array( $params, array( $claim ), false );
+				$argLists[] = array( $params, array( $statement ), false );
 			}
 
 			foreach ( array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED ) as $rank ) {
 				$params = array(
 					'action' => 'wbgetclaims',
-					'entity' => $entity->getId()->getSerialization(),
+					'entity' => $idSerialization,
 					'rank' => ClaimSerializer::serializeRank( $rank ),
 				);
 
-				$claims = array();
-
-				foreach ( $entity->getClaims() as $claim ) {
-					if ( $claim instanceof Statement && $claim->getRank() === $rank ) {
-						$claims[] = $claim;
-					}
-				}
-
-				$argLists[] = array( $params, $claims, true );
+				$statementsByRank = $statements->getByRank( $rank )->toArray();
+				$argLists[] = array( $params, $statementsByRank, true );
 			}
 		}
 
@@ -159,23 +154,21 @@ class GetClaimsTest extends \ApiTestCase {
 
 	public function testValidRequests() {
 		foreach ( $this->validRequestProvider() as $argList ) {
-			list( $params, $claims, $groupedByProperty ) = $argList;
+			list( $params, $statements, $groupedByProperty ) = $argList;
 
-			$this->doTestValidRequest( $params, $claims, $groupedByProperty );
+			$this->doTestValidRequest( $params, $statements, $groupedByProperty );
 		}
 	}
 
 	/**
 	 * @param string[] $params
-	 * @param Claims|Claim[] $claims
+	 * @param Statement[] $statements
 	 * @param bool $groupedByProperty
 	 */
-	public function doTestValidRequest( array $params, $claims, $groupedByProperty ) {
-		if ( is_array( $claims ) ) {
-			$claims = new Claims( $claims );
-		}
+	public function doTestValidRequest( array $params, array $statements, $groupedByProperty ) {
+		$claims = new Claims( $statements );
 		$options = new SerializationOptions();
-		if( !$groupedByProperty ) {
+		if ( !$groupedByProperty ) {
 			$options->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
 		}
 
@@ -195,10 +188,10 @@ class GetClaimsTest extends \ApiTestCase {
 	/**
 	 * @dataProvider invalidClaimProvider
 	 */
-	public function testGetInvalidClaims( $claimGuid ) {
+	public function testGetInvalidClaims( $guid ) {
 		$params = array(
 			'action' => 'wbgetclaims',
-			'claim' => $claimGuid
+			'claim' => $guid
 		);
 
 		try {
