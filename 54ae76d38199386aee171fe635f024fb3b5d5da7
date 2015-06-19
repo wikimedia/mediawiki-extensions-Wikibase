@@ -124,6 +124,24 @@
       "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_dfd5ba48",
+        "filename": "lib/tests/phpunit/ChangesTableTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-19T10:37:00Z",
+      "side": 1,
+      "message": "ItemDiff does not expect anything. Open a ticket or create patches if you think this test is broken or some diff code is broken. This is *irrelevant* for this patch. Please, please don\u0027t waste more of my time.",
+      "parentUuid": "8ec42329_5f9b0ac1",
+      "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
