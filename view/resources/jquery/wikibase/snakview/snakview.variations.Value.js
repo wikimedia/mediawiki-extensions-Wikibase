@@ -108,6 +108,26 @@
 			}
 
 			/**
+			 * @private
+			 *
+			 * @param {wikibase.store.FetchedContent|undefined|null} property
+			 * @return {dataTypes.DataType|null}
+			 */
+			function _getDataType( property ) {
+				// If the set property is not there, we have to display a warning. This can happen
+				// if a property got deleted but the Snaks using it didn't change the property.
+				var dataTypeId = property
+					? property.getContent().getDataTypeId()
+					: false;
+
+				if( dataTypeId ) {
+					return self._dataTypeStore.getDataType( dataTypeId );
+				}
+
+				return null;
+			}
+
+			/**
 			 * Handles a data value type mismatch by rendering appropriate messages.
 			 * Such a mismatch can happen whenever something changes internally but there were no
 			 * update scripts executed to change the data store. E.g. if a data type changes its
@@ -161,17 +181,7 @@
 						return;
 					}
 
-					// If the set property is not there, we have to display a warning. This can
-					// happen if a property got deleted but the Snaks using it didn't change the
-					// property.
-					var dataTypeId = fetchedProperty
-						? fetchedProperty.getContent().getDataTypeId()
-						: false;
-					var dataType = null;
-
-					if( dataTypeId ) {
-						dataType = self._dataTypeStore.getDataType( dataTypeId );
-					}
+					var dataType = _getDataType( fetchedProperty );
 
 					// If the new value's type is not the data value type used by the Snak's
 					// property data type, something is very wrong. Display warning!
