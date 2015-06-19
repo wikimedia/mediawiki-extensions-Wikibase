@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c2995d72",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-06-19T13:04:31Z",
+      "side": 1,
+      "message": "thanks for fixing this.\n\nonly nitpick... I would say \"property\u0027s\" instead of \"properties\"",
+      "revId": "8c706922a47529cf66ae75769d1b0d1e195f44ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
