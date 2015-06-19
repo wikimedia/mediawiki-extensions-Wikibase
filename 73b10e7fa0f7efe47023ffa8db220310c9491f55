@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_4276cd3a",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.variations.Value.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-19T13:06:40Z",
+      "side": 1,
+      "message": "According to EntityStore and DataTypeStore:\n\n @param {wikibase.store.FetchedContent|undefined|null} property\n @return {dataTypes.DataType|null}",
+      "revId": "73b10e7fa0f7efe47023ffa8db220310c9491f55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
