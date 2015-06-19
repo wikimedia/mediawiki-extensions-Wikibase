@@ -88,6 +88,24 @@
       "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9faad2cf",
+        "filename": "lib/tests/phpunit/ChangesTableTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-19T10:25:37Z",
+      "side": 1,
+      "message": "What are you talking about? Can you please remove your -1 and not waste time on something neither you nor me wants to waste time on?\n\nItemDiff does not \"ignore\" anything.\n\nI don\u0027t see how a diff with an added statement is \"empty\" and how this is relevant for this patch.",
+      "parentUuid": "8ec42329_df713aa8",
+      "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
