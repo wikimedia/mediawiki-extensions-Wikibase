@@ -16,6 +16,24 @@
       "revId": "8c706922a47529cf66ae75769d1b0d1e195f44ea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e2da5920",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-19T13:09:12Z",
+      "side": 1,
+      "message": "Uh, right! There is no difference in German, but in English.",
+      "parentUuid": "8ec42329_c2995d72",
+      "revId": "8c706922a47529cf66ae75769d1b0d1e195f44ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
