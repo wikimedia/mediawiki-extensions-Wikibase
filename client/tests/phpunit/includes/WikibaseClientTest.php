@@ -76,7 +76,15 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetLangLinkHandlerReturnType() {
-		$returnValue = $this->getWikibaseClient()->getLangLinkHandler();
+		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
+
+		$settings->setSetting( 'siteGroup', 'wikipedia' );
+		$settings->setSetting( 'siteGlobalID', 'enwiki' );
+		$settings->setSetting( 'languageLinkSiteGroup', 'wikipedia' );
+
+		$wikibaseClient = new WikibaseClient( $settings, Language::factory( 'en' ), $this->getSiteStore() );
+
+		$returnValue = $wikibaseClient->getLangLinkHandler();
 		$this->assertInstanceOf( 'Wikibase\LangLinkHandler', $returnValue );
 	}
 
