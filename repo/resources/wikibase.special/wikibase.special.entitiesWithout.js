@@ -11,14 +11,12 @@
 
 		if( $.uls ) {
 			$.each( $.uls.data.getAutonyms(), function( key, value ) {
-				languages.push( {
-					label: value + ' (' + key + ')',
-					value: value + ' (' + key + ')'
-				} );
+				languages.push( value + ' (' + key + ')' );
 			} );
 		}
 
 		var $languageSelector = $( '#wb-entitieswithoutpage-language' );
+		$languageSelector.attr( 'languageSelector', 'off' );
 		$languageSelector.suggester( { source: languages } );
 
 		$( '#wb-entitieswithoutpage-form' ).submit( function() {
