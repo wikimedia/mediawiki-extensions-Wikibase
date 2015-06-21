@@ -173,10 +173,6 @@ class TermSqlIndexTest extends TermIndexTest {
 	public function testGetMatchingTermsWeights( $languageCode, $termText, $searchText, $matches ) {
 		$termIndex = $this->getTermIndex();
 
-		if ( !$termIndex->supportsWeight() ) {
-			$this->markTestSkipped( "can't test search weight if withoutTermWeight option is set." );
-		}
-
 		$termIndex->clear();
 
 		$item1 = new Item( new ItemId( 'Q42' ) );
