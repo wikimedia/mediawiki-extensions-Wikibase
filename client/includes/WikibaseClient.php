@@ -18,6 +18,7 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
+use Wikibase\Client\DataAccess\RestrictedEntityLookup;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
@@ -150,6 +151,11 @@ final class WikibaseClient {
 	 * @var NamespaceChecker|null
 	 */
 	private $namespaceChecker = null;
+
+	/**
+	 * @var RestrictedEntityLookup|null
+	 */
+	private $restrictedEntityLookup = null;
 
 	/**
 	 * @since 0.4
@@ -728,7 +734,7 @@ final class WikibaseClient {
 	 * @return PropertyClaimsRendererFactory
 	 */
 	private function getPropertyClaimsRendererFactory() {
-		$entityLookup = $this->getEntityLookup();
+		$entityLookup = $this->getRestrictedEntityLookup();
 
 		$propertyIdResolver = new PropertyIdResolver(
 			$entityLookup,
@@ -824,6 +830,20 @@ final class WikibaseClient {
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
+	}
+
+	/**
+	 * @return RestrictedEntityLookup
+	 */
+	public function getRestrictedEntityLookup() {
+		if ( $this->restrictedEntityLookup === null ) {
+			$this->restrictedEntityLookup = new RestrictedEntityLookup(
+				$this->getEntityLookup(),
+				PHP_INT_MAX // Don't throw any exceptions, yet
+			);
+		}
+
+		return $this->restrictedEntityLookup;
 	}
 
 }
