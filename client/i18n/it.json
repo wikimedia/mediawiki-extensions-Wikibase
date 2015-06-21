@@ -9,7 +9,8 @@
 			"Raoli",
 			"Sannita",
 			"Nemo bis",
-			"FRacco"
+			"FRacco",
+			"Federico Mugnaini"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
@@ -56,8 +57,8 @@
 	"wikibase-error-deserialize-error": "Errore nella deserializzazione dei dati.",
 	"wikibase-error-serialize-error": "Impossibile serializzare i dati",
 	"wikibase-error-invalid-entity-id": "L'ID specificato è sconosciuto al sistema. Utilizza un ID di entità valido.",
-	"special-unconnectedpages": "Pagine non collegate agli elementi",
-	"wikibase-unconnectedpages-legend": "Opzioni per le pagine non collegate",
+	"unconnectedpages": "Pagine non collegate agli elementi",
+	"unconnectedpages-summary": "In questa pagina c'è la lista delle pagine senza oggetti collegati. La lista è limitata a spazi di nomi che supportano gli oggetti collegati.",
 	"wikibase-unconnectedpages-page": "Inizia l'elenco dei risultati dalla pagina:",
 	"wikibase-unconnectedpages-submit": "Vai",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" non è un codice di lingua valido.",

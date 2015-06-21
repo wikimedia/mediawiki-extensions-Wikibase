@@ -1,10 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sovichet"
+			"Sovichet",
+			"គីមស៊្រុន"
 		]
 	},
+	"wikibase-edit": "កែប្រែ",
+	"wikibase-add": "បន្ថែម",
 	"wikibase-addreference": "បន្ថែម​ឯកសារ​យោង",
+	"wikibase-sitelinks-special": "វិបសាយផ្សេងទៀត",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "មិន​ទាន់​បាន​រក្សា​ទុក {{PLURAL:$1|ឯកសារ​យោង​មួយ|ឯកសារ​យោង $1}}"
 }

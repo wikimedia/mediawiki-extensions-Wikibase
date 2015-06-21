@@ -63,6 +63,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "Zadejte název této entity, stručný popis a aliasy v jazyce $1.",
 	"wikibase-statements": "Výroky",
 	"wikibase-terms": "V jiných jazycích",
+	"wikibase-sitelinks": "Seznam stránek svázaných s touto položkou",
 	"wikibase-sitelinkgroupview-input-help-message": "Přidejte odkaz na článek zadáním projektu a stránky v projektu, upravte nebo odstraňte existující odkazy na články.",
 	"wikibase-sitelinks-empty": "Na tuto položku neodkazuje žádná stránka.",
 	"wikibase-sitelinks-input-help-message": "Nastavte odkaz na stránku vztahující se k této položce.",
@@ -391,5 +392,5 @@
 	"wikibase-entity-not-viewable-title": "Nesouhlasí typ obsahu: Obsah nelze zobrazit",
 	"wikibase-entity-not-viewable": "Zadaný typ obsahu „$1“ není entita a Wikibase ho nemůže zobrazit.",
 	"action-item-merge": "sloučit položky",
-	"action-property-create": "vytvořit vlastnosti"
+	"action-property-create": "vytvářet vlastnosti"
 }

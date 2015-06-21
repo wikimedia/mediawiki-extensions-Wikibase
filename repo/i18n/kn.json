@@ -3,13 +3,15 @@
 		"authors": [
 			"VASANTH S.N.",
 			"Omshivaprakash",
-			"Macofe"
+			"Macofe",
+			"రహ్మానుద్దీన్"
 		]
 	},
 	"wikibase-edit": "ಸಂಪಾದಿಸಿ",
 	"wikibase-save": "ಉಳಿಸಿ",
 	"wikibase-cancel": "ರದ್ಧುಮಾಡು",
 	"wikibase-add": "ಸೇರಿಸು",
+	"wikibase-label-empty": "ಲೇಬಲ್ ಉಲ್ಲೇಖಿಸಲ್ಪಟ್ಟಿಲ್ಲ",
 	"wikibase-diffview-rank": "ಶ್ರೇಣಿ",
 	"wikibase-diffview-label": "ಗುರುತು ಪಟ್ಟಿ",
 	"wikibase-diffview-description": "ವಿವರ",

@@ -53,6 +53,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "Sisesta selle olemi silt, lühikirjeldus ja rööpkujud järgmises keeles: $1",
 	"wikibase-statements": "Avaldused",
 	"wikibase-terms": "Teistes keeltes",
+	"wikibase-sitelinks": "Võrgukohalingid",
 	"wikibase-sitelinkgroupview-input-help-message": "Et võrgukohalink lisada, määra võrgukoht ja lehekülg selles võrgukohas. Saad olemasolevaid linke ka muuta või eemaldada.",
 	"wikibase-sitelinks-empty": "Ükski lehekülg pole selle üksusega lingitud.",
 	"wikibase-sitelinks-input-help-message": "Määra selle üksusega seotud leheküljele viitav link.",

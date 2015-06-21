@@ -8,7 +8,8 @@
 			"아라",
 			"Revi",
 			"Macofe",
-			"SeoJeongHo"
+			"SeoJeongHo",
+			"Alex00728"
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
@@ -54,6 +55,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "이 개체의 레이블과 간단한 설명, 다른 이름을 $1로 입력하십시오.",
 	"wikibase-statements": "서술",
 	"wikibase-terms": "다른 언어",
+	"wikibase-sitelinks": "사이트 링크",
 	"wikibase-sitelinks-empty": "이 항목에 연결된 페이지가 없습니다.",
 	"wikibase-sitelinks-input-help-message": "이 항목과 관련된 문서로 링크를 설정하세요.",
 	"wikibase-sitelinks-special": "다른 사이트",

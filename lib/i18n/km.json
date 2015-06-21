@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sovichet"
+			"Sovichet",
+			"គីមស៊្រុន"
 		]
 	},
+	"wikibase-sitelinks-wikipedia": "វិគីភីឌា",
 	"wikibase-validator-invalid": "តម្លៃ​មិន​ត្រឹម​ត្រូវ"
 }

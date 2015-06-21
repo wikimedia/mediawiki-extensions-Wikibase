@@ -5,9 +5,14 @@
 		]
 	},
 	"tooltip-t-wikibase": "لینک متصل به داده آیتم مخزن",
+	"wikibase-comment-update": "{{WBREPONAME}} مورد تغییر وابیده",
+	"wikibase-dataitem": "{{WBREPONAME}} مورد",
 	"wikibase-editlinks": "اصلاح لینک یل",
 	"wikibase-editlinkstitle": "اصلاح لینک یل زوون یل بین المللی",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "قائم کردن",
 	"wikibase-rc-hide-wikidata-show": "نشو دائن",
+	"wikibase-rc-wikibase-edit-letter": "ودا",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} اصلاح",
 	"wikibase-otherprojects": "پروجه یل دیه"
 }

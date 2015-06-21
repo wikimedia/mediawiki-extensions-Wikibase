@@ -1,9 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sovichet"
+			"Sovichet",
+			"គីមស៊្រុន"
 		]
 	},
 	"wikibase-comment-unlink": "ទំព័រ​នេះ​ត្រូវ​បាន​ផ្ដាច់​តំណ​ពី​វត្ថុ {{WBREPONAME}} ហើយ។ តំណ​ភាសា​ក៏​ត្រូវ​បាន​ដក​ចេញ​ដែរ។",
-	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}"
+	"wikibase-editlinks": "កែប្រែតំណភ្ជាប់",
+	"wikibase-editlinkstitle": "កែប្រែតំណភ្ជាប់អន្តរភាសា",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "លាក់",
+	"wikibase-rc-hide-wikidata-show": "បង្ហាញ",
+	"wikibase-rc-wikibase-edit-letter": "ទិន",
+	"wikibase-otherprojects": "គម្រោងផ្សេងៗទៀត"
 }

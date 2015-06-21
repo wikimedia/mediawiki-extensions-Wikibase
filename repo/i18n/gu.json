@@ -7,7 +7,8 @@
 			"Vyom",
 			"Macofe",
 			"Arbhatt",
-			"NehalDaveND"
+			"NehalDaveND",
+			"Ashok modhvadia"
 		]
 	},
 	"wikibase-desc": "માળખાગત માહિતીનો સંગ્રહ",
@@ -18,7 +19,7 @@
 	"wikibase-save": "સાચવો",
 	"wikibase-cancel": "રદ કરો",
 	"wikibase-add": "ઉમેરો",
-	"wikibase-addreference": "સ્રોત ઉમેરો",
+	"wikibase-addreference": "સંદર્ભો ઉમેરો",
 	"wikibase-save-inprogress": "સચવાઈ રહ્યું છે…",
 	"wikibase-remove-inprogress": "રદ્દ રહ્યું છે…",
 	"wikibase-entitytermsforlanguagelistview-description": "વિવરણ",
@@ -56,7 +57,7 @@
 	"wikibase-statementview-rank-preferred": "ઇચ્છિત સ્તર",
 	"wikibase-statementview-rank-normal": "સામાન્ય પદ",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|સંદર્ભ|સંદર્ભો}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|સ્રોત હજુ સચવાયો|$1 સ્રોતો હજુ સચવાયા}} નથી",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|સંદર્ભ હજુ સચવાયો|$1 સંદર્ભો હજુ સચવાયા}} નથી",
 	"wikibase-snakview-property-input-placeholder": "ગુણધર્મ",
 	"wikibase-snakview-choosesnaktype": "કિંમત પ્રકાર પસંદ કરો.",
 	"wikibase-snakview-variations-somevalue-label": "અજાણી કિંમત",
