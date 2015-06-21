@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_987f3d10",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-21T22:23:48Z",
+      "side": 1,
+      "message": "This is becoming a big garbage bin. 11 fields is beyond suspicious.\n\nLooking at the newly added method I can see it only uses these two fields and does not interact with existing fields or methods. Which is a sign of low cohesion. Furthermore the added fields are only used by the new method, a sign of the same issue.\n\nThat is a lot of signs of bad design. And this commit seems to continue down that path :(",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
