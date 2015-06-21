@@ -144,11 +144,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
 
-		$weightField = array();
-		if ( $this->supportsWeight() ) {
-			$weightField = array( 'term_weight'  => $this->getWeight( $entity ) );
-		}
-
 		$success = true;
 		foreach ( $terms as $term ) {
 			$success = $dbw->insert(
@@ -156,7 +151,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				array_merge(
 					$this->getTermFields( $term ),
 					$entityIdentifiers,
-					$weightField
+					array( 'term_weight'  => $this->getWeight( $entity ) )
 				),
 				__METHOD__,
 				array( 'IGNORE' )
@@ -576,24 +571,16 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$selectionFields = array(
 			'term_entity_type',
 			'term_entity_id',
+			'term_weight'
 		);
 
-		$hasWeight = $this->supportsWeight();
-		if ( $hasWeight ) {
-			$selectionFields[] = 'term_weight';
-		}
-
+		// We need to grab basically all hits in order to allow for the post-search sorting below.
 		$queryOptions = array(
 			'DISTINCT',
 			'LIMIT' => $internalLimit,
 		);
 
 		$requestedLimit = isset( $options['LIMIT'] ) ? max( (int)$options['LIMIT'], 0 ) : 0;
-		// if we take the weight into account, we need to grab basically all hits in order
-		// to allow for the post-search sorting below.
-		if ( !$hasWeight && $requestedLimit > 0 && $requestedLimit < $queryOptions['LIMIT'] ) {
-			$queryOptions['LIMIT'] = $requestedLimit;
-		}
 
 		$rows = $dbr->select(
 			$this->tableName,
@@ -603,18 +590,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$queryOptions
 		);
 
-		$entityIds = array();
-
-		if ( $hasWeight ) {
-			$entityIds = $this->getEntityIdsOrderedByWeight( $rows, $requestedLimit );
-		} else {
-			foreach ( $rows as $row ) {
-				// FIXME: this only works for items and properties
-				$id = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, $row->term_entity_id );
-
-				$entityIds[] = $id;
-			}
-		}
+		$entityIds = $this->getEntityIdsOrderedByWeight( $rows, $requestedLimit );
 
 		$this->releaseConnection( $dbr );
 
@@ -1002,14 +978,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		return $normalized;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function supportsWeight() {
-		$settings = Settings::singleton();
-		return !$settings->getSetting( 'withoutTermWeight' );
 	}
 
 }
