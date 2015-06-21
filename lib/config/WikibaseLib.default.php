@@ -41,12 +41,6 @@ $wgWBLibDefaultSettings = array(
 	'dispatchBatchChunkFactor' => 3,
 	'dispatchBatchCacheFactor' => 3,
 
-	// Allow the TermIndex table to work without weights,
-	// for sites that cannot easily roll out schema changes on large tables.
-	// This means that all searches will return an undefined order
-	// (depending on the database's inner working).
-	'withoutTermWeight' => false,
-
 	'changeHandlers' => array(
 		'wikibase-item~add' => 'Wikibase\ItemChange',
 		'wikibase-property~add' => 'Wikibase\EntityChange',

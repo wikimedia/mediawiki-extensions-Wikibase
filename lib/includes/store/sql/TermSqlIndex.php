@@ -144,11 +144,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
 
-		$weightField = array();
-		if ( $this->supportsWeight() ) {
-			$weightField = array( 'term_weight'  => $this->getWeight( $entity ) );
-		}
-
 		$success = true;
 		foreach ( $terms as $term ) {
 			$success = $dbw->insert(
@@ -156,7 +151,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				array_merge(
 					$this->getTermFields( $term ),
 					$entityIdentifiers,
-					$weightField
+					array( 'term_weight'  => $this->getWeight( $entity ) )
 				),
 				__METHOD__,
 				array( 'IGNORE' )
@@ -576,12 +571,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$selectionFields = array(
 			'term_entity_type',
 			'term_entity_id',
+			'term_weight'
 		);
-
-		$hasWeight = $this->supportsWeight();
-		if ( $hasWeight ) {
-			$selectionFields[] = 'term_weight';
-		}
 
 		$queryOptions = array(
 			'DISTINCT',
@@ -1002,14 +993,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		return $normalized;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function supportsWeight() {
-		$settings = Settings::singleton();
-		return !$settings->getSetting( 'withoutTermWeight' );
 	}
 
 }
