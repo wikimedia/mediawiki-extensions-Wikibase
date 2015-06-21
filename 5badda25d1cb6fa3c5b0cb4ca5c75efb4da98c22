@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_18934d54",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-21T22:26:38Z",
+      "side": 1,
+      "message": "Should this not pass $this-\u003eunitOneUris as second argument?\n\nIf this method is the only user of getQuantityUnitFormatter, then it\u0027s odd for getQuantityUnitFormatter to have an optional parameter.",
+      "revId": "5badda25d1cb6fa3c5b0cb4ca5c75efb4da98c22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
