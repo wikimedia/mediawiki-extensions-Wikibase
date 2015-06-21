@@ -34,6 +34,40 @@
       "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_58bb15ba",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-21T22:43:05Z",
+      "side": 1,
+      "message": "Just always requite a TermBuffer in the constructor. Having such checks all through the code creates clutter and is error prone. https://en.wikipedia.org/wiki/Null_Object_pattern",
+      "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_18e10dcc",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-21T22:43:05Z",
+      "side": 1,
+      "message": "Then again, this code seems to be misplaced. It\u0027s not needed for the creation being done here. It\u0027s also not creational in itself. And as far as this class can tell, there is no relation between the LabelDescriptionLookup it creates and the TermBuffer it interacts with.",
+      "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
