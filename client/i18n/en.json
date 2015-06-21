@@ -50,6 +50,7 @@
 	"wikibase-linkitem-not-loggedin-title": "You need to be logged in",
 	"wikibase-linkitem-not-loggedin": "You need to be logged in on this wiki and in the [$1 central data repository] to use this feature.",
 	"wikibase-linkitem-success-link": "The pages have successfully been linked. You can find the item containing the links in our [$1 central data repository].",
+	"wikibase-limitreport-entities-accessed": "Number of Wikibase entities loaded",
 	"wikibase-property-notfound": "$1 property not found.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Hide",
