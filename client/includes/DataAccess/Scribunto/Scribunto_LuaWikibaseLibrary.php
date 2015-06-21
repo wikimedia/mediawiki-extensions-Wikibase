@@ -153,7 +153,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		return new EntityAccessor(
 			$wikibaseClient->getEntityIdParser(),
-			$wikibaseClient->getStore()->getEntityLookup(),
+			$wikibaseClient->getRestrictedEntityLookup(),
 			$this->getUsageAccumulator(),
 			$wikibaseClient->getPropertyDataTypeLookup(),
 			$this->getLanguageFallbackChain(),
