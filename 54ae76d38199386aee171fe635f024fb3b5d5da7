@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_789b7179",
+        "filename": "lib/tests/phpunit/ChangesTableTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-21T22:17:47Z",
+      "side": 1,
+      "message": "Let\u0027s start a fresh fluffy comment thread :)\n\nAs far as I can tell, changing this key should not be done until EntityDiff is changed as well, since it uses \u0027claim\u0027 in several places. I can understand how this is perhaps not entirely obvious when just looking at this test. EntityDiff is not that nice after all, and is in need of some love. See T78298",
+      "revId": "54ae76d38199386aee171fe635f024fb3b5d5da7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_4d2043f2",
         "filename": "lib/tests/phpunit/ChangesTableTest.php",
         "patchSetId": 1
