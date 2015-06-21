@@ -240,6 +240,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\ContentLanguages', $langs );
 	}
 
+	public function testGetRestrictedEntityLookup() {
+		$restrictedEntityLookup = $this->getWikibaseClient()->getRestrictedEntityLookup();
+		$this->assertInstanceOf( 'Wikibase\Client\DataAccess\RestrictedEntityLookup', $restrictedEntityLookup );
+	}
+
 	/**
 	 * @return WikibaseClient
 	 */
