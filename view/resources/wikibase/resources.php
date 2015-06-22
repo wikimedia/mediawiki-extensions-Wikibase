@@ -37,6 +37,14 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.mobile' => $moduleTemplate + array(
+			'position' => 'top',
+			'styles' => array(
+				'wikibase.mobile.css'
+			),
+			'targets' => 'mobile'
+		),
+
 		'wikibase.RevisionStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RevisionStore.js',
