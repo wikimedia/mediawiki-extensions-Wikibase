@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_85b59131",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-22T11:41:45Z",
+      "side": 1,
+      "message": "Why not directly register them as \u003clink\u003e tags?\n\n  foreach ( $alternateLinks as $link ) {\n    $out-\u003eaddLink( $link );\n  }",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_987f3d10",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 3
@@ -31,6 +48,40 @@
       "side": 1,
       "message": "I agree, but let\u0027s not block this change on refactoring the entire ParserOutput stuff. If you have concrete suggestions on how to improve the architecture, please file a ticket.",
       "parentUuid": "8ec42329_987f3d10",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e5ac95ed",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-22T11:41:45Z",
+      "side": 1,
+      "message": "Why store the alt-links as \"properties\" first, and then transfer them to \"links\"? We could make them links directly, in RepoHook::onOutputPageParserOutput",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_65b8a525",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-22T11:41:45Z",
+      "side": 1,
+      "message": "Aren\u0027t we doing this again elsewhere? Perhaps elsewhere in Wi9kibaseRepo? Then we should have a getDataFormatProvider method (possibly privat)",
       "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
