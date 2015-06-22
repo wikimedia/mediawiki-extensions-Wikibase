@@ -501,6 +501,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
 	 * @param array $options
+	 *           In this implementation the orderByWeight options will mean at most 5000 Terms will be returned
+	 *           It also means when requesting a lower limit the DB query will still ask for 5000 results.
 	 *
 	 * @return TermIndexEntry[]
 	 */
@@ -514,6 +516,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return array();
 		}
 
+		$orderByWeight = false;
+		if( isset( $options['orderByWeight'] ) ) {
+			$orderByWeight = $options['orderByWeight'];
+		}
+
 		$dbr = $this->getReadDb();
 
 		$termConditions = $this->termsToConditions( $dbr, $terms, $termType, $entityType, $options );
@@ -522,22 +529,32 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$where[] = $dbr->makeList( $termConditions, LIST_OR );
 
 		$selectionFields = array_keys( $this->termFieldMap );
-
-		$queryOptions = array();
-
-		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
-			$queryOptions['LIMIT'] = (int)$options['LIMIT'];
+		if( $orderByWeight ) {
+			$selectionFields[] = 'term_weight';
 		}
 
-		$obtainedTerms = $dbr->select(
+		$requestedLimit = isset( $options['LIMIT'] ) ? max( (int)$options['LIMIT'], 0 ) : 0;
+		if( $orderByWeight ) {
+			// this is the maximum limit of search results
+			// TODO this should not be hardcoded
+			$internalLimit = 5000;
+		} else {
+			$internalLimit = $requestedLimit;
+		}
+
+		$rows = $dbr->select(
 			$this->tableName,
 			$selectionFields,
 			$where,
 			__METHOD__,
-			$queryOptions
+			array( 'LIMIT' => $internalLimit )
 		);
 
-		$terms = $this->buildTermResult( $obtainedTerms );
+		if( $orderByWeight ) {
+			$rows = $this->getRowsOrderedByWeight( $rows, $requestedLimit );
+		}
+
+		$terms = $this->buildTermResult( $rows );
 
 		$this->releaseConnection( $dbr );
 
@@ -590,7 +607,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$queryOptions
 		);
 
-		$entityIds = $this->getEntityIdsOrderedByWeight( $rows, $requestedLimit );
+		$rows = $this->getRowsOrderedByWeight( $rows, $requestedLimit );
+		$entityIds = array();
+		foreach ( $rows as $row ) {
+			// FIXME: this only works for items and properties
+			$id = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, $row->term_entity_id );
+
+			$entityIds[] = $id;
+		}
 
 		$this->releaseConnection( $dbr );
 
@@ -601,19 +625,15 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param Iterator $rows
 	 * @param int $limit
 	 *
-	 * @return EntityId[]
+	 * @return Iterator
 	 */
-	private function getEntityIdsOrderedByWeight( Iterator $rows, $limit = 0 ) {
+	private function getRowsOrderedByWeight( Iterator $rows, $limit = 0 ) {
 		$weights = array();
-		$idMap = array();
+		$rowMap = array();
 
-		foreach ( $rows as $row ) {
-			// FIXME: this only works for items and properties
-			$id = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, $row->term_entity_id );
-
-			$key = $id->getSerialization();
+		foreach ( $rows as $key => $row ) {
 			$weights[$key] = floatval( $row->term_weight );
-			$idMap[$key] = $id;
+			$rowMap[$key] = $row;
 		}
 
 		// this is a post-search sorting by weight. This allows us to not require an additional
@@ -626,13 +646,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$weights = array_slice( $weights, 0, $limit, true );
 		}
 
-		$entityIds = array();
+		$orderedRows = array();
 
 		foreach ( $weights as $key => $weight ) {
-			$entityIds[] = $idMap[$key];
+			$orderedRows[] = $rowMap[$key];
 		}
 
-		return $entityIds;
+		return $orderedRows;
 	}
 
 	/**
