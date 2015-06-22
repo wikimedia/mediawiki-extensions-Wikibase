@@ -16,6 +16,24 @@
       "revId": "5badda25d1cb6fa3c5b0cb4ca5c75efb4da98c22",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fb66784d",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-22T16:40:01Z",
+      "side": 1,
+      "message": "It\u0027s not the only one, see below. I\u0027m not sure if it was correct to set $this-\u003eunitOneUris for the details formatter but *not* for the snak value formatter. But note that I did not changed this. It was like this before.",
+      "parentUuid": "8ec42329_18934d54",
+      "revId": "5badda25d1cb6fa3c5b0cb4ca5c75efb4da98c22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
