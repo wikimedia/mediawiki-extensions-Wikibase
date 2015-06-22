@@ -8,7 +8,24 @@
  */
 
 .wikibase-toolbar-container {
-	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 0;
+}
+
+.wikibase-toolbar-button-edit a {
+	/* @embed */
+	background-image: url(pencil.svg);
+	display: block;
+	min-height: 24px;
+	min-width: 24px;
+}
+
+/* fix positioning of toolbar */
+.wikibase-entitytermsview,
+.wikibase-sitelinkgroupview {
+	position: relative;
 }
 
 .wikibase-title-id {
