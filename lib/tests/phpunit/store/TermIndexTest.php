@@ -97,7 +97,6 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item0 = new Item( new ItemId( 'Q10' ) );
 		$item0->setLabel( 'en', 'kittens' );
 
-
 		$item1 = new Item( new ItemId( 'Q11' )  );
 		$item1->setLabel( 'nl', 'mittens' );
 		$item1->setLabel( 'de', 'Mittens' );
@@ -224,6 +223,27 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetMatchingTerms
 	 */
 	public function testGetMatchingTerms( $entities, $queryTerms, $termTypes, $entityTypes, $options, $expectedTermKeys ) {
+		$lookup = $this->getTermIndex();
+
+		foreach ( $entities as $entitiy ) {
+			$lookup->saveTermsOfEntity( $entitiy );
+		}
+
+		$actual = $lookup->getMatchingTerms( $queryTerms, $termTypes, $entityTypes, $options );
+
+		$this->assertInternalType( 'array', $actual );
+
+		$actualTermKeys = array_map( array( $this, 'getTermKey' ), $actual );
+		sort( $actualTermKeys );
+		sort( $expectedTermKeys );
+
+		$this->assertEquals( $expectedTermKeys, $actualTermKeys );
+	}
+
+	/**
+	 * @dataProvider provideGetMatchingTerms
+	 */
+	public function testGetHighestRankMatchingTerms( $entities, $queryTerms, $termTypes, $entityTypes, $options, $expectedTermKeys ) {
 		$lookup = $this->getTermIndex();
 
 		foreach ( $entities as $entitiy ) {

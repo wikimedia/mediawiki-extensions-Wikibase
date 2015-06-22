@@ -84,9 +84,43 @@ interface TermIndex {
 	 * method parameters.
 	 *
 	 * The return value is an array of Terms where entityId, entityType,
-	 * termType, termLanguage, termText are all set.
+	 * termType, termLanguage, termText, termWeight are all set.
 	 *
 	 * @since 0.2
+	 *
+	 * @param TermIndexEntry[] $terms
+	 * @param string|string[]|null $termType
+	 * @param string|string[]|null $entityType
+	 * @param array $options
+	 *        Accepted options are:
+	 *        - caseSensitive: boolean, default true
+	 *        - prefixSearch: boolean, default false
+	 *        - LIMIT: int, defaults to none
+	 *        - orderByWeight: boolean, default false
+	 *
+	 * @return TermIndexEntry[]
+	 */
+	public function getMatchingTerms(
+		array $terms,
+		$termType = null,
+		$entityType = null,
+		array $options = array()
+	);
+
+	/**
+	 * Returns the terms that match the provided conditions ranked with the 'most important' first.
+	 * Will only return one TermIndexEntry per Entity
+	 *
+	 * $terms is an array of Term objects. Terms are joined by OR.
+	 * The fields of the terms are joined by AND.
+	 *
+	 * A default can be provided for termType and entityType via the corresponding
+	 * method parameters.
+	 *
+	 * The return value is an array of Terms where entityId, entityType,
+	 * termType, termLanguage, termText, termWeight are all set.
+	 *
+	 * @since 0.5
 	 *
 	 * @param TermIndexEntry[] $terms
 	 * @param string|string[]|null $termType
@@ -99,7 +133,7 @@ interface TermIndex {
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	public function getMatchingTerms(
+	public function getHighestRankMatchingTerms(
 		array $terms,
 		$termType = null,
 		$entityType = null,
