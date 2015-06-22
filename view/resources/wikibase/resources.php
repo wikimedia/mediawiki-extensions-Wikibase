@@ -37,6 +37,14 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.mobile' => $moduleTemplate + array(
+			'position' => 'top',
+			'styles' => array(
+				'wikibase.mobile.css'
+			),
+			'targets' => 'mobile'
+		),
+
 		'wikibase.getLanguageNameByCode' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.getLanguageNameByCode.js'
