@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_45780926",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-22T12:32:26Z",
+      "side": 1,
+      "message": "programmatic grouping by entityID is already implemented in the Interactor,",
+      "parentUuid": "8ec42329_c5207949",
+      "revId": "3c4a3b6225d1a5b4ba47cd337412f1996a10bd6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_052be12f",
         "filename": "lib/includes/store/sql/TermSqlIndex.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-22T12:04:25Z",
       "side": 1,
       "message": "How do keys work with iterators? I have no idea...",
+      "revId": "3c4a3b6225d1a5b4ba47cd337412f1996a10bd6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e598156f",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-22T12:32:26Z",
+      "side": 1,
+      "message": "The only thing we really need to know is that iterators do have keys :)\nhttp://php.net/manual/en/iterator.key.php",
+      "parentUuid": "8ec42329_052be12f",
       "revId": "3c4a3b6225d1a5b4ba47cd337412f1996a10bd6c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
