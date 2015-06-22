@@ -26,45 +26,6 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 */
 	public abstract function getTermIndex();
 
-	public function testGetMatchingIDs() {
-		$lookup = $this->getTermIndex();
-
-		$id0 = new ItemId( 'Q10' );
-		$item0 = new Item( $id0 );
-
-		$item0->setLabel( 'en', 'foobar' );
-		$item0->setLabel( 'de', 'foobar' );
-		$item0->setLabel( 'nl', 'baz' );
-		$lookup->saveTermsOfEntity( $item0 );
-
-		$item1 = $item0->copy();
-		$id1 = new ItemId( 'Q11' );
-		$item1->setId( $id1 );
-
-		$item1->setLabel( 'nl', 'o_O' );
-		$item1->setDescription( 'en', 'foo bar baz' );
-		$lookup->saveTermsOfEntity( $item1 );
-
-		$foobar = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'foobar' ) );
-		$bazNl= new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'baz', 'termLanguage' => 'nl' ) );
-		$froggerNl = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'o_O', 'termLanguage' => 'nl' ) );
-
-		$ids = $lookup->getMatchingIDs( array( $foobar ), Item::ENTITY_TYPE );
-		$this->assertInternalType( 'array', $ids );
-		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
-		$this->assertArrayEquals( array( $id0, $id1 ), $ids );
-
-		$ids = $lookup->getMatchingIDs( array( $bazNl ), Item::ENTITY_TYPE );
-		$this->assertInternalType( 'array', $ids );
-		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
-		$this->assertArrayEquals( array( $id0 ), $ids );
-
-		$ids = $lookup->getMatchingIDs( array( $froggerNl ), Item::ENTITY_TYPE );
-		$this->assertInternalType( 'array', $ids );
-		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
-		$this->assertArrayEquals( array( $id1 ), $ids );
-	}
-
 	public function getTermKey( TermIndexEntry $term ) {
 		$key = '';
 
@@ -282,9 +243,12 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertNotTermExists( $lookup, 'testDeleteTermsForEntity' );
 
 		$abc = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ) );
-		$ids = $lookup->getMatchingIDs( array( $abc ), Item::ENTITY_TYPE );
-
-		$this->assertNotContains( $id, $ids );
+		$matchedTerms = $lookup->getMatchingTerms( array( $abc ), array( TermIndexEntry::TYPE_LABEL ), Item::ENTITY_TYPE );
+		foreach( $matchedTerms as $matchedTerm ) {
+			if( $matchedTerm->getEntityId() === $id ) {
+				$this->fail( 'Failed to delete term or entity: ' . $id->getSerialization() );
+			}
+		}
 	}
 
 	public function testSaveTermsOfEntity() {
