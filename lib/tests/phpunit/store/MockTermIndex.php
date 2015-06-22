@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use BadMethodCallException;
 use Exception;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -319,6 +320,24 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 	/**
 	 * @param TermIndexEntry[] $terms
+	 * @param string|string[]|null $termType
+	 * @param string|string[]|null $entityType
+	 * @param array $options
+	 *
+	 * @return TermIndexEntry[]
+	 */
+	public function getTopMatchingTerms(
+		array $terms,
+		$termType = null,
+		$entityType = null,
+		array $options = array()
+	) {
+		throw new BadMethodCallException( __METHOD__ . ' not implemented' );
+		// TODO: Implement getHighestRankMatchingTerms() method.
+	}
+
+	/**
+	 * @param TermIndexEntry[] $terms
 	 * @param string|null $entityType
 	 * @param array $options
 	 *
@@ -436,4 +455,5 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 
 		return $find === $text;
 	}
+
 }
