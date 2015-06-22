@@ -388,8 +388,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\TermIndexEntry::compare' );
 		$extraTerms =   array_udiff( $actualTerms, $expectedTerms, 'Wikibase\TermIndexEntry::compare' );
 
-		$this->assertEmpty( $missingTerms, 'Missing terms' );
-		$this->assertEmpty( $extraTerms, 'Extra terms' );
+		$this->assertEquals( array(), $missingTerms, 'Missing terms' );
+		$this->assertEquals( array(), $extraTerms, 'Extra terms' );
 	}
 
 	private function getTermConflictEntities() {
