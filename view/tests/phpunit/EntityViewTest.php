@@ -68,6 +68,7 @@ abstract class EntityViewTest extends MediaWikiLangTestCase {
 
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 		$this->assertRegExp( '/id="wb-[a-z]+-' . $entityId . '"/', $output );
+		$this->assertContains( '<div id="toc"></div>', $output );
 	}
 
 	public abstract function provideTestGetHtml();
