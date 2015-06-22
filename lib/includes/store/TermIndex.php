@@ -141,28 +141,6 @@ interface TermIndex {
 	);
 
 	/**
-	 * Returns the IDs that match the provided conditions.
-	 *
-	 * $terms is an array of Term objects. Terms are joined by OR.
-	 * The fields of the terms are joined by AND.
-	 *
-	 * A single entityType has to be provided.
-	 *
-	 * @since 0.4
-	 *
-	 * @param TermIndexEntry[] $terms
-	 * @param string|null $entityType
-	 * @param array $options
-	 *        Accepted options are:
-	 *        - caseSensitive: boolean, default true
-	 *        - prefixSearch: boolean, default false
-	 *        - LIMIT: int, defaults to none
-	 *
-	 * @return EntityId[]
-	 */
-	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() );
-
-	/**
 	 * Clears all terms from the cache.
 	 *
 	 * @since 0.2
