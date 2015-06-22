@@ -54,6 +54,23 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_b999d8c8",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-22T18:45:15Z",
+      "side": 1,
+      "message": "Using the concept base URI here isn\u0027t really the right thing, is it? link\u003d\"alternate\" is intended to point to *documents*, not concepts, as far as I know.",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e5ac95ed",
         "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
         "patchSetId": 3
