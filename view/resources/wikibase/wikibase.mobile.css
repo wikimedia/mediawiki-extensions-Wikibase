@@ -11,6 +11,14 @@
 	position: absolute;
 	top: 0;
 	right: 0;
+	font-size: 0;
+}
+
+.wikibase-toolbar-button-edit a {
+	background-image: url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%20-410%202048%202048%22%20width%3D%2224%22%20height%3D%2224%22%3E%0A%20%20%20%20%3Cg%20id%3D%22g4%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M307.05%201073.838q32.507%2022.505%2097.522%2087.52L1659.846%2026.107q-33.757-60.013-101.272-82.518zm-135.03-51.26L1563.576-225.197q156.284%2026.256%20276.31%20155.034Q1959.91%2058.616%201968.663%20217.4L575.858%201470.177l-515.112%2055.012z%22%20id%3D%22path6%22%20fill%3D%22%23777%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A");
+	display: block;
+	min-height: 24px;
+	min-width: 24px;
 }
 
 /* fix positioning of toolbar */
