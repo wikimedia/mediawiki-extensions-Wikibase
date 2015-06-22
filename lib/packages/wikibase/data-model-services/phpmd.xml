@@ -14,8 +14,10 @@
         </properties>
     </rule>
 
-    <!-- todo: exclude the camel case method rule for the tests -->
-    <rule ref="rulesets/controversial.xml" />
+    <!-- todo: enable the camel case method rule for non-tests -->
+    <rule ref="rulesets/controversial.xml">
+        <exclude name="CamelCaseMethodName" />
+    </rule>
 
     <rule ref="rulesets/design.xml" />
 
