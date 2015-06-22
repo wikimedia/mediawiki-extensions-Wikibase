@@ -8,7 +8,15 @@
  */
 
 .wikibase-toolbar-container {
-	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+/* fix positioning of toolbar */
+.wikibase-entitytermsview,
+.wikibase-sitelinkgroupview {
+	position: relative;
 }
 
 .wikibase-entitytermsview-entitytermsforlanguagelistview {
