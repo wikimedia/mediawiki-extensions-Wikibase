@@ -96,6 +96,7 @@ interface TermIndex {
 	 *        - caseSensitive: boolean, default true
 	 *        - prefixSearch: boolean, default false
 	 *        - LIMIT: int, defaults to none
+	 *        - orderByWeight: boolean, default false
 	 *
 	 * @return TermIndexEntry[]
 	 */
