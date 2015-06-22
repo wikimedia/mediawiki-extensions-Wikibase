@@ -10,7 +10,6 @@ use MWException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -560,66 +559,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$this->releaseConnection( $dbr );
 
 		return $terms;
-	}
-
-	/**
-	 * @see TermIndex::getMatchingIDs
-	 *
-	 * @since 0.4
-	 *
-	 * @param TermIndexEntry[] $terms
-	 * @param string|null $entityType
-	 * @param array $options There is an implicit LIMIT of 5000 items in this implementation
-	 *
-	 * @return EntityId[]
-	 */
-	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() ) {
-		if ( empty( $terms ) ) {
-			return array();
-		}
-
-		// this is the maximum limit of search results
-		// TODO this should not be hardcoded
-		$internalLimit = 5000;
-
-		$dbr = $this->getReadDb();
-
-		$conditions = $this->termsToConditions( $dbr, $terms, null, $entityType, $options );
-
-		$selectionFields = array(
-			'term_entity_type',
-			'term_entity_id',
-			'term_weight'
-		);
-
-		// We need to grab basically all hits in order to allow for the post-search sorting below.
-		$queryOptions = array(
-			'DISTINCT',
-			'LIMIT' => $internalLimit,
-		);
-
-		$requestedLimit = isset( $options['LIMIT'] ) ? max( (int)$options['LIMIT'], 0 ) : 0;
-
-		$rows = $dbr->select(
-			$this->tableName,
-			$selectionFields,
-			$dbr->makeList( $conditions, LIST_OR ),
-			__METHOD__,
-			$queryOptions
-		);
-
-		$rows = $this->getRowsOrderedByWeight( $rows, $requestedLimit );
-		$entityIds = array();
-		foreach ( $rows as $row ) {
-			// FIXME: this only works for items and properties
-			$id = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, $row->term_entity_id );
-
-			$entityIds[] = $id;
-		}
-
-		$this->releaseConnection( $dbr );
-
-		return $entityIds;
 	}
 
 	/**

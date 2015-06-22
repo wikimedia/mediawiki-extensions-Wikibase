@@ -180,8 +180,6 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @see TermSqlIndex::getMatchingIDs
-	 *
 	 * @since 0.2
 	 *
 	 * @return EntityId|null
