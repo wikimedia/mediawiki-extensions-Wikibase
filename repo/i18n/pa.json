@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Babanwalia",
-			"Macofe"
+			"Macofe",
+			"Satdeep gill"
 		]
 	},
 	"wikibase-edit": "ਸੋਧੋ",
@@ -13,10 +14,10 @@
 	"wikibase-addreference": "ਸਰੋਤ ਜੋੜੋ",
 	"wikibase-save-inprogress": "ਸਾਂਭਿਆ ਜਾ ਰਿਹਾ ਹੈ...",
 	"wikibase-remove-inprogress": "ਹਟਾਇਆ ਜਾ ਰਿਹਾ ਹੈ...",
-	"wikibase-label-empty": "ਅਜੇ ਕੋਈ ਚੇਪੀ ਨਹੀਂ ਦਿੱਤੀ ਗਈ",
+	"wikibase-label-empty": "ਕੋਈ ਲੇਬਲ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ",
 	"wikibase-label-edit-placeholder": "ਚੇਪੀ ਭਰੋ",
 	"wikibase-label-edit-placeholder-language-aware": "$1 ਵਿਚ ਚੇਪੀ ਭਰੋ",
-	"wikibase-description-empty": "ਅਜੇ ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ",
+	"wikibase-description-empty": "ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ ਦਿੱਤਾ ਗਿਆ",
 	"wikibase-description-edit-placeholder": "ਵੇਰਵਾ ਭਰੋ",
 	"wikibase-description-edit-placeholder-language-aware": "$1 ਵਿਚ ਵੇਰਵਾ ਭਰੋ",
 	"wikibase-sitelink-site-edit-placeholder": "ਸਾਈਟ",
@@ -31,6 +32,7 @@
 	"wikibase-move-up": "ਉਤਾਂਹ ਘੱਲੋ",
 	"wikibase-move-down": "ਹੇਠਾਂ ਘੱਲੋ",
 	"wikibase-undo-title": "\"$1\" ਦੀ ਸੋਧ ਨਕਾਰੀ ਜਾ ਰਹੀ ਹੈ",
+	"wikibase-aliases-empty": "ਕੋਈ ਨਾਮ ਪਰਿਭਾਸ਼ਿਤ ਨਹੀਂ",
 	"wikibase-statementview-rank-normal": "ਆਮ ਦਰਜਾ",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ਹਵਾਲਾ|ਹਵਾਲੇ}}",
 	"wikibase-itembytitle-lookup-site": "ਸਾਈਟ:",
