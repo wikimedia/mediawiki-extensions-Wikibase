@@ -3,7 +3,8 @@
 		"authors": [
 			"Fryed-peach",
 			"Shirayuki",
-			"Penn Station"
+			"Penn Station",
+			"Otokoume"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 拡張機能のクライアント",
@@ -50,8 +51,8 @@
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}の編集をウォッチリストに表示",
 	"wikibase-error-serialize-error": "データをシリアライズできませんでした。",
 	"wikibase-error-invalid-entity-id": "入力した ID はシステムに登録されていません。有効なエンティティ ID を使用してください。",
-	"special-unconnectedpages": "項目に関連付けられていないページ",
-	"wikibase-unconnectedpages-legend": "関連付けられていないページのオプション",
+	"unconnectedpages": "項目に関連付けられていないページ",
+	"unconnectedpages-summary": "このページでは、関連項目のないページが一覧表示されます。一覧は、関連項目をサポートしている名前空間に限定されています。",
 	"wikibase-unconnectedpages-page": "検索結果の先頭にするページ:",
 	"wikibase-unconnectedpages-submit": "表示",
 	"wikibase-unconnectedpages-invalid-language": "「$1」は有効な言語コードではありません。",
