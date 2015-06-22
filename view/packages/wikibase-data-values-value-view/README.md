@@ -105,6 +105,11 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.15.0 (dev)
+
+#### Breaking changes
+* Removed deprecated constant `ValueView_VERSION`, use `VALUEVIEW_VERSION` instead.
+
 ### 0.14.5 (2015-06-11)
 * Fixed `jQuery.valueview.ExpertExtender.CalendarHint` test broken due to DataValues JavaScript dependency update.
 
