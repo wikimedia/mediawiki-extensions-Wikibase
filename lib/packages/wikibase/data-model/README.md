@@ -89,6 +89,7 @@ Daniel Kinzler and Jeroen De Dauw.
 ## See also
 
 * [Blog posts on Wikibase DataModel](http://www.bn2vs.com/blog/tag/wikibase-datamodel/)
+* [Wikibase DataModel Services](https://github.com/wmde/WikibaseDataModelServices)
 * [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization)
 * [Wikibase Internal Serialization](https://github.com/wmde/WikibaseInternalSerialization)
 
