@@ -26,71 +26,6 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 */
 	public abstract function getTermIndex();
 
-	public function provideGetMatchingIds() {
-		$id0 = new ItemId( 'Q10' );
-		$item0 = new Item( $id0 );
-
-		$item0->setLabel( 'en', 'foobar' );
-		$item0->setLabel( 'de', 'foobar' );
-		$item0->setLabel( 'nl', 'baz' );
-
-		$item1 = $item0->copy();
-		$id1 = new ItemId( 'Q11' );
-		$item1->setId( $id1 );
-
-		$item1->setLabel( 'nl', 'o_O' );
-		$item1->setLabel( 'pl', '<(^.^)>' );
-		$item1->setDescription( 'en', 'foo bar baz' );
-
-		$id2 = new ItemId( 'Q12' );
-		$item2 = new Item( $id2 );
-		$item2->setLabel( 'pt', 'fooKiTTens rock' );
-		$item2->setDescription( 'pt', 'fooKiTTens are the best' );
-
-		$item3 = $item2->copy();
-		$id3 = new ItemId( 'Q13' );
-		$item3->setId( $id3 );
-
-		return array(
-			array(
-				array( $item0, $item1 ),
-				array( new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'foobar' ) ) ),
-				array( $id1, $id0 ),
-			),
-			array(
-				array( $item0, $item1 ),
-				array( new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'baz', 'termLanguage' => 'nl' ) ) ),
-				array( $id0 ),
-			),
-			array(
-				array( $item0, $item1 ),
-				array( new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'o_O', 'termLanguage' => 'nl' ) ) ),
-				array( $id1 ),
-			),
-			array(
-				array( $item0, $item1, $item2 ),
-				array( new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'foo' ) ) ),
-				array( $id1, $id0, $id2 ),
-				array( 'caseSensitive' => false, 'prefixSearch' => true )
-			),
-		);
-	}
-
-	/**
-	 * @dataProvider provideGetMatchingIds
-	 */
-	public function testGetMatchingIDs( $items, $terms, $expectedIds, $options = array() ) {
-		$lookup = $this->getTermIndex();
-		foreach( $items as $item ) {
-			$lookup->saveTermsOfEntity( $item );
-		}
-
-		$ids = $lookup->getMatchingIDs( $terms, Item::ENTITY_TYPE, $options );
-		$this->assertInternalType( 'array', $ids );
-		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
-		$this->assertEquals( $expectedIds, $ids );
-	}
-
 	public function getTermKey( TermIndexEntry $term ) {
 		$key = '';
 
@@ -375,9 +310,12 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertNotTermExists( $lookup, 'testDeleteTermsForEntity' );
 
 		$abc = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ) );
-		$ids = $lookup->getMatchingIDs( array( $abc ), Item::ENTITY_TYPE );
-
-		$this->assertNotContains( $id, $ids );
+		$matchedTerms = $lookup->getMatchingTerms( array( $abc ), array( TermIndexEntry::TYPE_LABEL ), Item::ENTITY_TYPE );
+		foreach( $matchedTerms as $matchedTerm ) {
+			if( $matchedTerm->getEntityId() === $id ) {
+				$this->fail( 'Failed to delete term or entity: ' . $id->getSerialization() );
+			}
+		}
 	}
 
 	public function testSaveTermsOfEntity() {
