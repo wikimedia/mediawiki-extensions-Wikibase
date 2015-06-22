@@ -318,35 +318,6 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
-	 * @param TermIndexEntry[] $terms
-	 * @param string|null $entityType
-	 * @param array $options
-	 *
-	 * @return EntityId[]
-	 */
-	public function getMatchingIDs( array $terms, $entityType = null, array $options = array() ) {
-		// We can't pass the limit on to getMatchingTerms, since getMatchingTerms may
-		// return multiple terms for an EntityId.
-		$limit = isset( $options['LIMIT'] ) ? $options['LIMIT'] : 0;
-		unset( $options['LIMIT'] );
-
-		$terms = $this->getMatchingTerms( $terms, null, $entityType, $options );
-
-		$ids = array();
-		foreach ( $terms as $term ) {
-			$id = $term->getEntityId();
-			$key = $id->getSerialization();
-			$ids[$key] = $id;
-		}
-
-		if ( $limit > 0 ) {
-			$ids = array_slice( $ids, 0, $limit );
-		}
-
-		return $ids;
-	}
-
-	/**
 	 * @throws Exception always
 	 */
 	public function clear() {
