@@ -54,10 +54,11 @@ The "autoload" section of this file specifies how to load the resources provide 
 
 ## Tests
 
-This library comes with a set up PHPUnit tests that cover all non-trivial code. You can run these
-tests using the PHPUnit configuration file found in the root directory. The tests can also be run
-via TravisCI, as a TravisCI configuration file is also provided in the root directory.
-
+This library comes with a set up PHPUnit tests that cover all non-trivial code. Additionally, code
+style checks by PHPCS and PHPMD are supported. The configuration for all 3 these tools can be found
+in the root directory. You can use the tools in their standard manner, though can run all checks
+required by our CI by executing `composer ci`. To just run tests use `composer test`, and to just
+run style checks use `composer cs`.
 
 ## Links
 
