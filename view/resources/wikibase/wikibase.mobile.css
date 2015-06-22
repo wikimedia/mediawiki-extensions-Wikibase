@@ -7,14 +7,35 @@
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 
-.wikibase-toolbar-container {
-	display: none;
-}
-
 .wikibase-title-id {
 	color: grey;
 	font-size: 0.6em;
 	margin-left: 0.4em;
+}
+
+.wb-section-heading span {
+	width: 100%;
+}
+
+.wikibase-toolbar-container {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 0;
+}
+
+.wikibase-toolbar-button-edit a {
+	/* @embed */
+	background-image: url(pencil.svg);
+	display: block;
+	height: 24px;
+	width: 24px;
+}
+
+/* fix positioning of toolbar */
+.wikibase-entitytermsview,
+.wikibase-sitelinkgroupview {
+	position: relative;
 }
 
 .wikibase-entitytermsview-heading-aliases ul {
