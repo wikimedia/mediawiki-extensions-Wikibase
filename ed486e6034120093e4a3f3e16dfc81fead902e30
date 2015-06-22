@@ -16,6 +16,24 @@
       "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_05a201fa",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-22T11:33:23Z",
+      "side": 1,
+      "message": "I agree, but let\u0027s not block this change on refactoring the entire ParserOutput stuff. If you have concrete suggestions on how to improve the architecture, please file a ticket.",
+      "parentUuid": "8ec42329_987f3d10",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
