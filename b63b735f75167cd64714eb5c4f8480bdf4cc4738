@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e51fb55c",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-22T11:09:41Z",
+      "side": 1,
+      "message": "Note: I had to revert the absolute path because it makes the command useless on my machine. If this does not run on Travis without an absolute path, then we do have a problem.",
+      "revId": "b63b735f75167cd64714eb5c4f8480bdf4cc4738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
