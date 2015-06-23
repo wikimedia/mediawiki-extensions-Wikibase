@@ -72,7 +72,7 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::createEntity
 	 */
-	protected function createEntity( array $params ) {
+	protected function createEntity( $entityType ) {
 		$this->dieError( 'Could not find an existing entity', 'no-such-entity' );
 	}
 
