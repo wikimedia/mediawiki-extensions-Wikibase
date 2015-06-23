@@ -251,7 +251,7 @@
 	"wikibase-entitydata-unsupported-format": "De gegevensopmaak $1 wordt niet ondersteund via deze interface.",
 	"wikibase-entitydata-title": "Entiteitsgegevens",
 	"wikibase-entitydata-text": "Deze pagina biedt een koppelingsinterface naar entiteitswaarden. Geef het entiteits-ID op in de URL via de subpagina-opmaak.",
-	"special-redirectentity": "een entiteit doorverwijzen",
+	"special-redirectentity": "Een entiteit doorverwijzen",
 	"wikibase-redirectentity-submit": "Doorverwijzing",
 	"special-mylanguagefallbackchain": "Terugvalketen voor mijn taal",
 	"wikibase-mylanguagefallbackchain-text": "De gebruiker terugvalketen voor talen die gebruikt word voor het weergeven van entiteitlabels wordt hieronder weergegeven.",

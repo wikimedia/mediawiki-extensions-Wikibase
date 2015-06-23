@@ -14,7 +14,8 @@
 			"VezonThunder",
 			"Zolo",
 			"Тест",
-			"Harriv"
+			"Harriv",
+			"Pxos"
 		]
 	},
 	"wikibase-desc": "Säilö jäsennetylle datalle",
@@ -58,7 +59,7 @@
 	"wikibase-description-input-help-message": "Kirjoita lyhyt kuvaus tälle aiheelle kielellä $1.",
 	"wikibase-statements": "Esitykset",
 	"wikibase-terms": "Muilla kielillä",
-	"wikibase-sitelinks": "Luettelo tähän kohteeseen linkitetyistä sivuista",
+	"wikibase-sitelinks": "Sivuston linkit",
 	"wikibase-sitelinks-empty": "Tässä kohteessa ei vielä ole sivua linkitettynä.",
 	"wikibase-sitelinks-input-help-message": "Aseta linkki tähän kohteeseen liittyvälle sivulle.",
 	"wikibase-sitelinks-special": "Muut sivustot",
