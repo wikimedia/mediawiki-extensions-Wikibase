@@ -76,7 +76,8 @@ use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
-use Wikibase\Repo\Notifications\DummyChangeTransmitter;
+use Wikibase\Repo\Notifications\HookChangeTransmitter;
+use Wikibase\Repo\Notifications\MulticastChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
@@ -812,26 +813,27 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return ChangeTransmitter
+	 * @return ChangeTransmitter[]
 	 */
-	private function getChangeTransmitter() {
+	private function getChangeTransmitters() {
+		$transmitters = array();
+
+		$transmitters[] = new HookChangeTransmitter( 'WikibaseChangeNotification' );
+
 		if ( $this->settings->getSetting( 'useChangesTable' ) ) {
-			return new DatabaseChangeTransmitter();
+			$transmitters[] = new DatabaseChangeTransmitter();
 		}
-		else {
-			return new DummyChangeTransmitter();
-		}
+
+		return $transmitters;
 	}
 
 	/**
 	 * @return ChangeNotifier
 	 */
 	public function getChangeNotifier() {
-		// TODO: Instead of having getChangeTransmitter return a dummy,
-		//       return a dummy from here if useChangesTable is not set.
 		return new ChangeNotifier(
 			$this->getEntityChangeFactory(),
-			$this->getChangeTransmitter()
+			$this->getChangeTransmitters()
 		);
 	}
 
