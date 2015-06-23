@@ -120,7 +120,6 @@ class SpecialUnconnectedPages extends QueryPage {
 			'tables' => array(
 				'page',
 				'page_props',
-				'langlinks'
 			),
 			'fields' => array(
 				'value' => 'page_id',
@@ -129,18 +128,16 @@ class SpecialUnconnectedPages extends QueryPage {
 				'page_id',
 				'page_len',
 				'page_is_redirect',
-				'page_num_iwlinks' => 'count(ll_from)'
+				'page_num_iwlinks' => '0', // placeholder, we'll get this from page_props in the future
 			),
 			'conds' => $conds,
 			'options' => array(
-				'GROUP BY' => 'page_namespace, page_title',
 				'ORDER BY' => 'page_namespace, page_title',
 				'USE INDEX' => array( 'page' => 'name_title' )
 			),
 			'join_conds' => array(
-				// FIXME: Should 'wikibase_item' really be hardcoded here?
+				// TODO: also get explicit_langlink_count from page_props once that is populated. Could even filter or sort by it via pp_sortkey.
 				'page_props' => array( 'LEFT JOIN', array( 'page_id = pp_page', "pp_propname = 'wikibase_item'" ) ),
-				'langlinks' => array( 'LEFT JOIN', 'll_from = page_id' )
 			)
 		);
 	}
