@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3362d937",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-23T17:23:39Z",
+      "side": 1,
+      "message": "nested loops, please split into separate function",
+      "revId": "ef7c5414de01660c507da34af151629801265085",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
