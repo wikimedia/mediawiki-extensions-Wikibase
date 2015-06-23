@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c9a16492",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-23T19:47:09Z",
+      "side": 1,
+      "message": "new line before array_keys would aide readability, I guess",
+      "revId": "a840214a88cd05b96a49956c53c1f10c25627999",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6994f042",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-23T19:47:09Z",
+      "side": 1,
+      "message": "You call ItemId::getSerialization three time in this loop",
+      "revId": "a840214a88cd05b96a49956c53c1f10c25627999",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
