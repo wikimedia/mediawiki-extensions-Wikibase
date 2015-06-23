@@ -902,11 +902,11 @@ class WikibaseRepo {
 	/**
 	 * @return Serializer
 	 */
-	public function getInternalClaimSerializer() {
+	public function getInternalStatementSerializer() {
 		$claimSerializerClass = $this->settings->getSetting( 'internalClaimSerializerClass' );
 
 		if ( $claimSerializerClass === null ) {
-			return $this->getInternalSerializerFactory()->newClaimSerializer();
+			return $this->getInternalSerializerFactory()->newStatementSerializer();
 		}
 
 		return new $claimSerializerClass();
@@ -915,8 +915,8 @@ class WikibaseRepo {
 	/**
 	 * @return Deserializer
 	 */
-	public function getInternalClaimDeserializer() {
-		return $this->getInternalDeserializerFactory()->newClaimDeserializer();
+	public function getInternalStatementDeserializer() {
+		return $this->getInternalDeserializerFactory()->newStatementDeserializer();
 	}
 
 	/**
