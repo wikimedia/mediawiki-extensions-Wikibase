@@ -22,40 +22,35 @@ class TermSearchKeyBuilder {
 	 *
 	 * @var TermSqlIndex
 	 */
-	protected $table;
+	private $table;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var MessageReporter|null
 	 */
-	protected $reporter = null;
+	private $reporter = null;
 
 	/**
 	 * Whether all keys should be updated, or only missing keys
 	 *
 	 * @var bool
 	 */
-	protected $all = true;
+	private $all = true;
 
 	/**
 	 * @var int
 	 */
-	protected $fromId = 1;
+	private $fromId = 1;
 
 	/**
 	 * The batch size, giving the number of rows to be updated in each database transaction.
 	 *
 	 * @var int
 	 */
-	protected $batchSize = 100;
+	private $batchSize = 100;
 
-	/**
-	 * @since 0.4
-	 *
-	 * @param TermSqlIndex $table
-	 */
-	public function __construct( TermSqlIndex $table ) {
+	public function __construct( TermIndex $table ) {
 		$this->table = $table;
 	}
 
@@ -196,7 +191,7 @@ class TermSearchKeyBuilder {
 	 *
 	 * @return string|bool the search key, or false if no search key could be calculated.
 	 */
-	protected function updateSearchKey( \DatabaseBase $dbw, $rowId, $text ) {
+	private function updateSearchKey( \DatabaseBase $dbw, $rowId, $text ) {
 		$key = $this->table->getSearchKey( $text );
 
 		if ( $key === '' ) {
@@ -227,7 +222,7 @@ class TermSearchKeyBuilder {
 	 *
 	 * @param $msg
 	 */
-	protected function report( $msg ) {
+	private function report( $msg ) {
 		if ( $this->reporter ) {
 			$this->reporter->reportMessage( $msg );
 		}
