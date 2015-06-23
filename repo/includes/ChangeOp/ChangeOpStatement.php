@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use ValueValidators\Result;
 use Wikibase\DataModel\ByPropertyIdArray;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -20,20 +19,21 @@ use Wikibase\Summary;
 use Wikibase\Validators\SnakValidator;
 
 /**
- * Class for claim modification operations
+ * Class for statement modification operations
  *
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author H. Snater < mediawiki@snater.com >
  * @author Thiemo Mättig
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ChangeOpClaim extends ChangeOpBase {
+class ChangeOpStatement extends ChangeOpBase {
 
 	/**
-	 * @var Claim
+	 * @var Statement
 	 */
-	private $claim;
+	private $statement;
 
 	/**
 	 * @var ClaimGuidGenerator
@@ -61,7 +61,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	private $index;
 
 	/**
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param ClaimGuidParser $guidParser
@@ -71,7 +71,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		Claim $claim,
+		Statement $statement,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
 		ClaimGuidParser $guidParser,
@@ -82,7 +82,7 @@ class ChangeOpClaim extends ChangeOpBase {
 			throw new InvalidArgumentException( '$index must be an integer or null' );
 		}
 
-		$this->claim = $claim;
+		$this->statement = $statement;
 		$this->guidGenerator = $guidGenerator;
 		$this->guidValidator = $guidValidator;
 		$this->guidParser = $guidParser;
@@ -100,11 +100,11 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		if ( $this->claim->getGuid() === null ) {
-			$this->claim->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
+		if ( $this->statement->getGuid() === null ) {
+			$this->statement->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
 		}
 
-		$guid = $this->guidParser->parse( $this->claim->getGuid() );
+		$guid = $this->guidParser->parse( $this->statement->getGuid() );
 
 		if ( $this->guidValidator->validate( $guid->getSerialization() ) === false ) {
 			throw new ChangeOpException( "Claim does not have a valid GUID" );
@@ -140,7 +140,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @return Statement[]
 	 */
 	private function removeStatement( array $statements, Summary $summary = null ) {
-		$guid = $this->claim->getGuid();
+		$guid = $this->statement->getGuid();
 		$newStatements = array();
 		$oldStatement = null;
 
@@ -177,11 +177,11 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @throws ChangeOpException If the main snak update is illegal.
 	 */
 	private function checkMainSnakUpdate( Statement $oldStatement ) {
-		$newMainSnak = $this->claim->getMainSnak();
+		$newMainSnak = $this->statement->getMainSnak();
 		$oldPropertyId = $oldStatement->getMainSnak()->getPropertyId();
 
 		if ( !$oldPropertyId->equals( $newMainSnak->getPropertyId() ) ) {
-			$guid = $this->claim->getGuid();
+			$guid = $this->statement->getGuid();
 			throw new ChangeOpException( "Claim with GUID $guid uses property "
 				. $oldPropertyId . ", can't change to "
 				. $newMainSnak->getPropertyId() );
@@ -205,10 +205,10 @@ class ChangeOpClaim extends ChangeOpBase {
 		$indexedStatements->buildIndex();
 
 		try {
-			$indexedStatements->addObjectAtIndex( $this->claim, $this->index );
+			$indexedStatements->addObjectAtIndex( $this->statement, $this->index );
 			$statements = $indexedStatements->toFlatArray();
 		} catch ( OutOfBoundsException $ex ) {
-			$statements[] = $this->claim;
+			$statements[] = $this->statement;
 		}
 
 		return $statements;
@@ -244,7 +244,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @return Result
 	 */
 	public function validate( Entity $entity ) {
-		return $this->snakValidator->validateClaimSnaks( $this->claim );
+		return $this->snakValidator->validateClaimSnaks( $this->statement );
 	}
 
 }
