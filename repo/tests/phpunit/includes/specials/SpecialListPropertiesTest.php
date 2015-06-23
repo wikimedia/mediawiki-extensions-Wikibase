@@ -12,6 +12,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
+use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Test\SpecialPageTestBase;
 
@@ -105,10 +106,12 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$specialPage->initServices(
 			$this->getDataTypeFactory(),
 			$this->getPropertyInfoStore(),
-			new LanguageFallbackChainFactory(),
-			$this->getTermLookup(),
-			$this->getTermBuffer(),
-			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), new LanguageNameLookup() )
+			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), new LanguageNameLookup() ),
+			new LanguageFallbackLabelDescriptionLookupFactory(
+				new LanguageFallbackChainFactory(),
+				$this->getTermLookup(),
+				$this->getTermBuffer()
+			)
 		);
 
 		return $specialPage;
