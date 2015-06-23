@@ -13,7 +13,8 @@
 			"Peter17",
 			"Sherbrooke",
 			"Wyz",
-			"Brenloch56"
+			"Brenloch56",
+			"Mattho69"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -59,8 +60,8 @@
 	"wikibase-watchlist-show-changes-pref": "Voir les modifications de {{WBREPONAME}} dans votre liste de suivi",
 	"wikibase-error-serialize-error": "Échec à la sérialisation des données",
 	"wikibase-error-invalid-entity-id": "L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.",
-	"special-unconnectedpages": "Pages non reliées à un élément",
-	"wikibase-unconnectedpages-legend": "Options de pages non reliées",
+	"unconnectedpages": "Pages non reliées à un élément",
+	"unconnectedpages-summary": "Cette page répertorie les pages non reliées à un élément. La liste est limitée aux espaces de noms qui prennent en charge les éléments connectés.",
 	"wikibase-unconnectedpages-page": "Début de la liste des résultats avec la page :",
 	"wikibase-unconnectedpages-submit": "Démarrer",
 	"wikibase-unconnectedpages-invalid-language": "« $1 » n’est pas un code de langue valide.",
