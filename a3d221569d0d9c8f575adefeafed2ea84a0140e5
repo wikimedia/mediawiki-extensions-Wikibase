@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_dbf8517c",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-23T12:46:59Z",
+      "side": 1,
+      "message": "This needs to be fixed.",
+      "revId": "a3d221569d0d9c8f575adefeafed2ea84a0140e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
