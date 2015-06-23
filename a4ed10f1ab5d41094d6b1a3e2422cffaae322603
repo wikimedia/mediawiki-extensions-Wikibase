@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_bbb22545",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2015-06-23T11:28:22Z",
+      "side": 0,
+      "message": "You removed this line. Is it intentional?",
+      "revId": "a4ed10f1ab5d41094d6b1a3e2422cffaae322603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
