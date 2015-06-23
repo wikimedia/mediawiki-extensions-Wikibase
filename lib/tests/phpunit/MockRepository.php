@@ -294,14 +294,14 @@ class MockRepository implements
 	 * in the mock repository, it is not removed, but replaced as the current one. If a revision
 	 * ID is given, the entity with the highest revision ID is considered the current one.
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param int $revisionId
 	 * @param int|string $timestamp
 	 * @param User|string|null $user
 	 *
 	 * @return EntityRevision
 	 */
-	public function putEntity( Entity $entity, $revisionId = 0, $timestamp = 0, $user = null ) {
+	public function putEntity( EntityDocument $entity, $revisionId = 0, $timestamp = 0, $user = null ) {
 		if ( $entity->getId() === null ) {
 			$this->assignFreshId( $entity );
 		}
@@ -587,7 +587,7 @@ class MockRepository implements
 	/**
 	 * Stores the given Entity.
 	 *
-	 * @param Entity $entity the entity to save.
+	 * @param EntityDocument $entity the entity to save.
 	 * @param string $summary ignored
 	 * @param User $user ignored
 	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
@@ -600,7 +600,7 @@ class MockRepository implements
 	 *
 	 * @throws StorageException
 	 */
-	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
+	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
 		$entityId = $entity->getId();
 
 		$status = Status::newGood();
@@ -728,11 +728,11 @@ class MockRepository implements
 	/**
 	 * @see EntityStore::assignFreshId
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws StorageException
 	 */
-	public function assignFreshId( Entity $entity ) {
+	public function assignFreshId( EntityDocument $entity ) {
 		//TODO: Find a canonical way to generate an EntityId from the maxId number.
 		//XXX: Using setId() with an integer argument is deprecated!
 		$numericId = ++$this->maxEntityId;
