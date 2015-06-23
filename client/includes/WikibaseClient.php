@@ -651,8 +651,8 @@ final class WikibaseClient {
 	/**
 	 * @return Deserializer
 	 */
-	public function getInternalClaimDeserializer() {
-		return $this->getInternalDeserializerFactory()->newClaimDeserializer();
+	public function getInternalStatementDeserializer() {
+		return $this->getInternalDeserializerFactory()->newStatementDeserializer();
 	}
 
 	/**
