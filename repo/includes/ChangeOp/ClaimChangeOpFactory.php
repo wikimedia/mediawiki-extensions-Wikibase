@@ -66,7 +66,7 @@ class ClaimChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newAddClaimOp( Statement $statement, $index = null ) {
-		return new ChangeOpClaim(
+		return new ChangeOpStatement(
 			$statement,
 			$this->guidGenerator,
 			$this->guidValidator,
@@ -84,7 +84,7 @@ class ClaimChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetClaimOp( Claim $claim, $index = null ) {
-		return new ChangeOpClaim(
+		return new ChangeOpStatement(
 			$claim,
 			$this->guidGenerator,
 			$this->guidValidator,
