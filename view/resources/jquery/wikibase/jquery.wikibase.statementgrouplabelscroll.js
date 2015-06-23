@@ -120,11 +120,11 @@
 
 			for( var i = 0; i < $visibleStatementviews.length; i++ ) {
 				var $visibleClaim = $visibleStatementviews.eq( i ),
-					$statementGroup = $visibleClaim.closest( '.wikibase-statementlistview' ),
+					$statementGroup = $visibleClaim.closest( '.wikibase-statementgroupview' ),
 					$groupname
-						= $statementGroup.children( '.wikibase-statementgrouplistview-groupname' ),
+						= $statementGroup.children( '.wikibase-statementgroupview-property' ),
 					$statementGroupLabel = $groupname.children(
-							'.wikibase-statementgrouplistview-groupname-name'
+							'.wikibase-statementgroupview-property-label'
 						);
 
 				if( !$groupname.length ) {
@@ -265,8 +265,7 @@
 			using: function( css, calc ) {
 				$( this ).animate( css, {
 					queue: ANIMATION_QUEUE,
-					easing: 'easeInOutCubic',
-					duration: 'normal'
+					easing: 'easeInOutCubic'
 				} );
 			}
 		} )
