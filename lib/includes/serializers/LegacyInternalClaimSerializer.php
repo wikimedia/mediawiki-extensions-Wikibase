@@ -22,7 +22,7 @@ class LegacyInternalClaimSerializer implements Serializer {
 			throw new InvalidArgumentException( '$claim must be an Claim' );
 		}
 
-		return WikibaseRepo::getDefaultInstance()->getInternalClaimSerializer()->serialize( $claim );
+		return WikibaseRepo::getDefaultInstance()->getInternalStatementSerializer()->serialize( $claim );
 	}
 
 }
