@@ -249,9 +249,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected function createSummary( array $params ) {
 		$summary = new Summary( $this->getModuleName() );
-		if ( !is_null( $params['summary'] ) ) {
-			$summary->setUserSummary( $params['summary'] );
-		}
+		$summary->setUserSummary( $params['summary'] );
 		return $summary;
 	}
 
