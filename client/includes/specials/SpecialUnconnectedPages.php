@@ -131,33 +131,12 @@ class SpecialUnconnectedPages extends QueryPage {
 				'page_num_iwlinks' => '0', // placeholder, we'll get this from page_props in the future
 			),
 			'conds' => $conds,
-			'options' => array(
-				'ORDER BY' => 'page_namespace, page_title',
-				'USE INDEX' => array( 'page' => 'name_title' )
-			),
+			'options' => array(), // sorting is determined getOrderFields(), which returns array( 'value' ) per default.
 			'join_conds' => array(
 				// TODO: also get explicit_langlink_count from page_props once that is populated. Could even filter or sort by it via pp_sortkey.
 				'page_props' => array( 'LEFT JOIN', array( 'page_id = pp_page', "pp_propname = 'wikibase_item'" ) ),
 			)
 		);
-	}
-
-	/**
-	 * @see QueryPage::getOrderFields
-	 *
-	 * @return string[]
-	 */
-	function getOrderFields() {
-		return array( 'value' );
-	}
-
-	/**
-	 * @see QueryPage::sortDescending
-	 *
-	 * @return bool Always false for this page.
-	 */
-	function sortDescending() {
-		return false;
 	}
 
 	/**
