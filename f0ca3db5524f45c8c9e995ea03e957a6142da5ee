@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_536a05ec",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-23T17:39:06Z",
+      "side": 1,
+      "message": "WikibaseRepo should get a getLabelDescriptionLookupFactory method, instead of constructing this here.",
+      "revId": "f0ca3db5524f45c8c9e995ea03e957a6142da5ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
