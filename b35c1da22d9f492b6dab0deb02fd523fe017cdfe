@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_13a8fdd6",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-23T16:38:36Z",
+      "side": 1,
+      "message": "getTopMatchingTerms",
+      "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5389a578",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-23T16:38:36Z",
+      "side": 1,
+      "message": "test newly added ranking in here",
+      "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f3b21146",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-23T16:38:36Z",
+      "side": 1,
+      "message": "test ranking here and uniquiness",
+      "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
