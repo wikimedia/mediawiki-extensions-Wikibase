@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_934b8dcc",
+        "filename": "repo/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-23T17:13:34Z",
+      "side": 1,
+      "message": "I think the entire \"aliases in display language\" thing can go. It\u0027s expensive. We care about aliases only if they were matched. \n\nSearchEntities should, as a temporary compatibility measure, put the matched term under the \"aliases\" key, and use the display label and description for the \"label\" and \"description\" fields. \n\nLater, wbsearchentities should be changed so that the \"aliases\" key is removed, and instead a \"match\" key is introduced, which contains a term structure with text and language, and possibly type.",
+      "revId": "3b15126284461e9b9edc3bd1dd2ed0e6e8fd3605",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
