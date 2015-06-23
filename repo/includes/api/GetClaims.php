@@ -152,8 +152,7 @@ class GetClaims extends ApiWikibase {
 				$this->dieException( $e, 'param-invalid' );
 			}
 
-			$matchFilter = $propertyId->equals( $parsedProperty );
-			return $matchFilter;
+			return $propertyId->equals( $parsedProperty );
 		}
 
 		return true;
