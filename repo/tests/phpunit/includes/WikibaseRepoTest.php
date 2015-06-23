@@ -89,6 +89,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\LanguageFallbackChainFactory', $returnValue );
 	}
 
+	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {
+		$returnValue = $this->getWikibaseRepo()->getLanguageFallbackLabelDescriptionLookupFactory();
+		$this->assertInstanceOf( 'Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory', $returnValue );
+	}
+
 	public function testGetClaimGuidValidator() {
 		$returnValue = $this->getWikibaseRepo()->getClaimGuidValidator();
 		$this->assertInstanceOf( 'Wikibase\Lib\ClaimGuidValidator', $returnValue );

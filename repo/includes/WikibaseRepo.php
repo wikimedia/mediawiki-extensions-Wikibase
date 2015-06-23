@@ -487,6 +487,19 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @since 0.5
+	 *
+	 * @return LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	public function getLanguageFallbackLabelDescriptionLookupFactory() {
+		return new LanguageFallbackLabelDescriptionLookupFactory(
+			$this->getLanguageFallbackChainFactory(),
+			$this->getTermLookup(),
+			$this->getTermBuffer()
+		);
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @return ClaimGuidValidator
