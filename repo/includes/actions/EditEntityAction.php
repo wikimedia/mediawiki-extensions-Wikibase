@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use Action;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Html;

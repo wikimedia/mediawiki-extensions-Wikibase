@@ -2,7 +2,6 @@
 
 namespace Wikibase\Dumpers;
 
-use HashBagOStuff;
 use InvalidArgumentException;
 use MWContentSerializationException;
 use MWException;

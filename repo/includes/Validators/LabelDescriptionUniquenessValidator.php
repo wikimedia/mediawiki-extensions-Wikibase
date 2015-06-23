@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
