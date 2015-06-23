@@ -121,21 +121,20 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::createEntity
 	 *
-	 * @param array $params
+	 * @param string $entityType
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
 	 * @return Entity
 	 */
-	protected function createEntity( array $params ) {
-		$type = $params['new'];
+	protected function createEntity( $entityType ) {
 		$this->flags |= EDIT_NEW;
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 
 		try {
-			return $entityFactory->newEmpty( $type );
+			return $entityFactory->newEmpty( $entityType );
 		} catch ( InvalidArgumentException $ex ) {
-			$this->dieError( "No such entity type: '$type'", 'no-such-entity-type' );
+			$this->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
 		}
 
 		throw new LogicException( 'ApiBase::dieUsage did not throw a UsageException' );
