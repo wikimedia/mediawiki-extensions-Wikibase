@@ -3,7 +3,6 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Language;
-use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnakListDeserializer;
 use Wikibase\DataModel\Snak\Snak;
