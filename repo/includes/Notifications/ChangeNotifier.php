@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Notifications;
 
+use Hooks;
 use InvalidArgumentException;
 use Revision;
 use User;
@@ -60,6 +61,7 @@ class ChangeNotifier {
 
 		$this->changeTransmitter->transmitChange( $change );
 
+		Hooks::run( 'WikibaseChange', array( $change ) );
 		return $change;
 	}
 
@@ -91,6 +93,7 @@ class ChangeNotifier {
 
 		$this->changeTransmitter->transmitChange( $change );
 
+		Hooks::run( 'WikibaseChange', array( $change ) );
 		return $change;
 	}
 
