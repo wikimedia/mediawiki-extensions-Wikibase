@@ -315,7 +315,7 @@ class EntityChange extends DiffChange {
 		if ( defined( 'WB_VERSION' ) ) {
 			return WikibaseRepo::getDefaultInstance()->getInternalClaimDeserializer();
 		} elseif ( defined( 'WBC_VERSION' ) ) {
-			return WikibaseClient::getDefaultInstance()->getInternalClaimDeserializer();
+			return WikibaseClient::getDefaultInstance()->getInternalStatementDeserializer();
 		} else {
 			throw new RuntimeException( 'Need either client or repo loaded' );
 		}
