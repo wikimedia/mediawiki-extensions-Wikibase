@@ -27,6 +27,7 @@ class TermIndexEntryTest extends \MediaWikiTestCase {
 					'termType' => TermIndexEntry::TYPE_LABEL,
 					'termLanguage' => 'en',
 					'termText' => 'foo',
+					'termWeight' => 1.234,
 				)
 			),
 			array( // #1
@@ -62,6 +63,7 @@ class TermIndexEntryTest extends \MediaWikiTestCase {
 		$this->assertEquals( isset( $fields['termType'] ) ? $fields['termType'] : null, $term->getType() );
 		$this->assertEquals( isset( $fields['termLanguage'] ) ? $fields['termLanguage'] : null, $term->getLanguage() );
 		$this->assertEquals( isset( $fields['termText'] ) ? $fields['termText'] : null, $term->getText() );
+		$this->assertEquals( isset( $fields['termWeight'] ) ? $fields['termWeight'] : null, $term->getWeight() );
 	}
 
 	public function testClone() {
