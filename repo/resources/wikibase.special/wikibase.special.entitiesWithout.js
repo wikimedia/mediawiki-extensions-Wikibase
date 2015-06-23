@@ -16,7 +16,7 @@
 		}
 
 		var $languageSelector = $( '#wb-entitieswithoutpage-language' );
-		$languageSelector.attr( 'languageSelector', 'off' );
+		$languageSelector.attr( 'autocomplete', 'off' );
 		$languageSelector.suggester( { source: languages } );
 
 		$( '#wb-entitieswithoutpage-form' ).submit( function() {
