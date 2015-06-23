@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_a6820800",
+        "filename": "repo/includes/ChangeOp/ChangeOpRemoveStatement.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-23T14:52:04Z",
+      "side": 1,
+      "message": "I added this line because of your comment: \"This code looks suspicious and can break any time because there is no guarantee that modifying the StatementList will also modify the Entity.\" [1]\n\n[1] https://github.com/wmde/WikibaseDataModel/pull/481#issuecomment-101266246",
+      "parentUuid": "8ec42329_26a85889",
+      "revId": "586e029fecf368ce6550eb3115c9188088212ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_06b3dcfd",
         "filename": "repo/includes/ChangeOp/ChangeOpRemoveStatement.php",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_66a740a5",
+        "filename": "repo/includes/ChangeOp/ChangeOpRemoveStatement.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-23T14:52:04Z",
+      "side": 1,
+      "message": "Perhaps the whole method can be inlined.",
+      "parentUuid": "8ec42329_06b3dcfd",
+      "revId": "586e029fecf368ce6550eb3115c9188088212ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_46ad6498",
         "filename": "repo/includes/ChangeOp/ChangeOpRemoveStatement.php",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-23T14:46:56Z",
       "side": 1,
       "message": "Not needed.",
+      "revId": "586e029fecf368ce6550eb3115c9188088212ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_46932453",
+        "filename": "repo/includes/ChangeOp/ChangeOpRemoveStatement.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-23T14:52:04Z",
+      "side": 1,
+      "message": "*nod*",
+      "parentUuid": "8ec42329_46ad6498",
       "revId": "586e029fecf368ce6550eb3115c9188088212ed5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
