@@ -680,7 +680,6 @@ class SqlStore implements Store {
 	 * @return PropertyInfoStore
 	 */
 	private function newPropertyInfoStore() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$table = new PropertyInfoTable( false );
 		$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 
