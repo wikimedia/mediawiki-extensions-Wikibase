@@ -4,12 +4,11 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\Summary;
 use Wikibase\Validators\SnakValidator;
 
@@ -28,7 +27,7 @@ class ChangeOpReference extends ChangeOpBase {
 	 *
 	 * @var string
 	 */
-	protected $claimGuid;
+	protected $statementGuid;
 
 	/**
 	 * @since 0.4
@@ -61,7 +60,7 @@ class ChangeOpReference extends ChangeOpBase {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string $claimGuid
+	 * @param string $statementGuid
 	 * @param Reference $reference
 	 * @param string $referenceHash (if empty '' a new reference will be created)
 	 * @param SnakValidator $snakValidator
@@ -70,14 +69,14 @@ class ChangeOpReference extends ChangeOpBase {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		$claimGuid,
+		$statementGuid,
 		Reference $reference,
 		$referenceHash,
 		SnakValidator $snakValidator,
 		$index = null
 	) {
-		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
-			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
+		if ( !is_string( $statementGuid ) || $statementGuid === '' ) {
+			throw new InvalidArgumentException( '$statementGuid needs to be a string and must not be empty' );
 		}
 
 		if ( !is_string( $referenceHash ) ) {
@@ -92,7 +91,7 @@ class ChangeOpReference extends ChangeOpBase {
 			throw new InvalidArgumentException( '$index must be an integer or null' );
 		}
 
-		$this->claimGuid = $claimGuid;
+		$this->statementGuid = $statementGuid;
 		$this->reference = $reference;
 		$this->referenceHash = $referenceHash;
 		$this->index = $index;
@@ -105,18 +104,18 @@ class ChangeOpReference extends ChangeOpBase {
 	 * - the reference gets set to $reference when $referenceHash and $reference are set
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		$claims = new Claims( $entity->getClaims() );
-		$claim = $claims->getClaimWithGuid( $this->claimGuid );
-
-		if ( $claim === null ) {
-			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
+		if ( !( $entity instanceof StatementListHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
 		}
 
-		if ( !( $claim instanceof Statement ) ) {
-			throw new ChangeOpException( 'The referenced claim is not a statement and thus cannot have references' );
+		$statements = $entity->getStatements();
+		$statement = $statements->getFirstStatementWithGuid( $this->statementGuid );
+
+		if ( $statement === null ) {
+			throw new ChangeOpException( "Entity does not have a statement with GUID $this->statementGuid" );
 		}
 
-		$references = $claim->getReferences();
+		$references = $statement->getReferences();
 
 		if ( $this->referenceHash === '' ) {
 			$this->addReference( $references, $summary );
@@ -125,11 +124,11 @@ class ChangeOpReference extends ChangeOpBase {
 		}
 
 		if ( $summary !== null ) {
-			$summary->addAutoSummaryArgs( $this->getSnakSummaryArgs( $claim->getMainSnak() ) );
+			$summary->addAutoSummaryArgs( $this->getSnakSummaryArgs( $statement->getMainSnak() ) );
 		}
 
-		$claim->setReferences( $references );
-		$entity->setClaims( $claims );
+		$statement->setReferences( $references );
+		$entity->setStatements( $statements );
 
 		return true;
 	}
@@ -145,7 +144,7 @@ class ChangeOpReference extends ChangeOpBase {
 	protected function addReference( ReferenceList $references, Summary $summary = null ) {
 		if ( $references->hasReference( $this->reference ) ) {
 			$hash = $this->reference->getHash();
-			throw new ChangeOpException( "Claim has already a reference with hash $hash" );
+			throw new ChangeOpException( "The statement has already a reference with hash $hash" );
 		}
 		$references->addReference( $this->reference, $this->index );
 		$this->updateSummary( $summary, 'add' );
@@ -173,7 +172,7 @@ class ChangeOpReference extends ChangeOpBase {
 		}
 
 		if ( $references->hasReference( $this->reference ) && $this->index === $currentIndex ) {
-			throw new ChangeOpException( 'Claim has already a reference with hash '
+			throw new ChangeOpException( 'The statement has already a reference with hash '
 			. $this->reference->getHash() . ' and index (' . $currentIndex . ') is not changed' );
 		}
 		$references->removeReferenceHash( $this->referenceHash );
