@@ -14,9 +14,9 @@ use UsageException;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimGuidParsingException;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Statement\StatementGuidParsingException;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\WikibaseRepo;
@@ -66,7 +66,7 @@ class SetClaim extends ModifyClaim {
 
 		try {
 			$claimGuid = $this->guidParser->parse( $guid );
-		} catch ( ClaimGuidParsingException $ex ) {
+		} catch ( StatementGuidParsingException $ex ) {
 			$this->dieException( $ex, 'invalid-claim' );
 		}
 
