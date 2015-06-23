@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_53bbe570",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-23T17:38:16Z",
+      "side": 1,
+      "message": "WikibaseRepo should get a getLabelDescriptionLookupFactory method, instead of constructing this here.",
+      "revId": "cb30305cf3f7ad0a268bde9a40a80546a9a581cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
