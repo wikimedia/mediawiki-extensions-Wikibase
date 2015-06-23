@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_338bb9e9",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-23T17:20:12Z",
+      "side": 1,
+      "message": "four levels of nested new :) perhaps a local variable or two would make this more readable.",
+      "revId": "7dc673382fdaf3c218c4115490a77548947ee994",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
