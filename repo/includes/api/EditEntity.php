@@ -95,7 +95,7 @@ class EditEntity extends ModifyEntity {
 	protected function getRequiredPermissions( EntityDocument $entity ) {
 		$permissions = parent::getRequiredPermissions( $entity );
 
-		if ( !$this->entityExists( $entity ) ) {
+		if ( !$this->entityExists( $entity->getId() ) ) {
 			$permissions[] = 'createpage';
 
 			switch ( $entity->getType() ) {
@@ -106,6 +106,16 @@ class EditEntity extends ModifyEntity {
 		}
 
 		return $permissions;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return bool
+	 */
+	private function entityExists( EntityId $entityId ) {
+		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
+		return ( $title !== null && $title->exists() );
 	}
 
 	/**
@@ -160,7 +170,7 @@ class EditEntity extends ModifyEntity {
 		$this->validateDataProperties( $data, $entity, $baseRevId );
 
 		$revisionLookup = $this->getEntityRevisionLookup();
-		$exists = $this->entityExists( $entity );
+		$exists = $this->entityExists( $entity->getId() );
 
 		if ( $params['clear'] ) {
 			if ( $params['baserevid'] && $exists ) {
@@ -537,7 +547,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( $entity instanceof Item ) {
-			$builder->addSiteLinks( $entity->getSiteLinks(), 'entity' );
+			$builder->addSiteLinks( $entity->getSiteLinkList()->toArray(), 'entity' );
 		}
 
 		$builder->addClaims( $entity->getClaims(), 'entity' );
