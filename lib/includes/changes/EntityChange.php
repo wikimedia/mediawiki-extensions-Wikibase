@@ -8,9 +8,9 @@ use Revision;
 use RuntimeException;
 use User;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -273,7 +273,7 @@ class EntityChange extends DiffChange {
 	/**
 	 * @see DiffChange::arrayalizeObjects
 	 *
-	 * Overwritten to handle Claim objects.
+	 * Overwritten to handle Statement objects.
 	 *
 	 * @since 0.4
 	 *
@@ -283,8 +283,8 @@ class EntityChange extends DiffChange {
 	public function arrayalizeObjects( $data ) {
 		$data = parent::arrayalizeObjects( $data );
 
-		if ( $data instanceof Claim ) {
-			$array = $this->serializeClaim( $data );
+		if ( $data instanceof Statement ) {
+			$array = $this->serializeStatement( $data );
 			$array['_claimclass_'] = get_class( $data );
 
 			return $array;
@@ -293,11 +293,11 @@ class EntityChange extends DiffChange {
 		return $data;
 	}
 
-	private function serializeClaim( Claim $claim ) {
-		return $this->getClaimSerializer()->serialize( $claim );
+	private function serializeStatement( Statement $claim ) {
+		return $this->getStatementSerializer()->serialize( $claim );
 	}
 
-	private function getClaimSerializer() {
+	private function getStatementSerializer() {
 		// FIXME: the change row system needs to be reworked to either allow for sane injection
 		// or to avoid this kind of configuration dependent tasks.
 		if ( defined( 'WB_VERSION' ) ) {
@@ -309,7 +309,7 @@ class EntityChange extends DiffChange {
 		}
 	}
 
-	private function getClaimDeserializer() {
+	private function getStatementDeserializer() {
 		// FIXME: the change row system needs to be reworked to either allow for sane injection
 		// or to avoid this kind of configuration dependent tasks.
 		if ( defined( 'WB_VERSION' ) ) {
@@ -324,7 +324,7 @@ class EntityChange extends DiffChange {
 	/**
 	 * @see DiffChange::objectifyArrays
 	 *
-	 * Overwritten to handle Claim objects.
+	 * Overwritten to handle Statement objects.
 	 *
 	 * @since 0.4
 	 *
@@ -342,7 +342,7 @@ class EntityChange extends DiffChange {
 			) {
 				unset( $data['_claimclass_'] );
 
-				return $this->getClaimDeserializer()->deserialize( $data );
+				return $this->getStatementDeserializer()->deserialize( $data );
 			}
 		}
 
