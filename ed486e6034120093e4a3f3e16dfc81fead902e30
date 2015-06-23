@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_d2b27646",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-23T02:31:01Z",
+      "side": 1,
+      "message": "I initially did that to be able to test stuff more easily and to have stuff at a single place. Given we already have RepoHooksTest, I guess I could move that in here, if desired.",
+      "parentUuid": "8ec42329_85b59131",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_987f3d10",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 3
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_12ad5ee7",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-23T02:31:01Z",
+      "side": 1,
+      "message": "Mh... so what should I do here? Manually construct URLs to Special:EntityData/Q12345.format ?",
+      "parentUuid": "8ec42329_b999d8c8",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e5ac95ed",
         "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
         "patchSetId": 3
@@ -99,6 +135,24 @@
       "writtenOn": "2015-06-22T11:41:45Z",
       "side": 1,
       "message": "Aren\u0027t we doing this again elsewhere? Perhaps elsewhere in Wi9kibaseRepo? Then we should have a getDataFormatProvider method (possibly privat)",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b2b56a31",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-23T02:31:01Z",
+      "side": 1,
+      "message": "This is the only place in WikibaseRepo where we do this, so not worth it IMO.",
+      "parentUuid": "8ec42329_65b8a525",
       "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
