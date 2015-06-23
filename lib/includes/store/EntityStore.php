@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use PermissionsError;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 
@@ -32,11 +32,11 @@ interface EntityStore {
 	 * @note calling this method on an Entity that already has an ID, and specifically
 	 * calling this method twice on the same entity, shall result in an exception.
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws StorageException
 	 */
-	public function assignFreshId( Entity $entity );
+	public function assignFreshId( EntityDocument $entity );
 
 	/**
 	 * Saves the given Entity to some underlying storage mechanism.
@@ -50,7 +50,7 @@ interface EntityStore {
 	 *        EditEntity::attemptSave(), which automatically handles edit conflicts, permission
 	 *        checks, etc.
 	 *
-	 * @param Entity $entity the entity to save.
+	 * @param EntityDocument $entity the entity to save.
 	 * @param string $summary the edit summary for the new revision.
 	 * @param User $user the user to whom to attribute the edit
 	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
@@ -65,7 +65,7 @@ interface EntityStore {
 	 * @throws StorageException
 	 * @throws PermissionsError
 	 */
-	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false );
+	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevId = false );
 
 	/**
 	 * Saves the given EntityRedirect to some underlying storage mechanism.

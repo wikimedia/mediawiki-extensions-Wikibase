@@ -8,7 +8,7 @@ use Status;
 use Title;
 use User;
 use WatchAction;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\EntityRevision;
@@ -60,11 +60,11 @@ class WikiPageEntityStore implements EntityStore {
 	/**
 	 * @see EntityStore::assignFreshId()
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws StorageException
 	 */
-	public function assignFreshId( Entity $entity ) {
+	public function assignFreshId( EntityDocument $entity ) {
 		if ( $entity->getId() !== null ) {
 			throw new StorageException( 'This entity already has an ID!' );
 		}
@@ -110,7 +110,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @see EntityStore::saveEntity
 	 * @see WikiPage::doEditContent
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string $summary
 	 * @param User $user
 	 * @param int $flags
@@ -119,7 +119,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws StorageException
 	 * @return EntityRevision
 	 */
-	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
+	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
 		if ( $entity->getId() === null ) {
 			if ( ( $flags & EDIT_NEW ) !== EDIT_NEW ) {
 				throw new StorageException( Status::newFatal( 'edit-gone-missing' ) );
