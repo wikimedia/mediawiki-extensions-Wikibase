@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_268e182c",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-23T14:51:00Z",
+      "side": 1,
+      "message": "Statement",
+      "revId": "d93f72d17f615ff99df3df2e84eda463663f38ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6678a026",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-23T14:51:00Z",
+      "side": 1,
+      "message": "Statement",
+      "revId": "d93f72d17f615ff99df3df2e84eda463663f38ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
