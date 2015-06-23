@@ -14,7 +14,6 @@ use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Notifications\ChangeNotifier;
-use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -31,10 +30,14 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ChangeNotifierTest extends \MediaWikiTestCase {
 
-	private function getChangeNotifier() {
+	private function getChangeNotifier( $expectNotifications = 1 ) {
+		$changeTransmitter = $this->getMock( 'Wikibase\Repo\Notifications\ChangeTransmitter' );
+		$changeTransmitter->expects( $this->exactly( $expectNotifications ) )
+			->method( 'transmitChange' );
+
 		$notifier = new ChangeNotifier(
 			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
-			new DummyChangeTransmitter()
+			array( $changeTransmitter )
 		);
 
 		return $notifier;
@@ -144,7 +147,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$timestamp = '20140523' . '174822';
 		$content = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
 
-		$notifier = $this->getChangeNotifier();
+		$notifier = $this->getChangeNotifier( 0 );
 		$change = $notifier->notifyOnPageDeleted( $content, $user, $timestamp );
 
 		$this->assertNull( $change );
@@ -202,7 +205,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
 
-		$notifier = $this->getChangeNotifier();
+		$notifier = $this->getChangeNotifier( 0 );
 		$change = $notifier->notifyOnPageUndeleted( $revision );
 
 		$this->assertNull( $change );
@@ -245,7 +248,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$content = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
 
-		$notifier = $this->getChangeNotifier();
+		$notifier = $this->getChangeNotifier( 0 );
 		$change = $notifier->notifyOnPageCreated( $revision );
 
 		$this->assertNull( $change );
@@ -295,7 +298,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$content = $this->makeItemRedirectContent( $oldContent->getEntityId(), new ItemId( 'Q19' ) );
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId-1 );
 
-		$notifier = $this->getChangeNotifier();
+		$notifier = $this->getChangeNotifier( 0 );
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
 
 		$this->assertNull( $change );
