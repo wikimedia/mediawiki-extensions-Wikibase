@@ -50,6 +50,23 @@
       "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_137f9d64",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-23T16:38:53Z",
+      "side": 1,
+      "message": "This ignores the order, instead of testing for it :)\nAlso, this should check that only the \"best\" term for each entity is retained.",
+      "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
