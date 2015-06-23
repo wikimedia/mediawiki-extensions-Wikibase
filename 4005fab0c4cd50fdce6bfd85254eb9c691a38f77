@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_55c0b0e3",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-23T08:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_143263ef",
+      "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_58bb15ba",
         "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
         "patchSetId": 7
@@ -65,6 +83,24 @@
       "writtenOn": "2015-06-21T22:43:05Z",
       "side": 1,
       "message": "Then again, this code seems to be misplaced. It\u0027s not needed for the creation being done here. It\u0027s also not creational in itself. And as far as this class can tell, there is no relation between the LabelDescriptionLookup it creates and the TermBuffer it interacts with.",
+      "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_35bba472",
+        "filename": "repo/includes/LanguageFallbackLabelDescriptionLookupFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-23T08:15:15Z",
+      "side": 1,
+      "message": "The point is that we might want to pass a TermBuffer here which preloads the terms and improves performance significantly. We could also require a `BufferingTermLookup` here but I thought it would be nicer to stick to the interfaces. Also, there might be cases where we don\u0027t want to buffer/preload the terms (not sure if that\u0027d make sense actually).",
+      "parentUuid": "8ec42329_18e10dcc",
       "revId": "4005fab0c4cd50fdce6bfd85254eb9c691a38f77",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
