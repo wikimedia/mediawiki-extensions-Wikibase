@@ -11,7 +11,7 @@ use RuntimeException;
 use Status;
 use Title;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -64,7 +64,7 @@ class EditFilterHookRunner {
 	/**
 	 * Call EditFilterMergedContent hook, if registered.
 	 *
-	 * @param Entity|EntityRedirect|null $new The entity or redirect we are trying to save
+	 * @param EntityDocument|EntityRedirect|null $new The entity or redirect we are trying to save
 	 * @param User $user the user performing the edit
 	 * @param string $summary The edit summary
 	 *
@@ -78,7 +78,7 @@ class EditFilterHookRunner {
 			return $filterStatus;
 		}
 
-		if ( $new instanceof Entity ) {
+		if ( $new instanceof EntityDocument ) {
 			$entityContent = $this->entityContentFactory->newFromEntity( $new );
 			$context = $this->getContextForEditFilter( $new->getId(), $new->getType() );
 
