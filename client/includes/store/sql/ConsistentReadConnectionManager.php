@@ -95,7 +95,7 @@ class ConsistentReadConnectionManager {
 	/**
 	 * @param DatabaseBase $db
 	 */
-	public function releaseConnection( IDatabase $db ) {
+	public function releaseConnection( DatabaseBase $db ) {
 		$this->loadBalancer->reuseConnection( $db );
 	}
 
@@ -123,7 +123,7 @@ class ConsistentReadConnectionManager {
 	 * @param DatabaseBase $db
 	 * @param string $fname
 	 */
-	public function commitAtomicSection( IDatabase $db, $fname ) {
+	public function commitAtomicSection( DatabaseBase $db, $fname ) {
 		$db->endAtomic( $fname );
 		$this->releaseConnection( $db );
 	}
@@ -132,7 +132,7 @@ class ConsistentReadConnectionManager {
 	 * @param DatabaseBase $db
 	 * @param string $fname
 	 */
-	public function rollbackAtomicSection( IDatabase $db, $fname ) {
+	public function rollbackAtomicSection( DatabaseBase $db, $fname ) {
 		//FIXME: there does not seem to be a clean way to roll back an atomic section?!
 		$db->rollback( $fname, 'flush' );
 		$this->releaseConnection( $db );
