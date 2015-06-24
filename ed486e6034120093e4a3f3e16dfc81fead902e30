@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_2598447a",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-24T12:55:55Z",
+      "side": 1,
+      "message": "It would just remove one level of indirection, I think. Would make this patch smaller and simpler, no?",
+      "parentUuid": "8ec42329_d2b27646",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_987f3d10",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 3
@@ -107,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_45ad5097",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-24T12:55:55Z",
+      "side": 1,
+      "message": "yes, base the URL on the canonical Title of the special page.",
+      "parentUuid": "8ec42329_12ad5ee7",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e5ac95ed",
         "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
         "patchSetId": 3
@@ -153,6 +189,24 @@
       "side": 1,
       "message": "This is the only place in WikibaseRepo where we do this, so not worth it IMO.",
       "parentUuid": "8ec42329_65b8a525",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4584700f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-24T12:55:55Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "8ec42329_b2b56a31",
       "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
