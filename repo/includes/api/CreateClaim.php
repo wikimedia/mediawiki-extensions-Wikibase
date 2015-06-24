@@ -6,7 +6,6 @@ use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -70,12 +69,11 @@ class CreateClaim extends ModifyClaim {
 
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$claims = new Claims( $entity->getClaims() );
-		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
+		$statement = $entity->getStatements()->getFirstStatementWithGuid( $changeOp->getClaimGuid() );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addClaim( $claim );
+		$this->getResultBuilder()->addClaim( $statement );
 	}
 
 	/**
