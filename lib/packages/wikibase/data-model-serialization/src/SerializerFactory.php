@@ -91,6 +91,8 @@ class SerializerFactory {
 	/**
 	 * Returns a Serializer that can serialize Claims objects.
 	 *
+	 * @deprecated since 1.5, use newStatementListSerializer instead
+	 *
 	 * @return Serializer
 	 */
 	public function newClaimsSerializer() {

@@ -73,6 +73,8 @@ class DeserializerFactory {
 	/**
 	 * Returns a Deserializer that can deserialize Claims objects.
 	 *
+	 * @deprecated since 1.5, use newStatementListDeserializer instead
+	 *
 	 * @return Deserializer
 	 */
 	public function newClaimsDeserializer() {

@@ -1,5 +1,10 @@
 # Wikibase DataModel Serialization release notes
 
+## 1.5.0 (dev)
+
+* Deprecated `SerializerFactory::newClaimsSerializer` in favour of `SerializerFactory::newStatementListSerializer`
+* Deprecated `DeserializerFactory::newClaimsDeserializer` in favour of `DeserializerFactory::newStatementListDeserializer`
+
 ## 1.4.0 (2015-06-08)
 
 * Added compatibility with Wikibase DataModel 3.x
