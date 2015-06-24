@@ -118,13 +118,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_rankSelector: null,
 
 	/**
-	 * Shortcut to the `ListItemAdapter` in use in the `listview` managing the `referenceview`s.
-	 * @property {jQuery.wikibase.listview.ListItemAdapter}
-	 * @private
-	 */
-	_referenceviewLia: null,
-
-	/**
 	 * Shortcut to the `listview` managing the `referenceview`s.
 	 * @property {jQuery.wikibase.listview}
 	 * @private
@@ -343,7 +336,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		this._referencesListview = $listview.data( 'listview' );
 
-		this._referenceviewLia = this._referencesListview.listItemAdapter();
+		var lia = this._referencesListview.listItemAdapter();
 
 		$listview
 		.on( 'listviewitemadded listviewitemremoved', function( event, value, $li ) {
@@ -357,10 +350,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 			}
 
 			// Enter first item into the referenceview.
-			self._referenceviewLia.liInstance( $newLi ).enterNewItem();
+			lia.liInstance( $newLi ).enterNewItem();
 
-			var lia = self._referenceviewLia,
-				liInstance = lia.liInstance( $newLi );
+			var liInstance = lia.liInstance( $newLi );
 
 			if ( !liInstance.value() ) {
 				$newLi
@@ -562,8 +554,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {wikibase.datamodel.Reference[]}
 	 */
 	_getReferences: function() {
-		var self = this,
-			references = [];
+		var references = [];
 
 		// If the statement is pending (not yet stored), the listview widget for the references is
 		// not defined.
@@ -571,8 +562,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return references;
 		}
 
+		var lia = this._referencesListview.listItemAdapter();
+
 		$.each( this._referencesListview.items(), function( i, item ) {
-			var referenceview = self._referenceviewLia.liInstance( $( item ) ),
+			var referenceview = lia.liInstance( $( item ) ),
 				reference = referenceview ? referenceview.value() : null;
 			if( reference ) {
 				references.push( reference );
