@@ -4,7 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -30,7 +30,7 @@ class ClaimChangeOpFactory {
 	private $guidValidator;
 
 	/**
-	 * @var ClaimGuidParser
+	 * @var StatementGuidParser
 	 */
 	private $guidParser;
 
@@ -42,13 +42,13 @@ class ClaimChangeOpFactory {
 	/**
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
-	 * @param ClaimGuidParser $guidParser
+	 * @param StatementGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
 	 */
 	public function __construct(
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
-		ClaimGuidParser $guidParser,
+		StatementGuidParser $guidParser,
 		SnakValidator $snakValidator
 	) {
 		$this->guidGenerator = $guidGenerator;

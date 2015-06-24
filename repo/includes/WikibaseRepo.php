@@ -18,7 +18,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Api\ApiHelperFactory;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -427,10 +427,10 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return ClaimGuidParser
+	 * @return StatementGuidParser
 	 */
-	public function getClaimGuidParser() {
-		return new ClaimGuidParser( $this->getEntityIdParser() );
+	public function getStatementGuidParser() {
+		return new StatementGuidParser( $this->getEntityIdParser() );
 	}
 
 	/**
@@ -443,7 +443,7 @@ class WikibaseRepo {
 			$this->getEntityConstraintProvider(),
 			new ClaimGuidGenerator(),
 			$this->getClaimGuidValidator(),
-			$this->getClaimGuidParser(),
+			$this->getStatementGuidParser(),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
 			$this->getSiteStore()

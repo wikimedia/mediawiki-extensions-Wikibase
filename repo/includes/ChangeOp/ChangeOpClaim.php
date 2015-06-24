@@ -7,7 +7,7 @@ use OutOfBoundsException;
 use ValueValidators\Result;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -46,7 +46,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	private $guidValidator;
 
 	/**
-	 * @var ClaimGuidParser
+	 * @var StatementGuidParser
 	 */
 	private $guidParser;
 
@@ -64,7 +64,7 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @param Claim $claim
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
-	 * @param ClaimGuidParser $guidParser
+	 * @param StatementGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
 	 * @param int|null $index Where the claim should be placed among the other claims.
 	 *
@@ -74,7 +74,7 @@ class ChangeOpClaim extends ChangeOpBase {
 		Claim $claim,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
-		ClaimGuidParser $guidParser,
+		StatementGuidParser $guidParser,
 		SnakValidator $snakValidator,
 		$index = null
 	) {

@@ -4,7 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -30,7 +30,7 @@ abstract class ModifyClaim extends ApiWikibase {
 	/**
 	 * @since 0.5
 	 *
-	 * @var ClaimGuidParser
+	 * @var StatementGuidParser
 	 */
 	protected $guidParser;
 
@@ -51,7 +51,7 @@ abstract class ModifyClaim extends ApiWikibase {
 			$this->getErrorReporter()
 		);
 
-		$this->guidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+		$this->guidParser = WikibaseRepo::getDefaultInstance()->getStatementGuidParser();
 	}
 
 	/**

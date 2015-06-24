@@ -14,7 +14,7 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -249,12 +249,12 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
-	 * Returns a mock ClaimGuidParser that will return the same ClaimGuid for
+	 * Returns a mock StatementGuidParser that will return the same ClaimGuid for
 	 * all input strings.
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return ClaimGuidParser
+	 * @return StatementGuidParser
 	 */
 	public function getMockGuidParser( EntityId $entityId ) {
 		$mockClaimGuid = $this->getMockBuilder( 'Wikibase\DataModel\Claim\ClaimGuid' )
@@ -267,7 +267,7 @@ class ChangeOpTestMockProvider {
 			->method( 'getEntityId' )
 			->will( PHPUnit_Framework_TestCase::returnValue( $entityId ) );
 
-		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Claim\ClaimGuidParser' )
+		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Statement\StatementGuidParser' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
