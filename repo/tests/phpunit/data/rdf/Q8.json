@@ -36,7 +36,7 @@
                             "timezone": 60,
                             "before": 0,
                             "after": 0,
-                            "precision": 9,
+                            "precision": 11,
                             "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
                         },
                         "type": "time"
@@ -57,7 +57,7 @@
                             "timezone": -60,
                             "before": 0,
                             "after": 0,
-                            "precision": 9,
+                            "precision": 11,
                             "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
                         },
                         "type": "time"
@@ -78,7 +78,7 @@
                             "timezone": 0,
                             "before": 0,
                             "after": 0,
-                            "precision": 9,
+                            "precision": 11,
                             "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
                         },
                         "type": "time"
@@ -99,7 +99,7 @@
                             "timezone": 0,
                             "before": 0,
                             "after": 0,
-                            "precision": 9,
+                            "precision": 11,
                             "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
                         },
                         "type": "time"
@@ -162,7 +162,7 @@
                             "timezone": 0,
                             "before": 0,
                             "after": 0,
-                            "precision": 9,
+                            "precision": 11,
                             "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985786"
                         },
                         "type": "time"
@@ -183,7 +183,7 @@
                             "timezone": 0,
                             "before": 0,
                             "after": 0,
-                            "precision": 9,
+                            "precision": 11,
                             "calendarmodel": "http:\/\/acme.test\/calendar"
                         },
                         "type": "time"
@@ -246,7 +246,7 @@
                             "timezone": 0,
                             "before": 0,
                             "after": 0,
-                            "precision": 9,
+                            "precision": 8,
                             "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985786"
                         },
                         "type": "time"
