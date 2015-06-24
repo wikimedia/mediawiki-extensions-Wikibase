@@ -165,6 +165,8 @@ class importProperties extends Maintenance {
 	/**
 	 * Print a scalar, array or object if --verbose option is set.
 	 *
+	 * @param string $a
+	 *
 	 * @see doPrint
 	 */
 	private function maybePrint( $a ) {
@@ -175,6 +177,8 @@ class importProperties extends Maintenance {
 
 	/**
 	 * Output a scalar, array or object to the default channel
+	 *
+	 * @param string $a
 	 *
 	 * @see Maintenance::output
 	 */
