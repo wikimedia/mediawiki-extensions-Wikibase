@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_e2db12ec",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-24T10:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_13a8fdd6",
+      "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_5389a578",
         "filename": "lib/tests/phpunit/store/TermIndexTest.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-23T16:38:36Z",
       "side": 1,
       "message": "test newly added ranking in here",
+      "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_02d97ef7",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-24T10:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_5389a578",
       "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_22d6fac7",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-24T10:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_f3b21146",
+      "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_137f9d64",
         "filename": "lib/tests/phpunit/store/TermIndexTest.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2015-06-23T16:38:53Z",
       "side": 1,
       "message": "This ignores the order, instead of testing for it :)\nAlso, this should check that only the \"best\" term for each entity is retained.",
+      "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c2de16df",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-24T10:30:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_137f9d64",
       "revId": "b35c1da22d9f492b6dab0deb02fd523fe017cdfe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
