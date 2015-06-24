@@ -6,7 +6,6 @@ use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -16,7 +15,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @since 0.2
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
@@ -70,8 +68,8 @@ class CreateClaim extends ModifyClaim {
 
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$claims = new Claims( $entity->getClaims() );
-		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
+		// FIXME: OCP violation - entities are not guaranteed to have statements
+		$claim = $entity->getStatements()->getFirstStatementWithGuid( $changeOp->getClaimGuid() );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
