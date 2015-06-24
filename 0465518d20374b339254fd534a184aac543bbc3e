@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_2b46d525",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-24T17:59:30Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be $a[\u0027string\u0027] \u003c $b[\u0027string\u0027]? $a \u003c $b will work, but it\u0027s very inefficient - I think PHP will apply serialization and compare the results, or some crazy shit like that.",
+      "revId": "0465518d20374b339254fd534a184aac543bbc3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5684280f",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-24T17:59:30Z",
+      "side": 1,
+      "message": "Please add some test cases with different options.",
+      "revId": "0465518d20374b339254fd534a184aac543bbc3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
