@@ -176,7 +176,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 
 		$snakDeserializer = $wikibaseClient->getDeserializerFactory()->newSnakDeserializer();
-		$snaksDeserializer = $wikibaseClient->getDeserializerFactory()->newSnaksDeserializer();
+		$snaksDeserializer = $wikibaseClient->getDeserializerFactory()->newSnakListDeserializer();
 
 		return new SnakSerializationRenderer(
 			$snakFormatter,
