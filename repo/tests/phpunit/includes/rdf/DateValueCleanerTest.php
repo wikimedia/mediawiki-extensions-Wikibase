@@ -48,11 +48,11 @@ class DateValueCleanerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getDates
 	 */
-	public function testCleanDate( $date, $calendar, $expected ) {
+	public function testCleanDate( $date, $calendar, $expected, $precision = TimeValue::PRECISION_SECOND ) {
 		$julianCleaner = new JulianDateTimeValueCleaner();
-		$gregorianCleaner = new DateTimeValueCleaner();
+		$gregorianCleaner = new DateTimeValueCleaner( false );
 
-		$value = new TimeValue( $date, 0, 0, 0, TimeValue::PRECISION_SECOND, $calendar );
+		$value = new TimeValue( $date, 0, 0, 0, $precision, $calendar );
 
 		$result = $julianCleaner->getStandardValue( $value );
 		$this->assertEquals( $expected, $result );
