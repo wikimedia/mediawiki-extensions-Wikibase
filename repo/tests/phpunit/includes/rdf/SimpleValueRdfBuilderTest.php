@@ -182,15 +182,15 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 				)
 			),
-			'time-bce' => array( // NOTE: This assumes that internal data and the RDF data use the
-				                 //       same notion of negative years. If one uses traditional
-				                 //       numbering (-44 means 44 BCE, XSD 1.0) and the other
-				                 //       astronomical numbering (-44 means 43 BCE, XSD 1.1),
+			'time-bce' => array( // NOTE: This assumes that we're using XSD 1.1 standard.
+				                 //       Internally, Wikidata uses traditional
+				                 //       numbering (-44 means 44 BCE, XSD 1.0).
+				                 //       XSD 1.1 uses astronomical numbering (-44 means 43 BCE),
 				                 //       conversion would apply.
 				new PropertyId( 'P8' ),
 				new TimeValue( '-0044-03-15T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "-0044-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "-0043-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 				)
 			),
 			'time-julian' => array( // NOTE: Currently, giving a calendar other than gregorian
