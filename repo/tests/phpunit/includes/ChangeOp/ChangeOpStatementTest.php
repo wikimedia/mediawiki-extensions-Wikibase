@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use Wikibase\ChangeOp\ChangeOpStatement;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -20,6 +19,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -273,7 +273,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 			$statement,
 			new ClaimGuidGenerator(),
 			new ClaimGuidValidator( $idParser ),
-			new ClaimGuidParser( $idParser ),
+			new StatementGuidParser( $idParser ),
 			$this->mockProvider->getMockSnakValidator(),
 			$index
 		);

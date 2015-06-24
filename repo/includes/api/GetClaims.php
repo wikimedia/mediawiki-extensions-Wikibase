@@ -50,7 +50,7 @@ class GetClaims extends ApiWikibase {
 
 		//TODO: provide a mechanism to override the services
 		$this->guidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
-		$this->guidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+		$this->guidParser = WikibaseRepo::getDefaultInstance()->getStatementGuidParser();
 	}
 
 	/**
