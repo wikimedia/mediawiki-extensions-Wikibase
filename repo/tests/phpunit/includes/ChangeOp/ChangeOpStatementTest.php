@@ -4,8 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
-use Wikibase\ChangeOp\ChangeOpClaim;
-use Wikibase\DataModel\Claim\Claim;
+use Wikibase\ChangeOp\ChangeOpStatement;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
@@ -26,18 +25,18 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 
 /**
- * @covers Wikibase\ChangeOp\ChangeOpClaim
+ * @covers Wikibase\ChangeOp\ChangeOpStatement
  *
  * @group Wikibase
  * @group WikibaseRepo
  * @group ChangeOp
- * @group ChangeOpClaim
+ * @group ChangeOpStatement
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Daniel Kinzler
  */
-class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider
@@ -61,7 +60,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	public function testConstructionWithInvalidIndex( $invalidIndex ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
-		$this->newChangeOpClaim(
+		$this->newChangeOpStatement(
 			$this->mockProvider->makeStatement( 'P7' ),
 			$invalidIndex
 		);
@@ -86,8 +85,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	public function testApply( Item $item, Statement $statement, array $expected,
 		$index = null
 	) {
-		$changeOpClaim = $this->newChangeOpClaim( $statement, $index );
-		$changeOpClaim->apply( $item );
+		$changeOpStatement = $this->newChangeOpStatement( $statement, $index );
+		$changeOpStatement->apply( $item );
 
 		$expectedStatementList = new StatementList( $expected );
 		$this->assertTrue( $item->getStatements()->equals( $expectedStatementList ) );
@@ -103,18 +102,18 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statement777 = reset( $item777Statements );
 		$statement666 = reset( $item666Statements );
 
-		// claims that exist on the given entities
+		// statements that exist on the given entities
 		$statements[0] = new Statement( new PropertyNoValueSnak( 43 ) );
 		$statements[777] = clone $statement777;
 		$statements[666] = clone $statement666;
 
-		// claims with a null guid
+		// statements with a null guid
 		$statements[7770] = clone $statement777;
 		$statements[7770]->setGuid( null );
 		$statements[6660] = clone $statement666;
 		$statements[6660]->setGuid( null );
 
-		// new claims not yet on the entity
+		// new statements not yet on the entity
 		$statements[7777] = clone $statement777;
 		$statements[7777]->setGuid( 'Q777$D8404CDA-25E4-4334-AF13-A3290BC77777' );
 		$statements[6666] = clone $statement666;
@@ -129,7 +128,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$args = array();
 
-		// test adding the same claims with a null guid (a guid should be created)
+		// test adding the same statements with a null guid (a guid should be created)
 		$args[] = array(
 			$item777,
 			$statements[7770],
@@ -142,7 +141,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			array( $statements[666], $statements[6660] )
 		);
 
-		// test adding the same claims with a correct but different guid (these should be added)
+		// test adding the same statements with a correct but different guid (these should be added)
 		$args[] = array(
 			$item777,
 			$statements[7777],
@@ -155,7 +154,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			array( $statements[666], $statements[6660], $statements[6666] )
 		);
 
-		// test adding the same claims with and id that already exists (these shouldn't be added)
+		// test adding the same statements with and id that already exists (these shouldn't be added)
 		$args[] = array(
 			$item777,
 			$statements[7777],
@@ -168,7 +167,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			array( $statements[666], $statements[6660], $statements[6666] )
 		);
 
-		// test adding a claim at a specific index
+		// test adding a statement at a specific index
 		$args[] = array(
 			$item777,
 			$statements[0],
@@ -176,7 +175,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			0
 		);
 
-		// test moving a claim
+		// test moving a statement
 		$args[] = array(
 			$item666,
 			$statements[6666],
@@ -184,7 +183,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			1
 		);
 
-		// test adding a claim featuring another property id within the boundaries of claims the
+		// test adding a statement featuring another property id within the boundaries of statements the
 		// same property
 		$args[] = array(
 			$item666,
@@ -193,7 +192,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			1
 		);
 
-		// test moving a subset of claims featuring the same property
+		// test moving a subset of statements featuring the same property
 		$args[] = array(
 			$item666,
 			$statements[12],
@@ -217,8 +216,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statement = $this->makeStatement( $property, new PropertyNoValueSnak( 45 ) );
 		$expected = new StatementList( array( $statement ) );
 
-		$changeOpClaim = $this->newChangeOpClaim( $statement );
-		$changeOpClaim->apply( $property );
+		$changeOpStatement = $this->newChangeOpStatement( $statement );
+		$changeOpStatement->apply( $property );
 
 		$this->assertTrue( $property->getStatements()->equals( $expected ) );
 	}
@@ -232,8 +231,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	public function testApplyInvalidThrowsException( Item $item, Statement $statement ) {
 		$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
 
-		$changeOpClaim = $this->newChangeOpClaim( $statement );
-		$changeOpClaim->apply( $item );
+		$changeOpStatement = $this->newChangeOpStatement( $statement );
+		$changeOpStatement->apply( $item );
 	}
 
 	public function applyInvalidThrowsExceptionProvider() {
@@ -248,11 +247,11 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$statement777 = reset( $item777Statements );
 		$statement666 = reset( $item666Statements );
 
-		// claims that exist on the given entities
+		// statements that exist on the given entities
 		$statements[777] = clone $statement777;
 		$statements[666] = clone $statement666;
 
-		// test adding claims with guids from other items (these shouldn't be added)
+		// test adding statements with guids from other items (these shouldn't be added)
 		return array(
 			array( $itemEmpty, $statements[666] ),
 			array( $itemEmpty, $statements[777] ),
@@ -265,12 +264,12 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @param Statement $statement
 	 * @param int|null $index
 	 *
-	 * @return ChangeOpClaim
+	 * @return ChangeOpStatement
 	 */
-	private function newChangeOpClaim( Statement $statement, $index = null ) {
+	private function newChangeOpStatement( Statement $statement, $index = null ) {
 		$idParser = new BasicEntityIdParser();
 
-		return new ChangeOpClaim(
+		return new ChangeOpStatement(
 			$statement,
 			new ClaimGuidGenerator(),
 			new ClaimGuidValidator( $idParser ),
@@ -294,13 +293,13 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		// apply change to the wrong item
 		$wrongItem = new Item( new ItemId( 'Q888' ) );
-		$args['wrong entity'] = array( $wrongItem, $this->newChangeOpClaim( $newStatement ) );
+		$args['wrong entity'] = array( $wrongItem, $this->newChangeOpStatement( $newStatement ) );
 
-		// update an existing claim with wrong main snak property
+		// update an existing statement with wrong main snak property
 		$newSnak = new PropertyNoValueSnak( 23452345 );
 		$newStatement->setMainSnak( $newSnak );
 
-		$changeOp = $this->newChangeOpClaim( $newStatement );
+		$changeOp = $this->newChangeOpStatement( $newStatement );
 
 		$args['wrong main snak property'] = array( $item, $changeOp );
 
@@ -310,7 +309,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideInvalidApply
 	 */
-	public function testInvalidApply( Item $item, ChangeOpClaim $changeOp ) {
+	public function testInvalidApply( Item $item, ChangeOpStatement $changeOp ) {
 		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
 
 		$changeOp->apply( $item );
@@ -404,11 +403,11 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validateProvider
 	 */
 	public function testValidate( ItemId $itemId, Statement $statement ) {
-		$changeOpClaim = $this->newChangeOpClaim( $statement, 0 );
+		$changeOpStatement = $this->newChangeOpStatement( $statement, 0 );
 
 		$item = new Item( $itemId );
 
-		$result = $changeOpClaim->validate( $item );
+		$result = $changeOpStatement->validate( $item );
 		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}
 
