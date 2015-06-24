@@ -17,9 +17,9 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getConnectionMock() {
-		$connection = $this->getMockBuilder( 'IDatabase' )
+		$connection = $this->getMockBuilder( 'DatabaseBase' )
 			->setMethods( array( 'startAtomic', 'endAtomic', 'rollback' ) )
-			->getMock();
+			->getMockForAbstractClass();
 
 		return $connection;
 	}
