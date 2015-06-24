@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Icemandeaf"
+		]
+	},
+	"wikibase-editlinks": "M521x532S10609498x496S10621487x512S21100500x483S2df20479x468 M521x525S1ce10499x476S1ce48479x476S20a00491x510",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "M521x531S10012491x516S15a18479x503S26620486x469",
+	"wikibase-rc-wikibase-edit-letter": "M508x515S10120492x485",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} M521x532S10609498x496S10621487x512S21100500x483S2df20479x468"
+}
