@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c2a0569d",
+        "filename": "repo/includes/ChangeOp/ChangeOpRemoveStatement.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-24T10:08:13Z",
+      "side": 1,
+      "message": "I consider this something different. That comment on GitHub was about a method $listOfThings-\u003ereplaceWithCompletelyDifferentList. I found that suspicious. The code we are talking about here is about a \"removeThingFromList\" method.",
+      "parentUuid": "8ec42329_a6820800",
+      "revId": "586e029fecf368ce6550eb3115c9188088212ed5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_06b3dcfd",
         "filename": "repo/includes/ChangeOp/ChangeOpRemoveStatement.php",
         "patchSetId": 6
