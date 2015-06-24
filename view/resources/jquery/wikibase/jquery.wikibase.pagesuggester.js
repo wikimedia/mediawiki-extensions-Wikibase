@@ -58,7 +58,6 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 		}
 
 		if( key === 'pageName' ) {
-			this.element.val( value );
 			this._trigger( 'change' );
 		}
 	},
