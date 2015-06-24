@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_c5eb809f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-24T13:52:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_2598447a",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_987f3d10",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 3
@@ -143,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_25704405",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-24T13:52:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_45ad5097",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e5ac95ed",
         "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
         "patchSetId": 3
@@ -154,6 +190,24 @@
       "writtenOn": "2015-06-22T11:41:45Z",
       "side": 1,
       "message": "Why store the alt-links as \"properties\" first, and then transfer them to \"links\"? We could make them links directly, in RepoHook::onOutputPageParserOutput",
+      "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c57860f0",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-24T13:52:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_e5ac95ed",
       "revId": "ed486e6034120093e4a3f3e16dfc81fead902e30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
