@@ -99,7 +99,7 @@ class ItemContentTest extends EntityContentTest {
 	public function providePageProperties() {
 		$cases = parent::providePageProperties();
 
-		$contentLinkStub = ItemContent::newEmpty();
+		$contentLinkStub = $this->newEmpty( $this->getDummyId() );
 		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$cases['sitelinks'] = array(
@@ -109,7 +109,7 @@ class ItemContentTest extends EntityContentTest {
 
 		// @todo this is needed in PropertyContentTest as well
 		//       once we have statements in properties
-		$contentWithClaim = $this->newEmpty();
+		$contentWithClaim = $this->newEmpty( $this->getDummyId() );
 		$snak = new PropertyNoValueSnak( 83 );
 		$guid = '$testing$';
 		$contentWithClaim->getEntity()->getStatements()->addNewStatement( $snak, null, null, $guid );

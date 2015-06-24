@@ -27,9 +27,9 @@ use Wikibase\View\Template\TemplateFactory;
 class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * Integration test mostly testing that things don't fatal/ throw.
+	 * @return OutputPageBeforeHTMLHookHandler
 	 */
-	public function testOutputPageBeforeHTMLHookHandler() {
+	private function getHookHandler() {
 		$userLanguageLookup = $this->getMock( 'Wikibase\Lib\UserLanguageLookup' );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
@@ -49,6 +49,15 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			new LanguageNameLookup(),
 			new EntityContentFactory( array() )
 		);
+
+		return $outputPageBeforeHTMLHookHandler;
+	}
+
+	/**
+	 * Integration test mostly testing that things don't fatal/ throw.
+	 */
+	public function testOutputPageBeforeHTMLHookHandler() {
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler();
 
 		$html = '';
 		$context = new DerivativeContext( RequestContext::getMain() );

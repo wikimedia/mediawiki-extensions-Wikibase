@@ -71,6 +71,7 @@ use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
@@ -1093,6 +1094,10 @@ class WikibaseRepo {
 			$this->getSettings()->getSetting( 'badgeItems' )
 		);
 
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
+		$entityDataFormatProvider->setFormatWhiteList( $formats );
+
 		return new EntityParserOutputGeneratorFactory(
 			$entityViewFactory,
 			$this->getStore()->getEntityInfoBuilderFactory(),
@@ -1100,7 +1105,8 @@ class WikibaseRepo {
 			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory(),
 			new ReferencedEntitiesFinder( $this->getLocalEntityUriParser() ),
-			$templateFactory
+			$templateFactory,
+			$entityDataFormatProvider
 		);
 	}
 
