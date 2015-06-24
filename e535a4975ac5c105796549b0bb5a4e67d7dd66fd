@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_76afe478",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-24T18:03:15Z",
+      "side": 1,
+      "message": "One the *first* term. The interaction with ranking/sorting should be specified here.",
+      "revId": "e535a4975ac5c105796549b0bb5a4e67d7dd66fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d6bd78af",
+        "filename": "lib/tests/phpunit/store/MockTermIndex.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-24T18:03:15Z",
+      "side": 1,
+      "message": "Should this force the weight option?",
+      "revId": "e535a4975ac5c105796549b0bb5a4e67d7dd66fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
