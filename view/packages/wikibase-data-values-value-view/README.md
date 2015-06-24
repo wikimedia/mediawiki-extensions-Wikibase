@@ -111,6 +111,9 @@ Other methods an `Expert` needs to provide:
 * Removed deprecated constant `ValueView_VERSION`, use `VALUEVIEW_VERSION` instead.
 * Removed `jQuery.valueview.disable`, `jQuery.valueview.enable` and `jQuery.valueview.isDisabled`. These function were used to mock native `jQuery.Widget` functionality while adding a full `draw` cycle on top. `jQuery.valueview.draw` does not consider the state anymore.
 
+#### Enhancements
+* Refined `jQuery.ui.listrotator` style to have a more obvious active state.
+
 ### 0.14.5 (2015-06-11)
 * Fixed `jQuery.valueview.ExpertExtender.CalendarHint` test broken due to DataValues JavaScript dependency update.
 

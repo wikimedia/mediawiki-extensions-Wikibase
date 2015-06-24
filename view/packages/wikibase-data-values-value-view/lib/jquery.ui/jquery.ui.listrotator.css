@@ -1,31 +1,43 @@
 /**
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Thiemo Mättig
  */
-
 .ui-listrotator {
 	white-space: nowrap;
 	border: none;
 }
 
+/* Override the users "underline" setting, see ResourceLoaderUserCSSPrefsModule::getStyles. */
+.ui-listrotator a {
+	text-decoration: none;
+}
 .ui-listrotator .ui-listrotator-label {
 	background: none;
 	border: none;
 	cursor: pointer;
-	text-decoration: inherit;
+}
+.ui-listrotator .ui-listrotator-label.ui-state-default:hover {
+	color: black;
+	text-decoration: none;
 }
 .ui-listrotator .ui-listrotator-label.ui-state-disabled {
 	cursor: default;
 }
 
+.ui-listrotator .ui-listrotator-auto.ui-state-active,
+.ui-listrotator .ui-listrotator-curr.ui-state-active {
+	background: white;
+}
 .ui-listrotator .ui-state-active .ui-listrotator-label {
 	text-decoration: underline;
-	color: #000000;
+	color: black;
 }
 
 .ui-listrotator .ui-listrotator-auto {
 	float: left;
 	margin-right: 10px;
+	padding: 0 0.4em;
 	border: none;
 	background: none;
 }
@@ -46,7 +58,7 @@
 	text-align: center;
 	padding: 0 5px 0 10px;
 	background: none;
-	border: 1px solid #CCCCCC;
+	border: 1px solid silver;
 }
 .ui-listrotator .ui-listrotator-curr > * {
 	float: left;
