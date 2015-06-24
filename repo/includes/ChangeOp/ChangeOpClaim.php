@@ -9,11 +9,10 @@ use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
@@ -118,19 +117,19 @@ class ChangeOpClaim extends ChangeOpBase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function applyClaimToEntity( Entity $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof StatementListProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
+	private function applyClaimToEntity( EntityDocument $entity, Summary $summary = null ) {
+		if ( !( $entity instanceof StatementListHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
 		}
 
 		$statements = $this->removeStatement( $entity->getStatements()->toArray(), $summary );
 		$statements = $this->addStatement( $statements );
-		$this->setStatements( $entity, $statements );
+		$entity->setStatements( new StatementList( $statements ) );
 	}
 
 	/**
@@ -212,24 +211,6 @@ class ChangeOpClaim extends ChangeOpBase {
 		}
 
 		return $statements;
-	}
-
-	/**
-	 * @param Entity $entity
-	 * @param Statement[] $statements
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function setStatements( Entity $entity, array $statements ) {
-		$statementList = new StatementList( $statements );
-
-		if ( $entity instanceof Item ) {
-			$entity->setStatements( $statementList );
-		} elseif ( $entity instanceof Property ) {
-			$entity->setStatements( $statementList );
-		} else {
-			throw new InvalidArgumentException( '$entity must be an Item or Property' );
-		}
 	}
 
 	/**
