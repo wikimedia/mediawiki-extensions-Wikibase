@@ -26,16 +26,13 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 */
 	public abstract function getTermIndex();
 
-	public function testGetMatchingIDs() {
-		$lookup = $this->getTermIndex();
-
+	public function provideGetMatchingIds() {
 		$id0 = new ItemId( 'Q10' );
 		$item0 = new Item( $id0 );
 
 		$item0->setLabel( 'en', 'foobar' );
 		$item0->setLabel( 'de', 'foobar' );
 		$item0->setLabel( 'nl', 'baz' );
-		$lookup->saveTermsOfEntity( $item0 );
 
 		$item1 = $item0->copy();
 		$id1 = new ItemId( 'Q11' );
@@ -43,26 +40,39 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$item1->setLabel( 'nl', 'o_O' );
 		$item1->setDescription( 'en', 'foo bar baz' );
-		$lookup->saveTermsOfEntity( $item1 );
 
-		$foobar = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'foobar' ) );
-		$bazNl= new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'baz', 'termLanguage' => 'nl' ) );
-		$froggerNl = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'o_O', 'termLanguage' => 'nl' ) );
+		return array(
+			array(
+				array( $item0, $item1 ),
+				array( new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'foobar' ) ) ),
+				array( $id0, $id1 ),
+			),
+			array(
+				array( $item0, $item1 ),
+				array( new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'baz', 'termLanguage' => 'nl' ) ) ),
+				array( $id0 ),
+			),
+			array(
+				array( $item0, $item1 ),
+				array( new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'o_O', 'termLanguage' => 'nl' ) ) ),
+				array( $id1 ),
+			),
+		);
+	}
 
-		$ids = $lookup->getMatchingIDs( array( $foobar ), Item::ENTITY_TYPE );
+	/**
+	 * @dataProvider provideGetMatchingIds
+	 */
+	public function testGetMatchingIDs( $items, $terms, $expectedIds ) {
+		$lookup = $this->getTermIndex();
+		foreach( $items as $item ) {
+			$lookup->saveTermsOfEntity( $item );
+		}
+
+		$ids = $lookup->getMatchingIDs( $terms, Item::ENTITY_TYPE );
 		$this->assertInternalType( 'array', $ids );
 		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
-		$this->assertArrayEquals( array( $id0, $id1 ), $ids );
-
-		$ids = $lookup->getMatchingIDs( array( $bazNl ), Item::ENTITY_TYPE );
-		$this->assertInternalType( 'array', $ids );
-		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
-		$this->assertArrayEquals( array( $id0 ), $ids );
-
-		$ids = $lookup->getMatchingIDs( array( $froggerNl ), Item::ENTITY_TYPE );
-		$this->assertInternalType( 'array', $ids );
-		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
-		$this->assertArrayEquals( array( $id1 ), $ids );
+		$this->assertArrayEquals( $expectedIds, $ids );
 	}
 
 	public function getTermKey( TermIndexEntry $term ) {
