@@ -69,6 +69,9 @@
 		}
 	},
 	"scripts": {
-		"phpcs": "phpcs $PHPCS_ARGS -s --standard=phpcs.xml --ignore=extensions/ValueView,vendor --encoding=utf-8 --extensions=php"
+		"phpcs": "phpcs -sp --standard=phpcs.xml --extensions=php --ignore=extensions/ValueView,vendor .",
+		"test": [
+			"composer phpcs"
+		]
 	}
 }
