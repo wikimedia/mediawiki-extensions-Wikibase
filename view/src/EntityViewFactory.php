@@ -17,6 +17,7 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class EntityViewFactory {
 
@@ -46,6 +47,16 @@ class EntityViewFactory {
 	private $dataTypeFactory;
 
 	/**
+	 * @var TemplateFactory
+	 */
+	private $templateFactory;
+
+	/**
+	 * @var LanguageNameLookup
+	 */
+	private $languageNameLookup;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -61,16 +72,6 @@ class EntityViewFactory {
 	private $badgeItems;
 
 	/**
-	 * @var TemplateFactory
-	 */
-	private $templateFactory;
-
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-
-	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
@@ -81,6 +82,8 @@ class EntityViewFactory {
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityIdFormatterFactory $htmlIdFormatterFactory,
@@ -90,39 +93,46 @@ class EntityViewFactory {
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
-		array $siteLinkGroups,
-		array $specialSiteLinkGroups,
-		array $badgeItems
+		array $siteLinkGroups = array(),
+		array $specialSiteLinkGroups = array(),
+		array $badgeItems = array()
 	) {
-		$this->checkOutputFormat( $htmlIdFormatterFactory->getOutputFormat(), 'HTML' );
-		$this->checkOutputFormat( $plainTextIdFormatterFactory->getOutputFormat(), 'Plain' );
+		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
+			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
+		) {
+			throw new InvalidArgumentException( 'Expected an HTML and a plain text EntityIdFormatter factory' );
+		}
 
 		$this->htmlIdFormatterFactory = $htmlIdFormatterFactory;
 		$this->plainTextIdFormatterFactory = $plainTextIdFormatterFactory;
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
+		$this->templateFactory = $templateFactory;
+		$this->languageNameLookup = $languageNameLookup;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
-		$this->templateFactory = $templateFactory;
-		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
-	 * @param string $format
-	 * @param string $expected 'HTML' or 'Plain'
+	 * @param EntityIdFormatterFactory $factory
+	 * @param string $expected
 	 *
-	 * @throws InvalidArgumentException
+	 * @return bool
 	 */
-	private function checkOutputFormat( $format, $expected ) {
-		if ( ( $expected === 'HTML' && $format !== SnakFormatter::FORMAT_HTML
-				&& $format !== SnakFormatter::FORMAT_HTML_DIFF
-				&& $format !== SnakFormatter::FORMAT_HTML_WIDGET
-			) || ( $expected === 'Plain' && $format !== SnakFormatter::FORMAT_PLAIN )
-		) {
-			throw new InvalidArgumentException( $expected . ' format expected, got ' . $format );
+	private function hasValidOutputFormat( EntityIdFormatterFactory $factory, $expected ) {
+		switch ( $factory->getOutputFormat() ) {
+			case SnakFormatter::FORMAT_PLAIN:
+				return $expected === 'text/plain';
+
+			case SnakFormatter::FORMAT_HTML:
+			case SnakFormatter::FORMAT_HTML_DIFF:
+			case SnakFormatter::FORMAT_HTML_WIDGET:
+				return $expected === 'text/html';
 		}
+
+		return false;
 	}
 
 	/**
