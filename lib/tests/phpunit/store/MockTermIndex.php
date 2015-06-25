@@ -319,6 +319,10 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
+	 * Returns the same as getMatchingTerms simply making sure only one term
+	 * is returned per EntityId. This is the first term.
+	 * Weighting does not affect the order of return by this method.
+	 *
 	 * @param TermIndexEntry[] $terms
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
@@ -332,8 +336,17 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 		$entityType = null,
 		array $options = array()
 	) {
-		throw new BadMethodCallException( __METHOD__ . ' not implemented' );
-		// TODO: Implement getHighestRankMatchingTerms() method.
+		$options['orderByWeight'] = true;
+		$terms = $this->getMatchingTerms( $terms, $termType, $entityType, $options );
+		$previousEntityIdSerializations = array();
+		$returnTerms = array();
+		foreach( $terms as $termIndexEntry ) {
+			if( !in_array( $termIndexEntry->getEntityId()->getSerialization(), $previousEntityIdSerializations ) ) {
+				$returnTerms[] = $termIndexEntry;
+				$previousEntityIdSerializations[] = $termIndexEntry->getEntityId()->getSerialization();
+			}
+		}
+		return $returnTerms;
 	}
 
 	/**

@@ -71,6 +71,7 @@ use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
@@ -336,6 +337,22 @@ class WikibaseRepo {
 				$context
 			),
 			$this->getStore()->getEntityRedirectLookup()
+		);
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param string $displayLanguageCode
+	 *
+	 * @return TermIndexSearchInteractor
+	 */
+	public function newTermSearchInteractor( $displayLanguageCode ) {
+		return new TermIndexSearchInteractor(
+			$this->getStore()->getTermIndex(),
+			$this->getLanguageFallbackChainFactory(),
+			$this->getTermLookup(),
+			$displayLanguageCode
 		);
 	}
 
