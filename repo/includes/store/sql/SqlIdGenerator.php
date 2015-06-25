@@ -73,7 +73,9 @@ class SqlIdGenerator implements IdGenerator {
 		$currentId = $database->selectRow(
 			'wb_id_counters',
 			'id_value',
-			array( 'id_type' => $type )
+			array( 'id_type' => $type ),
+			__METHOD__,
+			array( 'FOR UPDATE' )
 		);
 
 		if ( is_object( $currentId ) ) {
