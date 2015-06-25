@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_0e7f5c11",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-25T15:11:11Z",
+      "side": 1,
+      "message": "Check if you can use the new LanguageFallbackLabelDescriptionLookupFactory instead. It encapsulates all the language fallback and pre-fecthing stuff.",
+      "revId": "5862311c57c1d5a5d2690f3f8722fb1c4e5b0168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6e8dc02d",
+        "filename": "repo/tests/phpunit/includes/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-25T15:11:11Z",
+      "side": 1,
+      "message": "This could be a static pseudo-constructor in TermIndexEntry",
+      "revId": "5862311c57c1d5a5d2690f3f8722fb1c4e5b0168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_eef53080",
+        "filename": "repo/tests/phpunit/includes/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-25T15:11:11Z",
+      "side": 1,
+      "message": "Ugh, nested mocks with nested callbacks? Please untangle this. Use a method on the test class as a callback (must be public for php 5.3), or put the \"inenr\" mocks into local variables in the top level function, etc.",
+      "revId": "5862311c57c1d5a5d2690f3f8722fb1c4e5b0168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
