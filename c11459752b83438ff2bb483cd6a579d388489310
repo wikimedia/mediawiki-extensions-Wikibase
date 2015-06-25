@@ -103,6 +103,24 @@
       "revId": "c11459752b83438ff2bb483cd6a579d388489310",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c2ba8bb5",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-25T03:42:14Z",
+      "side": 1,
+      "message": "Consider how we actually never needed this. YAGNI fail ;p",
+      "parentUuid": "8ec42329_c2e8560e",
+      "revId": "c11459752b83438ff2bb483cd6a579d388489310",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
