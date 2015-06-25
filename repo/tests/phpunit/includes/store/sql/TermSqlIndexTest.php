@@ -139,7 +139,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	/**
 	 * @dataProvider getMatchingTermsOptionsProvider
 	 *
-*@param Fingerprint $fingerprint
+	 * @param Fingerprint $fingerprint
 	 * @param TermIndexEntry[] $queryTerms
 	 * @param array $options
 	 * @param TermIndexEntry[] $expected
