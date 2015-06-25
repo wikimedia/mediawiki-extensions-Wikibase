@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_bd776435",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-25T06:49:24Z",
+      "side": 1,
+      "message": "Do we still need `@group Database` then?",
+      "revId": "c122da638df8168c8f52f4ef4828525d0cc68c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
