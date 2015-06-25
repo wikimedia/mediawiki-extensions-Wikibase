@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
-use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
