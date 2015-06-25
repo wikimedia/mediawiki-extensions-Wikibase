@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_5382ec02",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.pagesuggester.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-25T16:46:54Z",
+      "side": 1,
+      "message": "This means: If the option is set while the widget is already visible, a change event will be triggered, but the change will not be shown to the user. If he starts editing he will accidentally revert the value.",
+      "revId": "d8cf97e29b9f651dc0cc8e116a657259dd1ff85c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
