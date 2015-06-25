@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\Notifications;
 
+use Hooks;
 use InvalidArgumentException;
 use Revision;
 use User;
 use Wikibase\EntityChange;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikimedia\Assert\Assert;
 
 /**
  * Class for generating and submitting change notifications in different situations.
@@ -24,13 +26,19 @@ class ChangeNotifier {
 	private $changeFactory;
 
 	/**
-	 * @var ChangeTransmitter
+	 * @var ChangeTransmitter[]
 	 */
-	private $changeTransmitter;
+	private $changeTransmitters;
 
-	public function __construct( EntityChangeFactory $changeFactory, ChangeTransmitter $changeTransmitter ) {
+	/**
+	 * @param EntityChangeFactory $changeFactory
+	 * @param ChangeTransmitter[] $changeTransmitters
+	 */
+	public function __construct( EntityChangeFactory $changeFactory, array $changeTransmitters ) {
+		Assert::parameterElementType( 'Wikibase\Repo\Notifications\ChangeTransmitter', $changeTransmitters, '$changeTransmitters' );
+
 		$this->changeFactory = $changeFactory;
-		$this->changeTransmitter = $changeTransmitter;
+		$this->changeTransmitters = $changeTransmitters;
 	}
 
 	/**
@@ -58,8 +66,9 @@ class ChangeNotifier {
 		$change->setUserId( $user->getId() );
 		$change->setMetadataFromUser( $user );
 
-		$this->changeTransmitter->transmitChange( $change );
+		$this->transmitChange( $change );
 
+		Hooks::run( 'WikibaseChange', array( $change ) );
 		return $change;
 	}
 
@@ -89,8 +98,9 @@ class ChangeNotifier {
 		$user = User::newFromId( $revision->getUser() );
 		$change->setMetadataFromUser( $user );
 
-		$this->changeTransmitter->transmitChange( $change );
+		$this->transmitChange( $change );
 
+		Hooks::run( 'WikibaseChange', array( $change ) );
 		return $change;
 	}
 
@@ -120,7 +130,7 @@ class ChangeNotifier {
 		$change->setRevisionInfo( $revision );
 
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!
-		$this->changeTransmitter->transmitChange( $change );
+		$this->transmitChange( $change );
 
 		return $change;
 	}
@@ -152,7 +162,7 @@ class ChangeNotifier {
 		$change->setRevisionInfo( $current );
 
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!
-		$this->changeTransmitter->transmitChange( $change );
+		$this->transmitChange( $change );
 
 		return $change;
 	}
@@ -188,6 +198,17 @@ class ChangeNotifier {
 
 		$change = $this->changeFactory->newFromUpdate( $action, $oldEntity, $newEntity );
 		return $change;
+	}
+
+	/**
+	 * Transmit changes via all registered transmitters
+	 *
+	 * @param EntityChange $change
+	 */
+	private function transmitChange( EntityChange $change ) {
+		foreach ( $this->changeTransmitters as $transmitter ) {
+			$transmitter->transmitChange( $change );
+		}
 	}
 
 }
