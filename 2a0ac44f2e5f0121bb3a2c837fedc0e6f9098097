@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b86532ad",
+        "filename": "repo/includes/store/sql/SqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-25T10:15:59Z",
+      "side": 1,
+      "message": "We should probably only use FOR UPDATE when $trx \u003d\u003d 0\notherwise the lock will not be removed until the end of the connection, and as this method can all itself things would end up locked up",
+      "revId": "2a0ac44f2e5f0121bb3a2c837fedc0e6f9098097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
