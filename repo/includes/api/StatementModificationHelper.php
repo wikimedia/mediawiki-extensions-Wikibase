@@ -12,6 +12,7 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -83,12 +84,12 @@ class StatementModificationHelper {
 
 	/**
 	 * @param string $guid
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws UsageException
 	 * @return Statement
 	 */
-	public function getStatementFromEntity( $guid, Entity $entity ) {
+	public function getStatementFromEntity( $guid, EntityDocument $entity ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			$this->errorReporter->dieError( 'Entity type does not support statements', 'no-such-claim' );
 		}
