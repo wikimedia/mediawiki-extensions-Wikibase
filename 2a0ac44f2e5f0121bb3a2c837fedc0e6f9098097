@@ -16,6 +16,24 @@
       "revId": "2a0ac44f2e5f0121bb3a2c837fedc0e6f9098097",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_1829e6e0",
+        "filename": "repo/includes/store/sql/SqlIdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-25T10:39:47Z",
+      "side": 1,
+      "message": "After the update below the rows will be locked anyway, thus this would only shortly increase the lock on the wb_id_counters rows.",
+      "parentUuid": "8ec42329_b86532ad",
+      "revId": "2a0ac44f2e5f0121bb3a2c837fedc0e6f9098097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
