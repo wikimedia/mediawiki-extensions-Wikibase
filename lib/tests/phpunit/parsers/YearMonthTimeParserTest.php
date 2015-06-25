@@ -40,6 +40,7 @@ class YearMonthTimeParserTest extends StringValueParserTest {
 	 */
 	public function validInputProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+		$julian = 'http://www.wikidata.org/entity/Q1985786';
 
 		$argLists = array();
 
@@ -56,19 +57,19 @@ class YearMonthTimeParserTest extends StringValueParserTest {
 			'January/1999' =>
 				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'January/1' =>
-				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'1999 January' =>
 				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'January 1999' =>
 				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'January-1' =>
-				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'JanuARY-1' =>
-				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'JaN/1999' =>
 				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 			'januARY-1' =>
-				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000001-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'jan/1999' =>
 				array( '+0000000000001999-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 
@@ -90,15 +91,15 @@ class YearMonthTimeParserTest extends StringValueParserTest {
 
 			// presume mm/yy unless impossible month, in which case switch
 			'12/12' =>
-				array( '+0000000000000012-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000012-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'12/11' =>
-				array( '+0000000000000011-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000011-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'11/12' =>
-				array( '+0000000000000012-11-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000012-11-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'13/12' =>
-				array( '+0000000000000013-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000013-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'12/13' =>
-				array( '+0000000000000013-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
+				array( '+0000000000000013-12-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $julian ),
 			'2000 1' =>
 				array( '+0000000000002000-01-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_MONTH, $gregorian ),
 

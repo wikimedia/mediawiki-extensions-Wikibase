@@ -62,6 +62,7 @@ class YearTimeParserTest extends StringValueParserTest {
 	 */
 	public function validInputProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+		$julian = 'http://www.wikidata.org/entity/Q1985786';
 
 		$argLists = array();
 
@@ -83,16 +84,16 @@ class YearTimeParserTest extends StringValueParserTest {
 			'02000001' =>
 				array( '+0000000002000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'1' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
 			'000000001' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
 			'-1000000' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
+				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
 			'-1 000 000' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
+				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
 			// Digit grouping in the Indian numbering system
 			'-1,99,999' =>
-				array( '-0000000000199999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '-0000000000199999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
