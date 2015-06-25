@@ -75,7 +75,7 @@ $.extend( SELF.prototype, {
 			this._revisionStore.getClaimRevision( statementGuid )
 		)
 		.done( function( result ) {
-			self._revisionStore.setClaimRevision( result.pageinfo, statementGuid );
+			self._revisionStore.setClaimRevision( result.pageinfo.lastrevid, statementGuid );
 
 			// FIXME: Update self._entity
 			deferred.resolve();
