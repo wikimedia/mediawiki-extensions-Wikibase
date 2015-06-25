@@ -97,8 +97,8 @@ class RdfVocabulary {
 	 * @param string $dataUri Base URI for entity description URIs.
 	 */
 	public function __construct( $baseUri, $dataUri ) {
-		$this->baseUri = self::alwaysHTTP( $baseUri );
-		$this->dataUri = self::alwaysHTTP( $dataUri );
+		$this->baseUri = $baseUri;
+		$this->dataUri = $dataUri;
 
 		if( substr($this->baseUri, -7) === 'entity/') {
 			$topUri = substr($this->baseUri, 0, -7);
@@ -213,19 +213,6 @@ class RdfVocabulary {
 	 */
 	public function getCommonsURI( $file ) {
 		return self::COMMONS_URI . rawurlencode( $file );
-	}
-
-	/**
-	 * Returns URI that is always http: even if the passed URI is https
-	 * @param string $uri
-	 * @return string
-	 */
-	public static function alwaysHTTP( $uri ) {
-		if( strncasecmp( $uri, 'https://', 8 ) === 0 ) {
-			// https: becomes http:
-			$uri = 'http' . substr( $uri, 5 );
-		}
-		return $uri;
 	}
 
 }
