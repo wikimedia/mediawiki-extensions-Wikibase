@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_5313cfb8",
+        "filename": "view/resources/wikibase/entityChangers/ReferencesChanger.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-25T13:35:46Z",
+      "side": 1,
+      "message": "Ha, what a nice catch! Thanks!",
+      "revId": "169d725da2630ea360897af80fcc2c6841ef0d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
