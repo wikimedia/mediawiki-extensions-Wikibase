@@ -4,26 +4,23 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use ApiResult;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
+use Wikibase\Repo\Interactors\TermSearchInteractor;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
+use Wikibase\TermIndexEntry;
 
 /**
  * API module to search for Wikibase entities.
- *
- * FIXME: this module is doing to much work. Ranking terms is not its job and should be delegated
- * FIXME: the continuation currently relies on the search order returned by the TermStore
- *
- * Note: Continuation only works for a rather small number of entities. It is assumed that a large
- * number of entities will not be searched through by human editors, and that bots cannot search
- * through them anyway.
  *
  * @since 0.2
  *
@@ -32,6 +29,7 @@ use Wikibase\TermIndex;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Mättig
+ * @author Adam Shorland
  */
 class SearchEntities extends ApiBase {
 
@@ -46,14 +44,19 @@ class SearchEntities extends ApiBase {
 	private $idParser;
 
 	/**
+	 * @var TermIndexSearchInteractor
+	 */
+	private $termIndexSearchInteractor;
+
+	/**
 	 * @var TermIndex
 	 */
 	private $termIndex;
 
 	/**
-	 * @var  LanguageFallbackChainFactory
+	 * @var LabelDescriptionLookup
 	 */
-	private $languageFallbackChainFactory;
+	private $labelDescriptionLookup;
 
 	/**
 	 * @var ContentLanguages
@@ -77,79 +80,73 @@ class SearchEntities extends ApiBase {
 
 		$repo = WikibaseRepo::getDefaultInstance();
 		$this->setServices(
-			$repo->getStore()->getTermIndex(),
 			$repo->getEntityTitleLookup(),
 			$repo->getEntityIdParser(),
 			$repo->getEntityFactory()->getEntityTypes(),
 			$repo->getTermsLanguages(),
-			$repo->getLanguageFallbackChainFactory()
+			$repo->newTermSearchInteractor( $this->getLanguage()->getCode() ),
+			$repo->getStore()->getTermIndex(),
+			new LanguageFallbackLabelDescriptionLookup(
+				$repo->getTermLookup(),
+				$repo->getLanguageFallbackChainFactory()
+				->newFromLanguageCode( $this->getLanguage()->getCode() )
+			)
 		);
 	}
 
 	/**
 	 * Override services, for use for testing.
 	 *
-	 * @param TermIndex $termIndex
 	 * @param EntityTitleLookup $titleLookup
 	 * @param EntityIdParser $idParser
 	 * @param array $entityTypes
 	 * @param ContentLanguages $termLanguages
-	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param TermIndexSearchInteractor $termIndexSearchInteractor
+	 * @param TermIndex $termIndex
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 */
 	public function setServices(
-		TermIndex $termIndex,
 		EntityTitleLookup $titleLookup,
 		EntityIdParser $idParser,
 		array $entityTypes,
 		ContentLanguages $termLanguages,
-		LanguageFallbackChainFactory $languageFallbackChainFactory
+		TermIndexSearchInteractor $termIndexSearchInteractor,
+		TermIndex $termIndex,
+		LabelDescriptionLookup $labelDescriptionLookup
 	) {
-		$this->termIndex = $termIndex;
 		$this->titleLookup = $titleLookup;
 		$this->idParser = $idParser;
 		$this->entityTypes = $entityTypes;
 		$this->termsLanguages = $termLanguages;
-		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->termIndexSearchInteractor = $termIndexSearchInteractor;
+		$this->termIndex = $termIndex;
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 	}
 
 	/**
-	 * Get the entities corresponding to the provided languages and term.
-	 * Term means it is either a label or an alias.
+	 * Wrapper around TermSearchInteractor::searchForEntities
 	 *
-	 * @param string $term
-	 * @param string|null $entityType
-	 * @param string[] $languages
+	 * @see TermSearchInteractor::searchForEntities
+	 *
+	 * @param string $text
+	 * @param string $entityType
+	 * @param string $languageCode
 	 * @param int $limit
 	 * @param bool $prefixSearch
+	 * @param bool $strictLanguage
 	 *
-	 * @return TermIndexEntry[]
+	 * @return array[]
 	 */
-	private function searchEntities( $term, $entityType, array $languages, $limit, $prefixSearch ) {
-		$termTemplates = array();
-
-		foreach ( $languages as $language ) {
-			$termTemplates[] = new TermIndexEntry( array(
-				'termType' 		=> TermIndexEntry::TYPE_LABEL,
-				'termLanguage' 	=> $language,
-				'termText' 		=> $term
-			) );
-
-			$termTemplates[] = new TermIndexEntry( array(
-				'termType' 		=> TermIndexEntry::TYPE_ALIAS,
-				'termLanguage' 	=> $language,
-				'termText' 		=> $term
-			) );
-		}
-
-		//TODO: use getMatchingTerms instead
-		return $this->termIndex->getMatchingIDs(
-			$termTemplates,
+	private function searchEntities( $text, $entityType, $languageCode, $limit, $prefixSearch, $strictLanguage ) {
+		$this->termIndexSearchInteractor->setLimit( $limit );
+		$this->termIndexSearchInteractor->setIsPrefixSearch( $prefixSearch );
+		$this->termIndexSearchInteractor->setIsCaseSensitive( false );
+		$this->termIndexSearchInteractor->setUseLanguageFallback( !$strictLanguage );
+		return $this->termIndexSearchInteractor->searchForEntities(
+			$text,
+			$languageCode,
 			$entityType,
-			array(
-				'caseSensitive' => false,
-				'prefixSearch' => $prefixSearch,
-				'LIMIT' => $limit,
-			)
+			array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS )
 		);
 	}
 
@@ -164,36 +161,56 @@ class SearchEntities extends ApiBase {
 	 * @return array[]
 	 */
 	private function getSearchEntries( array $params ) {
-		$ids = array();
-		$required = $params['continue'] + $params['limit'] + 1;
-
-		$languages = $this->getLanguages( $params );
-
-		$ids = array_merge(
-			$ids,
-			$this->getRankedMatches( $params['search'], $params['type'], $languages, $required )
+		$matches = $this->getRankedMatches(
+			$params['search'],
+			$params['type'],
+			$params['language'],
+			$params['continue'] + $params['limit'] + 1,
+			$params['strictlanguage']
 		);
-		$ids = array_unique( $ids );
 
-		return $this->getEntries( $ids, $params['search'], $languages );
+		$entries = array();
+		foreach ( $matches as $match ) {
+			//TODO: use EntityInfoBuilder, EntityInfoTermLookup
+			$title = $this->titleLookup->getTitleForId(
+				$match['entityId']
+			);
+			$entry = array();
+			$entry['id'] = $match['entityId'];
+			$entry['url'] = $title->getFullUrl();
+			$entry = array_merge( $entry, $this->termsToArray( $match['displayTerms'] ) );
+			$entry['match']['type'] = $match[TermIndexSearchInteractor::MATCHEDTERMTYPE_KEY];
+			//Special handeling for 'entityId's as these are not actually Term objects
+			if ( $entry['match']['type'] === 'entityId' ) {
+				$entry['match']['text'] = $match['entityId'];
+				$entry['aliases'] = array( $match['entityId'] );
+			} else {
+				/** @var Term $matchedTerm */
+				$matchedTerm = $match[TermIndexSearchInteractor::MATCHEDTERM_KEY];
+				$entry['match']['language'] = $matchedTerm->getLanguageCode();
+				$entry['match']['text'] = $matchedTerm->getText();
+				$entry['aliases'] = array( $matchedTerm->getText() );
+			}
+			$entries[] = $entry;
+		}
+		return $entries;
 	}
 
-	private function getLanguages( array $params ) {
-		$lang = $params['language'];
-
-		if ( !$params['strictlanguage'] ) {
-			$fallbackMode = (
-				LanguageFallbackChainFactory::FALLBACK_VARIANTS
-				| LanguageFallbackChainFactory::FALLBACK_OTHERS
-				| LanguageFallbackChainFactory::FALLBACK_SELF );
-
-			$fallbackChain = $this->languageFallbackChainFactory
-				->newFromLanguageCode( $lang, $fallbackMode );
-
-			return $languages = $fallbackChain->getFetchLanguageCodes();
-		} else {
-			return array( $lang );
+	/**
+	 * @param Term[]|string[] $terms
+	 *
+	 * @return array[]
+	 */
+	private function termsToArray( array $terms ) {
+		$termArray = array();
+		foreach ( $terms as $key => $term ) {
+			if( $term instanceof Term ) {
+				$termArray[$key] = $term->getText();
+			} else {
+				$termArray[$key] = $term;
+			}
 		}
+		return $termArray;
 	}
 
 	/**
@@ -222,146 +239,105 @@ class SearchEntities extends ApiBase {
 	/**
 	 * Gets exact matches. If there are not enough exact matches, it gets prefixed matches.
 	 *
-	 * @param string $term
-	 * @param string|null $entityType
-	 * @param string[] $languages
+	 * @param string $text
+	 * @param string $entityType
+	 * @param string $languageCode
 	 * @param int $limit
+	 * @param bool $strictLanguage
 	 *
-	 * @return EntityId[]
+	 * @return array[] Key: string Serialized EntityId
+	 *           Value: array( entityId => EntityId, displayTerms => Term[], matchedTerm => Term, matchedTermType => string )
+	 *           Note: both arrays have possible keys Wikibase\TermIndexEntry::TYPE_*
 	 */
-	private function getRankedMatches( $term, $entityType, array $languages, $limit ) {
-		if ( empty( $languages ) ) {
-			return array();
-		}
+	private function getRankedMatches( $text, $entityType, $languageCode, $limit, $strictLanguage ) {
+		$allSearchResults = array();
 
-		/**
-		 * @var EntityId[] $ids
-		 */
-		$ids = array();
-
-		// If $term is the ID of an existing item, include it in the result.
-		$entityId = $this->getExactMatchForEntityId( $term, $entityType );
+		// If $text is the ID of an existing item, include it in the result.
+		$entityId = $this->getExactMatchForEntityId( $text, $entityType );
 		if ( $entityId !== null ) {
-			$ids[] = $entityId;
-		}
-
-		// If not enough matches yet, search for full term matches (for all languages at once).
-		// No preference is applied to any language.
-		$missing = $limit - count( $ids );
-		if ( $missing > 0 ) {
-			$matchedIds = $this->searchEntities( $term, $entityType, $languages, $missing, false );
-			$ids = array_unique( array_merge( $ids, $matchedIds ) );
-		}
-
-		// If not enough matches yet, search for prefix matches, one language at a time.
-		// This causes multiple queries for cases with few or no matches, but only one
-		// with a single language if there are many results (e.g. for a short prefix,
-		// as is common for type-ahead suggestions). This way, languages are preferred
-		// according to the language fallback chain, and database load is hopefully
-		// reduced.
-		foreach ( $languages as $lang ) {
-			$missing = $limit - count( $ids );
-			if ( $missing <= 0 ) {
-				break;
-			}
-
-			$matchedIds = $this->searchEntities( $term, $entityType, array( $lang ), $missing, true );
-			$ids = array_unique( array_merge( $ids, $matchedIds ) );
-		}
-
-		// Clip overflow, if any
-		$ids = array_slice( $ids, 0, $limit );
-
-		return $ids;
-	}
-
-	/**
-	 * @param EntityId[] $entityIds
-	 * @param string $search
-	 * @param string[] $languages
-	 *
-	 * @return array[]
-	 */
-	private function getEntries( array $entityIds, $search, $languages ) {
-		/**
-		 * @var array[] $entries
-		 */
-		$entries = array();
-
-		//TODO: do not re-implement language fallback here!
-		//TODO: use EntityInfoBuilder, EntityInfoTermLookup, and LanguageFallbackLabelDescriptionLookup
-		foreach ( $entityIds as $id ) {
-			$key = $id->getSerialization();
-			$title = $this->titleLookup->getTitleForId( $id );
-			$entries[ $key ] = array(
-				'id' => $id->getSerialization(),
-				'url' => $title->getFullUrl()
+			// This is nothing to do with terms, but make it look like it is so it is easy to handle
+			$allSearchResults[$entityId->getSerialization()] = array(
+				TermSearchInteractor::ENTITYID_KEY => $entityId,
+				TermSearchInteractor::DISPLAYTERMS_KEY => $this->termsToArray( $this->getDisplayTerms( $entityId ) ),
+				// Pretend that the entityId is a type of term so it can be output
+				TermSearchInteractor::MATCHEDTERMTYPE_KEY => 'entityId',
 			);
 		}
 
-		$termTypes = array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION, TermIndexEntry::TYPE_ALIAS );
+		// If not matched enough then search for full term matches
+		$missing = $limit - count( $allSearchResults );
+		if ( $missing > 0 ) {
+			$exactSearchResults = $this->searchEntities(
+				$text,
+				$entityType,
+				$languageCode,
+				$missing,
+				false,
+				$strictLanguage
+			);
+			$allSearchResults = $this->mergeSearchResults( $allSearchResults, $exactSearchResults, $limit );
 
-		// Find all the remaining terms for the given entities
-		$terms = $this->termIndex->getTermsOfEntities(
-			$entityIds, $termTypes, $languages );
-		// TODO: This needs to be rethought when a different search engine is used
-		$termPattern = '/^' . preg_quote( $search, '/' ) . '/i';
-
-		// ranks for fallback
-		$languageRanks = array_flip( $languages );
-		$languageRanks[''] = PHP_INT_MAX; // no language is worst
-
-		// track "best" language seen for each entity and term type
-		$bestLangPerSlot = array();
-
-		foreach ( $terms as $term ) {
-			$key = $term->getEntityId()->getSerialization();
-			if ( !isset( $entries[$key] ) ) {
-				continue;
+			// If still not enough matched then search for prefix matches
+			$missing = $limit - count( $allSearchResults );
+			if ( $missing > 0 ) {
+				$prefixSearchResults = $this->searchEntities(
+					$text,
+					$entityType,
+					$languageCode,
+					$missing,
+					true,
+					$strictLanguage
+				);
+				$allSearchResults = $this->mergeSearchResults( $allSearchResults, $prefixSearchResults, $limit );
 			}
-
-			$type = $term->getType();
-			$bestLang = isset( $bestLangPerSlot[$key][$type] ) ? $bestLangPerSlot[$key][$type] : '';
-			$currentLang = $term->getLanguage();
-
-			// we already have a "better" language for this slot
-			if ( $languageRanks[$bestLang] < $languageRanks[$currentLang] ) {
-				continue;
-			}
-
-			$entry = $entries[$key];
-
-			switch ( $type ) {
-				case TermIndexEntry::TYPE_LABEL:
-					$entry['label'] = $term->getText();
-					$bestLangPerSlot[$key][$type] = $currentLang;
-					break;
-				case TermIndexEntry::TYPE_DESCRIPTION:
-					$entry['description'] = $term->getText();
-					$bestLangPerSlot[$key][$type] = $currentLang;
-					break;
-				case TermIndexEntry::TYPE_ALIAS:
-					// Only include matching aliases
-					if ( preg_match( $termPattern, $term->getText() ) ) {
-						if ( !isset( $entry['aliases'] ) ) {
-							$entry['aliases'] = array();
-							ApiResult::setIndexedTagName( $entry['aliases'], 'alias' );
-						}
-						$entry['aliases'][] = $term->getText();
-						$bestLangPerSlot[$key][$type] = $currentLang;
-					}
-					break;
-			}
-
-			$entries[$key] = $entry;
 		}
 
-		//TODO: If we show a non-matching label for lang1 but the match was for the label in lang2,
-		//      treat the lang2 label like an alias, so there is an indication what term matched.
+		return $allSearchResults;
+	}
 
-		$entries = array_values( $entries );
+	/**
+	 * @param array[] $searchResults
+	 * @param array[] $newSearchResults
+	 * @param int $limit
+	 *
+	 * @return array
+	 */
+	private function mergeSearchResults( $searchResults, $newSearchResults, $limit ) {
+		$searchResultEntityIdSerializations = array_keys( $searchResults );
+		foreach ( $newSearchResults as $searchResultToAdd ) {
+			/** @var EntityId $entityId */
+			$entityId = $searchResultToAdd[TermSearchInteractor::ENTITYID_KEY];
+			$entityIdString = $entityId->getSerialization();
+			if ( !in_array( $entityIdString, $searchResultEntityIdSerializations ) ) {
+				$searchResults[$entityIdString] = $searchResultToAdd;
+				$searchResultEntityIdSerializations[] = $entityIdString;
+				$missing = $limit - count( $searchResults );
+				if ( $missing <= 0 ) {
+					return $searchResults;
+				}
+			}
+		}
+		return $searchResults;
+	}
 
-		return $entries;
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return Term[] array with possible keys TermIndexEntry::TYPE_*
+	 */
+	private function getDisplayTerms( EntityId $entityId ) {
+		$displayTerms = array();
+		try{
+			$displayTerms[TermIndexEntry::TYPE_LABEL] = $this->labelDescriptionLookup->getLabel( $entityId );
+		} catch ( OutOfBoundsException $e ) {
+			// Ignore
+		};
+		try{
+			$displayTerms[TermIndexEntry::TYPE_DESCRIPTION] = $this->labelDescriptionLookup->getDescription( $entityId );
+		} catch ( OutOfBoundsException $e ) {
+			// Ignore
+		};
+		return $displayTerms;
 	}
 
 	/**
@@ -370,7 +346,6 @@ class SearchEntities extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		//TODO: factor search logic out into a new class (TermSearchInteractor), re-use in SpecialTermDisambiguation.
 		$entries = $this->getSearchEntries( $params );
 
 		$this->getResult()->addValue(
@@ -426,7 +401,6 @@ class SearchEntities extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-
 		return array(
 			'search' => array(
 				ApiBase::PARAM_TYPE => 'string',

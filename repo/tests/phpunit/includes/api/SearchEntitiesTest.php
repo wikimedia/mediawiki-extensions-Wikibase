@@ -8,11 +8,15 @@ use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
+use Wikibase\Repo\Interactors\TermSearchInteractor;
 use Wikibase\TermIndexEntry;
-use Wikibase\TermIndex;
 use Wikibase\Api\SearchEntities;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Test\MockTermIndex;
@@ -33,100 +37,6 @@ use Wikibase\Test\MockTermIndex;
  */
 class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 
-	private static $terms = array(
-		'Berlin' => array(
-			'id' => 'Q64',
-			'labels' => array(
-				array( 'language' => 'en', 'value' => 'Berlin' ),
-				array( 'language' => 'de', 'value' => 'Berlin' ),
-			),
-			'aliases' => array(
-				array( array( 'language' => 'de', 'value' => 'Dickes B' ) ),
-			),
-			'descriptions' => array(
-				array( 'language' => 'en', 'value' => 'Capital city and a federated state of the Federal Republic of Germany.' ),
-				array( 'language' => 'de', 'value' => 'Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland.' ),
-			),
-		),
-		'Bern' => array(
-			'id' => 'Q45',
-			'labels' => array(
-				array( 'language' => 'en', 'value' => 'Bern' ),
-				array( 'language' => 'de', 'value' => 'Bern' ),
-				array( 'language' => 'fr', 'value' => 'Berne' ),
-				array( 'language' => 'it', 'value' => 'Berna' ),
-			),
-			'aliases' => array(
-			),
-			'descriptions' => array(
-				array( 'language' => 'en', 'value' => 'City in Switzerland.' ),
-				array( 'language' => 'de', 'value' => 'Stadt in der Schweiz.' ),
-			),
-		),
-		'Guangzhou' => array(
-			'id' => 'Q231',
-			'labels' => array(
-				array( 'language' => 'en', 'value' => 'Guangzhou' ),
-				array( 'language' => 'yue', 'value' => '廣州' ),
-				array( 'language' => 'zh-cn', 'value' => '广州市' ),
-			),
-			'aliases' => array(
-			),
-			'descriptions' => array(
-				array( 'language' => 'en', 'value' => 'Capital of Guangdong.' ),
-				array( 'language' => 'zh-hk', 'value' => '廣東的省會。' ),
-			),
-		),
-		'X1' => array(
-			'id' => 'Q1001',
-			'labels' => array(
-				array( 'language' => 'en', 'value' => 'label:x1:en' ),
-			),
-			'aliases' => array(
-				array( array( 'language' => 'en', 'value' => 'alias1:x1:en' ) ),
-			),
-			'descriptions' => array(
-				array( 'language' => 'en', 'value' => 'description:x1:en' ),
-			),
-		),
-		'X2' => array(
-			'id' => 'Q1002',
-			'labels' => array(
-				array( 'language' => 'en', 'value' => 'label:x2:en' ),
-				array( 'language' => 'de', 'value' => 'label:x2:de' ),
-			),
-			'aliases' => array(
-				array( array( 'language' => 'en', 'value' => 'alias1:x2:en' ) ),
-			),
-			'descriptions' => array(
-				array( 'language' => 'en', 'value' => 'description:x2:en' ),
-			),
-		),
-		'X3' => array(
-			'id' => 'Q1003',
-			'labels' => array(
-				array( 'language' => 'en', 'value' => 'label:x3:en' ),
-				array( 'language' => 'de', 'value' => 'label:x3:de' ),
-				array( 'language' => 'de-ch', 'value' => 'label:x3:de-ch' ),
-			),
-			'aliases' => array(
-				array( array( 'language' => 'en', 'value' => 'alias1:x3:en' ) ),
-				array( array( 'language' => 'en', 'value' => 'description:x3:en' ) ),
-				array( array( 'language' => 'de', 'value' => 'description:x3:de' ) ),
-				array( array( 'language' => 'de-ch', 'value' => 'description:x3:de-ch' ) ),
-			),
-			'descriptions' => array(
-				array( 'language' => 'en', 'value' => 'description:x3:en' ),
-				array( 'language' => 'de', 'value' => 'description:x3:de' ),
-				array( 'language' => 'de-ch', 'value' => 'description:x3:de-ch' ),
-			),
-		),
-	);
-
-	private function getEntityId( $handle ) {
-		return self::$terms[$handle]['id'];
-	}
-
 	/**
 	 * @param array $params
 	 *
@@ -134,95 +44,145 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getApiMain( array $params ) {
 		$context = new RequestContext();
+		$context->setLanguage( 'en-ca' );
 		$context->setRequest( new FauxRequest( $params, true ) );
-
 		$main = new ApiMain( $context );
 		return $main;
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityTitleLookup|\PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getTitleLookup() {
+	private function getMockTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$testCase = $this;
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
-				$title = Title::makeTitle( NS_MAIN, $id->getEntityType() . ':' . $id->getSerialization() );
-				$title->resetArticleID( $id->getNumericId() );
-				return $title;
-			} ) );
-
-		return $titleLookup;
-	}
-
-	/**
-	 * @return ContentLanguages
-	 */
-	private function getContentLanguages() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$titleLookup->expects( $this->any() )->method( 'getLanguages' )
-			->will( $this->returnValue( array( 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' ) ) );
-
-		return $titleLookup;
-	}
-
-	/**
-	 * @return TermIndex
-	 */
-	private function getTermIndex() {
-		$idParser = new BasicEntityIdParser();
-		$termObjects = array();
-		foreach ( self::$terms as $entity ) {
-			$id = $idParser->parse( $entity['id'] );
-
-			foreach ( $entity['labels'] as $row ) {
-				$termObjects[] = $this->newTermFromDataRow( $id, TermIndexEntry::TYPE_LABEL, $row );
-			}
-
-			foreach ( $entity['descriptions'] as $row ) {
-				$termObjects[] = $this->newTermFromDataRow( $id, TermIndexEntry::TYPE_DESCRIPTION, $row );
-			}
-
-			foreach ( $entity['aliases'] as $rows ) {
-				foreach ( $rows as $row ) {
-					$termObjects[] = $this->newTermFromDataRow( $id, TermIndexEntry::TYPE_ALIAS, $row );
+			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
+				if ( $id->getSerialization() === 'Q111' ) {
+					return $testCase->getMockTitle( true );
+				} else {
+					return $testCase->getMockTitle( false );
 				}
-			}
-		}
-
-		$termIndex = new MockTermIndex( $termObjects );
-
-		return $termIndex;
+			} ) );
+		return $titleLookup;
 	}
 
-	private function newTermFromDataRow( EntityId $entityId, $type, $row ) {
-		return new TermIndexEntry( array(
-			'termType' => $type,
-			'termLanguage' => $row['language'],
-			'termText' => $row['value'],
-			'entityType' => $entityId->getEntityType(),
-			'entityId' => $entityId->getNumericId()
-		) );
+	/**
+	 * @param bool $exists
+	 *
+	 * @return Title|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	public function getMockTitle( $exists ) {
+		$mock = $this->getMockBuilder( '\Title' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'exists' )
+			->will( $this->returnValue( $exists ) );
+		$mock->expects( $this->any() )
+			->method( 'getFullUrl' )
+			->will( $this->returnValue( 'http://fullTitleUrl' ) );
+		return $mock;
+	}
+
+	/**
+	 * @return ContentLanguages|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getMockContentLanguages() {
+		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$contentLanguages->expects( $this->any() )->method( 'getLanguages' )
+			->will( $this->returnValue( array( 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' ) ) );
+		return $contentLanguages;
 	}
 
 	/**
 	 * @param array $params
+	 * @param array $returnResults
+	 *
+	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getMockSearchInteractor( $params, $returnResults = array() ) {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\TermIndexSearchInteractor' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->atLeastOnce() )
+			->method( 'searchForEntities' )
+			->with(
+				$this->equalTo( $params['search'] ),
+				$this->equalTo( $params['language'] ),
+				$this->equalTo( $params['type'] ),
+				$this->equalTo( array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ) )
+			)
+			->will( $this->returnValue( $returnResults ) );
+		return $mock;
+	}
+
+	/**
+	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
+	 *
+	 * @return LanguageLabelDescriptionLookup
+	 */
+	private function getMockLabelDescriptionLookup() {
+		$mock = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelDescriptionLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( new Term( 'pt', 'ptLabel' ) ) );
+		$mock->expects( $this->any() )
+			->method( 'getDescription' )
+			->will( $this->returnValue( new Term( 'pt', 'ptDescription' ) ) );
+		return $mock;
+	}
+
+	/**
+	 * @param string $text
+	 * @param string $languageCode
+	 * @param string $termType
+	 * @param EntityId|ItemId|PropertyId $entityId
+	 *
+	 * @returns TermIndexEntry
+	 */
+	private function getTermIndexEntry( $text, $languageCode, $termType, EntityId $entityId ) {
+		return new TermIndexEntry( array(
+			'termText' => $text,
+			'termLanguage' => $languageCode,
+			'termType' => $termType,
+			'entityId' => $entityId->getNumericId(),
+			'entityType' => $entityId->getEntityType(),
+		) );
+	}
+
+	private function getMockTermIndex() {
+		return new MockTermIndex(
+			array()
+		);
+	}
+
+	/**
+	 * @param array $params
+	 * @param TermSearchInteractor|null $searchInteractor
 	 *
 	 * @return array[]
 	 */
-	private function callApiModule( array $params ) {
+	private function callApiModule( array $params, $searchInteractor = null ) {
 		$module = new SearchEntities(
 			$this->getApiMain( $params ),
 			'wbsearchentities'
 		);
 
+		if ( $searchInteractor == null ) {
+			$searchInteractor = $this->getMockSearchInteractor( $params );
+		}
+
 		$module->setServices(
-			$this->getTermIndex(),
-			$this->getTitleLookup(),
+			$this->getMockTitleLookup(),
 			new BasicEntityIdParser(),
 			array( 'item', 'property' ),
-			$this->getContentLanguages(),
-			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
+			$this->getMockContentLanguages(),
+			$searchInteractor,
+			$this->getMockTermIndex(),
+			$this->getMockLabelDescriptionLookup()
 		);
 
 		$module->execute();
@@ -235,96 +195,139 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		) );
 	}
 
-	public function provideData() {
+	public function provideBooleanValues() {
 		return array(
-			//Search via full Labels
-			'en:Berlin' => array( array( 'search' => 'Berlin', 'language' => 'en' ), array( array( 'label' => 'Berlin' ) ) ),
-			'en:bERliN' => array( array( 'search' => 'bERliN', 'language' => 'en' ), array( array( 'label' => 'Berlin' ) ) ),
-			'zh-cn:广州市' => array( array( 'search' => '广州市', 'language' => 'zh-cn' ), array( array( 'label' => '广州市' ) ) ),
-
-			//Search via partial Labels
-			'de:Guang' => array( array( 'search' => 'Guang', 'language' => 'de' ), array( array( 'label' => 'Guangzhou' ) ) ),
-			'zh-cn:广' => array( array( 'search' => '广', 'language' => 'zh-cn' ), array( array( 'label' => '广州市' ) ) ),
-
-			//Match alias
-			'de:Dickes' => array( array( 'search' => 'Dickes', 'language' => 'de' ), array( array( 'label' => 'Berlin', 'aliases' => array( 'Dickes B' ) ) ) ),
-
-			//Multi-match language fallback
-			'de:x' => array( array( 'search' => 'alias1:x', 'language' => 'de-ch' ), array(
-				array( 'label' => 'label:x1:en' ),
-				array( 'label' => 'label:x2:de' ),
-				array( 'label' => 'label:x3:de-ch' ),
-			) ),
+			array( true ),
+			array( false ),
 		);
 	}
 
 	/**
-	 * @dataProvider provideData
+	 * @dataProvider provideBooleanValues
 	 */
-	public function testSearchEntities( $params, $expected ) {
-		$params['action'] = 'wbsearchentities';
-
-		$result = $this->callApiModule( $params );
-
-		$this->assertResultLooksGood( $result );
-		$this->assertResultSet( $expected, $result['search'] );
-	}
-
-	public function testSearchExactMatch() {
+	public function testSearchStrictLanguage_passedToSearchInteractor( $boolean ) {
 		$params = array(
 			'action' => 'wbsearchentities',
-			'search' => $this->getEntityId( 'Berlin' ),
+			'search' => 'Foo',
+			'type' => 'item',
+			'language' => 'de-ch',
+		);
+		if ( $boolean ) {
+			$params['strictlanguage'] = true;
+		}
+
+		$searchInteractor = $this->getMockSearchInteractor( $params );
+		$searchInteractor->expects( $this->atLeastOnce() )
+			->method( 'setUseLanguageFallback' )
+			->with( $this->equalTo( !$boolean ) );
+
+		$this->callApiModule( $params, $searchInteractor );
+	}
+
+	public function provideTestSearchEntities() {
+		$multipleInteractorReturnValues = array(
+			array(
+				'entityId' => new ItemId( 'Q222' ),
+				'matchedTerm' => new Term( 'en-gb', 'Fooooo' ),
+				'matchedTermType' => 'label',
+				'displayTerms' => array(
+					TermIndexEntry::TYPE_LABEL => new Term( 'en-gb', 'FooHeHe' ),
+					TermIndexEntry::TYPE_DESCRIPTION => new Term( 'en', 'FooHeHe en description' ),
+				),
+			),
+			array(
+				'entityId' => new ItemId( 'Q333' ),
+				'matchedTerm' => new Term( 'de', 'AMatchedTerm' ),
+				'matchedTermType' => 'alias',
+				'displayTerms' => array(
+					TermIndexEntry::TYPE_LABEL => new Term( 'fr', 'ADisplayLabel' ),
+				),
+			),
+		);
+		$q222Result = array(
+			'id' => 'Q222',
+			'url' => 'http://fullTitleUrl',
+			TermIndexEntry::TYPE_LABEL => 'FooHeHe',
+			TermIndexEntry::TYPE_DESCRIPTION => 'FooHeHe en description',
+			'aliases' => array( 'Fooooo' ),
+			'match' => array(
+				'type' => 'label',
+				'language' => 'en-gb',
+				'text' => 'Fooooo',
+			),
+		);
+		$q333Result = array(
+			'id' => 'Q333',
+			'url' => 'http://fullTitleUrl',
+			TermIndexEntry::TYPE_LABEL => 'ADisplayLabel',
+			'aliases' => array( 'AMatchedTerm' ),
+			'match' => array(
+				'type' => 'alias',
+				'language' => 'de',
+				'text' => 'AMatchedTerm',
+			),
+		);
+		return array(
+			'No exact match' => array(
+				array( 'search' => 'Q999' ),
+				array(),
+				array(),
+			),
+			'Exact EntityId match' => array(
+				array( 'search' => 'Q111' ),
+				array(),
+				array(
+					array(
+						'id' => 'Q111',
+						'url' => 'http://fullTitleUrl',
+						'label' => 'ptLabel',
+						'description' => 'ptDescription',
+						'aliases' => array( 'Q111' ),
+						'match' => array(
+							'type' => 'entityId',
+							'text' => 'Q111',
+						),
+					),
+				),
+			),
+			'Multiple Results' => array(
+				array(),
+				$multipleInteractorReturnValues,
+				array( $q222Result, $q333Result ),
+			),
+			'Multiple Results (limited)' => array(
+				array( 'limit' => 1 ),
+				$multipleInteractorReturnValues,
+				array( $q222Result ),
+			),
+			'Multiple Results (limited-continue)' => array(
+				array( 'limit' => 1, 'continue' => 1 ),
+				$multipleInteractorReturnValues,
+				array( $q333Result ),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideTestSearchEntities
+	 */
+	public function testSearchEntities( array $overrideParams, array $interactorReturn, array $expected ) {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'Foo',
+			'type' => 'item',
 			'language' => 'en'
 		);
+		foreach( $overrideParams as $key => $param ) {
+			$params[$key] = $param;
+		}
 
-		$expected = array( array(
-			'label' => 'Berlin',
-			'description' => 'Capital city and a federated state of the Federal Republic of Germany.',
-		) );
+		$searchInteractor = $this->getMockSearchInteractor( $params, $interactorReturn );
 
-		$result = $this->callApiModule( $params );
-		$this->assertResultSet( $expected, $result['search'] );
-	}
+		$result = $this->callApiModule( $params, $searchInteractor );
 
-
-	public function testSearchFallback() {
-		$params = array(
-			'action' => 'wbsearchentities',
-			'search' => 'BERN',
-			'language' => 'de-ch',
-		);
-
-		$result = $this->callApiModule( $params );
-		$this->assertCount( 1, $result['search'] );
-
-		$resultEntry = reset( $result['search'] );
-		$this->assertEquals( 'Bern', $resultEntry['label'] );
-		$this->assertEquals( 'Stadt in der Schweiz.', $resultEntry['description'] );
-	}
-
-	public function testSearchStrictLanguage() {
-		$params = array(
-			'action' => 'wbsearchentities',
-			'search' => 'Berlin',
-			'language' => 'de-ch',
-			'strictlanguage' => true
-		);
-
-		$result = $this->callApiModule( $params );
-		$this->assertEmpty( $result['search'] );
-	}
-
-	public function testSearchContinue() {
-		$params = array(
-			'action' => 'wbsearchentities',
-			'search' => 'B',
-			'language' => 'de',
-			'limit' => 1
-		);
-
-		$result = $this->callApiModule( $params );
-
-		$this->assertArrayHasKey( 'search-continue', $result );
+		$this->assertResultLooksGood( $result );
+		$this->assertEquals( $expected, $result['search'] );
 	}
 
 	private function assertResultLooksGood( $result ) {
@@ -337,30 +340,6 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->assertArrayHasKey( 'id', $searchresult );
 			$this->assertArrayHasKey( 'url', $searchresult );
 		}
-
-	}
-
-	private function assertResultSet( $expected, $actual ) {
-		reset( $actual );
-		foreach ( $expected as $expectedEntry ) {
-			$actualEntry = current( $actual );
-			next( $actual );
-
-			$this->assertTrue( $actualEntry !== false, 'missing result entry ' . var_export( $expectedEntry, true ) );
-			$this->assertResultEntry( $expectedEntry, $actualEntry );
-		}
-
-		$actualEntry = next( $actual );
-		$this->assertFalse( $actualEntry, 'extra result entry ' . var_export( $actualEntry, true ) );
-	}
-
-	private function assertResultEntry( $expected, $actual ) {
-		$actual = array_intersect_key( $actual, $expected );
-
-		ksort( $expected );
-		ksort( $actual );
-
-		$this->assertEquals( $expected, $actual );
 	}
 
 }
