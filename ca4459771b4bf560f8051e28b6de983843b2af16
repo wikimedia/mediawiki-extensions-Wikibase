@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_8e026c0b",
+        "filename": "view/src/EntityViewFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-25T14:11:46Z",
+      "side": 1,
+      "message": "This was a different discussion. I completely undid all changes in the patch you are referring to and gave it a completely new purpose. No more need to panic over \"o my god you are introducing a default value\". I utterly disagree but undid it anyway. Still nobody ever looked at it again.\n\nNow downvoting unrelated patches is not helpful and not going anywhere. What I\u0027m doing here is making optional parameters optional. This is as trivial as it can get.",
+      "parentUuid": "8ec42329_bdde84dd",
+      "revId": "ca4459771b4bf560f8051e28b6de983843b2af16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_dddb50ec",
         "filename": "view/src/EntityViewFactory.php",
         "patchSetId": 1
