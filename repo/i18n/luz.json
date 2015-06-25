@@ -6,11 +6,11 @@
 	},
 	"wikibase-edit": "اصلاح",
 	"wikibase-add": "اضاف کردن",
-	"wikibase-label-empty": "برچسبی تعریف نوابیده",
-	"wikibase-description-empty": "شرحی تعریف نوابیده",
+	"wikibase-label-empty": "برچسبی تعریف نۉابیدھ",
+	"wikibase-description-empty": "شرحی تعریف نۉابیدھ",
 	"wikibase-statements": "بیانیه",
 	"wikibase-sitelinks-special": "سایتل دیه",
-	"wikibase-aliases-empty": "بدون نام مستعار تعریف وابیده",
+	"wikibase-aliases-empty": "بدۉن نام مستعار تعریف ۉابیدھ",
 	"wikibase-statementview-rank-normal": "رتبه عادی",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|سرچشمه|سرچشمه یل}}"
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|سرچشمه|سرچشمل}}"
 }

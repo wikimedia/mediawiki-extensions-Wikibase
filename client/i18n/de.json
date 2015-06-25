@@ -62,7 +62,7 @@
 	"wikibase-error-serialize-error": "Die Daten konnten nicht serialisiert werden",
 	"wikibase-error-invalid-entity-id": "Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.",
 	"unconnectedpages": "Seiten, die nicht mit Objekten verbunden sind",
-	"unconnectedpages-summary": "Diese Seite listet Seiten ohne verbundenes Objekt auf. Die Liste ist beschränkt auf Namensräume, die verbundene Objekte unterstützen.",
+	"unconnectedpages-summary": "Diese Seite listet Seiten ohne verbundenes Datenobjekt auf (in Namensräumen, die verbundene Objekte unterstützen). Die Liste wird absteigend nach der Seitenkennung sortiert, so dass neue Seiten zuerst aufgeführt werden.",
 	"wikibase-unconnectedpages-page": "Ergebnisliste mit Seite starten:",
 	"wikibase-unconnectedpages-submit": "Los",
 	"wikibase-unconnectedpages-invalid-language": "„$1“ ist kein gültiger Sprachcode.",

@@ -67,7 +67,7 @@
 	"wikibase-error-serialize-error": "Error al serializar datos.",
 	"wikibase-error-invalid-entity-id": "El ID ingresado es desconocido para el sistema. Utilice un identificador de entidad válido.",
 	"unconnectedpages": "Páginas no conectadas a elementos",
-	"unconnectedpages-summary": "Esta página lista páginas sin ningún elemento conectado. La lista se limita a los espacios de nombres que admiten elementos conectados.",
+	"unconnectedpages-summary": "Esta página lista páginas sin ningún elemento de datos conectado (en los espacios de nombres que admiten elementos conectados). La lista está ordenada por identificador de página descendente, por lo que las páginas más nuevas se muestran primero.",
 	"wikibase-unconnectedpages-page": "Comenzar lista de resultados por página:",
 	"wikibase-unconnectedpages-submit": "Continuar",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" no es un código de idioma válido.",

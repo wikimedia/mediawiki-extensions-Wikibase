@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ianbu"
+		]
+	},
+	"tooltip-t-wikibase": "連去資料倉庫的項目",
+	"wikibase-dataitem": "{{WBREPONAME}}項目",
+	"wikibase-editlinks": "改連結",
+	"wikibase-editlinkstitle": "改其他話語的連接"
+}

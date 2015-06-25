@@ -10,7 +10,8 @@
 			"Sannita",
 			"Nemo bis",
 			"FRacco",
-			"Federico Mugnaini"
+			"Federico Mugnaini",
+			"Fringio"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
@@ -58,7 +59,7 @@
 	"wikibase-error-serialize-error": "Impossibile serializzare i dati",
 	"wikibase-error-invalid-entity-id": "L'ID specificato è sconosciuto al sistema. Utilizza un ID di entità valido.",
 	"unconnectedpages": "Pagine non collegate agli elementi",
-	"unconnectedpages-summary": "In questa pagina c'è la lista delle pagine senza oggetti collegati. La lista è limitata a spazi di nomi che supportano gli oggetti collegati.",
+	"unconnectedpages-summary": "Questa pagina elenca le pagine non connessi ad un elemento data (nei namespace che supportano il collegamento tra elementi) Questa lista è ordinata in ordine decrescente secondo l'ID della pagina, cosicché le nuove voci siano elencate per prime.",
 	"wikibase-unconnectedpages-page": "Inizia l'elenco dei risultati dalla pagina:",
 	"wikibase-unconnectedpages-submit": "Vai",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" non è un codice di lingua valido.",

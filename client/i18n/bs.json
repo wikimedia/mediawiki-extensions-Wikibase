@@ -4,7 +4,8 @@
 			"DzWiki",
 			"Edinwiki",
 			"Palapa",
-			"Semso98"
+			"Semso98",
+			"Srdjan m"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
@@ -47,8 +48,7 @@
 	"wikibase-watchlist-show-changes-pref": "Prikaži izmjene Wikipodataka kod vašeg spiska praćenih članaka",
 	"wikibase-error-serialize-error": "Neuspješna serijalizacija podataka",
 	"wikibase-error-invalid-entity-id": "Unešen ID nije poznat u sistemu. Koristite validan ID.",
-	"special-unconnectedpages": "Stranice koje nisu povezane sa stavkama",
-	"wikibase-unconnectedpages-legend": "Opcije za nepovezane stranice",
+	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"wikibase-unconnectedpages-page": "Počni rezultat sa stranicom:",
 	"wikibase-unconnectedpages-submit": "OK",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" nije važeća jezična oznaka.",
@@ -58,5 +58,7 @@
 	"wikibase-pageinfo-entity-id": "ID stavke Wikipodataka",
 	"wikibase-pageinfo-entity-id-none": "Ništa",
 	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2",
-	"wikibase-otherprojects": "Drugi projekti"
+	"wikibase-otherprojects": "Drugi projekti",
+	"wikibase-otherprojects-beta-message": "Drugi projekti na bočnoj traci",
+	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s linkovima na ostale Wikimedijine projekte na osnovi podataka s projekta Wikidata."
 }
