@@ -5,8 +5,8 @@ namespace Wikibase\InternalSerialization;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\DeserializerFactory as CurrentDeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\InternalSerialization\Deserializers\StatementDeserializer;
 use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
+use Wikibase\InternalSerialization\Deserializers\StatementDeserializer;
 
 /**
  * Public interface of the library for constructing deserializers.
