@@ -183,7 +183,6 @@ Changes in the `Entity` hierarchy:
 * Changed the constructor signature of `Property`
 * Removed `Entity::setClaims` (`Item::setClaims` has been retained)
 * Removed `Entity::stub`
-* Removed `Property::newEmpty`
 * Removed `Entity::getIdFromClaimGuid`
 * `Entity::removeLabel` no longer accepts an array of language codes
 * `Entity::removeDescription` no longer accepts an array of language codes
