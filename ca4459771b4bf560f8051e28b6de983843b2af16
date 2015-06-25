@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_bdde84dd",
+        "filename": "view/src/EntityViewFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-25T07:39:05Z",
+      "side": 1,
+      "message": "This should be discussed in https://gerrit.wikimedia.org/r/#/c/203089/",
+      "revId": "ca4459771b4bf560f8051e28b6de983843b2af16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_dddb50ec",
+        "filename": "view/src/EntityViewFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-25T07:39:05Z",
+      "side": 1,
+      "message": "Really nice refactoring, appreciate it :-)",
+      "revId": "ca4459771b4bf560f8051e28b6de983843b2af16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
