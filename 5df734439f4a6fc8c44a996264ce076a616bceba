@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ce4cf4cd",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-25T15:22:44Z",
+      "side": 1,
+      "message": "make a private function, with $fullMatch as a param, and call it twice. much more readable.",
+      "revId": "5df734439f4a6fc8c44a996264ce076a616bceba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2ee25898",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-25T15:22:44Z",
+      "side": 1,
+      "message": "array[]",
+      "revId": "5df734439f4a6fc8c44a996264ce076a616bceba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_cedb94ec",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-25T15:22:44Z",
+      "side": 1,
+      "message": "$searchResult vs $searchResults o_O. Please avoid variable names that are distinguished only ba a trailing s. They are very confusing. Especially since $searchResult does *not* point to elements of $searchResults, but to elements of $newSearchResult...",
+      "revId": "5df734439f4a6fc8c44a996264ce076a616bceba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2e99f821",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-25T15:22:44Z",
+      "side": 1,
+      "message": "Here $searchResults is used as an indexed array, while at the beginning of the method, you use array_keys( $searchResults ) to get entity IDs. Whut?",
+      "revId": "5df734439f4a6fc8c44a996264ce076a616bceba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
