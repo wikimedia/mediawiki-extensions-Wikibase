@@ -79,9 +79,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
 	}
 
-	public function testGetClaimGuidParser() {
-		$returnValue = $this->getWikibaseRepo()->getClaimGuidParser();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\ClaimGuidParser', $returnValue );
+	public function testGetStatementGuidParser() {
+		$returnValue = $this->getWikibaseRepo()->getStatementGuidParser();
+		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\StatementGuidParser', $returnValue );
 	}
 
 	public function testGetLanguageFallbackChainFactory() {
