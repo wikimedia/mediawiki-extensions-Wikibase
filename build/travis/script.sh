@@ -6,6 +6,6 @@ cd ../phase3/tests/phpunit
 
 php phpunit.php --group Wikibase,Purtle
 
-cd -
+cd ../../extensions/Wikibase
 
 composer test
