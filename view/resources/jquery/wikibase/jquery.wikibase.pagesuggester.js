@@ -57,7 +57,7 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 			this._trigger( 'change' );
 		}
 
-		if( key === 'pageName' ) {
+		if( key === 'pageName' && this.element.val() !== value ) {
 			this.element.val( value );
 			this._trigger( 'change' );
 		}
