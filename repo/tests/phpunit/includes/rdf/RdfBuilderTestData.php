@@ -31,7 +31,7 @@ use Wikibase\Test\MockRepository;
 class RdfBuilderTestData {
 
 	const URI_BASE = 'http://acme.test/';
-	const URI_DATA = 'http://data.acme.test/';
+	const URI_DATA = 'https://data.acme.test/';
 
 	/**
 	 * @var EntityContentDataCodec|null
