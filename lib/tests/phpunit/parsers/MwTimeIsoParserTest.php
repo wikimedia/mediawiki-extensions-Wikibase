@@ -47,112 +47,112 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 		$valid = array(
 			// + dates
 			'13 billion years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				array( '+13000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'130 billion years CE' =>
-				array( '+0000130000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				array( '+130000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13000 billion years CE' =>
-				array( '+0013000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				array( '+13000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,000 billion years CE' =>
-				array( '+0013000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				array( '+13000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,000 million years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				array( '+13000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'13,800 million years CE' =>
-				array( '+0000013800000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $gregorian ),
+				array( '+13800000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $gregorian ),
 			'100 million years CE' =>
-				array( '+0000000100000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $gregorian ),
+				array( '+100000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $gregorian ),
 			'70 million years CE' =>
-				array( '+0000000070000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10Ma, $gregorian ),
+				array( '+70000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10Ma, $gregorian ),
 			'77 million years CE' =>
-				array( '+0000000077000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
+				array( '+77000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'13 million years CE' =>
-				array( '+0000000013000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
+				array( '+13000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'1 million years CE' =>
-				array( '+0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
+				array( '+1000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'100000 years CE' =>
-				array( '+0000000000100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $gregorian ),
+				array( '+100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $gregorian ),
 			'100,000 years CE' =>
-				array( '+0000000000100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $gregorian ),
+				array( '+100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $gregorian ),
 			'10000 years CE' =>
-				array( '+0000000000010000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $gregorian ),
+				array( '+10000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $gregorian ),
 			'99000 years CE' =>
-				array( '+0000000000099000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
+				array( '+99000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'99,000 years CE' =>
-				array( '+0000000000099000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
+				array( '+99000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'5. millennium' =>
-				array( '+0000000000005000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
+				array( '+5000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'55. millennium' =>
-				array( '+0000000000055000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
+				array( '+55000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $gregorian ),
 			'10. century' =>
-				array( '+0000000000001000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
+				array( '+1000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
 			'12. century' =>
-				array( '+0000000000001200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
+				array( '+1200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
 			'1980s' =>
-				array( '+0000000000001980-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
+				array( '+1980-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 			'2000s' =>
-				array( '+0000000000002000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
+				array( '+2000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $gregorian ),
 			'10s' =>
-				array( '+0000000000000010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
+				array( '+0010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
 			'12s' =>
-				array( '+0000000000000012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
+				array( '+0012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
 
 			// - dates
 			'13 billion years BCE' =>
-				array( '-0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
+				array( '-13000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
 			'130 billion years BCE' =>
-				array( '-0000130000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
+				array( '-130000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
 			'13000 billion years BCE' =>
-				array( '-0013000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
+				array( '-13000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
 			'13,000 billion years BCE' =>
-				array( '-0013000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
+				array( '-13000000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
 			'13,000 million years BCE' =>
-				array( '-0000013000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
+				array( '-13000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $julian ),
 			'13,800 million years BCE' =>
-				array( '-0000013800000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $julian ),
+				array( '-13800000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $julian ),
 			'100 million years BCE' =>
-				array( '-0000000100000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $julian ),
+				array( '-100000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100Ma, $julian ),
 			'70 million years BCE' =>
-				array( '-0000000070000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10Ma, $julian ),
+				array( '-70000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10Ma, $julian ),
 			'77 million years BCE' =>
-				array( '-0000000077000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
+				array( '-77000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
 			'13 million years BCE' =>
-				array( '-0000000013000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
+				array( '-13000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
 			'1 million years BCE' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
+				array( '-1000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
 			'100000 years BCE' =>
-				array( '-0000000000100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $julian ),
+				array( '-100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $julian ),
 			'100,000 years BCE' =>
-				array( '-0000000000100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $julian ),
+				array( '-100000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100ka, $julian ),
 			'10000 years BCE' =>
-				array( '-0000000000010000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $julian ),
+				array( '-10000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $julian ),
 			'99000 years BCE' =>
-				array( '-0000000000099000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
+				array( '-99000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
 			'99,000 years BCE' =>
-				array( '-0000000000099000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
+				array( '-99000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
 			'5. millennium BCE' =>
-				array( '-0000000000005000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
+				array( '-5000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
 			'55. millennium BCE' =>
-				array( '-0000000000055000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
+				array( '-55000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
 			'10. century BCE' =>
-				array( '-0000000000001000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
+				array( '-1000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
 			'12. century BCE' =>
-				array( '-0000000000001200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
+				array( '-1200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
 			'10s BCE' =>
-				array( '-0000000000000010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
+				array( '-0010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
 			'12s BCE' =>
-				array( '-0000000000000012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
+				array( '-0012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
 			// also parse BC
 			'5. millennium BC' =>
-				array( '-0000000000005000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
+				array( '-5000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
 			'55. millennium BC' =>
-				array( '-0000000000055000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
+				array( '-55000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_ka, $julian ),
 			'10. century BC' =>
-				array( '-0000000000001000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
+				array( '-1000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
 			'12. century BC' =>
-				array( '-0000000000001200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
+				array( '-1200-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_100a, $julian ),
 			'10s BC' =>
-				array( '-0000000000000010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
+				array( '-0010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
 			'12s BC' =>
-				array( '-0000000000000012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
+				array( '-0012-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10a, $julian ),
 		);
 
 		foreach ( $valid as $value => $expected ) {

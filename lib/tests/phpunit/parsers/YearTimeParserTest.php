@@ -67,32 +67,32 @@ class YearTimeParserTest extends StringValueParserTest {
 
 		$valid = array(
 			'1999' =>
-				array( '+0000000000001999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+1999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'2000' =>
-				array( '+0000000000002000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+2000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'2010' =>
-				array( '+0000000000002010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+2010-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'2000000' =>
-				array( '+0000000002000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
+				array( '+2000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $gregorian ),
 			'2000000000' =>
-				array( '+0000002000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
+				array( '+2000000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ga, $gregorian ),
 			'2000020000' =>
-				array( '+0000002000020000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $gregorian ),
+				array( '+2000020000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_10ka, $gregorian ),
 			'2000001' =>
-				array( '+0000000002000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+2000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'02000001' =>
-				array( '+0000000002000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
+				array( '+2000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 			'1' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
+				array( '+0001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
 			'000000001' =>
-				array( '+0000000000000001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
+				array( '+0001-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
 			'-1000000' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
+				array( '-1000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
 			'-1 000 000' =>
-				array( '-0000000001000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
+				array( '-1000000-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_Ma, $julian ),
 			// Digit grouping in the Indian numbering system
 			'-1,99,999' =>
-				array( '-0000000000199999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
+				array( '-199999-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $julian ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
