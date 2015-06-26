@@ -49,47 +49,47 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			 * @see Wikibase\Lib\Parsers\Test\YearTimeParserTest
 			 */
 			'1999' =>
-				array( '+0000000000001999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
+				array( '+1999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'2000' =>
-				array( '+0000000000002000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
+				array( '+2000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'2010' =>
-				array( '+0000000000002010-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
+				array( '+2010-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'1980 ' =>
-				array( '+0000000000001980-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
+				array( '+1980-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'1' =>
-				array( '+0000000000000001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
+				array( '+0001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 			'-1000000001' =>
-				array( '-0000001000000001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
+				array( '-1000000001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 			'+1000000001' =>
-				array( '+0000001000000001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
+				array( '+1000000001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 			'1BC' =>
-				array( '-0000000000000001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
+				array( '-0001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 			'1CE' =>
-				array( '+0000000000000001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
+				array( '+0001-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 			'1 1999 BC' =>
-				array( '-0000000000011999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
+				array( '-11999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
 			'1,000,000 BC' =>
-				array( '-0000000001000000-00-00T00:00:00Z', TimeValue::PRECISION_Ma, $julian ),
+				array( '-1000000-00-00T00:00:00Z', TimeValue::PRECISION_Ma, $julian ),
 
 			/**
 			 * @see Wikibase\Lib\Parsers\YearMonthTimeParser
 			 * @see Wikibase\Lib\Parsers\Test\YearMonthTimeParserTest
 			 */
 			'1 1999' =>
-				array( '+0000000000001999-01-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
+				array( '+1999-01-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
 			'March 1999' =>
-				array( '+0000000000001999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
+				array( '+1999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
 			'1999 March' =>
-				array( '+0000000000001999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
+				array( '+1999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
 
 			/**
 			 * @see ValueParsers\IsoTimestampParser
 			 * @see ValueParsers\Test\IsoTimestampParserTest
 			 */
 			'+0000000000000000-01-01T00:00:00Z (Gregorian)' =>
-				array( '+0000000000000000-01-01T00:00:00Z' ),
+				array( '+0000-01-01T00:00:00Z' ),
 			'+0-00-20T00:00:00Z' =>
-				array( '+0000000000000000-00-20T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+				array( '+0000-00-20T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'-10100-02-29' =>
 				array( '-10100-02-29T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'+2015-01-00T00:00:00Z' =>
@@ -106,40 +106,40 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			 * @see Wikibase\Lib\Parsers\Test\MWTimeIsoParserTest
 			 */
 			'13 billion years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga ),
+				array( '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga ),
 			'13,000 million years CE' =>
-				array( '+0000013000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga ),
+				array( '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga ),
 			'13,000 million years BCE' =>
-				array( '-0000013000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga, $julian ),
+				array( '-13000000000-00-00T00:00:00Z', TimeValue::PRECISION_Ga, $julian ),
 			'1980s' =>
-				array( '+0000000000001980-00-00T00:00:00Z', TimeValue::PRECISION_10a ),
+				array( '+1980-00-00T00:00:00Z', TimeValue::PRECISION_10a ),
 
 			/**
 			 * @see ValueParsers\PhpDateTimeParser
 			 * @see ValueParsers\Test\PhpDateTimeParserTest
 			 */
 			'10/10/10' =>
-				array( '+0000000000000010-10-10T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+				array( '+0010-10-10T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'1 July 2013' =>
-				array( '+0000000000002013-07-01T00:00:00Z' ),
+				array( '+2013-07-01T00:00:00Z' ),
 			'1 Jul 2013' =>
-				array( '+0000000000002013-07-01T00:00:00Z' ),
+				array( '+2013-07-01T00:00:00Z' ),
 			'1 Jul 2013 BC' =>
-				array( '-0000000000002013-07-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+				array( '-2013-07-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'1 Jul 2013CE' =>
-				array( '+0000000000002013-07-01T00:00:00Z' ),
+				array( '+2013-07-01T00:00:00Z' ),
 			'+1 Jul 2013' =>
-				array( '+0000000000002013-07-01T00:00:00Z' ),
+				array( '+2013-07-01T00:00:00Z' ),
 			'-1 Jul 2013' =>
-				array( '-0000000000002013-07-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+				array( '-2013-07-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'-1.11.111' =>
-				array( '-0000000000000111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+				array( '-0111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'1.11.111 BC' =>
-				array( '-0000000000000111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+				array( '-0111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'1,11,111 BC' =>
-				array( '-0000000000000111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+				array( '-0111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'1 11 111 BC' =>
-				array( '-0000000000000111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+				array( '-0111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 		);
 
 		$argLists = array();

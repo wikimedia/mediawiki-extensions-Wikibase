@@ -106,15 +106,15 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'time', new NumberValue( 7 ), false, 'TimeValue expected' ),
 
 			//time['calendar-model']
-			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, '1' ), false, 'calendar: too short' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://' . str_repeat('x', 256) ), false, 'calendar: too long' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), true, 'calendar: URL' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, ' http://acme.com/calendar ' ), false, 'calendar: untrimmed' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, ' javascript:alert(1)' ), false, 'calendar: bad URL' ),
+			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, '1' ), false, 'calendar: too short' ),
+			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://' . str_repeat('x', 256) ), false, 'calendar: too long' ),
+			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), true, 'calendar: URL' ),
+			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, ' http://acme.com/calendar ' ), false, 'calendar: untrimmed' ),
+			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, ' javascript:alert(1)' ), false, 'calendar: bad URL' ),
 
 			//precision to the second (currently not allowed)
-			array( 'time', new TimeValue( '+0000000000002013-06-06T11:22:33Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), false, 'time given to the second' ),
-			array( 'time', new TimeValue( '+0000000000002013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, 'http://acme.com/calendar' ), false, 'precision: second' ),
+			array( 'time', new TimeValue( '+2013-06-06T11:22:33Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), false, 'time given to the second' ),
+			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, 'http://acme.com/calendar' ), false, 'precision: second' ),
 
 			//time['time']
 			//NOTE: The below will fail with a IllegalValueExcpetion once the TimeValue constructor enforces the time format.

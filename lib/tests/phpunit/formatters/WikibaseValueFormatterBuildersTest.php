@@ -369,10 +369,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$this->setExpectedException( 'ValueFormatters\FormattingException' );
 
 		$timeValue = new TimeValue(
-			'+00000002013-01-01T00:00:00Z',
-			0,
-			0,
-			0,
+			'+2013-01-01T00:00:00Z',
+			0, 0, 0,
 			TimeValue::PRECISION_SECOND,
 			'http://nyan.cat/original.php'
 		);
@@ -411,10 +409,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$this->setExpectedException( 'ValueFormatters\FormattingException' );
 
 		$timeValue = new TimeValue(
-			'+00000002013-01-01T00:00:00Z',
-			0,
-			0,
-			0,
+			'+2013-01-01T00:00:00Z',
+			0, 0, 0,
 			TimeValue::PRECISION_SECOND,
 			'http://nyan.cat/original.php'
 		);
@@ -458,10 +454,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$this->setExpectedException( 'ValueFormatters\FormattingException' );
 
 		$timeValue = new TimeValue(
-			'+00000002013-01-01T00:00:00Z',
-			0,
-			0,
-			0,
+			'+2013-01-01T00:00:00Z',
+			0, 0, 0,
 			TimeValue::PRECISION_SECOND,
 			'http://nyan.cat/original.php'
 		);
