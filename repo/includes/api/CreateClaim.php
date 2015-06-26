@@ -69,7 +69,7 @@ class CreateClaim extends ModifyClaim {
 
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$statement = $entity->getStatements()->getFirstStatementWithGuid( $changeOp->getClaimGuid() );
+		$statement = $entity->getStatements()->getFirstStatementWithGuid( $changeOp->getStatementGuid() );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
