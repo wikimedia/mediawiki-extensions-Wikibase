@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_4bf468ca",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T13:31:25Z",
+      "side": 1,
+      "message": "This is probably a stupid nitpick, but I do not think this trivial thing should be a template. Just hardcode it. It can\u0027t change anyway.",
+      "revId": "e6364523694b897df5dafe46ec4a32af20407c1f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
