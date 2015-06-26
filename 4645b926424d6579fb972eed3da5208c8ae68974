@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_5a28b894",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-06-26T05:28:10Z",
+      "side": 1,
+      "message": "Just occured to me that this type of cloning causes issues when one uses the virtual proxy pattern. Not something to worry about here now though, as we are already doing this in other places and are not intent on using that pattern.",
+      "revId": "4645b926424d6579fb972eed3da5208c8ae68974",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
