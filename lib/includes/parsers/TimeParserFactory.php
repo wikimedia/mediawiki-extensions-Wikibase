@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Parsers;
 use Language;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\DispatchingValueParser;
+use ValueParsers\EraParser;
 use ValueParsers\IsoTimestampParser;
 use ValueParsers\MonthNameUnlocalizer;
 use ValueParsers\ParserOptions;

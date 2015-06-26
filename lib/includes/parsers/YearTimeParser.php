@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Parsers;
 use DataValues\TimeValue;
 use Language;
 use ValueParsers\CalendarModelParser;
+use ValueParsers\EraParser;
 use ValueParsers\IsoTimestampParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
@@ -65,7 +66,7 @@ class YearTimeParser extends StringValueParser {
 		list( $sign, $year ) = $this->eraParser->parse( $value );
 
 		// Negative dates usually don't have a month, assume non-digits are thousands separators
-		if( $sign === EraParser::BEFORE_CURRENT_ERA ) {
+		if ( $sign === '-' ) {
 			$separatorMap = $this->lang->separatorTransformTable();
 
 			if ( is_array( $separatorMap ) && array_key_exists( ',', $separatorMap ) ) {
