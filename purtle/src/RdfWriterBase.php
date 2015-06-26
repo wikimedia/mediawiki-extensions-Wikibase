@@ -145,8 +145,8 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $iri The base IRI
 	 */
 	public function prefix( $prefix, $iri ) {
-		if( $this->prefixesLocked ) {
-			throw new \LogicException("Prefixes can not be added after start()");
+		if ( $this->prefixesLocked ) {
+			throw new \LogicException( "Prefixes can not be added after start()" );
 		}
 		$this->prefixes[$prefix] = $iri;
 	}
@@ -297,7 +297,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 */
 	final public function drain() {
 		// we can drain after finish, but finish state is sticky
-		if( $this->state != self::STATE_FINISH ) {
+		if ( $this->state != self::STATE_FINISH ) {
 			$this->state( self::STATE_DOCUMENT );
 		}
 
@@ -515,17 +515,17 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @throws InvalidArgumentException
 	 */
 	final protected function state( $newState ) {
-		if( !isset( $this->transitionTable[$this->state][$newState] ) ) {
- 			throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . $newState  );
- 		}
- 		$action = $this->transitionTable[$this->state][$newState];
- 		if( $action !== true ) {
- 			if( is_string( $action ) ) {
- 				$this->write( $action );
- 			} else {
- 				$action();
- 			}
- 		}
+		if ( !isset( $this->transitionTable[$this->state][$newState] ) ) {
+			throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . $newState );
+		}
+		$action = $this->transitionTable[$this->state][$newState];
+		if ( $action !== true ) {
+			if ( is_string( $action ) ) {
+				$this->write( $action );
+			} else {
+				$action();
+			}
+		}
 
 		$this->state = $newState;
 	}
@@ -540,7 +540,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $base
 	 * @param string|null
 	 */
-	protected abstract function writeSubject( $base, $local = null );
+	abstract protected function writeSubject( $base, $local = null );
 
 	/**
 	 * Must be implemented to generate output that represents the association of a predicate
@@ -551,7 +551,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $base
 	 * @param string|null
 	 */
-	protected abstract function writePredicate( $base, $local = null );
+	abstract protected function writePredicate( $base, $local = null );
 
 	/**
 	 * Must be implemented to generate output that represents a resource used as the object
@@ -562,7 +562,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $base
 	 * @param string|null
 	 */
-	protected abstract function writeResource( $base, $local = null );
+	abstract protected function writeResource( $base, $local = null );
 
 	/**
 	 * Must be implemented to generate output that represents a text used as the object
@@ -571,7 +571,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $text the text to be placed in the output
 	 * @param string|null $language the language the text is in
 	 */
-	protected abstract function writeText( $text, $language );
+	abstract protected function writeText( $text, $language );
 
 	/**
 	 * Must be implemented to generate output that represents a (typed) literal used as the object
@@ -583,7 +583,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $typeBase
 	 * @param string|null $typeLocal
 	 */
-	protected abstract function writeValue( $value, $typeBase, $typeLocal = null );
+	abstract protected function writeValue( $value, $typeBase, $typeLocal = null );
 
 	/**
 	 * Perform any expansion (shorthand to qname, qname to IRI) desired

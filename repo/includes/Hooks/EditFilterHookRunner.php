@@ -116,7 +116,7 @@ class EditFilterHookRunner {
 	 * @return IContextSource
 	 */
 	private function getContextForEditFilter( EntityId $entityId = null, $entityType ) {
-		if( $entityId !== null ) {
+		if ( $entityId !== null ) {
 			$title = $this->titleLookup->getTitleForId( $entityId );
 			$context = clone $this->context;
 		} else {

@@ -54,7 +54,7 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$enAliases = array( 'en-alias1', 'en-alias2', 'en-alias3' );
-		$existingEnAliases = array ( 'en-existingAlias1', 'en-existingAlias2' );
+		$existingEnAliases = array( 'en-existingAlias1', 'en-existingAlias2' );
 		$item = ItemContent::newEmpty();
 		$entity = $item->getEntity();
 		$entity->setAliases( 'en', $existingEnAliases );

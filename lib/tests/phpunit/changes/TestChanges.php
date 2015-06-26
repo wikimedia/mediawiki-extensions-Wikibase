@@ -319,7 +319,6 @@ final class TestChanges {
 			$entityList[] = $entity;
 		}
 
-
 		return $entityList;
 	}
 

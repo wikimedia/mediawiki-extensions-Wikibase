@@ -67,7 +67,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityHandler
 	 */
-	protected abstract function getHandler( SettingsArray $settings = null );
+	abstract protected function getHandler( SettingsArray $settings = null );
 
 	/**
 	 * @param Entity|null $entity
@@ -99,7 +99,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return Entity
 	 */
-	protected abstract function newEntity( EntityId $id = null );
+	abstract protected function newEntity( EntityId $id = null );
 
 	/**
 	 * Returns EntityContents that can be handled by the EntityHandler deriving class.
@@ -335,7 +335,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $handler->getEntityType(), $entity->getType(), 'entity type' );
 	}
 
-	public abstract function entityIdProvider();
+	abstract public function entityIdProvider();
 
 	/**
 	 * @dataProvider entityIdProvider

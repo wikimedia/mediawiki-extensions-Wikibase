@@ -121,7 +121,7 @@ class YearMonthTimeParserTest extends StringValueParserTest {
 
 		foreach ( $valid as $value => $expected ) {
 			// $time, $timezone, $before, $after, $precision, $calendarModel
-			$expected = new TimeValue( $expected[0], $expected[1], $expected[2], $expected[3], $expected[4], $expected[5]  );
+			$expected = new TimeValue( $expected[0], $expected[1], $expected[2], $expected[3], $expected[4], $expected[5] );
 			$argLists[] = array( (string)$value, $expected );
 		}
 

@@ -59,7 +59,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOp = new ChangeOpStatementRank( $guid, $rank );
 
-		$args[] = array ( $item, $changeOp, $rank );
+		$args[] = array( $item, $changeOp, $rank );
 
 		return $args;
 	}

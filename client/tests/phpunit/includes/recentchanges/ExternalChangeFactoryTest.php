@@ -32,7 +32,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function newFromRecentChangeProvider() {
-		$rev = new RevisionData ( 'Cat', 5, 92, 90, '20130819111741',
+		$rev = new RevisionData( 'Cat', 5, 92, 90, '20130819111741',
 			array( 'key' => 'wikibase-comment-update' ), 'testrepo'
 		);
 

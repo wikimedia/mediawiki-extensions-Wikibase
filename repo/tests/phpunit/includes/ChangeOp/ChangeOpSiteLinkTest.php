@@ -81,7 +81,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$args[] = array(
 			$item->copy(),
 			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) ),
-			array_merge( $existingSiteLinks, array ( $enSiteLink ) )
+			array_merge( $existingSiteLinks, array( $enSiteLink ) )
 		);
 
 		// deleting sitelink

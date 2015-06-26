@@ -71,10 +71,10 @@ class EditEntityActionTest extends ActionTestCase {
 			return;
 		}
 
-		for ( $i = abs($ofs); $i > 0; $i -= 1 ) {
+		for ( $i = abs( $ofs ); $i > 0; $i -= 1 ) {
 			$rev = $rev->getPrevious();
 			if ( !$rev ) {
-				throw new MWException( "Page " . $page->getTitle()->getPrefixedDBkey() . " does not have " . ( abs($ofs) +1 ) . " revisions" );
+				throw new MWException( "Page " . $page->getTitle()->getPrefixedDBkey() . " does not have " . ( abs( $ofs ) +1 ) . " revisions" );
 			}
 		}
 
@@ -107,7 +107,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //2: // undo form with legal undo
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => 0, // current revision
 				),
 				false,    // post
@@ -118,7 +118,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //3: // undo form with legal undo and undoafter
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => 0, // current revision
 					'undoafter' => -1, // previous revision
 				),
@@ -130,7 +130,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //4: // undo form with illegal undo == undoafter
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => -1, // previous revision
 					'undoafter' => -1, // previous revision
 				),
@@ -142,7 +142,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //5: // undo form with legal undoafter
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undoafter' => -1, // previous revision
 				),
 				false,    // post
@@ -153,7 +153,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //6: // undo form with illegal undo
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => -2, // first revision
 				),
 				false,    // post
@@ -164,7 +164,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //7: // undo form with illegal undoafter
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undoafter' => 0, // current revision
 				),
 				false,    // post
@@ -176,7 +176,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //8: // restore form with legal restore
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'restore' => -1, // previous revision
 				),
 				false,    // post
@@ -187,7 +187,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //9: // restore form with illegal restore
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'restore' => 0, // current revision
 				),
 				false,    // post
@@ -199,7 +199,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //10: // undo bad revision
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => 12345678, // bad revision
 				),
 				false,    // post
@@ -210,7 +210,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //11: // undoafter bad revision with good undo
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => 0, // current revision
 					'undoafter' => 12345678, // bad revision
 				),
@@ -222,7 +222,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //12: // undoafter bad revision
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undoafter' => 12345678, // bad revision
 				),
 				false,    // post
@@ -233,7 +233,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //13: // restore bad revision
 				'edit',   // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'restore' => 12345678, // bad revision
 				),
 				false,    // post
@@ -245,7 +245,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //14: // non-existing page
 				'edit',   // action
 				Title::newFromText( "XXX", $this->getItemNamespace() ),
-				array(    // params
+				array( // params
 					'restore' => array( "London", 0 ), // ok revision
 				),
 				false,    // post
@@ -256,7 +256,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //15: // undo revision from different pages
 				'edit',   // action class
 				"Berlin", // handle
-				array(    // params
+				array( // params
 					'undo' => array( "London", 0 ), // wrong page
 				),
 				false,    // post
@@ -267,7 +267,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //16: // undoafter revision from different pages
 				'edit',   // action class
 				"Berlin", // handle
-				array(    // params
+				array( // params
 					'undoafter' => array( "London", -1 ), // wrong page
 				),
 				false,    // post
@@ -278,7 +278,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //17: // restore revision from different pages
 				'edit',   // action class
 				"Berlin", // handle
-				array(    // params
+				array( // params
 					'restore' => array( "London", -1 ), // wrong page
 				),
 				false,    // post
@@ -293,7 +293,7 @@ class EditEntityActionTest extends ActionTestCase {
 			$cases[] = array( //18: // undo form with legal undo
 				'edit',   // action
 				'Berlin2', // handle
-				array(    // params
+				array( // params
 					'undo' => 0, // current revision
 				),
 				false,    // post
@@ -318,7 +318,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //0: submit with legal undo, but don't post
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => 0,     // current revision
@@ -334,7 +334,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //1: submit with legal undo, but omit wpSave
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpEditToken' => true, // automatic token
 					'undo' => 0,     // current revision
 				),
@@ -350,7 +350,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //2: // undo form with legal undo
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => 0,     // current revision
@@ -366,7 +366,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //3: // undo form with legal undo and undoafter
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => 0, // current revision
@@ -383,7 +383,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //4: // undo form with illegal undo == undoafter
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => -1, // previous revision
@@ -397,7 +397,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //5: // undo form with legal undoafter
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undoafter' => -1, // previous revision
@@ -413,7 +413,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //6: // undo form with illegal undo
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => -2, // first revision
@@ -426,7 +426,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //7: // undo form with illegal undoafter
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undoafter' => 0, // current revision
@@ -440,7 +440,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //8: // restore form with legal restore
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'restore' => -1, // previous revision
@@ -456,7 +456,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //9: // restore form with illegal restore
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'restore' => 0, // current revision
@@ -470,7 +470,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //10: // undo bad revision
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => 12345678, // bad revision
@@ -483,7 +483,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //11: // undoafter bad revision with good undo
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => 0, // current revision
@@ -497,7 +497,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //12: // undoafter bad revision
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undoafter' => 12345678, // bad revision
@@ -510,7 +510,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //13: // restore bad revision
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'restore' => 12345678, // bad revision
@@ -524,7 +524,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //14: // non-existing page
 				'submit', // action
 				Title::newFromText( "XXX", $this->getItemNamespace() ),
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'restore' => array( "London", 0 ), // ok revision
@@ -537,7 +537,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //15: // undo revision from different pages
 				'submit', // action
 				"Berlin", // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => array( "London", 0 ), // wrong page
@@ -550,7 +550,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //16: // undoafter revision from different pages
 				'submit', // action
 				"Berlin", // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undoafter' => array( "London", -1 ), // wrong page
@@ -563,7 +563,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //17: // restore revision from different pages
 				'submit', // action
 				"Berlin", // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'restore' => array( "London", -1 ), // wrong page
@@ -577,7 +577,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //18: submit with legal undo, but wrong token
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => 'xyz', // bad token
 					'undo' => 0,     // current revision
@@ -591,7 +591,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //19: submit without undo/undoafter/restore
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // bad token
 				),

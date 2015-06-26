@@ -95,7 +95,7 @@ class GetEntities extends ApiWikibase {
 		$entityIds = $this->getEntityIdsFromParams( $params );
 		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects );
 
-		foreach( $entityRevisions as $sourceEntityId => $entityRevision ) {
+		foreach ( $entityRevisions as $sourceEntityId => $entityRevision ) {
 			$this->handleEntity( $sourceEntityId, $entityRevision, $params );
 		}
 
@@ -125,11 +125,11 @@ class GetEntities extends ApiWikibase {
 	 */
 	private function getEntityIdsFromIdParam( $params ) {
 		$ids = array();
-		if( isset( $params['ids'] ) ) {
-			foreach( $params['ids'] as $id ) {
+		if ( isset( $params['ids'] ) ) {
+			foreach ( $params['ids'] as $id ) {
 				try {
 					$ids[] = $this->getIdParser()->parse( $id );
-				} catch( EntityIdParsingException $e ) {
+				} catch ( EntityIdParsingException $e ) {
 					$this->dieError( "Invalid id: $id", 'no-such-entity' );
 				}
 			}
@@ -169,7 +169,7 @@ class GetEntities extends ApiWikibase {
 	 * @param array $missingItems Array of arrays, Each internal array has a key 'site' and 'title'
 	 */
 	private function addMissingItemsToResult( $missingItems ) {
-		foreach( $missingItems as $missingItem ) {
+		foreach ( $missingItems as $missingItem ) {
 			$this->getResultBuilder()->addMissingEntity( null, $missingItem );
 		}
 	}
@@ -274,7 +274,7 @@ class GetEntities extends ApiWikibase {
 		} else {
 			$languages = $params['languages'];
 		}
-		if( $params['ungroupedlist'] ) {
+		if ( $params['ungroupedlist'] ) {
 			$options->setOption(
 					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
 					array()

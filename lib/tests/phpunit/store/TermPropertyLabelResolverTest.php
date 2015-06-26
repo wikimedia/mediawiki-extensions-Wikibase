@@ -128,11 +128,11 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 			array( // #1
 				'de',   // lang
 				$terms, // terms
-				array(  // labels
+				array( // labels
 					'Eins',
 					'Zwei'
 				),
-				array(  // expected
+				array( // expected
 					'Eins' => new PropertyId( 'P1' ),
 					'Zwei' => new PropertyId( 'P2' ),
 				)
@@ -140,18 +140,18 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 			array( // #2
 				'de',   // lang
 				$terms, // terms
-				array(  // labels
+				array( // labels
 					'Drei',
 					'Vier'
 				),
-				array(  // expected
+				array( // expected
 					'Drei' => new PropertyId( 'P3' ),
 				)
 			),
 			array( // #3
 				'en',   // lang
 				$terms, // terms
-				array(  // labels
+				array( // labels
 					'Eins',
 					'Zwei'
 				),
@@ -160,13 +160,13 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 			array( // #4
 				'en',   // lang
 				$terms, // terms
-				array(  // labels
+				array( // labels
 					'One',
 					'Two',
 					'Three',
 					'Four'
 				),
-				array(  // expected
+				array( // expected
 					'One' => new PropertyId( 'P1' ),
 				)
 			),

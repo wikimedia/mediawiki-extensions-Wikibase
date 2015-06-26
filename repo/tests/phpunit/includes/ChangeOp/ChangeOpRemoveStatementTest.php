@@ -56,7 +56,7 @@ class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
 		$guid = $statement->getGuid();
 		$changeOp = new ChangeOpRemoveStatement( $guid );
 		$expected = null;
-		$args[] = array ( $item, $changeOp, $expected );
+		$args[] = array( $item, $changeOp, $expected );
 
 		return $args;
 	}

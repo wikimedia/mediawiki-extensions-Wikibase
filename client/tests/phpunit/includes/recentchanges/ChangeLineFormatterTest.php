@@ -73,11 +73,11 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 			$changesList->recentChangesFlags( array( 'wikibase-edit' => true ), '' )
 		);
 
-		foreach( $expectedTags as $key => $tag ) {
+		foreach ( $expectedTags as $key => $tag ) {
 			$this->assertTag( $tag, $formattedLine, $key );
 		}
 
-		foreach( $patterns as $pattern ) {
+		foreach ( $patterns as $pattern ) {
 			$this->assertRegExp( $pattern, $formattedLine );
 		}
 	}

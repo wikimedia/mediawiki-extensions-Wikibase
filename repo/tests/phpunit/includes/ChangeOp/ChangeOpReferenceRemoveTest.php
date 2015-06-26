@@ -55,7 +55,7 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 		$statement->getReferences()->addReference( $newReference );
 		$referenceHash = $newReference->getHash();
 		$changeOp = new ChangeOpReferenceRemove( $guid, $referenceHash );
-		$args[ 'Removing a single reference' ] = array ( $item, $changeOp, $referenceHash );
+		$args[ 'Removing a single reference' ] = array( $item, $changeOp, $referenceHash );
 
 		$item = $this->newItemWithClaim( 'q346', $snak );
 		$statements = $item->getStatements()->toArray();
@@ -70,7 +70,7 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 		$references->addReference( $newReference );
 		$referenceHash = $newReference->getHash();
 		$changeOp = new ChangeOpReferenceRemove( $guid, $referenceHash );
-		$args[ 'Removing references that have the same hash' ] = array ( $item, $changeOp, $referenceHash );
+		$args[ 'Removing references that have the same hash' ] = array( $item, $changeOp, $referenceHash );
 
 		return $args;
 	}

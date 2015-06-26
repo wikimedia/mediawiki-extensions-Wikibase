@@ -76,7 +76,7 @@ class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testBeginAtomicSection() {
 		$connection = $this->getConnectionMock();
-		$lb = $this->getLoadBalancerMock( );
+		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->exactly( 2 ) )
 			->method( 'getConnection' )
@@ -97,7 +97,7 @@ class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testCommitAtomicSection() {
 		$connection = $this->getConnectionMock();
-		$lb = $this->getLoadBalancerMock( );
+		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'reuseConnection' )
@@ -114,7 +114,7 @@ class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRollbackAtomicSection() {
 		$connection = $this->getConnectionMock();
-		$lb = $this->getLoadBalancerMock( );
+		$lb = $this->getLoadBalancerMock();
 
 		$lb->expects( $this->once() )
 			->method( 'reuseConnection' )

@@ -162,7 +162,7 @@ class TermSearchKeyBuilder {
 					$this->report( "Unable to calculate search key for " . $row->term_text );
 					$cError += 1;
 				} else {
-					$c+= 1;
+					$c += 1;
 				}
 
 				$rowId = $row->term_row_id;

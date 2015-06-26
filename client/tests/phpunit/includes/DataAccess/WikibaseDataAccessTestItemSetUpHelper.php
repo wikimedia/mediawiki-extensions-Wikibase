@@ -64,15 +64,15 @@ class WikibaseDataAccessTestItemSetUpHelper {
 
 		$qualifierSnak1 = $this->getTestSnak(
 			new PropertyId( 'P342' ),
-			new StringValue( 'A qualifier Snak')
+			new StringValue( 'A qualifier Snak' )
 		);
 		$qualifierSnak2 = $this->getTestSnak(
 			new PropertyId( 'P342' ),
-			new StringValue( 'Moar qualifiers')
+			new StringValue( 'Moar qualifiers' )
 		);
 		$referenceSnak = $this->getTestSnak(
 			new PropertyId( 'P342' ),
-			new StringValue( 'A reference')
+			new StringValue( 'A reference' )
 		);
 
 		$statement1->setQualifiers(

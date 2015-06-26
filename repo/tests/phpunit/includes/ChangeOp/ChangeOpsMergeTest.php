@@ -66,7 +66,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 						}
 					}
 					return Result::newSuccess();
-				} ) );
+			} ) );
 
 		$constraintProvider = $this->getMockBuilder( 'Wikibase\Validators\EntityConstraintProvider' )
 			->disableOriginalConstructor()
@@ -343,7 +343,6 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$bigItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'bar' );
-
 
 		$smallerItem = new Item();
 		$smallerItem->getFingerprint()->setLabel( 'en', 'toLabel' );
