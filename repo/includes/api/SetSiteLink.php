@@ -123,7 +123,7 @@ class SetSiteLink extends ModifyEntity {
 			$site = $sites->getSite( $linksite );
 
 			if ( $site === false ) {
-				$this->dieError( 'The supplied site identifier was not recognized' , 'not-recognized-siteid' );
+				$this->dieError( 'The supplied site identifier was not recognized', 'not-recognized-siteid' );
 			}
 
 			if ( isset( $params['linktitle'] ) ) {

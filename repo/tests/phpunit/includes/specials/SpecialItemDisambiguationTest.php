@@ -30,7 +30,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	/**
 	 * @return ItemDisambiguation
 	 */
-	private function getMockItemDisambiguation( ) {
+	private function getMockItemDisambiguation() {
 		$mock = $this->getMockBuilder( 'Wikibase\ItemDisambiguation' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -137,7 +137,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		$request = new FauxRequest( $data );
 
 		list( $output, ) = $this->executeSpecialPage( $sub, $request, $languageCode );
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 	}

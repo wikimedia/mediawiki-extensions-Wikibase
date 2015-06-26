@@ -144,7 +144,7 @@ class SnakHtmlGenerator {
 	 * @return string
 	 */
 	private function getPropertyNotFoundMessage() {
-		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
+		return wfMessage( 'wikibase-snakformat-propertynotfound' )->parse();
 	}
 
 }

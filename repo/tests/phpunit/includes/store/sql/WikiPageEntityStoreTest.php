@@ -289,7 +289,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		/* @var EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
 
-		$anonUser = User::newFromId(0);
+		$anonUser = User::newFromId( 0 );
 		$anonUser->setName( '127.0.0.1' );
 		$user = User::newFromName( "EditEntityTestUser" );
 		$item = new Item();
@@ -514,7 +514,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider simpleEntityParameterProvider
 	 */
-	public function testDeleteEntity( Entity $entity  ) {
+	public function testDeleteEntity( Entity $entity ) {
 		/* @var WikiPageEntityStore $store */
 		/* @var EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();

@@ -44,7 +44,7 @@ abstract class SpecialPageTestBase extends MediaWikiTestCase {
 		}
 
 		if ( $obLevel !== $this->obLevel ) {
-			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test.");
+			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test." );
 		}
 
 		parent::tearDown();
@@ -55,7 +55,7 @@ abstract class SpecialPageTestBase extends MediaWikiTestCase {
 	 *
 	 * @return SpecialPage
 	 */
-	protected abstract function newSpecialPage();
+	abstract protected function newSpecialPage();
 
 	/**
 	 * @param string $subPage The subpage parameter to call the page with

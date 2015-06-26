@@ -133,7 +133,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	public function testGetContentHandlerForType() {
 		$factory = $this->newFactory();
 
-		foreach ( $factory->getEntityTypes() as $type  ) {
+		foreach ( $factory->getEntityTypes() as $type ) {
 			$model = $factory->getContentModelForType( $type );
 			$handler = $factory->getContentHandlerForType( $type );
 

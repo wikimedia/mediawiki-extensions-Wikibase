@@ -58,7 +58,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	/**
 	 * @return RdfWriter
 	 */
-	protected abstract function newWriter();
+	abstract protected function newWriter();
 
 	public function testTriples() {
 		$writer = $this->newWriter();

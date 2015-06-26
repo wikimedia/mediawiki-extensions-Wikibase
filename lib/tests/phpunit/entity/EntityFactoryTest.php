@@ -35,10 +35,10 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 		$tests = array();
 
 		foreach ( $this->getEntityFactory()->getEntityTypes() as $type ) {
-			$tests[] = array ( $type, true );
+			$tests[] = array( $type, true );
 		}
 
-		$tests[] = array ( 'this-does-not-exist', false );
+		$tests[] = array( 'this-does-not-exist', false );
 
 		return $tests;
 	}

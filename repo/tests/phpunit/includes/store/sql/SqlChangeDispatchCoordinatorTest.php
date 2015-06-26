@@ -55,13 +55,13 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 			return $wikiDB === 'zhwikidb';
 		} );
 
-		$coordinator->setEngageClientLockOverride(  function( $wikiDB ) {
+		$coordinator->setEngageClientLockOverride( function( $wikiDB ) {
 			return $wikiDB !== 'zhwikidb';
-		}  );
+		} );
 
-		$coordinator->setReleaseClientLockOverride(  function( $wikiDB ) {
+		$coordinator->setReleaseClientLockOverride( function( $wikiDB ) {
 			return true;
-		}  );
+		} );
 
 		return $coordinator;
 	}

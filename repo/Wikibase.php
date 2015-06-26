@@ -55,7 +55,7 @@ $GLOBALS['wgValueParsers'] = array();
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
-	include_once( __DIR__ . '/../lib/WikibaseLib.php' );
+	include_once ( __DIR__ . '/../lib/WikibaseLib.php' );
 }
 
 if ( !defined( 'WBL_VERSION' ) ) {
@@ -63,15 +63,15 @@ if ( !defined( 'WBL_VERSION' ) ) {
 }
 
 if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-	include_once( __DIR__ . '/../view/WikibaseView.php' );
+	include_once ( __DIR__ . '/../view/WikibaseView.php' );
 }
 
 if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
-    throw new Exception( 'Wikibase depends on WikibaseView.' );
+	throw new Exception( 'Wikibase depends on WikibaseView.' );
 }
 
 if ( !defined( 'PURTLE_VERSION' ) ) {
-	include_once( __DIR__ . '/../purtle/Purtle.php' );
+	include_once ( __DIR__ . '/../purtle/Purtle.php' );
 }
 
 if ( !defined( 'PURTLE_VERSION' ) ) {
@@ -237,12 +237,12 @@ call_user_func( function() {
 	$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
 
 	$wgWBRepoSettings = array_merge(
-		require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
-		require( __DIR__ . '/config/Wikibase.default.php' )
+		require ( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
+		require ( __DIR__ . '/config/Wikibase.default.php' )
 	);
 
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-		include_once( __DIR__ . '/config/Wikibase.experimental.php' );
+		include_once ( __DIR__ . '/config/Wikibase.experimental.php' );
 	}
 
 } );

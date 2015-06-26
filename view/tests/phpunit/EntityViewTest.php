@@ -27,7 +27,7 @@ abstract class EntityViewTest extends MediaWikiLangTestCase {
 	 *
 	 * @return Entity
 	 */
-	protected abstract function makeEntity( EntityId $id, array $statements = array() );
+	abstract protected function makeEntity( EntityId $id, array $statements = array() );
 
 	/**
 	 * Generates a prefixed entity ID based on a numeric ID.
@@ -36,7 +36,7 @@ abstract class EntityViewTest extends MediaWikiLangTestCase {
 	 *
 	 * @return EntityId
 	 */
-	protected abstract function makeEntityId( $numericId );
+	abstract protected function makeEntityId( $numericId );
 
 	/**
 	 * @param Statement[] $statements
@@ -70,6 +70,6 @@ abstract class EntityViewTest extends MediaWikiLangTestCase {
 		$this->assertRegExp( '/id="wb-[a-z]+-' . $entityId . '"/', $output );
 	}
 
-	public abstract function provideTestGetHtml();
+	abstract public function provideTestGetHtml();
 
 }

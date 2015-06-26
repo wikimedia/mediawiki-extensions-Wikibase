@@ -56,7 +56,7 @@ define( 'WBC_DIR', __DIR__ );
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for WikibaseClient to work.
 if ( !defined( 'WBL_VERSION' ) ) {
-	include_once( __DIR__ . '/../lib/WikibaseLib.php' );
+	include_once ( __DIR__ . '/../lib/WikibaseLib.php' );
 }
 
 if ( !defined( 'WBL_VERSION' ) ) {
@@ -121,7 +121,7 @@ call_user_func( function() {
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
 
 	// extension hooks
-	$wgHooks['WikibaseDeleteData'][]			= '\Wikibase\ClientHooks::onWikibaseDeleteData';
+	$wgHooks['WikibaseDeleteData'][] = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(
@@ -149,18 +149,18 @@ call_user_func( function() {
 	);
 
 	// Special page registration
-	$wgSpecialPages['UnconnectedPages']						= 'Wikibase\Client\Specials\SpecialUnconnectedPages';
+	$wgSpecialPages['UnconnectedPages'] = 'Wikibase\Client\Specials\SpecialUnconnectedPages';
 
 	// Resource loader modules
-	$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
+	$wgResourceModules = array_merge( $wgResourceModules, include ( "$dir/resources/Resources.php" ) );
 
 	$wgWBClientSettings = array_merge(
-		require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
-		require( __DIR__ . '/config/WikibaseClient.default.php' )
+		require ( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
+		require ( __DIR__ . '/config/WikibaseClient.default.php' )
 	);
 
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-		include_once( $dir . 'config/WikibaseClient.experimental.php' );
+		include_once ( $dir . 'config/WikibaseClient.experimental.php' );
 	}
 
 	$wgRecentChangesFlags['wikibase-edit'] = array(

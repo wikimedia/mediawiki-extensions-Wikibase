@@ -142,7 +142,7 @@ class StatementGroupListView {
 	private function getHtmlForStatementListView( array $statements, $addStatementHtml ) {
 		$statementViewsHtml = '';
 
-		foreach( $statements as $statement ) {
+		foreach ( $statements as $statement ) {
 			$statementViewsHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 				$statement,
 				$this->editSectionGenerator->getStatementEditSection(

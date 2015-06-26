@@ -32,7 +32,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			->will( $this->returnValue( array( 'acceptedlanguage' ) ) );
 		$termsLanguages->expects( $this->any() )
 			->method( 'hasLanguage' )
-			->will( $this->returnCallback( function( $code) {
+			->will( $this->returnCallback( function( $code ) {
 				return $code === 'acceptedlanguage';
 			} ) );
 
@@ -64,7 +64,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 

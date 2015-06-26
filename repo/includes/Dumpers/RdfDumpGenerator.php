@@ -166,7 +166,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			EntityPrefetcher $entityPrefetcher
 	) {
 		$rdfWriter = self::getRdfWriter( $format );
-		if( !$rdfWriter ) {
+		if ( !$rdfWriter ) {
 			throw new MWException( "Unknown format: $format" );
 		}
 
