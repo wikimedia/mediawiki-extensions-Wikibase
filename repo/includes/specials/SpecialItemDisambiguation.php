@@ -135,13 +135,13 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$searchInteractor->setLimit( $this->limit );
 			$searchInteractor->setIsCaseSensitive( true );
 			$searchInteractor->setIsPrefixSearch( false );
-			$searchInteractor->setUseLanguageFallback( false );
-			// TODO also match aliases here T45962
+			$searchInteractor->setUseLanguageFallback( true );
+
 			$searchResult = $searchInteractor->searchForEntities(
 				$label,
 				$languageCode,
 				'item',
-				array( TermIndexEntry::TYPE_LABEL )
+				array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS )
 			);
 
 			if ( 0 < count( $searchResult ) ) {
