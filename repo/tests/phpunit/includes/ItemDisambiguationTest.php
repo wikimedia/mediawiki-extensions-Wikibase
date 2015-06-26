@@ -61,7 +61,7 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 		);
 		$cases['No Results'] = array( array(), $matchers );
 
-		// One Normal Result
+		// One label match in the display language
 		$matchers['matches'] = array(
 			'tag' => 'ul',
 			'children' => array( 'count' => 1 ),
@@ -71,16 +71,59 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 			'tag' => 'li',
 			'content' => 'regexp:/^Q1[^1]/s',
 		);
+		$matchers['one/label'] = array(
+			'tag' => 'span',
+			'content' => 'Foo',
+			'attributes' => array( 'class' => 'wb-itemlink-label' ),
+		);
 		$matchers['one/desc'] = array(
 			'tag' => 'span',
 			'content' => 'DisplayDescription',
 			'attributes' => array( 'class' => 'wb-itemlink-description' ),
 		);
-		$cases['One Normal Result'] = array(
+		$cases['One label match in the display language'] = array(
+			array(
+				new TermSearchResult(
+					new Term( 'en', 'Foo' ),
+					'label',
+					new ItemId( 'Q1' ),
+					new Term( 'en', 'Foo' ),
+					new Term( 'en', 'DisplayDescription' )
+				),
+			),
+			$matchers
+		);
+
+		// One alias match of another language
+		$matchers['matches'] = array(
+			'tag' => 'ul',
+			'children' => array( 'count' => 1 ),
+			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
+		);
+		$matchers['one'] = array(
+			'tag' => 'li',
+			'content' => 'regexp:/^Q1[^1]/s',
+		);
+		$matchers['one/label'] = array(
+			'tag' => 'span',
+			'content' => 'DisplayLabel',
+			'attributes' => array( 'class' => 'wb-itemlink-label' ),
+		);
+		$matchers['one/desc'] = array(
+			'tag' => 'span',
+			'content' => 'DisplayDescription',
+			'attributes' => array( 'class' => 'wb-itemlink-description' ),
+		);
+		$matchers['one/match'] = array(
+			'tag' => 'span',
+			'content' => 'regexp:/Foo/s',
+			'attributes' => array( 'class' => 'wb-itemlink-match' ),
+		);
+		$cases['One alias match of another language'] = array(
 			array(
 				new TermSearchResult(
 					new Term( 'de', 'Foo' ),
-					'label',
+					'alias',
 					new ItemId( 'Q1' ),
 					new Term( 'en', 'DisplayLabel' ),
 					new Term( 'en', 'DisplayDescription' )
@@ -90,6 +133,7 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 		);
 
 		// Two Results - (1 - No Label in display Language, 2 - No Description)
+		unset( $matchers['one/label'] );
 		$matchers['matches'] = array(
 			'tag' => 'ul',
 			'children' => array( 'count' => 2 ),
@@ -99,24 +143,24 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 			'tag' => 'li',
 			'content' => 'regexp:/^Q2[^1]/s',
 		);
-		$matchers['one/label'] = array(
-			'tag' => 'span',
-			'content' => 'Foo',
-			'attributes' => array( 'class' => 'wb-itemlink-query-lang', 'lang' => 'de' ),
-		);
 		$matchers['one/desc'] = array(
 			'tag' => 'span',
 			'content' => 'DisplayDescription',
 			'attributes' => array( 'class' => 'wb-itemlink-description' ),
 		);
+		$matchers['one/match'] = array(
+			'tag' => 'span',
+			'content' => 'regexp:/Foo/s',
+			'attributes' => array( 'class' => 'wb-itemlink-match' ),
+		);
 		$matchers['two'] = array(
 			'tag' => 'li',
 			'content' => 'regexp:/^Q3[^1]/s',
 		);
-		$matchers['two/desc'] = array(
+		$matchers['two/match'] = array(
 			'tag' => 'span',
-			'content' => 'Q3',
-			'attributes' => array( ),
+			'content' => 'regexp:/Foo/s',
+			'attributes' => array( 'class' => 'wb-itemlink-match' ),
 		);
 		$cases['Two Results'] = array(
 			array(
