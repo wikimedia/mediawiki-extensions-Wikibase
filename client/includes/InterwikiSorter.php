@@ -83,11 +83,11 @@ class InterwikiSorter {
 			return 0;
 		}
 
-		// If we encounter an unknown language, which may happen if the sort table is not updated, we move it to the bottom.
-		$a = array_key_exists( $a, $this->sortOrder ) ? $this->sortOrder[$a] : 999999;
-		$b = array_key_exists( $b, $this->sortOrder ) ? $this->sortOrder[$b] : 999999;
+		$a_index = array_key_exists( $a, $this->sortOrder ) ? $this->sortOrder[$a] : null;
+		$b_index = array_key_exists( $b, $this->sortOrder ) ? $this->sortOrder[$b] : null;
 
-		return ( $a > $b ) ? 1 : ( ( $a < $b ) ? -1: 0 );
+		// If we encounter an unknown language, which may happen if the sort table is not updated, we list it alphabetically.
+		return ( ( is_null( $a_index ) || is_null( $b_index ) ) ? strcmp( $a, $b ) : $a_index - $b_index );
 	}
 
 	/**
