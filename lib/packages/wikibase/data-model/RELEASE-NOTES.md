@@ -370,7 +370,7 @@ No description will be shown as part of its entry on Special:Version.
 
 #### Deprecations
 
-* Deprecated `Property::newEmpty`
+* Deprecated `Property::newEmpty` in favor of `Property::newFromType`
 * Deprecated old fingerprint related methods in `Entity`:
     * setLabel
     * setDescription
