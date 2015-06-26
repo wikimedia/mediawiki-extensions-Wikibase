@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_6ba7e408",
+        "filename": "client/ExampleSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-26T12:57:42Z",
+      "side": 1,
+      "message": "can do",
+      "parentUuid": "8ec42329_cb02980c",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_ab24ecad",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaBindingsTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-26T12:51:56Z",
       "side": 1,
       "message": "Why?",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_eb5bd424",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-26T12:57:42Z",
+      "side": 1,
+      "message": "phpcs detects closing brace not at correct indent level",
+      "parentUuid": "8ec42329_ab24ecad",
       "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_aba14cf6",
+        "filename": "lib/tests/phpunit/store/TermPropertyLabelResolverTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-26T12:57:42Z",
+      "side": 1,
+      "message": "1 space is required after opening bracket of an array(",
+      "parentUuid": "8ec42329_cb505810",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_6b512410",
         "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-06-26T12:51:56Z",
       "side": 1,
       "message": "Space before ? and around : missing.",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_cba6180d",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-26T12:57:42Z",
+      "side": 1,
+      "message": "not required by phpcs, but can do ;)",
+      "parentUuid": "8ec42329_6b512410",
       "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_4bb22848",
+        "filename": "repo/includes/rdf/JulianDateTimeValueCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-26T12:57:42Z",
+      "side": 1,
+      "message": "not required by phpcs but can do",
+      "parentUuid": "8ec42329_8b56d007",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_4b3c68bb",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2015-06-26T12:51:56Z",
       "side": 1,
       "message": "Which rule is this?",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6b7e0469",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-26T12:57:42Z",
+      "side": 1,
+      "message": "indent level",
+      "parentUuid": "8ec42329_4b3c68bb",
       "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
