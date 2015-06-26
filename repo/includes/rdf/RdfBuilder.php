@@ -303,8 +303,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param boolean $isObjectProperty Is the property data or object property?
 	 */
 	private function writePropertyPredicates( $id, $isObjectProperty ) {
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim')->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
-		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim')->is( RdfVocabulary::NSP_CLAIM, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is( RdfVocabulary::NSP_CLAIM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is( RdfVocabulary::NSP_CLAIM_VALUE, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is( RdfVocabulary::NSP_QUALIFIER, $id );
@@ -318,7 +318,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE, $id )->a( 'owl', 'ObjectProperty' );
 		// Depending on property type
-		if( $isObjectProperty ) {
+		if ( $isObjectProperty ) {
 			$datatype = 'ObjectProperty';
 		} else {
 			$datatype = 'DatatypeProperty';
@@ -368,7 +368,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName )
 			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $entity->getType() ) );
 
-		if( $entity instanceof Property ) {
+		if ( $entity instanceof Property ) {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
 				->is( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getDataTypeName( $entity ) );
 			$id = $entity->getId()->getSerialization();
@@ -491,7 +491,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			->a( RdfVocabulary::NS_SCHEMA_ORG, "Dataset" )
 			->say( RdfVocabulary::NS_CC, 'license' )->is( RdfVocabulary::LICENSE )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION )
-			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $timestamp ), 'xsd', 'dateTime'  );
+			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $timestamp ), 'xsd', 'dateTime' );
 	}
 
 }

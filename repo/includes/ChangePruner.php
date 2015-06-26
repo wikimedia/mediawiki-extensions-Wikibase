@@ -57,7 +57,7 @@ class ChangePruner {
 	 * Prunes the wb_changes table.
 	 */
 	public function prune() {
-		while( true ) {
+		while ( true ) {
 			wfWaitForSlaves();
 
 			$until = $this->getCutoffTimestamp();

@@ -76,7 +76,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		$entityPermissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 		$entityPermissionChecker->expects( $this->any() )
 				->method( 'getPermissionStatusForEntity' )
-				->will( $this->returnValue( Status::newGood() ));
+				->will( $this->returnValue( Status::newGood() ) );
 
 		return $entityPermissionChecker;
 	}
@@ -88,7 +88,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		return $summaryFormatter;
 	}
 
-	private function getMockEditFitlerHookRunner () {
+	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()

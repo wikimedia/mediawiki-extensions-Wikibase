@@ -34,7 +34,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
+// Needs to be 1.20c because version_compare() works in confusing ways.
+if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) {
 	die( '<b>Error:</b> WikibaseLib requires MediaWiki 1.20 or above.' );
 }
 
@@ -105,4 +106,3 @@ call_user_func( function() {
 		include_once __DIR__ . '/config/WikibaseLib.experimental.php';
 	}
 } );
-

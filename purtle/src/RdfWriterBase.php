@@ -145,8 +145,8 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @param string $iri The base IRI
 	 */
 	public function prefix( $prefix, $iri ) {
-		if( $this->prefixesLocked ) {
-			throw new \LogicException("Prefixes can not be added after start()");
+		if ( $this->prefixesLocked ) {
+			throw new \LogicException( "Prefixes can not be added after start()" );
 		}
 		$this->prefixes[$prefix] = $iri;
 	}
@@ -297,7 +297,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 */
 	final public function drain() {
 		// we can drain after finish, but finish state is sticky
-		if( $this->state != self::STATE_FINISH ) {
+		if ( $this->state !== self::STATE_FINISH ) {
 			$this->state( self::STATE_DOCUMENT );
 		}
 

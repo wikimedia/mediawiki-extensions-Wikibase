@@ -165,7 +165,7 @@ class ChangeOpReference extends ChangeOpBase {
 
 		$currentIndex = $references->indexOf( $this->reference );
 
-		if( is_null( $this->index ) && $currentIndex !== false ) {
+		if ( $this->index === null && $currentIndex !== false ) {
 			// Set index to current index to not have the reference removed and appended but
 			// retain its position within the list of references.
 			$this->index = $currentIndex;

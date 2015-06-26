@@ -200,11 +200,11 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		// merged change consisting of $create and $update
 		$create_update = $this->makeChange( array(
 			'id' => null,
-			'type' => $create->getField('type'), // because the first change has no parent
-			'time' => $update->getField('time'), // last change's timestamp
-			'object_id' => $update->getField('object_id'),
-			'revision_id' => $update->getField('revision_id'), // last changes rev id
-			'user_id' => $update->getField('user_id'),
+			'type' => $create->getField( 'type' ), // because the first change has no parent
+			'time' => $update->getField( 'time' ), // last change's timestamp
+			'object_id' => $update->getField( 'object_id' ),
+			'revision_id' => $update->getField( 'revision_id' ), // last changes rev id
+			'user_id' => $update->getField( 'user_id' ),
 			'info' => array(
 				'metadata' => array(
 					'bot' => 0,
@@ -237,11 +237,11 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		// merged change consisting of $create, $update and $updateXLink
 		$create_update_link = $this->makeChange( array(
 			'id' => null,
-			'type' => $create->getField('type'), // because the first change has no parent
-			'time' => $updateXLink->getField('time'), // last change's timestamp
-			'object_id' => $updateXLink->getField('object_id'),
-			'revision_id' => $updateXLink->getField('revision_id'), // last changes rev id
-			'user_id' => $updateXLink->getField('user_id'),
+			'type' => $create->getField( 'type' ), // because the first change has no parent
+			'time' => $updateXLink->getField( 'time' ), // last change's timestamp
+			'object_id' => $updateXLink->getField( 'object_id' ),
+			'revision_id' => $updateXLink->getField( 'revision_id' ), // last changes rev id
+			'user_id' => $updateXLink->getField( 'user_id' ),
 			'info' => array(
 				'metadata' => array(
 					'bot' => 0,

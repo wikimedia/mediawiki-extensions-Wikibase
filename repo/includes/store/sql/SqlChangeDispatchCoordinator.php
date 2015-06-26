@@ -319,7 +319,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @param  string|bool  $wikiDB: the logical name of the client wiki's database.
 	 * @param DatabaseBase $db: the client database connection to release for re-use.
 	 */
-	private function releaseClientMaster( $wikiDB, DatabaseBase $db  ) {
+	private function releaseClientMaster( $wikiDB, DatabaseBase $db ) {
 		$this->getClientLB( $wikiDB )->reuseConnection( $db );
 	}
 

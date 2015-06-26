@@ -242,7 +242,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		if ( isset( RdfVocabulary::$rankMap[$rank] ) ) {
 			$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )
 				->say( RdfVocabulary::NS_ONTOLOGY, 'rank' )->is( RdfVocabulary::NS_ONTOLOGY, RdfVocabulary::$rankMap[$rank] );
-			if( $isBest ) {
+			if ( $isBest ) {
 				$this->statementWriter->say( RdfVocabulary::NS_ONTOLOGY, 'rank' )->is( RdfVocabulary::NS_ONTOLOGY, RdfVocabulary::WIKIBASE_RANK_BEST );
 			}
 		} else {

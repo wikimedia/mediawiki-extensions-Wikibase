@@ -114,7 +114,7 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 		$dupeAliasFingerprint = new Fingerprint(
 			new TermList( array( new Term( 'de', 'good' ) ) ),
 			new TermList(),
-			new AliasGroupList( array( new AliasGroup( 'de', array( 'DUPE' )) ) )
+			new AliasGroupList( array( new AliasGroup( 'de', array( 'DUPE' ) ) ) )
 		);
 
 		return array(

@@ -161,8 +161,8 @@ class EntityParserOutputGenerator {
 		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
 
 		// FIXME: Bad
-		if( $entity instanceof Item ) {
-			foreach( $entity->getSiteLinkList()->getIterator() as $sitelink ) {
+		if ( $entity instanceof Item ) {
+			foreach ( $entity->getSiteLinkList()->getIterator() as $sitelink ) {
 				$usedEntityIds = array_merge( $usedEntityIds, $sitelink->getBadges() );
 			}
 		}
@@ -229,7 +229,7 @@ class EntityParserOutputGenerator {
 	private function addEntityLinksToParserOutput( ParserOutput $parserOutput, array $entityIds ) {
 		$linkBatch = new LinkBatch();
 
-		foreach( $entityIds as $entityId ) {
+		foreach ( $entityIds as $entityId ) {
 			$linkBatch->addObj( $this->entityTitleLookup->getTitleForId( $entityId ) );
 		}
 
@@ -239,7 +239,7 @@ class EntityParserOutputGenerator {
 			return;
 		}
 
-		foreach( $pages as $page ) {
+		foreach ( $pages as $page ) {
 			$title = Title::makeTitle( $page->page_namespace, $page->page_title );
 			$parserOutput->addLink( $title, $page->page_id );
 		}

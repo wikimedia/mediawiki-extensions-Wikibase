@@ -139,7 +139,7 @@ class WikibaseLuaBindings {
 	public function getLabel( $prefixedEntityId ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
-		} catch( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException $e ) {
 			return null;
 		}
 
@@ -164,7 +164,7 @@ class WikibaseLuaBindings {
 	public function getDescription( $prefixedEntityId ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
-		} catch( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException $e ) {
 			return null;
 		}
 
@@ -191,7 +191,7 @@ class WikibaseLuaBindings {
 	public function getSiteLinkPageName( $prefixedEntityId ) {
 		try {
 			$itemId = new ItemId( $prefixedEntityId );
-		} catch( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException $e ) {
 			return null;
 		}
 

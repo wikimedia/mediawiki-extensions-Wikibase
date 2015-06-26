@@ -45,7 +45,7 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 				10,  // chunkSize
 				50, // maxSize
 				array(
-					self::makeCacheAction(  0, 4, 'start at the start' ),
+					self::makeCacheAction( 0, 4, 'start at the start' ),
 					self::makeCacheAction( 10, 4, 'start at ten' ),
 					self::makeCacheAction( 98, 5, 'exceed end' ),
 				)
@@ -63,7 +63,7 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 					self::makeCacheAction( 14, 4, 'overlap block before' ),
 					self::makeCacheAction( 26, 4, 'overlap block after' ),
 
-					self::makeCacheAction(  7, 4, 'detached block before' ),
+					self::makeCacheAction( 7, 4, 'detached block before' ),
 					self::makeCacheAction( 33, 4, 'detached block after' ),
 
 					self::makeCacheAction( 21, 2, 'single chunk match' ),

@@ -122,7 +122,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$item->addSiteLink( new SiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) ) );
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
-		$redirect = new EntityRedirect( new ItemId('Q12345678'), $item->getId() );
+		$redirect = new EntityRedirect( new ItemId( 'Q12345678' ), $item->getId() );
 		$store->saveRedirect( $redirect, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		self::$badgeId = $badge->getId()->getSerialization();
@@ -167,7 +167,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$matchers['id']['attributes']['value'] = self::$itemId;
 
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
 		}
 	}
@@ -206,7 +206,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$matchers['badges']['children']['only']['attributes']['selected'] = '';
 
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
 		}
 	}
@@ -263,7 +263,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$this->assertContains( self::$itemId, $redirect, "Should redirect to item page" );
 
 		/** @var Item $item */
-		$item = $lookup->getEntity( new ItemId( self::$itemId) );
+		$item = $lookup->getEntity( new ItemId( self::$itemId ) );
 
 		$this->assertEquals(
 			'Wikipedia',

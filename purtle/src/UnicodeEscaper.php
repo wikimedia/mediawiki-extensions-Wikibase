@@ -52,7 +52,7 @@ class UnicodeEscaper {
 		for ( $i = 0; $i < $strLen; $i++ ) {
 			$c = mb_substr( $str, $i, 1, 'UTF-8' );
 			if ( !isset( $this->escChars[$c] ) ) {
-				$this->escChars[$c] = $this->escapedChar($c);
+				$this->escChars[$c] = $this->escapedChar( $c );
 			}
 			$result .= $this->escChars[$c];
 		}

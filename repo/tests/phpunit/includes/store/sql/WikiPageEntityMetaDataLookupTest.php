@@ -113,7 +113,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 			->loadRevisionInformation( $entityIds, DB_SLAVE );
 
 		$serializedEntityIds = array();
-		foreach( $entityIds as $entityId ) {
+		foreach ( $entityIds as $entityId ) {
 			$serializedEntityIds[] = $entityId->getSerialization();
 		}
 

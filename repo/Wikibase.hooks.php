@@ -82,7 +82,7 @@ final class RepoHooks {
 			throw new MWException( 'Wikibase: Incomplete configuration: '
 				. '$wgWBRepoSettings["entityNamespaces"] has to be set to an '
 				. 'array mapping content model IDs to namespace IDs. '
-				. 'See ExampleSettings.php for details and examples.');
+				. 'See ExampleSettings.php for details and examples.' );
 		}
 
 		foreach ( $namespaces as $contentModel => $namespace ) {
@@ -287,7 +287,9 @@ final class RepoHooks {
 
 		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
 		// May be redundant in some cases. Take care not to cause infinite regress.
-		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
+		WikibaseRepo::getDefaultInstance()
+			->getEntityStoreWatcher()
+			->entityDeleted( $content->getEntityId() );
 
 		$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
@@ -1051,7 +1053,9 @@ final class RepoHooks {
 	public static function onImportHandleRevisionXMLTag( $importer, $pageInfo, $revisionInfo ) {
 		if ( isset( $revisionInfo['model'] ) ) {
 			$contentModels = WikibaseRepo::getDefaultInstance()->getContentModelMappings();
-			$allowImport = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'allowEntityImport' );
+			$allowImport = WikibaseRepo::getDefaultInstance()
+				->getSettings()
+				->getSetting( 'allowEntityImport' );
 
 			if ( !$allowImport && in_array( $revisionInfo['model'], $contentModels ) ) {
 				// Skip entities.
