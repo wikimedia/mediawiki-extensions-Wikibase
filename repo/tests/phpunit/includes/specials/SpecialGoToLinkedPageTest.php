@@ -139,7 +139,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 				'type' => 'submit',
 				'name' => 'submit',
 			) );
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output for: ".$key );
 		}
 	}

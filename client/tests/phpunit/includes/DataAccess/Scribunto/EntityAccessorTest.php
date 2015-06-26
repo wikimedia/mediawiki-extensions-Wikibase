@@ -99,7 +99,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 
 		$entityAccessor->getEntity( $itemId->getSerialization() );
 		$this->assertTrue(
-			$this->hasUsage($usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage'
+			$this->hasUsage( $usages->getUsages(), $item->getId(), EntityUsage::ALL_USAGE ), 'all usage'
 		);
 	}
 
@@ -130,7 +130,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideZeroIndexedArray
 	 */
-	public function testZeroIndexArray ( array $array, array $expected ) {
+	public function testZeroIndexArray( array $array, array $expected ) {
 		$renumber = new ReflectionMethod( 'Wikibase\Client\DataAccess\Scribunto\EntityAccessor', 'renumber' );
 		$renumber->setAccessible( true );
 		$renumber->invokeArgs( $this->getEntityAccessor(), array( &$array ) );

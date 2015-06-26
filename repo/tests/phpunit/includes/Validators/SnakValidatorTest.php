@@ -99,7 +99,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$claim->setQualifiers( new SnakList( array(
 			new PropertyValueSnak( $p2, new StringValue( 'abc' ) )
 		) ) );
-		$claim->setReferences( new ReferenceList( array (
+		$claim->setReferences( new ReferenceList( array(
 			new Reference( new SnakList( array(
 				new PropertyValueSnak( $p2, new StringValue( 'xyz' ) )
 			) ) )
@@ -119,7 +119,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$cases[] = array( $brokenClaim, 'error in qualifier', false );
 
 		$brokenClaim = clone $claim;
-		$brokenClaim->setReferences( new ReferenceList( array (
+		$brokenClaim->setReferences( new ReferenceList( array(
 			new Reference( new SnakList( array(
 				new PropertyValueSnak( $p1, new StringValue( 'xyz' ) )
 			) ) )
@@ -149,7 +149,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$references = new ReferenceList();
 		$cases[] = array( $references, 'empty reference list', true );
 
-		$references = new ReferenceList( array (
+		$references = new ReferenceList( array(
 			new Reference( new SnakList( array(
 				new PropertyValueSnak( $p1, new StringValue( '123' ) )
 			) ) ),
@@ -159,7 +159,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		) );
 		$cases[] = array( $references, 'conforming reference list', true );
 
-		$references = new ReferenceList( array (
+		$references = new ReferenceList( array(
 			new Reference( new SnakList( array(
 				new PropertyValueSnak( $p1, new StringValue( '123' ) )
 			) ) ),

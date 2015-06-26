@@ -51,7 +51,7 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 		$statement->getQualifiers()->addSnak( $newQualifier );
 		$snakHash = $newQualifier->getHash();
 		$changeOp = new ChangeOpQualifierRemove( $guid, $snakHash );
-		$args[] = array ( $item, $changeOp, $snakHash );
+		$args[] = array( $item, $changeOp, $snakHash );
 
 		return $args;
 	}

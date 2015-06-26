@@ -46,9 +46,9 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$ops = array();
-		$ops[] = array ( new ChangeOpLabel( 'en', 'myNewLabel', $validatorFactory ) );
-		$ops[] = array ( new ChangeOpDescription( 'de', 'myNewDescription', $validatorFactory ) );
-		$ops[] = array ( new ChangeOpLabel( 'en', null, $validatorFactory ) );
+		$ops[] = array( new ChangeOpLabel( 'en', 'myNewLabel', $validatorFactory ) );
+		$ops[] = array( new ChangeOpDescription( 'de', 'myNewDescription', $validatorFactory ) );
+		$ops[] = array( new ChangeOpLabel( 'en', null, $validatorFactory ) );
 
 		return $ops;
 	}
@@ -68,7 +68,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$ops = array();
-		$ops[] = array (
+		$ops[] = array(
 					array(
 						new ChangeOpLabel( 'en', 'enLabel', $validatorFactory ),
 						new ChangeOpLabel( 'de', 'deLabel', $validatorFactory ),
@@ -94,8 +94,8 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$ops = array();
-		$ops[] = array ( 1234 );
-		$ops[] = array ( array( new ChangeOpLabel( 'en', 'test', $validatorFactory ), 123 ) );
+		$ops[] = array( 1234 );
+		$ops[] = array( array( new ChangeOpLabel( 'en', 'test', $validatorFactory ), 123 ) );
 
 		return $ops;
 	}

@@ -66,7 +66,8 @@ class ClaimDiffer {
 		}
 
 		if( ( $oldStatementMainSnak === null && $newStatementMainSnak !== null )
-			|| !$oldStatementMainSnak->equals( $newStatementMainSnak ) ) {
+			|| !$oldStatementMainSnak->equals( $newStatementMainSnak )
+		) {
 			return new DiffOpChange( $oldStatementMainSnak, $newStatementMainSnak );
 		}
 
@@ -105,7 +106,7 @@ class ClaimDiffer {
 		$oldRank = $oldStatement === null ? null : $oldStatement->getRank();
 		$newRank = $newStatement === null ? null : $newStatement->getRank();
 
-		if( $oldRank !== $newRank ) {
+		if ( $oldRank !== $newRank ) {
 			return new DiffOpChange( $oldRank, $newRank );
 		}
 

@@ -105,7 +105,7 @@ class EntityTermsView {
 		$labels = $fingerprint->getLabels();
 		$idInParentheses = '';
 
-		if( !is_null( $entityId ) ) {
+		if ( !is_null( $entityId ) ) {
 			$id = $entityId->getSerialization();
 			$idInParentheses = wfMessage( 'parentheses', $id )->text();
 		}
@@ -179,7 +179,7 @@ class EntityTermsView {
 	) {
 		$entityTermsForLanguageViewsHtml = '';
 
-		foreach( $languageCodes as $languageCode ) {
+		foreach ( $languageCodes as $languageCode ) {
 			$entityTermsForLanguageViewsHtml .= $this->getEntityTermsForLanguageView(
 				$fingerprint,
 				$languageCode,

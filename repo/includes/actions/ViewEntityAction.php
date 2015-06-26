@@ -140,10 +140,12 @@ abstract class ViewEntityAction extends ViewAction {
 
 		# Show delete and move logs
 		LogEventsList::showLogExtract( $out, array( 'delete', 'move' ), $title, '',
-			array(  'lim' => 10,
-			        'conds' => array( "log_action != 'revision'" ),
-			        'showIfEmpty' => false,
-			        'msgKey' => array( 'moveddeleted-notice' ) )
+			array(
+				'lim' => 10,
+				'conds' => array( "log_action != 'revision'" ),
+				'showIfEmpty' => false,
+				'msgKey' => array( 'moveddeleted-notice' )
+			)
 		);
 
 		$this->send404Code();

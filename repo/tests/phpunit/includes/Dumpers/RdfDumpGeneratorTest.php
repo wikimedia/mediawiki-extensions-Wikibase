@@ -90,7 +90,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 			} ) );
 
 		$entityRevisionLookup->expects( $this->any() )
-			->method ( 'getEntityRevision' )
+			->method( 'getEntityRevision' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $entityLookup ) {
 				/** @var EntityLookup $entityLookup */
 				$entity = $entityLookup->getEntity( $id );
@@ -99,7 +99,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 				}
 				return new EntityRevision( $entity, 12, wfTimestamp( TS_MW, 1000000 ) );
 			}
-		));
+		) );
 
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
@@ -132,7 +132,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return string[]
 	 */
-	public function normalizeData($data) {
+	public function normalizeData( $data ) {
 		$dataSplit = explode( "\n", $data );
 		sort( $dataSplit );
 		return $dataSplit;
@@ -161,7 +161,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		$entities = $jsonTest->makeEntities( $ids );
 		$redirects = array( 'Q4242' => new ItemId( 'Q42' ) );
 		$dumper = $this->newDumpGenerator( $entities, $redirects );
-		$dumper->setTimestamp(1000000);
+		$dumper->setTimestamp( 1000000 );
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );
 

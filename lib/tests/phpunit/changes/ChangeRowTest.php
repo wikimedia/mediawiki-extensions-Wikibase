@@ -148,7 +148,7 @@ class ChangeRowTest extends \ORMRowTest {
 		);
 	}
 
-	public function testGetObjectId( ) {
+	public function testGetObjectId() {
 		$data = array( 'object_id' => 'p100' );
 		$change = $this->getRowInstance( $data, true );
 

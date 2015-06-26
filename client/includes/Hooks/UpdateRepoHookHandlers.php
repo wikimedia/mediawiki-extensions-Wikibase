@@ -225,7 +225,7 @@ class UpdateRepoHookHandlers {
 
 			// To be able to find out about this in the ArticleDeleteAfter hook
 			$title->wikibasePushedDeleteToRepo = true;
-		} catch( MWException $e ) {
+		} catch ( MWException $e ) {
 			// This is not a reason to let an exception bubble up, we just
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.
@@ -270,7 +270,7 @@ class UpdateRepoHookHandlers {
 
 			// To be able to find out about this in the SpecialMovepageAfterMove hook
 			$newTitle->wikibasePushedMoveToRepo = true;
-		} catch( MWException $e ) {
+		} catch ( MWException $e ) {
 			// This is not a reason to let an exception bubble up, we just
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.

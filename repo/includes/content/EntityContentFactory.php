@@ -271,7 +271,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {
-			call_user_func_array( array( $status, 'fatal'), $error );
+			call_user_func_array( array( $status, 'fatal' ), $error );
 			$status->setResult( false );
 		}
 

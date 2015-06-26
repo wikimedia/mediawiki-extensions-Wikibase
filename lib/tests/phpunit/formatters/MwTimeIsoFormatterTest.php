@@ -553,7 +553,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 		$formatter = new MwTimeIsoFormatter( $options );
 		$actual = $formatter->format( $timeValue );
 
-		$this->assertEquals( $expected, $actual, 'Testing ' . $timeValue->getTime() . ', precision ' . $timeValue->getPrecision()  );
+		$this->assertEquals( $expected, $actual, 'Testing ' . $timeValue->getTime() . ', precision ' . $timeValue->getPrecision() );
 		if ( $roundtrip ) {
 			$this->assertCanRoundTrip( $actual, $timeValue, $languageCode );
 		}

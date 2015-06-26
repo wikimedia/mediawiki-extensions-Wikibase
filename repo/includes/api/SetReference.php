@@ -68,7 +68,7 @@ class SetReference extends ModifyClaim {
 			$this->validateReferenceHash( $claim, $params['reference'] );
 		}
 
-		if( isset( $params['snaks-order' ] ) ) {
+		if ( isset( $params['snaks-order' ] ) ) {
 			$snaksOrder = $this->getArrayFromParam( $params['snaks-order'] );
 		} else {
 			$snaksOrder = array();
@@ -140,7 +140,7 @@ class SetReference extends ModifyClaim {
 		$snakOrder = ( count( $snakOrder ) > 0 ) ? $snakOrder : array_keys( $rawSnaks );
 
 		try {
-			foreach( $snakOrder as $propertyId ) {
+			foreach ( $snakOrder as $propertyId ) {
 				if ( !is_array( $rawSnaks[$propertyId] ) ) {
 					$this->dieError( 'Invalid snak JSON given', 'invalid-json' );
 				}
@@ -153,14 +153,14 @@ class SetReference extends ModifyClaim {
 					$snaks[] = $snak;
 				}
 			}
-		} catch( InvalidArgumentException $invalidArgumentException ) {
+		} catch ( InvalidArgumentException $invalidArgumentException ) {
 			// Handle Snak instantiation failures
 			$this->dieError(
 				'Failed to get reference from reference Serialization '
 					. $invalidArgumentException->getMessage(),
 				'snak-instantiation-failure'
 			);
-		} catch( OutOfBoundsException $outOfBoundsException ) {
+		} catch ( OutOfBoundsException $outOfBoundsException ) {
 			$this->dieError(
 				'Failed to get reference from reference Serialization '
 					. $outOfBoundsException->getMessage(),
