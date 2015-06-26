@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Parsers\Test;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use Wikibase\Lib\Parsers\EraParser;
 use Wikibase\Lib\Parsers\YearTimeParser;
 
 /**
@@ -37,7 +36,7 @@ class YearTimeParserTest extends StringValueParserTest {
 	}
 
 	private function getMockEraParser() {
-		$mock = $this->getMockBuilder( 'Wikibase\Lib\Parsers\EraParser' )
+		$mock = $this->getMockBuilder( 'ValueParsers\EraParser' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -45,10 +44,10 @@ class YearTimeParserTest extends StringValueParserTest {
 			->with( $this->isType( 'string' ) )
 			->will( $this->returnCallback(
 				function( $value ) {
-					$sign = EraParser::CURRENT_ERA;
+					$sign = '+';
 					// Tiny parser that supports a single negative sign only
-					if ( $value[0] === EraParser::BEFORE_CURRENT_ERA ) {
-						$sign = EraParser::BEFORE_CURRENT_ERA;
+					if ( $value[0] === '-' ) {
+						$sign = '-';
 						$value = substr( $value, 1 );
 					}
 					return array( $sign, $value ) ;
