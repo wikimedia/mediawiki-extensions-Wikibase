@@ -173,7 +173,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$this->assertNoError( $output );
 
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 	}
@@ -257,7 +257,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			array( 'claims' => array( 'P1' => array( $statement ) ) ),
 			array(),
 			array(),
-			array( 'claims' => array( 'P1' => array ( $statementWithoutId ) ) ),
+			array( 'claims' => array( 'P1' => array( $statementWithoutId ) ) ),
 		);
 
 		return $testCases;

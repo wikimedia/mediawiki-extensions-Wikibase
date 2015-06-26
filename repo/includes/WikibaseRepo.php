@@ -1142,7 +1142,7 @@ class WikibaseRepo {
 	}
 
 	private function getMonolingualTextLanguages() {
-		if( $this->monolingualTextLanguages === null ) {
+		if ( $this->monolingualTextLanguages === null ) {
 			$this->monolingualTextLanguages = new WikibaseContentLanguages();
 		}
 		return $this->monolingualTextLanguages;

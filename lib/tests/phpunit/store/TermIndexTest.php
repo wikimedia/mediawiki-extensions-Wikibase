@@ -58,7 +58,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item0 = new Item( new ItemId( 'Q10' ) );
 		$item0->setLabel( 'en', 'kittens' );
 
-		$item1 = new Item( new ItemId( 'Q11' )  );
+		$item1 = new Item( new ItemId( 'Q11' ) );
 		$item1->setLabel( 'nl', 'mittens' );
 		$item1->setLabel( 'de', 'Mittens' );
 		$item1->setLabel( 'fr', 'kittens love mittens' );
@@ -230,7 +230,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$actualTermKeys = array_map( array( $this, 'getTermKey' ), $actual );
 
-		if( !array_key_exists( 'orderByWeight', $options ) || $options['orderByWeight'] === false ) {
+		if ( !array_key_exists( 'orderByWeight', $options ) || $options['orderByWeight'] === false ) {
 			$this->assertArrayEquals( $expectedTermKeys, $actualTermKeys, false );
 		} else {
 			$this->assertArrayEquals( $expectedTermKeys, $actualTermKeys, true );
@@ -350,8 +350,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$abc = new TermIndexEntry( array( 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'abc' ) );
 		$matchedTerms = $lookup->getMatchingTerms( array( $abc ), array( TermIndexEntry::TYPE_LABEL ), Item::ENTITY_TYPE );
-		foreach( $matchedTerms as $matchedTerm ) {
-			if( $matchedTerm->getEntityId() === $id ) {
+		foreach ( $matchedTerms as $matchedTerm ) {
+			if ( $matchedTerm->getEntityId() === $id ) {
 				$this->fail( 'Failed to delete term or entity: ' . $id->getSerialization() );
 			}
 		}

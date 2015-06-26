@@ -136,7 +136,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @return Status a Status object containing an array with three revisions, ($olderRevision, $newerRevision, $latestRevision)
 	 * @throws MWException if the page's latest revision cannot be loaded
 	 */
-	protected function loadRevisions( ) {
+	protected function loadRevisions() {
 		$latestRevId = $this->getTitle()->getLatestRevID();
 
 		if ( $latestRevId === 0 ) {

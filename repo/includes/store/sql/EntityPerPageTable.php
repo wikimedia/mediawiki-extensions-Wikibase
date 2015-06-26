@@ -350,7 +350,7 @@ class EntityPerPageTable implements EntityPerPage, EntityRedirectLookup {
 	 * @return EntityId[]
 	 */
 	public function listEntities( $entityType, $limit, EntityId $after = null, $redirects = self::NO_REDIRECTS ) {
-		if ( $entityType == null  ) {
+		if ( $entityType === null ) {
 			$where = array();
 			//NOTE: needs to be id/type, not type/id, according to the definition of the relevant
 			//      index in wikibase.sql: wb_entity_per_page (epp_entity_id, epp_entity_type);

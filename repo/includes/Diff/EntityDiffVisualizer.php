@@ -109,7 +109,7 @@ class EntityDiffVisualizer {
 		$termDiffVisualizer = new DiffView(
 			array(),
 			new Diff(
-				array (
+				array(
 					$this->context->getLanguage()->getMessage( 'wikibase-diffview-label' ) => $diff->getLabelsDiff(),
 					$this->context->getLanguage()->getMessage( 'wikibase-diffview-alias' ) => $diff->getAliasesDiff(),
 					$this->context->getLanguage()->getMessage( 'wikibase-diffview-description' ) => $diff->getDescriptionsDiff(),
@@ -132,7 +132,7 @@ class EntityDiffVisualizer {
 			$linkDiffVisualizer = new DiffView(
 				array(),
 				new Diff(
-					array (
+					array(
 						$this->context->getLanguage()->getMessage( 'wikibase-diffview-link' ) => $diff->getSiteLinkDiff(),
 					),
 					true

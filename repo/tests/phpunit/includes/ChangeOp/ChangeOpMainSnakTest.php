@@ -99,7 +99,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$guid = '';
 		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
-		$args['add new claim'] = array ( $item, $changeOp, $expected );
+		$args['add new claim'] = array( $item, $changeOp, $expected );
 
 		// update an existing claim with a new main snak value
 		$item = $this->makeNewItemWithClaim( 'Q234', $snak );
@@ -110,7 +110,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$guid = $claim->getGuid();
 		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
-		$args['update claim by guid'] = array ( $item, $changeOp, $expected );
+		$args['update claim by guid'] = array( $item, $changeOp, $expected );
 
 		return $args;
 	}
@@ -140,11 +140,11 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		// apply change to the wrong item
 		$wrongItem = new Item( new ItemId( 'Q888' ) );
 		$newSnak =  $this->makeSnak( 'P12', 'newww' );
-		$args['wrong entity'] = array ( $wrongItem, $this->newChangeOpMainSnak( $guid, $newSnak ) );
+		$args['wrong entity'] = array( $wrongItem, $this->newChangeOpMainSnak( $guid, $newSnak ) );
 
 		// apply change to an unknown claim
 		$wrongClaimId = $item->getId()->getSerialization() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
-		$args['unknown claim'] = array ( $item, $this->newChangeOpMainSnak( $wrongClaimId, $newSnak ) );
+		$args['unknown claim'] = array( $item, $this->newChangeOpMainSnak( $wrongClaimId, $newSnak ) );
 
 		// update an existing claim with wrong main snak property
 		$newSnak =  $this->makeSnak( 'P13', 'changedSnak' );
@@ -154,16 +154,16 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 		$guid = $statement->getGuid();
 		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
-		$args['wrong main snak property'] = array ( $item, $changeOp );
+		$args['wrong main snak property'] = array( $item, $changeOp );
 
 		// apply invalid main snak
 		$badSnak =  $this->makeSnak( 'P12', new NumberValue( 5 ) );
-		$args['bad value type'] = array ( $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) );
+		$args['bad value type'] = array( $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) );
 
 		// apply invalid main snak
 		// NOTE: the mock validator considers "INVALID" to be invalid.
 		$badSnak = $this->makeSnak( 'P12', 'INVALID' );
-		$args['invalid value'] = array ( $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) );
+		$args['invalid value'] = array( $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) );
 
 		return $args;
 	}

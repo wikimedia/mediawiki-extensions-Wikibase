@@ -188,7 +188,7 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 	public function getSites( array $sitesData, $scriptPath, $articlePath, $protocol = '' ) {
 		$sites = array();
 
-		foreach( $sitesData as $siteData ) {
+		foreach ( $sitesData as $siteData ) {
 			$fields = array(
 				'globalid' => $siteData['siteid'],
 				'type' => 'mediawiki',

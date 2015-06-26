@@ -55,7 +55,7 @@ class DispatchStats {
 		);
 
 		$res = $db->select(
-			array (
+			array(
 				'wb_changes_dispatch',
 				'wb_changes'
 			),

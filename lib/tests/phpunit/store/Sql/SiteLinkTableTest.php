@@ -48,7 +48,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 			'jawiki' => 'ビール'
 		);
 
-		foreach( $siteLinks as $siteId => $pageName ) {
+		foreach ( $siteLinks as $siteId => $pageName ) {
 			$item->getSiteLinkList()->addNewSiteLink( $siteId, $pageName );
 		}
 
@@ -116,7 +116,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	public function testGetItemIdForSiteLink( Item $item ) {
 		$siteLinks = $item->getSiteLinks();
 
-		foreach( $siteLinks as $siteLink ) {
+		foreach ( $siteLinks as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
 				$this->siteLinkTable->getItemIdForSiteLink( $siteLink )

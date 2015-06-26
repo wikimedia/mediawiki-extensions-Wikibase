@@ -102,7 +102,7 @@ class SpecialWatchlistQueryHandler {
 	private function makeShowWikibaseConds( array $conds ) {
 		$newConds = array();
 
-		foreach( $conds as $key => $cond ) {
+		foreach ( $conds as $key => $cond ) {
 			if ( $this->isRcTypeLogCondition( $cond ) ) {
 				$newConds[$key] = $this->makeShowLogAndWikibaseType();
 			} else {

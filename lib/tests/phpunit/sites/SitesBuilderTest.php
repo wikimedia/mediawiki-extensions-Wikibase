@@ -34,7 +34,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 		$sites = $this->getSites( $sitesData );
 		$expectedSites = $sites;
 
-		foreach( $expectedSites as $site ) {
+		foreach ( $expectedSites as $site ) {
 			if ( $site->getGroup() === 'wikipedia' ) {
 				$site->addInterwikiId( $site->getLanguageCode() );
 				$site->addNavigationId( $site->getLanguageCode() );
@@ -51,7 +51,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 
 		$expectedSites2 = $sites;
 
-		foreach( $expectedSites2 as $site ) {
+		foreach ( $expectedSites2 as $site ) {
 			if ( $site->getGroup() === 'wikivoyage' ) {
 				$site->addInterwikiId( $site->getLanguageCode() );
 				$site->addNavigationId( $site->getLanguageCode() );
@@ -126,7 +126,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 	protected function getSites( array $sitesData ) {
 		$sites = array();
 
-		foreach( $sitesData as $siteData ) {
+		foreach ( $sitesData as $siteData ) {
 			$fields = array(
 				'globalid' => $siteData['siteid'],
 				'type' => 'mediawiki',

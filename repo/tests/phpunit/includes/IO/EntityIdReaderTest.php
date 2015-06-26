@@ -107,7 +107,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 				'EntityIdReaderTest.txt',
 				null,
 				2,
-				array (
+				array(
 					array( $q1, $p2 ),
 					array( $q3, $p4 ),
 					array(),

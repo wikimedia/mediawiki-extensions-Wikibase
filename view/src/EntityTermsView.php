@@ -105,7 +105,7 @@ class EntityTermsView {
 		$labels = $fingerprint->getLabels();
 		$idInParentheses = '';
 
-		if( !is_null( $entityId ) ) {
+		if ( $entityId !== null ) {
 			$id = $entityId->getSerialization();
 			$idInParentheses = wfMessage( 'parentheses', $id )->text();
 		}
@@ -179,7 +179,7 @@ class EntityTermsView {
 	) {
 		$entityTermsForLanguageViewsHtml = '';
 
-		foreach( $languageCodes as $languageCode ) {
+		foreach ( $languageCodes as $languageCode ) {
 			$entityTermsForLanguageViewsHtml .= $this->getEntityTermsForLanguageView(
 				$fingerprint,
 				$languageCode,
@@ -220,7 +220,7 @@ class EntityTermsView {
 			'td',
 			$languageCode,
 			$this->templateFactory->render( 'wikibase-entitytermsforlanguageview-language',
-				is_null( $title )
+				$title === null
 					? '#'
 					: $title->getLocalURL( array( 'setlang' => $languageCode ) ),
 				htmlspecialchars( $this->languageNameLookup->getName( $languageCode, $this->languageCode ) )
@@ -285,7 +285,7 @@ class EntityTermsView {
 	 * @return string
 	 */
 	private function getHtmlForLabelDescriptionAliasesEditSection( EntityId $entityId = null ) {
-		if ( is_null( $this->sectionEditLinkGenerator ) ) {
+		if ( $this->sectionEditLinkGenerator === null ) {
 			return '';
 		}
 
@@ -303,4 +303,5 @@ class EntityTermsView {
 	private function msg( $key ) {
 		return wfMessage( $key )->inLanguage( $this->languageCode );
 	}
+
 }

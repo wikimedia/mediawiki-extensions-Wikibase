@@ -366,7 +366,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	public function serializeContent( Content $content, $format = null ) {
-		if ( !($content instanceof EntityContent) ) {
+		if ( !( $content instanceof EntityContent ) ) {
 			throw new InvalidArgumentException( '$content must be an instance of EntityContent' );
 		}
 

@@ -179,7 +179,7 @@ class ChangesSubscriptionTableBuilder {
 					. ' into wb_changes_subscription' );
 			}
 
-			$c+= count( $rows );
+			$c += count( $rows );
 		}
 
 		$db->endAtomic( __METHOD__ );

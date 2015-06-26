@@ -102,7 +102,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @return SiteLinkLookup
 	 */
-	private function getSiteLinkLookup( ) {
+	private function getSiteLinkLookup() {
 		$Q123 = new ItemId( 'Q123' );
 
 		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );

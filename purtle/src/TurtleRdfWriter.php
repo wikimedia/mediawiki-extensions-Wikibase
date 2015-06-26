@@ -42,7 +42,7 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		$this->transitionTable[self::STATE_SUBJECT][self::STATE_PREDICATE] = " ";
 		$this->transitionTable[self::STATE_PREDICATE][self::STATE_OBJECT] = " ";
 		$self = $this;
-		$this->transitionTable[self::STATE_START][self::STATE_DOCUMENT] = function() use($self) {
+		$this->transitionTable[self::STATE_START][self::STATE_DOCUMENT] = function() use ( $self ) {
 			$self->beginDocument();
 		};
 	}
@@ -50,14 +50,14 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	/**
 	 * Write prefixes
 	 */
-	public function beginDocument( ) {
-		foreach( $this->getPrefixes() as $prefix => $uri ) {
+	public function beginDocument() {
+		foreach ( $this->getPrefixes() as $prefix => $uri ) {
 			$this->write( "@prefix $prefix: <" . $this->quoter->escapeIRI( $uri ) . "> .\n" );
 		}
 	}
 
 	protected function writeSubject( $base, $local = null ) {
-		if( $local !== null ) {
+		if ( $local !== null ) {
 			$this->write( "$base:$local" );
 		} else {
 			$this->writeIRI( $base, $this->trustIRIs );
@@ -65,11 +65,11 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	}
 
 	protected function writePredicate( $base, $local = null ) {
-		if( $base === 'a' ) {
+		if ( $base === 'a' ) {
 			$this->write( 'a' );
 			return;
 		}
-		if( $local !== null ) {
+		if ( $local !== null ) {
 			$this->write( "$base:$local" );
 		} else {
 			$this->writeIRI( $base, $this->trustIRIs );
@@ -77,7 +77,7 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	}
 
 	protected function writeResource( $base, $local = null ) {
-		if( $local !== null) {
+		if ( $local !== null ) {
 			$this->write( "$base:$local" );
 		} else {
 			$this->writeIRI( $base );

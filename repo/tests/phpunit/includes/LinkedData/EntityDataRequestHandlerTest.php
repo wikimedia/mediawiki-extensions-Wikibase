@@ -59,7 +59,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 
 		if ( $obLevel !== $this->obLevel ) {
-			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test.");
+			$this->fail( "Test changed output buffer level: was {$this->obLevel} before test, but $obLevel after test." );
 		}
 
 		parent::tearDown();

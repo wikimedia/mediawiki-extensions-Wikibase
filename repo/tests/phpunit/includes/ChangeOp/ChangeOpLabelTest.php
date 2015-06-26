@@ -43,8 +43,8 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$args = array();
-		$args['update'] = array ( new ChangeOpLabel( 'en', 'myNew', $validatorFactory ), 'myNew' );
-		$args['set to null'] = array ( new ChangeOpLabel( 'en', null, $validatorFactory ), '' );
+		$args['update'] = array( new ChangeOpLabel( 'en', 'myNew', $validatorFactory ), 'myNew' );
+		$args['set to null'] = array( new ChangeOpLabel( 'en', null, $validatorFactory ), '' );
 
 		return $args;
 	}
@@ -69,11 +69,11 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$args = array();
-		$args['valid label'] = array ( new ChangeOpLabel( 'fr', 'valid', $validatorFactory ), true );
-		$args['invalid label'] = array ( new ChangeOpLabel( 'fr', 'INVALID', $validatorFactory ), false );
-		$args['duplicate label'] = array ( new ChangeOpLabel( 'fr', 'DUPE', $validatorFactory ), false );
-		$args['invalid language'] = array ( new ChangeOpLabel( 'INVALID', 'valid', $validatorFactory ), false );
-		$args['set bad language to null'] = array ( new ChangeOpLabel( 'INVALID', null, $validatorFactory ), false );
+		$args['valid label'] = array( new ChangeOpLabel( 'fr', 'valid', $validatorFactory ), true );
+		$args['invalid label'] = array( new ChangeOpLabel( 'fr', 'INVALID', $validatorFactory ), false );
+		$args['duplicate label'] = array( new ChangeOpLabel( 'fr', 'DUPE', $validatorFactory ), false );
+		$args['invalid language'] = array( new ChangeOpLabel( 'INVALID', 'valid', $validatorFactory ), false );
+		$args['set bad language to null'] = array( new ChangeOpLabel( 'INVALID', null, $validatorFactory ), false );
 
 		return $args;
 	}
@@ -115,15 +115,15 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 
 		$entity = $this->provideNewEntity();
 		$entity->getFingerprint()->setLabel( 'de', 'Test' );
-		$args[] = array ( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' );
+		$args[] = array( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' );
 
 		$entity = $this->provideNewEntity();
 		$entity->getFingerprint()->setLabel( 'de', 'Test' );
-		$args[] = array ( $entity, new ChangeOpLabel( 'de', null, $validatorFactory ), 'remove', 'de' );
+		$args[] = array( $entity, new ChangeOpLabel( 'de', null, $validatorFactory ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();
 		$entity->removeLabel( 'de' );
-		$args[] = array ( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory
+		$args[] = array( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory
 		), 'add', 'de' );
 
 		return $args;

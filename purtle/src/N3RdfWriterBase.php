@@ -23,7 +23,7 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 
 	protected function writeRef( $base, $local = null ) {
 		if ( $local === null ) {
-			if( $base === 'a' ) {
+			if ( $base === 'a' ) {
 				$this->write( 'a' );
 			} else {
 				$this->writeIRI( $base );

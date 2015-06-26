@@ -48,7 +48,7 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 			throw new InvalidArgumentException( '$statementGuid needs to be a string and must not be empty' );
 		}
 
-		if ( !is_string( $snakHash ) || $snakHash === ''  ) {
+		if ( !is_string( $snakHash ) || $snakHash === '' ) {
 			throw new InvalidArgumentException( '$snakHash needs to be a string and must not be empty' );
 		}
 
