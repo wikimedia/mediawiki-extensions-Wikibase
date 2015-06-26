@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_cb02980c",
+        "filename": "client/ExampleSettings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T12:51:56Z",
+      "side": 1,
+      "message": "These should not be used as they are functions. So the space is correct, but the brackets are confusing and not necessary. Please remove them.\n\nSame for all include/include_once/require/require_once in this patch.",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ab24ecad",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T12:51:56Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_cb505810",
+        "filename": "lib/tests/phpunit/store/TermPropertyLabelResolverTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T12:51:56Z",
+      "side": 1,
+      "message": "This is weird. The other comments are indented with multiple spaces but these comments can\u0027t? I think I see and understand the reason. Still weird. Please avoid for now.",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6b512410",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T12:51:56Z",
+      "side": 1,
+      "message": "Space before ? and around : missing.",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8b56d007",
+        "filename": "repo/includes/rdf/JulianDateTimeValueCleaner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T12:51:56Z",
+      "side": 1,
+      "message": "Spaces around ? and : missing.",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4b3c68bb",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T12:51:56Z",
+      "side": 1,
+      "message": "Which rule is this?",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_eb44344d",
+        "filename": "repo/tests/phpunit/includes/actions/EditEntityActionTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T12:51:56Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "e2967522715fa58ddc2a7b98d8c484271ac0faec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
