@@ -4,7 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\ChangeOp\ClaimChangeOpFactory;
+use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -19,7 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SetClaimValue extends ModifyClaim {
 
 	/**
-	 * @var ClaimChangeOpFactory
+	 * @var StatementChangeOpFactory
 	 */
 	private $claimChangeOpFactory;
 
@@ -32,7 +32,7 @@ class SetClaimValue extends ModifyClaim {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
-		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+		$this->claimChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 	}
 
 	/**
