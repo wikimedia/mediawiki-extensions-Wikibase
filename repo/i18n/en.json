@@ -120,7 +120,7 @@
 	"wikibase-validator-label-no-entityid": "The label must not be a valid entity id.",
 	"wikibase-itemlink": "$1 $2",
 	"wikibase-itemlink-id-wrapper": "($1)",
-	"wikibase-itemlink-userlang-wrapper": "&nbsp;($1: $2)",
+	"wikibase-itemlink-description-wrapper": " ($1)",
 	"wikibase-itemlink-title": "$1 | $2",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" is not a valid item id.",
 	"wikibase-wikibaserepopage-invalid-langcode": "The language code \"$1\" is unknown. Please use a language code known to the system, such as \"en\".",
