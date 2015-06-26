@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_8b61f033",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-26T14:44:22Z",
+      "side": 1,
+      "message": "Well, the width of a statementgroup is fixed but the number of columns therefore is responsive: So on a smartphone you get one column while on a tablet you have two or three.",
+      "parentUuid": "8ec42329_ab2aac28",
+      "revId": "069c5673e8ee94f0ba37f50af2b18eb590bff2da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_8b257058",
         "filename": "view/resources/wikibase/wikibase.mobile.css",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-26T13:34:16Z",
       "side": 1,
       "message": "Where does this color come from?",
+      "revId": "069c5673e8ee94f0ba37f50af2b18eb590bff2da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_eb4f54bf",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-26T14:44:22Z",
+      "side": 1,
+      "message": "Not sure tbh, maybe from testing what looks best? Or I copied it from some color used in MobileFrontend.",
+      "parentUuid": "8ec42329_8b257058",
       "revId": "069c5673e8ee94f0ba37f50af2b18eb590bff2da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
