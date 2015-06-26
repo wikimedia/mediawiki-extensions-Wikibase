@@ -7,7 +7,7 @@ use ApiMain;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\ClaimChangeOpFactory;
+use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -23,9 +23,9 @@ use Wikibase\Repo\WikibaseRepo;
 class RemoveQualifiers extends ModifyClaim {
 
 	/**
-	 * @var ClaimChangeOpFactory
+	 * @var StatementChangeOpFactory
 	 */
-	private $claimChangeOpFactory;
+	private $statementChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -36,7 +36,7 @@ class RemoveQualifiers extends ModifyClaim {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
-		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 	}
 
 	/**
@@ -91,7 +91,7 @@ class RemoveQualifiers extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $qualifierHashes as $qualifierHash ) {
-			$changeOps[] = $this->claimChangeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
+			$changeOps[] = $this->statementChangeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
 		}
 
 		return $changeOps;

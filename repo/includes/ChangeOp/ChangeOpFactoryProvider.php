@@ -95,22 +95,16 @@ class ChangeOpFactoryProvider {
 	}
 
 	/**
-	 * @return ClaimChangeOpFactory
-	 */
-	public function getClaimChangeOpFactory() {
-		return new ClaimChangeOpFactory(
-			$this->guidGenerator,
-			$this->guidValidator,
-			$this->guidParser,
-			$this->snakValidator
-		);
-	}
-
-	/**
 	 * @return StatementChangeOpFactory
 	 */
 	public function getStatementChangeOpFactory() {
-		return new StatementChangeOpFactory( $this->snakValidator );
+		return new StatementChangeOpFactory(
+			$this->guidGenerator,
+			$this->guidValidator,
+			$this->guidParser,
+			$this->snakValidator,
+			$this->snakValidator
+		);
 	}
 
 	/**

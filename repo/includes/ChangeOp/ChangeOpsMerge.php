@@ -124,13 +124,6 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * @return ClaimChangeOpFactory
-	 */
-	private function getClaimChangeOpFactory() {
-		return $this->changeOpFactoryProvider->getClaimChangeOpFactory();
-	}
-
-	/**
 	 * @return StatementChangeOpFactory
 	 */
 	private function getStatementChangeOpFactory() {
@@ -266,7 +259,7 @@ class ChangeOpsMerge {
 
 	private function generateClaimsChangeOps() {
 		foreach ( $this->fromItem->getClaims() as $fromClaim ) {
-			$this->fromChangeOps->add( $this->getClaimChangeOpFactory()->newRemoveStatementOp( $fromClaim->getGuid() ) );
+			$this->fromChangeOps->add( $this->getStatementChangeOpFactory()->newRemoveStatementOp( $fromClaim->getGuid() ) );
 
 			$toClaim = clone $fromClaim;
 			$toClaim->setGuid( null );
@@ -279,7 +272,7 @@ class ChangeOpsMerge {
 			if ( $toMergeToClaim ) {
 				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim );
 			} else {
-				$this->toChangeOps->add( $this->getClaimChangeOpFactory()->newSetClaimOp( $toClaim ) );
+				$this->toChangeOps->add( $this->getStatementChangeOpFactory()->newSetStatementOp( $toClaim ) );
 			}
 		}
 	}

@@ -61,11 +61,6 @@ class ChangeOpFactoryProviderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\FingerprintChangeOpFactory', $factory );
 	}
 
-	public function testGetClaimChangeOpFactory() {
-		$factory = $this->newChangeOpFactoryProvider()->getClaimChangeOpFactory();
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ClaimChangeOpFactory', $factory );
-	}
-
 	public function testGetStatementChangeOpFactory() {
 		$factory = $this->newChangeOpFactoryProvider()->getStatementChangeOpFactory();
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\StatementChangeOpFactory', $factory );
