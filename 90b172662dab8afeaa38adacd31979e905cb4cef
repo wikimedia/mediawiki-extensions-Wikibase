@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_cbe058ca",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-26T14:26:02Z",
+      "side": 1,
+      "message": "This will show the parameter passed to this function, which shouldn\u0027t be the property\u0027s id but its label per the line above which calls `resolvePropertyId` (and soon perhaps also property aliases will be supported which makes the whole thing much more flexible.)",
+      "parentUuid": "8ec42329_f0f5034e",
+      "revId": "90b172662dab8afeaa38adacd31979e905cb4cef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_30006b38",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-26T11:45:11Z",
       "side": 1,
       "message": "At least optionally, it would be nice to have one row per value/snak. The label would only be shown for the first of these rows.",
+      "revId": "90b172662dab8afeaa38adacd31979e905cb4cef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4bcc6865",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-26T14:26:02Z",
+      "side": 1,
+      "message": "I think this can be solved by callback renderers. I don\u0027t think we should use a new row but rather separate the values with \u003cbr\u003e tags because the label is the same.",
+      "parentUuid": "8ec42329_30006b38",
       "revId": "90b172662dab8afeaa38adacd31979e905cb4cef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
