@@ -43,6 +43,12 @@ HTML;
 <h2 class="wb-section-heading section-heading $3" dir="auto"><span id="$2">$1</span></h2>
 HTML;
 
+	// empty toc to help MobileFrontend
+	$templates['wikibase-toc'] =
+<<<HTML
+<div id="toc"></div>
+HTML;
+
 	$templates['wikibase-statementgrouplistview'] =
 <<<HTML
 <div class="wikibase-statementgrouplistview"><!-- wikibase-listview -->$1</div>
