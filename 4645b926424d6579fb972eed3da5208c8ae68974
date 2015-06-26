@@ -16,6 +16,24 @@
       "revId": "4645b926424d6579fb972eed3da5208c8ae68974",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ada164f6",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-06-26T06:06:33Z",
+      "side": 1,
+      "message": "I also wondered if this is the best idea of copying an Entity but I just wanted to replicate the current behaviour. I\u0027m not sure what alternatives we could use.\n\nOne idea would be to return copies of the actual objects in the getters (like `getStatements`, `getFingerprint` etc.) so that those objects aren\u0027t the same as in the Entity object. Then we can safely use `clone` because all modifications on `Entity` have to be made using setters and won\u0027t modify the original `Entity` object.",
+      "parentUuid": "8ec42329_5a28b894",
+      "revId": "4645b926424d6579fb972eed3da5208c8ae68974",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
