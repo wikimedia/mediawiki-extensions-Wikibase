@@ -134,15 +134,15 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		if ( isset( $languageCode ) && isset( $label ) && $label !== '' ) {
 			$searchInteractor = $this->getSearchInteractor( $this->getLanguage()->getCode() );
 			$searchInteractor->setLimit( $this->limit );
-			$searchInteractor->setIsCaseSensitive( true );
+			$searchInteractor->setIsCaseSensitive( false );
 			$searchInteractor->setIsPrefixSearch( false );
-			$searchInteractor->setUseLanguageFallback( false );
-			// TODO also match aliases here T45962
+			$searchInteractor->setUseLanguageFallback( true );
+
 			$searchResults = $searchInteractor->searchForEntities(
 				$label,
 				$languageCode,
 				'item',
-				array( TermIndexEntry::TYPE_LABEL )
+				array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS )
 			);
 
 			if ( 0 < count( $searchResults ) ) {

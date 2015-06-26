@@ -80,16 +80,51 @@ class ItemDisambiguation {
 	 * @return string HTML
 	 */
 	public function getResultHtml( $searchResult ) {
-		$result = $this->linkFormatter->formatEntityId( $searchResult->getEntityId() );
-		$result .= $this->getLabelHtml(
-			$searchResult->getDisplayLabel(),
-			$searchResult->getMatchedTerm()
+		$idHtml = $this->linkFormatter->formatEntityId( $searchResult['entityId'] );
+
+		$displayLabel = isset( $searchResult[TermSearchInteractor::DISPLAYTERMS_KEY][TermIndexEntry::TYPE_LABEL] ) ?
+			$searchResult[TermSearchInteractor::DISPLAYTERMS_KEY][TermIndexEntry::TYPE_LABEL] : null;
+
+		$displayDescription = isset( $searchResult[TermSearchInteractor::DISPLAYTERMS_KEY][TermIndexEntry::TYPE_DESCRIPTION] ) ?
+			$searchResult[TermSearchInteractor::DISPLAYTERMS_KEY][TermIndexEntry::TYPE_DESCRIPTION] : null;
+
+		$matchedTerm = isset( $searchResult[TermSearchInteractor::MATCHEDTERM_KEY] ) ?
+			$searchResult[TermSearchInteractor::MATCHEDTERM_KEY] : null;
+
+		$labelHtml = $this->getLabelHtml(
+			$displayLabel
 		);
-		$result .= $this->getDescriptionHtml(
-			$searchResult->getDisplayLabel(),
-			$searchResult->getDisplayDescription(),
-			$searchResult->getEntityId()
+
+		$descriptionHtml = $this->getDescriptionHtml(
+			$displayDescription
 		);
+
+		$matchHtml = $this->getMatchHtml(
+			$matchedTerm, $displayLabel
+		);
+
+		$result = $idHtml;
+
+		if ( $labelHtml !== '' || $descriptionHtml !== '' || $matchHtml !== '' )  {
+			$result .= wfMessage( 'colon-separator' )->escaped();
+		}
+
+		if ( $labelHtml !== '' )  {
+			$result .= $labelHtml;
+		}
+
+		if ( $labelHtml !== '' && $descriptionHtml !== '' ) {
+			$result .= wfMessage( 'comma-separator' )->escaped();
+		}
+
+		if ( $descriptionHtml !== '' ) {
+			$result .= $descriptionHtml;
+		}
+
+		if ( $matchHtml !== '' ) {
+			$result .= $matchHtml;
+		}
+
 		$result = Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
 		return $result;
 	}
@@ -106,53 +141,66 @@ class ItemDisambiguation {
 	 *
 	 * @return string HTML
 	 */
-	private function getLabelHtml( $displayLabel, $matchedTerm ) {
-		if( $displayLabel !== null && $displayLabel->getText() == $matchedTerm->getText() ) {
+	private function getLabelHtml( Term $label = null ) {
+		if( !$label ) {
 			return '';
 		}
-		$label = $matchedTerm->getText();
-		$language = $matchedTerm->getLanguageCode();
+
+		//TODO: include actual language if $label is a FallbackTerm
 		$labelElement = Html::element(
 			'span',
-			array( 'class' => 'wb-itemlink-query-lang', 'lang' => $language ),
-			$label
+			array( 'class' => 'wb-itemlink-label' ),
+			$label->getText()
 		);
-		$msg = wfMessage( 'wikibase-itemlink-userlang-wrapper' )
-			->rawParams(
-				$this->languageNameLookup->getName( $language, $this->displayLanguageCode ),
-				$labelElement
-			);
-		return $msg->parse();
+		return $labelElement;
 	}
 
 	/**
 	 * Returns HTML representing the description in the given language.
-	 * If no description is defined in that language, return the item's ID,
-	 * unless the label is not defined either. In that case, this method
-	 * returns an empty string, because the entity ID was already used as
-	 * a label.
 	 *
-	 * @param Term|null $displayLabel
-	 * @param Term|null $displayDescription
-	 * @param EntityId $entityId
+	 * @param Term|null $description
 	 *
 	 * @return string HTML
 	 */
-	private function getDescriptionHtml( $displayLabel, $displayDescription, $entityId ) {
-		if ( $displayDescription !== null ) {
-			$descriptionElement = Html::element(
-				'span',
-				array( 'class' => 'wb-itemlink-description' ),
-				$displayDescription->getText()
-			);
-			return htmlspecialchars( wfMessage( 'colon-separator' )->plain() ) . $descriptionElement;
-		} else {
-			if ( $displayLabel !== null ) {
-				$entityIdElement = Html::element( 'span', array(), $entityId->getSerialization() );
-				return htmlspecialchars( wfMessage( 'colon-separator' )->plain() ) . $entityIdElement;
-			}
+	private function getDescriptionHtml( Term $description = null ) {
+		if( !$description ) {
 			return '';
 		}
+
+		//TODO: include actual language if $description is a FallbackTerm
+		$descriptionElement = Html::element(
+			'span',
+			array( 'class' => 'wb-itemlink-description' ),
+			$description->getText()
+		);
+		return $descriptionElement;
+	}
+
+	/**
+	 * Returns HTML representing the label in the search language.
+	 * The result will include the language's name in the user language.
+	 *
+	 * If the label is the same as the label already displayed by the formatted
+	 * ItemID link then no additional label will be displayed
+	 *
+	 * @param Term $match
+	 * @param Term|null $label
+	 *
+	 * @return string HTML
+	 */
+	private function getMatchHtml( Term $match, Term $label = null ) {
+		if( !$match ) {
+			return '';
+		}
+
+		if( $label && $label->getText() == $match->getText() ) {
+			return '';
+		}
+
+		$text = $match->getText();
+		$language = $match->getLanguageCode();
+
+		return wfMessage( 'wikibase-itemlink-userlang-wrapper' )->params( $language, $text )->parse();
 	}
 
 }

@@ -73,9 +73,22 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				$this->equalTo( 'Foo' ),
 				$this->equalTo( 'fr' ),
 				$this->equalTo( 'item' ),
-				$this->equalTo( array( TermIndexEntry::TYPE_LABEL ) )
+				$this->equalTo( array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ) )
 			)
 			->will( $this->returnValue( $returnResults ) );
+
+		$mock->expects( $this->any() )
+			->method( 'setIsCaseSensitive' )
+			->with( false );
+
+		$mock->expects( $this->any() )
+			->method( 'setPrefixMatch' )
+			->with( false );
+
+		$mock->expects( $this->any() )
+			->method( 'setUseLanguageFallback' )
+			->with( true );
+
 		return $mock;
 	}
 
@@ -125,7 +138,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			'content' => 'ItemDisambiguationHTML-2',
 			'attributes' => array( 'class' => 'mock-span' ),
 		);
-		$cases['en/Foo'] = array( 'fr/Foo', array(), 'en', $matchers );
+		$cases['fr/Foo'] = array( 'fr/Foo', array(), 'en', $matchers );
 
 		return $cases;
 	}
