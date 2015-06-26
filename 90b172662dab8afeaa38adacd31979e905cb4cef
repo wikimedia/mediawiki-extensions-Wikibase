@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_f0f5034e",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-26T11:45:11Z",
+      "side": 1,
+      "message": "This uses the property id as the row label? I\u0027d suggest to allow an explicit label to be given as an optional argument. If it\u0027s not given, the property\u0027s label should be used, not the id.",
+      "revId": "90b172662dab8afeaa38adacd31979e905cb4cef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_30006b38",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.capiunto.lua",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-26T11:45:11Z",
+      "side": 1,
+      "message": "At least optionally, it would be nice to have one row per value/snak. The label would only be shown for the first of these rows.",
+      "revId": "90b172662dab8afeaa38adacd31979e905cb4cef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
