@@ -34,6 +34,24 @@
       "revId": "d8cf97e29b9f651dc0cc8e116a657259dd1ff85c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2bca3ca3",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.pagesuggester.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-26T13:11:10Z",
+      "side": 1,
+      "message": "I wonder what you mean with this question? Whenever widget.option( \u0027pageName\u0027, newValue ) is called.",
+      "parentUuid": "8ec42329_b3af9077",
+      "revId": "d8cf97e29b9f651dc0cc8e116a657259dd1ff85c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
