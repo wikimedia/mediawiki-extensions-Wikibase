@@ -120,12 +120,12 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApply( Item $item, ChangeOpMainSnak $changeOp, DataValue $expected = null ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$this->assertNotEmpty( $changeOp->getClaimGuid() );
+		$this->assertNotEmpty( $changeOp->getStatementGuid() );
 		$claims = new Claims( $item->getClaims() );
 		if ( $expected === null ) {
-			$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getClaimGuid() ) );
+			$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getStatementGuid() ) );
 		} else {
-			$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getClaimGuid() )->getMainSnak()->getDataValue() );
+			$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getStatementGuid() )->getMainSnak()->getDataValue() );
 		}
 	}
 
