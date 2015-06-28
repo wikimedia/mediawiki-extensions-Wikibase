@@ -11,7 +11,7 @@ use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
 use UsageException;
-use Wikibase\ChangeOp\ClaimChangeOpFactory;
+use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
@@ -34,9 +34,9 @@ use Wikibase\Summary;
 class SetClaim extends ModifyClaim {
 
 	/**
-	 * @var ClaimChangeOpFactory
+	 * @var StatementChangeOpFactory
 	 */
-	private $claimChangeOpFactory;
+	private $statementChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -47,7 +47,7 @@ class SetClaim extends ModifyClaim {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
-		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 	}
 
 	/**
@@ -77,7 +77,7 @@ class SetClaim extends ModifyClaim {
 
 		$summary = $this->getSummary( $params, $claim, $entity );
 
-		$changeop = $this->claimChangeOpFactory->newSetClaimOp(
+		$changeop = $this->statementChangeOpFactory->newSetStatementOp(
 			$claim,
 			isset( $params['index'] ) ? $params['index'] : null
 		);

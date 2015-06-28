@@ -4,6 +4,11 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementGuidParser;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Validators\SnakValidator;
 
 /**
@@ -15,12 +20,123 @@ use Wikibase\Validators\SnakValidator;
 class StatementChangeOpFactory {
 
 	/**
+	 * @var ClaimGuidGenerator
+	 */
+	private $guidGenerator;
+
+	/**
+	 * @var ClaimGuidValidator
+	 */
+	private $guidValidator;
+
+	/**
+	 * @var StatementGuidParser
+	 */
+	private $guidParser;
+
+	/**
+	 * @var SnakValidator
+	 */
+	private $snakValidator;
+
+	/**
 	 * @var SnakValidator
 	 */
 	private $referenceSnakValidator;
 
-	public function __construct( SnakValidator $referenceSnakValidator ) {
+	public function __construct(
+		ClaimGuidGenerator $guidGenerator,
+		ClaimGuidValidator $guidValidator,
+		StatementGuidParser $guidParser,
+		SnakValidator $snakValidator,
+		SnakValidator $referenceSnakValidator
+	) {
+		$this->guidGenerator = $guidGenerator;
+		$this->guidValidator = $guidValidator;
+		$this->guidParser = $guidParser;
+		$this->snakValidator = $snakValidator;
 		$this->referenceSnakValidator = $referenceSnakValidator;
+	}
+
+	/**
+	 * @param Statement $statement
+	 * @param int|null $index
+	 *
+	 * @throws InvalidArgumentException
+	 * @return ChangeOp
+	 */
+	public function newAddStatementOp( Statement $statement, $index = null ) {
+		return new ChangeOpStatement(
+			$statement,
+			$this->guidGenerator,
+			$this->guidValidator,
+			$this->guidParser,
+			$this->snakValidator,
+			$index
+		);
+	}
+
+	/**
+	 * @param Statement $statement
+	 * @param int|null $index
+	 *
+	 * @throws InvalidArgumentException
+	 * @return ChangeOp
+	 */
+	public function newSetStatementOp( Statement $statement, $index = null ) {
+		return new ChangeOpStatement(
+			$statement,
+			$this->guidGenerator,
+			$this->guidValidator,
+			$this->guidParser,
+			$this->snakValidator,
+			$index
+		);
+	}
+
+	/**
+	 * @param string $guid
+	 *
+	 * @throws InvalidArgumentException
+	 * @return ChangeOp
+	 */
+	public function newRemoveStatementOp( $guid ) {
+		return new ChangeOpRemoveStatement( $guid );
+	}
+
+	/**
+	 * @param string $statementGuid
+	 * @param Snak $snak
+	 *
+	 * @throws InvalidArgumentException
+	 * @return ChangeOp
+	 */
+	public function newSetMainSnakOp( $statementGuid, Snak $snak ) {
+		return new ChangeOpMainSnak( $statementGuid, $snak, $this->guidGenerator, $this->snakValidator );
+	}
+
+	/**
+	 * @param string $statementGuid
+	 * @param Snak $snak
+	 * @param string $snakHash (if not empty '', the old snak is replaced)
+	 *
+	 * @throws InvalidArgumentException
+	 * @return ChangeOp
+	 */
+	public function newSetQualifierOp( $statementGuid, Snak $snak, $snakHash ) {
+		//XXX: index??
+		return new ChangeOpQualifier( $statementGuid, $snak, $snakHash, $this->snakValidator );
+	}
+
+	/**
+	 * @param string $statementGuid
+	 * @param string $snakHash
+	 *
+	 * @throws InvalidArgumentException
+	 * @return ChangeOp
+	 */
+	public function newRemoveQualifierOp( $statementGuid, $snakHash ) {
+		return new ChangeOpQualifierRemove( $statementGuid, $snakHash );
 	}
 
 	/**

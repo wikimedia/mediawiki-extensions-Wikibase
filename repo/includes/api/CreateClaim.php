@@ -5,7 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
-use Wikibase\ChangeOp\ClaimChangeOpFactory;
+use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -22,9 +22,9 @@ use Wikibase\Repo\WikibaseRepo;
 class CreateClaim extends ModifyClaim {
 
 	/**
-	 * @var ClaimChangeOpFactory
+	 * @var StatementChangeOpFactory
 	 */
-	private $claimChangeOpFactory;
+	private $statementChangeOpFactory;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -35,7 +35,7 @@ class CreateClaim extends ModifyClaim {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
-		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 	}
 
 	/**
@@ -65,7 +65,7 @@ class CreateClaim extends ModifyClaim {
 		$summary = $this->modificationHelper->createSummary( $params, $this );
 
 		/* @var ChangeOpMainSnak $changeOp */
-		$changeOp = $this->claimChangeOpFactory->newSetMainSnakOp( '', $snak );
+		$changeOp = $this->statementChangeOpFactory->newSetMainSnakOp( '', $snak );
 
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 

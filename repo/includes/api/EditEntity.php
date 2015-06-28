@@ -13,7 +13,7 @@ use Title;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\ClaimChangeOpFactory;
+use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
@@ -55,9 +55,9 @@ class EditEntity extends ModifyEntity {
 	private $termChangeOpFactory;
 
 	/**
-	 * @var ClaimChangeOpFactory
+	 * @var StatementChangeOpFactory
 	 */
-	private $claimChangeOpFactory;
+	private $statementChangeOpFactory;
 
 	/**
 	 * @var SiteLinkChangeOpFactory
@@ -80,7 +80,7 @@ class EditEntity extends ModifyEntity {
 
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
-		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
 	}
 
@@ -499,7 +499,7 @@ class EditEntity extends ModifyEntity {
 						throw new IllegalValueException( 'Claim serialization did not contained a Claim.' );
 					}
 
-					$opsToReturn[] = $this->claimChangeOpFactory->newSetClaimOp( $claim );
+					$opsToReturn[] = $this->statementChangeOpFactory->newSetStatementOp( $claim );
 				} catch ( IllegalValueException $ex ) {
 					$this->dieException( $ex, 'invalid-claim' );
 				} catch ( MWException $ex ) {
@@ -522,7 +522,7 @@ class EditEntity extends ModifyEntity {
 		foreach ( $claims as $claimArray ) {
 			if ( array_key_exists( 'remove', $claimArray ) ) {
 				if ( array_key_exists( 'id', $claimArray ) ) {
-					$opsToReturn[] = $this->claimChangeOpFactory->newRemoveStatementOp( $claimArray['id'] );
+					$opsToReturn[] = $this->statementChangeOpFactory->newRemoveStatementOp( $claimArray['id'] );
 				} else {
 					$this->dieError( 'Cannot remove a claim with no GUID', 'invalid-claim' );
 				}
