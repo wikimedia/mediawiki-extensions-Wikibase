@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 
 /**
  * @covers Wikibase\DataModel\Services\Lookup\PropertyNotFoundException
