@@ -67,4 +67,5 @@ class AliasGroupDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 	}
+
 }

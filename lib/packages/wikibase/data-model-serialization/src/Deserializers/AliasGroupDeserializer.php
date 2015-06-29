@@ -59,8 +59,10 @@ class AliasGroupDeserializer implements Deserializer {
 		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'The alias group serialization should be an array' );
 		}
-		if( count( $serialization ) > 1 ) {
-			throw new DeserializationException( 'The alias group serialization should only contain 1 element' );
+		if ( count( $serialization ) > 1 ) {
+			throw new DeserializationException(
+				'The alias group serialization should only contain 1 element'
+			);
 		}
 	}
 
@@ -106,7 +108,10 @@ class AliasGroupDeserializer implements Deserializer {
 		}
 	}
 
-	private function assertRequestedAndActualLanguageMatch( array $serialization, $requestedLanguage ) {
+	private function assertRequestedAndActualLanguageMatch(
+		array $serialization,
+		$requestedLanguage
+	) {
 		if ( $serialization['language'] !== $requestedLanguage ) {
 			throw new DeserializationException(
 				'Deserialization of a value of the attribute language (actual)'

@@ -39,7 +39,7 @@ class TermListDeserializer implements Deserializer {
 	 */
 	private function getDeserialized( $serialization ) {
 		$termList = new TermList();
-		foreach( $serialization as $termSerialization ) {
+		foreach ( $serialization as $termSerialization ) {
 			$termList->setTerm( $this->termDeserializer->deserialize( $termSerialization ) );
 		}
 		return $termList;

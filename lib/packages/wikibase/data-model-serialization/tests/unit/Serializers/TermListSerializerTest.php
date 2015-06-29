@@ -30,19 +30,19 @@ class TermListSerializerTest extends \PHPUnit_Framework_TestCase {
 	public function serializationProvider() {
 		return array(
 			array(
-				new TermList( array( ) ),
+				new TermList( array() ),
 				false,
 				array()
 			),
 			array(
-				new TermList( array( ) ),
+				new TermList( array() ),
 				true,
 				new \stdClass()
 			),
 			array(
 				new TermList( array(
-					new Term ( 'en', 'Water' ),
-					new Term ( 'it', 'Lama' ),
+					new Term( 'en', 'Water' ),
+					new Term( 'it', 'Lama' ),
 					new TermFallback( 'pt', 'Lama', 'de', 'zh' ),
 				) ),
 				false,

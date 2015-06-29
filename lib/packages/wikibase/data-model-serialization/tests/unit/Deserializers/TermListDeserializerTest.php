@@ -77,4 +77,5 @@ class TermListDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 	}
+
 }
