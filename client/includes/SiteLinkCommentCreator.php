@@ -38,38 +38,12 @@ class SiteLinkCommentCreator {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Diff|null $siteLinkDiff
+	 * @param Diff $siteLinkDiff
 	 * @param string $action e.g. 'remove', see the constants in EntityChange
-	 * @param string $comment
 	 *
 	 * @return array|string
 	 */
-	public function getEditComment( Diff $siteLinkDiff = null, $action, $comment ) {
-		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
-			$siteLinkComment = $this->getSiteLinkComment( $action, $siteLinkDiff );
-
-			if ( !empty( $siteLinkComment ) ) {
-				return $siteLinkComment;
-			}
-		}
-
-		return $comment;
-	}
-
-	/**
-	 * Returns an array structure suitable for building an edit summary for the respective
-	 * change to site links.
-	 *
-	 * @param string $action e.g. 'remove', see the constants in EntityChange
-	 * @param Diff $siteLinkDiff The change's site link diff
-	 *
-	 * @return array|null
-	 */
-	private function getSiteLinkComment( $action, Diff $siteLinkDiff ) {
-		if ( $siteLinkDiff->isEmpty() ) {
-			return null;
-		}
-
+	public function getEditComment( Diff $siteLinkDiff, $action ) {
 		//TODO: Implement comments specific to the affected page.
 		//       Different pages may be affected in different ways by the same change.
 		//       Also, merged changes may affect the same page in multiple ways.
@@ -97,7 +71,7 @@ class SiteLinkCommentCreator {
 			if ( $diffOpCount === 1 ) {
 				$params = $this->getSiteLinkChangeParams( $diffOps );
 			} else {
-				// @todo report how many changes
+				// @todo FIXME report at least how many changes
 				$params = array(
 					'message' => 'wikibase-comment-update'
 				);
@@ -133,7 +107,7 @@ class SiteLinkCommentCreator {
 				$args
 			);
 
-			// todo handle if there are multiple diffOps here
+			//@todo FIXME handle if there are multiple diffOps here
 			break;
 		}
 
