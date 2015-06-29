@@ -373,14 +373,25 @@ class ChangeHandler {
 		$siteLinkDiff = $change instanceof ItemChange
 			? $change->getSiteLinkDiff()
 			: null;
+
 		$action = $change->getAction();
-		$comment = $change->getComment();
+		$editComment = array();
 
-		$commentCreator = new SiteLinkCommentCreator( $this->localSiteId );
-		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
+		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
+			$commentCreator = new SiteLinkCommentCreator( $this->localSiteId );
+			$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action );
+		}
 
-		if ( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
-			throw new MWException( 'getEditComment returned an empty comment' );
+		if ( $editComment === null ) {
+			$repoComment = $change->getComment();
+
+			$editComment = array(
+				'repo-comment' => $repoComment
+			);
+		}
+
+		if ( !isset( $editComment['message'] ) ) {
+			$editComment['message'] = 'wikibase-comment-updated';
 		}
 
 		return $editComment;

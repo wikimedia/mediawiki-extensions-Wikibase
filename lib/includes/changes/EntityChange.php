@@ -36,11 +36,6 @@ class EntityChange extends DiffChange {
 	private $entityId = null;
 
 	/**
-	 * @var string|null
-	 */
-	protected $comment = null;
-
-	/**
 	 * @see ORMRow::setField
 	 *
 	 * Overwritten to force lower case object_id
@@ -143,23 +138,27 @@ class EntityChange extends DiffChange {
 	 * @return string
 	 */
 	public function setComment( $comment = null ) {
-		if ( $comment !== null ) {
-			$this->comment = $comment;
-		} else {
+		if ( $comment === null ) {
 			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
 			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
-			$this->comment = 'wikibase-comment-' . $this->getAction();
+			$comment = 'wikibase-comment-' . $this->getAction();
 		}
+
+		$this->setMetadata( array( 'comment' => $comment ) );
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getComment() {
-		if ( $this->comment === null ) {
+		$meta = $this->getMetadata();
+
+		if ( empty( $meta ) || !isset( $meta['comment'] ) ) {
 			$this->setComment();
+			$meta = $this->getMetadata();
 		}
-		return $this->comment;
+
+		return $meta['comment'];
 	}
 
 	/**
@@ -182,7 +181,7 @@ class EntityChange extends DiffChange {
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
 			'time' => $rc->getAttribute( 'rc_timestamp' ),
-			'comment' => '',
+			'comment' => $rc->getAttribute( 'rc_comment' ),
 		) );
 	}
 
@@ -197,7 +196,6 @@ class EntityChange extends DiffChange {
 			'page_id' => 0,
 			'rev_id' => 0,
 			'parent_id' => 0,
-			'comment' => '',
 		) );
 	}
 
@@ -217,6 +215,8 @@ class EntityChange extends DiffChange {
 			'object_id' => $entityId->getSerialization(),
 			'time' => $revision->getTimestamp(),
 		) );
+
+		$this->setComment( $revision->getComment() );
 	}
 
 	/**

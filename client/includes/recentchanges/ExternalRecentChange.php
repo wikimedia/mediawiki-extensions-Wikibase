@@ -70,7 +70,7 @@ class ExternalRecentChange {
 			'rc_last_oldid' => $title->getLatestRevID(),
 			'rc_params' => serialize( $attribs ),
 			'rc_cur_id' => $title->getArticleID(),
-			'rc_comment' => '',
+			'rc_comment' => '', //FIXME why?!
 			'rc_timestamp' => $time,
 			'rc_log_action' => '',
 			'rc_source' => 'wb'
