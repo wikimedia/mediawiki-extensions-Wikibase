@@ -10,6 +10,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
+use Wikibase\Repo\Interactors\TermSearchResult;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 
@@ -137,16 +138,16 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$searchInteractor->setIsPrefixSearch( false );
 			$searchInteractor->setUseLanguageFallback( false );
 			// TODO also match aliases here T45962
-			$searchResult = $searchInteractor->searchForEntities(
+			$searchResults = $searchInteractor->searchForEntities(
 				$label,
 				$languageCode,
 				'item',
 				array( TermIndexEntry::TYPE_LABEL )
 			);
 
-			if ( 0 < count( $searchResult ) ) {
+			if ( 0 < count( $searchResults ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );
-				$this->displayDisambiguationPage( $searchResult );
+				$this->displayDisambiguationPage( $searchResults );
 			} else {
 				$this->showNothingFound( $languageCode, $label );
 			}
@@ -185,11 +186,11 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	/**
 	 * Display disambiguation page.
 	 *
-	 * @param array[] $searchResult
+	 * @param TermSearchResult[] $searchResults
 	 */
-	private function displayDisambiguationPage( array $searchResult ) {
+	private function displayDisambiguationPage( array $searchResults ) {
 		$itemDisambiguation = $this->getItemDisambiguation();
-		$html = $itemDisambiguation->getHTML( $searchResult );
+		$html = $itemDisambiguation->getHTML( $searchResults );
 		$this->getOutput()->addHTML( $html );
 	}
 

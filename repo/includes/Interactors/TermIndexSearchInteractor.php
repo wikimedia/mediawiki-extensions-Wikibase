@@ -160,7 +160,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @param string $entityType
 	 * @param string[] $termTypes
 	 *
-	 * @returns array[]
+	 * @returns TermSearchResult[]
 	 */
 	public function searchForEntities( $text, $languageCode, $entityType, array $termTypes ) {
 		$matchedTermIndexEntries = $this->getMatchingTermIndexEntries( $text, $languageCode, $entityType, $termTypes );
@@ -275,16 +275,16 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	/**
 	 * @param TermIndexEntry $termIndexEntry
 	 *
-	 * @returns array
-	 * @see TermSearchInteractor interface for return format
+	 * @returns TermSearchResult
 	 */
 	private function convertToSearchResult( TermIndexEntry $termIndexEntry ) {
 		$entityId = $termIndexEntry->getEntityId();
-		return array(
-			TermSearchInteractor::ENTITYID_KEY => $entityId,
-			TermSearchInteractor::MATCHEDTERM_KEY => $termIndexEntry->getTerm(),
-			TermSearchInteractor::MATCHEDTERMTYPE_KEY => $termIndexEntry->getType(),
-			TermSearchInteractor::DISPLAYTERMS_KEY => $this->getDisplayTerms( $entityId ),
+		return new TermSearchResult(
+			$termIndexEntry->getTerm(),
+			$termIndexEntry->getType(),
+			$entityId,
+			$this->getLabelDisplayTerm( $entityId ),
+			$this->getDescriptionDisplayTerm( $entityId )
 		);
 	}
 
@@ -312,27 +312,6 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 		}
 
 		return array_unique( $languageCodesWithFallback );
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return Term[] array with possible keys TermIndexEntry::TYPE_*
-	 */
-	private function getDisplayTerms( EntityId $entityId ) {
-		$displayTerms = array();
-
-		$labelDisplayTerm = $this->getLabelDisplayTerm( $entityId );
-		if( $labelDisplayTerm !== null ) {
-			$displayTerms[TermIndexEntry::TYPE_LABEL] = $labelDisplayTerm;
-		}
-
-		$descriptionDisplayTerm = $this->getDescriptionDisplayTerm( $entityId );
-		if( $descriptionDisplayTerm !== null ) {
-			$displayTerms[TermIndexEntry::TYPE_DESCRIPTION] = $descriptionDisplayTerm;
-		}
-
-		return $displayTerms;
 	}
 
 	/**
