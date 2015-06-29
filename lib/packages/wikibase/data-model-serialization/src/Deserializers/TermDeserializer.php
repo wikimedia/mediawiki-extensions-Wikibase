@@ -48,6 +48,23 @@ class TermDeserializer implements Deserializer {
 		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'The term serialization should be an array' );
 		}
+
+		$this->requireAttribute( $serialization, 'language' );
+		$this->requireAttribute( $serialization, 'value' );
+		$this->assertNotAttribute( $serialization, 'source' );
+
+		$this->assertAttributeInternalType( $serialization, 'language', 'string' );
+		$this->assertAttributeInternalType( $serialization, 'value', 'string' );
+	}
+
+	private function assertAttributeInternalType( array $array, $attributeName, $internalType ) {
+		if ( gettype( $array[$attributeName] ) !== $internalType ) {
+			throw new InvalidAttributeException(
+				$attributeName,
+				$array[$attributeName],
+				"The internal type of attribute '$attributeName' needs to be '$internalType'"
+			);
+		}
 	}
 
 	/**

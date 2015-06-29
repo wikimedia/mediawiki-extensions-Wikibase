@@ -43,6 +43,14 @@ class TermDeserializerTest extends DeserializerBaseTest {
 	public function nonDeserializableProvider() {
 		return array(
 			array(
+				'language' => 123,
+				'value' => 'FooBar',
+			),
+			array(
+				'language' => 'de',
+				'value' => 999,
+			),
+			array(
 				'language' => 'fr',
 				'value' => 'Fr to DE hehe',
 				'source' => 'de',

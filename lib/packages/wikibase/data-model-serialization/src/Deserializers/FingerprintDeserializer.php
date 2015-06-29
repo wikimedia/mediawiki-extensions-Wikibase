@@ -7,7 +7,6 @@ use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\TermList;
 
 /**
  * Package private
@@ -16,8 +15,24 @@ use Wikibase\DataModel\Term\TermList;
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig
+ * @author Adam Shorland
  */
 class FingerprintDeserializer implements Deserializer {
+
+	/**
+	 * @var TermListDeserializer
+	 */
+	private $termListDeserializer;
+
+	/**
+	 * @var AliasGroupDeserializer
+	 */
+	private $aliasGroupDeserializer;
+
+	public function __construct() {
+		$this->termListDeserializer = new TermListDeserializer( new TermDeserializer() );
+		$this->aliasGroupDeserializer = new AliasGroupDeserializer();
+	}
 
 	/**
 	 * @see Deserializer::deserialize
@@ -60,14 +75,12 @@ class FingerprintDeserializer implements Deserializer {
 	}
 
 	private function deserializeValuePerLanguageSerialization( array $serialization ) {
-		$termList = new TermList();
-
 		foreach ( $serialization as $requestedLanguage => $valueSerialization ) {
-			$this->assertIsValidValueSerialization( $valueSerialization, $requestedLanguage );
-			$termList->setTextForLanguage( $valueSerialization['language'], $valueSerialization['value'] );
+			$this->assertAttributeIsArray( $serialization, $requestedLanguage );
+			$this->assertRequestedAndActualLanguageMatch( $valueSerialization, $requestedLanguage );
 		}
 
-		return $termList;
+		return $this->termListDeserializer->deserialize( $serialization );
 	}
 
 	private function setAliasesFromSerialization( array $serialization, Fingerprint $fingerprint ) {
@@ -81,31 +94,10 @@ class FingerprintDeserializer implements Deserializer {
 				throw new DeserializationException( "Aliases attribute should be an array of array" );
 			}
 
-			$aliases = array();
-
-			foreach ( $aliasesPerLanguageSerialization as $aliasSerialization ) {
-				$this->assertIsValidValueSerialization( $aliasSerialization, $requestedLanguage );
-				$aliases[] = $aliasSerialization['value'];
-			}
-
-			$fingerprint->setAliasGroup( $requestedLanguage, $aliases );
-		}
-	}
-
-	private function requireAttribute( array $array, $attributeName ) {
-		if ( !array_key_exists( $attributeName, $array ) ) {
-			throw new MissingAttributeException(
-				$attributeName
-			);
-		}
-	}
-
-	private function assertNotAttribute( array $array, $key ) {
-		if ( array_key_exists( $key, $array ) ) {
-			throw new InvalidAttributeException(
-				$key,
-				$array[$key],
-				'Deserialization of attribute ' . $key . ' not supported.'
+			$fingerprint->getAliasGroups()->setGroup(
+				$this->aliasGroupDeserializer->deserialize(
+					array( $requestedLanguage => $aliasesPerLanguageSerialization )
+				)
 			);
 		}
 	}
@@ -118,20 +110,6 @@ class FingerprintDeserializer implements Deserializer {
 					. $serialization['language'] . ' !== ' . $requestedLanguage
 			);
 		}
-	}
-
-	private function assertIsValidValueSerialization( $serialization, $requestedLanguage ) {
-		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'Term serializations must be arrays' );
-		}
-
-		$this->requireAttribute( $serialization, 'language' );
-		$this->requireAttribute( $serialization, 'value' );
-		$this->assertNotAttribute( $serialization, 'source' );
-
-		$this->assertAttributeInternalType( $serialization, 'language', 'string' );
-		$this->assertAttributeInternalType( $serialization, 'value', 'string' );
-		$this->assertRequestedAndActualLanguageMatch( $serialization, $requestedLanguage );
 	}
 
 	private function assertAttributeIsArray( array $array, $attributeName ) {
