@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
+use Wikibase\Repo\Interactors\TermSearchResult;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndexEntry;
 use Wikibase\Test\MockTermIndex;
@@ -103,7 +104,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	private function getDisplayTerm( EntityId $entityId, $termType ) {
+	private function getExpectedDisplayTerm( EntityId $entityId, $termType ) {
 		return new TermFallback( 'pt', $termType . '-pt-' . $entityId->getSerialization(), 'pt', 'pt' );
 	}
 
@@ -315,35 +316,26 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			'Incorrect number of search results'
 		);
 
+		/** @var TermSearchResult $result */
 		foreach ( $results as $key => $result ) {
 			$expectedTermDetails = $expectedTermsDetails[$key];
 
 			/** @var EntityId $expectedEntityId */
 			$expectedEntityId = $expectedTermDetails['entityId'];
-			$this->assertTrue( $expectedEntityId->equals( $result['entityId'] ) );
+			$this->assertTrue( $expectedEntityId->equals( $result->getEntityId() ) );
 
-			/** @var Term $resultMatchedTerm */
-			$resultMatchedTerm = $result['matchedTerm'];
-			/** @var Term $expectedTerm */
-			$expectedTerm = $expectedTermDetails['term'];
-			$this->assertEquals( $expectedTerm, $resultMatchedTerm );
-
-			$resultMatchedTermType = $result['matchedTermType'];
-			$expectedTermType = $expectedTermDetails['termtype'];
-			$this->assertEquals( $expectedTermType, $resultMatchedTermType );
+			$this->assertEquals( $expectedTermDetails['term'], $result->getMatchedTerm() );
+			$this->assertEquals( $expectedTermDetails['termtype'], $result->getMatchedTermType() );
 
 			// These are mocked
-			$expectedDisplayTerms = array(
-				TermIndexEntry::TYPE_LABEL => $this->getDisplayTerm(
-					$expectedEntityId,
-					TermIndexEntry::TYPE_LABEL
-				),
-				TermIndexEntry::TYPE_DESCRIPTION => $this->getDisplayTerm(
-					$expectedEntityId,
-					TermIndexEntry::TYPE_DESCRIPTION
-				),
+			$this->assertEquals(
+				$this->getExpectedDisplayTerm( $expectedEntityId, TermIndexEntry::TYPE_LABEL ),
+				$result->getDisplayLabel()
 			);
-			$this->assertEquals( $expectedDisplayTerms, $result['displayTerms'] );
+			$this->assertEquals(
+				$this->getExpectedDisplayTerm( $expectedEntityId, TermIndexEntry::TYPE_DESCRIPTION ),
+				$result->getDisplayDescription()
+			);
 		}
 	}
 
