@@ -16,6 +16,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchInteractor;
+use Wikibase\Repo\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
 use Wikibase\Api\SearchEntities;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -97,7 +98,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param array $params
-	 * @param array $returnResults
+	 * @param TermSearchResult[] $returnResults
 	 *
 	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
 	 */
@@ -226,29 +227,25 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 
 	public function provideTestSearchEntities() {
 		$multipleInteractorReturnValues = array(
-			array(
-				'entityId' => new ItemId( 'Q222' ),
-				'matchedTerm' => new Term( 'en-gb', 'Fooooo' ),
-				'matchedTermType' => 'label',
-				'displayTerms' => array(
-					TermIndexEntry::TYPE_LABEL => new Term( 'en-gb', 'FooHeHe' ),
-					TermIndexEntry::TYPE_DESCRIPTION => new Term( 'en', 'FooHeHe en description' ),
-				),
+			new TermSearchResult(
+				new Term( 'en-gb', 'Fooooo' ),
+				'label',
+				new ItemId( 'Q222' ),
+				new Term( 'en-gb', 'FooHeHe' ),
+				new Term( 'en', 'FooHeHe en description' )
 			),
-			array(
-				'entityId' => new ItemId( 'Q333' ),
-				'matchedTerm' => new Term( 'de', 'AMatchedTerm' ),
-				'matchedTermType' => 'alias',
-				'displayTerms' => array(
-					TermIndexEntry::TYPE_LABEL => new Term( 'fr', 'ADisplayLabel' ),
-				),
+			new TermSearchResult(
+				new Term( 'de', 'AMatchedTerm' ),
+				'alias',
+				new ItemId( 'Q333' ),
+				new Term( 'fr', 'ADisplayLabel' )
 			),
 		);
 		$q222Result = array(
 			'id' => 'Q222',
 			'url' => 'http://fullTitleUrl',
-			TermIndexEntry::TYPE_LABEL => 'FooHeHe',
-			TermIndexEntry::TYPE_DESCRIPTION => 'FooHeHe en description',
+			'label' => 'FooHeHe',
+			'description' => 'FooHeHe en description',
 			'match' => array(
 				'type' => 'label',
 				'language' => 'en-gb',
@@ -258,7 +255,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q333Result = array(
 			'id' => 'Q333',
 			'url' => 'http://fullTitleUrl',
-			TermIndexEntry::TYPE_LABEL => 'ADisplayLabel',
+			'label' => 'ADisplayLabel',
 			'aliases' => array( 'AMatchedTerm' ),
 			'match' => array(
 				'type' => 'alias',

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\TermIndexEntry;
+use Wikibase\Repo\Interactors\TermSearchResult;
 
 /**
  * @covers Wikibase\ItemDisambiguation
@@ -78,16 +78,14 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 		);
 		$cases['One Normal Result'] = array(
 			array(
-				array(
-					'entityId' => new ItemId( 'Q1' ),
-					'matchedTerm' => new Term( 'de', 'Foo'),
-					'matchedTermType' => array( 'label' ),
-					'displayTerms' => array(
-						TermIndexEntry::TYPE_LABEL => new Term( 'en', 'DisplayLabel' ),
-						TermIndexEntry::TYPE_DESCRIPTION => new Term( 'en', 'DisplayDescription' ),
-						),
-					),
+				new TermSearchResult(
+					new Term( 'de', 'Foo' ),
+					'label',
+					new ItemId( 'Q1' ),
+					new Term( 'en', 'DisplayLabel' ),
+					new Term( 'en', 'DisplayDescription' )
 				),
+			),
 			$matchers
 		);
 
@@ -122,21 +120,18 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 		);
 		$cases['Two Results'] = array(
 			array(
-				array(
-					'entityId' => new ItemId( 'Q2' ),
-					'matchedTermType' => 'label',
-					'matchedTerm' => new Term( 'de', 'Foo' ),
-					'displayTerms' => array(
-						TermIndexEntry::TYPE_DESCRIPTION => new Term( 'en', 'DisplayDescription' ),
-					),
+				new TermSearchResult(
+					new Term( 'de', 'Foo' ),
+					'label',
+					new ItemId( 'Q2' ),
+					null,
+					new Term( 'en', 'DisplayDescription' )
 				),
-				array(
-					'entityId' => new ItemId( 'Q3' ),
-					'matchedTermType' => 'label',
-					'matchedTerm' => new Term( 'de', 'Foo' ),
-					'displayTerms' => array(
-						TermIndexEntry::TYPE_LABEL => new Term( 'en', 'DisplayLabel' ),
-					),
+				new TermSearchResult(
+					new Term( 'de', 'Foo' ),
+					'label',
+					new ItemId( 'Q3' ),
+					new Term( 'en', 'DisplayLabel' )
 				),
 			),
 			$matchers
