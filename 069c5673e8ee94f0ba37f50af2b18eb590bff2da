@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_b1ef6fe3",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-06-29T11:32:57Z",
+      "side": 1,
+      "message": "I\u0027m not even sure if columns are a good thing on mobile. For items with many statements this means you have to scroll down and up and down to read everything in the right order if it\u0027s split into two columns.\n\nAlso I like \"em\" more than \"px\", but that\u0027s probably more a matter of taste.",
+      "parentUuid": "8ec42329_8b61f033",
+      "revId": "069c5673e8ee94f0ba37f50af2b18eb590bff2da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_8b257058",
         "filename": "view/resources/wikibase/wikibase.mobile.css",
         "patchSetId": 1
