@@ -15,9 +15,6 @@ use Wikibase\DataModel\Term\AliasGroup;
  */
 class AliasGroupDeserializer implements Deserializer {
 
-	public function __construct() {
-	}
-
 	/**
 	 * @param mixed $serialization
 	 *
