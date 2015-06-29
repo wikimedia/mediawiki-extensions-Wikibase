@@ -3,10 +3,11 @@
 namespace Wikibase;
 
 use Html;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\Interactors\TermSearchInteractor;
+use Wikibase\Repo\Interactors\TermSearchResult;
 
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
@@ -59,7 +60,7 @@ class ItemDisambiguation {
 	 *
 	 * @since 0.5
 	 *
-	 * @param array[] $searchResults as returned by TermSearchInteractor
+	 * @param TermSearchResult[] $searchResults
 	 *
 	 * @return string HTML
 	 */
@@ -74,19 +75,20 @@ class ItemDisambiguation {
 	}
 
 	/**
-	 * @param array[] $searchResult
+	 * @param TermSearchResult $searchResult
 	 *
 	 * @return string HTML
 	 */
-	public function getResultHtml( array $searchResult ) {
-		$result = $this->linkFormatter->formatEntityId( $searchResult['entityId'] );
+	public function getResultHtml( $searchResult ) {
+		$result = $this->linkFormatter->formatEntityId( $searchResult->getEntityId() );
 		$result .= $this->getLabelHtml(
-			$searchResult[TermSearchInteractor::DISPLAYTERMS_KEY],
-			$searchResult[TermSearchInteractor::MATCHEDTERM_KEY]
+			$searchResult->getDisplayLabel(),
+			$searchResult->getMatchedTerm()
 		);
 		$result .= $this->getDescriptionHtml(
-			$searchResult[TermSearchInteractor::DISPLAYTERMS_KEY],
-			$searchResult[TermSearchInteractor::ENTITYID_KEY]
+			$searchResult->getDisplayLabel(),
+			$searchResult->getDisplayDescription(),
+			$searchResult->getEntityId()
 		);
 		$result = Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
 		return $result;
@@ -99,16 +101,13 @@ class ItemDisambiguation {
 	 * If the label is the same as the label already displayed by the formatted
 	 * ItemID link then no additional label will be displayed
 	 *
-	 * @param Term[] $displayTerms
+	 * @param Term|null $displayLabel
 	 * @param Term $matchedTerm
 	 *
 	 * @return string HTML
 	 */
-	private function getLabelHtml( $displayTerms, $matchedTerm ) {
-		if( array_key_exists( TermIndexEntry::TYPE_LABEL, $displayTerms ) ) {
-			$displayLabel = $displayTerms[TermIndexEntry::TYPE_LABEL];
-		}
-		if( isset( $displayLabel ) && $displayLabel->getText() == $matchedTerm->getText() ) {
+	private function getLabelHtml( $displayLabel, $matchedTerm ) {
+		if( $displayLabel !== null && $displayLabel->getText() == $matchedTerm->getText() ) {
 			return '';
 		}
 		$label = $matchedTerm->getText();
@@ -133,22 +132,23 @@ class ItemDisambiguation {
 	 * returns an empty string, because the entity ID was already used as
 	 * a label.
 	 *
-	 * @param Term[] $displayTerms
-	 * @param string $entityId
+	 * @param Term|null $displayLabel
+	 * @param Term|null $displayDescription
+	 * @param EntityId $entityId
 	 *
 	 * @return string HTML
 	 */
-	private function getDescriptionHtml( $displayTerms, $entityId ) {
-		if ( isset( $displayTerms[TermIndexEntry::TYPE_DESCRIPTION] ) ) {
+	private function getDescriptionHtml( $displayLabel, $displayDescription, $entityId ) {
+		if ( $displayDescription !== null ) {
 			$descriptionElement = Html::element(
 				'span',
 				array( 'class' => 'wb-itemlink-description' ),
-				$displayTerms[TermIndexEntry::TYPE_DESCRIPTION]->getText()
+				$displayDescription->getText()
 			);
 			return htmlspecialchars( wfMessage( 'colon-separator' )->plain() ) . $descriptionElement;
 		} else {
-			if ( array_key_exists( TermIndexEntry::TYPE_LABEL, $displayTerms ) ) {
-				$entityIdElement = Html::element( 'span', array(), $entityId );
+			if ( $displayLabel !== null ) {
+				$entityIdElement = Html::element( 'span', array(), $entityId->getSerialization() );
 				return htmlspecialchars( wfMessage( 'colon-separator' )->plain() ) . $entityIdElement;
 			}
 			return '';
