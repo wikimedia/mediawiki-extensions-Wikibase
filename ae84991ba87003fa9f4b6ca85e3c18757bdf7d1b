@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_f6b16d8d",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-29T10:26:19Z",
+      "side": 1,
+      "message": "eek",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_d6fc713d",
         "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
         "patchSetId": 22
@@ -104,6 +121,23 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_366b75f0",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-29T10:26:19Z",
+      "side": 1,
+      "message": "This parameter doesn\u0027t exist. From the name, it\u0027s also unclear what it would do. Generally, try to avoid boolean parameters for readability. What does frob( \"foo\", false, true, true ) do?....",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_96f26963",
         "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
         "patchSetId": 22
@@ -115,6 +149,40 @@
       "writtenOn": "2015-06-29T10:25:24Z",
       "side": 1,
       "message": "and a boolean for the status of the redirect.\nThis still just returns array( $fromRev, $toRev )",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d679d1c3",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-29T10:26:19Z",
+      "side": 1,
+      "message": "From looking at the next file, it seems like the $redirected flag has become part of the return value. Then that should be documented here.",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f6472d7a",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-29T10:26:19Z",
+      "side": 1,
+      "message": "Why use an integer? Does ApiResult have a problem with booleans?",
       "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
