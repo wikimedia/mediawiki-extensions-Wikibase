@@ -207,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_f162d7d3",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-06-29T10:59:43Z",
+      "side": 1,
+      "message": "Apparently yes. The boolean just isn\u0027t displayed.",
+      "parentUuid": "8ec42329_f6472d7a",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_f69acd15",
         "filename": "repo/includes/api/MergeItems.php",
         "patchSetId": 22
@@ -235,6 +253,24 @@
       "writtenOn": "2015-06-29T10:25:24Z",
       "side": 1,
       "message": "You have changed the message above to say that both the merge and the redirect were successful!\nWhat if they were not? We perhaps need to different messages to return here in the 2 differentcases!",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b1b76f34",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-06-29T10:59:43Z",
+      "side": 1,
+      "message": "Thought about it, too. But the message is just used here and for the special page and since we don\u0027t have an option to ignore conflicts there is no option to merge but not redirect.",
+      "parentUuid": "8ec42329_b6da05eb",
       "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
