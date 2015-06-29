@@ -87,6 +87,10 @@ span.wb-itemlink-id { /* item id within a link to an item (especially on special
 	clear: both; /* to not overlay success message */
 }
 
+#toc {
+	display: none;
+}
+
 h2.wb-section-heading {
 	position: relative;
 	float: left;
