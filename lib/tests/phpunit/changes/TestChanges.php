@@ -194,6 +194,7 @@ final class TestChanges {
 
 			foreach ( $changes as $key => $change ) {
 				$meta = array(
+					'comment' => '',
 					'page_id' => 23,
 					'bot' => false,
 					'rev_id' => $rev,
