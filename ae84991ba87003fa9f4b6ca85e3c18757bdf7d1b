@@ -138,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_f13417dc",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-06-29T10:37:49Z",
+      "side": 1,
+      "message": "I used to set the redirect value over this method, then realized it was easier the way I do it now. So I don\u0027t use redirected here any more and forgot it in the doc- sorry! :)",
+      "parentUuid": "8ec42329_366b75f0",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_96f26963",
         "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
         "patchSetId": 22
