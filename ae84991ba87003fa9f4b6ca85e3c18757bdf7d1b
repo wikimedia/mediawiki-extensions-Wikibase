@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_d6d551bb",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "$interactorRedirect should also be added to the phpdoc",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_76e01d93",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "ewww tabs",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d6fc713d",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "Dont think this 1 line needs its own method really.",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_36ee1588",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "@param EntityId $entityId\n\nCould also have a @returns",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_96db49ed",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "It would probably make more sense to call this \"isEmpty\"",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_76f7bd56",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "this new doc is wrong, you have not added $redirected to this method!",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_96f26963",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "and a boolean for the status of the redirect.\nThis still just returns array( $fromRev, $toRev )",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f69acd15",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "would be slightly better with @param ItemMergeException|RedirectCreationException $ex",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b6da05eb",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "You have changed the message above to say that both the merge and the redirect were successful!\nWhat if they were not? We perhaps need to different messages to return here in the 2 differentcases!",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_76a57d42",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "You already have $summaryFormatter here",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_96a02933",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "You already have $summaryFormatter here",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_967fc9a5",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 1,
+      "message": "We probably need a test for checking the \u0027redirect\u0027 flag is returned correctly.",
+      "revId": "ae84991ba87003fa9f4b6ca85e3c18757bdf7d1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

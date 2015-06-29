@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_56bf215c",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 22
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-06-29T10:25:24Z",
+      "side": 0,
+      "message": "hmm, why was this removed?",
+      "revId": "a4ed10f1ab5d41094d6b1a3e2422cffaae322603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
