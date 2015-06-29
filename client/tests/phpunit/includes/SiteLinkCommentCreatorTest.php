@@ -253,7 +253,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 		$updates[] = array(
 			$this->getBadgeChangeDiff(),
-			'wikibase-comment-update',
+			null,
 		);
 
 		$updates[] = array(

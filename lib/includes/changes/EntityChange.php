@@ -36,11 +36,6 @@ class EntityChange extends DiffChange {
 	private $entityId = null;
 
 	/**
-	 * @var string|null
-	 */
-	protected $comment = null;
-
-	/**
 	 * @see ORMRow::setField
 	 *
 	 * Overwritten to force lower case object_id
@@ -91,7 +86,7 @@ class EntityChange extends DiffChange {
 	/**
 	 * @param string $cache set to 'cache' to cache the unserialized diff.
 	 *
-	 * @return array|bool false if no meta data could be found in the info array
+	 * @return array
 	 */
 	public function getMetadata( $cache = 'no' ) {
 		$info = $this->getInfo( $cache );
@@ -115,6 +110,7 @@ class EntityChange extends DiffChange {
 			'rev_id',
 			'parent_id',
 			'user_text',
+			'comment',
 		);
 
 		if ( is_array( $metadata ) ) {
@@ -124,7 +120,9 @@ class EntityChange extends DiffChange {
 				}
 			}
 
-			$metadata['comment'] = $this->getComment();
+			if ( !array_key_exists( 'comment', $metadata ) ) {
+				$metadata['comment'] = $this->getComment();
+			}
 
 			$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 			$info['metadata'] = $metadata;
@@ -137,28 +135,18 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @param string|null $comment
-	 *
-	 * @return string
-	 */
-	public function setComment( $comment = null ) {
-		if ( $comment !== null ) {
-			$this->comment = $comment;
-		} else {
-			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
-			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
-			$this->comment = 'wikibase-comment-' . $this->getAction();
-		}
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getComment() {
-		if ( $this->comment === null ) {
-			$this->setComment();
+		$meta = $this->getMetadata();
+
+		if ( empty( $meta ) || !isset( $meta['comment'] ) ) {
+			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
+			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
+			return 'wikibase-comment-' . $this->getAction();
 		}
-		return $this->comment;
+
+		return $meta['comment'];
 	}
 
 	/**
@@ -180,6 +168,7 @@ class EntityChange extends DiffChange {
 			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
+			'comment' => '',
 		) );
 	}
 
@@ -212,6 +201,14 @@ class EntityChange extends DiffChange {
 			'user_id' => $revision->getUser(),
 			'object_id' => $entityId->getSerialization(),
 			'time' => $revision->getTimestamp(),
+		) );
+
+		$this->setMetadata( array(
+			'comment' => $revision->getComment(),
+			'page_id' => $revision->getPage(),
+			'rev_id' => $revision->getId(),
+			'parent_id' => $revision->getParentId(),
+			'user_text' => $revision->getUserText(),
 		) );
 	}
 
