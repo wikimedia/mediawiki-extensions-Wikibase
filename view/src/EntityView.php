@@ -162,14 +162,10 @@ if ( $ ) {
 	protected function getMainHtml( EntityRevision $entityRevision ) {
 		$entity = $entityRevision->getEntity();
 
-		$html = $this->getHtmlForFingerprint(
+		return $this->getHtmlForFingerprint(
 			$entity,
 			$this->getHtmlForTermBox( $entityRevision )
 		);
-
-		$html .= $this->templateFactory->render( 'wikibase-toc' );
-
-		return $html;
 	}
 
 	/**
