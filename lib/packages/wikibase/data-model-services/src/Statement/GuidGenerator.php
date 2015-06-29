@@ -25,7 +25,7 @@ class GuidGenerator  {
 	}
 
 	/**
-	 * Generates and returns a GUID for a claim in the given Entity.
+	 * Generates and returns a GUID for a statement in the given Entity.
 	 *
 	 * @since 1.0
 	 *
