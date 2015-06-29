@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3695b5e7",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-29T10:21:04Z",
+      "side": 1,
+      "message": "You could use \"zid\" as the language code; the \"z__\" range is reserved for  \"no linguistic content, not applicable\". https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes",
+      "revId": "68aaf901013b391e0009433bf472f7ab9a9bcd2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
