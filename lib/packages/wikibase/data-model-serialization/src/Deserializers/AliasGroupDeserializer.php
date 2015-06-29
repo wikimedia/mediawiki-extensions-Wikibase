@@ -9,7 +9,7 @@ use Deserializers\Exceptions\MissingAttributeException;
 use Wikibase\DataModel\Term\AliasGroup;
 
 /**
- * @since 1.5
+ * Package private
  *
  * @author Adam Shorland
  */

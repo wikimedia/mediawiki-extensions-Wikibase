@@ -8,7 +8,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupFallback;
 
 /**
- * @since 1.5
+ * Package private
  *
  * @author Adam Shorland
  */

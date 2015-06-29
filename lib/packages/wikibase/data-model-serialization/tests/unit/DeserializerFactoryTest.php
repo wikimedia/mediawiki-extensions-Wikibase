@@ -130,4 +130,28 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testNewTermDeserializer() {
+		$this->assertDeserializesWithoutException(
+			$this->buildDeserializerFactory()->newTermDeserializer(),
+			array( 'language' => 'en', 'value' => 'Some Term' )
+		);
+	}
+
+	public function testNewTermListDeserializer() {
+		$this->assertDeserializesWithoutException(
+			$this->buildDeserializerFactory()->newTermListDeserializer(),
+			array(
+				'en' => array( 'language' => 'en', 'value' => 'Some Term' ),
+				'de' => array( 'language' => 'de', 'value' => 'Some Term' ),
+			)
+		);
+	}
+
+	public function testNewAliasGroupDeserializer() {
+		$this->assertDeserializesWithoutException(
+			$this->buildDeserializerFactory()->newAliasGroupDeserializer(),
+			array( 'en' => array( array( 'language' => 'en', 'value' => 'Some Term' ) ) )
+		);
+	}
+
 }

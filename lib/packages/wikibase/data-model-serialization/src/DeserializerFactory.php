@@ -5,6 +5,7 @@ namespace Wikibase\DataModel;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
+use Wikibase\DataModel\Deserializers\AliasGroupDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
 use Wikibase\DataModel\Deserializers\FingerprintDeserializer;
@@ -17,6 +18,8 @@ use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnakListDeserializer;
 use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\Deserializers\StatementListDeserializer;
+use Wikibase\DataModel\Deserializers\TermDeserializer;
+use Wikibase\DataModel\Deserializers\TermListDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
@@ -174,6 +177,39 @@ class DeserializerFactory {
 	 */
 	public function newEntityIdDeserializer() {
 		return new EntityIdDeserializer( $this->entityIdParser );
+	}
+
+	/**
+	 * Returns a Deserializer that can serialize Term objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Deserializer
+	 */
+	public function newTermDeserializer() {
+		return new TermDeserializer();
+	}
+
+	/**
+	 * Returns a Deserializer that can serialize TermList objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Deserializer
+	 */
+	public function newTermListDeserializer() {
+		return new TermListDeserializer( $this->newTermDeserializer() );
+	}
+
+	/**
+	 * Returns a Deserializer that can serialize AliasGroup objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Deserializer
+	 */
+	public function newAliasGroupDeserializer() {
+		return new AliasGroupDeserializer();
 	}
 
 }

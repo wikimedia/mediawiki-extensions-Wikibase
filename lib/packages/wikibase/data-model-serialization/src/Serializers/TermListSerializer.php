@@ -8,7 +8,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @since 1.5
+ * Package private
  *
  * @author Adam Shorland
  */

@@ -16,6 +16,9 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\TypedSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @licence GNU GPL v2+
@@ -115,6 +118,27 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newTypedSnakSerializer(),
 			new TypedSnak( new PropertyNoValueSnak( 42 ), 'kittens' )
+		);
+	}
+
+	public function testNewTermSerializer() {
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newTermSerializer(),
+			new Term( 'en', 'Foo' )
+		);
+	}
+
+	public function testNewTermListSerializer() {
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newTermListSerializer(),
+			new TermList( array( new Term( 'de', 'Foo' ) ) )
+		);
+	}
+
+	public function testNewAliasGroupSerializer() {
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newAliasGroupSerializer(),
+			new AliasGroup( 'de', array( 'AA', 'BB' ) )
 		);
 	}
 

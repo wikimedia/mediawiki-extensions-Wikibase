@@ -5,6 +5,7 @@ namespace Wikibase\DataModel;
 use InvalidArgumentException;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
+use Wikibase\DataModel\Serializers\AliasGroupSerializer;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
@@ -16,6 +17,8 @@ use Wikibase\DataModel\Serializers\SnakListSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\Serializers\StatementSerializer;
+use Wikibase\DataModel\Serializers\TermListSerializer;
+use Wikibase\DataModel\Serializers\TermSerializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
 
 /**
@@ -194,6 +197,39 @@ class SerializerFactory {
 	 */
 	public function newTypedSnakSerializer() {
 		return new TypedSnakSerializer( $this->newSnakSerializer() );
+	}
+
+	/**
+	 * Returns a Serializer that can serialize Term objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Serializer
+	 */
+	public function newTermSerializer() {
+		return new TermSerializer();
+	}
+
+	/**
+	 * Returns a Serializer that can serialize TermList objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Serializer
+	 */
+	public function newTermListSerializer() {
+		return new TermListSerializer( $this->newTermSerializer(), $this->shouldUseObjectsForMaps() );
+	}
+
+	/**
+	 * Returns a Serializer that can serialize AliasGroup objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Serializer
+	 */
+	public function newAliasGroupSerializer() {
+		return new AliasGroupSerializer();
 	}
 
 }
