@@ -48,7 +48,7 @@ class RevisionData {
 	 * @param int $revId
 	 * @param int $parentId
 	 * @param string $timestamp
-	 * @param string $comment
+	 * @param string|array $comment
 	 * @param string $siteId
 	 */
 	public function __construct( $userName, $pageId, $revId, $parentId, $timestamp,
@@ -99,7 +99,7 @@ class RevisionData {
 	}
 
 	/**
-	 * @return string
+	 * @return string|array
 	 */
 	public function getComment() {
 		return $this->comment;
