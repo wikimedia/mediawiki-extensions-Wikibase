@@ -1,11 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bedynokue.nart"
+			"Bedynokue.nart",
+			"SamGamgee"
 		]
 	},
 	"tooltip-t-wikibase": "Ехьыл1агъэу хъарзынэщым и элементгорэм гъэзэгъэ зэпыщ",
+	"wikibase-comment-update": "{{WBREPONAME}} зэхъок1ыгъэ",
 	"wikibase-dataitem": "{{WBREPONAME}} зыгор",
 	"wikibase-editlinks": "Зэпыщэмэ я1аз",
-	"wikibase-editlinkstitle": "Бзэзэпыщэмэ я1аз"
+	"wikibase-editlinkstitle": "Бзэзэпыщэмэ я1аз",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Къэгъэлъагъу",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} и е1эзэныгъэ"
 }
