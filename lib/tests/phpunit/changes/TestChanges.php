@@ -193,9 +193,8 @@ final class TestChanges {
 			$rev = 1000;
 
 			foreach ( $changes as $key => $change ) {
-				$change->setComment( "$key:1|" );
-
 				$meta = array(
+					'comment' => '',
 					'page_id' => 23,
 					'bot' => false,
 					'rev_id' => $rev,

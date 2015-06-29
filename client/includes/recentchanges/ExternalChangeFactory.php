@@ -141,7 +141,7 @@ class ExternalChangeFactory {
 	}
 
 	/**
-	 * @fixme refactor comments handling!
+	 * @todo: FIXME refactor comments handling!
 	 *
 	 * @param array|string $comment
 	 * @param string $type
@@ -153,6 +153,7 @@ class ExternalChangeFactory {
 			'key' => 'wikibase-comment-update'
 		);
 
+		//TODO: parse $comment['text'] if present, and apply AutoCommentFormatter!
 		if ( is_array( $comment ) ) {
 			if ( $type === 'wikibase-item~add' ) {
 				// @todo: provide a link to the entity
@@ -171,13 +172,15 @@ class ExternalChangeFactory {
 	}
 
 	/**
-	 * @fixme refactor comments handling!
+	 * @todo: FIXME refactor comments handling!
 	 *
 	 * @param array $changeParams
 	 *
-	 * @return string
+	 * @return string|array
 	 */
 	private function extractComment( $changeParams ) {
+		global $wgContentLang;
+
 		$comment = array(
 			'key' => 'wikibase-comment-update'
 		);
@@ -185,7 +188,10 @@ class ExternalChangeFactory {
 		//TODO: If $changeParams['changes'] is set, this is a coalesced change.
 		//	  Combine all the comments! Up to some max length?
 		if ( array_key_exists( 'composite-comment', $changeParams ) ) {
+
+
 			$comment['key'] = 'wikibase-comment-multi';
+			//FIXME: combine comments in a better way! Can't  we just generate localized messages and concatenate them?
 			$comment['numparams'] = $this->countCompositeComments( $changeParams['composite-comment'] );
 		} elseif ( array_key_exists( 'comment', $changeParams ) ) {
 			$comment = $this->parseComment( $changeParams['comment'], $changeParams['type'] );
