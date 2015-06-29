@@ -321,6 +321,7 @@ class ChangeLineFormatter {
 	 * @return string
 	 */
 	private function formatComment( array $comment ) {
+		//FIXME: use repo-comment with AutoCommentFormatter
 		$commentMsg = wfMessage( $comment['key'] );
 
 		if ( isset( $comment['numparams'] ) ) {

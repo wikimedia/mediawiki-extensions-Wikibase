@@ -255,19 +255,28 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 				$changes['set-de-label'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				'set-de-label:1|'
+				array(
+					'message' => 'wikibase-comment-updated',
+					'repo-comment' => '',
+				),
 			),
 			array( // #2
 				$changes['add-claim'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				'add-claim:1|'
+				array(
+					'message' => 'wikibase-comment-updated',
+					'repo-comment' => '',
+				),
 			),
 			array( // #3
 				$changes['remove-claim'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				'remove-claim:1|'
+				array(
+					'message' => 'wikibase-comment-updated',
+					'repo-comment' => '',
+				),
 			),
 			array( // #4
 				$changes['set-dewiki-sitelink'],
@@ -458,7 +467,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	 */
 	public function testGetEditComment( Change $change, Title $title, array $pageNamesPerItemId, $expected ) {
 		$handler = $this->getChangeHandler( $pageNamesPerItemId );
-		$comment = $handler->getEditComment( $change, $title );
+		$comment = $handler->getEditComment( $change );
 
 		if ( is_array( $comment ) && is_array( $expected ) ) {
 			$this->assertArrayEquals( $expected, $comment, false, true );

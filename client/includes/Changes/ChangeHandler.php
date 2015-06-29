@@ -336,24 +336,22 @@ class ChangeHandler {
 		$fields = $change->getFields();
 		$fields['entity_type'] = $change->getEntityId()->getEntityType();
 
-		if ( $change instanceof ItemChange ) {
-			$rcinfo['comment'] = $this->getEditComment( $change );
+		$comment = $this->getEditComment( $change );
+		$rcinfo['comment'] = $comment;
 
-			if ( isset( $fields['info']['changes'] ) ) {
-				$rcinfo['composite-comment'] = array();
+		if ( isset( $fields['info']['changes'] ) ) {
+			$rcinfo['composite-comment'] = array();
 
-				foreach ( $fields['info']['changes'] as $part ) {
-					$rcinfo['composite-comment'][] = $this->getEditComment( $part );
-				}
+			foreach ( $fields['info']['changes'] as $part ) {
+				$rcinfo['composite-comment'][] = $this->getEditComment( $part );
 			}
 		}
 
 		unset( $fields['info'] );
 
-		$rcinfo = array_merge( $fields, $rcinfo );
-
 		return array(
-			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
+			'wikibase-repo-change' => array_merge( $fields, $rcinfo ),
+			'comment' => $comment,
 		);
 	}
 
@@ -373,14 +371,25 @@ class ChangeHandler {
 		$siteLinkDiff = $change instanceof ItemChange
 			? $change->getSiteLinkDiff()
 			: null;
+
 		$action = $change->getAction();
-		$comment = $change->getComment();
+		$editComment = null;
 
-		$commentCreator = new SiteLinkCommentCreator( $this->localSiteId );
-		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
+		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
+			$commentCreator = new SiteLinkCommentCreator( $this->localSiteId );
+			$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action );
+		}
 
-		if ( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
-			throw new MWException( 'getEditComment returned an empty comment' );
+		if ( $editComment === null ) {
+			$repoComment = $change->getComment();
+
+			$editComment = array(
+				'repo-comment' => $repoComment
+			);
+		}
+
+		if ( !isset( $editComment['message'] ) ) {
+			$editComment['message'] = 'wikibase-comment-updated';
 		}
 
 		return $editComment;
