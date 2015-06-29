@@ -2,6 +2,12 @@
 
 ## 1.5.0 (dev)
 
+* Added `TermSerializer`
+* Added `TermDeserializer`
+* Added `TermListSerializer`
+* Added `TermListDeserializer`
+* Added `AliasGroupSerializer`
+* Added `AliasGroupDeserializer`
 * Deprecated `SerializerFactory::newClaimsSerializer` in favour of `SerializerFactory::newStatementListSerializer`
 * Deprecated `DeserializerFactory::newClaimsDeserializer` in favour of `DeserializerFactory::newStatementListDeserializer`
 
