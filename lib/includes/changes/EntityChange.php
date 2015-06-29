@@ -86,7 +86,7 @@ class EntityChange extends DiffChange {
 	/**
 	 * @param string $cache set to 'cache' to cache the unserialized diff.
 	 *
-	 * @return array false if no meta data could be found in the info array
+	 * @return array
 	 */
 	public function getMetadata( $cache = 'no' ) {
 		$info = $this->getInfo( $cache );
@@ -103,6 +103,8 @@ class EntityChange extends DiffChange {
 	 * the current metadata array.
 	 *
 	 * @param array $metadata
+	 *
+	 * @return bool
 	 */
 	public function setMetadata( array $metadata ) {
 		$validKeys = array(
@@ -111,40 +113,43 @@ class EntityChange extends DiffChange {
 			'rev_id',
 			'parent_id',
 			'user_text',
-			'comment'
+			'comment',
 		);
 
-		// strip extra fields from metadata
-		$metadata = array_intersect_key( $metadata, array_flip( $validKeys ) );
+		if ( is_array( $metadata ) ) {
+			foreach ( array_keys( $metadata ) as $key ) {
+				if ( !in_array( $key, $validKeys ) ) {
+					unset( $metadata[$key] );
+				}
+			}
 
-		// merge new metadata into current metadata
-		$metadata = array_merge( $this->getMetadata(), $metadata );
+			if ( !array_key_exists( 'comment', $metadata ) ) {
+				$metadata['comment'] = $this->getComment();
+			}
 
-		// make sure the comment field is set
-		if ( !isset( $metadata['comment'] ) ) {
-			$metadata['comment'] = $this->getComment();
+			$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+			$info['metadata'] = $metadata;
+			$this->setField( 'info', $info );
+
+			return true;
 		}
 
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$info['metadata'] = $metadata;
-		$this->setField( 'info', $info );
+		return false;
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getComment() {
-		$metadata = $this->getMetadata();
+		$meta = $this->getMetadata();
 
-		// TODO: get rid of this awkward fallback and messages. Comments and messages
-		// should come from the revision, not be invented here.
-		if ( !isset( $metadata['comment'] ) ) {
+		if ( empty( $meta ) || !isset( $meta['comment'] ) ) {
 			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
 			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
-			$metadata['comment'] = 'wikibase-comment-' . $this->getAction();
+			return 'wikibase-comment-' . $this->getAction();
 		}
 
-		return $metadata['comment'];
+		return $meta['comment'];
 	}
 
 	/**
@@ -160,19 +165,13 @@ class EntityChange extends DiffChange {
 	 * @todo rename to setRecentChangeInfo
 	 */
 	public function setMetadataFromRC( RecentChange $rc ) {
-		$this->setFields( array(
-			'revision_id' => $rc->getAttribute( 'rc_this_oldid' ),
-			'user_id' => $rc->getAttribute( 'rc_user' ),
-			'time' => $rc->getAttribute( 'rc_timestamp' ),
-		) );
-
 		$this->setMetadata( array(
 			'user_text' => $rc->getAttribute( 'rc_user_text' ),
 			'bot' => $rc->getAttribute( 'rc_bot' ),
 			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
-			'comment' => $rc->getAttribute( 'rc_comment' ),
+			'comment' => '',
 		) );
 	}
 
@@ -210,6 +209,14 @@ class EntityChange extends DiffChange {
 			'revision_id' => $revision->getId(),
 			'user_id' => $revision->getUser(),
 			'time' => $revision->getTimestamp(),
+		) );
+
+		$this->setMetadata( array(
+			'comment' => $revision->getComment(),
+			'page_id' => $revision->getPage(),
+			'rev_id' => $revision->getId(),
+			'parent_id' => $revision->getParentId(),
+			'user_text' => $revision->getUserText(),
 		) );
 
 		if ( !$this->hasField( 'object_id' ) ) {
