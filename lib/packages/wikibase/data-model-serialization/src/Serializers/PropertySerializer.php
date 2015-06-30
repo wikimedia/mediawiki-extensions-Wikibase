@@ -14,13 +14,19 @@ use Wikibase\DataModel\Entity\Property;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class PropertySerializer implements DispatchableSerializer {
 
 	/**
-	 * @var FingerprintSerializer
+	 * @var Serializer
 	 */
-	private $fingerprintSerializer;
+	private $termListSerializer;
+
+	/**
+	 * @var Serializer
+	 */
+	private $aliasGroupListSerializer;
 
 	/**
 	 * @var Serializer
@@ -28,11 +34,17 @@ class PropertySerializer implements DispatchableSerializer {
 	private $statementListSerializer;
 
 	/**
-	 * @param FingerprintSerializer $fingerprintSerializer
+	 * @param Serializer $termListSerializer
+	 * @param Serializer $aliasGroupListSerializer
 	 * @param Serializer $statementListSerializer
 	 */
-	public function __construct( FingerprintSerializer $fingerprintSerializer, Serializer $statementListSerializer ) {
-		$this->fingerprintSerializer = $fingerprintSerializer;
+	public function __construct(
+		Serializer $termListSerializer,
+		Serializer $aliasGroupListSerializer,
+		Serializer $statementListSerializer
+	) {
+		$this->termListSerializer = $termListSerializer;
+		$this->aliasGroupListSerializer = $aliasGroupListSerializer;
 		$this->statementListSerializer = $statementListSerializer;
 	}
 
@@ -72,15 +84,27 @@ class PropertySerializer implements DispatchableSerializer {
 			'datatype' => $property->getDataTypeId(),
 		);
 
-		$this->fingerprintSerializer->addBasicsToSerialization(
-			$property->getId(),
-			$property->getFingerprint(),
-			$serialization
-		);
-
+		$this->addIdToSerialization( $property, $serialization );
+		$this->addTermsToSerialization( $property, $serialization );
 		$this->addStatementListToSerialization( $property, $serialization );
 
 		return $serialization;
+	}
+
+	private function addIdToSerialization( Property $property, array &$serialization ) {
+		$id = $property->getId();
+
+		if ( $id !== null ) {
+			$serialization['id'] = $id->getSerialization();
+		}
+	}
+
+	private function addTermsToSerialization( Property $property, array &$serialization ) {
+		$fingerprint = $property->getFingerprint();
+
+		$serialization['labels'] = $this->termListSerializer->serialize( $fingerprint->getLabels() );
+		$serialization['descriptions'] = $this->termListSerializer->serialize( $fingerprint->getDescriptions() );
+		$serialization['aliases'] = $this->aliasGroupListSerializer->serialize( $fingerprint->getAliasGroups() );
 	}
 
 	private function addStatementListToSerialization( Property $property, array &$serialization ) {

@@ -5,9 +5,9 @@ namespace Wikibase\DataModel;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
+use Wikibase\DataModel\Deserializers\AliasGroupListDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
-use Wikibase\DataModel\Deserializers\FingerprintDeserializer;
 use Wikibase\DataModel\Deserializers\ItemDeserializer;
 use Wikibase\DataModel\Deserializers\PropertyDeserializer;
 use Wikibase\DataModel\Deserializers\ReferenceDeserializer;
@@ -17,6 +17,8 @@ use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Deserializers\SnakListDeserializer;
 use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\Deserializers\StatementListDeserializer;
+use Wikibase\DataModel\Deserializers\TermDeserializer;
+use Wikibase\DataModel\Deserializers\TermListDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
@@ -26,6 +28,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class DeserializerFactory {
 
@@ -54,10 +57,20 @@ class DeserializerFactory {
 	 * @return DispatchableDeserializer
 	 */
 	public function newEntityDeserializer() {
-		$fingerprintDeserializer = new FingerprintDeserializer();
 		return new DispatchingDeserializer( array(
-			new ItemDeserializer( $this->newEntityIdDeserializer(), $fingerprintDeserializer, $this->newStatementListDeserializer(), $this->newSiteLinkDeserializer() ),
-			new PropertyDeserializer( $this->newEntityIdDeserializer(), $fingerprintDeserializer, $this->newStatementListDeserializer() )
+			new ItemDeserializer(
+				$this->newEntityIdDeserializer(),
+				$this->newTermListDeserializer(),
+				$this->newAliasGroupListDeserializer(),
+				$this->newStatementListDeserializer(),
+				$this->newSiteLinkDeserializer()
+			),
+			new PropertyDeserializer(
+				$this->newEntityIdDeserializer(),
+				$this->newTermListDeserializer(),
+				$this->newAliasGroupListDeserializer(),
+				$this->newStatementListDeserializer()
+			)
 		) );
 	}
 
@@ -174,6 +187,39 @@ class DeserializerFactory {
 	 */
 	public function newEntityIdDeserializer() {
 		return new EntityIdDeserializer( $this->entityIdParser );
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize Term objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Deserializer
+	 */
+	public function newTermDeserializer() {
+		return new TermDeserializer();
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize TermList objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Deserializer
+	 */
+	public function newTermListDeserializer() {
+		return new TermListDeserializer( $this->newTermDeserializer() );
+	}
+
+	/**
+	 * Returns a Deserializer that can deserialize AliasGroupList objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Deserializer
+	 */
+	public function newAliasGroupListDeserializer() {
+		return new AliasGroupListDeserializer();
 	}
 
 }

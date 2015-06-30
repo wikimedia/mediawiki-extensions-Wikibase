@@ -5,8 +5,8 @@ namespace Wikibase\DataModel;
 use InvalidArgumentException;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
+use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
-use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Serializers\ReferenceListSerializer;
@@ -16,6 +16,8 @@ use Wikibase\DataModel\Serializers\SnakListSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\StatementListSerializer;
 use Wikibase\DataModel\Serializers\StatementSerializer;
+use Wikibase\DataModel\Serializers\TermListSerializer;
+use Wikibase\DataModel\Serializers\TermSerializer;
 use Wikibase\DataModel\Serializers\TypedSnakSerializer;
 
 /**
@@ -25,6 +27,7 @@ use Wikibase\DataModel\Serializers\TypedSnakSerializer;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SerializerFactory {
 
@@ -69,13 +72,19 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newEntitySerializer() {
-		$mapOption = $this->shouldUseObjectsForMaps()
-			? FingerprintSerializer::USE_OBJECTS_FOR_MAPS
-			: FingerprintSerializer::USE_ARRAYS_FOR_MAPS;
-		$fingerprintSerializer = new FingerprintSerializer( $mapOption );
 		return new DispatchingSerializer( array(
-			new ItemSerializer( $fingerprintSerializer, $this->newStatementListSerializer(), $this->newSiteLinkSerializer(), $this->shouldUseObjectsForMaps() ),
-			new PropertySerializer( $fingerprintSerializer, $this->newStatementListSerializer() ),
+			new ItemSerializer(
+				$this->newTermListSerializer(),
+				$this->newAliasGroupListSerializer(),
+				$this->newStatementListSerializer(),
+				$this->newSiteLinkSerializer(),
+				$this->shouldUseObjectsForMaps()
+			),
+			new PropertySerializer(
+				$this->newTermListSerializer(),
+				$this->newAliasGroupListSerializer(),
+				$this->newStatementListSerializer()
+			)
 		) );
 	}
 
@@ -194,6 +203,39 @@ class SerializerFactory {
 	 */
 	public function newTypedSnakSerializer() {
 		return new TypedSnakSerializer( $this->newSnakSerializer() );
+	}
+
+	/**
+	 * Returns a Serializer that can serialize Term objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Serializer
+	 */
+	public function newTermSerializer() {
+		return new TermSerializer();
+	}
+
+	/**
+	 * Returns a Serializer that can serialize TermList objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Serializer
+	 */
+	public function newTermListSerializer() {
+		return new TermListSerializer( $this->newTermSerializer(), $this->shouldUseObjectsForMaps() );
+	}
+
+	/**
+	 * Returns a Serializer that can serialize AliasGroupList objects.
+	 *
+	 * @since 1.5
+	 *
+	 * @return Serializer
+	 */
+	public function newAliasGroupListSerializer() {
+		return new AliasGroupListSerializer( $this->shouldUseObjectsForMaps() );
 	}
 
 }

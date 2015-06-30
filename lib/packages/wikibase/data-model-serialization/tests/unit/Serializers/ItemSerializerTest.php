@@ -2,14 +2,14 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
-use stdClass;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\DataModel\Serializers\ItemSerializer
@@ -17,10 +17,37 @@ use Wikibase\DataModel\Statement\StatementList;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ItemSerializerTest extends SerializerBaseTest {
 
-	protected function buildSerializer() {
+	protected function buildSerializer( $useObjectsForMaps = false ) {
+		$termListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$termListSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnCallback( function( TermList $termList ) {
+				if ( $termList->isEmpty() ) {
+					return array();
+				}
+
+				return array(
+					'en' => array( 'lang' => 'en', 'value' => 'foo' )
+				);
+			} ) );
+
+		$aliasGroupListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$aliasGroupListSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnCallback( function( AliasGroupList $aliasGroupList ) {
+				if ( $aliasGroupList->isEmpty() ) {
+					return array();
+				}
+
+				return array(
+					'en' => array( 'lang' => 'en', 'values' => array( 'foo', 'bar' ) )
+				);
+			} ) );
+
 		$statementListSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
@@ -53,9 +80,13 @@ class ItemSerializerTest extends SerializerBaseTest {
 				'badges' => array()
 			) ) );
 
-		$fingerprintSerializer = new FingerprintSerializer( FingerprintSerializer::USE_ARRAYS_FOR_MAPS );
-
-		return new ItemSerializer( $fingerprintSerializer, $statementListSerializerMock, $siteLinkSerializerMock, false );
+		return new ItemSerializer(
+			$termListSerializerMock,
+			$aliasGroupListSerializerMock,
+			$statementListSerializerMock,
+			$siteLinkSerializerMock,
+			$useObjectsForMaps
+		);
 	}
 
 	public function serializableProvider() {
@@ -93,6 +124,78 @@ class ItemSerializerTest extends SerializerBaseTest {
 				),
 				new Item()
 			),
+		);
+
+		$entity = new Item();
+		$entity->setId( 42 );
+		$provider[] = array(
+			array(
+				'type' => 'item',
+				'id' => 'Q42',
+				'claims' => array(),
+				'labels' => array(),
+				'descriptions' => array(),
+				'aliases' => array(),
+				'sitelinks' => array(),
+			),
+			$entity
+		);
+
+		$entity = new Item();
+		$entity->getFingerprint()->setLabel( 'en', 'foo' );
+		$provider[] = array(
+			array(
+				'type' => 'item',
+				'claims' => array(),
+				'labels' => array(
+					'en' => array(
+						'lang' => 'en',
+						'value' => 'foo'
+					)
+				),
+				'descriptions' => array(),
+				'aliases' => array(),
+				'sitelinks' => array(),
+			),
+			$entity
+		);
+
+		$entity = new Item();
+		$entity->getFingerprint()->setDescription( 'en', 'foo' );
+		$provider[] = array(
+			array(
+				'type' => 'item',
+				'claims' => array(),
+				'labels' => array(),
+				'descriptions' => array(
+					'en' => array(
+						'lang' => 'en',
+						'value' => 'foo'
+					)
+				),
+				'aliases' => array(),
+				'sitelinks' => array(),
+			),
+			$entity
+		);
+
+		$entity = new Item();
+		$entity->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$provider[] = array(
+			array(
+				'type' => 'item',
+				'claims' => array(),
+				'labels' => array(),
+				'descriptions' => array(),
+				'aliases' => array(
+					'en' => array(
+						'lang' => 'en',
+						'values' => array( 'foo', 'bar' )
+					)
+				),
+				'sitelinks' => array(),
+			),
+			$entity
 		);
 
 		$entity = new Item();
@@ -144,35 +247,18 @@ class ItemSerializerTest extends SerializerBaseTest {
 	}
 
 	public function testItemSerializerWithOptionObjectsForMaps() {
-		$statementListSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$statementListSerializerMock->expects( $this->any() )
-			->method( 'serialize' )
-			->with( $this->equalTo( new StatementList() ) )
-			->will( $this->returnValue( array() ) );
-
-		$siteLinkSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$siteLinkSerializerMock->expects( $this->any() )
-			->method( 'serialize' )
-			->with( $this->equalTo( new SiteLink( 'enwiki', 'Nyan Cat' ) ) )
-			->will( $this->returnValue( array(
-				'site' => 'enwiki',
-				'title' => 'Nyan Cat',
-				'badges' => array()
-			) ) );
-
-		$fingerprintSerializer = new FingerprintSerializer( FingerprintSerializer::USE_ARRAYS_FOR_MAPS );
-
-		$serializer = new ItemSerializer( $fingerprintSerializer, $statementListSerializerMock, $siteLinkSerializerMock, true );
+		$serializer = $this->buildSerializer( true );
 
 		$item = new Item();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 
-		$sitelinks = new stdClass();
+		$sitelinks = new \stdClass();
 		$sitelinks->enwiki = array(
 			'site' => 'enwiki',
 			'title' => 'Nyan Cat',
 			'badges' => array(),
 		);
+
 		$serial = array(
 			'type' => 'item',
 			'labels' => array(),
@@ -181,6 +267,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 			'claims' => array(),
 			'sitelinks' => $sitelinks,
 		);
+
 		$this->assertEquals( $serial, $serializer->serialize( $item ) );
 	}
 

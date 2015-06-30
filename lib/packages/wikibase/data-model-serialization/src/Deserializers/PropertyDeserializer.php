@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\Property;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class PropertyDeserializer extends TypedObjectDeserializer {
 
@@ -23,7 +24,12 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 	/**
 	 * @var Deserializer
 	 */
-	private $fingerprintDeserializer;
+	private $termListDeserializer;
+
+	/**
+	 * @var Deserializer
+	 */
+	private $aliasGroupListDeserializer;
 
 	/**
 	 * @var Deserializer
@@ -32,18 +38,21 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 
 	/**
 	 * @param Deserializer $entityIdDeserializer
-	 * @param Deserializer $fingerprintDeserializer
+	 * @param Deserializer $termListDeserializer
+	 * @param Deserializer $aliasGroupListDeserializer
 	 * @param Deserializer $statementListDeserializer
 	 */
 	public function __construct(
 		Deserializer $entityIdDeserializer,
-		Deserializer $fingerprintDeserializer,
+		Deserializer $termListDeserializer,
+		Deserializer $aliasGroupListDeserializer,
 		Deserializer $statementListDeserializer
 	) {
 		parent::__construct( 'property', 'type' );
 
 		$this->entityIdDeserializer = $entityIdDeserializer;
-		$this->fingerprintDeserializer = $fingerprintDeserializer;
+		$this->termListDeserializer = $termListDeserializer;
+		$this->aliasGroupListDeserializer = $aliasGroupListDeserializer;
 		$this->statementListDeserializer = $statementListDeserializer;
 	}
 
@@ -72,9 +81,8 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 
 		$property = Property::newFromType( $serialization['datatype'] );
 
-		$property->setFingerprint( $this->fingerprintDeserializer->deserialize( $serialization ) );
-
 		$this->setIdFromSerialization( $serialization, $property );
+		$this->setTermsFromSerialization( $serialization, $property );
 		$this->setStatementListFromSerialization( $serialization, $property );
 
 		return $property;
@@ -86,6 +94,29 @@ class PropertyDeserializer extends TypedObjectDeserializer {
 		}
 
 		$property->setId( $this->entityIdDeserializer->deserialize( $serialization['id'] ) );
+	}
+
+	private function setTermsFromSerialization( array $serialization, Property $property ) {
+		if ( array_key_exists( 'labels', $serialization ) ) {
+			$this->assertAttributeIsArray( $serialization, 'labels' );
+			$property->getFingerprint()->setLabels(
+				$this->termListDeserializer->deserialize( $serialization['labels'] )
+			);
+		}
+
+		if ( array_key_exists( 'descriptions', $serialization ) ) {
+			$this->assertAttributeIsArray( $serialization, 'descriptions' );
+			$property->getFingerprint()->setDescriptions(
+				$this->termListDeserializer->deserialize( $serialization['descriptions'] )
+			);
+		}
+
+		if ( array_key_exists( 'aliases', $serialization ) ) {
+			$this->assertAttributeIsArray( $serialization, 'aliases' );
+			$property->getFingerprint()->setAliasGroups(
+				$this->aliasGroupListDeserializer->deserialize( $serialization['aliases'] )
+			);
+		}
 	}
 
 	private function setStatementListFromSerialization( array $serialization, Property $property ) {
