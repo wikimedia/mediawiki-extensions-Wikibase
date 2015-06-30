@@ -563,7 +563,7 @@
 	"apihelp-wbremovereferences-param-statement": "A GUID identifying the statement for which a reference is being set",
 	"apihelp-wbremovereferences-param-references": "The hashes of the references that should be removed",
 	"apihelp-wbremovereferences-example-1": "Remove reference with hash \"455481eeac76e6a8af71a6b493c073d54788e7e9\" from claim with GUID of \"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F\"",
-	"apihelp-wbsearchentities-description": "Searches for entities.",
+	"apihelp-wbsearchentities-description": "Searches for entities using labels and aliases.\nReturns a label and description for the entity in the user language if possible.\nReturns details of the matched term.\nThe matched term text is also present in the aliases key if different from the display label.",
 	"apihelp-wbsearchentities-param-search": "Search for this text.",
 	"apihelp-wbsearchentities-param-language": "Search in this language.",
 	"apihelp-wbsearchentities-param-type": "Search for this type of entity.",

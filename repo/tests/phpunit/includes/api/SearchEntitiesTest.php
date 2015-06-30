@@ -249,6 +249,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'url' => 'http://fullTitleUrl',
 			TermIndexEntry::TYPE_LABEL => 'FooHeHe',
 			TermIndexEntry::TYPE_DESCRIPTION => 'FooHeHe en description',
+			'aliases' => array( 'Fooooo' ),
 			'match' => array(
 				'type' => 'label',
 				'language' => 'en-gb',

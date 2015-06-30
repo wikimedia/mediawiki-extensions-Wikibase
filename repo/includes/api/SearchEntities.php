@@ -188,11 +188,17 @@ class SearchEntities extends ApiBase {
 			} else {
 				/** @var Term $matchedTerm */
 				$matchedTerm = $match[TermIndexSearchInteractor::MATCHEDTERM_KEY];
+				$matchedTermText = $matchedTerm->getText();
 				$entry['match']['language'] = $matchedTerm->getLanguageCode();
-				$entry['match']['text'] = $matchedTerm->getText();
+				$entry['match']['text'] = $matchedTermText;
 
-				if ( $match['matchedTermType'] === 'alias' ) {
-					$entry['aliases'] = array( $matchedTerm->getText() );
+				/**
+				 * Add matched terms to the aliases key in the result to give some context for the matched Term
+				 * if the matched term is different to the alias.
+				 * XXX: This appears odd but is used in the UI / Entity suggesters
+				 */
+				if ( !array_key_exists( 'label', $entry ) || $matchedTermText != $entry['label'] ) {
+					$entry['aliases'] = array( $matchedTermText );
 				}
 			}
 			$entries[] = $entry;
