@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Midnight Gambler"
+		]
+	},
+	"wikibase-editlinks": "Links beoorbeite",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "Ausblenne",
+	"wikibase-rc-hide-wikidata-show": "Zeich",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-eoorbeite"
+}
