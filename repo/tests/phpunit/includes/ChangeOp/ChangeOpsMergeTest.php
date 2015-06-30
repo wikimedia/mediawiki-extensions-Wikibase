@@ -7,7 +7,6 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\ChangeOpsMerge;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -319,11 +318,11 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$itemWithQualifiedStatement->copy()
 		);
 
-		$anotherQualifiedClaim = new Claim(
+		$anotherQualifiedStatement = new Statement(
 			new PropertyNoValueSnak( new PropertyId( 'P88' ) ),
 			new SnakList( array( new PropertyNoValueSnak( new PropertyId( 'P88' ) ) ) )
 		);
-		$anotherQualifiedClaim->setGuid( 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F' );
+		$anotherQualifiedStatement->setGuid( 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F' );
 
 		$bigItem = new Item();
 		$bigItem->getFingerprint()->setLabel( 'en', 'foo' );
@@ -333,7 +332,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$bigItem->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
 		$bigItem->getFingerprint()->setAliasGroup( 'de', array( 'defoo', 'debar' ) );
 		$bigItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
-		$bigItem->getStatements()->addStatement( $anotherQualifiedClaim );
+		$bigItem->getStatements()->addStatement( $anotherQualifiedStatement );
 
 		$testCases['itemMerge'] = array(
 			$bigItem->copy(),
@@ -343,7 +342,6 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$bigItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'bar' );
-
 
 		$smallerItem = new Item();
 		$smallerItem->getFingerprint()->setLabel( 'en', 'toLabel' );
@@ -364,7 +362,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$bigMergedItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
 		$bigMergedItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'toLink' );
-		$bigMergedItem->setStatements( new StatementList( $anotherQualifiedClaim ) );
+		$bigMergedItem->setStatements( new StatementList( $anotherQualifiedStatement ) );
 
 		$testCases['ignoreConflictItemMerge'] = array(
 			$bigItem->copy(),
