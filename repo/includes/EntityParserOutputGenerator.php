@@ -149,6 +149,10 @@ class EntityParserOutputGenerator {
 
 		$entity = $entityRevision->getEntity();
 
+		if ( $entity->getId() === null ) {
+			throw new InvalidArgumentException( '$entityRevision must contain an Entity with a EntityId' );
+		}
+
 		if ( $entity instanceof StatementListProvider ) {
 			$snaks = $entity->getStatements()->getAllSnaks();
 		}
