@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_4e51ba63",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-06-30T19:23:43Z",
+      "side": 1,
+      "message": "Oh crap, I was wrong about z__ being reserved for this kind of thing. It\u0027s just litterally \"zxx\" that is defiend as \"No linguistic content; Not applicable\".  Or we use something from the qaa-qtz range. How about \"qid\"?! WHY DIDN\u0027T I THINK OF THIS EARLIER?!",
+      "revId": "17d87763b7e17b7d9971dcc507bcd75ac2580af9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
