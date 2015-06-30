@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_2d847ba2",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-30T00:24:46Z",
+      "side": 1,
+      "message": "No longer true",
+      "revId": "d0925de6b3ee8f7fc13b74fb001b6559f593eec6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ed51933b",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-30T00:24:46Z",
+      "side": 1,
+      "message": "No space between (int) and $redirected. Also is cast to int really needed?",
+      "revId": "d0925de6b3ee8f7fc13b74fb001b6559f593eec6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ad470b7b",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-06-30T00:24:46Z",
+      "side": 1,
+      "message": "Not using qualified class names is nicer",
+      "revId": "d0925de6b3ee8f7fc13b74fb001b6559f593eec6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
