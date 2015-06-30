@@ -538,6 +538,31 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
+	public function testLabelDescriptionConflict() {
+		// FIXME: MySQL doesn't support self-joins on temporary tables,
+		//        so skip this check during unit tests on MySQL!
+		//        There is a similar check to this in TermSqlIndex
+		if ( $this->db->getType() == 'mysql' ) {
+			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
+		}
+
+		$params = array(
+			'action' => 'wbeditentity',
+			'new' => 'item',
+			'data' => '{
+				"labels": { "de": { "language": "de", "value": "LabelWithDescriptionConflict" } },
+				"descriptions": { "de": { "language": "de", "value": "LabelWithDescriptionConflict" } }
+			}',
+		);
+		$this->doApiRequestWithToken( $params );
+
+		$expectedException = array(
+			'type' => 'UsageException',
+			'code' => 'modification-failed',
+		);
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
 	public function testClearFromBadRevId() {
 		$params = array(
 			'action' => 'wbeditentity',
