@@ -83,8 +83,7 @@ class SerializerFactory {
 			new PropertySerializer(
 				$this->newTermListSerializer(),
 				$this->newAliasGroupListSerializer(),
-				$this->newStatementListSerializer(),
-				$this->shouldUseObjectsForMaps()
+				$this->newStatementListSerializer()
 			)
 		) );
 	}

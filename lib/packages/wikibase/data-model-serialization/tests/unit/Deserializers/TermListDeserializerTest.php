@@ -20,7 +20,7 @@ class TermListDeserializerTest extends DeserializerBaseTest {
 	 * @return Deserializer
 	 */
 	public function buildDeserializer() {
-		return new TermListDeserializer( New TermDeserializer() );
+		return new TermListDeserializer( new TermDeserializer() );
 	}
 
 	/**
@@ -47,7 +47,13 @@ class TermListDeserializerTest extends DeserializerBaseTest {
 				'en' => array( 'language' => 'en', 'value' => 'FooBar', 'source' => 'fr' ),
 			),
 			array(
+				'en' => array( 'language' => 'de', 'value' => 'Evil language' ),
+			),
+			array(
 				'en' => array( 'language' => 'en' ),
+			),
+			array(
+				8 => array( 'language' => 'en', 'value' => 'FooBar' ),
 			),
 		);
 	}

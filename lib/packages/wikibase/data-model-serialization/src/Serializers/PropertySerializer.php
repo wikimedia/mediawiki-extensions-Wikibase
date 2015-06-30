@@ -34,26 +34,18 @@ class PropertySerializer implements DispatchableSerializer {
 	private $statementListSerializer;
 
 	/**
-	 * @var bool
-	 */
-	private $useObjectsForMaps;
-
-	/**
 	 * @param Serializer $termListSerializer
 	 * @param Serializer $aliasGroupListSerializer
 	 * @param Serializer $statementListSerializer
-	 * @param bool $useObjectsForMaps
 	 */
 	public function __construct(
 		Serializer $termListSerializer,
 		Serializer $aliasGroupListSerializer,
-		Serializer $statementListSerializer,
-		$useObjectsForMaps
+		Serializer $statementListSerializer
 	) {
 		$this->termListSerializer = $termListSerializer;
 		$this->aliasGroupListSerializer = $aliasGroupListSerializer;
 		$this->statementListSerializer = $statementListSerializer;
-		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
 	/**
@@ -113,12 +105,6 @@ class PropertySerializer implements DispatchableSerializer {
 		$serialization['labels'] = $this->termListSerializer->serialize( $fingerprint->getLabels() );
 		$serialization['descriptions'] = $this->termListSerializer->serialize( $fingerprint->getDescriptions() );
 		$serialization['aliases'] = $this->aliasGroupListSerializer->serialize( $fingerprint->getAliasGroups() );
-
-		if ( $this->useObjectsForMaps ) {
-			$serialization['labels'] = (object)$serialization['labels'];
-			$serialization['descriptions'] = (object)$serialization['descriptions'];
-			$serialization['aliases'] = (object)$serialization['aliases'];
-		}
 	}
 
 	private function addStatementListToSerialization( Property $property, array &$serialization ) {

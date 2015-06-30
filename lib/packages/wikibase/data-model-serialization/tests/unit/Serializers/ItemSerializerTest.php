@@ -250,28 +250,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 		$serializer = $this->buildSerializer( true );
 
 		$item = new Item();
-		$item->getFingerprint()->setLabel( 'en', 'foo' );
-		$item->getFingerprint()->setDescription( 'en', 'foo' );
-		$item->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
-
-		$labels = new \stdClass();
-		$labels->en = array(
-			'lang' => 'en',
-			'value' => 'foo'
-		);
-
-		$descriptions = new \stdClass();
-		$descriptions->en = array(
-			'lang' => 'en',
-			'value' => 'foo'
-		);
-
-		$aliases = new \stdClass();
-		$aliases->en = array(
-			'lang' => 'en',
-			'values' => array( 'foo', 'bar' )
-		);
 
 		$sitelinks = new \stdClass();
 		$sitelinks->enwiki = array(
@@ -282,9 +261,9 @@ class ItemSerializerTest extends SerializerBaseTest {
 
 		$serial = array(
 			'type' => 'item',
-			'labels' => $labels,
-			'descriptions' => $descriptions,
-			'aliases' => $aliases,
+			'labels' => array(),
+			'descriptions' => array(),
+			'aliases' => array(),
 			'claims' => array(),
 			'sitelinks' => $sitelinks,
 		);

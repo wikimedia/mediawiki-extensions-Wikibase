@@ -89,6 +89,7 @@ class AliasGroupListDeserializer implements Deserializer {
 
 		$this->requireAttribute( $serialization, 'language' );
 		$this->requireAttribute( $serialization, 'value' );
+		// Do not deserialize alias group fallbacks
 		$this->assertNotAttribute( $serialization, 'source' );
 
 		$this->assertAttributeInternalType( $serialization, 'language', 'string' );

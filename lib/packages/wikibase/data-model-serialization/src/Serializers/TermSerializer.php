@@ -44,10 +44,12 @@ class TermSerializer implements Serializer {
 			'language' => $term->getLanguageCode(),
 			'value' => $term->getText(),
 		);
+
 		if ( $term instanceof TermFallback ) {
 			$result['language'] = $term->getActualLanguageCode();
 			$result['source'] = $term->getSourceLanguageCode();
 		}
+
 		return $result;
 	}
 

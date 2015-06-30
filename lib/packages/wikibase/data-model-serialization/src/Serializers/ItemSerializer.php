@@ -121,12 +121,6 @@ class ItemSerializer implements DispatchableSerializer {
 		$serialization['labels'] = $this->termListSerializer->serialize( $fingerprint->getLabels() );
 		$serialization['descriptions'] = $this->termListSerializer->serialize( $fingerprint->getDescriptions() );
 		$serialization['aliases'] = $this->aliasGroupListSerializer->serialize( $fingerprint->getAliasGroups() );
-
-		if ( $this->useObjectsForMaps ) {
-			$serialization['labels'] = (object)$serialization['labels'];
-			$serialization['descriptions'] = (object)$serialization['descriptions'];
-			$serialization['aliases'] = (object)$serialization['aliases'];
-		}
 	}
 
 	private function addStatementListToSerialization( Item $item, array &$serialization ) {

@@ -24,12 +24,6 @@ class TermDeserializer implements Deserializer {
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertCanDeserialize( $serialization );
-
-		$this->requireAttribute( $serialization, 'language' );
-		$this->requireAttribute( $serialization, 'value' );
-		// Do not deserialize term fallbacks
-		$this->assertNotAttribute( $serialization, 'source' );
-
 		return $this->getDeserialized( $serialization );
 	}
 
@@ -52,6 +46,7 @@ class TermDeserializer implements Deserializer {
 
 		$this->requireAttribute( $serialization, 'language' );
 		$this->requireAttribute( $serialization, 'value' );
+		// Do not deserialize term fallbacks
 		$this->assertNotAttribute( $serialization, 'source' );
 
 		$this->assertAttributeInternalType( $serialization, 'language', 'string' );

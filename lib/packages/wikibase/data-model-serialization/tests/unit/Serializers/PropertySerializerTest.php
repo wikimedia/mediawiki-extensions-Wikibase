@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\TermList;
  */
 class PropertySerializerTest extends SerializerBaseTest {
 
-	protected function buildSerializer( $useObjectsForMaps = false ) {
+	protected function buildSerializer() {
 		$termListSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
@@ -71,8 +71,7 @@ class PropertySerializerTest extends SerializerBaseTest {
 		return new PropertySerializer(
 			$termListSerializerMock,
 			$aliasGroupListSerializerMock,
-			$statementListSerializerMock,
-			$useObjectsForMaps
+			$statementListSerializerMock
 		);
 	}
 
@@ -213,44 +212,6 @@ class PropertySerializerTest extends SerializerBaseTest {
 		);
 
 		return $provider;
-	}
-
-	public function testPropertySerializerWithOptionObjectsForMaps() {
-		$serializer = $this->buildSerializer( true );
-
-		$property = Property::newFromType( '' );
-		$property->getFingerprint()->setLabel( 'en', 'foo' );
-		$property->getFingerprint()->setDescription( 'en', 'foo' );
-		$property->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
-
-		$labels = new \stdClass();
-		$labels->en = array(
-			'lang' => 'en',
-			'value' => 'foo'
-		);
-
-		$descriptions = new \stdClass();
-		$descriptions->en = array(
-			'lang' => 'en',
-			'value' => 'foo'
-		);
-
-		$aliases = new \stdClass();
-		$aliases->en = array(
-			'lang' => 'en',
-			'values' => array( 'foo', 'bar' )
-		);
-
-		$serial = array(
-			'type' => 'property',
-			'datatype' => '',
-			'labels' => $labels,
-			'descriptions' => $descriptions,
-			'aliases' => $aliases,
-			'claims' => array()
-		);
-
-		$this->assertEquals( $serial, $serializer->serialize( $property ) );
 	}
 
 }

@@ -61,4 +61,18 @@ class TermListSerializerTest extends \PHPUnit_Framework_TestCase {
 		$serializer->serialize( new \stdClass() );
 	}
 
+	public function testTermListSerializerWithOptionObjectsForMaps() {
+		$serializer = new TermListSerializer( new TermSerializer(), true );
+
+		$terms = new TermList( array( new Term( 'en', 'foo' ) ) );
+
+		$serial = new \stdClass();
+		$serial->en = array(
+			'language' => 'en',
+			'value' => 'foo'
+		);
+
+		$this->assertEquals( $serial, $serializer->serialize( $terms ) );
+	}
+
 }

@@ -21,8 +21,8 @@ class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider serializationProvider
 	 */
-	public function testSerialization( AliasGroupList $input, $expected ) {
-		$serializer = new AliasGroupListSerializer( false );
+	public function testSerialization( AliasGroupList $input, $useObjectsForMaps, $expected ) {
+		$serializer = new AliasGroupListSerializer( $useObjectsForMaps );
 
 		$output = $serializer->serialize( $input );
 
@@ -33,16 +33,24 @@ class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				new AliasGroupList( array( new AliasGroup( 'en', array() ) ) ),
+				false,
 				array(),
 			),
 			array(
+				new AliasGroupList( array( new AliasGroup( 'en', array() ) ) ),
+				true,
+				new \stdClass()
+			),
+			array(
 				new AliasGroupList( array( new AliasGroup( 'en', array( 'One' ) ) ) ),
+				false,
 				array( 'en' => array(
 					array( 'language' => 'en', 'value' => 'One' ),
 				) ),
 			),
 			array(
 				new AliasGroupList( array( new AliasGroup( 'en', array( 'One', 'Pony' ) ) ) ),
+				false,
 				array( 'en' => array(
 					array( 'language' => 'en', 'value' => 'One' ),
 					array( 'language' => 'en', 'value' => 'Pony' ),
@@ -53,6 +61,7 @@ class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 					new AliasGroup( 'en', array( 'One', 'Pony' ) ),
 					new AliasGroup( 'de', array( 'foo', 'bar' ) )
 				) ),
+				false,
 				array( 'en' => array(
 					array( 'language' => 'en', 'value' => 'One' ),
 					array( 'language' => 'en', 'value' => 'Pony' ),
@@ -63,6 +72,7 @@ class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				new AliasGroupList( array( new AliasGroupFallback( 'en', array( 'One', 'Pony' ), 'de', 'fr' ) ) ),
+				false,
 				array( 'en' => array(
 					array( 'language' => 'de', 'value' => 'One', 'source' => 'fr' ),
 					array( 'language' => 'de', 'value' => 'Pony', 'source' => 'fr' ),
@@ -75,6 +85,26 @@ class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 		$serializer = new TermSerializer();
 		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
 		$serializer->serialize( new stdClass() );
+	}
+
+	public function testAliasGroupListSerializerWithOptionObjectsForMaps() {
+		$serializer = new AliasGroupListSerializer( true );
+
+		$aliases = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) );
+
+		$serial = new \stdClass();
+		$serial->en = array(
+			array(
+				'language' => 'en',
+				'value' => 'foo'
+			),
+			array(
+				'language' => 'en',
+				'value' => 'bar'
+			)
+		);
+
+		$this->assertEquals( $serial, $serializer->serialize( $aliases ) );
 	}
 
 }

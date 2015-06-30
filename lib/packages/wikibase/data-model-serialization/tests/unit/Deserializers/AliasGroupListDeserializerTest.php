@@ -49,6 +49,9 @@ class AliasGroupListDeserializerTest extends DeserializerBaseTest {
 				array( 'language' => 'de', 'value' => 'Evil language' )
 			) ),
 			array( 'en' => array( 'A' ), 'de' => array( 'B' ) ),
+			array( 'en' => array(
+				array( 'language' => 'en', 'value' => 'Evil language', 'source' => 'fallback' )
+			) ),
 		);
 	}
 
