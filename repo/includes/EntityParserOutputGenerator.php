@@ -200,7 +200,11 @@ class EntityParserOutputGenerator {
 		// set the display title
 		//$parserOutput->setTitleText( $entity>getLabel( $langCode ) );
 
-		$this->addAlternateLinks( $parserOutput, $entity->getId() );
+		if ( $entity->getId() !== null ) {
+			$this->addAlternateLinks( $parserOutput, $entity->getId() );
+		} else {
+			wfLogWarning( "Encountered an Entity without EntityId in EntityParserOutputGenerator." );
+		}
 
 		return $parserOutput;
 	}
