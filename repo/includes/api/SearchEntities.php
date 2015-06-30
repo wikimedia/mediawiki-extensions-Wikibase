@@ -180,7 +180,8 @@ class SearchEntities extends ApiBase {
 			$entry['url'] = $title->getFullUrl();
 			$entry = array_merge( $entry, $this->termsToArray( $match['displayTerms'] ) );
 			$entry['match']['type'] = $match[TermIndexSearchInteractor::MATCHEDTERMTYPE_KEY];
-			//Special handeling for 'entityId's as these are not actually Term objects
+
+			//Special handling for 'entityId's as these are not actually Term objects
 			if ( $entry['match']['type'] === 'entityId' ) {
 				$entry['match']['text'] = $match['entityId'];
 				$entry['aliases'] = array( $match['entityId'] );
@@ -189,7 +190,10 @@ class SearchEntities extends ApiBase {
 				$matchedTerm = $match[TermIndexSearchInteractor::MATCHEDTERM_KEY];
 				$entry['match']['language'] = $matchedTerm->getLanguageCode();
 				$entry['match']['text'] = $matchedTerm->getText();
-				$entry['aliases'] = array( $matchedTerm->getText() );
+
+				if ( $match['matchedTermType'] === 'alias' ) {
+					$entry['aliases'] = array( $matchedTerm->getText() );
+				}
 			}
 			$entries[] = $entry;
 		}
