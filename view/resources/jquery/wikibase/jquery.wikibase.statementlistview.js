@@ -189,10 +189,10 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 								property: !!( value || propertyId )
 							}
 						},
-						dataTypeStore: self.option( 'dataTypeStore' ),
-						entityStore: self.option( 'entityStore' ),
-						valueViewBuilder: self.option( 'valueViewBuilder' ),
-						entityChangersFactory: self.option( 'entityChangersFactory' ),
+						dataTypeStore: self.options.dataTypeStore,
+						entityStore: self.options.entityStore,
+						valueViewBuilder: self.options.valueViewBuilder,
+						entityChangersFactory: self.options.entityChangersFactory,
 						claimsChanger: self._claimsChanger,
 						guidGenerator: self.options.claimGuidGenerator
 					};

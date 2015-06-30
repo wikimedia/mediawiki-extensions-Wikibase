@@ -148,7 +148,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 				var $snaklistview = $( event.target ).closest( ':wikibase-snaklistview' ),
 					snaklistview = $snaklistview.data( 'snaklistview' );
 
-				if( snaklistview && !snaklistview.value() ) {
+				if( snaklistview && !snaklistview.value().length ) {
 					self.$listview.data( 'listview' ).removeItem( snaklistview.element );
 				}
 			}
@@ -208,7 +208,11 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 */
 	value: function( reference ) {
 		if( reference ) {
-			this.option( 'value', reference );
+			return this.option( 'value', reference );
+		}
+
+		if( !this.$listview ) {
+			return null;
 		}
 
 		var snakList = new wb.datamodel.SnakList();
