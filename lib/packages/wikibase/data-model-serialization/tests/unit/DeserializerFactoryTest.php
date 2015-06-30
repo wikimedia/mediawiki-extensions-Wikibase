@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 /**
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -147,9 +148,9 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewAliasGroupDeserializer() {
+	public function testNewAliasGroupListDeserializer() {
 		$this->assertDeserializesWithoutException(
-			$this->buildDeserializerFactory()->newAliasGroupDeserializer(),
+			$this->buildDeserializerFactory()->newAliasGroupListDeserializer(),
 			array( 'en' => array( array( 'language' => 'en', 'value' => 'Some Term' ) ) )
 		);
 	}

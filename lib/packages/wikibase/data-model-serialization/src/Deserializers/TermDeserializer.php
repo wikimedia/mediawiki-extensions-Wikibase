@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\Term;
 /**
  * Package private
  *
+ * @licence GNU GPL v2+
  * @author Adam Shorland
  */
 class TermDeserializer implements Deserializer {

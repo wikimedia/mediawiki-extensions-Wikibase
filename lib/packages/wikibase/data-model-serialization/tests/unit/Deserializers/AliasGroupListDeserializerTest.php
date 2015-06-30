@@ -3,22 +3,24 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
-use Wikibase\DataModel\Deserializers\AliasGroupDeserializer;
+use Wikibase\DataModel\Deserializers\AliasGroupListDeserializer;
 use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\AliasGroupDeserializer
+ * @covers Wikibase\DataModel\Deserializers\AliasGroupListDeserializer
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupDeserializerTest extends DeserializerBaseTest {
+class AliasGroupListDeserializerTest extends DeserializerBaseTest {
 
 	/**
 	 * @return Deserializer
 	 */
 	public function buildDeserializer() {
-		return new AliasGroupDeserializer();
+		return new AliasGroupListDeserializer();
 	}
 
 	/**
@@ -31,6 +33,10 @@ class AliasGroupDeserializerTest extends DeserializerBaseTest {
 				array( 'language' => 'de', 'value' => 'One' ),
 				array( 'language' => 'de', 'value' => 'Pony' ),
 			) ),
+			array(
+				'de' => array( array( 'language' => 'de', 'value' => 'foo' ) ),
+				'en' => array( array( 'language' => 'en', 'value' => 'bar' ) ),
+			),
 		);
 	}
 
@@ -39,7 +45,10 @@ class AliasGroupDeserializerTest extends DeserializerBaseTest {
 	 */
 	public function nonDeserializableProvider() {
 		return array(
-			'multipleAliasGroups' => array( 'en' => array( 'A' ), 'de' => array( 'B' ) ),
+			array( 'en' => array(
+				array( 'language' => 'de', 'value' => 'Evil language' )
+			) ),
+			array( 'en' => array( 'A' ), 'de' => array( 'B' ) ),
 		);
 	}
 
@@ -49,17 +58,17 @@ class AliasGroupDeserializerTest extends DeserializerBaseTest {
 	public function deserializationProvider() {
 		return array(
 			array(
-				new AliasGroup( 'en', array() ),
+				new AliasGroupList( array( new AliasGroup( 'en', array() ) ) ),
 				array( 'en' => array() ),
 			),
 			array(
-				new AliasGroup( 'en', array( 'A' ) ),
+				new AliasGroupList( array( new AliasGroup( 'en', array( 'A' ) ) ) ),
 				array( 'en' => array(
 					array( 'language' => 'en', 'value' => 'A' ),
 				) ),
 			),
 			array(
-				new AliasGroup( 'en', array( 'A', 'B' ) ),
+				new AliasGroupList( array( new AliasGroup( 'en', array( 'A', 'B' ) ) ) ),
 				array( 'en' => array(
 					array( 'language' => 'en', 'value' => 'A' ),
 					array( 'language' => 'en', 'value' => 'B' ),

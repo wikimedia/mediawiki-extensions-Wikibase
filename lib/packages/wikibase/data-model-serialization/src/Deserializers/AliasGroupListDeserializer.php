@@ -7,49 +7,62 @@ use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
  * Package private
  *
+ * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupDeserializer implements Deserializer {
+class AliasGroupListDeserializer implements Deserializer {
 
 	/**
-	 * @param mixed $serialization
+	 * @see Deserializer::deserialize
 	 *
-	 * @return AliasGroup
+	 * @param array $serialization
+	 *
 	 * @throws DeserializationException
+	 * @return AliasGroupList
 	 */
 	public function deserialize( $serialization ) {
 		$this->assertCanDeserialize( $serialization );
-
 		return $this->getDeserialized( $serialization );
 	}
 
 	/**
 	 * @param array $serialization
 	 *
-	 * @return AliasGroup
+	 * @return AliasGroupList
 	 */
 	private function getDeserialized( $serialization ) {
-		foreach ( $serialization as $requestedLanguage => $aliasesPerLanguageSerialization ) {
-			if ( !is_array( $aliasesPerLanguageSerialization ) ) {
-				throw new DeserializationException( "Aliases serialization should be an array of array" );
-			}
+		$aliasGroupList = new AliasGroupList();
 
-			$aliases = array();
-
-			foreach ( $aliasesPerLanguageSerialization as $aliasSerialization ) {
-				$this->assertIsValidValueSerialization( $aliasSerialization, $requestedLanguage );
-				$aliases[] = $aliasSerialization['value'];
-			}
-
-			return new AliasGroup(
-				$requestedLanguage,
-				$aliases
-			);
+		foreach ( $serialization as $languageCode => $aliasGroupSerialization ) {
+			$aliasGroupList->setGroup( $this->deserializeAliasGroup( $aliasGroupSerialization, $languageCode ) );
 		}
+
+		return $aliasGroupList;
+	}
+
+	/**
+	 * @param array $serialization
+	 * @param string $languageCode
+	 *
+	 * @return AliasGroup
+	 */
+	private function deserializeAliasGroup( array $serialization, $languageCode ) {
+		$aliases = array();
+
+		foreach ( $serialization as $aliasSerialization ) {
+			$aliases[] = $aliasSerialization['value'];
+		}
+
+		return new AliasGroup(
+			$languageCode,
+			$aliases
+		);
 	}
 
 	/**
@@ -57,16 +70,19 @@ class AliasGroupDeserializer implements Deserializer {
 	 */
 	private function assertCanDeserialize( $serialization ) {
 		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'The alias group serialization should be an array' );
+			throw new DeserializationException( 'The aliasGroup list serialization should be an array' );
 		}
-		if ( count( $serialization ) > 1 ) {
-			throw new DeserializationException(
-				'The alias group serialization should only contain 1 element'
-			);
+
+		foreach ( $serialization as $requestedLanguage => $valueSerialization ) {
+			$this->assertAttributeIsArray( $serialization, $requestedLanguage );
+
+			foreach ( $valueSerialization as $aliasSerialization ) {
+				$this->assertIsValidAliasSerialization( $aliasSerialization, $requestedLanguage );
+			}
 		}
 	}
 
-	private function assertIsValidValueSerialization( $serialization, $requestedLanguage ) {
+	private function assertIsValidAliasSerialization( $serialization, $requestedLanguage ) {
 		if ( !is_array( $serialization ) ) {
 			throw new DeserializationException( 'Term serializations must be arrays' );
 		}
@@ -98,25 +114,26 @@ class AliasGroupDeserializer implements Deserializer {
 		}
 	}
 
+	private function assertRequestedAndActualLanguageMatch( array $serialization, $requestedLanguage ) {
+		if ( $serialization['language'] !== $requestedLanguage ) {
+			throw new DeserializationException(
+				'Deserialization of a value of the attribute language (actual)'
+					. ' that is not matching the language key (requested) is not supported: '
+					. $serialization['language'] . ' !== ' . $requestedLanguage
+			);
+		}
+	}
+
+	private function assertAttributeIsArray( array $array, $attributeName ) {
+		$this->assertAttributeInternalType( $array, $attributeName, 'array' );
+	}
+
 	private function assertAttributeInternalType( array $array, $attributeName, $internalType ) {
 		if ( gettype( $array[$attributeName] ) !== $internalType ) {
 			throw new InvalidAttributeException(
 				$attributeName,
 				$array[$attributeName],
 				"The internal type of attribute '$attributeName' needs to be '$internalType'"
-			);
-		}
-	}
-
-	private function assertRequestedAndActualLanguageMatch(
-		array $serialization,
-		$requestedLanguage
-	) {
-		if ( $serialization['language'] !== $requestedLanguage ) {
-			throw new DeserializationException(
-				'Deserialization of a value of the attribute language (actual)'
-				. ' that is not matching the language key (requested) is not supported: '
-				. $serialization['language'] . ' !== ' . $requestedLanguage
 			);
 		}
 	}

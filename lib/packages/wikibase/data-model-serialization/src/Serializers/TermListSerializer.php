@@ -2,14 +2,15 @@
 
 namespace Wikibase\DataModel\Serializers;
 
+use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
  * Package private
  *
+ * @licence GNU GPL v2+
  * @author Adam Shorland
  */
 class TermListSerializer implements Serializer {
@@ -34,9 +35,12 @@ class TermListSerializer implements Serializer {
 	}
 
 	/**
+	 * @see Serializer::serialize
+	 *
 	 * @param TermList $object
 	 *
 	 * @return array
+	 * @throws SerializationException
 	 */
 	public function serialize( $object ) {
 		$this->assertIsSerializerFor( $object );
@@ -61,7 +65,6 @@ class TermListSerializer implements Serializer {
 		$serialization = array();
 
 		foreach ( $termList->getIterator() as $term ) {
-			/** @var Term $term */
 			$serialization[$term->getLanguageCode()] = $this->termSerializer->serialize( $term );
 		}
 

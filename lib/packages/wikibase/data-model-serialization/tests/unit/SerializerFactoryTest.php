@@ -17,12 +17,14 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\TypedSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -135,10 +137,10 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewAliasGroupSerializer() {
+	public function testNewAliasGroupListSerializer() {
 		$this->assertSerializesWithoutException(
-			$this->buildSerializerFactory()->newAliasGroupSerializer(),
-			new AliasGroup( 'de', array( 'AA', 'BB' ) )
+			$this->buildSerializerFactory()->newAliasGroupListSerializer(),
+			new AliasGroupList( array( new AliasGroup( 'de', array( 'AA', 'BB' ) ) ) )
 		);
 	}
 

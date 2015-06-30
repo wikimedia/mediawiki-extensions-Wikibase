@@ -5,9 +5,8 @@ namespace Wikibase\DataModel;
 use InvalidArgumentException;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
-use Wikibase\DataModel\Serializers\AliasGroupSerializer;
+use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
-use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Serializers\ReferenceListSerializer;
@@ -28,6 +27,7 @@ use Wikibase\DataModel\Serializers\TypedSnakSerializer;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SerializerFactory {
 
@@ -72,13 +72,20 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newEntitySerializer() {
-		$mapOption = $this->shouldUseObjectsForMaps()
-			? FingerprintSerializer::USE_OBJECTS_FOR_MAPS
-			: FingerprintSerializer::USE_ARRAYS_FOR_MAPS;
-		$fingerprintSerializer = new FingerprintSerializer( $mapOption );
 		return new DispatchingSerializer( array(
-			new ItemSerializer( $fingerprintSerializer, $this->newStatementListSerializer(), $this->newSiteLinkSerializer(), $this->shouldUseObjectsForMaps() ),
-			new PropertySerializer( $fingerprintSerializer, $this->newStatementListSerializer() ),
+			new ItemSerializer(
+				$this->newTermListSerializer(),
+				$this->newAliasGroupListSerializer(),
+				$this->newStatementListSerializer(),
+				$this->newSiteLinkSerializer(),
+				$this->shouldUseObjectsForMaps()
+			),
+			new PropertySerializer(
+				$this->newTermListSerializer(),
+				$this->newAliasGroupListSerializer(),
+				$this->newStatementListSerializer(),
+				$this->shouldUseObjectsForMaps()
+			)
 		) );
 	}
 
@@ -222,14 +229,14 @@ class SerializerFactory {
 	}
 
 	/**
-	 * Returns a Serializer that can serialize AliasGroup objects.
+	 * Returns a Serializer that can serialize AliasGroupList objects.
 	 *
 	 * @since 1.5
 	 *
 	 * @return Serializer
 	 */
-	public function newAliasGroupSerializer() {
-		return new AliasGroupSerializer();
+	public function newAliasGroupListSerializer() {
+		return new AliasGroupListSerializer( $this->shouldUseObjectsForMaps() );
 	}
 
 }

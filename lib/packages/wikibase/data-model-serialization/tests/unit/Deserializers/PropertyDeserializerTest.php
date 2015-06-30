@@ -8,13 +8,17 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\PropertyDeserializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class PropertyDeserializerTest extends DeserializerBaseTest {
 
@@ -22,12 +26,30 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
+			->with( $this->equalTo( 'P42' ) )
 			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
 
-		$fingerprintDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
-		$fingerprintDeserializerMock->expects( $this->any() )
+		$termListDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$termListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->will( $this->returnValue( new Fingerprint() ) );
+			->with( $this->equalTo( array(
+				'en' => array(
+					'lang' => 'en',
+					'value' => 'foo'
+				)
+			) ) )
+			->will( $this->returnValue( new TermList( array( new Term( 'en', 'foo' ) ) ) ) );
+
+		$aliasGroupListDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$aliasGroupListDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->with( $this->equalTo( array(
+				'en' => array(
+					'lang' => 'en',
+					'values' => array( 'foo', 'bar' )
+				)
+			) ) )
+			->will( $this->returnValue( new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) ) ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
@@ -49,7 +71,12 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( new StatementList( array( $statement ) ) ) );
 
-		return new PropertyDeserializer( $entityIdDeserializerMock, $fingerprintDeserializerMock, $statementListDeserializerMock );
+		return new PropertyDeserializer(
+			$entityIdDeserializerMock,
+			$termListDeserializerMock,
+			$aliasGroupListDeserializerMock,
+			$statementListDeserializerMock
+		);
 	}
 
 	public function deserializableProvider() {
@@ -98,6 +125,54 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 				'type' => 'property',
 				'datatype' => '',
 				'id' => 'P42'
+			)
+		);
+
+		$property = Property::newFromType( '' );
+		$property->getFingerprint()->setLabel( 'en', 'foo' );
+		$provider[] = array(
+			$property,
+			array(
+				'type' => 'property',
+				'datatype' => '',
+				'labels' => array(
+					'en' => array(
+						'lang' => 'en',
+						'value' => 'foo'
+					)
+				)
+			)
+		);
+
+		$property = Property::newFromType( '' );
+		$property->getFingerprint()->setDescription( 'en', 'foo' );
+		$provider[] = array(
+			$property,
+			array(
+				'type' => 'property',
+				'datatype' => '',
+				'descriptions' => array(
+					'en' => array(
+						'lang' => 'en',
+						'value' => 'foo'
+					)
+				)
+			)
+		);
+
+		$property = Property::newFromType( '' );
+		$property->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$provider[] = array(
+			$property,
+			array(
+				'type' => 'property',
+				'datatype' => '',
+				'aliases' => array(
+					'en' => array(
+						'lang' => 'en',
+						'values' => array( 'foo', 'bar' )
+					)
+				)
 			)
 		);
 
