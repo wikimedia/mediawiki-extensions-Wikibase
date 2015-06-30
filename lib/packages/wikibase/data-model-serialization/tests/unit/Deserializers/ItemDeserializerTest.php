@@ -9,13 +9,17 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\ItemDeserializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ItemDeserializerTest extends DeserializerBaseTest {
 
@@ -23,12 +27,30 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
+			->with( $this->equalTo( 'Q42' ) )
 			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
 
-		$fingerprintDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
-		$fingerprintDeserializerMock->expects( $this->any() )
+		$termListDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$termListDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
-			->will( $this->returnValue( new Fingerprint() ) );
+			->with( $this->equalTo( array(
+				'en' => array(
+					'lang' => 'en',
+					'value' => 'foo'
+				)
+			) ) )
+			->will( $this->returnValue( new TermList( array( new Term( 'en', 'foo' ) ) ) ) );
+
+		$aliasGroupListDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$aliasGroupListDeserializerMock->expects( $this->any() )
+			->method( 'deserialize' )
+			->with( $this->equalTo( array(
+				'en' => array(
+					'lang' => 'en',
+					'values' => array( 'foo', 'bar' )
+				)
+			) ) )
+			->will( $this->returnValue( new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) ) ) );
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
@@ -60,7 +82,13 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( new SiteLink( 'enwiki', 'Nyan Cat' ) ) );
 
-		return new ItemDeserializer( $entityIdDeserializerMock, $fingerprintDeserializerMock, $statementListDeserializerMock, $siteLinkDeserializerMock );
+		return new ItemDeserializer(
+			$entityIdDeserializerMock,
+			$termListDeserializerMock,
+			$aliasGroupListDeserializerMock,
+			$statementListDeserializerMock,
+			$siteLinkDeserializerMock
+		);
 	}
 
 	public function deserializableProvider() {
@@ -105,6 +133,51 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 			array(
 				'type' => 'item',
 				'id' => 'Q42'
+			)
+		);
+
+		$item = new Item();
+		$item->getFingerprint()->setLabel( 'en', 'foo' );
+		$provider[] = array(
+			$item,
+			array(
+				'type' => 'item',
+				'labels' => array(
+					'en' => array(
+						'lang' => 'en',
+						'value' => 'foo'
+					)
+				)
+			)
+		);
+
+		$item = new Item();
+		$item->getFingerprint()->setDescription( 'en', 'foo' );
+		$provider[] = array(
+			$item,
+			array(
+				'type' => 'item',
+				'descriptions' => array(
+					'en' => array(
+						'lang' => 'en',
+						'value' => 'foo'
+					)
+				)
+			)
+		);
+
+		$item = new Item();
+		$item->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
+		$provider[] = array(
+			$item,
+			array(
+				'type' => 'item',
+				'aliases' => array(
+					'en' => array(
+						'lang' => 'en',
+						'values' => array( 'foo', 'bar' )
+					)
+				)
 			)
 		);
 

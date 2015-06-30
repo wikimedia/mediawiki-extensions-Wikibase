@@ -13,6 +13,7 @@ use Wikibase\DataModel\SiteLinkList;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ItemDeserializer extends TypedObjectDeserializer {
 
@@ -24,7 +25,12 @@ class ItemDeserializer extends TypedObjectDeserializer {
 	/**
 	 * @var Deserializer
 	 */
-	private $fingerprintDeserializer;
+	private $termListDeserializer;
+
+	/**
+	 * @var Deserializer
+	 */
+	private $aliasGroupListDeserializer;
 
 	/**
 	 * @var Deserializer
@@ -38,20 +44,23 @@ class ItemDeserializer extends TypedObjectDeserializer {
 
 	/**
 	 * @param Deserializer $entityIdDeserializer
-	 * @param Deserializer $fingerprintDeserializer
+	 * @param Deserializer $termListDeserializer
+	 * @param Deserializer $aliasGroupListDeserializer
 	 * @param Deserializer $statementListDeserializer
 	 * @param Deserializer $siteLinkDeserializer
 	 */
 	public function __construct(
 		Deserializer $entityIdDeserializer,
-		Deserializer $fingerprintDeserializer,
+		Deserializer $termListDeserializer,
+		Deserializer $aliasGroupListDeserializer,
 		Deserializer $statementListDeserializer,
 		Deserializer $siteLinkDeserializer
 	) {
 		parent::__construct( 'item', 'type' );
 
 		$this->entityIdDeserializer = $entityIdDeserializer;
-		$this->fingerprintDeserializer = $fingerprintDeserializer;
+		$this->termListDeserializer = $termListDeserializer;
+		$this->aliasGroupListDeserializer = $aliasGroupListDeserializer;
 		$this->statementListDeserializer = $statementListDeserializer;
 		$this->siteLinkDeserializer = $siteLinkDeserializer;
 	}
@@ -73,9 +82,8 @@ class ItemDeserializer extends TypedObjectDeserializer {
 	private function getDeserialized( array $serialization ) {
 		$item = new Item();
 
-		$item->setFingerprint( $this->fingerprintDeserializer->deserialize( $serialization ) );
-
 		$this->setIdFromSerialization( $serialization, $item );
+		$this->setTermsFromSerialization( $serialization, $item );
 		$this->setStatementListFromSerialization( $serialization, $item );
 		$this->setSiteLinksFromSerialization( $item->getSiteLinkList(), $serialization );
 
@@ -88,6 +96,29 @@ class ItemDeserializer extends TypedObjectDeserializer {
 		}
 
 		$item->setId( $this->entityIdDeserializer->deserialize( $serialization['id'] ) );
+	}
+
+	private function setTermsFromSerialization( array $serialization, Item $item ) {
+		if ( array_key_exists( 'labels', $serialization ) ) {
+			$this->assertAttributeIsArray( $serialization, 'labels' );
+			$item->getFingerprint()->setLabels(
+				$this->termListDeserializer->deserialize( $serialization['labels'] )
+			);
+		}
+
+		if ( array_key_exists( 'descriptions', $serialization ) ) {
+			$this->assertAttributeIsArray( $serialization, 'descriptions' );
+			$item->getFingerprint()->setDescriptions(
+				$this->termListDeserializer->deserialize( $serialization['descriptions'] )
+			);
+		}
+
+		if ( array_key_exists( 'aliases', $serialization ) ) {
+			$this->assertAttributeIsArray( $serialization, 'aliases' );
+			$item->getFingerprint()->setAliasGroups(
+				$this->aliasGroupListDeserializer->deserialize( $serialization['aliases'] )
+			);
+		}
 	}
 
 	private function setStatementListFromSerialization( array $serialization, Item $item ) {

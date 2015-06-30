@@ -4,10 +4,10 @@
 
 * Added `newTermSerializer` to `SerializerFactory`
 * Added `newTermListSerializer` to `SerializerFactory`
-* Added `newAliasGroupSerializer` to `SerializerFactory`
+* Added `newAliasGroupListSerializer` to `SerializerFactory`
 * Added `newTermDeserializer` to `DeserializerFactory`
 * Added `newTermListDeserializer` to `DeserializerFactory`
-* Added `newAliasGroupDeserializer` to `DeserializerFactory`
+* Added `newAliasGroupListDeserializer` to `DeserializerFactory`
 * Deprecated `SerializerFactory::newClaimsSerializer` in favour of `SerializerFactory::newStatementListSerializer`
 * Deprecated `DeserializerFactory::newClaimsDeserializer` in favour of `DeserializerFactory::newStatementListDeserializer`
 
