@@ -34,6 +34,24 @@
       "revId": "b36484472a7598faded18f1a40f341fb4e1bd06a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_3ad025fa",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-01T14:19:20Z",
+      "side": 1,
+      "message": "Ahh yes, the self join is only in getLabelWithDescriptionConflicts thus it does not apply to properties!",
+      "parentUuid": "8ec42329_3a1fc50e",
+      "revId": "b36484472a7598faded18f1a40f341fb4e1bd06a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
