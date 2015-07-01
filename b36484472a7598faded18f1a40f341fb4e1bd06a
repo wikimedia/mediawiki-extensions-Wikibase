@@ -16,6 +16,24 @@
       "revId": "b36484472a7598faded18f1a40f341fb4e1bd06a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_3a1fc50e",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-01T13:43:12Z",
+      "side": 1,
+      "message": "I do not know. Why did you added this in https://gerrit.wikimedia.org/r/#/c/147140/7..8/repo/tests/phpunit/includes/api/EditEntityTest.php ? I think the reason is that this check does not do a self-join. Only the label+description check does.",
+      "parentUuid": "8ec42329_ba2bb52d",
+      "revId": "b36484472a7598faded18f1a40f341fb4e1bd06a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
