@@ -79,7 +79,6 @@ use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
-use Wikibase\Repo\Notifications\MulticastChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
