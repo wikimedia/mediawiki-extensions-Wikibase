@@ -183,8 +183,15 @@ class SnakListTest extends HashArrayTest {
 		 * @var array
 		 */
 		$rawArguments = array(
-			//default order
-			array( array(), array() ),
+			'Default order' => array(
+				array(),
+				array(),
+			),
+			'Unknown id in order' => array(
+				array(),
+				array(),
+				array( 'P1' )
+			),
 			array(
 				array( new PropertyNoValueSnak( $id1 ) ),
 				array( new PropertyNoValueSnak( $id1 ) ),
@@ -211,8 +218,7 @@ class SnakListTest extends HashArrayTest {
 					new PropertyNoValueSnak( $id2 ),
 				),
 			),
-			//with additional order
-			array(
+			'With additional order' => array(
 				array(
 					new PropertyNoValueSnak( $id3 ),
 					new PropertyNoValueSnak( $id2 ),
@@ -223,7 +229,7 @@ class SnakListTest extends HashArrayTest {
 					new PropertyNoValueSnak( $id3 ),
 					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
 				),
-				array( $id2->getSerialization() )
+				array( 'P2' )
 			),
 			array(
 				array(
@@ -234,21 +240,20 @@ class SnakListTest extends HashArrayTest {
 					new PropertyNoValueSnak( $id1 ),
 				),
 				array(
-
 					new PropertyValueSnak( $id1, new StringValue( 'a' ) ),
 					new PropertyNoValueSnak( $id1 ),
 					new PropertyNoValueSnak( $id3 ),
 					new PropertyNoValueSnak( $id2 ),
 					new PropertyNoValueSnak( $id2 ),
 				),
-				array( $id1->getSerialization() )
+				array( 'P1' )
 			),
 		);
 
 		$arguments = array();
 
-		foreach ( $rawArguments as $rawArgument ) {
-			$arguments[] = array(
+		foreach ( $rawArguments as $key => $rawArgument ) {
+			$arguments[$key] = array(
 				new $class( $rawArgument[0] ),
 				new $class( $rawArgument[1] ),
 				array_key_exists( 2, $rawArgument ) ? $rawArgument[2] : array()

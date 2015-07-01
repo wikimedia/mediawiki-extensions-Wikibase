@@ -1,5 +1,8 @@
 # Wikibase DataModel release notes
 
+## Version 3.0.1 (2015-07-01)
+* Fixed out of bounds bug in `SnakList::orderByProperty`
+
 ## Version 3.0.0 (2015-06-06)
 
 #### Breaking changes
