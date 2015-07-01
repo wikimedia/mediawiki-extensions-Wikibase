@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b0abd76b",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-01T11:03:26Z",
+      "side": 1,
+      "message": "Why did you removed this instead of reworking it into a positive test?",
+      "revId": "0f0c736d3600087ed338449eab603ea6b71ef6c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
