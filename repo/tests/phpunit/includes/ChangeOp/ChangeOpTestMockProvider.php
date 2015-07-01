@@ -351,6 +351,10 @@ class ChangeOpTestMockProvider {
 			}
 		}
 
+		if ( $aliases === null ) {
+			return Result::newSuccess();
+		}
+
 		foreach ( $aliases as $lang => $texts ) {
 			if ( in_array( 'DUPE', $texts ) ) {
 				return Result::newError( array(

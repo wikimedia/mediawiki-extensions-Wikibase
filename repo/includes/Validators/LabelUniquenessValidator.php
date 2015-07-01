@@ -44,7 +44,8 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 			return $this->duplicateDetector->detectLabelConflicts(
 				$entity->getType(),
 				$entity->getFingerprint()->getLabels()->toTextArray(),
-				$entity->getFingerprint()->getAliasGroups()->toTextArray(),
+				// insert again when T104393 is resolved
+				null, //$entity->getFingerprint()->getAliasGroups()->toTextArray(),
 				$entity->getId()
 			);
 		}
@@ -83,7 +84,8 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 		return $this->duplicateDetector->detectLabelConflicts(
 			$entityId->getEntityType(),
 			$labels,
-			$aliases,
+			// insert again when T104393 is resolved
+			null, //$aliases,
 			$entityId
 		);
 	}

@@ -119,7 +119,8 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			'conflicting label' => array( $dupeLabelFingerprint, 'label-conflict' ),
-			'conflicting alias' => array( $dupeAliasFingerprint, 'label-conflict' ),
+			// insert again when T104393 is resolved
+			// 'conflicting alias' => array( $dupeAliasFingerprint, 'label-conflict' ),
 		);
 	}
 
