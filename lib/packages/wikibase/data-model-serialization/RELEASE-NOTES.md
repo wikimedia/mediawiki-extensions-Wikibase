@@ -1,6 +1,6 @@
 # Wikibase DataModel Serialization release notes
 
-## 1.5.0 (dev)
+## 1.5.0 (2015-07-01)
 
 * Added `newTermSerializer` to `SerializerFactory`
 * Added `newTermListSerializer` to `SerializerFactory`
