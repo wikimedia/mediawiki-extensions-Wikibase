@@ -89,13 +89,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	 * @dataProvider labelWithDescriptionConflictProvider
 	 */
 	public function testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected ) {
-
-		if ( wfGetDB( DB_MASTER )->getType() === 'mysql' ) {
-			// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
-			$this->markTestSkipped( 'Can\'t test self-joins on MySQL' );
-
-			return;
-		}
+		$this->markTestSkippedOnMySql();
 
 		parent::testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected );
 	}
@@ -267,6 +261,16 @@ class TermSqlIndexTest extends TermIndexTest {
 			array( array(), new Item() ),
 			array( array(), $this->getMock( 'Wikibase\DataModel\Entity\EntityDocument' ) )
 		);
+	}
+
+	/**
+	 * @see http://bugs.mysql.com/bug.php?id=10327
+	 * @see EditEntityTest::markTestSkippedOnMySql
+	 */
+	private function markTestSkippedOnMySql() {
+		if ( $this->db->getType() === 'mysql' ) {
+			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
+		}
 	}
 
 }

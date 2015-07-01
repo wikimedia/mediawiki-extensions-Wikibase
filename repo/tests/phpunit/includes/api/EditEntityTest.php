@@ -538,20 +538,47 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
-	public function testLabelDescriptionConflict() {
-		// FIXME: MySQL doesn't support self-joins on temporary tables,
-		//        so skip this check during unit tests on MySQL!
-		//        There is a similar check to this in TermSqlIndex
-		if ( $this->db->getType() == 'mysql' ) {
-			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
-		}
+	public function testPropertyLabelConflict() {
+		$params = array(
+			'action' => 'wbeditentity',
+			'data' => '{
+				"datatype": "string",
+				"labels": { "de": { "language": "de", "value": "LabelConflict" } }
+			}',
+			'new' => 'property',
+		);
+		$this->doApiRequestWithToken( $params );
+
+		$expectedException = array(
+			'type' => 'UsageException',
+			'code' => 'failed-save',
+		);
+		// Repeating the same request with the same label should fail.
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
+	public function testItemLabelWithoutDescriptionNotConflicting() {
+		$params = array(
+			'action' => 'wbeditentity',
+			'data' => '{ "labels": { "de": { "language": "de", "value": "NotConflicting" } } }',
+			'new' => 'item',
+		);
+		$this->doApiRequestWithToken( $params );
+
+		// Repeating the same request with the same label should not fail.
+		list( $result, , ) = $this->doApiRequestWithToken( $params );
+		$this->assertArrayHasKey( 'success', $result );
+	}
+
+	public function testItemLabelDescriptionConflict() {
+		$this->markTestSkippedOnMySql();
 
 		$params = array(
 			'action' => 'wbeditentity',
 			'new' => 'item',
 			'data' => '{
-				"labels": { "de": { "language": "de", "value": "LabelWithDescriptionConflict" } },
-				"descriptions": { "de": { "language": "de", "value": "LabelWithDescriptionConflict" } }
+				"labels": { "de": { "language": "de", "value": "LabelDescriptionConflict" } },
+				"descriptions": { "de": { "language": "de", "value": "LabelDescriptionConflict" } }
 			}',
 		);
 		$this->doApiRequestWithToken( $params );
@@ -560,6 +587,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'type' => 'UsageException',
 			'code' => 'modification-failed',
 		);
+		// Repeating the same request with the same label and description should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 
@@ -586,6 +614,16 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 		$expectedException = array( 'type' => 'UsageException', 'code' => 'editconflict' );
 		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
+	/**
+	 * @see http://bugs.mysql.com/bug.php?id=10327
+	 * @see TermSqlIndexTest::markTestSkippedOnMySql
+	 */
+	private function markTestSkippedOnMySql() {
+		if ( $this->db->getType() === 'mysql' ) {
+			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
+		}
 	}
 
 }
