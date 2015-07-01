@@ -126,16 +126,18 @@ class SnakList extends HashArray {
 		$orderedProperties = array_unique( array_merge( $order, array_keys( $snaksByProperty ) ) );
 
 		foreach ( $orderedProperties as $property ) {
-			$snaks = $snaksByProperty[$property];
-			$this->moveSnaksToBottom( $snaks );
+			if ( array_key_exists( $property, $snaksByProperty ) ) {
+				$snaks = $snaksByProperty[$property];
+				$this->moveSnaksToBottom( $snaks );
+			}
 		}
 	}
 
 	/**
-	 * @param array $snaks to remove and re add
+	 * @param Snak[] $snaks to remove and re add
 	 */
-	private function moveSnaksToBottom( $snaks ) {
-		foreach( $snaks as $snak ) {
+	private function moveSnaksToBottom( array $snaks ) {
+		foreach ( $snaks as $snak ) {
 			$this->removeSnak( $snak );
 			$this->addSnak( $snak );
 		}
@@ -145,15 +147,15 @@ class SnakList extends HashArray {
 	 * Gets the snaks in the current object in an array
 	 * grouped by property id
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	private function getSnaksByProperty() {
 		$snaksByProperty = array();
 
-		foreach( $this as $snak ) {
+		foreach ( $this as $snak ) {
 			/** @var Snak $snak */
 			$propertyId = $snak->getPropertyId()->getSerialization();
-			if( !isset( $snaksByProperty[$propertyId] ) ) {
+			if ( !isset( $snaksByProperty[$propertyId] ) ) {
 				$snaksByProperty[$propertyId] = array();
 			}
 			$snaksByProperty[$propertyId][] = $snak;
