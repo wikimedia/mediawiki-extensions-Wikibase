@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ba2bb52d",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-01T13:38:42Z",
+      "side": 1,
+      "message": "I do not understand why we dont have to have a $this-\u003emarkTestSkippedOnMySql(); here but we do for items... Very confused O_o",
+      "revId": "b36484472a7598faded18f1a40f341fb4e1bd06a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
