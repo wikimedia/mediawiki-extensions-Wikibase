@@ -106,17 +106,19 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function getTimestampHtml( $timestamp ) {
-		// Loose check if the ISO-like string contains at least year, month, day and hour.
-		if ( !preg_match( '/^([-+]?)(\d+)(-\d+-\d+T\d+(?::\d+)*)Z?$/i', $timestamp, $matches ) ) {
+		// Loose check if the ISO-like string contains at least year, month, day and the "T".
+		if ( !preg_match( '/^([-+]?)(\d+)(-\d+-\d+T.*)/', $timestamp, $matches ) ) {
 			return htmlspecialchars( $timestamp );
 		}
 
+		list( , $sign, $year, $rest ) = $matches;
+
 		// Actual MINUS SIGN (U+2212) instead of HYPHEN-MINUS (U+002D)
-		$sign = $matches[1] === '-' ? "\xE2\x88\x92" : '+';
+		$sign = $sign === '-' ? "\xE2\x88\x92" : '+';
 		// Warning, never cast the year to integer to not run into 32-bit integer overflows!
-		$year = ltrim( $matches[2], '0' );
-		// Keep the sign. Pad the year. Keep month, day, and time. Drop the trailing "Z".
-		return htmlspecialchars( $sign . str_pad( $year, 4, '0', STR_PAD_LEFT ) . $matches[3] );
+		$year = ltrim( $year, '0' );
+		// Keep the sign. Pad the year. Keep month, day, time, and timezone.
+		return htmlspecialchars( $sign . str_pad( $year, 4, '0', STR_PAD_LEFT ) . $rest );
 	}
 
 	/**
