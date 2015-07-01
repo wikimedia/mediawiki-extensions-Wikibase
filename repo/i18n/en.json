@@ -9,7 +9,8 @@
 			"Daniel Werner",
 			"Michał Łazowik",
 			"Adam Shorland",
-			"Bene*"
+			"Bene*",
+			"Lucie-Aimée Kaffee"
 		]
 	},
 	"wikibase-desc": "Structured data repository",
@@ -380,8 +381,8 @@
 	"wikibase-item-summary-wbsetqualifier-update": "Changed {{PLURAL:$1|qualifier|qualifiers}}",
 	"wikibase-item-summary-wbremovequalifiers-remove": "Removed {{PLURAL:$1|qualifier|qualifiers}}",
 	"wikibase-item-summary-wbremovereferences-remove": "Removed {{PLURAL:$3|reference|references}} from claim",
-	"wikibase-item-summary-wbmergeitems-from": "Merged item from \"$3\"",
-	"wikibase-item-summary-wbmergeitems-to": "Merged item into \"$3\"",
+	"wikibase-item-summary-wbmergeitems-from": "Merged item from $3",
+	"wikibase-item-summary-wbmergeitems-to": "Merged item into $3",
 	"wikibase-property-summary-wbcreate-new": "Created a new property",
 	"wikibase-property-summary-wbcreateclaim-create": "Created claim",
 	"wikibase-property-summary-wbcreateclaim": "Created {{PLURAL:$1|a claim|claims}}",
