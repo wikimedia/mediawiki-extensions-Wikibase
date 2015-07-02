@@ -24,7 +24,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	/**
 	 * @return TermIndex
 	 */
-	public abstract function getTermIndex();
+	abstract public function getTermIndex();
 
 	public function getTermKey( TermIndexEntry $term ) {
 		$key = '';

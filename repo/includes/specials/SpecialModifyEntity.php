@@ -264,7 +264,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @return Summary|bool
 	 */
-	protected abstract function modifyEntity( Entity $entity );
+	abstract protected function modifyEntity( Entity $entity );
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.

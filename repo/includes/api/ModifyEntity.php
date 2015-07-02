@@ -264,7 +264,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 *
 	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
-	protected abstract function modifyEntity( Entity &$entity, array $params, $baseRevId );
+	abstract protected function modifyEntity( Entity &$entity, array $params, $baseRevId );
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.

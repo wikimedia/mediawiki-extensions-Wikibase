@@ -27,14 +27,14 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	 *
 	 * @return array
 	 */
-	public abstract function validProvider();
+	abstract public function validProvider();
 
 	/**
 	 * @since 0.2
 	 *
 	 * @return SerializerObject
 	 */
-	protected abstract function getInstance();
+	abstract protected function getInstance();
 
 	/**
 	 * @dataProvider validProvider

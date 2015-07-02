@@ -72,7 +72,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	 *
 	 * @return SqlEntityInfoBuilder
 	 */
-	protected abstract function newEntityInfoBuilder( array $ids );
+	abstract protected function newEntityInfoBuilder( array $ids );
 
 	public function getEntityInfoProvider() {
 		return array(

@@ -79,7 +79,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	protected abstract function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects );
+	abstract protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects );
 
 	protected function itemSupportsRedirect() {
 		if ( !defined( 'CONTENT_MODEL_WIKIBASE_ITEM' ) ) {

@@ -55,7 +55,7 @@ abstract class SpecialPageTestBase extends MediaWikiTestCase {
 	 *
 	 * @return SpecialPage
 	 */
-	protected abstract function newSpecialPage();
+	abstract protected function newSpecialPage();
 
 	/**
 	 * @param string $subPage The subpage parameter to call the page with

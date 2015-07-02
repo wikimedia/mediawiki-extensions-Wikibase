@@ -203,7 +203,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @return Entity
 	 */
-	public abstract function makeEmptyEntity();
+	abstract public function makeEmptyEntity();
 
 	/**
 	 * Will return a new EntityContent representing the given EntityRedirect,
@@ -348,7 +348,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public abstract function makeEntityId( $id );
+	abstract public function makeEntityId( $id );
 
 	/**
 	 * @return string

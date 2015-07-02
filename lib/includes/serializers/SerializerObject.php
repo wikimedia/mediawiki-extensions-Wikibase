@@ -43,7 +43,7 @@ abstract class SerializerObject implements Serializer {
 	 *
 	 * @param SerializationOptions $options
 	 */
-	public final function setOptions( SerializationOptions $options ) {
+	final public function setOptions( SerializationOptions $options ) {
 		$this->options = $options;
 	}
 
@@ -70,7 +70,7 @@ abstract class SerializerObject implements Serializer {
 	 *
 	 * @return SerializationOptions
 	 */
-	public final function getOptions() {
+	final public function getOptions() {
 		return $this->options;
 	}
 
@@ -79,7 +79,7 @@ abstract class SerializerObject implements Serializer {
 	 * @param array $arr
 	 * @return bool Is the array an
 	 */
-	protected final function isAssociative( $arr ) {
+	final protected function isAssociative( $arr ) {
 		return array_keys( $arr ) !== range( 0, count( $arr ) - 1 );
 	}
 

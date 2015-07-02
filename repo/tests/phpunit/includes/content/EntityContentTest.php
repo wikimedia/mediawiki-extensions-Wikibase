@@ -71,14 +71,14 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	/**
 	 * @return EntityId
 	 */
-	protected abstract function getDummyId();
+	abstract protected function getDummyId();
 
 	/**
 	 * @param EntityId $entityId
 	 *
 	 * @return EntityContent
 	 */
-	protected abstract function newEmpty( EntityId $entityId = null );
+	abstract protected function newEmpty( EntityId $entityId = null );
 
 	/**
 	 * @dataProvider getTextForSearchIndexProvider
@@ -207,7 +207,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $status, $actual );
 	}
 
-	public abstract function provideGetEntityId();
+	abstract public function provideGetEntityId();
 
 	/**
 	 * @dataProvider provideGetEntityId

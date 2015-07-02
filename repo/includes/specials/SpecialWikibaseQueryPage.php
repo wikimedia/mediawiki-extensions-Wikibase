@@ -111,7 +111,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @return Array[]
 	 */
-	protected abstract function getResult( $offset = 0, $limit = 0 );
+	abstract protected function getResult( $offset = 0, $limit = 0 );
 
 	/**
 	 * Output the query result
