@@ -4,6 +4,7 @@ namespace Wikibase\Client\Usage;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * Value object representing the usage of an entity. This includes information about
@@ -143,6 +144,17 @@ class EntityUsage {
 	 */
 	public function __toString() {
 		return $this->getIdentityString();
+	}
+
+	/**
+	 * @return array array( 'entityId' => $entityId, 'aspect' => $aspect, 'modifier' => $modifier )
+	 */
+	public function asArray() {
+		return array(
+			'entityId' => $this->entityId->getSerialization(),
+			'aspect' => $this->aspect,
+			'modifier' => $this->modifier
+		);
 	}
 
 	/**
