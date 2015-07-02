@@ -3,9 +3,13 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangesTable;
+use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\ClientStore;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityPrefetcher;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Store\EntityIdLookup;
@@ -181,4 +185,17 @@ class MockClientStore implements ClientStore {
 		return new NullEntityPrefetcher();
 	}
 
+	/**
+	 * @since 0.5
+	 *
+	 * @return UsageUpdater
+	 */
+	public function getUsageUpdater() {
+		return new UsageUpdater(
+			'mock',
+			$this->getUsageTracker(),
+			$this->getUsageLookup(),
+			$this->getSubscriptionManager()
+		);
+	}
 }

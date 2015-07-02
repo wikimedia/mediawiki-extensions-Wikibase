@@ -67,6 +67,7 @@ call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
 	global $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages, $wgResourceModules;
 	global $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
+	global $wgJobClasses;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -120,6 +121,9 @@ call_user_func( function() {
 
 	// extension hooks
 	$wgHooks['WikibaseDeleteData'][] = '\Wikibase\ClientHooks::onWikibaseDeleteData';
+
+	// job classes
+	$wgJobClasses['wikibase-addUsagesForPage'] = 'Wikibase\Client\Store\AddUsagesForPageJob';
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(
