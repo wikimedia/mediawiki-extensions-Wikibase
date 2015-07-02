@@ -87,15 +87,8 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private function getItemDisambiguation() {
 		if( $this->itemDisambiguation === null ) {
 			$languageNameLookup = new LanguageNameLookup();
-			$entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter(
-				new LanguageLabelDescriptionLookup(
-					new EntityRetrievingTermLookup( WikibaseRepo::getDefaultInstance()->getEntityLookup() ),
-					$this->getLanguage()->getCode()
-				),
-				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
-				$languageNameLookup );
 			$this->itemDisambiguation = new ItemDisambiguation(
-				$entityIdHtmlLinkFormatter,
+				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
 				$languageNameLookup,
 				$this->getLanguage()->getCode()
 			);
