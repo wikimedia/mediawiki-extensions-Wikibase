@@ -71,7 +71,7 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 		$options->initOption( 'zest', 'ham' );
 
 		$this->assertEquals( 'text', $options->getOption( 'test' ), 'should not override' );
-		$this->assertEquals( 'ham',  $options->getOption( 'zest' ), 'should initialize' );
+		$this->assertEquals( 'ham', $options->getOption( 'zest' ), 'should initialize' );
 
 		$options->initOption( 'test', null );
 		$options->initOption( 'best', null );
@@ -97,7 +97,7 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 		$options->setOption( 'zest', 'ham' );
 
 		$this->assertEquals( 'spam', $options->getOption( 'test' ), 'should override' );
-		$this->assertEquals( 'ham',  $options->getOption( 'zest' ), 'should initialize' );
+		$this->assertEquals( 'ham', $options->getOption( 'zest' ), 'should initialize' );
 
 		$options->setOption( 'test', null );
 		$options->setOption( 'best', null );
@@ -131,8 +131,8 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'text', $options->getOption( 'test' ) );
 		$this->assertEquals( 'text', $options->getOption( 'test', 'default' ) );
 
-		$this->assertEquals( null,  $options->getOption( 'zest' ) );
-		$this->assertEquals( 17.3,  $options->getOption( 'zest', 17.3 ) );
+		$this->assertEquals( null, $options->getOption( 'zest' ) );
+		$this->assertEquals( 17.3, $options->getOption( 'zest', 17.3 ) );
 	}
 
 	/**

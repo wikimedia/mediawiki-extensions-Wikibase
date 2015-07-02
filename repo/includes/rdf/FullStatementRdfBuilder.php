@@ -229,7 +229,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 		$propertyLName = $this->vocabulary->getEntityLName( $snak->getPropertyId() );
 
-		$this->statementWriter->about( RdfVocabulary::NS_ENTITY,  $entityLName )
+		$this->statementWriter->about( RdfVocabulary::NS_ENTITY, $entityLName )
 			->say( RdfVocabulary::NSP_CLAIM, $propertyLName )->is( RdfVocabulary::NS_STATEMENT, $statementLName );
 
 		$this->statementWriter->about( RdfVocabulary::NS_STATEMENT, $statementLName )

@@ -77,7 +77,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 
 		$options->initOption( self::OPT_SORT_ORDER, self::SORT_NONE );
 
-		$options->initOption( self::OPT_PARTS,  array(
+		$options->initOption( self::OPT_PARTS, array(
 			'aliases',
 			'descriptions',
 			'labels',
@@ -87,7 +87,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 			'sitelinks', // item specific
 		) );
 
-		$options->initOption( self::OPT_SORT_FIELDS,  array() );
+		$options->initOption( self::OPT_SORT_FIELDS, array() );
 
 		parent::__construct( $options );
 

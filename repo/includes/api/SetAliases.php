@@ -64,8 +64,13 @@ class SetAliases extends ModifyEntity {
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
 
-		if ( !( ( !empty( $params['add'] ) || !empty( $params['remove'] ) ) xor isset( $params['set'] ) ) ) {
-			$this->dieError( "Parameters 'add' and 'remove' are not allowed to be set when parameter 'set' is provided" , 'invalid-list' );
+		if ( !( ( !empty( $params['add'] ) || !empty( $params['remove'] ) )
+			xor isset( $params['set'] )
+		) ) {
+			$this->dieError(
+				"Parameters 'add' and 'remove' are not allowed to be set when parameter 'set' is provided",
+				'invalid-list'
+			);
 		}
 	}
 

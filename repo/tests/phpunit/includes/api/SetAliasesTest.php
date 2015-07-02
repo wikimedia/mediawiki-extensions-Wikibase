@@ -132,7 +132,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		if ( empty( $expected['edit-no-change'] ) ) {
 			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
 			if ( array_key_exists( 'summary', $params ) ) {
-				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
+				$this->assertRevisionSummary( '/' . $params['summary']. '/', $result['entity']['lastrevid'] );
 			}
 		}
 	}

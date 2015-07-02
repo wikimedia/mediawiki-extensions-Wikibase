@@ -183,7 +183,7 @@ class ItemMergeInteractor {
 		}
 
 		if ( $toEntity->getId()->equals( $fromEntity->getId() ) ) {
-			throw new ItemMergeException( 'You must provide unique ids' , 'cant-merge-self' );
+			throw new ItemMergeException( 'You must provide unique ids', 'cant-merge-self' );
 		}
 	}
 

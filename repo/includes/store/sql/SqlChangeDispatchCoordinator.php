@@ -418,8 +418,8 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				'( chd_touched < ' . $db->addQuotes( $freshDispatchTime ) . // and wasn't touched too recently or...
 					' OR ( ' . (int)$maxId. ' - chd_seen ) > ' . (int)$this->batchSize . ') ' , // or it's lagging by more changes than batchSite
 				'chd_seen < ' . (int)$maxId, // and not fully up to date.
-				'chd_disabled = 0' ) // and not disabled
-			,
+				'chd_disabled = 0' // and not disabled
+			),
 			__METHOD__,
 			array(
 				'ORDER BY' => 'chd_seen ASC',

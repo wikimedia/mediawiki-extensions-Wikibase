@@ -206,9 +206,9 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		// -- check the edit summaries --------------------------------------------
 		$this->entityModificationTestHelper->assertRevisionSummary( array( 'wbmergeitems' ), $result['from']['lastrevid'] );
-		$this->entityModificationTestHelper->assertRevisionSummary( "/CustomSummary/" , $result['from']['lastrevid'] );
+		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['from']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( array( 'wbmergeitems' ), $result['to']['lastrevid'] );
-		$this->entityModificationTestHelper->assertRevisionSummary( "/CustomSummary/" , $result['to']['lastrevid'] );
+		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['to']['lastrevid'] );
 	}
 
 	public function provideExceptionParamsData() {

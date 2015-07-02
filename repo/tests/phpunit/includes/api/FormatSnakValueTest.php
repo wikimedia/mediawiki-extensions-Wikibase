@@ -116,7 +116,7 @@ class FormatSnakValueTest extends ApiTestCase {
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'/^Q404' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( $deletedItem,  '/' ) . '\)<\/span>$/'
+				'/^Q404' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( $deletedItem, '/' ) . '\)<\/span>$/'
 			),
 			array(
 				new EntityIdValue( new ItemId( 'Q23' ) ),

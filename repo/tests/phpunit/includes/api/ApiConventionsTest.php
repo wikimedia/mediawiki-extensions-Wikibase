@@ -103,7 +103,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	 **/
 	private function assertGetExamplesMessages( $moduleClass, ApiBase $module ) {
 		$method = 'getExamplesMessages';
-		$rMethod = new ReflectionMethod( $moduleClass,  $method );
+		$rMethod = new ReflectionMethod( $moduleClass, $method );
 		$rMethod->setAccessible( true );
 		$exArray = $rMethod->invoke( $module );
 
@@ -119,4 +119,5 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 		}
 
 	}
+
 }

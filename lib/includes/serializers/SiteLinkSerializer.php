@@ -36,7 +36,7 @@ class SiteLinkSerializer extends SerializerObject {
 	 * @param SiteStore $siteStore
 	 */
 	public function __construct( SerializationOptions $options, SiteStore $siteStore ) {
-		$options->initOption( EntitySerializer::OPT_PARTS,  array(
+		$options->initOption( EntitySerializer::OPT_PARTS, array(
 			'sitelinks',
 		) );
 
@@ -67,7 +67,7 @@ class SiteLinkSerializer extends SerializerObject {
 		$parts = $this->options->getOption( EntitySerializer::OPT_PARTS );
 
 		$includeUrls = in_array( 'sitelinks/urls', $parts );
-		$setRemoved = in_array( 'sitelinks/removed' , $parts );
+		$setRemoved = in_array( 'sitelinks/removed', $parts );
 
 		foreach ( $this->sortSiteLinks( $siteLinks ) as $siteLink ) {
 			$siteId = $siteLink->getSiteId();

@@ -81,7 +81,7 @@ class RemoveReferences extends ModifyClaim {
 	 */
 	private function validateParameters( array $params ) {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['statement'] ) ) ) {
-			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
 	}
 

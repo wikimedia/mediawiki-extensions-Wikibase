@@ -21,7 +21,7 @@ class PruneChanges extends Maintenance {
 		$this->mDescription = "Prune the Wikibase changes table to a maximum number of entries";
 
 		$this->addOption( 'number-of-days', 'Keep changes at least N days (deprecated).', false, true, 'n' );
-		$this->addOption( 'keep-days',  'Keep changes at least N days.', false, true, 'd' );
+		$this->addOption( 'keep-days', 'Keep changes at least N days.', false, true, 'd' );
 		$this->addOption( 'keep-hours', 'Keep changes at least N hours.', false, true, 'h' );
 		$this->addOption( 'keep-minutes', 'Keep changes at least N minutes.', false, true, 'm' );
 		$this->addOption( 'grace-minutes', 'Keep changes at least N more minutes after they have been dispatched.', false, true, 'g' );

@@ -95,7 +95,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( null, $usages );
 
 		$itemId = $wikibaseLuaBindings->getEntityId( 'Rome' );
-		$this->assertEquals( 'Q33' , $itemId );
+		$this->assertEquals( 'Q33', $itemId );
 
 		$this->assertTrue( $this->hasUsage( $usages->getUsages(), new ItemId( $itemId ), EntityUsage::TITLE_USAGE ), 'title usage' );
 		$this->assertFalse( $this->hasUsage( $usages->getUsages(), new ItemId( $itemId ), EntityUsage::SITELINK_USAGE ), 'sitelink usage' );

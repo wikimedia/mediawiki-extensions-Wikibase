@@ -52,7 +52,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 	private function resetPropertyInfoTable( PropertyInfoTable $table ) {
 		$dbw = $table->getWriteConnection();
-		$dbw->delete( 'wb_entity_per_page',  '*' );
+		$dbw->delete( 'wb_entity_per_page', '*' );
 	}
 
 	public function testRebuildPropertyInfo() {

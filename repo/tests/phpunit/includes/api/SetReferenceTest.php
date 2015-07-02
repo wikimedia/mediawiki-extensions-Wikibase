@@ -317,8 +317,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 	public function provideInvalidSerializations() {
 		return array(
-			array(
-			'{
+			array( '{
 				 "P813":[
 						{
 							 "snaktype":"value",
@@ -336,10 +335,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 							 }
 						}
 				 ]
-			}'
-		),
-			array(
-			'{
+			}' ),
+			array( '{
 				 "P813":[
 						{
 							 "snaktype":"wubbledubble",
@@ -357,12 +354,9 @@ class SetReferenceTest extends WikibaseApiTestCase {
 							 }
 						}
 				 ]
-			}'
-		),
-	);
-
+			}' ),
+		);
 	}
-
 
 	/**
 	 * @dataProvider invalidRequestProvider
@@ -402,8 +396,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request did not raise an error' );
-		} catch ( \UsageException $e ) {
-			$this->assertEquals( $error, $e->getCodeString(),  'Invalid claim guid raised correct error' );
+		} catch ( UsageException $ex ) {
+			$this->assertEquals( $error, $ex->getCodeString(), 'Invalid request raised correct error' );
 		}
 	}
 

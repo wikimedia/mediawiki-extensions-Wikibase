@@ -181,7 +181,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_VERSION_INFO );
 		$builder->addDumpHeader( 1426110695 );
 		$data = $this->getDataFromBuilder( $builder );
-		$this->assertEquals( $this->getSerializedData( 'dumpheader' ),  $data);
+		$this->assertEquals( $this->getSerializedData( 'dumpheader' ), $data);
 	}
 
 	public function testDeduplication() {

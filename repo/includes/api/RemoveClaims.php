@@ -86,20 +86,20 @@ class RemoveClaims extends ModifyClaim {
 
 		foreach ( $params['claim'] as $guid ) {
 			if ( !$this->modificationHelper->validateStatementGuid( $guid ) ) {
-				$this->dieError( "Invalid claim guid $guid" , 'invalid-guid' );
+				$this->dieError( "Invalid claim guid $guid", 'invalid-guid' );
 			}
 
 			if ( is_null( $entityId ) ) {
 				$entityId = $this->guidParser->parse( $guid )->getEntityId();
 			} else {
 				if ( !$this->guidParser->parse( $guid )->getEntityId()->equals( $entityId ) ) {
-					$this->dieError( 'All claims must belong to the same entity' , 'invalid-guid' );
+					$this->dieError( 'All claims must belong to the same entity', 'invalid-guid' );
 				}
 			}
 		}
 
 		if ( is_null( $entityId ) ) {
-			$this->dieError( 'Could not find an entity for the claims' , 'invalid-guid' );
+			$this->dieError( 'Could not find an entity for the claims', 'invalid-guid' );
 		}
 
 		return $entityId ;
