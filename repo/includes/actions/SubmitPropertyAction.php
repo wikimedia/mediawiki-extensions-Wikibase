@@ -12,5 +12,4 @@ namespace Wikibase;
  */
 class SubmitPropertyAction extends SubmitEntityAction {
 
-
 }

@@ -126,4 +126,5 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expected, $chunk, $info );
 		}
 	}
+
 }

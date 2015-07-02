@@ -275,4 +275,5 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			$summary->getAutoSummaryArgs()
 		);
 	}
+
 }
