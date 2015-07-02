@@ -54,6 +54,24 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 		$usage = new EntityUsage( $id, $aspect, $modifier );
 		$this->assertEquals( "$aspect.$modifier", $usage->getAspectKey() );
 	}
+	public function testAsArray() {
+		$id = new ItemId( 'Q7' );
+		$aspect = EntityUsage::LABEL_USAGE;
+		$modifier = 'ru';
+
+		$expected = array(
+			'entityId' => $id->getSerialization(),
+			'aspect' => $aspect,
+			'modifier' => null
+		);
+
+		$usage = new EntityUsage( $id, $aspect );
+		$this->assertEquals( $expected, $usage->asArray() );
+
+		$expected['modifier'] = $modifier;
+		$usage = new EntityUsage( $id, $aspect, $modifier );
+		$this->assertEquals( $expected, $usage->asArray() );
+	}
 
 	public function aspectKeyProvider() {
 		return array(
