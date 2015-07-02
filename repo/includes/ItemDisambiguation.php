@@ -186,7 +186,7 @@ class ItemDisambiguation {
 		}
 
 		$text = $match->getText();
-		$language = $match->getLanguageCode();
+		$language = $this->languageNameLookup->getName( $match->getLanguageCode() );
 
 		$matchElement = $descriptionElement = Html::element(
 			'span',
