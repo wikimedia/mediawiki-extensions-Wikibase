@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Hooks;
 
 use Content;
+use JobQueueGroup;
+use JobSpecification;
 use LinksUpdate;
 use ManualLogEntry;
 use ParserCache;
@@ -10,7 +12,9 @@ use ParserOptions;
 use ParserOutput;
 use Title;
 use User;
+use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use WikiPage;
@@ -34,19 +38,15 @@ class DataUpdateHookHandlers {
 	 */
 	private $usageUpdater;
 
+	/**
+	 * @var JobQueueGroup
+	 */
+	private $jobScheduler;
+
 	public static function newFromGlobalState() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
-
-		$usageUpdater = new UsageUpdater(
-			$settings->getSetting( 'siteGlobalID' ),
-			$wikibaseClient->getStore()->getUsageTracker(),
-			$wikibaseClient->getStore()->getUsageLookup(),
-			$wikibaseClient->getStore()->getSubscriptionManager()
-		);
-
 		return new DataUpdateHookHandlers(
-			$usageUpdater
+			WikibaseClient::getDefaultInstance()->getStore()->getUsageUpdater(),
+			JobQueueGroup::singleton()
 		);
 	}
 
@@ -113,9 +113,11 @@ class DataUpdateHookHandlers {
 	}
 
 	public function __construct(
-		UsageUpdater $usageUpdater
+		UsageUpdater $usageUpdater,
+		JobQueueGroup $jobScheduler
 	) {
 		$this->usageUpdater = $usageUpdater;
+		$this->jobScheduler = $jobScheduler;
 	}
 
 	/**
@@ -169,13 +171,22 @@ class DataUpdateHookHandlers {
 		// These timestamps should usually be the same, but asking $title may cause a database query.
 		$touched = $parserOutput->getTimestamp() ?: $title->getTouched();
 
+		if ( count( $usageAcc->getUsages() ) === 0 ) {
+			// no usages, bail out
+			return;
+		}
+
 		// Add or touch any usages present in the new rendering.
 		// This allows us to track usages in each user language separately, for multilingual sites.
-		$this->usageUpdater->addUsagesForPage(
-			$title->getArticleId(),
-			$usageAcc->getUsages(),
-			$touched
-		);
+
+		// NOTE: Since parser cache updates may be triggered by page views (in a new language),
+		// schedule the usage updates in the job queue, to avoid writing to the database
+		// during a GET request.
+
+		//TODO: Before posting a job, check slave database. If no changes are needed, skip update.
+
+		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages(), $touched );
+		$this->jobScheduler->push( $addUsagesForPageJob );
 	}
 
 	/**
