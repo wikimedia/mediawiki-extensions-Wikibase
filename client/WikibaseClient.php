@@ -123,6 +123,9 @@ call_user_func( function() {
 	// extension hooks
 	$wgHooks['WikibaseDeleteData'][]			= '\Wikibase\ClientHooks::onWikibaseDeleteData';
 
+	// job classes
+	$wgJobClasses['wikibase-addUsagesForPage'] = 'Wikibase\Client\Store\AddUsageForPageJob';
+
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(
 		'class' => 'Wikibase\ApiClientInfo',
