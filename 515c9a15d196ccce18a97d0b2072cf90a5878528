@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c4357b43",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-02T13:40:11Z",
+      "side": 1,
+      "message": "Same indenting everywhere, please.",
+      "revId": "515c9a15d196ccce18a97d0b2072cf90a5878528",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6438473a",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-02T13:40:11Z",
+      "side": 1,
+      "message": "280px please.",
+      "revId": "515c9a15d196ccce18a97d0b2072cf90a5878528",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_44418baa",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-02T13:40:11Z",
+      "side": 1,
+      "message": "Only webkit and moz please, remove ms and o.\n\nMove the standard to the bottom.",
+      "revId": "515c9a15d196ccce18a97d0b2072cf90a5878528",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c41c9bcd",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-02T13:40:11Z",
+      "side": 1,
+      "message": "Alphabetic order, please?",
+      "revId": "515c9a15d196ccce18a97d0b2072cf90a5878528",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
