@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_042dc3a2",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "I\u0027m sure we still need a different message for this?\nI mean we have multiple cases here:\n 1 - Multiple types of failure\n 2 - Partial success, merged, but not redirected\n 3 - Merged \u0026 Redirected",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a41f0f70",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "This comment / todo should be removed in this commit",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_6415a74c",
         "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
         "patchSetId": 26
@@ -19,6 +53,40 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_370d9339",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "Infact right here is the position where we have tried the merge but not the redirect yet.\nBelow isEmpty could throw an uncaught exception, this would result in an exception in the API (for example) result instead of anything useful.\nWe should catch said exception and then return an ItemRedirectException?",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e408b731",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "it would be cool / usefull here to document that loadEntity either throws an exception or returns a EntityDocument object",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_0404e318",
         "filename": "repo/includes/api/MergeItems.php",
         "patchSetId": 26
@@ -30,6 +98,23 @@
       "writtenOn": "2015-07-02T14:19:56Z",
       "side": 1,
       "message": "ewww, don\u0027t pass the context object, it\u0027s a kitchen sink :(\nOh, I see, EditFilterHookRunner needs it. *sigh*",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_977327af",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "\u0027true\u0027 \u003d\u003e true",
       "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +155,40 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_5d0e4b3f",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "ewwwwwww\nYou should find the setting in your IDE to stop this from happening!!!!!!",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_84b4537d",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "so I think I am okay with commenting out this summary test, I may do some refactoring here soon.",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_d7176f48",
         "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
         "patchSetId": 26
@@ -87,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_f7570bf7",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "Well it is tested in the interactor ofc, we could try and also test it here, I think we would need to add some more mock services for that (or it looked like we would have to at a glance)\nAs this API module has an interactor we could totally MOCK that, making this test for unity and less integrationy.",
+      "parentUuid": "8ec42329_d7176f48",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_1712d75b",
         "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
         "patchSetId": 26
@@ -98,6 +235,57 @@
       "writtenOn": "2015-07-02T14:19:56Z",
       "side": 1,
       "message": "eek",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b776639d",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "ewwwww still :D",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_97a247f8",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "YAY for splitting this up!",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_57a85fd7",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T14:28:08Z",
+      "side": 1,
+      "message": "the true here means $resolveRedirects\nthus I would currently expect this to fail, I mean if we result redirect on the FROM item we should then receive the Target / to item.",
       "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
