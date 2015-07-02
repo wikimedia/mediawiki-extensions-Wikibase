@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c1924d56",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-02T10:34:41Z",
+      "side": 1,
+      "message": "urm? :P",
+      "revId": "bdce4959b27d282be4e306c48a09fcfebf42e4d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
