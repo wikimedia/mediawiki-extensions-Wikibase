@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Умар"
+			"Умар",
+			"Gazimagomedov"
 		]
 	},
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Бахчизе",
-	"wikibase-rc-hide-wikidata-show": "Бихьизабизе"
+	"wikibase-rc-hide-wikidata-show": "Бихьизабизе",
+	"wikibase-otherprojects": "Цогидал проектазда"
 }

@@ -5,7 +5,8 @@
 			"Hugo.arg",
 			"Aswanas",
 			"Pofka",
-			"Vogone"
+			"Vogone",
+			"Albertas"
 		]
 	},
 	"wikibase-entity-item": "įrašas",
@@ -24,9 +25,9 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Aprašymas",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiketė",
 	"wikibase-entitytermsforlanguagelistview-language": "Kalba",
-	"wikibase-label-empty": "Dar nėra žymos",
+	"wikibase-label-empty": "Dar nenurodytos žymos",
 	"wikibase-label-edit-placeholder": "įvesti žymą",
-	"wikibase-description-empty": "Dar nėra aprašo",
+	"wikibase-description-empty": "Dar nenurodytas aprašymas",
 	"wikibase-description-edit-placeholder": "įvesti aprašą",
 	"wikibase-diffview-reference": "išnaša",
 	"wikibase-diffview-rank": "rangas",

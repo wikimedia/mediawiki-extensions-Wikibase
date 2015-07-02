@@ -393,7 +393,7 @@
 	"apihelp-wbgetclaims-example-1": "取得項目 ID Q42 的主張",
 	"apihelp-wbgetclaims-example-3": "取得項目 ID Q42 等級為一般的主張",
 	"apihelp-wbremoveclaims-description": "移除 Wikibase 主張。",
-	"apihelp-wbremoveclaims-param-claim": "移除一個 GUID 或多個(以 | 符號分隔) GUID 表示的主張。\n所有主張必須屬於同一個實體。",
+	"apihelp-wbremoveclaims-param-claim": "移除一個 GUID 或多個 (以 | 符號分隔) GUID 表示的主張。\n所有主張必須屬於同一個實體。",
 	"apihelp-wbsearchentities-description": "搜尋項目。",
 	"apihelp-wbsearchentities-param-search": "搜尋此文字。",
 	"apihelp-wbsearchentities-param-language": "搜尋此語言。",

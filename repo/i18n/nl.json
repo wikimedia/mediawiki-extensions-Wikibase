@@ -90,7 +90,7 @@
 	"wb-special-newitem-new-item-notification": "Nieuw item $1 aangemaakt en doorverwezen naar de pagina voor dat item. Terug naar $2.",
 	"wikibase-aliases-label": "Ook bekend als:",
 	"wikibase-aliases-input-help-message": "Om deze entiteit gemakkelijker te vinden, kunt u alternatieve namen invoeren.",
-	"wikibase-aliases-empty": "Er zijn geen aliassen ingesteld.",
+	"wikibase-aliases-empty": "Er zijn geen aliassen ingesteld",
 	"wikibase-propertypage-datatype": "Gegevenstype",
 	"wikibase-claimview-snak-tooltip": "Voer een waarde in die overeenkomt met de eigenschap \"$1\". Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het pictogram naast het invoerveld voor de waarde te klikken.",
 	"wikibase-claimview-snak-new-tooltip": "Nadat u een eigenschap hebt opgegeven kunt u een bijbehorende waarde opgeven. Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het pictogram naast het invoerveld voor de waarde te klikken.",

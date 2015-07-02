@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"محک"
+		]
+	},
+	"tooltip-t-wikibase": "لینک هدائن دیتای ِآیتم ره",
+	"wikibase-comment-update": "{{WBREPONAME}} آیتم تغییر هاکرده",
+	"wikibase-dataitem": "{{WBREPONAME}} ِآیتم",
+	"wikibase-editlinks": "لینکون ِدچی‌ین",
+	"wikibase-editlinkstitle": "میون‌ویکی ِلینکون ِدَچی‌ین",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "سِراق هاده",
+	"wikibase-rc-wikibase-edit-letter": "د",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دچی‌یه"
+}
