@@ -146,6 +146,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Language code:",
 	"wikibase-itemdisambiguation-lookup-label": "Label:",
 	"wikibase-itemdisambiguation-submit": "Search",
+	"wikibase-itemdisambiguation-form-hints": "Note that the result is limited to $1 results.",
 	"wikibase-itemdisambiguation-nothing-found": "Sorry, no item with that label was found.",
 	"wikibase-itemdisambiguation-search": "You can [$1 search for the item].",
 	"wikibase-itemdisambiguation-create": "You can [$1 create the item].",
