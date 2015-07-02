@@ -44,8 +44,8 @@ if ( defined( 'WB_VERSION' ) ) {
 define( 'WB_VERSION', '0.5 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
-if ( version_compare( $GLOBALS['wgVersion'], '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.\n" );
+if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) { // Needs to be 1.26c because version_compare() works in confusing ways.
+	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
 }
 
 /**
