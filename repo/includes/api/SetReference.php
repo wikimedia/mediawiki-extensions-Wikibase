@@ -197,7 +197,7 @@ class SetReference extends ModifyClaim {
 					ApiBase::PARAM_REQUIRED => true,
 				),
 				'snaks' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_TYPE => 'text',
 					ApiBase::PARAM_REQUIRED => true,
 				),
 				'snaks-order' => array(
