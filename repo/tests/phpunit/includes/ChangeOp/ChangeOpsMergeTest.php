@@ -58,14 +58,14 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$siteLinkUniquenessValidator->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnCallback( function( Item $item ) {
-					$siteLinks = $item->getSiteLinkList();
-					foreach ( $siteLinks as $siteLink ) {
-						if ( $siteLink->getPageName() === 'DUPE' ) {
-							return Result::newError( array( Error::newError( 'SiteLink conflict' ) ) );
-						}
+				$siteLinks = $item->getSiteLinkList();
+				foreach ( $siteLinks as $siteLink ) {
+					if ( $siteLink->getPageName() === 'DUPE' ) {
+						return Result::newError( array( Error::newError( 'SiteLink conflict' ) ) );
 					}
-					return Result::newSuccess();
-				} ) );
+				}
+				return Result::newSuccess();
+			} ) );
 
 		$constraintProvider = $this->getMockBuilder( 'Wikibase\Validators\EntityConstraintProvider' )
 			->disableOriginalConstructor()

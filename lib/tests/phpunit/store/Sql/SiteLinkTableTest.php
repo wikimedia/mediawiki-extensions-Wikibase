@@ -100,7 +100,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
-	 public function testGetSiteLinksOfItem( Item $item ) {
+	public function testGetSiteLinksOfItem( Item $item ) {
 		$siteLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
 
 		$this->assertEquals(
@@ -143,7 +143,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
-	 public function testDeleteLinksOfItem( Item $item ) {
+	public function testDeleteLinksOfItem( Item $item ) {
 		$this->assertTrue(
 			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
 		);

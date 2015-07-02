@@ -56,7 +56,6 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				return 'property / ' . $snak->getPropertyId()->getSerialization();
 			} ) );
 
-
 		$instance->expects( $this->any() )
 			->method( 'getPropertyAndValueHeader' )
 			->will( $this->returnCallback( function( PropertyValueSnak $snak ) {

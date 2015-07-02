@@ -515,17 +515,18 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @throws InvalidArgumentException
 	 */
 	final protected function state( $newState ) {
-		if( !isset( $this->transitionTable[$this->state][$newState] ) ) {
- 			throw new LogicException( 'Bad transition: ' . $this->state. ' -> ' . $newState  );
- 		}
- 		$action = $this->transitionTable[$this->state][$newState];
- 		if( $action !== true ) {
- 			if( is_string( $action ) ) {
- 				$this->write( $action );
- 			} else {
- 				$action();
- 			}
- 		}
+		if ( !isset( $this->transitionTable[$this->state][$newState] ) ) {
+			throw new LogicException( 'Bad transition: ' . $this->state . ' -> ' . $newState );
+		}
+
+		$action = $this->transitionTable[$this->state][$newState];
+		if ( $action !== true ) {
+			if ( is_string( $action ) ) {
+				$this->write( $action );
+			} else {
+				$action();
+			}
+		}
 
 		$this->state = $newState;
 	}

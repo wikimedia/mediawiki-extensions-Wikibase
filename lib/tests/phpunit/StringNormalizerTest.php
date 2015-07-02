@@ -130,7 +130,6 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 			array( "  \xC3\x85land    øyene  ", 'Åland    øyene' ), // #2
 			array( "  A\xCC\x8Aland    øyene  ", 'Åland    øyene' ), // #3
 
-
 			array( // #4: Private Use Area: U+0F818
 				"\xef\xa0\x98",
 				"\xef\xa0\x98"
@@ -163,4 +162,5 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 			//),
 		);
 	}
+
 }

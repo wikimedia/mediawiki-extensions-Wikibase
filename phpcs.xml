@@ -72,6 +72,10 @@
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing.After">
 		<severity>0</severity>
 	</rule>
+	<rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing" />
+	<rule ref="Squiz.WhiteSpace.ScopeClosingBrace" />
+	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
 
 	<rule ref="Zend.Files.ClosingTag" />
 </ruleset>

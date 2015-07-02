@@ -756,7 +756,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$item->setLabel( "en", "Test" );
 
 		if ( !$new ) {
-			$repo->putEntity( $item ) ;
+			$repo->putEntity( $item );
 			$repo->updateWatchlist( $user, $item->getId(), $watched );
 		}
 

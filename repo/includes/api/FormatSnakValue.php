@@ -194,7 +194,7 @@ class FormatSnakValue extends ApiWikibase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		$query = "action=" . $this->getModuleName() ;
+		$query = 'action=' . $this->getModuleName();
 		$hello = new StringValue( 'hello' );
 		$acme = new StringValue( 'http://acme.org' );
 

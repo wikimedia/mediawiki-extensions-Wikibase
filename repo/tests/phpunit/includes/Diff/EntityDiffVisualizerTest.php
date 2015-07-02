@@ -120,7 +120,6 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 		$enwiki = new Site();
 		$enwiki->setGlobalId( 'enwiki' );
 
-
 		return new EntityDiffVisualizer(
 			$this->getMockContext(),
 			$this->getMockClaimDiffer(),

@@ -136,7 +136,6 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 			$options
 		);
 
-
 		$options = new SerializationOptions();
 		$options->setIdKeyMode( SerializationOptions::ID_KEYS_BOTH );
 

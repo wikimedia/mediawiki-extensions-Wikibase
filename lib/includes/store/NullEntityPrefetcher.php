@@ -19,18 +19,21 @@ class NullEntityPrefetcher implements EntityPrefetcher {
 	 *
 	 * @param EntityId[] $entityIds
 	 */
-	public function prefetch( array $entityIds ) {}
+	public function prefetch( array $entityIds ) {
+	}
 
 	/**
 	 * Purges prefetched data about a given entity.
 	 *
 	 * @param EntityId $entityId
 	 */
-	public function purge( EntityId $entityId ) {}
+	public function purge( EntityId $entityId ) {
+	}
 
 	/**
 	 * Purges all prefetched data.
 	 */
-	public function purgeAll() {}
+	public function purgeAll() {
+	}
 
 }

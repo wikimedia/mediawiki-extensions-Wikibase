@@ -161,16 +161,16 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$fallbackChain->expects( $this->any() )
 			->method( 'extractPreferredValue' )
 			->will( $this->returnCallback( function( $labels ) {
-					if ( array_key_exists( 'en', $labels ) ) {
-						return array(
-							'value' => $labels['en'],
-							'language' => 'en',
-							'source' => 'en'
-						);
-					}
+				if ( array_key_exists( 'en', $labels ) ) {
+					return array(
+						'value' => $labels['en'],
+						'language' => 'en',
+						'source' => 'en'
+					);
+				}
 
-					return null;
-				} ) );
+				return null;
+			} ) );
 
 		return $fallbackChain;
 	}

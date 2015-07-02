@@ -32,7 +32,7 @@ class DumpRdf extends DumpScript {
 	 *
 	 * @return DumpGenerator
 	 */
-	 protected function createDumper( $output ) {
+	protected function createDumper( $output ) {
 		$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
 
 		return RdfDumpGenerator::createDumpGenerator(
@@ -45,6 +45,7 @@ class DumpRdf extends DumpScript {
 			$this->wikibaseRepo->getPropertyDataTypeLookup(),
 			$this->wikibaseRepo->getStore()->getEntityPrefetcher() );
 	}
+
 }
 
 $maintClass = 'Wikibase\DumpRdf';

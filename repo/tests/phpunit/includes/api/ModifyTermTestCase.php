@@ -57,7 +57,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'value' => array( 'en' => 'x x' ) ) ),
 		);
 	}
-	
+
 	public function doTestSetTerm( $attribute, $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;

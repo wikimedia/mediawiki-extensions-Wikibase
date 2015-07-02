@@ -62,9 +62,9 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$mentionTracker->expects( $this->any() )
 			->method( 'entityReferenceMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
-			$key = $id->getSerialization();
-			$mentioned[$key] = $id;
-		} ) );
+				$key = $id->getSerialization();
+				$mentioned[$key] = $id;
+			} ) );
 
 		$vocabulary = $this->getTestData()->getVocabulary();
 

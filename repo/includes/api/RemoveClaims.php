@@ -102,7 +102,7 @@ class RemoveClaims extends ModifyClaim {
 			$this->dieError( 'Could not find an entity for the claims', 'invalid-guid' );
 		}
 
-		return $entityId ;
+		return $entityId;
 	}
 
 	/**

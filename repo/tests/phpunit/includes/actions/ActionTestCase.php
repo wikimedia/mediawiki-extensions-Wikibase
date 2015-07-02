@@ -114,7 +114,6 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$item->setDescription( 'de', 'Hauptstadt von Deutschland' );
 		$items['Berlin'][] = $item;
 
-
 		$item = new Item();
 		$item->setLabel( 'en', 'London' );
 		$items['London'][] = $item;
@@ -122,7 +121,6 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$item = $item->copy();
 		$item->setLabel( 'de', 'London' );
 		$items['London'][] = $item;
-
 
 		$item = new Item();
 		$item->setLabel( 'de', 'Oslo' );

@@ -314,7 +314,7 @@ class EntityTestHelper {
 		$props[] = 'type'; // always return the type so we can demobilize
 		foreach ( $props as $prop ) {
 			if ( array_key_exists( $prop, $entityOutput ) ) {
-				$entityProps[ $prop ] = $entityOutput[ $prop ] ;
+				$entityProps[ $prop ] = $entityOutput[ $prop ];
 			}
 		}
 		foreach ( $entityProps as $prop => $value ) {

@@ -50,7 +50,7 @@ class YearTimeParserTest extends StringValueParserTest {
 						$sign = '-';
 						$value = substr( $value, 1 );
 					}
-					return array( $sign, $value ) ;
+					return array( $sign, $value );
 				}
 			) );
 		return $mock;

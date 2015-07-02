@@ -203,7 +203,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 
 		$numericItemIds = $this->getNumericItemIds( $entityIds );
 
-		$rows = $this->siteLinkLookup->getLinks( $numericItemIds, array( $this->clientSiteId ) ) ;
+		$rows = $this->siteLinkLookup->getLinks( $numericItemIds, array( $this->clientSiteId ) );
 
 		$used = $this->getItemIdsFromSiteLinkRows( $rows );
 		$unusedIds = array_diff( $numericItemIds, $used );
