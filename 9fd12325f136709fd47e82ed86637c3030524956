@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_7585530a",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2015-07-02T18:31:37Z",
+      "side": 1,
+      "message": "PLURAL needed for $1",
+      "revId": "9fd12325f136709fd47e82ed86637c3030524956",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
