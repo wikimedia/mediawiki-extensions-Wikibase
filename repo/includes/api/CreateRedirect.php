@@ -155,7 +155,7 @@ class CreateRedirect extends ApiBase {
 			),
 			'token' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => 'true',
+				ApiBase::PARAM_REQUIRED => true,
 			),
 			'bot' => array(
 				ApiBase::PARAM_TYPE => 'boolean',
