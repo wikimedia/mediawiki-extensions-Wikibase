@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_6415a74c",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-02T14:19:56Z",
+      "side": 1,
+      "message": "This now has a third field, indicating whether the old item was redirected. Redirecting creates a new revision, so perhaps the third entry should be the EntityRedirect, or null if no redirect was created. But this isn\u0027t so important - if it\u0027s hard to create the EntityRedirect, it\u0027s not worth it.",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0404e318",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-02T14:19:56Z",
+      "side": 1,
+      "message": "ewww, don\u0027t pass the context object, it\u0027s a kitchen sink :(\nOh, I see, EditFilterHookRunner needs it. *sigh*",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b7018309",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-02T14:19:56Z",
+      "side": 1,
+      "message": "Context is evil!",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5704df16",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-02T14:19:56Z",
+      "side": 1,
+      "message": "eek, whitespace!",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d7176f48",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-02T14:19:56Z",
+      "side": 1,
+      "message": "When and where does this test check that a redirect got created (or didn\u0027t get created, in case of an incomplete merge)? Where does it check that the redirect is pointing to the correct entity?",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_1712d75b",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-02T14:19:56Z",
+      "side": 1,
+      "message": "eek",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
