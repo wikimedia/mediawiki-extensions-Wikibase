@@ -8,6 +8,7 @@
 	<rule ref="Generic.ControlStructures" />
 
 	<rule ref="Generic.Files.ByteOrderMark" />
+	<rule ref="Generic.Files.EndFileNewline" />
 	<rule ref="Generic.Files.InlineHTML" />
 	<rule ref="Generic.Files.LineEndings" />
 	<rule ref="Generic.Files.OneInterfacePerFile" />

@@ -120,5 +120,4 @@ class StringNormalizer {
 		return $this->cleanupToNFC( $this->trimWhitespace( $inputString ) );
 	}
 
-
 }

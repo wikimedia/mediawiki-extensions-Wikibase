@@ -90,4 +90,5 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 
 		return reset( $entityIds ) ?: null;
 	}
+
 }

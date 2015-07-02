@@ -70,4 +70,4 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		}
 	}
 
-} 
+}

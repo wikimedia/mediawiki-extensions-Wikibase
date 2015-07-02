@@ -135,4 +135,5 @@ class HttpAcceptNegotiator {
 
 		return false;
 	}
+
 }
