@@ -260,6 +260,11 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 					'class' => 'wb-input-button'
 				)
 			)
+			. Html::element(
+				'p',
+				array(),
+				$this->msg( 'wikibase-itemdisambiguation-form-hints' )->numParams( $this->limit )->text()
+			)
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
