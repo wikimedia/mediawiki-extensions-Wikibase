@@ -5,8 +5,8 @@ namespace Wikibase;
 use Html;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Interactors\TermSearchResult;
 
 /**
@@ -24,9 +24,9 @@ use Wikibase\Repo\Interactors\TermSearchResult;
 class ItemDisambiguation {
 
 	/**
-	 * @var EntityIdFormatter
+	 * @var EntityTitleLookup
 	 */
-	private $linkFormatter;
+	private $titleLookup;
 
 	/**
 	 * @var LanguageNameLookup
@@ -41,16 +41,16 @@ class ItemDisambiguation {
 	/**
 	 * @since 0.5
 	 *
-	 * @param EntityIdFormatter $linkFormatter A formatter for generating HTML links for a given EntityId.
+	 * @param EntityTitleLookup $titleLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param string $displayLanguageCode
 	 */
 	public function __construct(
-		EntityIdFormatter $linkFormatter,
+		EntityTitleLookup $titleLookup,
 		LanguageNameLookup $languageNameLookup,
 		$displayLanguageCode
 	) {
-		$this->linkFormatter = $linkFormatter;
+		$this->titleLookup = $titleLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->displayLanguageCode = $displayLanguageCode;
 	}
@@ -80,7 +80,7 @@ class ItemDisambiguation {
 	 * @return string HTML
 	 */
 	public function getResultHtml( TermSearchResult $searchResult ) {
-		$idHtml = $this->linkFormatter->formatEntityId( $searchResult->getEntityId() );
+		$idHtml = $this->getIdHtml( $searchResult->getEntityId() );
 
 		$displayLabel = $searchResult->getDisplayLabel();
 		$displayDescription = $searchResult->getDisplayDescription();
@@ -122,6 +122,29 @@ class ItemDisambiguation {
 
 		$result = Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
 		return $result;
+	}
+
+	/**
+	 * Returns HTML representing the label in the display language (or an appropriate fallback).
+	 *
+	 * @param EntityId|null $entityId
+	 *
+	 * @return string HTML
+	 */
+	private function getIdHtml( EntityId $entityId = null ) {
+		$title = $this->titleLookup->getTitleForId( $entityId );
+
+		$idElement =  Html::element(
+			'a',
+			array(
+				'title' => $title ? $title->getPrefixedText() : '',
+				'href' => $title ? $title->getLocalURL() : '',
+				'class' => 'wb-itemlink-id'
+			),
+			$entityId->getSerialization()
+		);
+
+		return $idElement;
 	}
 
 	/**

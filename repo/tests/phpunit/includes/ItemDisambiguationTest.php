@@ -3,11 +3,12 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
+use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Interactors\TermSearchResult;
 
 /**
@@ -26,14 +27,14 @@ use Wikibase\Repo\Interactors\TermSearchResult;
 class ItemDisambiguationTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return EntityIdFormatter
+	 * @return EntityTitleLookup
 	 */
-	private function getMockEntityIdFormatter() {
-		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+	private function getMockEntityTitleLookup() {
+		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$entityIdFormatter->expects( $this->any() )
-			->method( 'formatEntityId' )
+			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( ItemId $itemId ) {
-				return $itemId->getSerialization();
+				return Title::makeTitle( NS_MAIN, $itemId->getSerialization() );
 			} ) );
 		return $entityIdFormatter;
 	}
@@ -43,7 +44,7 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 	 */
 	private function newItemDisambiguation() {
 		return new ItemDisambiguation(
-			$this->getMockEntityIdFormatter(),
+			$this->getMockEntityTitleLookup(),
 			new LanguageNameLookup(),
 			'en'
 		);
