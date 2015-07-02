@@ -16,6 +16,7 @@
 
 	<rule ref="Generic.Formatting.DisallowMultipleStatements" />
 
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
 	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
 
 	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />

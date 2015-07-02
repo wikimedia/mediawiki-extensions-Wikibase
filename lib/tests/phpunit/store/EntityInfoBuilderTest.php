@@ -148,7 +148,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$resolvedIds = array_map(
 			function( $record ) {
 				return $record['id'];
-			} ,
+			},
 			$entityInfo
 		);
 

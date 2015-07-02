@@ -75,7 +75,7 @@ class SetQualifier extends ModifyClaim {
 	 */
 	private function validateParameters( array $params ) {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['claim'] ) ) ) {
-			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
 
 		if ( !isset( $params['snakhash'] ) ) {
@@ -99,7 +99,7 @@ class SetQualifier extends ModifyClaim {
 	 */
 	private function validateQualifierHash( Statement $statement, $qualifierHash ) {
 		if ( !$statement->getQualifiers()->hasSnakHash( $qualifierHash ) ) {
-			$this->dieError( "Claim does not have a qualifier with the given hash" , 'no-such-qualifier' );
+			$this->dieError( 'Claim does not have a qualifier with the given hash', 'no-such-qualifier' );
 		}
 	}
 

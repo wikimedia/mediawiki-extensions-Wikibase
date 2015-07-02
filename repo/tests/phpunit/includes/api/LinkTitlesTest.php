@@ -63,7 +63,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
 		$this->assertResultHasEntityType( $result );
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
-		$this->assertArrayHasKey( 'lastrevid', $result['entity'] , 'entity should contain lastrevid key' );
+		$this->assertArrayHasKey( 'lastrevid', $result['entity'], 'entity should contain lastrevid key' );
 
 		$this->assertEquals( $expected['inresult'], count( $result['entity']['sitelinks'] ), "Result has wrong number of sitelinks" );
 		foreach ( $result['entity']['sitelinks'] as $link ) {
@@ -81,7 +81,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 
 		// -- check the edit summary --------------------------------------------
 		if ( array_key_exists( 'summary', $params ) ) {
-			$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
+			$this->assertRevisionSummary( '/' . $params['summary'] . '/', $result['entity']['lastrevid'] );
 		}
 	}
 

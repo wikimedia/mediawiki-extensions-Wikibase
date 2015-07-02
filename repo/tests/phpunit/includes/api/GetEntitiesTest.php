@@ -246,7 +246,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		}
 
 		//implied props
-		if ( in_array( 'sitelinks/urls' , $expected['props'] ) ) {
+		if ( in_array( 'sitelinks/urls', $expected['props'] ) ) {
 			$expected['props'][] = 'sitelinks';
 		}
 

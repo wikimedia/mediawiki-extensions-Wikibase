@@ -137,7 +137,7 @@ class LinkTitles extends ApiWikibase {
 		}
 		else {
 			// dissimilar items
-			$this->dieError( 'No common item detected, unable to link titles' , 'no-common-item' );
+			$this->dieError( 'No common item detected, unable to link titles', 'no-common-item' );
 		}
 
 		$this->getResultBuilder()->addSiteLinks( $return, 'entity' );

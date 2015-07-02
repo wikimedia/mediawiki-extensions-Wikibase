@@ -72,7 +72,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			$this->assertArrayHasKey( $requiredKey, $claim, 'claim has a "' . $requiredKey . '" key' );
 		}
 
-		$this->assertStringStartsWith( $item->getId()->getSerialization() , $claim['id'] );
+		$this->assertStringStartsWith( $item->getId()->getSerialization(), $claim['id'] );
 
 		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 

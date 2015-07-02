@@ -389,7 +389,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		if ( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ) {
 			$this->assertRevisionSummary( array( 'wbeditentity' ), $result['entity']['lastrevid'] );
 			if ( array_key_exists( 'summary', $params ) ) {
-				$this->assertRevisionSummary( "/{$params['summary']}/" , $result['entity']['lastrevid'] );
+				$this->assertRevisionSummary( '/' . $params['summary'] . '/', $result['entity']['lastrevid'] );
 			}
 		}
 	}

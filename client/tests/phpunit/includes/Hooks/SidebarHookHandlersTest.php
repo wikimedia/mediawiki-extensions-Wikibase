@@ -293,7 +293,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$output = new OutputPage( $context );
 		$output->setTitle( $title );
-		$output->setProperty( 'wikibase_item' , $itemId );
+		$output->setProperty( 'wikibase_item', $itemId );
 		$output->setProperty( 'wikibase-otherprojects-sidebar', $projects );
 
 		$context->setOutput( $output );

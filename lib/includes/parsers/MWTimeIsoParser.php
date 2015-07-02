@@ -127,7 +127,7 @@ class MWTimeIsoParser extends StringValueParser {
 				$msgText = $msg->text();
 				$isBceMsg = $this->isBceMsg( $msgKey );
 
-				list( $start, $end ) = explode( '$1' , $msgText , 2 );
+				list( $start, $end ) = explode( '$1', $msgText, 2 );
 				if( preg_match( '/^\s*' . preg_quote( $start ) . '(.+?)' . preg_quote( $end ) . '\s*$/i', $value, $matches ) ) {
 					list( , $number ) = $matches;
 					return $this->parseNumber( $number, $precision, $isBceMsg );

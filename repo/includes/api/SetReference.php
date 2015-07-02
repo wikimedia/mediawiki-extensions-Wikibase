@@ -94,7 +94,7 @@ class SetReference extends ModifyClaim {
 	 */
 	private function validateParameters( array $params ) {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['statement'] ) ) ) {
-			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
 	}
 
@@ -104,7 +104,7 @@ class SetReference extends ModifyClaim {
 	 */
 	private function validateReferenceHash( Statement $claim, $referenceHash ) {
 		if ( !$claim->getReferences()->hasReferenceHash( $referenceHash ) ) {
-			$this->dieError( "Claim does not have a reference with the given hash" , 'no-such-reference' );
+			$this->dieError( 'Claim does not have a reference with the given hash', 'no-such-reference' );
 		}
 	}
 

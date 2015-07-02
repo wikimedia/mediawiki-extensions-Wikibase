@@ -123,7 +123,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		$this->assertResultHasEntityType( $result );
 		if ( $params['action'] !== 'wbmergeitems' ) {
 			$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
-			$this->assertArrayHasKey( 'lastrevid', $result['entity'] , 'entity should contain lastrevid key' );
+			$this->assertArrayHasKey( 'lastrevid', $result['entity'], 'entity should contain lastrevid key' );
 			$myid = $result['entity']['id'];
 		} else {
 			$this->assertArrayHasKey( 'from', $result, "Missing 'from' section in response." );

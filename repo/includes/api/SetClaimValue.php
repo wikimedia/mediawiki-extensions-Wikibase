@@ -70,7 +70,7 @@ class SetClaimValue extends ModifyClaim {
 	 */
 	private function validateParameters( array $params ) {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['claim'] ) ) ) {
-			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
 	}
 

@@ -158,9 +158,9 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 
 		try {
 			$this->doApiRequestWithToken( $params );
-			$this->fail( 'Invalid claim guid did not throw an error' );
-		} catch ( UsageException $e ) {
-			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
+			$this->fail( 'Invalid guid did not throw an error' );
+		} catch ( UsageException $ex ) {
+			$this->assertEquals( 'invalid-guid', $ex->getCodeString(), 'Invalid guid raised correct error' );
 		}
 	}
 

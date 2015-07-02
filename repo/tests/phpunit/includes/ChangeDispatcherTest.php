@@ -143,7 +143,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			$this->newChange( ++$changeId, new PropertyId( 'P11' ), sprintf( '2014030301%02d', $changeId ) ),
 			$this->newChange( ++$changeId, new ItemId( 'Q22' ), sprintf( '2014030301%02d', $changeId ) ),
 			$this->newChange( ++$changeId, new ItemId( 'Q22' ), sprintf( '2014030301%02d', $changeId ) ),
-			$this->newChange( ++$changeId, new ItemId( 'Q33' ), sprintf( '2014030301%02d', $changeId ) , $addEn ),
+			$this->newChange( ++$changeId, new ItemId( 'Q33' ), sprintf( '2014030301%02d', $changeId ), $addEn ),
 			$this->newChange( ++$changeId, new ItemId( 'Q33' ), sprintf( '2014030301%02d', $changeId ), $changeEn ),
 			$this->newChange( ++$changeId, new ItemId( 'Q44' ), sprintf( '2014030301%02d', $changeId ), $addDe ),
 			$this->newChange( ++$changeId, new ItemId( 'Q44' ), sprintf( '2014030301%02d', $changeId ), $removeDe ),
