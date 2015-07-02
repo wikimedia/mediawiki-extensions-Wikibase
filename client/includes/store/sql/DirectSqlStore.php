@@ -7,6 +7,7 @@ use ObjectCache;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Usage\SiteLinkUsageLookup;
@@ -462,5 +463,17 @@ class DirectSqlStore implements ClientStore {
 		}
 
 		return $this->entityPrefetcher;
+	}
+
+	/**
+	 * @return UsageUpdater
+	 */
+	public function getUsageUpdater() {
+		return new UsageUpdater(
+			$this->siteId,
+			$this->getUsageTracker(),
+			$this->getUsageLookup(),
+			$this->getSubscriptionManager()
+		);
 	}
 }
