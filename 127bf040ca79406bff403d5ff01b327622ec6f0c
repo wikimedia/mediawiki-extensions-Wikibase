@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_46e98bdf",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-02T21:14:36Z",
+      "side": 1,
+      "message": "Gaah, evil core using singletons :S",
+      "revId": "127bf040ca79406bff403d5ff01b327622ec6f0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a6b5cfcc",
+        "filename": "client/tests/phpunit/includes/Hooks/DataUpdateHookHandlersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-02T21:14:36Z",
+      "side": 1,
+      "message": "expected usages seems to be an empty array in the failing test. Perhaps you should check `empty( $expectedUsages )` as well.",
+      "revId": "127bf040ca79406bff403d5ff01b327622ec6f0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a6a86f8a",
+        "filename": "client/tests/phpunit/includes/Usage/EntityUsageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-02T21:14:36Z",
+      "side": 1,
+      "message": "missing new line before function",
+      "revId": "127bf040ca79406bff403d5ff01b327622ec6f0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
