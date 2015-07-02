@@ -131,7 +131,6 @@ class EntityChangeFactory {
 			$theEntity = $newEntity;
 		}
 
-
 		$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
 
 		/**

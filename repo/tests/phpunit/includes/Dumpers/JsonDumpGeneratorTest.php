@@ -139,7 +139,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$result = array();
 		$size = count( $ids );
 
-		for ( ; $offset < $size && count( $result ) < $limit; $offset++ ) {
+		for (; $offset < $size && count( $result ) < $limit; $offset++ ) {
 			$id = $ids[ $offset ];
 
 			if ( $entityType !== null && $entityType !== $id->getEntityType() ) {

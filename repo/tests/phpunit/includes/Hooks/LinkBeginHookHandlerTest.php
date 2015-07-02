@@ -271,7 +271,6 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 					return array( 'en' => 'linkbegin-description' );
 				}
 
-
 				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITHOUT_LABEL ) {
 					return array();
 				}

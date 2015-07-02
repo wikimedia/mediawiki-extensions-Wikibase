@@ -999,7 +999,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'two' => array( array( 'X' => 'x', 'Y' => 'y' ) ) )
 				) ),
 
-
 			'int key' => array( 'ROOT', -2, 'value', 'letter', false,
 				array(
 					'ROOT' => array( -2 => 'value' )
@@ -1009,7 +1008,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'ROOT' => array( 'Q7' => 'value' )
 				) ),
-
 
 			'null key indexed' => array( 'ROOT', null, 'value', 'letter', true,
 				array(

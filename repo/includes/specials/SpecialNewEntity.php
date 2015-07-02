@@ -94,8 +94,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$uiLanguageCode = $this->getLanguage()->getCode();
 
 		if ( $this->getRequest()->wasPosted()
-			&&  $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) ) ) {
-
+			&& $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) )
+		) {
 			if ( $this->hasSufficientArguments() ) {
 				$entity = $this->createEntity();
 

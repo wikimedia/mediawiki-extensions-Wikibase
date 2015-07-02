@@ -82,7 +82,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		} catch ( InvalidArgumentException $ex ) {
 			$itemId = null;
 			$itemString = '';
-                }
+		}
 
 		return array( $site, $itemId, $itemString );
 	}

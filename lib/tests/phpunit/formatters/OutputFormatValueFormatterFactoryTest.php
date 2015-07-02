@@ -63,10 +63,14 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	}
 
 	public function getValueFormatterProvider() {
-		$this_ = $this;
+		$self = $this;
 		$builders = array(
-			'foo' => function () use ( $this_ ) { return $this_->makeMockValueFormatter( 'FOO' ); },
-			'bar' => function () use ( $this_ ) { return $this_->makeMockValueFormatter( 'BAR' ); },
+			'foo' => function() use ( $self ) {
+				return $self->makeMockValueFormatter( 'FOO' );
+			},
+			'bar' => function() use ( $self ) {
+				return $self->makeMockValueFormatter( 'BAR' );
+			},
 		);
 
 		return array(

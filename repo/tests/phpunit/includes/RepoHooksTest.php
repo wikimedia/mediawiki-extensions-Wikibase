@@ -156,7 +156,8 @@ XML
 		$importer->setNoticeCallback( function() {
 			// Do nothing for now. Could collect and compare notices.
 		} );
-		$importer->setPageOutCallback( function() {} );
+		$importer->setPageOutCallback( function() {
+		} );
 
 		if ( $expectedException !== null ) {
 			$this->setExpectedException( $expectedException );
@@ -197,4 +198,5 @@ XML
 
 		$this->assertSame( $altLinks, $out->getLinkTags() );
 	}
+
 }

@@ -100,17 +100,16 @@ class ChangesPageWikibaseFilterHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$user->expects( $this->any() )
 			->method( 'getOption' )
-			->will( $this->returnCallback( function( $optionName ) use(
-					$enhancedChangesPref,
-					$hideWikibaseEditsByDefault
-				) {
-					if ( $optionName === 'usenewrc' ) {
-						return $enhancedChangesPref;
-					} else {
-						return $hideWikibaseEditsByDefault;
-					}
+			->will( $this->returnCallback( function( $optionName ) use (
+				$enhancedChangesPref,
+				$hideWikibaseEditsByDefault
+			) {
+				if ( $optionName === 'usenewrc' ) {
+					return $enhancedChangesPref;
+				} else {
+					return $hideWikibaseEditsByDefault;
 				}
-			) );
+			} ) );
 
 		return $user;
 	}

@@ -62,7 +62,6 @@ class OutputFormatValueFormatterFactory {
 		$builder = $this->builders[$format];
 		$instance = call_user_func( $builder, $this, $format, $options );
 
-
 		if( !( $instance instanceof ValueFormatter ) ) {
 			throw new RuntimeException( get_class( $instance ) . ' does not implement ValueFormatter' );
 		}

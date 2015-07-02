@@ -20,13 +20,15 @@ class NullEntityMentionListener implements EntityMentionListener {
 	 *
 	 * @param EntityId $id
 	 */
-	public function entityReferenceMentioned( EntityId $id ) {}
+	public function entityReferenceMentioned( EntityId $id ) {
+	}
 
 	/**
 	 * Should be called when a property is used in a PropertySnak.
 	 *
 	 * @param PropertyId $id
 	 */
-	public function propertyMentioned( PropertyId $id ) {}
+	public function propertyMentioned( PropertyId $id ) {
+	}
 
 }

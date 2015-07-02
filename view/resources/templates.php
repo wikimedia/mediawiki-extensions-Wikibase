@@ -118,7 +118,6 @@ HTML;
 </div>
 HTML;
 
-
 	$templates['wikibase-listview'] =
 <<<HTML
 <div class="wikibase-listview">$1</div>

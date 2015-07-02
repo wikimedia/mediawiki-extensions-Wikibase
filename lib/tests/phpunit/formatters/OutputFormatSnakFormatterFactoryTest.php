@@ -73,10 +73,14 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getSnakFormatterProvider() {
-		$this_ = $this;
+		$self = $this;
 		$builders = array(
-			'foo' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'foo', 'FOO' ); },
-			'bar' => function () use ( $this_ ) { return $this_->makeMockSnakFormatter( 'bar', 'BAR' ); },
+			'foo' => function() use ( $self ) {
+				return $self->makeMockSnakFormatter( 'foo', 'FOO' );
+			},
+			'bar' => function() use ( $self ) {
+				return $self->makeMockSnakFormatter( 'bar', 'BAR' );
+			},
 		);
 
 		return array(

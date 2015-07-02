@@ -72,9 +72,16 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$this->validatorFactory = $this->getMock( 'Wikibase\Repo\DataTypeValidatorFactory' );
 		$this->validatorFactory->expects( $this->any() )
 			->method( 'getValidators' )
-			->will( $this->returnCallback( function( $dataTypeId ) use( $numericValidator, $alphabeticValidator, $lengthValidator ) {
-					return array( $dataTypeId === 'numeric' ? $numericValidator : $alphabeticValidator, $lengthValidator );
-				} ) );
+			->will( $this->returnCallback( function( $dataTypeId ) use (
+				$numericValidator,
+				$alphabeticValidator,
+				$lengthValidator
+			) {
+				return array(
+					$dataTypeId === 'numeric' ? $numericValidator : $alphabeticValidator,
+					$lengthValidator
+				);
+			} ) );
 	}
 
 	public function provideValidateClaimSnaks() {

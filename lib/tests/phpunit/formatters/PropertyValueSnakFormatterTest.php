@@ -192,7 +192,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'@^VT:string <span class="error wb-format-error">.*not found.*</span>$@'
 			),
 
-
 			'UnDeserializableValue, ignored' => array(
 				new PropertyValueSnak( 7,
 					new UnDeserializableValue( 'cookie', 'globecoordinate', 'cannot understand!' )
@@ -224,7 +223,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				PropertyValueSnakFormatter::ON_ERROR_IGNORE,
 				'@^VT:string$@'
 			),
-
 
 			'UnDeserializableValue, fail' => array(
 				new PropertyValueSnak( 7,

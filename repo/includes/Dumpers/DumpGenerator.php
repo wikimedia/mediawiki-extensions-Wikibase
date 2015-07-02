@@ -204,11 +204,11 @@ abstract class DumpGenerator {
 		$shard = abs( $shard ); // avoid negative numbers on 32 bit systems
 		$shard %= $this->shardingFactor; // modulo number of shards
 
-
 		return $shard === $this->shard;
 	}
+
 	private function idMatchesType( EntityId $entityId ) {
-		return $this->entityType === null || ($entityId->getEntityType() === $this->entityType);
+		return $this->entityType === null || ( $entityId->getEntityType() === $this->entityType );
 	}
 
 	/**

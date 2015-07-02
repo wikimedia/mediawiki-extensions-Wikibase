@@ -78,7 +78,6 @@ return call_user_func( function() {
 			),
 		),
 
-
 		'jquery.wikibase.toolbarcontroller.definitions.edittoolbar.entitytermsview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/edittoolbar/entitytermsview.js',
@@ -125,7 +124,6 @@ return call_user_func( function() {
 			),
 		),
 
-
 		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview-snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/removetoolbar/referenceview-snakview.js',
@@ -158,7 +156,6 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller',
 			),
 		),
-
 
 		'jquery.wikibase.toolbarcontroller' => $moduleTemplate + array(
 			'scripts' => array(
