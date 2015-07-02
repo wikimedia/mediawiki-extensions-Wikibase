@@ -52,7 +52,7 @@ class ParseValue extends ApiWikibase {
 		$params = $this->extractRequestParams();
 
 		foreach ( $params['values'] as $value ) {
-			$results[] = $this->parseValue( $parser, $value );
+			$results[] = $this->parseStringValue( $parser, $value );
 		}
 
 		$this->outputResults( $results );
@@ -76,7 +76,13 @@ class ParseValue extends ApiWikibase {
 		return $parser;
 	}
 
-	private function parseValue( ValueParser $parser, $value ) {
+	/**
+	 * @param ValueParser $parser
+	 * @param string $value
+	 *
+	 * @return array
+	 */
+	private function parseStringValue( ValueParser $parser, $value ) {
 		$result = array(
 			'raw' => $value
 		);
@@ -100,7 +106,7 @@ class ParseValue extends ApiWikibase {
 		return $result;
 	}
 
-	private function addParseErrorToResult( &$result, ParseException $parseError ) {
+	private function addParseErrorToResult( array &$result, ParseException $parseError ) {
 		$result['error'] = get_class( $parseError );
 
 		$result['error-info'] = $parseError->getMessage();
