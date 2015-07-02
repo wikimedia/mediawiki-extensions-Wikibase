@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_d40450cb",
+        "filename": "repo/includes/api/CreateRedirect.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-07-02T01:42:19Z",
+      "side": 1,
+      "message": "No other place in Wikibase or core MediaWiki uses strings for ApiBase::PARAM_REQUIRED.\nIa6d4fba82aa3bbdd2c72db6b6cc45f4fed8d1ba0 should fix this for \u0027token\u0027.",
+      "revId": "db04ab3fb77db74add3dae4446cdc0db3d4687f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
