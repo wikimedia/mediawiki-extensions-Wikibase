@@ -43,8 +43,8 @@ $wgHooks['ResourceLoaderTestModules'][] = function(
 ) {
 	$testModules['qunit'] = array_merge(
 		$testModules['qunit'],
-		include( __DIR__ . '/tests/lib/resources.php' ),
-		include( __DIR__ . '/tests/src/resources.php' )
+		include __DIR__ . '/tests/lib/resources.php',
+		include __DIR__ . '/tests/src/resources.php'
 	);
 	return true;
 };
@@ -52,6 +52,6 @@ $wgHooks['ResourceLoaderTestModules'][] = function(
 // Register Resource Loader modules:
 $wgResourceModules = array_merge(
 	$wgResourceModules,
-	include( __DIR__ . '/lib/resources.php' ),
-	include( __DIR__ . '/src/resources.php' )
+	include __DIR__ . '/lib/resources.php',
+	include __DIR__ . '/src/resources.php'
 );
