@@ -17,7 +17,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Statement\StatementGuidParsingException;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -140,7 +140,7 @@ class SetClaim extends ModifyClaim {
 	 * @return Claim
 	 */
 	private function getClaimFromParams( array $params ) {
-		$serializerFactory = new SerializerFactory();
+		$serializerFactory = new LibSerializerFactory();
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Claim\Claim' );
 
 		try {

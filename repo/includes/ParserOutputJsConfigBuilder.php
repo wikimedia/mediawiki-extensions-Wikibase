@@ -5,7 +5,7 @@ namespace Wikibase;
 use FormatJson;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 
 /**
  * @since 0.5
@@ -25,7 +25,7 @@ class ParserOutputJsConfigBuilder {
 	private $serializationOptions;
 
 	/**
-	 * @var SerializerFactory
+	 * @var LibSerializerFactory
 	 */
 	private $serializerFactory;
 
@@ -36,7 +36,7 @@ class ParserOutputJsConfigBuilder {
 		SerializationOptions $serializationOptions
 	) {
 		$this->serializationOptions = $serializationOptions;
-		$this->serializerFactory = new SerializerFactory();
+		$this->serializerFactory = new LibSerializerFactory();
 	}
 
 	/**

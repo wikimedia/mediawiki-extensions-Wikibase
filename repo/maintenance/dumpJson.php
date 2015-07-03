@@ -6,7 +6,7 @@ use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 
 require_once __DIR__ . '/dumpEntities.php';
 
@@ -26,7 +26,7 @@ class DumpJson extends DumpScript {
 		$entityFactory = $this->wikibaseRepo->getEntityFactory();
 		$serializerOptions = new SerializationOptions();
 
-		$serializerFactory = new SerializerFactory(
+		$serializerFactory = new LibSerializerFactory(
 			$serializerOptions,
 			$this->wikibaseRepo->getPropertyDataTypeLookup(),
 			$entityFactory
