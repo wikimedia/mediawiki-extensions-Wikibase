@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use DataValues\Serializers\DataValueSerializer;
+use SiteStore;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\EntityFactory;
@@ -46,17 +47,24 @@ class ApiHelperFactory {
 	 */
 	private $entityFactory;
 
+	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityFactory $entityFactory
+		EntityFactory $entityFactory,
+		SiteStore $siteStore
 	) {
 
 		$this->titleLookup = $titleLookup;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityFactory = $entityFactory;
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -72,7 +80,8 @@ class ApiHelperFactory {
 			$api->getResult(),
 			$this->titleLookup,
 			$this->getLibSerializerFactory( $defaultOptions ),
-			$this->getSerializerFactory()
+			$this->getSerializerFactory(),
+			$this->siteStore
 		);
 	}
 

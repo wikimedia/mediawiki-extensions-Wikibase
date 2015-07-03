@@ -6,12 +6,14 @@ use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use Revision;
+use SiteStore;
 use Status;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -68,6 +70,7 @@ class ResultBuilder {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param SerializerFactory $serializerFactory
+	 * @param SiteStore $siteStore
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -75,7 +78,8 @@ class ResultBuilder {
 		$result,
 		EntityTitleLookup $entityTitleLookup,
 		LibSerializerFactory $libSerializerFactory,
-		SerializerFactory $serializerFactory
+		SerializerFactory $serializerFactory,
+		SiteStore $siteStore
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiWikibase' );
@@ -86,6 +90,7 @@ class ResultBuilder {
 		$this->libSerializerFactory = $libSerializerFactory;
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -478,6 +483,54 @@ class ResultBuilder {
 		$serializer = $this->serializerFactory->newAliasGroupListSerializer();
 		$values = $serializer->serialize( $aliasGroupList );
 		$this->setList( $path, 'aliases', $values, 'alias' );
+	}
+
+	/**
+	 * Get serialized sitelinks and add them to result
+	 *
+	 * @since 0.5
+	 *
+	 * @todo use a SiteLinkListSerializer when created in DataModelSerialization here
+	 *
+	 * @param SiteLinkList $siteLinkList the site links to insert in the result
+	 * @param array|string $path where the data is located
+	 * @param bool $addUrl
+	 */
+	public function addSiteLinkList( SiteLinkList $siteLinkList, $path, $addUrl = false ) {
+		$serializer = $this->serializerFactory->newSiteLinkSerializer();
+		$values = array();
+		foreach ( $siteLinkList->toArray() as $siteLink ) {
+			$value = $serializer->serialize( $siteLink );
+			if ( $addUrl ) {
+				$site = $this->siteStore->getSite( $siteLink->getSiteId() );
+				if ( $site !== null ) {
+					$value['url'] = $site->getPageUrl( $siteLink->getPageName() );
+				}
+			}
+			$values[$siteLink->getSiteId()] = $value;
+		}
+		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
+	}
+
+	/**
+	 * Adds fake serialization to show a sitelink has been removed
+	 *
+	 * @since 0.5
+	 *
+	 * @param SiteLinkList $siteLinkList
+	 * @param array|string $path where the data is located
+	 */
+	public function addRemovedSitelinks( SiteLinkList $siteLinkList, $path ) {
+		$values = array();
+		foreach ( $siteLinkList->toArray() as $siteLink ) {
+			$siteId = $siteLink->getSiteId();
+			$values[$siteId] = array(
+				'site' => $siteId,
+				'title' => $siteLink->getPageName(),
+				'removed' => '',
+			);
+		}
+		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
 	}
 
 	/**
