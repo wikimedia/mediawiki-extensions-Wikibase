@@ -11,6 +11,7 @@ use MWException;
 use RequestContext;
 use SiteList;
 use Wikibase\RedirectRevision;
+use SiteStore;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
@@ -112,14 +113,21 @@ class EntityDataSerializationService {
 	private $rdfWriterFactory;
 
 	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * @param string $rdfBaseURI
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param PropertyDataTypeLookup $propertyLookup
+	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param SiteList $sites
 	 * @param SerializerFactory $serializerFactory
+	 * @param SiteStore $siteStore
 	 *
 	 * @since 0.4
 	 */
@@ -132,7 +140,8 @@ class EntityDataSerializationService {
 		PropertyDataTypeLookup $propertyLookup,
 		SiteList $sites,
 		EntityDataFormatProvider $entityDataFormatProvider,
-		SerializerFactory $serializerFactory
+		SerializerFactory $serializerFactory,
+		SiteStore $siteStore
 	) {
 		$this->rdfBaseURI = $rdfBaseURI;
 		$this->rdfDataURI = $rdfDataURI;
@@ -143,6 +152,7 @@ class EntityDataSerializationService {
 		$this->propertyLookup = $propertyLookup;
 		$this->sites = $sites;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
+		$this->siteStore = $siteStore;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
@@ -454,6 +464,7 @@ class EntityDataSerializationService {
 			$this->entityTitleLookup,
 			$this->libSerializerFactory,
 			$this->serializerFactory,
+			$this->siteStore,
 			false // Never index tags for this service as we dont output XML
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision, $options );
