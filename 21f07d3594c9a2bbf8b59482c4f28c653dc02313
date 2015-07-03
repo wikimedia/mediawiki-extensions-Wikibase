@@ -225,6 +225,41 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_dc4b0bb2",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-07-03T15:42:17Z",
+      "side": 1,
+      "message": "Because we don\u0027t have $fromRevId (which we can\u0027t get from the MockRepository, remember the change to getLatestRevisionId I did). Getting it otherwise is probably not going to work without hacking up MockRepository to actually keep it around.",
+      "parentUuid": "8ec42329_7c67774a",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_7cc6971b",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-07-03T15:42:17Z",
+      "side": 1,
+      "message": "missing space after if",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_d7176f48",
         "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
         "patchSetId": 26
