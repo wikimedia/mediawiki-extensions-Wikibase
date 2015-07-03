@@ -11,9 +11,12 @@ use Status;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -71,11 +74,17 @@ class ResultBuilder {
 	private $options;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $dataTypeLookup;
+
+	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteStore $siteStore
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -84,7 +93,8 @@ class ResultBuilder {
 		EntityTitleLookup $entityTitleLookup,
 		LibSerializerFactory $libSerializerFactory,
 		SerializerFactory $serializerFactory,
-		SiteStore $siteStore
+		SiteStore $siteStore,
+		PropertyDataTypeLookup $dataTypeLookup
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
@@ -96,6 +106,7 @@ class ResultBuilder {
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
 		$this->siteStore = $siteStore;
+		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
 	/**
@@ -567,13 +578,42 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addReference( Reference $reference ) {
-		$serializer = $this->libSerializerFactory->newReferenceSerializer( $this->getOptions() );
+		$serializer = $this->serializerFactory->newReferenceSerializer();
 
 		//TODO: this is currently only used to add a Reference as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow references
 		//      to be added to a list, using a path and a id key or index.
 
-		$value = $serializer->getSerialized( $reference );
+		$value = $serializer->serialize( $reference );
+
+		foreach ( $value['snaks'] as $propertyIdGroup => &$snakGroup ) {
+			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty(
+				new PropertyId( $propertyIdGroup )
+			);
+			foreach ( $snakGroup as &$snak ) {
+				/**
+				 * HACK: Inject the datatype into the serialization
+				 *
+				 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
+				 *       but this is not done by the LibSerializers thus not done here.
+				 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
+				 *       might be able to use in some way here
+				 */
+				if ( $snak['snaktype'] === 'value' ) {
+					$snak['datatype'] = $dataType;
+				}
+				/**
+				 * HACK: Remove snak hases
+				 *
+				 * TODO: LibSerializers do not return hashes for individual Snaks so we remove them here
+				 *       It would probbaly be nicer to have this as an option in DataModelSerialization
+				 *       OR we could just start returning them...... They are not really that usefull
+				 *       for consumers though...
+				 */
+				unset( $snak['hash'] );
+			}
+		}
+
 		$this->setValue( null, 'reference', $value );
 	}
 

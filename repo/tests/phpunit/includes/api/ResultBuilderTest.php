@@ -73,8 +73,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( $propertyId ) {
-				return 'DtIdFor_' . $propertyId;
+			->will( $this->returnCallback( function( PropertyId $propertyId ) {
+				return 'DtIdFor_' . $propertyId->getSerialization();
 			} ) );
 
 		// @todo inject EntityFactory and SiteStore
@@ -89,7 +89,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$mockEntityTitleLookup,
 			$libSerializerFactory,
 			$serializerFactory,
-			new MockSiteStore()
+			new MockSiteStore(),
+			$mockPropertyDataTypeLookup
 		);
 
 		if ( is_array( $options ) ) {

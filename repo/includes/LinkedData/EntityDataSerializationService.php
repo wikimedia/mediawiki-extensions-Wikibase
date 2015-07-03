@@ -433,7 +433,8 @@ class EntityDataSerializationService {
 			$this->entityTitleLookup,
 			$this->libSerializerFactory,
 			$this->serializerFactory,
-			$this->siteStore
+			$this->siteStore,
+			$this->propertyLookup
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision, $options );
 
