@@ -19,7 +19,7 @@ MODULE.getStore = function( dataTypeStore ) {
 	);
 
 	expertStore.registerDataValueExpert(
-		vv.experts.StringValue,
+		vv.experts.QuantityInput,
 		dv.QuantityValue.TYPE
 	);
 
