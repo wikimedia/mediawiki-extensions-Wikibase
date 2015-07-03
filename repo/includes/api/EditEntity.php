@@ -570,7 +570,7 @@ class EditEntity extends ModifyEntity {
 
 			$builder->addLabels( $fingerprint->getLabels(), 'entity' );
 			$builder->addDescriptions( $fingerprint->getDescriptions(), 'entity' );
-			$builder->addAliases( $fingerprint->getAliasGroups()->toTextArray(), 'entity' );
+			$builder->addAliasGroupList( $fingerprint->getAliasGroups(), 'entity' );
 		}
 
 		if ( $entity instanceof Item ) {
