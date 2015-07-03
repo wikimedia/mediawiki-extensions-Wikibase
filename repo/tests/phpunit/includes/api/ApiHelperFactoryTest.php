@@ -77,7 +77,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSerializerFactory() {
 		$factory = $this->newApiHelperFactory();
 
-		$serializerFactory = $factory->getSerializerFactory();
+		$serializerFactory = $factory->getLibSerializerFactory();
 		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\LibSerializerFactory', $serializerFactory );
 	}
 
