@@ -11,6 +11,8 @@ use Status;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLinkList;
@@ -76,6 +78,7 @@ class ResultBuilder {
 	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteStore $siteStore
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -84,7 +87,8 @@ class ResultBuilder {
 		EntityTitleLookup $entityTitleLookup,
 		LibSerializerFactory $libSerializerFactory,
 		SerializerFactory $serializerFactory,
-		SiteStore $siteStore
+		SiteStore $siteStore,
+		PropertyDataTypeLookup $dataTypeLookup
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
@@ -96,6 +100,7 @@ class ResultBuilder {
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
 		$this->siteStore = $siteStore;
+		$this->dataTypeLookup = $dataTypeLookup;
 	}
 
 	/**
@@ -567,13 +572,24 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addReference( Reference $reference ) {
-		$serializer = $this->libSerializerFactory->newReferenceSerializer( $this->getOptions() );
+		$serializer = $this->serializerFactory->newReferenceSerializer();
 
 		//TODO: this is currently only used to add a Reference as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow references
 		//      to be added to a list, using a path and a id key or index.
 
-		$value = $serializer->getSerialized( $reference );
+		$value = $serializer->serialize( $reference );
+
+		// Inject the 'datatype' into the serialization
+		foreach ( $value['snaks'] as $propertyIdGroup => &$snakGroup ) {
+			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty(
+				new PropertyId( $propertyIdGroup )
+			);
+			foreach ( $snakGroup as &$snak ) {
+				$snak['datatype'] = $dataType;
+			}
+		}
+
 		$this->setValue( null, 'reference', $value );
 	}
 
