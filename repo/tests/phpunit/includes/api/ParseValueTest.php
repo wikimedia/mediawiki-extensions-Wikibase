@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Api;
 
+use Wikibase\Validators\StringLengthValidator;
+
 /**
  * @covers Wikibase\Api\ParseValue
  *
@@ -15,6 +17,7 @@ namespace Wikibase\Test\Api;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 class ParseValueTest extends WikibaseApiTestCase {
 
@@ -22,6 +25,17 @@ class ParseValueTest extends WikibaseApiTestCase {
 		$this->mergeMwGlobalArrayValue(
 			'wgValueParsers',
 			array( 'decimal' => 'ValueParsers\DecimalParser' )
+		);
+		$this->mergeMwGlobalArrayValue(
+			'wgValueValidators',
+			array(
+				'stringLength6to8' => function() {
+					return new StringLengthValidator( 6, 8 );
+				},
+				'stringLengthEqual1' => function() {
+					return new StringLengthValidator( 1, 1 );
+				},
+			)
 		);
 		parent::setUp();
 	}
@@ -110,6 +124,32 @@ class ParseValueTest extends WikibaseApiTestCase {
 				),
 			),
 
+			'decimal with string length (6-8) validation' => array(
+				'$text' => '123.456',
+				'$parser' => 'decimal',
+				'$expected' => array(
+					'0/raw' => '123.456',
+					'0/type' => 'decimal',
+					'0/value' => '123.456',
+					'0/valid' => true,
+				),
+				'$validator' => 'stringLength6to8',
+			),
+
+			'decimal with string length (=1) validation' => array(
+				'$text' => '123.456',
+				'$parser' => 'decimal',
+				'$expected' => array(
+					'0/raw' => '123.456',
+					'0/type' => 'decimal',
+					'0/value' => '123.456',
+					'0/valid' => false,
+					'0/validation-info/0/code' => 'too-long',
+					'0/validation-info/0/text' => 'Too long, maximum length is 1',
+				),
+				'$validator' => 'stringLengthEqual1',
+			),
+
 		);
 	}
 
@@ -132,12 +172,16 @@ class ParseValueTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideValid
 	 */
-	public function testParse( $text, $parser, $expected ) {
+	public function testParse( $text, $parser, $expected, $validator = null ) {
 		$params = array(
 			'action' => 'wbparsevalue',
 			'values' => $text,
 			'parser' => $parser
 		);
+
+		if ( $validator !== null ) {
+			$params['validator'] = $validator;
+		}
 
 		list( $result, , ) = $this->doApiRequest( $params );
 

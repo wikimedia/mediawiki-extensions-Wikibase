@@ -23,6 +23,7 @@ class DataValueFactory {
 	 */
 	protected $values = array(
 		'boolean' => 'DataValues\BooleanValue',
+		'decimal' => 'DataValues\DecimalValue',
 		'number' => 'DataValues\NumberValue',
 		'string' => 'DataValues\StringValue',
 		'unknown' => 'DataValues\UnknownValue',
