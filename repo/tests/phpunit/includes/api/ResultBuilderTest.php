@@ -17,6 +17,8 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
@@ -435,7 +437,10 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddLabels() {
 		$result = $this->getDefaultResult();
-		$labels = array( 'en' => 'foo', 'de' => 'bar' );
+		$labels = new TermList( array(
+			new Term( 'en', 'foo' ),
+			new Term( 'de', 'bar' ),
+		) );
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
 			'entities' => array(
@@ -462,9 +467,39 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
+	public function testAddRemovedLabel() {
+		$result = $this->getDefaultResult();
+		$path = array( 'entities', 'Q1' );
+		$expected = array(
+			'entities' => array(
+				'Q1' => array(
+					'labels' => array(
+						'en' => array(
+							'language' => 'en',
+							'removed' => '',
+						),
+					),
+				),
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addRemovedLabel( 'en', $path );
+
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
+	}
+
 	public function testAddDescriptions() {
 		$result = $this->getDefaultResult();
-		$descriptions = array( 'en' => 'foo', 'de' => 'bar' );
+		$descriptions = new TermList( array(
+			new Term( 'en', 'foo' ),
+			new Term( 'de', 'bar' ),
+		) );
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
 			'entities' => array(
@@ -488,6 +523,33 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
+		$this->assertEquals( $expected, $data );
+	}
+
+	public function testAddRemovedDescription() {
+		$result = $this->getDefaultResult();
+		$path = array( 'entities', 'Q1' );
+		$expected = array(
+			'entities' => array(
+				'Q1' => array(
+					'descriptions' => array(
+						'en' => array(
+							'language' => 'en',
+							'removed' => '',
+						),
+					),
+				),
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addRemovedDescription( 'en', $path );
+
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
 		$this->assertEquals( $expected, $data );
 	}
 
