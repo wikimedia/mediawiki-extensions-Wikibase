@@ -122,7 +122,6 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		$args[] = array ( $entity, new ChangeOpDescription( 'de', null, $validatorFactory ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->removeDescription( 'de' );
 		$args[] = array ( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'add', 'de' );
 
 		return $args;
