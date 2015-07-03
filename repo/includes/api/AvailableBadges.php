@@ -9,8 +9,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module to query available badge items.
  *
- * @todo this might also be useful to find badges suggestions based on labels
- *
  * @since 0.5
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
