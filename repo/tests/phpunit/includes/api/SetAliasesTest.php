@@ -75,7 +75,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
 			array( //12
 				'p' => array( 'language' => 'en', 'remove' => 'ohi' ),
-				'e' => array(  ) ),
+				'e' => array() ),
 			array( //13
 				'p' => array( 'language' => 'en', 'set' => "  Foo\nBar  " ),
 				'e' => array( 'value' => array( 'en' => array( 'Foo Bar' ) ) ) ),

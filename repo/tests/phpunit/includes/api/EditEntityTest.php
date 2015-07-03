@@ -244,14 +244,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'rank' => 'normal' ) ) ) ),
 
 			'change the claim' => array(
-				'p' => array( 'data' => array (
-					'claims' => array (
-							array (
+				'p' => array( 'data' => array(
+					'claims' => array(
+							array(
 								'id' => '%lastClaimId%',
-								'mainsnak' => array (
+								'mainsnak' => array(
 										'snaktype' => 'value',
 										'property' => '%P56%',
-										'datavalue' => array ( 'value' => 'diffstring', 'type' => 'string' ),
+										'datavalue' => array( 'value' => 'diffstring', 'type' => 'string' ),
 									),
 								'type' => 'statement',
 								'rank' => 'normal',

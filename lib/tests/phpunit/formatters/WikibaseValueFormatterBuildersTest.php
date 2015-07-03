@@ -630,7 +630,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 		return array(
 			'empty' => array(
-				new FormatterOptions( array( ) ),
+				new FormatterOptions( array() ),
 				'en', // determined in WikibaseValueFormatterBuildersTest::newBuilder()
 				'en'  // derived from language code
 			),

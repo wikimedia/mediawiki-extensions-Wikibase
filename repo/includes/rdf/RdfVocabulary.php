@@ -81,7 +81,7 @@ class RdfVocabulary {
 	 *
 	 * @var array
 	 */
-	private $namespaces = array ();
+	private $namespaces = array();
 
 	/**
 	 * @var string
@@ -107,7 +107,7 @@ class RdfVocabulary {
 		}
 		$propUri = $topUri."prop/";
 
-		$this->namespaces = array (
+		$this->namespaces = array(
 				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',

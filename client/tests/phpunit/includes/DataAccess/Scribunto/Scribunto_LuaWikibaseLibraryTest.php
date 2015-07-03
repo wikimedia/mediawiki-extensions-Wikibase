@@ -74,7 +74,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 						'language' => 'ku-latn',
 						'value' => 'Pisîk'
 					),
-					'ku-arab' => array (
+					'ku-arab' => array(
 						'language' => 'ku-arab',
 						'value' => 'پسیک',
 						'source-language' => 'ku-latn',

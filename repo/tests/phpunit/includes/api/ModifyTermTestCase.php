@@ -51,7 +51,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'value' => array( 'bat-smg' => 'V?sata' ) ) ),
 			array( //7
 				'p' => array( 'language' => 'bat-smg', 'value' => '' ),
-				'e' => array( ) ),
+				'e' => array() ),
 			array( //8
 				'p' => array( 'language' => 'en', 'value' => "  x\nx  " ),
 				'e' => array( 'value' => array( 'en' => 'x x' ) ) ),

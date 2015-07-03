@@ -30,8 +30,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.js',
 			),
-			'dependencies' => array(
-			),
 		),
 
 		'wikibase.buildErrorOutput' => $moduleTemplate + array(

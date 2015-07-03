@@ -294,7 +294,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 				'zh_classicalwiki' => array(
 					'site' => 'zh_classicalwiki',
 					'title' => 'User:Addshore',
-					'badges' => array( )
+					'badges' => array()
 				),
 			),
 		) ) );
@@ -354,8 +354,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					'enwiki' => array(
 						'site' => 'enwiki',
 						'title' => 'Berlin',
-						'badges' => array(
-						)
+						'badges' => array()
 					),
 				),
 			),

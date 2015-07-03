@@ -280,7 +280,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				                    //       gregorian an output as an XSD date.
 				new PropertyId( 'P8' ),
 				new TimeValue( '+1492-10-12T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::JULIAN_CALENDAR ),
-				array (
+				array(
 					// Julian-to-Gregorian conversion applies.
 					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> "1492-10-21T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/23a636870974bab8f1771b34aa994936> .',

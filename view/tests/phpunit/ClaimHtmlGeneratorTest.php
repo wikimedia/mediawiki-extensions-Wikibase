@@ -120,7 +120,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			new Statement(
 				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 				new SnakList(),
-				new ReferenceList( array( new Reference( new SnakList( array (
+				new ReferenceList( array( new Reference( new SnakList( array(
 					new PropertyValueSnak( 50, new StringValue( 'second snak' ) )
 				) ) ) ) )
 			),

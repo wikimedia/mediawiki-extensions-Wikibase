@@ -154,7 +154,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 				'de' => array( 'language' => 'de', 'value' => 'berlin' )
 			) ),
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
-			array( ),
+			array(),
 			array(
 				'labels' => array(
 				'en' => array( 'language' => 'en', 'value' => 'bar' ),

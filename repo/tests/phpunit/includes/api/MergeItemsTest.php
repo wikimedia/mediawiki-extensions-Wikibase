@@ -154,7 +154,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
 			array(),
 			array(),
-			array( 'claims' => array( 'P1' => array ( array( 'mainsnak' => array(
+			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 		);
@@ -214,7 +214,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	public function provideExceptionParamsData() {
 		return array(
 			array( //0 no ids given
-				'p' => array( ),
+				'p' => array(),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //1 only from id
 				'p' => array( 'fromid' => 'Q1' ),

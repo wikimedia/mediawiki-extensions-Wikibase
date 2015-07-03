@@ -124,7 +124,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_Test
 				) ),
 			),
 			'no options' => array(
-				new FormatterOptions( array( ) ),
+				new FormatterOptions( array() ),
 			),
 		);
 	}

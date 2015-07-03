@@ -412,7 +412,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		//todo more exception checks should be added once Bug:53038 is resolved
 		return array(
 			array( //0 no params
-				'p' => array( ),
+				'p' => array(),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //1 bad id
 				'p' => array( 'ids' => 'ABCD' ),

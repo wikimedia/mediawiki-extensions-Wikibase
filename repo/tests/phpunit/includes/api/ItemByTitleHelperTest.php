@@ -189,14 +189,14 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				// Request with no sites
-				array( ),
+				array(),
 				array( 'barfoo' ),
 				false
 			),
 			array(
 				// Request with no titles
 				array( 'enwiki' ),
-				array( ),
+				array(),
 				false
 			),
 		);

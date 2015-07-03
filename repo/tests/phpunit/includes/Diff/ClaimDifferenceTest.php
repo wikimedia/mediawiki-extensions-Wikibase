@@ -80,7 +80,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 	public function atomicClaimDifferenceProvider() {
 		$claimDifferenceObjects = array();
 		$changeOp = new DiffOpChange( "old", "new" );
-		$diff = new Diff( array ( $changeOp ) );
+		$diff = new Diff( array( $changeOp ) );
 
 		$claimDifferenceObjects[] = new ClaimDifference( $changeOp );
 		$claimDifferenceObjects[] = new ClaimDifference( null, $diff );
@@ -93,7 +93,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 	public function nonAtomicClaimDifferenceProvider() {
 		$claimDifferenceObjects = array();
 		$changeOp = new DiffOpChange( "old", "new" );
-		$diff = new Diff( array ( $changeOp ) );
+		$diff = new Diff( array( $changeOp ) );
 
 		$claimDifferenceObjects[] = new ClaimDifference();
 		$claimDifferenceObjects[] = new ClaimDifference( $changeOp, $diff, null, null );
