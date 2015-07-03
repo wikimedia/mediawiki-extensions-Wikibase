@@ -110,7 +110,8 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$dataTypeLookup,
 			new SiteList(),
 			new EntityDataFormatProvider(),
-			$serializerFactory
+			$serializerFactory,
+			new MockSiteStore()
 		);
 
 		return $service;
