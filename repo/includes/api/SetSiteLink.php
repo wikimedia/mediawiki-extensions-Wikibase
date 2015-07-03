@@ -8,6 +8,7 @@ use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -83,23 +84,26 @@ class SetSiteLink extends ModifyEntity {
 		$item = $entity;
 		$summary = $this->createSummary( $params );
 		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
+		$hasLinkWithSiteId = $item->getSiteLinkList()->hasLinkWithSiteId( $linksite );
 
 		if ( $this->shouldRemove( $params ) ) {
-			if ( $item->hasLinkToSite( $linksite ) ) {
-				$link = $item->getSiteLink( $linksite );
-
+			if ( $hasLinkWithSiteId ) {
 				$changeOp = $this->getChangeOp( $params );
 				$this->applyChangeOp( $changeOp, $entity, $summary );
 
-				$this->getResultBuilder()->addSiteLinks( array( $link ), 'entity', array( 'removed' ) );
+				$this->getResultBuilder()->addRemovedSitelinks( array( $linksite ), 'entity' );
 			}
 		} else {
-			if ( isset( $params['linktitle'] ) || $item->hasLinkToSite( $linksite ) ) {
+			if ( isset( $params['linktitle'] ) || $hasLinkWithSiteId ) {
 				$changeOp = $this->getChangeOp( $params );
 				$this->applyChangeOp( $changeOp, $entity, $summary );
 
-				$link = $item->getSiteLink( $linksite );
-				$this->getResultBuilder()->addSiteLinks( array( $link ), 'entity', array( 'url' ) );
+				$link = $item->getSiteLinkList()->getBySiteId( $linksite );
+				$this->getResultBuilder()->addSiteLinkList(
+					new SiteLinkList( array( $link ) ),
+					'entity',
+					true // always add the URL
+				);
 			} else {
 				$this->dieMessage( 'no-such-sitelink', $params['linktitle'] );
 			}

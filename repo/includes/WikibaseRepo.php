@@ -1067,7 +1067,8 @@ class WikibaseRepo {
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
 			$this->getPropertyDataTypeLookup(),
-			$this->getEntityFactory()
+			$this->getEntityFactory().
+			$this->getSiteStore()
 		);
 	}
 
