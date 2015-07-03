@@ -13,6 +13,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -24,6 +25,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
+use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Api\ResultBuilder
@@ -85,7 +87,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$result,
 			$mockEntityTitleLookup,
 			$libSerializerFactory,
-			new SerializerFactory( new DataValueSerializer() )
+			new SerializerFactory( new DataValueSerializer() ),
+			new MockSiteStore()
 		);
 
 		if ( is_array( $options ) ) {
@@ -660,11 +663,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddSiteLinks() {
+	public function testAddSiteLinkList() {
 		$result = $this->getDefaultResult();
-		$siteLinks = array(
-			new SiteLink( 'enwiki', 'User:Addshore' ),
-			new SiteLink( 'dewikivoyage', 'Berlin' ),
+		$siteLinkList = new SiteLinkList(
+			array(
+				new SiteLink( 'enwiki', 'User:Addshore' ),
+				new SiteLink( 'dewikivoyage', 'Berlin' ),
+			)
 		);
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
@@ -687,7 +692,84 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addSiteLinks( $siteLinks, $path );
+		$resultBuilder->addSiteLinkList( $siteLinkList, $path );
+
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
+	}
+
+	public function testAddRemovedSiteLinks() {
+		$result = $this->getDefaultResult();
+		$siteIds = array( 'ptwiki', 'delala' );
+		$path = array( 'entities', 'Q1' );
+		$expected = array(
+			'entities' => array(
+				'Q1' => array(
+					'sitelinks' => array(
+						'ptwiki' => array(
+							'removed' => '',
+						),
+						'delala' => array(
+							'removed' => '',
+						),
+					),
+				),
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addRemovedSitelinks( $siteIds, $path );
+
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
+	}
+
+	public function testAddAndRemoveSiteLinks() {
+		$result = $this->getDefaultResult();
+		$siteLinkList = new SiteLinkList(
+			array(
+				new SiteLink( 'enwiki', 'User:Addshore' ),
+				new SiteLink( 'dewikivoyage', 'Berlin' ),
+			)
+		);
+		$siteIds = array( 'ptwiki', 'delala' );
+		$path = array( 'entities', 'Q1' );
+		$expected = array(
+			'entities' => array(
+				'Q1' => array(
+					'sitelinks' => array(
+						'enwiki' => array(
+							'site' => 'enwiki',
+							'title' => 'User:Addshore',
+							'badges' => array(),
+						),
+						'dewikivoyage' => array(
+							'site' => 'dewikivoyage',
+							'title' => 'Berlin',
+							'badges' => array(),
+						),
+						'ptwiki' => array(
+							'removed' => '',
+						),
+						'delala' => array(
+							'removed' => '',
+						),
+					),
+				),
+			),
+		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addSiteLinkList( $siteLinkList, $path );
+		$resultBuilder->addRemovedSitelinks( $siteIds, $path );
 
 		$data = $result->getResultData( null, array(
 			'BC' => array(),
