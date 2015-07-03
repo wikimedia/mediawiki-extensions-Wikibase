@@ -102,7 +102,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$propertyLookup,
 			new SiteList(),
 			$entityDataFormatProvider,
-			$serializerFactory
+			$serializerFactory,
+			new MockSiteStore()
 		);
 
 		$entityDataFormatProvider->setFormatWhiteList(
