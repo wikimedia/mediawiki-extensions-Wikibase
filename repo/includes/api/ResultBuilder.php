@@ -14,6 +14,9 @@ use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
@@ -472,16 +475,24 @@ class ResultBuilder {
 	}
 
 	/**
-	 * Get serialized aliases and add them to result
+	 * Get serialized AliasGroupList and add it to result
 	 *
 	 * @since 0.5
 	 *
-	 * @param array $aliases the aliases to set in the result
+	 * @param AliasGroupList $aliasGroupList the AliasGroupList to set in the result
 	 * @param array|string $path where the data is located
 	 */
-	public function addAliases( array $aliases, $path ) {
-		$aliasSerializer = $this->libSerializerFactory->newAliasSerializer( $this->getOptions() );
-		$values = $aliasSerializer->getSerialized( $aliases );
+	public function addAliasGroupList( AliasGroupList $aliasGroupList, $path ) {
+		if ( $this->isRawMode ) {
+			$serializer = $this->serializerFactory->newAliasGroupSerializer();
+			$values = array();
+			foreach ( $aliasGroupList->toArray() as $aliasGroup ) {
+				$values = array_merge( $values, $serializer->serialize( $aliasGroup ) );
+			}
+		} else {
+			$serializer = $this->serializerFactory->newAliasGroupListSerializer();
+			$values = $serializer->serialize( $aliasGroupList );
+		}
 		$this->setList( $path, 'aliases', $values, 'alias' );
 	}
 
