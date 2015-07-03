@@ -54,7 +54,7 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 		DataValue $dataValue,
 		array $derivedDataValues
 	) {
-		new DerivedPropertyValueSnak( $propertyId, $dataValue,$derivedDataValues );
+		new DerivedPropertyValueSnak( $propertyId, $dataValue, $derivedDataValues );
 	}
 
 	public function invalidConstructorArgumentsProvider() {
