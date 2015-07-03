@@ -461,14 +461,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$lookup->saveTermsOfEntity( $item );
 
 		// modify the item and save new set of terms
+		$item = new Item( new ItemId( 'Q568431314' ) );
 		$item->setLabel( 'en', 'abc' );
-		$item->removeLabel( 'de' );
 		$item->setLabel( 'nl', 'jke' );
-		$item->setDescription( 'it', '-xyz-' );
+		$item->setDescription( 'en', '-abc-' );
+		$item->setDescription( 'de', '-def-' );
+		$item->setDescription( 'nl', '-ghi-' );
+		$item->setDescription( 'it', 'ABC' );
 		$item->setAliases( 'en', array( 'ABC', 'X', '_' ) );
 		$item->setAliases( 'de', array( 'DEF', 'Y' ) );
 		$item->setAliases( 'nl', array( '_', 'Z', 'foo' ) );
-		$item->setDescription( 'it', 'ABC' );
+
 		$lookup->saveTermsOfEntity( $item );
 
 		// check that the stored terms are the ones in the modified items
