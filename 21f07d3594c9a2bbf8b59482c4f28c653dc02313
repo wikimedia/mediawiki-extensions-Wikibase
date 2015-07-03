@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_dc746bfa",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-03T15:36:20Z",
+      "side": 1,
+      "message": "What exactly do you mean? That isEmpty should be more defensive? What does that have to do with redirects? Why would you use a  ItemRedirectException to indicate that we failed to load the item we just merged?",
+      "parentUuid": "8ec42329_370d9339",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e408b731",
         "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
         "patchSetId": 26
@@ -189,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_7c67774a",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-03T15:36:20Z",
+      "side": 1,
+      "message": "Uh, I\u0027m actually not sure I\u0027m ok with this. Why is it commented out?",
+      "parentUuid": "8ec42329_84b4537d",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_d7176f48",
         "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
         "patchSetId": 26
@@ -218,6 +254,24 @@
       "side": 1,
       "message": "Well it is tested in the interactor ofc, we could try and also test it here, I think we would need to add some more mock services for that (or it looked like we would have to at a glance)\nAs this API module has an interactor we could totally MOCK that, making this test for unity and less integrationy.",
       "parentUuid": "8ec42329_d7176f48",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5c607b2d",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-03T15:36:20Z",
+      "side": 1,
+      "message": "Right: we\u0027d need a mock RedirectCreationInteractor, which checks that it gets called when expected.",
+      "parentUuid": "8ec42329_f7570bf7",
       "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -269,6 +323,40 @@
       "writtenOn": "2015-07-02T14:28:08Z",
       "side": 1,
       "message": "YAY for splitting this up!",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_1c56735f",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-03T15:36:20Z",
+      "side": 1,
+      "message": "no type hint?",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fc5a8783",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-03T15:36:20Z",
+      "side": 1,
+      "message": "no type hint?",
       "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
