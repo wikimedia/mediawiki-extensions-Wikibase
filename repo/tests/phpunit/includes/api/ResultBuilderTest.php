@@ -17,6 +17,8 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
@@ -575,9 +577,14 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddAliases() {
+	public function testAddAliasGroupList() {
 		$result = $this->getDefaultResult();
-		$aliases = array( 'en' => array( 'boo', 'hoo' ), 'de' => array( 'ham', 'cheese' ) );
+		$aliasGroupList = new AliasGroupList(
+			array(
+				new AliasGroup( 'en', array( 'boo', 'hoo' ) ),
+				new AliasGroup( 'de', array( 'ham', 'cheese' ) ),
+			)
+		);
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
 			'entities' => array(
@@ -609,7 +616,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addAliases( $aliases, $path );
+		$resultBuilder->addAliasGroupList( $aliasGroupList, $path );
 
 		$data = $result->getResultData( null, array(
 			'BC' => array(),
