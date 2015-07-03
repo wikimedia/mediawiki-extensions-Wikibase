@@ -93,7 +93,7 @@ class WikibaseValueFormatterBuilders {
 		SnakFormatter::FORMAT_PLAIN => array(
 			'VT:string' => 'ValueFormatters\StringFormatter',
 			'VT:globecoordinate' => array( 'this', 'newGlobeCoordinateFormatter' ),
-			'VT:quantity' =>  array( 'this', 'newQuantityFormatter' ),
+			'VT:quantity' =>  array( 'this', 'newPlainQuantityFormatter' ),
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
 			'VT:wikibase-entityid' => array( 'this', 'newEntityIdFormatter' ),
 			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter',
@@ -115,6 +115,7 @@ class WikibaseValueFormatterBuilders {
 			'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter',
 			'PT:wikibase-item' =>  array( 'this', 'newEntityIdHtmlFormatter' ),
 			'PT:wikibase-property' => array( 'this', 'newEntityIdHtmlFormatter' ),
+			'VT:quantity' => array( 'this', 'newHtmlQuantityFormatter' ),
 			'VT:time' => array( 'this', 'newHtmlTimeFormatter' ),
 			'VT:monolingualtext' => array( 'this', 'newMonolingualHtmlFormatter' ),
 		),
@@ -608,15 +609,22 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	/**
-	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
-	 * Used to compose the QuantityFormatter.
-	 *
 	 * @param FormatterOptions $options
 	 *
 	 * @return QuantityFormatter
 	 */
-	private function newQuantityFormatter( FormatterOptions $options ) {
-		//TODO: use a builder for this DecimalFormatter
+	private function newPlainQuantityFormatter( FormatterOptions $options ) {
+		$options->setOption( QuantityFormatter::OPT_APPLY_UNIT, false );
+		$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
+		return new QuantityFormatter( $decimalFormatter, null, $options );
+	}
+
+	/**
+	 * @param FormatterOptions $options
+	 *
+	 * @return QuantityFormatter
+	 */
+	private function newHtmlQuantityFormatter( FormatterOptions $options ) {
 		$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
 		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		$unitFormatter = new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup );
