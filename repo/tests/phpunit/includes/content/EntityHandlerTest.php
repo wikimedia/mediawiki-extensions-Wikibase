@@ -232,27 +232,33 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$e1 = $this->newEntity();
 		$r1 = $this->fakeRevision( $this->newEntityContent( $e1 ), 1 );
 
-		$e2 = $e1->copy();
+		$e2 = $this->newEntity();
 		$e2->setLabel( 'en', 'Foo' );
 		$r2 = $this->fakeRevision( $this->newEntityContent( $e2 ), 2 );
 
-		$e3 = $e2->copy();
+		$e3 = $this->newEntity();
+		$e3->setLabel( 'en', 'Foo' );
 		$e3->setLabel( 'de', 'Fuh' );
 		$r3 = $this->fakeRevision( $this->newEntityContent( $e3 ), 3 );
 
-		$e4 = $e3->copy();
+		$e4 = $this->newEntity();
+		$e4->setLabel( 'en', 'Foo' );
+		$e4->setLabel( 'de', 'Fuh' );
 		$e4->setLabel( 'fr', 'Fu' );
 		$r4 = $this->fakeRevision( $this->newEntityContent( $e4 ), 4 );
 
-		$e5 = $e4->copy();
+		$e5 = $this->newEntity();
 		$e5->setLabel( 'en', 'F00' );
+		$e5->setLabel( 'de', 'Fuh' );
+		$e5->setLabel( 'fr', 'Fu' );
 		$r5 = $this->fakeRevision( $this->newEntityContent( $e5 ), 5 );
 
-		$e5u4 = $e5->copy();
-		$e5u4->removeLabel( 'fr' );
+		$e5u4 = $this->newEntity();
+		$e5u4->setLabel( 'en', 'F00' );
+		$e5u4->setLabel( 'de', 'Fuh' );
 
-		$e5u4u3 = $e5u4->copy();
-		$e5u4u3->removeLabel( 'de' );
+		$e5u4u3 = $this->newEntity();
+		$e5u4u3->setLabel( 'en', 'F00' );
 
 		return array(
 			array( $r5, $r5, $r4, $this->newEntityContent( $e4 ), "undo last edit" ),
