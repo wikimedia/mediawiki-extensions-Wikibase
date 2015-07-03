@@ -1080,6 +1080,7 @@ class WikibaseRepo {
 			$this->getExceptionLocalizer(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getEntityFactory(),
+			$this->getSiteStore(),
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->newEditEntityFactory( $context )
