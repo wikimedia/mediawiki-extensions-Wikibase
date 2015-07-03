@@ -66,23 +66,25 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 
-		$serializerFactory = new LibSerializerFactory(
+		$libSerializerFactory = new LibSerializerFactory(
 			new SerializationOptions(),
 			$dataTypeLookup,
 			$entityFactory
 		);
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 
 		$serializationService = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
 			$mockRepository,
 			$titleLookup,
-			$serializerFactory,
+			$libSerializerFactory,
 			$dataTypeLookup,
 			new SiteList(),
-			$entityDataFormatProvider
+			$entityDataFormatProvider,
+			$serializerFactory
 		);
 
 		$maxAge = 60*60;
