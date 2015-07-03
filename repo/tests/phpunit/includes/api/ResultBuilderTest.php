@@ -65,8 +65,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( $propertyId ) {
-				return 'DtIdFor_' . $propertyId;
+			->will( $this->returnCallback( function( PropertyId $propertyId ) {
+				return 'DtIdFor_' . $propertyId->getSerialization();
 			} ) );
 
 		// @todo inject EntityFactory and SiteStore
@@ -82,6 +82,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$libSerializerFactory,
 			$serializerFactory,
 			new MockSiteStore(),
+			$mockPropertyDataTypeLookup,
 			$indexedMode
 		);
 
@@ -850,11 +851,42 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return array( $statement, $expectedSerialization );
 	}
 
-	public function testAddReference() {
-		$result = $this->getDefaultResult();
-		$reference = new Reference( new SnakList( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) ) ) );
-		$hash = $reference->getHash();
-		$expected = array(
+	public function provideAddReference() {
+		return array(
+			array( false ),
+			array( true ),
+		);
+	}
+
+	private function getExptectedAddReferenceResult( $isRawMode, $hash ) {
+		if ( $isRawMode ) {
+			return array(
+				'reference' => array(
+					'hash' => $hash,
+					'snaks' => array(
+						array(
+							'id' => 'P12',
+							array(
+								'snaktype' => 'value',
+								'property' => 'P12',
+								'datavalue' => array(
+									'value' => 'stringVal',
+									'type' => 'string',
+								),
+								'datatype' => 'DtIdFor_P12',
+							),
+							'_element' => 'snak',
+						),
+						'_element' => 'property',
+					),
+					'snaks-order' => array(
+						'P12',
+						'_element' => 'property',
+					),
+				),
+			);
+		}
+		return array(
 			'reference' => array(
 				'hash' => $hash,
 				'snaks' => array(
@@ -873,8 +905,18 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 				'snaks-order' => array( 'P12' ),
 			),
 		);
+	}
 
-		$resultBuilder = $this->getResultBuilder( $result );
+	/**
+	 * @dataProvider provideAddReference
+	 */
+	public function testAddReference( $isRawMode ) {
+		$result = $this->getDefaultResult();
+		$reference = new Reference( new SnakList( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) ) ) );
+		$hash = $reference->getHash();
+		$expected = $this->getExptectedAddReferenceResult( $isRawMode, $hash );
+
+		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
 		$resultBuilder->addReference( $reference );
 
 		$data = $result->getResultData();

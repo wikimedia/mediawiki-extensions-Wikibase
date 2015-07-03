@@ -465,6 +465,7 @@ class EntityDataSerializationService {
 			$this->libSerializerFactory,
 			$this->serializerFactory,
 			$this->siteStore,
+			$this->propertyLookup,
 			false // Never index tags for this service as we dont output XML
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision, $options );
