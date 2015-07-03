@@ -81,7 +81,8 @@ class ApiHelperFactory {
 			$this->titleLookup,
 			$this->getLibSerializerFactory( $defaultOptions ),
 			$this->getSerializerFactory(),
-			$this->siteStore
+			$this->siteStore,
+			$this->dataTypeLookup
 		);
 	}
 
