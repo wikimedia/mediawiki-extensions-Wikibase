@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_5ccf1b2c",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-03T15:45:19Z",
+      "side": 1,
+      "message": "No longer true, right?",
+      "revId": "bedb265f1f209707b874c88ce7e7b9e5ef792fe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
