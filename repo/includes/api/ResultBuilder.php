@@ -12,6 +12,8 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
@@ -450,16 +452,31 @@ class ResultBuilder {
 	}
 
 	/**
-	 * Get serialized aliases and add them to result
+	 * Get serialized AliasGroup and add it to result
 	 *
 	 * @since 0.5
 	 *
-	 * @param array $aliases the aliases to set in the result
+	 * @param AliasGroup $aliasGroup the AliasGroup to set in the result
 	 * @param array|string $path where the data is located
 	 */
-	public function addAliases( array $aliases, $path ) {
-		$aliasSerializer = $this->libSerializerFactory->newAliasSerializer( $this->getOptions() );
-		$values = $aliasSerializer->getSerialized( $aliases );
+	public function addAliasGroup( AliasGroup $aliasGroup, $path ) {
+		$this->addAliasGroupList(
+			new AliasGroupList( array( $aliasGroup ) ),
+			$path
+		);
+	}
+
+	/**
+	 * Get serialized AliasGroupList and add it to result
+	 *
+	 * @since 0.5
+	 *
+	 * @param AliasGroupList $aliasGroupList the AliasGroupList to set in the result
+	 * @param array|string $path where the data is located
+	 */
+	public function addAliasGroupList( AliasGroupList $aliasGroupList, $path ) {
+		$serializer = $this->serializerFactory->newAliasGroupListSerializer();
+		$values = $serializer->serialize( $aliasGroupList );
 		$this->setList( $path, 'aliases', $values, 'alias' );
 	}
 
