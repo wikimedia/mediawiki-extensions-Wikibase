@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 
 /**
  * @covers Wikibase\Lib\Serializers\DispatchingEntitySerializer
@@ -28,7 +28,7 @@ class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 	 * @return DispatchingEntitySerializer
 	 */
 	protected function getInstance() {
-		return new DispatchingEntitySerializer( new SerializerFactory() );
+		return new DispatchingEntitySerializer( new LibSerializerFactory() );
 	}
 
 	/**

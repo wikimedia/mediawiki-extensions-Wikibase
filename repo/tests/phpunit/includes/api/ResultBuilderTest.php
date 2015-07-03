@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 
 /**
  * @covers Wikibase\Api\ResultBuilder
@@ -70,7 +70,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			} ) );
 
 		// @todo inject EntityFactory and SiteStore
-		$serializerFactory = new SerializerFactory(
+		$serializerFactory = new LibSerializerFactory(
 			null, //no serialization options
 			$mockPropertyDataTypeLookup
 		);
