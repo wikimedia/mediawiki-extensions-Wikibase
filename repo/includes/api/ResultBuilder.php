@@ -13,7 +13,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -38,7 +38,7 @@ class ResultBuilder {
 	private $missingEntityCounter;
 
 	/**
-	 * @var SerializerFactory
+	 * @var LibSerializerFactory
 	 */
 	private $serializerFactory;
 
@@ -55,14 +55,14 @@ class ResultBuilder {
 	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param SerializerFactory $serializerFactory
+	 * @param LibSerializerFactory $serializerFactory
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		$result,
 		EntityTitleLookup $entityTitleLookup,
-		SerializerFactory $serializerFactory
+		LibSerializerFactory $serializerFactory
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );

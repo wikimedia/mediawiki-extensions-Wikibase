@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\Entity;
 class DispatchingEntitySerializer extends SerializerObject implements Unserializer {
 
 	/**
-	 * @var SerializerFactory
+	 * @var LibSerializerFactory
 	 */
 	protected $serializerFactory;
 
@@ -33,10 +33,10 @@ class DispatchingEntitySerializer extends SerializerObject implements Unserializ
 	protected $unserializers;
 
 	/**
-	 * @param SerializerFactory $serializerFactory
+	 * @param LibSerializerFactory $serializerFactory
 	 * @param SerializationOptions $options
 	 */
-	public function __construct( SerializerFactory $serializerFactory, SerializationOptions $options = null ) {
+	public function __construct( LibSerializerFactory $serializerFactory, SerializationOptions $options = null ) {
 		parent::__construct( $options );
 
 		$this->serializerFactory = $serializerFactory;

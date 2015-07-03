@@ -8,10 +8,10 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 
 /**
- * @covers Wikibase\Lib\Serializers\SerializerFactory
+ * @covers Wikibase\Lib\Serializers\LibSerializerFactory
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -21,10 +21,10 @@ use Wikibase\Lib\Serializers\SerializerFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SerializerFactoryTest extends \MediaWikiTestCase {
+class LibSerializerFactoryTest extends \MediaWikiTestCase {
 
 	public function testConstructor() {
-		new SerializerFactory();
+		new LibSerializerFactory();
 		$this->assertTrue( true );
 	}
 
@@ -44,7 +44,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider objectProvider
 	 */
 	public function testNewSerializerForObject( $object, $options = null ) {
-		$factory = new SerializerFactory();
+		$factory = new LibSerializerFactory();
 
 		$serializer = $factory->newSerializerForObject( $object, $options );
 
@@ -58,7 +58,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 
 		$snak = new PropertyNoValueSnak( 42 );
 
-		$factory = new SerializerFactory();
+		$factory = new LibSerializerFactory();
 		$serializer = $factory->newSerializerForObject( $snak );
 
 		$argLists[] = array( 'Wikibase\DataModel\Snak\Snak', $serializer->getSerialized( $snak ) );
@@ -73,7 +73,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @param array $serialization
 	 */
 	public function testNewUnserializerForClass( $className, array $serialization ) {
-		$factory = new SerializerFactory();
+		$factory = new LibSerializerFactory();
 
 		$unserializer = $factory->newUnserializerForClass( $className );
 
@@ -93,7 +93,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider entityTypeProvider
 	 */
 	public function testNewUnserializerForEntity( $entityType ) {
-		$factory = new SerializerFactory();
+		$factory = new LibSerializerFactory();
 		$options = new SerializationOPtions();
 
 		$unserializer = $factory->newUnserializerForEntity( $entityType, $options );
@@ -105,7 +105,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider entityTypeProvider
 	 */
 	public function testNewSerializerForEntity( $entityType ) {
-		$factory = new SerializerFactory();
+		$factory = new LibSerializerFactory();
 		$options = new SerializationOPtions();
 
 		$unserializer = $factory->newSerializerForEntity( $entityType, $options );
@@ -135,7 +135,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider newUnserializerProvider
 	 */
 	public function testNewUnserializer( $serializerName ) {
-		$factory = new SerializerFactory();
+		$factory = new LibSerializerFactory();
 		$options = new SerializationOPtions();
 
 		$method = "new$serializerName";
@@ -168,7 +168,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider newSerializerProvider
 	 */
 	public function testNewSerializer( $serializerName ) {
-		$factory = new SerializerFactory();
+		$factory = new LibSerializerFactory();
 		$options = new SerializationOPtions();
 
 		$method = "new$serializerName";

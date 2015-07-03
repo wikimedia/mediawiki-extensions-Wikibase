@@ -26,7 +26,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory as LegacySerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory as LegacySerializerFactory;
 
 /**
  * @todo Add tests with $options->setIndexTags( true ).

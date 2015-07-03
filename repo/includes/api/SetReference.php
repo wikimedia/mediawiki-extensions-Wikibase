@@ -11,7 +11,7 @@ use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -153,7 +153,7 @@ class SetReference extends ModifyClaim {
 	private function getSnaks( array $rawSnaks, array $snakOrder = array() ) {
 		$snaks = new SnakList();
 
-		$serializerFactory = new SerializerFactory();
+		$serializerFactory = new LibSerializerFactory();
 		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Snak\Snak' );
 
 		$snakOrder = ( count( $snakOrder ) > 0 ) ? $snakOrder : array_keys( $rawSnaks );
