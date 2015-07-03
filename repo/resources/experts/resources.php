@@ -35,6 +35,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.CommonsMediaType',
 				'jquery.valueview.experts.GlobeCoordinateInput',
 				'jquery.valueview.experts.MonolingualText',
+				'jquery.valueview.experts.QuantityInput',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.experts.TimeInput',
 				'jquery.valueview.experts.UnDeserializableValue',
