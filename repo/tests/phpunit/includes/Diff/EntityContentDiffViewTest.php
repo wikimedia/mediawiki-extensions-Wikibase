@@ -37,13 +37,12 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q11' ) );
 		$item->setDescription( 'en', 'ohi there' );
 		$item->setLabel( 'de', 'o_O' );
-		$item->addAliases( 'nl', array( 'foo', 'bar' ) );
+		$item->setAliases( 'nl', array( 'foo', 'bar' ) );
 
-		$item2 = $item->copy();
-		$item->setId( new ItemId( 'Q12' ) );
-		$item2->setAliases( 'nl', array( 'daaaah' ) );
+		$item2 = new Item( new ItemId( 'Q12' ) );
+		$item2->setLabel( 'de', 'o_O' );
 		$item2->setLabel( 'en', 'O_o' );
-		$item2->removeDescription( 'en' );
+		$item2->setAliases( 'nl', array( 'daaaah' ) );
 
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q21' ) );
 		$redirect2 = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q22' ) );
