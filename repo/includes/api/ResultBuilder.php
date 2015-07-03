@@ -6,12 +6,14 @@ use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use Revision;
+use SiteStore;
 use Status;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -59,6 +61,11 @@ class ResultBuilder {
 	private $entityTitleLookup;
 
 	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * @var SerializationOptions
 	 */
 	private $options;
@@ -68,6 +75,7 @@ class ResultBuilder {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param SerializerFactory $serializerFactory
+	 * @param SiteStore $siteStore
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -75,7 +83,8 @@ class ResultBuilder {
 		$result,
 		EntityTitleLookup $entityTitleLookup,
 		LibSerializerFactory $libSerializerFactory,
-		SerializerFactory $serializerFactory
+		SerializerFactory $serializerFactory,
+		SiteStore $siteStore
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
@@ -86,6 +95,7 @@ class ResultBuilder {
 		$this->libSerializerFactory = $libSerializerFactory;
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -468,35 +478,47 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param array $siteLinks the site links to insert in the result, as SiteLink objects
+	 * @todo use a SiteLinkListSerializer when created in DataModelSerialization here
+	 *
+	 * @param SiteLinkList $siteLinkList the site links to insert in the result
 	 * @param array|string $path where the data is located
-	 * @param array|null $options
+	 * @param bool $addUrl
 	 */
-	public function addSiteLinks( array $siteLinks, $path, $options = null ) {
-		$serializerOptions = $this->getOptions();
-
-		if ( is_array( $options ) ) {
-			if ( in_array( EntitySerializer::SORT_ASC, $options ) ) {
-				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
-			} elseif ( in_array( EntitySerializer::SORT_DESC, $options ) ) {
-				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_DESC );
+	public function addSiteLinkList( SiteLinkList $siteLinkList, $path, $addUrl = false ) {
+		$serializer = $this->serializerFactory->newSiteLinkSerializer();
+		$values = array();
+		foreach ( $siteLinkList->toArray() as $siteLink ) {
+			$value = $serializer->serialize( $siteLink );
+			if ( $addUrl ) {
+				$site = $this->siteStore->getSite( $siteLink->getSiteId() );
+				if ( $site !== null ) {
+					$value['url'] = $site->getPageUrl( $siteLink->getPageName() );
+				}
 			}
-
-			if ( in_array( 'url', $options ) ) {
-				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/urls" );
-			}
-
-			if ( in_array( 'removed', $options ) ) {
-				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/removed" );
-			}
+			$values[$siteLink->getSiteId()] = $value;
 		}
+		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
+	}
 
-		$siteLinkSerializer = $this->libSerializerFactory->newSiteLinkSerializer( $serializerOptions );
-		$values = $siteLinkSerializer->getSerialized( $siteLinks );
-
-		if ( $values !== array() ) {
-			$this->setList( $path, 'sitelinks', $values, 'sitelink' );
+	/**
+	 * Adds fake serialization to show a sitelink has been removed
+	 *
+	 * @since 0.5
+	 *
+	 * @param SiteLinkList $siteLinkList
+	 * @param array|string $path where the data is located
+	 */
+	public function addRemovedSitelinks( SiteLinkList $siteLinkList, $path ) {
+		$values = array();
+		foreach ( $siteLinkList->toArray() as $siteLink ) {
+			$siteId = $siteLink->getSiteId();
+			$values[$siteId] = array(
+				'site' => $siteId,
+				'title' => $siteLink->getPageName(),
+				'removed' => '',
+			);
 		}
+		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
 	}
 
 	/**
