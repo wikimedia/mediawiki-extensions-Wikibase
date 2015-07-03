@@ -89,7 +89,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$mockEntityTitleLookup,
 			$libSerializerFactory,
 			$serializerFactory,
-			new MockSiteStore()
+			new MockSiteStore(),
+			$mockPropertyDataTypeLookup
 		);
 
 		if ( is_array( $options ) ) {
@@ -850,6 +851,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 								'type' => 'string',
 							),
 							'datatype' => 'DtIdFor_P12',
+							'hash' => '9b19cde2d3be5730e55dffc2163b59bea9702727',
 						)
 					),
 				),
