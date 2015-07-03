@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
@@ -33,7 +33,7 @@ use Wikibase\Repo\Store\EntityIdPager;
 class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var SerializerFactory|null
+	 * @var LibSerializerFactory|null
 	 */
 	public $serializerFactory = null;
 
@@ -45,7 +45,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->serializerFactory = new SerializerFactory();
+		$this->serializerFactory = new LibSerializerFactory();
 		$this->serializationOptions = new SerializationOptions();
 	}
 

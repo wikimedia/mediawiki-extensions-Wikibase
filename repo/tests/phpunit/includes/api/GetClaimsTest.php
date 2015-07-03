@@ -18,7 +18,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -172,7 +172,7 @@ class GetClaimsTest extends ApiTestCase {
 			$options->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
 		}
 
-		$serializerFactory = new SerializerFactory( null, $this->getDataTypeLookup() );
+		$serializerFactory = new LibSerializerFactory( null, $this->getDataTypeLookup() );
 		$serializer = $serializerFactory->newSerializerForObject( $claims );
 		$serializer->setOptions( $options );
 		$expected = $serializer->getSerialized( $claims );

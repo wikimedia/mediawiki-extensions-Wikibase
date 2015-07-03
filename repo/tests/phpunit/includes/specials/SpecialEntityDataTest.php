@@ -11,7 +11,7 @@ use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -66,7 +66,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 
-		$serializerFactory = new SerializerFactory(
+		$serializerFactory = new LibSerializerFactory(
 			new SerializationOptions(),
 			$dataTypeLookup,
 			$entityFactory

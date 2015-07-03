@@ -25,7 +25,7 @@ use Wikibase\EntityFactory;
  *
  * @todo: allow this to be obtained from WikibaseRepo resp. WikibaseClient
  */
-class SerializerFactory {
+class LibSerializerFactory {
 
 	/**
 	 * @var EntityFactory|null
