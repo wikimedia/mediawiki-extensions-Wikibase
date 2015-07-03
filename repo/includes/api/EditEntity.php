@@ -540,7 +540,7 @@ class EditEntity extends ModifyEntity {
 		if ( $entity instanceof FingerprintProvider ) {
 			$fingerprint = $entity->getFingerprint();
 
-			$builder->addLabels( $fingerprint->getLabels()->toTextArray(), 'entity' );
+			$builder->addLabels( $fingerprint->getLabels(), 'entity' );
 			$builder->addDescriptions( $fingerprint->getDescriptions()->toTextArray(), 'entity' );
 			$builder->addAliases( $fingerprint->getAliasGroups()->toTextArray(), 'entity' );
 		}
