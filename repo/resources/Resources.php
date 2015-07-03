@@ -201,8 +201,8 @@ return call_user_func( function() {
 
 	return array_merge(
 		$modules,
-		include( __DIR__ . '/experts/resources.php' ),
-		include( __DIR__ . '/formatters/resources.php' ),
-		include( __DIR__ . '/parsers/resources.php' )
+		include __DIR__ . '/experts/resources.php',
+		include __DIR__ . '/formatters/resources.php',
+		include __DIR__ . '/parsers/resources.php'
 	);
 } );

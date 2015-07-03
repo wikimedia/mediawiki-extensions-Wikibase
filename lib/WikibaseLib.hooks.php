@@ -43,7 +43,7 @@ final class LibHooks {
 	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
-			include( __DIR__ . '/tests/qunit/resources.php' )
+			include __DIR__ . '/tests/qunit/resources.php'
 		);
 
 		return true;

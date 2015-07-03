@@ -22,7 +22,7 @@ class TemplateFactory {
 	public static function getDefaultInstance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self(
-				new TemplateRegistry( include( __DIR__ . '/../../resources/templates.php' ) )
+				new TemplateRegistry( include __DIR__ . '/../../resources/templates.php' )
 			);
 		}
 

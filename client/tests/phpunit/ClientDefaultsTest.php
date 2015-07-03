@@ -157,7 +157,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 	public function testDefaults( array $settings, array $wg, $repoIsLocal, $expected ) {
 		$this->setMwGlobals( $wg );
 
-		$defaults = include( WBC_DIR . '/config/WikibaseClient.default.php' );
+		$defaults = include WBC_DIR . '/config/WikibaseClient.default.php';
 
 		$settings = array_merge( $defaults, $settings );
 		$settings = new SettingsArray( $settings );

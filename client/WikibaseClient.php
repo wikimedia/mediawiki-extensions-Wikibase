@@ -56,7 +56,7 @@ define( 'WBC_DIR', __DIR__ );
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for WikibaseClient to work.
 if ( !defined( 'WBL_VERSION' ) ) {
-	include_once( __DIR__ . '/../lib/WikibaseLib.php' );
+	include_once __DIR__ . '/../lib/WikibaseLib.php';
 }
 
 if ( !defined( 'WBL_VERSION' ) ) {
@@ -79,12 +79,10 @@ call_user_func( function() {
 		'descriptionmsg' => 'wikibase-client-desc'
 	);
 
-	$dir = __DIR__ . '/';
-
 	// i18n
 	$wgMessagesDirs['wikibaseclient']                   = __DIR__ . '/i18n';
-	$wgExtensionMessagesFiles['Wikibaseclientalias']	= $dir . 'WikibaseClient.i18n.alias.php';
-	$wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
+	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
+	$wgExtensionMessagesFiles['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
 
 	// Hooks
 	$wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
@@ -152,15 +150,18 @@ call_user_func( function() {
 	$wgSpecialPages['UnconnectedPages']						= 'Wikibase\Client\Specials\SpecialUnconnectedPages';
 
 	// Resource loader modules
-	$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
+	$wgResourceModules = array_merge(
+		$wgResourceModules,
+		include __DIR__ . '/resources/Resources.php'
+	);
 
 	$wgWBClientSettings = array_merge(
-		require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
-		require( __DIR__ . '/config/WikibaseClient.default.php' )
+		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
+		require __DIR__ . '/config/WikibaseClient.default.php'
 	);
 
 	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-		include_once( $dir . 'config/WikibaseClient.experimental.php' );
+		include_once __DIR__ . '/config/WikibaseClient.experimental.php';
 	}
 
 	$wgRecentChangesFlags['wikibase-edit'] = array(
