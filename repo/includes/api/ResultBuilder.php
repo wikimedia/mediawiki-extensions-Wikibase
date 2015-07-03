@@ -10,6 +10,8 @@ use Status;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLinkList;
@@ -67,6 +69,11 @@ class ResultBuilder {
 	private $options;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $dataTypeLookup;
+
+	/**
 	 * @var SerializationModifier
 	 */
 	private $modifier;
@@ -82,6 +89,7 @@ class ResultBuilder {
 	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteStore $siteStore
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param bool $isRawMode when special elements such as '_element' are needed by the formatter.
 	 *
 	 * @throws InvalidArgumentException
@@ -92,6 +100,7 @@ class ResultBuilder {
 		LibSerializerFactory $libSerializerFactory,
 		SerializerFactory $serializerFactory,
 		SiteStore $siteStore,
+		PropertyDataTypeLookup $dataTypeLookup,
 		$isRawMode
 	) {
 		if ( !$result instanceof ApiResult ) {
@@ -105,6 +114,7 @@ class ResultBuilder {
 		$this->missingEntityCounter = -1;
 		$this->isRawMode = $isRawMode;
 		$this->siteStore = $siteStore;
+		$this->dataTypeLookup = $dataTypeLookup;
 		$this->modifier = new SerializationModifier();
 	}
 
@@ -595,13 +605,52 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addReference( Reference $reference ) {
-		$serializer = $this->libSerializerFactory->newReferenceSerializer( $this->getOptions() );
+		$serializer = $this->serializerFactory->newReferenceSerializer();
 
 		//TODO: this is currently only used to add a Reference as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow references
 		//      to be added to a list, using a path and a id key or index.
 
-		$value = $serializer->getSerialized( $reference );
+		$value = $serializer->serialize( $reference );
+
+		$modifier = new SerializationModifier();
+		$dtLookup = $this->dataTypeLookup;
+
+		$value = $modifier->modifyUsingCallback( $value, 'snaks', function ( $x ) use ( $dtLookup ) {
+			foreach ( $x as $propertyIdGroup => &$snakGroup ) {
+				$dataType = $dtLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroup ) );
+				foreach ( $snakGroup as &$snak ) {
+					unset( $snak['hash'] );
+					/**
+					 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
+					 *       but this is not done by the LibSerializers thus not done here.
+					 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
+					 *       might be able to use in some way here
+					 */
+					if ( $snak['snaktype'] === 'value' ) {
+						$snak['datatype'] = $dataType;
+					}
+				}
+			}
+			return $x;
+		} );
+
+		if ( $this->isRawMode ) {
+			$value = $modifier->modifyUsingCallback( $value, 'snaks-order', function ( $x ) {
+				ApiResult::setIndexedTagName( $x, 'property' );
+				return $x;
+			} );
+			$value = $modifier->modifyUsingCallback( $value, 'snaks', function ( $x ) {
+				foreach ( $x as $propertyIdGroup => &$snakGroup ) {
+					$snakGroup['id'] = $propertyIdGroup;
+					ApiResult::setIndexedTagName( $snakGroup, 'snak' );
+				}
+				$x = array_values( $x );
+				ApiResult::setIndexedTagName( $x, 'property' );
+				return $x;
+			} );
+		}
+
 		$this->setValue( null, 'reference', $value );
 	}
 
