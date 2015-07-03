@@ -48,9 +48,13 @@ class SetLabel extends ModifyTerm {
 		$changeOp = $this->getChangeOp( $params );
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
-		$labels = array( $language => ( $entity->getLabel( $language ) !== false ) ? $entity->getLabel( $language ) : "" );
-
-		$this->getResultBuilder()->addLabels( $labels, 'entity' );
+		$resultBuilder = $this->getResultBuilder();
+		if ( $entity->getFingerprint()->hasLabel( $language ) ) {
+			$termList = $entity->getFingerprint()->getLabels()->getWithLanguages( array( $language ) );
+			$resultBuilder->addLabels( $termList, 'entity' );
+		} else {
+			$resultBuilder->addRemovedLabel( $language, 'entity' );
+		}
 
 		return $summary;
 	}

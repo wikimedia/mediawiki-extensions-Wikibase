@@ -48,9 +48,13 @@ class SetDescription extends ModifyTerm {
 		$changeOp = $this->getChangeOp( $params );
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
-		$descriptions = array( $language => ( $entity->getDescription( $language ) !== false ) ? $entity->getDescription( $language ) : "" );
-
-		$this->getResultBuilder()->addDescriptions( $descriptions, 'entity' );
+		$resultBuilder = $this->getResultBuilder();
+		if ( $entity->getFingerprint()->hasDescription( $language ) ) {
+			$termList = $entity->getFingerprint()->getDescriptions()->getWithLanguages( array( $language ) );
+			$resultBuilder->addDescriptions( $termList, 'entity' );
+		} else {
+			$resultBuilder->addRemovedDescription( $language, 'entity' );
+		}
 
 		return $summary;
 	}
