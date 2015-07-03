@@ -18,6 +18,8 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
@@ -551,41 +553,85 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddAliases() {
-		$result = $this->getDefaultResult();
-		$aliases = array( 'en' => array( 'boo', 'hoo' ), 'de' => array( 'ham', 'cheese' ) );
-		$path = array( 'entities', 'Q1' );
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'aliases' => array(
-						'en' => array(
-							array(
-								'language' => 'en',
-								'value' => 'boo',
-							),
-							array(
-								'language' => 'en',
-								'value' => 'hoo',
+	public function provideAddAliasGroupList() {
+		return array(
+			array(
+				false,
+				array(
+					'entities' => array(
+						'Q1' => array(
+							'aliases' => array(
+								'en' => array(
+									array(
+										'language' => 'en',
+										'value' => 'boo',
+									),
+									array(
+										'language' => 'en',
+										'value' => 'hoo',
+									),
+								),
+								'de' => array(
+									array(
+										'language' => 'de',
+										'value' => 'ham',
+									),
+									array(
+										'language' => 'de',
+										'value' => 'cheese',
+									),
+								),
 							),
 						),
-						'de' => array(
-							array(
-								'language' => 'de',
-								'value' => 'ham',
-							),
-							array(
-								'language' => 'de',
-								'value' => 'cheese',
+					),
+				),
+			),
+			array(
+				true,
+				array(
+					'entities' => array(
+						'Q1' => array(
+							'aliases' => array(
+								array(
+									'language' => 'en',
+									'value' => 'boo',
+								),
+								array(
+									'language' => 'en',
+									'value' => 'hoo',
+								),
+								array(
+									'language' => 'de',
+									'value' => 'ham',
+								),
+								array(
+									'language' => 'de',
+									'value' => 'cheese',
+								),
+								'_element' => 'alias',
 							),
 						),
 					),
 				),
 			),
 		);
+	}
 
-		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addAliases( $aliases, $path );
+	/**
+	 * @dataProvider provideAddAliasGroupList
+	 */
+	public function testAddAliasGroupList( $rawMode, $expected ) {
+		$result = $this->getDefaultResult();
+		$aliasGroupList = new AliasGroupList(
+			array(
+				new AliasGroup( 'en', array( 'boo', 'hoo' ) ),
+				new AliasGroup( 'de', array( 'ham', 'cheese' ) ),
+			)
+		);
+		$path = array( 'entities', 'Q1' );
+
+		$resultBuilder = $this->getResultBuilder( $result, null, $rawMode );
+		$resultBuilder->addAliasGroupList( $aliasGroupList, $path );
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );

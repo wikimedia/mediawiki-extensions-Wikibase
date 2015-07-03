@@ -113,9 +113,10 @@ class SetAliases extends ModifyEntity {
 			$summary->addAutoSummaryArgs( $entity->getAliases( $language ) );
 		}
 
-		$aliases = $entity->getAliases( $language );
-		if ( count( $aliases ) ) {
-			$this->getResultBuilder()->addAliases( array( $language => $aliases ), 'entity' );
+		$fingerprint = $entity->getFingerprint();
+		if ( $fingerprint->hasAliasGroup( $language ) ) {
+			$aliasGroupList = $fingerprint->getAliasGroups()->getWithLanguages( array( $language ) );
+			$this->getResultBuilder()->addAliasGroupList( $aliasGroupList, 'entity' );
 		}
 
 		return $summary;
