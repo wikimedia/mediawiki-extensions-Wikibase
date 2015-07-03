@@ -112,6 +112,7 @@ Other methods an `Expert` needs to provide:
 * Removed `jQuery.valueview.disable`, `jQuery.valueview.enable` and `jQuery.valueview.isDisabled`. These function were used to mock native `jQuery.Widget` functionality while adding a full `draw` cycle on top. `jQuery.valueview.draw` does not consider the state anymore.
 
 #### Enhancements
+* Added `jquery.valueview.experts.QuantityInput` expert
 * Refined `jQuery.ui.listrotator` style to have a more obvious active state.
 
 ### 0.14.5 (2015-06-11)
