@@ -101,7 +101,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getSiteStore()->getSites(),
 			$entityDataFormatProvider,
-			$serializerFactory
+			$serializerFactory,
+			$wikibaseRepo->getSiteStore()
 		);
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataSquidMaxage' );

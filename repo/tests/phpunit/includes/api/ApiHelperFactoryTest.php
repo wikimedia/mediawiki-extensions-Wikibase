@@ -5,6 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 use Language;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Repo\Api\ApiHelperFactory
@@ -34,6 +35,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 			$exceptionLocalizer,
 			$dataTypeLookup,
 			$entityFactory,
+			new MockSiteStore(),
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$editEntityFactory

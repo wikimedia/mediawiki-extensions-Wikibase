@@ -573,7 +573,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( $entity instanceof Item ) {
-			$builder->addSiteLinks( $entity->getSiteLinkList()->toArray(), 'entity' );
+			$builder->addSiteLinkList( $entity->getSiteLinkList(), 'entity' );
 		}
 
 		$builder->addClaims( $entity->getClaims(), 'entity' );
