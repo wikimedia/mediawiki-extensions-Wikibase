@@ -13,6 +13,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -22,6 +23,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
+use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Repo\Api\ResultBuilder
@@ -79,6 +81,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$mockEntityTitleLookup,
 			$libSerializerFactory,
 			$serializerFactory,
+			new MockSiteStore(),
 			$indexedMode
 		);
 
@@ -588,12 +591,126 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddSiteLinks() {
+	public function provideAddSiteLinkList() {
+		return array(
+			array(
+				false,
+				array(
+					'entities' => array(
+						'Q1' => array(
+							'sitelinks' => array(
+								'enwiki' => array(
+									'site' => 'enwiki',
+									'title' => 'User:Addshore',
+									'badges' => array(),
+								),
+								'dewikivoyage' => array(
+									'site' => 'dewikivoyage',
+									'title' => 'Berlin',
+									'badges' => array(),
+								),
+							),
+						),
+					),
+				),
+			),
+			array(
+				true,
+				array(
+					'entities' => array(
+						'Q1' => array(
+							'sitelinks' => array(
+								array(
+									'site' => 'enwiki',
+									'title' => 'User:Addshore',
+									'badges' => array( '_element' => 'badge' ),
+								),
+								array(
+									'site' => 'dewikivoyage',
+									'title' => 'Berlin',
+									'badges' => array( '_element' => 'badge' ),
+								),
+								'_element' => 'sitelink',
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideAddSiteLinkList
+	 */
+	public function testAddSiteLinkList( $isRawMode, $expected ) {
 		$result = $this->getDefaultResult();
-		$siteLinks = array(
+		$siteLinkList = new SiteLinkList(
+			array(
+				new SiteLink( 'enwiki', 'User:Addshore' ),
+				new SiteLink( 'dewikivoyage', 'Berlin' ),
+			)
+		);
+		$path = array( 'entities', 'Q1' );
+
+		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
+		$resultBuilder->addSiteLinkList( $siteLinkList, $path );
+
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
+		$this->assertEquals( $expected, $data );
+	}
+
+	public function testAddRemovedSiteLinks() {
+		$result = $this->getDefaultResult();
+		$siteLinkList = new SiteLinkList( array(
 			new SiteLink( 'enwiki', 'User:Addshore' ),
 			new SiteLink( 'dewikivoyage', 'Berlin' ),
+		) );
+		$path = array( 'entities', 'Q1' );
+		$expected = array(
+			'entities' => array(
+				'Q1' => array(
+					'sitelinks' => array(
+						'enwiki' => array(
+							'site' => 'enwiki',
+							'title' => 'User:Addshore',
+							'removed' => '',
+							'badges' => array(),
+						),
+						'dewikivoyage' => array(
+							'site' => 'dewikivoyage',
+							'title' => 'Berlin',
+							'removed' => '',
+							'badges' => array(),
+						),
+					),
+				),
+			),
 		);
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addRemovedSiteLinks( $siteLinkList, $path );
+
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		$this->assertEquals( $expected, $data );
+	}
+
+	public function testAddAndRemoveSiteLinks() {
+		$result = $this->getDefaultResult();
+		$siteLinkListAdd = new SiteLinkList(
+			array(
+				new SiteLink( 'enwiki', 'User:Addshore' ),
+				new SiteLink( 'dewikivoyage', 'Berlin' ),
+			)
+		);
+		$siteLinkListRemove = new SiteLinkList( array(
+			new SiteLink( 'ptwiki', 'Port' ),
+			new SiteLink( 'dewiki', 'Gin' ),
+		) );
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
 			'entities' => array(
@@ -609,13 +726,26 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'title' => 'Berlin',
 							'badges' => array(),
 						),
+						'ptwiki' => array(
+							'site' => 'ptwiki',
+							'title' => 'Port',
+							'removed' => '',
+							'badges' => array(),
+						),
+						'dewiki' => array(
+							'site' => 'dewiki',
+							'title' => 'Gin',
+							'removed' => '',
+							'badges' => array(),
+						),
 					),
 				),
 			),
 		);
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addSiteLinks( $siteLinks, $path );
+		$resultBuilder->addSiteLinkList( $siteLinkListAdd, $path );
+		$resultBuilder->addRemovedSiteLinks( $siteLinkListRemove, $path );
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
