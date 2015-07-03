@@ -257,7 +257,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			array( 'claims' => array( 'P1' => array( $statement ) ) ),
 			array(),
 			array(),
-			array( 'claims' => array( 'P1' => array ( $statementWithoutId ) ) ),
+			array( 'claims' => array( 'P1' => array( $statementWithoutId ) ) ),
 		);
 
 		return $testCases;

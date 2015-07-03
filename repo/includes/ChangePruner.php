@@ -89,7 +89,7 @@ class ChangePruner {
 		if ( !$this->ignoreDispatch ) {
 			$dbr = wfGetDB( DB_SLAVE );
 			$row = $dbr->selectRow(
-				array ( 'wb_changes_dispatch', 'wb_changes' ),
+				array( 'wb_changes_dispatch', 'wb_changes' ),
 				'min(change_time) as timestamp',
 				array(
 					'chd_disabled' => 0,

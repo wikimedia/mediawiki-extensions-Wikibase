@@ -60,7 +60,7 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'-{zh:mooooo;zh-hans:mooooo;zh-hant:mooooo;zh-cn:mooooo;zh-hk:mooooo;}-',
 				$itemId,
-				array ( 'zh', 'zh-hans', 'zh-hant', 'zh-cn', 'zh-hk' ),
+				array( 'zh', 'zh-hans', 'zh-hant', 'zh-cn', 'zh-hk' ),
 				'cat'
 			),
 			// Don't create "-{}-" for empty input,
