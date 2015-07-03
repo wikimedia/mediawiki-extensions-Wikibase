@@ -9,6 +9,7 @@ use SiteList;
 use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
@@ -85,7 +86,7 @@ class LinkTitles extends ApiWikibase {
 		$fromId = $siteLinkStore->getItemIdForLink( $fromSite->getGlobalId(), $fromPage );
 		$toId = $siteLinkStore->getItemIdForLink( $toSite->getGlobalId(), $toPage );
 
-		$return = array();
+		$returnSiteLinksList = new SiteLinkList();
 		$flags = 0;
 		$item = null;
 
@@ -102,10 +103,10 @@ class LinkTitles extends ApiWikibase {
 			$item = new Item();
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$item->addSiteLink( $toLink );
-			$return[] = $toLink;
+			$returnSiteLinksList->addSiteLink( $toLink );
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$item->addSiteLink( $fromLink );
-			$return[] = $fromLink;
+			$returnSiteLinksList->addSiteLink( $fromLink );
 
 			$flags |= EDIT_NEW;
 			$summary->setAction( 'create' );
@@ -117,7 +118,7 @@ class LinkTitles extends ApiWikibase {
 			$item = $itemRev->getEntity();
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$item->addSiteLink( $fromLink );
-			$return[] = $fromLink;
+			$returnSiteLinksList->addSiteLink( $fromLink );
 			$summary->setAction( 'connect' );
 		}
 		elseif ( $fromId !== null && $toId === null ) {
@@ -127,7 +128,7 @@ class LinkTitles extends ApiWikibase {
 			$item = $itemRev->getEntity();
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$item->addSiteLink( $toLink );
-			$return[] = $toLink;
+			$returnSiteLinksList->addSiteLink( $toLink );
 			$summary->setAction( 'connect' );
 		}
 		// we can be sure that $fromId and $toId are not null here
@@ -140,7 +141,7 @@ class LinkTitles extends ApiWikibase {
 			$this->dieError( 'No common item detected, unable to link titles', 'no-common-item' );
 		}
 
-		$this->getResultBuilder()->addSiteLinks( $return, 'entity' );
+		$this->getResultBuilder()->addSiteLinkList( $returnSiteLinksList, 'entity' );
 		$status = $this->getAttemptSaveStatus( $item, $summary, $flags );
 		$this->buildResult( $item, $status );
 	}
