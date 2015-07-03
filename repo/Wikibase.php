@@ -52,6 +52,7 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) { // Needs to be 1
  * @deprecated since 0.5 This is a global registry that provides no control over object lifecycle
  */
 $GLOBALS['wgValueParsers'] = array();
+$GLOBALS['wgValueValidators'] = array();
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
