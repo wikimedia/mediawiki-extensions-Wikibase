@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\EditEntity;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
@@ -77,11 +76,6 @@ abstract class ApiWikibase extends ApiBase {
 	private $entityStore;
 
 	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $dataTypeLookup;
-
-	/**
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
@@ -114,7 +108,6 @@ abstract class ApiWikibase extends ApiBase {
 		$this->entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( $uncached );
 		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$this->dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 
 		$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
