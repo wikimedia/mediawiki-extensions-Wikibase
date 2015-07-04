@@ -72,7 +72,8 @@ class RemoveReferences extends ModifyClaim {
 			$this->dieException( $e, 'failed-save' );
 		}
 
-		$this->saveChanges( $entity, $summary );
+		$status = $this->saveChanges( $entity, $summary );
+		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->getResultBuilder()->markSuccess();
 	}
 
