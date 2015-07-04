@@ -353,10 +353,6 @@ abstract class ModifyEntity extends ApiWikibase {
 			$this->dieError( 'Attempted modification of the item failed', 'failed-modify' );
 		}
 
-		if ( $summary === true ) { // B/C, for implementations of modifyEntity that return true on success.
-			$summary = new Summary( $this->getModuleName() );
-		}
-
 		$this->addFlags( $entity->getId() === null );
 
 		//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
