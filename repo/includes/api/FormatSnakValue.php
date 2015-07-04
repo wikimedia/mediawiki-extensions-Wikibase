@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use DataValues\DataValue;
 use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
@@ -23,39 +24,52 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
-class FormatSnakValue extends ApiWikibase {
+class FormatSnakValue extends ApiBase {
 
 	/**
-	 * @var null|OutputFormatValueFormatterFactory
+	 * @var OutputFormatValueFormatterFactory
 	 */
-	private $formatterFactory = null;
+	private $valueFormatterFactory;
 
 	/**
-	 * @var null|DataValueFactory
+	 * @var DataValueFactory
 	 */
-	private $valueFactory = null;
+	private $dataValueFactory;
 
 	/**
-	 * @return OutputFormatValueFormatterFactory
+	 * @var ApiErrorReporter
 	 */
-	private function getFormatterFactory() {
-		if ( $this->formatterFactory === null ) {
-			$this->formatterFactory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
-		}
+	private $errorReporter;
 
-		return $this->formatterFactory;
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$apiHelperFactory = WikibaseRepo::getDefaultInstance()->getApiHelperFactory();
+
+		$this->setServices(
+			WikibaseRepo::getDefaultInstance()->getValueFormatterFactory(),
+			WikibaseRepo::getDefaultInstance()->getDataValueFactory(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
 	}
 
-	/**
-	 * @return DataValueFactory
-	 */
-	private function getValueFactory() {
-		if ( $this->valueFactory === null ) {
-			$this->valueFactory = WikibaseRepo::getDefaultInstance()->getDataValueFactory();
-		}
-
-		return $this->valueFactory;
+	public function setServices(
+		OutputFormatValueFormatterFactory $valueFormatterFactory,
+		DataValueFactory $dataValueFactory,
+		ApiErrorReporter $apiErrorReporter
+	) {
+		$this->valueFormatterFactory = $valueFormatterFactory;
+		$this->dataValueFactory = $dataValueFactory;
+		$this->errorReporter = $apiErrorReporter;
 	}
 
 	/**
@@ -94,11 +108,14 @@ class FormatSnakValue extends ApiWikibase {
 		$params = $this->extractRequestParams();
 
 		$options = $this->getOptionsObject( $params['options'] );
-		$formatter = $this->getFormatterFactory()->getValueFormatter( $params['generate'], $options );
+		$formatter = $this->valueFormatterFactory->getValueFormatter( $params['generate'], $options );
 
-		// Paranoid check, should never fail since we only accept well known values for the 'generate' parameter
+		// Paranoid check:
+		// should never fail since we only accept well known values for the 'generate' parameter
 		if ( $formatter === null ) {
-			throw new LogicException( 'Could not obtain a ValueFormatter instance for ' . $params['generate'] );
+			throw new LogicException(
+				'Could not obtain a ValueFormatter instance for ' . $params['generate']
+			);
 		}
 
 		return $formatter;
@@ -115,17 +132,17 @@ class FormatSnakValue extends ApiWikibase {
 		$data = json_decode( $json, true );
 
 		if ( !is_array( $data ) ) {
-			$this->dieError( 'Failed to decode datavalue', 'baddatavalue' );
+			$this->errorReporter->dieError( 'Failed to decode datavalue', 'baddatavalue' );
 		}
 
 		try {
-			$value = $this->getValueFactory()->newFromArray( $data );
+			$value = $this->dataValueFactory->newFromArray( $data );
 			return $value;
 		} catch ( IllegalValueException $ex ) {
-			$this->dieException( $ex, 'baddatavalue' );
+			$this->errorReporter->dieException( $ex, 'baddatavalue' );
 		}
 
-		throw new LogicException( 'ApiBase::dieUsage did not throw a UsageException' );
+		throw new LogicException( 'ApiErrorReporter::dieUsage did not throw a UsageException' );
 	}
 
 	/**
