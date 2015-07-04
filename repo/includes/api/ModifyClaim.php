@@ -45,11 +45,14 @@ abstract class ModifyClaim extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+
 		$this->modificationHelper = new StatementModificationHelper(
-			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
-			$this->getErrorReporter()
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getClaimGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
 		);
 
 		$this->guidParser = WikibaseRepo::getDefaultInstance()->getStatementGuidParser();
