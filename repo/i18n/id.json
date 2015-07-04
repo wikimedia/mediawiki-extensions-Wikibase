@@ -7,7 +7,8 @@
 			"පසිඳු කාවින්ද",
 			"아라",
 			"Ahdan",
-			"Macofe"
+			"Macofe",
+			"Kenrick95"
 		]
 	},
 	"wikibase-desc": "Penyimpanan data berstruktur",
@@ -22,9 +23,9 @@
 	"wikibase-addreference": "tambah sumber",
 	"wikibase-save-inprogress": "Menyimpan...",
 	"wikibase-remove-inprogress": "Menghapus...",
-	"wikibase-label-empty": "Belum ada label",
+	"wikibase-label-empty": "Tidak ada label",
 	"wikibase-label-edit-placeholder": "masukkan label",
-	"wikibase-description-empty": "Belum ada deskripsi",
+	"wikibase-description-empty": "Tidak ada deskripsi",
 	"wikibase-description-edit-placeholder": "masukkan deskripsi",
 	"wikibase-diffview-reference": "referensi",
 	"wikibase-diffview-rank": "peringkat",
@@ -40,6 +41,7 @@
 	"wikibase-description-input-help-message": "Masukkan deskripsi dalam $1.",
 	"wikibase-statements": "Pernyataan",
 	"wikibase-terms": "Dalam bahasa lain",
+	"wikibase-sitelinks": "Daftar halaman yang tertaut ke item ini",
 	"wikibase-sitelinks-empty": "Belum ada interwiki untuk item ini.",
 	"wikibase-sitelinks-input-help-message": "Buat interwiki ke halaman yang terkait dengan item ini.",
 	"wikibase-sitelinks-special": "Situs lain",

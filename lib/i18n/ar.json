@@ -42,6 +42,7 @@
 	"wikibase-globedetails-longitude": "خطّ الطول",
 	"wikibase-globedetails-latitude": "خطّ العرض",
 	"wikibase-globedetails-precision": "الدقة",
+	"wikibase-globedetails-globe": "كرة أرضية",
 	"wikibase-parse-error": "قيمة سيئة التشكيل.",
 	"wikibase-parse-error-coordinate": "قيمة الإحداثية سيئة التشكيل.",
 	"wikibase-parse-error-entity-id": "معرف الكائن سيء التشكيل.",

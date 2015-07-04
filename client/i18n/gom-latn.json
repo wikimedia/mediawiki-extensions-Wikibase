@@ -7,12 +7,12 @@
 	"tooltip-t-wikibase": "Mahiti bhandarant zodleleo kamacheo vostu",
 	"wikibase-comment-update": "{{WBREPONAME}} vost bodolla",
 	"wikibase-dataitem": "{{WBREPONAME}} vost",
-	"wikibase-editlinks": "Zodpam bodol",
-	"wikibase-editlinkstitle": "Aantarbhasik zoddpam bodol",
+	"wikibase-editlinks": "Zoddnio bodol",
+	"wikibase-editlinkstitle": "Aantarbhasik zoddnio bodol",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Lipoi",
 	"wikibase-rc-hide-wikidata-show": "Dakhoi",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} bodlop",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} bodol",
 	"wikibase-otherprojects": "Her prokolpam"
 }

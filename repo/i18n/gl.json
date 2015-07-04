@@ -133,6 +133,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Código da lingua:",
 	"wikibase-itemdisambiguation-lookup-label": "Etiqueta:",
 	"wikibase-itemdisambiguation-submit": "Procurar",
+	"wikibase-itemdisambiguation-form-hints": "Decátese de que o resultado está limitado a $1 resultados.",
 	"wikibase-itemdisambiguation-nothing-found": "Sentímolo, non se atopou elemento ningún con esa etiqueta.",
 	"wikibase-itemdisambiguation-search": "Pode [$1 buscar o elemento].",
 	"wikibase-itemdisambiguation-create": "Pode [$1 crear o elemento].",

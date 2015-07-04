@@ -14,7 +14,8 @@
 			"Wizardist",
 			"Alan ffm",
 			"Darellur",
-			"Devwebtel"
+			"Devwebtel",
+			"PiotrAntosz"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -135,6 +136,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Kod języka:",
 	"wikibase-itemdisambiguation-lookup-label": "Etykieta:",
 	"wikibase-itemdisambiguation-submit": "Szukaj",
+	"wikibase-itemdisambiguation-form-hints": "Uwaga, nie zostanie pokazane więcej niż $1 {{PLURAL:$1|result|results}} wyników.",
 	"wikibase-itemdisambiguation-nothing-found": "Niestety, nie znaleziono żadnego elementu z tą etykietą.",
 	"wikibase-itemdisambiguation-search": "Możesz [$1 wyszukać element].",
 	"wikibase-itemdisambiguation-create": "Możesz [$1 utworzyć taki element].",

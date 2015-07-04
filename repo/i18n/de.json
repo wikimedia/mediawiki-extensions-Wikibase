@@ -147,7 +147,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Sprachcode:",
 	"wikibase-itemdisambiguation-lookup-label": "Bezeichnung:",
 	"wikibase-itemdisambiguation-submit": "Suchen",
-	"wikibase-itemdisambiguation-form-hints": "Beachte, dass das Ergebnis auf $1 Einträge beschränkt ist.",
+	"wikibase-itemdisambiguation-form-hints": "Beachte, dass nicht mehr als {{PLURAL:$1|ein Ergebnis angezeigt wird|$1 Ergebnisse angezeigt werden}}.",
 	"wikibase-itemdisambiguation-nothing-found": "Es wurde leider kein Datenobjekt mit dieser Bezeichnung gefunden.",
 	"wikibase-itemdisambiguation-search": "Du kannst [$1 nach dem Datenobjekt suchen].",
 	"wikibase-itemdisambiguation-create": "Du kannst auch [$1 ein Datenobjekt erstellen].",

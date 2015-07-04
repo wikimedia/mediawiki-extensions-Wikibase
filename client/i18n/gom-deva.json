@@ -4,7 +4,8 @@
 			"Darshan kandolkar",
 			"Santhosh.thottingal",
 			"Konknni mogi 24",
-			"Supriya kankumbikar"
+			"Supriya kankumbikar",
+			"The Discoverer"
 		]
 	},
 	"tooltip-t-wikibase": "म्हायती भांडारांत जोडिल्ल्या कलमाचो नग",
@@ -12,10 +13,10 @@
 	"wikibase-dataitem": "{{WBREPONAME}}नग",
 	"wikibase-editlinks": "दुवो संस्करण",
 	"wikibase-editlinkstitle": "आंतरभाशीक दुवो संस्करण",
-	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "लिपयात",
 	"wikibase-rc-hide-wikidata-show": "दाखयात",
-	"wikibase-rc-wikibase-edit-letter": "ड",
+	"wikibase-rc-wikibase-edit-letter": "डे",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संस्करण",
 	"wikibase-otherprojects": "हेर प्रकल्प"
 }

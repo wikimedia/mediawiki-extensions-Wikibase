@@ -102,6 +102,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Sproochcode:",
 	"wikibase-itemdisambiguation-lookup-label": "Etikett:",
 	"wikibase-itemdisambiguation-submit": "Sichen",
+	"wikibase-itemdisambiguation-form-hints": "Denkt drun datt net méi wéi {{PLURAL:$1|ee Resultat|$1 Resultater}} gewise ginn.",
 	"wikibase-itemdisambiguation-nothing-found": "Pardon, en Element mat där Etikett gouf net fonnt.",
 	"wikibase-itemdisambiguation-search": "Dir kënnt nom Element [{{fullurl:Special:Search|$1 sichen}}].",
 	"wikibase-itemdisambiguation-create": "Dir kënnt [$1 d'Element uleeën].",
