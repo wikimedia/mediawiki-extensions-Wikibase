@@ -67,7 +67,7 @@ abstract class ModifyClaim extends ApiWikibase {
 		return $this->attemptSaveEntity(
 			$entity,
 			$summary,
-			$this->getFlags()
+			EDIT_UPDATE
 		);
 	}
 
@@ -76,20 +76,6 @@ abstract class ModifyClaim extends ApiWikibase {
 	 */
 	public function isWriteMode() {
 		return true;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @return integer
-	 */
-	protected function getFlags() {
-		$flags = EDIT_UPDATE;
-
-		$params = $this->extractRequestParams();
-		$flags |= ( $this->getUser()->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-
-		return $flags;
 	}
 
 	/**
