@@ -38,7 +38,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 		$updates = $this->getUpdates();
 
-		foreach( $updates as $update ) {
+		foreach ( $updates as $update ) {
 			$changes[] = array(
 				$update[0],
 				ItemChange::UPDATE,

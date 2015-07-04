@@ -418,7 +418,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$ids = array();
 		$missingIds = array();
 
-		for ( $i = 1; $i<=100; $i++) {
+		for ( $i = 1; $i <= 100; $i++ ) {
 			$id = new ItemId( "Q$i" );
 			$ids[] = $id;
 
@@ -448,7 +448,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function testProgressReporter() {
 		$ids = array();
 
-		for ( $i = 1; $i<=100; $i++) {
+		for ( $i = 1; $i <= 100; $i++ ) {
 			$id = new ItemId( "Q$i" );
 			$ids[] = $id;
 		}
@@ -512,7 +512,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function testRedirectsNotIncluded() {
 		$ids = array();
 
-		for ( $i = 1; $i<=10; $i++) {
+		for ( $i = 1; $i <= 10; $i++ ) {
 			$id = new ItemId( "Q$i" );
 			$ids[] = $id;
 		}

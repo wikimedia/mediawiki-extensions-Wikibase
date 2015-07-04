@@ -18,17 +18,17 @@ class XmlRdfWriter extends RdfWriterBase {
 		// Also due to PHP 5.3 scope issues, used functions need to be public.
 		// TODO: seek better solution (or move to PHP 5.4+)
 		$self = $this;
-		$this->transitionTable[self::STATE_START][self::STATE_DOCUMENT] = function() use($self) {
+		$this->transitionTable[self::STATE_START][self::STATE_DOCUMENT] = function() use ( $self ) {
 			$self->beginDocument();
 		};
-		array($this, 'beginDocument');
-		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_FINISH] = function() use($self) {
+		array( $this, 'beginDocument' );
+		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_FINISH] = function() use ( $self ) {
 			$self->finishDocument();
 		};
-		$this->transitionTable[self::STATE_OBJECT][self::STATE_DOCUMENT] = function() use($self) {
+		$this->transitionTable[self::STATE_OBJECT][self::STATE_DOCUMENT] = function() use ( $self ) {
 			$self->finishSubject();
 		};
-		$this->transitionTable[self::STATE_OBJECT][self::STATE_SUBJECT] = function() use($self) {
+		$this->transitionTable[self::STATE_OBJECT][self::STATE_SUBJECT] = function() use ( $self ) {
 			$self->finishSubject();
 		};
 	}

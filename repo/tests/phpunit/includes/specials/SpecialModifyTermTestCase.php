@@ -77,7 +77,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		// execute with no subpage value
 		list( $output, ) = $this->executeSpecialPage( '', null, 'en' );
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
 		}
 
@@ -101,7 +101,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 				'value' => 'remove',
 			) );
 
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
 		}
 
@@ -110,7 +110,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$matchers['language']['attributes']['value'] = 'de';
 		$matchers['value']['attributes']['value'] = 'foo';
 
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
 		}
 	}

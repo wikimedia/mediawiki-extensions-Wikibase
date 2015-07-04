@@ -166,7 +166,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			$this->assertEquals( $expected, $response->getheader( 'Location' ), 'Redirect' );
 		}
 
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
 	}

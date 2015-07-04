@@ -106,7 +106,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		foreach( $labels as $label ) {
+		foreach ( $labels as $label ) {
 			$item = new Item();
 			$item->setLabel( 'en', $prefix . $label );
 			$rev = $store->saveEntity( $item, "added an item", $user, EDIT_NEW );
@@ -157,7 +157,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 			)
 		);
 
-		foreach( $pageRow as $row ) {
+		foreach ( $pageRow as $row ) {
 			return (int)$row->page_id;
 		}
 
@@ -250,7 +250,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	private function assertRows( $expectedRows ) {
 		$dbw = wfGetDB( DB_MASTER );
 
-		foreach( $expectedRows as $expectedRow ) {
+		foreach ( $expectedRows as $expectedRow ) {
 			$pageId = (int)$expectedRow['epp_page_id'];
 
 			$resRowObject = $dbw->selectRow(

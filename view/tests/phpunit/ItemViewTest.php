@@ -45,7 +45,7 @@ class ItemViewTest extends EntityViewTest {
 	 * @return EntityId
 	 */
 	protected function makeEntityId( $n ) {
-		return new ItemId( "Q$n");
+		return new ItemId( "Q$n" );
 	}
 
 	public function provideTestGetHtml() {

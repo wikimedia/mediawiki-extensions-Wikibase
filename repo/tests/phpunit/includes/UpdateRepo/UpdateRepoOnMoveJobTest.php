@@ -84,7 +84,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		return $summaryFormatter;
 	}
 
-	private function getMockEditFitlerHookRunner () {
+	private function getMockEditFitlerHookRunner() {
 		$runner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()

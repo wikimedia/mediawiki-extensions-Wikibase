@@ -275,7 +275,7 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 	 * @param int $expected
 	 */
 	public function testGetClientCount( $expected ) {
-		$stats = $this->getDispatchStats( );
+		$stats = $this->getDispatchStats();
 
 		$this->assertEquals( $expected, $stats->getClientCount() );
 	}

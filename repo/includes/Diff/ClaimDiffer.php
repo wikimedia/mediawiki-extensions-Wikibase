@@ -105,7 +105,7 @@ class ClaimDiffer {
 		$oldRank = $oldStatement === null ? null : $oldStatement->getRank();
 		$newRank = $newStatement === null ? null : $newStatement->getRank();
 
-		if( $oldRank !== $newRank ) {
+		if ( $oldRank !== $newRank ) {
 			return new DiffOpChange( $oldRank, $newRank );
 		}
 

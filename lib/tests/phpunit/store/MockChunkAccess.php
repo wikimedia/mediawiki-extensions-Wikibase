@@ -62,7 +62,7 @@ class MockChunkAccess implements ChunkAccess {
 
 			$chunk[] = $rec;
 			$c++;
-		} while( next( $this->data ) );
+		} while ( next( $this->data ) );
 
 		return $chunk;
 	}

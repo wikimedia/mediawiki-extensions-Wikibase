@@ -71,10 +71,11 @@ class EditEntityActionTest extends ActionTestCase {
 			return;
 		}
 
-		for ( $i = abs($ofs); $i > 0; $i -= 1 ) {
+		for ( $i = abs( $ofs ); $i > 0; $i -= 1 ) {
 			$rev = $rev->getPrevious();
 			if ( !$rev ) {
-				throw new MWException( "Page " . $page->getTitle()->getPrefixedDBkey() . " does not have " . ( abs($ofs) +1 ) . " revisions" );
+				throw new MWException( 'Page ' . $page->getTitle()->getPrefixedDBkey()
+					. ' does not have ' . ( abs( $ofs ) + 1 ) . ' revisions' );
 			}
 		}
 
