@@ -3,14 +3,19 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use ApiResult;
 use DataValues\DataValue;
+use Exception;
 use LogicException;
 use OutOfBoundsException;
+use Status;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
+use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\ValueParserFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for using value parsers.
@@ -20,23 +25,50 @@ use Wikibase\Repo\ValueParserFactory;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
-class ParseValue extends ApiWikibase {
+class ParseValue extends ApiBase {
 
 	/**
-	 * @var null|ValueParserFactory
+	 * @var ValueParserFactory
 	 */
-	private $factory = null;
+	private $valueParserFactory;
 
 	/**
-	 * @return ValueParserFactory
+	 * @var ExceptionLocalizer
 	 */
-	private function getFactory() {
-		if ( $this->factory === null ) {
-			$this->factory = new ValueParserFactory( $GLOBALS['wgValueParsers'] );
-		}
+	private $exceptionLocalizer;
 
-		return $this->factory;
+	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->setServices(
+			new ValueParserFactory( $GLOBALS['wgValueParsers'] ),
+			WikibaseRepo::getDefaultInstance()->getExceptionLocalizer(),
+			WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getErrorReporter( $this )
+		);
+	}
+
+	public function setServices(
+		ValueParserFactory $valueParserFactory,
+		ExceptionLocalizer $exceptionLocalizer,
+		ApiErrorReporter $errorReporter
+	) {
+		$this->valueParserFactory = $valueParserFactory;
+		$this->exceptionLocalizer = $exceptionLocalizer;
+		$this->errorReporter = $errorReporter;
 	}
 
 	/**
@@ -68,7 +100,7 @@ class ParseValue extends ApiWikibase {
 		$options = $this->getOptionsObject( $params['options'] );
 
 		try {
-			$parser = $this->getFactory()->newParser( $params['parser'], $options );
+			$parser = $this->valueParserFactory->newParser( $params['parser'], $options );
 		} catch ( OutOfBoundsException $ex ) {
 			throw new LogicException( 'Could not obtain a ValueParser instance' );
 		}
@@ -113,7 +145,7 @@ class ParseValue extends ApiWikibase {
 		$result['expected-format'] = $parseError->getExpectedFormat();
 
 		$status = $this->getExceptionStatus( $parseError );
-		$this->getErrorReporter()->addStatusToResult( $status, $result );
+		$this->errorReporter->addStatusToResult( $status, $result );
 	}
 
 	private function outputResults( array $results ) {
@@ -139,7 +171,7 @@ class ParseValue extends ApiWikibase {
 			$options = json_decode( $optionsParam, true );
 
 			if ( !is_array( $options ) ) {
-				$this->dieError( 'Malformed options parameter', 'malformed-options' );
+				$this->errorReporter->dieError( 'Malformed options parameter', 'malformed-options' );
 			}
 
 			foreach ( $options as $name => $value ) {
@@ -151,12 +183,31 @@ class ParseValue extends ApiWikibase {
 	}
 
 	/**
+	 * Returns a Status object representing the given exception using a localized message.
+	 *
+	 * @note: The returned Status will always be fatal, that is, $status->isOk() will return false.
+	 *
+	 * @see getExceptionMessage().
+	 *
+	 * @param Exception $error
+	 *
+	 * @return Status
+	 */
+	protected function getExceptionStatus( Exception $error ) {
+		$msg = $this->exceptionLocalizer->getExceptionMessage( $error );
+		$status = Status::newFatal( $msg );
+		$status->setResult( false, $error->getMessage() );
+
+		return $status;
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 */
-	protected function getAllowedParams() {
+	public function getAllowedParams() {
 		return array(
 			'parser' => array(
-				ApiBase::PARAM_TYPE => $this->getFactory()->getParserIds(),
+				ApiBase::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'values' => array(
@@ -176,8 +227,10 @@ class ParseValue extends ApiWikibase {
 	 */
 	protected function getExamplesMessages() {
 		return array(
-			'action=wbparsevalue&parser=null&values=foo|bar' => 'apihelp-wbparsevalue-example-1',
-			'action=wbparsevalue&parser=time&values=1994-02-08&options={"precision":9}' => 'apihelp-wbparsevalue-example-2',
+			'action=wbparsevalue&parser=null&values=foo|bar' =>
+				'apihelp-wbparsevalue-example-1',
+			'action=wbparsevalue&parser=time&values=1994-02-08&options={"precision":9}' =>
+				'apihelp-wbparsevalue-example-2',
 		);
 	}
 
