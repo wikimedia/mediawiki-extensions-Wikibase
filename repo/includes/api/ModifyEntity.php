@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -50,6 +51,11 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @var SiteLinkLookup
 	 */
 	protected $siteLinkLookup;
+
+	/**
+	 * @var EntityStore
+	 */
+	private $entityStore;
 
 	/**
 	 * @since 0.5
@@ -94,6 +100,8 @@ abstract class ModifyEntity extends ApiWikibase {
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
+
+		$this->entityStore = $wikibaseRepo->getEntityStore();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->siteLinkLookup = $wikibaseRepo->getStore()->newSiteLinkStore();
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
@@ -327,7 +335,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 			// HACK: We need to assign an ID early, for things like the ClaimIdGenerator.
 			if ( $entity->getId() === null ) {
-				$this->getEntityStore()->assignFreshId( $entity );
+				$this->entityStore->assignFreshId( $entity );
 			}
 		} else {
 			$entity = $entityRev->getEntity();
