@@ -21,6 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Adam Shorland
  */
 class ApiXmlFormatTest extends \MediaWikiTestCase {
 
@@ -44,7 +45,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 		$expected = $this->getExpectedGetEntitiesXml( $entityRevision );
 
-		$this->assertEquals( $expected, $actual );
+		$this->assertXmlStringEqualsXmlString( $expected, $actual );
 	}
 
 	private function getExpectedGetEntitiesXml( EntityRevision $entityRevision ) {
@@ -112,7 +113,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$actual = $this->doApiRequest( $module );
 		$expected = $this->getExpectedGetClaimsXml( $entityRevision );
 
-		$this->assertEquals( $expected, $actual );
+		$this->assertXmlStringEqualsXmlString( $expected, $actual );
 	}
 
 	private function getExpectedGetClaimsXml( EntityRevision $entityRevision ) {
