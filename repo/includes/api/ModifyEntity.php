@@ -17,6 +17,8 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -50,6 +52,16 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @var SiteLinkLookup
 	 */
 	protected $siteLinkLookup;
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $titleLookup;
+
+	/**
+	 * @var EntityStore
+	 */
+	private $entityStore;
 
 	/**
 	 * @since 0.5
@@ -94,9 +106,25 @@ abstract class ModifyEntity extends ApiWikibase {
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
+		$this->entityStore = $wikibaseRepo->getEntityStore();
+		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->siteLinkLookup = $wikibaseRepo->getStore()->newSiteLinkStore();
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	protected function getTitleLookup() {
+		return $this->titleLookup;
+	}
+
+	/**
+	 * @return EntityStore
+	 */
+	protected function getEntityStore() {
+		return $this->entityStore;
 	}
 
 	/**
