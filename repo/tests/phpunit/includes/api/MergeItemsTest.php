@@ -93,10 +93,14 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			Language::factory( 'en' )
 		);
 
-		$resultBuilder = WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getResultBuilder( $module );
-		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$mockContext = $this->getMock( 'RequestContext' );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mockContext );
 
-		$changeOpsFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()->getMergeChangeOpFactory();
+		$resultBuilder = $apiHelperFactory->getResultBuilder( $module );
+		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
+
+		$changeOpsFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getMergeChangeOpFactory();
 
 		$module->setServices(
 			$idParser,
