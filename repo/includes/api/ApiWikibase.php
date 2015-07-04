@@ -436,25 +436,6 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * Returns a Status object representing the given exception using a localized message.
-	 *
-	 * @note: The returned Status will always be fatal, that is, $status->isOk() will return false.
-	 *
-	 * @see getExceptionMessage().
-	 *
-	 * @param Exception $error
-	 *
-	 * @return Status
-	 */
-	protected function getExceptionStatus( Exception $error ) {
-		$msg = $this->exceptionLocalizer->getExceptionMessage( $error );
-		$status = Status::newFatal( $msg );
-		$status->setResult( false, $error->getMessage() );
-
-		return $status;
-	}
-
-	/**
 	 * @deprecated since 0.5, use dieError(), dieException() or the
 	 * methods in $this->apiErrorReporter instead.
 	 *
