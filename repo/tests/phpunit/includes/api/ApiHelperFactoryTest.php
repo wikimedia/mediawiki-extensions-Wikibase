@@ -23,12 +23,23 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$exceptionLocalizer = $this->getMock( 'Wikibase\Lib\Localizer\ExceptionLocalizer' );
 		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+		$summaryFormatter = $this->getMockBuilder( 'Wikibase\SummaryFormatter' )
+			->disableOriginalConstructor()->getMock();
+		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$entityStore = $this->getMock( 'Wikibase\Lib\Store\EntityStore' );
+		$entityPermissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
+		$editFilterHookRunner = $this->getMock( 'Wikibase\Repo\Hooks\EditFilterHookRunner' );
 
 		return new ApiHelperFactory(
 			$titleLookup,
 			$exceptionLocalizer,
 			$dataTypeLookup,
-			$entityFactory
+			$entityFactory,
+			$summaryFormatter,
+			$entityRevisionLookup,
+			$entityStore,
+			$entityPermissionChecker,
+			$editFilterHookRunner
 		);
 	}
 

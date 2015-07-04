@@ -54,10 +54,13 @@ class ParseValue extends ApiBase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+
 		$this->setServices(
 			new ValueParserFactory( $GLOBALS['wgValueParsers'] ),
-			WikibaseRepo::getDefaultInstance()->getExceptionLocalizer(),
-			WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getErrorReporter( $this )
+			$wikibaseRepo->getExceptionLocalizer(),
+			$apiHelperFactory->getErrorReporter( $this )
 		);
 	}
 
