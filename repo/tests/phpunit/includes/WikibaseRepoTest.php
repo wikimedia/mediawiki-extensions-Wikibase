@@ -238,7 +238,8 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetApiHelperFactory() {
-		$factory = $this->getWikibaseRepo()->getApiHelperFactory();
+		$mockContext = $this->getMock( 'RequestContext' );
+		$factory = $this->getWikibaseRepo()->getApiHelperFactory( $mockContext );
 		$this->assertInstanceOf( 'Wikibase\Api\ApiHelperFactory', $factory );
 	}
 
