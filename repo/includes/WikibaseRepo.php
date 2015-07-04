@@ -330,12 +330,21 @@ class WikibaseRepo {
 			$this->getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,
-			new EditFilterHookRunner(
-				$this->getEntityTitleLookup(),
-				$this->getEntityContentFactory(),
-				$context
-			),
+			$this->newEditFilterHookRunner( $context ),
 			$this->getStore()->getEntityRedirectLookup()
+		);
+	}
+
+	/**
+	 * @param IContextSource $context
+	 *
+	 * @return EditFilterHookRunner
+	 */
+	private function newEditFilterHookRunner( IContextSource $context ) {
+		return new EditFilterHookRunner(
+			$this->getEntityTitleLookup(),
+			$this->getEntityContentFactory(),
+			$context
 		);
 	}
 
@@ -1060,14 +1069,21 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @param IContextSource $context
+	 *
 	 * @return ApiHelperFactory
 	 */
-	public function getApiHelperFactory() {
+	public function getApiHelperFactory( $context ) {
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
 			$this->getPropertyDataTypeLookup(),
-			$this->getEntityFactory()
+			$this->getEntityFactory(),
+			$this->getSummaryFormatter(),
+			$this->getEntityRevisionLookup(),
+			$this->getEntityStore(),
+			$this->getEntityPermissionChecker(),
+			$this->newEditFilterHookRunner( $context )
 		);
 	}
 

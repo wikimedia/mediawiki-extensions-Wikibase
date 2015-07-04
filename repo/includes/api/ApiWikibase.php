@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EditEntity;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\Store\BadRevisionException;
@@ -25,7 +24,6 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -91,6 +89,11 @@ abstract class ApiWikibase extends ApiBase {
 	private $editFilterHookRunner;
 
 	/**
+	 * @var EntitySaveHelper
+	 */
+	private $entitySaveHelper;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -114,9 +117,12 @@ abstract class ApiWikibase extends ApiBase {
 
 		$this->exceptionLocalizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
 
-		$this->errorReporter = WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getErrorReporter( $this );
-
-		$this->resultBuilder = WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getResultBuilder( $this );
+		$apiHelperFactory = WikibaseRepo::getDefaultInstance()->getApiHelperFactory(
+			$this->getContext()
+		);
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entitySaveHelper = $apiHelperFactory->getEntitySaveHelper( $this );
 
 		$this->editFilterHookRunner = new EditFilterHookRunner(
 			$this->titleLookup,
@@ -287,152 +293,10 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * Signal errors and warnings from a save operation to the API call's output.
-	 * This is much like handleStatus(), but specialized for Status objects returned by
-	 * EditEntity::attemptSave(). In particular, the 'errorFlags' and 'errorCode' fields
-	 * from the status value are used to determine the error code to return to the caller.
-	 *
-	 * @note: this function may or may not return normally, depending on whether
-	 *        the status is fatal or not.
-	 *
-	 * @see handleStatus().
-	 *
-	 * @param Status $status The status to report
-	 */
-	private function handleSaveStatus( Status $status ) {
-		$value = $status->getValue();
-		$errorCode = null;
-
-		if ( is_array( $value ) && isset( $value['errorCode'] ) ) {
-			$errorCode = $value['errorCode'];
-		} else {
-			$editError = 0;
-
-			if ( is_array( $value ) && isset( $value['errorFlags'] ) ) {
-				$editError = $value['errorFlags'];
-			}
-
-			if ( ( $editError & EditEntity::TOKEN_ERROR ) > 0 ) {
-				$errorCode = 'badtoken';
-			} elseif ( ( $editError & EditEntity::EDIT_CONFLICT_ERROR ) > 0 ) {
-				$errorCode = 'editconflict';
-			} elseif ( ( $editError & EditEntity::ANY_ERROR ) > 0 ) {
-				$errorCode = 'failed-save';
-			}
-		}
-
-		//NOTE: will just add warnings or do nothing if there's no error
-		$this->handleStatus( $status, $errorCode );
-	}
-
-	/**
-	 * Include messages from a Status object in the API call's output.
-	 *
-	 * An ApiErrorHandler is used to report the status, if necessary.
-	 * If $status->isOK() is false, this method will terminate with a UsageException.
-	 *
-	 * @param Status $status The status to report
-	 * @param string  $errorCode The API error code to use in case $status->isOK() returns false
-	 * @param array   $extradata Additional data to include the the error report,
-	 *                if $status->isOK() returns false
-	 * @param int     $httpRespCode the HTTP response code to use in case
-	 *                $status->isOK() returns false.+
-	 *
-	 * @throws UsageException If $status->isOK() returns false.
-	 */
-	private function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
-		if ( $status->isGood() ) {
-			return;
-		} elseif ( $status->isOK() ) {
-			$this->errorReporter->reportStatusWarnings( $status );
-		} else {
-			$this->errorReporter->reportStatusWarnings( $status );
-			$this->errorReporter->dieStatus( $status, $errorCode, $httpRespCode, $extradata );
-		}
-	}
-
-	/**
-	 * Attempts to save the new entity content, chile first checking for permissions,
-	 * edit conflicts, etc. Saving is done via EditEntity::attemptSave().
-	 *
-	 * This method automatically takes into account several parameters:
-	 * * 'bot' for setting the bot flag
-	 * * 'baserevid' for determining the edit's base revision for conflict resolution
-	 * * 'token' for the edit token
-	 *
-	 * If an error occurs, it is automatically reported and execution of the API module
-	 * is terminated using the ApiErrorReporter (via handleStatus()). If there were any
-	 * warnings, they will automatically be included in the API call's output (again, via
-	 * handleStatus()).
-	 *
-	 * @param Entity $entity The entity to save
-	 * @param string|Summary $summary The edit summary
-	 * @param int $flags The edit flags (see WikiPage::doEditContent)
-	 *
-	 * @throws LogicException if not in write mode
-	 * @return Status the status of the save operation, as returned by EditEntity::attemptSave()
-	 * @see  EditEntity::attemptSave()
-	 *
-	 * @todo: this could be factored out into a controller-like class, but that controller
-	 *        would still need knowledge of the API module to be useful. We'll put it here
-	 *        for now pending further discussion.
+	 * @see EntitySaveHelper::attemptSaveEntity
 	 */
 	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
-		if ( !$this->isWriteMode() ) {
-			// sanity/safety check
-			throw new LogicException( 'attemptSaveEntity() cannot be used by API modules that do not return true from isWriteMode()!' );
-		}
-
-		if ( $summary instanceof Summary ) {
-			$summary = $this->summaryFormatter->formatSummary( $summary );
-		}
-
-		$params = $this->extractRequestParams();
-		$user = $this->getUser();
-
-		if ( isset( $params['bot'] ) && $params['bot'] && $user->isAllowed( 'bot' ) ) {
-			$flags |= EDIT_FORCE_BOT;
-		}
-
-		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
-
-		$editEntity = new EditEntity(
-			$this->titleLookup,
-			$this->entityRevisionLookup,
-			$this->entityStore,
-			$this->permissionChecker,
-			$entity,
-			$user,
-			$this->editFilterHookRunner,
-			$baseRevisionId,
-			$this->getContext()
-		);
-
-		$token = $this->evaluateTokenParam( $params );
-
-		$status = $editEntity->attemptSave(
-			$summary,
-			$flags,
-			$token
-		);
-
-		$this->handleSaveStatus( $status );
-		return $status;
-	}
-
-	/**
-	 * @param array $params
-	 *
-	 * @return string|bool|null Token string, or false if not needed, or null if not set.
-	 */
-	private function evaluateTokenParam( array $params ) {
-		if ( !$this->needsToken() ) {
-			// False disables the token check.
-			return false;
-		}
-
-		// Null fails the token check.
-		return isset( $params['token'] ) ? $params['token'] : null;
+		return $this->entitySaveHelper->attemptSaveEntity( $entity, $summary, $flags );
 	}
 
 	/**
