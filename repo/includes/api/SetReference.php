@@ -61,8 +61,11 @@ class SetReference extends ModifyClaim {
 		$this->validateParameters( $params );
 
 		$entityId = $this->guidParser->parse( $params['statement'] )->getEntityId();
-		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
-		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
+		if ( isset( $params['baserevid'] ) ) {
+			$entityRevision = $this->loadEntityRevision( $entityId, (int)$params['baserevid'] );
+		} else {
+			$entityRevision = $this->loadEntityRevision( $entityId );
+		}
 		$entity = $entityRevision->getEntity();
 
 		$summary = $this->modificationHelper->createSummary( $params, $this );
