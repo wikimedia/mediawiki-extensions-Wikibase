@@ -53,11 +53,12 @@ class FormatSnakValue extends ApiBase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$apiHelperFactory = WikibaseRepo::getDefaultInstance()->getApiHelperFactory();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
 		$this->setServices(
-			WikibaseRepo::getDefaultInstance()->getValueFormatterFactory(),
-			WikibaseRepo::getDefaultInstance()->getDataValueFactory(),
+			$wikibaseRepo->getValueFormatterFactory(),
+			$wikibaseRepo->getDataValueFactory(),
 			$apiHelperFactory->getErrorReporter( $this )
 		);
 	}
