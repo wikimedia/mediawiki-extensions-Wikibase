@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_d9f792ce",
+        "filename": "repo/includes/api/EntityLoadHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-05T18:59:39Z",
+      "side": 1,
+      "message": "nope",
+      "parentUuid": "8ec42329_b94ac625",
+      "revId": "230707f8b96ce397e47612be119f65c194b2b3d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_994fca38",
         "filename": "repo/includes/api/EntityLoadHelper.php",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2015-07-05T18:54:48Z",
       "side": 1,
       "message": "I do not think this test class pays for itself. It tests a very simple class that basically just binds some stuff together. And it does so in a way that creates strong binding on the implementation of that class. This is the kind of thing for which writing a \"unit test\", where \"unit\" is interpreted as \"class\", is not the best of ideas IMO.",
+      "revId": "230707f8b96ce397e47612be119f65c194b2b3d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_99fd8ab0",
+        "filename": "repo/tests/phpunit/includes/api/EntityLoadHelperTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-05T18:59:39Z",
+      "side": 1,
+      "message": "I could kill the test of mock less \u003do",
+      "parentUuid": "8ec42329_1953dae2",
       "revId": "230707f8b96ce397e47612be119f65c194b2b3d1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
