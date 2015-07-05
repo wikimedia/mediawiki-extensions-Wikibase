@@ -104,10 +104,9 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		// update an existing claim with a new main snak value
 		$item = $this->makeNewItemWithClaim( 'Q234', $snak );
 		$newSnak =  $this->makeSnak( 'P5', 'changedSnak' );
-		$claims = $item->getClaims();
-		$claim = reset( $claims );
+		$statements = $item->getStatements()->toArray();
 
-		$guid = $claim->getGuid();
+		$guid = $statements[0]->getGuid();
 		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
 		$args['update claim by guid'] = array( $item, $changeOp, $expected );
@@ -121,11 +120,11 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	public function testApply( Item $item, ChangeOpMainSnak $changeOp, DataValue $expected = null ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$this->assertNotEmpty( $changeOp->getStatementGuid() );
-		$claims = new Claims( $item->getClaims() );
+		$statements = $item->getStatements();
 		if ( $expected === null ) {
-			$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getStatementGuid() ) );
+			$this->assertEquals( $expected, $statements->getFirstStatementWithGuid( $changeOp->getStatementGuid() ) );
 		} else {
-			$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getStatementGuid() )->getMainSnak()->getDataValue() );
+			$this->assertEquals( $expected, $statements->getFirstStatementWithGuid( $changeOp->getStatementGuid() )->getMainSnak()->getDataValue() );
 		}
 	}
 
