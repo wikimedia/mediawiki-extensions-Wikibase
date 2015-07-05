@@ -59,8 +59,11 @@ class RemoveClaims extends ModifyClaim {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
-		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
-		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
+		if ( isset( $params['baserevid'] ) ) {
+			$entityRevision = $this->loadEntityRevision( $entityId, (int)$params['baserevid'] );
+		} else {
+			$entityRevision = $this->loadEntityRevision( $entityId );
+		}
 		$entity = $entityRevision->getEntity();
 
 		if ( $entity instanceof StatementListProvider ) {
