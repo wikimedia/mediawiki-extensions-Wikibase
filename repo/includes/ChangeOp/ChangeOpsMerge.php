@@ -161,7 +161,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateLabelsChangeOps() {
-		foreach ( $this->fromItem->getLabels() as $langCode => $label ) {
+		foreach ( $this->fromItem->getFingerprint()->getLabels()->toTextArray() as $langCode => $label ) {
 			$toLabel = $this->toItem->getLabel( $langCode );
 			if ( $toLabel === false || $toLabel === $label ) {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
@@ -174,7 +174,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateDescriptionsChangeOps() {
-		foreach ( $this->fromItem->getDescriptions() as $langCode => $desc ) {
+		foreach ( $this->fromItem->getFingerprint()->getDescriptions()->toTextArray() as $langCode => $desc ) {
 			$toDescription = $this->toItem->getDescription( $langCode );
 			if ( $toDescription === false || $toDescription === $desc ) {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveDescriptionOp( $langCode ) );
@@ -188,7 +188,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateAliasesChangeOps() {
-		foreach ( $this->fromItem->getAllAliases() as $langCode => $aliases ) {
+		foreach ( $this->fromItem->getFingerprint()->getAliasGroups()->toTextArray() as $langCode => $aliases ) {
 			$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveAliasesOp( $langCode, $aliases ) );
 			$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, $aliases, 'add' ) );
 		}
