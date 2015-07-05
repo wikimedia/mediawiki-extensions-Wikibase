@@ -170,15 +170,6 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::isReadMode
-	 *
-	 * @return bool Always true in this abstract base implementation.
-	 */
-	public function isReadMode() {
-		return true;
-	}
-
-	/**
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *
