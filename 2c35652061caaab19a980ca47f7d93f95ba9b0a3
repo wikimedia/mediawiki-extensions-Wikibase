@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_7e0764cd",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-05T15:54:53Z",
+      "side": 1,
+      "message": "`as` should be removed here.",
+      "revId": "2c35652061caaab19a980ca47f7d93f95ba9b0a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
