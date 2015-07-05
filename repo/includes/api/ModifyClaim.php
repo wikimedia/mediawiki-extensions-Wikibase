@@ -5,8 +5,10 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use Status;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -19,7 +21,7 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ModifyClaim extends ApiWikibase {
+abstract class ModifyClaim extends ApiBase {
 
 	/**
 	 * @since 0.4
@@ -34,6 +36,21 @@ abstract class ModifyClaim extends ApiWikibase {
 	 * @var StatementGuidParser
 	 */
 	protected $guidParser;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadHelper
+	 */
+	private $entityLoadHelper;
+
+	/**
+	 * @var EntitySaveHelper
+	 */
+	private $entitySaveHelper;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -56,6 +73,33 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->guidParser = WikibaseRepo::getDefaultInstance()->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadHelper = $apiHelperFactory->getEntityLoadHelper( $this );
+		$this->entitySaveHelper = $apiHelperFactory->getEntitySaveHelper( $this );
+	}
+
+	/**
+	 * @see EntitySaveHelper::attemptSaveEntity
+	 */
+	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
+		return $this->entitySaveHelper->attemptSaveEntity( $entity, $summary, $flags );
+	}
+
+	/**
+	 * @return ResultBuilder
+	 */
+	protected function getResultBuilder() {
+		return $this->resultBuilder;
+	}
+
+	/**
+	 * @see EntitySaveHelper::loadEntityRevision
+	 */
+	protected function loadEntityRevision(
+		EntityId $entityId,
+		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
+		return $this->entityLoadHelper->loadEntityRevision( $entityId, $revId );
 	}
 
 	/**
@@ -79,6 +123,15 @@ abstract class ModifyClaim extends ApiWikibase {
 	 */
 	public function isWriteMode() {
 		return true;
+	}
+
+	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
 	}
 
 	/**
