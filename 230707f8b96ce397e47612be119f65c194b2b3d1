@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_792e9e3f",
+        "filename": "repo/includes/api/EntityLoadHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-05T19:00:03Z",
+      "side": 1,
+      "message": "Could be done in a followup? ;)",
+      "parentUuid": "8ec42329_994fca38",
+      "revId": "230707f8b96ce397e47612be119f65c194b2b3d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_1953dae2",
         "filename": "repo/tests/phpunit/includes/api/EntityLoadHelperTest.php",
         "patchSetId": 3
