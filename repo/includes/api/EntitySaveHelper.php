@@ -8,11 +8,7 @@ use Status;
 use UsageException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EditEntity as EditEntityHandler;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
-use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\EditEntityFactory;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -41,48 +37,20 @@ class EntitySaveHelper {
 	private $summaryFormatter;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EditEntityFactory
 	 */
-	private $titleLookup;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
-	 * @var EntityStore
-	 */
-	private $entityStore;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
-
-	/**
-	 * @var EditFilterHookRunner
-	 */
-	private $editFilterHookRunner;
+	private $editEntityFactory;
 
 	public function __construct(
 		ApiBase $apiBase,
 		ApiErrorReporter $errorReporter,
 		SummaryFormatter $summaryFormatter,
-		EntityTitleLookup $entityTitleLookup,
-		EntityRevisionLookup $entityRevisionLookup,
-		EntityStore $entityStore,
-		EntityPermissionChecker $entityPermissionChecker,
-		EditFilterHookRunner $editFilterHookRunner
+		EditEntityFactory $editEntityFactory
 	) {
 		$this->apiBase = $apiBase;
 		$this->errorReporter = $errorReporter;
 		$this->summaryFormatter = $summaryFormatter;
-		$this->titleLookup = $entityTitleLookup;
-		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->entityStore = $entityStore;
-		$this->permissionChecker = $entityPermissionChecker;
-		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->editEntityFactory = $editEntityFactory;
 	}
 
 	/**
@@ -128,16 +96,10 @@ class EntitySaveHelper {
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
 
-		$editEntityHandler = new EditEntityHandler(
-			$this->titleLookup,
-			$this->entityRevisionLookup,
-			$this->entityStore,
-			$this->permissionChecker,
-			$entity,
+		$editEntityHandler = $this->editEntityFactory->newEditEntity(
 			$user,
-			$this->editFilterHookRunner,
-			$baseRevisionId,
-			$this->apiBase->getContext()
+			$entity,
+			$baseRevisionId
 		);
 
 		$token = $this->evaluateTokenParam( $params );
