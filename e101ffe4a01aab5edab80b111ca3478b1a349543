@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_1e942038",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-05T16:31:06Z",
+      "side": 1,
+      "message": "I wonder if we really need to add this method here or if we just could add this to the place where it is needed. This requires extra tests, comments and maintenance.",
+      "revId": "e101ffe4a01aab5edab80b111ca3478b1a349543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fe9cb460",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-05T16:31:06Z",
+      "side": 1,
+      "message": "Call `getAliasGroups()-\u003egetWithLanguages` and we don\u0027t need `addAliasGroup` in ResultBuilder. Also, the emptiness check is not needed as an empty alias group can never be conained in an AliasGroupList.",
+      "revId": "e101ffe4a01aab5edab80b111ca3478b1a349543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
