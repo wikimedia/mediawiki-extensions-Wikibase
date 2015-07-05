@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b94ac625",
+        "filename": "repo/includes/api/EntityLoadHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-05T18:52:16Z",
+      "side": 1,
+      "message": "Do we not have API classes in Wikibase\\Repo\\Api ?",
+      "revId": "230707f8b96ce397e47612be119f65c194b2b3d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_994fca38",
+        "filename": "repo/includes/api/EntityLoadHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-05T18:52:16Z",
+      "side": 1,
+      "message": "EntityLoadingHelper...\n\nThough it\u0027s be nicer to ditch the \"api helper\" notion and just have generally sensible services which happen to be used by the API",
+      "revId": "230707f8b96ce397e47612be119f65c194b2b3d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
