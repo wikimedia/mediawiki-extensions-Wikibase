@@ -161,15 +161,6 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::mustBePosted()
-	 *
-	 * @return bool
-	 */
-	public function mustBePosted() {
-		return $this->isWriteMode();
-	}
-
-	/**
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *
