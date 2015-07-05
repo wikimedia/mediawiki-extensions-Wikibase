@@ -26,9 +26,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$summaryFormatter = $this->getMockBuilder( 'Wikibase\SummaryFormatter' )
 			->disableOriginalConstructor()->getMock();
 		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
-		$entityStore = $this->getMock( 'Wikibase\Lib\Store\EntityStore' );
-		$entityPermissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
-		$editFilterHookRunner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+		$editEntityFactory = $this->getMockBuilder( 'Wikibase\EditEntityFactory' )
 			->disableOriginalConstructor()->getMock();
 
 		return new ApiHelperFactory(
@@ -38,9 +36,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 			$entityFactory,
 			$summaryFormatter,
 			$entityRevisionLookup,
-			$entityStore,
-			$entityPermissionChecker,
-			$editFilterHookRunner
+			$editEntityFactory
 		);
 	}
 
