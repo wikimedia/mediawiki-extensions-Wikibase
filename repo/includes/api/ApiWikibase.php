@@ -17,7 +17,6 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
@@ -69,11 +68,6 @@ abstract class ApiWikibase extends ApiBase {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var EntityStore
-	 */
-	private $entityStore;
-
-	/**
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
@@ -111,7 +105,6 @@ abstract class ApiWikibase extends ApiBase {
 		// NOTE: use uncached lookup for write mode!
 		$uncached = $this->isWriteMode() ? 'uncached' : '';
 		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup( $uncached );
-		$this->entityStore = $wikibaseRepo->getEntityStore();
 
 		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
@@ -132,20 +125,6 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @return ApiErrorReporter
-	 */
-	protected function getErrorReporter() {
-		return $this->errorReporter;
-	}
-
-	/**
-	 * @return EntityStore
-	 */
-	protected function getEntityStore() {
-		return $this->entityStore;
-	}
-
-	/**
 	 * @return EntityRevisionLookup
 	 */
 	protected function getEntityRevisionLookup() {
@@ -157,13 +136,6 @@ abstract class ApiWikibase extends ApiBase {
 	 */
 	protected function getIdParser() {
 		return $this->idParser;
-	}
-
-	/**
-	 * @return EntityTitleLookup
-	 */
-	protected function getTitleLookup() {
-		return $this->titleLookup;
 	}
 
 	/**
