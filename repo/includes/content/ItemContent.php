@@ -19,6 +19,7 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ItemContent extends EntityContent {
 
@@ -204,6 +205,32 @@ class ItemContent extends EntityContent {
 		}
 
 		return $text;
+	}
+
+	/**
+	 * @see AbstractContent::isEmpty
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		if ( $this->isRedirect() ) {
+			return false;
+		}
+
+		return $this->getItem()->isEmpty();
+	}
+
+	/**
+	 * @see EntityContent::isStub
+	 *
+	 * @return bool
+	 */
+	public function isStub() {
+		if ( $this->isEmpty() ) {
+			return false;
+		}
+
+		return $this->getItem()->getStatements()->isEmpty();
 	}
 
 	/**
