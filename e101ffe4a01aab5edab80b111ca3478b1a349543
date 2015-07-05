@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_be4b8cb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-05T17:19:30Z",
+      "side": 1,
+      "message": "serialization",
+      "revId": "e101ffe4a01aab5edab80b111ca3478b1a349543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_1e942038",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 3
