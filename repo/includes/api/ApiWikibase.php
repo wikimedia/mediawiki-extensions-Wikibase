@@ -247,18 +247,18 @@ abstract class ApiWikibase extends ApiBase {
 			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId );
 
 			if ( !$revision ) {
-				$this->dieError(
+				$this->errorReporter->dieError(
 					'Entity ' . $entityId->getSerialization() . ' not found',
 					'cant-load-entity-content' );
 			}
 
 			return $revision;
 		} catch ( UnresolvedRedirectException $ex ) {
-			$this->dieException( $ex, 'unresolved-redirect' );
+			$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
 		} catch ( BadRevisionException $ex ) {
-			$this->dieException( $ex, 'nosuchrevid' );
+			$this->errorReporter->dieException( $ex, 'nosuchrevid' );
 		} catch ( StorageException $ex ) {
-			$this->dieException( $ex, 'cant-load-entity-content' );
+			$this->errorReporter->dieException( $ex, 'cant-load-entity-content' );
 		}
 
 		throw new LogicException( 'ApiErrorReporter::dieError did not throw a UsageException' );
@@ -272,8 +272,8 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @deprecated since 0.5, use dieError(), dieException() or the
-	 * methods in $this->apiErrorReporter instead.
+	 * @deprecated since 0.5, use dieError(), dieException() and dieMessage()
+	 * methods inside an ApiErrorReporter object instead
 	 *
 	 * @param string $description
 	 * @param string $errorCode
@@ -283,46 +283,6 @@ abstract class ApiWikibase extends ApiBase {
 	public function dieUsage( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
 		//NOTE: This is just here for the @deprecated flag above.
 		parent::dieUsage( $description, $errorCode, $httpRespCode, $extradata );
-	}
-
-	/**
-	 * @see ApiErrorReporter::dieError()
-	 *
-	 * @since 0.5
-	 *
-	 * @param string $description
-	 * @param string $code
-	 * @param int $httpStatusCode
-	 * @param array $extradata
-	 */
-	protected function dieError( $description, $code, $httpStatusCode = 0, $extradata = array() ) {
-		$this->errorReporter->dieError( $description, $code, $httpStatusCode, $extradata );
-	}
-
-	/**
-	 * @see ApiErrorReporter::dieException()
-	 *
-	 * @since 0.5
-	 *
-	 * @param Exception $exception
-	 * @param string $code
-	 * @param int $httpStatusCode
-	 * @param array $extradata
-	 */
-	protected function dieException( Exception $exception, $code, $httpStatusCode = 0, $extradata = array() ) {
-		$this->errorReporter->dieException( $exception, $code, $httpStatusCode, $extradata );
-	}
-
-	/**
-	 * @see ApiErrorReporter::dieMessage()
-	 *
-	 * @since 0.5
-	 *
-	 * @param string $errorCode A code identifying the error.
-	 * @param string [$param,...] Parameters for the Message.
-	 */
-	protected function dieMessage( $errorCode /*...*/ ) {
-		call_user_func_array( array( $this->errorReporter, 'dieMessage' ), func_get_args() );
 	}
 
 }

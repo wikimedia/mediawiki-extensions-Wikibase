@@ -31,6 +31,11 @@ class LinkTitles extends ApiWikibase {
 	private $siteLinkTargetProvider;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -45,7 +50,9 @@ class LinkTitles extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteStore(),
 			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
@@ -133,11 +140,11 @@ class LinkTitles extends ApiWikibase {
 		// we can be sure that $fromId and $toId are not null here
 		elseif ( $fromId->equals( $toId ) ) {
 			// no-op
-			$this->dieError( 'Common item detected, sitelinks are both on the same item', 'common-item' );
+			$this->errorReporter->dieError( 'Common item detected, sitelinks are both on the same item', 'common-item' );
 		}
 		else {
 			// dissimilar items
-			$this->dieError( 'No common item detected, unable to link titles', 'no-common-item' );
+			$this->errorReporter->dieError( 'No common item detected, unable to link titles', 'no-common-item' );
 		}
 
 		$this->getResultBuilder()->addSiteLinks( $return, 'entity' );
@@ -156,7 +163,7 @@ class LinkTitles extends ApiWikibase {
 		$siteObj = $sites->getSite( $site );
 		$page = $siteObj->normalizePageName( $pageTitle );
 		if( $page === false ) {
-			$this->dieMessage( 'no-external-page', $site, $pageTitle );
+			$this->errorReporter->dieMessage( 'no-external-page', $site, $pageTitle );
 		}
 		return array( $siteObj, $page );
 	}
@@ -194,11 +201,11 @@ class LinkTitles extends ApiWikibase {
 	 */
 	protected function validateParameters( array $params ) {
 		if ( $params['fromsite'] === $params['tosite'] ) {
-			$this->dieError( 'The from site cannot match the to site', 'param-illegal' );
+			$this->errorReporter->dieError( 'The from site cannot match the to site', 'param-illegal' );
 		}
 
 		if ( $params['fromtitle'] === '' || $params['totitle'] === '' ) {
-			$this->dieError( 'The from title and to title must have a value', 'param-illegal' );
+			$this->errorReporter->dieError( 'The from title and to title must have a value', 'param-illegal' );
 		}
 	}
 

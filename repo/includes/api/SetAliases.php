@@ -33,6 +33,11 @@ class SetAliases extends ModifyEntity {
 	private $termChangeOpFactory;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -40,7 +45,11 @@ class SetAliases extends ModifyEntity {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 	}
 
@@ -67,7 +76,7 @@ class SetAliases extends ModifyEntity {
 		if ( !( ( !empty( $params['add'] ) || !empty( $params['remove'] ) )
 			xor isset( $params['set'] )
 		) ) {
-			$this->dieError(
+			$this->errorReporter->dieError(
 				"Parameters 'add' and 'remove' are not allowed to be set when parameter 'set' is provided",
 				'invalid-list'
 			);
@@ -78,7 +87,7 @@ class SetAliases extends ModifyEntity {
 	 * @see ModifyEntity::createEntity
 	 */
 	protected function createEntity( $entityType ) {
-		$this->dieError( 'Could not find an existing entity', 'no-such-entity' );
+		$this->errorReporter->dieError( 'Could not find an existing entity', 'no-such-entity' );
 	}
 
 	/**

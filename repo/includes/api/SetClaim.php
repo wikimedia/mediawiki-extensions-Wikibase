@@ -39,6 +39,11 @@ class SetClaim extends ModifyClaim {
 	private $statementChangeOpFactory;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -46,7 +51,11 @@ class SetClaim extends ModifyClaim {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 	}
 
@@ -61,13 +70,13 @@ class SetClaim extends ModifyClaim {
 		$guid = $claim->getGuid();
 
 		if ( $guid === null ) {
-			$this->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
+			$this->errorReporter->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
 		}
 
 		try {
 			$claimGuid = $this->guidParser->parse( $guid );
 		} catch ( StatementGuidParsingException $ex ) {
-			$this->dieException( $ex, 'invalid-claim' );
+			$this->errorReporter->dieException( $ex, 'invalid-claim' );
 		}
 
 		$entityId = $claimGuid->getEntityId();
@@ -144,9 +153,15 @@ class SetClaim extends ModifyClaim {
 			}
 			return $claim;
 		} catch ( InvalidArgumentException $invalidArgumentException ) {
-			$this->dieError( 'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(), 'invalid-claim' );
+			$this->errorReporter->dieError(
+				'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(),
+				'invalid-claim'
+			);
 		} catch ( OutOfBoundsException $outOfBoundsException ) {
-			$this->dieError( 'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(), 'invalid-claim' );
+			$this->errorReporter->dieError(
+				'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(),
+				'invalid-claim'
+			);
 		}
 
 		// Note: since dieUsage() never returns, this should be unreachable!

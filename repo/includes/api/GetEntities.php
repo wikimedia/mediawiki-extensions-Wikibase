@@ -55,6 +55,11 @@ class GetEntities extends ApiWikibase {
 	private $siteLinkGroups;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -64,7 +69,9 @@ class GetEntities extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 
@@ -84,7 +91,7 @@ class GetEntities extends ApiWikibase {
 		$params = $this->extractRequestParams();
 
 		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
-			$this->dieError(
+			$this->errorReporter->dieError(
 				'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages',
 				'param-missing'
 			);
@@ -130,7 +137,7 @@ class GetEntities extends ApiWikibase {
 				try {
 					$ids[] = $this->getIdParser()->parse( $id );
 				} catch ( EntityIdParsingException $e ) {
-					$this->dieError( "Invalid id: $id", 'no-such-entity' );
+					$this->errorReporter->dieError( "Invalid id: $id", 'no-such-entity' );
 				}
 			}
 		}

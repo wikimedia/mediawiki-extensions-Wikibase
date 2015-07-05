@@ -27,6 +27,11 @@ class CreateClaim extends ModifyClaim {
 	private $statementChangeOpFactory;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -34,7 +39,11 @@ class CreateClaim extends ModifyClaim {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 	}
 
@@ -54,7 +63,7 @@ class CreateClaim extends ModifyClaim {
 
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !$propertyId instanceof PropertyId ) {
-			$this->dieError(
+			$this->errorReporter->dieError(
 				$propertyId->getSerialization() . ' does not appear to be a property ID',
 				'param-illegal'
 			);
@@ -86,18 +95,27 @@ class CreateClaim extends ModifyClaim {
 	private function validateParameters( array $params ) {
 		if ( $params['snaktype'] === 'value' XOR isset( $params['value'] ) ) {
 			if ( $params['snaktype'] === 'value' ) {
-				$this->dieError( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'param-missing' );
+				$this->errorReporter->dieError(
+					'A value needs to be provided when creating a claim with PropertyValueSnak snak',
+					'param-missing'
+				);
 			} else {
-				$this->dieError( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'param-illegal' );
+				$this->errorReporter->dieError(
+					'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak',
+					'param-illegal'
+				);
 			}
 		}
 
 		if ( !isset( $params['property'] ) ) {
-			$this->dieError( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
+			$this->errorReporter->dieError(
+				'A property ID needs to be provided when creating a claim with a Snak',
+				'param-missing'
+			);
 		}
 
 		if ( isset( $params['value'] ) && json_decode( $params['value'], true ) === null ) {
-			$this->dieError( 'Could not decode snak value', 'invalid-snak' );
+			$this->errorReporter->dieError( 'Could not decode snak value', 'invalid-snak' );
 		}
 	}
 
