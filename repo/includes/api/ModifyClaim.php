@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use Status;
 use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
@@ -59,16 +60,15 @@ abstract class ModifyClaim extends ApiWikibase {
 	 *
 	 * @param Entity $entity
 	 * @param Summary $summary
+	 *
+	 * @returns Status
 	 */
 	public function saveChanges( Entity $entity, Summary $summary ) {
-		$status = $this->attemptSaveEntity(
+		return $this->attemptSaveEntity(
 			$entity,
 			$summary,
 			$this->getFlags()
 		);
-
-		//@todo this doesnt belong here!...
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 	}
 
 	/**
