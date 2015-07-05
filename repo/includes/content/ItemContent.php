@@ -209,7 +209,8 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see EntityContent::getEntityPageProperties
 	 *
-	 * Records the number of sitelinks in the 'wb-sitelinks' key.
+	 * Records the number of statements in the 'wb-claims' key
+	 * and sitelinks in the 'wb-sitelinks' key.
 	 *
 	 * @return array A map from property names to property values.
 	 */
@@ -219,6 +220,7 @@ class ItemContent extends EntityContent {
 		}
 
 		$properties = parent::getEntityPageProperties();
+		$properties['wb-claims'] = $this->getItem()->getStatements()->count();
 		$properties['wb-sitelinks'] = $this->getItem()->getSiteLinkList()->count();
 
 		return $properties;

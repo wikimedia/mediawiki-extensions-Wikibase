@@ -92,6 +92,24 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
+	 * @see EntityContent::getEntityPageProperties
+	 *
+	 * Records the number of statements in the 'wb-claims' key.
+	 *
+	 * @return array A map from property names to property values.
+	 */
+	public function getEntityPageProperties() {
+		if ( $this->isRedirect() ) {
+			return array();
+		}
+
+		$properties = parent::getEntityPageProperties();
+		$properties['wb-claims'] = $this->getProperty()->getStatements()->count();
+
+		return $properties;
+	}
+
+	/**
 	 * Checks if this PropertyContent is valid for saving.
 	 *
 	 * Returns false if the entity does not have a DataType set.

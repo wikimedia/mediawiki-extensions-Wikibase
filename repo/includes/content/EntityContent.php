@@ -742,7 +742,6 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * Keys used:
 	 * - wb-status: the entity's status, according to getEntityStatus()
-	 * - wb-claims: the number of claims in the entity
 	 *
 	 * @return array A map from property names to property values.
 	 */
@@ -751,9 +750,7 @@ abstract class EntityContent extends AbstractContent {
 			return array();
 		}
 
-		$properties = array(
-			'wb-claims' => count( $this->getEntity()->getClaims() ),
-		);
+		$properties = array();
 
 		$status = $this->getEntityStatus();
 
