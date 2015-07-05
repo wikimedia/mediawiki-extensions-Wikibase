@@ -92,90 +92,76 @@ final class TestChanges {
 
 		if ( empty( $changes ) ) {
 			$empty = Property::newFromType( 'string' );
-			$empty->setId( new PropertyId( 'p100' ) );
+			$empty->setId( 100 );
 
 			$changes['property-creation'] = $changeFactory->newFromUpdate( EntityChange::ADD, null, $empty );
 			$changes['property-deletion'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 			// -----
 			$old = Property::newFromType( 'string' );
-			$old->setId( new PropertyId( 'p100' ) );
-			$new = $old->copy();
+			$old->setId( 100 );
 
+			$new = Property::newFromType( 'string' );
+			$new->setId( 100 );
 			$new->setLabel( "de", "dummy" );
 			$changes['property-set-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
 			// -----
 			$old = new Item( new ItemId( 'Q100' ) );
-
-			/* @var Item $new */
-			$new = $old->copy();
+			$new = new Item( new ItemId( 'Q100' ) );
 
 			$changes['item-creation'] = $changeFactory->newFromUpdate( EntityChange::ADD, null, $new );
 			$changes['item-deletion'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $old, null );
 
 			// -----
 
-			//FIXME: $changeFactory->newFromUpdate causes Item::getSiteLinks to be called,
-			//       which uses SiteLink::newFromText, which in turn uses the Sites singleton
-			//       which relies on the database. This is inconsistent with the Site objects
-			//       generated here, or elsewhere in test cases.
-
-			$link = new SiteLink( 'dewiki', "Dummy" );
-			$new->addSiteLink( $link, 'add' );
+			$new = new Item( new ItemId( 'Q100' ) );
+			$new->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Dummy' );
 			$changes['set-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
-			$link = new SiteLink( 'enwiki', "Emmy" );
-			$new->addSiteLink( $link, 'add' );
+			$new->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Emmy' );
 			$changes['set-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			// -----
-			$new->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
-			$new->getSiteLinkList()->removeLinkWithSiteId( 'dewiki' );
+			$new = new Item( new ItemId( 'Q100' ) );
 
-			$link = new SiteLink( 'enwiki', "Emmy" );
-			$new->addSiteLink( $link, 'add' );
-
-			$link = new SiteLink( 'dewiki', "Dummy" );
-			$new->addSiteLink( $link, 'add' );
+			$new->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Emmy' );
+			$new->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Dummy' );
 
 			$changes['change-sitelink-order'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			// -----
-			$link = new SiteLink( 'dewiki', "Dummy2" );
-			$new->addSiteLink( $link, 'set' );
+			$new->getSiteLinkList()->setNewSiteLink( 'dewiki', 'Dummy2' );
 			$changes['change-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
-			$link = new SiteLink( 'enwiki', "Emmy2" );
-			$new->addSiteLink( $link, 'set' );
+			$new->getSiteLinkList()->setNewSiteLink( 'enwiki', 'Emmy2' );
 			$changes['change-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
-			$link = new SiteLink( 'enwiki', "Emmy2", array( new ItemId( 'Q17' ) ) );
-			$new->addSiteLink( $link, 'set' );
+			$new->getSiteLinkList()->setNewSiteLink( 'enwiki', 'Emmy2', array( new ItemId( 'Q17' ) ) );
 			$changes['change-enwiki-sitelink-badges'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			$new->getSiteLinkList()->removeLinkWithSiteId( 'dewiki' );
 			$changes['remove-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			// -----
 			$new->setLabel( "de", "dummy" );
 			$changes['set-de-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			$new->setLabel( "en", "emmy" );
 			$changes['set-en-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			$new->setAliases( "en", array( "foo", "bar" ) );
 			$changes['set-en-aliases'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			// -----
 			$propertyId = new PropertyId( 'p23' );
@@ -186,12 +172,12 @@ final class TestChanges {
 			$statements = new StatementList( array( $statement ) );
 			$new->setStatements( $statements );
 			$changes['add-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			$statements = new StatementList();
 			$new->setStatements( $statements );
 			$changes['remove-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
+			$old = unserialize( serialize( $new ) );
 
 			// -----
 			$changes['item-deletion-linked'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $old, null );
