@@ -65,7 +65,7 @@ class ResultBuilder {
 		SerializerFactory $serializerFactory
 	) {
 		if ( !$result instanceof ApiResult ) {
-			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiWikibase' );
+			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
 		}
 
 		$this->result = $result;
