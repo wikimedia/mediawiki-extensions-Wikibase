@@ -4,26 +4,12 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use Exception;
-use LogicException;
-use Status;
-use UsageException;
-use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EntityRevision;
-use Wikibase\Lib\Localizer\ExceptionLocalizer;
-use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 
 /**
  * Base class for API modules
@@ -43,21 +29,6 @@ abstract class ApiWikibase extends ApiBase {
 	private $resultBuilder;
 
 	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
-
-	/**
-	 * @var ExceptionLocalizer
-	 */
-	private $exceptionLocalizer;
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $idParser;
@@ -66,21 +37,6 @@ abstract class ApiWikibase extends ApiBase {
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
-
-	/**
-	 * @var SummaryFormatter
-	 */
-	private $summaryFormatter;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
-
-	/**
-	 * @var EditFilterHookRunner
-	 */
-	private $editFilterHookRunner;
 
 	/**
 	 * @var EntitySaveHelper
@@ -104,30 +60,16 @@ abstract class ApiWikibase extends ApiBase {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 
 		// NOTE: use uncached lookup for write mode!
 		$uncached = $this->isWriteMode() ? 'uncached' : '';
 		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup( $uncached );
 
-		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
-
-		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
-
-		$this->exceptionLocalizer = $wikibaseRepo->getExceptionLocalizer();
-
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entitySaveHelper = $apiHelperFactory->getEntitySaveHelper( $this );
 		$this->entityLoadHelper = $apiHelperFactory->getEntityLoadHelper( $this );
-
-		$this->editFilterHookRunner = new EditFilterHookRunner(
-			$this->titleLookup,
-			$wikibaseRepo->getEntityContentFactory(),
-			$this->getContext()
-		);
 	}
 
 	/**
