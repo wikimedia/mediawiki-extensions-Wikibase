@@ -104,21 +104,26 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$item->setDescription( 'de', 'Stadt in Deutschland' );
 		$items['Berlin'][] = $item;
 
-		$item = $item->copy();
+		$item = new Item();
+		$item->setLabel( 'de', 'Berlin' );
 		$item->setLabel( 'en', 'Berlin' );
 		$item->setDescription( 'de', 'Stadt in Brandenburg' );
 		$item->setDescription( 'en', 'City in Germany' );
 		$items['Berlin'][] = $item;
 
-		$item = $item->copy();
+		$item = new Item();
+		$item->setLabel( 'de', 'Berlin' );
+		$item->setLabel( 'en', 'Berlin' );
 		$item->setDescription( 'de', 'Hauptstadt von Deutschland' );
+		$item->setDescription( 'en', 'City in Germany' );
 		$items['Berlin'][] = $item;
 
 		$item = new Item();
 		$item->setLabel( 'en', 'London' );
 		$items['London'][] = $item;
 
-		$item = $item->copy();
+		$item = new Item();
+		$item->setLabel( 'en', 'London' );
 		$item->setLabel( 'de', 'London' );
 		$items['London'][] = $item;
 

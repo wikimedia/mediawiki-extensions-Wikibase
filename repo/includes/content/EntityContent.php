@@ -571,7 +571,7 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			$entityAfterPatch = $this->makeEmptyEntity();
 		} else {
-			$entityAfterPatch = $this->getEntity()->copy();
+			$entityAfterPatch = unserialize( serialize( $this->getEntity() ) );
 		}
 
 		// FIXME: this should either be done in the derivatives, or the patcher
