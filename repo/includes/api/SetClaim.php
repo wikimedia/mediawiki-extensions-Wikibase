@@ -14,9 +14,9 @@ use UsageException;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Statement\StatementGuidParsingException;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\WikibaseRepo;
@@ -99,15 +99,17 @@ class SetClaim extends ModifyClaim {
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
 	private function getSummary( array $params, Claim $claim, Entity $entity ) {
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
+		}
+
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
-		$claims = new Claims( $entity->getClaims() );
-
 		$summary = $claimSummaryBuilder->buildClaimSummary(
-			$claims->getClaimWithGuid( $claim->getGuid() ),
+			$entity->getStatements()->getFirstStatementWithGuid( $claim->getGuid() ),
 			$claim
 		);
 
