@@ -1080,7 +1080,7 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup(),
 			$this->getEntityFactory(),
 			$this->getSummaryFormatter(),
-			$this->getEntityRevisionLookup(),
+			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->newEditFilterHookRunner( $context )

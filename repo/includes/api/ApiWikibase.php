@@ -88,6 +88,11 @@ abstract class ApiWikibase extends ApiBase {
 	private $entitySaveHelper;
 
 	/**
+	 * @var EntityLoadHelper
+	 */
+	private $entityLoadHelper;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -116,6 +121,7 @@ abstract class ApiWikibase extends ApiBase {
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entitySaveHelper = $apiHelperFactory->getEntitySaveHelper( $this );
+		$this->entityLoadHelper = $apiHelperFactory->getEntityLoadHelper( $this );
 
 		$this->editFilterHookRunner = new EditFilterHookRunner(
 			$this->titleLookup,
@@ -228,40 +234,13 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * Load the entity content of the given revision.
-	 *
-	 * Will fail by calling dieError() on the ApiErrorReporter if the revision
-	 * cannot be found or cannot be loaded.
-	 *
-	 * @since 0.5
-	 *
-	 * @param EntityId $entityId : the title of the page to load the revision for
-	 * @param int|string $revId : the revision to load. If not given, the current revision will be loaded.
-	 *
-	 * @throws UsageException
-	 * @throws LogicException
-	 * @return EntityRevision
+	 * @see EntitySaveHelper::loadEntityRevision
 	 */
-	protected function loadEntityRevision( EntityId $entityId, $revId = EntityRevisionLookup::LATEST_FROM_MASTER ) {
-		try {
-			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId );
-
-			if ( !$revision ) {
-				$this->errorReporter->dieError(
-					'Entity ' . $entityId->getSerialization() . ' not found',
-					'cant-load-entity-content' );
-			}
-
-			return $revision;
-		} catch ( UnresolvedRedirectException $ex ) {
-			$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
-		} catch ( BadRevisionException $ex ) {
-			$this->errorReporter->dieException( $ex, 'nosuchrevid' );
-		} catch ( StorageException $ex ) {
-			$this->errorReporter->dieException( $ex, 'cant-load-entity-content' );
-		}
-
-		throw new LogicException( 'ApiErrorReporter::dieError did not throw a UsageException' );
+	protected function loadEntityRevision(
+		EntityId $entityId,
+		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
+		return $this->entityLoadHelper->loadEntityRevision( $entityId, $revId );
 	}
 
 	/**

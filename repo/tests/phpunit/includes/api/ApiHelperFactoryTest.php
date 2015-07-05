@@ -100,4 +100,11 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Api\EntitySaveHelper', $helper );
 	}
 
+	public function testGetEntityLoadHelper() {
+		$factory = $this->newApiHelperFactory();
+
+		$helper = $factory->getEntityLoadHelper( $this->newApiModule() );
+		$this->assertInstanceOf( 'Wikibase\Api\EntityLoadHelper', $helper );
+	}
+
 }
