@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -69,31 +70,25 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			$plSiteLink
 		);
 
-		$item = new Item();
-
-		foreach ( $existingSiteLinks as $siteLink ) {
-			$item->addSiteLink( $siteLink );
-		}
-
 		$args = array();
 
 		// adding sitelink with badges
 		$args[] = array(
-			$item->copy(),
+			$existingSiteLinks,
 			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) ),
 			array_merge( $existingSiteLinks, array( $enSiteLink ) )
 		);
 
 		// deleting sitelink
 		$args[] = array(
-			$item->copy(),
+			$existingSiteLinks,
 			new ChangeOpSiteLink( 'dewiki', null ),
 			array( $plSiteLink )
 		);
 
 		// setting badges on existing sitelink
 		$args[] = array(
-			$item->copy(),
+			$existingSiteLinks,
 			new ChangeOpSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) ),
 			array(
 				$deSiteLink,
@@ -103,7 +98,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// changing sitelink without modifying badges
 		$args[] = array(
-			$item->copy(),
+			$existingSiteLinks,
 			new ChangeOpSiteLink( 'plwiki', 'Test' ),
 			array(
 				$deSiteLink,
@@ -113,7 +108,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// change badges without modifying title
 		$args[] = array(
-			$item->copy(),
+			$existingSiteLinks,
 			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'Q149' ) ) ),
 			array(
 				$deSiteLink,
@@ -123,7 +118,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// add duplicate badges
 		$args[] = array(
-			$item->copy(),
+			$existingSiteLinks,
 			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ) ),
 			array(
 				$deSiteLink,
@@ -136,16 +131,19 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpSiteLinkProvider
-	 * @param Item $entity
+	 * @param SiteLink[] $existingSitelinks
 	 * @param ChangeOpSiteLink $changeOpSiteLink
 	 * @param SiteLink[] $expectedSiteLinks
 	 */
-	public function testApply( Item $entity, ChangeOpSiteLink $changeOpSiteLink, array $expectedSiteLinks ) {
-		$changeOpSiteLink->apply( $entity );
+	public function testApply( array $existingSiteLinks, ChangeOpSiteLink $changeOpSiteLink, array $expectedSiteLinks ) {
+		$item = new Item();
+		$item->setSiteLinkList( new SiteLinkList( $existingSiteLinks ) );
+
+		$changeOpSiteLink->apply( $item );
 
 		$this->assertEquals(
 			$expectedSiteLinks,
-			$entity->getSiteLinks()
+			array_values( $item->getSiteLinkList()->toArray() )
 		);
 	}
 
@@ -155,22 +153,16 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$deSiteLink = new SiteLink( 'dewiki', 'Berlin' );
 		$plSiteLink = new SiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
 
-		$existingSiteLinks = array(
+		$existingSitelinks = array(
 			$deSiteLink,
 			$plSiteLink
 		);
-
-		$item = new Item();
-
-		foreach ( $existingSiteLinks as $siteLink ) {
-			$item->addSiteLink( $siteLink );
-		}
 
 		$args = array();
 
 		// cannot change badges of non-existing sitelink
 		$args[] = array(
-			$item->copy(),
+			$existingSitelinks,
 			new ChangeOpSiteLink( 'enwiki', null, array( new ItemId( 'Q149' ) ) ),
 		);
 
@@ -179,21 +171,25 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidChangeOpSiteLinkProvider
-	 * @param Item $entity
+	 * @param SiteLink[] $existingSitelinks
 	 * @param ChangeOpSiteLink $changeOpSiteLink
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testApplyWithInvalidData( Item $entity, ChangeOpSiteLink $changeOpSiteLink ) {
-		$changeOpSiteLink->apply( $entity );
+	public function testApplyWithInvalidData( array $existingSitelinks, ChangeOpSiteLink $changeOpSiteLink ) {
+		$item = new Item();
+		$item->setSiteLinkList( new SiteLinkList( $existingSitelinks ) );
+
+		$changeOpSiteLink->apply( $item );
 	}
 
 	public function summaryTestProvider() {
 		$this->applySettings();
 
-		$item = new Item();
-		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
-		$item->getSiteLinkList()->addNewSiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) );
+		$sitelinks = array(
+			new SiteLink( 'dewiki', 'Berlin' ),
+			new SiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) )
+		);
 
 		$cases = array();
 		$badge = new ItemId( 'Q149' );
@@ -202,7 +198,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$cases['add-sitelink-without-badges'] = array(
 			'add',
 			array( 'Berlin' ),
-			$item->copy(),
+			$sitelinks,
 			new ChangeOpSiteLink( 'enwiki', 'Berlin', array() )
 		);
 
@@ -210,7 +206,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$cases['add-sitelink-with-badges'] = array(
 			'add-both',
 			array( 'Berlin', array( $badge ) ),
-			$item->copy(),
+			$sitelinks,
 			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( $badge ) )
 		);
 
@@ -218,7 +214,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$cases['set-pagename-existing-sitelink'] = array(
 			'set',
 			array( 'London' ),
-			$item->copy(),
+			$sitelinks,
 			new ChangeOpSiteLink( 'ruwiki', 'London' )
 		);
 
@@ -226,7 +222,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$cases['add-badges-to-existing-sitelink'] = array(
 			'set-badges',
 			array( array( $badge ) ),
-			$item->copy(),
+			$sitelinks,
 			new ChangeOpSiteLink( 'dewiki', null, array( $badge ) )
 		);
 
@@ -234,7 +230,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$cases['set-pagename-badges-existing-sitelink'] = array(
 			'set-both',
 			array( 'London', array( $badge ) ),
-			$item->copy(),
+			$sitelinks,
 			new ChangeOpSiteLink( 'dewiki', 'London', array( $badge ) ),
 		);
 
@@ -242,7 +238,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$cases['change-badges-for-existing-sitelink'] = array(
 			'set-badges',
 			array( array( $badge ) ),
-			$item->copy(),
+			$sitelinks,
 			new ChangeOpSiteLink( 'ruwiki', null, array( $badge ) )
 		);
 
@@ -259,11 +255,14 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	public function testApplySummary(
 		$expectedAction,
 		array $expectedArguments,
-		Item $entity,
+		array $sitelinks,
 		ChangeOpSiteLink $changeOpSiteLink
 	) {
+		$item = new Item();
+		$item->setSiteLinkList( new SiteLinkList( $sitelinks ) );
+
 		$summary = new Summary();
-		$changeOpSiteLink->apply( $entity, $summary );
+		$changeOpSiteLink->apply( $item, $summary );
 
 		$this->assertSame(
 			$expectedAction,

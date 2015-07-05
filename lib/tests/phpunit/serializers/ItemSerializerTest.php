@@ -97,14 +97,12 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	 * @return array[]
 	 */
 	private function semiValidProvider() {
-		$item = $this->getEntityInstance();
-
 		$validArgs = array();
 
 		$options = new SerializationOptions();
 		$options->setOption( EntitySerializer::OPT_PARTS, array( 'aliases' ) );
 
-		$item0 = $item->copy();
+		$item0 = $this->getEntityInstance();
 		$item0->setAliases( 'en', array( 'foo', 'bar' ) );
 		$item0->setAliases( 'de', array( 'baz', 'bah' ) );
 
@@ -142,7 +140,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 		$options = new SerializationOptions();
 		$options->setOption( EntitySerializer::OPT_PARTS, array( 'descriptions', 'labels' ) );
 
-		$item1 = $item->copy();
+		$item1 = $this->getEntityInstance();
 		$item1->setLabel( 'en', 'foo' );
 		$item1->setLabel( 'de', 'bar' );
 		$item1->setDescription( 'en', 'baz' );

@@ -491,7 +491,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			$item->getSiteLinkList()->addNewSiteLink( $siteId, $page, $badges );
 		}
 
-		return $item->copy();
+		return $item;
 	}
 
 	/**
