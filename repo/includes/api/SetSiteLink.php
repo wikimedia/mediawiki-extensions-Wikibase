@@ -32,6 +32,11 @@ class SetSiteLink extends ModifyEntity {
 	private $siteLinkChangeOpFactory;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -39,7 +44,11 @@ class SetSiteLink extends ModifyEntity {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
 	}
 
@@ -66,7 +75,10 @@ class SetSiteLink extends ModifyEntity {
 
 		// If we found anything then check if it is of the correct base class
 		if ( !is_null( $entityRev ) && !( $entityRev->getEntity() instanceof Item ) ) {
-			$this->dieError( 'The content on the found page is not of correct type', 'wrong-class' );
+			$this->errorReporter->dieError(
+				'The content on the found page is not of correct type',
+				'wrong-class'
+				 );
 		}
 
 		return $entityRev;
@@ -77,7 +89,7 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		if ( !( $entity instanceof Item ) ) {
-			$this->dieError( "The given entity is not an item", "not-item" );
+			$this->errorReporter->dieError( "The given entity is not an item", "not-item" );
 		}
 
 		$item = $entity;
@@ -101,7 +113,7 @@ class SetSiteLink extends ModifyEntity {
 				$link = $item->getSiteLink( $linksite );
 				$this->getResultBuilder()->addSiteLinks( array( $link ), 'entity', array( 'url' ) );
 			} else {
-				$this->dieMessage( 'no-such-sitelink', $params['linktitle'] );
+				$this->errorReporter->dieMessage( 'no-such-sitelink', $params['linktitle'] );
 			}
 		}
 
@@ -123,14 +135,17 @@ class SetSiteLink extends ModifyEntity {
 			$site = $sites->getSite( $linksite );
 
 			if ( $site === false ) {
-				$this->dieError( 'The supplied site identifier was not recognized', 'not-recognized-siteid' );
+				$this->errorReporter->dieError(
+					'The supplied site identifier was not recognized',
+					'not-recognized-siteid'
+				);
 			}
 
 			if ( isset( $params['linktitle'] ) ) {
 				$page = $site->normalizePageName( $this->stringNormalizer->trimWhitespace( $params['linktitle'] ) );
 
 				if ( $page === false ) {
-					$this->dieMessage( 'no-external-page', $linksite, $params['linktitle'] );
+					$this->errorReporter->dieMessage( 'no-external-page', $linksite, $params['linktitle'] );
 				}
 			} else {
 				$page = null;
