@@ -161,4 +161,18 @@ class ApiHelperFactory {
 		);
 	}
 
+	/**
+	 * Return an EntityLoadHelper object for use in Api modules
+	 *
+	 * @param ApiBase $apiBase
+	 *
+	 * @return EntityLoadHelper
+	 */
+	public function getEntityLoadHelper( ApiBase $apiBase ) {
+		return new EntityLoadHelper(
+			$this->entityRevisionLookup,
+			$this->getErrorReporter( $apiBase )
+		);
+	}
+
 }
