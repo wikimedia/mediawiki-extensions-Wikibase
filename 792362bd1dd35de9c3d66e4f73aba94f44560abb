@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_5e8f082f",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-05T16:25:13Z",
+      "side": 1,
+      "message": "doesn\u0027t need @since tag since it\u0027s private",
+      "revId": "792362bd1dd35de9c3d66e4f73aba94f44560abb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_3e88fc21",
+        "filename": "repo/includes/api/SetDescription.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-05T16:25:13Z",
+      "side": 1,
+      "message": "use $resultBuilder or inline it above",
+      "revId": "792362bd1dd35de9c3d66e4f73aba94f44560abb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_de821801",
+        "filename": "repo/includes/api/SetLabel.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-05T16:25:13Z",
+      "side": 1,
+      "message": "use $resultBuilder or inline it above",
+      "revId": "792362bd1dd35de9c3d66e4f73aba94f44560abb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
