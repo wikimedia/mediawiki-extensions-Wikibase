@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test\Api;
 
+use Exception;
 use Status;
 use TestUser;
-use Title;
 use Wikibase\Api\EntitySaveHelper;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -23,7 +23,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class EntitySaverHelperTest extends \MediaWikiTestCase {
+class EntitySaverHelperTest extends \PHPUnit_Framework_TestCase {
 
 	private function getMockApiBase() {
 		return $this->getMockBuilder( 'ApiBase' )
@@ -43,39 +43,41 @@ class EntitySaverHelperTest extends \MediaWikiTestCase {
 			->getMock();
 	}
 
-	private function getMockEntityTitleLookup() {
-		return $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
-	}
-
-	private function getMockEntityRevisionLookup() {
-		return $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
-	}
-
-	private function getMockEntityStore() {
-		return $this->getMock( 'Wikibase\Lib\Store\EntityStore' );
-	}
-
-	private function getMockEntityPermissionChecker() {
-		return $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
-	}
-
-	private function getMockEditFilterHookRunner() {
-		return $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+	private function getMockEditEntity( $calls ) {
+		$mock = $this->getMockBuilder( 'Wikibase\EditEntity' )
 			->disableOriginalConstructor()
 			->getMock();
+		$mock->expects( $this->exactly( $calls ) )
+			->method( 'attemptSave' )
+			->will( $this->returnValue( Status::newGood() ) );
+		return $mock;
+	}
+
+	private function getMockEditEntityFactory( $calls ) {
+		$mock = $this->getMockBuilder( 'Wikibase\EditEntityFactory' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->exactly( $calls ) )
+			->method( 'newEditEntity' )
+			->will( $this->returnValue( $this->getMockEditEntity( $calls ) ) );
+		return $mock;
 	}
 
 	private function getMockContext() {
 		return $this->getMock( 'RequestContext' );
 	}
 
-	public function testAttemptSave() {
-		$testUser = new TestUser( 'aUser' );
+	private function getMockUser() {
+		return $this->getMockBuilder( 'User' )
+			->disableOriginalConstructor()
+			->getMock();
+	}
 
+	public function testAttemptSave() {
 		$mockContext = $this->getMockContext();
 		$mockContext->expects( $this->once() )
 			->method( 'getUser' )
-			->will( $this->returnValue( $testUser->getUser() ) );
+			->will( $this->returnValue( $this->getMockUser() ) );
 
 		$mockApiBase = $this->getMockApiBase();
 		$mockApiBase->expects( $this->once() )
@@ -88,34 +90,11 @@ class EntitySaverHelperTest extends \MediaWikiTestCase {
 			->method( 'extractRequestParams' )
 			->will( $this->returnValue( array() ) );
 
-		$mockTitleLookup = $this->getMockEntityTitleLookup();
-		$mockTitleLookup->expects( $this->atLeastOnce() )
-			->method( 'getTitleForId' )
-			->will( $this->returnValue( Title::newFromText( 'Title' ) ) );
-
-		$mockEntityStore = $this->getMockEntityStore();
-		$mockEntityStore->expects( $this->once() )
-			->method( 'updateWatchlist' );
-
-		$mockEntityPermissionChecker = $this->getMockEntityPermissionChecker();
-		$mockEntityPermissionChecker->expects( $this->atLeastOnce() )
-			->method( 'getPermissionStatusForEntity' )
-			->will( $this->returnValue( Status::newGood() ) );
-
-		$mockEditFilterHookRunner = $this->getMockEditFilterHookRunner();
-		$mockEditFilterHookRunner->expects( $this->atLeastOnce() )
-			->method( 'run' )
-			->will( $this->returnValue( Status::newGood() ) );
-
 		$helper = new EntitySaveHelper(
 			$mockApiBase,
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
-			$mockTitleLookup,
-			$this->getMockEntityRevisionLookup(),
-			$mockEntityStore,
-			$mockEntityPermissionChecker,
-			$mockEditFilterHookRunner
+			$this->getMockEditEntityFactory( 1 )
 		);
 
 		$entity = new Item();
@@ -142,11 +121,7 @@ class EntitySaverHelperTest extends \MediaWikiTestCase {
 			$mockApiBase,
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
-			$this->getMockEntityTitleLookup(),
-			$this->getMockEntityRevisionLookup(),
-			$this->getMockEntityStore(),
-			$this->getMockEntityPermissionChecker(),
-			$this->getMockEditFilterHookRunner()
+			$this->getMockEditEntityFactory( 0 )
 		);
 
 		$this->setExpectedException( 'LogicException' );
