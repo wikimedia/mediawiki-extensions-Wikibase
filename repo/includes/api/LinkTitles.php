@@ -41,6 +41,16 @@ class LinkTitles extends ApiWikibase {
 	private $siteLinkGroups;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $revisionLookup;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -52,7 +62,9 @@ class LinkTitles extends ApiWikibase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
+		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteStore(),
 			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
@@ -67,7 +79,7 @@ class LinkTitles extends ApiWikibase {
 	 * @since 0.1
 	 */
 	public function execute() {
-		$lookup = $this->getEntityRevisionLookup();
+		$lookup = $this->revisionLookup;
 
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
@@ -147,7 +159,7 @@ class LinkTitles extends ApiWikibase {
 			$this->errorReporter->dieError( 'No common item detected, unable to link titles', 'no-common-item' );
 		}
 
-		$this->getResultBuilder()->addSiteLinks( $return, 'entity' );
+		$this->resultBuilder->addSiteLinks( $return, 'entity' );
 		$status = $this->getAttemptSaveStatus( $item, $summary, $flags );
 		$this->buildResult( $item, $status );
 	}
@@ -189,11 +201,11 @@ class LinkTitles extends ApiWikibase {
 
 	private function buildResult( Item $item = null, Status $status ) {
 		if ( $item !== null ) {
-			$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity' );
-			$this->getResultBuilder()->addBasicEntityInformation( $item->getId(), 'entity' );
+			$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'entity' );
+			$this->resultBuilder->addBasicEntityInformation( $item->getId(), 'entity' );
 		}
 
-		$this->getResultBuilder()->markSuccess( $status->isOK() );
+		$this->resultBuilder->markSuccess( $status->isOK() );
 	}
 
 	/**
@@ -214,6 +226,15 @@ class LinkTitles extends ApiWikibase {
 	 */
 	public function isWriteMode() {
 		return true;
+	}
+
+	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
 	}
 
 	/**

@@ -70,6 +70,11 @@ class EditEntity extends ModifyEntity {
 	private $errorReporter;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $revisionLookup;
+
+	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -85,6 +90,7 @@ class EditEntity extends ModifyEntity {
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
+		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -93,15 +99,13 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiWikibase::getRequiredPermissions
-	 *
 	 * @param EntityDocument $entity
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string[]
+	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = parent::getRequiredPermissions( $entity );
+		$permissions = $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
 
 		if ( !$this->entityExists( $entity->getId() ) ) {
 			$permissions[] = 'createpage';
@@ -176,12 +180,11 @@ class EditEntity extends ModifyEntity {
 		$data = json_decode( $params['data'], true );
 		$this->validateDataProperties( $data, $entity, $baseRevId );
 
-		$revisionLookup = $this->getEntityRevisionLookup();
 		$exists = $this->entityExists( $entity->getId() );
 
 		if ( $params['clear'] ) {
 			if ( $params['baserevid'] && $exists ) {
-				$latestRevision = $revisionLookup->getLatestRevisionId(
+				$latestRevision = $this->revisionLookup->getLatestRevisionId(
 					$entity->getId(),
 					EntityRevisionLookup::LATEST_FROM_MASTER
 				);
@@ -708,7 +711,7 @@ class EditEntity extends ModifyEntity {
 				);
 			}
 
-			$dataId = $this->getIdParser()->parse( $data['id'] );
+			$dataId = $this->idParser->parse( $data['id'] );
 			if ( !$entityId->equals( $dataId ) ) {
 				$this->errorReporter->dieError(
 					'Invalid field used in call: "id", must match id parameter',
