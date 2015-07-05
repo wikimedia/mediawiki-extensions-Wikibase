@@ -19,7 +19,7 @@ use Wikibase\SummaryFormatter;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class EntitySaveHelper {
+class EntitySavingHelper {
 
 	/**
 	 * @var ApiBase

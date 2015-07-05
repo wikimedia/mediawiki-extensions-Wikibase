@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class EntityLoadHelper {
+class EntityLoadingHelper {
 
 	/**
 	 * @var EntityRevisionLookup

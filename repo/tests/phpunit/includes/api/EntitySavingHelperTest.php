@@ -2,10 +2,8 @@
 
 namespace Wikibase\Test\Api;
 
-use Exception;
 use Status;
-use TestUser;
-use Wikibase\Api\EntitySaveHelper;
+use Wikibase\Api\EntitySavingHelper;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -13,7 +11,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\Test\Api\EntitySaverHelper
+ * @covers Wikibase\Api\EntitySavingHelper
  *
  * @group Database
  * @group Wikibase
@@ -23,7 +21,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class EntitySaverHelperTest extends \PHPUnit_Framework_TestCase {
+class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 
 	private function getMockApiBase() {
 		return $this->getMockBuilder( 'ApiBase' )
@@ -90,7 +88,7 @@ class EntitySaverHelperTest extends \PHPUnit_Framework_TestCase {
 			->method( 'extractRequestParams' )
 			->will( $this->returnValue( array() ) );
 
-		$helper = new EntitySaveHelper(
+		$helper = new EntitySavingHelper(
 			$mockApiBase,
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
@@ -117,7 +115,7 @@ class EntitySaverHelperTest extends \PHPUnit_Framework_TestCase {
 			->method( 'isWriteMode' )
 			->will( $this->returnValue( false ) );
 
-		$helper = new EntitySaveHelper(
+		$helper = new EntitySavingHelper(
 			$mockApiBase,
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),

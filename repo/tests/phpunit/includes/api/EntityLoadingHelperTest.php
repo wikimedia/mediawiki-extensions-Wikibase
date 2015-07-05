@@ -4,14 +4,14 @@ namespace Wikibase\Test\Api;
 
 use Exception;
 use UsageException;
-use Wikibase\Api\EntityLoadHelper;
+use Wikibase\Api\EntityLoadingHelper;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
- * @covers Wikibase\Test\Api\EntityLoadHelper
+ * @covers Wikibase\Api\EntityLoadingHelper
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class EntityLoadHelperTest extends \MediaWikiTestCase {
+class EntityLoadingHelperTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param mixed $entityRevisionReturn if value is instance of Exception it will be thrown
@@ -68,7 +68,7 @@ class EntityLoadHelperTest extends \MediaWikiTestCase {
 
 	public function testRevision_returnsRevision() {
 		$revision = $this->getMockRevision();
-		$helper = new EntityLoadHelper(
+		$helper = new EntityLoadingHelper(
 			$this->getMockEntityRevisionLookup( $revision ),
 			$this->getMockErrorReporter()
 		);
@@ -79,7 +79,7 @@ class EntityLoadHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testNullRevision_callsErrorReporter() {
-		$helper = new EntityLoadHelper(
+		$helper = new EntityLoadingHelper(
 			$this->getMockEntityRevisionLookup( null ),
 			$this->getMockErrorReporter( null, 'cant-load-entity-content' )
 		);
@@ -89,7 +89,7 @@ class EntityLoadHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testUnresolvedRedirectException_callsErrorReporter() {
-		$helper = new EntityLoadHelper(
+		$helper = new EntityLoadingHelper(
 			$this->getMockEntityRevisionLookup( new UnresolvedRedirectException( new ItemId( 'Q1' ) ) ),
 			$this->getMockErrorReporter( 'unresolved-redirect' )
 		);
@@ -99,7 +99,7 @@ class EntityLoadHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testBadRevisionException_callsErrorReporter() {
-		$helper = new EntityLoadHelper(
+		$helper = new EntityLoadingHelper(
 			$this->getMockEntityRevisionLookup( new BadRevisionException() ),
 			$this->getMockErrorReporter( 'nosuchrevid' )
 		);
@@ -109,7 +109,7 @@ class EntityLoadHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testStorageException_callsErrorReporter() {
-		$helper = new EntityLoadHelper(
+		$helper = new EntityLoadingHelper(
 			$this->getMockEntityRevisionLookup( new StorageException() ),
 			$this->getMockErrorReporter( 'cant-load-entity-content' )
 		);

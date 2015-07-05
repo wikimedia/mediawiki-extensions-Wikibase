@@ -40,7 +40,7 @@ class EditEntityFactoryTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 	}
 
-	public function testGetEntityLoadHelper() {
+	public function testGetEntityLoadingHelper() {
 		$factory = $this->newEditEntityFactory();
 
 		$editEntity = $factory->newEditEntity( $this->getMockUser(), new Item() );
