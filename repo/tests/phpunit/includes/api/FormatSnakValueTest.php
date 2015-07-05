@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use ApiTestCase;
 use DataValues\DataValue;
@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\FormatSnakValue
+ * @covers Wikibase\Repo\Api\FormatSnakValue
  *
  * @group Wikibase
  * @group WikibaseAPI

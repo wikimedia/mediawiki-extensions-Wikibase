@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 /**
- * @covers Wikibase\Api\SetAliases
+ * @covers Wikibase\Repo\Api\SetAliases
  *
  * @group Database
  * @group medium

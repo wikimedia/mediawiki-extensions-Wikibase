@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use ApiMain;
 use FauxRequest;
@@ -9,8 +9,8 @@ use RequestContext;
 use Status;
 use UsageException;
 use User;
-use Wikibase\Api\ApiErrorReporter;
-use Wikibase\Api\CreateRedirect;
+use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\CreateRedirect;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -23,7 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\Api\CreateRedirect
+ * @covers Wikibase\Repo\Api\CreateRedirect
  *
  * @group API
  * @group Wikibase

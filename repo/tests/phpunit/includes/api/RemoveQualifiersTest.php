@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use DataValues\StringValue;
 use UsageException;
@@ -16,7 +16,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\RemoveQualifiers
+ * @covers Wikibase\Repo\Api\RemoveQualifiers
  *
  * @group API
  * @group Database

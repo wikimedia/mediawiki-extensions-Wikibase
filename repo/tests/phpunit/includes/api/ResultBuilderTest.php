@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use ApiResult;
 use DataValues\StringValue;
-use Wikibase\Api\ResultBuilder;
+use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -20,7 +20,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 
 /**
- * @covers Wikibase\Api\ResultBuilder
+ * @covers Wikibase\Repo\Api\ResultBuilder
  * @todo mock and inject serializers to avoid massive expected output?
  *
  * @group Wikibase
@@ -93,7 +93,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testCanConstruct() {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
-		$this->assertInstanceOf( '\Wikibase\Api\ResultBuilder', $resultBuilder );
+		$this->assertInstanceOf( '\Wikibase\Repo\Api\ResultBuilder', $resultBuilder );
 	}
 
 	/**

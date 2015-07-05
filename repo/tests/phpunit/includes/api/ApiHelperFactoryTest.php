@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use Language;
-use Wikibase\Api\ApiHelperFactory;
+use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\ApiHelperFactory
+ * @covers Wikibase\Repo\Api\ApiHelperFactory
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -71,7 +71,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->newApiHelperFactory();
 
 		$resultBuilder = $factory->getResultBuilder( $api );
-		$this->assertInstanceOf( 'Wikibase\Api\ResultBuilder', $resultBuilder );
+		$this->assertInstanceOf( 'Wikibase\Repo\Api\ResultBuilder', $resultBuilder );
 	}
 
 	public function testGetErrorReporter() {
@@ -79,7 +79,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->newApiHelperFactory();
 
 		$errorReporter = $factory->getErrorReporter( $api );
-		$this->assertInstanceOf( 'Wikibase\Api\ApiErrorReporter', $errorReporter );
+		$this->assertInstanceOf( 'Wikibase\Repo\Api\ApiErrorReporter', $errorReporter );
 	}
 
 	public function testGetSerializerFactory() {
@@ -93,14 +93,14 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->newApiHelperFactory();
 
 		$helper = $factory->getEntitySavingHelper( $this->newApiModule() );
-		$this->assertInstanceOf( 'Wikibase\Api\EntitySavingHelper', $helper );
+		$this->assertInstanceOf( 'Wikibase\Repo\Api\EntitySavingHelper', $helper );
 	}
 
 	public function testGetEntityLoadingHelper() {
 		$factory = $this->newApiHelperFactory();
 
 		$helper = $factory->getEntityLoadingHelper( $this->newApiModule() );
-		$this->assertInstanceOf( 'Wikibase\Api\EntityLoadingHelper', $helper );
+		$this->assertInstanceOf( 'Wikibase\Repo\Api\EntityLoadingHelper', $helper );
 	}
 
 }

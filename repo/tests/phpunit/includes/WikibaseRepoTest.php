@@ -240,7 +240,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	public function testGetApiHelperFactory() {
 		$mockContext = $this->getMock( 'RequestContext' );
 		$factory = $this->getWikibaseRepo()->getApiHelperFactory( $mockContext );
-		$this->assertInstanceOf( 'Wikibase\Api\ApiHelperFactory', $factory );
+		$this->assertInstanceOf( 'Wikibase\Repo\Api\ApiHelperFactory', $factory );
 	}
 
 	public function testGetTermLookup() {

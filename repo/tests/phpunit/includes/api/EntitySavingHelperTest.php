@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use Status;
-use Wikibase\Api\EntitySavingHelper;
+use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -11,7 +11,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\Api\EntitySavingHelper
+ * @covers Wikibase\Repo\Api\EntitySavingHelper
  *
  * @group Database
  * @group Wikibase
@@ -30,7 +30,7 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getMockErrorReporter() {
-		return $this->getMockBuilder( 'Wikibase\Api\ApiErrorReporter' )
+		return $this->getMockBuilder( 'Wikibase\Repo\Api\ApiErrorReporter' )
 			->disableOriginalConstructor()
 			->getMock();
 	}
