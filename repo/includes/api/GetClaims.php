@@ -39,6 +39,11 @@ class GetClaims extends ApiWikibase {
 	private $guidParser;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -49,8 +54,11 @@ class GetClaims extends ApiWikibase {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		//TODO: provide a mechanism to override the services
-		$this->guidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
-		$this->guidParser = WikibaseRepo::getDefaultInstance()->getStatementGuidParser();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
+		$this->guidValidator = $wikibaseRepo->getClaimGuidValidator();
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
 	}
 
 	/**
@@ -67,7 +75,7 @@ class GetClaims extends ApiWikibase {
 		try {
 			$entityId = $this->getIdParser()->parse( $idString );
 		} catch ( EntityIdParsingException $e ) {
-			$this->dieException( $e, 'param-invalid' );
+			$this->errorReporter->dieException( $e, 'param-invalid' );
 		}
 
 		$entityRevision = $entityId ? $this->loadEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_SLAVE ) : null;
@@ -87,7 +95,7 @@ class GetClaims extends ApiWikibase {
 
 	private function validateParameters( array $params ) {
 		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
-			$this->dieError( 'Either the entity parameter or the claim parameter need to be set', 'param-missing' );
+			$this->errorReporter->dieError( 'Either the entity parameter or the claim parameter need to be set', 'param-missing' );
 		}
 	}
 
@@ -149,7 +157,7 @@ class GetClaims extends ApiWikibase {
 			try {
 				$parsedProperty = $this->getIdParser()->parse( $params['property'] );
 			} catch ( EntityIdParsingException $e ) {
-				$this->dieException( $e, 'param-invalid' );
+				$this->errorReporter->dieException( $e, 'param-invalid' );
 			}
 
 			return $propertyId->equals( $parsedProperty );
@@ -176,7 +184,7 @@ class GetClaims extends ApiWikibase {
 			$idString = $this->getEntityIdFromStatementGuid( $params['claim'] );
 
 			if ( isset( $params['entity'] ) && $idString !== $params['entity'] ) {
-				$this->dieError( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
+				$this->errorReporter->dieError( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
 			}
 		} else {
 			$idString = $params['entity'];
@@ -187,7 +195,7 @@ class GetClaims extends ApiWikibase {
 
 	private function getEntityIdFromStatementGuid( $guid ) {
 		if ( $this->guidValidator->validateFormat( $guid ) === false ) {
-			$this->dieError( 'Invalid claim guid', 'invalid-guid' );
+			$this->errorReporter->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
 
 		return $this->guidParser->parse( $guid )->getEntityId()->getSerialization();

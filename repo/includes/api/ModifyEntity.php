@@ -76,6 +76,11 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected $badgeItems;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
 	 *
 	 * @see EditEntity::attemptSave
@@ -96,9 +101,11 @@ abstract class ModifyEntity extends ApiWikibase {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$settings = $wikibaseRepo->getSettings();
 
 		//TODO: provide a mechanism to override the services
+		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
@@ -149,11 +156,11 @@ abstract class ModifyEntity extends ApiWikibase {
 			try {
 				$entityRevision = $this->getEntityRevisionLookup()->getEntityRevision( $entityId, $baseRevisionId );
 			} catch ( StorageException $ex ) {
-				$this->dieException( $ex, 'no-such-entity' );
+				$this->errorReporter->dieException( $ex, 'no-such-entity' );
 			}
 
 			if ( $entityRevision === null ) {
-				$this->dieError( "Can't access entity " . $entityId
+				$this->errorReporter->dieError( "Can't access entity " . $entityId
 					. ', revision may have been deleted.', 'no-such-entity' );
 			}
 		}
@@ -192,7 +199,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		try {
 			return $this->getIdParser()->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
-			$this->dieException( $ex, 'no-such-entity-id' );
+			$this->errorReporter->dieException( $ex, 'no-such-entity-id' );
 		}
 
 		return null;
@@ -211,7 +218,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
 
 		if ( $itemId === null ) {
-			$this->dieError( 'No entity found matching site link ' . $site . ':' . $title,
+			$this->errorReporter->dieError( 'No entity found matching site link ' . $site . ':' . $title,
 				'no-such-entity-link' );
 		}
 
@@ -232,21 +239,23 @@ abstract class ModifyEntity extends ApiWikibase {
 			try {
 				$badgeId = new ItemId( $badgeSerialization );
 			} catch ( InvalidArgumentException $ex ) {
-				$this->dieError( 'Badges: could not parse "' . $badgeSerialization
+				$this->errorReporter->dieError( 'Badges: could not parse "' . $badgeSerialization
 					. '", the id is invalid', 'invalid-entity-id' );
 				continue;
 			}
 
 			if ( !array_key_exists( $badgeId->getSerialization(), $this->badgeItems ) ) {
-				$this->dieError( 'Badges: item "' . $badgeSerialization . '" is not a badge',
+				$this->errorReporter->dieError( 'Badges: item "' . $badgeSerialization . '" is not a badge',
 					'not-badge' );
 			}
 
 			$itemTitle = $this->getTitleLookup()->getTitleForId( $badgeId );
 
 			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
-				$this->dieError( 'Badges: no item found matching id "' . $badgeSerialization . '"',
-					'no-such-entity' );
+				$this->errorReporter->dieError(
+					'Badges: no item found matching id "' . $badgeSerialization . '"',
+					'no-such-entity'
+				);
 			}
 
 			$badges[] = $badgeId;
@@ -265,7 +274,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return Entity Newly created entity
 	 */
 	protected function createEntity( $entityType ) {
-		$this->dieError( 'Could not find an existing entity', 'no-such-entity' );
+		$this->errorReporter->dieError( 'Could not find an existing entity', 'no-such-entity' );
 	}
 
 	/**
@@ -316,7 +325,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 			$changeOp->apply( $entity, $summary );
 		} catch ( ChangeOpException $ex ) {
-			$this->dieException( $ex, 'modification-failed' );
+			$this->errorReporter->dieException( $ex, 'modification-failed' );
 		}
 	}
 
@@ -330,8 +339,10 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieError( 'Either provide the item "id" or pairs of "site" and "title"'
-				. ' for a corresponding page', 'param-illegal' );
+			$this->errorReporter->dieError(
+				'Either provide the item "id" or pairs of "site" and "title" for a corresponding page',
+				'param-illegal'
+			);
 		}
 	}
 
@@ -370,7 +381,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		$status = $this->checkPermissions( $entity, $user );
 
 		if ( !$status->isOK() ) {
-			$this->dieError( 'You do not have sufficient permissions', 'permissiondenied' );
+			$this->errorReporter->dieError( 'You do not have sufficient permissions', 'permissiondenied' );
 		}
 
 		$summary = $this->modifyEntity( $entity, $params, $entityRevId );
@@ -378,7 +389,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		if ( !$summary ) {
 			//XXX: This could rather be used for "silent" failure, i.e. in cases where
 			//     there was simply nothing to do.
-			$this->dieError( 'Attempted modification of the item failed', 'failed-modify' );
+			$this->errorReporter->dieError( 'Attempted modification of the item failed', 'failed-modify' );
 		}
 
 		$this->addFlags( $entity->getId() === null );
