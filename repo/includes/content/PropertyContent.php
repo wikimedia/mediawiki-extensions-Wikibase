@@ -111,4 +111,30 @@ class PropertyContent extends EntityContent {
 		return true;
 	}
 
+	/**
+	 * @see AbstractContent::isEmpty
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		if ( $this->isRedirect() ) {
+			return false;
+		}
+
+		return $this->getProperty()->isEmpty();
+	}
+
+	/**
+	 * @see EntityContent::isStub
+	 *
+	 * @return bool
+	 */
+	public function isStub() {
+		if ( $this->isEmpty() ) {
+			return false;
+		}
+
+		return $this->getProperty()->getStatements()->isEmpty();
+	}
+
 }

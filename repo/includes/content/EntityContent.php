@@ -26,7 +26,6 @@ use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
@@ -645,13 +644,7 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * @return bool
 	 */
-	public function isEmpty() {
-		if ( $this->isRedirect() ) {
-			return false;
-		}
-
-		return $this->getEntity()->isEmpty();
-	}
+	public abstract function isStub();
 
 	/**
 	 * @see Content::copy
@@ -769,7 +762,7 @@ abstract class EntityContent extends AbstractContent {
 	 * e.g. STATUS_EMPTY or STATUS_NONE.
 	 * Used by getEntityPageProperties().
 	 *
-	 * @note Will fail if this ItemContent is a redirect.
+	 * @note Will fail if this EntityContent is a redirect.
 	 *
 	 * @see getEntityPageProperties()
 	 * @see EntityContent::STATUS_NONE
@@ -779,13 +772,9 @@ abstract class EntityContent extends AbstractContent {
 	 * @return int
 	 */
 	public function getEntityStatus() {
-		$entity = $this->getEntity();
-
 		if ( $this->isEmpty() ) {
 			return self::STATUS_EMPTY;
-		} elseif ( $entity instanceof StatementListProvider
-			&& $entity->getStatements()->isEmpty()
-		) {
+		} else if ( $this->isStub() ) {
 			return self::STATUS_STUB;
 		} else {
 			return self::STATUS_NONE;

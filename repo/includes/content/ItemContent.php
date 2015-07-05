@@ -207,6 +207,32 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * @see AbstractContent::isEmpty
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		if ( $this->isRedirect() ) {
+			return false;
+		}
+
+		return $this->getItem()->isEmpty();
+	}
+
+	/**
+	 * @see EntityContent::isStub
+	 *
+	 * @return bool
+	 */
+	public function isStub() {
+		if ( $this->isEmpty() ) {
+			return false;
+		}
+
+		return $this->getItem()->getStatements()->isEmpty();
+	}
+
+	/**
 	 * @see EntityContent::getEntityPageProperties
 	 *
 	 * Records the number of sitelinks in the 'wb-sitelinks' key.
