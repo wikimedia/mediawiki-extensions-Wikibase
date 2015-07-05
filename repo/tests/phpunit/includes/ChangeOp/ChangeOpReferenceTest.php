@@ -273,7 +273,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 			$index
 		);
 
-		$entity = $entity->copy();
 		$changeOpReference->apply( $entity );
 	}
 
@@ -319,7 +318,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 			$index
 		);
 
-		$entity = $entity->copy();
 		$result = $changeOpReference->validate( $entity );
 		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}

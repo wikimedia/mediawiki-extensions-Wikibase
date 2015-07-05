@@ -143,8 +143,7 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 			array(),
 		);
 
-		/** @var Item $item */
-		$item = $item->copy();
+		$item = new Item( new ItemId( 'Q1' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'test' );
 
 		$testCases[] = array(

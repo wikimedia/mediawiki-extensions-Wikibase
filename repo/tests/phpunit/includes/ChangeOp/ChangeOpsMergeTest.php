@@ -190,16 +190,16 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$itemWithEnLabel->getFingerprint()->setLabel( 'en', 'foo' );
 
 		$testCases['labelMerge'] = array(
-			$itemWithEnLabel->copy(),
+			unserialize( serialize( $itemWithEnLabel ) ),
 			new Item(),
 			new Item(),
-			$itemWithEnLabel->copy(),
+			unserialize( serialize( $itemWithEnLabel ) ),
 		);
 		$testCases['identicalLabelMerge'] = array(
-			$itemWithEnLabel->copy(),
-			$itemWithEnLabel->copy(),
+			unserialize( serialize( $itemWithEnLabel ) ),
+			unserialize( serialize( $itemWithEnLabel ) ),
 			new Item(),
-			$itemWithEnLabel->copy(),
+			unserialize( serialize( $itemWithEnLabel ) ),
 		);
 
 		$itemWithEnBarLabel = new Item();
@@ -210,35 +210,35 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$itemWithLabelAndAlias->getFingerprint()->setAliasGroup( 'en', array( 'foo' ) );
 
 		$testCases['labelAsAliasMerge'] = array(
-			$itemWithEnLabel->copy(),
-			$itemWithEnBarLabel->copy(),
+			unserialize( serialize( $itemWithEnLabel ) ),
+			unserialize( serialize( $itemWithEnBarLabel ) ),
 			new Item(),
-			$itemWithLabelAndAlias->copy()
+			unserialize( serialize( $itemWithLabelAndAlias ) )
 		);
 
 		$itemWithDescription = new Item();
 		$itemWithDescription->getFingerprint()->setDescription( 'en', 'foo' );
 
 		$testCases['descriptionMerge'] = array(
-			$itemWithDescription->copy(),
+			unserialize( serialize( $itemWithDescription ) ),
 			new Item(),
 			new Item(),
-			$itemWithDescription->copy(),
+			unserialize( serialize( $itemWithDescription ) ),
 		);
 		$testCases['identicalDescriptionMerge'] = array(
-			$itemWithDescription->copy(),
-			$itemWithDescription->copy(),
+			unserialize( serialize( $itemWithDescription ) ),
+			unserialize( serialize( $itemWithDescription ) ),
 			new Item(),
-			$itemWithDescription->copy(),
+			unserialize( serialize( $itemWithDescription ) ),
 		);
 
 		$itemWithBarDescription = new Item();
 		$itemWithBarDescription->getFingerprint()->setDescription( 'en', 'bar' );
 		$testCases['ignoreConflictDescriptionMerge'] = array(
-			$itemWithDescription->copy(),
-			$itemWithBarDescription->copy(),
-			$itemWithDescription->copy(),
-			$itemWithBarDescription->copy(),
+			unserialize( serialize( $itemWithDescription ) ),
+			unserialize( serialize( $itemWithBarDescription ) ),
+			unserialize( serialize( $itemWithDescription ) ),
+			unserialize( serialize( $itemWithBarDescription ) ),
 			array( 'description' )
 		);
 
@@ -246,47 +246,47 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$itemWithFooBarAliases->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
 
 		$testCases['aliasMerge'] = array(
-			$itemWithFooBarAliases->copy(),
+			unserialize( serialize( $itemWithFooBarAliases ) ),
 			new Item(),
 			new Item(),
-			$itemWithFooBarAliases->copy(),
+			unserialize( serialize( $itemWithFooBarAliases ) ),
 		);
 
 		$itemWithFooBarBazAliases = new Item();
 		$itemWithFooBarBazAliases->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar', 'baz' ) );
 
 		$testCases['duplicateAliasMerge'] = array(
-			$itemWithFooBarAliases->copy(),
-			$itemWithFooBarBazAliases->copy(),
+			unserialize( serialize( $itemWithFooBarAliases ) ),
+			unserialize( serialize( $itemWithFooBarBazAliases ) ),
 			new Item(),
-			$itemWithFooBarBazAliases->copy(),
+			unserialize( serialize( $itemWithFooBarBazAliases ) ),
 		);
 
 		$itemWithLink = new Item();
 		$itemWithLink->getSiteLinkList()->addNewSiteLink( 'enwiki', 'foo' );
 
 		$testCases['linkMerge'] = array(
-			$itemWithLink->copy(),
+			unserialize( serialize( $itemWithLink ) ),
 			new Item(),
 			new Item(),
-			$itemWithLink->copy(),
+			unserialize( serialize( $itemWithLink ) ),
 		);
 
 		$testCases['sameLinkLinkMerge'] = array(
-			$itemWithLink->copy(),
-			$itemWithLink->copy(),
+			unserialize( serialize( $itemWithLink ) ),
+			unserialize( serialize( $itemWithLink ) ),
 			new Item(),
-			$itemWithLink->copy(),
+			unserialize( serialize( $itemWithLink ) ),
 		);
 
 		$itemWithBarLink = new Item();
 		$itemWithBarLink->getSiteLinkList()->addNewSiteLink( 'enwiki', 'bar' );
 
 		$testCases['ignoreConflictLinkMerge'] = array(
-			$itemWithLink->copy(),
-			$itemWithBarLink->copy(),
-			$itemWithLink->copy(),
-			$itemWithBarLink->copy(),
+			unserialize( serialize( $itemWithLink ) ),
+			unserialize( serialize( $itemWithBarLink ) ),
+			unserialize( serialize( $itemWithLink ) ),
+			unserialize( serialize( $itemWithBarLink ) ),
 			array( 'sitelink' ),
 		);
 
@@ -296,10 +296,10 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$itemWithStatement = new Item();
 		$itemWithStatement->getStatements()->addStatement( $claim );
 		$testCases['claimMerge'] = array(
-			$itemWithStatement->copy(),
+			unserialize( serialize( $itemWithStatement ) ),
 			new Item(),
 			new Item(),
-			$itemWithStatement->copy()
+			unserialize( serialize( $itemWithStatement ) )
 		);
 
 		$qualifiedClaim = new Statement(
@@ -312,10 +312,10 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$itemWithQualifiedStatement->getStatements()->addStatement( $qualifiedClaim );
 
 		$testCases['claimWithQualifierMerge'] = array(
-			$itemWithQualifiedStatement->copy(),
+			unserialize( serialize( $itemWithQualifiedStatement ) ),
 			new Item(),
 			new Item(),
-			$itemWithQualifiedStatement->copy()
+			unserialize( serialize( $itemWithQualifiedStatement ) )
 		);
 
 		$anotherQualifiedStatement = new Statement(
@@ -335,10 +335,10 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$bigItem->getStatements()->addStatement( $anotherQualifiedStatement );
 
 		$testCases['itemMerge'] = array(
-			$bigItem->copy(),
+			unserialize( serialize( $bigItem ) ),
 			new Item(),
 			new Item(),
-			$bigItem->copy(),
+			unserialize( serialize( $bigItem ) ),
 		);
 
 		$bigItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'bar' );
@@ -365,10 +365,10 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$bigMergedItem->setStatements( new StatementList( $anotherQualifiedStatement ) );
 
 		$testCases['ignoreConflictItemMerge'] = array(
-			$bigItem->copy(),
-			$smallerItem->copy(),
-			$smallerMergedItem->copy(),
-			$bigMergedItem->copy(),
+			unserialize( serialize( $bigItem ) ),
+			unserialize( serialize( $smallerItem ) ),
+			unserialize( serialize( $smallerMergedItem ) ),
+			unserialize( serialize( $bigMergedItem ) ),
 			array( 'description', 'sitelink' )
 		);
 		return $testCases;

@@ -101,7 +101,8 @@ class ChangeOps implements ChangeOp {
 	 */
 	public function validate( Entity $entity ) {
 		$result = Result::newSuccess();
-		$entity = $entity->copy();
+		// deep clone of $entity to avoid side-effects
+		$entity = unserialize( serialize( $entity ) );
 
 		foreach ( $this->changeOps as $changeOp ) {
 			$result = $changeOp->validate( $entity );
