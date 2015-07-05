@@ -184,7 +184,6 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 			$this->mockProvider->getMockSnakValidator()
 		);
 
-		$entity = $entity->copy();
 		$changeOpQualifier->apply( $entity );
 	}
 
@@ -225,7 +224,6 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 			$this->mockProvider->getMockSnakValidator()
 		);
 
-		$entity = $entity->copy();
 		$result = $changeOpQualifier->validate( $entity );
 		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}
