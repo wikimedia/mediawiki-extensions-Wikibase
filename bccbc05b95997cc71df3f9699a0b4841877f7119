@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_34e57bd6",
+        "filename": "repo/tests/phpunit/includes/EditEntityFactoryTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-05T23:52:02Z",
+      "side": 1,
+      "message": "Again, I do not think this test adds much real value, with that little being outweight by the maintenance cost. Just leave this to integration tests, or unit tests with a bigger \"unit\".",
+      "revId": "bccbc05b95997cc71df3f9699a0b4841877f7119",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
