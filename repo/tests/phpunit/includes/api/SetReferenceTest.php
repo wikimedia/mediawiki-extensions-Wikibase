@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use DataValues\StringValue;
 use FormatJson;
@@ -20,7 +20,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\SetReference
+ * @covers Wikibase\Repo\Api\SetReference
  *
  * @group API
  * @group Database

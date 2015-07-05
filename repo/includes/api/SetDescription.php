@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpDescription;
