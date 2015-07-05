@@ -10,7 +10,7 @@ use DerivativeRequest;
 use MWException;
 use RequestContext;
 use SiteList;
-use Wikibase\Api\ResultBuilder;
+use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;

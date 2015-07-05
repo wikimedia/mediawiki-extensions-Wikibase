@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -8,7 +8,7 @@ use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\GetEntities
+ * @covers Wikibase\Repo\Api\GetEntities
  *
  * Test for redirect resolution in the wbgetentities API module
  *

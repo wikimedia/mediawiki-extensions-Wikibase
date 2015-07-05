@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\SetSiteLink
+ * @covers Wikibase\Repo\Api\SetSiteLink
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >

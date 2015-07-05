@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use ApiMain;
 use DataValues\StringValue;
 use UsageException;
-use Wikibase\Api\ApiErrorReporter;
-use Wikibase\Api\CreateClaim;
-use Wikibase\Api\StatementModificationHelper;
+use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\CreateClaim;
+use Wikibase\Repo\Api\StatementModificationHelper;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -16,7 +16,7 @@ use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\StatementModificationHelper
+ * @covers Wikibase\Repo\Api\StatementModificationHelper
  *
  * @group Wikibase
  * @group WikibaseRepo

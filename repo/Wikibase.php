@@ -142,28 +142,28 @@ call_user_func( function() {
 	$wgValueParsers['monolingualtext'] = 'Wikibase\Parsers\MonolingualTextParser';
 
 	// API module registration
-	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';
-	$wgAPIModules['wbsetlabel'] 						= 'Wikibase\Api\SetLabel';
-	$wgAPIModules['wbsetdescription'] 					= 'Wikibase\Api\SetDescription';
-	$wgAPIModules['wbsearchentities'] 					= 'Wikibase\Api\SearchEntities';
-	$wgAPIModules['wbsetaliases'] 						= 'Wikibase\Api\SetAliases';
-	$wgAPIModules['wbeditentity'] 						= 'Wikibase\Api\EditEntity';
-	$wgAPIModules['wblinktitles'] 						= 'Wikibase\Api\LinkTitles';
-	$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\Api\SetSiteLink';
-	$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\Api\CreateClaim';
-	$wgAPIModules['wbgetclaims'] 						= 'Wikibase\Api\GetClaims';
-	$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\Api\RemoveClaims';
-	$wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\Api\SetClaimValue';
-	$wgAPIModules['wbsetreference'] 					= 'Wikibase\Api\SetReference';
-	$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Api\RemoveReferences';
-	$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Api\SetClaim';
-	$wgAPIModules['wbremovequalifiers']					= 'Wikibase\Api\RemoveQualifiers';
-	$wgAPIModules['wbsetqualifier']						= 'Wikibase\Api\SetQualifier';
-	$wgAPIModules['wbmergeitems']						= 'Wikibase\Api\MergeItems';
-	$wgAPIModules['wbformatvalue']						= 'Wikibase\Api\FormatSnakValue';
-	$wgAPIModules['wbparsevalue']						= 'Wikibase\Api\ParseValue';
-	$wgAPIModules['wbavailablebadges']					= 'Wikibase\Api\AvailableBadges';
-	$wgAPIModules['wbcreateredirect']					= 'Wikibase\Api\CreateRedirect';
+	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Repo\Api\GetEntities';
+	$wgAPIModules['wbsetlabel'] 						= 'Wikibase\Repo\Api\SetLabel';
+	$wgAPIModules['wbsetdescription'] 					= 'Wikibase\Repo\Api\SetDescription';
+	$wgAPIModules['wbsearchentities'] 					= 'Wikibase\Repo\Api\SearchEntities';
+	$wgAPIModules['wbsetaliases'] 						= 'Wikibase\Repo\Api\SetAliases';
+	$wgAPIModules['wbeditentity'] 						= 'Wikibase\Repo\Api\EditEntity';
+	$wgAPIModules['wblinktitles'] 						= 'Wikibase\Repo\Api\LinkTitles';
+	$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\Repo\Api\SetSiteLink';
+	$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\Repo\Api\CreateClaim';
+	$wgAPIModules['wbgetclaims'] 						= 'Wikibase\Repo\Api\GetClaims';
+	$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\Repo\Api\RemoveClaims';
+	$wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\Repo\Api\SetClaimValue';
+	$wgAPIModules['wbsetreference'] 					= 'Wikibase\Repo\Api\SetReference';
+	$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Repo\Api\RemoveReferences';
+	$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Repo\Api\SetClaim';
+	$wgAPIModules['wbremovequalifiers']					= 'Wikibase\Repo\Api\RemoveQualifiers';
+	$wgAPIModules['wbsetqualifier']						= 'Wikibase\Repo\Api\SetQualifier';
+	$wgAPIModules['wbmergeitems']						= 'Wikibase\Repo\Api\MergeItems';
+	$wgAPIModules['wbformatvalue']						= 'Wikibase\Repo\Api\FormatSnakValue';
+	$wgAPIModules['wbparsevalue']						= 'Wikibase\Repo\Api\ParseValue';
+	$wgAPIModules['wbavailablebadges']					= 'Wikibase\Repo\Api\AvailableBadges';
+	$wgAPIModules['wbcreateredirect']					= 'Wikibase\Repo\Api\CreateRedirect';
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';

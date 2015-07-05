@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
@@ -17,7 +17,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\RemoveClaims
+ * @covers Wikibase\Repo\Api\RemoveClaims
  *
  * @group API
  * @group Database
