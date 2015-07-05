@@ -123,14 +123,14 @@ class ApiHelperFactory {
 	}
 
 	/**
-	 * Return an EntitySaveHelper object for use in Api modules
+	 * Return an EntitySavingHelper object for use in Api modules
 	 *
 	 * @param ApiBase $apiBase
 	 *
-	 * @return EntitySaveHelper
+	 * @return EntitySavingHelper
 	 */
-	public function getEntitySaveHelper( ApiBase $apiBase ) {
-		return new EntitySaveHelper(
+	public function getEntitySavingHelper( ApiBase $apiBase ) {
+		return new EntitySavingHelper(
 			$apiBase,
 			$this->getErrorReporter( $apiBase ),
 			$this->summaryFormatter,
@@ -139,14 +139,14 @@ class ApiHelperFactory {
 	}
 
 	/**
-	 * Return an EntityLoadHelper object for use in Api modules
+	 * Return an EntityLoadingHelper object for use in Api modules
 	 *
 	 * @param ApiBase $apiBase
 	 *
-	 * @return EntityLoadHelper
+	 * @return EntityLoadingHelper
 	 */
-	public function getEntityLoadHelper( ApiBase $apiBase ) {
-		return new EntityLoadHelper(
+	public function getEntityLoadingHelper( ApiBase $apiBase ) {
+		return new EntityLoadingHelper(
 			$this->entityRevisionLookup,
 			$this->getErrorReporter( $apiBase )
 		);
