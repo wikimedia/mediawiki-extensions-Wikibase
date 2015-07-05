@@ -1,17 +1,17 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use Exception;
 use UsageException;
-use Wikibase\Api\EntityLoadingHelper;
+use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
- * @covers Wikibase\Api\EntityLoadingHelper
+ * @covers Wikibase\Repo\Api\EntityLoadingHelper
  *
  * @group Wikibase
  * @group WikibaseAPI
@@ -42,7 +42,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	}
 
 	private function getMockErrorReporter( $expectedExceptionCode = null, $expectedErrorCode = null ) {
-		$mock = $this->getMockBuilder( 'Wikibase\Api\ApiErrorReporter' )
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Api\ApiErrorReporter' )
 			->disableOriginalConstructor()
 			->getMock();
 		if ( $expectedExceptionCode ) {

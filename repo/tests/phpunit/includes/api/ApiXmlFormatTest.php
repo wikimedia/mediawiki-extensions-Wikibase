@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use ApiBase;
 use ApiMain;
@@ -39,7 +39,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			'ids' => $entityId
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Api\GetEntities', 'wbgetentities', $params );
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetEntities', 'wbgetentities', $params );
 		$result = $this->doApiRequest( $module );
 		$actual = $this->removeGetEntitiesAttributes( $result, $entityId );
 
@@ -109,7 +109,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			'entity' => $entityId
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Api\GetClaims', 'wbgetclaims', $params );
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetClaims', 'wbgetclaims', $params );
 		$actual = $this->doApiRequest( $module );
 		$expected = $this->getExpectedGetClaimsXml( $entityRevision );
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use DataValues\DataValue;
 use DataValues\DataValueFactory;
@@ -27,7 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
- * @covers Wikibase\Api\SetClaimValue
+ * @covers Wikibase\Repo\Api\SetClaimValue
  *
  * @group API
  * @group Database

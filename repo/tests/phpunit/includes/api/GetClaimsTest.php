@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use ApiTestCase;
 use DataValues\StringValue;
@@ -22,7 +22,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\GetClaims
+ * @covers Wikibase\Repo\Api\GetClaims
  *
  * @group API
  * @group Database

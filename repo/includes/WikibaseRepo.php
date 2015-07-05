@@ -16,7 +16,7 @@ use StubObject;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Api\ApiHelperFactory;
+use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;

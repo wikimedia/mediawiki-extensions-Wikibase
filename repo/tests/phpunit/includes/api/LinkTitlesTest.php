@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 /**
- * @covers Wikibase\Api\LinkTitles
+ * @covers Wikibase\Repo\Api\LinkTitles
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >

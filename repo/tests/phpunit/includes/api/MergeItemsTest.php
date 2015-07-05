@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use Language;
 use Status;
 use User;
-use Wikibase\Api\ApiErrorReporter;
-use Wikibase\Api\MergeItems;
+use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\MergeItems;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -15,7 +15,7 @@ use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\Api\MergeItems
+ * @covers Wikibase\Repo\Api\MergeItems
  *
  * @group API
  * @group Wikibase
@@ -118,7 +118,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	private function callApiModule( $params, User $user = null ) {
-		$module = $this->apiModuleTestHelper->newApiModule( 'Wikibase\Api\MergeItems', 'wbmergeitems', $params, $user );
+		$module = $this->apiModuleTestHelper->newApiModule( 'Wikibase\Repo\Api\MergeItems', 'wbmergeitems', $params, $user );
 		$this->overrideServices( $module );
 
 		$module->execute();

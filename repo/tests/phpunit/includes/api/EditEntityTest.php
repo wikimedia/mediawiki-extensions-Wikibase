@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\EditEntity
+ * @covers Wikibase\Repo\Api\EditEntity
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
