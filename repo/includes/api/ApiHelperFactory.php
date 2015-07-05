@@ -21,9 +21,6 @@ use Wikibase\SummaryFormatter;
  * @note: This is a high level factory which should not be injected or passed around.
  * It should only be used when bootstrapping from a static context.
  *
- * @todo: Factor functionality out of ApiWikibase into separate helper classes, and
- * make them available via ApiHelperFactory.
- *
  * @license GPL 2+
  * @author Daniel Kinzler
  */

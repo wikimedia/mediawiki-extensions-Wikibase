@@ -42,15 +42,13 @@ abstract class ModifyTerm extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiWikibase::getRequiredPermissions
-	 *
 	 * @param EntityDocument $entity
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string[]
+	 * @return string[] A list of permissions
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = parent::getRequiredPermissions( $entity );
+		$permissions = $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
 		$permissions[] = $entity->getType() . '-term';
 		return $permissions;
 	}
