@@ -180,19 +180,21 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		/* @var Item $item */
 		$item = new Item( new ItemId( 'Q17' ) );
-		$item->setLabel('en', 'foo' );
+		$item->setLabel( 'en', 'foo' );
 		$repo->putEntity( $item, 10, 0, $user );
 
-		$item = $item->copy();
+		$item = new Item( new ItemId( 'Q17' ) );
 		$item->setLabel( 'en', 'bar' );
 		$repo->putEntity( $item, 11, 0, $otherUser );
 
-		$item = $item->copy();
+		$item = new Item( new ItemId( 'Q17' ) );
+		$item->setLabel( 'en', 'bar' );
 		$item->setLabel( 'de', 'bar' );
 		$repo->putEntity( $item, 12, 0, $user );
 
-		$item = $item->copy();
-		$item->setLabel('en', 'test' );
+		$item = new Item( new ItemId( 'Q17' ) );
+		$item->setLabel( 'en', 'test' );
+		$item->setLabel( 'de', 'bar' );
 		$item->setDescription( 'en', 'more testing' );
 		$repo->putEntity( $item, 13, 0, $user );
 
@@ -364,14 +366,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$user = $this->getUser( 'EditEntityTestUser' );
 
 		// create item
-		$entity = new Item();
-		$entity->getFingerprint()->setLabel( 'en', 'Test' );
+		$entity = new Item( new ItemId( 'Q42' ) );
+		$entity->setLabel( 'en', 'Test' );
 
 		$repo->putEntity( $entity, 0, 0, $user );
 
 		// begin editing the entity
-		$entity = $entity->copy();
-		$entity->getFingerprint()->setLabel( 'en', 'Trust' );
+		$entity = new Item( new ItemId( 'Q42' ) );
+		$entity->setLabel( 'en', 'Trust' );
 
 		$titleLookup = $this->getEntityTitleLookup();
 		$editEntity = $this->makeEditEntity( $repo, $entity, $titleLookup, $user, $baseRevId );
@@ -380,17 +382,17 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertEquals( $baseRevId !== false, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
 
 		// create independent Entity instance for the same entity, and modify and save it
-		$entity2 = $entity->copy();
-		$user2 = $this->getUser( 'EditEntityTestUser2' );
-
+		$entity2 = new Item( new ItemId( 'Q42' ));
 		$entity2->setLabel( 'en', 'Toast' );
+
+		$user2 = $this->getUser( 'EditEntityTestUser2' );
 		$repo->putEntity( $entity2, 0, 0, $user2 );
 
 		// now try to save the original edit. The conflict should still be detected
 		$token = $user->getEditToken();
 		$status = $editEntity->attemptSave( "Testing", EDIT_UPDATE, $token );
 
-		$id = $entity->getId()->__toString();
+		$id = $entity->getId()->getSerialization();
 
 		if ( $status->isOK() ) {
 			$statusMessage = "Status ($id): OK";

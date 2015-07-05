@@ -33,7 +33,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 
 		$entities[11] = new EntityRevision( $item, 11, '20130101001100' );
 
-		$item = $item->copy();
+		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( 'en', "Foo" );
 
 		$entities[12] = new EntityRevision( $item, 12, '20130101001200' );
