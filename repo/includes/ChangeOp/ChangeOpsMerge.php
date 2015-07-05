@@ -7,7 +7,6 @@ use Site;
 use SiteLookup;
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -158,7 +157,7 @@ class ChangeOpsMerge {
 		$this->generateDescriptionsChangeOps();
 		$this->generateAliasesChangeOps();
 		$this->generateSitelinksChangeOps();
-		$this->generateClaimsChangeOps();
+		$this->generateStatementsChangeOps();
 	}
 
 	private function generateLabelsChangeOps() {
@@ -257,43 +256,40 @@ class ChangeOpsMerge {
 		return $site;
 	}
 
-	private function generateClaimsChangeOps() {
-		foreach ( $this->fromItem->getClaims() as $fromClaim ) {
-			$this->fromChangeOps->add( $this->getStatementChangeOpFactory()->newRemoveStatementOp( $fromClaim->getGuid() ) );
+	private function generateStatementsChangeOps() {
+		foreach ( $this->fromItem->getStatements() as $fromStatement ) {
+			$this->fromChangeOps->add( $this->getStatementChangeOpFactory()->newRemoveStatementOp( $fromStatement->getGuid() ) );
 
-			$toClaim = clone $fromClaim;
-			$toClaim->setGuid( null );
-			$toMergeToClaim = false;
+			$toStatement = clone $fromStatement;
+			$toStatement->setGuid( null );
+			$toMergeToStatement = $this->findEquivalentStatement( $toStatement );
 
-			if ( $toClaim instanceof Statement ) {
-				$toMergeToClaim = $this->findEquivalentClaim( $toClaim );
-			}
-
-			if ( $toMergeToClaim ) {
-				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim );
+			if ( $toMergeToStatement ) {
+				$this->generateReferencesChangeOps( $toStatement, $toMergeToStatement );
 			} else {
-				$this->toChangeOps->add( $this->getStatementChangeOpFactory()->newSetStatementOp( $toClaim ) );
+				$this->toChangeOps->add( $this->getStatementChangeOpFactory()->newSetStatementOp( $toStatement ) );
 			}
 		}
 	}
 
 	/**
-	 * Finds a claim in the target entity with the same main snak and qualifiers as $fromStatement
+	 * Finds a statement in the target entity with the same main snak and qualifiers as $fromStatement
 	 *
 	 * @param Statement $fromStatement
 	 *
-	 * @return Claim|false Claim to merge reference into or false
+	 * @return Statement|false Statement to merge reference into or false
 	 */
-	private function findEquivalentClaim( $fromStatement ) {
-		$fromHash = $this->getClaimHash( $fromStatement );
+	private function findEquivalentStatement( $fromStatement ) {
+		$fromHash = $this->getStatementHash( $fromStatement );
 
-		/** @var $claim Claim */
-		foreach ( $this->toItem->getClaims() as $claim ) {
-			$toHash = $this->getClaimHash( $claim );
+		/** @var Statement $statement */
+		foreach ( $this->toItem->getStatements() as $statement ) {
+			$toHash = $this->getStatementHash( $statement );
 			if ( $toHash === $fromHash ) {
-				return $claim;
+				return $statement;
 			}
 		}
+
 		return false;
 	}
 
@@ -302,7 +298,7 @@ class ChangeOpsMerge {
 	 *
 	 * @return string combined hash of the Mainsnak and Qualifiers
 	 */
-	private function getClaimHash( Statement $statement ) {
+	private function getStatementHash( Statement $statement ) {
 		return $statement->getMainSnak()->getHash() . $statement->getQualifiers()->getHash();
 	}
 
