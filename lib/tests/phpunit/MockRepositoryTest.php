@@ -645,7 +645,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$user2 = User::newFromName( "WikiPageEntityStoreTestUserWasLastToEdit2" );
 
 		// initial revision
-		$item = new Item();
+		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( 'en', 'one' );
 		$rev1 = $this->repo->saveEntity( $item, 'testing 1', $user1, EDIT_NEW );
 		$itemId = $item->getId();
@@ -654,7 +654,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->repo->userWasLastToEdit( $user2, $itemId, $rev1->getRevisionId() ), 'user has not edited yet' );
 
 		// second edit by another user
-		$item = $item->copy();
+        $item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( 'en', 'two' );
 		$rev2 = $this->repo->saveEntity( $item, 'testing 2', $user2, EDIT_UPDATE );
 
@@ -662,7 +662,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertTrue( $this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevisionId() ), 'second user has just edited' );
 
 		// subsequent edit by the original user
-		$item = $item->copy();
+        $item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( 'en', 'three' );
 		$rev3 = $this->repo->saveEntity( $item, 'testing 3', $user1, EDIT_UPDATE );
 
