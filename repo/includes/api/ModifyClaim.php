@@ -36,6 +36,11 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $guidParser;
 
 	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -56,6 +61,14 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->guidParser = WikibaseRepo::getDefaultInstance()->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+	}
+
+	/**
+	 * @return ResultBuilder
+	 */
+	protected function getResultBuilder() {
+		return $this->resultBuilder;
 	}
 
 	/**
@@ -79,6 +92,15 @@ abstract class ModifyClaim extends ApiWikibase {
 	 */
 	public function isWriteMode() {
 		return true;
+	}
+
+	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
 	}
 
 	/**

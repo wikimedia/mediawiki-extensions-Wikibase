@@ -24,21 +24,6 @@ use Wikibase\Repo\WikibaseRepo;
 abstract class ApiWikibase extends ApiBase {
 
 	/**
-	 * @var ResultBuilder
-	 */
-	private $resultBuilder;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
 	 * @var EntitySaveHelper
 	 */
 	private $entitySaveHelper;
@@ -60,71 +45,9 @@ abstract class ApiWikibase extends ApiBase {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
-
-		// NOTE: use uncached lookup for write mode!
-		$uncached = $this->isWriteMode() ? 'uncached' : '';
-		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup( $uncached );
-
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entitySaveHelper = $apiHelperFactory->getEntitySaveHelper( $this );
 		$this->entityLoadHelper = $apiHelperFactory->getEntityLoadHelper( $this );
-	}
-
-	/**
-	 * @return EntityRevisionLookup
-	 */
-	protected function getEntityRevisionLookup() {
-		return $this->entityRevisionLookup;
-	}
-
-	/**
-	 * @return EntityIdParser
-	 */
-	protected function getIdParser() {
-		return $this->idParser;
-	}
-
-	/**
-	 * @return ResultBuilder
-	 */
-	protected function getResultBuilder() {
-		return $this->resultBuilder;
-	}
-
-	/**
-	 * @see ApiBase::needsToken()
-	 *
-	 * @return string|false
-	 */
-	public function needsToken() {
-		return $this->isWriteMode() ? 'csrf' : false;
-	}
-
-	/**
-	 * Returns the permissions that are required to perform the operation specified by
-	 * the parameters.
-	 *
-	 * Per default, this will include the 'read' permission if $this->isReadMode() returns true,
-	 * and the 'edit' permission if $this->isWriteMode() returns true,
-	 *
-	 * @param EntityDocument $entity The entity to check permissions for
-	 *
-	 * @return string[] A list of permissions
-	 */
-	protected function getRequiredPermissions( EntityDocument $entity ) {
-		$permissions = array();
-
-		if ( $this->isReadMode() ) {
-			$permissions[] = 'read';
-		}
-
-		if ( $this->isWriteMode() ) {
-			$permissions[] = 'edit';
-		}
-
-		return $permissions;
 	}
 
 	/**
