@@ -67,6 +67,7 @@
 	"wikibase-gotolinkedpage-summary": "„Special:GoToLinkedPage“ weed jebruch, öm en heh dä Wäbßait noh enem Deng obb ene verbonge Sigg ze söhke.\n<br />\nEm lenke Fäld (Wäbßait) jitt mer e Schprohcheköözel un e Köözel för di Wäbßait en.\n<br />\nEm rääschte Fäld (Objäk) jitt mer e Köözel för dat Deng en, woh mer noh söhke well.",
 	"wikibase-itemdisambiguation-lookup-language": "Köözel fö de Schprohch:",
 	"wikibase-itemdisambiguation-submit": "Söhke",
+	"wikibase-itemdisambiguation-form-hints": "Jiv Obbacht, dat nit mih wi {{PLURAL:$1|ein|$1|kein}} jevonge Saache aanjezeijsch wääde.",
 	"wikibase-itemdisambiguation-invalid-langcode": "Schahdt, dat Schprohcheköözel „<code>$1</code>“ es em Wikki nit bikannt. Bes esu johd un nemm e jöltesch Köözel, för e Beijschpell „<code>ksh</code>“.",
 	"wikibase-itemdisambiguation-description": "De Wääte beim Söhke möße der jannze Täx ußmaache. De Schprohch es e Köözel, för e Beijschpell „<code>ksh</code>“.",
 	"special-newproperty": "En neu Eijeschaff aanlääje",

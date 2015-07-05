@@ -54,6 +54,7 @@
 	"wikibase-error-serialize-error": "Nepodařilo se zaserializovat data.",
 	"wikibase-error-invalid-entity-id": "Systém zadané ID nezná. Použijte platné ID entity.",
 	"unconnectedpages": "Stránky nepropojené s položkou",
+	"unconnectedpages-summary": "Tato stránka obsahuje seznam stránek, které nejsou propojeny s datovou položkou (ve jmenných prostorech, které toto propojení umožňují). Seznam je seřazen sestupně podle Id stránky, takže novější stránky jsou zonrazeny jako první.",
 	"wikibase-unconnectedpages-page": "Seznam výsledků začít stránkou:",
 	"wikibase-unconnectedpages-submit": "Provést",
 	"wikibase-unconnectedpages-invalid-language": "„$1“ není platný kód jazyka.",

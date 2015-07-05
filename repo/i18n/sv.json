@@ -10,7 +10,8 @@
 			"WikiPhoenix",
 			"Warrakkk",
 			"Peki01",
-			"Jenniesarina"
+			"Jenniesarina",
+			"Rockyfelle"
 		]
 	},
 	"wikibase-desc": "Strukturerad datalagring",
@@ -133,6 +134,7 @@
 	"wikibase-itemdisambiguation-lookup-language": "Språkkod:",
 	"wikibase-itemdisambiguation-lookup-label": "Etikett:",
 	"wikibase-itemdisambiguation-submit": "Sök",
+	"wikibase-itemdisambiguation-form-hints": "Notera att inget mer än $1 {{PLURAL:$1|resultat}} kommer visas.",
 	"wikibase-itemdisambiguation-nothing-found": "Tyvärr, inget objekt med denna etikett hittades.",
 	"wikibase-itemdisambiguation-search": "Du kan [$1 söka efter objektet].",
 	"wikibase-itemdisambiguation-create": "Du kan [$1 skapa objektet].",
@@ -513,7 +515,7 @@
 	"apihelp-wbsearchentities-param-type": "Sök efter denna typen av entitet.",
 	"apihelp-wbsearchentities-param-limit": "Maximalt antal resultat",
 	"apihelp-wbsearchentities-example-1": "Sök efter \"abc\" på engelska, med standardvärden för typ och begränsning",
-	"apihelp-wbsearchentities-example-2": "Sök efter \"abc\" på engelska, med en gräns på 50",
+	"apihelp-wbsearchentities-example-2": "Sök efter \"abc\" på Engelska med en gräns på 50",
 	"apihelp-wbsearchentities-example-3": "Sök efter \"alphabet\" på engelska, för typen egenskap",
 	"apihelp-wbsetaliases-description": "Anger alias för en Wikibase-entitet.",
 	"apihelp-wbsetaliases-param-id": "Identifieraren för entiteten, inklusive prefixet.\nAnvänd antingen 'id' eller 'site' och 'title' tillsammans.",

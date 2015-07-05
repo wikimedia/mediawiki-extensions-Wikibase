@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"रमेश सिंह बोहरा"
+			"रमेश सिंह बोहरा",
+			"राम प्रसाद जोशी"
 		]
 	},
 	"tooltip-t-wikibase": "जडान अरियाका डाटा भराण प्रकारखि लेखा लिङ्क",
@@ -9,6 +10,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} प्रकार",
 	"wikibase-editlinks": "लिंक सम्पादन अरिदिय",
 	"wikibase-editlinkstitle": "अन्तरभाषिक लिङ्क सम्पादन गरिदिय",
+	"wikibase-linkitem-selectlink": "यै पानासँग लिङ्क गद्दाका निउती कृपया तम साइट पानो छान ।",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "लुकाइदिय",
 	"wikibase-rc-hide-wikidata-show": "धेकाइदिय",
