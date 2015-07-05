@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Repo\Api;
 
 use ApiMain;
 use DataValues\IllegalValueException;
@@ -8,13 +8,13 @@ use Language;
 use Status;
 use UsageException;
 use ValueParsers\ParseException;
-use Wikibase\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
 
 /**
- * @covers Wikibase\Api\ApiErrorReporter
+ * @covers Wikibase\Repo\Api\ApiErrorReporter
  *
  * @group Wikibase
  * @group WikibaseValidators

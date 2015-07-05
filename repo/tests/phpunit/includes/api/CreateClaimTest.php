@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use UsageException;
 use Wikibase\DataModel\Claim\Claims;
@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Api\CreateClaim
+ * @covers Wikibase\Repo\Api\CreateClaim
  *
  * @group API
  * @group Database

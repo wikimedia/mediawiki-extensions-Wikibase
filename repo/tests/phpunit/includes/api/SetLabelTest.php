@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 /**
- * @covers Wikibase\Api\SetLabel
+ * @covers Wikibase\Repo\Api\SetLabel
  *
  * @group Database
  * @group medium
