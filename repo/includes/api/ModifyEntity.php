@@ -15,6 +15,7 @@ use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
@@ -39,7 +40,7 @@ use Wikibase\Summary;
  * @author Daniel Kinzler
  * @author Michał Łazowik
  */
-abstract class ModifyEntity extends ApiWikibase {
+abstract class ModifyEntity extends ApiBase {
 
 	/**
 	 * @var StringNormalizer
@@ -89,6 +90,26 @@ abstract class ModifyEntity extends ApiWikibase {
 	private $permissionChecker;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $revisionLookup;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntitySaveHelper
+	 */
+	private $entitySaveHelper;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
 	 *
 	 * @see EditEntity::attemptSave
@@ -114,19 +135,30 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		//TODO: provide a mechanism to override the services
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entitySaveHelper = $apiHelperFactory->getEntitySaveHelper( $this );
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
+		$this->idParser = $wikibaseRepo->getEntityIdParser();
 
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteStore(),
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
+		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
 		$this->entityStore = $wikibaseRepo->getEntityStore();
 		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->siteLinkLookup = $wikibaseRepo->getStore()->newSiteLinkStore();
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+	}
+
+	/**
+	 * @see EntitySaveHelper::attemptSaveEntity
+	 */
+	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
+		return $this->entitySaveHelper->attemptSaveEntity( $entity, $summary, $flags );
 	}
 
 	/**
@@ -141,6 +173,13 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected function getEntityStore() {
 		return $this->entityStore;
+	}
+
+	/**
+	 * @return ResultBuilder
+	 */
+	protected function getResultBuilder() {
+		return $this->resultBuilder;
 	}
 
 	/**
@@ -163,7 +202,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			}
 
 			try {
-				$entityRevision = $this->getEntityRevisionLookup()->getEntityRevision( $entityId, $baseRevisionId );
+				$entityRevision = $this->revisionLookup->getEntityRevision( $entityId, $baseRevisionId );
 			} catch ( StorageException $ex ) {
 				$this->errorReporter->dieException( $ex, 'no-such-entity' );
 			}
@@ -206,7 +245,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected function getEntityIdFromString( $id ) {
 		try {
-			return $this->getIdParser()->parse( $id );
+			return $this->idParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'no-such-entity-id' );
 		}
@@ -435,6 +474,15 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return array
+	 */
+	protected function getRequiredPermissions( EntityDocument $entity ) {
+		return $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
+	}
+
+	/**
 	 * @param bool $entityIsNew
 	 */
 	protected function addFlags( $entityIsNew ) {
@@ -470,6 +518,15 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	public function isWriteMode() {
 		return true;
+	}
+
+	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
 	}
 
 	/**
