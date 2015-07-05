@@ -8,10 +8,12 @@ use InvalidArgumentException;
 use LogicException;
 use Status;
 use UsageException;
+use User;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -22,6 +24,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
@@ -81,6 +84,11 @@ abstract class ModifyEntity extends ApiWikibase {
 	private $errorReporter;
 
 	/**
+	 * @var EntityPermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
 	 *
 	 * @see EditEntity::attemptSave
@@ -113,6 +121,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$settings->getSetting( 'specialSiteLinkGroups' )
 		);
 
+		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
 		$this->entityStore = $wikibaseRepo->getEntityStore();
 		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
@@ -403,6 +412,26 @@ abstract class ModifyEntity extends ApiWikibase {
 		);
 
 		$this->addToOutput( $entity, $status );
+	}
+
+	/**
+	 * Check the rights for the user accessing the module.
+	 *
+	 * @param $entity EntityDocument the entity to check
+	 * @param $user User doing the action
+	 *
+	 * @return Status the check's result
+	 */
+	private function checkPermissions( EntityDocument $entity, User $user ) {
+		$permissions = $this->getRequiredPermissions( $entity );
+		$status = Status::newGood();
+
+		foreach ( array_unique( $permissions ) as $perm ) {
+			$permStatus = $this->permissionChecker->getPermissionStatusForEntity( $user, $perm, $entity );
+			$status->merge( $permStatus );
+		}
+
+		return $status;
 	}
 
 	/**
