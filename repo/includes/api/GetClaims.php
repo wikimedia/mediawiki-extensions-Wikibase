@@ -6,6 +6,7 @@ use ApiBase;
 use ApiMain;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuidParser;
@@ -26,7 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Adam Shorland
  */
-class GetClaims extends ApiWikibase {
+class GetClaims extends ApiBase {
 
 	/**
 	 * @var ClaimGuidValidator
@@ -44,6 +45,21 @@ class GetClaims extends ApiWikibase {
 	private $errorReporter;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
+	 * @var EntityLoadHelper
+	 */
+	private $entityLoadHelper;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -57,8 +73,11 @@ class GetClaims extends ApiWikibase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadHelper = $apiHelperFactory->getEntityLoadHelper( $this );
 		$this->guidValidator = $wikibaseRepo->getClaimGuidValidator();
 		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->idParser = $wikibaseRepo->getEntityIdParser();
 	}
 
 	/**
@@ -73,16 +92,20 @@ class GetClaims extends ApiWikibase {
 		list( $idString, $guid ) = $this->getIdentifiers( $params );
 
 		try {
-			$entityId = $this->getIdParser()->parse( $idString );
+			$entityId = $this->idParser->parse( $idString );
 		} catch ( EntityIdParsingException $e ) {
 			$this->errorReporter->dieException( $e, 'param-invalid' );
 		}
 
-		$entityRevision = $entityId ? $this->loadEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_SLAVE ) : null;
+		/** @var EntityId $entityId */
+		$entityRevision = $this->entityLoadHelper->loadEntityRevision(
+			$entityId,
+			EntityRevisionLookup::LATEST_FROM_SLAVE
+		);
 		$entity = $entityRevision->getEntity();
 
 		if ( $params['ungroupedlist'] ) {
-			$this->getResultBuilder()->getOptions()
+			$this->resultBuilder->getOptions()
 				->setOption(
 					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
 					array()
@@ -90,12 +113,15 @@ class GetClaims extends ApiWikibase {
 		}
 
 		$claims = $this->getClaims( $entity, $guid );
-		$this->getResultBuilder()->addClaims( $claims, null );
+		$this->resultBuilder->addClaims( $claims, null );
 	}
 
 	private function validateParameters( array $params ) {
 		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
-			$this->errorReporter->dieError( 'Either the entity parameter or the claim parameter need to be set', 'param-missing' );
+			$this->errorReporter->dieError(
+				'Either the entity parameter or the claim parameter need to be set',
+				'param-missing'
+			);
 		}
 	}
 
@@ -155,11 +181,12 @@ class GetClaims extends ApiWikibase {
 
 		if ( isset( $params['property'] ) ) {
 			try {
-				$parsedProperty = $this->getIdParser()->parse( $params['property'] );
+				$parsedProperty = $this->idParser->parse( $params['property'] );
 			} catch ( EntityIdParsingException $e ) {
 				$this->errorReporter->dieException( $e, 'param-invalid' );
 			}
 
+			/** @var EntityId $parsedProperty */
 			return $propertyId->equals( $parsedProperty );
 		}
 
@@ -184,7 +211,10 @@ class GetClaims extends ApiWikibase {
 			$idString = $this->getEntityIdFromStatementGuid( $params['claim'] );
 
 			if ( isset( $params['entity'] ) && $idString !== $params['entity'] ) {
-				$this->errorReporter->dieError( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
+				$this->errorReporter->dieError(
+					'If both entity id and claim key are provided they need to point to the same entity',
+					'param-illegal'
+				);
 			}
 		} else {
 			$idString = $params['entity'];
