@@ -26,6 +26,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\EntityParserOutputGeneratorFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
@@ -1081,9 +1082,14 @@ class WikibaseRepo {
 			$this->getEntityFactory(),
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
-			$this->getEntityStore(),
-			$this->getEntityPermissionChecker(),
-			$this->newEditFilterHookRunner( $context )
+			new EditEntityFactory(
+				$this->getEntityTitleLookup(),
+				$this->getEntityRevisionLookup( 'uncached' ),
+				$this->getEntityStore(),
+				$this->getEntityPermissionChecker(),
+				$this->newEditFilterHookRunner( $context ),
+				$context
+			)
 		);
 	}
 

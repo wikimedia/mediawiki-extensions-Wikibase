@@ -43,24 +43,8 @@ class EntitySaverHelperTest extends \MediaWikiTestCase {
 			->getMock();
 	}
 
-	private function getMockEntityTitleLookup() {
-		return $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
-	}
-
-	private function getMockEntityRevisionLookup() {
-		return $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
-	}
-
-	private function getMockEntityStore() {
-		return $this->getMock( 'Wikibase\Lib\Store\EntityStore' );
-	}
-
-	private function getMockEntityPermissionChecker() {
-		return $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
-	}
-
-	private function getMockEditFilterHookRunner() {
-		return $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+	private function getMockEditEntityFactory() {
+		return $this->getMockBuilder( 'Wikibase\EditEntityFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 	}
@@ -88,34 +72,11 @@ class EntitySaverHelperTest extends \MediaWikiTestCase {
 			->method( 'extractRequestParams' )
 			->will( $this->returnValue( array() ) );
 
-		$mockTitleLookup = $this->getMockEntityTitleLookup();
-		$mockTitleLookup->expects( $this->atLeastOnce() )
-			->method( 'getTitleForId' )
-			->will( $this->returnValue( Title::newFromText( 'Title' ) ) );
-
-		$mockEntityStore = $this->getMockEntityStore();
-		$mockEntityStore->expects( $this->once() )
-			->method( 'updateWatchlist' );
-
-		$mockEntityPermissionChecker = $this->getMockEntityPermissionChecker();
-		$mockEntityPermissionChecker->expects( $this->atLeastOnce() )
-			->method( 'getPermissionStatusForEntity' )
-			->will( $this->returnValue( Status::newGood() ) );
-
-		$mockEditFilterHookRunner = $this->getMockEditFilterHookRunner();
-		$mockEditFilterHookRunner->expects( $this->atLeastOnce() )
-			->method( 'run' )
-			->will( $this->returnValue( Status::newGood() ) );
-
 		$helper = new EntitySaveHelper(
 			$mockApiBase,
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
-			$mockTitleLookup,
-			$this->getMockEntityRevisionLookup(),
-			$mockEntityStore,
-			$mockEntityPermissionChecker,
-			$mockEditFilterHookRunner
+			$this->getMockEditEntityFactory()
 		);
 
 		$entity = new Item();
@@ -142,11 +103,7 @@ class EntitySaverHelperTest extends \MediaWikiTestCase {
 			$mockApiBase,
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
-			$this->getMockEntityTitleLookup(),
-			$this->getMockEntityRevisionLookup(),
-			$this->getMockEntityStore(),
-			$this->getMockEntityPermissionChecker(),
-			$this->getMockEditFilterHookRunner()
+			$this->getMockEditEntityFactory()
 		);
 
 		$this->setExpectedException( 'LogicException' );
