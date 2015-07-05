@@ -16,6 +16,23 @@
       "revId": "6b85afcdba2c8b0f1de6f4a4b69b1fcc864a485e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fe96f44d",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-05T16:20:08Z",
+      "side": 1,
+      "message": "Can also be constructed above like $libSerializerFactory",
+      "revId": "6b85afcdba2c8b0f1de6f4a4b69b1fcc864a485e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
