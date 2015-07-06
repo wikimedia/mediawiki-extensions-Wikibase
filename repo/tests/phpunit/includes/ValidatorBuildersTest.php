@@ -56,7 +56,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			$urlSchemes,
 			$contentLanguages
 		);
-		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( $builders );
+		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( $builders->getDataTypeValidators() );
 
 		return $validatorFactory;
 	}
