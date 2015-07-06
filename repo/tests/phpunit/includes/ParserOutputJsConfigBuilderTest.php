@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
 
 /**
@@ -45,7 +45,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	}
 
 	public function assertSerializationEqualsEntity( Entity $entity, $serialization ) {
-		$serializerFactory = new SerializerFactory();
+		$serializerFactory = new LibSerializerFactory();
 		$options = new SerializationOptions();
 
 		$unserializer = $serializerFactory->newUnserializerForEntity( $entity->getType(), $options );

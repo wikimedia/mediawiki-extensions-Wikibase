@@ -8,7 +8,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\SummaryFormatter;
@@ -112,10 +112,10 @@ class ApiHelperFactory {
 	 *
 	 * @param SerializationOptions $defaultOptions
 	 *
-	 * @return SerializerFactory
+	 * @return LibSerializerFactory
 	 */
 	public function getSerializerFactory( SerializationOptions $defaultOptions = null ) {
-		return new SerializerFactory(
+		return new LibSerializerFactory(
 			$defaultOptions,
 			$this->dataTypeLookup,
 			$this->entityFactory

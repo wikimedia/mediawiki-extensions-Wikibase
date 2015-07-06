@@ -11,7 +11,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
@@ -150,7 +150,7 @@ class EntityAccessor {
 	 */
 	private function getEntitySerializer( EntityDocument $entityObject ) {
 		$options = $this->getSerializationOptions();
-		$serializerFactory = new SerializerFactory( $options, $this->dataTypeLookup );
+		$serializerFactory = new LibSerializerFactory( $options, $this->dataTypeLookup );
 
 		return $serializerFactory->newSerializerForObject( $entityObject, $options );
 	}

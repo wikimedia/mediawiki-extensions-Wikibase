@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -96,7 +96,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( 'string' ) );
 
 		$serializerOptions = new SerializationOptions();
-		$serializerFactory = new SerializerFactory( $serializerOptions, $dataTypeLookup );
+		$serializerFactory = new LibSerializerFactory( $serializerOptions, $dataTypeLookup );
 
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,

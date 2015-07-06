@@ -14,7 +14,7 @@ use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -80,7 +80,7 @@ class EntityDataSerializationService {
 	private $entityTitleLookup;
 
 	/**
-	 * @var SerializerFactory
+	 * @var LibSerializerFactory
 	 */
 	private $serializerFactory;
 
@@ -109,7 +109,7 @@ class EntityDataSerializationService {
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param SerializerFactory $serializerFactory
+	 * @param LibSerializerFactory $serializerFactory
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param SiteList $sites
 	 *
@@ -120,7 +120,7 @@ class EntityDataSerializationService {
 		$rdfDataURI,
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
-		SerializerFactory $serializerFactory,
+		LibSerializerFactory $serializerFactory,
 		PropertyDataTypeLookup $propertyLookup,
 		SiteList $sites,
 		EntityDataFormatProvider $entityDataFormatProvider
