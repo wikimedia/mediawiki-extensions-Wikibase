@@ -11,12 +11,10 @@ use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -77,32 +75,26 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityStore $entityStore
-	 * @param EntityPermissionChecker $permissionChecker
 	 * @param SiteStore $siteStore
 	 * @param FingerprintChangeOpFactory $changeOpFactory
 	 * @param ContentLanguages $termsLanguages
-	 * @param EditFilterHookRunner $editFilterHookRunner
+	 * @param EditEntityFactory $editEntityFactory
 	 */
 	public function setServices(
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		EntityStore $entityStore,
-		EntityPermissionChecker $permissionChecker,
 		SiteStore $siteStore,
 		FingerprintChangeOpFactory $changeOpFactory,
 		ContentLanguages $termsLanguages,
-		EditFilterHookRunner $editFilterHookRunner
+		EditEntityFactory $editEntityFactory
 	) {
 		$this->setSpecialWikibaseRepoPageServices(
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$entityTitleLookup,
-			$entityStore,
-			$permissionChecker,
 			$siteStore,
-			$editFilterHookRunner
+			$editEntityFactory
 		);
 
 		$this->changeOpFactory = $changeOpFactory;

@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\EditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
@@ -50,12 +51,16 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup(),
 			$this->getEntityTitleLookup(),
-			$this->getEntityStore(),
-			$this->getEntityPermissionChecker(),
 			$this->getSiteStore(),
 			$this->getFingerprintChangeOpsFactory(),
 			$this->getContentLanguages(),
-			$this->getMockEditFitlerHookRunner()
+			new EditEntityFactory(
+				$this->getEntityTitleLookup(),
+				$this->getEntityRevisionLookup(),
+				$this->getEntityStore(),
+				$this->getEntityPermissionChecker(),
+				$this->getMockEditFitlerHookRunner()
+			)
 		);
 
 		return $page;
