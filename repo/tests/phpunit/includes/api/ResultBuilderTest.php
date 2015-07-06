@@ -808,7 +808,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddClaim() {
 		$result = $this->getDefaultResult();
-		$statement = new Statement( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
+		$statement = new Statement(
+			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ),
+			new SnakList( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'qualiferVal' ) ) ) ),
+			new Referencelist( array( new Reference( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ) ) ) ) )
+		);
 		$statement->setGuid( 'fooguidbar' );
 		$expected = array(
 			'claim' => array(
@@ -824,6 +828,40 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 				),
 				'type' => 'statement',
 				'rank' => 'normal',
+				'qualifiers-order' => array( 'P12' ),
+				'references' => array(
+					array(
+						'hash' => '2f543336756784850a310cbc52a9307e467c7c42',
+						'snaks' => array(
+							'P12' => array(
+								array(
+									'snaktype' => 'value',
+									'property' => 'P12',
+									'datatype' => 'DtIdFor_P12',
+									'datavalue' => array(
+										'value' => 'refSnakVal',
+										'type' => 'string',
+									),
+								),
+							),
+						),
+						'snaks-order' => array( 'P12' ),
+					),
+				),
+				'qualifiers' => array(
+					'P12' => array(
+						array(
+							'snaktype' => 'value',
+							'property' => 'P12',
+							'datatype' => 'DtIdFor_P12',
+							'datavalue' => array(
+								'value' => 'qualiferVal',
+								'type' => 'string',
+							),
+							'hash' => '67423e8a140238decaa9156be1e3ba23513b3b19',
+						),
+					),
+				),
 			),
 		);
 
