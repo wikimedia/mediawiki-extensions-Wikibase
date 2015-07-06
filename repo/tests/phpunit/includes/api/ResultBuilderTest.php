@@ -596,8 +596,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddClaims() {
 		$result = $this->getDefaultResult();
-		$statement = new Statement( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
-		$statement->setGuid( 'fooguidbar' );
+		list( $statement, $expectedStatementSerialization ) = $this->getClaimAndExpectedSerialization();
 		$claims = array( $statement );
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
@@ -605,21 +604,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 				'Q1' => array(
 					'claims' => array(
 						'P12' => array(
-							array(
-								'id' => 'fooguidbar',
-								'mainsnak' => array(
-									'snaktype' => 'value',
-									'property' => 'P12',
-									'datavalue' => array(
-										'value' => 'stringVal',
-										'type' => 'string',
-									),
-									'datatype' => 'DtIdFor_P12',
-								),
-								'type' => 'statement',
-								'rank' => 'normal',
-							)
-						)
+							$expectedStatementSerialization
+						),
 					),
 				),
 			),
@@ -638,24 +624,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddClaim() {
 		$result = $this->getDefaultResult();
-		$statement = new Statement( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
-		$statement->setGuid( 'fooguidbar' );
-		$expected = array(
-			'claim' => array(
-				'id' => 'fooguidbar',
-				'mainsnak' => array(
-					'snaktype' => 'value',
-					'property' => 'P12',
-					'datavalue' => array(
-						'value' => 'stringVal',
-						'type' => 'string',
-					),
-					'datatype' => 'DtIdFor_P12',
-				),
-				'type' => 'statement',
-				'rank' => 'normal',
-			),
-		);
+		list( $statement, $expectedStatementSerialization ) = $this->getClaimAndExpectedSerialization();
+		$expected = array( 'claim' => $expectedStatementSerialization );
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addClaim( $statement );
@@ -666,6 +636,66 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			'Strip' => 'all',
 		) );
 		$this->assertEquals( $expected, $data );
+	}
+
+	private function getClaimAndExpectedSerialization() {
+		$statement = new Statement(
+			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ),
+			new SnakList( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'qualiferVal' ) ) ) ),
+			new Referencelist( array( new Reference( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ) ) ) ) )
+		);
+		$statement->setGuid( 'fooguidbar' );
+
+		$expectedSerialization = array(
+			'id' => 'fooguidbar',
+			'mainsnak' => array(
+				'snaktype' => 'value',
+				'property' => 'P12',
+				'datavalue' => array(
+					'value' => 'stringVal',
+					'type' => 'string',
+				),
+				'datatype' => 'DtIdFor_P12',
+			),
+			'type' => 'statement',
+			'rank' => 'normal',
+			'qualifiers-order' => array( 'P12' ),
+			'references' => array(
+				array(
+					'hash' => '2f543336756784850a310cbc52a9307e467c7c42',
+					'snaks' => array(
+						'P12' => array(
+							array(
+								'snaktype' => 'value',
+								'property' => 'P12',
+								'datatype' => 'DtIdFor_P12',
+								'datavalue' => array(
+									'value' => 'refSnakVal',
+									'type' => 'string',
+								),
+							),
+						),
+					),
+					'snaks-order' => array( 'P12' ),
+				),
+			),
+			'qualifiers' => array(
+				'P12' => array(
+					array(
+						'snaktype' => 'value',
+						'property' => 'P12',
+						'datatype' => 'DtIdFor_P12',
+						'datavalue' => array(
+							'value' => 'qualiferVal',
+							'type' => 'string',
+						),
+						'hash' => '67423e8a140238decaa9156be1e3ba23513b3b19',
+					),
+				),
+			),
+		);
+
+		return array( $statement, $expectedSerialization );
 	}
 
 	public function testAddReference() {
