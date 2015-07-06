@@ -243,6 +243,12 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Repo\Api\ApiHelperFactory', $factory );
 	}
 
+	public function testNewEditEntityFactory() {
+		$mockContext = $this->getMock( 'RequestContext' );
+		$factory = $this->getWikibaseRepo()->newEditEntityFactory( $mockContext );
+		$this->assertInstanceOf( 'Wikibase\EditEntityFactory', $factory );
+	}
+
 	public function testGetTermLookup() {
 		$service = $this->getWikibaseRepo()->getTermLookup();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\TermLookup', $service );

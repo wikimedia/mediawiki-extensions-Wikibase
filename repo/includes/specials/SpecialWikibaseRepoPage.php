@@ -12,15 +12,12 @@ use UserInputException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EditEntity;
+use Wikibase\EditEntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -50,24 +47,14 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $entityTitleLookup;
 
 	/**
-	 * @var EntityStore
-	 */
-	private $entityStore;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
-
-	/**
 	 * @var SiteStore
 	 */
 	protected $siteStore;
 
 	/**
-	 * @var EditFilterHookRunner
+	 * @var EditEntityFactory
 	 */
-	private $editFilterHookRunner;
+	private $editEntityFactory;
 
 	/**
 	 * @since 0.5
@@ -79,20 +66,12 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		parent::__construct( $title, $restriction );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
-
 		$this->setSpecialWikibaseRepoPageServices(
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$titleLookup,
-			$wikibaseRepo->getEntityStore(),
-			$wikibaseRepo->getEntityPermissionChecker(),
+			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->getSiteStore(),
-			new EditFilterHookRunner(
-				$titleLookup,
-				$wikibaseRepo->getEntityContentFactory(),
-				$this->getContext()
-			)
+			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
 		);
 	}
 
@@ -102,27 +81,21 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityStore $entityStore
-	 * @param EntityPermissionChecker $permissionChecker
 	 * @param SiteStore $siteStore
-	 * @param EditFilterHookRunner $editFilterHookRunner
+	 * @param EditEntityFactory $editEntityFactory
 	 */
 	public function setSpecialWikibaseRepoPageServices(
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
-		EntityStore $entityStore,
-		EntityPermissionChecker $permissionChecker,
 		SiteStore $siteStore,
-		EditFilterHookRunner $editFilterHookRunner
+		EditEntityFactory $editEntityFactory
 	) {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->entityStore = $entityStore;
-		$this->permissionChecker = $permissionChecker;
 		$this->siteStore = $siteStore;
-		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->editEntityFactory = $editEntityFactory;
 	}
 
 	/**
@@ -236,17 +209,17 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 *
 	 * @return Status
 	 */
-	protected function saveEntity( Entity $entity, Summary $summary, $token, $flags = EDIT_UPDATE, $baseRev = false ) {
-		$editEntity = new EditEntity(
-			$this->entityTitleLookup,
-			$this->entityRevisionLookup,
-			$this->entityStore,
-			$this->permissionChecker,
-			$entity,
+	protected function saveEntity(
+		Entity $entity,
+		Summary $summary,
+		$token,
+		$flags = EDIT_UPDATE,
+		$baseRev = false
+	) {
+		$editEntity = $this->editEntityFactory->newEditEntity(
 			$this->getUser(),
-			$this->editFilterHookRunner,
-			$baseRev,
-			$this->getContext()
+			$entity,
+			$baseRev
 		);
 
 		$status = $editEntity->attemptSave(
