@@ -12,6 +12,8 @@ use ValueValidators\ValueValidator;
 interface DataTypeValidatorFactory {
 
 	/**
+	 * Returns the validators associated with the given $dataTypeId.
+	 * For unknown $dataTypeIds, an empty array is returned.
 	 *
 	 * @param string $dataTypeId
 	 *
