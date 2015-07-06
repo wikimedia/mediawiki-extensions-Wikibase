@@ -17,6 +17,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -543,9 +544,30 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addClaims( array $claims, $path ) {
-		$claimsSerializer = $this->libSerializerFactory->newClaimsSerializer( $this->getOptions() );
+		$serializer = $this->serializerFactory->newStatementListSerializer();
 
-		$values = $claimsSerializer->getSerialized( new Claims( $claims ) );
+		$values = $serializer->serialize( new StatementList( $claims ) );
+
+		//TODO XXX THIS IS A BIG HACK
+		foreach ( $values as $propertyIdGroup => &$statementGroup ) {
+			foreach ( $statementGroup as &$statement ) {
+				$this->injectDataTypeIntoSnakSerialization( $statement['mainsnak'] );
+				$this->removeHashFromSnakSerialization( $statement['mainsnak'] );
+				foreach ( $statement['references'] as &$reference ) {
+					foreach ( $reference['snaks'] as &$snakGroup ) {
+						foreach ( $snakGroup as &$snak ) {
+							$this->injectDataTypeIntoSnakSerialization( $snak );
+							$this->removeHashFromSnakSerialization( $snak );
+						}
+					}
+				}
+				foreach ( $statement['qualifiers'] as &$qualiferGroup ) {
+					foreach ( $qualiferGroup as &$qualiferSnak ) {
+						$this->injectDataTypeIntoSnakSerialization( $qualiferSnak );
+					}
+				}
+			}
+		}
 
 		// HACK: comply with ApiResult::setIndexedTagName
 		$tag = isset( $values['_element'] ) ? $values['_element'] : 'claim';
@@ -560,13 +582,31 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addClaim( Claim $claim ) {
-		$serializer = $this->libSerializerFactory->newClaimSerializer( $this->getOptions() );
+		$serializer = $this->serializerFactory->newStatementSerializer();
 
 		//TODO: this is currently only used to add a Claim as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow claims
 		//      to be added to a list, using a path and a id key or index.
 
-		$value = $serializer->getSerialized( $claim );
+		$value = $serializer->serialize( $claim );
+
+		//TODO XXX THIS IS A BIG HACK
+		$this->injectDataTypeIntoSnakSerialization( $value['mainsnak'] );
+		$this->removeHashFromSnakSerialization( $value['mainsnak'] );
+		foreach ( $value['references'] as &$reference ) {
+			foreach ( $reference['snaks'] as &$snakGroup ) {
+				foreach ( $snakGroup as &$snak ) {
+					$this->injectDataTypeIntoSnakSerialization( $snak );
+					$this->removeHashFromSnakSerialization( $snak );
+				}
+			}
+		}
+		foreach ( $value['qualifiers'] as &$qualiferGroup ) {
+			foreach ( $qualiferGroup as &$qualiferSnak ) {
+				$this->injectDataTypeIntoSnakSerialization( $qualiferSnak );
+			}
+		}
+
 		$this->setValue( null, 'claim', $value );
 	}
 
@@ -586,35 +626,44 @@ class ResultBuilder {
 
 		$value = $serializer->serialize( $reference );
 
+		//TODO XXX THIS IS A BIG HACK
 		foreach ( $value['snaks'] as $propertyIdGroup => &$snakGroup ) {
-			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty(
-				new PropertyId( $propertyIdGroup )
-			);
 			foreach ( $snakGroup as &$snak ) {
-				/**
-				 * HACK: Inject the datatype into the serialization
-				 *
-				 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
-				 *       but this is not done by the LibSerializers thus not done here.
-				 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
-				 *       might be able to use in some way here
-				 */
-				if ( $snak['snaktype'] === 'value' ) {
-					$snak['datatype'] = $dataType;
-				}
-				/**
-				 * HACK: Remove snak hases
-				 *
-				 * TODO: LibSerializers do not return hashes for individual Snaks so we remove them here
-				 *       It would probbaly be nicer to have this as an option in DataModelSerialization
-				 *       OR we could just start returning them...... They are not really that usefull
-				 *       for consumers though...
-				 */
-				unset( $snak['hash'] );
+				$this->injectDataTypeIntoSnakSerialization( $snak );
+				$this->removeHashFromSnakSerialization( $snak );
 			}
 		}
 
 		$this->setValue( null, 'reference', $value );
+	}
+
+	/**
+	 * HACK: Inject the datatype into the snak serialization
+	 *
+	 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
+	 *       but this is not done by the LibSerializers thus not done here.
+	 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
+	 *       might be able to use in some way here
+	 */
+	private function injectDataTypeIntoSnakSerialization( array &$serialization ) {
+		if ( $serialization['snaktype'] === 'value' ) {
+			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty(
+				new PropertyId( $serialization['property'] )
+			);
+			$serialization['datatype'] = $dataType;
+		}
+	}
+
+	/**
+	 * HACK: Remove snak hases
+	 *
+	 * TODO: LibSerializers do not return hashes for individual Snaks so we remove them here
+	 *       It would probbaly be nicer to have this as an option in DataModelSerialization
+	 *       OR we could just start returning them...... They are not really that usefull
+	 *       for consumers though...
+	 */
+	private function removeHashFromSnakSerialization( array &$serialization ) {
+		unset( $serialization['hash'] );
 	}
 
 	/**
