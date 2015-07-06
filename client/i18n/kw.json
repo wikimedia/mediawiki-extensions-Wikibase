@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kw-Moon"
+		]
+	},
+	"tooltip-t-wikibase": "Kevrenna dhe elven kovskrifva dhata junyes",
+	"wikibase-dataitem": "Elven {{WBREPONAME}}",
+	"wikibase-editlinks": "Chanjya an kevrennow",
+	"wikibase-editlinkstitle": "Chanjya an kevrennow yeth",
+	"wikibase-rc-hide-wikidata-show": "Diskwedhes",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Chanjya {{WBREPONAME}}"
+}

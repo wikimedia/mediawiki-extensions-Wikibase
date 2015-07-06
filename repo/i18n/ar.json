@@ -273,7 +273,7 @@
 	"wikibase-item-summary-clientsitelink-remove": "تم حذف الصفحة من [$3]",
 	"wikibase-item-summary-wbremovereferences-remove": "إزالة {{PLURAL:$3|مرجع|مرجعين|مراجع}} من ادعاء",
 	"wikibase-item-summary-wbmergeitems-from": "دمج العنصر من «$3»",
-	"wikibase-item-summary-wbmergeitems-to": "دمج العنصر إلى «$3»",
+	"wikibase-item-summary-wbmergeitems-to": "دمج العنصر إلى $3",
 	"wikibase-property-summary-wbcreate-new": "إنشاء خاصية جديدة",
 	"wikibase-property-summary-wbcreateclaim-create": "الدعوى المنشئة",
 	"wikibase-property-summary-wbcreateclaim": "إنشاء {{PLURAL:$1|ادعاء|ادعائين|ادعاءات}}",

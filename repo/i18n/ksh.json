@@ -174,7 +174,7 @@
 	"apihelp-wbsearchentities-param-limit": "De hühßte Zahl vun Äjehbmeße",
 	"apihelp-wbsearchentities-param-continue": "un woh wigger söhke",
 	"apihelp-wbsearchentities-example-1": "Söhk noh „abc“ en Änglesch mem Schtandat för Zood un Jräns",
-	"apihelp-wbsearchentities-example-2": "Söhk noh „abc“ en Änglesch met ene Jräns vun 50",
+	"apihelp-wbsearchentities-example-2": "Söhk noh „<kbd lang=\"en\" xml:lang=\"en\" dir=\"ltr\">abc</kbd>“ en Änglesch met ene Jräns vun 50.",
 	"apihelp-wbsetaliases-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
 	"apihelp-wbsetaliases-param-bot": "Makkehr heh di Änderong als eine vun enem Bot_Projramm. Dat hät blohß ene Effäk, wann dä Metmaacher och en dä Metmaacherjopp \n<code lang=\"en\" xml:lang=\"en\" dir=\"ltr\">bot</code> dren es.",
 	"apihelp-wbsetclaim-param-summary": "Zersammefaßong för de Änderong.\nDerförhr weed ene automattesch jennerehrte Täx eenjeföhsch. De Jesampläng för se beijds zersamme es 260 Zeijsche. Alles, wat ze lang es, weed automattesch afjeschnedde un flüsch fott.",
