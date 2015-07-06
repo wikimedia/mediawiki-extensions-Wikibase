@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ee42bf10",
+        "filename": "repo/tests/phpunit/includes/api/ApiErrorReporterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-06T08:07:59Z",
+      "side": 1,
+      "message": "Fix that evil test namespace \u003do",
+      "revId": "cef84dec113543479934933b247d16009accddc7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
