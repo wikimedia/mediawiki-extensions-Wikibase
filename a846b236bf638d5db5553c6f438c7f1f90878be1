@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_91179e4a",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-06T10:21:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_7e06848a",
+      "revId": "a846b236bf638d5db5553c6f438c7f1f90878be1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_3efc7c6c",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-05T17:04:30Z",
       "side": 1,
       "message": "This should use the SiteLinkSerializer as well.",
+      "revId": "a846b236bf638d5db5553c6f438c7f1f90878be1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5121369c",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-06T10:21:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_3efc7c6c",
       "revId": "a846b236bf638d5db5553c6f438c7f1f90878be1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
