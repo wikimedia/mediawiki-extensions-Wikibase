@@ -337,11 +337,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource $context
+	 * @param IContextSource|null $context
 	 *
 	 * @return EditFilterHookRunner
 	 */
-	private function newEditFilterHookRunner( IContextSource $context ) {
+	private function newEditFilterHookRunner( IContextSource $context = null ) {
 		return new EditFilterHookRunner(
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),
@@ -1082,14 +1082,23 @@ class WikibaseRepo {
 			$this->getEntityFactory(),
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
-			new EditEntityFactory(
-				$this->getEntityTitleLookup(),
-				$this->getEntityRevisionLookup( 'uncached' ),
-				$this->getEntityStore(),
-				$this->getEntityPermissionChecker(),
-				$this->newEditFilterHookRunner( $context ),
-				$context
-			)
+			$this->newEditEntityFactory( $context )
+		);
+	}
+
+	/**
+	 * @param IContextSource|null $context
+	 *
+	 * @return EditEntityFactory
+	 */
+	public function newEditEntityFactory( $context = null ) {
+		return new EditEntityFactory(
+			$this->getEntityTitleLookup(),
+			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityStore(),
+			$this->getEntityPermissionChecker(),
+			$this->newEditFilterHookRunner( $context ),
+			$context
 		);
 	}
 

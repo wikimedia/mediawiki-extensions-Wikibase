@@ -8,13 +8,10 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EditEntity;
+use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\Hooks\EditFilterHookRunner;
-use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -28,11 +25,6 @@ use Wikibase\SummaryFormatter;
  * @author Marius Hoch < hoo@online.de >
  */
 abstract class UpdateRepoJob extends Job {
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	protected $entityTitleLookup;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -50,14 +42,9 @@ abstract class UpdateRepoJob extends Job {
 	protected $summaryFormatter;
 
 	/**
-	 * @var EntityPermissionChecker
+	 * @var EditEntityFactory
 	 */
-	protected $entityPermissionChecker;
-
-	/**
-	 * @var EditFilterHookRunner
-	 */
-	private $editFilterHookRunner;
+	private $editEntityFactory;
 
 	/**
 	 * @see Job::__construct
@@ -70,35 +57,24 @@ abstract class UpdateRepoJob extends Job {
 		parent::__construct( $command, $title, $params );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
-
 		$this->initRepoJobServices(
-			$titleLookup,
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityPermissionChecker(),
-			new EditFilterHookRunner(
-				$titleLookup,
-				$wikibaseRepo->getEntityContentFactory()
-			)
+			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
 
 	protected function initRepoJobServices(
-		EntityTitleLookup $entityTitleLookup,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
-		EntityPermissionChecker $entityPermissionChecker,
-		EditFilterHookRunner $editFilterHookRunner
+		EditEntityFactory $editEntityFactory
 	) {
-		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
 		$this->summaryFormatter = $summaryFormatter;
-		$this->entityPermissionChecker = $entityPermissionChecker;
-		$this->editFilterHookRunner = $editFilterHookRunner;
+		$this->editEntityFactory = $editEntityFactory;
 	}
 
 	/**
@@ -177,19 +153,9 @@ abstract class UpdateRepoJob extends Job {
 		$summary = $this->getSummary();
 		$itemId = $item->getId();
 
-		$editEntity = new EditEntity(
-			$this->entityTitleLookup,
-			$this->entityRevisionLookup,
-			$this->entityStore,
-			$this->entityPermissionChecker,
-			$item,
-			$user,
-			$this->editFilterHookRunner,
-			true
-		);
-
 		$summaryString = $this->summaryFormatter->formatSummary( $summary );
 
+		$editEntity = $this->editEntityFactory->newEditEntity( $user, $item, true );
 		$status = $editEntity->attemptSave(
 			$summaryString,
 			EDIT_UPDATE,

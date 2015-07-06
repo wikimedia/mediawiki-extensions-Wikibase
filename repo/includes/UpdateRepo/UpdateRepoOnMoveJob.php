@@ -7,6 +7,7 @@ use SiteStore;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -56,38 +57,27 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
-
 		$this->initServices(
-			$titleLookup,
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->getEntityPermissionChecker(),
 			$wikibaseRepo->getSiteStore(),
-			new EditFilterHookRunner(
-				$titleLookup,
-				$wikibaseRepo->getEntityContentFactory()
-			)
+			$wikibaseRepo->newEditEntityFactory()
 		);
 	}
 
 	public function initServices(
-		EntityTitleLookup $entityTitleLookup,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
-		EntityPermissionChecker $entityPermissionChecker,
 		SiteStore $siteStore,
-		EditFilterHookRunner $editFilterHookRunner
+		EditEntityFactory $editEntityFactory
 	) {
 		$this->initRepoJobServices(
-			$entityTitleLookup,
 			$entityRevisionLookup,
 			$entityStore,
 			$summaryFormatter,
-			$entityPermissionChecker,
-			$editFilterHookRunner
+			$editEntityFactory
 		);
 		$this->siteStore = $siteStore;
 	}

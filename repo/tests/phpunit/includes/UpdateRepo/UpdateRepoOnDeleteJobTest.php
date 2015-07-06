@@ -7,6 +7,8 @@ use User;
 use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EditEntity;
+use Wikibase\EditEntityFactory;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
 use Wikibase\Test\MockRepository;
 
@@ -138,13 +140,17 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 
 		$job = new UpdateRepoOnDeleteJob( Title::newMainPage(), $params );
 		$job->initServices(
-			$this->getEntityTitleLookup( $item->getId() ),
 			$mockRepository,
 			$mockRepository,
 			$this->getSummaryFormatter(),
-			$this->getEntityPermissionChecker(),
 			$this->getSiteStore( $titleExists ),
-			$this->getMockEditFitlerHookRunner()
+			new EditEntityFactory(
+				$this->getEntityTitleLookup( $item->getId() ),
+				$mockRepository,
+				$mockRepository,
+				$this->getEntityPermissionChecker(),
+				$this->getMockEditFitlerHookRunner()
+			)
 		);
 
 		$job->run();
