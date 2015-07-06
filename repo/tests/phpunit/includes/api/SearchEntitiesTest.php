@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use ApiMain;
 use FauxRequest;
@@ -18,12 +18,12 @@ use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
-use Wikibase\Api\SearchEntities;
+use Wikibase\Repo\Api\SearchEntities;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Test\MockTermIndex;
 
 /**
- * @covers Wikibase\Api\SearchEntities
+ * @covers Wikibase\Repo\Api\SearchEntities
  *
  * @group API
  * @group Wikibase

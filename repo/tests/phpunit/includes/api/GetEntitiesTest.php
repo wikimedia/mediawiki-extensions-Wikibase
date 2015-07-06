@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Api;
+namespace Wikibase\Test\Repo\Api;
 
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 
 /**
- * @covers Wikibase\Api\GetEntities
+ * @covers Wikibase\Repo\Api\GetEntities
  *
  * Test cases are generated using the data provided in the various static arrays below.
  *
