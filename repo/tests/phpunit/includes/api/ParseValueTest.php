@@ -10,8 +10,10 @@ use Language;
 use ValueParsers\NullParser;
 use Wikibase\Api\ApiErrorReporter;
 use Wikibase\Api\ParseValue;
+use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Validators\RegexValidator;
 
 /**
  * @covers Wikibase\Api\ParseValue
@@ -40,6 +42,8 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 		$module = new ParseValue( $main, 'wbparsevalue' );
 
 		$exceptionLocalizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		$validatorErrorLocalizer = WikibaseRepo::getDefaultInstance()->getValidatorErrorLocalizer();
+
 		$errorReporter = new ApiErrorReporter(
 			$module,
 			$exceptionLocalizer,
@@ -59,21 +63,32 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 			'globe-coordinate' => 'DataValues\Geo\Parsers\GlobeCoordinateParser',
 		) );
 
+		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( array(
+			'string' => array( $this, 'newArrayWithStringValidator' ),
+			'url' => array( $this, 'newArrayWithStringValidator' ),
+		) );
+
 		$module->setServices(
 			$dataTypeFactory,
 			$valueParserFactory,
+			$validatorFactory,
 			$exceptionLocalizer,
+			$validatorErrorLocalizer,
 			$errorReporter
 		);
 
 		return $module;
 	}
 
-	public function newStringDataType( $spec, $name ) {
+	public function newArrayWithStringValidator() {
+		return array( new RegexValidator( '/INVALID/', true, 'no-kittens' ) );
+	}
+
+	public function newStringDataType( $name ) {
 		return new DataType( $name, 'string', array() );
 	}
 
-	public function newCoordinateDataType( $spec, $name ) {
+	public function newCoordinateDataType( $name ) {
 		return new DataType( $name, 'globecoordinate', array() );
 	}
 
@@ -88,7 +103,7 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 		$result = $module->getResult();
 
 		$data = $result->getResultData( null, array(
-			'BC' => array(),
+			'BC' => array( 'nobool' ),
 			'Types' => array(),
 			'Strip' => 'all',
 		) );
@@ -121,6 +136,45 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 					'0/raw' => 'foo',
 					'0/type' => 'unknown',
 					'0/value' => 'foo',
+				),
+			),
+
+			'validation' => array(
+				array(
+					'values' => 'VALID',
+					'datatype' => 'string',
+					'validate' => ''
+				),
+				array(
+					'0/raw' => 'VALID',
+					'0/valid' => true,
+				),
+			),
+
+			'bad value, validation failure' => array(
+				array(
+					'values' => 'INVALID',
+					'datatype' => 'string',
+					'validate' => ''
+				),
+				array(
+					'0/raw' => 'INVALID',
+					'0/valid' => false,
+					'0/error' => 'ValidationError',
+					'0/messages/0/name' => 'wikibase-validator-no-kittens',
+					'0/messages/0/html/*' => '/.+/',
+					'0/validation-errors/0' => 'no-kittens',
+				),
+			),
+
+			'bad value, no validation' => array(
+				array(
+					'values' => 'INVALID',
+					'datatype' => 'string',
+				),
+				array(
+					'0/raw' => 'INVALID',
+					'0/type' => 'unknown',
 				),
 			),
 
@@ -193,9 +247,10 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 	protected function assertValueAtPath( $expected, $path, $data ) {
 		$name = '';
 		foreach ( $path as $step ) {
-			$this->assertArrayHasKey( $step, $data );
-			$data = $data[$step];
 			$name .= '/' . $step;
+			$this->assertInternalType( 'array', $data, $name );
+			$this->assertArrayHasKey( $step, $data, $name );
+			$data = $data[$step];
 		}
 
 		if ( is_string( $expected ) && preg_match( '/^([^\s\w\d]).*\1[a-zA-Z]*$/', $expected ) ) {
