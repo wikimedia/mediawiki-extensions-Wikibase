@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_51ecd626",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-06T11:05:26Z",
+      "side": 1,
+      "message": "Well, I would expect / ideally expect that the API would still tell me that the merge was successful and the redirect failed for reason X rather than having an uncaught exception that tells me nothing and doesn\u0027t hint that 2 edits have already been made.\n\nWe could leave it as it is but I feel this is less than ideal :/",
+      "parentUuid": "8ec42329_dc746bfa",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e408b731",
         "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
         "patchSetId": 26
@@ -333,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_71f1d2fd",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-06T11:05:26Z",
+      "side": 1,
+      "message": "Indeed, would need some poking at MockRepo to be able to test this here :/",
+      "parentUuid": "8ec42329_dc4b0bb2",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_7cc6971b",
         "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
         "patchSetId": 26
@@ -415,6 +451,24 @@
       "side": 1,
       "message": "Right: we\u0027d need a mock RedirectCreationInteractor, which checks that it gets called when expected.",
       "parentUuid": "8ec42329_f7570bf7",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_11f64ef7",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-06T11:05:26Z",
+      "side": 1,
+      "message": "Yep, I think that\u0027s the best way forward for this (and other api modules) ;)!",
+      "parentUuid": "8ec42329_5c607b2d",
       "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
