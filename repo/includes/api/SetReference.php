@@ -3,14 +3,14 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
-use InvalidArgumentException;
-use OutOfBoundsException;
+use DataValues\Deserializers\DataValueDeserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -35,6 +35,11 @@ class SetReference extends ModifyClaim {
 	private $errorReporter;
 
 	/**
+	 * @var DeserializerFactory
+	 */
+	private $deserializerFactory;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -48,6 +53,10 @@ class SetReference extends ModifyClaim {
 
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
+		$this->deserializerFactory = new DeserializerFactory(
+			$wikibaseRepo->getDataValueDeserializer(),
+			$wikibaseRepo->getEntityIdParser()
+		);
 	}
 
 	/**
@@ -71,13 +80,6 @@ class SetReference extends ModifyClaim {
 
 		$claim = $this->modificationHelper->getStatementFromEntity( $params['statement'], $entity );
 
-		if ( ! ( $claim instanceof Statement ) ) {
-			$this->errorReporter->dieError(
-				'The referenced claim is not a statement and thus cannot have references',
-				'not-statement'
-			);
-		}
-
 		if ( isset( $params['reference'] ) ) {
 			$this->validateReferenceHash( $claim, $params['reference'] );
 		}
@@ -88,20 +90,28 @@ class SetReference extends ModifyClaim {
 			$snaksOrder = array();
 		}
 
-		$newReference = new Reference(
-			$this->getSnaks(
-				$this->getArrayFromParam( $params['snaks'] ),
-				$snaksOrder
-			)
-		);
+		$deserializer = $this->deserializerFactory->newSnakListDeserializer();
+		/** @var SnakList $snakList */
+		try{
+			$snakList = $deserializer->deserialize( $this->getArrayFromParam( $params['snaks'] ) );
+		} catch ( DeserializationException $e ) {
+			$this->errorReporter->dieError(
+				'Failed to get reference from reference Serialization ' . $e->getMessage(),
+				'snak-instantiation-failure'
+			);
+		}
+		$snakList->orderByProperty( $snaksOrder );
+
+		$newReference = new Reference( $snakList );
 
 		$changeOp = $this->getChangeOp( $newReference );
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$status = $this->saveChanges( $entity, $summary );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addReference( $newReference );
+		$resultBuilder = $this->getResultBuilder();
+		$resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$resultBuilder->markSuccess();
+		$resultBuilder->addReference( $newReference );
 	}
 
 	/**
@@ -139,54 +149,6 @@ class SetReference extends ModifyClaim {
 		}
 
 		return $rawArray;
-	}
-
-	/**
-	 * @param array $rawSnaks array of snaks
-	 * @param array $snakOrder array of property ids the snaks are supposed to be ordered by.
-	 *
-	 * @todo: Factor deserialization out of the API class.
-	 *
-	 * @return SnakList
-	 */
-	private function getSnaks( array $rawSnaks, array $snakOrder = array() ) {
-		$snaks = new SnakList();
-
-		$serializerFactory = new LibSerializerFactory();
-		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Snak\Snak' );
-
-		$snakOrder = ( count( $snakOrder ) > 0 ) ? $snakOrder : array_keys( $rawSnaks );
-
-		try {
-			foreach ( $snakOrder as $propertyId ) {
-				if ( !is_array( $rawSnaks[$propertyId] ) ) {
-					$this->errorReporter->dieError( 'Invalid snak JSON given', 'invalid-json' );
-				}
-				foreach ( $rawSnaks[$propertyId] as $rawSnak ) {
-					if ( !is_array( $rawSnak ) ) {
-						$this->errorReporter->dieError( 'Invalid snak JSON given', 'invalid-json' );
-					}
-
-					$snak = $snakUnserializer->newFromSerialization( $rawSnak );
-					$snaks[] = $snak;
-				}
-			}
-		} catch ( InvalidArgumentException $invalidArgumentException ) {
-			// Handle Snak instantiation failures
-			$this->errorReporter->dieError(
-				'Failed to get reference from reference Serialization '
-					. $invalidArgumentException->getMessage(),
-				'snak-instantiation-failure'
-			);
-		} catch ( OutOfBoundsException $outOfBoundsException ) {
-			$this->errorReporter->dieError(
-				'Failed to get reference from reference Serialization '
-					. $outOfBoundsException->getMessage(),
-				'snak-instantiation-failure'
-			);
-		}
-
-		return $snaks;
 	}
 
 	/**
