@@ -582,6 +582,7 @@
 	"apihelp-wbparsevalue-param-options": "{{doc-apihelp-param|wbparsevalue|options}}",
 	"apihelp-wbparsevalue-example-1": "{{doc-apihelp-example|wbparsevalue}}",
 	"apihelp-wbparsevalue-example-2": "{{doc-apihelp-example|wbparsevalue}}",
+	"apihelp-wbparsevalue-example-3": "{{doc-apihelp-example|wbparsevalue}}",
 	"apihelp-wbremoveclaims-description": "{{doc-apihelp-description|wbremoveclaims}}",
 	"apihelp-wbremoveclaims-param-claim": "{{doc-apihelp-param|wbremoveclaims|claim}}",
 	"apihelp-wbremoveclaims-example-1": "{{doc-apihelp-example|wbremoveclaim}}",
