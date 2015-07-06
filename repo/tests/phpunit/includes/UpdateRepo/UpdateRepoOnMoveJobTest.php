@@ -7,6 +7,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EditEntityFactory;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
 use Wikibase\Test\MockRepository;
 
@@ -134,13 +135,17 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 
 		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
 		$job->initServices(
-			$this->getEntityTitleLookup( $item->getId() ),
 			$mockRepository,
 			$mockRepository,
 			$this->getSummaryFormatter(),
-			$this->getEntityPermissionChecker(),
 			$this->getSiteStore( $normalizedPageName ),
-			$this->getMockEditFitlerHookRunner()
+			new EditEntityFactory(
+				$this->getEntityTitleLookup( $item->getId() ),
+				$mockRepository,
+				$mockRepository,
+				$this->getEntityPermissionChecker(),
+				$this->getMockEditFitlerHookRunner()
+			)
 		);
 
 		$job->run();
