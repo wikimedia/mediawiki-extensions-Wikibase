@@ -17,6 +17,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -543,9 +544,40 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addClaims( array $claims, $path ) {
-		$claimsSerializer = $this->libSerializerFactory->newClaimsSerializer( $this->getOptions() );
+		$serializer = $this->serializerFactory->newStatementListSerializer();
 
-		$values = $claimsSerializer->getSerialized( new Claims( $claims ) );
+		$values = $serializer->serialize( new StatementList( $claims ) );
+
+		foreach ( $values as $propertyIdGroup => &$statementGroup ) {
+			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty(
+				new PropertyId( $propertyIdGroup )
+			);
+			foreach ( $statementGroup as &$statement ) {
+				/**
+				 * HACK: Inject the datatype into the mainsnak serialization
+				 *
+				 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
+				 *       but this is not done by the LibSerializers thus not done here.
+				 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
+				 *       might be able to use in some way here
+				 */
+				if ( $statement['mainsnak']['snaktype'] === 'value' ) {
+					$statement['mainsnak']['datatype'] = $dataType;
+				}
+				/**
+				 * HACK: Remove mainsnak hases
+				 *
+				 * TODO: LibSerializers do not return hashes for individual Snaks so we remove them here
+				 *       It would probbaly be nicer to have this as an option in DataModelSerialization
+				 *       OR we could just start returning them...... They are not really that usefull
+				 *       for consumers though...
+				 */
+				unset( $statement['mainsnak']['hash'] );
+			}
+
+		}
+
+
 
 		// HACK: comply with ApiResult::setIndexedTagName
 		$tag = isset( $values['_element'] ) ? $values['_element'] : 'claim';
@@ -560,13 +592,38 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addClaim( Claim $claim ) {
-		$serializer = $this->libSerializerFactory->newClaimSerializer( $this->getOptions() );
+		$serializer = $this->serializerFactory->newStatementSerializer();
 
 		//TODO: this is currently only used to add a Claim as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow claims
 		//      to be added to a list, using a path and a id key or index.
 
-		$value = $serializer->getSerialized( $claim );
+		$value = $serializer->serialize( $claim );
+
+		/**
+		 * HACK: Inject the datatype into the mainsnak serialization
+		 *
+		 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
+		 *       but this is not done by the LibSerializers thus not done here.
+		 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
+		 *       might be able to use in some way here
+		 */
+		if ( $value['mainsnak']['snaktype'] === 'value' ) {
+			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty(
+				new PropertyId( $value['mainsnak']['property'] )
+			);
+			$value['mainsnak']['datatype'] = $dataType;
+		}
+		/**
+		 * HACK: Remove mainsnak hases
+		 *
+		 * TODO: LibSerializers do not return hashes for individual Snaks so we remove them here
+		 *       It would probbaly be nicer to have this as an option in DataModelSerialization
+		 *       OR we could just start returning them...... They are not really that usefull
+		 *       for consumers though...
+		 */
+		unset( $value['mainsnak']['hash'] );
+
 		$this->setValue( null, 'claim', $value );
 	}
 
