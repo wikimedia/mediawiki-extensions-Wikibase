@@ -468,8 +468,23 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'removing invalid claim fails' => array( // removing invalid claim fails
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"claims":[{"remove":""}]}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-claim', 'message' => 'Cannot remove a claim with no GUID'  ) ) ),
-			'removing valid claim with no guid fails' => array( // removing valid claim with no guid fails
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{"remove":"","claims":[{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":{"value":"imastring","type":"string"}},"type":"statement","rank":"normal"}]}'),
+			'removing valid claim with no guid fails' => array(
+				'p' => array(
+					'site' => 'enwiki',
+					'title' => 'Berlin',
+					'data' => '{
+						"remove": "",
+						"claims": [ {
+							"mainsnak": {
+								"snaktype": "value",
+								"property": "%P56%",
+								"datavalue": { "value": "imastring", "type": "string" }
+							},
+							"type": "statement",
+							"rank": "normal"
+						} ]
+					}'
+				),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized', 'message' => 'Unknown key in json: remove' ) ) ),
 			'bad badge id' => array( // bad badge id
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["abc","%Q149%"]}}}' ),

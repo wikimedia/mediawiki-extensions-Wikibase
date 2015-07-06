@@ -161,7 +161,10 @@ class RemoveReferences extends ModifyClaim {
 	 */
 	protected function getExamplesMessages() {
 		return array(
-			'action=wbremovereferences&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar&baserevid=7201010' => 'apihelp-wbremovereferences-example-1',
+			'action=wbremovereferences&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F'
+				. '&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar'
+				. '&baserevid=7201010'
+				=> 'apihelp-wbremovereferences-example-1',
 		);
 	}
 

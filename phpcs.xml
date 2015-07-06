@@ -11,6 +11,13 @@
 	<rule ref="Generic.Files.EndFileNewline" />
 	<rule ref="Generic.Files.InlineHTML" />
 	<rule ref="Generic.Files.LineEndings" />
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<!-- FIXME: Should be decreased to 100, preferably in steps of 10. -->
+			<property name="lineLimit" value="200" />
+			<property name="absoluteLineLimit" value="9999" />
+		</properties>
+	</rule>
 	<rule ref="Generic.Files.OneInterfacePerFile" />
 	<rule ref="Generic.Files.OneTraitPerFile" />
 
