@@ -41,7 +41,12 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 		$this->assertInternalType( 'string', $value );
 		$this->assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 
-		$this->assertContains( '<h2 class="wb-section-heading section-heading wikibase-sitelinks" dir="auto"><span id="sitelinks"', $value, 'Html should contain section heading' );
+		$this->assertContains(
+			'<h2 class="wb-section-heading section-heading wikibase-sitelinks" dir="auto">'
+				. '<span id="sitelinks"',
+			$value,
+			'Html should contain section heading'
+		);
 	}
 
 	public function getHtmlProvider() {

@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase;
+
+use Exception;
+use Maintenance;
+use User;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -24,7 +29,7 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 
 require_once $basePath . '/maintenance/Maintenance.php';
 
-class importProperties extends Maintenance {
+class ImportProperties extends Maintenance {
 
 	/**
 	 * @var bool
@@ -192,5 +197,5 @@ class importProperties extends Maintenance {
 
 }
 
-$maintClass = 'importProperties';
+$maintClass = 'Wikibase\ImportProperties';
 require_once RUN_MAINTENANCE_IF_MAIN;

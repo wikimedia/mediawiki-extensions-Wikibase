@@ -227,7 +227,10 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>newmainsnakvalue (DETAILED)</span></ins></div></td></tr>'.
 				// rank change
-				'<tr><td colspan="2" class="diff-lineno">property / P1: oldmainsnakvalue / rank</td><td colspan="2" class="diff-lineno">property / P1: newmainsnakvalue / rank</td></tr>'.
+				'<tr>' .
+				'<td colspan="2" class="diff-lineno">property / P1: oldmainsnakvalue / rank</td>' .
+				'<td colspan="2" class="diff-lineno">property / P1: newmainsnakvalue / rank</td>' .
+				'</tr>' .
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span>Normal rank</span></del></div></td>'.
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
