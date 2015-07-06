@@ -1159,16 +1159,18 @@ class WikibaseRepo {
 		);
 	}
 
-	private function getDataTypeValidatorFactory() {
+	public function getDataTypeValidatorFactory() {
 		$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
 
+		$builders = new ValidatorBuilders(
+			$this->getEntityLookup(),
+			$this->getEntityIdParser(),
+			$urlSchemes,
+			$this->getMonolingualTextLanguages()
+		);
+
 		return new BuilderBasedDataTypeValidatorFactory(
-			new ValidatorBuilders(
-				$this->getEntityLookup(),
-				$this->getEntityIdParser(),
-				$urlSchemes,
-				$this->getMonolingualTextLanguages()
-			)
+			$builders->getDataTypeValidators()
 		);
 	}
 
