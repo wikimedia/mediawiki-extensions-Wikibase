@@ -43,14 +43,14 @@ abstract class ModifyClaim extends ApiBase {
 	private $resultBuilder;
 
 	/**
-	 * @var EntityLoadHelper
+	 * @var EntityLoadingHelper
 	 */
-	private $entityLoadHelper;
+	private $entityLoadingHelper;
 
 	/**
-	 * @var EntitySaveHelper
+	 * @var EntitySavingHelper
 	 */
-	private $entitySaveHelper;
+	private $entitySavingHelper;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -74,15 +74,15 @@ abstract class ModifyClaim extends ApiBase {
 
 		$this->guidParser = WikibaseRepo::getDefaultInstance()->getStatementGuidParser();
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entityLoadHelper = $apiHelperFactory->getEntityLoadHelper( $this );
-		$this->entitySaveHelper = $apiHelperFactory->getEntitySaveHelper( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 	}
 
 	/**
-	 * @see EntitySaveHelper::attemptSaveEntity
+	 * @see EntitySavingHelper::attemptSaveEntity
 	 */
 	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
-		return $this->entitySaveHelper->attemptSaveEntity( $entity, $summary, $flags );
+		return $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $flags );
 	}
 
 	/**
@@ -93,13 +93,13 @@ abstract class ModifyClaim extends ApiBase {
 	}
 
 	/**
-	 * @see EntitySaveHelper::loadEntityRevision
+	 * @see EntitySavingHelper::loadEntityRevision
 	 */
 	protected function loadEntityRevision(
 		EntityId $entityId,
 		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
 	) {
-		return $this->entityLoadHelper->loadEntityRevision( $entityId, $revId );
+		return $this->entityLoadingHelper->loadEntityRevision( $entityId, $revId );
 	}
 
 	/**
