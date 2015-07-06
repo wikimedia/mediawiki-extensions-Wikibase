@@ -2,11 +2,19 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiMain;
+use DataTypes\DataType;
+use DataTypes\DataTypeFactory;
+use FauxRequest;
+use Language;
+use ValueParsers\NullParser;
+use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\ParseValue;
+use Wikibase\Repo\ValueParserFactory;
+use Wikibase\Repo\WikibaseRepo;
+
 /**
  * @covers Wikibase\Repo\Api\ParseValue
- *
- * @group Database
- * @group medium
  *
  * @group API
  * @group Wikibase
@@ -16,97 +24,165 @@ namespace Wikibase\Test\Repo\Api;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ParseValueTest extends WikibaseApiTestCase {
+class ParseValueTest extends \PHPUnit_Framework_TestCase {
 
-	protected function setUp() {
-		$this->mergeMwGlobalArrayValue(
-			'wgValueParsers',
-			array( 'decimal' => 'ValueParsers\DecimalParser' )
+	/**
+	 * @param string[] $params
+	 *
+	 * @return ParseValue
+	 */
+	private function newApiModule( array $params ) {
+
+		$request = new FauxRequest( $params, true );
+		$main = new ApiMain( $request );
+
+		$module = new ParseValue( $main, 'wbparsevalue' );
+
+		$exceptionLocalizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		$errorReporter = new ApiErrorReporter(
+			$module,
+			$exceptionLocalizer,
+			Language::factory( 'qqq' )
 		);
-		parent::setUp();
+
+		$dataTypeFactory = new DataTypeFactory( array(
+			'string' => array( $this, 'newStringDataType' ),
+			'url' => array( $this, 'newStringDataType' ),
+			'globe-coordinate' => array( $this, 'newCoordinateDataType' ),
+		) );
+
+		$valueParserFactory = new ValueParserFactory( array(
+			'null' => array( $this, 'newNullParser' ),
+			'string' => array( $this, 'newNullParser' ),
+			'url' => array( $this, 'newNullParser' ),
+			'globe-coordinate' => 'DataValues\Geo\Parsers\GlobeCoordinateParser',
+		) );
+
+		$module->setServices(
+			$dataTypeFactory,
+			$valueParserFactory,
+			$exceptionLocalizer,
+			$errorReporter
+		);
+
+		return $module;
 	}
 
+	public function newStringDataType( $name ) {
+		return new DataType( $name, 'string', array() );
+	}
+
+	public function newCoordinateDataType( $name ) {
+		return new DataType( $name, 'globecoordinate', array() );
+	}
+
+	public function newNullParser() {
+		return new NullParser();
+	}
+
+	private function callApiModule( array $params ) {
+		$module = $this->newApiModule( $params );
+
+		$module->execute();
+		$result = $module->getResult();
+
+		$data = $result->getResultData( null, array(
+			'BC' => array(),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+		return $data;
+	}
+
+	/**
+	 * @return array[]
+	 */
 	public function provideValid() {
 		return array(
-			'null' => array(
-				'$text' => 'foo',
-				'$parser' => 'null',
-				'$expected' => array(
+			'datatype=string' => array(
+				array(
+					'values' => 'foo',
+					'datatype' => 'string',
+				),
+				array(
 					'0/raw' => 'foo',
 					'0/type' => 'unknown',
 					'0/value' => 'foo',
 				),
 			),
 
-			'decimal' => array(
-				'$text' => '123.456',
-				'$parser' => 'decimal',
-				'$expected' => array(
-					'0/raw' => '123.456',
-					'0/type' => 'decimal',
-					'0/value' => '123.456',
+			'datatype=url' => array(
+				array(
+					'values' => 'foo',
+					'datatype' => 'string',
 				),
-			),
-
-			'multi decimals' => array(
-				'$text' => '123|-17',
-				'$parser' => 'decimal',
-				'$expected' => array(
-					'0/raw' => '123',
-					'0/type' => 'decimal',
-					'0/value' => '123',
-
-					'1/raw' => '-17',
-					'1/type' => 'decimal',
-					'1/value' => '-17',
-				),
-			),
-
-			'quantity' => array(
-				'$text' => '123.456+/-0.003',
-				'$parser' => 'quantity',
-				'$expected' => array(
-					'0/raw' => '123.456+/-0.003',
-					'0/type' => 'quantity',
-					'0/value/amount' => '+123.456',
-					'0/value/unit' => '1',
-					'0/value/upperBound' => '+123.459',
-					'0/value/lowerBound' => '+123.453',
-				),
-			),
-
-			'empty decimal' => array(
-				'$text' => '|',
-				'$parser' => 'decimal',
-				'$expected' => array(
-					'0/raw' => '',
-					'0/error' => 'ValueParsers\ParseException',
-					'0/error-info' => '/^.+$/',
-					'0/expected-format' => 'decimal',
-					'0/messages/0/name' => 'wikibase-parse-error',
-					'0/messages/0/html' => '/^.+$/',
-				),
-			),
-
-			'malformed decimal' => array(
-				'$text' => 'foo',
-				'$parser' => 'decimal',
-				'$expected' => array(
+				array(
 					'0/raw' => 'foo',
+					'0/type' => 'unknown',
+					'0/value' => 'foo',
+				),
+			),
+
+			'parser=string (deprecated param)' => array(
+				array(
+					'values' => 'foo',
+					'parser' => 'string',
+				),
+				array(
+					'0/raw' => 'foo',
+					'0/type' => 'unknown',
+					'0/value' => 'foo',
+				),
+			),
+
+			'values=foo|bar' => array(
+				array(
+					'values' => 'foo|bar',
+					'datatype' => 'string',
+				),
+				array(
+					'0/raw' => 'foo',
+					'0/type' => 'unknown',
+					'0/value' => 'foo',
+
+					'1/raw' => 'bar',
+					'1/type' => 'unknown',
+					'1/value' => 'bar',
+				),
+			),
+
+			'datatype=globe-coordinate' => array(
+				array(
+					'values' => '5.5S,37W',
+					'datatype' => 'globe-coordinate',
+				),
+				array(
+					'0/raw' => '5.5S,37W',
+					'0/type' => 'globecoordinate',
+				),
+			),
+
+			'malformed coordinate' => array(
+				array(
+					'values' => 'XYZ',
+					'datatype' => 'globe-coordinate',
+				),
+				array(
+					'0/raw' => 'XYZ',
 					'0/error' => 'ValueParsers\ParseException',
 					'0/error-info' => '/^.+$/',
-					'0/expected-format' => 'decimal',
-					'0/messages/0/name' => 'wikibase-parse-error',
-					'0/messages/0/html' => '/^.+$/',
+					'0/messages/0/html/*' => '/^.+$/',
 				),
 			),
 
 			'good and bad' => array(
-				'$text' => 'foo|2',
-				'$parser' => 'decimal',
-				'$expected' => array(
+				array(
+					'values' => 'XYZ|5.5S,37W',
+					'datatype' => 'globe-coordinate',
+				),
+				array(
 					'0/error' => 'ValueParsers\ParseException',
-					'1/value' => '2',
+					'1/type' => 'globecoordinate',
 				),
 			),
 
@@ -132,14 +208,9 @@ class ParseValueTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideValid
 	 */
-	public function testParse( $text, $parser, $expected ) {
-		$params = array(
-			'action' => 'wbparsevalue',
-			'values' => $text,
-			'parser' => $parser
-		);
+	public function testParse( array $params, array $expected ) {
 
-		list( $result, , ) = $this->doApiRequest( $params );
+		$result = $this->callApiModule( $params );
 
 		$this->assertArrayHasKey( 'results', $result );
 
@@ -147,6 +218,39 @@ class ParseValueTest extends WikibaseApiTestCase {
 			$path = explode( '/', $path );
 			$this->assertValueAtPath( $value, $path, $result['results'] );
 		}
+	}
+
+	/**
+	 * @return array[]
+	 */
+	public function provideInvalid() {
+		return array(
+			'no datatype' => array(
+				array(
+					'values' => 'foo',
+				)
+			),
+			'bad datatype (valid parser name)' => array(
+				array(
+					'values' => 'foo',
+					'datatype' => 'null',
+				)
+			),
+			'bad parser' => array(
+				array(
+					'values' => 'foo',
+					'parser' => 'foo',
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideInvalid
+	 */
+	public function testParse_failure( array $params ) {
+		$this->setExpectedException( 'UsageException' );
+		$this->callApiModule( $params );
 	}
 
 }

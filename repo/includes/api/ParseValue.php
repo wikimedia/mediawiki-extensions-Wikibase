@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use ApiResult;
+use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
 use Exception;
 use LogicException;
@@ -28,6 +29,11 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Adam Shorland
  */
 class ParseValue extends ApiBase {
+
+	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
 
 	/**
 	 * @var ValueParserFactory
@@ -58,6 +64,7 @@ class ParseValue extends ApiBase {
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
 		$this->setServices(
+			$wikibaseRepo->getDataTypeFactory(),
 			new ValueParserFactory( $GLOBALS['wgValueParsers'] ),
 			$wikibaseRepo->getExceptionLocalizer(),
 			$apiHelperFactory->getErrorReporter( $this )
@@ -65,10 +72,12 @@ class ParseValue extends ApiBase {
 	}
 
 	public function setServices(
+		DataTypeFactory $dataTypeFactory,
 		ValueParserFactory $valueParserFactory,
 		ExceptionLocalizer $exceptionLocalizer,
 		ApiErrorReporter $errorReporter
 	) {
+		$this->dataTypeFactory = $dataTypeFactory;
 		$this->valueParserFactory = $valueParserFactory;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->errorReporter = $errorReporter;
@@ -102,10 +111,21 @@ class ParseValue extends ApiBase {
 
 		$options = $this->getOptionsObject( $params['options'] );
 
+		// Parsers are registered by datatype.
+		// Note: parser used to be addressed by a name independant of datatype, using the 'parser'
+		// parameter. For backwards compatibility, parsers are also registered under their old names
+		// in $wgValueParsers, and this in the ValueParserFactory.
+		$name = $params['datatype'] ?: $params['parser'];
+
+		if ( empty( $name ) ) {
+			// If neither 'datatype' not 'parser' is given, tell the client to use 'datatype'.
+			$this->dieUsageMsg( array( 'missingparam', 'datatype' ) );
+		}
+
 		try {
-			$parser = $this->valueParserFactory->newParser( $params['parser'], $options );
+			$parser = $this->valueParserFactory->newParser( $name, $options );
 		} catch ( OutOfBoundsException $ex ) {
-			throw new LogicException( 'Could not obtain a ValueParser instance' );
+			throw new LogicException( "No parser registered for `$name`" );
 		}
 
 		return $parser;
@@ -207,9 +227,21 @@ class ParseValue extends ApiBase {
 	 */
 	public function getAllowedParams() {
 		return array(
+			'datatype' => array(
+				ApiBase::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
+
+				// Currently, the deprecated 'parser' parameter may be used as an
+				// alternative to the 'datatype' parameter. Once 'parser' is removed,
+				// 'datatype' should be required.
+				ApiBase::PARAM_REQUIRED => false,
+			),
 			'parser' => array(
 				self::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
-				self::PARAM_REQUIRED => true,
+
+				// Use 'datatype' instead!
+				// NOTE: when removing the 'parser' parameter, set 'datatype' to PARAM_REQUIRED
+				self::PARAM_DEPRECATED => true,
+				self::PARAM_REQUIRED => false,
 			),
 			'values' => array(
 				self::PARAM_TYPE => 'string',
@@ -228,9 +260,9 @@ class ParseValue extends ApiBase {
 	 */
 	protected function getExamplesMessages() {
 		return array(
-			'action=wbparsevalue&parser=null&values=foo|bar' =>
+			'action=wbparsevalue&datatype=string&values=foo|bar' =>
 				'apihelp-wbparsevalue-example-1',
-			'action=wbparsevalue&parser=time&values=1994-02-08&options={"precision":9}' =>
+			'action=wbparsevalue&datatype=time&values=1994-02-08&options={"precision":9}' =>
 				'apihelp-wbparsevalue-example-2',
 		);
 	}
