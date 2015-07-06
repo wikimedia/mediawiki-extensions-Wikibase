@@ -26,7 +26,6 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 
 	public function providerTrimBadChars() {
 		return array(
-
 			array( // #7: empty
 				"",
 				""
@@ -96,22 +95,16 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider providerCleanupToNFC
 	 */
-	public function testCleanupToNFC( $src, $dst, $expected ) {
+	public function testCleanupToNFC( $string, $expected ) {
 		$normalizer = new StringNormalizer();
-
-		if ($expected) {
-			$this->assertEquals( $dst, $normalizer->cleanupToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
-		}
-		else {
-			$this->assertFalse( $dst === $normalizer->cleanupToNFC( $src ), "String '$src' (" . urlencode( $src ) . ") is the same as the expected '$dst' (" . urlencode( $dst ) . "). This is unusual, but correct." );
-		}
+		$this->assertSame( $expected, $normalizer->cleanupToNFC( $string ) );
 	}
 
 	public function providerCleanupToNFC() {
 		return array(
-			array( "\xC3\x85land", 'Åland', true ),
-			array( "A\xCC\x8Aland", 'Åland', true ),
-			array( "\xE2\x84\xABngstrom (unit)", 'Ångstrom (unit)', false ),
+			array( "\xC3\x85land", 'Åland' ),
+			array( "A\xCC\x8Aland", 'Åland' ),
+			array( "\xE2\x84\xABngstrom (unit)", 'Ångstrom (unit)' ),
 		);
 	}
 
