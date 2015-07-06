@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_f13142eb",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-07-06T11:05:10Z",
+      "side": 1,
+      "message": "This message is only for the special page. As for now, only the API can merge but not redirect (case 2) so another message for that case isn\u0027t necessary here. The failures were displayed correctly so far, that\u0027s why I didn\u0027t add another message.",
+      "parentUuid": "8ec42329_042dc3a2",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_a41f0f70",
         "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
         "patchSetId": 26
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-02T14:28:08Z",
       "side": 1,
       "message": "This comment / todo should be removed in this commit",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_3157ca07",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-07-06T11:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_a41f0f70",
       "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_11696ebc",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-07-06T11:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_e408b731",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_0404e318",
         "filename": "repo/includes/api/MergeItems.php",
         "patchSetId": 26
@@ -122,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_316eeac5",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-07-06T11:05:10Z",
+      "side": 1,
+      "message": "Yes :(",
+      "parentUuid": "8ec42329_0404e318",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_977327af",
         "filename": "repo/includes/api/MergeItems.php",
         "patchSetId": 26
@@ -133,6 +205,24 @@
       "writtenOn": "2015-07-02T14:28:08Z",
       "side": 1,
       "message": "\u0027true\u0027 \u003d\u003e true",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d16206d6",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-07-06T11:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_977327af",
       "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -254,6 +344,24 @@
       "writtenOn": "2015-07-03T15:42:17Z",
       "side": 1,
       "message": "missing space after if",
+      "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_519e16bf",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2015-07-06T11:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_7cc6971b",
       "revId": "21f07d3594c9a2bbf8b59482c4f28c653dc02313",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
