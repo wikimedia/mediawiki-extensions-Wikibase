@@ -750,14 +750,15 @@ class EditEntity extends ModifyEntity {
 			parent::getAllowedParams(),
 			array(
 				'data' => array(
-					ApiBase::PARAM_TYPE => 'text',
+					self::PARAM_TYPE => 'text',
+					self::PARAM_REQUIRED => true,
 				),
 				'clear' => array(
-					ApiBase::PARAM_TYPE => 'boolean',
-					ApiBase::PARAM_DFLT => false
+					self::PARAM_TYPE => 'boolean',
+					self::PARAM_DFLT => false
 				),
 				'new' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					self::PARAM_TYPE => 'string',
 				),
 			)
 		);
@@ -770,27 +771,42 @@ class EditEntity extends ModifyEntity {
 		return array(
 			// Creating new entites
 			'action=wbeditentity&new=item&data={}'
-			=> 'apihelp-wbeditentity-example-1',
-			'action=wbeditentity&new=item&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
-			=> 'apihelp-wbeditentity-example-2',
-			'action=wbeditentity&new=property&data={"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}'
-			=> 'apihelp-wbeditentity-example-3',
+				=> 'apihelp-wbeditentity-example-1',
+			'action=wbeditentity&new=item&data={"labels":{'
+				. '"de":{"language":"de","value":"de-value"},'
+				. '"en":{"language":"en","value":"en-value"}}}'
+				=> 'apihelp-wbeditentity-example-2',
+			'action=wbeditentity&new=property&data={'
+				. '"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},'
+				. '"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},'
+				. '"datatype":"string"}'
+				=> 'apihelp-wbeditentity-example-3',
 			// Clearing entities
 			'action=wbeditentity&clear=true&id=Q42&data={}'
-			=> 'apihelp-wbeditentity-example-4',
-			'action=wbeditentity&clear=true&id=Q42&data={"labels":{"en":{"language":"en","value":"en-value"}}}'
-			=> 'apihelp-wbeditentity-example-5',
+				=> 'apihelp-wbeditentity-example-4',
+			'action=wbeditentity&clear=true&id=Q42&data={'
+				. '"labels":{"en":{"language":"en","value":"en-value"}}}'
+				=> 'apihelp-wbeditentity-example-5',
 			// Setting stuff
-			'action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
-			=> 'apihelp-wbeditentity-example-6',
-			'action=wbeditentity&id=Q42&data={"descriptions":{"nb":{"language":"nb","value":"nb-Description-Here"}}}'
-			=> 'apihelp-wbeditentity-example-7',
-			'action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ExampleString","type":"string"}},"type":"statement","rank":"normal"}]}'
-			=> 'apihelp-wbeditentity-example-8',
-			'action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","remove":""},{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","remove":""}]}'
-			=> 'apihelp-wbeditentity-example-9',
-			'action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ChangedString","type":"string"}},"type":"statement","rank":"normal"}]}'
-			=> 'apihelp-wbeditentity-example-10',
+			'action=wbeditentity&id=Q42&data={'
+				. '"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
+				=> 'apihelp-wbeditentity-example-6',
+			'action=wbeditentity&id=Q42&data={'
+				. '"descriptions":{"nb":{"language":"nb","value":"nb-Description-Here"}}}'
+				=> 'apihelp-wbeditentity-example-7',
+			'action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value",'
+				. '"property":"P56","datavalue":{"value":"ExampleString","type":"string"}},'
+				. '"type":"statement","rank":"normal"}]}'
+				=> 'apihelp-wbeditentity-example-8',
+			'action=wbeditentity&id=Q42&data={"claims":['
+				. '{"id":"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","remove":""},'
+				. '{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","remove":""}]}'
+				=> 'apihelp-wbeditentity-example-9',
+			'action=wbeditentity&id=Q42&data={"claims":[{'
+				. '"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","mainsnak":{"snaktype":"value",'
+				. '"property":"P56","datavalue":{"value":"ChangedString","type":"string"}},'
+				. '"type":"statement","rank":"normal"}]}'
+				=> 'apihelp-wbeditentity-example-10',
 		);
 	}
 
