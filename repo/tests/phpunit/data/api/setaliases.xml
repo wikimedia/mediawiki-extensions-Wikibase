@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<api success="1">
+	<entity id="Q80050245" type="item">
+		<aliases>
+			<alias language="en-gb" value="AA"/>
+			<alias language="en-gb" value="BB"/>
+			<alias language="en-gb" value="CC"/>
+		</aliases>
+	</entity>
+</api>
