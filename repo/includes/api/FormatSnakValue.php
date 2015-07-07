@@ -143,7 +143,7 @@ class FormatSnakValue extends ApiBase {
 			$this->errorReporter->dieException( $ex, 'baddatavalue' );
 		}
 
-		throw new LogicException( 'ApiErrorReporter::dieUsage did not throw a UsageException' );
+		throw new LogicException( 'ApiErrorReporter::dieException did not throw a UsageException' );
 	}
 
 	/**
