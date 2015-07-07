@@ -162,7 +162,7 @@ class ParseValue extends ApiBase {
 	}
 
 	/**
-	 * @param string $optionsParam
+	 * @param string|null $optionsParam
 	 *
 	 * @return ParserOptions
 	 */
@@ -170,7 +170,7 @@ class ParseValue extends ApiBase {
 		$parserOptions = new ParserOptions();
 		$parserOptions->setOption( ValueParser::OPT_LANG, $this->getLanguage()->getCode() );
 
-		if ( $optionsParam !== null && $optionsParam !== '' ) {
+		if ( is_string( $optionsParam ) && $optionsParam !== '' ) {
 			$options = json_decode( $optionsParam, true );
 
 			if ( !is_array( $options ) ) {

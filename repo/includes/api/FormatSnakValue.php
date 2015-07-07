@@ -147,7 +147,7 @@ class FormatSnakValue extends ApiBase {
 	}
 
 	/**
-	 * @param string $optionsParam
+	 * @param string|null $optionsParam
 	 *
 	 * @return FormatterOptions
 	 */
@@ -155,11 +155,13 @@ class FormatSnakValue extends ApiBase {
 		$formatterOptions = new FormatterOptions();
 		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->getLanguage()->getCode() );
 
-		$options = json_decode( $optionsParam, true );
+		if ( is_string( $optionsParam ) && $optionsParam !== '' ) {
+			$options = json_decode( $optionsParam, true );
 
-		if ( is_array( $options ) ) {
-			foreach ( $options as $name => $value ) {
-				$formatterOptions->setOption( $name, $value );
+			if ( is_array( $options ) ) {
+				foreach ( $options as $name => $value ) {
+					$formatterOptions->setOption( $name, $value );
+				}
 			}
 		}
 
