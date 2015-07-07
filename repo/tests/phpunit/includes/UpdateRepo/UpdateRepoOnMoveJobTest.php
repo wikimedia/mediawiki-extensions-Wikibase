@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use MediaWikiTestCase;
+use RequestContext;
 use Status;
 use Title;
 use User;
@@ -22,7 +24,7 @@ use Wikibase\Test\MockRepository;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
+class UpdateRepoOnMoveJobTest extends MediaWikiTestCase {
 
 	public function testGetSummary() {
 		$job = new UpdateRepoOnMoveJob(
@@ -144,7 +146,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 				$mockRepository,
 				$mockRepository,
 				$this->getEntityPermissionChecker(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				RequestContext::getMain()
 			)
 		);
 

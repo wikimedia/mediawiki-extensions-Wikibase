@@ -2,9 +2,11 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use MediaWikiTestCase;
+use RequestContext;
+use Status;
 use Title;
 use User;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntityFactory;
@@ -22,7 +24,7 @@ use Wikibase\Test\MockRepository;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
+class UpdateRepoOnDeleteJobTest extends MediaWikiTestCase {
 
 	public function testGetSummary() {
 		$job = new UpdateRepoOnDeleteJob(
@@ -148,7 +150,8 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 				$mockRepository,
 				$mockRepository,
 				$this->getEntityPermissionChecker(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				RequestContext::getMain()
 			)
 		);
 
