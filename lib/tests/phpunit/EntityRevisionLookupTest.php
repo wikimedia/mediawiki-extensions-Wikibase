@@ -172,6 +172,8 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 			$this->fail( 'Expected an UnresolvedRedirectException exception when looking up a redirect.' );
 		} catch ( UnresolvedRedirectException $ex ) {
 			$this->assertEquals( $expectedRedirect, $ex->getRedirectTargetId() );
+			$this->assertGreaterThan( 0, $ex->getRevisionId() );
+			$this->assertNotEmpty( $ex->getRevisionTimestamp() );
 		}
 	}
 
