@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Test\MockRepository
@@ -616,6 +617,31 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$this->repo->deleteEntity( $item->getId(), 'testing', $GLOBALS['wgUser'] );
 		$this->assertFalse( $this->repo->hasEntity( $item->getId() ) );
+	}
+
+	public function testPutRedirect( ) {
+		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
+		$this->repo->putRedirect( $redirect );
+
+		try {
+			$this->repo->getEntityRevision( new ItemId( 'Q11' ) );
+			$this->fail( 'getEntityRevision() should fail for redirects' );
+		} catch ( UnresolvedRedirectException $ex ) {
+			$this->assertEquals( 'Q1', $ex->getRedirectTargetId()->getSerialization() );
+			$this->assertGreaterThan( 0, $ex->getRevisionId() );
+			$this->assertNotEmpty( $ex->getRevisionTimestamp() );
+		}
+
+		$this->repo->putRedirect( $redirect, 117, '20150505000000' );
+
+		try {
+			$this->repo->getEntityRevision( new ItemId( 'Q11' ) );
+			$this->fail( 'getEntityRevision() should fail for redirects' );
+		} catch ( UnresolvedRedirectException $ex ) {
+			$this->assertEquals( 'Q1', $ex->getRedirectTargetId()->getSerialization() );
+			$this->assertEquals( 117, $ex->getRevisionId() );
+			$this->assertEquals( '20150505000000', $ex->getRevisionTimestamp() );
+		}
 	}
 
 	public function testDeleteRedirect( ) {

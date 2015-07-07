@@ -10,6 +10,7 @@ use DerivativeRequest;
 use MWException;
 use RequestContext;
 use SiteList;
+use Wikibase\RedirectRevision;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
@@ -193,7 +194,7 @@ class EntityDataSerializationService {
 	 *
 	 * @param string $format The name (mime type of file extension) of the format to use
 	 * @param EntityRevision $entityRevision The entity
-	 * @param EntityRedirect|null $followedRedirect The redirect that led to the entity, or null
+	 * @param RedirectRevision|null $followedRedirect The redirect that led to the entity, or null
 	 * @param EntityId[] $incomingRedirects Incoming redirects to include in the output
 	 * @param string|null $flavor The type of the output provided by serializer
 	 *
@@ -203,7 +204,7 @@ class EntityDataSerializationService {
 	public function getSerializedData(
 		$format,
 		EntityRevision $entityRevision,
-		EntityRedirect $followedRedirect = null,
+		RedirectRevision $followedRedirect = null,
 		array $incomingRedirects = array(),
 		$flavor = null
 	) {
@@ -217,7 +218,8 @@ class EntityDataSerializationService {
 		$serializer = $this->createApiSerializer( $formatName );
 
 		if( $serializer ) {
-			$data = $this->apiSerialize( $entityRevision, $followedRedirect, $incomingRedirects, $serializer );
+			$redirect = ( $followedRedirect ? $followedRedirect->getRedirect() : null );
+			$data = $this->apiSerialize( $entityRevision, $redirect, $incomingRedirects, $serializer );
 			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
 		} else {
 			$rdfBuilder = $this->createRdfBuilder( $formatName, $flavor );
@@ -237,7 +239,7 @@ class EntityDataSerializationService {
 
 	/**
 	 * @param EntityRevision $entityRevision
-	 * @param EntityRedirect|null $followedRedirect a redirect leading to the entity for use in the output
+	 * @param RedirectRevision|null $followedRedirect a redirect leading to the entity for use in the output
 	 * @param EntityId[] $incomingRedirects Incoming redirects to include in the output
 	 * @param RdfBuilder $rdfBuilder
 	 * @param string|null $flavor The type of the output provided by serializer
@@ -246,20 +248,31 @@ class EntityDataSerializationService {
 	 */
 	private function rdfSerialize(
 		EntityRevision $entityRevision,
-		EntityRedirect $followedRedirect = null,
+		RedirectRevision $followedRedirect = null,
 		array $incomingRedirects,
 		RdfBuilder $rdfBuilder,
 		$flavor = null
 	) {
 		$rdfBuilder->startDocument();
+		$redir = null;
 
 		if ( $followedRedirect ) {
-			$rdfBuilder->addEntityRedirect( $followedRedirect->getEntityId(), $followedRedirect->getTargetId() );
+			$redir = $followedRedirect->getRedirect();
+			$rdfBuilder->addEntityRedirect( $redir->getEntityId(), $redir->getTargetId() );
+
+			if ( $followedRedirect->getRevisionId() > 0 ) {
+				$rdfBuilder->addEntityRevisionInfo(
+					$redir->getEntityId(),
+					$followedRedirect->getRevisionId(),
+					$followedRedirect->getTimestamp()
+				);
+			}
 		}
 
 		if ( $followedRedirect && $flavor === 'dump' ) {
 			// For redirects, don't output the target entity data if the "dump" flavor is requested.
 			// @todo: In this case, avoid loading the Entity all together.
+			// However we want to output the revisions for redirects
 		} else {
 			$rdfBuilder->addEntityRevisionInfo(
 				$entityRevision->getEntity()->getId(),
@@ -275,7 +288,7 @@ class EntityDataSerializationService {
 			// For $flavor === 'dump' we don't need to output incoming redirects.
 
 			$targetId = $entityRevision->getEntity()->getId();
-			$this->addIncomingRedirects( $targetId, $followedRedirect, $incomingRedirects, $rdfBuilder );
+			$this->addIncomingRedirects( $targetId, $redir, $incomingRedirects, $rdfBuilder );
 		}
 
 		$rdfBuilder->finishDocument();

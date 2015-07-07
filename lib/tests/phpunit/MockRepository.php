@@ -30,6 +30,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\RedirectRevision;
 
 /**
  * Mock repository for use in tests.
@@ -68,7 +69,7 @@ class MockRepository implements
 	/**
 	 * Entity id serialization => EntityRedirect
 	 *
-	 * @var EntityRedirect[]
+	 * @var RedirectRevision[]
 	 */
 	private $redirects = array();
 
@@ -125,7 +126,12 @@ class MockRepository implements
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
-			throw new UnresolvedRedirectException( $this->redirects[$key]->getTargetId() );
+			$redirRev = $this->redirects[$key];
+			throw new UnresolvedRedirectException(
+				$redirRev->getRedirect()->getTargetId(),
+				$redirRev->getRevisionId(),
+				$redirRev->getTimestamp()
+			);
 		}
 
 		if ( empty( $this->entities[$key] ) ) {
@@ -357,15 +363,28 @@ class MockRepository implements
 	 * in the mock repository, it is replaced with the redirect.
 	 *
 	 * @param EntityRedirect $redirect
+	 * @param int $revisionId
+	 * @param string|int $timestamp
 	 */
-	public function putRedirect( EntityRedirect $redirect ) {
+	public function putRedirect( EntityRedirect $redirect, $revisionId = 0, $timestamp = 0 ) {
 		$key = $redirect->getEntityId()->getSerialization();
 
 		if ( isset( $this->entities[$key] ) ) {
 			$this->removeEntity( $redirect->getEntityId() );
 		}
 
-		$this->redirects[$key] = $redirect;
+		if ( $revisionId === 0 ) {
+			$revisionId = ++$this->maxRevisionId;
+		}
+
+		$this->maxEntityId = max( $this->maxEntityId, $redirect->getTargetId()->getNumericId() );
+		$this->maxRevisionId = max( $this->maxRevisionId, $revisionId );
+
+		$this->redirects[$key] = new RedirectRevision(
+			unserialize( serialize( $redirect ) ),
+			$revisionId,
+			wfTimestamp( TS_MW, $timestamp )
+		);
 	}
 
 	/**
@@ -823,7 +842,8 @@ class MockRepository implements
 	public function getRedirectIds( EntityId $targetId ) {
 		$redirects = array();
 
-		foreach ( $this->redirects as $redir ) {
+		foreach ( $this->redirects as $redirRev ) {
+			$redir = $redirRev->getRedirect();
 			if ( $redir->getTargetId()->equals( $targetId ) ) {
 				$redirects[] = $redir->getEntityId();
 			}
@@ -847,7 +867,7 @@ class MockRepository implements
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
-			return $this->redirects[$key]->getTargetId();
+			return $this->redirects[$key]->getRedirect()->getTargetId();
 		}
 
 		if ( isset( $this->entities[$key] ) ) {

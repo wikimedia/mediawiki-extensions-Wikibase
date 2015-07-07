@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store;
 
-use Exception;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -20,19 +19,26 @@ class UnresolvedRedirectException extends StorageException {
 	private $redirectTargetId;
 
 	/**
-	 * @param EntityId $redirectTargetId The ID of the target Entity of the redirect
-	 * @param string|null $message
-	 * @param int $code
-	 * @param Exception|null $previous
+	 * @var int
 	 */
-	public function __construct( EntityId $redirectTargetId, $message = null, $code = 0, Exception $previous = null ) {
-		if ( $message === null ) {
-			$message = "Unresolved redirect to " . $redirectTargetId->getSerialization();
-		}
+	private $revisionId;
 
-		parent::__construct( $message, $code, $previous );
+	/**
+	 * @var string
+	 */
+	private $revisionTimestamp;
+
+	/**
+	 * @param EntityId $redirectTargetId The ID of the target Entity of the redirect
+	 * @param int $revisionId
+	 * @param string $revisionTimestamp
+	 */
+	public function __construct( EntityId $redirectTargetId, $revisionId = 0, $revisionTimestamp = '' ) {
+		parent::__construct( "Unresolved redirect to " . $redirectTargetId->getSerialization() );
 
 		$this->redirectTargetId = $redirectTargetId;
+		$this->revisionId = $revisionId;
+		$this->revisionTimestamp = $revisionTimestamp;
 	}
 
 	/**
@@ -42,6 +48,20 @@ class UnresolvedRedirectException extends StorageException {
 	 */
 	public function getRedirectTargetId() {
 		return $this->redirectTargetId;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getRevisionId() {
+		return $this->revisionId;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getRevisionTimestamp() {
+		return $this->revisionTimestamp;
 	}
 
 }

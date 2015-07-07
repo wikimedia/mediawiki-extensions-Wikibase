@@ -18,6 +18,8 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\UnresolvedRedirectRevisionException;
+use Wikibase\RedirectRevision;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
@@ -340,7 +342,7 @@ class EntityDataRequestHandler {
 	 * @param EntityId $id
 	 * @param int $revision The revision ID (use 0 for the current revision).
 	 *
-	 * @return array list( EntityRevision, EntityRedirect|null )
+	 * @return array list( EntityRevision, RedirectRevision|null )
 	 * @throws HttpError
 	 */
 	private function getEntityRevision( EntityId $id, $revision ) {
@@ -350,7 +352,7 @@ class EntityDataRequestHandler {
 			$revision = EntityRevisionLookup::LATEST_FROM_SLAVE;
 		}
 
-		$entityRedirect = null;
+		$redirectRevision = null;
 
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $id, $revision );
@@ -360,7 +362,10 @@ class EntityDataRequestHandler {
 				throw new HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
 			}
 		} catch ( UnresolvedRedirectException $ex ) {
-			$entityRedirect = new EntityRedirect( $id, $ex->getRedirectTargetId() );
+			$redirectRevision = new RedirectRevision(
+				new EntityRedirect( $id, $ex->getRedirectTargetId() ),
+				$ex->getRevisionId(), $ex->getRevisionTimestamp()
+			);
 
 			if ( is_string( $revision ) ) {
 				// If no specific revision is requested, resolve the redirect.
@@ -381,7 +386,7 @@ class EntityDataRequestHandler {
 			throw new \HttpError( 500, $msg->params( $prefixedId, $revision ) );
 		}
 
-		return array( $entityRevision, $entityRedirect );
+		return array( $entityRevision, $redirectRevision );
 	}
 
 	/**
@@ -418,8 +423,8 @@ class EntityDataRequestHandler {
 		$flavor = $request->getVal("flavor");
 
 		/** @var EntityRevision $entityRevision */
-		/** @var EntityRedirect $followedRedirect */
-		list( $entityRevision, $followedRedirect ) = $this->getEntityRevision( $id, $revision );
+		/** @var RedirectRevision $followedRedirectRevision */
+		list( $entityRevision, $followedRedirectRevision ) = $this->getEntityRevision( $id, $revision );
 
 		// handle If-Modified-Since
 		$imsHeader = $request->getHeader( 'IF-MODIFIED-SINCE' );
@@ -433,7 +438,7 @@ class EntityDataRequestHandler {
 			}
 		}
 
-		if ( $flavor === 'dump' || $revision > 0  ) {
+		if ( $flavor === 'dump' || $revision > 0 ) {
 			// In dump mode and when fetching a specific revision, don't include incoming redirects.
 			$incomingRedirects = array();
 		} else {
@@ -444,7 +449,7 @@ class EntityDataRequestHandler {
 		list( $data, $contentType ) = $this->serializationService->getSerializedData(
 			$format,
 			$entityRevision,
-			$followedRedirect,
+			$followedRedirectRevision,
 			$incomingRedirects,
 			$flavor
 		);
