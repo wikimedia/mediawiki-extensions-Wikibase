@@ -167,7 +167,7 @@ class SetClaim extends ModifyClaim {
 		}
 
 		// Note: since dieUsage() never returns, this should be unreachable!
-		throw new LogicException( 'ApiBase::dieUsage did not throw a UsageException' );
+		throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 	}
 
 	/**
