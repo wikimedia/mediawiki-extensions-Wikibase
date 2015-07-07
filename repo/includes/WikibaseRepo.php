@@ -1087,11 +1087,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource|null $context
+	 * @param IContextSource $context
 	 *
 	 * @return EditEntityFactory
 	 */
-	public function newEditEntityFactory( $context = null ) {
+	public function newEditEntityFactory( IContextSource $context ) {
 		return new EditEntityFactory(
 			$this->getEntityTitleLookup(),
 			$this->getEntityRevisionLookup( 'uncached' ),
