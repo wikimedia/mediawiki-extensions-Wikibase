@@ -16,6 +16,24 @@
       "revId": "b9663642442c80cbe2da30f5265078d1e810ab12",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6bfa360f",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-07T08:58:26Z",
+      "side": 1,
+      "message": "indeed the handeling from getSnaks should be added here.",
+      "parentUuid": "8ec42329_f80efe3e",
+      "revId": "b9663642442c80cbe2da30f5265078d1e810ab12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
