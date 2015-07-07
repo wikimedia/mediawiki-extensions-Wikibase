@@ -164,8 +164,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$entity,
 			$user,
 			$editFilterHookRunner,
-			$baseRevId,
-			$context
+			$context,
+			$baseRevId
 		);
 	}
 
@@ -424,8 +424,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 			new Item(),
 			$this->getUser( 'EditEntityTestUser' ),
 			$this->getMockEditFitlerHookRunner(),
-			false,
-			$context
+			$context,
+			false
 		);
 
 		$editEntity->checkEditPermissions();
