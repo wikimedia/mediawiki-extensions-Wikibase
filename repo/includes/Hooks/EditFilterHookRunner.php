@@ -45,17 +45,8 @@ class EditFilterHookRunner {
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		EntityContentFactory $entityContentFactory,
-		$context = null
+		IContextSource $context
 	) {
-		if ( $context !== null && !$context instanceof RequestContext && !$context instanceof DerivativeContext ) {
-			throw new InvalidArgumentException( '$context must be an instance of RequestContext'
-				. ' or DerivativeContext' );
-		}
-
-		if ( $context === null ) {
-			$context = RequestContext::getMain();
-		}
-
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->context = $context;
