@@ -1070,11 +1070,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource|null $context
+	 * @param IContextSource $context
 	 *
 	 * @return ApiHelperFactory
 	 */
-	public function getApiHelperFactory( $context = null ) {
+	public function getApiHelperFactory( $context ) {
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
