@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_2b52ee16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-07T09:21:55Z",
+      "side": 1,
+      "message": "serialization",
+      "revId": "52c241c4a12957d5c81e61c148d468f0ff1ac3be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f8aa7e16",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-07T09:21:55Z",
+      "side": 1,
+      "message": "We should really pass the ResultBuilder in here instead of increasing the number of parameters to 42.\n\nPerhaps a ResultBuilderFactory would be needed to achieve that. Alternatively, we could pass the ApiResult with every `addStuff` method.\n\nIn fact, we could also pass an ApiHelperFactory object here and use that to create the ResultBuilder.",
+      "revId": "52c241c4a12957d5c81e61c148d468f0ff1ac3be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8b744298",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-07T09:21:55Z",
+      "side": 1,
+      "message": "We might want to include the URL in the normal serialization as well so there must be a better mechanism than hacking it in like here.",
+      "revId": "52c241c4a12957d5c81e61c148d468f0ff1ac3be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2b698ebc",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-07T09:21:55Z",
+      "side": 1,
+      "message": "This hack is perhaps not avoidable.",
+      "revId": "52c241c4a12957d5c81e61c148d468f0ff1ac3be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_18a8aa1c",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-07T09:21:55Z",
+      "side": 1,
+      "message": "User account promotion in tests \u003do",
+      "revId": "52c241c4a12957d5c81e61c148d468f0ff1ac3be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
