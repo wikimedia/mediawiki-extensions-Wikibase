@@ -219,7 +219,7 @@ class ParseValue extends ApiBase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'options' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => 'text',
 				ApiBase::PARAM_REQUIRED => false,
 			),
 		);
