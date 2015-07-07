@@ -37,14 +37,14 @@
  *        Required for dynamically generating GUIDs for new `Statement`s.
  * @param {wikibase.entityChangers.ClaimsChanger} options.claimsChanger
  *        Required to store the view's `Statement`.
+ * @param {wikibase.entityChangers.ReferencesChanger} options.referencesChanger
+ *        Required to store the `Reference`s gathered from the `referenceview`s aggregated by the
+ *        `statementview`.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
  *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
  *        `jQuery.valueview`.
- * @param {wikibase.entityChangers.EntityChangersFactory} options.entityChangersFactory
- *        Required to store the `Reference`s gathered from the `referenceview`s aggregated by the
- *        `statementview`.
  * @param {dataTypes.DataTypeStore} options.dataTypeStore
  *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
  *        object when interacting on a "value" `Variation`.
@@ -100,8 +100,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 		},
 		value: null,
 		claimsChanger: null,
+		referencesChanger: null,
 		dataTypeStore: null,
-		entityChangersFactory: null,
 		predefined: {
 			mainSnak: false
 		},
@@ -148,7 +148,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			!this.options.entityStore
 			|| !this.options.valueViewBuilder
 			|| !this.options.claimsChanger
-			|| !this.options.entityChangersFactory
+			|| !this.options.referencesChanger
 			|| !this.options.dataTypeStore
 			|| !this.options.guidGenerator
 		) {
@@ -157,7 +157,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		PARENT.prototype._create.call( this );
 
-		this._referencesChanger = this.options.entityChangersFactory.getReferencesChanger();
+		this._referencesChanger = this.options.referencesChanger;
 
 		this.draw();
 	},
