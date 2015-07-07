@@ -34,6 +34,24 @@
       "revId": "a3fe5e4d06095f4172e1fa5a548911cc97cc6d06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ebc6269e",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-07T09:32:22Z",
+      "side": 1,
+      "message": "Explicitely passing null here is still more obvious than not passing anything. However, I agree that we should remove the evil from EditEntity and I will prepare a patch for that.",
+      "parentUuid": "8ec42329_abe9fe11",
+      "revId": "a3fe5e4d06095f4172e1fa5a548911cc97cc6d06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
