@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_da145247",
+        "filename": "lib/includes/store/UnresolvedRedirectException.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-07-07T19:12:54Z",
+      "side": 1,
+      "message": "implements RevisionInfo here?",
+      "revId": "96499a742aebd5b38648a21665b37f484286115f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
