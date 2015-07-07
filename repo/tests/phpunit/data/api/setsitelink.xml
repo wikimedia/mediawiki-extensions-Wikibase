@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<api success="1">
+	<entity id="Q80050245" type="item">
+		<sitelinks>
+			<sitelink site="enwiki" title="Japan">
+				<badges/>
+			</sitelink>
+		</sitelinks>
+	</entity>
+</api>
