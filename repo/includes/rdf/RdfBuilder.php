@@ -278,9 +278,20 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	public function addEntityRevisionInfo( EntityId $entityId, $revision, $timestamp ) {
 		$timestamp = wfTimestamp( TS_ISO_8601, $timestamp );
+		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
 		$this->writer->about( RdfVocabulary::NS_DATA, $entityId )
-			->say( RdfVocabulary::NS_SCHEMA_ORG, 'version' )->value( $revision, 'xsd', 'integer' )
+			->a( RdfVocabulary::NS_SCHEMA_ORG, "Dataset" )
+			->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )->is( RdfVocabulary::NS_ENTITY, $entityLName );
+
+		if ( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
+			// Dumps don't need version/license info for each entity, since it is included in the dump header
+			$this->writer
+				->say( RdfVocabulary::NS_CC, 'license' )->is( RdfVocabulary::LICENSE )
+				->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION );
+		}
+
+		$this->writer->say( RdfVocabulary::NS_SCHEMA_ORG, 'version' )->value( $revision, 'xsd', 'integer' )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( $timestamp, 'xsd', 'dateTime' );
 	}
 
@@ -347,23 +358,9 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @todo: extract into MetaDataRdfBuilder
 	 *
 	 * @param EntityDocument $entity
-	 * @param bool $produceData Should we also produce Dataset node?
 	 */
-	private function addEntityMetaData( EntityDocument $entity, $produceData = true ) {
+	private function addEntityMetaData( EntityDocument $entity ) {
 		$entityLName = $this->vocabulary->getEntityLName( $entity->getId() );
-
-		if ( $produceData ) {
-			$this->writer->about( RdfVocabulary::NS_DATA, $entity->getId() )
-				->a( RdfVocabulary::NS_SCHEMA_ORG, "Dataset" )
-				->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )->is( RdfVocabulary::NS_ENTITY, $entityLName );
-
-			if ( $this->shouldProduce( RdfProducer::PRODUCE_VERSION_INFO ) ) {
-				// Dumps don't need version/license info for each entity, since it is included in the dump header
-				$this->writer
-					->say( RdfVocabulary::NS_CC, 'license' )->is( RdfVocabulary::LICENSE )
-					->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION );
-			}
-		}
 
 		$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName )
 			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getEntityTypeName( $entity->getType() ) );
