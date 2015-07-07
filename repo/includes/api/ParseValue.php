@@ -210,17 +210,17 @@ class ParseValue extends ApiBase {
 	public function getAllowedParams() {
 		return array(
 			'parser' => array(
-				ApiBase::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
-				ApiBase::PARAM_REQUIRED => true,
+				self::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
+				self::PARAM_REQUIRED => true,
 			),
 			'values' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
+				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
+				self::PARAM_ISMULTI => true,
 			),
 			'options' => array(
-				ApiBase::PARAM_TYPE => 'text',
-				ApiBase::PARAM_REQUIRED => false,
+				self::PARAM_TYPE => 'text',
+				self::PARAM_REQUIRED => false,
 			),
 		);
 	}

@@ -141,10 +141,12 @@ abstract class ModifyClaim extends ApiBase {
 		return array_merge(
 			parent::getAllowedParams(),
 			array(
-				'summary' => array( ApiBase::PARAM_TYPE => 'string' ),
+				'summary' => array(
+					self::PARAM_TYPE => 'string',
+				),
 				'token' => null,
 				'baserevid' => array(
-					ApiBase::PARAM_TYPE => 'integer',
+					self::PARAM_TYPE => 'integer',
 				),
 				'bot' => false,
 			)

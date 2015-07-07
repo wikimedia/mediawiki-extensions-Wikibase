@@ -368,7 +368,7 @@ class SearchEntities extends ApiBase {
 
 		// Only pass search-continue param if there are more results and the maximum continuation
 		// limit is not exceeded.
-		if ( $hits > $nextContinuation && $nextContinuation <= ApiBase::LIMIT_SML1 ) {
+		if ( $hits > $nextContinuation && $nextContinuation <= self::LIMIT_SML1 ) {
 			$this->getResult()->addValue(
 				null,
 				'search-continue',
@@ -398,32 +398,32 @@ class SearchEntities extends ApiBase {
 	protected function getAllowedParams() {
 		return array(
 			'search' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
+				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => $this->termsLanguages->getLanguages(),
-				ApiBase::PARAM_REQUIRED => true,
+				self::PARAM_TYPE => $this->termsLanguages->getLanguages(),
+				self::PARAM_REQUIRED => true,
 			),
 			'strictlanguage' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false
+				self::PARAM_TYPE => 'boolean',
+				self::PARAM_DFLT => false
 			),
 			'type' => array(
-				ApiBase::PARAM_TYPE => $this->entityTypes,
-				ApiBase::PARAM_DFLT => 'item',
+				self::PARAM_TYPE => $this->entityTypes,
+				self::PARAM_DFLT => 'item',
 			),
 			'limit' => array(
-				ApiBase::PARAM_TYPE => 'limit',
-				ApiBase::PARAM_DFLT => 7,
-				ApiBase::PARAM_MAX => ApiBase::LIMIT_SML1,
-				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_SML2,
-				ApiBase::PARAM_MIN => 0,
-				ApiBase::PARAM_RANGE_ENFORCE => true,
+				self::PARAM_TYPE => 'limit',
+				self::PARAM_DFLT => 7,
+				self::PARAM_MAX => self::LIMIT_SML1,
+				self::PARAM_MAX2 => self::LIMIT_SML2,
+				self::PARAM_MIN => 0,
+				self::PARAM_RANGE_ENFORCE => true,
 			),
 			'continue' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => false,
+				self::PARAM_TYPE => 'integer',
+				self::PARAM_REQUIRED => false,
 			),
 		);
 	}
