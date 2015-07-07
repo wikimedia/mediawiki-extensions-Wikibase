@@ -1070,11 +1070,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource $context
+	 * @param IContextSource|null $context
 	 *
 	 * @return ApiHelperFactory
 	 */
-	public function getApiHelperFactory( $context ) {
+	public function getApiHelperFactory( IContextSource $context = null ) {
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
@@ -1091,7 +1091,7 @@ class WikibaseRepo {
 	 *
 	 * @return EditEntityFactory
 	 */
-	public function newEditEntityFactory( $context = null ) {
+	public function newEditEntityFactory( IContextSource $context = null ) {
 		return new EditEntityFactory(
 			$this->getEntityTitleLookup(),
 			$this->getEntityRevisionLookup( 'uncached' ),
