@@ -67,7 +67,8 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			$wikibaseRepo->getSiteStore(),
 			new EditFilterHookRunner(
 				$titleLookup,
-				$wikibaseRepo->getEntityContentFactory()
+				$wikibaseRepo->getEntityContentFactory(),
+				RequestContext::getMain()
 			)
 		);
 	}

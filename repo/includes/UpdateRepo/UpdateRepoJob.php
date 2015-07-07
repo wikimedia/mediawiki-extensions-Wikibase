@@ -80,7 +80,8 @@ abstract class UpdateRepoJob extends Job {
 			$wikibaseRepo->getEntityPermissionChecker(),
 			new EditFilterHookRunner(
 				$titleLookup,
-				$wikibaseRepo->getEntityContentFactory()
+				$wikibaseRepo->getEntityContentFactory(),
+				RequestContext::getMain()
 			)
 		);
 	}
