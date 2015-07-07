@@ -16,6 +16,24 @@
       "revId": "a3fe5e4d06095f4172e1fa5a548911cc97cc6d06",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_abe9fe11",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-07T09:30:52Z",
+      "side": 1,
+      "message": "Well, the solution here would be to remove the evil from EditEntity, not from here.\nIf EditEntity actually always required context then we would never be able to pass null here.\nSame for EditFilterHookRunner",
+      "parentUuid": "8ec42329_6b85565d",
+      "revId": "a3fe5e4d06095f4172e1fa5a548911cc97cc6d06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
