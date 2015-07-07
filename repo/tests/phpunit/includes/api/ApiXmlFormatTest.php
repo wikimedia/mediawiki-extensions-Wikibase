@@ -5,6 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 use ApiBase;
 use ApiMain;
 use FauxRequest;
+use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -41,7 +42,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetEntities', 'wbgetentities', $params );
 		$result = $this->doApiRequest( $module );
-		$actual = $this->removeGetEntitiesAttributes( $result, $entityId );
+		$actual = $this->removeEntityAttributes( $result, $entityId );
 
 		$expected = $this->getExpectedGetEntitiesXml( $entityRevision );
 
@@ -52,52 +53,12 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$xml = trim( file_get_contents( __DIR__ . '/../../data/api/getentities.xml' ) );
 
 		$expected = $this->replaceIdsInExpectedXml( $xml, $entityRevision );
-		$expected = $this->removeGetEntitiesAttributes(
+		$expected = $this->removeEntityAttributes(
 			$expected,
 			$entityRevision->getEntity()->getId()->getSerialization()
 		);
 
 		return $expected;
-	}
-
-	private function replaceIdsInExpectedXml( $xml, EntityRevision $entityRevision ) {
-		$xml = $this->replacePropertyId( $xml, $entityRevision );
-		$xml = $this->replaceEntityId(
-			$xml,
-			$entityRevision->getEntity()->getId()->getSerialization()
-		);
-
-		return $xml;
-	}
-
-	private function replaceEntityId( $xml, $entityId ) {
-		return str_replace( 'Q80050245', $entityId, $xml );
-	}
-
-	private function replacePropertyId( $xml, EntityRevision $entityRevision ) {
-		$propertyIds = $entityRevision->getEntity()->getStatements()->getPropertyIds();
-
-		foreach( $propertyIds as $propertyId ) {
-			$propertyIdText = $propertyId->getSerialization();
-		}
-
-		return str_replace( 'P1491009', $propertyIdText, $xml );
-	}
-
-	private function removeGetEntitiesAttributes( $xml, $entityId ) {
-		$dom = new \DOMDocument( '1.0', 'UTF-8' );
-		$dom->loadXML( $xml );
-
-		$xpath = new \DOMXPath( $dom );
-		$element = $xpath->query( "//*[@id='$entityId']" )->item( 0 );
-
-		$attributesToRemove = array( 'pageid', 'lastrevid', 'modified', 'title', 'ns' );
-
-		foreach( $attributesToRemove as $attributeToRemove ) {
-			$element->removeAttribute( $attributeToRemove );
-		}
-
-		return $dom->saveXML();
 	}
 
 	public function testGetClaimsXmlFormat() {
@@ -122,7 +83,130 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		return $this->replaceIdsInExpectedXml( $xml, $entityRevision );
 	}
 
-	private function getApiModule( $moduleClass, $moduleName, array $params ) {
+	public function testSetLabelXmlFormat() {
+		$entityRevision = $this->getEntityRevision();
+		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
+
+		$params = array(
+			'action' => 'wbsetlabel',
+			'id' => $entityId,
+			'language' => 'en-gb',
+			'value' => 'enGbLabel',
+		);
+
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetLabel', 'wbsetlabel', $params, true );
+		$result = $this->doApiRequest( $module );
+		$actual = $this->removeEntityAttributes( $result, $entityId );
+
+		$expected = $this->getExpectedSetLabelXml( $entityRevision, '1' );
+		$this->assertXmlStringEqualsXmlString( $expected, $actual );
+	}
+
+	private function getExpectedSetLabelXml( EntityRevision $entityRevision ) {
+		$xml = trim( file_get_contents( __DIR__ . '/../../data/api/setlabel.xml' ) );
+		return $this->replaceIdsInExpectedXml( $xml, $entityRevision );
+	}
+
+	public function testSetDescriptionXmlFormat() {
+		$entityRevision = $this->getEntityRevision();
+		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
+
+		$params = array(
+			'action' => 'wbsetdescription',
+			'id' => $entityId,
+			'language' => 'en-gb',
+			'value' => 'enGbDescription',
+		);
+
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetDescription', 'wbsetdescription', $params, true );
+		$result = $this->doApiRequest( $module );
+		$actual = $this->removeEntityAttributes( $result, $entityId );
+
+		$expected = $this->getExpectedSetDescriptionXml( $entityRevision, '1' );
+		$this->assertXmlStringEqualsXmlString( $expected, $actual );
+	}
+
+	private function getExpectedSetDescriptionXml( EntityRevision $entityRevision ) {
+		$xml = trim( file_get_contents( __DIR__ . '/../../data/api/setdescription.xml' ) );
+		return $this->replaceIdsInExpectedXml( $xml, $entityRevision );
+	}
+
+	public function testSetAliasesXmlFormat() {
+		$entityRevision = $this->getEntityRevision();
+		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
+
+		$params = array(
+			'action' => 'wbsetaliases',
+			'id' => $entityId,
+			'language' => 'en-gb',
+			'set' => 'AA|BB|CC',
+		);
+
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetAliases', 'wbsetaliases', $params, true );
+		$result = $this->doApiRequest( $module );
+		$actual = $this->removeEntityAttributes( $result, $entityId );
+
+		$expected = $this->getExpectedSetAliasesXml( $entityRevision, '1' );
+		$this->assertXmlStringEqualsXmlString( $expected, $actual );
+	}
+
+	private function getExpectedSetAliasesXml( EntityRevision $entityRevision ) {
+		$xml = trim( file_get_contents( __DIR__ . '/../../data/api/setaliases.xml' ) );
+		return $this->replaceIdsInExpectedXml( $xml, $entityRevision );
+	}
+
+	private function replaceIdsInExpectedXml( $xml, EntityRevision $entityRevision ) {
+		$xml = $this->replacePropertyId( $xml, $entityRevision );
+		$xml = $this->replaceEntityId(
+			$xml,
+			$entityRevision->getEntity()->getId()->getSerialization()
+		);
+
+		return $xml;
+	}
+
+	private function replaceEntityId( $xml, $entityId ) {
+		return str_replace( 'Q80050245', $entityId, $xml );
+	}
+
+	private function replacePropertyId( $xml, EntityRevision $entityRevision ) {
+		/** @var Item $item */
+		$item = $entityRevision->getEntity();
+		foreach ( $item->getStatements()->getPropertyIds() as $propertyId ) {
+			return str_replace( 'P1491009', $propertyId->getSerialization(), $xml );
+		}
+		return $xml;
+	}
+
+	private function removeEntityAttributes( $xml, $entityId ) {
+		$dom = new \DOMDocument( '1.0', 'UTF-8' );
+		$dom->loadXML( $xml );
+
+		$xpath = new \DOMXPath( $dom );
+		$element = $xpath->query( "//*[@id='$entityId']" )->item( 0 );
+
+		$attributesToRemove = array( 'pageid', 'lastrevid', 'modified', 'title', 'ns' );
+
+		foreach ( $attributesToRemove as $attributeToRemove ) {
+			$element->removeAttribute( $attributeToRemove );
+		}
+
+		return $dom->saveXML();
+	}
+
+	/**
+	 * @param string $moduleClass
+	 * @param string $moduleName
+	 * @param array $params
+	 * @param bool $needsToken
+	 *
+	 * @return ApiMain
+	 */
+	private function getApiModule( $moduleClass, $moduleName, array $params, $needsToken = false ) {
+		if ( $needsToken ) {
+			global $wgUser;
+			$params['token'] = $wgUser->getEditToken();
+		}
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
 
