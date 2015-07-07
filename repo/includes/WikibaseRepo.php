@@ -8,6 +8,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
 use IContextSource;
+use RequestContext;
 use RuntimeException;
 use Serializers\Serializer;
 use SiteSQLStore;
@@ -16,9 +17,7 @@ use StubObject;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -26,6 +25,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\EntityParserOutputGeneratorFactory;
@@ -67,6 +67,7 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ReferencedEntitiesFinder;
+use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
@@ -112,6 +113,11 @@ class WikibaseRepo {
 	 * @var SettingsArray
 	 */
 	private $settings;
+
+	/**
+	 * @var IContextSource
+	 */
+	private $context;
 
 	/**
 	 * @var DataTypeFactory|null
@@ -205,7 +211,10 @@ class WikibaseRepo {
 		static $instance = null;
 
 		if ( $instance === null ) {
-			$instance = new self( new SettingsArray( $GLOBALS['wgWBRepoSettings'] ) );
+			$instance = new self(
+				new SettingsArray( $GLOBALS['wgWBRepoSettings'] ),
+				RequestContext::getMain()
+			);
 		}
 
 		return $instance;
@@ -215,9 +224,11 @@ class WikibaseRepo {
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
+	 * @param IContextSource $context
 	 */
-	public function __construct( SettingsArray $settings ) {
+	public function __construct( SettingsArray $settings, IContextSource $context ) {
 		$this->settings = $settings;
+		$this->context = $context;
 	}
 
 	/**
@@ -320,18 +331,18 @@ class WikibaseRepo {
 	 * @since 0.5
 	 *
 	 * @param User $user
-	 * @param IContextSource $context
+	 * @param IContextSource|nulll $context
 	 *
 	 * @return RedirectCreationInteractor
 	 */
-	public function newRedirectCreationInteractor( User $user, IContextSource $context ) {
+	public function newRedirectCreationInteractor( User $user, IContextSource $context = null ) {
 		return new RedirectCreationInteractor(
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,
-			$this->newEditFilterHookRunner( $context ),
+			$this->newEditFilterHookRunner( $context ?: $this->context ),
 			$this->getStore()->getEntityRedirectLookup()
 		);
 	}
@@ -345,7 +356,7 @@ class WikibaseRepo {
 		return new EditFilterHookRunner(
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),
-			$context
+			$context ?: $this->context
 		);
 	}
 
@@ -1082,7 +1093,7 @@ class WikibaseRepo {
 			$this->getEntityFactory(),
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
-			$this->newEditEntityFactory( $context )
+			$this->newEditEntityFactory( $context ?: $this->context )
 		);
 	}
 
@@ -1097,8 +1108,8 @@ class WikibaseRepo {
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
-			$this->newEditFilterHookRunner( $context ),
-			$context
+			$this->newEditFilterHookRunner( $context ?: $this->context ),
+			$context ?: $this->context
 		);
 	}
 
