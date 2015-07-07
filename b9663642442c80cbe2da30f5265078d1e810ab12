@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_f80efe3e",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-07T08:55:41Z",
+      "side": 1,
+      "message": "What about the DeserializationException that can be thrown here? What happens if an invalid array is passed via the api?",
+      "revId": "b9663642442c80cbe2da30f5265078d1e810ab12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
