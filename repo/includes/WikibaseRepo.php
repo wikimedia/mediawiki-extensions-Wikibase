@@ -8,6 +8,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
 use IContextSource;
+use RequestContext;
 use RuntimeException;
 use Serializers\Serializer;
 use SiteSQLStore;
@@ -337,11 +338,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource|null $context
+	 * @param IContextSource $context
 	 *
 	 * @return EditFilterHookRunner
 	 */
-	private function newEditFilterHookRunner( IContextSource $context = null ) {
+	private function newEditFilterHookRunner( IContextSource $context ) {
 		return new EditFilterHookRunner(
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),
@@ -1087,11 +1088,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource|null $context
+	 * @param IContextSource $context
 	 *
 	 * @return EditEntityFactory
 	 */
-	public function newEditEntityFactory( IContextSource $context = null ) {
+	public function newEditEntityFactory( IContextSource $context ) {
 		return new EditEntityFactory(
 			$this->getEntityTitleLookup(),
 			$this->getEntityRevisionLookup( 'uncached' ),

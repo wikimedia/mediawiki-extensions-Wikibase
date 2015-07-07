@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use RequestContext;
 use Title;
 use User;
 use Status;
@@ -148,7 +149,8 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 				$mockRepository,
 				$mockRepository,
 				$this->getEntityPermissionChecker(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				RequestContext::getMain()
 			)
 		);
 
