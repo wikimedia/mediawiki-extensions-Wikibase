@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_eb6066ff",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-07T11:41:12Z",
+      "side": 1,
+      "message": "these should be swapped.\nThe default of false for baseRevId is useless here otherwise",
+      "revId": "f4b180cf5536b37daee738f21bdbde2d186f2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_0b77f2d0",
         "filename": "repo/includes/UpdateRepo/UpdateRepoJob.php",
         "patchSetId": 2
