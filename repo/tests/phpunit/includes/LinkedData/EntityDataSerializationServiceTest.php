@@ -18,6 +18,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\RedirectRevision;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 
@@ -120,7 +121,10 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		$mockRepo = $this->getMockRepository();
 		$entityRevQ42 = $mockRepo->getEntityRevision( new ItemId( 'Q42' ) );
 		$entityRevQ23 = $mockRepo->getEntityRevision( new ItemId( 'Q23' ) );
-		$entityRedirQ2233 = new EntityRedirect( new ItemId( 'Q2233' ), new ItemId( 'Q23' ) );
+		$entityRedirQ2233 = new RedirectRevision(
+			new EntityRedirect( new ItemId( 'Q2233' ), new ItemId( 'Q23' ) ),
+			127, '20150505000000'
+		);
 
 		$q2233 = new ItemId( 'Q2233' );
 		$q222333 = new ItemId( 'Q222333' );
@@ -282,7 +286,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	public function testGetSerializedData(
 		$format,
 		EntityRevision $entityRev,
-		EntityRedirect $followedRedirect = null,
+		RedirectRevision $followedRedirect = null,
 		array $incomingRedirects,
 		$flavor,
 		array $expectedDataExpressions,

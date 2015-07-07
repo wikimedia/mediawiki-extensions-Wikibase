@@ -3,22 +3,22 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Lib\Store\EntityRedirect;
 
 /**
- * Represents a revision of a Wikibase entity.
+ * Represents a revision of a Wikibase redirect.
  *
- * @since 0.4
+ * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityRevision implements RevisionInfo {
+class RedirectRevision implements RevisionInfo {
 
 	/**
-	 * @var EntityDocument
+	 * @var EntityRedirect
 	 */
-	private $entity;
+	private $redirect;
 
 	/**
 	 * @var int
@@ -31,13 +31,13 @@ class EntityRevision implements RevisionInfo {
 	private $mwTimestamp;
 
 	/**
-	 * @param EntityDocument $entity
+	 * @param EntityRedirect $redirect
 	 * @param int $revisionId Revision ID or 0 for none
 	 * @param string $mwTimestamp in MediaWiki format or an empty string for none
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityDocument $entity, $revisionId = 0, $mwTimestamp = '' ) {
+	public function __construct( EntityRedirect $redirect, $revisionId = 0, $mwTimestamp = '' ) {
 		if ( !is_int( $revisionId ) || $revisionId < 0 ) {
 			throw new InvalidArgumentException( 'Revision ID must be a non-negative integer.' );
 		}
@@ -46,16 +46,16 @@ class EntityRevision implements RevisionInfo {
 			throw new InvalidArgumentException( 'Timestamp must be a string of 14 digits or empty.' );
 		}
 
-		$this->entity = $entity;
+		$this->redirect = $redirect;
 		$this->revisionId = $revisionId;
 		$this->mwTimestamp = $mwTimestamp;
 	}
 
 	/**
-	 * @return EntityDocument
+	 * @return EntityRedirect
 	 */
-	public function getEntity() {
-		return $this->entity;
+	public function getRedirect() {
+		return $this->redirect;
 	}
 
 	/**
