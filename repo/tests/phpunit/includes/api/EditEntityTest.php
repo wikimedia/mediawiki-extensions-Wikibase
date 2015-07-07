@@ -416,17 +416,21 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => array( 'title' => 'abcde', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			'cant have id and new' => array( // cant have id and new
-				'p' => array( 'id' => 'q666', 'new' => 'item' ),
+				'p' => array( 'id' => 'q666', 'new' => 'item', 'data' => '{}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			'when clearing must also have data!' => array( // when clearing must also have data!
 				'p' => array( 'site' => 'enwiki', 'new' => 'Berlin', 'clear' => '' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'nodata' ) ) ),
 			'bad site' => array( // bad site
 				'p' => array( 'site' => 'abcde', 'data' => '{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site' ) ) ),
-			'no data provided' => array( // no data provided
+			'no data provided' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-data' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'nodata' //see 'no$1' in ApiBase::$messageMap
+				) )
+			),
 			'malformed json' => array( // malformed json
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' , 'data' => '{{{}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-json' ) ) ),
