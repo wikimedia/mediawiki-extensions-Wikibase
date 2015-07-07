@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Specials;
 
+use DataValues\Serializers\DataValueSerializer;
 use HttpError;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -81,23 +83,25 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 
 		$serializationOptions = new SerializationOptions();
-		$serializerFactory = new LibSerializerFactory(
+		$libSerializerFactory = new LibSerializerFactory(
 			$serializationOptions,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getEntityFactory()
 		);
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 
 		$serializationService = new EntityDataSerializationService(
 			$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' ),
 			$this->getPageTitle()->getCanonicalURL() . '/',
 			$wikibaseRepo->getStore()->getEntityLookup(),
 			$titleLookup,
-			$serializerFactory,
+			$libSerializerFactory,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getSiteStore()->getSites(),
-			$entityDataFormatProvider
+			$entityDataFormatProvider,
+			$serializerFactory
 		);
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataSquidMaxage' );

@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
@@ -89,7 +91,9 @@ class ApiHelperFactory {
 		return new ResultBuilder(
 			$api->getResult(),
 			$this->titleLookup,
-			$this->getSerializerFactory( $defaultOptions ) );
+			$this->newLibSerializerFactory( $defaultOptions ),
+			$this->newSerializerFactory()
+		);
 	}
 
 	/**
@@ -114,12 +118,21 @@ class ApiHelperFactory {
 	 *
 	 * @return LibSerializerFactory
 	 */
-	public function getSerializerFactory( SerializationOptions $defaultOptions = null ) {
+	public function newLibSerializerFactory( SerializationOptions $defaultOptions = null ) {
 		return new LibSerializerFactory(
 			$defaultOptions,
 			$this->dataTypeLookup,
 			$this->entityFactory
 		);
+	}
+
+	/**
+	 * Returns a serializer factory to be used when constructing API results.
+	 *
+	 * @return SerializerFactory
+	 */
+	public function newSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer() );
 	}
 
 	/**

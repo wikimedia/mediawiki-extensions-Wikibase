@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DataValues\Serializers\DataValueSerializer;
 use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -10,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -96,17 +98,19 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( 'string' ) );
 
 		$serializerOptions = new SerializationOptions();
-		$serializerFactory = new LibSerializerFactory( $serializerOptions, $dataTypeLookup );
+		$libSerializerFactory = new LibSerializerFactory( $serializerOptions, $dataTypeLookup );
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
 			$entityLookup,
 			$titleLookup,
-			$serializerFactory,
+			$libSerializerFactory,
 			$dataTypeLookup,
 			new SiteList(),
-			new EntityDataFormatProvider()
+			new EntityDataFormatProvider(),
+			$serializerFactory
 		);
 
 		return $service;

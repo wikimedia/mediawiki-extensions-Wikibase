@@ -10,6 +10,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -40,6 +41,11 @@ class ResultBuilder {
 	/**
 	 * @var LibSerializerFactory
 	 */
+	private $libSerializerFactory;
+
+	/**
+	 * @var SerializerFactory
+	 */
 	private $serializerFactory;
 
 	/**
@@ -55,14 +61,16 @@ class ResultBuilder {
 	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param LibSerializerFactory $serializerFactory
+	 * @param LibSerializerFactory $libSerializerFactory
+	 * @param SerializerFactory $serializerFactory
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		$result,
 		EntityTitleLookup $entityTitleLookup,
-		LibSerializerFactory $serializerFactory
+		LibSerializerFactory $libSerializerFactory,
+		SerializerFactory $serializerFactory
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
@@ -70,6 +78,7 @@ class ResultBuilder {
 
 		$this->result = $result;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->libSerializerFactory = $libSerializerFactory;
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
 	}
@@ -325,7 +334,7 @@ class ResultBuilder {
 
 			//FIXME: $props should be used to filter $entitySerialization!
 			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
-			$entitySerializer = $this->serializerFactory->newSerializerForObject( $entity, $serializerOptions );
+			$entitySerializer = $this->libSerializerFactory->newSerializerForObject( $entity, $serializerOptions );
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 			if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $entitySerialization ) ) {
@@ -364,7 +373,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addLabels( array $labels, $path ) {
-		$labelSerializer = $this->serializerFactory->newLabelSerializer( $this->getOptions() );
+		$labelSerializer = $this->libSerializerFactory->newLabelSerializer( $this->getOptions() );
 
 		$values = $labelSerializer->getSerialized( $labels );
 		$this->setList( $path, 'labels', $values, 'label' );
@@ -379,7 +388,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addDescriptions( array $descriptions, $path ) {
-		$descriptionSerializer = $this->serializerFactory->newDescriptionSerializer( $this->getOptions() );
+		$descriptionSerializer = $this->libSerializerFactory->newDescriptionSerializer( $this->getOptions() );
 
 		$values = $descriptionSerializer->getSerialized( $descriptions );
 		$this->setList( $path, 'descriptions', $values, 'description' );
@@ -394,7 +403,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addAliases( array $aliases, $path ) {
-		$aliasSerializer = $this->serializerFactory->newAliasSerializer( $this->getOptions() );
+		$aliasSerializer = $this->libSerializerFactory->newAliasSerializer( $this->getOptions() );
 		$values = $aliasSerializer->getSerialized( $aliases );
 		$this->setList( $path, 'aliases', $values, 'alias' );
 	}
@@ -427,7 +436,7 @@ class ResultBuilder {
 			}
 		}
 
-		$siteLinkSerializer = $this->serializerFactory->newSiteLinkSerializer( $serializerOptions );
+		$siteLinkSerializer = $this->libSerializerFactory->newSiteLinkSerializer( $serializerOptions );
 		$values = $siteLinkSerializer->getSerialized( $siteLinks );
 
 		if ( $values !== array() ) {
@@ -444,7 +453,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addClaims( array $claims, $path ) {
-		$claimsSerializer = $this->serializerFactory->newClaimsSerializer( $this->getOptions() );
+		$claimsSerializer = $this->libSerializerFactory->newClaimsSerializer( $this->getOptions() );
 
 		$values = $claimsSerializer->getSerialized( new Claims( $claims ) );
 
@@ -461,7 +470,7 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addClaim( Claim $claim ) {
-		$serializer = $this->serializerFactory->newClaimSerializer( $this->getOptions() );
+		$serializer = $this->libSerializerFactory->newClaimSerializer( $this->getOptions() );
 
 		//TODO: this is currently only used to add a Claim as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow claims
@@ -479,7 +488,7 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addReference( Reference $reference ) {
-		$serializer = $this->serializerFactory->newReferenceSerializer( $this->getOptions() );
+		$serializer = $this->libSerializerFactory->newReferenceSerializer( $this->getOptions() );
 
 		//TODO: this is currently only used to add a Reference as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow references

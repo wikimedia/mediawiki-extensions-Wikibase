@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Api;
 
 use ApiResult;
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\Item;
@@ -10,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -70,14 +72,16 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			} ) );
 
 		// @todo inject EntityFactory and SiteStore
-		$serializerFactory = new LibSerializerFactory(
+		$libSerializerFactory = new LibSerializerFactory(
 			null, //no serialization options
 			$mockPropertyDataTypeLookup
 		);
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 
 		$builder = new ResultBuilder(
 			$result,
 			$mockEntityTitleLookup,
+			$libSerializerFactory,
 			$serializerFactory
 		);
 
