@@ -155,7 +155,7 @@ class EditEntity extends ModifyEntity {
 			$this->errorReporter->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
 		}
 
-		throw new LogicException( 'ApiBase::dieUsage did not throw a UsageException' );
+		throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 	}
 
 	/**

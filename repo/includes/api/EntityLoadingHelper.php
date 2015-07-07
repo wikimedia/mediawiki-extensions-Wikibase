@@ -76,7 +76,7 @@ class EntityLoadingHelper {
 			$this->errorReporter->dieException( $ex, 'cant-load-entity-content' );
 		}
 
-		throw new LogicException( 'ApiErrorReporter::dieError did not throw a UsageException' );
+		throw new LogicException( 'ApiErrorReporter::dieException did not throw a UsageException' );
 	}
 
 }
