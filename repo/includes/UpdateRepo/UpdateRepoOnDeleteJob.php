@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\UpdateRepo;
 
+use Job;
 use OutOfBoundsException;
+use RequestContext;
 use SiteStore;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -54,7 +56,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory( RequestContext::getMain() )
 		);
 	}
 

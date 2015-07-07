@@ -4,6 +4,7 @@ namespace Wikibase\Repo\UpdateRepo;
 
 use InvalidArgumentException;
 use Job;
+use RequestContext;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
@@ -61,7 +62,7 @@ abstract class UpdateRepoJob extends Job {
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory( RequestContext::getMain() )
 		);
 	}
 
