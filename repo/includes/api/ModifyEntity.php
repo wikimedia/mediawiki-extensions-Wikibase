@@ -154,6 +154,10 @@ abstract class ModifyEntity extends ApiBase {
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 	}
 
+	public function setServices( SiteLinkTargetProvider $siteLinkTargetProvider ) {
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+	}
+
 	/**
 	 * @see EntitySavingHelper::attemptSaveEntity
 	 */
