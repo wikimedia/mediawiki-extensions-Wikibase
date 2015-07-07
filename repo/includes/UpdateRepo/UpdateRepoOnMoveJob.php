@@ -59,7 +59,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory( RequestContext::getMain() )
 		);
 	}
 

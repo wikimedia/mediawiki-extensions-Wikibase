@@ -61,7 +61,7 @@ abstract class UpdateRepoJob extends Job {
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory( RequestContext::getMain() )
 		);
 	}
 
