@@ -1,0 +1,20 @@
+{
+  "P1491009": [
+    {
+      "snaktype": "value",
+      "property": "P1491009",
+      "datavalue": {
+        "type": "string",
+        "value": "Val1"
+      }
+    },
+    {
+      "snaktype": "value",
+      "property": "P1491009",
+      "datavalue": {
+        "type": "string",
+        "value": "Val2"
+      }
+    }
+  ]
+}
