@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\UpdateRepo;
 
 use OutOfBoundsException;
+use RequestContext;
 use SiteStore;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -48,13 +49,14 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		parent::__construct( 'UpdateRepoOnDelete', $title, $params );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$context = RequestContext::getMain();
 
 		$this->initServices(
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory( $context )
 		);
 	}
 

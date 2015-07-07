@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use FauxResponse;
+use RequestContext;
 use Status;
 use ValueValidators\Result;
 use WebRequest;
@@ -59,7 +60,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),
 				$this->getEntityPermissionChecker(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				RequestContext::getMain()
 			)
 		);
 

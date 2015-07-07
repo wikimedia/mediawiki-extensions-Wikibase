@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use RequestContext;
 use Status;
 use Title;
 use User;
@@ -144,7 +145,8 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 				$mockRepository,
 				$mockRepository,
 				$this->getEntityPermissionChecker(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getMockEditFitlerHookRunner(),
+				RequestContext::getMain()
 			)
 		);
 
