@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<api success="1">
+	<entity id="Q2" type="item">
+		<labels>
+			<label language="pt" value="Airbus"/>
+		</labels>
+		<descriptions>
+			<description language="fr" value="constructeur a&#xE9;ronautique europ&#xE9;en"/>
+		</descriptions>
+		<aliases>
+			<alias language="uk" value="Airbus S.A.S"/>
+			<alias language="uk" value="&#x410;&#x435;&#x440;&#x43E;&#x301;&#x431;&#x443;&#x441;"/>
+		</aliases>
+		<sitelinks/>
+		<claims>
+			<property id="P2">
+				<claim _idx="0" id="Q2$kittens" type="statement" rank="normal">
+					<mainsnak snaktype="novalue" property="P2"/>
+					<qualifiers/>
+					<qualifiers-order/>
+				</claim>
+				<claim _idx="1" id="Q2$26D08148-75F5-4AD1-B340-3A6A2F32C202" type="statement"
+					   rank="normal">
+					<mainsnak snaktype="value" property="P2" datatype="string">
+						<datavalue value="SomeMainVal" type="string"/>
+					</mainsnak>
+					<qualifiers>
+						<property id="P2">
+							<qualifiers _idx="0" hash="9eb35e39a968a9bdf3d95dd20ac07df3aaaa39e7"
+										snaktype="value" property="P2" datatype="string">
+								<datavalue value="SomeQualVal" type="string"/>
+							</qualifiers>
+						</property>
+					</qualifiers>
+					<qualifiers-order>
+						<property>P2</property>
+					</qualifiers-order>
+					<references>
+						<reference hash="2d398c1495c41720b9cecd24cfd0cc7118e3a993">
+							<snaks>
+								<property id="P2">
+									<snak _idx="0" snaktype="value" property="P2" datatype="string">
+										<datavalue value="SomeRefVal" type="string"/>
+									</snak>
+								</property>
+							</snaks>
+							<snaks-order>
+								<property>P2</property>
+							</snaks-order>
+						</reference>
+					</references>
+				</claim>
+			</property>
+		</claims>
+	</entity>
+</api>

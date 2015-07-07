@@ -1,0 +1,83 @@
+{
+  "id": "Q80050245",
+  "type": "item",
+  "aliases": {
+    "uk": [
+      {
+        "language": "uk",
+        "value": "Airbus S.A.S"
+      },
+      {
+        "language": "uk",
+        "value": "\u0410\u0435\u0440\u043e\u0301\u0431\u0443\u0441"
+      }
+    ]
+  },
+  "labels": {
+    "pt": {
+      "language": "pt",
+      "value": "Airbus"
+    }
+  },
+  "descriptions": {
+    "fr": {
+      "language": "fr",
+      "value": "constructeur a\u00e9ronautique europ\u00e9en"
+    }
+  },
+  "claims": {
+    "P1491009": [
+      {
+        "id": "Q80050245$26D08148-75F5-4AD1-B340-3A6A2F32C202",
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P1491009",
+          "datatype": "string",
+          "datavalue": {
+            "value": "SomeMainVal",
+            "type": "string"
+          }
+        },
+        "type": "statement",
+        "rank": "normal",
+        "qualifiers": {
+          "P1491009": [
+            {
+              "snaktype": "value",
+              "property": "P1491009",
+              "datatype": "string",
+              "datavalue": {
+                "value": "SomeQualVal",
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "qualifiers-order": [
+          "P1491009"
+        ],
+        "references": [
+          {
+            "snaks": {
+              "P1491009": [
+                {
+                  "snaktype": "value",
+                  "property": "P1491009",
+                  "datatype": "string",
+                  "datavalue": {
+                    "value": "SomeRefVal",
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            "snaks-order": [
+              "P1491009"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sitelinks": {}
+}
