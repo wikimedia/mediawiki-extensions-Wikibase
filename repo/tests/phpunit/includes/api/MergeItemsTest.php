@@ -4,15 +4,19 @@ namespace Wikibase\Test\Repo\Api;
 
 use Language;
 use Status;
+use TestSites;
 use User;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Store\EntityRedirect;
+
 
 /**
  * @covers Wikibase\Repo\Api\MergeItems
@@ -26,6 +30,7 @@ use Wikibase\Test\MockRepository;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Lucie-Aimée Kaffee
  */
 class MergeItemsTest extends \MediaWikiTestCase {
 
@@ -47,6 +52,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->setUpSites();
+
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();
 		$this->apiModuleTestHelper = new ApiModuleTestHelper();
 
@@ -65,6 +72,18 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		) );
 	}
 
+	private function setUpSites() {
+		static $isSetup = false;
+
+		if ( !$isSetup ) {
+			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable->clear();
+			$sitesTable->saveSites( TestSites::getSites() );
+
+			$isSetup = true;
+		}
+	}
+
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 
@@ -79,6 +98,22 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			} ) );
 
 		return $permissionChecker;
+	}
+
+	/**
+	 * @return RedirectCreationInteractor
+	 */
+	public function getMockRedirectCreationInteractor() {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\RedirectCreationInteractor' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$mock->expects( $this->any() )
+			->method( 'createRedirect' )
+			->will( $this->returnCallback( function( EntityId $fromId, EntityId $toId, $bot ) {
+				return new EntityRedirect( $fromId, $toId );
+			} ) );
+		return $mock;
 	}
 
 	/**
@@ -112,7 +147,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				$this->mockRepository,
 				$this->getPermissionCheckers(),
 				$summaryFormatter,
-				$module->getUser()
+				$module->getUser(),
+				$this->getMockRedirectCreationInteractor()
 			)
 		);
 	}
@@ -189,6 +225,16 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$result = $this->callApiModule( $params );
 
 		// -- check the result --------------------------------------------
+		$this->assertResultCorrect( $result );
+
+		// -- check the items --------------------------------------------
+		$this->assertItemsCorrect( $result, $expectedFrom, $expectedTo );
+
+		// -- check the edit summaries --------------------------------------------
+		$this->assertEditSummariesCorrect( $result );
+	}
+
+	private function assertResultCorrect( array $result ) {
 		$this->apiModuleTestHelper->assertResultSuccess( $result );
 
 		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'from', 'id' ), $result );
@@ -200,15 +246,17 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'to', 'lastrevid' ), $result );
 		$this->assertGreaterThan( 0, $result['from']['lastrevid'] );
 		$this->assertGreaterThan( 0, $result['to']['lastrevid'] );
+	}
 
-		// -- check the items --------------------------------------------
-		$actualFrom = $this->entityModificationTestHelper->getEntity( $result['from']['id'] );
+	private function assertItemsCorrect( array $result, array $expectedFrom, array $expectedTo ) {
+		$actualFrom = $this->entityModificationTestHelper->getEntity( $result['from']['id'], true ); //resolve redirects
 		$this->entityModificationTestHelper->assertEntityEquals( $expectedFrom, $actualFrom );
 
-		$actualTo = $this->entityModificationTestHelper->getEntity( $result['to']['id'] );
+		$actualTo = $this->entityModificationTestHelper->getEntity( $result['to']['id'], true );
 		$this->entityModificationTestHelper->assertEntityEquals( $expectedTo, $actualTo );
+	}
 
-		// -- check the edit summaries --------------------------------------------
+	private function assertEditSummariesCorrect( array $result ) {
 		$this->entityModificationTestHelper->assertRevisionSummary( array( 'wbmergeitems' ), $result['from']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( '/CustomSummary/', $result['from']['lastrevid'] );
 		$this->entityModificationTestHelper->assertRevisionSummary( array( 'wbmergeitems' ), $result['to']['lastrevid'] );

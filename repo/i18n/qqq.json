@@ -238,7 +238,7 @@
 	"wikibase-mergeitems-fromid": "Label for the input field to select the ID of the entity to merge from. See also:\n* {{msg-mw|Wikibase-mergeitems-toid}}",
 	"wikibase-mergeitems-toid": "Label for the input field to select the ID of the entity to merge to. See also:\n* {{msg-mw|Wikibase-mergeitems-fromid}}",
 	"wikibase-mergeitems-submit": "Label for the button that activates the action.\n\nPreceded by the following input box labels:\n* {{msg-mw|Wikibase-mergeitems-fromid}}\n* {{msg-mw|Wikibase-mergeitems-toid}}\n{{Identical|Merge item}}",
-	"wikibase-mergeitems-success": "Message shown when an item has successfully been merged into another item.\nParameters:\n* $1: the ID of the source item\n* $2: the new revision ID of the source item\n* $3: the ID of the item where the pages has been merged",
+	"wikibase-mergeitems-success": "Message shown when an item has successfully been merged and redirected into another item.\nParameters:\n* $1: the ID of the source item\n* $2: the new revision ID of the source item\n* $3: the ID of the item where the pages has been merged",
 	"wikibase-itemmerge-missing-parameter": "Error message shown when a required field was not provided.",
 	"wikibase-itemmerge-not-item": "Error message shown when a provided entity id did not refer to an item.",
 	"wikibase-itemmerge-failed-save": "Error message shown when the merged items could not be saved.",
