@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\WikibaseRepo;
@@ -61,11 +60,11 @@ abstract class ModifyTerm extends ModifyEntity {
 			parent::getAllowedParams(),
 			array(
 				'language' => array(
-					ApiBase::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
-					ApiBase::PARAM_REQUIRED => true,
+					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
+					self::PARAM_REQUIRED => true,
 				),
 				'value' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					self::PARAM_TYPE => 'string',
 				),
 			)
 		);

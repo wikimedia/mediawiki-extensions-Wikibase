@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
 use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
@@ -751,14 +750,14 @@ class EditEntity extends ModifyEntity {
 			parent::getAllowedParams(),
 			array(
 				'data' => array(
-					ApiBase::PARAM_TYPE => 'text',
+					self::PARAM_TYPE => 'text',
 				),
 				'clear' => array(
-					ApiBase::PARAM_TYPE => 'boolean',
-					ApiBase::PARAM_DFLT => false
+					self::PARAM_TYPE => 'boolean',
+					self::PARAM_DFLT => false
 				),
 				'new' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					self::PARAM_TYPE => 'string',
 				),
 			)
 		);

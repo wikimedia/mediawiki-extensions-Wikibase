@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
 use ApiMain;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOp;
@@ -195,20 +194,20 @@ class SetAliases extends ModifyEntity {
 			parent::getAllowedParams(),
 			array(
 				'add' => array(
-					ApiBase::PARAM_TYPE => 'string',
-					ApiBase::PARAM_ISMULTI => true,
+					self::PARAM_TYPE => 'string',
+					self::PARAM_ISMULTI => true,
 				),
 				'remove' => array(
-					ApiBase::PARAM_TYPE => 'string',
-					ApiBase::PARAM_ISMULTI => true,
+					self::PARAM_TYPE => 'string',
+					self::PARAM_ISMULTI => true,
 				),
 				'set' => array(
-					ApiBase::PARAM_TYPE => 'string',
-					ApiBase::PARAM_ISMULTI => true,
+					self::PARAM_TYPE => 'string',
+					self::PARAM_ISMULTI => true,
 				),
 				'language' => array(
-					ApiBase::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
-					ApiBase::PARAM_REQUIRED => true,
+					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
+					self::PARAM_REQUIRED => true,
 				),
 			)
 		);

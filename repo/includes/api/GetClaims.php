@@ -81,7 +81,7 @@ class GetClaims extends ApiBase {
 	}
 
 	/**
-	 * @see \ApiBase::execute
+	 * @see ApiBase::execute
 	 *
 	 * @since 0.3
 	 */
@@ -237,26 +237,26 @@ class GetClaims extends ApiBase {
 	protected function getAllowedParams() {
 		return array(
 			'entity' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 			'property' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 			'claim' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 			'rank' => array(
-				ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
+				self::PARAM_TYPE => ClaimSerializer::getRanks(),
 			),
 			'props' => array(
-				ApiBase::PARAM_TYPE => array(
+				self::PARAM_TYPE => array(
 					'references',
 				),
-				ApiBase::PARAM_DFLT => 'references',
+				self::PARAM_DFLT => 'references',
 			),
 			'ungroupedlist' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false,
+				self::PARAM_TYPE => 'boolean',
+				self::PARAM_DFLT => false,
 			),
 		);
 	}

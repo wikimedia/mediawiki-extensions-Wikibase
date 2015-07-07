@@ -552,7 +552,7 @@ abstract class ModifyEntity extends ApiBase {
 	protected function getAllowedParamsForId() {
 		return array(
 			'id' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 		);
 	}
@@ -569,10 +569,10 @@ abstract class ModifyEntity extends ApiBase {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		return array(
 			'site' => array(
-				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 			),
 			'title' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 		);
 	}
@@ -587,10 +587,10 @@ abstract class ModifyEntity extends ApiBase {
 	protected function getAllowedParamsForEntity() {
 		return array(
 			'baserevid' => array(
-				ApiBase::PARAM_TYPE => 'integer',
+				self::PARAM_TYPE => 'integer',
 			),
 			'summary' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 			'token' => null,
 			'bot' => false,
