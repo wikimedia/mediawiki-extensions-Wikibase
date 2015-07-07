@@ -94,6 +94,12 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	_claimsChanger: null,
 
 	/**
+	 * @type {wikibase.entityChangers.ReferencesChanger}
+	 * @private
+	 */
+	_referencesChanger: null,
+
+	/**
 	 * @inheritdoc
 	 * @protected
 	 *
@@ -114,6 +120,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 		PARENT.prototype._create.call( this );
 
 		this._claimsChanger = this.options.entityChangersFactory.getClaimsChanger();
+		this._referencesChanger = this.options.entityChangersFactory.getReferencesChanger();
 
 		this._createListView();
 
@@ -192,8 +199,8 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 						dataTypeStore: self.options.dataTypeStore,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder,
-						entityChangersFactory: self.options.entityChangersFactory,
 						claimsChanger: self._claimsChanger,
+						referencesChanger: self._referencesChanger,
 						guidGenerator: self.options.claimGuidGenerator
 					};
 				}

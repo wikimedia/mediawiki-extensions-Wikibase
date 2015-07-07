@@ -25,7 +25,7 @@ var createStatementgrouplistview = function( options, $node ) {
 				return 'i am a ClaimsChanger';
 			},
 			getReferencesChanger: function() {
-				return null;
+				return 'I am a ReferencesChanger';
 			}
 		},
 		dataTypeStore: 'I am a DataTypeStore',

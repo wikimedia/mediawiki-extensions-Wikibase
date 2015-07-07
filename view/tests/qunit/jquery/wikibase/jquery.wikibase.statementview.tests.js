@@ -45,11 +45,7 @@ var createStatementview = function( options, $node ) {
 		entityStore: entityStore,
 		valueViewBuilder: 'i am a valueview builder',
 		claimsChanger: 'I am a ClaimsChanger',
-		entityChangersFactory: {
-			getReferencesChanger: function() {
-				return 'I am a ReferencesChanger';
-			}
-		},
+		referencesChanger: 'I am a ReferencesChanger',
 		dataTypeStore: 'I am a DataTypeStore',
 		guidGenerator: 'I am a ClaimGuidGenerator'
 	}, options || {} );
@@ -138,11 +134,7 @@ QUnit.test( 'remove', function( assert ) {
 				),
 				new wb.datamodel.ReferenceList( [ reference ] )
 			),
-			entityChangersFactory: {
-				getReferencesChanger: function() {
-					return referencesChanger;
-				}
-			}
+			referencesChanger: referencesChanger
 		} ),
 		statementview = $statementview.data( 'statementview' );
 
