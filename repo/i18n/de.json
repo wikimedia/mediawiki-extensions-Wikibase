@@ -211,7 +211,7 @@
 	"wikibase-mergeitems-fromid": "Die Kennung des Objekts, von dem zusammengeführt werden soll:",
 	"wikibase-mergeitems-toid": "Die Kennung des Objekts, in das zusammengeführt werden soll:",
 	"wikibase-mergeitems-submit": "Datenobjekte zusammenführen",
-	"wikibase-mergeitems-success": "$1 wurde erfolgreich in $3 zusammengeführt.",
+	"wikibase-mergeitems-success": "$1 wurde erfolgreich in $3 zusammengeführt und weitergeleitet.",
 	"wikibase-itemmerge-missing-parameter": "Unvollständige Eingabe.",
 	"wikibase-itemmerge-not-item": "Das angegebene Element ist kein Objekt.",
 	"wikibase-itemmerge-failed-save": "Objekt konnte nicht gespeichert werden.",

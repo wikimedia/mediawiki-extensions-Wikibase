@@ -5,7 +5,8 @@
 			"GrigorGB",
 			"Աշոտ1997",
 			"Xelgen",
-			"Դավիթ Սարոյան"
+			"Դավիթ Սարոյան",
+			"Սահակ"
 		]
 	},
 	"wikibase-edit": "խմբագրել",
@@ -14,8 +15,10 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Կարգավորել",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Նաև հայտնի որպես",
 	"wikibase-entitytermsforlanguagelistview-description": "Նկարագրություն",
+	"wikibase-entitytermsforlanguagelistview-label": "Պիտակ",
 	"wikibase-entitytermsforlanguagelistview-language": "Լեզու",
 	"wikibase-label-empty": "Պիտակը (անվանումը) նշված չէ",
+	"wikibase-diffview-label": "պիտակ",
 	"wikibase-statements": "Պնդումներ",
 	"wikibase-sitelinks-special": "Այլ կայքեր",
 	"wikibase-aliases-empty": "Այլ անվանումներ (հոմանիշներ) նշված չեն",

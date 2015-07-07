@@ -200,7 +200,7 @@
 	"wikibase-mergeitems-fromid": "המזהה שהמיזוג יתבצע ממנו",
 	"wikibase-mergeitems-toid": "המזהה שהמיזוג יתבצע אליו",
 	"wikibase-mergeitems-submit": "מיזוג פריטים",
-	"wikibase-mergeitems-success": "$1 מוזג בהצלחה לתוך $3.",
+	"wikibase-mergeitems-success": "$1 מוזג בהצלחה לתוך $3 והופנה.",
 	"wikibase-itemmerge-missing-parameter": "קלט לא שלם.",
 	"wikibase-itemmerge-not-item": "הישות שצוינה אינה פריט.",
 	"wikibase-itemmerge-failed-save": "שמירת פריט נכשלה.",
