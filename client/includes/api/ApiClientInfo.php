@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
 
@@ -93,9 +92,9 @@ class ApiClientInfo extends ApiQueryBase {
 	protected function getAllowedParams() {
 		return array(
 			'prop' => array(
-				ApiBase::PARAM_DFLT => 'url|siteid',
-				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_TYPE => array(
+				self::PARAM_DFLT => 'url|siteid',
+				self::PARAM_ISMULTI => true,
+				self::PARAM_TYPE => array(
 					'url', 'siteid'
 				)
 			),

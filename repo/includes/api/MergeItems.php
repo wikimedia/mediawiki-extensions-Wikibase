@@ -199,18 +199,18 @@ class MergeItems extends ApiBase {
 	protected function getAllowedParams() {
 		return array(
 			'fromid' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 			'toid' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 			'ignoreconflicts' => array(
-				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_TYPE => ChangeOpsMerge::$conflictTypes,
-				ApiBase::PARAM_REQUIRED => false,
+				self::PARAM_ISMULTI => true,
+				self::PARAM_TYPE => ChangeOpsMerge::$conflictTypes,
+				self::PARAM_REQUIRED => false,
 			),
 			'summary' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				self::PARAM_TYPE => 'string',
 			),
 			'bot' => array(
 				ApiBase::PARAM_TYPE => 'boolean',

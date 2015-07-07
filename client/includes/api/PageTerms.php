@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Api;
 
-use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
 use ApiResult;
@@ -235,18 +234,18 @@ class PageTerms extends ApiQueryBase {
 	protected function getAllowedParams() {
 		return array(
 			'continue' => array(
-				ApiBase::PARAM_HELP_MSG => 'api-help-param-continue',
-				ApiBase::PARAM_TYPE => 'integer',
+				self::PARAM_HELP_MSG => 'api-help-param-continue',
+				self::PARAM_TYPE => 'integer',
 			),
 			'terms' => array(
 				// XXX Ought to get this list from Wikibase\TermIndexEntry, its setType() also hardcodes it.
-				ApiBase::PARAM_TYPE => array(
+				self::PARAM_TYPE => array(
 					TermIndexEntry::TYPE_ALIAS,
 					TermIndexEntry::TYPE_DESCRIPTION,
 					TermIndexEntry::TYPE_LABEL
 				),
-				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
+				self::PARAM_ISMULTI => true,
+				self::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
 			),
 		);
 	}

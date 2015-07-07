@@ -150,20 +150,20 @@ class CreateRedirect extends ApiBase {
 	protected function getAllowedParams() {
 		return array(
 			'from' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
+				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			),
 			'to' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
+				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			),
 			'token' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
+				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			),
 			'bot' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false,
+				self::PARAM_TYPE => 'boolean',
+				self::PARAM_DFLT => false,
 			)
 		);
 	}

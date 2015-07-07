@@ -186,26 +186,26 @@ class FormatSnakValue extends ApiBase {
 	protected function getAllowedParams() {
 		return array(
 			'generate' => array(
-				ApiBase::PARAM_TYPE => array(
+				self::PARAM_TYPE => array(
 					SnakFormatter::FORMAT_PLAIN,
 					SnakFormatter::FORMAT_WIKI,
 					SnakFormatter::FORMAT_HTML,
 					SnakFormatter::FORMAT_HTML_WIDGET,
 				),
-				ApiBase::PARAM_DFLT => SnakFormatter::FORMAT_WIKI,
-				ApiBase::PARAM_REQUIRED => false,
+				self::PARAM_DFLT => SnakFormatter::FORMAT_WIKI,
+				self::PARAM_REQUIRED => false,
 			),
 			'datavalue' => array(
-				ApiBase::PARAM_TYPE => 'text',
-				ApiBase::PARAM_REQUIRED => true,
+				self::PARAM_TYPE => 'text',
+				self::PARAM_REQUIRED => true,
 			),
 			'datatype' => array(
-				ApiBase::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds(),
-				ApiBase::PARAM_REQUIRED => false,
+				self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds(),
+				self::PARAM_REQUIRED => false,
 			),
 			'options' => array(
-				ApiBase::PARAM_TYPE => 'text',
-				ApiBase::PARAM_REQUIRED => false,
+				self::PARAM_TYPE => 'text',
+				self::PARAM_REQUIRED => false,
 			),
 		);
 	}

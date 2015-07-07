@@ -327,49 +327,49 @@ class GetEntities extends ApiBase {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		return array_merge( parent::getAllowedParams(), array(
 			'ids' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_ISMULTI => true,
+				self::PARAM_TYPE => 'string',
+				self::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
-				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_ALLOW_DUPLICATES => true
+				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_ISMULTI => true,
+				self::PARAM_ALLOW_DUPLICATES => true
 			),
 			'titles' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_ALLOW_DUPLICATES => true
+				self::PARAM_TYPE => 'string',
+				self::PARAM_ISMULTI => true,
+				self::PARAM_ALLOW_DUPLICATES => true
 			),
 			'redirects' => array(
-				ApiBase::PARAM_TYPE => array( 'yes', 'no' ),
-				ApiBase::PARAM_DFLT => 'yes',
+				self::PARAM_TYPE => array( 'yes', 'no' ),
+				self::PARAM_DFLT => 'yes',
 			),
 			'props' => array(
-				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
+				self::PARAM_TYPE => array( 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
 					'descriptions', 'claims', 'datatype' ),
-				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
-				ApiBase::PARAM_ISMULTI => true,
+				self::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
+				self::PARAM_ISMULTI => true,
 			),
 			'languages' => array(
-				ApiBase::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
-				ApiBase::PARAM_ISMULTI => true,
+				self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages(),
+				self::PARAM_ISMULTI => true,
 			),
 			'languagefallback' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false
+				self::PARAM_TYPE => 'boolean',
+				self::PARAM_DFLT => false
 			),
 			'normalize' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false
+				self::PARAM_TYPE => 'boolean',
+				self::PARAM_DFLT => false
 			),
 			'ungroupedlist' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false,
+				self::PARAM_TYPE => 'boolean',
+				self::PARAM_DFLT => false,
 			),
 			'sitefilter' => array(
-				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
-				ApiBase::PARAM_ISMULTI => true,
-				ApiBase::PARAM_ALLOW_DUPLICATES => true
+				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_ISMULTI => true,
+				self::PARAM_ALLOW_DUPLICATES => true
 			),
 		) );
 	}

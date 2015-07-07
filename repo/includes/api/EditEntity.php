@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
 use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;

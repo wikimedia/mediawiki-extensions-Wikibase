@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Api;
 
-use ApiBase;
 use ApiMain;
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -212,21 +211,21 @@ class SetReference extends ModifyClaim {
 		return array_merge(
 			array(
 				'statement' => array(
-					ApiBase::PARAM_TYPE => 'string',
-					ApiBase::PARAM_REQUIRED => true,
+					self::PARAM_TYPE => 'string',
+					self::PARAM_REQUIRED => true,
 				),
 				'snaks' => array(
-					ApiBase::PARAM_TYPE => 'text',
-					ApiBase::PARAM_REQUIRED => true,
+					self::PARAM_TYPE => 'text',
+					self::PARAM_REQUIRED => true,
 				),
 				'snaks-order' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					self::PARAM_TYPE => 'string',
 				),
 				'reference' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					self::PARAM_TYPE => 'string',
 				),
 				'index' => array(
-					ApiBase::PARAM_TYPE => 'integer',
+					self::PARAM_TYPE => 'integer',
 				),
 			),
 			parent::getAllowedParams()
