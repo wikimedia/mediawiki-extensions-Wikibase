@@ -643,9 +643,18 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return bool
+	 * @return bool False if the entity is a redirect, true otherwise.
 	 */
-	abstract public function isStub();
+	public function isEmpty() {
+		return !$this->isRedirect();
+	}
+
+	/**
+	 * @return bool False if the entity is a redirect, true otherwise.
+	 */
+	public function isStub() {
+		return !$this->isRedirect();
+	}
 
 	/**
 	 * @see Content::copy

@@ -113,29 +113,21 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * @see AbstractContent::isEmpty
+	 * @see EntityContent::isEmpty
 	 *
-	 * @return bool
+	 * @return bool True if this is not a redirect and the property is empty.
 	 */
 	public function isEmpty() {
-		if ( $this->isRedirect() ) {
-			return false;
-		}
-
-		return $this->getProperty()->isEmpty();
+		return parent::isEmpty() && $this->getProperty()->isEmpty();
 	}
 
 	/**
 	 * @see EntityContent::isStub
 	 *
-	 * @return bool
+	 * @return bool True if this is not a redirect and the property does not contain statements.
 	 */
 	public function isStub() {
-		if ( $this->isEmpty() ) {
-			return false;
-		}
-
-		return $this->getProperty()->getStatements()->isEmpty();
+		return parent::isStub() && $this->getProperty()->getStatements()->isEmpty();
 	}
 
 }
