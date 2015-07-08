@@ -16,15 +16,22 @@
  *
  * @param {Object} options
  * @param {wikibase.datamodel.Reference|null} options.value
- * @param {string} options.statementGuid
+ * @param {string|null} [options.statementGuid]
  *        The GUID of the `Statement` the `Reference` represented by the widget instance belongs to.
+ *        Required only if the `Reference` is supposed to be saved individually (`referencesChanger`
+ *        option is defined). Else, the `Reference` is supposed to be saved along with its
+ *        `Statement` (e.g. by being part of a `statementview`) and will receive the GUID from that
+ *        context.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
  *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
  *        `jQuery.valueview`.
- * @param {wikibase.entityChangers.ReferencesChanger} options.referencesChanger
- *        Required for saving the `Reference` represented by the widget instance.
+ * @param {wikibase.entityChangers.ReferencesChanger} [options.referencesChanger]
+ *        Required for saving the `Reference` represented by the widget instance. If omitted, the
+ *        `referenceview` widget does not trigger saving the `Reference` it is managing when
+ *        stopping edit mode. Setting this option by providing a `ReferencesChanger` instance
+ *        requires the `statementGuid` option to be set as well.
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-claimview-snak-new-tooltip' )]
  *        End-user message explaining how to interact with the widget. The message is most likely to
  *        be used inside the tooltip of the toolbar corresponding to the widget.
@@ -92,13 +99,16 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @protected
 	 *
 	 * @throws {Error} if a required option is not specified properly.
+	 * @throws {Error} if `referencesChanger` option is defined but `statementGuid` option is
+	 *         omitted.
 	 */
 	_create: function() {
-		if(
-			!this.options.statementGuid || !this.options.entityStore
-			|| !this.options.valueViewBuilder || !this.options.referencesChanger
-		) {
+		if( !this.options.entityStore || !this.options.valueViewBuilder ) {
 			throw new Error( 'Required option not specified properly' );
+		}
+		if( this.options.referencesChanger && !this.options.statementGuid ) {
+			throw new Error( 'Would be unable to save a Reference using the provided '
+				+ 'ReferencesChanger without a statementGuid being provided' );
 		}
 
 		PARENT.prototype._create.call( this );
@@ -424,20 +434,32 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @see wikibase.entityChangers.ReferencesChanger.setReference
 	 * @private
 	 *
-	 * @return {Object} jQuery.Promise
-	 * @return {Function} return.done
-	 * @return {Reference} return.done.savedReference
-	 * @return {Function} return.fail
-	 * @return {wikibase.api.RepoApiError} return.fail.error
+	 * @return {jQuery.Promise}
+	 *         Resolved parameters:
+	 *         - {wikibase.datamodel.Reference} The saved reference
+	 *         Rejected parameters:
+	 *         - {wikibase.api.RepoApiError}
+	 *
+	 * @throws {Error} when no `ReferencesChanger` was supplied via options and it is tried to save
+	 *         an invalid or empty `Reference`.
 	 */
 	_saveReferenceApiCall: function() {
 		var self = this,
-			guid = this.options.statementGuid;
+			guid = this.options.statementGuid,
+			reference = this.value();
 
-		return this.options.referencesChanger.setReference( guid, this.value() )
+		if( this.options.referencesChanger ) {
+			return this.options.referencesChanger.setReference( guid, reference )
 			.done( function( savedReference ) {
-			self._updateReferenceHashClass( savedReference );
-		} );
+				self._updateReferenceHashClass( savedReference );
+			} );
+		} else {
+			if( !reference ) {
+				throw new Error( 'Trying to save an invalid or empty Reference' );
+			}
+
+			return $.Deferred().resolve( reference ).promise();
+		}
 	},
 
 	/**
