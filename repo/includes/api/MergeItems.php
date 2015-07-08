@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use Exception;
 use InvalidArgumentException;
 use LogicException;
 use UsageException;
@@ -142,12 +143,13 @@ class MergeItems extends ApiBase {
 	/**
 	 * @param ItemId $fromId
 	 * @param ItemId $toId
-	 * @param array $ignoreConflicts
+	 * @param string[] $ignoreConflicts
 	 * @param string $summary
 	 * @param bool $bot
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary, $bot ) {
-		list( $newRevisionFrom, $newRevisionTo, $redirected ) = $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $bot );
+		list( $newRevisionFrom, $newRevisionTo, $redirected )
+			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $bot );
 
 		$this->resultBuilder->setValue( null, 'success', 1 );
 		$this->resultBuilder->setValue( null, 'redirected', (int) $redirected );
@@ -161,7 +163,7 @@ class MergeItems extends ApiBase {
 	 *
 	 * @throws UsageException always
 	 */
-	private function handleException( \Exception $ex ) {
+	private function handleException( Exception $ex ) {
 		$cause = $ex->getPrevious();
 
 		if ( $cause ) {
@@ -213,12 +215,12 @@ class MergeItems extends ApiBase {
 				self::PARAM_TYPE => 'string',
 			),
 			'bot' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false,
+				self::PARAM_TYPE => 'boolean',
+				self::PARAM_DFLT => false,
 			),
 			'token' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
+				self::PARAM_TYPE => 'string',
+				self::PARAM_REQUIRED => true,
 			)
 		);
 	}
@@ -247,4 +249,5 @@ class MergeItems extends ApiBase {
 	public function isWriteMode() {
 		return true;
 	}
+
 }

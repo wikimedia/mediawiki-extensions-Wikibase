@@ -173,7 +173,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	/**
 	 * @param ItemId $fromId
 	 * @param ItemId $toId
-	 * @param array $ignoreConflicts
+	 * @param string[] $ignoreConflicts
 	 * @param string $summary
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
@@ -181,7 +181,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 		/** @var EntityRevision $newRevisionFrom  */
 		/** @var EntityRevision $newRevisionTo */
-		list( $newRevisionFrom, $newRevisionTo, $redirected ) = $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+		list( $newRevisionFrom, $newRevisionTo, $redirected )
+			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
 
 		//XXX: might be nicer to pass pre-rendered links as parameters
 		$this->getOutput()->addWikiMsg(

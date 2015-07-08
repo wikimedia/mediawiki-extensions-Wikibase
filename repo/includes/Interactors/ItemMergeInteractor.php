@@ -17,7 +17,6 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
-use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 
 /**
  * @since 0.5
@@ -112,7 +111,7 @@ class ItemMergeInteractor {
 	 * Check the given permissions for the given $entityId.
 	 *
 	 * @param EntityId $entityId
-	 * @param $permission
+	 * @param string $permission
 	 *
 	 * @throws ItemMergeException if the permission check fails
 	 */
@@ -131,7 +130,7 @@ class ItemMergeInteractor {
 	 *
 	 * @param ItemId $fromId
 	 * @param ItemId $toId
-	 * @param array $ignoreConflicts The kinds of conflicts to ignore
+	 * @param string[] $ignoreConflicts The kinds of conflicts to ignore
 	 * @param string|null $summary
 	 * @param bool $bot Mark the edit as bot edit
 	 *
@@ -179,27 +178,29 @@ class ItemMergeInteractor {
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 * @return bool isEmpty
+	 * @param ItemId $itemId
+	 *
+	 * @return bool
 	 */
-	private function isEmpty( EntityId $entityId ) {
-		return $this->loadEntity( $entityId )->isEmpty();
+	private function isEmpty( ItemId $itemId ) {
+		return $this->loadEntity( $itemId )->isEmpty();
 	}
 
 	/**
 	 * Either throws an exception or returns a EntityDocument object.
 	 *
-	 * @param EntityId $entityId
+	 * @param ItemId $itemId
+	 *
 	 * @return EntityDocument
 	 * @throws ItemMergeException
 	 */
-	private function loadEntity( EntityId $entityId ) {
+	private function loadEntity( ItemId $itemId ) {
 		try {
-			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$revision = $this->entityRevisionLookup->getEntityRevision( $itemId, EntityRevisionLookup::LATEST_FROM_MASTER );
 
 			if ( !$revision ) {
 				throw new ItemMergeException(
-					"Entity $entityId not found",
+					"Entity $itemId not found",
 					'no-such-entity'
 				);
 			}
@@ -213,6 +214,7 @@ class ItemMergeInteractor {
 	/**
 	 * @param EntityDocument $fromEntity
 	 * @param EntityDocument $toEntity
+	 *
 	 * @throws ItemMergeException
 	 */
 	private function validateEntities( EntityDocument $fromEntity, EntityDocument $toEntity ) {
@@ -229,6 +231,7 @@ class ItemMergeInteractor {
 	 * @param string $direction either 'from' or 'to'
 	 * @param ItemId $getId
 	 * @param string|null $customSummary
+	 *
 	 * @return Summary
 	 */
 	private function getSummary( $direction, $getId, $customSummary = null ) {
