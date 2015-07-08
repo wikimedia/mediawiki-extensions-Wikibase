@@ -40,17 +40,7 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.util.getDirectionality' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.util.getDirectionality.js',
-			),
-		),
-
 	);
-
-	if ( defined( 'ULS_VERSION' ) ) {
-		$modules['jquery.util.getDirectionality']['dependencies'][] = 'ext.uls.mediawiki';
-	}
 
 	return $modules;
 } );

@@ -45,17 +45,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.Site' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.Site.js',
-			),
-			'dependencies' => array(
-				'mediawiki.util',
-				'util.inherit',
-				'wikibase',
-			),
-		),
-
 		'wikibase.sites' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.sites.js',
@@ -74,10 +63,6 @@ return call_user_func( function() {
 		include __DIR__ . '/deprecated/resources.php',
 		include __DIR__ . '/jquery.wikibase/resources.php'
 	);
-
-	if ( defined( 'ULS_VERSION' ) ) {
-		$modules['wikibase.Site']['dependencies'][] = 'ext.uls.mediawiki';
-	}
 
 	return $modules;
 } );

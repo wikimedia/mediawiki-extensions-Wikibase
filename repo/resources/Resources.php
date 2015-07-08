@@ -149,16 +149,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.special.entitiesWithout' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.special/wikibase.special.entitiesWithout.js'
-			),
-			'dependencies' => array(
-				'wikibase.special',
-				'jquery.ui.suggester'
-			)
-		),
-
 		'wikibase.special.itemByTitle' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.special/wikibase.special.itemByTitle.js'
@@ -170,34 +160,7 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.special.itemDisambiguation' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.special/wikibase.special.itemDisambiguation.js'
-			),
-			'dependencies' => array(
-				'wikibase.special',
-				'jquery.ui.suggester'
-			)
-		),
-
-		'wikibase.WikibaseContentLanguages' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.WikibaseContentLanguages.js',
-			),
-			'dependencies' => array(
-				'util.ContentLanguages',
-				'util.inherit',
-				'wikibase',
-			),
-		),
-
 	);
-
-	if ( defined( 'ULS_VERSION' ) ) {
-		$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'ext.uls.mediawiki';
-		$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'ext.uls.mediawiki';
-		$modules['wikibase.WikibaseContentLanguages']['dependencies'][] = 'ext.uls.languagenames';
-	}
 
 	return array_merge(
 		$modules,
