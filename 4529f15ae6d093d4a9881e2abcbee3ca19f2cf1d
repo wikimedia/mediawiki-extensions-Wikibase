@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_4b3e4fd9",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-08T14:52:28Z",
+      "side": 1,
+      "message": "Copy paste accident?",
+      "revId": "4529f15ae6d093d4a9881e2abcbee3ca19f2cf1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
