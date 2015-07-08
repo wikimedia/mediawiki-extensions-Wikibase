@@ -73,7 +73,7 @@ class PropertyContentTest extends EntityContentTest {
 
 	public function testIsStub_emptyProperty() {
 		$content = PropertyContent::newFromProperty( Property::newFromType( 'foo' ) );
-		$this->assertFalse( $content->isStub() );
+		$this->assertTrue( $content->isStub() );
 	}
 
 	public function testIsStub_nonStubProperty() {

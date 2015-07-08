@@ -451,7 +451,7 @@ class ItemContentTest extends EntityContentTest {
 
 	public function testIsStub_emptyItem() {
 		$content = ItemContent::newFromItem( new Item() );
-		$this->assertFalse( $content->isStub() );
+		$this->assertTrue( $content->isStub() );
 	}
 
 	public function testIsStub_nonStubItem() {
