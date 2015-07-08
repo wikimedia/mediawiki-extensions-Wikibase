@@ -37,15 +37,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.getLanguageNameByCode' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.getLanguageNameByCode.js'
-			),
-			'dependencies' => array(
-				'wikibase'
-			)
-		),
-
 		'wikibase.RevisionStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RevisionStore.js',
@@ -71,10 +62,6 @@ return call_user_func( function() {
 		),
 
 	);
-
-	if ( defined( 'ULS_VERSION' ) ) {
-		$modules['wikibase.getLanguageNameByCode']['dependencies'][] = 'ext.uls.mediawiki';
-	}
 
 	return $modules;
 } );

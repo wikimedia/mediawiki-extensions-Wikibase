@@ -77,6 +77,7 @@ call_user_func( function() {
 	// Hooks
 	$wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';
 	$wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTests';
+	$wgHooks['ResourceLoaderRegisterModules'][]			= 'Wikibase\LibHooks::onResourceLoaderRegisterModules';
 
 	/**
 	 * Called when generating the extensions credits, use this to change the tables headers.
