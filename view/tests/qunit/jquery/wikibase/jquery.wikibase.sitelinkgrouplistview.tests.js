@@ -11,8 +11,8 @@
  */
 function createSitelinkgrouplistview( options ) {
 	options = $.extend( {
-		siteLinksChanger: 'i am a SiteLinksChanger',
-		entityStore: 'i am an EntityStore'
+		siteLinksChanger: 'I am a SiteLinksChanger',
+		entityStore: 'I am an EntityStore'
 	}, options );
 
 	return $( '<div/>' )

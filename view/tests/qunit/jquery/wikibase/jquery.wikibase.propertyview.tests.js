@@ -34,7 +34,7 @@ var createPropertyview = function( options, $node ) {
 	$propertyview.data( 'propertyview' )._save = function() {
 		return $.Deferred().resolve( {
 			entity: {
-				lastrevid: 'i am a revision id'
+				lastrevid: 'I am a revision id'
 			}
 		} ).promise();
 	};

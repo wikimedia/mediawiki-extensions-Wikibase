@@ -12,9 +12,9 @@
  */
 var createEntitytermsforlanguageview = function( options, $node ) {
 	options = $.extend( {
-		entityId: 'i am an EntityId',
+		entityId: 'I am an EntityId',
 		entityChangersFactory: {
-			getAliasesChanger: function() { return 'i am an AliasesChanger'; },
+			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
 			getDescriptionsChanger: function() {
 				return {
 					setDescription: function() { return $.Deferred().resolve(); }
@@ -49,7 +49,7 @@ var createEntitytermsforlanguageview = function( options, $node ) {
 		= function() {
 			return $.Deferred().resolve( {
 				entity: {
-					lastrevid: 'i am a revision id'
+					lastrevid: 'I am a revision id'
 				}
 			} ).promise();
 		};

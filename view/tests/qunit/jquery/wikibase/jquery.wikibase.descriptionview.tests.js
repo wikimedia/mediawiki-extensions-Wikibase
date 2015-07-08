@@ -27,7 +27,7 @@ var createDescriptionview = function( options, $node ) {
 	$descriptionview.data( 'descriptionview' )._save = function() {
 		return $.Deferred().resolve( {
 			entity: {
-				lastrevid: 'i am a revision id'
+				lastrevid: 'I am a revision id'
 			}
 		} ).promise();
 	};

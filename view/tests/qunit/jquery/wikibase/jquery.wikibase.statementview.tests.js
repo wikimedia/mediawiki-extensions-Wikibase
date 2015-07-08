@@ -43,7 +43,7 @@ var entityStore = {
 var createStatementview = function( options, $node ) {
 	options = $.extend( {
 		entityStore: entityStore,
-		valueViewBuilder: 'i am a valueview builder',
+		valueViewBuilder: 'I am a valueview builder',
 		claimsChanger: 'I am a ClaimsChanger',
 		referencesChanger: 'I am a ReferencesChanger',
 		dataTypeStore: 'I am a DataTypeStore',
