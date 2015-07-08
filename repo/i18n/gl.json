@@ -197,7 +197,7 @@
 	"wikibase-mergeitems-fromid": "O identificador desde o que fusionar",
 	"wikibase-mergeitems-toid": "O identificador co que fusionar",
 	"wikibase-mergeitems-submit": "Fusionar os elementos",
-	"wikibase-mergeitems-success": "A fusión de $1 con $3 foi correcta.",
+	"wikibase-mergeitems-success": "A fusión de $1 con $3 foi correcta e redirixida.",
 	"wikibase-itemmerge-missing-parameter": "Entrada incompleta.",
 	"wikibase-itemmerge-not-item": "A entidade especificada non é un elemento.",
 	"wikibase-itemmerge-failed-save": "Erro ó gardar o elemento.",

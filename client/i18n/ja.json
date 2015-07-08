@@ -5,7 +5,8 @@
 			"Shirayuki",
 			"Penn Station",
 			"Otokoume",
-			"Sujiniku"
+			"Sujiniku",
+			"2nd-player"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 拡張機能のクライアント",
@@ -51,7 +52,7 @@
 	"wikibase-replicationnote": "変更内容をすべてのウィキに反映させるのに時間がかかる場合があることにご注意ください。",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}の編集をウォッチリストに表示",
 	"wikibase-error-serialize-error": "データをシリアライズできませんでした。",
-	"wikibase-error-invalid-entity-id": "入力した ID はシステムに登録されていません。有効なエンティティ ID を使用してください。",
+	"wikibase-error-invalid-entity-id": "入力した ID はシステムに登録されていません。有効な実体IDを使用してください。",
 	"unconnectedpages": "項目に接続されていないページ",
 	"unconnectedpages-summary": "このページでは、関連項目のないページが一覧表示されます。(一覧は、関連項目をサポートしている名前空間に限定されています。)この一覧は降順ページIDでソートされており、新しいページほど先頭に来ます。",
 	"wikibase-unconnectedpages-page": "検索結果の先頭にするページ:",

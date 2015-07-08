@@ -6,7 +6,7 @@
 			"Dağlı95"
 		]
 	},
-	"wikibase-after-page-move-queued": "Bu səhifə ilə əlaqəli olan [$1 {{WBREPONAME}} qeydi] tezliklə avtomatik dəyişdiriləcək.",
+	"wikibase-after-page-move-queued": "Bu səhifə ilə əlaqəli olan [$1 {{WBREPONAME}} qeydi] tezliklə avtomatik dəyişdiriləcək. Nəzərə alın ki, bu, dərhal baş verməyə bilər.",
 	"wikibase-comment-update": "{{WBREPONAME}} elementi dəyişdirildi",
 	"wikibase-dataitem": "{{WBREPONAME}} elementi",
 	"wikibase-editlinks": "Keçidlərin redaktəsi",
