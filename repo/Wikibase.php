@@ -229,6 +229,7 @@ call_user_func( function() {
 	$wgHooks['BaseTemplateToolbox'][]               = 'Wikibase\RepoHooks::onBaseTemplateToolbox';
 	$wgHooks['SkinTemplateBuildNavUrlsNav_urlsAfterPermalink'][] = 'Wikibase\RepoHooks::onSkinTemplateBuildNavUrlsNav_urlsAfterPermalink';
 	$wgHooks['SkinMinervaDefaultModules'][]			= 'Wikibase\RepoHooks::onSkinMinervaDefaultModules';
+	$wgHooks['ResourceLoaderRegisterModules'][]			= 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';

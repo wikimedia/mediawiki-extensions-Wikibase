@@ -8,6 +8,7 @@ use BaseTemplate;
 use Content;
 use ContentHandler;
 use DatabaseUpdater;
+use ExtensionRegistry;
 use HistoryPager;
 use Html;
 use Linker;
@@ -1133,4 +1134,80 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Register ResourceLoader modules with dynamic dependencies.
+	 *
+	 * @param ResourceLoader $resourceLoader
+	 */
+	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
+		preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
+			. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
+		$hasULS = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
+
+		$moduleTemplate = array(
+			'localBasePath' => __DIR__ . '/resources',
+			'remoteExtPath' => '..' . $remoteExtPath[0],
+			'position' => 'top' // reducing the time between DOM construction and JS initialisation
+		);
+
+		$dependencies = array(
+			'util.ContentLanguages',
+			'util.inherit',
+			'wikibase',
+		);
+
+		if ( $hasULS ) {
+			$dependencies[] = 'ext.uls.languagenames';
+		}
+
+		$resourceLoader->register(
+			'wikibase.WikibaseContentLanguages',
+			$moduleTemplate + array(
+				'scripts' => array(
+					'wikibase.WikibaseContentLanguages.js',
+				),
+				'dependencies' => $dependencies
+			)
+		);
+
+		$dependencies = array(
+			'wikibase.special',
+			'jquery.ui.suggester'
+		);
+
+		if ( $hasULS ) {
+			$dependencies[] = 'ext.uls.mediawiki';
+		}
+
+		$resourceLoader->register(
+			'wikibase.special.itemDisambiguation',
+			$moduleTemplate + array(
+				'scripts' => array(
+					'wikibase.special/wikibase.special.itemDisambiguation.js'
+				),
+				'dependencies' => $dependencies
+			)
+		);
+
+		$dependencies = array(
+			'wikibase.special',
+			'jquery.ui.suggester'
+		);
+
+		if ( $hasULS ) {
+			$dependencies[] = 'ext.uls.mediawiki';
+		}
+
+		$resourceLoader->register(
+			'wikibase.special.entitiesWithout',
+			$moduleTemplate + array(
+				'scripts' => array(
+					'wikibase.special/wikibase.special.entitiesWithout.js'
+				),
+				'dependencies' => $dependencies
+			)
+		);
+
+		return true;
+	}
 }

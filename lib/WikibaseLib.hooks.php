@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 
+use ExtensionRegistry;
+use ResourceLoader;
+
 /**
  * File defining the hook handlers for the WikibaseLib extension.
  *
@@ -49,4 +52,42 @@ final class LibHooks {
 		return true;
 	}
 
+	/**
+	 * Register ResourceLoader modules with dynamic dependencies.
+	 *
+	 * @param ResourceLoader $resourceLoader
+	 */
+	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
+		preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
+			. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
+		$hasULS = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
+
+		$moduleTemplate = array(
+			'localBasePath' => __DIR__ . '/resources',
+			'remoteExtPath' => '..' . $remoteExtPath[0],
+			'position' => 'top' // reducing the time between DOM construction and JS initialisation
+		);
+
+		$dependencies = array(
+			'mediawiki.util',
+			'util.inherit',
+			'wikibase',
+		);
+
+		if ( $hasULS ) {
+			$dependencies[] = 'ext.uls.mediawiki';
+		}
+
+		$resourceLoader->register(
+			'wikibase.Site',
+			$moduleTemplate + array(
+				'scripts' => array(
+					'wikibase.Site.js',
+				),
+				'dependencies' => $dependencies,
+			)
+		);
+
+		return true;
+	}
 }
