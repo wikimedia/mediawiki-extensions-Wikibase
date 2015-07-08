@@ -29,8 +29,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'qunit.parameterize/qunit.parameterize.js',
 			),
-			'dependencies' => array(
-			),
 		),
 
 		'util.inherit' => $moduleTemplate + array(

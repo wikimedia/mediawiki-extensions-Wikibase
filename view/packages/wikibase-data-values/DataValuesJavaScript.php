@@ -11,7 +11,7 @@ define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.7.0' );
 
 // Include the composer autoloader if it is present.
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
-	include_once( __DIR__ . '/vendor/autoload.php' );
+	include_once __DIR__ . '/vendor/autoload.php';
 }
 
 $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
@@ -31,8 +31,8 @@ $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 // Resource Loader module registration
 $GLOBALS['wgResourceModules'] = array_merge(
 	isset( $GLOBALS['wgResourceModules'] ) ? $GLOBALS['wgResourceModules'] : array(),
-	include( __DIR__ . '/lib/resources.php' ),
-	include( __DIR__ . '/src/resources.php' )
+	include __DIR__ . '/lib/resources.php',
+	include __DIR__ . '/src/resources.php'
 );
 
 /**
