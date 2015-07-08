@@ -245,13 +245,11 @@ class ItemContent extends EntityContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
-		if ( $this->isRedirect() ) {
-			return array();
-		}
-
 		$properties = parent::getEntityPageProperties();
-		$properties['wb-claims'] = $this->getItem()->getStatements()->count();
-		$properties['wb-sitelinks'] = $this->getItem()->getSiteLinkList()->count();
+
+		$item = $this->getItem();
+		$properties['wb-claims'] = $item->getStatements()->count();
+		$properties['wb-sitelinks'] = $item->getSiteLinkList()->count();
 
 		return $properties;
 	}

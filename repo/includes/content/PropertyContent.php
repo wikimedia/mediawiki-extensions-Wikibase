@@ -100,11 +100,8 @@ class PropertyContent extends EntityContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
-		if ( $this->isRedirect() ) {
-			return array();
-		}
-
 		$properties = parent::getEntityPageProperties();
+
 		$properties['wb-claims'] = $this->getProperty()->getStatements()->count();
 
 		return $properties;
