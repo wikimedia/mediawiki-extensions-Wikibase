@@ -294,7 +294,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Statement} [statement]
 	 */
-	_createReferences: function( statement ) {
+	_createReferencesListview: function( statement ) {
 		if( !statement ) {
 			return;
 		}
@@ -472,7 +472,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			);
 		}
 
-		this._createReferences( this.options.value );
+		this._createReferencesListview( this.options.value );
 
 		return $.Deferred().resolve().promise();
 	},
