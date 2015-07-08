@@ -64,6 +64,29 @@
 		}
 	} ) );
 
+	QUnit.test( 'rejects invalid options', function( assert ) {
+		assert.throws(
+			function() {
+				createReferenceview( { statementGuid: null } );
+			},
+			'Throws error when initialized with no GUID.'
+		);
+
+		assert.throws(
+			function() {
+				createReferenceview( { entityStore: null } );
+			},
+			'Throws error when initialized with no EntityStore.'
+		);
+
+		assert.throws(
+			function() {
+				createReferenceview( { valueViewBuilder: null } );
+			},
+			'Throws error when initialized with no ValueViewBuilder.'
+		);
+	} );
+
 	QUnit.test( 'Initialize and destroy', function( assert ) {
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
@@ -189,6 +212,28 @@
 			true,
 			'Referenceview has initial value.'
 		);
+	} );
+
+	QUnit.test( 'can be used with no ReferencesChanger', function( assert ) {
+		var $node = createReferenceview( {
+				referencesChanger: null,
+				value: new wb.datamodel.Reference( new wb.datamodel.SnakList() )
+			} ),
+			referenceview = $node.data( 'referenceview' );
+
+		referenceview.startEditing();
+		referenceview.value( new wb.datamodel.Reference( new wb.datamodel.SnakList( [
+			new wb.datamodel.PropertyNoValueSnak( 'P2' )
+		] ) ) );
+
+		$node.on( 'referenceviewafterstopediting', function( event, error ) {
+			assert.ok(
+				true,
+				'Triggered "afterstopediting" event.'
+			);
+		} );
+
+		referenceview.stopEditing();
 	} );
 
 } )( jQuery, mediaWiki, wikibase, jQuery.valueview, valueFormatters, QUnit );
