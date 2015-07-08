@@ -635,11 +635,14 @@ abstract class EntityContent extends AbstractContent {
 	 * @return bool
 	 */
 	public function isCountable( $hasLinks = null ) {
-		if ( $this->isRedirect() ) {
-			return false;
-		}
+		return !$this->isRedirect() && !$this->getEntity()->isEmpty();
+	}
 
-		return !$this->getEntity()->isEmpty();
+	/**
+	 * @return bool True if this is not a redirect and the page is empty.
+	 */
+	public function isEmpty() {
+		return !$this->isRedirect() && parent::isEmpty();
 	}
 
 	/**
