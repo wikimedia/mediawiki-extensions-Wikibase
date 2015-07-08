@@ -608,8 +608,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @private
 	 */
 	_drawReferencesCounter: function() {
-		var numberOfValues = this._referencesListview.nonEmptyItems().length,
+		var numberOfValues = 0,
+			numberOfPendingValues = 0;
+
+		if( this._referencesListview ) {
+			numberOfValues = this._referencesListview.nonEmptyItems().length;
 			numberOfPendingValues = this._referencesListview.items().length - numberOfValues;
+		}
 
 		// build a nice counter, displaying fixed and pending values:
 		var $counterMsg = wb.utilities.ui.buildPendingCounter(
