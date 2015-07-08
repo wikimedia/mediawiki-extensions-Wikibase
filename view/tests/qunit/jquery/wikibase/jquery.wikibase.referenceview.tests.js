@@ -32,18 +32,17 @@
 	/**
 	 * Generates a referenceview widget suitable for testing.
 	 *
-	 * @param {string} [statementGuid]
-	 * @param {Object} [additionalOptions]
+	 * @param {Object} [options]
 	 * @return {jQuery}
 	 */
-	function createReferenceview( statementGuid, additionalOptions ) {
-		var options = $.extend( additionalOptions, {
-			statementGuid: statementGuid,
+	function createReferenceview( options ) {
+		options = $.extend( {
+			statementGuid: 'testGuid',
 			entityStore: entityStore,
 			valueViewBuilder: valueViewBuilder,
 			referencesChanger: 'I am a ReferencesChanger',
 			dataTypeStore: 'I am a DataTypeStore'
-		} );
+		}, options );
 
 		return $( '<div/>' )
 			.addClass( 'test_referenceview' )
@@ -66,7 +65,7 @@
 	} ) );
 
 	QUnit.test( 'Initialize and destroy', function( assert ) {
-		var $node = createReferenceview( 'testGuid' ),
+		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
 		assert.ok(
@@ -112,7 +111,7 @@
 	} );
 
 	QUnit.test( 'is initialized with a value', function( assert ) {
-		var $node = createReferenceview( 'testGuid', {
+		var $node = createReferenceview( {
 				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
 					new wb.datamodel.PropertyNoValueSnak( 'P1' )
 				] ) )
@@ -127,7 +126,7 @@
 	} );
 
 	QUnit.test( 'allows to enter new item', function( assert ) {
-		var $node = createReferenceview( 'testGuid' ),
+		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
 		referenceview.enterNewItem();
@@ -152,7 +151,7 @@
 	} );
 
 	QUnit.test( 'allows to stop editing', function( assert ) {
-		var $node = createReferenceview( 'testGuid' ),
+		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
 		referenceview.enterNewItem();
@@ -178,7 +177,7 @@
 	} );
 
 	QUnit.test( 'recognizes initial value', function( assert ) {
-		var $node = createReferenceview( 'testGuid', {
+		var $node = createReferenceview( {
 				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
 					new wb.datamodel.PropertyNoValueSnak( 'P1' )
 				] ) )
