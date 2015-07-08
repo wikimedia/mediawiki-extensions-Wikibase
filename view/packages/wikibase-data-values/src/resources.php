@@ -71,8 +71,8 @@ return call_user_func( function() {
 
 	$modules = array_merge(
 		$modules,
-		include( __DIR__ . '/valueFormatters/resources.php' ),
-		include( __DIR__ . '/valueParsers/resources.php' )
+		include __DIR__ . '/valueFormatters/resources.php',
+		include __DIR__ . '/valueParsers/resources.php'
 	);
 
 	return $modules;
