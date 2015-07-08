@@ -632,14 +632,17 @@ abstract class EntityContent extends AbstractContent {
 	 * @param bool $hasLinks: if it is known whether this content contains links, provide this
 	 *        information here, to avoid redundant parsing to find out.
 	 *
-	 * @return bool
+	 * @return bool True if this is not a redirect and the page is not empty.
 	 */
 	public function isCountable( $hasLinks = null ) {
-		if ( $this->isRedirect() ) {
-			return false;
-		}
+		return !$this->isRedirect() && !parent::isEmpty();
+	}
 
-		return !$this->getEntity()->isEmpty();
+	/**
+	 * @return bool True if this is not a redirect and the page is empty.
+	 */
+	public function isEmpty() {
+		return !$this->isRedirect() && parent::isEmpty();
 	}
 
 	/**
