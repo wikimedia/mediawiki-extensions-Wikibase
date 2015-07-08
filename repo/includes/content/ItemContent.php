@@ -208,29 +208,32 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see AbstractContent::isEmpty
+	 * @see EntityContent::isCountable
 	 *
-	 * @return bool
+	 * @param bool $hasLinks
+	 *
+	 * @return bool True if this is not a redirect and the item is not empty.
+	 */
+	public function isCountable( $hasLinks = null ) {
+		return !$this->isRedirect() && !$this->getItem()->isEmpty();
+	}
+
+	/**
+	 * @see EntityContent::isEmpty
+	 *
+	 * @return bool True if this is not a redirect and the item is empty.
 	 */
 	public function isEmpty() {
-		if ( $this->isRedirect() ) {
-			return false;
-		}
-
-		return $this->getItem()->isEmpty();
+		return !$this->isRedirect() && $this->getItem()->isEmpty();
 	}
 
 	/**
 	 * @see EntityContent::isStub
 	 *
-	 * @return bool
+	 * @return bool True if the item is not empty, but does not contain statements.
 	 */
 	public function isStub() {
-		if ( $this->isEmpty() ) {
-			return false;
-		}
-
-		return $this->getItem()->getStatements()->isEmpty();
+		return !$this->isEmpty() && $this->getItem()->getStatements()->isEmpty();
 	}
 
 	/**

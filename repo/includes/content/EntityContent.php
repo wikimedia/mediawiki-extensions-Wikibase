@@ -626,20 +626,10 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Returns true if this content is countable as a "real" wiki page, provided
-	 * that it's also in a countable location (e.g. a current revision in the main namespace).
-	 *
-	 * @param bool $hasLinks: if it is known whether this content contains links, provide this
-	 *        information here, to avoid redundant parsing to find out.
-	 *
-	 * @return bool
+	 * @return bool True if this is not a redirect and the page is empty.
 	 */
-	public function isCountable( $hasLinks = null ) {
-		if ( $this->isRedirect() ) {
-			return false;
-		}
-
-		return !$this->getEntity()->isEmpty();
+	public function isEmpty() {
+		return !$this->isRedirect() && parent::isEmpty();
 	}
 
 	/**
