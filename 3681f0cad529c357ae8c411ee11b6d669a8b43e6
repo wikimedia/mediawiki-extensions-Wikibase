@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_76e53206",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-08T15:44:36Z",
+      "side": 1,
+      "message": "This means an item that\u0027s completely empty will *not* be a stub. This is not relevant for the current usages of this method (because isEmpty is checked before isStub) but I think this is confusing and error-prone and I would like to fix this. See my follow-up.",
+      "revId": "3681f0cad529c357ae8c411ee11b6d669a8b43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f6f042c6",
+        "filename": "repo/tests/phpunit/includes/content/PropertyContentTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-08T15:44:36Z",
+      "side": 1,
+      "message": "Is this code indented with spaces?",
+      "revId": "3681f0cad529c357ae8c411ee11b6d669a8b43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

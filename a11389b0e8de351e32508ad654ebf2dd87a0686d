@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_9659be06",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-08T15:44:36Z",
+      "side": 0,
+      "message": "Why not keep at least the redirect check? See my follow-up.",
+      "revId": "a11389b0e8de351e32508ad654ebf2dd87a0686d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
