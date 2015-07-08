@@ -42,7 +42,7 @@ class ItemContent extends EntityContent {
 	private $redirect;
 
 	/**
-	 * @var Title|null
+	 * @var Title|null Title of the redirect target.
 	 */
 	private $redirectTitle;
 
@@ -55,7 +55,7 @@ class ItemContent extends EntityContent {
 	 *
 	 * @param EntityHolder|null $itemHolder
 	 * @param EntityRedirect|null $entityRedirect
-	 * @param Title|null $redirectTitle
+	 * @param Title|null $redirectTitle Title of the redirect target.
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -112,7 +112,7 @@ class ItemContent extends EntityContent {
 	 * @since 0.5
 	 *
 	 * @param EntityRedirect $redirect
-	 * @param Title $redirectTitle
+	 * @param Title $redirectTitle Title of the redirect target.
 	 *
 	 * @return ItemContent
 	 */
@@ -123,7 +123,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see Content::getRedirectTarget
 	 *
-	 * @return null|Title
+	 * @return Title|null
 	 */
 	public function getRedirectTarget() {
 		return $this->redirectTitle;
@@ -233,7 +233,9 @@ class ItemContent extends EntityContent {
 	 * @return bool True if the item is not empty, but does not contain statements.
 	 */
 	public function isStub() {
-		return !$this->isEmpty() && $this->getItem()->getStatements()->isEmpty();
+		return !$this->isRedirect()
+			&& !$this->getItem()->isEmpty()
+			&& $this->getItem()->getStatements()->isEmpty();
 	}
 
 	/**
@@ -245,13 +247,13 @@ class ItemContent extends EntityContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
-		if ( $this->isRedirect() ) {
-			return array();
-		}
-
 		$properties = parent::getEntityPageProperties();
-		$properties['wb-claims'] = $this->getItem()->getStatements()->count();
-		$properties['wb-sitelinks'] = $this->getItem()->getSiteLinkList()->count();
+
+		if ( !$this->isRedirect() ) {
+			$item = $this->getItem();
+			$properties['wb-claims'] = $item->getStatements()->count();
+			$properties['wb-sitelinks'] = $item->getSiteLinkList()->count();
+		}
 
 		return $properties;
 	}
@@ -271,12 +273,15 @@ class ItemContent extends EntityContent {
 	 */
 	public function getEntityStatus() {
 		$status = parent::getEntityStatus();
-		$hasSiteLinks = !$this->getItem()->getSiteLinkList()->isEmpty();
 
-		if ( $status === self::STATUS_EMPTY && $hasSiteLinks ) {
-			$status = self::STATUS_LINKSTUB;
-		} elseif ( $status === self::STATUS_STUB && $hasSiteLinks ) {
-			$status = self::STATUS_LINKSTUB;
+		if ( !$this->isRedirect() ) {
+			$hasSiteLinks = !$this->getItem()->getSiteLinkList()->isEmpty();
+
+			if ( $status === self::STATUS_EMPTY && $hasSiteLinks ) {
+				$status = self::STATUS_LINKSTUB;
+			} elseif ( $status === self::STATUS_STUB && $hasSiteLinks ) {
+				$status = self::STATUS_LINKSTUB;
+			}
 		}
 
 		return $status;
