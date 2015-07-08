@@ -315,7 +315,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 				newItemOptionsFn: function( value ) {
 					return {
 						value: value || null,
-						statementGuid: self.options.value.getClaim().getGuid(),
+						statementGuid: self.options.value
+							? self.options.value.getClaim().getGuid()
+							: null,
 						dataTypeStore: self.options.dataTypeStore,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder,
@@ -469,6 +471,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 					: new wb.datamodel.SnakList()
 			);
 		}
+
 		this._createReferences( this.options.value );
 
 		return $.Deferred().resolve().promise();
