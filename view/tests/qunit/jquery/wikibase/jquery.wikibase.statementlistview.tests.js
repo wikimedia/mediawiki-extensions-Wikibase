@@ -24,7 +24,7 @@ var createStatementlistview = function( options, $node ) {
 				return 'I am a ClaimsChanger';
 			},
 			getReferencesChanger: function() {
-				return null;
+				return 'I am a ReferencesChanger';
 			}
 		},
 		dataTypeStore: 'I am a DataTypeStore',
