@@ -35,17 +35,11 @@ use Wikibase\Lib\Serializers\LibSerializerFactory;
  */
 class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
-	protected function getDefaultResult( $indexedMode = false ) {
-		$result = new ApiResult( false );
-
-		if ( $indexedMode ) {
-			$result->setRawMode();
-		}
-
-		return $result;
+	protected function getDefaultResult() {
+		return new ApiResult( false );
 	}
 
-	protected function getResultBuilder( $result, $options = null ) {
+	protected function getResultBuilder( $result, $options = null, $indexedMode = false ) {
 		$mockTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -82,7 +76,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$result,
 			$mockEntityTitleLookup,
 			$libSerializerFactory,
-			$serializerFactory
+			$serializerFactory,
+			$indexedMode
 		);
 
 		if ( is_array( $options ) ) {
@@ -388,8 +383,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$props = array( 'sitelinks' );
 		$siteIds = array( 'enwiki' );
 
-		$result = $this->getDefaultResult( $indexedMode );
-		$resultBuilder = $this->getResultBuilder( $result );
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result, null, $indexedMode );
 		$resultBuilder->addEntityRevision( null, $entityRevision, $options, $props, $siteIds );
 
 		$expected = array( 'entities' => array(
@@ -913,8 +908,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideSetList
 	 */
 	public function testSetList( $path, $name, array $values, $tag, $indexed, $expected ) {
-		$result = $this->getDefaultResult( $indexed );
-		$builder = $this->getResultBuilder( $result );
+		$result = $this->getDefaultResult();
+		$builder = $this->getResultBuilder( $result, null, $indexed );
 
 		$builder->setList( $path, $name, $values, $tag );
 		$data = $result->getResultData( null, array(
@@ -980,8 +975,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideSetValue
 	 */
 	public function testSetValue( $path, $name, $value, $indexed, $expected ) {
-		$result = $this->getDefaultResult( $indexed );
-		$builder = $this->getResultBuilder( $result );
+		$result = $this->getDefaultResult();
+		$builder = $this->getResultBuilder( $result, null, $indexed );
 
 		$builder->setValue( $path, $name, $value );
 		$data = $result->getResultData( null, array(
@@ -1063,8 +1058,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideAppendValue
 	 */
 	public function testAppendValue( $path, $key, $value, $tag, $indexed, $expected ) {
-		$result = $this->getDefaultResult( $indexed );
-		$builder = $this->getResultBuilder( $result );
+		$result = $this->getDefaultResult();
+		$builder = $this->getResultBuilder( $result, null, $indexed );
 
 		$builder->appendValue( $path, $key, $value, $tag );
 		$data = $result->getResultData( null, array(
