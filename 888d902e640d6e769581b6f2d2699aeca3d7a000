@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_75e0be25",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.SnakTypeSelector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-09T16:44:33Z",
+      "side": 1,
+      "message": "This must be adapted as well.\n\nThis also looks like it never worked. There is a space missing between the two event names!",
+      "revId": "888d902e640d6e769581b6f2d2699aeca3d7a000",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
