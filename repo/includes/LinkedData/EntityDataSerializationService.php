@@ -435,7 +435,8 @@ class EntityDataSerializationService {
 			$res,
 			$this->entityTitleLookup,
 			$this->libSerializerFactory,
-			$this->serializerFactory
+			$this->serializerFactory,
+			false // Never index tags for this service as we dont output XML
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision, $options );
 
