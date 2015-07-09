@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_95320aee",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/statementview.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-09T16:37:50Z",
+      "side": 1,
+      "message": "I find this selector suspicious. This selects the first A element? How does it know it clicks the right button?",
+      "revId": "e3635245b894102bcd7d702709a3b9e89368abab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
