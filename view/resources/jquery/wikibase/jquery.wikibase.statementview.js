@@ -132,12 +132,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_qualifiers: null,
 
 	/**
-	 * @property {wikibase.entityChangers.ReferencesChanger}
-	 * @private
-	 */
-	_referencesChanger: null,
-
-	/**
 	 * @inheritdoc
 	 * @protected
 	 *
@@ -156,8 +150,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 
 		PARENT.prototype._create.call( this );
-
-		this._referencesChanger = this.options.referencesChanger;
 
 		this.draw();
 	},
@@ -327,7 +319,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 						dataTypeStore: self.options.dataTypeStore,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder,
-						referencesChanger: self._referencesChanger
+						referencesChanger: self.options.referencesChanger
 					};
 				}
 			} ),
@@ -585,7 +577,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		referenceview.disable();
 
-		this._referencesChanger.removeReference(
+		this.options.referencesChanger.removeReference(
 			this.value().getClaim().getGuid(),
 			referenceview.value()
 		)
