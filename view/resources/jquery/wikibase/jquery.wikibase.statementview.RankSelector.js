@@ -120,7 +120,7 @@
 				};
 
 				$( document ).on( 'mouseup.' + self.widgetName, degrade  );
-				$( window ).on( 'resize.' + self.widgetName, degrade );
+				$( window ).on( 'resize.' + self.widgetName, function( event ) { self.repositionMenu(); } );
 			} );
 
 			this._setRank( this.options.value );
