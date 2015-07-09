@@ -83,4 +83,13 @@ class SnakSerializerTest extends SerializerBaseTest {
 		);
 	}
 
+	public function testSnakSerializationWithoutHash() {
+		$serializer = new SnakSerializer( new DataValueSerializer(), false );
+
+		$snak = new PropertyValueSnak( 42, new StringValue( 'hax' ) );
+		$serialization = $serializer->serialize( $snak );
+
+		$this->assertArrayNotHasKey( 'hash', $serialization );
+	}
+
 }

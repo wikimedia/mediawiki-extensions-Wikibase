@@ -29,11 +29,13 @@ use Wikibase\DataModel\Serializers\TypedSnakSerializer;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Adam Shorland
  */
 class SerializerFactory {
 
 	const OPTION_DEFAULT = 0;
 	const OPTION_OBJECTS_FOR_MAPS = 1;
+	const OPTION_SERIALIZE_SNAKS_WITHOUT_HASH = 2;
 
 	/**
 	 * @var int
@@ -65,6 +67,13 @@ class SerializerFactory {
 	 */
 	private function shouldUseObjectsForMaps() {
 		return (bool)( $this->options & self::OPTION_OBJECTS_FOR_MAPS );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function shouldSerializeSnaksWithHash() {
+		return !(bool)( $this->options & self::OPTION_OBJECTS_FOR_MAPS );
 	}
 
 	/**
@@ -192,7 +201,10 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newSnakSerializer() {
-		return new SnakSerializer( $this->dataValueSerializer );
+		return new SnakSerializer(
+			$this->dataValueSerializer,
+			$this->shouldSerializeSnaksWithHash()
+		);
 	}
 
 	/**
