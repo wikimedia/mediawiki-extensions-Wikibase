@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_52391bca",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-09T07:27:30Z",
+      "side": 1,
+      "message": "The question is more general and nothing to *fix* in the first place.\n\nI\u0027m not completely sure but I think an empty item should not be considered a stub as \"stub\" implies that there is still some content.\n\nFrom https://en.wikipedia.org/wiki/Wikipedia:Stub:\n\n```\nA stub is an article containing only one or a few sentences of text that, although providing some useful information, is too short to provide encyclopedic coverage of a subject, and that is capable of expansion.\n```",
+      "parentUuid": "8ec42329_76e53206",
+      "revId": "3681f0cad529c357ae8c411ee11b6d669a8b43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_f6f042c6",
         "filename": "repo/tests/phpunit/includes/content/PropertyContentTest.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-08T15:44:36Z",
       "side": 1,
       "message": "Is this code indented with spaces?",
+      "revId": "3681f0cad529c357ae8c411ee11b6d669a8b43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_122cf38e",
+        "filename": "repo/tests/phpunit/includes/content/PropertyContentTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-09T07:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_f6f042c6",
       "revId": "3681f0cad529c357ae8c411ee11b6d669a8b43e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

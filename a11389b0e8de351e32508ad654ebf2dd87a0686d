@@ -16,6 +16,24 @@
       "revId": "a11389b0e8de351e32508ad654ebf2dd87a0686d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b26f1fc3",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-09T07:27:30Z",
+      "side": 0,
+      "message": "Providing a default implementation of isEmpty and isStub might be a source of errors because other implementations of this abstract class might forget to override the isEmpty method (which they have to, otherwise all those entities would be considered empty). Therefore I don\u0027t think it is a good idea to provide a default here in EntityContent.",
+      "parentUuid": "8ec42329_9659be06",
+      "revId": "a11389b0e8de351e32508ad654ebf2dd87a0686d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
