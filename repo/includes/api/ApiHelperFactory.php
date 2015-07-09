@@ -92,7 +92,9 @@ class ApiHelperFactory {
 			$api->getResult(),
 			$this->titleLookup,
 			$this->newLibSerializerFactory( $defaultOptions ),
-			$this->newSerializerFactory()
+			$this->newSerializerFactory(),
+			//TODO this should always be true of the API due to changes in core
+			$api->getResult()->getIsRawMode()
 		);
 	}
 
