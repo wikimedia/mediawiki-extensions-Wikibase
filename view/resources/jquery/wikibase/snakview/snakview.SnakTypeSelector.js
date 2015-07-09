@@ -95,7 +95,7 @@
 					self._unbindGlobalListenersFn = $.noop;
 				};
 				$( document ).on( 'mouseup.' + widgetName, degrade  );
-				$( window ).on( 'resize.' + widgetName, degrade );
+				$( window ).on( 'resize.' + widgetName, function( event ) { self.repositionMenu(); }  );
 			} );
 
 			this._$icon = $( '<span/>' )
