@@ -34,6 +34,24 @@
       "revId": "a11389b0e8de351e32508ad654ebf2dd87a0686d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d20f48e3",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-09T15:32:32Z",
+      "side": 0,
+      "message": "That\u0027s a good argument. I agree for isStub and changed my follow-up accordingly. But since isEmpty already has a default implementation in the super classes and we can not remove this default, we should provide a sensible default here. See my follow-up.",
+      "parentUuid": "8ec42329_b26f1fc3",
+      "revId": "a11389b0e8de351e32508ad654ebf2dd87a0686d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
