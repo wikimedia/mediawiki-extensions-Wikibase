@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e1414c0f",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-09T21:10:55Z",
+      "side": 1,
+      "message": "This should actually also use EntityContent::isEmpty and not rely on the isEmpty method on Entity. I will do this in another patch.\n\nFor the change done by you here, I\u0027m not sure if the code is actually better readable now. Personally, I prefer the old solution with the if condition but I may get convinced that your proposal is actually better.",
+      "revId": "f838db97eaa18684e5444308c8083080efc5b297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_81464825",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-09T21:10:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this comment really adds much value.",
+      "revId": "f838db97eaa18684e5444308c8083080efc5b297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_614d5c3f",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-09T21:10:55Z",
+      "side": 1,
+      "message": "See EntityContent",
+      "revId": "f838db97eaa18684e5444308c8083080efc5b297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_015a58f9",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-09T21:10:55Z",
+      "side": 1,
+      "message": "See EntityContent, I think the old version is more readable",
+      "revId": "f838db97eaa18684e5444308c8083080efc5b297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
