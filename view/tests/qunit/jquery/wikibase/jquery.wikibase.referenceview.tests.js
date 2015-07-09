@@ -41,7 +41,7 @@
 			statementGuid: statementGuid,
 			entityStore: entityStore,
 			valueViewBuilder: valueViewBuilder,
-			referencesChanger: 'i am a ReferencesChanger',
+			referencesChanger: 'I am a ReferencesChanger',
 			dataTypeStore: 'I am a DataTypeStore'
 		} );
 

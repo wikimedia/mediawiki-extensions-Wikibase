@@ -11,11 +11,11 @@
  */
 var createEntitytermsforlanguagelistview = function( options ) {
 	options = $.extend( {
-		entityId: 'i am an EntityId',
+		entityId: 'I am an EntityId',
 		entityChangersFactory: {
-			getAliasesChanger: function() { return 'i am an AliasesChanger'; },
-			getDescriptionsChanger: function() { return 'i am a DescriptionsChanger'; },
-			getLabelsChanger: function() { return 'i am a LabelsChanger'; }
+			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
+			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
+			getLabelsChanger: function() { return 'I am a LabelsChanger'; }
 		},
 		value: [
 			{

@@ -12,8 +12,8 @@
  */
 var createLabelview = function( options, $node ) {
 	options = $.extend( {
-		entityId: 'i am an EntityId',
-		labelsChanger: 'i am a LabelsChanger',
+		entityId: 'I am an EntityId',
+		labelsChanger: 'I am a LabelsChanger',
 		value: new wb.datamodel.Term( 'en', 'test label' )
 	}, options || {} );
 
@@ -26,7 +26,7 @@ var createLabelview = function( options, $node ) {
 	$labelview.data( 'labelview' )._save = function() {
 		return $.Deferred().resolve( {
 			entity: {
-				lastrevid: 'i am a revision id'
+				lastrevid: 'I am a revision id'
 			}
 		} ).promise();
 	};
