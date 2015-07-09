@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\Property;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class PropertyContent extends EntityContent {
 
@@ -127,6 +128,32 @@ class PropertyContent extends EntityContent {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @see AbstractContent::isEmpty
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		if ( $this->isRedirect() ) {
+			return false;
+		}
+
+		return $this->getProperty()->isEmpty();
+	}
+
+	/**
+	 * @see EntityContent::isStub
+	 *
+	 * @return bool
+	 */
+	public function isStub() {
+		if ( $this->isEmpty() ) {
+			return false;
+		}
+
+		return $this->getProperty()->getStatements()->isEmpty();
 	}
 
 }
