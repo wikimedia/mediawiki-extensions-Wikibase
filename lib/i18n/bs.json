@@ -4,11 +4,12 @@
 			"Edinwiki",
 			"CERminator",
 			"KWiki",
-			"Palapa"
+			"Palapa",
+			"Semso98"
 		]
 	},
 	"wikibase-lib-desc": "Sadrži zajedničku funkcionalnost za Wikibazu i proširenje za Wikibaza klijent.",
-	"specialpages-group-wikibase": "Wikibase skladište",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-error-save-generic": "Greška je se desila tokom sačuvanja vaše izmjene. Zbog ovoga se vaše izmjene nisu mogle izvršiti.",
 	"wikibase-error-remove-generic": "Greška je se desila tokom brisanja. Zbog ovoga se vaše izmjene nisu mogle izvršiti.",
 	"wikibase-error-save-connection": "Desila je se greška sa konekcijom tokom sačuvanja. Zbog ovoga se vaše izmjene nisu mogle izvršiti. Provjerite vašu konekciju.",

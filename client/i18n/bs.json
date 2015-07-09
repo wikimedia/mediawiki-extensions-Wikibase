@@ -55,7 +55,7 @@
 	"wikibase-unconnectedpages-page-warning": "Nije moguće koristiti ovaj naslov stranice u pretrazi i zato će biti ignorisano.",
 	"wikibase-unconnectedpages-iwdata-label": "Samo stranice sa međuwiki vezama.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|međuwiki veza|međuwiki veze|međuwiki veza}} na stranici)",
-	"wikibase-pageinfo-entity-id": "ID stavke Wikipodataka",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} stavka ID",
 	"wikibase-pageinfo-entity-id-none": "Ništa",
 	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2",
 	"wikibase-otherprojects": "Drugi projekti",

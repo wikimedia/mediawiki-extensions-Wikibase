@@ -5,7 +5,8 @@
 			"Edinwiki",
 			"Palapa",
 			"Macofe",
-			"KWiki"
+			"KWiki",
+			"Semso98"
 		]
 	},
 	"wikibase-desc": "Strukturirano skladište podataka",
@@ -16,7 +17,7 @@
 	"wikibase-save": "sačuvaj",
 	"wikibase-cancel": "odustani",
 	"wikibase-add": "dodaj",
-	"wikibase-addreference": "dodaj izvor",
+	"wikibase-addreference": "dodaj referencu",
 	"wikibase-save-inprogress": "Sprema se...",
 	"wikibase-remove-inprogress": "Brisanje...",
 	"wikibase-label-empty": "Oznaka nije navedena",
@@ -33,6 +34,7 @@
 	"wikibase-description-input-help-message": "Unesite kratak opis ove stavke u $1.",
 	"wikibase-statements": "Iskazi",
 	"wikibase-terms": "Na drugim jezicima",
+	"wikibase-sitelinks": "Spisak stranica koje su povezane uz ovu stavku",
 	"wikibase-sitelinks-empty": "Trenutno još nema sajt-stranica za ovu stavku.",
 	"wikibase-sitelinks-input-help-message": "Unesite vezu prema stranici koja pripada ovaj stavki.",
 	"wikibase-sitelinks-special": "Druge stranice",
