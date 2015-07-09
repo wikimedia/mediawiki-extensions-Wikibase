@@ -143,7 +143,7 @@ class ResultBuilder {
 		$this->checkNameIsString( $name );
 		$this->checkTagIsString( $tag );
 
-		if ( $this->result->getIsRawMode() ) {
+		if ( $this->getOptions()->shouldIndexTags() ) {
 			// Unset first, so we don't make the tag name an actual value.
 			// We'll be setting this to $tag by calling setIndexedTagName().
 			unset( $values['_element'] );
@@ -209,7 +209,7 @@ class ResultBuilder {
 
 		$this->checkValueIsNotList( $value );
 
-		if ( $this->result->getIsRawMode() ) {
+		if ( $this->getOptions()->shouldIndexTags() ) {
 			$key = null;
 		}
 
