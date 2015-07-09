@@ -86,16 +86,18 @@
 					}
 					self._unbindGlobalListenersFn();
 				};
+				var repositionMenu = function( event ) { self.repositionMenu(); };
+				
 				// also make this available for destroy() function!
 				self._unbindGlobalListenersFn = function() {
 					// unbind event after closing menu, explicitly unbind specific handler to
 					// support instantiation of multiple snaktypeselector widgets.
-					$( document ).add( $( window ) )
-					.off( 'mouseup.' + widgetName + 'resize.' + widgetName, degrade );
+					$( document ).off( 'mouseup.' + widgetName, degrade  );
+					$( window ).off( 'resize.' + widgetName, repositionMenu);
 					self._unbindGlobalListenersFn = $.noop;
 				};
 				$( document ).on( 'mouseup.' + widgetName, degrade  );
-				$( window ).on( 'resize.' + widgetName, degrade );
+				$( window ).on( 'resize.' + widgetName, repositionMenu);
 			} );
 
 			this._$icon = $( '<span/>' )
