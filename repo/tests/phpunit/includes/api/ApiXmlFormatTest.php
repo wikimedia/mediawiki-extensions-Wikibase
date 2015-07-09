@@ -295,12 +295,18 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
 
+		/**
+		 * This has to be set before the Wikibase Api module is instansiated due to the ApiHelperFactory
+		 * using $api->getResult()->getIsRawMode().
+		 */
+		$main->getResult()->setRawMode( true );
+
 		return new $moduleClass( $main, $moduleName );
 	}
 
 	private function doApiRequest( ApiBase $module ) {
 		$printer = $module->getMain()->createPrinterByName( 'xml' );
-		$module->getResult()->setRawMode( $printer->getNeedsRawData() );
+
 		$module->execute();
 
 		$printer->initPrinter();
