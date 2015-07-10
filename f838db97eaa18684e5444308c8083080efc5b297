@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_27de8415",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-10T06:46:06Z",
+      "side": 1,
+      "message": "I fixed isCountable as well in PS5.\n\nI find code like \"if ( condition is [not] met ) set isCountable to {true|false}\" confusing. If true then false, if false then true, if true then true, ...? Much more straightforward: When is an entity countable: when it\u0027s not a redirect and not empty.",
+      "parentUuid": "8ec42329_e1414c0f",
+      "revId": "f838db97eaa18684e5444308c8083080efc5b297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_81464825",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-09T21:10:55Z",
       "side": 1,
       "message": "I\u0027m not sure if this comment really adds much value.",
+      "revId": "f838db97eaa18684e5444308c8083080efc5b297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2705247d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-10T06:46:06Z",
+      "side": 1,
+      "message": "It describes the behavior of the method. I do not see how *not* having this is *more* valuable.",
+      "parentUuid": "8ec42329_81464825",
       "revId": "f838db97eaa18684e5444308c8083080efc5b297",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
