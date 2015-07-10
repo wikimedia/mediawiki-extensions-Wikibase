@@ -16,6 +16,24 @@
       "revId": "ac5c05b81cebc3cac5bc98a137716b837b767f47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_7932f4f0",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-10T08:56:31Z",
+      "side": 1,
+      "message": "Indeed :)",
+      "parentUuid": "8ec42329_590e1839",
+      "revId": "ac5c05b81cebc3cac5bc98a137716b837b767f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
