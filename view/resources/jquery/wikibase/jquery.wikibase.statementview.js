@@ -424,6 +424,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this.$mainSnak.off( '.' + this.widgetName );
 
 		this._destroyQualifiersListView();
+		this._destroyReferencesListview();
 
 		PARENT.prototype.destroy.call( this );
 	},
@@ -438,6 +439,19 @@ $.widget( 'wikibase.statementview', PARENT, {
 				.off( '.' + this.widgetName )
 				.empty();
 			this._qualifiers = null;
+		}
+	},
+
+	/**
+	 * @private
+	 */
+	_destroyReferencesListview: function() {
+		if( this._referencesListview ) {
+			this._referencesListview.destroy();
+			this.$references
+				.off( '.' + this.widgetName )
+				.empty();
+			this._referencesListview = null;
 		}
 	},
 
