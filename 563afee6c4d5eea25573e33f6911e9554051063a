@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_9c5d4e81",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-10T13:26:08Z",
+      "side": 1,
+      "message": "This would create a \u003cdiv\u003e inside of a \u003cspan\u003e. I suggest to either make this \u003cspan\u003e a \u003cdiv\u003e or to apply the class name to the \u003cdiv class\u003d\"wikibase-sitelinklistview\"\u003e below.",
+      "revId": "563afee6c4d5eea25573e33f6911e9554051063a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
