@@ -1,4 +1,4 @@
-( function( vv ) {
+( function( vv, UnitSelector ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -13,20 +13,48 @@
 	vv.experts.QuantityInput = vv.expert( 'QuantityInput', PARENT, function() {
 		PARENT.apply( this, arguments );
 
+		var self = this;
+
+		this._unitSelector = new UnitSelector(
+			function() {
+				var value = self.viewState().value();
+				return value && value.getUnit();
+			},
+			function() {
+				self._viewNotifier.notify( 'change' );
+			}
+		);
+
 		var inputExtender = new vv.ExpertExtender(
 			this.$input,
-			[]
+			[
+				this._unitSelector
+			]
 		);
 
 		this.addExtension( inputExtender );
 	}, {
 		/**
+		 * @property {jQuery.valueview.ExpertExtender.UnitSelector}
+		 * @private
+		 */
+		_unitSelector: null,
+
+		/**
 		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
-			return {
-				unit: null
-			};
+			var options = {};
+
+			if( this._unitSelector ) {
+				var unit = this._unitSelector.getValue();
+
+				if( unit ) {
+					options.unit = unit;
+				}
+			}
+
+			return options;
 		},
 
 		/**
@@ -34,8 +62,9 @@
 		 */
 		destroy: function() {
 			PARENT.prototype.destroy.call( this );
-			// TODO: Unset private properties.
+
+			this._unitSelector = null;
 		}
 	} );
 
-}( jQuery.valueview ) );
+}( jQuery.valueview, jQuery.valueview.ExpertExtender.UnitSelector ) );

@@ -95,6 +95,7 @@ return call_user_func( function() {
 				'dependencies' => array(
 					'jquery.valueview.Expert',
 					'jquery.valueview.ExpertExtender',
+					'jquery.valueview.ExpertExtender.UnitSelector',
 					'jquery.valueview.experts',
 					'jquery.valueview.experts.StringValue',
 				),
