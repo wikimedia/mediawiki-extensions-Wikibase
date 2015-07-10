@@ -27,6 +27,8 @@ $GLOBALS['wgHooks']['UnitTestsList'][] = function( array &$paths ) {
  * Register ResourceLoader modules with dynamic dependencies.
  *
  * @param ResourceLoader $resourceLoader
+ *
+ * @return bool
  */
 $GLOBALS['wgHooks']['ResourceLoaderRegisterModules'][] = function( ResourceLoader $resourceLoader ) {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
