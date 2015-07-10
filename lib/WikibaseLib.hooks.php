@@ -62,7 +62,6 @@ final class LibHooks {
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 			. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
-		$hasULS = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 
 		$moduleTemplate = array(
 			'localBasePath' => __DIR__,
@@ -70,25 +69,25 @@ final class LibHooks {
 			'position' => 'top' // reducing the time between DOM construction and JS initialisation
 		);
 
-		$dependencies = array(
-			'mediawiki.util',
-			'util.inherit',
-			'wikibase',
-		);
-
-		if ( $hasULS ) {
-			$dependencies[] = 'ext.uls.mediawiki';
-		}
-
-		$resourceLoader->register(
-			'wikibase.Site',
-			$moduleTemplate + array(
+		$modules = array(
+			'wikibase.Site' => $moduleTemplate + array(
 				'scripts' => array(
 					'resources/wikibase.Site.js',
 				),
-				'dependencies' => $dependencies,
-			)
+				'dependencies' => array(
+					'mediawiki.util',
+					'util.inherit',
+					'wikibase',
+				),
+			),
 		);
+
+		$isUlsLoaded = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
+		if ( $isUlsLoaded ) {
+			$modules['wikibase.Site']['dependencies'][] = 'ext.uls.mediawiki';
+		}
+
+		$resourceLoader->register( $modules );
 
 		return true;
 	}
