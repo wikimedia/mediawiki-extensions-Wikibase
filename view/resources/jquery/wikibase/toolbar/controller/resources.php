@@ -33,6 +33,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
+				'jquery.wikibase.listview',
 				'jquery.wikibase.statementlistview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.templates',
@@ -56,6 +57,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
+				'jquery.wikibase.listview',
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.toolbarcontroller',
 			),
@@ -70,6 +72,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
+				'jquery.wikibase.listview',
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.toolbarcontroller',
 			),
@@ -129,6 +132,7 @@ return call_user_func( function() {
 				'definitions/removetoolbar/referenceview-snakview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.removetoolbar',
 				'jquery.wikibase.toolbarcontroller',
@@ -151,6 +155,7 @@ return call_user_func( function() {
 				'definitions/removetoolbar/statementview-snakview.js',
 			),
 			'dependencies' => array(
+				'jquery.wikibase.listview',
 				'jquery.wikibase.removetoolbar',
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.toolbarcontroller',
