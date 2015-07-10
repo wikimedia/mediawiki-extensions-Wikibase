@@ -583,15 +583,15 @@ abstract class EntityContent extends AbstractContent {
 
 		$redirAfterPatch = $this->getPatchedRedirect( $patch->getRedirectDiff() );
 
-		if ( $redirAfterPatch !== null && !$entityAfterPatch->isEmpty() ) {
-			throw new PatcherException( 'EntityContent must not contain Entity data as well as'
-				. ' a redirect after applying the patch!' );
-		} elseif ( $redirAfterPatch ) {
+		if ( $redirAfterPatch ) {
 			$patched = $handler->makeEntityRedirectContent( $redirAfterPatch );
 
 			if ( !$patched ) {
 				throw new PatcherException( 'Cannot create a redirect using content model '
 					. $this->getModel() . '!' );
+			} elseif ( !$patched->isEmpty() ) {
+				throw new PatcherException( 'EntityContent must not contain Entity data as well as '
+					. 'a redirect after applying the patch!' );
 			}
 		} else {
 			$patched = $handler->makeEntityContent( new EntityInstanceHolder( $entityAfterPatch ) );
