@@ -494,6 +494,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {boolean}
 	 */
 	isInitialValue: function() {
+		var i;
+
 		if( this.options.value ) {
 			if( !this._rankSelector.isInitialValue() ) {
 				return false;
@@ -504,11 +506,25 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 			// Generate a SnakList object featuring all current qualifier snaks to be able to
 			// compare it to the SnakList object the claimview has been initialized with:
-			for( var i = 0; i < snaklistviews.length; i++ ) {
+			for( i = 0; i < snaklistviews.length; i++ ) {
 				qualifiers.merge( snaklistviews[i].value() );
 			}
 
 			if( !qualifiers.equals( this.options.value.getClaim().getQualifiers() ) ) {
+				return false;
+			}
+
+			var referenceviews = this._referencesListview ? this._referencesListview.value() : [],
+				references = new wb.datamodel.ReferenceList();
+
+			for( i = 0; i < referenceviews.length; i++ ) {
+				var reference = referenceviews[i].value();
+				if( reference ) {
+					references.addItem( reference );
+				}
+			}
+
+			if( !references.equals( this.options.value.getReferences() ) ) {
 				return false;
 			}
 		}
