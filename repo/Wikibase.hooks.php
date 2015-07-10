@@ -1142,6 +1142,8 @@ final class RepoHooks {
 	 * Register ResourceLoader modules with dynamic dependencies.
 	 *
 	 * @param ResourceLoader $resourceLoader
+	 *
+	 * @return bool
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
@@ -1214,4 +1216,5 @@ final class RepoHooks {
 
 		return true;
 	}
+
 }
