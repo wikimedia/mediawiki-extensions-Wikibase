@@ -385,8 +385,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @inheritdoc
 	 */
 	getHelpMessage: function() {
-		var deferred = $.Deferred();
-		var helpMessage = this.options.helpMessage;
+		var deferred = $.Deferred(),
+			helpMessage = this.options.helpMessage;
 
 		if( !this.options.value && !this.options.predefined.mainSnak ) {
 			deferred.resolve( helpMessage );
@@ -485,7 +485,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 				return false;
 			}
 
-			var snaklistviews = ( this._qualifiers ) ? this._qualifiers.value() : [],
+			var snaklistviews = this._qualifiers ? this._qualifiers.value() : [],
 				qualifiers = new wb.datamodel.SnakList();
 
 			// Generate a SnakList object featuring all current qualifier snaks to be able to
@@ -636,12 +636,16 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		this.$mainSnak.one( 'snakviewafterstartediting', function() {
 			PARENT.prototype.startEditing.call( self ).done( function() {
+				var snaklistviews,
+					i;
+
 				self._rankSelector.startEditing();
 
 				if( self._qualifiers ) {
-					var snaklistviews = self._qualifiers.value();
+					snaklistviews = self._qualifiers.value();
+
 					if( snaklistviews.length ) {
-						for( var i = 0; i < snaklistviews.length; i++ ) {
+						for( i = 0; i < snaklistviews.length; i++ ) {
 							snaklistviews[i].startEditing();
 						}
 					}
@@ -722,13 +726,11 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @throws {Error} if unable to instantiate a `Statement` from the current view state.
 	 */
 	_save: function() {
-		var self = this;
-
-		var guid = this.options.value
-			? this.options.value.getClaim().getGuid()
-			: this.options.guidGenerator.newGuid();
-
-		var statement = this._instantiateStatement( guid );
+		var self = this,
+			guid = this.options.value
+				? this.options.value.getClaim().getGuid()
+				: this.options.guidGenerator.newGuid(),
+			statement = this._instantiateStatement( guid );
 
 		if( !statement ) {
 			throw new Error( 'Unable to instantiate Statement' );
@@ -754,15 +756,18 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
+		var snaklistviews,
+			i;
+
 		if( this.$mainSnak.data( 'snakview' ) && !this.$mainSnak.data( 'snakview' ).isValid() ) {
 			return false;
 		}
 
 		if( this._qualifiers ) {
-			var snaklistviews = this._qualifiers.value();
+			snaklistviews = this._qualifiers.value();
 
 			if( snaklistviews.length ) {
-				for( var i = 0; i < snaklistviews.length; i++ ) {
+				for( i = 0; i < snaklistviews.length; i++ ) {
 					if( !snaklistviews[i].isValid() ) {
 						return false;
 					}
