@@ -34,6 +34,7 @@ $GLOBALS['wgHooks']['ResourceLoaderRegisterModules'][] = function( ResourceLoade
 	$hasULS = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 
 	$moduleTemplate = array(
+		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
 		'position' => 'top' // reducing the time between DOM construction and JS initialisation
 	);
@@ -46,9 +47,8 @@ $GLOBALS['wgHooks']['ResourceLoaderRegisterModules'][] = function( ResourceLoade
 	$resourceLoader->register(
 		'jquery.util.getDirectionality',
 		$moduleTemplate + array(
-			'localBasePath' => __DIR__ . '/resources/jquery',
 			'scripts' => array(
-				'jquery.util.getDirectionality.js',
+				'resources/jquery/jquery.util.getDirectionality.js',
 			),
 			'dependencies' => $dependencies
 		)
@@ -62,9 +62,8 @@ $GLOBALS['wgHooks']['ResourceLoaderRegisterModules'][] = function( ResourceLoade
 	$resourceLoader->register(
 		'wikibase.getLanguageNameByCode',
 		$moduleTemplate + array(
-			'localBasePath' => __DIR__ . '/resources/wikibase',
 			'scripts' => array(
-				'wikibase.getLanguageNameByCode.js'
+				'resources/wikibase/wikibase.getLanguageNameByCode.js'
 			),
 			'dependencies' => $dependencies
 		)
