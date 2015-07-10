@@ -350,6 +350,7 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.sitelinkgroupview.css',
 			),
 			'dependencies' => array(
+				'jquery.makeCollapsible',
 				'jquery.sticknode',
 				'jquery.ui.TemplatedWidget',
 				'jquery.util.EventSingletonManager',
