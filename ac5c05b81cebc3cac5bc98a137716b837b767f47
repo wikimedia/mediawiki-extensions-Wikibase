@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_590e1839",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-07-10T08:55:14Z",
+      "side": 1,
+      "message": "This is  a monster array",
+      "revId": "ac5c05b81cebc3cac5bc98a137716b837b767f47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
