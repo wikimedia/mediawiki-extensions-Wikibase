@@ -150,7 +150,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		};
 
 		$( document ).on( 'mouseup.' + this.widgetName, degrade );
-		$( window ).on( 'resize.' + this.widgetName, degrade );
+		$( window ).on( 'resize.' + this.widgetName, function( event ) { self.repositionMenu(); } );
 
 		$menu.on( 'click.' + this.widgetName, function( event ) {
 			var $li = $( event.target ).closest( 'li' ),
