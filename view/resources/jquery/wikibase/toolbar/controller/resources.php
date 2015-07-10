@@ -150,6 +150,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.statementview-referenceview' => $moduleTemplate + array(
+			'scripts' => array(
+				'definitions/removetoolbar/statementview-referenceview.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.listview',
+				'jquery.wikibase.referenceview',
+				'jquery.wikibase.removetoolbar',
+				'jquery.wikibase.statementview',
+				'jquery.wikibase.toolbarcontroller',
+			),
+		),
+
 		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.statementview-snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/removetoolbar/statementview-snakview.js',
