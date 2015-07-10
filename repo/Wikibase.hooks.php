@@ -1148,7 +1148,6 @@ final class RepoHooks {
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 			. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
-		$hasULS = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 
 		$moduleTemplate = array(
 			'localBasePath' => __DIR__,
@@ -1156,63 +1155,45 @@ final class RepoHooks {
 			'position' => 'top' // reducing the time between DOM construction and JS initialisation
 		);
 
-		$dependencies = array(
-			'util.ContentLanguages',
-			'util.inherit',
-			'wikibase',
-		);
-
-		if ( $hasULS ) {
-			$dependencies[] = 'ext.uls.languagenames';
-		}
-
-		$resourceLoader->register(
-			'wikibase.WikibaseContentLanguages',
-			$moduleTemplate + array(
+		$modules = array(
+			'wikibase.WikibaseContentLanguages' => $moduleTemplate + array(
 				'scripts' => array(
 					'resources/wikibase.WikibaseContentLanguages.js',
 				),
-				'dependencies' => $dependencies
-			)
+				'dependencies' => array(
+					'util.ContentLanguages',
+					'util.inherit',
+					'wikibase',
+				),
+			),
+			'wikibase.special.itemDisambiguation' => $moduleTemplate + array(
+				'scripts' => array(
+					'resources/wikibase.special/wikibase.special.itemDisambiguation.js',
+				),
+				'dependencies' => array(
+					'wikibase.special',
+					'jquery.ui.suggester',
+				),
+			),
+			'wikibase.special.entitiesWithout' => $moduleTemplate + array(
+				'scripts' => array(
+					'resources/wikibase.special/wikibase.special.entitiesWithout.js',
+				),
+				'dependencies' => array(
+					'wikibase.special',
+					'jquery.ui.suggester',
+				),
+			),
 		);
 
-		$dependencies = array(
-			'wikibase.special',
-			'jquery.ui.suggester'
-		);
-
-		if ( $hasULS ) {
-			$dependencies[] = 'ext.uls.mediawiki';
+		$isUlsLoaded = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
+		if ( $isUlsLoaded ) {
+			$modules['wikibase.WikibaseContentLanguages']['dependencies'][] = 'ext.uls.languagenames';
+			$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'ext.uls.mediawiki';
+			$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'ext.uls.mediawiki';
 		}
 
-		$resourceLoader->register(
-			'wikibase.special.itemDisambiguation',
-			$moduleTemplate + array(
-				'scripts' => array(
-					'resources/wikibase.special/wikibase.special.itemDisambiguation.js'
-				),
-				'dependencies' => $dependencies
-			)
-		);
-
-		$dependencies = array(
-			'wikibase.special',
-			'jquery.ui.suggester'
-		);
-
-		if ( $hasULS ) {
-			$dependencies[] = 'ext.uls.mediawiki';
-		}
-
-		$resourceLoader->register(
-			'wikibase.special.entitiesWithout',
-			$moduleTemplate + array(
-				'scripts' => array(
-					'resources/wikibase.special/wikibase.special.entitiesWithout.js'
-				),
-				'dependencies' => $dependencies
-			)
-		);
+		$resourceLoader->register( $modules );
 
 		return true;
 	}
