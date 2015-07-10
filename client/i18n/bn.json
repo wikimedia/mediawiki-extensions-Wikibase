@@ -9,11 +9,10 @@
 		]
 	},
 	"wikibase-client-desc": "উইকিবেজ এক্সটেনশনের জন্য গ্রাহক",
-	"specialpages-group-wikibaseclient": "{{WBREPONAME}} গ্রাহক",
 	"tooltip-t-wikibase": "আইটেম উপাত্ত ভান্ডারে সংযুক্ত করা লিঙ্ক",
 	"wikibase-after-page-move": "এছাড়া আপনি স্থানান্তর করা পাতাতে ভাষার লিংক বজায় রাখার জন্য সংশ্লিষ্ট {{WBREPONAME}} আইটেমটি [$1 হালনাগাদ] করতে পারেন।",
-	"wikibase-after-page-move-queued": "এই পাতার সাথে যুক্ত [$1 {{WBREPONAME}} আইটেম] স্বয়ংক্রিয়ভাবে শীঘ্রই হালনাগাদ করা হবে।",
-	"wikibase-after-page-delete-queued": "এই পাতার সাথে যুক্ত [$1 {{WBREPONAME}} আইটেম] স্বয়ংক্রিয়ভাবে শীঘ্রই হালনাগাদ করা হবে।",
+	"wikibase-after-page-move-queued": "এই পাতার সাথে যুক্ত [$1 {{WBREPONAME}} আইটেম] স্বয়ংক্রিয়ভাবে হালনাগাদ করা হবে। দয়া করে লক্ষ্য করুন যে এটি তাত্ক্ষণিকভাবে নাও হতে পারে।",
+	"wikibase-after-page-delete-queued": "এই পাতার সাথে যুক্ত [$1 {{WBREPONAME}} আইটেম] স্বয়ংক্রিয়ভাবে হালনাগাদ করা হবে। দয়া করে লক্ষ্য করুন যে এটি তাত্ক্ষণিকভাবে নাও হতে পারে।",
 	"wikibase-comment-add": "একটি {{WBREPONAME}} আইটেম তৈরি করা হয়েছে।",
 	"wikibase-comment-remove": "সংশ্লিষ্ট {{WBREPONAME}} আইটেম অপসারিত হয়েছে। ভাষার সংযোগ সরানো হয়েছে।",
 	"wikibase-comment-linked": "একটি {{WBREPONAME}} আইটেম এই পাতার সাথে সংযুক্ত হয়েছে।",
@@ -27,6 +26,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} আইটেম",
 	"wikibase-editlinks": "আন্তঃউইকি সংযোগ সম্পাদনা",
 	"wikibase-editlinkstitle": "আন্তঃভাষার লিংকগুলি সম্পাদনা করুন",
+	"wikibase-addlinkstitle": "আন্তঃভাষার সংযোগ দিন",
 	"wikibase-linkitem-addlinks": "আন্তঃউইকি সংযোগ দিন",
 	"wikibase-linkitem-alreadylinked": "আপনি পাতাটি কেন্দ্রীয় তথ্য ভান্ডারের [$1 আইটেমের] সাথে সংযুক্ত করতে চাইছেন তা ইতোমধ্যে এই সাইটের $2 এর সাথে সংযুক্ত রয়েছে। একটি আইটেম কোন সাইটে কেবল একটি মাত্র পাতার সাথে সংযুক্ত হতে পারে। অনুগ্রহ করে সংযোগ করতে অন্য একটি পাতা পছন্দ করুন।",
 	"wikibase-linkitem-close": "ডায়ালগ বন্ধ এবং পাতা পুনরায় লোড করো",
@@ -51,8 +51,7 @@
 	"wikibase-replicationnote": "দয়া করে লক্ষ্য করুন যে এই পরিবর্তনগুলি সকল উইকিতে দৃশ্যমান হতে কয়েক মিনিট পর্যন্ত সময় লাগতে পারে।",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}ের সম্পাদনাগুলো নজরতালিকায় দেখাও",
 	"wikibase-error-invalid-entity-id": "প্রবেশ করানো আইডিটি সিস্টেমের অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।",
-	"special-unconnectedpages": "পাতাটি আইটেমের সাথে সংযুক্ত হয়নি",
-	"wikibase-unconnectedpages-legend": "অসংযুক্ত পাতা অপশন",
+	"unconnectedpages": "পাতাসমূহ আইটেমসমূহের সাথে সংযুক্ত হয়নি",
 	"wikibase-unconnectedpages-page": "যে পাতা দিয়ে ফলাফলের তালিকা শুরু হবে:",
 	"wikibase-unconnectedpages-submit": "যাও",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" কোনো সঠিক ভাষার কোড নয়।",
@@ -61,5 +60,6 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} আইটেম আইডি",
 	"wikibase-pageinfo-entity-id-none": "কোনটিই নয়",
 	"wikibase-otherprojects": "অন্যান্য প্রকল্প",
-	"wikibase-otherprojects-beta-message": "অন্যান্য প্রকল্পের পার্শ্বদণ্ড"
+	"wikibase-otherprojects-beta-message": "অন্যান্য প্রকল্পের পার্শ্বদণ্ড",
+	"wikibase-otherprojects-beta-description": "পার্শ্বদণ্ডে \"{{int:wikibase-otherprojects}}\" অনুচ্ছেদ যোগ করে যা {{WBREPONAME}}ে থাকা উপাত্তের উপর ভিত্তি করে অন্যান্য উইকিমিডিয়া প্রকল্পের লিঙ্ক প্রদান করে।"
 }

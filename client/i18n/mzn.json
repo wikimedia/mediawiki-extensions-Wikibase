@@ -12,5 +12,6 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "سِراق هاده",
 	"wikibase-rc-wikibase-edit-letter": "د",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دچی‌یه"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دچی‌یه",
+	"wikibase-otherprojects": "دیگه پروژه‌ئون"
 }
