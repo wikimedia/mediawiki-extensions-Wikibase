@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_a3125eff",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-11T23:21:16Z",
+      "side": 1,
+      "message": "nice :) didn\u0027t know about assertXmlStringEqualsXmlString",
+      "revId": "fe5597860a9c1191d6c8fbfc3ed31368fddd7c3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8315e2eb",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-11T23:21:16Z",
+      "side": 1,
+      "message": "I know we still have \"Claim\" in the api modules, but perhaps start using Statement here in the method name, instead of Claim?",
+      "revId": "fe5597860a9c1191d6c8fbfc3ed31368fddd7c3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

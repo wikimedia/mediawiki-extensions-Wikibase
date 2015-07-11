@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c31bea1f",
+        "filename": "repo/tests/phpunit/data/api/getclaims.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-11T23:21:16Z",
+      "side": 0,
+      "message": "awww :(",
+      "revId": "93a4cc197d940f7a9e0c68835afe6924b2fc20c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e3186625",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-11T23:21:16Z",
+      "side": 0,
+      "message": ":(",
+      "revId": "93a4cc197d940f7a9e0c68835afe6924b2fc20c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
