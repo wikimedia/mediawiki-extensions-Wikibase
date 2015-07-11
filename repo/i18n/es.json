@@ -201,7 +201,7 @@
 	"wikibase-mergeitems-fromid": "La identificación para combinar desde",
 	"wikibase-mergeitems-toid": "La identificación para combinar a",
 	"wikibase-mergeitems-submit": "Combinar elementos",
-	"wikibase-mergeitems-success": "$1 se fusionó con éxito en $3.",
+	"wikibase-mergeitems-success": "$1 se fusionó con éxito en $3 y se redirigió.",
 	"wikibase-itemmerge-missing-parameter": "Entrada incompleta.",
 	"wikibase-itemmerge-not-item": "La entidad especificada no es un elemento.",
 	"wikibase-itemmerge-failed-save": "No se pudo guardar el elemento.",
