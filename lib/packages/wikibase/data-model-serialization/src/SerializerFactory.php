@@ -73,7 +73,7 @@ class SerializerFactory {
 	 * @return bool
 	 */
 	private function shouldSerializeSnaksWithHash() {
-		return !(bool)( $this->options & self::OPTION_OBJECTS_FOR_MAPS );
+		return !(bool)( $this->options & self::OPTION_SERIALIZE_SNAKS_WITHOUT_HASH );
 	}
 
 	/**
