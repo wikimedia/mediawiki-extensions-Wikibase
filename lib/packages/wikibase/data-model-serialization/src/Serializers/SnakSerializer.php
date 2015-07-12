@@ -26,15 +26,15 @@ class SnakSerializer implements DispatchableSerializer {
 	/**
 	 * @var bool
 	 */
-	private $serializeSnaksWithHash;
+	private $serializeWithHash;
 
 	/**
 	 * @param Serializer $dataValueSerializer
-	 * @param bool $serializeSnaksWithHash
+	 * @param bool $serializeWithHash
 	 */
-	public function __construct( Serializer $dataValueSerializer, $serializeSnaksWithHash = true ) {
+	public function __construct( Serializer $dataValueSerializer, $serializeWithHash = true ) {
 		$this->dataValueSerializer = $dataValueSerializer;
-		$this->serializeSnaksWithHash = $serializeSnaksWithHash;
+		$this->serializeWithHash = $serializeWithHash;
 	}
 
 	/**
@@ -73,7 +73,7 @@ class SnakSerializer implements DispatchableSerializer {
 			'property' => $snak->getPropertyId()->getSerialization(),
 		);
 
-		if ( $this->serializeSnaksWithHash ) {
+		if ( $this->serializeWithHash ) {
 			$serialization['hash'] = $snak->getHash();
 		}
 
