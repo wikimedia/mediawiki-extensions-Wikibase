@@ -4,9 +4,21 @@
 			"Ahmed-Najib-Biabani-Ibrahimkhel"
 		]
 	},
+	"specialpages-group-wikibase": "ويکي بېز",
+	"wikibase-deletedentity-item": "ړنگ شوی توکی",
+	"wikibase-quantitydetails-amount": "د پيسو کچه",
+	"wikibase-timedetails-time": "وخت",
 	"wikibase-timedetails-isotime": "وخت ټاپه",
+	"wikibase-timedetails-timezone": "وخت سيمه",
+	"wikibase-timedetails-calendar": "کاليزه",
+	"wikibase-timedetails-before": "دمخه",
+	"wikibase-timedetails-after": "وروسته",
 	"wikibase-sitelinks-wikipedia": "ويکيپېډيا",
 	"wikibase-sitelinks-sitename-columnheading": "ژبه",
+	"wikibase-sitelinks-link-columnheading": "تړلی مخ",
+	"wikibase-snakview-snaktypeselector-somevalue": "ناجوت ارزښت",
+	"wikibase-snakview-snaktypeselector-novalue": "بې ارزښته",
 	"wikibase-tooltip-error-details": "تفصيلات",
+	"wikibase-validator-no-such-entity": "$1 و نه موندل شو",
 	"datatypes-type-wikibase-item": "توکی"
 }
