@@ -145,6 +145,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 			.fail( function( error ) {
 				self.setError( error );
 				deferred.reject( error );
+				self.enable();
 			} );
 		}
 
