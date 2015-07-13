@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_9aa2233a",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T17:18:01Z",
+      "side": 1,
+      "message": "I don\u0027t understand. It also works without this addition. We have 59 instances of this code in our Wikibase code base and they are all the same. None does add a duplicate \"/resources/resources/\".",
+      "parentUuid": "8ec42329_7a15f7e8",
+      "revId": "9578f52e0668b9a2a1cd4f3f81587c266e858e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_7a93b7a6",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 1
