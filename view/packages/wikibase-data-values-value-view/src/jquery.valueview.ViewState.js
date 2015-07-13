@@ -43,11 +43,11 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * @see jQuery.valueview.isDisabled
-		 * @inheritdoc jQuery.valueview#isDisabled
+		 * Returns whether the related `valueview` is currently disabled.
+		 * @return {boolean}
 		 */
 		isDisabled: function() {
-			return this._view.isDisabled();
+			return this._view.option( 'disabled' );
 		},
 
 		/**

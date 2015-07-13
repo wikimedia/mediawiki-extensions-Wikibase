@@ -184,6 +184,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		language: null,
 		autoStartEditing: false,
 		parseDelay: 300,
+		messageProvider: null,
 		contentLanguages: null
 	},
 
@@ -580,19 +581,9 @@ $.widget( 'valueview.valueview', PARENT, {
 	draw: function() {
 		var self = this;
 
-		// have native $.Widget functionality add/remove state css classes
-		// (see jQuery.Widget._setOption)
-		PARENT.prototype.option.call( this, 'disabled', this.isDisabled() );
-
-		// add/remove edit mode ui class:
-		var staticModeClass = this.widgetBaseClass + '-instaticmode',
-			editModeClass = this.widgetBaseClass + '-ineditmode';
-
-		if( this.isInEditMode() ) {
-			this.element.addClass( editModeClass ).removeClass( staticModeClass );
-		} else {
-			this.element.addClass( staticModeClass ).removeClass( editModeClass );
-		}
+		this.element
+			.toggleClass( this.widgetBaseClass + '-instaticmode', !this._isInEditMode )
+			.toggleClass( this.widgetBaseClass + '-ineditmode', this._isInEditMode );
 
 		return this.drawContent()
 			.done( function() {
@@ -643,47 +634,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	 */
 	drawStaticContent: function() {
 		this.element.html( this.getFormattedValue() );
-	},
-
-	/**
-	 * @private
-	 *
-	 * @param {boolean} disabledValue
-	 */
-	_setDisabled: function( disabledValue ) {
-		if( this.options.disabled !== disabledValue ) {
-			this.options.disabled = disabledValue;
-			this.draw();
-		}
-	},
-
-	/**
-	 * Marks the `valueview` disabled and triggers re-drawing it.
-	 * Since the visual state should be managed completely by the `draw` method, toggling the css
-	 * classes is done in `draw()` by issuing a call to `jQuery.Widget.option()`.
-	 * @see jQuery.Widget.disable
-	 */
-	disable: function() {
-		this._setDisabled( true );
-	},
-
-	/**
-	 * Marks the `valueview` enabled and triggers re-drawing the `valueview`.
-	 * Since the visual state should be managed completely by the `draw` method, toggling the css
-	 * classes is done in `draw()` by issuing a call to `jQuery.Widget.option()`.
-	 * @see jQuery.Widget.enable
-	 */
-	enable: function() {
-		this._setDisabled( false );
-	},
-
-	/**
-	 * Returns whether the `valueview` is disabled.
-	 *
-	 * @return {boolean}
-	 */
-	isDisabled: function() {
-		return this.option( 'disabled' );
 	},
 
 	/**
