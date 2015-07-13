@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_5a759b91",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T16:10:03Z",
+      "side": 1,
+      "message": "This can not be kittens",
+      "revId": "3f107565d4b88e146937e4bed0acecc91c6dfe33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fa69e7bc",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T16:10:03Z",
+      "side": 1,
+      "message": "This can not be kittens",
+      "revId": "3f107565d4b88e146937e4bed0acecc91c6dfe33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
