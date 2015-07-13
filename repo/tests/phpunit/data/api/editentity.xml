@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <api success="1">
-	<entity id="Q80050245" type="item">
+	<entity id="$itemIdUnderTest" type="item">
 		<labels>
 			<label language="pt" value="Airbus"/>
 		</labels>
@@ -13,35 +13,35 @@
 		</aliases>
 		<sitelinks/>
 		<claims>
-			<property id="P1491009">
-				<claim _idx="0" id="Q80050245$26D08148-75F5-4AD1-B340-3A6A2F32C202" type="statement"
+			<property id="$propertyIdUnderTest">
+				<claim _idx="0" id="$itemIdUnderTest$26D08148-75F5-4AD1-B340-3A6A2F32C202" type="statement"
 					   rank="normal">
-					<mainsnak snaktype="value" property="P1491009" datatype="string">
+					<mainsnak snaktype="value" property="$propertyIdUnderTest" datatype="string">
 						<datavalue value="SomeMainVal" type="string"/>
 					</mainsnak>
 					<qualifiers>
-						<property id="P1491009">
+						<property id="$propertyIdUnderTest">
 							<qualifiers _idx="0" hash="XXX"
-										snaktype="value" property="P1491009" datatype="string">
+										snaktype="value" property="$propertyIdUnderTest" datatype="string">
 								<datavalue value="SomeQualVal" type="string"/>
 							</qualifiers>
 						</property>
 					</qualifiers>
 					<qualifiers-order>
-						<property>P1491009</property>
+						<property>$propertyIdUnderTest</property>
 					</qualifiers-order>
 					<references>
 						<reference hash="XXX">
 							<snaks>
-								<property id="P1491009">
-									<snak _idx="0" snaktype="value" property="P1491009"
+								<property id="$propertyIdUnderTest">
+									<snak _idx="0" snaktype="value" property="$propertyIdUnderTest"
 										  datatype="string">
 										<datavalue value="SomeRefVal" type="string"/>
 									</snak>
 								</property>
 							</snaks>
 							<snaks-order>
-								<property>P1491009</property>
+								<property>$propertyIdUnderTest</property>
 							</snaks-order>
 						</reference>
 					</references>

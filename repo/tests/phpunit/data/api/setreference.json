@@ -1,8 +1,8 @@
 {
-  "P1491009": [
+  "$propertyIdUnderTest": [
     {
       "snaktype": "value",
-      "property": "P1491009",
+      "property": "$propertyIdUnderTest",
       "datavalue": {
         "type": "string",
         "value": "Val1"
@@ -10,7 +10,7 @@
     },
     {
       "snaktype": "value",
-      "property": "P1491009",
+      "property": "$propertyIdUnderTest",
       "datavalue": {
         "type": "string",
         "value": "Val2"
