@@ -174,7 +174,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$json = $this->replaceIdsInString( $json );
 		$params = array(
 			'action' => 'wbsetreference',
-			'statement' => $entityId . '$1111AAAA-43cb-ed6d-3adb-760e85bd17ee',
+			'statement' => $entityId . '$kittens',
 			'snaks' => $json,
 		);
 
@@ -193,7 +193,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 		$params = array(
 			'action' => 'wbsetqualifier',
-			'claim' => $entityId . '$1111AAAA-43cb-ed6d-3adb-760e85bd17ee',
+			'claim' => $entityId . '$kittens',
 			'property' => $this->lastPropertyId->getSerialization(),
 			'value' => '"QualiValue"',
 			'snaktype' => 'value',
@@ -209,7 +209,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 	}
 
 	public function testEditEntityXmlFormat() {
-		$this->storeProperty();
+		$this->storeNewProperty();
 		$entityRevision = $this->getNewEntityRevision();
 		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
 
@@ -239,10 +239,10 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 	private function replaceIdsInString( $string ) {
 		if ( $this->lastPropertyId !== null ) {
-			$string = str_replace( 'P1491009', $this->lastPropertyId->getSerialization(), $string );
+			$string = str_replace( '$propertyIdUnderTest', $this->lastPropertyId->getSerialization(), $string );
 		}
 		if ( $this->lastItemId !== null ) {
-			$string = str_replace( 'Q80050245', $this->lastItemId->getSerialization(), $string );
+			$string = str_replace( '$itemIdUnderTest', $this->lastItemId->getSerialization(), $string );
 		}
 		return $string;
 	}
@@ -287,8 +287,9 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 	 * @return ApiMain
 	 */
 	private function getApiModule( $moduleClass, $moduleName, array $params, $needsToken = false ) {
+		global $wgUser;
+
 		if ( $needsToken ) {
-			global $wgUser;
 			$params['token'] = $wgUser->getEditToken();
 		}
 		$request = new FauxRequest( $params, true );
@@ -314,43 +315,46 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$entityRevision = $this->storeNewItem();
 
 		if ( $withData ) {
-			$this->storeProperty();
-			$entityRevision = $this->storePresetDataInClaim( $entityRevision, $this->lastPropertyId );
+			$this->storeNewProperty();
+			$entityRevision = $this->storePresetDataInStatement( $entityRevision, $this->lastPropertyId );
 		}
 
 		return $entityRevision;
 	}
 
-	private function storeProperty( $canReuseLast = true ) {
-		if ( $canReuseLast && $this->lastPropertyId !== null ) {
-			return;
-		}
+	private function storeNewProperty() {
+		global $wgUser;
+
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$property = Property::newFromType( 'string' );
-		$entityRevision = $store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+		$entityRevision = $store->saveEntity( $property, 'testing', $wgUser, EDIT_NEW );
 		$this->lastPropertyId = $entityRevision->getEntity()->getId();
 	}
 
 	private function storeNewItem() {
+		global $wgUser;
+
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = new Item();
-		$entityRevision = $store->saveEntity( $item, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+		$entityRevision = $store->saveEntity( $item, 'testing', $wgUser, EDIT_NEW );
 		$this->lastItemId = $entityRevision->getEntity()->getId();
 
 		return $entityRevision;
 	}
 
-	private function storePresetDataInClaim( EntityRevision $entityRevision, PropertyId $propertyId ) {
+	private function storePresetDataInStatement( EntityRevision $entityRevision, PropertyId $propertyId ) {
+		global $wgUser;
+
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		/** @var Item $item */
 		$item = $entityRevision->getEntity();
 		$snak = new PropertyNoValueSnak( $propertyId );
-		$guid = $item->getId()->getSerialization() . '$1111AAAA-43cb-ed6d-3adb-760e85bd17ee';
+		$guid = $item->getId()->getSerialization() . '$kittens';
 		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
-		$entityRevision = $store->saveEntity( $item, 'testing more!', $GLOBALS['wgUser'] );
+		$entityRevision = $store->saveEntity( $item, 'testing more!', $wgUser );
 
 		return $entityRevision;
 	}

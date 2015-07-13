@@ -1,5 +1,5 @@
 {
-  "id": "Q80050245",
+  "id": "$itemIdUnderTest",
   "type": "item",
   "aliases": {
     "uk": [
@@ -26,12 +26,12 @@
     }
   },
   "claims": {
-    "P1491009": [
+    "$propertyIdUnderTest": [
       {
-        "id": "Q80050245$26D08148-75F5-4AD1-B340-3A6A2F32C202",
+        "id": "$itemIdUnderTest$26D08148-75F5-4AD1-B340-3A6A2F32C202",
         "mainsnak": {
           "snaktype": "value",
-          "property": "P1491009",
+          "property": "$propertyIdUnderTest",
           "datatype": "string",
           "datavalue": {
             "value": "SomeMainVal",
@@ -41,10 +41,10 @@
         "type": "statement",
         "rank": "normal",
         "qualifiers": {
-          "P1491009": [
+          "$propertyIdUnderTest": [
             {
               "snaktype": "value",
-              "property": "P1491009",
+              "property": "$propertyIdUnderTest",
               "datatype": "string",
               "datavalue": {
                 "value": "SomeQualVal",
@@ -54,15 +54,15 @@
           ]
         },
         "qualifiers-order": [
-          "P1491009"
+          "$propertyIdUnderTest"
         ],
         "references": [
           {
             "snaks": {
-              "P1491009": [
+              "$propertyIdUnderTest": [
                 {
                   "snaktype": "value",
-                  "property": "P1491009",
+                  "property": "$propertyIdUnderTest",
                   "datatype": "string",
                   "datavalue": {
                     "value": "SomeRefVal",
@@ -72,7 +72,7 @@
               ]
             },
             "snaks-order": [
-              "P1491009"
+              "$propertyIdUnderTest"
             ]
           }
         ]
