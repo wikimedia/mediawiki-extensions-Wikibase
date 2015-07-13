@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_7a6737b5",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T16:26:10Z",
+      "side": 1,
+      "message": "I\u0027m sorry? Why? It\u0027s appended below in the \u0027scripts\u0027 section.",
+      "parentUuid": "8ec42329_3aed2f23",
+      "revId": "9578f52e0668b9a2a1cd4f3f81587c266e858e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_7a93b7a6",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-13T16:16:59Z",
       "side": 1,
       "message": "should rather also append \"/resources\" here",
+      "revId": "9578f52e0668b9a2a1cd4f3f81587c266e858e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_fa0a47d4",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T16:26:10Z",
+      "side": 1,
+      "message": "I\u0027m sorry? Why? It\u0027s appended below in the \u0027scripts\u0027 section.",
+      "parentUuid": "8ec42329_7a93b7a6",
       "revId": "9578f52e0668b9a2a1cd4f3f81587c266e858e09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
