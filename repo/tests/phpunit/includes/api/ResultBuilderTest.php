@@ -119,11 +119,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->markSuccess( $param );
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( array( 'success' => $expected ), $data );
 	}
 
@@ -177,135 +175,138 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
-		$expected = array( 'entities' => array( 'Q1230000' => array(
-			'pageid' => 123, //mocked
-			'ns' => 456, //mocked
-			'title' => 'MockPrefixedText', //mocked
-			'id' => 'Q123098',
-			'type' => 'item',
-			'lastrevid' => 33,
-			'modified' => '2013-11-26T20:29:23Z',
-			'redirects' => array(
-				'from' => 'Q1230000',
-				'to' => 'Q123098',
-			),
-			'aliases' => array(
-				'en' => array(
-					array(
-						'language' => 'en',
-						'value' => 'bar'
+		$expected = array(
+			'entities' => array(
+				'Q1230000' => array(
+					'pageid' => 123, //mocked
+					'ns' => 456, //mocked
+					'title' => 'MockPrefixedText', //mocked
+					'id' => 'Q123098',
+					'type' => 'item',
+					'lastrevid' => 33,
+					'modified' => '2013-11-26T20:29:23Z',
+					'redirects' => array(
+						'from' => 'Q1230000',
+						'to' => 'Q123098',
 					),
-					array(
-						'language' => 'en',
-						'value' => 'baz'
-					)
-				),
-				'zh' => array(
-					array(
-						'language' => 'zh',
-						'value' => '????????',
-					),
-				),
-			),
-			'descriptions' => array(
-				'pt' => array(
-					'language' => 'pt',
-					'value' => 'ptDesc'
-				),
-				'pl' => array(
-					'language' => 'pl',
-					'value' => 'Longer Description For An Item'
-				),
-			),
-			'labels' => array(
-				'de' => array(
-					'language' => 'de',
-					'value' => 'foo'
-				),
-				'zh_classical' => array(
-					'language' => 'zh_classical',
-					'value' => 'Longer Label'
-				),
-			),
-			'claims' => array(
-				'P65' => array(
-					array(
-						'id' => 'imaguid',
-						'mainsnak' => array(
-							'snaktype' => 'somevalue',
-							'property' => 'P65'
+					'aliases' => array(
+						'en' => array(
+							array(
+								'language' => 'en',
+								'value' => 'bar'
+							),
+							array(
+								'language' => 'en',
+								'value' => 'baz'
+							)
 						),
-						'type' => 'statement',
-						'qualifiers' => array(
-							'P65' => array(
-								array(
-									'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
-									'snaktype' => 'somevalue',
-									'property' => 'P65',
-								),
-								array(
-									'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
-									'snaktype' => 'value',
-									'property' => 'P65',
-									'datavalue' => array(
-										'value' => 'string!',
-										'type' => 'string',
-									),
-									'datatype' => 'DtIdFor_P65',
-								),
+						'zh' => array(
+							array(
+								'language' => 'zh',
+								'value' => '????????',
 							),
 						),
-						'rank' => 'normal',
-						'qualifiers-order' => array(
-							'P65'
+					),
+					'descriptions' => array(
+						'pt' => array(
+							'language' => 'pt',
+							'value' => 'ptDesc'
 						),
-						'references' => array(
+						'pl' => array(
+							'language' => 'pl',
+							'value' => 'Longer Description For An Item'
+						),
+					),
+					'labels' => array(
+						'de' => array(
+							'language' => 'de',
+							'value' => 'foo'
+						),
+						'zh_classical' => array(
+							'language' => 'zh_classical',
+							'value' => 'Longer Label'
+						),
+					),
+					'claims' => array(
+						'P65' => array(
 							array(
-								'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
-								'snaks' => array(
+								'id' => 'imaguid',
+								'mainsnak' => array(
+									'snaktype' => 'somevalue',
+									'property' => 'P65'
+								),
+								'type' => 'statement',
+								'qualifiers' => array(
 									'P65' => array(
 										array(
+											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
 											'snaktype' => 'somevalue',
-											'property' => 'P65'
-										)
-									),
-									'P68' => array(
+											'property' => 'P65',
+										),
 										array(
-											'snaktype' => 'somevalue',
-											'property' => 'P68'
+											'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
+											'snaktype' => 'value',
+											'property' => 'P65',
+											'datavalue' => array(
+												'value' => 'string!',
+												'type' => 'string',
+											),
+											'datatype' => 'DtIdFor_P65',
+										),
+									),
+								),
+								'rank' => 'normal',
+								'qualifiers-order' => array(
+									'P65'
+								),
+								'references' => array(
+									array(
+										'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
+										'snaks' => array(
+											'P65' => array(
+												array(
+													'snaktype' => 'somevalue',
+													'property' => 'P65'
+												)
+											),
+											'P68' => array(
+												array(
+													'snaktype' => 'somevalue',
+													'property' => 'P68'
+												)
+											),
+										),
+										'snaks-order' => array(
+											'P65',
+											'P68'
 										)
 									),
 								),
-								'snaks-order' => array(
-									'P65', 'P68'
-								)
-							),
+							)
 						),
-					)
+					),
+					'sitelinks' => array(
+						'enwiki' => array(
+							'site' => 'enwiki',
+							'title' => 'Berlin',
+							'badges' => array( 'Q333' )
+						),
+						'zh_classicalwiki' => array(
+							'site' => 'zh_classicalwiki',
+							'title' => 'User:Addshore',
+							'badges' => array()
+						),
+					),
 				),
+				'_element' => 'entity',
 			),
-			'sitelinks' => array(
-				'enwiki' => array(
-					'site' => 'enwiki',
-					'title' => 'Berlin',
-					'badges' => array( 'Q333' )
-				),
-				'zh_classicalwiki' => array(
-					'site' => 'zh_classicalwiki',
-					'title' => 'User:Addshore',
-					'badges' => array()
-				),
-			),
-		) ) );
+		);
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addEntityRevision( 'Q1230000', $entityRevision, new SerializationOptions(), $props );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -357,13 +358,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					),
 				),
 			),
+			'_element' => 'entity',
 		) );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -417,11 +416,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			'_element' => 'entity'
 		) );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => $indexedMode ? 'bc' : 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -436,11 +432,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addBasicEntityInformation( $entityId, 'entity' );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -468,11 +461,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addLabels( $labels, $path );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -500,11 +490,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addDescriptions( $descriptions, $path );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -544,11 +531,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addAliases( $aliases, $path );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -581,11 +565,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addSiteLinks( $siteLinks, $path );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -609,11 +590,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addClaims( $claims, $path );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -625,11 +603,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addClaim( $statement );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -720,11 +695,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addReference( $reference );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -744,11 +716,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$resultBuilder->addMissingEntity( $key, $missingDetails );
 		}
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -764,7 +733,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'site' => 'enwiki',
 							'title' => 'Berlin',
 							'missing' => '',
-						)
+						),
+						'_element' => 'entity',
 					),
 				)
 			),
@@ -777,7 +747,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'Q77' => array(
 							'id' => 'Q77',
 							'missing' => '',
-						)
+						),
+						'_element' => 'entity',
 					),
 				)
 			),
@@ -790,7 +761,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'Q77' => array(
 							'foo' => 'bar',
 							'missing' => '',
-						)
+						),
+						'_element' => 'entity',
 					),
 				)
 			),
@@ -810,7 +782,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'site' => 'dewiki',
 							'title' => 'Foo',
 							'missing' => '',
-						)
+						),
+						'_element' => 'entity',
 					),
 				)
 			),
@@ -834,11 +807,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addNormalizedTitle( $from, $to );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -859,11 +829,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addRevisionIdFromStatusToResult( $mockStatus, 'entity' );
 
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -912,11 +879,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = $this->getResultBuilder( $result, null, $indexed );
 
 		$builder->setList( $path, $name, $values, $tag );
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => $indexed ? 'bc' : 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertResultStructure( $expected, $data );
 	}
 
@@ -979,11 +943,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = $this->getResultBuilder( $result, null, $indexed );
 
 		$builder->setValue( $path, $name, $value );
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => $indexed ? 'bc' : 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertResultStructure( $expected, $data );
 	}
 
@@ -1010,31 +971,34 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideAppendValue() {
 		return array(
-			'null path' => array( null, null, 'value', 'letter', false, array( 'value' ) ),
+			'null path' => array( null, null, 'value', 'letter', false,
+				array( 'value', '_element' => 'letter' ),
+			),
 
 			'empty path' => array( array(), null, 'value', 'letter', false,
-				array( 'value' )
+				array( 'value', '_element' => 'letter' )
 			),
 
 			'string path' => array( 'ROOT', null, 'value', 'letter', false,
 				array(
-					'ROOT' => array( 'value' )
+					'ROOT' => array( 'value', '_element' => 'letter' )
 				) ),
 
 			'actual path' => array( array( 'one', 'two' ), null, array( 'X' => 'x', 'Y' => 'y' ), 'letter', false,
 				array(
 					'one' => array(
-						'two' => array( array( 'X' => 'x', 'Y' => 'y' ) ) )
+						'two' => array( array( 'X' => 'x', 'Y' => 'y' ), '_element' => 'letter' ),
+					)
 				) ),
 
 			'int key' => array( 'ROOT', -2, 'value', 'letter', false,
 				array(
-					'ROOT' => array( -2 => 'value' )
+					'ROOT' => array( -2 => 'value', '_element' => 'letter' ),
 				) ),
 
 			'string key' => array( 'ROOT', 'Q7', 'value', 'letter', false,
 				array(
-					'ROOT' => array( 'Q7' => 'value' )
+					'ROOT' => array( 'Q7' => 'value', '_element' => 'letter' ),
 				) ),
 
 			'null key indexed' => array( 'ROOT', null, 'value', 'letter', true,
@@ -1062,11 +1026,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = $this->getResultBuilder( $result, null, $indexed );
 
 		$builder->appendValue( $path, $key, $value, $tag );
-		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
-			'Strip' => $indexed ? 'bc' : 'all',
-		) );
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertResultStructure( $expected, $data );
 	}
 
@@ -1107,6 +1068,17 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$this->assertEquals( array_keys( $expected ), array_keys( $actual ), "Keys of $path:" );
+	}
+
+	private function removeElementsWithKeysRecursively( array &$array, array $unwantedKeys ) {
+		foreach ( $unwantedKeys as $unwantedKey ) {
+			unset( $array[$unwantedKey] );
+			foreach ( $array as &$value ) {
+				if ( is_array( $value ) ) {
+					$this->removeElementsWithKeysRecursively( $value, array( $unwantedKey ) );
+				}
+			}
+		}
 	}
 
 }
