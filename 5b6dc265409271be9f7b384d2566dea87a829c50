@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_95be74f9",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T17:54:00Z",
+      "side": 1,
+      "message": "Ok, thanks for the reference. It\u0027s called $this-\u003eisRawMode there. Can you please rename it and add a description? To quote ApiResult: \"when special elements such as \u0027_element\u0027 are needed by the formatter, for example in XML printing.\"",
+      "parentUuid": "8ec42329_1585a45a",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_5a4efb73",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 5
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "Indeed it probably should.\nApiResult::META_INDEXED_TAG_NAME was only introduced in a recent mw version hence why it wasn\u0027t used here before.\nAs I didn\u0027t touch this code I wont touch it in this change.",
       "parentUuid": "8ec42329_8f066322",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f53c9890",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T17:54:00Z",
+      "side": 1,
+      "message": "Ok, just wanted to mention this.",
+      "parentUuid": "8ec42329_5af27b04",
       "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
