@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <api success="1">
 	<pageinfo/>
-	<claim id="Q80050245$1111AAAA-43cb-ed6d-3adb-760e85bd17ee" type="statement" rank="normal">
-		<mainsnak snaktype="novalue" property="P1491009"/>
+	<claim id="$itemIdUnderTest$kittens" type="statement" rank="normal">
+		<mainsnak snaktype="novalue" property="$propertyIdUnderTest"/>
 		<qualifiers>
-			<property id="P1491009">
+			<property id="$propertyIdUnderTest">
 				<qualifiers _idx="0" hash="XXX"
-							snaktype="value" property="P1491009" datatype="string">
+							snaktype="value" property="$propertyIdUnderTest" datatype="string">
 					<datavalue value="QualiValue" type="string"/>
 				</qualifiers>
 			</property>
 		</qualifiers>
 		<qualifiers-order>
-			<property>P1491009</property>
+			<property>$propertyIdUnderTest</property>
 		</qualifiers-order>
 	</claim>
 </api>
