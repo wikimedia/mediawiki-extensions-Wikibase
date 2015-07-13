@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ba3cbfbd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T16:09:07Z",
+      "side": 1,
+      "message": "\"best\"? Which \"stage\"?",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_af28ff96",
+        "filename": "repo/includes/api/ApiHelperFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T16:09:07Z",
+      "side": 1,
+      "message": "What does \"of the API\" mean? Is this a typo? I don\u0027t understand what\u0027s \"to do\" here.",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_da0bcb24",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T16:09:07Z",
+      "side": 1,
+      "message": "Please use a more descriptive variable name in this class. \"Raw\" is very generic. Why not simply stick to the name $indexTags that\u0027s already used in the SerializationOptions object?",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5a4efb73",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T16:09:07Z",
+      "side": 1,
+      "message": "This code is odd. Why not simply pass this SerializationOptions object as a parameter in the constructor? This would solve two problems: You do not need an unnamed \"true\" when constructing a ResultBuilder. Instead you can pass a expressive options object. And you can drop this odd singleton implementation and replace it with a straight getter.",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8f066322",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T16:09:07Z",
+      "side": 1,
+      "message": "This should use ApiResult::META_INDEXED_TAG_NAME.",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
