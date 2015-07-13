@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_5a211bab",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T17:34:44Z",
+      "side": 1,
+      "message": "I see 3 places where this is used. None looks like something that\u0027s \"raw\". Two places drop array keys and the third sets an option that\u0027s called indexTags. What\u0027s \"raw XML\" anyway? Where is this defined? What\u0027s the difference between \"raw\" and \"non-raw XML\"?",
+      "parentUuid": "8ec42329_fa7fa761",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_5a4efb73",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 5
