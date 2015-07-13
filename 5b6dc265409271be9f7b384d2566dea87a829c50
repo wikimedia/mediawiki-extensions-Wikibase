@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_1585a45a",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T17:46:46Z",
+      "side": 1,
+      "message": "Well, We could call it $xmlMode but this is not necessarilly only used by XML.\n\u0027raw\u0027 directly links to what the Mediawiki ApiResult object expects in certain cases. It is called raw there hence it is called raw here.",
+      "parentUuid": "8ec42329_5a211bab",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_5a4efb73",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 5
