@@ -14,7 +14,7 @@
 	<rule ref="Generic.Files.LineLength">
 		<properties>
 			<!-- FIXME: Should be decreased to 100, preferably in steps of 10. -->
-			<property name="lineLimit" value="200" />
+			<property name="lineLimit" value="170" />
 			<property name="absoluteLineLimit" value="9999" />
 		</properties>
 	</rule>
@@ -53,10 +53,9 @@
 	<rule ref="PSR2.ControlStructures.ElseIfDeclaration" />
 	<rule ref="PSR2.Methods.MethodDeclaration" />
 
-	<!-- TODO: Enable Squiz sniffs. -->
-	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
-		<severity>0</severity>
+		<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
+		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibase*Library</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
 	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->

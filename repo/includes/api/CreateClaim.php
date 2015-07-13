@@ -157,9 +157,12 @@ class CreateClaim extends ModifyClaim {
 				=>'apihelp-wbcreateclaim-example-1',
 			'action=wbcreateclaim&entity=Q42&property=P9002&snaktype=value&value="itsastring"'
 				=> 'apihelp-wbcreateclaim-example-2',
-			'action=wbcreateclaim&entity=Q42&property=P9003&snaktype=value&value={"entity-type":"item","numeric-id":1}'
+			'action=wbcreateclaim&entity=Q42&property=P9003&snaktype=value&value='
+				. '{"entity-type":"item","numeric-id":1}'
 				=> 'apihelp-wbcreateclaim-example-3',
-			'action=wbcreateclaim&entity=Q42&property=P9004&snaktype=value&value={"latitude":40.748433,"longitude":-73.985656,"globe":"http://www.wikidata.org/entity/Q2","precision":0.000001}'
+			'action=wbcreateclaim&entity=Q42&property=P9004&snaktype=value&value='
+				. '{"latitude":40.748433,"longitude":-73.985656,'
+				. '"globe":"http://www.wikidata.org/entity/Q2","precision":0.000001}'
 				=> 'apihelp-wbcreateclaim-example-4',
 		);
 	}
