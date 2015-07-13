@@ -108,6 +108,7 @@
 	"wikibase-itembytitle-lookup-page": "בלאט:",
 	"wikibase-itembytitle-submit": "זוכן",
 	"wikibase-itembytitle-create": "איר קענט אויך [$1 שאפֿן א דאטנאביעקט].",
+	"wikibase-itembytitle-summary": "דער באזונדערער בלאט Special:ItemByTitle ניצט מען צו טרעפן דעם פאסנדיקן אביעקט פאר אן אנגעגעבענעם בלאט אויף א פארבונדענעם וועבזייטל. <br /> אינעם רעכטן פעלד, \"וועבזייטל:\", לייגט מען דעם שפראך און וועבזייטל קאד. <br /> אינעם לינקן פעלד , \"בלאט:\", דארפט איר איינגעבן דעם גענויעם טיטל פונעם בלאט אזוי ווי ער ערשיינט אויפן פארבונדענעם וועבזייטל.",
 	"special-gotolinkedpage": "גיין צו פארלינקטן בלאט",
 	"wikibase-gotolinkedpage-lookup-site": "וועבזײַטל:",
 	"wikibase-gotolinkedpage-lookup-item": "אביעקט אידענטיפיצירער:",

@@ -44,7 +44,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "配置",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "在页面加载时显示我的所有语言的标签、别名和描述",
 	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "用户界面语言以外的个人语言可以在用户页使用[[mw:Extension:Babel|巴别扩展]]语法进行设置。",
-	"wikibase-entitytermsforlanguagelistview-aliases": "也称为",
+	"wikibase-entitytermsforlanguagelistview-aliases": "别名",
 	"wikibase-entitytermsforlanguagelistview-description": "描述",
 	"wikibase-entitytermsforlanguagelistview-label": "标签",
 	"wikibase-entitytermsforlanguagelistview-language": "语言",
