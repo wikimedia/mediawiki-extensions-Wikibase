@@ -1149,7 +1149,7 @@ final class RepoHooks {
 		$hasULS = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 
 		$moduleTemplate = array(
-			'localBasePath' => __DIR__ . '/resources',
+			'localBasePath' => __DIR__,
 			'remoteExtPath' => '..' . $remoteExtPath[0],
 			'position' => 'top' // reducing the time between DOM construction and JS initialisation
 		);
@@ -1168,7 +1168,7 @@ final class RepoHooks {
 			'wikibase.WikibaseContentLanguages',
 			$moduleTemplate + array(
 				'scripts' => array(
-					'wikibase.WikibaseContentLanguages.js',
+					'resources/wikibase.WikibaseContentLanguages.js',
 				),
 				'dependencies' => $dependencies
 			)
@@ -1187,7 +1187,7 @@ final class RepoHooks {
 			'wikibase.special.itemDisambiguation',
 			$moduleTemplate + array(
 				'scripts' => array(
-					'wikibase.special/wikibase.special.itemDisambiguation.js'
+					'resources/wikibase.special/wikibase.special.itemDisambiguation.js'
 				),
 				'dependencies' => $dependencies
 			)
@@ -1206,7 +1206,7 @@ final class RepoHooks {
 			'wikibase.special.entitiesWithout',
 			$moduleTemplate + array(
 				'scripts' => array(
-					'wikibase.special/wikibase.special.entitiesWithout.js'
+					'resources/wikibase.special/wikibase.special.entitiesWithout.js'
 				),
 				'dependencies' => $dependencies
 			)

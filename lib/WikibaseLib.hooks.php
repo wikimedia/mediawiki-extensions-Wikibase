@@ -63,7 +63,7 @@ final class LibHooks {
 		$hasULS = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 
 		$moduleTemplate = array(
-			'localBasePath' => __DIR__ . '/resources',
+			'localBasePath' => __DIR__,
 			'remoteExtPath' => '..' . $remoteExtPath[0],
 			'position' => 'top' // reducing the time between DOM construction and JS initialisation
 		);
@@ -82,7 +82,7 @@ final class LibHooks {
 			'wikibase.Site',
 			$moduleTemplate + array(
 				'scripts' => array(
-					'wikibase.Site.js',
+					'resources/wikibase.Site.js',
 				),
 				'dependencies' => $dependencies,
 			)
