@@ -237,11 +237,18 @@ class SetReference extends ModifyClaim {
 	 */
 	protected function getExamplesMessages() {
 		return array(
-			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks={"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string","value":"foo"}}]}&baserevid=7201010&token=foobar'
+			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks='
+				. '{"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string",'
+				. '"value":"foo"}}]}&baserevid=7201010&token=foobar'
 				=> 'apihelp-wbsetreference-example-1',
-			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&reference=1eb8793c002b1d9820c833d234a1b54c8e94187e&snaks={"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string","value":"bar"}}]}&baserevid=7201010&token=foobar'
+			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF'
+				. '&reference=1eb8793c002b1d9820c833d234a1b54c8e94187e&snaks='
+				. '{"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string",'
+				. '"value":"bar"}}]}&baserevid=7201010&token=foobar'
 				=> 'apihelp-wbsetreference-example-2',
-			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks={"P212":[{"snaktype":"novalue","property":"P212"}]}&index=0&baserevid=7201010&token=foobar'
+			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks='
+				. '{"P212":[{"snaktype":"novalue","property":"P212"}]}'
+				. '&index=0&baserevid=7201010&token=foobar'
 				=> 'apihelp-wbsetreference-example-3',
 		);
 	}

@@ -193,12 +193,21 @@ class SetClaim extends ModifyClaim {
 	 */
 	protected function getExamplesMessages() {
 		return array(
-			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}'
-			=> 'apihelp-wbsetclaim-example-1',
-			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"claim","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}}}&index=0'
-			=> 'apihelp-wbsetclaim-example-2',
-			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee","type":"statement","mainsnak":{"snaktype":"value","property":"P1","datavalue":{"value":"City","type":"string"}},"references":[{"snaks":{"P2":[{"snaktype":"value","property":"P2","datavalue":{"value":"The Economy of Cities","type":"string"}}]},"snaks-order":["P2"]}],"rank":"normal"}'
-			=> 'apihelp-wbsetclaim-example-3',
+			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee",'
+				. '"type":"claim","mainsnak":{"snaktype":"value","property":"P1",'
+				. '"datavalue":{"value":"City","type":"string"}}}'
+				=> 'apihelp-wbsetclaim-example-1',
+			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee",'
+				. '"type":"claim","mainsnak":{"snaktype":"value","property":"P1",'
+				. '"datavalue":{"value":"City","type":"string"}}}&index=0'
+				=> 'apihelp-wbsetclaim-example-2',
+			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee",'
+				. '"type":"statement","mainsnak":{"snaktype":"value","property":"P1",'
+				. '"datavalue":{"value":"City","type":"string"}},'
+				. '"references":[{"snaks":{"P2":[{"snaktype":"value","property":"P2",'
+				. '"datavalue":{"value":"The Economy of Cities","type":"string"}}]},'
+				. '"snaks-order":["P2"]}],"rank":"normal"}'
+				=> 'apihelp-wbsetclaim-example-3',
 		);
 	}
 
