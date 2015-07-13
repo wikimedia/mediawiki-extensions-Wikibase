@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_ba635fd9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T16:16:28Z",
+      "side": 1,
+      "message": "next!",
+      "parentUuid": "8ec42329_ba3cbfbd",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_af28ff96",
         "filename": "repo/includes/api/ApiHelperFactory.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-13T16:09:07Z",
       "side": 1,
       "message": "What does \"of the API\" mean? Is this a typo? I don\u0027t understand what\u0027s \"to do\" here.",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_daaf4bdd",
+        "filename": "repo/includes/api/ApiHelperFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T16:16:28Z",
+      "side": 1,
+      "message": "the TODO is to replce the \"$api-\u003egetResult()-\u003egetIsRawMode()\" with true.\ndue to changes in the mediawiki api (in theory)..\n\nthe Result should now always be given meta data and only the printers that need meta data will use it. Other printers will ignore it.",
+      "parentUuid": "8ec42329_af28ff96",
       "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_fa7fa761",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T16:16:28Z",
+      "side": 1,
+      "message": "raw here does not just mean the indexing of tags, hence the move to \u0027raw\u0027.\nraw is the legacy format / format expected for XML as expected by core.",
+      "parentUuid": "8ec42329_da0bcb24",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_5a4efb73",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 5
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_da966b97",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T16:16:28Z",
+      "side": 1,
+      "message": "SerializationOptions and thus this method will be killed once we more away from the Lib Serializers.\nPassing the bool rawMode into the constructor is the behaviour we want to expose, not this silly object.",
+      "parentUuid": "8ec42329_5a4efb73",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_8f066322",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 5
@@ -81,6 +153,24 @@
       "writtenOn": "2015-07-13T16:09:07Z",
       "side": 1,
       "message": "This should use ApiResult::META_INDEXED_TAG_NAME.",
+      "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5af27b04",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T16:16:28Z",
+      "side": 1,
+      "message": "Indeed it probably should.\nApiResult::META_INDEXED_TAG_NAME was only introduced in a recent mw version hence why it wasn\u0027t used here before.\nAs I didn\u0027t touch this code I wont touch it in this change.",
+      "parentUuid": "8ec42329_8f066322",
       "revId": "5b6dc265409271be9f7b384d2566dea87a829c50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
