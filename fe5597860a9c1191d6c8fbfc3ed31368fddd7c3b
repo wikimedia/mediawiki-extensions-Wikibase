@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_ef0fe78b",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T15:58:07Z",
+      "side": 1,
+      "message": "This should call setServices, in my opinion.",
+      "revId": "fe5597860a9c1191d6c8fbfc3ed31368fddd7c3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_a3125eff",
         "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
         "patchSetId": 11
@@ -19,6 +36,57 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_2feacf73",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T15:58:07Z",
+      "side": 1,
+      "message": "It would be much more obvious when the files contain something like {PropertyIdUnderTest} and {ItemIdUnderTest} instead of having these two numbers hardcoded.",
+      "revId": "fe5597860a9c1191d6c8fbfc3ed31368fddd7c3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4fc87b25",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T15:58:07Z",
+      "side": 1,
+      "message": "I think the placement of this line is semantically meaningless. Please move it to the top of the function.",
+      "revId": "fe5597860a9c1191d6c8fbfc3ed31368fddd7c3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8f4e63c3",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T15:58:07Z",
+      "side": 1,
+      "message": "storeNewProperty please.\n\nThe parameter is not used, please remove.",
+      "revId": "fe5597860a9c1191d6c8fbfc3ed31368fddd7c3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_8315e2eb",
         "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
         "patchSetId": 11
@@ -30,6 +98,23 @@
       "writtenOn": "2015-07-11T23:21:16Z",
       "side": 1,
       "message": "I know we still have \"Claim\" in the api modules, but perhaps start using Statement here in the method name, instead of Claim?",
+      "revId": "fe5597860a9c1191d6c8fbfc3ed31368fddd7c3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_af579f5b",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-13T15:58:07Z",
+      "side": 1,
+      "message": "I also find having a string like \"kittens\" better in tests. It makes it much more obvious that this is a test dummy.",
       "revId": "fe5597860a9c1191d6c8fbfc3ed31368fddd7c3b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
