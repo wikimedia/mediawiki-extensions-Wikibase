@@ -64,7 +64,7 @@ final class LibHooks {
 
 		$moduleTemplate = array(
 			'localBasePath' => __DIR__ . '/resources',
-			'remoteExtPath' => '..' . $remoteExtPath[0],
+			'remoteExtPath' => '..' . $remoteExtPath[0] . '/resources',
 			'position' => 'top' // reducing the time between DOM construction and JS initialisation
 		);
 
