@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_1527e460",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-13T18:06:20Z",
+      "side": 1,
+      "message": "this can also not be kittens",
+      "revId": "1224654a63cf30d8c5881e71ff3a1907101e12f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
