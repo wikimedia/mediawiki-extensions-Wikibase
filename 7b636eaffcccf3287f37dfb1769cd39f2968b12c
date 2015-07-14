@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_6c769a3b",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2015-07-14T18:28:51Z",
+      "side": 1,
+      "message": "Either wrap this before push()ing via EnqueueJob::newFromLocalJobs (like WatchedItem.php) or use lazyPush() so it works fast in any datacenter.",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_cc854e0d",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2015-07-14T18:28:51Z",
+      "side": 1,
+      "message": "Setting removeDuplicates is a good idea, though parser cache hits should mostly handle this as is.",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
