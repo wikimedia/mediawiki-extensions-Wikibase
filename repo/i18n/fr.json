@@ -37,7 +37,8 @@
 			"Spasmedevivre",
 			"Freak2fast4u",
 			"Mattho69",
-			"Windes"
+			"Windes",
+			"TomT0m"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -495,5 +496,20 @@
 	"apihelp-wbgetentities-param-props": "Le nom des propriétés à récupérer de chaque entité.\nSera filtré ultérieurement par les langues fournies.",
 	"apihelp-wbgetentities-param-languages": "Par défaut, les valeurs internationalisés sont renvoyées dans toutes les langues disponibles.\nCe paramètre permet de les limiter à une ou plusieurs langues en fournissant un ou plusieurs codes de langue.",
 	"apihelp-wbgetentities-param-languagefallback": "Appliquer la langue de secours pour les langues définies dans le paramètre « languages », avec le contexte actuel de l’appel de l’API.",
+	"apihelp-wbgetentities-param-normalize": "Essayer de normaliser le titre de la page fourni en fonction du site sur lequel il se trouve.\nCette fonction fonctionne uniquement si un seul site et une seule page sont fournis.",
+	"apihelp-wbgetentities-param-ungroupedlist": "Ne pas grouper les paires propriété/valeur par propriété.",
+	"apihelp-wbgetentities-param-sitefilter": "Ne garder que les liens vers les sites listés dans cette liste.",
+	"apihelp-wbgetentities-example-1": "Récupérez les entités d'ID Q42 et tous leurs attributs dans toutes les langues disponibles",
+	"apihelp-wbgetentities-example-2": "Récupérer les entité d'ID P17 avec toutes leurs déclarations dans toutes les langues",
+	"apihelp-wbgetentities-example-3": "Récupérez les entités d'ID Q42 et P17 avec tous leurs attributs dans toutes les langues disponibles",
+	"apihelp-wbgetentities-example-4": "Récupérer l'entité Q42 avec tous ses attributs, en anglais",
+	"apihelp-wbgetentities-example-5": "Récupérer l'élément Q42 avec toutes ses données dans en langue ii ou n'importe laquelle de ses langues de repli.",
+	"apihelp-wbgetentities-example-6": "Obtenez des entités d'identifiant Q42 avec tous les intitulés dans toutes les langues",
+	"apihelp-wbgetentities-example-7": "Récupérer les types de données des propriétés P17 et P3",
+	"apihelp-wbgetentities-example-8": "Récupérer tous les alias en anglais de l'entité Q42",
+	"apihelp-wbgetentities-example-9": "Récupérer les descriptions en anglais, allemand et français des élément Q1 et Q42",
+	"apihelp-wbgetentities-example-10": "Obtenir l'élément de la page \"Berlin\" sur le site \"enwiki\", avec les attributs de langue en langue anglaise",
+	"apihelp-wbgetentities-example-11": "Obtenir l'élément de la page \"Berlin\" sur le site \"enwiki\" après normalisation du titre de \"berlin\"",
+	"apihelp-wbgetentities-example-12": "Récupérer les liens de site pour l'élément Q42",
 	"apihelp-wbsetaliases-param-set": "Une liste d'alias qui remplacera la liste courante (les éléments de cette liste ne peuvent être ni complétés ni supprimés)"
 }

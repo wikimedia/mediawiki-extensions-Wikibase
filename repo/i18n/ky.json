@@ -3,13 +3,16 @@
 		"authors": [
 			"Growingup",
 			"Викиней",
-			"Macofe"
+			"Macofe",
+			"Janatkg"
 		]
 	},
+	"wikibase-edit": "оңдоо",
 	"wikibase-save": "сактоо",
 	"wikibase-cancel": "жокко чыгаруу",
 	"wikibase-add": "кошуу",
 	"wikibase-sitelink-site-edit-placeholder": "сайт",
+	"wikibase-sitelinks-special": "Башка сайттар",
 	"wikibase-remove": "өчүрүү",
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "Барак:",

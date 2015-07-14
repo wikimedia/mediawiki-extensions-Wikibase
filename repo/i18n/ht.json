@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tisave"
+			"Tisave",
+			"Bfpage"
 		]
 	},
 	"wikibase-edit": "chanje",
 	"wikibase-add": "ajoute",
 	"wikibase-sitelinks-special": "Lòt sit",
-	"wikibase-statementview-rank-normal": "Ran nòmal"
+	"wikibase-statementview-rank-normal": "Ran nòmal",
+	"wikibase-item-summary-wbmergeitems-from": "Fizyone atik nan $3"
 }

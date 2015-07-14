@@ -3,7 +3,8 @@
 		"authors": [
 			"Calak",
 			"Macofe",
-			"Asoxor"
+			"Asoxor",
+			"Muhammed taha"
 		]
 	},
 	"wikibase-entity-item": "بەند",
@@ -30,6 +31,7 @@
 	"wikibase-description-input-help-message": "شیکردنەوەیەکی کورت بە $1 بنووسە.",
 	"wikibase-statements": "ئاخاوتەکان",
 	"wikibase-terms": "بە زمانەکانی تر",
+	"wikibase-sitelinks": "پێرستی پەڕە بەسراوەکان بەم بەندەوە",
 	"wikibase-remove": "سڕینەوە",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|نێوانویکی}}",
 	"wikibase-disambiguation-title": "ڕوونکردنەوە بۆ «$1»",
@@ -37,7 +39,7 @@
 	"wikibase-aliases-empty": "نازناوێک دیاری نەکراوە.",
 	"wikibase-propertypage-datatype": "جۆری دراوە",
 	"wikibase-statementview-rank-normal": "پلەی ئاسایی",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ژێدەر|ژێدەر}}",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ژێدەر|ژێدەرەکان}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "ھێشتا {{PLURAL:$1|یەک سەرچاوە|$1 سەرچاوە}} پاشەکەوت نەکراوە",
 	"wikibase-snakview-property-input-placeholder": "تایبەتمەندی",
 	"wikibase-snakview-choosesnaktype": "جۆرێکی نرخ ھەڵبژێرە.",

@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Growingup"
+			"Growingup",
+			"Janatkg"
 		]
 	},
-	"wikibase-sitelinks-sitename-columnheading": "Тил",
-	"wikibase-sitelinks-siteid-columnheading": "Код"
+	"wikibase-sitelinks-wikipedia": "Уикипедия",
+	"wikibase-sitelinks-sitename-columnheading": "Тил"
 }

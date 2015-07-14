@@ -17,7 +17,7 @@
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
 	"tooltip-t-wikibase": "Collegamento all'elemento connesso dell'archivio dati",
 	"wikibase-after-page-move": "Puoi anche [$1 aggiornare] l'elemento associato su {{WBREPONAME}} per trasferire gli interlink sulla nuova pagina.",
-	"wikibase-after-page-move-queued": "L'[$1 elemento {{WBREPONAME}}] associato a questa pagina sarà presto aggiornato automaticamente.",
+	"wikibase-after-page-move-queued": "L'[$1 elemento {{WBREPONAME}}] associato a questa pagina sarà presto aggiornato automaticamente. Si noti che potrebbe non accadere istantaneamente.",
 	"wikibase-comment-add": "Un elemento di {{WBREPONAME}} è stato creato.",
 	"wikibase-comment-remove": "L'elemento di {{WBREPONAME}} associato è stato cancellato. I collegamenti interlinguistici sono stati rimossi.",
 	"wikibase-comment-linked": "Un elemento di {{WBREPONAME}} è stato collegato a questa pagina.",
