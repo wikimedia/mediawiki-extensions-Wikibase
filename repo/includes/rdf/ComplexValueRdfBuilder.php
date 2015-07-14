@@ -83,7 +83,6 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 					'amount' => 'decimal',
 					'upperBound' => 'decimal',
 					'lowerBound' => 'decimal',
-					'unit' => null, //FIXME: it's a URI (or "1"), should be of type url!
 				);
 				break;
 
