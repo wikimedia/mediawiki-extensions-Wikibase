@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_5651ef63",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-14T13:14:08Z",
+      "side": 1,
+      "message": "This method is public (why?) so it fails if this content is a redirect. I\u0027m not sure if this is a good idea.",
+      "revId": "9cd75214a2c9580cb6775d0b6c265ba214b62ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
