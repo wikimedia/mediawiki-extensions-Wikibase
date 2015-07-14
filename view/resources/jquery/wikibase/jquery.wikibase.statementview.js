@@ -292,15 +292,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @private
 	 *
-	 * @param {wikibase.datamodel.Statement} [statement]
+	 * @param {wikibase.datamodel.Reference[]} [references]
 	 */
-	_createReferencesListview: function( statement ) {
-		if( !statement ) {
-			return;
-		}
-
-		var self = this,
-			references = statement.getReferences();
+	_createReferencesListview: function( references ) {
+		var self = this;
 
 		var $listview = this.$references.children();
 		if( !$listview.length ) {
@@ -325,7 +320,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 					};
 				}
 			} ),
-			value: references.toArray()
+			value: references
 		} );
 
 		this._referencesListview = $listview.data( 'listview' );
@@ -472,7 +467,11 @@ $.widget( 'wikibase.statementview', PARENT, {
 			);
 		}
 
-		this._createReferencesListview( this.options.value );
+		if( this.isInEditMode() || this.options.value ) {
+			this._createReferencesListview(
+				this.options.value ? this.options.value.getReferences().toArray() : []
+			);
+		}
 
 		return $.Deferred().resolve().promise();
 	},
