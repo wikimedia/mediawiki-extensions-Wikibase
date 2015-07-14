@@ -193,14 +193,14 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
 						. '<http://wikiba.se/ontology-beta#quantityLowerBound> "+0.00010"^^'
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
-						. '<http://wikiba.se/ontology-beta#quantityUnit> "1" .',
+					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> ',
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
 						. '<http://wikiba.se/ontology-beta#quantityUpperBound> "+0.00013"^^'
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
 				),
 			),
-			'quantity-unit' => array(
+/* TODO: re-enable this test when Units are implemeted
+  				'quantity-unit' => array(
 				new PropertyId( 'P6' ),
 				new QuantityValue(
 					new DecimalValue( '-2.3' ),
@@ -231,7 +231,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '<http://wikiba.se/ontology-beta#quantityUpperBound> "-2.3"^^'
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
 				),
-			),
+			),*/
 			'string' => array(
 				new PropertyId( 'P7' ),
 				new StringValue( 'Kittens' ),

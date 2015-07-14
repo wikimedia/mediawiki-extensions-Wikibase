@@ -295,12 +295,6 @@
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
-  <owl:DatatypeProperty rdf:about="&wikibase;quantityUnit">
-      <rdfs:label>quantityUnit</rdfs:label>
-      <rdfs:comment>Unit of measurement.</rdfs:comment>
-      <rdfs:domain rdf:resource="&wikibase;QuantityValue"/>
-  </owl:DatatypeProperty>
-
   <owl:ObjectProperty rdf:about="&wikibase;timeCalendarModel">
       <rdfs:label>timeCalendarModel</rdfs:label>
       <rdfs:comment>Preferred calendar used to display this date to the user.</rdfs:comment>
