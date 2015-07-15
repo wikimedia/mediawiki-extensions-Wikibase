@@ -6,13 +6,11 @@ use Language;
 use Parser;
 use ParserOptions;
 use Scribunto;
-use Scribunto_LuaWikibaseLibrary;
 use Title;
-use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 
 /**
- * @covers Scribunto_LuaWikibaseLibrary
+ * @covers Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
@@ -36,7 +34,10 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testConstructor() {
 		$engine = Scribunto::newDefaultEngine( array() );
 		$luaWikibaseLibrary = new Scribunto_LuaWikibaseLibrary( $engine );
-		$this->assertInstanceOf( 'Scribunto_LuaWikibaseLibrary', $luaWikibaseLibrary );
+		$this->assertInstanceOf(
+			'Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary',
+			$luaWikibaseLibrary
+		);
 	}
 
 	public function testRegister() {

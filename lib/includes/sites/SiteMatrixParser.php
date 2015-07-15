@@ -1,5 +1,11 @@
 <?php
 
+namespace Wikibase\Lib\Sites;
+
+use InvalidArgumentException;
+use MediaWikiSite;
+use Site;
+
 /**
  * Translates api sitematrix results json into an array of Site objects
  *

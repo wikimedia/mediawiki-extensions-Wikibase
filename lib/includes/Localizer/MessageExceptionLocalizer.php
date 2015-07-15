@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Localizer;
 use Exception;
 use InvalidArgumentException;
 use Message;
-use MessageException;
+use Wikibase\Lib\MessageException;
 
 /**
  * @license GPL 2+

@@ -2,10 +2,10 @@
 
 namespace Wikibase;
 
-use Disposable;
 use Maintenance;
 use MWException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\Disposable;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;

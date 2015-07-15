@@ -1,6 +1,11 @@
 <?php
 
-use Wikibase\Test\MockSiteStore;
+namespace Wikibase\Test;
+
+use MediaWikiSite;
+use PHPUnit_Framework_TestCase;
+use SiteList;
+use Wikibase\Lib\Sites\SitesBuilder;
 
 /**
  * @covers SitesBuilder

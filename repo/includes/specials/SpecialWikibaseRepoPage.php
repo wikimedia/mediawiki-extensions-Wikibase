@@ -2,22 +2,22 @@
 
 namespace Wikibase\Repo\Specials;
 
-use MessageException;
 use MWException;
 use RuntimeException;
 use SiteStore;
 use Status;
 use Title;
-use UserInputException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -153,8 +153,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param EntityId $id
 	 * @param int|string $revisionId
 	 *
-	 * @throws \MessageException
-	 * @throws \UserInputException
+	 * @throws MessageException
+	 * @throws UserInputException
 	 * @return EntityRevision
 	 *
 	 */

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\IO;
 
-use Disposable;
 use InvalidArgumentException;
 use Iterator;
+use Wikibase\Lib\Disposable;
 
 /**
  * LineReader allows iterating over the lines of a file.

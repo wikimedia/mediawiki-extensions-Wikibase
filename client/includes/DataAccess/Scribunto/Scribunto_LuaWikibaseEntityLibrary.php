@@ -1,12 +1,16 @@
 <?php
 
+namespace Wikibase\Client\DataAccess\Scribunto;
+
+use InvalidArgumentException;
+use Scribunto_LuaLibraryBase;
+use ScribuntoException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\SnaksFinder;
-use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\SnakFormatter;

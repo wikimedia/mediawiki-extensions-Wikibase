@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use UserInputException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 

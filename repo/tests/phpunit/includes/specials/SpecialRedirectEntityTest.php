@@ -4,12 +4,12 @@ namespace Wikibase\Test;
 
 use Exception;
 use FauxRequest;
-use MessageException;
 use PHPUnit_Framework_Error;
 use RawMessage;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\MessageException;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
@@ -246,10 +246,10 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		return array(
 			array( //toid bad
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
-				'e' =>  'UserInputException:wikibase-wikibaserepopage-invalid-id' ),
+				'e' =>  'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
 			array( //fromid bad
 				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
-				'e' =>  'UserInputException:wikibase-wikibaserepopage-invalid-id' ),
+				'e' =>  'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
 			array( //from id is property
 				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
 				'e' =>  'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),

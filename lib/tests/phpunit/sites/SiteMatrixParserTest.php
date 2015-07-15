@@ -1,5 +1,11 @@
 <?php
 
+namespace Wikibase\Test;
+
+use MediaWikiSite;
+use PHPUnit_Framework_TestCase;
+use Wikibase\Lib\Sites\SiteMatrixParser;
+
 /**
  * @covers SiteMatrixParser
  *
@@ -215,4 +221,5 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 
 		return $sites;
 	}
+
 }
