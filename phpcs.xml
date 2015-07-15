@@ -37,9 +37,6 @@
 	<rule ref="Generic.PHP.NoSilencedErrors" />
 
 	<rule ref="PSR1" />
-	<rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
-		<severity>0</severity>
-	</rule>
 	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
 		<severity>0</severity>

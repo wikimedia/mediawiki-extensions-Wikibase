@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Lib\Sites;
+
+use Site;
+use SiteStore;
+
 /**
  * Builds the site identifiers table
  *

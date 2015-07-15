@@ -3,13 +3,14 @@
 namespace Wikibase\Test;
 
 use Exception;
-use MessageException;
 use PHPUnit_Framework_Error;
 use RawMessage;
 use Status;
 use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\MessageException;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;

@@ -5,12 +5,12 @@ namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 use Parser;
 use ParserOptions;
 use Scribunto;
-use Scribunto_LuaWikibaseEntityLibrary;
 use Title;
+use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\WikibaseClient;
 
 /**
- * @covers Scribunto_LuaWikibaseEntityLibrary
+ * @covers Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration

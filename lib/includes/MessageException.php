@@ -1,5 +1,9 @@
 <?php
 
+namespace Wikibase\Lib;
+
+use Exception;
+
 /**
  * Should be moved to core!
  *

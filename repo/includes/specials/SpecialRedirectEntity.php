@@ -4,11 +4,11 @@ namespace Wikibase\Repo\Specials;
 
 use Exception;
 use Html;
-use UserInputException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
+use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\WikibaseRepo;
