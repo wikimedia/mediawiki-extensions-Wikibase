@@ -491,7 +491,7 @@ class EntityDataRequestHandler {
 			$response->header( 'Last-Modified: ' . wfTimestamp( TS_RFC2822, $lastModified ) );
 		}
 
-		//Set X-Frame-Options API results (bug 39180)
+		//Set X-Frame-Options API results (bug T41180)
 		if ( $this->frameOptionsHeader !== null && $this->frameOptionsHeader !== '' ) {
 			$response->header( "X-Frame-Options: $this->frameOptionsHeader" );
 		}

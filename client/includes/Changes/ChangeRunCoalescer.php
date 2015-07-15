@@ -261,7 +261,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 				}
 
 				$currentRun[] = $change;
-				// skip any change that failed to process in some way (bug 49417)
+				// skip any change that failed to process in some way (bug T51417)
 			} catch ( Exception $ex ) {
 				wfLogWarning( __METHOD__ . ':' . $ex->getMessage() );
 			}

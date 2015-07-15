@@ -101,7 +101,7 @@ class ItemChangeTest extends EntityChangeTest {
 			$cases['plain-diff'] = array( $change );
 
 			// --------
-			// Bug 51363: As of commit ff65735a125e, MapDiffer may generate atomic diffs for
+			// Bug T53363: As of commit ff65735a125e, MapDiffer may generate atomic diffs for
 			// substructures even in recursive mode. Make sure we can handle them
 			// if we happen to load them from the database or such.
 

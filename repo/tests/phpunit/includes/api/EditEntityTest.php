@@ -503,7 +503,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. TermTestHelper::makeOverlyLongString() . '"}}}'
 				),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
-			//@todo add check for Bug:52731 once fixed
+			//@todo add check for bug T54731 once fixed
 			'removing invalid claim fails' => array( // removing invalid claim fails
 				'p' => array(
 					'site' => 'enwiki',

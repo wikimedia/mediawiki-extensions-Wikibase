@@ -268,7 +268,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 
 		// TODO: This widget should not need to queue the requests of its encapsulated widgets.
 		// However, the back-end produces edit conflicts when issuing multiple requests at once.
-		// Remove queueing as soon as the back-end is fixed; see bug #72020.
+		// Remove queueing as soon as the back-end is fixed; see bug T74020.
 		var $queue = $( {} );
 
 		/**

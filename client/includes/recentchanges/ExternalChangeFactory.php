@@ -195,7 +195,7 @@ class ExternalChangeFactory {
 	}
 
 	/**
-	 * normalizes for extra empty comment in rc_params (see bug 45812)
+	 * normalizes for extra empty comment in rc_params (see bug T47812)
 	 * @fixme: can remove at some point in the future
 	 *
 	 * @param array $comments

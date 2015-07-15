@@ -373,7 +373,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @see https://bugzilla.wikimedia.org/66181
+	 * @see https://phabricator.wikimedia.org/T68181
 	 */
 	public function testAddEntityRevisionInIndexedModeWithSiteLinksFilter() {
 		$indexedMode = true;

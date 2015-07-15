@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
 ) /*$wgDBTableOptions*/;
 
 -- Indexes and comments below adopted from the suggestions Sean Pringle made
--- at https://bugzilla.wikimedia.org/show_bug.cgi?id=45529#c10 based on a
+-- at https://phabricator.wikimedia.org/T47529#518941 based on a
 -- live analysis of queries on wikidata.org in January 2014.
 -- NOTE: keep these in sync with UpdateTermIndexes.sql
 

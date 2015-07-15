@@ -1044,7 +1044,7 @@ final class RepoHooks {
 	/**
 	 * Called by Import.php. Implemented to prevent the import of entities.
 	 *
-	 * @param object $importer unclear, see Bug 64657
+	 * @param object $importer unclear, see Bug T66657
 	 * @param array $pageInfo
 	 * @param array $revisionInfo
 	 *
