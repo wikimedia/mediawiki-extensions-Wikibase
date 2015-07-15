@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_d0f079fc",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-15T21:22:22Z",
+      "side": 1,
+      "message": "The function name is a bit odd. What about onGetQueryPages?",
+      "revId": "6f037b08aea1e2cea17b689666e2650fe9840118",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
