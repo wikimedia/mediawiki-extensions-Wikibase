@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
+use Wikibase\DataModel\Serializers\AliasGroupSerializer;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\PropertySerializer;
@@ -228,6 +229,17 @@ class SerializerFactory {
 	}
 
 	/**
+	 * Returns a Serializer that can serialize AliasGroup objects.
+	 *
+	 * @since 1.6
+	 *
+	 * @return Serializer
+	 */
+	public function newAliasGroupSerializer() {
+		return new AliasGroupSerializer();
+	}
+
+	/**
 	 * Returns a Serializer that can serialize AliasGroupList objects.
 	 *
 	 * @since 1.5
@@ -235,7 +247,7 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newAliasGroupListSerializer() {
-		return new AliasGroupListSerializer( $this->shouldUseObjectsForMaps() );
+		return new AliasGroupListSerializer( $this->newAliasGroupSerializer(), $this->shouldUseObjectsForMaps() );
 	}
 
 }
