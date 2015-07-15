@@ -53,7 +53,7 @@ class RepoHooksTest extends \MediaWikiTestCase {
 	 * @param null $expectedException
 	 */
 	public function testOnImportHandleRevisionXMLTag( $revisionInfo, $expectedException = null ) {
-		//NOTE: class is unclear, see Bug 64657. But we don't use that object anyway.
+		//NOTE: class is unclear, see Bug T66657. But we don't use that object anyway.
 		$importer = $this->getMockBuilder( 'Import' )
 			->disableOriginalConstructor()
 			->getMock();

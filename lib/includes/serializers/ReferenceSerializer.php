@@ -55,7 +55,7 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$serialization = array();
 
-		// needs to be cloned as workaround for bug 71519, where in some cases
+		// needs to be cloned as workaround for bug T73519, where in some cases
 		// calling $reference->getHash() corrupts the $snaks value of the $reference.
 		$clonedReference = clone $reference;
 		$serialization['hash'] = $clonedReference->getHash();

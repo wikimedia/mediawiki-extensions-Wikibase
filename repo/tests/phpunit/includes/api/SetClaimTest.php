@@ -392,10 +392,10 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @see Bug 58394 - "specified index out of bounds" issue when moving a statement
+	 * @see Bug T60394 - "specified index out of bounds" issue when moving a statement
 	 * @note A hack is  in place in ChangeOpStatement to allow this
 	 */
-	public function testBug58394SpecifiedIndexOutOfBounds() {
+	public function testBugT60394SpecifiedIndexOutOfBounds() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		// Initialize item content with empty claims:

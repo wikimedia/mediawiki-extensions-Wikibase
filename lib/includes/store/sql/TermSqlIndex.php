@@ -974,7 +974,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		//TODO: Use Language::lc to convert to lower case.
 		//      But that requires us to load ALL the language objects,
 		//      which loads ALL the messages, which makes us run out
-		//      of RAM (see bug 41103).
+		//      of RAM (see bug T43103).
 		$normalized = mb_strtolower( $strippedText, 'UTF-8' );
 
 		if ( !is_string( $normalized ) || $normalized === '' ) {
