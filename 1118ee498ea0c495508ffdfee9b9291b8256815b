@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b5036278",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-15T16:57:55Z",
+      "side": 1,
+      "message": "Bad indent here. This is also why jenkins fails: it now has a \"lint\" check that fails on style violations.",
+      "revId": "1118ee498ea0c495508ffdfee9b9291b8256815b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
