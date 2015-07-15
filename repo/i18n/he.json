@@ -433,7 +433,7 @@
 	"apihelp-wbeditentity-param-new": "אם זה מוגדר, תיווצר ישות חדשה.\nיש להגדיר את זה לסוג הישות שברצונך ליצור – עכשיו זה 'item'|'property'.\nאסור שזה יהיה מוגדר אם גם 'id' מוגדר.",
 	"apihelp-wbeditentity-example-1": "ליצור פריט ריק חדש, להחזיר מבנה ישות שלם",
 	"apihelp-wbeditentity-example-2": "ליצור פריט חדש ולהגדיר תוויות ל־de ו־en",
-	"apihelp-wbeditentity-example-3": "יוצרת מאפיין חדש שמכיל את נתוני json, ומחזירה מורחב עם מבנה הפריט",
+	"apihelp-wbeditentity-example-3": "יצירת מאפיין חדש שמכיל את נתוני json, החזרת מבנה ישות מלא",
 	"apihelp-wbeditentity-example-4": "לנקות את כל הנתונים עם מזהה Q42",
 	"apihelp-wbeditentity-example-5": "ניקוי כל הנתונים מישות שהמזהה שלה הוא Q42 והגדרת תווית ל־en",
 	"apihelp-wbeditentity-example-6": "הגדרת קישור אתר ל־nowiki, ודריסה אם הוא כבר קיים",

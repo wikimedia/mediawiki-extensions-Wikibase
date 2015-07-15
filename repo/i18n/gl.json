@@ -430,7 +430,7 @@
 	"apihelp-wbeditentity-param-new": "Se se indica, crearase unha nova entidade.\nFixe isto ó tipo da entidade que quere crear - actualmente 'item'|'property' (elemento|propiedade).\nNon está permitido indicar isto cando 'id' tamén está seleccionado.",
 	"apihelp-wbeditentity-example-1": "Crear un novo elemento baleiro, devolve a estrutura completa da entidade",
 	"apihelp-wbeditentity-example-2": "Crea un novo elemento e fixa as etiquetas para de e en",
-	"apihelp-wbeditentity-example-3": "Crea unha nova propiedade que contén os datos json, devólvese extendida coa estrutura do elemento",
+	"apihelp-wbeditentity-example-3": "Crea unha nova propiedade que contén os datos json, devolve a estrutura completa da entidade",
 	"apihelp-wbeditentity-example-4": "Baleira todos os datos da entidade co identificador Q42",
 	"apihelp-wbeditentity-example-5": "Baleira todos os datos da entidade co identificador Q42 e fixa a etiqueta para en",
 	"apihelp-wbeditentity-example-6": "Fixa a ligazón ó sitio para nonwiki, sobreescribíndoa se xa existe",

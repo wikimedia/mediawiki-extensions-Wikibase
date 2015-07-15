@@ -38,7 +38,8 @@
 			"Freak2fast4u",
 			"Mattho69",
 			"Windes",
-			"TomT0m"
+			"TomT0m",
+			"Pathe"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -511,5 +512,17 @@
 	"apihelp-wbgetentities-example-10": "Obtenir l'élément de la page \"Berlin\" sur le site \"enwiki\", avec les attributs de langue en langue anglaise",
 	"apihelp-wbgetentities-example-11": "Obtenir l'élément de la page \"Berlin\" sur le site \"enwiki\" après normalisation du titre de \"berlin\"",
 	"apihelp-wbgetentities-example-12": "Récupérer les liens de site pour l'élément Q42",
-	"apihelp-wbsetaliases-param-set": "Une liste d'alias qui remplacera la liste courante (les éléments de cette liste ne peuvent être ni complétés ni supprimés)"
+	"apihelp-wbgetentities-example-13": "Obtenir les entités avec l’ID Q42 en affichant uniquement les liens de site de enwiki",
+	"apihelp-wblinktitles-description": "Associe deux articles sur deux wiki différents dans un élément de Wikibase.",
+	"apihelp-wblinktitles-param-tosite": "Un identifiant pour le site sur lequel réside la page.\nÀ utiliser avec 'totitle' pour faire un lien de site complet.",
+	"apihelp-wblinktitles-param-totitle": "Titre de la page à associer.\nÀ utiliser avec 'tosite' pour faire un lien de site complet.",
+	"apihelp-wblinktitles-param-fromsite": "Un identifiant pour le site sur lequel réside la page.\nÀ utiliser avec 'fromtitle' pour faire un lien de site complet.",
+	"apihelp-wblinktitles-param-fromtitle": "Titre de la page à associer.\nÀ utiliser avec 'fromsite' pour faire un lien de site complet.",
+	"apihelp-wbmergeitems-description": "Fusionne plusieurs éléments",
+	"apihelp-wbmergeitems-param-fromid": "L’ID à partir duquel fusionner",
+	"apihelp-wbmergeitems-param-toid": "L’ID vers lequel fusionner",
+	"apihelp-wbsetaliases-param-set": "Une liste d'alias qui remplacera la liste courante (les éléments de cette liste ne peuvent être ni complétés ni supprimés)",
+	"apihelp-wbsetlabel-param-language": "Langue de l'étiquette",
+	"apihelp-wbsetlabel-param-value": "La valeur de l'étiquette",
+	"apihelp-wbsetsitelink-example-4": "Supprime de l'élément le lien vers le site germanophone"
 }
