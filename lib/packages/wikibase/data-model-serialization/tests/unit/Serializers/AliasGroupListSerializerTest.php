@@ -18,11 +18,22 @@ use Wikibase\DataModel\Term\AliasGroupList;
  */
 class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 
+	protected function buildSerializer( $useObjectsForMaps ) {
+		$aliasGroupSerializer = $this->getMock( 'Serializers\Serializer' );
+		$aliasGroupSerializer->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnCallback( function( AliasGroup $aliasGroup ) {
+				return $aliasGroup->getAliases();
+			} ) );
+
+		return new AliasGroupListSerializer( $aliasGroupSerializer, $useObjectsForMaps );
+	}
+
 	/**
 	 * @dataProvider serializationProvider
 	 */
 	public function testSerialization( AliasGroupList $input, $useObjectsForMaps, $expected ) {
-		$serializer = new AliasGroupListSerializer( $useObjectsForMaps );
+		$serializer = $this->buildSerializer( $useObjectsForMaps );
 
 		$output = $serializer->serialize( $input );
 
@@ -44,17 +55,12 @@ class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 			array(
 				new AliasGroupList( array( new AliasGroup( 'en', array( 'One' ) ) ) ),
 				false,
-				array( 'en' => array(
-					array( 'language' => 'en', 'value' => 'One' ),
-				) ),
+				array( 'en' => array( 'One' ) )
 			),
 			array(
 				new AliasGroupList( array( new AliasGroup( 'en', array( 'One', 'Pony' ) ) ) ),
 				false,
-				array( 'en' => array(
-					array( 'language' => 'en', 'value' => 'One' ),
-					array( 'language' => 'en', 'value' => 'Pony' ),
-				) ),
+				array( 'en' => array( 'One', 'Pony' ) )
 			),
 			array(
 				new AliasGroupList( array(
@@ -62,21 +68,10 @@ class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 					new AliasGroup( 'de', array( 'foo', 'bar' ) )
 				) ),
 				false,
-				array( 'en' => array(
-					array( 'language' => 'en', 'value' => 'One' ),
-					array( 'language' => 'en', 'value' => 'Pony' ),
-				), 'de' => array(
-					array( 'language' => 'de', 'value' => 'foo' ),
-					array( 'language' => 'de', 'value' => 'bar' ),
-				) ),
-			),
-			array(
-				new AliasGroupList( array( new AliasGroupFallback( 'en', array( 'One', 'Pony' ), 'de', 'fr' ) ) ),
-				false,
-				array( 'en' => array(
-					array( 'language' => 'de', 'value' => 'One', 'source' => 'fr' ),
-					array( 'language' => 'de', 'value' => 'Pony', 'source' => 'fr' ),
-				) ),
+				array(
+					'en' => array( 'One', 'Pony' ),
+					'de' => array( 'foo', 'bar' ),
+				)
 			),
 		);
 	}
@@ -88,21 +83,12 @@ class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testAliasGroupListSerializerWithOptionObjectsForMaps() {
-		$serializer = new AliasGroupListSerializer( true );
+		$serializer = $this->buildSerializer( true );
 
 		$aliases = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) );
 
 		$serial = new \stdClass();
-		$serial->en = array(
-			array(
-				'language' => 'en',
-				'value' => 'foo'
-			),
-			array(
-				'language' => 'en',
-				'value' => 'bar'
-			)
-		);
+		$serial->en = array( 'foo', 'bar' );
 
 		$this->assertEquals( $serial, $serializer->serialize( $aliases ) );
 	}

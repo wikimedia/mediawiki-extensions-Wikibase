@@ -137,6 +137,13 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testNewAliasGroupSerializer() {
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newAliasGroupSerializer(),
+			new AliasGroup( 'en', array( 'foo', 'bar' ) )
+		);
+	}
+
 	public function testNewAliasGroupListSerializer() {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newAliasGroupListSerializer(),
