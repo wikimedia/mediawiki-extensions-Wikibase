@@ -330,12 +330,14 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 	public function testOnFormat( $model, $root, $pre, $auto, $post, $title, $local, $expected ) {
 		$itemTitle = $this->getMock( $title );
 		$itemTitle->expects( $this->once() )->method( 'getContentModel' )->will( $this->returnValue( $model ) );
+
 		$comment = null;
-		RepoHooks::onFormat( array($model, $root), $comment, $pre, $auto, $post, $itemTitle, $local );
+
+		RepoHooks::onFormat( array( $model, $root ), $comment, $pre, $auto, $post, $itemTitle, $local );
+
 		if ( is_null( $expected ) ) {
 			$this->assertEquals( $expected, $comment, "Didn't find the expected null" );
-		}
-		else {
+		} else {
 			$this->assertRegExp( $expected, $comment, "Didn't find the expected final comment" );
 		}
 	}

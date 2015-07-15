@@ -142,8 +142,7 @@ class LinkTitles extends ApiBase {
 
 			$flags |= EDIT_NEW;
 			$summary->setAction( 'create' );
-		}
-		elseif ( $fromId === null && $toId !== null ) {
+		} elseif ( $fromId === null && $toId !== null ) {
 			// reuse to-site's item
 			/** @var Item $item */
 			$itemRev = $lookup->getEntityRevision( $toId, EntityRevisionLookup::LATEST_FROM_MASTER );
@@ -152,8 +151,7 @@ class LinkTitles extends ApiBase {
 			$item->addSiteLink( $fromLink );
 			$return[] = $fromLink;
 			$summary->setAction( 'connect' );
-		}
-		elseif ( $fromId !== null && $toId === null ) {
+		} elseif ( $fromId !== null && $toId === null ) {
 			// reuse from-site's item
 			/** @var Item $item */
 			$itemRev = $lookup->getEntityRevision( $fromId, EntityRevisionLookup::LATEST_FROM_MASTER );
@@ -162,13 +160,10 @@ class LinkTitles extends ApiBase {
 			$item->addSiteLink( $toLink );
 			$return[] = $toLink;
 			$summary->setAction( 'connect' );
-		}
-		// we can be sure that $fromId and $toId are not null here
-		elseif ( $fromId->equals( $toId ) ) {
+		} elseif ( $fromId->equals( $toId ) ) {
 			// no-op
 			$this->errorReporter->dieError( 'Common item detected, sitelinks are both on the same item', 'common-item' );
-		}
-		else {
+		} else {
 			// dissimilar items
 			$this->errorReporter->dieError( 'No common item detected, unable to link titles', 'no-common-item' );
 		}
@@ -188,7 +183,7 @@ class LinkTitles extends ApiBase {
 	private function getSiteAndNormalizedPageName( SiteList $sites, $site, $pageTitle ) {
 		$siteObj = $sites->getSite( $site );
 		$page = $siteObj->normalizePageName( $pageTitle );
-		if( $page === false ) {
+		if ( $page === false ) {
 			$this->errorReporter->dieMessage( 'no-external-page', $site, $pageTitle );
 		}
 		return array( $siteObj, $page );
@@ -204,8 +199,7 @@ class LinkTitles extends ApiBase {
 		if ( $item === null ) {
 			// to not have an Item isn't really bad at this point
 			return Status::newGood( true );
-		}
-		else {
+		} else {
 			// Do the actual save, or if it don't exist yet create it.
 			return $this->attemptSaveEntity( $item,
 				$summary,

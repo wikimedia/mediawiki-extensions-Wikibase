@@ -256,8 +256,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			. Html::input( 'id', $this->entityRevision->getEntity()->getId()->getSerialization(), 'hidden' )
 			. Html::input( 'remove', 'remove', 'hidden' )
 			. $pageinput;
-		}
-		else {
+		} else {
 			$intro = $this->msg( 'wikibase-setsitelink-intro' )->text();
 
 			if ( !empty( $this->badgeItems ) ) {

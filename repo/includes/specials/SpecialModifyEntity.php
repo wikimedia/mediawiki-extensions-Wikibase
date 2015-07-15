@@ -100,8 +100,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				$errors = $status->getErrorsArray();
 				$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );
 				$this->setForm( $entity );
-			}
-			else {
+			} else {
 				$entityUrl = $this->getEntityTitle( $entity->getId() )->getFullUrl();
 				$this->getOutput()->redirect( $entityUrl );
 			}

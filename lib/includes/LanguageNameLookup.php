@@ -33,8 +33,7 @@ class LanguageNameLookup {
 		if ( isset( $inLanguage ) ) {
 			$inLanguage = str_replace( '_', '-', $inLanguage );
 			$languageName = Language::fetchLanguageName( $languageCode, $inLanguage );
-		}
-		else {
+		} else {
 			$languageName = Language::fetchLanguageName( $languageCode );
 		}
 

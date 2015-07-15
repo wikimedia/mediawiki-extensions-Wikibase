@@ -92,8 +92,7 @@ class HistoryEntityAction extends \HistoryAction {
 			// OutputPage::setPageTitle:
 			return $this->msg( 'wikibase-history-title-with-label' )
 				->rawParams( $idSerialization, htmlspecialchars( $labelText ) )->text();
-		}
-		else {
+		} else {
 			return $this->msg( 'wikibase-history-title-without-label' )
 				->rawParams( $idSerialization )->text();
 		}

@@ -6,6 +6,7 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use MWContentSerializationException;
+use MWExceptionHandler;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
@@ -139,9 +140,8 @@ class EntityContentDataCodec {
 		try {
 			$data = $this->entitySerializer->serialize( $entity );
 			return $this->encodeEntityContentData( $data, $format );
-		}
-		catch ( SerializationException $ex ) {
-			\MWExceptionHandler::logException( $ex );
+		} catch ( SerializationException $ex ) {
+			MWExceptionHandler::logException( $ex );
 			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 		}
 	}
@@ -227,8 +227,7 @@ class EntityContentDataCodec {
 		try {
 			$entity = $this->entityDeserializer->deserialize( $data );
 			return $entity;
-		}
-		catch ( DeserializationException $ex ) {
+		} catch ( DeserializationException $ex ) {
 			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 		}
 	}
@@ -266,8 +265,7 @@ class EntityContentDataCodec {
 			// TODO: Use proper Deserializer
 			$redirect = new EntityRedirect( $entityId, $targetId );
 			return $redirect;
-		}
-		catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException $ex ) {
 			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 		}
 	}
@@ -290,16 +288,14 @@ class EntityContentDataCodec {
 				// Handle the old-style representation of IDs as a two element array.
 				$stubbedId = $data[$key];
 				return LegacyIdInterpreter::newIdFromTypeAndNumber( $stubbedId[0], $stubbedId[1] );
-			}
-			catch ( InvalidArgumentException $ex ) {
+			} catch ( InvalidArgumentException $ex ) {
 				throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 			}
 		}
 
 		try {
 			return $this->entityIdParser->parse( $data[$key] );
-		}
-		catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException $ex ) {
 			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 		}
 	}

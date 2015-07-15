@@ -50,8 +50,7 @@ class AliasSerializer extends SerializerObject implements Unserializer {
 				}
 				$value[$languageCode] = $arr;
 			}
-		}
-		else {
+		} else {
 			foreach ( $aliases as $languageCode => $alarr ) {
 				foreach ( $alarr as $alias ) {
 					if ( $alias === '' ) {

@@ -141,8 +141,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 
 			if ( $serialization['references'] === array() ) {
 				unset( $serialization['references'] );
-			}
-			else {
+			} else {
 				$this->setIndexedTagName( $serialization['references'], 'reference' );
 			}
 		}

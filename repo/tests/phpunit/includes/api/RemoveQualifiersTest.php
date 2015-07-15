@@ -95,8 +95,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 					array( '~=[,,_,,]:3' ),
 					'no-such-qualifier'
 				);
-			}
-			else {
+			} else {
 				$hashes = array_map(
 					function( Snak $qualifier ) {
 						return $qualifier->getHash();

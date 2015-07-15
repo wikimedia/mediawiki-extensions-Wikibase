@@ -124,8 +124,7 @@ class ParseValue extends ApiBase {
 
 		try {
 			$parseResult = $parser->parse( $value );
-		}
-		catch ( ParseException $parseError ) {
+		} catch ( ParseException $parseError ) {
 			$this->addParseErrorToResult( $result, $parseError );
 			return $result;
 		}
@@ -133,8 +132,7 @@ class ParseValue extends ApiBase {
 		if ( $parseResult instanceof DataValue ) {
 			$result['value'] = $parseResult->getArrayValue();
 			$result['type'] = $parseResult->getType();
-		}
-		else {
+		} else {
 			$result['value'] = $parseResult;
 		}
 
