@@ -326,7 +326,12 @@ class ChangeOpTestMockProvider {
 		return Result::newSuccess();
 	}
 
-	public function detectLabelConflicts( $entityType, $labels, $aliases, EntityId $entityId = null ) {
+	public function detectLabelConflicts(
+		$entityType,
+		array $labels,
+		array $aliases = null,
+		EntityId $entityId = null
+	) {
 		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
 			// simulated conflicts always conflict with P666, so if these are
 			// ignored as self-conflicts, we don't need to check any labels.
@@ -376,7 +381,12 @@ class ChangeOpTestMockProvider {
 		return Result::newSuccess();
 	}
 
-	public function detectLabelDescriptionConflicts( $entityType, $labels, $descriptions, EntityId $entityId = null ) {
+	public function detectLabelDescriptionConflicts(
+		$entityType,
+		array $labels,
+		array $descriptions = null,
+		EntityId $entityId = null
+	) {
 		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
 			// simulated conflicts always conflict with P666, so if these are
 			// ignored as self-conflicts, we don't need to check any labels.
@@ -384,11 +394,9 @@ class ChangeOpTestMockProvider {
 		}
 
 		foreach ( $labels as $lang => $text ) {
-
 			if ( $descriptions !== null
-				&& ( !isset( $descriptions[$lang] )
-					|| $descriptions[$lang] !== 'DUPE' ) ) {
-
+				&& ( !isset( $descriptions[$lang] ) || $descriptions[$lang] !== 'DUPE' )
+			) {
 				continue;
 			}
 

@@ -85,7 +85,6 @@ class EntityModificationTestHelper {
 	 */
 	public function putRedirects( $redirects ) {
 		foreach ( $redirects as $key => $redirect ) {
-
 			if ( !( $redirect instanceof EntityRedirect ) ) {
 				$from = $this->idParser->parse( $key );
 

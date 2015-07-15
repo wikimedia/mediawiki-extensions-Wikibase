@@ -388,7 +388,6 @@ class SqlStore implements Store {
 	private function updateEntityPerPageTable( DatabaseUpdater $updater, DatabaseBase $db ) {
 		// Update from 0.1. or 0.2.
 		if ( !$db->tableExists( 'wb_entity_per_page' ) ) {
-
 			$updater->addExtensionTable(
 				'wb_entity_per_page',
 				$this->getUpdateScriptPath( 'AddEntityPerPage', $db->getType() )
@@ -397,7 +396,6 @@ class SqlStore implements Store {
 			$updater->addPostDatabaseUpdateMaintenance(
 				'Wikibase\Repo\Maintenance\RebuildEntityPerPage'
 			);
-
 		} elseif ( $this->useRedirectTargetColumn ) {
 			$updater->addExtensionField(
 				'wb_entity_per_page',
@@ -416,7 +414,6 @@ class SqlStore implements Store {
 	private function updateTermsTable( DatabaseUpdater $updater, DatabaseBase $db ) {
 		// ---- Update from 0.1 or 0.2. ----
 		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
-
 			$updater->addExtensionField(
 				'wb_terms',
 				'term_search_key',

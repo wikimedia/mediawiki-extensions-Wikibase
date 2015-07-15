@@ -169,8 +169,7 @@ class EntityDataFormatProvider {
 	 * Initializes the internal mapping of MIME types and file extensions to format names.
 	 */
 	private function initFormats() {
-		if ( $this->mimeTypes !== null
-			&& $this->fileExtensions !== null ) {
+		if ( $this->mimeTypes !== null && $this->fileExtensions !== null ) {
 			return;
 		}
 
@@ -200,12 +199,12 @@ class EntityDataFormatProvider {
 		$formats = $this->rdfWriterFactory->getSupportedFormats();
 
 		foreach ( $formats as $name ) {
-
 			// check whitelist, and don't override API formats
 			if ( ( $this->formatWhiteList !== null
 					&& !in_array( $name, $this->formatWhiteList ) )
 				|| in_array( $name, $this->mimeTypes )
-				|| in_array( $name, $this->fileExtensions )) {
+				|| in_array( $name, $this->fileExtensions )
+			) {
 				continue;
 			}
 
