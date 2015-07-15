@@ -481,7 +481,7 @@
 	"apihelp-wbeditentity-param-new": "If set, a new entity will be created.\nSet this to the type of the entity you want to create - currently 'item'|'property'.\nIt is not allowed to have this set when 'id' is also set.",
 	"apihelp-wbeditentity-example-1": "Create a new empty item, return full entity structure",
 	"apihelp-wbeditentity-example-2": "Create a new item and set labels for de and en",
-	"apihelp-wbeditentity-example-3": "Create a new property containing the json data, returns extended with the item structure",
+	"apihelp-wbeditentity-example-3": "Create a new property containing the json data, return full entity structure",
 	"apihelp-wbeditentity-example-4": "Clear all data from entity with ID Q42",
 	"apihelp-wbeditentity-example-5": "Clear all data from entity with ID Q42 and set a label for en",
 	"apihelp-wbeditentity-example-6": "Sets sitelink for nowiki, overwriting it if it already exists",
