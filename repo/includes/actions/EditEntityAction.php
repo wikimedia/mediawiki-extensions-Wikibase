@@ -241,7 +241,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			$this->msg( 'errorpagetitle' )
 		);
 
-		$this->getOutput()->addWikiText( $status->getMessage()->text() );
+		$this->getOutput()->addHTML( $status->getMessage()->parse() );
 
 		$this->getOutput()->returnToMain();
 	}
