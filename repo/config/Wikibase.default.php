@@ -49,7 +49,6 @@ return call_user_func( function() {
 		'entityDataFormats' => array(
 			// using the API
 			'json', // default
-			'php',
 
 			// using easyRdf
 			'rdfxml',
