@@ -123,11 +123,8 @@ class SpecialUnconnectedPages extends QueryPage {
 			),
 			'fields' => array(
 				'value' => 'page_id',
-				'page_namespace',
-				'page_title',
-				'page_id',
-				'page_len',
-				'page_is_redirect',
+				'namespace' => 'page_namespace',
+				'title' => 'page_title',
 				'page_num_iwlinks' => '0', // placeholder, we'll get this from page_props in the future
 			),
 			'conds' => $conds,
