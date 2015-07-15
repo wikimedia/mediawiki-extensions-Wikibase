@@ -16,6 +16,24 @@
       "revId": "4aba7475ea9388556bf6807b92abe32e93311923",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_75fdfa68",
+        "filename": "client/WikibaseClient.i18n.magic.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-15T18:45:36Z",
+      "side": 1,
+      "message": "You are right. I missed this somehow. Thanks a lot for the reminder. Fixed in I113502f.",
+      "parentUuid": "8ec42329_9157615c",
+      "revId": "4aba7475ea9388556bf6807b92abe32e93311923",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
