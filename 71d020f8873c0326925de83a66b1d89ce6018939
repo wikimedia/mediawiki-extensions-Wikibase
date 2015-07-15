@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_cf7a1de7",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-07-15T13:30:09Z",
+      "side": 1,
+      "message": "Long parameter lists and boolean parameters should be avoided",
+      "revId": "71d020f8873c0326925de83a66b1d89ce6018939",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
