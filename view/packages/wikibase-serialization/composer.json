@@ -17,7 +17,7 @@
 		}
 	],
 	"support": {
-		"issues": "https://bugzilla.wikimedia.org/",
+		"issues": "https://phabricator.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"autoload": {
