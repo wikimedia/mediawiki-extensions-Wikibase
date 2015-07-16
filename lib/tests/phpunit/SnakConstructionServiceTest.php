@@ -44,7 +44,7 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider newSnakProvider
 	 */
-	public function testNewSnak( $propertyId, $snakType, $rawValue, $expectedSnakClass, $expectedValue, $expectedException ) {
+	public function testNewSnak( $propertyId, $snakType, $rawValue, $expectedSnakClass, $expectedException = null ) {
 		if ( is_int( $propertyId ) ) {
 			$propertyId = PropertyId::newFromNumber( $propertyId );
 		}
@@ -58,23 +58,42 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 		$snak = $service->newSnak( $propertyId, $snakType, $rawValue );
 
 		$this->assertInstanceOf( $expectedSnakClass, $snak );
-
-		if ( $expectedValue ) {
-			$this->assertEmpty( $expectedValue, $snak->getValue() );
-		}
 	}
 
 	public function newSnakProvider() {
 		return array(
-			'novalue' => array( 1, 'novalue', null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, null ),
-			'somevalue' => array( 1, 'somevalue', null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, null ),
-			'value' => array( 1, 'value', '"hello"', 'Wikibase\DataModel\Snak\PropertyValueSnak', null, null ),
-
-			'novalue/badprop' => array( 66, 'novalue', null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, 'Wikibase\DataModel\Entity\PropertyNotFoundException' ),
-			'somevalue/badprop' => array( 66, 'somevalue', null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, 'Wikibase\DataModel\Entity\PropertyNotFoundException' ),
-			'value/badprop' => array( 66, 'value', '"hello"', 'Wikibase\DataModel\Snak\PropertyValueSnak', null, 'Wikibase\DataModel\Entity\PropertyNotFoundException' ),
-
-			'value/badvalue' => array( 1, 'value', array( "foo" ), 'Wikibase\DataModel\Snak\PropertyValueSnak', null, 'DataValues\IllegalValueException' ),
+			'novalue' => array(
+				1, 'novalue', null,
+				'Wikibase\DataModel\Snak\PropertyNoValueSnak',
+			),
+			'somevalue' => array(
+				1, 'somevalue', null,
+				'Wikibase\DataModel\Snak\PropertySomeValueSnak',
+			),
+			'value' => array(
+				1, 'value', '"hello"',
+				'Wikibase\DataModel\Snak\PropertyValueSnak',
+			),
+			'novalue/badprop' => array(
+				66, 'novalue', null,
+				'Wikibase\DataModel\Snak\PropertyNoValueSnak',
+				'Wikibase\DataModel\Entity\PropertyNotFoundException'
+			),
+			'somevalue/badprop' => array(
+				66, 'somevalue', null,
+				'Wikibase\DataModel\Snak\PropertySomeValueSnak',
+				'Wikibase\DataModel\Entity\PropertyNotFoundException'
+			),
+			'value/badprop' => array(
+				66, 'value', '"hello"',
+				'Wikibase\DataModel\Snak\PropertyValueSnak',
+				'Wikibase\DataModel\Entity\PropertyNotFoundException'
+			),
+			'value/badvalue' => array(
+				1, 'value', array( 'foo' ),
+				'Wikibase\DataModel\Snak\PropertyValueSnak',
+				'DataValues\IllegalValueException'
+			),
 		);
 	}
 

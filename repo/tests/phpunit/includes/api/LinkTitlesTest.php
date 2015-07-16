@@ -87,33 +87,117 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 
 	public function provideLinkTitleExceptions() {
 		return array(
-			array( //0 notoken
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'AnotherPage' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'notoken', 'message' => 'The token parameter must be set' ) ) ),
-			array( //1 badtoken
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'AnotherPage', 'token' => '88888888888888888888888888888888+\\' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'Invalid token' ) ) ),
-			array( //2 add two links already exist together
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'common-item') ) ),
-			array( //3 add two links already exist together
-				'p' => array( 'tosite' => 'dewiki', 'totitle' => 'Berlin', 'fromsite' => 'nlwiki', 'fromtitle' => 'Oslo' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-common-item') ) ),
-			array( //4 add two links from the same site
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Hammerfest', 'fromsite' => 'nnwiki', 'fromtitle' => 'Hammerfest' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal') ) ),
-			array( //5 missing title
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => '', 'fromsite' => 'dewiki', 'fromtitle' => 'Hammerfest' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal') ) ),
-			array( //6 bad tosite
-				'p' => array( 'tosite' => 'qwerty', 'totitle' => 'Hammerfest', 'fromsite' => 'nnwiki', 'fromtitle' => 'Hammerfest' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_tosite') ) ),
-			array( //7 bad fromsite
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Hammerfest', 'fromsite' => 'qwerty', 'fromtitle' => 'Hammerfest' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_fromsite') ) ),
-			array( //8 missing site
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'APage', 'fromsite' => '', 'fromtitle' => 'Hammerfest' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_fromsite') ) ),
+			'notoken' => array(
+				'p' => array(
+					'tosite' => 'nnwiki',
+					'totitle' => 'Oslo',
+					'fromsite' => 'nowiki',
+					'fromtitle' => 'AnotherPage'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'notoken',
+					'message' => 'The token parameter must be set'
+				) )
+			),
+			'badtoken' => array(
+				'p' => array(
+					'tosite' => 'nnwiki',
+					'totitle' => 'Oslo',
+					'fromsite' => 'nowiki',
+					'fromtitle' => 'AnotherPage',
+					'token' => '88888888888888888888888888888888+\\'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'badtoken',
+					'message' => 'Invalid token'
+				) )
+			),
+			'add two links already exist together' => array(
+				'p' => array(
+					'tosite' => 'nnwiki',
+					'totitle' => 'Oslo',
+					'fromsite' => 'nowiki',
+					'fromtitle' => 'Oslo'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'common-item'
+				) )
+			),
+			'no common item' => array(
+				'p' => array(
+					'tosite' => 'dewiki',
+					'totitle' => 'Berlin',
+					'fromsite' => 'nlwiki',
+					'fromtitle' => 'Oslo'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'no-common-item'
+				) )
+			),
+			'add two links from the same site' => array(
+				'p' => array(
+					'tosite' => 'nnwiki',
+					'totitle' => 'Hammerfest',
+					'fromsite' => 'nnwiki',
+					'fromtitle' => 'Hammerfest'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'param-illegal'
+				) )
+			),
+			'missing title' => array(
+				'p' => array(
+					'tosite' => 'nnwiki',
+					'totitle' => '',
+					'fromsite' => 'dewiki',
+					'fromtitle' => 'Hammerfest'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'param-illegal'
+				) )
+			),
+			'bad tosite' => array(
+				'p' => array(
+					'tosite' => 'qwerty',
+					'totitle' => 'Hammerfest',
+					'fromsite' => 'nnwiki',
+					'fromtitle' => 'Hammerfest'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'unknown_tosite'
+				) )
+			),
+			'bad fromsite' => array(
+				'p' => array(
+					'tosite' => 'nnwiki',
+					'totitle' => 'Hammerfest',
+					'fromsite' => 'qwerty',
+					'fromtitle' => 'Hammerfest'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'unknown_fromsite'
+				) )
+			),
+			'missing site' => array(
+				'p' => array(
+					'tosite' => 'nnwiki',
+					'totitle' => 'APage',
+					'fromsite' => '',
+					'fromtitle' => 'Hammerfest'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'unknown_fromsite'
+				) )
+			),
 		);
 	}
 
