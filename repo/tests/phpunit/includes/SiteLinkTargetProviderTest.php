@@ -20,7 +20,11 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideExpected
 	 */
-	public function testGetSiteList( $groups, $specialGroups, $expectedGlobalIds ) {
+	public function testGetSiteList(
+		array $groups,
+		array $specialGroups,
+		array $expectedGlobalIds
+	) {
 		$provider = new SiteLinkTargetProvider( $this->getMockSiteStore(), $specialGroups );
 
 		$siteList = $provider->getSiteList( $groups );
@@ -38,11 +42,23 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 			array( array( 'species' ), array(), array( 'specieswiki' ) ),
 			array( array( 'wikiquote' ), array(), array( 'eswikiquote' ) ),
 			array( array( 'qwerty' ), array(), array() ),
-			array( array( 'wikipedia', 'species' ), array(), array( 'eswiki', 'dawiki', 'specieswiki' ) ),
-			array( array( 'wikipedia', 'wikiquote' ), array(), array( 'eswiki', 'dawiki', 'eswikiquote' ) ),
+			array(
+				array( 'wikipedia', 'species' ),
+				array(),
+				array( 'eswiki', 'dawiki', 'specieswiki' )
+			),
+			array(
+				array( 'wikipedia', 'wikiquote' ),
+				array(),
+				array( 'eswiki', 'dawiki', 'eswikiquote' )
+			),
 			array( array( 'special' ), array( 'species' ), array( 'specieswiki' ) ),
 			array( array( 'wikipedia' ), array( 'species' ), array( 'eswiki', 'dawiki' ) ),
-			array( array( 'special', 'wikipedia' ), array( 'species', 'wikiquote' ), array( 'eswiki', 'dawiki', 'specieswiki', 'eswikiquote' ) ),
+			array(
+				array( 'special', 'wikipedia' ),
+				array( 'species', 'wikiquote' ),
+				array( 'eswiki', 'dawiki', 'specieswiki', 'eswikiquote' )
+			),
 			array( array(), array( 'wikipedia' ), array() ),
 			array( array(), array(), array() ),
 		);
