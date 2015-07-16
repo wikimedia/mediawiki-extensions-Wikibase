@@ -13,10 +13,12 @@
 	<rule ref="Generic.Files.LineEndings" />
 	<rule ref="Generic.Files.LineLength">
 		<properties>
-			<!-- FIXME: Should be decreased to 100, preferably in steps of 10. -->
+			<!-- TODO: Should be decreased to 100, preferably in steps of 10. -->
 			<property name="lineLimit" value="170" />
 			<property name="absoluteLineLimit" value="9999" />
 		</properties>
+		<!-- Exclude auto-generated file from the Translate extension, see magic-export.php.-->
+		<exclude-pattern>\.i18n\.magic\.php</exclude-pattern>
 	</rule>
 	<rule ref="Generic.Files.OneInterfacePerFile" />
 	<rule ref="Generic.Files.OneTraitPerFile" />
@@ -55,7 +57,7 @@
 
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
 		<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
-		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibase*Library</exclude-pattern>
+		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibase*Library*\.php</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
 	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->

@@ -85,11 +85,7 @@ $magicWords['fy'] = array(
 
 /** Hindi (हिन्दी) */
 $magicWords['hi'] = array(
-	'noexternallanglinks' => array(
-		0,
-		'कोई_अंतरविकी_कड़ियाँ_नहीं',
-		'कोई_अंतरविकि_कड़ियाँ_नहीं'
-	),
+	'noexternallanglinks' => array( 0, 'कोई_अंतरविकी_कड़ियाँ_नहीं', 'कोई_अंतरविकि_कड़ियाँ_नहीं' ),
 	'property' => array( 0, 'गुण' ),
 );
 
