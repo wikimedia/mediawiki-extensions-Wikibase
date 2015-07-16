@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_14b82ee1",
+        "filename": "repo/tests/phpunit/includes/SiteLinkTargetProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-16T17:06:07Z",
+      "side": 1,
+      "message": "we probably want to assert the order here",
+      "revId": "d1a71b84163eaebbf3bfe7bb3c979c90844a58e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_54beb6d2",
+        "filename": "repo/tests/phpunit/includes/SiteLinkTargetProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-16T17:06:07Z",
+      "side": 1,
+      "message": "well, I would have expected these to fail.. We now order so we should test the order!",
+      "revId": "d1a71b84163eaebbf3bfe7bb3c979c90844a58e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
