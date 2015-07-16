@@ -78,7 +78,6 @@ class SiteLinkCommentCreator {
 
 		// change involved site link to client wiki
 		if ( array_key_exists( $siteId, $diffOps ) ) {
-
 			// $siteLinkDiff changed from containing atomic diffs to
 			// containing map diffs. For B/C, handle both cases.
 			$diffOp = $diffOps[$siteId];

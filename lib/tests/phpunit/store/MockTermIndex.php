@@ -304,7 +304,6 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 				&& ( $termType === null || in_array( $term->getType(), $termType ) )
 				&& $this->termMatchesTemplates( $term, $terms, $options )
 			) {
-
 				$matchingTerms[] = $term;
 			}
 		}

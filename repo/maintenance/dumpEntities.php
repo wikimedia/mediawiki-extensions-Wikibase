@@ -137,8 +137,8 @@ abstract class DumpScript extends Maintenance {
 	private function closeLogFile() {
 		if ( $this->logFileHandle
 			&& $this->logFileHandle !== STDERR
-			&& $this->logFileHandle !== STDOUT ) {
-
+			&& $this->logFileHandle !== STDOUT
+		) {
 			fclose( $this->logFileHandle );
 		}
 

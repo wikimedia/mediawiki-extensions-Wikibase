@@ -17,7 +17,7 @@
 			<property name="lineLimit" value="170" />
 			<property name="absoluteLineLimit" value="9999" />
 		</properties>
-		<!-- Exclude auto-generated file from the Translate extension, see magic-export.php.-->
+		<!-- Exclude auto-generated files from the Translate extension, see magic-export.php. -->
 		<exclude-pattern>\.i18n\.magic\.php</exclude-pattern>
 	</rule>
 	<rule ref="Generic.Files.OneInterfacePerFile" />
@@ -60,10 +60,6 @@
 		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibase*Library*\.php</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
-	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
-	<rule ref="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace">
-		<severity>0</severity>
-	</rule>
 	<rule ref="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace">
 		<severity>0</severity>
 	</rule>

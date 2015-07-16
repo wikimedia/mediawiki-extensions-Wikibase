@@ -99,10 +99,11 @@ class EditFilterHookRunner {
 			throw new InvalidArgumentException( '$new must be instance of Entity or EntityRedirect' );
 		}
 
-		if ( !wfRunHooks( 'EditFilterMergedContent',
-			array( $context, $entityContent, &$filterStatus, $summary, $user, false ) ) ) {
-
-			# Error messages etc. were handled inside the hook.
+		if ( !Hooks::run(
+			'EditFilterMergedContent',
+			array( $context, $entityContent, &$filterStatus, $summary, $user, false )
+		) ) {
+			// Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );
 		}
 

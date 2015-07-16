@@ -125,10 +125,11 @@ class HttpAcceptNegotiator {
 
 		// wildcard match (HTTP/1.1 section 14.1)
 		if ( preg_match( '!^(\w+?)/(\*|\w+)!', $accepted, $acceptedParts )
-			&& preg_match( '!^(\w+?)/(\w+)!', $supported, $supportedParts ) ) {
-
+			&& preg_match( '!^(\w+?)/(\w+)!', $supported, $supportedParts )
+		) {
 			if ( $acceptedParts[2] === '*'
-				&& $acceptedParts[1] === $supportedParts[1] ) {
+				&& $acceptedParts[1] === $supportedParts[1]
+			) {
 				return true;
 			}
 		}

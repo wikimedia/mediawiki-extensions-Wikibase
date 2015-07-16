@@ -385,8 +385,8 @@ class ChangeDispatcher {
 			// The change is relevant if it alters any sitelinks referring to $siteID,
 			// or the item currently links to $siteID.
 			if ( isset( $subscribedEntities[$idString] )
-				|| $this->isRelevantChange( $change, $siteID ) ) {
-
+				|| $this->isRelevantChange( $change, $siteID )
+			) {
 				$filteredChanges[] = $change;
 				$numberOfChangesFound++;
 			}
@@ -438,4 +438,5 @@ class ChangeDispatcher {
 	public function getDispatchCoordinator() {
 		return $this->coordinator;
 	}
+
 }

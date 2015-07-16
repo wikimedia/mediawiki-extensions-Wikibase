@@ -245,7 +245,6 @@ class ChangeHandler {
 		$titlesToUpdate = $this->getTitlesForPageIds( $pageIds );
 
 		switch ( $action ) {
-
 			case self::PARSER_PURGE_ACTION:
 				$this->updater->purgeParserCache( $titlesToUpdate );
 				break;

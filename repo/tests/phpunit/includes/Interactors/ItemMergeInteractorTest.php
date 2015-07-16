@@ -317,7 +317,6 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 
 	private function assertRedirectWorks( $expectedFrom, $fromId, $toId ) {
 		if ( empty( $expectedFrom ) ) {
-
 			try {
 				$this->testHelper->getEntity( $fromId );
 				$this->fail( 'getEntity( ' . $fromId->getSerialization() . ' ) did not throw an UnresolvedRedirectException' );
