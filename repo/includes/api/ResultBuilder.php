@@ -34,9 +34,9 @@ class ResultBuilder {
 	private $result;
 
 	/**
-	 * @var int
+	 * @var EntityTitleLookup
 	 */
-	private $missingEntityCounter;
+	private $entityTitleLookup;
 
 	/**
 	 * @var LibSerializerFactory
@@ -49,19 +49,19 @@ class ResultBuilder {
 	private $serializerFactory;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var bool when special elements such as '_element' are needed by the formatter.
 	 */
-	private $entityTitleLookup;
+	private $isRawMode;
+
+	/**
+	 * @var int
+	 */
+	private $missingEntityCounter = -1;
 
 	/**
 	 * @var SerializationOptions
 	 */
 	private $options;
-
-	/**
-	 * @var bool when special elements such as '_element' are needed by the formatter.
-	 */
-	private $isRawMode;
 
 	/**
 	 * @param ApiResult $result
@@ -77,7 +77,7 @@ class ResultBuilder {
 		EntityTitleLookup $entityTitleLookup,
 		LibSerializerFactory $libSerializerFactory,
 		SerializerFactory $serializerFactory,
-		$isRawMode
+		$isRawMode = false
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
@@ -87,7 +87,6 @@ class ResultBuilder {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->libSerializerFactory = $libSerializerFactory;
 		$this->serializerFactory = $serializerFactory;
-		$this->missingEntityCounter = -1;
 		$this->isRawMode = $isRawMode;
 	}
 
