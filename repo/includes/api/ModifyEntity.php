@@ -571,6 +571,7 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function getAllowedParamsForSiteLink() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+
 		return array(
 			'site' => array(
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
