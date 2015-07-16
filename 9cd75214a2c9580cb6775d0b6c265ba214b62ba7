@@ -34,6 +34,24 @@
       "revId": "9cd75214a2c9580cb6775d0b6c265ba214b62ba7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9cb52a7b",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-16T12:27:29Z",
+      "side": 1,
+      "message": "Ok, so this shouldn\u0027t be used anywhere outside this class, right? However, it is still possible to use this method outside, so as long as it is public, we have to state in the comment that this method fails if the entity is a redirect. In another patch (or maybe in this one?) this should become protected.",
+      "parentUuid": "8ec42329_b5dcc21c",
+      "revId": "9cd75214a2c9580cb6775d0b6c265ba214b62ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
