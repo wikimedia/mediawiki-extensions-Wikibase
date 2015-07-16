@@ -59,10 +59,16 @@ class ResultBuilder {
 	private $options;
 
 	/**
+	 * @var bool when special elements such as '_element' are needed by the formatter.
+	 */
+	private $isRawMode;
+
+	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param SerializerFactory $serializerFactory
+	 * @param bool $isRawMode when special elements such as '_element' are needed by the formatter.
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -70,7 +76,8 @@ class ResultBuilder {
 		$result,
 		EntityTitleLookup $entityTitleLookup,
 		LibSerializerFactory $libSerializerFactory,
-		SerializerFactory $serializerFactory
+		SerializerFactory $serializerFactory,
+		$isRawMode
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
@@ -81,6 +88,7 @@ class ResultBuilder {
 		$this->libSerializerFactory = $libSerializerFactory;
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
+		$this->isRawMode = $isRawMode;
 	}
 
 	/**
@@ -92,7 +100,7 @@ class ResultBuilder {
 	public function getOptions() {
 		if ( !$this->options ) {
 			$this->options = new SerializationOptions();
-			$this->options->setIndexTags( $this->result->getIsRawMode() );
+			$this->options->setIndexTags( $this->isRawMode );
 			$this->options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
 		}
 
@@ -143,7 +151,7 @@ class ResultBuilder {
 		$this->checkNameIsString( $name );
 		$this->checkTagIsString( $tag );
 
-		if ( $this->result->getIsRawMode() ) {
+		if ( $this->isRawMode ) {
 			// Unset first, so we don't make the tag name an actual value.
 			// We'll be setting this to $tag by calling setIndexedTagName().
 			unset( $values['_element'] );
@@ -209,7 +217,7 @@ class ResultBuilder {
 
 		$this->checkValueIsNotList( $value );
 
-		if ( $this->result->getIsRawMode() ) {
+		if ( $this->isRawMode ) {
 			$key = null;
 		}
 
