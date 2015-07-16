@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_d49e2659",
+        "filename": "repo/includes/api/ApiHelperFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-16T17:17:15Z",
+      "side": 1,
+      "message": "Please add a comment here explaining what\u0027s going on. Something like\n// abusing getIsRawMode() here to check if we should be emitting XML tag names in the API result.",
+      "revId": "594f5c5af494bac31ce9c1885e88575d580ba0ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_14958e35",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-07-16T17:17:15Z",
+      "side": 1,
+      "message": "This name is arcane and confusing. It doesn\u0027t indicate what this actually does.\nHow about $injectXmlTagNames? That would be a lot more descriptive.",
+      "revId": "594f5c5af494bac31ce9c1885e88575d580ba0ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
