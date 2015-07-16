@@ -14,7 +14,7 @@
 	<rule ref="Generic.Files.LineLength">
 		<properties>
 			<!-- TODO: Should be decreased to 100, preferably in steps of 10. -->
-			<property name="lineLimit" value="170" />
+			<property name="lineLimit" value="160" />
 			<property name="absoluteLineLimit" value="9999" />
 		</properties>
 		<!-- Exclude auto-generated files from the Translate extension, see magic-export.php. -->

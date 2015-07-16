@@ -468,15 +468,26 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => $tableClass ) ) );
 
-		$this->getOutput()->addHTML( '<colgroup><col class="diff-marker"> <col class="diff-content"><col class="diff-marker"> <col class="diff-content"></colgroup>' );
+		$this->getOutput()->addHTML( '<colgroup>'
+			. '<col class="diff-marker"><col class="diff-content">'
+			. '<col class="diff-marker"><col class="diff-content">'
+			. '</colgroup>' );
 		$this->getOutput()->addHTML( Html::openElement( 'tbody' ) );
 
 		$old = $this->msg( 'currentrev' )->parse();
 		$new = $this->msg( 'yourtext' )->parse(); //XXX: better message?
 
 		$this->getOutput()->addHTML( Html::openElement( 'tr', array( 'valign' => 'top' ) ) );
-		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-otitle1' ), $old ) ) );
-		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new ) ) );
+		$this->getOutput()->addHTML(
+			Html::rawElement( 'td', array( 'colspan' => '2' ),
+				Html::rawElement( 'div', array( 'id' => 'mw-diff-otitle1' ), $old )
+			)
+		);
+		$this->getOutput()->addHTML(
+			Html::rawElement( 'td', array( 'colspan' => '2' ),
+				Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new )
+			)
+		);
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
 
 		$this->getOutput()->addHTML( $this->entityDiffVisualizer->visualizeEntityContentDiff( $diff ) );

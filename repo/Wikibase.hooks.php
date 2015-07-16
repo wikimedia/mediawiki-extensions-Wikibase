@@ -1060,7 +1060,10 @@ final class RepoHooks {
 			if ( !$allowImport && in_array( $revisionInfo['model'], $contentModels ) ) {
 				// Skip entities.
 				// XXX: This is rather rough.
-				throw new MWException( 'To avoid ID conflicts, the import of Wikibase entities is not supported. You can enable imports using the `allowEntityImport` setting.' );
+				throw new MWException(
+					'To avoid ID conflicts, the import of Wikibase entities is not supported.'
+						. ' You can enable imports using the "allowEntityImport" setting.'
+				);
 			}
 		}
 
