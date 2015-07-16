@@ -622,17 +622,18 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddClaims() {
+	/**
+	 * @dataProvider statementSerializationProvider
+	 */
+	public function testAddClaims( Statement $statement, $statementSerialization ) {
 		$result = $this->getDefaultResult();
-		list( $statement, $expectedStatementSerialization ) = $this->getClaimAndExpectedSerialization();
-		$claims = array( $statement );
 		$path = array( 'entities', 'Q1' );
 		$expected = array(
 			'entities' => array(
 				'Q1' => array(
 					'claims' => array(
 						'P12' => array(
-							$expectedStatementSerialization
+							$statementSerialization
 						),
 					),
 				),
@@ -640,17 +641,19 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addClaims( $claims, $path );
+		$resultBuilder->addClaims( array( $statement ), $path );
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
-	public function testAddClaim() {
+	/**
+	 * @dataProvider statementSerializationProvider
+	 */
+	public function testAddClaim( Statement $statement, $statementSerialization ) {
 		$result = $this->getDefaultResult();
-		list( $statement, $expectedStatementSerialization ) = $this->getClaimAndExpectedSerialization();
-		$expected = array( 'claim' => $expectedStatementSerialization );
+		$expected = array( 'claim' => $statementSerialization );
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addClaim( $statement );
@@ -660,13 +663,19 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
-	private function getClaimAndExpectedSerialization() {
+	public function statementSerializationProvider() {
 		$statement = new Statement(
 			new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ),
-			new SnakList( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'qualiferVal' ) ) ) ),
-			new Referencelist( array( new Reference( array( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ) ) ) ) )
+			new SnakList( array(
+				new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'qualiferVal' ) ),
+			) ),
+			new Referencelist( array(
+				new Reference( array(
+					new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
+				) ),
+			) ),
+			'fooguidbar'
 		);
-		$statement->setGuid( 'fooguidbar' );
 
 		$expectedSerialization = array(
 			'id' => 'fooguidbar',
@@ -717,7 +726,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 		);
 
-		return array( $statement, $expectedSerialization );
+		return array(
+			array( $statement, $expectedSerialization ),
+		);
 	}
 
 	public function testAddReference() {
