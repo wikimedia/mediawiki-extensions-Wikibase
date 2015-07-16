@@ -116,8 +116,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 
 		if ( $request->getCheck( 'label' ) ) {
 			$label = $request->getText( 'label' );
-		}
-		else {
+		} else {
 			$label = isset( $parts[1] ) ? str_replace( '_', ' ', $parts[1] ) : '';
 		}
 

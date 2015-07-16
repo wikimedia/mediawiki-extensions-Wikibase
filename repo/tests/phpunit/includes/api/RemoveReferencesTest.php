@@ -102,8 +102,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 					array( '~=[,,_,,]:3' ),
 					'no-such-reference'
 				);
-			}
-			else {
+			} else {
 				$this->makeValidRequest(
 					$statement->getGuid(),
 					$hashes

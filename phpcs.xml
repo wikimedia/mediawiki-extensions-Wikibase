@@ -57,9 +57,6 @@
 		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibase*Library*\.php</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
-	<rule ref="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace">
-		<severity>0</severity>
-	</rule>
 	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
 	<rule ref="Squiz.ControlStructures.ControlSignature.SpaceAfterKeyword">
 		<severity>0</severity>

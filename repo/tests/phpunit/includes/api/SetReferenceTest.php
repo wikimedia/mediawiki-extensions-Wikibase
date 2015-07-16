@@ -229,9 +229,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
-		}
-		catch ( UsageException $e ) {
-			$this->assertEquals( $expectedErrorCode, $e->getCodeString(), 'Invalid request raised correct error' );
+		} catch ( UsageException $ex ) {
+			$this->assertEquals( $expectedErrorCode, $ex->getCodeString(), 'Invalid request raised correct error' );
 		}
 	}
 

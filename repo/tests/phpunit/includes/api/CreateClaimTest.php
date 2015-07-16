@@ -226,11 +226,10 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Invalid request should raise an exception' );
-		}
-		catch ( UsageException $e ) {
+		} catch ( UsageException $ex ) {
 			$this->assertEquals(
 				$errorCode,
-				$e->getCodeString(), 'Invalid request raised correct error: ' . $e->getMessage()
+				$ex->getCodeString(), 'Invalid request raised correct error: ' . $ex->getMessage()
 			);
 		}
 

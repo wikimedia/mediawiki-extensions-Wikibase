@@ -107,8 +107,7 @@ class SiteLinkSerializer extends SerializerObject {
 
 			if ( !$this->options->shouldIndexTags() ) {
 				$serialization[$siteLink->getSiteId()] = $response;
-			}
-			else {
+			} else {
 				$serialization[] = $response;
 			}
 		}

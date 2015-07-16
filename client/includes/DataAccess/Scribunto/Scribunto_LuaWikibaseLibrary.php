@@ -255,14 +255,13 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getEntity( $prefixedEntityId ) {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
+
 		try {
 			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId );
 			return array( $entityArr );
-		}
-		catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException $ex ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
-		}
-		catch ( \Exception $e ) {
+		} catch ( Exception $ex ) {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
 		}
 	}

@@ -231,8 +231,7 @@ class SummaryFormatter {
 	private function formatIfEntityId( $value ) {
 		try {
 			return $this->idFormatter->formatEntityId( $this->idParser->parse( $value ) );
-		}
-		catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException $ex ) {
 			return $value;
 		}
 	}

@@ -301,8 +301,7 @@ class EditEntity extends ModifyEntity {
 
 			if ( $newLabel === "" ) {
 				$labelChangeOps[] = $this->termChangeOpFactory->newRemoveLabelOp( $language );
-			}
-			else {
+			} else {
 				$labelChangeOps[] = $this->termChangeOpFactory->newSetLabelOp( $language, $newLabel );
 			}
 		}
@@ -331,8 +330,7 @@ class EditEntity extends ModifyEntity {
 
 			if ( $newDescription === "" ) {
 				$descriptionChangeOps[] = $this->termChangeOpFactory->newRemoveDescriptionOp( $language );
-			}
-			else {
+			} else {
 				$descriptionChangeOps[] = $this->termChangeOpFactory->newSetDescriptionOp( $language, $newDescription );
 			}
 		}
@@ -396,7 +394,7 @@ class EditEntity extends ModifyEntity {
 					$aliasesChangeOps[] = $this->termChangeOpFactory->newRemoveAliasesOp( $language, $alias );
 				} elseif ( array_key_exists( 'add', $arg ) ) {
 					$aliasesChangeOps[] = $this->termChangeOpFactory->newAddAliasesOp( $language, $alias );
-				}  else {
+				} else {
 					$aliasesToSet[] = $alias[0];
 				}
 			}

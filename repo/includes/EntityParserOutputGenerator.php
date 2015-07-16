@@ -151,8 +151,7 @@ class EntityParserOutputGenerator {
 
 		if ( $entity instanceof StatementListProvider ) {
 			$snaks = $entity->getStatements()->getAllSnaks();
-		}
-		else {
+		} else {
 			$snaks = array();
 		}
 

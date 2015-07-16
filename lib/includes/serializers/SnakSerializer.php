@@ -145,8 +145,7 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 				$constructorArguments[0],
 				$constructorArguments[1]
 			);
-		}
-		else {
+		} else {
 			return new $snakClass( $constructorArguments[0] );
 		}
 	}
