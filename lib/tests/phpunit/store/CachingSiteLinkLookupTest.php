@@ -156,4 +156,5 @@ class CachingSiteLinkLookupTest extends PHPUnit_Framework_TestCase {
 			$cachingSiteLinkLookup->getLinks( array( 1 ), array( 'a' ), array( 'b' ) )
 		);
 	}
+
 }

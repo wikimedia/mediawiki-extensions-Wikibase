@@ -218,4 +218,5 @@ class WikibaseLuaBindings {
 		// already splits the cache (which also is an intended side effect here).
 		return $this->parserOptions->getUserLang();
 	}
+
 }

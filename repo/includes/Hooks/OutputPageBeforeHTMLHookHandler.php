@@ -169,4 +169,5 @@ class OutputPageBeforeHTMLHookHandler {
 			$this->languageNameLookup
 		);
 	}
+
 }

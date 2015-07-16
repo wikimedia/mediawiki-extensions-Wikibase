@@ -50,4 +50,5 @@ class TestValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// noop
 	}
+
 }

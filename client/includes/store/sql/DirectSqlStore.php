@@ -463,4 +463,5 @@ class DirectSqlStore implements ClientStore {
 
 		return $this->entityPrefetcher;
 	}
+
 }

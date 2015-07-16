@@ -25,4 +25,5 @@ class NTriplesRdfWriterTest extends RdfWriterTestBase {
 	protected function newWriter() {
 		return new NTriplesRdfWriter();
 	}
+
 }

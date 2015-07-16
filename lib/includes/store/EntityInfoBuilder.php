@@ -100,4 +100,5 @@ interface EntityInfoBuilder {
 	 * @param EntityId[] $ids
 	 */
 	public function retainEntityInfo( array $ids );
+
 }

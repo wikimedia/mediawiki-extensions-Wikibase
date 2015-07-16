@@ -35,5 +35,4 @@ class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 		);
 	}
 
-
 }

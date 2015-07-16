@@ -156,4 +156,5 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 			array( null, 'property' ),
 		);
 	}
+
 }

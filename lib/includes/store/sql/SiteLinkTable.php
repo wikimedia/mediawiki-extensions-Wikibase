@@ -162,7 +162,6 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 		return $success;
 	}
 
-
 	/**
 	 * Internal callback for deleting a list of links.
 	 *
@@ -200,7 +199,6 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 
 		return $success;
 	}
-
 
 	/**
 	 * @see SiteLinkStore::deleteLinksOfItem

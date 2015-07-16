@@ -91,4 +91,5 @@ class PropertyIdResolver {
 
 		return $propertyId;
 	}
+
 }

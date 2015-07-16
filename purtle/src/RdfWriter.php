@@ -131,7 +131,6 @@ interface RdfWriter {
 	 */
 	public function text( $text, $language = null );
 
-
 	/**
 	 * Produce a typed or untyped literal as the object of a statement.
 	 * Can only follow a call to say() or a call to one of is(), text(), or value().
@@ -179,4 +178,5 @@ interface RdfWriter {
 	 * @return string a MIME type
 	 */
 	public function getMimeType();
+
 }

@@ -213,5 +213,4 @@ class XmlRdfWriter extends RdfWriterBase {
 		return 'application/rdf+xml; charset=UTF-8';
 	}
 
-
 }

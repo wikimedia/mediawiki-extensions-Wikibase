@@ -158,4 +158,5 @@ class Runner {
 		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
 		return $runner->runPropertyParserFunction( $parser, $frame, $args );
 	}
+
 }

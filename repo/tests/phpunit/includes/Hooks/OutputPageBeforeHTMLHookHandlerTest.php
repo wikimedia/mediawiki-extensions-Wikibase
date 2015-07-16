@@ -76,4 +76,5 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame( array( 'es', 'ru' ), $wbUserSpecifiedLanguages );
 	}
+
 }

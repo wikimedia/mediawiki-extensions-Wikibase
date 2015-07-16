@@ -440,4 +440,5 @@ class EntityParserOutputGenerator {
 
 		$parserOutput->setExtensionData( 'wikibase-alternate-links', $links );
 	}
+
 }

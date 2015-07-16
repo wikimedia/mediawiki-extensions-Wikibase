@@ -84,7 +84,6 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		return $property;
 	}
 
-
 	protected function getTestItem() {
 		static $item = null;
 

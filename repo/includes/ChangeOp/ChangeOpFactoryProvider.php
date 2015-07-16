@@ -125,4 +125,5 @@ class ChangeOpFactoryProvider {
 			$this->siteLookup
 		);
 	}
+
 }

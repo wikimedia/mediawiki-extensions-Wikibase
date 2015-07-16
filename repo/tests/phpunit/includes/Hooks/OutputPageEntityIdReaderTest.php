@@ -78,4 +78,5 @@ class OutputPageEntityIdReaderTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 	}
+
 }

@@ -290,4 +290,5 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 			array( $labels, $serialized2, 'serialization without index tags' )
 		);
 	}
+
 }

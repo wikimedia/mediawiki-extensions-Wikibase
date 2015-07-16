@@ -84,7 +84,6 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $value->text(), $formatter->formatSnak( $valueSnak ) );
 	}
 
-
 	public function testGetSnakTypes() {
 		$novalue = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
 		$somevalue = wfMessage( 'wikibase-snakview-snaktypeselector-somevalue' );

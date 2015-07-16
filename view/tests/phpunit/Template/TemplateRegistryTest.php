@@ -34,7 +34,6 @@ class TemplateRegistryTest extends \MediaWikiTestCase {
 		);
 	}
 
-
 	/**
 	 * @dataProvider providerAddTemplates
 	 */

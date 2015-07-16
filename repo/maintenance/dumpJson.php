@@ -45,6 +45,7 @@ class DumpJson extends DumpScript {
 		$dumper->setUseSnippets( (bool)$this->getOption( 'snippet', false ) );
 		return $dumper;
 	}
+
 }
 
 $maintClass = 'Wikibase\DumpJson';

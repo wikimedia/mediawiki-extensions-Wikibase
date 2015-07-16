@@ -64,7 +64,6 @@ class NTriplesRdfWriter extends N3RdfWriterBase {
 		$this->writeRef( $base, $local );
 	}
 
-
 	protected function writeText( $text, $language = null ) {
 		$this->writeSubjectAndObject();
 		$this->write( ' ' );

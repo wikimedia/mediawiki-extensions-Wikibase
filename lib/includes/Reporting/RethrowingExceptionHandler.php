@@ -26,4 +26,5 @@ class RethrowingExceptionHandler implements ExceptionHandler {
 	public function handleException( Exception $exception, $errorCode, $explanation ) {
 		throw $exception;
 	}
+
 }

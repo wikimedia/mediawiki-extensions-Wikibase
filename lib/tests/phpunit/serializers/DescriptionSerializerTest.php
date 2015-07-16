@@ -290,4 +290,5 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 			array( $descriptions, $serialized2, 'serialization without index tags' )
 		);
 	}
+
 }

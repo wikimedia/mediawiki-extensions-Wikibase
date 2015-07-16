@@ -209,7 +209,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		return $this->entityPerPage->getEntitiesWithoutTerm( $this->termType, $this->language, $this->type, $limit, $offset );
 	}
 
-
 	/**
 	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
 	 *

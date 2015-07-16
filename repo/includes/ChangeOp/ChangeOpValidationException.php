@@ -55,4 +55,5 @@ class ChangeOpValidationException extends ChangeOpException {
 
 		return $text;
 	}
+
 }

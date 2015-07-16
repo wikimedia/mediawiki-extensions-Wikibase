@@ -107,4 +107,5 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 			$this->assertInternalType( 'string', $extension );
 		}
 	}
+
 }

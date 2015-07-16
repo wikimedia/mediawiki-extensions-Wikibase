@@ -55,4 +55,5 @@ class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 		$text = $this->termLookup->getDescription( $entityId, $this->languageCode );
 		return new Term( $this->languageCode, $text );
 	}
+
 }

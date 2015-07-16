@@ -18,4 +18,5 @@ interface MessageReporter {
 	 * @param string $message
 	 */
 	public function reportMessage( $message );
+
 }

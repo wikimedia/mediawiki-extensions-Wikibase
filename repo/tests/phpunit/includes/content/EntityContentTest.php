@@ -369,7 +369,6 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $content->getNativeData(), $copy->getNativeData(), 'Copy must have the same data.' );
 	}
 
-
 	public function equalsProvider() {
 		$empty = $this->newEmpty();
 

@@ -102,4 +102,5 @@ class DispatchingEntitySerializer extends SerializerObject implements Unserializ
 
 		return $this->unserializers[$entityType];
 	}
+
 }

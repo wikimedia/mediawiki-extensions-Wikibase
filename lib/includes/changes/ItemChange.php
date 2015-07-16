@@ -37,4 +37,5 @@ class ItemChange extends EntityChange {
 			return $diff->getSiteLinkDiff();
 		}
 	}
+
 }
