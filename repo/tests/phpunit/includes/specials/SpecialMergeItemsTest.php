@@ -3,13 +3,14 @@
 namespace Wikibase\Test;
 
 use Exception;
-use MessageException;
 use PHPUnit_Framework_Error;
 use RawMessage;
 use Status;
 use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\MessageException;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
@@ -325,19 +326,19 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		return array(
 			array( //3 toid bad
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
-				'e' =>  'UserInputException:wikibase-wikibaserepopage-invalid-id' ),
+				'e' =>  'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
 			array( //4 fromid bad
 				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
-				'e' =>  'UserInputException:wikibase-wikibaserepopage-invalid-id' ),
+				'e' =>  'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
 			array( //5 both same id
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q1' ),
 				'e' =>  'Wikibase\Repo\Interactors\ItemMergeException:wikibase-itemmerge-cant-merge-self' ),
 			array( //6 from id is property
 				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
-				'e' =>  'UserInputException:wikibase-itemmerge-not-item' ),
+				'e' =>  'Wikibase\Lib\UserInputException:wikibase-itemmerge-not-item' ),
 			array( //7 to id is property
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
-				'e' =>  'UserInputException:wikibase-itemmerge-not-item' ),
+				'e' =>  'Wikibase\Lib\UserInputException:wikibase-itemmerge-not-item' ),
 			array( //10 bad token
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q2', 'token' => 'BAD' ),
 				'e' =>  'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ),

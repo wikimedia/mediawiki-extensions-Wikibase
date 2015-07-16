@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Interactors;
 
 use Exception;
-use MessageException;
+use Wikibase\Lib\MessageException;
 
 /**
  * Exception representing a failure to execute the "merge items" use case.

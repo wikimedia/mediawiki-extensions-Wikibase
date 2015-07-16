@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 /**
  * Verifies that arbitrary data access doesn't work, if it's disabled.
  *
- * @covers Scribunto_LuaWikibaseLibrary
+ * @covers Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
  *
  * @group WikibaseScribunto
  * @group WikibaseIntegration

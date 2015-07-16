@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase\Lib;
+
 /**
  * An interface for objects that support explicit disposal.
  *

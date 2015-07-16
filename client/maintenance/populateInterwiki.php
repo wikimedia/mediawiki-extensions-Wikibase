@@ -1,5 +1,17 @@
 <?php
 
+namespace Wikibase;
+
+use BagOStuff;
+use Http;
+use Maintenance;
+
+$basePath = getenv( 'MW_INSTALL_PATH' ) !== false
+	? getenv( 'MW_INSTALL_PATH' )
+	: __DIR__ . '/../../../..';
+
+require_once $basePath . '/maintenance/Maintenance.php';
+
 /**
  * Maintenance script that populates the interwiki table with list of sites
  * as exists on Wikipedia, so interwiki links render properly.
@@ -9,11 +21,6 @@
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' )
-	: __DIR__ . '/../../../..';
-
-require_once $basePath . '/maintenance/Maintenance.php';
-
 class PopulateInterwiki extends Maintenance {
 
 	/**
@@ -154,5 +161,5 @@ TEXT;
 
 }
 
-$maintClass = 'PopulateInterwiki';
+$maintClass = 'Wikibase\PopulateInterwiki';
 require_once RUN_MAINTENANCE_IF_MAIN;

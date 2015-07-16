@@ -1,6 +1,18 @@
 <?php
 
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
+namespace Wikibase;
+
+use Http;
+use Maintenance;
+use MWException;
+use SiteSQLStore;
+use Wikibase\Lib\Sites\SiteMatrixParser;
+use Wikibase\Lib\Sites\SitesBuilder;
+
+$basePath = getenv( 'MW_INSTALL_PATH' ) !== false
+	? getenv( 'MW_INSTALL_PATH' )
+	: __DIR__ . '/../../../..';
+
 require_once $basePath . '/maintenance/Maintenance.php';
 
 if ( !class_exists( 'SitesBuilder' ) ) {
@@ -107,7 +119,8 @@ class PopulateSitesTable extends Maintenance {
 
 		return $json;
 	}
+
 }
 
-$maintClass = 'PopulateSitesTable';
+$maintClass = 'Wikibase\PopulateSitesTable';
 require_once RUN_MAINTENANCE_IF_MAIN;

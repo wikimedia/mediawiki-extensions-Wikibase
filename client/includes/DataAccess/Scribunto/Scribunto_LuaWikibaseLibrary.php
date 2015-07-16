@@ -1,12 +1,14 @@
 <?php
 
+namespace Wikibase\Client\DataAccess\Scribunto;
+
 use Deserializers\Exceptions\DeserializationException;
+use Language;
+use Scribunto_LuaLibraryBase;
+use ScribuntoException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\Usage\UsageTrackingTermLookup;
-use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
-use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
-use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\PropertyIdResolver;
@@ -407,4 +409,5 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getUserLang() {
 		return array( $this->getLuaBindings()->getUserLang() );
 	}
+
 }

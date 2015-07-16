@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\IO;
 
-use Disposable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\Disposable;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 use Wikibase\Repo\Store\EntityIdPager;
