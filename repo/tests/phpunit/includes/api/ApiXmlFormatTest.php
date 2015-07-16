@@ -158,7 +158,6 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			'claim' => $json,
 		);
 
-		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetClaim', 'wbsetclaim', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
@@ -178,7 +177,6 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			'snaks' => $json,
 		);
 
-		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetReference', 'wbsetreference', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
@@ -199,7 +197,6 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			'snaktype' => 'value',
 		);
 
-		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetQualifier', 'wbsetqualifier', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
