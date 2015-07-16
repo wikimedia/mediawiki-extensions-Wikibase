@@ -39,7 +39,7 @@
 	<rule ref="PSR1" />
 	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
-		<severity>0</severity>
+		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibaseLibraryTestCase\.php</exclude-pattern>
 	</rule>
 	<rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
 		<severity>0</severity>
