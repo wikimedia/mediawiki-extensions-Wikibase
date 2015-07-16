@@ -534,7 +534,7 @@ final class RepoHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialPage_reorderPages( &$groups, &$moveOther ) {
+	public static function onSpecialPageReorderPages( &$groups, &$moveOther ) {
 		$groups = array_merge( array( 'wikibaserepo' => null ), $groups );
 		return true;
 	}
@@ -1076,7 +1076,7 @@ final class RepoHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSkinTemplateBuildNavUrlsNav_urlsAfterPermalink(
+	public static function onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink(
 		SkinTemplate $skinTemplate,
 		array &$navigationUrls
 	) {

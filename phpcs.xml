@@ -45,7 +45,8 @@
 		<severity>0</severity>
 	</rule>
 	<rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
-		<severity>0</severity>
+		<!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
+		<exclude-pattern>tests*phpunit*Test*\.php</exclude-pattern>
 	</rule>
 
 	<!-- TODO: Enable PSR2 sniffs. -->
@@ -53,7 +54,6 @@
 	<rule ref="PSR2.Methods.MethodDeclaration" />
 
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
-		<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
 		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibase*Library*\.php</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
