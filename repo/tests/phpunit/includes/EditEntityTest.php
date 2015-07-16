@@ -821,4 +821,5 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $hookReturnStatus->isGood(), $saveStatus->isGood() );
 	}
+
 }

@@ -91,7 +91,6 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $revision->getEntity()->getId() );
 	}
 
-
 	public function redirectResolutionFailureProvider() {
 		// Redirects as per $this->getEntityRevision:
 		// Q1 -> Q5 -> Q10

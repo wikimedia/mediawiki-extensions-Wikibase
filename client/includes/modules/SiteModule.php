@@ -46,4 +46,5 @@ class SiteModule extends ResourceLoaderModule {
 
 		return 'mediaWiki.config.set( "wbCurrentSite", ' . \FormatJson::encode( $currentSite ) . ' );';
 	}
+
 }

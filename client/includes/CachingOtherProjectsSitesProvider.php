@@ -82,4 +82,5 @@ class CachingOtherProjectsSitesProvider implements OtherProjectsSitesProvider {
 		$settingsHash = sha1( implode( '|', $siteLinkGroups ) );
 		return wfMemcKey( 'OtherProjectsSites', $settingsHash );
 	}
+
 }

@@ -406,4 +406,5 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 			array( true, false, 'experimental, not anon cached page view' )
 		);
 	}
+
 }

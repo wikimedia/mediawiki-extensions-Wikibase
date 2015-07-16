@@ -95,4 +95,5 @@ class WikiPageUpdater implements PageUpdater {
 			$rc->save();
 		}
 	}
+
 }

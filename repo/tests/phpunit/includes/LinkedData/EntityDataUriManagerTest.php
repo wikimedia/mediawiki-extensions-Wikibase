@@ -203,4 +203,5 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$actual = $uriManager->getCacheableUrls( $id );
 		$this->assertEquals( $expected, $actual );
 	}
+
 }

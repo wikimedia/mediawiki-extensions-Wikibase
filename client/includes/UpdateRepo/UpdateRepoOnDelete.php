@@ -34,4 +34,5 @@ class UpdateRepoOnDelete extends UpdateRepo {
 			'user' => $this->user->getName()
 		);
 	}
+
 }

@@ -226,4 +226,5 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 			$this->assertNull( $actual, $format );
 		}
 	}
+
 }

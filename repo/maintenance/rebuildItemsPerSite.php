@@ -77,6 +77,7 @@ class RebuildItemsPerSite extends Maintenance {
 	public function report( $msg ) {
 		$this->output( "$msg\n" );
 	}
+
 }
 
 $maintClass = 'Wikibase\Repo\Maintenance\RebuildItemsPerSite';

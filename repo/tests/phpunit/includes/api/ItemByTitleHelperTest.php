@@ -217,4 +217,5 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$itemByTitleHelper->getItemIds( $sites, $titles, $normalize );
 	}
+
 }

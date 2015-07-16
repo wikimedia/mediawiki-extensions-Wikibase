@@ -36,4 +36,5 @@ class ReportingExceptionHandler implements ExceptionHandler {
 		$msg = '[' . $errorCode . ']: ' . $explanation . ' (' . $msg . ')';
 		$this->reporter->reportMessage( $msg );
 	}
+
 }

@@ -28,4 +28,5 @@ class WikibaseContentLanguagesTest extends \MediaWikiTestCase {
 			array_intersect( $knownLangCodes, $result )
 		);
 	}
+
 }

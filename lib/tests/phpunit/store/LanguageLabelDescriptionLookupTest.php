@@ -120,4 +120,5 @@ class LanguageLabelDescriptionLookupTest extends MediaWikiTestCase {
 
 		return new MockTermIndex( $terms );
 	}
+
 }

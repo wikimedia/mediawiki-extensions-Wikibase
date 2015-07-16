@@ -88,7 +88,6 @@ class StatementChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
 	}
 
-
 	public function testNewSetStatementRankOp() {
 		$op = $this->newChangeOpFactory()->newSetStatementRankOp( 'DEADBEEF', Statement::RANK_NORMAL );
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );

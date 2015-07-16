@@ -63,7 +63,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		return $builder;
 	}
 
-
 	/**
 	 * Load entity from JSON
 	 *

@@ -60,7 +60,6 @@ class SpecialUnconnectedPages extends QueryPage {
 		return false;
 	}
 
-
 	/**
 	 * @since 0.4
 	 *

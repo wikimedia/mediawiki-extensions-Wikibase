@@ -173,4 +173,5 @@ class DiffChange extends ChangeRow {
 	public function objectifyArrays( array $data ) {
 		return $data; // noop
 	}
+
 }

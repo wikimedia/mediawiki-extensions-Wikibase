@@ -225,7 +225,6 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		return $warning;
 	}
 
-
 	/**
 	 * @param Message $warning
 	 *

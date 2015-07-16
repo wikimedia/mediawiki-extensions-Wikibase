@@ -402,7 +402,6 @@ class EntityTestHelper {
 		return null;
 	}
 
-
 	/**
 	 * Applies $idMap to all data in the given data structure, recursively.
 	 *

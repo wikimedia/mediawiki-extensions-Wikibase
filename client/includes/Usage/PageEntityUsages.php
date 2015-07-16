@@ -134,7 +134,6 @@ class PageEntityUsages {
 		return true;
 	}
 
-
 	/**
 	 * Returns all entities used on the page represented by this PageEntityUsages object.
 	 *

@@ -26,4 +26,5 @@ class TurtleRdfWriterTest extends RdfWriterTestBase {
 	protected function newWriter() {
 		return new TurtleRdfWriter();
 	}
+
 }

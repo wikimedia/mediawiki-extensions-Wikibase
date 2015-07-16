@@ -183,7 +183,6 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
 
-
 	public function provideValidateReference() {
 		$p1 = new PropertyId( 'p1' ); // numeric
 		$p2 = new PropertyId( 'p2' ); // alphabetic

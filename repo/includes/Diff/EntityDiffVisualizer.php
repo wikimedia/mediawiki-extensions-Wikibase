@@ -148,7 +148,6 @@ class EntityDiffVisualizer {
 		return $html;
 	}
 
-
 	/**
 	 * Generates and returns an HTML visualization of the provided redirect Diff.
 	 *

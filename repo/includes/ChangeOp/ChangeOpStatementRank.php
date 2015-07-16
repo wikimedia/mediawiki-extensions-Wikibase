@@ -114,4 +114,5 @@ class ChangeOpStatementRank extends ChangeOpBase {
 		//TODO: move validation logic from apply() here.
 		return parent::validate( $entity );
 	}
+
 }

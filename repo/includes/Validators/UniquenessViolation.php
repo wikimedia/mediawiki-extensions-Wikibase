@@ -38,4 +38,5 @@ class UniquenessViolation extends Error {
 	public function getConflictingEntity() {
 		return $this->conflictingEntity;
 	}
+
 }

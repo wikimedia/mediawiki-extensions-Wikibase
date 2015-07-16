@@ -26,4 +26,5 @@ class XmlRdfWriterTest extends RdfWriterTestBase {
 	protected function newWriter() {
 		return new XmlRdfWriter();
 	}
+
 }

@@ -439,7 +439,6 @@ class WikibaseValueFormatterBuilders {
 		return $widgetFormatters;
 	}
 
-
 	/**
 	 * Returns a full set of formatters for generating HTML for use in diffs.
 	 * If there are formatters defined for HTML that are not defined for diffs,

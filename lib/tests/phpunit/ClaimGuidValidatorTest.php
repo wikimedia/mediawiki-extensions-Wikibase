@@ -115,4 +115,5 @@ class ClaimGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 			array( 'a060$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' )
 		);
 	}
+
 }

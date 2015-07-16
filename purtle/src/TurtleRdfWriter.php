@@ -108,6 +108,4 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		return 'text/turtle; charset=UTF-8';
 	}
 
-
-
 }

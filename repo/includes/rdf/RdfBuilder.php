@@ -156,6 +156,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 		return $statementBuilder;
 	}
+
 	/**
 	 * @return EntityRdfBuilder
 	 */

@@ -52,4 +52,5 @@ class CachingOtherProjectsSitesProviderTest extends \PHPUnit_Framework_TestCase 
 			$cachingOtherProjectsSitesProvider->getOtherProjectsSiteIds( array( 'wikivoyage', 'commons' ) )
 		);
 	}
+
 }

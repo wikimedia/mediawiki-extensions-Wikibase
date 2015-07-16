@@ -35,4 +35,5 @@ class ValueParserFactoryTest extends \MediaWikiTestCase {
 			)
 		);
 	}
+
 }

@@ -44,4 +44,5 @@ class SnaksFinder {
 			->getStatements()
 			->getByPropertyId( $propertyId );
 	}
+
 }

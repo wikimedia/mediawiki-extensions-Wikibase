@@ -234,4 +234,5 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		sort( $strings );
 		return $strings;
 	}
+
 }

@@ -136,4 +136,5 @@ interface EntityStore {
 	 * @return bool
 	 */
 	public function isWatching( User $user, EntityId $id );
+
 }

@@ -57,4 +57,5 @@ interface EditSectionGenerator {
 	 * @return string
 	 */
 	public function getAddStatementToGroupSection( PropertyId $propertyId, EntityId $entityId = null );
+
 }

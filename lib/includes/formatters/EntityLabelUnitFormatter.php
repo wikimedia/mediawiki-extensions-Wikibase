@@ -90,4 +90,5 @@ class EntityLabelUnitFormatter implements QuantityUnitFormatter {
 			return "$numberText $unit";
 		}
 	}
+
 }

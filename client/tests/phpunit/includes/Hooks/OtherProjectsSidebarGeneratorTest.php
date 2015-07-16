@@ -121,4 +121,5 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 
 		return $lookup;
 	}
+
 }
