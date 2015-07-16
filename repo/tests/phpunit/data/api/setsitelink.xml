@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <api success="1">
-	<entity id="Q80050245" type="item">
+	<entity id="$itemIdUnderTest" type="item">
 		<sitelinks>
 			<sitelink site="enwiki" title="Japan">
 				<badges/>

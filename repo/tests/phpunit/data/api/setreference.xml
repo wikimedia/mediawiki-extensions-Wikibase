@@ -3,17 +3,17 @@
 	<pageinfo/>
 	<reference hash="XXX">
 		<snaks>
-			<property id="P1491009">
-				<snak _idx="0" snaktype="value" property="P1491009" datatype="string">
+			<property id="$propertyIdUnderTest">
+				<snak _idx="0" snaktype="value" property="$propertyIdUnderTest" datatype="string">
 					<datavalue value="Val1" type="string"/>
 				</snak>
-				<snak _idx="1" snaktype="value" property="P1491009" datatype="string">
+				<snak _idx="1" snaktype="value" property="$propertyIdUnderTest" datatype="string">
 					<datavalue value="Val2" type="string"/>
 				</snak>
 			</property>
 		</snaks>
 		<snaks-order>
-			<property>P1491009</property>
+			<property>$propertyIdUnderTest</property>
 		</snaks-order>
 	</reference>
 </api>

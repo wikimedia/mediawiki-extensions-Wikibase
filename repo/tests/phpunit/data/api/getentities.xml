@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <api success="1">
 	<entities>
-		<entity id="Q80050245" type="item">
+		<entity id="$itemIdUnderTest" type="item">
 			<aliases/>
 			<labels/>
 			<descriptions/>
 			<claims>
-				<property id="P1491009">
-					<claim _idx="0" id="Q80050245$1111AAAA-43cb-ed6d-3adb-760e85bd17ee" type="statement" rank="normal">
-						<mainsnak snaktype="novalue" property="P1491009"/>
+				<property id="$propertyIdUnderTest">
+					<claim _idx="0" id="$itemIdUnderTest$1111AAAA-43cb-ed6d-3adb-760e85bd17ee" type="statement" rank="normal">
+						<mainsnak snaktype="novalue" property="$propertyIdUnderTest"/>
 						<qualifiers/>
 						<qualifiers-order/>
 					</claim>
