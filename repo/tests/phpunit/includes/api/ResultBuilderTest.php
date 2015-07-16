@@ -40,11 +40,11 @@ use Wikibase\Test\MockSiteStore;
  */
 class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
-	protected function getDefaultResult() {
+	private function getDefaultResult() {
 		return new ApiResult( false );
 	}
 
-	protected function getResultBuilder( $result, $isRawMode = false ) {
+	private function getResultBuilder( $result, $isRawMode = false ) {
 		$mockTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -108,7 +108,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideMarkResultSuccess() {
-		return array( array( true, 1 ), array( 1, 1 ), array( false, 0 ), array( 0, 0 ), array( null, 0 ) );
+		return array(
+			array( true, 1 ),
+			array( 1, 1 ),
+			array( false, 0 ),
+			array( 0, 0 ),
+			array( null, 0 ),
+		);
 	}
 
 	/**
@@ -596,7 +602,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTestAddEntityRevisionFallback
 	 */
-	public function testAddEntityRevisionFallback( $indexedMode, $expected ) {
+	public function testAddEntityRevisionFallback( $isRawMode, $expected ) {
 		$item = new Item( new ItemId( 'Q123101' ) );
 		$item->getFingerprint()->setLabel( 'de', 'Oslo-de' );
 		$item->getFingerprint()->setLabel( 'en', 'Oslo-en' );
@@ -618,7 +624,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$filterLangCodes = array_keys( $fallbackChains );
 
 		$result = $this->getDefaultResult();
-		$resultBuilder = $this->getResultBuilder( $result, $indexedMode );
+		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
 		$resultBuilder->addEntityRevision(
 			null,
 			$entityRevision,
@@ -1580,46 +1586,45 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function provideSetList() {
 		return array(
 			'null path' => array( null, 'foo', array(), 'letter', false, array( 'foo' => array() ) ),
-
 			'empty path' => array( array(), 'foo', array( 'x', 'y' ), 'letter', false,
 				array(
 					'foo' => array( 'x', 'y' )
-			) ),
-
+				)
+			),
 			'string path' => array( 'ROOT', 'foo', array( 'x', 'y' ), 'letter', false,
 				array(
 					'ROOT' => array(
 						'foo' => array( 'x', 'y' ) )
-				) ),
-
+				)
+			),
 			'actual path' => array( array( 'one', 'two' ), 'foo', array( 'X' => 'x', 'Y' => 'y' ), 'letter', false,
 				array(
 					'one' => array(
 						'two' => array(
 							'foo' => array( 'X' => 'x', 'Y' => 'y' ) ) )
-				) ),
-
+				)
+			),
 			'indexed' => array( 'ROOT', 'foo', array( 'X' => 'x', 'Y' => 'y' ), 'letter', true,
 				array(
 					'ROOT' => array(
 						'foo' => array( 'x', 'y', '_element' => 'letter' ) )
-				) ),
-
+				)
+			),
 			'pre-set element name' => array( 'ROOT', 'foo', array( 'x', 'y', '_element' => '_thingy' ), 'letter', true,
 				array(
 					'ROOT' => array(
 						'foo' => array( 'x', 'y', '_element' => 'letter' ) )
-				) ),
-
+				)
+			),
 		);
 	}
 
 	/**
 	 * @dataProvider provideSetList
 	 */
-	public function testSetList( $path, $name, array $values, $tag, $indexed, $expected ) {
+	public function testSetList( $path, $name, array $values, $tag, $isRawMode, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, $indexed );
+		$builder = $this->getResultBuilder( $result, $isRawMode );
 
 		$builder->setList( $path, $name, $values, $tag );
 		$data = $result->getResultData();
@@ -1653,37 +1658,37 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function provideSetValue() {
 		return array(
 			'null path' => array( null, 'foo', 'value', false, array( 'foo' => 'value' ) ),
-
 			'empty path' => array( array(), 'foo', 'value', false,
 				array(
 					'foo' => 'value'
-				) ),
-
+				)
+			),
 			'string path' => array( 'ROOT', 'foo', 'value', false,
 				array(
 					'ROOT' => array( 'foo' => 'value' )
-				) ),
-
+				)
+			),
 			'actual path' => array( array( 'one', 'two' ), 'foo', array( 'X' => 'x', 'Y' => 'y' ), true,
 				array(
 					'one' => array(
 						'two' => array(
 							'foo' => array( 'X' => 'x', 'Y' => 'y' ) ) )
-				) ),
-
+				)
+			),
 			'indexed' => array( 'ROOT', 'foo', 'value', true,
 				array(
 					'ROOT' => array( 'foo' => 'value' )
-				) ),
+				)
+			),
 		);
 	}
 
 	/**
 	 * @dataProvider provideSetValue
 	 */
-	public function testSetValue( $path, $name, $value, $indexed, $expected ) {
+	public function testSetValue( $path, $name, $value, $isRawMode, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, $indexed );
+		$builder = $this->getResultBuilder( $result, $isRawMode );
 
 		$builder->setValue( $path, $name, $value );
 		$data = $result->getResultData();
@@ -1717,56 +1722,55 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			'null path' => array( null, null, 'value', 'letter', false,
 				array( 'value', '_element' => 'letter' ),
 			),
-
 			'empty path' => array( array(), null, 'value', 'letter', false,
 				array( 'value', '_element' => 'letter' )
 			),
-
 			'string path' => array( 'ROOT', null, 'value', 'letter', false,
 				array(
 					'ROOT' => array( 'value', '_element' => 'letter' )
-				) ),
-
+				)
+			),
 			'actual path' => array( array( 'one', 'two' ), null, array( 'X' => 'x', 'Y' => 'y' ), 'letter', false,
 				array(
 					'one' => array(
 						'two' => array( array( 'X' => 'x', 'Y' => 'y' ), '_element' => 'letter' ),
 					)
-				) ),
-
+				)
+			),
 			'int key' => array( 'ROOT', -2, 'value', 'letter', false,
 				array(
 					'ROOT' => array( -2 => 'value', '_element' => 'letter' ),
-				) ),
-
+				)
+			),
 			'string key' => array( 'ROOT', 'Q7', 'value', 'letter', false,
 				array(
 					'ROOT' => array( 'Q7' => 'value', '_element' => 'letter' ),
-				) ),
-
+				)
+			),
 			'null key indexed' => array( 'ROOT', null, 'value', 'letter', true,
 				array(
 					'ROOT' => array( 'value', '_element' => 'letter' )
-				) ),
-
+				)
+			),
 			'int key indexed' => array( 'ROOT', -2, 'value', 'letter', true,
 				array(
 					'ROOT' => array( 'value', '_element' => 'letter' )
-				) ),
-
+				)
+			),
 			'string key indexed' => array( 'ROOT', 'Q7', 'value', 'letter', true,
 				array(
 					'ROOT' => array( 'value', '_element' => 'letter' )
-				) ),
+				)
+			),
 		);
 	}
 
 	/**
 	 * @dataProvider provideAppendValue
 	 */
-	public function testAppendValue( $path, $key, $value, $tag, $indexed, $expected ) {
+	public function testAppendValue( $path, $key, $value, $tag, $isRawMode, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, $indexed );
+		$builder = $this->getResultBuilder( $result, $isRawMode );
 
 		$builder->appendValue( $path, $key, $value, $tag );
 		$data = $result->getResultData();
@@ -1796,7 +1800,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder->appendValue( $path, $key, $value, $tag );
 	}
 
-	protected function assertResultStructure( $expected, $actual, $path = null ) {
+	private function assertResultStructure( $expected, $actual, $path = null ) {
 		foreach ( $expected as $key => $value ) {
 			$this->assertArrayHasKey( $key, $actual, $path );
 
