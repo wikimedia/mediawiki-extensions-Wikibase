@@ -40,19 +40,14 @@ class ResultBuilder {
 	private $result;
 
 	/**
-	 * @var int
+	 * @var EntityTitleLookup
 	 */
-	private $missingEntityCounter;
+	private $entityTitleLookup;
 
 	/**
 	 * @var SerializerFactory
 	 */
 	private $serializerFactory;
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
 
 	/**
 	 * @var SiteStore
@@ -65,6 +60,12 @@ class ResultBuilder {
 	private $dataTypeLookup;
 
 	/**
+	 * @var bool|null when special elements such as '_element' are needed by the formatter.
+	 * @note please use $this->getIsRawMode() to access this value!
+	 */
+	private $isRawMode;
+
+	/**
 	 * @var SerializationModifier
 	 */
 	private $modifier;
@@ -75,11 +76,9 @@ class ResultBuilder {
 	private $callbackFactory;
 
 	/**
-	 * @var bool when special elements such as '_element' are needed by the formatter.
-	 * @var bool|null when special elements such as '_element' are needed by the formatter.
-	 * @note please use $this->getIsRawMode() to access this value!
+	 * @var int
 	 */
-	private $isRawMode;
+	private $missingEntityCounter = -1;
 
 	/**
 	 * @param ApiResult $result
@@ -100,10 +99,9 @@ class ResultBuilder {
 		$this->result = $result;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
-		$this->missingEntityCounter = -1;
-		$this->isRawMode = $isRawMode;
 		$this->siteStore = $siteStore;
 		$this->dataTypeLookup = $dataTypeLookup;
+		$this->isRawMode = $isRawMode;
 		$this->modifier = new SerializationModifier();
 		$this->callbackFactory = new CallbackFactory();
 	}
