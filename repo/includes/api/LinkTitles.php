@@ -250,6 +250,7 @@ class LinkTitles extends ApiBase {
 	 */
 	protected function getAllowedParams() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+
 		return array_merge( parent::getAllowedParams(), array(
 			'tosite' => array(
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
