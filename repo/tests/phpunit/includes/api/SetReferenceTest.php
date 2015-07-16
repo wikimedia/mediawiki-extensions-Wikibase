@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Repo\Api;
 
 use DataValues\StringValue;
-use FormatJson;
 use UsageException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
@@ -40,6 +39,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SetReferenceTest extends WikibaseApiTestCase {
 
+	/**
+	 * @var PropertyId[]
+	 */
 	private static $propertyIds;
 
 	protected function setUp() {
@@ -62,119 +64,102 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @todo Clean this up so more of the input space can easily be tested
-	 * semi-blocked by cleanup of GUID handling in claims
-	 * can perhaps steal from RemoveReferencesTest
+	 * @param Reference[] $references references to be created with
+	 * @returns Statement the statement of the item
 	 */
-	public function testRequests() {
+	private function getNewItemWithStatementAndReference( array $references = array() ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
+		// Create a new empty item
 		$item = new Item();
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$snak = new PropertyNoValueSnak( self::$propertyIds[0] );
-		$reference = new Reference( array( new PropertySomeValueSnak( 100 ) ) );
-		$guid = $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P';
-		$item->getStatements()->addNewStatement( $snak, null, array( $reference ), $guid );
+		$statementGuid = $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P';
 
+		$item->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( self::$propertyIds[0] ),
+			null,
+			$references,
+			$statementGuid
+		);
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
+		return $item->getStatements()->getFirstStatementWithGuid( $statementGuid );
+	}
+
+	public function testRequests() {
+		$reference = new Reference( array( new PropertySomeValueSnak( 100 ) ) );
 		$referenceHash = $reference->getHash();
+		$statement = $this->getNewItemWithStatementAndReference( array( $reference ) );
+		$guid = $statement->getGuid();
 
-		$reference = new Reference( new SnakList(
-			array( new PropertyNoValueSnak( self::$propertyIds[1] ) )
-		) );
-
-		$serializedReference = $this->makeValidRequest(
+		// Replace the reference with this new one
+		$newReference = new Reference( new SnakList( array(
+			new PropertyNoValueSnak( self::$propertyIds[1] )
+		) ) );
+		$serializedReferenceResult = $this->makeValidRequest(
 			$guid,
 			$referenceHash,
-			$reference
+			$newReference
 		);
 
 		// Since the reference got modified, the hash should no longer match
+		$propertyIdString = self::$propertyIds[0]->getSerialization();
 		$this->makeInvalidRequest(
 			$guid,
 			$referenceHash,
-			$reference
+			'{"' . $propertyIdString . '":[{"snaktype":"novalue","property":"' . $propertyIdString . '"}]}',
+			'["' . $propertyIdString . '"]',
+			'no-such-reference'
 		);
 
-		$referenceHash = $serializedReference['hash'];
-
-		$reference = new Reference( new SnakList(
+		// Replace the previous reference with a reference with 2 snaks
+		$aditionalReference = new Reference( new SnakList(
 			array(
 				new PropertyNoValueSnak( self::$propertyIds[0] ),
 				new PropertyNoValueSnak( self::$propertyIds[1] ),
 			)
 		) );
-
-		// Set reference with two snaks:
-		$serializedReference = $this->makeValidRequest(
+		$serializedReferenceResult = $this->makeValidRequest(
 			$guid,
-			$referenceHash,
-			$reference
+			$serializedReferenceResult['hash'],
+			$aditionalReference
 		);
 
-		$referenceHash = $serializedReference['hash'];
-
 		// Reorder reference snaks by moving the last property id to the front:
-		$firstPropertyId = array_shift( $serializedReference['snaks-order'] );
-		array_push( $serializedReference['snaks-order'], $firstPropertyId );
-
-		// Make another request with reordered snaks-order:
+		$firstPropertyId = array_shift( $serializedReferenceResult['snaks-order'] );
+		array_push( $serializedReferenceResult['snaks-order'], $firstPropertyId );
 		$this->makeValidRequest(
 			$guid,
-			$referenceHash,
-			$serializedReference
+			$serializedReferenceResult['hash'],
+			$serializedReferenceResult
 		);
 	}
 
 	public function testRequestWithInvalidProperty() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$reference = new Reference( array( new PropertySomeValueSnak( 100 ) ) );
+		$statement = $this->getNewItemWithStatementAndReference( array( $reference ) );
+		$guid = $statement->getGuid();
 
-		$item = new Item();
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
-
-		// Create a statement to act upon:
-		$snak = new PropertyNoValueSnak( self::$propertyIds[0] );
-		$guid = $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P';
-		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
-
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
-
-		$snak = new PropertySomeValueSnak( new PropertyId( 'P23728525' ) );
-		$reference = new Reference( new SnakList( array( $snak ) ) );
-
-		$this->makeInvalidRequest( $guid, null, $reference, 'modification-failed' );
+		$this->makeInvalidRequest(
+			$guid,
+			null,
+			'{"P23728525":[{"snaktype":"somevalue","property":"P23728525"}]}',
+			'["P23728525"]',
+			'modification-failed'
+		);
 	}
 
 	public function testSettingIndex() {
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
-		$item = new Item();
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
-
-		// Create a statement to act upon:
-		$statement = new Statement( new PropertyNoValueSnak( self::$propertyIds[0] ) );
-		$guid = $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P';
-		$statement->setGuid( $guid );
-
-		// Pre-fill statement with three references:
+		/** @var Reference[] $references */
 		$references = array(
 			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[0] ) ) ) ),
 			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[1] ) ) ) ),
 			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[2] ) ) ) ),
 		);
-
-		foreach( $references as $reference ) {
-			$statement->getReferences()->addReference( $reference );
-		}
-
-		$item->getStatements()->addStatement( $statement );
-
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$statement = $this->getNewItemWithStatementAndReference( $references );
 
 		$this->makeValidRequest(
-			$guid,
+			$statement->getGuid(),
 			$references[2]->getHash(),
 			$references[2],
 			0
@@ -197,8 +182,9 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$params = $this->generateRequestParams(
 			$statementGuid,
+			json_encode( $serializedReference['snaks'] ),
+			json_encode( $serializedReference['snaks-order'] ),
 			$referenceHash,
-			$serializedReference,
 			$index
 		);
 
@@ -219,18 +205,26 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	protected function makeInvalidRequest(
 		$statementGuid,
 		$referenceHash,
-		Reference $reference,
-		$expectedErrorCode = 'no-such-reference'
+		$snaksJson,
+		$snaksOrderJson,
+		$expectedErrorCode
 	) {
-		$serializedReference = $this->serializeReference( $reference );
-
-		$params = $this->generateRequestParams( $statementGuid, $referenceHash, $serializedReference );
+		$params = $this->generateRequestParams(
+			$statementGuid,
+			$snaksJson,
+			$snaksOrderJson,
+			$referenceHash
+		);
 
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->assertFalse( true, 'Invalid request should raise an exception' );
-		} catch ( UsageException $ex ) {
-			$this->assertEquals( $expectedErrorCode, $ex->getCodeString(), 'Invalid request raised correct error' );
+		} catch ( UsageException $e ) {
+			$this->assertEquals(
+				$expectedErrorCode,
+				$e->getCodeString(),
+				'Invalid request raised correct error'
+			);
 		}
 	}
 
@@ -241,13 +235,12 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @return array
 	 */
 	protected function serializeReference( $reference ) {
-		if ( !( $reference instanceof Reference ) ) {
-			return $reference;
-		} else {
-			$serializerFactory = new LibSerializerFactory();
-			$serializer = $serializerFactory->newSerializerForObject( $reference );
-			return $serializer->getSerialized( $reference );
+		if ( $reference instanceof Reference ) {
+			$reference = $this->newLibSerializerFactory()
+				->newSerializerForObject( $reference )
+				->getSerialized( $reference );
 		}
+		return $reference;
 	}
 
 	/**
@@ -257,44 +250,52 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @return Reference Reference
 	 */
 	protected function unserializeReference( $reference ) {
-		if ( $reference instanceof Reference ) {
-			return $reference;
-		} else {
+		if ( is_array( $reference ) ) {
 			unset( $reference['hash'] );
-			$serializerFactory = new LibSerializerFactory();
-			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Reference' );
-			return $unserializer->newFromSerialization( $reference );
+			$reference = $this->newLibSerializerFactory()
+				->newUnserializerForClass( 'Wikibase\DataModel\Reference' )
+				->newFromSerialization( $reference );
 		}
+		return $reference;
+	}
+
+	private function newLibSerializerFactory() {
+		return new LibSerializerFactory();
 	}
 
 	/**
 	 * Generates the parameters for a 'wbsetreference' API request.
 	 *
 	 * @param string $statementGuid
-	 * @param string $referenceHash
-	 * @param array $serializedReference
+	 * @param string $snaksJson
+	 * @param string|null $snaksOrderJson
+	 * @param string|null $referenceHash
 	 * @param int|null $index
 	 *
 	 * @return array
 	 */
 	protected function generateRequestParams(
 		$statementGuid,
-		$referenceHash,
-		$serializedReference,
+		$snaksJson,
+		$snaksOrderJson = null,
+		$referenceHash = null,
 		$index = null
 	) {
 		$params = array(
 			'action' => 'wbsetreference',
 			'statement' => $statementGuid,
-			'snaks' => FormatJson::encode( $serializedReference['snaks'] ),
-			'snaks-order' => FormatJson::encode( $serializedReference['snaks-order'] ),
+			'snaks' => $snaksJson,
 		);
 
-		if( !is_null( $referenceHash ) ) {
+		if ( !is_null( $snaksOrderJson ) ) {
+			$params['snaks-order'] = $snaksOrderJson;
+		}
+
+		if ( !is_null( $referenceHash ) ) {
 			$params['reference'] = $referenceHash;
 		}
 
-		if( !is_null( $index ) ) {
+		if ( !is_null( $index ) ) {
 			$params['index'] = $index;
 		}
 
@@ -360,19 +361,17 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
-	public function testInvalidRequest( $itemHandle, $claimGuid, $referenceValue, $referenceHash, $error ) {
+	public function testInvalidRequest( $itemHandle, $guid, $referenceValue, $referenceHash, $error ) {
 		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
-		if ( $claimGuid === null ) {
-			/**
-			 * @var $item Item
-			 */
+		if ( $guid === null ) {
+			/* @var Item $item */
 			$statements = $item->getStatements()->toArray();
 
 			/* @var Claim $claim */
 			$claim = reset( $statements );
-			$claimGuid = $claim->getGuid();
+			$guid = $claim->getGuid();
 		}
 
 		$prop = new PropertyId( EntityTestHelper::getId( 'StringProp' ) );
@@ -383,9 +382,9 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$params = array(
 			'action' => 'wbsetreference',
-			'statement' => $claimGuid,
-			'snaks' => FormatJson::encode( $serializedReference['snaks'] ),
-			'snaks-order' => FormatJson::encode( $serializedReference['snaks-order'] ),
+			'statement' => $guid,
+			'snaks' => json_encode( $serializedReference['snaks'] ),
+			'snaks-order' => json_encode( $serializedReference['snaks-order'] ),
 		);
 
 		if ( $referenceHash ) {
@@ -402,10 +401,14 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 	public function invalidRequestProvider() {
 		return array(
-			'bad guid 1' => array( 'Berlin', 'xyz', 'good', '', 'invalid-guid' ),
-			'bad guid 2' => array( 'Berlin', 'x$y$z', 'good', '',  'invalid-guid' ),
-			'bad guid 3' => array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'good', '', 'invalid-guid' ),
-			'bad snak value' => array( 'Berlin', null, '    ', '', 'modification-failed' ),
+			'bad guid 1' =>
+				array( 'Berlin', 'xyz', 'good', '', 'invalid-guid' ),
+			'bad guid 2' =>
+				array( 'Berlin', 'x$y$z', 'good', '',  'invalid-guid' ),
+			'bad guid 3' =>
+				array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'good', '', 'invalid-guid' ),
+			'bad snak value' =>
+				array( 'Berlin', null, '    ', '', 'modification-failed' ),
 		);
 	}
 
