@@ -104,7 +104,7 @@ class EntityPerPageTable implements EntityPerPage, EntityRedirectLookup {
 			$values['epp_redirect_target'] = $redirectTarget;
 		}
 
-		$this->addRow_internal( $values );
+		$this->addRowInternal( $values );
 	}
 
 	/**
@@ -112,7 +112,7 @@ class EntityPerPageTable implements EntityPerPage, EntityRedirectLookup {
 	 *
 	 * @throws DBError
 	 */
-	private function addRow_internal( array $values ) {
+	private function addRowInternal( array $values ) {
 		$conflictConds = $this->getConflictingRowConditions( $values );
 
 		$dbw = wfGetDB( DB_MASTER );
