@@ -214,8 +214,14 @@ call_user_func( function() {
 	$wgHooks['ChangesListInitRows'][] 					= 'Wikibase\Repo\Hooks\LabelPrefetchHookHandlers::onChangesListInitRows';
 	$wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
 	//FIXME: handle other types of entities with autocomments too!
-	$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\RepoHooks::onFormat', array( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ) );
-	$wgHooks['FormatAutocomments'][]					= array( 'Wikibase\RepoHooks::onFormat', array( CONTENT_MODEL_WIKIBASE_PROPERTY, "wikibase-property" ) );
+	$wgHooks['FormatAutocomments'][] = array(
+		'Wikibase\RepoHooks::onFormat',
+		array( CONTENT_MODEL_WIKIBASE_ITEM, 'wikibase-item' )
+	);
+	$wgHooks['FormatAutocomments'][] = array(
+		'Wikibase\RepoHooks::onFormat',
+		array( CONTENT_MODEL_WIKIBASE_PROPERTY, 'wikibase-property' )
+	);
 	$wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
 	$wgHooks['WikibaseDeleteData'][] 					= 'Wikibase\RepoHooks::onWikibaseDeleteData';
 	$wgHooks['ApiCheckCanExecute'][] 					= 'Wikibase\RepoHooks::onApiCheckCanExecute';

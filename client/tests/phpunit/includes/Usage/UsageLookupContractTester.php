@@ -97,7 +97,8 @@ class UsageLookupContractTester {
 				23 => new PageEntityUsages( 23, array( $u3l, $u4l ) ),
 				42 => new PageEntityUsages( 42, array( $u4l ) ),
 			),
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q4, $q3 ), array( EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'de' ) ) ) ),
+			iterator_to_array( $this->lookup->getPagesUsing( array( $q4, $q3 ),
+				array( EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'de' ) ) ) ),
 			'Pages using "label" on Q4 or Q3'
 		);
 

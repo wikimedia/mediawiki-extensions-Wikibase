@@ -684,8 +684,14 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'two' );
 		$rev2 = $this->repo->saveEntity( $item, 'testing 2', $user2, EDIT_UPDATE );
 
-		$this->assertFalse( $this->repo->userWasLastToEdit( $user1, $itemId, $rev1->getRevisionId() ), 'original user was no longer last to edit' );
-		$this->assertTrue( $this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevisionId() ), 'second user has just edited' );
+		$this->assertFalse(
+			$this->repo->userWasLastToEdit( $user1, $itemId, $rev1->getRevisionId() ),
+			'original user was no longer last to edit'
+		);
+		$this->assertTrue(
+			$this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevisionId() ),
+			'second user has just edited'
+		);
 
 		// subsequent edit by the original user
 		$item = new Item( new ItemId( 'Q42' ) );

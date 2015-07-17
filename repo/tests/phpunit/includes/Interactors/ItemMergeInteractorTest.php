@@ -318,12 +318,12 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 
 		$this->assertRedirectWorks( $expectedFrom, $fromId, $toId  );
 
-		// -- check the edit summaries --------------------------------------------
-		//$fromRevId = $this->mockRepository->getLatestRevisionId( $fromId );
 		$toRevId = $this->mockRepository->getLatestRevisionId( $toId );
-
-		//$this->testHelper->assertRevisionSummary( '@^/\* *wbmergeitems-to:0\|\|Q2 *\*/ *CustomSummary$@', $fromRevId, 'summary for source item' );
-		$this->testHelper->assertRevisionSummary( '@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@', $toRevId, 'summary for target item' );
+		$this->testHelper->assertRevisionSummary(
+			'@^/\* *wbmergeitems-from:0\|\|Q1 *\*/ *CustomSummary$@',
+			$toRevId,
+			'summary for target item'
+		);
 	}
 
 	private function assertRedirectWorks( $expectedFrom, $fromId, $toId ) {

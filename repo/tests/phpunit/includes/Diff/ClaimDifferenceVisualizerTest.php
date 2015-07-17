@@ -166,21 +166,39 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				),
 				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
-				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>'.
-				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-				'<div><del class="diffchange diffchange-inline"><span>oldmainsnakvalue (DETAILED)</span></del></div></td>'.
-				'<td class="diff-marker">+</td><td class="diff-addedline">'.
-				'<div><ins class="diffchange diffchange-inline"><span>newmainsnakvalue (DETAILED)</span></ins></div></td></tr>'.
+				'<tr>'
+				. '<td colspan="2" class="diff-lineno">property / P1</td>'
+				. '<td colspan="2" class="diff-lineno">property / P1</td>'
+				. '</tr>'
+				. '<tr>'
+				. '<td class="diff-marker">-</td>'
+				. '<td class="diff-deletedline"><div><del class="diffchange diffchange-inline">'
+				. '<span>oldmainsnakvalue (DETAILED)</span></del></div></td>'
+				. '<td class="diff-marker">+</td>'
+				. '<td class="diff-addedline"><div><ins class="diffchange diffchange-inline">'
+				. '<span>newmainsnakvalue (DETAILED)</span></ins></div></td>'
+				. '</tr>'
 				// added qualifier
-				'<tr><td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">property / P1: newmainsnakvalue / qualifier</td></tr>'.
-				'<tr><td colspan="2">&nbsp;</td>'.
-				'<td class="diff-marker">+</td><td class="diff-addedline">'.
-				'<div><ins class="diffchange diffchange-inline"><span>P44: newqualifiervalue (DETAILED)</span></ins></div></td></tr>'.
+				. '<tr>'
+				. '<td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">'
+				. 'property / P1: newmainsnakvalue / qualifier</td>'
+				. '</tr>'
+				. '<tr>'
+				. '<td colspan="2">&nbsp;</td><td class="diff-marker">+</td>'
+				. '<td class="diff-addedline"><div><ins class="diffchange diffchange-inline"><span>'
+				. 'P44: newqualifiervalue (DETAILED)</span></ins></div></td>'
+				. '</tr>'
 				// removed qualifier
-				'<tr><td colspan="2" class="diff-lineno">property / P1: oldmainsnakvalue / qualifier</td><td colspan="2" class="diff-lineno"></td></tr>'.
-				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-				'<div><del class="diffchange diffchange-inline"><span>P44: oldqualifiervalue (DETAILED)</span></del></div></td>'.
-				'<td colspan="2">&nbsp;</td></tr>'
+				. '<tr>'
+				. '<td colspan="2" class="diff-lineno">property / P1: oldmainsnakvalue / qualifier'
+				. '</td><td colspan="2" class="diff-lineno"></td>'
+				. '</tr>'
+				. '<tr>'
+				. '<td class="diff-marker">-</td>'
+				. '<td class="diff-deletedline"><div><del class="diffchange diffchange-inline">'
+				. '<span>P44: oldqualifiervalue (DETAILED)</span></del></div></td>'
+				. '<td colspan="2">&nbsp;</td>'
+				. '</tr>'
 			),
 			'mainsnak and references' => array(
 				new ClaimDifference(
@@ -200,21 +218,39 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 				),
 				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
-				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>'.
-				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-				'<div><del class="diffchange diffchange-inline"><span>oldmainsnakvalue (DETAILED)</span></del></div></td>'.
-				'<td class="diff-marker">+</td><td class="diff-addedline">'.
-				'<div><ins class="diffchange diffchange-inline"><span>newmainsnakvalue (DETAILED)</span></ins></div></td></tr>'.
+				'<tr>'
+				. '<td colspan="2" class="diff-lineno">property / P1</td>'
+				. '<td colspan="2" class="diff-lineno">property / P1</td>'
+				. '</tr>'
+				. '<tr>'
+				. '<td class="diff-marker">-</td><td class="diff-deletedline"><div><del class="'
+				. 'diffchange diffchange-inline"><span>oldmainsnakvalue (DETAILED)</span></del>'
+				. '</div></td>'
+				. '<td class="diff-marker">+</td><td class="diff-addedline"><div><ins class="'
+				. 'diffchange diffchange-inline"><span>newmainsnakvalue (DETAILED)</span></ins>'
+				. '</div></td>'
+				. '</tr>'
 				// added qualifier
-				'<tr><td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">property / P1: newmainsnakvalue / reference</td></tr>'.
-				'<tr><td colspan="2">&nbsp;</td>'.
-				'<td class="diff-marker">+</td><td class="diff-addedline">'.
-				'<div><ins class="diffchange diffchange-inline"><span>P44: newreferencevalue (DETAILED)</span></ins></div></td></tr>'.
+				. '<tr>'
+				. '<td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">'
+				. 'property / P1: newmainsnakvalue / reference</td>'
+				. '</tr>'
+				. '<tr>'
+				. '<td colspan="2">&nbsp;</td><td class="diff-marker">+</td>'
+				. '<td class="diff-addedline"><div><ins class="diffchange diffchange-inline">'
+				. '<span>P44: newreferencevalue (DETAILED)</span></ins></div></td>'
+				. '</tr>'
 				// removed qualifier
-				'<tr><td colspan="2" class="diff-lineno">property / P1: oldmainsnakvalue / reference</td><td colspan="2" class="diff-lineno"></td></tr>'.
-				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-				'<div><del class="diffchange diffchange-inline"><span>P44: oldreferencevalue (DETAILED)</span></del></div></td>'.
-				'<td colspan="2">&nbsp;</td></tr>'
+				. '<tr>'
+				. '<td colspan="2" class="diff-lineno">property / P1: oldmainsnakvalue / reference'
+				. '</td><td colspan="2" class="diff-lineno"></td>'
+				. '</tr>'
+				. '<tr>'
+				. '<td class="diff-marker">-</td>'
+				. '<td class="diff-deletedline"><div><del class="diffchange diffchange-inline">'
+				. '<span>P44: oldreferencevalue (DETAILED)</span></del></div></td>'
+				. '<td colspan="2">&nbsp;</td>'
+				. '</tr>'
 			),
 			'mainsnak and rank' => array(
 				new ClaimDifference(

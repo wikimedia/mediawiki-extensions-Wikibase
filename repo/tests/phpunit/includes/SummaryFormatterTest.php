@@ -244,15 +244,51 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 
 	public function provideToStringArgs() {
 		return array(
-			array( array(), array(), '/* foobar:0| */' ),
-			array( array( '' ), array( 'This is a test…' ), '/* foobar:1|| */ This is a test…' ),
-			array( array( 'one' ), array( 'This is a test…' ), '/* foobar:1||one */ This is a test…' ),
-			array( array( 'one', 'two' ), array( 'This is a test…' ), '/* foobar:1||one|two */ This is a test…' ),
-			array( array( 'one', 'two', 'three' ), array( 'This is a test…' ), '/* foobar:1||one|two|three */ This is a test…' ),
-			array( array( 'one', 'two', 'three', '…' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|… */ This is a test…' ),
-			array( array( 'one', 'two', 'three', '<>' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|<> */ This is a test…' ),
-			array( array( 'one', 'two', 'three', '&lt;&gt;' ), array( 'This is a test…' ), '/* foobar:1||one|two|three|&lt;&gt; */ This is a test…' ),
-			array( array(), array( str_repeat( 'a', 2 * SUMMARY_MAX_LENGTH ) ), '/* foobar:1| */ ' . str_repeat( 'a', SUMMARY_MAX_LENGTH - 19 ) . '...' ),
+			array(
+				array(),
+				array(),
+				'/* foobar:0| */'
+			),
+			array(
+				array( '' ),
+				array( 'This is a test…' ),
+				'/* foobar:1|| */ This is a test…'
+			),
+			array(
+				array( 'one' ),
+				array( 'This is a test…' ),
+				'/* foobar:1||one */ This is a test…'
+			),
+			array(
+				array( 'one', 'two' ),
+				array( 'This is a test…' ),
+				'/* foobar:1||one|two */ This is a test…'
+			),
+			array(
+				array( 'one', 'two', 'three' ),
+				array( 'This is a test…' ),
+				'/* foobar:1||one|two|three */ This is a test…'
+			),
+			array(
+				array( 'one', 'two', 'three', '…' ),
+				array( 'This is a test…' ),
+				'/* foobar:1||one|two|three|… */ This is a test…'
+			),
+			array(
+				array( 'one', 'two', 'three', '<>' ),
+				array( 'This is a test…' ),
+				'/* foobar:1||one|two|three|<> */ This is a test…'
+			),
+			array(
+				array( 'one', 'two', 'three', '&lt;&gt;' ),
+				array( 'This is a test…' ),
+				'/* foobar:1||one|two|three|&lt;&gt; */ This is a test…'
+			),
+			array(
+				array(),
+				array( str_repeat( 'a', 2 * SUMMARY_MAX_LENGTH ) ),
+				'/* foobar:1| */ ' . str_repeat( 'a', SUMMARY_MAX_LENGTH - 19 ) . '...'
+			),
 		);
 	}
 

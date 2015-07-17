@@ -98,7 +98,11 @@ class PropertyInfoStoreTestHelper {
 		$this->test->assertEquals( array(), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after adding one property" );
 
 		$table->setPropertyInfo( $p42, $info42 );
-		$this->test->assertEquals( array( 42 => $info42 ), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after adding the second property" );
+		$this->test->assertEquals(
+			array( 42 => $info42 ),
+			$table->getPropertyInfoForDataType( 'commonsMedia' ),
+			'after adding the second property'
+		);
 
 		$table->removePropertyInfo( $p23 );
 		$this->test->assertEquals( array( 42 => $info42 ), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after removing one property" );

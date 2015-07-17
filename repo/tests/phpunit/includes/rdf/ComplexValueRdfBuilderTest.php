@@ -137,8 +137,12 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'https://www.wikidata.org/entity/Q2'
 				),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P4> "Point(12.25 -45.5)"^^<http://www.opengis.net/ont/geosparql#wktLiteral> .',
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P4> <http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> .',
+					'<http://acme.test/Q11> '
+					. '<http://acme.test/prop/statement/P4> "Point(12.25 -45.5)"^^'
+					. '<http://www.opengis.net/ont/geosparql#wktLiteral> .',
+					'<http://acme.test/Q11> '
+					. '<http://acme.test/prop/statement/value/P4> '
+					. '<http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> .',
 				),
 				array(
 					'<http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> '
