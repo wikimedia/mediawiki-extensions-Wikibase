@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_6fd9902b",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:19:55Z",
+      "side": 1,
+      "message": "can do",
+      "parentUuid": "8ec42329_f4f3179a",
+      "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_741647ae",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 17
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-17T21:01:42Z",
       "side": 1,
       "message": "Both \"if\" sections could be factored out into private methods.",
+      "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_cfa3e495",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:19:55Z",
+      "side": 1,
+      "message": "indeed",
+      "parentUuid": "8ec42329_741647ae",
       "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_0fc1ec33",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:19:55Z",
+      "side": 1,
+      "message": "yes here we could definitely type hint against array\nalso may rename to $array here.\n(just quickly threw this together on top of the other patch to show usage of the SerializationModifier)!",
+      "parentUuid": "8ec42329_143ee324",
+      "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_3410bfac",
         "filename": "repo/includes/api/SetSiteLink.php",
         "patchSetId": 17
@@ -64,6 +118,24 @@
       "writtenOn": "2015-07-17T21:01:42Z",
       "side": 1,
       "message": "Upper case L please?",
+      "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8fdcfc1c",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:19:55Z",
+      "side": 1,
+      "message": "will do",
+      "parentUuid": "8ec42329_3410bfac",
       "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
