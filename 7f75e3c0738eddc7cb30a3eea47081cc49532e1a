@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_efcca068",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:23:23Z",
+      "side": 1,
+      "message": "$array is probably best (as per the other patch)",
+      "parentUuid": "8ec42329_11aef5e2",
+      "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_d1b70d34",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 9
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_afd698f4",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:23:23Z",
+      "side": 1,
+      "message": "should be $propertyIdString or $propertyIdGroupKey here!",
+      "parentUuid": "8ec42329_d1b70d34",
+      "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_51ac7deb",
         "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
         "patchSetId": 9
@@ -47,6 +83,24 @@
       "writtenOn": "2015-07-17T20:04:38Z",
       "side": 1,
       "message": "Why do you do it like this? I find the big \"if\" below really, really strange. It looks like this should be split into two functions. Or even simpler: The two arrays should be a second parameter in the provider above.",
+      "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0fefacaf",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:23:23Z",
+      "side": 1,
+      "message": "We need to add the hash, which comes from the test method and can not be retrieved by the provider (as the hash will change due to different property ids depending on when this test is run)\n\nThis would be two separate methods, but that would just be moving the IF statement somewhere else (into the test method)",
+      "parentUuid": "8ec42329_51ac7deb",
       "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
