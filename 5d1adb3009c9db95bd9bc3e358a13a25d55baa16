@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_cfc6846b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T22:21:00Z",
+      "side": 1,
+      "message": "Uh, what? This sounds like a test case, not something that should be an official, public example of how to use the API. Why do you want this to be here?",
+      "revId": "5d1adb3009c9db95bd9bc3e358a13a25d55baa16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ef98207e",
+        "filename": "repo/includes/BuilderBasedDataTypeValidatorFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T22:21:00Z",
+      "side": 1,
+      "message": "\"did not return an array\". And remove the exclamation marks please. No need to yell.",
+      "revId": "5d1adb3009c9db95bd9bc3e358a13a25d55baa16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8f8e3c29",
+        "filename": "repo/includes/api/ParseValue.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T22:21:00Z",
+      "side": 1,
+      "message": "|null",
+      "revId": "5d1adb3009c9db95bd9bc3e358a13a25d55baa16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
