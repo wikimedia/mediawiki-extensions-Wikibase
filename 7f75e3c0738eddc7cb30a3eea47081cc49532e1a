@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_11aef5e2",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T20:04:38Z",
+      "side": 1,
+      "message": "$x? Really? Sorry, but I\u0027m sure it\u0027s possible to find more meaningful variable names that are still short.",
+      "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d1b70d34",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T20:04:38Z",
+      "side": 1,
+      "message": "So $propertyIdGroup is not a group but a $propertyId?",
+      "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_51ac7deb",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T20:04:38Z",
+      "side": 1,
+      "message": "Why do you do it like this? I find the big \"if\" below really, really strange. It looks like this should be split into two functions. Or even simpler: The two arrays should be a second parameter in the provider above.",
+      "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
