@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_2f862819",
+        "filename": "repo/includes/api/SerializationModifier.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:16:42Z",
+      "side": 1,
+      "message": "Yes, will do",
+      "parentUuid": "8ec42329_ef46e025",
+      "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_cfe52434",
         "filename": "repo/includes/api/SerializationModifier.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-17T22:07:59Z",
       "side": 1,
       "message": "string[]",
+      "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4f893426",
+        "filename": "repo/includes/api/SerializationModifier.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:16:42Z",
+      "side": 1,
+      "message": "Yes, will do",
+      "parentUuid": "8ec42329_cfe52434",
       "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_ef7fc00f",
+        "filename": "repo/includes/api/SerializationModifier.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:16:42Z",
+      "side": 1,
+      "message": "Yes, will do",
+      "parentUuid": "8ec42329_6fd4304c",
+      "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_2f80684a",
         "filename": "repo/includes/api/SerializationModifier.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2015-07-17T22:07:59Z",
       "side": 1,
       "message": "string[]",
+      "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_0f7b2c25",
+        "filename": "repo/includes/api/SerializationModifier.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:16:42Z",
+      "side": 1,
+      "message": "Yes, will do",
+      "parentUuid": "8ec42329_2f80684a",
       "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_cf744433",
+        "filename": "repo/includes/api/SerializationModifier.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:16:42Z",
+      "side": 1,
+      "message": "Yes, will do",
+      "parentUuid": "8ec42329_6f86706c",
+      "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_4f57f4cd",
         "filename": "repo/tests/phpunit/includes/api/SerializationModifierTest.php",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2015-07-17T22:07:59Z",
       "side": 1,
       "message": "Why does this need a method?",
+      "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2f95c835",
+        "filename": "repo/tests/phpunit/includes/api/SerializationModifierTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-17T22:16:42Z",
+      "side": 1,
+      "message": "Will remove it ;)",
+      "parentUuid": "8ec42329_4f57f4cd",
       "revId": "ffed35bf23fd26c81d52e5543ff39b2e62c81667",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
