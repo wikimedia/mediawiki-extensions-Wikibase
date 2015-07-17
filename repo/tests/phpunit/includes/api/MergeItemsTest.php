@@ -293,34 +293,75 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		return array(
 			array( //0 no ids given
 				'p' => array(),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'param-missing'
+				) )
+			),
 			array( //1 only from id
 				'p' => array( 'fromid' => 'Q1' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'param-missing'
+				) )
+			),
 			array( //2 only to id
 				'p' => array( 'toid' => 'Q1' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'param-missing'
+				) )
+			),
 			array( //3 toid bad
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'invalid-entity-id'
+				) )
+			),
 			array( //4 fromid bad
 				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'invalid-entity-id'
+				) )
+			),
 			array( //5 both same id
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q1' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id', 'message' => 'You must provide unique ids' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'invalid-entity-id',
+					'message' => 'You must provide unique ids'
+				) )
+			),
 			array( //6 from id is property
 				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'not-item'
+				) )
+			),
 			array( //7 to id is property
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'not-item'
+				) )
+			),
 			array( //8 bad ignoreconficts
 				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'foo' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'invalid-entity-id'
+				) )
+			),
 			array( //9 bad ignoreconficts
 				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'label|foo' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'invalid-entity-id'
+				) )
+			),
 		);
 	}
 

@@ -193,30 +193,36 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			),
 			'sitelink usage' => array(
 				array( EntityUsage::SITELINK_USAGE ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION,
+					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
 			),
 			'label usage' => array(
 				array( EntityUsage::LABEL_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+					ChangeHandler::RC_ENTRY_ACTION ),
 				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
 			'title usage' => array(
 				array( EntityUsage::TITLE_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+					ChangeHandler::RC_ENTRY_ACTION ),
 				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
 			'other usage' => array(
 				array( EntityUsage::OTHER_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+					ChangeHandler::RC_ENTRY_ACTION ),
 				array( ChangeHandler::LINKS_UPDATE_ACTION )
 			),
 			'all usage' => array(
 				array( EntityUsage::ALL_USAGE ),
-				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION,
+					ChangeHandler::RC_ENTRY_ACTION ),
 			),
 			'sitelink and other usage (does links update)' => array(
 				array( EntityUsage::SITELINK_USAGE, EntityUsage::OTHER_USAGE ),
-				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION, ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
+				array( ChangeHandler::LINKS_UPDATE_ACTION, ChangeHandler::PARSER_PURGE_ACTION,
+					ChangeHandler::WEB_PURGE_ACTION, ChangeHandler::RC_ENTRY_ACTION ),
 			),
 		);
 	}

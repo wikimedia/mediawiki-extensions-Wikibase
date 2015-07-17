@@ -624,11 +624,19 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @param WikiPage|Title|string $page
 	 * @param array $params
 	 * @param bool $post
-	 * @param User $user
-	 * @param null $htmlPattern
-	 * @param null $expectedProps
+	 * @param User|null $user
+	 * @param string|bool|null $htmlPattern
+	 * @param string[]|null $expectedProps
 	 */
-	protected function tryUndoAction( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null ) {
+	protected function tryUndoAction(
+		$action,
+		$page,
+		array $params,
+		$post = false,
+		User $user = null,
+		$htmlPattern = null,
+		$expectedProps = null
+	) {
 		if ( $user ) {
 			$this->setUser( $user );
 		}

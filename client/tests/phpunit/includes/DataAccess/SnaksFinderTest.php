@@ -28,7 +28,12 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider findSnaksProvider
 	 */
-	public function testFindSnaks( array $expected, StatementListProvider $statementListProvider, PropertyId $propertyId, $acceptableRanks = null ) {
+	public function testFindSnaks(
+		array $expected,
+		StatementListProvider $statementListProvider,
+		PropertyId $propertyId,
+		array $acceptableRanks = null
+	) {
 		$snaksFinder = new SnaksFinder();
 
 		$snakList = $snaksFinder->findSnaks( $statementListProvider, $propertyId, $acceptableRanks );

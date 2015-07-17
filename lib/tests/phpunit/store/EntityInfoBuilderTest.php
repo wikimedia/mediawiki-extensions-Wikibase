@@ -206,16 +206,26 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 				null,
 				array(
 					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( array( 'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ) ),
-						'descriptions' =>  $this->makeLanguageValueRecords( array( 'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ) ),
-						'aliases' =>  $this->makeLanguageValueRecords( array( 'en' => array( 'alias:Q1/en#1' ), 'de' => array( 'alias:Q1/de#1', 'alias:Q1/de#2' ) ) ),
+						'labels' => $this->makeLanguageValueRecords( array(
+							'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ) ),
+						'descriptions' => $this->makeLanguageValueRecords( array(
+							'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ) ),
+						'aliases' => $this->makeLanguageValueRecords( array(
+							'en' => array( 'alias:Q1/en#1' ),
+							'de' => array( 'alias:Q1/de#1', 'alias:Q1/de#2' ) ) ),
 					),
 					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
-						'labels' => $this->makeLanguageValueRecords( array( 'en' => 'label:P3/en', 'de' => 'label:P3/de' ) ),
-						'descriptions' =>  $this->makeLanguageValueRecords( array( 'en' => 'description:P3/en', 'de' => 'description:P3/de' ) ),
-						'aliases' =>  array(),
+						'labels' => $this->makeLanguageValueRecords( array(
+							'en' => 'label:P3/en', 'de' => 'label:P3/de' ) ),
+						'descriptions' => $this->makeLanguageValueRecords( array(
+							'en' => 'description:P3/en', 'de' => 'description:P3/de' ) ),
+						'aliases' => array(),
 					),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE, 'labels' => array(), 'descriptions' => array(), 'aliases' => array() ),
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
+						'labels' => array(),
+						'descriptions' => array(),
+						'aliases' => array()
+					),
 				)
 			),
 

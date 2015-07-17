@@ -32,9 +32,21 @@ class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit_Framework_TestCa
 		) );
 
 		return array(
-			'ChangeOpValidationException(0)' => array( new ChangeOpValidationException( $result0 ), 'wikibase-validator-invalid', array() ),
-			'ChangeOpValidationException(1)' => array( new ChangeOpValidationException( $result1 ), 'wikibase-validator-too-long', array( '8' ) ),
-			'ChangeOpValidationException(2)' => array( new ChangeOpValidationException( $result2 ), 'wikibase-validator-too-long', array( 'eekwiki|Eek' ) ),
+			'ChangeOpValidationException(0)' => array(
+				new ChangeOpValidationException( $result0 ),
+				'wikibase-validator-invalid',
+				array()
+			),
+			'ChangeOpValidationException(1)' => array(
+				new ChangeOpValidationException( $result1 ),
+				'wikibase-validator-too-long',
+				array( '8' )
+			),
+			'ChangeOpValidationException(2)' => array(
+				new ChangeOpValidationException( $result2 ),
+				'wikibase-validator-too-long',
+				array( 'eekwiki|Eek' )
+			),
 		);
 	}
 
