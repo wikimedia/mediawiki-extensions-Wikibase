@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests\Repo;
 
+use Site;
 use SiteList;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
@@ -14,50 +15,96 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Marius Hoch < hoo@online.de >
+ * @author Thiemo Mättig
  */
 class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider provideExpected
+	 * @dataProvider getSiteListProvider
 	 */
-	public function testGetSiteList( $groups, $specialGroups, $expectedGlobalIds ) {
+	public function testGetSiteList(
+		array $groups,
+		array $specialGroups,
+		array $expectedGlobalIds
+	) {
 		$provider = new SiteLinkTargetProvider( $this->getMockSiteStore(), $specialGroups );
-
 		$siteList = $provider->getSiteList( $groups );
 
-		$this->assertEquals( count( $expectedGlobalIds ), count( $siteList ) );
-		foreach( $expectedGlobalIds as $globalId ) {
-			$this->assertTrue( $siteList->hasSite( $globalId ) );
+		$globalIds = array();
+		/** @var Site $site */
+		foreach ( $siteList as $site ) {
+			$globalIds[] = $site->getGlobalId();
 		}
+		$this->assertSame( $expectedGlobalIds, $globalIds );
 	}
 
-	public function provideExpected() {
+	public function getSiteListProvider() {
 		return array(
-			// groupsToGet, specialGroups, siteIdsExpected
-			array( array( 'wikipedia' ), array(), array( 'eswiki', 'dawiki' ) ),
-			array( array( 'species' ), array(), array( 'specieswiki' ) ),
-			array( array( 'wikiquote' ), array(), array( 'eswikiquote' ) ),
-			array( array( 'qwerty' ), array(), array() ),
-			array( array( 'wikipedia', 'species' ), array(), array( 'eswiki', 'dawiki', 'specieswiki' ) ),
-			array( array( 'wikipedia', 'wikiquote' ), array(), array( 'eswiki', 'dawiki', 'eswikiquote' ) ),
-			array( array( 'special' ), array( 'species' ), array( 'specieswiki' ) ),
-			array( array( 'wikipedia' ), array( 'species' ), array( 'eswiki', 'dawiki' ) ),
-			array( array( 'special', 'wikipedia' ), array( 'species', 'wikiquote' ), array( 'eswiki', 'dawiki', 'specieswiki', 'eswikiquote' ) ),
-			array( array(), array( 'wikipedia' ), array() ),
-			array( array(), array(), array() ),
+			array(
+				array( 'wikipedia' ),
+				array(),
+				array( 'dawiki', 'eswiki' )
+			),
+			array(
+				array( 'species' ), array(), array( 'specieswiki' ) ),
+			array(
+				array( 'wikiquote' ),
+				array(),
+				array( 'eswikiquote' )
+			),
+			array(
+				array( 'qwerty' ),
+				array(),
+				array()
+			),
+			array(
+				array( 'wikipedia', 'species' ),
+				array(),
+				array( 'dawiki', 'eswiki', 'specieswiki' )
+			),
+			array(
+				array( 'wikipedia', 'wikiquote' ),
+				array(),
+				array( 'dawiki', 'eswiki', 'eswikiquote' )
+			),
+			array(
+				array( 'special' ),
+				array( 'species' ),
+				array( 'specieswiki' )
+			),
+			array(
+				array( 'wikipedia' ),
+				array( 'species' ),
+				array( 'dawiki', 'eswiki' )
+			),
+			array(
+				array( 'special', 'wikipedia' ),
+				array( 'species', 'wikiquote' ),
+				array( 'dawiki', 'eswiki', 'eswikiquote', 'specieswiki' )
+			),
+			array(
+				array(),
+				array( 'wikipedia' ),
+				array()
+			),
+			array(
+				array(),
+				array(),
+				array()
+			),
 		);
 	}
 
-	protected function getSiteList() {
+	private function getSiteList() {
 		$siteList = new SiteList();
-		$siteList->append( $this->getMockSite( 'eswiki', 'wikipedia' ) );
-		$siteList->append( $this->getMockSite( 'dawiki', 'wikipedia' ) );
-		$siteList->append( $this->getMockSite( 'specieswiki', 'species' ) );
-		$siteList->append( $this->getMockSite( 'eswikiquote', 'wikiquote' ) );
+		$siteList->append( $this->newSite( 'eswiki', 'wikipedia' ) );
+		$siteList->append( $this->newSite( 'dawiki', 'wikipedia' ) );
+		$siteList->append( $this->newSite( 'specieswiki', 'species' ) );
+		$siteList->append( $this->newSite( 'eswikiquote', 'wikiquote' ) );
 		return $siteList;
 	}
 
-	protected function getMockSiteStore() {
+	private function getMockSiteStore() {
 		$siteList = $this->getSiteList();
 		$mockSiteStore = $this->getMock( 'SiteStore' );
 		$mockSiteStore->expects( $this->once() )
@@ -66,18 +113,11 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 		return $mockSiteStore;
 	}
 
-	protected function getMockSite( $globalId, $group ) {
-		$mockSite = $this->getMock( 'Site' );
-		$mockSite->expects( $this->once() )
-			->method( 'getGroup' )
-			->will( $this->returnValue( $group ) );
-		$mockSite->expects( $this->any() )
-			->method( 'getGlobalId' )
-			->will( $this->returnValue( $globalId ) );
-		$mockSite->expects( $this->any() )
-			->method( 'getNavigationIds' )
-			->will( $this->returnValue( array() ) );
-		return $mockSite;
+	private function newSite( $globalId, $group ) {
+		$site = new Site();
+		$site->setGlobalId( $globalId );
+		$site->setGroup( $group );
+		return $site;
 	}
 
 }

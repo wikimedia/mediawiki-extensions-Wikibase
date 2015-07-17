@@ -14,6 +14,7 @@ use SiteStore;
  * @author Daniel K
  * @author Adam Shorland
  * @author Marius Hoch < hoo@online.de >
+ * @author Thiemo Mättig
  */
 class SiteLinkTargetProvider {
 
@@ -23,15 +24,15 @@ class SiteLinkTargetProvider {
 	private $siteStore;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $specialSiteGroups;
 
 	/**
 	 * @param SiteStore $siteStore
-	 * @param array $specialSiteGroups
+	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, array $specialSiteGroups ) {
+	public function __construct( SiteStore $siteStore, array $specialSiteGroups = array() ) {
 		$this->siteStore = $siteStore;
 		$this->specialSiteGroups = $specialSiteGroups;
 	}
@@ -41,7 +42,7 @@ class SiteLinkTargetProvider {
 	 *
 	 * @param string[] $groups sitelink groups to get
 	 *
-	 * @return SiteList
+	 * @return SiteList alphabetically ordered by the site's global identifiers.
 	 */
 	public function getSiteList( array $groups ) {
 		// As the special sitelink group actually just wraps multiple groups
@@ -58,11 +59,17 @@ class SiteLinkTargetProvider {
 			}
 		}
 
+		// Because of the way SiteList is implemented this will not order the array returned by
+		// SiteList::getGlobalIdentifiers.
+		$sites->uasort( function( Site $a, Site $b ) {
+			return strnatcasecmp( $a->getGlobalId(), $b->getGlobalId() );
+		} );
+
 		return $sites;
 	}
 
 	/**
-	 * @param array &$groups
+	 * @param string[] &$groups
 	 */
 	private function substituteSpecialSiteGroups( &$groups ) {
 		if ( !in_array( 'special', $groups ) ) {
