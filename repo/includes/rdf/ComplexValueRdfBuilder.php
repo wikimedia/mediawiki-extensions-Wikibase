@@ -121,9 +121,8 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 			return $valueLName;
 		}
 
-		$this->valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )->a( RdfVocabulary::NS_ONTOLOGY, 'Value' );
-
-		$this->valueWriter->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getValueTypeName( $value ) );
+		$this->valueWriter->about( RdfVocabulary::NS_VALUE, $valueLName )
+			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getValueTypeName( $value ) );
 
 		foreach ( $props as $prop => $type ) {
 			$propLName = $prefix . ucfirst( $prop );

@@ -85,14 +85,17 @@
   <owl:Class rdf:about="&wikibase;QuantityValue">
     <rdfs:label>QuantityValue</rdfs:label>
     <rdfs:comment>Wikibase extended value representing quantity.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&wikibase;Value"/>
   </owl:Class>
   <owl:Class rdf:about="&wikibase;TimeValue">
     <rdfs:label>TimeValue</rdfs:label>
     <rdfs:comment>Wikibase extended value representing time.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&wikibase;Value"/>
   </owl:Class>
   <owl:Class rdf:about="&wikibase;GlobecoordinateValue">
     <rdfs:label>GlobecoordinateValue</rdfs:label>
     <rdfs:comment>Wikibase extended value representing geographic coordinate.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&wikibase;Value"/>
   </owl:Class>
 
 

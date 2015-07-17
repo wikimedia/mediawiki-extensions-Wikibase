@@ -147,9 +147,6 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'<http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#Value> .',
-					'<http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://wikiba.se/ontology-beta#GlobecoordinateValue> .',
 					'<http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> '
 						. '<http://wikiba.se/ontology-beta#geoGlobe> '
@@ -187,9 +184,6 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#Value> .',
-					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://wikiba.se/ontology-beta#QuantityValue> .',
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
 						. '<http://wikiba.se/ontology-beta#quantityAmount> "+0.00011"^^'
@@ -216,9 +210,6 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P6> <http://acme.test/value/9744b3301e3a9b3b5a31f6c6ba46dae0> .',
 				),
 				array(
-					'<http://acme.test/value/9744b3301e3a9b3b5a31f6c6ba46dae0> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#Value> .',
 					'<http://acme.test/value/9744b3301e3a9b3b5a31f6c6ba46dae0> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://wikiba.se/ontology-beta#QuantityValue> .',
@@ -254,9 +245,6 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'<http://acme.test/value/7a453935e4288ff180c20a7304bab948> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#Value> .',
-					'<http://acme.test/value/7a453935e4288ff180c20a7304bab948> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://wikiba.se/ontology-beta#TimeValue> .',
 					'<http://acme.test/value/7a453935e4288ff180c20a7304bab948> '
 						. '<http://wikiba.se/ontology-beta#timeCalendarModel> '
@@ -282,9 +270,6 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'<http://acme.test/value/418aedfba643e02a5ba758952f8f7765> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#Value> .',
-					'<http://acme.test/value/418aedfba643e02a5ba758952f8f7765> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://wikiba.se/ontology-beta#TimeValue> .',
 					'<http://acme.test/value/418aedfba643e02a5ba758952f8f7765> '
 						. '<http://wikiba.se/ontology-beta#timeCalendarModel> '
@@ -308,9 +293,6 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/8977346cbe7d0a6624ebd06fe27d749f> .',
 				),
 				array(
-					'<http://acme.test/value/8977346cbe7d0a6624ebd06fe27d749f> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#Value> .',
 					'<http://acme.test/value/8977346cbe7d0a6624ebd06fe27d749f> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://wikiba.se/ontology-beta#TimeValue> .',
@@ -341,8 +323,6 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				),
 				array(
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Value> .',
-					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#TimeValue> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
 						. '<http://wikiba.se/ontology-beta#timeCalendarModel> <http://www.wikidata.org/entity/Q1985727> .',
@@ -367,9 +347,6 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/23a636870974bab8f1771b34aa994936> .',
 				),
 				array(
-					'<http://acme.test/value/23a636870974bab8f1771b34aa994936> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#Value> .',
 					'<http://acme.test/value/23a636870974bab8f1771b34aa994936> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://wikiba.se/ontology-beta#TimeValue> .',
