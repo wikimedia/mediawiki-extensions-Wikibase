@@ -390,7 +390,7 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+		if ( !( isset( $params['id'] ) xor ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
 			$this->errorReporter->dieError(
 				'Either provide the item "id" or pairs of "site" and "title" for a corresponding page',
 				'param-illegal'

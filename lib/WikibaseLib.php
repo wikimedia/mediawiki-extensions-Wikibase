@@ -70,7 +70,7 @@ call_user_func( function() {
 	define( 'SUMMARY_MAX_LENGTH', 250 );
 
 	// i18n
-	$wgMessagesDirs['WikibaseLib']           = __DIR__ . '/i18n';
+	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/i18n';
 
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 
