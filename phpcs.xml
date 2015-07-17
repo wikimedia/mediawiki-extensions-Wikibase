@@ -5,6 +5,10 @@
 -->
 <ruleset name="MediaWiki">
 
+	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
+	<rule ref="Generic.CodeAnalysis.JumbledIncrementer" />
+	<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
+
 	<rule ref="Generic.ControlStructures" />
 
 	<rule ref="Generic.Files.ByteOrderMark" />
@@ -23,6 +27,10 @@
 	<rule ref="Generic.Files.OneTraitPerFile" />
 
 	<rule ref="Generic.Formatting.DisallowMultipleStatements" />
+	<rule ref="Generic.Formatting.MultipleStatementAlignment" />
+	<rule ref="Generic.Formatting.MultipleStatementAlignment.NotSameWarning">
+		<severity>0</severity>
+	</rule>
 
 	<rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
 	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
@@ -33,7 +41,9 @@
 	<rule ref="Generic.PHP.DeprecatedFunctions" />
 	<rule ref="Generic.PHP.DisallowShortOpenTag" />
 	<rule ref="Generic.PHP.ForbiddenFunctions" />
+	<rule ref="Generic.PHP.LowerCaseKeyword" />
 	<rule ref="Generic.PHP.NoSilencedErrors" />
+	<rule ref="Generic.PHP.SAPIUsage" />
 
 	<rule ref="PSR1" />
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
@@ -64,6 +74,7 @@
 			<property name="spacing" value="1" />
 		</properties>
 	</rule>
+	<rule ref="Squiz.WhiteSpace.LanguageConstructSpacing" />
 	<rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing" />
 	<rule ref="Squiz.WhiteSpace.ScopeClosingBrace" />
 	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />

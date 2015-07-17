@@ -20,40 +20,40 @@ interface RdfProducer {
 	/**
 	 * Produce all statements
 	 */
-	const PRODUCE_ALL_STATEMENTS    = 2;
+	const PRODUCE_ALL_STATEMENTS = 2;
 
 	/**
 	 * Produce qualifiers for statements
 	 * Should be used together with PRODUCE_ALL_STATEMENTS.
 	 */
-	const PRODUCE_QUALIFIERS        = 4;
+	const PRODUCE_QUALIFIERS = 4;
 
 	/**
 	 * Produce references for statements
 	 * Should be used together with PRODUCE_ALL_STATEMENTS.
 	 */
-	const PRODUCE_REFERENCES        = 8;
+	const PRODUCE_REFERENCES = 8;
 
 	/**
 	 * Produce links and badges
 	 */
-	const PRODUCE_SITELINKS         = 16;
+	const PRODUCE_SITELINKS = 16;
 
 	/**
 	 * Add entity definitions for properties used in the dump.
 	 */
-	const PRODUCE_PROPERTIES        = 32;
+	const PRODUCE_PROPERTIES = 32;
 
 	/**
 	 * Produce full expanded values as nodes.
 	 * Should be used together with PRODUCE_ALL_STATEMENTS.
 	 */
-	const PRODUCE_FULL_VALUES       = 64;
+	const PRODUCE_FULL_VALUES = 64;
 
 	/**
 	 * Produce metadata header containing software version info and copyright.
 	 */
-	const PRODUCE_VERSION_INFO      = 128;
+	const PRODUCE_VERSION_INFO = 128;
 
 	/**
 	 * Produce definitions for all entities used in the dump

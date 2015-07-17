@@ -167,7 +167,7 @@ class EditEntity extends ModifyEntity {
 		$hasSiteLink = isset( $params['site'] ) && isset( $params['title'] );
 		$hasSiteLinkPart = isset( $params['site'] ) || isset( $params['title'] );
 
-		if ( !( $hasId XOR $hasSiteLink XOR $hasNew ) ) {
+		if ( !( $hasId xor $hasSiteLink xor $hasNew ) ) {
 			$this->errorReporter->dieError(
 				'Either provide the item "id" or pairs of "site" and "title" or a "new" type for'
 					. ' an entity',
@@ -243,7 +243,7 @@ class EditEntity extends ModifyEntity {
 		//TODO: Construct a nice and meaningful summary from the changes that get applied!
 		//      Perhaps that could be based on the resulting diff?]
 		$summary = $this->createSummary( $params );
-		if ( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
+		if ( isset( $params['id'] ) xor ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
 			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
 		} else {
 			$summary->setAction( 'create' );

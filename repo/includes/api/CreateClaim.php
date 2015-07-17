@@ -95,7 +95,7 @@ class CreateClaim extends ModifyClaim {
 	 * @params array $params
 	 */
 	private function validateParameters( array $params ) {
-		if ( $params['snaktype'] === 'value' XOR isset( $params['value'] ) ) {
+		if ( $params['snaktype'] === 'value' xor isset( $params['value'] ) ) {
 			if ( $params['snaktype'] === 'value' ) {
 				$this->errorReporter->dieError(
 					'A value needs to be provided when creating a claim with PropertyValueSnak snak',

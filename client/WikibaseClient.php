@@ -119,7 +119,7 @@ call_user_func( function() {
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
 
 	// extension hooks
-	$wgHooks['WikibaseDeleteData'][]			= '\Wikibase\ClientHooks::onWikibaseDeleteData';
+	$wgHooks['WikibaseDeleteData'][] = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(

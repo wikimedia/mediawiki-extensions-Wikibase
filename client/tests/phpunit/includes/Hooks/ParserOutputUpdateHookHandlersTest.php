@@ -200,7 +200,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		SettingsArray $settings,
 		SiteLinkLookup $siteLinkLookup
 	) {
-		return  new OtherProjectsSidebarGeneratorFactory(
+		return new OtherProjectsSidebarGeneratorFactory(
 			$settings,
 			$siteLinkLookup,
 			$this->getSiteStore()
