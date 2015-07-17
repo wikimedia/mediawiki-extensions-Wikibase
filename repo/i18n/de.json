@@ -442,7 +442,7 @@
 	"apihelp-wbeditentity-param-new": "Wenn dies festgelegt wird, wird ein neues Objekt angelegt. \nLegt dies als den gewünschten zu erstellenden Objekttyp fest – aktuell „item“|„property“.\nEs ist nicht erlaubt, dies festzulegen, wenn „id“ ebenfalls festgelegt ist.",
 	"apihelp-wbeditentity-example-1": "Erstellt ein neues leeres Datenobjekt, gibt die gesamte Objektstruktur zurück",
 	"apihelp-wbeditentity-example-2": "Erstellt ein neues Objekt und legt die Bezeichnungen für de und en fest",
-	"apihelp-wbeditentity-example-3": "Erstellt eine neue Eigenschaft mit den JSON-Daten, gibt sie erweitert um die Datenobjektstruktur zurück",
+	"apihelp-wbeditentity-example-3": "Erstellt eine neue Eigenschaft mit den JSON-Daten, gibt die volle Objektstruktur zurück",
 	"apihelp-wbeditentity-example-4": "Löscht alle Daten vom Objekt mit der Kennung Q42",
 	"apihelp-wbeditentity-example-5": "Leert alle Daten von dem Objekt mit der Kennung Q42 und legt eine Bezeichnung für en fest",
 	"apihelp-wbeditentity-example-6": "Legt den Websitelink für nowiki fest und überschreibt ihn, falls bereits vorhanden",

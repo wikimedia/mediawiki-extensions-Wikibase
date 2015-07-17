@@ -447,7 +447,7 @@
 	"apihelp-wbeditentity-param-new": "如果设定，将会新建一个实体。\n将此设置为您希望创建的实体类型 - 目前为'item'|'property'。\n不允许在“id”也被设置的情况下拥有此设置。",
 	"apihelp-wbeditentity-example-1": "创建一个新的空项，返回完整的项结构",
 	"apihelp-wbeditentity-example-2": "创建一个新项，并设置de和en的标签",
-	"apihelp-wbeditentity-example-3": "创建一个包含json数据的新属性，返回扩展的项目结构",
+	"apihelp-wbeditentity-example-3": "创建一个包含json数据的新属性，返回完整的实体结构",
 	"apihelp-wbeditentity-example-4": "从ID为Q42的实体清空一切数据",
 	"apihelp-wbeditentity-example-5": "清除ID Q42项的所有数据并设置en标签",
 	"apihelp-wbeditentity-example-6": "设置nowiki的站点链接，覆盖已有的",
