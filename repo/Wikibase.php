@@ -177,8 +177,14 @@ call_user_func( function() {
 	$wgSpecialPages['SetAliases'] 						= 'Wikibase\Repo\Specials\SpecialSetAliases';
 	$wgSpecialPages['SetLabelDescriptionAliases'] 		= 'Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases';
 	$wgSpecialPages['SetSiteLink']						= 'Wikibase\Repo\Specials\SpecialSetSiteLink';
-	$wgSpecialPages['EntitiesWithoutLabel'] 			= array( 'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory', 'newSpecialEntitiesWithoutLabel' );
-	$wgSpecialPages['EntitiesWithoutDescription']		= array( 'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory', 'newSpecialEntitiesWithoutDescription' );
+	$wgSpecialPages['EntitiesWithoutLabel'] = array(
+		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
+		'newSpecialEntitiesWithoutLabel'
+	);
+	$wgSpecialPages['EntitiesWithoutDescription'] = array(
+		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
+		'newSpecialEntitiesWithoutDescription'
+	);
 	$wgSpecialPages['ListDatatypes']					= 'Wikibase\Repo\Specials\SpecialListDatatypes';
 	$wgSpecialPages['ListProperties']					= 'Wikibase\Repo\Specials\SpecialListProperties';
 	$wgSpecialPages['DispatchStats']					= 'Wikibase\Repo\Specials\SpecialDispatchStats';

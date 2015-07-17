@@ -132,18 +132,66 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 		$p20q5Snak = new PropertyValueSnak( $p20, $q5Value );
 
 		return array(
-			'empty' => array( '', '', '', array(), ':0|' ),
-			'no args' => array( 'foo', 'testing', 'en', array(), 'foo-testing:0|en' ),
-			'one arg' => array( 'foo', 'testing', 'en', array( 'one' ), 'foo-testing:0|en|one' ),
-			'two args (no action)' => array( 'foo', '', 'en', array( 'one', 'two' ), 'foo:0|en|one|two' ),
-			'args contains array (no module)' => array( '', 'testing', 'en', array( array( 'one', 'two' ) ), 'testing:0|en|one|two' ),
-			'args contains map (no module)' => array( '', 'testing', 'en', array( array( array( 'one' => 1, 'two' => 2 ) ) ), 'testing:0|en|one: 1, two: 2' ),
-			'empty arg' => array( 'foo', 'testing', 'en', array( 'one', '', 'three' ), 'foo-testing:0|en|one||three' ),
-			'number' => array( 'foo', 'testing', 'en', array( 23 ), 'foo-testing:0|en|23' ),
-			'EntityId' => array( 'foo', 'testing', 'en', array( $q5 ), 'foo-testing:0|en|[[item:Q5]]' ),
-			'DataValue' => array( 'foo', 'testing', 'en', array( $q5Value ), 'foo-testing:0|en|[[item:Q5]]' ),
-			'Snak' => array( 'foo', 'testing', 'en', array( $p20q5Snak ), 'foo-testing:0|en|[[item:Q5]]' ),
-			'property-item-map' => array( '', 'testing', 'en', array( array( array( 'P17' => new ItemId( "Q2" ) ) ) ), 'testing:0|en|[[property:P17]]: [[item:Q2]]' ),
+			'empty' => array(
+				'', '', '',
+				array(),
+				':0|'
+			),
+			'no args' => array(
+				'foo', 'testing', 'en',
+				array(),
+				'foo-testing:0|en'
+			),
+			'one arg' => array(
+				'foo', 'testing', 'en',
+				array( 'one' ),
+				'foo-testing:0|en|one'
+			),
+			'two args (no action)' => array(
+				'foo', '', 'en',
+				array( 'one', 'two' ),
+				'foo:0|en|one|two'
+			),
+			'args contains array (no module)' => array(
+				'', 'testing', 'en',
+				array( array( 'one', 'two' ) ),
+				'testing:0|en|one|two'
+			),
+			'args contains map (no module)' => array(
+				'', 'testing', 'en',
+				array( array( array( 'one' => 1, 'two' => 2 ) ) ),
+				'testing:0|en|one: 1, two: 2'
+			),
+			'empty arg' => array(
+				'foo', 'testing', 'en',
+				array( 'one', '', 'three' ),
+				'foo-testing:0|en|one||three'
+			),
+			'number' => array(
+				'foo', 'testing', 'en',
+				array( 23 ),
+				'foo-testing:0|en|23'
+			),
+			'EntityId' => array(
+				'foo', 'testing', 'en',
+				array( $q5 ),
+				'foo-testing:0|en|[[item:Q5]]'
+			),
+			'DataValue' => array(
+				'foo', 'testing', 'en',
+				array( $q5Value ),
+				'foo-testing:0|en|[[item:Q5]]'
+			),
+			'Snak' => array(
+				'foo', 'testing', 'en',
+				array( $p20q5Snak ),
+				'foo-testing:0|en|[[item:Q5]]'
+			),
+			'property-item-map' => array(
+				'', 'testing', 'en',
+				array( array( array( 'P17' => new ItemId( "Q2" ) ) ) ),
+				'testing:0|en|[[property:P17]]: [[item:Q2]]'
+			),
 		);
 	}
 

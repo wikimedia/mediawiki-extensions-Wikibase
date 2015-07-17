@@ -14,7 +14,14 @@ class DumpJson extends DumpScript {
 
 	public function __construct() {
 		parent::__construct();
-		$this->addOption( 'snippet', "Output a JSON snippet without square brackets at the start and end. Allows output to be combined more freely.", false, false );
+
+		$this->addOption(
+			'snippet',
+			'Output a JSON snippet without square brackets at the start and end. Allows output to'
+				. ' be combined more freely.',
+			false,
+			false
+		);
 	}
 
 	/**

@@ -32,7 +32,16 @@ class SnakFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideNewSnak
 	 */
-	public function testNewSnak( $propertyId, $snakType, $valueType, $snakValue, $expectedSnakClass, $expectedValueClass, $expectedException, $message ) {
+	public function testNewSnak(
+		$propertyId,
+		$snakType,
+		$valueType,
+		$snakValue,
+		$expectedSnakClass,
+		$expectedValueClass,
+		$expectedException,
+		$message
+	) {
 		if ( is_int( $propertyId ) ) {
 			$propertyId = PropertyId::newFromNumber( $propertyId );
 		}

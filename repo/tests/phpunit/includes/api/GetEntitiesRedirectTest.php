@@ -70,7 +70,11 @@ class GetEntitiesRedirectTest extends \ApiTestCase {
 		$this->assertArrayHasKey( $redirectKey, $result['entities'], 'the id from the request should be used as a key in the result' );
 		$this->assertArrayNotHasKey( $targetKey, $result['entities'], 'the id from the request should be used as a key in the result' );
 		$this->assertArrayHasKey( 'labels', $result['entities'][$redirectKey], 'the redirect should be resolve to a full entity' );
-		$this->assertEquals( $targetKey, $result['entities'][$redirectKey]['id'], 'the entity id should be the id of the redirect target' );
+		$this->assertEquals(
+			$targetKey,
+			$result['entities'][$redirectKey]['id'],
+			'the entity id should be the id of the redirect target'
+		);
 
 		// double redirects should be treated like a missing entity
 		$params['ids'] = $doubleRedirectId->getSerialization();
@@ -79,7 +83,11 @@ class GetEntitiesRedirectTest extends \ApiTestCase {
 		$this->assertArrayHasKey( 'entities', $result );
 		$this->assertArrayHasKey( $doubleRedirectKey, $result['entities'], 'the id from the request should be used as a key in the result' );
 		$this->assertArrayNotHasKey( $redirectKey, $result['entities'], 'the id from the request should be used as a key in the result' );
-		$this->assertEquals( $doubleRedirectKey, $result['entities'][$doubleRedirectKey]['id'], 'the reported entitiy id should be the id of the redirect' );
+		$this->assertEquals(
+			$doubleRedirectKey,
+			$result['entities'][$doubleRedirectKey]['id'],
+			'the reported entitiy id should be the id of the redirect'
+		);
 		$this->assertArrayHasKey( 'missing', $result['entities'][$doubleRedirectKey], 'the entity should be labeled as missing' );
 		$this->assertArrayNotHasKey( 'labels', $result['entities'][$doubleRedirectKey], 'the unresolved redirect should not have labels' );
 
@@ -91,7 +99,11 @@ class GetEntitiesRedirectTest extends \ApiTestCase {
 		$this->assertArrayHasKey( 'entities', $result );
 		$this->assertArrayHasKey( $redirectKey, $result['entities'], 'the id from the request should be used as a key in the result' );
 		$this->assertArrayNotHasKey( $targetKey, $result['entities'], 'the id from the request should be used as a key in the result' );
-		$this->assertEquals( $redirectKey, $result['entities'][$redirectKey]['id'], 'the reported entitiy id should be the id of the redirect' );
+		$this->assertEquals(
+			$redirectKey,
+			$result['entities'][$redirectKey]['id'],
+			'the reported entitiy id should be the id of the redirect'
+		);
 		$this->assertArrayHasKey( 'missing', $result['entities'][$redirectKey], 'the entity should be labeled as missing' );
 		$this->assertArrayNotHasKey( 'labels', $result['entities'][$redirectKey], 'the unresolved redirect should not have labels' );
 	}

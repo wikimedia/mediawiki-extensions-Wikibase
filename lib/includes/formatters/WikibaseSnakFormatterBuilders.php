@@ -77,12 +77,24 @@ class WikibaseSnakFormatterBuilders {
 	 *
 	 * @return DispatchingSnakFormatter
 	 */
-	public function buildDispatchingSnakFormatter( OutputFormatSnakFormatterFactory $factory, $format, FormatterOptions $options ) {
+	public function buildDispatchingSnakFormatter(
+		OutputFormatSnakFormatterFactory $factory,
+		$format,
+		FormatterOptions $options
+	) {
 		$this->valueFormatterBuilders->applyLanguageDefaults( $options );
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 
-		$noValueSnakFormatter = new MessageSnakFormatter( 'novalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $lang ), $format );
-		$someValueSnakFormatter = new MessageSnakFormatter( 'somevalue', $this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $lang ), $format );
+		$noValueSnakFormatter = new MessageSnakFormatter(
+			'novalue',
+			$this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $lang ),
+			$format
+		);
+		$someValueSnakFormatter = new MessageSnakFormatter(
+			'somevalue',
+			$this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $lang ),
+			$format
+		);
 
 		$factory = new OutputFormatValueFormatterFactory( $this->valueFormatterBuilders->getValueFormatterBuildersForFormats() );
 		$valueFormatter = $this->valueFormatterBuilders->buildDispatchingValueFormatter( $factory, $format, $options );

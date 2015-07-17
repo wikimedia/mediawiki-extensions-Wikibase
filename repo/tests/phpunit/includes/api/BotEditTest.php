@@ -54,46 +54,59 @@ class BotEditTest extends WikibaseApiTestCase {
 	public function provideData() {
 		return array(
 			array(//0
-				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetlabel', 'language' => 'en', 'value' => 'ALabel' ),
+				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetlabel',
+					'language' => 'en', 'value' => 'ALabel' ),
 				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//1
-				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetlabel', 'language' => 'en', 'value' => 'ALabel2' ),
+				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetlabel', 'language' => 'en',
+					'value' => 'ALabel2' ),
 				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//2
-				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetdescription', 'language' => 'de', 'value' => 'ADesc' ),
+				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetdescription',
+					'language' => 'de', 'value' => 'ADesc' ),
 				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//3
-				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetdescription', 'language' => 'de', 'value' => 'ADesc2' ),
+				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetdescription',
+					'language' => 'de', 'value' => 'ADesc2' ),
 				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//4
-				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetaliases', 'language' => 'de', 'set' => 'ali1' ),
+				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetaliases',
+					'language' => 'de', 'set' => 'ali1' ),
 				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//5
-				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetaliases', 'language' => 'de', 'set' => 'ali2' ),
+				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetaliases', 'language' => 'de',
+					'set' => 'ali2' ),
 				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//6
-				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetsitelink', 'linksite' => 'enwiki', 'linktitle' => 'PageEn' ),
+				'p' => array( 'handle' => 'Empty', 'bot' => '', 'action' => 'wbsetsitelink',
+					'linksite' => 'enwiki', 'linktitle' => 'PageEn' ),
 				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//7
-				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetsitelink', 'linksite' => 'dewiki', 'linktitle' => 'PageDe' ),
+				'p' => array( 'handle' => 'Empty', 'action' => 'wbsetsitelink',
+					'linksite' => 'dewiki', 'linktitle' => 'PageDe' ),
 				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//8
-				'p' => array( 'bot' => '', 'action' => 'wblinktitles', 'tosite' => 'enwiki', 'totitle' => 'PageEn', 'fromsite' => 'svwiki', 'fromtitle' => 'SvPage' ),
+				'p' => array( 'bot' => '', 'action' => 'wblinktitles', 'tosite' => 'enwiki',
+					'totitle' => 'PageEn', 'fromsite' => 'svwiki', 'fromtitle' => 'SvPage' ),
 				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//9
-				'p' => array( 'action' => 'wblinktitles', 'tosite' => 'dewiki', 'totitle' => 'PageDe', 'fromsite' => 'nowiki', 'fromtitle' => 'NoPage' ),
+				'p' => array( 'action' => 'wblinktitles', 'tosite' => 'dewiki',
+					'totitle' => 'PageDe', 'fromsite' => 'nowiki', 'fromtitle' => 'NoPage' ),
 				'e' => array( 'bot' => false, 'new' => false ) ),
 			array(//10
-				'p' => array( 'bot' => '', 'action' => 'wbeditentity', 'new' => 'item', 'data' => '{}' ),
+				'p' => array( 'bot' => '', 'action' => 'wbeditentity', 'new' => 'item',
+					'data' => '{}' ),
 				'e' => array( 'bot' => true, 'new' => true ) ),
 			array(//11
 				'p' => array( 'action' => 'wbeditentity', 'new' => 'item', 'data' => '{}' ),
 				'e' => array( 'bot' => false, 'new' => true ) ),
 			array(//12
-				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Osaka', 'toid' => 'Empty', 'bot' => '' ),
+				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Osaka', 'toid' => 'Empty',
+					'bot' => '' ),
 				'e' => array( 'bot' => true, 'new' => false ) ),
 			array(//13
-				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Leipzig', 'toid' => 'Empty', 'ignoreconflicts' => 'description' ),
+				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Leipzig', 'toid' => 'Empty',
+					'ignoreconflicts' => 'description' ),
 				'e' => array( 'bot' => false, 'new' => false ) ),
 			//todo claims, references, qualifiers
 		);

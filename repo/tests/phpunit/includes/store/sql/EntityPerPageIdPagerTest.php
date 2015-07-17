@@ -39,7 +39,12 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 			$keydIds[$key] = $entityId;
 		}
 
-		$listEntities = function( $entityType, $limit, EntityId $after = null, $actualRedirectMode = EntityPerPage::NO_REDIRECTS ) use ( $keydIds, $redirectMode ) {
+		$listEntities = function(
+			$entityType,
+			$limit,
+			EntityId $after = null,
+			$actualRedirectMode = EntityPerPage::NO_REDIRECTS
+		) use ( $keydIds, $redirectMode ) {
 			PHPUnit_Framework_Assert::assertEquals( $redirectMode, $actualRedirectMode );
 
 			reset( $keydIds );
