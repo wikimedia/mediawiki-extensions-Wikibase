@@ -309,7 +309,15 @@ class EditEntityActionTest extends ActionTestCase {
 	/**
 	 * @dataProvider provideUndoForm
 	 */
-	public function testUndoForm( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null ) {
+	public function testUndoForm(
+		$action,
+		$page,
+		array $params,
+		$post = false,
+		User $user = null,
+		$htmlPattern = null,
+		array $expectedProps = null
+	) {
 		$this->tryUndoAction( $action, $page, $params, $post, $user, $htmlPattern, $expectedProps );
 	}
 
@@ -607,7 +615,15 @@ class EditEntityActionTest extends ActionTestCase {
 	/**
 	 * @dataProvider provideUndoSubmit
 	 */
-	public function testUndoSubmit( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null ) {
+	public function testUndoSubmit(
+		$action,
+		$page,
+		array $params,
+		$post = false,
+		User $user = null,
+		$htmlPattern = null,
+		array $expectedProps = null
+	) {
 		if ( is_string( $page ) ) {
 			self::resetTestItem( $page );
 		}
@@ -635,7 +651,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$post = false,
 		User $user = null,
 		$htmlPattern = null,
-		$expectedProps = null
+		array $expectedProps = null
 	) {
 		if ( $user ) {
 			$this->setUser( $user );

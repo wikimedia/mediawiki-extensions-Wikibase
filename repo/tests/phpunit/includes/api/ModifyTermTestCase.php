@@ -77,9 +77,20 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 
 		// -- check the result only has our changed data (if any)  ------------
-		$this->assertEquals( 1, count( $result['entity'][$attribute] ), "Entity return contained more than a single language" );
-		$this->assertArrayHasKey( $params['language'], $result['entity'][$attribute], "Entity doesn't return expected language");
-		$this->assertEquals( $params['language'], $result['entity'][$attribute][ $params['language'] ]['language'], "Returned incorrect language" );
+		$this->assertCount(
+			1,
+			$result['entity'][$attribute],
+			'Entity return contained more than a single language'
+		);
+		$this->assertArrayHasKey(
+			$params['language'],
+			$result['entity'][$attribute],
+			"Entity doesn't return expected language");
+		$this->assertEquals(
+			$params['language'],
+			$result['entity'][$attribute][$params['language']]['language'],
+			'Returned incorrect language'
+		);
 
 		if ( array_key_exists( $params['language'], $expected['value'] ) ) {
 			$this->assertEquals(

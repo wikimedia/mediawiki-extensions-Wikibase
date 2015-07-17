@@ -146,7 +146,12 @@ class PageTermsTest extends \MediaWikiTestCase {
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	public function getTermsOfEntities( array $termObjectsByEntityId, array $entityIds, array $termTypes = null, array $languageCodes = null ) {
+	public function getTermsOfEntities(
+		array $termObjectsByEntityId,
+		array $entityIds,
+		array $termTypes = null,
+		array $languageCodes = null
+	) {
 		$result = array();
 
 		foreach ( $entityIds as $id ) {

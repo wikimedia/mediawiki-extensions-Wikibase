@@ -111,8 +111,16 @@ class TermSqlIndexTest extends TermIndexTest {
 			new AliasGroupList()
 		);
 
-		$labelFooEn = new TermIndexEntry( array( 'termLanguage' => 'en', 'termType' => TermIndexEntry::TYPE_LABEL, 'termText' => 'Foo' ) );
-		$descriptionBarEn = new TermIndexEntry( array( 'termLanguage' => 'en', 'termType' => TermIndexEntry::TYPE_DESCRIPTION, 'termText' => 'Bar' ) );
+		$labelFooEn = new TermIndexEntry( array(
+			'termType' => TermIndexEntry::TYPE_LABEL,
+			'termLanguage' => 'en',
+			'termText' => 'Foo',
+		) );
+		$descriptionBarEn = new TermIndexEntry( array(
+			'termType' => TermIndexEntry::TYPE_DESCRIPTION,
+			'termLanguage' => 'en',
+			'termText' => 'Bar',
+		) );
 
 		return array(
 			'no options' => array(

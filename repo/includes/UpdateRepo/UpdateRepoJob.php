@@ -165,7 +165,8 @@ abstract class UpdateRepoJob extends Job {
 		);
 
 		if ( !$status->isOK() ) {
-			wfDebugLog( 'UpdateRepo', __FUNCTION__ . ": attemptSave for " . $itemId->getSerialization() . " failed: " . $status->getMessage()->text() );
+			wfDebugLog( 'UpdateRepo', __FUNCTION__ . ': attemptSave for '
+				. $itemId->getSerialization() . ' failed: ' . $status->getMessage()->text() );
 		}
 
 		return $status->isOK();

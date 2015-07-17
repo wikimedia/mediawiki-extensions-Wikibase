@@ -163,7 +163,11 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$snakListFinder->expects( $this->any() )
 			->method( 'findSnaks' )
-			->will( $this->returnCallback( function ( StatementListProvider $statementListProvider, PropertyId $propertyId, $acceptableRanks = null ) {
+			->will( $this->returnCallback( function(
+				StatementListProvider $statementListProvider,
+				PropertyId $propertyId,
+				$acceptableRanks = null
+			) {
 				return array(
 					new PropertyValueSnak( $propertyId, new EntityIdValue( new ItemId( 'Q7' ) ) )
 				);
