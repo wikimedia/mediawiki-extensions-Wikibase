@@ -148,7 +148,8 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 		}
 
 		// TODO: add special handling like in WDTK?
-		// https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-rdf/src/main/java/org/wikidata/wdtk/rdf/extensions/SimpleIdExportExtension.java
+		// https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-rdf/src/main/java/org/
+		// wikidata/wdtk/rdf/extensions/SimpleIdExportExtension.java
 	}
 
 	/**

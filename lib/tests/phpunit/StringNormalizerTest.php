@@ -87,8 +87,14 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 			array( "foo\rbar", 'foo bar'), // #5, both a space and control char
 			array( "\r \t\nfoo\r\t\t\tbar\n\n\n\r\r", 'foo bar'), // #6, both space and control chars
 			array( "\r \t\nfoo\r\t\t\t bar\n\n\n\r\r", 'foo  bar'), // #7, both space and control chars
-			array( html_entity_decode( "foo&#8204;bar", ENT_QUOTES, "utf-8"), html_entity_decode( "foo&#8204;bar", ENT_QUOTES, "utf-8") ), // #8
-			array( html_entity_decode( "foo&#8204;&#8204;bar", ENT_QUOTES, "utf-8"), html_entity_decode( "foo&#8204;&#8204;bar", ENT_QUOTES, "utf-8") ), // #9
+			array(
+				html_entity_decode( 'foo&#8204;bar', ENT_QUOTES, 'utf-8' ),
+				html_entity_decode( 'foo&#8204;bar', ENT_QUOTES, 'utf-8' )
+			),
+			array(
+				html_entity_decode( 'foo&#8204;&#8204;bar', ENT_QUOTES, 'utf-8' ),
+				html_entity_decode( 'foo&#8204;&#8204;bar', ENT_QUOTES, 'utf-8' )
+			),
 		);
 	}
 

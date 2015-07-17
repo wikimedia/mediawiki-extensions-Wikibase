@@ -108,8 +108,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 
 		// check if id belongs to an item
-		if ( $this->entityRevision !== null && !( $this->entityRevision->getEntity() instanceof Item ) ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-setsitelink-not-item', $this->entityRevision->getEntity()->getId()->getSerialization() )->parse() );
+		if ( $this->entityRevision !== null
+			&& !( $this->entityRevision->getEntity() instanceof Item )
+		) {
+			$itemId = $this->entityRevision->getEntity()->getId();
+			$msg = $this->msg( 'wikibase-setsitelink-not-item', $itemId->getSerialization() );
+			$this->showErrorHTML( $msg->parse() );
 			$this->entityRevision = null;
 		}
 
