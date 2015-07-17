@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_f4f3179a",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T21:01:42Z",
+      "side": 1,
+      "message": "Weird variable name. Why not simply $siteLinks or something like that?",
+      "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_741647ae",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T21:01:42Z",
+      "side": 1,
+      "message": "Both \"if\" sections could be factored out into private methods.",
+      "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_143ee324",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T21:01:42Z",
+      "side": 1,
+      "message": "More $x? Is this guaranteed to be an array? Could this be set to \"array $serialization\"?",
+      "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_3410bfac",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T21:01:42Z",
+      "side": 1,
+      "message": "Upper case L please?",
+      "revId": "de5301ba296a8843aee6c5c35c943bc891708114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
