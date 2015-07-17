@@ -104,6 +104,24 @@
       "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4fe7f4a7",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-07-17T22:45:09Z",
+      "side": 1,
+      "message": "The hash is static, as far as I can tell. It can be provided as a string.",
+      "parentUuid": "8ec42329_0fefacaf",
+      "revId": "7f75e3c0738eddc7cb30a3eea47081cc49532e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
