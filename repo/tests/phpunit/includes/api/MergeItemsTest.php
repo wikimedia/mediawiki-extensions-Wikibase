@@ -17,7 +17,6 @@ use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
 use Wikibase\Lib\Store\EntityRedirect;
 
-
 /**
  * @covers Wikibase\Repo\Api\MergeItems
  *

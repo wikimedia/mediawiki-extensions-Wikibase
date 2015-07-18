@@ -218,4 +218,3 @@ class SpecialListProperties extends SpecialWikibasePage {
 	}
 
 }
-

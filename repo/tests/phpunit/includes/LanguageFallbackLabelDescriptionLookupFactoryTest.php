@@ -67,4 +67,3 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framewo
 	}
 
 }
-

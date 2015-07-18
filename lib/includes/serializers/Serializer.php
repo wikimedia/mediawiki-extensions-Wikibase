@@ -51,4 +51,3 @@ interface Serializer {
 	public function getOptions();
 
 }
-

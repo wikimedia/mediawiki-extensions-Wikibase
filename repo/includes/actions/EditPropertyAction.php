@@ -13,4 +13,3 @@ namespace Wikibase;
 class EditPropertyAction extends EditEntityAction {
 
 }
-

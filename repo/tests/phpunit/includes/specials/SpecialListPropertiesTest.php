@@ -159,4 +159,3 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 }
-

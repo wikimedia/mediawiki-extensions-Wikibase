@@ -59,4 +59,3 @@ class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 	}
 
 }
-
