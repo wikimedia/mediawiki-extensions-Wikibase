@@ -102,6 +102,11 @@ class DumpRdf extends DumpScript {
 	protected function createDumper( $output ) {
 		$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
 
+		$languageCodes = array_merge(
+				$GLOBALS['wgDummyLanguageCodes'],
+				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'canonicalLanguageCodes' )
+		);
+
 		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
@@ -110,7 +115,8 @@ class DumpRdf extends DumpScript {
 			$this->siteStore->getSites(),
 			$this->revisionLookup,
 			$this->propertyDatatypeLookup,
-			$this->entityPrefetcher
+			$this->entityPrefetcher,
+			$languageCodes
 		);
 	}
 

@@ -102,7 +102,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			new MockSiteStore()
+			new MockSiteStore(),
+			array('test' => 'en-x-test')
 		);
 
 		$entityDataFormatProvider->setFormatWhiteList(
