@@ -250,7 +250,8 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 		$dataType,
 		MonolingualTextValue $value
 	) {
-		$writer->say( $propertyValueNamespace, $propertyValueLName )->text( $value->getText(), $value->getLanguageCode() );
+		$writer->say( $propertyValueNamespace, $propertyValueLName )->text( $value->getText(),
+				$this->vocabulary->getCanonicalLanguage( $value->getLanguageCode() ) );
 	}
 
 	/**
