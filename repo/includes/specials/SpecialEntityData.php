@@ -87,6 +87,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
+		$languageCodes = array_merge(
+				$GLOBALS['wgDummyLanguageCodes'],
+				$wikibaseRepo->getSettings()->getSetting( 'canonicalLanguageCodes' )
+		);
+
 		$serializationService = new EntityDataSerializationService(
 			$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' ),
 			$this->getPageTitle()->getCanonicalURL() . '/',
@@ -96,7 +101,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getSiteStore()->getSites(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			$wikibaseRepo->getSiteStore()
+			$wikibaseRepo->getSiteStore(),
+			$languageCodes
 		);
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataSquidMaxage' );

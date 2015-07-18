@@ -111,6 +111,11 @@ class EntityDataSerializationService {
 	private $siteStore;
 
 	/**
+	 * @var array
+	 */
+	private $languageCodes;
+
+	/**
 	 * @param string $rdfBaseURI
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
@@ -132,7 +137,8 @@ class EntityDataSerializationService {
 		SiteList $sites,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		SerializerFactory $serializerFactory,
-		SiteStore $siteStore
+		SiteStore $siteStore,
+		array $languageCodes
 	) {
 		$this->rdfBaseURI = $rdfBaseURI;
 		$this->rdfDataURI = $rdfDataURI;
@@ -143,6 +149,7 @@ class EntityDataSerializationService {
 		$this->sites = $sites;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->siteStore = $siteStore;
+		$this->languageCodes = $languageCodes;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
@@ -415,7 +422,7 @@ class EntityDataSerializationService {
 
 		$rdfBuilder = new RdfBuilder(
 			$this->sites,
-			new RdfVocabulary( $this->rdfBaseURI, $this->rdfDataURI ),
+			new RdfVocabulary( $this->rdfBaseURI, $this->rdfDataURI, $this->languageCodes ),
 			$this->propertyLookup,
 			$this->getFlavor( $flavorName ),
 			$rdfWriter,
