@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_6a8bbe1b",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-07-18T08:38:34Z",
+      "side": 1,
+      "message": "Why mixed single and double quotes?",
+      "revId": "9082e6ab7ee42b1e4338f7e445acb37d0fa84b1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
