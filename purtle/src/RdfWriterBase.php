@@ -103,7 +103,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	function __construct( $role, BNodeLabeler $labeler = null ) {
+	public function __construct( $role, BNodeLabeler $labeler = null ) {
 		if ( !is_string( $role ) ) {
 			throw new InvalidArgumentException( '$role must be a string' );
 		}
