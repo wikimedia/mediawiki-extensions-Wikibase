@@ -159,6 +159,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param EntityPrefetcher $entityPrefetcher
+	 * @param array $languageCodes
 	 *
 	 * @return RdfDumpGenerator
 	 * @throws MWException
@@ -171,7 +172,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			SiteList $sites,
 			EntityRevisionLookup $entityRevisionLookup,
 			PropertyDataTypeLookup $propertyLookup,
-			EntityPrefetcher $entityPrefetcher
+			EntityPrefetcher $entityPrefetcher,
+			array $languageCodes
 	) {
 		$rdfWriter = self::getRdfWriter( $format );
 		if ( !$rdfWriter ) {
@@ -184,7 +186,7 @@ class RdfDumpGenerator extends DumpGenerator {
 
 		$rdfBuilder = new RdfBuilder(
 			$sites,
-			new RdfVocabulary( $baseUri, $dataUri ),
+			new RdfVocabulary( $baseUri, $dataUri, $languageCodes ),
 			$propertyLookup,
 			$flavor,
 			$rdfWriter,
