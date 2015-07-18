@@ -122,6 +122,19 @@ return call_user_func( function() {
 		// This is both a repo and client setting, and should be set to the same value in
 		// repo and clients for multiwiki setups.
 		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
+
+		// Special non-canonical languages and their BCP 47 mappings
+		// Based on: https://meta.wikimedia.org/wiki/Special_language_codes
+		'canonicalLanguageCodes' => array(
+				'simple'      => 'en-x-simple',
+				'crh'         => 'crh-Latn',
+				'cbk-zam'     => 'cbk-x-zam',
+				'map-bms'     => 'jv-x-bms',
+				'nrm'         => 'fr-x-nrm',
+				'roa-tara'    => 'it-x-tara',
+				'de-formal'   => 'de-x-formal',
+				'nl-informal' => 'nl-x-informal',
+		),
 	);
 
 	return $defaults;
