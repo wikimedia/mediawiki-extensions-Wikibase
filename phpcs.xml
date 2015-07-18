@@ -65,6 +65,7 @@
 	<rule ref="PSR2.Namespaces.NamespaceDeclaration" />
 	<rule ref="PSR2.Namespaces.UseDeclaration" />
 
+	<!-- This sniff is included in PSR1 but needs an exception. -->
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
 		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibase*Library</exclude-pattern>
 	</rule>
@@ -72,6 +73,10 @@
 	<!-- FIXME: This indicates an error in the Wikibase codebase that should be fixed. -->
 	<rule ref="Squiz.ControlStructures.ControlSignature.SpaceAfterKeyword">
 		<severity>0</severity>
+	</rule>
+	<rule ref="Squiz.Scope.MethodScope">
+		<!-- FIXME: This indicates an error in the QueryPage base class that should be fixed. -->
+		<exclude-pattern>SpecialUnconnectedPages\.php</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
 		<properties>
