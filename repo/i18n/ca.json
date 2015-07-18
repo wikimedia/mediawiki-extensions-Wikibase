@@ -14,7 +14,8 @@
 			"Fitoschido",
 			"Davidpar",
 			"Macofe",
-			"Joan manel"
+			"Joan manel",
+			"F3RaN"
 		]
 	},
 	"wikibase-desc": "Repositori de dades estructurades",
@@ -34,10 +35,10 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Descripció",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiqueta",
 	"wikibase-entitytermsforlanguagelistview-language": "Llengua",
-	"wikibase-label-empty": "Encara no s'ha definit cap etiqueta.",
+	"wikibase-label-empty": "Encara no s'ha definit cap etiqueta",
 	"wikibase-label-edit-placeholder": "introduïu una etiqueta",
 	"wikibase-label-edit-placeholder-language-aware": "introduïu una etiqueta en $1",
-	"wikibase-description-empty": "Encara no s'ha definit cap descripció.",
+	"wikibase-description-empty": "Encara no s'ha definit cap descripció",
 	"wikibase-description-edit-placeholder": "introduïu una descripció",
 	"wikibase-description-edit-placeholder-language-aware": "introduïu una descripció en $1",
 	"wikibase-sitelink-site-edit-placeholder": "lloc",
@@ -47,6 +48,7 @@
 	"wikibase-description-input-help-message": "Introduïu una breu descripció en $1.",
 	"wikibase-statements": "Declaracions",
 	"wikibase-terms": "En altres llengües",
+	"wikibase-sitelinks": "Llista de les pàgines vinculades a aquest element",
 	"wikibase-sitelinks-empty": "Encara no hi ha enllaços del lloc per aquest element.",
 	"wikibase-sitelinks-input-help-message": "Definiu un enllaç a una pàgina relacionada amb aquest element.",
 	"wikibase-sitelinks-special": "Altres llocs",

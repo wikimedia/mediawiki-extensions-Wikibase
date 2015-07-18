@@ -13,6 +13,7 @@
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
+	"wikibase-entity": "개체",
 	"wikibase-entity-item": "항목",
 	"wikibase-entity-property": "속성",
 	"wikibase-entity-query": "쿼리",
