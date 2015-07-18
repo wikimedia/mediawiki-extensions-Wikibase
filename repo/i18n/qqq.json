@@ -596,6 +596,7 @@
 	"apihelp-wbsearchentities-description": "{{doc-apihelp-description|wbsearchentities}}",
 	"apihelp-wbsearchentities-param-search": "{{doc-apihelp-param|wbsearchentities|search}}",
 	"apihelp-wbsearchentities-param-language": "{{doc-apihelp-param|wbsearchentities|language}}",
+	"apihelp-wbsearchentities-param-strictlanguage": "{{doc-apihelp-param|wbsearchentities|strictlanguage}}",
 	"apihelp-wbsearchentities-param-type": "{{doc-apihelp-param|wbsearchentities|type}}",
 	"apihelp-wbsearchentities-param-limit": "{{doc-apihelp-param|wbsearchentities|limit}}",
 	"apihelp-wbsearchentities-param-continue": "{{doc-apihelp-param|wbsearchentities|continue}}",
