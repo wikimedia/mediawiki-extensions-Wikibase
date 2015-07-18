@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * RDF vocabulary for use in mapping for wikibase data model.
@@ -91,6 +92,17 @@ class RdfVocabulary {
 	 * @var string
 	 */
 	private $dataUri;
+	/**
+	 * List of non-standard language codes with standard equivalents
+	 * @var array
+	 */
+	private $languageCanonicalNames;
+
+	/**
+	 * Cached language resolutions
+	 * @var array
+	 */
+	private static $languageCanonicalCache = array();
 
 	/**
 	 * @param string $baseUri Base URI for entity concept URIs.
@@ -137,6 +149,8 @@ class RdfVocabulary {
 				self::NS_GEO => self::GEO_URI,
 				self::NS_PROV => self::PROV_URI,
 		);
+
+		$this->languageCanonicalNames = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'languageCanonicalNames' );
 	}
 
 	/**
@@ -213,6 +227,30 @@ class RdfVocabulary {
 	 */
 	public function getCommonsURI( $file ) {
 		return self::COMMONS_URI . rawurlencode( $file );
+	}
+
+	/**
+	 * Return canonical language name from internal Wikibase one
+	 * @param string $langName
+	 * @return string
+	 */
+	public function getCanonicalLanguage( $langName ) {
+		if ( isset(self::$languageCanonicalCache[$langName]) ) {
+			return self::$languageCanonicalCache[$langName];
+		}
+
+		// Wikibase list goes first in case we want to override
+		// Like "simple" goes to en-x-simple not en
+		if( !empty($this->languageCanonicalNames[$langName]) ) {
+			return $this->languageCanonicalNames[$langName];
+		}
+
+		if( !empty($GLOBALS['wgDummyLanguageCodes'][$langName]) ) {
+			return $GLOBALS['wgDummyLanguageCodes'][$langName];
+		}
+
+		self::$languageCanonicalCache[$langName] = wfBCP47( $langName );
+		return self::$languageCanonicalCache[$langName];
 	}
 
 }
