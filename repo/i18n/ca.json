@@ -133,6 +133,7 @@
 	"wikibase-setsitelink-introfull": "Esteu definint l'enllaç de lloc en $2 de [[$1]].",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Codi d'idioma:",
+	"wikibase-mergeitems-success": "$1 ha sigut fusionat amb èxit amb $3 i redirigit.",
 	"wikibase-history-title-with-label": "«$2» ($1): Historial de revisions",
 	"wikibase-entitieswithoutlabel-label-language": "Codi d'idioma:",
 	"wikibase-entitieswithoutlabel-submit": "Cerca",

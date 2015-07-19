@@ -265,6 +265,7 @@
 	"apihelp-wbmergeitems-example-2": "Fusionéiert Date vun Q555 an Q3",
 	"apihelp-wbsearchentities-param-search": "No dësem Text sichen.",
 	"apihelp-wbsearchentities-param-language": "An dëser Sprooch sichen.",
+	"apihelp-wbsearchentities-param-strictlanguage": "Ob Ersatzsproochen ausgeschalt solle ginn",
 	"apihelp-wbsearchentities-example-2": "No \"abc\" an der Englescher Sprooch siche mat enger Limite vu 50",
 	"apihelp-wbsetaliases-param-summary": "Resumé fir d'Ännerung.\nEng automatesch generéiert Bemierkung gëtt virdru gesat. D'Limite vun der Längt vun der automatescher Bemierkung zesumme mam Resumé ass 260 Zeechen. Denkt drun datt alles wat iwwer déi Limite erausgeet automatesch ofgeschnidde gëtt.",
 	"apihelp-wbsetaliases-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",

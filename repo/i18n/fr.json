@@ -509,7 +509,7 @@
 	"apihelp-wbgetentities-example-6": "Obtenez des entités d'identifiant Q42 avec tous les intitulés dans toutes les langues",
 	"apihelp-wbgetentities-example-7": "Récupérer les types de données des propriétés P17 et P3",
 	"apihelp-wbgetentities-example-8": "Récupérer les entités avec ID Q42 avec tous les alias en anglais",
-	"apihelp-wbgetentities-example-9": "Récupérer les entités d'identifiants Q1 et Q42 avec leurs descriptions en anglais, en allemand et en français (si elles existent)",
+	"apihelp-wbgetentities-example-9": "Récupérer les entités d'identifiants Q1 et Q42 avec leurs descriptions en anglais, en allemand et en français",
 	"apihelp-wbgetentities-example-10": "Obtenir l'élément de la page \"Berlin\" sur le site \"enwiki\", avec les attributs de langue en langue anglaise",
 	"apihelp-wbgetentities-example-11": "Obtenir l'élément de la page \"Berlin\" sur le site \"enwiki\" après normalisation du titre de \"berlin\"",
 	"apihelp-wbgetentities-example-12": "Récupérer les liens de site pour l'élément Q42",

@@ -24,6 +24,7 @@
 	"wikibase-error-autocomplete-response": "Servern svarade: $1",
 	"wikibase-error-ui-no-external-page": "Den angivna artikeln kunde inte hittas på den motsvarande webbplatsen.",
 	"wikibase-error-ui-edit-conflict": "Det finns en redigeringskonflikt. Vänligen ladda om och spara igen.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (translittererad)",
 	"wikibase-quantitydetails-amount": "Mängd",
 	"wikibase-quantitydetails-upperbound": "Övre gräns",
 	"wikibase-quantitydetails-lowerbound": "Undre gräns",
@@ -83,6 +84,8 @@
 	"wikibase-time-precision-BCE-Gannum": "$1 miljarder år f.v.t.",
 	"wikibase-time-precision-BCE-Mannum": "$1 miljoner år f.v.t.",
 	"wikibase-time-precision-BCE-annum": "$1 år f.v.t.",
+	"wikibase-time-precision-BCE-millennium": "$1 årtusendet f.Kr.",
+	"wikibase-time-precision-BCE-century": "$1 århundradet f.Kr.",
 	"wikibase-time-precision-BCE-10annum": "$1-talet f.v.t.",
 	"wikibase-snakformatter-valuetype-mismatch": "Värdets typ \"$1\" stämmer inte med egenskapens typ \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Egenskap $1 hittades inte, kan inte avgöra vilken datatyp som ska användas."

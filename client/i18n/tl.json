@@ -10,5 +10,7 @@
 	"wikibase-dataitem": "Aytem na {{WBREPONAME}}",
 	"wikibase-editlinks": "Baguhin ang mga kawing",
 	"wikibase-editlinkstitle": "Baguhin ang mga kawing inter-wika",
-	"wikibase-rc-hide-wikidata-show": "Ipakita"
+	"wikibase-rc-hide-wikidata-hide": "Itago",
+	"wikibase-rc-hide-wikidata-show": "Ipakita",
+	"wikibase-otherprojects": "Iba pang mga proyekto"
 }
