@@ -105,6 +105,7 @@ class GetClaims extends ApiBase {
 		$entity = $entityRevision->getEntity();
 
 		if ( $params['ungroupedlist'] ) {
+			$this->logFeatureUsage( 'action=wbgetclaims&ungroupedlist' );
 			$this->resultBuilder->getOptions()
 				->setOption(
 					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
