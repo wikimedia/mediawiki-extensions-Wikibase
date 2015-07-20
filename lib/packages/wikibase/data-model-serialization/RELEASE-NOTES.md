@@ -1,6 +1,6 @@
 # Wikibase DataModel Serialization release notes
 
-## 1.6.0 (dev)
+## 1.6.0 (2015-07-20)
 
 * Added `newAliasGroupSerializer` to `SerializerFactory`
 

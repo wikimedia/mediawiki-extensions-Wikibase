@@ -31,7 +31,7 @@ version 1.5 of this package:
 ```json
 {
 	"require": {
-		"wikibase/data-model-serialization": "~1.5"
+		"wikibase/data-model-serialization": "~1.6"
 	}
 }
 ```
