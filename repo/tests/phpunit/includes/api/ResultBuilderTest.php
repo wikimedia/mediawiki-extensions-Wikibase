@@ -45,7 +45,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return new ApiResult( false );
 	}
 
-	protected function getResultBuilder( $result, $options = null, $indexedMode = false ) {
+	protected function getResultBuilder( $result, $options = null, $isRawMode = false ) {
 		$mockTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -85,7 +85,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$serializerFactory,
 			new MockSiteStore(),
 			$mockPropertyDataTypeLookup,
-			$indexedMode
+			$isRawMode
 		);
 
 		if ( is_array( $options ) ) {
@@ -802,22 +802,40 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider statementSerializationProvider
 	 */
-	public function testAddClaims( Statement $statement, $statementSerialization ) {
+	public function testAddClaims( Statement $statement, $isRawMode, $statementSerialization ) {
 		$result = $this->getDefaultResult();
 		$path = array( 'entities', 'Q1' );
-		$expected = array(
-			'entities' => array(
-				'Q1' => array(
-					'claims' => array(
-						'P12' => array(
-							$statementSerialization
+
+		if ( $isRawMode ) {
+			$expected = array(
+				'entities' => array(
+					'Q1' => array(
+						'claims' => array(
+							array(
+								'id' => 'P12',
+								$statementSerialization,
+								'_element' => 'claim',
+							),
+							'_element' => 'property',
 						),
 					),
 				),
-			),
-		);
+			);
+		} else {
+			$expected = array(
+				'entities' => array(
+					'Q1' => array(
+						'claims' => array(
+							'P12' => array(
+								$statementSerialization
+							),
+						),
+					),
+				),
+			);
+		}
 
-		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
 		$resultBuilder->addClaims( array( $statement ), $path );
 
 		$data = $result->getResultData();
@@ -828,11 +846,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider statementSerializationProvider
 	 */
-	public function testAddClaim( Statement $statement, $statementSerialization ) {
+	public function testAddClaim( Statement $statement, $isRawMode, $statementSerialization ) {
 		$result = $this->getDefaultResult();
 		$expected = array( 'claim' => $statementSerialization );
 
-		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
 		$resultBuilder->addClaim( $statement );
 
 		$data = $result->getResultData();
@@ -903,8 +921,71 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 		);
 
+		$expectedRawModeSerialization = array(
+			'id' => 'fooguidbar',
+			'mainsnak' => array(
+				'snaktype' => 'value',
+				'property' => 'P12',
+				'datavalue' => array(
+					'value' => 'stringVal',
+					'type' => 'string',
+				),
+				'datatype' => 'DtIdFor_P12',
+			),
+			'type' => 'statement',
+			'rank' => 'normal',
+			'qualifiers-order' => array(
+				'P12',
+				'_element' => 'property',
+			),
+			'references' => array(
+				array(
+					'hash' => '2f543336756784850a310cbc52a9307e467c7c42',
+					'snaks' => array(
+						array(
+							'id' => 'P12',
+							array(
+								'snaktype' => 'value',
+								'property' => 'P12',
+								'datatype' => 'DtIdFor_P12',
+								'datavalue' => array(
+									'value' => 'refSnakVal',
+									'type' => 'string',
+								),
+							),
+							'_element' => 'snak',
+						),
+						'_element' => 'property',
+					),
+					'snaks-order' => array(
+						'P12',
+						'_element' => 'property',
+					),
+				),
+				'_element' => 'reference',
+			),
+			'qualifiers' => array(
+				array(
+					'id' => 'P12',
+					array(
+						'snaktype' => 'value',
+						'property' => 'P12',
+						'datatype' => 'DtIdFor_P12',
+						'datavalue' => array(
+							'value' => 'qualiferVal',
+							'type' => 'string',
+						),
+						'hash' => '67423e8a140238decaa9156be1e3ba23513b3b19',
+					),
+					'_element' => 'qualifiers',
+				),
+				'_element' => 'property',
+			),
+		);
+
 		return array(
-			array( $statement, $expectedSerialization ),
+			array( $statement, false, $expectedSerialization ),
+			array( $statement, true, $expectedRawModeSerialization ),
 		);
 	}
 
