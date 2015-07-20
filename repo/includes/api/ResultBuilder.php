@@ -598,14 +598,80 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addClaim( Claim $claim ) {
-		$serializer = $this->libSerializerFactory->newClaimSerializer( $this->getOptions() );
+		$serializer = $this->serializerFactory->newStatementSerializer();
 
 		//TODO: this is currently only used to add a Claim as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow claims
 		//      to be added to a list, using a path and a id key or index.
 
-		$value = $serializer->getSerialized( $claim );
+		$value = $serializer->serialize( $claim );
+
+		/**
+		 * Below we force an empty qualifiers and qualifiers-order element in the output.
+		 * This is to make sure we dont break anything that assumes this is always here.
+		 * This hack was added when moving away from the Lib serializers
+		 */
+		if ( !isset( $value['qualifiers'] ) ) {
+			$value['qualifiers'] = array();
+		}
+		if ( !isset( $value['qualifiers-order'] ) ) {
+			$value['qualifiers-order'] = array();
+		}
+
+		$value = $this->getArrayWithNoSnakHashAtPath( $value, 'mainsnak' );
+		$value = $this->getArrayWithNoSnakHashAtPath( $value, 'references/*/snaks/*/*' );
+		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'references/*/snaks' );
+		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'qualifiers' );
+		$value = $this->modifier->modifyUsingCallback(
+			$value,
+			'mainsnak',
+			$this->getModCallbackToAddDataTypeToSnak()
+		);
+
+		if ( $this->isRawMode ) {
+			$value = $this->getRawModeClaimArray( $value );
+		}
+
 		$this->setValue( null, 'claim', $value );
+	}
+
+	private function getRawModeClaimArray( $array ) {
+		$rawModeModifications = array(
+			'references/*/snaks/*' => array(
+				$this->getModCallbackToIndexTags( 'snak' ),
+			),
+			'references/*/snaks' => array(
+				$this->getModCallbackToRemoveKeys( 'id' ),
+				$this->getModCallbackToIndexTags( 'property' ),
+			),
+			'references/*/snaks-order' => array(
+				$this->getModCallbackToIndexTags( 'property' )
+			),
+			'references' => array(
+				$this->getModCallbackToIndexTags( 'reference' ),
+			),
+			'qualifiers/*' => array(
+				$this->getModCallbackToIndexTags( 'qualifiers' ),
+			),
+			'qualifiers' => array(
+				$this->getModCallbackToRemoveKeys( 'id' ),
+				$this->getModCallbackToIndexTags( 'property' ),
+			),
+			'qualifiers-order' => array(
+				$this->getModCallbackToIndexTags( 'property' )
+			),
+			'mainsnak' => array(
+				$this->getModCallbackToAddDataTypeToSnak(),
+			),
+		);
+
+		foreach ( $rawModeModifications as $path => $callbacks ) {
+			foreach ( $callbacks as $callback ) {
+				$array = $this->modifier->modifyUsingCallback( $array, $path, $callback );
+			}
+		}
+
+		return $array;
 	}
 
 	/**
@@ -624,8 +690,8 @@ class ResultBuilder {
 
 		$value = $serializer->serialize( $reference );
 
-		$value = $this->getReferenceArrayWithNoSnakHashes( $value );
-		$value = $this->getReferenceArrayWithValueDataTypes( $value );
+		$value = $this->getArrayWithNoSnakHashAtPath( $value, 'snaks/*/*' );
+		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'snaks' );
 
 		if ( $this->isRawMode ) {
 			$value = $this->getRawModeReferenceArray( $value );
@@ -634,36 +700,32 @@ class ResultBuilder {
 		$this->setValue( null, 'reference', $value );
 	}
 
-	private function getReferenceArrayWithNoSnakHashes( $array ) {
-		return $this->modifier->modifyUsingCallback( $array, 'snaks', function ( $array ) {
-			foreach ( $array as $propertyIdGroupKey => &$snakGroup ) {
-				foreach ( $snakGroup as &$snak ) {
-					unset( $snak['hash'] );
-				}
-			}
-			return $array;
-		} );
+	/**
+	 * @param array $array
+	 * @param $path string
+	 *
+	 * @return array
+	 */
+	private function getArrayWithNoSnakHashAtPath( array $array, $path ) {
+		return $this->modifier->modifyUsingCallback(
+			$array,
+			$path,
+			$this->getModCallbackToRemoveElementWithKey( 'hash' )
+		);
 	}
 
-	private function getReferenceArrayWithValueDataTypes( $array ) {
-		$dtLookup = $this->dataTypeLookup;
-		return $this->modifier->modifyUsingCallback( $array, 'snaks', function ( $array ) use ( $dtLookup ) {
-			foreach ( $array as $propertyIdGroupKey => &$snakGroup ) {
-				$dataType = $dtLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroupKey ) );
-				foreach ( $snakGroup as &$snak ) {
-					/**
-					 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
-					 *       but this is not done by the LibSerializers thus not done here.
-					 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
-					 *       might be able to use in some way here
-					 */
-					if ( $snak['snaktype'] === 'value' ) {
-						$snak['datatype'] = $dataType;
-					}
-				}
-			}
-			return $array;
-		} );
+	/**
+	 * @param array $array
+	 * @param string $path
+	 *
+	 * @return array
+	 */
+	private function getArrayWithDataTypesInGroupedSnakListAtPath( array $array, $path ) {
+		return $this->modifier->modifyUsingCallback(
+			$array,
+			$path,
+			$this->getModCallbackToAddDataTypeToSnaksGroupedByProperty()
+		);
 	}
 
 	private function getRawModeReferenceArray( $array ) {
@@ -756,6 +818,91 @@ class ResultBuilder {
 
 			$this->setValue( $path, 'lastrevid', empty( $revisionId ) ? 0 : $revisionId );
 		}
+	}
+
+	/**
+	 * Get callable to index array with the given tag name
+	 *
+	 * @param string $tagName
+	 *
+	 * @return callable
+	 */
+	private function getModCallbackToIndexTags( $tagName ) {
+		return function( $array ) use ( $tagName ) {
+			ApiResult::setIndexedTagName( $array, $tagName );
+			return $array;
+		};
+	}
+
+	/**
+	 * Get callable to remove array keys and optionally set the key as an array value
+	 *
+	 * @param string|null $addAsArrayElement
+	 *
+	 * @return callable
+	 */
+	private function getModCallbackToRemoveKeys( $addAsArrayElement = null ) {
+		return function ( $array ) use ( $addAsArrayElement ) {
+			if ( $addAsArrayElement !== null ) {
+				foreach ( $array as $key => &$value ) {
+					$value[$addAsArrayElement] = $key;
+				}
+			}
+			$array = array_values( $array );
+			return $array;
+		};
+	}
+
+	/**
+	 * @param string $keyToRemove
+	 *
+	 * @return callable
+	 */
+	private function getModCallbackToRemoveElementWithKey( $keyToRemove ) {
+		return function ( $array ) use ( $keyToRemove ) {
+			if ( isset( $array[$keyToRemove] ) ) {
+				unset( $array[$keyToRemove] );
+			}
+			return $array;
+		};
+	}
+
+	private function getModCallbackToAddDataTypeToSnaksGroupedByProperty() {
+		$dtLookup = $this->dataTypeLookup;
+		return function ( $array ) use ( $dtLookup ) {
+			foreach ( $array as $propertyIdGroupKey => &$snakGroup ) {
+				$dataType = $dtLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroupKey ) );
+				foreach ( $snakGroup as &$snak ) {
+					/**
+					 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
+					 *       but this is not done by the LibSerializers thus not done here.
+					 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
+					 *       might be able to use in some way here
+					 */
+					if ( $snak['snaktype'] === 'value' ) {
+						$snak['datatype'] = $dataType;
+					}
+				}
+			}
+			return $array;
+		};
+	}
+
+	private function getModCallbackToAddDataTypeToSnak() {
+		$dtLookup = $this->dataTypeLookup;
+		return function ( $array ) use ( $dtLookup ) {
+			$dataType = $dtLookup->getDataTypeIdForProperty( new PropertyId( $array['property'] ) );
+			/**
+			 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
+			 *       but this is not done by the LibSerializers thus not done here.
+			 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
+			 *       might be able to use in some way here
+			 */
+			if ( $array['snaktype'] === 'value' ) {
+				$array['datatype'] = $dataType;
+			}
+			return $array;
+		};
 	}
 
 }
