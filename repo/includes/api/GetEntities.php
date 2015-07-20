@@ -308,6 +308,7 @@ class GetEntities extends ApiBase {
 			$languages = $params['languages'];
 		}
 		if ( $params['ungroupedlist'] ) {
+			$this->logFeatureUsage( 'action=wbgetentities&ungroupedlist' );
 			$options->setOption(
 					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
 					array()
