@@ -151,7 +151,149 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return array( array( 3 ), array( -1 ) );
 	}
 
-	public function testAddEntityRevision() {
+	public function provideTestAddEntityRevision() {
+		$expected = array(
+			'entities' => array(
+				'Q1230000' => array(
+					'pageid' => 123, //mocked
+					'ns' => 456, //mocked
+					'title' => 'MockPrefixedText', //mocked
+					'id' => 'Q123098',
+					'type' => 'item',
+					'lastrevid' => 33,
+					'modified' => '2013-11-26T20:29:23Z',
+					'redirects' => array(
+						'from' => 'Q1230000',
+						'to' => 'Q123098',
+					),
+					'aliases' => array(
+						'en' => array(
+							array(
+								'language' => 'en',
+								'value' => 'bar'
+							),
+							array(
+								'language' => 'en',
+								'value' => 'baz'
+							)
+						),
+						'zh' => array(
+							array(
+								'language' => 'zh',
+								'value' => '????????',
+							),
+						),
+					),
+					'descriptions' => array(
+						'pt' => array(
+							'language' => 'pt',
+							'value' => 'ptDesc'
+						),
+						'pl' => array(
+							'language' => 'pl',
+							'value' => 'Longer Description For An Item'
+						),
+					),
+					'labels' => array(
+						'de' => array(
+							'language' => 'de',
+							'value' => 'foo'
+						),
+						'zh_classical' => array(
+							'language' => 'zh_classical',
+							'value' => 'Longer Label'
+						),
+					),
+					'claims' => array(
+						'P65' => array(
+							array(
+								'id' => 'imaguid',
+								'mainsnak' => array(
+									'snaktype' => 'somevalue',
+									'property' => 'P65'
+								),
+								'type' => 'statement',
+								'qualifiers' => array(
+									'P65' => array(
+										array(
+											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
+											'snaktype' => 'somevalue',
+											'property' => 'P65',
+										),
+										array(
+											'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
+											'snaktype' => 'value',
+											'property' => 'P65',
+											'datavalue' => array(
+												'value' => 'string!',
+												'type' => 'string',
+											),
+											'datatype' => 'DtIdFor_P65',
+										),
+									),
+								),
+								'rank' => 'normal',
+								'qualifiers-order' => array(
+									'P65'
+								),
+								'references' => array(
+									array(
+										'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
+										'snaks' => array(
+											'P65' => array(
+												array(
+													'snaktype' => 'somevalue',
+													'property' => 'P65'
+												)
+											),
+											'P68' => array(
+												array(
+													'snaktype' => 'somevalue',
+													'property' => 'P68'
+												)
+											),
+										),
+										'snaks-order' => array(
+											'P65',
+											'P68'
+										)
+									),
+								),
+							)
+						),
+					),
+					'sitelinks' => array(
+						'enwiki' => array(
+							'site' => 'enwiki',
+							'title' => 'Berlin',
+							'badges' => array( 'Q333' )
+						),
+						'zh_classicalwiki' => array(
+							'site' => 'zh_classicalwiki',
+							'title' => 'User:Addshore',
+							'badges' => array()
+						),
+					)
+				),
+				'_element' => 'entity',
+			),
+		);
+
+		$expectedRaw = $expected;
+		unset( $expectedRaw['entities']['_element'] );
+		$expectedRaw['entities'] = array_values( $expectedRaw['entities'] );
+		$expectedRaw['entities']['_element'] = 'entity';
+
+		return array(
+			array( false, $expected ),
+			array( true, $expectedRaw ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideTestAddEntityRevision
+	 */
+	public function testAddEntityRevision( $isRawMode, $expected ) {
 		$result = $this->getDefaultResult();
 		$props = array( 'info' );
 		$item = new Item( new ItemId( 'Q123098' ) );
@@ -183,130 +325,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
-		$expected = array( 'entities' => array( 'Q1230000' => array(
-			'pageid' => 123, //mocked
-			'ns' => 456, //mocked
-			'title' => 'MockPrefixedText', //mocked
-			'id' => 'Q123098',
-			'type' => 'item',
-			'lastrevid' => 33,
-			'modified' => '2013-11-26T20:29:23Z',
-			'redirects' => array(
-				'from' => 'Q1230000',
-				'to' => 'Q123098',
-			),
-			'aliases' => array(
-				'en' => array(
-					array(
-						'language' => 'en',
-						'value' => 'bar'
-					),
-					array(
-						'language' => 'en',
-						'value' => 'baz'
-					)
-				),
-				'zh' => array(
-					array(
-						'language' => 'zh',
-						'value' => '????????',
-					),
-				),
-			),
-			'descriptions' => array(
-				'pt' => array(
-					'language' => 'pt',
-					'value' => 'ptDesc'
-				),
-				'pl' => array(
-					'language' => 'pl',
-					'value' => 'Longer Description For An Item'
-				),
-			),
-			'labels' => array(
-				'de' => array(
-					'language' => 'de',
-					'value' => 'foo'
-				),
-				'zh_classical' => array(
-					'language' => 'zh_classical',
-					'value' => 'Longer Label'
-				),
-			),
-			'claims' => array(
-				'P65' => array(
-					array(
-						'id' => 'imaguid',
-						'mainsnak' => array(
-							'snaktype' => 'somevalue',
-							'property' => 'P65'
-						),
-						'type' => 'statement',
-						'qualifiers' => array(
-							'P65' => array(
-								array(
-									'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
-									'snaktype' => 'somevalue',
-									'property' => 'P65',
-								),
-								array(
-									'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
-									'snaktype' => 'value',
-									'property' => 'P65',
-									'datavalue' => array(
-										'value' => 'string!',
-										'type' => 'string',
-									),
-									'datatype' => 'DtIdFor_P65',
-								),
-							),
-						),
-						'rank' => 'normal',
-						'qualifiers-order' => array(
-							'P65'
-						),
-						'references' => array(
-							array(
-								'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
-								'snaks' => array(
-									'P65' => array(
-										array(
-											'snaktype' => 'somevalue',
-											'property' => 'P65'
-										)
-									),
-									'P68' => array(
-										array(
-											'snaktype' => 'somevalue',
-											'property' => 'P68'
-										)
-									),
-								),
-								'snaks-order' => array(
-									'P65', 'P68'
-								)
-							),
-						),
-					)
-				),
-			),
-			'sitelinks' => array(
-				'enwiki' => array(
-					'site' => 'enwiki',
-					'title' => 'Berlin',
-					'badges' => array( 'Q333' )
-				),
-				'zh_classicalwiki' => array(
-					'site' => 'zh_classicalwiki',
-					'title' => 'User:Addshore',
-					'badges' => array()
-				),
-			) ),
-			'_element' => 'entity',
-			),
-		);
-
-		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
 		$resultBuilder->addEntityRevision( 'Q1230000', $entityRevision, new SerializationOptions(), $props );
 
 		$data = $result->getResultData();
