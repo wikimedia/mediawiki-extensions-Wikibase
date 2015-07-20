@@ -366,6 +366,7 @@ class GetEntities extends ApiBase {
 			'ungroupedlist' => array(
 				self::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false,
+				self::PARAM_DEPRECATED => true,
 			),
 			'sitefilter' => array(
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
