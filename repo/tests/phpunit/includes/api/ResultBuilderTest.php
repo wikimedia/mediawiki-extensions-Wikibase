@@ -850,8 +850,15 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$expected = array( 'claim' => $statementSerialization );
 
-		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
-		$resultBuilder->addClaim( $statement );
+		$time_start = microtime(true);
+		//$resultBuilder->addClaim( $statement );
+		for($i=0; $i<1000; $i++){
+			$resultBuilder = $this->getResultBuilder( new ApiResult( false ), null, $isRawMode );
+			$resultBuilder->addClaim( $statement );
+		}
+		$time_end = microtime(true);
+		$execution_time = ($time_end - $time_start)/60;
+		$this->markTestSkipped( '<b>Total Execution Time:</b> '.$execution_time.' Mins for ' . $isRawMode );
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
