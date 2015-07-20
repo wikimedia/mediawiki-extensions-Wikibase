@@ -850,7 +850,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$expected = array( 'claim' => $statementSerialization );
 
-		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $this->getDefaultResult(), null, $isRawMode );
 		$resultBuilder->addClaim( $statement );
 
 		$data = $result->getResultData();
