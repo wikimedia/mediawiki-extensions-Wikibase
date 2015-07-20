@@ -189,6 +189,10 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			array( '1980UTC' ),
 			array( '1980 America/New_York' ),
 			array( '1980America/New_York' ),
+			// No date parser should ever magically turn HMS times into dates.
+			array( '12:31:59' ),
+			array( '23:12:31' ),
+			array( '23:12:59' ),
 		);
 	}
 
