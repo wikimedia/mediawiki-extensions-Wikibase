@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Api;
+namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
@@ -74,7 +74,8 @@ class GetClaims extends ApiWikibase {
 		$entity = $entityRevision->getEntity();
 
 		if ( $params['ungroupedlist'] ) {
-			$this->getResultBuilder()->getOptions()
+			$this->logFeatureUsage( 'action=wbgetclaims&ungroupedlist' );
+			$this->resultBuilder->getOptions()
 				->setOption(
 					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
 					array()
