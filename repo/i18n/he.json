@@ -520,6 +520,7 @@
 	"apihelp-wbsearchentities-description": "חיפוש ישויות באמצעות תוויות וכינויים.\nהחזרת תווית ותיאר לישות בשפת המשתמש אם אפשר.\nהחזרת פרטים של המושג שהתאים.\nטקסט המושג שהתאים נמצאגם במפתח הכינויים אם הוא שונה מהתווית להצגה.",
 	"apihelp-wbsearchentities-param-search": "חיפוש עבור הטקסט הזה.",
 	"apihelp-wbsearchentities-param-language": "חיפוש עבור שפה זו.",
+	"apihelp-wbsearchentities-param-strictlanguage": "האם לכבות את גיבוי השפה",
 	"apihelp-wbsearchentities-param-type": "חיפוש הסוג הזה של ישות.",
 	"apihelp-wbsearchentities-param-limit": "מספר מירבי של תוצאות",
 	"apihelp-wbsearchentities-param-continue": "היסט לתחילת החיפוש",

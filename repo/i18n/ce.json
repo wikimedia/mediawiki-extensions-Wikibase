@@ -81,7 +81,7 @@
 	"wikibase-validator-sitelink-conflict": "$1 хьажорг хӀинцале $2 элементас лелош ю. Хьа йиш ю $2 чура и дӀаяккха, и оцу чохь хилла езаш яцахь, я элементаш вовшахтоха, уьш цхьаттера елахь.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 дӀасахьажорг.",
 	"special-itembytitle": "Элементаш коьртамогӀомца",
-	"wikibase-itembytitle-lookup-fieldset": "Лаха элемент сайтаца а коьртамгӀанца а",
+	"wikibase-itembytitle-lookup-fieldset": "Лаха элемент сайтаца а, коьртамгӀанца а",
 	"wikibase-itembytitle-lookup-site": "Сайт:",
 	"wikibase-itembytitle-lookup-page": "АгӀо:",
 	"wikibase-itembytitle-submit": "Лахар",

@@ -6,7 +6,8 @@
 			"Աշոտ1997",
 			"Xelgen",
 			"Դավիթ Սարոյան",
-			"Սահակ"
+			"Սահակ",
+			"Vahe Gharakhanyan"
 		]
 	},
 	"wikibase-edit": "խմբագրել",
@@ -18,6 +19,7 @@
 	"wikibase-entitytermsforlanguagelistview-label": "Պիտակ",
 	"wikibase-entitytermsforlanguagelistview-language": "Լեզու",
 	"wikibase-label-empty": "Պիտակը (անվանումը) նշված չէ",
+	"wikibase-description-empty": "Նկարագրությունը լրացված չէ",
 	"wikibase-diffview-label": "պիտակ",
 	"wikibase-statements": "Պնդումներ",
 	"wikibase-sitelinks-special": "Այլ կայքեր",

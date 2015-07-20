@@ -390,6 +390,7 @@
 	"apihelp-wbremovereferences-description": "Usuwa jeden lub więcej odnośników tej samej deklaracji.",
 	"apihelp-wbsearchentities-param-search": "Wyszukaj w tym tekście.",
 	"apihelp-wbsearchentities-param-language": "Wyszukaj w tym języku.",
+	"apihelp-wbsearchentities-param-strictlanguage": "Czy wyłączyć język pomocniczy",
 	"apihelp-wbsearchentities-param-limit": "Maksymalna liczba wyników",
 	"apihelp-wbsetaliases-param-language": "Język, w którym ustawia się aliasy",
 	"apihelp-wbsetclaimvalue-description": "Ustawia wartość stwierdzenia Wikibase.",
