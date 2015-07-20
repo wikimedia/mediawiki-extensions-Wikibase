@@ -122,15 +122,6 @@ class LibSerializerFactory {
 	 *
 	 * @return Serializer
 	 */
-	public function newClaimsSerializer( SerializationOptions $options ) {
-		return new ClaimsSerializer( $this->newClaimSerializer( $options ), $options );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Serializer
-	 */
 	private function newItemSerializer( SerializationOptions $options ) {
 		return new ItemSerializer( $this->newClaimSerializer( $options ), $this->siteStore, $options, $this->entityFactory );
 	}
