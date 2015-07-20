@@ -99,7 +99,6 @@ class LibSerializerFactoryTest extends \MediaWikiTestCase {
 		$names = array(
 			'SnakSerializer',
 			'ClaimSerializer',
-			'ClaimsSerializer',
 		);
 
 		return array_map( function( $name ) {
