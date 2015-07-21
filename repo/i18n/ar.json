@@ -16,7 +16,8 @@
 			"Abanima",
 			"Sonic N800",
 			"Bibas",
-			"Yahya Sakhnini"
+			"Yahya Sakhnini",
+			"Mervat Salman"
 		]
 	},
 	"wikibase-desc": "مستودع بيانات مهيكلة",
@@ -327,6 +328,7 @@
 	"apihelp-wbsearchentities-description": "بحث عن كائنات",
 	"apihelp-wbsearchentities-param-search": "ابحث عن هذا النص",
 	"apihelp-wbsearchentities-param-language": "ابحث بهذه اللغة",
+	"apihelp-wbsearchentities-param-strictlanguage": "إذا ما سيتم التراجع عن تعطيل اللغة",
 	"apihelp-wbsearchentities-param-type": "البحث عن نمط الكائنات التالي",
 	"apihelp-wbsearchentities-param-limit": "العدد الأعظم للنتائج",
 	"apihelp-wbsetdescription-param-language": "لغة الوصف",

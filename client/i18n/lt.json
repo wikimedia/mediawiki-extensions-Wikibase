@@ -4,12 +4,13 @@
 			"Garas",
 			"Hugo.arg",
 			"Reedy",
-			"Salpusnis"
+			"Salpusnis",
+			"Albertas"
 		]
 	},
 	"wikibase-client-desc": "Wikibase išplėtimo klientas",
 	"tooltip-t-wikibase": "Nuoroda į susietą duomenų saugyklos įrašą",
-	"apihelp-query+pageterms-description": "Gauti su puslapiu susijusias sąlygas per susijusį duomenų elementą.",
+	"apihelp-query+pageterms-description": "Gauti su puslapiu susijusias sąlygas per susijusį duomenų įrašą.",
 	"apihelp-query+pageterms-example-simple": "Gauti visus su puslapiu \"Londonas\" susijusius terminus naudotojo kalba.",
 	"apihelp-query+pageterms-example-label-en": "Gauti žymas ir pseudonimus, susijusius su puslapiu \"Londonas\", anglų kalba.",
 	"apihelp-query+pageterms-param-terms": "Grąžintinų terminų tipai, pvz. \"apibūdinimas\". Jei nenurodyta, grąžinami visi tipai.",
@@ -54,7 +55,7 @@
 	"wikibase-rc-hide-wikidata-show": "Rodyti",
 	"wikibase-rc-show-wikidata-pref": "Rodyti pakeitimus {{WBREPONAME}} naujausių keitimų puslapyje",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} elemento pakeitimas",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} keitimas",
 	"wikibase-replicationnote": "Atkreipkite dėmesį, kad gali praeiti keletas minučių kol keitimai bus matomi visose wiki.",
 	"wikibase-watchlist-show-changes-pref": "Rodyti keitimus {{WBREPONAME}} jūsų stebimųjų puslapių sąraše",
 	"wikibase-error-deserialize-error": "Nepavyko deserializuoti duomenų.",
