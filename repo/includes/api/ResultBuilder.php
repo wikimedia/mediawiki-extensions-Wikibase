@@ -5,13 +5,14 @@ namespace Wikibase\Repo\Api;
 use ApiResult;
 use InvalidArgumentException;
 use Revision;
+use SiteStore;
 use Status;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\EntitySerializer;
@@ -56,9 +57,19 @@ class ResultBuilder {
 	private $entityTitleLookup;
 
 	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * @var SerializationOptions
 	 */
 	private $options;
+
+	/**
+	 * @var SerializationModifier
+	 */
+	private $modifier;
 
 	/**
 	 * @var bool when special elements such as '_element' are needed by the formatter.
@@ -70,6 +81,7 @@ class ResultBuilder {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param SerializerFactory $serializerFactory
+	 * @param SiteStore $siteStore
 	 * @param bool $isRawMode when special elements such as '_element' are needed by the formatter.
 	 *
 	 * @throws InvalidArgumentException
@@ -79,6 +91,7 @@ class ResultBuilder {
 		EntityTitleLookup $entityTitleLookup,
 		LibSerializerFactory $libSerializerFactory,
 		SerializerFactory $serializerFactory,
+		SiteStore $siteStore,
 		$isRawMode
 	) {
 		if ( !$result instanceof ApiResult ) {
@@ -91,6 +104,8 @@ class ResultBuilder {
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
 		$this->isRawMode = $isRawMode;
+		$this->siteStore = $siteStore;
+		$this->modifier = new SerializationModifier();
 	}
 
 	/**
@@ -471,35 +486,69 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param array $siteLinks the site links to insert in the result, as SiteLink objects
+	 * @todo use a SiteLinkListSerializer when created in DataModelSerialization here
+	 *
+	 * @param SiteLinkList $siteLinkList the site links to insert in the result
 	 * @param array|string $path where the data is located
-	 * @param array|null $options
+	 * @param bool $addUrl
 	 */
-	public function addSiteLinks( array $siteLinks, $path, $options = null ) {
-		$serializerOptions = $this->getOptions();
+	public function addSiteLinkList( SiteLinkList $siteLinkList, $path, $addUrl = false ) {
+		$serializer = $this->serializerFactory->newSiteLinkSerializer();
 
-		if ( is_array( $options ) ) {
-			if ( in_array( EntitySerializer::SORT_ASC, $options ) ) {
-				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
-			} elseif ( in_array( EntitySerializer::SORT_DESC, $options ) ) {
-				$serializerOptions->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_DESC );
-			}
-
-			if ( in_array( 'url', $options ) ) {
-				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/urls" );
-			}
-
-			if ( in_array( 'removed', $options ) ) {
-				$serializerOptions->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/removed" );
-			}
+		$values = array();
+		foreach ( $siteLinkList->toArray() as $siteLink ) {
+			$values[$siteLink->getSiteId()] = $serializer->serialize( $siteLink );
 		}
 
-		$siteLinkSerializer = $this->libSerializerFactory->newSiteLinkSerializer( $serializerOptions );
-		$values = $siteLinkSerializer->getSerialized( $siteLinks );
-
-		if ( $values !== array() ) {
-			$this->setList( $path, 'sitelinks', $values, 'sitelink' );
+		if ( $addUrl ) {
+			$values = $this->getSiteLinkListArrayWithUrls( $values );
 		}
+
+		if ( $this->isRawMode ) {
+			$values = $this->getRawModeSiteLinkListArray( $values );
+		}
+
+		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
+	}
+
+	private function getSiteLinkListArrayWithUrls( array $array ) {
+		$siteStore = $this->siteStore;
+		$addUrlCallback = function( $array ) use ( $siteStore ) {
+			$site = $siteStore->getSite( $array['site'] );
+			if ( $site !== null ) {
+				$array['url'] = $site->getPageUrl( $array['title'] );
+			}
+			return $array;
+		};
+		return $this->modifier->modifyUsingCallback( $array, '*', $addUrlCallback );
+	}
+
+	private function getRawModeSiteLinkListArray( array $array ) {
+		$addIndexedBadgesCallback = function ( $array ) {
+			ApiResult::setIndexedTagName( $array, 'badge' );
+			return $array;
+		};
+		$array = array_values( $array );
+		return $this->modifier->modifyUsingCallback( $array, '*/badges', $addIndexedBadgesCallback );
+	}
+
+	/**
+	 * Adds fake serialization to show a sitelink has been removed
+	 *
+	 * @since 0.5
+	 *
+	 * @param SiteLinkList $siteLinkList
+	 * @param array|string $path where the data is located
+	 */
+	public function addRemovedSiteLinks( SiteLinkList $siteLinkList, $path ) {
+		$serializer = $this->serializerFactory->newSiteLinkSerializer();
+		$values = array();
+		foreach ( $siteLinkList->toArray() as $siteLink ) {
+			$value = $serializer->serialize( $siteLink );
+			$value['removed'] = '';
+			$values[$siteLink->getSiteId()] = $value;
+		}
+		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
 	}
 
 	/**
