@@ -99,15 +99,10 @@ class LibSerializerFactoryTest extends \MediaWikiTestCase {
 
 	public function newUnserializerProvider() {
 		$names = array(
-			'SnakUnserializer',
 			'ReferenceUnserializer',
 			'ClaimUnserializer',
-			'ClaimsUnserializer',
 			'PropertyUnserializer',
 			'ItemUnserializer',
-			'LabelUnserializer',
-			'DescriptionUnserializer',
-			'AliasUnserializer',
 		);
 
 		return array_map( function( $name ) {
@@ -136,11 +131,7 @@ class LibSerializerFactoryTest extends \MediaWikiTestCase {
 			'ClaimsSerializer',
 			'PropertySerializer',
 			'ItemSerializer',
-			'LabelSerializer',
-			'DescriptionSerializer',
 			'AliasSerializer',
-
-			'SiteLinkSerializer',
 		);
 
 		return array_map( function( $name ) {
