@@ -67,13 +67,6 @@ class LibSerializerFactory {
 	}
 
 	/**
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 */
-	public function setDataTypeLookup( PropertyDataTypeLookup $dataTypeLookup ) {
-		$this->dataTypeLookup = $dataTypeLookup;
-	}
-
-	/**
 	 * @param mixed $object
 	 * @param SerializationOptions $options
 	 *
