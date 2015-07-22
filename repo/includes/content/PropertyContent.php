@@ -100,11 +100,8 @@ class PropertyContent extends EntityContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
-		if ( $this->isRedirect() ) {
-			return array();
-		}
-
 		$properties = parent::getEntityPageProperties();
+
 		$properties['wb-claims'] = $this->getProperty()->getStatements()->count();
 
 		return $properties;
@@ -148,7 +145,9 @@ class PropertyContent extends EntityContent {
 	 * @return bool True if the property is not empty, but does not contain statements.
 	 */
 	public function isStub() {
-		return !$this->isEmpty() && $this->getProperty()->getStatements()->isEmpty();
+		return !$this->isRedirect()
+			&& !$this->getProperty()->isEmpty()
+			&& $this->getProperty()->getStatements()->isEmpty();
 	}
 
 }

@@ -204,6 +204,14 @@ class ItemContentTest extends EntityContentTest {
 			$case[1]['wb-sitelinks'] = 0;
 		}
 
+		$cases['redirect'] = array(
+			ItemContent::newFromRedirect(
+				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
+				Title::newFromText( 'Item:Q2' )
+			),
+			array()
+		);
+
 		$cases['claims'] = array(
 			$this->getItemContentWithClaim(),
 			array(

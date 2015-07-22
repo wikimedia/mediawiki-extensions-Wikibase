@@ -292,7 +292,6 @@ abstract class EntityContent extends AbstractContent {
 
 		$output = $outputGenerator->getParserOutput( $entityRevision, $options, $generateHtml );
 
-		// register page properties
 		$this->applyEntityPageProperties( $output );
 
 		return $output;
@@ -710,8 +709,11 @@ abstract class EntityContent extends AbstractContent {
 	 * @param ParserOutput $output
 	 */
 	private function applyEntityPageProperties( ParserOutput $output ) {
-		$properties = $this->getEntityPageProperties();
+		if ( $this->isRedirect() ) {
+			return;
+		}
 
+		$properties = $this->getEntityPageProperties();
 		foreach ( $properties as $name => $value ) {
 			$output->setProperty( $name, $value );
 		}
@@ -729,13 +731,9 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
-		if ( $this->isRedirect() ) {
-			return array();
-		}
-
 		$properties = array();
-		$status = $this->getEntityStatus();
 
+		$status = $this->getEntityStatus();
 		if ( $status !== self::STATUS_NONE ) {
 			$properties['wb-status'] = $status;
 		}

@@ -234,7 +234,6 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 					'wb-claims' => 0,
 				)
 			),
-
 			'labels' => array(
 				$labeledEntityContent,
 				array(
