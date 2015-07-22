@@ -16,6 +16,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -253,7 +254,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		if ( is_array( $reference ) ) {
 			unset( $reference['hash'] );
 			$reference = $this->newLibSerializerFactory()
-				->newUnserializerForClass( 'Wikibase\DataModel\Reference' )
+				->newReferenceUnserializer( new SerializationOptions() )
 				->newFromSerialization( $reference );
 		}
 		return $reference;

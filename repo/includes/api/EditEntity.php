@@ -24,6 +24,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\WikibaseRepo;
@@ -515,7 +516,7 @@ class EditEntity extends ModifyEntity {
 		$opsToReturn = array();
 
 		$serializerFactory = new LibSerializerFactory();
-		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Claim\Claim' );
+		$unserializer = $serializerFactory->newClaimUnserializer( new SerializationOptions() );
 
 		foreach ( $claims as $claimArray ) {
 			if ( !array_key_exists( 'remove', $claimArray ) ) {
