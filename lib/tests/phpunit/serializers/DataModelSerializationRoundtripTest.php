@@ -26,7 +26,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory as LegacySerializerFactory;
+use Wikibase\Lib\Serializers\LibSerializerFactory;
 
 /**
  * @todo Add tests with $options->setIndexTags( true ).
@@ -283,17 +283,17 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	private function getLegacySerializer( Entity $entity ) {
 		$options = new SerializationOptions();
 
-		$legacySerializerFactory = new LegacySerializerFactory();
+		$LibSerializerFactory = new LibSerializerFactory();
 		$entityType = $entity->getType();
-		return $legacySerializerFactory->newSerializerForEntity( $entityType, $options );
+		return $LibSerializerFactory->newSerializerForEntity( $entityType, $options );
 	}
 
 	private function getLegacyUnserializer( Entity $entity ) {
 		$options = new SerializationOptions();
 
-		$legacySerializerFactory = new LegacySerializerFactory();
+		$LibSerializerFactory = new LibSerializerFactory();
 		$entityType = $entity->getType();
-		return $legacySerializerFactory->newUnserializerForEntity( $entityType, $options );
+		return $LibSerializerFactory->newUnserializerForEntity( $entityType, $options );
 	}
 
 	private function getSerializer() {
