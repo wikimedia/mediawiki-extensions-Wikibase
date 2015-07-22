@@ -281,5 +281,6 @@
 	"content-model-wikibase-item": "Wikibase-דאטנאביעקט",
 	"content-model-wikibase-property": "Wikibase-אייגנשאפֿט",
 	"content-model-wikibase-query": "Wikibase-פֿראגע",
+	"action-property-create": "שאַפן אייגנשאַפֿטן",
 	"apihelp-wbremoveclaims-description": "נעמט אראפ וויקיבאזע טענות."
 }

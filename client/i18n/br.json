@@ -23,7 +23,7 @@
 	"wikibase-rc-hide-wikidata-show": "Diskouez",
 	"wikibase-rc-show-wikidata-pref": "Diskouez kemmoù {{WBREPONAME}} er c'hemmoù ziwezhañ",
 	"wikibase-rc-wikibase-edit-letter": "R",
-	"wikibase-rc-wikibase-edit-title": "Kemmañ {{WBREPONAME}}.",
-	"special-unconnectedpages": "Pajennoù n’int ket liammet gant elfennoù",
+	"wikibase-rc-wikibase-edit-title": "Ur c'hemm eus {{WBREPONAME}}",
+	"unconnectedpages": "Pajennoù n’int ket liammet gant elfennoù",
 	"wikibase-otherprojects": "Raktresoù all"
 }
