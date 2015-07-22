@@ -100,7 +100,6 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 		caseSensitive: false,
 		timeout: 8000,
 		messages: {
-			'aliases-label': mwMsgOrString( 'wikibase-aliases-label', 'also known as:' ),
 			more: mwMsgOrString( 'wikibase-entityselector-more', 'more' )
 		}
 	},
@@ -291,25 +290,20 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	_createLabelFromSuggestion: function( entityStub ) {
 		var $suggestion = $( '<span class="ui-entityselector-itemcontent"/>' );
 
-		$suggestion.append(
-				$( '<span class="ui-entityselector-label"/>' )
-				.text( entityStub.label || entityStub.id )
-			);
+		var $label = $( '<span class="ui-entityselector-label"/>' ).text( entityStub.label || entityStub.id);
 
+		if( entityStub.aliases ) {
+			$label.append(
+					$( '<span class="ui-entityselector-aliases"/>' ).text( " (" + entityStub.aliases.join( ', ' ) + ")" )
+			);
+		}
+
+		$suggestion.append($label);
+		
 		if( entityStub.description ) {
 			$suggestion.append(
 				$( '<span class="ui-entityselector-description"/>' )
 				.text( entityStub.description )
-			);
-		}
-
-		if( entityStub.aliases ) {
-			var aliasesText = this.options.messages['aliases-label']
-				+ ' '
-				+ entityStub.aliases.join( ', ' );
-
-			$suggestion.append(
-				$( '<span class="ui-entityselector-aliases"/>' ).text( aliasesText )
 			);
 		}
 
