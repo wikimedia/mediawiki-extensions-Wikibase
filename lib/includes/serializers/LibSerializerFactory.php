@@ -107,46 +107,6 @@ class LibSerializerFactory {
 	}
 
 	/**
-	 * @param string $className
-	 * @param SerializationOptions $options
-	 *
-	 * @return Unserializer
-	 * @throws OutOfBoundsException
-	 * @throws InvalidArgumentException
-	 */
-	public function newUnserializerForClass( $className, $options = null ) {
-		if ( $options === null ) {
-			$options = new SerializationOptions();
-		}
-
-		//TODO: The factory should take options in the constructor (?!)
-		//TODO: The factory should offer clones of the options via newSerializationOptions().
-		//TODO: This method should merge to options given with the options from the constructor.
-
-		if ( !is_string( $className ) ) {
-			throw new OutOfBoundsException( '$className needs to be a string' );
-		}
-
-		switch ( ltrim( $className, '\\' ) ) {
-			case 'Wikibase\DataModel\Entity\Item':
-				return $this->newItemUnserializer( $options );
-			case 'Wikibase\DataModel\Entity\Property':
-				return $this->newPropertyUnserializer( $options );
-			//TODO: support extra entity types!
-			case 'Wikibase\DataModel\Snak\Snak':
-				return $this->newSnakUnserializer( $options );
-			case 'Wikibase\DataModel\Reference':
-				return $this->newReferenceUnserializer($options );
-			case 'Wikibase\DataModel\Claim\Claim':
-				return $this->newClaimUnserializer( $options );
-			case 'Wikibase\DataModel\Claim\Claims':
-				return $this->newClaimsUnserializer( $options );
-		}
-
-		throw new OutOfBoundsException( '"' . $className . '" has no associated unserializer' );
-	}
-
-	/**
 	 * @param string $entityType
 	 * @param SerializationOptions $options
 	 *

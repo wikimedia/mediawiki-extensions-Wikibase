@@ -21,6 +21,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -301,7 +302,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$serializer = $serializerFactory->newSerializerForObject( $claim );
 			$serializedClaim = $serializer->getSerialized( $claim );
 		} else {
-			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Claim\Claim' );
+			$unserializer = $serializerFactory->newClaimUnserializer( new SerializationOptions() );
 			$serializedClaim = $claim;
 			$claim = $unserializer->newFromSerialization( $serializedClaim );
 		}
