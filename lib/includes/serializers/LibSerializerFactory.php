@@ -203,44 +203,8 @@ class LibSerializerFactory {
 	 *
 	 * @return Serializer
 	 */
-	public function newSiteLinkSerializer( SerializationOptions $options ) {
-		return new SiteLinkSerializer( $this->makeOptions( $options ), $this->siteStore );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Serializer
-	 */
-	public function newLabelSerializer( SerializationOptions $options ) {
-		return new LabelSerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Serializer
-	 */
-	public function newDescriptionSerializer( SerializationOptions $options ) {
-		return new DescriptionSerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Serializer
-	 */
 	public function newAliasSerializer( SerializationOptions $options ) {
 		return new AliasSerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Unserializer
-	 */
-	public function newSnakUnserializer( SerializationOptions $options ) {
-		return $this->newSnakSerializer( $this->makeOptions( $options ) );
 	}
 
 	/**
@@ -266,15 +230,6 @@ class LibSerializerFactory {
 	 *
 	 * @return Unserializer
 	 */
-	public function newClaimsUnserializer( SerializationOptions $options ) {
-		return $this->newClaimsSerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Unserializer
-	 */
 	public function newItemUnserializer( SerializationOptions $options ) {
 		return $this->newItemSerializer( $this->makeOptions( $options ) );
 	}
@@ -286,33 +241,6 @@ class LibSerializerFactory {
 	 */
 	public function newPropertyUnserializer( SerializationOptions $options ) {
 		return $this->newPropertySerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Unserializer
-	 */
-	public function newLabelUnserializer( SerializationOptions $options ) {
-		return $this->newLabelSerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Unserializer
-	 */
-	public function newDescriptionUnserializer( SerializationOptions $options ) {
-		return $this->newDescriptionSerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Unserializer
-	 */
-	public function newAliasUnserializer( SerializationOptions $options ) {
-		return $this->newAliasSerializer( $this->makeOptions( $options ) );
 	}
 
 	/**
