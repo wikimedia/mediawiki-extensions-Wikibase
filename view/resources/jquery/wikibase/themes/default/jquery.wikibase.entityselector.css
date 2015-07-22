@@ -41,8 +41,9 @@
 	font-weight: bold;
 }
 
-.ui-entityselector-aliases {
+.ui-entityselector-list .ui-entityselector-aliases {
 	font-style: italic;
+	display: inline;
 }
 
 .ui-entityselector-list .ui-entityselector-more {

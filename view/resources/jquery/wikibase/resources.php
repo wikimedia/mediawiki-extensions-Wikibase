@@ -143,7 +143,6 @@ return call_user_func( function() {
 				'jquery.ui.widget',
 			),
 			'messages' => array(
-				'wikibase-aliases-label',
 				'wikibase-entityselector-more',
 			),
 		),
