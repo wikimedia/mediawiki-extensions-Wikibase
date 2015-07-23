@@ -1,13 +1,14 @@
 # Wikibase DataModel Serialization release notes
 
-## 1.7.0 (development)
+## 1.7.0 (2015-07-23)
 
 * Added `SerializerFactory` option `OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH`
 * Added `SerializerFactory` option `OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH`
 * Added `SerializerFactory` option `OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH`
-* Added parameter to `newSnakListSerializer` called `$serializeSnaksWithHash`, the default is b/c
-* Added parameter to `newSnakSerializer` called $serializeWithHash`, the default is b/c
-* Added parameter to `newTypedSnakSerializer` called `$serializeWithHash`, the default is b/c
+* Added `$serializeSnaksWithHash` parameter to `newSnakListSerializer`, the default is b/c
+* Added `$serializeWithHash` parameter to `newSnakSerializer`, the default is b/c
+* Added `$serializeWithHash` parameter to `newTypedSnakSerializer`, the default is b/c
+* Added support for deserializing ungrouped SnakLists and StatementLists
 
 ## 1.6.0 (2015-07-20)
 
