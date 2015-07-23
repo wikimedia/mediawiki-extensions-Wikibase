@@ -2,10 +2,6 @@
 
 namespace Wikibase\Test\Repo\Api;
 
-use Wikibase\Lib\Serializers\EntitySerializer;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
-
 /**
  * @covers Wikibase\Repo\Api\GetEntities
  *
