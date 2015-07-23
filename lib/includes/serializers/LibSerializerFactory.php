@@ -3,15 +3,10 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use SiteStore;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityFactory;
 
 /**
@@ -30,17 +25,17 @@ class LibSerializerFactory {
 	/**
 	 * @var EntityFactory|null
 	 */
-	public $entityFactory = null;
+	private $entityFactory = null;
 
 	/**
 	 * @var SiteStore|null
 	 */
-	public $siteStore = null;
+	private $siteStore = null;
 
 	/**
 	 * @var PropertyDataTypeLookup|null
 	 */
-	protected $dataTypeLookup = null;
+	private $dataTypeLookup = null;
 
 	/**
 	 * @param SerializationOptions $defaultOptions
@@ -118,15 +113,6 @@ class LibSerializerFactory {
 	 *
 	 * @return Serializer
 	 */
-	public function newReferenceSerializer( SerializationOptions $options ) {
-		return new ReferenceSerializer( $this->newSnakSerializer( $options ), $options );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Serializer
-	 */
 	public function newClaimSerializer( SerializationOptions $options ) {
 		return new ClaimSerializer( $this->newSnakSerializer( $options ), $options );
 	}
@@ -145,7 +131,7 @@ class LibSerializerFactory {
 	 *
 	 * @return Serializer
 	 */
-	public function newItemSerializer( SerializationOptions $options ) {
+	private function newItemSerializer( SerializationOptions $options ) {
 		return new ItemSerializer( $this->newClaimSerializer( $options ), $this->siteStore, $options, $this->entityFactory );
 	}
 
@@ -154,26 +140,8 @@ class LibSerializerFactory {
 	 *
 	 * @return Serializer
 	 */
-	public function newPropertySerializer( SerializationOptions $options ) {
+	private function newPropertySerializer( SerializationOptions $options ) {
 		return new PropertySerializer( $this->newClaimSerializer( $options ), $options, $this->entityFactory );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Serializer
-	 */
-	public function newAliasSerializer( SerializationOptions $options ) {
-		return new AliasSerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Unserializer
-	 */
-	public function newReferenceUnserializer( SerializationOptions $options ) {
-		return $this->newReferenceSerializer( $this->makeOptions( $options ) );
 	}
 
 	/**
@@ -190,7 +158,7 @@ class LibSerializerFactory {
 	 *
 	 * @return Unserializer
 	 */
-	public function newItemUnserializer( SerializationOptions $options ) {
+	private function newItemUnserializer( SerializationOptions $options ) {
 		return $this->newItemSerializer( $this->makeOptions( $options ) );
 	}
 
@@ -199,7 +167,7 @@ class LibSerializerFactory {
 	 *
 	 * @return Unserializer
 	 */
-	public function newPropertyUnserializer( SerializationOptions $options ) {
+	private function newPropertyUnserializer( SerializationOptions $options ) {
 		return $this->newPropertySerializer( $this->makeOptions( $options ) );
 	}
 
@@ -211,7 +179,7 @@ class LibSerializerFactory {
 	 *
 	 * @return null|SerializationOptions
 	 */
-	protected function makeOptions( SerializationOptions $options = null ) {
+	private function makeOptions( SerializationOptions $options = null ) {
 		if ( $options === null && $this->defaultOptions === null ) {
 			return new SerializationOptions();
 		}
