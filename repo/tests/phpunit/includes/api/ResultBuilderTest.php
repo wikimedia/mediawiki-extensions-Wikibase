@@ -440,7 +440,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAddEntityRevision( $isRawMode, $expected ) {
 		$result = $this->getDefaultResult();
-		$props = array( 'info' );
 		$item = new Item( new ItemId( 'Q123098' ) );
 
 		//Basic

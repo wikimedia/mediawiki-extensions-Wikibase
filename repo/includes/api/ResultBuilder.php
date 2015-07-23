@@ -345,11 +345,6 @@ class ResultBuilder {
 
 		$record = array();
 
-		$serializerOptions = $this->getOptions();
-		if ( $options ) {
-			$serializerOptions->merge( $options );
-		}
-
 		//if there are no props defined only return type and id..
 		if ( $props === array() ) {
 			$record['id'] = $entityId->getSerialization();
@@ -370,19 +365,58 @@ class ResultBuilder {
 				);
 			}
 
-			//FIXME: $props should be used to filter $entitySerialization!
-			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
-			$entitySerializer = $this->libSerializerFactory->newSerializerForEntity(
-				$entity->getType(),
-				$serializerOptions
+			$entitySerializer = $this->serializerFactory->newEntitySerializer();
+			$entitySerialization = $entitySerializer->serialize( $entity );
+
+			if ( $props !== 'all' ) {
+				if ( !in_array( 'labels', $props ) ) {
+					unset( $entitySerialization['labels'] );
+				}
+				if ( !in_array( 'descriptions', $props ) ) {
+					unset( $entitySerialization['descriptions'] );
+				}
+				if ( !in_array( 'aliases', $props ) ) {
+					unset( $entitySerialization['aliases'] );
+				}
+				if ( !in_array( 'claims', $props ) ) {
+					unset( $entitySerialization['claims'] );
+				}
+				if ( !in_array( 'sitelinks', $props ) ) {
+					unset( $entitySerialization['sitelinks'] );
+				}
+			}
+
+			$entitySerialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+				$entitySerialization,
+				'claims/*/*/qualifiers'
 			);
-			$entitySerialization = $entitySerializer->getSerialized( $entity );
+			$entitySerialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+				$entitySerialization,
+				'claims/*/*/references/*/snaks'
+			);
 
 			if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $entitySerialization ) ) {
 				foreach ( $entitySerialization['sitelinks'] as $siteId => $siteLink ) {
 					if ( is_array( $siteLink ) && !in_array( $siteLink['site'], $siteIds ) ) {
 						unset( $entitySerialization['sitelinks'][$siteId] );
 					}
+				}
+			}
+
+			if ( $this->isRawMode ) {
+				$tagsToAdd = array(
+					'labels' => 'label',
+					'descriptions' => 'description',
+					'aliases' => 'alias',
+					'sitelinks' => 'sitelink',
+					'claims' => 'property',
+				);
+				foreach ( $tagsToAdd as $path => $tag ) {
+					$entitySerialization = $this->modifier->modifyUsingCallback(
+						$entitySerialization,
+						$path,
+						$this->getModCallbackToIndexTags( $tag )
+					);
 				}
 			}
 
