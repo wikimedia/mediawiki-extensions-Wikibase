@@ -504,7 +504,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 				'action' => 'wbgetentities',
 				'languages' => join( '|', $languages ),
 				'languagefallback' => '',
-				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id,
 			)
 		);

@@ -20,6 +20,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
+use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
@@ -318,23 +319,24 @@ class ResultBuilder {
 	 * Get serialized entity for the EntityRevision and add it to the result
 	 *
 	 * @param string|null $sourceEntityIdSerialization EntityId used to retreive $entityRevision
-	 *        Used as the key for the entity in the 'entities' structure and for adding redirect info
-	 *        Will default to the entity's serialized ID if null.
-	 *        If given this must be the entity id before any redirects were resolved.
+	 *        Used as the key for the entity in the 'entities' structure and for adding redirect
+	 *     info Will default to the entity's serialized ID if null. If given this must be the
+	 *     entity id before any redirects were resolved.
 	 * @param EntityRevision $entityRevision
-	 * @param SerializationOptions|null $options
-	 * @param array|string $props a list of fields to include, or "all"
-	 * @param array $siteIds A list of site IDs to filter by
+	 * @param string[]|string $props a list of fields to include, or "all"
+	 * @param string[] $filterSiteIds A list of site IDs to filter by
+	 * @param string[] $filterLangCodes A list of language codes to filter by
+	 * @param LanguageWithConversion[] $fallbackChains
 	 *
 	 * @since 0.5
 	 */
 	public function addEntityRevision(
 		$sourceEntityIdSerialization,
 		EntityRevision $entityRevision,
-		SerializationOptions
-		$options = null,
 		$props = 'all',
-		$siteIds = array()
+		$filterSiteIds = array(),
+		$filterLangCodes = array(),
+		$fallbackChains = array()
 	) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
@@ -344,11 +346,6 @@ class ResultBuilder {
 		}
 
 		$record = array();
-
-		$serializerOptions = $this->getOptions();
-		if ( $options ) {
-			$serializerOptions->merge( $options );
-		}
 
 		//if there are no props defined only return type and id..
 		if ( $props === array() ) {
@@ -370,26 +367,245 @@ class ResultBuilder {
 				);
 			}
 
-			//FIXME: $props should be used to filter $entitySerialization!
-			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
-			$entitySerializer = $this->libSerializerFactory->newSerializerForEntity(
-				$entity->getType(),
-				$serializerOptions
-			);
-			$entitySerialization = $entitySerializer->getSerialized( $entity );
+			$entitySerializer = $this->serializerFactory->newEntitySerializer();
+			$serialization = $entitySerializer->serialize( $entity );
 
-			if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $entitySerialization ) ) {
-				foreach ( $entitySerialization['sitelinks'] as $siteId => $siteLink ) {
-					if ( is_array( $siteLink ) && !in_array( $siteLink['site'], $siteIds ) ) {
-						unset( $entitySerialization['sitelinks'][$siteId] );
-					}
-				}
+			$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
+			if ( $props == 'all' || in_array( 'sitelinks/urls', $props ) ) {
+				$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
+			}
+			$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
+			$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
+			$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
+			if ( !empty( $fallbackChains ) ) {
+				$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
+			}
+			$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization, $filterLangCodes );
+
+			if ( $this->isRawMode ) {
+				$serialization = $this->getRawModeEntitySerialization( $serialization );
 			}
 
-			$record = array_merge( $record, $entitySerialization );
+			$record = array_merge( $record, $serialization );
 		}
 
 		$this->appendValue( array( 'entities' ), $sourceEntityIdSerialization, $record, 'entity' );
+	}
+
+	/**
+	 * @param array $serialization
+	 * @param string|array $props
+	 *
+	 * @return array
+	 */
+	private function filterEntitySerializationUsingProps( array $serialization, $props ) {
+		if ( $props !== 'all' ) {
+			if ( !in_array( 'labels', $props ) ) {
+				unset( $serialization['labels'] );
+			}
+			if ( !in_array( 'descriptions', $props ) ) {
+				unset( $serialization['descriptions'] );
+			}
+			if ( !in_array( 'aliases', $props ) ) {
+				unset( $serialization['aliases'] );
+			}
+			if ( !in_array( 'claims', $props ) ) {
+				unset( $serialization['claims'] );
+			}
+			if ( !in_array( 'sitelinks', $props ) ) {
+				unset( $serialization['sitelinks'] );
+			}
+		}
+		return $serialization;
+	}
+
+	private function injectEntitySerializationWithSiteLinkUrls( array $serialization ) {
+		if ( isset( $serialization['sitelinks'] ) ) {
+			$serialization['sitelinks'] = $this->getSiteLinkListArrayWithUrls( $serialization['sitelinks'] );
+		}
+		return $serialization;
+	}
+
+	private function sortEntitySerializationSiteLinks( array $serialization ) {
+		if ( isset( $serialization['sitelinks'] ) ) {
+			ksort( $serialization['sitelinks'] );
+		}
+		return $serialization;
+	}
+
+	private function injectEntitySerializationWithDataTypes( array $serialization ) {
+		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+			$serialization,
+			'claims/*/*/qualifiers'
+		);
+		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+			$serialization,
+			'claims/*/*/references/*/snaks'
+		);
+		return $serialization;
+	}
+
+	private function filterEntitySerializationUsingSiteIds( array $serialization, $siteIds ) {
+		if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $serialization ) ) {
+			foreach ( $serialization['sitelinks'] as $siteId => $siteLink ) {
+				if ( is_array( $siteLink ) && !in_array( $siteLink['site'], $siteIds ) ) {
+					unset( $serialization['sitelinks'][$siteId] );
+				}
+			}
+		}
+		return $serialization;
+	}
+
+	/**
+	 * @param array $serialization
+	 * @param array $fallbackChains array of LanguageWithConversion[]
+	 *
+	 * @return array
+	 */
+	private function addEntitySerializationFallbackInfo(
+		array $serialization,
+		array $fallbackChains
+	) {
+		$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
+			$serialization['labels'],
+			$fallbackChains
+		);
+		$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
+			$serialization['descriptions'],
+			$fallbackChains
+		);
+		return $serialization;
+	}
+
+	/**
+	 * @param array $serialization
+	 * @param array $fallbackChains array of LanguageWithConversion[]
+	 *
+	 * @return array
+	 */
+	private function getTermsSerializationWithFallbackInfo(
+		array $serialization,
+		array $fallbackChains
+	) {
+		foreach ( $fallbackChains as $requestedLanguageCode => $langsWithConversion ) {
+			if ( !array_key_exists( $requestedLanguageCode, $serialization ) ) {
+				/** @var LanguageWithConversion $langWithConversion */
+				foreach ( $langsWithConversion as $langWithConversion ) {
+					$fallbackLangCode = $langWithConversion->getLanguageCode();
+					if ( array_key_exists( $fallbackLangCode, $serialization ) ) {
+						$fallbackSerialization = $serialization[$fallbackLangCode];
+						$fallbackSerialization['language'] = $fallbackLangCode;
+						$sourceLangCode = $langWithConversion->getSourceLanguageCode();
+						if ( $sourceLangCode !== null ) {
+							$fallbackSerialization['source-language'] = $sourceLangCode;
+						}
+						if ( $this->isRawMode ) {
+							$fallbackSerialization['for-language'] = $requestedLanguageCode;
+						}
+						$serialization[$requestedLanguageCode] = $fallbackSerialization;
+					}
+				}
+			}
+		}
+		return $serialization;
+	}
+
+	private function filterEntitySerializationUsingLangCodes( array $serialization, $langCodes ) {
+		if ( !empty( $langCodes ) ) {
+			if ( array_key_exists( 'labels', $serialization ) ) {
+				foreach ( $serialization['labels'] as $langCode => $languageArray ) {
+					if ( !in_array( $langCode, $langCodes ) ) {
+						unset( $serialization['labels'][$langCode] );
+					}
+				}
+			}
+			if ( array_key_exists( 'descriptions', $serialization ) ) {
+				foreach ( $serialization['descriptions'] as $langCode => $languageArray ) {
+					if ( !in_array( $langCode, $langCodes ) ) {
+						unset( $serialization['descriptions'][$langCode] );
+					}
+				}
+			}
+			if ( array_key_exists( 'aliases', $serialization ) ) {
+				foreach ( $serialization['aliases'] as $langCode => $languageArray ) {
+					if ( !in_array( $langCode, $langCodes ) ) {
+						unset( $serialization['aliases'][$langCode] );
+					}
+				}
+			}
+		}
+		return $serialization;
+	}
+
+	private function getRawModeEntitySerialization( $serialization ) {
+		// In raw mode aliases are not currently grouped by language
+		$serialization = $this->modifier->modifyUsingCallback(
+			$serialization,
+			'aliases',
+			function( $array ) {
+				$newArray = array();
+				foreach ( $array as $aliasGroup ) {
+					foreach ( $aliasGroup as $alias ) {
+						$newArray[] = $alias;
+					}
+				}
+				return $newArray;
+			}
+		);
+		// In the old Lib serializers
+		$serialization = $this->modifier->modifyUsingCallback(
+			$serialization,
+			'claims/*/*',
+			function( $array ) {
+				if ( !array_key_exists( 'qualifiers', $array ) ) {
+					$array['qualifiers'] = array();
+				}
+				if ( !array_key_exists( 'qualifiers-order', $array ) ) {
+					$array['qualifiers-order'] = array();
+				}
+				return $array;
+			}
+		);
+		$keysToValues = array(
+			'aliases' => null,
+			'descriptions' => null,
+			'labels' => null,
+			'claims/*/*/references/*/snaks' => 'id',
+			'claims/*/*/qualifiers' => 'id',
+			'claims' => 'id',
+			'sitelinks' => null,
+		);
+		foreach ( $keysToValues as $path => $newKey ) {
+			$serialization = $this->modifier->modifyUsingCallback(
+				$serialization,
+				$path,
+				$this->getModCallbackToRemoveKeys( $newKey )
+			);
+		}
+		$tagsToAdd = array(
+			'labels' => 'label',
+			'descriptions' => 'description',
+			'aliases' => 'alias',
+			'sitelinks/*/badges' => 'badge',
+			'sitelinks' => 'sitelink',
+			'claims/*/*/qualifiers/*' => 'qualifiers',
+			'claims/*/*/qualifiers' => 'property',
+			'claims/*/*/qualifiers-order' => 'property',
+			'claims/*/*/references/*/snaks/*' => 'snak',
+			'claims/*/*/references/*/snaks' => 'property',
+			'claims/*/*/references/*/snaks-order' => 'property',
+			'claims/*/*/references' => 'reference',
+			'claims/*' => 'claim',
+			'claims' => 'property',
+		);
+		foreach ( $tagsToAdd as $path => $tag ) {
+			$serialization = $this->modifier->modifyUsingCallback(
+				$serialization,
+				$path,
+				$this->getModCallbackToIndexTags( $tag )
+			);
+		}
+		return $serialization;
 	}
 
 	/**
@@ -869,7 +1085,9 @@ class ResultBuilder {
 	 */
 	private function getModCallbackToIndexTags( $tagName ) {
 		return function( $array ) use ( $tagName ) {
-			ApiResult::setIndexedTagName( $array, $tagName );
+			if ( is_array( $array ) ) {
+				ApiResult::setIndexedTagName( $array, $tagName );
+			}
 			return $array;
 		};
 	}
