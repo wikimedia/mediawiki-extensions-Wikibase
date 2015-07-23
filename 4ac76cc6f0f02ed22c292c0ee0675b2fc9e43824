@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_40dd7316",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-07-23T06:19:37Z",
+      "side": 1,
+      "message": "Why a special treatment for language codes with \"-\"? wfBCP47 makes just a strtolower().",
+      "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
