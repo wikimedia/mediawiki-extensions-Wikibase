@@ -114,15 +114,11 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 
 		// -- check item in database -------------------------------------------
 		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
-		if ( count( $expected['value'] ) ) {
-			$this->assertArrayHasKey( $attribute, $dbEntity );
-			$dbLabels = $this->flattenArray( $dbEntity[$attribute], 'language', 'value', true );
-			foreach ( $expected['value'] as $valueLanguage => $value ) {
-				$this->assertArrayHasKey( $valueLanguage, $dbLabels );
-				$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );
-			}
-		} else {
-			$this->assertArrayNotHasKey( $attribute, $dbEntity );
+		$this->assertArrayHasKey( $attribute, $dbEntity );
+		$dbLabels = $this->flattenArray( $dbEntity[$attribute], 'language', 'value', true );
+		foreach ( $expected['value'] as $valueLanguage => $value ) {
+			$this->assertArrayHasKey( $valueLanguage, $dbLabels );
+			$this->assertEquals( $value, $dbLabels[$valueLanguage][0] );
 		}
 
 		// -- check the edit summary --------------------------------------------
