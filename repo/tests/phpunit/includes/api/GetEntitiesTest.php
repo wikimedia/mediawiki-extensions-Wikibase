@@ -142,11 +142,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 			foreach ( self::$goodItems as $testCase ) {
 				$testCase['p']['props'] = $propData;
 				$testCases[] = $testCase;
-
-				if ( in_array( 'claims', explode( '|', $propData ) ) ) {
-					$testCase['p']['ungroupedlist'] = true;
-					$testCases[] = $testCase;
-				}
 			}
 		}
 
@@ -262,13 +257,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		} else {
 			$expected['dir'] = 'ascending';
 		}
-
-		//expect snaks to be grouped by property or not
-		if( !isset( $params['ungroupedlist'] ) || !$params['ungroupedlist'] ) {
-			$expected['groupedbyproperty'] = true;
-		} else {
-			$expected['groupedbyproperty'] = false;
-		}
 		return $expected;
 	}
 
@@ -296,18 +284,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 			$expected['props'],
 			$expected['languages']
 		);
-		if( !$expected['groupedbyproperty'] ) {
-			$options = new SerializationOptions();
-			$options->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
-			$factory = new LibSerializerFactory();
-			/** @var EntitySerializer $serializer */
-			$serializer = $factory->newSerializerForEntity( $entity['type'], $options );
-			$expectedEntityOutput = $serializer->getSerialized(
-				$serializer->newFromSerialization(
-					$expectedEntityOutput
-				)
-			);
-		}
 		$this->assertEntityEquals(
 			$expectedEntityOutput,
 			$entity,
