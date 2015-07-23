@@ -3,22 +3,22 @@
 namespace Wikibase\Test\Repo\Api;
 
 use ApiTestCase;
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use UsageException;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -39,6 +39,21 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Adam Shorland
  */
 class GetClaimsTest extends ApiTestCase {
+
+	/**
+	 * @var SerializerFactory
+	 */
+	private $serializerFactory;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->serializerFactory = new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH
+		);
+	}
 
 	/**
 	 * @param EntityDocument $entity
@@ -162,18 +177,25 @@ class GetClaimsTest extends ApiTestCase {
 	 * @param Statement[] $statements
 	 */
 	public function doTestValidRequest( array $params, array $statements ) {
-		$claims = new Claims( $statements );
-		$options = new SerializationOptions();
+		$statements = new StatementList( $statements );
 
-		$serializerFactory = new LibSerializerFactory( null, $this->getDataTypeLookup() );
-		$serializer = $serializerFactory->newClaimsSerializer( $options );
-		$serializer->setOptions( $options );
-		$expected = $serializer->getSerialized( $claims );
+		$serializer = $this->serializerFactory->newStatementListSerializer();
+		$expected = $serializer->serialize( $statements );
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
 
 		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claims', $resultArray, 'top level element has a claims key' );
+
+		// Assert that value mainsnaks have a datatype added
+		foreach ( $resultArray['claims'] as &$claimsByProperty ) {
+			foreach ( $claimsByProperty as &$claimArray ) {
+				if ( $claimArray['mainsnak']['snaktype'] === 'value' ) {
+					$this->assertArrayHasKey( 'datatype', $claimArray['mainsnak'] );
+					unset( $claimArray['mainsnak']['datatype'] );
+				}
+			}
+		}
 
 		$this->assertEquals( $expected, $resultArray['claims'] );
 	}
