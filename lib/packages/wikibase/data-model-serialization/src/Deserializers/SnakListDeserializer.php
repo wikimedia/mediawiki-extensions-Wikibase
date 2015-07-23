@@ -11,6 +11,7 @@ use Wikibase\DataModel\Snak\SnakList;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Adam Shorland
  */
 class SnakListDeserializer implements Deserializer {
 
@@ -48,9 +49,13 @@ class SnakListDeserializer implements Deserializer {
 	private function getDeserialized( array $serialization ) {
 		$snakList = new SnakList();
 
-		foreach ( $serialization as $snakArray ) {
-			foreach ( $snakArray as $snakSerialization ) {
-				$snakList->addElement( $this->snakDeserializer->deserialize( $snakSerialization ) );
+		foreach ( $serialization as $key => $snakArray ) {
+			if ( is_string( $key ) ) {
+				foreach ( $snakArray as $snakSerialization ) {
+					$snakList->addElement( $this->snakDeserializer->deserialize( $snakSerialization ) );
+				}
+			} else {
+				$snakList->addElement( $this->snakDeserializer->deserialize( $snakArray ) );
 			}
 		}
 
@@ -67,8 +72,8 @@ class SnakListDeserializer implements Deserializer {
 			throw new DeserializationException( 'The SnakList serialization should be an array' );
 		}
 
-		foreach ( $serialization as $snaksOfPropertySerialization ) {
-			if ( !is_array( $snaksOfPropertySerialization ) ) {
+		foreach ( $serialization as $key => $snakArray ) {
+			if ( is_string( $key ) && !is_array( $snakArray ) ) {
 				throw new DeserializationException( 'The snaks per property should be an array' );
 			}
 		}

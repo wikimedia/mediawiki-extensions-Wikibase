@@ -11,6 +11,7 @@ use Wikibase\DataModel\Statement\StatementList;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Adam Shorland
  */
 class StatementListDeserializer implements Deserializer {
 
@@ -48,10 +49,17 @@ class StatementListDeserializer implements Deserializer {
 	private function getDeserialized( array $serialization ) {
 		$statementList = new StatementList();
 
-		foreach ( $serialization as $statementArray ) {
-			foreach ( $statementArray as $statementSerialization ) {
-				$statementList->addStatement( $this->statementDeserializer->deserialize( $statementSerialization ) );
+		foreach ( $serialization as $key => $statementArray ) {
+			if ( is_string( $key ) ) {
+				foreach ( $statementArray as $statementSerialization ) {
+					$statementList->addStatement(
+						$this->statementDeserializer->deserialize( $statementSerialization )
+					);
+				}
+			} else {
+				$statementList->addStatement( $this->statementDeserializer->deserialize( $statementArray ) );
 			}
+
 		}
 
 		return $statementList;
@@ -62,8 +70,8 @@ class StatementListDeserializer implements Deserializer {
 			throw new DeserializationException( 'The StatementList serialization should be an array' );
 		}
 
-		foreach ( $serialization as $statementArray ) {
-			if ( !is_array( $statementArray ) ) {
+		foreach ( $serialization as $key => $statementArray ) {
+			if ( is_string( $key ) && !is_array( $statementArray ) ) {
 				throw new DeserializationException( 'The statements per property should be an array' );
 			}
 		}

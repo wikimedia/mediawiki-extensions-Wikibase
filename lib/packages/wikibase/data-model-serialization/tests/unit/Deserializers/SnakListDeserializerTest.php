@@ -57,6 +57,18 @@ class SnakListDeserializerTest extends DeserializerBaseTest {
 					)
 				)
 			),
+			array(
+				array(
+					array(
+						'snaktype' => 'novalue',
+						'property' => 'P42'
+					),
+					array(
+						'snaktype' => 'novalue',
+						'property' => 'P42'
+					)
+				)
+			),
 		);
 	}
 
