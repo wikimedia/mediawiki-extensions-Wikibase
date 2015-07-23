@@ -456,9 +456,6 @@ class EntityDataSerializationService {
 		// function gets called multiple times during testing, etc.
 		$res->reset();
 
-		//TODO: apply language filter/Fallback via options!
-		$options = new SerializationOptions();
-
 		$resultBuilder = new ResultBuilder(
 			$res,
 			$this->entityTitleLookup,
@@ -468,7 +465,7 @@ class EntityDataSerializationService {
 			$this->propertyLookup,
 			false // Never index tags for this service as we dont output XML
 		);
-		$resultBuilder->addEntityRevision( null, $entityRevision, $options );
+		$resultBuilder->addEntityRevision( null, $entityRevision );
 
 		return $res;
 	}
