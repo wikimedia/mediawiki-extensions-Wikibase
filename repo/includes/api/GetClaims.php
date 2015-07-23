@@ -104,15 +104,6 @@ class GetClaims extends ApiBase {
 		);
 		$entity = $entityRevision->getEntity();
 
-		if ( $params['ungroupedlist'] ) {
-			$this->logFeatureUsage( 'action=wbgetclaims&ungroupedlist' );
-			$this->resultBuilder->getOptions()
-				->setOption(
-					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
-					array()
-				);
-		}
-
 		$claims = $this->getClaims( $entity, $guid );
 		$this->resultBuilder->addClaims( $claims, null );
 	}
@@ -254,11 +245,6 @@ class GetClaims extends ApiBase {
 					'references',
 				),
 				self::PARAM_DFLT => 'references',
-			),
-			'ungroupedlist' => array(
-				self::PARAM_TYPE => 'boolean',
-				self::PARAM_DFLT => false,
-				self::PARAM_DEPRECATED => true,
 			),
 		);
 	}

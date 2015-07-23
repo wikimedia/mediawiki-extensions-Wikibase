@@ -124,17 +124,14 @@ class GetClaimsTest extends ApiTestCase {
 				'entity' => $idSerialization,
 			);
 
-			$argLists[] = array( $params, $statements->toArray(), true );
+			$argLists[] = array( $params, $statements->toArray() );
 
 			foreach ( $statements->toArray() as $statement ) {
 				$params = array(
 					'action' => 'wbgetclaims',
 					'claim' => $statement->getGuid(),
 				);
-				$argLists[] = array( $params, array( $statement ), true );
-
-				$params['ungroupedlist'] = true;
-				$argLists[] = array( $params, array( $statement ), false );
+				$argLists[] = array( $params, array( $statement ) );
 			}
 
 			foreach ( array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED ) as $rank ) {
@@ -145,7 +142,7 @@ class GetClaimsTest extends ApiTestCase {
 				);
 
 				$statementsByRank = $statements->getByRank( $rank )->toArray();
-				$argLists[] = array( $params, $statementsByRank, true );
+				$argLists[] = array( $params, $statementsByRank );
 			}
 		}
 
@@ -154,23 +151,19 @@ class GetClaimsTest extends ApiTestCase {
 
 	public function testValidRequests() {
 		foreach ( $this->validRequestProvider() as $argList ) {
-			list( $params, $statements, $groupedByProperty ) = $argList;
+			list( $params, $statements ) = $argList;
 
-			$this->doTestValidRequest( $params, $statements, $groupedByProperty );
+			$this->doTestValidRequest( $params, $statements );
 		}
 	}
 
 	/**
 	 * @param string[] $params
 	 * @param Statement[] $statements
-	 * @param bool $groupedByProperty
 	 */
-	public function doTestValidRequest( array $params, array $statements, $groupedByProperty ) {
+	public function doTestValidRequest( array $params, array $statements ) {
 		$claims = new Claims( $statements );
 		$options = new SerializationOptions();
-		if ( !$groupedByProperty ) {
-			$options->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
-		}
 
 		$serializerFactory = new LibSerializerFactory( null, $this->getDataTypeLookup() );
 		$serializer = $serializerFactory->newClaimsSerializer( $options );
