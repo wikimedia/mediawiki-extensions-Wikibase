@@ -5,16 +5,10 @@ namespace Wikibase\Test;
 use Wikibase\ChangesTable;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
-use Wikibase\Client\Usage\SubscriptionManager;
-use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\ClientStore;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\NullEntityPrefetcher;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
-use Wikibase\PropertyLabelResolver;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;
 
 /**
@@ -52,7 +46,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getUsageLookup
 	 *
-	 * @return UsageLookup
+	 * @return NullUsageTracker
 	 */
 	public function getUsageLookup() {
 		return new NullUsageTracker();
@@ -61,7 +55,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getUsageTracker
 	 *
-	 * @return UsageTracker
+	 * @return NullUsageTracker
 	 */
 	public function getUsageTracker() {
 		return new NullUsageTracker();
@@ -70,7 +64,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getSubscriptionManager
 	 *
-	 * @return SubscriptionManager
+	 * @return NullSubscriptionManager
 	 */
 	public function getSubscriptionManager() {
 		return new NullSubscriptionManager();
@@ -79,7 +73,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getPropertyLabelResolver
 	 *
-	 * @return PropertyLabelResolver
+	 * @return MockPropertyLabelResolver
 	 */
 	public function getPropertyLabelResolver() {
 		return new MockPropertyLabelResolver(
@@ -100,7 +94,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getEntityIdLookup
 	 *
-	 * @return \Wikibase\Store\EntityIdLookup
+	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup() {
 		// FIXME: Incomplete
@@ -141,7 +135,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getEntityLookup
 	 *
-	 * @return EntityLookup
+	 * @return MockRepository
 	 */
 	public function getEntityLookup() {
 		return $this->getMockRepository();
@@ -150,7 +144,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getEntityRevisionLookup
 	 *
-	 * @return EntityRevisionLookup
+	 * @return MockRepository
 	 */
 	public function getEntityRevisionLookup() {
 		return $this->getMockRepository();
@@ -159,7 +153,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getSiteLinkLookup
 	 *
-	 * @return SiteLinkLookup
+	 * @return MockRepository
 	 */
 	public function getSiteLinkLookup() {
 		return $this->getMockRepository();
@@ -168,7 +162,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getPropertyInfoStore
 	 *
-	 * @return PropertyInfoStore
+	 * @return MockPropertyInfoStore
 	 */
 	public function getPropertyInfoStore() {
 		if ( self::$propertyInfoStore === null ) {
@@ -181,7 +175,7 @@ class MockClientStore implements ClientStore {
 	/**
 	 * @see ClientStore::getEntityPrefetcher
 	 *
-	 * @return EntityPrefetcher
+	 * @return NullEntityPrefetcher
 	 */
 	public function getEntityPrefetcher() {
 		return new NullEntityPrefetcher();
