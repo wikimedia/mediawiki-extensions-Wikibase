@@ -75,7 +75,11 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		);
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$serializerFactory = new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
 
 		$serializationService = new EntityDataSerializationService(
 			self::URI_BASE,
