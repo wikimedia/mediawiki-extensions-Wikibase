@@ -307,13 +307,6 @@ class GetEntities extends ApiBase {
 		} else {
 			$languages = $params['languages'];
 		}
-		if ( $params['ungroupedlist'] ) {
-			$this->logFeatureUsage( 'action=wbgetentities&ungroupedlist' );
-			$options->setOption(
-					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
-					array()
-				);
-		}
 		$options->setLanguages( $languages );
 		$options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
 		$options->setOption( EntitySerializer::OPT_PARTS, $props );
@@ -363,11 +356,6 @@ class GetEntities extends ApiBase {
 			'normalize' => array(
 				self::PARAM_TYPE => 'boolean',
 				self::PARAM_DFLT => false
-			),
-			'ungroupedlist' => array(
-				self::PARAM_TYPE => 'boolean',
-				self::PARAM_DFLT => false,
-				self::PARAM_DEPRECATED => true,
 			),
 			'sitefilter' => array(
 				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
