@@ -28,38 +28,13 @@ class LibSerializerFactoryTest extends \MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
-	public function objectProvider() {
-		$argLists = array();
-
-		$argLists[] = array( new PropertyNoValueSnak( 42 ) );
-		$argLists[] = array( new Reference() );
-		$argLists[] = array( new Statement( new PropertyNoValueSnak( 42 ) ) );
-
-		$argLists[] = array( new Item(), new SerializationOptions() );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider objectProvider
-	 */
-	public function testNewSerializerForObject( $object, $options = null ) {
-		$factory = new LibSerializerFactory();
-
-		$serializer = $factory->newSerializerForObject( $object, $options );
-
-		$this->assertInstanceOf( 'Wikibase\Lib\Serializers\Serializer', $serializer );
-
-		$serializer->getSerialized( $object );
-	}
-
 	public function serializationProvider() {
 		$argLists = array();
 
 		$snak = new PropertyNoValueSnak( 42 );
 
 		$factory = new LibSerializerFactory();
-		$serializer = $factory->newSerializerForObject( $snak );
+		$serializer = $factory->newSnakSerializer( new SerializationOptions() );
 
 		$argLists[] = array( 'Wikibase\DataModel\Snak\Snak', $serializer->getSerialized( $snak ) );
 

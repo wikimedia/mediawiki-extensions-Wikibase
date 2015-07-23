@@ -67,46 +67,6 @@ class LibSerializerFactory {
 	}
 
 	/**
-	 * @param mixed $object
-	 * @param SerializationOptions $options
-	 *
-	 * @return Serializer
-	 * @throws OutOfBoundsException
-	 * @throws InvalidArgumentException
-	 */
-	public function newSerializerForObject( $object, $options = null ) {
-		if ( !is_object( $object ) ) {
-			throw new InvalidArgumentException( 'newSerializerForObject only accepts objects and got ' . gettype( $object ) );
-		}
-
-		//TODO: The factory should take options in the constructor.
-		//TODO: The factory should offer clones of the options via newSerializationOptions().
-		//TODO: This method should merge to options given with the options from the constructor.
-
-		if ( $options == null ) {
-			$options = new SerializationOptions();
-		}
-
-		switch ( true ) {
-			case ( $object instanceof Snak ):
-				return $this->newSnakSerializer( $options );
-			case ( $object instanceof Reference ):
-				return $this->newReferenceSerializer( $options );
-			case ( $object instanceof Item ):
-				return $this->newItemSerializer( $options );
-			case ( $object instanceof Property ):
-				return $this->newPropertySerializer( $options );
-			//TODO: support extra entity types!
-			case ( $object instanceof Claim ):
-				return $this->newClaimSerializer( $options );
-			case ( $object instanceof Claims ):
-				return $this->newClaimsSerializer( $options );
-		}
-
-		throw new OutOfBoundsException( 'There is no serializer for the provided type of object "' . get_class( $object ) . '"' );
-	}
-
-	/**
 	 * @param string $entityType
 	 * @param SerializationOptions $options
 	 *
