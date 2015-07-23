@@ -261,8 +261,8 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	/**
-	 * Initializes the options keys ValueFormatter::OPT_LANG and 'languages' if
-	 * they are not yet set.
+	 * Initializes the options keys ValueFormatter::OPT_LANG and
+	 * FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN if they are not yet set.
 	 *
 	 * @param FormatterOptions $options The options to modify.
 	 *
@@ -279,20 +279,25 @@ class WikibaseValueFormatterBuilders {
 
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 		if ( !is_string( $lang ) ) {
-			throw new InvalidArgumentException( 'The value of OPT_LANG must be a language code. For a fallback chain, use the `languages` option.' );
+			throw new InvalidArgumentException(
+				'The value of OPT_LANG must be a language code. For a fallback chain, use OPT_LANGUAGE_FALLBACK_CHAIN.'
+			);
 		}
 
-		if ( !$options->hasOption( 'languages' ) ) {
+		if ( !$options->hasOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ) ) {
 			$fallbackMode = (
 				LanguageFallbackChainFactory::FALLBACK_VARIANTS
 				| LanguageFallbackChainFactory::FALLBACK_OTHERS
 				| LanguageFallbackChainFactory::FALLBACK_SELF );
 
-			$options->setOption( 'languages', $languageFallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode ) );
+			$options->setOption(
+				FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN,
+				$languageFallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode )
+			);
 		}
 
-		if ( !( $options->getOption( 'languages' ) instanceof LanguageFallbackChain ) ) {
-			throw new InvalidArgumentException( 'The value of the `languages` option must be an instance of LanguageFallbackChain.' );
+		if ( !( $options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ) instanceof LanguageFallbackChain ) ) {
+			throw new InvalidArgumentException( 'The value of OPT_LANGUAGE_FALLBACK_CHAIN must be an instance of LanguageFallbackChain.' );
 		}
 	}
 
