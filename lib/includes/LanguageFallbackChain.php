@@ -83,6 +83,20 @@ class LanguageFallbackChain {
 					$value = $value['value'];
 				}
 
+				if ( $value == 'Oslo-en' && $languageWithConversion->getLanguageCode() == 'es' ) {
+					var_dump(
+						$languageCode,
+						$languageWithConversion,
+						$languageWithConversion->translate( $value ),
+						$languageWithConversion->getLanguageCode(),
+						$languageWithConversion->getSourceLanguageCode(),
+						$languageWithConversion->getFetchLanguageCode()
+
+					);
+					die();
+					//TODO fix this.... es ie being returned where en should as the langugae of a label
+				}
+
 				return $this->getValueArray(
 					$languageWithConversion->translate( $value ),
 					$languageWithConversion->getLanguageCode(),
