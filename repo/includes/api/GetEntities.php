@@ -265,37 +265,34 @@ class GetEntities extends ApiBase {
 	 * @param EntityRevision|null $entityRevision
 	 * @param array $params
 	 */
-	private function handleEntity( $sourceEntityId, EntityRevision $entityRevision = null, array $params = array() ) {
+	private function handleEntity(
+		$sourceEntityId,
+		EntityRevision $entityRevision = null,
+		array $params = array()
+	) {
 		if ( $entityRevision === null ) {
 			$this->resultBuilder->addMissingEntity( $sourceEntityId, array( 'id' => $sourceEntityId ) );
 		} else {
-			$props = $this->getPropsFromParams( $params );
-			$options = $this->getSerializationOptions( $params, $props );
-			$siteFilterIds = $params['sitefilter'];
-
 			$this->resultBuilder->addEntityRevision(
 				$sourceEntityId,
 				$entityRevision,
-				$options,
-				$props,
-				$siteFilterIds
+				$this->getPropsFromParams( $params ),
+				$params['sitefilter'],
+				$this->getLanguageCodesUsingFallback( $params )
 			);
 		}
 	}
 
 	/**
 	 * @param array $params
-	 * @param array $props
 	 *
-	 * @return SerializationOptions
+	 * @return string[]
 	 */
-	private function getSerializationOptions( $params, $props ) {
+	private function getLanguageCodesUsingFallback( $params ) {
 		$fallbackMode = (
 			LanguageFallbackChainFactory::FALLBACK_VARIANTS
 			| LanguageFallbackChainFactory::FALLBACK_OTHERS
 			| LanguageFallbackChainFactory::FALLBACK_SELF );
-
-		$options = new SerializationOptions();
 
 		if ( $params['languagefallback'] ) {
 			$languages = array();
@@ -307,11 +304,7 @@ class GetEntities extends ApiBase {
 		} else {
 			$languages = $params['languages'];
 		}
-		$options->setLanguages( $languages );
-		$options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
-		$options->setOption( EntitySerializer::OPT_PARTS, $props );
-		$options->setIndexTags( $this->getResult()->getIsRawMode() );
-		return $options;
+		return $languages;
 	}
 
 	/**
