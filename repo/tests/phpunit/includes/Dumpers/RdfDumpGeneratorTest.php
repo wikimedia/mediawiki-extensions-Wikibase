@@ -135,6 +135,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	public function normalizeData( $data ) {
 		$dataSplit = explode( "\n", $data );
 		sort( $dataSplit );
+		$dataSplit = array_map( 'trim', $dataSplit );
 		return $dataSplit;
 	}
 
