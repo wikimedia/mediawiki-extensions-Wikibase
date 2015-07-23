@@ -76,6 +76,26 @@ class StatementListDeserializerTest extends DeserializerBaseTest {
 					)
 				)
 			),
+			array(
+				array(
+					array(
+						'mainsnak' => array(
+							'snaktype' => 'novalue',
+							'property' => 'P42'
+						),
+						'type' => 'statement',
+						'rank' => 'normal'
+					),
+					array(
+						'mainsnak' => array(
+							'snaktype' => 'novalue',
+							'property' => 'P42'
+						),
+						'type' => 'statement',
+						'rank' => 'normal'
+					)
+				)
+			),
 		);
 	}
 
