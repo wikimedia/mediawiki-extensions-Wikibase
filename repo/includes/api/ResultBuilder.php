@@ -372,7 +372,10 @@ class ResultBuilder {
 
 			//FIXME: $props should be used to filter $entitySerialization!
 			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
-			$entitySerializer = $this->libSerializerFactory->newSerializerForObject( $entity, $serializerOptions );
+			$entitySerializer = $this->libSerializerFactory->newSerializerForEntity(
+				$entity->getType(),
+				$serializerOptions
+			);
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 			if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $entitySerialization ) ) {
