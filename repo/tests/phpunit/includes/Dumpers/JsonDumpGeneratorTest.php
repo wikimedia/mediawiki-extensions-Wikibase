@@ -2,8 +2,10 @@
 
 namespace Wikibase\Test\Dumpers;
 
+use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use MWContentSerializationException;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -11,14 +13,13 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Dumpers\JsonDumpGenerator;
-use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Dumpers\JsonDumpGenerator
@@ -29,24 +30,30 @@ use Wikibase\Repo\Store\EntityIdPager;
  *
  * @license GPL 2+
  * @author Daniel Kinzler
+ * @author Adam Shorland
  */
 class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var LibSerializerFactory|null
+	 * @var SerializerFactory|null
 	 */
-	public $serializerFactory = null;
+	private $serializerFactory = null;
 
 	/**
-	 * @var SerializationOptions|null
+	 * @var DeserializerFactory|null
 	 */
-	public $serializationOptions = null;
+	private $deserializerFactory = null;
 
 	protected function setUp() {
 		parent::setUp();
 
-		$this->serializerFactory = new LibSerializerFactory();
-		$this->serializationOptions = new SerializationOptions();
+		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
+		$this->serializerFactory = new SerializerFactory( new DataValueSerializer(), $serializerOptions );
+		$this->deserializerFactory = new DeserializerFactory(
+			WikibaseRepo::getDefaultInstance()->getDataValueDeserializer(),
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+		);
 	}
 
 	/**
@@ -98,7 +105,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	protected function newDumpGenerator( array $ids = array(), array $missingIds = array(), array $redirectedIds = array() ) {
 		$out = fopen( 'php://output', 'w' );
 
-		$serializer = new DispatchingEntitySerializer( $this->serializerFactory );
+		$serializer = $this->serializerFactory->newEntitySerializer();
 
 		$entities = $this->makeEntities( $ids );
 
@@ -198,7 +205,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	private function getJsonDumperWithExceptionHandler( array $ids ) {
 		$entityLookup = $this->getEntityLookupThrowsMWContentSerializationException();
 		$out = fopen( 'php://output', 'w' );
-		$serializer = new DispatchingEntitySerializer( $this->serializerFactory );
+		$serializer = $this->serializerFactory->newEntitySerializer();
 
 		$jsonDumper = new JsonDumpGenerator(
 			$out,
@@ -279,10 +286,13 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			return;
 		}
 
-		$serializer = $this->serializerFactory->newUnserializerForEntity( $id->getEntityType(), $this->serializationOptions );
-		$actualEntity = $serializer->newFromSerialization( $data );
+		$deserializer = $this->deserializerFactory->newEntityDeserializer();
+		$actualEntity = $deserializer->deserialize( $data );
 
-		$this->assertTrue( $expectedEntity->equals( $actualEntity ), 'Round trip failed for ' . $id->getSerialization() );
+		$this->assertTrue(
+			$expectedEntity->equals( $actualEntity ),
+			'Round trip failed for ' . $id->getSerialization()
+		);
 	}
 
 	public function typeFilterProvider() {

@@ -2,11 +2,10 @@
 
 namespace Wikibase;
 
+use DataValues\Serializers\DataValueSerializer;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\JsonDumpGenerator;
-use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 
 require_once __DIR__ . '/dumpEntities.php';
 
@@ -30,16 +29,11 @@ class DumpJson extends DumpScript {
 	 * @return DumpGenerator
 	 */
 	protected function createDumper( $output ) {
-		$entityFactory = $this->wikibaseRepo->getEntityFactory();
-		$serializerOptions = new SerializationOptions();
+		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
+		$serializerFactory = new SerializerFactory( new DataValueSerializer(), $serializerOptions );
 
-		$serializerFactory = new LibSerializerFactory(
-			$serializerOptions,
-			$this->wikibaseRepo->getPropertyDataTypeLookup(),
-			$entityFactory
-		);
-
-		$entitySerializer = new DispatchingEntitySerializer( $serializerFactory, $serializerOptions );
+		$entitySerializer = $serializerFactory->newEntitySerializer();
 		$entityPrefetcher = $this->wikibaseRepo->getStore()->getEntityPrefetcher();
 
 		$dumper = new JsonDumpGenerator(
