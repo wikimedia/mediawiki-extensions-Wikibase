@@ -94,7 +94,7 @@ return call_user_func( function() {
 		'interwikiSortOrders' => array(
 			'alphabetic' => array(
 				'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
-				'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'bm', 'bn', 'bjn',
+				'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'azb', 'bm', 'bn', 'bjn',
 				'zh-min-nan', 'nan', 'map-bms', 'ba', 'be', 'be-x-old', 'bh', 'bcl', 'bi',
 				'bg', 'bar', 'bo', 'bs', 'br', 'bxr', 'ca', 'cv', 'ceb', 'cs', 'ch',
 				'cbk-zam', 'ny', 'sn', 'tum', 'cho', 'co', 'cy', 'da', 'dk', 'pdc', 'de',
@@ -122,7 +122,7 @@ return call_user_func( function() {
 			),
 			'alphabetic_revised' => array(
 				'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc', 'roa-rup',
-				'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'bjn', 'id', 'ms', 'bm', 'bn',
+				'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'azb', 'bjn', 'id', 'ms', 'bm', 'bn',
 				'zh-min-nan', 'nan', 'map-bms', 'jv', 'su', 'ba', 'min', 'be', 'be-x-old', 'bh',
 				'bcl', 'bi', 'bar', 'bo', 'bs', 'br', 'bug', 'bg', 'bxr', 'ca', 'ceb', 'cv', 'cs',
 				'ch', 'cbk-zam', 'ny', 'sn', 'tum', 'cho', 'co', 'cy', 'da', 'dk', 'pdc', 'de',
@@ -149,7 +149,7 @@ return call_user_func( function() {
 			),
 			'alphabetic_sr' => array(
 				'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
-				'roa-rup', 'frp', 'arz', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'bjn', 'id',
+				'roa-rup', 'frp', 'arz', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'azb', 'bjn', 'id',
 				'ms', 'bg', 'bm', 'zh-min-nan', 'nan', 'map-bms', 'jv', 'su', 'ba', 'be',
 				'be-x-old', 'bh', 'bcl', 'bi', 'bn', 'bo', 'bar', 'bs', 'bpy', 'br', 'bug',
 				'bxr', 'ca', 'ceb', 'ch', 'cbk-zam', 'sn', 'tum', 'ny', 'cho', 'chr', 'co',
@@ -177,7 +177,7 @@ return call_user_func( function() {
 			),
 			'alphabetic_fy' => array(
 				'aa', 'ab', 'ace', 'af', 'ay', 'ak', 'als', 'am', 'an', 'ang', 'ar', 'arc',
-				'arz', 'as', 'ast', 'av', 'az', 'ba', 'bar', 'bat-smg', 'bcl', 'be', 'be-x-old',
+				'arz', 'as', 'ast', 'av', 'az', 'azb', 'ba', 'bar', 'bat-smg', 'bcl', 'be', 'be-x-old',
 				'bg', 'bh', 'bi', 'bjn', 'bm', 'bn', 'bo', 'bpy', 'br', 'bs', 'bug', 'bxr',
 				'ca', 'cbk-zam', 'cdo', 'ce', 'ceb', 'ch', 'chy', 'cho', 'chr', 'cy', 'ckb',
 				'co', 'cr', 'crh', 'cs', 'csb', 'cu', 'cv', 'da', 'de', 'diq', 'dk', 'dsb', 'dv',
