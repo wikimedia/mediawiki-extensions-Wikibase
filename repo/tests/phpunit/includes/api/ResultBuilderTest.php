@@ -76,7 +76,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			null, //no serialization options
 			$mockPropertyDataTypeLookup
 		);
-		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$serializerFactory = new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
 
 		$builder = new ResultBuilder(
 			$result,
