@@ -5,8 +5,8 @@ namespace Wikibase\Dumpers;
 use InvalidArgumentException;
 use MWContentSerializationException;
 use MWException;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
@@ -52,7 +52,12 @@ class JsonDumpGenerator extends DumpGenerator {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $out, EntityLookup $lookup, Serializer $entitySerializer, EntityPrefetcher $entityPrefetcher ) {
+	public function __construct(
+		$out,
+		EntityLookup $lookup,
+		Serializer $entitySerializer,
+		EntityPrefetcher $entityPrefetcher
+	) {
 		parent::__construct( $out, $entityPrefetcher );
 		if ( $lookup instanceof RedirectResolvingEntityLookup ) {
 			throw new InvalidArgumentException( '$lookup must not resolve redirects!' );
@@ -111,7 +116,7 @@ class JsonDumpGenerator extends DumpGenerator {
 			return null;
 		}
 
-		$data = $this->entitySerializer->getSerialized( $entity );
+		$data = $this->entitySerializer->serialize( $entity );
 		$json = $this->encode( $data );
 
 		return $json;
