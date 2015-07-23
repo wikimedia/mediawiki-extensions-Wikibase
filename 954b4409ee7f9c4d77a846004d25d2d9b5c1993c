@@ -16,6 +16,24 @@
       "revId": "954b4409ee7f9c4d77a846004d25d2d9b5c1993c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2e4daac7",
+        "filename": "client/includes/DataAccess/RestrictedEntityLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-07-23T00:19:58Z",
+      "side": 1,
+      "message": "I considered that, but decided to keep the complexity low (although I guess for a reasonable $entityAccessLimit this wont matter).",
+      "parentUuid": "8ec42329_a44d52c9",
+      "revId": "954b4409ee7f9c4d77a846004d25d2d9b5c1993c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
