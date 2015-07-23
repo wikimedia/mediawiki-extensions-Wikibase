@@ -238,7 +238,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	protected function serializeReference( $reference ) {
 		if ( $reference instanceof Reference ) {
 			$reference = $this->newLibSerializerFactory()
-				->newSerializerForObject( $reference )
+				->newReferenceSerializer( new SerializationOptions() )
 				->getSerialized( $reference );
 		}
 		return $reference;

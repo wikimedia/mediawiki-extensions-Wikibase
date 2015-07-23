@@ -147,7 +147,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 				// supposed to be done in the serialized representation since changing the actual
 				// object might apply intrinsic sorting.
 				$serializerFactory = new LibSerializerFactory();
-				$serializer = $serializerFactory->newSerializerForObject( $statement );
+				$serializer = $serializerFactory->newClaimSerializer( new SerializationOptions() );
 				$serializedClaim = $serializer->getSerialized( $statement );
 				$firstPropertyId = array_shift( $serializedClaim['qualifiers-order'] );
 				array_push( $serializedClaim['qualifiers-order'], $firstPropertyId );
@@ -299,7 +299,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$serializerFactory = new LibSerializerFactory();
 
 		if ( $claim instanceof Statement ) {
-			$serializer = $serializerFactory->newSerializerForObject( $claim );
+			$serializer = $serializerFactory->newClaimSerializer( new SerializationOptions() );
 			$serializedClaim = $serializer->getSerialized( $claim );
 		} else {
 			$unserializer = $serializerFactory->newClaimUnserializer( new SerializationOptions() );
@@ -447,7 +447,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$badClaim = new Statement( new PropertyNoValueSnak( $badProperty->getId() ) );
 
-		$serializer = $serializerFactory->newSerializerForObject( $statement );
+		$serializer = $serializerFactory->newClaimSerializer( new SerializationOptions() );
 		$serializedBadClaim = $serializer->getSerialized( $badClaim );
 
 		$params = array(
