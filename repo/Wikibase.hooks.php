@@ -485,7 +485,7 @@ final class RepoHooks {
 	public static function onPageTabs( SkinTemplate &$skinTemplate, array &$links ) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		$title = $skinTemplate->getTitle();
+		$title = $skinTemplate->getRelevantTitle();
 		$request = $skinTemplate->getRequest();
 
 		if ( $entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
