@@ -88,7 +88,7 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 			),
 			'Multiple Snaks' => array(
 				'foo, bar, Berlin',
-				array( array(
+				array( 'P42' => array(
 					$this->getSnakSerialization( new StringValue( 'foo' ) ),
 					$this->getSnakSerialization( new StringValue( 'bar' ) ),
 					$this->getSnakSerialization( new StringValue( 'Berlin' ) )
