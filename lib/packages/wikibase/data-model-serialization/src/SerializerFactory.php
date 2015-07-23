@@ -29,11 +29,17 @@ use Wikibase\DataModel\Serializers\TypedSnakSerializer;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Adam Shorland
  */
 class SerializerFactory {
 
 	const OPTION_DEFAULT = 0;
+	/** @since 1.2.0 */
 	const OPTION_OBJECTS_FOR_MAPS = 1;
+	/** @since 1.7.0 */
+	const OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH = 2;
+	const OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH = 4;
+	const OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH = 8;
 
 	/**
 	 * @var int
@@ -65,6 +71,27 @@ class SerializerFactory {
 	 */
 	private function shouldUseObjectsForMaps() {
 		return (bool)( $this->options & self::OPTION_OBJECTS_FOR_MAPS );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function shouldSerializeMainSnaksWithHash() {
+		return !(bool)( $this->options & self::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function shouldSerializeQualifierSnaksWithHash() {
+		return !(bool)( $this->options & self::OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function shouldSerializeReferenceSnaksWithHash() {
+		return !(bool)( $this->options & self::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH );
 	}
 
 	/**
@@ -117,7 +144,10 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newStatementListSerializer() {
-		return new StatementListSerializer( $this->newStatementSerializer(), $this->shouldUseObjectsForMaps() );
+		return new StatementListSerializer(
+			$this->newStatementSerializer(),
+			$this->shouldUseObjectsForMaps()
+		);
 	}
 
 	/**
@@ -129,8 +159,8 @@ class SerializerFactory {
 	 */
 	public function newStatementSerializer() {
 		return new StatementSerializer(
-			$this->newSnakSerializer(),
-			$this->newSnakListSerializer(),
+			$this->newSnakSerializer( $this->shouldSerializeMainSnaksWithHash() ),
+			$this->newSnakListSerializer( $this->shouldSerializeQualifierSnaksWithHash() ),
 			$this->newReferencesSerializer()
 		);
 	}
@@ -161,18 +191,27 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newReferenceSerializer() {
-		return new ReferenceSerializer( $this->newSnakListSerializer() );
+		return new ReferenceSerializer(
+			$this->newSnakListSerializer(
+				$this->shouldSerializeReferenceSnaksWithHash()
+			)
+		);
 	}
 
 	/**
 	 * Returns a Serializer that can serialize SnakList objects.
 	 *
+	 * @param bool $serializeSnaksWithHash
+	 *
 	 * @since 1.4
 	 *
 	 * @return Serializer
 	 */
-	public function newSnakListSerializer() {
-		return new SnakListSerializer( $this->newSnakSerializer(), $this->shouldUseObjectsForMaps() );
+	public function newSnakListSerializer( $serializeSnaksWithHash = true ) {
+		return new SnakListSerializer(
+			$this->newSnakSerializer( $serializeSnaksWithHash ),
+			$this->shouldUseObjectsForMaps()
+		);
 	}
 
 	/**
@@ -189,21 +228,28 @@ class SerializerFactory {
 	/**
 	 * Returns a Serializer that can serialize Snak objects.
 	 *
+	 * @param bool $serializeWithHash
+	 *
 	 * @return Serializer
 	 */
-	public function newSnakSerializer() {
-		return new SnakSerializer( $this->dataValueSerializer );
+	public function newSnakSerializer( $serializeWithHash = true ) {
+		return new SnakSerializer(
+			$this->dataValueSerializer,
+			$serializeWithHash
+		);
 	}
 
 	/**
 	 * Returns a Serializer that can serialize TypedSnak objects.
 	 *
+	 * @param bool $serializeWithHash
+	 *
 	 * @since 1.3
 	 *
 	 * @return Serializer
 	 */
-	public function newTypedSnakSerializer() {
-		return new TypedSnakSerializer( $this->newSnakSerializer() );
+	public function newTypedSnakSerializer( $serializeWithHash = true ) {
+		return new TypedSnakSerializer( $this->newSnakSerializer( $serializeWithHash ) );
 	}
 
 	/**

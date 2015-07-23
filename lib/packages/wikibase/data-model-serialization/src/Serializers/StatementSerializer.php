@@ -27,12 +27,12 @@ class StatementSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	private $snakSerializer;
+	private $mainSnakSerializer;
 
 	/**
 	 * @var Serializer
 	 */
-	private $snaksSerializer;
+	private $qualifierSnaksSerializer;
 
 	/**
 	 * @var Serializer
@@ -40,13 +40,17 @@ class StatementSerializer implements DispatchableSerializer {
 	private $referencesSerializer;
 
 	/**
-	 * @param Serializer $snakSerializer
-	 * @param Serializer $snaksSerializer
+	 * @param Serializer $mainSnakSerializer
+	 * @param Serializer $qualifierSnaksSerializer
 	 * @param Serializer $referencesSerializer
 	 */
-	public function __construct( Serializer $snakSerializer, Serializer $snaksSerializer, Serializer $referencesSerializer ) {
-		$this->snakSerializer = $snakSerializer;
-		$this->snaksSerializer = $snaksSerializer;
+	public function __construct(
+		Serializer $mainSnakSerializer,
+		Serializer $qualifierSnaksSerializer,
+		Serializer $referencesSerializer
+	) {
+		$this->mainSnakSerializer = $mainSnakSerializer;
+		$this->qualifierSnaksSerializer = $qualifierSnaksSerializer;
 		$this->referencesSerializer = $referencesSerializer;
 	}
 
@@ -82,7 +86,7 @@ class StatementSerializer implements DispatchableSerializer {
 
 	private function getSerialized( Statement $statement ) {
 		$serialization = array(
-			'mainsnak' => $this->snakSerializer->serialize( $statement->getMainSnak() ),
+			'mainsnak' => $this->mainSnakSerializer->serialize( $statement->getMainSnak() ),
 			'type' => 'statement'
 		);
 
@@ -109,7 +113,9 @@ class StatementSerializer implements DispatchableSerializer {
 		$references = $statement->getReferences();
 
 		if ( $references->count() != 0 ) {
-			$serialization['references'] = $this->referencesSerializer->serialize( $statement->getReferences() );
+			$serialization['references'] = $this->referencesSerializer->serialize(
+				$statement->getReferences()
+			);
 		}
 	}
 
@@ -117,7 +123,7 @@ class StatementSerializer implements DispatchableSerializer {
 		$qualifiers = $statement->getQualifiers();
 
 		if ( $qualifiers->count() !== 0 ) {
-			$serialization['qualifiers'] = $this->snaksSerializer->serialize( $qualifiers );
+			$serialization['qualifiers'] = $this->qualifierSnaksSerializer->serialize( $qualifiers );
 			$serialization['qualifiers-order'] = $this->buildQualifiersOrderList( $qualifiers );
 		}
 	}

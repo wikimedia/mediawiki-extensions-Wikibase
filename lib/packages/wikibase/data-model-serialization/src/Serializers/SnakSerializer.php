@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\Snak;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Adam Shorland
  */
 class SnakSerializer implements DispatchableSerializer {
 
@@ -23,10 +24,17 @@ class SnakSerializer implements DispatchableSerializer {
 	private $dataValueSerializer;
 
 	/**
-	 * @param Serializer $dataValueSerializer
+	 * @var bool
 	 */
-	public function __construct( Serializer $dataValueSerializer ) {
+	private $serializeWithHash;
+
+	/**
+	 * @param Serializer $dataValueSerializer
+	 * @param bool $serializeWithHash
+	 */
+	public function __construct( Serializer $dataValueSerializer, $serializeWithHash = true ) {
 		$this->dataValueSerializer = $dataValueSerializer;
+		$this->serializeWithHash = $serializeWithHash;
 	}
 
 	/**
@@ -63,8 +71,11 @@ class SnakSerializer implements DispatchableSerializer {
 		$serialization = array(
 			'snaktype' => $snak->getType(),
 			'property' => $snak->getPropertyId()->getSerialization(),
-			'hash' => $snak->getHash()
 		);
+
+		if ( $this->serializeWithHash ) {
+			$serialization['hash'] = $snak->getHash();
+		}
 
 		if ( $snak instanceof PropertyValueSnak ) {
 			$serialization['datavalue'] = $this->dataValueSerializer->serialize( $snak->getDataValue() );
