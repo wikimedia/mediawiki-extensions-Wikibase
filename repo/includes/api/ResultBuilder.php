@@ -621,8 +621,6 @@ class ResultBuilder {
 			$value['qualifiers-order'] = array();
 		}
 
-		$value = $this->getArrayWithNoSnakHashAtPath( $value, 'mainsnak' );
-		$value = $this->getArrayWithNoSnakHashAtPath( $value, 'references/*/snaks/*/*' );
 		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'references/*/snaks' );
 		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'qualifiers' );
 		$value = $this->modifier->modifyUsingCallback(
@@ -693,7 +691,6 @@ class ResultBuilder {
 
 		$value = $serializer->serialize( $reference );
 
-		$value = $this->getArrayWithNoSnakHashAtPath( $value, 'snaks/*/*' );
 		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'snaks' );
 
 		if ( $this->isRawMode ) {
@@ -701,20 +698,6 @@ class ResultBuilder {
 		}
 
 		$this->setValue( null, 'reference', $value );
-	}
-
-	/**
-	 * @param array $array
-	 * @param $path string
-	 *
-	 * @return array
-	 */
-	private function getArrayWithNoSnakHashAtPath( array $array, $path ) {
-		return $this->modifier->modifyUsingCallback(
-			$array,
-			$path,
-			$this->getModCallbackToRemoveElementWithKey( 'hash' )
-		);
 	}
 
 	/**
@@ -852,20 +835,6 @@ class ResultBuilder {
 				}
 			}
 			$array = array_values( $array );
-			return $array;
-		};
-	}
-
-	/**
-	 * @param string $keyToRemove
-	 *
-	 * @return callable
-	 */
-	private function getModCallbackToRemoveElementWithKey( $keyToRemove ) {
-		return function ( $array ) use ( $keyToRemove ) {
-			if ( isset( $array[$keyToRemove] ) ) {
-				unset( $array[$keyToRemove] );
-			}
 			return $array;
 		};
 	}
