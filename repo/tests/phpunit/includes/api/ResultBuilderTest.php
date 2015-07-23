@@ -215,17 +215,17 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							array(
 								'id' => 'imaguid',
 								'mainsnak' => array(
-									'snaktype' => 'somevalue',
-									'property' => 'P65'
+									'snaktype' => 'value',
+									'property' => 'P65',
+									'datavalue' => array(
+										'value' => 'snakStringValue',
+										'type' => 'string',
+									),
+									'datatype' => 'DtIdFor_P65',
 								),
 								'type' => 'statement',
 								'qualifiers' => array(
 									'P65' => array(
-										array(
-											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
-											'snaktype' => 'somevalue',
-											'property' => 'P65',
-										),
 										array(
 											'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
 											'snaktype' => 'value',
@@ -235,6 +235,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 												'type' => 'string',
 											),
 											'datatype' => 'DtIdFor_P65',
+										),
+										array(
+											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
+											'snaktype' => 'somevalue',
+											'property' => 'P65',
 										),
 									),
 								),
@@ -342,18 +347,18 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							array(
 								'id' => 'imaguid',
 								'mainsnak' => array(
-									'snaktype' => 'somevalue',
-									'property' => 'P65'
+									'snaktype' => 'value',
+									'property' => 'P65',
+									'datavalue' => array(
+										'value' => 'snakStringValue',
+										'type' => 'string',
+									),
+									'datatype' => 'DtIdFor_P65',
 								),
 								'type' => 'statement',
 								'qualifiers' => array(
 									array(
 										'id' => 'P65',
-										array(
-											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
-											'snaktype' => 'somevalue',
-											'property' => 'P65',
-										),
 										array(
 											'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
 											'snaktype' => 'value',
@@ -363,6 +368,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 												'type' => 'string',
 											),
 											'datatype' => 'DtIdFor_P65',
+										),
+										array(
+											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
+											'snaktype' => 'somevalue',
+											'property' => 'P65',
 										),
 										'_element' => 'qualifiers',
 									),
@@ -442,7 +452,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAddEntityRevision( $isRawMode, $expected ) {
 		$result = $this->getDefaultResult();
-		$props = array( 'info' );
 		$item = new Item( new ItemId( 'Q123098' ) );
 
 		//Basic
@@ -455,11 +464,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
 		$item->addSiteLink( new SiteLink( 'zh_classicalwiki', 'User:Addshore', array() ) );
 
-		$snak = new PropertySomeValueSnak( new PropertyId( 'P65' ) );
+		$snak = new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
 
 		$qualifiers = new SnakList();
-		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
 		$qualifiers->addSnak( new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'string!' ) ) );
+		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
 
 		$references = new ReferenceList();
 		$referenceSnaks = new SnakList();
@@ -476,7 +485,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$serializationOptions->setIndexTags( $isRawMode );
 
 		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
-		$resultBuilder->addEntityRevision( 'Q1230000', $entityRevision, $serializationOptions, $props );
+		$resultBuilder->addEntityRevision( 'Q1230000', $entityRevision );
 
 		$data = $result->getResultData();
 
@@ -494,13 +503,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$resultBuilder = $this->getResultBuilder( $result );
 
 		// automatic key
-		$resultBuilder->addEntityRevision( null, $entityRevision, new SerializationOptions(), $props );
+		$resultBuilder->addEntityRevision( null, $entityRevision, $props );
 
 		$data = $result->getResultData();
 		$this->assertArrayHasKey( 'Q11', $data['entities'] );
 
 		// explicit key
-		$resultBuilder->addEntityRevision( 'FOO', $entityRevision, new SerializationOptions(), $props );
+		$resultBuilder->addEntityRevision( 'FOO', $entityRevision, $props );
 
 		$data = $result->getResultData();
 		$this->assertArrayHasKey( 'FOO', $data['entities'] );
@@ -620,27 +629,85 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entityRevision = new EntityRevision( $item );
 
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
-		$languages = array(
-			'de-formal' => $fallbackChainFactory->newFromLanguageCode( 'de-formal' ),
-			'es' => $fallbackChainFactory->newFromLanguageCode( 'es' ),
-			'qug' => $fallbackChainFactory->newFromLanguageCode( 'qug' ),
-			'zh-my' => $fallbackChainFactory->newFromLanguageCode( 'zh-my' ),
+		$fallbackMode = (
+			LanguageFallbackChainFactory::FALLBACK_VARIANTS
+			| LanguageFallbackChainFactory::FALLBACK_OTHERS
+			| LanguageFallbackChainFactory::FALLBACK_SELF );
+		$fallbackChains = array(
+			'de-formal' => $fallbackChainFactory->newFromLanguageCode( 'de-formal', $fallbackMode ),
+			'es' => $fallbackChainFactory->newFromLanguageCode( 'es', $fallbackMode ),
+			'qug' => $fallbackChainFactory->newFromLanguageCode( 'qug', $fallbackMode ),
+			'zh-my' => $fallbackChainFactory->newFromLanguageCode( 'zh-my', $fallbackMode ),
 		);
-
-		$props = array( 'labels', 'descriptions' );
-
-		$options = new SerializationOptions();
-		$options->setIndexTags( $indexedMode );
-		$options->setLanguages( $languages );
-		$options->setOption( EntitySerializer::OPT_PARTS, $props );
+		$filterLangCodes = array_keys( $fallbackChains );
 
 		$result = $this->getDefaultResult();
-		$resultBuilder = $this->getResultBuilder( $result, $options, $indexedMode );
-		$resultBuilder->addEntityRevision( null, $entityRevision, $options, $props );
+		$resultBuilder = $this->getResultBuilder( $result, null, $indexedMode );
+		$resultBuilder->addEntityRevision(
+			null,
+			$entityRevision,
+			array( 'labels', 'descriptions' ),
+			array(),
+			$filterLangCodes,
+			$fallbackChains
+		);
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 
+		$this->assertEquals( $expected, $data );
+	}
+
+	public function testAddEntityRevisionWithLanguagesFilter() {
+		$item = new Item( new ItemId( 'Q123099' ) );
+		$item->getFingerprint()->setLabel( 'en', 'text' );
+		$item->getFingerprint()->setLabel( 'de', 'text' );
+		$item->getFingerprint()->setDescription( 'en', 'text' );
+		$item->getFingerprint()->setDescription( 'de', 'text' );
+		$item->getFingerprint()->setAliasGroup( 'en', array( 'text' ) );
+		$item->getFingerprint()->setAliasGroup( 'de', array( 'text' ) );
+		$entityRevision = new EntityRevision( $item );
+
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addEntityRevision(
+			null,
+			$entityRevision,
+			array( 'labels', 'descriptions', 'aliases' ),
+			array(),
+			array( 'de' )
+		);
+
+		$expected = array( 'entities' => array(
+			'Q123099' => array(
+				'id' => 'Q123099',
+				'type' => 'item',
+				'labels' => array(
+					'de' => array(
+						'language' => 'de',
+						'value' => 'text',
+					),
+				),
+				'descriptions' => array(
+					'de' => array(
+						'language' => 'de',
+						'value' => 'text',
+					),
+				),
+				'aliases' => array(
+					'de' => array(
+						array(
+							'language' => 'de',
+							'value' => 'text',
+						),
+					),
+				),
+			),
+			'_element' => 'entity',
+		) );
+
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
 		$this->assertEquals( $expected, $data );
 	}
 
@@ -650,13 +717,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$entityRevision = new EntityRevision( $item );
 
-		$options = new SerializationOptions();
 		$props = array( 'sitelinks' );
 		$siteIds = array( 'enwiki' );
 
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addEntityRevision( null, $entityRevision, $options, $props, $siteIds );
+		$resultBuilder->addEntityRevision( null, $entityRevision, $props, $siteIds );
 
 		$expected = array( 'entities' => array(
 			'Q123099' => array(
@@ -682,21 +748,17 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @see https://phabricator.wikimedia.org/T68181
 	 */
 	public function testAddEntityRevisionInIndexedModeWithSiteLinksFilter() {
-		$indexedMode = true;
-
 		$item = new Item( new ItemId( 'Q123100' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 		$entityRevision = new EntityRevision( $item );
 
-		$options = new SerializationOptions();
-		$options->setIndexTags( $indexedMode );
 		$props = array( 'sitelinks' );
 		$siteIds = array( 'enwiki' );
 
 		$result = $this->getDefaultResult();
-		$resultBuilder = $this->getResultBuilder( $result, null, $indexedMode );
-		$resultBuilder->addEntityRevision( null, $entityRevision, $options, $props, $siteIds );
+		$resultBuilder = $this->getResultBuilder( $result, null, true );
+		$resultBuilder->addEntityRevision( null, $entityRevision, $props, $siteIds );
 
 		$expected = array( 'entities' => array(
 			array(
@@ -711,18 +773,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						)
 					),
 					'_element' => 'sitelink'
-				),
-				'aliases' => array(
-					'_element' => 'alias'
-				),
-				'descriptions' => array(
-					'_element' => 'description'
-				),
-				'labels' => array(
-					'_element' => 'label'
-				),
-				'claims' => array(
-					'_element' => 'property'
 				),
 			),
 			'_element' => 'entity'
