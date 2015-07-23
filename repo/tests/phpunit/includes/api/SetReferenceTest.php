@@ -2,21 +2,22 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use UsageException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -45,6 +46,16 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 */
 	private static $propertyIds;
 
+	/**
+	 * @var SerializerFactory
+	 */
+	private $serializerFactory;
+
+	/**
+	 * @var DeserializerFactory
+	 */
+	private $deserializerFactory;
+
 	protected function setUp() {
 		parent::setUp();
 
@@ -62,6 +73,15 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 			$this->initTestEntities( array( 'StringProp', 'Berlin' ) );
 		}
+
+		$this->serializerFactory = new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
+		$this->deserializerFactory = new DeserializerFactory(
+			WikibaseRepo::getDefaultInstance()->getDataValueDeserializer(),
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+		);
 	}
 
 	/**
@@ -237,9 +257,9 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 */
 	protected function serializeReference( $reference ) {
 		if ( $reference instanceof Reference ) {
-			$reference = $this->newLibSerializerFactory()
-				->newReferenceSerializer( new SerializationOptions() )
-				->getSerialized( $reference );
+			$reference = $this->serializerFactory
+				->newReferenceSerializer()
+				->serialize( $reference );
 		}
 		return $reference;
 	}
@@ -252,16 +272,11 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 */
 	protected function unserializeReference( $reference ) {
 		if ( is_array( $reference ) ) {
-			unset( $reference['hash'] );
-			$reference = $this->newLibSerializerFactory()
-				->newReferenceUnserializer( new SerializationOptions() )
-				->newFromSerialization( $reference );
+			$reference = $this->deserializerFactory
+				->newReferenceDeserializer()
+				->deserialize( $reference );
 		}
 		return $reference;
-	}
-
-	private function newLibSerializerFactory() {
-		return new LibSerializerFactory();
 	}
 
 	/**

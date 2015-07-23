@@ -3,15 +3,10 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use SiteStore;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityFactory;
 
 /**
@@ -118,15 +113,6 @@ class LibSerializerFactory {
 	 *
 	 * @return Serializer
 	 */
-	public function newReferenceSerializer( SerializationOptions $options ) {
-		return new ReferenceSerializer( $this->newSnakSerializer( $options ), $options );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Serializer
-	 */
 	public function newClaimSerializer( SerializationOptions $options ) {
 		return new ClaimSerializer( $this->newSnakSerializer( $options ), $options );
 	}
@@ -165,15 +151,6 @@ class LibSerializerFactory {
 	 */
 	public function newAliasSerializer( SerializationOptions $options ) {
 		return new AliasSerializer( $this->makeOptions( $options ) );
-	}
-
-	/**
-	 * @param SerializationOptions $options
-	 *
-	 * @return Unserializer
-	 */
-	public function newReferenceUnserializer( SerializationOptions $options ) {
-		return $this->newReferenceSerializer( $this->makeOptions( $options ) );
 	}
 
 	/**

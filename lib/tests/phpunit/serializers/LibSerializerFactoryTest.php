@@ -74,7 +74,6 @@ class LibSerializerFactoryTest extends \MediaWikiTestCase {
 
 	public function newUnserializerProvider() {
 		$names = array(
-			'ReferenceUnserializer',
 			'ClaimUnserializer',
 			'PropertyUnserializer',
 			'ItemUnserializer',
@@ -101,7 +100,6 @@ class LibSerializerFactoryTest extends \MediaWikiTestCase {
 	public function newSerializerProvider() {
 		$names = array(
 			'SnakSerializer',
-			'ReferenceSerializer',
 			'ClaimSerializer',
 			'ClaimsSerializer',
 			'PropertySerializer',
