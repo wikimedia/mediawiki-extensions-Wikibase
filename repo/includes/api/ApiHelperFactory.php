@@ -10,8 +10,6 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\SummaryFormatter;
@@ -91,15 +89,13 @@ class ApiHelperFactory {
 	 * Returns a ResultBuilder wrapping the ApiResult of the given API module.
 	 *
 	 * @param ApiBase $api
-	 * @param SerializationOptions $defaultOptions
 	 *
 	 * @return ResultBuilder
 	 */
-	public function getResultBuilder( ApiBase $api, SerializationOptions $defaultOptions = null ) {
+	public function getResultBuilder( ApiBase $api ) {
 		return new ResultBuilder(
 			$api->getResult(),
 			$this->titleLookup,
-			$this->newLibSerializerFactory( $defaultOptions ),
 			$this->newSerializerFactory(),
 			$this->siteStore,
 			$this->dataTypeLookup,
@@ -119,21 +115,6 @@ class ApiHelperFactory {
 			$api,
 			$this->exceptionLocalizer,
 			$api->getLanguage()
-		);
-	}
-
-	/**
-	 * Returns a serializer factory to be used when constructing API results.
-	 *
-	 * @param SerializationOptions $defaultOptions
-	 *
-	 * @return LibSerializerFactory
-	 */
-	public function newLibSerializerFactory( SerializationOptions $defaultOptions = null ) {
-		return new LibSerializerFactory(
-			$defaultOptions,
-			$this->dataTypeLookup,
-			$this->entityFactory
 		);
 	}
 
