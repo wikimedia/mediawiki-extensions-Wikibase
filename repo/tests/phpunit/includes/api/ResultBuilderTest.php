@@ -6,7 +6,6 @@ use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -25,8 +24,6 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Test\MockSiteStore;
 
 /**
@@ -47,7 +44,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return new ApiResult( false );
 	}
 
-	protected function getResultBuilder( $result, $options = null, $isRawMode = false ) {
+	protected function getResultBuilder( $result, $isRawMode = false ) {
 		$mockTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -73,11 +70,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 				return 'DtIdFor_' . $propertyId->getSerialization();
 			} ) );
 
-		// @todo inject EntityFactory and SiteStore
-		$libSerializerFactory = new LibSerializerFactory(
-			null, //no serialization options
-			$mockPropertyDataTypeLookup
-		);
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
 			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
@@ -87,18 +79,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = new ResultBuilder(
 			$result,
 			$mockEntityTitleLookup,
-			$libSerializerFactory,
 			$serializerFactory,
 			new MockSiteStore(),
 			$mockPropertyDataTypeLookup,
 			$isRawMode
 		);
-
-		if ( is_array( $options ) ) {
-			$builder->getOptions()->setOptions( $options );
-		} elseif ( $options instanceof SerializationOptions ) {
-			$builder->getOptions()->merge( $options );
-		}
 
 		return $builder;
 	}
@@ -481,10 +466,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
-		$serializationOptions = new SerializationOptions();
-		$serializationOptions->setIndexTags( $isRawMode );
-
-		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
 		$resultBuilder->addEntityRevision( 'Q1230000', $entityRevision );
 
 		$data = $result->getResultData();
@@ -642,7 +624,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$filterLangCodes = array_keys( $fallbackChains );
 
 		$result = $this->getDefaultResult();
-		$resultBuilder = $this->getResultBuilder( $result, null, $indexedMode );
+		$resultBuilder = $this->getResultBuilder( $result, $indexedMode );
 		$resultBuilder->addEntityRevision(
 			null,
 			$entityRevision,
@@ -757,7 +739,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$siteIds = array( 'enwiki' );
 
 		$result = $this->getDefaultResult();
-		$resultBuilder = $this->getResultBuilder( $result, null, true );
+		$resultBuilder = $this->getResultBuilder( $result, true );
 		$resultBuilder->addEntityRevision( null, $entityRevision, $props, $siteIds );
 
 		$expected = array( 'entities' => array(
@@ -988,7 +970,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 		$path = array( 'entities', 'Q1' );
 
-		$resultBuilder = $this->getResultBuilder( $result, null, $rawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $rawMode );
 		$resultBuilder->addAliasGroupList( $aliasGroupList, $path );
 
 		$data = $result->getResultData();
@@ -1057,7 +1039,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 		$path = array( 'entities', 'Q1' );
 
-		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
 		$resultBuilder->addSiteLinkList( $siteLinkList, $path );
 
 		$data = $result->getResultData();
@@ -1193,7 +1175,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			);
 		}
 
-		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
 		$resultBuilder->addClaims( array( $statement ), $path );
 
 		$data = $result->getResultData();
@@ -1253,7 +1235,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$expected = array( 'claim' => $statementSerialization );
 
-		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
 		$resultBuilder->addClaim( $statement );
 
 		$data = $result->getResultData();
@@ -1458,7 +1440,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			) )
 		);
 
-		$resultBuilder = $this->getResultBuilder( $result, null, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
 		$resultBuilder->addReference( $reference );
 
 		$data = $result->getResultData();
@@ -1642,7 +1624,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSetList( $path, $name, array $values, $tag, $indexed, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, null, $indexed );
+		$builder = $this->getResultBuilder( $result, $indexed );
 
 		$builder->setList( $path, $name, $values, $tag );
 		$data = $result->getResultData();
@@ -1706,7 +1688,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testSetValue( $path, $name, $value, $indexed, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, null, $indexed );
+		$builder = $this->getResultBuilder( $result, $indexed );
 
 		$builder->setValue( $path, $name, $value );
 		$data = $result->getResultData();
@@ -1789,7 +1771,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAppendValue( $path, $key, $value, $tag, $indexed, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, null, $indexed );
+		$builder = $this->getResultBuilder( $result, $indexed );
 
 		$builder->appendValue( $path, $key, $value, $tag );
 		$data = $result->getResultData();
