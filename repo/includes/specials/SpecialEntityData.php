@@ -5,8 +5,6 @@ namespace Wikibase\Repo\Specials;
 use DataValues\Serializers\DataValueSerializer;
 use HttpError;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -82,13 +80,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 
-		$serializationOptions = new SerializationOptions();
-		$libSerializerFactory = new LibSerializerFactory(
-			$serializationOptions,
-			$wikibaseRepo->getPropertyDataTypeLookup(),
-			$wikibaseRepo->getEntityFactory()
-		);
-
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
@@ -101,7 +92,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$this->getPageTitle()->getCanonicalURL() . '/',
 			$wikibaseRepo->getStore()->getEntityLookup(),
 			$titleLookup,
-			$libSerializerFactory,
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getSiteStore()->getSites(),
 			$entityDataFormatProvider,
