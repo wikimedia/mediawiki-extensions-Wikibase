@@ -152,7 +152,7 @@ class EntityAccessor {
 		$options = $this->getSerializationOptions();
 		$serializerFactory = new LibSerializerFactory( $options, $this->dataTypeLookup );
 
-		return $serializerFactory->newSerializerForObject( $entityObject, $options );
+		return $serializerFactory->newSerializerForEntity( $entityObject->getType(), $options );
 	}
 
 	/**

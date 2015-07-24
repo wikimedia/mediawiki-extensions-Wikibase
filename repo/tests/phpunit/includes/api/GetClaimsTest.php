@@ -173,7 +173,7 @@ class GetClaimsTest extends ApiTestCase {
 		}
 
 		$serializerFactory = new LibSerializerFactory( null, $this->getDataTypeLookup() );
-		$serializer = $serializerFactory->newSerializerForObject( $claims );
+		$serializer = $serializerFactory->newClaimsSerializer( $options );
 		$serializer->setOptions( $options );
 		$expected = $serializer->getSerialized( $claims );
 
