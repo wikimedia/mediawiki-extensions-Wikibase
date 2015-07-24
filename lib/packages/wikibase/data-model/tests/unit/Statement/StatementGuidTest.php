@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Tests\Claim;
+namespace Wikibase\DataModel\Tests\Statement;
 
 use Exception;
 use Wikibase\DataModel\Statement\StatementGuid;

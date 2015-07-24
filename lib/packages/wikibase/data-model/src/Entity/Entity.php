@@ -2,10 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Diff\EntityDiff;
-use Wikibase\DataModel\Entity\Diff\EntityDiffer;
-use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -348,35 +344,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 */
 	public function getClaims() {
 		return array();
-	}
-
-	/**
-	 * Returns an EntityDiff between $this and the provided Entity.
-	 *
-	 * @since 0.1
-	 * @deprecated since 1.0 - use EntityDiffer or a more specific differ
-	 *
-	 * @param Entity $target
-	 *
-	 * @return EntityDiff
-	 * @throws InvalidArgumentException
-	 */
-	public final function getDiff( Entity $target ) {
-		$differ = new EntityDiffer();
-		return $differ->diffEntities( $this, $target );
-	}
-
-	/**
-	 * Apply an EntityDiff to the entity.
-	 *
-	 * @since 0.4
-	 * @deprecated since 1.1 - use EntityPatcher or a more specific patcher
-	 *
-	 * @param EntityDiff $patch
-	 */
-	public final function patch( EntityDiff $patch ) {
-		$patcher = new EntityPatcher();
-		$patcher->patchEntity( $this, $patch );
 	}
 
 	/**

@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Tests\Entity;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -402,84 +401,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $entity->getId(), $instance->getId() );
 	}
 
-	public function diffProvider() {
-		$argLists = array();
-
-		$emptyDiff = EntityDiff::newForType( $this->getNewEmpty()->getType() );
-
-		$entity0 = $this->getNewEmpty();
-		$entity1 = $this->getNewEmpty();
-		$expected = clone $emptyDiff;
-
-		$argLists[] = array( $entity0, $entity1, $expected );
-
-		$entity0 = $this->getNewEmpty();
-		$entity0->addAliases( 'nl', array( 'bah' ) );
-		$entity0->addAliases( 'de', array( 'bah' ) );
-
-		$entity1 = $this->getNewEmpty();
-		$entity1->addAliases( 'en', array( 'foo', 'bar' ) );
-		$entity1->addAliases( 'nl', array( 'bah', 'baz' ) );
-
-		$entity1->setDescription( 'en', 'onoez' );
-
-		$expected = new EntityDiff( array(
-			'aliases' => new Diff( array(
-				'en' => new Diff( array(
-					new DiffOpAdd( 'foo' ),
-					new DiffOpAdd( 'bar' ),
-				), false ),
-				'de' => new Diff( array(
-					new DiffOpRemove( 'bah' ),
-				), false ),
-				'nl' => new Diff( array(
-					new DiffOpAdd( 'baz' ),
-				), false )
-			) ),
-			'description' => new Diff( array(
-				'en' => new DiffOpAdd( 'onoez' ),
-			) ),
-		) );
-
-		$argLists[] = array( $entity0, $entity1, $expected );
-
-		$entity0 = clone $entity1;
-		$entity1 = clone $entity1;
-		$expected = clone $emptyDiff;
-
-		$argLists[] = array( $entity0, $entity1, $expected );
-
-		$entity0 = $this->getNewEmpty();
-
-		$entity1 = $this->getNewEmpty();
-		$entity1->setLabel( 'en', 'onoez' );
-
-		$expected = new EntityDiff( array(
-			'label' => new Diff( array(
-				'en' => new DiffOpAdd( 'onoez' ),
-			) ),
-		) );
-
-		$argLists[] = array( $entity0, $entity1, $expected );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider diffProvider
-	 * @param Entity $entity0
-	 * @param Entity $entity1
-	 * @param EntityDiff $expected
-	 */
-	public function testDiffEntities( Entity $entity0, Entity $entity1, EntityDiff $expected ) {
-		$actual = $entity0->getDiff( $entity1 );
-
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Diff\EntityDiff', $actual );
-		$this->assertSameSize( $expected, $actual );
-
-		// TODO: equality check
-		// (simple serialize does not work, since the order is not relevant, and not only on the top level)
-	}
 
 	/**
 	 * @dataProvider instanceProvider

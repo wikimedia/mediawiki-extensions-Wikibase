@@ -1,6 +1,27 @@
 # Wikibase DataModel release notes
 
-## Version 3.1 (dev)
+## Version 4.0 (dev)
+
+#### Breaking changes
+
+The services that resided in this component have been moved to the new
+Wikibase DataModel Services library. These symbols have been removed:
+
+* `Entity::getDiff` and `Entity::patch`
+* `EntityIdParser` and derivatives
+* `EntityDiffer` and associated services
+* `EntityPatcher` and associated services
+* `EntityDiff` and derivatives
+* `ItemLookup` and `ItemNotFoundException`
+* `PropertyLookup` and `PropertyNotFoundException`
+* `PropertyDataTypeLookup`
+* `BestStatementsFinder`
+* `ByPropertyIdGrouper`
+* `StatementGuidParser` and alias `ClaimGuidParser`
+* `StatementGuidParsingException` and alias `ClaimGuidParsingException`
+* `StatementList::getBestStatementPerProperty`
+
+#### Additions
 
 * Added `DerivedPropertyValueSnak`
 
