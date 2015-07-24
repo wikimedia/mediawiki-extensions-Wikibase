@@ -45,7 +45,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
 	"wikibase-replicationnote": "Budite svjesni da može potrajati nekoliko minuta dok izmjene budu vidljive na svim wiki strancima",
-	"wikibase-watchlist-show-changes-pref": "Prikaži izmjene Wikipodataka kod vašeg spiska praćenih članaka",
+	"wikibase-watchlist-show-changes-pref": "Prikaži {{WBREPONAME}} izmjene na spisku praćenih članaka",
 	"wikibase-error-serialize-error": "Neuspješna serijalizacija podataka",
 	"wikibase-error-invalid-entity-id": "Unešen ID nije poznat u sistemu. Koristite validan ID.",
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",

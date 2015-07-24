@@ -319,7 +319,7 @@
 	"wikibase-item-summary-wbsetqualifier-update": "Zmieniono {{PLURAL:$1|kwalifikator|kwalifikatory|kwalifikatorów}}",
 	"wikibase-item-summary-wbremovequalifiers-remove": "Usunięto {{PLURAL:$1|kwalifikator|kwalifikatory|kwalifikatorów}}",
 	"wikibase-item-summary-wbremovereferences-remove": "Usunięto {{PLURAL:$3|odnośnik|odnośniki|odnośników}} ze stwierdzenia",
-	"wikibase-item-summary-wbmergeitems-from": "Połączony element z $3",
+	"wikibase-item-summary-wbmergeitems-from": "Połączono element z $3",
 	"wikibase-item-summary-wbmergeitems-to": "Połączony element do $3",
 	"wikibase-property-summary-wbcreate-new": "Utworzono nową właściwość",
 	"wikibase-property-summary-wbcreateclaim-create": "Utworzono stwierdzenie",
