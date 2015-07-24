@@ -16,6 +16,24 @@
       "revId": "c6c4a5649ac1752a001bf24d65c58934ecb66c8e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_19ba6c6d",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-24T18:54:07Z",
+      "side": 1,
+      "message": "will move to wikibaserepo (or somewhere)",
+      "parentUuid": "8ec42329_b98318ac",
+      "revId": "c6c4a5649ac1752a001bf24d65c58934ecb66c8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
