@@ -25,6 +25,7 @@ use SkinTemplate;
 use SpecialSearch;
 use Title;
 use User;
+use LogPage;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
@@ -293,6 +294,35 @@ final class RepoHooks {
 
 		$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
+
+		if( $logEntry && $logEntry->getType() == 'suppress' ) {
+			$log = new LogPage( $logEntry->getType() );
+			if ( $log->isRestricted() ) {
+				/*
+				 * Create a fake recent change entry to signify change but
+				 * not give out any data about it.
+				 * Only add our own entry if the original one was restricted.
+				 * We need this to track suppressed deletes.
+				 * See https://phabricator.wikimedia.org/T105427
+				 */
+				$title = $wikiPage->getTitle();
+				// Fake anonymous user
+				$fakeUser = new User();
+				$fakeUser->setName( "127.0.0.1" );
+				RecentChange::notifyLog(
+						$logEntry->getTimestamp(),
+						$title,
+						$fakeUser,
+						"",
+						"127.0.0.1",
+						"",
+						"",
+						$title,
+						"",
+						""
+				);
+			}
+		}
 
 		return true;
 	}
