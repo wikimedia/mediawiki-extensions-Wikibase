@@ -75,8 +75,6 @@ class LibSerializerFactoryTest extends \MediaWikiTestCase {
 	public function newUnserializerProvider() {
 		$names = array(
 			'ClaimUnserializer',
-			'PropertyUnserializer',
-			'ItemUnserializer',
 		);
 
 		return array_map( function( $name ) {
@@ -102,9 +100,6 @@ class LibSerializerFactoryTest extends \MediaWikiTestCase {
 			'SnakSerializer',
 			'ClaimSerializer',
 			'ClaimsSerializer',
-			'PropertySerializer',
-			'ItemSerializer',
-			'AliasSerializer',
 		);
 
 		return array_map( function( $name ) {
