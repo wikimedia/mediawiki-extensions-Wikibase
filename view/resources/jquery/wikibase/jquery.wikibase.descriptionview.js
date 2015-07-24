@@ -165,12 +165,12 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 			$input.val( descriptionText );
 		}
 
-		if( $.fn.inputautoexpand ) {
-			$input.inputautoexpand( {
-				expandHeight: true,
-				suppressNewLine: true
-			} );
-		}
+//		if( $.fn.inputautoexpand ) {
+//			$input.inputautoexpand( {
+//				expandHeight: true,
+//				suppressNewLine: true
+//			} );
+//		}
 
 		this.$text.empty().append( $input );
 	},
