@@ -5,6 +5,8 @@ namespace Wikibase\Test\Repo\Api;
 use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -502,6 +504,144 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$data = $result->getResultData();
 		$this->assertArrayHasKey( 'FOO', $data['entities'] );
+	}
+
+	public function provideTestAddEntityRevisionFallback() {
+		return array(
+			array(
+				false,
+				array(
+					'entities' => array(
+						'Q123101' => array(
+							'id' => 'Q123101',
+							'type' => 'item',
+							'labels' => array(
+								'de-formal' => array(
+									'language' => 'de',
+									'value' => 'Oslo-de',
+								),
+								'es' => array(
+									'language' => 'en',
+									'value' => 'Oslo-en',
+								),
+								'qug' => array(
+									'language' => 'en',
+									'value' => 'Oslo-en',
+								),
+								'zh-my' => array(
+									'language' => 'en',
+									'value' => 'Oslo-en',
+								),
+							),
+							'descriptions' => array(
+								'es' => array(
+									'language' => 'es',
+									'value' => 'desc-es',
+								),
+								'qug' => array(
+									'language' => 'es',
+									'value' => 'desc-es',
+								),
+								'zh-my' => array(
+									'language' => 'zh-my',
+									'value' => 'desc-zh-sg',
+									'source-language' => 'zh-sg',
+								),
+							),
+						),
+						'_element' => 'entity',
+					)
+				),
+			),
+			array(
+				true,
+				array(
+					'entities' => array(
+						array(
+							'id' => 'Q123101',
+							'type' => 'item',
+							'labels' => array(
+								array(
+									'language' => 'de',
+									'value' => 'Oslo-de',
+									'for-language' => 'de-formal'
+								),
+								array(
+									'language' => 'en',
+									'value' => 'Oslo-en',
+									'for-language' => 'es',
+								),
+								array(
+									'language' => 'en',
+									'value' => 'Oslo-en',
+									'for-language' => 'qug'
+								),
+								array(
+									'language' => 'en',
+									'value' => 'Oslo-en',
+									'for-language' => 'zh-my'
+								),
+								'_element' => 'label',
+							),
+							'descriptions' => array(
+								array(
+									'language' => 'es',
+									'value' => 'desc-es',
+								),
+								array(
+									'language' => 'es',
+									'value' => 'desc-es',
+									'for-language' => 'qug'
+								),
+								array(
+									'language' => 'zh-my',
+									'value' => 'desc-zh-sg',
+									'source-language' => 'zh-sg',
+								),
+								'_element' => 'description',
+							),
+						),
+						'_element' => 'entity',
+					)
+				),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideTestAddEntityRevisionFallback
+	 */
+	public function testAddEntityRevisionFallback( $indexedMode, $expected  ) {
+		$item = new Item( new ItemId( 'Q123101' ) );
+		$item->getFingerprint()->setLabel( 'de', 'Oslo-de' );
+		$item->getFingerprint()->setLabel( 'en', 'Oslo-en' );
+		$item->getFingerprint()->setDescription( 'es', 'desc-es' );
+		$item->getFingerprint()->setDescription( 'zh-sg', 'desc-zh-sg' );
+		$entityRevision = new EntityRevision( $item );
+
+		$fallbackChainFactory = new LanguageFallbackChainFactory();
+		$languages = array(
+			'de-formal' => $fallbackChainFactory->newFromLanguageCode( 'de-formal' ),
+			'es' => $fallbackChainFactory->newFromLanguageCode( 'es' ),
+			'qug' => $fallbackChainFactory->newFromLanguageCode( 'qug' ),
+			'zh-my' => $fallbackChainFactory->newFromLanguageCode( 'zh-my' ),
+		);
+
+		$props = array( 'labels', 'descriptions' );
+
+		$options = new SerializationOptions();
+		$options->setIndexTags( $indexedMode );
+		$options->setLanguages( $languages );
+		$options->setOption( EntitySerializer::OPT_PARTS, $props );
+
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result, $options, $indexedMode );
+		$resultBuilder->addEntityRevision( null, $entityRevision, $options, $props );
+
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
+
+		$this->assertEquals( $expected, $data );
 	}
 
 	public function testAddEntityRevisionWithSiteLinksFilter() {
