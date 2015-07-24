@@ -2,9 +2,9 @@
 
 namespace Wikibase\DataModel\Tests\Claim;
 
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**

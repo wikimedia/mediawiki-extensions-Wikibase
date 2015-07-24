@@ -2,9 +2,8 @@
 
 namespace Wikibase\DataModel\Services\Statement;
 
-use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
