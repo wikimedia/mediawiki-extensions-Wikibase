@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_25985d1e",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-07-24T09:33:00Z",
+      "side": 1,
+      "message": "I would suggest to create two methods instead of passing a bool",
+      "revId": "40daa1b0730223012e29b15e0d0e918079c3ec7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
