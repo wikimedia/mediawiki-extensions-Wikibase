@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b98318ac",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-24T18:53:05Z",
+      "side": 1,
+      "message": "Looks like everything before \"$dumper \u003d\" belongs in a factory.",
+      "revId": "c6c4a5649ac1752a001bf24d65c58934ecb66c8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
