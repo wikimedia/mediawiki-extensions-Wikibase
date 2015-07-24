@@ -273,6 +273,22 @@
 	}
 
 	/**
+	 *  This methods detects whether the site was loaded from "history cache"
+	 *  and triggers a reload to prevent the browser to display an old state
+	 */
+	function attachHistoryCacheCleaning() {
+		if ( window.name === 'reload' ) {
+	        window.name = "";
+	        location.reload();
+	    }
+
+		$( window ).on( 'beforeunload', function() {
+			window.name = 'reload'; 
+		} );
+	}
+	attachHistoryCacheCleaning();
+
+	/**
 	 * @param {jQuery} $entityview
 	 * @param {jQuery} $origin
 	 * @param {string} gravity
