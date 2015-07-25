@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_2c936105",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-07-25T01:03:01Z",
+      "side": 1,
+      "message": "@param int $precision constant like TimeValue::PRECISION_SECOND",
+      "revId": "764598751211591d3ca730f2c0ba5ace481261ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ccfc1d3e",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-07-25T01:03:01Z",
+      "side": 1,
+      "message": "|null",
+      "revId": "764598751211591d3ca730f2c0ba5ace481261ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ec6eb9fc",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-07-25T01:03:01Z",
+      "side": 1,
+      "message": "TODO understand precision: I don\u0027t fully know the semantics of precision to validate this part of the patch.",
+      "revId": "764598751211591d3ca730f2c0ba5ace481261ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_38c9697c",
+        "filename": "repo/includes/rdf/DateTimeValueCleaner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-07-25T01:03:01Z",
+      "side": 1,
+      "message": "TODO understand precision",
+      "revId": "764598751211591d3ca730f2c0ba5ace481261ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f89201ff",
+        "filename": "repo/includes/rdf/JulianDateTimeValueCleaner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-07-25T01:03:01Z",
+      "side": 1,
+      "message": "TODO understand precision",
+      "revId": "764598751211591d3ca730f2c0ba5ace481261ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

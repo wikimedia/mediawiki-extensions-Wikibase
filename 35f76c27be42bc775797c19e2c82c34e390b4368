@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ec98f91f",
+        "filename": "repo/includes/rdf/JulianDateTimeValueCleaner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-07-25T01:03:01Z",
+      "side": 0,
+      "message": "@param int $precision constant like TimeValue::PRECISION_SECOND",
+      "revId": "35f76c27be42bc775797c19e2c82c34e390b4368",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
