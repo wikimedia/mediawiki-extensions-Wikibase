@@ -3,7 +3,8 @@
 		"authors": [
 			"Milicevic01",
 			"Rancher",
-			"Милан Јелисавчић"
+			"Милан Јелисавчић",
+			"Srdjan m"
 		]
 	},
 	"wikibase-desc": "Складиште структуираних података",
@@ -46,6 +47,7 @@
 	"wikibase-entitytermsforlanguageview-input-help-message": "Унесите назив овог ентитета, кратак опис и алтернативне називе у $1.",
 	"wikibase-statements": "Изјаве",
 	"wikibase-terms": "На другим језицима",
+	"wikibase-sitelinks": "Списак страна повезаних са овом ставком",
 	"wikibase-sitelinks-empty": "Ниједна страница није повезана са овом ставком.",
 	"wikibase-sitelinks-input-help-message": "Поставите везу према страници која се односи на ову ставку.",
 	"wikibase-sitelinks-special": "Други сајтови",
@@ -68,6 +70,7 @@
 	"wikibase-aliases-empty": "Ниједан псеудоним није дефинисан.",
 	"wikibase-propertypage-datatype": "Тип податка",
 	"wikibase-claimview-snak-new-tooltip": "После навођења својства можете унети одговарајућу вредност. Ако својство нема одређену вредност или тачна вредност није позната, уместо навођења прилагођене вредности можете изабрати алтернативне вредности кликом на икону поред поља за унос вредности.",
+	"wikibase-statementview-rank-normal": "Нормални ранг",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|референца|референце}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Једна референца|$1 референци}} није {{PLURAL:$1|сачуван|сачувано}}",
 	"wikibase-snakview-property-input-placeholder": "својство",

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Milicevic01",
-			"Macofe"
+			"Macofe",
+			"Srdjan m"
 		]
 	},
 	"wikibase-desc": "Skladište struktuiranih podataka",
@@ -64,6 +65,7 @@
 	"wikibase-aliases-empty": "Nijedan pseudonim nije definisan.",
 	"wikibase-propertypage-datatype": "Tip podatka",
 	"wikibase-claimview-snak-new-tooltip": "Posle navođenja svojstva možete uneti odgovarajuću vrednost. Ako svojstvo nema određenu vrednost ili tačna vrednost nije poznata, umesto navođenja prilagođene vrednosti možete izabrati alternativne vrednosti klikom na ikonu pored polja za unos vrednosti.",
+	"wikibase-statementview-rank-normal": "Normalni rang",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referenca|reference}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Jedna referenca|$1 referenci}} nije {{PLURAL:$1|sačuvan|sačuvano}}",
 	"wikibase-snakview-property-input-placeholder": "svojstvo",
