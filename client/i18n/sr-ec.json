@@ -4,7 +4,8 @@
 			"Milicevic01",
 			"Nikola Smolenski",
 			"Rancher",
-			"Милан Јелисавчић"
+			"Милан Јелисавчић",
+			"Srdjan m"
 		]
 	},
 	"wikibase-client-desc": "Клијент за проширење Викибаза",
@@ -51,8 +52,7 @@
 	"wikibase-watchlist-show-changes-pref": "Прикажи измене на Википодацима у списку надгледања",
 	"wikibase-error-serialize-error": "Неуспешна серијализација података",
 	"wikibase-error-invalid-entity-id": "Унети идентификатор је непознат систему. Молимо унесите важећи ИД.",
-	"special-unconnectedpages": "Странице које нису повезане са ставкама",
-	"wikibase-unconnectedpages-legend": "Могућности неповезаних страница",
+	"unconnectedpages": "Странице које нису повезане са ставкама",
 	"wikibase-unconnectedpages-page": "Почни списка резултата страницом:",
 	"wikibase-unconnectedpages-submit": "Иди",
 	"wikibase-unconnectedpages-invalid-language": "„$1“ није исправан код за језик.",
@@ -61,5 +61,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|међујезичка веза|међујезичких веза}} на страници)",
 	"wikibase-pageinfo-entity-id": "ИД ставке на Википодацима",
 	"wikibase-pageinfo-entity-id-none": "Нема",
-	"wikibase-otherprojects": "Остали пројекти"
+	"wikibase-otherprojects": "Остали пројекти",
+	"wikibase-otherprojects-beta-message": "Остали пројекти на бочној траци",
+	"wikibase-otherprojects-beta-description": "Додаје одломак „{{int:wikibase-otherprojects}}“ на бочној траци с везама на остале Викимедијине пројекте на основу података из Викибазе."
 }

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Milicevic01"
+			"Milicevic01",
+			"Srdjan m"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Vikibaza",
@@ -41,8 +42,7 @@
 	"wikibase-watchlist-show-changes-pref": "Prikaži izmene na Vikipodacima u spisku nadgledanja",
 	"wikibase-error-serialize-error": "Neuspešna serijalizacija podataka.",
 	"wikibase-error-invalid-entity-id": "Uneti identifikator je nepoznat sistemu. Molimo unesite važeći ID.",
-	"special-unconnectedpages": "Stranice koje nisu povezane sa stavkama",
-	"wikibase-unconnectedpages-legend": "Mogućnosti nepovezanih stranica",
+	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"wikibase-unconnectedpages-page": "Počni spiska rezultata stranicom:",
 	"wikibase-unconnectedpages-submit": "Idi",
 	"wikibase-unconnectedpages-invalid-language": "„$1“ nije ispravan kod za jezik.",
@@ -51,5 +51,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|međujezička veza|međujezičkih veza}} na stranici)",
 	"wikibase-pageinfo-entity-id": "ID stavke na Vikipodacima",
 	"wikibase-pageinfo-entity-id-none": "Nema",
-	"wikibase-otherprojects": "Ostali projekti"
+	"wikibase-otherprojects": "Ostali projekti",
+	"wikibase-otherprojects-beta-message": "Ostali projekti na bočnoj traci",
+	"wikibase-otherprojects-beta-description": "Dodaje odlomak „{{int:wikibase-otherprojects}}“ na bočnoj traci s vezama na ostale Vikimedijine projekte na osnovi podataka s projekta {{WBREPONAME}}."
 }
