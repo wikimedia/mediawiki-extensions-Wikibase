@@ -144,7 +144,7 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 
 		$expected = array_merge( $base, $extra );
 
-		$this->assertGreaterThanOrEqual( 4, count( $options->getOptions() ) );
+		$this->assertGreaterThanOrEqual( 3, count( $options->getOptions() ) );
 
 		foreach ( $expected as $key => $value ) {
 			if ( $value === null ) {
@@ -178,7 +178,7 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 
 		$expected = array_merge( $base, $extra );
 
-		$this->assertGreaterThanOrEqual( 4, count( $options->getOptions() ) );
+		$this->assertGreaterThanOrEqual( 3, count( $options->getOptions() ) );
 
 		foreach ( $expected as $key => $value ) {
 			if ( $value === null ) {
@@ -320,42 +320,6 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 					'sr' => LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS,
 				),
 			),
-		);
-	}
-
-	/**
-	 * @dataProvider provideIdKeyMode
-	 */
-	public function testSetIdKeyMode( $mode ) {
-		$options = new SerializationOptions();
-		$options->setIdKeyMode( $mode );
-
-		$this->assertEquals( $mode & SerializationOptions::ID_KEYS_LOWER, $options->shouldUseLowerCaseIdsAsKeys() );
-		$this->assertEquals( $mode & SerializationOptions::ID_KEYS_UPPER, $options->shouldUseUpperCaseIdsAsKeys() );
-	}
-
-	public function provideIdKeyMode() {
-		return array(
-			'lower' => array( SerializationOptions::ID_KEYS_LOWER ),
-			'upper' => array( SerializationOptions::ID_KEYS_UPPER ),
-			'both' => array( SerializationOptions::ID_KEYS_BOTH ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideBadIdKeyMode
-	 */
-	public function testBadSetIdKeyMode( $mode ) {
-		$this->setExpectedException( '\InvalidArgumentException' );
-
-		$options = new SerializationOptions();
-		$options->setIdKeyMode( $mode );
-	}
-
-	public function provideBadIdKeyMode() {
-		return array(
-			'none' => array( 0 ),
-			'badr' => array( 17 ),
 		);
 	}
 
