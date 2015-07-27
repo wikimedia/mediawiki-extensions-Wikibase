@@ -114,7 +114,7 @@ class GetClaims extends ApiBase {
 		}
 
 		$claims = $this->getClaims( $entity, $guid );
-		$this->resultBuilder->addClaims( $claims, null );
+		$this->resultBuilder->addClaims( $claims, null, $params['props'] );
 	}
 
 	private function validateParameters( array $params ) {
@@ -254,6 +254,7 @@ class GetClaims extends ApiBase {
 					'references',
 				),
 				self::PARAM_DFLT => 'references',
+				self::PARAM_ISMULTI => true,
 			),
 			'ungroupedlist' => array(
 				self::PARAM_TYPE => 'boolean',
