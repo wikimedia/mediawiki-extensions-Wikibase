@@ -124,33 +124,6 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testGetBestStatementPerProperty() {
-		$list = new StatementList(
-			$this->getStatement( 1, 'one', Statement::RANK_PREFERRED ),
-			$this->getStatement( 1, 'two', Statement::RANK_NORMAL ),
-			$this->getStatement( 1, 'three', Statement::RANK_PREFERRED ),
-
-			$this->getStatement( 2, 'four', Statement::RANK_DEPRECATED ),
-
-			$this->getStatement( 3, 'five', Statement::RANK_DEPRECATED ),
-			$this->getStatement( 3, 'six', Statement::RANK_NORMAL ),
-
-			$this->getStatement( 4, 'seven', Statement::RANK_PREFERRED )
-		);
-
-		$this->assertEquals(
-			array(
-				$this->getStatement( 1, 'one', Statement::RANK_PREFERRED ),
-				$this->getStatement( 1, 'three', Statement::RANK_PREFERRED ),
-
-				$this->getStatement( 3, 'six', Statement::RANK_NORMAL ),
-
-				$this->getStatement( 4, 'seven', Statement::RANK_PREFERRED ),
-			),
-			$list->getBestStatementPerProperty()->toArray()
-		);
-	}
-
 	public function testGetUniqueMainSnaksReturnsListWithoutDuplicates() {
 		$list = new StatementList(
 			$this->getStatementWithSnak( 1, 'foo' ),

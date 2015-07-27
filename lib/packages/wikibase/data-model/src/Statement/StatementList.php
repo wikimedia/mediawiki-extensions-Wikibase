@@ -59,18 +59,6 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
-	 * Returns the best statements per property.
-	 * The best statements are those with the highest rank for a particular property.
-	 * Deprecated ranks are never included.
-	 *
-	 * @return self
-	 */
-	public function getBestStatementPerProperty() {
-		$bestStatementsFinder = new BestStatementsFinder( $this );
-		return new self( $bestStatementsFinder->getBestStatementsPerProperty() );
-	}
-
-	/**
 	 * Returns the property ids used by the statements.
 	 * The keys of the returned array hold the serializations of the property ids.
 	 *

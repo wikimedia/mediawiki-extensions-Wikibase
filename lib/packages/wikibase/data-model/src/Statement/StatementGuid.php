@@ -65,7 +65,7 @@ class StatementGuid implements Comparable {
 		}
 
 		return $target instanceof self
-			&& $target->serialization === $this->serialization;
+		&& $target->serialization === $this->serialization;
 	}
 
 	public function __toString() {

@@ -27,8 +27,6 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 				// Full qualified aliases go here.
 				'Wikibase\DataModel\Claim\Claim',
 				'Wikibase\DataModel\Claim\ClaimGuid',
-				'Wikibase\DataModel\Claim\ClaimGuidParser',
-				'Wikibase\DataModel\Claim\ClaimGuidParsingException',
 				'Wikibase\DataModel\StatementListProvider'
 			)
 		);
