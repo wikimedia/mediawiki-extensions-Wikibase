@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Api;
 
 use DataValues\NumberValue;
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use FormatJson;
 use UsageException;
@@ -19,9 +20,8 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -146,9 +146,9 @@ class SetClaimTest extends WikibaseApiTestCase {
 				// Simply reorder the qualifiers by putting the first qualifier to the end. This is
 				// supposed to be done in the serialized representation since changing the actual
 				// object might apply intrinsic sorting.
-				$serializerFactory = new LibSerializerFactory();
-				$serializer = $serializerFactory->newClaimSerializer( new SerializationOptions() );
-				$serializedClaim = $serializer->getSerialized( $statement );
+				$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+				$statementSerializer = $serializerFactory->newStatementSerializer();
+				$serializedClaim = $statementSerializer->serialize( $statement );
 				$firstPropertyId = array_shift( $serializedClaim['qualifiers-order'] );
 				array_push( $serializedClaim['qualifiers-order'], $firstPropertyId );
 				$this->makeRequest( $serializedClaim, $itemId, 1, 'reorder qualifiers' );
@@ -296,15 +296,15 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$baserevid = null,
 		$error = null
 	) {
-		$serializerFactory = new LibSerializerFactory();
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$statementSerializer = $serializerFactory->newStatementSerializer();
+		$statementDeserializer = WikibaseRepo::getDefaultInstance()->getStatementDeserializer();
 
 		if ( $claim instanceof Statement ) {
-			$serializer = $serializerFactory->newClaimSerializer( new SerializationOptions() );
-			$serializedClaim = $serializer->getSerialized( $claim );
+			$serializedClaim = $statementSerializer->serialize( $claim );
 		} else {
-			$unserializer = $serializerFactory->newClaimUnserializer( new SerializationOptions() );
 			$serializedClaim = $claim;
-			$claim = $unserializer->newFromSerialization( $serializedClaim );
+			$claim = $statementDeserializer->deserialize( $serializedClaim );
 		}
 
 		$params = array(
