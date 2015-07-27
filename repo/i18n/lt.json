@@ -37,6 +37,7 @@
 	"wikibase-description-empty": "Dar nenurodytas aprašymas",
 	"wikibase-description-edit-placeholder": "įvesti aprašą",
 	"wikibase-description-edit-placeholder-language-aware": "įveskitą aprašymą $1 kalba",
+	"wikibase-aliases-edit-placeholder-language-aware": "įveskite alternatyvių pavadinimų $1",
 	"wikibase-diffview-reference": "išnaša",
 	"wikibase-diffview-rank": "rangas",
 	"wikibase-diffview-rank-preferred": "Pageidautinas reitingas",

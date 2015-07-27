@@ -3,10 +3,12 @@
 		"authors": [
 			"Ilnur efende",
 			"Умар",
-			"Derslek"
+			"Derslek",
+			"Ильнар"
 		]
 	},
 	"tooltip-t-wikibase": "Үзара бәйләнгән мәгълүматләр репозиториясе элементларына сылтама",
+	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элементы үзгәртелде",
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} мәгълүмат элементы",
 	"wikibase-editlinks": "Сылтамалар өстәү",
 	"wikibase-editlinkstitle": "Башка телләргә сылтамалар өстәү",
