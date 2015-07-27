@@ -208,6 +208,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
 											'snaktype' => 'somevalue',
 											'property' => 'P65',
+											'datatype' => 'DtIdFor_P65',
 										),
 									),
 								),
@@ -222,13 +223,15 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 											'P65' => array(
 												array(
 													'snaktype' => 'somevalue',
-													'property' => 'P65'
+													'property' => 'P65',
+													'datatype' => 'DtIdFor_P65',
 												)
 											),
 											'P68' => array(
 												array(
 													'snaktype' => 'somevalue',
-													'property' => 'P68'
+													'property' => 'P68',
+													'datatype' => 'DtIdFor_P68',
 												)
 											),
 										),
@@ -341,6 +344,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 											'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
 											'snaktype' => 'somevalue',
 											'property' => 'P65',
+											'datatype' => 'DtIdFor_P65',
 										),
 										'_element' => 'qualifiers',
 									),
@@ -359,7 +363,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 												'id' => 'P65',
 												array(
 													'snaktype' => 'somevalue',
-													'property' => 'P65'
+													'property' => 'P65',
+													'datatype' => 'DtIdFor_P65',
 												),
 												'_element' => 'snak',
 											),
@@ -367,7 +372,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 												'id' => 'P68',
 												array(
 													'snaktype' => 'somevalue',
-													'property' => 'P68'
+													'property' => 'P68',
+													'datatype' => 'DtIdFor_P68',
 												),
 												'_element' => 'snak',
 											),
@@ -1191,6 +1197,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 								'mainsnak' => array(
 									'snaktype' => 'somevalue',
 									'property' => 'P12',
+									'datatype' => 'DtIdFor_P12',
 								),
 								'type' => 'statement',
 								'rank' => 'normal',

@@ -3,7 +3,7 @@
 	<claims>
 		<property id="$propertyIdUnderTest">
 			<claim _idx="0" type="statement" id="$itemIdUnderTest$1111AAAA-43cb-ed6d-3adb-760e85bd17ee" rank="normal">
-				<mainsnak snaktype="novalue" property="$propertyIdUnderTest"/>
+				<mainsnak snaktype="novalue" property="$propertyIdUnderTest" datatype="string"/>
 				<qualifiers/>
 				<qualifiers-order/>
 			</claim>
