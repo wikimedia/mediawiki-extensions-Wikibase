@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Api;
 
 use ApiResult;
-use InvalidArgumentException;
 use Revision;
 use SiteStore;
 use Status;
@@ -21,6 +20,7 @@ use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikimedia\Assert\Assert;
 
 /**
  * Builder for Api Results
@@ -85,21 +85,15 @@ class ResultBuilder {
 	 * @param SiteStore $siteStore
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param bool $isRawMode when special elements such as '_element' are needed by the formatter.
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		$result,
+		ApiResult $result,
 		EntityTitleLookup $entityTitleLookup,
 		SerializerFactory $serializerFactory,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $dataTypeLookup,
 		$isRawMode
 	) {
-		if ( !$result instanceof ApiResult ) {
-			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
-		}
-
 		$this->result = $result;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
@@ -114,17 +108,15 @@ class ResultBuilder {
 	 * @since 0.5
 	 *
 	 * @param $success bool|int|null
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function markSuccess( $success = true ) {
 		$value = (int)$success;
 
-		if ( $value !== 1 && $value !== 0 ) {
-			throw new InvalidArgumentException(
-				'$success must evaluate to either 1 or 0 when casted to integer'
-			);
-		}
+		Assert::parameter(
+			$value == 1 || $value == 0,
+			'$success',
+			'$success must evaluate to either 1 or 0 when casted to integer'
+		);
 
 		$this->result->addValue( null, 'success', $value );
 	}
@@ -146,13 +138,11 @@ class ResultBuilder {
 	 * @param $name string
 	 * @param $values array
 	 * @param string $tag tag name to use for elements of $values
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function setList( $path, $name, array $values, $tag ) {
 		$this->checkPathType( $path );
-		$this->checkNameIsString( $name );
-		$this->checkTagIsString( $tag );
+		Assert::parameterType( 'string', $name, '$name' );
+		Assert::parameterType( 'string', $tag, '$tag' );
 
 		if ( $this->isRawMode ) {
 			// Unset first, so we don't make the tag name an actual value.
@@ -180,12 +170,10 @@ class ResultBuilder {
 	 * @param $path array|string|null
 	 * @param $name string
 	 * @param $value mixed
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function setValue( $path, $name, $value ) {
 		$this->checkPathType( $path );
-		$this->checkNameIsString( $name );
+		Assert::parameterType( 'string', $name, '$name' );
 		$this->checkValueIsNotList( $value );
 
 		$this->result->addValue( $path, $name, $value );
@@ -210,14 +198,11 @@ class ResultBuilder {
 	 * May be ignored even if given, based on $this->result->getIsRawMode().
 	 * @param $value mixed
 	 * @param string $tag tag name to use for $value in indexed mode
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function appendValue( $path, $key, $value, $tag ) {
 		$this->checkPathType( $path );
 		$this->checkKeyType( $key );
-		$this->checkTagIsString( $tag );
-
+		Assert::parameterType( 'string', $tag, '$tag' );
 		$this->checkValueIsNotList( $value );
 
 		if ( $this->isRawMode ) {
@@ -230,61 +215,35 @@ class ResultBuilder {
 
 	/**
 	 * @param array|string|null $path
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	private function checkPathType( $path ) {
-		if ( is_string( $path ) ) {
-			$path = array( $path );
-		}
-
-		if ( !is_array( $path ) && $path !== null ) {
-			throw new InvalidArgumentException( '$path must be an array (or null)' );
-		}
-	}
-
-	/**
-	 * @param string $name
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function checkNameIsString( $name ) {
-		if ( !is_string( $name ) ) {
-			throw new InvalidArgumentException( '$name must be a string' );
-		}
+		Assert::parameter(
+			is_string( $path ) || is_array( $path ) || is_null( $path ),
+			'$path',
+			'$path must be an array (or null)'
+		);
 	}
 
 	/**
 	 * @param $key int|string|null the key to use when appending, or null for automatic.
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	private function checkKeyType( $key ) {
-		if ( $key !== null && !is_string( $key ) && !is_int( $key ) ) {
-			throw new InvalidArgumentException( '$key must be a string, int, or null' );
-		}
-	}
-
-	/**
-	 * @param string $tag tag name to use for elements of $values
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function checkTagIsString( $tag ) {
-		if ( !is_string( $tag ) ) {
-			throw new InvalidArgumentException( '$tag must be a string' );
-		}
+		Assert::parameter(
+			is_string( $key ) || is_int( $key ) || is_null( $key ),
+			'$key',
+			'$key must be an array (or null)'
+		);
 	}
 
 	/**
 	 * @param mixed $value
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	private function checkValueIsNotList( $value ) {
-		if ( is_array( $value ) && isset( $value[0] ) ) {
-			throw new InvalidArgumentException( '$value must not be a list' );
-		}
+		Assert::parameter(
+			!( is_array( $value ) && isset( $value[0] ) ),
+			'$value',
+			'$value must not be a list'
+		);
 	}
 
 	/**
