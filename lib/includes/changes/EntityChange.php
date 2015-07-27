@@ -309,7 +309,7 @@ class EntityChange extends DiffChange {
 		// FIXME: the change row system needs to be reworked to either allow for sane injection
 		// or to avoid this kind of configuration dependent tasks.
 		if ( defined( 'WB_VERSION' ) ) {
-			return WikibaseRepo::getDefaultInstance()->getInternalStatementDeserializer();
+			return WikibaseRepo::getDefaultInstance()->getStatementDeserializer();
 		} elseif ( defined( 'WBC_VERSION' ) ) {
 			return WikibaseClient::getDefaultInstance()->getInternalStatementDeserializer();
 		} else {
