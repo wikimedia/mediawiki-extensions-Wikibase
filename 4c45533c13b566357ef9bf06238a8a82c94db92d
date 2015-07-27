@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e6e1f093",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-07-27T06:45:36Z",
+      "side": 1,
+      "message": "These messages are also used for Special:NewProperty, but \"item\" was used for consistency with wikibase-newentity-label and wikibase-newentity-description.",
+      "revId": "4c45533c13b566357ef9bf06238a8a82c94db92d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_46f1e464",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-07-27T06:45:36Z",
+      "side": 1,
+      "message": "Long line?",
+      "revId": "4c45533c13b566357ef9bf06238a8a82c94db92d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
