@@ -582,11 +582,23 @@ class ResultBuilder {
 	 *
 	 * @param Claim[] $claims the labels to set in the result
 	 * @param array|string $path where the data is located
+	 * @param array|string $props a list of fields to include, or "all"
 	 */
-	public function addClaims( array $claims, $path ) {
+	public function addClaims( array $claims, $path, $props = 'all' ) {
 		$claimsSerializer = $this->libSerializerFactory->newClaimsSerializer( $this->getOptions() );
 
 		$values = $claimsSerializer->getSerialized( new Claims( $claims ) );
+
+		if ( is_array( $props ) && !in_array( 'references', $props ) ) {
+			$values = $this->modifier->modifyUsingCallback(
+				$values,
+				'*/*',
+				function ( $array ) {
+					unset( $array['references'] );
+					return $array;
+				}
+			);
+		}
 
 		// HACK: comply with ApiResult::setIndexedTagName
 		$tag = isset( $values['_element'] ) ? $values['_element'] : 'claim';
