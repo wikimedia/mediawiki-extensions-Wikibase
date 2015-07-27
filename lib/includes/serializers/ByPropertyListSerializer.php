@@ -81,17 +81,8 @@ class ByPropertyListSerializer extends SerializerObject {
 				$serializedObjects['id'] = $propertyId->getSerialization();
 				$serialization[] = $serializedObjects;
 			} else {
-				$key = $propertyId->getSerialization();
-
-				if ( $this->getOptions()->shouldUseUpperCaseIdsAsKeys() ) {
-					$key = strtoupper( $key );
-					$serialization[$key] = $serializedObjects;
-				}
-
-				if ( $this->getOptions()->shouldUseLowerCaseIdsAsKeys() ) {
-					$key = strtolower( $key );
-					$serialization[$key] = $serializedObjects;
-				}
+				$key = strtoupper( $propertyId->getSerialization() );
+				$serialization[$key] = $serializedObjects;
 			}
 		}
 

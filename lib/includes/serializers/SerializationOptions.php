@@ -21,18 +21,6 @@ class SerializationOptions {
 
 	/**
 	 * @since 0.5
-	 * @const key for the entityIdKeyMode option, a  bit field determining whether to use
-	 *        upper case entities IDs as keys in the serialized structure, or lower case
-	 *        IDs, or both.
-	 */
-	const OPT_ID_KEY_MODE = 'entityIdKeyMode';
-
-	const ID_KEYS_UPPER = 1;
-	const ID_KEYS_LOWER = 2;
-	const ID_KEYS_BOTH = 3;
-
-	/**
-	 * @since 0.5
 	 * @const key for the indexTags option, a boolean indicating whether associative or indexed
 	 *        arrays should be used for output. This allows indexed mode to be forced for used
 	 *        with ApiResults in XML model.
@@ -82,7 +70,6 @@ class SerializationOptions {
 	public function __construct( array $options = array() ) {
 		$this->setOptions( $options );
 
-		$this->initOption( self::OPT_ID_KEY_MODE, self::ID_KEYS_UPPER );
 		$this->initOption( self::OPT_INDEX_TAGS, false );
 		$this->initOption( self::OPT_GROUP_BY_PROPERTIES, array( 'claims', 'qualifiers', 'references' ) );
 		$this->initOption( self::OPT_SERIALIZE_SNAKS_WITH_HASH, false );
@@ -287,62 +274,6 @@ class SerializationOptions {
 	 */
 	public function shouldIndexTags() {
 		return $this->getOption( self::OPT_INDEX_TAGS );
-	}
-
-	/**
-	 * Returns whether lower case entities IDs should be used as keys in the serialized data structure.
-	 *
-	 * @see setIdKeyMode()
-	 *
-	 * @since 0.5
-	 *
-	 * @return boolean
-	 */
-	public function shouldUseLowerCaseIdsAsKeys() {
-		$idKeyMode = $this->getOption( self::OPT_ID_KEY_MODE );
-		return ( $idKeyMode & self::ID_KEYS_LOWER ) > 0;
-	}
-
-	/**
-	 * Returns whether upper case entities IDs should be used as keys in the serialized data structure.
-	 *
-	 * @see setIdKeyMode()
-	 *
-	 * @since 0.5
-	 *
-	 * @return boolean
-	 */
-	public function shouldUseUpperCaseIdsAsKeys() {
-		$idKeyMode = $this->getOption( self::OPT_ID_KEY_MODE );
-		return ( $idKeyMode & self::ID_KEYS_UPPER ) > 0;
-	}
-
-	/**
-	 * Sets whether upper case entities IDs should be used as keys in the serialized data structure,
-	 * or lower case, or both.
-	 *
-	 * Allowing for different forms of IDs to be used as keys is needed for backwards
-	 * compatibility while we change from lower case to upper case IDs in version 0.5.
-	 *
-	 * @see shouldUseLowerCaseIdsAsKeys()
-	 * @see shouldUseUpperCaseIdsAsKeys()
-	 *
-	 * @since 0.5
-	 *
-	 * @param int $mode a bit field using the ID_KEYS_XXX constants.
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function setIdKeyMode( $mode ) {
-		if ( ( $mode & self::ID_KEYS_BOTH ) === 0 ) {
-			throw new InvalidArgumentException( "At least one ID key mode must be set in the bit field." );
-		}
-
-		if ( ( $mode & ~self::ID_KEYS_BOTH ) !== 0 ) {
-			throw new InvalidArgumentException( "Unknown bits set in ID key mode, use the ID_KEYS_XXX constants." );
-		}
-
-		$this->setOption( self::OPT_ID_KEY_MODE, $mode );
 	}
 
 	/**
