@@ -95,23 +95,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideBadConstructionData
-	 */
-	public function testBadConstruction( $result ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$this->getResultBuilder( $result );
-	}
-
-	public function provideBadConstructionData() {
-		return array(
-			array( null ),
-			array( 1234 ),
-			array( "imastring" ),
-			array( array() ),
-		);
-	}
-
-	/**
 	 * @dataProvider provideMarkResultSuccess
 	 */
 	public function testMarkResultSuccess( $param, $expected ) {
