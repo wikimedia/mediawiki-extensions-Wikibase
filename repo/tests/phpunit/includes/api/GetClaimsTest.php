@@ -190,10 +190,8 @@ class GetClaimsTest extends ApiTestCase {
 		// Assert that value mainsnaks have a datatype added
 		foreach ( $resultArray['claims'] as &$claimsByProperty ) {
 			foreach ( $claimsByProperty as &$claimArray ) {
-				if ( $claimArray['mainsnak']['snaktype'] === 'value' ) {
-					$this->assertArrayHasKey( 'datatype', $claimArray['mainsnak'] );
-					unset( $claimArray['mainsnak']['datatype'] );
-				}
+				$this->assertArrayHasKey( 'datatype', $claimArray['mainsnak'] );
+				unset( $claimArray['mainsnak']['datatype'] );
 			}
 		}
 
