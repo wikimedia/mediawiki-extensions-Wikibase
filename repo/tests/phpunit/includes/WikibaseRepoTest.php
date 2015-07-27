@@ -158,7 +158,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetInternalEntityDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getInternalEntityDeserializer();
+		$deserializer = $this->getWikibaseRepo()->getEntityDeserializer();
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
