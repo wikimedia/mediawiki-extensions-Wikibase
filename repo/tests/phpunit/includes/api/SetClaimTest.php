@@ -424,7 +424,6 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	public function testBadPropertyError() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$serializerFactory = new LibSerializerFactory();
 
 		$property = Property::newFromType( 'quantity' );
 		$property = $store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
@@ -445,21 +444,26 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$badProperty = Property::newFromType( 'string' );
 		$badProperty = $store->saveEntity( $badProperty, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
-		$badClaim = new Statement( new PropertyNoValueSnak( $badProperty->getId() ) );
-
-		$serializer = $serializerFactory->newClaimSerializer( new SerializationOptions() );
-		$serializedBadClaim = $serializer->getSerialized( $badClaim );
+		$badClaimSerialization = array(
+			'id' => $statement->getGuid(),
+			'mainsnak' => array(
+				'snaktype' => 'novalue',
+				'property' => $badProperty->getId()->getSerialization(),
+			),
+			'type' => 'statement',
+			'rank' => 'normal',
+		);
 
 		$params = array(
 			'action' => 'wbsetclaim',
-			'claim' => FormatJson::encode( $serializedBadClaim ),
+			'claim' => FormatJson::encode( $badClaimSerialization ),
 		);
 
 		try {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Changed main snak property did not raise an error' );
 		} catch ( UsageException $e ) {
-			$this->assertEquals( 'invalid-claim', $e->getCodeString(), 'Changed main snak property' );
+			$this->assertEquals( 'modification-failed', $e->getCodeString(), 'Changed main snak property' );
 		}
 	}
 
