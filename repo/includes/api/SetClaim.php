@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use DataValues\IllegalValueException;
+use Deserializers\Deserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use InvalidArgumentException;
@@ -14,6 +15,7 @@ use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
@@ -44,6 +46,11 @@ class SetClaim extends ModifyClaim {
 	private $errorReporter;
 
 	/**
+	 * @var Deserializer
+	 */
+	private $statementDeserializer;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -53,8 +60,9 @@ class SetClaim extends ModifyClaim {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
+		$this->statementDeserializer = $wikibaseRepo->getStatementDeserializer();
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 	}
@@ -142,17 +150,15 @@ class SetClaim extends ModifyClaim {
 	 * @return Claim
 	 */
 	private function getClaimFromParams( array $params ) {
-		$serializerFactory = new LibSerializerFactory();
-		$unserializer = $serializerFactory->newClaimUnserializer( new SerializationOptions() );
 
 		try {
-			$serializedClaim = json_decode( $params['claim'], true );
-			if ( !is_array( $serializedClaim ) ) {
-				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
+			$serializedStatement = json_decode( $params['claim'], true );
+			if ( !is_array( $serializedStatement ) ) {
+				throw new IllegalValueException( 'Failed to get statement from Serialization' );
 			}
-			$claim = $unserializer->newFromSerialization( $serializedClaim );
-			if ( !$claim instanceof Claim ) {
-				throw new IllegalValueException( 'Failed to get claim from claim Serialization' );
+			$claim = $this->statementDeserializer->deserialize( $serializedStatement );
+			if ( !$claim instanceof Statement ) {
+				throw new IllegalValueException( 'Failed to get statement from Serialization' );
 			}
 			return $claim;
 		} catch ( InvalidArgumentException $invalidArgumentException ) {

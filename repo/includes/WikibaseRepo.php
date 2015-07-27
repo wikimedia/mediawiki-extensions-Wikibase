@@ -917,15 +917,15 @@ class WikibaseRepo {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
 			$this->getInternalEntitySerializer(),
-			$this->getInternalEntityDeserializer()
+			$this->getEntityDeserializer()
 		);
 	}
 
 	/**
 	 * @return Deserializer
 	 */
-	public function getInternalEntityDeserializer() {
-		return $this->getInternalDeserializerFactory()->newEntityDeserializer();
+	public function getEntityDeserializer() {
+		return $this->getDeserializerFactory()->newEntityDeserializer();
 	}
 
 	/**
@@ -935,7 +935,7 @@ class WikibaseRepo {
 		$entitySerializerClass = $this->settings->getSetting( 'internalEntitySerializerClass' );
 
 		if ( $entitySerializerClass === null ) {
-			return $this->getInternalSerializerFactory()->newEntitySerializer();
+			return $this->getSerializerFactory()->newEntitySerializer();
 		}
 
 		return new $entitySerializerClass();
@@ -948,7 +948,7 @@ class WikibaseRepo {
 		$claimSerializerClass = $this->settings->getSetting( 'internalClaimSerializerClass' );
 
 		if ( $claimSerializerClass === null ) {
-			return $this->getInternalSerializerFactory()->newStatementSerializer();
+			return $this->getSerializerFactory()->newStatementSerializer();
 		}
 
 		return new $claimSerializerClass();
@@ -957,14 +957,14 @@ class WikibaseRepo {
 	/**
 	 * @return Deserializer
 	 */
-	public function getInternalStatementDeserializer() {
-		return $this->getInternalDeserializerFactory()->newStatementDeserializer();
+	public function getStatementDeserializer() {
+		return $this->getDeserializerFactory()->newStatementDeserializer();
 	}
 
 	/**
 	 * @return DeserializerFactory
 	 */
-	protected function getInternalDeserializerFactory() {
+	protected function getDeserializerFactory() {
 		return new DeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
@@ -992,7 +992,7 @@ class WikibaseRepo {
 	/**
 	 * @return SerializerFactory
 	 */
-	protected function getInternalSerializerFactory() {
+	protected function getSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer() );
 	}
 
