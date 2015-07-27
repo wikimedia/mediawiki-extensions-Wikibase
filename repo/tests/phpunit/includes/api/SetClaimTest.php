@@ -445,14 +445,19 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$badProperty = Property::newFromType( 'string' );
 		$badProperty = $store->saveEntity( $badProperty, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
-		$badClaim = new Statement( new PropertyNoValueSnak( $badProperty->getId() ) );
-
-		$serializer = $serializerFactory->newClaimSerializer( new SerializationOptions() );
-		$serializedBadClaim = $serializer->getSerialized( $badClaim );
+		$badClaimSerialization = array(
+			'id' => null,
+			'mainsnak' => array(
+				'snaktype' => 'novalue',
+				'property' => $badProperty->getId(),
+			),
+			'type' => 'statement',
+			'rank' => 'normal',
+		);
 
 		$params = array(
 			'action' => 'wbsetclaim',
-			'claim' => FormatJson::encode( $serializedBadClaim ),
+			'claim' => FormatJson::encode( $badClaimSerialization ),
 		);
 
 		try {
