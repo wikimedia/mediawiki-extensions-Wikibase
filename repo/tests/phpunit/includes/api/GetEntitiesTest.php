@@ -514,6 +514,46 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 
 				),
 			),
+			array(
+				'Oslo',
+				array( 'sli', 'de-formal', 'kn', 'nb' ),
+				array(
+					'sli' => array(
+						'language' => 'de',
+						'value' => 'Oslo',
+					),
+					'de-formal' => array(
+						'language' => 'de',
+						'value' => 'Oslo',
+					),
+					'kn' => array(
+						'language' => 'en',
+						'value' => 'Oslo',
+					),
+					'nb' => array(
+						'language' => 'nb',
+						'value' => 'Oslo',
+					),
+				),
+				array(
+					'sli' => array(
+						'language' => 'de',
+						'value' => 'Hauptstadt der Norwegen.',
+					),
+					'de-formal' => array(
+						'language' => 'de',
+						'value' => 'Hauptstadt der Norwegen.',
+					),
+					'kn' => array(
+						'language' => 'en',
+						'value' => 'Capital city in Norway.',
+					),
+					'nb' => array(
+						'language' => 'nb',
+						'value' => 'Hovedsted i Norge.',
+					),
+				),
+			),
 		);
 	}
 
@@ -528,7 +568,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 				'action' => 'wbgetentities',
 				'languages' => join( '|', $languages ),
 				'languagefallback' => '',
-				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id,
 			)
 		);
