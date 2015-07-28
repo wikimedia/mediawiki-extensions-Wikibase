@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_252844dc",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-28T11:19:33Z",
+      "side": 1,
+      "message": "Ooops \u003do",
+      "revId": "259b3849f758528cbfa2500c7a15c27abce7db2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
