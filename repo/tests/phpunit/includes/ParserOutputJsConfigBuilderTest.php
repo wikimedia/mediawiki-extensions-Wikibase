@@ -137,11 +137,11 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 					'value' => 'Cake'
 				)
 			),
-			'claims' => array (
+			'claims' => array(
 				$propertyId->getSerialization() => array(
 					array(
 						'id' => $this->makeGuid( $entity->getId() ),
-						'mainsnak' => array (
+						'mainsnak' => array(
 							'snaktype' => 'value',
 							'property' => $propertyId->getSerialization(),
 							'datavalue' => array(

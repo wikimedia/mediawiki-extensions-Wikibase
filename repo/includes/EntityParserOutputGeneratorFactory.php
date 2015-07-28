@@ -106,7 +106,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @return ParserOutputJsConfigBuilder
 	 */
 	private function newParserOutputJsConfigBuilder() {
-		return new ParserOutputJsConfigBuilder( new SerializationOptions() );
+		return new ParserOutputJsConfigBuilder();
 	}
 
 	/**
