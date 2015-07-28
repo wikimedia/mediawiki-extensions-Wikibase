@@ -7,6 +7,7 @@ use Revision;
 use SiteStore;
 use Status;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -79,7 +80,7 @@ class ResultBuilder {
 	private $isRawMode;
 
 	/**
-	 * @param ApiResult $result
+	 * @param ApiResult|null $result
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteStore $siteStore
@@ -87,13 +88,16 @@ class ResultBuilder {
 	 * @param bool $isRawMode when special elements such as '_element' are needed by the formatter.
 	 */
 	public function __construct(
-		ApiResult $result,
+		ApiResult $result = null,
 		EntityTitleLookup $entityTitleLookup,
 		SerializerFactory $serializerFactory,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $dataTypeLookup,
 		$isRawMode
 	) {
+		if ( $result === null ) {
+			$result = new ApiResult( false );
+		}
 		$this->result = $result;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
@@ -249,6 +253,8 @@ class ResultBuilder {
 	/**
 	 * Get serialized entity for the EntityRevision and add it to the result
 	 *
+	 * @since 0.5
+	 *
 	 * @param string|null $sourceEntityIdSerialization EntityId used to retreive $entityRevision
 	 *        Used as the key for the entity in the 'entities' structure and for adding redirect
 	 *     info Will default to the entity's serialized ID if null. If given this must be the
@@ -259,7 +265,7 @@ class ResultBuilder {
 	 * @param string[] $filterLangCodes A list of language codes to filter by
 	 * @param LanguageFallbackChain[] $fallbackChains with keys of the origional language
 	 *
-	 * @since 0.5
+	 * @return array the serialized entity revision that was added to the array
 	 */
 	public function addEntityRevision(
 		$sourceEntityIdSerialization,
@@ -298,29 +304,60 @@ class ResultBuilder {
 				);
 			}
 
-			$entitySerializer = $this->serializerFactory->newEntitySerializer();
-			$serialization = $entitySerializer->serialize( $entity );
+			$entitySerialization = $this->getEntityArray(
+				$entity,
+				$props,
+				$filterSiteIds,
+				$filterLangCodes,
+				$fallbackChains
+			);
 
-			$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
-			if ( $props == 'all' || in_array( 'sitelinks/urls', $props ) ) {
-				$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
-			}
-			$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
-			$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
-			$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
-			if ( !empty( $fallbackChains ) ) {
-				$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
-			}
-			$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization, $filterLangCodes );
-
-			if ( $this->isRawMode ) {
-				$serialization = $this->getRawModeEntitySerialization( $serialization );
-			}
-
-			$record = array_merge( $record, $serialization );
+			$record = array_merge( $record, $entitySerialization );
 		}
 
 		$this->appendValue( array( 'entities' ), $sourceEntityIdSerialization, $record, 'entity' );
+
+		return $record;
+	}
+
+	/**
+	 * @see ResultBuilder::addEntityRevision
+	 *
+	 * @param Entity $entity
+	 * @param array|string $props
+	 * @param array $filterSiteIds
+	 * @param array $filterLangCodes
+	 * @param array $fallbackChains
+	 *
+	 * @return array
+	 */
+	public function getEntityArray(
+		Entity $entity,
+		$props,
+		array $filterSiteIds,
+		array $filterLangCodes,
+		array $fallbackChains
+	) {
+		$entitySerializer = $this->serializerFactory->newEntitySerializer();
+		$serialization = $entitySerializer->serialize( $entity );
+
+		$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
+		if ( $props == 'all' || in_array( 'sitelinks/urls', $props ) ) {
+			$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
+		}
+		$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
+		$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
+		$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
+		if ( !empty( $fallbackChains ) ) {
+			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
+		}
+		$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization, $filterLangCodes );
+
+		if ( $this->isRawMode ) {
+			$serialization = $this->getRawModeEntitySerialization( $serialization );
+		}
+
+		return $serialization;
 	}
 
 	/**

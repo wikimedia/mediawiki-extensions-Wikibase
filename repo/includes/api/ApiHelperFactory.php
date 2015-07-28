@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use SiteStore;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
@@ -88,18 +89,24 @@ class ApiHelperFactory {
 	/**
 	 * Returns a ResultBuilder wrapping the ApiResult of the given API module.
 	 *
-	 * @param ApiBase $api
+	 * @param ApiResult|null $apiResult
 	 *
 	 * @return ResultBuilder
 	 */
-	public function getResultBuilder( ApiBase $api ) {
+	public function getResultBuilder( ApiResult $apiResult = null ) {
+		if ( $apiResult === null ) {
+			$isRawMode = false;
+		} else {
+			$isRawMode = $apiResult->getIsRawMode();
+		}
+
 		return new ResultBuilder(
-			$api->getResult(),
+			$apiResult,
 			$this->titleLookup,
 			$this->newSerializerFactory(),
 			$this->siteStore,
 			$this->dataTypeLookup,
-			$api->getResult()->getIsRawMode()
+			$isRawMode
 		);
 	}
 

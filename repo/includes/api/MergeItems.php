@@ -64,7 +64,7 @@ class MergeItems extends ApiBase {
 		$this->setServices(
 			$wikibaseRepo->getEntityIdParser(),
 			$apiHelperFactory->getErrorReporter( $this ),
-			$apiHelperFactory->getResultBuilder( $this ),
+			$apiHelperFactory->getResultBuilder( $this->getResult() ),
 			new ItemMergeInteractor(
 				$wikibaseRepo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
 				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),

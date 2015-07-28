@@ -87,7 +87,7 @@ class GetEntities extends ApiBase {
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this->getResult() );
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();

@@ -133,7 +133,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mockContext );
 
-		$resultBuilder = $apiHelperFactory->getResultBuilder( $module );
+		$resultBuilder = $apiHelperFactory->getResultBuilder( $module->getResult() );
 		$summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(

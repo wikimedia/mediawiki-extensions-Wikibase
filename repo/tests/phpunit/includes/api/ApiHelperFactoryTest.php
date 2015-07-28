@@ -72,7 +72,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$api = $this->newApiModule();
 		$factory = $this->newApiHelperFactory();
 
-		$resultBuilder = $factory->getResultBuilder( $api );
+		$resultBuilder = $factory->getResultBuilder( $api->getResult() );
 		$this->assertInstanceOf( 'Wikibase\Repo\Api\ResultBuilder', $resultBuilder );
 	}
 

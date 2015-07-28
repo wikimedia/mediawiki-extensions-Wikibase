@@ -74,7 +74,7 @@ class GetClaims extends ApiBase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this->getResult() );
 		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
 		$this->guidValidator = $wikibaseRepo->getClaimGuidValidator();
 		$this->guidParser = $wikibaseRepo->getStatementGuidParser();

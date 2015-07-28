@@ -135,7 +135,7 @@ abstract class ModifyEntity extends ApiBase {
 
 		//TODO: provide a mechanism to override the services
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this->getResult() );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
