@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -10,8 +9,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
@@ -33,7 +30,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	 * @dataProvider buildProvider
 	 */
 	public function testBuild( Entity $entity ) {
-		$configBuilder = $this->getConfigBuilder( 'en', array( 'de', 'en', 'es', 'fr' ) );
+		$configBuilder = $this->getConfigBuilder();
 		$configVars = $configBuilder->build( $entity );
 
 		$this->assertInternalType( 'array', $configVars );
@@ -62,37 +59,10 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function getConfigBuilder( $languageCode, array $languageCodes ) {
-		$configBuilder = new ParserOutputJsConfigBuilder(
-			$this->getSerializationOptions( $languageCode, $languageCodes )
-		);
+	private function getConfigBuilder() {
+		$configBuilder = new ParserOutputJsConfigBuilder();
 
 		return $configBuilder;
-	}
-
-	/**
-	 * @param string $langCode
-	 *
-	 * @return LanguageFallbackChain
-	 */
-	private function getLanguageFallbackChain( $langCode ) {
-		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-
-		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage(
-			Language::factory( $langCode )
-		);
-
-		return $languageFallbackChain;
-	}
-
-	private function getSerializationOptions( $langCode, $langCodes ) {
-		$fallbackChain = $this->getLanguageFallbackChain( $langCode );
-		$langCodes = $langCodes + array( $langCode => $fallbackChain );
-
-		$options = new SerializationOptions();
-		$options->setLanguages( $langCodes );
-
-		return $options;
 	}
 
 	private function getMainItem() {
