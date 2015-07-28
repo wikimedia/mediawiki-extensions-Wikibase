@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Test\Lib\Serialization;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\Repo\Api\SerializationModifier;
+use Wikibase\Lib\Serialization\SerializationModifier;
 
 /**
  * @author Adam Shorland
  *
- * @covers Wikibase\Repo\Api\SerializationModifier
+ * @covers Wikibase\Lib\Serialization\SerializationModifier
  */
 class SerializationModifierTest extends PHPUnit_Framework_TestCase {
 
