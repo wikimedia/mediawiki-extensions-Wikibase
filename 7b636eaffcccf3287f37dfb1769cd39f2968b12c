@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_b660eca0",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_e68946cc",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_86b88275",
         "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-14T21:11:56Z",
       "side": 1,
       "message": "Wikibase\\Client\\Usage\\EntityUsage not used here",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_765604d3",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_86b88275",
       "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_166f8090",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_46b29a93",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_6c769a3b",
         "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2015-07-14T18:28:51Z",
       "side": 1,
       "message": "Either wrap this before push()ing via EnqueueJob::newFromLocalJobs (like WatchedItem.php) or use lazyPush() so it works fast in any datacenter.",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d66498b1",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_6c769a3b",
       "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_b68c6c8a",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_66b55678",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_26a74e4f",
         "filename": "client/includes/store/AddUsagesForPageJob.php",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2015-07-14T21:11:56Z",
       "side": 1,
       "message": "don\u0027t think we need the $idParser in the comment here",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_36df1c6e",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "maybe properties can be used in the clients? e.g. https://www.wikidata.org/wiki/Property:P17 and with lua and arbitrary access, this could be the usage (or an item)",
+      "parentUuid": "8ec42329_26a74e4f",
       "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_1148ea30",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_cc854e0d",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_e6a06634",
         "filename": "client/tests/phpunit/includes/Hooks/DataUpdateHookHandlersTest.php",
         "patchSetId": 5
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_316c0699",
+        "filename": "client/tests/phpunit/includes/Hooks/DataUpdateHookHandlersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_e6a06634",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_a66a5ee8",
         "filename": "client/tests/phpunit/includes/Hooks/DataUpdateHookHandlersTest.php",
         "patchSetId": 5
@@ -149,6 +293,24 @@
       "writtenOn": "2015-07-14T21:11:56Z",
       "side": 1,
       "message": "long line, could be split",
+      "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d1126201",
+        "filename": "client/tests/phpunit/includes/Hooks/DataUpdateHookHandlersTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-28T18:36:41Z",
+      "side": 1,
+      "message": "split this and other long lines",
+      "parentUuid": "8ec42329_a66a5ee8",
       "revId": "7b636eaffcccf3287f37dfb1769cd39f2968b12c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
