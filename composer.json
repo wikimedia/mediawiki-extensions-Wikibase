@@ -37,9 +37,9 @@
 
 		"wikibase/data-model": "~3.0",
 		"wikibase/data-model-javascript": "^1.0.2",
-		"wikibase/data-model-serialization": "~1.4",
+		"wikibase/data-model-serialization": "~1.4.0",
 		"wikibase/javascript-api": "~1.0",
-		"wikibase/internal-serialization": "~1.4",
+		"wikibase/internal-serialization": "~1.4.0",
 		"wikibase/serialization-javascript": "~2.0",
 
 		"diff/diff": "~2.0|~1.0"
