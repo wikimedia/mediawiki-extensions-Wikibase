@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_9c8cf133",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-28T19:55:15Z",
+      "side": 1,
+      "message": "We actually undeprecated the shortcut setters for exactly these use cases so we should also use them here.",
+      "revId": "e4c7a7b30660c6b8e1b35ffcaaeb6298d0bba7af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
