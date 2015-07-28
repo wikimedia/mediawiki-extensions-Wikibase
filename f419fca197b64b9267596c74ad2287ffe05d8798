@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_d1434242",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-28T18:18:39Z",
+      "side": 1,
+      "message": "Given the rename in the previous commit, this now uses the wrong deserializer. It\u0027s still going to work, though more dependencies are pulled in than is needed.",
+      "revId": "f419fca197b64b9267596c74ad2287ffe05d8798",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
