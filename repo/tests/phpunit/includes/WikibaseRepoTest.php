@@ -214,7 +214,10 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	public function testNewItemHandler_badSerializerSetting() {
 		$wikibaseRepo = $this->getWikibaseRepo();
 		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
-		$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+		$wikibaseRepo->getSettings()->setSetting(
+			'internalEntitySerializerClass',
+			'Wikibase\Repo\Serializers\LegacyInternalEntitySerializer'
+		);
 
 		$this->setExpectedException( 'RuntimeException' );
 		$wikibaseRepo->newItemHandler();
@@ -223,7 +226,10 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	public function testNewPropertyHandler_badSerializerSetting() {
 		$wikibaseRepo = $this->getWikibaseRepo();
 		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
-		$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+		$wikibaseRepo->getSettings()->setSetting(
+			'internalEntitySerializerClass',
+			'Wikibase\Repo\Serializers\LegacyInternalEntitySerializer'
+		);
 
 		$this->setExpectedException( 'RuntimeException' );
 		$wikibaseRepo->newPropertyHandler();

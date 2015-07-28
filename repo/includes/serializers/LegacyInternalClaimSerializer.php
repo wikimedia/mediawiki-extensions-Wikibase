@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Serializers;
+namespace Wikibase\Repo\Serializers;
 
 use InvalidArgumentException;
 use Serializers\Serializer;
