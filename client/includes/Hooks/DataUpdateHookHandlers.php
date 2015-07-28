@@ -4,7 +4,6 @@ namespace Wikibase\Client\Hooks;
 
 use Content;
 use JobQueueGroup;
-use JobSpecification;
 use LinksUpdate;
 use ManualLogEntry;
 use ParserCache;
@@ -14,7 +13,6 @@ use Title;
 use User;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
-use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use WikiPage;
@@ -162,7 +160,7 @@ class DataUpdateHookHandlers {
 	 * Implemented to update usage tracking information via UsageUpdater.
 	 *
 	 * @param ParserOutput $parserOutput
-	 * @param $title $title
+	 * @param Title $title
 	 */
 	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
@@ -186,7 +184,7 @@ class DataUpdateHookHandlers {
 		//TODO: Before posting a job, check slave database. If no changes are needed, skip update.
 
 		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages(), $touched );
-		$this->jobScheduler->push( $addUsagesForPageJob );
+		$this->jobScheduler->lazyPush( $addUsagesForPageJob );
 	}
 
 	/**
