@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
+use DataValues\StringValue;
 use Language;
 use ReflectionMethod;
 use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;
@@ -12,6 +13,13 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Test\MockRepository;
@@ -39,9 +47,10 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getEntityAccessor(
 		EntityLookup $entityLookup = null,
-		UsageAccumulator $usageAccumulator = null
+		UsageAccumulator $usageAccumulator = null,
+		$langCode = 'en'
 	) {
-		$language = new Language( 'en' );
+		$language = new Language( $langCode );
 
 		$propertyDataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$propertyDataTypeLookup->expects( $this->any() )
@@ -56,7 +65,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$termsLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
 		$termsLanguages->expects( $this->any() )
 			->method( 'getLanguages' )
-			->will( $this->returnValue( array( 'de', 'en', 'es', 'ja' ) ) );
+			->will( $this->returnValue( array( 'de', $langCode, 'es', 'ja' ) ) );
 
 		return new EntityAccessor(
 			new BasicEntityIdParser(),
@@ -164,6 +173,147 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 				array( array( 'foo' => 'bar', 1337 => 'Wikidata' ) )
 			),
 		);
+	}
+
+	public function testFullEntityGetEntityResponse() {
+		$item = new Item( new ItemId( 'Q123098' ) );
+
+		//Basic
+		$item->setLabel( 'de', 'foo-de' );
+		$item->setLabel( 'qu', 'foo-qu' );
+		$item->addAliases( 'en', array( 'bar', 'baz' ) );
+		$item->addAliases( 'de-formal', array( 'bar', 'baz' ) );
+		$item->setDescription( 'en', 'en-desc' );
+		$item->setDescription( 'pt', 'ptDesc' );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
+		$item->addSiteLink( new SiteLink( 'zh_classicalwiki', 'User:Addshore', array() ) );
+
+		$snak = new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
+
+		$qualifiers = new SnakList();
+		$qualifiers->addSnak( new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'string!' ) ) );
+		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+
+		$references = new ReferenceList();
+		$referenceSnaks = new SnakList();
+		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P68' ) ) );
+		$references->addReference( new Reference( $referenceSnaks ) );
+
+		$guid = 'imaguid';
+		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+
+		$entityAccessor = $this->getEntityAccessor( $entityLookup, null, 'qug' );
+
+		$expected = array(
+			'id' => 'Q123098',
+			'type' => 'item',
+			'labels' => array(
+				'de' => array(
+					'language' => 'de',
+					'value' => 'foo-de',
+				),
+			),
+			'descriptions' => array(
+				'en' => array(
+					'language' => 'en',
+					'value' => 'en-desc',
+				),
+			),
+			'aliases' => array(
+				'en' => array(
+					1 => array(
+						'language' => 'en',
+						'value' => 'bar',
+					),
+					2 => array(
+						'language' => 'en',
+						'value' => 'baz',
+					),
+				),
+			),
+			'claims' => array(
+				'P65' => array(
+					1 => array(
+						'id' => 'imaguid',
+						'type' => 'statement',
+						'mainsnak' => array(
+							'snaktype' => 'value',
+							'property' => 'P65',
+							'datatype' => 'structured-cat',
+							'datavalue' => array(
+								'value' => 'snakStringValue',
+								'type' => 'string',
+							),
+						),
+						'qualifiers' => array(
+							'P65' => array(
+								1 => array(
+									'hash' => 'e95e866e7fa1c18bd06dae9b712cb99545107eb8',
+									'snaktype' => 'value',
+									'property' => 'P65',
+									'datavalue' => array(
+										'value' => 'string!',
+										'type' => 'string',
+									),
+									'datatype' => 'structured-cat',
+								),
+								2 => array(
+									'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
+									'snaktype' => 'somevalue',
+									'property' => 'P65',
+								),
+							),
+						),
+						'rank' => 'normal',
+						'qualifiers-order' => array(
+							1 => 'P65'
+						),
+						'references' => array(
+							1 => array(
+								'hash' => 'bdc5f7185904d6d3219e13b7443571dda8c4bee8',
+								'snaks' => array(
+									'P65' => array(
+										1 => array(
+											'snaktype' => 'somevalue',
+											'property' => 'P65',
+										)
+									),
+									'P68' => array(
+										1 => array(
+											'snaktype' => 'somevalue',
+											'property' => 'P68',
+										)
+									),
+								),
+								'snaks-order' => array(
+									1 => 'P65',
+									2 => 'P68'
+								),
+							),
+						),
+					),
+				),
+			),
+			'sitelinks' => array(
+				'enwiki' => array(
+					'site' => 'enwiki',
+					'title' => 'Berlin',
+					'badges' => array( 1 => 'Q333' )
+				),
+				'zh_classicalwiki' => array(
+					'site' => 'zh_classicalwiki',
+					'title' => 'User:Addshore',
+					'badges' => array()
+				),
+			),
+			'schemaVersion' => 2,
+		);
+
+		$this->assertEquals( $expected, $entityAccessor->getEntity( 'Q123098' ) );
 	}
 
 }
