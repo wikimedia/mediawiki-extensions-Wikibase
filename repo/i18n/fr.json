@@ -40,7 +40,8 @@
 			"Windes",
 			"TomT0m",
 			"Pathe",
-			"Wladek92"
+			"Wladek92",
+			"Ash Crow"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -70,6 +71,7 @@
 	"wikibase-description-empty": "Aucune description fournie",
 	"wikibase-description-edit-placeholder": "saisir une description",
 	"wikibase-description-edit-placeholder-language-aware": "entrer la description en $1",
+	"wikibase-aliases-edit-placeholder-language-aware": "entrer certains des alias dans $1",
 	"wikibase-diffview-reference": "référence",
 	"wikibase-diffview-rank": "rang",
 	"wikibase-diffview-rank-preferred": "Rang privilégié",
@@ -188,6 +190,7 @@
 	"wikibase-newitem-not-recognized-siteid": "L’identifiant de site fourni n’a pas été reconnu.",
 	"wikibase-newentity-label": "Libellé&nbsp;:",
 	"wikibase-newentity-description": "Description&nbsp;:",
+	"wikibase-newentity-aliases": "Alias, séparés par une barre verticale (''pipe'') :",
 	"wikibase-newentity-submit": "Créer",
 	"special-setlabel": "Définir un libellé",
 	"wikibase-setlabel-introfull": "Vous êtes en train de définir le libellé en $2 pour [[$1]].",
@@ -485,7 +488,6 @@
 	"apihelp-wbgetclaims-param-claim": "Un GUID identifiant la déclaration. Obligatoire sauf si l’entité est fournie. Le GUID est l’identifiant unique global pour une déclaration, par ex. « q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F ».",
 	"apihelp-wbgetclaims-param-rank": "Filtre facultatif pour renvoyer uniquement les déclarations qui ont le rang spécifié",
 	"apihelp-wbgetclaims-param-props": "Certaines parties de la déclaration sont renvoyées de façon facultative. Ce paramètre contrôle lesquelles sont renvoyées.",
-	"apihelp-wbgetclaims-param-ungroupedlist": "Ne pas regrouper les assertions simples par ID de propriété",
 	"apihelp-wbgetclaims-example-1": "Obtenir les déclarations pour l’élément d’ID Q42",
 	"apihelp-wbgetclaims-example-2": "Obtenir les déclarations pour l’élément avec l’ID Q42 et la propriété avec l’ID P2",
 	"apihelp-wbgetclaims-example-3": "Obtenir les déclarations pour l’élément d’ID Q42 qui sont de rang normal",
@@ -499,7 +501,6 @@
 	"apihelp-wbgetentities-param-languages": "Par défaut, les valeurs internationalisés sont renvoyées dans toutes les langues disponibles.\nCe paramètre permet de les limiter à une ou plusieurs langues en fournissant un ou plusieurs codes de langue.",
 	"apihelp-wbgetentities-param-languagefallback": "Appliquer la langue de secours pour les langues définies dans le paramètre « languages », avec le contexte actuel de l’appel de l’API.",
 	"apihelp-wbgetentities-param-normalize": "Essayer de normaliser le titre de la page fourni en fonction du site sur lequel il se trouve.\nCette fonction fonctionne uniquement si un seul site et une seule page sont fournis.",
-	"apihelp-wbgetentities-param-ungroupedlist": "Ne pas grouper les paires propriété/valeur par identifiant de propriété.",
 	"apihelp-wbgetentities-param-sitefilter": "Ne garder que les liens vers les sites listés dans cette liste.",
 	"apihelp-wbgetentities-example-1": "Récupérez les entités d'ID Q42 et tous leurs attributs dans toutes les langues disponibles",
 	"apihelp-wbgetentities-example-2": "Récupérer les entités d'ID P17 et tous leurs attributs dans toutes les langues disponibles",

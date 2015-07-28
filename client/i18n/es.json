@@ -66,7 +66,7 @@
 	"wikibase-replicationnote": "Ten en cuenta que puede tardar varios minutos hasta que los cambios sean visibles en todas las wikis.",
 	"wikibase-watchlist-show-changes-pref": "Mostrar las ediciones de {{WBREPONAME}} en tu lista de seguimiento",
 	"wikibase-error-serialize-error": "Error al serializar datos.",
-	"wikibase-error-invalid-entity-id": "El ID ingresado es desconocido para el sistema. Utilice un identificador de entidad válido.",
+	"wikibase-error-invalid-entity-id": "El ID ingresado es desconocido para el sistema. Utiliza un identificador de entidad válido.",
 	"unconnectedpages": "Páginas no conectadas a elementos",
 	"unconnectedpages-summary": "Esta página lista páginas sin ningún elemento de datos conectado (en los espacios de nombres que admiten elementos conectados). La lista está ordenada por identificador de página descendente, por lo que las páginas más nuevas se muestran primero.",
 	"wikibase-unconnectedpages-page": "Comenzar lista de resultados por página:",

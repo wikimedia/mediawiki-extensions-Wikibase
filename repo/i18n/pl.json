@@ -157,6 +157,7 @@
 	"wikibase-newitem-not-recognized-siteid": "Otrzymany identyfikator witryny nie został rozpoznany.",
 	"wikibase-newentity-label": "Etykieta:",
 	"wikibase-newentity-description": "Opis:",
+	"wikibase-newentity-aliases": "Aliasy, oddzielone pionową kreską:",
 	"wikibase-newentity-submit": "Utwórz",
 	"special-setlabel": "Ustaw etykietę",
 	"wikibase-setlabel-introfull": "Ustawiasz etykietę $2 dla [[$1]].",

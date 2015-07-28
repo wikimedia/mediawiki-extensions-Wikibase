@@ -415,7 +415,6 @@
 	"apihelp-wbformatvalue-description": "Форматира податочни вредности.",
 	"apihelp-wbformatvalue-param-generate": "Саканиот формат на изводот што треба да се испише.",
 	"apihelp-wbgetclaims-description": "Дава тврдења од Викибазата.",
-	"apihelp-wbgetclaims-param-ungroupedlist": "Не групирај сопјници по назнака на својство",
 	"apihelp-wbgetclaims-example-1": "Дај тврдења за предмет со назнака Q42",
 	"apihelp-wbgetclaims-example-2": "Дај тврдења за предмет со назнака Q42 и својство со назнака P2",
 	"apihelp-wbmergeitems-example-1": "Ги спојува податоците од Q42 во Q222",
