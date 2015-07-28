@@ -2,10 +2,10 @@
 
 namespace Wikibase;
 
+use DataValues\Serializers\DataValueSerializer;
 use FormatJson;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
+use Wikibase\DataModel\SerializerFactory;
 
 /**
  * @since 0.5
@@ -16,27 +16,21 @@ use Wikibase\Lib\Serializers\LibSerializerFactory;
  * @author Daniel Werner
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Adam Shorland
  */
 class ParserOutputJsConfigBuilder {
 
 	/**
-	 * @var SerializationOptions
-	 */
-	private $serializationOptions;
-
-	/**
-	 * @var LibSerializerFactory
+	 * @var SerializerFactory
 	 */
 	private $serializerFactory;
 
-	/**
-	 * @param SerializationOptions $serializationOptions
-	 */
-	public function __construct(
-		SerializationOptions $serializationOptions
-	) {
-		$this->serializationOptions = $serializationOptions;
-		$this->serializerFactory = new LibSerializerFactory();
+	public function __construct() {
+		$this->serializerFactory = new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
 	}
 
 	/**
@@ -67,12 +61,19 @@ class ParserOutputJsConfigBuilder {
 	 * @return string
 	 */
 	private function getSerializedEntity( Entity $entity ) {
-		$serializer = $this->serializerFactory->newSerializerForEntity(
-			$entity->getType(),
-			$this->serializationOptions
-		);
+		$serializer = $this->serializerFactory->newEntitySerializer();
 
-		return $serializer->getSerialized( $entity );
+		$serialization = $serializer->serialize( $entity );
+
+		// Remove empty parts of the serialization (Added when Lib Serializers were removed)
+		// We could allow parts if we are sure it would not break anything
+		foreach ( $serialization as $key => $serializationPart ) {
+			if ( is_array( $serializationPart ) && empty( $serializationPart ) ) {
+				unset( $serialization[$key] );
+			}
+		}
+
+		return $serialization;
 	}
 
 }
