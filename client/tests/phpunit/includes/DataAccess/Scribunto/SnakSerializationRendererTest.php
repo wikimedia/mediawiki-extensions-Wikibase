@@ -3,15 +3,17 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use DataValues\DataValue;
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Language;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
  * @covers Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer
@@ -36,8 +38,8 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 			$value
 		);
 
-		$snakSerializer = new SnakSerializer();
-		$serialized = $snakSerializer->getSerialized( $snak );
+		$snakSerializer = new SnakSerializer( new DataValueSerializer() );
+		$serialized = $snakSerializer->serialize( $snak );
 
 		return $serialized;
 	}
