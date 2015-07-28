@@ -70,11 +70,11 @@ return call_user_func( function() {
 		},
 
 		// Can be used to override the serialization used for storage.
-		// Typical value: Wikibase\Lib\Serializers\LegacyInternalEntitySerializer
+		// Typical value: Wikibase\Repo\Serializers\LegacyInternalEntitySerializer
 		'internalEntitySerializerClass' => null,
 
 		// Can be used to override the serialization used for storage.
-		// Typical value: Wikibase\Lib\Serializers\LegacyInternalClaimSerializer
+		// Typical value: Wikibase\Repo\Serializers\LegacyInternalClaimSerializer
 		'internalClaimSerializerClass' => null,
 
 		'transformLegacyFormatOnExport' => function( SettingsArray $settings ) {
