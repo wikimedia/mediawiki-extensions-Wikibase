@@ -92,8 +92,11 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$entityAccessor = $this->getEntityAccessor( $entityLookup );
 
 		$entityArr = $entityAccessor->getEntity( $prefixedId );
-		$actual = is_array( $entityArr ) ? array_keys( $entityArr ) : array();
-		$this->assertEquals( $expected, $actual );
+		$actual = is_array( $entityArr ) ? $entityArr : array();
+		$this->assertCount( count( $expected ), $actual );
+		foreach ( $expected as $expectedKey ) {
+			$this->assertArrayHasKey( $expectedKey, $actual );
+		}
 	}
 
 	public function testGetEntity_usage() {
@@ -265,6 +268,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 									'hash' => '210b00274bf03247a89de918f15b12142ebf9e56',
 									'snaktype' => 'somevalue',
 									'property' => 'P65',
+									'datatype' => 'structured-cat',
 								),
 							),
 						),
@@ -280,12 +284,14 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 										1 => array(
 											'snaktype' => 'somevalue',
 											'property' => 'P65',
+											'datatype' => 'structured-cat',
 										)
 									),
 									'P68' => array(
 										1 => array(
 											'snaktype' => 'somevalue',
 											'property' => 'P68',
+											'datatype' => 'structured-cat',
 										)
 									),
 								),
