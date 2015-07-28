@@ -1064,7 +1064,7 @@ class WikibaseRepo {
 		}
 
 		return array(
-			'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer',
+			'Wikibase\Repo\Serializers\LegacyInternalEntitySerializer',
 			'isBlobUsingLegacyFormat'
 		);
 	}
