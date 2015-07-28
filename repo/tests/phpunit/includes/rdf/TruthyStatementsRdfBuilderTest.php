@@ -71,6 +71,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$lines = explode( "\n", trim( $ntriples ) );
 		sort( $lines );
+		$lines = array_map( 'trim', $lines );
 		return $lines;
 	}
 
