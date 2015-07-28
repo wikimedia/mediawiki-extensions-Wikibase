@@ -985,6 +985,13 @@ class WikibaseRepo {
 	/**
 	 * @return Deserializer
 	 */
+	public function getEntityDeserializer() {
+		return $this->getDeserializerFactory()->newEntityDeserializer();
+	}
+
+	/**
+	 * @return Deserializer
+	 */
 	public function getStatementDeserializer() {
 		return $this->getDeserializerFactory()->newStatementDeserializer();
 	}
