@@ -1,5 +1,10 @@
 # Wikibase DataModel Serialization release notes
 
+## 1.8.0 (2015-07-28)
+
+* Added compatibility with Wikibase DataModel 4.x
+* Removed compatibility with Wikibase DataModel 3.x
+
 ## 1.7.0 (2015-07-23)
 
 * Added `SerializerFactory` option `OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH`

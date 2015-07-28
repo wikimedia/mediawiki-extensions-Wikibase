@@ -5,7 +5,7 @@ namespace Tests\Wikibase\DataModel;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 
 /**
  * @licence GNU GPL v2+

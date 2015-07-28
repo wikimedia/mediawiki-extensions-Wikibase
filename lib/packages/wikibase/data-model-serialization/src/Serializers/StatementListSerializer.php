@@ -6,7 +6,7 @@ use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
-use Wikibase\DataModel\ByPropertyIdGrouper;
+use Wikibase\DataModel\Services\ByPropertyIdGrouper;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
