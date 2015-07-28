@@ -80,7 +80,7 @@ class ItemTest extends EntityTest {
 		$items[] = $item;
 
 		/** @var Item $item */
-		$item = $item->copy();
+		$item = unserialize( serialize( $item ) );
 		$item->getStatements()->addNewStatement(
 			new PropertyNoValueSnak( new PropertyId( 'P42' ) )
 		);

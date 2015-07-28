@@ -1,5 +1,11 @@
 # Wikibase DataModel release notes
 
+## Version 5.0 (dev)
+
+#### Breaking changes
+
+* Removed `Entity::copy`
+
 ## Version 4.0 (2015-07-28)
 
 #### Breaking changes
