@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_a94e4ac3",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-28T23:00:03Z",
+      "side": 1,
+      "message": "Is the thing that is being deserialized coming from the repo storage layer? If not, better use the normal deserializer",
+      "revId": "d871bee46a3d54966ab8b51524e3234423a4fa2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
