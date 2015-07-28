@@ -7,9 +7,9 @@ use Revision;
 use SiteStore;
 use Status;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Statement\StatementList;
@@ -18,7 +18,8 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serialization\CallbackFactory;
+use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikimedia\Assert\Assert;
 
@@ -59,11 +60,6 @@ class ResultBuilder {
 	private $siteStore;
 
 	/**
-	 * @var SerializationOptions
-	 */
-	private $options;
-
-	/**
 	 * @var PropertyDataTypeLookup
 	 */
 	private $dataTypeLookup;
@@ -72,6 +68,11 @@ class ResultBuilder {
 	 * @var SerializationModifier
 	 */
 	private $modifier;
+
+	/**
+	 * @var CallbackFactory
+	 */
+	private $callbackFactory;
 
 	/**
 	 * @var bool when special elements such as '_element' are needed by the formatter.
@@ -102,6 +103,7 @@ class ResultBuilder {
 		$this->siteStore = $siteStore;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->modifier = new SerializationModifier();
+		$this->callbackFactory = new CallbackFactory();
 	}
 
 	/**
@@ -298,29 +300,61 @@ class ResultBuilder {
 				);
 			}
 
-			$entitySerializer = $this->serializerFactory->newEntitySerializer();
-			$serialization = $entitySerializer->serialize( $entity );
+			$entitySerialization = $this->getEntityArray(
+				$entity,
+				$props,
+				$filterSiteIds,
+				$filterLangCodes,
+				$fallbackChains
+			);
 
-			$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
-			if ( $props == 'all' || in_array( 'sitelinks/urls', $props ) ) {
-				$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
-			}
-			$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
-			$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
-			$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
-			if ( !empty( $fallbackChains ) ) {
-				$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
-			}
-			$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization, $filterLangCodes );
-
-			if ( $this->isRawMode ) {
-				$serialization = $this->getRawModeEntitySerialization( $serialization );
-			}
-
-			$record = array_merge( $record, $serialization );
+			$record = array_merge( $record, $entitySerialization );
 		}
 
 		$this->appendValue( array( 'entities' ), $sourceEntityIdSerialization, $record, 'entity' );
+	}
+
+	/**
+	 * @see ResultBuilder::addEntityRevision
+	 *
+	 * @param Entity $entity
+	 * @param array|string $props
+	 * @param string[]|null $filterSiteIds
+	 * @param string[] $filterLangCodes
+	 * @param LanguageFallbackChain[] $fallbackChains
+	 *
+	 * @return array
+	 */
+	private function getEntityArray(
+		Entity $entity,
+		$props,
+		$filterSiteIds,
+		$filterLangCodes,
+		$fallbackChains
+	) {
+		$entitySerializer = $this->serializerFactory->newEntitySerializer();
+		$serialization = $entitySerializer->serialize( $entity );
+
+		$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
+		if ( $props == 'all' || in_array( 'sitelinks/urls', $props ) ) {
+			$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
+		}
+		$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
+		$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
+		$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
+		if ( !empty( $fallbackChains ) ) {
+			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
+		}
+		$serialization = $this->filterEntitySerializationUsingLangCodes(
+			$serialization,
+			$filterLangCodes
+		);
+
+		if ( $this->isRawMode ) {
+			$serialization = $this->getRawModeEntitySerialization( $serialization );
+		}
+
+		return $serialization;
 	}
 
 	/**
@@ -368,7 +402,7 @@ class ResultBuilder {
 		$serialization = $this->modifier->modifyUsingCallback(
 			$serialization,
 			'claims/*/*/mainsnak',
-			$this->getModCallbackToAddDataTypeToSnak()
+			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
 		);
 		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
 			$serialization,
@@ -511,7 +545,7 @@ class ResultBuilder {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
 				$path,
-				$this->getModCallbackToRemoveKeys( $newKey )
+				$this->callbackFactory->getCallbackToRemoveKeys( $newKey )
 			);
 		}
 		$tagsToAdd = array(
@@ -534,7 +568,7 @@ class ResultBuilder {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
 				$path,
-				$this->getModCallbackToIndexTags( $tag )
+				$this->callbackFactory->getCallbackToIndexTags( $tag )
 			);
 		}
 		return $serialization;
@@ -756,12 +790,12 @@ class ResultBuilder {
 			$values = $this->modifier->modifyUsingCallback(
 				$values,
 				null,
-				$this->getModCallbackToRemoveKeys( 'id' )
+				$this->callbackFactory->getCallbackToRemoveKeys( 'id' )
 			);
 			$values = $this->modifier->modifyUsingCallback(
 				$values,
 				'*',
-				$this->getModCallbackToIndexTags( 'claim' )
+				$this->callbackFactory->getCallbackToIndexTags( 'claim' )
 			);
 		}
 
@@ -839,7 +873,7 @@ class ResultBuilder {
 		$array = $this->modifier->modifyUsingCallback(
 			$array,
 			$claimPath . 'mainsnak',
-			$this->getModCallbackToAddDataTypeToSnak()
+			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
 		);
 		return $array;
 	}
@@ -853,30 +887,30 @@ class ResultBuilder {
 	private function getArrayWithRawModeClaims( array $array, $claimPath = '' ) {
 		$rawModeModifications = array(
 			'references/*/snaks/*' => array(
-				$this->getModCallbackToIndexTags( 'snak' ),
+				$this->callbackFactory->getCallbackToIndexTags( 'snak' ),
 			),
 			'references/*/snaks' => array(
-				$this->getModCallbackToRemoveKeys( 'id' ),
-				$this->getModCallbackToIndexTags( 'property' ),
+				$this->callbackFactory->getCallbackToRemoveKeys( 'id' ),
+				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
 			),
 			'references/*/snaks-order' => array(
-				$this->getModCallbackToIndexTags( 'property' )
+				$this->callbackFactory->getCallbackToIndexTags( 'property' )
 			),
 			'references' => array(
-				$this->getModCallbackToIndexTags( 'reference' ),
+				$this->callbackFactory->getCallbackToIndexTags( 'reference' ),
 			),
 			'qualifiers/*' => array(
-				$this->getModCallbackToIndexTags( 'qualifiers' ),
+				$this->callbackFactory->getCallbackToIndexTags( 'qualifiers' ),
 			),
 			'qualifiers' => array(
-				$this->getModCallbackToRemoveKeys( 'id' ),
-				$this->getModCallbackToIndexTags( 'property' ),
+				$this->callbackFactory->getCallbackToRemoveKeys( 'id' ),
+				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
 			),
 			'qualifiers-order' => array(
-				$this->getModCallbackToIndexTags( 'property' )
+				$this->callbackFactory->getCallbackToIndexTags( 'property' )
 			),
 			'mainsnak' => array(
-				$this->getModCallbackToAddDataTypeToSnak(),
+				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup ),
 			),
 		);
 
@@ -924,7 +958,7 @@ class ResultBuilder {
 		return $this->modifier->modifyUsingCallback(
 			$array,
 			$path,
-			$this->getModCallbackToAddDataTypeToSnaksGroupedByProperty()
+			$this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup )
 		);
 	}
 
@@ -1018,63 +1052,6 @@ class ResultBuilder {
 
 			$this->setValue( $path, 'lastrevid', empty( $revisionId ) ? 0 : $revisionId );
 		}
-	}
-
-	/**
-	 * Get callable to index array with the given tag name
-	 *
-	 * @param string $tagName
-	 *
-	 * @return callable
-	 */
-	private function getModCallbackToIndexTags( $tagName ) {
-		return function( $array ) use ( $tagName ) {
-			if ( is_array( $array ) ) {
-				ApiResult::setIndexedTagName( $array, $tagName );
-			}
-			return $array;
-		};
-	}
-
-	/**
-	 * Get callable to remove array keys and optionally set the key as an array value
-	 *
-	 * @param string|null $addAsArrayElement
-	 *
-	 * @return callable
-	 */
-	private function getModCallbackToRemoveKeys( $addAsArrayElement = null ) {
-		return function ( $array ) use ( $addAsArrayElement ) {
-			if ( $addAsArrayElement !== null ) {
-				foreach ( $array as $key => &$value ) {
-					$value[$addAsArrayElement] = $key;
-				}
-			}
-			$array = array_values( $array );
-			return $array;
-		};
-	}
-
-	private function getModCallbackToAddDataTypeToSnaksGroupedByProperty() {
-		$dtLookup = $this->dataTypeLookup;
-		return function ( $array ) use ( $dtLookup ) {
-			foreach ( $array as $propertyIdGroupKey => &$snakGroup ) {
-				$dataType = $dtLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroupKey ) );
-				foreach ( $snakGroup as &$snak ) {
-					$snak['datatype'] = $dataType;
-				}
-			}
-			return $array;
-		};
-	}
-
-	private function getModCallbackToAddDataTypeToSnak() {
-		$dtLookup = $this->dataTypeLookup;
-		return function ( $array ) use ( $dtLookup ) {
-			$dataType = $dtLookup->getDataTypeIdForProperty( new PropertyId( $array['property'] ) );
-			$array['datatype'] = $dataType;
-			return $array;
-		};
 	}
 
 }
