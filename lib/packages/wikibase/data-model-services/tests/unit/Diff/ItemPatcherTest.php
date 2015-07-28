@@ -30,7 +30,7 @@ class ItemPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getPatchedItem( Item $item, ItemDiff $patch ) {
-		$patchedItem = $item->copy();
+		$patchedItem = unserialize( serialize( $item ) );
 
 		$patcher = new ItemPatcher();
 		$patcher->patchEntity( $patchedItem, $patch );
