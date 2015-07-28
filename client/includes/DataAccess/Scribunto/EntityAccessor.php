@@ -4,14 +4,10 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Language;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\Serializer;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
@@ -23,6 +19,7 @@ use Wikibase\Lib\Store\EntityLookup;
  * @author Marius Hoch < hoo@online.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
+ * @author Adam Shorland
  */
 class EntityAccessor {
 
@@ -40,11 +37,6 @@ class EntityAccessor {
 	 * @var UsageAccumulator
 	 */
 	private $usageAccumulator;
-
-	/**
-	 * @var SerializationOptions|null
-	 */
-	private $serializationOptions = null;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -131,9 +123,17 @@ class EntityAccessor {
 			return null;
 		}
 
-		$serializer = $this->getEntitySerializer( $entityObject );
+		$serializer = new \ClientEntitySerializer(
+			$this->dataTypeLookup,
+			array_unique( array_merge(
+				$this->termsLanguages->getLanguages(),
+				$this->fallbackChain->getFetchLanguageCodes(),
+				array( $this->language->getCode() )
+			) ),
+			array( $this->language->getCode() => $this->fallbackChain )
+		);
 
-		$entityArr = $serializer->getSerialized( $entityObject );
+		$entityArr = $serializer->serialize( $entityObject );
 
 		// Renumber the entity as Lua uses 1-based array indexing
 		$this->renumber( $entityArr );
@@ -141,47 +141,6 @@ class EntityAccessor {
 
 		$this->usageAccumulator->addAllUsage( $entityId );
 		return $entityArr;
-	}
-
-	/**
-	 * @param EntityDocument $entityObject
-	 *
-	 * @return Serializer
-	 */
-	private function getEntitySerializer( EntityDocument $entityObject ) {
-		$options = $this->getSerializationOptions();
-		$serializerFactory = new LibSerializerFactory( $options, $this->dataTypeLookup );
-
-		return $serializerFactory->newSerializerForEntity( $entityObject->getType(), $options );
-	}
-
-	/**
-	 * @return SerializationOptions
-	 */
-	private function getSerializationOptions() {
-		if ( $this->serializationOptions === null ) {
-			$this->serializationOptions = $this->newSerializationOptions();
-		}
-
-		return $this->serializationOptions;
-	}
-
-	/**
-	 * @return SerializationOptions
-	 */
-	private function newSerializationOptions() {
-		$options = new SerializationOptions();
-
-		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
-		// so any customized Lua modules can access labels of another entity written in another variant,
-		// unless we give them the ability to getEntity() any entity by specifying its ID, not just self.
-		$languages = $this->termsLanguages->getLanguages() +
-			array( $this->language->getCode() => $this->fallbackChain );
-
-		// SerializationOptions accepts mixed types of keys happily.
-		$options->setLanguages( $languages );
-
-		return $options;
 	}
 
 }
