@@ -4,7 +4,6 @@ namespace Wikibase\Client\Usage;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * Value object representing the usage of an entity. This includes information about

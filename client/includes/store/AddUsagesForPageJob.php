@@ -64,7 +64,12 @@ class AddUsagesForPageJob extends Job {
 			'touched' => $touched
 		);
 
-		return new JobSpecification( 'wikibase-addUsagesForPage', $jobParams, array(), $title );
+		return new JobSpecification(
+			'wikibase-addUsagesForPage',
+			$jobParams,
+			array( 'removeDuplicates' => true ),
+			$title
+		);
 	}
 
 	/**
