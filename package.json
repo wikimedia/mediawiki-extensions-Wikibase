@@ -11,7 +11,7 @@
 	"author": "The Wikidata team",
 	"license": "GPL-2.0+",
 	"devDependencies": {
-		"jscs": "",
+		"jscs": ">=2.0",
 		"jshint": ""
 	}
 }
