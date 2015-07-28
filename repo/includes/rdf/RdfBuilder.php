@@ -350,7 +350,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	private function propertyIsLink( Property $property ) {
 		// For now, it's very simple but can be more complex later
-		return $property->getDataTypeId() == 'wikibase-entityid';
+		return in_array( $property->getDataTypeId(), array('wikibase-item', 'wikibase-property', 'url', 'commonsMedia') );
 	}
 
 	/**
