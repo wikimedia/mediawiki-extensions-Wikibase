@@ -13,9 +13,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\ParserOutputJsConfigBuilder
@@ -35,7 +34,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 		$this->addLabels( $item );
 		$mainSnakPropertyId = $this->addStatements( $item );
 
-		$configBuilder = new ParserOutputJsConfigBuilder( new SerializationOptions() );
+		$configBuilder = new ParserOutputJsConfigBuilder();
 		$configVars = $configBuilder->build( $item );
 
 		$this->assertWbEntityId( 'Q5881', $configVars );
@@ -56,7 +55,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 		$this->addLabels( $property );
 		$mainSnakPropertyId = $this->addStatements( $property );
 
-		$configBuilder = new ParserOutputJsConfigBuilder( new SerializationOptions() );
+		$configBuilder = new ParserOutputJsConfigBuilder();
 		$configVars = $configBuilder->build( $property );
 
 		$this->assertWbEntityId( 'P330', $configVars );
@@ -89,11 +88,8 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	}
 
 	public function assertSerializationEqualsEntity( EntityDocument $entity, $serialization ) {
-		$serializerFactory = new LibSerializerFactory();
-		$options = new SerializationOptions();
-
-		$unserializer = $serializerFactory->newUnserializerForEntity( $entity->getType(), $options );
-		$unserializedEntity = $unserializer->newFromSerialization( $serialization );
+		$deserializer = WikibaseRepo::getDefaultInstance()->getEntityDeserializer();
+		$unserializedEntity = $deserializer->deserialize( $serialization );
 
 		$this->assertTrue(
 			$unserializedEntity->equals( $entity ),
