@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Serializers;
+namespace Wikibase\Client;
 
 use RuntimeException;
 use Serializers\Serializer as NewStyleSerializer;
