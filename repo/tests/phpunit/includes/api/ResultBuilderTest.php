@@ -1151,6 +1151,51 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $data );
 	}
 
+	public function testAddClaimsNoProps() {
+		$result = $this->getDefaultResult();
+		$path = array( 'entities', 'Q1' );
+
+		$statement = new Statement(
+			new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
+			null,
+			new Referencelist( array(
+				new Reference( array(
+					new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
+				) ),
+			) ),
+			'fooguidbar'
+		);
+
+		$expected = array(
+			'entities' => array(
+				'Q1' => array(
+					'claims' => array(
+						'P12' => array(
+							array(
+								'id' => 'fooguidbar',
+								'mainsnak' => array(
+									'snaktype' => 'somevalue',
+									'property' => 'P12',
+								),
+								'type' => 'statement',
+								'rank' => 'normal',
+							),
+						),
+					),
+				),
+			),
+		);
+
+		$props = array();
+
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addClaims( array( $statement ), $path, $props );
+
+		$data = $result->getResultData();
+		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
+		$this->assertEquals( $expected, $data );
+	}
+
 	/**
 	 * @dataProvider statementSerializationProvider
 	 */
