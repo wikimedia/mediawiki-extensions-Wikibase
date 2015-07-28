@@ -7,6 +7,7 @@ use Revision;
 use SiteStore;
 use Status;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -298,29 +299,61 @@ class ResultBuilder {
 				);
 			}
 
-			$entitySerializer = $this->serializerFactory->newEntitySerializer();
-			$serialization = $entitySerializer->serialize( $entity );
+			$entitySerialization = $this->getEntityArray(
+				$entity,
+				$props,
+				$filterSiteIds,
+				$filterLangCodes,
+				$fallbackChains
+			);
 
-			$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
-			if ( $props == 'all' || in_array( 'sitelinks/urls', $props ) ) {
-				$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
-			}
-			$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
-			$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
-			$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
-			if ( !empty( $fallbackChains ) ) {
-				$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
-			}
-			$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization, $filterLangCodes );
-
-			if ( $this->isRawMode ) {
-				$serialization = $this->getRawModeEntitySerialization( $serialization );
-			}
-
-			$record = array_merge( $record, $serialization );
+			$record = array_merge( $record, $entitySerialization );
 		}
 
 		$this->appendValue( array( 'entities' ), $sourceEntityIdSerialization, $record, 'entity' );
+	}
+
+	/**
+	 * @see ResultBuilder::addEntityRevision
+	 *
+	 * @param Entity $entity
+	 * @param array|string $props
+	 * @param string[]|null $filterSiteIds
+	 * @param string[] $filterLangCodes
+	 * @param LanguageFallbackChain[] $fallbackChains
+	 *
+	 * @return array
+	 */
+	private function getEntityArray(
+		Entity $entity,
+		$props,
+		$filterSiteIds,
+		$filterLangCodes,
+		$fallbackChains
+	) {
+		$entitySerializer = $this->serializerFactory->newEntitySerializer();
+		$serialization = $entitySerializer->serialize( $entity );
+
+		$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
+		if ( $props == 'all' || in_array( 'sitelinks/urls', $props ) ) {
+			$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
+		}
+		$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
+		$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
+		$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
+		if ( !empty( $fallbackChains ) ) {
+			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
+		}
+		$serialization = $this->filterEntitySerializationUsingLangCodes(
+			$serialization,
+			$filterLangCodes
+		);
+
+		if ( $this->isRawMode ) {
+			$serialization = $this->getRawModeEntitySerialization( $serialization );
+		}
+
+		return $serialization;
 	}
 
 	/**
