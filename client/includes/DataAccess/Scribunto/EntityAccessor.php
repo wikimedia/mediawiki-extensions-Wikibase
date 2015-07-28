@@ -2,11 +2,14 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
+use DataValues\Serializers\DataValueSerializer;
 use Language;
 use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -131,9 +134,16 @@ class EntityAccessor {
 			return null;
 		}
 
-		$serializer = $this->getEntitySerializer( $entityObject );
-
-		$entityArr = $serializer->getSerialized( $entityObject );
+		$entityArr = $this->getEntityArray(
+			$entityObject,
+			//TODO is this the right set of langs to return? or just 1? CONFUSING!
+			array_unique( array_merge(
+				$this->termsLanguages->getLanguages(),
+				$this->fallbackChain->getFetchLanguageCodes(),
+				array( $this->language->getCode() )
+			) ),
+			array( $this->language->getCode() => $this->fallbackChain )
+		);
 
 		// Renumber the entity as Lua uses 1-based array indexing
 		$this->renumber( $entityArr );
@@ -144,44 +154,123 @@ class EntityAccessor {
 	}
 
 	/**
-	 * @param EntityDocument $entityObject
+	 * @see ResultBuilder::addEntityRevision
 	 *
-	 * @return Serializer
+	 * @param Entity $entity
+	 * @param array $filterLangCodes
+	 * @param array $fallbackChains
+	 *
+	 * @return array
 	 */
-	private function getEntitySerializer( EntityDocument $entityObject ) {
-		$options = $this->getSerializationOptions();
-		$serializerFactory = new LibSerializerFactory( $options, $this->dataTypeLookup );
+	private function getEntityArray( Entity $entity, array $filterLangCodes, array $fallbackChains ) {
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$entitySerializer = $serializerFactory->newEntitySerializer();
+		$serialization = $entitySerializer->serialize( $entity );
 
-		return $serializerFactory->newSerializerForEntity( $entityObject->getType(), $options );
-	}
-
-	/**
-	 * @return SerializationOptions
-	 */
-	private function getSerializationOptions() {
-		if ( $this->serializationOptions === null ) {
-			$this->serializationOptions = $this->newSerializationOptions();
+		if ( !empty( $fallbackChains ) ) {
+			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
 		}
 
-		return $this->serializationOptions;
+		$serialization = $this->filterEntitySerializationUsingLangCodes(
+			$serialization,
+			$filterLangCodes
+		);
+
+		// Omit empty arrays from the result
+		$serialization = array_filter(
+			$serialization,
+			function( $value ) {
+				return $value !== array();
+			}
+		);
+
+		return $serialization;
 	}
 
 	/**
-	 * @return SerializationOptions
+	 * @param array $serialization
+	 * @param LanguageFallbackChain[] $fallbackChains
+	 *
+	 * @TODO FIXME duplicated code in Repo ResultBuilder
+	 *
+	 * @return array
 	 */
-	private function newSerializationOptions() {
-		$options = new SerializationOptions();
+	private function addEntitySerializationFallbackInfo(
+		array $serialization,
+		array $fallbackChains
+	) {
+		$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
+			$serialization['labels'],
+			$fallbackChains
+		);
+		$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
+			$serialization['descriptions'],
+			$fallbackChains
+		);
+		return $serialization;
+	}
 
-		// See mw.wikibase.lua. This is the only way to inject values into mw.wikibase.label( ),
-		// so any customized Lua modules can access labels of another entity written in another variant,
-		// unless we give them the ability to getEntity() any entity by specifying its ID, not just self.
-		$languages = $this->termsLanguages->getLanguages() +
-			array( $this->language->getCode() => $this->fallbackChain );
+	/**
+	 * @param array $serialization
+	 * @param LanguageFallbackChain[] $fallbackChains
+	 *
+	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 *
+	 * @return array
+	 */
+	private function getTermsSerializationWithFallbackInfo(
+		array $serialization,
+		array $fallbackChains
+	) {
+		$newSerialization = $serialization;
+		foreach ( $fallbackChains as $requestedLanguageCode => $fallbackChain ) {
+			if ( !array_key_exists( $requestedLanguageCode, $serialization ) ) {
+				$fallbackSerialization = $fallbackChain->extractPreferredValue( $serialization );
+				if ( $fallbackSerialization !== null ) {
+					if ( $fallbackSerialization['source'] !== null ) {
+						$fallbackSerialization['source-language'] = $fallbackSerialization['source'];
+					}
+					unset( $fallbackSerialization['source'] );
+					$newSerialization[$requestedLanguageCode] = $fallbackSerialization;
+				}
+			}
+		}
+		return $newSerialization;
+	}
 
-		// SerializationOptions accepts mixed types of keys happily.
-		$options->setLanguages( $languages );
-
-		return $options;
+	/**
+	 * @param array $serialization
+	 * @param array|null $langCodes
+	 *
+	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 *
+	 * @return array
+	 */
+	private function filterEntitySerializationUsingLangCodes( array $serialization, $langCodes ) {
+		if ( !empty( $langCodes ) ) {
+			if ( array_key_exists( 'labels', $serialization ) ) {
+				foreach ( $serialization['labels'] as $langCode => $languageArray ) {
+					if ( !in_array( $langCode, $langCodes ) ) {
+						unset( $serialization['labels'][$langCode] );
+					}
+				}
+			}
+			if ( array_key_exists( 'descriptions', $serialization ) ) {
+				foreach ( $serialization['descriptions'] as $langCode => $languageArray ) {
+					if ( !in_array( $langCode, $langCodes ) ) {
+						unset( $serialization['descriptions'][$langCode] );
+					}
+				}
+			}
+			if ( array_key_exists( 'aliases', $serialization ) ) {
+				foreach ( $serialization['aliases'] as $langCode => $languageArray ) {
+					if ( !in_array( $langCode, $langCodes ) ) {
+						unset( $serialization['aliases'][$langCode] );
+					}
+				}
+			}
+		}
+		return $serialization;
 	}
 
 }
