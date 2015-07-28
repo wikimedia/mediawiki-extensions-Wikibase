@@ -9,9 +9,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\ParserOutputJsConfigBuilder
@@ -42,11 +41,8 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	}
 
 	public function assertSerializationEqualsEntity( Entity $entity, $serialization ) {
-		$serializerFactory = new LibSerializerFactory();
-		$options = new SerializationOptions();
-
-		$unserializer = $serializerFactory->newUnserializerForEntity( $entity->getType(), $options );
-		$unserializedEntity = $unserializer->newFromSerialization( $serialization );
+		$deserializer = WikibaseRepo::getDefaultInstance()->getEntityDeserializer();
+		$unserializedEntity = $deserializer->deserialize( $serialization );
 
 		$this->assertTrue( $unserializedEntity->equals( $entity ), 'unserialized entity equals entity' );
 	}
