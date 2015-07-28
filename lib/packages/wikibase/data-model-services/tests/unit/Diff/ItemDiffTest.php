@@ -47,7 +47,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = $a->copy();
+		$b = unserialize( serialize( $a ) );
 		$b->getSiteLinkList()->addSiteLink(
 			new SiteLink(
 				'dewiki',
@@ -158,7 +158,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = $a->copy();
+		$b = unserialize( serialize( $a ) );
 		$b->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
 
 		$tests[] = array( $a, $b );

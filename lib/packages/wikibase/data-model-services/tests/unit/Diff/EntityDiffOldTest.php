@@ -35,7 +35,8 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$a = self::newEntity( $entityType );
 		$a->setLabel( 'en', 'Test' );
 
-		$b = $a->copy();
+		$b = self::newEntity( $entityType );
+		$b->setLabel( 'en', 'Test' );
 		$b->setLabel( 'de', 'Test' );
 
 		$tests[] = array( $a, $b );
@@ -54,14 +55,15 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$a = self::newEntity( $entityType );
 		$a->setLabel( 'en', 'Test' );
 
-		$b = $a->copy();
+		$b = self::newEntity( $entityType );
 		$b->setLabel( 'en', 'Test!!!' );
 
 		// #3: add description ------------------------------
 		$a = self::newEntity( $entityType );
 		$a->setDescription( 'en', 'Test' );
 
-		$b = $a->copy();
+		$b = self::newEntity( $entityType );
+		$b->setDescription( 'en', 'Test' );
 		$b->setDescription( 'de', 'Test' );
 
 		$tests[] = array( $a, $b );
@@ -71,8 +73,8 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$a->setDescription( 'en', 'Test' );
 		$a->setDescription( 'de', 'Test' );
 
-		$b = $a->copy();
-		$b->removeDescription( 'en' );
+		$b = self::newEntity( $entityType );
+		$b->setDescription( 'de', 'Test' );
 
 		$tests[] = array( $a, $b );
 
@@ -80,44 +82,44 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$a = self::newEntity( $entityType );
 		$a->setDescription( 'en', 'Test' );
 
-		$b = $a->copy();
+		$b = self::newEntity( $entityType );
 		$b->setDescription( 'en', 'Test!!!' );
 
 		$tests[] = array( $a, $b );
 
 		// #6: add alias ------------------------------
 		$a = self::newEntity( $entityType );
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
+		$a->setAliases( 'en', array( 'Foo', 'Bar' ) );
 
-		$b = $a->copy();
-		$b->addAliases( 'en', array( 'Quux' ) );
+		$b = self::newEntity( $entityType );
+		$b->setAliases( 'en', array( 'Foo', 'Bar', 'Quux' ) );
 
 		$tests[] = array( $a, $b );
 
 		// #7: add alias language
 		$a = self::newEntity( $entityType );
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
+		$a->setAliases( 'en', array( 'Foo', 'Bar' ) );
 
-		$b = $a->copy();
-		$b->addAliases( 'de', array( 'Quux' ) );
+		$b = self::newEntity( $entityType );
+		$b->setAliases( 'en', array( 'Foo', 'Bar' ) );
+		$b->setAliases( 'de', array( 'Quux' ) );
 
 		$tests[] = array( $a, $b );
 
 		// #8: remove alias
 		$a = self::newEntity( $entityType );
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
+		$a->setAliases( 'en', array( 'Foo', 'Bar' ) );
 
-		$b = $a->copy();
-		$b->removeAliases( 'en', array( 'Foo' ) );
+		$b = self::newEntity( $entityType );
+		$b->setAliases( 'en', array( 'Bar' ) );
 
 		$tests[] = array( $a, $b );
 
 		// #9: remove alias language
 		$a = self::newEntity( $entityType );
+		$a->setAliases( 'en', array( 'Foo', 'Bar' ) );
 
-		$b = $a->copy();
-		$b->addAliases( 'en', array( 'Foo', 'Bar' ) );
-		$b->removeAliases( 'en', array( 'Foo', 'Bar' ) );
+		$b = self::newEntity( $entityType );
 
 		$tests[] = array( $a, $b );
 		return $tests;
@@ -140,9 +142,9 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 		// #0: adding a label where there was none before
 		$base = self::newEntity( Item::ENTITY_TYPE );
-		$current = $base->copy();
+		$current = unserialize( serialize( $base ) );
 
-		$new = $base->copy();
+		$new = unserialize( serialize( $base ) );
 		$new->setLabel( 'en', 'TEST' );
 
 		$cases[] = array(
@@ -156,8 +158,8 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$base = self::newEntity( Item::ENTITY_TYPE );
 		$current = $base;
 
-		$new = $base->copy();
-		$new->addAliases( 'en', array( 'TEST' ) );
+		$new = unserialize( serialize( $base ) );
+		$new->setAliases( 'en', array( 'TEST' ) );
 
 		$cases[] = array(
 			$base,
@@ -168,11 +170,11 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 		// #2: adding an alias where there already was one before
 		$base = self::newEntity( Item::ENTITY_TYPE );
-		$base->addAliases( 'en', array( 'Foo' ) );
+		$base->setAliases( 'en', array( 'Foo' ) );
 		$current = $base;
 
-		$new = $base->copy();
-		$new->addAliases( 'en', array( 'Bar' ) );
+		$new = unserialize( serialize( $base ) );
+		$new->setAliases( 'en', array( 'Bar' ) );
 
 		$cases[] = array(
 			$base,
@@ -183,11 +185,11 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 		// #3: adding an alias where there already was one in another language
 		$base = self::newEntity( Item::ENTITY_TYPE );
-		$base->addAliases( 'en', array( 'Foo' ) );
+		$base->setAliases( 'en', array( 'Foo' ) );
 		$current = $base;
 
-		$new = $base->copy();
-		$new->addAliases( 'de', array( 'Bar' ) );
+		$new = unserialize( serialize( $base ) );
+		$new->setAliases( 'de', array( 'Bar' ) );
 
 		$cases[] = array(
 			$base,
@@ -208,7 +210,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 		$patch = $differ->diffEntities( $base, $new );
 
-		$patchedCurrent = $current->copy();
+		$patchedCurrent = unserialize( serialize( $current ) );
 		$patcher->patchEntity( $patchedCurrent, $patch );
 
 		$cleanPatch = $differ->diffEntities( $base, $patchedCurrent );
