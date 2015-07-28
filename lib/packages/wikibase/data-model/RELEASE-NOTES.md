@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 4.0 (dev)
+## Version 4.0 (2015-07-28)
 
 #### Breaking changes
 
