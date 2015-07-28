@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\StatementRankSerializer;
 use Wikibase\Summary;
 
 /**
@@ -76,8 +77,12 @@ class ChangeOpStatementRank extends ChangeOpBase {
 		$this->updateSummary( $summary, null, '', $this->getSnakSummaryArgs( $statement->getMainSnak() ) );
 
 		if ( $summary !== null ) {
+			$statementRankSerializer = new StatementRankSerializer();
 			$summary->addAutoCommentArgs(
-				array( ClaimSerializer::serializeRank( $oldRank ), ClaimSerializer::serializeRank( $this->rank ) )
+				array(
+					$statementRankSerializer->serialize( $oldRank ),
+					$statementRankSerializer->serialize( $this->rank )
+				)
 			);
 		}
 

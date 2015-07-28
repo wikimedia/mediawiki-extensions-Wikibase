@@ -10,6 +10,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\StatementRankSerializer;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -79,7 +80,8 @@ class ClaimHtmlGenerator {
 		//  (see https://github.com/wmde/WikibaseDataModel/pull/317)
 		if ( $claim instanceof Statement ) {
 			/** @var Statement $claim */
-			$serializedRank = ClaimSerializer::serializeRank( $claim->getRank() );
+			$statementRankSerializer = new StatementRankSerializer();
+			$serializedRank = $statementRankSerializer->serialize( $claim->getRank() );
 
 			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
 			// wikibase-statementview-rank-deprecated
