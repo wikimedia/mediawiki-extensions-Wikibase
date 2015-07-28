@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Lib\Serializers;
+namespace Wikibase\Client;
 
 use RuntimeException;
-use Serializers\Serializer as NewStyleSerializer;
+use Serializers\Serializer;
 
 /**
  * Serializer to be used as a stand-in when no serialization is supported.
@@ -12,7 +12,7 @@ use Serializers\Serializer as NewStyleSerializer;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ForbiddenSerializer implements NewStyleSerializer {
+class ForbiddenSerializer implements Serializer {
 
 	/**
 	 * @var string
