@@ -16,12 +16,8 @@ matrix:
       php: 7
     - env: DM=~3.0
       php: hhvm
-    - env: DM=~3.0@dev
-      php: hhvm-nightly
   exclude:
     - env: THENEEDFORTHIS=FAIL
-  allow_failures:
-    - php: hhvm-nightly
 
 sudo: false
 
