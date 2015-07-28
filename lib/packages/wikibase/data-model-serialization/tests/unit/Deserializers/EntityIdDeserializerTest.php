@@ -3,8 +3,8 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\EntityIdDeserializer
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 class EntityIdDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
-		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
+		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Services\EntityId\EntityIdParser' );
 		$entityIdParserMock->expects( $this->any() )
 			->method( 'parse' )
 			->with( $this->equalTo( 'Q42' ) )
@@ -53,7 +53,7 @@ class EntityIdDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function testDeserializeWithEntityIdParsingException() {
-		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
+		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Services\EntityId\EntityIdParser' );
 		$entityIdParserMock->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->throwException( new EntityIdParsingException() ) );
