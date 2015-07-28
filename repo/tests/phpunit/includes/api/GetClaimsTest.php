@@ -20,6 +20,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StatementRankSerializer;
 
 /**
  * @covers Wikibase\Repo\Api\GetClaims
@@ -150,10 +151,11 @@ class GetClaimsTest extends ApiTestCase {
 			}
 
 			foreach ( array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED ) as $rank ) {
+				$statementRankSerializer = new StatementRankSerializer();
 				$params = array(
 					'action' => 'wbgetclaims',
 					'entity' => $idSerialization,
-					'rank' => ClaimSerializer::serializeRank( $rank ),
+					'rank' => $statementRankSerializer->serialize( $rank ),
 				);
 
 				$statementsByRank = $statements->getByRank( $rank )->toArray();
