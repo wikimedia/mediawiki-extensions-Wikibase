@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use Job;
 use JobQueueGroup;
 use JobSpecification;
 use ParserOutput;
@@ -36,7 +35,13 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 *
 	 * @return UsageUpdater
 	 */
-	private function newUsageUpdater( Title $title, array $expectedUsages = null, $touched = null, $prune = true, $add = true ) {
+	private function newUsageUpdater(
+		Title $title,
+		array $expectedUsages = null,
+		$touched = null,
+		$prune = true,
+		$add = true
+	) {
 		$usageUpdater = $this->getMockBuilder( 'Wikibase\Client\Store\UsageUpdater' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -80,7 +85,12 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 *
 	 * @return JobQueueGroup
 	 */
-	private function newJobScheduler( Title $title, array $expectedUsages = null, $touched = null, $useJobQueue = false ) {
+	private function newJobScheduler(
+		Title $title,
+		array $expectedUsages = null,
+		$touched = null,
+		$useJobQueue = false
+	) {
 		$jobScheduler = $this->getMockBuilder( 'JobQueueGroup' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -120,7 +130,13 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 *
 	 * @return DataUpdateHookHandlers
 	 */
-	private function newDataUpdateHookHandlers( Title $title, array $expectedUsages = null, $touched = null, $prune = true, $asyncAdd = false ) {
+	private function newDataUpdateHookHandlers(
+		Title $title,
+		array $expectedUsages = null,
+		$touched = null,
+		$prune = true,
+		$asyncAdd = false
+	) {
 		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $touched, $prune, !$asyncAdd );
 		$jobScheduler = $this->newJobScheduler( $title, $expectedUsages, $touched, $asyncAdd );
 
