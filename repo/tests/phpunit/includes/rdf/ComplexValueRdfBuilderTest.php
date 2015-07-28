@@ -328,36 +328,30 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '<http://www.w3.org/2001/XMLSchema#integer> .',
 				),
 			),
-			'time-bce' => array( // NOTE: This assumes that internal data and the RDF data use the
-				                 //       same notion of negative years. If one uses traditional
-				                 //       numbering (-44 means 44 BCE, XSD 1.0) and the other
-				                 //       astronomical numbering (-44 means 43 BCE, XSD 1.1),
+			'time-bce' => array( // NOTE: This assumes that we're using XSD 1.1 standard.
+				                 //       Internally, Wikidata uses traditional
+				                 //       numbering (-44 means 44 BCE, XSD 1.0).
+				                 //       XSD 1.1 uses astronomical numbering (-44 means 43 BCE),
 				                 //       conversion would apply.
 				new PropertyId( 'P8' ),
 				new TimeValue( '-0044-03-15T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> "-0044-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> "-0043-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> .',
 				),
 				array(
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#Value> .',
+						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Value> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-						. '<http://wikiba.se/ontology-beta#TimeValue> .',
+						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#TimeValue> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://wikiba.se/ontology-beta#timeCalendarModel> '
-						. '<http://www.wikidata.org/entity/Q1985727> .',
+						. '<http://wikiba.se/ontology-beta#timeCalendarModel> <http://www.wikidata.org/entity/Q1985727> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://wikiba.se/ontology-beta#timePrecision> "11"^^'
-						. '<http://www.w3.org/2001/XMLSchema#integer> .',
+						. '<http://wikiba.se/ontology-beta#timePrecision> "11"^^<http://www.w3.org/2001/XMLSchema#integer> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://wikiba.se/ontology-beta#timeValue> "-0044-03-15T00:00:00Z"^^'
-						. '<http://www.w3.org/2001/XMLSchema#dateTime> .',
+						. '<http://wikiba.se/ontology-beta#timeValue> "-0043-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://wikiba.se/ontology-beta#timeTimezone> "0"^^'
-						. '<http://www.w3.org/2001/XMLSchema#integer> .',
+						. '<http://wikiba.se/ontology-beta#timeTimezone> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .',
 				),
 			),
 			'time-julian' => array( // NOTE: Currently, giving a calendar other than gregorian
