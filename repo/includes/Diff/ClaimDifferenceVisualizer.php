@@ -11,6 +11,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\StatementRankSerializer;
 
 /**
  * Class for generating HTML for Claim Diffs.
@@ -187,7 +188,8 @@ class ClaimDifferenceVisualizer {
 		}
 
 		if ( is_int( $rank ) ) {
-			$rank = ClaimSerializer::serializeRank( $rank );
+			$statementRankSerializer = new StatementRankSerializer();
+			$rank = $statementRankSerializer->serialize( $rank );
 		}
 
 		// Messages:
