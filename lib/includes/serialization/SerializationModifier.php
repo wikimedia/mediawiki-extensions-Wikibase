@@ -1,13 +1,11 @@
 <?php
 
-namespace Wikibase\Repo\Api;
+namespace Wikibase\Lib\Serialization;
 
 /**
  * Class which can be used to easily modify serializations and arrays.
  *
- * This is in Repo\Api to be used to modify the Api output serialization.
- * This could easily be used in other places if needed.
- * This could also easily be factored out into a library.
+ * This could easily be factored out into a library.
  *
  * @since 0.5
  * @author Adam Shorland
