@@ -5,6 +5,8 @@ namespace Wikibase\DataModel\Services\Tests\Diff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 
 /**
  * @covers Wikibase\DataModel\Services\Diff\EntityDiff
@@ -126,7 +128,10 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideApplyData
 	 */
 	public function testApply( Entity $a, Entity $b ) {
-		$a->patch( $a->getDiff( $b ) );
+		$differ = new EntityDiffer();
+		$patcher = new EntityPatcher();
+
+		$patcher->patchEntity( $a, $differ->diffEntities( $a, $b ) );
 		$this->assertTrue( $a->getFingerprint()->equals( $b->getFingerprint() ) );
 	}
 
@@ -198,12 +203,15 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideConflictDetection
 	 */
 	public function testConflictDetection( Entity $base, Entity $current, Entity $new, $expectedConflicts ) {
-		$patch = $base->getDiff( $new );
+		$differ = new EntityDiffer();
+		$patcher = new EntityPatcher();
+
+		$patch = $differ->diffEntities( $base, $new );
 
 		$patchedCurrent = $current->copy();
-		$patchedCurrent->patch( $patch );
+		$patcher->patchEntity( $patchedCurrent, $patch );
 
-		$cleanPatch = $base->getDiff( $patchedCurrent );
+		$cleanPatch = $differ->diffEntities( $base, $patchedCurrent );
 
 		$conflicts = $patch->count() - $cleanPatch->count();
 
