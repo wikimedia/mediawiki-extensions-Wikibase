@@ -1,9 +1,9 @@
 <?php
 
-namespace Wikibase\Lib\Serializers;
+namespace Wikibase\Repo\Serializers;
 
 use InvalidArgumentException;
-use Serializers\Serializer as NewStyleSerializer;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -14,7 +14,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class LegacyInternalEntitySerializer implements NewStyleSerializer {
+class LegacyInternalEntitySerializer implements Serializer {
 
 	/**
 	 * Returns an array structure representing the given entity,
