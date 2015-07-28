@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 
 /**
- * @covers Wikibase\DataModel\Entity\InMemoryDataTypeLookup
+ * @covers Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

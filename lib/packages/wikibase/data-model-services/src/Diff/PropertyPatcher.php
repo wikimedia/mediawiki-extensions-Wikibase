@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
-use Wikibase\DataModel\Statement\StatementListPatcher;
+use Wikibase\DataModel\Services\Diff\Internal\StatementListPatcher;
 
 /**
  * @since 1.0

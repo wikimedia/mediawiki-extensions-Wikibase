@@ -7,8 +7,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Diff\Internal\StatementListDiffer;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Statement\StatementListDiffer;
 
 /**
  * @since 1.0
