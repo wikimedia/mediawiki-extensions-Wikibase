@@ -198,4 +198,5 @@ class MockClientStore implements ClientStore {
 			$this->getSubscriptionManager()
 		);
 	}
+
 }

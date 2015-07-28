@@ -476,4 +476,5 @@ class DirectSqlStore implements ClientStore {
 			$this->getSubscriptionManager()
 		);
 	}
+
 }
