@@ -48,7 +48,7 @@ Wikibase DataModel Services 1.x:
 
 ### Manual
 
-Get the Wikibase DataModel code, either via git, or some other means. Also get all dependencies.
+Get the Wikibase DataModel Services code, either via git, or some other means. Also get all dependencies.
 You can find a list of the dependencies in the "require" section of the composer.json file.
 The "autoload" section of this file specifies how to load the resources provide by this library.
 
@@ -62,9 +62,9 @@ run style checks use `composer cs`.
 
 ## Links
 
-* [Wikibase DataModel on Packagist](https://packagist.org/packages/wikibase/data-model-services)
-* [Wikibase DataModel on TravisCI](https://travis-ci.org/wmde/WikibaseDataModelServices)
-* [Wikibase DataModel on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices)
+* [Wikibase DataModel Services on Packagist](https://packagist.org/packages/wikibase/data-model-services)
+* [Wikibase DataModel Services on TravisCI](https://travis-ci.org/wmde/WikibaseDataModelServices)
+* [Wikibase DataModel Services on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseDataModelServices)
  
 ## See also
 
