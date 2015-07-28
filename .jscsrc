@@ -3,12 +3,26 @@
 	"preset": "wikimedia",
 
 	// ----
-	// Rules from wikimedia preset we don't follow
+	// Rules from wikimedia preset we don't yet? follow
 
 	"validateIndentation": null,
 	"requireMultipleVarDecl": null,
 	"disallowDanglingUnderscores": null,
-	"requireSpacesInsideArrayBrackets": null,
+	"requireSpacesInsideBrackets": null,
+	"requireVarDeclFirst": null,
+	"jsDoc": {
+		// what we don't yet follow is commented out
+		//"checkAnnotations": "jsduck5",
+		//"checkParamNames": true,
+		"requireParamTypes": true,
+		"checkRedundantParams": true,
+		//"checkReturnTypes": true,
+		"checkRedundantReturns": true,
+		//"requireReturnTypes": true,
+		//"checkTypes": "capitalizedNativeCase",
+		"checkRedundantAccess": true
+		//"requireNewlineAfterDescription": true
+	},
 
 	// ----
 	// Own rules
@@ -24,5 +38,5 @@
 		"else"
 	],
 
-	"excludeFiles": [ "node_modules/**", "vendor/**" ]
+	"excludeFiles": [ "node_modules/**", "vendor/**", "extensions/**" ]
 }
