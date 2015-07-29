@@ -23,9 +23,10 @@ use ValueValidators\Result;
 use Wikibase\Content\DeferredCopyEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
-use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
@@ -550,7 +551,8 @@ abstract class EntityContent extends AbstractContent {
 		$fromEntity = $fromContent->isRedirect() ? $this->makeEmptyEntity() : $fromContent->getEntity();
 		$toEntity = $toContent->isRedirect() ? $this->makeEmptyEntity() : $toContent->getEntity();
 
-		$entityDiff = $fromEntity->getDiff( $toEntity );
+		$entityDiffer = new EntityDiffer();
+		$entityDiff = $entityDiffer->diffEntities( $fromEntity, $toEntity );
 
 		return new EntityContentDiff( $entityDiff, $redirectDiff );
 	}

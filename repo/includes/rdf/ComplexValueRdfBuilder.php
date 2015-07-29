@@ -3,7 +3,7 @@
 namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

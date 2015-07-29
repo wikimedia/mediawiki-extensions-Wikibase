@@ -11,12 +11,12 @@ use DataValues\StringValue;
 use DataValues\TimeValue;
 use PHPUnit_Framework_TestCase;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\ValidatorBuilders;
 

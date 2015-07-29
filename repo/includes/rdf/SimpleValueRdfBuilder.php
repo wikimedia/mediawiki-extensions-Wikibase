@@ -10,9 +10,9 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

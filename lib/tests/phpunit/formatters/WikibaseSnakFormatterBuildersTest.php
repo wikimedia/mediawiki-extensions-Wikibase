@@ -7,10 +7,10 @@ use DataValues\StringValue;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
@@ -39,7 +39,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseSnakFormatterBuilders
 	 */
 	public function newBuilders( $propertyType, EntityId $entityId ) {
-		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$typeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( $propertyType ) );
