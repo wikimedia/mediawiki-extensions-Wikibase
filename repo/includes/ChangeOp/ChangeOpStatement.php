@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
 use Wikibase\Validators\SnakValidator;
@@ -34,7 +34,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	private $statement;
 
 	/**
-	 * @var ClaimGuidGenerator
+	 * @var GuidGenerator
 	 */
 	private $guidGenerator;
 
@@ -60,7 +60,7 @@ class ChangeOpStatement extends ChangeOpBase {
 
 	/**
 	 * @param Statement $statement
-	 * @param ClaimGuidGenerator $guidGenerator
+	 * @param GuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param StatementGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
@@ -70,7 +70,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	 */
 	public function __construct(
 		Statement $statement,
-		ClaimGuidGenerator $guidGenerator,
+		GuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
 		StatementGuidParser $guidParser,
 		SnakValidator $snakValidator,
