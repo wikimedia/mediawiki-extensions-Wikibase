@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Test;
 use DataValues\BooleanValue;
 use DataValues\DataValue;
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
