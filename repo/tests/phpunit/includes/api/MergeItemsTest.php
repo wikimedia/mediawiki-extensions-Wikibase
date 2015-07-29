@@ -6,20 +6,20 @@ use Language;
 use Status;
 use TestSites;
 use User;
+use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
-use Wikibase\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
-use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\MockSiteStore;
-use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Validators\TermValidatorFactory;
 
 /**
  * @covers Wikibase\Repo\Api\MergeItems

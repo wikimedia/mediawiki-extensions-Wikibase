@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;

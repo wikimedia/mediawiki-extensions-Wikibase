@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\NamespaceChecker;
 
 /**

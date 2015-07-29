@@ -5,8 +5,8 @@ namespace Wikibase\Client\Usage\Tests;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageAspectTransformer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 
 /**
  * @covers Wikibase\Client\Usage\UsageAspectTransformer

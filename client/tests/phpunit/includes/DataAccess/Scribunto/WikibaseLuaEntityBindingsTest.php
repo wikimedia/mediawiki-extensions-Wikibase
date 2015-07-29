@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
