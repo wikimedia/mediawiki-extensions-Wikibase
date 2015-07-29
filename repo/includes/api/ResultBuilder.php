@@ -75,9 +75,9 @@ class ResultBuilder {
 	private $callbackFactory;
 
 	/**
-	 * @var bool when special elements such as '_element' are needed by the formatter.
+	 * @var bool when metadata elements should be added, see ApiResult::META_*
 	 */
-	private $isRawMode;
+	private $addMetaData;
 
 	/**
 	 * @param ApiResult $result
@@ -85,7 +85,8 @@ class ResultBuilder {
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteStore $siteStore
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param bool $isRawMode when special elements such as '_element' are needed by the formatter.
+	 * @param bool $addMetaData when metadata elements should be added, see ApiResult::META_*
+	 *     This is generally true for the api and false for everything else.
 	 */
 	public function __construct(
 		ApiResult $result,
@@ -93,13 +94,13 @@ class ResultBuilder {
 		SerializerFactory $serializerFactory,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $dataTypeLookup,
-		$isRawMode
+		$addMetaData
 	) {
 		$this->result = $result;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
-		$this->isRawMode = $isRawMode;
+		$this->addMetaData = $addMetaData;
 		$this->siteStore = $siteStore;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->modifier = new SerializationModifier();
@@ -146,7 +147,7 @@ class ResultBuilder {
 		Assert::parameterType( 'string', $name, '$name' );
 		Assert::parameterType( 'string', $tag, '$tag' );
 
-		if ( $this->isRawMode ) {
+		if ( $this->addMetaData ) {
 			// Unset first, so we don't make the tag name an actual value.
 			// We'll be setting this to $tag by calling setIndexedTagName().
 			unset( $values['_element'] );
@@ -197,7 +198,6 @@ class ResultBuilder {
 	 *
 	 * @param $path array|string|null
 	 * @param $key int|string|null the key to use when appending, or null for automatic.
-	 * May be ignored even if given, based on $this->result->getIsRawMode().
 	 * @param $value mixed
 	 * @param string $tag tag name to use for $value in indexed mode
 	 */
@@ -206,10 +206,6 @@ class ResultBuilder {
 		$this->checkKeyType( $key );
 		Assert::parameterType( 'string', $tag, '$tag' );
 		$this->checkValueIsNotList( $value );
-
-		if ( $this->isRawMode ) {
-			$key = null;
-		}
 
 		$this->result->addValue( $path, $key, $value );
 		$this->result->addIndexedTagName( $path, $tag );
@@ -356,8 +352,10 @@ class ResultBuilder {
 			$filterLangCodes
 		);
 
-		if ( $this->isRawMode ) {
-			$serialization = $this->getRawModeEntitySerialization( $serialization );
+		$serialization = $this->addKeysAsElementsInEntityArray( $serialization );
+
+		if ( $this->addMetaData ) {
+			$serialization = $this->addMetaDataToEntityArray( $serialization );
 		}
 
 		return $serialization;
@@ -528,51 +526,28 @@ class ResultBuilder {
 		return $serialization;
 	}
 
-	private function getRawModeEntitySerialization( $serialization ) {
-		// In raw mode aliases are not currently grouped by language
-		$serialization = $this->modifier->modifyUsingCallback(
-			$serialization,
-			'aliases',
-			function( $array ) {
-				$newArray = array();
-				foreach ( $array as $aliasGroup ) {
-					foreach ( $aliasGroup as $alias ) {
-						$newArray[] = $alias;
-					}
-				}
-				return $newArray;
-			}
-		);
-		// In the old Lib serializers
-		$serialization = $this->modifier->modifyUsingCallback(
-			$serialization,
-			'claims/*/*',
-			function( $array ) {
-				if ( !array_key_exists( 'qualifiers', $array ) ) {
-					$array['qualifiers'] = array();
-				}
-				if ( !array_key_exists( 'qualifiers-order', $array ) ) {
-					$array['qualifiers-order'] = array();
-				}
-				return $array;
-			}
-		);
-		$keysToValues = array(
-			'aliases' => null,
-			'descriptions' => null,
-			'labels' => null,
+	private function addKeysAsElementsInEntityArray( $serialization ) {
+		$keysToElements = array(
+			//TODO something needs to be done with these tags 'aliases' => null,
+			//TODO something needs to be done with these tags 'descriptions' => null,
+			//TODO something needs to be done with these tags 'labels' => null,
 			'claims/*/*/references/*/snaks' => 'id',
 			'claims/*/*/qualifiers' => 'id',
 			'claims' => 'id',
-			'sitelinks' => null,
+			//TODO something needs to be done with these tags 'sitelinks' => null,
 		);
-		foreach ( $keysToValues as $path => $newKey ) {
+		foreach ( $keysToElements as $path => $newKey ) {
+			//TODO we no longer remove these keys, but the formater should ignore them!! :(
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
 				$path,
-				$this->callbackFactory->getCallbackToRemoveKeys( $newKey )
+				$this->callbackFactory->getCallbackToAddKeysAsElement( $newKey )
 			);
 		}
+		return $serialization;
+	}
+
+	private function addMetaDataToEntityArray( $serialization ) {
 		$tagsToAdd = array(
 			'labels' => 'label',
 			'descriptions' => 'description',
@@ -699,17 +674,12 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addAliasGroupList( AliasGroupList $aliasGroupList, $path ) {
-		if ( $this->isRawMode ) {
-			$serializer = $this->serializerFactory->newAliasGroupSerializer();
-			$values = array();
-			foreach ( $aliasGroupList->toArray() as $aliasGroup ) {
-				$values = array_merge( $values, $serializer->serialize( $aliasGroup ) );
-			}
-		} else {
-			$serializer = $this->serializerFactory->newAliasGroupListSerializer();
-			$values = $serializer->serialize( $aliasGroupList );
-		}
-		$this->setList( $path, 'aliases', $values, 'alias' );
+		$serializer = $this->serializerFactory->newAliasGroupListSerializer();
+		$values = $serializer->serialize( $aliasGroupList );
+
+		//TODO need to add metadata / index tags here
+
+		$this->setList( $path, 'aliases', $values, 'language' );
 	}
 
 	/**
@@ -735,8 +705,8 @@ class ResultBuilder {
 			$values = $this->getSiteLinkListArrayWithUrls( $values );
 		}
 
-		if ( $this->isRawMode ) {
-			$values = $this->getRawModeSiteLinkListArray( $values );
+		if ( $this->addMetaData ) {
+			$values = $this->addMetaDataToSiteLinkListArray( $values );
 		}
 
 		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
@@ -754,7 +724,7 @@ class ResultBuilder {
 		return $this->modifier->modifyUsingCallback( $array, '*', $addUrlCallback );
 	}
 
-	private function getRawModeSiteLinkListArray( array $array ) {
+	private function addMetaDataToSiteLinkListArray( array $array ) {
 		$addIndexedBadgesCallback = function ( $array ) {
 			ApiResult::setIndexedTagName( $array, 'badge' );
 			return $array;
@@ -807,15 +777,16 @@ class ResultBuilder {
 			);
 		}
 
-		if ( !$this->isRawMode ) {
-			$values = $this->getArrayWithAlteredClaims( $values, false, '*/*/' );
+		if ( !$this->addMetaData ) {
+			$values = $this->getArrayWithAlteredClaims( $values, '*/*/' );
 		} else {
-			$values = $this->getArrayWithAlteredClaims( $values, true, '*/*/' );
-			$values = $this->getArrayWithRawModeClaims( $values, '*/*/' );
+			$values = $this->getArrayWithAlteredClaims( $values, '*/*/' );
+			$values = $this->addMetaDataToClaimsArray( $values, '*/*/' );
+			//TODO we no longer remove these keys, but the formater should ignore them!! :(
 			$values = $this->modifier->modifyUsingCallback(
 				$values,
 				null,
-				$this->callbackFactory->getCallbackToRemoveKeys( 'id' )
+				$this->callbackFactory->getCallbackToAddKeysAsElement( 'id' )
 			);
 			$values = $this->modifier->modifyUsingCallback(
 				$values,
@@ -845,8 +816,8 @@ class ResultBuilder {
 
 		$value = $this->getArrayWithAlteredClaims( $value );
 
-		if ( $this->isRawMode ) {
-			$value = $this->getArrayWithRawModeClaims( $value );
+		if ( $this->addMetaData ) {
+			$value = $this->addMetaDataToClaimsArray( $value );
 		}
 
 		$this->setValue( null, 'claim', $value );
@@ -854,39 +825,11 @@ class ResultBuilder {
 
 	/**
 	 * @param array $array
-	 * @param bool $allowEmptyQualifiers
 	 * @param string $claimPath to the claim array/arrays with trailing /
 	 *
 	 * @return array
 	 */
-	private function getArrayWithAlteredClaims(
-		array $array,
-		$allowEmptyQualifiers = true,
-		$claimPath = ''
-	) {
-		if ( $allowEmptyQualifiers ) {
-			/**
-			 * Below we force an empty qualifiers and qualifiers-order element in the output.
-			 * This is to make sure we dont break anything that assumes this is always here.
-			 * This hack was added when moving away from the Lib serializers
-			 * TODO: remove this hack when we make other 'breaking changes' to the api output
-			 */
-			$array = $this->modifier->modifyUsingCallback(
-				$array,
-				trim( $claimPath, '/' ),
-				function ( $array ) {
-					if ( !isset( $array['qualifiers'] ) ) {
-						$array['qualifiers'] = array();
-					}
-					if ( !isset( $array['qualifiers-order'] ) ) {
-						$array['qualifiers-order'] = array();
-					}
-
-					return $array;
-				}
-			);
-		}
-
+	private function getArrayWithAlteredClaims( array $array, $claimPath = '' ) {
 		$array = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
 			$array,
 			$claimPath . 'references/*/snaks'
@@ -900,6 +843,20 @@ class ResultBuilder {
 			$claimPath . 'mainsnak',
 			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
 		);
+
+		//TODO we no longer remove these keys, but the formater should ignore them!! :(
+		$array = $this->modifier->modifyUsingCallback(
+			$array,
+			$claimPath . 'references/*/snaks',
+			$this->callbackFactory->getCallbackToAddKeysAsElement( 'id' )
+		);
+		//TODO we no longer remove these keys, but the formater should ignore them!! :(
+		$array = $this->modifier->modifyUsingCallback(
+			$array,
+			$claimPath . 'qualifiers',
+			$this->callbackFactory->getCallbackToAddKeysAsElement( 'id' )
+		);
+
 		return $array;
 	}
 
@@ -909,40 +866,19 @@ class ResultBuilder {
 	 *
 	 * @return array
 	 */
-	private function getArrayWithRawModeClaims( array $array, $claimPath = '' ) {
-		$rawModeModifications = array(
-			'references/*/snaks/*' => array(
-				$this->callbackFactory->getCallbackToIndexTags( 'snak' ),
-			),
-			'references/*/snaks' => array(
-				$this->callbackFactory->getCallbackToRemoveKeys( 'id' ),
-				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
-			),
-			'references/*/snaks-order' => array(
-				$this->callbackFactory->getCallbackToIndexTags( 'property' )
-			),
-			'references' => array(
-				$this->callbackFactory->getCallbackToIndexTags( 'reference' ),
-			),
-			'qualifiers/*' => array(
-				$this->callbackFactory->getCallbackToIndexTags( 'qualifiers' ),
-			),
-			'qualifiers' => array(
-				$this->callbackFactory->getCallbackToRemoveKeys( 'id' ),
-				$this->callbackFactory->getCallbackToIndexTags( 'property' ),
-			),
-			'qualifiers-order' => array(
-				$this->callbackFactory->getCallbackToIndexTags( 'property' )
-			),
-			'mainsnak' => array(
-				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup ),
-			),
+	private function addMetaDataToClaimsArray( array $array, $claimPath = '' ) {
+		$indexTagModifications = array(
+			'references/*/snaks/*' => $this->callbackFactory->getCallbackToIndexTags( 'snak' ),
+			'references/*/snaks' => $this->callbackFactory->getCallbackToIndexTags( 'property' ),
+			'references/*/snaks-order' => $this->callbackFactory->getCallbackToIndexTags( 'property' ),
+			'references' => $this->callbackFactory->getCallbackToIndexTags( 'reference' ),
+			'qualifiers/*' => $this->callbackFactory->getCallbackToIndexTags( 'qualifiers' ),
+			'qualifiers' => $this->callbackFactory->getCallbackToIndexTags( 'property' ),
+			'qualifiers-order' => $this->callbackFactory->getCallbackToIndexTags( 'property' ),
 		);
 
-		foreach ( $rawModeModifications as $path => $callbacks ) {
-			foreach ( $callbacks as $callback ) {
-				$array = $this->modifier->modifyUsingCallback( $array, $claimPath . $path, $callback );
-			}
+		foreach ( $indexTagModifications as $path => $callback ) {
+			$array = $this->modifier->modifyUsingCallback( $array, $claimPath . $path, $callback );
 		}
 
 		return $array;
@@ -966,8 +902,8 @@ class ResultBuilder {
 
 		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'snaks' );
 
-		if ( $this->isRawMode ) {
-			$value = $this->getRawModeReferenceArray( $value );
+		if ( $this->addMetaData ) {
+			$value = $this->addMetaDataToReferenceArray( $value );
 		}
 
 		$this->setValue( null, 'reference', $value );
@@ -987,7 +923,7 @@ class ResultBuilder {
 		);
 	}
 
-	private function getRawModeReferenceArray( $array ) {
+	private function addMetaDataToReferenceArray( $array ) {
 		$array = $this->modifier->modifyUsingCallback( $array, 'snaks-order', function ( $array ) {
 			ApiResult::setIndexedTagName( $array, 'property' );
 			return $array;
