@@ -19,7 +19,7 @@ use Wikibase\Repo\Interactors\TermSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
 use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Test\MockTermIndex;
 
 /**

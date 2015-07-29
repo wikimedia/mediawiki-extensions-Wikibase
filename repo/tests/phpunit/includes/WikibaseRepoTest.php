@@ -76,7 +76,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetEntityIdParserReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityIdParser();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\EntityId\EntityIdParser', $returnValue );
 	}
 
 	public function testGetStatementGuidParser() {

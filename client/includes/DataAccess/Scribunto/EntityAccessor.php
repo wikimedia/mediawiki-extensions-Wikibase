@@ -6,7 +6,7 @@ use DataValues\Serializers\DataValueSerializer;
 use Language;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\LanguageFallbackChain;

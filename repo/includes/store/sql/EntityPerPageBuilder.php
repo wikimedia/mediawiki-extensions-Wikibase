@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Store\SQL;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\EntityNamespaceLookup;
