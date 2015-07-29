@@ -45,7 +45,7 @@
 	"wikibase-error-serialize-error": "Imposibil de serializat datele.",
 	"wikibase-error-invalid-entity-id": "ID-ul introdus nu este recunoscut de sistem. Utilizați un ID de entitate valid.",
 	"unconnectedpages": "Pagini neasociate cu un element",
-	"unconnectedpages-summary": "Această pagină listează paginile care nu sunt conectate la un item Wikidata (din spațiile de nume care suportă conectarea itemilor). Lista este ordonată descrescător după ID-ul paginii, astfel încât paginile noi sunt listate primele.",
+	"unconnectedpages-summary": "Această pagină enumeră paginile care nu sunt asociate unui element Wikidata (din spațiile de nume care suportă asocierea elementelor). Lista este ordonată descrescător după ID-ul paginii, astfel încât paginile noi sunt listate primele.",
 	"wikibase-unconnectedpages-page": "Începe lista rezultatelor cu pagina:",
 	"wikibase-unconnectedpages-submit": "Du-te",
 	"wikibase-unconnectedpages-invalid-language": "„$1” nu este un cod de limbă valid.",

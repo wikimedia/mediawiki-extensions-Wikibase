@@ -8,7 +8,8 @@
 			"아라",
 			"Ahdan",
 			"Macofe",
-			"Kenrick95"
+			"Kenrick95",
+			"Mirws"
 		]
 	},
 	"wikibase-desc": "Penyimpanan data berstruktur",
@@ -27,6 +28,7 @@
 	"wikibase-label-edit-placeholder": "masukkan label",
 	"wikibase-description-empty": "Tidak ada deskripsi",
 	"wikibase-description-edit-placeholder": "masukkan deskripsi",
+	"wikibase-aliases-edit-placeholder-language-aware": "memasukkan beberapa alias dalam $1",
 	"wikibase-diffview-reference": "referensi",
 	"wikibase-diffview-rank": "peringkat",
 	"wikibase-diffview-qualifier": "kualifikasi",
@@ -120,6 +122,7 @@
 	"wikibase-newitem-not-recognized-siteid": "Pengidentifikasian yang disediakan situs tidak dikenal.",
 	"wikibase-newentity-label": "Label:",
 	"wikibase-newentity-description": "Deskripsi:",
+	"wikibase-newentity-aliases": "Alias, pipa-dipisahkan:",
 	"wikibase-newentity-submit": "Buat",
 	"special-setlabel": "Buat label",
 	"wikibase-setlabel-introfull": "Anda menetapkan label $2 untuk [[$1]].",
