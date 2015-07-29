@@ -7,7 +7,7 @@ use OutputPage;
 use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;

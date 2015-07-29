@@ -71,7 +71,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
-		$propertyLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$propertyLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )

@@ -163,7 +163,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 		/** @var Statement $statement */
 		// FIXME: getBestStatementPerProperty() is expensive, share the result with TruthyStatementRdfBuilder!
-		foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
+		foreach ( $statementList->getBestStatements() as $statement ) {
 			$bestList[$statement->getGuid()] = true;
 		}
 
