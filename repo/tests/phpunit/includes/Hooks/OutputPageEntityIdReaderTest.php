@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use PHPUnit_Framework_TestCase;
 use OutputPage;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 

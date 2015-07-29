@@ -10,7 +10,7 @@ use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
