@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3f6cccca",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-29T01:29:55Z",
+      "side": 1,
+      "message": "perhaps not a problem, but extractPreferredValue swaps the order of \u0027language\u0027 and \u0027value\u0027 in the term serialization:\n\n(before + with this patch)\n\nhttps://gist.github.com/filbertkm/d2d8b049b54c16ed4f63/revisions",
+      "revId": "d89c012fe6e67d8438eb44682ba44753a6fc4674",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
