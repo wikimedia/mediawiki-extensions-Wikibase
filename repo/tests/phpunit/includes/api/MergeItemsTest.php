@@ -19,7 +19,7 @@ use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\MockSiteStore;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 
 /**
  * @covers Wikibase\Repo\Api\MergeItems
@@ -138,7 +138,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		$changeOpsFactoryProvider = new ChangeOpFactoryProvider(
 			$this->getConstraintProvider(),
-			new ClaimGuidGenerator(),
+			new GuidGenerator(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
 			WikibaseRepo::getDefaultInstance()->getStatementGuidParser(),
 			$this->getSnakValidator(),

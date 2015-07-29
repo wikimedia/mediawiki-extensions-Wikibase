@@ -14,7 +14,7 @@ use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOps
@@ -146,7 +146,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 
 		$guid = 'guid';
 		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), new StringValue( 'INVALID' ) );
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 
 		$error = Error::newError( 'Testing', 'test', 'test-error', array() );
 		$result = Result::newError( array( $error ) );
