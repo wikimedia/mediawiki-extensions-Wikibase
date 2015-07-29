@@ -3,7 +3,7 @@
 namespace Wikibase\InternalSerialization;
 
 use Deserializers\Deserializer;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
