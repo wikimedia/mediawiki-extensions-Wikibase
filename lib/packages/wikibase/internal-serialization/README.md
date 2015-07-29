@@ -106,7 +106,12 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
-### 1.4 (2015-06-12)
+## 1.5.0 (2015-07-29)
+
+* Added compatibility with Wikibase DataModel 4.x
+* Removed compatibility with Wikibase DataModel 3.x
+
+### 1.4.0 (2015-06-12)
 
 * Added compatibility with DataModel 3.x
 * Deprecated `LegacyDeserializerFactory::newClaimDeserializer` in favour of `LegacyDeserializerFactory::newStatementDeserializer`
