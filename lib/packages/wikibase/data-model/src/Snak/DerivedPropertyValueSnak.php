@@ -8,13 +8,13 @@ use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * PropertyValueSnak with with derived values attached.
- * Derived DataValues can be used to provide infomation, for example, normalized values.
+ * Derived DataValues can be used to provide information such as normalized values.
  *
  * Calls to the getType method will indicate that this is a PropertyValueSnak.
  *
  * Direct serialization of this object will not include the extra derived values.
  *
- * The hash of this object is not changed by aditional Derived values.
+ * The hash of this object is not changed by additional Derived values.
  * The hash of this object will differ from the PropertyValueSnak of this object.
  *
  * This object will ->equal other DerivedPropertyValueSnaks with the same base PropertyValueSnak.
