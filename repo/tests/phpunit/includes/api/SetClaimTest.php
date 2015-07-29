@@ -14,14 +14,14 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\InternalSerialization\SerializerFactory;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -133,7 +133,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 			$itemId = $item->getId();
 
-			$guidGenerator = new ClaimGuidGenerator();
+			$guidGenerator = new GuidGenerator();
 			$guid = $guidGenerator->newGuid( $itemId );
 
 			$statement->setGuid( $guid );
@@ -189,7 +189,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
 		$obsoleteSnak = new PropertyValueSnak( $px, new StringValue( ' x ' ) );
 
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 
 		$cases = array();
 
@@ -256,7 +256,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 		$itemId = $item->getId();
 
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 
 		for ( $i = 1; $i <= 3; $i++ ) {
 			$item->getStatements()->addNewStatement(
@@ -405,7 +405,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		// Generate a single claim:
 		$itemId = $item->getId();
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 
 		// Save the single claim
 		$item->getStatements()->addNewStatement(
@@ -433,7 +433,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$item = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
 		// add a claim
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 		$statement = new Statement( new PropertyNoValueSnak( $property->getId() ) );
 		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 

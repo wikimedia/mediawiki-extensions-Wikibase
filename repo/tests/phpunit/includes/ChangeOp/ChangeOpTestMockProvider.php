@@ -24,7 +24,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\DataTypeValidatorFactory;
@@ -111,12 +111,12 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
-	 * Returns a normal ClaimGuidGenerator.
+	 * Returns a normal GuidGenerator.
 	 *
-	 * @return ClaimGuidGenerator
+	 * @return GuidGenerator
 	 */
 	public function getGuidGenerator() {
-		return new ClaimGuidGenerator();
+		return new GuidGenerator();
 	}
 
 	/**
@@ -516,10 +516,10 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
-	 * @return ClaimGuidGenerator
+	 * @return GuidGenerator
 	 */
 	public function getMockGuidGenerator() {
-		return new ClaimGuidGenerator();
+		return new GuidGenerator();
 	}
 
 	/**

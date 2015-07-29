@@ -21,7 +21,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 
 /**
@@ -271,7 +271,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		return new ChangeOpStatement(
 			$statement,
-			new ClaimGuidGenerator(),
+			new GuidGenerator(),
 			new ClaimGuidValidator( $idParser ),
 			new StatementGuidParser( $idParser ),
 			$this->mockProvider->getMockSnakValidator(),
@@ -337,7 +337,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function makeStatement( Entity $entity, Snak $mainSnak ) {
 		$statement = new Statement( $mainSnak );
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 		$statement->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
 
 		return $statement;
@@ -362,7 +362,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
 		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
 
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 
 		$cases = array();
 
