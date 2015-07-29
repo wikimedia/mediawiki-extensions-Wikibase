@@ -35,7 +35,7 @@ use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactor
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DispatchingValueFormatter;
@@ -470,7 +470,7 @@ class WikibaseRepo {
 	public function getChangeOpFactoryProvider() {
 		return new ChangeOpFactoryProvider(
 			$this->getEntityConstraintProvider(),
-			new ClaimGuidGenerator(),
+			new GuidGenerator(),
 			$this->getClaimGuidValidator(),
 			$this->getStatementGuidParser(),
 			$this->getSnakValidator(),

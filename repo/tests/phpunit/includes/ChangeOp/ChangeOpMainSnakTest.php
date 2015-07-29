@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpMainSnak
@@ -213,7 +213,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
 		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
 
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 
 		$cases = array();
 
@@ -233,7 +233,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$changeOpMainSnak = new ChangeOpMainSnak(
 			$guid,
 			$snak,
-			new ClaimGuidGenerator(),
+			new GuidGenerator(),
 			$this->mockProvider->getMockSnakValidator()
 		);
 
