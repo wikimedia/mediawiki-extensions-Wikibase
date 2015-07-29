@@ -52,7 +52,7 @@ class SiteLinkSubscriptionLookup implements SubscriptionLookup {
 		// collect the item IDs present in these links
 		$linkedItems = array();
 		foreach ( $links as $link ) {
-			list(,, $id ) = $link;
+			list( ,, $id ) = $link;
 			$linkedItems[$id] = $entityIds[$id];
 		}
 

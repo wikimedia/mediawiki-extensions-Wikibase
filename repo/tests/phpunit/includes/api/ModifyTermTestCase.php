@@ -18,7 +18,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'Empty') );
+			$this->initTestEntities( array( 'Empty' ) );
 		}
 		self::$hasSetup = true;
 	}
@@ -85,7 +85,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		$this->assertArrayHasKey(
 			$params['language'],
 			$result['entity'][$attribute],
-			"Entity doesn't return expected language");
+			"Entity doesn't return expected language" );
 		$this->assertEquals(
 			$params['language'],
 			$result['entity'][$attribute][$params['language']]['language'],
@@ -108,7 +108,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		// -- check any warnings ----------------------------------------------
 		if ( array_key_exists( 'warning', $expected ) ) {
 			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
-			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name']);
+			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name'] );
 			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
 		}
 
@@ -128,7 +128,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		// -- check the edit summary --------------------------------------------
 		if ( empty( $expected['edit-no-change'] ) ) {
 			$this->assertRevisionSummary( array( self::$testAction, $params['language'] ), $result['entity']['lastrevid'] );
-			if ( array_key_exists( 'summary', $params) ) {
+			if ( array_key_exists( 'summary', $params ) ) {
 				$this->assertRevisionSummary( "/{$params['summary']}/", $result['entity']['lastrevid'] );
 			}
 		}

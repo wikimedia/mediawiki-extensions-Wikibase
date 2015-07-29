@@ -478,7 +478,7 @@ class ApiErrorReporter {
 			// it's a plain string containing a message key
 			$name = $messageSpec;
 		} elseif ( is_array( $messageSpec ) ) {
-			if ( isset( $messageSpec[0]) ) {
+			if ( isset( $messageSpec[0] ) ) {
 				// it's an indexed array, the first entriy is the message key, the rest are paramters
 				$name = $messageSpec[0];
 				$params = array_slice( $messageSpec, 1 );

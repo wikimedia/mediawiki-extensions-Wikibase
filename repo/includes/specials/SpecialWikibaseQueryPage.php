@@ -161,7 +161,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 			$this->offset
 		);
 
-		if( $paging ) {
+		if ( $paging ) {
 			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
 		}
 

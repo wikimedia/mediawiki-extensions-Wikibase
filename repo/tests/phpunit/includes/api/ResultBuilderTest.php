@@ -611,7 +611,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTestAddEntityRevisionFallback
 	 */
-	public function testAddEntityRevisionFallback( $indexedMode, $expected  ) {
+	public function testAddEntityRevisionFallback( $indexedMode, $expected ) {
 		$item = new Item( new ItemId( 'Q123101' ) );
 		$item->getFingerprint()->setLabel( 'de', 'Oslo-de' );
 		$item->getFingerprint()->setLabel( 'en', 'Oslo-en' );
@@ -1441,7 +1441,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array(
-					array( 'site' => 'enwiki', 'title' => 'Berlin'),
+					array( 'site' => 'enwiki', 'title' => 'Berlin' ),
 				),
 				array(
 					'entities' => array(
@@ -1484,8 +1484,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			array(
 				array(
-					array( 'site' => 'enwiki', 'title' => 'Berlin'),
-					array( 'site' => 'dewiki', 'title' => 'Foo'),
+					array( 'site' => 'enwiki', 'title' => 'Berlin' ),
+					array( 'site' => 'dewiki', 'title' => 'Foo' ),
 				),
 				array(
 					'entities' => array(

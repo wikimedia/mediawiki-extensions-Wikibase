@@ -394,11 +394,11 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	 * @return array
 	 */
 	private function expectionPlaceholder( $value ) {
-		foreach( $value as &$site ) {
+		foreach ( $value as &$site ) {
 			if ( !isset( $site['badges'] ) ) {
 					continue;
 			}
-			foreach( $site['badges'] as &$dummy ) {
+			foreach ( $site['badges'] as &$dummy ) {
 				if ( $dummy === '{gaItem}' ) {
 					$dummy = self::$gaItemId->getSerialization();
 				} elseif ( $dummy === '{faItem}' ) {

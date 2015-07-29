@@ -33,7 +33,7 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		parent::execute( $subPage );
 
 		$this->getOutput()->addHTML( $this->msg( 'wikibase-listdatatypes-intro' ) );
-		$this->getOutput()->addHTML( Html::openElement( 'dl' ));
+		$this->getOutput()->addHTML( Html::openElement( 'dl' ) );
 
 		// some of the datatype descriptions
 		// 'wikibase-listdatatypes-wikibase-item-head'
@@ -61,7 +61,7 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 			$this->getOutput()->addHTML( $this->getHtmlForDataTypeId( $dataTypeId ) );
 		}
 
-		$this->getOutput()->addHTML( Html::closeElement( 'dl' ));
+		$this->getOutput()->addHTML( Html::closeElement( 'dl' ) );
 	}
 
 	protected function getDataTypeIds() {

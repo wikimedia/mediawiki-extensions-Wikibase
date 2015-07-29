@@ -315,7 +315,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'type' => 'item',
 			'language' => 'en'
 		);
-		foreach( $overrideParams as $key => $param ) {
+		foreach ( $overrideParams as $key => $param ) {
 			$params[$key] = $param;
 		}
 
@@ -332,7 +332,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$this->assertArrayHasKey( 'search', $result['searchinfo'] );
 		$this->assertArrayHasKey( 'search', $result );
 
-		foreach( $result['search'] as $key => $searchresult ) {
+		foreach ( $result['search'] as $key => $searchresult ) {
 			$this->assertInternalType( 'integer', $key );
 			$this->assertArrayHasKey( 'id', $searchresult );
 			$this->assertArrayHasKey( 'url', $searchresult );

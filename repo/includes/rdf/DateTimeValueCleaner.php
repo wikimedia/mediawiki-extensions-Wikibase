@@ -60,7 +60,7 @@ class DateTimeValueCleaner {
 			$d = 1;
 		}
 
-		if($y === "") {
+		if ( $y === "" ) {
 			// Year 0 is invalid for now, see T94064 for discussion
 			throw new IllegalValueException();
 		}
@@ -78,7 +78,7 @@ class DateTimeValueCleaner {
 	protected function cleanupGregorianValue( $dateValue, $precision ) {
 		try {
 			list( $minus, $y, $m, $d, $time ) = $this->parseDateValue( $dateValue );
-		} catch( IllegalValueException $e ) {
+		} catch ( IllegalValueException $e ) {
 			return null;
 		}
 
@@ -113,7 +113,7 @@ class DateTimeValueCleaner {
 			// If we have year's or finer precision, to make year match XSD 1.1 we
 			// need to bump up the negative years by 1
 			// Note that $y is an absolute value here.
-			$y = (string)( (int)$y - 1);
+			$y = (string)( (int)$y - 1 );
 			if ( $y == "0" ) {
 				$minus = "";
 			}

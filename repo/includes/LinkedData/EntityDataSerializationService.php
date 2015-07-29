@@ -227,7 +227,7 @@ class EntityDataSerializationService {
 
 		$serializer = $this->createApiSerializer( $formatName );
 
-		if( $serializer ) {
+		if ( $serializer ) {
 			$redirect = ( $followedRedirect ? $followedRedirect->getRedirect() : null );
 			$data = $this->apiSerialize( $entityRevision, $redirect, $incomingRedirects, $serializer );
 			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
@@ -379,7 +379,7 @@ class EntityDataSerializationService {
 	 * @throws MWException
 	 */
 	private function getFlavor( $flavorName ) {
-		switch( $flavorName ) {
+		switch ( $flavorName ) {
 			case 'simple':
 				return RdfProducer::PRODUCE_TRUTHY_STATEMENTS
 					| RdfProducer::PRODUCE_SITELINKS

@@ -164,7 +164,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidGuidProvider() {
-		$snak = new PropertyValueSnak( 722, new StringValue( 'abc') );
+		$snak = new PropertyValueSnak( 722, new StringValue( 'abc' ) );
 		$hash = $snak->getHash();
 
 		return array(

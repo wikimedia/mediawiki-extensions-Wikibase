@@ -155,7 +155,7 @@ class ItemDisambiguation {
 	 * @return string HTML
 	 */
 	private function getLabelHtml( Term $label = null ) {
-		if( !$label ) {
+		if ( !$label ) {
 			return '';
 		}
 
@@ -176,7 +176,7 @@ class ItemDisambiguation {
 	 * @return string HTML
 	 */
 	private function getDescriptionHtml( Term $description = null ) {
-		if( !$description ) {
+		if ( !$description ) {
 			return '';
 		}
 
@@ -200,11 +200,11 @@ class ItemDisambiguation {
 	 * @return string HTML
 	 */
 	private function getMatchHtml( Term $match = null, Term $label = null ) {
-		if( !$match ) {
+		if ( !$match ) {
 			return '';
 		}
 
-		if( $label && $label->getText() == $match->getText() ) {
+		if ( $label && $label->getText() == $match->getText() ) {
 			return '';
 		}
 

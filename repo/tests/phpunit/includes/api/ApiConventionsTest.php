@@ -61,7 +61,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	 * @param string $moduleClass one of the modules in $GLOBALS['wgAPIModules'], only in this function for the error messages
 	 * @param ApiBase $module is an instance of $moduleClass
 	 **/
-	private function assertGetFinalDescription ( $moduleClass, ApiBase $module ) {
+	private function assertGetFinalDescription( $moduleClass, ApiBase $module ) {
 		$method = 'getFinalDescription';
 		$descArray = $module->$method();
 
@@ -86,7 +86,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	 * @param string $moduleClass one of the modules in $GLOBALS['wgAPIModules'], only in this function for the error messages
 	 * @param ApiBase $module is an instance of $moduleClass
 	 **/
-	private function assertGetFinalParamDescription ( $moduleClass, ApiBase $module ) {
+	private function assertGetFinalParamDescription( $moduleClass, ApiBase $module ) {
 		$method = 'getFinalParamDescription';
 		$paramsArray = $module->getFinalParams();
 

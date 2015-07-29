@@ -98,7 +98,7 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	 */
 	public function testCreateItem( $permissions, $expectedError ) {
 		$itemData = array(
-			'labels' => array("en" => array( "language" => 'en', "value" => 'Test' ) ),
+			'labels' => array( "en" => array( "language" => 'en', "value" => 'Test' ) ),
 		);
 
 		$params = array(
@@ -128,7 +128,7 @@ abstract class PermissionsTest extends PermissionsTestCase {
 	 */
 	public function testCreateProperty( $permissions, $expectedError ) {
 		$itemData = array(
-			'labels' => array("en" => array( "language" => 'en', "value" => 'Testttttttt' ) ),
+			'labels' => array( "en" => array( "language" => 'en', "value" => 'Testttttttt' ) ),
 			'datatype' => 'string',
 		);
 

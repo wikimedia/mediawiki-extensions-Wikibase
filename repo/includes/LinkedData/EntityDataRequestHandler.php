@@ -358,7 +358,7 @@ class EntityDataRequestHandler {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $id, $revision );
 
 			if ( $entityRevision === null ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId"  );
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId" );
 				throw new HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
 			}
 		} catch ( UnresolvedRedirectException $ex ) {
@@ -372,16 +372,16 @@ class EntityDataRequestHandler {
 				list( $entityRevision, ) = $this->getEntityRevision( $ex->getRedirectTargetId(), $revision );
 			} else {
 				// The requested revision is a redirect
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision $revision of $prefixedId is a redirect: $ex"  );
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision $revision of $prefixedId is a redirect: $ex" );
 				$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
 				throw new HttpError( 400, $msg->params( $prefixedId, $revision ) );
 			}
 		} catch ( BadRevisionException $ex ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": could not load revision $revision or $prefixedId: $ex"  );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": could not load revision $revision or $prefixedId: $ex" );
 			$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
 			throw new HttpError( 404, $msg->params( $prefixedId, $revision ) );
 		} catch ( StorageException $ex ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load $prefixedId: $ex (revision $revision)"  );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load $prefixedId: $ex (revision $revision)" );
 			$msg = wfMessage( 'wikibase-entitydata-storage-error' );
 			throw new \HttpError( 500, $msg->params( $prefixedId, $revision ) );
 		}
@@ -402,7 +402,7 @@ class EntityDataRequestHandler {
 			return $this->entityRedirectLookup->getRedirectIds( $id );
 		} catch ( StorageException $ex ) {
 			$prefixedId = $id->getSerialization();
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load incoming redirects of $prefixedId: $ex"  );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load incoming redirects of $prefixedId: $ex" );
 			return array();
 		}
 	}
@@ -420,7 +420,7 @@ class EntityDataRequestHandler {
 	 */
 	public function showData( WebRequest $request, OutputPage $output, $format, EntityId $id, $revision ) {
 
-		$flavor = $request->getVal("flavor");
+		$flavor = $request->getVal( "flavor" );
 
 		/** @var EntityRevision $entityRevision */
 		/** @var RedirectRevision $followedRedirectRevision */

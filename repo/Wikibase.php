@@ -128,7 +128,7 @@ call_user_func( function() {
 
 	$wgValueParsers['quantity'] = function( ValueParsers\ParserOptions $options ) {
 		$language = Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
-		$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer( $language);
+		$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer( $language );
 		return new \ValueParsers\QuantityParser( $options, $unlocalizer );
 	};
 

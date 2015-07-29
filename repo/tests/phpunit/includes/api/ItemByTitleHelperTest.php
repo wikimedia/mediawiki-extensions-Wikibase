@@ -84,7 +84,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 		list( $entityIds, ) = $itemByTitleHelper->getItemIds( $sites, $titles, false );
 
-		foreach( $entityIds as $entityId ) {
+		foreach ( $entityIds as $entityId ) {
 			$this->assertEquals( $expectedEntityId, $entityId );
 		}
 	}

@@ -99,10 +99,10 @@ class ItemByTitleHelper {
 		}
 
 		$missingItems = array();
-		foreach( $sites as $siteId ) {
-			foreach( $titles as $title ) {
+		foreach ( $sites as $siteId ) {
+			foreach ( $titles as $title ) {
 				$itemId = $this->getItemId( $siteId, $title, $normalize );
-				if( !is_null( $itemId ) ) {
+				if ( !is_null( $itemId ) ) {
 					$ids[] = $itemId;
 				} else {
 					$missingItems[] = array( 'site' => $siteId, 'title' => $title );

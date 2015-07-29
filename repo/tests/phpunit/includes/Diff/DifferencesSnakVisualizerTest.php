@@ -87,7 +87,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	public function testGetPropertyAndDetailedValue( $snak, $expected ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
 		$result = $snakVisualizer->getPropertyAndDetailedValue( $snak );
-		$this->assertEquals($result, $expected );
+		$this->assertEquals( $result, $expected );
 	}
 
 	public function provideGetPropertyAndDetailedValue() {
@@ -106,7 +106,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	public function testGetDetailedValue( $snak, $expected ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
 		$result = $snakVisualizer->getDetailedValue( $snak );
-		$this->assertEquals($result, $expected );
+		$this->assertEquals( $result, $expected );
 	}
 
 	public function provideGetDetailedValue() {
@@ -125,7 +125,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	public function testGetPropertyAndValueHeader( $snak, $expected ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
 		$result = $snakVisualizer->getPropertyAndValueHeader( $snak );
-		$this->assertEquals($result, $expected );
+		$this->assertEquals( $result, $expected );
 	}
 
 	public function provideGetPropertyAndValueHeader() {
@@ -144,7 +144,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	public function testGetPropertyHeader( $snak, $expected ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
 		$result = $snakVisualizer->getPropertyHeader( $snak );
-		$this->assertEquals($result, $expected );
+		$this->assertEquals( $result, $expected );
 	}
 
 	public function provideGetPropertyHeader() {

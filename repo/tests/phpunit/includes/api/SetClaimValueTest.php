@@ -106,7 +106,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-		foreach( $this->getItems( $property->getId() ) as $item ) {
+		foreach ( $this->getItems( $property->getId() ) as $item ) {
 			foreach ( $item->getStatements()->toArray() as $statement ) {
 				$value = new StringValue( 'Kittens.png' );
 				$argLists[] = array(

@@ -74,7 +74,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @return TermIndexSearchInteractor
 	 */
 	private function getSearchInteractor( $displayLanguageCode ) {
-		if( $this->searchInteractor === null ) {
+		if ( $this->searchInteractor === null ) {
 			$interactor = WikibaseRepo::getDefaultInstance()->newTermSearchInteractor( $displayLanguageCode );
 			$this->searchInteractor = $interactor;
 		}
@@ -85,7 +85,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @return ItemDisambiguation
 	 */
 	private function getItemDisambiguation() {
-		if( $this->itemDisambiguation === null ) {
+		if ( $this->itemDisambiguation === null ) {
 			$languageNameLookup = new LanguageNameLookup();
 			$this->itemDisambiguation = new ItemDisambiguation(
 				WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),

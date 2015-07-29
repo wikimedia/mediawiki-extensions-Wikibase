@@ -183,7 +183,7 @@ class DispatchChanges extends Maintenance {
 				$wikiState = $dispatcher->selectClient();
 
 				if ( $wikiState ) {
-					$dispatcher->dispatchTo( $wikiState  );
+					$dispatcher->dispatchTo( $wikiState );
 				} else {
 					// Try again later, unless we have already reached the limit.
 					if ( $c < $maxPasses ) {

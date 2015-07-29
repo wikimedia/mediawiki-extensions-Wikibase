@@ -142,7 +142,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$this->makeRequest( $statement, $itemId, 1, 'addition request' );
 
 			// Reorder qualifiers
-			if( count( $statement->getQualifiers() ) > 0 ) {
+			if ( count( $statement->getQualifiers() ) > 0 ) {
 				// Simply reorder the qualifiers by putting the first qualifier to the end. This is
 				// supposed to be done in the serialized representation since changing the actual
 				// object might apply intrinsic sorting.
@@ -312,11 +312,11 @@ class SetClaimTest extends WikibaseApiTestCase {
 			'claim' => FormatJson::encode( $serializedClaim ),
 		);
 
-		if( !is_null( $index ) ) {
+		if ( !is_null( $index ) ) {
 			$params['index'] = $index;
 		}
 
-		if( !is_null( $baserevid ) ) {
+		if ( !is_null( $baserevid ) ) {
 			$params['baserevid'] = $baserevid;
 		}
 
@@ -360,7 +360,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
 		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a statement key' );
 
-		if( isset( $resultArray['claim']['qualifiers'] ) ) {
+		if ( isset( $resultArray['claim']['qualifiers'] ) ) {
 			$this->assertArrayHasKey( 'qualifiers-order', $resultArray['claim'], '"qualifiers-order" key is set when returning qualifiers' );
 		}
 	}
@@ -385,7 +385,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$claims = new Claims( $item->getClaims() );
 		$savedClaim = $claims->getClaimWithGuid( $claim->getGuid() );
 		$this->assertNotNull( $savedClaim, "Claims list does not have claim after {$requestLabel}" );
-		if( count( $claim->getQualifiers() ) ) {
+		if ( count( $claim->getQualifiers() ) ) {
 			$this->assertTrue( $claim->getQualifiers()->equals( $savedClaim->getQualifiers() ) );
 		}
 

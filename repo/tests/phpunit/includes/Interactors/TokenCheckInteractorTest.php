@@ -50,7 +50,7 @@ class TokenCheckInteractorTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'missingtoken' => array( array( 'foo' => 'VALID' ), true, 'missingtoken' ),
 			'mustposttoken' => array( array( 'tokentest' => 'VALID' ), false, 'mustposttoken' ),
-			'badtoken' => array( array( 'tokentest' => 'BAD' ), true, 'badtoken'),
+			'badtoken' => array( array( 'tokentest' => 'BAD' ), true, 'badtoken' ),
 		);
 	}
 

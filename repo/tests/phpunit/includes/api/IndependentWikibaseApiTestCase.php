@@ -74,7 +74,7 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 			$this->doApiRequest( $params );
 			$this->fail( "Failed to throw UsageException" );
 
-		} catch( UsageException $e ) {
+		} catch ( UsageException $e ) {
 			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}

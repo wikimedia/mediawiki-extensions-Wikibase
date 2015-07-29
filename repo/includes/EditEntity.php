@@ -731,7 +731,7 @@ class EditEntity {
 	 *
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
-	private function showStatus( ) {
+	private function showStatus() {
 		if ( $this->status === null || $this->status->isGood() ) {
 			return false;
 		}

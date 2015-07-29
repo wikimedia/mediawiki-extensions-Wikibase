@@ -136,7 +136,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetContentModelMappings() {
 		$array = $this->getWikibaseRepo()->getContentModelMappings();
-		foreach( $array as $entityType => $contentModel ) {
+		foreach ( $array as $entityType => $contentModel ) {
 			$this->assertTrue( is_scalar( $entityType ) );
 			$this->assertTrue( is_scalar( $contentModel ) );
 		}

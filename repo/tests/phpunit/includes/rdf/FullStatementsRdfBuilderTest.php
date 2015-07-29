@@ -75,7 +75,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $statementValueBuilder );
 		$statementBuilder->setDedupeBag( $dedupe ?: new NullDedupeBag() );
 
-		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES  ) {
+		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES ) {
 			$statementBuilder->setEntityMentionListener( $mentionTracker );
 		}
 

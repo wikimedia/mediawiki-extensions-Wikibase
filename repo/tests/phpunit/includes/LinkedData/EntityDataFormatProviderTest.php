@@ -131,15 +131,15 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 		$types = $provider->getSupportedExtensions();
 
 		foreach ( self::$apiExtensions as $type ) {
-			$this->assertTrue( in_array( $type, $types), $type, "api extension $type" );
+			$this->assertTrue( in_array( $type, $types ), $type, "api extension $type" );
 		}
 
 		foreach ( self::$rdfExtensions as $type ) {
-			$this->assertTrue( in_array( $type, $types), $type, "rdf extension $type" );
+			$this->assertTrue( in_array( $type, $types ), $type, "rdf extension $type" );
 		}
 
 		foreach ( self::$badExtensions as $type ) {
-			$this->assertFalse( in_array( $type, $types), $type, "bad extension $type" );
+			$this->assertFalse( in_array( $type, $types ), $type, "bad extension $type" );
 		}
 	}
 
@@ -149,15 +149,15 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 		$types = $provider->getSupportedFormats();
 
 		foreach ( self::$apiFormats as $type ) {
-			$this->assertTrue( in_array( $type, $types), $type, "api format $type" );
+			$this->assertTrue( in_array( $type, $types ), $type, "api format $type" );
 		}
 
 		foreach ( self::$rdfFormats as $type ) {
-			$this->assertTrue( in_array( $type, $types), $type, "rdf format $type" );
+			$this->assertTrue( in_array( $type, $types ), $type, "rdf format $type" );
 		}
 
 		foreach ( self::$badFormats as $type ) {
-			$this->assertFalse( in_array( $type, $types), $type, "bad format $type" );
+			$this->assertFalse( in_array( $type, $types ), $type, "bad format $type" );
 		}
 	}
 
