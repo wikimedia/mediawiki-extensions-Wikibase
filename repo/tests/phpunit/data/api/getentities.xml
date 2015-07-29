@@ -2,9 +2,20 @@
 <api success="1">
 	<entities>
 		<entity type="item" id="$itemIdUnderTest">
-			<labels/>
-			<descriptions/>
-			<aliases/>
+			<labels>
+				<label language="en" value="en-label"/>
+				<label language="de" value="de-label"/>
+			</labels>
+			<descriptions>
+				<description language="de" value="de-desc"/>
+				<description language="es" value="es-desc"/>
+			</descriptions>
+			<aliases>
+				<alias language="pt" value="AA"/>
+				<alias language="pt" value="BB"/>
+				<alias language="en" value="AA-en"/>
+				<alias language="en" value="BB-en"/>
+			</aliases>
 			<claims>
 				<property id="$propertyIdUnderTest">
 					<claim _idx="0" type="statement" id="$itemIdUnderTest$1111AAAA-43cb-ed6d-3adb-760e85bd17ee" rank="normal">
