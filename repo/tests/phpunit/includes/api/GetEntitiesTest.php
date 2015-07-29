@@ -442,6 +442,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					'de-formal' => array(
 						'language' => 'de',
 						'value' => 'Guangzhou',
+						'for-language' => 'de-formal',
 					),
 					'yue' => array(
 						'language' => 'yue',
@@ -461,6 +462,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					'de-formal' => array(
 						'language' => 'en',
 						'value' => 'Capital of Guangdong.',
+						'for-language' => 'de-formal',
 					),
 					'en' => array(
 						'language' => 'en',
@@ -469,10 +471,12 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					'fr' => array(
 						'language' => 'en',
 						'value' => 'Capital of Guangdong.',
+						'for-language' => 'fr',
 					),
 					'yue' => array(
 						'language' => 'en',
 						'value' => 'Capital of Guangdong.',
+						'for-language' => 'yue',
 					),
 					'zh-cn' => array(
 						'language' => 'zh-cn',
@@ -493,14 +497,17 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					'sli' => array(
 						'language' => 'de',
 						'value' => 'Oslo',
+						'for-language' => 'sli',
 					),
 					'de-formal' => array(
 						'language' => 'de',
 						'value' => 'Oslo',
+						'for-language' => 'de-formal',
 					),
 					'kn' => array(
 						'language' => 'en',
 						'value' => 'Oslo',
+						'for-language' => 'kn',
 					),
 					'nb' => array(
 						'language' => 'nb',
@@ -511,14 +518,17 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					'sli' => array(
 						'language' => 'de',
 						'value' => 'Hauptstadt der Norwegen.',
+						'for-language' => 'sli',
 					),
 					'de-formal' => array(
 						'language' => 'de',
 						'value' => 'Hauptstadt der Norwegen.',
+						'for-language' => 'de-formal',
 					),
 					'kn' => array(
 						'language' => 'en',
 						'value' => 'Capital city in Norway.',
+						'for-language' => 'kn',
 					),
 					'nb' => array(
 						'language' => 'nb',
