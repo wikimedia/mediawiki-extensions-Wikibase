@@ -8,7 +8,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;

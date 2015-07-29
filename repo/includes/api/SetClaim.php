@@ -16,7 +16,7 @@ use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementGuidParsingException;
+use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\WikibaseRepo;

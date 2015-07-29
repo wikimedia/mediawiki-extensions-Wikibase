@@ -5,7 +5,7 @@ namespace Wikibase\Client;
 use Html;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\NamespaceChecker;
 
 /**

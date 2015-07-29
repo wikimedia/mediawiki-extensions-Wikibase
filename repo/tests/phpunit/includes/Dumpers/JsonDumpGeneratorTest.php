@@ -6,7 +6,7 @@ use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use MWContentSerializationException;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
