@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use DataValues\Serializers\DataValueSerializer;
 use SiteStore;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;

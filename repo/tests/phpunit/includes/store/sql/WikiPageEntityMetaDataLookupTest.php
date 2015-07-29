@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;

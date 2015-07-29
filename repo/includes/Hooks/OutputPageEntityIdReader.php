@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\Repo\Content\EntityContentFactory;
 
 /**

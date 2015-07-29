@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Serialization;
 
 use ApiResult;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**

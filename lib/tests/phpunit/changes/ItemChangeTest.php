@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Exception;
-use Wikibase\DataModel\Entity\Diff\ItemDiff;
+use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityChange;

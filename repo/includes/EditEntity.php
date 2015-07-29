@@ -13,6 +13,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -425,11 +426,13 @@ class EditEntity {
 			return false;
 		}
 
+		$entityDiffer = new EntityDiffer();
+
 		// calculate patch against base revision
 		// NOTE: will fail if $baseRev or $base are null, which they may be if
 		// this gets called at an inappropriate time. The data flow in this class
 		// should be improved.
-		$patch = $baseRev->getEntity()->getDiff( $this->newEntity ); // diff from base to new
+		$patch = $entityDiffer->diffEntities( $baseRev->getEntity(), $this->newEntity );
 
 		if ( $patch->isEmpty() ) {
 			// we didn't technically fix anything, but if there is nothing to change,
@@ -443,7 +446,7 @@ class EditEntity {
 		$patchedLatest->patch( $patch );
 
 		// detect conflicts against latest revision
-		$cleanPatch = $latestRev->getEntity()->getDiff( $patchedLatest );
+		$cleanPatch = $entityDiffer->diffEntities( $latestRev->getEntity(), $patchedLatest );
 
 		$conflicts = $patch->count() - $cleanPatch->count();
 

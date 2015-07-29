@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Test\EntityInfoBuilderTest;
