@@ -32,12 +32,12 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetEntityIdParserReturnType() {
 		$returnValue = $this->getWikibaseClient()->getEntityIdParser();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\EntityId\EntityIdParser', $returnValue );
 	}
 
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getWikibaseClient()->getPropertyDataTypeLookup();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup', $returnValue );
 	}
 
 	public function testGetStringNormalizerReturnType() {

@@ -80,7 +80,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$entityLookup = $this->getMockRepository();
 		}
 
-		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );
@@ -91,7 +91,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
-		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );

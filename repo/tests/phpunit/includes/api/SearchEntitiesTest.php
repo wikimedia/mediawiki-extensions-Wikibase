@@ -10,16 +10,16 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
+use Wikibase\Repo\Api\SearchEntities;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
-use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Test\MockTermIndex;
 
 /**

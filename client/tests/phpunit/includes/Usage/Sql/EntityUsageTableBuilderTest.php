@@ -6,7 +6,7 @@ use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 

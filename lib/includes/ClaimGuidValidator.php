@@ -3,8 +3,8 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Claim\ClaimGuid;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 
 /**
  * @since 0.4

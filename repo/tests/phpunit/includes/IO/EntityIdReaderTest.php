@@ -2,12 +2,12 @@
 
 namespace Wikibase\Test\IO;
 
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 
