@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Validators\SnakValidator;

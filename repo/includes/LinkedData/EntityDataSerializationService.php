@@ -24,7 +24,7 @@ use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriterFactory;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 
 /**
  * Service for serializing entity data.

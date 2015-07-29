@@ -6,7 +6,7 @@ use Diff\Differ\MapDiffer;
 use Wikibase\Change;
 use Wikibase\ChangesTable;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
-use Wikibase\DataModel\Entity\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
