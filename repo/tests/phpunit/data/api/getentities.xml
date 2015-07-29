@@ -11,10 +11,14 @@
 				<description language="es" value="es-desc"/>
 			</descriptions>
 			<aliases>
-				<alias language="pt" value="AA"/>
-				<alias language="pt" value="BB"/>
-				<alias language="en" value="AA-en"/>
-				<alias language="en" value="BB-en"/>
+				<language id="pt">
+					<alias language="pt" value="AA"/>
+					<alias language="pt" value="BB"/>
+				</language>
+				<language id="en">
+					<alias language="en" value="AA-en"/>
+					<alias language="en" value="BB-en"/>
+				</language>
 			</aliases>
 			<claims>
 				<property id="$propertyIdUnderTest">

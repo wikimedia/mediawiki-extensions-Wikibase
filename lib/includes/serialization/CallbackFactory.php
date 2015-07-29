@@ -29,20 +29,19 @@ class CallbackFactory {
 	}
 
 	/**
-	 * Get callable to remove array keys and optionally set the key as an array value
+	 * Get callable to set the keys in an array as values
 	 *
-	 * @param string|null $addAsArrayElement
+	 * @param string $elementKey
 	 *
 	 * @return callable
 	 */
-	public function getCallbackToRemoveKeys( $addAsArrayElement = null ) {
-		return function ( $array ) use ( $addAsArrayElement ) {
-			if ( $addAsArrayElement !== null ) {
-				foreach ( $array as $key => &$value ) {
-					$value[$addAsArrayElement] = $key;
+	public function getCallbackToAddKeysAsElement( $elementKey ) {
+		return function ( $array ) use ( $elementKey ) {
+			foreach ( $array as $key => &$value ) {
+				if ( is_array( $value ) ) {
+					$value[$elementKey] = $key;
 				}
 			}
-			$array = array_values( $array );
 			return $array;
 		};
 	}
