@@ -66,8 +66,10 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 	 */
 	public function addStatements( EntityId $entityId, StatementList $statementList ) {
 		// FIXME: getBestStatementPerProperty() uis expensive, share the result with FullStatementRdfBuilder!
-		foreach ( $statementList->getBestStatementPerProperty() as $statement ) {
-			$this->addMainSnak( $entityId, $statement, true );
+		foreach ( $statementList->getPropertyIds() as $propertyId ) {
+			foreach ( $statementList->getByPropertyId( $propertyId )->getBestStatements() as $statement ) {
+				$this->addMainSnak( $entityId, $statement, true );
+			}
 		}
 	}
 
