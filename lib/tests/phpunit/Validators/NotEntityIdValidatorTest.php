@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test\Validators;
 
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Validators\NotEntityIdValidator;
 
 /**

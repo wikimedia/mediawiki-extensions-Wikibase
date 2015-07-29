@@ -6,7 +6,7 @@ use DataTypes\DataTypeFactory;
 use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 
 /**
  * Defines the snak formatters supported by Wikibase.
