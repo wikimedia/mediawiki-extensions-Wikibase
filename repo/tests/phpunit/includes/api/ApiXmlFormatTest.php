@@ -361,6 +361,14 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$snak = new PropertyNoValueSnak( $propertyId );
 		$guid = $item->getId()->getSerialization() . '$1111AAAA-43cb-ed6d-3adb-760e85bd17ee';
 		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
+
+		$item->setLabel( 'en', 'en-label' );
+		$item->setLabel( 'de', 'de-label' );
+		$item->setDescription( 'de', 'de-desc' );
+		$item->setDescription( 'es', 'es-desc' );
+		$item->setAliases( 'pt', array( 'AA', 'BB' ) );
+		$item->setAliases( 'en', array( 'AA-en', 'BB-en' ) );
+
 		$entityRevision = $store->saveEntity( $item, 'testing more!', $wgUser );
 
 		return $entityRevision;
