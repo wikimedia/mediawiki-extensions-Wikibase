@@ -5,10 +5,13 @@ namespace Wikibase\DataModel\Tests\Statement;
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\ReferencedStatementFilter;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
@@ -624,6 +627,28 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$statements = new StatementList();
 
 		$this->assertNull( $statements->getFirstStatementWithGuid( false ) );
+	}
+
+	public function testFilter() {
+		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statement2 = new Statement( new PropertyNoValueSnak( 2 ) );
+		$statement3 = new Statement( new PropertyNoValueSnak( 3 ) );
+		$statement4 = new Statement( new PropertyNoValueSnak( 4 ) );
+
+		$statement2->setReferences( new ReferenceList( array(
+			new Reference( array( new PropertyNoValueSnak( 20 ) ) )
+		) ) );
+
+		$statement3->setReferences( new ReferenceList( array(
+			new Reference( array( new PropertyNoValueSnak( 30 ) ) )
+		) ) );
+
+		$statements = new StatementList( $statement1, $statement2, $statement3, $statement4 );
+
+		$this->assertEquals(
+			new StatementList( $statement2, $statement3 ),
+			$statements->filter( new ReferencedStatementFilter() )
+		);
 	}
 
 }

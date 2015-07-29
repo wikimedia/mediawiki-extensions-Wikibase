@@ -306,4 +306,23 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 		return null;
 	}
 
+	/**
+	 * @since 4.1
+	 *
+	 * @param StatementFilter $filter
+	 *
+	 * @return self
+	 */
+	public function filter( StatementFilter $filter ) {
+		$statementList = new self();
+
+		foreach ( $this->statements as $statement ) {
+			if ( $filter->statementMatches( $statement ) ) {
+				$statementList->addStatement( $statement );
+			}
+		}
+
+		return $statementList;
+	}
+
 }
