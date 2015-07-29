@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Test;
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
-use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\SnakFactory;
 
@@ -77,17 +77,17 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 			'novalue/badprop' => array(
 				66, 'novalue', null,
 				'Wikibase\DataModel\Snak\PropertyNoValueSnak',
-				'Wikibase\DataModel\Entity\PropertyNotFoundException'
+				'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException'
 			),
 			'somevalue/badprop' => array(
 				66, 'somevalue', null,
 				'Wikibase\DataModel\Snak\PropertySomeValueSnak',
-				'Wikibase\DataModel\Entity\PropertyNotFoundException'
+				'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException'
 			),
 			'value/badprop' => array(
 				66, 'value', '"hello"',
 				'Wikibase\DataModel\Snak\PropertyValueSnak',
-				'Wikibase\DataModel\Entity\PropertyNotFoundException'
+				'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException'
 			),
 			'value/badvalue' => array(
 				1, 'value', array( 'foo' ),

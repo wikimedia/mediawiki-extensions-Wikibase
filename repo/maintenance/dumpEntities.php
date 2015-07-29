@@ -4,7 +4,8 @@ namespace Wikibase;
 
 use Maintenance;
 use MWException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Lib\Disposable;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -18,7 +19,6 @@ use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Dumpers\DumpGenerator;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 

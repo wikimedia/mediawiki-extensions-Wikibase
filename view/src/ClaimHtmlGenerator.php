@@ -2,14 +2,13 @@
 
 namespace Wikibase\View;
 
-use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Services\ByPropertyIdGrouper;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\StatementRankSerializer;
 use Wikibase\View\Template\TemplateFactory;
 
