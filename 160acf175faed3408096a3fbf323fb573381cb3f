@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_8cbefc5e",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-07-29T00:49:07Z",
+      "side": 1,
+      "message": "Use single quotes for consistency.",
+      "revId": "160acf175faed3408096a3fbf323fb573381cb3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
