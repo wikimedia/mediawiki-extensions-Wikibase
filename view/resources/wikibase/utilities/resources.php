@@ -16,9 +16,9 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'wikibase.utilities.ClaimGuidGenerator' => $moduleTemplate + array(
+		'wikibase.utilities.GuidGenerator' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.utilities.ClaimGuidGenerator.js',
+				'wikibase.utilities.GuidGenerator.js',
 			),
 			'dependencies' => array(
 				'wikibase.utilities.GuidGenerator',

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\ItemSerializer;
@@ -189,7 +189,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 			)
 		);
 
-		$guidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new GuidGenerator();
 		$statement->setGuid( $guidGenerator->newGuid( $item2->getId() ) );
 
 		$item2->setLabel( 'en', 'foo' );

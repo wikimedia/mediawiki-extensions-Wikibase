@@ -15,12 +15,12 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'wikibase.utilities.ClaimGuidGenerator.tests' => $moduleBase + array(
+		'wikibase.utilities.GuidGenerator.tests' => $moduleBase + array(
 			'scripts' => array(
-				'ClaimGuidGenerator.tests.js',
+				'GuidGenerator.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.utilities.ClaimGuidGenerator',
+				'wikibase.utilities.GuidGenerator',
 			),
 		),
 
