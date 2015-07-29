@@ -99,7 +99,7 @@ class ApiHelperFactory {
 			$this->newSerializerFactory(),
 			$this->siteStore,
 			$this->dataTypeLookup,
-			$api->getResult()->getIsRawMode()
+			true // The mediawiki api should always be given metadata
 		);
 	}
 
