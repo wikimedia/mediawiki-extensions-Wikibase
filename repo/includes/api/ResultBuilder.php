@@ -489,7 +489,7 @@ class ResultBuilder {
 						$fallbackSerialization['source-language'] = $fallbackSerialization['source'];
 					}
 					unset( $fallbackSerialization['source'] );
-					if ( $this->isRawMode && $requestedLanguageCode !== $fallbackSerialization['language'] ) {
+					if ( $requestedLanguageCode !== $fallbackSerialization['language'] ) {
 						$fallbackSerialization['for-language'] = $requestedLanguageCode;
 					}
 					$newSerialization[$requestedLanguageCode] = $fallbackSerialization;
