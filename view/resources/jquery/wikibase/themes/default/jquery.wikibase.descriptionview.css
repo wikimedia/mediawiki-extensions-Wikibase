@@ -10,3 +10,7 @@
 	font-family: inherit;
 	font-size: inherit;
 }
+
+.wikibase-descriptionview .wikibase-descriptionview-input:focus {
+	background-color: #D6F3FF;
+}
