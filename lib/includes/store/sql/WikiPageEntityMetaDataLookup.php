@@ -8,7 +8,7 @@ use DBQueryError;
 use ResultWrapper;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 
 /**
  * Service for looking up meta data about one or more entities as needed for

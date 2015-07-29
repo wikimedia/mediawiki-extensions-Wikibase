@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Test\Change;
 
 use Wikibase\ChangesTable;
-use Wikibase\DataModel\Entity\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

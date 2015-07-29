@@ -4,7 +4,7 @@ namespace Wikibase\Validators;
 
 use InvalidArgumentException;
 use ValueValidators\ValueValidator;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;

@@ -7,7 +7,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use Title;
-use Wikibase\DataModel\Entity\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

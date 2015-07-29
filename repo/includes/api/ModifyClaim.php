@@ -6,7 +6,7 @@ use ApiBase;
 use ApiMain;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
