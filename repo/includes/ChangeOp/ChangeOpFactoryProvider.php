@@ -3,8 +3,8 @@
 namespace Wikibase\ChangeOp;
 
 use SiteLookup;
-use Wikibase\DataModel\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;

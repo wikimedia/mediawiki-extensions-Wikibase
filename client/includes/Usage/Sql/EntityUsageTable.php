@@ -9,7 +9,7 @@ use Iterator;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 
 /**
  * Helper class for updating the wbc_entity_usage table.

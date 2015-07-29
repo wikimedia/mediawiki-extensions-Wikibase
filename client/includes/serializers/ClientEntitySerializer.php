@@ -5,7 +5,7 @@ namespace Wikibase\Client\Serializer;
 use DataValues\Serializers\DataValueSerializer;
 use Serializers\Exceptions\SerializationException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serialization\CallbackFactory;

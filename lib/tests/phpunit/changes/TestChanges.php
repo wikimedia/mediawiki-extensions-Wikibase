@@ -2,16 +2,13 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Change;
 use Wikibase\ChangeRow;
 use Wikibase\ChangesTable;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;

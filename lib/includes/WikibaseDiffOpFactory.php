@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOpFactory;
-use Wikibase\DataModel\Entity\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\EntityDiff;
 
 /**
  * Class for changes that can be represented as a Diff.
