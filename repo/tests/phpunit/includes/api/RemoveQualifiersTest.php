@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -79,7 +79,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-			$guidGenerator = new ClaimGuidGenerator();
+			$guidGenerator = new GuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->getStatements()->addStatement( $statement );
 

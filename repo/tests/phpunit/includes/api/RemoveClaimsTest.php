@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -58,7 +58,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		);
 
 		foreach ( $statements as $statement ) {
-			$guidGenerator = new ClaimGuidGenerator();
+			$guidGenerator = new GuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->getStatements()->addStatement( $statement );
 		}
