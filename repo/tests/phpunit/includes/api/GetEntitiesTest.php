@@ -442,6 +442,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					'de-formal' => array(
 						'language' => 'de',
 						'value' => 'Guangzhou',
+						'for-language' => 'de-formal',
 					),
 					'yue' => array(
 						'language' => 'yue',
@@ -493,14 +494,17 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					'sli' => array(
 						'language' => 'de',
 						'value' => 'Oslo',
+						'for-language' => 'sli',
 					),
 					'de-formal' => array(
 						'language' => 'de',
 						'value' => 'Oslo',
+						'for-language' => 'de-formal',
 					),
 					'kn' => array(
 						'language' => 'en',
 						'value' => 'Oslo',
+						'for-language' => 'kn',
 					),
 					'nb' => array(
 						'language' => 'nb',
