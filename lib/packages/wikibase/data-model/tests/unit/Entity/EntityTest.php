@@ -364,32 +364,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider instanceProvider
 	 * @param Entity $entity
 	 */
-	public function testCopy( Entity $entity ) {
-		$copy = $entity->copy();
-
-		// The equality method alone is not enough since it does not check the IDs.
-		$this->assertTrue( $entity->equals( $copy ) );
-		$this->assertEquals( $entity->getId(), $copy->getId() );
-
-		$this->assertFalse( $entity === $copy );
-	}
-
-	public function testCopyRetainsLabels() {
-		$item = new Item();
-
-		$item->getFingerprint()->setLabel( 'en', 'foo' );
-		$item->getFingerprint()->setLabel( 'de', 'bar' );
-
-		$newItem = unserialize( serialize( $item ) );
-
-		$this->assertTrue( $newItem->getFingerprint()->getLabels()->hasTermForLanguage( 'en' ) );
-		$this->assertTrue( $newItem->getFingerprint()->getLabels()->hasTermForLanguage( 'de' ) );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param Entity $entity
-	 */
 	public function testSerialize( Entity $entity ) {
 		$string = serialize( $entity );
 
