@@ -300,8 +300,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 				$pageNameInput
 				.attr( 'lang', site.getLanguageCode() )
 				.attr( 'dir', site.getLanguageDirection() )
-				.show()
-				.focus();
+				.show();
 			} else {
 				$pageNameInput.hide();
 			}
