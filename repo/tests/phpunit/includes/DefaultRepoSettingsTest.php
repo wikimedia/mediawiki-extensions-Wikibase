@@ -39,7 +39,7 @@ class DefaultRepoSettingsTest extends \PHPUnit_Framework_TestCase {
 	private function newSettingsArray( array $settings ) {
 		$settingsArray = new SettingsArray();
 
-		foreach( $settings as $setting => $value ) {
+		foreach ( $settings as $setting => $value ) {
 			$settingsArray->setSetting( $setting, $value );
 		}
 

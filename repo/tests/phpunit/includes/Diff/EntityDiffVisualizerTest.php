@@ -45,7 +45,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 							new DiffOpRemove( 'foo' ),
 							new DiffOpRemove( 'bar' ),
 						) )
-				), true  ),
+				), true ),
 			) ),
 			new Diff()
 		);

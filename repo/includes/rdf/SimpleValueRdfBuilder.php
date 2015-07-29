@@ -97,7 +97,7 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 			// for any other types
 			try {
 				$dataType = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
-			} catch( PropertyNotFoundException $e ) {
+			} catch ( PropertyNotFoundException $e ) {
 				// keep "unknown"
 			}
 		}

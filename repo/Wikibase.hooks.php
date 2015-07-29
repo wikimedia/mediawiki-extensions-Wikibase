@@ -445,7 +445,7 @@ final class RepoHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$s, array &$classes  ) {
+	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$s, array &$classes ) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$article = $history->getArticle();

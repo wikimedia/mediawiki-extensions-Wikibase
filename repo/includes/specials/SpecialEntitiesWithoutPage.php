@@ -149,7 +149,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 					'id' => 'wb-entitieswithoutpage-form'
 				)
 			) .
-			Html::input (
+			Html::input(
 				'title',
 				$this->getPageTitle()->getPrefixedText(),
 				'hidden',

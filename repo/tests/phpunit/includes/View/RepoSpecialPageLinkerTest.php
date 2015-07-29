@@ -19,7 +19,7 @@ class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 	 * @param string[] $subPageParams
 	 * @param string $expectedMatch
 	 */
-	public function testGetLink( $specialPageName, $subPageParams, $expectedMatch) {
+	public function testGetLink( $specialPageName, $subPageParams, $expectedMatch ) {
 		$linker = new RepoSpecialPageLinker();
 
 		$link = $linker->getLink( $specialPageName, $subPageParams );

@@ -100,8 +100,8 @@ class RdfVocabulary {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 
-		if( substr($this->baseUri, -7) === 'entity/') {
-			$topUri = substr($this->baseUri, 0, -7);
+		if ( substr( $this->baseUri, -7 ) === 'entity/' ) {
+			$topUri = substr( $this->baseUri, 0, -7 );
 		} else {
 			$topUri = $this->baseUri;
 		}

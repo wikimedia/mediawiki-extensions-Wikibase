@@ -316,7 +316,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		$actualTo = $this->testHelper->getEntity( $toId );
 		$this->testHelper->assertEntityEquals( $expectedTo, $actualTo, 'modified target item' );
 
-		$this->assertRedirectWorks( $expectedFrom, $fromId, $toId  );
+		$this->assertRedirectWorks( $expectedFrom, $fromId, $toId );
 
 		$toRevId = $this->mockRepository->getLatestRevisionId( $toId );
 		$this->testHelper->assertRevisionSummary(

@@ -35,7 +35,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	public function provideLinkTitles() {
 		return array(
 			array( //0 add nowiki as fromsite
-				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo'),
+				'p' => array( 'tosite' => 'nnwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ),
 				'e' => array( 'inresult' => 1 ) ),
 			array( //1 add svwiki as tosite
 				'p' => array( 'tosite' => 'svwiki', 'totitle' => 'Oslo', 'fromsite' => 'nowiki', 'fromtitle' => 'Oslo' ),

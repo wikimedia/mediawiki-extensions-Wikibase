@@ -135,7 +135,7 @@ class ValidatorBuilders {
 	 *
 	 * @return ValueValidator[]
 	 */
-	private function getCommonStringValidators( $maxLength = 400  ) {
+	private function getCommonStringValidators( $maxLength = 400 ) {
 		$validators = array();
 
 		$validators[] = new TypeValidator( 'string' );

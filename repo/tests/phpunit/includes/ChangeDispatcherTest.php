@@ -73,7 +73,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$sender->expects( $this->any() )
 			->method( 'sendNotification' )
-			->will(  $this->returnCallback( function ( $siteID, array $changes ) use ( &$notifications ) {
+			->will( $this->returnCallback( function ( $siteID, array $changes ) use ( &$notifications ) {
 				$notifications[] = array( $siteID, $changes );
 			} ) );
 
@@ -189,31 +189,31 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$change->expects( $this->any() )
 			->method( 'isEmpty' )
-			->will(  $this->returnValue( false ) );
+			->will( $this->returnValue( false ) );
 
 		$change->expects( $this->any() )
 			->method( 'getTime' )
-			->will(  $this->returnValue( $time ) );
+			->will( $this->returnValue( $time ) );
 
 		$change->expects( $this->any() )
 			->method( 'getAge' )
-			->will(  $this->returnValue( (int)wfTimestamp( TS_UNIX, $time ) - (int)wfTimestamp( TS_UNIX, $this->now ) ) );
+			->will( $this->returnValue( (int)wfTimestamp( TS_UNIX, $time ) - (int)wfTimestamp( TS_UNIX, $this->now ) ) );
 
 		$change->expects( $this->any() )
 			->method( 'getId' )
-			->will(  $this->returnValue( $changeId ) );
+			->will( $this->returnValue( $changeId ) );
 
 		$change->expects( $this->any() )
 			->method( 'getObjectId' )
-			->will(  $this->returnValue( $entityId->getSerialization() ) );
+			->will( $this->returnValue( $entityId->getSerialization() ) );
 
 		$change->expects( $this->any() )
 			->method( 'getEntityId' )
-			->will(  $this->returnValue( $entityId ) );
+			->will( $this->returnValue( $entityId ) );
 
 		$change->expects( $this->any() )
 			->method( 'getSiteLinkDiff' )
-			->will(  $this->returnValue( $siteLinkDiff ) );
+			->will( $this->returnValue( $siteLinkDiff ) );
 
 		return $change;
 	}
@@ -233,7 +233,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$coordinator->expects( $this->once() )
 			->method( 'selectClient' )
-			->will(  $this->returnValue( $expectedClientState ) );
+			->will( $this->returnValue( $expectedClientState ) );
 
 		$coordinator->expects( $this->never() )
 			->method( 'initState' );

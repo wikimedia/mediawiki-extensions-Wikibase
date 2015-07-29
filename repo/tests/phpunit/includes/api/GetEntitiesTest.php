@@ -279,7 +279,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		}
 
 		//Assert the whole entity is as expected (claims, sitelinks, aliases, descriptions, labels)
-		$expectedEntityOutput = EntityTestHelper::getEntityOutput (
+		$expectedEntityOutput = EntityTestHelper::getEntityOutput(
 			EntityTestHelper::getHandle( $entity['id'] ),
 			$expected['props'],
 			$expected['languages']
@@ -552,7 +552,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$this->assertEquals( $expectedDescriptions, $res['entities'][$id]['descriptions'] );
 	}
 
-	public function testSiteLinkFilter () {
+	public function testSiteLinkFilter() {
 		$id = EntityTestHelper::getId( 'Oslo' );
 
 		list( $res,, ) = $this->doApiRequest(

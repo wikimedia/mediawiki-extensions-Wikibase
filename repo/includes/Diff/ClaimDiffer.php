@@ -65,7 +65,7 @@ class ClaimDiffer {
 			return null;
 		}
 
-		if( ( $oldStatementMainSnak === null && $newStatementMainSnak !== null )
+		if ( ( $oldStatementMainSnak === null && $newStatementMainSnak !== null )
 			|| !$oldStatementMainSnak->equals( $newStatementMainSnak ) ) {
 			return new DiffOpChange( $oldStatementMainSnak, $newStatementMainSnak );
 		}

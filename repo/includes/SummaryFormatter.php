@@ -107,7 +107,7 @@ class SummaryFormatter {
 		$parts = $this->formatArgList( $commentArgs );
 		$joinedParts = implode( '|', $parts );
 
-		$composite = ( 0 < strlen($joinedParts) )
+		$composite = ( 0 < strlen( $joinedParts ) )
 			? implode( ':', array( $messageKey, $joinedParts ) )
 			: $messageKey;
 

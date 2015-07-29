@@ -309,7 +309,7 @@ class EntityTestHelper {
 	 *
 	 * @return array Array of entity output with props and langs removed
 	 */
-	protected static function stripUnwantedOutputValues( $entityOutput, $props = array(), $langs = null  ) {
+	protected static function stripUnwantedOutputValues( $entityOutput, $props = array(), $langs = null ) {
 		$entityProps = array();
 		$props[] = 'type'; // always return the type so we can demobilize
 		foreach ( $props as $prop ) {
@@ -343,7 +343,7 @@ class EntityTestHelper {
 	 * @param string $id
 	 * @param array $entity
 	 */
-	public static function registerEntity( $handle, $id, $entity = null) {
+	public static function registerEntity( $handle, $id, $entity = null ) {
 		self::$activeHandles[ $handle ] = $id;
 		self::$activeIds[ $id ] = $handle;
 		if ( $entity ) {

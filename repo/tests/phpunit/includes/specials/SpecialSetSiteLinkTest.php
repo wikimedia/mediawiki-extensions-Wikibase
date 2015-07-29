@@ -226,7 +226,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$matchers['value']['attributes']['value'] = 'Wikidata';
 		$matchers['badges']['children']['only']['attributes']['selected'] = '';
 
-		foreach( $matchers as $key => $matcher ) {
+		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
 		}
 	}

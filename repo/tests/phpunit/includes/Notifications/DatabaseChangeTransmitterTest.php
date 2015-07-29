@@ -29,7 +29,7 @@ class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 		$db = wfGetDB( DB_MASTER );
 		$tableName = WikibaseRepo::getDefaultInstance()->getStore()->getChangesTable()->getName();
 
-		$db->delete( $tableName, '*', __METHOD__  );
+		$db->delete( $tableName, '*', __METHOD__ );
 		$this->tablesUsed[] = $tableName;
 
 		$channel = new DatabaseChangeTransmitter();

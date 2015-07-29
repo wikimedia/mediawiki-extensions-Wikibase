@@ -172,7 +172,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidGuidProvider() {
-		$qualifierSnak = new PropertyValueSnak( 722, new StringValue( 'abc') );
+		$qualifierSnak = new PropertyValueSnak( 722, new StringValue( 'abc' ) );
 		$hash = $qualifierSnak->getHash();
 
 		return array(

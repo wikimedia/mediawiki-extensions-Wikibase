@@ -112,7 +112,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 		// -- check any warnings ----------------------------------------------
 		if ( array_key_exists( 'warning', $expected ) ) {
 			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
-			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name']);
+			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name'] );
 			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
 		}
 

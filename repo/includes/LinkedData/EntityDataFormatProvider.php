@@ -188,7 +188,7 @@ class EntityDataFormatProvider {
 			$ext = self::getApiFormatName( $name );
 
 			foreach ( $mimes as $mime ) {
-				if ( !isset( $this->mimeTypes[$mime]) ) {
+				if ( !isset( $this->mimeTypes[$mime] ) ) {
 					$this->mimeTypes[$mime] = $name;
 				}
 			}
@@ -210,14 +210,14 @@ class EntityDataFormatProvider {
 
 			// use all mime types. to improve content negotiation
 			foreach ( $this->rdfWriterFactory->getMimeTypes( $name ) as $mime ) {
-				if ( !isset( $this->mimeTypes[$mime]) ) {
+				if ( !isset( $this->mimeTypes[$mime] ) ) {
 					$this->mimeTypes[$mime] = $name;
 				}
 			}
 
 			// only one file extension, to keep purging simple
 			$ext = $this->rdfWriterFactory->getFileExtension( $name );
-			if ( !isset( $this->fileExtensions[$ext]) ) {
+			if ( !isset( $this->fileExtensions[$ext] ) ) {
 				$this->fileExtensions[$ext] = $name;
 			}
 		}

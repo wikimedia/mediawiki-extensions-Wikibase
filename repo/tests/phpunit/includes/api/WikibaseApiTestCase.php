@@ -175,7 +175,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			}
 
 			$this->fail( "Failed to throw UsageException" );
-		} catch( UsageException $e ) {
+		} catch ( UsageException $e ) {
 			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}

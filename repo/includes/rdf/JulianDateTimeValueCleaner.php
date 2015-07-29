@@ -24,8 +24,8 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 	 */
 	protected function julianDateValue( $dateValue, $precision ) {
 		try {
-			list($minus, $y, $m, $d, $time) = $this->parseDateValue( $dateValue );
-		} catch( IllegalValueException $e ) {
+			list( $minus, $y, $m, $d, $time ) = $this->parseDateValue( $dateValue );
+		} catch ( IllegalValueException $e ) {
 			return null;
 		}
 		// We accept here certain precision loss since we will need to do calculations anyway,
@@ -70,7 +70,7 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 			$precision = $value->getPrecision();
 			// If we are less precise than a day, no point to convert
 			// Julian to Gregorian since we don't have enough information to do it anyway
-			if( $precision >= TimeValue::PRECISION_DAY ) {
+			if ( $precision >= TimeValue::PRECISION_DAY ) {
 				return $this->julianDateValue( $value->getTime(), $precision );
 			} else {
 				return $this->cleanupGregorianValue( $value->getTime(), $precision );

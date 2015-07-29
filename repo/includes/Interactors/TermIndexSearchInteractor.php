@@ -191,16 +191,16 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 			$this->getTermIndexOptions()
 		);
 		// Shortcut out if we already have enough TermIndexEntries
-		if( count( $matchedTermIndexEntries ) == $this->limit || !$this->useLanguageFallback ) {
+		if ( count( $matchedTermIndexEntries ) == $this->limit || !$this->useLanguageFallback ) {
 			return $matchedTermIndexEntries;
 		}
 
 		$matchedEntityIdSerializations = array();
-		foreach( $matchedTermIndexEntries as $termIndexEntry ) {
+		foreach ( $matchedTermIndexEntries as $termIndexEntry ) {
 			$matchedEntityIdSerializations[] = $termIndexEntry->getEntityId()->getSerialization();
 		}
 
-		if( $this->useLanguageFallback ) {
+		if ( $this->useLanguageFallback ) {
 			$fallbackMatchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
 				$this->makeTermIndexEntryTemplates(
 					$text,
@@ -213,15 +213,15 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 			);
 
 			// Remove any IndexEntries that are already have an match for
-			foreach( $fallbackMatchedTermIndexEntries as $key => $termIndexEntry ) {
-				if( in_array( $termIndexEntry->getEntityId()->getSerialization(), $matchedEntityIdSerializations ) ) {
+			foreach ( $fallbackMatchedTermIndexEntries as $key => $termIndexEntry ) {
+				if ( in_array( $termIndexEntry->getEntityId()->getSerialization(), $matchedEntityIdSerializations ) ) {
 					unset( $fallbackMatchedTermIndexEntries[$key] );
 				}
 			}
 
 			// Matches in the main language will always be first
 			$matchedTermIndexEntries = array_merge( $matchedTermIndexEntries, $fallbackMatchedTermIndexEntries );
-			if( count( $matchedTermIndexEntries ) > $this->limit ) {
+			if ( count( $matchedTermIndexEntries ) > $this->limit ) {
 				array_slice( $matchedTermIndexEntries, 0, $this->limit, true );
 			}
 		}
@@ -261,7 +261,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 */
 	private function getEntityIdsForTermIndexEntries( array $termsIndexEntries ) {
 		$entityIds = array();
-		foreach( $termsIndexEntries as $termIndexEntry ) {
+		foreach ( $termsIndexEntries as $termIndexEntry ) {
 			$entityId = $termIndexEntry->getEntityId();
 			// We would hope that this would never happen, but is possible
 			if ( $entityId !== null ) {
@@ -322,7 +322,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	private function getLabelDisplayTerm( EntityId $entityId ) {
 		try{
 			return $this->labelDescriptionLookup->getLabel( $entityId );
-		} catch( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException $e ) {
 			return null;
 		}
 	}
@@ -335,7 +335,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	private function getDescriptionDisplayTerm( EntityId $entityId ) {
 		try{
 			return $this->labelDescriptionLookup->getDescription( $entityId );
-		} catch( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException $e ) {
 			return null;
 		}
 	}
