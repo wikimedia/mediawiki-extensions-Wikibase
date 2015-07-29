@@ -8,11 +8,11 @@ use PHPUnit_Framework_Assert;
 use RequestContext;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
 
 /**

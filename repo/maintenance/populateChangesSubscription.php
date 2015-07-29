@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;

@@ -10,11 +10,10 @@ use DerivativeRequest;
 use MWException;
 use RequestContext;
 use SiteList;
-use Wikibase\RedirectRevision;
 use SiteStore;
-use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -23,8 +22,9 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\RedirectRevision;
+use Wikibase\Repo\Api\ResultBuilder;
 use Wikimedia\Purtle\RdfWriterFactory;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
 /**
  * Service for serializing entity data.

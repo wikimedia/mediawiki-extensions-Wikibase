@@ -7,9 +7,9 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\EntityUsageTable
