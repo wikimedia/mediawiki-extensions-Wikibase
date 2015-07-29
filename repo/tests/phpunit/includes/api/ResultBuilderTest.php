@@ -499,18 +499,22 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 								'de-formal' => array(
 									'language' => 'de',
 									'value' => 'Oslo-de',
+									'for-language' => 'de-formal',
 								),
 								'es' => array(
 									'language' => 'en',
 									'value' => 'Oslo-en',
+									'for-language' => 'es',
 								),
 								'qug' => array(
 									'language' => 'en',
 									'value' => 'Oslo-en',
+									'for-language' => 'qug',
 								),
 								'zh-my' => array(
 									'language' => 'en',
 									'value' => 'Oslo-en',
+									'for-language' => 'zh-my',
 								),
 							),
 							'descriptions' => array(
@@ -521,6 +525,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 								'qug' => array(
 									'language' => 'es',
 									'value' => 'desc-es',
+									'for-language' => 'qug',
 								),
 								'zh-my' => array(
 									'language' => 'zh-my',
