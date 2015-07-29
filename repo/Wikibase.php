@@ -120,9 +120,9 @@ call_user_func( function() {
 	// This is somewhat hackish, make WikibaseValueParserBuilders, analogous to WikibaseValueFormatterBuilders
 	$wgValueParsers['wikibase-entityid'] = function( ValueParsers\ParserOptions $options ) {
 		//TODO: make ID builders configurable.
-		$builders = \Wikibase\DataModel\Entity\BasicEntityIdParser::getBuilders();
+		$builders = \Wikibase\DataModel\Services\EntityId\BasicEntityIdParser::getBuilders();
 		return new \Wikibase\Lib\EntityIdValueParser(
-			new \Wikibase\DataModel\Entity\DispatchingEntityIdParser( $builders, $options )
+			new \Wikibase\DataModel\Services\EntityId\DispatchingEntityIdParser( $builders, $options )
 		);
 	};
 

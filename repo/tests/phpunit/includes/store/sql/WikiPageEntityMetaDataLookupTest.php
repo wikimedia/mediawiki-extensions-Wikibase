@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;

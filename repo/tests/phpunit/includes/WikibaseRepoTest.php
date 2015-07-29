@@ -56,7 +56,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getPropertyDataTypeLookup();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup', $returnValue );
 	}
 
 	public function testGetStringNormalizerReturnType() {
@@ -76,12 +76,12 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetEntityIdParserReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityIdParser();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\EntityId\EntityIdParser', $returnValue );
 	}
 
 	public function testGetStatementGuidParser() {
 		$returnValue = $this->getWikibaseRepo()->getStatementGuidParser();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\StatementGuidParser', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Statement\StatementGuidParser', $returnValue );
 	}
 
 	public function testGetLanguageFallbackChainFactory() {

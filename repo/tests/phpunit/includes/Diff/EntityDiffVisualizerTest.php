@@ -9,7 +9,7 @@ use IContextSource;
 use Language;
 use MediaWikiTestCase;
 use Site;
-use Wikibase\DataModel\Entity\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;

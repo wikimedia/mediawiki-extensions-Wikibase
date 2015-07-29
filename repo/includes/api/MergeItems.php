@@ -9,13 +9,13 @@ use InvalidArgumentException;
 use LogicException;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\Interactors\ItemMergeException;
-use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

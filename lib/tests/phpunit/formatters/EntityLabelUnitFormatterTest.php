@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Test;
 
 use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\EntityLabelUnitFormatter;
 
