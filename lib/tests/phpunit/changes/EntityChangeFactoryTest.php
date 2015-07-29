@@ -3,13 +3,13 @@
 namespace Wikibase\Lib\Test\Change;
 
 use Wikibase\ChangesTable;
-use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;

@@ -3,9 +3,9 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**

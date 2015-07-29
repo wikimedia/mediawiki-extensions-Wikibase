@@ -5,9 +5,9 @@ namespace Wikibase\Lib\Changes;
 use InvalidArgumentException;
 use MWException;
 use Wikibase\ChangesTable;
-use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 
