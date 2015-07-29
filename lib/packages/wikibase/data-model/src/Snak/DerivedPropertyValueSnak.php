@@ -34,12 +34,12 @@ class DerivedPropertyValueSnak extends PropertyValueSnak {
 	private $derivedDataValues = array();
 
 	/**
-	 * @param PropertyId $propertyId
+	 * @param PropertyId|EntityId|int $propertyId
 	 * @param DataValue $dataValue
 	 * @param DataValue[] $derivedDataValues
 	 */
 	public function __construct(
-		PropertyId $propertyId,
+		$propertyId,
 		DataValue $dataValue,
 		array $derivedDataValues
 	) {
@@ -72,6 +72,7 @@ class DerivedPropertyValueSnak extends PropertyValueSnak {
 		if ( isset( $this->derivedDataValues[$key] ) ) {
 			return $this->derivedDataValues[$key];
 		}
+
 		return null;
 	}
 
