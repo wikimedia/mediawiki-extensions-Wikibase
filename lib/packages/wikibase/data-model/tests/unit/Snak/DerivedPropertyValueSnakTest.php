@@ -42,6 +42,11 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 				new StringValue( 'bc' ),
 				array( 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ),
 			),
+			'numeric id' => array(
+				42,
+				new StringValue( 'foo' ),
+				array()
+			)
 		);
 	}
 
