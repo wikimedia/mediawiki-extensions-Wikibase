@@ -23,27 +23,6 @@ use Wikibase\DataModel\Term\TermList;
 abstract class Entity implements \Comparable, FingerprintProvider, EntityDocument {
 
 	/**
-	 * @var EntityId|null
-	 */
-	protected $id;
-
-	/**
-	 * @var Fingerprint
-	 */
-	protected $fingerprint;
-
-	/**
-	 * Returns the id of the entity or null if it does not have one.
-	 *
-	 * @since 0.1 return type changed in 0.3
-	 *
-	 * @return EntityId|null
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
 	 * Sets the value for the label in a certain value.
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
@@ -52,7 +31,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string $value
 	 */
 	public function setLabel( $languageCode, $value ) {
-		$this->fingerprint->setLabel( $languageCode, $value );
+		$this->getFingerprint()->setLabel( $languageCode, $value );
 	}
 
 	/**
@@ -64,7 +43,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string $value
 	 */
 	public function setDescription( $languageCode, $value ) {
-		$this->fingerprint->setDescription( $languageCode, $value );
+		$this->getFingerprint()->setDescription( $languageCode, $value );
 	}
 
 	/**
@@ -75,7 +54,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string $languageCode
 	 */
 	public function removeLabel( $languageCode ) {
-		$this->fingerprint->removeLabel( $languageCode );
+		$this->getFingerprint()->removeLabel( $languageCode );
 	}
 
 	/**
@@ -86,7 +65,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string $languageCode
 	 */
 	public function removeDescription( $languageCode ) {
-		$this->fingerprint->removeDescription( $languageCode );
+		$this->getFingerprint()->removeDescription( $languageCode );
 	}
 
 	/**
@@ -99,7 +78,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return string[]
 	 */
 	public function getAliases( $languageCode ) {
-		$aliases = $this->fingerprint->getAliasGroups();
+		$aliases = $this->getFingerprint()->getAliasGroups();
 
 		if ( $aliases->hasGroupForLanguage( $languageCode ) ) {
 			return $aliases->getByLanguage( $languageCode )->getAliases();
@@ -119,7 +98,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return array[]
 	 */
 	public function getAllAliases( array $languageCodes = null ) {
-		$aliases = $this->fingerprint->getAliasGroups();
+		$aliases = $this->getFingerprint()->getAliasGroups();
 
 		$textLists = array();
 
@@ -144,7 +123,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string[] $aliases
 	 */
 	public function setAliases( $languageCode, array $aliases ) {
-		$this->fingerprint->setAliasGroup( $languageCode, $aliases );
+		$this->getFingerprint()->setAliasGroup( $languageCode, $aliases );
 	}
 
 	/**
@@ -222,11 +201,11 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return string|bool
 	 */
 	public function getDescription( $languageCode ) {
-		if ( !$this->fingerprint->hasDescription( $languageCode ) ) {
+		if ( !$this->getFingerprint()->hasDescription( $languageCode ) ) {
 			return false;
 		}
 
-		return $this->fingerprint->getDescription( $languageCode )->getText();
+		return $this->getFingerprint()->getDescription( $languageCode )->getText();
 	}
 
 	/**
@@ -240,11 +219,11 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @return string|bool
 	 */
 	public function getLabel( $languageCode ) {
-		if ( !$this->fingerprint->hasLabel( $languageCode ) ) {
+		if ( !$this->getFingerprint()->hasLabel( $languageCode ) ) {
 			return false;
 		}
 
-		return $this->fingerprint->getLabel( $languageCode )->getText();
+		return $this->getFingerprint()->getLabel( $languageCode )->getText();
 	}
 
 	/**
@@ -257,9 +236,9 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 */
 	private function getMultilangTexts( $fieldKey, array $languageCodes = null ) {
 		if ( $fieldKey === 'label' ) {
-			$textList = $this->fingerprint->getLabels()->toTextArray();
+			$textList = $this->getFingerprint()->getLabels()->toTextArray();
 		} else {
-			$textList = $this->fingerprint->getDescriptions()->toTextArray();
+			$textList = $this->getFingerprint()->getDescriptions()->toTextArray();
 		}
 
 		if ( $languageCodes !== null ) {
@@ -280,7 +259,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string[] $labels
 	 */
 	public function setLabels( array $labels ) {
-		$this->fingerprint->setLabels( new TermList() );
+		$this->getFingerprint()->setLabels( new TermList() );
 
 		foreach ( $labels as $languageCode => $labelText ) {
 			$this->setLabel( $languageCode, $labelText );
@@ -298,7 +277,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param string[] $descriptions
 	 */
 	public function setDescriptions( array $descriptions ) {
-		$this->fingerprint->setDescriptions( new TermList() );
+		$this->getFingerprint()->setDescriptions( new TermList() );
 
 		foreach ( $descriptions as $languageCode => $descriptionText ) {
 			$this->setDescription( $languageCode, $descriptionText );
@@ -317,7 +296,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param array[] $aliasLists
 	 */
 	public function setAllAliases( array $aliasLists ) {
-		$this->fingerprint->setAliasGroups( new AliasGroupList() );
+		$this->getFingerprint()->setAliasGroups( new AliasGroupList() );
 
 		foreach( $aliasLists as $languageCode => $aliasList ) {
 			$this->setAliases( $languageCode, $aliasList );
@@ -344,26 +323,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 */
 	public function getClaims() {
 		return array();
-	}
-
-	/**
-	 * @since 0.7.3
-	 * @deprecated since 1.0
-	 *
-	 * @return Fingerprint
-	 */
-	public function getFingerprint() {
-		return $this->fingerprint;
-	}
-
-	/**
-	 * @since 0.7.3
-	 * @deprecated since 1.0
-	 *
-	 * @param Fingerprint $fingerprint
-	 */
-	public function setFingerprint( Fingerprint $fingerprint ) {
-		$this->fingerprint = $fingerprint;
 	}
 
 	/**
