@@ -5,8 +5,6 @@ namespace Wikibase\Test\Repo\Api;
 use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -24,6 +22,8 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
+use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Test\MockSiteStore;
 
 /**
@@ -63,7 +63,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $mockTitle ) );
 
-		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {

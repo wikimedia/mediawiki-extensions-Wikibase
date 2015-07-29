@@ -3,10 +3,10 @@
 namespace Wikibase\Test;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 
