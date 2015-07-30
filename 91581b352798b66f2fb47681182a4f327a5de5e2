@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b71775a7",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-07-30T17:30:19Z",
+      "side": 1,
+      "message": "Use\n\n mw.message( ... ).escaped()\n\nwhen embedding into HTML.",
+      "revId": "91581b352798b66f2fb47681182a4f327a5de5e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
