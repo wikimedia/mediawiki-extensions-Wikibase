@@ -166,6 +166,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 			self.$property.addClass( 'wb-edit' );
 		} )
 		.on( prefix + 'afterremove.' + this.widgetName, function( event ) {
+			self.$property.removeClass( 'wb-error' ).removeClass( 'wb-edit' );
 			self._trigger( 'afterremove' );
 		} )
 		.statementlistview( {
