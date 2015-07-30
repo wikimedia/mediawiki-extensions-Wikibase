@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_85f482ee",
+        "filename": "lib/includes/serializers/ClaimSerializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-30T15:04:05Z",
+      "side": 1,
+      "message": "Maybe this should even go into `Statement` in WikibaseDataModel itself?",
+      "revId": "28eeb8c7f4a041236a01a61be14ecc7dd96780c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c5d5aa48",
+        "filename": "repo/tests/phpunit/includes/StatementRankSerializerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-30T15:04:05Z",
+      "side": 1,
+      "message": "Nice function but I think adding `array( ... )` three time is a lot easier ;-)",
+      "revId": "28eeb8c7f4a041236a01a61be14ecc7dd96780c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
