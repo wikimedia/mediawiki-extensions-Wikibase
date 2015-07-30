@@ -14,16 +14,12 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -46,11 +42,6 @@ class ResultBuilder {
 	 * @var int
 	 */
 	private $missingEntityCounter;
-
-	/**
-	 * @var LibSerializerFactory
-	 */
-	private $libSerializerFactory;
 
 	/**
 	 * @var SerializerFactory
@@ -90,7 +81,6 @@ class ResultBuilder {
 	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteStore $siteStore
 	 * @param PropertyDataTypeLookup $dataTypeLookup
@@ -101,7 +91,6 @@ class ResultBuilder {
 	public function __construct(
 		$result,
 		EntityTitleLookup $entityTitleLookup,
-		LibSerializerFactory $libSerializerFactory,
 		SerializerFactory $serializerFactory,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $dataTypeLookup,
@@ -113,29 +102,12 @@ class ResultBuilder {
 
 		$this->result = $result;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->libSerializerFactory = $libSerializerFactory;
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
 		$this->isRawMode = $isRawMode;
 		$this->siteStore = $siteStore;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->modifier = new SerializationModifier();
-	}
-
-	/**
-	 * Returns the serialization options used by this ResultBuilder.
-	 * This can be used to modify the options.
-	 *
-	 * @return SerializationOptions
-	 */
-	public function getOptions() {
-		if ( !$this->options ) {
-			$this->options = new SerializationOptions();
-			$this->options->setIndexTags( $this->isRawMode );
-			$this->options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
-		}
-
-		return $this->options;
 	}
 
 	/**

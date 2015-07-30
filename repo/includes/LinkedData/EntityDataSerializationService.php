@@ -16,8 +16,6 @@ use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -83,11 +81,6 @@ class EntityDataSerializationService {
 	private $entityTitleLookup;
 
 	/**
-	 * @var LibSerializerFactory
-	 */
-	private $libSerializerFactory;
-
-	/**
 	 * @var SerializerFactory
 	 */
 	private $serializerFactory;
@@ -122,7 +115,6 @@ class EntityDataSerializationService {
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param LibSerializerFactory $libSerializerFactory
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param SiteList $sites
@@ -136,7 +128,6 @@ class EntityDataSerializationService {
 		$rdfDataURI,
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
-		LibSerializerFactory $libSerializerFactory,
 		PropertyDataTypeLookup $propertyLookup,
 		SiteList $sites,
 		EntityDataFormatProvider $entityDataFormatProvider,
@@ -147,7 +138,6 @@ class EntityDataSerializationService {
 		$this->rdfDataURI = $rdfDataURI;
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->libSerializerFactory = $libSerializerFactory;
 		$this->serializerFactory = $serializerFactory;
 		$this->propertyLookup = $propertyLookup;
 		$this->sites = $sites;
@@ -459,7 +449,6 @@ class EntityDataSerializationService {
 		$resultBuilder = new ResultBuilder(
 			$res,
 			$this->entityTitleLookup,
-			$this->libSerializerFactory,
 			$this->serializerFactory,
 			$this->siteStore,
 			$this->propertyLookup,
