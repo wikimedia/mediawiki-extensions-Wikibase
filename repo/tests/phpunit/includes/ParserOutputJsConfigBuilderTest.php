@@ -2,16 +2,17 @@
 
 namespace Wikibase\Test;
 
-use Language;
+use DataValues\StringValue;
 use MediaWikiTestCase;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
@@ -29,84 +30,131 @@ use Wikibase\ParserOutputJsConfigBuilder;
  */
 class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 
-	/**
-	 * @dataProvider buildProvider
-	 */
-	public function testBuild( Entity $entity ) {
-		$configBuilder = $this->getConfigBuilder( 'en', array( 'de', 'en', 'es', 'fr' ) );
-		$configVars = $configBuilder->build( $entity );
+	public function testBuildConfigItem() {
+		$item = new Item( new ItemId( 'Q5881' ) );
+		$this->addLabels( $item );
+		$mainSnakPropertyId = $this->addStatements( $item );
 
-		$this->assertInternalType( 'array', $configVars );
+		$configBuilder = new ParserOutputJsConfigBuilder( new SerializationOptions() );
+		$configVars = $configBuilder->build( $item );
 
-		$entityId = $entity->getId()->getSerialization();
-		$this->assertEquals( $entityId, $configVars['wbEntityId'], 'wbEntityId' );
+		$this->assertWbEntityId( 'Q5881', $configVars );
 
-		$this->assertSerializationEqualsEntity( $entity, json_decode( $configVars['wbEntity'], true ) );
+		$this->assertWbEntity(
+			$this->getSerialization( $item, $mainSnakPropertyId ),
+			$configVars
+		);
+
+		$this->assertSerializationEqualsEntity(
+			$item,
+			json_decode( $configVars['wbEntity'], true )
+		);
 	}
 
-	public function assertSerializationEqualsEntity( Entity $entity, $serialization ) {
+	public function testBuildConfigProperty() {
+		$property = new Property( new PropertyId( 'P330' ), null, 'string' );
+		$this->addLabels( $property );
+		$mainSnakPropertyId = $this->addStatements( $property );
+
+		$configBuilder = new ParserOutputJsConfigBuilder( new SerializationOptions() );
+		$configVars = $configBuilder->build( $property );
+
+		$this->assertWbEntityId( 'P330', $configVars );
+
+		$expectedSerialization = $this->getSerialization( $property, $mainSnakPropertyId );
+		$expectedSerialization['datatype'] = 'string';
+
+		$this->assertWbEntity( $expectedSerialization, $configVars );
+
+		$this->assertSerializationEqualsEntity(
+			$property,
+			json_decode( $configVars['wbEntity'], true )
+		);
+	}
+
+	public function assertWbEntityId( $expectedId, array $configVars ) {
+		$this->assertEquals(
+			$expectedId,
+			$configVars['wbEntityId'],
+			'wbEntityId'
+		);
+	}
+
+	public function assertWbEntity( array $expectedSerialization, array $configVars ) {
+		$this->assertEquals(
+			$expectedSerialization,
+			json_decode( $configVars['wbEntity'], true ),
+			'wbEntity'
+		);
+	}
+
+	public function assertSerializationEqualsEntity( EntityDocument $entity, $serialization ) {
 		$serializerFactory = new LibSerializerFactory();
 		$options = new SerializationOptions();
 
 		$unserializer = $serializerFactory->newUnserializerForEntity( $entity->getType(), $options );
 		$unserializedEntity = $unserializer->newFromSerialization( $serialization );
 
-		$this->assertTrue( $unserializedEntity->equals( $entity ), 'unserialized entity equals entity' );
+		$this->assertTrue(
+			$unserializedEntity->equals( $entity ),
+			'unserialized entity equals entity'
+		);
 	}
 
-	public function buildProvider() {
-		$entity = $this->getMainItem();
+	private function addLabels( FingerprintProvider $fingerprintProvider ) {
+		$fingerprintProvider->getFingerprint()->setLabel( 'en', 'Cake' );
+		$fingerprintProvider->getFingerprint()->setLabel( 'de', 'Kuchen' );
+	}
 
+	private function addStatements( StatementListProvider $statementListProvider ) {
+		$propertyId = new PropertyId( 'P794' );
+
+		$statementListProvider->getStatements()->addNewStatement(
+			new PropertyValueSnak( $propertyId, new StringValue( 'kittens!' ) ),
+			null,
+			null,
+			$this->makeGuid( $statementListProvider->getId() )
+		);
+
+		return $propertyId;
+	}
+
+	private function makeGuid( EntityId $entityId ) {
+		return $entityId->getSerialization() . '$muahahaha';
+	}
+
+	private function getSerialization( EntityDocument $entity, PropertyId $propertyId ) {
 		return array(
-			array( $entity )
+			'id' => $entity->getId()->getSerialization(),
+			'type' => $entity->getType(),
+			'labels' => array(
+				'de' => array(
+					'language' => 'de',
+					'value' => 'Kuchen'
+				),
+				'en' => array(
+					'language' => 'en',
+					'value' => 'Cake'
+				)
+			),
+			'claims' => array (
+				$propertyId->getSerialization() => array(
+					array(
+						'id' => $this->makeGuid( $entity->getId() ),
+						'mainsnak' => array (
+							'snaktype' => 'value',
+							'property' => $propertyId->getSerialization(),
+							'datavalue' => array(
+								'value' => 'kittens!',
+								'type' => 'string'
+							),
+						),
+						'type' => 'statement',
+						'rank' => 'normal',
+					),
+				),
+			),
 		);
-	}
-
-	private function getConfigBuilder( $languageCode, array $languageCodes ) {
-		$configBuilder = new ParserOutputJsConfigBuilder(
-			$this->getSerializationOptions( $languageCode, $languageCodes )
-		);
-
-		return $configBuilder;
-	}
-
-	/**
-	 * @param string $langCode
-	 *
-	 * @return LanguageFallbackChain
-	 */
-	private function getLanguageFallbackChain( $langCode ) {
-		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-
-		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage(
-			Language::factory( $langCode )
-		);
-
-		return $languageFallbackChain;
-	}
-
-	private function getSerializationOptions( $langCode, $langCodes ) {
-		$fallbackChain = $this->getLanguageFallbackChain( $langCode );
-		$langCodes = $langCodes + array( $langCode => $fallbackChain );
-
-		$options = new SerializationOptions();
-		$options->setLanguages( $langCodes );
-
-		return $options;
-	}
-
-	private function getMainItem() {
-		$item = new Item( new ItemId( 'Q5881' ) );
-		$item->setLabel( 'en', 'Cake' );
-
-		$snak = new PropertyValueSnak(
-			new PropertyId( 'P794' ),
-			new EntityIdValue( new ItemId( 'Q9000' ) )
-		);
-		$guid = 'P794$muahahaha';
-		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
-
-		return $item;
 	}
 
 }
