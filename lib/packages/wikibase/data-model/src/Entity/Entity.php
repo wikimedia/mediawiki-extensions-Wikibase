@@ -289,6 +289,18 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	}
 
 	/**
+	 * Returns a deep copy of the entity.
+	 *
+	 * @since 0.1
+	 * @deprecated since 1.0
+	 *
+	 * @return self
+	 */
+	public function copy() {
+		return unserialize( serialize( $this ) );
+	}
+
+	/**
 	 * @since 0.3
 	 * @deprecated since 1.0, use getStatements()->toArray() instead.
 	 *
