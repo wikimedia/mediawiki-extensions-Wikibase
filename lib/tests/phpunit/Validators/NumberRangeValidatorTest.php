@@ -42,7 +42,7 @@ class NumberRangeValidatorTest extends \PHPUnit_Framework_TestCase {
 			$this->assertCount( 1, $errors, $message );
 			$this->assertTrue( in_array( $errors[0]->getCode(), array( 'too-low', 'too-high' ) ), $message . "\n" . $errors[0]->getCode() );
 
-			$localizer = new ValidatorErrorLocalizer( );
+			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );
 			$this->assertTrue( $msg->exists(), $msg );
 		}

@@ -80,7 +80,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
-			->will( $this->returnValue( 'Deutsch' ));
+			->will( $this->returnValue( 'Deutsch' ) );
 
 		return new WikibaseValueFormatterBuilders(
 			Language::factory( 'en' ),

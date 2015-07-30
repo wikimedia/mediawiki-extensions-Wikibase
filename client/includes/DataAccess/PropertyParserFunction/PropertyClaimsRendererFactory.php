@@ -153,7 +153,7 @@ class PropertyClaimsRendererFactory {
 	private function newVariantsAwareRenderer( array $variants, UsageAccumulator $usageAccumulator ) {
 		$languageAwareRenderers = array();
 
-		foreach( $variants as $variant ) {
+		foreach ( $variants as $variant ) {
 			$languageAwareRenderers[$variant] = $this->getLanguageAwareRendererFromCode(
 				$variant,
 				$usageAccumulator

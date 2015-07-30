@@ -69,7 +69,7 @@ class LibSerializerFactory {
 	 * @return Serializer
 	 */
 	public function newSerializerForEntity( $entityType, $options ) {
-		switch( $entityType ) {
+		switch ( $entityType ) {
 			case Item::ENTITY_TYPE:
 				return $this->newItemSerializer( $options );
 			case Property::ENTITY_TYPE:
@@ -88,7 +88,7 @@ class LibSerializerFactory {
 	 * @return Unserializer
 	 */
 	public function newUnserializerForEntity( $entityType, $options ) {
-		switch( $entityType ) {
+		switch ( $entityType ) {
 			case Item::ENTITY_TYPE:
 				return $this->newItemUnserializer( $options );
 			case Property::ENTITY_TYPE:

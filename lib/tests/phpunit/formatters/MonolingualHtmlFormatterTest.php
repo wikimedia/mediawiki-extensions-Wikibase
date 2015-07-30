@@ -28,7 +28,7 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
-			->will( $this->returnValue( 'Deutsch' ));
+			->will( $this->returnValue( 'Deutsch' ) );
 
 		$formatter = new MonolingualHtmlFormatter( $options, $languageNameLookup );
 

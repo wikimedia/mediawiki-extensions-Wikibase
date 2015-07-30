@@ -41,7 +41,7 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase {
 			$this->assertCount( 1, $errors, $message );
 			$this->assertEquals( 'malformed-value', $errors[0]->getCode(), $message );
 
-			$localizer = new ValidatorErrorLocalizer( );
+			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );
 			$this->assertTrue( $msg->exists(), $msg );
 		}

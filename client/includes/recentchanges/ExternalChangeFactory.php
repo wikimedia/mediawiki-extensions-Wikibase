@@ -187,7 +187,7 @@ class ExternalChangeFactory {
 		if ( array_key_exists( 'composite-comment', $changeParams ) ) {
 			$comment['key'] = 'wikibase-comment-multi';
 			$comment['numparams'] = $this->countCompositeComments( $changeParams['composite-comment'] );
-		} elseif ( array_key_exists( 'comment', $changeParams  ) ) {
+		} elseif ( array_key_exists( 'comment', $changeParams ) ) {
 			$comment = $this->parseComment( $changeParams['comment'], $changeParams['type'] );
 		}
 

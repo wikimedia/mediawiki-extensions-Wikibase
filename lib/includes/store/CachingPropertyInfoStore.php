@@ -139,7 +139,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	 * @throws InvalidArgumentException
 	 */
 	public function setPropertyInfo( PropertyId $propertyId, array $info ) {
-		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ]) ) {
+		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ] ) ) {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
 

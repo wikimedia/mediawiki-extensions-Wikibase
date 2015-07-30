@@ -97,7 +97,7 @@ class DescriptionSerializer extends SerializerObject implements Unserializer {
 	public function newFromSerialization( array $data ) {
 		$descriptions = array();
 
-		foreach( $data as $key => $description ) {
+		foreach ( $data as $key => $description ) {
 			if ( $key === '_element' ) {
 				continue;
 			}

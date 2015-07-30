@@ -84,7 +84,7 @@ class AliasSerializer extends SerializerObject implements Unserializer {
 	public function newFromSerialization( array $data ) {
 		$aliases = array();
 
-		foreach( $data as $key => $aliasSet ) {
+		foreach ( $data as $key => $aliasSet ) {
 			if ( $key === '_element' ) {
 				continue;
 			}
@@ -114,7 +114,7 @@ class AliasSerializer extends SerializerObject implements Unserializer {
 	protected function extractAliasValues( array $aliasSet ) {
 		$aliases = array();
 
-		foreach( $aliasSet as $alias ) {
+		foreach ( $aliasSet as $alias ) {
 			if ( is_array( $alias ) && array_key_exists( 'value', $alias ) && is_string( $alias['value'] ) ) {
 				$aliases[] = $alias['value'];
 			} else {

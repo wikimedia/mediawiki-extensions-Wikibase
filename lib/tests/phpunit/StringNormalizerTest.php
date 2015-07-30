@@ -79,14 +79,14 @@ class StringNormalizerTest extends \MediaWikiTestCase {
 
 	public function providerTrimWhitespace() {
 		return array(
-			array( 'foo bar', 'foo bar'), // #0
-			array( ' foo  bar ', 'foo  bar'), // #1
-			array( '  foo   bar  ', 'foo   bar'), // #2
-			array( "foo\tbar", 'foo bar'), // #3, both a space and control char
-			array( "foo\nbar", 'foo bar'), // #4, both a space and control char
-			array( "foo\rbar", 'foo bar'), // #5, both a space and control char
-			array( "\r \t\nfoo\r\t\t\tbar\n\n\n\r\r", 'foo bar'), // #6, both space and control chars
-			array( "\r \t\nfoo\r\t\t\t bar\n\n\n\r\r", 'foo  bar'), // #7, both space and control chars
+			array( 'foo bar', 'foo bar' ), // #0
+			array( ' foo  bar ', 'foo  bar' ), // #1
+			array( '  foo   bar  ', 'foo   bar' ), // #2
+			array( "foo\tbar", 'foo bar' ), // #3, both a space and control char
+			array( "foo\nbar", 'foo bar' ), // #4, both a space and control char
+			array( "foo\rbar", 'foo bar' ), // #5, both a space and control char
+			array( "\r \t\nfoo\r\t\t\tbar\n\n\n\r\r", 'foo bar' ), // #6, both space and control chars
+			array( "\r \t\nfoo\r\t\t\t bar\n\n\n\r\r", 'foo  bar' ), // #7, both space and control chars
 			array(
 				html_entity_decode( 'foo&#8204;bar', ENT_QUOTES, 'utf-8' ),
 				html_entity_decode( 'foo&#8204;bar', ENT_QUOTES, 'utf-8' )

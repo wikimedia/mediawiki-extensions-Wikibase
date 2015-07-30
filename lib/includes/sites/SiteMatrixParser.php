@@ -76,7 +76,7 @@ class SiteMatrixParser {
 
 		$sites = array();
 
-		foreach( $groups as $groupData ) {
+		foreach ( $groups as $groupData ) {
 			$sites = array_merge(
 				$sites,
 				$this->getSitesFromLangGroup( $groupData )
@@ -99,7 +99,7 @@ class SiteMatrixParser {
 	private function getSpecialSites( array $specialSites ) {
 		$sites = array();
 
-		foreach( $specialSites as $specialSite ) {
+		foreach ( $specialSites as $specialSite ) {
 			$site = $this->getSiteFromSiteData( $specialSite );
 			$siteId = $site->getGlobalId();
 
@@ -123,7 +123,7 @@ class SiteMatrixParser {
 	private function getSitesFromLangGroup( $langGroup ) {
 		$sites = array();
 
-		foreach( $langGroup['site'] as $siteData ) {
+		foreach ( $langGroup['site'] as $siteData ) {
 			if ( !array_key_exists( 'code', $langGroup ) ) {
 				continue;
 			}
