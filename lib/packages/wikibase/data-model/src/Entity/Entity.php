@@ -329,7 +329,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @deprecated since 1.0
 	 *
 	 * @param Fingerprint $fingerprint
- 	 */
+	 */
 	public abstract function setFingerprint( Fingerprint $fingerprint );
 
 	/**
