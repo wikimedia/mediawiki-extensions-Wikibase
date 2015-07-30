@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_e58c668b",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-30T14:58:52Z",
+      "side": 1,
+      "message": "We shouldn\u0027t depend on the global factory here but constructing a DeserializerFactory requires some overhead :S Maybe do some mocking?",
+      "revId": "abdaa6d94e681793cdd7442c37ac1dafd1b70b83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
