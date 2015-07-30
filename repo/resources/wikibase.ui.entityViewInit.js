@@ -263,11 +263,10 @@
 				$.find( '.mw-notification-content' ).length === 0
 				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
 			) {
-				mw.notify(
-					mw.msg( 'wikibase-anonymouseditwarning',
-						mw.msg( 'wikibase-entity-' + entityType )
-					)
-				);
+				var message = mw.msg( 'wikibase-anonymouseditwarning',
+								mw.msg( 'wikibase-entity-' + entityType ) );
+				message = $( '<div class="wb-warning">' ).text( message );
+				mw.notify( message, { autoHide: false } );
 			}
 		} );
 	}
