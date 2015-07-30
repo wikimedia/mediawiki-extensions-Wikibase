@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Term;
 
 /**
- * @since 4.0
+ * @since 4.1
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >

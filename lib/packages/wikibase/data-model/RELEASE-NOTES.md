@@ -4,6 +4,7 @@
 
 * Added `StatementFilter` and `ReferencedStatementFilter`
 * Added `StatementList::filter`
+* Added `LabelsProvider`, `DescriptionsProvider` and `AliasesProvider`
 
 ## Version 4.0 (2015-07-28)
 

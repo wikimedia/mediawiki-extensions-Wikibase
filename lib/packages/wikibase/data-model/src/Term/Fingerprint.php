@@ -13,7 +13,7 @@ use OutOfBoundsException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Mättig
  */
-class Fingerprint implements Comparable {
+class Fingerprint implements Comparable, LabelsProvider, DescriptionsProvider, AliasesProvider {
 
 	/**
 	 * @deprecated since 2.5, use new Fingerprint() instead.
