@@ -20,7 +20,9 @@ vp.StringParser = util.inherit( PARENT, {
 	 * @param {string} rawValue
 	 */
 	parse: function( rawValue ) {
-		return $.Deferred().resolve( new dv.StringValue( rawValue ) ).promise();
+		return $.Deferred().resolve(
+			rawValue === '' ? null : new dv.StringValue( rawValue )
+		).promise();
 	}
 } );
 

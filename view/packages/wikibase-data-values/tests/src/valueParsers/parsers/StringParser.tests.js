@@ -38,7 +38,8 @@ define( [
 				[ '42', new dv.StringValue( '42' ) ],
 				[ ' foo ', new dv.StringValue( ' foo ' ) ],
 				[ ' Baa', new dv.StringValue( ' Baa' ) ],
-				[ 'xXx ', new dv.StringValue( 'xXx ' ) ]
+				[ 'xXx ', new dv.StringValue( 'xXx ' ) ],
+				[ '', null ]
 			];
 		}
 
