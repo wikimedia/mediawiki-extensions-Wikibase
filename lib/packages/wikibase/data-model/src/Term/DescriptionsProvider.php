@@ -11,6 +11,8 @@ namespace Wikibase\DataModel\Term;
 interface DescriptionsProvider {
 
 	/**
+	 * It is not guaranteed that this method returns the original object.
+	 *
 	 * @return TermList
 	 */
 	public function getDescriptions();

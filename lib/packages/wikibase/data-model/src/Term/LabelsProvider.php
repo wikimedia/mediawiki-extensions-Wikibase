@@ -11,6 +11,8 @@ namespace Wikibase\DataModel\Term;
 interface LabelsProvider {
 
 	/**
+	 * It is not guaranteed that this method returns the original object.
+	 *
 	 * @return TermList
 	 */
 	public function getLabels();

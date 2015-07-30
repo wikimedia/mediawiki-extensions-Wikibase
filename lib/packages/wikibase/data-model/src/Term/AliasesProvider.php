@@ -11,6 +11,8 @@ namespace Wikibase\DataModel\Term;
 interface AliasesProvider {
 
 	/**
+	 * It is not guaranteed that this method returns the original object.
+	 *
 	 * @return AliasGroupList
 	 */
 	public function getAliasGroups();
