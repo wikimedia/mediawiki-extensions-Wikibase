@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Caoimhin"
+			"Caoimhin",
+			"GunChleoc"
 		]
 	},
+	"wikibase-edit": "deasaich",
 	"wikibase-add": "cuir ris"
 }

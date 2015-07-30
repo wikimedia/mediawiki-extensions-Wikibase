@@ -4,7 +4,8 @@
 			"Admresdeserv.",
 			"Papuass",
 			"Edgars2007",
-			"Macofe"
+			"Macofe",
+			"Nitalynx"
 		]
 	},
 	"wikibase-entity-item": "ieraksts",
@@ -19,9 +20,9 @@
 	"wikibase-save-inprogress": "Saglabā...",
 	"wikibase-remove-inprogress": "Dzēš...",
 	"wikibase-entitytermsforlanguagelistview-language": "Valoda",
-	"wikibase-label-empty": "Nosaukums vēl nav norādīts",
+	"wikibase-label-empty": "Nav nosaukuma",
 	"wikibase-label-edit-placeholder": "ievadiet nosaukumu",
-	"wikibase-description-empty": "Apraksts nav vēl norādīts",
+	"wikibase-description-empty": "Nav apraksta",
 	"wikibase-description-edit-placeholder": "ievadiet aprakstu",
 	"wikibase-diffview-reference": "atsauce",
 	"wikibase-diffview-rank": "rangs",

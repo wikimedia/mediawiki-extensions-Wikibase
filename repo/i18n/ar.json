@@ -201,6 +201,7 @@
 	"special-listdatatypes": "قائمة بجميع أنماط البيانات المتوفرة",
 	"wikibase-history-title-with-label": "تاريخ مراجعات «$2» ($1)",
 	"wikibase-history-title-without-label": "تاريخ مراجعات ($1)",
+	"special-listproperties": "قائمة الخصائص",
 	"special-entitieswithoutdescription": "كائنات بلا وصف",
 	"wikibase-entitieswithoutdescription-legend": "أعط قائمة بالكائنات بلا وصف",
 	"special-entitieswithoutlabel": "كائنات بلا وسم",

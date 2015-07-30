@@ -30,6 +30,7 @@
 	"wikibase-addreference": "kaynak ekle",
 	"wikibase-save-inprogress": "Kaydediliyor...",
 	"wikibase-remove-inprogress": "Kaldırılıyor...",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Daha fazla dillerde",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Yapılandır",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Şu şekilde de bilinir:",
 	"wikibase-entitytermsforlanguagelistview-description": "Tanım",

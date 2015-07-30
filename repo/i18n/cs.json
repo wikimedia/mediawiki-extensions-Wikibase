@@ -44,6 +44,7 @@
 	"wikibase-description-empty": "Popis nebyl definován",
 	"wikibase-description-edit-placeholder": "zadejte popis",
 	"wikibase-description-edit-placeholder-language-aware": "zadejte popis v jazyce $1",
+	"wikibase-aliases-edit-placeholder-language-aware": "zadejte aliasy v jazyce $1",
 	"wikibase-diffview-reference": "reference",
 	"wikibase-diffview-rank": "postavení",
 	"wikibase-diffview-rank-preferred": "Preferované postavení",
