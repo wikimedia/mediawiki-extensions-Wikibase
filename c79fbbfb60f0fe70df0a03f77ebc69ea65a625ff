@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c5fcca0a",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-30T14:47:35Z",
+      "side": 1,
+      "message": "why does this support / use the internal deserializer and wbeditentity does not use the internal one?",
+      "revId": "c79fbbfb60f0fe70df0a03f77ebc69ea65a625ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
