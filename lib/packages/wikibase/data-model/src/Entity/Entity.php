@@ -44,6 +44,30 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	}
 
 	/**
+	 * Sets the value for the label in a certain value.
+	 *
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
+	 *
+	 * @param string $languageCode
+	 * @param string $value
+	 */
+	public function setLabel( $languageCode, $value ) {
+		$this->fingerprint->setLabel( $languageCode, $value );
+	}
+
+	/**
+	 * Sets the value for the description in a certain value.
+	 *
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
+	 *
+	 * @param string $languageCode
+	 * @param string $value
+	 */
+	public function setDescription( $languageCode, $value ) {
+		$this->fingerprint->setDescription( $languageCode, $value );
+	}
+
+	/**
 	 * Removes the labels in the specified languages.
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
@@ -109,6 +133,18 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 		}
 
 		return $textLists;
+	}
+
+	/**
+	 * Sets the aliases for the item in the language with the specified code.
+	 *
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
+	 *
+	 * @param string $languageCode
+	 * @param string[] $aliases
+	 */
+	public function setAliases( $languageCode, array $aliases ) {
+		$this->fingerprint->setAliasGroup( $languageCode, $aliases );
 	}
 
 	/**
