@@ -85,7 +85,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		if ( !$row ) {
 			// Try loading from master
-			wfDebugLog(  __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
 				. " with $revisionId from DB_MASTER." );
 
 			$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_MASTER );

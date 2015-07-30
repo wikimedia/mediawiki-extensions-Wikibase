@@ -23,7 +23,7 @@ class EscapingEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
 		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
 		$entityIdFormatter->expects( $this->once() )
 			->method( 'formatEntityId' )
-			->will( $this->returnValue( 'Q1 is &%$;§ > Q2' ));
+			->will( $this->returnValue( 'Q1 is &%$;§ > Q2' ) );
 
 		$formatter = new EscapingEntityIdFormatter( $entityIdFormatter, 'htmlspecialchars' );
 		$value = new ItemId( 'Q1' );

@@ -60,7 +60,7 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$argLists[] = array(
-			array( new PropertyValueSnak( $p27, new StringValue( 'onoez' )  ) ),
+			array( new PropertyValueSnak( $p27, new StringValue( 'onoez' ) ) ),
 			array( $p27 ),
 			"PropertyValueSnak with string value"
 		);

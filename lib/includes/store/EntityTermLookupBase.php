@@ -94,7 +94,7 @@ abstract class EntityTermLookupBase implements TermLookup {
 	protected function convertTermsToMap( array $wikibaseTerms ) {
 		$terms = array();
 
-		foreach( $wikibaseTerms as $wikibaseTerm ) {
+		foreach ( $wikibaseTerms as $wikibaseTerm ) {
 			$languageCode = $wikibaseTerm->getLanguage();
 			$terms[$languageCode] = $wikibaseTerm->getText();
 		}

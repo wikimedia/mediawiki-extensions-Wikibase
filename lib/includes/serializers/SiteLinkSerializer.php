@@ -171,7 +171,7 @@ class SiteLinkSerializer extends SerializerObject {
 	public function newFromSerialization( array $data ) {
 		$siteLinks = array();
 
-		foreach( $data as $siteLink ) {
+		foreach ( $data as $siteLink ) {
 			if ( !array_key_exists( 'site', $siteLink ) || !array_key_exists( 'title', $siteLink ) ) {
 				throw new InvalidArgumentException( 'Site link serialization is invalid.' );
 			}
@@ -198,7 +198,7 @@ class SiteLinkSerializer extends SerializerObject {
 
 		$badges = array();
 
-		foreach( $data as $badge ) {
+		foreach ( $data as $badge ) {
 			$itemId = $idParser->parse( $badge );
 
 			if ( ! $itemId instanceof ItemId ) {

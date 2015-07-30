@@ -234,7 +234,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 			array(), // items
 			array(), // sites
 			array(), // pages
-			array(  // expected
+			array( // expected
 				array( 'enwiki', 'Foo', 1 ),
 				array( 'dewiki', 'Bar', 1 ),
 				array( 'enwiki', 'Bar', 2 ),
@@ -391,7 +391,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		try {
 			$entities = $this->repo->getEntities( $ids );
 
-			if ( $expectedError !== false  ) {
+			if ( $expectedError !== false ) {
 				$this->fail( "expected error: " . $expectedError );
 			}
 		} catch ( \MWException $ex ) {
@@ -611,7 +611,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'bar', $logEntry['summary'] );
 	}
 
-	public function testDeleteEntity( ) {
+	public function testDeleteEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
 		$this->repo->putEntity( $item );
 
@@ -619,7 +619,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->repo->hasEntity( $item->getId() ) );
 	}
 
-	public function testPutRedirect( ) {
+	public function testPutRedirect() {
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
 		$this->repo->putRedirect( $redirect );
 
@@ -644,7 +644,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function testDeleteRedirect( ) {
+	public function testDeleteRedirect() {
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
 		$this->repo->putRedirect( $redirect );
 
@@ -660,10 +660,10 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$itemId = $item->getId();
 
 		$this->repo->updateWatchlist( $user, $itemId, true );
-		$this->assertTrue(  $this->repo->isWatching( $user, $itemId ) );
+		$this->assertTrue( $this->repo->isWatching( $user, $itemId ) );
 
 		$this->repo->updateWatchlist( $user, $itemId, false );
-		$this->assertFalse(  $this->repo->isWatching( $user, $itemId ) );
+		$this->assertFalse( $this->repo->isWatching( $user, $itemId ) );
 	}
 
 	public function testUserWasLastToEdit() {

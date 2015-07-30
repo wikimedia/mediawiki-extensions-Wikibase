@@ -100,7 +100,7 @@ class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 	}
 
 	protected function assertErrorCodeLocalization( Result $result ) {
-		$localizer = new ValidatorErrorLocalizer( );
+		$localizer = new ValidatorErrorLocalizer();
 
 		$errors = $result->getErrors();
 		$this->assertGreaterThanOrEqual( 1, $errors );

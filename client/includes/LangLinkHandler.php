@@ -193,7 +193,7 @@ class LangLinkHandler {
 		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) === true ) {
 			$nel = $this->getNoExternalLangLinks( $out );
 
-			if( in_array( '*', $nel ) ) {
+			if ( in_array( '*', $nel ) ) {
 				return false;
 			}
 
@@ -303,7 +303,7 @@ class LangLinkHandler {
 		foreach ( $flatLinks as $s ) {
 			$parts = explode( ':', $s, 2 );
 
-			if ( count($parts) === 2 ) {
+			if ( count( $parts ) === 2 ) {
 				$lang = $parts[0];
 				$page = $parts[1];
 

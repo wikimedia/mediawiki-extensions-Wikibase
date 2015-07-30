@@ -53,7 +53,7 @@ class EntityRedirectResolvingDecorator {
 			throw new InvalidArgumentException( '$target must be an object' );
 		}
 
-		if ( !is_int( $maxResolutionDepth) || $maxResolutionDepth < 0 ) {
+		if ( !is_int( $maxResolutionDepth ) || $maxResolutionDepth < 0 ) {
 			throw new InvalidArgumentException( '$maxResolutionDepth must be a positive integer' );
 		}
 

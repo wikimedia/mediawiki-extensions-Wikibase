@@ -52,7 +52,7 @@ class SitesBuilder {
 
 		$existingSites = $this->store->getSites( "nocache" );
 
-		foreach( $sites as $site ) {
+		foreach ( $sites as $site ) {
 			$siteId = $site->getGlobalId();
 
 			if ( $existingSites->hasSite( $siteId ) ) {
@@ -71,8 +71,8 @@ class SitesBuilder {
 	 * @return Site[]
 	 */
 	protected function addInterwikiIdsToGroup( array $sites, $siteGroup ) {
-		foreach( $sites as $site ) {
-			if( $site->getGroup() === $siteGroup ) {
+		foreach ( $sites as $site ) {
+			if ( $site->getGroup() === $siteGroup ) {
 				$localId = $site->getLanguageCode();
 
 				if ( $localId ) {
