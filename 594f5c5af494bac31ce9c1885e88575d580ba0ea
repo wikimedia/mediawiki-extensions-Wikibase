@@ -33,6 +33,23 @@
       "revId": "594f5c5af494bac31ce9c1885e88575d580ba0ea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_cb061889",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-30T21:09:27Z",
+      "side": 1,
+      "message": "apparently at constructor time, it is always false and then is true when the methods below are called for xml format. :(",
+      "revId": "594f5c5af494bac31ce9c1885e88575d580ba0ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
