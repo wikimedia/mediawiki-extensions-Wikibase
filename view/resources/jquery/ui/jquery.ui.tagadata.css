@@ -52,9 +52,7 @@ ul.tagadata li.tagadata-choice .tagadata-label input {
 }
 
 ul.tagadata li.tagadata-choice-empty,
-ul.tagadata li.tagadata-choice-active,
-ul.tagadata li.tagadata-choice .tagadata-label input:focus,
-ul.tagadata li.tagadata-choice-empty input {
+ul.tagadata li.tagadata-choice-active {
 	background: none white !important;
 }
 
@@ -76,4 +74,8 @@ ul.tagadata li.tagadata-choice-equal {
 
 ul.tagadata {
 	background-color: #F0F0F0;
+}
+
+ul.tagadata li.tagadata-choice .tagadata-label input:focus {
+	background-color: #D6F3FF;
 }
