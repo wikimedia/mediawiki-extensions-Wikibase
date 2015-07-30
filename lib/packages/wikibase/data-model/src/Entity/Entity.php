@@ -7,7 +7,6 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
@@ -324,6 +323,14 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	public function getClaims() {
 		return array();
 	}
+
+	/**
+	 * @since 0.7.3
+	 * @deprecated since 1.0
+	 *
+	 * @param Fingerprint $fingerprint
+ 	 */
+	public abstract function setFingerprint( Fingerprint $fingerprint );
 
 	/**
 	 * Returns if the Entity has no content.

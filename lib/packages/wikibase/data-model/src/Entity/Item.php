@@ -68,7 +68,7 @@ class Item extends Entity implements StatementListHolder {
 	/**
 	 * Returns the id of the entity or null if it does not have one.
 	 *
-	 * @since 5.0
+	 * @since 0.1 return type changed in 0.3
 	 *
 	 * @return ItemId|null
 	 */
@@ -98,7 +98,7 @@ class Item extends Entity implements StatementListHolder {
 	}
 
 	/**
-	 * @since 5.0
+	 * @since 0.7.3
 	 *
 	 * @return Fingerprint
 	 */
@@ -107,7 +107,7 @@ class Item extends Entity implements StatementListHolder {
 	}
 
 	/**
-	 * @since 5.0
+	 * @since 0.7.3
 	 *
 	 * @param Fingerprint $fingerprint
 	 */
