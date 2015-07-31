@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_d9526fdd",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-07-31T11:55:34Z",
+      "side": 1,
+      "message": "The inner message should escaped, or else it get double escaped.",
+      "revId": "303ab318e3f3be263c9aa64b07241205a9ac07b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
