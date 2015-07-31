@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_b6f1b093",
+        "filename": "lib/includes/serializers/ClaimSerializer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-31T10:10:27Z",
+      "side": 1,
+      "message": "This whole class dies by the end of this chain",
+      "parentUuid": "8ec42329_85f482ee",
+      "revId": "28eeb8c7f4a041236a01a61be14ecc7dd96780c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_c5d5aa48",
         "filename": "repo/tests/phpunit/includes/StatementRankSerializerTest.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-30T15:04:05Z",
       "side": 1,
       "message": "Nice function but I think adding `array( ... )` three time is a lot easier ;-)",
+      "revId": "28eeb8c7f4a041236a01a61be14ecc7dd96780c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_96f6f48a",
+        "filename": "repo/tests/phpunit/includes/StatementRankSerializerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-31T10:10:27Z",
+      "side": 1,
+      "message": "Perhaps, but this is just a Copy and paste that is probably going to die in a few weeks anyway! :)",
+      "parentUuid": "8ec42329_c5d5aa48",
       "revId": "28eeb8c7f4a041236a01a61be14ecc7dd96780c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
