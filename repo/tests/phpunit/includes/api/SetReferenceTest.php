@@ -218,6 +218,13 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		unset( $serializedReference['lastrevid'] );
 
+		foreach ( $serializedReference['snaks'] as &$propertyGroup ) {
+			foreach ( $propertyGroup as &$snak ) {
+				$this->assertArrayHasKey( 'datatype', $snak );
+				unset( $snak['datatype'] );
+			}
+		}
+
 		$this->assertArrayEquals( $this->serializeReference( $reference ), $serializedReference );
 
 		return $serializedReference;

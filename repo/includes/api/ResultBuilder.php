@@ -1085,15 +1085,7 @@ class ResultBuilder {
 			foreach ( $array as $propertyIdGroupKey => &$snakGroup ) {
 				$dataType = $dtLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroupKey ) );
 				foreach ( $snakGroup as &$snak ) {
-					/**
-					 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
-					 *       but this is not done by the LibSerializers thus not done here.
-					 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
-					 *       might be able to use in some way here
-					 */
-					if ( $snak['snaktype'] === 'value' ) {
-						$snak['datatype'] = $dataType;
-					}
+					$snak['datatype'] = $dataType;
 				}
 			}
 			return $array;
@@ -1104,15 +1096,7 @@ class ResultBuilder {
 		$dtLookup = $this->dataTypeLookup;
 		return function ( $array ) use ( $dtLookup ) {
 			$dataType = $dtLookup->getDataTypeIdForProperty( new PropertyId( $array['property'] ) );
-			/**
-			 * TODO: We probably want to return the datatype for NoValue and SomeValue snaks too
-			 *       but this is not done by the LibSerializers thus not done here.
-			 * TODO: Also DataModelSerialization has a TypedSnak object and serializer which we
-			 *       might be able to use in some way here
-			 */
-			if ( $array['snaktype'] === 'value' ) {
-				$array['datatype'] = $dataType;
-			}
+			$array['datatype'] = $dataType;
 			return $array;
 		};
 	}
