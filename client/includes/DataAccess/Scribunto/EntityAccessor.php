@@ -181,8 +181,6 @@ class EntityAccessor {
 		// SerializationOptions accepts mixed types of keys happily.
 		$options->setLanguages( $languages );
 
-		$options->setIdKeyMode( SerializationOptions::ID_KEYS_UPPER );
-
 		return $options;
 	}
 
