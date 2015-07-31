@@ -53,14 +53,14 @@ class InterwikiSorter {
 		);
 
 		// Prepare the array for sorting.
-		foreach( $links as $k => $langLink ) {
+		foreach ( $links as $k => $langLink ) {
 			$links[$k] = explode( ':', $langLink, 2 );
 		}
 
 		usort( $links, array( $this, 'compareLinks' ) );
 
 		// Restore the sorted array.
-		foreach( $links as $k => $langLink ) {
+		foreach ( $links as $k => $langLink ) {
 			$links[$k] = implode( ':', $langLink );
 		}
 

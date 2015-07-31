@@ -148,7 +148,7 @@ class TermIndexEntryTest extends \MediaWikiTestCase {
 		);
 
 		$other = clone $term;
-		$other->setType( TermIndexEntry::TYPE_DESCRIPTION  );
+		$other->setType( TermIndexEntry::TYPE_DESCRIPTION );
 		$tests[] = array( // #6
 			$term,
 			$other,

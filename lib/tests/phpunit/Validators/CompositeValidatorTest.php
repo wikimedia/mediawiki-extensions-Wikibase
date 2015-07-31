@@ -50,7 +50,7 @@ class CompositeValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedErrorCount === 0, $result->isValid(), $message );
 		$this->assertCount( $expectedErrorCount, $errors, $message );
 
-		$localizer = new ValidatorErrorLocalizer( );
+		$localizer = new ValidatorErrorLocalizer();
 
 		foreach ( $errors as $error ) {
 			$msg = $localizer->getErrorMessage( $error );

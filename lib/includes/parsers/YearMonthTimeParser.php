@@ -57,7 +57,7 @@ class YearMonthTimeParser extends StringValueParser {
 	 */
 	protected function stringParse( $value ) {
 		//Matches Year and month separated by a separator, \p{L} matches letters outside the ASCII range
-		if( !preg_match( '/^([\d\p{L}]+)\s*[\/\-\s.,]\s*([\d\p{L}]+)$/', trim( $value ), $matches ) ) {
+		if ( !preg_match( '/^([\d\p{L}]+)\s*[\/\-\s.,]\s*([\d\p{L}]+)$/', trim( $value ), $matches ) ) {
 			throw new ParseException( 'Failed to parse year and month', $value, self::FORMAT_NAME );
 		}
 		list( , $a, $b ) = $matches;
@@ -65,15 +65,15 @@ class YearMonthTimeParser extends StringValueParser {
 		$aIsInt = preg_match( '/^\d+$/', $a );
 		$bIsInt = preg_match( '/^\d+$/', $b );
 
-		if( $aIsInt && $bIsInt ) {
+		if ( $aIsInt && $bIsInt ) {
 			$parsed = $this->parseYearMonthTwoInts( $a, $b );
-			if( $parsed ) {
+			if ( $parsed ) {
 				return $parsed;
 			}
 		}
 
-		if( $aIsInt || $bIsInt ) {
-			if( $aIsInt ) {
+		if ( $aIsInt || $bIsInt ) {
+			if ( $aIsInt ) {
 				$year = $a;
 				$month = trim( $b );
 			} else {
@@ -82,7 +82,7 @@ class YearMonthTimeParser extends StringValueParser {
 			}
 
 			$parsed =  $this->parseYearMonth( $year, $month );
-			if( $parsed ) {
+			if ( $parsed ) {
 				return $parsed;
 			}
 		}
@@ -99,12 +99,12 @@ class YearMonthTimeParser extends StringValueParser {
 	 *
 	 * @return TimeValue|bool
 	 */
-	private function parseYearMonthTwoInts( $a, $b  ) {
-		if( !preg_match( '/^\d+$/', $a ) || !preg_match( '/^\d+$/', $b ) ) {
+	private function parseYearMonthTwoInts( $a, $b ) {
+		if ( !preg_match( '/^\d+$/', $a ) || !preg_match( '/^\d+$/', $b ) ) {
 			return false;
 		}
 
-		if( !$this->canBeMonth( $a ) && $this->canBeMonth( $b ) ) {
+		if ( !$this->canBeMonth( $a ) && $this->canBeMonth( $b ) ) {
 			return $this->getTimeFromYearMonth( $a, $b );
 		} elseif( $this->canBeMonth( $a ) ) {
 			return $this->getTimeFromYearMonth( $b, $a );
@@ -125,13 +125,13 @@ class YearMonthTimeParser extends StringValueParser {
 	private function parseYearMonth( $year, $month ) {
 		$names = $this->lang->getMonthNamesArray();
 		for ( $i = 1; $i <= 12; $i++ ) {
-			if( strcasecmp( $names[$i], $month ) === 0 ) {
+			if ( strcasecmp( $names[$i], $month ) === 0 ) {
 				return $this->getTimeFromYearMonth( $year, $i );
 			}
 		}
 		$nameAbbrevs = $this->lang->getMonthAbbreviationsArray();
 		for ( $i = 1; $i <= 12; $i++ ) {
-			if( strcasecmp( $nameAbbrevs[$i], $month ) === 0 ) {
+			if ( strcasecmp( $nameAbbrevs[$i], $month ) === 0 ) {
 				return $this->getTimeFromYearMonth( $year, $i );
 			}
 		}

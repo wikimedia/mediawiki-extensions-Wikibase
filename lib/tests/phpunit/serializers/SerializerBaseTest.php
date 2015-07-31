@@ -62,7 +62,7 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 
 		if ( $serializer instanceof Unserializer ) {
 			$roundtrippedValue = $serializer->newFromSerialization( $output );
-			if( !is_null( $normalizedInput ) ) {
+			if ( !is_null( $normalizedInput ) ) {
 				$input = $normalizedInput;
 			}
 			$this->assertMeaningfulEquals(

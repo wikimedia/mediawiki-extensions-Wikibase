@@ -119,7 +119,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		// Create another test item to test arbitrary access
 		$this->createTestItem( new ItemId( 'Q199024' ), array( 'de' => 'Arbitrary access \o/' ) );
 
-		$this->createTestItem( new ItemId( 'Q885588'), array( 'ku-latn' => 'Pisîk' ) );
+		$this->createTestItem( new ItemId( 'Q885588' ), array( 'ku-latn' => 'Pisîk' ) );
 	}
 
 	/**

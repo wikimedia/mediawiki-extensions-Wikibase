@@ -97,7 +97,7 @@ class LabelSerializer extends SerializerObject implements Unserializer {
 	public function newFromSerialization( array $data ) {
 		$labels = array();
 
-		foreach( $data as $key => $label ) {
+		foreach ( $data as $key => $label ) {
 			if ( $key === '_element' ) {
 				continue;
 			}

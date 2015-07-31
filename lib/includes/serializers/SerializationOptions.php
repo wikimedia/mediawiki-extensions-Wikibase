@@ -75,7 +75,7 @@ class SerializationOptions {
 		$this->initOption( self::OPT_SERIALIZE_SNAKS_WITH_HASH, false );
 	}
 
-	protected function checkKey( $key) {
+	protected function checkKey( $key ) {
 		if ( !is_string( $key ) ) {
 			throw new InvalidArgumentException( 'option keys must be strings' );
 		}
@@ -213,7 +213,7 @@ class SerializationOptions {
 	 * @param array $options associative array of options
 	 */
 	public function setOptions( array $options ) {
-		foreach ( $options as $key => $value) {
+		foreach ( $options as $key => $value ) {
 			$this->setOption( $key, $value );
 		}
 	}

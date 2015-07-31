@@ -261,7 +261,7 @@ class TermIndexEntry {
 	public function getTerm() {
 		try{
 			return new Term( $this->getLanguage(), $this->getText() );
-		} catch( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException $e ) {
 			throw new MWException( 'Can not construct Term from partial TermIndexEntry' );
 		}
 	}

@@ -66,7 +66,7 @@ class DispatchingExceptionLocalizer implements ExceptionLocalizer {
 	 * @return ExceptionLocalizer|null
 	 */
 	private function getLocalizerForException( Exception $exception ) {
-		foreach( $this->localizers as $localizer ) {
+		foreach ( $this->localizers as $localizer ) {
 			if ( $localizer->hasExceptionMessage( $exception ) ) {
 				return $localizer;
 			}

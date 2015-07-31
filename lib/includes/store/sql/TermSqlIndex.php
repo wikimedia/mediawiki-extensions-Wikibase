@@ -519,7 +519,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$termConditions = $this->termsToConditions( $dbr, $terms, $termType, $entityType, $options );
 
 		$queryOptions = array();
-		if( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
+		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
 			$queryOptions['LIMIT'] = $options['LIMIT'];
 		}
 
@@ -531,7 +531,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$queryOptions
 		);
 
-		if( array_key_exists( 'orderByWeight', $options ) && $options['orderByWeight'] ) {
+		if ( array_key_exists( 'orderByWeight', $options ) && $options['orderByWeight'] ) {
 			$rows = $this->getRowsOrderedByWeight( $rows );
 		}
 
@@ -563,7 +563,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $options = array()
 	) {
 		$requestedLimit = 0;
-		if( array_key_exists( 'LIMIT', $options ) ) {
+		if ( array_key_exists( 'LIMIT', $options ) ) {
 			$requestedLimit = $options['LIMIT'];
 		}
 		$options['LIMIT'] = 5000;
@@ -577,9 +577,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		);
 
 		$returnTermIndexEntries = array();
-		foreach( $matchingTermIndexEntries as $key => $indexEntry ) {
+		foreach ( $matchingTermIndexEntries as $key => $indexEntry ) {
 			$entityIdSerilization = $indexEntry->getEntityId()->getSerialization();
-			if( !array_key_exists( $entityIdSerilization, $returnTermIndexEntries ) ) {
+			if ( !array_key_exists( $entityIdSerilization, $returnTermIndexEntries ) ) {
 				$returnTermIndexEntries[$entityIdSerilization] = $indexEntry;
 			}
 		}

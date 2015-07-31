@@ -47,7 +47,7 @@ class DataValueValidatorTest extends \PHPUnit_Framework_TestCase {
 			$errors = $result->getErrors();
 			$this->assertCount( 1, $errors, $message );
 
-			$localizer = new ValidatorErrorLocalizer( );
+			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );
 			$this->assertTrue( $msg->exists(), $msg );
 		}

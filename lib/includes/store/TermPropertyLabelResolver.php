@@ -175,7 +175,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 	 * @return bool
 	 */
 	protected function needsRecache( array $propertyIds ) {
-		foreach( $propertyIds as $propertyId ) {
+		foreach ( $propertyIds as $propertyId ) {
 			if ( !( $propertyId instanceof PropertyId ) ) {
 				return true;
 			}

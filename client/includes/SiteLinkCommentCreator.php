@@ -119,7 +119,7 @@ class SiteLinkCommentCreator {
 		*/
 		$params['message'] = $messagePrefix . 'change';
 
-		foreach( $diffs as $siteId => $diff ) {
+		foreach ( $diffs as $siteId => $diff ) {
 			// backwards compatibility in case of old, pre-badges changes in the queue
 			$diffOp = ( ( $diff instanceof Diff ) && array_key_exists( 'name', $diff ) ) ? $diff['name'] : $diff;
 			$args = $this->getChangeParamsForDiffOp( $diffOp, $siteId, $messagePrefix );

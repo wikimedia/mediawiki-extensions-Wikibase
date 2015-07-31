@@ -48,7 +48,7 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 			$this->assertCount( 1, $errors );
 			$this->assertEquals( $expectedErrorCode, $errors[0]->getCode(), 'error code' );
 
-			$localizer = new ValidatorErrorLocalizer( );
+			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );
 			$this->assertTrue( $msg->exists(), 'message: ' . $msg );
 		}

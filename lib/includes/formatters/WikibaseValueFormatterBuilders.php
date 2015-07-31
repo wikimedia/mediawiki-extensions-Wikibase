@@ -212,7 +212,7 @@ class WikibaseValueFormatterBuilders {
 			}
 		}
 
-		$this->setValueFormatterSpec( $format, $type, $formatterBuilder);
+		$this->setValueFormatterSpec( $format, $type, $formatterBuilder );
 	}
 
 	/**

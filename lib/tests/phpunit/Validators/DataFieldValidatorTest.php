@@ -52,7 +52,7 @@ class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 
 			$this->assertEquals( $expectedError, $errors[0]->getCode(), $message );
 
-			$localizer = new ValidatorErrorLocalizer( );
+			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );
 			$this->assertTrue( $msg->exists(), $msg );
 		}

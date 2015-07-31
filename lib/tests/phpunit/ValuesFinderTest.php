@@ -46,7 +46,7 @@ class ValuesFinderTest extends \MediaWikiTestCase {
 		$argLists["PropertyNoValueSnak"] = array(
 			array( new PropertyNoValueSnak( $p42 ) ),
 			'url',
-			array());
+			array() );
 
 		$argLists["PropertySomeValueSnak"] = array(
 			array( new PropertySomeValueSnak( $p42 ) ),

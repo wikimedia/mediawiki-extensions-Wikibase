@@ -120,7 +120,7 @@ TEXT;
 			}
 		}
 
-		foreach( $data as $d ) {
+		foreach ( $data as $d ) {
 			$prefix = $d['prefix'];
 
 			$row = $dbw->selectRow(

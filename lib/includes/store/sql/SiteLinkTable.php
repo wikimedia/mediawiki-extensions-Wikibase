@@ -436,7 +436,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 
 		$siteLinks = array();
 
-		foreach( $rows as $row ) {
+		foreach ( $rows as $row ) {
 			$siteLinks[] = new SiteLink( $row->ips_site_id, $row->ips_site_page );
 		}
 

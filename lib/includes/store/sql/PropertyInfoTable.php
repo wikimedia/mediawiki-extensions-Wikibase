@@ -195,7 +195,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 			throw new DBError( 'Cannot write when in readonly mode' );
 		}
 
-		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ]) ) {
+		if ( !isset( $info[ PropertyInfoStore::KEY_DATA_TYPE ] ) ) {
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoStore::KEY_DATA_TYPE );
 		}
 
