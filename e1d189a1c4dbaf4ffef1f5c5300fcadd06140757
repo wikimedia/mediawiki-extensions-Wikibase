@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_79eedbe9",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-07-31T12:20:46Z",
+      "side": 1,
+      "message": "also kill this method please :)",
+      "revId": "e1d189a1c4dbaf4ffef1f5c5300fcadd06140757",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
