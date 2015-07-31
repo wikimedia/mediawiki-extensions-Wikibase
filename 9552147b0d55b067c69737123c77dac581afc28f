@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_fc0cf9f0",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-07-31T14:22:45Z",
+      "side": 1,
+      "message": "The inner message should _not_ escaped, or else it get double escaped.\n\n(Sorry wrong wording in my last comment.)\n\nReduce indenting.",
+      "revId": "9552147b0d55b067c69737123c77dac581afc28f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
