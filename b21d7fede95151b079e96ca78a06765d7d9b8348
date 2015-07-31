@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_cafb6b42",
+        "filename": "client/includes/DataAccess/Scribunto/EntityAccessor.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-31T19:12:43Z",
+      "side": 1,
+      "message": "Own method please, then you do not need this comment",
+      "revId": "b21d7fede95151b079e96ca78a06765d7d9b8348",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
