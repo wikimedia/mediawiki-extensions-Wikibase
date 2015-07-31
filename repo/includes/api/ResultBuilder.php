@@ -74,7 +74,8 @@ class ResultBuilder {
 	private $modifier;
 
 	/**
-	 * @var bool when special elements such as '_element' are needed by the formatter.
+	 * @var bool|null when special elements such as '_element' are needed by the formatter.
+	 * @note please use $this->getIsRawMode() to access this value!
 	 */
 	private $isRawMode;
 
@@ -92,7 +93,7 @@ class ResultBuilder {
 		SerializerFactory $serializerFactory,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $dataTypeLookup,
-		$isRawMode
+		$isRawMode = null
 	) {
 		$this->result = $result;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -102,6 +103,22 @@ class ResultBuilder {
 		$this->siteStore = $siteStore;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->modifier = new SerializationModifier();
+	}
+
+	/**
+	 * isRawMode needs to be lazy initialized since ApiMain may set it
+	 * on the ApiResult after the module is constructed.
+	 *
+	 * isRawMode can be set in the constructor, such as for testing purposes.
+	 *
+	 * @return bool
+	 */
+	private function getIsRawMode() {
+		if ( $this->isRawMode === null ) {
+			$this->isRawMode = $this->result->getIsRawMode();
+		}
+
+		return $this->isRawMode;
 	}
 
 	/**
@@ -144,7 +161,7 @@ class ResultBuilder {
 		Assert::parameterType( 'string', $name, '$name' );
 		Assert::parameterType( 'string', $tag, '$tag' );
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			// Unset first, so we don't make the tag name an actual value.
 			// We'll be setting this to $tag by calling setIndexedTagName().
 			unset( $values['_element'] );
@@ -205,7 +222,7 @@ class ResultBuilder {
 		Assert::parameterType( 'string', $tag, '$tag' );
 		$this->checkValueIsNotList( $value );
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$key = null;
 		}
 
@@ -313,12 +330,12 @@ class ResultBuilder {
 			}
 			$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization, $filterLangCodes );
 
-			if ( !$this->isRawMode ) {
+			if ( !$this->getIsRawMode() ) {
 				// Non raw mode formats dont want empty parts....
 				$serialization = $this->filterEmptyEntitySerializationParts( $serialization );
 			}
 
-			if ( $this->isRawMode ) {
+			if ( $this->getIsRawMode() ) {
 				$serialization = $this->getRawModeEntitySerialization( $serialization );
 			}
 
@@ -456,7 +473,7 @@ class ResultBuilder {
 						$fallbackSerialization['source-language'] = $fallbackSerialization['source'];
 					}
 					unset( $fallbackSerialization['source'] );
-					if ( $this->isRawMode && $requestedLanguageCode !== $fallbackSerialization['language'] ) {
+					if ( $this->getIsRawMode() && $requestedLanguageCode !== $fallbackSerialization['language'] ) {
 						$fallbackSerialization['for-language'] = $requestedLanguageCode;
 					}
 					$newSerialization[$requestedLanguageCode] = $fallbackSerialization;
@@ -664,7 +681,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addAliasGroupList( AliasGroupList $aliasGroupList, $path ) {
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$serializer = $this->serializerFactory->newAliasGroupSerializer();
 			$values = array();
 			foreach ( $aliasGroupList->toArray() as $aliasGroup ) {
@@ -700,7 +717,7 @@ class ResultBuilder {
 			$values = $this->getSiteLinkListArrayWithUrls( $values );
 		}
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$values = $this->getRawModeSiteLinkListArray( $values );
 		}
 
@@ -772,7 +789,7 @@ class ResultBuilder {
 			);
 		}
 
-		if ( !$this->isRawMode ) {
+		if ( !$this->getIsRawMode() ) {
 			$values = $this->getArrayWithAlteredClaims( $values, false, '*/*/' );
 		} else {
 			$values = $this->getArrayWithAlteredClaims( $values, true, '*/*/' );
@@ -810,7 +827,7 @@ class ResultBuilder {
 
 		$value = $this->getArrayWithAlteredClaims( $value );
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$value = $this->getArrayWithRawModeClaims( $value );
 		}
 
@@ -931,7 +948,7 @@ class ResultBuilder {
 
 		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'snaks' );
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$value = $this->getRawModeReferenceArray( $value );
 		}
 

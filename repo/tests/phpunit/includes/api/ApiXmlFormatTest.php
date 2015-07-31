@@ -49,7 +49,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		);
 
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetEntities', 'wbgetentities', $params );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'getentities' ), $actual );
@@ -65,7 +65,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		);
 
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetClaims', 'wbgetclaims', $params );
-		$actual = $this->doApiRequest( $module );
+		$actual = $this->executeApiModule( $module );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'getclaims' ), $actual );
 	}
@@ -82,7 +82,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		);
 
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetLabel', 'wbsetlabel', $params, true );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setlabel' ), $actual );
@@ -100,7 +100,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		);
 
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetDescription', 'wbsetdescription', $params, true );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setdescription' ), $actual );
@@ -118,7 +118,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		);
 
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetAliases', 'wbsetaliases', $params, true );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setaliases' ), $actual );
@@ -140,7 +140,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetSiteLink', 'wbsetsitelink', $params, true );
 		$siteTaregtProvider = new SiteLinkTargetProvider( MockSiteStore::newFromTestSites(), array() );
 		$module->setServices( $siteTaregtProvider );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 		//If a URL has been added just remove it as it is not always present
 		$actual = str_replace( 'url="https://en.wikipedia.org/wiki/Japan"', '', $actual );
@@ -160,7 +160,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetClaim', 'wbsetclaim', $params, true );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setclaim' ), $actual );
@@ -180,7 +180,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetReference', 'wbsetreference', $params, true );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
 		$actual = $this->replaceHashWithMock( $actual );
 
@@ -201,7 +201,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetQualifier', 'wbsetqualifier', $params, true );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
 		$actual = $this->replaceHashWithMock( $actual );
 
@@ -223,7 +223,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		);
 
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\EditEntity', 'wbeditEntity', $params, true );
-		$result = $this->doApiRequest( $module );
+		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 		$actual = $this->replaceHashWithMock( $actual );
 
@@ -295,17 +295,18 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );
 
-		/**
-		 * This has to be set before the Wikibase Api module is instansiated due to the ApiHelperFactory
-		 * using $api->getResult()->getIsRawMode().
-		 */
-		$main->getResult()->setRawMode( true );
-
 		return new $moduleClass( $main, $moduleName );
 	}
 
-	private function doApiRequest( ApiBase $module ) {
+	/**
+	 * This mimics ApiMain::executeAction with the relevant parts,
+	 * including setupExternalResponse where the printer is set. and
+	 * Then raw mode is set the api format requires it. (always for xml)
+	 * The module is then executed and results printed.
+	 */
+	private function executeApiModule( ApiBase $module ) {
 		$printer = $module->getMain()->createPrinterByName( 'xml' );
+		$module->getResult()->setRawMode( true );
 
 		$module->execute();
 
