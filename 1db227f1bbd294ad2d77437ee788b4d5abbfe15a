@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3fda7378",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-07-31T15:54:30Z",
+      "side": 1,
+      "message": "i think we can remove these settings.\n\nuse of it for wikidata was removed almost a year ago:\n\nhttps://gerrit.wikimedia.org/r/#/c/156258/\n\nit was used to handle transition from the old format to the new format, but is obsolete now and doubt anyone uses it\n\nhttps://github.com/search?utf8\u003d%E2%9C%93\u0026q\u003dinternalEntitySerializerClass+%40wikimedia\u0026type\u003dCode\u0026ref\u003dsearchresults",
+      "revId": "1db227f1bbd294ad2d77437ee788b4d5abbfe15a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
