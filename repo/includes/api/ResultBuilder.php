@@ -104,7 +104,7 @@ class ResultBuilder {
 		SerializerFactory $serializerFactory,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $dataTypeLookup,
-		$isRawMode
+		$isRawMode = null
 	) {
 		if ( !$result instanceof ApiResult ) {
 			throw new InvalidArgumentException( 'Result builder must be constructed with an ApiResult' );
@@ -130,11 +130,27 @@ class ResultBuilder {
 	public function getOptions() {
 		if ( !$this->options ) {
 			$this->options = new SerializationOptions();
-			$this->options->setIndexTags( $this->isRawMode );
+			$this->options->setIndexTags( $this->getIsRawMode() );
 			$this->options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
 		}
 
 		return $this->options;
+	}
+
+	/**
+	 * isRawMode needs to be lazy initialized since ApiMain may set it
+	 * on the ApiResult after the module is constructed.
+	 *
+	 * isRawMode can be set in the constructor, such as for testing purposes.
+	 *
+	 * @return bool
+	 */
+	private function getIsRawMode() {
+		if ( $this->isRawMode === null ) {
+			$this->isRawMode = $this->result->getIsRawMode();
+		}
+
+		return $this->isRawMode;
 	}
 
 	/**
@@ -181,7 +197,7 @@ class ResultBuilder {
 		$this->checkNameIsString( $name );
 		$this->checkTagIsString( $tag );
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			// Unset first, so we don't make the tag name an actual value.
 			// We'll be setting this to $tag by calling setIndexedTagName().
 			unset( $values['_element'] );
@@ -247,7 +263,7 @@ class ResultBuilder {
 
 		$this->checkValueIsNotList( $value );
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$key = null;
 		}
 
@@ -492,7 +508,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addAliasGroupList( AliasGroupList $aliasGroupList, $path ) {
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$serializer = $this->serializerFactory->newAliasGroupSerializer();
 			$values = array();
 			foreach ( $aliasGroupList->toArray() as $aliasGroup ) {
@@ -528,7 +544,7 @@ class ResultBuilder {
 			$values = $this->getSiteLinkListArrayWithUrls( $values );
 		}
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$values = $this->getRawModeSiteLinkListArray( $values );
 		}
 
@@ -629,7 +645,7 @@ class ResultBuilder {
 			$this->getModCallbackToAddDataTypeToSnak()
 		);
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$value = $this->getRawModeClaimArray( $value );
 		}
 
@@ -693,7 +709,7 @@ class ResultBuilder {
 
 		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'snaks' );
 
-		if ( $this->isRawMode ) {
+		if ( $this->getIsRawMode() ) {
 			$value = $this->getRawModeReferenceArray( $value );
 		}
 

@@ -102,8 +102,7 @@ class ApiHelperFactory {
 			$this->newLibSerializerFactory( $defaultOptions ),
 			$this->newSerializerFactory(),
 			$this->siteStore,
-			$this->dataTypeLookup,
-			$api->getResult()->getIsRawMode()
+			$this->dataTypeLookup
 		);
 	}
 
