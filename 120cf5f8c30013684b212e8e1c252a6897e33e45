@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_8aa24391",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-31T18:50:26Z",
+      "side": 1,
+      "message": "new PropertySomeValueSnak( 65 );\n\nThat is less verbose and equally valid",
+      "revId": "120cf5f8c30013684b212e8e1c252a6897e33e45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_eaaae767",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/EntityAccessorTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-31T18:50:26Z",
+      "side": 1,
+      "message": "$references-\u003eaddNewReference( $referenceSnaks );\n\nLess verbose again",
+      "revId": "120cf5f8c30013684b212e8e1c252a6897e33e45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
