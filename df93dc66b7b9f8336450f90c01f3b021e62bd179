@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_6a783726",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-31T18:47:13Z",
+      "side": 1,
+      "message": "???",
+      "parentUuid": "8ec42329_9c9cd5b9",
+      "revId": "df93dc66b7b9f8336450f90c01f3b021e62bd179",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_5c92eda2",
         "filename": "repo/tests/phpunit/includes/ParserOutputJsConfigBuilderTest.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-31T14:09:20Z",
       "side": 1,
       "message": "Shouldn\u0027t depend on global state here :S",
+      "revId": "df93dc66b7b9f8336450f90c01f3b021e62bd179",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_ea842711",
+        "filename": "repo/tests/phpunit/includes/ParserOutputJsConfigBuilderTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-07-31T18:47:13Z",
+      "side": 1,
+      "message": "Indeed. This commit does not change the situation though. It replaces a static/global new call with a static/global method call. Same thing.",
+      "parentUuid": "8ec42329_5c92eda2",
       "revId": "df93dc66b7b9f8336450f90c01f3b021e62bd179",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
