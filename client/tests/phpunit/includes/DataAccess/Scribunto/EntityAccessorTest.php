@@ -93,7 +93,8 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 
 		$entityArr = $entityAccessor->getEntity( $prefixedId );
 		$actual = is_array( $entityArr ) ? $entityArr : array();
-		$this->assertCount( count( $expected ), $actual );
+		$this->assertSameSize( $expected, $actual );
+
 		foreach ( $expected as $expectedKey ) {
 			$this->assertArrayHasKey( $expectedKey, $actual );
 		}
