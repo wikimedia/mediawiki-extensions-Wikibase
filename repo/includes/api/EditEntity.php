@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use DataValues\IllegalValueException;
+use Deserializers\Deserializer;
 use InvalidArgumentException;
 use LogicException;
 use MWException;
@@ -15,16 +16,14 @@ use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\Lib\Serializers\LibSerializerFactory;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\WikibaseRepo;
@@ -81,6 +80,11 @@ class EditEntity extends ModifyEntity {
 	private $idParser;
 
 	/**
+	 * @var Deserializer
+	 */
+	private $statementDeserializer;
+
+	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -98,6 +102,7 @@ class EditEntity extends ModifyEntity {
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
+		$this->statementDeserializer = $wikibaseRepo->getStatementDeserializer();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -496,38 +501,35 @@ class EditEntity extends ModifyEntity {
 			foreach ( $claims as $subClaims ) {
 				$changeOps = array_merge( $changeOps,
 					$this->getRemoveStatementChangeOps( $subClaims ),
-					$this->getModifyClaimsChangeOps( $subClaims ) );
+					$this->getModifyStatementChangeOps( $subClaims ) );
 			}
 		} else {
 			$changeOps = array_merge( $changeOps,
 				$this->getRemoveStatementChangeOps( $claims ),
-				$this->getModifyClaimsChangeOps( $claims ) );
+				$this->getModifyStatementChangeOps( $claims ) );
 		}
 
 		return $changeOps;
 	}
 
 	/**
-	 * @param array[] $claims array of serialized claims
+	 * @param array[] $statements array of serialized statements
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getModifyClaimsChangeOps( array $claims ) {
+	private function getModifyStatementChangeOps( array $statements ) {
 		$opsToReturn = array();
 
-		$serializerFactory = new LibSerializerFactory();
-		$unserializer = $serializerFactory->newClaimUnserializer( new SerializationOptions() );
-
-		foreach ( $claims as $claimArray ) {
-			if ( !array_key_exists( 'remove', $claimArray ) ) {
+		foreach ( $statements as $statementArray ) {
+			if ( !array_key_exists( 'remove', $statementArray ) ) {
 				try {
-					$claim = $unserializer->newFromSerialization( $claimArray );
+					$statement = $this->statementDeserializer->deserialize( $statementArray );
 
-					if ( !( $claim instanceof Claim ) ) {
-						throw new IllegalValueException( 'Claim serialization did not contained a Claim.' );
+					if ( !( $statement instanceof Statement ) ) {
+						throw new IllegalValueException( 'Statement serialization did not contained a Statement.' );
 					}
 
-					$opsToReturn[] = $this->statementChangeOpFactory->newSetStatementOp( $claim );
+					$opsToReturn[] = $this->statementChangeOpFactory->newSetStatementOp( $statement );
 				} catch ( IllegalValueException $ex ) {
 					$this->errorReporter->dieException( $ex, 'invalid-claim' );
 				} catch ( MWException $ex ) {

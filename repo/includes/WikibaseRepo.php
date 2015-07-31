@@ -16,6 +16,7 @@ use StubObject;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Statement\StatementGuidParser;
@@ -29,8 +30,8 @@ use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\EntityParserOutputGeneratorFactory;
-use Wikibase\InternalSerialization\DeserializerFactory;
-use Wikibase\InternalSerialization\SerializerFactory;
+use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
+use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -962,13 +963,30 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return InternalDeserializerFactory
 	 */
 	protected function getInternalDeserializerFactory() {
+		return new InternalDeserializerFactory(
+			$this->getDataValueDeserializer(),
+			$this->getEntityIdParser()
+		);
+	}
+
+	/**
+	 * @return DeserializerFactory
+	 */
+	protected function getDeserializerFactory() {
 		return new DeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
+	}
+
+	/**
+	 * @return Deserializer
+	 */
+	public function getStatementDeserializer() {
+		return $this->getDeserializerFactory()->newStatementDeserializer();
 	}
 
 	/**
@@ -990,10 +1008,10 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return SerializerFactory
+	 * @return InternalSerializerFactory
 	 */
 	protected function getInternalSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer() );
+		return new InternalSerializerFactory( new DataValueSerializer() );
 	}
 
 	/**
