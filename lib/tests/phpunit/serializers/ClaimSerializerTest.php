@@ -124,34 +124,4 @@ class ClaimSerializerTest extends SerializerBaseTest {
 		return $validArgs;
 	}
 
-	public function rankProvider() {
-		$ranks = array(
-			Statement::RANK_NORMAL,
-			Statement::RANK_PREFERRED,
-			Statement::RANK_DEPRECATED,
-		);
-
-		return $this->arrayWrap( $ranks );
-	}
-
-	/**
-	 * @dataProvider rankProvider
-	 */
-	public function testRankSerialization( $rank ) {
-		$id = new PropertyId( 'P42' );
-		$statement = new Statement( new PropertyNoValueSnak( $id ) );
-
-		$statement->setRank( $rank );
-
-		$serializer = new ClaimSerializer( new SnakSerializer() );
-
-		$serialization = $serializer->getSerialized( $statement );
-
-		$this->assertEquals(
-			$rank,
-			ClaimSerializer::unserializeRank( $serialization['rank'] ),
-			'Roundtrip between rank serialization and unserialization'
-		);
-	}
-
 }

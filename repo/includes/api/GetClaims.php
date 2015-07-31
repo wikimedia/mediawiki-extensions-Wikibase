@@ -17,6 +17,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StatementRankSerializer;
 
 /**
  * API module for getting claims.
@@ -160,7 +161,8 @@ class GetClaims extends ApiBase {
 		$params = $this->extractRequestParams();
 
 		if ( isset( $params['rank'] ) ) {
-			$unserializedRank = ClaimSerializer::unserializeRank( $params['rank'] );
+			$statementRankSerializer = new StatementRankSerializer();
+			$unserializedRank = $statementRankSerializer->deserialize( $params['rank'] );
 			$matchFilter = $rank === $unserializedRank;
 			return $matchFilter;
 		}
@@ -238,7 +240,7 @@ class GetClaims extends ApiBase {
 				self::PARAM_TYPE => 'string',
 			),
 			'rank' => array(
-				self::PARAM_TYPE => ClaimSerializer::getRanks(),
+				self::PARAM_TYPE => StatementRankSerializer::getRanks(),
 			),
 			'props' => array(
 				self::PARAM_TYPE => array(
