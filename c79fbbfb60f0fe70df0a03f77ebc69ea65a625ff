@@ -176,6 +176,24 @@
       "revId": "c79fbbfb60f0fe70df0a03f77ebc69ea65a625ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b661b0d1",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-07-31T08:38:12Z",
+      "side": 1,
+      "message": "as far as I can tell no, I havnt changed any behaviour in setclaim, I think I have actually just made the test test the right thing....\nI mean its clear this test is \"trying to change the main snak\u0027s property \"\nSo it should get the error saying \"Changed ma\nin snak property\"\n :)\n\nNot 100% sure what it was testing before...",
+      "parentUuid": "8ec42329_8502420a",
+      "revId": "c79fbbfb60f0fe70df0a03f77ebc69ea65a625ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
