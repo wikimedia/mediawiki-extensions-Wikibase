@@ -44,6 +44,7 @@
 	"wikibase-description-empty": "Nie podano opisu",
 	"wikibase-description-edit-placeholder": "podaj opis",
 	"wikibase-description-edit-placeholder-language-aware": "podaj opis w $1",
+	"wikibase-aliases-edit-placeholder-language-aware": "podaj alternatywne nazwy w $1",
 	"wikibase-diffview-reference": "przypis",
 	"wikibase-diffview-rank": "ranga",
 	"wikibase-diffview-rank-preferred": "Ranga preferowana",
