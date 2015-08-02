@@ -230,7 +230,7 @@ class SidebarHookHandlers {
 
 		$betaFeatureEnabled = class_exists( '\BetaFeatures' ) &&
 			$this->otherProjectsLinksBeta &&
-			\BetaFeatures::isFeatureEnabled( $skin->getUser(), 'wikibase-otherprojects' );
+			\BetaFeatures::isFeatureEnabled( $skin->getContext()->getUser(), 'wikibase-otherprojects' );
 
 		if ( $this->otherProjectsLinksDefault || $betaFeatureEnabled ) {
 			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
