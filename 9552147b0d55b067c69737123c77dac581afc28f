@@ -34,6 +34,24 @@
       "revId": "9552147b0d55b067c69737123c77dac581afc28f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_4267574a",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-08-02T19:11:01Z",
+      "side": 1,
+      "message": "Yes, this is a better solution.",
+      "parentUuid": "8ec42329_c75a7984",
+      "revId": "9552147b0d55b067c69737123c77dac581afc28f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
