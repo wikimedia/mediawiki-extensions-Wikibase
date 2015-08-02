@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_04b87cc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-02T20:08:01Z",
+      "side": 1,
+      "message": "I couldn\u0027t reproduce this (and that is not surprising) given that we have dir\u003d\"rtl\" set for the whole page (for rtl languages), thus that is not going to change without explicitly setting a dir on the wikibase-sitelinkview-link span, no matter the lang attribute.",
+      "revId": "f30e6e15a6a2d52ae61970e407e9ff831737ae40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
