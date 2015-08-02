@@ -87,7 +87,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entry|entries}}",
 	"wikibase-disambiguation-title": "Disambiguation for \"$1\"",
 	"wb-special-newitem-new-item-notification": "New item $1 created and redirected to its page. Back to $2.",
-	"wikibase-aliases-label": "Also known as:",
 	"wikibase-aliases-input-help-message": "To make this entity easier to find, you can enter alternative names.",
 	"wikibase-aliases-empty": "No aliases defined",
 	"wikibase-propertypage-datatype": "Data type",
