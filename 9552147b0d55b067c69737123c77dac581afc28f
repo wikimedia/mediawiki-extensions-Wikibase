@@ -16,6 +16,24 @@
       "revId": "9552147b0d55b067c69737123c77dac581afc28f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c75a7984",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-02T14:20:33Z",
+      "side": 1,
+      "message": "Thank you for your help! Sorry, I wasn\u0027t aware about escaping, because I thought the message was intended to be html. So I would propose to do the escaping when creating the element with jQuery: $( \u0027\u003cdiv class\u003d\"wb-warning\"\u003e\u0027 ).text(message)\n\nDo you agree?",
+      "parentUuid": "8ec42329_fc0cf9f0",
+      "revId": "9552147b0d55b067c69737123c77dac581afc28f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
