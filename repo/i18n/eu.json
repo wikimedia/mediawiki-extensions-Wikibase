@@ -24,6 +24,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Hizkuntza",
 	"wikibase-label-empty": "Ez da etiketarik zehaztu",
 	"wikibase-label-edit-placeholder": "Sartu etiketa bat",
+	"wikibase-description-empty": "Ez dago difinituriko deskribapenik",
 	"wikibase-description-edit-placeholder-language-aware": "sartu deskribapen bat $1-n",
 	"wikibase-diffview-label": "etiketa",
 	"wikibase-diffview-description": "deskribapena",
