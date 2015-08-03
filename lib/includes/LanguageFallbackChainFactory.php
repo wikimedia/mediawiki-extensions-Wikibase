@@ -120,7 +120,7 @@ class LanguageFallbackChainFactory {
 	/**
 	 * Build fallback chain array for a given language or validated language code.
 	 *
-	 * @param $language Language object or language code as string
+	 * @param Language|string $language Language object or language code as string
 	 * @param int $mode Bitfield of self::FALLBACK_*
 	 * @param LanguageFallbackChain[] $chain for recursive calls
 	 * @param array $fetched for recursive calls
