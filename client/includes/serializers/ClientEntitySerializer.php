@@ -4,7 +4,7 @@ namespace Wikibase\Client\Serializer;
 
 use DataValues\Serializers\DataValueSerializer;
 use Serializers\Exceptions\SerializationException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\LanguageFallbackChain;
@@ -60,7 +60,7 @@ class ClientEntitySerializer implements \Serializers\Serializer{
 	/**
 	 * @see ResultBuilder::addEntityRevision
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws SerializationException
 	 *
