@@ -25,9 +25,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'DataTypes\DataTypeFactory', $returnValue );
 	}
 
-	public function testGetDataTypeValidatorFactoryReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getDataTypeValidatorFactory();
-		$this->assertInstanceOf( 'Wikibase\Repo\DataTypeValidatorFactory', $returnValue );
+	public function testGetValueParserFactoryReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getValueParserFactory();
+		$this->assertInstanceOf( 'Wikibase\Repo\ValueParserFactory', $returnValue );
 	}
 
 	public function testGetDataValueFactoryReturnType() {
