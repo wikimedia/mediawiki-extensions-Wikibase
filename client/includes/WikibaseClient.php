@@ -348,7 +348,7 @@ final class WikibaseClient {
 	private static function newInstance() {
 		global $wgContLang, $wgWBClientSettings, $wgWBClientDataTypes;
 
-		$dataTypeDefinitions = $wgWBClientSettings;
+		$dataTypeDefinitions = $wgWBClientDataTypes;
 		Hooks::run( 'WikibaseClientDataTypes', array( &$dataTypeDefinitions ) );
 
 		return new self(
