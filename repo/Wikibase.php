@@ -139,43 +139,17 @@ call_user_func( function() {
 		);
 	};
 
-	// all entity types use the same parser
-	$wgValueParsers['wikibase-item'] = $newEntityIdParser;
-	$wgValueParsers['wikibase-property'] = $newEntityIdParser;
+	/**
+	 * @var callable[] $wgValueParsers Defines parser factory callbacks by parser name (not data type name).
+	 * @deprecated use $wgWBRepoDataTypes instead.
+	 */
+	$wgValueParsers['wikibase-entityid'] = $wgWBRepoDataTypes['wikibase-item']['parser-factory-callback'];
+	$wgValueParsers['globecoordinate'] = $wgWBRepoDataTypes['globe-coordinate']['parser-factory-callback'];
 
-	// deprecated: 'wikibase-entityid' is not a datatype. Alias kept for backwards compatibility.
-	$wgValueParsers['wikibase-entityid'] = $newEntityIdParser;
-
-	$wgValueParsers['quantity'] = function( ValueParsers\ParserOptions $options ) {
-		$language = Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
-		$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer( $language );
-		return new \ValueParsers\QuantityParser( $options, $unlocalizer );
+	// 'null' is not a datatype. Kept for backwards compatibility.
+	$wgValueParsers['null'] = function() {
+		return new \ValueParsers\NullParser();
 	};
-
-	$wgValueParsers['time'] = function( ValueParsers\ParserOptions $options ) {
-		$factory = new Wikibase\Lib\Parsers\TimeParserFactory( $options );
-		return $factory->getTimeParser();
-	};
-
-	$wgValueParsers['globe-coordinate'] = 'DataValues\Geo\Parsers\GlobeCoordinateParser';
-
-	// deprecated: 'globecoordinate' is not a datatype. Alias kept for backwards compatibility.
-	$wgValueParsers['globecoordinate'] = 'DataValues\Geo\Parsers\GlobeCoordinateParser';
-
-	$wgValueParsers['monolingualtext'] = 'Wikibase\Parsers\MonolingualTextParser';
-
-	// Use StringParser for datatypes that use StringValue
-	$stringParserFactoryFunction = function( ValueParsers\ParserOptions $options ) {
-		$normalizer = \Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getStringNormalizer();
-		return new \ValueParsers\StringParser( new Wikibase\Lib\WikibaseStringValueNormalizer( $normalizer ) );
-	};
-
-	$wgValueParsers['commonsMedia'] = $stringParserFactoryFunction;
-	$wgValueParsers['string'] = $stringParserFactoryFunction;
-	$wgValueParsers['url'] = $stringParserFactoryFunction;
-
-	// deprecated: 'null' is not a datatype. Alias kept for backwards compatibility.
-	$wgValueParsers['null'] = 'ValueParsers\NullParser';
 
 	// API module registration
 	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Repo\Api\GetEntities';

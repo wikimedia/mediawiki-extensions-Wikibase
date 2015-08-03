@@ -48,6 +48,11 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 		$this->assertEquals( array( 'foo' => 'DataTypeDefinitionsTest::getFooValidators' ), $defs->getValidatorFactoryCallbacks() );
 	}
 
+	public function testGetParserFactoryCallbacks() {
+		$defs = $this->getDataTypeDefinitions();
+		$this->assertEquals( array( 'foo' => 'DataTypeDefinitionsTest::getFooParser' ), $defs->getParserFactoryCallbacks() );
+	}
+
 	public function testRegisterDataTypes() {
 		$defs = $this->getDataTypeDefinitions();
 

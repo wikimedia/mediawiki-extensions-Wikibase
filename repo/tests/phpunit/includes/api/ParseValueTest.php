@@ -3,8 +3,8 @@
 namespace Wikibase\Test\Repo\Api;
 
 use ApiMain;
-use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
+use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use FauxRequest;
 use Language;
 use ValueParsers\NullParser;
@@ -60,7 +60,7 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 			'null' => array( $this, 'newNullParser' ),
 			'string' => array( $this, 'newNullParser' ),
 			'url' => array( $this, 'newNullParser' ),
-			'globe-coordinate' => 'DataValues\Geo\Parsers\GlobeCoordinateParser',
+			'globe-coordinate' => array( $this, 'newGlobeCoordinateParser' ),
 		) );
 
 		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( array(
@@ -89,6 +89,10 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 
 	public function newNullParser() {
 		return new NullParser();
+	}
+
+	public function newGlobeCoordinateParser() {
+		return new GlobeCoordinateParser();
 	}
 
 	private function callApiModule( array $params ) {
