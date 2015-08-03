@@ -16,6 +16,24 @@
       "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_eb23b850",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-03T19:52:46Z",
+      "side": 1,
+      "message": "To save a function call. This would be on a very frequently called codepath (each label in RDF dump passes through it, i.e. tens of millions of calls) and we know wfBCP47 won\u0027t do anything useful with languages that have no - inside.",
+      "parentUuid": "8ec42329_40dd7316",
+      "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
