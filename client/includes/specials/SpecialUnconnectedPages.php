@@ -187,7 +187,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return string
 	 */
 	protected function getGroupName() {
-		return 'pages';
+		return 'maintenance';
 	}
 
 }
