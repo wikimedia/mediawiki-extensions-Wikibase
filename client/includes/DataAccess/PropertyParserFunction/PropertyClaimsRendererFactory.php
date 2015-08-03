@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Language;
+use MWException;
 use Parser;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -94,12 +95,17 @@ class PropertyClaimsRendererFactory {
 	}
 
 	/**
-	 * @param Language $language
+	 * @param Language|mixed $language
 	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
+	 * @throws MWException
 	 */
-	private function newLanguageAwareRenderer( Language $language, UsageAccumulator $usageAccumulator ) {
+	private function newLanguageAwareRenderer( $language, UsageAccumulator $usageAccumulator ) {
+		if ( !$language instanceof Language ) {
+			throw new MWException( get_class( $language ) . ' is not a Language object. See https://phabricator.wikimedia.org/T107711' );
+		}
+
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
 			$language,
 			$this->propertyIdResolver,
