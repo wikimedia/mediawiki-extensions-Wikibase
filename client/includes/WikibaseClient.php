@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Exception;
+use Hooks;
 use Language;
 use LogicException;
 use MediaWikiSite;
@@ -47,6 +48,7 @@ use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFa
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
@@ -157,20 +159,26 @@ final class WikibaseClient {
 	private $restrictedEntityLookup = null;
 
 	/**
-	 * @since 0.4
-	 *
+	 * @var DataTypeDefinitions
+	 */
+	private $dataTypeDefinitions;
+
+	/**
 	 * @param SettingsArray $settings
 	 * @param Language $contentLanguage
+	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param SiteStore|null $siteStore
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		Language $contentLanguage,
+		DataTypeDefinitions $dataTypeDefinitions,
 		SiteStore $siteStore = null
 	) {
 		$this->settings = $settings;
 		$this->contentLanguage = $contentLanguage;
 		$this->siteStore = $siteStore;
+		$this->dataTypeDefinitions = $dataTypeDefinitions;
 	}
 
 	/**
@@ -180,21 +188,7 @@ final class WikibaseClient {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			// Temporary hack, will be removed in a follow-up
-			$types = array(
-				'commonsMedia'      => 'string',
-				'globe-coordinate'  => 'globecoordinate',
-				'monolingualtext'   => 'monolingualtext',
-				'multilingualtext'  => 'multilingualtext',
-				'quantity'          => 'quantity',
-				'string'            => 'string',
-				'time'              => 'time',
-				'url'               => 'string',
-				'wikibase-item'     => 'wikibase-entityid',
-				'wikibase-property' => 'wikibase-entityid',
-			);
-
-			$this->dataTypeFactory = new DataTypeFactory( $types );
+			$this->dataTypeFactory = new DataTypeFactory( $this->dataTypeDefinitions->getValueTypes() );
 		}
 
 		return $this->dataTypeFactory;
@@ -352,9 +346,16 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgContLang;
+		global $wgContLang, $wgWBClientSettings, $wgWBClientDataTypes;
 
-		return new self( new SettingsArray( $GLOBALS['wgWBClientSettings'] ), $wgContLang );
+		$dataTypeDefinitions = $wgWBClientDataTypes;
+		Hooks::run( 'WikibaseClientDataTypes', array( &$dataTypeDefinitions ) );
+
+		return new self(
+			new SettingsArray( $wgWBClientSettings ),
+			$wgContLang,
+			new DataTypeDefinitions( $dataTypeDefinitions )
+		);
 	}
 
 	/**
