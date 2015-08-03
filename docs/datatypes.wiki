@@ -1,0 +1,44 @@
+This document describes the concept of data types as used by Wikibase.
+
+== Overview ==
+Data types in Wikibase are largely ephemeral: they are modelled by DataType objects,
+but such objects do not define any functionality of themselves. Data types are used
+to declare which kinds of values can be associated with a Property in a Snak. For each
+data type, the following things are defined:
+
+* the type of DataValue to use for values
+* a localized name and description of the data type
+* ValueValidators that impose constraints on the allowed values
+* A ValueParser for parsing user input
+* Formatters for rendering values of the given type to various target formats.
+
+
+== Data Type Definitions ==
+Data types are defined in the global array $wgWikibaseDataTypeDefinitions which is constructed at
+bootstrap time in Wikibase.php resp. WikibaseCLient.php, based on the information returned by the
+files WikibaseLib.datatypes.php, Wikibase.datatypes.php, and WikibaseClient.datatypes.php
+respectively.
+
+$wgWikibaseDataTypeDefinitions is an associative array that maps data type IDs to a data type
+definition record. Each such record has the following fields:
+* value-type: the data value type ID identifying the low level value type to use for this data type. Logically, the value type defines the structure of the value, while the data type defines constraints on the value.
+* validator-factory-callback: a callable that acts as a factory for the list of validators that should be used to check any user supplied values of the given data type. The callable will be called without any arguments, and must return a list of ValueValidator objects.
+* parser-factory-callback: (PLANNED) a callable that acts as a factory for a ValueParser for this data type.
+* formatter-factory-callback: (PLANNED) a callable that acts as a factory for ValueFormatters for use with this data type.
+
+Extensions that wish to register a data type should add the appropriate data type definition record
+to $wgWikibaseDataTypeDefinitions.
+
+
+== Programmatic Access ==
+Information about data types can be accessed programmatically using the appropriate service objects.
+WikibaseRepo and WikibaseClient both provide the method getDataTypeFactory(); The DataTypeFactory
+object returned by that method provides access to a DataType object for each data type, from which
+the associated value type may be obtained.
+
+WikibaseRepo also defines the method getDataTypeValidatorFactory() which returns a
+DataTypeValidatorFactory for obtaining the validators for each data type.
+
+== Caveats ==
+* the Methods getSnakFormatterFactory() does not yet use $wgWikibaseDataTypeDefinitions.
+* ValueParsers are still defined using the $wgValueParsers global.

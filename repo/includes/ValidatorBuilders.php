@@ -24,7 +24,10 @@ use Wikibase\Repo\Validators\UrlSchemeValidators;
 use Wikibase\Repo\Validators\UrlValidator;
 
 /**
- * Defines validators for the data types supported by Wikibase.
+ * Defines validators for the basic well known data types supported by Wikibase.
+ *
+ * @warning: This is a low level factory for use by boostrap code only!
+ * Program logic should use an instance of DataTypeValidatorFactory.
  *
  * @since 0.4
  *
@@ -70,34 +73,6 @@ class ValidatorBuilders {
 		$this->entityIdParser = $idParser;
 		$this->entityLookup = $lookup;
 		$this->urlSchemes = $urlSchemes;
-	}
-
-	/**
-	 * @return callable[] ValueValidator for DataTypes build spec
-	 */
-	public function getDataTypeValidators() {
-
-		$types = array(
-			'commonsMedia'      => array( $this, 'buildMediaValidators' ),
-			'globe-coordinate'  => array( $this, 'buildCoordinateValidators' ),
-			'monolingualtext'   => array( $this, 'buildMonolingualTextValidators' ),
-			'quantity'          => array( $this, 'buildQuantityValidators' ),
-			'string'            => array( $this, 'buildStringValidators' ),
-			'time'              => array( $this, 'buildTimeValidators' ),
-			'url'               => array( $this, 'buildUrlValidators' ),
-			'wikibase-item'     => array( $this, 'buildItemValidators' ),
-			'wikibase-property' => array( $this, 'buildPropertyValidators' ),
-		);
-
-		$experimental = array(
-			// 'multilingualtext' => array( $this, 'buildMultilingualTextValidators' ),
-		);
-
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$types = array_merge( $types, $experimental );
-		}
-
-		return $types;
 	}
 
 	/**
