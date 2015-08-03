@@ -22,8 +22,8 @@ respectively.
 $wgWikibaseDataTypeDefinitions is an associative array that maps data type IDs to a data type
 definition record. Each such record has the following fields:
 * value-type: the data value type ID identifying the low level value type to use for this data type. Logically, the value type defines the structure of the value, while the data type defines constraints on the value.
-* validator-factory-callback: a callable that acts as a factory for the list of validators that should be used to check any user supplied values of the given data type. The callable will be called without any arguments, and must return a list of ValueValidator objects.
-* parser-factory-callback: (PLANNED) a callable that acts as a factory for a ValueParser for this data type.
+* validator-factory-callback: a callable that acts as a factory for the list of validators that should be used to check any user supplied values of the given data type. Used with BuilderBasedDataTypeValidatorFactory. The callable will be called without any arguments, and must return a list of ValueValidator objects.
+* parser-factory-callback: a callable that acts as a factory for a ValueParser for this data type (or the class name of a ValueParser implementation). The function resp. Used with ValueParserFactory. The constructor is called with a ParserOptions as an argument, and must return a ValueParser object.
 * formatter-factory-callback: (PLANNED) a callable that acts as a factory for ValueFormatters for use with this data type.
 
 Extensions that wish to register a data type should add the appropriate data type definition record
@@ -41,4 +41,3 @@ DataTypeValidatorFactory for obtaining the validators for each data type.
 
 == Caveats ==
 * the Methods getSnakFormatterFactory() does not yet use $wgWikibaseDataTypeDefinitions.
-* ValueParsers are still defined using the $wgValueParsers global.

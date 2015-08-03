@@ -2,6 +2,8 @@
 
 namespace Wikibase\Tests\Repo;
 
+use ValueParsers\NullParser;
+use ValueParsers\ParserOptions;
 use Wikibase\Repo\ValueParserFactory;
 
 /**
@@ -14,26 +16,42 @@ use Wikibase\Repo\ValueParserFactory;
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-class ValueParserFactoryTest extends \MediaWikiTestCase {
+class ValueParserFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider getParserIdsProvider
+	 * @dataProvider provideFactoryFunctions
 	 */
-	public function testGetParserIds( $valueParsers, $expected ) {
-		$valueParserFactory = new ValueParserFactory( $valueParsers );
+	public function testGetParserIds( $factoryFunctions ) {
+		$valueParserFactory = new ValueParserFactory( $factoryFunctions );
 
 		$returnValue = $valueParserFactory->getParserIds();
 
-		$this->assertEquals( $expected, $returnValue );
+		$this->assertEquals( array_keys( $factoryFunctions ), $returnValue );
 	}
 
-	public function getParserIdsProvider() {
+	public function provideFactoryFunctions() {
 		return array(
 			array(
-				array( 'key' => 'value' ),
-				array( 'key' )
+				array(
+					'foo' => function() {
+						return new NullParser();
+					}
+				),
 			)
 		);
+	}
+
+	/**
+	 * @dataProvider provideFactoryFunctions
+	 */
+	public function testNewParser( $factoryFunctions ) {
+		$valueParserFactory = new ValueParserFactory( $factoryFunctions );
+		$options = new ParserOptions();
+
+		foreach ( $valueParserFactory->getParserIds() as $id ) {
+			$parser = $valueParserFactory->newParser( $id, $options );
+			$this->assertInstanceOf( 'ValueParsers\ValueParser', $parser );
+		}
 	}
 
 }
