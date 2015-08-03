@@ -31,7 +31,7 @@ use Wikibase\Repo\ValidatorBuilders;
  */
 class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
-	protected function newValidatorFactory() {
+	protected function newValidatorBuilders() {
 		$entityIdParser = new BasicEntityIdParser();
 
 		$q8 = new Item( new ItemId( 'Q8' ) );
@@ -56,9 +56,8 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			$urlSchemes,
 			$contentLanguages
 		);
-		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( $builders->getDataTypeValidators() );
 
-		return $validatorFactory;
+		return $builders;
 	}
 
 	public function provideDataTypeValidation() {
@@ -246,8 +245,21 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideDataTypeValidation
 	 */
 	public function testDataTypeValidation( $typeId, $value, $expected, $message ) {
-		$validatorsFactory = $this->newValidatorFactory();
-		$validators = $validatorsFactory->getValidators( $typeId );
+		$builders = $this->newValidatorBuilders();
+
+		$validatorMap = array(
+			'commonsMedia'      => array( $builders, 'buildMediaValidators' ),
+			'globe-coordinate'  => array( $builders, 'buildCoordinateValidators' ),
+			'monolingualtext'   => array( $builders, 'buildMonolingualTextValidators' ),
+			'quantity'          => array( $builders, 'buildQuantityValidators' ),
+			'string'            => array( $builders, 'buildStringValidators' ),
+			'time'              => array( $builders, 'buildTimeValidators' ),
+			'url'               => array( $builders, 'buildUrlValidators' ),
+			'wikibase-item'     => array( $builders, 'buildItemValidators' ),
+			'wikibase-property' => array( $builders, 'buildPropertyValidators' ),
+		);
+
+		$validators = call_user_func( $validatorMap[$typeId] );
 
 		$this->assertValidation( $expected, $validators, $value, $message );
 	}

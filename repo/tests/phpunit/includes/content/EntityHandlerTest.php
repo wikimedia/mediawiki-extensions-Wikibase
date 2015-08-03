@@ -13,9 +13,10 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\InternalSerialization\SerializerFactory;
+use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -59,7 +60,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 			$repoSettings = array_merge( $repoSettings, $settings->getArrayCopy() );
 		}
 
-		return new WikibaseRepo( new SettingsArray( $repoSettings ) );
+		return new WikibaseRepo( new SettingsArray( $repoSettings ), new DataTypeDefinitions() );
 	}
 
 	/**
