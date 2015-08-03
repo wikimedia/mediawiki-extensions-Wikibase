@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_4a4a0d29",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-08-03T08:04:52Z",
+      "side": 1,
+      "message": "Use\n\n mw.message( ... ).toString()\n\nor the short form\n\n mw.msg( ... )\n\nto get a unescaped string for .text().",
+      "revId": "b88776b24974450d5546a3ef71bed5a20cc52d70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
