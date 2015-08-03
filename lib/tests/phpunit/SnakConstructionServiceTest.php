@@ -25,10 +25,9 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 	public function newSnakConstructionService() {
 		$snakFactory = new SnakFactory();
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeFactory = new DataTypeFactory();
+		$dataTypeFactory = new DataTypeFactory( array( 'string' => 'string' ) );
 		$dataValueFactory = DataValueFactory::singleton();
 
-		$dataTypeFactory->registerDataType( new DataType( 'string', 'string', array() ) );
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'p1' ), 'string' );
 
 		$service = new SnakConstructionService(
