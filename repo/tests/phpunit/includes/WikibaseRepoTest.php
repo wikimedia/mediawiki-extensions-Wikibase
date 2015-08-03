@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests\Repo;
 
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -214,7 +215,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	 */
 	private function getWikibaseRepo() {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		return new WikibaseRepo( $settings );
+		return new WikibaseRepo( $settings, new DataTypeDefinitions() );
 	}
 
 	public function testGetApiHelperFactory() {
