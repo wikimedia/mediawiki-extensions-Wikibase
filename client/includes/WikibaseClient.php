@@ -54,7 +54,6 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
@@ -181,19 +180,21 @@ final class WikibaseClient {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
-			$builders = new WikibaseDataTypeBuilders(
-				$this->getEntityLookup(),
-				$this->getEntityIdParser(),
-				$urlSchemes
+			// Temporary hack, will be removed in a follow-up
+			$types = array(
+				'commonsMedia'      => 'string',
+				'globe-coordinate'  => 'globecoordinate',
+				'monolingualtext'   => 'monolingualtext',
+				'multilingualtext'  => 'multilingualtext',
+				'quantity'          => 'quantity',
+				'string'            => 'string',
+				'time'              => 'time',
+				'url'               => 'string',
+				'wikibase-item'     => 'wikibase-entityid',
+				'wikibase-property' => 'wikibase-entityid',
 			);
 
-			$typeBuilderSpecs = array_intersect_key(
-				$builders->getDataTypeBuilders(),
-				array_flip( $this->settings->getSetting( 'dataTypes' ) )
-			);
-
-			$this->dataTypeFactory = new DataTypeFactory( $typeBuilderSpecs );
+			$this->dataTypeFactory = new DataTypeFactory( $types );
 		}
 
 		return $this->dataTypeFactory;

@@ -30,7 +30,7 @@
 		"data-values/number": "~0.5.0",
 		"data-values/time": "~0.8.1",
 		"data-values/validators": "~0.1.0",
-		"data-values/data-types": "~0.4.0",
+		"data-values/data-types": "~0.5.0",
 		"data-values/serialization": "~1.0",
 		"data-values/javascript": "~0.6.0|~0.7.0",
 		"data-values/value-view": "~0.14.0",
