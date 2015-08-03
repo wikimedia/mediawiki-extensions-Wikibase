@@ -120,6 +120,11 @@ class WikibaseRepo {
 	private $dataTypeFactory = null;
 
 	/**
+	 * @var ValueParserFactory|null
+	 */
+	private $valueParserFactory = null;
+
+	/**
 	 * @var SnakConstructionService|null
 	 */
 	private $snakConstructionService = null;
@@ -287,6 +292,26 @@ class WikibaseRepo {
 		}
 
 		return $this->dataTypeFactory;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ValueParserFactory
+	 */
+	public function getValueParserFactory() {
+		global $wgValueParsers;
+
+		if ( $this->valueParserFactory === null ) {
+			$callbacks = $this->dataTypeDefinitions->getParserFactoryCallbacks();
+
+			// For backwards-compatibility, also register parsers under legacy names.
+			$callbacks = array_merge( $wgValueParsers, $callbacks );
+
+			$this->valueParserFactory = new ValueParserFactory( $callbacks );
+		}
+
+		return $this->valueParserFactory;
 	}
 
 	/**
