@@ -6,7 +6,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\FingerprintHolder;
 use Wikibase\DataModel\Term\TermList;
 
 /**
@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\TermList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class Entity implements \Comparable, FingerprintProvider, EntityDocument {
+abstract class Entity implements \Comparable, FingerprintHolder, EntityDocument {
 
 	/**
 	 * Sets the value for the label in a certain value.
@@ -323,14 +323,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	public function getClaims() {
 		return array();
 	}
-
-	/**
-	 * @since 0.7.3
-	 * @deprecated since 1.0
-	 *
-	 * @param Fingerprint $fingerprint
-	 */
-	public abstract function setFingerprint( Fingerprint $fingerprint );
 
 	/**
 	 * Returns if the Entity has no content.
