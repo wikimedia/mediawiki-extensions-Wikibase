@@ -111,7 +111,7 @@ class EntityAccessor {
 	 *
 	 * @param string $prefixedEntityId
 	 *
-	 * @return array
+	 * @return array|null
 	 */
 	public function getEntity( $prefixedEntityId ) {
 		$prefixedEntityId = trim( $prefixedEntityId );
@@ -124,7 +124,18 @@ class EntityAccessor {
 			return null;
 		}
 
-		$serializer = new ClientEntitySerializer(
+		$entityArr = $this->newClientEntitySerializer()->serialize( $entityObject );
+
+		// Renumber the entity as Lua uses 1-based array indexing
+		$this->renumber( $entityArr );
+		$entityArr['schemaVersion'] = 2;
+
+		$this->usageAccumulator->addAllUsage( $entityId );
+		return $entityArr;
+	}
+
+	private function newClientEntitySerializer() {
+		return new ClientEntitySerializer(
 			$this->dataTypeLookup,
 			array_unique( array_merge(
 				$this->termsLanguages->getLanguages(),
@@ -133,15 +144,6 @@ class EntityAccessor {
 			) ),
 			array( $this->language->getCode() => $this->fallbackChain )
 		);
-
-		$entityArr = $serializer->serialize( $entityObject );
-
-		// Renumber the entity as Lua uses 1-based array indexing
-		$this->renumber( $entityArr );
-		$entityArr['schemaVersion'] = 2;
-
-		$this->usageAccumulator->addAllUsage( $entityId );
-		return $entityArr;
 	}
 
 }
