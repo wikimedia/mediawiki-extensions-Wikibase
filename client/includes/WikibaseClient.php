@@ -54,7 +54,6 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
@@ -83,7 +82,7 @@ final class WikibaseClient {
 	private $contentLanguage;
 
 	/**
-	 * @var SiteStore|null
+	 * @var SiteStore
 	 */
 	private $siteStore;
 
@@ -157,12 +156,12 @@ final class WikibaseClient {
 	 *
 	 * @param SettingsArray $settings
 	 * @param Language $contentLanguage
-	 * @param SiteStore|null $siteStore
+	 * @param SiteStore $siteStore
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		Language $contentLanguage,
-		SiteStore $siteStore = null
+		SiteStore $siteStore
 	) {
 		$this->settings = $settings;
 		$this->contentLanguage = $contentLanguage;
@@ -176,19 +175,7 @@ final class WikibaseClient {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
-			$builders = new WikibaseDataTypeBuilders(
-				$this->getEntityLookup(),
-				$this->getEntityIdParser(),
-				$urlSchemes
-			);
-
-			$typeBuilderSpecs = array_intersect_key(
-				$builders->getDataTypeBuilders(),
-				array_flip( $this->settings->getSetting( 'dataTypes' ) )
-			);
-
-			$this->dataTypeFactory = new DataTypeFactory( $typeBuilderSpecs );
+			$this->dataTypeFactory = DataTypeFactory::getDefaultInstance();
 		}
 
 		return $this->dataTypeFactory;
@@ -346,13 +333,17 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgContLang;
+		global $wgContLang, $wgWBClientSettings;
 
-		return new self( new SettingsArray( $GLOBALS['wgWBClientSettings'] ), $wgContLang );
+		return new self(
+			new SettingsArray( $wgWBClientSettings ),
+			$wgContLang,
+			SiteSQLStore::newInstance()
+		);
 	}
 
 	/**
-	 * Returns the default instance constructed using newInstance().
+	 * Returns the default instance of WikibaseClient.
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @since 0.4
@@ -606,10 +597,6 @@ final class WikibaseClient {
 	 * @return SiteStore
 	 */
 	public function getSiteStore() {
-		if ( $this->siteStore === null ) {
-			$this->siteStore = SiteSQLStore::newInstance();
-		}
-
 		return $this->siteStore;
 	}
 

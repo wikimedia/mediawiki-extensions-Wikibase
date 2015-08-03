@@ -63,7 +63,6 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ReferencedEntitiesFinder;
@@ -202,10 +201,14 @@ class WikibaseRepo {
 	 * @return WikibaseRepo
 	 */
 	public static function getDefaultInstance() {
+		global $wgWBRepoSettings;
+
 		static $instance = null;
 
 		if ( $instance === null ) {
-			$instance = new self( new SettingsArray( $GLOBALS['wgWBRepoSettings'] ) );
+			$instance = new self(
+				new SettingsArray( $wgWBRepoSettings )
+			);
 		}
 
 		return $instance;
@@ -216,7 +219,9 @@ class WikibaseRepo {
 	 *
 	 * @param SettingsArray $settings
 	 */
-	public function __construct( SettingsArray $settings ) {
+	public function __construct(
+		SettingsArray $settings
+	) {
 		$this->settings = $settings;
 	}
 
@@ -227,14 +232,7 @@ class WikibaseRepo {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			$builders = new WikibaseDataTypeBuilders();
-
-			$typeBuilderSpecs = array_intersect_key(
-				$builders->getDataTypeBuilders(),
-				array_flip( $this->settings->getSetting( 'dataTypes' ) )
-			);
-
-			$this->dataTypeFactory = new DataTypeFactory( $typeBuilderSpecs );
+			$this->dataTypeFactory = DataTypeFactory::getDefaultInstance();
 		}
 
 		return $this->dataTypeFactory;
