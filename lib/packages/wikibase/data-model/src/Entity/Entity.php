@@ -306,7 +306,6 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * Returns a deep copy of the entity.
 	 *
 	 * @since 0.1
-	 * @deprecated since 1.0
 	 *
 	 * @return self
 	 */
