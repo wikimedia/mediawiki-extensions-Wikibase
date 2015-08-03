@@ -23,6 +23,16 @@ class Property extends Entity implements StatementListHolder {
 	const ENTITY_TYPE = 'property';
 
 	/**
+	 * @var PropertyId|null
+	 */
+	private $id;
+
+	/**
+	 * @var Fingerprint
+	 */
+	private $fingerprint;
+
+	/**
 	 * @var string
 	 */
 	private $dataTypeId;
@@ -53,6 +63,17 @@ class Property extends Entity implements StatementListHolder {
 	}
 
 	/**
+	 * Returns the id of the entity or null if it does not have one.
+	 *
+	 * @since 0.1 return type changed in 0.3
+	 *
+	 * @return PropertyId|null
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
 	 * Can be integer since 0.1.
 	 * Can be PropertyId since 0.5.
 	 * Can be null since 1.0.
@@ -71,6 +92,24 @@ class Property extends Entity implements StatementListHolder {
 		else {
 			throw new InvalidArgumentException( '$id must be an instance of PropertyId, an integer, or null' );
 		}
+	}
+
+	/**
+	 * @since 0.7.3
+	 *
+	 * @return Fingerprint
+	 */
+	public function getFingerprint() {
+		return $this->fingerprint;
+	}
+
+	/**
+	 * @since 0.7.3
+	 *
+	 * @param Fingerprint $fingerprint
+	 */
+	public function setFingerprint( Fingerprint $fingerprint ) {
+		$this->fingerprint = $fingerprint;
 	}
 
 	/**
@@ -101,15 +140,6 @@ class Property extends Entity implements StatementListHolder {
 	 */
 	public function setAliases( $languageCode, array $aliases ) {
 		$this->fingerprint->setAliasGroup( $languageCode, $aliases );
-	}
-
-	/**
-	 * @since 0.1 return type changed in 0.3
-	 *
-	 * @return PropertyId|null
-	 */
-	public function getId() {
-		return $this->id;
 	}
 
 	/**
