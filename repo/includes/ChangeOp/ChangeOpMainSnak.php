@@ -6,10 +6,10 @@ use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
-use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Summary;
 use Wikibase\Validators\SnakValidator;
 

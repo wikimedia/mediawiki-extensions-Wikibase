@@ -2,10 +2,10 @@
 
 namespace Wikibase\Rdf;
 
+use DataValues\DataValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
-use DataValues\DataValue;
 
 /**
  * RDF vocabulary for use in mapping for wikibase data model.

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Rdf;
 
-use DataValues\TimeValue;
 use DataValues\IllegalValueException;
+use DataValues\TimeValue;
 
 /**
  * Clean datetime value to conform to RDF/XML standards
