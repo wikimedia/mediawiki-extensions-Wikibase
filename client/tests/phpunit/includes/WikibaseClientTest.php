@@ -7,6 +7,7 @@ use MediaWikiSite;
 use SiteStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockSiteStore;
 
@@ -82,7 +83,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'languageLinkSiteGroup', 'wikipedia' );
 
-		$wikibaseClient = new WikibaseClient( $settings, Language::factory( 'en' ), $this->getSiteStore() );
+		$wikibaseClient = new WikibaseClient( $settings, Language::factory( 'en' ), new DataTypeDefinitions(), $this->getSiteStore() );
 
 		$returnValue = $wikibaseClient->getLangLinkHandler();
 		$this->assertInstanceOf( 'Wikibase\LangLinkHandler', $returnValue );
@@ -97,7 +98,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getLangLinkSiteGroupProvider
 	 */
 	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteStore $siteStore ) {
-		$client = new WikibaseClient( $settings, Language::factory( 'en' ), $siteStore );
+		$client = new WikibaseClient( $settings, Language::factory( 'en' ), new DataTypeDefinitions(), $siteStore );
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
 	}
 
@@ -125,7 +126,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getSiteGroupProvider
 	 */
 	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteStore $siteStore ) {
-		$client = new WikibaseClient( $settings, Language::factory( 'en' ), $siteStore );
+		$client = new WikibaseClient( $settings, Language::factory( 'en' ), new DataTypeDefinitions(), $siteStore );
 		$this->assertEquals( $expected, $client->getSiteGroup() );
 	}
 
@@ -251,7 +252,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	private function getWikibaseClient() {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
 		$sites = new MockSiteStore( array() );
-		return new WikibaseClient( $settings, Language::factory( 'en' ), $sites );
+		$dataTypeDefinitions = new DataTypeDefinitions();
+		return new WikibaseClient( $settings, Language::factory( 'en' ), $dataTypeDefinitions, $sites );
 	}
 
 }
