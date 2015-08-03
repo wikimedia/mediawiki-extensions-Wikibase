@@ -13,10 +13,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -185,24 +182,24 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		//Basic
 		$item->setLabel( 'de', 'foo-de' );
 		$item->setLabel( 'qu', 'foo-qu' );
-		$item->addAliases( 'en', array( 'bar', 'baz' ) );
-		$item->addAliases( 'de-formal', array( 'bar', 'baz' ) );
+		$item->setAliases( 'en', array( 'bar', 'baz' ) );
+		$item->setAliases( 'de-formal', array( 'bar', 'baz' ) );
 		$item->setDescription( 'en', 'en-desc' );
 		$item->setDescription( 'pt', 'ptDesc' );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
-		$item->addSiteLink( new SiteLink( 'zh_classicalwiki', 'User:Addshore', array() ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', array() );
 
-		$snak = new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
+		$snak = new PropertyValueSnak( 65, new StringValue( 'snakStringValue' ) );
 
 		$qualifiers = new SnakList();
-		$qualifiers->addSnak( new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'string!' ) ) );
-		$qualifiers->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
+		$qualifiers->addSnak( new PropertyValueSnak( 65, new StringValue( 'string!' ) ) );
+		$qualifiers->addSnak( new PropertySomeValueSnak( 65 ) );
 
 		$references = new ReferenceList();
-		$referenceSnaks = new SnakList();
-		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P65' ) ) );
-		$referenceSnaks->addSnak( new PropertySomeValueSnak( new PropertyId( 'P68' ) ) );
-		$references->addReference( new Reference( $referenceSnaks ) );
+		$references->addNewReference( array(
+			new PropertySomeValueSnak( 65 ),
+			new PropertySomeValueSnak( 68 )
+		) );
 
 		$guid = 'imaguid';
 		$item->getStatements()->addNewStatement( $snak, $qualifiers, $references, $guid );
