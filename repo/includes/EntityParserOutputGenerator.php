@@ -199,10 +199,11 @@ class EntityParserOutputGenerator {
 		// set the display title
 		//$parserOutput->setTitleText( $entity>getLabel( $langCode ) );
 
+		// Sometimes extensions like SpamBlacklist might call getParserOutput
+		// before the id is assigned, during the process of creating a new entity.
+		// in that case, no alternate links are added, which probably is no problem.
 		if ( $entity->getId() !== null ) {
 			$this->addAlternateLinks( $parserOutput, $entity->getId() );
-		} else {
-			wfLogWarning( "Encountered an Entity without EntityId in EntityParserOutputGenerator." );
 		}
 
 		return $parserOutput;
