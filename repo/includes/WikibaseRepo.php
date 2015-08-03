@@ -17,6 +17,7 @@ use StubObject;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
@@ -194,6 +195,11 @@ class WikibaseRepo {
 	private $monolingualTextLanguages = null;
 
 	/**
+	 * @var DataTypeDefinitions
+	 */
+	private $dataTypeDefinitions;
+
+	/**
 	 * Returns the default instance constructed using newInstance().
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
@@ -202,13 +208,14 @@ class WikibaseRepo {
 	 * @return WikibaseRepo
 	 */
 	public static function getDefaultInstance() {
-		global $wgWBRepoSettings;
+		global $wgWikibaseDataTypes, $wgWBRepoSettings;
 
 		static $instance = null;
 
 		if ( $instance === null ) {
 			$instance = new self(
-				new SettingsArray( $wgWBRepoSettings )
+				new SettingsArray( $wgWBRepoSettings ),
+				new DataTypeDefinitions( $wgWikibaseDataTypes )
 			);
 		}
 
@@ -216,14 +223,57 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * Returns the default ValidatorBuilders instance.
+	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
+	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $reset Flag: Pass "reset" to reset the default instance
+	 *
+	 * @return ValidatorBuilders
+	 */
+	public static function getDefaultValidatorBuilders( $reset = 'noreset' ) {
+		static $builders;
+
+		if ( $builders === null || $reset === 'reset' ) {
+			$wikibaseRepo = self::getDefaultInstance();
+			$builders = $wikibaseRepo->newValidatorBuilders();
+		}
+
+		return $builders;
+	}
+
+	/**
+	 * Returns a low level factory object for creating validators for well known data types.
+	 * @warning This is for use with getDefaultValidatorBuilders() during bootstrap only!
+	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
+	 *
+	 * @return ValidatorBuilders
+	 */
+	private function newValidatorBuilders() {
+		$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
+
+		return new ValidatorBuilders(
+			$this->getEntityLookup(),
+			$this->getEntityIdParser(),
+			$urlSchemes,
+			$this->getMonolingualTextLanguages()
+		);
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
+	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 */
 	public function __construct(
-		SettingsArray $settings
+		SettingsArray $settings,
+		DataTypeDefinitions $dataTypeDefinitions
 	) {
 		$this->settings = $settings;
+		$this->dataTypeDefinitions = $dataTypeDefinitions;
 	}
 
 	/**
@@ -233,21 +283,7 @@ class WikibaseRepo {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			// Temporary hack, will be removed in a follow-up
-			$types = array(
-				'commonsMedia'      => 'string',
-				'globe-coordinate'  => 'globecoordinate',
-				'monolingualtext'   => 'monolingualtext',
-				'multilingualtext'  => 'multilingualtext',
-				'quantity'          => 'quantity',
-				'string'            => 'string',
-				'time'              => 'time',
-				'url'               => 'string',
-				'wikibase-item'     => 'wikibase-entityid',
-				'wikibase-property' => 'wikibase-entityid',
-			);
-
-			$this->dataTypeFactory = new DataTypeFactory( $types );
+			$this->dataTypeFactory = new DataTypeFactory( $this->dataTypeDefinitions->getValueTypes() );
 		}
 
 		return $this->dataTypeFactory;
@@ -1203,18 +1239,10 @@ class WikibaseRepo {
 		);
 	}
 
-	public function getDataTypeValidatorFactory() {
-		$urlSchemes = $this->settings->getSetting( 'urlSchemes' );
-
-		$builders = new ValidatorBuilders(
-			$this->getEntityLookup(),
-			$this->getEntityIdParser(),
-			$urlSchemes,
-			$this->getMonolingualTextLanguages()
-		);
+	private function getDataTypeValidatorFactory() {
 
 		return new BuilderBasedDataTypeValidatorFactory(
-			$builders->getDataTypeValidators()
+			$this->dataTypeDefinitions->getValidatorFactoryCallbacks()
 		);
 	}
 
