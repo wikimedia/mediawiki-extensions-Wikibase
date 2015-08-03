@@ -77,10 +77,13 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	 * @return DataTypeFactory
 	 */
 	private function getMockDataTypeFactory( $dataType, $valueType ) {
-		$typeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
+		$typeFactory = $this->getMockBuilder( 'DataTypes\DataTypeFactory' )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$typeFactory->expects( $this->any() )
 			->method( 'getType' )
-			->will( $this->returnValue( new DataType( $dataType, $valueType, array() ) ) );
+			->will( $this->returnValue( new DataType( $dataType, $valueType ) ) );
 
 		return $typeFactory;
 	}
@@ -262,7 +265,10 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 		$typeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		$typeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
+		$typeFactory = $this->getMockBuilder( 'DataTypes\DataTypeFactory' )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$typeFactory->expects( $this->never() )->method( 'getType' );
 
 		$valueFormatter = new DispatchingValueFormatter( array() );
