@@ -31,7 +31,7 @@ use Wikibase\Repo\ValidatorBuilders;
  */
 class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
-	protected function newValidatorFactory() {
+	protected function newValidatorBuilders() {
 		$entityIdParser = new BasicEntityIdParser();
 
 		$q8 = new Item( new ItemId( 'Q8' ) );
@@ -56,9 +56,8 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			$urlSchemes,
 			$contentLanguages
 		);
-		$validatorFactory = new BuilderBasedDataTypeValidatorFactory( $builders );
 
-		return $validatorFactory;
+		return $builders;
 	}
 
 	public function provideDataTypeValidation() {
@@ -106,15 +105,56 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'time', new NumberValue( 7 ), false, 'TimeValue expected' ),
 
 			//time['calendar-model']
-			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, '1' ), false, 'calendar: too short' ),
-			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://' . str_repeat('x', 256) ), false, 'calendar: too long' ),
-			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), true, 'calendar: URL' ),
-			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, ' http://acme.com/calendar ' ), false, 'calendar: untrimmed' ),
-			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, ' javascript:alert(1)' ), false, 'calendar: bad URL' ),
+			array(
+				'time',
+				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, '1' ),
+				false,
+				'calendar: too short'
+			),
+			array(
+				'time',
+				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
+					'http://' . str_repeat('x', 256) ),
+				false,
+				'calendar: too long'
+			),
+			array(
+				'time',
+				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
+					'http://acme.com/calendar' ),
+				true,
+				'calendar: URL'
+			),
+			array(
+				'time',
+				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
+					' http://acme.com/calendar ' ),
+				false,
+				'calendar: untrimmed'
+			),
+			array(
+				'time',
+				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
+					' javascript:alert(1)' ),
+				false,
+				'calendar: bad URL'
+			),
 
 			//precision to the second (currently not allowed)
-			array( 'time', new TimeValue( '+2013-06-06T11:22:33Z', 0, 0, 0, TimeValue::PRECISION_DAY, 'http://acme.com/calendar' ), false, 'time given to the second' ),
-			array( 'time', new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, 'http://acme.com/calendar' ), false, 'precision: second' ),
+			array(
+				'time',
+				new TimeValue( '+2013-06-06T11:22:33Z', 0, 0, 0, TimeValue::PRECISION_DAY,
+					'http://acme.com/calendar' ),
+				false,
+				'time given to the second'
+			),
+			array(
+				'time',
+				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND,
+					'http://acme.com/calendar' ),
+				false,
+				'precision: second'
+			),
 
 			//time['time']
 			//NOTE: The below will fail with a IllegalValueExcpetion once the TimeValue constructor enforces the time format.
@@ -205,8 +245,21 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideDataTypeValidation
 	 */
 	public function testDataTypeValidation( $typeId, $value, $expected, $message ) {
-		$validatorsFactory = $this->newValidatorFactory();
-		$validators = $validatorsFactory->getValidators( $typeId );
+		$builders = $this->newValidatorBuilders();
+
+		$validatorMap = array(
+			'commonsMedia'      => array( $builders, 'buildMediaValidators' ),
+			'globe-coordinate'  => array( $builders, 'buildCoordinateValidators' ),
+			'monolingualtext'   => array( $builders, 'buildMonolingualTextValidators' ),
+			'quantity'          => array( $builders, 'buildQuantityValidators' ),
+			'string'            => array( $builders, 'buildStringValidators' ),
+			'time'              => array( $builders, 'buildTimeValidators' ),
+			'url'               => array( $builders, 'buildUrlValidators' ),
+			'wikibase-item'     => array( $builders, 'buildItemValidators' ),
+			'wikibase-property' => array( $builders, 'buildPropertyValidators' ),
+		);
+
+		$validators = call_user_func( $validatorMap[$typeId] );
 
 		$this->assertValidation( $expected, $validators, $value, $message );
 	}
