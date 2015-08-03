@@ -181,7 +181,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 
 		/** @var EntityRevision $newRevisionFrom  */
 		/** @var EntityRevision $newRevisionTo */
-		list( $newRevisionFrom, $newRevisionTo, $redirected )
+		list( $newRevisionFrom, $newRevisionTo, )
 			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
 
 		//XXX: might be nicer to pass pre-rendered links as parameters
