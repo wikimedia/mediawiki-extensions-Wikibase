@@ -59,7 +59,6 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ReferencedEntitiesFinder;
@@ -228,14 +227,21 @@ class WikibaseRepo {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			$builders = new WikibaseDataTypeBuilders();
-
-			$typeBuilderSpecs = array_intersect_key(
-				$builders->getDataTypeBuilders(),
-				array_flip( $this->settings->getSetting( 'dataTypes' ) )
+			// Temporary hack, will be removed in a follow-up
+			$types = array(
+				'commonsMedia'      => 'string',
+				'globe-coordinate'  => 'globecoordinate',
+				'monolingualtext'   => 'monolingualtext',
+				'multilingualtext'  => 'multilingualtext',
+				'quantity'          => 'quantity',
+				'string'            => 'string',
+				'time'              => 'time',
+				'url'               => 'string',
+				'wikibase-item'     => 'wikibase-entityid',
+				'wikibase-property' => 'wikibase-entityid',
 			);
 
-			$this->dataTypeFactory = new DataTypeFactory( $typeBuilderSpecs );
+			$this->dataTypeFactory = new DataTypeFactory( $types );
 		}
 
 		return $this->dataTypeFactory;

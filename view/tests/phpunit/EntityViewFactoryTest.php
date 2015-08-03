@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DataTypes\DataTypeFactory;
 use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\LanguageFallbackChain;
@@ -84,7 +85,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
 			$this->getSiteStore(),
-			$this->getMock( 'DataTypes\DataTypeFactory' ),
+			new DataTypeFactory( array() ),
 			$templateFactory,
 			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
 			array(),

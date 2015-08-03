@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Test;
 
 use DataTypes\DataType;
+use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
 use Language;
 use ValueFormatters\FormatterOptions;
@@ -51,12 +52,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			'globecoordinate' => 'globecoordinate',
 		);
 
-		$typeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
-		$typeFactory->expects( $this->any() )
-			->method( 'getType' )
-			->will( $this->returnCallback( function ( $id ) use ( $typeMap ) {
-				return new DataType( $id, $typeMap[$id], array() );
-			} ) );
+		$typeFactory = new DataTypeFactory( $typeMap );
 
 		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 		$termLookup->expects( $this->any() )

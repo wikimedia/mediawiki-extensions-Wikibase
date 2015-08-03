@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataType;
+use DataTypes\DataTypeFactory;
 use Language;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -97,17 +97,7 @@ class PropertyViewTest extends EntityViewTest {
 	}
 
 	private function getDataTypeFactory() {
-		$dataTypeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
-
-		$dataTypeFactory->expects( $this->any() )
-			->method( 'getType' )
-			->will( $this->returnValue( new DataType(
-				'type',
-				'datavalue',
-				array()
-			) ) );
-
-		return $dataTypeFactory;
+		return new DataTypeFactory( array( 'type' => 'datavalue', 'string' => 'string' ) );
 	}
 
 }

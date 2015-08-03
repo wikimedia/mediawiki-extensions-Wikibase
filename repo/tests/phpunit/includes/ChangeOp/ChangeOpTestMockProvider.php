@@ -173,7 +173,7 @@ class ChangeOpTestMockProvider {
 	 * @return DataTypeFactory
 	 */
 	public function getMockDataTypeFactory() {
-		$stringType = new DataType( 'string', 'string', array() );
+		$stringType = new DataType( 'string', 'string' );
 
 		$types = array(
 			'string' => $stringType

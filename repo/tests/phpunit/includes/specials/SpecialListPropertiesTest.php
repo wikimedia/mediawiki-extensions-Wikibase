@@ -37,10 +37,10 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	private function getDataTypeFactory() {
-		$dataTypeFactory = DataTypeFactory::newFromTypes( array(
-			new DataType( 'wikibase-item', 'wikibase-item', array() ),
-			new DataType( 'string', 'string', array() ),
-			new DataType( 'quantity', 'quantity', array() )
+		$dataTypeFactory = new DataTypeFactory( array(
+			'wikibase-item' => 'wikibase-item',
+			'string' => 'string',
+			'quantity' => 'quantity',
 		) );
 
 		return $dataTypeFactory;
