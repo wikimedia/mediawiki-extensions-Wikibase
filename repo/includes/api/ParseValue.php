@@ -65,7 +65,7 @@ class ParseValue extends ApiBase {
 
 		$this->setServices(
 			$wikibaseRepo->getDataTypeFactory(),
-			new ValueParserFactory( $GLOBALS['wgValueParsers'] ),
+			$wikibaseRepo->getValueParserFactory(),
 			$wikibaseRepo->getExceptionLocalizer(),
 			$apiHelperFactory->getErrorReporter( $this )
 		);
@@ -112,9 +112,9 @@ class ParseValue extends ApiBase {
 		$options = $this->getOptionsObject( $params['options'] );
 
 		// Parsers are registered by datatype.
-		// Note: parser used to be addressed by a name independant of datatype, using the 'parser'
+		// Note: parser used to be addressed by a name independent of datatype, using the 'parser'
 		// parameter. For backwards compatibility, parsers are also registered under their old names
-		// in $wgValueParsers, and this in the ValueParserFactory.
+		// in $wgValueParsers, and thus in the ValueParserFactory.
 		$name = $params['datatype'] ?: $params['parser'];
 
 		if ( empty( $name ) ) {
