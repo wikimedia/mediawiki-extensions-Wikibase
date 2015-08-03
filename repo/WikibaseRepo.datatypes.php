@@ -18,6 +18,13 @@
  * @author Daniel Kinzler
  */
 
+use DataValues\Geo\Parsers\GlobeCoordinateParser;
+use ValueParsers\NullParser;
+use ValueParsers\QuantityParser;
+use ValueParsers\ValueParser;
+use Wikibase\Lib\EntityIdValueParser;
+use Wikibase\Lib\Parsers\TimeParserFactory;
+use Wikibase\Parsers\MonolingualTextParser;
 use Wikibase\Repo\WikibaseRepo;
 
 return call_user_func( function() {
@@ -27,34 +34,40 @@ return call_user_func( function() {
 	// ValidatorBuilders should be used *only* here, program logic should use a
 	// DataValueValidatorFactory as returned by WikibaseRepo::getDataTypeValidatorFactory().
 
+	$newEntityIdParser = function( ValueParsers\ParserOptions $options ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		return new EntityIdValueParser( $repo->getEntityIdParser() );
+	};
+
+	$newNullParser = function( ValueParsers\ParserOptions $options ) {
+		return new NullParser();
+	};
+
 	return array(
 		'commonsMedia' => array(
 			'validator-factory-callback' => function () {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildStringValidators();
 			},
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getCommonsMediaFormatter( $format, $options );
-			}
+			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
+
 		),
 		'globe-coordinate' => array(
 			'validator-factory-callback' => function () {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildCoordinateValidators();
 			},
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getGlobeCoordinateFormatter( $format, $options );
+			'parser-factory-callback' => function( ValueParsers\ParserOptions $options ) {
+				return new GlobeCoordinateParser( $options );
 			}
 		),
 		'monolingualtext' => array(
 			'validator-factory-callback' => function () {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildMonolingualTextValidators();
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getMonolingualTextFormatter( $format, $options );
+			},
+			'parser-factory-callback' => function( ValueParsers\ParserOptions $options ) {
+				return new MonolingualTextParser( $options );
 			}
 		),
 		'quantity' => array(
@@ -62,60 +75,49 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildQuantityValidators();
 			},
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getQuantityFormatter( $format, $options );
-			}
+			'parser-factory-callback' => function( ValueParsers\ParserOptions $options ) {
+				$language = Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
+				$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer( $language);
+				return new QuantityParser( $options, $unlocalizer );
+			},
 		),
 		'string' => array(
 			'validator-factory-callback' => function () {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildStringValidators();
 			},
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getStringFormatter( $format, $options );
-			}
+			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
 		),
 		'time' => array(
 			'validator-factory-callback' => function () {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildTimeValidators();
 			},
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getTimeFormatter( $format, $options );
-			}
+			'parser-factory-callback' => function( ValueParsers\ParserOptions $options ) {
+				$factory = new TimeParserFactory( $options );
+				return $factory->getTimeParser();
+			},
 		),
 		'url' => array(
 			'validator-factory-callback' => function () {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildUrlValidators();
 			},
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getUrlFormatter( $format, $options );
-			}
+			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
 		),
 		'wikibase-item' => array(
 			'validator-factory-callback' => function () {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildItemValidators();
 			},
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getEntityIdFormatter( $format, $options );
-			}
+			'parser-factory-callback' => $newEntityIdParser,
 		),
 		'wikibase-property' => array(
 			'validator-factory-callback' => function () {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				$factory->buildPropertyValidators();
 			},
-			'parser-factory-callback' => function ( $factory, $format, $options ) {
-				$factory = WikibaseRepo::getDefaultWikibaseValueFormatterBuilders();
-				$factory->getEntityIdFormatter( $format, $options );
-			}
+			'parser-factory-callback' => $newEntityIdParser,
 		),
 	);
 
