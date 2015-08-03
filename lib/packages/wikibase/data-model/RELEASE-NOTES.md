@@ -5,6 +5,7 @@
 * Added `StatementList::filter`
 * Added `StatementFilter` and `ReferencedStatementFilter`
 * Added `LabelsProvider`, `DescriptionsProvider` and `AliasesProvider`
+* Added `FingerprintHolder`
 
 ## Version 4.0 (2015-07-28)
 
