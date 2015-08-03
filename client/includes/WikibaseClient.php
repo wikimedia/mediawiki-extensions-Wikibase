@@ -41,6 +41,7 @@ use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFa
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -151,20 +152,26 @@ final class WikibaseClient {
 	private $namespaceChecker = null;
 
 	/**
-	 * @since 0.4
-	 *
+	 * @var DataTypeDefinitions
+	 */
+	private $dataTypeDefinitions;
+
+	/**
 	 * @param SettingsArray $settings
 	 * @param Language $contentLanguage
+	 * @param DataTypeDefinitions $dataTypeDefinitions
 	 * @param SiteStore $siteStore
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		Language $contentLanguage,
+		DataTypeDefinitions $dataTypeDefinitions,
 		SiteStore $siteStore
 	) {
 		$this->settings = $settings;
 		$this->contentLanguage = $contentLanguage;
 		$this->siteStore = $siteStore;
+		$this->dataTypeDefinitions = $dataTypeDefinitions;
 	}
 
 	/**
@@ -174,21 +181,7 @@ final class WikibaseClient {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			// Temporary hack, will be removed in a follow-up
-			$types = array(
-				'commonsMedia'      => 'string',
-				'globe-coordinate'  => 'globecoordinate',
-				'monolingualtext'   => 'monolingualtext',
-				'multilingualtext'  => 'multilingualtext',
-				'quantity'          => 'quantity',
-				'string'            => 'string',
-				'time'              => 'time',
-				'url'               => 'string',
-				'wikibase-item'     => 'wikibase-entityid',
-				'wikibase-property' => 'wikibase-entityid',
-			);
-
-			$this->dataTypeFactory = new DataTypeFactory( $types );
+			$this->dataTypeFactory = new DataTypeFactory( $this->dataTypeDefinitions->getValueTypes() );
 		}
 
 		return $this->dataTypeFactory;
@@ -346,11 +339,12 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgContLang, $wgWBClientSettings;
+		global $wgContLang, $wgWBClientSettings, $wgWikibaseDataTypes;
 
 		return new self(
 			new SettingsArray( $wgWBClientSettings ),
 			$wgContLang,
+			new DataTypeDefinitions( $wgWikibaseDataTypes ),
 			SiteSQLStore::newInstance()
 		);
 	}
