@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_1808df2e",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-03T15:38:45Z",
+      "side": 1,
+      "message": "phpdoc should be updated",
+      "revId": "cd95dc9f4778d2f52fb98e9941415d5bfbae8822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_38035b14",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-03T15:38:45Z",
+      "side": 1,
+      "message": "phpdoc should be updated",
+      "revId": "cd95dc9f4778d2f52fb98e9941415d5bfbae8822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f3009405",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-03T15:38:45Z",
+      "side": 1,
+      "message": "should have @throws phpdoc",
+      "revId": "cd95dc9f4778d2f52fb98e9941415d5bfbae8822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b3068c1d",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-03T15:38:45Z",
+      "side": 1,
+      "message": "Exception should be added to the use list.\nThis will remove the \\ here.",
+      "revId": "cd95dc9f4778d2f52fb98e9941415d5bfbae8822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_730ca43d",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-03T15:38:45Z",
+      "side": 1,
+      "message": "better to use \u0027 chars instead of \" for strings not using variables in them!",
+      "revId": "cd95dc9f4778d2f52fb98e9941415d5bfbae8822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
