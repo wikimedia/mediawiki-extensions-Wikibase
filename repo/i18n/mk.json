@@ -74,7 +74,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "($1 {{PLURAL:$1|ставка|ставки}})",
 	"wikibase-disambiguation-title": "Појаснување за „$1“",
 	"wb-special-newitem-new-item-notification": "Новиот предмет $1 е создаден и пренасочен на својата страница. Назад на $2.",
-	"wikibase-aliases-label": "Познато и како:",
 	"wikibase-aliases-input-help-message": "За полесно да ја најдете единицата, можете да ѝ дадете алтернативни имиња.",
 	"wikibase-aliases-empty": "Нема зададено алијаси.",
 	"wikibase-propertypage-datatype": "Податочен тип",

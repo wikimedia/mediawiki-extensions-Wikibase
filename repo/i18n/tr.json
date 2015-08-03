@@ -69,7 +69,6 @@
 	"wikibase-undo-title": "\"$1\" üzerindeki değişiklik geri alınıyor",
 	"wikibase-restore-title": "\"$1\" eski revizyonu geri yükleniyor",
 	"wikibase-partial-undo": "Düzenleme kısmen geri alınabilir.",
-	"wikibase-aliases-label": "Şu şekilde de bilinir:",
 	"wikibase-aliases-empty": "Hiçbir ilave tanımlanmamış",
 	"wikibase-propertypage-datatype": "Veri türü",
 	"wikibase-statementview-rank-normal": "Normal oran",

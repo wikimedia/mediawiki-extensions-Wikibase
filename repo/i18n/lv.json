@@ -48,7 +48,6 @@
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|$1 vērtības vēl nav saglabātas|$1 vērtība vēl nav saglabāta|$1 vērtības vēl nav saglabātas}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|ieraksti|ieraksts|ieraksti}}",
 	"wikibase-disambiguation-title": "\"$1\" nozīmju atdalīšana",
-	"wikibase-aliases-label": "Zināms arī kā:",
 	"wikibase-aliases-empty": "Nav norādīti citi nosaukumi.",
 	"wikibase-propertypage-datatype": "Datu tips",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|atsauces|atsauce|atsauces}}",

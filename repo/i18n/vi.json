@@ -80,7 +80,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1}}mục",
 	"wikibase-disambiguation-title": "Định hướng cho “$1”",
 	"wb-special-newitem-new-item-notification": "Khoản mục $1 đã được tạo mới và chuyển hướng đến trang của nó. Quay lại $2.",
-	"wikibase-aliases-label": "Còn được gọi:",
 	"wikibase-aliases-input-help-message": "Đặt các biệt danh để giúp người ta tìm thấy thực thể này.",
 	"wikibase-aliases-empty": "Không có định rõ biệt danh.",
 	"wikibase-propertypage-datatype": "Kiểu dữ liệu",

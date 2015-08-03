@@ -98,7 +98,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entrada|entradas}}",
 	"wikibase-disambiguation-title": "Desambiguación para \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nuevo elemento $1 creado y redirigido a la página correspondiente. Volver a  $2.",
-	"wikibase-aliases-label": "Alias y nombres alternativos:",
 	"wikibase-aliases-input-help-message": "Para que sea más fácil encontrar esta entidad, puedes escribir nombres alternativos.",
 	"wikibase-aliases-empty": "No hay alias definidos.",
 	"wikibase-propertypage-datatype": "Tipo de dato",

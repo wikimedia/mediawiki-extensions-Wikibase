@@ -77,7 +77,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|sissekanne|sissekannet}}",
 	"wikibase-disambiguation-title": "Eristatavad üksused sildiga \"$1\"",
 	"wb-special-newitem-new-item-notification": "Uus üksus $1 loodud. Sind suunati selle leheküljele. Naase leheküljele \"$2\".",
-	"wikibase-aliases-label": "Teisiti:",
 	"wikibase-aliases-input-help-message": "Et seda üksust oleks lihtsam leida, saad sisestada teised võimalikud nimetused.",
 	"wikibase-aliases-empty": "Rööpkujusid pole määratud",
 	"wikibase-propertypage-datatype": "Andmetüüp",

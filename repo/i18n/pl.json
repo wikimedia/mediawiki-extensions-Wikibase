@@ -87,7 +87,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|wpis|wpisy|wpisów}}",
 	"wikibase-disambiguation-title": "Ujednoznacznienie „$1”",
 	"wb-special-newitem-new-item-notification": "Został utworzony nowy element $1 i przekierowano na jego stronę. Powrót do $2.",
-	"wikibase-aliases-label": "Inne nazwy:",
 	"wikibase-aliases-input-help-message": "Aby ta encja mogła zostać łatwiej odszukana, możesz wprowadzić nazwy alternatywne.",
 	"wikibase-aliases-empty": "Nie zdefiniowano aliasów.",
 	"wikibase-propertypage-datatype": "Typ danych",

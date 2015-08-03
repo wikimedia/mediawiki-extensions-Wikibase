@@ -94,7 +94,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|Eintrag|Einträge}}",
 	"wikibase-disambiguation-title": "Begriffsklärung für „$1“",
 	"wb-special-newitem-new-item-notification": "Es wurde das neue Datenobjekt $1 erstellt und auf seine Seite weitergeleitet. Zurück zu $2.",
-	"wikibase-aliases-label": "Auch bekannt als:",
 	"wikibase-aliases-input-help-message": "Um dieses Objekt leichter wiederzufinden, kannst du alternative Namen eingeben.",
 	"wikibase-aliases-empty": "Es wurden keine Aliasse definiert.",
 	"wikibase-propertypage-datatype": "Datentyp",

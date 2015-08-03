@@ -63,7 +63,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entri}}",
 	"wikibase-disambiguation-title": "Disambiguasi untuk \"$1\"",
 	"wb-special-newitem-new-item-notification": "Item baru $1 telah dibuat dan dialihkan ke halaman tersebut. Kembali ke $2.",
-	"wikibase-aliases-label": "Nama lain:",
 	"wikibase-aliases-input-help-message": "Jika data ini dikenal dengan lebih dari satu nama tertentu, Anda dapat memasukkan nama lain dan sinonimnya, sehingga dapat ditemukan dengan menggunakan nama-nama alternatif.",
 	"wikibase-aliases-empty": "Nama lain belum ditentukan",
 	"wikibase-propertypage-datatype": "Jenis data",

@@ -83,7 +83,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|עיול|עיולים}}",
 	"wikibase-disambiguation-title": "פירושונים עבור \"$1\"",
 	"wb-special-newitem-new-item-notification": "פריט חדש $1 נוצר והופנה לדף שלו. חזרה אל $2.",
-	"wikibase-aliases-label": "מכונה גם:",
 	"wikibase-aliases-input-help-message": "כדי שיהיה קל יותר למצוא את הישות הזה, אפשר להזין שמות חלופיים.",
 	"wikibase-aliases-empty": "לא הוגדרו כינויים.",
 	"wikibase-propertypage-datatype": "סוג נתונים",
