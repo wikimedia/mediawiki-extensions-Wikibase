@@ -84,6 +84,17 @@ call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgSpecialPages, $wgHooks, $wgAvailableRights;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
+	global $wgWBRepoDataTypes;
+
+	$wgWBRepoDataTypes = require ( __DIR__ . '/../lib/WikibaseLib.datatypes.php' );
+
+	$repoDatatypes = require ( __DIR__ . '/WikibaseRepo.datatypes.php' );
+
+	// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
+	foreach ( $repoDatatypes as $type => $repoDef ) {
+		$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : array();
+		$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
+	}
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
