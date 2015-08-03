@@ -23,7 +23,6 @@ class DateTimeValueCleaner {
 	protected $xsd11 = true;
 
 	/**
-	 *
 	 * @param bool $xsd11 Should we use XSD 1.1 standard?
 	 */
 	public function __construct( $xsd11 = true ) {
@@ -31,40 +30,13 @@ class DateTimeValueCleaner {
 	}
 
 	/**
-	 * Parse date value and fix weird numbers there.
-	 * @param string $dateValue
-	 * @throws IllegalValueException
-	 * @return array Parsed value in parts: $minus, $y, $m, $d, $time
+	 * Get standardized dateTime value, compatible with xsd:dateTime
+	 * If the value cannot be converted to it, returns null
+	 * @param TimeValue $value
+	 * @return string|null
 	 */
-	protected function parseDateValue( $dateValue ) {
-		list( $date, $time ) = explode( "T", $dateValue, 2 );
-		if ( $date[0] == "-" ) {
-			$minus = "-";
-		} else {
-			$minus = '';
-		}
-		list( $y, $m, $d ) = explode( '-', substr( $date, 1 ), 3 );
-
-		$m = (int)$m;
-		$d = (int)$d;
-		$y = ltrim( $y, '0' );
-
-		if ( $m <= 0 ) {
-			$m = 1;
-		}
-		if ( $m >= 12 ) {
-			// Why anybody would do something like that? Anyway, better to check.
-			$m = 12;
-		}
-		if ( $d <= 0 ) {
-			$d = 1;
-		}
-
-		if ( $y === "" ) {
-			// Year 0 is invalid for now, see T94064 for discussion
-			throw new IllegalValueException();
-		}
-		return array( $minus, $y, $m, $d, $time );
+	public function getStandardValue( TimeValue $value ) {
+		return $this->cleanupGregorianValue( $value->getTime(), $value->getPrecision() );
 	}
 
 	/**
@@ -128,13 +100,42 @@ class DateTimeValueCleaner {
 	}
 
 	/**
-	 * Get standardized dateTime value, compatible with xsd:dateTime
-	 * If the value cannot be converted to it, returns null
-	 * @param TimeValue $value
-	 * @return string|null
+	 * Parse date value and fix weird numbers there.
+	 *
+	 * @param string $dateValue
+	 * @throws IllegalValueException
+	 *
+	 * @return array Parsed value in parts: $minus, $y, $m, $d, $time
 	 */
-	public function getStandardValue( TimeValue $value ) {
-		return $this->cleanupGregorianValue( $value->getTime(), $value->getPrecision() );
+	protected function parseDateValue( $dateValue ) {
+		list( $date, $time ) = explode( "T", $dateValue, 2 );
+		if ( $date[0] == "-" ) {
+			$minus = "-";
+		} else {
+			$minus = '';
+		}
+		list( $y, $m, $d ) = explode( '-', substr( $date, 1 ), 3 );
+
+		$m = (int)$m;
+		$d = (int)$d;
+		$y = ltrim( $y, '0' );
+
+		if ( $m <= 0 ) {
+			$m = 1;
+		}
+		if ( $m >= 12 ) {
+			// Why anybody would do something like that? Anyway, better to check.
+			$m = 12;
+		}
+		if ( $d <= 0 ) {
+			$d = 1;
+		}
+
+		if ( $y === "" ) {
+			// Year 0 is invalid for now, see T94064 for discussion
+			throw new IllegalValueException();
+		}
+		return array( $minus, $y, $m, $d, $time );
 	}
 
 }

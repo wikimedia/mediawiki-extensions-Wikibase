@@ -17,6 +17,29 @@ use DataValues\IllegalValueException;
 class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 
 	/**
+	 * Get standardized dateTime value, compatible with xsd:dateTime
+	 * If the value cannot be converted to it, returns null
+	 * @param TimeValue $value
+	 * @return string|null
+	 */
+	public function getStandardValue( TimeValue $value ) {
+		$calendar = $value->getCalendarModel();
+		if ( $calendar == TimeValue::CALENDAR_GREGORIAN ) {
+			return $this->cleanupGregorianValue( $value->getTime(), $value->getPrecision() );
+		} elseif ( $calendar == TimeValue::CALENDAR_JULIAN ) {
+			$precision = $value->getPrecision();
+			// If we are less precise than a day, no point to convert
+			// Julian to Gregorian since we don't have enough information to do it anyway
+			if ( $precision >= TimeValue::PRECISION_DAY ) {
+				return $this->julianDateValue( $value->getTime(), $precision );
+			} else {
+				return $this->cleanupGregorianValue( $value->getTime(), $precision );
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Get Julian date value and return it as Gregorian date
 	 * @param string $dateValue
 	 * @param int $precision Date precision constant (e.g. TimeValue::PRECISION_SECOND)
@@ -54,29 +77,6 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 		// and leading 0 is not allowed for 5 digits, but sprintf counts - as digit
 		// See: http://www.w3.org/TR/xmlschema-2/#dateTime
 		return sprintf( '%s%04d-%02d-%02dT%s', ( $y < 0 ) ? '-' : '', abs( $y ), $m, $d, $time );
-	}
-
-	/**
-	 * Get standardized dateTime value, compatible with xsd:dateTime
-	 * If the value cannot be converted to it, returns null
-	 * @param TimeValue $value
-	 * @return string|null
-	 */
-	public function getStandardValue( TimeValue $value ) {
-		$calendar = $value->getCalendarModel();
-		if ( $calendar == TimeValue::CALENDAR_GREGORIAN ) {
-			return $this->cleanupGregorianValue( $value->getTime(), $value->getPrecision() );
-		} elseif ( $calendar == TimeValue::CALENDAR_JULIAN ) {
-			$precision = $value->getPrecision();
-			// If we are less precise than a day, no point to convert
-			// Julian to Gregorian since we don't have enough information to do it anyway
-			if ( $precision >= TimeValue::PRECISION_DAY ) {
-				return $this->julianDateValue( $value->getTime(), $precision );
-			} else {
-				return $this->cleanupGregorianValue( $value->getTime(), $precision );
-			}
-		}
-		return null;
 	}
 
 }
