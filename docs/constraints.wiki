@@ -29,9 +29,9 @@ to be referencing an ''existing'' entity, but it is not a violation of
 data integrity if an entity contains a "broken" reference.
 
 Soft constraints are enforced by the respective ChangeOps. Snak
-validation is largely based on the validators provided by the DataType
-objects which are constructed in WikibaseDataTypeBuilders, while the
-validators for terms come fro the TermValidatorFactory.
+validation is based on the validators provided by a DataTypeValidatorFactory
+(see datatypes.wiki for details), while the validators for terms come fro the
+TermValidatorFactory.
 
 Note that some soft constraints only require local knowledge of the
 value in questions, while others are "global" in that they apply to

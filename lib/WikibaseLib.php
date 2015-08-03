@@ -55,6 +55,9 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
+	global $wgWikibaseDataTypes;
+
+	$wgWikibaseDataTypes = require ( __DIR__ . '/WikibaseLib.datatypes.php' );
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
