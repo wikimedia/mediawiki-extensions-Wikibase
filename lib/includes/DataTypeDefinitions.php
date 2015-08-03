@@ -93,7 +93,15 @@ class DataTypeDefinitions {
 		return $this->getMapForDefinitionField( 'validator-factory-callback' );
 	}
 
-	//TODO: getParserFactoryCallbacks()
+	/**
+	 * @see BuilderBasedDataTypeValidatorFactory
+	 *
+	 * @return callable[]|string[]
+	 */
+	public function getParserFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'parser-factory-callback' );
+	}
+
 	//TODO: getFormatterFactoryCallbacks()
 
 }
