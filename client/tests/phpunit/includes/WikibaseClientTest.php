@@ -250,7 +250,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function getWikibaseClient() {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
-		return new WikibaseClient( $settings, Language::factory( 'en' ) );
+		$sites = new MockSiteStore( array() );
+		return new WikibaseClient( $settings, Language::factory( 'en' ), $sites );
 	}
 
 }

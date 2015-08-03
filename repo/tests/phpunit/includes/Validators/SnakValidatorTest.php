@@ -57,9 +57,10 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$alphabeticValidator = new TestValidator( '/^[A-Z]+$/i' );
 		$lengthValidator = new TestValidator( '/^.{1,10}$/' );
 
-		$this->dataTypeFactory = new DataTypeFactory();
-		$this->dataTypeFactory->registerDataType( new DataType( 'numeric', 'string', array() ) );
-		$this->dataTypeFactory->registerDataType( new DataType( 'alphabetic', 'string', array() ) );
+		$this->dataTypeFactory = new DataTypeFactory( array(
+			'numeric' => 'string',
+			'alphabetic' => 'string'
+		) );
 
 		$p1 = new PropertyId( 'p1' );
 		$p2 = new PropertyId( 'p2' );
