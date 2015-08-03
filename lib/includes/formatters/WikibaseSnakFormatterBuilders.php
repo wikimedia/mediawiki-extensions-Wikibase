@@ -71,17 +71,12 @@ class WikibaseSnakFormatterBuilders {
 	 * Returns a DispatchingSnakFormatter for the given format, that will dispatch based on
 	 * the snak type. The instance returned by this method will cover all standard snak types.
 	 *
-	 * @param OutputFormatSnakFormatterFactory $factory
 	 * @param string               $format
 	 * @param FormatterOptions     $options
 	 *
 	 * @return DispatchingSnakFormatter
 	 */
-	public function buildDispatchingSnakFormatter(
-		OutputFormatSnakFormatterFactory $factory,
-		$format,
-		FormatterOptions $options
-	) {
+	public function buildDispatchingSnakFormatter( $format, FormatterOptions $options ) {
 		$this->valueFormatterBuilders->applyLanguageDefaults( $options );
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 

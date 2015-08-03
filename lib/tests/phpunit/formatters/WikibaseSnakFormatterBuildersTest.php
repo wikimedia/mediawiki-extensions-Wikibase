@@ -101,10 +101,8 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testBuildDispatchingSnakFormatter( $format, $options, $type, $snak, $expected ) {
 		$builders = $this->newBuilders( $type, new ItemId( 'Q5' ) );
-		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
 
 		$formatter = $builders->buildDispatchingSnakFormatter(
-			$factory,
 			$format,
 			$options
 		);
