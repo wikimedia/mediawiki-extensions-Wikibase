@@ -35,12 +35,12 @@ class ClientEntitySerializer implements \Serializers\Serializer{
 	private $callbackFactory;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $filterLangCodes;
 
 	/**
-	 * @var array
+	 * @var LanguageFallbackChain[]
 	 */
 	private $fallbackChains;
 
@@ -74,15 +74,11 @@ class ClientEntitySerializer implements \Serializers\Serializer{
 		$serialization = $entitySerializer->serialize( $entity );
 
 		if ( !empty( $this->fallbackChains ) ) {
-			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $this->fallbackChains );
+			$serialization = $this->addEntitySerializationFallbackInfo( $serialization );
 		}
 
 		$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
-
-		$serialization = $this->filterEntitySerializationUsingLangCodes(
-			$serialization,
-			$this->filterLangCodes
-		);
+		$serialization = $this->filterEntitySerializationUsingLangCodes( $serialization );
 
 		return $this->omitEmptyArrays( $serialization );
 	}
@@ -98,23 +94,17 @@ class ClientEntitySerializer implements \Serializers\Serializer{
 
 	/**
 	 * @param array $serialization
-	 * @param LanguageFallbackChain[] $fallbackChains
 	 *
 	 * @TODO FIXME duplicated code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
-	private function addEntitySerializationFallbackInfo(
-		array $serialization,
-		array $fallbackChains
-	) {
+	private function addEntitySerializationFallbackInfo( array $serialization ) {
 		$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
-			$serialization['labels'],
-			$fallbackChains
+			$serialization['labels']
 		);
 		$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
-			$serialization['descriptions'],
-			$fallbackChains
+			$serialization['descriptions']
 		);
 		return $serialization;
 	}
@@ -161,18 +151,14 @@ class ClientEntitySerializer implements \Serializers\Serializer{
 
 	/**
 	 * @param array $serialization
-	 * @param LanguageFallbackChain[] $fallbackChains
 	 *
 	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
-	private function getTermsSerializationWithFallbackInfo(
-		array $serialization,
-		array $fallbackChains
-	) {
+	private function getTermsSerializationWithFallbackInfo( array $serialization ) {
 		$newSerialization = $serialization;
-		foreach ( $fallbackChains as $requestedLanguageCode => $fallbackChain ) {
+		foreach ( $this->fallbackChains as $requestedLanguageCode => $fallbackChain ) {
 			if ( !array_key_exists( $requestedLanguageCode, $serialization ) ) {
 				$fallbackSerialization = $fallbackChain->extractPreferredValue( $serialization );
 				if ( $fallbackSerialization !== null ) {
@@ -189,31 +175,30 @@ class ClientEntitySerializer implements \Serializers\Serializer{
 
 	/**
 	 * @param array $serialization
-	 * @param array|null $langCodes
 	 *
 	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
 	 *
 	 * @return array
 	 */
-	private function filterEntitySerializationUsingLangCodes( array $serialization, $langCodes ) {
-		if ( !empty( $langCodes ) ) {
+	private function filterEntitySerializationUsingLangCodes( array $serialization ) {
+		if ( !empty( $this->filterLangCodes ) ) {
 			if ( array_key_exists( 'labels', $serialization ) ) {
 				foreach ( $serialization['labels'] as $langCode => $languageArray ) {
-					if ( !in_array( $langCode, $langCodes ) ) {
+					if ( !in_array( $langCode, $this->filterLangCodes ) ) {
 						unset( $serialization['labels'][$langCode] );
 					}
 				}
 			}
 			if ( array_key_exists( 'descriptions', $serialization ) ) {
 				foreach ( $serialization['descriptions'] as $langCode => $languageArray ) {
-					if ( !in_array( $langCode, $langCodes ) ) {
+					if ( !in_array( $langCode, $this->filterLangCodes ) ) {
 						unset( $serialization['descriptions'][$langCode] );
 					}
 				}
 			}
 			if ( array_key_exists( 'aliases', $serialization ) ) {
 				foreach ( $serialization['aliases'] as $langCode => $languageArray ) {
-					if ( !in_array( $langCode, $langCodes ) ) {
+					if ( !in_array( $langCode, $this->filterLangCodes ) ) {
 						unset( $serialization['aliases'][$langCode] );
 					}
 				}
