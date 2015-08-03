@@ -50,9 +50,9 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$dataTypeFactory = new DataTypeFactory( array(
-			'string' => array( $this, 'newStringDataType' ),
-			'url' => array( $this, 'newStringDataType' ),
-			'globe-coordinate' => array( $this, 'newCoordinateDataType' ),
+			'string' => 'string',
+			'url' => 'string',
+			'globe-coordinate' => 'globecoordinate',
 		) );
 
 		$valueParserFactory = new ValueParserFactory( array(
@@ -83,12 +83,6 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 		return array( new RegexValidator( '/INVALID/', true, 'no-kittens' ) );
 	}
 
-	public function newStringDataType( $name ) {
-		return new DataType( $name, 'string', array() );
-	}
-
-	public function newCoordinateDataType( $name ) {
-		return new DataType( $name, 'globecoordinate', array() );
 	}
 
 	public function newNullParser() {
