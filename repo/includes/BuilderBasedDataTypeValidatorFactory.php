@@ -2,11 +2,12 @@
 
 namespace Wikibase\Repo;
 
+use OutOfBoundsException;
 use ValueValidators\ValueValidator;
 use Wikimedia\Assert\Assert;
 
 /**
- * A factory providing ValueValidators based on DataType id that uses ValidatorBuilders.
+ * A factory providing ValueValidators based on factory callbacks.
  *
  * @todo: unit tests!
  *
@@ -36,8 +37,8 @@ class BuilderBasedDataTypeValidatorFactory implements DataTypeValidatorFactory {
 	 */
 	public function getValidators( $dataTypeId ) {
 		if ( !isset( $this->validatorBuilders[ $dataTypeId ] ) ) {
-			//@todo: test me!
-			return array();
+			// NOTE: fail hard, to avoid bypassing validators if the data type is mistyped or some such.
+			throw new OutOfBoundsException( 'No validators known for data type ' . $dataTypeId );
 		}
 
 		$validators = call_user_func(
