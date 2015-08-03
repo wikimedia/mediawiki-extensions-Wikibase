@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
-use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\ChangeOp\StatementChangeOpFactory;

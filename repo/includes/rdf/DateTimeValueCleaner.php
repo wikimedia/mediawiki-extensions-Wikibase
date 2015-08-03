@@ -2,8 +2,8 @@
 
 namespace Wikibase\Rdf;
 
-use DataValues\TimeValue;
 use DataValues\IllegalValueException;
+use DataValues\TimeValue;
 
 /**
  * Very basic cleaner that assumes the date is Gregorian and only
