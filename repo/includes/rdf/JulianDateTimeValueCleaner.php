@@ -19,7 +19,9 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 	/**
 	 * Get standardized dateTime value, compatible with xsd:dateTime
 	 * If the value cannot be converted to it, returns null
+	 *
 	 * @param TimeValue $value
+	 *
 	 * @return string|null
 	 */
 	public function getStandardValue( TimeValue $value ) {
@@ -31,7 +33,7 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 			// If we are less precise than a day, no point to convert
 			// Julian to Gregorian since we don't have enough information to do it anyway
 			if ( $precision >= TimeValue::PRECISION_DAY ) {
-				return $this->julianDateValue( $value->getTime(), $precision );
+				return $this->julianDateValue( $value->getTime() );
 			} else {
 				return $this->cleanupGregorianValue( $value->getTime(), $precision );
 			}
@@ -41,11 +43,12 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 
 	/**
 	 * Get Julian date value and return it as Gregorian date
+	 *
 	 * @param string $dateValue
-	 * @param int $precision Date precision constant (e.g. TimeValue::PRECISION_SECOND)
+	 *
 	 * @return string|null Value compatible with xsd:dateTime type, null if we failed to parse
 	 */
-	protected function julianDateValue( $dateValue, $precision ) {
+	private function julianDateValue( $dateValue ) {
 		try {
 			list( $minus, $y, $m, $d, $time ) = $this->parseDateValue( $dateValue );
 		} catch ( IllegalValueException $e ) {
