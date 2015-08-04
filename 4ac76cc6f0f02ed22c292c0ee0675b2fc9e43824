@@ -34,6 +34,24 @@
       "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9f5fce43",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-08-04T04:29:01Z",
+      "side": 1,
+      "message": "You even decrease the performance for language codes which have a \u0027-\u0027 inside because you add a function call.\nIs this function a bottleneck? The performance can improved by caching.",
+      "parentUuid": "8ec42329_eb23b850",
+      "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
