@@ -30,6 +30,7 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
+use ValueParsers\ValueParser;
 
 /**
  * File defining the hook handlers for the Wikibase extension.
@@ -44,6 +45,148 @@ use WikiPage;
  * @author Jens Ohlig
  */
 final class RepoHooks {
+
+	public static function registerExtension() {
+		global $wgGroupPermissions, $wgAvailableRights, $wgHooks, $wgWBRepoSettings, $wgResourceModules, $wgValueParsers;
+
+		if ( defined( 'WikiBase' ) ) {
+			// Do not initialize more than once.
+			return 1;
+		}
+
+		define( 'WikiBase', 'WB'
+			. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
+
+		/**
+		 * Registry of ValueParsers classes or factory callbacks, by datatype.
+		 * @note: that parsers are also registered under their old names for backwards compatibility,
+		 * for use with the deprecated 'parser' parameter of the wbparsevalue API module.
+		 */
+		$wgValueParsers = array();
+
+		if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
+			include_once __DIR__ . '/../view/WikibaseView.php';
+		}
+
+		if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
+			throw new Exception( 'Wikibase depends on WikibaseView.' );
+		}
+
+		if ( !defined( 'PURTLE_VERSION' ) ) {
+			include_once __DIR__ . '/../purtle/Purtle.php';
+		}
+
+		if ( !defined( 'PURTLE_VERSION' ) ) {
+			throw new Exception( 'Wikibase depends on Purtle.' );
+		}
+
+		// constants
+		define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+		define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
+
+		// rights
+		// names should be according to other naming scheme
+		$wgGroupPermissions['*']['item-term']			= true;
+		$wgGroupPermissions['*']['property-term']		= true;
+		$wgGroupPermissions['*']['item-merge']			= true;
+		$wgGroupPermissions['*']['item-redirect']		= true;
+		$wgGroupPermissions['*']['property-create']		= true;
+
+		$wgAvailableRights[] = 'item-term';
+		$wgAvailableRights[] = 'property-term';
+		$wgAvailableRights[] = 'item-merge';
+		$wgAvailableRights[] = 'item-redirect';
+		$wgAvailableRights[] = 'property-create';
+
+		// This is somewhat hackish, make WikibaseValueParserBuilders, analogous to WikibaseValueFormatterBuilders
+		$newEntityIdParser = function( ValueParsers\ParserOptions $options ) {
+			//TODO: make ID builders configurable.
+			$builders = \Wikibase\DataModel\Services\EntityId\BasicEntityIdParser::getBuilders();
+			return new \Wikibase\Lib\EntityIdValueParser(
+				new \Wikibase\DataModel\Services\EntityId\DispatchingEntityIdParser( $builders, $options )
+			);
+		};
+
+		// all entity types use the same parser
+		$wgValueParsers['wikibase-item'] = $newEntityIdParser;
+		$wgValueParsers['wikibase-property'] = $newEntityIdParser;
+
+		// deprecated: 'wikibase-entityid' is not a datatype. Alias kept for backwards compatibility.
+		$wgValueParsers['wikibase-entityid'] = $newEntityIdParser;
+
+		$wgValueParsers['quantity'] = function( \ValueParsers\ParserOptions $options ) {
+			$language = \Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
+			$unlocalizer = new \Wikibase\Lib\MediaWikiNumberUnlocalizer( $language );
+			return new \ValueParsers\QuantityParser( $options, $unlocalizer );
+		};
+
+		$wgValueParsers['time'] = function( \ValueParsers\ParserOptions $options ) {
+			$factory = new \Wikibase\Lib\Parsers\TimeParserFactory( $options );
+			return $factory->getTimeParser();
+		};
+
+		$wgValueParsers['globe-coordinate'] = 'DataValues\Geo\Parsers\GlobeCoordinateParser';
+
+		// deprecated: 'globecoordinate' is not a datatype. Alias kept for backwards compatibility.
+		$wgValueParsers['globecoordinate'] = '\DataValues\Geo\Parsers\GlobeCoordinateParser';
+
+		$wgValueParsers['monolingualtext'] = '\Wikibase\Parsers\MonolingualTextParser';
+
+		// Use NullParser for datatypes that use StringValue
+		$wgValueParsers['commonsMedia'] = 'ValueParsers\NullParser';
+		$wgValueParsers['string'] = 'ValueParsers\NullParser';
+		$wgValueParsers['url'] = 'ValueParsers\NullParser';
+
+		// deprecated: 'null' is not a datatype. Alias kept for backwards compatibility.
+		$wgValueParsers['null'] = 'ValueParsers\NullParser';
+
+		$wgHooks['UnitTestsList'][] = '\Wikibase\RepoHooks::registerUnitTests';
+
+		$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\RepoHooks::onSchemaUpdate';
+
+		//FIXME: handle other types of entities with autocomments too!
+		$wgHooks['FormatAutocomments'][] = array(
+			'Wikibase\RepoHooks::onFormat',
+			array( CONTENT_MODEL_WIKIBASE_ITEM, 'wikibase-item' )
+		);
+		$wgHooks['FormatAutocomments'][] = array(
+			'Wikibase\RepoHooks::onFormat',
+			array( CONTENT_MODEL_WIKIBASE_PROPERTY, 'wikibase-property' )
+		);
+
+		$wgHooks['SetupAfterCache'][] = '\Wikibase\RepoHooks::onSetupAfterCache';
+
+		$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
+
+		// Resource Loader Modules:
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			include __DIR__ . '/resources/Resources.php'
+		);
+
+		$wgWBRepoSettings = array_merge(
+			require __DIR__ . '/../lib/config/WikibaseLib.default.php',
+			require __DIR__ . '/config/Wikibase.default.php'
+		);
+
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			include_once __DIR__ . '/config/Wikibase.experimental.php';
+		}
+	}
+
+	public static function onExtensionSetup() {
+		// Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
+		if (
+			!defined( 'WikibaseLib' ) &&
+			!\ExtensionRegistry::getInstance()->isLoaded( 'Wikibase/lib' )
+		) {
+			include_once __DIR__ . '/../lib/WikibaseLib.php';
+		}
+
+		if ( !defined( 'WikibaseLib' ) ) {
+			throw new Exception( 'Wikibase depends on the WikibaseLib extension.' );
+		}
+	}
 
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
