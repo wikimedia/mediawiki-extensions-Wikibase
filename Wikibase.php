@@ -33,13 +33,21 @@
 if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
 	require_once __DIR__ . '/repo/Wikibase.php';
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
-		require_once __DIR__ . '/repo/ExampleSettings.php';
+		call_user_func(
+			function () {
+				require_once __DIR__ . '/repo/ExampleSettings.php';
+			}
+		);
 	}
 }
 
 if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnableWikibaseClient'] ) {
 	require_once __DIR__ . '/client/WikibaseClient.php';
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
-		require_once __DIR__ . '/client/ExampleSettings.php';
+		call_user_func(
+			function () {
+				require_once __DIR__ . '/client/ExampleSettings.php';
+			}
+		);
 	}
 }
