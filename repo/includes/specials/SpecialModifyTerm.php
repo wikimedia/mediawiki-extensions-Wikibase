@@ -11,6 +11,8 @@ use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -187,9 +189,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		if ( $this->languageCode === null ) {
 			$this->languageCode = $this->getLanguage()->getCode();
 		}
-		if ( $this->value === null ) {
-			$this->value = $this->getValue( $entity, $this->languageCode );
-		}
+
+		$this->setValueIfNull( $entity );
 
 		$valueinput = Html::input(
 			'value',
@@ -261,6 +262,16 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		}
 	}
 
+	private function setValueIfNull( FingerprintProvider $fingerprintProvider = null ) {
+		if ( $this->value === null ) {
+			if ( $fingerprintProvider === null ) {
+				$this->value = '';
+			} else {
+				$this->value = $this->getValue( $fingerprintProvider->getFingerprint(), $this->languageCode );
+			}
+		}
+	}
+
 	/**
 	 * Returning the posted value of the request.
 	 *
@@ -275,12 +286,12 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity|null $entity
+	 * @param Fingerprint $fingerprint
 	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
-	abstract protected function getValue( $entity, $languageCode );
+	abstract protected function getValue( Fingerprint $fingerprint, $languageCode );
 
 	/**
 	 * Setting the value of the entity name by the given language

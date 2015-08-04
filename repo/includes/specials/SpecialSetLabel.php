@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Summary;
 
 /**
@@ -37,13 +38,15 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Entity $entity
+	 * @param Fingerprint $fingerprint
 	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
-	protected function getValue( $entity, $languageCode ) {
-		return $entity === null ? '' : $entity->getLabel( $languageCode );
+	protected function getValue( Fingerprint $fingerprint, $languageCode ) {
+		return $fingerprint->hasLabel( $languageCode )
+			? $fingerprint->getLabel( $languageCode )->getText()
+			: '';
 	}
 
 	/**
