@@ -5,6 +5,7 @@ namespace Wikibase;
 use Action;
 use BaseTemplate;
 use ChangesList;
+use ExtensionRegistry;
 use FormOptions;
 use IContextSource;
 use Message;
@@ -48,6 +49,94 @@ use Wikibase\DataModel\SiteLink;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 final class ClientHooks {
+
+	public static function registerExtension() {
+		global $wgWBClientDataTypes, $wgWBClientSettings, $wgExtensionCredits, $wgAPIPropModules,
+		$wgAPIMetaModules, $wgResourceModules, $wgHooks, $wgWBClientSettings;
+
+		if ( defined( 'WBC_VERSION' ) ) {
+			// Do not initialize more than once.
+			return;
+		}
+
+		define( 'WBC_VERSION', '0.5 alpha'
+			. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
+
+		define( 'WBC_DIR', __DIR__ );
+
+		$wgExtensionCredits['wikibase'][] = array(
+			'path' => __DIR__,
+			'name' => 'Wikibase Client',
+			'version' => WBC_VERSION,
+			'author' => array(
+				'The Wikidata team', // TODO: link?
+			),
+			'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client',
+			'descriptionmsg' => 'wikibase-client-desc'
+		);
+
+		$wgWBClientDataTypes = require ( __DIR__ . '/../lib/WikibaseLib.datatypes.php' );
+		$clientDatatypes = require ( __DIR__ . '/WikibaseClient.datatypes.php' );
+
+		// merge WikibaseClient.datatypes.php into $wgWBClientDataTypes
+		foreach ( $clientDatatypes as $type => $clientDef ) {
+			$baseDef = isset( $wgWBClientDataTypes[$type] ) ? $wgWBClientDataTypes[$type] : array();
+			$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
+		}
+
+		$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
+
+		// api modules
+		$wgAPIMetaModules['wikibase'] = array(
+			'class' => 'Wikibase\ApiClientInfo',
+			'factory' => function( ApiQuery $apiQuery, $moduleName ) {
+				return new Wikibase\ApiClientInfo(
+					Wikibase\Client\WikibaseClient::getDefaultInstance()->getSettings(),
+					$apiQuery,
+					$moduleName
+				);
+			}
+		);
+
+		$wgAPIPropModules['pageterms'] = array(
+			'class' => 'Wikibase\Client\Api\PageTerms',
+			'factory' => function ( ApiQuery $query, $moduleName ) {
+				$client = \Wikibase\Client\WikibaseClient::getDefaultInstance();
+				return new Wikibase\Client\Api\PageTerms(
+					$client->getStore()->getTermIndex(),
+					$client->getStore()->getEntityIdLookup(),
+					$query,
+					$moduleName
+				);
+			}
+		);
+
+		// Resource loader modules
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			include __DIR__ . '/resources/Resources.php'
+		);
+
+		$wgWBClientSettings = array_merge(
+			require __DIR__ . '/../lib/config/WikibaseLib.default.php',
+			require __DIR__ . '/config/WikibaseClient.default.php'
+		);
+
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			include_once __DIR__ . '/config/WikibaseClient.experimental.php';
+		}
+	}
+
+	public static function onExtensionSetup() {
+		// Include the WikibaseLib extension if that hasn't been done yet, since it's required for WikibaseClient to work.
+		if ( !defined( 'WBL_VERSION' ) ) {
+			include_once __DIR__ . '/../lib/WikibaseLib.php';
+		}
+
+		if ( !defined( 'WBL_VERSION' ) ) {
+			throw new Exception( 'WikibaseClient depends on the WikibaseLib extension.' );
+		}
+	}
 
 	/**
 	 * @see NamespaceChecker::isWikibaseEnabled
