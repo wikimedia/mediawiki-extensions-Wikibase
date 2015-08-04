@@ -30,6 +30,10 @@ call_user_func( function() {
 	define( 'WB_NS_PROPERTY', $baseNs + 2 );
 	define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
 
+	// constants
+	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
+
 	// Register extra namespaces.
 	$wgExtraNamespaces[WB_NS_ITEM] = 'Item';
 	$wgExtraNamespaces[WB_NS_ITEM_TALK] = 'Item_talk';

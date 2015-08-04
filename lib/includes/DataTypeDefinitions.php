@@ -50,7 +50,7 @@ class DataTypeDefinitions {
 	 * definitions. Data type definitions are associative arrays, refer to the class level
 	 * documentation.
 	 */
-	public function registerDataTypes( array $dataTypeDefinitions ) {
+	public function registerDataTypes( $dataTypeDefinitions ) {
 		Assert::parameterElementType( 'array', $dataTypeDefinitions, '$dataTypeDefinitions' );
 
 		foreach ( $dataTypeDefinitions as $id => $def ) {
