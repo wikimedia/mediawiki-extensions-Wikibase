@@ -7,7 +7,7 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
-use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -111,12 +111,12 @@ class RemoveQualifiers extends ModifyClaim {
 
 	/**
 	 * @param array $params
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 *
 	 * @return string[]
 	 */
-	private function getQualifierHashesFromParams( array $params, Claim $claim ) {
-		$qualifiers = $claim->getQualifiers();
+	private function getQualifierHashesFromParams( array $params, Statement $statement ) {
+		$qualifiers = $statement->getQualifiers();
 		$hashes = array();
 
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
