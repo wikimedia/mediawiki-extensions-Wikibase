@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_15df3d11",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-04T10:38:23Z",
+      "side": 1,
+      "message": "It\u0027s the localizable description of an API example shown in the self-documentation of the API module. Sicne I added a new parameter, I also added a new example.",
+      "parentUuid": "8ec42329_cfc6846b",
+      "revId": "5d1adb3009c9db95bd9bc3e358a13a25d55baa16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_ef98207e",
         "filename": "repo/includes/BuilderBasedDataTypeValidatorFactory.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_15065d89",
+        "filename": "repo/includes/BuilderBasedDataTypeValidatorFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-04T10:38:23Z",
+      "side": 1,
+      "message": "did not return kittens!!!111eleven!\n\nSeriously though: the check just tests for an array, but the person who reads the error message will probably want to know an array of *what* is expected here.",
+      "parentUuid": "8ec42329_ef98207e",
+      "revId": "5d1adb3009c9db95bd9bc3e358a13a25d55baa16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_8f8e3c29",
         "filename": "repo/includes/api/ParseValue.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2015-07-17T22:21:00Z",
       "side": 1,
       "message": "|null",
+      "revId": "5d1adb3009c9db95bd9bc3e358a13a25d55baa16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_95f1ed93",
+        "filename": "repo/includes/api/ParseValue.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-04T10:38:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_8f8e3c29",
       "revId": "5d1adb3009c9db95bd9bc3e358a13a25d55baa16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
