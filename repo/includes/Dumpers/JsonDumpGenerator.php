@@ -7,6 +7,9 @@ use MWContentSerializationException;
 use MWException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\Lib\Serialization\CallbackFactory;
+use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
@@ -40,6 +43,21 @@ class JsonDumpGenerator extends DumpGenerator {
 	private $entityLookup;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $dataTypeLookup;
+
+	/**
+	 * @var CallbackFactory
+	 */
+	private $callbackFactory;
+
+	/**
+	 * @var SerializationModifier
+	 */
+	private $modifier;
+
+	/**
 	 * @var bool
 	 */
 	private $useSnippets = false;
@@ -49,6 +67,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	 * @param EntityLookup $lookup Must not resolve redirects
 	 * @param Serializer $entitySerializer
 	 * @param EntityPrefetcher $entityPrefetcher
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -56,7 +75,8 @@ class JsonDumpGenerator extends DumpGenerator {
 		$out,
 		EntityLookup $lookup,
 		Serializer $entitySerializer,
-		EntityPrefetcher $entityPrefetcher
+		EntityPrefetcher $entityPrefetcher,
+		PropertyDataTypeLookup $dataTypeLookup
 	) {
 		parent::__construct( $out, $entityPrefetcher );
 		if ( $lookup instanceof RedirectResolvingEntityLookup ) {
@@ -65,6 +85,10 @@ class JsonDumpGenerator extends DumpGenerator {
 
 		$this->entitySerializer = $entitySerializer;
 		$this->entityLookup = $lookup;
+		$this->dataTypeLookup = $dataTypeLookup;
+
+		$this->callbackFactory = new CallbackFactory();
+		$this->modifier = new SerializationModifier();
 	}
 
 	/**
@@ -117,9 +141,52 @@ class JsonDumpGenerator extends DumpGenerator {
 		}
 
 		$data = $this->entitySerializer->serialize( $entity );
+
+		$data = $this->injectEntitySerializationWithDataTypes( $data );
+
 		$json = $this->encode( $data );
 
 		return $json;
+	}
+
+	/**
+	 * @param array $serialization
+	 *
+	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 *
+	 * @return array
+	 */
+	private function injectEntitySerializationWithDataTypes( array $serialization ) {
+		$serialization = $this->modifier->modifyUsingCallback(
+			$serialization,
+			'claims/*/*/mainsnak',
+			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
+		);
+		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+			$serialization,
+			'claims/*/*/qualifiers'
+		);
+		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+			$serialization,
+			'claims/*/*/references/*/snaks'
+		);
+		return $serialization;
+	}
+
+	/**
+	 * @param array $array
+	 * @param string $path
+	 *
+	 * @TODO FIXME duplicated / similar code in Repo ResultBuilder
+	 *
+	 * @return array
+	 */
+	private function getArrayWithDataTypesInGroupedSnakListAtPath( array $array, $path ) {
+		return $this->modifier->modifyUsingCallback(
+			$array,
+			$path,
+			$this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup )
+		);
 	}
 
 	/**
