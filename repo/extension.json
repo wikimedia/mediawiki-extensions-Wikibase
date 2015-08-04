@@ -1,0 +1,18 @@
+{
+	"name": "Wikibase Repository",
+	"type": "wikibase",
+	"requires": {
+		"MediaWiki": ">= 1.27.0"
+	},
+	"callback": "Wikibase\\RepoHooks::registerExtension",
+	"MessagesDirs": {
+		"Wikibase": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"WikibaseAlias": "Wikibase.i18n.alias.php",
+		"WikibaseNS": "Wikibase.i18n.namespaces.php"
+	},
+	"manifest_version": 1
+}
