@@ -30,15 +30,6 @@
  * @licence GNU GPL v2+
  */
 
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( 'Not an entry point.' );
-}
-
-// Needs to be 1.26c because version_compare() works in confusing ways.
-if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
-}
-
 if ( defined( 'WBL_VERSION' ) ) {
 	// Do not initialize more than once.
 	return 1;
@@ -53,52 +44,17 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
-
-	$wgExtensionCredits['wikibase'][] = array(
-		'path' => __DIR__,
-		'name' => 'WikibaseLib',
-		'version' => WBL_VERSION,
-		'author' => array(
-			'The Wikidata team', // TODO: link?
-		),
-		'url' => 'https://www.mediawiki.org/wiki/Extension:WikibaseLib',
-		'descriptionmsg' => 'wikibase-lib-desc'
-	);
-
 	define( 'SUMMARY_MAX_LENGTH', 250 );
-
-	// i18n
-	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/i18n';
-
-	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
-
-	// Hooks
-	$wgHooks['UnitTestsList'][] = 'Wikibase\LibHooks::registerPhpUnitTests';
-	$wgHooks['ResourceLoaderTestModules'][] = 'Wikibase\LibHooks::registerQUnitTests';
-	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\LibHooks::onResourceLoaderRegisterModules';
-
-	/**
-	 * Called when generating the extensions credits, use this to change the tables headers.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ExtensionTypes
-	 *
-	 * @since 0.1
-	 *
-	 * @param array &$extensionTypes
-	 *
-	 * @return boolean
-	 */
-	$wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
-		// @codeCoverageIgnoreStart
-		$extensionTypes['wikibase'] = wfMessage( 'version-wikibase' )->text();
-
-		return true;
-		// @codeCoverageIgnoreEnd
-	};
-
-	// Resource Loader Modules:
-	$wgResourceModules = array_merge(
-		$wgResourceModules,
-		include __DIR__ . '/resources/Resources.php'
-	);
+	if ( function_exists( 'wfLoadExtension' ) ) {
+		wfLoadExtension( 'WikibaseLib', __DIR__.'/extension.json' );
+		// Keep i18n globals so mergeMessageFileList.php doesn't break
+		$GLOBALS['wgMessagesDirs']['WikibaseLib'] = __DIR__ . '/i18n';
+		/* wfWarn(
+			'Deprecated PHP entry point used for WikibaseLib extension. Please use wfLoadExtension instead, ' .
+			'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
+		); */
+		return;
+	} else {
+		die( 'This version of the WikibaseLib extension requires MediaWiki 1.25+' );
+	}
 } );
