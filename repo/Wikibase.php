@@ -30,21 +30,12 @@
  * @licence GNU GPL v2+
  */
 
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( 'Not an entry point.' );
-}
-
 if ( defined( 'WB_VERSION' ) ) {
 	// Do not initialize more than once.
 	return 1;
 }
 
 define( 'WB_VERSION', '0.5 alpha' );
-
-// Needs to be 1.26c because version_compare() works in confusing ways.
-if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
-}
 
 /**
  * Registry of ValueParsers classes or factory callbacks, by datatype.
@@ -79,6 +70,13 @@ if ( !defined( 'PURTLE_VERSION' ) ) {
 }
 
 call_user_func( function() {
+	/* 
+	 * This is a workaround so tests pass.
+	 * Since this uses a callback in extension.json you carn't do a callback within a callback without causing probems.
+	 * So doing this way the tests work.
+	 *
+	 * It is recommended to use extension.json without loading this file.
+	 */
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks, $wgAvailableRights;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
@@ -256,4 +254,19 @@ call_user_func( function() {
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
 	);
+	if ( function_exists( 'wfLoadExtension' ) ) {
+		wfLoadExtension( 'WikibaseRepository', __DIR__.'/extension.json' );
+		// Keep i18n globals so mergeMessageFileList.php doesn't break
+		$GLOBALS['wgMessagesDirs']['Wikibase'] = __DIR__ . '/i18n';
+		$GLOBALS['wgExtensionMessagesFiles']['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
+		$GLOBALS['wgExtensionMessagesFiles']['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
+		/* wfWarn(
+			'Deprecated PHP entry point used for Wikibase repo extension. Please use wfLoadExtension instead, ' .
+			'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
+		); */
+		return;
+	} else {
+		die( 'This version of the Wikibase repo extension requires MediaWiki 1.25+' );
+	}
+
 } );
