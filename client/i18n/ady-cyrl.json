@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bedynokue.nart",
-			"SamGamgee"
+			"SamGamgee",
+			"TheRossatron"
 		]
 	},
 	"tooltip-t-wikibase": "Ехьыл1агъэу хъарзынэщым и элементгорэм гъэзэгъэ зэпыщ",
@@ -11,6 +12,7 @@
 	"wikibase-editlinks": "Зэпыщэмэ я1аз",
 	"wikibase-editlinkstitle": "Бзэзэпыщэмэ я1аз",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Гъэбылъ",
 	"wikibase-rc-hide-wikidata-show": "Къэгъэлъагъу",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} и е1эзэныгъэ"
 }

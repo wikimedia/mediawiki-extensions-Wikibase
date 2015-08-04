@@ -39,7 +39,7 @@
 	"wikibase-validator-invalid": "Магийна доцу маьӀна",
 	"wikibase-validator-missing-field": "Хила еза меттиг яц '$1'",
 	"datatypes-type-wikibase-item": "Элемент",
-	"datatypes-type-commonsMedia": "Медиафайл Викидlайуьллуче чохь",
+	"datatypes-type-commonsMedia": "Медиафайл Викигуламехь",
 	"version-wikibase": "Вики-баз",
 	"wikibase-time-precision-Gannum": "$1 миллиард шо",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|шо|шераш}}",
