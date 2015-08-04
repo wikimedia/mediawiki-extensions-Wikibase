@@ -1,0 +1,15 @@
+{
+	"name": "Wikibase",
+	"version": "0.5 alpha",
+	"author": [
+		"The Wikidata team"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Wikibase",
+	"type": "wikibase",
+	"license-name": "GPL-2.0+",
+	"requires": {
+		"MediaWiki": ">= 1.27.0"
+	},
+	"callback": "Wikibase\\Hooks::registerExtension",
+	"manifest_version": 1
+}

@@ -23,23 +23,16 @@
  */
 
 /**
- * Testing entry point. Do not use for production setups!
+ * As of MediaWiki 1.27 this is now the entry point.
  *
  * @see README.md
  * @see http://wikiba.se
  * @licence GNU GPL v2+
  */
 
-if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
-	require_once __DIR__ . '/repo/Wikibase.php';
-	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
-		require_once __DIR__ . '/repo/ExampleSettings.php';
-	}
-}
-
-if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnableWikibaseClient'] ) {
-	require_once __DIR__ . '/client/WikibaseClient.php';
-	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
-		require_once __DIR__ . '/client/ExampleSettings.php';
-	}
+if ( function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'Wikibase', __DIR__ . '/extension.json' );
+	return;
+} else {
+	die( 'This version of the Wikibase extension requires MediaWiki 1.27+' );
 }
