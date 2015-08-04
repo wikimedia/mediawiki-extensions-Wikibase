@@ -21,7 +21,6 @@ if [ $BUILD = true ]; then
 fi
 
 function apply_client_settings {
-  echo "client"
   echo '$wgEnableWikibaseRepo = false;' >> LocalSettings.php
   echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
   # $wgWikimediaJenkinsCI is only set later, so need to set it here, too
