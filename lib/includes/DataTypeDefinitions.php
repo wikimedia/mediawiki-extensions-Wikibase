@@ -28,7 +28,7 @@ class DataTypeDefinitions {
 	/**
 	 * @var array[]
 	 */
-	private $dataTypeDefinitions = array();
+	public $dataTypeDefinitions = array();
 
 	/**
 	 * @param array[] $dataTypeDefinitions An associative array mapping data type ids to data type
