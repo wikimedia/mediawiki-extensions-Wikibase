@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;

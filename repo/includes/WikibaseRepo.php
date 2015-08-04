@@ -53,7 +53,6 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Parsers\SuffixEntityIdParser;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
-use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityLookup;

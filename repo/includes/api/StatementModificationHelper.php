@@ -22,7 +22,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\Lib\SnakConstructionService;
+use Wikibase\Repo\SnakConstructionService;
 use Wikibase\Summary;
 
 /**
