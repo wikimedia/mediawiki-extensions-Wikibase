@@ -18,7 +18,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
-use Wikibase\Lib\Store\UnresolvedRedirectRevisionException;
 use Wikibase\RedirectRevision;
 
 /**
