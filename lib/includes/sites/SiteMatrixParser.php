@@ -128,7 +128,7 @@ class SiteMatrixParser {
 				continue;
 			}
 
-			$site = $this->getSiteFromSiteData( $siteData, $langGroup['code'], false );
+			$site = $this->getSiteFromSiteData( $siteData );
 			$site->setLanguageCode( $langGroup['code'] );
 			$siteId = $site->getGlobalId();
 			$sites[$siteId] = $site;
