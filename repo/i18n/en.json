@@ -135,6 +135,8 @@
 	"wikibase-itembytitle-submit": "Search",
 	"wikibase-itembytitle-create": "You can also [$1 create an item].",
 	"wikibase-itembytitle-summary": "Special:ItemByTitle is used to find the corresponding item for a given page on a connected site. <br /> The left field, \"Site:\", is where you enter the language and site code. <br /> For the right field, \"Page:\", you must put in the exact title of the page as it appears on the connected site.",
+	"wikibase-itembytitle-lookup-error-site": "Please enter an existing site.",
+	"wikibase-itembytitle-lookup-error-item_not_found": "No item was found.",
 	"special-gotolinkedpage": "Go to linked page",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Go to linked page by site and item",
 	"wikibase-gotolinkedpage-lookup-site": "Site:",

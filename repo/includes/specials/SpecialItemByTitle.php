@@ -235,6 +235,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		);
 
 		if ( $siteExists && isset( $page ) ) {
+			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-lookup-error-item_not_found' ) );
 			$createLink = $this->getTitleFor( 'NewItem' );
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
@@ -245,6 +246,10 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 					->parse()
 				. Html::closeElement( 'div' )
 			);
+		}
+
+		if ( !$siteExists && !empty( $page ) ) {
+			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-lookup-error-site' ) );
 		}
 	}
 
