@@ -70,7 +70,7 @@
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview textarea {
-	white-space: normal; /* IE implicitly inherits nowrap from container (.wikibase-*view-container) */
+	white-space: pre-wrap; /* IE implicitly inherits nowrap from container (.wikibase-*view-container) */
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-label input,
