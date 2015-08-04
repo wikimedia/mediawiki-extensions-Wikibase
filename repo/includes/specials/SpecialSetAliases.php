@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Summary;
 
 /**
@@ -37,13 +38,17 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Entity $entity
+	 * @param Fingerprint $fingerprint
 	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
-	protected function getValue( $entity, $languageCode ) {
-		return $entity === null ? '' : implode( '|', $entity->getAliases( $languageCode ) );
+	protected function getValue( Fingerprint $fingerprint, $languageCode ) {
+		if ( $fingerprint->hasAliasGroup( $languageCode ) ) {
+			return implode( '|', $fingerprint->getAliasGroup( $languageCode )->getAliases() );
+		}
+
+		return '';
 	}
 
 	/**
