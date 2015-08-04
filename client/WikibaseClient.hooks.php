@@ -45,6 +45,94 @@ use Wikibase\Lib\AutoCommentFormatter;
  */
 final class ClientHooks {
 
+	public static function registerExtension() {
+		global $wgWBClientDataTypes, $wgWBClientSettings, $wgExtensionCredits, $wgAPIPropModules,
+		$wgAPIMetaModules, $wgResourceModules, $wgHooks, $wgWBClientSettings;
+
+		if ( defined( 'WBC_VERSION' ) ) {
+			// Do not initialize more than once.
+			return;
+		}
+
+		define( 'WBC_VERSION', '0.5 alpha' );
+
+		define( 'WBC_DIR', __DIR__ );
+
+		// Include the WikibaseLib extension if that hasn't been done yet, since it's required for WikibaseClient to work.
+		if ( !defined( 'WBL_VERSION' ) ) {
+			include_once __DIR__ . '/../lib/WikibaseLib.php';
+		}
+
+		if ( !defined( 'WBL_VERSION' ) ) {
+			throw new Exception( 'WikibaseClient depends on the WikibaseLib extension.' );
+		}
+
+		$wgExtensionCredits['wikibase'][] = array(
+			'path' => __DIR__,
+			'name' => 'Wikibase Client',
+			'version' => WBC_VERSION,
+		);
+
+		$wgWBClientDataTypes = require ( __DIR__ . '/../lib/WikibaseLib.datatypes.php' );
+		$clientDatatypes = require ( __DIR__ . '/WikibaseClient.datatypes.php' );
+
+		// merge WikibaseClient.datatypes.php into $wgWBClientDataTypes
+		foreach ( $clientDatatypes as $type => $clientDef ) {
+			$baseDef = isset( $wgWBClientDataTypes[$type] ) ? $wgWBClientDataTypes[$type] : array();
+			$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
+		}
+
+		// api modules
+		$wgAPIMetaModules['wikibase'] = array(
+			'class' => 'Wikibase\ApiClientInfo',
+			'factory' => function( ApiQuery $apiQuery, $moduleName ) {
+				return new Wikibase\ApiClientInfo(
+					Wikibase\Client\WikibaseClient::getDefaultInstance()->getSettings(),
+					$apiQuery,
+					$moduleName
+				);
+			}
+		);
+
+		$wgAPIPropModules['pageterms'] = array(
+			'class' => 'Wikibase\Client\Api\PageTerms',
+			'factory' => function ( ApiQuery $query, $moduleName ) {
+				// FIXME: HACK: make pageterms work directly on entity pages on the repo.
+				// We should instead use an EntityIdLookup that combines the repo and the client
+				// implementation, see T115117.
+				// NOTE: when changing repo and/or client integration, remember to update the
+				// self-documentation of the API module in the "apihelp-query+pageterms-description"
+				// message and the PageTerms::getExamplesMessages() method.
+				if ( defined( 'WB_VERSION' ) ) {
+					$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+					$termIndex = $repo->getStore()->getTermIndex();
+					$entityIdLookup = $repo->getEntityContentFactory();
+				} else {
+					$client = \Wikibase\Client\WikibaseClient::getDefaultInstance();
+					$termIndex = $client->getStore()->getTermIndex();
+					$entityIdLookup = $client->getStore()->getEntityIdLookup();
+				}
+				return new Wikibase\Client\Api\PageTerms(
+					$termIndex,
+					$entityIdLookup,
+					$query,
+					$moduleName
+				);
+			}
+		);
+
+		// Resource loader modules
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			include __DIR__ . '/resources/Resources.php'
+		);
+
+		$wgWBClientSettings = array_merge(
+			require __DIR__ . '/../lib/config/WikibaseLib.default.php',
+			require __DIR__ . '/config/WikibaseClient.default.php'
+		);
+	}
+
 	/**
 	 * @see NamespaceChecker::isWikibaseEnabled
 	 *
