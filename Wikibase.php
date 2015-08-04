@@ -31,14 +31,14 @@
  */
 
 if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
-	require_once __DIR__ . '/repo/Wikibase.php';
+	wfLoadExtensions( array( 'Wikibase/repo' ) );
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
 		require_once __DIR__ . '/repo/ExampleSettings.php';
 	}
 }
 
 if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnableWikibaseClient'] ) {
-	require_once __DIR__ . '/client/WikibaseClient.php';
+	wfLoadExtensions( array( 'Wikibase/client' ) );
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
 		require_once __DIR__ . '/client/ExampleSettings.php';
 	}
