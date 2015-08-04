@@ -114,7 +114,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$itemContent = null;
 
 		// If there are enough data, then try to lookup the item content
-		if ( isset( $site ) && isset( $page ) ) {
+		if ( $site !== '' && $page !== '' ) {
 			// Try to get a item content
 			$siteId = $this->stringNormalizer->trimToNFC( $site ); // no stripping of underscores here!
 			$pageName = $this->stringNormalizer->trimToNFC( $page );
@@ -191,34 +191,39 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				array(),
 				$this->msg( 'wikibase-itembytitle-lookup-fieldset' )->text()
 			)
-			. Html::element(
-				'label',
-				array( 'for' => 'wb-itembytitle-sitename' ),
-				$this->msg( 'wikibase-itembytitle-lookup-site' )->text()
+			. Html::label(
+				$this->msg( 'wikibase-itembytitle-lookup-site' )->text(),
+				'wb-itembytitle-sitename',
+				array(
+					'class' => 'wb-label'
+				)
 			)
 			. Html::input(
 				'site',
-				$siteId ? htmlspecialchars( $siteId ) : '',
+				htmlspecialchars( $siteId ),
 				'text',
 				array(
+					'class' => 'wb-input',
 					'id' => 'wb-itembytitle-sitename',
 					'size' => 12
 				)
 			)
 			. ' '
-			. Html::element(
-				'label',
-				array( 'for' => 'pagename' ),
-				$this->msg( 'wikibase-itembytitle-lookup-page' )->text()
+			. Html::label(
+				$this->msg( 'wikibase-itembytitle-lookup-page' )->text(),
+				'pagename',
+				array(
+					'class' => 'wb-label'
+				)
 			)
 			. Html::input(
 				'page',
 				$page ? htmlspecialchars( $page ) : '',
 				'text',
 				array(
+					'class' => 'wb-input',
 					'id' => 'pagename',
-					'size' => 36,
-					'class' => 'wb-input-text'
+					'size' => 36
 				)
 			)
 			. Html::input(
@@ -227,20 +232,24 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				'submit',
 				array(
 					'id' => 'wb-itembytitle-submit',
-					'class' => 'wb-input-button'
+					'class' => 'wb-button'
 				)
 			)
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
 
-		if ( $siteExists && isset( $page ) ) {
+		if ( $siteId && !$siteExists ) {
+			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-site' ) );
+		} elseif ( $siteExists && $page ) {
+			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-item' ) );
+
 			$createLink = $this->getTitleFor( 'NewItem' );
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
 				. $this->msg( 'wikibase-itembytitle-create' )
 					->params(
-						$createLink->getFullURL( array( 'site' => ( $siteId ?: '' ), 'page' => ( $page ?: '' ) ) )
+						$createLink->getFullURL( array( 'site' => $siteId, 'page' => $page ) )
 					)
 					->parse()
 				. Html::closeElement( 'div' )

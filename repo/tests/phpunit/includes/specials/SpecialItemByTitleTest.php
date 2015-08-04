@@ -121,14 +121,14 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'pagename',
-				'class' => 'wb-input-text',
+				'class' => 'wb-input',
 				'name' => 'page',
 			) );
 		$matchers['submit'] = array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-itembytitle-submit',
-				'class' => 'wb-input-button',
+				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'submit',
 			) );
