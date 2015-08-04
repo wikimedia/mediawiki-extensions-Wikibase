@@ -577,6 +577,7 @@
 	"apihelp-wbmergeitems-example-4": "{{doc-apihelp-example|wbmergeitems}}",
 	"apihelp-wbparsevalue-description": "{{doc-apihelp-description|wbparsevalue}}",
 	"apihelp-wbparsevalue-param-parser": "{{doc-apihelp-param|wbparsevalue|parser}}",
+	"apihelp-wbparsevalue-param-datatype": "{{doc-apihelp-param|wbparsevalue|datatype}}",
 	"apihelp-wbparsevalue-param-values": "{{doc-apihelp-param|wbparsevalue|values}}",
 	"apihelp-wbparsevalue-param-options": "{{doc-apihelp-param|wbparsevalue|options}}",
 	"apihelp-wbparsevalue-example-1": "{{doc-apihelp-example|wbparsevalue}}",

@@ -49,7 +49,9 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) { // Needs to be 1
 }
 
 /**
- * @deprecated since 0.5 This is a global registry that provides no control over object lifecycle
+ * Registry of ValueParsers classes or factory callbacks, by datatype.
+ * @note: that parsers are also registered under their old names for backwards compatibility,
+ * for use with the deprecated 'parser' parameter of the wbparsevalue API module.
  */
 $GLOBALS['wgValueParsers'] = array();
 
@@ -118,13 +120,20 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseNS'] 			= __DIR__ . '/Wikibase.i18n.namespaces.php';
 
 	// This is somewhat hackish, make WikibaseValueParserBuilders, analogous to WikibaseValueFormatterBuilders
-	$wgValueParsers['wikibase-entityid'] = function( ValueParsers\ParserOptions $options ) {
+	$newEntityIdParser = function( ValueParsers\ParserOptions $options ) {
 		//TODO: make ID builders configurable.
 		$builders = \Wikibase\DataModel\Services\EntityId\BasicEntityIdParser::getBuilders();
 		return new \Wikibase\Lib\EntityIdValueParser(
 			new \Wikibase\DataModel\Services\EntityId\DispatchingEntityIdParser( $builders, $options )
 		);
 	};
+
+	// all entity types use the same parser
+	$wgValueParsers['wikibase-item'] = $newEntityIdParser;
+	$wgValueParsers['wikibase-property'] = $newEntityIdParser;
+
+	// deprecated: 'wikibase-entityid' is not a datatype. Alias kept for backwards compatibility.
+	$wgValueParsers['wikibase-entityid'] = $newEntityIdParser;
 
 	$wgValueParsers['quantity'] = function( ValueParsers\ParserOptions $options ) {
 		$language = Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
@@ -137,9 +146,20 @@ call_user_func( function() {
 		return $factory->getTimeParser();
 	};
 
+	$wgValueParsers['globe-coordinate'] = 'DataValues\Geo\Parsers\GlobeCoordinateParser';
+
+	// deprecated: 'globecoordinate' is not a datatype. Alias kept for backwards compatibility.
 	$wgValueParsers['globecoordinate'] = 'DataValues\Geo\Parsers\GlobeCoordinateParser';
-	$wgValueParsers['null'] = 'ValueParsers\NullParser';
+
 	$wgValueParsers['monolingualtext'] = 'Wikibase\Parsers\MonolingualTextParser';
+
+	// Use NullParser for datatypes that use StringValue
+	$wgValueParsers['commonsMedia'] = 'ValueParsers\NullParser';
+	$wgValueParsers['string'] = 'ValueParsers\NullParser';
+	$wgValueParsers['url'] = 'ValueParsers\NullParser';
+
+	// deprecated: 'null' is not a datatype. Alias kept for backwards compatibility.
+	$wgValueParsers['null'] = 'ValueParsers\NullParser';
 
 	// API module registration
 	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Repo\Api\GetEntities';
