@@ -1,0 +1,38 @@
+{
+	"name": "WikibaseLib",
+	"version": "0.5 alpha",
+	"author": [
+		"The Wikidata team"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:WikibaseLib",
+	"descriptionmsg": "wikibase-lib-desc",
+	"type": "wikibase",
+	"license-name": "GPL-2.0+",
+	"require": {
+		"MediaWiki": ">= 1.27.0"
+	},
+	"callback": "Wikibase\\LibHooks::registerExtension",
+	"JobClasses": {
+		"ChangeNotification": "Wikibase\\ChangeNotificationJob"
+	},
+	"MessagesDirs": {
+		"WikibaseLib": [
+			"i18n"
+		]
+	},
+	"Hooks": {
+		"ExtensionTypes": [
+			"Wikibase\\LibHooks::onExtensionTypes"
+		],
+		"UnitTestsList": [
+			"Wikibase\\LibHooks::registerPhpUnitTests"
+		],
+		"ResourceLoaderTestModules": [
+			"Wikibase\\LibHooks::registerQUnitTests"
+		],
+		"ResourceLoaderRegisterModules": [
+			"Wikibase\\LibHooks::onResourceLoaderRegisterModules"
+		]
+	},
+	"manifest_version": 1
+}

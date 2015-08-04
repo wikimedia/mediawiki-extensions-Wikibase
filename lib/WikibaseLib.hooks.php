@@ -17,6 +17,43 @@ use ResourceLoader;
  */
 final class LibHooks {
 
+	public static function registerExtension() {
+		global $wgResourceModules;
+
+		if ( defined( 'WBL_VERSION' ) ) {
+			// Do not initialize more than once.
+			return 1;
+		}
+
+		define( 'WBL_VERSION', '0.5 alpha' );
+
+		define( 'SUMMARY_MAX_LENGTH', 250 );
+
+		// Resource Loader Modules:
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			include __DIR__ . '/resources/Resources.php'
+		);
+	}
+
+	/**
+	 * Called when generating the extensions credits, use this to change the tables headers.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ExtensionTypes
+	 *
+	 * @since 0.1
+	 *
+	 * @param array &$extensionTypes
+	 *
+	 * @return boolean
+	 */
+	public static function onExtensionTypes( array &$extensionTypes ) {
+		// @codeCoverageIgnoreStart
+		$extensionTypes['wikibase'] = wfMessage( 'version-wikibase' )->text();
+
+		return true;
+		// @codeCoverageIgnoreEnd
+	}
+
 	/**
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
