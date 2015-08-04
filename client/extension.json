@@ -1,0 +1,133 @@
+{
+	"name": "Wikibase Client",
+	"author": [
+		"The Wikidata team"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Wikibase_Client",
+	"descriptionmsg": "wikibase-client-desc",
+	"type": "wikibase",
+	"callback": "Wikibase\\ClientHooks::registerExtension",
+	"RecentChangesFlags": {
+		"wikibase-edit": {
+			"letter": "wikibase-rc-wikibase-edit-letter",
+			"title": "wikibase-rc-wikibase-edit-title"
+		}
+	},
+	"SpecialPages": {
+		"UnconnectedPages": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages",
+		"PagesWithBadges": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges"
+	},
+	"JobClasses": {
+		"wikibase-addUsagesForPage": "Wikibase\\Client\\Store\\AddUsagesForPageJob"
+	},
+	"MessagesDirs": {
+		"wikibaseclient": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"Wikibaseclientalias": "WikibaseClient.i18n.alias.php",
+		"wikibaseclientmagic": "WikibaseClient.i18n.magic.php"
+	},
+	"Hooks": {
+		"LoadExtensionSchemaUpdates": [
+			"\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater::onSchemaUpdate"
+		],
+		"wgQueryPages": [
+			"Wikibase\\ClientHooks::onwgQueryPages"
+		],
+		"UnitTestsList": [
+			"\\Wikibase\\ClientHooks::registerUnitTests"
+		],
+		"BaseTemplateToolbox": [
+			"\\Wikibase\\ClientHooks::onBaseTemplateToolbox"
+		],
+		"OldChangesListRecentChangesLine": [
+			"\\Wikibase\\ClientHooks::onOldChangesListRecentChangesLine"
+		],
+		"OutputPageParserOutput": [
+			"\\Wikibase\\Client\\Hooks\\SidebarHookHandlers::onOutputPageParserOutput"
+		],
+		"SkinTemplateGetLanguageLink": [
+			"\\Wikibase\\Client\\Hooks\\SidebarHookHandlers::onSkinTemplateGetLanguageLink"
+		],
+		"ContentAlterParserOutput": [
+			"\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandlers::onContentAlterParserOutput"
+		],
+		"SidebarBeforeOutput": [
+			"\\Wikibase\\Client\\Hooks\\SidebarHookHandlers::onSidebarBeforeOutput"
+		],
+		"LinksUpdateComplete": [
+			"\\Wikibase\\Client\\Hooks\\DataUpdateHookHandlers::onLinksUpdateComplete"
+		],
+		"ArticleDeleteComplete": [
+			"\\Wikibase\\Client\\Hooks\\DataUpdateHookHandlers::onArticleDeleteComplete",
+			"\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandlers::onArticleDeleteComplete"
+		],
+		"ParserCacheSaveComplete": [
+			"\\Wikibase\\Client\\Hooks\\DataUpdateHookHandlers::onParserCacheSaveComplete"
+		],
+		"ParserFirstCallInit": [
+			"\\Wikibase\\ClientHooks::onParserFirstCallInit"
+		],
+		"MagicWordwgVariableIDs": [
+			"\\Wikibase\\ClientHooks::onMagicWordwgVariableIDs"
+		],
+		"ParserGetVariableValueSwitch": [
+			"\\Wikibase\\ClientHooks::onParserGetVariableValueSwitch"
+		],
+		"SkinTemplateOutputPageBeforeExec": [
+			"\\Wikibase\\ClientHooks::onSkinTemplateOutputPageBeforeExec"
+		],
+		"SpecialMovepageAfterMove": [
+			"\\Wikibase\\Client\\Hooks\\MovePageNotice::onSpecialMovepageAfterMove"
+		],
+		"SpecialWatchlistQuery": [
+			"\\Wikibase\\ClientHooks::onSpecialWatchlistQuery"
+		],
+		"SpecialRecentChangesQuery": [
+			"\\Wikibase\\ClientHooks::onSpecialRecentChangesQuery"
+		],
+		"SpecialRecentChangesFilters": [
+			"\\Wikibase\\ClientHooks::onSpecialRecentChangesFilters"
+		],
+		"GetPreferences": [
+			"\\Wikibase\\ClientHooks::onGetPreferences"
+		],
+		"BeforePageDisplay": [
+			"\\Wikibase\\ClientHooks::onBeforePageDisplay",
+			"\\Wikibase\\ClientHooks::onBeforePageDisplayAddJsConfig"
+		],
+		"ScribuntoExternalLibraries": [
+			"\\Wikibase\\ClientHooks::onScribuntoExternalLibraries"
+		],
+		"SpecialWatchlistFilters": [
+			"\\Wikibase\\ClientHooks::onSpecialWatchlistFilters"
+		],
+		"InfoAction": [
+			"\\Wikibase\\ClientHooks::onInfoAction"
+		],
+		"TitleMoveComplete": [
+			"\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandlers::onTitleMoveComplete"
+		],
+		"BaseTemplateAfterPortlet": [
+			"\\Wikibase\\ClientHooks::onBaseTemplateAfterPortlet"
+		],
+		"GetBetaFeaturePreferences": [
+			"\\Wikibase\\ClientHooks::onGetBetaFeaturePreferences"
+		],
+		"ArticleDeleteAfterSuccess": [
+			"\\Wikibase\\ClientHooks::onArticleDeleteAfterSuccess"
+		],
+		"ParserLimitReportFormat": [
+			"\\Wikibase\\Client\\Hooks\\ParserLimitHookHandlers::onParserLimitReportFormat"
+		],
+		"ParserLimitReportPrepare": [
+			"\\Wikibase\\Client\\Hooks\\ParserLimitHookHandlers::onParserLimitReportPrepare"
+		],
+		"FormatAutocomments": [
+			"\\Wikibase\\ClientHooks::onFormat"
+		]
+	},
+	"manifest_version": 1
+}
