@@ -50,7 +50,7 @@ class SitesBuilder {
 			$sites = $this->addInterwikiIdsToGroup( $sites, $siteGroup );
 		}
 
-		$existingSites = $this->store->getSites( "nocache" );
+		$existingSites = $this->store->getSites();
 
 		foreach ( $sites as $site ) {
 			$siteId = $site->getGlobalId();

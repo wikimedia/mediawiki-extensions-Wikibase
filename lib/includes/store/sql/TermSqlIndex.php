@@ -276,8 +276,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 					$termIdentifiers,
 					$entityIdentifiers
 				),
-				__METHOD__,
-				array( 'IGNORE' )
+				__METHOD__
 			);
 
 			if ( !$success ) {
