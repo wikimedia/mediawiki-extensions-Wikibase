@@ -50,22 +50,37 @@ class CallbackFactory {
 	public function getCallbackToAddDataTypeToSnaksGroupedByProperty(
 		PropertyDataTypeLookup $dataTypeLookup
 	) {
-		return function ( $array ) use ( $dataTypeLookup ) {
-			foreach ( $array as $propertyIdGroupKey => &$snakGroup ) {
-				$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroupKey ) );
-				foreach ( $snakGroup as &$snak ) {
-					$snak['datatype'] = $dataType;
+		return function ( $value ) use ( $dataTypeLookup ) {
+			if ( is_array( $value ) ) {
+				foreach ( $value as $propertyIdGroupKey => &$snakGroup ) {
+					$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroupKey ) );
+					foreach ( $snakGroup as &$snak ) {
+						$snak['datatype'] = $dataType;
+					}
+				}
+			} else {
+				foreach ( get_object_vars( $value ) as $propertyIdGroupKey => $snakGroup ) {
+					$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $propertyIdGroupKey ) );
+					foreach ( get_object_vars( $snakGroup ) as $snakKey => $snak ) {
+						$value->$propertyIdGroupKey->$snakKey->datatype = $dataType;
+					}
 				}
 			}
-			return $array;
+			return $value;
 		};
 	}
 
 	public function getCallbackToAddDataTypeToSnak( PropertyDataTypeLookup $dataTypeLookup ) {
-		return function ( $array ) use ( $dataTypeLookup ) {
-			$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $array['property'] ) );
-			$array['datatype'] = $dataType;
-			return $array;
+		return function ( $value ) use ( $dataTypeLookup ) {
+			if ( is_array( $value ) ) {
+				$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $value['property'] ) );
+				$value['datatype'] = $dataType;
+			} else {
+				$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $value->property ) );
+				$value->datatype = $dataType;
+			}
+
+			return $value;
 		};
 	}
 
