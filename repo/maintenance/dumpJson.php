@@ -36,12 +36,14 @@ class DumpJson extends DumpScript {
 
 		$entitySerializer = $serializerFactory->newEntitySerializer();
 		$entityPrefetcher = $this->wikibaseRepo->getStore()->getEntityPrefetcher();
+		$dataTypeLookup = $this->wikibaseRepo->getPropertyDataTypeLookup();
 
 		$dumper = new JsonDumpGenerator(
 			$output,
 			$this->entityLookup,
 			$entitySerializer,
-			$entityPrefetcher
+			$entityPrefetcher,
+			$dataTypeLookup
 		);
 
 		$dumper->setUseSnippets( (bool)$this->getOption( 'snippet', false ) );

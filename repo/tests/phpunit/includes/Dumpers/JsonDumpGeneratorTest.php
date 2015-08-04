@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Dumpers\JsonDumpGenerator;
@@ -128,7 +129,8 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$out,
 			$entityLookup,
 			$serializer,
-			new NullEntityPrefetcher()
+			new NullEntityPrefetcher(),
+			$this->getMockPropertyDataTypeLookup()
 		);
 	}
 
@@ -211,7 +213,8 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$out,
 			$entityLookup,
 			$serializer,
-			new NullEntityPrefetcher()
+			new NullEntityPrefetcher(),
+			$this->getMockPropertyDataTypeLookup()
 		);
 
 		$exceptionHandler = $this->getMock( 'Wikibase\Lib\Reporting\ExceptionHandler' );
@@ -221,6 +224,21 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$jsonDumper->setExceptionHandler( $exceptionHandler );
 
 		return $jsonDumper;
+	}
+
+	/**
+	 * Returns a mock PropertyDataTypeLookup that will return the
+	 * type id "string" for any property.
+	 *
+	 * @return PropertyDataTypeLookup
+	 */
+	public function getMockPropertyDataTypeLookup() {
+		$mock = $this->getMock( '\Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
+		$mock->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		return $mock;
 	}
 
 	/**
