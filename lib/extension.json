@@ -1,0 +1,27 @@
+{
+	"@doc": "$wgExtensionCredits is set in the WikibaseLib.hooks.php file",
+	"callback": "Wikibase\\LibHooks::registerExtension",
+	"JobClasses": {
+		"ChangeNotification": "Wikibase\\ChangeNotificationJob"
+	},
+	"MessagesDirs": {
+		"WikibaseLib": [
+			"i18n"
+		]
+	},
+	"Hooks": {
+		"ExtensionTypes": [
+			"Wikibase\\LibHooks::onExtensionTypes"
+		],
+		"UnitTestsList": [
+			"Wikibase\\LibHooks::registerPhpUnitTests"
+		],
+		"ResourceLoaderTestModules": [
+			"Wikibase\\LibHooks::registerQUnitTests"
+		],
+		"ResourceLoaderRegisterModules": [
+			"Wikibase\\LibHooks::onResourceLoaderRegisterModules"
+		]
+	},
+	"manifest_version": 1
+}
