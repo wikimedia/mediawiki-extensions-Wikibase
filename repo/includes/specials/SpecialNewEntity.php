@@ -55,6 +55,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	private $rightsText;
 
 	/**
+	 * @var string[]
+	 */
+	private $aliases;
+
+	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
 	 * @param string $restriction User right required, 'createpage' per default.
 	 *
