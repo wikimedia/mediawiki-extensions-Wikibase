@@ -47,6 +47,120 @@ use WikiPage;
  */
 final class RepoHooks {
 
+	public static function registerExtension() {
+		global $wgExtensionCredits, $wgGroupPermissions, $wgAvailableRights, $wgHooks, $wgWBRepoSettings,
+		$wgResourceModules, $wgValueParsers, $wgWBRepoDataTypes;
+
+		if ( defined( 'WB_VERSION' ) ) {
+			// Do not initialize more than once.
+			return 1;
+		}
+
+		define( 'WB_VERSION', '0.5 alpha' );
+
+		/**
+		 * Registry of ValueParsers classes or factory callbacks, by datatype.
+		 * @note: that parsers are also registered under their old names for backwards compatibility,
+		 * for use with the deprecated 'parser' parameter of the wbparsevalue API module.
+		 */
+		$GLOBALS['wgValueParsers'] = array();
+
+		if ( !defined( 'WBL_VERSION' ) ) {
+			include_once __DIR__ . '/../lib/WikibaseLib.php';
+		}
+
+		if ( !defined( 'WBL_VERSION' ) ) {
+			throw new Exception( 'Wikibase depends on the WikibaseLib extension.' );
+		}
+
+		if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
+			include_once __DIR__ . '/../view/WikibaseView.php';
+		}
+
+		if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
+			throw new Exception( 'Wikibase depends on WikibaseView.' );
+		}
+
+		if ( !defined( 'PURTLE_VERSION' ) ) {
+			include_once __DIR__ . '/../purtle/Purtle.php';
+		}
+
+		if ( !defined( 'PURTLE_VERSION' ) ) {
+			throw new Exception( 'Wikibase depends on Purtle.' );
+		}
+
+		$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
+
+		$repoDatatypes = require __DIR__ . '/WikibaseRepo.datatypes.php';
+
+		// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
+		foreach ( $repoDatatypes as $type => $repoDef ) {
+			$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : array();
+			$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
+		}
+
+		$wgExtensionCredits['wikibase'][] = array(
+			'path' => __DIR__,
+			'name' => 'Wikibase Repository',
+			'version' => WB_VERSION,
+		);
+
+		// constants
+		define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+		define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
+
+		// rights
+		// names should be according to other naming scheme
+		$wgGroupPermissions['*']['item-term'] = true;
+		$wgGroupPermissions['*']['property-term'] = true;
+		$wgGroupPermissions['*']['item-merge']  = true;
+		$wgGroupPermissions['*']['item-redirect'] = true;
+		$wgGroupPermissions['*']['property-create'] = true;
+
+		$wgAvailableRights[] = 'item-term';
+		$wgAvailableRights[] = 'property-term';
+		$wgAvailableRights[] = 'item-merge';
+		$wgAvailableRights[] = 'item-redirect';
+		$wgAvailableRights[] = 'property-create';
+
+		/**
+		 * @var callable[] $wgValueParsers Defines parser factory callbacks by parser name (not data type name).
+		 * @deprecated use $wgWBRepoDataTypes instead.
+		 */
+		$wgValueParsers['wikibase-entityid'] = $wgWBRepoDataTypes['wikibase-item']['parser-factory-callback'];
+		$wgValueParsers['globecoordinate'] = $wgWBRepoDataTypes['globe-coordinate']['parser-factory-callback'];
+
+		// 'null' is not a datatype. Kept for backwards compatibility.
+		$wgValueParsers['null'] = function() {
+			return new \ValueParsers\NullParser();
+		};
+
+		$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
+
+		//FIXME: handle other types of entities with autocomments too!
+		$wgHooks['FormatAutocomments'][] = array(
+			'Wikibase\RepoHooks::onFormat',
+			array( CONTENT_MODEL_WIKIBASE_ITEM, 'wikibase-item' )
+		);
+		$wgHooks['FormatAutocomments'][] = array(
+			'Wikibase\RepoHooks::onFormat',
+			array( CONTENT_MODEL_WIKIBASE_PROPERTY, 'wikibase-property' )
+		);
+
+		$wgHooks['SetupAfterCache'][] = '\Wikibase\RepoHooks::onSetupAfterCache';
+
+		// Resource Loader Modules:
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			include __DIR__ . '/resources/Resources.php'
+		);
+
+		$wgWBRepoSettings = array_merge(
+			require __DIR__ . '/../lib/config/WikibaseLib.default.php',
+			require __DIR__ . '/config/Wikibase.default.php'
+		);
+	}
+
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
 	 * replacing the native search box with the entity selector widget.
