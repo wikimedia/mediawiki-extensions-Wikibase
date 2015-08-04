@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_90f25bdd",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-04T12:23:35Z",
+      "side": 1,
+      "message": "ItemId|null",
+      "revId": "79157f6fcf4f90f14835c14b5549dee1fef7f483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_10074bce",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-04T12:23:35Z",
+      "side": 1,
+      "message": "No space between list and the opening parentheses, please",
+      "revId": "79157f6fcf4f90f14835c14b5549dee1fef7f483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d05543c5",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-04T12:23:35Z",
+      "side": 1,
+      "message": "No space between ! and empty, please",
+      "revId": "79157f6fcf4f90f14835c14b5549dee1fef7f483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_1060ab9e",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-04T12:23:35Z",
+      "side": 1,
+      "message": "Could be private",
+      "revId": "79157f6fcf4f90f14835c14b5549dee1fef7f483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f02abf29",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialGoToLinkedPageTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-04T12:23:35Z",
+      "side": 1,
+      "message": "too much indentation",
+      "revId": "79157f6fcf4f90f14835c14b5549dee1fef7f483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_102e6b3e",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialGoToLinkedPageTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-04T12:23:35Z",
+      "side": 1,
+      "message": "no space between ! and empty, please",
+      "revId": "79157f6fcf4f90f14835c14b5549dee1fef7f483",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
