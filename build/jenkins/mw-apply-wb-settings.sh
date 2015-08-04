@@ -21,6 +21,7 @@ if [ $BUILD = true ]; then
 fi
 
 function apply_client_settings {
+  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
   echo "client"
   echo '$wgEnableWikibaseRepo = false;' >> LocalSettings.php
   echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
@@ -28,17 +29,15 @@ function apply_client_settings {
   echo '$wgWikimediaJenkinsCI = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = false;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
 }
 
 function apply_repo_settings {
-  echo '$wgEnableWikibaseRepo = true;' >> LocalSettings.php
-  echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
+  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
+  echo '$wgEnableWikibaseBoth = true;' >> LocalSettings.php
   # $wgWikimediaJenkinsCI is only set later, so need to set it here, too
   echo '$wgWikimediaJenkinsCI = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
-  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
 }
 
 cd $WORKSPACE/src
