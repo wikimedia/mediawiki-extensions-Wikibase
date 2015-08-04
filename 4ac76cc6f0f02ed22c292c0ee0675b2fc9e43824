@@ -52,6 +52,24 @@
       "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_035ce01c",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-04T19:47:05Z",
+      "side": 1,
+      "message": "Caching is a good idea, we don\u0027t have that many language codes. As for slowing down the ones with -, yes, it is a trade-off. Most labels however do not have - (most data is in languages like en, de, es, ru, zh, etc.) and only few labels have languages with -. So we optimize for the common case.",
+      "parentUuid": "8ec42329_9f5fce43",
+      "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
