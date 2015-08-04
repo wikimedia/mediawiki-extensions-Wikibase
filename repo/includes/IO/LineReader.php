@@ -4,7 +4,7 @@ namespace Wikibase\Repo\IO;
 
 use InvalidArgumentException;
 use Iterator;
-use Wikibase\Lib\Disposable;
+use Wikibase\Repo\Disposable;
 
 /**
  * LineReader allows iterating over the lines of a file.

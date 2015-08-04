@@ -6,7 +6,7 @@ use Maintenance;
 use MWException;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\Dumpers\DumpGenerator;
-use Wikibase\Lib\Disposable;
+use Wikibase\Repo\Disposable;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
