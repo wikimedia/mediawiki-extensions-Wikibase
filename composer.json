@@ -35,6 +35,8 @@
 		"data-values/javascript": "~0.6.0|~0.7.0",
 		"data-values/value-view": "~0.15.5",
 
+		"mediawiki/universal-language-selector": "dev-master",
+
 		"wikibase/data-model": "~4.0",
 		"wikibase/data-model-serialization": "~2.0",
 		"wikibase/internal-serialization": "~2.0",
