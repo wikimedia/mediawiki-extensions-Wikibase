@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Repo;
 
 /**
  * Utility class for process identifier (PID) locking.

@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use Maintenance;
-use Wikibase\Lib\PidLock;
+use Wikibase\Repo\PidLock;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Repo\ChangePruner;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Repo\Test;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\Lib\PidLock;
+use Wikibase\Repo\PidLock;
 
 /**
- * @covers Wikibase\Lib\PidLock
+ * @covers Wikibase\Repo\PidLock
  *
  * @group WikibaseLib
  * @group Wikibase
