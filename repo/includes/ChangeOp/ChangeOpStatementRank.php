@@ -7,7 +7,6 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementListHolder;
-use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\StatementRankSerializer;
 use Wikibase\Summary;
 
