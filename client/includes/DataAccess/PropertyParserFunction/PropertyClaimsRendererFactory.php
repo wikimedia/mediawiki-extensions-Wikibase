@@ -108,7 +108,7 @@ class PropertyClaimsRendererFactory {
 				'T107711',
 				get_class( $language ) . ' is not a Language object.',
 				'all',
-				array( 'trace' => wfDebugBacktrace() )
+				array( 'trace' => wfBacktrace( true ) )
 			);
 		}
 		StubUserLang::unstub( $language );
