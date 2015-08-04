@@ -8,6 +8,7 @@ use ApiQuerySiteinfo;
 use BaseTemplate;
 use Content;
 use ContentHandler;
+use Exception;
 use ExtensionRegistry;
 use HistoryPager;
 use Html;
@@ -48,6 +49,107 @@ use WikiPage;
  * @author Jens Ohlig
  */
 final class RepoHooks {
+
+	public static function registerExtension() {
+		global $wgGroupPermissions, $wgAvailableRights, $wgHooks, $wgWBRepoSettings, $wgGrantPermissions,
+		$wgResourceModules, $wgValueParsers, $wgWBRepoDataTypes, $wgWBRepoEntityTypes,
+		$wgWikimediaJenkinsCI;
+
+		if ( defined( 'WB_VERSION' ) ) {
+			// Do not initialize more than once.
+			return 1;
+		}
+
+		define( 'WB_VERSION', '0.5 alpha' );
+
+		/**
+		 * Registry of ValueParsers classes or factory callbacks, by datatype.
+		 * @note: that parsers are also registered under their old names for backwards compatibility,
+		 * for use with the deprecated 'parser' parameter of the wbparsevalue API module.
+		 */
+
+		// Registry and definition of data types
+		$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
+
+		$repoDataTypes = require __DIR__ . '/WikibaseRepo.datatypes.php';
+		// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
+		foreach ( $repoDataTypes as $type => $repoDef ) {
+			$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : array();
+			$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
+		}
+
+		// constants
+		define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+		define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
+
+		// Registry and definition of entity types
+		$wgWBRepoEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
+
+		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
+
+		// merge WikibaseRepo.entitytypes.php into $wgWBRepoEntityTypes
+		foreach ( $repoEntityTypes as $type => $repoDef ) {
+			$baseDef = isset( $wgWBRepoEntityTypes[$type] ) ? $wgWBRepoEntityTypes[$type] : array();
+			$wgWBRepoEntityTypes[$type] = array_merge( $baseDef, $repoDef );
+		}
+
+		// rights
+		// names should be according to other naming scheme
+		$wgGroupPermissions['*']['item-term'] = true;
+		$wgGroupPermissions['*']['property-term'] = true;
+		$wgGroupPermissions['*']['item-merge']  = true;
+		$wgGroupPermissions['*']['item-redirect'] = true;
+		$wgGroupPermissions['*']['property-create'] = true;
+
+		$wgAvailableRights[] = 'item-term';
+		$wgAvailableRights[] = 'property-term';
+		$wgAvailableRights[] = 'item-merge';
+		$wgAvailableRights[] = 'item-redirect';
+		$wgAvailableRights[] = 'property-create';
+
+		$wgGrantPermissions['editpage']['item-term'] = true;
+		$wgGrantPermissions['editpage']['item-redirect'] = true;
+		$wgGrantPermissions['editpage']['item-merge'] = true;
+		$wgGrantPermissions['editpage']['property-term'] = true;
+		$wgGrantPermissions['createeditmovepage']['property-create'] = true;
+
+		/**
+		 * @var callable[] $wgValueParsers Defines parser factory callbacks by parser name (not data type name).
+		 * @deprecated use $wgWBRepoDataTypes instead.
+		 */
+		$wgValueParsers['wikibase-entityid'] = $wgWBRepoDataTypes['VT:wikibase-entityid']['parser-factory-callback'];
+		$wgValueParsers['globecoordinate'] = $wgWBRepoDataTypes['VT:globecoordinate']['parser-factory-callback'];
+
+		// 'null' is not a datatype. Kept for backwards compatibility.
+		$wgValueParsers['null'] = function() {
+			return new \ValueParsers\NullParser();
+		};
+
+		$wgHooks['ResourceLoaderRegisterModules'][] = '\Wikibase\RepoHooks::onResourceLoaderRegisterModules';
+
+		//FIXME: handle other types of entities with autocomments too!
+		$wgHooks['FormatAutocomments'][] = array(
+			'Wikibase\RepoHooks::onFormat',
+			array( CONTENT_MODEL_WIKIBASE_ITEM, 'wikibase-item' )
+		);
+		$wgHooks['FormatAutocomments'][] = array(
+			'Wikibase\RepoHooks::onFormat',
+			array( CONTENT_MODEL_WIKIBASE_PROPERTY, 'wikibase-property' )
+		);
+
+		$wgHooks['SetupAfterCache'][] = '\Wikibase\RepoHooks::onSetupAfterCache';
+
+		// Resource Loader Modules:
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			include __DIR__ . '/resources/Resources.php'
+		);
+
+		$wgWBRepoSettings = array_merge(
+			require __DIR__ . '/../lib/config/WikibaseLib.default.php',
+			require __DIR__ . '/config/Wikibase.default.php'
+		);
+	}
 
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
