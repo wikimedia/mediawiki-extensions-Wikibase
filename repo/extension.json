@@ -1,0 +1,193 @@
+{
+	"name": "Wikibase Repository",
+	"version": "0.5 alpha",
+	"author": [
+		"The Wikidata team"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Wikibase_Repository",
+	"descriptionmsg": "wikibase-desc",
+	"type": "wikibase",
+	"license-name": "GPL-2.0+",
+	"require": {
+		"MediaWiki": ">= 1.27.0"
+	},
+	"callback": "Wikibase\\RepoHooks::registerExtension",
+	"SpecialPages": {
+		"NewItem": "Wikibase\\Repo\\Specials\\SpecialNewItem",
+		"NewProperty": "Wikibase\\Repo\\Specials\\SpecialNewProperty",
+		"ItemByTitle": "Wikibase\\Repo\\Specials\\SpecialItemByTitle",
+		"GoToLinkedPage": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage",
+		"ItemDisambiguation": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
+		"ItemsWithoutSitelinks": "Wikibase\\Repo\\Specials\\SpecialItemsWithoutSitelinks",
+		"SetLabel": "Wikibase\\Repo\\Specials\\SpecialSetLabel",
+		"SetDescription": "Wikibase\\Repo\\Specials\\SpecialSetDescription",
+		"SetAliases": "Wikibase\\Repo\\Specials\\SpecialSetAliases",
+		"SetLabelDescriptionAliases": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases",
+		"SetSiteLink": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink",
+		"EntitiesWithoutLabel": [
+			"Wikibase\\Repo\\Specials\\SpecialEntitiesWithoutPageFactory",
+			"newSpecialEntitiesWithoutLabel"
+		],
+		"EntitiesWithoutDescription": [
+			"Wikibase\\Repo\\Specials\\SpecialEntitiesWithoutPageFactory",
+			"newSpecialEntitiesWithoutDescription"
+		],
+		"ListDatatypes": "Wikibase\\Repo\\Specials\\SpecialListDatatypes",
+		"ListProperties": "Wikibase\\Repo\\Specials\\SpecialListProperties",
+		"DispatchStats": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
+		"EntityData": "Wikibase\\Repo\\Specials\\SpecialEntityData",
+		"MyLanguageFallbackChain": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain",
+		"MergeItems": "Wikibase\\Repo\\Specials\\SpecialMergeItems",
+		"RedirectEntity": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity"
+	},
+	"JobClasses": {
+		"UpdateRepoOnMove": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnMoveJob",
+		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob"
+	},
+	"APIModules": {
+		"wbgetentities": "Wikibase\\Repo\\Api\\GetEntities",
+		"wbsetlabel": "Wikibase\\Repo\\Api\\SetLabel",
+		"wbsetdescription": "Wikibase\\Repo\\Api\\SetDescription",
+		"wbsearchentities": "Wikibase\\Repo\\Api\\SearchEntities",
+		"wbsetaliases": "Wikibase\\Repo\\Api\\SetAliases",
+		"wbeditentity": "Wikibase\\Repo\\Api\\EditEntity",
+		"wblinktitles": "Wikibase\\Repo\\Api\\LinkTitles",
+		"wbsetsitelink": "Wikibase\\Repo\\Api\\SetSiteLink",
+		"wbcreateclaim": "Wikibase\\Repo\\Api\\CreateClaim",
+		"wbgetclaims": "Wikibase\\Repo\\Api\\GetClaims",
+		"wbremoveclaims": "Wikibase\\Repo\\Api\\RemoveClaims",
+		"wbsetclaimvalue": "Wikibase\\Repo\\Api\\SetClaimValue",
+		"wbsetreference": "Wikibase\\Repo\\Api\\SetReference",
+		"wbremovereferences": "Wikibase\\Repo\\Api\\RemoveReferences",
+		"wbsetclaim": "Wikibase\\Repo\\Api\\SetClaim",
+		"wbremovequalifiers": "Wikibase\\Repo\\Api\\RemoveQualifiers",
+		"wbsetqualifier": "Wikibase\\Repo\\Api\\SetQualifier",
+		"wbmergeitems": "Wikibase\\Repo\\Api\\MergeItems",
+		"wbformatvalue": "Wikibase\\Repo\\Api\\FormatSnakValue",
+		"wbparsevalue": "Wikibase\\Repo\\Api\\ParseValue",
+		"wbavailablebadges": "Wikibase\\Repo\\Api\\AvailableBadges",
+		"wbcreateredirect": "Wikibase\\Repo\\Api\\CreateRedirect"
+	},
+	"APIListModules": {
+		"wbsearch": "Wikibase\\Repo\\Api\\QuerySearchEntities"
+	},
+	"MessagesDirs": {
+		"Wikibase": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"WikibaseAlias": "Wikibase.i18n.alias.php",
+		"WikibaseNS": "Wikibase.i18n.namespaces.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"Wikibase\\RepoHooks::onBeforePageDisplay"
+		],
+		"LoadExtensionSchemaUpdates": [
+			"Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater::onSchemaUpdate",
+			"\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater::onSchemaUpdate"
+		],
+		"UnitTestsList": [
+			"Wikibase\\RepoHooks::registerUnitTests"
+		],
+		"ResourceLoaderTestModules": [
+			"Wikibase\\RepoHooks::registerQUnitTests"
+		],
+		"NamespaceIsMovable": [
+			"Wikibase\\RepoHooks::onNamespaceIsMovable"
+		],
+		"NewRevisionFromEditComplete": [
+			"Wikibase\\RepoHooks::onNewRevisionFromEditComplete"
+		],
+		"SkinTemplateNavigation": [
+			"Wikibase\\RepoHooks::onPageTabs"
+		],
+		"RecentChange_save": [
+			"Wikibase\\RepoHooks::onRecentChangeSave"
+		],
+		"ArticleDeleteComplete": [
+			"Wikibase\\RepoHooks::onArticleDeleteComplete"
+		],
+		"ArticleUndelete": [
+			"Wikibase\\RepoHooks::onArticleUndelete"
+		],
+		"GetPreferences": [
+			"Wikibase\\RepoHooks::onGetPreferences"
+		],
+		"LinkBegin": [
+			"Wikibase\\Repo\\Hooks\\LinkBeginHookHandler::onLinkBegin"
+		],
+		"ChangesListInitRows": [
+			"Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandlers::onChangesListInitRows"
+		],
+		"OutputPageBodyAttributes": [
+			"Wikibase\\RepoHooks::onOutputPageBodyAttributes"
+		],
+		"PageHistoryLineEnding": [
+			"Wikibase\\RepoHooks::onPageHistoryLineEnding"
+		],
+		"ApiCheckCanExecute": [
+			"Wikibase\\RepoHooks::onApiCheckCanExecute"
+		],
+		"ShowSearchHit": [
+			"Wikibase\\RepoHooks::onShowSearchHit"
+		],
+		"ShowSearchHitTitle": [
+			"Wikibase\\RepoHooks::onShowSearchHitTitle"
+		],
+		"TitleGetRestrictionTypes": [
+			"Wikibase\\RepoHooks::onTitleGetRestrictionTypes"
+		],
+		"TitleQuickPermissions": [
+			"Wikibase\\RepoHooks::onTitleQuickPermissions"
+		],
+		"AbuseFilter-contentToString": [
+			"Wikibase\\RepoHooks::onAbuseFilterContentToString"
+		],
+		"SpecialPage_reorderPages": [
+			"Wikibase\\RepoHooks::onSpecialPageReorderPages"
+		],
+		"OutputPageParserOutput": [
+			"Wikibase\\RepoHooks::onOutputPageParserOutput"
+		],
+		"ContentModelCanBeUsedOn": [
+			"Wikibase\\RepoHooks::onContentModelCanBeUsedOn"
+		],
+		"OutputPageBeforeHTML": [
+			"Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler::onOutputPageBeforeHTML",
+			"Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::onOutputPageBeforeHtmlRegisterConfig"
+		],
+		"APIQuerySiteInfoGeneralInfo": [
+			"Wikibase\\RepoHooks::onAPIQuerySiteInfoGeneralInfo"
+		],
+		"APIQuerySiteInfoStatisticsInfo": [
+			"Wikibase\\RepoHooks::onAPIQuerySiteInfoStatisticsInfo"
+		],
+		"ImportHandleRevisionXMLTag": [
+			"Wikibase\\RepoHooks::onImportHandleRevisionXMLTag"
+		],
+		"BaseTemplateToolbox": [
+			"Wikibase\\RepoHooks::onBaseTemplateToolbox"
+		],
+		"SkinTemplateBuildNavUrlsNav_urlsAfterPermalink": [
+			"Wikibase\\RepoHooks::onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink"
+		],
+		"SkinMinervaDefaultModules": [
+			"Wikibase\\RepoHooks::onSkinMinervaDefaultModules"
+		],
+		"ResourceLoaderRegisterModules": [
+			"Wikibase\\RepoHooks::onResourceLoaderRegisterModules"
+		],
+		"ContentHandlerForModelID": [
+			"Wikibase\\RepoHooks::onContentHandlerForModelID"
+		],
+		"SetupAfterCache": [
+			"Wikibase\\RepoHooks::onSetupAfterCache"
+		]
+	},
+	"config": {
+		"ValueParsers": []
+	},
+	"manifest_version": 1
+}
