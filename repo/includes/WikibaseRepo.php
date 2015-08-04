@@ -361,7 +361,7 @@ class WikibaseRepo {
 		return new TermIndexSearchInteractor(
 			$this->getStore()->getTermIndex(),
 			$this->getLanguageFallbackChainFactory(),
-			$this->getTermLookup(),
+			$this->getBufferingTermLookup(),
 			$displayLanguageCode
 		);
 	}
@@ -591,6 +591,13 @@ class WikibaseRepo {
 	 * @return TermLookup
 	 */
 	public function getTermLookup() {
+		return $this->getBufferingTermLookup();
+	}
+
+	/**
+	 * @return BufferingTermLookup
+	 */
+	public function getBufferingTermLookup() {
 		if ( !$this->termLookup ) {
 			$this->termLookup = new BufferingTermLookup(
 				$this->getStore()->getTermIndex(),
