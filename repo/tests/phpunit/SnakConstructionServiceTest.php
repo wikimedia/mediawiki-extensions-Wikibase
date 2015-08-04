@@ -7,14 +7,14 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\Lib\SnakConstructionService;
+use Wikibase\Repo\SnakConstructionService;
 use Wikibase\SnakFactory;
 
 /**
- * @covers Wikibase\Lib\SnakConstructionService
+ * @covers Wikibase\Repo\SnakConstructionService
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Snak
  *
  * @licence GNU GPL v2+

@@ -71,7 +71,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetSnakConstructionServiceReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getSnakConstructionService();
-		$this->assertInstanceOf( 'Wikibase\Lib\SnakConstructionService', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\Repo\SnakConstructionService', $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {
