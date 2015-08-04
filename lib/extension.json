@@ -1,0 +1,14 @@
+{
+	"name": "WikibaseLib",
+	"type": "wikibase",
+	"requires": {
+		"MediaWiki": ">= 1.27.0"
+	},
+	"callback": "Wikibase\\LibHooks::registerExtension",
+	"MessagesDirs": {
+		"WikibaseLib": [
+			"i18n"
+		]
+	},
+	"manifest_version": 1
+}
