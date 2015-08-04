@@ -31,6 +31,8 @@
  */
 
 if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
+	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
 	require_once __DIR__ . '/repo/Wikibase.php';
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
 		require_once __DIR__ . '/repo/ExampleSettings.php';
@@ -38,6 +40,8 @@ if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnable
 }
 
 if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnableWikibaseClient'] ) {
+	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
 	require_once __DIR__ . '/client/WikibaseClient.php';
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
 		require_once __DIR__ . '/client/ExampleSettings.php';
