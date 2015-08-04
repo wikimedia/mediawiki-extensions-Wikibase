@@ -190,7 +190,7 @@ class ChangeOpsMerge {
 	private function generateAliasesChangeOps() {
 		foreach ( $this->fromItem->getFingerprint()->getAliasGroups()->toTextArray() as $langCode => $aliases ) {
 			$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveAliasesOp( $langCode, $aliases ) );
-			$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, $aliases, 'add' ) );
+			$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, $aliases ) );
 		}
 	}
 

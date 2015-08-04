@@ -84,7 +84,7 @@ class FormatSnakValue extends ApiBase {
 		$value = $this->decodeDataValue( $params['datavalue'] );
 		$dataTypeId = $this->getDataTypeId( $params );
 
-		$formatter = $this->getFormatter( $value );
+		$formatter = $this->getFormatter();
 
 		if ( $formatter instanceof TypedValueFormatter ) {
 			// use data type id, if we can
