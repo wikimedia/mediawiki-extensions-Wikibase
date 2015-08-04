@@ -37,22 +37,12 @@
  */
 
 // @codingStandardsIgnoreFile
-
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( "Not an entry point.\n" );
-}
-
 if ( defined( 'WBC_VERSION' ) ) {
 	// Do not initialize more than once.
 	return;
 }
 
 define( 'WBC_VERSION', '0.5 alpha' );
-
-// Needs to be 1.26c because version_compare() works in confusing ways.
-if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
-}
 
 define( 'WBC_DIR', __DIR__ );
 
@@ -64,7 +54,6 @@ if ( !defined( 'WBL_VERSION' ) ) {
 if ( !defined( 'WBL_VERSION' ) ) {
 	throw new Exception( 'WikibaseClient depends on the WikibaseLib extension.' );
 }
-
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
 	global $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages, $wgResourceModules;
@@ -196,4 +185,18 @@ call_user_func( function() {
 		'letter' => 'wikibase-rc-wikibase-edit-letter',
 		'title' => 'wikibase-rc-wikibase-edit-title'
 	);
+	if ( function_exists( 'wfLoadExtension' ) ) {
+		wfLoadExtension( 'WikibaseClient', __DIR__.'/extension.json' );
+		// Keep i18n globals so mergeMessageFileList.php doesn't break
+		$GLOBALS['wgMessagesDirs']['wikibaseclient'] = __DIR__ . '/i18n';
+		$GLOBALS['wgExtensionMessagesFiles']['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
+		$GLOBALS['wgExtensionMessagesFiles']['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
+		/* wfWarn(
+			'Deprecated PHP entry point used for Wikibase Client extension. Please use wfLoadExtension instead, ' .
+			'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
+		); */
+		return;
+	} else {
+		die( 'This version of the Wikibase Client extension requires MediaWiki 1.25+' );
+	}
 } );
