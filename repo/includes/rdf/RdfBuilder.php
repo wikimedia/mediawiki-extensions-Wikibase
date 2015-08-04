@@ -151,7 +151,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	private function newTruthyStatementRdfBuilder() {
 		//NOTE: currently, the only simple values are supported in truthy mode!
-		$simpleValueBuilder = $this->newSimpleValueRdfBuilder( $this->vocabulary, $this->propertyLookup );
+		$simpleValueBuilder = $this->newSimpleValueRdfBuilder();
 		$statementBuilder = new TruthyStatementRdfBuilder( $this->vocabulary, $this->writer, $simpleValueBuilder );
 
 		return $statementBuilder;
@@ -444,7 +444,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param EntityDocument $entity
 	 */
 	private function addEntityStub( EntityDocument $entity ) {
-		$this->addEntityMetaData( $entity, false );
+		$this->addEntityMetaData( $entity );
 
 		if ( $entity instanceof FingerprintProvider ) {
 			$fingerprint = $entity->getFingerprint();
