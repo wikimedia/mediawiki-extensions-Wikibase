@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 4.1 (dev)
+## Version 4.1 (2015-08-04)
 
 * Added `StatementList::filter`
 * Added `StatementFilter` and `ReferencedStatementFilter`
