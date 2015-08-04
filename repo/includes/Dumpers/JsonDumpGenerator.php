@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MWContentSerializationException;
 use MWException;
 use Serializers\Serializer;
+use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
@@ -143,6 +144,13 @@ class JsonDumpGenerator extends DumpGenerator {
 		$data = $this->entitySerializer->serialize( $entity );
 
 		$data = $this->injectEntitySerializationWithDataTypes( $data );
+
+		// HACK: replace empty arrays with objects at the first level of the array
+		foreach ( $data as &$element ) {
+			if ( empty( $element ) ) {
+				$element = new stdClass();
+			}
+		}
 
 		$json = $this->encode( $data );
 
