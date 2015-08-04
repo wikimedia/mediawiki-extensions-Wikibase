@@ -1165,7 +1165,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
-		$resultBuilder->addClaims( array( $statement ), $path );
+		$resultBuilder->addStatements( array( $statement ), $path );
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
@@ -1211,7 +1211,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$props = array();
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addClaims( array( $statement ), $path, $props );
+		$resultBuilder->addStatements( array( $statement ), $path, $props );
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );
@@ -1226,7 +1226,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$expected = array( 'claim' => $statementSerialization );
 
 		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
-		$resultBuilder->addClaim( $statement );
+		$resultBuilder->addStatement( $statement );
 
 		$data = $result->getResultData();
 		$this->removeElementsWithKeysRecursively( $data, array( '_type' ) );

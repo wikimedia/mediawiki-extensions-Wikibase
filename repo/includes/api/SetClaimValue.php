@@ -76,7 +76,7 @@ class SetClaimValue extends ModifyClaim {
 		$status = $this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addClaim( $claim );
+		$this->getResultBuilder()->addStatement( $claim );
 	}
 
 	/**

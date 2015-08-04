@@ -579,7 +579,7 @@ class EditEntity extends ModifyEntity {
 			$builder->addSiteLinkList( $entity->getSiteLinkList(), 'entity' );
 		}
 
-		$builder->addClaims( $entity->getClaims(), 'entity' );
+		$builder->addStatements( $entity->getClaims(), 'entity' );
 	}
 
 	/**

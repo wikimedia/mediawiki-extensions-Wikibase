@@ -6,13 +6,13 @@ use ApiResult;
 use Revision;
 use SiteStore;
 use Status;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
@@ -803,14 +803,14 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Claim[] $claims the labels to set in the result
+	 * @param Statement[] $statements the labels to set in the result
 	 * @param array|string $path where the data is located
 	 * @param array|string $props a list of fields to include, or "all"
 	 */
-	public function addClaims( array $claims, $path, $props = 'all' ) {
+	public function addStatements( array $statements, $path, $props = 'all' ) {
 		$serializer = $this->serializerFactory->newStatementListSerializer();
 
-		$values = $serializer->serialize( new StatementList( $claims ) );
+		$values = $serializer->serialize( new StatementList( $statements ) );
 
 		if ( is_array( $props ) && !in_array( 'references', $props ) ) {
 			$values = $this->modifier->modifyUsingCallback(
@@ -846,18 +846,18 @@ class ResultBuilder {
 	/**
 	 * Get serialized claim and add it to result
 	 *
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 *
 	 * @since 0.5
 	 */
-	public function addClaim( Claim $claim ) {
+	public function addStatement( Statement $statement ) {
 		$serializer = $this->serializerFactory->newStatementSerializer();
 
 		//TODO: this is currently only used to add a Claim as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow claims
 		//      to be added to a list, using a path and a id key or index.
 
-		$value = $serializer->serialize( $claim );
+		$value = $serializer->serialize( $statement );
 
 		$value = $this->getArrayWithAlteredClaims( $value );
 

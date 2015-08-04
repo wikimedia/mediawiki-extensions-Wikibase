@@ -85,7 +85,7 @@ class CreateClaim extends ModifyClaim {
 		$status = $this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addClaim( $statement );
+		$this->getResultBuilder()->addStatement( $statement );
 	}
 
 	/**

@@ -106,7 +106,7 @@ class GetClaims extends ApiBase {
 		$entity = $entityRevision->getEntity();
 
 		$claims = $this->getClaims( $entity, $guid );
-		$this->resultBuilder->addClaims( $claims, null, $params['props'] );
+		$this->resultBuilder->addStatements( $claims, null, $params['props'] );
 	}
 
 	private function validateParameters( array $params ) {
