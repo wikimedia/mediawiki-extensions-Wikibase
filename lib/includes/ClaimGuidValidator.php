@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib;
 
-use Wikibase\DataModel\Claim\ClaimGuid;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
  * @since 0.4
@@ -40,7 +40,7 @@ class ClaimGuidValidator {
 			return false;
 		}
 
-		$guidParts = explode( ClaimGuid::SEPARATOR, $guid );
+		$guidParts = explode( StatementGuid::SEPARATOR, $guid );
 
 		if ( ! $this->validateClaimGuidPrefix( $guidParts[0] ) || ! $this->validateGuid( $guidParts[1] ) ) {
 			return false;
