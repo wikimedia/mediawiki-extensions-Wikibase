@@ -35,7 +35,7 @@ class DataTypeDefinitions {
 	 * definitions. Data type definitions are associative arrays, refer to the class level
 	 * documentation.
 	 */
-	public function __construct( $dataTypeDefinitions = array() ) {
+	public function __construct( array $dataTypeDefinitions ) {
 		Assert::parameterElementType( 'array', $dataTypeDefinitions, '$dataTypeDefinitions' );
 
 		$this->registerDataTypes( $dataTypeDefinitions );
