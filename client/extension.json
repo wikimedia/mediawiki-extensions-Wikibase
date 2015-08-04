@@ -1,0 +1,20 @@
+{
+	"name": "Wikibase Client",
+	"type": "wikibase",
+	"requires": {
+		"MediaWiki": ">= 1.27.0"
+	},
+	"callback": "Wikibase\\ClientHooks::registerExtension",
+	"MessagesDirs": {
+		"wikibaseclient": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"Wikibaseclientalias": "WikibaseClient.i18n.alias.php",
+		"wikibaseclientmagic": "WikibaseClient.i18n.magic.php"
+	},
+	"Hooks": {},
+	"config": {},
+	"manifest_version": 1
+}
