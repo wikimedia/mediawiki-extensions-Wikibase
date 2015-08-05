@@ -144,18 +144,22 @@ class ItemMergeInteractor {
 		$this->checkPermissions( $fromId );
 		$this->checkPermissions( $toId );
 
-		$fromEntity = $this->loadEntity( $fromId );
-		$toEntity = $this->loadEntity( $toId );
+		/**
+		 * @var Item $fromItem
+		 * @var Item $toItem
+		 */
+		$fromItem = $this->loadEntity( $fromId );
+		$toItem = $this->loadEntity( $toId );
 
-		$this->validateEntities( $fromEntity, $toEntity );
+		$this->validateEntities( $fromItem, $toItem );
 
 		// strip any bad values from $ignoreConflicts
 		$ignoreConflicts = array_intersect( $ignoreConflicts, ChangeOpsMerge::$conflictTypes );
 
 		try {
 			$changeOps = $this->changeOpFactory->newMergeOps(
-				$fromEntity,
-				$toEntity,
+				$fromItem,
+				$toItem,
 				$ignoreConflicts
 			);
 
@@ -164,7 +168,7 @@ class ItemMergeInteractor {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
 		}
 
-		$result = $this->attemptSaveMerge( $fromEntity, $toEntity, $summary, $bot );
+		$result = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $bot );
 
 		$redirected = false;
 
