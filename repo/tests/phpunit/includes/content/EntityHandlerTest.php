@@ -400,7 +400,6 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function testExportTransform( $blob, $expected ) {
 		$settings = new SettingsArray();
 		$settings->setSetting( 'transformLegacyFormatOnExport', true );
-		$settings->setSetting( 'internalEntitySerializerClass', null );
 
 		$handler = $this->getHandler( $settings );
 		$actual = $handler->exportTransform( $blob );
@@ -419,7 +418,6 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 		$settings = new SettingsArray();
 		$settings->setSetting( 'transformLegacyFormatOnExport', true );
-		$settings->setSetting( 'internalEntitySerializerClass', null );
 
 		$entity = $this->newEntity();
 		$currentSerializer = $this->getWikibaseRepo( $settings )->getInternalEntitySerializer();
