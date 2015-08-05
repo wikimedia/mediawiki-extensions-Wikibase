@@ -7,9 +7,9 @@ use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpStatementRank;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Services\Statement\GuidGenerator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpStatementRank

@@ -3,12 +3,12 @@
 namespace Wikibase\Test\Repo\Api;
 
 use Status;
-use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\Repo\Api\EntitySavingHelper;
 
 /**
  * @covers Wikibase\Repo\Api\EntitySavingHelper

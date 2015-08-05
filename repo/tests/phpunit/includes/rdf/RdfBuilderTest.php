@@ -6,9 +6,9 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
-use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
+use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
  * @covers Wikibase\Rdf\RdfBuilder
