@@ -11,20 +11,15 @@ use Language;
 use MediaWikiTestCase;
 use Title;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
-use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
-use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -100,103 +95,108 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	/**
 	 * @return EntityTitleLookup
 	 */
-	private function newEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $entityId ) {
-				return Title::newFromText( $entityId->getSerialization() );
-			} )
-		);
+	private function getTitleLookup() {
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
-		return $entityTitleLookup;
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback(
+				function ( EntityId $id ) {
+					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
+				}
+			) );
+
+		return $titleLookup;
 	}
 
 	/**
-	 * @dataProvider buildDispatchingValueFormatterProvider
+	 * @param string $type
+	 * @param string $format
+	 * @param FormatterOptions $options
+	 *
+	 * @return mixed
 	 */
-	public function testBuildDispatchingValueFormatter(
+	private function getFormatter( $type, $format, $options ) {
+		$builders = $this->newWikibaseValueFormatterBuilders(
+			$this->getTitleLookup()
+		);
+
+		$factory = array( $builders, 'new' . $type . 'Formatter' );
+		$formatter = call_user_func( $factory, $format, $options );
+
+		$this->assertInstanceOf( 'ValueFormatters\ValueFormatter', $formatter );
+		return $formatter;
+	}
+
+	/**
+	 * @dataProvider provideNewFormatter
+	 */
+	public function testNewFormatter(
+		$type,
 		$format,
 		FormatterOptions $options,
 		DataValue $value,
-		$expected,
-		$dataTypeId = null
+		$expected
 	) {
-		$builders = $this->newWikibaseValueFormatterBuilders( $this->newEntityTitleLookup() );
+		$formatter = $this->getFormatter( $type, $format, $options );
 
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-		$formatter = $builders->buildDispatchingValueFormatter( $factory, $format, $options );
-
-		$text = $formatter->formatValue( $value, $dataTypeId );
+		$text = $formatter->format( $value );
 		$this->assertRegExp( $expected, $text );
 	}
 
-	public function buildDispatchingValueFormatterProvider() {
+	public function provideNewFormatter() {
 		return array(
 			'plain url' => array(
+				'Url',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new StringValue( 'http://acme.com/' ),
 				'@^http://acme\\.com/$@'
 			),
-			'wikitext string' => array(
-				SnakFormatter::FORMAT_WIKI,
-				$this->newFormatterOptions(),
-				new StringValue( '{Wikibase}' ),
-				'@^&#123;Wikibase&#125;$@'
-			),
-			'html string' => array(
-				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
-				new StringValue( 'I <3 Wikibase & stuff' ),
-				'@^I &lt;3 Wikibase &amp; stuff$@'
-			),
-			'plain item label (with entity lookup)' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
-				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'@^Label for Q5$@' // compare mock object created in newBuilders()
-			),
 			'plain item label (with language fallback)' => array(
+				'EntityId',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions( 'de-ch' ), // should fall back to 'de'
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^Name für Q5$@' // compare mock object created in newBuilders()
 			),
-			'widget item link (with entity lookup)' => array(
-				SnakFormatter::FORMAT_HTML_WIDGET,
+			'html item link (with title lookup)' => array(
+				'EntityId',
+				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bQ5">Label for Q5<\/a>.*$/', // compare mock object created in newBuilders()
-				'wikibase-item'
 			),
-			'property link' => array(
+			'property link (with title lookup)' => array(
+				'EntityId',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new PropertyId( 'P5' ) ),
 				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
-				'wikibase-property'
 			),
-			'diff <url>' => array(
-				SnakFormatter::FORMAT_HTML_DIFF,
+			'<url>' => array(
+				'String',
+				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new StringValue( '<http://acme.com/>' ),
 				'@^&lt;http://acme\\.com/&gt;$@'
 			),
 			'localized quantity' => array(
-				SnakFormatter::FORMAT_WIKI,
+				'Quantity',
+				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions( 'de' ),
 				QuantityValue::newFromNumber( '+123456.789' ),
 				'@^123\\.456,789$@'
 			),
 			'commons link' => array(
+				'commonsMedia',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
-				'commonsMedia'
 			),
 			'a month in 1980' => array(
+				'Time',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new TimeValue(
@@ -208,6 +208,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'/^May 1980$/'
 			),
 			'a gregorian day in 1520' => array(
+				'Time',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new TimeValue(
@@ -219,6 +220,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'/^1 May 1520<sup class="wb-calendar-name">Gregorian<\/sup>$/'
 			),
 			'a julian day in 1980' => array(
+				'Time',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new TimeValue(
@@ -230,19 +232,22 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'/^1 May 1980<sup class="wb-calendar-name">Julian<\/sup>$/'
 			),
 			'text in english' => array(
+				'Monolingual',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions( 'en' ),
 				new MonolingualTextValue( 'en', 'Hello World' ),
 				'/^Hello World$/'
 			),
 			'text in german' => array(
+				'Monolingual',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions( 'en' ),
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
 				'/^<span lang="de".*?>Hallo Welt<\/span>.*\Deutsch.*$/'
 			),
 			'text in spanish' => array(
-				SnakFormatter::FORMAT_WIKI,
+				'Monolingual',
+				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions( 'de' ),
 				new MonolingualTextValue( 'es', 'Ola' ),
 				'/^Ola$/u'
@@ -254,61 +259,59 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * In case WikibaseValueFormatterBuilders doesn't have a EntityTitleLookup it returns
 	 * a formatter which doesn't link the entity id.
 	 *
-	 * @dataProvider buildDispatchingValueFormatterNoTitleLookupProvider
+	 * @dataProvider provideNewFormatter_noTitleLookup
 	 */
-	public function testBuildDispatchingValueFormatter_noTitleLookup(
+	public function testNewFormatter_noTitleLookup(
+		$type,
 		$format,
 		FormatterOptions $options,
 		DataValue $value,
-		$expected,
-		$dataTypeId = null
+		$expected
 	) {
-		$builders = $this->newWikibaseValueFormatterBuilders();
+		$formatter = $this->getFormatter( $type, $format, $options );
 
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-		$formatter = $builders->buildDispatchingValueFormatter( $factory, $format, $options );
-
-		$text = $formatter->formatValue( $value, $dataTypeId );
+		$text = $formatter->format( $value );
 		$this->assertRegExp( $expected, $text );
 	}
 
-	public function buildDispatchingValueFormatterNoTitleLookupProvider() {
+	public function provideNewFormatter_noTitleLookup() {
 		return array(
 			'plain item label' => array(
+				'EntityId',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^Label for Q5$@'
 			),
-			'widget item link' => array(
-				SnakFormatter::FORMAT_HTML_WIDGET,
+			'item link' => array(
+				'EntityId',
+				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'/^Label for Q5*$/',
-				'wikibase-item'
+				'/^Label for Q5*$/'
 			)
 		);
 	}
 
 	/**
-	 * @dataProvider buildDispatchingValueFormatterProvider_LabelDescriptionLookupOption
+	 * @dataProvider provideNewFormatter_LabelDescriptionLookupOption
 	 */
-	public function testBuildDispatchingValueFormatter_LabelDescriptionLookupOption(
+	public function testNewFormatter_LabelDescriptionLookupOption(
+		$type,
 		FormatterOptions $options,
-		ItemId $value,
+		DataValue $value,
 		$expected
 	) {
-		$builders = $this->newWikibaseValueFormatterBuilders( $this->newEntityTitleLookup() );
+		$builders = $this->newWikibaseValueFormatterBuilders();
 
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-		$formatter = $builders->buildDispatchingValueFormatter( $factory, SnakFormatter::FORMAT_HTML, $options );
+		$factory = array( $builders, 'new' . $type . 'Formatter' );
+		$formatter = call_user_func( $factory, SnakFormatter::FORMAT_HTML, $options );
 
-		$value = new EntityIdValue( $value );
-		$text = $formatter->formatValue( $value, 'wikibase-item' );
+		$text = $formatter->format( $value );
 		$this->assertRegExp( $expected, $text );
 	}
 
-	public function buildDispatchingValueFormatterProvider_LabelDescriptionLookupOption() {
+	public function provideNewFormatter_LabelDescriptionLookupOption() {
 		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
@@ -319,342 +322,58 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 		return array(
 			'language option' => array(
+				'EntityId',
 				new FormatterOptions( array(
 					ValueFormatter::OPT_LANG => 'de',
 				) ),
-				new ItemId( 'Q5' ),
+				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@>Name für Q5<@'
 			),
 			'fallback option' => array(
+				'EntityId',
 				new FormatterOptions( array(
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
 				) ),
-				new ItemId( 'Q5' ),
+				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@>Name für Q5<@'
 			),
 			'LabelDescriptionLookup option' => array(
+				'EntityId',
 				new FormatterOptions( array(
 					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup,
 				) ),
-				new ItemId( 'Q5' ),
+				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@>Custom LabelDescriptionLookup<@'
 			),
 		);
 	}
 
-	public function testSetValueFormatter() {
-		$mockFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
-		$mockFormatter->expects( $this->any() )
-			->method( 'format' )
-			->will( $this->returnValue( 'MOCK!' ) );
-
+	public function testGetFormatterFactoryCallbacksByValueType() {
 		$builders = $this->newWikibaseValueFormatterBuilders();
-		$builders->setValueFormatter( SnakFormatter::FORMAT_PLAIN, 'VT:string', $mockFormatter );
-		$builders->setValueFormatter( SnakFormatter::FORMAT_PLAIN, 'VT:time', null );
-
-		$formatter = $builders->buildDispatchingValueFormatter(
-			new OutputFormatValueFormatterFactory(
-				$builders->getValueFormatterBuildersForFormats()
-			),
-			SnakFormatter::FORMAT_PLAIN,
-			new FormatterOptions()
-		);
-
-		$this->assertEquals(
-			'MOCK!',
-			$formatter->format( new StringValue( 'o_O' ) ),
-			'Formatter override'
-		);
-
-		$this->setExpectedException( 'ValueFormatters\FormattingException' );
-
-		$timeValue = new TimeValue(
-			'+2013-01-01T00:00:00Z',
-			0, 0, 0,
-			TimeValue::PRECISION_SECOND,
-			'http://nyan.cat/original.php'
-		);
-		$formatter->format( $timeValue ); // expecting a FormattingException
-	}
-
-	public function testSetValueFormatterClass() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-		$builders->setValueFormatterClass(
-			SnakFormatter::FORMAT_PLAIN,
-			'VT:monolingualtext',
-			'Wikibase\Formatters\MonolingualTextFormatter'
-		);
-		$builders->setValueFormatterClass(
-			SnakFormatter::FORMAT_PLAIN,
-			'VT:time',
-			null
-		);
-
-		$options = new FormatterOptions();
-		$factory = new OutputFormatValueFormatterFactory(
-			$builders->getValueFormatterBuildersForFormats()
-		);
-		$formatter = $builders->buildDispatchingValueFormatter(
-			$factory,
-			SnakFormatter::FORMAT_PLAIN,
-			$options
-		);
-
-		$this->assertEquals(
-			'value',
-			$formatter->format( new MonolingualTextValue( 'en', 'value' ) ),
-			'Extra formatter'
-		);
-
-		$this->setExpectedException( 'ValueFormatters\FormattingException' );
-
-		$timeValue = new TimeValue(
-			'+2013-01-01T00:00:00Z',
-			0, 0, 0,
-			TimeValue::PRECISION_SECOND,
-			'http://nyan.cat/original.php'
-		);
-
-		$formatter->format( $timeValue ); // expecting a FormattingException
-	}
-
-	public function testSetValueFormatterBuilder() {
-		$builder = function () {
-			return new EntityIdValueFormatter( new PlainEntityIdFormatter() );
-		};
-
-		$builders = $this->newWikibaseValueFormatterBuilders();
-		$builders->setValueFormatterBuilder(
-			SnakFormatter::FORMAT_PLAIN,
-			'VT:wikibase-entityid',
-			$builder
-		);
-		$builders->setValueFormatterBuilder(
-			SnakFormatter::FORMAT_PLAIN,
-			'VT:time',
-			null
-		);
-
-		$options = new FormatterOptions();
-		$factory = new OutputFormatValueFormatterFactory(
-			$builders->getValueFormatterBuildersForFormats()
-		);
-		$formatter = $builders->buildDispatchingValueFormatter(
-			$factory,
-			SnakFormatter::FORMAT_PLAIN,
-			$options
-		);
-
-		$this->assertEquals(
-			'Q5',
-			$formatter->format( new EntityIdValue( new ItemId( "Q5" ) ) ),
-			'Extra formatter'
-		);
-
-		$this->setExpectedException( 'ValueFormatters\FormattingException' );
-
-		$timeValue = new TimeValue(
-			'+2013-01-01T00:00:00Z',
-			0, 0, 0,
-			TimeValue::PRECISION_SECOND,
-			'http://nyan.cat/original.php'
-		);
-		$formatter->format( $timeValue ); // expecting a FormattingException
-	}
-
-	public function testGetPlainTextFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-		$options = new FormatterOptions();
 
 		// check for all the required types
 		$required = array(
-			'VT:string',
-			'VT:time',
-			'VT:globecoordinate',
-			'VT:wikibase-entityid',
-			'VT:quantity',
+			'string',
+			'time',
+			'globecoordinate',
+			'wikibase-entityid',
+			'quantity',
+			'bad',
+			'monolingualtext',
 		);
+
+		$actual = array_keys( $builders->getFormatterFactoryCallbacksByValueType() );
+
+		sort( $required );
+		sort( $actual );
 
 		// check for all the required types, that is, the ones supported by the fallback format
-		$this->assertIncluded(
+		$this->assertEquals(
 			$required,
-			array_keys( $builders->getPlainTextFormatters( $options ) )
+			$actual
 		);
 
-		// skip two of the required entries
-		$skip = array_slice( $required, 2 );
-		$this->assertExcluded(
-			$skip,
-			array_keys( $builders->getPlainTextFormatters( $options, $skip ) )
-		);
-	}
-
-	public function testGetWikiTextFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-		$options = new FormatterOptions();
-
-		// check for all the required types, that is, the ones supported by the fallback format
-		$required = array_keys( $builders->getPlainTextFormatters( $options ) );
-		$this->assertIncluded(
-			$required,
-			array_keys( $builders->getWikiTextFormatters( $options ) )
-		);
-
-		// skip two of the required entries
-		$skip = array_slice( $required, 2 );
-		$this->assertExcluded(
-			$skip,
-			array_keys( $builders->getWikiTextFormatters( $options, $skip ) )
-		);
-	}
-
-	public function testGetHtmlFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-		$options = new FormatterOptions();
-
-		// check for all the required types, that is, the ones supported by the fallback format
-		$required = array_keys( $builders->getPlainTextFormatters( $options ) );
-		$this->assertIncluded(
-			$required,
-			array_keys( $builders->getHtmlFormatters( $options ) )
-		);
-
-		// skip two of the required entries
-		$skip = array_slice( $required, 2 );
-		$this->assertExcluded(
-			$skip,
-			array_keys( $builders->getHtmlFormatters( $options, $skip ) )
-		);
-	}
-
-	public function testGetWidgetFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-		$options = $this->newFormatterOptions();
-
-		// check for all the required types, that is, the ones supported by the fallback format
-		$required = array_keys( $builders->getHtmlFormatters( $options ) );
-		$this->assertIncluded(
-			$required,
-			array_keys( $builders->getWidgetFormatters( $options ) )
-		);
-
-		// skip two of the required entries
-		$skip = array_slice( $required, 2 );
-		$this->assertExcluded(
-			$skip,
-			array_keys( $builders->getWidgetFormatters( $options, $skip ) )
-		);
-	}
-
-	public function testGetDiffFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-		$options = $this->newFormatterOptions();
-
-		// check for all the required types, that is, the ones supported by the fallback format
-		$required = array_keys( $builders->getHtmlFormatters( $options ) );
-		$this->assertIncluded(
-			$required,
-			array_keys( $builders->getDiffFormatters( $options ) )
-		);
-
-		// skip two of the required entries
-		$skip = array_slice( $required, 2 );
-		$this->assertExcluded(
-			$skip,
-			array_keys( $builders->getDiffFormatters( $options, $skip ) )
-		);
-	}
-
-	/**
-	 * Asserts that $actualTypes contains all types listed in $requiredTypes.
-	 *
-	 * @param string[] $requiredTypes
-	 * @param string[] $actualTypes
-	 */
-	protected function assertIncluded( $requiredTypes, $actualTypes ) {
-		sort( $requiredTypes );
-		sort( $actualTypes );
-		$this->assertEmpty( array_diff( $requiredTypes, $actualTypes ), 'required' );
-	}
-
-	/**
-	 * Asserts that $actualTypes does not contain types listed in $skippedTypes.
-	 *
-	 * @param string[] $skippedTypes
-	 * @param string[] $actualTypes
-	 */
-	protected function assertExcluded( $skippedTypes, $actualTypes ) {
-		sort( $skippedTypes );
-		sort( $actualTypes );
-		$this->assertEmpty( array_intersect( $skippedTypes, $actualTypes ), 'skipped' );
-	}
-
-	public function testMakeEscapingFormatters() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-
-		$formatters = $builders->makeEscapingFormatters(
-			array( new StringFormatter( new FormatterOptions() ) ),
-			'htmlspecialchars'
-		);
-
-		$text = $formatters[0]->format( new StringValue( 'I <3 Wikibase' ) );
-		$this->assertEquals( 'I &lt;3 Wikibase', $text );
-	}
-
-	/**
-	 * @dataProvider applyLanguageDefaultsProvider
-	 */
-	public function testApplyLanguageDefaults( FormatterOptions $options, $expectedLanguage, $expectedFallback ) {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-
-		$builders->applyLanguageDefaults( $options );
-
-		if ( $expectedLanguage !== null ) {
-			$lang = $options->getOption( ValueFormatter::OPT_LANG );
-			$this->assertEquals( $expectedLanguage, $lang, 'OPT_LANG' );
-		}
-
-		if ( $expectedFallback !== null ) {
-			/** @var LanguageFallbackChain $languageFallback */
-			$languageFallback = $options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN );
-			$languages = $languageFallback->getFallbackChain();
-			$lang = $languages[0]->getLanguage()->getCode();
-
-			$this->assertEquals( $expectedFallback, $lang, 'OPT_LANGUAGE_FALLBACK_CHAIN' );
-		}
-	}
-
-	public function applyLanguageDefaultsProvider() {
-		$languageFallbackFactory = new LanguageFallbackChainFactory();
-		$languageFallback = $languageFallbackFactory->newFromLanguage( Language::factory( 'fr' ) );
-
-		return array(
-			'empty' => array(
-				new FormatterOptions( array() ),
-				'en', // determined in WikibaseValueFormatterBuildersTest::newBuilder()
-				'en'  // derived from language code
-			),
-			'language code set' => array(
-				new FormatterOptions( array( ValueFormatter::OPT_LANG => 'de' ) ),
-				'de', // as given
-				'de'  // derived from language code
-			),
-			'language fallback set' => array(
-				new FormatterOptions( array(
-					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback
-				) ),
-				'en', // default code is taken from the constructor, not the fallback chain
-				'fr'  // as given
-			),
-			'language code and fallback set' => array(
-				new FormatterOptions( array(
-					ValueFormatter::OPT_LANG => 'de',
-					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallback
-				) ),
-				'de', // as given
-				'fr'  // as given
-			),
-		);
+		$this->fail( "TODO: test value type formatters!" );
 	}
 
 }
