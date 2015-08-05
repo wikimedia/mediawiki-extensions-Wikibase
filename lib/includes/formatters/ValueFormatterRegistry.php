@@ -10,24 +10,17 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
- * Factory for ValueFormatters, based on factory callbacks.
+ * Registry for ValueFormatter factories.
  *
- * This class provides a mapping between factory callbacks organized by data type
- * to ValueFormatters by target type. This reflects the fact that formatters for a single data type
- * are typically defined by code that has knowledge about that specific data type, while
- * ValueFormatters are typically used by code that doesn't know anything about specific data types,
- * but requires a specific output format.
- *
- * This class implements a fallback mechanism for target formats, that allows some target formats
- * to stand in for others (with escaping applies if necessary). E.g. if there is not HTML formatter
- * defined for a data type, the plain text formatter plus HTML escaping would be used.
+ * This implements a fallback mechanism for target formats, that allows some target formats
+ * top stand in for others (with escaping applies if necessary).
  *
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class OutputFormatValueFormatterFactory {
+class ValueFormatterRegistry {
 
 	/**
 	 * @var callable[]
@@ -40,14 +33,12 @@ class OutputFormatValueFormatterFactory {
 	private $defaultLanguage;
 
 	/**
-	 * @param callable[] $factoryFunctions An associative array mapping types to factory
-	 * functions. Type names must use the "PT:" prefix for property types (data types),
-	 * and "VT:" for value types, to be compatible with the convention used by
-	 * DispatchingValueFormatter.
-	 * The factory functions will be called with two parameters, the desired target
-	 * type (see the SnakFormatter::FORMAT_XXX constants) and a FormatterOptions object.
-	 * The factory function must return an instance of ValueFormatter suitable for the given target
-	 * format, or null if no formatter for the requested target format is known.
+	 * @param callable[] $factoryFunctions An associative array mapping types (data types using the
+	 * prefix "DT:", values types using the prefix "VT:") to factory functions. The factory
+	 * functions will be called with two parameters, the desired target type (see the
+	 * SnakFormatter::FORMAT_XXX constants) and a FormatterOptions object. The factory function
+	 * must return an instance of ValueFormatter suitable for the given target format, or null
+	 * if no formatter for the requested target format is known.
 	 *
 	 * @param Language $defaultLanguage
 	 */
@@ -65,9 +56,8 @@ class OutputFormatValueFormatterFactory {
 	 * @throws InvalidArgumentException
 	 * @todo  : Sort out how the desired language is specified. We have two language options,
 	 *        each accepting different ways of specifying the language. That's not good.
-	 * @todo: this shouldn't be public at all. Perhaps factor it out into a helper class.
 	 */
-	public function applyLanguageDefaults( FormatterOptions $options ) {
+	private function applyLanguageDefaults( FormatterOptions $options ) {
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 
 		if ( !$options->hasOption( ValueFormatter::OPT_LANG ) ) {
@@ -143,7 +133,7 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
-	private function getPlainTextFormatters( FormatterOptions $options, array $skip = array() ) {
+	public function getPlainTextFormatters( FormatterOptions $options, array $skip = array() ) {
 		return $this->buildDefinedFormatters(
 			SnakFormatter::FORMAT_PLAIN,
 			$options,
@@ -162,7 +152,7 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
-	private function getWikiTextFormatters( FormatterOptions $options, array $skip = array() ) {
+	public function getWikiTextFormatters( FormatterOptions $options, array $skip = array() ) {
 		$wikiFormatters = $this->buildDefinedFormatters(
 			SnakFormatter::FORMAT_WIKI,
 			$options,
@@ -191,7 +181,7 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
-	private function getHtmlFormatters( FormatterOptions $options, array $skip = array() ) {
+	public function getHtmlFormatters( FormatterOptions $options, array $skip = array() ) {
 		$htmlFormatters = $this->buildDefinedFormatters(
 			SnakFormatter::FORMAT_HTML,
 			$options,
@@ -221,7 +211,7 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
-	private function getWidgetFormatters( FormatterOptions $options, array $skip = array() ) {
+	public function getWidgetFormatters( FormatterOptions $options, array $skip = array() ) {
 		$widgetFormatters = $this->buildDefinedFormatters(
 			SnakFormatter::FORMAT_HTML_WIDGET,
 			$options,
@@ -251,7 +241,7 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
-	private function getDiffFormatters( FormatterOptions $options, array $skip = array() ) {
+	public function getDiffFormatters( FormatterOptions $options, array $skip = array() ) {
 		$diffFormatters = $this->buildDefinedFormatters(
 			SnakFormatter::FORMAT_HTML_DIFF,
 			$options,
@@ -278,12 +268,13 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @param string $format
 	 * @param FormatterOptions $options
-	 * @param string[] $skip A list of types to be skipped. Useful when the caller already
+	 * @param string[] $skip A list of types to be skipped (using the 'VT:' prefix for data value
+	 *        types, or the 'PT:' prefix for property data types). Useful when the caller already
 	 *        has formatters for some types.
 	 *
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
-	private function buildDefinedFormatters( $format, FormatterOptions $options, array $skip = array() ) {
+	protected function buildDefinedFormatters( $format, FormatterOptions $options, array $skip = array() ) {
 		$formatters = array();
 
 		foreach ( $this->factoryFunctions as $type => $func ) {
@@ -311,7 +302,7 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @return ValueFormatter[]
 	 */
-	private function makeEscapingFormatters( array $formatters, $escape ) {
+	public function makeEscapingFormatters( array $formatters, $escape ) {
 		$escapingFormatters = array();
 
 		foreach ( $formatters as $key => $formatter ) {
