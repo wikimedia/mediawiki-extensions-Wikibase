@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\DataValueFactory;
+use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\SnakFactory;
@@ -47,8 +48,9 @@ class SnakFactoryTest extends \MediaWikiTestCase {
 		}
 
 		if ( $valueType !== null ) {
-			$dataValueFactory = new DataValueFactory();
-			$dataValueFactory->registerDataValue( $valueType, $expectedValueClass );
+			$dataValueFactory = new DataValueFactory( new DataValueDeserializer( array(
+				$valueType => $expectedValueClass
+			) ) );
 
 			$dataValue = $dataValueFactory->newDataValue( $valueType, $snakValue );
 		} else {

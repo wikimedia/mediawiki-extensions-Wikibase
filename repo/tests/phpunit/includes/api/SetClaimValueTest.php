@@ -159,7 +159,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertNotNull( $obtainedClaim );
 
-		$dataValue = DataValueFactory::singleton()->newFromArray( $claim['mainsnak']['datavalue'] );
+		$dataValue = WikibaseRepo::getDefaultInstance()->getDataValueFactory()->newFromArray( $claim['mainsnak']['datavalue'] );
 
 		$this->assertTrue( $obtainedClaim->getMainSnak()->getDataValue()->equals( $dataValue ) );
 	}
