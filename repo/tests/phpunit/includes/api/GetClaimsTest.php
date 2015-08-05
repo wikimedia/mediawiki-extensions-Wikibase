@@ -18,7 +18,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StatementRankSerializer;
 
