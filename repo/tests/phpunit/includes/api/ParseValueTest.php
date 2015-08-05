@@ -68,8 +68,6 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 		return $module;
 	}
 
-	}
-
 	public function newNullParser() {
 		return new NullParser();
 	}

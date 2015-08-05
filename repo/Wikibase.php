@@ -128,15 +128,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseAlias'] 			= __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] 			= __DIR__ . '/Wikibase.i18n.namespaces.php';
 
-	// This is somewhat hackish, make WikibaseValueParserBuilders, analogous to WikibaseValueFormatterBuilders
-	$newEntityIdParser = function( ValueParsers\ParserOptions $options ) {
-		//TODO: make ID builders configurable.
-		$builders = \Wikibase\DataModel\Services\EntityId\BasicEntityIdParser::getBuilders();
-		return new \Wikibase\Lib\EntityIdValueParser(
-			new \Wikibase\DataModel\Services\EntityId\DispatchingEntityIdParser( $builders, $options )
-		);
-	};
-
 	/**
 	 * @var callable[] $wgValueParsers Defines parser factory callbacks by parser name (not data type name).
 	 * @deprecated use $wgWikibaseDataTypes instead.
