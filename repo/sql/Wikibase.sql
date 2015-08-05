@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (
   ips_row_id                 BIGINT unsigned     NOT NULL PRIMARY KEY AUTO_INCREMENT, -- row ID
   ips_item_id                INT unsigned        NOT NULL, -- Id of the item
   ips_site_id                VARBINARY(32)       NOT NULL, -- Site identifier (global)
-  ips_site_page              VARCHAR(255)        NOT NULL -- Title of the page
+  ips_site_page              VARCHAR(310)        NOT NULL -- Prefixed title of the page
 ) /*$wgDBTableOptions*/;
 
 CREATE UNIQUE INDEX /*i*/wb_ips_item_site_page ON /*_*/wb_items_per_site (ips_site_id, ips_site_page);

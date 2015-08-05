@@ -456,6 +456,16 @@ class SqlStore implements Store {
 			'term_search',
 			$this->getUpdateScriptPath( 'UpdateTermIndexes', $db->getType() )
 		);
+
+		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
+		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
+		if ( $db->getType() !== 'sqlite' ) {
+			$updater->modifyExtensionField(
+				'wb_items_per_site',
+				'ips_site_page',
+				$this->getUpdateScriptPath( 'MakeIpsSitePageLarger', $db->getType() )
+			);
+		}
 	}
 
 	/**
