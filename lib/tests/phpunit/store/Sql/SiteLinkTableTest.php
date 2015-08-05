@@ -66,6 +66,21 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @depends testSaveLinksOfItem
+	 */
+	public function testSaveLinksOfItem_duplicate() {
+		if ( wfGetDB( DB_MASTER )->getType() === 'sqlite' ) {
+			$this->markTestSkipped( "Duplicated tables don't have indexes on them in SQLite, thus we can't test uniqueness handling." );
+		}
+
+		$item = new Item( new ItemId( 'Q2' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Beer' );
+
+		$res = $this->siteLinkTable->saveLinksOfItem( $item );
+		$this->assertFalse( $res );
+	}
+
+	/**
 	 * @dataProvider itemProvider
 	 */
 	public function testUpdateLinksOfItem() {
