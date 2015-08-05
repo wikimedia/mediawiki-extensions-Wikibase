@@ -6,11 +6,12 @@
 	},
 	"wikibase-edit": "hanova",
 	"wikibase-add": "ampiana",
+	"wikibase-label-empty": "Tsy misy marika voafaritra",
 	"wikibase-description-empty": "Tsy misy famisavisana voafaritra",
 	"wikibase-statements": "Filazana",
 	"wikibase-sitelinks-special": "Tranonkala hafa",
 	"wikibase-aliases-empty": "Tsy misy solonanarana voafaritra",
 	"wikibase-statementview-rank-normal": "Filaharana tsotra",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|tsiahy|tsiahy}}",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|tsiahy}}",
 	"wikibase-item-summary-wblinktitles-connect": "Nanampy rohim-piteny hampifandray pejy"
 }

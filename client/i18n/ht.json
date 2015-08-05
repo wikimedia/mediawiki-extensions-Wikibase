@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Tisave"
+			"Tisave",
+			"Bfpage"
 		]
 	},
+	"tooltip-t-wikibase": "Link nan done konekte atik repozitwa",
 	"wikibase-dataitem": "Eleman {{WBREPONAME}}",
 	"wikibase-editlinks": "Chanje lyen yo",
 	"wikibase-editlinkstitle": "Chanje lyen entèlang yo",
