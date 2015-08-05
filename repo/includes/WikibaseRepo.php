@@ -275,6 +275,46 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * Returns the default WikibaseValueFormatterBuilders instance.
+	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
+	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $reset Flag: Pass "reset" to reset the default instance
+	 *
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	public static function getDefaultFormatterBuilders( $reset = 'noreset' ) {
+		static $builders;
+
+		if ( $builders === null || $reset === 'reset' ) {
+			$wikibaseRepo = self::getDefaultInstance();
+			$builders = $wikibaseRepo->newWikibaseValueFormatterBuilders();
+		}
+
+		return $builders;
+	}
+
+	/**
+	 * Returns a low level factory object for creating formatters for well known data types.
+	 *
+	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
+	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
+	 *
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function newWikibaseValueFormatterBuilders() {
+		return new WikibaseValueFormatterBuilders(
+			$this->getDefaultLanguage(),
+			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
+			new LanguageNameLookup(),
+			$this->getLocalEntityUriParser(),
+			$this->getEntityTitleLookup()
+		);
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
@@ -702,30 +742,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return WikibaseValueFormatterBuilders
-	 */
-	public function getValueFormatterBuilders() {
-		return $this->getValueFormatterBuildersForTermLookup(
-			$this->getTermLookup()
-		);
-	}
-
-	/**
-	 * @param TermLookup $termLookup
-	 *
-	 * @return WikibaseValueFormatterBuilders
-	 */
-	public function getValueFormatterBuildersForTermLookup( TermLookup $termLookup ) {
-		return new WikibaseValueFormatterBuilders(
-			$this->getDefaultLanguage(),
-			new FormatterLabelDescriptionLookupFactory( $termLookup ),
-			new LanguageNameLookup(),
-			$this->getLocalEntityUriParser(),
-			$this->getEntityTitleLookup()
-		);
-	}
-
-	/**
 	 * @return EntityIdParser
 	 */
 	private function getLocalEntityUriParser() {
@@ -760,6 +776,31 @@ class WikibaseRepo {
 		}
 
 		return $this->valueFormatterFactory;
+	}
+
+	/**
+	 * Constructs an array of factory callbacks for ValueFormatters, keyed by property type
+	 * (data type) prefixed with "PT:", or value type prefixed with "VT:". This matches to
+	 * convention used by OutputFormatValueFormatterFactory and DispatchingValueFormatter.
+	 *
+	 * @return callable[]
+	 */
+	private function getFormatterFactoryCallbacksByType() {
+		$callbacks = array();
+
+		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
+		$valueTypeFormatters = $valueFormatterBuilders->getFormatterFactoryCallbacksByValueType();
+		$dataTypeFormatters = $this->dataTypeDefinitions->getFormatterFactoryCallbacks();
+
+		foreach ( $valueTypeFormatters as $key => $formatter ) {
+			$callbacks["VT:$key"] = $formatter;
+		}
+
+		foreach ( $dataTypeFormatters as $key => $formatter ) {
+			$callbacks["PT:$key"] = $formatter;
+		}
+
+		return $callbacks;
 	}
 
 	/**
@@ -864,6 +905,7 @@ class WikibaseRepo {
 			}
 		);
 
+		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 			$valueFormatterFactory,
 			$this->getPropertyDataTypeLookup(),

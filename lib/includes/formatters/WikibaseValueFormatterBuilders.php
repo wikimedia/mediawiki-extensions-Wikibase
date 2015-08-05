@@ -89,55 +89,6 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	/**
-	 * Returns an associative array mapping data types to factory functions.
-	 *
-	 * @todo FIXME: This is a temporary hack, the declaration of the factory callbacks should
-	 * go into DataTypeDefinitions.
-	 *
-	 * @return callable[]
-	 */
-	public function getFormatterFactoryCallbacksByDataType() {
-		$self = $this; // yay PHP 5.3!
-		return array(
-			'commonsMedia' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->newCommonsMediaFormatter( $format, $options );
-			},
-
-			'globe-coordinate' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->newGlobeCoordinateFormatter( $format, $options );
-			},
-
-			'monolingualtext' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->newMonolingualFormatter( $format, $options );
-			},
-
-			'quantity' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->newQuantityFormatter( $format, $options );
-			},
-
-			'string' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return null;
-			},
-
-			'time' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->newTimeFormatter( $format, $options );
-			},
-
-			'url' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->newUrlFormatter( $format, $options );
-			},
-
-			'wikibase-item' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->newEntityIdFormatter( $format, $options );
-			},
-
-			'wikibase-property' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->newEntityIdFormatter( $format, $options );
-			},
-		);
-	}
-
-	/**
 	 * Returns an associative array mapping value types to factory functions.
 	 * This is for use with OutputFormatValueFormatterFactory and DispatchingValueFormatter,
 	 * to allow a fallback from data type based formatter selection to formatting based
