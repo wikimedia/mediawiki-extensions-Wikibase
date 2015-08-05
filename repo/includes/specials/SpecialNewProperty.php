@@ -102,7 +102,6 @@ class SpecialNewProperty extends SpecialNewEntity {
 			'type' => 'select',
 			'options' => array_flip( $selector->getOptionsArray() ),
 			'id' => 'wb-newproperty-datatype',
-			'cssclass' => 'wb-select',
 			'label-message' => 'wikibase-newproperty-datatype'
 		);
 

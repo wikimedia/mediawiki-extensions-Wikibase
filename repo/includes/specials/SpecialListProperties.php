@@ -161,7 +161,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 				'name' => 'datatype',
 				'type' => 'select',
 				'id' => 'wb-listproperties-datatype',
-				'cssclass' => 'wb-select',
 				'label-message' => 'wikibase-listproperties-datatype',
 				'options' => $options,
 				'default' => $this->dataType
@@ -170,7 +169,6 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 				'name' => '',
 				'type' => 'submit',
 				'id' => 'wikibase-listproperties-submit',
-				'cssclass' => 'wb-input-button',
 				'default' => $this->msg( 'wikibase-listproperties-submit' )->text()
 			)
 		);

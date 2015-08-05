@@ -102,7 +102,6 @@ class SpecialNewItem extends SpecialNewEntity {
 			'default' => $this->site,
 			'type' => 'text',
 			'id' => 'wb-newitem-site',
-			'cssclass' => 'wb-input',
 			'readonly' => 'readonly',
 			'label-message' => 'wikibase-newitem-site'
 		);
@@ -111,7 +110,6 @@ class SpecialNewItem extends SpecialNewEntity {
 			'default' => $this->page,
 			'type' => 'text',
 			'id' => 'wb-newitem-page',
-			'cssclass' => 'wb-input',
 			'readonly' => 'readonly',
 			'label-message' => 'wikibase-newitem-page'
 		);

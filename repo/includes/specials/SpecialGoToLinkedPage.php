@@ -239,7 +239,6 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-itemid',
 				'size' => 36,
-				'cssclass' => 'wb-input-text',
 				'label-message' => 'wikibase-gotolinkedpage-lookup-item'
 			)
 		);

@@ -163,7 +163,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				'default' => $this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wikibase-entitieswithoutpage-submit',
-				'cssclass' => 'wb-input-button'
 			)
 		);
 

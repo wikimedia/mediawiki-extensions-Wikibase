@@ -134,7 +134,6 @@ class SpecialPagesWithBadges extends QueryPage {
 				'name' => '',
 				'type' => 'submit',
 				'id' => 'wikibase-pageswithbadges-submit',
-				'cssclass' => 'wb-input-button',
 				'default' => $this->msg( 'wikibase-pageswithbadges-submit' )->text()
 			)
 		);
