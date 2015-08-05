@@ -230,13 +230,12 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
 			)
 			. parent::getFormElements( $entity )
-			. Html::element(
-				'label',
+			. Html::label(
+				$this->msg( 'wikibase-modifyterm-language' )->text(),
+				'wb-modifyterm-language',
 				array(
-					'for' => 'wb-modifyterm-language',
 					'class' => 'wb-label'
-				),
-				$this->msg( 'wikibase-modifyterm-language' )->text()
+				)
 			)
 			. Html::input(
 				'language',
@@ -248,15 +247,16 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				)
 			)
 			. Html::element( 'br' )
-			. Html::element(
-				'label',
-				array(
-					'for' => 'wb-modifyterm-value',
-					'class' => 'wb-label'
-				),
-				// Messages: wikibase-setlabel-label, wikibase-setdescription-label,
+			. Html::label(
+				// Messages:
+				// wikibase-setlabel-label
+				// wikibase-setdescription-label
 				// wikibase-setaliases-label
-				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text()
+				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text(),
+				'wb-modifyterm-value',
+				array(
+					'class' => 'wb-label'
+				)
 			)
 			. $valueinput;
 		}

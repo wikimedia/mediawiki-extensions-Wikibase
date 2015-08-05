@@ -223,7 +223,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * @param string $itemString
 	 */
 	protected function outputForm( $site, $itemString ) {
-		$this->getOutput()->addModules( 'wikibase.special.goToLinkedPage' );
+		$this->getOutput()->addModuleStyles( 'wikibase.special' );
 
 		$this->getOutput()->addHTML(
 			Html::openElement(
@@ -241,25 +241,30 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				array(),
 				$this->msg( 'wikibase-gotolinkedpage-lookup-fieldset' )->text()
 			)
-			. Html::element(
-				'label',
-				array( 'for' => 'wb-gotolinkedpage-sitename' ),
-				$this->msg( 'wikibase-gotolinkedpage-lookup-site' )->text()
+			. Html::label(
+				$this->msg( 'wikibase-gotolinkedpage-lookup-site' )->text(),
+				'wb-gotolinkedpage-sitename',
+				array(
+					'class' => 'wb-label'
+				)
 			)
 			. Html::input(
 				'site',
 				$site ? htmlspecialchars( $site ) : '',
 				'text',
 				array(
+					'class' => 'wb-input',
 					'id' => 'wb-gotolinkedpage-sitename',
 					'size' => 12
 				)
 			)
 			. ' '
-			. Html::element(
-				'label',
-				array( 'for' => 'wb-gotolinkedpage-itemid' ),
-				$this->msg( 'wikibase-gotolinkedpage-lookup-item' )->text()
+			. Html::label(
+				$this->msg( 'wikibase-gotolinkedpage-lookup-item' )->text(),
+				'wb-gotolinkedpage-itemid',
+				array(
+					'class' => 'wb-label'
+				)
 			)
 			. Html::input(
 				'itemid',
@@ -268,7 +273,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				array(
 					'id' => 'wb-gotolinkedpage-itemid',
 					'size' => 36,
-					'class' => 'wb-input-text'
+					'class' => 'wb-input'
 				)
 			)
 			. Html::input(
@@ -277,7 +282,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				'submit',
 				array(
 					'id' => 'wb-gotolinkedpage-submit',
-					'class' => 'wb-input-button'
+					'class' => 'wb-button'
 				)
 			)
 			. Html::closeElement( 'fieldset' )

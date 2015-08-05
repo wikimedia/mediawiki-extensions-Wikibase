@@ -162,12 +162,9 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				$this->msg( $this->legendMsg )->text()
 			) .
 			Html::openElement( 'p' ) .
-			Html::element(
-				'label',
-				array(
-					'for' => 'wb-entitieswithoutpage-language'
-				),
-				$this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text()
+			Html::label(
+				$this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text(),
+				'wb-entitieswithoutpage-language'
 			) . ' ' .
 			Html::input(
 				'language',
@@ -177,12 +174,9 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 					'id' => 'wb-entitieswithoutpage-language'
 				)
 			) . ' ' .
-			Html::element(
-				'label',
-				array(
-					'for' => 'wb-entitieswithoutpage-type'
-				),
-				$this->msg( 'wikibase-entitieswithoutlabel-label-type' )->text()
+			Html::label(
+				$this->msg( 'wikibase-entitieswithoutlabel-label-type' )->text(),
+				'wb-entitieswithoutpage-type'
 			) . ' ' .
 			$typeSelect->getHTML() . ' ' .
 			Html::input(
@@ -190,8 +184,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				$this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
 				'submit',
 				array(
-					'id' => 'wikibase-entitieswithoutpage-submit',
-					'class' => 'wb-input-button'
+					'id' => 'wikibase-entitieswithoutpage-submit'
 				)
 			) .
 			Html::closeElement( 'p' ) .

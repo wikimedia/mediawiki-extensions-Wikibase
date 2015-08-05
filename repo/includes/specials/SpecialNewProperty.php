@@ -100,13 +100,12 @@ class SpecialNewProperty extends SpecialNewEntity {
 		$selector = new DataTypeSelector( $dataTypeFactory->getTypes(), $this->getLanguage()->getCode() );
 
 		return parent::additionalFormElements()
-			. Html::element(
-				'label',
+			. Html::label(
+				$this->msg( 'wikibase-newproperty-datatype' )->text(),
+				'wb-newproperty-datatype',
 				array(
-					'for' => 'wb-newproperty-datatype',
 					'class' => 'wb-label'
-				),
-				$this->msg( 'wikibase-newproperty-datatype' )->text()
+				)
 			)
 			. $selector->getHtml( 'wb-newproperty-datatype' );
 	}

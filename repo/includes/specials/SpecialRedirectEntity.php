@@ -233,13 +233,12 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 * @return string
 	 */
 	protected function getFormElements() {
-		return Html::element(
-			'label',
+		return Html::label(
+			$this->msg( 'wikibase-redirectentity-fromid' )->text(),
+			'wb-redirectentity-fromid',
 			array(
-				'for' => 'wb-redirectentity-fromid',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-redirectentity-fromid' )->text()
+			)
 		)
 		. Html::input(
 			'fromid',
@@ -251,13 +250,12 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 			)
 		)
 		. Html::element( 'br' )
-		. Html::element(
-			'label',
+		. Html::label(
+			$this->msg( 'wikibase-redirectentity-toid' )->text(),
+			'wb-redirectentity-toid',
 			array(
-				'for' => 'wb-redirectentity-toid',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-redirectentity-toid' )->text()
+			)
 		)
 		. Html::input(
 			'toid',
