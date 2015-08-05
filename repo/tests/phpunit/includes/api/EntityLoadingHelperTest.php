@@ -4,11 +4,11 @@ namespace Wikibase\Test\Repo\Api;
 
 use Exception;
 use UsageException;
-use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Repo\Api\EntityLoadingHelper;
 
 /**
  * @covers Wikibase\Repo\Api\EntityLoadingHelper

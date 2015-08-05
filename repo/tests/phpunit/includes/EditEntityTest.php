@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use HashBagOStuff;
-use IContextSource;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use ReflectionMethod;
 use RequestContext;
@@ -21,7 +20,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\EditEntity

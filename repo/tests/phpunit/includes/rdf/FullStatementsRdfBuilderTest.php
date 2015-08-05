@@ -2,14 +2,14 @@
 
 namespace Wikibase\Test\Rdf;
 
-use Wikibase\Rdf\ComplexValueRdfBuilder;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Rdf\ComplexValueRdfBuilder;
 use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\FullStatementRdfBuilder;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
-use Wikibase\Rdf\SimpleValueRdfBuilder;
-use Wikibase\Rdf\FullStatementRdfBuilder;
 use Wikibase\Rdf\RdfProducer;
+use Wikibase\Rdf\SimpleValueRdfBuilder;
 
 /**
  * @covers Wikibase\Rdf\FullStatementRdfBuilder

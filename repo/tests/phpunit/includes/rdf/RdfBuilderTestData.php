@@ -10,12 +10,12 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\MockRepository;
+use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
  * Helper class for accessing data files for RdfBuilder related tests.

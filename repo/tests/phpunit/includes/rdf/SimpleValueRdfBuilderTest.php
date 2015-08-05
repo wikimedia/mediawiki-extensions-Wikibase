@@ -14,9 +14,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikimedia\Purtle\RdfWriter;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SimpleValueRdfBuilder;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @covers Wikibase\Rdf\SimpleValueRdfBuilder

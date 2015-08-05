@@ -4,10 +4,10 @@ namespace Wikibase\Test\Repo\Api;
 
 use MediaWikiSite;
 use Title;
-use Wikibase\Repo\Api\ItemByTitleHelper;
-use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\Api\ItemByTitleHelper;
+use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\StringNormalizer;
 
 /**

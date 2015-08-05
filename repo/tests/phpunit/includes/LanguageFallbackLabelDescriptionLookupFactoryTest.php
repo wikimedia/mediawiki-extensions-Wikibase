@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
 

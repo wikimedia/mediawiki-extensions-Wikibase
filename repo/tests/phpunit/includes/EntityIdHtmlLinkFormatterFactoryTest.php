@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Test;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 
 /**
  * @covers Wikibase\Repo\EntityIdHtmlLinkFormatterFactory
