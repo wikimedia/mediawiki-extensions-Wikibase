@@ -165,7 +165,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-gotolinkedpage-itemid',
-				'class' => 'wb-input-text',
+				'class' => 'wb-input',
 				'name' => 'itemid',
 				'value' => $item
 			) );
@@ -173,7 +173,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-gotolinkedpage-submit',
-				'class' => 'wb-input-button',
+				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'submit'
 			)
