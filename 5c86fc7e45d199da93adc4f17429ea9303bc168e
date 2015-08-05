@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_4fa1a98f",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-05T09:22:11Z",
+      "side": 1,
+      "message": "Should be \"Item $fromItem\" afaik\nSame below",
+      "revId": "5c86fc7e45d199da93adc4f17429ea9303bc168e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
