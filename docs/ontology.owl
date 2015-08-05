@@ -297,10 +297,11 @@
       <rdfs:range rdf:resource="&xsd;decimal"/>
   </owl:DatatypeProperty>
 
-  <owl:DatatypeProperty rdf:about="&wikibase;quantityUnit">
+  <owl:ObjectProperty rdf:about="&wikibase;quantityUnit">
       <rdfs:label>quantityUnit</rdfs:label>
       <rdfs:comment>Unit of measurement.</rdfs:comment>
       <rdfs:domain rdf:resource="&wikibase;QuantityValue"/>
+      <rdfs:range rdf:resource="&wikibase;Item"/>
   </owl:DatatypeProperty>
 
   <owl:ObjectProperty rdf:about="&wikibase;timeCalendarModel">
