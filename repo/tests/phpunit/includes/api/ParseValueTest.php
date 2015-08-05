@@ -81,8 +81,6 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 
 	public function newArrayWithStringValidator() {
 		return array( new RegexValidator( '/INVALID/', true, 'no-kittens' ) );
-	}
-
 	public function newNullParser() {
 		return new NullParser();
 	}

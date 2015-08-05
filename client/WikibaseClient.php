@@ -69,8 +69,6 @@ call_user_func( function() {
 	global $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
 	global $wgJobClasses, $wgWBClientDataTypes;
 
-	$wgWBClientDataTypes = require ( __DIR__ . '/../lib/WikibaseLib.datatypes.php' );
-
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
 		'name' => 'Wikibase Client',
@@ -81,6 +79,22 @@ call_user_func( function() {
 		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client',
 		'descriptionmsg' => 'wikibase-client-desc'
 	);
+
+	$wgWBClientDataTypes = require ( __DIR__ . '/../lib/WikibaseLib.datatypes.php' );
+
+	$clientDatatypes = require( __DIR__ . '/WikibaseClient.datatypes.php' );
+
+	// merge WikibaseRepo.datatypes.php into $wgWBClientDataTypes
+	foreach ( $clientDatatypes as $type => $clientDef ) {
+		$baseDef = isset( $wgWBClientDataTypes[$type] ) ? $wgWBClientDataTypes[$type] : array();
+
+		// If the repo extension is loaded, do not override the repo's formatters!
+		if ( defined( 'WB_VERSION' ) ) {
+			unset( $clientDef['formatter-factory-callback'] );
+		}
+
+		$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
+	}
 
 	// i18n
 	$wgMessagesDirs['wikibaseclient']                   = __DIR__ . '/i18n';
