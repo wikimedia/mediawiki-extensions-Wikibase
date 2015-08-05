@@ -40,4 +40,4 @@ WikibaseRepo also defines the method getDataTypeValidatorFactory() which returns
 DataTypeValidatorFactory for obtaining the validators for each data type.
 
 == Caveats ==
-* the Methods getSnakFormatterFactory() does not yet use $wgWikibaseDataTypeDefinitions.
+* FIXME: the Methods getSnakFormatterFactory() does not yet use $wgWikibaseDataTypeDefinitions.
