@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Serialization;
 use ApiResult;
 use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 
 /**
  * @since 0.5
