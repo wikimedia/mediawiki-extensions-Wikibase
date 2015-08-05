@@ -85,8 +85,6 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 			new DataValueValidator(
 				new RegexValidator( '/INVALID/', true, 'no-kittens' )
 			) );
-	}
-
 	public function newNullParser() {
 		return new NullParser();
 	}
