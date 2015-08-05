@@ -2,78 +2,21 @@
 
 namespace DataValues;
 
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 
 /**
- * Factory for DataValue objects.
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
 class DataValueFactory {
 
-	/**
-	 * Field holding the registered data values.
-	 * Data value type pointing to name of DataValue implementing class.
-	 *
-	 * @since 0.1
-	 *
-	 * @var string[]
-	 */
-	protected $values = array(
-		'boolean' => 'DataValues\BooleanValue',
-		'number' => 'DataValues\NumberValue',
-		'string' => 'DataValues\StringValue',
-		'unknown' => 'DataValues\UnknownValue',
-		'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
-		'monolingualtext' => 'DataValues\MonolingualTextValue',
-		'multilingualtext' => 'DataValues\MultilingualTextValue',
-		'quantity' => 'DataValues\QuantityValue',
-		'time' => 'DataValues\TimeValue',
-		'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
-	);
+	private $deserializer;
 
-	/**
-	 * Singleton.
-	 * @deprecated Create your own instance rather then relying on global state
-	 *
-	 * @since 0.1
-	 *
-	 * @return DataValueFactory
-	 */
-	public static function singleton() {
-		static $instance = null;
-
-		if ( $instance === null ) {
-			$instance = new DataValueFactory();
-		}
-
-		return $instance;
-	}
-
-	/**
-	 * Registers a data value.
-	 * If there is a data value already with the provided name,
-	 * it will be overridden with the newly provided data.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $dataValueType
-	 * @param string $class
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function registerDataValue( $dataValueType, $class ) {
-		if ( !is_string( $dataValueType ) ) {
-			throw new InvalidArgumentException( 'Data value types can only be of type string' );
-		}
-
-		if ( !is_string( $class ) ) {
-			throw new InvalidArgumentException( 'DataValue class names can only be of type string' );
-		}
-
-		$this->values[$dataValueType] = $class;
+	public function __construct( Deserializer $dataValueDeserializer ) {
+		$this->deserializer = $dataValueDeserializer;
 	}
 
 	/**
@@ -85,7 +28,6 @@ class DataValueFactory {
 	 * @param mixed  $data
 	 *
 	 * @return DataValue
-	 * @throws IllegalValueException
 	 * @throws InvalidArgumentException
 	 */
 	public function newDataValue( $dataValueType, $data ) {
@@ -93,8 +35,14 @@ class DataValueFactory {
 			throw new InvalidArgumentException( '$dataValueType must be a non-empty string' );
 		}
 
-		$class = $this->getDataValueClass( $dataValueType );
-		$value = $class::newFromArray( $data );
+		try {
+			$value = $this->deserializer->deserialize( array(
+				'value' => $data,
+				'type' => $dataValueType
+			) );
+		} catch ( DeserializationException $ex ) {
+			throw new InvalidArgumentException( $ex->getMessage(), 0, $ex );
+		}
 
 		return $value;
 	}
@@ -183,48 +131,6 @@ class DataValueFactory {
 		}
 
 		return $value;
-	}
-
-	/**
-	 * Returns the class associated with the provided DataValue type.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $dataValueType
-	 *
-	 * @return string
-	 * @throws IllegalValueException
-	 */
-	protected function getDataValueClass( $dataValueType ) {
-		if ( !array_key_exists( $dataValueType, $this->values ) ) {
-			throw new IllegalValueException( 'Unknown data value type "' . $dataValueType . '" has no associated DataValue class' );
-		}
-
-		return $this->values[$dataValueType];
-	}
-
-	/**
-	 * Returns the types of the registered DataValues.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string[]
-	 */
-	public function getDataValues() {
-		return array_keys( $this->values );
-	}
-
-	/**
-	 * Returns if there is a DataValue with the provided type.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $dataValueType DataValue type
-	 *
-	 * @return boolean
-	 */
-	public function hasDataValue( $dataValueType ) {
-		return array_key_exists( $dataValueType, $this->values );
 	}
 
 }
