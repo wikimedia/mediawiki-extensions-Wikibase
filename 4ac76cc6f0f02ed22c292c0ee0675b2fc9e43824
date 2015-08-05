@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ec42329_a1fdc105",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-05T10:19:36Z",
+      "side": 1,
+      "message": "This is accessing globals state. Please do not do that if it can at all be avoided. If this class needs a map of canonical language names, it should require a map of canonical language names as a constructor parameter. This dependency should be explicit, and not buried in global state.\n\nAlso consider providing a LanguageCodeLookup interface instead of an array. That would be type safe, and it would allow lazy lookup/initialization.",
+      "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_40dd7316",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 2
@@ -67,6 +84,24 @@
       "side": 1,
       "message": "Caching is a good idea, we don\u0027t have that many language codes. As for slowing down the ones with -, yes, it is a trade-off. Most labels however do not have - (most data is in languages like en, de, es, ru, zh, etc.) and only few labels have languages with -. So we optimize for the common case.",
       "parentUuid": "8ec42329_9f5fce43",
+      "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_c1000d06",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-05T10:19:36Z",
+      "side": 1,
+      "message": "Perhaps a local cache of mappings makes more sense then.",
+      "parentUuid": "8ec42329_eb23b850",
       "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
