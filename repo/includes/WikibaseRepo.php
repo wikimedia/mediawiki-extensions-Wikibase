@@ -939,26 +939,14 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getInternalEntitySerializer() {
-		$entitySerializerClass = $this->settings->getSetting( 'internalEntitySerializerClass' );
-
-		if ( $entitySerializerClass === null ) {
-			return $this->getInternalSerializerFactory()->newEntitySerializer();
-		}
-
-		return new $entitySerializerClass();
+		return $this->getInternalSerializerFactory()->newEntitySerializer();
 	}
 
 	/**
 	 * @return Serializer
 	 */
 	public function getInternalStatementSerializer() {
-		$claimSerializerClass = $this->settings->getSetting( 'internalClaimSerializerClass' );
-
-		if ( $claimSerializerClass === null ) {
-			return $this->getInternalSerializerFactory()->newStatementSerializer();
-		}
-
-		return new $claimSerializerClass();
+		return $this->getInternalSerializerFactory()->newStatementSerializer();
 	}
 
 	/**
