@@ -107,7 +107,7 @@ class ChangeOpDescription extends ChangeOpBase {
 	 */
 	public function validate( Entity $entity ) {
 		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
-		$termValidator = $this->termValidatorFactory->getDescriptionValidator( $entity->getType() );
+		$termValidator = $this->termValidatorFactory->getDescriptionValidator();
 		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
 		// check that the language is valid
