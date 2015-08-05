@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -54,7 +55,20 @@ class DumpJsonTest extends MediaWikiTestCase {
 		$testEntities = array(
 			new Item( new ItemId( 'Q1' ) ),
 			new Property( new PropertyId( 'P1' ), null, 'string' ),
-			new Property( new PropertyId( 'P12' ), null, 'string' ),
+			new Property(
+				new PropertyId( 'P12' ),
+				null,
+				'string',
+				new StatementList( array(
+					new Statement(
+						// P999 is non existent thus the datatype will not be present
+						new PropertySomeValueSnak( new PropertyId( 'P999' ) ),
+						null,
+						null,
+						'GUID1'
+					)
+				) )
+			),
 			new Item(
 				new ItemId( 'Q2' ),
 				new Fingerprint(
@@ -148,6 +162,9 @@ class DumpJsonTest extends MediaWikiTestCase {
 		$mockDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {
+				if ( $propertyId->getSerialization() === 'P999' ) {
+					throw new PropertyNotFoundException( $propertyId );
+				}
 				return 'DtIdFor_' . $propertyId->getSerialization();
 			} ) );
 		return $mockDataTypeLookup;
