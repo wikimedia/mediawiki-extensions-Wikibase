@@ -126,7 +126,6 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'pagename',
-				'class' => 'wb-input',
 			),
 			'child' => array(
 				'tag' => 'input',

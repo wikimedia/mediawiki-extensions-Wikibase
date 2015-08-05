@@ -177,7 +177,6 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-mergeitems-fromid',
-				'class' => 'wb-input',
 			),
 			'child' => array(
 				'tag' => 'input',
@@ -189,7 +188,6 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-mergeitems-toid',
-				'class' => 'wb-input',
 			),
 			'child' => array(
 				'tag' => 'input',

@@ -225,7 +225,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				$this->getRequest()->getVal( 'page' ) ?: $this->page,
 				'text',
 				array(
-					'class' => 'wb-input wb-input-text',
+					'class' => 'wb-input',
 					'id' => 'wb-setsitelink-page',
 				)
 			);
