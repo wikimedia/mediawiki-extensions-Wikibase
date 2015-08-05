@@ -34,6 +34,41 @@
       "revId": "954b4409ee7f9c4d77a846004d25d2d9b5c1993c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_41617dce",
+        "filename": "client/includes/DataAccess/RestrictedEntityLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-05T10:32:17Z",
+      "side": 1,
+      "message": "Yes... count() can have very bad performance, but if and when that is the case depends on the platform a lot. I recall Thiemo doing some investigation of this, and finding that different versions of php behave quite differently, and hhvm is different still. And the behavior may also depend on the type of keys in the array...\n\nBut yea, for reasonable limits \u003c 1000, it probably doesn\u0027t make a difference.",
+      "parentUuid": "8ec42329_2e4daac7",
+      "revId": "954b4409ee7f9c4d77a846004d25d2d9b5c1993c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_e15bc924",
+        "filename": "client/includes/DataAccess/RestrictedEntityLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-05T10:32:17Z",
+      "side": 1,
+      "message": "So, if the limit is 1, and you access one item, you get an exception? I don\u0027t think that is right, it should be \"\u003e\", not \"\u003e\u003d\".",
+      "revId": "954b4409ee7f9c4d77a846004d25d2d9b5c1993c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
