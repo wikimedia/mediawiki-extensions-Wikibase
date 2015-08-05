@@ -224,7 +224,7 @@ HTML;
 
 	$templates['wikibase-sitelinkgroupview'] =
 <<<HTML
-<div class="wikibase-sitelinkgroupview mw-collapsible" data-wb-sitelinks-group="$5">
+<div class="wikibase-sitelinkgroupview$7" data-wb-sitelinks-group="$5">
 	<div class="wikibase-sitelinkgroupview-heading-section">
 		<div class="wikibase-sitelinkgroupview-heading-container">
 			<h3 class="wb-sitelinks-heading" dir="auto" id="$1">$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h3>
