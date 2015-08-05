@@ -16,6 +16,24 @@
       "revId": "26f4d1f83aad538ff227db49be57e8266db1f5ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_3726f3c9",
+        "filename": "repo/maintenance/dumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-05T17:31:58Z",
+      "side": 1,
+      "message": "Indeed! Will fix in a follow-up!!! ;)",
+      "parentUuid": "8ec42329_773ebb87",
+      "revId": "26f4d1f83aad538ff227db49be57e8266db1f5ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
