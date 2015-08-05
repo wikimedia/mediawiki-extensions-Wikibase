@@ -77,35 +77,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Deletes all the data stored on the repository.
-	 *
-	 * @since 0.2
-	 *
-	 * @param callable $reportMessage // takes a string param and echos it
-	 *
-	 * @return bool
-	 */
-	public static function onWikibaseDeleteData( $reportMessage ) {
-		$store = WikibaseClient::getDefaultInstance()->getStore();
-
-		$reportMessage( "Deleting data from the " . get_class( $store ) . " store..." );
-
-		$store->clear();
-
-		// @todo filter by something better than RC_EXTERNAL, in case something else uses that someday
-		$dbw = wfGetDB( DB_MASTER );
-		$dbw->delete(
-			'recentchanges',
-			array( 'rc_type' => RC_EXTERNAL ),
-			__METHOD__
-		);
-
-		$reportMessage( "done!\n" );
-
-		return true;
-	}
-
-	/**
 	 * External library for Scribunto
 	 *
 	 * @since 0.4

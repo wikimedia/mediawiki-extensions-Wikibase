@@ -119,9 +119,6 @@ call_user_func( function() {
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
 
-	// extension hooks
-	$wgHooks['WikibaseDeleteData'][] = '\Wikibase\ClientHooks::onWikibaseDeleteData';
-
 	// job classes
 	$wgJobClasses['wikibase-addUsagesForPage'] = 'Wikibase\Client\Store\AddUsagesForPageJob';
 
