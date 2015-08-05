@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
-use Wikibase\TermIndexEntry;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup

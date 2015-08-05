@@ -2,14 +2,13 @@
 
 namespace Wikibase\Test;
 
-use BadMethodCallException;
 use Exception;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
+use Wikibase\TermIndexEntry;
 
 /**
  * Mock implementation of TermIndex.

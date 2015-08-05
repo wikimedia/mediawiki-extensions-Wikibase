@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoTable;
-use Wikibase\Settings;
 
 /**
  * @covers Wikibase\PropertyInfoTable
