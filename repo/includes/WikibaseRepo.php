@@ -246,7 +246,7 @@ class WikibaseRepo {
 	 * @return DataValueFactory
 	 */
 	public function getDataValueFactory() {
-		return DataValueFactory::singleton();
+		return new DataValueFactory( $this->getDataValueDeserializer() );
 	}
 
 	/**
