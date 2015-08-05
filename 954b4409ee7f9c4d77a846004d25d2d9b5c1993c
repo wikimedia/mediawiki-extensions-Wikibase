@@ -69,6 +69,24 @@
       "revId": "954b4409ee7f9c4d77a846004d25d2d9b5c1993c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_28c3ed3d",
+        "filename": "client/includes/DataAccess/RestrictedEntityLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-05T23:49:54Z",
+      "side": 1,
+      "message": "Weird... how did I come up with that.",
+      "parentUuid": "8ec42329_e15bc924",
+      "revId": "954b4409ee7f9c4d77a846004d25d2d9b5c1993c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
