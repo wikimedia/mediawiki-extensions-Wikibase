@@ -21,6 +21,8 @@ interface TypedValueFormatter {
 	 * If $dataTypeId is given, it may be used as a hint for providing
 	 * more appropriate formatting.
 	 *
+	 * @todo: make $dataTypeId mandatory.
+	 *
 	 * @param DataValue $value
 	 * @param string    $dataTypeId
 	 *

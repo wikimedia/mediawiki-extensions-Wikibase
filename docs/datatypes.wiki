@@ -47,5 +47,5 @@ DataTypeValidatorFactory for obtaining the validators for each data type.
 
 
 == Caveats ==
-* the Methods getSnakFormatterFactory() does not yet use $wgWikibaseDataTypeDefinitions.
+* FIXME: the Methods getSnakFormatterFactory() does not yet use $wgWikibaseDataTypeDefinitions.
 * RDF mappings for the different data types are still hardcoded.
