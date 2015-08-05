@@ -13,8 +13,8 @@ use Wikimedia\Assert\Assert;
  * - value-type: the value type used with the data type
  * - validator-factory-callback: a callback for creating validators for the data type,
  *   as used by BuilderBasedDataTypeValidatorFactory.
- * @todo parser-factory-callback: a callback for instantiating a parser for the data type
- * @todo formatter-factory-callback: a callback for instantiating a formatter for the data type
+ * - parser-factory-callback: a callback for instantiating a parser for the data type
+ * - formatter-factory-callback: a callback for instantiating a formatter for the data type
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -94,7 +94,7 @@ class DataTypeDefinitions {
 	}
 
 	/**
-	 * @see BuilderBasedDataTypeValidatorFactory
+	 * @see ValueParserFactory
 	 *
 	 * @return callable[]|string[]
 	 */
@@ -102,6 +102,13 @@ class DataTypeDefinitions {
 		return $this->getMapForDefinitionField( 'parser-factory-callback' );
 	}
 
-	//TODO: getFormatterFactoryCallbacks()
+	/**
+	 * @see OutputFormattValueFormatterFactory
+	 *
+	 * @return callable[]|string[]
+	 */
+	public function getFormatterFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'formatter-factory-callback' );
+	}
 
 }
