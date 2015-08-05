@@ -104,11 +104,9 @@ class TermValidatorFactory {
 	}
 
 	/**
-	 * @param string $entityType
-	 *
 	 * @return ValueValidator
 	 */
-	public function getDescriptionValidator( $entityType ) {
+	public function getDescriptionValidator() {
 		$validators = $this->getCommonTermValidators();
 
 		return new CompositeValidator( $validators, true );

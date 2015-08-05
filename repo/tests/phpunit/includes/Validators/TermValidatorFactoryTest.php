@@ -114,7 +114,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testGetDescriptionValidator() {
 		$builders = $this->newFactory( 8, array( 'en' ) );
 
-		$validator = $builders->getDescriptionValidator( Item::ENTITY_TYPE );
+		$validator = $builders->getDescriptionValidator();
 
 		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
 
