@@ -271,13 +271,12 @@ class SpecialMergeItems extends SpecialWikibasePage {
 			// Message: wikibase-mergeitems-intro
 			$this->msg( 'wikibase-mergeitems-intro' )->parse()
 		)
-		. Html::element(
-			'label',
+		. Html::label(
+			$this->msg( 'wikibase-mergeitems-fromid' )->text(),
+			'wb-mergeitems-fromid',
 			array(
-				'for' => 'wb-mergeitems-fromid',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-mergeitems-fromid' )->text()
+			)
 		)
 		. Html::input(
 			'fromid',
@@ -289,13 +288,12 @@ class SpecialMergeItems extends SpecialWikibasePage {
 			)
 		)
 		. Html::element( 'br' )
-		. Html::element(
-			'label',
+		. Html::label(
+			$this->msg( 'wikibase-mergeitems-toid' )->text(),
+			'wb-mergeitems-toid',
 			array(
-				'for' => 'wb-mergeitems-toid',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-mergeitems-toid' )->text()
+			)
 		)
 		. Html::input(
 			'toid',

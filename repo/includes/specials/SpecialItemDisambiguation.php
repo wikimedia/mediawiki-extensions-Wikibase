@@ -208,10 +208,9 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				array(),
 				$this->msg( 'wikibase-itemdisambiguation-lookup-fieldset' )->text()
 			)
-			. Html::element(
-				'label',
-				array( 'for' => 'wb-itemdisambiguation-languagename' ),
-				$this->msg( 'wikibase-itemdisambiguation-lookup-language' )->text()
+			. Html::label(
+				$this->msg( 'wikibase-itemdisambiguation-lookup-language' )->text(),
+				'wb-itemdisambiguation-languagename'
 			)
 			. Html::input(
 				'language',
@@ -219,15 +218,13 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'text',
 				array(
 					'id' => 'wb-itemdisambiguation-languagename',
-					'size' => 12,
-					'class' => 'wb-input-text'
+					'size' => 12
 				)
 			)
 			. ' '
-			. Html::element(
-				'label',
-				array( 'for' => 'labelname' ),
-				$this->msg( 'wikibase-itemdisambiguation-lookup-label' )->text()
+			. Html::label(
+				$this->msg( 'wikibase-itemdisambiguation-lookup-label' )->text(),
+				'labelname'
 			)
 			. Html::input(
 				'label',
@@ -236,7 +233,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				array(
 					'id' => 'labelname',
 					'size' => 36,
-					'class' => 'wb-input-text',
 					'autofocus'
 				)
 			)
@@ -245,8 +241,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				$this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
 				'submit',
 				array(
-					'id' => 'wb-itembytitle-submit',
-					'class' => 'wb-input-button'
+					'id' => 'wb-itembytitle-submit'
 				)
 			)
 			. Html::element(
