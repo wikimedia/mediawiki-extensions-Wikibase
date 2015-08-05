@@ -169,8 +169,45 @@ final class WikibaseClient {
 	private $termLookup = null;
 
 	/**
-	 * @since 0.4
+	 * Returns the default WikibaseValueFormatterBuilders instance.
+	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
+	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
+	 * @since 0.5
+	 *
+	 * @param string $reset Flag: Pass "reset" to reset the default instance
+	 *
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	public static function getDefaultFormatterBuilders( $reset = 'noreset' ) {
+		static $builders;
+
+		if ( $builders === null || $reset === 'reset' ) {
+			$wikibaseRepo = self::getDefaultInstance();
+			$builders = $wikibaseRepo->newWikibaseValueFormatterBuilders();
+		}
+
+		return $builders;
+	}
+
+	/**
+	 * Returns a low level factory object for creating formatters for well known data types.
+	 *
+	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
+	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
+	 *
+	 * @return WikibaseValueFormatterBuilders
+	 */
+	private function newWikibaseValueFormatterBuilders() {
+		return new WikibaseValueFormatterBuilders(
+			$this->contentLanguage,
+			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
+			new LanguageNameLookup(),
+			$this->getRepoEntityUriParser()
+		);
+	}
+
+	/**
 	 * @param SettingsArray $settings
 	 * @param Language $contentLanguage
 	 * @param DataTypeDefinitions $dataTypeDefinitions
@@ -517,7 +554,7 @@ final class WikibaseClient {
 	/**
 	 * @return OutputFormatSnakFormatterFactory
 	 */
-	private function newSnakFormatterFactory() {
+	protected function newSnakFormatterFactory() {
 		$factory = new OutputFormatSnakFormatterFactory(
 			$this->getValueFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
@@ -553,7 +590,7 @@ final class WikibaseClient {
 
 		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
 		$valueTypeFormatters = $valueFormatterBuilders->getFormatterFactoryCallbacksByValueType();
-		$dataTypeFormatters = $valueFormatterBuilders->getFormatterFactoryCallbacksByDataType();
+		$dataTypeFormatters = $this->dataTypeDefinitions->getFormatterFactoryCallbacks();
 
 		foreach ( $valueTypeFormatters as $key => $formatter ) {
 			$callbacks["VT:$key"] = $formatter;
@@ -573,15 +610,6 @@ final class WikibaseClient {
 		return new OutputFormatValueFormatterFactory(
 			$this->getFormatterFactoryCallbacksByType(),
 			$this->getContentLanguage()
-		);
-	}
-
-	private function newWikibaseValueFormatterBuilders() {
-		return new WikibaseValueFormatterBuilders(
-			$this->contentLanguage,
-			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
-			new LanguageNameLookup(),
-			$this->getRepoEntityUriParser()
 		);
 	}
 

@@ -220,8 +220,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo() {
+		$lang = Language::factory( 'qqx' );
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		return new WikibaseRepo( $settings, new DataTypeDefinitions(), Language::factory( 'en' ) );
+		return new WikibaseRepo( $settings, new DataTypeDefinitions(), $lang );
 	}
 
 	public function testGetApiHelperFactory() {
