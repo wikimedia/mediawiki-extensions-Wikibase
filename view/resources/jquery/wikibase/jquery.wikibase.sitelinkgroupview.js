@@ -40,7 +40,8 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			'', // counter
 			'', // sitelinklistview
 			'', // group
-			'' // toolbar
+			'', // toolbar
+			'' // additional class names
 		],
 		templateShortCuts: {
 			$headingSection: '.wikibase-sitelinkgroupview-heading-section',
