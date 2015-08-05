@@ -13,6 +13,9 @@ use ValueFormatters\ValueFormatterBase;
  * DispatchingValueFormatter is a formatter for DataValues. In addition to dispatching based on
  * the DataValue type, it also supports dispatching based on a DataType.
  *
+ * @todo: drop ValueFormatterBase ancestry. Plain format() shouldn't be supported,
+ * formatValue() should require the dataType ID.
+ *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
@@ -78,6 +81,7 @@ class DispatchingValueFormatter extends ValueFormatterBase implements TypedValue
 	 * @see ValueFormatter::format
 	 *
 	 * @since 0.5
+	 * @deprecated, use formatValue() instead
 	 *
 	 * @param DataValue $value The value to format
 	 *
