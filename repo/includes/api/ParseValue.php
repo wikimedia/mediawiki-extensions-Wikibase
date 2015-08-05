@@ -14,9 +14,15 @@ use Status;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
+use ValueValidators\Error;
+use ValueValidators\NullValidator;
+use ValueValidators\ValueValidator;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Validators\CompositeValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * API module for using value parsers.
@@ -39,6 +45,16 @@ class ParseValue extends ApiBase {
 	 * @var ValueParserFactory
 	 */
 	private $valueParserFactory;
+
+	/**
+	 * @var DataTypeValidatorFactory
+	 */
+	private $dataTypeValidatorFactory;
+
+	/**
+	 * @var ValidatorErrorLocalizer
+	 */
+	private $validatorErrorLocalizer;
 
 	/**
 	 * @var ExceptionLocalizer
@@ -66,7 +82,9 @@ class ParseValue extends ApiBase {
 		$this->setServices(
 			$wikibaseRepo->getDataTypeFactory(),
 			new ValueParserFactory( $GLOBALS['wgValueParsers'] ),
+			$wikibaseRepo->getDataTypeValidatorFactory(),
 			$wikibaseRepo->getExceptionLocalizer(),
+			$wikibaseRepo->getValidatorErrorLocalizer(),
 			$apiHelperFactory->getErrorReporter( $this )
 		);
 	}
@@ -74,12 +92,16 @@ class ParseValue extends ApiBase {
 	public function setServices(
 		DataTypeFactory $dataTypeFactory,
 		ValueParserFactory $valueParserFactory,
+		DataTypeValidatorFactory $dataTypeValidatorFactory,
 		ExceptionLocalizer $exceptionLocalizer,
+		ValidatorErrorLocalizer $validatorErrorLocalizer,
 		ApiErrorReporter $errorReporter
 	) {
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->valueParserFactory = $valueParserFactory;
+		$this->dataTypeValidatorFactory = $dataTypeValidatorFactory;
 		$this->exceptionLocalizer = $exceptionLocalizer;
+		$this->validatorErrorLocalizer = $validatorErrorLocalizer;
 		$this->errorReporter = $errorReporter;
 	}
 
@@ -94,9 +116,10 @@ class ParseValue extends ApiBase {
 		$results = array();
 
 		$params = $this->extractRequestParams();
+		$validator = $params['validate'] ? $this->getValidator() : null;
 
 		foreach ( $params['values'] as $value ) {
-			$results[] = $this->parseStringValue( $parser, $value );
+			$results[] = $this->parseStringValue( $parser, $value, $validator );
 		}
 
 		$this->outputResults( $results );
@@ -119,25 +142,59 @@ class ParseValue extends ApiBase {
 
 		if ( empty( $name ) ) {
 			// If neither 'datatype' not 'parser' is given, tell the client to use 'datatype'.
-			$this->dieUsageMsg( array( 'missingparam', 'datatype' ) );
+			$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
 		}
 
 		try {
 			$parser = $this->valueParserFactory->newParser( $name, $options );
+			return $parser;
 		} catch ( OutOfBoundsException $ex ) {
-			throw new LogicException( "No parser registered for `$name`" );
+			$this->errorReporter->dieError( "Unknown datatype `$name`", 'unknown-datatype' );
+			throw new LogicException( 'dieError() did not throw an exception' );
+		}
+	}
+
+	/**
+	 * @return ValueValidator
+	 */
+	private function getValidator() {
+		$params = $this->extractRequestParams();
+
+		$name = $params['datatype'];
+
+		if ( empty( $name ) ) {
+			// 'datatype' parameter is required for validation.
+			$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
 		}
 
-		return $parser;
+		// Note: For unknown datatype, we'll get an empty list.
+		$validators = $this->dataTypeValidatorFactory->getValidators( $name );
+		return $this->wrapValidators( $validators );
+	}
+
+	/**
+	 * @param ValueValidator[] $validators
+	 *
+	 * @return ValueValidator
+	 */
+	private function wrapValidators( array $validators ) {
+		if ( count( $validators ) === 0 ) {
+			return new NullValidator();
+		} elseif ( count( $validators ) === 1 ) {
+			return reset( $validators );
+		} else {
+			return new CompositeValidator( $validators, true );
+		}
 	}
 
 	/**
 	 * @param ValueParser $parser
 	 * @param string $value
+	 * @param ValueValidator|null $validator
 	 *
 	 * @return array
 	 */
-	private function parseStringValue( ValueParser $parser, $value ) {
+	private function parseStringValue( ValueParser $parser, $value, ValueValidator $validator = null ) {
 		$result = array(
 			'raw' => $value
 		);
@@ -156,7 +213,34 @@ class ParseValue extends ApiBase {
 			$result['value'] = $parseResult;
 		}
 
+		if ( $validator ) {
+			$validatorResult = $validator->validate( $value );
+			$validationStatus = $this->validatorErrorLocalizer->getResultStatus( $validatorResult );
+
+			$result['valid'] = $validationStatus->isOK();
+
+			if ( !$validationStatus->isOK() ) {
+				$result['error'] = 'ValidationError';
+				$this->errorReporter->addStatusToResult( $validationStatus, $result );
+				$result['validation-errors'] = $this->getValidatorErrorCodes( $validatorResult->getErrors() );
+			}
+		}
+
 		return $result;
+	}
+
+	/**
+	 * @param Error[] $errors
+	 *
+	 * @return string[]
+	 */
+	private function getValidatorErrorCodes( array $errors ) {
+		return array_map(
+			function ( Error $error ) {
+				return $error->getCode();
+			},
+			$errors
+		);
 	}
 
 	private function addParseErrorToResult( array &$result, ParseException $parseError ) {
@@ -252,6 +336,9 @@ class ParseValue extends ApiBase {
 				self::PARAM_TYPE => 'text',
 				self::PARAM_REQUIRED => false,
 			),
+			'validate' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+			),
 		);
 	}
 
@@ -264,6 +351,8 @@ class ParseValue extends ApiBase {
 				'apihelp-wbparsevalue-example-1',
 			'action=wbparsevalue&datatype=time&values=1994-02-08&options={"precision":9}' =>
 				'apihelp-wbparsevalue-example-2',
+			'action=wbparsevalue&datatype=time&validate&values=1994-02-08&options={"precision":14}' =>
+				'apihelp-wbparsevalue-example-3',
 		);
 	}
 
