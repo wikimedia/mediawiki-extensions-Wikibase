@@ -98,13 +98,12 @@ class SpecialNewItem extends SpecialNewEntity {
 		}
 
 		return parent::additionalFormElements()
-		. Html::element(
-			'label',
+		. Html::label(
+			$this->msg( 'wikibase-newitem-site' )->text(),
+			'wb-newitem-site',
 			array(
-				'for' => 'wb-newitem-site',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-newitem-site' )->text()
+			)
 		)
 		. Html::input(
 			'site',
@@ -116,13 +115,12 @@ class SpecialNewItem extends SpecialNewEntity {
 				'readonly' => 'readonly'
 			)
 		)
-		. Html::element(
-			'label',
+		. Html::label(
+			$this->msg( 'wikibase-newitem-page' )->text(),
+			'wb-newitem-page',
 			array(
-				'for' => 'wb-newitem-page',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-newitem-page' )->text()
+			)
 		)
 		. Html::input(
 			'page',

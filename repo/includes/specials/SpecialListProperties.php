@@ -134,12 +134,9 @@ class SpecialListProperties extends SpecialWikibasePage {
 				$this->msg( 'wikibase-listproperties-legend' )->text()
 			) .
 			Html::openElement( 'p' ) .
-			Html::element(
-				'label',
-				array(
-					'for' => 'wb-listproperties-datatype'
-				),
-				$this->msg( 'wikibase-listproperties-datatype' )->text()
+			Html::label(
+				$this->msg( 'wikibase-listproperties-datatype' )->text(),
+				'wb-listproperties-datatype'
 			) . ' ' .
 			Html::rawElement(
 				'select',
@@ -164,7 +161,7 @@ class SpecialListProperties extends SpecialWikibasePage {
 				'submit',
 				array(
 					'id' => 'wikibase-listproperties-submit',
-					'class' => 'wb-input-button'
+					'class' => 'wb-button'
 				)
 			) .
 			Html::closeElement( 'p' ) .

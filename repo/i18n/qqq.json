@@ -168,7 +168,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Label for the textfield holding the site ID. See also the Wikidata glossary for [[d:Wikidata:Glossary#sitelinks|sitelinks]].\n{{Identical|Site}}",
 	"wikibase-gotolinkedpage-lookup-item": "Label for the textfield holding the item ID. See also the Wikidata glossary for [[d:Wikidata:Glossary#Items|items]].",
 	"wikibase-gotolinkedpage-submit": "Text for the submit button in the search form which if successfully will go (redirect) to the specified linked page (sitelink).\n{{Identical|Go}}",
-	"wikibase-gotolinkedpage-summary": "Summary and explanation of the GoToLinkedPage.\n\nFor right-to-left languages swap \"right\" and \"left\".\n\n\"Site\" is {{msg-mw|wikibase-gotolinkedpage-lookup-site}}.\n\n\"item id\" is {{msg-mw|wikibase-gotolinkedpage-lookup-item}}.",
+	"wikibase-gotolinkedpage-summary": "Summary and explanation of the GoToLinkedPage.\n\n\"Site\" is {{msg-mw|wikibase-gotolinkedpage-lookup-site}}.\n\n\"item id\" is {{msg-mw|wikibase-gotolinkedpage-lookup-item}}.",
 	"special-itemdisambiguation": "{{doc-special|ItemDisambiguation}}\nThis special page returns all items with a given label. It provides an interface to disambiguate them. See also the Wikidata glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Items|items]].",
 	"wikibase-itemdisambiguation-lookup-fieldset": "This is the title for the fieldset on the special page for further refining the search. This is the search by language and label.",
 	"wikibase-itemdisambiguation-lookup-language": "Label for the textfield holding the language id.\n{{Identical|Language code}}",
