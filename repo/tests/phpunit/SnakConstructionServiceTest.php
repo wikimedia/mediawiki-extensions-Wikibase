@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test;
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
+use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Repo\SnakConstructionService;
@@ -26,7 +27,9 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 		$snakFactory = new SnakFactory();
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeFactory = new DataTypeFactory();
-		$dataValueFactory = DataValueFactory::singleton();
+		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( array(
+			'string' => 'DataValues\StringValue',
+		) ) );
 
 		$dataTypeFactory->registerDataType( new DataType( 'string', 'string', array() ) );
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'p1' ), 'string' );
@@ -92,7 +95,7 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 			'value/badvalue' => array(
 				1, 'value', array( 'foo' ),
 				'Wikibase\DataModel\Snak\PropertyValueSnak',
-				'DataValues\IllegalValueException'
+				'InvalidArgumentException'
 			),
 		);
 	}

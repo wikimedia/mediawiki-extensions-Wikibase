@@ -3,7 +3,11 @@
 namespace Wikibase\Test;
 
 use DataValues\DataValueFactory;
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\SnakFactory;
 
@@ -13,63 +17,47 @@ use Wikibase\SnakFactory;
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseSnak
- * @group Database
  *
  * @license GPL 2+
- * @author Daniel Kinzler
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SnakFactoryTest extends \MediaWikiTestCase {
 
-	public function provideNewSnak() {
-		return array(
-			array( 1, 'somevalue', null, null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, null, 'some value' ),
-			array( 1, 'novalue', null, null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, null, 'no value' ),
-			array( 1, 'value', 'string', 'foo', 'Wikibase\DataModel\Snak\PropertyValueSnak', 'DataValues\StringValue', null, 'a value' ),
-			array( 1, 'kittens', null, 'foo', null, null, 'InvalidArgumentException', 'bad snak type' ),
+	public function testNoValueSnakConstruction() {
+		$factory = new SnakFactory();
+		$snak = $factory->newSnak( new PropertyId( 'P1' ), 'novalue', null );
+
+		$this->assertEquals(
+			new PropertyNoValueSnak( 1 ),
+			$snak
 		);
 	}
 
-	/**
-	 * @dataProvider provideNewSnak
-	 */
-	public function testNewSnak(
-		$propertyId,
-		$snakType,
-		$valueType,
-		$snakValue,
-		$expectedSnakClass,
-		$expectedValueClass,
-		$expectedException,
-		$message
-	) {
-		if ( is_int( $propertyId ) ) {
-			$propertyId = PropertyId::newFromNumber( $propertyId );
-		}
-
-		if ( $valueType !== null ) {
-			$dataValueFactory = new DataValueFactory();
-			$dataValueFactory->registerDataValue( $valueType, $expectedValueClass );
-
-			$dataValue = $dataValueFactory->newDataValue( $valueType, $snakValue );
-		} else {
-			$dataValue = null;
-		}
-
-		if ( $expectedException !== null ) {
-			$this->setExpectedException( $expectedException );
-		}
-
+	public function testSomeValueSnakConstruction() {
 		$factory = new SnakFactory();
-		$snak = $factory->newSnak( $propertyId, $snakType, $dataValue );
+		$snak = $factory->newSnak( new PropertyId( 'P1' ), 'somevalue', null );
 
-		if ( $expectedSnakClass !== null ) {
-			$this->assertInstanceOf( $expectedSnakClass, $snak, $message );
-		}
+		$this->assertEquals(
+			new PropertySomeValueSnak( 1 ),
+			$snak
+		);
+	}
 
-		if ( $expectedValueClass !== null && $snak instanceof PropertyValueSnak ) {
-			$dataValue = $snak->getDataValue();
-			$this->assertInstanceOf( $expectedValueClass, $dataValue, $message );
-		}
+	public function testPropertyValueSnakConstruction() {
+		$factory = new SnakFactory();
+		$snak = $factory->newSnak( new PropertyId( 'P1' ), 'value', new StringValue( 'foo' ) );
+
+		$this->assertEquals(
+			new PropertyValueSnak( 1, new StringValue( 'foo' ) ),
+			$snak
+		);
+	}
+
+	public function testGivenInvalidSnakType_exceptionIsThrown() {
+		$factory = new SnakFactory();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$factory->newSnak( new PropertyId( 'P1' ), 'kittens', null );
 	}
 
 }
