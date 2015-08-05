@@ -192,7 +192,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '<http://wikiba.se/ontology-beta#quantityLowerBound> "+0.00010"^^'
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
-						. '<http://wikiba.se/ontology-beta#quantityUnit> "1" .',
+						. '<http://wikiba.se/ontology-beta#quantityUnit> <http://www.wikidata.org/entity/Q199> .',
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
 						. '<http://wikiba.se/ontology-beta#quantityUpperBound> "+0.00013"^^'
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
@@ -221,7 +221,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
 					'<http://acme.test/value/9744b3301e3a9b3b5a31f6c6ba46dae0> '
 						. '<http://wikiba.se/ontology-beta#quantityUnit> '
-						. '"https://www.wikidata.org/entity/Q11573" .',
+						. '<https://www.wikidata.org/entity/Q11573> .',
 					'<http://acme.test/value/9744b3301e3a9b3b5a31f6c6ba46dae0> '
 						. '<http://wikiba.se/ontology-beta#quantityUpperBound> "-2.3"^^'
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
