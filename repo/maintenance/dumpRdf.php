@@ -38,12 +38,13 @@ class DumpRdf extends DumpScript {
 		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
-			$this->wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' ),
+			$this->settings->getSetting( 'conceptBaseUri' ),
 			$entityDataTitle->getCanonicalURL() . '/',
-			$this->wikibaseRepo->getSiteStore()->getSites(),
+			$this->siteStore->getSites(),
 			$this->revisionLookup,
-			$this->wikibaseRepo->getPropertyDataTypeLookup(),
-			$this->wikibaseRepo->getStore()->getEntityPrefetcher() );
+			$this->propertyDatatypeLookup,
+			$this->entityPrefetcher
+		);
 	}
 
 }

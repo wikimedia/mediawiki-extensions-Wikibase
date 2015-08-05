@@ -4,8 +4,12 @@ namespace Wikibase;
 
 use Maintenance;
 use MWException;
+use SiteStore;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
+use Wikibase\Lib\Store\EntityPrefetcher;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Disposable;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -45,9 +49,24 @@ abstract class DumpScript extends Maintenance {
 	protected $revisionLookup;
 
 	/**
-	 * @var WikibaseRepo
+	 * @var EntityPrefetcher
 	 */
-	protected $wikibaseRepo;
+	protected $entityPrefetcher;
+
+	/**
+	 * @var SiteStore
+	 */
+	protected $siteStore;
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	protected $propertyDatatypeLookup;
+
+	/**
+	 * @var Settings
+	 */
+	protected $settings;
 
 	/**
 	 * @var EntityPerPage
@@ -73,17 +92,36 @@ abstract class DumpScript extends Maintenance {
 		$this->addOption( 'log', "Log file (default is stderr). Will be appended.", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 		$this->addOption( 'limit', "Limit how many entities are dumped.", false, true );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
+		$this->setServices(
+			$wikibaseRepo->getStore()->getEntityPrefetcher(),
+			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getPropertyDataTypeLookup(),
+			$revisionLookup,
+			$wikibaseRepo->getStore()->newEntityPerPage(),
+			new RevisionBasedEntityLookup( $revisionLookup ),
+			$wikibaseRepo->getSettings()
+		);
 	}
 
-	private function initServices() {
-		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		//TODO: allow injection for unit tests
-		$this->entityPerPage = $this->wikibaseRepo->getStore()->newEntityPerPage();
-
-		// Use an uncached EntityRevisionLookup here to avoid leaking memory (we only need every entity once)
-		$this->revisionLookup = $this->wikibaseRepo->getStore()->getEntityRevisionLookup( 'uncached' );
-		// This is not purposefully not resolving redirects, as we don't want them in the dump
-		$this->entityLookup = new RevisionBasedEntityLookup( $this->revisionLookup );
+	public function setServices(
+		EntityPrefetcher $entityPrefetcher,
+		SiteStore $siteStore,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityPerPage $entityPerPage,
+		EntityLookup $entityLookup,
+		SettingsArray $settings
+	) {
+		$this->entityPrefetcher = $entityPrefetcher;
+		$this->siteStore = $siteStore;
+		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
+		$this->revisionLookup = $entityRevisionLookup;
+		$this->entityPerPage = $entityPerPage;
+		$this->entityLookup = $entityLookup;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -149,8 +187,6 @@ abstract class DumpScript extends Maintenance {
 	 * Do the actual work. All child classes will need to implement this
 	 */
 	public function execute() {
-		$this->initServices();
-
 		//TODO: more validation for options
 		$entityType = $this->getOption( 'entity-type' );
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
