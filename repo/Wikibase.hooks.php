@@ -540,59 +540,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Deletes all the data stored on the repository.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/WikibaseDeleteData
-	 *
-	 * @since 0.1
-	 *
-	 * @param callable $reportMessage // takes a string param and echos it
-	 *
-	 * @return bool
-	 */
-	public static function onWikibaseDeleteData( $reportMessage ) {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-
-		$reportMessage( 'Deleting data from changes table...' );
-
-		$dbw = wfGetDB( DB_MASTER );
-		$dbw->delete( 'wb_changes', '*', __METHOD__ );
-		$dbw->delete( 'wb_changes_dispatch', '*', __METHOD__ );
-
-		$reportMessage( "done!\n" );
-
-		$reportMessage( 'Deleting revisions from Data NS...' );
-
-		$namespaceList = $dbw->makeList( $entityNamespaceLookup->getEntityNamespaces(), LIST_COMMA );
-
-		$dbw->deleteJoin(
-			'revision', 'page',
-			'rev_page', 'page_id',
-			array( 'page_namespace IN ( ' . $namespaceList . ')' )
-		);
-
-		$reportMessage( "done!\n" );
-
-		$reportMessage( 'Deleting pages from Data NS...' );
-
-		$dbw->delete(
-			'page',
-			array( 'page_namespace IN ( ' . $namespaceList . ')' )
-		);
-
-		$reportMessage( "done!\n" );
-
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
-
-		$reportMessage( 'Deleting data from the ' . get_class( $store ) . ' store...' );
-
-		$store->clear();
-
-		$reportMessage( "done!\n" );
-
-		return true;
-	}
-
-	/**
 	 * Used to append a css class to the body, so the page can be identified as Wikibase item page.
 	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
 	 *
