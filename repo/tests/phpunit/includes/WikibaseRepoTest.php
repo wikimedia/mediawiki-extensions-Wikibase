@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests\Repo;
 
+use Language;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
@@ -245,8 +246,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo() {
+		$lang = Language::factory( 'qqq' );
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		return new WikibaseRepo( $settings, new DataTypeDefinitions() );
+		return new WikibaseRepo( $settings, new DataTypeDefinitions(), $lang );
 	}
 
 	public function testGetApiHelperFactory() {
