@@ -16,6 +16,24 @@
       "revId": "5c86fc7e45d199da93adc4f17429ea9303bc168e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b5d97b5d",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-05T18:58:33Z",
+      "side": 1,
+      "message": "This works. I suspect the other way round does not.",
+      "parentUuid": "8ec42329_4fa1a98f",
+      "revId": "5c86fc7e45d199da93adc4f17429ea9303bc168e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
