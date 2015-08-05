@@ -2,13 +2,16 @@
 
 namespace Wikibase\Lib;
 
+use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
+use Message;
 use RuntimeException;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 
 /**
- * OutputFormatSnakFormatterFactory is a service
- * for obtaining a SnakFormatter for a desired output format.
+ * Service for obtaining a SnakFormatter for a desired output format.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
@@ -16,33 +19,37 @@ use ValueFormatters\FormatterOptions;
 class OutputFormatSnakFormatterFactory {
 
 	/**
-	 * @var callable[]
+	 * @var OutputFormatValueFormatterFactory
 	 */
-	private $builders;
+	private $valueFormatterFactory;
 
 	/**
-	 * @param callable[] $builders maps formats to callable builders. Each builder must accept
-	 *        three parameters, this OutputFormatSnakFormatterFactory, a format ID, and an FormatOptions object,
-	 *        and return an instance of SnakFormatter suitable for the given output format.
-	 *
-	 * @throws InvalidArgumentException
+	 * @var DataTypeFactory
 	 */
-	public function __construct( array $builders ) {
-		foreach ( $builders as $format => $builder ) {
-			if ( !is_string( $format ) ) {
-				throw new InvalidArgumentException( '$builders must map type IDs to formatters.' );
-			}
+	private $dataTypeFactory;
 
-			if ( !is_callable( $builder ) ) {
-				throw new InvalidArgumentException( '$builders must contain a callable builder for each format.' );
-			}
-		}
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
 
-		$this->builders = $builders;
+	/**
+	 * @param OutputFormatValueFormatterFactory $valueFormatterFactory
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param DataTypeFactory $dataTypeFactory
+	 */
+	public function __construct(
+		OutputFormatValueFormatterFactory $valueFormatterFactory,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		DataTypeFactory $dataTypeFactory
+	) {
+		$this->valueFormatterFactory = $valueFormatterFactory;
+		$this->dataTypeFactory = $dataTypeFactory;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 	}
 
 	/**
-	 * Returns an SnakFormatter for rendering snak values in the desired format
+	 * Returns an SnakFormatter for rendering snaks in the desired format
 	 * using the given options.
 	 *
 	 * @param string $format Use the SnakFormatter::FORMAT_XXX constants.
@@ -53,19 +60,48 @@ class OutputFormatSnakFormatterFactory {
 	 * @return SnakFormatter
 	 */
 	public function getSnakFormatter( $format, FormatterOptions $options ) {
-		if ( !array_key_exists( $format, $this->builders ) ) {
-			throw new InvalidArgumentException( "Unsupported format: $format" );
-		}
+		$this->valueFormatterFactory->applyLanguageDefaults( $options );
+		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 
-		//TODO: cache instances based on an option hash
-		$builder = $this->builders[$format];
-		$instance = call_user_func( $builder, $this, $format, $options );
+		$noValueSnakFormatter = new MessageSnakFormatter(
+			'novalue',
+			$this->getMessage( 'wikibase-snakview-snaktypeselector-novalue', $lang ),
+			$format
+		);
+		$someValueSnakFormatter = new MessageSnakFormatter(
+			'somevalue',
+			$this->getMessage( 'wikibase-snakview-snaktypeselector-somevalue', $lang ),
+			$format
+		);
 
-		if ( !( $instance instanceof SnakFormatter ) ) {
-			throw new RuntimeException( get_class( $instance ) . ' does not implement SnakFormatter' );
-		}
+		$valueFormatter = $this->valueFormatterFactory->getValueFormatter( $format, $options );
+		$valueSnakFormatter = new PropertyValueSnakFormatter(
+			$format,
+			$options,
+			$valueFormatter,
+			$this->propertyDataTypeLookup,
+			$this->dataTypeFactory
+		);
 
-		return $instance;
+		$formatters = array(
+			'novalue' => $noValueSnakFormatter,
+			'somevalue' => $someValueSnakFormatter,
+			'value' => $valueSnakFormatter,
+		);
+
+		return new DispatchingSnakFormatter( $format, $formatters );
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $lang
+	 *
+	 * @return Message
+	 */
+	private function getMessage( $key, $lang ) {
+		$msg = wfMessage( $key );
+		$msg = $msg->inLanguage( $lang );
+		return $msg;
 	}
 
 }
