@@ -109,21 +109,21 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-itemdisambiguation-languagename',
-				'class' => 'wb-input-text',
+				'class' => 'wb-input',
 				'name' => 'language',
 			) );
 		$matchers['label'] = array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'labelname',
-				'class' => 'wb-input-text',
+				'class' => 'wb-input',
 				'name' => 'label',
 			) );
 		$matchers['submit'] = array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-itembytitle-submit',
-				'class' => 'wb-input-button',
+				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'submit',
 			) );

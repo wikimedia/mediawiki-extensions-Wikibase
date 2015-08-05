@@ -451,7 +451,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$label = null;
 		if ( $labelText ) {
-			$label = Html::element( 'label', $inputAttrs['id'] ? array( 'for' => $inputAttrs['id'] ) : null, $labelText );
+			$label = Html::label( $labelText, $inputAttrs['id'] );
 			$label = Html::rawElement( 'span', $spanLabelAttrs, $label );
 		}
 

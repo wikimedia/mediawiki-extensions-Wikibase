@@ -229,13 +229,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			'lang',
 			$langCode
 		)
-		. Html::element(
-			'label',
+		. Html::label(
+			$this->msg( 'wikibase-newentity-label' )->text(),
+			'wb-newentity-label',
 			array(
-				'for' => 'wb-newentity-label',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-newentity-label' )->text()
+			)
 		)
 		. Html::input(
 			'label',
@@ -252,13 +251,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				)->text(),
 			)
 		)
-		. Html::element(
-			'label',
+		. Html::label(
+			$this->msg( 'wikibase-newentity-description' )->text(),
+			'wb-newentity-description',
 			array(
-				'for' => 'wb-newentity-description',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-newentity-description' )->text()
+			)
 		)
 		. Html::input(
 			'description',
@@ -274,13 +272,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$langName
 				)->text(),
 			)
-		). Html::element(
-			'label',
+		). Html::label(
+			$this->msg( 'wikibase-newentity-aliases' )->text(),
+			'wb-newentity-aliases',
 			array(
-				'for' => 'wb-newentity-aliases',
 				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-newentity-aliases' )->text()
+			)
 		)
 		. Html::input(
 			'aliases',

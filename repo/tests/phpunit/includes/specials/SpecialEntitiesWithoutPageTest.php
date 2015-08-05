@@ -58,7 +58,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wikibase-entitieswithoutpage-submit',
-				'class' => 'wb-input-button',
+				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'submit',
 			) );
