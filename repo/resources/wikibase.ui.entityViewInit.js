@@ -259,14 +259,14 @@
 		}
 
 		$entityview.on( viewName + 'afterstartediting', function() {
-			if(
-				$.find( '.mw-notification-content' ).length === 0
+			if( !$.find( '.mw-notification-content' ).length
 				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
 			) {
-				var message = mw.msg( 'wikibase-anonymouseditwarning',
-								mw.msg( 'wikibase-entity-' + entityType ) );
-				message = $( '<div class="wb-warning">' ).text( message );
-				mw.notify( message, { autoHide: false } );
+				var message = mw.msg(
+					'wikibase-anonymouseditwarning',
+					mw.msg( 'wikibase-entity-' + entityType )
+				);
+				mw.notify( message, { autoHide: false, type: 'warn' } );
 			}
 		} );
 	}
@@ -289,8 +289,7 @@
 			cookieKey = 'wikibase.acknowledgedcopyrightversion',
 			optionsKey = 'wb-acknowledgedcopyrightversion';
 
-		if(
-			$.cookie( cookieKey ) === copyRightVersion
+		if( $.cookie( cookieKey ) === copyRightVersion
 			|| mw.user.options.get( optionsKey ) === copyRightVersion
 		) {
 			return;
@@ -304,8 +303,7 @@
 			editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
 
 		// TODO: Use notification system for copyright messages on all widgets.
-		if(
-			editableTemplatedWidget
+		if( editableTemplatedWidget
 			&& !( editableTemplatedWidget instanceof $.wikibase.statementview )
 			&& !( editableTemplatedWidget instanceof $.wikibase.aliasesview )
 		) {
