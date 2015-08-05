@@ -59,7 +59,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 			$repoSettings = array_merge( $repoSettings, $settings->getArrayCopy() );
 		}
 
-		return new WikibaseRepo( new SettingsArray( $repoSettings ), new DataTypeDefinitions() );
+		return new WikibaseRepo( new SettingsArray( $repoSettings ), new DataTypeDefinitions(), Language::factory( 'qqq' ) );
 	}
 
 	/**
