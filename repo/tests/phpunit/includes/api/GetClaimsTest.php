@@ -110,19 +110,6 @@ class GetClaimsTest extends ApiTestCase {
 	}
 
 	/**
-	 * @return PropertyDataTypeLookup
-	 */
-	private function getDataTypeLookup() {
-		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
-
-		$lookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
-
-		return $lookup;
-	}
-
-	/**
 	 * @return array( $params, $statements, $groupedByProperty )
 	 */
 	public function validRequestProvider() {
