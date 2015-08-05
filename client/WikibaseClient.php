@@ -82,6 +82,20 @@ call_user_func( function() {
 		'descriptionmsg' => 'wikibase-client-desc'
 	);
 
+	$clientDatatypes = require( __DIR__ . '/WikibaseClient.datatypes.php' );
+
+	// merge WikibaseRepo.datatypes.php into $wgWikibaseDataTypes
+	foreach ( $clientDatatypes as $type => $clientDef ) {
+		$baseDef = isset( $wgWikibaseDataTypes[$type] ) ? $wgWikibaseDataTypes[$type] : array();
+
+		// If the repo extension is loaded, do not override the repo's formatters!
+		if ( defined( 'WB_VERSION' ) ) {
+			unset( $clientDef['formatter-factory-callback'] );
+		}
+
+		$wgWikibaseDataTypes[$type] = array_merge( $baseDef, $clientDef );
+	}
+
 	// i18n
 	$wgMessagesDirs['wikibaseclient']                   = __DIR__ . '/i18n';
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';

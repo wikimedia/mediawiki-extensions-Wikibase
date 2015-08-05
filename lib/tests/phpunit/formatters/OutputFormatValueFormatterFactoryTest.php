@@ -2,9 +2,11 @@
 
 namespace Wikibase\Lib\Test;
 
+use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\Lib\OutputFormatValueFormatterFactory
@@ -23,8 +25,9 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	 * @dataProvider constructorErrorsProvider
 	 */
 	public function testConstructorErrors( $builder, $error ) {
+		$language = Language::factory( 'en' );
 		$this->setExpectedException( $error );
-		new OutputFormatValueFormatterFactory( $builder );
+		new OutputFormatValueFormatterFactory( $builder, $language );
 	}
 
 	public function constructorErrorsProvider() {
@@ -56,7 +59,8 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	 * @dataProvider getValueFormatterProvider
 	 */
 	public function testGetValueFormatter( $builders, $format ) {
-		$factory = new OutputFormatValueFormatterFactory( $builders );
+		$language = Language::factory( 'en' );
+		$factory = new OutputFormatValueFormatterFactory( $builders, $language );
 		$formatter = $factory->getValueFormatter( $format, new FormatterOptions() );
 
 		$this->assertInstanceOf( 'ValueFormatters\ValueFormatter', $formatter );
@@ -65,22 +69,22 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	public function getValueFormatterProvider() {
 		$self = $this;
 		$builders = array(
-			'foo' => function() use ( $self ) {
-				return $self->makeMockValueFormatter( 'FOO' );
+			'VT:foo' => function() use ( $self ) {
+				return $self->makeMockValueFormatter( '<FOO>' );
 			},
-			'bar' => function() use ( $self ) {
-				return $self->makeMockValueFormatter( 'BAR' );
+			'VT:bar' => function() use ( $self ) {
+				return $self->makeMockValueFormatter( '<BAR>' );
 			},
 		);
 
 		return array(
-			'foo' => array(
+			'foo/plain' => array(
 				$builders,
-				'foo'
+				SnakFormatter::FORMAT_PLAIN
 			),
-			'bar' => array(
+			'bar/html' => array(
 				$builders,
-				'bar'
+				SnakFormatter::FORMAT_HTML
 			),
 		);
 	}
