@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_262c7ff1",
+        "filename": "repo/includes/rdf/ComplexValueRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-05T22:16:56Z",
+      "side": 1,
+      "message": "this makes it a resource? not a url literal?",
+      "revId": "3354c41113ae0149fd3ea36e485c65a72b51f696",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
