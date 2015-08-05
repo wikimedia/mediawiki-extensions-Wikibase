@@ -136,24 +136,6 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	/**
-	 * @param string $text
-	 * @param string $languageCode
-	 * @param string $termType
-	 * @param EntityId|ItemId|PropertyId $entityId
-	 *
-	 * @returns TermIndexEntry
-	 */
-	private function getTermIndexEntry( $text, $languageCode, $termType, EntityId $entityId ) {
-		return new TermIndexEntry( array(
-			'termText' => $text,
-			'termLanguage' => $languageCode,
-			'termType' => $termType,
-			'entityId' => $entityId->getNumericId(),
-			'entityType' => $entityId->getEntityType(),
-		) );
-	}
-
 	private function getMockTermIndex() {
 		return new MockTermIndex(
 			array()
