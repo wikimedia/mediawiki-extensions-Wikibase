@@ -151,8 +151,11 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 					'ips_site_id' => $link->getSiteId(),
 					'ips_site_page' => $link->getPageName()
 				),
-				__METHOD__
+				__METHOD__,
+				array( 'IGNORE' )
 			);
+
+			$success = $success && $dbw->affectedRows();
 
 			if ( !$success ) {
 				break;
