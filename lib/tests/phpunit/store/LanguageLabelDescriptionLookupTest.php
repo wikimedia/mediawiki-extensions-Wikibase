@@ -3,10 +3,10 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
-use Wikibase\TermIndexEntry;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
+use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Lib\Store\LanguageLabelDescriptionLookup

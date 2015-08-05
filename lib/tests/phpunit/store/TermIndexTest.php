@@ -6,8 +6,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
+use Wikibase\TermIndexEntry;
 
 /**
  * Base class for tests for classes implementing Wikibase\TermIndex.

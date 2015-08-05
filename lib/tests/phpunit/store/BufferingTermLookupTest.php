@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Store\BufferingTermLookup;
-use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
+use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Store\BufferingTermLookup
