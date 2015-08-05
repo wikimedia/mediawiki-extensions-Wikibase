@@ -62,6 +62,12 @@ class RdfVocabulary {
 	// See also DataValues\TimeValue\TimeFormatter::XXX_CALENDAR constants.
 	const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
 	const JULIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985786';
+	/**
+	 * URI for unit "1"
+	 * See: https://phabricator.wikimedia.org/T105432
+	 * @var string
+	 */
+	const ONE_ENTITY = 'http://www.wikidata.org/entity/Q199';
 	// Ranks
 	const WIKIBASE_RANK_BEST = 'BestRank';
 	public static $rankMap = array(
