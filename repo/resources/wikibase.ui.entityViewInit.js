@@ -265,8 +265,7 @@
 			) {
 				var message = mw.msg( 'wikibase-anonymouseditwarning',
 								mw.msg( 'wikibase-entity-' + entityType ) );
-				message = $( '<div class="wb-warning">' ).text( message );
-				mw.notify( message, { autoHide: false } );
+				mw.notify( message, { autoHide: false , type: 'warn' } );
 			}
 		} );
 	}
