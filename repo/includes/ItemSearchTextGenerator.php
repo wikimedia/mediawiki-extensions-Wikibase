@@ -22,7 +22,7 @@ class ItemSearchTextGenerator {
 		$fingerprintGenerator = new FingerprintSearchTextGenerator();
 		$text = $fingerprintGenerator->generate( $item->getFingerprint() );
 
-		foreach ( $item->getSiteLinks() as $siteLink ) {
+		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$text .= "\n" . $siteLink->getPageName();
 		}
 
