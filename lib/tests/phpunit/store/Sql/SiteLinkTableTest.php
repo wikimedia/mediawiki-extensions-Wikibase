@@ -57,12 +57,25 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		return array( $items );
 	}
 
+	public function saveLinksOfItemProvider() {
+		$itemProvider = $this->itemProvider();
+		$goodItem = $itemProvider[0][0];
+
+		$conflicItem = new Item( new ItemId( 'Q2' ) );
+		$conflicItem->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Beer' );
+
+		return array(
+			array( true, $goodItem ),
+			array( false, $conflicItem )
+		);
+	}
+
 	/**
-	 * @dataProvider itemProvider
+	 * @dataProvider saveLinksOfItemProvider
 	 */
-	public function testSaveLinksOfItem( Item $item ) {
+	public function testSaveLinksOfItem( $expected, Item $item ) {
 		$res = $this->siteLinkTable->saveLinksOfItem( $item );
-		$this->assertTrue( $res );
+		$this->assertSame( $expected, $res );
 	}
 
 	/**
