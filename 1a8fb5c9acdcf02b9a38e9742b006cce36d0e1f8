@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_f7e2a02c",
+        "filename": "repo/tests/phpunit/data/maintenance/dumpRdf-out.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-06T15:16:21Z",
+      "side": 1,
+      "message": "agree, sorted n-triples would be much more stable.",
+      "parentUuid": "8ec42329_bce87f0c",
+      "revId": "1a8fb5c9acdcf02b9a38e9742b006cce36d0e1f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_1cde7370",
         "filename": "repo/tests/phpunit/maintenance/dumpRdfTest.php",
         "patchSetId": 3
