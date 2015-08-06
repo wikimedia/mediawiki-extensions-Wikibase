@@ -75,7 +75,7 @@ class SimpleValueRdfBuilder implements DataValueRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
-		$value
+		DataValue $value
 	) {
 		//FIXME: use a proper registry / dispatching builder
 		switch ( $value->getType() ) {
