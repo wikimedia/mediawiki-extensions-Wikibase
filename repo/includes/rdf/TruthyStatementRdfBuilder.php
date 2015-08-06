@@ -5,7 +5,6 @@ namespace Wikibase\Rdf;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -43,19 +42,19 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 	private $writer;
 
 	/**
-	 * @var SnakValueRdfBuilder
+	 * @var SnakRdfBuilder
 	 */
-	private $valueBuilder;
+	private $snakBuilder;
 
 	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param RdfWriter $writer
-	 * @param SnakValueRdfBuilder $valueBuilder
+	 * @param SnakRdfBuilder $snakBuilder
 	 */
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, SnakValueRdfBuilder $valueBuilder ) {
+	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, SnakRdfBuilder $snakBuilder ) {
 		$this->vocabulary = $vocabulary;
 		$this->writer = $writer;
-		$this->valueBuilder = $valueBuilder;
+		$this->snakBuilder = $snakBuilder;
 	}
 
 	/**
@@ -90,25 +89,7 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 
 		$this->writer->about( RdfVocabulary::NS_ENTITY, $entityLName );
 
-		$propertyId = $snak->getPropertyId();
-		switch ( $snak->getType() ) {
-			case 'value':
-				/** @var PropertyValueSnak $snak */
-				$this->valueBuilder->addSnakValue( $this->writer, $propertyId, $snak->getDataValue(), RdfVocabulary::NSP_DIRECT_CLAIM );
-				break;
-			case 'somevalue':
-				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
-
-				$this->writer->say( RdfVocabulary::NSP_DIRECT_CLAIM, $propertyValueLName )->is( '_', $this->writer->blank() );
-				break;
-			case 'novalue':
-				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
-
-				$this->writer->say( 'a' )->is( RdfVocabulary::NSP_NOVALUE, $propertyValueLName );
-				break;
-			default:
-				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
-		}
+		$this->snakBuilder->addSnak( $this->writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
 	}
 
 	/**
