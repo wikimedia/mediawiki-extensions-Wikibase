@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_bcbabf1c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T12:11:51Z",
+      "side": 1,
+      "message": "mh... this sounds rather Wikimedia specific.",
+      "revId": "955d03829656a5f66c0384137a999c28cee14eed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
