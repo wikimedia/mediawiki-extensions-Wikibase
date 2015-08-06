@@ -18,6 +18,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Rdf\DataValueRdfBuilderFactory;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
@@ -116,11 +117,17 @@ class EntityDataSerializationService {
 	private $canonicalLanguageCodes;
 
 	/**
+	 * @var DatavalueRdfBuilderFactory
+	 */
+	private $dataValueRdfBuilderFactory;
+
+	/**
 	 * @param string $rdfBaseURI
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param PropertyDataTypeLookup $propertyLookup
+	 * @param DataValueRdfBuilderFactory $dataValueRdfBuilderFactory
 	 * @param SiteList $sites
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param SerializerFactory $serializerFactory
@@ -135,6 +142,7 @@ class EntityDataSerializationService {
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		PropertyDataTypeLookup $propertyLookup,
+		DatavalueRdfBuilderFactory $dataValueRdfBuilderFactory,
 		SiteList $sites,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		SerializerFactory $serializerFactory,
@@ -147,6 +155,7 @@ class EntityDataSerializationService {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
 		$this->propertyLookup = $propertyLookup;
+		$this->dataValueRdfBuilderFactory = $dataValueRdfBuilderFactory;
 		$this->sites = $sites;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->siteStore = $siteStore;
@@ -425,6 +434,7 @@ class EntityDataSerializationService {
 			$this->sites,
 			new RdfVocabulary( $this->rdfBaseURI, $this->rdfDataURI, $this->canonicalLanguageCodes ),
 			$this->propertyLookup,
+			$this->dataValueRdfBuilderFactory,
 			$this->getFlavor( $flavorName ),
 			$rdfWriter,
 			new HashDedupeBag()

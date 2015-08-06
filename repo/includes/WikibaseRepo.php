@@ -61,6 +61,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\Rdf\DataValueRdfBuilderFactory;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -207,6 +208,11 @@ class WikibaseRepo {
 	 * @var Language
 	 */
 	private $defaultLanguage;
+
+	/**
+	 * @var DataValueRdfBuilderFactory
+	 */
+	private $dataValueRdfBuilderFactory;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -811,6 +817,25 @@ class WikibaseRepo {
 		$factory = new OutputFormatValueFormatterFactory( $callbacks, $this->getDefaultLanguage() );
 
 		return $factory;
+	}
+
+	/**
+	 * @todo FIXME: test me!
+	 * @return DataValueRdfBuilderFactory
+	 */
+	public function getDataValueRdfBuilderFactory() {
+		if ( $this->dataValueRdfBuilderFactory === null ) {
+			$callbacks = $this->dataTypeDefinitions->getRdfBuilderFactoryCallbacks();
+
+			//FIXME: this gives callbacks for datattypes; do we need value types too?
+			//FIXME: add PT: prefix! DO NOT SUBMIT without!
+
+			$this->dataValueRdfBuilderFactory = new DataValueRdfBuilderFactory(
+				$callbacks
+			);
+		}
+
+		return $this->dataValueRdfBuilderFactory;
 	}
 
 	/**
