@@ -9,6 +9,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
  * Renders the main Snaks associated with a given Property on an Entity.
@@ -80,7 +81,16 @@ class StatementTransclusionInteractor {
 		$propertyLabelOrId,
 		$acceptableRanks = null
 	) {
-		$entity = $this->entityLookup->getEntity( $entityId );
+		try {
+			$entity = $this->entityLookup->getEntity( $entityId );
+		} catch( UnresolvedRedirectException $e ) {
+			// We probably hit a double redirect
+			wfLogWarning(
+				'Encountered a UnresolvedRedirectException when trying to load ' . $entityId->getSerialization()
+			);
+
+			return '';
+		}
 
 		if ( !$entity instanceof StatementListProvider ) {
 			return '';
