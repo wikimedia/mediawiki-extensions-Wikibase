@@ -119,7 +119,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
-	 * @return SnakValueRdfBuilder
+	 * @return DataValueRdfBuilder
 	 */
 	private function newSimpleValueRdfBuilder() {
 		$simpleValueBuilder = new SimpleValueRdfBuilder( $this->vocabulary, $this->propertyLookup );
@@ -129,21 +129,33 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
-	 * @return SnakValueRdfBuilder
+	 * @return DataValueRdfBuilder
 	 */
-	private function newSnakValueBuilder() {
-		if ( $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ) {
-			// NOTE: use sub-writers for nested structures
-			$valueWriter = $this->writer->sub();
+	private function newComplexValueRdfBuilder() {
+		// NOTE: use sub-writers for nested structures
+		$valueWriter = $this->writer->sub();
 
-			$statementValueBuilder = new ComplexValueRdfBuilder( $this->vocabulary, $valueWriter, $this->propertyLookup );
-			$statementValueBuilder->setDedupeBag( $this->dedupBag );
-			$statementValueBuilder->setEntityMentionListener( $this );
+		$statementValueBuilder = new ComplexValueRdfBuilder( $this->vocabulary, $valueWriter, $this->propertyLookup );
+		$statementValueBuilder->setDedupeBag( $this->dedupBag );
+		$statementValueBuilder->setEntityMentionListener( $this );
+
+		return $statementValueBuilder;
+	}
+
+	/**
+	 * @return SnakRdfBuilder
+	 */
+	private function newSnakBuilder( $full ) {
+		if ( $full === 'full' ) {
+			$statementValueBuilder = $this->newComplexValueRdfBuilder();
 		} else {
 			$statementValueBuilder = $this->newSimpleValueRdfBuilder();
 		}
 
-		return $statementValueBuilder;
+		$snakBuilder = new SnakRdfBuilder( $this->vocabulary, $statementValueBuilder, $this->propertyLookup );
+		$snakBuilder->setEntityMentionListener( $this );
+
+		return $snakBuilder;
 	}
 
 	/**
@@ -151,8 +163,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	private function newTruthyStatementRdfBuilder() {
 		//NOTE: currently, the only simple values are supported in truthy mode!
-		$simpleValueBuilder = $this->newSimpleValueRdfBuilder();
-		$statementBuilder = new TruthyStatementRdfBuilder( $this->vocabulary, $this->writer, $simpleValueBuilder );
+		$simpleSnakBuilder = $this->newSnakBuilder( 'simple' );
+		$statementBuilder = new TruthyStatementRdfBuilder( $this->vocabulary, $this->writer, $simpleSnakBuilder );
 
 		return $statementBuilder;
 	}
@@ -161,11 +173,10 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @return EntityRdfBuilder
 	 */
 	private function newFullStatementRdfBuilder() {
-		$statementValueBuilder = $this->newSnakValueBuilder();
+		$statementValueBuilder = $this->newSnakBuilder( $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ? 'full' : 'simple' );
 
 		$statementBuilder = new FullStatementRdfBuilder( $this->vocabulary, $this->writer, $statementValueBuilder );
 		$statementBuilder->setDedupeBag( $this->dedupBag );
-		$statementBuilder->setEntityMentionListener( $this );
 		$statementBuilder->setProduceQualifiers( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) );
 		$statementBuilder->setProduceReferences( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) );
 
