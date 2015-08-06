@@ -43,6 +43,7 @@
 
 .wikibase-sitelinkview input:focus {
 	border-color: #0b0080;
+	background-color: #D6F3FF;
 }
 
 .wikibase-sitelinkview-badges {
