@@ -14,12 +14,16 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Rdf\DataValueRdfBuilder;
+use Wikibase\Rdf\DataValueRdfBuilderFactory;
+use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\SimpleValueRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\SimpleValueRdfBuilder
+ * Test for integration of DataValueRdfBuilderFactory, DispatchingValueRdfBuilder, and various
+ * handlers for different data types. Should allow confident transition from the old
+ * SimpleValueRdfBuilder.
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -55,7 +59,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param EntityId[] &$mentioned receives the IDs of any mentioned entities.
 	 *
-	 * @return SimpleValueRdfBuilder
+	 * @return DataValueRdfBuilder
 	 */
 	private function newBuilder( array &$mentioned = array() ) {
 		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
@@ -66,10 +70,16 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$vocabulary = $this->getTestData()->getVocabulary();
+		$dataValueRdfBuilderFactory = new DataValueRdfBuilderFactory(
+			$this->getTestData()->getDataValueRdfBuilderFactoryCallbacks()
+		);
 
-		$builder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
-		$builder->setEntityMentionListener( $mentionTracker );
+		$builder = $dataValueRdfBuilderFactory->getSimpleDataValueRdfBuilder(
+			$this->getTestData()->getVocabulary(),
+			$this->getTestData()->getNTriplesWriter(),
+			$mentionTracker,
+			new HashDedupeBag()
+		);
 
 		return $builder;
 	}

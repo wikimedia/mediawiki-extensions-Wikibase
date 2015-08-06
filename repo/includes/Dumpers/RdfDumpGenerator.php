@@ -13,6 +13,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Rdf\DataValueRdfBuilderFactory;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
@@ -172,6 +173,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		SiteList $sites,
 		EntityRevisionLookup $entityRevisionLookup,
 		PropertyDataTypeLookup $propertyLookup,
+		DataValueRdfBuilderFactory $dataValueRdfBuilderFactory,
 		EntityPrefetcher $entityPrefetcher,
 		array $canonicalLanguageCodes = array()
 	) {
@@ -187,6 +189,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		$rdfBuilder = new RdfBuilder(
 			$sites,
 			new RdfVocabulary( $baseUri, $dataUri, $canonicalLanguageCodes ),
+			$dataValueRdfBuilderFactory,
 			$propertyLookup,
 			$flavor,
 			$rdfWriter,
