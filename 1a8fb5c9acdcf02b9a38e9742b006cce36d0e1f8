@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_bce87f0c",
+        "filename": "repo/tests/phpunit/data/maintenance/dumpRdf-out.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-06T12:26:51Z",
+      "side": 1,
+      "message": "The order of things in the rdf output is underfined, changing it should nto break the test. better use n-triples output and sort the lines.",
+      "revId": "1a8fb5c9acdcf02b9a38e9742b006cce36d0e1f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_1cde7370",
+        "filename": "repo/tests/phpunit/maintenance/dumpRdfTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-06T12:26:51Z",
+      "side": 1,
+      "message": "the tab here is rather easy to mess up, use \\t or \\s instead.",
+      "revId": "1a8fb5c9acdcf02b9a38e9742b006cce36d0e1f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
