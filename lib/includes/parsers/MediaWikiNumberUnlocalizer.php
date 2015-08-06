@@ -22,7 +22,7 @@ class MediaWikiNumberUnlocalizer extends BasicNumberUnlocalizer {
 	/**
 	 * @var Language
 	 */
-	protected $language;
+	private $language;
 
 	/**
 	 * @param Language $language

@@ -25,7 +25,7 @@ class EntityIdValueParser extends StringValueParser {
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $parser;
+	private $parser;
 
 	/**
 	 * @param EntityIdParser $parser
