@@ -6,7 +6,7 @@ use DataValues\DataValue;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * Interface for RDF mapping for wikibase data values.
+ * RDF mapping for DataValues that map to a resource (object) URI..
  *
  * @since 0.5
  *
@@ -14,7 +14,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-interface DataValueRdfBuilder {
+class ObjectValueRdfBuilder implements DataValueRdfBuilder {
 
 	/**
 	 * Adds specific value
@@ -31,6 +31,18 @@ interface DataValueRdfBuilder {
 		$propertyValueLName,
 		$dataType,
 		DataValue $value
-	);
+	) {
+		$uri = $this->getValueUri( $value );
 
+		$writer->say( $propertyValueNamespace, $propertyValueLName )->is( $uri );
+	}
+
+	/**
+	 * @param DataValue $value
+	 *
+	 * @return string the object URI
+	 */
+	protected function getValueUri( DataValue $value ) {
+		return trim( $value->getValue() );
+	}
 }
