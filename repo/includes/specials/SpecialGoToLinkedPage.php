@@ -9,6 +9,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 
 /**
  * Enables accessing a linked page on a site by providing the item id and site
@@ -35,6 +38,22 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	private $redirectLookup;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * Error message key
+	 * @var string|null
+	 */
+	private $errorMessageKey;
+
+	/**
 	 * @see SpecialWikibasePage::__construct
 	 */
 	public function __construct() {
@@ -45,8 +64,12 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		$this->initServices(
 			$wikibaseRepo->getSiteStore(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
-			$wikibaseRepo->getStore()->getEntityRedirectLookup()
+			$wikibaseRepo->getStore()->getEntityRedirectLookup(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStore()->getEntityLookup()
 		);
+
+		$this->errorMessageKey = null;
 	}
 
 	/**
@@ -60,42 +83,42 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	public function initServices(
 		SiteStore $siteStore,
 		SiteLinkLookup $siteLinkLookup,
-		EntityRedirectLookup $redirectLookup
+		EntityRedirectLookup $redirectLookup,
+		EntityIdParser $idParser,
+		EntityLookup $entityLookup
 	) {
 		$this->siteStore = $siteStore;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->redirectLookup = $redirectLookup;
+		$this->idParser = $idParser;
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
 	 * @param string $subPage
-	 * @return array array( string $site, ItemId $itemId, string $itemString )
+	 * @return array array( string $site, string $itemString )
 	 */
 	protected function getArguments( $subPage ) {
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$site = trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) );
-
 		$itemString = trim( $request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : 0 ) );
-		try {
-			$itemId = new ItemId( $itemString );
-		} catch ( InvalidArgumentException $ex ) {
-			$itemId = null;
-			$itemString = '';
-		}
 
-		return array( $site, $itemId, $itemString );
+		return array( $site, $itemString );
 	}
 
 	/**
 	 * @param string $site
-	 * @param ItemId|null $itemId
+	 * @param string|null $itemString
 	 * @return string|null the URL to redirect to or null if the sitelink does not exist
 	 */
-	protected function getTargetUrl( $site, ItemId $itemId = null ) {
+	protected function getTargetUrl( $site, $itemString = null ) {
+		$itemId = $this->getItemId( $itemString );
+
 		if ( $site === '' || $itemId === null ) {
 			return null;
 		}
+
 		$site = $this->stringNormalizer->trimToNFC( $site );
 
 		if ( !$this->siteStore->getSite( $site ) ) {
@@ -115,7 +138,35 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			$siteObj = $this->siteStore->getSite( $site );
 			$url = $siteObj->getPageUrl( $pageName );
 			return $url;
+		} else {
+			$this->errorMessageKey = "page-not-found";
 		}
+
+		return null;
+	}
+
+	/**
+	 * Parses a string to itemId
+	 *
+	 * @param string $itemString
+	 * @return ItemId|null
+	 */
+	private function getItemId( $itemString ) {
+		try {
+			$itemId = $this->idParser->parse( $itemString );
+			if ( $itemId instanceof ItemId ) {
+				if ( !$this->entityLookup->hasEntity( $itemId ) ) {
+					$this->errorMessageKey = "item-not-found";
+					return null;
+				}
+				return $itemId;
+			}
+		} catch ( EntityIdParsingException $e ) {
+			$this->errorMessageKey = 'item-id-invalid';
+		} catch ( InvalidArgumentException $e ) {
+			$this->errorMessageKey = 'item-id-invalid';
+		}
+
 		return null;
 	}
 
@@ -151,14 +202,17 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
-		list( $site, $itemId, $itemString ) = $this->getArguments( $subPage );
+		list( $site, $itemString ) = $this->getArguments( $subPage );
 
-		$url = $this->getTargetUrl( $site, $itemId );
-		if ( null === $url ) {
-			$this->outputForm( $site, $itemString );
-		} else {
-			$this->getOutput()->redirect( $url );
+		if ( !empty( $site ) || !empty( $itemString ) ) {
+			$url = $this->getTargetUrl( $site, $itemString );
+			if ( null !== $url ) {
+				return $this->getOutput()->redirect( $url );
+			}
 		}
+
+		$this->outputError();
+		$this->outputForm( $site, $itemString );
 	}
 
 	/**
@@ -229,6 +283,16 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
+	}
+
+	/**
+	 * Outputs an error message
+	 */
+	private function outputError() {
+		if ( $this->errorMessageKey !== null ) {
+			$this->showErrorHTML(
+				$this->msg( 'wikibase-gotolinkedpage-error-' . $this->errorMessageKey ) );
+		}
 	}
 
 }
