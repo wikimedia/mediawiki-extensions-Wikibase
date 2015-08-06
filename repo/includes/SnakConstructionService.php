@@ -58,8 +58,7 @@ class SnakConstructionService {
 	 * @return Snak
 	 * @throws PropertyNotFoundException from getDataTypeIdForProperty
 	 * @throws OutOfBoundsException from getType
-	 * @throws InvalidArgumentException from newDataValue and newSnak
-	 * @throws IllegalValueException from newDataValue
+	 * @throws InvalidArgumentException from newDataValue, newDataValue and newSnak
 	 */
 	public function newSnak( PropertyId $propertyId, $snakType, $rawValue = null ) {
 		$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
