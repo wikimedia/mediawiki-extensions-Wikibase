@@ -6,7 +6,7 @@ use DataValues\DataValue;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * Interface for RDF mapping for wikibase data values.
+ * RDF mapping for DataValues that map to a literal.
  *
  * @since 0.5
  *
@@ -14,7 +14,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-interface DataValueRdfBuilder {
+class TextValueRdfBuilder implements DataValueRdfBuilder {
 
 	/**
 	 * Adds specific value
@@ -31,6 +31,9 @@ interface DataValueRdfBuilder {
 		$propertyValueLName,
 		$dataType,
 		DataValue $value
-	);
+	) {
+		$writer->say( $propertyValueNamespace, $propertyValueLName )
+			->text( $value->getValue() );
+	}
 
 }
