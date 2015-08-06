@@ -133,7 +133,9 @@ class TermSqlIndexTest extends TermIndexTest {
 				$fingerprint,
 				array( $labelFooEn, $descriptionBarEn ),
 				array( 'LIMIT' => 1 ),
-				array( $descriptionBarEn ), // FIXME: This is not really well defined. Could be either of the two.
+				// This is not really well defined. Could be either of the two.
+				// So use null to show we want something but don't know what it is
+				array( null ),
 			)
 		);
 	}
@@ -161,11 +163,12 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		foreach ( $expected as $key => $expectedTerm ) {
 			$this->assertArrayHasKey( $key, $actual );
-
-			$actualTerm = $actual[$key];
-			$this->assertEquals( $expectedTerm->getType(), $actualTerm->getType(), 'termType' );
-			$this->assertEquals( $expectedTerm->getLanguage(), $actualTerm->getLanguage(), 'termLanguage' );
-			$this->assertEquals( $expectedTerm->getText(), $actualTerm->getText(), 'termText' );
+			if ( $expectedTerm instanceof TermIndexEntry ) {
+				$actualTerm = $actual[$key];
+				$this->assertEquals( $expectedTerm->getType(), $actualTerm->getType(), 'termType' );
+				$this->assertEquals( $expectedTerm->getLanguage(), $actualTerm->getLanguage(), 'termLanguage' );
+				$this->assertEquals( $expectedTerm->getText(), $actualTerm->getText(), 'termText' );
+			}
 		}
 	}
 
