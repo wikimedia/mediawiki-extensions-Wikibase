@@ -103,8 +103,6 @@ abstract class EntityView {
 			$this->getSideHtml( $entityRevision )
 		);
 
-		$html .= $this->getLoadingSpinnerInlineScript();
-
 		return $html;
 	}
 
@@ -129,26 +127,6 @@ abstract class EntityView {
 		}
 
 		return '';
-	}
-
-	private function getLoadingSpinnerInlineScript() {
-		// Show loading spinner as long as JavaScript is initialising.
-		// The fastest way to show it is placing the script right after the corresponding HTML.
-		// Remove it after a while in any case (e.g. some resources might not have been loaded
-		// silently, so JavaScript is not initialising).
-		// Additionally attaching to window.error would only make sense before any other
-		// JavaScript is parsed.
-		return Html::inlineScript( '
-if ( $ ) {
-	$( ".wikibase-entityview" ).addClass( "loading" ).append(
-		$( "<div/>" ).addClass( "mw-small-spinner wb-entity-spinner" )
-	);
-	window.setTimeout( function() {
-		$( ".wikibase-entityview" ).removeClass( "loading" );
-		$( ".wb-entity-spinner" ).remove();
-	}, 7000 );
-}
-' );
 	}
 
 	/**
