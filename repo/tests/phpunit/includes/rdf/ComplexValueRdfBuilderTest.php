@@ -14,15 +14,17 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Rdf\ComplexValueRdfBuilder;
+use Wikibase\Rdf\DataValueRdfBuilder;
+use Wikibase\Rdf\DataValueRdfBuilderFactory;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\ComplexValueRdfBuilder
+ * Test for integration of DataValueRdfBuilderFactory, DispatchingValueRdfBuilder, and various
+ * handlers for different data types. Should allow confident transition from the old
+ * ComplexValueRdfBuilder.
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -59,7 +61,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityId[] &$mentioned receives the IDs of any mentioned entities.
 	 * @param DedupeBag|null $bag A list of value hashes that should be considered "already seen".
 	 *
-	 * @return ComplexValueRdfBuilder
+	 * @return DataValueRdfBuilder
 	 */
 	private function newBuilder( array &$mentioned = array(), DedupeBag $bag = null ) {
 		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
@@ -70,12 +72,18 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$vocabulary = $this->getTestData()->getVocabulary();
 		$valueWriter = $this->getTestData()->getNTriplesWriter();
 
-		$builder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $this->getTestData()->getMockRepository() );
-		$builder->setEntityMentionListener( $mentionTracker );
-		$builder->setDedupeBag( $bag ?: new NullDedupeBag() );
+		$dataValueRdfBuilderFactory = new DataValueRdfBuilderFactory(
+			$this->getTestData()->getDataValueRdfBuilderFactoryCallbacks()
+		);
+
+		$builder = $dataValueRdfBuilderFactory->getComplexDataValueRdfBuilder(
+			$this->getTestData()->getVocabulary(),
+			$valueWriter,
+			$mentionTracker,
+			$bag ?: new HashDedupeBag()
+		);
 
 		// HACK: glue on the value writer as a public field, so we can evaluate it later.
 		$builder->test_value_writer = $valueWriter;
@@ -102,11 +110,21 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		return $lines;
 	}
 
-	private function assertTriplesEqual( array $expectedTriples, RdfWriter $writer ) {
+	private function assertTriplesEqual( array $expectedTriples, RdfWriter $writer, $message = '' ) {
 		$actualTripels = $this->getDataFromWriter( $writer );
 		sort( $expectedTriples );
+		sort( $actualTripels );
 
-		$this->assertEquals( $expectedTriples, $actualTripels );
+		// Note: comparing $expected and $actual directly would show triples
+		// that are present in both but shifted in position. That makes the output
+		// hard to read. Calculating the $missing and $extra sets helps.
+		$extra = array_diff( $actualTripels, $expectedTriples );
+		$missing = array_diff( $expectedTriples, $actualTripels );
+
+		// Cute: $missing and $extra can be equal only if they are empty.
+		// Comparing them here directly looks a bit odd in code, but produces meaningful
+		// output, especially if the input was sorted.
+		$this->assertEquals( $missing, $extra, $message );
 	}
 
 	public function provideAddValue() {

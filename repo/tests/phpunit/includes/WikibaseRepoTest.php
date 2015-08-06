@@ -294,4 +294,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\DataTypeDefinitions', $dataTypeDefinitions );
 	}
 
+	public function testGetDataValueRdfBuilderFactory() {
+		$dataValueRdfBuilderFactory = $this->getWikibaseRepo()->getDataValueRdfBuilderFactory();
+		$this->assertInstanceOf( 'Wikibase\Rdf\DataValueRdfBuilderFactory', $dataValueRdfBuilderFactory );
+	}
+
 }

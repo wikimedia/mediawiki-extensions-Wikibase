@@ -3,13 +3,12 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Rdf\ComplexValueRdfBuilder;
+use Wikibase\Rdf\DataValueRdfBuilderFactory;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\FullStatementRdfBuilder;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfProducer;
-use Wikibase\Rdf\SimpleValueRdfBuilder;
 use Wikibase\Rdf\SnakRdfBuilder;
 
 /**
@@ -66,11 +65,26 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
+		$dataValueRdfBuilderFactory = new DataValueRdfBuilderFactory(
+			$this->getTestData()->getDataValueRdfBuilderFactoryCallbacks()
+		);
+
 		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
 			$valueWriter = $writer->sub();
-			$statementValueBuilder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $this->getTestData()->getMockRepository() );
+
+			$statementValueBuilder = $dataValueRdfBuilderFactory->getComplexDataValueRdfBuilder(
+				$this->getTestData()->getVocabulary(),
+				$valueWriter,
+				$mentionTracker,
+				new HashDedupeBag()
+			);
 		} else {
-			$statementValueBuilder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
+			$statementValueBuilder = $dataValueRdfBuilderFactory->getSimpleDataValueRdfBuilder(
+				$this->getTestData()->getVocabulary(),
+				$writer,
+				$mentionTracker,
+				new HashDedupeBag()
+			);
 		}
 
 		$snakRdfBuilder = new SnakRdfBuilder( $vocabulary, $statementValueBuilder, $this->getTestData()->getMockRepository() );
@@ -79,7 +93,6 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES ) {
 			$snakRdfBuilder->setEntityMentionListener( $mentionTracker );
-			$statementValueBuilder->setEntityMentionListener( $mentionTracker );
 		}
 
 		$statementBuilder->setProduceQualifiers( $flavor & RdfProducer::PRODUCE_QUALIFIERS );
