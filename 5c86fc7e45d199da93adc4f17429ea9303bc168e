@@ -52,6 +52,24 @@
       "revId": "5c86fc7e45d199da93adc4f17429ea9303bc168e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_2e7d3517",
+        "filename": "repo/includes/Interactors/ItemMergeInteractor.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-06T08:34:07Z",
+      "side": 1,
+      "message": "Indeed, it should work! but , codestyle! ;)",
+      "parentUuid": "8ec42329_eb607f9b",
+      "revId": "5c86fc7e45d199da93adc4f17429ea9303bc168e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
