@@ -133,7 +133,7 @@ class TermSqlIndexTest extends TermIndexTest {
 				$fingerprint,
 				array( $labelFooEn, $descriptionBarEn ),
 				array( 'LIMIT' => 1 ),
-				array( $descriptionBarEn ), // FIXME: This is not really well defined. Could be either of the two.
+				array( $labelFooEn ), // FIXME: This is not really well defined. Could be either of the two.
 			)
 		);
 	}
