@@ -96,12 +96,13 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedTriples, $actualTripels );
 	}
 
-	public function provideAddSnakValue() {
+	public function provideAddValue() {
 		// NOTE: data types must match $this->getTestData()->getMockRepository();
 
 		return array(
 			'wikibase-entityid' => array(
 				new PropertyId( 'P2' ),
+				'wikibase-item',
 				new EntityIdValue( new ItemId( 'Q42' ) ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P2> <http://acme.test/Q42> .',
@@ -109,6 +110,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'commonsMedia' => array(
 				new PropertyId( 'P3' ),
+				'commonsMedia',
 				new StringValue( 'Test.jpg' ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Test.jpg> .',
@@ -116,6 +118,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'globecoordinate' => array(
 				new PropertyId( 'P4' ),
+				'globecoordinate',
 				new GlobeCoordinateValue(
 					new LatLongValue( 12.25, -45.5 ),
 					0.025,
@@ -127,6 +130,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'monolingualtext' => array(
 				new PropertyId( 'P5' ),
+				'monolingualtext',
 				new MonolingualTextValue( 'ru', 'Берлин' ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P5> "\u0411\u0435\u0440\u043B\u0438\u043D"@ru .',
@@ -134,6 +138,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'quantity' => array(
 				new PropertyId( 'P6' ),
+				'quantity',
 				new QuantityValue(
 					new DecimalValue( '+0.00011' ),
 					'1',
@@ -145,6 +150,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'quantity-unit' => array(
 				new PropertyId( 'P6' ),
+				'quantity',
 				new QuantityValue(
 					new DecimalValue( '-2.3' ),
 					'https://www.wikidata.org/entity/Q11573',
@@ -156,6 +162,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'string' => array(
 				new PropertyId( 'P7' ),
+				'string',
 				new StringValue( 'Kittens' ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P7> "Kittens" .',
@@ -163,6 +170,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'time' => array(
 				new PropertyId( 'P8' ),
+				'time',
 				new TimeValue( '+2015-03-03T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
@@ -170,6 +178,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'time-year' => array( // NOTE: may changed to use xsd:gYear
 				new PropertyId( 'P8' ),
+				'time',
 				new TimeValue( '+2015-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "2015-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
@@ -177,6 +186,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'time-margin' => array(
 				new PropertyId( 'P8' ),
+				'time',
 				new TimeValue( '+2015-03-03T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
@@ -188,6 +198,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				                 //       XSD 1.1 uses astronomical numbering (-44 means 43 BCE),
 				                 //       conversion would apply.
 				new PropertyId( 'P8' ),
+				'time',
 				new TimeValue( '-0044-03-15T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "-0043-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
@@ -199,6 +210,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				                    //       are known, they could be converted to (proleptic)
 				                    //       gregorian an output as an XSD date.
 				new PropertyId( 'P8' ),
+				'time',
 				new TimeValue( '+1492-10-12T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::JULIAN_CALENDAR ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P8> "1492-10-21T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
@@ -206,6 +218,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'url' => array(
 				new PropertyId( 'P9' ),
+				'url',
 				new StringValue( 'http://quux.test/xyzzy' ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P9> <http://quux.test/xyzzy> .',
@@ -213,6 +226,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'url-mailto' => array(
 				new PropertyId( 'P9' ),
+				'url',
 				new StringValue( 'mailto:xyzzy@quux.test' ),
 				array(
 					'<http://acme.test/Q11> <http://acme.test/prop/direct/P9> <mailto:xyzzy@quux.test> .',
@@ -222,21 +236,22 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideAddSnakValue
+	 * @dataProvider provideAddValue
 	 */
-	public function testAddSnakValue( PropertyId $propertyId, DataValue $value, array $expectedTriples ) {
+	public function testAddValue( PropertyId $propertyId, $dataType, DataValue $value, array $expectedTriples ) {
 		$writer = $this->getTestData()->getNTriplesWriter();
 
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
 		$builder = $this->newBuilder();
-		$builder->addSnakValue( $writer, $propertyId, $value, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addValue( $writer, RdfVocabulary::NSP_DIRECT_CLAIM, $propertyId->getSerialization(), $dataType, $value );
 
 		$this->assertTriplesEqual( $expectedTriples, $writer );
 	}
 
-	public function testAddSnakValue_mention() {
+	public function testAddValue_mention() {
 		$propertyId = new PropertyId( 'P2' );
+		$dataType = 'wikibase-item';
 		$value = new EntityIdValue( new ItemId( 'Q42' ) );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
@@ -245,7 +260,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$mentioned = array();
 		$builder = $this->newBuilder( $mentioned );
-		$builder->addSnakValue( $writer, $propertyId, $value, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addValue( $writer, RdfVocabulary::NSP_DIRECT_CLAIM, $propertyId->getSerialization(), $dataType, $value );
 
 		$this->assertEquals( array( 'Q42' ), array_keys( $mentioned ) );
 	}
