@@ -3,12 +3,13 @@
 namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
  * RDF mapping for wikibase data values, using the fully expanded data representation.
  * This outputs expanded values (when appropriate) in addition to simple values.
+ *
+ * @todo: KILL ME! DO NOT MERGE until this is gone!
  *
  * @since 0.5
  *
@@ -31,10 +32,9 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param RdfWriter $valueWriter
-	 * @param PropertyDataTypeLookup $propertyLookup
 	 */
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $valueWriter, PropertyDataTypeLookup $propertyLookup ) {
-		parent::__construct( $vocabulary, $propertyLookup );
+	public function __construct( RdfVocabulary $vocabulary, RdfWriter $valueWriter ) {
+		parent::__construct( $vocabulary );
 
 		$this->dedupeBag = new NullDedupeBag();
 		$this->valueWriter = $valueWriter;
@@ -63,7 +63,7 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param DataValue $value
 	 */
-	public function addValue( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value ) {
+	public function addValue( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType, DataValue $value ) {
 		parent::addValue( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
 
 		switch ( $value->getType() ) {

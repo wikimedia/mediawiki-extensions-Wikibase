@@ -76,10 +76,15 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyLookup;
+	/**
+	 * @var DataValueRdfBuilderFactory
+	 */
+	private $dataValueRdfBuilderFactory;
 
 	/**
 	 * @param SiteList $sites
 	 * @param RdfVocabulary $vocabulary
+	 * @param DataValueRdfBuilderFactory $dataValueRdfBuilderFactory
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param int $flavor
 	 * @param RdfWriter $writer
@@ -88,13 +93,15 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	public function __construct(
 		SiteList $sites,
 		RdfVocabulary $vocabulary,
+		DataValueRdfBuilderFactory $dataValueRdfBuilderFactory,
 		PropertyDataTypeLookup $propertyLookup,
 		$flavor,
 		RdfWriter $writer,
-			DedupeBag $dedupBag
+		DedupeBag $dedupBag
 	) {
 		$this->vocabulary = $vocabulary;
 		$this->propertyLookup = $propertyLookup;
+		$this->dataValueRdfBuilderFactory = $dataValueRdfBuilderFactory;
 		$this->writer = $writer;
 		$this->produceWhat = $flavor;
 		$this->dedupBag = $dedupBag ?: new HashBagOStuff();
@@ -115,31 +122,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_SITELINKS ) ) {
 			$this->builders[] = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
 		}
-
-	}
-
-	/**
-	 * @return DataValueRdfBuilder
-	 */
-	private function newSimpleValueRdfBuilder() {
-		$simpleValueBuilder = new SimpleValueRdfBuilder( $this->vocabulary, $this->propertyLookup );
-		$simpleValueBuilder->setEntityMentionListener( $this );
-
-		return $simpleValueBuilder;
-	}
-
-	/**
-	 * @return DataValueRdfBuilder
-	 */
-	private function newComplexValueRdfBuilder() {
-		// NOTE: use sub-writers for nested structures
-		$valueWriter = $this->writer->sub();
-
-		$statementValueBuilder = new ComplexValueRdfBuilder( $this->vocabulary, $valueWriter, $this->propertyLookup );
-		$statementValueBuilder->setDedupeBag( $this->dedupBag );
-		$statementValueBuilder->setEntityMentionListener( $this );
-
-		return $statementValueBuilder;
 	}
 
 	/**
@@ -147,9 +129,19 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	private function newSnakBuilder( $full ) {
 		if ( $full === 'full' ) {
-			$statementValueBuilder = $this->newComplexValueRdfBuilder();
+			$statementValueBuilder = $this->dataValueRdfBuilderFactory->getComplexDataValueRdfBuilder(
+				$this->vocabulary,
+				$this->writer,
+				$this,
+				$this->dedupBag
+			);
 		} else {
-			$statementValueBuilder = $this->newSimpleValueRdfBuilder();
+			$statementValueBuilder = $this->dataValueRdfBuilderFactory->getSimpleDataValueRdfBuilder(
+				$this->vocabulary,
+				$this->writer,
+				$this,
+				$this->dedupBag
+			);
 		}
 
 		$snakBuilder = new SnakRdfBuilder( $this->vocabulary, $statementValueBuilder, $this->propertyLookup );

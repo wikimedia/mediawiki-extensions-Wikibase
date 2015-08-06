@@ -105,6 +105,13 @@ class SnakRdfBuilder {
 		$this->mentionedEntityTracker->propertyMentioned( $snak->getPropertyId() );
 	}
 
+	private $propertyTypes = array();
+
+	private function getDataTypeIdForProperty( $propertyId ) {
+
+		return $this->propertyTypes[$key];
+	}
+
 	/**
 	 * Adds the value of the given property to the RDF graph.
 	 *
@@ -120,20 +127,18 @@ class SnakRdfBuilder {
 		$propertyNamespace
 	) {
 		$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
+		$propertyKey = $propertyId->getSerialization();
 
-		$typeId = $value->getType();
-		$dataType = null;
-
-		if ( $typeId === 'string' ) {
-			// We only care about the actual data type of strings, so we can save time but not asking
-			// for any other types
+		// cache data type for all properties we encounter
+		if ( !isset( $this->propertyTypes[$propertyKey] ) ) {
 			try {
-				$dataType = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
+				$this->propertyTypes[$propertyKey] = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
 			} catch ( PropertyNotFoundException $e ) {
-				// keep "unknown"
+				$this->propertyTypes[$propertyKey] = "unknown";
 			}
 		}
 
+		$dataType = $this->propertyTypes[$propertyKey];
 		$this->valueBuilder->addValue( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value );
 	}
 

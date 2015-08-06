@@ -12,10 +12,24 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Rdf\ComplexValueRdfBuilder;
+use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\EntityMentionListener;
+use Wikibase\Rdf\JulianDateTimeValueCleaner;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\Values\CommonsMediaRdfBuilder;
+use Wikibase\Rdf\Values\ComplexValueRdfHelper;
+use Wikibase\Rdf\Values\EntityIdRdfBuilder;
+use Wikibase\Rdf\Values\GlobeCoordinateRdfBuilder;
+use Wikibase\Rdf\Values\LiteralValueRdfBuilder;
+use Wikibase\Rdf\Values\MonolingualTextRdfBuilder;
+use Wikibase\Rdf\Values\ObjectValueRdfBuilder;
+use Wikibase\Rdf\Values\QuantityRdfBuilder;
+use Wikibase\Rdf\Values\TimeRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\MockRepository;
 use Wikimedia\Purtle\NTriplesRdfWriter;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * Helper class for accessing data files for RdfBuilder related tests.
@@ -231,4 +245,37 @@ class RdfBuilderTestData {
 		return $repo;
 	}
 
+	public function getDataValueRdfBuilderFactoryCallbacks() {
+		return array(
+			'VT:wikibase-entityid' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new EntityIdRdfBuilder( $vocab, $tracker );
+			},
+			'VT:globecoordinate' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub() );
+				return new GlobeCoordinateRdfBuilder( $complexValueHelper );
+			},
+			'VT:monolingualtext' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new MonolingualTextRdfBuilder();
+			},
+			'VT:quantity' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub() );
+				return new QuantityRdfBuilder( $complexValueHelper );
+			},
+			'VT:time' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				// TODO: if data is fixed to be always Gregorian, replace with DateTimeValueCleaner
+				$dateCleaner = new JulianDateTimeValueCleaner();
+				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub() );
+				return new TimeRdfBuilder( $dateCleaner, $complexValueHelper );
+			},
+			'PT:url' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new ObjectValueRdfBuilder();
+			},
+			'PT:string' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new LiteralValueRdfBuilder( null, null );
+			},
+			'PT:commonsMedia' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new CommonsMediaRdfBuilder( $vocab );
+			},
+		);
+	}
 }
