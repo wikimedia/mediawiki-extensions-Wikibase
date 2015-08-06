@@ -23,7 +23,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseLuaEntityBindings
 	 */
 	private function getWikibaseLuaEntityBindings() {
-		$entityStatementsRenderer = $this->getMockBuilder( 'Wikibase\DataAccess\StatementTransclusionInteractor' )
+		$entityStatementsRenderer = $this->getMockBuilder( 'Wikibase\Client\DataAccess\StatementTransclusionInteractor' )
 			->disableOriginalConstructor()
 			->getMock();
 

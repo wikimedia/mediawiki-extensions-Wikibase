@@ -5,10 +5,10 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 use DataValues\StringValue;
 use Language;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataAccess\PropertyIdResolver;
-use Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
-use Wikibase\DataAccess\SnaksFinder;
-use Wikibase\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\DataAccess\PropertyIdResolver;
+use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
+use Wikibase\Client\DataAccess\SnaksFinder;
+use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -18,7 +18,7 @@ use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer
+ * @covers Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -111,7 +111,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function getSnaksFinder( array $snaks ) {
 		$snaksFinder = $this->getMockBuilder(
-				'Wikibase\DataAccess\SnaksFinder'
+				'Wikibase\Client\DataAccess\SnaksFinder'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -125,7 +125,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	private function getPropertyIdResolver() {
 		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyIdResolver'
+				'Wikibase\Client\DataAccess\PropertyIdResolver'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -158,7 +158,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	private function getPropertyIdResolverForPropertyNotFound() {
 		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyIdResolver'
+				'Wikibase\Client\DataAccess\PropertyIdResolver'
 			)
 			->disableOriginalConstructor()
 			->getMock();

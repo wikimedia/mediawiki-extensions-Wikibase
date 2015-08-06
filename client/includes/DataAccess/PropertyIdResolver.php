@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataAccess;
+namespace Wikibase\Client\DataAccess;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;

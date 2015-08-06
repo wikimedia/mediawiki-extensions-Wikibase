@@ -2,14 +2,14 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
-use Wikibase\DataAccess\PropertyIdResolver;
+use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Test\MockPropertyLabelResolver;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\DataAccess\PropertyIdResolver
+ * @covers Wikibase\Client\DataAccess\PropertyIdResolver
  *
  * @group Wikibase
  * @group WikibaseClient

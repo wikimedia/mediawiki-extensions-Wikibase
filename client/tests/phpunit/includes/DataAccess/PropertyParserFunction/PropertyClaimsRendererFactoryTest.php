@@ -8,7 +8,7 @@ use ParserOptions;
 use Title;
 use User;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
+use Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -19,7 +19,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory
+ * @covers Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -38,7 +38,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
+			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
 			$renderer
 		);
 	}
@@ -50,7 +50,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
+			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
 			$renderer
 		);
 	}
@@ -62,7 +62,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer',
+			'Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer',
 			$renderer
 		);
 	}
@@ -77,7 +77,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
+			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
 			$renderer
 		);
 	}
@@ -97,7 +97,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
+			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
 			$renderer
 		);
 	}
@@ -109,7 +109,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer',
+			'Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer',
 			$renderer
 		);
 	}
@@ -140,7 +140,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function getPropertyIdResolver() {
 		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyIdResolver'
+				'Wikibase\Client\DataAccess\PropertyIdResolver'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -156,7 +156,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function getSnaksFinder() {
 		$snakListFinder = $this->getMockBuilder(
-				'Wikibase\DataAccess\SnaksFinder'
+				'Wikibase\Client\DataAccess\SnaksFinder'
 			)
 			->disableOriginalConstructor()
 			->getMock();

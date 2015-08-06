@@ -11,12 +11,12 @@ use Preprocessor_Hash;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\Runner
+ * @covers Wikibase\Client\DataAccess\PropertyParserFunction\Runner
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -82,7 +82,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunPropertyParserFunction_arbitraryAccessNotFound() {
 		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
+				'Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -163,7 +163,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId );
 
 		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
+				'Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -177,7 +177,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 	private function getRenderer( $entityId, $propertyLabelOrId ) {
 		$renderer = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRenderer'
+				'Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRenderer'
 			)
 			->disableOriginalConstructor()
 			->getMock();
