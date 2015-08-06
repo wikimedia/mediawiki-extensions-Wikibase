@@ -10,10 +10,10 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
- * @covers Wikibase\Validators\TermValidatorFactory
+ * @covers Wikibase\Repo\Validators\TermValidatorFactory
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -45,7 +45,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getFingerprintValidator( Item::ENTITY_TYPE );
 
-		$this->assertInstanceOf( 'Wikibase\Validators\FingerprintValidator', $validator );
+		$this->assertInstanceOf( 'Wikibase\Repo\Validators\FingerprintValidator', $validator );
 
 		$goodFingerprint = new Fingerprint(
 			new TermList( array(

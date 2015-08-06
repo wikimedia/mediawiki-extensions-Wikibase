@@ -13,7 +13,7 @@ use Wikibase\Repo\Api\ParseValue;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Validators\RegexValidator;
+use Wikibase\Repo\Validators\RegexValidator;
 
 /**
  * @covers Wikibase\Repo\Api\ParseValue

@@ -8,7 +8,7 @@ use Message;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
  * @license GPL 2+

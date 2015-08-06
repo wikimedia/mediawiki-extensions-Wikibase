@@ -5,7 +5,7 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use SiteLookup;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
  * Factory for ChangeOps that merge Items.

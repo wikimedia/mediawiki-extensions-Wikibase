@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Validators\UniquenessViolation;
+use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**
- * @covers Wikibase\Validators\UniquenessViolation
+ * @covers Wikibase\Repo\Validators\UniquenessViolation
  *
  * @group Database
  * @group Wikibase

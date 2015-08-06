@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpFactoryProvider

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\TermIndexEntry;
-use Wikibase\Validators\UniquenessViolation;
+use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**
  * @covers Wikibase\LabelDescriptionDuplicateDetector
@@ -269,7 +269,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			$this->assertEquals( $expectedError->getCode(), $error->getCode(), 'Error code:' );
 			$this->assertEquals( $expectedError->getParameters(), $error->getParameters(), 'Error parameters:' );
 
-			$this->assertInstanceOf( 'Wikibase\Validators\UniquenessViolation', $error );
+			$this->assertInstanceOf( 'Wikibase\Repo\Validators\UniquenessViolation', $error );
 			$this->assertEquals( $expectedError->getConflictingEntity(), $error->getConflictingEntity() );
 		}
 	}

@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Validators\Test;
+namespace Wikibase\Test\Repo\Validators;
 
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Validators\CompositeEntityValidator;
+use Wikibase\Repo\Validators\CompositeEntityValidator;
 
 /**
- * @covers Wikibase\Validators\CompositeEntityValidator
+ * @covers Wikibase\Repo\Validators\CompositeEntityValidator
  *
  * @group Database
  * @group Wikibase
@@ -24,12 +24,12 @@ class CompositeEntityValidatorTest extends \PHPUnit_Framework_TestCase {
 		$success = Result::newSuccess();
 		$failure = Result::newError( array( Error::newError( 'Foo!' ) ) );
 
-		$good = $this->getMock( 'Wikibase\Validators\EntityValidator' );
+		$good = $this->getMock( 'Wikibase\Repo\Validators\EntityValidator' );
 		$good->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnValue( $success ) );
 
-		$bad = $this->getMock( 'Wikibase\Validators\EntityValidator' );
+		$bad = $this->getMock( 'Wikibase\Repo\Validators\EntityValidator' );
 		$bad->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnValue( $failure ) );

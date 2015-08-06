@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
-use Wikibase\Validators\NotEntityIdValidator;
+use Wikibase\Repo\Validators\NotEntityIdValidator;
 
 /**
- * @covers \Wikibase\Validators\NotEntityIdValidator
+ * @covers \Wikibase\Repo\Validators\NotEntityIdValidator
  *
  * @group WikibaseLib
  * @group Wikibase

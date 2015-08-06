@@ -151,7 +151,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$error = Error::newError( 'Testing', 'test', 'test-error', array() );
 		$result = Result::newError( array( $error ) );
 
-		$snakValidator = $this->getMockBuilder( 'Wikibase\Validators\SnakValidator' )
+		$snakValidator = $this->getMockBuilder( 'Wikibase\Repo\Validators\SnakValidator' )
 			->disableOriginalConstructor()
 			->getMock();
 

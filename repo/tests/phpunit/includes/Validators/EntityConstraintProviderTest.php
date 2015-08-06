@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Validators\Test;
+namespace Wikibase\Test\Repo\Validators;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
- * @covers Wikibase\Validators\EntityConstraintProvider
+ * @covers Wikibase\Repo\Validators\EntityConstraintProvider
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -47,7 +47,7 @@ class EntityConstraintProviderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'array', $validators );
 
 		foreach ( $validators as $validator ) {
-			$this->assertInstanceOf( 'Wikibase\Validators\EntityValidator', $validator );
+			$this->assertInstanceOf( 'Wikibase\Repo\Validators\EntityValidator', $validator );
 		}
 	}
 

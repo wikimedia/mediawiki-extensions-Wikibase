@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Validators\ValidatorErrorLocalizer
+ * @covers Wikibase\Repo\Validators\ValidatorErrorLocalizer
  *
  * @license GPL 2+
  *

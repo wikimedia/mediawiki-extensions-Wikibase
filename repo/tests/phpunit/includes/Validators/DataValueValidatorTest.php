@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
 use DataValues\StringValue;
-use Wikibase\Validators\DataValueValidator;
-use Wikibase\Validators\StringLengthValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\DataValueValidator;
+use Wikibase\Repo\Validators\StringLengthValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Validators\DataValueValidator
+ * @covers Wikibase\Repo\Validators\DataValueValidator
  *
  * @license GPL 2+
  *

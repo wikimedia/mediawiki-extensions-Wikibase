@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\Summary;
-use Wikibase\Validators\SnakValidator;
+use Wikibase\Repo\Validators\SnakValidator;
 
 /**
  * Class for mainsnak change operation

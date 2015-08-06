@@ -9,19 +9,19 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Validators\AlternativeValidator;
-use Wikibase\Validators\CompositeValidator;
-use Wikibase\Validators\DataFieldValidator;
-use Wikibase\Validators\DataValueValidator;
-use Wikibase\Validators\EntityExistsValidator;
-use Wikibase\Validators\MembershipValidator;
-use Wikibase\Validators\NumberRangeValidator;
-use Wikibase\Validators\NumberValidator;
-use Wikibase\Validators\RegexValidator;
-use Wikibase\Validators\StringLengthValidator;
-use Wikibase\Validators\TypeValidator;
-use Wikibase\Validators\UrlSchemeValidators;
-use Wikibase\Validators\UrlValidator;
+use Wikibase\Repo\Validators\AlternativeValidator;
+use Wikibase\Repo\Validators\CompositeValidator;
+use Wikibase\Repo\Validators\DataFieldValidator;
+use Wikibase\Repo\Validators\DataValueValidator;
+use Wikibase\Repo\Validators\EntityExistsValidator;
+use Wikibase\Repo\Validators\MembershipValidator;
+use Wikibase\Repo\Validators\NumberRangeValidator;
+use Wikibase\Repo\Validators\NumberValidator;
+use Wikibase\Repo\Validators\RegexValidator;
+use Wikibase\Repo\Validators\StringLengthValidator;
+use Wikibase\Repo\Validators\TypeValidator;
+use Wikibase\Repo\Validators\UrlSchemeValidators;
+use Wikibase\Repo\Validators\UrlValidator;
 
 /**
  * Defines validators for the data types supported by Wikibase.

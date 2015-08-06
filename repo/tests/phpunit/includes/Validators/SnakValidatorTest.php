@@ -22,10 +22,10 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\DataTypeValidatorFactory;
-use Wikibase\Validators\SnakValidator;
+use Wikibase\Repo\Validators\SnakValidator;
 
 /**
- * @covers Wikibase\Validators\SnakValidator
+ * @covers Wikibase\Repo\Validators\SnakValidator
  *
  * @group Wikibase
  * @group WikibaseRepo

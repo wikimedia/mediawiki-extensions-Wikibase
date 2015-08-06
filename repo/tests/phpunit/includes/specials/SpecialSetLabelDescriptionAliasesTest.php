@@ -16,8 +16,8 @@ use Wikibase\EditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
-use Wikibase\Validators\TermValidatorFactory;
-use Wikibase\Validators\UniquenessViolation;
+use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases

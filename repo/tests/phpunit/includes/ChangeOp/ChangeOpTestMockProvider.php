@@ -27,14 +27,14 @@ use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\DataTypeValidatorFactory;
-use Wikibase\Validators\CompositeFingerprintValidator;
-use Wikibase\Validators\CompositeValidator;
-use Wikibase\Validators\DataValueValidator;
-use Wikibase\Validators\LabelDescriptionUniquenessValidator;
-use Wikibase\Validators\RegexValidator;
-use Wikibase\Validators\SnakValidator;
-use Wikibase\Validators\TermValidatorFactory;
-use Wikibase\Validators\TypeValidator;
+use Wikibase\Repo\Validators\CompositeFingerprintValidator;
+use Wikibase\Repo\Validators\CompositeValidator;
+use Wikibase\Repo\Validators\DataValueValidator;
+use Wikibase\Repo\Validators\LabelDescriptionUniquenessValidator;
+use Wikibase\Repo\Validators\RegexValidator;
+use Wikibase\Repo\Validators\SnakValidator;
+use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\TypeValidator;
 
 /**
  * A helper class for test cases that deal with claims.
@@ -554,7 +554,7 @@ class ChangeOpTestMockProvider {
 	 * @return TermValidatorFactory
 	 */
 	public function getMockTermValidatorFactory() {
-		$mock = $this->getMockBuilder( 'Wikibase\Validators\TermValidatorFactory' )
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Validators\TermValidatorFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 

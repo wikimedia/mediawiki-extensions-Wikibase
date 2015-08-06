@@ -19,7 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\MockSiteStore;
-use Wikibase\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @covers Wikibase\Repo\Api\MergeItems
@@ -166,7 +166,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return EntityConstraintProvider
 	 */
 	private function getConstraintProvider() {
-		$constraintProvider = $this->getMockBuilder( 'Wikibase\Validators\EntityConstraintProvider' )
+		$constraintProvider = $this->getMockBuilder( 'Wikibase\Repo\Validators\EntityConstraintProvider' )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -181,7 +181,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return SnakValidator
 	 */
 	private function getSnakValidator() {
-		$snakValidator = $this->getMockBuilder( 'Wikibase\Validators\SnakValidator' )
+		$snakValidator = $this->getMockBuilder( 'Wikibase\Repo\Validators\SnakValidator' )
 			->disableOriginalConstructor()
 			->getMock();
 

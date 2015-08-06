@@ -17,8 +17,8 @@ use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
-use Wikibase\Validators\EntityConstraintProvider;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
  * Content handler for Wikibase items.
