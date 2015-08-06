@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use JobQueueGroup;
-use JobSpecification;
 use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\DataUpdateHookHandlers;

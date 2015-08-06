@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 use DataValues\StringValue;
 use Language;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\DataAccess\SnaksFinder;

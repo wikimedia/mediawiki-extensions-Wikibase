@@ -2,14 +2,14 @@
 
 namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
-use MediaWikiTestCase;
 use Language;
+use MediaWikiTestCase;
 use Parser;
 use ParserOptions;
 use Title;
+use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Test\MockClientStore;
-use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 
 /**
  * Simple integration test for the {{#property:…}} parser function.

@@ -6,7 +6,6 @@ use DataValues\StringValue;
 use Language;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\SnaksFinder;
 use Wikibase\DataAccess\StatementTransclusionInteractor;

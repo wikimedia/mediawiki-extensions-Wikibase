@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Usage;
 
-use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\Client\Usage\HashUsageAccumulator;
+use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\TermLookup;
 

@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests;
 
 use HashBagOStuff;
-use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\CachingOtherProjectsSitesProvider;
+use Wikibase\Client\OtherProjectsSitesProvider;
 
 /**
  * @covers Wikibase\Client\CachingOtherProjectsSitesProvider
