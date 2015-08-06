@@ -4,12 +4,32 @@ namespace Wikibase;
 
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\JsonDumpGenerator;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityPrefetcher;
+use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\WikibaseRepo;
 
 require_once __DIR__ . '/dumpEntities.php';
 
 class DumpJson extends DumpScript {
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * @var EntityPrefetcher
+	 */
+	private $entityPrefetcher;
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDatatypeLookup;
 
 	public function __construct() {
 		parent::__construct();
@@ -21,6 +41,25 @@ class DumpJson extends DumpScript {
 			false,
 			false
 		);
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$this->setServices(
+			$wikibaseRepo->getStore()->newEntityPerPage(),
+			$wikibaseRepo->getStore()->getEntityPrefetcher(),
+			$wikibaseRepo->getPropertyDataTypeLookup(),
+			$wikibaseRepo->getEntityLookup( 'uncached' )
+		);
+	}
+	public function setServices(
+		EntityPerPage $entityPerPage,
+		EntityPrefetcher $entityPrefetcher,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityLookup $entityLookup
+	) {
+		parent::setServices( $entityPerPage );
+		$this->entityPrefetcher = $entityPrefetcher;
+		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
+		$this->entityLookup = $entityLookup;
 	}
 
 	/**
