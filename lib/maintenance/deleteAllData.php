@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Hooks;
+
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
@@ -42,7 +44,7 @@ class DeleteAllData extends \Maintenance {
 			echo $message;
 		};
 
-		wfRunHooks( 'WikibaseDeleteData', array( $report ) );
+		Hooks::run( 'WikibaseDeleteData', array( $report ) );
 
 		$report( <<<EOT
 Some tasty bits there... omnomnom...

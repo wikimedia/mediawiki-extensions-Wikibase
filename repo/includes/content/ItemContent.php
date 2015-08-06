@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Hooks;
 use InvalidArgumentException;
 use LogicException;
 use MWException;
@@ -200,7 +201,7 @@ class ItemContent extends EntityContent {
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getItem() );
 
-		if ( !wfRunHooks( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
+		if ( !Hooks::run( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
 			return '';
 		}
 

@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use ContentHandler;
+use Hooks;
 use LogEventsList;
 use OutputPage;
 use SpecialPage;
@@ -136,7 +137,7 @@ abstract class ViewEntityAction extends ViewAction {
 		// TODO: Factor the "show stuff for missing page" code out from Article::showMissingArticle,
 		//       so it can be re-used here. The below code is copied & modified from there...
 
-		wfRunHooks( 'ShowMissingArticle', array( $this->page ) );
+		Hooks::run( 'ShowMissingArticle', array( $this->page ) );
 
 		# Show delete and move logs
 		LogEventsList::showLogExtract( $out, array( 'delete', 'move' ), $title, '',
@@ -150,7 +151,7 @@ abstract class ViewEntityAction extends ViewAction {
 
 		$this->send404Code();
 
-		$hookResult = wfRunHooks( 'BeforeDisplayNoArticleText', array( $this ) );
+		$hookResult = Hooks::run( 'BeforeDisplayNoArticleText', array( $this ) );
 
 		// XXX: ...end of stuff stolen from Article::showMissingArticle
 

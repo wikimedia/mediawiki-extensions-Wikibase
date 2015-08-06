@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Changes;
 
 use Exception;
+use Hooks;
 use InvalidArgumentException;
 use IORMRow;
 use MWException;
@@ -126,12 +127,12 @@ class ChangeHandler {
 	public function handleChanges( array $changes ) {
 		$changes = $this->changeListTransformer->transformChangeList( $changes );
 
-		if ( !wfRunHooks( 'WikibaseHandleChanges', array( $changes ) ) ) {
+		if ( !Hooks::run( 'WikibaseHandleChanges', array( $changes ) ) ) {
 			return;
 		}
 
 		foreach ( $changes as $change ) {
-			if ( !wfRunHooks( 'WikibaseHandleChange', array( $change ) ) ) {
+			if ( !Hooks::run( 'WikibaseHandleChange', array( $change ) ) ) {
 				continue;
 			}
 

@@ -7,6 +7,7 @@ use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
+use Hooks;
 use IContextSource;
 use RuntimeException;
 use Serializers\Serializer;
@@ -898,7 +899,7 @@ class WikibaseRepo {
 			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
 		);
 
-		wfRunHooks( 'WikibaseContentModelMapping', array( &$map ) );
+		Hooks::run( 'WikibaseContentModelMapping', array( &$map ) );
 
 		return $map;
 	}
