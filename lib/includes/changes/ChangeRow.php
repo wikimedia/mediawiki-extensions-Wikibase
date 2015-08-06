@@ -258,6 +258,10 @@ class ChangeRow extends ORMRow implements Change {
 			$info = unserialize( $str );
 		}
 
+		if ( !is_array( $info ) ) {
+			wfLogWarning( "Failed to unserializeInfo of id: " . $this->getObjectId() );
+		}
+
 		return $info;
 	}
 
