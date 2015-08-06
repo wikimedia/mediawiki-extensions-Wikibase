@@ -63,8 +63,8 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param DataValue $value
 	 */
-	protected function addValueForDataType( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value ) {
-		parent::addValueForDataType( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+	public function addValue( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value ) {
+		parent::addValue( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
 
 		switch ( $value->getType() ) {
 			case 'time':
