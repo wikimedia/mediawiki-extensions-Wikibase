@@ -79,6 +79,7 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 				continue;
 			}
 
+			// FIXME: we should check the site exists using hasGlobalId here before asuming it does
 			$site = $this->siteLookup->getSite( $siteLink->getSiteId() );
 
 			// XXX: ideally, we'd use https if the target site supports it.
