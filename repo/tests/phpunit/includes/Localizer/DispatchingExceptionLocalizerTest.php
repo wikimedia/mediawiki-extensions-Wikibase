@@ -5,13 +5,13 @@ namespace Wikibase\Test;
 use Exception;
 use RuntimeException;
 use ValueParsers\ParseException;
-use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
-use Wikibase\Lib\Localizer\GenericExceptionLocalizer;
-use Wikibase\Lib\Localizer\MessageExceptionLocalizer;
-use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
+use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
+use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
+use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
+use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 
 /**
- * @covers Wikibase\Lib\Localizer\DispatchingExceptionLocalizer
+ * @covers Wikibase\Repo\Localizer\DispatchingExceptionLocalizer
  *
  * @group Wikibase
  * @group WikibaseLib
