@@ -69,18 +69,7 @@ return call_user_func( function() {
 			return $GLOBALS['wgRightsText'];
 		},
 
-		// Can be used to override the serialization used for storage.
-		// Typical value: Wikibase\Repo\Serializers\LegacyInternalEntitySerializer
-		'internalEntitySerializerClass' => null,
-
-		// Can be used to override the serialization used for storage.
-		// Typical value: Wikibase\Repo\Serializers\LegacyInternalClaimSerializer
-		'internalClaimSerializerClass' => null,
-
-		'transformLegacyFormatOnExport' => function( SettingsArray $settings ) {
-			// Enabled, unless internalEntitySerializerClass is set.
-			return $settings->getSetting( 'internalEntitySerializerClass' ) === null;
-		},
+		'transformLegacyFormatOnExport' => true,
 
 		'useRedirectTargetColumn' => true,
 

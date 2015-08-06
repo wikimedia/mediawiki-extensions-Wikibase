@@ -63,7 +63,6 @@ class RdfBuilderTestData {
 	private function getCodec() {
 		if ( $this->codec === null ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$wikibaseRepo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
 			$wikibaseRepo->getSettings()->setSetting( 'useRedirectTargetColumn', true );
 			$this->codec = $wikibaseRepo->getEntityContentDataCodec();
 		}

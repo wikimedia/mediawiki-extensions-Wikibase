@@ -939,26 +939,14 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getInternalEntitySerializer() {
-		$entitySerializerClass = $this->settings->getSetting( 'internalEntitySerializerClass' );
-
-		if ( $entitySerializerClass === null ) {
-			return $this->getInternalSerializerFactory()->newEntitySerializer();
-		}
-
-		return new $entitySerializerClass();
+		return $this->getInternalSerializerFactory()->newEntitySerializer();
 	}
 
 	/**
 	 * @return Serializer
 	 */
 	public function getInternalStatementSerializer() {
-		$claimSerializerClass = $this->settings->getSetting( 'internalClaimSerializerClass' );
-
-		if ( $claimSerializerClass === null ) {
-			return $this->getInternalSerializerFactory()->newStatementSerializer();
-		}
-
-		return new $claimSerializerClass();
+		return $this->getInternalSerializerFactory()->newStatementSerializer();
 	}
 
 	/**
@@ -1086,18 +1074,29 @@ class WikibaseRepo {
 			return null;
 		}
 
-		$entitySerializerClass = $this->settings->getSetting( 'internalEntitySerializerClass' );
-
-		if ( $entitySerializerClass !== null ) {
-			throw new RuntimeException( 'Inconsistent configuration: transformLegacyFormatOnExport ' .
-				'is enabled, but internalEntitySerializerClass is set to legacy serializer ' .
-				$entitySerializerClass );
-		}
-
-		return array(
-			'Wikibase\Repo\Serializers\LegacyInternalEntitySerializer',
-			'isBlobUsingLegacyFormat'
-		);
+		/**
+		 * Detects blobs that may be using a legacy serialization format.
+		 * WikibaseRepo uses this for the $legacyExportFormatDetector parameter
+		 * when constructing EntityHandlers.
+		 *
+		 * @see WikibaseRepo::newItemHandler
+		 * @see WikibaseRepo::newPropertyHandler
+		 * @see EntityHandler::__construct
+		 *
+		 * @note: False positives (detecting a legacy format when really no legacy format was used)
+		 * are acceptable, false negatives (failing to detect a legacy format when one was used)
+		 * are not acceptable.
+		 *
+		 * @param string $blob
+		 * @param string $format
+		 *
+		 * @return bool True if $blob seems to be using a legacy serialization format.
+		 */
+		return function( $blob, $format ) {
+			// The legacy serialization uses something like "entity":["item",21] or
+			// even "entity":"p21" for the entity ID.
+			return preg_match( '/"entity"\s*:/', $blob ) > 0;
+		};
 	}
 
 	/**
