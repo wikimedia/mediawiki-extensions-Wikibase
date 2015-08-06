@@ -1,12 +1,14 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Rdf\Values;
 
 use DataValues\DataValue;
+use DataValues\MonolingualTextValue;
+use Wikibase\Rdf\DataValueRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * Interface for RDF mapping for wikibase data values.
+ * RDF mapping for MonolingualTextValues.
  *
  * @since 0.5
  *
@@ -14,7 +16,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-interface DataValueRdfBuilder {
+class MonolingualTextRdfBuilder implements DataValueRdfBuilder {
 
 	/**
 	 * Adds specific value
@@ -23,7 +25,7 @@ interface DataValueRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
-	 * @param DataValue $value
+	 * @param MonolingualTextValue $value
 	 */
 	public function addValue(
 		RdfWriter $writer,
@@ -31,6 +33,10 @@ interface DataValueRdfBuilder {
 		$propertyValueLName,
 		$dataType,
 		DataValue $value
-	);
+	) {
+		/** @var MonolingualTextValue $value */
+		$writer->say( $propertyValueNamespace, $propertyValueLName )
+			->text( $value->getText(), $value->getLanguageCode() );
+	}
 
 }
