@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_2e6e952a",
+        "filename": "client/extension.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2015-08-06T08:49:34Z",
+      "side": 1,
+      "message": "Yes we can use a callback as we are doing already . But this way should work.",
+      "parentUuid": "8ec42329_4b5c3382",
+      "revId": "474bd5b11fd775a01894332760e5feed01b2cc7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_a18dc12f",
         "filename": "lib/WikibaseLib.hooks.php",
         "patchSetId": 4
