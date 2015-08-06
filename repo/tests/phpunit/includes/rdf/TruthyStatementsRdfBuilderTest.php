@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\Rdf\SimpleValueRdfBuilder;
+use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\TruthyStatementRdfBuilder;
 
 /**
@@ -47,11 +48,12 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$writer = $this->getTestData()->getNTriplesWriter();
 
 		$valueBuilder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
+		$snakBuilder = new SnakRdfBuilder( $vocabulary, $valueBuilder, $this->getTestData()->getMockRepository() );
 
 		$builder = new TruthyStatementRdfBuilder(
 			$vocabulary,
 			$writer,
-			$valueBuilder
+			$snakBuilder
 		);
 
 		// HACK: stick the writer into a public field, for use by getDataFromBuilder()

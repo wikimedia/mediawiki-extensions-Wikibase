@@ -2,12 +2,9 @@
 
 namespace Wikibase\Rdf;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -29,11 +26,6 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Stas Malyshev
  */
 class FullStatementRdfBuilder implements EntityRdfBuilder {
-
-	/**
-	 * @var EntityMentionListener
-	 */
-	private $mentionedEntityTracker;
 
 	/**
 	 * @var DedupeBag
@@ -66,16 +58,16 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	private $referenceWriter;
 
 	/**
-	 * @var SnakValueRdfBuilder
+	 * @var SnakRdfBuilder
 	 */
-	private $valueBuilder;
+	private $snakBuilder;
 
 	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param RdfWriter $writer
-	 * @param SnakValueRdfBuilder $valueBuilder
+	 * @param SnakRdfBuilder $snakBuilder
 	 */
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, SnakValueRdfBuilder $valueBuilder ) {
+	public function __construct( RdfVocabulary $vocabulary, RdfWriter $writer, SnakRdfBuilder $snakBuilder ) {
 		$this->vocabulary = $vocabulary;
 
 		// Note: since we process references as nested structures, they need a separate
@@ -83,24 +75,9 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		$this->statementWriter = $writer;
 		$this->referenceWriter = $writer->sub();
 
-		$this->valueBuilder = $valueBuilder;
+		$this->snakBuilder = $snakBuilder;
 
-		$this->mentionedEntityTracker = new NullEntityMentionListener();
 		$this->dedupeBag = new NullDedupeBag();
-	}
-
-	/**
-	 * @return EntityMentionListener
-	 */
-	public function getEntityMentionListener() {
-		return $this->mentionedEntityTracker;
-	}
-
-	/**
-	 * @param EntityMentionListener $mentionedEntityTracker
-	 */
-	public function setEntityMentionListener( $mentionedEntityTracker ) {
-		$this->mentionedEntityTracker = $mentionedEntityTracker;
 	}
 
 	/**
@@ -182,7 +159,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 		if ( $this->produceQualifiers ) {
 			// this assumes statement was added by addMainSnak
 			foreach ( $statement->getQualifiers() as $q ) {
-				$this->addSnak( $this->statementWriter, $q, RdfVocabulary::NSP_QUALIFIER );
+				$this->snakBuilder->addSnak( $this->statementWriter, $q, RdfVocabulary::NSP_QUALIFIER );
 			}
 		}
 
@@ -203,7 +180,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 					->a( RdfVocabulary::NS_ONTOLOGY, 'Reference' );
 
 				foreach ( $reference->getSnaks() as $refSnak ) {
-					$this->addSnak( $this->referenceWriter, $refSnak, RdfVocabulary::NSP_REFERENCE );
+					$this->snakBuilder->addSnak( $this->referenceWriter, $refSnak, RdfVocabulary::NSP_REFERENCE );
 				}
 			}
 		}
@@ -240,42 +217,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 			wfLogWarning( "Unknown rank $rank encountered for $entityId:{$statement->getGuid()}" );
 		}
 
-		$this->addSnak( $this->statementWriter, $snak, RdfVocabulary::NSP_CLAIM_STATEMENT );
-		$this->mentionedEntityTracker->propertyMentioned( $snak->getPropertyId() );
-
-	}
-
-	/**
-	 * Adds the given Statement's main Snak to the RDF graph.
-	 *
-	 * @todo share more of this code with TruthyStatementRdfBuilder
-	 *
-	 * @param RdfWriter $writer
-	 * @param Snak $snak
-	 * @param string $propertyNamespace
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function addSnak( RdfWriter $writer, Snak $snak, $propertyNamespace ) {
-		$propertyId = $snak->getPropertyId();
-		switch ( $snak->getType() ) {
-			case 'value':
-				/** @var PropertyValueSnak $snak */
-				$this->valueBuilder->addSnakValue( $writer, $propertyId, $snak->getDataValue(), $propertyNamespace );
-				break;
-			case 'somevalue':
-				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
-
-				$writer->say( $propertyNamespace, $propertyValueLName )->is( '_', $writer->blank() );
-				break;
-			case 'novalue':
-				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
-
-				$writer->say( 'a' )->is( RdfVocabulary::NSP_NOVALUE, $propertyValueLName );
-				break;
-			default:
-				throw new InvalidArgumentException( 'Unknown snak type: ' . $snak->getType() );
-		}
+		$this->snakBuilder->addSnak( $this->statementWriter, $snak, RdfVocabulary::NSP_CLAIM_STATEMENT );
 	}
 
 	/**
