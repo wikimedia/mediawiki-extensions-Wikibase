@@ -16,6 +16,24 @@
       "revId": "c525abbe1aff2b8c5c1f9708b91167cd74218980",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d1e8d40d",
+        "filename": "repo/maintenance/dumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-06T10:20:41Z",
+      "side": 1,
+      "message": "does it need to though?\nDoes the current solution of calling parent::setServics work?",
+      "parentUuid": "8ec42329_91efac1a",
+      "revId": "c525abbe1aff2b8c5c1f9708b91167cd74218980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
