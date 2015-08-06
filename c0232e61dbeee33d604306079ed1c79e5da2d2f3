@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_11389cce",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T09:54:31Z",
+      "side": 1,
+      "message": "string|null",
+      "revId": "c0232e61dbeee33d604306079ed1c79e5da2d2f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_313358f4",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T09:54:31Z",
+      "side": 1,
+      "message": "no space after !",
+      "revId": "c0232e61dbeee33d604306079ed1c79e5da2d2f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d12d348d",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T09:54:31Z",
+      "side": 1,
+      "message": "no space after !",
+      "revId": "c0232e61dbeee33d604306079ed1c79e5da2d2f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_914b2c62",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T09:54:31Z",
+      "side": 1,
+      "message": "should be private",
+      "revId": "c0232e61dbeee33d604306079ed1c79e5da2d2f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
