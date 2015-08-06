@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Usage;
 
 use DataValues\StringValue;
-use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\Usage\HashUsageAccumulator;
+use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;

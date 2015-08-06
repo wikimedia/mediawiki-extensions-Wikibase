@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use Title;
-use SiteStore;
 use MediaWikiSite;
+use SiteStore;
+use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;

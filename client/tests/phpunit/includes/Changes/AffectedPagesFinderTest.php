@@ -11,7 +11,6 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\SiteLinkUsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Test\TestChanges;

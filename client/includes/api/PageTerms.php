@@ -9,8 +9,8 @@ use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndexEntry;
 use Wikibase\TermIndex;
+use Wikibase\TermIndexEntry;
 
 /**
  * Provides wikibase terms (labels, descriptions, aliases, etc.) for local pages.

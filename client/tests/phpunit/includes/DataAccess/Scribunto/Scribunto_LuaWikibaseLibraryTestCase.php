@@ -16,8 +16,8 @@ if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 
 use Language;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Test\MockClientStore;
 
 /**

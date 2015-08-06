@@ -8,13 +8,13 @@ use ScribuntoException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
-use Wikibase\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\SnaksFinder;
-use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\StatementTransclusionInteractor;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension

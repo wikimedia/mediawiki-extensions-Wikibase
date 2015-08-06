@@ -4,8 +4,8 @@ namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
  * Find Snaks for claims in a given Entity, based on PropertyId.

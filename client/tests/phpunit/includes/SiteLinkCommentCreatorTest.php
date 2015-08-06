@@ -6,7 +6,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
 use Wikibase\Test\TestChanges;
