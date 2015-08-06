@@ -29,7 +29,6 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DumpJson;
 use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Repo\Test\MockEntityPerPage;
-use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\DumpJson
@@ -117,13 +116,10 @@ class DumpJsonTest extends MediaWikiTestCase {
 		}
 
 		$dumpScript->setServices(
-			new NullEntityPrefetcher(),
-			new MockSiteStore(),
-			$this->getMockPropertyDataTypeLookup(),
-			$mockRepo,
 			$mockEntityPerPage,
-			$mockRepo,
-			new SettingsArray()
+			new NullEntityPrefetcher(),
+			$this->getMockPropertyDataTypeLookup(),
+			$mockRepo
 		);
 
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpJsonTest" );

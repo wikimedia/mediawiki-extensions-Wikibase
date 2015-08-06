@@ -4,25 +4,17 @@ namespace Wikibase;
 
 use Maintenance;
 use MWException;
-use SiteStore;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
-use Wikibase\Lib\Store\EntityPrefetcher;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Disposable;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
-use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -37,36 +29,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @author Daniel Kinzler
  */
 abstract class DumpScript extends Maintenance {
-
-	/**
-	 * @var EntityLookup
-	 */
-	protected $entityLookup;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	protected $revisionLookup;
-
-	/**
-	 * @var EntityPrefetcher
-	 */
-	protected $entityPrefetcher;
-
-	/**
-	 * @var SiteStore
-	 */
-	protected $siteStore;
-
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	protected $propertyDatatypeLookup;
-
-	/**
-	 * @var Settings
-	 */
-	protected $settings;
 
 	/**
 	 * @var EntityPerPage
@@ -92,36 +54,10 @@ abstract class DumpScript extends Maintenance {
 		$this->addOption( 'log', "Log file (default is stderr). Will be appended.", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 		$this->addOption( 'limit', "Limit how many entities are dumped.", false, true );
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
-		$this->setServices(
-			$wikibaseRepo->getStore()->getEntityPrefetcher(),
-			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getPropertyDataTypeLookup(),
-			$revisionLookup,
-			$wikibaseRepo->getStore()->newEntityPerPage(),
-			new RevisionBasedEntityLookup( $revisionLookup ),
-			$wikibaseRepo->getSettings()
-		);
 	}
 
-	public function setServices(
-		EntityPrefetcher $entityPrefetcher,
-		SiteStore $siteStore,
-		PropertyDataTypeLookup $propertyDataTypeLookup,
-		EntityRevisionLookup $entityRevisionLookup,
-		EntityPerPage $entityPerPage,
-		EntityLookup $entityLookup,
-		SettingsArray $settings
-	) {
-		$this->entityPrefetcher = $entityPrefetcher;
-		$this->siteStore = $siteStore;
-		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
-		$this->revisionLookup = $entityRevisionLookup;
+	public function setDumpEntitiesServices( EntityPerPage $entityPerPage ) {
 		$this->entityPerPage = $entityPerPage;
-		$this->entityLookup = $entityLookup;
-		$this->settings = $settings;
 	}
 
 	/**
