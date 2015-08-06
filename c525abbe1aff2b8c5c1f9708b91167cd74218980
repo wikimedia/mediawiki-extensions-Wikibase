@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_91efac1a",
+        "filename": "repo/maintenance/dumpEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T10:19:10Z",
+      "side": 1,
+      "message": "this function needs to have a different name... I\u0027d recommend setDumpEntitiesServices. You can call it in the child setService functions.",
+      "revId": "c525abbe1aff2b8c5c1f9708b91167cd74218980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
