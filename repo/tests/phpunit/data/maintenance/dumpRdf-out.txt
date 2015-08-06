@@ -1,0 +1,174 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix wikibase: <http://wikiba.se/ontology-beta#> .
+@prefix wdata: <http://localhost/w/index.php/Special:EntityData/> .
+@prefix wd: <fooUri> .
+@prefix wds: <fooUristatement/> .
+@prefix wdref: <fooUrireference/> .
+@prefix wdv: <fooUrivalue/> .
+@prefix wdt: <fooUriprop/direct/> .
+@prefix p: <fooUriprop/> .
+@prefix ps: <fooUriprop/statement/> .
+@prefix psv: <fooUriprop/statement/value/> .
+@prefix pq: <fooUriprop/qualifier/> .
+@prefix pqv: <fooUriprop/qualifier/value/> .
+@prefix pr: <fooUriprop/reference/> .
+@prefix prv: <fooUriprop/reference/value/> .
+@prefix wdno: <fooUriprop/novalue/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+wikibase:Dump a schema:Dataset ;
+	cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+	schema:softwareVersion "0.0.1" ;
+	schema:dateModified "2015-01-01T00:00:00Z"^^xsd:dateTime .
+
+wdata:Q1 a schema:Dataset ;
+	schema:about wd:Q1 ;
+	schema:version "1"^^xsd:integer ;
+	schema:dateModified "2000-01-01T00:00:00Z"^^xsd:dateTime .
+
+wd:Q1 a wikibase:Item .
+
+wdata:P1 a schema:Dataset ;
+	schema:about wd:P1 ;
+	schema:version "1"^^xsd:integer ;
+	schema:dateModified "2000-01-01T00:00:00Z"^^xsd:dateTime .
+
+wd:P1 a wikibase:Property ;
+	wikibase:propertyType wikibase:String ;
+	wikibase:directClaim wdt:P1 ;
+	wikibase:claim p:P1 ;
+	wikibase:statementProperty ps:P1 ;
+	wikibase:statementValue psv:P1 ;
+	wikibase:qualifier pq:P1 ;
+	wikibase:qualifierValue pqv:P1 ;
+	wikibase:reference pr:P1 ;
+	wikibase:referenceValue prv:P1 ;
+	wikibase:novalue wdno:P1 .
+
+p:P1 a owl:ObjectProperty .
+
+psv:P1 a owl:ObjectProperty .
+
+pqv:P1 a owl:ObjectProperty .
+
+prv:P1 a owl:ObjectProperty .
+
+wdt:P1 a owl:DatatypeProperty .
+
+ps:P1 a owl:DatatypeProperty .
+
+pq:P1 a owl:DatatypeProperty .
+
+pr:P1 a owl:DatatypeProperty .
+
+wdno:P1 a owl:Class ;
+	owl:complementOf _:genid1 .
+
+_:genid1 a owl:Restriction ;
+	owl:onProperty wdt:P1 ;
+	owl:someValuesFrom owl:Thing .
+
+wdata:P12 a schema:Dataset ;
+	schema:about wd:P12 ;
+	schema:version "2"^^xsd:integer ;
+	schema:dateModified "2000-01-01T00:00:00Z"^^xsd:dateTime .
+
+wd:P12 a wikibase:Property ;
+	wikibase:propertyType wikibase:String ;
+	wikibase:directClaim wdt:P12 ;
+	wikibase:claim p:P12 ;
+	wikibase:statementProperty ps:P12 ;
+	wikibase:statementValue psv:P12 ;
+	wikibase:qualifier pq:P12 ;
+	wikibase:qualifierValue pqv:P12 ;
+	wikibase:reference pr:P12 ;
+	wikibase:referenceValue prv:P12 ;
+	wikibase:novalue wdno:P12 .
+
+p:P12 a owl:ObjectProperty .
+
+psv:P12 a owl:ObjectProperty .
+
+pqv:P12 a owl:ObjectProperty .
+
+prv:P12 a owl:ObjectProperty .
+
+wdt:P12 a owl:DatatypeProperty .
+
+ps:P12 a owl:DatatypeProperty .
+
+pq:P12 a owl:DatatypeProperty .
+
+pr:P12 a owl:DatatypeProperty .
+
+wdno:P12 a owl:Class ;
+	owl:complementOf _:genid2 .
+
+_:genid2 a owl:Restriction ;
+	owl:onProperty wdt:P12 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P12 wdt:P999 _:genid3 ;
+	p:P999 wds:GUID1 .
+
+wds:GUID1 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P999 _:genid4 .
+
+wdata:Q2 a schema:Dataset ;
+	schema:about wd:Q2 ;
+	schema:version "3"^^xsd:integer ;
+	schema:dateModified "2000-01-01T00:00:00Z"^^xsd:dateTime .
+
+wd:Q2 a wikibase:Item ;
+	rdfs:label "en-label"@en ;
+	skos:prefLabel "en-label"@en ;
+	schema:name "en-label"@en ;
+	rdfs:label "de-label"@de ;
+	skos:prefLabel "de-label"@de ;
+	schema:name "de-label"@de ;
+	schema:description "en-desc"@fr,
+		"de-desc"@de ;
+	skos:altLabel "ali1"@en,
+		"ali2"@en,
+		"ali11"@dv,
+		"ali22"@dv ;
+	wdt:P12 _:genid5,
+		_:genid6 ;
+	p:P12 wds:GUID1 .
+
+wds:GUID1 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P12 _:genid7 .
+
+wd:Q2 p:P12 wds:GUID2 .
+
+wds:GUID2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P12 _:genid8 ;
+	pq:P12 _:genid9,
+		"stringVal" ;
+	prov:wasDerivedFrom wdref:2d8eac3c95db6407b057e9883971cbdb562d6473 .
+
+<https://en.wikipedia.org/wiki/Berlin> a schema:Article ;
+	schema:about wd:Q2 ;
+	schema:inLanguage "en" .
+
+<https://de.wikipedia.org/wiki/England> a schema:Article ;
+	schema:about wd:Q2 ;
+	schema:inLanguage "de" ;
+	wikibase:badge wd:Q1 .
+
+wdref:2d8eac3c95db6407b057e9883971cbdb562d6473 a wikibase:Reference ;
+	pr:P12 "refSnakVal" ;
+	a wdno:P12 .
