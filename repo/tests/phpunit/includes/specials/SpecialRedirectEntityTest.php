@@ -87,7 +87,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 
-		$exceptionLocalizer = $this->getMock( 'Wikibase\Lib\Localizer\ExceptionLocalizer' );
+		$exceptionLocalizer = $this->getMock( 'Wikibase\Repo\Localizer\ExceptionLocalizer' );
 		$exceptionLocalizer->expects( $this->any() )
 			->method( 'getExceptionMessage' )
 			->will( $this->returnCallback( function( Exception $ex ) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Localizer;
+namespace Wikibase\Repo\Localizer;
 
 use Exception;
 use InvalidArgumentException;

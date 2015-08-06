@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use Exception;
-use Wikibase\Lib\Localizer\MessageExceptionLocalizer;
-use Wikibase\Lib\MessageException;
+use ValueParsers\ParseException;
+use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 
 /**
- * @covers Wikibase\Lib\Localizer\MessageExceptionLocalizer
+ * @covers Wikibase\Repo\Localizer\ParseExceptionLocalizer
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -16,21 +16,11 @@ use Wikibase\Lib\MessageException;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class MessageExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class ParseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetExceptionMessage() {
-		$exception = new MessageException(
-			'wikibase-error-autocomplete-response',
-			array( 'cannot autocomplete' ),
-			'autocomplete error'
-		);
-
 		return array(
-			'MessageException' => array(
-				$exception,
-				'wikibase-error-autocomplete-response',
-				array( 'cannot autocomplete' )
-			)
+			'ParseException' => array( new ParseException( 'Blarg!' ), 'wikibase-parse-error', array() ),
 		);
 	}
 
@@ -38,7 +28,7 @@ class MessageExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideGetExceptionMessage
 	 */
 	public function testGetExceptionMessage( Exception $ex, $expectedKey, $expectedParams ) {
-		$localizer = new MessageExceptionLocalizer();
+		$localizer = new ParseExceptionLocalizer();
 
 		$this->assertTrue( $localizer->hasExceptionMessage( $ex ) );
 
