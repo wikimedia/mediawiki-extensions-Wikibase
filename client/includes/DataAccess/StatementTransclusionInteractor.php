@@ -80,7 +80,16 @@ class StatementTransclusionInteractor {
 		$propertyLabelOrId,
 		$acceptableRanks = null
 	) {
-		$entity = $this->entityLookup->getEntity( $entityId );
+		try {
+			$entity = $this->entityLookup->getEntity( $entityId );
+		} catch( UnresolvedRedirectException $e ) {
+			// We probably hit a double redirect
+			wfLogWarning(
+				'Encountered a UnresolvedRedirectException when trying to load ' . $entityId->getSerialization()
+			);
+
+			return null;
+		}
 
 		if ( !$entity instanceof StatementListProvider ) {
 			return '';
