@@ -10,7 +10,7 @@ use Language;
 use LogicException;
 use Message;
 use Status;
-use Wikibase\Lib\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\Localizer\ExceptionLocalizer;
 
 /**
  * ApiErrorReporter is a component for API modules that handles
