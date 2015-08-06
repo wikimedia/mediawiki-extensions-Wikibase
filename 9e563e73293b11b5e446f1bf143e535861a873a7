@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_11873cbb",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T11:38:53Z",
+      "side": 1,
+      "message": "superfluous else",
+      "revId": "9e563e73293b11b5e446f1bf143e535861a873a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_318278a9",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T11:38:53Z",
+      "side": 1,
+      "message": "We usually use single quotes for strings",
+      "revId": "9e563e73293b11b5e446f1bf143e535861a873a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
