@@ -386,6 +386,15 @@
 		);
 	}
 
+	// spinner
+	$( '.wikibase-entityview' ).addClass( 'loading' ).append(
+		$( '<div/>' ).addClass( 'mw-small-spinner wb-entity-spinner' )
+	);
+	window.setTimeout( function() {
+		$( '.wikibase-entityview' ).removeClass( 'loading' );
+		$( '.wb-entity-spinner' ).remove();
+	}, 7000 );
+
 } )(
 	jQuery,
 	mediaWiki,
