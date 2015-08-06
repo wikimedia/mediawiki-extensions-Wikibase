@@ -314,7 +314,7 @@ SELF.getCalendarModelKeyByUri = function( uri ) {
  * Precision configuration.
  * @property {Object}
  * @static
- * @since 0.7
+ * @since 0.8
  */
 SELF.PRECISIONS = [
 	{ id: 'YEAR1G', text: 'billion years' },
