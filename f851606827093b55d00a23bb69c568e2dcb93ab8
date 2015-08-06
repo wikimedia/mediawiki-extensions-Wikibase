@@ -16,6 +16,24 @@
       "revId": "f851606827093b55d00a23bb69c568e2dcb93ab8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_9e3010fe",
+        "filename": "repo/tests/phpunit/maintenance/dumpRdfTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-06T23:18:07Z",
+      "side": 1,
+      "message": "If possible, yes",
+      "parentUuid": "8ec42329_f2114b5f",
+      "revId": "f851606827093b55d00a23bb69c568e2dcb93ab8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
