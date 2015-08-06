@@ -12,10 +12,22 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Rdf\CommonsMediaRdfBuilder;
+use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\EntityIdRdfBuilder;
+use Wikibase\Rdf\EntityMentionListener;
+use Wikibase\Rdf\GlobeCoordinateRdfBuilder;
+use Wikibase\Rdf\JulianDateTimeValueCleaner;
+use Wikibase\Rdf\LiteralValueRdfBuilder;
+use Wikibase\Rdf\ObjectValueRdfBuilder;
+use Wikibase\Rdf\QuantityRdfBuilder;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\MonolingualTextRdfBuilder;
+use Wikibase\Rdf\TimeRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\MockRepository;
 use Wikimedia\Purtle\NTriplesRdfWriter;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * Helper class for accessing data files for RdfBuilder related tests.
@@ -231,4 +243,34 @@ class RdfBuilderTestData {
 		return $repo;
 	}
 
+	public function getDataValueRdfBuilderFactoryCallbacks() {
+		return array(
+			'VT:wikibase-entityid' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new EntityIdRdfBuilder( $vocab, $tracker );
+			},
+			'VT:globecoordinate' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new GlobeCoordinateRdfBuilder();
+			},
+			'VT:monolingualtext' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new MonolingualTextRdfBuilder();
+			},
+			'VT:quantity' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new QuantityRdfBuilder();
+			},
+			'VT:time' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				// TODO: if data is fixed to be always Gregorian, replace with DateTimeValueCleaner
+				$dateCleaner = new JulianDateTimeValueCleaner();
+				return new TimeRdfBuilder( $dateCleaner );
+			},
+			'PT:url' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new ObjectValueRdfBuilder();
+			},
+			'PT:string' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new LiteralValueRdfBuilder( null, null );
+			},
+			'PT:commonsMedia' => function ( $mode, RdfVocabulary $vocab, RdfWriter $writer, EntityMentionListener $tracker, DedupeBag $dedupe ) {
+				return new CommonsMediaRdfBuilder( $vocab );
+			},
+		);
+	}
 }

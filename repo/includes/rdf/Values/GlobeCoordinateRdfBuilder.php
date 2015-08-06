@@ -1,12 +1,15 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Rdf\Values;
 
 use DataValues\DataValue;
+use DataValues\Geo\Values\GlobeCoordinateValue;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * Interface for RDF mapping for wikibase data values.
+ * RDF mapping for GlobeCoordinateValue.
+ *
+ * @todo: FIXME: test me!
  *
  * @since 0.5
  *
@@ -14,7 +17,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-interface DataValueRdfBuilder {
+class GlobeCoordinateRdfBuilder implements DataValueRdfBuilder {
 
 	/**
 	 * Adds specific value
@@ -23,7 +26,7 @@ interface DataValueRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
-	 * @param DataValue $value
+	 * @param GlobeCoordinateValue $value
 	 */
 	public function addValue(
 		RdfWriter $writer,
@@ -31,6 +34,11 @@ interface DataValueRdfBuilder {
 		$propertyValueLName,
 		$dataType,
 		DataValue $value
-	);
+	) {
+		/** @var GlobeCoordinateValue $value */
+		$point = "Point({$value->getLatitude()} {$value->getLongitude()})";
+		$writer->say( $propertyValueNamespace, $propertyValueLName )
+			->value( $point, RdfVocabulary::NS_GEO, "wktLiteral" );
+	}
 
 }

@@ -1,12 +1,16 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Rdf\Values;
 
 use DataValues\DataValue;
+use DataValues\QuantityValue;
+use Wikibase\Rdf\DataValueRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * Interface for RDF mapping for wikibase data values.
+ * RDF mapping for QuantityValue.
+ *
+ * @todo: FIXME: test me!
  *
  * @since 0.5
  *
@@ -14,7 +18,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-interface DataValueRdfBuilder {
+class QuantityRdfBuilder implements DataValueRdfBuilder {
 
 	/**
 	 * Adds specific value
@@ -23,7 +27,7 @@ interface DataValueRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
-	 * @param DataValue $value
+	 * @param QuantityValue $value
 	 */
 	public function addValue(
 		RdfWriter $writer,
@@ -31,6 +35,10 @@ interface DataValueRdfBuilder {
 		$propertyValueLName,
 		$dataType,
 		DataValue $value
-	);
+	) {
+		/** @var QuantityValue $value */
+		$writer->say( $propertyValueNamespace, $propertyValueLName )
+			->value( $value->getAmount(), 'xsd', 'decimal' );
+	}
 
 }

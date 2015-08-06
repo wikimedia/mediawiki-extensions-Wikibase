@@ -10,12 +10,12 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
  * RDF mapping for wikibase data values, using a simplified projection.
  *
+ * @todo: KILL ME! DO NOT MERGE until this is gone!
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -36,11 +36,9 @@ class SimpleValueRdfBuilder implements DataValueRdfBuilder {
 
 	/**
 	 * @param RdfVocabulary $vocabulary
-	 * @param PropertyDataTypeLookup $propertyLookup
 	 */
-	public function __construct( RdfVocabulary $vocabulary, PropertyDataTypeLookup $propertyLookup ) {
+	public function __construct( RdfVocabulary $vocabulary ) {
 		$this->vocabulary = $vocabulary;
-		$this->propertyLookup = $propertyLookup;
 
 		// TODO: if data is fixed to be always Gregorian, replace with DateTimeValueCleaner
 		$this->dateCleaner = new JulianDateTimeValueCleaner();
@@ -75,7 +73,7 @@ class SimpleValueRdfBuilder implements DataValueRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
-		$value
+		DataValue $value
 	) {
 		//FIXME: use a proper registry / dispatching builder
 		switch ( $value->getType() ) {

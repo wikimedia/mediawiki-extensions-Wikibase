@@ -109,7 +109,7 @@ class DataTypeDefinitions {
 	/**
 	 * @see ValueParserFactory
 	 *
-	 * @return callable[]|string[]
+	 * @return callable[]
 	 */
 	public function getParserFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'parser-factory-callback' );
@@ -118,12 +118,19 @@ class DataTypeDefinitions {
 	/**
 	 * @see OutputFormattValueFormatterFactory
 	 *
-	 * @return callable[]|string[]
+	 * @return callable[]
 	 */
 	public function getFormatterFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'formatter-factory-callback' );
 	}
 
-	//TODO: getRdfBuilderFactoryCallbacks()
+	/**
+	 * @see DataValueRdfBuilderFactory
+	 *
+	 * @return callable[]
+	 */
+	public function getRdfBuilderFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'rdf-builder-factory-callback' );
+	}
 
 }
