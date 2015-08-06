@@ -37,9 +37,9 @@ class DumpRdf extends DumpScript {
 	private $propertyDatatypeLookup;
 
 	/**
-	 * @var Settings
+	 * @var string
 	 */
-	private $settings;
+	private $conceptBaseUri;
 
 	public function __construct() {
 		parent::__construct();
@@ -52,7 +52,7 @@ class DumpRdf extends DumpScript {
 			$wikibaseRepo->getSiteStore(),
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-			$wikibaseRepo->getSettings()
+			$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' )
 		);
 	}
 
@@ -62,14 +62,14 @@ class DumpRdf extends DumpScript {
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityRevisionLookup $entityRevisionLookup,
-		SettingsArray $settings
+		$conceptBaseUri
 	) {
 		parent::setServices( $entityPerPage );
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->siteStore = $siteStore;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->revisionLookup = $entityRevisionLookup;
-		$this->settings = $settings;
+		$this->conceptBaseUri = $conceptBaseUri;
 	}
 
 	/**
@@ -94,7 +94,7 @@ class DumpRdf extends DumpScript {
 		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
-			$this->settings->getSetting( 'conceptBaseUri' ),
+			$this->conceptBaseUri,
 			$entityDataTitle->getCanonicalURL() . '/',
 			$this->siteStore->getSites(),
 			$this->revisionLookup,
