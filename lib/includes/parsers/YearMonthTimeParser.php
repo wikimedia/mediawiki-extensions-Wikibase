@@ -27,7 +27,7 @@ class YearMonthTimeParser extends StringValueParser {
 	/**
 	 * @var Language
 	 */
-	protected $lang;
+	private $lang;
 
 	/**
 	 * @var ValueParser
