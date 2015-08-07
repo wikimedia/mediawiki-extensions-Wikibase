@@ -551,9 +551,23 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	private function assertEntityPerPage( $expected, EntityId $entityId ) {
-		$epp = $this->newEntityPerPageTable();
+		$dbr = wfGetDB( DB_SLAVE );
 
-		$pageId = $epp->getPageIdForEntityId( $entityId );
+		$row = $dbr->selectRow(
+			'wb_entity_per_page',
+			array( 'epp_page_id' ),
+			array(
+				'epp_entity_type' => $entityId->getEntityType(),
+				'epp_entity_id' => $entityId->getNumericId()
+			),
+			__METHOD__
+		);
+
+		if ( !$row ) {
+			$pageId = false;
+		} else {
+			$pageId = (int)$row->epp_page_id;
+		}
 
 		if ( $expected === true ) {
 			$this->assertGreaterThan( 0, $pageId );
