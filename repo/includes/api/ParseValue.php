@@ -214,7 +214,7 @@ class ParseValue extends ApiBase {
 		}
 
 		if ( $validator ) {
-			$validatorResult = $validator->validate( $value );
+			$validatorResult = $validator->validate( $parseResult );
 			$validationStatus = $this->validatorErrorLocalizer->getResultStatus( $validatorResult );
 
 			$result['valid'] = $validationStatus->isOK();
