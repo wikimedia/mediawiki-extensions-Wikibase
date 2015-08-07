@@ -203,7 +203,15 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$entityIdFormatter = $this->getEntityIdFormater();
 		$labelDescriptionLookup = $this->getLabelDescriptionLookup();
 
-		$row = $entityIdFormatter->formatEntityId( $propertyId );
+		$row = '';
+		try{
+			$labelDescriptionLookup->getLabel( $propertyId );
+			// If there is a label (no exception) then add the ID to the row
+			$row .= $propertyId->getSerialization() . ' - ';
+		} catch ( OutOfBoundsException $e ) {
+			// If there is no label the ID will be in the link
+		}
+		$row .= $entityIdFormatter->formatEntityId( $propertyId );
 		try{
 			$row .= ' (' . $labelDescriptionLookup->getDescription( $propertyId )->getText() . ')';
 		} catch ( OutOfBoundsException $e ) {
