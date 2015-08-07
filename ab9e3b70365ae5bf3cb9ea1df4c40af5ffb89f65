@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_7490e345",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-07T05:48:38Z",
+      "side": 1,
+      "message": "Own method please. Code quality is arguably even more important in tests than in production code, even though many people think it does not really matter there",
+      "revId": "ab9e3b70365ae5bf3cb9ea1df4c40af5ffb89f65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
