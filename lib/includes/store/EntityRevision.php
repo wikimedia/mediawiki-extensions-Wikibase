@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityRevision implements RevisionInfo {
+class EntityRevision {
 
 	/**
 	 * @var EntityDocument
