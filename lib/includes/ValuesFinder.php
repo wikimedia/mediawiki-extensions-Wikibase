@@ -29,7 +29,7 @@ class ValuesFinder {
 	}
 
 	/**
-	 * Find all data values for the specified data type in the array of snaks.
+	 * Find all data values for the specifie	d data type in the array of snaks.
 	 *
 	 * @param Snak[] $snaks
 	 * @param string $dataType

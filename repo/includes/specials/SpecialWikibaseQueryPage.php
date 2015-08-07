@@ -109,7 +109,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @param integer $offset Start to include at number of entries from the start title
 	 * @param integer $limit Stop at number of entries after start of inclusion
 	 *
-	 * @return Array[]
+	 * @return array
 	 */
 	abstract protected function getResult( $offset = 0, $limit = 0 );
 
