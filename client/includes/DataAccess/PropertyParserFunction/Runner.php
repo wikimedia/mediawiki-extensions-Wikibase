@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use Parser;
 use PPFrame;
+use Wikibase\Client\DataAccess\RestrictedEntityLookup;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
@@ -42,6 +43,11 @@ class Runner {
 	private $entityIdParser;
 
 	/**
+	 * @var RestrictedEntityLookup
+	 */
+	private $restrictedEntityLookup;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -55,6 +61,7 @@ class Runner {
 	 * @param PropertyCLaimsRendererFactory $rendererFactory
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityIdParser $entityIdParser
+	 * @param RestrictedEntityLookup $restrictedEntityLookup
 	 * @param string $siteId
 	 * @param bool $allowArbitraryDataAccess
 	 */
@@ -62,12 +69,14 @@ class Runner {
 		PropertyClaimsRendererFactory $rendererFactory,
 		SiteLinkLookup $siteLinkLookup,
 		EntityIdParser $entityIdParser,
+		RestrictedEntityLookup $restrictedEntityLookup,
 		$siteId,
 		$allowArbitraryDataAccess
 	) {
 		$this->rendererFactory = $rendererFactory;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityIdParser = $entityIdParser;
+		$this->restrictedEntityLookup = $restrictedEntityLookup;
 		$this->siteId = $siteId;
 		$this->allowArbitraryDataAccess = $allowArbitraryDataAccess;
 	}
@@ -112,15 +121,7 @@ class Runner {
 	private function getEntityIdForStatementListProvider( Parser $parser, PPFrame $frame, array $args ) {
 		$from = $frame->getArgument( 'from' );
 		if ( $from && $this->allowArbitraryDataAccess ) {
-			try {
-				$entityId = $this->entityIdParser->parse( $from );
-				// Accessing a foreign item is expensive.
-				// XXX: Only increment once per item? How?
-				$parser->incrementExpensiveFunctionCount();
-			} catch ( EntityIdParsingException $ex ) {
-				// Just ignore this
-				return null;
-			}
+			$entityId = $this->getEntityIdFromString( $parser, $from );
 		} else {
 			$title = $parser->getTitle();
 			$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
@@ -128,6 +129,30 @@ class Runner {
 		}
 
 		return $entityId;
+	}
+
+	/**
+	 * Gets the entity and increments the expensive parser function count.
+	 *
+	 * @param Parser $parser
+	 * @param string $from
+	 *
+	 * @return EntityId|null
+	 */
+	private function getEntityIdFromString( Parser $parser, $from ) {
+		try {
+			$entityId = $this->entityIdParser->parse( $from );
+
+			// Getting a foreign item is expensive (unless we already loaded it and it's cached)
+			if ( !$this->restrictedEntityLookup->hasEntityBeenAccessed( $entityId ) ) {
+				$parser->incrementExpensiveFunctionCount();
+			}
+
+			return $entityId;
+		} catch ( EntityIdParsingException $ex ) {
+			// Just ignore this
+			return null;
+		}
 	}
 
 	/**
