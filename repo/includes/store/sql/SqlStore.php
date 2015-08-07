@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
@@ -32,8 +33,10 @@ use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
+use Wikibase\Repo\Store\SQL\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store\EntityIdLookup;
 use WikiPage;
 
 /**
@@ -107,6 +110,16 @@ class SqlStore implements Store {
 	private $entityPrefetcher = null;
 
 	/**
+	 * @var EntityIdLookup
+	 */
+	private $entityIdLookup;
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $entityTitleLookup;
+
+	/**
 	 * @var string
 	 */
 	private $cacheKeyPrefix;
@@ -134,13 +147,19 @@ class SqlStore implements Store {
 	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdLookup $entityIdLookup
+	 * @param EntityTitleLookup $entityTitleLookup
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		EntityIdLookup $entityIdLookup,
+		EntityTitleLookup $entityTitleLookup
 	) {
 		$this->contentCodec = $contentCodec;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityIdLookup = $entityIdLookup;
+		$this->entityTitleLookup = $entityTitleLookup;
 
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
@@ -510,7 +529,12 @@ class SqlStore implements Store {
 	 * @return EntityRedirectLookup
 	 */
 	public function getEntityRedirectLookup() {
-		return $this->newEntityPerPage();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		return new WikiPageEntityRedirectLookup(
+			$this->entityTitleLookup,
+			$this->entityIdLookup
+		);
 	}
 
 	/**

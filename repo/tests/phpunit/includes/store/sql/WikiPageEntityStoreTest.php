@@ -562,18 +562,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		}
 	}
 
-	private function isRedirectTargetColumnSupported() {
-		return WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
-	}
-
 	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
-		if ( !$this->isRedirectTargetColumnSupported() ) {
-			$this->markTestSkipped( 'Redirects not supported' );
-		}
+		$entityRedirectLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRedirectLookup();
 
-		$epp = $this->newEntityPerPageTable();
-
-		$targetId = $epp->getRedirectForEntityId( $entityId );
+		$targetId = $entityRedirectLookup->getRedirectForEntityId( $entityId );
 
 		$this->assertEquals( $expected, $targetId );
 	}

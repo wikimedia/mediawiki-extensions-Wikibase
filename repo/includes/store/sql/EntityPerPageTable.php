@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -23,7 +22,7 @@ use Wikibase\Repo\Store\EntityPerPage;
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
  */
-class EntityPerPageTable implements EntityPerPage, EntityRedirectLookup {
+class EntityPerPageTable implements EntityPerPage {
 
 	/**
 	 * @var EntityIdParser
@@ -410,43 +409,6 @@ class EntityPerPageTable implements EntityPerPage, EntityRedirectLookup {
 	}
 
 	/**
-	 * Returns the IDs that redirect to (are aliases of) the given target entity.
-	 *
-	 * @note If $this->useRedirectTargetColumn, this returns the empty array.
-	 *
-	 * @since 0.5
-	 *
-	 * @param EntityId $targetId
-	 *
-	 * @return EntityId[]
-	 */
-	public function getRedirectIds( EntityId $targetId ) {
-		if ( !$this->useRedirectTargetColumn ) {
-			return array();
-		}
-
-		$where = array(
-			'epp_entity_type' => $targetId->getEntityType(),
-			'epp_redirect_target' => $targetId->getSerialization(),
-		);
-
-		$dbr = wfGetDB( DB_SLAVE );
-
-		$rows = $dbr->select(
-			'wb_entity_per_page',
-			array( 'entity_type' => 'epp_entity_type', 'entity_id' => 'epp_entity_id' ),
-			$where,
-			__METHOD__,
-			array(
-				'LIMIT' => 1000 // everything should have a hard limit
-			)
-		);
-
-		$ids = $this->getEntityIdsFromRows( $rows );
-		return $ids;
-	}
-
-	/**
 	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
@@ -472,49 +434,6 @@ class EntityPerPageTable implements EntityPerPage, EntityRedirectLookup {
 		}
 
 		return (int)$row->epp_page_id;
-	}
-
-	/**
-	 * @see EntityRedirectLookup::getRedirectForEntityId
-	 *
-	 * @since 0.5
-	 *
-	 * @param EntityId $entityId
-	 * @paran string $forUpdate
-	 *
-	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
-	 *         does not refer to a redirect, or false if $entityId is not known.
-	 */
-	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
-		// Even if we don't have the redirect column, we still want to
-		// check whether the entry is there at all.
-		$redirectColumn = $this->useRedirectTargetColumn
-			? 'epp_redirect_target'
-			: 'NULL AS epp_redirect_target';
-
-		$dbr = wfGetDB(
-			$forUpdate === 'for update' ? DB_MASTER : DB_SLAVE
-		);
-
-		$row = $dbr->selectRow(
-			'wb_entity_per_page',
-			array( 'epp_page_id', $redirectColumn ),
-			array(
-				'epp_entity_type' => $entityId->getEntityType(),
-				'epp_entity_id' => $entityId->getNumericId()
-			),
-			__METHOD__
-		);
-
-		if ( !$row ) {
-			return false;
-		}
-
-		if ( !$row->epp_redirect_target ) {
-			return null;
-		}
-
-		return $this->entityIdParser->parse( $row->epp_redirect_target );
 	}
 
 }
