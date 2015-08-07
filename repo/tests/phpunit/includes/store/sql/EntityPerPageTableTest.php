@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -44,7 +45,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$entityId = new ItemId( 'Q5' );
 		$epp->addEntityPage( $entityId, 55 );
 
-		$this->assertEquals( 55, $epp->getPageIdForEntityId( $entityId ) );
+		$this->assertEquals( 55, $this->getPageIdForEntityId( $entityId ) );
 	}
 
 	public function testAddRedirectPage() {
@@ -59,7 +60,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$targetId = new ItemId( 'Q10' );
 		$epp->addRedirectPage( $redirectId, 55, $targetId );
 
-		$this->assertEquals( 55, $epp->getPageIdForEntityId( $redirectId ) );
+		$this->assertEquals( 55, $this->getPageIdForEntityId( $redirectId ) );
 
 		$ids = $epp->listEntities( Item::ENTITY_TYPE, 10 );
 		$this->assertEmpty( $ids, 'Redirects must not show up in ID listings' );
@@ -208,17 +209,24 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testGetPageIdForEntityId() {
-		$entity = new Item( new ItemId( 'Q5' ) );
+	private function getPageIdForEntityId( EntityId $entityId ) {
+		$dbr = wfGetDB( DB_SLAVE );
 
-		$epp = $this->newEntityPerPageTable( array( $entity ) );
-		$entityId = $entity->getId();
+		$row = $dbr->selectRow(
+			'wb_entity_per_page',
+			array( 'epp_page_id' ),
+			array(
+				'epp_entity_type' => $entityId->getEntityType(),
+				'epp_entity_id' => $entityId->getNumericId()
+			),
+			__METHOD__
+		);
 
-		$this->assertFalse( $epp->getPageIdForEntityId( new ItemId( 'Q7435389457' ) ) );
+		if ( !$row ) {
+			return false;
+		}
 
-		$pageId = $epp->getPageIdForEntityId( $entityId );
-		$this->assertInternalType( 'int', $pageId );
-		$this->assertGreaterThan( 0, $pageId );
+		return (int)$row->epp_page_id;
 	}
 
 }
