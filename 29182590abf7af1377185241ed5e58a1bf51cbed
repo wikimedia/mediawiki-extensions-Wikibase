@@ -16,6 +16,24 @@
       "revId": "29182590abf7af1377185241ed5e58a1bf51cbed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b441683c",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-07T14:31:08Z",
+      "side": 1,
+      "message": "Yes, but that seems a bit odd, and then the creation of the creation of the service is indeed in a very odd place...\n\nWith the way it is now done, we get the result and save information about the result to propertyIds, then when formatting rows we get a service that is required to format rows.\n\nIf we make the service here then we getResult is called and we create a service which isn\u0027t used here and has nothing to do with getting the result...",
+      "parentUuid": "8ec42329_141abc6f",
+      "revId": "29182590abf7af1377185241ed5e58a1bf51cbed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
