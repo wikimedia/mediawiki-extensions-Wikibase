@@ -4,9 +4,10 @@ namespace Wikibase\Repo\Specials;
 
 use DataTypes\DataTypeFactory;
 use Html;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataTypeSelector;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -193,17 +194,35 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	protected function formatRow( $propertyId ) {
 		$entityIdFormatter = $this->getEntityIdFormater();
-		return $entityIdFormatter->formatEntityId( $propertyId );
+		$labelDescriptionLookup = $this->getLabelDescriptionLookup();
+
+		$row = '';
+		try {
+			$labelDescriptionLookup->getLabel( $propertyId );
+			// If there is a label (no exception) then add the ID to the row
+			$row .= $propertyId->getSerialization() . ' - ';
+		} catch ( OutOfBoundsException $e ) {
+			// If there is no label the ID will be in the link
+		}
+		$row .= $entityIdFormatter->formatEntityId( $propertyId );
+
+		return $row;
+	}
+
+	private function getLabelDescriptionLookup() {
+		if ( !isset( $this->labelDescriptionLookup ) ) {
+			$this->labelDescriptionLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
+				$this->getLanguage(),
+				$this->propertyIds
+			);
+		}
+		return $this->labelDescriptionLookup;
 	}
 
 	private function getEntityIdFormater() {
 		if ( !isset( $this->entityIdFormatter ) ) {
-			$labelDescriptionLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
-				$this->getLanguage(),
-				$this->propertyIds
-			);
 			$this->entityIdFormatter = $this->entityIdFormatterFactory->getEntityIdFormater(
-				$labelDescriptionLookup
+				$this->getLabelDescriptionLookup()
 			);
 		}
 		return $this->entityIdFormatter;
