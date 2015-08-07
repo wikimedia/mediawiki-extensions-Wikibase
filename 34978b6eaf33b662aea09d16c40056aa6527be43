@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b458882a",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-07T14:37:44Z",
+      "side": 1,
+      "message": "*facepalm* blergh, why bother moving this stuff when there is basically no need to.\nThe only real outcome of this is that we use some useful gitblame....\nAlso of course conflicts with other patches\nbasically nothing has changed in this file except for the order of things and the removing of 1 duplicate line.\nThe line I am all for, the just moving things around is annoying :/",
+      "revId": "34978b6eaf33b662aea09d16c40056aa6527be43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
