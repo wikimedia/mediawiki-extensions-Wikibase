@@ -92,12 +92,12 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @since 0.4 (as abstract function with same interface in 0.3)
 	 *
-	 * @param $entry
+	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function formatRow( $entry ) {
-		$title = $this->entityTitleLookup->getTitleForId( $entry );
+	protected function formatRow( $entityId ) {
+		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 		return Linker::linkKnown( $title );
 	}
 
@@ -109,7 +109,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @param integer $offset Start to include at number of entries from the start title
 	 * @param integer $limit Stop at number of entries after start of inclusion
 	 *
-	 * @return array
+	 * @return EntityId[]
 	 */
 	abstract protected function getResult( $offset = 0, $limit = 0 );
 
@@ -128,9 +128,9 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 			list( $this->limit, $this->offset ) = $this->getRequest()->getLimitOffset();
 		}
 
-		$result = $this->getResult( $this->offset, $this->limit + 1 );
+		$entityIds = $this->getResult( $this->offset, $this->limit + 1 );
 
-		$this->numRows = count( $result );
+		$this->numRows = count( $entityIds );
 
 		$out->addHTML( Html::openElement( 'div', array( 'class' => 'mw-spcontent' ) ) );
 
@@ -155,7 +155,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 		}
 
 		$this->outputResults(
-			$result,
+			$entityIds,
 			// do not format the one extra row, if it exist
 			min( $this->numRows, $this->limit ),
 			$this->offset
@@ -173,15 +173,15 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @since 0.3
 	 *
-	 * @param EntityId[] $results
+	 * @param EntityId[] $entityIds
 	 * @param integer $num number of available result rows
 	 * @param integer $offset paging offset
 	 */
-	protected function outputResults( array $results, $num, $offset ) {
+	protected function outputResults( array $entityIds, $num, $offset ) {
 		if ( $num > 0 ) {
 			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
 			for ( $i = 0; $i < $num; $i++ ) {
-				$row = $this->formatRow( $results[$i] );
+				$row = $this->formatRow( $entityIds[$i] );
 				$html .= Html::rawElement( 'li', array(), $row );
 			}
 			$html .= Html::closeElement( 'ol' );
