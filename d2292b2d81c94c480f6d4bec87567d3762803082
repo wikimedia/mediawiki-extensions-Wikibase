@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_14687cb7",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-07T14:33:44Z",
+      "side": 1,
+      "message": "Again this is something that should probably first be changed in SpecialWikibaseQueryPage in order to set a good example to people that extend the class!",
+      "parentUuid": "8ec42329_54f92417",
+      "revId": "d2292b2d81c94c480f6d4bec87567d3762803082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_b1041a1c",
         "filename": "repo/includes/specials/SpecialListProperties.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-07T14:06:12Z",
       "side": 1,
       "message": "Oh no, you forgot a space!",
+      "revId": "d2292b2d81c94c480f6d4bec87567d3762803082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_747300b0",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-07T14:33:44Z",
+      "side": 1,
+      "message": "Indeed I did!",
+      "parentUuid": "8ec42329_b1041a1c",
       "revId": "d2292b2d81c94c480f6d4bec87567d3762803082",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
