@@ -34,6 +34,24 @@
       "revId": "34978b6eaf33b662aea09d16c40056aa6527be43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d46bd481",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-07T14:52:34Z",
+      "side": 1,
+      "message": "Well I still facepalm this sort of thing due to conflicts\nhttps://gerrit.wikimedia.org/r/#/c/227686/3/repo/includes/api/ResultBuilder.php",
+      "parentUuid": "8ec42329_f441300d",
+      "revId": "34978b6eaf33b662aea09d16c40056aa6527be43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
