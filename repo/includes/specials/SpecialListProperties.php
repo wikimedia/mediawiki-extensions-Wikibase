@@ -4,9 +4,11 @@ namespace Wikibase\Repo\Specials;
 
 use DataTypes\DataTypeFactory;
 use Html;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataTypeSelector;
 use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\Store\LabelDescriptionLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -18,6 +20,7 @@ use Wikibase\View\EntityIdFormatterFactory;
  * @since 0.5
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Adam Shorland
  */
 class SpecialListProperties extends SpecialWikibaseQueryPage {
 
@@ -62,6 +65,11 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 * @var EntityIdFormatter
 	 */
 	private $entityIdFormatter;
+
+	/**
+	 * @var LabelDescriptionLookup
+	 */
+	private $labelDescriptionLookup;
 
 	public function __construct() {
 		parent::__construct( 'ListProperties' );
@@ -193,17 +201,32 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	protected function formatRow( $propertyId ) {
 		$entityIdFormatter = $this->getEntityIdFormater();
-		return $entityIdFormatter->formatEntityId( $propertyId );
+		$labelDescriptionLookup = $this->getLabelDescriptionLookup();
+
+		$row = $entityIdFormatter->formatEntityId( $propertyId );
+		try{
+			$row .= ' (' . $labelDescriptionLookup->getDescription( $propertyId )->getText() . ')';
+		} catch ( OutOfBoundsException $e ) {
+			// Ignore non existant descriptions
+		}
+
+		return $row;
+	}
+
+	private function getLabelDescriptionLookup() {
+		if ( !isset( $this->labelDescriptionLookup ) ) {
+			$this->labelDescriptionLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
+				$this->getLanguage(),
+				$this->propertyIds
+			);
+		}
+		return $this->labelDescriptionLookup;
 	}
 
 	private function getEntityIdFormater() {
 		if ( !isset( $this->entityIdFormatter ) ) {
-			$labelDescriptionLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
-				$this->getLanguage(),
-				$this->propertyIds
-			);
 			$this->entityIdFormatter = $this->entityIdFormatterFactory->getEntityIdFormater(
-				$labelDescriptionLookup
+				$this->getLabelDescriptionLookup()
 			);
 		}
 		return $this->entityIdFormatter;

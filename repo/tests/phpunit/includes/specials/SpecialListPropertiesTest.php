@@ -25,6 +25,7 @@ use Wikibase\Repo\Specials\SpecialListProperties;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Adam Shorland
  */
 class SpecialListPropertiesTest extends SpecialPageTestBase {
 
@@ -73,6 +74,11 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {
 				return array( 'en' => 'Property with label ' . $propertyId->getSerialization() );
+			} ) );
+		$termLookup->expects( $this->any() )
+			->method( 'getDescriptions' )
+			->will( $this->returnCallback( function( PropertyId $propertyId ) {
+				return array( 'en' => 'Property with description ' . $propertyId->getSerialization() );
 			} ) );
 
 		return $termLookup;
@@ -145,7 +151,9 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( 'wikibase-item', null, 'en-gb' );
 
 		$this->assertContains( 'Property with label P123', $output );
+		$this->assertContains( 'Property with description P123', $output );
 		$this->assertContains( 'Property with label P456', $output );
+		$this->assertContains( 'Property with description P456', $output );
 		$this->assertNotContains( 'P789', $output );
 	}
 
