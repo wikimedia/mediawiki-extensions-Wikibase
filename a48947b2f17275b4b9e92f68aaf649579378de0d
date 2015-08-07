@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_f4437312",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-07T04:31:53Z",
+      "side": 1,
+      "message": "Why are you using global state here?",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_5435a7a1",
+        "filename": "repo/includes/store/sql/WikiPageEntityRedirectLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-07T04:31:53Z",
+      "side": 1,
+      "message": "Comment adds very little value",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_7438e39a",
+        "filename": "repo/includes/store/sql/WikiPageEntityRedirectLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-07T04:31:53Z",
+      "side": 1,
+      "message": "This docblock is not needed given its the same as the type hints",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_143b9f97",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityRedirectLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-07T04:31:53Z",
+      "side": 1,
+      "message": "assertFalse",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_343edb86",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityRedirectLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-07T04:31:53Z",
+      "side": 1,
+      "message": "assertNull",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d448b733",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityRedirectLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-07T04:31:53Z",
+      "side": 1,
+      "message": "assertSame",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
