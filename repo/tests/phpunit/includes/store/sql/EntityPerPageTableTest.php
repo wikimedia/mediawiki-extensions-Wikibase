@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -60,7 +59,6 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$targetId = new ItemId( 'Q10' );
 		$epp->addRedirectPage( $redirectId, 55, $targetId );
 
-		$this->assertEquals( $targetId, $epp->getRedirectForEntityId( $redirectId ) );
 		$this->assertEquals( 55, $epp->getPageIdForEntityId( $redirectId ) );
 
 		$ids = $epp->listEntities( Item::ENTITY_TYPE, 10 );
@@ -210,54 +208,6 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider getRedirectIdsProvider
-	 */
-	public function testGetRedirectIds( array $entities, array $redirects, EntityId $targetId, array $expected ) {
-		$table = $this->newEntityPerPageTable( $entities, $redirects );
-		$actual = $table->getRedirectIds( $targetId );
-
-		$this->assertEqualIds( $expected, $actual );
-	}
-
-	public function getRedirectIdsProvider() {
-		$property = new Property( new PropertyId( 'P5' ), null, 'string' );
-		$item = new Item( new ItemId( 'Q5' ) );
-		$redirect = new EntityRedirect( new ItemId( 'Q55' ), new ItemId( 'Q5' ) );
-
-		$q1 = new ItemId( 'Q1' );
-		$q5 = new ItemId( 'Q5' );
-		$p5 = new PropertyId( 'P5' );
-		$q55 = new ItemId( 'Q55' );
-
-		return array(
-			'empty' => array(
-				array(),
-				array(),
-				$q55,
-				array()
-			),
-			'none' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				$q1,
-				array(),
-			),
-			'redirects' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				$q5,
-				array( $q55 ),
-			),
-			'wrong type' => array(
-				array( $item, $property ),
-				array( $redirect ),
-				$p5,
-				array(),
-			),
-		);
-	}
-
 	public function testGetPageIdForEntityId() {
 		$entity = new Item( new ItemId( 'Q5' ) );
 
@@ -269,28 +219,6 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$pageId = $epp->getPageIdForEntityId( $entityId );
 		$this->assertInternalType( 'int', $pageId );
 		$this->assertGreaterThan( 0, $pageId );
-	}
-
-	public function testGetRedirectForEntityId() {
-		if ( !$this->isRedirectTargetColumnSupported() ) {
-			$this->markTestSkipped( 'Redirects not supported' );
-		}
-
-		$entity = new Item( new ItemId( 'Q1' ) );
-		$entity2 = new Item( new ItemId( 'Q2' ) );
-
-		$epp = $this->newEntityPerPageTable( array( $entity, $entity2 ) );
-		$redirectId = $entity->getId();
-		$targetId = $entity2->getId();
-
-		$redirectPageId = $epp->getPageIdForEntityId( $redirectId );
-		$epp->addRedirectPage( $redirectId, $redirectPageId, $targetId );
-
-		$this->assertFalse( $epp->getRedirectForEntityId( new ItemId( 'Q7435389457' ) ) );
-		$this->assertNull( $epp->getRedirectForEntityId( $targetId ) );
-
-		$targetIdFromEpp = $epp->getRedirectForEntityId( $redirectId );
-		$this->assertEquals( $targetId, $targetIdFromEpp );
 	}
 
 }
