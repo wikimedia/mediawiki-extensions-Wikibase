@@ -51,6 +51,7 @@
 	"wikibase-linkitem-not-loggedin-title": "יש להיכנס לחשבון",
 	"wikibase-linkitem-not-loggedin": "יש להיכנס לחשבון בוויקי הזה וב[$1 מאגר הנתונים המרכזי] כדי להשתמש באפשרות הזאת.",
 	"wikibase-linkitem-success-link": "הדפים קושרו בהצלחה. אפשר למצוא את הפריט החדש שמכיל את הקישורים ב[$1 מאגר הנתונים המרכזי].",
+	"wikibase-limitreport-entities-accessed": "מספר ישויות הוויקיבייס שנטענו",
 	"wikibase-property-notfound": "המאפיין $1 לא נמצא.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "הסתרת",

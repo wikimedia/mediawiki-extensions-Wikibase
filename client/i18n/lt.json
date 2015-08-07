@@ -49,6 +49,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Jums reikia būti prisiregistravusiam",
 	"wikibase-linkitem-not-loggedin": "Jums reikia būti prisijungusiam šioje wiki ir [$1 centrinėje duomenų saugykloje], kad galėtumėte naudotis šia funkcija.",
 	"wikibase-linkitem-success-link": "Puslapiai buvo sėkmingai susieti. Jūs galite rasti įrašą, kuriame sukauptos nuorodos, mūsų [$1 centrinėje duomenų saugykloje].",
+	"wikibase-limitreport-entities-accessed": "Užkrautų Wikibase esybių skaičius",
 	"wikibase-property-notfound": "$1 savybė nerasta.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Slėpti",

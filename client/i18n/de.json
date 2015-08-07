@@ -49,6 +49,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Du musst angemeldet sein",
 	"wikibase-linkitem-not-loggedin": "Du musst auf diesem Wiki und im [$1 zentralen Datenrepositorium] angemeldet sein, um diese Funktion nutzen zu können.",
 	"wikibase-linkitem-success-link": "Die Seiten wurden erfolgreich verlinkt. Du findest das Objekt, das die Links enthält, in unserem [$1 zentralen Datenrepositorium].",
+	"wikibase-limitreport-entities-accessed": "Anzahl der geladenen Wikibase-Objekte",
 	"wikibase-property-notfound": "Die Eigenschaft „$1“ wurde nicht gefunden.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "ausblenden",

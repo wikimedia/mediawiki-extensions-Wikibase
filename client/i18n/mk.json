@@ -45,6 +45,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Треба да сте најавени",
 	"wikibase-linkitem-not-loggedin": "За да ја користите функцијава, треба да сте најавени на ова вики и на [$1 централното складиште на податоци].",
 	"wikibase-linkitem-success-link": "Страниците се успешно сврзани. Новосоздадената единица со врските ќе ја најдете на нашето [$1 централно складиште на податоци].",
+	"wikibase-limitreport-entities-accessed": "Број на вчитани единици од Викибазата",
 	"wikibase-property-notfound": "Својството „$1“ не е пронајдено.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Скриј",

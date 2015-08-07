@@ -15,7 +15,8 @@
 			"Zolo",
 			"Тест",
 			"Harriv",
-			"Pxos"
+			"Pxos",
+			"Pitke"
 		]
 	},
 	"wikibase-desc": "Säilö jäsennetylle datalle",
@@ -81,7 +82,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|linkki|linkkiä}}",
 	"wikibase-disambiguation-title": "Täsmennyssivu nimelle ”$1”",
 	"wb-special-newitem-new-item-notification": "Luotiin uusi kohde $1 ja sinut ohjattiin sen sivulle. Palaa sivulle $2.",
-	"wikibase-aliases-label": "Tunnetaan myös nimellä",
 	"wikibase-aliases-input-help-message": "Jotta tämä aihe löytyisi helpommin, voit lisätä vaihtoehtoisia nimiä.",
 	"wikibase-aliases-empty": "Aliaksia ei määritetty.",
 	"wikibase-propertypage-datatype": "Tietotyyppi",
@@ -149,6 +149,7 @@
 	"wikibase-newitem-not-recognized-siteid": "Annettua sivustotunnusta ei tunnistettu.",
 	"wikibase-newentity-label": "Nimi",
 	"wikibase-newentity-description": "Kuvaus",
+	"wikibase-newentity-aliases": "Aliakset, erotusmerkkinä pystyviiva:",
 	"wikibase-newentity-submit": "Luo",
 	"special-setlabel": "Aseta nimi",
 	"wikibase-setlabel-introfull": "Asetat kohteen [[$1]] nimeä kielellä $2.",
