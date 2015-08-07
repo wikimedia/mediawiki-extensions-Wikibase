@@ -153,36 +153,30 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	 * @dataProvider provideHandleChanges
 	 */
 	public function testHandleChanges() {
-		global $handleChangeCallCount, $handleChangesCallCount;
 		$changes = func_get_args();
 
+		$spy = new \stdClass();
+		$spy->handleChangeCallCount = 0;
+		$spy->handleChangesCallCount = 0;
+
 		$testHooks = array(
-			'WikibaseHandleChange' => array( function( Change $change ) {
-				global $handleChangeCallCount;
-				$handleChangeCallCount++;
+			'WikibaseHandleChange' => array( function( Change $change ) use ( $spy ) {
+				$spy->handleChangeCallCount++;
 				return true;
 			} ),
-			'WikibaseHandleChanges' => array( function( array $changes ) {
-				global $handleChangesCallCount;
-				$handleChangesCallCount++;
+			'WikibaseHandleChanges' => array( function( array $changes ) use ( $spy ) {
+				$spy->handleChangesCallCount++;
 				return true;
 			} )
 		);
 
 		$this->mergeMwGlobalArrayValue( 'wgHooks', $testHooks );
 
-		$handleChangeCallCount = 0;
-		$handleChangesCallCount = 0;
-
 		$changeHandler = $this->getChangeHandler();
-
 		$changeHandler->handleChanges( $changes );
 
-		$this->assertEquals( count( $changes ), $handleChangeCallCount );
-		$this->assertEquals( 1, $handleChangesCallCount );
-
-		unset( $handleChangeCallCount );
-		unset( $handleChangesCallCount );
+		$this->assertEquals( count( $changes ), $spy->handleChangeCallCount );
+		$this->assertEquals( 1, $spy->handleChangesCallCount );
 	}
 
 	public function provideGetUpdateActions() {
