@@ -551,6 +551,16 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	private function assertEntityPerPage( $expected, EntityId $entityId ) {
+		$pageId = $this->getPageId( $entityId );
+
+		if ( $expected === true ) {
+			$this->assertGreaterThan( 0, $pageId );
+		} else {
+			$this->assertEquals( $expected, $pageId );
+		}
+	}
+
+	private function getPageId( EntityId $entityId ) {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$row = $dbr->selectRow(
@@ -564,16 +574,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		);
 
 		if ( !$row ) {
-			$pageId = false;
-		} else {
-			$pageId = (int)$row->epp_page_id;
+			return false;
 		}
 
-		if ( $expected === true ) {
-			$this->assertGreaterThan( 0, $pageId );
-		} else {
-			$this->assertEquals( $expected, $pageId );
-		}
+		return $pageId = (int)$row->epp_page_id;
 	}
 
 	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
