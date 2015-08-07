@@ -107,7 +107,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 			MockSiteStore::newFromTestSites()
 		);
 
-		$exceptionLocalizer = $this->getMock( 'Wikibase\Lib\Localizer\ExceptionLocalizer' );
+		$exceptionLocalizer = $this->getMock( 'Wikibase\Repo\Localizer\ExceptionLocalizer' );
 		$exceptionLocalizer->expects( $this->any() )
 			->method( 'getExceptionMessage' )
 			->will( $this->returnCallback( function( Exception $ex ) {

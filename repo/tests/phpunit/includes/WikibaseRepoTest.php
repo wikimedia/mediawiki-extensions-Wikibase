@@ -144,7 +144,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetExceptionLocalizer() {
 		$localizer = $this->getWikibaseRepo()->getExceptionLocalizer();
-		$this->assertInstanceOf( 'Wikibase\Lib\Localizer\ExceptionLocalizer', $localizer );
+		$this->assertInstanceOf( 'Wikibase\Repo\Localizer\ExceptionLocalizer', $localizer );
 	}
 
 	public function testGetEntityContentDataCodec() {
