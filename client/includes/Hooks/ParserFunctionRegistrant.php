@@ -4,7 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use Parser;
 use PPFrame;
-use Wikibase\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 
 class ParserFunctionRegistrant {
 

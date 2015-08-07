@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use Language;
 use MWException;
@@ -10,9 +10,9 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
-use Wikibase\DataAccess\PropertyIdResolver;
-use Wikibase\DataAccess\SnaksFinder;
-use Wikibase\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\DataAccess\PropertyIdResolver;
+use Wikibase\Client\DataAccess\SnaksFinder;
+use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataAccess\PropertyParserFunction;
+namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use Parser;
 use PPFrame;

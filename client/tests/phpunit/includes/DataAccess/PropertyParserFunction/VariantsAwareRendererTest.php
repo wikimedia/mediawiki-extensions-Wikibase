@@ -2,11 +2,11 @@
 
 namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
-use Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
+use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\VariantsAwareRenderer
+ * @covers Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -24,7 +24,7 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		$languageRenderer = $this->getLanguageAwareRenderer();
 
 		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
+				'Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -76,7 +76,7 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	private function getLanguageAwareRenderer() {
 		$languageRenderer = $this->getMockBuilder(
-			'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer'
+			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer'
 		)
 		->disableOriginalConstructor()
 		->getMock();

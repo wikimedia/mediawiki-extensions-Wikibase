@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
-use Wikibase\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 
 /**

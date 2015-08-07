@@ -11,7 +11,7 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataAccess\PropertyIdResolver;
+use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;

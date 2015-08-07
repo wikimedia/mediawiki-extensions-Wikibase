@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess;
 
 use DataValues\StringValue;
-use Wikibase\DataAccess\SnaksFinder;
+use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
- * @covers Wikibase\DataAccess\SnaksFinder
+ * @covers Wikibase\Client\DataAccess\SnaksFinder
  *
  * @group Wikibase
  * @group WikibaseClient
