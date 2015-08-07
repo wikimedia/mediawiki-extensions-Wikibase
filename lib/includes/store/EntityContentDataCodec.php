@@ -184,7 +184,7 @@ class EntityContentDataCodec {
 			throw new InvalidArgumentException( '$blob must be a string' );
 		}
 
-		wfSuppressWarnings();
+		\MediaWiki\suppressWarnings();
 		switch ( $this->sanitizeFormat( $format ) ) {
 			case CONTENT_FORMAT_JSON:
 				$data = json_decode( $blob, true );
@@ -195,7 +195,7 @@ class EntityContentDataCodec {
 			default:
 				throw new InvalidArgumentException( "Unsupported decoding format: $format" );
 		}
-		wfRestoreWarnings();
+		\MediaWiki\restoreWarnings();
 
 		if ( !is_array( $data ) ) {
 			throw new MWContentSerializationException( "Failed to decode as $format" );

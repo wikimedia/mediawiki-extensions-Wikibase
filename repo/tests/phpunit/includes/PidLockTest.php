@@ -30,9 +30,9 @@ class PidLockTest extends PHPUnit_Framework_TestCase {
 
 		// Make sure that the given file has actually been removed.
 		// unlink gives a warning if you use it a file that doesn't exist, suppress that
-		wfSuppressWarnings();
+		\MediaWiki\suppressWarnings();
 		$this->assertFalse( $pidLock->removeLock() );
-		wfRestoreWarnings();
+		\MediaWiki\restoreWarnings();
 	}
 
 	public function wikiIdProvider() {
