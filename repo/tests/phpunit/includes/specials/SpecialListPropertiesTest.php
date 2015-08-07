@@ -119,7 +119,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 				new LanguageFallbackChainFactory(),
 				$this->getTermLookup(),
 				$this->getTermBuffer()
-			)
+			),
+			$this->getEntityTitleLookup()
 		);
 
 		return $specialPage;
