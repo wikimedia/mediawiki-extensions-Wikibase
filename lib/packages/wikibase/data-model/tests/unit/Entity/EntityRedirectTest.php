@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @covers Wikibase\Lib\Store\EntityRedirect
+ * @covers Wikibase\DataModel\Entity\EntityRedirect
  *
  * @group Wikibase
  * @group WikibaseDataModel
