@@ -106,7 +106,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @return bool
 	 */
-	public function hasEntityBeenAccessed( EntityId $entityId ) {
+	public function entityHasBeenAccessed( EntityId $entityId ) {
 		$entityIdSerialization = $entityId->getSerialization();
 
 		return array_key_exists( $entityIdSerialization, $this->entitiesAccessed );

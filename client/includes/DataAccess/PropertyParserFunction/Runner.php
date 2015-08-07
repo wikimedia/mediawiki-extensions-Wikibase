@@ -148,7 +148,7 @@ class Runner {
 		}
 
 		// Getting a foreign item is expensive (unless we already loaded it and it's cached)
-		if ( !$this->restrictedEntityLookup->hasEntityBeenAccessed( $entityId ) ) {
+		if ( !$this->restrictedEntityLookup->entityHasBeenAccessed( $entityId ) ) {
 			$parser->incrementExpensiveFunctionCount();
 		}
 

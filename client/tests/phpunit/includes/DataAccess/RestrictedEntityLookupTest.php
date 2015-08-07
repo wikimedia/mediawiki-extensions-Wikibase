@@ -77,8 +77,8 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$lookup = new RestrictedEntityLookup( $this->getEntityLookup(), 200 );
 		$lookup->getEntity( new ItemId( 'Q2' ) );
 
-		$this->assertTrue( $lookup->hasEntityBeenAccessed( new ItemId( 'Q2' ) ) );
-		$this->assertFalse( $lookup->hasEntityBeenAccessed( new ItemId( 'Q42' ) ) );
+		$this->assertTrue( $lookup->entityHasBeenAccessed( new ItemId( 'Q2' ) ) );
+		$this->assertFalse( $lookup->entityHasBeenAccessed( new ItemId( 'Q42' ) ) );
 	}
 
 }
