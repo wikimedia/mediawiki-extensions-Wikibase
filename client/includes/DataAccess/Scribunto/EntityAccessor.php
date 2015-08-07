@@ -13,6 +13,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\LibSerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
  * Functionality needed to expose Entities to Lua.
@@ -125,7 +126,16 @@ class EntityAccessor {
 
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 
-		$entityObject = $this->entityLookup->getEntity( $entityId );
+		try {
+			$entityObject = $this->entityLookup->getEntity( $entityId );
+		} catch( UnresolvedRedirectException $e ) {
+			// We probably hit a double redirect
+			wfLogWarning(
+				'Encountered a UnresolvedRedirectException when trying to load ' . $prefixedEntityId
+			);
+
+			return null;
+		}
 
 		if ( $entityObject === null ) {
 			return null;
