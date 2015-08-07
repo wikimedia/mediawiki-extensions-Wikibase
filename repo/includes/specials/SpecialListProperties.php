@@ -18,7 +18,7 @@ use Wikibase\View\EntityIdFormatterFactory;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class SpecialListProperties extends SpecialWikibasePage {
+class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 	/**
 	 * Max server side caching time in seconds.
@@ -173,8 +173,8 @@ class SpecialListProperties extends SpecialWikibasePage {
 		);
 	}
 
-	private function showQuery() {
-		$propertyIds = $this->getPropertyIds();
+	protected function showQuery( array $query = array() ) {
+		$propertyIds = $this->getResult();
 
 		if ( empty( $propertyIds ) ) {
 			$this->getOutput()->addWikiMsg( 'specialpage-empty' );
@@ -199,9 +199,12 @@ class SpecialListProperties extends SpecialWikibasePage {
 	}
 
 	/**
+	 * @param integer $offset Start to include at number of entries from the start title
+	 * @param integer $limit Stop at number of entries after start of inclusion
+	 *
 	 * @return PropertyId[]
 	 */
-	private function getPropertyIds() {
+	protected function getResult( $offset = 0, $limit = 0 ) {
 		if ( $this->dataType === '' ) {
 			$propertyInfoForDataType = $this->propertyInfoStore->getAllPropertyInfo();
 		} else {
