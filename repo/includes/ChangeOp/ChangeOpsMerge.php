@@ -13,9 +13,9 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Validators\CompositeEntityValidator;
-use Wikibase\Validators\EntityConstraintProvider;
-use Wikibase\Validators\UniquenessViolation;
+use Wikibase\Repo\Validators\CompositeEntityValidator;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**
  * @since 0.5

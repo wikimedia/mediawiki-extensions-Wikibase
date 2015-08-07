@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Validators;
+namespace Wikibase\Repo\Validators;
 
 use ValueValidators\Error;
 use Wikibase\DataModel\Entity\EntityId;

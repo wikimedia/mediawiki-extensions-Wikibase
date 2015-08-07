@@ -29,9 +29,9 @@ use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
-use Wikibase\Validators\EntityConstraintProvider;
-use Wikibase\Validators\EntityValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\EntityValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
  * Base handler class for Entity content classes.

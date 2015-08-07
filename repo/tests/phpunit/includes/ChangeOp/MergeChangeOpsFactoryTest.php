@@ -28,7 +28,7 @@ class MergeChangeOpsFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$toItemId = new ItemId( 'Q3' );
 
-		$constraintProvider = $this->getMockBuilder( 'Wikibase\Validators\EntityConstraintProvider' )
+		$constraintProvider = $this->getMockBuilder( 'Wikibase\Repo\Validators\EntityConstraintProvider' )
 			->disableOriginalConstructor()
 			->getMock();
 

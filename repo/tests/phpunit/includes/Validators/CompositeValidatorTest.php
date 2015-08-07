@@ -1,16 +1,16 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
 use DataValues\StringValue;
-use Wikibase\Validators\CompositeValidator;
-use Wikibase\Validators\RegexValidator;
-use Wikibase\Validators\StringLengthValidator;
-use Wikibase\Validators\TypeValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\CompositeValidator;
+use Wikibase\Repo\Validators\RegexValidator;
+use Wikibase\Repo\Validators\StringLengthValidator;
+use Wikibase\Repo\Validators\TypeValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Validators\CompositeValidator
+ * @covers Wikibase\Repo\Validators\CompositeValidator
  *
  * @license GPL 2+
  *

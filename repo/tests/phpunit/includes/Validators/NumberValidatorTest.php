@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
-use Wikibase\Validators\NumberValidator;
+use Wikibase\Repo\Validators\NumberValidator;
 
 /**
- * @covers Wikibase\Validators\NumberValidator
+ * @covers Wikibase\Repo\Validators\NumberValidator
  *
  * @license GPL 2+
  *

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Validators;
+namespace Wikibase\Repo\Validators;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValue;

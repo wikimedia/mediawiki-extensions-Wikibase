@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Validators\UniquenessViolation;
+use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**
  * Detector of label/description uniqueness constraint violations.

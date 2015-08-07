@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
 use ValueValidators\Result;
-use Wikibase\Validators\UrlSchemeValidators;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\UrlSchemeValidators;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Validators\UrlSchemeValidators
+ * @covers Wikibase\Repo\Validators\UrlSchemeValidators
  *
  * @license GPL 2+
  *

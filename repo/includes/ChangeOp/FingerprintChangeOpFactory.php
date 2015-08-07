@@ -3,7 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\Validators\TermValidatorFactory;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * Factory for ChangeOps that apply to an entity Fingerprint.

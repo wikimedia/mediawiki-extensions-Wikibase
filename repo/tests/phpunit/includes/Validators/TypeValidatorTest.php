@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
-use Wikibase\Validators\TypeValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\TypeValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Validators\TypeValidator
+ * @covers Wikibase\Repo\Validators\TypeValidator
  *
  * @license GPL 2+
  *

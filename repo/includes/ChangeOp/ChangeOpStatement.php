@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
-use Wikibase\Validators\SnakValidator;
+use Wikibase\Repo\Validators\SnakValidator;
 
 /**
  * Class for statement modification operations

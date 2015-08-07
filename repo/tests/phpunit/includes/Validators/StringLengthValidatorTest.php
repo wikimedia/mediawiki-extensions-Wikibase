@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
-use Wikibase\Validators\StringLengthValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\StringLengthValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Validators\StringLengthValidator
+ * @covers Wikibase\Repo\Validators\StringLengthValidator
  *
  * @license GPL 2+
  *

@@ -21,8 +21,8 @@ use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Validators\CompositeValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\CompositeValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
  * API module for using value parsers.

@@ -447,7 +447,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'array', $validators );
 
 		foreach ( $validators as $validator ) {
-			$this->assertInstanceOf( 'Wikibase\Validators\EntityValidator', $validator );
+			$this->assertInstanceOf( 'Wikibase\Repo\Validators\EntityValidator', $validator );
 		}
 	}
 

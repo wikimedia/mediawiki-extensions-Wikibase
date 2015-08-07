@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -13,10 +13,10 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Test\ChangeOpTestMockProvider;
-use Wikibase\Validators\LabelUniquenessValidator;
+use Wikibase\Repo\Validators\LabelUniquenessValidator;
 
 /**
- * @covers Wikibase\Validators\LabelUniquenessValidator
+ * @covers Wikibase\Repo\Validators\LabelUniquenessValidator
  *
  * @group Database
  * @group Wikibase

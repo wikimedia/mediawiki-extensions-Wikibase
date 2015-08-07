@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\Validators\SnakValidator;
+use Wikibase\Repo\Validators\SnakValidator;
 
 /**
  * Factory for ChangeOps that modify Statements.

@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
-use Wikibase\Validators\NumberRangeValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\NumberRangeValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers \Wikibase\Validators\NumberRangeValidator
+ * @covers \Wikibase\Repo\Validators\NumberRangeValidator
  *
  * @group WikibaseLib
  * @group Wikibase

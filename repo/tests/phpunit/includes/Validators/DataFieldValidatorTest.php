@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Validators;
+namespace Wikibase\Test\Repo\Validators;
 
-use Wikibase\Validators\DataFieldValidator;
-use Wikibase\Validators\StringLengthValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\Validators\DataFieldValidator;
+use Wikibase\Repo\Validators\StringLengthValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @covers Wikibase\Validators\DataFieldValidator
+ * @covers Wikibase\Repo\Validators\DataFieldValidator
  *
  * @license GPL 2+
  *
