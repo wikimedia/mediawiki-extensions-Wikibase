@@ -7,7 +7,7 @@ use DataValues\DataValue;
 /**
  * Provides a string representation for a DataValue given its associated DataType.
  *
- * @since 0.4
+ * @since 1.1
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
