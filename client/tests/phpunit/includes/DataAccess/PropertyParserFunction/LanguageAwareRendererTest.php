@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\PropertyLabelNotResolvedException;
+use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 
 /**

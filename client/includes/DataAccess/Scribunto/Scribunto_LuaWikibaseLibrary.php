@@ -15,7 +15,7 @@ use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\PropertyLabelNotResolvedException;
+use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
