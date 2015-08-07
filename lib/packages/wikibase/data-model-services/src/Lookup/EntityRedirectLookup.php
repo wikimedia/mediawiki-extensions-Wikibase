@@ -17,7 +17,7 @@ interface EntityRedirectLookup {
 	/**
 	 * Returns the IDs that redirect to (are aliases of) the given target entity.
 	 *
-	 * @since 0.5
+	 * @since 1.1
 	 *
 	 * @param EntityId $targetId
 	 *
@@ -28,7 +28,7 @@ interface EntityRedirectLookup {
 	/**
 	 * Returns the redirect target associated with the given redirect ID.
 	 *
-	 * @since 0.5
+	 * @since 1.1
 	 *
 	 * @param EntityId $entityId
 	 * @param string $forUpdate If "for update" is given the redirect will be

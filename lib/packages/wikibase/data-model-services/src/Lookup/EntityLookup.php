@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -25,11 +24,10 @@ interface EntityLookup {
 	 * Code that needs control over redirect resolution should use an
 	 * EntityRevisionLookup instead.
 	 *
-	 * @since 0.3
+	 * @since 1.1
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException
 	 * @return EntityDocument|null
 	 */
 	public function getEntity( EntityId $entityId );
@@ -43,11 +41,10 @@ interface EntityLookup {
 	 * Code that needs control over redirect resolution should use an
 	 * EntityRevisionLookup instead.
 	 *
-	 * @since 0.4
+	 * @since 1.1
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId );
