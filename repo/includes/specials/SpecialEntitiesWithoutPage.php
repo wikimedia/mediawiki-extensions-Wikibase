@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Store\EntityPerPage;
@@ -204,6 +205,11 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
 	 * @since 0.4
+	 *
+	 * @param int $offset
+	 * @param int $limit
+	 *
+	 * @return EntityId[]
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		return $this->entityPerPage->getEntitiesWithoutTerm( $this->termType, $this->language, $this->type, $limit, $offset );

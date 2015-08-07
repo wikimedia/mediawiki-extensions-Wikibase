@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -34,6 +35,11 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
 	 * @since 0.4
+	 *
+	 * @param int $offset
+	 * @param int $limit
+	 *
+	 * @return EntityId[]
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
