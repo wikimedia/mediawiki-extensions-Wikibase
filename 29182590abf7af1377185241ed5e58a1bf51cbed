@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_141abc6f",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-07T14:12:04Z",
+      "side": 1,
+      "message": "The only reason for this class property is to pass it to the lazy getter. Instead you can simply create a new $this-\u003eentityIdFormatter at this point.",
+      "revId": "29182590abf7af1377185241ed5e58a1bf51cbed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
