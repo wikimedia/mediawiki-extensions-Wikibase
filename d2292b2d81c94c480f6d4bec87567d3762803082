@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_54f92417",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-07T14:06:12Z",
+      "side": 1,
+      "message": "Is this supposed to return plain text or escaped HTML? Please add either \"plain text\" or \"HTML\" and check if the code below needs a htmlspecialchars.",
+      "revId": "d2292b2d81c94c480f6d4bec87567d3762803082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b1041a1c",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-07T14:06:12Z",
+      "side": 1,
+      "message": "Oh no, you forgot a space!",
+      "revId": "d2292b2d81c94c480f6d4bec87567d3762803082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
