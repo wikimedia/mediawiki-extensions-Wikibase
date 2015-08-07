@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityRedirect;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class RedirectRevision implements RevisionInfo {
+class RedirectRevision {
 
 	/**
 	 * @var EntityRedirect
