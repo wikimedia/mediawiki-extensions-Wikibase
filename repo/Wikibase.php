@@ -153,10 +153,15 @@ call_user_func( function() {
 
 	$wgValueParsers['monolingualtext'] = 'Wikibase\Parsers\MonolingualTextParser';
 
-	// Use NullParser for datatypes that use StringValue
-	$wgValueParsers['commonsMedia'] = 'ValueParsers\NullParser';
-	$wgValueParsers['string'] = 'ValueParsers\NullParser';
-	$wgValueParsers['url'] = 'ValueParsers\NullParser';
+	// Use StringParser for datatypes that use StringValue
+	$stringParserFactoryFunction = function( ValueParsers\ParserOptions $options ) {
+		$normalizer = \Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+		return new \ValueParsers\StringParser( new Wikibase\Lib\WikibaseStringValueNormalizer( $normalizer ) );
+	};
+
+	$wgValueParsers['commonsMedia'] = $stringParserFactoryFunction;
+	$wgValueParsers['string'] = $stringParserFactoryFunction;
+	$wgValueParsers['url'] = $stringParserFactoryFunction;
 
 	// deprecated: 'null' is not a datatype. Alias kept for backwards compatibility.
 	$wgValueParsers['null'] = 'ValueParsers\NullParser';
