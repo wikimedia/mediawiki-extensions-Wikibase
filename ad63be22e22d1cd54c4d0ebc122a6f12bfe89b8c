@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_d4f51780",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-07T06:31:11Z",
+      "side": 1,
+      "message": "There is no need to nest this code. I\u0027ve un-nested it in a follow up",
+      "revId": "ad63be22e22d1cd54c4d0ebc122a6f12bfe89b8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
