@@ -45,9 +45,9 @@ class BabelUserLanguageLookupTest extends \MediaWikiTestCase {
 	) {
 		$message = $usersLanguage . ' with {{#babel:' . $babelLanguages . '}} in assert #';
 
-		$babelLanguages            = $this->split( $babelLanguages );
-		$userSpecifiedLanguages    = $this->split( $userSpecifiedLanguages );
-		$allExpected               = $this->split( $allExpected );
+		$babelLanguages = $this->split( $babelLanguages );
+		$userSpecifiedLanguages = $this->split( $userSpecifiedLanguages );
+		$allExpected = $this->split( $allExpected );
 
 		$user = new User();
 		// Required to not be anonymous
@@ -70,15 +70,15 @@ class BabelUserLanguageLookupTest extends \MediaWikiTestCase {
 			// 1. List of languages from the users babel box (as returned by the Babel extension)
 			// 2. List of usable user specified languages
 			// 3. Expected collection of all languages
-			array( 'de', '',         '',         'de'       ),
-			array( 'de', 'en',       'en',       'de|en'    ),
+			array( 'de', '', '', 'de' ),
+			array( 'de', 'en', 'en', 'de|en' ),
 			array( 'de', 'de|en|fr', 'de|en|fr', 'de|en|fr' ),
-			array( 'en', '',         '',         'en',      ),
-			array( 'en', 'en',       'en',       'en',      ),
+			array( 'en', '', '', 'en' ),
+			array( 'en', 'en', 'en', 'en' ),
 			array( 'en', 'de|en|fr', 'de|en|fr', 'en|de|fr' ),
 
 			// Codes reported from Babel are getting lower-cased
-			array( 'en', 'nds-NL',   'nds-nl',   'en|nds-nl' ),
+			array( 'en', 'nds-NL', 'nds-nl', 'en|nds-nl' ),
 
 			// Whatever we get from Babel will be retained
 			array( 'en', 'invalid-language-code', 'invalid-language-code', 'en|invalid-language-code' ),

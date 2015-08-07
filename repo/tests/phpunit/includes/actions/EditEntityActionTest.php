@@ -42,12 +42,12 @@ class EditEntityActionTest extends ActionTestCase {
 	}
 
 	public function testActionForPage() {
-		$page = $this->getTestItemPage( "Berlin" );
+		$page = $this->getTestItemPage( 'Berlin' );
 
-		$action = $this->createAction( "edit", $page );
+		$action = $this->createAction( 'edit', $page );
 		$this->assertInstanceOf( 'Wikibase\EditEntityAction', $action );
 
-		$action = $this->createAction( "submit", $page );
+		$action = $this->createAction( 'submit', $page );
 		$this->assertInstanceOf( 'Wikibase\SubmitEntityAction', $action );
 	}
 
@@ -87,203 +87,203 @@ class EditEntityActionTest extends ActionTestCase {
 
 		$cases = array(
 			array( //0: edit, no parameters
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(),  // params
-				false,    // post
-				null,     // user
-				'/id="[^"]*\bwb-item\b[^"]*"/',     // htmlPattern: should show an item
+				array(), // params
+				false, // post
+				null, // user
+				'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show an item
 			),
 
 			array( //1: submit, no parameters
 				'submit', // action
 				'Berlin', // handle
-				array(),  // params
-				false,    // post
-				null,     // user
-				'/id="[^"]*\bwb-item\b[^"]*"/',     // htmlPattern: should show an item
+				array(), // params
+				false, // post
+				null, // user
+				'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show an item
 			),
 
 			// -- show undo form -----------------------------------
 			array( //2: // undo form with legal undo
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => 0, // current revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/undo-success/', // htmlPattern: should be a success
 			),
 
 			array( //3: // undo form with legal undo and undoafter
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => 0, // current revision
 					'undoafter' => -1, // previous revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/undo-success/', // htmlPattern: should be a success
 			),
 
 			array( //4: // undo form with illegal undo == undoafter
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => -1, // previous revision
 					'undoafter' => -1, // previous revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/wikibase-undo-samerev/', // htmlPattern: should contain error
 			),
 
 			array( //5: // undo form with legal undoafter
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undoafter' => -1, // previous revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/undo-success/', // htmlPattern: should be a success
 			),
 
 			array( //6: // undo form with illegal undo
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => -2, // first revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/wikibase-undo-firstrev/', // htmlPattern: should contain error
 			),
 
 			array( //7: // undo form with illegal undoafter
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undoafter' => 0, // current revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/wikibase-undo-samerev/', // htmlPattern: should contain error
 			),
 
 			// -- show restore form -----------------------------------
 			array( //8: // restore form with legal restore
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'restore' => -1, // previous revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/class="diff/', // htmlPattern: should be a success and contain a diff (undo-success is not shown for restore)
 			),
 
 			array( //9: // restore form with illegal restore
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'restore' => 0, // current revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/wikibase-undo-samerev/', // htmlPattern: should contain error
 			),
 
 			// -- bad revision -----------------------------------
 			array( //10: // undo bad revision
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => 12345678, // bad revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/undo-norev/', // htmlPattern: should contain error
 			),
 
 			array( //11: // undoafter bad revision with good undo
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undo' => 0, // current revision
 					'undoafter' => 12345678, // bad revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/undo-norev/', // htmlPattern: should contain error
 			),
 
 			array( //12: // undoafter bad revision
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'undoafter' => 12345678, // bad revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/undo-norev/', // htmlPattern: should contain error
 			),
 
 			array( //13: // restore bad revision
-				'edit',   // action
+				'edit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'restore' => 12345678, // bad revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/undo-norev/', // htmlPattern: should contain error
 			),
 
 			// -- bad page -----------------------------------
 			array( //14: // non-existing page
-				'edit',   // action
-				Title::newFromText( "XXX", $this->getItemNamespace() ),
-				array(    // params
-					'restore' => array( "London", 0 ), // ok revision
+				'edit', // action
+				Title::newFromText( 'XXX', $this->getItemNamespace() ),
+				array( // params
+					'restore' => array( 'London', 0 ), // ok revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/missing-article/', // htmlPattern: should contain error
 			),
 
 			array( //15: // undo revision from different pages
-				'edit',   // action class
-				"Berlin", // handle
-				array(    // params
-					'undo' => array( "London", 0 ), // wrong page
+				'edit', // action class
+				'Berlin', // handle
+				array( // params
+					'undo' => array( 'London', 0 ), // wrong page
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/wikibase-undo-badpage/', // htmlPattern: should contain error
 			),
 
 			array( //16: // undoafter revision from different pages
-				'edit',   // action class
-				"Berlin", // handle
-				array(    // params
-					'undoafter' => array( "London", -1 ), // wrong page
+				'edit', // action class
+				'Berlin', // handle
+				array( // params
+					'undoafter' => array( 'London', -1 ), // wrong page
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/wikibase-undo-badpage/', // htmlPattern: should contain error
 			),
 
 			array( //17: // restore revision from different pages
-				'edit',   // action class
-				"Berlin", // handle
-				array(    // params
-					'restore' => array( "London", -1 ), // wrong page
+				'edit', // action class
+				'Berlin', // handle
+				array( // params
+					'restore' => array( 'London', -1 ), // wrong page
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/wikibase-undo-badpage/', // htmlPattern: should contain error
 			),
 
@@ -292,13 +292,13 @@ class EditEntityActionTest extends ActionTestCase {
 		if ( self::shouldTestRedirects() ) {
 			// -- show undo form for redirect -----------------------------------
 			$cases[] = array( //18: // undo form with legal undo
-				'edit',   // action
+				'edit', // action
 				'Berlin2', // handle
-				array(    // params
+				array( // params
 					'undo' => 0, // current revision
 				),
-				false,    // post
-				null,     // user
+				false, // post
+				null, // user
 				'/undo-success/', // htmlPattern: should be a success
 			);
 		}
@@ -327,14 +327,14 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //0: submit with legal undo, but don't post
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
-					'undo' => 0,     // current revision
+					'undo' => 0, // current revision
 				),
-				false,    // post
-				null,     // user
-				null,     // htmlPattern
+				false, // post
+				null, // user
+				null, // htmlPattern
 				array(
 					'redirect' => '/[&?]action=edit&undo=\d+/', // redirect to undo form
 				)
@@ -343,13 +343,13 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //1: submit with legal undo, but omit wpSave
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpEditToken' => true, // automatic token
-					'undo' => 0,     // current revision
+					'undo' => 0, // current revision
 				),
-				true,    // post
-				null,     // user
-				null,     // htmlPattern
+				true, // post
+				null, // user
+				null, // htmlPattern
 				array(
 					'redirect' => '/[&?]action=edit&undo=\d+/', // redirect to undo form
 				)
@@ -359,14 +359,14 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //2: // undo form with legal undo
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
-					'undo' => 0,     // current revision
+					'undo' => 0, // current revision
 				),
-				true,    // post
-				null,    // user
-				null,    // htmlPattern
+				true, // post
+				null, // user
+				null, // htmlPattern
 				array(
 					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 				),
@@ -375,15 +375,15 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //3: // undo form with legal undo and undoafter
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => 0, // current revision
 					'undoafter' => -1, // previous revision
 				),
-				true,    // post
-				null,    // user
-				null,    // htmlPattern
+				true, // post
+				null, // user
+				null, // htmlPattern
 				array(
 					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 				),
@@ -392,28 +392,28 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //4: // undo form with illegal undo == undoafter
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => -1, // previous revision
 					'undoafter' => -1, // previous revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/wikibase-undo-samerev/', // htmlPattern: should contain error
 			),
 
 			array( //5: // undo form with legal undoafter
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undoafter' => -1, // previous revision
 				),
-				true,    // post
-				null,     // user
-				null,    // htmlPattern
+				true, // post
+				null, // user
+				null, // htmlPattern
 				array(
 					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 				),
@@ -422,26 +422,26 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //6: // undo form with illegal undo
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => -2, // first revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/wikibase-undo-firstrev/', // htmlPattern: should contain error
 			),
 
 			array( //7: // undo form with illegal undoafter
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undoafter' => 0, // current revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/wikibase-undo-samerev/', // htmlPattern: should contain error
 			),
 
@@ -449,14 +449,14 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //8: // restore form with legal restore
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'restore' => -1, // previous revision
 				),
-				true,    // post
-				null,     // user
-				null,    // htmlPattern
+				true, // post
+				null, // user
+				null, // htmlPattern
 				array(
 					'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
 				),
@@ -465,13 +465,13 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //9: // restore form with illegal restore
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'restore' => 0, // current revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/wikibase-undo-samerev/', // htmlPattern: should contain error
 			),
 
@@ -479,106 +479,106 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //10: // undo bad revision
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => 12345678, // bad revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/undo-norev/', // htmlPattern: should contain error
 			),
 
 			array( //11: // undoafter bad revision with good undo
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undo' => 0, // current revision
 					'undoafter' => 12345678, // bad revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/undo-norev/', // htmlPattern: should contain error
 			),
 
 			array( //12: // undoafter bad revision
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'undoafter' => 12345678, // bad revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/undo-norev/', // htmlPattern: should contain error
 			),
 
 			array( //13: // restore bad revision
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
 					'restore' => 12345678, // bad revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/undo-norev/', // htmlPattern: should contain error
 			),
 
 			// -- bad page -----------------------------------
 			array( //14: // non-existing page
 				'submit', // action
-				Title::newFromText( "XXX", $this->getItemNamespace() ),
-				array(    // params
+				Title::newFromText( 'XXX', $this->getItemNamespace() ),
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
-					'restore' => array( "London", 0 ), // ok revision
+					'restore' => array( 'London', 0 ), // ok revision
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/missing-article/', // htmlPattern: should contain error
 			),
 
 			array( //15: // undo revision from different pages
 				'submit', // action
-				"Berlin", // handle
-				array(    // params
+				'Berlin', // handle
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
-					'undo' => array( "London", 0 ), // wrong page
+					'undo' => array( 'London', 0 ), // wrong page
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/wikibase-undo-badpage/', // htmlPattern: should contain error
 			),
 
 			array( //16: // undoafter revision from different pages
 				'submit', // action
-				"Berlin", // handle
-				array(    // params
+				'Berlin', // handle
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
-					'undoafter' => array( "London", -1 ), // wrong page
+					'undoafter' => array( 'London', -1 ), // wrong page
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/wikibase-undo-badpage/', // htmlPattern: should contain error
 			),
 
 			array( //17: // restore revision from different pages
 				'submit', // action
-				"Berlin", // handle
-				array(    // params
+				'Berlin', // handle
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // automatic token
-					'restore' => array( "London", -1 ), // wrong page
+					'restore' => array( 'London', -1 ), // wrong page
 				),
-				true,    // post
-				null,     // user
+				true, // post
+				null, // user
 				'/wikibase-undo-badpage/', // htmlPattern: should contain error
 			),
 
@@ -586,27 +586,27 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //18: submit with legal undo, but wrong token
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => 'xyz', // bad token
-					'undo' => 0,     // current revision
+					'undo' => 0, // current revision
 				),
-				true,    // post
-				null,     // user
-				'/token_suffix_mismatch/',     // htmlPattern: should contain error
+				true, // post
+				null, // user
+				'/token_suffix_mismatch/', // htmlPattern: should contain error
 			),
 
 			// -- incomplete form -----------------------------------
 			array( //19: submit without undo/undoafter/restore
 				'submit', // action
 				'Berlin', // handle
-				array(    // params
+				array( // params
 					'wpSave' => 1,
 					'wpEditToken' => true, // bad token
 				),
-				true,    // post
-				null,     // user
-				'/id="[^"]*\bwb-item\b[^"]*"/',     // htmlPattern: should show item
+				true, // post
+				null, // user
+				'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show item
 			),
 
 		);
@@ -701,7 +701,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //0: undo last revision
 				'Berlin', //handle
 				array(
-					'undo' => 0,  // last revision
+					'undo' => 0, // last revision
 				),
 				array( //expected
 					'descriptions' => array(
@@ -714,7 +714,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //1: undo previous revision
 				'Berlin', //handle
 				array(
-					'undo' => -1,  // previous revision
+					'undo' => -1, // previous revision
 				),
 				array( //expected
 					'descriptions' => array(
@@ -726,8 +726,8 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //2: undo last and previous revision
 				'Berlin', //handle
 				array(
-					'undo' => 0,  // current revision
-					'undoafter' => -2,  // first revision
+					'undo' => 0, // current revision
+					'undoafter' => -2, // first revision
 				),
 				array( //expected
 					'descriptions' => array(
@@ -739,7 +739,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //3: undoafter first revision (conflict, no change)
 				'Berlin', //handle
 				array(
-					'undoafter' => -2,  // first revision
+					'undoafter' => -2, // first revision
 				),
 				array( //expected
 					'descriptions' => array(
@@ -751,7 +751,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //4: restore previous revision
 				'Berlin', //handle
 				array(
-					'restore' => -1,  // previous revision
+					'restore' => -1, // previous revision
 				),
 				array( //expected
 					'descriptions' => array(
@@ -764,7 +764,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //5: restore first revision
 				'Berlin', //handle
 				array(
-					'restore' => -2,  // first revision
+					'restore' => -2, // first revision
 				),
 				array( //expected
 					'descriptions' => array(
@@ -797,7 +797,7 @@ class EditEntityActionTest extends ActionTestCase {
 
 		$out = $this->callAction( 'submit', $page, $params, true );
 
-		$this->assertRegExp( '![:/=]Q\d+$!', $out->getRedirect(), "successful operation should return a redirect" );
+		$this->assertRegExp( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
 
 		$item = $this->loadTestItem( $handle );
 
@@ -852,7 +852,7 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @dataProvider provideUndoPermissions
 	 */
 	public function testUndoPermissions( $action, $permissions, $error ) {
-		$handle = "London";
+		$handle = 'London';
 
 		self::resetTestItem( $handle );
 
@@ -871,9 +871,9 @@ class EditEntityActionTest extends ActionTestCase {
 		if ( $error ) {
 			$this->assertRegExp( $error, $out->getHTML() );
 
-			$this->assertEmpty( $out->getRedirect(), "operation should not trigger a redirect" );
+			$this->assertEmpty( $out->getRedirect(), 'operation should not trigger a redirect' );
 		} else {
-			$this->assertRegExp( '![:/=]Q\d+$!', $out->getRedirect(), "successful operation should return a redirect" );
+			$this->assertRegExp( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
 		}
 
 		self::resetTestItem( $handle );

@@ -41,7 +41,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	private function newExpander( User $user, EntityRevisionLookup $entityRevisionLookup, ItemId $itemId ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
-		$title = $this->getMockBuilder( 'Title')
+		$title = $this->getMockBuilder( 'Title' )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -47,7 +47,7 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$html = $snakHtmlGenerator->getSnakHtml( $snak );
 
-		foreach( $patterns as $message => $pattern ) {
+		foreach ( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
 		}
 	}

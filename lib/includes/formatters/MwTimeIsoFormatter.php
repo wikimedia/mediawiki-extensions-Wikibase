@@ -83,7 +83,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		}
 
 		$mwTimestamp = $this->getMwTimestamp( $isoTimestamp, $precision );
-		$mwYear        = $this->language->sprintfDate(         'Y', $mwTimestamp );
+		$mwYear = $this->language->sprintfDate( 'Y', $mwTimestamp );
 		$localizedDate = $this->language->sprintfDate( $dateFormat, $mwTimestamp );
 
 		if ( $mwYear !== $localizedYear ) {

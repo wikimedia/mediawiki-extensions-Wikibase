@@ -6,10 +6,11 @@ use FauxResponse;
 use Site;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
-use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialGoToLinkedPage
@@ -104,17 +105,13 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	private function getEntitylookup() {
 		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$mock->expects( $this->any() )
-		->method( 'hasEntity' )
-		->will( $this->returnCallback( function( ItemId $itemId ) {
-			if ( $itemId->getSerialization() === 'Q23'
-				|| $itemId->getSerialization() === 'Q24') {
-				return true;
-			} else {
-				return false;
-			}
-		} ) );
+			->method( 'hasEntity' )
+			->will( $this->returnCallback( function( ItemId $itemId ) {
+				$id = $itemId->getSerialization();
+				return $id === 'Q23' || $id === 'Q24';
+			} ) );
 
-			return $mock;
+		return $mock;
 	}
 
 	/**

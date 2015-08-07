@@ -84,7 +84,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, 'edit' );
 
-		foreach( $patterns as $message => $pattern ) {
+		foreach ( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
 		}
 	}
