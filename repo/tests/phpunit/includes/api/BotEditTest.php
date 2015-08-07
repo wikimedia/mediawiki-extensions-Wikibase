@@ -129,7 +129,7 @@ class BotEditTest extends WikibaseApiTestCase {
 			$params['fromid'] = EntityTestHelper::getId( $params['fromid'] );
 			$params['toid'] = EntityTestHelper::getId( $params['toid'] );
 		}
-		list( $result, , ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->user );
+		list( $result, , ) = $this->doApiRequestWithToken( $params, null, self::$users['wbbot']->getUser() );
 
 		// -- check the result ------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -153,7 +153,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		);
 
 		//@todo this really makes this test slow, is there a better way?
-		$rcResult = $this->doApiRequest( $rcRequest, null, false, self::$users['wbbot']->user );
+		$rcResult = $this->doApiRequest( $rcRequest, null, false, self::$users['wbbot']->getUser() );
 
 		// -- check the recent changes result ---------------------------------
 		$this->assertArrayHasKey( 'query', $rcResult[0], "Must have a 'query' key in the result from the API" );
