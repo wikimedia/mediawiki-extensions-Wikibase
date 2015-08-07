@@ -758,6 +758,7 @@ final class WikibaseClient {
 			$this->getPropertyClaimsRendererFactory(),
 			$this->getStore()->getSiteLinkLookup(),
 			$this->getEntityIdParser(),
+			$this->getRestrictedEntityLookup(),
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->settings->getSetting( 'allowArbitraryDataAccess' )
 		);
