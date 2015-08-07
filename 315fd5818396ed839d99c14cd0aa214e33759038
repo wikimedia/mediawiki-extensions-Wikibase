@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_34bb38e0",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-07T15:16:14Z",
+      "side": 1,
+      "message": "This thing probably shouldn\u0027t be in here, it should probably be implemented in the subclasses, that way we dont HAVE to work on EntityId objects.",
+      "revId": "315fd5818396ed839d99c14cd0aa214e33759038",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d4cf5482",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-07T15:16:14Z",
+      "side": 1,
+      "message": "My comment above would also require a change here to just array",
+      "revId": "315fd5818396ed839d99c14cd0aa214e33759038",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
