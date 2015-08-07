@@ -4,7 +4,7 @@ namespace Wikibase\Client\DataAccess;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\PropertyLabelNotResolvedException;
+use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\PropertyLabelResolver;
 

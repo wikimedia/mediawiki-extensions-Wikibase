@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\PropertyLabelNotResolvedException;
+use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -81,7 +81,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			'en'
 		);
 
-		$this->setExpectedException( 'Wikibase\Lib\PropertyLabelNotResolvedException' );
+		$this->setExpectedException( 'Wikibase\Client\PropertyLabelNotResolvedException' );
 		$renderer->render( new ItemId( 'Q42' ), 'blah' );
 	}
 
