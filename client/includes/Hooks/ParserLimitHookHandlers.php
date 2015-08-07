@@ -6,6 +6,7 @@ use Html;
 use Language;
 use Parser;
 use ParserOutput;
+use StubObject;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\DataAccess\RestrictedEntityLookup;
 
@@ -43,6 +44,7 @@ class ParserLimitHookHandlers {
 		global $wgLang;
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		StubObject::unstub( $wgLang );
 
 		return new self(
 			$wikibaseClient->getRestrictedEntityLookup(),
