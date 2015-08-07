@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b41088f9",
+        "filename": "lib/includes/ValuesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-07T15:10:10Z",
+      "side": 1,
+      "message": "?",
+      "revId": "d0059b955ece2da1f9e93d7c5fc03941a6d7fafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_54d5a41e",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-07T15:10:10Z",
+      "side": 1,
+      "message": "See Ie81a2ad.",
+      "revId": "d0059b955ece2da1f9e93d7c5fc03941a6d7fafa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
