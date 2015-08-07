@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Services\TypedValue;
+namespace Wikibase\DataModel\Services\DataValue;
 
 use DataValues\DataValue;
 
