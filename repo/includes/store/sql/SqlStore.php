@@ -32,6 +32,7 @@ use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
+use Wikibase\Repo\Store\SQL\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
@@ -510,7 +511,12 @@ class SqlStore implements Store {
 	 * @return EntityRedirectLookup
 	 */
 	public function getEntityRedirectLookup() {
-		return $this->newEntityPerPage();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		return new WikiPageEntityRedirectLookup(
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getEntityIdLookup()
+		);
 	}
 
 	/**
