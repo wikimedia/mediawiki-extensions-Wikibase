@@ -16,6 +16,24 @@
       "revId": "34978b6eaf33b662aea09d16c40056aa6527be43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_f441300d",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-07T14:47:46Z",
+      "side": 1,
+      "message": "I\u0027m trying to minimize my patches much, much more than a year before. I totally agree when a method is moved. But in this case I disagree. Consistency (property a, b, c, constructor parameters a, b, c, assignments a, b, c) and being able to read the code is more important than a barely used blame for some class properties.",
+      "parentUuid": "8ec42329_b458882a",
+      "revId": "34978b6eaf33b662aea09d16c40056aa6527be43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
