@@ -144,9 +144,9 @@ XML
 	 */
 	public function testImportHandleRevisionXMLTag_hook( $xml, $allowImport, $expectedException = null ) {
 		// WikiImporter tried to register this protocol every time, so unregister first to avoid errors.
-		wfSuppressWarnings();
+		\MediaWiki\suppressWarnings();
 		stream_wrapper_unregister( 'uploadsource' );
-		wfRestoreWarnings();
+		\MediaWiki\restoreWarnings();
 
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $allowImport );
 
