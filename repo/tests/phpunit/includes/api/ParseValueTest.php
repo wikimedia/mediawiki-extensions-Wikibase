@@ -11,6 +11,8 @@ use ValueParsers\NullParser;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ParseValue;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
+use Wikibase\Repo\Validators\DataFieldValidator;
+use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Validators\RegexValidator;
@@ -80,7 +82,10 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function newArrayWithStringValidator() {
-		return array( new RegexValidator( '/INVALID/', true, 'no-kittens' ) );
+		return array(
+			new DataValueValidator(
+				new RegexValidator( '/INVALID/', true, 'no-kittens' )
+			) );
 	}
 
 	public function newStringDataType( $name ) {
