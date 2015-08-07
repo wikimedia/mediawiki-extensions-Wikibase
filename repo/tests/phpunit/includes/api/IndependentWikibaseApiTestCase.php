@@ -32,7 +32,7 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 			array( 'wbeditor' )
 		);
 
-		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->user );
+		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->getUser() );
 
 		if ( !$isSetup ) {
 			//TODO remove me once everything that needs this is overridden
