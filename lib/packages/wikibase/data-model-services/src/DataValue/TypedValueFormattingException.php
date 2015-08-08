@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Services\TypedValue;
+namespace Wikibase\DataModel\Services\DataValue;
 
 /**
  * @since 1.1
