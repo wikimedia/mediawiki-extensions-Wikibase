@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_61beded3",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-08T00:00:28Z",
+      "side": 1,
+      "message": "I apparently didn\u0027t take this out of the \"let\u0027s see if this can fly\" state... whoops.",
+      "parentUuid": "8ec42329_f4437312",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_5435a7a1",
         "filename": "repo/includes/store/sql/WikiPageEntityRedirectLookup.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-07T04:31:53Z",
       "side": 1,
       "message": "Comment adds very little value",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_41bde2d0",
+        "filename": "repo/includes/store/sql/WikiPageEntityRedirectLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-08T00:00:28Z",
+      "side": 1,
+      "message": "Indeed, removed.",
+      "parentUuid": "8ec42329_5435a7a1",
       "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_c1c8f279",
+        "filename": "repo/includes/store/sql/WikiPageEntityRedirectLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-08T00:00:28Z",
+      "side": 1,
+      "message": "Netbeans doesn\u0027t show me hints if there\u0027s no docblock, thus I prefer to have them, given it\u0027s not harm.",
+      "parentUuid": "8ec42329_7438e39a",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_143b9f97",
         "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityRedirectLookupTest.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-08-07T04:31:53Z",
       "side": 1,
       "message": "assertFalse",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_81aaea80",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityRedirectLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-08T00:00:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_143b9f97",
       "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_21af7693",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityRedirectLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-08T00:00:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_343edb86",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_d448b733",
         "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityRedirectLookupTest.php",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2015-08-07T04:31:53Z",
       "side": 1,
       "message": "assertSame",
+      "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_41b402e5",
+        "filename": "repo/tests/phpunit/includes/store/sql/WikiPageEntityRedirectLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-08T00:00:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_d448b733",
       "revId": "a48947b2f17275b4b9e92f68aaf649579378de0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
