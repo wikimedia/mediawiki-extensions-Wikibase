@@ -2,9 +2,6 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
-use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOpAdd;
-use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\AliasGroup;
