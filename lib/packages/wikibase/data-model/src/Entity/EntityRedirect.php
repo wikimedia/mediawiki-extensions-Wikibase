@@ -12,7 +12,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityRedirect  {
+class EntityRedirect {
 
 	/**
 	 * @var EntityId
