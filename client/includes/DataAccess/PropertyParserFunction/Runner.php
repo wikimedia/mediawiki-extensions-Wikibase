@@ -135,24 +135,24 @@ class Runner {
 	 * Gets the entity and increments the expensive parser function count.
 	 *
 	 * @param Parser $parser
-	 * @param string $from
+	 * @param string $entityIdString
 	 *
 	 * @return EntityId|null
 	 */
-	private function getEntityIdFromString( Parser $parser, $from ) {
+	private function getEntityIdFromString( Parser $parser, $entityIdString ) {
 		try {
-			$entityId = $this->entityIdParser->parse( $from );
-
-			// Getting a foreign item is expensive (unless we already loaded it and it's cached)
-			if ( !$this->restrictedEntityLookup->hasEntityBeenAccessed( $entityId ) ) {
-				$parser->incrementExpensiveFunctionCount();
-			}
-
-			return $entityId;
+			$entityId = $this->entityIdParser->parse( $entityIdString );
 		} catch ( EntityIdParsingException $ex ) {
 			// Just ignore this
 			return null;
 		}
+
+		// Getting a foreign item is expensive (unless we already loaded it and it's cached)
+		if ( !$this->restrictedEntityLookup->hasEntityBeenAccessed( $entityId ) ) {
+			$parser->incrementExpensiveFunctionCount();
+		}
+
+		return $entityId;
 	}
 
 	/**
