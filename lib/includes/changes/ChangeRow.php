@@ -19,6 +19,27 @@ use User;
 class ChangeRow extends ORMRow implements Change {
 
 	/**
+	 * HORRIBLE HACK: Overwritten to dissallow to large change_info entries.
+	 * Bugs: T108130 108246
+	 *
+	 * @param string|null $functionName
+	 *
+	 * @return bool Success indicator
+	 */
+	public function save( $functionName = null ) {
+		$infoLength = strlen( $this->serializeInfo( $this->getInfo() ) );
+		if ( $infoLength > 65500 ) {
+			return true;
+		}
+
+		if ( $this->hasIdField() ) {
+			return $this->table->updateRow( $this, $functionName );
+		} else {
+			return $this->table->insertRow( $this, $functionName );
+		}
+	}
+
+	/**
 	 * Field for caching the linked user.
 	 *
 	 * @since 0.1
