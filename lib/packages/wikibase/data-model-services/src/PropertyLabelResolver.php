@@ -7,13 +7,10 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Resolves property labels (which are unique per language) into entity IDs.
  *
- * Copyright © 24.04.13 by the authors listed below.
- *
  * @since 1.1
  *
- * @license GPL 2+
- *
- * @author daniel
+ * @licence GNU GPL v2+
+ * @author Daniel Kinzler
  */
 interface PropertyLabelResolver {
 
