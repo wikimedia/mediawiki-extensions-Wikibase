@@ -99,4 +99,17 @@ class RestrictedEntityLookup implements EntityLookup {
 		return $this->entityAccessCount;
 	}
 
+	/**
+	 * Whether an entity has been accessed before via this RestrictedEntityLookup.
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return bool
+	 */
+	public function hasEntityBeenAccessed( EntityId $entityId ) {
+		$entityIdSerialization = $entityId->getSerialization();
+
+		return array_key_exists( $entityIdSerialization, $this->entitiesAccessed );
+	}
+
 }
