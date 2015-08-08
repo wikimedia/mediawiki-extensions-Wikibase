@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 4.2 (dev)
+
+* Added `EntityRedirect`
+
 ## Version 4.1 (2015-08-04)
 
 * Added `StatementList::filter`
