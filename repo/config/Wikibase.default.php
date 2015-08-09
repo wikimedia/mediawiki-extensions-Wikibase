@@ -41,6 +41,10 @@ return call_user_func( function() {
 		// Note: keep that low, because such caches cannot always be purged easily.
 		'dataSquidMaxage' => $wgSquidMaxage,
 
+		// Settings for change dispatching
+	        'dispatchBatchChunkFactor' => 3,
+	        'dispatchBatchCacheFactor' => 3,
+
 		// Formats that shall be available via SpecialEntityData.
 		// The first format will be used as the default.
 		// This is a whitelist, some formats may not be supported because when missing

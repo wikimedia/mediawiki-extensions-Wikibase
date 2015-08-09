@@ -38,9 +38,6 @@ $wgWBLibDefaultSettings = array(
 	// may contain mappings from site-id to db-name.
 	'localClientDatabases' => array(),
 
-	'dispatchBatchChunkFactor' => 3,
-	'dispatchBatchCacheFactor' => 3,
-
 	'changeHandlers' => array(
 		'wikibase-item~add' => 'Wikibase\ItemChange',
 		'wikibase-property~add' => 'Wikibase\EntityChange',

@@ -31,7 +31,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 </poem>
 :'''Warning:''' do not change this if you already have Wikibase entities in your database, since they may become unreadable!
 ;useChangesTable: Whether to record changes in the database, so they can be pushed to clients. Boolean, defaults to <code>true</code>. May be set to false in situations where there are no clients to notify, to preserve space. '''Note''' that if this is true, the <code>pruneChanges.php</code> script should be run periodically to remove old changes from the database table.
-;dispatchBatchChunkFactor: Chunk factor used internally by the <code>dispatchChanges.php</code> script. The default is 3. If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
 ;changeHandlers: Array mapping change type IDs to handler classes. May be used by extensions to register additional change classes.
 ;dataTypes: Array listing the available data types that can be used in snaks (and thus in claims and statements). The relevant data type identifiers are defined by the DataType extension. Default:
 <poem>
@@ -52,6 +51,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;conceptBaseUri: Base URI for building concept URIs (for example used in Rdf output). This has to include the protocol and domain, only an entity identifier will be appended.
 
 === Expert Settings ===
+;dispatchBatchChunkFactor: Chunk factor used internally by the <code>dispatchChanges.php</code> script. The default is 3. If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
 ;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities. '''Note:''' this may change in the future to allow separate blacklists for different kinds of entities.
 ;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
 :;length: the maximum length of the string, in characters.
