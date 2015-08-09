@@ -3,6 +3,7 @@
 ## Version 4.2 (dev)
 
 * Added `EntityRedirect`
+* Removed no longer needed dependency on `diff/diff`
 
 ## Version 4.1 (2015-08-04)
 
