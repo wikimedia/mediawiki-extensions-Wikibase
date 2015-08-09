@@ -8,8 +8,6 @@ use Wikibase\DataModel\Services\Lookup\ItemNotFoundException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\ItemNotFoundException
  *
- * @group WikibaseDataModel
- *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */

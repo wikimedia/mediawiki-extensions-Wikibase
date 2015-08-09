@@ -9,9 +9,6 @@ use Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\EscapingEntityIdFormatter
  *
- * @group Wikibase
- * @group WikibaseDataModel
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

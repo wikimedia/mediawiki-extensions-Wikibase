@@ -10,9 +10,6 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser
  *
- * @group Wikibase
- * @group WikibaseDataModel
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

@@ -10,9 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @covers Wikibase\DataModel\Services\Statement\StatementGuidParser
  *
- * @group Wikibase
- * @group WikibaseDataModel
- *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
