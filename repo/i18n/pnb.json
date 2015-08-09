@@ -6,6 +6,11 @@
 	},
 	"wikibase-edit": "لکھو",
 	"wikibase-add": "جوڑو",
+	"wikibase-label-empty": "کوئی سرخی نہیں",
+	"wikibase-description-empty": "کوئی گل نہیں دسی گئی",
 	"wikibase-statements": "واتاں",
-	"wikibase-sitelinks-special": "ہور سائیٹاں"
+	"wikibase-sitelinks-special": "ہور سائیٹاں",
+	"wikibase-aliases-empty": "مشہور ناں نہیں دسیا گیا",
+	"wikibase-statementview-rank-normal": "نارمل رینک",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{انیک:$1|اتہ پتہ|اتے پتے}}"
 }

@@ -6,8 +6,10 @@
 	},
 	"wikibase-comment-update": "آئیٹم بدل دتی",
 	"wikibase-dataitem": "وکی ڈاٹا آئیٹم",
-	"wikibase-editlinks": "جوڑاں بارے لکھو",
+	"wikibase-editlinks": "جوڑ لکھو",
 	"wikibase-editlinkstitle": "بولیاں دے آپسی جوڑ لکھو",
+	"wikibase-rc-hide-wikidata-hide": "لکاؤ",
 	"wikibase-rc-hide-wikidata-show": "وکھاؤ",
-	"wikibase-rc-wikibase-edit-letter": "ڈاٹا"
+	"wikibase-rc-wikibase-edit-letter": "ڈاٹا",
+	"wikibase-otherprojects": "ہور ویونت"
 }
