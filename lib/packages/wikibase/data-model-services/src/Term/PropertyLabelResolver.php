@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Services;
+namespace Wikibase\DataModel\Services\Term;
 
 use Wikibase\DataModel\Entity\EntityId;
 
