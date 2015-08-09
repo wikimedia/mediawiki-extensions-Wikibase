@@ -1,0 +1,154 @@
+<?php
+
+namespace Wikibase\DataModel\Services\Tests\Lookup;
+
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Fixtures\InMemoryEntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
+
+/**
+ * @covers Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup
+ *
+ * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
+ */
+class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
+
+	public function testGetLabel() {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$label = $termLookup->getLabel( new ItemId( 'Q116' ), 'en' );
+		$this->assertEquals( 'New York City', $label );
+	}
+
+	public function testGetLabel_notFoundThrowsException() {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$termLookup->getLabel( new ItemId( 'Q116' ), 'fa' );
+	}
+
+	public function testGetLabel_entityNotFound() {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
+	}
+
+	public function getLabelsProvider() {
+		return array(
+			array(
+				array( 'en' => 'New York City', 'es' => 'Nueva York' ),
+				new ItemId( 'Q116' ),
+				array( 'en', 'es' )
+			),
+			array(
+				array( 'es' => 'Nueva York' ),
+				new ItemId( 'Q116' ),
+				array( 'es' )
+			),
+			array(
+				array( 'de' => 'Berlin' ),
+				new ItemId( 'Q117' ),
+				array( 'de' )
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getLabelsProvider
+	 */
+	public function testGetLabels( array $expected, ItemId $itemId, array $languageCodes ) {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$labels = $termLookup->getLabels( $itemId, $languageCodes );
+		$this->assertEquals( $expected, $labels );
+	}
+
+	public function testGetDescription() {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$description = $termLookup->getDescription( new ItemId( 'Q116' ), 'de' );
+		$expected = 'Metropole an der Ostküste der Vereinigten Staaten';
+
+		$this->assertEquals( $expected, $description );
+	}
+
+	public function testGetDescription_notFoundThrowsException() {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$termLookup->getDescription( new ItemId( 'Q116' ), 'fr' );
+	}
+
+	public function getDescriptionsProvider() {
+		return array(
+			array(
+				array(
+					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
+					'en' => 'largest city in New York and the United States of America',
+				),
+				new ItemId( 'Q116' ),
+				array( 'de', 'en' )
+			),
+			array(
+				array(
+					'de' => 'Metropole an der Ostküste der Vereinigten Staaten',
+				),
+				new ItemId( 'Q116' ),
+				array( 'de', 'fr' )
+			),
+			array(
+				array(),
+				new ItemId( 'Q117' ),
+				array()
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider getDescriptionsProvider
+	 */
+	public function testGetDescriptions( array $expected, ItemId $itemId, array $languageCodes ) {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$descriptions = $termLookup->getDescriptions( $itemId, $languageCodes );
+		$this->assertEquals( $expected, $descriptions );
+	}
+
+	/**
+	 * @return EntityRetrievingTermLookup
+	 */
+	private function getEntityRetrievingTermLookup() {
+		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
+	}
+
+	/**
+	 * @return EntityLookup
+	 */
+	private function getEntityLookup() {
+		$entityLookup = new InMemoryEntityLookup();
+
+		$item = new Item( new ItemId( 'Q116' ) );
+
+		$item->setLabel( 'en', 'New York City' );
+		$item->setLabel( 'es', 'Nueva York' );
+
+		$item->setDescription( 'de', 'Metropole an der Ostküste der Vereinigten Staaten' );
+		$item->setDescription( 'en', 'largest city in New York and the United States of America' );
+
+		$entityLookup->addEntity( $item );
+
+		$item = new Item( new ItemId( 'Q117' ) );
+
+		$item->setLabel( 'de', 'Berlin' );
+
+		$entityLookup->addEntity( $item );
+
+		return $entityLookup;
+	}
+
+}
