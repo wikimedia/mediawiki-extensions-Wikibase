@@ -37,7 +37,7 @@ class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException
+	 * @throws OutOfBoundsException if no such label or entity could be found
 	 * @return Term
 	 */
 	public function getLabel( EntityId $entityId ) {
