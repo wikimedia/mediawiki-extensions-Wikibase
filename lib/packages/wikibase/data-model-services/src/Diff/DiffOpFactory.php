@@ -1,10 +1,9 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataModel\Services\Diff;
 
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOpFactory as DiffDiffOpFactory;
-use Wikibase\DataModel\Services\Diff\EntityDiff;
 
 /**
  * Class for changes that can be represented as a Diff.
