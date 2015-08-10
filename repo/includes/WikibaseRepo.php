@@ -559,7 +559,9 @@ class WikibaseRepo {
 		if ( $this->store === null ) {
 			$this->store = new SqlStore(
 				$this->getEntityContentDataCodec(),
-				$this->getEntityIdParser()
+				$this->getEntityIdParser(),
+				$this->getEntityIdLookup(),
+				$this->getEntityTitleLookup()
 			);
 		}
 
