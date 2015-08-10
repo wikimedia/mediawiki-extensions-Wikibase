@@ -95,7 +95,7 @@ class SummaryFormatter {
 	 * @return string with a formatted comment, or possibly an empty string
 	 */
 	public function formatAutoComment( Summary $summary ) {
-		$messageKey = $summary->getMessageKey();
+		$composite = $summary->getMessageKey();
 		$summaryArgCount = count( $summary->getAutoSummaryArgs() );
 
 		$commentArgs = array_merge(
@@ -107,9 +107,9 @@ class SummaryFormatter {
 		$parts = $this->formatArgList( $commentArgs );
 		$joinedParts = implode( '|', $parts );
 
-		$composite = ( 0 < strlen( $joinedParts ) )
-			? implode( ':', array( $messageKey, $joinedParts ) )
-			: $messageKey;
+		if ( $joinedParts !== '' ) {
+			$composite .= ':' . $joinedParts;
+		}
 
 		return $composite;
 	}
