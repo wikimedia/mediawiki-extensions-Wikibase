@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_6ae9ce7a",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-10T12:31:08Z",
+      "side": 1,
+      "message": "So this is always applied, every time the updater is run, even if the field already has the correct type? Does MySQL skip the update if the field already has the desired type?",
+      "revId": "77dafa83b67608698f42a2d3b755f0c9748ab465",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
