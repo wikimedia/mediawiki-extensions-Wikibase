@@ -13,9 +13,6 @@ use Wikibase\DataModel\Term\Term;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter
  *
- * @group Wikibase
- * @group WikibaseDataModel
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler

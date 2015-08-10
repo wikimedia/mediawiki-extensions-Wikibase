@@ -11,9 +11,6 @@ use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter
  *
- * @group Wikibase
- * @group WikibaseDataModel
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

@@ -8,9 +8,6 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 /**
  * @covers Wikibase\DataModel\Services\Statement\StatementGuidValidator
  *
- * @group Wikibase
- * @group WikibaseDataModel
- *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

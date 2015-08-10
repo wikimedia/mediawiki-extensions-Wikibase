@@ -16,9 +16,6 @@ use Wikibase\DataModel\Snak\Snak;
 /**
  * @covers Wikibase\DataModel\Services\DataValue\ValuesFinder
  *
- * @group Wikibase
- * @group WikibaseDataModel
- *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
