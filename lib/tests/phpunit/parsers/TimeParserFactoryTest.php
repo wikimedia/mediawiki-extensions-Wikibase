@@ -141,6 +141,14 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '-0111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'1 11 111 BC' =>
 				array( '-0111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+
+			/**
+			 * @see https://phabricator.wikimedia.org/T104862
+			 */
+			'1991 1 1' =>
+				array( '+1991-01-01T00:00:00Z' ),
+			'2001 1 1' =>
+				array( '+2001-01-01T00:00:00Z' ),
 		);
 
 		$argLists = array();
