@@ -71,13 +71,12 @@ class ByPropertyIdGrouper {
 	 * @return PropertyId[]
 	 */
 	public function getPropertyIds() {
-		$propertyIds = array_keys( $this->byPropertyId );
-
-		array_walk( $propertyIds, function( &$propertyId ) {
-			$propertyId = new PropertyId( $propertyId );
-		} );
-
-		return $propertyIds;
+		return array_map(
+			function( $propertyId ) {
+				return new PropertyId( $propertyId );
+			},
+			array_keys( $this->byPropertyId )
+		);
 	}
 
 	/**
