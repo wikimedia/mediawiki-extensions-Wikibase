@@ -300,7 +300,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		// present the English for now. Once the frontend is using backend parsers we can
 		// turn the translation on. See the FIXME in MwTimeIsoParser::reconvertOutputString.
 		// $message->inLanguage( $this->language );
-		$message->inLanguage( new Language() );
+		$message->inLanguage( 'en' );
 		$message->params( array( $param ) );
 		return $message->text();
 	}
