@@ -49,7 +49,9 @@
 		 * @param {jQuery} $extender
 		 */
 		init: function( $extender ) {
-			this.$selector.on( 'eachchange', this._onValueChange );
+			this.$selector.unitsuggester( {
+				change: this._onValueChange
+			} );
 			$extender
 				// FIXME: Use a MessageProvider!
 				.append( $( '<span>' ).text( 'Unit (optional)' ) )
@@ -61,6 +63,14 @@
 		 */
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
+			if( value === '1' || value === 'http://qudt.org/vocab/unit#Unitless' ) {
+				value = null;
+			} else if( typeof value !== null ) {
+				value = value.replace( /^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/(?=Q)/i, '' );
+				if( value === 'Q199' ) {
+					value = null;
+				}
+			}
 			this.$selector.val( value );
 		},
 
@@ -79,7 +89,8 @@
 		 * @return {string|null} The current value
 		 */
 		getValue: function() {
-			return this.$selector.val();
+			var unitSuggester = this.$selector.data( 'unitsuggester' );
+			return unitSuggester.getSelectedUri() || this.$selector.val();
 		}
 	} );
 
