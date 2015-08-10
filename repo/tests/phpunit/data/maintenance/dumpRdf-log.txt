@@ -1,0 +1,2 @@
+Dumping shard 0/1
+Processed 4 entities.
