@@ -36,7 +36,7 @@
 				var deferred = $.Deferred();
 
 				$.ajax( {
-					url: location.protocol + '//commons.wikimedia.org/w/api.php',
+					url: 'https://commons.wikimedia.org/w/api.php',
 					dataType: 'jsonp',
 					data: {
 						search: term,
