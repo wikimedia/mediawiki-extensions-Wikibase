@@ -22,26 +22,12 @@ class UnresolvedRedirectException extends RuntimeException {
 	private $redirectTargetId;
 
 	/**
-	 * @var int
-	 */
-	private $revisionId;
-
-	/**
-	 * @var string
-	 */
-	private $revisionTimestamp;
-
-	/**
 	 * @param EntityId $redirectTargetId The ID of the target Entity of the redirect
-	 * @param int $revisionId
-	 * @param string $revisionTimestamp
 	 */
-	public function __construct( EntityId $redirectTargetId, $revisionId = 0, $revisionTimestamp = '' ) {
+	public function __construct( EntityId $redirectTargetId ) {
 		parent::__construct( "Unresolved redirect to " . $redirectTargetId->getSerialization() );
 
 		$this->redirectTargetId = $redirectTargetId;
-		$this->revisionId = $revisionId;
-		$this->revisionTimestamp = $revisionTimestamp;
 	}
 
 	/**
@@ -51,20 +37,6 @@ class UnresolvedRedirectException extends RuntimeException {
 	 */
 	public function getRedirectTargetId() {
 		return $this->redirectTargetId;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getRevisionId() {
-		return $this->revisionId;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getRevisionTimestamp() {
-		return $this->revisionTimestamp;
 	}
 
 }
