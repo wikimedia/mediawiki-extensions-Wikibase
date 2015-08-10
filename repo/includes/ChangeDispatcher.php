@@ -276,12 +276,13 @@ class ChangeDispatcher {
 		$batch = array();
 		$batchSize = 0;
 		$chunkSize = $this->batchSize * $this->batchChunkFactor;
+		$chunksExamined = 0;
 
 		// Track the change ID from which the next pass should start.
 		// Note that this is non-trivial due to programmatic filtering.
 		$lastIdSeen = $after;
 
-		while ( $batchSize < $this->batchSize ) {
+		while ( $batchSize < $this->batchSize && $chunksExamined < 15 ) {
 			// get a chunk of changes
 			$chunk = $this->chunkedChangesAccess->loadChunk( $after+1, $chunkSize );
 
@@ -300,6 +301,7 @@ class ChangeDispatcher {
 
 			$batch = array_merge( $batch, $filtered );
 			$batchSize = count( $batch );
+			$chunksExamined++;
 
 			//XXX: We could try to adapt $chunkSize based on ratio of changes that get filtered out:
 			//     $chunkSize = ( $this->batchSize - count( $batch ) ) * ( count_before / count_after );
