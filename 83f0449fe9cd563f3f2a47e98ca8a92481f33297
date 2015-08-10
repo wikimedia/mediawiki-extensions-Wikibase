@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a0535742",
+        "filename": "client/includes/InterwikiSorter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-10T16:41:00Z",
+      "side": 1,
+      "message": "we use camelCase not snake_case :)",
+      "revId": "83f0449fe9cd563f3f2a47e98ca8a92481f33297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
