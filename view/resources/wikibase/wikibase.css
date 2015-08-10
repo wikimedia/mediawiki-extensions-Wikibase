@@ -510,6 +510,11 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	clear: both;
 }
 
+/* References are initially hidden if JS is enabled */
+.client-js .wikibase-statementview-references {
+	display: none;
+}
+
 .wikibase-referenceview {
 	position: relative;
 	background: #F8F8F8;
