@@ -34,6 +34,11 @@
 			"Wikibase\\DataModel\\Services\\": "src/"
 		}
 	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.1.x-dev"
+		}
+	},
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
