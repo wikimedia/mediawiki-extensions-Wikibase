@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_5b7626d7",
+        "filename": "lib/includes/parsers/WikibaseStringValueLocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-10T18:39:55Z",
+      "side": 1,
+      "message": "use Wikibase\\StringNormalizer as UtfNormalStringNormalizer.",
+      "revId": "028ecf4fa79462b0697f3004b4cf8da8052ca5c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_fbab5219",
+        "filename": "lib/includes/parsers/WikibaseStringValueLocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-10T18:39:55Z",
+      "side": 1,
+      "message": "Calling something \"Wikibase\" is not very specific. \\Wikibase\\StringNormalizer can easily be moved to an other component where the name \"Wikibase\" does not fit any more.\n\nI suggest UtfNormalStringValueNormalizer.",
+      "revId": "028ecf4fa79462b0697f3004b4cf8da8052ca5c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
