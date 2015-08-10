@@ -3,7 +3,8 @@
 		"authors": [
 			"Bedynokue.nart",
 			"SamGamgee",
-			"TheRossatron"
+			"TheRossatron",
+			"Amire80"
 		]
 	},
 	"tooltip-t-wikibase": "Ехьыл1агъэу хъарзынэщым и элементгорэм гъэзэгъэ зэпыщ",
@@ -15,5 +16,6 @@
 	"wikibase-rc-hide-wikidata-hide": "Гъэбылъ",
 	"wikibase-rc-hide-wikidata-show": "Къэгъэлъагъу",
 	"wikibase-rc-wikibase-edit-letter": "Д",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} и е1эзэныгъэ"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} и е1эзэныгъэ",
+	"wikibase-otherprojects": "Нэмыкӏ проектхэр"
 }

@@ -12,5 +12,6 @@
 	"wikibase-label-empty": "Ц1э пари фэусыгъэп",
 	"wikibase-statements": "Еплъык1эхэр",
 	"wikibase-sitelinks-special": "Нэмык1 сайтхэр",
-	"wikibase-aliases-empty": "Синонимхэр гъэнэфагъэхэп"
+	"wikibase-aliases-empty": "Синонимхэр гъэнэфагъэхэп",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|лъапсэ|лъапсэхэр}}"
 }
