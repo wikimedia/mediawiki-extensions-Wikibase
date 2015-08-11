@@ -20,11 +20,11 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Validators\CompositeFingerprintValidator;
@@ -119,12 +119,12 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
-	 * Returns a mock ClaimGuidValidator that accepts any GUID.
+	 * Returns a mock StatementGuidValidator that accepts any GUID.
 	 *
-	 * @return ClaimGuidValidator
+	 * @return StatementGuidValidator
 	 */
 	public function getMockGuidValidator() {
-		$mock = $this->getMockBuilder( '\Wikibase\Lib\ClaimGuidValidator' )
+		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Services\Statement\StatementGuidValidator' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
