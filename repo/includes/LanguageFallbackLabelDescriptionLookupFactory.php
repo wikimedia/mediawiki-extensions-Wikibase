@@ -4,10 +4,10 @@ namespace Wikibase\Repo;
 
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\TermLookup;
 use Wikibase\Store\TermBuffer;
 
 /**

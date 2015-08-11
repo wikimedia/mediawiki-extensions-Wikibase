@@ -6,10 +6,10 @@ use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use Language;
 use SiteStore;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**

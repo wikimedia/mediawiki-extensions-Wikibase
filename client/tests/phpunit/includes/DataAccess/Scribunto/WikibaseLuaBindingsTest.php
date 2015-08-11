@@ -12,8 +12,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
 
@@ -62,7 +62,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 				return $page === 'Rome' ? new ItemId( 'Q33' ) : false;
 			} ) );
 
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'xy', 'LabelString' ) ) );

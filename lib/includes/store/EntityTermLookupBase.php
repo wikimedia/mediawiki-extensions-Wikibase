@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\TermIndexEntry;
 
 /**

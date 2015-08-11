@@ -6,11 +6,11 @@ use OutOfBoundsException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
 
 /**
  * @covers Wikibase\Lib\EntityIdHtmlLinkFormatter
@@ -31,7 +31,7 @@ class EntityIdHtmlLinkFormatterTest extends \MediaWikiTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup( Term $term = null ) {
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
@@ -43,7 +43,7 @@ class EntityIdHtmlLinkFormatterTest extends \MediaWikiTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookupNoLabel() {
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->throwException( new OutOfBoundsException( 'meep' ) ) );

@@ -4,7 +4,7 @@ namespace Wikibase\Client\Usage;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 
 /**
  * TermLookup decorator that records label usage in an TermLookup.

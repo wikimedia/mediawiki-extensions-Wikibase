@@ -7,17 +7,17 @@ use MWException;
 use Parser;
 use StubUserLang;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * @since 0.5

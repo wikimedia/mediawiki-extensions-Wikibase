@@ -11,9 +11,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Test\Rdf\RdfBuilderTest;
 
@@ -69,7 +69,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	protected function newDumpGenerator( array $entities = array(), array $redirects = array() ) {
 		$out = fopen( 'php://output', 'w' );
 
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
 		$propertyLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 

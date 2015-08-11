@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\DataAccess;
 
-use Wikimedia\Assert\Assert;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikimedia\Assert\Assert;
 
 /**
  * EntityLookup that counts how many entities have been loaded through it and throws
