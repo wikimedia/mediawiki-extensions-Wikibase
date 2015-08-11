@@ -68,7 +68,7 @@ abstract class ModifyClaim extends ApiBase {
 		$this->modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakConstructionService(),
 			$wikibaseRepo->getEntityIdParser(),
-			$wikibaseRepo->getClaimGuidValidator(),
+			$wikibaseRepo->getStatementGuidValidator(),
 			$apiHelperFactory->getErrorReporter( $this )
 		);
 
