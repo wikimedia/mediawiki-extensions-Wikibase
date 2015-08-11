@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Entity;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintHolder;
 use Wikibase\DataModel\Term\TermList;
 
