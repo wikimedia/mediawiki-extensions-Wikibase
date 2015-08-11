@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;

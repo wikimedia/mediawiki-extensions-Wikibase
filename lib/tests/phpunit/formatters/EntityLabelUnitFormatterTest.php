@@ -40,7 +40,7 @@ class EntityLabelUnitFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideApplyUnit
 	 */
 	public function testApplyUnit( $unit, $number, $expected ) {
-		$labelLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {

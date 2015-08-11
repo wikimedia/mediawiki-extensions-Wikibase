@@ -6,7 +6,7 @@ use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 
 /**
  * @since 0.4

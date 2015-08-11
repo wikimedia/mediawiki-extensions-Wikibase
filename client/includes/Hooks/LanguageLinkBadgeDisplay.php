@@ -9,7 +9,7 @@ use Sanitizer;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
 /**
  * Provides access to the badges of the current page's sitelinks

@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.

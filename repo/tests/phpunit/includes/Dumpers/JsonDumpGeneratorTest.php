@@ -17,7 +17,7 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\JsonDumpGenerator;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
@@ -110,7 +110,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$entities = $this->makeEntities( $ids );
 
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $entities, $missingIds, $redirectedIds ) {
@@ -246,7 +246,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookupThrowsMWContentSerializationException() {
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnCallback( function( EntityId $id ) {

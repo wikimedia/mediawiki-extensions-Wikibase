@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;

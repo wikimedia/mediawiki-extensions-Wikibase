@@ -203,7 +203,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityLookup() {
-		$entityLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityLookup' )
+		$entityLookup = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\EntityLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 

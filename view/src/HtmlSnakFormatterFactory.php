@@ -4,7 +4,7 @@ namespace Wikibase\View;
 
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 
 /**
  * A factory constructing SnakFormatters that output HTML.

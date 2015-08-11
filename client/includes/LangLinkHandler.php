@@ -10,7 +10,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\ParserOutputDataUpdater;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**

@@ -11,7 +11,7 @@ use SpecialPageFactory;
 use Title;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store\EntityIdLookup;

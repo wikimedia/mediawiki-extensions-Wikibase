@@ -161,7 +161,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getRestrictedEntityLookup() {
 		return new RestrictedEntityLookup(
-			$this->getMock( 'Wikibase\Lib\Store\EntityLookup' ),
+			$this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' ),
 			200
 		);
 	}

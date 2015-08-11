@@ -23,8 +23,8 @@ use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EscapingEntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityRetrievingTermLookup;
-use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
+use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 

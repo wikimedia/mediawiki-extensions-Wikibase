@@ -4,7 +4,7 @@ namespace Wikibase\Repo;
 
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**

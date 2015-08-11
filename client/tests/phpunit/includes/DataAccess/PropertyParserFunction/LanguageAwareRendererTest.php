@@ -174,7 +174,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityLookup() {
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$lookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnValue(

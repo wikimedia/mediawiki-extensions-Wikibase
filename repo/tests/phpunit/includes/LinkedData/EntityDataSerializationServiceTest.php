@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\RedirectRevision;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;

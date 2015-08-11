@@ -6,7 +6,7 @@ use RuntimeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
 /**
  * Utility class for rebuilding the wb_property_info table.

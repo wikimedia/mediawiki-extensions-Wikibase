@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
