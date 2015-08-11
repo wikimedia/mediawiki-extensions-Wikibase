@@ -1,7 +1,7 @@
-Wikibase Client provides a Lua [[mw:Scribunto|Scribunto]] interface that, if activated, can be used to access data from the Wikibase repository.
+Wikibase Client provides a Lua [[mw:Scribunto|Scribunto]] interface that implements functions to access data from the Wikibase repository, if the Wikibase Client configuration enables <code>allowDataTransclusion</code>. Lua modules and wiki templates can invoke these functions.
 
 == mw.wikibase ==
-In <code>mw.wikibase</code> general Lua functionality for working with Wikibase data can be found.
+<code>mw.wikibase</code> has general Lua functionality for working with Wikibase data.
 
 === mw.wikibase.getEntity ===
 <code>wikibase.getEntity()</code><br>
@@ -36,7 +36,7 @@ Takes an item ID and returns the title of the corresponding page title on the lo
 
 An example call might look like this:
 <source lang="lua">
-mw.wikibase.sitelink( 'Q42' ) -- Returns the given items page title in the current Wiki as a string, like "Berlin".
+mw.wikibase.sitelink( 'Q42' ) -- Returns the given item's page title in the current Wiki as a string, like "Berlin".
 </source>
 
 === mw.wikibase.description ===
@@ -79,7 +79,7 @@ mw.wikibase.renderSnaks( snaks ) -- Returns the given Snaks formatted as wiki te
 <code>wikibase.resolvePropertyId( propertyLabelOrId )</code><br>
 Returns a property id for the given label or id. This allows using the property's labels instead of ids in all places. If no property was found for the label, a nil value is returned.
 
-An exmple call might look like this:
+An example call might look like this:
 <source lang="lua">
 mw.wikibase.resolvePropertyId( 'father' ) -- Returns the property id for the property with label "father", like "P12".
 </source>
