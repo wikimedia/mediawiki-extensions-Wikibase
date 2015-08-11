@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
 /**
  * @since 0.4

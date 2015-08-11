@@ -6,10 +6,10 @@ use DataValues\StringValue;
 use Html;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
@@ -113,7 +113,7 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function getEntityIdFormatter() {
-		$lookup = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$lookup = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 
 		$lookup->expects( $this->any() )
 			->method( 'formatEntityId' )

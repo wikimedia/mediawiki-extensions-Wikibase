@@ -14,7 +14,7 @@ use InvalidArgumentException;
 use MWException;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
 /**
  * Class for generating views of DiffOp objects.

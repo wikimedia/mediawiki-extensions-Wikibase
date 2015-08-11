@@ -9,10 +9,10 @@ use Language;
 use MWException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 

@@ -5,6 +5,7 @@ namespace Wikibase\Lib;
 use InvalidArgumentException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
 /**
  * @since 0.5
