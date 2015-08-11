@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 use Wikibase\DataModel\SiteLink;
@@ -28,7 +29,6 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DumpRdf;
-use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Repo\Test\MockEntityPerPage;
 
 /**

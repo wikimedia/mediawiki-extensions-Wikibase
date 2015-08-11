@@ -4,10 +4,10 @@ namespace Wikibase;
 
 use SiteStore;
 use Title;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
-use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
