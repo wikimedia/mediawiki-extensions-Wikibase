@@ -9,10 +9,10 @@ use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
 use Wikibase\Repo\Validators\SnakValidator;
 
@@ -39,7 +39,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	private $guidGenerator;
 
 	/**
-	 * @var ClaimGuidValidator
+	 * @var StatementGuidValidator
 	 */
 	private $guidValidator;
 
@@ -61,7 +61,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	/**
 	 * @param Statement $statement
 	 * @param GuidGenerator $guidGenerator
-	 * @param ClaimGuidValidator $guidValidator
+	 * @param StatementGuidValidator $guidValidator
 	 * @param StatementGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
 	 * @param int|null $index Where the claim should be placed among the other claims.
@@ -71,7 +71,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	public function __construct(
 		Statement $statement,
 		GuidGenerator $guidGenerator,
-		ClaimGuidValidator $guidValidator,
+		StatementGuidValidator $guidValidator,
 		StatementGuidParser $guidParser,
 		SnakValidator $snakValidator,
 		$index = null

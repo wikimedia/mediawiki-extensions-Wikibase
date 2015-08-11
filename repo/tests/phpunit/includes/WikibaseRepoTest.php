@@ -95,7 +95,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetClaimGuidValidator() {
-		$returnValue = $this->getWikibaseRepo()->getClaimGuidValidator();
+		$returnValue = $this->getWikibaseRepo()->getStatementGuidValidator();
 		$this->assertInstanceOf( 'Wikibase\Lib\ClaimGuidValidator', $returnValue );
 	}
 

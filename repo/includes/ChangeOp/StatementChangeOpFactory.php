@@ -6,9 +6,9 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\Validators\SnakValidator;
 
 /**
@@ -25,7 +25,7 @@ class StatementChangeOpFactory {
 	private $guidGenerator;
 
 	/**
-	 * @var ClaimGuidValidator
+	 * @var StatementGuidValidator
 	 */
 	private $guidValidator;
 
@@ -46,7 +46,7 @@ class StatementChangeOpFactory {
 
 	public function __construct(
 		GuidGenerator $guidGenerator,
-		ClaimGuidValidator $guidValidator,
+		StatementGuidValidator $guidValidator,
 		StatementGuidParser $guidParser,
 		SnakValidator $snakValidator,
 		SnakValidator $referenceSnakValidator
