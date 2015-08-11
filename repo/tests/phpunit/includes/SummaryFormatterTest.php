@@ -80,7 +80,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 	 * @return SummaryFormatter
 	 */
 	protected function newFormatter() {
-		$idFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$idFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 		$idFormatter->expects( $this->any() )->method( 'formatEntityId' )
 			->will( $this->returnCallback( array( $this, 'formatId' ) ) );
 

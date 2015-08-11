@@ -6,8 +6,8 @@ use Sanitizer;
 use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\Template\TemplateFactory;
 

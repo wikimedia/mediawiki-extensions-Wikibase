@@ -20,7 +20,7 @@ use Wikibase\Lib\EscapingEntityIdFormatter;
 class EscapingEntityIdFormatterTest extends PHPUnit_Framework_TestCase {
 
 	public function testFormat() {
-		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$entityIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 		$entityIdFormatter->expects( $this->once() )
 			->method( 'formatEntityId' )
 			->will( $this->returnValue( 'Q1 is &%$;§ > Q2' ) );

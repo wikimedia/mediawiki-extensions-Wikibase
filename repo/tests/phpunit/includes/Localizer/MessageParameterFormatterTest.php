@@ -11,8 +11,8 @@ use SiteStore;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 
 /**
@@ -82,7 +82,7 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function getMockIdFormatter() {
-		$mock = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$mock = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 		$mock->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnCallback(

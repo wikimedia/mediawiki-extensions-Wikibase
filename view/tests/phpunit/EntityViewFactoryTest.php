@@ -94,7 +94,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityIdFormatterFactory( $format ) {
-		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$entityIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 
 		$formatterFactory = $this->getMock( 'Wikibase\View\EntityIdFormatterFactory' );
 

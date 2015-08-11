@@ -8,8 +8,8 @@ use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\SiteLinksView;
@@ -211,7 +211,7 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function getEntityIdFormatterMock() {
-		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$entityIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 
 		$entityIdFormatter->expects( $this->any() )
 			->method( 'formatEntityId' )
