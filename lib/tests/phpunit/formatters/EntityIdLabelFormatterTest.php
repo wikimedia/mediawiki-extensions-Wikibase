@@ -7,11 +7,11 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\EntityIdLabelFormatter;
 
 /**
- * @covers Wikibase\Lib\EntityIdLabelFormatter
+ * @covers Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
