@@ -4,11 +4,11 @@ namespace Wikibase\Dumpers;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
-use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityIdPager;
 

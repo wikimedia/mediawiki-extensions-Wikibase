@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Store\SQL;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\EntityIdPager;
 
