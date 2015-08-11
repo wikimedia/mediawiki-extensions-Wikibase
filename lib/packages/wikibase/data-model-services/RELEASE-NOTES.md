@@ -21,7 +21,7 @@ Moved over various classes and interfaces from Wikibase Lib:
 * `Lookup\LanguageLabelDescriptionLookup`
 * `Lookup\TermLookup`
 * `Statement\StatementGuidValidator`
-* `Tern\PropertyLabelResolver`
+* `Term\PropertyLabelResolver`
 * `Term\TermBuffer`
 
 These have not been changed apart from now residing in a different namespace, and in some
