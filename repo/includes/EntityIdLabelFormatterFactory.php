@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo;
 
+use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\EntityIdFormatterFactory;
 
