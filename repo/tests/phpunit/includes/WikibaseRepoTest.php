@@ -66,7 +66,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetEntityLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityLookup();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityLookup', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\EntityLookup', $returnValue );
 	}
 
 	public function testGetSnakConstructionServiceReturnType() {
@@ -231,7 +231,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetTermLookup() {
 		$service = $this->getWikibaseRepo()->getTermLookup();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\TermLookup', $service );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\TermLookup', $service );
 	}
 
 	public function testGetTermBuffer() {

@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Usage;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 
 /**
  * @covers Wikibase\Client\Usage\UsageTrackingTermLookup
@@ -23,7 +23,7 @@ class UsageTrackingTermLookupTest extends \MediaWikiTestCase {
 	 * @return TermLookup
 	 */
 	private function getMockTermLookup( $method, $p1, $p2 ) {
-		$mockLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
+		$mockLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 		$mockLookup->expects( $this->once() )
 			->method( $method )
 			->with( $p1, $p2 )

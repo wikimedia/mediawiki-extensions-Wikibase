@@ -6,12 +6,12 @@ use Html;
 use InvalidArgumentException;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityRedirectLookup;
+use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 
 /**
  * Enables accessing a linked page on a site by providing the item id and site

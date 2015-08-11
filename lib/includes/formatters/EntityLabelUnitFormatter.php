@@ -6,7 +6,7 @@ use OutOfBoundsException;
 use ValueFormatters\QuantityUnitFormatter;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 
 /**
  * QuantityUnitFormatter for representing units by their respective entity label.

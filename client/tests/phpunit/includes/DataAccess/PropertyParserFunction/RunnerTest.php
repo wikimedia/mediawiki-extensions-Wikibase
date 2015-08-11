@@ -9,10 +9,10 @@ use PHPUnit_Framework_TestCase;
 use PPFrame_Hash;
 use Preprocessor_Hash;
 use Title;
+use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\DataAccess\RestrictedEntityLookup;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 
@@ -161,7 +161,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getRestrictedEntityLookup() {
 		return new RestrictedEntityLookup(
-			$this->getMock( 'Wikibase\Lib\Store\EntityLookup' ),
+			$this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' ),
 			200
 		);
 	}

@@ -7,8 +7,8 @@ use Site;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
 
@@ -71,7 +71,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return EntityRedirectLookup
 	 */
 	private function getEntityRedirectLookup() {
-		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityRedirectLookup' );
+		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityRedirectLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getRedirectForEntityId' )
 			->will( $this->returnCallback( function( ItemId $itemId ) {
@@ -103,7 +103,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return EntityLookup
 	 */
 	private function getEntitylookup() {
-		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$mock->expects( $this->any() )
 			->method( 'hasEntity' )
 			->will( $this->returnCallback( function( ItemId $itemId ) {

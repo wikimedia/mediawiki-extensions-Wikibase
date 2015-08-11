@@ -3,7 +3,7 @@
 namespace Wikibase\View;
 
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 
 /**
  * A factory interface for generating EntityIdFormatters.

@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Test\Store;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 
@@ -59,7 +59,7 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	public function getLookupDouble() {
-		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 
 		$mock->expects( $this->any() )
 			->method( 'getEntity' )

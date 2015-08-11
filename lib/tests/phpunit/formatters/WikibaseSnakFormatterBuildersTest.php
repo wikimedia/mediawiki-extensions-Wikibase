@@ -58,7 +58,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				return new DataType( $id, $typeMap[$id], array() );
 			} ) );
 
-		$termLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
+		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnValue( array( 'en' => 'Label for ' . $entityId->getSerialization() ) ) );

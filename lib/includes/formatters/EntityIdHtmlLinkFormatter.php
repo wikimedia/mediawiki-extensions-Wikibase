@@ -4,10 +4,10 @@ namespace Wikibase\Lib;
 
 use Html;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.

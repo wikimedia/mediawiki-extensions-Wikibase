@@ -8,8 +8,8 @@ use ParserOutput;
 use Sanitizer;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Provides access to the badges of the current page's sitelinks

@@ -7,8 +7,8 @@ use Parser;
 use ParserOptions;
 use Title;
 use User;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -203,7 +203,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityLookup() {
-		$entityLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityLookup' )
+		$entityLookup = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\EntityLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 

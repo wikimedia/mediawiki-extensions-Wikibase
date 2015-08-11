@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
@@ -60,7 +60,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$mock = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityLookup' )
+		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\EntityLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 

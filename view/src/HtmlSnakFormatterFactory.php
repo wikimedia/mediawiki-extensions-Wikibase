@@ -2,9 +2,9 @@
 
 namespace Wikibase\View;
 
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\LabelDescriptionLookup;
 
 /**
  * A factory constructing SnakFormatters that output HTML.

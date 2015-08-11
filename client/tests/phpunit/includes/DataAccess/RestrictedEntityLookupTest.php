@@ -19,7 +19,7 @@ use Wikibase\DataModel\Entity\ItemId;
 class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 	private function getEntityLookup() {
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 
 		$entityLookup->expects( $this->any() )
 			->method( 'hasEntity' )

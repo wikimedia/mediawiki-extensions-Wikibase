@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Store\SQL;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Store\EntityIdLookup;
 

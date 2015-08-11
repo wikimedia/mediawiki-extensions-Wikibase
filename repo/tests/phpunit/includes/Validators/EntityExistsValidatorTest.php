@@ -6,10 +6,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Test\MockRepository;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Repo\Validators\EntityExistsValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Repo\Validators\EntityExistsValidator

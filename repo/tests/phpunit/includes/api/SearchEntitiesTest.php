@@ -9,12 +9,11 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\LanguageLabelDescriptionLookup;
 use Wikibase\Repo\Api\SearchEntities;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchInteractor;
@@ -124,7 +123,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 * @return LanguageLabelDescriptionLookup
 	 */
 	private function getMockLabelDescriptionLookup() {
-		$mock = $this->getMockBuilder( 'Wikibase\Lib\Store\LabelDescriptionLookup' )
+		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )

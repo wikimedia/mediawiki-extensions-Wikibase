@@ -4,17 +4,17 @@ namespace Wikibase\Client\Tests\DataAccess\PropertyParserFunction;
 
 use DataValues\StringValue;
 use Language;
-use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
+use Wikibase\Client\PropertyLabelNotResolvedException;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -174,7 +174,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityLookup() {
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$lookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnValue(

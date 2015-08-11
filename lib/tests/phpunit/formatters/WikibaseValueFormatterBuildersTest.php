@@ -55,7 +55,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup = null ) {
-		$termLookup = $this->getMock( 'Wikibase\Lib\Store\TermLookup' );
+		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
@@ -309,7 +309,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	public function buildDispatchingValueFormatterProvider_LabelDescriptionLookupOption() {
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\Lib\Store\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'xy', 'Custom LabelDescriptionLookup' ) ) );
