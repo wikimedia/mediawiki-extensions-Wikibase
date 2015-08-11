@@ -16,6 +16,24 @@
       "revId": "77dafa83b67608698f42a2d3b755f0c9748ab465",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_aa91ed53",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 2556
+      },
+      "writtenOn": "2015-08-11T08:18:09Z",
+      "side": 1,
+      "message": "Later versions are more \"intelligent\" about this, but assume that in general a table copy will be done every time.",
+      "parentUuid": "6ec1af18_6ae9ce7a",
+      "revId": "77dafa83b67608698f42a2d3b755f0c9748ab465",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
