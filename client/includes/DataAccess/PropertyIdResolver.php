@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\PropertyLabelResolver;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 
 /**
  * Resolves the PropertyId for the input, which might be a property label or prefixed id.
