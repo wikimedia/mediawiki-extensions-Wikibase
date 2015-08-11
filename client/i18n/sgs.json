@@ -5,9 +5,9 @@
 		]
 	},
 	"wikibase-after-page-move-queued": "[$1 Vikidatas īrašos], sojongts so ton poslapio, tūjaus bus atnaujints autuomatėškā.",
-	"wikibase-dataitem": "Doumenū īrašos",
+	"wikibase-dataitem": "{{WBREPONAME}} īrašos",
 	"wikibase-editlinks": "Keistė nūruodas",
-	"wikibase-editlinkstitle": "Keistė terpkalbėnes nūruodas",
+	"wikibase-editlinkstitle": "Keistė terpkalbėnės nūruodas",
 	"wikibase-linkitem-addlinks": "Pridietė nūruodas",
 	"wikibase-linkitem-close": "Ožvertė ton longa ė poslapi perkrautė",
 	"wikibase-linkitem-title": "Sojongtė so poslapio",
@@ -16,6 +16,11 @@
 	"wikibase-linkitem-confirmitem-text": "Tamstas pasėrinkts poslapis sojongts so [$1 īrašo mūsa centrėnėm doumenū skladė] jau īr. Ožtvėrtėnkat, prašuom, ku {{PLURAL:$2|poslapis|poslapio|poslapē}}, katrėi išruodītė apačiuo, īr čīstā {{PLURAL:$2|šėts|šėto|šėtėi}}, so katrās ton poslapi sojongtė nuorat.",
 	"wikibase-linkitem-confirmitem-button": "Patvirtėnt",
 	"wikibase-linkitem-success-link": "Poslapē bova poikē sojongtė. Tamsta galat rastō īraša, katram sudietas nūoruodas mūsa [$1 centrėnė doumenū skladuo].",
-	"wikibase-rc-wikibase-edit-title": "Vikidatas elemėnta pakeitėms",
-	"wikibase-pageinfo-entity-id-none": "Nie"
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Kavuotė",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} pakeitėms",
+	"wikibase-replicationnote": "Toriekėt galvuo, kū gal praētė kelets mėnotiu pakuol keitėmā pataps regėmė visūsė wiki.",
+	"wikibase-pageinfo-entity-id-none": "Nie",
+	"wikibase-otherprojects": "Kėtūs tėnklopiūs"
 }

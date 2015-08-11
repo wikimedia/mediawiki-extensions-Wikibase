@@ -16,7 +16,8 @@
 			"Macofe",
 			"Ricordisamoa",
 			"FRacco",
-			"Alexmar983"
+			"Alexmar983",
+			"Statix64"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -88,7 +89,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|sito|siti}}",
 	"wikibase-disambiguation-title": "Disambigua per \"$1\"",
 	"wb-special-newitem-new-item-notification": "Il nuovo elemento $1 è stato creato e reindirizza alla sua pagina. Torna a $2.",
-	"wikibase-aliases-label": "Anche conosciuto come:",
 	"wikibase-aliases-input-help-message": "Per rendere più facile trovare questa entità, è possibile inserire nomi alternativi.",
 	"wikibase-aliases-empty": "Nessun alias definito.",
 	"wikibase-propertypage-datatype": "Tipo di dato",
@@ -135,6 +135,8 @@
 	"wikibase-gotolinkedpage-lookup-site": "Sito:",
 	"wikibase-gotolinkedpage-lookup-item": "ID elemento:",
 	"wikibase-gotolinkedpage-submit": "Vai",
+	"wikibase-gotolinkedpage-error-item-id-invalid": "L'ID inserito dell'elemento non è valido",
+	"wikibase-gotolinkedpage-error-item-not-found": "L'elemento non è stato trovato",
 	"special-itemdisambiguation": "Disambiguazione elementi",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Ricerca elementi per lingua ed etichetta",
 	"wikibase-itemdisambiguation-lookup-language": "Codice lingua:",

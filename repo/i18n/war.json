@@ -6,5 +6,8 @@
 	},
 	"wikibase-edit": "Igliwat",
 	"wikibase-add": "dugngi",
-	"wikibase-sitelinks-special": "Iba nga mga sityo"
+	"wikibase-statements": "Mga pamulong",
+	"wikibase-sitelinks-special": "Iba nga mga sityo",
+	"wikibase-statementview-rank-normal": "Normal nga ranggo",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|binasaran|pinanbasaran}}"
 }

@@ -10,8 +10,10 @@
 	"wikibase-edit": "е1аз",
 	"wikibase-add": "хэгъахъу",
 	"wikibase-label-empty": "Ц1э пари фэусыгъэп",
+	"wikibase-description-empty": "ГурыIоныгъэ пари итхагъэп",
 	"wikibase-statements": "Еплъык1эхэр",
 	"wikibase-sitelinks-special": "Нэмык1 сайтхэр",
 	"wikibase-aliases-empty": "Синонимхэр гъэнэфагъэхэп",
+	"wikibase-statementview-rank-normal": "Ранг нормал",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|лъапсэ|лъапсэхэр}}"
 }
