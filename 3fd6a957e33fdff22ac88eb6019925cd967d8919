@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_cfe00b96",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 401
+      },
+      "writtenOn": "2015-08-11T01:47:47Z",
+      "side": 1,
+      "message": "I just noticed there\u0027s no #mw.wikibase.entity.create section in this document after change I59ae005e, maybe this should link to #mw.wikibase.getEntity instead?",
+      "revId": "3fd6a957e33fdff22ac88eb6019925cd967d8919",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
