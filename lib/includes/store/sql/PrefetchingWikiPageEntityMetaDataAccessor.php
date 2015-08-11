@@ -4,9 +4,9 @@ namespace Wikibase\Lib\Store\Sql;
 
 use MapCacheLRU;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 

@@ -7,7 +7,7 @@ use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\ClientStore;
-use Wikibase\Lib\Store\NullEntityPrefetcher;
+use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;

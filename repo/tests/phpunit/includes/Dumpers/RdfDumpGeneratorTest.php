@@ -10,10 +10,10 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Test\Rdf\RdfBuilderTest;
 

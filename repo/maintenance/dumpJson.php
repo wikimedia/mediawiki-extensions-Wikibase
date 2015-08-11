@@ -4,11 +4,11 @@ namespace Wikibase;
 
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityPrefetcher;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;

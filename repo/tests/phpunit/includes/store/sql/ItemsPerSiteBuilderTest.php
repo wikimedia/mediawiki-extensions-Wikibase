@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\NullEntityPrefetcher;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
