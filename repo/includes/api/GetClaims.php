@@ -9,10 +9,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StatementRankSerializer;
@@ -29,7 +29,7 @@ use Wikibase\StatementRankSerializer;
 class GetClaims extends ApiBase {
 
 	/**
-	 * @var ClaimGuidValidator
+	 * @var StatementGuidValidator
 	 */
 	private $guidValidator;
 
@@ -74,7 +74,7 @@ class GetClaims extends ApiBase {
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
-		$this->guidValidator = $wikibaseRepo->getClaimGuidValidator();
+		$this->guidValidator = $wikibaseRepo->getStatementGuidValidator();
 		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 	}

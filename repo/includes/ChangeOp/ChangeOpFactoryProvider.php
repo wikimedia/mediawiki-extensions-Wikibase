@@ -5,7 +5,7 @@ namespace Wikibase\ChangeOp;
 use SiteLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -31,7 +31,7 @@ class ChangeOpFactoryProvider {
 	private $guidGenerator;
 
 	/**
-	 * @var ClaimGuidValidator
+	 * @var StatementGuidValidator
 	 */
 	private $guidValidator;
 
@@ -58,7 +58,7 @@ class ChangeOpFactoryProvider {
 	/**
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param GuidGenerator $guidGenerator
-	 * @param ClaimGuidValidator $guidValidator
+	 * @param StatementGuidValidator $guidValidator
 	 * @param StatementGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
 	 * @param TermValidatorFactory $termValidatorFactory
@@ -67,7 +67,7 @@ class ChangeOpFactoryProvider {
 	public function __construct(
 		EntityConstraintProvider $constraintProvider,
 		GuidGenerator $guidGenerator,
-		ClaimGuidValidator $guidValidator,
+		StatementGuidValidator $guidValidator,
 		StatementGuidParser $guidParser,
 		SnakValidator $snakValidator,
 		TermValidatorFactory $termValidatorFactory,

@@ -29,6 +29,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\EntityParserOutputGeneratorFactory;
@@ -37,7 +38,6 @@ use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactor
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DispatchingValueFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
@@ -135,9 +135,9 @@ class WikibaseRepo {
 	private $languageFallbackChainFactory = null;
 
 	/**
-	 * @var ClaimGuidValidator|null
+	 * @var StatementGuidValidator|null
 	 */
-	private $claimGuidValidator = null;
+	private $statementGuidValidator = null;
 
 	/**
 	 * @var EntityIdParser|null
@@ -471,7 +471,7 @@ class WikibaseRepo {
 		return new ChangeOpFactoryProvider(
 			$this->getEntityConstraintProvider(),
 			new GuidGenerator(),
-			$this->getClaimGuidValidator(),
+			$this->getStatementGuidValidator(),
 			$this->getStatementGuidParser(),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
@@ -531,14 +531,14 @@ class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
-	 * @return ClaimGuidValidator
+	 * @return StatementGuidValidator
 	 */
-	public function getClaimGuidValidator() {
-		if ( $this->claimGuidValidator === null ) {
-			$this->claimGuidValidator = new ClaimGuidValidator( $this->getEntityIdParser() );
+	public function getStatementGuidValidator() {
+		if ( $this->statementGuidValidator === null ) {
+			$this->statementGuidValidator = new StatementGuidValidator( $this->getEntityIdParser() );
 		}
 
-		return $this->claimGuidValidator;
+		return $this->statementGuidValidator;
 	}
 
 	/**
