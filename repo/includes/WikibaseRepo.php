@@ -21,6 +21,7 @@ use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\DataValue\ValuesFinder;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\DispatchingEntityIdParser;
@@ -95,7 +96,6 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
-use Wikibase\ValuesFinder;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
 
