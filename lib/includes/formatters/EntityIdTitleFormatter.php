@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**

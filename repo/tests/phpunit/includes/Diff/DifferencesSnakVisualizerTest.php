@@ -38,7 +38,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	}
 
 	public function newEntityIdLabelFormatter() {
-		$instance = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$instance = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 
 		$instance->expects( $this->any() )
 			->method( 'formatEntityId' )

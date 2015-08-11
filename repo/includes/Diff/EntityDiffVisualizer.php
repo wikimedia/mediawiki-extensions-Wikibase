@@ -12,7 +12,7 @@ use MWException;
 use SiteStore;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
 
 /**

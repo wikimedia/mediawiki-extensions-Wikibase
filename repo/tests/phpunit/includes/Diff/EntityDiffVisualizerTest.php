@@ -125,7 +125,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
 			new MockSiteStore( array( $enwiki ) ),
-			$this->getMock( 'Wikibase\Lib\EntityIdFormatter' )
+			$this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' )
 		);
 	}
 

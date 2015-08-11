@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
 /**
  * EscapingEntityIdFormatter wraps another EntityIdFormatter and

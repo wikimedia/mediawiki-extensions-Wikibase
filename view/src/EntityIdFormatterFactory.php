@@ -2,7 +2,7 @@
 
 namespace Wikibase\View;
 
-use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\Store\LabelDescriptionLookup;
 
 /**

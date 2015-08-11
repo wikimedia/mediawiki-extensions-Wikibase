@@ -90,7 +90,7 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	private function getDiffView( array $path, Diff $diff ) {
 		$siteStore = MockSiteStore::newFromTestSites();
 
-		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\EntityIdFormatter' );
+		$entityIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 		$entityIdFormatter->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnValue( 'FORMATTED BADGE ID' ) );

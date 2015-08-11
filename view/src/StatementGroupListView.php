@@ -2,8 +2,8 @@
 
 namespace Wikibase\View;
 
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
