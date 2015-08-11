@@ -12,6 +12,7 @@ use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\LanguageFallbackChain;
