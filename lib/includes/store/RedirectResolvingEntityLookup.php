@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Entity\EntityRedirectResolvingDecorator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
 /**
