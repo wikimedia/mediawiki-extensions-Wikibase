@@ -34,6 +34,24 @@
       "revId": "77dafa83b67608698f42a2d3b755f0c9748ab465",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_50535c1a",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-11T14:44:59Z",
+      "side": 1,
+      "message": "Obviously DatabaseUpdater::modifyField makes sure each update is only ever applied once to a wiki… otherwise all field changes from extensions and core would have that problem.",
+      "parentUuid": "6ec1af18_aa91ed53",
+      "revId": "77dafa83b67608698f42a2d3b755f0c9748ab465",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
