@@ -10,13 +10,16 @@
 	 *
 	 * @constructor
 	 *
+	 * @param {util.MessageProvider} messageProvider
 	 * @param {Function} getUpstreamValue
 	 * @param {Function} onValueChange
 	 */
 	ExpertExtender.UnitSelector = function(
+		messageProvider,
 		getUpstreamValue,
 		onValueChange
 	) {
+		this._messageProvider = messageProvider;
 		this._getUpstreamValue = getUpstreamValue;
 		this._onValueChange = onValueChange;
 
@@ -24,6 +27,12 @@
 	};
 
 	$.extend( ExpertExtender.UnitSelector.prototype, {
+		/**
+		 * @property {util.MessageProvider}
+		 * @private
+		 */
+		_messageProvider: null,
+
 		/**
 		 * @property {Function}
 		 * @private
@@ -49,12 +58,14 @@
 		 * @param {jQuery} $extender
 		 */
 		init: function( $extender ) {
+			var label = this._messageProvider.getMessage(
+				'valueview-expertextender-unitsuggester-label'
+			);
 			this.$selector.unitsuggester( {
 				change: this._onValueChange
 			} );
 			$extender
-				// FIXME: Use a MessageProvider!
-				.append( $( '<span>' ).text( 'Unit (optional)' ) )
+				.append( $( '<span>' ).text( label ) )
 				.append( this.$selector );
 		},
 
@@ -63,13 +74,11 @@
 		 */
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
-			if( value === '1' || value === 'http://qudt.org/vocab/unit#Unitless' ) {
+			if( value === '1'
+				|| value === 'http://qudt.org/vocab/unit#Unitless'
+				|| /^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/Q199$/i.test( value )
+			) {
 				value = null;
-			} else if( typeof value !== null ) {
-				value = value.replace( /^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/(?=Q)/i, '' );
-				if( value === 'Q199' ) {
-					value = null;
-				}
 			}
 			this.$selector.val( value );
 		},
@@ -80,6 +89,7 @@
 		destroy: function() {
 			this._getUpstreamValue = null;
 			this.$selector = null;
+			this._messageProvider = null;
 			this._onValueChange = null;
 		},
 
@@ -88,9 +98,9 @@
 		 *
 		 * @return {string|null} The current value
 		 */
-		getValue: function() {
+		getConceptUri: function() {
 			var unitSuggester = this.$selector.data( 'unitsuggester' );
-			return unitSuggester.getSelectedUri() || this.$selector.val();
+			return unitSuggester.getSelectedConceptUri() || this.$selector.val();
 		}
 	} );
 

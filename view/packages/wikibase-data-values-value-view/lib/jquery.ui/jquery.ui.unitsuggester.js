@@ -1,6 +1,8 @@
 ( function( $, util, mw ) {
 	'use strict';
 
+var PARENT = $.ui.suggester;
+
 /**
  * @class jQuery.ui.languagesuggester
  * @extends jQuery.ui.suggester
@@ -9,7 +11,7 @@
  *
  * @constructor
  */
-$.widget( 'wikibase.unitsuggester', $.ui.suggester, {
+$.widget( 'wikibase.unitsuggester', PARENT, {
 
 	/**
 	 * Options
@@ -31,7 +33,7 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	 * @property {string}
 	 * @private
 	 */
-	_selectedUri: null,
+	_selectedUrl: null,
 
 	/**
 	 * Caches retrieved results.
@@ -47,9 +49,10 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	_create: function() {
 		var self = this;
 
+		this._cache = {};
 		this.options.source = this._initDefaultSource();
 
-		$.ui.suggester.prototype._create.call( this );
+		PARENT.prototype._create.call( this );
 
 		this.element
 			.addClass( 'ui-unitsuggester-input' )
@@ -72,7 +75,7 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 
 		this._cache = {};
 
-		$.ui.suggester.prototype.destroy.call( this );
+		PARENT.prototype.destroy.call( this );
 	},
 
 	/**
@@ -81,6 +84,7 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	 * @param {jQuery.Event} event
 	 */
 	_search: function( event ) {
+		// TODO: This whole method is probably dead code now.
 		var self = this;
 
 		this._cache = {};
@@ -94,11 +98,35 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 					return;
 				}
 
+				// TODO: First found item should be pre-selected, so "save" works.
 				if( self._termMatchesSuggestion( requestTerm, suggestions[0] ) ) {
-					self._select( suggestions[0] );
+					console.log( 'DONE: '+requestTerm );
+					self._selectFirstUnit();
+//					self._trigger( 'selected', suggestions[0] );
+//					self._select( suggestions[0] );
 				}
 			} );
 		}, this.options.delay );
+	},
+
+	_selectFirstUnit: function() {
+		var menu = this.options.menu,
+			menuItems = menu.option( 'items' ),
+			url = null;
+
+		if( menuItems.length > 0 && menu.element.is( ':visible' ) ) {
+			this.options.menu.activate( menuItems[0] );
+			url = menuItems[0]._link;
+		}
+
+		if( this._selectedUrl !== url ) {
+			this._selectedUrl = url;
+			this._trigger(
+				'selected',
+				null,
+				[url]
+			);
+		}
 	},
 
 	/**
@@ -110,8 +138,8 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	 * @return {boolean}
 	 */
 	_termMatchesSuggestion: function( term, suggestion ) {
-		return ( suggestion.label && term.toLowerCase() === suggestion.label.toLowerCase() )
-			|| term === suggestion.id;
+		return ( term.toLowerCase() === suggestion.id.toLowerCase() )
+			|| ( suggestion.label && term.toLowerCase() === suggestion.label.toLowerCase() );
 	},
 
 	/**
@@ -174,7 +202,7 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	_updateMenu: function( suggestions ) {
 		var scrollTop = this.options.menu.element.scrollTop();
 
-		$.ui.suggester.prototype._updateMenu.apply( this, arguments );
+		PARENT.prototype._updateMenu.apply( this, arguments );
 
 		this.options.menu.element.scrollTop( scrollTop );
 	},
@@ -224,23 +252,23 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	 * @protected
 	 */
 	_initMenu: function( ooMenu ) {
-		var self = this;
+		var self = this,
+			retVal = PARENT.prototype._initMenu.apply( this, arguments );
 
-		$.ui.suggester.prototype._initMenu.apply( this, arguments );
-
-		$( this.options.menu )
-			.off( 'selected.suggester' )
-			.on( 'selected.unitsuggester', function( event, item ) {
-				if( item.getEntityStub ) {
-					self._close();
-					self._trigger( 'change' );
-
-					var entityStub = item.getEntityStub();
-					if( self._selectedUri === null || self._selectedUri !== entityStub.url ) {
-						self._select( entityStub );
-					}
-				}
-			} );
+		// TODO: Rename "retVal" to something meaningfull.
+		// TODO: Check if the "off" is really needed.
+		$( retVal )
+		.off( 'selected.suggester' )
+		.on( 'selected.unitsuggester', function( event, item ) {
+			if( item.getEntityStub ) {
+				// TODO: Kill the custom Item class in this file. Simply use _link instead of url.
+				self._selectedUrl = item.getEntityStub().url;
+				// TODO: Call the parent method instead and remove all lines below.
+				self.element.val( item.getValue() );
+				self._close();
+				self._trigger( 'change' );
+			}
+		} );
 
 		return ooMenu;
 	},
@@ -252,24 +280,24 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	_getSuggestions: function( term ) {
 		var self = this;
 
-		return $.ui.suggester.prototype._getSuggestions.apply( this, arguments )
-			.then( function( suggestions, searchTerm, nextSuggestionOffset ) {
-				var deferred = $.Deferred();
+		return PARENT.prototype._getSuggestions.apply( this, arguments )
+		.then( function( suggestions, searchTerm, nextSuggestionOffset ) {
+			var deferred = $.Deferred();
 
-				if( self._cache[searchTerm] ) {
-					self._cache[searchTerm].suggestions = self._cache[searchTerm].suggestions.concat( suggestions );
-					self._cache[searchTerm].nextSuggestionOffset = nextSuggestionOffset;
-				} else {
-					self._cache = {};
-					self._cache[searchTerm] = {
-						suggestions: suggestions,
-						nextSuggestionOffset: nextSuggestionOffset
-					};
-				}
+			if( self._cache[searchTerm] ) {
+				self._cache[searchTerm].suggestions = self._cache[searchTerm].suggestions.concat( suggestions );
+				self._cache[searchTerm].nextSuggestionOffset = nextSuggestionOffset;
+			} else {
+				self._cache = {};
+				self._cache[searchTerm] = {
+					suggestions: suggestions,
+					nextSuggestionOffset: nextSuggestionOffset
+				};
+			}
 
-				deferred.resolve( self._cache[searchTerm].suggestions, searchTerm );
-				return deferred.promise();
-			} );
+			deferred.resolve( self._cache[searchTerm].suggestions, searchTerm );
+			return deferred.promise();
+		} );
 	},
 
 	/**
@@ -302,7 +330,7 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	 */
 	_select: function( entityStub ) {
 		var id = entityStub && entityStub.id;
-		this._selectedUri = entityStub && entityStub.url;
+		this._selectedUrl = entityStub && entityStub.url;
 		if( id ) {
 			this._trigger( 'selected', null, [id] );
 		}
@@ -311,8 +339,8 @@ $.widget( 'wikibase.unitsuggester', $.ui.suggester, {
 	/**
 	 * @return {string}
 	 */
-	getSelectedUri: function() {
-		return this._selectedUri && this._selectedUri.replace(
+	getSelectedConceptUri: function() {
+		return this._selectedUrl && this._selectedUrl.replace(
 			/^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/(?=Q)/i,
 			'http://www.wikidata.org/entity/'
 		);

@@ -16,6 +16,7 @@
 		var self = this;
 
 		this._unitSelector = new UnitSelector(
+			this._messageProvider,
 			function() {
 				var value = self.viewState().value();
 				return value && value.getUnit();
@@ -47,8 +48,7 @@
 			var options = {};
 
 			if( this._unitSelector ) {
-				var unit = this._unitSelector.getValue();
-
+				var unit = this._unitSelector.getConceptUri();
 				if( unit ) {
 					options.unit = unit;
 				}

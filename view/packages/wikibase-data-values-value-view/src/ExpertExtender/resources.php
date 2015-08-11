@@ -121,6 +121,9 @@ return call_user_func( function() {
 				'jquery.valueview.ExpertExtender',
 				'jquery.ui.unitsuggester',
 			),
+			'messages' => array(
+				'valueview-expertextender-unitsuggester-label',
+			),
 		),
 	);
 

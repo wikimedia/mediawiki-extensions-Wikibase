@@ -22,6 +22,7 @@
 	"valueview-expertextender-calendarhint-switch-julian": "&rarr; change to Julian",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Language (mandatory): ",
+	"valueview-expertextender-unitsuggester-label": "Unit (optional): ",
 	"valueview-preview-label": "will be displayed as:",
 	"valueview-preview-novalue": "no valid value recognized",
 	"valueview-listrotator-auto": "auto"
