@@ -38,6 +38,8 @@ class DerivedPropertyValueSnak extends PropertyValueSnak {
 	 * @param PropertyId|EntityId|int $propertyId
 	 * @param DataValue $dataValue
 	 * @param DataValue[] $derivedDataValues
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		$propertyId,

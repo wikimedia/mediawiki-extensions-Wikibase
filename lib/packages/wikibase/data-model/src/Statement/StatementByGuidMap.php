@@ -26,7 +26,7 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 	private $statements = array();
 
 	/**
-	 * @param Statement[] $statements
+	 * @param Statement[]|Traversable $statements
 	 */
 	public function __construct( $statements = array() ) {
 		foreach ( $statements as $statement ) {
