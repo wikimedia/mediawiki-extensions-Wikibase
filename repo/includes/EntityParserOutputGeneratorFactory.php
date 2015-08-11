@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use ParserOptions;
+use Wikibase\DataModel\Services\DataValue\ValuesFinder;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
