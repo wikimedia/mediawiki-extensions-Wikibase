@@ -9,7 +9,6 @@ use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -60,11 +59,11 @@ class SnakValidator implements ValueValidator {
 	 * the main snak, the qualifiers, and all snaks of all references,
 	 * in case the claim is a Statement.
 	 *
-	 * @param Claim $claim The value to validate
+	 * @param Statement $claim The value to validate
 	 *
 	 * @return Result
 	 */
-	public function validateClaimSnaks( Claim $claim ) {
+	public function validateClaimSnaks( Statement $claim ) {
 		$snak = $claim->getMainSnak();
 		$result = $this->validate( $snak );
 
@@ -80,12 +79,10 @@ class SnakValidator implements ValueValidator {
 			}
 		}
 
-		if ( $claim instanceof Statement ) {
-			$result = $this->validateReferences( $claim->getReferences() );
+		$result = $this->validateReferences( $claim->getReferences() );
 
-			if ( !$result->isValid() ) {
-				return $result;
-			}
+		if ( !$result->isValid() ) {
+			return $result;
 		}
 
 		return Result::newSuccess();
