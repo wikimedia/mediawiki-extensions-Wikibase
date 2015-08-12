@@ -16,6 +16,24 @@
       "revId": "43e67d9371dda97d843d1679e324d67ae4c0ce43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_2e29889a",
+        "filename": "lib/tests/phpunit/MockRepositoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-12T09:51:58Z",
+      "side": 1,
+      "message": "Code style checkers can be greedy sometimes...",
+      "parentUuid": "8ec42329_fa506038",
+      "revId": "43e67d9371dda97d843d1679e324d67ae4c0ce43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
