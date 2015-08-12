@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_913300f3",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-12T13:34:46Z",
+      "side": 1,
+      "message": "The change to the $this-\u003esiteStore property is unrelated to everything else in this patch. I also tend to disagree that this should be changed in the first place. What you are doing here is removing a lazy initialization. As far as I can see this was done on purpose because initializing this may include reading the database and may take some time.",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_d158a837",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-12T13:34:46Z",
+      "side": 1,
+      "message": "Not a real issue, but if you are doing a new patch set anyway, please revert this change too.",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_3147ac52",
+        "filename": "view/tests/phpunit/PropertyViewTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-12T13:34:46Z",
+      "side": 1,
+      "message": "Is the \"string\" part even used in this test?",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
