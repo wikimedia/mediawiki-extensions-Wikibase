@@ -5,7 +5,6 @@ namespace Wikibase\Client\DataAccess;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -58,7 +57,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException|EntityAccessLimitException
+	 * @throws EntityAccessLimitException
 	 * @return EntityDocument|null
 	 */
 	public function getEntity( EntityId $entityId ) {
@@ -85,7 +84,6 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {

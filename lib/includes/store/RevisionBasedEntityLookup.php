@@ -35,7 +35,6 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
 	 * @return EntityDocument|null
 	 */
 	public function getEntity( EntityId $entityId ) {
@@ -48,7 +47,6 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
