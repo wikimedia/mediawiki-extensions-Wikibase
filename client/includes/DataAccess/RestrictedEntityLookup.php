@@ -2,8 +2,10 @@
 
 namespace Wikibase\Client\DataAccess;
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
 
 /**
