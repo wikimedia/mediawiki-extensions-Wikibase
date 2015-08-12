@@ -50,9 +50,11 @@ class SerializationModifier {
 	private function setArrayValueAtKey( &$array, $path, $value ) {
 		$current = &$array;
 		$pathParts = $this->getPathParts( $path );
+
 		foreach ( $pathParts as $key ) {
 			$current = &$current[$key];
 		}
+
 		$current = $value;
 	}
 
@@ -86,7 +88,6 @@ class SerializationModifier {
 					$this->getElementsForKey( $array, $pathElements, $currentPath, $currentKey )
 				);
 			}
-
 		}
 
 		return $elements;
