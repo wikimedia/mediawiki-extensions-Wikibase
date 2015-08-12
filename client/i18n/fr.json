@@ -58,6 +58,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Vous devez être connecté",
 	"wikibase-linkitem-not-loggedin": "Vous devez être connecté sur ce wiki et dans l’[$1 entrepôt central de données] pour utiliser cette fonctionnalité.",
 	"wikibase-linkitem-success-link": "Les pages ont bien été liées. Vous pouvez trouver l’élément contenant les liens dans notre [$1 entrepôt central de données].",
+	"wikibase-limitreport-entities-accessed": "Nombre d’entités Wikibase chargées",
 	"wikibase-property-notfound": "Propriété $1 non trouvée.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Masquer",

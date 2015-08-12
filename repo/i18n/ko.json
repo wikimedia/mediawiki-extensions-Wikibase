@@ -9,7 +9,8 @@
 			"Revi",
 			"Macofe",
 			"SeoJeongHo",
-			"Alex00728"
+			"Alex00728",
+			"Hwangjy9"
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
@@ -117,7 +118,7 @@
 	"wikibase-itembytitle-lookup-page": "문서:",
 	"wikibase-itembytitle-submit": "검색",
 	"wikibase-itembytitle-create": "또한 [$1 항목을 만들] 수 있습니다.",
-	"wikibase-itembytitle-summary": "Special:ItemByTitle은 연결된 사이트의 특정 문서와 대응되는 항목을 찾는 데 쓰입니다. <br /> 왼쪽 칸의 \"사이트:\"에는 언어나 사이트 코드를 입력하십시오. <br /> 오른쪽 칸의 \"문서:\"에는 연결된 사이트에 있는 문서의 정확한 제목을 입력해야 합니다.",
+	"wikibase-itembytitle-summary": "Special:ItemByTitle은 연결된 사이트의 특정 문서와 대응되는 항목을 찾는 데 쓰입니다. <br /> 첫째 칸의 \"사이트:\"에는 언어나 사이트 코드를 입력하십시오. <br /> 둘째 칸의 \"문서:\"에는 연결된 사이트에 있는 문서의 정확한 제목을 입력해야 합니다.",
 	"special-gotolinkedpage": "링크된 문서로 이동",
 	"wikibase-gotolinkedpage-lookup-fieldset": "사이트와 항목을 통해 링크된 페이지로 이동",
 	"wikibase-gotolinkedpage-lookup-site": "사이트:",
