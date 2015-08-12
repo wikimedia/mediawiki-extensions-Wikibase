@@ -27,7 +27,7 @@ class EntityDiff extends Diff {
 			return new ItemDiff( $operations );
 		}
 		else {
-			return new EntityDiff( $operations );
+			return new self( $operations );
 		}
 	}
 
