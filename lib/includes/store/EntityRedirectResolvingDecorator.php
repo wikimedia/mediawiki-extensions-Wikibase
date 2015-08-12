@@ -69,6 +69,8 @@ class EntityRedirectResolvingDecorator {
 	 *
 	 * This essentially adds transparent redirect resolution to the respective methods of the
 	 * target object.
+	 *
+	 * @throws UnresolvedRedirectException
 	 */
 	public function __call( $name, $arguments ) {
 		$retries = $this->maxResolutionDepth;
