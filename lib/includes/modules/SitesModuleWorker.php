@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use MediaWikiSite;
-use ResourceLoaderModule;
 use Site;
 use SiteList;
 use SiteStore;
