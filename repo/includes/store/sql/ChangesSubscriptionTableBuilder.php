@@ -128,7 +128,7 @@ class ChangesSubscriptionTableBuilder {
 			} else {
 				break;
 			}
-		};
+		}
 	}
 
 	/**

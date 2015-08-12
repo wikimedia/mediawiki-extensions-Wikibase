@@ -120,7 +120,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return false;
 		}
 
-		try{
+		try {
 			$this->checkTermChangePermissions( $this->entityRevision->getEntity() );
 		} catch ( PermissionsError $e ) {
 			$this->showErrorHTML( $this->msg( 'permissionserrors' ) . ': ' . $e->permission );

@@ -87,7 +87,7 @@ class ItemsPerSiteBuilder {
 			$i = $i + $this->rebuildSiteLinks( $ids );
 
 			$this->report( 'Processed ' . $i . ' entities.' );
-		};
+		}
 
 		$this->report( 'Rebuild done.' );
 	}

@@ -127,7 +127,7 @@ class PageEntityUsages {
 	public function equals( PageEntityUsages $other ) {
 		if ( !$other->getPageId() === $this->getPageId() ) {
 			return false;
-		} elseif( array_keys( $other->getUsages() ) != array_keys( $this->getUsages() ) ) {
+		} elseif ( array_keys( $other->getUsages() ) != array_keys( $this->getUsages() ) ) {
 			return false;
 		}
 
