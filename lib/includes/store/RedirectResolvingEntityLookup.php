@@ -22,7 +22,7 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 *
 	 * @note This does not formally implement EntityLookup!
 	 *
-	 * @var EntityLookup
+	 * @var EntityLookup|EntityRedirectResolvingDecorator
 	 */
 	protected $lookup;
 
@@ -44,7 +44,8 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
+	 * @throws UnresolvedRedirectException
+	 *
 	 * @return EntityDocument|null
 	 */
 	public function getEntity( EntityId $entityId ) {
@@ -59,7 +60,8 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
+	 * @throws UnresolvedRedirectException
+	 *
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {

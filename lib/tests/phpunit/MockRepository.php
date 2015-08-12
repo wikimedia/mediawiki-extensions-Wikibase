@@ -103,11 +103,13 @@ class MockRepository implements
 	 * @param EntityId $entityId
 	 *
 	 * @return EntityDocument|null
-	 *
-	 * @throws StorageException
 	 */
 	public function getEntity( EntityId $entityId ) {
-		$revision = $this->getEntityRevision( $entityId );
+		try{
+			$revision = $this->getEntityRevision( $entityId );
+		} catch ( StorageException $exception ) {
+			return null;
+		}
 
 		return $revision === null ? null : unserialize( serialize( $revision->getEntity() ) );
 	}
