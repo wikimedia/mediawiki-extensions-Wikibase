@@ -8,10 +8,10 @@ use Language;
 use Status;
 use UsageException;
 use ValueParsers\ParseException;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
-use Wikibase\Repo\Api\ApiErrorReporter;
 
 /**
  * @covers Wikibase\Repo\Api\ApiErrorReporter

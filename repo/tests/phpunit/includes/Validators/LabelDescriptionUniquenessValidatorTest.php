@@ -12,8 +12,8 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Test\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\LabelDescriptionUniquenessValidator;
+use Wikibase\Test\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\Repo\Validators\LabelDescriptionUniquenessValidator

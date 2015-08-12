@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
-use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;

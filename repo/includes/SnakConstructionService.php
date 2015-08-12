@@ -4,7 +4,6 @@ namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
-use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\PropertyId;

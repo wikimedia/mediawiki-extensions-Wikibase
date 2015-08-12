@@ -6,8 +6,8 @@ use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store\SQL\WikiPageEntityRedirectLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Store\SQL\WikiPageEntityRedirectLookup

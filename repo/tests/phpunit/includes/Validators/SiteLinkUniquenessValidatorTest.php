@@ -5,8 +5,8 @@ namespace Wikibase\Test\Repo\Validators;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
-use Wikibase\Test\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\SiteLinkUniquenessValidator;
+use Wikibase\Test\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\Repo\Validators\SiteLinkUniquenessValidator

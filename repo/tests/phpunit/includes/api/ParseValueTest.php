@@ -11,11 +11,10 @@ use ValueParsers\NullParser;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ParseValue;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
-use Wikibase\Repo\Validators\DataFieldValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
+use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Validators\RegexValidator;
 
 /**
  * @covers Wikibase\Repo\Api\ParseValue

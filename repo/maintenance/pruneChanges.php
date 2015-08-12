@@ -3,10 +3,10 @@
 namespace Wikibase;
 
 use Maintenance;
-use Wikibase\Repo\PidLock;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Repo\ChangePruner;
+use Wikibase\Repo\PidLock;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
