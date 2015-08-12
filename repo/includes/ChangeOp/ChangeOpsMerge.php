@@ -195,9 +195,9 @@ class ChangeOpsMerge {
 	}
 
 	private function generateSitelinksChangeOps() {
-		foreach ( $this->fromItem->getSiteLinks() as $fromSiteLink ) {
-			$siteId = $fromSiteLink->getSiteId();
-			if ( !$this->toItem->hasLinkToSite( $siteId ) ) {
+		foreach ( $this->fromItem->getSiteLinkList()->toArray() as $fromSiteLink ) {
+
+			if ( !$this->toItem->getSiteLinkList()->hasLinkWithSiteId( $fromSiteLink->getSiteId() ) ) {
 				$this->generateSitelinksChangeOpsWithNoConflict( $fromSiteLink );
 			} else {
 				$this->generateSitelinksChangeOpsWithConflict( $fromSiteLink );
