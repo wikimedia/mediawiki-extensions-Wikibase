@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_e9185a7c",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-12T10:02:17Z",
+      "side": 1,
+      "message": "At a guess could we not fix this fixme now?",
+      "revId": "e59f62c81614f6ac88ef2ac03053bd57ce908cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
