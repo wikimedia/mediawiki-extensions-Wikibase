@@ -102,12 +102,18 @@ class MockRepository implements
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return EntityDocument|null
-	 *
-	 * @throws StorageException
+	 * @return null|EntityDocument
+	 * @throws UnresolvedRedirectException
 	 */
 	public function getEntity( EntityId $entityId ) {
-		$revision = $this->getEntityRevision( $entityId );
+		try {
+			$revision = $this->getEntityRevision( $entityId );
+		} catch ( StorageException $exception ) {
+			if ( $exception instanceof UnresolvedRedirectException ) {
+				throw $exception;
+			}
+			return null;
+		}
 
 		return $revision === null ? null : unserialize( serialize( $revision->getEntity() ) );
 	}
@@ -395,15 +401,11 @@ class MockRepository implements
 	 * @return Entity
 	 */
 	public function removeEntity( EntityId $entityId ) {
-		try {
-			$oldEntity = $this->getEntity( $entityId );
+		$oldEntity = $this->getEntity( $entityId );
 
-			if ( $oldEntity && ( $oldEntity instanceof Item ) ) {
-				// clean up old sitelinks
-				$this->unregisterSiteLinks( $entityId );
-			}
-		} catch ( StorageException $ex ) {
-			$oldEntity = null; // ignore
+		if ( $oldEntity && ( $oldEntity instanceof Item ) ) {
+			// clean up old sitelinks
+			$this->unregisterSiteLinks( $entityId );
 		}
 
 		$key = $entityId->getSerialization();

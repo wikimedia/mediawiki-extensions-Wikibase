@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\DataAccess;
 use Wikibase\Client\DataAccess\RestrictedEntityLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 
 /**
  * @covers Wikibase\Client\DataAccess\RestrictedEntityLookup
@@ -18,6 +19,9 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return EntityLookup
+	 */
 	private function getEntityLookup() {
 		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 

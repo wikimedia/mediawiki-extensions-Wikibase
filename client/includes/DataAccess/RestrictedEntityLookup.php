@@ -58,7 +58,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException|EntityAccessLimitException
+	 * @throws EntityAccessLimitException
 	 * @return EntityDocument|null
 	 */
 	public function getEntity( EntityId $entityId ) {
@@ -85,7 +85,6 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
