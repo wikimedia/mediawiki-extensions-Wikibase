@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_71cd3462",
+        "filename": "lib/tests/phpunit/MockRepositoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-12T14:47:23Z",
+      "side": 1,
+      "message": "setNewSiteLink works.",
+      "revId": "f37981d2e1356b880da694d37093062794984139",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
