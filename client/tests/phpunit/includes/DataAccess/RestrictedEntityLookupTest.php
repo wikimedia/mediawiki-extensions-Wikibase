@@ -63,7 +63,7 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException Wikibase\Client\DataAccess\EntityAccessLimitException
+	 * @expectedException \Wikibase\Client\DataAccess\EntityAccessLimitException
 	 */
 	public function testGetEntity_exception() {
 		$lookup = new RestrictedEntityLookup( $this->getEntityLookup(), 3 );
