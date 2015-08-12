@@ -26,8 +26,10 @@ use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
+use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\RedirectRevision;
@@ -50,6 +52,11 @@ class MockRepository implements
 	SiteLinkLookup,
 	SiteLinkConflictLookup
 {
+
+	/**
+	 * @var SiteLinkStore
+	 */
+	private $siteLinkStore;
 
 	/**
 	 * Entity id serialization => array of EntityRevision
@@ -96,6 +103,10 @@ class MockRepository implements
 	 * @var int
 	 */
 	private $maxRevisionId = 0;
+
+	public function __construct() {
+		$this->siteLinkStore = new HashSiteLinkStore();
+	}
 
 	/**
 	 * @see EntityLookup::getEntity
@@ -232,16 +243,7 @@ class MockRepository implements
 	 * @return ItemId|null
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
-		// We store page titles with spaces instead of underscores
-		$pageTitle = str_replace( '_', ' ', $pageTitle );
-
-		$key = "$globalSiteId:$pageTitle";
-
-		if ( isset( $this->itemByLink[$key] ) ) {
-			return ItemId::newFromNumber( $this->itemByLink[$key] );
-		} else {
-			return null;
-		}
+		return $this->siteLinkStore->getItemIdForLink( $globalSiteId, $pageTitle );
 	}
 
 	/**
@@ -252,14 +254,7 @@ class MockRepository implements
 	 * @return ItemId|null
 	 */
 	public function getItemIdForSiteLink( SiteLink $siteLink ) {
-		$globalSiteId = $siteLink->getSiteId();
-		$pageName = $siteLink->getPageName();
-
-		// @todo: fix test data to use titles with underscores, like the site link table does it
-		$title = Title::newFromText( $pageName );
-		$pageTitle = $title->getDBkey();
-
-		return $this->getItemIdForLink( $globalSiteId, $pageTitle );
+		return $this->siteLinkStore->getItemIdForSiteLink( $siteLink );
 	}
 
 	/**
@@ -268,16 +263,7 @@ class MockRepository implements
 	 * @param Item $item
 	 */
 	private function registerSiteLinks( Item $item ) {
-		$itemId = $item->getId();
-		$numericId = $itemId->getNumericId();
-
-		$this->unregisterSiteLinks( $itemId );
-
-		/** @var SiteLink $siteLink */
-		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			$key = $siteLink->getSiteId() . ':' . $siteLink->getPageName();
-			$this->itemByLink[$key] = $numericId;
-		}
+		$this->siteLinkStore->saveLinksOfItem( $item );
 	}
 
 	/**
@@ -286,13 +272,7 @@ class MockRepository implements
 	 * @param ItemId $itemId
 	 */
 	private function unregisterSiteLinks( ItemId $itemId ) {
-		$numericId = $itemId->getNumericId();
-
-		foreach ( $this->itemByLink as $key => $n ) {
-			if ( $n === $numericId ) {
-				unset( $this->itemByLink[$key] );
-			}
-		}
+		$this->siteLinkStore->deleteLinksOfItem( $itemId );
 	}
 
 	/**
@@ -423,58 +403,7 @@ class MockRepository implements
 	 * @return array[]
 	 */
 	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
-		$links = array();
-
-		foreach ( array_keys( $this->entities ) as $idString ) {
-			$itemId = $this->parseId( $idString );
-
-			if ( !( $itemId instanceof ItemId ) ) {
-				continue;
-			}
-
-			if ( !empty( $numericIds ) && !in_array( $itemId->getNumericId(), $numericIds ) ) {
-				continue;
-			}
-
-			/** @var Item $item */
-			$item = $this->getEntity( $itemId );
-
-			/** @var SiteLink $siteLink */
-			foreach ( $item->getSiteLinkList() as $siteLink ) {
-				if ( $this->linkMatches( $item, $siteLink, $numericIds, $siteIds, $pageNames ) ) {
-					$links[] = array(
-						$siteLink->getSiteId(),
-						$siteLink->getPageName(),
-						$item->getId()->getNumericId(),
-					);
-				}
-			}
-		}
-
-		return $links;
-	}
-
-	/**
-	 * Returns true if the link matches the given conditions.
-	 *
-	 * @param Item     $item
-	 * @param SiteLink $siteLink
-	 * @param int[] $numericIds Numeric (unprefixed) item ids
-	 * @param string[] $siteIds
-	 * @param string[] $pageNames
-	 *
-	 * @return bool
-	 */
-	private function linkMatches(
-		Item $item,
-		SiteLink $siteLink,
-		array $numericIds,
-		array $siteIds = array(),
-		array $pageNames = array()
-	) {
-		return ( empty( $numericIds ) || in_array( $item->getId()->getNumericId(), $numericIds ) )
-			&& ( empty( $siteIds ) || in_array( $siteLink->getSiteId(), $siteIds ) )
-			&& ( empty( $pageNames ) || in_array( $siteLink->getPageName(), $pageNames ) );
+		return $this->siteLinkStore->getLinks( $numericIds, $siteIds, $pageNames );
 	}
 
 	/**
@@ -514,14 +443,7 @@ class MockRepository implements
 	 * @return SiteLink[]
 	 */
 	public function getSiteLinksForItem( ItemId $itemId ) {
-		$entity = $this->getEntity( $itemId );
-
-		if ( $entity instanceof Item ) {
-			return $entity->getSiteLinks();
-		}
-
-		// FIXME: throw InvalidArgumentException rather then failing silently
-		return array();
+		return $this->siteLinkStore->getSiteLinksForItem( $itemId );
 	}
 
 	/**
