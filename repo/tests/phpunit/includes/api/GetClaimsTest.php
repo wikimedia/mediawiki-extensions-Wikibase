@@ -77,7 +77,7 @@ class GetClaimsTest extends ApiTestCase {
 			$this->save( $item );
 		}
 
-		/** @var $statements Statement[] */
+		/** @var Statement[] $statements */
 		$statements[0] = new Statement( new PropertyNoValueSnak( $propertyId ) );
 		$statements[1] = new Statement( new PropertyNoValueSnak( $propertyId ) );
 		$statements[2] = new Statement( new PropertySomeValueSnak( $propertyId ) );

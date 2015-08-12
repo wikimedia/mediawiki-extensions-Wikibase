@@ -307,7 +307,7 @@ class ChangeOpsMerge {
 	 * @param Statement $toStatement statement to add references to
 	 */
 	private function generateReferencesChangeOps( Statement $fromStatement, Statement $toStatement ) {
-		/** @var $reference Reference */
+		/** @var Reference $reference */
 		foreach ( $fromStatement->getReferences() as $reference ) {
 			if ( !$toStatement->getReferences()->hasReferenceHash( $reference->getHash() ) ) {
 				$this->toChangeOps->add( $this->getStatementChangeOpFactory()->newSetReferenceOp(

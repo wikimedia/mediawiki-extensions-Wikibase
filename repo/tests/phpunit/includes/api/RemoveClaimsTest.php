@@ -48,7 +48,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			self::$propertyId = $this->getNewProperty( 'string' )->getId();
 		}
 
-		/** @var $statements Statement[] */
+		/** @var Statement[] $statements */
 		$statements = array(
 			new Statement( new PropertyNoValueSnak( self::$propertyId ) ),
 			new Statement( new PropertyNoValueSnak( self::$propertyId ) ),

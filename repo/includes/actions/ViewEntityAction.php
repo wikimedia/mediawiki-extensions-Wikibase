@@ -162,7 +162,7 @@ abstract class ViewEntityAction extends ViewAction {
 					$this->getTitle()->getPrefixedText(),
 					wfMessage( 'missingarticle-rev', $oldid )->plain() )->plain();
 			} else {
-				/** @var $entityHandler EntityHandler */
+				/** @var EntityHandler $entityHandler */
 				$entityHandler = ContentHandler::getForTitle( $this->getTitle() );
 				$entityCreationPage = $entityHandler->getSpecialPageForCreation();
 
