@@ -9,7 +9,7 @@ use InvalidArgumentException;
 /**
  * Class for changes that can be represented as a Diff.
  *
- * @since 1.1
+ * @since 1.2
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
