@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Exception;
-use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Lib\MessageException;
+use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 
 /**
  * @covers Wikibase\Repo\Localizer\MessageExceptionLocalizer

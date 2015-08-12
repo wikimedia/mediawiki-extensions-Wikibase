@@ -10,8 +10,8 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
-use Wikibase\Summary;
 use Wikibase\Repo\Validators\SnakValidator;
+use Wikibase\Summary;
 
 /**
  * Class for mainsnak change operation

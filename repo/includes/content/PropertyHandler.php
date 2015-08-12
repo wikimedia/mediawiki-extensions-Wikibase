@@ -15,10 +15,10 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\TermIndex;
-use Wikibase\Updates\DataUpdateAdapter;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\TermIndex;
+use Wikibase\Updates\DataUpdateAdapter;
 
 /**
  * Content handler for Wikibase items.

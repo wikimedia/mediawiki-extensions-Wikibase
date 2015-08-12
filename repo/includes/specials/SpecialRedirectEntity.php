@@ -7,10 +7,10 @@ use Html;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
-use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
+use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
