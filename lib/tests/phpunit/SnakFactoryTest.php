@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test;
 
-use DataValues\DataValueFactory;
-use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
