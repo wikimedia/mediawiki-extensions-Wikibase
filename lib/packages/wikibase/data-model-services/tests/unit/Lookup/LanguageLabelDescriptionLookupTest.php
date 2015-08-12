@@ -20,7 +20,7 @@ class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 		$termLookup->expects( $this->once() )
 			->method( 'getLabel' )
 			->with( $this->equalTo( new ItemId( 'Q42' ) ), $this->equalTo( 'language_code' ) )
-			->willReturn( 'term_text' );
+			->will( $this->returnValue( 'term_text' ) );
 
 		$lookup = new LanguageLabelDescriptionLookup( $termLookup, 'language_code' );
 
@@ -36,7 +36,7 @@ class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 		$termLookup->expects( $this->once() )
 			->method( 'getDescription' )
 			->with( $this->equalTo( new ItemId( 'Q42' ) ), $this->equalTo( 'language_code' ) )
-			->willReturn( 'term_text' );
+			->will( $this->returnValue( 'term_text' ) );
 
 		$lookup = new LanguageLabelDescriptionLookup( $termLookup, 'language_code' );
 
