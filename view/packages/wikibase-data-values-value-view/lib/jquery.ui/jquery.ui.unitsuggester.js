@@ -64,6 +64,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 		.off( 'blur' )
 		.on( 'eachchange.' + this.widgetName, function( event ) {
 			self._search( event );
+			self._trigger( 'change' );
 		} );
 	},
 
@@ -84,29 +85,23 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 * @param {jQuery.Event} event
 	 */
 	_search: function( event ) {
-		// TODO: This whole method is probably dead code now.
 		var self = this;
-
 		this._cache = {};
 		this._select( null );
 
+		self._term = self.element.val();
+
 		clearTimeout( this._searchTimeoutHandle );
 		this._searchTimeoutHandle = setTimeout( function() {
-			self.search( event )
-			.done( function( suggestions, requestTerm ) {
-				if( !suggestions.length || self.element.val() !== requestTerm ) {
-					return;
-				}
-
-				// TODO: First found item should be pre-selected, so "save" works.
-				if( self._termMatchesSuggestion( requestTerm, suggestions[0] ) ) {
-					console.log( 'DONE: '+requestTerm );
+			self.search()
+			.done( function( suggestions ) {
+				if( self.options.menu.element.is( ':visible' ) ) {
 					self._selectFirstUnit();
-//					self._trigger( 'selected', suggestions[0] );
-//					self._select( suggestions[0] );
+				} else {
+					self._trigger( 'selected', null, [null] );
 				}
 			} );
-		}, this.options.delay );
+		}, self.options.delay );
 	},
 
 	_selectFirstUnit: function() {
@@ -252,12 +247,11 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 * @protected
 	 */
 	_initMenu: function( ooMenu ) {
-		var self = this,
-			retVal = PARENT.prototype._initMenu.apply( this, arguments );
+		var self = this;
 
-		// TODO: Rename "retVal" to something meaningfull.
-		// TODO: Check if the "off" is really needed.
-		$( retVal )
+		$.ui.suggester.prototype._initMenu.apply( this, arguments );
+
+		$( this.options.menu )
 		.off( 'selected.suggester' )
 		.on( 'selected.unitsuggester', function( event, item ) {
 			if( item.getEntityStub ) {
@@ -267,6 +261,14 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 				self.element.val( item.getValue() );
 				self._close();
 				self._trigger( 'change' );
+			}
+		} );
+
+		this.options.menu.element
+		.on( 'mouseleave', function() {
+			if( self.options.menu.element.is( ':visible' ) ) {
+				self._selectedSite = null;
+				self._selectFirstUnit();
 			}
 		} );
 
