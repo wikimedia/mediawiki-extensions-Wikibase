@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Services\Diff;
 
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOpFactory as DiffDiffOpFactory;
+use InvalidArgumentException;
 
 /**
  * Class for changes that can be represented as a Diff.
@@ -15,6 +16,12 @@ use Diff\DiffOpFactory as DiffDiffOpFactory;
  */
 class DiffOpFactory extends DiffDiffOpFactory {
 
+	/**
+	 * @param array $diffOp
+	 *
+	 * @return DiffOp
+	 * @throws InvalidArgumentException
+	 */
 	public function newFromArray( array $diffOp ) {
 		$this->assertHasKey( 'type', $diffOp );
 
@@ -35,8 +42,6 @@ class DiffOpFactory extends DiffDiffOpFactory {
 	/**
 	 * Converts a list of diff operations represented by arrays into a list of
 	 * DiffOp objects.
-	 *
-	 * @todo: pull this up into DiffOpFactory
 	 *
 	 * @param array $data the input data
 	 * @return DiffOp[] The diff ops
