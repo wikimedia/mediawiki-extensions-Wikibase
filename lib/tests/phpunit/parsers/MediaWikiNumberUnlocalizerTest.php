@@ -67,7 +67,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 			foreach ( $numbers as $num ) {
 				$cases[] = array( $num, $lang );
 			}
-		};
+		}
 
 		return $cases;
 	}

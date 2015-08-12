@@ -235,7 +235,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 					if ( isset( $siteLinkDiff[ $this->localSiteId ] ) ) {
 						$break = true;
 						$breakNext = true;
-					};
+					}
 				}
 
 				// FIXME: We should call changeNeedsRendering() and see if the needs-rendering

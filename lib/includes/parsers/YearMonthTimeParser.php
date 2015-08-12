@@ -106,7 +106,7 @@ class YearMonthTimeParser extends StringValueParser {
 
 		if ( !$this->canBeMonth( $a ) && $this->canBeMonth( $b ) ) {
 			return $this->getTimeFromYearMonth( $a, $b );
-		} elseif( $this->canBeMonth( $a ) ) {
+		} elseif ( $this->canBeMonth( $a ) ) {
 			return $this->getTimeFromYearMonth( $b, $a );
 		}
 

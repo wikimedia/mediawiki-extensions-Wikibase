@@ -151,7 +151,7 @@ class BulkSubscriptionUpdater {
 			} else {
 				break;
 			}
-		};
+		}
 	}
 
 	/**
@@ -292,7 +292,7 @@ class BulkSubscriptionUpdater {
 			} else {
 				break;
 			}
-		};
+		}
 	}
 
 	/**

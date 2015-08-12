@@ -91,7 +91,7 @@ class SetReference extends ModifyClaim {
 
 		$deserializer = $this->deserializerFactory->newSnakListDeserializer();
 		/** @var SnakList $snakList */
-		try{
+		try {
 			$snakList = $deserializer->deserialize( $this->getArrayFromParam( $params['snaks'] ) );
 		} catch ( DeserializationException $e ) {
 			$this->errorReporter->dieError(

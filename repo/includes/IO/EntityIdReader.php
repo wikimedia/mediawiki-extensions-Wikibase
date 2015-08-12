@@ -115,7 +115,7 @@ class EntityIdReader implements EntityIdPager, Disposable {
 				$id = null;
 				continue;
 			}
-		};
+		}
 
 		return $id;
 	}
