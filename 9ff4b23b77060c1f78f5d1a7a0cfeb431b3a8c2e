@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_f12fe4f1",
+        "filename": "lib/tests/phpunit/LanguageFallbackChainFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-12T14:49:22Z",
+      "side": 1,
+      "message": "Replace with newFromContextAndLanguageCode and keep the language code.",
+      "revId": "9ff4b23b77060c1f78f5d1a7a0cfeb431b3a8c2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
