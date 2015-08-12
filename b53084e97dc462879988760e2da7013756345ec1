@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_29474224",
+        "filename": "lib/WikibaseLib.datatypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-12T10:59:21Z",
+      "side": 1,
+      "message": "I don\u0027t like the \"is supposed to be merged into $wgWBRepoDataTypes\". It\u0027s a type of dependency in the wrong direction. Would not be if the concrete details where omitted.",
+      "revId": "b53084e97dc462879988760e2da7013756345ec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
