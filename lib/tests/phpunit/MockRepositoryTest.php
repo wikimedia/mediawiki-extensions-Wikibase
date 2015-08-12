@@ -152,7 +152,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( null, $this->repo->getItemIdForLink( 'xywiki', 'Foo' ) );
 
 		// test lookup after item modification
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Bar' ), 'set' );
+		$item->getSiteLinkList()->setNewSiteLink( 'enwiki', 'Bar' );
 		$this->repo->putEntity( $item );
 
 		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
