@@ -218,8 +218,7 @@ class EntityDataSerializationService {
 		$serializer = $this->createApiSerializer( $formatName );
 
 		if ( $serializer ) {
-			$redirect = ( $followedRedirect ? $followedRedirect->getRedirect() : null );
-			$data = $this->apiSerialize( $entityRevision, $redirect, $incomingRedirects, $serializer );
+			$data = $this->apiSerialize( $entityRevision, $serializer );
 			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
 		} else {
 			$rdfBuilder = $this->createRdfBuilder( $formatName, $flavor );
@@ -475,8 +474,6 @@ class EntityDataSerializationService {
 	 */
 	private function apiSerialize(
 		EntityRevision $entityRevision,
-		EntityRedirect $followedRedirect = null,
-		array $incomingRedirects,
 		ApiFormatBase $printer
 	) {
 		// NOTE: The way the ApiResult is provided to $printer is somewhat
