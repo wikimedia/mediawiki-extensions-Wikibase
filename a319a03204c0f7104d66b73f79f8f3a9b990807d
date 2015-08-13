@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_9353fb19",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-13T13:36:03Z",
+      "side": 1,
+      "message": "I\u0027m curious what the intent here is. What is gained by injecting this? Do you also want to inject all other fields?",
+      "parentUuid": "6ec1af18_913300f3",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_b3587736",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-13T13:36:03Z",
+      "side": 1,
+      "message": "I prefer the old form. No need to pull the global into local scope, or by having two lines to look at with other stuff in between.",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_d158a837",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 10
