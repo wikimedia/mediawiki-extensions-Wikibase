@@ -16,6 +16,24 @@
       "revId": "3fd6a957e33fdff22ac88eb6019925cd967d8919",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_70ca054c",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-13T12:31:02Z",
+      "side": 1,
+      "message": "Feel free to add that, but make sure to point out that people aren\u0027t supposed to call .create directly.",
+      "parentUuid": "6ec1af18_cfe00b96",
+      "revId": "3fd6a957e33fdff22ac88eb6019925cd967d8919",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
