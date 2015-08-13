@@ -204,18 +204,18 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
-	public function testInvalidRequest( $itemHandle, $claimGuid, $propertyHande, $snakType, $value, $error ) {
+	public function testInvalidRequest( $itemHandle, $guid, $propertyHande, $snakType, $value, $error ) {
 		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
 		$propertyId = EntityTestHelper::getId( $propertyHande );
 
-		if ( $claimGuid === null ) {
-			$claims = $item->getClaims();
-
-			/* @var Claim $claim */
-			$claim = reset( $claims );
-			$claimGuid = $claim->getGuid();
+		if ( $guid === null ) {
+			/** @var Item $item */
+			$statements = $item->getStatements()->toArray();
+			/** @var Statement $statement */
+			$statement = reset( $statements );
+			$guid = $statement->getGuid();
 		}
 
 		if ( !is_string( $value ) ) {
@@ -224,7 +224,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 		$params = array(
 			'action' => 'wbsetqualifier',
-			'claim' => $claimGuid,
+			'claim' => $guid,
 			'property' => $propertyId,
 			'snaktype' => $snakType,
 			'value' => $value,

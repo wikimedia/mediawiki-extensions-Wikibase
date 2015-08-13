@@ -142,8 +142,8 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 
 		$claimHtmlGenerator->expects( $this->any() )
 			->method( 'getHtmlForClaim' )
-			->will( $this->returnCallback( function( Claim $claim, $editSectionHtml = null ) {
-				return $claim->getGuid();
+			->will( $this->returnCallback( function( Statement $statement, $editSectionHtml = null ) {
+				return $statement->getGuid();
 			} ) );
 
 		return $claimHtmlGenerator;

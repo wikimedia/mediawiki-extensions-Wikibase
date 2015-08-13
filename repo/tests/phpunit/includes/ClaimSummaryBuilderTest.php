@@ -6,7 +6,6 @@ use DataValues\StringValue;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Wikibase\ClaimSummaryBuilder;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -43,9 +42,9 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return Claim[]
+	 * @return Statement[]
 	 */
-	protected function claimProvider() {
+	protected function statementProvider() {
 		$statements = array();
 
 		$mainSnak = new PropertyValueSnak( 112358, new StringValue( "don't panic" ) );
@@ -83,43 +82,43 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function buildUpdateClaimSummaryProvider() {
 		$arguments = array();
 
-		foreach ( $this->claimProvider() as $claim ) {
+		foreach ( $this->statementProvider() as $statement ) {
 			$testCaseArgs = array();
 
 			//change mainsnak
-			$modifiedClaim = clone $claim;
-			$modifiedClaim->setMainSnak(
+			$modifiedStatement = clone $statement;
+			$modifiedStatement->setMainSnak(
 				new PropertyValueSnak( 112358, new StringValue( "let's panic!!!" ) )
 			);
-			$testCaseArgs[] = $claim;
-			$testCaseArgs[] = $modifiedClaim;
+			$testCaseArgs[] = $statement;
+			$testCaseArgs[] = $modifiedStatement;
 			$testCaseArgs[] = 'update';
 			$arguments[] = $testCaseArgs;
 
 			//change qualifiers
-			$modifiedClaim = clone $claim;
-			$modifiedClaim->setQualifiers( new SnakList( $this->snakProvider() ) );
-			$testCaseArgs[] = $claim;
-			$testCaseArgs[] = $modifiedClaim;
+			$modifiedStatement = clone $statement;
+			$modifiedStatement->setQualifiers( new SnakList( $this->snakProvider() ) );
+			$testCaseArgs[] = $statement;
+			$testCaseArgs[] = $modifiedStatement;
 			$testCaseArgs[] = 'update-qualifiers';
 			$arguments[] = $testCaseArgs;
 
 			//change rank
-			$modifiedClaim = clone $claim;
-			$modifiedClaim->setRank( Statement::RANK_PREFERRED );
-			$testCaseArgs[] = $claim;
-			$testCaseArgs[] = $modifiedClaim;
+			$modifiedStatement = clone $statement;
+			$modifiedStatement->setRank( Statement::RANK_PREFERRED );
+			$testCaseArgs[] = $statement;
+			$testCaseArgs[] = $modifiedStatement;
 			$testCaseArgs[] = 'update-rank';
 			$arguments[] = $testCaseArgs;
 
 			//change mainsnak & qualifiers
-			$modifiedClaim = clone $claim;
-			$modifiedClaim->setMainSnak(
+			$modifiedStatement = clone $statement;
+			$modifiedStatement->setMainSnak(
 				new PropertyValueSnak( 112358, new StringValue( "let's panic!!!" ) )
 			);
-			$modifiedClaim->setQualifiers( new SnakList( $this->snakProvider() ) );
-			$testCaseArgs[] = $claim;
-			$testCaseArgs[] = $modifiedClaim;
+			$modifiedStatement->setQualifiers( new SnakList( $this->snakProvider() ) );
+			$testCaseArgs[] = $statement;
+			$testCaseArgs[] = $modifiedStatement;
 			$testCaseArgs[] = 'update-rank';
 			$arguments[] = $testCaseArgs;
 		}
@@ -133,10 +132,10 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
-		$newClaims = $this->claimProvider();
+		$newStatements = $this->statementProvider();
 
-		foreach ( $newClaims as $newClaim ) {
-			$summary = $claimSummaryBuilder->buildClaimSummary( null, $newClaim );
+		foreach ( $newStatements as $newStatement ) {
+			$summary = $claimSummaryBuilder->buildClaimSummary( null, $newStatement );
 			$this->assertInstanceOf( 'Wikibase\Summary', $summary, "this should return a Summary object" );
 			$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
 			$this->assertEquals( 'create', $summary->getActionName() );
@@ -145,18 +144,18 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider buildUpdateClaimSummaryProvider
-	 *
-	 * @param Claim $originalClaim
-	 * @param Claim $modifiedClaim
-	 * @param string $action
 	 */
-	public function testBuildUpdateClaimSummary( $originalClaim, $modifiedClaim, $action ) {
+	public function testBuildUpdateClaimSummary(
+		Statement $originalStatement,
+		Statement $modifiedStatement,
+		$action
+	) {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			'wbsetclaim',
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
-		$summary = $claimSummaryBuilder->buildClaimSummary( $originalClaim, $modifiedClaim );
+		$summary = $claimSummaryBuilder->buildClaimSummary( $originalStatement, $modifiedStatement );
 		$this->assertInstanceOf( 'Wikibase\Summary', $summary, "this should return a Summary object" );
 		$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
 		$this->assertEquals( $action, $summary->getActionName() );

@@ -366,27 +366,27 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @param Claim $claim
+	 * @param Statement $statement
 	 * @param ItemId $itemId
 	 * @param int $claimCount
 	 * @param string $requestLabel A label to identify requests that are made in errors.
 	 */
 	private function assertClaimWasSet(
-		Claim $claim,
+		Statement $statement,
 		ItemId $itemId,
 		$claimCount,
 		$requestLabel
 	) {
-		$this->assertNotNull( $claim->getGuid(), 'Cannot search for claims with no GUID' );
+		$this->assertNotNull( $statement->getGuid(), 'Cannot search for statements with no GUID' );
 
 		/** @var Item $item */
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
 		$claims = new Claims( $item->getClaims() );
-		$savedClaim = $claims->getClaimWithGuid( $claim->getGuid() );
+		$savedClaim = $claims->getClaimWithGuid( $statement->getGuid() );
 		$this->assertNotNull( $savedClaim, "Claims list does not have claim after {$requestLabel}" );
-		if ( count( $claim->getQualifiers() ) ) {
-			$this->assertTrue( $claim->getQualifiers()->equals( $savedClaim->getQualifiers() ) );
+		if ( count( $statement->getQualifiers() ) ) {
+			$this->assertTrue( $statement->getQualifiers()->equals( $savedClaim->getQualifiers() ) );
 		}
 
 		$this->assertSame( $claimCount, $claims->count(), "Claims count is wrong after {$requestLabel}" );
@@ -399,15 +399,13 @@ class SetClaimTest extends WikibaseApiTestCase {
 	public function testBugT60394SpecifiedIndexOutOfBounds() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		// Initialize item content with empty claims:
+		// Save new Item with empty statements:
 		$item = new Item();
 		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 
-		// Generate a single claim:
+		// Update the same Item with a single statement:
 		$itemId = $item->getId();
 		$guidGenerator = new GuidGenerator();
-
-		// Save the single claim
 		$item->getStatements()->addNewStatement(
 			new PropertyNoValueSnak( self::$propertyIds[1] ),
 			null,
@@ -432,7 +430,6 @@ class SetClaimTest extends WikibaseApiTestCase {
 		/** @var Item $item */
 		$item = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
 
-		// add a claim
 		$guidGenerator = new GuidGenerator();
 		$statement = new Statement( new PropertyNoValueSnak( $property->getId() ) );
 		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );

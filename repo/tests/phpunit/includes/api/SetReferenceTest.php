@@ -389,12 +389,11 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
 		if ( $guid === null ) {
-			/* @var Item $item */
+			/** @var Item $item */
 			$statements = $item->getStatements()->toArray();
-
-			/* @var Claim $claim */
-			$claim = reset( $statements );
-			$guid = $claim->getGuid();
+			/** @var Statement $statement */
+			$statement = reset( $statements );
+			$guid = $statement->getGuid();
 		}
 
 		$prop = new PropertyId( EntityTestHelper::getId( 'StringProp' ) );

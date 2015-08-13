@@ -167,16 +167,16 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
-	public function testInvalidRequest( $itemHandle, $claimGuid, $snakType, $value, $error ) {
+	public function testInvalidRequest( $itemHandle, $guid, $snakType, $value, $error ) {
 		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
-		if ( $claimGuid === null ) {
-			$claims = $item->getClaims();
-
-			/* @var Claim $claim */
-			$claim = reset( $claims );
-			$claimGuid = $claim->getGuid();
+		if ( $guid === null ) {
+			/** @var Item $item */
+			$statements = $item->getStatements()->toArray();
+			/** @var Statement $statement */
+			$statement = reset( $statements );
+			$guid = $statement->getGuid();
 		}
 
 		if ( !is_string( $value ) ) {
@@ -185,7 +185,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$params = array(
 			'action' => 'wbsetclaimvalue',
-			'claim' => $claimGuid,
+			'claim' => $guid,
 			'snaktype' => $snakType,
 			'value' => $value,
 		);

@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Diff\ClaimDiffer;
 
 /**
@@ -47,29 +47,30 @@ class ClaimSummaryBuilder {
 	}
 
 	/**
-	 * Checks what has actually changed inside a claim by looking at a ClaimDifference,
+	 * Checks what has actually changed inside a statement by looking at a ClaimDifference,
 	 * constructs an edit-summary based upon that information and returns
 	 * a Summary object holding this edit-summary
 	 *
-	 * @param Claim|null $oldClaim
-	 * @param Claim $newClaim
+	 * @param Statement|null $oldStatement
+	 * @param Statement $newStatement
 	 *
 	 * @return Summary
 	 */
-	public function buildClaimSummary( Claim $oldClaim = null, Claim $newClaim ) {
-		$guid = $newClaim->getGuid();
+	public function buildClaimSummary( Statement $oldStatement = null, Statement $newStatement ) {
+		$guid = $newStatement->getGuid();
 
 		$summary = new Summary( $this->apiModuleName );
-		$summary->addAutoCommentArgs( 1 ); // only one claim touched, so we're always having singular here
+		// Only one statement touched, so we're always having singular here.
+		$summary->addAutoCommentArgs( 1 );
 		$summaryArgs = $this->buildSummaryArgs(
-			$newClaim,
+			$newStatement,
 			$guid
 		);
 		$summary->addAutoSummaryArgs( $summaryArgs );
 
-		if ( $oldClaim !== null ) {
+		if ( $oldStatement !== null ) {
 			//claim is changed
-			$claimDifference = $this->claimDiffer->diffClaims( $oldClaim, $newClaim );
+			$claimDifference = $this->claimDiffer->diffClaims( $oldStatement, $newStatement );
 
 			if ( $claimDifference->isAtomic() ) {
 				if ( $claimDifference->getMainSnakChange() !== null ) {
@@ -101,18 +102,18 @@ class ClaimSummaryBuilder {
 
 	/**
 	 * Builds an associative array that can be used as summary arguments. It uses property IDs as
-	 * array keys and builds arrays of the main Snaks of all Claims given by the GUIDs.
+	 * array keys and builds arrays of the main Snaks of all statements given by the GUIDs.
 	 *
-	 * @param Claim $newClaim
+	 * @param Statement $newStatement
 	 * @param string $guid
 	 *
 	 * @return array[] Associative array that contains property ID => array of main Snaks
 	 */
-	private function buildSummaryArgs( Claim $newClaim, $guid ) {
+	private function buildSummaryArgs( Statement $newStatement, $guid ) {
 		$pairs = array();
 
-		if ( $newClaim->getGuid() === $guid ) {
-			$snak = $newClaim->getMainSnak();
+		if ( $newStatement->getGuid() === $guid ) {
+			$snak = $newStatement->getMainSnak();
 			$key = $snak->getPropertyId()->getSerialization();
 
 			if ( !array_key_exists( $key, $pairs ) ) {

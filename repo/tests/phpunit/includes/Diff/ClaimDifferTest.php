@@ -8,7 +8,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -112,9 +111,9 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider diffClaimsProvider
 	 */
-	public function testDiffClaims( Claim $oldClaim, Claim $newClaim, ClaimDifference $expected ) {
+	public function testDiffClaims( Statement $oldStatement, Statement $newStatement, ClaimDifference $expected ) {
 		$differ = new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) );
-		$actual = $differ->diffClaims( $oldClaim, $newClaim );
+		$actual = $differ->diffClaims( $oldStatement, $newStatement );
 
 		$this->assertTrue( $expected->equals( $actual ) );
 		// Additional fail-safe checks to guard against an ArrayObject bug in PHP 5.3, that returned

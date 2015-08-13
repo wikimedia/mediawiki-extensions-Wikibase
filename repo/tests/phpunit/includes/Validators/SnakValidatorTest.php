@@ -9,7 +9,6 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -132,10 +131,10 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideValidateClaimSnaks
 	 */
-	public function testValidateClaimSnaks( Claim $claim, $description, $expectedValid = true ) {
+	public function testValidateClaimSnaks( Statement $statement, $description, $expectedValid = true ) {
 		$validator = $this->getSnakValidator();
 
-		$result = $validator->validateClaimSnaks( $claim );
+		$result = $validator->validateClaimSnaks( $statement );
 
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
