@@ -7,9 +7,9 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\StatementRankSerializer;
 
 /**
@@ -57,11 +57,11 @@ class ClaimDifferenceVisualizer {
 	 * @since 0.4
 	 *
 	 * @param ClaimDifference $claimDifference
-	 * @param Claim $baseClaim The new claim, if it exists; otherwise, the old claim
+	 * @param Statement $baseClaim The new claim, if it exists; otherwise, the old claim
 	 *
 	 * @return string HTML
 	 */
-	public function visualizeClaimChange( ClaimDifference $claimDifference, Claim $baseClaim ) {
+	public function visualizeClaimChange( ClaimDifference $claimDifference, Statement $baseClaim ) {
 		$newestMainSnak = $baseClaim->getMainSnak();
 		$oldestMainSnak = $newestMainSnak;
 		$html = '';
@@ -107,11 +107,11 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Claim $claim
+	 * @param Statement $claim
 	 *
 	 * @return string HTML
 	 */
-	public function visualizeNewClaim( Claim $claim ) {
+	public function visualizeNewClaim( Statement $claim ) {
 		$claimDiffer = new ClaimDiffer( new ListDiffer() );
 		$claimDifference = $claimDiffer->diffClaims( null, $claim );
 		return $this->visualizeClaimChange( $claimDifference, $claim );
@@ -122,11 +122,11 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Claim $claim
+	 * @param Statement $claim
 	 *
 	 * @return string HTML
 	 */
-	public function visualizeRemovedClaim( Claim $claim ) {
+	public function visualizeRemovedClaim( Statement $claim ) {
 		$claimDiffer = new ClaimDiffer( new ListDiffer() );
 		$claimDifference = $claimDiffer->diffClaims( $claim, null );
 		return $this->visualizeClaimChange( $claimDifference, $claim );
