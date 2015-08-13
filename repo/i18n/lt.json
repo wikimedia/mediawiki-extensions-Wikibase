@@ -506,7 +506,7 @@
 	"apihelp-wbparsevalue-param-datatype": "Duomenų tipas reikšmės, kurią išanalizuoti. Nustato, kurį analizatorių naudoti.",
 	"apihelp-wbparsevalue-param-values": "Reikšmė, kurią apdoroti",
 	"apihelp-wbparsevalue-param-options": "Parinktys, kurias analizatorius turėtų naudoti. Pateikiamos kaip JSON objektas.",
-	"apihelp-wbparsevalue-example-1": "Nėra eilutės formatavimo pokyčių.",
+	"apihelp-wbparsevalue-example-1": "Konvertuoti paprastą simbolių eilutę į StringValue objektą.",
 	"apihelp-wbparsevalue-example-2": "Apdoroja 1994-02-08 į datos formatą su tikslumu 9 (metai).",
 	"apihelp-wbparsevalue-example-3": "Konvertuoti 1994-02-08 į TimeValue objektą su 14 (sekundžių) tikslumu ir su įgalintu validavimu, ko pasekoje validavimas nepavyksta.",
 	"apihelp-wbremoveclaims-description": "Pašalina Wikibase priekaištus.",

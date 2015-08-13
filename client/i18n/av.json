@@ -7,6 +7,7 @@
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} элемент",
 	"wikibase-editlinks": "Линкал хисизаризе",
+	"wikibase-editlinkstitle": "МацӀаздагьоркьосел линкал хисизе",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Бахчизе",
 	"wikibase-rc-hide-wikidata-show": "Бихьизабизе",

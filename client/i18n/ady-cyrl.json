@@ -4,11 +4,12 @@
 			"Bedynokue.nart",
 			"SamGamgee",
 			"TheRossatron",
-			"Amire80"
+			"Amire80",
+			"GR44 Luc"
 		]
 	},
 	"tooltip-t-wikibase": "Ехьыл1агъэу хъарзынэщым и элементгорэм гъэзэгъэ зэпыщ",
-	"wikibase-comment-update": "{{WBREPONAME}} зэхъок1ыгъэ",
+	"wikibase-comment-update": "{{WBREPONAME}} зэхъокIыгъэ",
 	"wikibase-dataitem": "{{WBREPONAME}} зыгор",
 	"wikibase-editlinks": "Зэпыщэмэ я1аз",
 	"wikibase-editlinkstitle": "Бзэзэпыщэмэ я1аз",
@@ -16,6 +17,6 @@
 	"wikibase-rc-hide-wikidata-hide": "Гъэбылъ",
 	"wikibase-rc-hide-wikidata-show": "Къэгъэлъагъу",
 	"wikibase-rc-wikibase-edit-letter": "Д",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} и е1эзэныгъэ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} и еIэзэныгъэ",
 	"wikibase-otherprojects": "Нэмыкӏ проектхэр"
 }
