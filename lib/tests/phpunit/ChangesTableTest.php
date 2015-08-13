@@ -6,10 +6,10 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Wikibase\ChangesTable;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangesTable
@@ -67,7 +67,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 			array(
 				'claim' => new Diff(
 					array(
-						new DiffOpAdd( new Claim( new PropertyNoValueSnak( 77 ) ) ),
+						new DiffOpAdd( new Statement( new PropertyNoValueSnak( 77 ) ) ),
 					)
 				)
 			)

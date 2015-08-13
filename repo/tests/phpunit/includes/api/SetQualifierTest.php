@@ -5,7 +5,6 @@ namespace Wikibase\Test\Repo\Api;
 use DataValues\StringValue;
 use FormatJson;
 use UsageException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

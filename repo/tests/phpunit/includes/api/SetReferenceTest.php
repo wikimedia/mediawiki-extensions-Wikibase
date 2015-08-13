@@ -5,7 +5,6 @@ namespace Wikibase\Test\Repo\Api;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use UsageException;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

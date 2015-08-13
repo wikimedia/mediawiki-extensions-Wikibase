@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Html;
 use MediaWikiLangTestCase;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;

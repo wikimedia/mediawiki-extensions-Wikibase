@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;

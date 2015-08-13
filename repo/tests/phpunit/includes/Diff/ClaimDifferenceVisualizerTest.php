@@ -8,7 +8,6 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use MediaWikiTestCase;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -85,7 +84,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 		return array(
 			'no change' => array(
 				new ClaimDifference(),
-				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				''
 			),
 			'mainsnak' => array(
@@ -95,7 +94,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 						new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) )
 					)
 				),
-				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>'.
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span>bar (DETAILED)</span></del></div></td>'.
@@ -109,7 +108,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 						new DiffOpAdd( new PropertyValueSnak( 44, new StringValue( 'v' ) ) ),
 					) )
 				),
-				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr><td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">property / P1: foo / qualifier</td></tr>'.
 				'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>P44: v (DETAILED)</span></ins></div></td></tr>'
@@ -123,7 +122,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 						new DiffOpRemove( new Reference( new SnakList( array( new PropertyValueSnak( 50, new StringValue( 'v' ) ) ) ) ) ),
 					) )
 				),
-				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
+				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
 				'<tr><td colspan="2" class="diff-lineno">property / P1: foo / reference</td><td colspan="2" class="diff-lineno"></td></tr>'.
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span>P50: v (DETAILED)</span></del></div></td><td colspan="2">&nbsp;</td></tr>'
@@ -164,7 +163,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 						)
 					) )
 				),
-				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
 				'<tr>'
 				. '<td colspan="2" class="diff-lineno">property / P1</td>'
@@ -216,7 +215,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 						) ) ) )
 					) )
 				),
-				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
 				'<tr>'
 				. '<td colspan="2" class="diff-lineno">property / P1</td>'
@@ -262,7 +261,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 					null,
 					new DiffOpChange( Statement::RANK_NORMAL, Statement::RANK_PREFERRED )
 				),
-				new Claim( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
+				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'newmainsnakvalue' ) ) ),
 				// mainsnak change
 				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>'.
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.

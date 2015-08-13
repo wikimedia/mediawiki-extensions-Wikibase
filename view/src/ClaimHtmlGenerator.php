@@ -2,7 +2,6 @@
 
 namespace Wikibase\View;
 
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\ByPropertyIdGrouper;

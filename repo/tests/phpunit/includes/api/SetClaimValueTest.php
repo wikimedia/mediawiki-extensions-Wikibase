@@ -10,7 +10,6 @@ use Revision;
 use UsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -123,14 +122,14 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function doTestValidRequest( Entity $entity, $claimGuid, $value, $expectedSummary ) {
+	public function doTestValidRequest( Entity $entity, $guid, $value, $expectedSummary ) {
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
 		$claimCount = count( $obtainedEntity->getClaims() );
 
 		$params = array(
 			'action' => 'wbsetclaimvalue',
-			'claim' => $claimGuid,
+			'claim' => $guid,
 			'value' => FormatJson::encode( $value ),
 			'snaktype' => 'value',
 		);
@@ -155,7 +154,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( $claimCount, $claims->count(), 'Claim count should not change after doing a setclaimvalue request' );
 
-		$obtainedClaim = $claims->getClaimWithGuid( $claimGuid );
+		$obtainedClaim = $claims->getClaimWithGuid( $guid );
 
 		$this->assertNotNull( $obtainedClaim );
 
