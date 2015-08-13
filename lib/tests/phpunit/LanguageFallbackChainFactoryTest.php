@@ -218,7 +218,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 
 	public function testNewFromContextAndLanguageCode() {
 		$factory = new LanguageFallbackChainFactory();
-		$languageFallbackChain = $factory->newFromContext( \RequestContext::getMain(), 'en' );
+		$languageFallbackChain = $factory->newFromContextAndLanguageCode( \RequestContext::getMain(), 'en' );
 		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
 	}
 
