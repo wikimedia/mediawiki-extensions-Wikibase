@@ -60,54 +60,45 @@ class ClaimHtmlGenerator {
 	}
 
 	/**
-	 * Builds and returns the HTML representing a single WikibaseEntity's claim.
+	 * Builds and returns the HTML representing a single WikibaseEntity's statement.
 	 *
 	 * @since 0.4
 	 *
-	 * @param Claim $claim the claim to render
+	 * @param Statement $statement
 	 * @param null|string $editSectionHtml has the html for the edit section
 	 *
 	 * @return string
 	 */
-	public function getHtmlForClaim( Claim $claim, $editSectionHtml = null ) {
+	public function getHtmlForClaim( Statement $statement, $editSectionHtml = null ) {
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
-			$claim->getMainSnak(),
+			$statement->getMainSnak(),
 			false
 		);
 
-		// TODO: Resolve if-statement after concept of Claim has been removed
-		//  (see https://github.com/wmde/WikibaseDataModel/pull/317)
-		if ( $claim instanceof Statement ) {
-			/** @var Statement $claim */
-			$statementRankSerializer = new StatementRankSerializer();
-			$serializedRank = $statementRankSerializer->serialize( $claim->getRank() );
+		$statementRankSerializer = new StatementRankSerializer();
+		$serializedRank = $statementRankSerializer->serialize( $statement->getRank() );
 
-			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
-			// wikibase-statementview-rank-deprecated
-			$rankHtml = $this->templateFactory->render(
-				'wikibase-rankselector',
-				'ui-state-disabled',
-				'wikibase-rankselector-' . $serializedRank,
-				$this->getStatementRankText( $serializedRank )
-			);
+		// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
+		// wikibase-statementview-rank-deprecated
+		$rankHtml = $this->templateFactory->render(
+			'wikibase-rankselector',
+			'ui-state-disabled',
+			'wikibase-rankselector-' . $serializedRank,
+			$this->getStatementRankText( $serializedRank )
+		);
 
-			$referencesHeading = $this->getReferencesHeading( $claim );
+		$referencesHeading = $this->getReferencesHeading( $statement );
 
-			$referencesHtml = $this->getHtmlForReferences(
-				$claim->getReferences()
-			);
-		} else {
-			$rankHtml = '';
-			$referencesHeading = '';
-			$referencesHtml = '';
-		}
+		$referencesHtml = $this->getHtmlForReferences(
+			$statement->getReferences()
+		);
 
 		return $this->templateFactory->render(
 			'wikibase-statementview',
-			$claim->getGuid(),
+			$statement->getGuid(),
 			$rankHtml,
 			$mainSnakHtml,
-			$this->getHtmlForQualifiers( $claim->getQualifiers() ),
+			$this->getHtmlForQualifiers( $statement->getQualifiers() ),
 			$editSectionHtml,
 			$referencesHeading,
 			$referencesHtml
