@@ -13,7 +13,6 @@ use OutOfBoundsException;
 use UsageException;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
@@ -110,14 +109,14 @@ class SetClaim extends ModifyClaim {
 
 	/**
 	 * @param array $params
-	 * @param Claim $claim
+	 * @param Statement $claim
 	 * @param Entity $entity
 	 *
 	 * @return Summary
 	 *
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
-	private function getSummary( array $params, Claim $claim, Entity $entity ) {
+	private function getSummary( array $params, Statement $claim, Entity $entity ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
@@ -145,7 +144,7 @@ class SetClaim extends ModifyClaim {
 	 * @throws IllegalValueException
 	 * @throws UsageException
 	 * @throws LogicException
-	 * @return Claim
+	 * @return Statement
 	 */
 	private function getClaimFromParams( array $params ) {
 
