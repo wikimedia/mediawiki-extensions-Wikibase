@@ -239,7 +239,10 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 		var $label = this._createLabelFromSuggestion( suggestion ),
 			value = suggestion.label || suggestion.id;
 
-		return new $.wikibase.unitsuggester.Item( $label, value, suggestion );
+		var item = new $.ui.ooMenu.Item( $label, value);
+		item._link = suggestion.url;
+
+		return item;
 	},
 
 	/**
@@ -254,14 +257,11 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 		$( this.options.menu )
 		.off( 'selected.suggester' )
 		.on( 'selected.unitsuggester', function( event, item ) {
-			if( item.getEntityStub ) {
-				// TODO: Kill the custom Item class in this file. Simply use _link instead of url.
-				self._selectedUrl = item.getEntityStub().url;
+				self._selectedUrl = item._link;
 				// TODO: Call the parent method instead and remove all lines below.
 				self.element.val( item.getValue() );
 				self._close();
 				self._trigger( 'change' );
-			}
 		} );
 
 		this.options.menu.element
@@ -303,29 +303,6 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	},
 
 	/**
-	 * @inheritdoc
-	 * @protected
-	 */
-	_getSuggestionsFromArray: function( term, source ) {
-		var deferred = $.Deferred(),
-			matcher = new RegExp( this._escapeRegex( term ), 'i' );
-
-		deferred.resolve( $.grep( source, function( item ) {
-			if( item.aliases ) {
-				for( var i = 0; i < item.aliases.length; i++ ) {
-					if( matcher.test( item.aliases[i] ) ) {
-						return true;
-					}
-				}
-			}
-
-			return matcher.test( item.label ) || matcher.test( item.id );
-		} ), term );
-
-		return deferred.promise();
-	},
-
-	/**
 	 * @protected
 	 *
 	 * @param {Object} entityStub
@@ -347,53 +324,6 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 			'http://www.wikidata.org/entity/'
 		);
 	}
-} );
-
-/**
- * Default `unitsuggester` suggestion menu item.
- * @class jQuery.wikibase.unitsuggester.Item
- * @extends jQuery.ui.ooMenu.Item
- *
- * @constructor
- *
- * @param {jQuery|string} label
- * @param {string} value
- * @param {Object} entityStub
- *
- * @throws {Error} if a required parameter is not specified properly.
- */
-var Item = function( label, value, entityStub ) {
-	if( !label || !value || !entityStub ) {
-		throw new Error( 'Required parameter(s) not specified properly' );
-	}
-
-	this._label = label;
-	this._value = value;
-	this._entityStub = entityStub;
-	this._link = entityStub.url;
-};
-
-Item = util.inherit(
-	$.ui.ooMenu.Item,
-	Item,
-	{
-		/**
-		 * @property {Object}
-		 * @protected
-		 */
-		_entityStub: null,
-
-		/**
-		 * @return {Object}
-		 */
-		getEntityStub: function() {
-			return this._entityStub;
-		}
-	}
-);
-
-$.extend( $.wikibase.unitsuggester, {
-	Item: Item
 } );
 
 }( jQuery, util, mediaWiki ) );
