@@ -1,7 +1,5 @@
 <?php
 
-use Wikibase\SettingsArray;
-
 /**
  * This file assigns the default values to all Wikibase Repo settings.
  *

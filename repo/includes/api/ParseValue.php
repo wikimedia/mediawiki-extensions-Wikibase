@@ -17,12 +17,12 @@ use ValueParsers\ValueParser;
 use ValueValidators\Error;
 use ValueValidators\NullValidator;
 use ValueValidators\ValueValidator;
-use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\DataTypeValidatorFactory;
-use Wikibase\Repo\ValueParserFactory;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\Repo\ValueParserFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for using value parsers.

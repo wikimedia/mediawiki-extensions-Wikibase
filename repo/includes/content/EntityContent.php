@@ -32,8 +32,8 @@ use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Validators\EntityValidator;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**

@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Summary;
 use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Summary;
 
 /**
  * Class for aliases change operation

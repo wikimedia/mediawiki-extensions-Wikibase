@@ -15,11 +15,11 @@ use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\MockSiteStore;
-use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @covers Wikibase\Repo\Api\MergeItems

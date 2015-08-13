@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Repo\Api;
 
 use DataValues\DataValue;
-use DataValues\DataValueFactory;
 use DataValues\StringValue;
 use FormatJson;
 use Revision;
