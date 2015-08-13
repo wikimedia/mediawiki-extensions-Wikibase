@@ -59,19 +59,19 @@ class SnakValidator implements ValueValidator {
 	 * the main snak, the qualifiers, and all snaks of all references,
 	 * in case the claim is a Statement.
 	 *
-	 * @param Statement $claim The value to validate
+	 * @param Statement $statement The value to validate
 	 *
 	 * @return Result
 	 */
-	public function validateClaimSnaks( Statement $claim ) {
-		$snak = $claim->getMainSnak();
+	public function validateClaimSnaks( Statement $statement ) {
+		$snak = $statement->getMainSnak();
 		$result = $this->validate( $snak );
 
 		if ( !$result->isValid() ) {
 			return $result;
 		}
 
-		foreach ( $claim->getQualifiers() as $snak ) {
+		foreach ( $statement->getQualifiers() as $snak ) {
 			$result = $this->validate( $snak );
 
 			if ( !$result->isValid() ) {
@@ -79,7 +79,7 @@ class SnakValidator implements ValueValidator {
 			}
 		}
 
-		$result = $this->validateReferences( $claim->getReferences() );
+		$result = $this->validateReferences( $statement->getReferences() );
 
 		if ( !$result->isValid() ) {
 			return $result;

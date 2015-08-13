@@ -52,17 +52,17 @@ class ClaimDifferenceVisualizer {
 	}
 
 	/**
-	 * Generates HTML of a claim change.
+	 * Generates HTML of a statement change.
 	 *
 	 * @since 0.4
 	 *
 	 * @param ClaimDifference $claimDifference
-	 * @param Statement $baseClaim The new claim, if it exists; otherwise, the old claim
+	 * @param Statement $baseStatement The new statement, if it exists. Otherwise the old statement.
 	 *
 	 * @return string HTML
 	 */
-	public function visualizeClaimChange( ClaimDifference $claimDifference, Statement $baseClaim ) {
-		$newestMainSnak = $baseClaim->getMainSnak();
+	public function visualizeClaimChange( ClaimDifference $claimDifference, Statement $baseStatement ) {
+		$newestMainSnak = $baseStatement->getMainSnak();
 		$oldestMainSnak = $newestMainSnak;
 		$html = '';
 
@@ -107,14 +107,14 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Statement $claim
+	 * @param Statement $statement
 	 *
 	 * @return string HTML
 	 */
-	public function visualizeNewClaim( Statement $claim ) {
+	public function visualizeNewClaim( Statement $statement ) {
 		$claimDiffer = new ClaimDiffer( new ListDiffer() );
-		$claimDifference = $claimDiffer->diffClaims( null, $claim );
-		return $this->visualizeClaimChange( $claimDifference, $claim );
+		$claimDifference = $claimDiffer->diffClaims( null, $statement );
+		return $this->visualizeClaimChange( $claimDifference, $statement );
 	}
 
 	/**
@@ -122,14 +122,14 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Statement $claim
+	 * @param Statement $statement
 	 *
 	 * @return string HTML
 	 */
-	public function visualizeRemovedClaim( Statement $claim ) {
+	public function visualizeRemovedClaim( Statement $statement ) {
 		$claimDiffer = new ClaimDiffer( new ListDiffer() );
-		$claimDifference = $claimDiffer->diffClaims( $claim, null );
-		return $this->visualizeClaimChange( $claimDifference, $claim );
+		$claimDifference = $claimDiffer->diffClaims( $statement, null );
+		return $this->visualizeClaimChange( $claimDifference, $statement );
 	}
 
 	/**

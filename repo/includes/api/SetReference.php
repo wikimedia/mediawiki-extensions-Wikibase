@@ -123,13 +123,13 @@ class SetReference extends ModifyClaim {
 	}
 
 	/**
-	 * @param Statement $claim
+	 * @param Statement $statement
 	 * @param string $referenceHash
 	 */
-	private function validateReferenceHash( Statement $claim, $referenceHash ) {
-		if ( !$claim->getReferences()->hasReferenceHash( $referenceHash ) ) {
+	private function validateReferenceHash( Statement $statement, $referenceHash ) {
+		if ( !$statement->getReferences()->hasReferenceHash( $referenceHash ) ) {
 			$this->errorReporter->dieError(
-				'Claim does not have a reference with the given hash',
+				'Statement does not have a reference with the given hash',
 				'no-such-reference'
 			);
 		}
