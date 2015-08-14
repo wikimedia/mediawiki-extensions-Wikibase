@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Client\Usage\SiteLinkUsageLookup
@@ -33,7 +33,7 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookup( array $links ) {
-		$repo = new MockRepository();
+		$siteLinkLookup = new HashSiteLinkStore();
 
 		foreach ( $links as $name => $itemId ) {
 			$item = new Item( $itemId );
@@ -41,10 +41,10 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'badwiki', "$name" ) );
 			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'sadwiki', "42" ) );
 
-			$repo->putEntity( $item );
+			$siteLinkLookup->saveLinksOfItem( $item );
 		}
 
-		return $repo;
+		return $siteLinkLookup;
 	}
 
 	/**
