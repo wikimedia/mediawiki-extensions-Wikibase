@@ -10,25 +10,21 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyNotFoundException extends \RuntimeException {
-
-	private $propertyId;
+class PropertyNotFoundException extends EntityNotFoundException {
 
 	public function __construct( PropertyId $propertyId, $message = null, \Exception $previous = null ) {
-		$this->propertyId = $propertyId;
-
 		if ( $message === null ) {
 			$message = "Property not found: " . $propertyId;
 		}
 
-		parent::__construct( $message, 0, $previous );
+		parent::__construct( $propertyId, $message, $previous );
 	}
 
 	/**
 	 * @return PropertyId
 	 */
 	public function getPropertyId() {
-		return $this->propertyId;
+		return $this->getEntityId();
 	}
 
 }

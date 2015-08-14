@@ -10,16 +10,12 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ItemNotFoundException extends \RuntimeException {
-
-	private $itemId;
+class ItemNotFoundException extends EntityNotFoundException {
 
 	public function __construct( ItemId $itemId, $message = null, \Exception $previous = null ) {
-		$this->itemId = $itemId;
-
 		parent::__construct(
+			$itemId,
 			$message ?: 'Item not found: ' . $itemId,
-			0,
 			$previous
 		);
 	}
@@ -28,7 +24,7 @@ class ItemNotFoundException extends \RuntimeException {
 	 * @return ItemId
 	 */
 	public function getItemId() {
-		return $this->itemId;
+		return $this->getEntityId();
 	}
 
 }
