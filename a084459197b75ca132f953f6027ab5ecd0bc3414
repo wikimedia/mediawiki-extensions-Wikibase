@@ -16,6 +16,24 @@
       "revId": "a084459197b75ca132f953f6027ab5ecd0bc3414",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_d3cada49",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-14T11:20:26Z",
+      "side": 1,
+      "message": "~0.8.1 is equivalent to \u003e\u003d0.8.1 \u003c0.9.0\n^0.8.1 is equivalent to \u003e\u003d0.8.1 \u003c1.0.0\n\nThe first is correct, in any case.",
+      "parentUuid": "6ec1af18_33bf9ecf",
+      "revId": "a084459197b75ca132f953f6027ab5ecd0bc3414",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
