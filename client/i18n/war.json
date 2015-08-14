@@ -4,6 +4,8 @@
 			"JinJian"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} ginliwat an item",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "Igliwat an mga link",
 	"wikibase-editlinkstitle": "Igliwat an mga interlanguage link",
 	"wikibase-rc-hide-wikidata-hide": "Tago-a",
