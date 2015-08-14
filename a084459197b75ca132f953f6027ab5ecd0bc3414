@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_33bf9ecf",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-14T11:07:43Z",
+      "side": 1,
+      "message": "~0.8.1 should be used here.\nOtherwise this will also allow 1.0.0 2.0.0 etc",
+      "revId": "a084459197b75ca132f953f6027ab5ecd0bc3414",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
