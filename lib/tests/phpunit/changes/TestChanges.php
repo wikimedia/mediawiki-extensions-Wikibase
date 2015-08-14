@@ -201,7 +201,6 @@ final class TestChanges {
 					'rev_id' => $rev,
 					'parent_id' => $rev -1,
 					'user_text' => 'Some User',
-					'time' => wfTimestamp( TS_MW ),
 				);
 
 				$change->setMetadata( $meta );
