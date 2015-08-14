@@ -110,7 +110,6 @@ class EntityChange extends DiffChange {
 	 */
 	public function setMetadata( array $metadata ) {
 		$validKeys = array(
-			'comment',
 			'page_id',
 			'bot',
 			'rev_id',
@@ -182,7 +181,6 @@ class EntityChange extends DiffChange {
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
 			'time' => $rc->getAttribute( 'rc_timestamp' ),
-			'comment' => '',
 		) );
 	}
 
@@ -197,7 +195,6 @@ class EntityChange extends DiffChange {
 			'page_id' => 0,
 			'rev_id' => 0,
 			'parent_id' => 0,
-			'comment' => '',
 		) );
 	}
 

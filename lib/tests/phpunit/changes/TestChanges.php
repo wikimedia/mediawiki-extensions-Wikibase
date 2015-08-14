@@ -196,7 +196,6 @@ final class TestChanges {
 				$change->setComment( "$key:1|" );
 
 				$meta = array(
-					'comment' => '',
 					'page_id' => 23,
 					'bot' => false,
 					'rev_id' => $rev,
