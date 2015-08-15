@@ -4,15 +4,16 @@
 			"SamGamgee",
 			"TheRossatron",
 			"SmartNart12",
-			"GR44 Luc"
+			"GR44 Luc",
+			"Highlander45temp"
 		]
 	},
 	"wikibase-edit": "еIаз",
 	"wikibase-add": "хэгъахъу",
-	"wikibase-label-empty": "Ц1э пари фэусыгъэп",
+	"wikibase-label-empty": "ЦIэ пари фэусыгъэп",
 	"wikibase-description-empty": "ГурыIоныгъэ пари итхагъэп",
-	"wikibase-statements": "Еплъык1эхэр",
-	"wikibase-sitelinks-special": "Нэмык1 сайтхэр",
+	"wikibase-statements": "ЕплъыкIэхэр",
+	"wikibase-sitelinks-special": "НэмыкI сайтхэр",
 	"wikibase-aliases-empty": "Синонимхэр гъэнэфагъэхэп",
 	"wikibase-statementview-rank-normal": "Ранг нормал",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|лъапсэ|лъапсэхэр}}"
