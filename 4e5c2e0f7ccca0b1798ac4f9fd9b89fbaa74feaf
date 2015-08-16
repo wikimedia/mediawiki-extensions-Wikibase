@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_85307a54",
+        "filename": "repo/Wikibase.i18n.namespaces.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2015-08-16T15:05:18Z",
+      "side": 1,
+      "message": "[\u0027vi\u0027]",
+      "revId": "4e5c2e0f7ccca0b1798ac4f9fd9b89fbaa74feaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
