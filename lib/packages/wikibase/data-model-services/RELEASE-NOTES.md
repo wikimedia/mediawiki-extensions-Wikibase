@@ -1,5 +1,9 @@
 # Wikibase DataModel Services release notes
 
+## Dev version
+
+* Added `Lookup\RedirectResolvingEntityLookup`
+
 ## Version 1.1 (2015-08-10)
 
 Moved over various classes and interfaces from Wikibase Lib:
