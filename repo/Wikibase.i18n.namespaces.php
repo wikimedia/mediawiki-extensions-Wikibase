@@ -105,3 +105,17 @@ $namespaceNames['ru'] = array(
 	WB_NS_QUERY      => 'Запрос',
 	WB_NS_QUERY_TALK => 'Обсуждение_запроса',
 );
+
+$namespaceNames['vi'] = array(
+	WB_NS_DATA      => 'Dữ_liệu',           // legacy
+	WB_NS_DATA_TALK => 'Thảo_luận_Dữ_liệu', // legacy
+
+	WB_NS_ITEM      => 'Khoản_mục',
+	WB_NS_ITEM_TALK => 'Thảo_luận_Khoản_mục',
+
+	WB_NS_PROPERTY      => 'Thuộc_tính',
+	WB_NS_PROPERTY_TALK => 'Thảo_luận_Thuộc_tính',
+
+	WB_NS_QUERY      => 'Truy_vấn',
+	WB_NS_QUERY_TALK => 'Thảo_luận_Truy_vấn',
+);
