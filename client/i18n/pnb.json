@@ -4,12 +4,15 @@
 			"Khalid Mahmood"
 		]
 	},
+	"tooltip-t-wikibase": "ریپوزیٹری آئیٹم نال جوڑ",
 	"wikibase-comment-update": "آئیٹم بدل دتی",
 	"wikibase-dataitem": "وکی ڈاٹا آئیٹم",
 	"wikibase-editlinks": "جوڑ لکھو",
 	"wikibase-editlinkstitle": "بولیاں دے آپسی جوڑ لکھو",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "لکاؤ",
 	"wikibase-rc-hide-wikidata-show": "وکھاؤ",
 	"wikibase-rc-wikibase-edit-letter": "ڈاٹا",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} لکھت",
 	"wikibase-otherprojects": "ہور ویونت"
 }

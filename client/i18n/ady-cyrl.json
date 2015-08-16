@@ -5,14 +5,15 @@
 			"SamGamgee",
 			"TheRossatron",
 			"Amire80",
-			"GR44 Luc"
+			"GR44 Luc",
+			"Inyzh"
 		]
 	},
-	"tooltip-t-wikibase": "Ехьыл1агъэу хъарзынэщым и элементгорэм гъэзэгъэ зэпыщ",
+	"tooltip-t-wikibase": "ЕхьылIагъэу хъарзынэщым и элементгорэм гъэзэгъэ зэпыщ",
 	"wikibase-comment-update": "{{WBREPONAME}} зэхъокIыгъэ",
 	"wikibase-dataitem": "{{WBREPONAME}} зыгор",
-	"wikibase-editlinks": "Зэпыщэмэ я1аз",
-	"wikibase-editlinkstitle": "Бзэзэпыщэмэ я1аз",
+	"wikibase-editlinks": "Зэпыщэмэ яIаз",
+	"wikibase-editlinkstitle": "Бзэзэпыщэмэ яIаз",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Гъэбылъ",
 	"wikibase-rc-hide-wikidata-show": "Къэгъэлъагъу",

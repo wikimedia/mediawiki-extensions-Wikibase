@@ -4,9 +4,10 @@
 			"JinJian"
 		]
 	},
+	"tooltip-t-wikibase": "Igsumpay ha connected data repository item",
 	"wikibase-comment-update": "{{WBREPONAME}} ginliwat an item",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
-	"wikibase-editlinks": "Igliwat an mga link",
+	"wikibase-editlinks": "Igliwat an mga sumpay",
 	"wikibase-editlinkstitle": "Igliwat an mga interlanguage link",
 	"wikibase-rc-hide-wikidata-hide": "Tago-a",
 	"wikibase-rc-hide-wikidata-show": "Pakit-a",

@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "ہور سائیٹاں",
 	"wikibase-aliases-empty": "مشہور ناں نہیں دسیا گیا",
 	"wikibase-statementview-rank-normal": "نارمل رینک",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{انیک:$1|اتہ پتہ|اتے پتے}}"
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|اتہ پتہ|اتے پتے}}"
 }
