@@ -377,7 +377,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				array( 'x', 'y' ),
 				array( 'A', 'B' ),
 				'can I haz world domination?',
-				'/* summarytest-testing:2|nl|x|y */ can I haz world domination?'
+				'/* summarytest-testing:2|nl|x|y */ A, B: can I haz world domination?'
 				),
 			array( // #6
 				'summarytest',
