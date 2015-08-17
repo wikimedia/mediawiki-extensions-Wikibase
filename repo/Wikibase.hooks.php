@@ -733,6 +733,40 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Handler for the TitleQuickPermissions hook.
+	 *
+	 * Implemented to point out that entity pages cannot be 'created' normally.
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleQuickPermissions
+	 *
+	 * @param Title $title The Title being checked
+	 * @param User $user The User performing the action
+	 * @param string $action The action being performed
+	 * @param array $errors Array of errors
+	 * @param bool $doExpensiveQueries Whether to do expensive DB queries
+	 * @param bool $short Whether to return immediately on first error
+	 *
+	 * @return bool
+	 */
+	public static function onTitleQuickPermissions(
+		Title $title, User $user, $action, array &$errors, $doExpensiveQueries, $short
+	) {
+		if ( $action !== 'create' ) {
+			return true;
+		}
+
+		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+			// Do not allow "create" for Wikibase namespaces
+			$errors[] = array( 'wikibase-no-direct-editing', $title->getNsText() );
+			return false; // Bail out immediately
+		}
+
+		return true;
+	}
+
+	/**
 	 * Hook handler for AbuseFilter's AbuseFilter-contentToString hook, implemented
 	 * to provide a custom text representation of Entities for filtering.
 	 *
