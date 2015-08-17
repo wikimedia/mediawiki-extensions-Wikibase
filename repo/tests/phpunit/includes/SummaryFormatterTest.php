@@ -377,7 +377,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				array( 'x', 'y' ),
 				array( 'A', 'B' ),
 				'can I haz world domination?',
-				'/* summarytest-testing:2|nl|x|y */ can I haz world domination?'
+				'/* summarytest-testing:2|nl|x|y */ A, B, can I haz world domination?'
 			),
 			'Trimming' => array(
 				'summarytest',
@@ -386,7 +386,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				array( ' autoArg0 ', ' autoArg1 ' ),
 				array( ' userArg0 ', ' userArg1 ' ),
 				' userSummary ',
-				'/* summarytest-testing:2|de| autoArg0 | autoArg1 */ userSummary'
+				'/* summarytest-testing:2|de| autoArg0 | autoArg1 */ userArg0 ,  userArg1, userSummary'
 			),
 			'User summary only' => array(
 				'summarytest',
@@ -396,6 +396,24 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				null,
 				'can I haz world domination?',
 				'/* summarytest:0| */ can I haz world domination?'
+			),
+			'User summary w/o arguments' => array(
+				'summarytest',
+				'testing',
+				'de',
+				array( 'autoArg0', 'autoArg1' ),
+				null,
+				'userSummary',
+				'/* summarytest-testing:0|de|autoArg0|autoArg1 */ userSummary'
+			),
+			'User summary w/o auto comment arguments' => array(
+				'summarytest',
+				'testing',
+				'de',
+				null,
+				array( 'userArg0', 'userArg1' ),
+				'userSummary',
+				'/* summarytest-testing:2|de */ userArg0, userArg1, userSummary'
 			),
 			'Array arguments' => array(
 				'summarytest',
