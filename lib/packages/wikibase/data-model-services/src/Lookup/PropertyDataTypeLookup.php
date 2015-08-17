@@ -18,7 +18,7 @@ interface PropertyDataTypeLookup {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return string
-	 * @throws PropertyNotFoundException
+	 * @throws EntityIdLookupException
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId );
 

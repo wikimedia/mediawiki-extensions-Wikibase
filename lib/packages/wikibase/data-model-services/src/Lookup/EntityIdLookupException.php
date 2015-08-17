@@ -9,8 +9,12 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ *
+ * Thrown to indicate that a lookup has failed.
+ * This DOES NOT mean that the object does not exist.
+ * The object asked for may exist but there is something preventing us from getting it right now.
  */
-class EntityNotFoundException extends \RuntimeException {
+class EntityIdLookupException extends \RuntimeException {
 
 	private $entityId;
 
@@ -18,7 +22,7 @@ class EntityNotFoundException extends \RuntimeException {
 		$this->entityId = $entityId;
 
 		parent::__construct(
-			$message ?: 'Entity not found: ' . $entityId,
+			$message ?: 'Entity lookup failed for: ' . $entityId,
 			0,
 			$previous
 		);

@@ -38,11 +38,16 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @return string
+	 * @return string|null
+	 * @throws EntityIdLookupException
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		$labels = $this->getFingerprint( $entityId )->getLabels();
-		return $labels->getByLanguage( $languageCode )->getText();
+		try{
+			return $labels->getByLanguage( $languageCode )->getText();
+		} catch( OutOfBoundsException $ex ) {
+			return null;
+		}
 	}
 
 	/**
@@ -51,7 +56,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languages
 	 *
-	 * @throws OutOfBoundsException if the entity does not exist
+	 * @throws EntityIdLookupException
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId, array $languages ) {
@@ -66,11 +71,16 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @return string
+	 * @throws EntityIdLookupException
+	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		$descriptions = $this->getFingerprint( $entityId )->getDescriptions();
-		return $descriptions->getByLanguage( $languageCode )->getText();
+		try{
+			return $descriptions->getByLanguage( $languageCode )->getText();
+		} catch( OutOfBoundsException $ex ) {
+			return null;
+		}
 	}
 
 	/**
@@ -79,7 +89,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languages
 	 *
-	 * @throws OutOfBoundsException if the entity does not exist
+	 * @throws EntityIdLookupException
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId, array $languages ) {
@@ -91,6 +101,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
+	 * @throws EntityIdLookupException
 	 * @return Fingerprint
 	 */
 	private function getFingerprint( EntityId $entityId ) {
@@ -106,7 +117,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException
+	 * @throws EntityIdLookupException
 	 * @return Fingerprint
 	 */
 	private function fetchFingerprint( EntityId $entityId ) {
@@ -118,7 +129,10 @@ class EntityRetrievingTermLookup implements TermLookup {
 		}
 
 		if ( $entity === null ) {
-			throw new OutOfBoundsException( "An Entity with the id $entityId could not be loaded" );
+			throw new EntityIdLookupException(
+				$entityId,
+				"The entity could not be loaded"
+			);
 		}
 
 		return $entity instanceof FingerprintProvider ? $entity->getFingerprint() : new Fingerprint();

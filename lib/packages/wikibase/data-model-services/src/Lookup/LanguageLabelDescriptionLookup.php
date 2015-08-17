@@ -37,8 +37,8 @@ class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException if no such label or entity could be found
-	 * @return Term
+	 * @throws EntityIdLookupException
+	 * @return Term|null
 	 */
 	public function getLabel( EntityId $entityId ) {
 		$text = $this->termLookup->getLabel( $entityId, $this->languageCode );
@@ -48,8 +48,8 @@ class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException if no such description or entity could be found
-	 * @return Term
+	 * @throws EntityIdLookupException
+	 * @return Term|null
 	 */
 	public function getDescription( EntityId $entityId ) {
 		$text = $this->termLookup->getDescription( $entityId, $this->languageCode );

@@ -18,8 +18,8 @@ interface ItemLookup {
 	 *
 	 * @param ItemId $itemId
 	 *
-	 * @return Item
-	 * @throws ItemNotFoundException
+	 * @return Item|null
+	 * @throws EntityIdLookupException
 	 */
 	public function getItemForId( ItemId $itemId );
 

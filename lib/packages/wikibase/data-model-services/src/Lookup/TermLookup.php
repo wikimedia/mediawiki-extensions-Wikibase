@@ -23,8 +23,8 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException for label or entity not found
-	 * @return string
+	 * @throws EntityIdLookupException for entity not found
+	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode );
 
@@ -36,9 +36,8 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch
 	 *
-	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
+	 * @throws EntityIdLookupException if the entity was not found (not guaranteed).
 	 * @return string[] labels, keyed by language.
-	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
 	public function getLabels( EntityId $entityId, array $languageCodes );
 
@@ -48,8 +47,8 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException for description or entity not found
-	 * @return string
+	 * @throws EntityIdLookupException for entity not found
+	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode );
 
@@ -62,9 +61,8 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch
 	 *
-	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
+	 * @throws EntityIdLookupException if the entity was not found (not guaranteed).
 	 * @return string[] descriptions, keyed by language.
-	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
 	public function getDescriptions( EntityId $entityId, array $languageCodes );
 

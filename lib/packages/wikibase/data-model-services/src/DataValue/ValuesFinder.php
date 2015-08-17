@@ -4,8 +4,8 @@ namespace Wikibase\DataModel\Services\DataValue;
 
 use DataValues\DataValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityIdLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
@@ -60,7 +60,7 @@ class ValuesFinder {
 	private function isMatchingDataType( PropertyId $propertyId, $dataType ) {
 		try {
 			return $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId ) === $dataType;
-		} catch ( PropertyNotFoundException $ex ) {
+		} catch ( EntityIdLookupException $ex ) {
 			return false;
 		}
 	}
