@@ -281,7 +281,7 @@ class SummaryFormatter {
 		$userSummary = $summary->getUserSummary();
 
 		if ( !is_null( $userSummary ) ) {
-			$autoSummary = $userSummary;
+			$autoSummary = self::formatAutoSummary( $summary ) . ': ' . $userSummary;
 		} else {
 			$autoSummary = self::formatAutoSummary( $summary );
 		}
