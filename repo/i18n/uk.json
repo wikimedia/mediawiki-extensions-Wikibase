@@ -16,7 +16,8 @@
 			"Piramidion",
 			"Капитан Джон Шепард",
 			"Максим Підліснюк",
-			"Alex Blokha"
+			"Alex Blokha",
+			"Dars"
 		]
 	},
 	"wikibase-desc": "Сховище структурованих даних",
@@ -439,10 +440,10 @@
 	"apihelp-wbmergeitems-example-3": "Об'єднує дані з Q66 у Q99, ігноруючи будь-які конфліктні мітки",
 	"apihelp-wbmergeitems-example-4": "Об'єднує дані з  Q66 у Q99, ігноруючи будь-які конфліктні мітки та описи",
 	"apihelp-wbparsevalue-description": "Аналізує значення, використовуючи ValueParser.",
-	"apihelp-wbparsevalue-param-parser": "ID ValueParser для використання. ЗАСТАРІЛО, використовуйте натомість параметр типу даних.",
+	"apihelp-wbparsevalue-param-parser": "Ідентифікатор ValueParser для використання. <span class=\"apihelp-deprecated\">Застарілий</span>. Натомість використовуйте параметр типу даних.",
 	"apihelp-wbparsevalue-param-values": "Значення для аналізу",
 	"apihelp-wbparsevalue-param-options": "Опції, які парсер має використати. Надається як JSON-об'єкт.",
-	"apihelp-wbparsevalue-example-1": "Жодних змін у форматі рядка.",
+	"apihelp-wbparsevalue-example-1": "Розбір звичайного рядку в об'єкт StringValue.",
 	"apihelp-wbremovequalifiers-description": "Вилучає уточнення для твердження.",
 	"apihelp-wbremovequalifiers-param-claim": "GUID твердження, для якого вилучається уточнення",
 	"apihelp-wbremovequalifiers-example-1": "Вилучити уточнення з хешом \"1eb8793c002b1d9820c833d234a1b54c8e94187e\" з твердження з GUID \"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F\"",
