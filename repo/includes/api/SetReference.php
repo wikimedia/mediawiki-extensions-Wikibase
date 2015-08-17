@@ -2,14 +2,19 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -21,7 +26,17 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetReference extends ModifyClaim {
+class SetReference extends ApiBase {
+
+	/**
+	 * @var StatementModificationHelper
+	 */
+	private $modificationHelper;
+
+	/**
+	 * @var StatementGuidParser
+	 */
+	private $guidParser;
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -39,6 +54,21 @@ class SetReference extends ModifyClaim {
 	private $deserializerFactory;
 
 	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -48,6 +78,19 @@ class SetReference extends ModifyClaim {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
@@ -106,8 +149,8 @@ class SetReference extends ModifyClaim {
 		$changeOp = $this->getChangeOp( $newReference );
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$status = $this->saveChanges( $entity, $summary );
-		$resultBuilder = $this->getResultBuilder();
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$resultBuilder = $this->resultBuilder;
 		$resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$resultBuilder->markSuccess();
 		$resultBuilder->addReference( $newReference );
@@ -166,6 +209,16 @@ class SetReference extends ModifyClaim {
 	}
 
 	/**
+	 * @see EntitySavingHelper::loadEntityRevision
+	 */
+	protected function loadEntityRevision(
+		EntityId $entityId,
+		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
+		return $this->entityLoadingHelper->loadEntityRevision( $entityId, $revId );
+	}
+
+	/**
 	 * @see ApiBase::isWriteMode
 	 */
 	public function isWriteMode() {
@@ -204,6 +257,14 @@ class SetReference extends ModifyClaim {
 				'index' => array(
 					self::PARAM_TYPE => 'integer',
 				),
+				'summary' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
@@ -14,9 +15,12 @@ use UsageException;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -30,7 +34,17 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
  */
-class SetClaim extends ModifyClaim {
+class SetClaim extends ApiBase {
+
+	/**
+	 * @var StatementModificationHelper
+	 */
+	private $modificationHelper;
+
+	/**
+	 * @var StatementGuidParser
+	 */
+	private $guidParser;
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -48,6 +62,21 @@ class SetClaim extends ModifyClaim {
 	private $statementDeserializer;
 
 	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -57,6 +86,19 @@ class SetClaim extends ModifyClaim {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$this->statementDeserializer = $wikibaseRepo->getStatementDeserializer();
@@ -101,10 +143,10 @@ class SetClaim extends ModifyClaim {
 
 		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
-		$status = $this->saveChanges( $entity, $summary );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addStatement( $claim );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->addStatement( $claim );
 	}
 
 	/**
@@ -176,6 +218,16 @@ class SetClaim extends ModifyClaim {
 	}
 
 	/**
+	 * @see EntitySavingHelper::loadEntityRevision
+	 */
+	private function loadEntityRevision(
+		EntityId $entityId,
+		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
+		return $this->entityLoadingHelper->loadEntityRevision( $entityId, $revId );
+	}
+
+	/**
 	 * @see ApiBase::isWriteMode
 	 */
 	public function isWriteMode() {
@@ -204,6 +256,14 @@ class SetClaim extends ModifyClaim {
 				'index' => array(
 					self::PARAM_TYPE => 'integer',
 				),
+				'summary' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);

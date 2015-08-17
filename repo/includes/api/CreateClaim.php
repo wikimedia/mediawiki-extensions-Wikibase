@@ -2,10 +2,16 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -18,7 +24,12 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class CreateClaim extends ModifyClaim {
+class CreateClaim extends ApiBase {
+
+	/**
+	 * @var StatementModificationHelper
+	 */
+	private $modificationHelper;
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -31,6 +42,21 @@ class CreateClaim extends ModifyClaim {
 	private $errorReporter;
 
 	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -40,7 +66,20 @@ class CreateClaim extends ModifyClaim {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
@@ -82,10 +121,10 @@ class CreateClaim extends ModifyClaim {
 
 		$statement = $entity->getStatements()->getFirstStatementWithGuid( $changeOp->getStatementGuid() );
 
-		$status = $this->saveChanges( $entity, $summary );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addStatement( $statement );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->addStatement( $statement );
 	}
 
 	/**
@@ -119,6 +158,16 @@ class CreateClaim extends ModifyClaim {
 		if ( isset( $params['value'] ) && json_decode( $params['value'], true ) === null ) {
 			$this->errorReporter->dieError( 'Could not decode snak value', 'invalid-snak' );
 		}
+	}
+
+	/**
+	 * @see EntitySavingHelper::loadEntityRevision
+	 */
+	private function loadEntityRevision(
+		EntityId $entityId,
+		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
+		return $this->entityLoadingHelper->loadEntityRevision( $entityId, $revId );
 	}
 
 	/**
@@ -159,6 +208,14 @@ class CreateClaim extends ModifyClaim {
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => false,
 				),
+				'summary' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);
