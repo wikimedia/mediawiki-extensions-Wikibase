@@ -2,15 +2,19 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -22,7 +26,17 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class RemoveClaims extends ModifyClaim {
+class RemoveClaims extends ApiBase {
+
+	/**
+	 * @var StatementModificationHelper
+	 */
+	private $modificationHelper;
+
+	/**
+	 * @var StatementGuidParser
+	 */
+	private $guidParser;
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -35,6 +49,21 @@ class RemoveClaims extends ModifyClaim {
 	private $errorReporter;
 
 	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -44,6 +73,19 @@ class RemoveClaims extends ModifyClaim {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
@@ -80,10 +122,19 @@ class RemoveClaims extends ModifyClaim {
 			$this->errorReporter->dieException( $e, 'failed-save' );
 		}
 
-		$status = $this->saveChanges( $entity, $summary );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->setList( null, 'claims', $params['claim'], 'claim' );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->setList( null, 'claims', $params['claim'], 'claim' );
+	}
+	/**
+	 * @see EntitySavingHelper::loadEntityRevision
+	 */
+	private function loadEntityRevision(
+		EntityId $entityId,
+		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
+		return $this->entityLoadingHelper->loadEntityRevision( $entityId, $revId );
 	}
 
 	/**
@@ -121,7 +172,10 @@ class RemoveClaims extends ModifyClaim {
 	 * @param StatementList $statements
 	 * @param string[] $requiredGuids
 	 */
-	private function assertStatementListContainsGuids( StatementList $statements, array $requiredGuids ) {
+	private function assertStatementListContainsGuids(
+		StatementList $statements,
+		array $requiredGuids
+	) {
 		$existingGuids = array();
 
 		/** @var Statement $statement */
@@ -184,6 +238,14 @@ class RemoveClaims extends ModifyClaim {
 					self::PARAM_ISMULTI => true,
 					self::PARAM_REQUIRED => true,
 				),
+				'summary' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);

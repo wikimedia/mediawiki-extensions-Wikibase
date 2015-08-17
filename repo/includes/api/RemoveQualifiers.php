@@ -2,12 +2,18 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -19,7 +25,17 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class RemoveQualifiers extends ModifyClaim {
+class RemoveQualifiers extends ApiBase {
+
+	/**
+	 * @var StatementModificationHelper
+	 */
+	private $statementModificationHelper;
+
+	/**
+	 * @var StatementGuidParser
+	 */
+	private $guidParser;
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -32,6 +48,21 @@ class RemoveQualifiers extends ModifyClaim {
 	private $errorReporter;
 
 	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -41,7 +72,20 @@ class RemoveQualifiers extends ModifyClaim {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
@@ -64,9 +108,9 @@ class RemoveQualifiers extends ModifyClaim {
 			$entityRevision = $this->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
-		$summary = $this->modificationHelper->createSummary( $params, $this );
+		$summary = $this->statementModificationHelper->createSummary( $params, $this );
 
-		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
+		$claim = $this->statementModificationHelper->getStatementFromEntity( $guid, $entity );
 
 		$qualifierHashes = $this->getQualifierHashesFromParams( $params, $claim );
 
@@ -79,18 +123,28 @@ class RemoveQualifiers extends ModifyClaim {
 			$this->errorReporter->dieException( $e, 'failed-save' );
 		}
 
-		$status = $this->saveChanges( $entity, $summary );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
 	}
 
 	/**
 	 * Check the provided parameters
 	 */
 	private function validateParameters( array $params ) {
-		if ( !( $this->modificationHelper->validateStatementGuid( $params['claim'] ) ) ) {
+		if ( !( $this->statementModificationHelper->validateStatementGuid( $params['claim'] ) ) ) {
 			$this->errorReporter->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
+	}
+
+	/**
+	 * @see EntitySavingHelper::loadEntityRevision
+	 */
+	private function loadEntityRevision(
+		EntityId $entityId,
+		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
+		return $this->entityLoadingHelper->loadEntityRevision( $entityId, $revId );
 	}
 
 	/**
@@ -103,7 +157,10 @@ class RemoveQualifiers extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $qualifierHashes as $qualifierHash ) {
-			$changeOps[] = $this->statementChangeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
+			$changeOps[] = $this->statementChangeOpFactory->newRemoveQualifierOp(
+				$claimGuid,
+				$qualifierHash
+			);
 		}
 
 		return $changeOps;
@@ -160,6 +217,14 @@ class RemoveQualifiers extends ModifyClaim {
 					self::PARAM_REQUIRED => true,
 					self::PARAM_ISMULTI => true,
 				),
+				'summary' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);
