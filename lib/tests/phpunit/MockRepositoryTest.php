@@ -648,8 +648,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
 		$this->repo->putRedirect( $redirect );
 
+		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
 		$this->repo->deleteEntity( $redirect->getEntityId(), 'testing', $GLOBALS['wgUser'] );
-		$this->assertNull( $this->repo->getEntity( $redirect->getEntityId() ) );
 	}
 
 	public function testUpdateWatchlist() {
