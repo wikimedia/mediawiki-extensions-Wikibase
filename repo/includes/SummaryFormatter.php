@@ -241,11 +241,10 @@ class SummaryFormatter {
 	 *
 	 * @param string $comment autocomment part, will be placed in a block comment
 	 * @param string $summary human readable string to be appended after the autocomment part
-	 * @param int $length max length of the string
 	 *
 	 * @return string to be used for the summary
 	 */
-	private function assembleSummaryString( $comment, $summary, $length = SUMMARY_MAX_LENGTH ) {
+	private function assembleSummaryString( $comment, $summary ) {
 		$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 
 		$comment = $normalizer->trimToNFC( $comment );
@@ -259,7 +258,10 @@ class SummaryFormatter {
 				// Having a space after the comment is commonly known from section edits
 				$mergedString .= ' ';
 			}
-			$mergedString .= $this->language->truncate( $summary, $length - strlen( $mergedString ) );
+			$mergedString .= $this->language->truncate(
+				$summary,
+				SUMMARY_MAX_LENGTH - strlen( $mergedString )
+			);
 		}
 
 		// leftover entities should be removed, but its not clear how this shall be done
@@ -272,18 +274,10 @@ class SummaryFormatter {
 	 * @since 0.5
 	 *
 	 * @param Summary $summary
-	 * @param int $length Max length of the summary
-	 * @param int $format Bit field indicating what to include, see the Summary::USE_XXX constants.
 	 *
 	 * @return string to be used for the summary
-	 *
-	 * @see Summary::USE_ALL
 	 */
-	public function formatSummary(
-		Summary $summary,
-		$length = SUMMARY_MAX_LENGTH,
-		$format = Summary::USE_ALL
-	) {
+	public function formatSummary( Summary $summary ) {
 		$userSummary = $summary->getUserSummary();
 
 		if ( !is_null( $userSummary ) ) {
@@ -293,13 +287,10 @@ class SummaryFormatter {
 		}
 
 		$autoComment = $this->formatAutoComment( $summary );
+		$autoComment = $this->stringNormalizer->trimToNFC( $autoComment );
+		$autoSummary = $this->stringNormalizer->trimToNFC( $autoSummary );
 
-		$autoComment = ( $format & Summary::USE_COMMENT )
-			? $this->stringNormalizer->trimToNFC( $autoComment ) : '';
-		$autoSummary = ( $format & Summary::USE_SUMMARY )
-			? $this->stringNormalizer->trimToNFC( $autoSummary ) : '';
-
-		$totalSummary = self::assembleSummaryString( $autoComment, $autoSummary, $length );
+		$totalSummary = self::assembleSummaryString( $autoComment, $autoSummary );
 		return $totalSummary;
 	}
 

@@ -45,13 +45,6 @@ class Summary {
 	private $userSummary;
 
 	/**
-	 * Indicates a specific type of formatting
-	 */
-	const USE_COMMENT = 2;
-	const USE_SUMMARY = 4;
-	const USE_ALL = 6;
-
-	/**
 	 * @since 0.4
 	 *
 	 * @param string|null $moduleName The module part of the auto comment
