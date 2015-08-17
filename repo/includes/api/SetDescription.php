@@ -82,6 +82,24 @@ class SetDescription extends ModifyTerm {
 	}
 
 	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode()
+	 *
+	 * @return bool Always true.
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {

@@ -122,6 +122,22 @@ class CreateClaim extends ModifyClaim {
 	}
 
 	/**
+	 * @see ApiBase::isWriteMode
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
