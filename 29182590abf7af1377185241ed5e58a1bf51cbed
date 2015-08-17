@@ -52,6 +52,24 @@
       "revId": "29182590abf7af1377185241ed5e58a1bf51cbed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_cebd3f18",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-17T09:07:23Z",
+      "side": 1,
+      "message": "If getResult is called multiple times then everything will still work, but it may be slightly more expensive as these propertyIds are simply used for prefetching terms.\nBut again this does not ever happen thus I am not accounting for it.\n\nIf getResult was ever called more than once then we wouls just merge the resulting arrays of propertyIds into $this-\u003epropertyIds",
+      "parentUuid": "8ec42329_548a8420",
+      "revId": "29182590abf7af1377185241ed5e58a1bf51cbed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
