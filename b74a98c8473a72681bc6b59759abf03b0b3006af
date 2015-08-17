@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_b95effea",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-17T14:03:07Z",
+      "side": 1,
+      "message": "Why not:\n\n $autoSummary \u003d self::formatAutoSummary( $summary );\n if ( !is_null( $userSummary ) ) {\n \t$autoSummary .\u003d \u0027: \u0027 . $userSummary;\n }",
+      "revId": "b74a98c8473a72681bc6b59759abf03b0b3006af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
