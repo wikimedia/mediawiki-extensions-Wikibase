@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use Exception;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -11,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class UnresolvedRedirectException extends StorageException {
+class UnresolvedRedirectException extends Exception {
 
 	/**
 	 * @var EntityId
