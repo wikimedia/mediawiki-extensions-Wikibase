@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_4e494f8f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-17T12:57:25Z",
+      "side": 1,
+      "message": "Missing @since tag.",
+      "revId": "0e1b4bec7a44bab8dbe0f015d5893e5bb41fb0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_6e9f6b07",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 1
