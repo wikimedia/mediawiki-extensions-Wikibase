@@ -120,6 +120,20 @@ class AddUsagesForPageJob extends Job {
 	}
 
 	/**
+	 * @see Job::getDeduplicationInfo
+	 *
+	 * @return mixed[] Job params array, with touched omitted.
+	 */
+	public function getDeduplicationInfo() {
+		// parent Job class returns an array with 'params' key
+		$info = parent::getDeduplicationInfo();
+
+		unset( $info['params']['touched'] );
+
+		return $info;
+	}
+
+	/**
 	 * @return EntityUsage[]
 	 */
 	private function getUsages() {
