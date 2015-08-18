@@ -45,7 +45,7 @@ class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getMovePageNoticeCaseProvider
 	 */
-	public function testDoSpecialMovepageAfterMove( $expected, Title $oldTitle, Title $newTitle, $message ) {
+	public function testDoSpecialMovepageAfterMove( $expected, Title $oldTitle, Title $newTitle ) {
 		$siteLinkLookup = $this->getMock(
 			'Wikibase\Lib\Store\SiteLinkTable',
 			array( 'getItemIdForSiteLink' ),
@@ -95,8 +95,8 @@ class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
 		$expected2 = $this->getParsedMessage( 'wikibase-after-page-move-queued' );
 
 		return array(
-			array( $expected, $oldTitle, $newTitle, 'after page move' ),
-			array( $expected2, $oldTitle, $newTitle2, 'page move queued' )
+			'after page move' => array( $expected, $oldTitle, $newTitle ),
+			'page move queued' => array( $expected2, $oldTitle, $newTitle2 )
 		);
 	}
 

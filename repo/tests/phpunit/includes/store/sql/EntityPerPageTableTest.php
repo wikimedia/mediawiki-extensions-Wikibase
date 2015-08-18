@@ -66,7 +66,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->assertEmpty( $ids, 'Redirects must not show up in ID listings' );
 	}
 
-	protected function isRedirectTargetColumnSupported() {
+	private function isRedirectTargetColumnSupported() {
 		return WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
 	}
 
@@ -76,7 +76,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityPerPageTable
 	 */
-	protected function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
+	private function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
 		$useRedirectTargetColumn = $this->isRedirectTargetColumnSupported();
 		$idParser = new BasicEntityIdParser();
 
@@ -96,7 +96,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		return $table;
 	}
 
-	protected function getIdStrings( array $entities ) {
+	private function getIdStrings( array $entities ) {
 		$ids = array_map( function ( $entity ) {
 			if ( $entity instanceof EntityDocument ) {
 				$entity = $entity->getId();
@@ -110,7 +110,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		return $ids;
 	}
 
-	protected function assertEqualIds( array $expected,array $actual, $msg = null ) {
+	private function assertEqualIds( array $expected, array $actual ) {
 		$expectedIds = $this->getIdStrings( $expected );
 		$actualIds = $this->getIdStrings( $actual );
 

@@ -115,22 +115,6 @@ class EntityContentDiffView extends DifferenceEngine {
 	}
 
 	/**
-	 * @see DifferenceEngine::addHeader
-	 *
-	 * @param string $diff
-	 * @param string $otitle
-	 * @param string $ntitle
-	 * @param string $multi
-	 * @param string $notice
-	 *
-	 * @return string
-	 */
-	public function addHeader( $diff, $otitle, $ntitle, $multi = '', $notice = '' ) {
-		// if we don't want a two column table layout, we have to change this
-		return parent::addHeader( $diff, $otitle, $ntitle, $multi, $notice );
-	}
-
-	/**
 	 * @return Language
 	 */
 	public function getDiffLang() {
