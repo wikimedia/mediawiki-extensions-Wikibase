@@ -16,6 +16,24 @@
       "revId": "3a5b7423bdeb0b059631393d3b64eb9c1f391741",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e77a991e",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-18T07:56:58Z",
+      "side": 0,
+      "message": "Already done in formatSummary method.\nThis was then duplicated here",
+      "parentUuid": "6ec1af18_67878915",
+      "revId": "3a5b7423bdeb0b059631393d3b64eb9c1f391741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
