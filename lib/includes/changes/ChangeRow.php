@@ -176,10 +176,6 @@ class ChangeRow extends ORMRow implements Change {
 	protected function getInfo( $cache = 'no' ) {
 		$info = $this->getField( 'info' );
 
-		if ( !is_array( $info ) ) {
-			$info = array();
-		}
-
 		if ( $cache === 'cache' ) {
 			$this->setField( 'info', $info );
 		}
@@ -260,6 +256,7 @@ class ChangeRow extends ORMRow implements Change {
 
 		if ( !is_array( $info ) ) {
 			wfLogWarning( "Failed to unserializeInfo of id: " . $this->getObjectId() );
+			return array();
 		}
 
 		return $info;
