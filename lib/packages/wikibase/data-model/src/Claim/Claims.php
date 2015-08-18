@@ -59,16 +59,16 @@ class Claims extends ArrayObject {
 	}
 
 	/**
-	 * @param Statement $claim
+	 * @param Statement $statement
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	private function getClaimKey( Statement $claim ) {
-		$guid = $claim->getGuid();
+	private function getClaimKey( Statement $statement ) {
+		$guid = $statement->getGuid();
 
 		if ( $guid === null ) {
-			throw new InvalidArgumentException( 'Can\'t handle claims with no GUID set!' );
+			throw new InvalidArgumentException( 'Can\'t handle statements with no GUID set' );
 		}
 
 		$key = $this->getGuidKey( $guid );
@@ -79,16 +79,16 @@ class Claims extends ArrayObject {
 	 * @since 0.1
 	 * @deprecated since 1.0, use StatementList::addStatement() instead.
 	 *
-	 * @param Statement $claim
+	 * @param Statement $statement
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addClaim( Statement $claim ) {
+	public function addClaim( Statement $statement ) {
 		if ( func_num_args() > 1 ) {
 			throw new InvalidArgumentException( '$index is not supported any more' );
 		}
 
-		$this[] = $claim;
+		$this[] = $statement;
 	}
 
 	/**
@@ -166,16 +166,16 @@ class Claims extends ArrayObject {
 	 * @deprecated since 1.0, should never be called.
 	 *
 	 * @param string $guid
-	 * @param Statement $claim
+	 * @param Statement $statement
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function offsetSet( $guid, $claim ) {
-		if ( !( $claim instanceof Statement ) ) {
-			throw new InvalidArgumentException( '$claim must be an instance of Statement' );
+	public function offsetSet( $guid, $statement ) {
+		if ( !( $statement instanceof Statement ) ) {
+			throw new InvalidArgumentException( '$statement must be an instance of Statement' );
 		}
 
-		$claimKey = $this->getClaimKey( $claim );
+		$claimKey = $this->getClaimKey( $statement );
 
 		if ( $guid !== null ) {
 			$guidKey = $this->getGuidKey( $guid );
@@ -185,7 +185,7 @@ class Claims extends ArrayObject {
 			}
 		}
 
-		parent::offsetSet( $claimKey, $claim );
+		parent::offsetSet( $claimKey, $statement );
 	}
 
 	/**
