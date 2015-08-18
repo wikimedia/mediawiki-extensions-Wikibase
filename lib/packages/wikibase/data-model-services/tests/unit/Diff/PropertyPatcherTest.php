@@ -32,7 +32,7 @@ class PropertyPatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getPatchedProperty( Property $property, EntityDiff $patch ) {
-		$patchedProperty = unserialize( serialize( $property ) );
+		$patchedProperty = $property->copy();
 
 		$patcher = new PropertyPatcher();
 		$patcher->patchEntity( $patchedProperty, $patch );
