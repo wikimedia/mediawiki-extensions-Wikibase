@@ -441,6 +441,7 @@
 	"apihelp-wbmergeitems-example-4": "Об'єднує дані з  Q66 у Q99, ігноруючи будь-які конфліктні мітки та описи",
 	"apihelp-wbparsevalue-description": "Аналізує значення, використовуючи ValueParser.",
 	"apihelp-wbparsevalue-param-parser": "Ідентифікатор ValueParser для використання. <span class=\"apihelp-deprecated\">Застарілий</span>. Натомість використовуйте параметр типу даних.",
+	"apihelp-wbparsevalue-param-datatype": "Тип даних значення для синтаксичного аналізу. Визначає який аналізатор використовувати.",
 	"apihelp-wbparsevalue-param-values": "Значення для аналізу",
 	"apihelp-wbparsevalue-param-options": "Опції, які парсер має використати. Надається як JSON-об'єкт.",
 	"apihelp-wbparsevalue-example-1": "Розбір звичайного рядку в об'єкт StringValue.",

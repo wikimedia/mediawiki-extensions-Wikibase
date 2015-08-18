@@ -45,6 +45,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Pead olema sisse loginud",
 	"wikibase-linkitem-not-loggedin": "Et kasutada seda funktsiooni, pead olema sisse loginud siia vikisse ja [$1 kesksesse andmehoidlasse].",
 	"wikibase-linkitem-success-link": "Leheküljed on edukalt ühendatud. Linke sisaldava üksuse leiad [$1 kesksest andmehoidlast].",
+	"wikibase-limitreport-entities-accessed": "Vikibaasist laaditud olemite arv",
 	"wikibase-property-notfound": "Omadust $1 ei leitud.",
 	"wikibase-rc-hide-wikidata": "Vikiandmed ($1)",
 	"wikibase-rc-hide-wikidata-hide": "peida",

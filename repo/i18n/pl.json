@@ -131,6 +131,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Witryna:",
 	"wikibase-gotolinkedpage-lookup-item": "Identyfikator elementu:",
 	"wikibase-gotolinkedpage-submit": "Dalej",
+	"wikibase-gotolinkedpage-error-item-not-found": "Nie znaleziono elementu",
 	"special-itemdisambiguation": "Ujednoznacznienie elementów",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Wyszukiwanie elementów według języka i etykiety",
 	"wikibase-itemdisambiguation-lookup-language": "Kod języka:",
