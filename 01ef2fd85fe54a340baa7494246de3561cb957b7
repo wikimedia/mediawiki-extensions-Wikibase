@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_22be4ffb",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-18T11:16:05Z",
+      "side": 1,
+      "message": "This is not a CP error, colon-separator is only needed when there is an autosummary.\nThis is due to the fact that on the actual rendering of the autocomment an colon seperator is already added to the end",
+      "parentUuid": "6ec1af18_22e72f3d",
+      "revId": "01ef2fd85fe54a340baa7494246de3561cb957b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_62c45795",
         "filename": "repo/includes/SummaryFormatter.php",
         "patchSetId": 7
@@ -48,6 +66,24 @@
       "writtenOn": "2015-08-18T11:12:13Z",
       "side": 1,
       "message": "one downside of using colon-separator here is that this will be saved to the DB as is, ie, if a DE users makes an edit and an EN users views the summary they will see the DE separator...",
+      "revId": "01ef2fd85fe54a340baa7494246de3561cb957b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e237e7a9",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-18T11:16:05Z",
+      "side": 1,
+      "message": "I think we should revert to using a string \u0027:\u0027 here",
+      "parentUuid": "6ec1af18_62c45795",
       "revId": "01ef2fd85fe54a340baa7494246de3561cb957b7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
