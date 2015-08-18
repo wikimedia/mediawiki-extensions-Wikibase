@@ -64,8 +64,7 @@
 
 	<rule ref="PSR2.Classes.PropertyDeclaration" />
 	<rule ref="PSR2.ControlStructures.ElseIfDeclaration" />
-	<rule ref="PSR2.Files.ClosingTag" />
-	<rule ref="PSR2.Files.EndFileNewline" />
+	<rule ref="PSR2.Files" />
 	<rule ref="PSR2.Methods.MethodDeclaration" />
 	<rule ref="PSR2.Namespaces" />
 
@@ -92,5 +91,5 @@
 	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
 
-	<rule ref="Zend.Files.ClosingTag" />
+	<rule ref="Zend.Files" />
 </ruleset>
