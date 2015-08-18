@@ -24,7 +24,7 @@ class EntityPatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenEmptyDiffItemRemainsUnchanged( Item $item ) {
 		$patcher = new EntityPatcher();
 
-		$patchedEntity = unserialize( serialize( $item ) );
+		$patchedEntity = $item->copy();
 		$patcher->patchEntity( $patchedEntity, new ItemDiff() );
 
 		$this->assertEquals( $item, $patchedEntity );
