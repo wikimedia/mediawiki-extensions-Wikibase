@@ -2,24 +2,20 @@
 
 namespace Wikibase\DataModel\Services\Tests\Diff;
 
-use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
-use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Services\Diff\DiffOpFactory;
+use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\DiffOpFactory
+ * @covers Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpFactoryTest extends \PHPUnit_Framework_TestCase {
+class EntityTypeAwareDiffOpFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNormalDiffOpArray_diffOpIsReturned() {
-		$factory = new DiffOpFactory();
+		$factory = new EntityTypeAwareDiffOpFactory();
 
 		$diffOp = new DiffOpAdd( 42 );
 		$newDiffOp = $factory->newFromArray( $diffOp->toArray() );
@@ -28,13 +24,13 @@ class DiffOpFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenInvalidDiffOp_exceptionIsThrown() {
-		$factory = new DiffOpFactory();
+		$factory = new EntityTypeAwareDiffOpFactory();
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$factory->newFromArray( array( 'wee' ) );
 	}
 
 	public function testGivenEntityDiffOpArray_entityDiffOpisReturned() {
-		$factory = new DiffOpFactory();
+		$factory = new EntityTypeAwareDiffOpFactory();
 
 		$diffOp = new ItemDiff( array() );
 		$newDiffOp = $factory->newFromArray( $diffOp->toArray() );

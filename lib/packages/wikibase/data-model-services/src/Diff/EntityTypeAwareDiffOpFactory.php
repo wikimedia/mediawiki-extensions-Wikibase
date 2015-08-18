@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Services\Diff;
 
 use Diff\DiffOp\DiffOp;
-use Diff\DiffOpFactory as DiffDiffOpFactory;
+use Diff\DiffOpFactory;
 use InvalidArgumentException;
 
 /**
@@ -14,7 +14,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class DiffOpFactory extends DiffDiffOpFactory {
+class EntityTypeAwareDiffOpFactory extends DiffOpFactory {
 
 	/**
 	 * @param array $diffOp
