@@ -53,6 +53,24 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
+	}
+
+	/**
+	 * @see ApiBase::isWriteMode()
+	 *
+	 * @return bool Always true.
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
 	 * @param EntityDocument $entity
 	 *
 	 * @throws InvalidArgumentException

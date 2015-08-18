@@ -53,6 +53,24 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
+	 * @see ApiBase::isWriteMode()
+	 *
+	 * @return bool Always true.
+	 */
+	public function isWriteMode() {
+		return true;
+	}
+
+	/**
+	 * @see ApiBase::needsToken
+	 *
+	 * @return string
+	 */
+	public function needsToken() {
+		return 'csrf';
+	}
+
+	/**
 	 * Checks whether the link should be removed based on params
 	 *
 	 * @param array $params
