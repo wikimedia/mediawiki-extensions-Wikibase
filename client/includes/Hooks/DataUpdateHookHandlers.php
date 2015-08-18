@@ -107,8 +107,17 @@ class DataUpdateHookHandlers {
 		ParserOptions $pops,
 		$revId
 	) {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		if ( $settings->getSetting( 'allowDataAccessInUserLanguage' ) === true ) {
+			$langCode = $pops->getUserLangObj()->getCode();
+		} else {
+			global $wgContLang;
+			$langCode = $wgContLang->getCode();
+		}
+
 		$handler = self::newFromGlobalState();
-		$handler->doParserCacheSaveComplete( $pout, $title );
+		$handler->doParserCacheSaveComplete( $pout, $title, $langCode );
 	}
 
 	public function __construct(
@@ -162,8 +171,9 @@ class DataUpdateHookHandlers {
 	 *
 	 * @param ParserOutput $parserOutput
 	 * @param Title $title
+	 * @param string $langCode
 	 */
-	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
+	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title, $langCode ) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
 		// The parser output should tell us when it was parsed. If not, ask the Title object.
@@ -184,7 +194,13 @@ class DataUpdateHookHandlers {
 
 		//TODO: Before posting a job, check slave database. If no changes are needed, skip update.
 
-		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages(), $touched );
+		$addUsagesForPageJob = AddUsagesForPageJob::newSpec(
+			$title,
+			$usageAcc->getUsages(),
+			$touched,
+			$langCode
+		);
+
 		$enqueueJob = EnqueueJob::newFromLocalJobs( $addUsagesForPageJob );
 
 		$this->jobScheduler->lazyPush( $enqueueJob );
