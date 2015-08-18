@@ -120,6 +120,25 @@ class AddUsagesForPageJob extends Job {
 	}
 
 	/**
+	 * @see Job::getDeduplicationInfo
+	 *
+	 * @return array Job params array, with touched omitted.
+	 */
+	public function getDeduplicationInfo() {
+		// parent Job class returns an array with 'params' key
+		$info = parent::getDeduplicationInfo();
+
+		// If this job is not yet processed and a new one (e.g. from a more recent
+		// edit) is created with same page id and usages, then the job queue can
+		// disregard this one and avoid duplicate, excess database updates.
+		if ( is_array( $info['params'] ) ) {
+			unset( $info['params']['touched'] );
+		}
+
+		return $info;
+	}
+
+	/**
 	 * @return EntityUsage[]
 	 */
 	private function getUsages() {
