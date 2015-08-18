@@ -45,6 +45,7 @@
 	<rule ref="Generic.PHP.DeprecatedFunctions" />
 	<rule ref="Generic.PHP.DisallowShortOpenTag" />
 	<rule ref="Generic.PHP.ForbiddenFunctions" />
+	<rule ref="Generic.PHP.LowerCaseConstant" />
 	<rule ref="Generic.PHP.LowerCaseKeyword" />
 	<rule ref="Generic.PHP.NoSilencedErrors" />
 	<rule ref="Generic.PHP.SAPIUsage" />
@@ -66,18 +67,19 @@
 	<rule ref="PSR2.Files.ClosingTag" />
 	<rule ref="PSR2.Files.EndFileNewline" />
 	<rule ref="PSR2.Methods.MethodDeclaration" />
-	<rule ref="PSR2.Namespaces.NamespaceDeclaration" />
-	<rule ref="PSR2.Namespaces.UseDeclaration" />
+	<rule ref="PSR2.Namespaces" />
 
 	<!-- This sniff is included in PSR1 but needs an exception. -->
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
 		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibase*Library</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
+	<rule ref="Squiz.Scope" />
 	<rule ref="Squiz.Scope.MethodScope">
 		<!-- FIXME: This indicates an error in the QueryPage base class that should be fixed. -->
 		<exclude-pattern>SpecialUnconnectedPages\.php</exclude-pattern>
 	</rule>
+	<rule ref="Squiz.WhiteSpace.CastSpacing" />
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
 		<properties>
 			<property name="spacing" value="1" />
@@ -86,6 +88,7 @@
 	<rule ref="Squiz.WhiteSpace.LanguageConstructSpacing" />
 	<rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing" />
 	<rule ref="Squiz.WhiteSpace.ScopeClosingBrace" />
+	<rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing" />
 	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
 
