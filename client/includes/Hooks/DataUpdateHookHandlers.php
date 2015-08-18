@@ -12,6 +12,7 @@ use ParserOptions;
 use ParserOutput;
 use Title;
 use User;
+use Wikibase\Client\ParserLanguageOptions;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -42,10 +43,16 @@ class DataUpdateHookHandlers {
 	 */
 	private $jobScheduler;
 
+	/**
+	 * @var ParserLanguageOptions
+	 */
+	private $parserLanguageOptions;
+
 	public static function newFromGlobalState() {
 		return new DataUpdateHookHandlers(
 			WikibaseClient::getDefaultInstance()->getStore()->getUsageUpdater(),
-			JobQueueGroup::singleton()
+			JobQueueGroup::singleton(),
+			new ParserLanguageOptions()
 		);
 	}
 
@@ -104,19 +111,21 @@ class DataUpdateHookHandlers {
 		ParserCache $parserCache,
 		ParserOutput $pout,
 		Title $title,
-		ParserOptions $pops,
+		ParserOptions $popts,
 		$revId
 	) {
 		$handler = self::newFromGlobalState();
-		$handler->doParserCacheSaveComplete( $pout, $title );
+		$handler->doParserCacheSaveComplete( $pout, $popts, $title );
 	}
 
 	public function __construct(
 		UsageUpdater $usageUpdater,
-		JobQueueGroup $jobScheduler
+		JobQueueGroup $jobScheduler,
+		ParserLanguageOptions $parserLanguageOptions
 	) {
 		$this->usageUpdater = $usageUpdater;
 		$this->jobScheduler = $jobScheduler;
+		$this->parserLanguageOptions = $parserLanguageOptions;
 	}
 
 	/**
@@ -161,9 +170,14 @@ class DataUpdateHookHandlers {
 	 * Implemented to update usage tracking information via UsageUpdater.
 	 *
 	 * @param ParserOutput $parserOutput
+	 * @param ParserOptions $parserOptions
 	 * @param Title $title
 	 */
-	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
+	public function doParserCacheSaveComplete(
+		ParserOutput $parserOutput,
+		ParserOptions $parserOptions,
+		Title $title
+	) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
 		// The parser output should tell us when it was parsed. If not, ask the Title object.
@@ -183,11 +197,44 @@ class DataUpdateHookHandlers {
 		// during a GET request.
 
 		//TODO: Before posting a job, check slave database. If no changes are needed, skip update.
+		$addUsagesForPageJob = AddUsagesForPageJob::newSpec(
+			$title,
+			$usageAcc->getUsages(),
+			$touched,
+			$parserLanguageOptions->getParserLanguageCode( $parserOutput, $parserOptions, $title )
+		);
 
-		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages(), $touched );
 		$enqueueJob = EnqueueJob::newFromLocalJobs( $addUsagesForPageJob );
 
 		$this->jobScheduler->lazyPush( $enqueueJob );
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param ParserOptions $parserOptions
+	 * @param Title $title
+	 *
+	 * @return string language code
+	 */
+	private static function getParserLanguageCode(
+		ParserOutput $parserOutput,
+		ParserOptions $parserOptions,
+		Title $title
+	) {
+		// see T109705 for implementing a better, more consistent way of
+		// knowing and getting parser language in core.
+		$targetLanguage = $parserOptions->getTargetLanguage();
+
+		if ( $targetLanguage instanceof Language ) {
+			return $targetLanguage->getCode();
+		} elseif (
+			in_array( 'userlang', $parserOutput->getUsedOptions() ) ||
+			$parserOptions->getInterfaceMessage()
+		) {
+			return $parserOptions->getUserLang();
+		}
+
+		return $title->getPageLanguage()->getCode();
 	}
 
 	/**

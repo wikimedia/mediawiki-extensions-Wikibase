@@ -110,7 +110,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 							'params' => array(
 								'pageId' => $title->getArticleID(),
 								'usages' => $expectedUsageArray,
-								'touched' => $touched
+								'touched' => $touched,
+								'langCode' => 'es'
 							),
 							'opts' => array(
 								'removeDuplicates' => true
@@ -156,9 +157,16 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $touched, $prune, !$asyncAdd );
 		$jobScheduler = $this->newJobScheduler( $title, $expectedUsages, $touched, $asyncAdd );
 
+		$parserLanguageOptions = $this->getMock( 'Wikibase\Client\ParserLanguageOptions' );
+
+		$parserLanguageOptions->expects( $this->any() )
+			->method( 'getParserLanguageCode' )
+			->will( $this->returnValue( 'es' ) );
+
 		return new DataUpdateHookHandlers(
 			$usageUpdater,
-			$jobScheduler
+			$jobScheduler,
+			$parserLanguageOptions
 		);
 	}
 
@@ -254,10 +262,11 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$timestamp = '20150505000000';
 
 		$parserOutput = $this->newParserOutput( $usage, $timestamp );
+		$parserOptions = new ParserOptions();
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, false, true );
-		$handler->doParserCacheSaveComplete( $parserOutput, $title );
+		$handler->doParserCacheSaveComplete( $parserOutput, $parserOptions, $title );
 	}
 
 	public function testDoArticleDeleteComplete() {
