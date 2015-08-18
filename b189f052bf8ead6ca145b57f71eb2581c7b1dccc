@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_4754cd56",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-18T09:21:06Z",
+      "side": 1,
+      "message": "No non-localizable strings please. Use a message, e.g. \"colon-separator\" or a combination of \"word-separator\" and \"parentheses\".",
+      "revId": "b189f052bf8ead6ca145b57f71eb2581c7b1dccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e7529969",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-18T09:21:06Z",
+      "side": 1,
+      "message": "The issue with this formatting is that the clickable area will be in a different position in every line. Either the whole line should be clickable or the raw (unclickable) id should be behind the (clickable) link.",
+      "revId": "b189f052bf8ead6ca145b57f71eb2581c7b1dccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a7c49112",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-18T09:21:06Z",
+      "side": 1,
+      "message": "This property is not declared in the class header.",
+      "revId": "b189f052bf8ead6ca145b57f71eb2581c7b1dccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
