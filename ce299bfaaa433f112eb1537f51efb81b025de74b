@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c2b3cbe6",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-18T13:13:28Z",
+      "side": 1,
+      "message": "These are not the \"names\" of languages. Please rename to \"canonicalLanguageCodes\", for example. Core also calls it\u0027s \"wgDummyLanguageCodes\" setting \"...LanguageCodes\".",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_429a7b76",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-18T13:13:28Z",
+      "side": 1,
+      "message": "I find these two variable names odd. Please rename to something like $canonicalLanguageCodes and $canonicalLanguageCodeCache.",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a2b31ffc",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-18T13:13:28Z",
+      "side": 1,
+      "message": "Why is it necessary and/or useful to cache the result of a function that dos nothing but simple string manipulation?",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_82b063f2",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-18T13:13:28Z",
+      "side": 1,
+      "message": "This code looks like it\u0027s in the wrong order. First, the cache is checked. Then, two other sources are checked. Then the cache is filled.\n\nPlease have all cache related code together.",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
