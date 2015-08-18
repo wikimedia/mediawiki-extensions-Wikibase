@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_d9e17d2a",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-18T23:36:56Z",
+      "side": 1,
+      "message": "ok, I\u0027ll rename it",
+      "parentUuid": "6ec1af18_c2b3cbe6",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_429a7b76",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 4
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_b9e6f13d",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-18T23:36:56Z",
+      "side": 1,
+      "message": "Because this will be called literally millions of times when doing the dump. Saving millions of function calls speeds up the dump.",
+      "parentUuid": "6ec1af18_a2b31ffc",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_82b063f2",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 4
@@ -64,6 +100,24 @@
       "writtenOn": "2015-08-18T13:13:28Z",
       "side": 1,
       "message": "This code looks like it\u0027s in the wrong order. First, the cache is checked. Then, two other sources are checked. Then the cache is filled.\n\nPlease have all cache related code together.",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_19cf05b7",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-18T23:36:56Z",
+      "side": 1,
+      "message": "Most frequent case would be \"simple\" languages en, de, etc. - those will be in the cache, and putting cache checks saves time for those. Only in rare cases of exotic languages the mapping sets need to be consulted. Thus they go after the cache check, since in most cases the cache check is what will be sufficient. Optimizing for the common case.",
+      "parentUuid": "6ec1af18_82b063f2",
       "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
