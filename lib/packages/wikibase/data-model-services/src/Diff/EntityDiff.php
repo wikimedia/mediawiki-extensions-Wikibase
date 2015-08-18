@@ -25,8 +25,7 @@ class EntityDiff extends Diff {
 	public static function newForType( $entityType, $operations = array() ) {
 		if ( $entityType === Item::ENTITY_TYPE ) {
 			return new ItemDiff( $operations );
-		}
-		else {
+		} else {
 			return new self( $operations );
 		}
 	}
