@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c7819dc9",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-08-18T09:16:22Z",
+      "side": 1,
+      "message": "see below, $userSummary !\u003d\u003d null \u0026\u0026 $userSummary !\u003d\u003d \u0027\u0027",
+      "revId": "12f613a7585dd69f93fbc2466792cb81a9088b0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a77ed1df",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-08-18T09:16:22Z",
+      "side": 1,
+      "message": "We could do this check in the `assembleSummaryString` method instead which makes this method more readable and seems to fit there much better as we already check if it is an empty string there. Adding another check for null seems to be a better idea.",
+      "revId": "12f613a7585dd69f93fbc2466792cb81a9088b0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
