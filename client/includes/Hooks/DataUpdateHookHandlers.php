@@ -104,7 +104,7 @@ class DataUpdateHookHandlers {
 		ParserCache $parserCache,
 		ParserOutput $pout,
 		Title $title,
-		ParserOptions $pops,
+		ParserOptions $popts,
 		$revId
 	) {
 		$handler = self::newFromGlobalState();
@@ -163,7 +163,10 @@ class DataUpdateHookHandlers {
 	 * @param ParserOutput $parserOutput
 	 * @param Title $title
 	 */
-	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
+	public function doParserCacheSaveComplete(
+		ParserOutput $parserOutput,
+		Title $title
+	) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
 		// The parser output should tell us when it was parsed. If not, ask the Title object.
@@ -183,8 +186,12 @@ class DataUpdateHookHandlers {
 		// during a GET request.
 
 		//TODO: Before posting a job, check slave database. If no changes are needed, skip update.
+		$addUsagesForPageJob = AddUsagesForPageJob::newSpec(
+			$title,
+			$usageAcc->getUsages(),
+			$touched
+		);
 
-		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages(), $touched );
 		$enqueueJob = EnqueueJob::newFromLocalJobs( $addUsagesForPageJob );
 
 		$this->jobScheduler->lazyPush( $enqueueJob );
