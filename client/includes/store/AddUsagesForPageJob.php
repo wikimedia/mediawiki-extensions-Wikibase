@@ -34,6 +34,11 @@ class AddUsagesForPageJob extends Job {
 	private $touched;
 
 	/**
+	 * @var string|null
+	 */
+	private $langCode = null;
+
+	/**
 	 * @var UsageUpdater
 	 */
 	private $usageUpdater;
@@ -49,10 +54,11 @@ class AddUsagesForPageJob extends Job {
 	 * @param Title $title
 	 * @param EntityUsage[] $usages
 	 * @param string $touched
+	 * @param string $langCode
 	 *
 	 * @return JobSpecification
 	 */
-	public static function newSpec( Title $title, array $usages, $touched ) {
+	public static function newSpec( Title $title, array $usages, $touched, $langCode ) {
 		// NOTE: Map EntityUsage objects to scalar arrays, for JSON serialization in the job queue.
 		$usages = array_map( function ( EntityUsage $usage ) {
 			return $usage->asArray();
@@ -61,7 +67,8 @@ class AddUsagesForPageJob extends Job {
 		$jobParams = array(
 			'pageId' => $title->getArticleId(),
 			'usages' => $usages,
-			'touched' => $touched
+			'touched' => $touched,
+			'langCode' => $langCode
 		);
 
 		return new JobSpecification(
@@ -94,6 +101,9 @@ class AddUsagesForPageJob extends Job {
 			'$params["touched"]',
 			'must be a timestamp string' );
 
+		// @todo assert langCode parameter is a string and not empty, but there might
+		// still be old jobs in the queue that don't have the param.
+
 		Assert::parameterElementType(
 			'array',
 			$params['usages'],
@@ -102,6 +112,11 @@ class AddUsagesForPageJob extends Job {
 		$this->pageId = $params['pageId'];
 		$this->usages = $params['usages'];
 		$this->touched = $params['touched'];
+
+		// unused for now, see @todo above
+		if ( isset( $params['langCode'] ) ) {
+			$this->langCode = $params['langCode'];
+		}
 
 		$usageUpdater = WikibaseClient::getDefaultInstance()->getStore()->getUsageUpdater();
 		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
@@ -117,6 +132,24 @@ class AddUsagesForPageJob extends Job {
 	public function overrideServices( UsageUpdater $usageUpdater, EntityIdParser $idParser ) {
 		$this->usageUpdater = $usageUpdater;
 		$this->idParser = $idParser;
+	}
+
+	/**
+	 * @see Job::getDeduplicationInfo
+	 *
+	 * @return mixed[] Job params array, with usages and touched omitted.
+	 */
+	public function getDeduplicationInfo() {
+		// parent Job class returns an array with 'params' key
+		$info = parent::getDeduplicationInfo();
+
+		unset( $info['params']['usages'] );
+		unset( $info['params']['touched'] );
+
+		// normalize order, job queue hashes the array (see Job::getDeduplicationInfo)
+		ksort( $info['params'] );
+
+		return $info;
 	}
 
 	/**

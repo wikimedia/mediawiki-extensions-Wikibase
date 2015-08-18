@@ -92,12 +92,40 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 		new AddUsagesForPageJob( $title, $params );
 	}
 
+	public function testDeduplicationInfo() {
+		$usage = new EntityUsage( new ItemId( 'Q100' ), 'X' );
+
+		$params = array(
+			'pageId' => 18,
+			'usages' => array( $usage->asArray() ),
+			'touched' => '20150801000000',
+			'langCode' => 'ar'
+		);
+
+		$title = Title::makeTitle( NS_MAIN, 'Bar' );
+
+		$expected = array (
+			'type' => 'wikibase-addUsagesForPage',
+			'namespace' => NS_MAIN,
+			'title' => 'Bar',
+			'params' => array (
+				'langCode' => 'ar',
+				'pageId' => 18,
+			),
+		);
+
+		$job = new AddUsagesForPageJob( $title, $params );
+
+		$this->assertEquals( $expected, $job->getDeduplicationInfo() );
+	}
+
 	public function testRun() {
 		$usageQ5X = new EntityUsage( new ItemId( 'Q5' ), 'X' );
 		$params = array(
 			'pageId' => 17,
 			'usages' => array( $usageQ5X->asArray() ),
 			'touched' => '20150101000000',
+			'langCode' => 'es'
 		);
 
 		$usageUpdater = $this->getMockBuilder( 'Wikibase\Client\Store\UsageUpdater' )
@@ -128,17 +156,18 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 		$touched = '20150101000000';
 		$usages = array( $usageQ5X );
 
-		$spec = AddUsagesForPageJob::newSpec( $title, $usages, $touched );
+		$spec = AddUsagesForPageJob::newSpec( $title, $usages, $touched, 'es' );
 
-		$params = array(
+		$expected = array(
 			'pageId' => $title->getArticleID(),
 			'usages' => array( $usageQ5X->asArray() ),
 			'touched' => '20150101000000',
+			'langCode' => 'es'
 		);
 
 		$this->assertEquals( 'wikibase-addUsagesForPage', $spec->getType() );
 		$this->assertEquals( $title->getFullText(), $spec->getTitle()->getFullText() );
-		$this->assertEquals( $params, $spec->getParams() );
+		$this->assertEquals( $expected, $spec->getParams() );
 	}
 
 }
