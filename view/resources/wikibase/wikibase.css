@@ -139,27 +139,6 @@ h2.wb-section-heading {
 	color: #A1A1A1;
 }
 
-.wikibase-entityview.loading {
-	position: relative;
-}
-
-.wikibase-entityview.loading > * {
-	opacity: .3;
-}
-
-.wb-entity-spinner { /* loading spinner positioning (animation is taken from .mw-small-spinner) */
-	display: none;
-	left: 50%;
-	margin-left: -10px; /* half of the 20px width of .mw-small-spinner */
-	opacity: 1 !important;
-	position: absolute;
-	top: 120px;
-}
-
-.loading .wb-entity-spinner {
-	display: block;
-}
-
 .wb-entity-undefinedinfo {
 	color: #505050;
 	font-style: italic;

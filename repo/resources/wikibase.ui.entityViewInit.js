@@ -7,16 +7,6 @@
 ( function( $, mw, wb, dataTypeStore, getExpertsStore, getFormatterStore, getParserStore ) {
 	'use strict';
 
-	// Show loading spinner as long as JavaScript is initialising.
-	$( '.wikibase-entityview' ).addClass( 'loading' ).append(
-		$( '<div/>' ).addClass( 'mw-small-spinner wb-entity-spinner' )
-	);
-	// Remove it after a while in any case, e.g. in case of an error.
-	window.setTimeout( function() {
-		$( '.wikibase-entityview' ).removeClass( 'loading' );
-		$( '.wb-entity-spinner' ).remove();
-	}, 7000 );
-
 	mw.hook( 'wikipage.content' ).add( function() {
 		if( mw.config.get( 'wbEntity' ) === null ) {
 			return;
@@ -38,10 +28,6 @@
 				attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
 				attachWatchLinkUpdater( $entityview, viewName );
 			}
-
-			// Remove loading spinner after JavaScript has kicked in:
-			$entityview.removeClass( 'loading' );
-			$( '.wb-entity-spinner' ).remove();
 		} );
 
 		if( canEdit ) {
