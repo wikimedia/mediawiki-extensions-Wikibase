@@ -54,28 +54,28 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 
 		$enAliases = array( 'en-alias1', 'en-alias2', 'en-alias3' );
 		$existingEnAliases = array( 'en-existingAlias1', 'en-existingAlias2' );
-		$item = ItemContent::newEmpty();
-		$entity = $item->getEntity();
-		$entity->setAliases( 'en', $existingEnAliases );
+		$itemContent = ItemContent::newEmpty();
+		$item = $itemContent->getEntity();
+		$item->setAliases( 'en', $existingEnAliases );
 
 		return array(
 			'add' => array(
-				unserialize( serialize( $entity ) ),
+				$item->copy(),
 				new ChangeOpAliases( 'en', $enAliases, 'add', $validatorFactory ),
 				array_merge( $existingEnAliases, $enAliases )
 			),
 			'set' => array(
-				unserialize( serialize( $entity ) ),
+				$item->copy(),
 				new ChangeOpAliases( 'en', $enAliases, 'set', $validatorFactory ),
 				$enAliases
 			),
 			'set (default)' => array(
-				unserialize( serialize( $entity ) ),
+				$item->copy(),
 				new ChangeOpAliases( 'en', $enAliases, '', $validatorFactory ),
 				$enAliases
 			),
 			'remove' => array(
-				unserialize( serialize( $entity ) ),
+				$item->copy(),
 				new ChangeOpAliases( 'en', $existingEnAliases, 'remove', $validatorFactory ),
 				null
 			),
