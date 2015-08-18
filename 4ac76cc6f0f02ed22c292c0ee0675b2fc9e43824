@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_193e2588",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-18T23:43:42Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean here. Why we need an interface if we just need a simple lookup table? It\u0027s just a simple config parameter, and this is what happens all over the code when you need to access config parameter (which yes, is a global state, that\u0027s what config parameters are). Do you want to pass the language names as parameter? I can do that though I don\u0027t see much value in it except just duplicating this code every time we instantiate the class, since this is what this config setting is supposed to do.",
+      "parentUuid": "8ec42329_a1fdc105",
+      "revId": "4ac76cc6f0f02ed22c292c0ee0675b2fc9e43824",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_40dd7316",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 2
