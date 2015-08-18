@@ -17,11 +17,11 @@ interface EntityIdParser {
 	/**
 	 * @since 1.0
 	 *
-	 * @param string $entityId
+	 * @param string $idSerialization
 	 *
 	 * @return EntityId
 	 * @throws EntityIdParsingException
 	 */
-	public function parse( $entityId );
+	public function parse( $idSerialization );
 
 }

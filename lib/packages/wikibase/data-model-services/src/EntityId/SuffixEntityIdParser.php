@@ -39,21 +39,21 @@ class SuffixEntityIdParser implements EntityIdParser {
 	 * If $prefixedEntityId does nto start with the expected prefix, a EntityIdParsingException
 	 * is thrown.
 	 *
-	 * @param string $prefixedEntityId An EntityId with some prefix attached, e.g. an entity URI.
+	 * @param string $idSerialization An EntityId with some prefix attached, e.g. an entity URI.
 	 *
 	 * @throws EntityIdParsingException If $prefixedEntityId doesn't start with the expected prefix,
 	 *         or the remaining suffix is not a valid entity ID string.
 	 *
 	 * @return EntityId
 	 */
-	public function parse( $prefixedEntityId ) {
-		if ( strncmp( $this->prefix, $prefixedEntityId, strlen( $this->prefix ) ) === 0 ) {
-			$suffix = substr( $prefixedEntityId, strlen( $this->prefix ) );
+	public function parse( $idSerialization ) {
+		if ( strncmp( $this->prefix, $idSerialization, strlen( $this->prefix ) ) === 0 ) {
+			$suffix = substr( $idSerialization, strlen( $this->prefix ) );
 
 			return $this->idParser->parse( $suffix );
 		}
 
-		throw new EntityIdParsingException( "Missing expected prefix `{$this->prefix}` in `{$prefixedEntityId}`" );
+		throw new EntityIdParsingException( "Missing expected prefix `{$this->prefix}` in `{$idSerialization}`" );
 	}
 
 }
