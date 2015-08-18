@@ -110,7 +110,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 							'params' => array(
 								'pageId' => $title->getArticleID(),
 								'usages' => $expectedUsageArray,
-								'touched' => $touched
+								'touched' => $touched,
+								'langCode' => 'es'
 							),
 							'opts' => array(
 								'removeDuplicates' => true
@@ -257,7 +258,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, false, true );
-		$handler->doParserCacheSaveComplete( $parserOutput, $title );
+		$handler->doParserCacheSaveComplete( $parserOutput, $title, 'es' );
 	}
 
 	public function testDoArticleDeleteComplete() {

@@ -104,11 +104,13 @@ class DataUpdateHookHandlers {
 		ParserCache $parserCache,
 		ParserOutput $pout,
 		Title $title,
-		ParserOptions $pops,
+		ParserOptions $popts,
 		$revId
 	) {
 		$handler = self::newFromGlobalState();
-		$handler->doParserCacheSaveComplete( $pout, $title );
+		$langCode = self::getParserLanguage( $pout, $opts, $title );
+
+		$handler->doParserCacheSaveComplete( $pout, $title, $langCode );
 	}
 
 	public function __construct(
@@ -162,8 +164,13 @@ class DataUpdateHookHandlers {
 	 *
 	 * @param ParserOutput $parserOutput
 	 * @param Title $title
+	 * @param string $langCode
 	 */
-	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
+	public function doParserCacheSaveComplete(
+		ParserOutput $parserOutput,
+		Title $title,
+		$langCode
+	) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
 		// The parser output should tell us when it was parsed. If not, ask the Title object.
@@ -184,10 +191,39 @@ class DataUpdateHookHandlers {
 
 		//TODO: Before posting a job, check slave database. If no changes are needed, skip update.
 
-		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages(), $touched );
+		$addUsagesForPageJob = AddUsagesForPageJob::newSpec(
+			$title,
+			$usageAcc->getUsages(),
+			$touched,
+			$langCode
+		);
+
 		$enqueueJob = EnqueueJob::newFromLocalJobs( $addUsagesForPageJob );
 
 		$this->jobScheduler->lazyPush( $enqueueJob );
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param ParserOptions $parserOptions
+	 * @param Title $title
+	 *
+	 * @return string language code
+	 */
+	private function getParserLanguageCode(
+		ParserOutput $parserOutput,
+		ParserOptions $parserOptions,
+		Title $title
+	) {
+		// see T109705 for implementing a better, more consistent way of getting parser language.
+		if (
+			in_array( 'userlang', $parserOutput->getUsedOptions() ) ||
+			$parserOptions->getInterfaceMessage()
+		) {
+			return $parserOptions->getUserLang();
+		}
+
+		return $title->getPageLanguage()->getCode();
 	}
 
 	/**
