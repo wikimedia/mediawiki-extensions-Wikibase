@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c202ebbd",
+        "filename": "repo/includes/SummaryFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-18T11:24:28Z",
+      "side": 1,
+      "message": "We should probably use \u0027: \u0027 here instead",
+      "revId": "a1b2dfa14126351befa6588014071789cd3fa4c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_426fdb8f",
+        "filename": "repo/tests/phpunit/includes/SummaryFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-18T11:24:28Z",
+      "side": 1,
+      "message": "misleading, this is not an autocomment only, it is also a user summary",
+      "revId": "a1b2dfa14126351befa6588014071789cd3fa4c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_626a1780",
+        "filename": "repo/tests/phpunit/includes/SummaryFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-18T11:24:28Z",
+      "side": 1,
+      "message": "misleading, this is not an autosummary only, it is also a user summary, and an autocomment...",
+      "revId": "a1b2dfa14126351befa6588014071789cd3fa4c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
