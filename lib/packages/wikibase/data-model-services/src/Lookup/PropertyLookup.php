@@ -19,7 +19,7 @@ interface PropertyLookup {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return Property|null
-	 * @throws EntityIdLookupException
+	 * @throws EntityLookupException
 	 */
 	public function getPropertyForId( PropertyId $propertyId );
 

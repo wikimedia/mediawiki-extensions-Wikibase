@@ -9,12 +9,8 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
- *
- * Thrown to indicate that a lookup has failed.
- * This DOES NOT mean that the object does not exist.
- * The object asked for may exist but there is something preventing us from getting it right now.
  */
-class EntityIdLookupException extends \RuntimeException {
+class PropertyDataTypeLookupException extends \RuntimeException {
 
 	private $entityId;
 
@@ -22,7 +18,7 @@ class EntityIdLookupException extends \RuntimeException {
 		$this->entityId = $entityId;
 
 		parent::__construct(
-			$message ?: 'Entity lookup failed for: ' . $entityId,
+			$message ?: 'Property datatype lookup failed for: ' . $entityId,
 			0,
 			$previous
 		);

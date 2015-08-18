@@ -28,7 +28,7 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return string
-	 * @throws EntityIdLookupException
+	 * @throws PropertyDataTypeLookupException
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
 		return $this->getProperty( $propertyId )->getDataTypeId();
@@ -38,13 +38,13 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return Property
-	 * @throws EntityIdLookupException
+	 * @throws PropertyDataTypeLookupException
 	 */
 	private function getProperty( PropertyId $propertyId ) {
 		$property = $this->entityLookup->getEntity( $propertyId );
 
 		if ( !( $property instanceof Property ) ) {
-			throw new EntityIdLookupException( $propertyId );
+			throw new PropertyDataTypeLookupException( $propertyId );
 		}
 
 		return $property;

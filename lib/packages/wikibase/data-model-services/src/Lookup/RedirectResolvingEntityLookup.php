@@ -45,7 +45,7 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @return EntityDocument|null
-	 * @throws EntityIdLookupException
+	 * @throws EntityLookupException
 	 */
 	public function getEntity( EntityId $entityId ) {
 		return $this->lookup->getEntity( $entityId );

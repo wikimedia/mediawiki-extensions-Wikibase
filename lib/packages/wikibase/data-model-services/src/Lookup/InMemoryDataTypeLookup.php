@@ -25,7 +25,7 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return string
-	 * @throws EntityIdLookupException
+	 * @throws PropertyDataTypeLookupException
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
 		$this->verifyDataTypeIsSet( $propertyId );
@@ -48,7 +48,7 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 		$numericId = $propertyId->getSerialization();
 
 		if ( !array_key_exists( $numericId, $this->dataTypeIds ) ) {
-			throw new EntityIdLookupException( $propertyId, "The DataType for property '$numericId' is not set" );
+			throw new PropertyDataTypeLookupException( $propertyId, "The DataType for property '$numericId' is not set" );
 		}
 	}
 

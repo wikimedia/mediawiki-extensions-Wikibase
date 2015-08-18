@@ -33,7 +33,7 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	public function testGetLabel_entityNotFoundThrowsException() {
 		$termLookup = $this->getEntityRetrievingTermLookup();
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityIdLookupException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
 		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
 	}
 
@@ -79,7 +79,7 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	public function testGetDescription_entityNotFoundThrowsException() {
 		$termLookup = $this->getEntityRetrievingTermLookup();
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityIdLookupException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
 		$termLookup->getDescription( new ItemId( 'Q120' ), 'en' );
 	}
 

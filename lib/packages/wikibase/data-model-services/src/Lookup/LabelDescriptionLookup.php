@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 
@@ -18,7 +17,7 @@ interface LabelDescriptionLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws EntityIdLookupException
+	 * @throws LabelDescriptionLookupException
 	 * @return Term|null
 	 */
 	public function getLabel( EntityId $entityId );
@@ -26,7 +25,7 @@ interface LabelDescriptionLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws EntityIdLookupException
+	 * @throws LabelDescriptionLookupException
 	 * @return Term|null
 	 */
 	public function getDescription( EntityId $entityId );

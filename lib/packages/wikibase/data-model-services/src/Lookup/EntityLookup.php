@@ -28,7 +28,7 @@ interface EntityLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @return EntityDocument|null
-	 * @throws EntityIdLookupException
+	 * @throws EntityLookupException
 	 */
 	public function getEntity( EntityId $entityId );
 

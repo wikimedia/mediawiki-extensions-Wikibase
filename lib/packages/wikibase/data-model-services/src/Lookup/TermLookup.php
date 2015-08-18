@@ -23,7 +23,7 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws EntityIdLookupException for entity not found
+	 * @throws TermLookupException for entity not found
 	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode );
@@ -36,7 +36,7 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch
 	 *
-	 * @throws EntityIdLookupException if the entity was not found (not guaranteed).
+	 * @throws TermLookupException if the entity was not found (not guaranteed).
 	 * @return string[] labels, keyed by language.
 	 */
 	public function getLabels( EntityId $entityId, array $languageCodes );
@@ -47,7 +47,7 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws EntityIdLookupException for entity not found
+	 * @throws TermLookupException for entity not found
 	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode );
@@ -61,7 +61,7 @@ interface TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch
 	 *
-	 * @throws EntityIdLookupException if the entity was not found (not guaranteed).
+	 * @throws TermLookupException if the entity was not found (not guaranteed).
 	 * @return string[] descriptions, keyed by language.
 	 */
 	public function getDescriptions( EntityId $entityId, array $languageCodes );

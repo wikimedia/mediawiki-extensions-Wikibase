@@ -64,7 +64,7 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException \Wikibase\DataModel\Services\Lookup\EntityNotFoundException
+	 * @expectedException \Wikibase\DataModel\Services\Lookup\EntityLookupException
 	 */
 	public function testGetEntity_exception() {
 		$lookup = new RestrictedEntityLookup( $this->getEntityLookup(), 3 );
