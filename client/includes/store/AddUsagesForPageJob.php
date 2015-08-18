@@ -34,6 +34,11 @@ class AddUsagesForPageJob extends Job {
 	private $touched;
 
 	/**
+	 * @var string|null
+	 */
+	private $langCode = null;
+
+	/**
 	 * @var UsageUpdater
 	 */
 	private $usageUpdater;
@@ -94,6 +99,9 @@ class AddUsagesForPageJob extends Job {
 			'$params["touched"]',
 			'must be a timestamp string' );
 
+		// @todo assert langCode parameter is a string and not empty, but there might
+		// still be old jobs in the queue that don't have the param.
+
 		Assert::parameterElementType(
 			'array',
 			$params['usages'],
@@ -117,6 +125,20 @@ class AddUsagesForPageJob extends Job {
 	public function overrideServices( UsageUpdater $usageUpdater, EntityIdParser $idParser ) {
 		$this->usageUpdater = $usageUpdater;
 		$this->idParser = $idParser;
+	}
+
+	/**
+	 * @see Job::getDeduplicationInfo
+	 *
+	 * @return mixed[] Job params array, with touched omitted.
+	 */
+	public function getDeduplicationInfo() {
+		// parent Job class returns an array with 'params' key
+		$info = parent::getDeduplicationInfo();
+
+		unset( $info['params']['touched'] );
+
+		return $info;
 	}
 
 	/**
