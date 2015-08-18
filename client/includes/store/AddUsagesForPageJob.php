@@ -34,6 +34,11 @@ class AddUsagesForPageJob extends Job {
 	private $touched;
 
 	/**
+	 * @var string
+	 */
+	private $langCode;
+
+	/**
 	 * @var UsageUpdater
 	 */
 	private $usageUpdater;
@@ -49,10 +54,11 @@ class AddUsagesForPageJob extends Job {
 	 * @param Title $title
 	 * @param EntityUsage[] $usages
 	 * @param string $touched
+	 * @param string $langCode
 	 *
 	 * @return JobSpecification
 	 */
-	public static function newSpec( Title $title, array $usages, $touched ) {
+	public static function newSpec( Title $title, array $usages, $touched, $langCode ) {
 		// NOTE: Map EntityUsage objects to scalar arrays, for JSON serialization in the job queue.
 		$usages = array_map( function ( EntityUsage $usage ) {
 			return $usage->asArray();
@@ -61,12 +67,15 @@ class AddUsagesForPageJob extends Job {
 		$jobParams = array(
 			'pageId' => $title->getArticleId(),
 			'usages' => $usages,
-			'touched' => $touched
+			'touched' => $touched,
+			'langCode' => $langCode
 		);
 
 		return new JobSpecification(
 			'wikibase-addUsagesForPage',
-			$jobParams,
+			$jobParams + Job::newRootJobParams(
+				'wikibase-UsagesRoot:' . $title->getPrefixedText() . ':' . $langCode
+			),
 			array( 'removeDuplicates' => true ),
 			$title
 		);
@@ -94,6 +103,9 @@ class AddUsagesForPageJob extends Job {
 			'$params["touched"]',
 			'must be a timestamp string' );
 
+		// @todo assert langCode parameter is a string and not empty, but there might
+		// still be old jobs in the queue that don't have the param.
+
 		Assert::parameterElementType(
 			'array',
 			$params['usages'],
@@ -102,6 +114,11 @@ class AddUsagesForPageJob extends Job {
 		$this->pageId = $params['pageId'];
 		$this->usages = $params['usages'];
 		$this->touched = $params['touched'];
+
+		// unused for now, see @todo above
+		if ( isset( $params['langCode'] ) ) {
+			$this->langCode = $params['langCode'];
+		}
 
 		$usageUpdater = WikibaseClient::getDefaultInstance()->getStore()->getUsageUpdater();
 		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();

@@ -103,38 +103,56 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			}, $expectedUsages );
 
 			$params = array(
-				'jobsByWiki' => array(
-					wfWikiID() => array(
-						array(
-							'type' => 'wikibase-addUsagesForPage',
-							'params' => array(
-								'pageId' => $title->getArticleID(),
-								'usages' => $expectedUsageArray,
-								'touched' => $touched
-							),
-							'opts' => array(
-								'removeDuplicates' => true
-							),
-							'title' => array(
-								'ns' => NS_MAIN,
-								'key' => 'Oxygen'
-							)
-						)
-					)
-				)
+				'pageId' => $title->getArticleID(),
+				'usages' => $expectedUsageArray,
+				'touched' => $touched,
+				'langCode' => 'en',
+				'rootJobIsSelf' => true
 			);
 
 			$jobScheduler->expects( $this->once() )
 				->method( 'lazyPush' )
 				->with( $this->callback( function ( $job ) use ( $params ) {
+
 					DataUpdateHookHandlersTest::assertEquals( 'enqueue', $job->getType() );
-					DataUpdateHookHandlersTest::assertEquals( $params, $job->getParams() );
+
+					$jobParams = $job->getParams();
+					$wikiId = wfWikiID();
+
+					unset( $jobParams['jobsByWiki'][$wikiId][0]['params']['rootJobSignature'] );
+					unset( $jobParams['jobsByWiki'][$wikiId][0]['params']['rootJobTimestamp'] );
+
+					DataUpdateHookHandlersTest::assertEquals(
+						$this->getExpectedJobParams( $params, $wikiId ),
+						$jobParams
+					);
+
 					return true;
 				} ) );
 
 		}
 
 		return $jobScheduler;
+	}
+
+	private function getExpectedJobParams( array $params, $wikiId ) {
+		return array(
+			'jobsByWiki' => array(
+				$wikiId => array(
+					array(
+						'type' => 'wikibase-addUsagesForPage',
+						'params' => $params,
+						'opts' => array(
+							'removeDuplicates' => true
+						),
+						'title' => array(
+							'ns' => NS_MAIN,
+							'key' => 'Oxygen'
+						)
+					)
+				)
+			)
+		);
 	}
 
 	/**
@@ -257,7 +275,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, false, true );
-		$handler->doParserCacheSaveComplete( $parserOutput, $title );
+		$handler->doParserCacheSaveComplete( $parserOutput, $title, 'en' );
 	}
 
 	public function testDoArticleDeleteComplete() {

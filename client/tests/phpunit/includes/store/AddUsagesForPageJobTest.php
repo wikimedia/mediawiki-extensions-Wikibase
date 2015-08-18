@@ -92,6 +92,16 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 		new AddUsagesForPageJob( $title, $params );
 	}
 
+	public function testIsRootJob() {
+		$title = Title::makeTitle( NS_MAIN, 'Foo' );
+		$title->resetArticleID( 17 );
+
+		$usage = new EntityUsage( new ItemId( 'Q100' ), 'X' );
+
+		$job = AddUsagesForPageJob::newSpec( $title, array( $usage ), '20150102000000', 'en' );
+		$this->assertTrue( $job->isRootJob() );
+	}
+
 	public function testRun() {
 		$usageQ5X = new EntityUsage( new ItemId( 'Q5' ), 'X' );
 		$params = array(
@@ -128,17 +138,24 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 		$touched = '20150101000000';
 		$usages = array( $usageQ5X );
 
-		$spec = AddUsagesForPageJob::newSpec( $title, $usages, $touched );
+		$spec = AddUsagesForPageJob::newSpec( $title, $usages, $touched, 'es' );
 
-		$params = array(
+		$expected = array(
 			'pageId' => $title->getArticleID(),
 			'usages' => array( $usageQ5X->asArray() ),
 			'touched' => '20150101000000',
+			'langCode' => 'es',
+			'rootJobIsSelf' => true
 		);
+
+		$params = $spec->getParams();
+
+		unset( $params['rootJobSignature'] );
+		unset( $params['rootJobTimestamp'] );
 
 		$this->assertEquals( 'wikibase-addUsagesForPage', $spec->getType() );
 		$this->assertEquals( $title->getFullText(), $spec->getTitle()->getFullText() );
-		$this->assertEquals( $params, $spec->getParams() );
+		$this->assertEquals( $expected, $params );
 	}
 
 }
