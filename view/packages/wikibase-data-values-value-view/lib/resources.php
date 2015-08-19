@@ -187,6 +187,18 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.unitsuggester' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.unitsuggester.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.unitsuggester.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+			),
+		),
 
 		'jquery.util.adaptlettercase' => $moduleTemplate + array(
 			'scripts' => array(

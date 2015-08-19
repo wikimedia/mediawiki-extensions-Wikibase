@@ -555,6 +555,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				this.viewState(),
 				this.viewNotifier(),
 				{
+					language: this.options.language,
 					contentLanguages: this.options.contentLanguages,
 					messageProvider: this.options.messageProvider
 				}

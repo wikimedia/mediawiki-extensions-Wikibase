@@ -112,6 +112,19 @@ return call_user_func( function() {
 				'valueview-expert-advancedadjustments',
 			),
 		),
+
+		'jquery.valueview.ExpertExtender.UnitSelector' => $moduleTemplate + array(
+			'scripts' => array(
+				'ExpertExtender.UnitSelector.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.ExpertExtender',
+				'jquery.ui.unitsuggester',
+			),
+			'messages' => array(
+				'valueview-expertextender-unitsuggester-label',
+			),
+		),
 	);
 
 	return $modules;
