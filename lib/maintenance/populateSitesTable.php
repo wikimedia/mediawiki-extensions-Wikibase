@@ -44,7 +44,7 @@ class PopulateSitesTable extends Maintenance {
 		$this->addOption( 'strip-protocols', "Strip http/https from URLs to make them protocol relative." );
 		$this->addOption( 'force-protocol', "Force a specific protocol for all URLs (like http/https).", false, true );
 		$this->addOption( 'load-from', "Full URL to the API of the wiki to fetch the site info from. "
-				. "Default is https://meta.wikimedia.org/w/api.php", false, true );
+				. "Default is http://meta.wikimedia.org/w/api.php", false, true );
 		$this->addOption( 'script-path', 'Script path to use for wikis in the site matrix. '
 				. ' (e.g. "/w/$1")', false, true );
 		$this->addOption( 'article-path', 'Article path for wikis in the site matrix. '
@@ -60,7 +60,7 @@ class PopulateSitesTable extends Maintenance {
 	public function execute() {
 		$stripProtocols = (bool)$this->getOption( 'strip-protocols', false );
 		$forceProtocol = $this->getOption( 'force-protocol', null );
-		$url = $this->getOption( 'load-from', 'https://meta.wikimedia.org/w/api.php' );
+		$url = $this->getOption( 'load-from', 'sites.json' );
 		$scriptPath = $this->getOption( 'script-path', '/w/$1' );
 		$articlePath = $this->getOption( 'article-path', '/wiki/$1' );
 		$expandGroup = !$this->getOption( 'no-expand-group', false );
@@ -109,7 +109,7 @@ class PopulateSitesTable extends Maintenance {
 	 * @return string
 	 */
 	protected function getSiteMatrixData( $url ) {
-		$url .= '?action=sitematrix&format=json';
+		#$url .= '?action=sitematrix&format=json';
 
 		$json = Http::get( $url );
 
