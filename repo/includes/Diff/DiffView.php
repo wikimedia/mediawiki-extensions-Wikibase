@@ -207,11 +207,18 @@ class DiffView extends ContextSource {
 	private function getSiteLinkElement( $siteId, $pageName ) {
 		$site = $this->siteStore->getSite( $siteId );
 
-		return Html::element( 'a', array(
-			'href' => $site->getPageUrl( $pageName ),
-			'hreflang' => $site->getLanguageCode(),
+		$tagName = 'span';
+		$attrs = array(
 			'dir' => 'auto',
-		), $pageName );
+		);
+
+		if ( is_object( $site ) ) {
+			$tagName = 'a';
+			$attrs['href'] = $site->getPageUrl( $pageName );
+			$attrs['hreflang'] = $site->getLanguageCode();
+		}
+
+		return Html::element( $tagName, $attrs, $pageName );
 	}
 
 	/**
