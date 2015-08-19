@@ -15,10 +15,12 @@
 		}
 
 		// this will build a drop-down for the language selection:
-		var siteList = [];
-		for( var siteId in wb.sites.getSites() ) {
-			var site = wb.sites.getSite( siteId );
-			siteList.push( site.getName() + ' (' + site.getId() + ')' );
+		var sites = wb.sites.getSites(),
+			siteList = [];
+		for( var siteId in sites ) {
+			if( sites.hasOwnProperty( siteId ) ) {
+				siteList.push( sites[ siteId ].getName() + ' (' + siteId + ')' );
+			}
 		}
 		$( '#wb-itembytitle-sitename' )
 		.attr( 'autocomplete', 'off' )
