@@ -16,6 +16,23 @@
       "revId": "be8cb96e72e0916134c31f103f25cb2fcc5d0bbc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_477124a6",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T09:33:57Z",
+      "side": 1,
+      "message": "This is the only time this class accesses WikibaseRepo. Please avoid this and pass this setting in via the constructor. This makes it way easier to move this class to an independent component later.",
+      "revId": "be8cb96e72e0916134c31f103f25cb2fcc5d0bbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
