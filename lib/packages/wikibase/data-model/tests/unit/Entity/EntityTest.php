@@ -377,7 +377,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getFingerprint()->setLabel( 'de', 'bar' );
 
-		$newItem = unserialize( serialize( $item ) );
+		$newItem = $item->copy();
 
 		$this->assertTrue( $newItem->getFingerprint()->getLabels()->hasTermForLanguage( 'en' ) );
 		$this->assertTrue( $newItem->getFingerprint()->getLabels()->hasTermForLanguage( 'de' ) );

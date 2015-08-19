@@ -344,10 +344,10 @@ class ItemTest extends EntityTest {
 		$secondItem = new Item();
 		$secondItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
-		$secondItemWithId = unserialize( serialize( $secondItem ) );
+		$secondItemWithId = $secondItem->copy();
 		$secondItemWithId->setId( 42 );
 
-		$differentId = unserialize( serialize( $secondItemWithId ) );
+		$differentId = $secondItemWithId->copy();
 		$differentId->setId( 43 );
 
 		return array(
