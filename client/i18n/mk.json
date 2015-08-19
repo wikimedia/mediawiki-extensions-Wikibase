@@ -61,7 +61,7 @@
 	"unconnectedpages": "Страници што не се врзани со предмети",
 	"unconnectedpages-summary": "Оваа страница без сврзан податочен предмет (во именски простори што поддржуваат сврзани предмети). Списокот е подреден надолно по назнака, од понови кон постари страници.",
 	"wikibase-unconnectedpages-page": "Почни го списокот на резултати со страницата:",
-	"wikibase-unconnectedpages-submit": "Оди",
+	"wikibase-unconnectedpages-submit": "Дај",
 	"wikibase-unconnectedpages-invalid-language": "„$1“ не претставува важечки јазичен код.",
 	"wikibase-unconnectedpages-page-warning": "Насловот на страницата не може да се употреби во барање, па затоа е занемарен.",
 	"wikibase-unconnectedpages-iwdata-label": "Само страници со меѓујазични врски",
