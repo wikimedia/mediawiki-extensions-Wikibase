@@ -15,13 +15,16 @@
 		}
 
 		// this will build a drop-down for the language selection:
-		var siteList = [];
-		for( var siteId in wb.sites.getSites() ) {
-			var site = wb.sites.getSite( siteId );
-			siteList.push( {
-				label: site.getName() + ' (' + site.getId() + ')',
-				value: site.getName() + ' (' + site.getId() + ')'
-			} );
+		var sites = wb.sites.getSites(),
+			siteList = [];
+		for( var siteId in sites ) {
+			if( sites.hasOwnProperty( siteId ) ) {
+				var siteName = sites[ siteId ].getName();
+				siteList.push( {
+					label: siteName + ' (' + siteId + ')',
+					value: siteName + ' (' + siteId + ')'
+				} );
+			}
 		}
 		$( '#wb-itembytitle-sitename' ).suggester( { source: siteList } );
 		// Hackety hack hack...
