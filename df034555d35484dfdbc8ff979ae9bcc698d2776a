@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a759e82e",
+        "filename": "view/resources/wikibase/wikibase.getLanguageNameByCode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T09:39:13Z",
+      "side": 1,
+      "message": "Why does this need a shortcut?",
+      "revId": "df034555d35484dfdbc8ff979ae9bcc698d2776a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_678a2070",
+        "filename": "view/resources/wikibase/wikibase.getLanguageNameByCode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T09:39:13Z",
+      "side": 1,
+      "message": "return languages.hasOwnProperty( langCode ) \u0026\u0026 languages[langCode][2] || langCode;",
+      "revId": "df034555d35484dfdbc8ff979ae9bcc698d2776a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_2784185e",
+        "filename": "view/resources/wikibase/wikibase.getLanguageNameByCode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T09:39:13Z",
+      "side": 1,
+      "message": "return ulsLanguages \u0026\u0026 ulsLanguages.hasOwnProperty( langCode ) \u0026\u0026 ulsLanguages[langCode]\n    || getNativeLanguageName( langCode );",
+      "revId": "df034555d35484dfdbc8ff979ae9bcc698d2776a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
