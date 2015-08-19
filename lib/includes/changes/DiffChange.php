@@ -43,7 +43,7 @@ class DiffChange extends ChangeRow {
 	 */
 	public function hasDiff() {
 		$info = $this->getField( 'info' );
-		return !empty( $info ) && isset( $info['diff'] );
+		return isset( $info['diff'] );
 	}
 
 	/**
