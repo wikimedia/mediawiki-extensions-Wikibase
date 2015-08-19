@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use MWException;
+
 /**
  * Language sorting utility functions.
  *
@@ -13,20 +15,32 @@ namespace Wikibase;
  */
 class InterwikiSorter {
 
+	/**
+	 * @var array[]
+	 */
 	private $sortOrders;
 
+	/**
+	 * @var string
+	 */
 	private $sort;
 
+	/**
+	 * @var string[]
+	 */
 	private $sortPrepend;
 
+	/**
+	 * @var int[]
+	 */
 	private $sortOrder;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param string $sort
-	 * @param $sortOrders[]
-	 * @param $sortPrepend[]
+	 * @param array[] $sortOrders
+	 * @param string[] $sortPrepend
 	 */
 	public function __construct( $sort, array $sortOrders, array $sortPrepend ) {
 		$this->sort = $sort;
@@ -40,9 +54,9 @@ class InterwikiSorter {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $links[]
+	 * @param string[] $links
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function sortLinks( array $links ) {
 		// Prepare the sorting array.
@@ -70,10 +84,10 @@ class InterwikiSorter {
 	/**
 	 * usort() callback function, compares the links on the basis of $sortOrder
 	 *
-	 * @param mixed $a
-	 * @param mixed $b
+	 * @param string[] $a
+	 * @param string[] $b
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	private function compareLinks( $a, $b ) {
 		$a = $a[0];
@@ -94,15 +108,15 @@ class InterwikiSorter {
 	 * Build sort order to be used by compareLinks().
 	 *
 	 * @param string $sort
-	 * @param array $sortOrders []
-	 * @param array $sortPrepend []
+	 * @param array[] $sortOrders
+	 * @param string[] $sortPrepend
 	 *
-	 * @throws \MWException
-	 * @return array
+	 * @throws MWException
+	 * @return int[]
 	 */
 	private function buildSortOrder( $sort, array $sortOrders, array $sortPrepend ) {
 		if ( !array_key_exists( 'alphabetic', $sortOrders ) ) {
-			throw new \MWException( 'alphabetic interwiki sorting order is missing from Wikibase Client settings.' );
+			throw new MWException( 'alphabetic interwiki sorting order is missing from Wikibase Client settings.' );
 		}
 
 		$sortOrder = $sortOrders['alphabetic'];
