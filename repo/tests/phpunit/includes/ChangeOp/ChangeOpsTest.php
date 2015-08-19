@@ -55,10 +55,8 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpProvider
-	 *
-	 * @param ChangeOp $changeOp
 	 */
-	public function testAdd( $changeOp ) {
+	public function testAdd( ChangeOp $changeOp ) {
 		$changeOps = new ChangeOps();
 		$changeOps->add( $changeOp );
 		$this->assertEquals( array( $changeOp ), $changeOps->getChangeOps() );
@@ -81,10 +79,8 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpArrayProvider
-	 *
-	 * @param $changeOpArray
 	 */
-	public function testAddArray( $changeOpArray ) {
+	public function testAddArray( array $changeOpArray ) {
 		$changeOps = new ChangeOps();
 		$changeOps->add( $changeOpArray );
 		$this->assertEquals( $changeOpArray, $changeOps->getChangeOps() );
@@ -103,8 +99,6 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider invalidChangeOpProvider
 	 * @expectedException InvalidArgumentException
-	 *
-	 * @param $invalidChangeOp
 	 */
 	public function testInvalidAdd( $invalidChangeOp ) {
 		$changeOps = new ChangeOps();
@@ -127,13 +121,8 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpsProvider
-	 *
-	 * @param ChangeOps $changeOps
-	 * @param string $language
-	 * @param string $expectedLabel
-	 * @param string $expectedDescription
 	 */
-	public function testApply( $changeOps, $language, $expectedLabel, $expectedDescription ) {
+	public function testApply( ChangeOps $changeOps, $language, $expectedLabel, $expectedDescription ) {
 		$entity = new Item();
 
 		$changeOps->apply( $entity );

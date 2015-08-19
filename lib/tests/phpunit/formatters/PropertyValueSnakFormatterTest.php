@@ -33,9 +33,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider constructorErrorsProvider
-	 *
-	 * @param $format
-	 * @param $error
 	 */
 	public function testConstructorErrors( $format, $error ) {
 		$this->setExpectedException( $error );

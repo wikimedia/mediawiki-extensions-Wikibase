@@ -26,12 +26,8 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider constructorErrorsProvider
-	 *
-	 * @param $format
-	 * @param $formatters
-	 * @param $error
 	 */
-	public function testConstructorErrors( $format, $formatters, $error ) {
+	public function testConstructorErrors( $format, array $formatters, $error ) {
 		$this->setExpectedException( $error );
 
 		new DispatchingSnakFormatter( $format, $formatters );

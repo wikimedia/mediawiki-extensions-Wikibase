@@ -18,11 +18,6 @@ class DiffOpValueFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideGenerateHtml
-	 *
-	 * @param $name
-	 * @param $oldValues
-	 * @param $newValues
-	 * @param $pattern
 	 */
 	public function testGenerateHtml( $name, $oldValues, $newValues, $pattern ) {
 		$formatter = new DiffOpValueFormatter( $name, $name, $oldValues, $newValues );

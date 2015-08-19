@@ -46,7 +46,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		parent::tearDown();
 	}
 
-	protected function doPermissionsTest( $action, $params, $permissions = array(), $expectedError = null ) {
+	protected function doPermissionsTest( $action, array $params, array $permissions = null, $expectedError = null ) {
 		global $wgUser, $wgGroupPermissions;
 
 		$this->setMwGlobals( 'wgUser', clone $wgUser );

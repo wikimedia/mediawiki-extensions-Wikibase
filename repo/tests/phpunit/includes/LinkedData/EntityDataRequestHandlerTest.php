@@ -160,7 +160,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return OutputPage
 	 */
-	protected function makeOutputPage( $params, $headers ) {
+	protected function makeOutputPage( array $params, array $headers ) {
 		// construct request
 		$request = new FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
@@ -194,7 +194,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @param int    $expCode     Expected HTTP status code
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
-	public function testHandleRequest( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
+	public function testHandleRequest( $subpage, array $params, array $headers, $expRegExp, $expCode = 200, array $expHeaders = array() ) {
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();
 

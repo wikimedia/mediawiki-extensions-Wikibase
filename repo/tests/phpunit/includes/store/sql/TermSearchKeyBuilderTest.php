@@ -38,10 +38,6 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider termProvider
-	 * @param $languageCode
-	 * @param $termText
-	 * @param $searchText
-	 * @param boolean $matches
 	 */
 	public function testRebuildSearchKey( $languageCode, $termText, $searchText, $matches ) {
 		/* @var TermSqlIndex $termCache */
