@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_e2311eeb",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T12:59:47Z",
+      "side": 1,
+      "message": "Is there a way to avoid accessing more global state in this class?\n\nAlso, I suggest to always have such \"global\" line as the first line in a function.",
+      "revId": "184830df2e1d0802b55ff011e48bbf81e5aeaeb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_82305ae6",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T12:59:47Z",
+      "side": 1,
+      "message": "Who is the consumer of these params?",
+      "revId": "184830df2e1d0802b55ff011e48bbf81e5aeaeb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
