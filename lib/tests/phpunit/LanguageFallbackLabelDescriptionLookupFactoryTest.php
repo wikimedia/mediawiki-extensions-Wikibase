@@ -7,10 +7,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
- * @covers Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory
+ * @covers Wikibase\Lib\LanguageFallbackLabelDescriptionLookupFactory
  *
  * @license GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
