@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_e23efe23",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T14:15:21Z",
+      "side": 1,
+      "message": "This broke the wbsearchentities API. See T109584.",
+      "revId": "ce7b4b9f7d12c91a0d2a547c823f024ca95eaa5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
