@@ -33,6 +33,24 @@
       "revId": "0e1b4bec7a44bab8dbe0f015d5893e5bb41fb0a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_87a94c7a",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T10:54:18Z",
+      "side": 1,
+      "message": "I just asked the team which check (for the namespace or the content model) should be done in which situation. The answer is that you should pick whatever seems more appropriate. Which means it does not really matter in this case because the Title object does have both, a getNamespace() and a getContentModel() method. And both isEntityContentModel() and isEntityNamespace() are used equally in this file, so we also do not win anything when preferring one.",
+      "parentUuid": "6ec1af18_6e9f6b07",
+      "revId": "0e1b4bec7a44bab8dbe0f015d5893e5bb41fb0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
