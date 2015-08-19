@@ -59,6 +59,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.ExpertExtender.UnitSelector.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ExpertExtender.UnitSelector.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.ExpertExtender.UnitSelector',
+				'jquery.valueview.test.testExpertExtenderExtension'
+			),
+		),
+
 		'jquery.valueview.ExpertExtender.Listrotator.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'ExpertExtender.Listrotator.tests.js',
