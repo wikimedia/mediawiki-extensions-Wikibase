@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_e73e1024",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2015-08-19T11:12:59Z",
+      "side": 1,
+      "message": "ksort() seems overkill here, since afaik the relative order is preserved, so it won\u0027t do anything",
+      "revId": "9022143065ffcc8a3bab48dd637e151ddbd084fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
