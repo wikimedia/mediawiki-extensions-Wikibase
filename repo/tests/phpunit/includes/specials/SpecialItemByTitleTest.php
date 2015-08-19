@@ -151,12 +151,8 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 
 	/**
 	 * @dataProvider requestProvider
-	 *
-	 * @param $sub
-	 * @param $target
-	 * @param $matchers
 	 */
-	public function testExecute( $sub, $target, $matchers ) {
+	public function testExecute( $sub, $target, array $matchers ) {
 		/* @var FauxResponse $response */
 		list( $output, $response ) = $this->executeSpecialPage( $sub );
 

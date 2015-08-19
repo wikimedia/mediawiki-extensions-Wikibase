@@ -24,11 +24,8 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider constructorErrorsProvider
-	 *
-	 * @param $formatters
-	 * @param $error
 	 */
-	public function testConstructorErrors( $formatters, $error ) {
+	public function testConstructorErrors( array $formatters, $error ) {
 		$this->setExpectedException( $error );
 
 		new DispatchingValueFormatter( $formatters );

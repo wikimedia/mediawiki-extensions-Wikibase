@@ -49,10 +49,8 @@ class RepoHooksTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider revisionInfoProvider
-	 * @param $revisionInfo
-	 * @param null $expectedException
 	 */
-	public function testOnImportHandleRevisionXMLTag( $revisionInfo, $expectedException = null ) {
+	public function testOnImportHandleRevisionXMLTag( array $revisionInfo, $expectedException = null ) {
 		//NOTE: class is unclear, see Bug T66657. But we don't use that object anyway.
 		$importer = $this->getMockBuilder( 'Import' )
 			->disableOriginalConstructor()
@@ -137,10 +135,6 @@ XML
 
 	/**
 	 * @dataProvider importProvider
-	 *
-	 * @param string $xml
-	 * @param bool $allowImport
-	 * @param Exception|null $expectedException
 	 */
 	public function testImportHandleRevisionXMLTag_hook( $xml, $allowImport, $expectedException = null ) {
 		// WikiImporter tried to register this protocol every time, so unregister first to avoid errors.

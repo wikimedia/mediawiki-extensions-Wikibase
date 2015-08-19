@@ -21,7 +21,7 @@ class PermissionsHelper {
 	 *
 	 * @todo: try to do this without messing with the globals, or at least without hardcoding them.
 	 */
-	public static function applyPermissions( $permissions, $groups = null ) {
+	public static function applyPermissions( array $permissions = null, array $groups = null ) {
 		global $wgGroupPermissions;
 		global $wgUser;
 

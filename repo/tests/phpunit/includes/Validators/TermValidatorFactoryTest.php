@@ -25,18 +25,18 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param $maxLength
-	 * @param $languages
+	 * @param int $maxLength
+	 * @param string[] $languageCodes
 	 *
 	 * @return TermValidatorFactory
 	 */
-	protected function newFactory( $maxLength, $languages ) {
+	private function newFactory( $maxLength, $languageCodes ) {
 		$idParser = new BasicEntityIdParser();
 
 		$mockProvider = new ChangeOpTestMockProvider( $this );
 		$dupeDetector = $mockProvider->getMockLabelDescriptionDuplicateDetector();
 
-		$builders = new TermValidatorFactory( $maxLength, $languages, $idParser, $dupeDetector );
+		$builders = new TermValidatorFactory( $maxLength, $languageCodes, $idParser, $dupeDetector );
 		return $builders;
 	}
 

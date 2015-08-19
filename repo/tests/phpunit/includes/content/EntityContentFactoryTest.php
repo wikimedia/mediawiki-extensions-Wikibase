@@ -217,7 +217,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetPermissionStatusForEntity
 	 */
-	public function testGetPermissionStatusForEntity( $action, $permissions, $id, $expectations ) {
+	public function testGetPermissionStatusForEntity( $action, array $permissions, $id, array $expectations ) {
 		global $wgUser;
 
 		$entity = new Item();
