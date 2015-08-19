@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @since 1.2
@@ -12,23 +12,23 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class PropertyDataTypeLookupException extends \RuntimeException {
 
-	private $entityId;
+	private $propertyId;
 
-	public function __construct( EntityId $entityId, $message = null, \Exception $previous = null ) {
-		$this->entityId = $entityId;
+	public function __construct( PropertyId $propertyId, $message = null, \Exception $previous = null ) {
+		$this->propertyId = $propertyId;
 
 		parent::__construct(
-			$message ?: 'Property datatype lookup failed for: ' . $entityId,
+			$message ?: 'Property datatype lookup failed for: ' . $propertyId,
 			0,
 			$previous
 		);
 	}
 
 	/**
-	 * @return EntityId
+	 * @return PropertyId
 	 */
-	public function getEntityId() {
-		return $this->entityId;
+	public function getPropertyId() {
+		return $this->propertyId;
 	}
 
 }
