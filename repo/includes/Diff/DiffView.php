@@ -12,6 +12,7 @@ use Html;
 use IContextSource;
 use InvalidArgumentException;
 use MWException;
+use Site;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -207,11 +208,19 @@ class DiffView extends ContextSource {
 	private function getSiteLinkElement( $siteId, $pageName ) {
 		$site = $this->siteStore->getSite( $siteId );
 
-		return Html::element( 'a', array(
-			'href' => $site->getPageUrl( $pageName ),
-			'hreflang' => $site->getLanguageCode(),
+		$tagName = 'span';
+		$attrs = array(
 			'dir' => 'auto',
-		), $pageName );
+		);
+
+		if ( $site instanceof Site ) {
+			// Otherwise it may have been deleted from the sites table
+			$tagName = 'a';
+			$attrs['href'] = $site->getPageUrl( $pageName );
+			$attrs['hreflang'] = $site->getLanguageCode();
+		}
+
+		return Html::element( $tagName, $attrs, $pageName );
 	}
 
 	/**
