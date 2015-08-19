@@ -7,7 +7,7 @@ use Html;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataTypeSelector;
 use Wikibase\PropertyInfoStore;
-use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityIdFormatterFactory;
 
