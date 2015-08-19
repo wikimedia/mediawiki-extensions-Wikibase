@@ -47,6 +47,7 @@ use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
