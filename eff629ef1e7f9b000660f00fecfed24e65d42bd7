@@ -16,6 +16,24 @@
       "revId": "eff629ef1e7f9b000660f00fecfed24e65d42bd7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_470284bf",
+        "filename": "lib/includes/changes/ChangeRow.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T09:48:23Z",
+      "side": 1,
+      "message": "parent::getField returns mixed, as the doc tags say.",
+      "parentUuid": "6ec1af18_c7475421",
+      "revId": "eff629ef1e7f9b000660f00fecfed24e65d42bd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
