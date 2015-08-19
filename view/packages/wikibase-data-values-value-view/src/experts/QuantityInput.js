@@ -23,6 +23,9 @@
 			},
 			function() {
 				self._viewNotifier.notify( 'change' );
+			},
+			{
+				language: self._options.language
 			}
 		);
 

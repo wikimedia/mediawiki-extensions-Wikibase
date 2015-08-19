@@ -21,10 +21,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 */
 	options: {
 		url: 'https://www.wikidata.org/w/api.php',
-		/* jshint ignore:start */
-		language: typeof mediaWiki === 'object' && mediaWiki.config
-			&& mediaWiki.config.get( 'wgUserLanguage' ) || null,
-		/* jshint ignore:end */
+		language: null,
 		timeout: 8000
 	},
 

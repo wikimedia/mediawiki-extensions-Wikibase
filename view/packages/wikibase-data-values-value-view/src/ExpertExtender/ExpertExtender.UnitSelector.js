@@ -13,15 +13,19 @@
 	 * @param {util.MessageProvider} messageProvider
 	 * @param {Function} getUpstreamValue
 	 * @param {Function} onValueChange
+	 * @param {Object} [options={}]
+	 * @param {string} [options.language=null]
 	 */
 	ExpertExtender.UnitSelector = function(
 		messageProvider,
 		getUpstreamValue,
-		onValueChange
+		onValueChange,
+		options
 	) {
 		this._messageProvider = messageProvider;
 		this._getUpstreamValue = getUpstreamValue;
 		this._onValueChange = onValueChange;
+		this._options = options || {};
 
 		this.$selector = $( '<input>' );
 	};
@@ -46,6 +50,12 @@
 		_onValueChange: null,
 
 		/**
+		 * @property {Object}
+		 * @private
+		 */
+		_options: null,
+
+		/**
 		 * @property {jQuery}
 		 * @private
 		 * @readonly
@@ -62,6 +72,7 @@
 				'valueview-expertextender-unitsuggester-label'
 			);
 			this.$selector.unitsuggester( {
+				language: this._options.language || null,
 				change: this._onValueChange
 			} );
 			$extender
