@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_07b0fcef",
+        "filename": "repo/tests/phpunit/includes/Validators/TermValidatorFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-19T10:12:04Z",
+      "side": 1,
+      "message": "could type hint against array here?",
+      "revId": "9bf8f83bca3942faf903e2cf51a2ec28a7888a19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
