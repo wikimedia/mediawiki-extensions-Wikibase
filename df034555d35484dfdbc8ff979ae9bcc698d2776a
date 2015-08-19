@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_6781c0c7",
+        "filename": "view/resources/wikibase/wikibase.getLanguageNameByCode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-08-19T11:26:37Z",
+      "side": 1,
+      "message": "When langCode contains \u0027hasOwnProperty\u0027 this leads to an error because\n\n languages.hasOwnProperty( \u0027hasOwnProperty\u0027 ) \u003d\u003d true\n\nbut\n\n hasOwn.call( languages, \u0027hasOwnProperty\u0027 ) \u003d\u003d false",
+      "parentUuid": "6ec1af18_678a2070",
+      "revId": "df034555d35484dfdbc8ff979ae9bcc698d2776a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_2784185e",
         "filename": "view/resources/wikibase/wikibase.getLanguageNameByCode.js",
         "patchSetId": 1
