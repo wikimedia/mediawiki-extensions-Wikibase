@@ -85,7 +85,7 @@ class RdfVocabulary {
 	/**
 	 * Map of qnames to namespace URIs
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	private $namespaces = array();
 
@@ -148,7 +148,7 @@ class RdfVocabulary {
 	/**
 	 * Returns a map of namespace names (prefixes) to URIs
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function getNamespaces() {
 		return $this->namespaces;
@@ -180,7 +180,7 @@ class RdfVocabulary {
 	 * Returns a qname for the given entity type.
 	 * For well known types, these qnames refer to classes from the Wikibase ontology.
 	 *
-	 * @param $type
+	 * @param string $type
 	 *
 	 * @return string
 	 */
@@ -202,7 +202,7 @@ class RdfVocabulary {
 	/**
 	 * Get Wikibase value type name for ontology
 	 *
-	 * @param DataValue $prop
+	 * @param DataValue $val
 	 *
 	 * @return string
 	 */
