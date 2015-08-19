@@ -475,14 +475,20 @@ class ResultBuilder {
 		array $serialization,
 		array $fallbackChains
 	) {
-		$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
-			$serialization['labels'],
-			$fallbackChains
-		);
-		$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
-			$serialization['descriptions'],
-			$fallbackChains
-		);
+		if ( isset( $serialization['labels'] ) ) {
+			$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
+				$serialization['labels'],
+				$fallbackChains
+			);
+		}
+
+		if ( isset( $serialization['descriptions'] ) ) {
+			$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
+				$serialization['descriptions'],
+				$fallbackChains
+			);
+		}
+
 		return $serialization;
 	}
 
