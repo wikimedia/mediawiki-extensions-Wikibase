@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_5c681bf2",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T09:05:55Z",
+      "side": 1,
+      "message": "Ok, thanks for the explanation.",
+      "parentUuid": "6ec1af18_b9e6f13d",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_82b063f2",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 4
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Most frequent case would be \"simple\" languages en, de, etc. - those will be in the cache, and putting cache checks saves time for those. Only in rare cases of exotic languages the mapping sets need to be consulted. Thus they go after the cache check, since in most cases the cache check is what will be sufficient. Optimizing for the common case.",
       "parentUuid": "6ec1af18_82b063f2",
+      "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_9c8523a2",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-19T09:05:55Z",
+      "side": 1,
+      "message": "The code is confusing no matter what. First, the cache is checked. Then two other sources are checked, but not cached. Why not cache everything? Wouldn\u0027t this be even faster, because this will save all the additional array key lookups for language codes that are in the 2nd or 3rd source? What if there is a conflict between these 3 sources? Which is more relevant? I can not tell when looking at this code.\n\nThe most common pattern for such caching is:\n\n if ( !isInCache ) {\n     fillCache;\n }\n return cachedValue;",
+      "parentUuid": "6ec1af18_19cf05b7",
       "revId": "ce299bfaaa433f112eb1537f51efb81b025de74b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
