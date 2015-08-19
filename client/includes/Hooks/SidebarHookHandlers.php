@@ -107,7 +107,7 @@ class SidebarHookHandlers {
 	/**
 	 * Static handler for the SkinTemplateGetLanguageLink hook.
 	 *
-	 * @param &$languageLink
+	 * @param array &$languageLink
 	 * @param Title $languageLinkTitle
 	 * @param Title $title
 	 * @param OutputPage $output

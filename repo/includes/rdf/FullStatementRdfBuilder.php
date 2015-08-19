@@ -259,7 +259,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 *
 	 * @param RdfWriter $writer
 	 * @param Snak $snak
-	 * @param $propertyNamespace
+	 * @param string $propertyNamespace
 	 *
 	 * @throws InvalidArgumentException
 	 */

@@ -30,6 +30,8 @@ class UsageTrackerContractTester {
 	/**
 	 * @param UsageTracker $tracker
 	 * @param callable $getUsagesCallback function( $pageId, $timestamp ) returns EntityUsage[]
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( UsageTracker $tracker, $getUsagesCallback ) {
 		if ( !is_callable( $getUsagesCallback ) ) {
@@ -42,8 +44,7 @@ class UsageTrackerContractTester {
 
 	/**
 	 * @param int $pageId
-	 *
-	 * @param $timestamp
+	 * @param string $timestamp
 	 *
 	 * @return EntityUsage[]
 	 */

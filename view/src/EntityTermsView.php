@@ -296,7 +296,7 @@ class EntityTermsView {
 	}
 
 	/**
-	 * @param $key
+	 * @param string $key
 	 *
 	 * @return Message
 	 */

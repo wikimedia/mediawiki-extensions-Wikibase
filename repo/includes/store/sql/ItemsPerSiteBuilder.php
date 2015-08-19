@@ -132,7 +132,7 @@ class ItemsPerSiteBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param $msg
+	 * @param string $msg
 	 */
 	protected function report( $msg ) {
 		if ( $this->reporter ) {

@@ -79,7 +79,7 @@ class DispatchingSnakFormatter implements SnakFormatter {
 	}
 
 	/**
-	 * @param $type
+	 * @param string $type
 	 *
 	 * @return null|SnakFormatter
 	 */

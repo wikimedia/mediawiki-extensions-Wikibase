@@ -214,7 +214,7 @@ abstract class DumpGenerator {
 	/**
 	 * Writers the given string to the output provided to the constructor.
 	 *
-	 * @param $data
+	 * @param string $data
 	 */
 	protected function writeToDump( $data ) {
 		//TODO: use output stream object

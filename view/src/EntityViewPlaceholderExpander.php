@@ -197,7 +197,7 @@ class EntityViewPlaceholderExpander {
 	 * @note This encodes knowledge about which placeholders are used by EntityView with what
 	 *       intended meaning.
 	 *
-	 * @param $name
+	 * @param string $name
 	 * @param array $args
 	 *
 	 * @return string

@@ -86,9 +86,9 @@ abstract class DumpScript extends Maintenance {
 	/**
 	 * Opens the given file for use by logMessage().
 	 *
-	 * @param $file
+	 * @param string $file use "-" as a shortcut for "php://stdout"
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	private function openLogFile( $file ) {
 		$this->closeLogFile();
@@ -101,7 +101,7 @@ abstract class DumpScript extends Maintenance {
 		$this->logFileHandle = fopen( $file, 'a' );
 
 		if ( !$this->logFileHandle ) {
-			throw new \MWException( 'Failed to open log file: ' . $file );
+			throw new MWException( 'Failed to open log file: ' . $file );
 		}
 	}
 
@@ -142,7 +142,7 @@ abstract class DumpScript extends Maintenance {
 		$output = fopen( $outFile, 'w' ); //TODO: Allow injection of an OutputStream
 
 		if ( !$output ) {
-			throw new \MWException( 'Failed to open ' . $outFile . '!' );
+			throw new MWException( 'Failed to open ' . $outFile . '!' );
 		}
 
 		if ( $this->hasOption( 'list-file' ) ) {
@@ -234,7 +234,7 @@ abstract class DumpScript extends Maintenance {
 		$input = fopen( $listFile, 'r' );
 
 		if ( !$input ) {
-			throw new \MWException( "Failed to open ID file: $input" );
+			throw new MWException( "Failed to open ID file: $input" );
 		}
 
 		$stream = new EntityIdReader( new LineReader( $input ), new BasicEntityIdParser() );

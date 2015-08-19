@@ -530,7 +530,7 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @see getMockLabelDescriptionDuplicateDetector()
 	 *
-	 * @param $entityType
+	 * @param string $entityType
 	 *
 	 * @return LabelDescriptionUniquenessValidator|CompositeFingerprintValidator
 	 */

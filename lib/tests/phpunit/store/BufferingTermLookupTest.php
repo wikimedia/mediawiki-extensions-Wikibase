@@ -47,8 +47,8 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 	 * These calls will filter the result correctly by language, but ignore the term type or item id.
 	 * Terms in three languages are defined: en, de, and fr.
 	 *
-	 * @param $getTermsOfEntityCalls
-	 * @param $getTermsOfEntitiesCalls
+	 * @param int $getTermsOfEntityCalls
+	 * @param int $getTermsOfEntitiesCalls
 	 *
 	 * @return TermIndex
 	 */

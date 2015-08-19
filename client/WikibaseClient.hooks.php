@@ -101,12 +101,12 @@ final class ClientHooks {
 	 *
 	 * @since 0.2
 	 *
-	 * @param &$conds[]
-	 * @param &$tables[]
-	 * @param &$join_conds[]
+	 * @param array &$conds
+	 * @param string[] &$tables
+	 * @param array &$join_conds
 	 * @param FormOptions $opts
-	 * @param &$query_options[]
-	 * @param &$fields[]
+	 * @param array &$query_options
+	 * @param string[] &$fields
 	 *
 	 * @return bool
 	 */
@@ -451,7 +451,7 @@ final class ClientHooks {
 	 * Adds a preference for showing or hiding Wikidata entries in recent changes
 	 *
 	 * @param User $user
-	 * @param &$prefs[]
+	 * @param array[] &$prefs
 	 *
 	 * @return bool
 	 */

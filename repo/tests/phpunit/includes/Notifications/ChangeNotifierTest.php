@@ -81,8 +81,8 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	/**
 	 * @param Content $content
 	 * @param User $user
-	 * @param $revisionId
-	 * @param $timestamp
+	 * @param int $revisionId
+	 * @param string $timestamp
 	 * @param int $parent_id
 	 *
 	 * @return Revision

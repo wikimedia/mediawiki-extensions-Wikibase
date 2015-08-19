@@ -225,7 +225,7 @@ class TermSearchKeyBuilder {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $msg
+	 * @param string $msg
 	 */
 	protected function report( $msg ) {
 		if ( $this->reporter ) {

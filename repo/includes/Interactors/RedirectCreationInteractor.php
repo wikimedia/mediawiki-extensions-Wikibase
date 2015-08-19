@@ -141,7 +141,7 @@ class RedirectCreationInteractor {
 	 * Check the given permissions for the given $entityId.
 	 *
 	 * @param EntityId $entityId
-	 * @param $permission
+	 * @param string $permission
 	 *
 	 * @throws RedirectCreationException if the permission check fails
 	 */

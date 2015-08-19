@@ -27,12 +27,11 @@ class HttpAcceptParser {
 	 *
 	 * See HTTP/1.1 section 14 for details.
 	 *
-	 * @param $rawHeader
+	 * @param string $rawHeader
 	 *
 	 * @return array
 	 */
 	public function parseWeights( $rawHeader ) {
-
 		//FIXME: The code below was copied and adapted from WebRequest::getAcceptLang.
 		//       Move this utility class into core for reuse!
 

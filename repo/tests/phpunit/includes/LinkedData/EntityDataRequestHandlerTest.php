@@ -155,8 +155,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param $params
-	 * @param $headers
+	 * @param array $params
+	 * @param string[] $headers
 	 *
 	 * @return OutputPage
 	 */

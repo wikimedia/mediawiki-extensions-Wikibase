@@ -405,8 +405,8 @@ class EntityTestHelper {
 	/**
 	 * Applies $idMap to all data in the given data structure, recursively.
 	 *
-	 * @param mixed $data
-	 * @param string[] $idMap
+	 * @param mixed &$data
+	 * @param string[] &$idMap
 	 */
 	public static function injectIds( &$data, array &$idMap ) {
 		if ( is_array( $data ) ) {

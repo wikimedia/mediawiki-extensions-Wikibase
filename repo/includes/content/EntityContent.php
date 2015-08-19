@@ -240,7 +240,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @note Will fail if this EntityContent does not represent a redirect.
 	 *
-	 * @param $generateHtml
+	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */

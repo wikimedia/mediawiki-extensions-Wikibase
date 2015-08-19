@@ -287,7 +287,7 @@ class ChunkCache implements ChunkAccess {
 	 * Remove the chunk with the given start key from the cache.
 	 * Used during pruning.
 	 *
-	 * @param $startKey
+	 * @param int $startKey
 	 *
 	 * @return bool
 	 */

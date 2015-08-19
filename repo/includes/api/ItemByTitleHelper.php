@@ -155,13 +155,14 @@ class ItemByTitleHelper {
 	}
 
 	/**
-	 * @param $messgae
-	 * @param $code
-	 * @throws UsageException
+	 * @param string $message
+	 * @param string $code
+	 *
+	 * @throws UsageException always
 	 */
-	private function throwUsageException( $messgae, $code ) {
+	private function throwUsageException( $message, $code ) {
 		Profiler::instance()->close();
-		throw new UsageException( $messgae, $code );
+		throw new UsageException( $message, $code );
 	}
 
 }

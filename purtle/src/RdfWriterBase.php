@@ -510,9 +510,9 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * particularly of structural elements which correspond to terminals in a respective
 	 * parser.
 	 *
-	 * @param $newState
+	 * @param int $newState one of the self::STATE_... constants
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws LogicException
 	 */
 	final protected function state( $newState ) {
 		if ( !isset( $this->transitionTable[$this->state][$newState] ) ) {
@@ -539,7 +539,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @note: $base and $local are given as passed to about() and processed by expandSubject().
 	 *
 	 * @param string $base
-	 * @param string|null
+	 * @param string|null $local
 	 */
 	abstract protected function writeSubject( $base, $local = null );
 
@@ -550,7 +550,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @note: $base and $local are given as passed to say() and processed by expandPredicate().
 	 *
 	 * @param string $base
-	 * @param string|null
+	 * @param string|null $local
 	 */
 	abstract protected function writePredicate( $base, $local = null );
 
@@ -561,7 +561,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @note: $base and $local are given as passed to is() and processed by expandObject().
 	 *
 	 * @param string $base
-	 * @param string|null
+	 * @param string|null $local
 	 */
 	abstract protected function writeResource( $base, $local = null );
 

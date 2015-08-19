@@ -211,8 +211,8 @@ class DispatchChanges extends Maintenance {
 	}
 
 	/**
-	 * @param $repoDB
-	 * @param $subscriptionLookupMode
+	 * @param string|bool $repoDB
+	 * @param string $subscriptionLookupMode
 	 *
 	 * @return SubscriptionLookup
 	 */

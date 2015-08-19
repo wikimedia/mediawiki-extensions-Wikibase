@@ -83,7 +83,7 @@ class ExternalRecentChange {
 	 * @since 0.4
 	 *
 	 * @param string $param metadata array key
-	 * @param $rc_params[]
+	 * @param array|string $rc_params
 	 *
 	 * @return mixed|bool
 	 */

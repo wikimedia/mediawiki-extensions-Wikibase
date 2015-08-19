@@ -174,7 +174,7 @@ class EntityModificationTestHelper {
 	 * Strip any fields we will likely not have in the arrays that are provided as
 	 * expected values. This includes empty fields, and automatic id or hash fields.
 	 *
-	 * @param $data
+	 * @param array $data
 	 */
 	private function unsetSpuriousFieldsRecursively( &$data ) {
 		// unset empty fields

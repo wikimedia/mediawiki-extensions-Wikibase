@@ -23,7 +23,8 @@ class StringNormalizer {
 	 *
 	 * @todo: this was stolen from the Language class. Make that code reusable.
 	 *
-	 * @param $string String
+	 * @param string $string
+	 *
 	 * @return string
 	 */
 	protected function removeBadCharLast( $string ) {
@@ -50,7 +51,8 @@ class StringNormalizer {
 	 *
 	 * @todo: this was stolen from the Language class. Make that code reusable.
 	 *
-	 * @param $string String
+	 * @param string $string
+	 *
 	 * @return string
 	 */
 	protected function removeBadCharFirst( $string ) {
@@ -67,7 +69,7 @@ class StringNormalizer {
 	/**
 	 * Remove incomplete UTF-8 sequences from the beginning and end of the string.
 	 *
-	 * @param $string
+	 * @param string $string
 	 *
 	 * @return string
 	 */

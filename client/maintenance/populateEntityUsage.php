@@ -79,7 +79,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $msg
+	 * @param string $msg
 	 */
 	public function report( $msg ) {
 		$this->output( "$msg\n" );

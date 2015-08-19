@@ -276,8 +276,8 @@ class ApiErrorReporter {
 	 *
 	 * @see ApiBase::dieUsage()
 	 *
-	 * @param $description
-	 * @param $errorCode
+	 * @param string $description
+	 * @param string $errorCode
 	 * @param int $httpRespCode
 	 * @param null|array $extradata
 	 *

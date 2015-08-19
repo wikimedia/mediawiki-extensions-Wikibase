@@ -347,7 +347,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * Applies self::$idMap to all data in the given data structure, recursively.
 	 *
-	 * @param $data
+	 * @param mixed &$data
 	 */
 	protected function injectIds( &$data ) {
 		EntityTestHelper::injectIds( $data, self::$idMap );

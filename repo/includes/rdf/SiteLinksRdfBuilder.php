@@ -57,7 +57,7 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 	/**
 	 * Site filter
 	 *
-	 * @param $lang
+	 * @param string $lang
 	 *
 	 * @return bool
 	 */
