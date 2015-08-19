@@ -8,6 +8,8 @@
 ( function ( wb, mw, $ ) {
 	'use strict';
 
+	var hasOwn = Object.prototype.hasOwnProperty;
+
 	/**
 	 * Tries to retrieve Universal Language Selector's set of languages.
 	 *
@@ -30,8 +32,8 @@
 	 * @return string
 	 */
 	var getNativeLanguageName = function( langCode ) {
-		var language = getLanguages()[ langCode ];
-		return language && language[2] || langCode;
+		var languages = getLanguages();
+		return hasOwn.call( languages, langCode ) && languages[langCode][2] || langCode;
 	};
 
 	/**
@@ -43,7 +45,8 @@
 	 */
 	wb.getLanguageNameByCode = function( langCode ) {
 		var ulsLanguages = mw.config.get( 'wgULSLanguages' );
-		return ulsLanguages && ulsLanguages[langCode] || getNativeLanguageName( langCode );
+		return ulsLanguages && hasOwn.call( ulsLanguages, langCode ) && ulsLanguages[langCode]
+			|| getNativeLanguageName( langCode );
 	};
 
 } )( wikibase, mediaWiki, jQuery );
