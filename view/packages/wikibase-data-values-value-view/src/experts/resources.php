@@ -89,9 +89,6 @@ return call_user_func( function() {
 				'scripts' => array(
 					'QuantityInput.js',
 				),
-				'styles' => array(
-					'QuantityInput.css',
-				),
 				'dependencies' => array(
 					'jquery.valueview.Expert',
 					'jquery.valueview.ExpertExtender',

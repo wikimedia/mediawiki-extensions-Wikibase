@@ -56,7 +56,6 @@
 
 		assert.equal( unitSelector.getConceptUri(), 'en' );
 
-
 		$extender.find( 'input' ).val( 'foobar' );
 
 		assert.equal( unitSelector.getConceptUri(), 'foobar' );

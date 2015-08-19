@@ -1,4 +1,4 @@
-( function( $, util, mw ) {
+( function( $, util ) {
 	'use strict';
 
 var PARENT = $.ui.suggester;
@@ -21,7 +21,10 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 */
 	options: {
 		url: 'https://www.wikidata.org/w/api.php',
-		language: mw && mw.config && mw.config.get( 'wgUserLanguage' ),
+		/* jshint ignore:start */
+		language: typeof mediaWiki === 'object' && mediaWiki.config
+			&& mediaWiki.config.get( 'wgUserLanguage' ) || null,
+		/* jshint ignore:end */
 		timeout: 8000
 	},
 
@@ -88,22 +91,25 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 */
 	_search: function( event ) {
 		var self = this;
-		this._cache = {};
-		this._selectedUrl = null;
 
-		self._term = self.element.val();
+		this._term = this.element.val();
+		this._selectedUrl = null;
+		this._cache = {};
 
 		clearTimeout( this._searchTimeoutHandle );
 		this._searchTimeoutHandle = setTimeout( function() {
 			self.search()
-			.done( function( suggestions ) {
+			.done( function( suggestions, requestTerm ) {
+				if( requestTerm !== self.element.val() ) {
+					return;
+				}
 				if( self.options.menu.element.is( ':visible' ) ) {
 					self._selectFirstUnit();
 				} else {
 					self._trigger( 'selected', null, [null] );
 				}
 			} );
-		}, self.options.delay );
+		}, this.options.delay );
 	},
 
 	_selectFirstUnit: function() {
@@ -118,11 +124,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 
 		if( this._selectedUrl !== url ) {
 			this._selectedUrl = url;
-			this._trigger(
-				'selected',
-				null,
-				[url]
-			);
+			this._trigger( 'selected', null, [url] );
 		}
 	},
 
@@ -136,7 +138,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 */
 	_termMatchesSuggestion: function( term, suggestion ) {
 		return ( term.toLowerCase() === suggestion.id.toLowerCase() ) ||
-				( suggestion.label && term.toLowerCase() === suggestion.label.toLowerCase() );
+			( suggestion.label && term.toLowerCase() === suggestion.label.toLowerCase() );
 	},
 
 	/**
@@ -242,11 +244,12 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	_initMenu: function( ooMenu ) {
 		var self = this;
 
-		$.ui.suggester.prototype._initMenu.apply( this, arguments );
+		PARENT.prototype._initMenu.apply( this, arguments );
 
 		$( this.options.menu )
 		.off( 'selected.suggester' )
 		.on( 'selected.unitsuggester', function( event, item ) {
+				self._term = item.getValue();
 				self._selectedUrl = item._link;
 				self.element.val( item.getValue() );
 				self._close();
@@ -304,4 +307,4 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	}
 } );
 
-}( jQuery, util, mediaWiki ) );
+}( jQuery, util ) );
