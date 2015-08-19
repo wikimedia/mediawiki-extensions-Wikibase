@@ -133,6 +133,11 @@ final class WikibaseClient {
 	private $snakFormatterFactory = null;
 
 	/**
+	 * @var TermLookup|null
+	 */
+	private $termLookup;
+
+	/**
 	 * @var OutputFormatValueFormatterFactory|null
 	 */
 	private $valueFormatterFactory = null;
@@ -221,10 +226,24 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return TermBuffer
+	 */
+	public function getTermBuffer() {
+		return $this->getTermLookup();
+	}
+
+	/**
 	 * @return TermLookup
 	 */
-	private function getTermLookup() {
-		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
+	public function getTermLookup() {
+		if ( !$this->termLookup ) {
+			$this->termLookup = new BufferingTermLookup(
+				$this->getStore()->getTermIndex(),
+				1000 // @todo: configure buffer size
+			);
+		}
+
+		return $this->termLookup;
 	}
 
 	/**
