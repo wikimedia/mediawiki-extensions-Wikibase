@@ -136,25 +136,6 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		return $interactor;
 	}
 
-	/**
-	 * Strip any fields we will likely not have in the arrays that are provided as
-	 * expected values. This includes empty fields, and automatic id or hash fields.
-	 *
-	 * @param $data
-	 */
-	private function unsetSpuriousFieldsRecursively( &$data ) {
-		// unset empty fields
-		foreach ( $data as $key => &$value ) {
-			if ( $key === 'hash' || $key === 'id' ) {
-				unset( $data[$key] );
-			} elseif ( $value === array() ) {
-				unset( $data[$key] );
-			} elseif ( is_array( $value ) ) {
-				$this->unsetSpuriousFieldsRecursively( $value );
-			}
-		}
-	}
-
 	public function mergeProvider() {
 		// NOTE: Any empty arrays and any fields called 'id' or 'hash' get stripped
 		//       from the result before comparing it to the expected value.
