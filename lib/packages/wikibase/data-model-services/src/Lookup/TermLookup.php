@@ -20,6 +20,8 @@ interface TermLookup {
 	/**
 	 * Gets the label of an Entity with the specified EntityId and language code.
 	 *
+	 * @since 2.0
+	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
@@ -33,6 +35,8 @@ interface TermLookup {
 	 *
 	 * The result will contain the entries for the requested languages, if they exist.
 	 *
+	 * @since 2.0
+	 *
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch
 	 *
@@ -43,6 +47,8 @@ interface TermLookup {
 
 	/**
 	 * Gets the description of an Entity with the specified EntityId and language code.
+	 *
+	 * @since 2.0
 	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
@@ -57,6 +63,8 @@ interface TermLookup {
 	 *
 	 * If $languages is given, the result will contain the entries for the
 	 * requested languages, if they exist.
+	 *
+	 * @since 2.0
 	 *
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch

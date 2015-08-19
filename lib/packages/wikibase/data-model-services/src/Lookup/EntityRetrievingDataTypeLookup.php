@@ -23,7 +23,7 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	}
 
 	/**
-	 * @since 0.4
+	 * @since 2.0
 	 *
 	 * @param PropertyId $propertyId
 	 *

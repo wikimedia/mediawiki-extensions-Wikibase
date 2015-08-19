@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Lookup;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @since 1.2
+ * @since 2.0
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland

@@ -15,6 +15,8 @@ use Wikibase\DataModel\Term\Term;
 interface LabelDescriptionLookup {
 
 	/**
+	 * @since 2.0
+	 *
 	 * @param EntityId $entityId
 	 *
 	 * @throws LabelDescriptionLookupException
@@ -23,6 +25,8 @@ interface LabelDescriptionLookup {
 	public function getLabel( EntityId $entityId );
 
 	/**
+	 * @since 2.0
+	 *
 	 * @param EntityId $entityId
 	 *
 	 * @throws LabelDescriptionLookupException

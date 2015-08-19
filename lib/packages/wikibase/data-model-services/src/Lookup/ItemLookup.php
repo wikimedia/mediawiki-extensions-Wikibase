@@ -16,6 +16,8 @@ interface ItemLookup {
 	/**
 	 * Returns the Item of which the id is given.
 	 *
+	 * @since 2.0
+	 *
 	 * @param ItemId $itemId
 	 *
 	 * @return Item|null
