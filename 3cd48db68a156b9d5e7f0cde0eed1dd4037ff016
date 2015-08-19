@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_288b85e9",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-19T17:09:22Z",
+      "side": 1,
+      "message": "Should be \"itemswithmostsitelinks\"?",
+      "revId": "3cd48db68a156b9d5e7f0cde0eed1dd4037ff016",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
