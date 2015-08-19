@@ -57,6 +57,8 @@ use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Store\TermBuffer;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
@@ -131,6 +133,11 @@ final class WikibaseClient {
 	 * @var OutputFormatSnakFormatterFactory|null
 	 */
 	private $snakFormatterFactory = null;
+
+	/**
+	 * @var TermLookup|null
+	 */
+	private $termLookup = null;
 
 	/**
 	 * @var OutputFormatValueFormatterFactory|null
@@ -221,10 +228,24 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return TermBuffer
+	 */
+	public function getTermBuffer() {
+		return $this->getTermLookup();
+	}
+
+	/**
 	 * @return TermLookup
 	 */
-	private function getTermLookup() {
-		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
+	public function getTermLookup() {
+		if ( $this->termLookup == null ) {
+			$this->termLookup = new BufferingTermLookup(
+				$this->getStore()->getTermIndex(),
+				1000 // @todo: configure buffer size
+			);
+		}
+
+		return $this->termLookup;
 	}
 
 	/**
