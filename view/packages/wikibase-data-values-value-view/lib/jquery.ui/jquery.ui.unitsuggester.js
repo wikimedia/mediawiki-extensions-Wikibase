@@ -8,9 +8,11 @@ var PARENT = $.ui.suggester;
  * @extends jQuery.ui.suggester
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
+ * @author Jonas Kress
  *
  * @constructor
  */
+
 $.widget( 'wikibase.unitsuggester', PARENT, {
 
 	/**
@@ -87,7 +89,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	_search: function( event ) {
 		var self = this;
 		this._cache = {};
-		this._select( null );
+		this._selectedUrl = null;
 
 		self._term = self.element.val();
 
@@ -133,8 +135,8 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 * @return {boolean}
 	 */
 	_termMatchesSuggestion: function( term, suggestion ) {
-		return ( term.toLowerCase() === suggestion.id.toLowerCase() )
-			|| ( suggestion.label && term.toLowerCase() === suggestion.label.toLowerCase() );
+		return ( term.toLowerCase() === suggestion.id.toLowerCase() ) ||
+				( suggestion.label && term.toLowerCase() === suggestion.label.toLowerCase() );
 	},
 
 	/**
@@ -191,18 +193,6 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	},
 
 	/**
-	 * @inheritdoc
-	 * @protected
-	 */
-	_updateMenu: function( suggestions ) {
-		var scrollTop = this.options.menu.element.scrollTop();
-
-		PARENT.prototype._updateMenu.apply( this, arguments );
-
-		this.options.menu.element.scrollTop( scrollTop );
-	},
-
-	/**
 	 * Generates the label for a suggester entity.
 	 * @protected
 	 *
@@ -239,7 +229,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 		var $label = this._createLabelFromSuggestion( suggestion ),
 			value = suggestion.label || suggestion.id;
 
-		var item = new $.ui.ooMenu.Item( $label, value);
+		var item = new $.ui.ooMenu.Item( $label, value );
 		item._link = suggestion.url;
 
 		return item;
@@ -258,7 +248,6 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 		.off( 'selected.suggester' )
 		.on( 'selected.unitsuggester', function( event, item ) {
 				self._selectedUrl = item._link;
-				// TODO: Call the parent method instead and remove all lines below.
 				self.element.val( item.getValue() );
 				self._close();
 				self._trigger( 'change' );
@@ -303,19 +292,8 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	},
 
 	/**
-	 * @protected
-	 *
-	 * @param {Object} entityStub
-	 */
-	_select: function( entityStub ) {
-		var id = entityStub && entityStub.id;
-		this._selectedUrl = entityStub && entityStub.url;
-		if( id ) {
-			this._trigger( 'selected', null, [id] );
-		}
-	},
-
-	/**
+	 * Returns concept URI for an item for example:
+	 * http://www.wikidata.org/entity/Q650
 	 * @return {string}
 	 */
 	getSelectedConceptUri: function() {
