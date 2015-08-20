@@ -163,7 +163,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 * This method tests all valid API requests
 	 * @dataProvider provideData
 	 */
-	public function testGetEntities( $params, $expected ) {
+	public function testGetEntities( array $params, array $expected ) {
 		// -- setup any further data -----------------------------------------------
 		$params['ids'] = implode( '|', $this->getIdsFromHandlesAndIds( $params ) );
 		$params = $this->removeHandles( $params );
@@ -203,7 +203,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		}
 	}
 
-	private function getIdsFromHandlesAndIds( $params ) {
+	private function getIdsFromHandlesAndIds( array $params ) {
 		if ( array_key_exists( 'ids', $params ) ) {
 			$ids = explode( '|', $params['ids'] );
 		} else {
@@ -221,14 +221,14 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		return $ids;
 	}
 
-	private function removeHandles( $params ) {
+	private function removeHandles( array $params ) {
 		if ( array_key_exists( 'handles', $params ) ) {
 			unset( $params['handles'] );
 		}
 		return $params;
 	}
 
-	private function calculateExpectedData( $expected, $params ) {
+	private function calculateExpectedData( array $expected, array $params ) {
 		//expect the props in params or the default props of the api
 		if ( array_key_exists( 'props', $params ) ) {
 			$expected['props'] = explode( '|', $params['props'] );
@@ -256,7 +256,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		return $expected;
 	}
 
-	private function assertEntityResult( $entity, $expected ) {
+	private function assertEntityResult( array $entity, array $expected ) {
 		//Assert individual props of each entity (if we want them, make sure they are there)
 		if ( in_array( 'info', $expected['props'] ) ) {
 			$this->assertEntityPropsInfo( $entity );
@@ -290,7 +290,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	/**
 	 * @param array $entity
 	 */
-	private function assertEntityPropsInfo( $entity ) {
+	private function assertEntityPropsInfo( array $entity ) {
 		$this->assertArrayHasKey( 'pageid', $entity, 'An entity is missing the pageid value' );
 		$this->assertInternalType( 'integer', $entity['pageid'] );
 		$this->assertGreaterThan( 0, $entity['pageid'] );
@@ -321,7 +321,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	/**
 	 * @param array $entity
 	 */
-	private function assertEntityPropsSitelinksUrls( $entity ) {
+	private function assertEntityPropsSitelinksUrls( array $entity ) {
 		foreach ( $entity['sitelinks'] as $siteLink ) {
 			$this->assertArrayHasKey( 'url', $siteLink );
 			$this->assertNotEmpty( $siteLink['url'] );
@@ -331,7 +331,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	/**
 	 * @param array $entity
 	 */
-	private function assertEntityPropsSitelinksBadges( $entity ) {
+	private function assertEntityPropsSitelinksBadges( array $entity ) {
 		foreach ( $entity['sitelinks'] as $siteLink ) {
 			$this->assertArrayHasKey( 'badges', $siteLink );
 			$this->assertInternalType( 'array', $siteLink['badges'] );
@@ -343,7 +343,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		}
 	}
 
-	private function assertEntitySitelinkSorting( $entity, $expected ) {
+	private function assertEntitySitelinkSorting( array $entity, array $expected ) {
 		$last = '';
 		if ( $expected['dir'] == 'descending' ) {
 			$last = 'zzzzzzzz';
@@ -367,7 +367,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		}
 	}
 
-	private function assertNormalization( $result, $params ) {
+	private function assertNormalization( array $result, array $params ) {
 		$this->assertArrayHasKey( 'normalized', $result );
 		$this->assertEquals(
 			$params['titles'],
@@ -419,7 +419,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testGetEntitiesExceptions( $params, $expected ) {
+	public function testGetEntitiesExceptions( array $params, array $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbgetentities';
 		if ( array_key_exists( 'handles', $params ) ) {
@@ -487,7 +487,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 						'language' => 'zh-hk',
 						'value' => '廣東的省會。',
 					),
-
 				),
 			),
 			'Oslo Fallback' => array(
@@ -571,10 +570,10 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 */
 	public function testLanguageFallback(
 		$handle,
-		$languages,
-		$expectedLabels = null,
-		$expectedDescriptions = null,
-		$props = array()
+		array $languages,
+		array $expectedLabels = null,
+		array $expectedDescriptions = null,
+		array $props = array()
 	) {
 		$id = EntityTestHelper::getId( $handle );
 

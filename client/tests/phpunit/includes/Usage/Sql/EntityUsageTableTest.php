@@ -547,11 +547,11 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param DatabaseBase $db
-	 * @param mixed $conditions
+	 * @param array $conditions
 	 *
 	 * @return bool
 	 */
-	private function rowExists( DatabaseBase $db, $conditions ) {
+	private function rowExists( DatabaseBase $db, array $conditions ) {
 		$count = $db->selectRowCount( EntityUsageTable::DEFAULT_TABLE_NAME, '*', $conditions );
 		return $count > 0;
 	}

@@ -53,7 +53,7 @@ class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit_Framework_TestCa
 	/**
 	 * @dataProvider provideGetExceptionMessage
 	 */
-	public function testGetExceptionMessage( Exception $ex, $expectedKey, $expectedParams ) {
+	public function testGetExceptionMessage( Exception $ex, $expectedKey, array $expectedParams ) {
 		$formatter = $this->getMockFormatter();
 		$localizer = new ChangeOpValidationExceptionLocalizer( $formatter );
 

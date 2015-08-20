@@ -393,7 +393,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	 * @param array $value
 	 * @return array
 	 */
-	private function expectionPlaceholder( $value ) {
+	private function expectionPlaceholder( array $value ) {
 		foreach ( $value as &$site ) {
 			if ( !isset( $site['badges'] ) ) {
 					continue;
@@ -414,7 +414,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testSetSiteLink( $params, $expected ) {
+	public function testSetSiteLink( array $params, array $expected ) {
 		// -- set any defaults ------------------------------------
 		if ( array_key_exists( 'handle', $params ) ) {
 			$params['id'] = EntityTestHelper::getId( $params['handle'] );
@@ -534,7 +534,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetSiteLinkExceptions( $params, $expected ) {
+	public function testSetSiteLinkExceptions( array $params, array $expected ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbsetsitelink';
 
@@ -553,7 +553,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideBadBadgeData
 	 */
-	public function testBadBadges( $params ) {
+	public function testBadBadges( array $params ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbsetsitelink';
 
