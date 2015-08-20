@@ -30,6 +30,23 @@ class CallbackFactory {
 	}
 
 	/**
+	 * Get callable to index array with the given tag name
+	 *
+	 * @param string $type
+	 * @param string $kvpKeyName
+	 *
+	 * @return callable
+	 */
+	public function getCallbackToSetArrayType( $type, $kvpKeyName = null ) {
+		return function( $array ) use ( $type, $kvpKeyName ) {
+			if ( is_array( $array ) ) {
+				ApiResult::setArrayType( $array, $type, $kvpKeyName );
+			}
+			return $array;
+		};
+	}
+
+	/**
 	 * Get callable to remove array keys and optionally set the key as an array value
 	 *
 	 * @param string|null $addAsArrayElement
@@ -68,11 +85,13 @@ class CallbackFactory {
 
 	public function getCallbackToAddDataTypeToSnak( PropertyDataTypeLookup $dataTypeLookup ) {
 		return function ( $array ) use ( $dataTypeLookup ) {
-			try {
-				$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $array['property'] ) );
-				$array['datatype'] = $dataType;
-			} catch ( PropertyNotFoundException $e ) {
-				//XXX: shall we set $serialization['datatype'] = 'bad' ??
+			if ( is_array( $array ) ) {
+				try {
+					$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $array['property'] ) );
+					$array['datatype'] = $dataType;
+				} catch ( PropertyNotFoundException $e ) {
+					//XXX: shall we set $serialization['datatype'] = 'bad' ??
+				}
 			}
 			return $array;
 		};

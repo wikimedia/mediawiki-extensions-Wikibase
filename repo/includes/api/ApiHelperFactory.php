@@ -98,7 +98,8 @@ class ApiHelperFactory {
 			$this->titleLookup,
 			$this->newSerializerFactory(),
 			$this->siteStore,
-			$this->dataTypeLookup
+			$this->dataTypeLookup,
+			true // The mediawiki api should always be given metadata
 		);
 	}
 
