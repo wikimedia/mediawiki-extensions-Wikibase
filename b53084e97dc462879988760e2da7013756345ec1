@@ -16,6 +16,24 @@
       "revId": "b53084e97dc462879988760e2da7013756345ec1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ec490791",
+        "filename": "lib/WikibaseLib.datatypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T17:30:14Z",
+      "side": 1,
+      "message": "I think it is useful to document intended use. Documentation like this provides context, it does not introduce dependencies.",
+      "parentUuid": "6ec1af18_29474224",
+      "revId": "b53084e97dc462879988760e2da7013756345ec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
