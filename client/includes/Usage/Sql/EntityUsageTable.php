@@ -6,7 +6,6 @@ use ArrayIterator;
 use DatabaseBase;
 use DBUnexpectedError;
 use InvalidArgumentException;
-use Iterator;
 use MWException;
 use Traversable;
 use Wikibase\Client\Usage\EntityUsage;
@@ -348,7 +347,7 @@ class EntityUsageTable {
 	 * @param EntityId[] $entityIds
 	 * @param string[] $aspects
 	 *
-	 * @return Iterator An iterator over PageEntityUsages grouped by page.
+	 * @return Traversable A traversable over PageEntityUsages grouped by page.
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
 		if ( empty( $entityIds ) ) {
