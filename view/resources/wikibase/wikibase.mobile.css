@@ -1,0 +1,87 @@
+/**
+ * Styles specific to the mobile version of Wikibase.
+ *
+ * @since 0.5
+ *
+ * @license GNU GPL v2+
+ * @author Bene* < benestar.wikimedia@gmail.com >
+ */
+
+.wikibase-toolbar-container {
+	display: none;
+}
+
+.wikibase-title-id {
+	color: grey;
+	font-size: 0.6em;
+	margin-left: 0.4em;
+}
+
+.wikibase-entitytermsview-heading-aliases ul {
+	color: grey;
+	margin: 0;
+	word-wrap: break-word;
+}
+
+.wikibase-entitytermsview-heading-aliases li {
+	display: inline;
+}
+
+.wikibase-entitytermsview-heading-aliases li::before,
+.wikibase-entitytermsview-heading-aliases li:before {
+	content: '|';
+	padding: 0 0.4em;
+}
+
+.wikibase-entitytermsview-heading-aliases li:first-child:before {
+	content: '';
+	padding: 0;
+}
+
+.wikibase-entitytermsview-entitytermsforlanguagelistview {
+	display: none;
+}
+
+.wikibase-statementgrouplistview,
+.wikibase-sitelinklistview {
+	-webkit-column-width: 280px;
+	-moz-column-width: 280px;
+	column-width: 280px;
+}
+
+.wikibase-statementgroupview {
+	/* Same as toc */
+	background-color: #f9f9f9;
+	border: 1px solid #eee;
+	/* Prevent statementgroupview to be split among columns */
+	display: inline-block;
+	margin: 0 0 10px;
+	padding: 5px;
+	width: 100%;
+}
+
+.wikibase-statementgroupview-property-label a,
+.wikibase-snakview-property a {
+	color: #555;
+}
+
+.wikibase-statementview {
+	margin-bottom: 10px;
+}
+
+.wikibase-statementview-mainsnak .wikibase-snakview-value {
+	font-size: 1.2em;
+}
+
+.wikibase-snakview div {
+	display: inline;
+}
+
+.wikibase-statementview-references-container,
+.wikibase-statementview-qualifiers {
+	font-size: 0.8em;
+}
+
+.wikibase-referenceview {
+	margin: 5px 0;
+}
