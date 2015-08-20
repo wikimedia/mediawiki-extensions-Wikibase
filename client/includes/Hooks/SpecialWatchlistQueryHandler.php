@@ -53,7 +53,7 @@ class SpecialWatchlistQueryHandler {
 	 *
 	 * @return array
 	 */
-	public function addWikibaseConditions( WebRequest $request, array $conds, $opts ) {
+	public function addWikibaseConditions( WebRequest $request, array $conds, FormOptions $opts = null ) {
 		// do not include wikibase changes for activated enhanced watchlist
 		// since we do not support that format yet
 		if ( $this->shouldHideWikibaseChanges( $request, $opts ) ) {

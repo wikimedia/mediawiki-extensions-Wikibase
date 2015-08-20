@@ -35,7 +35,7 @@ class TextInjector {
 	 *        for use by inject(); a map of string markers associated with
 	 *        parameter arrays.
 	 */
-	public function __construct( $markers = array() ) {
+	public function __construct( array $markers = array() ) {
 		$this->markers = $markers;
 
 		// idea stolen from Parser class in core
