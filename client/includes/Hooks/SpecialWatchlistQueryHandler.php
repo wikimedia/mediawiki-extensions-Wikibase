@@ -49,7 +49,7 @@ class SpecialWatchlistQueryHandler {
 	/**
 	 * @param WebRequest $request
 	 * @param array $conds
-	 * @param FormOptions|null $opts
+	 * @param FormOptions|array|null $opts MediaWiki 1.22 used an array and MobileFrontend still does.
 	 *
 	 * @return array
 	 */
@@ -67,7 +67,7 @@ class SpecialWatchlistQueryHandler {
 
 	/**
 	 * @param WebRequest $request
-	 * @param FormOptions|null $opts
+	 * @param FormOptions|array|null $opts MediaWiki 1.22 used an array and MobileFrontend still does.
 	 *
 	 * @return boolean
 	 */

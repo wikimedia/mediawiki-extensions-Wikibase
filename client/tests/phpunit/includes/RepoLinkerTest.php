@@ -143,7 +143,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getPageUrlInvalidProvider
 	 */
-	public function testGetPageUrlInvalidThrowsException( $settings, $page ) {
+	public function testGetPageUrlInvalidThrowsException( array $settings, $page ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$repoLinker->getPageUrl( $page );
@@ -160,7 +160,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider formatLinkProvider
 	 */
-	public function testFormatLink( $expected, $settings, $url, $text, $attribs ) {
+	public function testFormatLink( $expected, array $settings, $url, $text, array $attribs = array() ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->formatLink( $url, $text, $attribs ) );
@@ -174,8 +174,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				'<a class="plainlinks" href="//example.com/wiki/Special:Log/delete">delete</a>',
 				$settings[1],
 				'//example.com/wiki/Special:Log/delete',
-				'delete',
-				null
+				'delete'
 			),
 			array(
 				'<a class="plainlinks" tabindex="1" href="http://www.example.com/w/index.php'
