@@ -495,13 +495,9 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		if ( array_key_exists( 'indb', $expected ) ) {
 			$expectedInDb = $expected['indb'];
 		}
-		if ( $expectedInDb ) {
-			$this->assertArrayHasKey( 'sitelinks', $dbEntity );
-			$this->assertCount( $expectedInDb, $dbEntity['sitelinks'] );
-			$this->assertContainsAllSiteLinks( $expected['value'], $dbEntity['sitelinks'] );
-		} else {
-			$this->assertArrayNotHasKey( 'sitelinks', $dbEntity );
-		}
+		$this->assertArrayHasKey( 'sitelinks', $dbEntity );
+		$this->assertCount( $expectedInDb, $dbEntity['sitelinks'] );
+		$this->assertContainsAllSiteLinks( $expected['value'], $dbEntity['sitelinks'] );
 
 		// -- check the edit summary --------------------------------------------
 		if ( ! array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ) {
