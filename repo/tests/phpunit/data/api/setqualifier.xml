@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <api success="1">
 	<pageinfo/>
-	<claim id="$itemIdUnderTest$1111AAAA-43cb-ed6d-3adb-760e85bd17ee" type="statement" rank="normal">
+	<claim type="statement" id="$itemIdUnderTest$1111AAAA-43cb-ed6d-3adb-760e85bd17ee" rank="normal">
 		<mainsnak snaktype="novalue" property="$propertyIdUnderTest" datatype="string"/>
 		<qualifiers>
 			<property id="$propertyIdUnderTest">
-				<qualifiers _idx="0" hash="XXX"
-							snaktype="value" property="$propertyIdUnderTest" datatype="string">
+				<qualifiers snaktype="value" property="$propertyIdUnderTest" hash="XXX" datatype="string">
 					<datavalue value="QualiValue" type="string"/>
 				</qualifiers>
 			</property>
