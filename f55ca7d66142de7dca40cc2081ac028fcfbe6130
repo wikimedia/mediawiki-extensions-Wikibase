@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_6cc3d78c",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-20T16:38:05Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is a good idea. PHP has no such type, and it would only confuse IDEs that do not understand this syntax.",
+      "revId": "f55ca7d66142de7dca40cc2081ac028fcfbe6130",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_4c385b9b",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-08-20T16:38:05Z",
+      "side": 0,
+      "message": "Not sure I understand why you are dropping the test data.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
