@@ -58,6 +58,7 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
@@ -302,6 +303,19 @@ final class WikibaseClient {
 		}
 
 		return $this->languageFallbackChainFactory;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	public function getLanguageFallbackLabelDescriptionLookupFactory() {
+		return new LanguageFallbackLabelDescriptionLookupFactory(
+			$this->getLanguageFallbackChainFactory(),
+			$this->getTermLookup(),
+			$this->getTermBuffer()
+		);
 	}
 
 	/**
