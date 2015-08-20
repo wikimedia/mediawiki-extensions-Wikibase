@@ -89,7 +89,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$languageCodes = array_merge(
 				$GLOBALS['wgDummyLanguageCodes'],
-				$this->wikibaseRepo->getSettings()->getSetting( 'canonicalLanguageCodes' )
+				$wikibaseRepo->getSettings()->getSetting( 'canonicalLanguageCodes' )
 		);
 
 		$serializationService = new EntityDataSerializationService(
