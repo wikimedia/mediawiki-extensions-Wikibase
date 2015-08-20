@@ -5,7 +5,5 @@
 		<mainsnak snaktype="value" property="$propertyIdUnderTest" datatype="string">
 			<datavalue value="SetClaimValue" type="string"/>
 		</mainsnak>
-		<qualifiers/>
-		<qualifiers-order/>
 	</claim>
 </api>
