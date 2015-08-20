@@ -92,7 +92,7 @@ class ExternalChangeFactory {
 	 * @throws UnexpectedValueException
 	 * @return bool
 	 */
-	private function validateChangeData( $changeParams ) {
+	private function validateChangeData( array $changeParams ) {
 		if ( !is_array( $changeParams ) ) {
 			throw new UnexpectedValueException( 'Invalid Wikibase change' );
 		}
@@ -198,7 +198,7 @@ class ExternalChangeFactory {
 	 *
 	 * @return string
 	 */
-	private function extractComment( $changeParams ) {
+	private function extractComment( array $changeParams ) {
 		$comment = array(
 			'key' => 'wikibase-comment-update'
 		);
@@ -223,7 +223,7 @@ class ExternalChangeFactory {
 	 *
 	 * @return int
 	 */
-	private function countCompositeComments( $comments ) {
+	private function countCompositeComments( array $comments ) {
 		$compositeComments = array_filter( $comments );
 
 		return count( $compositeComments );
