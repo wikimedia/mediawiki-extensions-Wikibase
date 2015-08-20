@@ -273,7 +273,7 @@ class ResultBuilder {
 	 *     entity id before any redirects were resolved.
 	 * @param EntityRevision $entityRevision
 	 * @param string[]|string $props a list of fields to include, or "all"
-	 * @param string[] $filterSiteIds A list of site IDs to filter by
+	 * @param string[]|null $filterSiteIds A list of site IDs to filter by
 	 * @param string[] $filterLangCodes A list of language codes to filter by
 	 * @param LanguageFallbackChain[] $fallbackChains with keys of the origional language
 	 *
@@ -283,9 +283,9 @@ class ResultBuilder {
 		$sourceEntityIdSerialization,
 		EntityRevision $entityRevision,
 		$props = 'all',
-		$filterSiteIds = array(),
-		$filterLangCodes = array(),
-		$fallbackChains = array()
+		array $filterSiteIds = null,
+		array $filterLangCodes = array(),
+		array $fallbackChains = array()
 	) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
@@ -344,9 +344,9 @@ class ResultBuilder {
 	private function getEntityArray(
 		Entity $entity,
 		$props,
-		$filterSiteIds,
-		$filterLangCodes,
-		$fallbackChains
+		array $filterSiteIds = null,
+		array $filterLangCodes,
+		array $fallbackChains
 	) {
 		$entitySerializer = $this->serializerFactory->newEntitySerializer();
 		$serialization = $entitySerializer->serialize( $entity );
@@ -454,7 +454,10 @@ class ResultBuilder {
 		return $serialization;
 	}
 
-	private function filterEntitySerializationUsingSiteIds( array $serialization, $siteIds ) {
+	private function filterEntitySerializationUsingSiteIds(
+		array $serialization,
+		array $siteIds = null
+	) {
 		if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $serialization ) ) {
 			foreach ( $serialization['sitelinks'] as $siteId => $siteLink ) {
 				if ( is_array( $siteLink ) && !in_array( $siteLink['site'], $siteIds ) ) {
@@ -521,7 +524,7 @@ class ResultBuilder {
 		return $newSerialization;
 	}
 
-	private function filterEntitySerializationUsingLangCodes( array $serialization, $langCodes ) {
+	private function filterEntitySerializationUsingLangCodes( array $serialization, array $langCodes ) {
 		if ( !empty( $langCodes ) ) {
 			if ( array_key_exists( 'labels', $serialization ) ) {
 				foreach ( $serialization['labels'] as $langCode => $languageArray ) {
@@ -548,7 +551,7 @@ class ResultBuilder {
 		return $serialization;
 	}
 
-	private function getRawModeEntitySerialization( $serialization ) {
+	private function getRawModeEntitySerialization( array $serialization ) {
 		// In raw mode aliases are not currently grouped by language
 		$serialization = $this->modifier->modifyUsingCallback(
 			$serialization,
@@ -1007,7 +1010,7 @@ class ResultBuilder {
 		);
 	}
 
-	private function getRawModeReferenceArray( $array ) {
+	private function getRawModeReferenceArray( array $array ) {
 		$array = $this->modifier->modifyUsingCallback( $array, 'snaks-order', function ( $array ) {
 			ApiResult::setIndexedTagName( $array, 'property' );
 			return $array;
@@ -1034,7 +1037,7 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 */
-	public function addMissingEntity( $key, $missingDetails ) {
+	public function addMissingEntity( $key, array $missingDetails ) {
 		if ( $key === null && isset( $missingDetails['id'] ) ) {
 			$key = $missingDetails['id'];
 		}

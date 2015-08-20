@@ -137,7 +137,7 @@ class LangLinkHandler {
 	 *
 	 * @return SiteLink[] The SiteLinks in $links, indexed by site ID
 	 */
-	private function indexLinksBySiteId( $links ) {
+	private function indexLinksBySiteId( array $links ) {
 		$indexed = array();
 
 		foreach ( $links as $link ) {
@@ -153,7 +153,7 @@ class LangLinkHandler {
 	 *
 	 * @return SiteLink[] The SiteLinks in $links, indexed by interwiki prefix.
 	 */
-	private function indexLinksByInterwiki( $links ) {
+	private function indexLinksByInterwiki( array $links ) {
 		$indexed = array();
 
 		foreach ( $links as $link ) {

@@ -48,7 +48,7 @@ class ChangeOpValidationException extends ChangeOpException {
 	 *
 	 * @return string
 	 */
-	private function composeErrorMessage( $errors ) {
+	private function composeErrorMessage( array $errors ) {
 		$text = implode( '; ', array_map( function( Error $error ) {
 			return $error->getText();
 		}, $errors ) );

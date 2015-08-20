@@ -135,7 +135,7 @@ class DiffOpValueFormatter {
 	 *
 	 * @return string HTML
 	 */
-	private function generateValueHtml( $values ) {
+	private function generateValueHtml( array $values ) {
 		$html = '';
 
 		foreach ( $values as $value ) {

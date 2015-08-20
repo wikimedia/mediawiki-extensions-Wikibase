@@ -347,7 +347,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 *
 	 * @returns TermIndexEntry[]
 	 */
-	private function makeTermIndexEntryTemplates( $text, $languageCodes, $termTypes ) {
+	private function makeTermIndexEntryTemplates( $text, array $languageCodes, array $termTypes ) {
 		$terms = array();
 		foreach ( $languageCodes as $languageCode ) {
 			foreach ( $termTypes as $termType ) {
