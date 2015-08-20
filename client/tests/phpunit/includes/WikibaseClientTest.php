@@ -54,6 +54,10 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$returnValue = $this->getWikibaseClient()->getLanguageFallbackChainFactory();
 		$this->assertInstanceOf( 'Wikibase\LanguageFallbackChainFactory', $returnValue );
 	}
+	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {
+		$returnValue = $this->getWikibaseClient()->getLanguageFallbackLabelDescriptionLookupFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory', $returnValue );
+	}
 
 	public function testGetStoreReturnType() {
 		$returnValue = $this->getWikibaseClient()->getStore();
@@ -238,6 +242,23 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetTermsLanguages() {
 		$langs = $this->getWikibaseClient()->getTermsLanguages();
 		$this->assertInstanceOf( 'Wikibase\Lib\ContentLanguages', $langs );
+	}
+
+	public function testGetTermLookup() {
+		$service = $this->getWikibaseClient()->getTermLookup();
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\TermLookup', $service );
+	}
+
+	public function testGetTermBuffer() {
+		$service = $this->getWikibaseClient()->getTermBuffer();
+		$this->assertInstanceOf( 'Wikibase\Store\TermBuffer', $service );
+	}
+
+	public function testGetTermBuffer_instance() {
+		$repo = $this->getWikibaseClient();
+		$service = $repo->getTermBuffer();
+		$this->assertSame( $service, $repo->getTermBuffer(), 'Second call should return same instance' );
+		$this->assertSame( $service, $repo->getTermLookup(), 'TermBuffer and TermLookup should be the same object' );
 	}
 
 	public function testGetRestrictedEntityLookup() {

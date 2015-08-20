@@ -57,9 +57,12 @@ use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Store\BufferingTermLookup;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
+
 
 /**
  * Top level factory for the WikibaseClient extension.
@@ -301,6 +304,19 @@ final class WikibaseClient {
 		}
 
 		return $this->languageFallbackChainFactory;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	public function getLanguageFallbackLabelDescriptionLookupFactory() {
+		return new LanguageFallbackLabelDescriptionLookupFactory(
+			$this->getLanguageFallbackChainFactory(),
+			$this->getTermLookup(),
+			$this->getTermBuffer()
+		);
 	}
 
 	/**
