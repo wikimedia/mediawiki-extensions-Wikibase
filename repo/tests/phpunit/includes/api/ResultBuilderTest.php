@@ -44,7 +44,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return new ApiResult( false );
 	}
 
-	private function getResultBuilder( $result, $isRawMode = false ) {
+	private function getResultBuilder( $result, $addMetaData = false ) {
 		$mockTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -82,7 +82,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$serializerFactory,
 			new MockSiteStore(),
 			$mockPropertyDataTypeLookup,
-			$isRawMode
+			$addMetaData
 		);
 
 		return $builder;
@@ -430,7 +430,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTestAddEntityRevision
 	 */
-	public function testAddEntityRevision( $isRawMode, $expected ) {
+	public function testAddEntityRevision( $addMetaData, $expected ) {
 		$result = $this->getDefaultResult();
 		$item = new Item( new ItemId( 'Q123098' ) );
 
@@ -461,7 +461,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
-		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addEntityRevision( 'Q1230000', $entityRevision );
 
 		$data = $result->getResultData();
@@ -602,7 +602,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTestAddEntityRevisionFallback
 	 */
-	public function testAddEntityRevisionFallback( $isRawMode, $expected ) {
+	public function testAddEntityRevisionFallback( $addMetaData, $expected ) {
 		$item = new Item( new ItemId( 'Q123101' ) );
 		$item->getFingerprint()->setLabel( 'de', 'Oslo-de' );
 		$item->getFingerprint()->setLabel( 'en', 'Oslo-en' );
@@ -624,7 +624,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$filterLangCodes = array_keys( $fallbackChains );
 
 		$result = $this->getDefaultResult();
-		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addEntityRevision(
 			null,
 			$entityRevision,
@@ -960,7 +960,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddAliasGroupList
 	 */
-	public function testAddAliasGroupList( $rawMode, $expected ) {
+	public function testAddAliasGroupList( $metaData, $expected ) {
 		$result = $this->getDefaultResult();
 		$aliasGroupList = new AliasGroupList(
 			array(
@@ -970,7 +970,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 		$path = array( 'entities', 'Q1' );
 
-		$resultBuilder = $this->getResultBuilder( $result, $rawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $metaData );
 		$resultBuilder->addAliasGroupList( $aliasGroupList, $path );
 
 		$data = $result->getResultData();
@@ -1029,7 +1029,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddSiteLinkList
 	 */
-	public function testAddSiteLinkList( $isRawMode, $expected ) {
+	public function testAddSiteLinkList( $addMetaData, $expected ) {
 		$result = $this->getDefaultResult();
 		$siteLinkList = new SiteLinkList(
 			array(
@@ -1039,7 +1039,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 		$path = array( 'entities', 'Q1' );
 
-		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addSiteLinkList( $siteLinkList, $path );
 
 		$data = $result->getResultData();
@@ -1142,11 +1142,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider statementSerializationProvider
 	 */
-	public function testAddClaims( Statement $statement, $isRawMode, $statementSerialization ) {
+	public function testAddClaims( Statement $statement, $addMetaData, $statementSerialization ) {
 		$result = $this->getDefaultResult();
 		$path = array( 'entities', 'Q1' );
 
-		if ( $isRawMode ) {
+		if ( $addMetaData ) {
 			$expected = array(
 				'entities' => array(
 					'Q1' => array(
@@ -1175,7 +1175,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			);
 		}
 
-		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addStatements( array( $statement ), $path );
 
 		$data = $result->getResultData();
@@ -1232,11 +1232,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider statementSerializationProvider
 	 */
-	public function testAddClaim( Statement $statement, $isRawMode, $statementSerialization ) {
+	public function testAddClaim( Statement $statement, $addMetaData, $statementSerialization ) {
 		$result = $this->getDefaultResult();
 		$expected = array( 'claim' => $statementSerialization );
 
-		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addStatement( $statement );
 
 		$data = $result->getResultData();
@@ -1307,7 +1307,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$expectedRawModeSerialization = array(
+		$expectedSerializationWithMetaData = array(
 			'id' => 'fooguidbar',
 			'mainsnak' => array(
 				'snaktype' => 'value',
@@ -1371,7 +1371,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array( $statement, false, $expectedSerialization ),
-			array( $statement, true, $expectedRawModeSerialization ),
+			array( $statement, true, $expectedSerializationWithMetaData ),
 		);
 	}
 
@@ -1433,7 +1433,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddReference
 	 */
-	public function testAddReference( $isRawMode, $expected ) {
+	public function testAddReference( $addMetaData, $expected ) {
 		$result = $this->getDefaultResult();
 		$reference = new Reference(
 			new SnakList( array(
@@ -1441,7 +1441,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			) )
 		);
 
-		$resultBuilder = $this->getResultBuilder( $result, $isRawMode );
+		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
 		$resultBuilder->addReference( $reference );
 
 		$data = $result->getResultData();
@@ -1622,9 +1622,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideSetList
 	 */
-	public function testSetList( $path, $name, array $values, $tag, $isRawMode, $expected ) {
+	public function testSetList( $path, $name, array $values, $tag, $addMetaData, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, $isRawMode );
+		$builder = $this->getResultBuilder( $result, $addMetaData );
 
 		$builder->setList( $path, $name, $values, $tag );
 		$data = $result->getResultData();
@@ -1686,9 +1686,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideSetValue
 	 */
-	public function testSetValue( $path, $name, $value, $isRawMode, $expected ) {
+	public function testSetValue( $path, $name, $value, $addMetaData, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, $isRawMode );
+		$builder = $this->getResultBuilder( $result, $addMetaData );
 
 		$builder->setValue( $path, $name, $value );
 		$data = $result->getResultData();
@@ -1768,9 +1768,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAppendValue
 	 */
-	public function testAppendValue( $path, $key, $value, $tag, $isRawMode, $expected ) {
+	public function testAppendValue( $path, $key, $value, $tag, $addMetaData, $expected ) {
 		$result = $this->getDefaultResult();
-		$builder = $this->getResultBuilder( $result, $isRawMode );
+		$builder = $this->getResultBuilder( $result, $addMetaData );
 
 		$builder->appendValue( $path, $key, $value, $tag );
 		$data = $result->getResultData();
