@@ -17,6 +17,7 @@ h1 .wikibase-title .wikibase-title-id {
 	color: grey;
 	font-size: 0.6em;
 	margin-left: 0.4em;
+	unicode-bidi: embed;
 }
 
 h1 .wikibase-title .wikibase-title-id:before {
