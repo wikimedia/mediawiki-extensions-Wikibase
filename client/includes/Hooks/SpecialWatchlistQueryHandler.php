@@ -71,7 +71,7 @@ class SpecialWatchlistQueryHandler {
 	 *
 	 * @return boolean
 	 */
-	private function shouldHideWikibaseChanges( WebRequest $request, $opts ) {
+	private function shouldHideWikibaseChanges( WebRequest $request, FormOptions $opts = null ) {
 		if ( !$this->showExternalChanges || $this->isEnhancedChangesEnabled( $request ) === true ) {
 			return true;
 		}

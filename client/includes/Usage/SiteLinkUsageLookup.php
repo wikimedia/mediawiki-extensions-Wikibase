@@ -175,7 +175,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 *
 	 * @return ItemId[]
 	 */
-	private function makeItemIds( $numericIds ) {
+	private function makeItemIds( array $numericIds ) {
 		return array_map(
 			function ( $numericId ) {
 				return ItemId::newFromNumber( $numericId );
