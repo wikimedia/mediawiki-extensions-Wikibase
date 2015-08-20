@@ -128,9 +128,6 @@ class GetEntities extends ApiBase {
 			$this->handleEntity( $sourceEntityId, $entityRevision, $params );
 		}
 
-		//todo remove once result builder is used... (what exactly does this do....?)
-		$this->getResult()->addIndexedTagName( array( 'entities' ), 'entity' );
-
 		$this->resultBuilder->markSuccess( 1 );
 	}
 
