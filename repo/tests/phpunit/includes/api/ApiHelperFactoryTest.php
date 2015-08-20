@@ -49,10 +49,6 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$result->expects( $this->any() )
-			->method( 'getIsRawMode' )
-			->will( $this->returnValue( false ) );
-
 		$api = $this->getMockBuilder( 'ApiBase' )
 			->disableOriginalConstructor()
 			->getMock();
