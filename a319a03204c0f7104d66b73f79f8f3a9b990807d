@@ -157,6 +157,24 @@
       "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6ff669c4",
+        "filename": "view/tests/phpunit/PropertyViewTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T18:25:42Z",
+      "side": 1,
+      "message": "Oh, it is, apparently: https://integration.wikimedia.org/ci/job/mwext-Wikibase-repo-tests-mysql-hhvm/3961/console",
+      "parentUuid": "6ec1af18_3147ac52",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
