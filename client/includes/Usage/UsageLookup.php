@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Usage;
 
-use Iterator;
+use ArrayIterator;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -32,7 +32,7 @@ interface UsageLookup {
 	 * @param string[] $aspects Which aspects to consider (if omitted, all aspects are considered).
 	 * Use the EntityUsage::XXX_USAGE constants to represent aspects.
 	 *
-	 * @return Iterator<PageEntityUsages> An iterator over PageEntityUsages of pages using any of the given entities.
+	 * @return ArrayIterator A traversable over PageEntityUsages of pages using any of the given entities.
 	 *         If $aspects is given, only usages of these aspects are included in the result.
 	 * @throws UsageTrackerException
 	 */
