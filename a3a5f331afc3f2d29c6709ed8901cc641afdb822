@@ -16,6 +16,24 @@
       "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8cfba3b9",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:44:36Z",
+      "side": 0,
+      "message": "I think one of these arrays I removed is actually needed and used and compared in the test. I will re-add it.",
+      "parentUuid": "6ec1af18_4c385b9b",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

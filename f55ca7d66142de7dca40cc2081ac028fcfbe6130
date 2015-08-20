@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_2c038fc3",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:44:36Z",
+      "side": 1,
+      "message": "This is common practice. We use these more specific hints all over our code base.",
+      "parentUuid": "6ec1af18_6cc3d78c",
+      "revId": "f55ca7d66142de7dca40cc2081ac028fcfbe6130",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_0c425313",
         "filename": "repo/includes/specials/SpecialEntityData.php",
         "patchSetId": 1
