@@ -505,7 +505,7 @@
 	"apihelp-wbparsevalue-param-parser": "要使用的ValueParser的ID。<span class=\"apihelp-deprecated\">已弃用</span>。请改用数据类型参数。",
 	"apihelp-wbparsevalue-param-datatype": "要解析的值的数据类型。确定解析器以使用。",
 	"apihelp-wbparsevalue-param-values": "要解析的值",
-	"apihelp-wbparsevalue-example-1": "不对字符串的格式做出更改。",
+	"apihelp-wbparsevalue-example-1": "将一段无格式的字符串解析至一个StringValue对象中。",
 	"apihelp-wbparsevalue-example-2": "解析1994-02-08为时间值对象，精度为9（年）。",
 	"apihelp-wbparsevalue-example-3": "解析1994-02-08为时间值对象，精度为14（秒）并启用验证，返回验证失败。",
 	"apihelp-wbremoveclaims-description": "移除Wikibase声称。",
