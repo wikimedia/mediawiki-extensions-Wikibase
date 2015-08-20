@@ -297,13 +297,11 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 
 	/**
 	 * This mimics ApiMain::executeAction with the relevant parts,
-	 * including setupExternalResponse where the printer is set. and
-	 * Then raw mode is set the api format requires it. (always for xml)
+	 * including setupExternalResponse where the printer is set.
 	 * The module is then executed and results printed.
 	 */
 	private function executeApiModule( ApiBase $module ) {
 		$printer = $module->getMain()->createPrinterByName( 'xml' );
-		$module->getResult()->setRawMode( true );
 
 		$module->execute();
 
