@@ -190,8 +190,12 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialWatchlistQuery( array &$conds, array &$tables,
-		array &$join_conds, array &$fields, $opts
+	public static function onSpecialWatchlistQuery(
+		array &$conds,
+		array &$tables,
+		array &$join_conds,
+		array &$fields,
+		$opts = null
 	) {
 		$db = wfGetDB( DB_SLAVE );
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
