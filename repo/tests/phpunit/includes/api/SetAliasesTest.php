@@ -118,14 +118,10 @@ class SetAliasesTest extends ModifyTermTestCase {
 
 		// -- check item in database -------------------------------------------
 		$dbEntity = $this->loadEntity( EntityTestHelper::getId( 'Empty' ) );
-		if ( count( $expected['value'] ) ) {
-			$this->assertArrayHasKey( 'aliases', $dbEntity );
-			$dbAliases = $this->flattenArray( $dbEntity['aliases'], 'language', 'value', true );
-			foreach ( $expected['value'] as $valueLanguage => $value ) {
-				$this->assertArrayEquals( $value, $dbAliases[ $valueLanguage ] );
-			}
-		} else {
-			$this->assertArrayNotHasKey( 'aliases', $dbEntity );
+		$this->assertArrayHasKey( 'aliases', $dbEntity );
+		$dbAliases = $this->flattenArray( $dbEntity['aliases'], 'language', 'value', true );
+		foreach ( $expected['value'] as $valueLanguage => $value ) {
+			$this->assertArrayEquals( $value, $dbAliases[ $valueLanguage ] );
 		}
 
 		// -- check the edit summary --------------------------------------------
