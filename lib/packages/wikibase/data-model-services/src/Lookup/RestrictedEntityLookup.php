@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * This is needed to limit the number of entities that can be loaded via some
  * user controlled features, like entity access in Lua.
  *
- * @since 1.2
+ * @since 2.0
  *
  * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
@@ -58,7 +58,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws EntityNotFoundException
+	 * @throws EntityLookupException
 	 * @return EntityDocument
 	 */
 	public function getEntity( EntityId $entityId ) {
@@ -70,7 +70,7 @@ class RestrictedEntityLookup implements EntityLookup {
 		}
 
 		if ( $this->entityAccessCount > $this->entityAccessLimit ) {
-			throw new EntityNotFoundException(
+			throw new EntityLookupException(
 				$entityId,
 				'To many entities loaded, must not load more than ' . $this->entityAccessLimit . ' entities.'
 			);
@@ -93,7 +93,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	/**
 	 * Returns the number of entities already loaded via this object.
 	 *
-	 * @since 1.2
+	 * @since 2.0
 	 *
 	 * @return int
 	 */
@@ -104,7 +104,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	/**
 	 * Whether an entity has been accessed before via this RestrictedEntityLookup.
 	 *
-	 * @since 1.2
+	 * @since 2.0
 	 *
 	 * @param EntityId $entityId
 	 *

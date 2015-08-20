@@ -15,10 +15,12 @@ interface PropertyDataTypeLookup {
 	/**
 	 * Returns the data type for the Property of which the id is given.
 	 *
+	 * @since 2.0
+	 *
 	 * @param PropertyId $propertyId
 	 *
 	 * @return string
-	 * @throws PropertyNotFoundException
+	 * @throws PropertyDataTypeLookupException
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId );
 

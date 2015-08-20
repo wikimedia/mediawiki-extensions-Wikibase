@@ -23,12 +23,12 @@ interface EntityLookup {
 	 * Code that needs control over redirect resolution should use an
 	 * EntityRevisionLookup instead.
 	 *
-	 * @since 1.1
+	 * @since 2.0
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return EntityDocument
-	 * @throws EntityNotFoundException
+	 * @return EntityDocument|null
+	 * @throws EntityLookupException
 	 */
 	public function getEntity( EntityId $entityId );
 

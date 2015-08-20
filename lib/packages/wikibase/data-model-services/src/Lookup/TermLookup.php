@@ -20,11 +20,13 @@ interface TermLookup {
 	/**
 	 * Gets the label of an Entity with the specified EntityId and language code.
 	 *
+	 * @since 2.0
+	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException for label or entity not found
-	 * @return string
+	 * @throws TermLookupException for entity not found
+	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode );
 
@@ -33,23 +35,26 @@ interface TermLookup {
 	 *
 	 * The result will contain the entries for the requested languages, if they exist.
 	 *
+	 * @since 2.0
+	 *
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch
 	 *
-	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
+	 * @throws TermLookupException if the entity was not found (not guaranteed).
 	 * @return string[] labels, keyed by language.
-	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
 	public function getLabels( EntityId $entityId, array $languageCodes );
 
 	/**
 	 * Gets the description of an Entity with the specified EntityId and language code.
 	 *
+	 * @since 2.0
+	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException for description or entity not found
-	 * @return string
+	 * @throws TermLookupException for entity not found
+	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode );
 
@@ -59,12 +64,13 @@ interface TermLookup {
 	 * If $languages is given, the result will contain the entries for the
 	 * requested languages, if they exist.
 	 *
+	 * @since 2.0
+	 *
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The list of languages to fetch
 	 *
-	 * @throws OutOfBoundsException if the entity was not found (not guaranteed).
+	 * @throws TermLookupException if the entity was not found (not guaranteed).
 	 * @return string[] descriptions, keyed by language.
-	 *         An empty array may or may not indicate that the entity does not exist.
 	 */
 	public function getDescriptions( EntityId $entityId, array $languageCodes );
 

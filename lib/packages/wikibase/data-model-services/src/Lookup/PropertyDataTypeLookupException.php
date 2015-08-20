@@ -5,26 +5,30 @@ namespace Wikibase\DataModel\Services\Lookup;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
- * @since 1.0
+ * @since 2.0
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Adam Shorland
  */
-class PropertyNotFoundException extends EntityNotFoundException {
+class PropertyDataTypeLookupException extends \RuntimeException {
+
+	private $propertyId;
 
 	public function __construct( PropertyId $propertyId, $message = null, \Exception $previous = null ) {
-		if ( $message === null ) {
-			$message = "Property not found: " . $propertyId;
-		}
+		$this->propertyId = $propertyId;
 
-		parent::__construct( $propertyId, $message, $previous );
+		parent::__construct(
+			$message ?: 'Property datatype lookup failed for: ' . $propertyId,
+			0,
+			$previous
+		);
 	}
 
 	/**
 	 * @return PropertyId
 	 */
 	public function getPropertyId() {
-		return $this->getEntityId();
+		return $this->propertyId;
 	}
 
 }

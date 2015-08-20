@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Entity\EntityRedirectResolvingDecorator;
  * Implementation of EntityLookup that opaquely resolves one level
  * of redirects when looking up entities.
  *
- * @since 1.2
+ * @since 2.0
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -44,8 +44,8 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return EntityDocument
-	 * @throws EntityNotFoundException
+	 * @return EntityDocument|null
+	 * @throws EntityLookupException
 	 */
 	public function getEntity( EntityId $entityId ) {
 		return $this->lookup->getEntity( $entityId );

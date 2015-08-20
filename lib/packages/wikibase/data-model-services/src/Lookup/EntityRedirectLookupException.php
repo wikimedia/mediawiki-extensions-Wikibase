@@ -5,12 +5,12 @@ namespace Wikibase\DataModel\Services\Lookup;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * @since 1.2
+ * @since 2.0
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class EntityNotFoundException extends \RuntimeException {
+class EntityRedirectLookupException extends \RuntimeException {
 
 	private $entityId;
 
@@ -18,7 +18,7 @@ class EntityNotFoundException extends \RuntimeException {
 		$this->entityId = $entityId;
 
 		parent::__construct(
-			$message ?: 'Entity not found: ' . $entityId,
+			$message ?: 'Entity redirect lookup failed for: ' . $entityId,
 			0,
 			$previous
 		);
