@@ -130,7 +130,7 @@ class MockRepository implements
 	 * @param EntityId $entityId
 	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
 	 *
-	 * @throws StorageException
+	 * @throws StorageException|UnresolvedRedirectException
 	 * @return EntityRevision|null
 	 */
 	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
