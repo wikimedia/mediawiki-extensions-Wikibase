@@ -14,7 +14,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Formatter for Summary objects
@@ -26,6 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author John Erling Blad
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Adam Shorland
  */
 class SummaryFormatter {
 
@@ -64,8 +64,12 @@ class SummaryFormatter {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdFormatter $idFormatter, ValueFormatter $valueFormatter,
-		SnakFormatter $snakFormatter, Language $language, EntityIdParser $idParser
+	public function __construct(
+		EntityIdFormatter $idFormatter,
+		ValueFormatter $valueFormatter,
+		SnakFormatter $snakFormatter,
+		Language $language,
+		EntityIdParser $idParser
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
 			throw new InvalidArgumentException(
@@ -239,33 +243,32 @@ class SummaryFormatter {
 	/**
 	 * Merge the total summary
 	 *
-	 * @param string $comment autocomment part, will be placed in a block comment
-	 * @param string $summary human readable string to be appended after the autocomment part
+	 * @param string $autoComment autocomment part, will be placed in a block comment
+	 * @param string $autoSummary human readable string to be appended after the autocomment part
+	 * @param string $userSummary user provided summary to be appended after the autoSummary
 	 *
 	 * @return string to be used for the summary
 	 */
-	private function assembleSummaryString( $comment, $summary ) {
-		$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
-
-		$comment = $normalizer->trimToNFC( $comment );
-		$summary = $normalizer->trimToNFC( $summary );
+	private function assembleSummaryString( $autoComment, $autoSummary, $userSummary ) {
 		$mergedString = '';
-		if ( $comment !== '' ) {
-			$mergedString .=  '/* ' . $comment . ' */';
+		$autoComment = $this->stringNormalizer->trimToNFC( $autoComment );
+		$autoSummary = $this->stringNormalizer->trimToNFC( $autoSummary );
+		$userSummary = $this->stringNormalizer->trimToNFC( $userSummary );
+
+		if ( $autoComment !== '' ) {
+			$mergedString .=  '/* ' . $autoComment . ' */ ';
 		}
-		if ( $summary !== '' ) {
-			if ( $mergedString !== '' ) {
-				// Having a space after the comment is commonly known from section edits
-				$mergedString .= ' ';
-			}
-			$mergedString .= $this->language->truncate(
-				$summary,
-				SUMMARY_MAX_LENGTH - strlen( $mergedString )
-			);
+
+		if ( $autoSummary !== '' && $userSummary !== '' ) {
+			$mergedString .= $this->language->commaList( array( $autoSummary, $userSummary ) );
+		} elseif ( $autoSummary !== '' ) {
+			$mergedString .= $autoSummary;
+		} elseif ( $userSummary !== '' ) {
+			$mergedString .= $userSummary;
 		}
 
 		// leftover entities should be removed, but its not clear how this shall be done
-		return $mergedString;
+		return $this->language->truncate( rtrim( $mergedString ), SUMMARY_MAX_LENGTH );
 	}
 
 	/**
@@ -280,18 +283,11 @@ class SummaryFormatter {
 	public function formatSummary( Summary $summary ) {
 		$userSummary = $summary->getUserSummary();
 
-		if ( !is_null( $userSummary ) ) {
-			$autoSummary = $userSummary;
-		} else {
-			$autoSummary = self::formatAutoSummary( $summary );
-		}
-
-		$autoComment = $this->formatAutoComment( $summary );
-		$autoComment = $this->stringNormalizer->trimToNFC( $autoComment );
-		$autoSummary = $this->stringNormalizer->trimToNFC( $autoSummary );
-
-		$totalSummary = self::assembleSummaryString( $autoComment, $autoSummary );
-		return $totalSummary;
+		return $this->assembleSummaryString(
+			$this->formatAutoComment( $summary ),
+			$this->formatAutoSummary( $summary ),
+			$userSummary === null ? '' : $userSummary
+		);
 	}
 
 }
