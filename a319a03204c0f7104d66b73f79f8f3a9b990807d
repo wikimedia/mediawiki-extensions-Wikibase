@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_ef81f94f",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T18:15:59Z",
+      "side": 1,
+      "message": "@Jeroen: SiteStore is injected because it comes from core. Core controls the default instance. WikibaseClient should not rely on global state to acquire the instance.\n\n@Thiemo: SiteSQLStore::newInstance() does not access the database, it calls a dumb constructor which just initializes some members. The reason for the lazy init was apparently to avoid proper injection. The reason I removed the lazy init here is that I found that I could easily provide this along with the other things required by the constructor. I can put the lazy init code back, and inject null, but I see no good reason to do that?",
+      "parentUuid": "6ec1af18_9353fb19",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_b3587736",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 10
@@ -48,6 +66,24 @@
       "writtenOn": "2015-08-13T13:36:03Z",
       "side": 1,
       "message": "I prefer the old form. No need to pull the global into local scope, or by having two lines to look at with other stuff in between.",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_4ff28d04",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T18:15:59Z",
+      "side": 1,
+      "message": "I dislike $GLOBALS because it\u0027s a magic super-global that magically sets globals. ugh. Better use a proper language construct.\n\nIn the past, I sometimes preferred using $GLOBALS, because it\u0027s easier to spot than the global keyword.\n\nOverall, no strong feelings, I change this for consistency.",
+      "parentUuid": "6ec1af18_b3587736",
       "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_afe2112c",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T18:15:59Z",
+      "side": 1,
+      "message": "Can do that, but note that further down the chain of changes, I\u0027m introducing more parameters here, so the line breaks will come back.",
+      "parentUuid": "6ec1af18_d158a837",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_3147ac52",
         "filename": "view/tests/phpunit/PropertyViewTest.php",
         "patchSetId": 10
@@ -82,6 +136,24 @@
       "writtenOn": "2015-08-12T13:34:46Z",
       "side": 1,
       "message": "Is the \"string\" part even used in this test?",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6fec2921",
+        "filename": "view/tests/phpunit/PropertyViewTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T18:15:59Z",
+      "side": 1,
+      "message": "probably not.",
+      "parentUuid": "6ec1af18_3147ac52",
       "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
