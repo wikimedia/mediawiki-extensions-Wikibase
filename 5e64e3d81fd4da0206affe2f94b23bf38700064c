@@ -33,6 +33,24 @@
       "revId": "5e64e3d81fd4da0206affe2f94b23bf38700064c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_cc952b44",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T16:53:14Z",
+      "side": 1,
+      "message": "I\u0027d suggest to just provide the entire MockRepo as a parameter. The provider would load it with any entities needed here.",
+      "parentUuid": "6ec1af18_2212cf01",
+      "revId": "5e64e3d81fd4da0206affe2f94b23bf38700064c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
