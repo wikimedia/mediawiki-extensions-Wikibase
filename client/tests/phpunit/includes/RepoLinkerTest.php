@@ -19,7 +19,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
-	protected function getRepoSettings() {
+	private function getRepoSettings() {
 		return array(
 			array(
 				'baseUrl' => '//www.example.com',
@@ -51,7 +51,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	protected function getRepoLinkerForSettings( $settings ) {
+	private function getRepoLinkerForSettings( array $settings ) {
 		return new RepoLinker(
 			$settings['baseUrl'],
 			$settings['articlePath'],
@@ -100,7 +100,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getEntityTitleProvider
 	 */
-	public function testGetEntityTitle( $expected, $settings, EntityId $entityId ) {
+	public function testGetEntityTitle( $expected, array $settings, EntityId $entityId ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->getEntityTitle( $entityId ) );
@@ -121,7 +121,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getPageUrlProvider
 	 */
-	public function testGetPageUrl( $expected, $settings, $page ) {
+	public function testGetPageUrl( $expected, array $settings, $page ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->getPageUrl( $page ) );
@@ -143,7 +143,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getPageUrlInvalidProvider
 	 */
-	public function testGetPageUrlInvalidThrowsException( $settings, $page ) {
+	public function testGetPageUrlInvalidThrowsException( array $settings, $page ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$repoLinker->getPageUrl( $page );
@@ -160,7 +160,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider formatLinkProvider
 	 */
-	public function testFormatLink( $expected, $settings, $url, $text, $attribs ) {
+	public function testFormatLink( $expected, array $settings, $url, $text, array $attribs ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->formatLink( $url, $text, $attribs ) );
@@ -175,7 +175,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				$settings[1],
 				'//example.com/wiki/Special:Log/delete',
 				'delete',
-				null
+				array()
 			),
 			array(
 				'<a class="plainlinks" tabindex="1" href="http://www.example.com/w/index.php'
@@ -194,7 +194,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider buildEntityLinkProvider
 	 */
-	public function testBuildEntityLink( $expected, $settings, $entityId, $classes ) {
+	public function testBuildEntityLink( $expected, array $settings, EntityId $entityId, array $classes ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->buildEntityLink( $entityId, $classes ) );
@@ -228,7 +228,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getEntityUrlProvider
 	 */
-	public function testGetEntityUrl( $expected, $settings, $entityId ) {
+	public function testGetEntityUrl( $expected, array $settings, EntityId $entityId ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->getEntityUrl( $entityId ) );
@@ -254,7 +254,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getBaseUrlProvider
 	 */
-	public function testGetBaseUrl( $expected, $settings ) {
+	public function testGetBaseUrl( $expected, array $settings ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->getBaseUrl() );
@@ -278,7 +278,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getApiUrlProvider
 	 */
-	public function testGetApiUrl( $expected, $settings ) {
+	public function testGetApiUrl( $expected, array $settings ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->getApiUrl() );
@@ -298,7 +298,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getIndexUrlProvider
 	 */
-	public function testGetIndexUrl( $expected, $settings ) {
+	public function testGetIndexUrl( $expected, array $settings ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->getIndexUrl() );
@@ -318,7 +318,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider addQueryParamsProvider
 	 */
-	public function testAddQueryParams( $expected, $settings, $url, $params ) {
+	public function testAddQueryParams( $expected, array $settings, $url, array $params ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 
 		$this->assertEquals( $expected, $repoLinker->addQueryParams( $url, $params ) );

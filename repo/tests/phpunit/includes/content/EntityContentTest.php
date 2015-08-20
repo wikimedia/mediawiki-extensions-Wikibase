@@ -247,7 +247,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEntityPageProperties
 	 */
-	public function testGetEntityPageProperties( EntityContent $content, $pageProps ) {
+	public function testGetEntityPageProperties( EntityContent $content, array $pageProps ) {
 		$actual = $content->getEntityPageProperties();
 
 		foreach ( $pageProps as $key => $value ) {

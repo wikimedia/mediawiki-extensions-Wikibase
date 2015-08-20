@@ -51,7 +51,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return ChangeDispatcher
 	 */
-	private function getChangeDispatcher( ChangeDispatchCoordinator $coordinator, &$notifications = array() ) {
+	private function getChangeDispatcher( ChangeDispatchCoordinator $coordinator, array &$notifications = array() ) {
 		$dispatcher = new ChangeDispatcher(
 			$coordinator,
 			$this->getNotificationSender( $notifications ),
@@ -68,7 +68,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return ChangeNotificationSender
 	 */
-	private function getNotificationSender( &$notifications = array() ) {
+	private function getNotificationSender( array &$notifications = array() ) {
 		$sender = $this->getMock( 'Wikibase\Repo\Notifications\ChangeNotificationSender' );
 
 		$sender->expects( $this->any() )
@@ -275,18 +275,14 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetPendingChanges
 	 */
-	public function testGetPendingChanges( $siteId, $afterId, $batchSize, $batchChunkFactor, $expectedChanges, $expectedSeen ) {
+	public function testGetPendingChanges( $siteId, $afterId, $batchSize, $batchChunkFactor, array $expectedChanges, $expectedSeen ) {
 		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
 
 		$dispatcher = $this->getChangeDispatcher( $coordinator );
-
 		$dispatcher->setBatchSize( $batchSize );
 		$dispatcher->setBatchChunkFactor( $batchChunkFactor );
 
-		$pending = $dispatcher->getPendingChanges(
-			$siteId,
-			$afterId
-		);
+		$pending = $dispatcher->getPendingChanges( $siteId, $afterId );
 
 		$this->assertChanges( $expectedChanges, $pending[0] );
 		$this->assertEquals( $expectedSeen, $pending[1] );
@@ -358,7 +354,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideDispatchTo
 	 */
-	public function testDispatchTo( $batchSize, $wikiState, $expectedFinalSeen, $expectedNotifications ) {
+	public function testDispatchTo( $batchSize, array $wikiState, $expectedFinalSeen, array $expectedNotifications ) {
 		$expectedFinalState = array_merge( $wikiState, array( 'chd_seen' => $expectedFinalSeen ) );
 
 		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
@@ -370,16 +366,10 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			->method( 'releaseClient' )
 			->with( $expectedFinalState );
 
-		$dispatcher = $this->getChangeDispatcher(
-			$coordinator,
-			$notifications
-		);
-
+		$notifications = array();
+		$dispatcher = $this->getChangeDispatcher( $coordinator, $notifications );
 		$dispatcher->setBatchSize( $batchSize );
-
-		$dispatcher->dispatchTo(
-			$wikiState
-		);
+		$dispatcher->dispatchTo( $wikiState );
 
 		$this->assertNotifications( $expectedNotifications, $notifications );
 	}
@@ -390,14 +380,14 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		}, $changes );
 	}
 
-	private function assertChanges( $expected, $actual ) {
+	private function assertChanges( array $expected, $actual ) {
 		$expected = $this->getChangeIds( $expected );
 		$actual = $this->getChangeIds( $actual );
 
 		$this->assertEquals( $expected, $actual );
 	}
 
-	private function assertNotifications( $expected, $notifications ) {
+	private function assertNotifications( array $expected, array $notifications ) {
 		foreach ( $notifications as &$n ) {
 			$n[1] = $this->getChangeIds( $n[1] );
 		}

@@ -61,7 +61,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetErrorMessage()
 	 */
-	public function testGetErrorMessage( $error, $params ) {
+	public function testGetErrorMessage( $error, array $params ) {
 		$localizer = new ValidatorErrorLocalizer( $this->getMockFormatter() );
 		$message = $localizer->getErrorMessage( $error );
 

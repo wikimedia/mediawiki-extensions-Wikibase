@@ -132,7 +132,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider diffProvider
 	 */
-	public function testGenerateEntityContentDiffBody( EntityContentDiff $diff, $matchers ) {
+	public function testGenerateEntityContentDiffBody( EntityContentDiff $diff, array $matchers ) {
 		$visualizer = $this->getVisualizer();
 
 		$html = $visualizer->visualizeEntityContentDiff( $diff );

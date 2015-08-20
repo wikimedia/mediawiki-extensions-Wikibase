@@ -269,7 +269,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider typeFilterProvider
 	 */
-	public function testTypeFilterDump( array $ids, $type, $expectedIds ) {
+	public function testTypeFilterDump( array $ids, $type, array $expectedIds ) {
 		$dumper = $this->newDumpGenerator( $ids );
 		$pager = $this->makeIdPager( $ids );
 

@@ -78,7 +78,7 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider attachBadgesToOutputProvider
 	 */
-	public function testAttachBadgesToOutput( $expected, $languageLinks ) {
+	public function testAttachBadgesToOutput( array $expected, array $languageLinks ) {
 		$languageLinkBadgeDisplay = $this->getLanguageLinkBadgeDisplay();
 		$parserOutput = new ParserOutput();
 

@@ -26,7 +26,7 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider otherProjectSitesProvider
 	 */
-	public function testOtherProjectSiteIds( array $supportedSites, $localSiteId, $expectedSiteIds ) {
+	public function testOtherProjectSiteIds( array $supportedSites, $localSiteId, array $expectedSiteIds ) {
 		$siteStore = $this->getSiteStoreMock();
 		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator( $siteStore, $localSiteId, array( 'wikidata' ) );
 
