@@ -83,9 +83,7 @@ class RdfVocabulary {
 	);
 
 	/**
-	 * Map of qnames to namespace URIs
-	 *
-	 * @var string[]
+	 * @var string[] Mapping of namespace names to URIs.
 	 */
 	private $namespaces = array();
 
@@ -93,30 +91,31 @@ class RdfVocabulary {
 	 * @var string
 	 */
 	private $baseUri;
+
 	/**
 	 * @var string
 	 */
 	private $dataUri;
+
 	/**
-	 * Mapping of non-standard language codes to standard equivalents
-	 * @var array
+	 * @var string[] Mapping of non-standard to canonical language codes.
 	 */
 	private $canonicalLanguageCodes;
 
 	/**
-	 * Cached language code resolutions
-	 * @var array
+	 * @var string[]
 	 */
-	private static $canonicalLanguageCache = array();
+	private static $canonicalLanguageCodeCache = array();
 
 	/**
 	 * @param string $baseUri Base URI for entity concept URIs.
 	 * @param string $dataUri Base URI for entity description URIs.
-	 * @param array $canonicalLanguageCodes Mapping from internal language codes to canonical language codes
+	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
 	 */
 	public function __construct( $baseUri, $dataUri, array $canonicalLanguageCodes = array() ) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
+		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 
 		if ( substr( $this->baseUri, -7 ) === 'entity/' ) {
 			$topUri = substr( $this->baseUri, 0, -7 );
@@ -155,8 +154,6 @@ class RdfVocabulary {
 				self::NS_GEO => self::GEO_URI,
 				self::NS_PROV => self::PROV_URI,
 		);
-
-		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 	}
 
 	/**
@@ -236,24 +233,24 @@ class RdfVocabulary {
 	}
 
 	/**
-	 * Return canonical language code from internal Wikibase one
-	 * @param string $langName
-	 * @return string
+	 * @param string $languageCode Any non-standard or canonical language code
+	 *
+	 * @return string Canonical language code
 	 */
-	public function getCanonicalLanguage( $langName ) {
+	public function getCanonicalLanguageCode( $languageCode ) {
 		// First we check the case since most languages will be cached very quickly
-		if ( isset(self::$canonicalLanguageCache[$langName]) ) {
-			return self::$canonicalLanguageCache[$langName];
+		if ( isset( self::$canonicalLanguageCodeCache[$languageCode] ) ) {
+			return self::$canonicalLanguageCodeCache[$languageCode];
 		}
 
 		// Wikibase list goes first in case we want to override
 		// Like "simple" goes to en-x-simple not en
-		if ( !empty($this->canonicalLanguageCodes[$langName]) ) {
-			return $this->canonicalLanguageCodes[$langName];
+		if ( isset( $this->canonicalLanguageCodes[$languageCode] ) ) {
+			return $this->canonicalLanguageCodes[$languageCode];
 		}
 
-		self::$canonicalLanguageCache[$langName] = wfBCP47( $langName );
-		return self::$canonicalLanguageCache[$langName];
+		self::$canonicalLanguageCodeCache[$languageCode] = wfBCP47( $languageCode );
+		return self::$canonicalLanguageCodeCache[$languageCode];
 	}
 
 }

@@ -134,7 +134,7 @@ class RdfBuilderTestData {
 	 * @return RdfVocabulary
 	 */
 	public function getVocabulary() {
-		return new RdfVocabulary( self::URI_BASE, self::URI_DATA, array("test" => "en-x-test") );
+		return new RdfVocabulary( self::URI_BASE, self::URI_DATA );
 	}
 
 	/**
