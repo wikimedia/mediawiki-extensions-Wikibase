@@ -105,13 +105,13 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
 		$actual = $lookup->getPagesUsing( array( $q42, $p11 ) );
-		$this->assertInstanceOf( 'Iterator', $actual );
+		$this->assertInstanceOf( 'Traversable', $actual );
 
 		$actual = iterator_to_array( $actual );
 		$this->assertEmpty( $actual );
 
 		$actual = $lookup->getPagesUsing( array( $q23 ), array( EntityUsage::OTHER_USAGE ) );
-		$this->assertInstanceOf( 'Iterator', $actual );
+		$this->assertInstanceOf( 'Traversable', $actual );
 
 		$actual = iterator_to_array( $actual );
 		$usages = $actual[0]->getUsages();
@@ -119,7 +119,7 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( $q23, $usage->getEntityId() );
 
 		$actual = $lookup->getPagesUsing( array( $q42, $q23, $p11 ) );
-		$this->assertInstanceOf( 'Iterator', $actual );
+		$this->assertInstanceOf( 'Traversable', $actual );
 
 		$actual = iterator_to_array( $actual );
 		$this->assertCount( 1, $actual );
@@ -179,7 +179,7 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 
 		$usages = $lookup->getPagesUsing( array( $itemId ), array() );
 
-		$this->assertInstanceOf( 'Iterator', $usages );
+		$this->assertInstanceOf( 'Traversable', $usages );
 	}
 
 }

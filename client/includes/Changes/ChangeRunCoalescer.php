@@ -83,7 +83,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 *
 	 * @param EntityChange[] $changes
 	 *
-	 * @return EntityChange[][] an associative array using entity IDs for keys. Associated with each
+	 * @return array[] an associative array using entity IDs for keys. Associated with each
 	 *         entity ID is the list of changes performed on that entity.
 	 */
 	private function groupChangesByEntity( array $changes ) {

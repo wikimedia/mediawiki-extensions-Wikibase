@@ -86,7 +86,7 @@ class WikibaseValueFormatterBuilders {
 	 * * If no formatter is defined for a property data type (using the PT prefix),
 	 *   the value's type is used to find an appropriate formatter (with the VT prefix).
 	 *
-	 * @var callable[][]
+	 * @var array[]
 	 */
 	protected $valueFormatterSpecs = array(
 

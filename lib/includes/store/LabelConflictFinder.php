@@ -25,7 +25,7 @@ interface LabelConflictFinder {
 	 *
 	 * @param string $entityType The entity type to consider for conflicts.
 	 * @param string[] $labels The labels to look for, with language codes as keys.
-	 * @param string[][]|null $aliases The aliases to look for, with language codes as keys. If null,
+	 * @param array[]|null $aliases The aliases to look for, with language codes as keys. If null,
 	 *        conflicts with aliases are not considered.
 	 *
 	 * @return TermIndexEntry[]
