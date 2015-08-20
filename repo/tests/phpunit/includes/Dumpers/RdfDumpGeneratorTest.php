@@ -109,8 +109,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 			$this->getSiteList(),
 			$entityRevisionLookup,
 			$propertyLookup,
-			new NullEntityPrefetcher(),
-			array('test' => 'en-x-test')
+			new NullEntityPrefetcher()
 		);
 	}
 

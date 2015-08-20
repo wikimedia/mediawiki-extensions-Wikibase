@@ -80,8 +80,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			new MockSiteStore(),
-			array('test' => 'en-x-test')
+			new MockSiteStore()
 		);
 
 		$maxAge = 60*60;
