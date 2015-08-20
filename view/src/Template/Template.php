@@ -24,11 +24,11 @@ class Template extends Message {
 	 * be sure to escape your params before using this class!
 	 *
 	 * @param TemplateRegistry $templateRegistry
-	 * @param $key: message key, or array of message keys to try
+	 * @param string|string[] $key message key, or array of message keys to try
 	 *          and use the first non-empty message for
-	 * @param $params Array message parameters
+	 * @param array $params Array message parameters
 	 */
-	public function __construct( TemplateRegistry $templateRegistry, $key, $params = array() ) {
+	public function __construct( TemplateRegistry $templateRegistry, $key, array $params = array() ) {
 		$this->templateRegistry = $templateRegistry;
 		parent::__construct( $key, $params );
 	}
