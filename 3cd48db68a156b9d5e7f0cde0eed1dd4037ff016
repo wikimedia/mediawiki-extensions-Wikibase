@@ -50,6 +50,24 @@
       "revId": "3cd48db68a156b9d5e7f0cde0eed1dd4037ff016",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_46fb5dde",
+        "filename": "repo/includes/specials/SpecialItemsWithMostSitelinks.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-20T11:05:52Z",
+      "side": 1,
+      "message": "See:\n* https://github.com/wikimedia/mediawiki/blob/a5c9c9607e034a00edc79146ec778e3d9c05e50a/includes/specialpage/QueryPage.php#L167\n* https://github.com/wikimedia/mediawiki/blob/a5c9c9607e034a00edc79146ec778e3d9c05e50a/includes/specialpage/QueryPage.php#L136",
+      "parentUuid": "6ec1af18_4684bd5e",
+      "revId": "3cd48db68a156b9d5e7f0cde0eed1dd4037ff016",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
