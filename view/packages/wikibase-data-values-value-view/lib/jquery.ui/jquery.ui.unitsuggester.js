@@ -151,6 +151,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 			search: term,
 			format: 'json',
 			language: this.options.language,
+			uselang: this.options.language,
 			type: 'item'
 		};
 	},
