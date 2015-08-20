@@ -16,6 +16,24 @@
       "revId": "f7f1a181c600794b30f9e6eedef2d62ab20edcc7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ec3a6732",
+        "filename": "client/includes/DataAccess/Scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-20T17:34:04Z",
+      "side": 1,
+      "message": "ugh, getLinks is ugly! but it could work.",
+      "parentUuid": "6ec1af18_6caaf76e",
+      "revId": "f7f1a181c600794b30f9e6eedef2d62ab20edcc7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
