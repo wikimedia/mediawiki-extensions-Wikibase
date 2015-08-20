@@ -435,7 +435,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 
 	public function provideLanguageFallback() {
 		return array(
-			array(
+			'Guangzhou Fallback' => array(
 				'Guangzhou',
 				array( 'de-formal', 'en', 'fr', 'yue', 'zh-cn', 'zh-hk' ),
 				array(
@@ -490,7 +490,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 
 				),
 			),
-			array(
+			'Oslo Fallback' => array(
 				'Oslo',
 				array( 'sli', 'de-formal', 'kn', 'nb' ),
 				array(
@@ -536,26 +536,67 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 					),
 				),
 			),
+			'Oslo Fallback - Labels Only' => array(
+				'Oslo',
+				array( 'sli', 'de-formal', 'kn', 'nb' ),
+				array(
+					'sli' => array(
+						'language' => 'de',
+						'value' => 'Oslo',
+						'for-language' => 'sli',
+					),
+					'de-formal' => array(
+						'language' => 'de',
+						'value' => 'Oslo',
+						'for-language' => 'de-formal',
+					),
+					'kn' => array(
+						'language' => 'en',
+						'value' => 'Oslo',
+						'for-language' => 'kn',
+					),
+					'nb' => array(
+						'language' => 'nb',
+						'value' => 'Oslo',
+					),
+				),
+				null,
+				array( 'labels' )
+			),
 		);
 	}
 
 	/**
 	 * @dataProvider provideLanguageFallback
 	 */
-	public function testLanguageFallback( $handle, $languages, $expectedLabels, $expectedDescriptions ) {
+	public function testLanguageFallback(
+		$handle,
+		$languages,
+		$expectedLabels = null,
+		$expectedDescriptions = null,
+		$props = array()
+	) {
 		$id = EntityTestHelper::getId( $handle );
 
-		list( $res,, ) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'languages' => join( '|', $languages ),
-				'languagefallback' => '',
-				'ids' => $id,
-			)
+		$params = array(
+			'action' => 'wbgetentities',
+			'languages' => join( '|', $languages ),
+			'languagefallback' => '',
+			'ids' => $id,
 		);
 
-		$this->assertEquals( $expectedLabels, $res['entities'][$id]['labels'] );
-		$this->assertEquals( $expectedDescriptions, $res['entities'][$id]['descriptions'] );
+		if ( !empty( $props ) ) {
+			$params['props'] = implode( '|', $props );
+		}
+
+		list( $res,, ) = $this->doApiRequest( $params );
+
+		if ( $expectedLabels !== null ) {
+			$this->assertEquals( $expectedLabels, $res['entities'][$id]['labels'] );
+		}
+		if ( $expectedDescriptions !== null ) {
+			$this->assertEquals( $expectedDescriptions, $res['entities'][$id]['descriptions'] );
+		}
 	}
 
 	public function testSiteLinkFilter() {
