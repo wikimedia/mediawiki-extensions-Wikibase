@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_6c1af774",
+        "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-20T16:34:40Z",
+      "side": 1,
+      "message": "Why introduce a type hint when there are some calling methods with same parameter without it?\nFor example:\nonSpecialWatchlistQuery( array \u0026$conds, array \u0026$tables,\n\t\tarray \u0026$join_conds, array \u0026$fields, $opts",
+      "revId": "b3f7853c9869ba3beced8771191124f1a1a4762e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_0cfc93d4",
+        "filename": "view/src/TextInjector.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-20T16:34:40Z",
+      "side": 1,
+      "message": "I am not sure about the call in OutputPageBeforeHTMLHookHandler",
+      "revId": "b3f7853c9869ba3beced8771191124f1a1a4762e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
