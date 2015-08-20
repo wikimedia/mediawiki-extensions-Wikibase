@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a1bd4b18",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-20T13:17:30Z",
+      "side": 1,
+      "message": "Copy what is done in Repo.\nRename this one to getBufferingTermLookup\nAdd a separate getTermLookup thats call this method and a getTermBuffer that also calls this method but both with different typehints!",
+      "revId": "d86616eb8d66eb62cfb69c05bec2eeb3e751a464",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_818a8f6c",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-20T13:17:30Z",
+      "side": 1,
+      "message": "??? :O",
+      "revId": "d86616eb8d66eb62cfb69c05bec2eeb3e751a464",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_21815b4f",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-20T13:17:30Z",
+      "side": 1,
+      "message": "??? :O",
+      "revId": "d86616eb8d66eb62cfb69c05bec2eeb3e751a464",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e19a73bc",
+        "filename": "lib/maintenance/populateSitesTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-20T13:17:30Z",
+      "side": 1,
+      "message": "??? :O",
+      "revId": "d86616eb8d66eb62cfb69c05bec2eeb3e751a464",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
