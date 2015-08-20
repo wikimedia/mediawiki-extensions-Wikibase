@@ -27,7 +27,7 @@ class ParseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetExceptionMessage
 	 */
-	public function testGetExceptionMessage( Exception $ex, $expectedKey, $expectedParams ) {
+	public function testGetExceptionMessage( Exception $ex, $expectedKey, array $expectedParams ) {
 		$localizer = new ParseExceptionLocalizer();
 
 		$this->assertTrue( $localizer->hasExceptionMessage( $ex ) );

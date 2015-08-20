@@ -50,7 +50,7 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 	 *
 	 * @return array api request result
 	 */
-	public function doApiRequest( $params ) {
+	public function doApiRequest( array $params ) {
 		$module = $this->getModule( $params );
 		$module->execute();
 
@@ -94,7 +94,7 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 	 *
 	 * @return ApiBase
 	 */
-	protected function getModule( $params ) {
+	protected function getModule( array $params ) {
 		global $wgRequest;
 
 		$requestContext = new RequestContext();

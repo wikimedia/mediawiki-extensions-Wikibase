@@ -101,7 +101,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getMockSearchInteractor( $params, $returnResults = array() ) {
+	private function getMockSearchInteractor( array $params, array $returnResults = array() ) {
 		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\TermIndexSearchInteractor' )
 			->disableOriginalConstructor()
 			->getMock();

@@ -247,7 +247,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @param array[] $expectedRows
 	 */
-	private function assertRows( $expectedRows ) {
+	private function assertRows( array $expectedRows ) {
 		$dbw = wfGetDB( DB_MASTER );
 
 		foreach ( $expectedRows as $expectedRow ) {

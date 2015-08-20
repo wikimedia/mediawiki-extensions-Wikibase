@@ -83,9 +83,8 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideConstructor_failure
-	 * @param array $params
 	 */
-	public function testConstructor_failure( $params ) {
+	public function testConstructor_failure( array $params ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
 		$title = Title::makeTitle( NS_MAIN, 'Foo' );

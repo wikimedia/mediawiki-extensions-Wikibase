@@ -43,7 +43,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return TermsRdfBuilder
 	 */
-	private function newBuilder( $languages = null ) {
+	private function newBuilder( array $languages = null ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		$writer = $this->getTestData()->getNTriplesWriter();
@@ -96,7 +96,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddEntity( $entityName, $dataSetName, $languages = null ) {
+	public function testAddEntity( $entityName, $dataSetName, array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$builder = $this->newBuilder( $languages );
@@ -115,7 +115,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddLabels
 	 */
-	public function testAddLabels( $entityName, $dataSetName, $languages = null ) {
+	public function testAddLabels( $entityName, $dataSetName, array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$builder = $this->newBuilder( $languages );
@@ -134,7 +134,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddDescriptions
 	 */
-	public function testAddDescriptions( $entityName, $dataSetName, $languages = null ) {
+	public function testAddDescriptions( $entityName, $dataSetName, array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$builder = $this->newBuilder( $languages );
@@ -153,7 +153,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddAliases
 	 */
-	public function testAddAliases( $entityName, $dataSetName, $languages = null ) {
+	public function testAddAliases( $entityName, $dataSetName, array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$builder = $this->newBuilder( $languages );

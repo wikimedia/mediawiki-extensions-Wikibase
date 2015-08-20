@@ -83,7 +83,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		$dbw->insert( 'wb_changes', $row, __METHOD__ );
 	}
 
-	private function insertChangesDispatchRows( $rows ) {
+	private function insertChangesDispatchRows( array $rows ) {
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->insert( 'wb_changes_dispatch', array_values( $rows ), __METHOD__ );
 	}
@@ -415,7 +415,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSelectClient
 	 */
-	public function testSelectClient( $chdRows, $expected ) {
+	public function testSelectClient( array $chdRows, $expected ) {
 		$this->resetChangesTable();
 		$this->insertChangesDispatchRows( $chdRows );
 

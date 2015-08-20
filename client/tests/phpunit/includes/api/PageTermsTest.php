@@ -97,7 +97,7 @@ class PageTermsTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityId[]
 	 */
-	private function makeEntityIds( $pageIds ) {
+	private function makeEntityIds( array $pageIds ) {
 		$entityIds = array();
 
 		foreach ( $pageIds as $pid ) {
@@ -182,7 +182,7 @@ class PageTermsTest extends \MediaWikiTestCase {
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	private function makeTermsFromGroups( EntityId $entityId, $termGroups ) {
+	private function makeTermsFromGroups( EntityId $entityId, array $termGroups ) {
 		$terms = array();
 
 		foreach ( $termGroups as $type => $group ) {
@@ -213,7 +213,7 @@ class PageTermsTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityIdLookup
 	 */
-	private function getEntityIdLookup( $entityIds ) {
+	private function getEntityIdLookup( array $entityIds ) {
 		$idLookup = $this->getMock( 'Wikibase\Store\EntityIdLookup' );
 		$idLookup->expects( $this->any() )
 			->method( 'getEntityIds' )

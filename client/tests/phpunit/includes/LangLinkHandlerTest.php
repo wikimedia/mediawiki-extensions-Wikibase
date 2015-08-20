@@ -209,7 +209,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEntityLinks
 	 */
-	public function testGetEntityLinks( $title, $expectedLinks ) {
+	public function testGetEntityLinks( $title, array $expectedLinks ) {
 		if ( is_string( $title ) ) {
 			$title = Title::newFromText( $title );
 		}
@@ -240,7 +240,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 
-	protected function makeParserOutput( $langLinks, $noExternalLangLinks = array() ) {
+	protected function makeParserOutput( array $langLinks, array $noExternalLangLinks = array() ) {
 		$out = new ParserOutput();
 		NoLangLinkHandler::setNoExternalLangLinks( $out, $noExternalLangLinks );
 
@@ -254,7 +254,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetNoExternalLangLinks
 	 */
-	public function testGetNoExternalLangLinks( $noExternalLangLinks ) {
+	public function testGetNoExternalLangLinks( array $noExternalLangLinks ) {
 		$out = $this->makeParserOutput( array(), $noExternalLangLinks );
 		$nel = $this->langLinkHandler->getNoExternalLangLinks( $out );
 
@@ -314,7 +314,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideUseRepoLinks
 	 */
-	public function testUseRepoLinks( $title, $noExternalLangLinks, $expected ) {
+	public function testUseRepoLinks( $title, array $noExternalLangLinks, $expected ) {
 		if ( is_string( $title ) ) {
 			$title = Title::newFromText( $title );
 			$title->resetArticleID( 1 );
@@ -395,7 +395,12 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEffectiveRepoLinks
 	 */
-	public function testGetEffectiveRepoLinks( $title, $langLinks, $noExternalLangLinks, $expectedLinks ) {
+	public function testGetEffectiveRepoLinks(
+		$title,
+		array $langLinks,
+		array $noExternalLangLinks,
+		array $expectedLinks
+	) {
 		if ( is_string( $title ) ) {
 			$title = Title::newFromText( $title );
 		}
@@ -413,7 +418,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return array
 	 */
-	private function getPlainLinks( $links ) {
+	private function getPlainLinks( array $links ) {
 		$flat = array();
 
 		foreach ( $links as $link ) {
@@ -469,7 +474,13 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideAddLinksFromRepository
 	 */
-	public function testAddLinksFromRepository( $title, $langLinks, $noExternalLangLinks, $expectedLinks, $expectedBadges ) {
+	public function testAddLinksFromRepository(
+		$title,
+		array $langLinks,
+		array $noExternalLangLinks,
+		array $expectedLinks,
+		array $expectedBadges
+	) {
 		if ( is_string( $title ) ) {
 			$title = Title::newFromText( $title );
 		}
@@ -535,7 +546,11 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideFilterRepoLinksByGroup
 	 */
-	public function testFilterRepoLinksByGroup( $repoLinks, $allowedGroups, $expectedLinks ) {
+	public function testFilterRepoLinksByGroup(
+		array $repoLinks,
+		array $allowedGroups,
+		array $expectedLinks
+	) {
 		$actualLinks = $this->langLinkHandler->filterRepoLinksByGroup( $repoLinks, $allowedGroups );
 
 		$this->assertEquals( $expectedLinks, $actualLinks );
@@ -582,7 +597,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSuppressRepoLinks
 	 */
-	public function testSuppressRepoLinks( $repoLinks, $nel, $expectedLinks ) {
+	public function testSuppressRepoLinks( array $repoLinks, array $nel, array $expectedLinks ) {
 		$out = new ParserOutput();
 		$out->setProperty( 'noexternallanglinks', serialize( $nel ) );
 

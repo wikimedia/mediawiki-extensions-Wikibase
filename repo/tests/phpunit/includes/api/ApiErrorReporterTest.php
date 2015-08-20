@@ -132,7 +132,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider exceptionProvider
 	 */
-	public function testDieException( $exception, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
+	public function testDieException( $exception, $code, $httpStatusCode, array $extradata = null, $infoPattern, array $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
@@ -169,7 +169,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider messageProvider
 	 */
-	public function testDieMessage( $code, $param, $infoPattern, $expectedDataFields ) {
+	public function testDieMessage( $code, $param, $infoPattern, array $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
@@ -226,7 +226,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider statusProvider
 	 */
-	public function testDieStatus( Status $status, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
+	public function testDieStatus( Status $status, $code, $httpStatusCode, array $extradata, $infoPattern, array $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
@@ -273,7 +273,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider errorProvider
 	 */
-	public function testDieError( $description, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
+	public function testDieError( $description, $code, $httpStatusCode, array $extradata, $infoPattern, array $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
@@ -308,7 +308,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider warningProvider
 	 */
-	public function testReportStatusWarnings( Status $status, $expectedDataFields ) {
+	public function testReportStatusWarnings( Status $status, array $expectedDataFields ) {
 		$api = new ApiMain();
 		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );

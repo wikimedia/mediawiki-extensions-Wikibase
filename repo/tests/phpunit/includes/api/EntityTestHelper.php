@@ -289,7 +289,7 @@ class EntityTestHelper {
 	 * @throws OutOfBoundsException
 	 * @return mixed
 	 */
-	public static function getEntityOutput( $handle, $props = null, $langs = null ) {
+	public static function getEntityOutput( $handle, array $props = null, array $langs = null ) {
 		if ( !array_key_exists( $handle, self::$entityOutput ) ) {
 			throw new OutOfBoundsException( "No entity output defined with handle {$handle}" );
 		}
@@ -309,7 +309,7 @@ class EntityTestHelper {
 	 *
 	 * @return array Array of entity output with props and langs removed
 	 */
-	protected static function stripUnwantedOutputValues( $entityOutput, $props = array(), $langs = null ) {
+	protected static function stripUnwantedOutputValues( array $entityOutput, array $props = array(), array $langs = null ) {
 		$entityProps = array();
 		$props[] = 'type'; // always return the type so we can demobilize
 		foreach ( $props as $prop ) {
@@ -343,7 +343,7 @@ class EntityTestHelper {
 	 * @param string $id
 	 * @param array $entity
 	 */
-	public static function registerEntity( $handle, $id, $entity = null ) {
+	public static function registerEntity( $handle, $id, array $entity = null ) {
 		self::$activeHandles[ $handle ] = $id;
 		self::$activeIds[ $id ] = $handle;
 		if ( $entity ) {

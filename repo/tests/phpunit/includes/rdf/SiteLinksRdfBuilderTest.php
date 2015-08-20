@@ -43,7 +43,7 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return SiteLinksRdfBuilder
 	 */
-	private function newBuilder( $sites = null ) {
+	private function newBuilder( array $sites = null ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
 		$writer = $this->getTestData()->getNTriplesWriter();
@@ -97,7 +97,7 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddEntity( $entityName, $dataSetName, $sites = null ) {
+	public function testAddEntity( $entityName, $dataSetName, array $sites = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$builder = $this->newBuilder( $sites );
@@ -109,7 +109,7 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddEntity
 	 */
-	public function testAddSiteLinks( $entityName, $dataSetName, $sites = null ) {
+	public function testAddSiteLinks( $entityName, $dataSetName, array $sites = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$builder = $this->newBuilder( $sites );
