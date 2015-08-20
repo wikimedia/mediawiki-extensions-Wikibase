@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_89bcf5b2",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T15:43:38Z",
+      "side": 1,
+      "message": "We have to be really careful where $langCode comes from. We have to do this consistently everywhere - that is, job deduplication, parser cache key, parser function, and lua library have to agree exactly on which language is used. Ideally, they would share the same code for figuring that out.\nIn *theory*, $parserOptions-\u003egetTargetLanguage() should be it. In practice, this is however not the case. When we target the user language for output, $pops-\u003egetTargetLanguage() still returns the content language. I consider that a bug in core - cure just needs to  support the concept of multilingual page output.",
+      "revId": "590fc8536518a3336325eb4e0da711759dd18890",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
