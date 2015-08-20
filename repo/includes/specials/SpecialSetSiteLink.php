@@ -11,7 +11,7 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;

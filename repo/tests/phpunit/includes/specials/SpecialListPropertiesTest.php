@@ -12,7 +12,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
-use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
 
 /**

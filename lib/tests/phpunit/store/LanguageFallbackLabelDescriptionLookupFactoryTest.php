@@ -6,10 +6,10 @@ use Language;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
- * @covers Wikibase\Repo\LanguageFallbackLabelDescriptionLookupFactory
+ * @covers Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory
  *
  * @license GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >

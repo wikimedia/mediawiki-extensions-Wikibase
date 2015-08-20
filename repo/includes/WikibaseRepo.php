@@ -57,6 +57,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
