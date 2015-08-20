@@ -7,7 +7,7 @@ use DatabaseBase;
 use DBError;
 use Exception;
 use InvalidArgumentException;
-use Iterator;
+use Traversable;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
@@ -216,7 +216,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityId[] $entityIds
 	 * @param string[] $aspects
 	 *
-	 * @return Iterator An iterator over PageEntityUsages grouped by page.
+	 * @return Traversable A traversable over PageEntityUsages grouped by page.
 	 * @throws UsageTrackerException
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
