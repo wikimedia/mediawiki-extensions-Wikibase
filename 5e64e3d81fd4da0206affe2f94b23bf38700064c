@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_69c18932",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaBindingsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T15:45:29Z",
+      "side": 1,
+      "message": "Please change accordingly.",
+      "revId": "5e64e3d81fd4da0206affe2f94b23bf38700064c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_2212cf01",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLuaBindingsTest.php",
         "patchSetId": 2
