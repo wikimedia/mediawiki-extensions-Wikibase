@@ -16,6 +16,40 @@
       "revId": "3cd48db68a156b9d5e7f0cde0eed1dd4037ff016",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_46ad9de6",
+        "filename": "repo/includes/specials/SpecialItemsWithMostSitelinks.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T11:01:24Z",
+      "side": 1,
+      "message": "we probably also want \"pp_sortkey \u003e 0\" here.",
+      "revId": "3cd48db68a156b9d5e7f0cde0eed1dd4037ff016",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_4684bd5e",
+        "filename": "repo/includes/specials/SpecialItemsWithMostSitelinks.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-20T11:01:24Z",
+      "side": 1,
+      "message": "I see no order being imposed. we want to show items sorted by the number of sitelinks, right? So we need ORDER BY pp_sortkey DESC somewhere...",
+      "revId": "3cd48db68a156b9d5e7f0cde0eed1dd4037ff016",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
