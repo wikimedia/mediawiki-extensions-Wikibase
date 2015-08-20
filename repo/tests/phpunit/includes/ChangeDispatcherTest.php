@@ -222,11 +222,11 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		$siteId = 'testwiki';
 
 		$expectedClientState = array(
-			'chd_site' =>   $siteId,
-			'chd_db' =>     $siteId,
-			'chd_seen' =>   0,
+			'chd_site' => $siteId,
+			'chd_db' => $siteId,
+			'chd_seen' => 0,
 			'chd_touched' => '20140303000000',
-			'chd_lock' =>   null
+			'chd_lock' => null
 		);
 
 		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
@@ -299,11 +299,11 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			'enwiki: from the beginning' => array(
 				3,
 				array(
-					'chd_site' =>   'enwiki',
-					'chd_db' =>     'enwikidb',
-					'chd_seen' =>   0,
+					'chd_site' => 'enwiki',
+					'chd_db' => 'enwikidb',
+					'chd_seen' => 0,
 					'chd_touched' => '00000000000000',
-					'chd_lock' =>   null
+					'chd_lock' => null
 				),
 				3,
 				array(
@@ -313,11 +313,11 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			'enwiki: scan to end' => array(
 				3,
 				array(
-					'chd_site' =>   'enwiki',
-					'chd_db' =>     'enwikidb',
-					'chd_seen' =>   4,
+					'chd_site' => 'enwiki',
+					'chd_db' => 'enwikidb',
+					'chd_seen' => 4,
 					'chd_touched' => $changes[4]->getTime(),
-					'chd_lock' =>   null
+					'chd_lock' => null
 				),
 				8,
 				array(
@@ -327,11 +327,11 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			'dewiki: from the beginning' => array(
 				3,
 				array(
-					'chd_site' =>   'dewiki',
-					'chd_db' =>     'dewikidb',
-					'chd_seen' =>   0,
+					'chd_site' => 'dewiki',
+					'chd_db' => 'dewikidb',
+					'chd_seen' => 0,
 					'chd_touched' => '00000000000000',
-					'chd_lock' =>   null
+					'chd_lock' => null
 				),
 				7,
 				array(
@@ -341,11 +341,11 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			'dewiki: offset' => array(
 				2,
 				array(
-					'chd_site' =>   'dewiki',
-					'chd_db' =>     'dewikidb',
-					'chd_seen' =>   3,
+					'chd_site' => 'dewiki',
+					'chd_db' => 'dewikidb',
+					'chd_seen' => 3,
 					'chd_touched' => $changes[4]->getTime(),
-					'chd_lock' =>   null
+					'chd_lock' => null
 				),
 				7,
 				array(

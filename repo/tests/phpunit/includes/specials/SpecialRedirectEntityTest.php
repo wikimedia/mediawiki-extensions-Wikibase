@@ -246,19 +246,19 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		return array(
 			array( //toid bad
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
-				'e' =>  'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
+				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
 			array( //fromid bad
 				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
-				'e' =>  'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
+				'e' => 'Wikibase\Lib\UserInputException:wikibase-wikibaserepopage-invalid-id' ),
 			array( //from id is property
 				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
-				'e' =>  'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),
+				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),
 			array( //to id is property
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
-				'e' =>  'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),
+				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),
 			array( //bad token
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q2', 'token' => 'BAD' ),
-				'e' =>  'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ),
+				'e' => 'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ),
 		);
 	}
 

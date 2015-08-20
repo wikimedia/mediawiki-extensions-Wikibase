@@ -365,7 +365,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 				'chd_db' => 'dewikidb',
 				'chd_seen' => '23', // nothing to do!
 				'chd_touched' => '00000000000000',
-				'chd_lock' =>  null,
+				'chd_lock' => null,
 				'chd_disabled' => 0,
 			),
 		);
