@@ -98,10 +98,11 @@
 		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
-			this._getUpstreamValue = null;
-			this.$selector = null;
 			this._messageProvider = null;
+			this._getUpstreamValue = null;
 			this._onValueChange = null;
+			this._options = null;
+			this.$selector = null;
 		},
 
 		/**

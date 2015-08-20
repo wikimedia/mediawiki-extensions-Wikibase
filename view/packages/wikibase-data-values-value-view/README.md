@@ -105,6 +105,15 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.15.1 (2015-08-20)
+
+#### Enhancements
+* `jQuery.valueview.experts.QuantityInput` also submits the `unit` option if it's null.
+
+#### Bugfixes
+* `jQuery.ui.unitsuggester` now queries the `wbsearchentities` API for a specific language.
+* Fixed `jQuery.valueview.ExpertExtender.UnitSelector.destroy`.
+
 ### 0.15.0 (2015-08-19)
 
 #### Breaking changes

@@ -48,16 +48,9 @@
 		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
-			var options = {};
-
-			if( this._unitSelector ) {
-				var unit = this._unitSelector.getConceptUri();
-				if( unit ) {
-					options.unit = unit;
-				}
-			}
-
-			return options;
+			return {
+				unit: this._unitSelector && this._unitSelector.getConceptUri() || null
+			};
 		},
 
 		/**
