@@ -184,7 +184,7 @@ class ClaimHtmlGenerator {
 	 *
 	 * @return string
 	 */
-	protected function getSnaklistviewHtml( $snaks ) {
+	protected function getSnaklistviewHtml( array $snaks ) {
 		$snaksHtml = '';
 		$i = 0;
 

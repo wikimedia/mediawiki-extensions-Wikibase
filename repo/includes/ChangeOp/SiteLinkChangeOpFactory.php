@@ -21,7 +21,7 @@ class SiteLinkChangeOpFactory {
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newSetSiteLinkOp( $siteId, $pageName, $badges = null ) {
+	public function newSetSiteLinkOp( $siteId, $pageName, array $badges = null ) {
 		return new ChangeOpSiteLink( $siteId, $pageName, $badges );
 	}
 
