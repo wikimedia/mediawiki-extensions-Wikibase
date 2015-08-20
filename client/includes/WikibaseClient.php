@@ -158,6 +158,11 @@ final class WikibaseClient {
 	private $restrictedEntityLookup = null;
 
 	/**
+	 * @var TermLookup|null
+	 */
+	private $termLookup;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
@@ -221,10 +226,31 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return TermBuffer
+	 */
+	public function getTermBuffer() {
+		return $this->getTermLookup();
+	}
+
+	/**
 	 * @return TermLookup
 	 */
-	private function getTermLookup() {
-		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
+	public function getTermLookup() {
+		return $this->getBufferingTermLookup();
+	}
+
+	/**
+	 * @return BufferingTermLookup
+	 */
+	public function getBufferingTermLookup() {
+		if ( !$this->termLookup ) {
+			$this->termLookup = new BufferingTermLookup(
+				$this->getStore()->getTermIndex(),
+				1000 // @todo: configure buffer size
+			);
+		}
+
+		return $this->termLookup;
 	}
 
 	/**
