@@ -6,6 +6,7 @@ use ArrayIterator;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use Title;
+use Traversable;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
@@ -558,7 +559,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PageEntityUsages[]|Iterator<PageEntityUsages> $usagesPerPage
+	 * @param PageEntityUsages[]|Traversable $usagesPerPage
 	 *
 	 * @return PageEntityUsages[]
 	 */

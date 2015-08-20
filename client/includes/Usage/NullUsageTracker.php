@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Usage;
 
 use ArrayIterator;
-use Iterator;
+use Traversable;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -65,7 +65,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityId[] $entities
 	 * @param string[] $aspects
 	 *
-	 * @return Iterator<PageEntityUsages>
+	 * @return Traversable always empty
 	 */
 	public function getPagesUsing( array $entities, array $aspects = array() ) {
 		return new ArrayIterator();
