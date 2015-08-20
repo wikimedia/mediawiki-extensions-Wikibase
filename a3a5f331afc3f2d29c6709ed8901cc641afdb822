@@ -16,6 +16,159 @@
       "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_49536d43",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "Could be\n\n array $canonicalLanguageCodes \u003d array()\n\nThis means:\n* Strict type hint.\n* More obvious name.\n* It\u0027s optional and the dummy value you are adding to several places is not necessary.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e949f990",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_091b2583",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "Not needed.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a963f108",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6990a9f1",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "$this-\u003ewikibaseRepo does not exist.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c9251dbe",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataRequestHandlerTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure but I think most of these tests do not need nor use this default.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_693429f2",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_892f159c",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTestData.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_291e2176",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialEntityDataTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-20T16:20:41Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
