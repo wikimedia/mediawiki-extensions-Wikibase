@@ -16,6 +16,24 @@
       "revId": "590fc8536518a3336325eb4e0da711759dd18890",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ec1d8767",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-20T16:28:34Z",
+      "side": 1,
+      "message": "I would ideally like to have this code in some place in core, per the bug.\n\nthere is Parser::getTargetLanguage which calls ParserOptions-\u003egetTargetLanguage() which is just a getter for the setter, and by default not set.\n\nwe could call the setter if getUserLang is called (which is weirdly named, because it splits cache)\n\nthere is more issue with having knowledge of the page language, which is the default. ParserOptions is not aware of the title.\n\nsuggestions?",
+      "parentUuid": "6ec1af18_89bcf5b2",
+      "revId": "590fc8536518a3336325eb4e0da711759dd18890",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
