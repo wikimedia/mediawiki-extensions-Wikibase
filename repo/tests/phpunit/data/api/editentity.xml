@@ -8,21 +8,23 @@
 			<description language="fr" value="constructeur a&#xE9;ronautique europ&#xE9;en"/>
 		</descriptions>
 		<aliases>
-			<alias language="uk" value="Airbus S.A.S"/>
-			<alias language="uk" value="&#x410;&#x435;&#x440;&#x43E;&#x301;&#x431;&#x443;&#x441;"/>
+			<language  id="uk">
+				<alias language="uk" value="Airbus S.A.S"/>
+				<alias language="uk" value="&#x410;&#x435;&#x440;&#x43E;&#x301;&#x431;&#x443;&#x441;"/>
+			</language>
 		</aliases>
 		<sitelinks/>
 		<claims>
 			<property id="$propertyIdUnderTest">
-				<claim _idx="0" id="$itemIdUnderTest$26D08148-75F5-4AD1-B340-3A6A2F32C202" type="statement"
+				<claim type="statement" id="$itemIdUnderTest$26D08148-75F5-4AD1-B340-3A6A2F32C202"
 					   rank="normal">
 					<mainsnak snaktype="value" property="$propertyIdUnderTest" datatype="string">
 						<datavalue value="SomeMainVal" type="string"/>
 					</mainsnak>
 					<qualifiers>
 						<property id="$propertyIdUnderTest">
-							<qualifiers _idx="0" hash="XXX"
-										snaktype="value" property="$propertyIdUnderTest" datatype="string">
+							<qualifiers snaktype="value" property="$propertyIdUnderTest"
+										hash="XXX" datatype="string">
 								<datavalue value="SomeQualVal" type="string"/>
 							</qualifiers>
 						</property>
@@ -34,7 +36,7 @@
 						<reference hash="XXX">
 							<snaks>
 								<property id="$propertyIdUnderTest">
-									<snak _idx="0" snaktype="value" property="$propertyIdUnderTest"
+									<snak snaktype="value" property="$propertyIdUnderTest"
 										  datatype="string">
 										<datavalue value="SomeRefVal" type="string"/>
 									</snak>

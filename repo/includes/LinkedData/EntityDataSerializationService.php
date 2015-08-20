@@ -459,7 +459,7 @@ class EntityDataSerializationService {
 			$this->serializerFactory,
 			$this->siteStore,
 			$this->propertyLookup,
-			false // Never index tags for this service as we dont output XML
+			false // Never add meta data for this service
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision );
 
