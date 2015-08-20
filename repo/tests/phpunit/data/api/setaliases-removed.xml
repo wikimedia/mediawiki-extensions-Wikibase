@@ -2,7 +2,9 @@
 <api success="1">
 	<entity id="$itemIdUnderTest" type="item">
 		<aliases>
-			<alias language="en-gb" value="AA"/>
+			<language id="en-gb">
+				<alias language="en-gb" value="AA"/>
+			</language>
 		</aliases>
 	</entity>
 </api>
