@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_f0f48385",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1718
+      },
+      "writtenOn": "2015-08-20T01:34:43Z",
+      "side": 1,
+      "message": "bug number should be above Change-Id as\n\nBug: T105430",
+      "revId": "a3a5f331afc3f2d29c6709ed8901cc641afdb822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
