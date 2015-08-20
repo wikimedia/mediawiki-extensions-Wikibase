@@ -147,6 +147,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			 */
 			'1991 1 1' =>
 				array( '+1991-01-01T00:00:00Z' ),
+			'1991 1 20' =>
+				array( '+1991-01-20T00:00:00Z' ),
 			'2001 1 1' =>
 				array( '+2001-01-01T00:00:00Z' ),
 		);
@@ -197,6 +199,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			array( '1980UTC' ),
 			array( '1980 America/New_York' ),
 			array( '1980America/New_York' ),
+			// A format YDM does not exist.
+			array( '1991 20 1' ),
 			// No date parser should ever magically turn HMS times into dates.
 			array( '12:31:59' ),
 			array( '23:12:31' ),
