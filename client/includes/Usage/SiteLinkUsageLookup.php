@@ -4,7 +4,7 @@ namespace Wikibase\Client\Usage;
 
 use ArrayIterator;
 use InvalidArgumentException;
-use Iterator;
+use Traversable;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -82,12 +82,12 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 * @param string[] $aspects Which aspects to consider (if omitted, all aspects are considered).
 	 * Use the EntityUsage::XXX_USAGE constants to represent aspects.
 	 *
-	 * @return Iterator<PageEntityUsages>
+	 * @return ArrayIterator of PageEntityUsages
 	 * @throws UsageTrackerException
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
 		if ( empty( $entityIds ) ) {
-			return new ArrayIterator( array() );
+			return new ArrayIterator();
 		}
 
 		$numericItemIds = $this->getNumericItemIds( $entityIds );

@@ -5,8 +5,8 @@ namespace Wikibase;
 use DatabaseBase;
 use DBAccessBase;
 use InvalidArgumentException;
-use Iterator;
 use MWException;
+use Traversable;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -591,12 +591,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @param Iterator $rows
+	 * @param object[]|Traversable $rows
 	 * @param int $limit
 	 *
-	 * @return Iterator
+	 * @return object[]
 	 */
-	private function getRowsOrderedByWeight( Iterator $rows, $limit = 0 ) {
+	private function getRowsOrderedByWeight( Traversable $rows, $limit = 0 ) {
 		$sortData = array();
 		$rowMap = array();
 
@@ -732,7 +732,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * Modifies the provided terms to use the field names expected by the interface
 	 * rather then the table field names. Also ensures the values are of the correct type.
 	 *
-	 * @param array[]|Iterator $obtainedTerms
+	 * @param array[]|Traversable $obtainedTerms
 	 *
 	 * @return TermIndexEntry[]
 	 */
@@ -906,7 +906,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * @param string[]|array[] $textsByLanguage A list of texts, or a list of lists of texts (keyed
-	 * by language on the top level).
+	 *  by language on the top level).
 	 * @param string[] $types
 	 *
 	 * @throws InvalidArgumentException

@@ -5,7 +5,7 @@ namespace Wikibase\Client\Usage\Sql;
 use ArrayIterator;
 use DatabaseBase;
 use InvalidArgumentException;
-use Iterator;
+use Traversable;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\EntityId;
@@ -269,7 +269,7 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * @param array|Iterator $rows
+	 * @param array|Traversable $rows
 	 *
 	 * @return EntityUsage[]
 	 */
@@ -345,7 +345,7 @@ class EntityUsageTable {
 	 * @param EntityId[] $entityIds
 	 * @param string[] $aspects
 	 *
-	 * @return Iterator<PageEntityUsages> An iterator over entity usages grouped by page
+	 * @return ArrayIterator A traversable over PageEntityUsages grouped by page
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
 		if ( empty( $entityIds ) ) {
@@ -373,7 +373,7 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * @param array|Iterator $rows
+	 * @param array|Traversable $rows
 	 *
 	 * @return PageEntityUsages[]
 	 */

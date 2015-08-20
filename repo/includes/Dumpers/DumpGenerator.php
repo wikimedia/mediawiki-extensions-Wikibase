@@ -256,7 +256,7 @@ abstract class DumpGenerator {
 	/**
 	 * Generates a dump, writing to the file handle provided to the constructor.
 	 *
-	 * @param EntityIdPager $idPager an Iterator that returns EntityId instances
+	 * @param EntityIdPager $idPager a pager that returns EntityId instances
 	 */
 	public function generateDump( EntityIdPager $idPager ) {
 		$dumpCount = 0;
