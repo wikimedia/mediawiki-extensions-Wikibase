@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<api success="1">
+	<entity id="$itemIdUnderTest" type="item">
+		<descriptions>
+			<description language="en-gb" removed=""/>
+		</descriptions>
+	</entity>
+</api>
