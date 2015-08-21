@@ -73,6 +73,20 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 				array( 'ja', 'de', 'pt', 'en', 'hu' ), 'mycustomorder', $sortOrders, array(),
 				$sortOrders['mycustomorder']
 			),
+			array(
+				array( 'x2', 'x1', 'x3' ),
+				'alphabetic',
+				array( 'alphabetic' => array() ),
+				array(),
+				array( 'x1', 'x2', 'x3' )
+			),
+			array(
+				array( 'x2', 'x1', 'en', 'de', 'a2', 'a1' ),
+				'alphabetic',
+				$sortOrders,
+				array(),
+				array( 'a1', 'a2', 'de', 'en', 'x1', 'x2' )
+			),
 		);
 	}
 
