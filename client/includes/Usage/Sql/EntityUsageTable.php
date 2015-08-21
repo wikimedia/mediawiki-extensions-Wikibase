@@ -94,18 +94,31 @@ class EntityUsageTable {
 			), LIST_AND );
 		}
 
-		// XXX: Do we need batching here? List pages may be using hundreds of entities...
-		$this->connection->update(
+		// Collect affected row IDs, so we can use them for an
+		// efficient update query on the master db.
+		$rowIds = $db->selectFieldValues(
 			$this->tableName,
-			array(
-				'eu_touched' => wfTimestamp( TS_MW, $touched ),
-			),
+			'eu_row_id',
 			array(
 				'eu_page_id' => (int)$pageId,
-				$this->connection->makeList( $usageConditions, LIST_OR )
+				$db->makeList( $usageConditions, LIST_OR )
 			),
 			__METHOD__
 		);
+
+		if ( !empty( $rowIds ) ) {
+			// XXX: Do we need batching here? List pages may be using hundreds of entities...
+			$db->update(
+				$this->tableName,
+				array(
+					'eu_touched' => wfTimestamp( TS_MW, $touched ),
+				),
+				array(
+					'eu_row_id' => $rowIds
+				),
+				__METHOD__
+			);
+		}
 	}
 
 	/**
