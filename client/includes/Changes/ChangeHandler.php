@@ -158,14 +158,16 @@ class ChangeHandler {
 			. ' (' . $change->getType() . ')' );
 
 		$usagesPerPage = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
+		// Warning, empty() does not work on ArrayIterator objects!
+		$count = count( $usagesPerPage );
 
-		if ( empty( $usagesPerPage ) ) {
+		if ( $count === 0 ) {
 			// nothing to do
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$changeId." );
 			return false;
 		}
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . count( $usagesPerPage )
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . $count
 			. " page(s) for change #$changeId." );
 
 		$actionBuckets = array();
