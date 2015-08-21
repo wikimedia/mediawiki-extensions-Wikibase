@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Als-Holder"
+			"Als-Holder",
+			"J. 'mach' wust"
 		]
 	},
 	"wikibase-client-desc": "Macht e Client fir d Erwyterig Wikibase megli",
@@ -16,5 +17,7 @@
 	"wikibase-rc-hide-wikidata-show": "aazeige",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Bearbeitig",
-	"wikibase-otherprojects": "Andri Projäkt"
+	"wikibase-otherprojects": "Andri Projäkt",
+	"wikibase-otherprojects-beta-message": "Syteleiste für anderi Projekt",
+	"wikibase-otherprojects-beta-description": "En Abschnitt «{{int:wikibase-otherprojects}}» chunt zur Syteleiste derzue. Är het Links zu anderne Wikimedia-Projekt, wo uf {{WBREPONAME}}-Date basiere."
 }

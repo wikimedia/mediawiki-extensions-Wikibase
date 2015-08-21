@@ -5,6 +5,7 @@
 		]
 	},
 	"wikibase-after-page-move-queued": "[$1 Vikidatas īrašos], sojongts so ton poslapio, tūjaus bus atnaujints autuomatėškā.",
+	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} īrašos], katros sosėjis so tuo straipsnio, patsā atsėnaujėna. Bat tas dielē kuokiū tās kliūtiū galiejė ė nenutiktė.",
 	"wikibase-dataitem": "{{WBREPONAME}} īrašos",
 	"wikibase-editlinks": "Keistė nūruodas",
 	"wikibase-editlinkstitle": "Keistė terpkalbėnės nūruodas",
