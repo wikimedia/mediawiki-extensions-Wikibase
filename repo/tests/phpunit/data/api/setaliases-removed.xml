@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<api success="1">
+	<entity id="$itemIdUnderTest" type="item">
+		<aliases>
+			<alias language="en-gb" value="AA"/>
+		</aliases>
+	</entity>
+</api>
