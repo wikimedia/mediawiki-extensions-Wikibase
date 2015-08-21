@@ -74,7 +74,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	public function testGetHtml_containsDescriptionAndAliases() {
 		$entityTermsView = $this->getEntityTermsView();
 		$fingerprint = $this->getFingerprint();
-		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $fingerprint );
 
 		$this->assertContains( htmlspecialchars( $fingerprint->getDescription( 'en' )->getText() ), $html );
 		foreach ( $fingerprint->getAliasGroup( 'en' )->getAliases() as $alias ) {
@@ -97,7 +97,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	 */
 	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
 		$entityTermsView = $this->getEntityTermsView( $languageCode, $this->once() );
-		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $fingerprint, $entityId );
 
 		$this->assertContains( '~EDITSECTION~', $html );
 	}
@@ -107,7 +107,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$fingerprint = new Fingerprint();
 		$fingerprint->setDescription( 'en', '<script>alert( "xss" );</script>' );
 		$fingerprint->setAliasGroup( 'en', array( '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ) );
-		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $fingerprint );
 
 		$this->assertContains( 'evil html', $html, 'make sure it works' );
 		$this->assertNotContains( 'href="#"', $html );
@@ -135,14 +135,14 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	 */
 	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint, $expectedPlaceholder ) {
 		$entityTermsView = $this->getEntityTermsView();
-		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $fingerprint );
 
 		$this->assertContains( 'wb-empty', $html );
 	}
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
 		$entityTermsView = $this->getEntityTermsView();
-		$html = $entityTermsView->getHtml( $this->getFingerprint(), null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $this->getFingerprint() );
 
 		$this->assertNotContains( 'wb-empty', $html );
 	}
@@ -152,7 +152,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	 */
 	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $expectedPlaceholder ) {
 		$entityTermsView = $this->getEntityTermsView();
-		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $fingerprint );
 
 		$this->assertContains( $expectedPlaceholder, $html );
 		$numberOfPlaceholders = $fingerprint->isEmpty() ? 2 : 1;

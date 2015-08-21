@@ -73,11 +73,14 @@ class EntityTermsView {
 	public function getHtml(
 		Fingerprint $fingerprint,
 		EntityId $entityId = null,
-		$termBoxHtml,
-		TextInjector $textInjector
+		$termBoxHtml = '',
+		TextInjector $textInjector = null
 	) {
 		$descriptions = $fingerprint->getDescriptions();
 		$aliasGroups = $fingerprint->getAliasGroups();
+		$marker = $textInjector === null ? '' : $textInjector->newMarker(
+			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
+		);
 
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
 			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
@@ -85,9 +88,7 @@ class EntityTermsView {
 			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
 			$this->getHtmlForAliases( $aliasGroups ),
 			$termBoxHtml,
-			$textInjector->newMarker(
-				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
-			),
+			$marker,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $entityId )
 		);
 	}
