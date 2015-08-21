@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_527b1123",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-21T12:42:07Z",
+      "side": 1,
+      "message": "this is WIP, obviously and wanted to upload as a draft.",
+      "parentUuid": "6ec1af18_92109954",
+      "revId": "05aab5488dc07c4415b553009d6e101cce25e414",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_521a3174",
         "filename": "client/includes/ParserLanguageOptions.php",
         "patchSetId": 5
@@ -81,6 +99,24 @@
       "writtenOn": "2015-08-21T10:45:10Z",
       "side": 1,
       "message": "So we rely solely on the language code to make sure we track the usages for all different renderings. This should be documented here.",
+      "revId": "05aab5488dc07c4415b553009d6e101cce25e414",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_b27cb51c",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-21T12:42:07Z",
+      "side": 1,
+      "message": "hmm... what might be better is to specifically track the language(s) we use for parsing / rendering lua and parser function, as extension data in parser output. that would be more consistent and sure.",
+      "parentUuid": "6ec1af18_525f9113",
       "revId": "05aab5488dc07c4415b553009d6e101cce25e414",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
