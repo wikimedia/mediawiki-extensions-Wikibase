@@ -48,9 +48,9 @@ class EntityRetrievingTermLookup implements TermLookup {
 		/** @var Fingerprint $fingerprint */
 		$labels = $fingerprint->getLabels();
 
-		try{
+		try {
 			return $labels->getByLanguage( $languageCode )->getText();
-		} catch( OutOfBoundsException $ex ) {
+		} catch ( OutOfBoundsException $ex ) {
 			return null;
 		}
 	}
