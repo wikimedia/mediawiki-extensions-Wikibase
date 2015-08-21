@@ -85,6 +85,24 @@ class EntityUsageTable {
 
 		$db = $this->connection;
 
+		$rowIds = $this->getAffectedRowIds( $db, $pageId, $usages );
+		$batches  = array_chunk( $rowIds, $this->batchSize );
+
+		foreach ( $batches as $batch ) {
+			$this->touchUsageBatch( $db, $batch, $touched );
+		}
+	}
+
+	/**
+	 * @param DatabaseBase $db
+	 * @param int $pageId
+	 * @param EntityUsage[] $usages
+	 *
+	 * @return int[] affected row ids
+	 * @throws \DBUnexpectedError
+	 * @throws \MWException
+	 */
+	private function getAffectedRowIds( DatabaseBase $db, $pageId, array $usages ) {
 		$usageConditions = array();
 
 		foreach ( $usages as $usage ) {
@@ -94,15 +112,35 @@ class EntityUsageTable {
 			), LIST_AND );
 		}
 
-		// XXX: Do we need batching here? List pages may be using hundreds of entities...
-		$this->connection->update(
+		// Collect affected row IDs, so we can use them for an
+		// efficient update query on the master db.
+		$rowIds = $db->selectFieldValues(
+			$this->tableName,
+			'eu_row_id',
+			array(
+				'eu_page_id' => (int)$pageId,
+				$db->makeList( $usageConditions, LIST_OR )
+			),
+			__METHOD__
+		);
+
+		$rowIds = array_map( 'intval', $rowIds ?: array() );
+		return $rowIds;
+	}
+
+	/**
+	 * @param DatabaseBase $db
+	 * @param int[] $rowIds the ids of the rows to touch
+	 * @param string $touched timestamp
+	 */
+	private function touchUsageBatch( DatabaseBase $db, $rowIds, $touched ) {
+		$db->update(
 			$this->tableName,
 			array(
 				'eu_touched' => wfTimestamp( TS_MW, $touched ),
 			),
 			array(
-				'eu_page_id' => (int)$pageId,
-				$this->connection->makeList( $usageConditions, LIST_OR )
+				'eu_row_id' => $rowIds
 			),
 			__METHOD__
 		);
