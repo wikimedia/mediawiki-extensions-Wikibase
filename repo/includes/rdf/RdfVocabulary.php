@@ -97,12 +97,24 @@ class RdfVocabulary {
 	 * @var string
 	 */
 	private $dataUri;
+	/**
+	 * Mapping of non-standard language codes to standard equivalents
+	 * @var array
+	 */
+	private $canonicalLanguageCodes;
+
+	/**
+	 * Cached language code resolutions
+	 * @var array
+	 */
+	private static $canonicalLanguageCache = array();
 
 	/**
 	 * @param string $baseUri Base URI for entity concept URIs.
 	 * @param string $dataUri Base URI for entity description URIs.
+	 * @param array $canonicalLanguageCodes Mapping from internal language codes to canonical language codes
 	 */
-	public function __construct( $baseUri, $dataUri ) {
+	public function __construct( $baseUri, $dataUri, array $canonicalLanguageCodes = array() ) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 
@@ -143,6 +155,8 @@ class RdfVocabulary {
 				self::NS_GEO => self::GEO_URI,
 				self::NS_PROV => self::PROV_URI,
 		);
+
+		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 	}
 
 	/**
@@ -219,6 +233,27 @@ class RdfVocabulary {
 	 */
 	public function getCommonsURI( $file ) {
 		return self::COMMONS_URI . rawurlencode( $file );
+	}
+
+	/**
+	 * Return canonical language code from internal Wikibase one
+	 * @param string $langName
+	 * @return string
+	 */
+	public function getCanonicalLanguage( $langName ) {
+		// First we check the case since most languages will be cached very quickly
+		if ( isset(self::$canonicalLanguageCache[$langName]) ) {
+			return self::$canonicalLanguageCache[$langName];
+		}
+
+		// Wikibase list goes first in case we want to override
+		// Like "simple" goes to en-x-simple not en
+		if ( !empty($this->canonicalLanguageCodes[$langName]) ) {
+			return $this->canonicalLanguageCodes[$langName];
+		}
+
+		self::$canonicalLanguageCache[$langName] = wfBCP47( $langName );
+		return self::$canonicalLanguageCache[$langName];
 	}
 
 }
