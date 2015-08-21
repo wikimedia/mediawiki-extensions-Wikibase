@@ -66,18 +66,21 @@ class EntityTermsView {
 	 * @param Fingerprint $fingerprint the fingerprint to render
 	 * @param EntityId|null $entityId the id of the fingerprint's entity
 	 * @param string $termBoxHtml
-	 * @param TextInjector $textInjector
+	 * @param TextInjector|null $textInjector
 	 *
 	 * @return string
 	 */
 	public function getHtml(
 		Fingerprint $fingerprint,
 		EntityId $entityId = null,
-		$termBoxHtml,
-		TextInjector $textInjector
+		$termBoxHtml = '',
+		TextInjector $textInjector = null
 	) {
 		$descriptions = $fingerprint->getDescriptions();
 		$aliasGroups = $fingerprint->getAliasGroups();
+		$marker = $textInjector === null ? '' : $textInjector->newMarker(
+			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
+		);
 
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
 			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
@@ -85,9 +88,7 @@ class EntityTermsView {
 			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
 			$this->getHtmlForAliases( $aliasGroups ),
 			$termBoxHtml,
-			$textInjector->newMarker(
-				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
-			),
+			$marker,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $entityId )
 		);
 	}
