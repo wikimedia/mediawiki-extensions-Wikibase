@@ -251,6 +251,8 @@ class SqlStore implements Store {
 	/**
 	 * Updates the schema of the SQL store to it's latest version.
 	 *
+	 * @TODO: Make this a separatec class!
+	 *
 	 * @since 0.1
 	 *
 	 * @param DatabaseUpdater $updater
@@ -275,8 +277,40 @@ class SqlStore implements Store {
 
 		$this->updateEntityPerPageTable( $updater, $db );
 		$this->updateTermsTable( $updater, $db );
+		$this->updateItemsPerSiteTable( $updater, $db );
+		$this->updateChangesTable( $updater, $db );
 
 		$this->registerPropertyInfoTableUpdates( $updater );
+	}
+
+	/**
+	 * @param DatabaseUpdater $updater
+	 */
+	private function updateItemsPerSiteTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
+		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
+		if ( $db->getType() !== 'sqlite' ) {
+			$updater->modifyExtensionField(
+				'wb_items_per_site',
+				'ips_site_page',
+				$this->getUpdateScriptPath( 'MakeIpsSitePageLarger', $db->getType() )
+			);
+		}
+	}
+
+	/**
+	 * @param DatabaseUpdater $updater
+	 */
+	private function updateChangesTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+		// Make wb_changes.change_info MEDIUMBLOB - T108246
+		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
+		if ( $db->getType() !== 'sqlite' ) {
+			$updater->modifyExtensionField(
+				'wb_changes',
+				'change_info',
+				$this->getUpdateScriptPath( 'MakeChangeInfoLarger', $db->getType() )
+			);
+		}
 	}
 
 	private function registerPropertyInfoTableUpdates( DatabaseUpdater $updater ) {
@@ -475,16 +509,6 @@ class SqlStore implements Store {
 			'term_search',
 			$this->getUpdateScriptPath( 'UpdateTermIndexes', $db->getType() )
 		);
-
-		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
-		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
-		if ( $db->getType() !== 'sqlite' ) {
-			$updater->modifyExtensionField(
-				'wb_items_per_site',
-				'ips_site_page',
-				$this->getUpdateScriptPath( 'MakeIpsSitePageLarger', $db->getType() )
-			);
-		}
 	}
 
 	/**
