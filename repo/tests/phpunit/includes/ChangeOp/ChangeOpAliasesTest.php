@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpAliases;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
 
@@ -78,21 +77,27 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 			'remove' => array(
 				unserialize( serialize( $entity ) ),
 				new ChangeOpAliases( 'en', $existingEnAliases, 'remove', $validatorFactory ),
-				array()
+				null
 			),
 		);
 	}
 
 	/**
 	 * @dataProvider changeOpAliasesProvider
-	 *
-	 * @param Entity $entity
-	 * @param ChangeOpAliases $changeOpAliases
-	 * @param string $expectedAliases
 	 */
-	public function testApply( $entity, $changeOpAliases, $expectedAliases ) {
-		$changeOpAliases->apply( $entity );
-		$this->assertEquals( $expectedAliases, $entity->getAliases( 'en' ) );
+	public function testApply(
+		Item $item,
+		ChangeOpAliases $changeOpAliases,
+		array $expectedAliases = null
+	) {
+		$changeOpAliases->apply( $item );
+		$fingerprint = $item->getFingerprint();
+
+		if ( $expectedAliases === null ) {
+			$this->assertFalse( $fingerprint->hasAliasGroup( 'en' ) );
+		} else {
+			$this->assertEquals( $expectedAliases, $fingerprint->getAliasGroup( 'en' )->getAliases() );
+		}
 	}
 
 	public function validateProvider() {
