@@ -100,8 +100,9 @@ class InterwikiSorter {
 		$aIndex = array_key_exists( $a, $this->sortOrder ) ? $this->sortOrder[$a] : null;
 		$bIndex = array_key_exists( $b, $this->sortOrder ) ? $this->sortOrder[$b] : null;
 
-		// If we encounter an unknown language, which may happen if the sort table is not updated, we list it alphabetically.
-		return ( ( is_null( $aIndex ) || is_null( $bIndex ) ) ? strcmp( $a, $b ) : $aIndex - $bIndex );
+		// If we encounter an unknown language, which may happen if the sort table is not updated,
+		// we list it alphabetically.
+		return $aIndex === null || $bIndex === null ? strcmp( $a, $b ) : $aIndex - $bIndex;
 	}
 
 	/**
