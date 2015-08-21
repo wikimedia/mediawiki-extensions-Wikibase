@@ -187,7 +187,8 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
 		);
 
-		$usageTable = $this->getEntityUsageTable();
+		// test with small batch size
+		$usageTable = $this->getEntityUsageTable( 2 );
 		$usageTable->addUsages( 23, $usagesT1, $t1 );
 
 		// touch usage entries (some non-existing)
