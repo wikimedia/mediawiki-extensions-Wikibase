@@ -34,6 +34,24 @@
       "revId": "590fc8536518a3336325eb4e0da711759dd18890",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_7eeff9ad",
+        "filename": "client/includes/Hooks/DataUpdateHookHandlers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-21T09:18:14Z",
+      "side": 1,
+      "message": "have submitted https://gerrit.wikimedia.org/r/#/c/232826/ and https://gerrit.wikimedia.org/r/#/c/232757/ to help improve the situation.\n\nin the meanwhile, maybe i can put it in a helper class in Wikibase Lib and make sure these different places share the same code for determining language used for parsing.",
+      "parentUuid": "6ec1af18_ec1d8767",
+      "revId": "590fc8536518a3336325eb4e0da711759dd18890",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
