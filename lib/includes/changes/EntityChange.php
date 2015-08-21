@@ -36,14 +36,9 @@ class EntityChange extends DiffChange {
 	private $entityId = null;
 
 	/**
-	 * @var string|null
-	 */
-	protected $comment = null;
-
-	/**
 	 * @see ORMRow::setField
 	 *
-	 * Overwritten to force lower case object_id
+	 * @todo FIXME use uppecase ID, like everywhere else!
 	 *
 	 * @param string $name
 	 * @param mixed $value
@@ -91,7 +86,7 @@ class EntityChange extends DiffChange {
 	/**
 	 * @param string $cache set to 'cache' to cache the unserialized diff.
 	 *
-	 * @return array|bool false if no meta data could be found in the info array
+	 * @return array false if no meta data could be found in the info array
 	 */
 	public function getMetadata( $cache = 'no' ) {
 		$info = $this->getInfo( $cache );
@@ -100,13 +95,14 @@ class EntityChange extends DiffChange {
 			return $info['metadata'];
 		}
 
-		return false;
+		return array();
 	}
 
 	/**
-	 * @param array $metadata
+	 * Sets metadata fields. Unknown fields are ignored. New metadata is merged into
+	 * the current metadata array.
 	 *
-	 * @return bool
+	 * @param array $metadata
 	 */
 	public function setMetadata( array $metadata ) {
 		$validKeys = array(
@@ -115,50 +111,40 @@ class EntityChange extends DiffChange {
 			'rev_id',
 			'parent_id',
 			'user_text',
+			'comment'
 		);
 
-		if ( is_array( $metadata ) ) {
-			foreach ( array_keys( $metadata ) as $key ) {
-				if ( !in_array( $key, $validKeys ) ) {
-					unset( $metadata[$key] );
-				}
-			}
+		// strip extra fields from metadata
+		$metadata = array_intersect_key( $metadata, array_flip( $validKeys ) );
 
+		// merge new metadata into current metadata
+		$metadata = array_merge( $this->getMetadata(), $metadata );
+
+		// make sure the comment field is set
+		if ( !isset( $metadata['comment'] ) ) {
 			$metadata['comment'] = $this->getComment();
-
-			$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-			$info['metadata'] = $metadata;
-			$this->setField( 'info', $info );
-
-			return true;
 		}
 
-		return false;
-	}
-
-	/**
-	 * @param string|null $comment
-	 *
-	 * @return string
-	 */
-	public function setComment( $comment = null ) {
-		if ( $comment !== null ) {
-			$this->comment = $comment;
-		} else {
-			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
-			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
-			$this->comment = 'wikibase-comment-' . $this->getAction();
-		}
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+		$info['metadata'] = $metadata;
+		$this->setField( 'info', $info );
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getComment() {
-		if ( $this->comment === null ) {
-			$this->setComment();
+		$metadata = $this->getMetadata();
+
+		// TODO: get rid of this awkward fallback and messages. Comments and messages
+		// should come from the revision, not be invented here.
+		if ( !isset( $metadata['comment'] ) ) {
+			// Messages: wikibase-comment-add, wikibase-comment-remove, wikibase-comment-linked,
+			// wikibase-comment-unlink, wikibase-comment-restore, wikibase-comment-update
+			$metadata['comment'] = 'wikibase-comment-' . $this->getAction();
 		}
-		return $this->comment;
+
+		return $metadata['comment'];
 	}
 
 	/**
@@ -174,27 +160,44 @@ class EntityChange extends DiffChange {
 	 * @todo rename to setRecentChangeInfo
 	 */
 	public function setMetadataFromRC( RecentChange $rc ) {
+		$this->setFields( array(
+			'revision_id' => $rc->getAttribute( 'rc_this_oldid' ),
+			'user_id' => $rc->getAttribute( 'rc_user' ),
+			'time' => $rc->getAttribute( 'rc_timestamp' ),
+		) );
+
 		$this->setMetadata( array(
 			'user_text' => $rc->getAttribute( 'rc_user_text' ),
 			'bot' => $rc->getAttribute( 'rc_bot' ),
 			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
 			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
 			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
+			'comment' => $rc->getAttribute( 'rc_comment' ),
 		) );
 	}
 
 	/**
 	 * @param User $user
 	 *
-	 * @todo rename to setUserInfo, set fields too.
+	 * @todo rename to setUserInfo
 	 */
 	public function setMetadataFromUser( User $user ) {
-		$this->setMetadata( array(
-			'user_text' => $user->getName(),
-			'page_id' => 0,
-			'rev_id' => 0,
-			'parent_id' => 0,
+		$this->setFields( array(
+			'user_id' => $user->getId(),
 		) );
+
+		// TODO: init page_id etc in getMetadata, not here!
+		$metadata = array_merge( array(
+				'page_id' => 0,
+				'rev_id' => 0,
+				'parent_id' => 0,
+			),
+			$this->getMetadata()
+		);
+
+		$metadata['user_text'] = $user->getName();
+
+		$this->setMetadata( $metadata );
 	}
 
 	/**
@@ -203,25 +206,29 @@ class EntityChange extends DiffChange {
 	 * @param Revision $revision
 	 */
 	public function setRevisionInfo( Revision $revision ) {
-		/* @var EntityContent $content */
-		$content = $revision->getContent();
-		$entityId = $content->getEntityId();
-
 		$this->setFields( array(
 			'revision_id' => $revision->getId(),
 			'user_id' => $revision->getUser(),
-			'object_id' => $entityId->getSerialization(),
 			'time' => $revision->getTimestamp(),
 		) );
-	}
 
-	/**
-	 * @param int $userId
-	 *
-	 * @todo Merge into future setUserInfo.
-	 */
-	public function setUserId( $userId ) {
-		$this->setField( 'user_id', $userId );
+		if ( !$this->hasField( 'object_id' ) ) {
+			/* @var EntityContent $content */
+			$content = $revision->getContent(); // potentially expensive!
+			$entityId = $content->getEntityId();
+
+			$this->setFields( array(
+				'object_id' => $entityId->getSerialization(),
+			) );
+		}
+
+		$this->setMetadata( array(
+			'user_text' => $revision->getUserText(),
+			'page_id' => $revision->getPage(),
+			'parent_id' => $revision->getParentId(),
+			'comment' => $revision->getComment(),
+			'rev_id' => $revision->getId(),
+		) );
 	}
 
 	/**

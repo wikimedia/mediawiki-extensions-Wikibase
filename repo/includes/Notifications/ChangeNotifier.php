@@ -63,7 +63,6 @@ class ChangeNotifier {
 		$change = $this->changeFactory->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
 
 		$change->setTimestamp( $timestamp );
-		$change->setUserId( $user->getId() );
 		$change->setMetadataFromUser( $user );
 
 		$this->transmitChange( $change );
