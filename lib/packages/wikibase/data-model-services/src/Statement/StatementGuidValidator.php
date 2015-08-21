@@ -96,7 +96,7 @@ class StatementGuidValidator {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $prefixedId
+	 * @param string $prefixedId
 	 *
 	 * @return boolean
 	 */
