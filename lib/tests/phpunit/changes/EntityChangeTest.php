@@ -2,7 +2,9 @@
 
 namespace Wikibase\Test;
 
+use RecentChange;
 use Revision;
+use stdClass;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -127,11 +129,9 @@ class EntityChangeTest extends DiffChangeTest {
 		$this->assertInternalType( 'string', $entityChange->getType() );
 	}
 
-	/**
-	 * @dataProvider changeProvider
-	 * @since 0.3
-	 */
-	public function testMetadata( EntityChange $entityChange ) {
+	public function testMetadata() {
+		$entityChange = $this->newEntityChange( new ItemId( 'Q13' ) );
+
 		$entityChange->setMetadata( array(
 			'kittens' => 3,
 			'rev_id' => 23,
@@ -141,20 +141,38 @@ class EntityChangeTest extends DiffChangeTest {
 			array(
 				'rev_id' => 23,
 				'user_text' => '171.80.182.208',
-				'comment' => $entityChange->getComment(),
+				'comment' => $entityChange->getComment(), // the comment field is magically initialized
+			),
+			$entityChange->getMetadata()
+		);
+
+		// override some fields, keep others
+		$entityChange->setMetadata( array(
+			'rev_id' => 25,
+			'comment' => 'foo',
+		) );
+		$this->assertEquals(
+			array(
+				'rev_id' => 25,
+				'user_text' => '171.80.182.208',
+				'comment' => 'foo', // the comment field is not magically initialized
 			),
 			$entityChange->getMetadata()
 		);
 	}
 
-	/**
-	 * @dataProvider changeProvider
-	 * @since 0.3
-	 */
-	public function testGetEmptyMetadata( EntityChange $entityChange ) {
+	public function testGetEmptyMetadata() {
+		$entityChange = $this->newEntityChange( new ItemId( 'Q13' ) );
+
+		$entityChange->setMetadata( array(
+			'kittens' => 3,
+			'rev_id' => 23,
+			'user_text' => '171.80.182.208',
+		) );
+
 		$entityChange->setField( 'info', array() );
 		$this->assertEquals(
-			false,
+			array(),
 			$entityChange->getMetadata()
 		);
 	}
@@ -173,38 +191,113 @@ class EntityChangeTest extends DiffChangeTest {
 		$this->assertTrue( stripos( $s, $type ) !== false, "missing type $type" );
 	}
 
+	public function testGetComment() {
+		$entityChange = $this->newEntityChange( new ItemId( 'Q13' ) );
+
+		$this->assertEquals( 'wikibase-comment-update', $entityChange->getComment(), 'comment' );
+
+		$entityChange->setMetadata( array(
+			'comment' => 'Foo!',
+		) );
+
+		$this->assertEquals( 'Foo!', $entityChange->getComment(), 'comment' );
+	}
+
+	public function testSetMetadataFromRC() {
+		$timestamp = '20140523' . '174422';
+
+		$row = new stdClass();
+		$row->rc_last_oldid = 3;
+		$row->rc_this_oldid = 5;
+		$row->rc_user = 7;
+		$row->rc_user_text = 'Mr. Kittens';
+		$row->rc_timestamp = $timestamp;
+		$row->rc_cur_id = 6;
+		$row->rc_bot = 1;
+		$row->rc_deleted = 0;
+		$row->rc_comment = 'Test!';
+
+		$rc = RecentChange::newFromRow( $row );
+
+		$entityChange = $this->newEntityChange( new ItemId( 'Q7' ) );
+		$entityChange->setMetadataFromRC( $rc );
+
+		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
+		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
+		$this->assertEquals( 'q7', $entityChange->getObjectId(), 'object_id' );
+		$this->assertEquals( $timestamp, $entityChange->getTime(), 'timestamp' );
+		$this->assertEquals( 'Test!', $entityChange->getComment(), 'comment' );
+
+		$metadata = $entityChange->getMetadata();
+		$this->assertEquals( 3, $metadata['parent_id'], 'parent_id' );
+		$this->assertEquals( 6, $metadata['page_id'], 'page_id' );
+		$this->assertEquals( 5, $metadata['rev_id'], 'rev_id' );
+		$this->assertEquals( 1, $metadata['bot'], 'bot' );
+		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
+	}
+
+	public function testSetMetadataFromUser() {
+		$user = $this->getMockBuilder( 'User' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$user->expects( $this->atLeastOnce() )
+			->method( 'getId' )
+			->will( $this->returnValue( 7 ) );
+
+		$user->expects( $this->atLeastOnce() )
+			->method( 'getName' )
+			->will( $this->returnValue( 'Mr. Kittens' ) );
+
+		$entityChange = $this->newEntityChange( new ItemId( 'Q7' ) );
+
+		$entityChange->setMetadata( array(
+			'user_text' => 'Dobby', // will be overwritten
+			'page_id' => 5, // will NOT be overwritten
+		) );
+
+		$entityChange->setMetadataFromUser( $user );
+
+		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
+
+		$metadata = $entityChange->getMetadata();
+		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
+		$this->assertEquals( 5, $metadata['page_id'], 'page_id should be preserved' );
+		$this->assertArrayHasKey( 'rev_id', $metadata, 'rev_id should be initialized' );
+	}
+
 	public function testSetRevisionInfo() {
 		$id = new ItemId( 'Q7' );
 		$item = new Item( $id );
 
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$entityChange = $changeFactory->newForEntity( EntityChange::UPDATE, $id );
+		$entityChange = $this->newEntityChange( $id );
 
 		$timestamp = '20140523' . '174422';
 
 		$revision = new Revision( array(
 			'id' => 5,
+			'page' => 6,
 			'user' => 7,
+			'parent_id' => 3,
+			'user_text' => 'Mr. Kittens',
 			'timestamp' => $timestamp,
 			'content' => ItemContent::newFromItem( $item ),
+			'comment' => 'Test!',
 		) );
 
 		$entityChange->setRevisionInfo( $revision );
 
-		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ) );
-		$this->assertEquals( 7, $entityChange->getField( 'user_id' ) );
-		$this->assertEquals( 'q7', $entityChange->getObjectId() );
-		$this->assertEquals( $timestamp, $entityChange->getTime() );
-	}
+		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
+		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
+		$this->assertEquals( 'q7', $entityChange->getObjectId(), 'object_id' );
+		$this->assertEquals( $timestamp, $entityChange->getTime(), 'timestamp' );
+		$this->assertEquals( 'Test!', $entityChange->getComment(), 'comment' );
 
-	public function testSetUserId() {
-		$id = new ItemId( 'Q7' );
-
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newForEntity( EntityChange::UPDATE, $id );
-
-		$change->setUserId( 7 );
-		$this->assertEquals( 7, $change->getField( 'user_id' ), 7 );
+		$metadata = $entityChange->getMetadata();
+		$this->assertEquals( 3, $metadata['parent_id'], 'parent_id' );
+		$this->assertEquals( 6, $metadata['page_id'], 'page_id' );
+		$this->assertEquals( 5, $metadata['rev_id'], 'rev_id' );
+		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
 	}
 
 	public function testSetTimestamp() {

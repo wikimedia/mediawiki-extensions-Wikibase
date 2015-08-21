@@ -193,14 +193,13 @@ final class TestChanges {
 			$rev = 1000;
 
 			foreach ( $changes as $key => $change ) {
-				$change->setComment( "$key:1|" );
-
 				$meta = array(
 					'page_id' => 23,
 					'bot' => false,
 					'rev_id' => $rev,
 					'parent_id' => $rev -1,
 					'user_text' => 'Some User',
+					'comment' => "$key:1|",
 				);
 
 				$change->setMetadata( $meta );

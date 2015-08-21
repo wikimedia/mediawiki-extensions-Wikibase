@@ -319,7 +319,7 @@ class ChangeHandler {
 	private function getRCAttributes( EntityChange $change ) {
 		$rcinfo = $change->getMetadata();
 
-		if ( !is_array( $rcinfo ) ) {
+		if ( empty( $rcinfo ) ) {
 			return false;
 		}
 
