@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_9272d90e",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-21T13:22:46Z",
+      "side": 1,
+      "message": "should be updated",
+      "revId": "e2967219449e2ad30278e127673f3efa0ef8c7eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
