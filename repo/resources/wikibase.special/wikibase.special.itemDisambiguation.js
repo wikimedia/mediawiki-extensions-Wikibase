@@ -19,13 +19,12 @@
 		if ( $.uls !== undefined ) {
 			var languages = $.uls.data.getAutonyms();
 			$.each( languages, function( key, value ) {
-				langList.push( {
-					label: value + ' (' + key + ')',
-					value: value + ' (' + key + ')'
-				} );
+				langList.push( value + ' (' + key + ')' );
 			} );
 		}
-		$( '#wb-itemdisambiguation-languagename' ).suggester( { source: langList } );
+		$( '#wb-itemdisambiguation-languagename' )
+		.attr( 'autocomplete', 'off' )
+		.suggester( { source: langList } );
 
 		// On submit, replace human readable value like "English (en)" with actual language name ("en")
 		$( '#wb-itemdisambiguation-form1' ).submit( function() {
