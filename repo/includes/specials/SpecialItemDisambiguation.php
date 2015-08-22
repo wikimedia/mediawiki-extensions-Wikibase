@@ -190,7 +190,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param string|null $label
 	 */
 	private function switchForm( $languageCode, $label ) {
-		$this->getOutput()->addModules( 'wikibase.special.itemDisambiguation' );
+		$this->getOutput()->addModules( 'wikibase.special.languageSuggester' );
 
 		$this->getOutput()->addHTML(
 			Html::openElement(
@@ -220,7 +220,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				array(
 					'id' => 'wb-itemdisambiguation-languagename',
 					'size' => 12,
-					'class' => 'wb-input-text'
+					'class' => 'wb-input-text wb-language-suggester'
 				)
 			)
 			. ' '
