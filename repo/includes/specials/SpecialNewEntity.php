@@ -46,6 +46,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	private $contentLanguage = null;
 
 	/**
+	 * @var string[]
+	 */
+	private $languageCodes;
+
+	/**
 	 * @var string
 	 */
 	private $rightsUrl;
@@ -69,8 +74,9 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	public function __construct( $name, $restriction = 'createpage' ) {
 		parent::__construct( $name, $restriction );
 
-		// TODO: find a way to inject this
+		// TODO: find a way to inject these
 		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$this->languageCodes = WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages();
 
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 
@@ -216,6 +222,20 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
+	 * Get options for language selector
+	 *
+	 * @return array
+	 */
+	private function getLanguageOptions() {
+		$names = Language::fetchLanguageNames( null, 'all' );
+		$languageOptions = array();
+		foreach ( $this->languageCodes as $code ) {
+			$languageOptions[isset( $names[$code] ) ? $names[$code] : $code] = $code;
+		}
+		return $languageOptions;
+	}
+
+	/**
 	 * Build additional formelements
 	 *
 	 * @since 0.1
@@ -223,14 +243,20 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return string Formatted HTML for inclusion in the form
 	 */
 	protected function additionalFormElements() {
+		$this->getOutput()->addModules( 'wikibase.special.languageLabelDescriptionAliases' );
+
 		$langCode = $this->contentLanguage->getCode();
 		$langName = Language::fetchLanguageName( $langCode );
 		$langDir = $this->contentLanguage->getDir();
 		return array(
 			'lang' => array(
 				'name' => 'lang',
+				'options' => $this->getLanguageOptions(),
 				'default' => $langCode,
-				'type' => 'hidden'
+				'type' => 'select',
+				'id' => 'wb-newentity-language',
+				'cssclass' => 'wb-input',
+				'label-message' => 'wikibase-newentity-language'
 			),
 			'label' => array(
 				'name' => 'label',
@@ -241,8 +267,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
-					'wikibase-label-edit-placeholder-language-aware',
-					$langName
+					'wikibase-label-edit-placeholder'
 				)->text(),
 				'label-message' => 'wikibase-newentity-label'
 			),
@@ -255,8 +280,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
-					'wikibase-description-edit-placeholder-language-aware',
-					$langName
+					'wikibase-description-edit-placeholder'
 				)->text(),
 				'label-message' => 'wikibase-newentity-description'
 			),
@@ -269,8 +293,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
-					'wikibase-aliases-edit-placeholder-language-aware',
-					$langName
+					'wikibase-aliases-edit-placeholder'
 				)->text(),
 				'label-message' => 'wikibase-newentity-aliases'
 			)
