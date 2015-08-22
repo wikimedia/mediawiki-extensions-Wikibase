@@ -139,7 +139,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $type )->text(), $type );
 		}
 
-		$this->getOutput()->addModules( 'wikibase.special.entitiesWithout' );
+		$this->getOutput()->addModules( 'wikibase.special.languageSuggester' );
 
 		$this->getOutput()->addHTML(
 			Html::openElement(
@@ -175,7 +175,8 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				$this->language,
 				'text',
 				array(
-					'id' => 'wb-entitieswithoutpage-language'
+					'id' => 'wb-entitieswithoutpage-language',
+					'class' => 'wb-language-suggester'
 				)
 			) . ' ' .
 			Html::element(
