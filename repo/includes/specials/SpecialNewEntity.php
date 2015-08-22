@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Language;
 use Status;
+use Xml;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
@@ -225,10 +226,25 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$langCode = $this->contentLanguage->getCode();
 		$langName = Language::fetchLanguageName( $langCode );
 		$langDir = $this->contentLanguage->getDir();
-		return Html::hidden(
-			'lang',
-			$langCode
+		list( , $selector ) = Xml::languageSelector(
+			$langCode,
+			false, // $customisedOnly
+			null, // $inLanguage
+			array(
+				'name' => 'lang',
+				'id' => 'wb-newentity-lang',
+				'class' => 'wb-input'
+			)
+		);
+		return Html::element(
+			'label',
+			array(
+				'for' => 'wb-newentity-lang',
+				'class' => 'wb-label'
+			),
+			$this->msg( 'wikibase-newentity-language' )->text()
 		)
+		. $selector
 		. Html::element(
 			'label',
 			array(
