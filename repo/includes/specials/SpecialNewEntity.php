@@ -223,6 +223,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return string Formatted HTML for inclusion in the form
 	 */
 	protected function additionalFormElements() {
+		$this->getOutput()->addModules( 'wikibase.special.languageSuggester' );
+
 		$langCode = $this->contentLanguage->getCode();
 		$langName = Language::fetchLanguageName( $langCode );
 		$langDir = $this->contentLanguage->getDir();
@@ -230,7 +232,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			'lang' => array(
 				'name' => 'lang',
 				'default' => $langCode,
-				'type' => 'hidden'
+				'type' => 'text',
+				'id' => 'wb-newentity-lang',
+				'cssclass' => 'wb-input wb-language-suggester',
+				'label-message' => 'wikibase-newentity-language'
 			),
 			'label' => array(
 				'name' => 'label',

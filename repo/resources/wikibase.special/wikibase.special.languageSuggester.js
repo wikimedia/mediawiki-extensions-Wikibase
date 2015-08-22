@@ -15,7 +15,7 @@
 			return;
 		}
 
-		$inputs = $( '.wb-language-suggester' );
+		$inputs = $( 'input.wb-language-suggester, div.wb-language-suggester > input' );
 		if ( $inputs.length === 0 ) {
 			return;
 		}
