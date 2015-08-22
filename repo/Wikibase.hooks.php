@@ -1131,12 +1131,29 @@ final class RepoHooks {
 					'jquery.ui.suggester',
 				),
 			),
+			'wikibase.special.languageLabelDescriptionAliases' => $moduleTemplate + array(
+				'scripts' => array(
+					'resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js',
+				),
+				'dependencies' => array(
+					'oojs-ui',
+				),
+				'messages' => array(
+					'wikibase-label-edit-placeholder',
+					'wikibase-label-edit-placeholder-language-aware',
+					'wikibase-description-edit-placeholder',
+					'wikibase-description-edit-placeholder-language-aware',
+					'wikibase-aliases-edit-placeholder',
+					'wikibase-aliases-edit-placeholder-language-aware',
+				),
+			),
 		);
 
 		$isUlsLoaded = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 		if ( $isUlsLoaded ) {
 			$modules['wikibase.WikibaseContentLanguages']['dependencies'][] = 'ext.uls.languagenames';
 			$modules['wikibase.special.languageSuggester']['dependencies'][] = 'ext.uls.mediawiki';
+			$modules['wikibase.special.languageLabelDescriptionAliases']['dependencies'][] = 'ext.uls.mediawiki';
 		}
 
 		$resourceLoader->register( $modules );
