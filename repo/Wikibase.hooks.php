@@ -1115,18 +1115,9 @@ final class RepoHooks {
 					'wikibase',
 				),
 			),
-			'wikibase.special.itemDisambiguation' => $moduleTemplate + array(
+			'wikibase.special.languageSuggester' => $moduleTemplate + array(
 				'scripts' => array(
-					'resources/wikibase.special/wikibase.special.itemDisambiguation.js',
-				),
-				'dependencies' => array(
-					'wikibase.special',
-					'jquery.ui.suggester',
-				),
-			),
-			'wikibase.special.entitiesWithout' => $moduleTemplate + array(
-				'scripts' => array(
-					'resources/wikibase.special/wikibase.special.entitiesWithout.js',
+					'resources/wikibase.special/wikibase.special.languageSuggester.js',
 				),
 				'dependencies' => array(
 					'wikibase.special',
@@ -1138,8 +1129,7 @@ final class RepoHooks {
 		$isUlsLoaded = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 		if ( $isUlsLoaded ) {
 			$modules['wikibase.WikibaseContentLanguages']['dependencies'][] = 'ext.uls.languagenames';
-			$modules['wikibase.special.itemDisambiguation']['dependencies'][] = 'ext.uls.mediawiki';
-			$modules['wikibase.special.entitiesWithout']['dependencies'][] = 'ext.uls.mediawiki';
+			$modules['wikibase.special.languageSuggester']['dependencies'][] = 'ext.uls.mediawiki';
 		}
 
 		$resourceLoader->register( $modules );
