@@ -223,14 +223,27 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return string Formatted HTML for inclusion in the form
 	 */
 	protected function additionalFormElements() {
+		$this->getOutput()->addModules( 'wikibase.special.languageLabelDescriptionAliases' );
+
+		$codes = WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages();
+		$names = Language::fetchLanguageNames( null, 'all' );
+		$options = array();
+		foreach ( $codes as $code ) {
+			$options[isset( $names[$code] ) ? $names[$code] : $code] = $code;
+		}
+
 		$langCode = $this->contentLanguage->getCode();
 		$langName = Language::fetchLanguageName( $langCode );
 		$langDir = $this->contentLanguage->getDir();
 		return array(
 			'lang' => array(
 				'name' => 'lang',
+				'options' => $options,
 				'default' => $langCode,
-				'type' => 'hidden'
+				'type' => 'select',
+				'id' => 'wb-newentity-lang',
+				'cssclass' => 'wb-input',
+				'label-message' => 'wikibase-newentity-language'
 			),
 			'label' => array(
 				'name' => 'label',
@@ -241,8 +254,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
-					'wikibase-label-edit-placeholder-language-aware',
-					$langName
+					'wikibase-label-edit-placeholder'
 				)->text(),
 				'label-message' => 'wikibase-newentity-label'
 			),
@@ -255,8 +267,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
-					'wikibase-description-edit-placeholder-language-aware',
-					$langName
+					'wikibase-description-edit-placeholder'
 				)->text(),
 				'label-message' => 'wikibase-newentity-description'
 			),
@@ -269,8 +280,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
-					'wikibase-aliases-edit-placeholder-language-aware',
-					$langName
+					'wikibase-aliases-edit-placeholder'
 				)->text(),
 				'label-message' => 'wikibase-newentity-aliases'
 			)
