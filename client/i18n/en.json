@@ -67,6 +67,7 @@
 	"unconnectedpages": "Pages not connected to items",
 	"unconnectedpages-summary": "This page lists pages with no connected data item (in namespaces that support connected items). The list is sorted by descending page ID, so that newer pages are listed first.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|interlanguage links}} on the page)",
+	"wikibase-unconnectedpages-submit": "Show pages",
 	"pageswithbadges": "Pages with badges",
 	"pageswithbadges-summary": "This page lists pages with badges (e.g. good article or featured article). The list is sorted by descending page ID, so that newer pages are listed first.",
 	"wikibase-pageswithbadges-invalid-id": "$1 is not a valid item id",

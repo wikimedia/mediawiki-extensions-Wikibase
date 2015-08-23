@@ -4,7 +4,9 @@ namespace Wikibase\Client\Specials;
 
 use DatabaseBase;
 use FakeResultWrapper;
+use Html;
 use Linker;
+use MWNamespace;
 use QueryPage;
 use ResultWrapper;
 use Skin;
@@ -108,7 +110,13 @@ class SpecialUnconnectedPages extends QueryPage {
 			$conds[] = 'page_title >= ' . $dbr->addQuotes( $title->getDBkey() );
 			$conds[] = 'page_namespace = ' . (int)$title->getNamespace();
 		}
-		$conds[] = 'page_namespace IN (' . implode( ',', $checker->getWikibaseNamespaces() ) . ')';
+		$wbNamespaces = $checker->getWikibaseNamespaces();
+		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
+		if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
+			$conds[] = 'page_namespace = ' . $ns;
+		} else {
+			$conds[] = 'page_namespace IN (' . implode( ',', $wbNamespaces ) . ')';
+		}
 
 		return $conds;
 	}
@@ -182,12 +190,57 @@ class SpecialUnconnectedPages extends QueryPage {
 	}
 
 	/**
+	 * @see QueryPage::getPageHeader
+	 *
+	 * @return string
+	 */
+	public function getPageHeader() {
+		$excludeNamespaces = array_diff(
+			MWNamespace::getValidNamespaces(),
+			$this->getNamespaceChecker()->getWikibaseNamespaces()
+		);
+
+		$limit = $this->getRequest()->getIntOrNull( 'limit' );
+		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
+
+		return Html::openElement(
+			'form',
+			array(
+				'action' => $this->getPageTitle()->getLocalURL()
+			)
+		) .
+		( $limit === null ? '' : Html::hidden( 'limit', $limit ) ) .
+		Html::namespaceSelector( array(
+			'selected' => $ns === null ? '' : $ns,
+			'all' => '',
+			'exclude' => $excludeNamespaces,
+			'label' => $this->msg( 'namespace' )->text()
+		) ) . ' ' .
+		Html::submitButton(
+			$this->msg( 'wikibase-unconnectedpages-submit' )->text(),
+			array()
+		) .
+		Html::closeElement( 'form' );
+	}
+
+	/**
 	 * @see SpecialPage::getGroupName
 	 *
 	 * @return string
 	 */
 	protected function getGroupName() {
 		return 'maintenance';
+	}
+
+	/**
+	 * @see QueryPage::linkParameters
+	 *
+	 * @return array
+	 */
+	public function linkParameters() {
+		return array(
+			'namespace' => $this->getRequest()->getIntOrNull( 'namespace' ),
+		);
 	}
 
 }
