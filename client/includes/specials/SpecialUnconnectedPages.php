@@ -4,7 +4,9 @@ namespace Wikibase\Client\Specials;
 
 use DatabaseBase;
 use FakeResultWrapper;
+use Html;
 use Linker;
+use MWNamespace;
 use QueryPage;
 use ResultWrapper;
 use Skin;
@@ -108,7 +110,13 @@ class SpecialUnconnectedPages extends QueryPage {
 			$conds[] = 'page_title >= ' . $dbr->addQuotes( $title->getDBkey() );
 			$conds[] = 'page_namespace = ' . (int)$title->getNamespace();
 		}
-		$conds[] = 'page_namespace IN (' . implode( ',', $checker->getWikibaseNamespaces() ) . ')';
+		$wbNamespaces = $checker->getWikibaseNamespaces();
+		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
+		if ( $ns !== null && in_array( $ns, $wbNamespaces ) ) {
+			$conds[] = 'page_namespace = ' . $ns;
+		} else {
+			$conds[] = 'page_namespace IN (' . implode( ',', $wbNamespaces ) . ')';
+		}
 
 		return $conds;
 	}
@@ -179,6 +187,28 @@ class SpecialUnconnectedPages extends QueryPage {
 		}
 
 		return $out;
+	}
+
+	public function execute( $par ) {
+		$excludeNamespaces = array_diff(
+			MWNamespace::getValidNamespaces(),
+			$this->getNamespaceChecker()->getWikibaseNamespaces()
+		);
+		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
+		$out = $this->getOutput();
+		$out->addHTML(
+			Html::openElement( 'form' )
+			. Html::namespaceSelector( array(
+				'selected' => $ns === null ? '' : $ns,
+				'all' => '',
+				'exclude' => $excludeNamespaces,
+				'label' => $this->msg( 'namespace' )->text()
+			) )
+			. '<br/>'
+			. Html::submitButton( $this->msg( 'htmlform-submit' )->text(), array() )
+			. Html::closeElement( 'form' )
+		);
+		parent::execute( $par );
 	}
 
 	/**
