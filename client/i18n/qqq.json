@@ -78,6 +78,7 @@
 	"unconnectedpages": "{{doc-special|UnconnectedPages}}",
 	"unconnectedpages-summary": "Introductory text used on Special:UnconnectedPages.",
 	"wikibase-unconnectedpages-format-row": "Formatting of the additional data for each row in the result set on the special page for pages not connected to sitelinks.\n\nThis message follows the page title (with link).\n\nParameters:\n* $1 - number of inter-language links",
+	"wikibase-unconnectedpages-submit": "Label for the button that activates the action",
 	"pageswithbadges": "{{doc-special|PagesWithBadges}}",
 	"pageswithbadges-summary": "Introductory text used on Special:PagesWithBadges.",
 	"wikibase-pageswithbadges-invalid-id": "Error message when an invalid id is passed to the special page. Parameters:\n* $1 - the invalid ID",
