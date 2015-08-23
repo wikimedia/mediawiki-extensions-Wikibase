@@ -6,14 +6,19 @@ use DataTypes\DataTypeFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Exception;
+use GuzzleHttp\Client;
 use Language;
 use LogicException;
+use Mediawiki\Api\MediawikiApi;
 use MediaWikiSite;
 use MWException;
 use Site;
 use SiteSQLStore;
 use SiteStore;
 use StubObject;
+use Wikibase\Api\Lookup\EntityApiLookup;
+use Wikibase\Api\Lookup\TermApiLookup;
+use Wikibase\Api\WikibaseFactory;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
@@ -213,18 +218,32 @@ final class WikibaseClient {
 		return $this->entityIdParser;
 	}
 
+	private function getApi() {
+		$client = new Client( array(
+			'base_url' => 'http://www.wikidata.org/w/api.php',
+			'defaults' => array(
+				'verify' => false,
+			),
+		) );
+		return new MediawikiApi( $client );
+	}
+
+	private function getApiFactory() {
+		return new WikibaseFactory( $this->getApi() );
+	}
+
 	/**
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		return $this->getStore()->getEntityLookup();
+		return new EntityApiLookup( $this->getApiFactory()->newRevisionGetter() );
 	}
 
 	/**
 	 * @return TermLookup
 	 */
 	private function getTermLookup() {
-		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
+		return new TermApiLookup( $this->getEntityLookup() );
 	}
 
 	/**
