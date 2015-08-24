@@ -66,7 +66,7 @@ class ClaimHtmlGenerator {
 	 * @param Statement $statement
 	 * @param null|string $editSectionHtml has the html for the edit section
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function getHtmlForClaim( Statement $statement, $editSectionHtml = null ) {
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
@@ -109,9 +109,9 @@ class ClaimHtmlGenerator {
 	 *
 	 * @param SnakList $qualifiers
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function getHtmlForQualifiers( SnakList $qualifiers ) {
+	private function getHtmlForQualifiers( SnakList $qualifiers ) {
 		$qualifiersByProperty = new ByPropertyIdGrouper( $qualifiers );
 
 		$snaklistviewsHtml = '';
@@ -130,9 +130,9 @@ class ClaimHtmlGenerator {
 	 *
 	 * @param ReferenceList $referenceList
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function getHtmlForReferences( ReferenceList $referenceList ) {
+	private function getHtmlForReferences( ReferenceList $referenceList ) {
 		$referencesHtml = '';
 
 		foreach ( $referenceList as $reference ) {
@@ -155,9 +155,9 @@ class ClaimHtmlGenerator {
 	 *
 	 * @param Reference $reference
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function getHtmlForReference( $reference ) {
+	private function getHtmlForReference( Reference $reference ) {
 		$snaks = $reference->getSnaks();
 
 		$referenceSnaksByProperty = new ByPropertyIdGrouper( $snaks );
@@ -182,9 +182,9 @@ class ClaimHtmlGenerator {
 	 *
 	 * @param Snak[] $snaks
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function getSnaklistviewHtml( $snaks ) {
+	private function getSnaklistviewHtml( array $snaks ) {
 		$snaksHtml = '';
 		$i = 0;
 
@@ -198,7 +198,7 @@ class ClaimHtmlGenerator {
 	/**
 	 * @param Statement $statement
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getReferencesHeading( Statement $statement ) {
 		$referenceCount = count( $statement->getReferences() );
@@ -218,7 +218,7 @@ class ClaimHtmlGenerator {
 	/**
 	 * @param string $serializedRank
 	 *
-	 * @return string
+	 * @return string Text
 	 */
 	private function getStatementRankText( $serializedRank ) {
 		if ( !array_key_exists( $serializedRank, $this->statementRankText ) ) {
