@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_4c64c5ae",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-24T12:22:33Z",
+      "side": 1,
+      "message": "Using Xml::languageSelector is totally fine for the moment. I agree that it makes sense to reuse the languageSuggester module when it is merged. But this can easily be done in a separate patch.",
+      "parentUuid": "6ec1af18_3153d66f",
+      "revId": "e993b68aad9c944ead1e2f43713b0bad73d1c875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_91ddea75",
         "filename": "repo/includes/specials/SpecialNewEntity.php",
         "patchSetId": 1
