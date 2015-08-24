@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_ecc49113",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-24T13:51:41Z",
+      "side": 1,
+      "message": "would be nicer and more easily testable if this was not hard coded :/ \n\nmaybe the number can be small, also.... maybe 10? or 5?",
+      "revId": "700f30456facaf40c3c0c98b05d32d91045c46de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
