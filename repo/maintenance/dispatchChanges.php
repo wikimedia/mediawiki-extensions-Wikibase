@@ -48,7 +48,7 @@ class DispatchChanges extends Maintenance {
 		$this->addOption( 'idle-delay', "Seconds to sleep when idle. Default: 10", false, true );
 		$this->addOption( 'dispatch-interval', "How often to dispatch to each target wiki. "
 					. "Default: every 60 seconds", false, true );
-		$this->addOption( 'lock-grace-interval', "Seconds after wich to probe for orphaned locks. "
+		$this->addOption( 'lock-grace-interval', "Seconds after which to probe for orphaned locks. "
 					. "Default: 60", false, true );
 		$this->addOption( 'randomness', "Number of least current target wikis to pick from at random. "
 					. "Default: 10.", false, true );
