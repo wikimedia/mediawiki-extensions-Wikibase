@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_11deda14",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageSuggester.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-24T10:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_b1e266fe",
+      "revId": "5fc1eba530a39041d8c75f94f44bdedf7416f6d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_711dde13",
         "filename": "repo/resources/wikibase.special/wikibase.special.languageSuggester.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-24T09:36:44Z",
       "side": 1,
       "message": "Now this code is executed on every page, possibly slowing down loading. Please reorganize the code so this is not executed if $( \u0027.wb-language-suggester\u0027 ).length \u003d\u003d\u003d 0.",
+      "revId": "5fc1eba530a39041d8c75f94f44bdedf7416f6d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_b1e4a6dc",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageSuggester.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-24T10:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_711dde13",
       "revId": "5fc1eba530a39041d8c75f94f44bdedf7416f6d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
