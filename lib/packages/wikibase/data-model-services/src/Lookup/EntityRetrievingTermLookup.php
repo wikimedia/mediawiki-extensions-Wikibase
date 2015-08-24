@@ -45,11 +45,8 @@ class EntityRetrievingTermLookup implements TermLookup {
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		$fingerprint = $this->getFingerprint( $entityId, array( $languageCode ) );
 
-		/** @var Fingerprint $fingerprint */
-		$labels = $fingerprint->getLabels();
-
 		try {
-			return $labels->getByLanguage( $languageCode )->getText();
+			return $fingerprint->getLabel( $languageCode )->getText();
 		} catch ( OutOfBoundsException $ex ) {
 			return null;
 		}
@@ -66,8 +63,6 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 */
 	public function getLabels( EntityId $entityId, array $languages ) {
 		$fingerprint = $this->getFingerprint( $entityId, $languages );
-
-		/** @var Fingerprint $fingerprint */
 		$labels = $fingerprint->getLabels()->toTextArray();
 
 		return array_intersect_key( $labels, array_flip( $languages ) );
@@ -85,12 +80,9 @@ class EntityRetrievingTermLookup implements TermLookup {
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		$fingerprint = $this->getFingerprint( $entityId, array( $languageCode ) );
 
-		/** @var Fingerprint $fingerprint */
-		$descriptions = $fingerprint->getDescriptions();
-
-		try{
-			return $descriptions->getByLanguage( $languageCode )->getText();
-		} catch( OutOfBoundsException $ex ) {
+		try {
+			return $fingerprint->getDescription( $languageCode )->getText();
+		} catch ( OutOfBoundsException $ex ) {
 			return null;
 		}
 	}
@@ -106,9 +98,6 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 */
 	public function getDescriptions( EntityId $entityId, array $languages ) {
 		$fingerprint = $this->getFingerprint( $entityId, $languages );
-
-
-		/** @var Fingerprint $fingerprint */
 		$descriptions = $fingerprint->getDescriptions()->toTextArray();
 
 		return array_intersect_key( $descriptions, array_flip( $languages ) );
@@ -141,7 +130,7 @@ class EntityRetrievingTermLookup implements TermLookup {
 	private function fetchFingerprint( EntityId $entityId, array $languages ) {
 		$entity = $this->entityLookup->getEntity( $entityId );
 
-		if( $entity === null ) {
+		if ( $entity === null ) {
 			throw new TermLookupException( $entityId, $languages, 'The entity could not be loaded' );
 		}
 

@@ -34,6 +34,21 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		return $entityLookup;
 	}
 
+	public function testConstructor() {
+		$lookup = new RestrictedEntityLookup( $this->getEntityLookup(), 1 );
+		$this->assertInstanceOf(
+			'Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup',
+			$lookup
+		);
+	}
+
+	/**
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function testConstructor_exception() {
+		new RestrictedEntityLookup( $this->getEntityLookup(), 0 );
+	}
+
 	public function testHasEntity() {
 		$lookup = new RestrictedEntityLookup( $this->getEntityLookup(), 200 );
 

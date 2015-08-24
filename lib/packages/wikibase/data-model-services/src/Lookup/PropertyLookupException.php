@@ -24,7 +24,7 @@ class PropertyLookupException extends EntityLookupException {
 	 * @return PropertyId
 	 */
 	public function getPropertyId() {
-		return parent::getEntityId();
+		return $this->getEntityId();
 	}
 
 }

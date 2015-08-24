@@ -44,7 +44,7 @@ class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 		try {
 			$text = $this->termLookup->getLabel( $entityId, $this->languageCode );
 			return new Term( $this->languageCode, $text );
-		} catch( TermLookupException $ex ) {
+		} catch ( TermLookupException $ex ) {
 			throw new LabelDescriptionLookupException( $entityId, 'Failed to lookup label', $ex );
 		}
 	}
@@ -59,8 +59,8 @@ class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 		try {
 			$text = $this->termLookup->getDescription( $entityId, $this->languageCode );
 			return new Term( $this->languageCode, $text );
-		} catch( TermLookupException $ex ) {
-			throw new LabelDescriptionLookupException( $entityId, 'Failed to lookup label', $ex );
+		} catch ( TermLookupException $ex ) {
+			throw new LabelDescriptionLookupException( $entityId, 'Failed to lookup description', $ex );
 		}
 	}
 

@@ -45,9 +45,9 @@ class StatementGuidParser {
 
 		try {
 			return new StatementGuid( $this->entityIdParser->parse( $keyParts[0] ), $keyParts[1] );
-		}
-		catch( EntityIdParsingException $exception ) {
-			throw new StatementGuidParsingException( '$serialization contains invalid EntityId: ' . $exception->getMessage() );
+		} catch ( EntityIdParsingException $ex ) {
+			throw new StatementGuidParsingException( '$serialization contains invalid EntityId: '
+				. $ex->getMessage() );
 		}
 	}
 

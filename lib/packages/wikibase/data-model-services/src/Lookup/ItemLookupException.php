@@ -24,7 +24,7 @@ class ItemLookupException extends EntityLookupException {
 	 * @return ItemId
 	 */
 	public function getItemId() {
-		return parent::getEntityId();
+		return $this->getEntityId();
 	}
 
 }
