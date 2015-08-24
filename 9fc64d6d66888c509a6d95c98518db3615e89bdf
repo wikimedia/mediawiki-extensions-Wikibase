@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_f1878e64",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T08:59:28Z",
+      "side": 1,
+      "message": "Why is this not removed but others are..??",
+      "revId": "9fc64d6d66888c509a6d95c98518db3615e89bdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

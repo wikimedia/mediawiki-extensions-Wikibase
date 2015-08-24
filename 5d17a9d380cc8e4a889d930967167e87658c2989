@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_51b9c227",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataRequestHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T08:59:28Z",
+      "side": 0,
+      "message": "Why is this removed?",
+      "revId": "5d17a9d380cc8e4a889d930967167e87658c2989",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_31be7614",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T08:59:28Z",
+      "side": 0,
+      "message": "Why is this removed?",
+      "revId": "5d17a9d380cc8e4a889d930967167e87658c2989",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_91af2ade",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTestData.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T08:59:28Z",
+      "side": 0,
+      "message": "Why is this removed?",
+      "revId": "5d17a9d380cc8e4a889d930967167e87658c2989",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_d1adb2e8",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialEntityDataTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T08:59:28Z",
+      "side": 0,
+      "message": "Why is this removed?",
+      "revId": "5d17a9d380cc8e4a889d930967167e87658c2989",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
