@@ -88,7 +88,13 @@ class TermSqlIndexTest extends TermIndexTest {
 	/**
 	 * @dataProvider labelWithDescriptionConflictProvider
 	 */
-	public function testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected ) {
+	public function testGetLabelWithDescriptionConflicts(
+		array $entities,
+		$entityType,
+		array $labels,
+		array $descriptions,
+		array $expected
+	) {
 		$this->markTestSkippedOnMySql();
 
 		parent::testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected );

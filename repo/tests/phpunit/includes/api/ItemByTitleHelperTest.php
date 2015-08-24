@@ -53,7 +53,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param ItemId|null $itemId
+	 * @param mixed $itemId
 	 * @return SiteLinkLookup
 	 */
 	public function getSiteLinkLookupMock( $itemId = null ) {
@@ -205,7 +205,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider notEnoughInputProvider
 	 */
-	public function testNotEnoughInput( $sites, $titles, $normalize ) {
+	public function testNotEnoughInput( array $sites, array $titles, $normalize ) {
 		$this->setExpectedException( 'UsageException' );
 
 		$itemByTitleHelper = new ItemByTitleHelper(

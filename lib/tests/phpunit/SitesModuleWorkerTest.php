@@ -30,7 +30,11 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return SitesModuleWorker
 	 */
-	private function newSitesModuleWorker( $sites, $groups, $specialGroups ) {
+	private function newSitesModuleWorker(
+		array $sites = array(),
+		array $groups = array(),
+		array $specialGroups = array()
+	) {
 		$siteStore = $this->getMock( '\SiteStore' );
 		$siteStore->expects( $this->any() )
 			->method( 'getSites' )
@@ -49,7 +53,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @dataProvider getScriptProvider
 	 */
-	public function testGetScript( $sites, $groups, $specialGroups, $expected ) {
+	public function testGetScript( array $sites, array $groups, array $specialGroups, $expected ) {
 		$worker = $this->newSitesModuleWorker( $sites, $groups, $specialGroups );
 
 		$result = $worker->getScript();
@@ -94,7 +98,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getModifiedHashProvider
 	 */
-	public function testGetModifiedHash( $workerLists ) {
+	public function testGetModifiedHash( array $workerLists ) {
 		$results = array();
 
 		/** @var SitesModuleWorker[] $workers */
@@ -132,21 +136,21 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 			array(
 				array(
 					'empty workers' => array(
-						$this->newSitesModuleWorker( array(), array(), array() ),
-						$this->newSitesModuleWorker( array(), array(), array() ),
+						$this->newSitesModuleWorker(),
+						$this->newSitesModuleWorker(),
 					// Should ignore non-MW-sites
-					// $this->newSitesModuleWorker( array( $nonMwSite ), array(), array() ),
+					// $this->newSitesModuleWorker( array( $nonMwSite ) ),
 					),
 					'single site' => array(
-						$this->newSitesModuleWorker( array( $site ), array(), array() ),
-						$this->newSitesModuleWorker( array( $site ), array(), array() ),
+						$this->newSitesModuleWorker( array( $site ) ),
+						$this->newSitesModuleWorker( array( $site ) ),
 					// Should ignore non-MW-sites
-					// $this->newSitesModuleWorker( array( $site, $nonMwSite ), array(), array() ),
-					// $this->newSitesModuleWorker( array( $nonMwSite, $site ), array(), array() )
+					// $this->newSitesModuleWorker( array( $site, $nonMwSite ) ),
+					// $this->newSitesModuleWorker( array( $nonMwSite, $site ) )
 					),
 					'single site with configured group' => array(
-						$this->newSitesModuleWorker( array( $site ), array( 'allowedgroup' ), array() ),
-						$this->newSitesModuleWorker( array( $site ), array( 'allowedgroup' ), array() )
+						$this->newSitesModuleWorker( array( $site ), array( 'allowedgroup' ) ),
+						$this->newSitesModuleWorker( array( $site ), array( 'allowedgroup' ) )
 					),
 				)
 			)

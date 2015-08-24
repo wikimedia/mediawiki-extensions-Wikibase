@@ -29,9 +29,9 @@ class MockSiteStore implements SiteStore {
 	}
 
 	/**
-	 * @param array $sites
+	 * @param Site[] $sites
 	 */
-	public function __construct( $sites = array() ) {
+	public function __construct( array $sites = array() ) {
 		$this->saveSites( $sites );
 	}
 

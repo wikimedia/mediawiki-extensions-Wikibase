@@ -124,7 +124,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 		$usageLookup->expects( $this->once() )
 			->method( 'getUnusedEntities' )
 			->with( $this->callback(
-				function ( $actualEntities ) use ( $prunedEntityIds ) {
+				function( array $actualEntities ) use ( $prunedEntityIds ) {
 					return UsageUpdaterTest::arraysHaveSameContent( $prunedEntityIds, $actualEntities );
 				}
 			) )

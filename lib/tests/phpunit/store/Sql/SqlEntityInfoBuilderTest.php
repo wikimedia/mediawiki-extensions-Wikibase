@@ -119,7 +119,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		return $rows;
 	}
 
-	protected function insertRows( $table, $fields, $rows ) {
+	private function insertRows( $table, array $fields, array $rows ) {
 		$dbw = wfGetDB( DB_MASTER );
 
 		foreach ( $rows as $row ) {
