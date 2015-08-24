@@ -128,11 +128,11 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	private function addBadgeMatcher() {
-		$name = 'badge-' . self::$badgeId;
-		self::$matchers['badgeinput'] = tagMatchingOutline( "<input type='checkbox' name='$name' id='$name'>" );
+		$value = self::$badgeId;
+		self::$matchers['badgeinput'] = tagMatchingOutline( "<input type='checkbox' name='badges[]' value='$value'>" );
 
 		self::$matchers['badgelabel'] = both(
-			tagMatchingOutline( "<label for='$name'>" )
+			tagMatchingOutline( "<label>" )
 		)->andAlso(
 			havingTextContents( 'Guter Artikel' )
 		);
@@ -279,17 +279,17 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	private static function createMatchers() {
 		return [
-			'id' => tagMatchingOutline(
-				'<input id="wb-modifyentity-id" class="wb-input" name="id"/>'
+			'id' => both( tagMatchingOutline( '<div id="wb-modifyentity-id" class="wb-input"/>' ) )->andAlso(
+				havingChild( tagMatchingOutline( '<input name="id"/>' ) )
 			),
-			'site' => tagMatchingOutline(
-				'<input id="wb-setsitelink-site" class="wb-input" name="site"/>'
+			'site' => both( tagMatchingOutline( '<div id="wb-setsitelink-site" class="wb-input"/>' ) )->andAlso(
+				havingChild( tagMatchingOutline( '<input name="site"/>' ) )
 			),
-			'page' => tagMatchingOutline(
-				'<input id="wb-setsitelink-page" class="wb-input" name="page"/>'
+			'page' => both( tagMatchingOutline( '<div id="wb-setsitelink-page" class="wb-input"/>' ) )->andAlso(
+				havingChild( tagMatchingOutline( '<input name="page"/>' ) )
 			),
-			'submit' => tagMatchingOutline(
-				'<input id="wb-setsitelink-submit" class="wb-button" type="submit" name="wikibase-setsitelink-submit"/>'
+			'submit' => both( tagMatchingOutline( '<div id="wb-setsitelink-submit"/>' ) )->andAlso(
+				havingChild( tagMatchingOutline( '<button type="submit" name="wikibase-setsitelink-submit"/>' ) )
 			),
 		];
 	}
