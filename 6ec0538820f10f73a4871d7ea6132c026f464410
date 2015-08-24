@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_51f1c2c6",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-24T09:38:40Z",
+      "side": 1,
+      "message": "It\u0027s just the explanation why MobildFrontend still calls this with an array() and why this code needs to stay compatible with that.",
+      "parentUuid": "6ec1af18_71107e53",
+      "revId": "6ec0538820f10f73a4871d7ea6132c026f464410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_b106e61e",
         "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_f1bf8ecb",
+        "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-24T09:38:40Z",
+      "side": 1,
+      "message": "Same here.",
+      "parentUuid": "6ec1af18_b106e61e",
+      "revId": "6ec0538820f10f73a4871d7ea6132c026f464410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_d1093230",
         "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2015-08-24T08:50:20Z",
       "side": 1,
       "message": "same here",
+      "revId": "6ec0538820f10f73a4871d7ea6132c026f464410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_11c33a62",
+        "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-24T09:38:40Z",
+      "side": 1,
+      "message": "Same here.",
+      "parentUuid": "6ec1af18_d1093230",
       "revId": "6ec0538820f10f73a4871d7ea6132c026f464410",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
