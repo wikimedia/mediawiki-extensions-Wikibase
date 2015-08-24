@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_11f25a03",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-24T09:24:29Z",
+      "side": 1,
+      "message": "Wikibase does support more languages than core, that\u0027s why we have our own language selector for labels, descriptions, aliases and other strings that are part of the content. For this patch, replacing the hidden field with core\u0027s selector is ok as an intermediate step. But please add:\n\n @todo Replace with Wikibase\u0027s LanguageSelector when it supports more languages than MediaWiki core.\n @see T78006",
+      "revId": "e993b68aad9c944ead1e2f43713b0bad73d1c875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_91ddea75",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-24T09:24:29Z",
+      "side": 1,
+      "message": "These placeholders currently say \"enter a label in English\", but this does not change when the user changes the language in the selector above. This is not really a problem, but confusing when using the new feature.",
+      "revId": "e993b68aad9c944ead1e2f43713b0bad73d1c875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
