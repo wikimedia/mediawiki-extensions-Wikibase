@@ -18,12 +18,11 @@
 		var siteList = [];
 		for( var siteId in wb.sites.getSites() ) {
 			var site = wb.sites.getSite( siteId );
-			siteList.push( {
-				label: site.getName() + ' (' + site.getId() + ')',
-				value: site.getName() + ' (' + site.getId() + ')'
-			} );
+			siteList.push( site.getName() + ' (' + site.getId() + ')' );
 		}
-		$( '#wb-itembytitle-sitename' ).suggester( { source: siteList } );
+		$( '#wb-itembytitle-sitename' )
+		.attr( 'autocomplete', 'off' )
+		.suggester( { source: siteList } );
 		// Hackety hack hack...
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
 		$( '#wb-itembytitle-form1' ).submit( function() {
