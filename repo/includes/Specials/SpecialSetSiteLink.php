@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HTMLForm;
 use Html;
 use InvalidArgumentException;
 use OutOfBoundsException;
@@ -139,12 +140,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->page = $request->getVal( 'page' );
 
-		$this->badges = array();
-		foreach ( $this->badgeItems as $badgeId => $value ) {
-			if ( $request->getVal( 'badge-' . $badgeId ) ) {
-				$this->badges[] = $badgeId;
-			}
-		}
+		$this->badges = array_intersect(
+			array_keys( $this->badgeItems ),
+			$request->getArray( 'badges', array() )
+		);
 	}
 
 	/**
@@ -210,66 +209,61 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialModifyEntity::getFormElements()
+	 * @see SpecialModifyEntity::getForm()
 	 *
 	 * @param EntityDocument|null $entity
 	 *
-	 * @return string HTML
+	 * @return HTMLForm
 	 */
-	protected function getFormElements( EntityDocument $entity = null ) {
+	protected function getForm( EntityDocument $entity = null ) {
 		if ( $this->page === null ) {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
 		if ( empty( $this->badges ) ) {
 			$this->badges = $this->site === null ? array() : $this->getBadges( $entity, $this->site );
 		}
-		$pageinput = Html::element( 'br' )
-			. Html::label(
-				$this->msg( 'wikibase-setsitelink-label' )->text(),
-				'wb-setsitelink-page',
-				array(
-					'class' => 'wb-label'
-				)
-			) .
-			Html::input(
-				'page',
-				$this->getRequest()->getVal( 'page' ) ?: $this->page,
-				'text',
-				array(
-					'class' => 'wb-input',
-					'id' => 'wb-setsitelink-page',
-				)
-			);
+		$pageinput = array(
+			'page' => array(
+				'name' => 'page',
+				'label-message' => 'wikibase-setsitelink-label',
+				'type' => 'text',
+				'default' => $this->getRequest()->getVal( 'page' ) ?: $this->page,
+				'nodata' => true,
+				'cssclass' => 'wb-input wb-input-text',
+				'id' => 'wb-setsitelink-page'
+			)
+		);
 
 		if ( !empty( $this->badgeItems ) ) {
-			$pageinput .= Html::element( 'br' )
-			. Html::label(
-				$this->msg( 'wikibase-setsitelink-badges' )->text(),
-				'wb-setsitelink-badges',
-				array(
-					'class' => 'wb-label'
-				)
-			)
-			. $this->getHtmlForBadges();
+			$pageinput['badges'] = $this->getMultiSelectForBadges();
 		}
 
 		$site = $this->siteLookup->getSite( $this->site );
 
 		if ( $entity !== null && $this->site !== null && $site !== null ) {
 			// show the detailed form which also allows users to remove site links
-			return Html::rawElement(
-				'p',
-				array(),
-				$this->msg(
-					'wikibase-setsitelink-introfull',
-					$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
-					'[' . $site->getPageUrl( '' ) . ' ' . $this->site . ']'
-				)->parse()
-			)
-			. Html::input( 'site', $this->site, 'hidden' )
-			. Html::input( 'id', $this->entityRevision->getEntity()->getId()->getSerialization(), 'hidden' )
-			. Html::input( 'remove', 'remove', 'hidden' )
-			. $pageinput;
+			$intro = $this->msg(
+				'wikibase-setsitelink-introfull',
+				$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
+				'[' . $site->getPageUrl( '' ) . ' ' . $this->site . ']'
+			)->parse();
+			$formDescriptor = array(
+				'site' => array(
+					'name' => 'site',
+					'type' => 'hidden',
+					'default' => $this->site
+				),
+				'id' => array(
+					'name' => 'id',
+					'type' => 'hidden',
+					'default' => $this->entityRevision->getEntity()->getId()->getSerialization()
+				),
+				'remove' => array(
+					'name' => 'remove',
+					'type' => 'hidden',
+					'default' => 'remove'
+				)
+			);
 		} else {
 			$intro = $this->msg( 'wikibase-setsitelink-intro' )->text();
 
@@ -277,40 +271,30 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				$intro .= $this->msg( 'word-separator' )->text() . $this->msg( 'wikibase-setsitelink-intro-badges' )->text();
 			}
 
-			return Html::element(
-				'p',
-				array(),
-				$intro
-			)
-			. parent::getFormElements( $entity )
-			. Html::element( 'br' )
-			. Html::label(
-				$this->msg( 'wikibase-setsitelink-site' )->text(),
-				'wb-setsitelink-site',
-				array(
-					'class' => 'wb-label'
-				)
-			)
-			. Html::input(
-				'site',
-				$this->getRequest()->getVal( 'site' ) ?: $this->site,
-				'text',
-				array(
-					'class' => 'wb-input',
-					'id' => 'wb-setsitelink-site'
-				)
-			)
-			. $pageinput;
+			$formDescriptor = $this->getFormElements( $entity );
+			$formDescriptor['site'] = array(
+				'name' => 'site',
+				'label-message' => 'wikibase-setsitelink-site',
+				'type' => 'text',
+				'default' => $this->getRequest()->getVal( 'site' ) ?: $this->site,
+				'cssclass' => 'wb-input',
+				'id' => 'wb-setsitelink-site'
+			);
 		}
+		$formDescriptor = array_merge( $formDescriptor, $pageinput );
+
+		return HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
+			->setHeaderText( Html::rawElement( 'p', array(), $intro ) );
 	}
 
 	/**
-	 * Returns the HTML containing a checkbox for each badge.
+	 * Returns an array for generating a checkbox for each badge.
 	 *
-	 * @return string
+	 * @return array
 	 */
-	private function getHtmlForBadges() {
-		$options = '';
+	private function getMultiSelectForBadges() {
+		$options = array();
+		$default = array();
 
 		/** @var ItemId[] $badgeItemIds */
 		$badgeItemIds = array_map(
@@ -327,28 +311,23 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		foreach ( $badgeItemIds as $badgeId ) {
 			$idSerialization = $badgeId->getSerialization();
-			$name = 'badge-' . $idSerialization;
 
 			$label = $labelLookup->getLabel( $badgeId );
 			$label = $label === null ? $idSerialization : $label->getText();
 
-			$options .= Html::rawElement(
-				'div',
-				array(
-					'class' => 'wb-label'
-				),
-				Html::check(
-					$name,
-					in_array( $idSerialization, $this->badges ),
-					array(
-						'id' => $name
-					)
-				)
-				. Html::label( $label, $name )
-			);
+			$options[$label] = $idSerialization;
+			if ( in_array( $idSerialization, $this->badges ) ) {
+				$default[] = $idSerialization;
+			}
 		}
 
-		return $options;
+		return array(
+			'name' => 'badges',
+			'type' => 'multiselect',
+			'label-message' => 'wikibase-setsitelink-badges',
+			'options' => $options,
+			'default' => $default
+		);
 	}
 
 	/**
