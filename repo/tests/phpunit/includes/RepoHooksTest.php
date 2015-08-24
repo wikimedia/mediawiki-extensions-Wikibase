@@ -4,7 +4,6 @@ namespace Wikibase\Tests;
 
 use ConfigFactory;
 use DerivativeContext;
-use Exception;
 use ImportStringSource;
 use OutputPage;
 use RequestContext;
