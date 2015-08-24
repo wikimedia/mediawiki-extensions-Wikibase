@@ -30,7 +30,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return TermValidatorFactory
 	 */
-	private function newFactory( $maxLength, $languageCodes ) {
+	private function newFactory( $maxLength, array $languageCodes ) {
 		$idParser = new BasicEntityIdParser();
 
 		$mockProvider = new ChangeOpTestMockProvider( $this );

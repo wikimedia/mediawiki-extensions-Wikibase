@@ -68,7 +68,7 @@ class EntityModificationTestHelper {
 	 *        If the entity does not have an ID and the corresponding array key is a string,
 	 *        they key is used as the entity ID.
 	 */
-	public function putEntities( $entities ) {
+	public function putEntities( array $entities ) {
 		foreach ( $entities as $key => $entity ) {
 			$id = is_string( $key ) ? $key : null;
 			$this->putEntity( $entity, $id );
@@ -83,7 +83,7 @@ class EntityModificationTestHelper {
 	 *        the corresponding array key and value; the key is parsed as an EntityId, the value
 	 *        is also parsed if it's a string.
 	 */
-	public function putRedirects( $redirects ) {
+	public function putRedirects( array $redirects ) {
 		foreach ( $redirects as $key => $redirect ) {
 			if ( !( $redirect instanceof EntityRedirect ) ) {
 				$from = $this->idParser->parse( $key );

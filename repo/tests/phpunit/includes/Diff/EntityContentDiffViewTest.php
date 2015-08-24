@@ -128,7 +128,7 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider itemProvider
 	 */
-	public function testGenerateContentDiffBody( ItemContent $itemContent, ItemContent $itemContent2, $matchers ) {
+	public function testGenerateContentDiffBody( ItemContent $itemContent, ItemContent $itemContent2, array $matchers ) {
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setLanguage( Language::factory( 'en' ) );
 

@@ -85,7 +85,7 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider aspectKeyProvider
 	 */
-	public function testStripModifier( $aspectKey, $expectedParts ) {
+	public function testStripModifier( $aspectKey, array $expectedParts ) {
 		$aspect = EntityUsage::stripModifier( $aspectKey );
 		$this->assertEquals( $expectedParts[0], $aspect );
 	}
@@ -93,7 +93,7 @@ class EntityUsageTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider aspectKeyProvider
 	 */
-	public function testSplitAspectKey( $aspectKey, $expectedParts ) {
+	public function testSplitAspectKey( $aspectKey, array $expectedParts ) {
 		$parts = EntityUsage::splitAspectKey( $aspectKey );
 		$this->assertEquals( $expectedParts, $parts );
 	}

@@ -291,10 +291,10 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	public function testDoContentAlterParserOutput(
 		Title $title,
 		$expectedItem,
-		$pagePropsBefore,
-		$expectedLanguageLinks,
-		$expectedSisterLinks,
-		$expectedBadges
+		array $pagePropsBefore,
+		array $expectedLanguageLinks,
+		array $expectedSisterLinks,
+		array $expectedBadges = null
 	) {
 		$parserOutput = $this->newParserOutput( $pagePropsBefore, array() );
 		$handler = $this->newParserOutputUpdateHookHandlers();

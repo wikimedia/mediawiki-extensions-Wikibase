@@ -54,7 +54,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testConstructorWithInvalidArguments( $siteId, $linkPage, $badges = null ) {
+	public function testConstructorWithInvalidArguments( $siteId, $linkPage, array $badges = null ) {
 		new ChangeOpSiteLink( $siteId, $linkPage, $badges );
 	}
 

@@ -30,7 +30,7 @@ class GenericExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetExceptionMessage
 	 */
-	public function testGetExceptionMessage( Exception $ex, $expectedKey, $expectedParams ) {
+	public function testGetExceptionMessage( Exception $ex, $expectedKey, array $expectedParams ) {
 		$localizer = new GenericExceptionLocalizer();
 
 		$this->assertTrue( $localizer->hasExceptionMessage( $ex ) );

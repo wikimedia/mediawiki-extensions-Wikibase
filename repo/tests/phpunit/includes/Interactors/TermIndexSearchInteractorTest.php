@@ -306,7 +306,11 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @param array $params
 	 * @param array[] $expectedTermsDetails each element has a 'term', 'termtype' and a 'entityId' key
 	 */
-	public function testSearchForEntities_returnsExpectedResults( $interactor, $params, $expectedTermsDetails ) {
+	public function testSearchForEntities_returnsExpectedResults(
+		TermIndexSearchInteractor $interactor,
+		array $params,
+		array $expectedTermsDetails
+	) {
 		// $interactor->searchForEntities() call
 		$results = call_user_func_array( array( $interactor, 'searchForEntities' ), $params );
 

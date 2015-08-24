@@ -73,7 +73,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityPermissionChecker
 	 */
-	private function getEntityPermissionChecker( $permissions ) {
+	private function getEntityPermissionChecker( array $permissions = null ) {
 		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 
 		$checkAction = function( $user, $action ) use ( $permissions ) {
@@ -623,7 +623,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider dataAttemptSaveRateLimit
 	 */
-	public function testAttemptSaveRateLimit( $limits, $groups, $edits ) {
+	public function testAttemptSaveRateLimit( array $limits, array $groups, array $edits ) {
 		$repo = $this->getMockRepository();
 
 		$this->setMwGlobals(

@@ -107,7 +107,14 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	/**
 	 * @dataProvider provideDetectLabelDescriptionConflicts
 	 */
-	public function testDetectLabelDescriptionConflicts( $world, $entityType, $labels, $descriptions, $ignore, $expectedErrors ) {
+	public function testDetectLabelDescriptionConflicts(
+		array $world,
+		$entityType,
+		array $labels,
+		array $descriptions,
+		$ignore,
+		array $expectedErrors
+	) {
 		$detector = new LabelDescriptionDuplicateDetector( new MockTermIndex( $world ) );
 
 		$result = $detector->detectLabelDescriptionConflicts( $entityType, $labels, $descriptions, $ignore );
@@ -245,7 +252,14 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	/**
 	 * @dataProvider provideDetectLabelConflicts
 	 */
-	public function testDetectLabelConflicts( $world, $entityType, $labels, $aliases, $ignore, $expectedErrors ) {
+	public function testDetectLabelConflicts(
+		array $world,
+		$entityType,
+		array $labels,
+		array $aliases = null,
+		$ignore,
+		array $expectedErrors
+	) {
 		$detector = new LabelDescriptionDuplicateDetector( new MockTermIndex( $world ) );
 
 		$result = $detector->detectLabelConflicts( $entityType, $labels, $aliases, $ignore );
@@ -257,7 +271,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	 * @param Result $result
 	 * @param Error[] $expectedErrors
 	 */
-	protected function assertResult( Result $result, $expectedErrors ) {
+	protected function assertResult( Result $result, array $expectedErrors ) {
 		$this->assertEquals( empty( $expectedErrors ), $result->isValid(), 'isValid()' );
 		$errors = $result->getErrors();
 

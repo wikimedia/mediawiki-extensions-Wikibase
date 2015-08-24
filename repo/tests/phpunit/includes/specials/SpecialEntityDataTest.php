@@ -143,7 +143,14 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	 * @param int    $expCode     Expected HTTP status code
 	 * @param array  $expHeaders  Expected HTTP response headers
 	 */
-	public function testExecute( $subpage, $params, $headers, $expRegExp, $expCode = 200, $expHeaders = array() ) {
+	public function testExecute(
+		$subpage,
+		array $params,
+		array $headers,
+		$expRegExp,
+		$expCode = 200,
+		array $expHeaders = array()
+	) {
 		$request = new FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 

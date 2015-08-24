@@ -224,7 +224,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddSnakValue
 	 */
-	public function testAddSnakValue( PropertyId $propertyId, DataValue $value, $expectedTriples ) {
+	public function testAddSnakValue( PropertyId $propertyId, DataValue $value, array $expectedTriples ) {
 		$writer = $this->getTestData()->getNTriplesWriter();
 
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
