@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_cce51508",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-24T12:33:50Z",
+      "side": 1,
+      "message": "type hint for $rowIds would be nice, but can be fixed in a follow up",
+      "revId": "e8c3eb2c3ba0e3986dd806695a9e66da828b0e18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
