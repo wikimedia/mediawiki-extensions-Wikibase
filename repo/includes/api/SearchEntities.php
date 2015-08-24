@@ -176,6 +176,8 @@ class SearchEntities extends ApiBase {
 			$entry = array();
 			$entry['id'] = $match->getEntityId()->getSerialization();
 			$entry['url'] = $title->getFullUrl();
+			$entry['title'] = $title->getPrefixedText();
+			$entry['pageid'] = $title->getArticleID();
 			$displayLabel = $match->getDisplayLabel();
 			if ( !is_null( $displayLabel ) ) {
 				$entry['label'] = $displayLabel->getText();
