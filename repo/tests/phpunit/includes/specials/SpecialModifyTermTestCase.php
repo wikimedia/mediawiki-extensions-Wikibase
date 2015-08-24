@@ -46,34 +46,53 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$page = $this->newSpecialPage();
 
 		$matchers['id'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
-				'name' => 'id',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'id',
+				)
 			) );
 		$matchers['language'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-modifyterm-language',
 				'class' => 'wb-input',
-				'name' => 'language',
-				'value' => 'en',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'language',
+					'value' => 'en',
+				)
 			) );
 		$matchers['value'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
-				'name' => 'value',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'value',
+				)
 			) );
 		$matchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
+			),
+			'child' => array(
+				'tag' => 'button',
+				'attributes' => array(
+					'type' => 'submit',
+					'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
+				)
 			) );
 
 		// execute with no subpage value
@@ -84,16 +103,20 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		// execute with one subpage value
 		list( $output, ) = $this->executeSpecialPage( $id, null, 'en' );
-		$matchers['id']['attributes'] = array(
+		$matchers['id'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'type' => 'hidden',
 				'name' => 'id',
 				'value' => $id,
-			);
-		$matchers['language']['attributes'] = array(
+			) );
+		$matchers['language'] = array(
+			'tag' => 'input',
+			'attributes' => array(
 				'type' => 'hidden',
 				'name' => 'language',
 				'value' => 'en',
-			);
+			) );
 		$matchers['remove'] = array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -109,7 +132,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		// execute with two subpage values
 		list( $output, ) = $this->executeSpecialPage( $id . '/de', null, 'en' );
 		$matchers['language']['attributes']['value'] = 'de';
-		$matchers['value']['attributes']['value'] = 'foo';
+		$matchers['value']['child'][0]['attributes']['value'] = 'foo';
 
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
@@ -126,12 +149,17 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
 		$this->assertTag( array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
-				'name' => 'value',
-				'value' => 'foo',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'value',
+					'value' => 'foo',
+				)
 			)
 		), $output, 'Value still preserves when no value was entered in the big form' );
 	}

@@ -188,71 +188,106 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		global $wgLang;
 
 		$formMatchers['id'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
-				'name' => 'id',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'id',
+				)
 			),
 		);
 		$formMatchers['language'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wikibase-setlabeldescriptionaliases-language',
 				'class' => 'wb-input',
-				'name' => 'language',
-				'value' => $wgLang->getCode(), // Default user language
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'language',
+					'value' => $wgLang->getCode(), // Default user language
+				)
 			),
 		);
 		$formMatchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-setlabeldescriptionaliases-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-setlabeldescriptionaliases-submit',
+			),
+			'child' => array(
+				'tag' => 'button',
+				'attributes' => array(
+					'type' => 'submit',
+					'name' => 'wikibase-setlabeldescriptionaliases-submit',
+				)
 			),
 		);
 
 		$withIdMatchers = $formMatchers;
-		$withIdMatchers['id']['attributes'] = array(
-			'type' => 'hidden',
-			'name' => 'id',
-			'value' => 'regexp:/Q\d+/',
+		$withIdMatchers['id'] = array(
+			'tag' => 'input',
+			'attributes' => array(
+				'type' => 'hidden',
+				'name' => 'id',
+				'value' => 'regexp:/Q\d+/',
+			),
 		);
-		$withIdMatchers['language']['attributes'] = array(
-			'type' => 'hidden',
-			'name' => 'language',
-			'value' => $wgLang->getCode(), // Default user language
+		$withIdMatchers['language'] = array(
+			'tag' => 'input',
+			'attributes' => array(
+				'type' => 'hidden',
+				'name' => 'language',
+				'value' => $wgLang->getCode(), // Default user language
+			),
 		);
 		$withIdMatchers['label'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wikibase-setlabeldescriptionaliases-label',
 				'class' => 'wb-input',
-				'name' => 'label',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'label',
+				)
 			),
 		);
 		$withIdMatchers['description'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wikibase-setlabeldescriptionaliases-description',
 				'class' => 'wb-input',
-				'name' => 'description',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'description',
+				)
 			),
 		);
 		$withIdMatchers['aliases'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wikibase-setlabeldescriptionaliases-aliases',
 				'class' => 'wb-input',
-				'name' => 'aliases',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'aliases',
+				)
 			),
 		);
 
 		$withLanguageMatchers = $withIdMatchers;
 		$withLanguageMatchers['language']['attributes']['value'] = 'de';
-		$withLanguageMatchers['label']['attributes']['value'] = 'foo';
+		$withLanguageMatchers['label']['child'][0]['attributes']['value'] = 'foo';
 
 		$fooFingerprint = $this->makeFingerprint(
 			array( 'de' => 'foo' )

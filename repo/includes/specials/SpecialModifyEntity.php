@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HTMLForm;
 use Html;
 use SiteStore;
 use Wikibase\ChangeOp\ChangeOp;
@@ -254,52 +255,19 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			);
 		}
 
-		// Form header
-		$this->getOutput()->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'method' => 'post',
-					'action' => $this->getPageTitle()->getLocalURL(),
-					'name' => strtolower( $this->getName() ),
-					'id' => 'wb-' . strtolower( $this->getName() ) . '-form1',
-					'class' => 'wb-form'
-				)
-			)
-			. Html::openElement(
-				'fieldset',
-				array( 'class' => 'wb-fieldset' )
-			)
-			. Html::element(
-				'legend',
-				array( 'class' => 'wb-legend' ),
-				$this->msg( 'special-' . strtolower( $this->getName() ) )->text()
-			)
-		);
-
 		// Form elements
-		$this->getOutput()->addHTML( $this->getFormElements( $entity ) );
-
-		// Form body
+		list( $intro, $formDescriptor ) = $this->getFormElements( $entity );
 		$submitKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
-		$this->getOutput()->addHTML(
-			Html::input(
-				$submitKey,
-				$this->msg( $submitKey )->text(),
-				'submit',
-				array(
-					'id' => 'wb-' . strtolower( $this->getName() ) . '-submit',
-					'class' => 'wb-button'
-				)
-			)
-			. Html::input(
-				'wpEditToken',
-				$this->getUser()->getEditToken(),
-				'hidden'
-			)
-			. Html::closeElement( 'fieldset' )
-			. Html::closeElement( 'form' )
-		);
+
+		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
+			->setId( 'wb-' . strtolower( $this->getName() ) . '-form1' )
+			->setHeaderText( Html::rawElement( 'p', array(), $intro ) )
+			->setSubmitID( 'wb-' . strtolower( $this->getName() ) . '-submit' )
+			->setSubmitName( $submitKey )
+			->setSubmitTextMsg( $submitKey )
+			->setWrapperLegendMsg( 'special-' . strtolower( $this->getName() ) )
+			->setSubmitCallback( function () {// no-op
+			} )->show();
 	}
 
 	/**
@@ -314,19 +282,16 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected function getFormElements( EntityDocument $entity = null ) {
 		$id = 'wb-modifyentity-id';
 
-		return Html::label(
-			$this->msg( 'wikibase-modifyentity-id' )->text(),
-			$id,
-			array( 'class' => 'wb-label' )
-		)
-		. Html::input(
-			'id',
-			$entity === null ? '' : $entity->getId(),
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => $id
-			)
+		return array(
+			'id' => array(
+				'name' => 'id',
+				'label-message' => 'wikibase-modifyentity-id',
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => $id,
+				'default' => $entity === null ? '' : $entity->getId(),
+				'cssclass' => 'wb-input'
+			),
 		);
 	}
 
