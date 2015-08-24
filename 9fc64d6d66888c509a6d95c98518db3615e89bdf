@@ -16,6 +16,24 @@
       "revId": "9fc64d6d66888c509a6d95c98518db3615e89bdf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_f1a6aebd",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-24T09:44:13Z",
+      "side": 1,
+      "message": "This is under test, see https://gerrit.wikimedia.org/r/#/c/225518/12/repo/tests/phpunit/data/rdf/dump_entities.nt",
+      "parentUuid": "6ec1af18_f1878e64",
+      "revId": "9fc64d6d66888c509a6d95c98518db3615e89bdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
