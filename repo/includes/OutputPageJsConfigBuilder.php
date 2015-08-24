@@ -31,12 +31,12 @@ class OutputPageJsConfigBuilder {
 	 * @param OutputPage $out
 	 * @param string $rightsUrl
 	 * @param string $rightsText
-	 * @param array $badgeItems
+	 * @param string[] $badgeItems
 	 * @param boolean $isExperimental
 	 *
 	 * @return array
 	 */
-	public function build( OutputPage $out, $rightsUrl, $rightsText, $badgeItems, $isExperimental ) {
+	public function build( OutputPage $out, $rightsUrl, $rightsText, array $badgeItems, $isExperimental ) {
 		$user = $out->getUser();
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
