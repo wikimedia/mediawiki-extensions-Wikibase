@@ -69,6 +69,24 @@
       "revId": "5fc1eba530a39041d8c75f94f44bdedf7416f6d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_71d87ef4",
+        "filename": "repo/resources/wikibase.special/wikibase.special.languageSuggester.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-24T10:56:19Z",
+      "side": 1,
+      "message": "PS: AFAICS it\u0027s only executed on Special:ItemDisambiguation and Special:EntitiesWithout*",
+      "parentUuid": "6ec1af18_b1e4a6dc",
+      "revId": "5fc1eba530a39041d8c75f94f44bdedf7416f6d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
