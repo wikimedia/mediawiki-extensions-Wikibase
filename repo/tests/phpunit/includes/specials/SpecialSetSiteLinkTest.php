@@ -34,33 +34,52 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	 */
 	private static $matchers = array(
 		'id' => array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
-				'name' => 'id',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'id',
+				)
 			) ),
 		'site' => array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-site',
 				'class' => 'wb-input',
-				'name' => 'site',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'site',
+				)
 			) ),
 		'page' => array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-page',
 				'class' => 'wb-input',
-				'name' => 'page',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'page',
+				)
 			) ),
 		'submit' => array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-setsitelink-submit',
+			),
+			'child' => array(
+				'tag' => 'button',
+				'attributes' => array(
+					'type' => 'submit',
+					'name' => 'wikibase-setsitelink-submit',
+				)
 			) )
 	);
 
