@@ -288,14 +288,17 @@ class EditEntity extends ModifyEntity {
 		//       for more efficient validation!
 
 		if ( array_key_exists( 'labels', $data ) ) {
+			$this->assertArray( $data['labels'], 'List of labels must be an array' );
 			$changeOps->add( $this->getLabelChangeOps( $data['labels'] ) );
 		}
 
 		if ( array_key_exists( 'descriptions', $data ) ) {
+			$this->assertArray( $data['descriptions'], 'List of descriptions must be an array' );
 			$changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'] ) );
 		}
 
 		if ( array_key_exists( 'aliases', $data ) ) {
+			$this->assertArray( $data['aliases'], 'List of aliases must be an array' );
 			$changeOps->add( $this->getAliasesChangeOps( $data['aliases'] ) );
 		}
 
@@ -303,11 +306,12 @@ class EditEntity extends ModifyEntity {
 			if ( !( $entity instanceof Item ) ) {
 				$this->errorReporter->dieError( 'Non Items cannot have sitelinks', 'not-recognized' );
 			}
-
+			$this->assertArray( $data['sitelinks'], 'List of sitelinks must be an array' );
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $entity ) );
 		}
 
 		if ( array_key_exists( 'claims', $data ) ) {
+			$this->assertArray( $data['claims'], 'List of claims must be an array' );
 			$changeOps->add( $this->getClaimsChangeOps( $data['claims'] ) );
 		}
 
@@ -315,16 +319,12 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param mixed $labels
+	 * @param array[] $labels
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getLabelChangeOps( $labels ) {
+	private function getLabelChangeOps( array $labels ) {
 		$labelChangeOps = array();
-
-		if ( !is_array( $labels ) ) {
-			$this->errorReporter->dieError( "List of labels must be an array", 'not-recognized-array' );
-		}
 
 		foreach ( $labels as $langCode => $arg ) {
 			$this->validateMultilangArgs( $arg, $langCode );
@@ -344,16 +344,12 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param mixed $descriptions
+	 * @param array[] $descriptions
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getDescriptionChangeOps( $descriptions ) {
+	private function getDescriptionChangeOps( array $descriptions ) {
 		$descriptionChangeOps = array();
-
-		if ( !is_array( $descriptions ) ) {
-			$this->errorReporter->dieError( "List of descriptions must be an array", 'not-recognized-array' );
-		}
 
 		foreach ( $descriptions as $langCode => $arg ) {
 			$this->validateMultilangArgs( $arg, $langCode );
@@ -373,15 +369,11 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param mixed $aliases
+	 * @param array[] $aliases
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getAliasesChangeOps( $aliases ) {
-		if ( !is_array( $aliases ) ) {
-			$this->errorReporter->dieError( "List of aliases must be an array", 'not-recognized-array' );
-		}
-
+	private function getAliasesChangeOps( array $aliases ) {
 		$indexedAliases = $this->getIndexedAliases( $aliases );
 		$aliasesChangeOps = $this->getIndexedAliasesChangeOps( $indexedAliases );
 
@@ -442,18 +434,13 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param mixed $siteLinks
+	 * @param array[] $siteLinks
 	 * @param Item $item
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getSiteLinksChangeOps( $siteLinks, Item $item ) {
+	private function getSiteLinksChangeOps( array $siteLinks, Item $item ) {
 		$siteLinksChangeOps = array();
-
-		if ( !is_array( $siteLinks ) ) {
-			$this->errorReporter->dieError( 'List of sitelinks must be an array', 'not-recognized-array' );
-		}
-
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		foreach ( $siteLinks as $siteId => $arg ) {
@@ -502,15 +489,11 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param mixed $claims
+	 * @param array[] $claims
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getClaimsChangeOps( $claims ) {
-		if ( !is_array( $claims ) ) {
-			$this->errorReporter->dieError( "List of claims must be an array", 'not-recognized-array' );
-		}
-
+	private function getClaimsChangeOps( array $claims ) {
 		$changeOps = array();
 
 		//check if the array is associative or in arrays by property
@@ -658,14 +641,11 @@ class EditEntity extends ModifyEntity {
 		}
 
 		// NOTE: json_decode will decode any JS literal or structure, not just objects!
-		if ( !is_array( $data ) ) {
-			$this->errorReporter->dieError( 'Top level structure must be a JSON object', 'not-recognized-array' );
-		}
+		$this->assertArray( $data, 'Top level structure must be a JSON object' );
 
 		foreach ( $data as $prop => $args ) {
-			if ( !is_string( $prop ) ) { // NOTE: catch json_decode returning an indexed array (list)
-				$this->errorReporter->dieError( 'Top level structure must be a JSON object, (no keys found)', 'not-recognized-string' );
-			}
+			// Catch json_decode returning an indexed array (list).
+			$this->assertString( $prop, 'Top level structure must be a JSON object (no keys found)' );
 
 			if ( !in_array( $prop, $allowedProps ) ) {
 				$this->errorReporter->dieError( "Unknown key in json: $prop", 'not-recognized' );
@@ -847,27 +827,21 @@ class EditEntity extends ModifyEntity {
 	 * @param string $langCode The language code used in the value part
 	 */
 	private function validateMultilangArgs( $arg, $langCode ) {
-		if ( !is_array( $arg ) ) {
-			$this->errorReporter->dieError(
-				"An array was expected, but not found in the json for the langCode {$langCode}",
-				'not-recognized-array' );
-		}
+		$this->assertArray( $arg, 'An array was expected, but not found in the json for the '
+			. "langCode $langCode" );
 
 		if ( !array_key_exists( 'language', $arg ) ) {
 			$this->errorReporter->dieError(
-				"'language' was not found in the label or description json for {$langCode}",
+				"'language' was not found in the label or description json for $langCode",
 					'missing-language' );
 		}
 
-		if ( !is_string( $arg['language'] ) ) {
-			$this->errorReporter->dieError(
-				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'language'",
-				'not-recognized-string' );
-		}
+		$this->assertString( $arg['language'], 'A string was expected, but not found in the json '
+			. "for the langCode $langCode and argument 'language'" );
 		if ( !is_numeric( $langCode ) ) {
 			if ( $langCode !== $arg['language'] ) {
 				$this->errorReporter->dieError(
-					"inconsistent language: {$langCode} is not equal to {$arg['language']}",
+					"inconsistent language: $langCode is not equal to {$arg['language']}",
 					'inconsistent-language' );
 			}
 		}
@@ -876,10 +850,9 @@ class EditEntity extends ModifyEntity {
 			$this->errorReporter->dieError( 'Unknown language: ' . $arg['language'], 'not-recognized-language' );
 		}
 
-		if ( !array_key_exists( 'remove', $arg ) && !is_string( $arg['value'] ) ) {
-			$this->errorReporter->dieError(
-				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'value'",
-				'not-recognized-string' );
+		if ( !array_key_exists( 'remove', $arg ) ) {
+			$this->assertString( $arg['value'], 'A string was expected, but not found in the json '
+				. "for the langCode $langCode and argument 'value'" );
 		}
 	}
 
@@ -891,33 +864,54 @@ class EditEntity extends ModifyEntity {
 	 * @param SiteList|null $sites The valid sites.
 	 */
 	private function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
-		if ( !is_array( $arg ) ) {
-			$this->errorReporter->dieError( 'An array was expected, but not found', 'not-recognized-array' );
-		}
-		if ( !is_string( $arg['site'] ) ) {
-			$this->errorReporter->dieError( 'A string was expected, but not found', 'not-recognized-string' );
-		}
+		$this->assertArray( $arg, 'An array was expected, but not found' );
+		$this->assertString( $arg['site'], 'A string was expected, but not found' );
+
 		if ( !is_numeric( $siteCode ) ) {
 			if ( $siteCode !== $arg['site'] ) {
-				$this->errorReporter->dieError( "inconsistent site: {$siteCode} is not equal to {$arg['site']}", 'inconsistent-site' );
+				$this->errorReporter->dieError( "inconsistent site: $siteCode is not equal to {$arg['site']}", 'inconsistent-site' );
 			}
 		}
+
 		if ( $sites !== null && !$sites->hasSite( $arg['site'] ) ) {
 			$this->errorReporter->dieError( 'Unknown site: ' . $arg['site'], 'not-recognized-site' );
 		}
-		if ( isset( $arg['title'] ) && !is_string( $arg['title'] ) ) {
-			$this->errorReporter->dieError( 'A string was expected, but not found', 'not-recognized-string' );
+
+		if ( isset( $arg['title'] ) ) {
+			$this->assertString( $arg['title'], 'A string was expected, but not found' );
 		}
+
 		if ( isset( $arg['badges'] ) ) {
-			if ( !is_array( $arg['badges'] ) ) {
-				$this->errorReporter->dieError( 'Badges: an array was expected, but not found', 'not-recognized-array' );
-			} else {
-				foreach ( $arg['badges'] as $badge ) {
-					if ( !is_string( $badge ) ) {
-						$this->errorReporter->dieError( 'Badges: a string was expected, but not found', 'not-recognized-string' );
-					}
-				}
+			$this->assertArray( $arg['badges'], 'Badges: an array was expected, but not found' );
+			foreach ( $arg['badges'] as $badge ) {
+				$this->assertString( $badge, 'Badges: a string was expected, but not found' );
 			}
+		}
+	}
+
+	/**
+	 * @param mixed $value
+	 * @param string $message
+	 */
+	private function assertArray( $value, $message ) {
+		$this->assertType( 'array', $value, $message );
+	}
+	/**
+	 * @param mixed $value
+	 * @param string $message
+	 */
+	private function assertString( $value, $message ) {
+		$this->assertType( 'string', $value, $message );
+	}
+
+	/**
+	 * @param string $type
+	 * @param mixed $value
+	 * @param string $message
+	 */
+	private function assertType( $type, $value, $message ) {
+		if ( gettype( $value ) !== $type ) {
+			$this->errorReporter->dieError( $message, 'not-recognized-' . $type );
 		}
 	}
 
