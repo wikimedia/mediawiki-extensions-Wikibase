@@ -292,7 +292,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			],
 		];
 		$tagMatchers[ 'submit' ] = [
-			'tag' => 'input',
+			'tag' => 'button',
 			'attributes' => [
 				'type' => 'submit',
 			],
@@ -346,7 +346,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			],
 		];
 		$tagMatchers[ 'submit' ] = [
-			'tag' => 'input',
+			'tag' => 'button',
 			'attributes' => [
 				'type' => 'submit',
 			],
@@ -393,7 +393,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			],
 		];
 		$tagMatchers[ 'submit' ] = [
-			'tag' => 'input',
+			'tag' => 'button',
 			'attributes' => [
 				'type' => 'submit',
 			],
