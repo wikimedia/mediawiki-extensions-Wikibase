@@ -192,75 +192,61 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 		$this->setValueIfNull( $entity );
 
-		$valueinput = Html::input(
-			'value',
-			$this->getRequest()->getVal( 'value' ) ? $this->getRequest()->getVal( 'value' ) : $this->value,
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => 'wb-modifyterm-value',
-			)
+		$valueinput = array(
+			'name' => 'value',
+			'cssclass' => 'wb-input',
+			'id' => 'wb-modifyterm-value',
+			'type' => 'text',
+			'default' => $this->getRequest()->getVal( 'value' ) ? $this->getRequest()->getVal( 'value' ) : $this->value
 		);
 
 		$languageName = Language::fetchLanguageName( $this->languageCode, $this->getLanguage()->getCode() );
 
 		if ( $entity !== null && $this->languageCode !== null && $languageName !== '' ) {
-			return Html::rawElement(
-				'p',
-				array(),
-				// Messages: wikibase-setlabel-introfull, wikibase-setdescription-introfull,
-				// wikibase-setaliases-introfull
-				$this->msg(
-					'wikibase-' . strtolower( $this->getName() ) . '-introfull',
-					$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
-					$languageName
-				)->parse()
-			)
-			. Html::input( 'language', $this->languageCode, 'hidden' )
-			. Html::input( 'id', $entity->getId()->getSerialization(), 'hidden' )
-			. Html::input( 'remove', 'remove', 'hidden' )
-			. $valueinput;
+			// Messages: wikibase-setlabel-introfull, wikibase-setdescription-introfull,
+			// wikibase-setaliases-introfull
+			$intro = $this->msg(
+				'wikibase-' . strtolower( $this->getName() ) . '-introfull',
+				$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
+				$languageName
+			)->parse();
+			$formDescriptor = array(
+				'language' => array(
+					'name' => 'language',
+					'type' => 'hidden',
+					'default' => $this->languageCode
+				),
+				'id' => array(
+					'name' => 'id',
+					'type' => 'hidden',
+					'default' => $entity->getId()->getSerialization()
+				),
+				'remove' => array(
+					'name' => 'remove',
+					'type' => 'hidden',
+					'default' => 'remove'
+				),
+				'value' => $valueinput
+			);
 		} else {
-			return Html::rawElement(
-				'p',
-				array(),
-				// Messages: wikibase-setlabel-intro, wikibase-setdescription-intro,
-				// wikibase-setaliases-intro
-				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
-			)
-			. parent::getFormElements( $entity )
-			. Html::element( 'br' )
-			. Html::element(
-				'label',
-				array(
-					'for' => 'wb-modifyterm-language',
-					'class' => 'wb-label'
-				),
-				$this->msg( 'wikibase-modifyterm-language' )->text()
-			)
-			. Html::input(
-				'language',
-				$this->languageCode,
-				'text',
-				array(
-					'class' => 'wb-input',
-					'id' => 'wb-modifyterm-language'
-				)
-			)
-			. Html::element( 'br' )
-			. Html::element(
-				'label',
-				array(
-					'for' => 'wb-modifyterm-value',
-					'class' => 'wb-label'
-				),
-				// Messages: wikibase-setlabel-label, wikibase-setdescription-label,
-				// wikibase-setaliases-label
-				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-label' )->text()
-			)
-			. $valueinput
-			. Html::element( 'br' );
+			// Messages: wikibase-setlabel-intro, wikibase-setdescription-intro,
+			// wikibase-setaliases-intro
+			$intro = $this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse();
+			$formDescriptor = parent::getFormElements( $entity );
+			$formDescriptor['language'] = array(
+				'name' => 'language',
+				'label-message' => 'wikibase-modifyterm-language',
+				'type' => 'text',
+				'default' => $this->languageCode,
+				'cssclass' => 'wb-input',
+				'id' => 'wb-modifyterm-language'
+			);
+			// Messages: wikibase-setlabel-label, wikibase-setdescription-label,
+			// wikibase-setaliases-label
+			$valueinput['label-message'] = 'wikibase-' . strtolower( $this->getName() ) . '-label';
+			$formDescriptor['value'] = $valueinput;
 		}
+		return array( $intro, $formDescriptor );
 	}
 
 	private function setValueIfNull( FingerprintProvider $fingerprintProvider = null ) {
