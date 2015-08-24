@@ -46,7 +46,7 @@ class EntityUsageTable {
 	/**
 	 * @param EntityIdParser $idParser
 	 * @param DatabaseBase $connection
-	 * @param int $batchSize defaults to 1000
+	 * @param int $batchSize defaults to 100
 	 * @param string|null $tableName defaults to wbc_entity_usage
 	 *
 	 * @throws InvalidArgumentException
@@ -54,7 +54,7 @@ class EntityUsageTable {
 	public function __construct(
 		EntityIdParser $idParser,
 		DatabaseBase $connection,
-		$batchSize = 1000,
+		$batchSize = 100,
 		$tableName = null
 	) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
@@ -83,9 +83,25 @@ class EntityUsageTable {
 			return;
 		}
 
-		$db = $this->connection;
+		$rowIds = $this->getAffectedRowIds( $pageId, $usages );
+		$batches  = array_chunk( $rowIds, $this->batchSize );
 
+		foreach ( $batches as $batch ) {
+			$this->touchUsageBatch( $batch, $touched );
+		}
+	}
+
+	/**
+	 * @param int $pageId
+	 * @param EntityUsage[] $usages
+	 *
+	 * @return int[] affected row ids
+	 * @throws \DBUnexpectedError
+	 * @throws \MWException
+	 */
+	private function getAffectedRowIds( $pageId, array $usages ) {
 		$usageConditions = array();
+		$db = $this->connection;
 
 		foreach ( $usages as $usage ) {
 			$usageConditions[] = $db->makeList( array(
@@ -94,15 +110,34 @@ class EntityUsageTable {
 			), LIST_AND );
 		}
 
-		// XXX: Do we need batching here? List pages may be using hundreds of entities...
+		// Collect affected row IDs, so we can use them for an
+		// efficient update query on the master db.
+		$rowIds = $db->selectFieldValues(
+			$this->tableName,
+			'eu_row_id',
+			array(
+				'eu_page_id' => (int)$pageId,
+				$db->makeList( $usageConditions, LIST_OR )
+			),
+			__METHOD__
+		);
+
+		$rowIds = array_map( 'intval', $rowIds ?: array() );
+		return $rowIds;
+	}
+
+	/**
+	 * @param int[] $rowIds the ids of the rows to touch
+	 * @param string $touched timestamp
+	 */
+	private function touchUsageBatch( array $rowIds, $touched ) {
 		$this->connection->update(
 			$this->tableName,
 			array(
 				'eu_touched' => wfTimestamp( TS_MW, $touched ),
 			),
 			array(
-				'eu_page_id' => (int)$pageId,
-				$this->connection->makeList( $usageConditions, LIST_OR )
+				'eu_row_id' => $rowIds
 			),
 			__METHOD__
 		);
