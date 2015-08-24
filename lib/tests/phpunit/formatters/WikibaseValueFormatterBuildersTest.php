@@ -571,7 +571,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * @param string[] $requiredTypes
 	 * @param string[] $actualTypes
 	 */
-	protected function assertIncluded( $requiredTypes, $actualTypes ) {
+	private function assertIncluded( array $requiredTypes, array $actualTypes ) {
 		sort( $requiredTypes );
 		sort( $actualTypes );
 		$this->assertEmpty( array_diff( $requiredTypes, $actualTypes ), 'required' );
@@ -583,7 +583,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * @param string[] $skippedTypes
 	 * @param string[] $actualTypes
 	 */
-	protected function assertExcluded( $skippedTypes, $actualTypes ) {
+	private function assertExcluded( array $skippedTypes, array $actualTypes ) {
 		sort( $skippedTypes );
 		sort( $actualTypes );
 		$this->assertEmpty( array_intersect( $skippedTypes, $actualTypes ), 'skipped' );

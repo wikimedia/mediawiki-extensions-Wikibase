@@ -44,7 +44,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		return new ApiResult( false );
 	}
 
-	private function getResultBuilder( $result, $addMetaData = false ) {
+	private function getResultBuilder( ApiResult $result, $addMetaData = false ) {
 		$mockTitle = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -340,7 +340,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTestAddEntityRevision
 	 */
-	public function testAddEntityRevision( $addMetaData, $expected ) {
+	public function testAddEntityRevision( $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$item = new Item( new ItemId( 'Q123098' ) );
 
@@ -469,7 +469,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTestAddEntityRevisionFallback
 	 */
-	public function testAddEntityRevisionFallback( $addMetaData, $expected ) {
+	public function testAddEntityRevisionFallback( $addMetaData, array $expected ) {
 		$item = new Item( new ItemId( 'Q123101' ) );
 		$item->getFingerprint()->setLabel( 'de', 'Oslo-de' );
 		$item->getFingerprint()->setLabel( 'en', 'Oslo-en' );
@@ -826,7 +826,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddAliasGroupList
 	 */
-	public function testAddAliasGroupList( $metaData, $expected ) {
+	public function testAddAliasGroupList( $metaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$aliasGroupList = new AliasGroupList(
 			array(
@@ -880,7 +880,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddSiteLinkList
 	 */
-	public function testAddSiteLinkList( $addMetaData, $expected ) {
+	public function testAddSiteLinkList( $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$siteLinkList = new SiteLinkList(
 			array(
@@ -993,7 +993,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider statementSerializationProvider
 	 */
-	public function testAddStatements( Statement $statement, $addMetaData, $statementSerialization ) {
+	public function testAddStatements( Statement $statement, $addMetaData, array $statementSerialization ) {
 		$result = $this->getDefaultResult();
 		$path = array( 'entities', 'Q1' );
 
@@ -1077,7 +1077,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider statementSerializationProvider
 	 */
-	public function testAddStatement( Statement $statement, $addMetaData, $statementSerialization ) {
+	public function testAddStatement( Statement $statement, $addMetaData, array $statementSerialization ) {
 		$result = $this->getDefaultResult();
 		$expected = array(
 			'claim' => $statementSerialization,
@@ -1220,7 +1220,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddReference
 	 */
-	public function testAddReference( $addMetaData, $expected ) {
+	public function testAddReference( $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$reference = new Reference(
 			new SnakList( array(
@@ -1239,7 +1239,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideMissingEntity
 	 */
-	public function testAddMissingEntityWithMetaData( $missingEntities, $expected ) {
+	public function testAddMissingEntityWithMetaData( array $missingEntities, array $expected ) {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result, true );
 
@@ -1427,7 +1427,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideSetList
 	 */
-	public function testSetList( $path, $name, array $values, $tag, $addMetaData, $expected ) {
+	public function testSetList( $path, $name, array $values, $tag, $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result, $addMetaData );
 
@@ -1497,7 +1497,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideSetValue
 	 */
-	public function testSetValue( $path, $name, $value, $addMetaData, $expected ) {
+	public function testSetValue( $path, $name, $value, $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result, $addMetaData );
 
@@ -1586,7 +1586,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAppendValue
 	 */
-	public function testAppendValue( $path, $key, $value, $tag, $addMetaData, $expected ) {
+	public function testAppendValue( $path, $key, $value, $tag, $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result, $addMetaData );
 

@@ -217,7 +217,14 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetMatchingTerms
 	 */
-	public function testGetMatchingTerms( $entities, $queryTerms, $termTypes, $entityTypes, $options, $expectedTermKeys ) {
+	public function testGetMatchingTerms(
+		array $entities,
+		array $queryTerms,
+		$termTypes,
+		$entityTypes,
+		array $options,
+		array $expectedTermKeys
+	) {
 		$lookup = $this->getTermIndex();
 
 		foreach ( $entities as $entitiy ) {
@@ -313,7 +320,14 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetTopMatchingTerms
 	 */
-	public function testGetTopMatchingTerms( $entities, $queryTerms, $termTypes, $entityTypes, $options, $expectedTermKeys ) {
+	public function testGetTopMatchingTerms(
+		array $entities,
+		array $queryTerms,
+		$termTypes,
+		$entityTypes,
+		array $options,
+		array $expectedTermKeys
+	) {
 		$lookup = $this->getTermIndex();
 
 		foreach ( $entities as $entitiy ) {
@@ -583,7 +597,13 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider labelConflictProvider
 	 */
-	public function testGetLabelConflicts( $entities, $entityType, $labels, $aliases, $expected ) {
+	public function testGetLabelConflicts(
+		array $entities,
+		$entityType,
+		array $labels,
+		array $aliases,
+		array $expected
+	) {
 		$termIndex = $this->getTermIndex();
 		$termIndex->clear();
 
@@ -650,7 +670,13 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider labelWithDescriptionConflictProvider
 	 */
-	public function testGetLabelWithDescriptionConflicts( $entities, $entityType, $labels, $descriptions, $expected ) {
+	public function testGetLabelWithDescriptionConflicts(
+		array $entities,
+		$entityType,
+		array $labels,
+		array $descriptions,
+		array $expected
+	) {
 		$termIndex = $this->getTermIndex();
 		$termIndex->clear();
 

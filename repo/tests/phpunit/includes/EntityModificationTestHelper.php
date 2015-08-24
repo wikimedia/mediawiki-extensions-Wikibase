@@ -145,7 +145,7 @@ class EntityModificationTestHelper {
 	 *
 	 * @return object
 	 */
-	public function unserializeEntity( $data, $id = null ) {
+	public function unserializeEntity( array $data, $id = null ) {
 		if ( $id !== null ) {
 			if ( is_string( $id ) ) {
 				$id = $this->idParser->parse( $id );
@@ -176,7 +176,7 @@ class EntityModificationTestHelper {
 	 *
 	 * @param array $data
 	 */
-	private function unsetSpuriousFieldsRecursively( &$data ) {
+	private function unsetSpuriousFieldsRecursively( array &$data ) {
 		// unset empty fields
 		foreach ( $data as $key => &$value ) {
 			if ( $key === 'hash' || $key === 'id' ) {
