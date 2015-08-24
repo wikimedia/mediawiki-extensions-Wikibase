@@ -161,51 +161,41 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				$languageName
 			);
 
-			$html = Html::hidden(
-					'id',
-					$entity->getId()->getSerialization()
+			$formDescriptor = array(
+				'id' => array(
+					'name' => 'id',
+					'type' => 'hidden',
+					'default' => $entity->getId()->getSerialization()
+				),
+				'language' => array(
+					'name' => 'language',
+					'type' => 'hidden',
+					'default' => $this->languageCode
 				)
-				. Html::hidden(
-					'language',
-					$this->languageCode
-				)
-				. $this->getLabeledInputField( 'label', $this->label )
-				. Html::element( 'br' )
-				. $this->getLabeledInputField( 'description', $this->description )
-				. Html::element( 'br' )
-				. $this->getLabeledInputField( 'aliases', implode( '|', $this->aliases ) );
+			);
+			$formDescriptor = array_merge(
+				$formDescriptor,
+				$this->getLabeledInputField( 'label', $this->label ),
+				$this->getLabeledInputField( 'description', $this->description ),
+				$this->getLabeledInputField( 'aliases', implode( '|', $this->aliases ) )
+			);
 		} else {
 			$intro = $this->msg( 'wikibase-setlabeldescriptionaliases-intro' );
 			$fieldId = 'wikibase-setlabeldescriptionaliases-language';
 			$languageCode = $this->languageCode ? : $this->getLanguage()->getCode();
 
-			$html = parent::getFormElements( $entity )
-				. Html::element( 'br' )
-				. Html::label(
-					$this->msg( 'wikibase-modifyterm-language' )->text(),
-					$fieldId,
-					array(
-						'class' => 'wb-label',
-					)
-				)
-				. Html::input(
-					'language',
-					$languageCode,
-					'text',
-					array(
-						'class' => 'wb-input',
-						'id' => $fieldId,
-					)
-				);
+			$formDescriptor = parent::getFormElements( $entity );
+			$formDescriptor['language'] = array(
+				'name' => 'language',
+				'default' => $languageCode,
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => $fieldId,
+				'label-message' => 'wikibase-modifyterm-language'
+			);
 		}
 
-		return Html::rawElement(
-			'p',
-			array(),
-			$intro->parse()
-		)
-		. $html
-		. Html::element( 'br' );
+		return array( $intro, $formDescriptor );
 	}
 
 	/**
@@ -223,21 +213,15 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		// wikibase-setlabeldescriptionaliases-label-label
 		// wikibase-setlabeldescriptionaliases-description-label
 		// wikibase-setlabeldescriptionaliases-aliases-label
-		return Html::label(
-			$this->msg( $fieldId . '-label' )->text(),
-			$fieldId,
-			array(
-				'class' => 'wb-label',
-			)
-		)
-		. Html::input(
-			$termType,
-			$value,
-			'text',
-			array(
-				'class' => 'wb-input',
+		return array(
+			$termType => array(
+				'name' => $termType,
+				'default' => $value,
+				'type' => 'text',
+				'cssclass' => 'wb-input',
 				'id' => $fieldId,
 				'placeholder' => $value,
+				'label-message' => $fieldId . '-label'
 			)
 		);
 	}
