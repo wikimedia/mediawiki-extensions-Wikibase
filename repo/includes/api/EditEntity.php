@@ -308,16 +308,14 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( array_key_exists( 'claims', $data ) ) {
-			$changeOps->add(
-				$this->getClaimsChangeOps( $data['claims'] )
-			);
+			$changeOps->add( $this->getClaimsChangeOps( $data['claims'] ) );
 		}
 
 		return $changeOps;
 	}
 
 	/**
-	 * @param array[] $labels
+	 * @param mixed $labels
 	 *
 	 * @return ChangeOp[]
 	 */
@@ -346,7 +344,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array[] $descriptions
+	 * @param mixed $descriptions
 	 *
 	 * @return ChangeOp[]
 	 */
@@ -375,7 +373,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array[] $aliases
+	 * @param mixed $aliases
 	 *
 	 * @return ChangeOp[]
 	 */
@@ -444,7 +442,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array[] $siteLinks
+	 * @param mixed $siteLinks
 	 * @param Item $item
 	 *
 	 * @return ChangeOp[]
@@ -504,7 +502,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param array[] $claims
+	 * @param mixed $claims
 	 *
 	 * @return ChangeOp[]
 	 */
@@ -512,6 +510,7 @@ class EditEntity extends ModifyEntity {
 		if ( !is_array( $claims ) ) {
 			$this->errorReporter->dieError( "List of claims must be an array", 'not-recognized-array' );
 		}
+
 		$changeOps = array();
 
 		//check if the array is associative or in arrays by property
