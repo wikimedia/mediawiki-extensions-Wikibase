@@ -150,7 +150,6 @@ class ChangeHandler {
 	 * @param Change $change
 	 *
 	 * @throws MWException
-	 * @return bool
 	 */
 	public function handleChange( Change $change ) {
 		$changeId = $this->getChangeIdForLog( $change );
@@ -158,16 +157,8 @@ class ChangeHandler {
 			. ' (' . $change->getType() . ')' );
 
 		$usagesPerPage = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
-		// Warning, empty() does not work on ArrayIterator objects!
-		$count = count( $usagesPerPage );
 
-		if ( $count === 0 ) {
-			// nothing to do
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No pages to update for change #$changeId." );
-			return false;
-		}
-
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . $count
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . count( $usagesPerPage )
 			. " page(s) for change #$changeId." );
 
 		$actionBuckets = array();
@@ -181,8 +172,6 @@ class ChangeHandler {
 		foreach ( $actionBuckets as $action => $bucket ) {
 			$this->applyUpdateAction( $action, $bucket, $change );
 		}
-
-		return true;
 	}
 
 	/**
