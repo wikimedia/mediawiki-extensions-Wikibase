@@ -52,34 +52,53 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$page = $this->newSpecialPage();
 
 		$matchers['id'] = [
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => [
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
-				'name' => 'id',
+			],
+			'child' => [
+				'tag' => 'input',
+				'attributes' => [
+					'name' => 'id',
+				]
 			] ];
 		$matchers['language'] = [
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => [
 				'id' => 'wb-modifyterm-language',
 				'class' => 'wb-input',
-				'name' => 'language',
-				'value' => self::USER_LANGUAGE,
+			],
+			'child' => [
+				'tag' => 'input',
+				'attributes' => [
+					'name' => 'language',
+					'value' => self::USER_LANGUAGE,
+				]
 			] ];
 		$matchers['value'] = [
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => [
 				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
-				'name' => 'value',
+			],
+			'child' => [
+				'tag' => 'input',
+				'attributes' => [
+					'name' => 'value',
+				]
 			] ];
 		$matchers['submit'] = [
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => [
 				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
+			],
+			'child' => [
+				'tag' => 'button',
+				'attributes' => [
+					'type' => 'submit',
+					'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
+				]
 			] ];
 
 		// execute with no subpage value
@@ -110,19 +129,28 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 				'type' => 'hidden',
 			] ];
 		$matchers['value'] = [
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => [
 				'id' => 'wb-modifyterm-value',
 				'class' => 'wb-input',
-				'name' => 'value',
+			],
+			'child' => [
+				'tag' => 'input',
+				'attributes' => [
+					'name' => 'value',
+				]
 			] ];
 		$matchers['submit'] = [
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => [
 				'id' => 'wb-' . strtolower( $page->getName() ) . '-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
+			],
+			'child' => [
+				'tag' => 'button',
+				'attributes' => [
+					'type' => 'submit',
+					'name' => 'wikibase-' . strtolower( $page->getName() ) . '-submit',
+				]
 			] ];
 		$matchers['remove'] = [
 			'tag' => 'input',
