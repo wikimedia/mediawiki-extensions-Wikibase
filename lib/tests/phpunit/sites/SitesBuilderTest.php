@@ -20,7 +20,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider buildSitesProvider
 	 */
-	public function testBuildSites( $sites, $group, $wikiId, $expected ) {
+	public function testBuildSites( array $sites, $group, $wikiId, array $expected ) {
 		$store = new MockSiteStore();
 
 		$validGroups = array( 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
@@ -74,7 +74,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 		return $data;
 	}
 
-	protected function getSitesData() {
+	private function getSitesData() {
 		$sitesData = array(
 			array(
 				'siteid' => 'enwiki',
@@ -128,7 +128,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return MediaWikiSite[]
 	 */
-	protected function getSites( array $sitesData ) {
+	private function getSites( array $sitesData ) {
 		$sites = array();
 
 		foreach ( $sitesData as $siteData ) {

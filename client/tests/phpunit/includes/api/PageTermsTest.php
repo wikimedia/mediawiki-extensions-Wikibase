@@ -396,7 +396,7 @@ class PageTermsTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider pageTermsProvider
 	 */
-	public function testPageTerms( $params, $terms, $expected ) {
+	public function testPageTerms( array $params, array $terms, array $expected ) {
 		$result = $this->callApiModule( $params, $terms );
 
 		if ( isset( $result['error'] ) ) {
