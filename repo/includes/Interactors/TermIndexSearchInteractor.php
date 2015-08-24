@@ -20,6 +20,8 @@ use Wikimedia\Assert\Assert;
  */
 class TermIndexSearchInteractor implements TermSearchInteractor {
 
+	const HARD_LIMIT = 5000;
+
 	/**
 	 * @var TermIndex
 	 */
@@ -63,7 +65,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	/**
 	 * @var int
 	 */
-	private $limit = 5000;
+	private $limit = self::HARD_LIMIT;
 
 	/**
 	 * @param TermIndex $termIndex Used to search the terms
@@ -122,8 +124,8 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	public function setLimit( $limit ) {
 		Assert::parameterType( 'integer', $limit, '$limit' );
 		Assert::parameter( $limit > 0, '$limit', 'Must be positive' );
-		if ( $limit > 5000 ) {
-			$limit = 5000;
+		if ( $limit > self::HARD_LIMIT ) {
+			$limit = self::HARD_LIMIT;
 		}
 		$this->limit = $limit;
 	}
@@ -191,7 +193,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 			$this->getTermIndexOptions()
 		);
 		// Shortcut out if we already have enough TermIndexEntries
-		if ( count( $matchedTermIndexEntries ) == $this->limit || !$this->useLanguageFallback ) {
+		if ( count( $matchedTermIndexEntries ) >= $this->limit || !$this->useLanguageFallback ) {
 			return $matchedTermIndexEntries;
 		}
 
@@ -297,9 +299,9 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	}
 
 	/**
-	 * @param array $languageCodes
+	 * @param string[] $languageCodes
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function addFallbackLanguageCodes( array $languageCodes ) {
 		$languageCodesWithFallback = array();
@@ -347,7 +349,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 *
 	 * @returns TermIndexEntry[]
 	 */
-	private function makeTermIndexEntryTemplates( $text, $languageCodes, $termTypes ) {
+	private function makeTermIndexEntryTemplates( $text, array $languageCodes, array $termTypes ) {
 		$terms = array();
 		foreach ( $languageCodes as $languageCode ) {
 			foreach ( $termTypes as $termType ) {
