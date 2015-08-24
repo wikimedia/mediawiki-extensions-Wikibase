@@ -82,6 +82,12 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$mock->expects( $this->any() )
 			->method( 'getFullUrl' )
 			->will( $this->returnValue( 'http://fullTitleUrl' ) );
+		$mock->expects( $this->any() )
+			->method( 'getPrefixedText' )
+			->will( $this->returnValue( 'Prefixed:Title' ) );
+		$mock->expects( $this->any() )
+			->method( 'getArticleID' )
+			->will( $this->returnValue( 42 ) );
 		return $mock;
 	}
 
@@ -225,6 +231,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q222Result = array(
 			'id' => 'Q222',
 			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
 			'label' => 'FooHeHe',
 			'description' => 'FooHeHe en description',
 			'aliases' => array( 'Fooooo' ),
@@ -237,6 +245,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q333Result = array(
 			'id' => 'Q333',
 			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
 			'label' => 'ADisplayLabel',
 			'aliases' => array( 'AMatchedTerm' ),
 			'match' => array(
@@ -258,6 +268,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 					array(
 						'id' => 'Q111',
 						'url' => 'http://fullTitleUrl',
+						'title' => 'Prefixed:Title',
+						'pageid' => 42,
 						'label' => 'ptLabel',
 						'description' => 'ptDescription',
 						'aliases' => array( 'Q111' ),
