@@ -56,6 +56,8 @@ class DispatchChanges extends Maintenance {
 					. "Default: 1 if --max-time is not set, infinite if it is.", false, true );
 		$this->addOption( 'max-time', "The number of seconds to run before exiting, "
 					. "if --max-passes is not reached. Default: infinite.", false, true );
+		$this->addOption( 'max-chunks', "Max number of chunks / passes per wiki "
+					. "when selecting pending changes. Default: 15", false, true );
 		$this->addOption( 'batch-size', "Max number of changes to pass to a client at a time. "
 					. "Default: 1000", false, true );
 	}
@@ -78,6 +80,7 @@ class DispatchChanges extends Maintenance {
 		$subscriptionLookupMode = $settings->getSetting( 'subscriptionLookupMode' );
 
 		$batchSize = (int)$this->getOption( 'batch-size', 1000 );
+		$maxChunks = (int)$this->getOption( 'max-chunks', 15 );
 		$dispatchInterval = (int)$this->getOption( 'dispatch-interval', 60 );
 		$lockGraceInterval = (int)$this->getOption( 'lock-grace-interval', 60 );
 		$randomness = (int)$this->getOption( 'randomness', 10 );
@@ -129,6 +132,7 @@ class DispatchChanges extends Maintenance {
 		$dispatcher->setMessageReporter( $reporter );
 		$dispatcher->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
 		$dispatcher->setBatchSize( $batchSize );
+		$dispatcher->setMaxChunks( $maxChunks );
 		$dispatcher->setBatchChunkFactor( $batchChunkFactor );
 		$dispatcher->setVerbose( $this->verbose );
 
