@@ -38,33 +38,52 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	 */
 	private static $matchers = array(
 		'id' => array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
-				'name' => 'id',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'id',
+				)
 			) ),
 		'site' => array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-site',
 				'class' => 'wb-input',
-				'name' => 'site',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'site',
+				)
 			) ),
 		'page' => array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-page',
 				'class' => 'wb-input',
-				'name' => 'page',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'page',
+				)
 			) ),
 		'submit' => array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-setsitelink-submit',
+			),
+			'child' => array(
+				'tag' => 'button',
+				'attributes' => array(
+					'type' => 'submit',
+					'name' => 'wikibase-setsitelink-submit',
+				)
 			) )
 	);
 
@@ -156,22 +175,20 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	}
 
 	private function addBadgeMatcher() {
-		$name = 'badge-' . self::$badgeId;
-		self::$matchers['badgeinput'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'name' => $name,
-				'id' => $name,
-				'type' => 'checkbox'
-			) );
-
-		self::$matchers['badgelabel'] = array(
+		self::$matchers['badge'] = array(
 			'tag' => 'label',
-			'attributes' => array(
-				'for' => $name
-			),
-			'content' => 'Guter Artikel'
-		);
+			'content' => 'Guter Artikel',
+			'descendant' => array(
+				'tag' => 'div',
+				'child' => array(
+					'tag' => 'input',
+					'attributes' => array(
+						'name' => 'badges[]',
+						'value' => self::$badgeId,
+						'type' => 'checkbox'
+					)
+				)
+			) );
 	}
 
 	public function testExecuteEmptyForm() {
@@ -190,7 +207,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		// Note: use language fallback de-ch => de
 		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'de-ch' );
 
-		$matchers['id']['attributes']['value'] = self::$itemId;
+		$matchers['id']['child'][0]['attributes']['value'] = self::$itemId;
 
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag(
@@ -233,7 +250,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$matchers['value']['attributes']['value'] = 'Wikidata';
 
-		$matchers['badges']['children']['only']['attributes']['selected'] = '';
+		$matchers['badge']['descendant']['child']['attributes']['checked'] = 'checked';
 
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag(
@@ -255,9 +272,9 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		unset( $matchers['site'] );
 		unset( $matchers['remove'] );
 
-		$matchers['badgelabel']['content'] = self::$badgeId;
+		$matchers['badge']['content'] = self::$badgeId;
 		$matchers['value']['attributes']['value'] = 'Wikidata';
-		$matchers['badges']['children']['only']['attributes']['selected'] = '';
+		$matchers['badge']['descendant']['child']['attributes']['checked'] = 'checked';
 
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag(
@@ -288,12 +305,17 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
 		$this->assertTag( array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-page',
 				'class' => 'wb-input',
-				'name' => 'page',
-				'value' => 'Wikidata',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'page',
+					'value' => 'Wikidata',
+				)
 			)
 		), $output, 'Value still preserves when no value was entered in the big form' );
 	}
