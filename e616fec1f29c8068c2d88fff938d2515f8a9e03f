@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c3d163d1",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T17:43:27Z",
+      "side": 1,
+      "message": "As with everything else here the default of this should probably \u003d null!!!!!",
+      "revId": "e616fec1f29c8068c2d88fff938d2515f8a9e03f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_83d35bd6",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T17:43:27Z",
+      "side": 1,
+      "message": "There is no use for TermBuffer at the top of this file! :( add one!",
+      "revId": "e616fec1f29c8068c2d88fff938d2515f8a9e03f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_23a7074e",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T17:43:27Z",
+      "side": 1,
+      "message": "one $this-\u003etermLookup is null by default then this should check against null",
+      "revId": "e616fec1f29c8068c2d88fff938d2515f8a9e03f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
