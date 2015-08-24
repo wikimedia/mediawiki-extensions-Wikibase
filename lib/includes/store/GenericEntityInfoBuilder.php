@@ -183,7 +183,12 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		}
 	}
 
-	private function injectFingerprint( $types, array &$entityRecord, Fingerprint $fingerprint, $languages ) {
+	private function injectFingerprint(
+		array $types = null,
+		array &$entityRecord,
+		Fingerprint $fingerprint,
+		array $languages = null
+	) {
 		if ( $types === null || in_array( 'label', $types ) ) {
 			$labels = $fingerprint->getLabels();
 

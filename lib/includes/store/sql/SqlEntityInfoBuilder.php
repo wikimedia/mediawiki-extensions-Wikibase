@@ -616,7 +616,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @return array
 	 */
-	private function ungroup( $groupedArrays ) {
+	private function ungroup( array $groupedArrays ) {
 		$merged = array_reduce(
 			$groupedArrays,
 			function ( $acc, $next ) {
