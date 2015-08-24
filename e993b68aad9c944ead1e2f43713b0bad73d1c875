@@ -69,6 +69,24 @@
       "revId": "e993b68aad9c944ead1e2f43713b0bad73d1c875",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ccb3d5fb",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 2387
+      },
+      "writtenOn": "2015-08-24T12:49:23Z",
+      "side": 1,
+      "message": "Probably only \"enter a label\" is enough.",
+      "parentUuid": "6ec1af18_91ddea75",
+      "revId": "e993b68aad9c944ead1e2f43713b0bad73d1c875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
