@@ -279,8 +279,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	private static function createMatchers() {
 		return [
-			'id' => tagMatchingOutline(
-				'<input id="wb-modifyentity-id" class="wb-input" name="id"/>'
+			'id' => tagMatchingOutline( '<div id="wb-modifyentity-id" class="wb-input"/>' )->andAlso(
+				havingChild( tagMatchingOutline( '<input name="id"/>' ) )
 			),
 			'site' => tagMatchingOutline(
 				'<input id="wb-setsitelink-site" class="wb-input" name="site"/>'
