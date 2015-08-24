@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_71107e53",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T08:50:20Z",
+      "side": 1,
+      "message": "wikibase cant be installed against mw 1.22 so that part of tihs comment could probably die",
+      "revId": "6ec0538820f10f73a4871d7ea6132c026f464410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_b106e61e",
+        "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T08:50:20Z",
+      "side": 1,
+      "message": "wikibase cant be installed against mw 1.22 so that part of tihs comment could probably die",
+      "revId": "6ec0538820f10f73a4871d7ea6132c026f464410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_d1093230",
+        "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-24T08:50:20Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "6ec0538820f10f73a4871d7ea6132c026f464410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
