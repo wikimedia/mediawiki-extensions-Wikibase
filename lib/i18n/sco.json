@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"John Reid",
-			"Macofe"
+			"Macofe",
+			"AmaryllisGardener"
 		]
 	},
 	"wikibase-timedetails-time": "Time",
@@ -17,6 +18,7 @@
 	"wikibase-globedetails-precision": "Preceesion",
 	"wikibase-globedetails-globe": "Globe",
 	"wikibase-parse-error": "Malformed value.",
+	"wikibase-sitelinks-wikipedia": "Wikipaedia",
 	"wikibase-time-precision-Gannum": "in $1 billion year",
 	"wikibase-time-precision-Mannum": "in $1 million year",
 	"wikibase-time-precision-annum": "in $1 year",
