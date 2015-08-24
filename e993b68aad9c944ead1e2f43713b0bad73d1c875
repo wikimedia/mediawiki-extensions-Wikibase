@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_3153d66f",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-24T10:49:10Z",
+      "side": 1,
+      "message": "Or wait for I51da1f47dda63c9fb2352d953048c509a1e4d996 instead?",
+      "parentUuid": "6ec1af18_11f25a03",
+      "revId": "e993b68aad9c944ead1e2f43713b0bad73d1c875",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_91ddea75",
         "filename": "repo/includes/specials/SpecialNewEntity.php",
         "patchSetId": 1
