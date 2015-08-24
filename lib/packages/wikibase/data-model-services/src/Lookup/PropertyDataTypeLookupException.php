@@ -18,7 +18,7 @@ class PropertyDataTypeLookupException extends \RuntimeException {
 		$this->propertyId = $propertyId;
 
 		parent::__construct(
-			$message ?: 'Property datatype lookup failed for: ' . $propertyId,
+			$message ?: 'Property data type lookup failed for: ' . $propertyId,
 			0,
 			$previous
 		);

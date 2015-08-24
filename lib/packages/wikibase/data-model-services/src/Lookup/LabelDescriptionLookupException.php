@@ -18,7 +18,7 @@ class LabelDescriptionLookupException extends \RuntimeException {
 		$this->entityId = $entityId;
 
 		parent::__construct(
-			$message ?: 'Label Description lookup failed for: ' . $entityId,
+			$message ?: 'Label and description lookup failed for: ' . $entityId,
 			0,
 			$previous
 		);

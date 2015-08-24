@@ -43,10 +43,12 @@ class RestrictedEntityLookup implements EntityLookup {
 	/**
 	 * @param EntityLookup $entityLookup
 	 * @param int $entityAccessLimit
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( EntityLookup $entityLookup, $entityAccessLimit ) {
-		if ( !is_int( $entityAccessLimit ) ) {
-			throw new InvalidArgumentException( '$entityAccessLimit must be an integer' );
+		if ( !is_int( $entityAccessLimit ) || $entityAccessLimit < 1 ) {
+			throw new InvalidArgumentException( '$entityAccessLimit must be a positive integer' );
 		}
 
 		$this->entityLookup = $entityLookup;
