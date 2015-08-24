@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HTMLForm;
 use Html;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -162,52 +163,29 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			);
 		}
 
-		// Form header
-		$this->getOutput()->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'method' => 'post',
-					'action' => $this->getPageTitle()->getFullUrl(),
-					'name' => strtolower( $this->getName() ),
-					'id' => 'wb-' . strtolower( $this->getName() ) . '-form1',
-					'class' => 'wb-form'
-				)
-			)
-			. Html::openElement(
-				'fieldset',
-				array( 'class' => 'wb-fieldset' )
-			)
-			. Html::element(
-				'legend',
-				array( 'class' => 'wb-legend' ),
-				$this->msg( 'special-' . strtolower( $this->getName() ) )->text()
-			)
-		);
-
+		$formDescriptor = array();
 		// Form elements
-		$this->getOutput()->addHTML( $this->getFormElements( $entity ) );
-
-		// Form body
+		list( $intro, $formElements ) = $this->getFormElements( $entity );
+		$this->getOutput()->addHTML( Html::rawElement( 'p', array(), $intro ) );
+		$formDescriptor = array_merge( $formDescriptor, $formElements );
 		$submitKey = 'wikibase-' . strtolower( $this->getName() ) . '-submit';
-		$this->getOutput()->addHTML(
-			Html::input(
-				$submitKey,
-				$this->msg( $submitKey )->text(),
-				'submit',
-				array(
-					'id' => 'wb-' . strtolower( $this->getName() ) . '-submit',
-					'class' => 'wb-button'
-				)
-			)
-			. Html::input(
-				'wpEditToken',
-				$this->getUser()->getEditToken(),
-				'hidden'
-			)
-			. Html::closeElement( 'fieldset' )
-			. Html::closeElement( 'form' )
+		$formDescriptor[] = array(
+			'type' => 'submit',
+			'id' => 'wb-' . strtolower( $this->getName() ) . '-submit',
+			'cssclass' => 'wb-button',
+			'name' => $submitKey,
+			'default' => $this->msg( $submitKey )->text()
 		);
+		$sectionName = strtolower( $this->getName() );
+		foreach ( $formDescriptor as $name => $field ) {
+			$formDescriptor[$name]['section'] = $sectionName;
+		}
+		$htmlForm = new HTMLForm( $formDescriptor, $this->getContext(), 'special' );
+		$htmlForm
+			->setId( 'wb-' . strtolower( $this->getName() ) . '-form1' )
+			->addHiddenField( 'wpEditToken', $this->getUser()->getEditToken() )
+			->suppressDefaultSubmit()
+			->show();
 	}
 
 	/**
@@ -222,19 +200,15 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected function getFormElements( Entity $entity = null ) {
 		$id = 'wb-modifyentity-id';
 
-		return Html::label(
-			$this->msg( 'wikibase-modifyentity-id' )->text(),
-			$id,
-			array( 'class' => 'wb-label' )
-		)
-		. Html::input(
-			'id',
-			$entity === null ? '' : $entity->getId(),
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => $id
-			)
+		return array(
+			'id' => array(
+				'label-message' => 'wikibase-modifyentity-id',
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => $id,
+				'default' => $entity === null ? '' : $entity->getId(),
+				'cssclass' => 'wb-input'
+			),
 		);
 	}
 
