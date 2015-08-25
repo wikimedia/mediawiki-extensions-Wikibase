@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c6fde86a",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T17:07:01Z",
+      "side": 0,
+      "message": "Why was this removed? It\u0027s still used by getEntityIdFormater()",
+      "revId": "6af8557c7910e3cd27fe48c26efcd90c9b9b88e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

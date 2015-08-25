@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_0637704c",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T17:07:01Z",
+      "side": 1,
+      "message": "Isn\u0027t this what getIdHtml does? \nAnd why do we use a fance EntityIdFormatter with label lookup if we *know* that the property page doesn\u0027t exist? It\u0027s rather likely that there is no label either...",
+      "revId": "3c722bc1da6deaa85b50bfb2212dce9f44d54e4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_46e9f8a5",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T17:07:01Z",
+      "side": 1,
+      "message": "This re-implements an EntityIdFormatter... why?",
+      "revId": "3c722bc1da6deaa85b50bfb2212dce9f44d54e4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
