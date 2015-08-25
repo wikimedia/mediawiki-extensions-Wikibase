@@ -16,6 +16,23 @@
       "revId": "39bc770852c0db477775d8c670b3077364f934cc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_92c5da42",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T22:35:28Z",
+      "side": 1,
+      "message": "Looks like some iterator magic would do good here",
+      "revId": "39bc770852c0db477775d8c670b3077364f934cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
