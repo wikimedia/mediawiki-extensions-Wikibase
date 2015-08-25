@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a368ceb8",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-25T14:59:54Z",
+      "side": 1,
+      "message": "Typo, 1 t instead of 2.",
+      "revId": "c2b1d508ee64889768e820fe24c34a17c85c79dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_235cde1d",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-25T14:59:54Z",
+      "side": 1,
+      "message": "Whats the point of doing a lazy initialization here? Isn\u0027t it much simpler to simply pass in the $entityIdFormatter as a parameter in the constructor? ... arg, I see. Because of the prefetched $propertyIds.",
+      "revId": "c2b1d508ee64889768e820fe24c34a17c85c79dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_636666ec",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-25T14:59:54Z",
+      "side": 1,
+      "message": "The limit is not used anywhere. What\u0027s the point of this patch if all it does is *hiding* the additional search results, but they are still all queried?",
+      "revId": "c2b1d508ee64889768e820fe24c34a17c85c79dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c3839a55",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-25T14:59:54Z",
+      "side": 1,
+      "message": "Please use the $limit here to avoid looping/passing thousands of entries around.",
+      "revId": "c2b1d508ee64889768e820fe24c34a17c85c79dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
