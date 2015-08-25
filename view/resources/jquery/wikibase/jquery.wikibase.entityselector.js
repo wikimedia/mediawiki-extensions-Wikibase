@@ -217,6 +217,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 			search: term,
 			format: 'json',
 			language: this.options.language,
+			uselang: this.options.language,
 			type: this.options.type,
 			'continue': this._cache[term] && this._cache[term].nextSuggestionOffset
 			? this._cache[term].nextSuggestionOffset : 0
