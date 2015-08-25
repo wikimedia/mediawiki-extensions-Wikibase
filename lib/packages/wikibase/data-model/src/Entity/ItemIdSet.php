@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Entity;
 
+use ArrayIterator;
 use Comparable;
 use Countable;
 use InvalidArgumentException;
@@ -51,10 +52,10 @@ class ItemIdSet implements IteratorAggregate, Countable, Comparable {
 	/**
 	 * @see IteratorAggregate::getIterator
 	 *
-	 * @return Traversable
+	 * @return Traversable|ItemId[]
 	 */
 	public function getIterator() {
-		return new \ArrayIterator( $this->ids );
+		return new ArrayIterator( $this->ids );
 	}
 
 	/**

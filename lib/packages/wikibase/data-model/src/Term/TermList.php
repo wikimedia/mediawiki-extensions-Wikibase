@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Term;
 
+use ArrayIterator;
 use Comparable;
 use Countable;
 use InvalidArgumentException;
@@ -64,10 +65,10 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 
 	/**
 	 * @see IteratorAggregate::getIterator
-	 * @return Traversable
+	 * @return Traversable|Term[]
 	 */
 	public function getIterator() {
-		return new \ArrayIterator( $this->terms );
+		return new ArrayIterator( $this->terms );
 	}
 
 	/**

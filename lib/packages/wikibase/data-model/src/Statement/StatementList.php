@@ -224,7 +224,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	}
 
 	/**
-	 * @return Traversable
+	 * @return Traversable|Statement[]
 	 */
 	public function getIterator() {
 		return new ArrayIterator( $this->statements );
