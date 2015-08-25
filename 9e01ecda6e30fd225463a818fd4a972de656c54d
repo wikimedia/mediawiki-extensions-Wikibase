@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_91d15c28",
+        "filename": "docs/datatypes.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:35:14Z",
+      "side": 1,
+      "message": "\"ephemeral\" is somewhat of a 10 dollar word. It also has a different meaning than what you intend to convey here if I\u0027m not mistaken",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_51c77467",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:35:14Z",
+      "side": 1,
+      "message": "meta-factory? \"various aspects associated with data types\"?",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_71edd0ed",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:35:14Z",
+      "side": 1,
+      "message": "?",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_f1a780b8",
+        "filename": "lib/tests/phpunit/DataTypeDefinitionsTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:35:14Z",
+      "side": 1,
+      "message": "error",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_11ad6c99",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:35:14Z",
+      "side": 1,
+      "message": "The brackets are not needed and omitted in our other code if I\u0027m not mistaken",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_d1b284f8",
+        "filename": "repo/includes/BuilderBasedDataTypeValidatorFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:35:14Z",
+      "side": 1,
+      "message": "twice?",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
