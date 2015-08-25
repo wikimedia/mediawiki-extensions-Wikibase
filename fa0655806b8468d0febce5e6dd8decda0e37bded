@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_464d78c6",
+        "filename": "lib/includes/serialization/CallbackFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T17:23:10Z",
+      "side": 1,
+      "message": "what\u0027s the intended usage of this?",
+      "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8657e05a",
+        "filename": "lib/includes/serialization/CallbackFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T17:23:10Z",
+      "side": 1,
+      "message": "why is this check now needed? and why fail silently if $array isn\u0027t an array?",
+      "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e6eca490",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T17:23:10Z",
+      "side": 1,
+      "message": "Is it really necessary to pass dynamically generated callbacks here? I mean, lambda is fun and all, but wouldn\u0027t it be simpler to have 5 methods for the five usecases in the modifier?",
+      "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_06f2106b",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T17:23:10Z",
+      "side": 1,
+      "message": "regardless of $this-\u003eaddMetaData?",
+      "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
