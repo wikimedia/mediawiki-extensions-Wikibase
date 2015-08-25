@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_83e03225",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-25T15:04:22Z",
+      "side": 1,
+      "message": "Unused.",
+      "revId": "0f87d6351bac31f1783f2beb12c7605c41979657",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c3fabad9",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-25T15:04:22Z",
+      "side": 1,
+      "message": "use missing.",
+      "revId": "0f87d6351bac31f1783f2beb12c7605c41979657",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_03f522ea",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-25T15:04:22Z",
+      "side": 1,
+      "message": "$ missing!",
+      "revId": "0f87d6351bac31f1783f2beb12c7605c41979657",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
