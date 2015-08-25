@@ -629,7 +629,8 @@ class WikibaseValueFormatterBuilders {
 		$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
 		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		$unitFormatter = new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup );
-		return new QuantityFormatter( $decimalFormatter, $unitFormatter, $options );
+		$quantityFormatter = new QuantityFormatter( $decimalFormatter, $unitFormatter, $options );
+		return new EscapingValueFormatter( $quantityFormatter, 'htmlspecialchars' );
 	}
 
 	/**
