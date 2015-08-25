@@ -14,6 +14,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Store\HashSiteLinkStore;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
 
@@ -32,7 +34,10 @@ use Wikibase\Test\MockRepository;
 class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 	public function testConstructor() {
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings();
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
+			new MockRepository(),
+			new HashSiteLinkStore()
+		);
 
 		$this->assertInstanceOf(
 			'Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings',
@@ -47,21 +52,11 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseLuaBindings
 	 */
 	private function getWikibaseLuaBindings(
-		EntityLookup $entityLookup = null,
+		EntityLookup $entityLookup,
+		SiteLinkLookup $siteLinkLookup,
 		UsageAccumulator $usageAccumulator = null,
 		ParserOptions $parserOptions = null
 	) {
-
-		$siteLinkTable = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkTable' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$siteLinkTable->expects( $this->any() )
-			->method( 'getItemIdForLink' )
-			->will( $this->returnCallback( function( $siteId, $page ) {
-				return $page === 'Rome' ? new ItemId( 'Q33' ) : false;
-			} ) );
-
 		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
@@ -73,8 +68,8 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),
-			$entityLookup ?: new MockRepository(),
-			$siteLinkTable,
+			$entityLookup,
+			$siteLinkLookup,
 			new SettingsArray(),
 			$labelDescriptionLookup,
 			$usageAccumulator ?: new HashUsageAccumulator(),
@@ -90,8 +85,22 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetEntityId() {
+		$item = new Item( new ItemId( 'Q33' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Rome' );
+
 		$usages = new HashUsageAccumulator();
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( null, $usages );
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $item );
+
+		$siteLinkStore = new HashSiteLinkStore();
+		$siteLinkStore->saveLinksOfItem( $item );
+
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
+			$entityLookup,
+			$siteLinkStore,
+			$usages
+		);
 
 		$itemId = $wikibaseLuaBindings->getEntityId( 'Rome' );
 		$this->assertEquals( 'Q33', $itemId );
@@ -117,14 +126,22 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $itemId
 	 */
 	public function testGetLabel( $expected, $itemId ) {
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings();
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
+			new MockRepository(),
+			new HashSiteLinkStore()
+		);
 
 		$this->assertSame( $expected, $wikibaseLuaBindings->getLabel( $itemId ) );
 	}
 
 	public function testGetLabel_usage() {
 		$usages = new HashUsageAccumulator();
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( null, $usages );
+
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
+			new MockRepository(),
+			new HashSiteLinkStore(),
+			$usages
+		);
 
 		$itemId = new ItemId( 'Q7' );
 		$wikibaseLuaBindings->getLabel( $itemId->getSerialization() );
@@ -148,14 +165,22 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $itemId
 	 */
 	public function testGetDescription( $expected, $itemId ) {
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings();
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
+			new MockRepository(),
+			new HashSiteLinkStore()
+		);
 
 		$this->assertSame( $expected, $wikibaseLuaBindings->getDescription( $itemId ) );
 	}
 
 	public function testGetDescription_usage() {
 		$usages = new HashUsageAccumulator();
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( null, $usages );
+
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
+			new MockRepository(),
+			new HashSiteLinkStore(),
+			$usages
+		);
 
 		$itemId = new ItemId( 'Q7' );
 		$wikibaseLuaBindings->getDescription( $itemId->getSerialization() );
@@ -185,7 +210,10 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $item );
 
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $entityLookup );
+		$siteLinkStore = new HashSiteLinkStore();
+		$siteLinkStore->saveLinksOfItem( $item );
+
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $entityLookup, $siteLinkStore );
 		$this->assertSame( $expected, $wikibaseLuaBindings->getSiteLinkPageName( $itemId ) );
 	}
 
@@ -195,8 +223,16 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $item );
 
+		$siteLinkStore = new HashSiteLinkStore();
+		$siteLinkStore->saveLinksOfItem( $item );
+
 		$usages = new HashUsageAccumulator();
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( $entityLookup, $usages );
+
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
+			$entityLookup,
+			$siteLinkStore,
+			$usages
+		);
 
 		$itemId = $item->getId();
 		$wikibaseLuaBindings->getSiteLinkPageName( $itemId->getSerialization() );
@@ -219,7 +255,13 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			}
 		);
 
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings( null, null, $parserOptions );
+		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
+			new MockRepository(),
+			new HashSiteLinkStore(),
+			new HashUsageAccumulator(),
+			$parserOptions
+		);
+
 		$userLang = $wikibaseLuaBindings->getUserLang();
 		$this->assertSame( 'ru', $userLang );
 		$this->assertTrue( $cacheSplit );
