@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_31fd08af",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:22:36Z",
+      "side": 1,
+      "message": "\u003e The reason for the lazy init was apparently to avoid proper injection.\n\nYeah, I\u0027m sure someone was intent on doing that",
+      "parentUuid": "6ec1af18_ef81f94f",
+      "revId": "a319a03204c0f7104d66b73f79f8f3a9b990807d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_b3587736",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 10
