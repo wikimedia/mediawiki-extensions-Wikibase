@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_f1b460d1",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:49:00Z",
+      "side": 1,
+      "message": "le sigh :)",
+      "revId": "b63a10cdf062850625cf12190f53425b14f8bf36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
