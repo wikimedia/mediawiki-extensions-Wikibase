@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_6670b46f",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T16:39:58Z",
+      "side": 1,
+      "message": "This is never initialized or read.",
+      "revId": "9daa1df25cf6c1cf11cd8c3d08b94d25542cad33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_26662cb9",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-25T16:39:58Z",
+      "side": 1,
+      "message": "But if it is set, we should use it?...",
+      "revId": "9daa1df25cf6c1cf11cd8c3d08b94d25542cad33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
