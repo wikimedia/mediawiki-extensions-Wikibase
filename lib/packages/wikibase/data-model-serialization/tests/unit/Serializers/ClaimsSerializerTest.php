@@ -20,8 +20,8 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
-		$claimSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$claimSerializerMock->expects( $this->any() )
+		$statementSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( $statement ) )
 			->will( $this->returnValue( array(
@@ -33,12 +33,12 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 				'rank' => 'normal'
 			) ) );
 
-		return new ClaimsSerializer( $claimSerializerMock, false );
+		return new ClaimsSerializer( $statementSerializerMock, false );
 	}
 
 	public function serializableProvider() {
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'test' );
 
 		return array(
 			array(
@@ -46,7 +46,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 			),
 			array(
 				new Claims( array(
-					$claim
+					$statement
 				) )
 			),
 		);
@@ -98,15 +98,15 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 	public function testClaimsSerializerWithOptionObjectsForMaps() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
-		$claimSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$claimSerializerMock->expects( $this->any() )
+		$statementSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$statementSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( $statement ) )
 			->will( $this->returnValue( array(
 				'mockedsuff' => array(),
 				'type' => 'statement',
 			) ) );
-		$serializer = new ClaimsSerializer( $claimSerializerMock, true );
+		$serializer = new ClaimsSerializer( $statementSerializerMock, true );
 
 		$claims = new Claims( array( $statement ) );
 

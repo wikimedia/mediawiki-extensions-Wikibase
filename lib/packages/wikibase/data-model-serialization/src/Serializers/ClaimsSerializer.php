@@ -6,8 +6,8 @@ use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * Package private
@@ -20,7 +20,7 @@ class ClaimsSerializer implements DispatchableSerializer {
 	/**
 	 * @var Serializer
 	 */
-	private $claimSerializer;
+	private $statementSerializer;
 
 	/**
 	 * @var bool
@@ -28,11 +28,11 @@ class ClaimsSerializer implements DispatchableSerializer {
 	private $useObjectsForMaps;
 
 	/**
-	 * @param Serializer $claimSerializer
+	 * @param Serializer $statementSerializer
 	 * @param bool $useObjectsForMaps
 	 */
-	public function __construct( Serializer $claimSerializer, $useObjectsForMaps ) {
-		$this->claimSerializer = $claimSerializer;
+	public function __construct( Serializer $statementSerializer, $useObjectsForMaps ) {
+		$this->statementSerializer = $statementSerializer;
 		$this->useObjectsForMaps = $useObjectsForMaps;
 	}
 
@@ -66,14 +66,12 @@ class ClaimsSerializer implements DispatchableSerializer {
 		return $this->getSerialized( $object );
 	}
 
-	private function getSerialized( Claims $claims ) {
+	private function getSerialized( Claims $statements ) {
 		$serialization = array();
 
-		/**
-		 * @var Claim $claim
-		 */
-		foreach ( $claims as $claim ) {
-			$serialization[$claim->getMainSnak()->getPropertyId()->getSerialization()][] = $this->claimSerializer->serialize( $claim );
+		/** @var Statement $statement */
+		foreach ( $statements as $statement ) {
+			$serialization[$statement->getMainSnak()->getPropertyId()->getSerialization()][] = $this->statementSerializer->serialize( $statement );
 		}
 
 		if ( $this->useObjectsForMaps ) {

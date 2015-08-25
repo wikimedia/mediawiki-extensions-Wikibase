@@ -4,7 +4,6 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Serializers\DataValueSerializer;
 use Serializers\Serializer;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -15,6 +14,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\TypedSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -73,7 +73,7 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewClaimSerializer() {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newClaimSerializer(),
-			new Claim( new PropertyNoValueSnak( 42 ) )
+			new Statement( new PropertyNoValueSnak( 42 ) )
 		);
 	}
 
