@@ -186,7 +186,7 @@ final class ClientHooks {
 	 * @param array &$tables
 	 * @param array &$join_conds
 	 * @param array &$fields
-	 * @param FormOptions|null $opts
+	 * @param FormOptions|array|null $opts MediaWiki 1.22 used an array and MobileFrontend still does.
 	 *
 	 * @return bool
 	 */

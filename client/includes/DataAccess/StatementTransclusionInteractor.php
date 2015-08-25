@@ -79,7 +79,7 @@ class StatementTransclusionInteractor {
 	public function render(
 		EntityId $entityId,
 		$propertyLabelOrId,
-		$acceptableRanks = null
+		array $acceptableRanks = null
 	) {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
