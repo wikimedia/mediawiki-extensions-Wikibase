@@ -43,6 +43,21 @@ class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $connection, $actual );
 	}
 
+	public function testGetWriteConnection() {
+		$connection = $this->getConnectionMock();
+		$lb = $this->getLoadBalancerMock();
+
+		$lb->expects( $this->once() )
+			->method( 'getConnection' )
+			->with( DB_MASTER )
+			->will( $this->returnValue( $connection ) );
+
+		$manager = new ConsistentReadConnectionManager( $lb );
+		$actual = $manager->getWriteConnection();
+
+		$this->assertSame( $connection, $actual );
+	}
+
 	public function testForceMaster() {
 		$connection = $this->getConnectionMock();
 		$lb = $this->getLoadBalancerMock();

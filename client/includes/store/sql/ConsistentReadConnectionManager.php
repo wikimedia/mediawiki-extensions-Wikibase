@@ -70,7 +70,8 @@ class ConsistentReadConnectionManager {
 	}
 
 	/**
-	 * Returns a database connection for reading.
+	 * Returns a database connection for reading. The connection should later be released by
+	 * calling releaseConnection().
 	 *
 	 * @note: If forceMaster() or beginAtomicSection() were previously called on this
 	 * ConsistentReadConnectionManager instance, this method will return a connection to the master database,
@@ -84,11 +85,12 @@ class ConsistentReadConnectionManager {
 	}
 
 	/**
-	 * Returns a connection to the master DB, for updating.
+	 * Returns a connection to the master DB, for updating. The connection should later be released
+	 * by calling releaseConnection().
 	 *
 	 * @return DatabaseBase
 	 */
-	private function getWriteConnection() {
+	public function getWriteConnection() {
 		return $this->loadBalancer->getConnection( DB_MASTER, array(), $this->dbName );
 	}
 
