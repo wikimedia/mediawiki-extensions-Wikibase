@@ -6,7 +6,6 @@ use stdClass;
 use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
 use Wikibase\DataModel\Serializers\TermSerializer;
 use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupFallback;
 use Wikibase\DataModel\Term\AliasGroupList;
 
 /**

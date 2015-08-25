@@ -166,7 +166,7 @@ class SerializerFactory {
 	}
 
 	/**
-	 * Returns a Serializer that can serialize claims.
+	 * Returns a Serializer that can serialize Claim objects.
 	 *
 	 * @deprecated since 1.4, use newStatementSerializer instead
 	 *
