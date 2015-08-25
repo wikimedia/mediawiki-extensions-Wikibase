@@ -4,6 +4,7 @@ namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
 use DatabaseBase;
+use Exception;
 use InvalidArgumentException;
 use Iterator;
 use Wikibase\Client\Usage\EntityUsage;
@@ -131,6 +132,7 @@ class EntityUsageTable {
 	 * @param string $touched timestamp
 	 */
 	private function touchUsageBatch( array $rowIds, $touched ) {
+		$this->connection->begin( __METHOD__ );
 		$this->connection->update(
 			$this->tableName,
 			array(
@@ -141,6 +143,7 @@ class EntityUsageTable {
 			),
 			__METHOD__
 		);
+		$this->connection->commit( __METHOD__ );
 	}
 
 	/**
@@ -195,8 +198,12 @@ class EntityUsageTable {
 		$c = 0;
 
 		foreach ( $batches as $rows ) {
+			$this->connection->begin( __METHOD__ );
+
 			$this->connection->insert( $this->tableName, $rows, __METHOD__, array( 'IGNORE' ) );
 			$c += $this->connection->affectedRows();
+
+			$this->connection->commit( __METHOD__ );
 		}
 
 		return $c;
@@ -344,6 +351,7 @@ class EntityUsageTable {
 		$batches = array_chunk( $idStrings, $this->batchSize );
 
 		foreach ( $batches as $batch ) {
+			$this->connection->begin( __METHOD__ );
 			$this->connection->delete(
 				$this->tableName,
 				array(
@@ -351,6 +359,7 @@ class EntityUsageTable {
 				),
 				__METHOD__
 			);
+			$this->connection->commit( __METHOD__ );
 		}
 	}
 

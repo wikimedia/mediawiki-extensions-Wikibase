@@ -37,7 +37,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	/**
 	 * @var int
 	 */
-	private $batchSize = 1000;
+	private $batchSize = 100;
 
 	/**
 	 * @param EntityIdParser $idParser
@@ -129,7 +129,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return;
 		}
 
-		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
+		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
+		// transaction to prevent long lock retention during big updates.
+		$db = $this->connectionManager->getWriteConnection();
 
 		try {
 			$usageTable = $this->newUsageTable( $db );
@@ -145,9 +147,9 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			$usageTable->touchUsages( $pageId, $keep, $touched );
 			$usageTable->addUsages( $pageId, $added, $touched );
 
-			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->releaseConnection( $db );
 		} catch ( Exception $ex ) {
-			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->releaseConnection( $db );
 
 			if ( $ex instanceof DBError ) {
 				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
@@ -168,16 +170,18 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @throws UsageTrackerException
 	 */
 	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
-		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
+		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
+		// transaction to prevent long lock retention during big updates.
+		$db = $this->connectionManager->getWriteConnection();
 
 		try {
 			$usageTable = $this->newUsageTable( $db );
 			$pruned = $usageTable->pruneStaleUsages( $pageId, $lastUpdatedBefore );
 
-			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->releaseConnection( $db );
 			return $pruned;
 		} catch ( Exception $ex ) {
-			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->releaseConnection( $db );
 
 			if ( $ex instanceof DBError ) {
 				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
@@ -200,15 +204,17 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			return;
 		}
 
-		$db = $this->connectionManager->beginAtomicSection( __METHOD__ );
+		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
+		// transaction to prevent long lock retention during big updates.
+		$db = $this->connectionManager->getWriteConnection();
 
 		try {
 			$usageTable = $this->newUsageTable( $db );
 			$usageTable->removeEntities( $entityIds );
 
-			$this->connectionManager->commitAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->releaseConnection( $db );
 		} catch ( Exception $ex ) {
-			$this->connectionManager->rollbackAtomicSection( $db, __METHOD__ );
+			$this->connectionManager->releaseConnection( $db );
 
 			if ( $ex instanceof DBError ) {
 				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
