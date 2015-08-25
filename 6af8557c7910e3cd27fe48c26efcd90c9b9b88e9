@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_917f1c10",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:39:40Z",
+      "side": 1,
+      "message": "This if else could go into its own method. Only accessing fields of the class, no local vars or params of this method\n\nJust saying - this was already the case. Then again, you added more code, so there is more incentive to do this",
+      "revId": "6af8557c7910e3cd27fe48c26efcd90c9b9b88e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_11948c41",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-08-25T18:39:40Z",
+      "side": 1,
+      "message": "+\u003d 1 :)",
+      "revId": "6af8557c7910e3cd27fe48c26efcd90c9b9b88e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
