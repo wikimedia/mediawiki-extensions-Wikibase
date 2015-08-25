@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_b11a586d",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-25T17:56:56Z",
+      "side": 1,
+      "message": "chd_seen is set here",
+      "revId": "39bc770852c0db477775d8c670b3077364f934cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
