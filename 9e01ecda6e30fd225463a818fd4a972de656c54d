@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_5ca1c434",
+        "filename": "docs/datatypes.wiki",
+        "patchSetId": 13
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T11:31:09Z",
+      "side": 1,
+      "message": "you are right, i was looking for \"etherial\".",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_51c77467",
         "filename": "lib/includes/DataTypeDefinitions.php",
         "patchSetId": 13
@@ -98,6 +115,23 @@
       "writtenOn": "2015-08-25T18:35:14Z",
       "side": 1,
       "message": "twice?",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_17c6bc71",
+        "filename": "repo/includes/BuilderBasedDataTypeValidatorFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T11:31:09Z",
+      "side": 1,
+      "message": "is is",
       "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
