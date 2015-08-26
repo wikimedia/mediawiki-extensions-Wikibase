@@ -39,14 +39,14 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$q1->setLabel( 'de', 'label:Q1/de' );
 		$q1->setDescription( 'en', 'description:Q1/en' );
 		$q1->setDescription( 'de', 'description:Q1/de' );
-		$q1->addAliases( 'en', array( 'alias:Q1/en#1' ) );
-		$q1->addAliases( 'de', array( 'alias:Q1/de#1', 'alias:Q1/de#2' ) );
+		$q1->setAliases( 'en', array( 'alias:Q1/en#1' ) );
+		$q1->setAliases( 'de', array( 'alias:Q1/de#1', 'alias:Q1/de#2' ) );
 
 		$q2 = new Item( new ItemId( 'Q2' ) );
 		$q2->setLabel( 'en', 'label:Q2/en' );
 		$q2->setLabel( 'de', 'label:Q2/de' );
-		$q2->addAliases( 'en', array( 'alias:Q2/en#1' ) );
-		$q2->addAliases( 'de', array( 'alias:Q2/de#1', 'alias:Q2/de#2' ) );
+		$q2->setAliases( 'en', array( 'alias:Q2/en#1' ) );
+		$q2->setAliases( 'de', array( 'alias:Q2/de#1', 'alias:Q2/de#2' ) );
 
 		$p2 = Property::newFromType( 'string' );
 		$p2->setId( new PropertyId( 'P2' ) );
@@ -54,8 +54,8 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$p2->setLabel( 'de', 'label:P2/de' );
 		$p2->setDescription( 'en', 'description:P2/en' );
 		$p2->setDescription( 'de', 'description:P2/de' );
-		$p2->addAliases( 'en', array( 'alias:P2/en#1' ) );
-		$p2->addAliases( 'de', array( 'alias:P2/de#1', 'alias:P2/de#2' ) );
+		$p2->setAliases( 'en', array( 'alias:P2/en#1' ) );
+		$p2->setAliases( 'de', array( 'alias:P2/de#1', 'alias:P2/de#2' ) );
 
 		$p3 = Property::newFromType( 'string' );
 		$p3->setId( new PropertyId( 'P3' ) );
