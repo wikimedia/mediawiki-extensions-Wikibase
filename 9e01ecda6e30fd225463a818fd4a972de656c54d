@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_fc1e7074",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T12:04:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_51c77467",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_71edd0ed",
         "filename": "lib/includes/DataTypeDefinitions.php",
         "patchSetId": 13
@@ -64,6 +82,24 @@
       "writtenOn": "2015-08-25T18:35:14Z",
       "side": 1,
       "message": "?",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_3c315801",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T12:04:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_71edd0ed",
       "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_1c249cbb",
+        "filename": "lib/tests/phpunit/DataTypeDefinitionsTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T12:04:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_f1a780b8",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_11ad6c99",
         "filename": "repo/Wikibase.php",
         "patchSetId": 13
@@ -98,6 +152,24 @@
       "writtenOn": "2015-08-25T18:35:14Z",
       "side": 1,
       "message": "The brackets are not needed and omitted in our other code if I\u0027m not mistaken",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_7c128065",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T12:04:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_11ad6c99",
       "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_3c08782f",
+        "filename": "repo/includes/BuilderBasedDataTypeValidatorFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T12:04:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_d1b284f8",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_17c6bc71",
         "filename": "repo/includes/BuilderBasedDataTypeValidatorFactory.php",
         "patchSetId": 13
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_5c054415",
+        "filename": "repo/includes/BuilderBasedDataTypeValidatorFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T12:04:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_17c6bc71",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_9c616c02",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 13
@@ -149,6 +257,24 @@
       "writtenOn": "2015-08-26T11:54:33Z",
       "side": 1,
       "message": "add the hook point",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_fffd0205",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T12:04:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_9c616c02",
       "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
