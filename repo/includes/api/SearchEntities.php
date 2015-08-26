@@ -69,6 +69,11 @@ class SearchEntities extends ApiBase {
 	private $entityTypes;
 
 	/**
+	 * @var string
+	 */
+	private $conceptBaseUri;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -92,6 +97,8 @@ class SearchEntities extends ApiBase {
 				->newFromLanguageCode( $this->getLanguage()->getCode() )
 			)
 		);
+
+		$this->conceptBaseUri = $repo->getSettings()->getSetting( 'conceptBaseUri' );
 	}
 
 	/**
@@ -175,6 +182,7 @@ class SearchEntities extends ApiBase {
 			$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
 			$entry = array();
 			$entry['id'] = $match->getEntityId()->getSerialization();
+			$entry['concepturi'] = $this->conceptBaseUri . $match->getEntityId()->getSerialization();
 			$entry['url'] = $title->getFullUrl();
 			$entry['title'] = $title->getPrefixedText();
 			$entry['pageid'] = $title->getArticleID();
