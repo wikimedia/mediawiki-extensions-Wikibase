@@ -4,9 +4,9 @@ namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Fixtures\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 
 /**
  * @covers Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup
