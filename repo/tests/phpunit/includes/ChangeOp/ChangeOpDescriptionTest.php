@@ -87,13 +87,14 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	public function testValidate( ChangeOp $changeOp, $valid ) {
 		$entity = $this->provideNewEntity();
 
-		$oldLabels = $entity->getDescriptions();
+		$oldDescriptions = $entity->getFingerprint()->getDescriptions()->toTextArray();
 
 		$result = $changeOp->validate( $entity );
 		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
 
-		// labels should not have changed during validation
-		$this->assertEquals( $oldLabels, $entity->getDescriptions(), 'Descriptions modified by validation!' );
+		// descriptions should not have changed during validation
+		$newDescriptions = $entity->getFingerprint()->getDescriptions()->toTextArray();
+		$this->assertEquals( $oldDescriptions, $newDescriptions, 'Descriptions modified by validation!' );
 	}
 
 	/**
