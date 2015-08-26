@@ -135,6 +135,23 @@
       "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_9c616c02",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T11:54:33Z",
+      "side": 1,
+      "message": "add the hook point",
+      "revId": "9e01ecda6e30fd225463a818fd4a972de656c54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
