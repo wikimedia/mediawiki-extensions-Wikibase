@@ -151,32 +151,13 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$this->assertEquals( $target, $response->getheader( 'Location' ), 'Redirect' );
 
 		$matchers = array();
-		$matchers['site'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wb-gotolinkedpage-sitename',
-				'name' => 'site',
-				'value' => $site
-			) );
-		$matchers['itemid'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wb-gotolinkedpage-itemid',
-				'class' => 'wb-input-text',
-				'name' => 'itemid',
-				'value' => $item
-			) );
-		$matchers['submit'] = array(
-			'tag' => 'input',
-			'attributes' => array(
-				'id' => 'wb-gotolinkedpage-submit',
-				'class' => 'wb-input-button',
-				'type' => 'submit',
-				'name' => 'submit'
-			)
-		);
+		$matchers['site'] = '@<input([^>]+)id="wb-gotolinkedpage-sitename"([^>]+)(|value=")'.$site.'("|)([^>]+)>@';
+		$matchers['itemid'] = '@<input([^>]+)id="wb-gotolinkedpage-itemid"([^>]+)(|value=")'.$item.'("|)([^>]+)>@';
+		$matchers['submit'] = '@<input([^>]+)id="wb-gotolinkedpage-submit"([^>]+)type="submit"([^>]+)>@';
+		echo $output;
+
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output for: " . $key );
+			$this->assertRegExp( $matcher, $output, "Failed to match html output for: " . $key );
 		}
 
 		$errorMatch = array(
@@ -188,7 +169,8 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		);
 
 		if ( !empty( $error ) ) {
-			$this->assertTag( $errorMatch, $output, "Failed to match error: " . $error );
+			$errorMatch = '@<p class="error">'.$error.'</p>@';
+			$this->assertRegExp( $errorMatch, $output, "Failed to match error: " . $error );
 		}
 	}
 
