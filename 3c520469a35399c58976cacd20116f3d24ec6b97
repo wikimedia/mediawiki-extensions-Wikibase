@@ -106,6 +106,24 @@
       "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_dae134cc",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-26T15:01:47Z",
+      "side": 0,
+      "message": "I would be happier with that, though did try running the tests with this put back and they are indeed ok.\n\njust learned the hard way in the past to touch this the same time as touching xml stuff. :/",
+      "parentUuid": "6ec1af18_ba9ea856",
+      "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
