@@ -1,4 +1,4 @@
-( function( $, wb, mw ) {
+( function ( $, wb, mw ) {
 	'use strict';
 
 var PARENT = $.wikibase.entityview;
@@ -54,11 +54,11 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_create: function() {
+	_create: function () {
 		this._createEntityview();
 
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element ).first();
-		if( this.$statements.length === 0 ) {
+		if ( this.$statements.length === 0 ) {
 			this.$statements = $( '<div/>' ).appendTo( this.element );
 		}
 
@@ -69,7 +69,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_init: function() {
+	_init: function () {
 		this._initStatements();
 		PARENT.prototype._init.call( this );
 	},
@@ -77,17 +77,17 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_createDataType: function() {
+	_createDataType: function () {
 		// TODO: Implement propertyview template to have static HTML rendered by the back-end match
 		// the HTML rendered here without having to invoke templating mechanism here.
 
-		if( this.$dataType ) {
+		if ( this.$dataType ) {
 			return;
 		}
 
 		this.$dataType = $( '.wikibase-propertyview-datatype', this.element );
 
-		if( !this.$dataType.length ) {
+		if ( !this.$dataType.length ) {
 			this.$dataType = mw.wbTemplate( 'wikibase-propertyview-datatype',
 				this.options.value.getDataTypeId()
 			).appendTo( this.element );
@@ -97,7 +97,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_initStatements: function() {
+	_initStatements: function () {
 		var claimGuidGenerator = new wb.utilities.ClaimGuidGenerator( this.options.value.getId() );
 
 		this.$statements
@@ -123,7 +123,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_attachEventHandlers: function() {
+	_attachEventHandlers: function () {
 		PARENT.prototype._attachEventHandlers.call( this );
 
 		var self = this;
@@ -133,7 +133,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 			'statementviewafterstartediting.' + this.widgetName,
 			'referenceviewafterstartediting.' + this.widgetName
 		].join( ' ' ),
-		function( event ) {
+		function ( event ) {
 			self._trigger( 'afterstartediting' );
 		} );
 
@@ -144,7 +144,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 			'statementviewafterremove.' + this.widgetName,
 			'referenceviewafterstopediting.' + this.widgetName
 		].join( ' ' ),
-		function( event, dropValue ) {
+		function ( event, dropValue ) {
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} );
 	},
@@ -153,14 +153,14 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_setState: function( state ) {
+	_setState: function ( state ) {
 		PARENT.prototype._setState.call( this, state );
 
 		this.$statements.data( 'statementgrouplistview' )[state]();
 		// TODO: Resolve integration of referenceviews
-		this.$statements.find( '.wb-statement-references' ).each( function() {
+		this.$statements.find( '.wb-statement-references' ).each( function () {
 			var $listview = $( this ).children( ':wikibase-listview' );
-			if( $listview.length ) {
+			if ( $listview.length ) {
 				$listview.data( 'listview' )[state]();
 			}
 		} );

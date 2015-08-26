@@ -2,14 +2,14 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 /**
  * @param {Object} [options]
  * @return {jQuery}
  */
-var createEntitytermsview = function( options ) {
+var createEntitytermsview = function ( options ) {
 	options = $.extend( {
 		value: [
 			{
@@ -26,9 +26,9 @@ var createEntitytermsview = function( options ) {
 		],
 		entityId: 'I am an EntityId',
 		entityChangersFactory: {
-			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
-			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
-			getLabelsChanger: function() { return 'I am a LabelsChanger'; }
+			getAliasesChanger: function () { return 'I am an AliasesChanger'; },
+			getDescriptionsChanger: function () { return 'I am a DescriptionsChanger'; },
+			getLabelsChanger: function () { return 'I am a LabelsChanger'; }
 		}
 	}, options || {} );
 
@@ -39,12 +39,12 @@ var createEntitytermsview = function( options ) {
 };
 
 QUnit.module( 'jquery.wikibase.entitytermsview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_entitytermsview' ).each( function() {
+	teardown: function () {
+		$( '.test_entitytermsview' ).each( function () {
 			var $entitytermsview = $( this ),
 				entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-			if( entitytermsview ) {
+			if ( entitytermsview ) {
 				entitytermsview.destroy();
 			}
 
@@ -53,9 +53,9 @@ QUnit.module( 'jquery.wikibase.entitytermsview', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.throws(
-		function() {
+		function () {
 			createEntitytermsview( { value: null } );
 		},
 		'Throwing error when trying to initialize widget without a value.'
@@ -77,12 +77,12 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'setError()', function( assert ) {
+QUnit.test( 'setError()', function ( assert ) {
 	var $entitytermsview = createEntitytermsview(),
 		entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
 	$entitytermsview
-	.on( 'entitytermsviewtoggleerror', function( event, error ) {
+	.on( 'entitytermsviewtoggleerror', function ( event, error ) {
 		assert.ok(
 			true,
 			'Triggered "toggleerror" event.'
@@ -92,7 +92,7 @@ QUnit.test( 'setError()', function( assert ) {
 	entitytermsview.setError();
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	var $entitytermsview = createEntitytermsview(),
 		entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
@@ -104,7 +104,7 @@ QUnit.test( 'value()', function( assert ) {
 	);
 
 	assert.throws(
-		function() {
+		function () {
 			entitytermsview.value( [] );
 		},
 		'Throwing error when trying to set a new value.'

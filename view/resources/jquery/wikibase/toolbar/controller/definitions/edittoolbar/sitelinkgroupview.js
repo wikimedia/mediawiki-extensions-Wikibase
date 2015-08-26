@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -12,7 +12,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 	selector: ':' + $.wikibase.sitelinkgroupview.prototype.namespace
 		+ '-' + $.wikibase.sitelinkgroupview.prototype.widgetName,
 	events: {
-		sitelinkgroupviewcreate: function( event ) {
+		sitelinkgroupviewcreate: function ( event ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				$headingContainer = $sitelinkgroupview.find(
@@ -20,7 +20,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				),
 				$container = $headingContainer.children( '.wikibase-toolbar-container' );
 
-			if( !$container.length ) {
+			if ( !$container.length ) {
 				$container = $( '<div/>' ).appendTo( $headingContainer );
 			}
 
@@ -29,23 +29,23 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				interactionWidget: sitelinkgroupview
 			} );
 
-			$sitelinkgroupview.on( 'keydown.edittoolbar', function( event ) {
-				if( sitelinkgroupview.option( 'disabled' ) ) {
+			$sitelinkgroupview.on( 'keydown.edittoolbar', function ( event ) {
+				if ( sitelinkgroupview.option( 'disabled' ) ) {
 					return;
 				}
-				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
+				if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 					sitelinkgroupview.stopEditing( true );
-				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
+				} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					sitelinkgroupview.stopEditing( false );
 				}
 			} );
 		},
-		'sitelinkgroupviewchange sitelinkgroupviewafterstartediting': function( event ) {
+		'sitelinkgroupviewchange sitelinkgroupviewafterstartediting': function ( event ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				edittoolbar = $sitelinkgroupview.data( 'edittoolbar' );
 
-			if( !edittoolbar ) {
+			if ( !edittoolbar ) {
 				return;
 			}
 
@@ -54,7 +54,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[enable ? 'enable' : 'disable']();
 		},
-		sitelinkgroupviewdisable: function( event ) {
+		sitelinkgroupviewdisable: function ( event ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				edittoolbar = $sitelinkgroupview.data( 'edittoolbar' ),
@@ -63,11 +63,11 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[enable ? 'enable' : 'disable']();
 		},
-		edittoolbaredit: function( event, toolbarcontroller ) {
+		edittoolbaredit: function ( event, toolbarcontroller ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
-			if( !sitelinkgroupview ) {
+			if ( !sitelinkgroupview ) {
 				return;
 			}
 

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 'use strict';
 
 var PARENT = $.wikibase.toolbaritem;
@@ -42,25 +42,25 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem._create
 	 */
-	_create: function() {
+	_create: function () {
 		PARENT.prototype._create.call( this );
 
 		var self = this;
 
-		if( this.options.cssClassSuffix ) {
+		if ( this.options.cssClassSuffix ) {
 			this.element.addClass( 'wikibase-toolbar-button-' + this.options.cssClassSuffix );
 		}
 
-		if( !this.$link.contents().length ) {
+		if ( !this.$link.contents().length ) {
 			this.$link.append( this._getLabel() );
 		}
 
 		this.$link
-		.on( 'click.toolbarbutton keydown.toolbarbutton', function( event ) {
-			if( event.type === 'click' || event.keyCode === $.ui.keyCode.ENTER ) {
+		.on( 'click.toolbarbutton keydown.toolbarbutton', function ( event ) {
+			if ( event.type === 'click' || event.keyCode === $.ui.keyCode.ENTER ) {
 				event.preventDefault();
 
-				if( !self.options.disabled ) {
+				if ( !self.options.disabled ) {
 					self._trigger( 'action' );
 				}
 			}
@@ -70,7 +70,7 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		this.$link.off( '.toolbarbutton' );
 		PARENT.prototype.destroy.call( this );
 	},
@@ -78,15 +78,15 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem._setOption
 	 */
-	_setOption: function( key, value ) {
-		if( key === 'cssClassSuffix' ) {
-			if( this.options.cssClassSuffix ) {
+	_setOption: function ( key, value ) {
+		if ( key === 'cssClassSuffix' ) {
+			if ( this.options.cssClassSuffix ) {
 				this.element
 				.removeClass( 'wikibase-toolbar-button-' + this.options.cssClassSuffix );
 			}
 			this.element.addClass( 'wikibase-toolbar-button-' + value );
-		} else if( key === 'disabled' ) {
-			if( value ) {
+		} else if ( key === 'disabled' ) {
+			if ( value ) {
 				this.$link.attr( 'tabIndex', '-1' );
 			} else {
 				this.$link.removeAttr( 'tabIndex' );
@@ -98,7 +98,7 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @return {jQuery}
 	 */
-	_getLabel: function() {
+	_getLabel: function () {
 		return typeof this.options.$label === 'string'
 			? $( document.createTextNode( this.options.$label ) )
 			: this.options.$label;
@@ -107,14 +107,14 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem.focus
 	 */
-	focus: function() {
+	focus: function () {
 		this.$link.focus();
 	},
 
 	/**
 	 * Main drawing routine.
 	 */
-	draw: function() {}
+	draw: function () {}
 } );
 
 } )( jQuery );

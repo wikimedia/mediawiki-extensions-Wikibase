@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -11,12 +11,12 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 	id: 'referenceview-snakview',
 	selector: '.wikibase-statementview-references .wikibase-referenceview',
 	events: {
-		'snakviewafterstartediting snakviewchange': function( event, toolbarcontroller ) {
+		'snakviewafterstartediting snakviewchange': function ( event, toolbarcontroller ) {
 			var $snakview = $( event.target ),
 				$referenceview = $snakview.closest( ':wikibase-referenceview' ),
 				referenceview = $referenceview.data( 'referenceview' );
 
-			if( !referenceview ) {
+			if ( !referenceview ) {
 				return;
 			}
 
@@ -28,8 +28,8 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				$snakview.removetoolbar( {
 					$container: $( '<div/>' ).appendTo( $snakview )
 				} )
-				.on( 'removetoolbarremove.removetoolbar', function( event ) {
-					if( event.target === $snakview[0] ) {
+				.on( 'removetoolbarremove.removetoolbar', function ( event ) {
+					if ( event.target === $snakview[0] ) {
 						snakviewPropertyGroupListview.removeItem( $snakview );
 					}
 				} );
@@ -38,12 +38,12 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'referenceviewafterstopediting',
-					function( event, toolbarcontroller ) {
+					function ( event, toolbarcontroller ) {
 						// Destroy the snakview toolbars:
 						var $referenceviewNode = $( event.target );
 						$.each(
 							$referenceviewNode.find( '.wikibase-snakview' ),
-							function( i, snakviewNode ) {
+							function ( i, snakviewNode ) {
 								toolbarcontroller.destroyToolbar(
 									$( snakviewNode ).data( 'removetoolbar' )
 								);
@@ -56,14 +56,14 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'referenceviewdisable listviewitemremoved',
-					function( event ) {
+					function ( event ) {
 						var $referenceview = event.type.indexOf( 'referenceview' ) !== -1
 							? $( event.target )
 							: $( event.target ).closest( ':wikibase-referenceview' );
 
 						var referenceview = $referenceview.data( 'referenceview' );
 
-						if( !referenceview ) {
+						if ( !referenceview ) {
 							return;
 						}
 
@@ -71,18 +71,18 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 							lia = listview.listItemAdapter(),
 							$snaklistviews = listview.items();
 
-						for( var i = 0; i < $snaklistviews.length; i++ ) {
+						for ( var i = 0; i < $snaklistviews.length; i++ ) {
 							var snaklistview = lia.liInstance( $snaklistviews.eq( i ) );
 
 							// Item might be about to be removed not being a list item instance.
-							if( snaklistview ) {
+							if ( snaklistview ) {
 								var $snakviews = snaklistview._listview.items();
 
-								for( var j = 0; j < $snakviews.length; j++ ) {
+								for ( var j = 0; j < $snakviews.length; j++ ) {
 									var $snakview = $snakviews.eq( j ),
 										removetoolbar = $snakview.data( 'removetoolbar' );
 
-									if( removetoolbar ) {
+									if ( removetoolbar ) {
 										removetoolbar[
 											referenceview.option( 'disabled' )
 											|| $snakviews.length === 1 && $snaklistviews.length === 1
@@ -104,7 +104,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				lia = listview.listItemAdapter(),
 				$snaklistviews = listview.items();
 
-			if( !$snaklistviews.length ) {
+			if ( !$snaklistviews.length ) {
 				return;
 			}
 
@@ -114,21 +114,21 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				removetoolbar = $firstSnakview.data( 'removetoolbar' ),
 				numberOfSnakviews = 0;
 
-			for( var i = 0; i < $snaklistviews.length; i++ ) {
+			for ( var i = 0; i < $snaklistviews.length; i++ ) {
 				var snaklistviewWidget = lia.liInstance( $snaklistviews.eq( i ) ),
 					snaklistviewListview = snaklistviewWidget.$listview.data( 'listview' ),
 					snaklistviewListviewLia = snaklistviewListview.listItemAdapter(),
 					$snakviews = snaklistviewListview.items();
 
-				for( var j = 0; j < $snakviews.length; j++ ) {
+				for ( var j = 0; j < $snakviews.length; j++ ) {
 					var snakview = snaklistviewListviewLia.liInstance( $snakviews.eq( j ) );
-					if( snakview.snak() ) {
+					if ( snakview.snak() ) {
 						numberOfSnakviews++;
 					}
 				}
 			}
 
-			if( removetoolbar ) {
+			if ( removetoolbar ) {
 				removetoolbar[ numberOfSnakviews > 1 ? 'enable' : 'disable' ]();
 			}
 		}

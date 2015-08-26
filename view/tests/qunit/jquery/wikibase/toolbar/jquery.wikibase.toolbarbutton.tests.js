@@ -2,26 +2,26 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki at snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 /**
  * @param {Object} [options]
  * @return {jQuery}
  */
-var createTestButton = function( options ) {
+var createTestButton = function ( options ) {
 	return $( '<span/>' )
 		.addClass( 'test_toolbarbutton' )
 		.toolbarbutton( options || {} );
 };
 
 QUnit.module( 'jquery.wikibase.toolbarbutton', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( 'test_toolbarbutton' ).each( function() {
+	teardown: function () {
+		$( 'test_toolbarbutton' ).each( function () {
 			var $button = $( this ),
 				button = $button.data( 'toolbarbutton' );
 
-			if( button ) {
+			if ( button ) {
 				button.destroy();
 			}
 
@@ -30,7 +30,7 @@ QUnit.module( 'jquery.wikibase.toolbarbutton', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $button = createTestButton(),
 		button = $button.data( 'toolbarbutton' );
 
@@ -47,11 +47,11 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'action event', 1, function( assert ) {
+QUnit.test( 'action event', 1, function ( assert ) {
 	var $button = createTestButton(),
 		button = $button.data( 'toolbarbutton' );
 
-	$button.on( 'toolbarbuttonaction', function( event ) {
+	$button.on( 'toolbarbuttonaction', function ( event ) {
 		assert.ok(
 			$( event.target ).data( 'toolbarbutton' ) === button,
 			'Triggered "action" event.'

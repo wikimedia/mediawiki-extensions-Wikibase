@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -60,8 +60,8 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
-		if( !this.options.siteLinksChanger || !this.options.entityStore ) {
+	_create: function () {
+		if ( !this.options.siteLinksChanger || !this.options.entityStore ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -76,7 +76,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		this.$listview.data( 'listview' ).destroy();
 		this.$listview.off( '.' + this.widgetName );
 		this.element.removeClass( 'wikibase-sitelinklistview' );
@@ -89,17 +89,17 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.draw
 	 */
-	draw: function() {
-		if( !this.$listview.data( 'listview' ) ) {
+	draw: function () {
+		if ( !this.$listview.data( 'listview' ) ) {
 			this._createListView();
 		}
 
 		this._refreshCounter();
 
-		if( this.options.autoInput && !this.isFull() ) {
+		if ( this.options.autoInput && !this.isFull() ) {
 			var self = this,
 				event = this.widgetEventPrefix + 'afterstartediting.' + this.widgetName,
-				updateAutoInput = function() {
+				updateAutoInput = function () {
 					self._updateAutoInput();
 				};
 
@@ -114,7 +114,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * Creates the listview widget managing the sitelinkview widgets
 	 */
-	_createListView: function() {
+	_createListView: function () {
 		var self = this,
 			listItemWidget = $.wikibase.sitelinkview,
 			prefix = listItemWidget.prototype.widgetEventPrefix;
@@ -124,11 +124,11 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: listItemWidget,
-				newItemOptionsFn: function( value ) {
+				newItemOptionsFn: function ( value ) {
 					return {
 						value: value,
-						getAllowedSites: function() {
-							return $.map( self._getUnusedAllowedSiteIds(), function( siteId ) {
+						getAllowedSites: function () {
+							return $.map( self._getUnusedAllowedSiteIds(), function ( siteId ) {
 								return wb.sites.getSite( siteId );
 							} );
 						},
@@ -140,23 +140,23 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			listItemNodeName: 'LI',
 			encapsulate: true
 		} )
-		.on( prefix + 'change.' + this.widgetName, function( event ) {
+		.on( prefix + 'change.' + this.widgetName, function ( event ) {
 			event.stopPropagation();
-			if( self.options.autoInput ) {
+			if ( self.options.autoInput ) {
 				self._updateAutoInput();
 				self._refreshCounter();
 			}
 			self._trigger( 'change' );
 		} )
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+		.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
 			event.stopPropagation();
 		} )
-		.on( 'keydown.' + this.widgetName, function( event ) {
-			if( event.keyCode === $.ui.keyCode.BACKSPACE ) {
+		.on( 'keydown.' + this.widgetName, function ( event ) {
+			if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
 				var $sitelinkview = $( event.target ).closest( ':wikibase-sitelinkview' ),
 					sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
-				if( sitelinkview ) {
+				if ( sitelinkview ) {
 					self._removeSitelinkviewIfEmpty( sitelinkview, event );
 				}
 			}
@@ -168,16 +168,16 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 				prefix + 'afterstopediting.' + this.widgetName,
 				prefix + 'disable.' + this.widgetName
 			].join( ' ' ),
-			function( event ) {
+			function ( event ) {
 				event.stopPropagation();
 			}
 		)
 		.on(
 			'listviewitemremoved.' + this.widgetName
 			+ ' listviewitemadded.' + this.widgetName,
-			function( event, sitelinkview ) {
+			function ( event, sitelinkview ) {
 				self._refreshCounter();
-				if( sitelinkview ) {
+				if ( sitelinkview ) {
 					// Do not trigger "change" event when handling empty elements.
 					self._trigger( 'change' );
 				}
@@ -189,7 +189,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	 * @param {jQuery.wikibase.sitelinkview} sitelinkview
 	 * @param {jQuery.Event} event
 	 */
-	_removeSitelinkviewIfEmpty: function( sitelinkview, event ) {
+	_removeSitelinkviewIfEmpty: function ( sitelinkview, event ) {
 		var $sitelinkview = sitelinkview.element,
 			listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
@@ -198,29 +198,29 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			isEmpty = sitelinkview.isEmpty()
 				|| sitelinkview.option( 'value' ) && !sitelinkview.value();
 
-		if( isEmpty ) {
+		if ( isEmpty ) {
 			event.preventDefault();
 			event.stopPropagation();
 
 			// Shift focus to previous line or to following line if there is no previous:
-			$items.each( function( i ) {
-				if( this === $sitelinkview.get( 0 ) ) {
-					if( i > 0 ) {
+			$items.each( function ( i ) {
+				if ( this === $sitelinkview.get( 0 ) ) {
+					if ( i > 0 ) {
 						lia.liInstance( $items.eq( i - 1 ) ).focus();
-					} else if( $items.length > 1 ) {
+					} else if ( $items.length > 1 ) {
 						lia.liInstance( $items.eq( i + 1 ) ).focus();
 					}
 					return false;
 				}
 			} );
 
-			if( !isLast ) {
+			if ( !isLast ) {
 				listview.removeItem( $sitelinkview );
 			}
 		}
 	},
 
-	_updateAutoInput: function() {
+	_updateAutoInput: function () {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
 			$items = listview.items(),
@@ -231,13 +231,13 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			secondToLastInvalidPending
 				= secondToLast && !secondToLast.isValid() && !secondToLast.option( 'value' );
 
-		if(
+		if (
 			lastSitelinkview
 			&& lastSitelinkview.isEmpty()
 			&& ( secondToLastEmpty || secondToLastInvalidPending )
 		) {
 			listview.removeItem( $lastSitelinkview );
-		} else if( !lastSitelinkview || lastSitelinkview.isValid() && !this.isFull() ) {
+		} else if ( !lastSitelinkview || lastSitelinkview.isValid() && !this.isFull() ) {
 			this.enterNewItem();
 		}
 	},
@@ -245,12 +245,12 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * @return {string[]}
 	 */
-	_getUnusedAllowedSiteIds: function() {
-		var representedSiteIds = $.map( this.value(), function( siteLink ) {
+	_getUnusedAllowedSiteIds: function () {
+		var representedSiteIds = $.map( this.value(), function ( siteLink ) {
 			return siteLink.getSiteId();
 		} );
 
-		return $.grep( this.option( 'allowedSiteIds' ), function( siteId ) {
+		return $.grep( this.option( 'allowedSiteIds' ), function ( siteId ) {
 			return $.inArray( siteId, representedSiteIds ) === -1;
 		} );
 	},
@@ -260,7 +260,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	 *
 	 * @return {boolean}
 	 */
-	isFull: function() {
+	isFull: function () {
 		return !this._getUnusedAllowedSiteIds().length
 			|| this.value().length === this.options.allowedSiteIds.length;
 	},
@@ -268,8 +268,8 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * Refreshes any nodes featuring a counter.
 	 */
-	_refreshCounter: function() {
-		if( !this.options.$counter ) {
+	_refreshCounter: function () {
+		if ( !this.options.$counter ) {
 			return;
 		}
 
@@ -284,11 +284,11 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	 *
 	 * @return {jQuery}
 	 */
-	_getFormattedCounterText: function() {
+	_getFormattedCounterText: function () {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
 			$items = listview.items(),
-			$pendingItems = $items.filter( '.wb-new' ).filter( function() {
+			$pendingItems = $items.filter( '.wb-new' ).filter( function () {
 				return !lia.liInstance( $( this ) ).isEmpty();
 			} );
 
@@ -312,19 +312,19 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isEmpty
 	 */
-	isEmpty: function() {
+	isEmpty: function () {
 		return !this.$listview.data( 'listview' ).items().length;
 	},
 
 	/**
 	 * @return {boolean}
 	 */
-	isValid: function() {
+	isValid: function () {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
 			isValid = true;
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			// Site link views are regarded valid if they have a valid site. Invalid site links
 			// (without a page name) and empty values (with no site id and page name input) are
 			// supposed to be stripped when querying this widget for its value.
@@ -345,27 +345,27 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		var currentValue = this.value();
 
-		if( currentValue.length !== this.options.value.length ) {
+		if ( currentValue.length !== this.options.value.length ) {
 			return false;
 		}
 
 		// TODO: Use SiteLinkList.equals() as soon as implemented in DataModelJavaScript
-		for( var i = 0; i < currentValue.length; i++ ) {
-			if( currentValue[i] === null ) {
+		for ( var i = 0; i < currentValue.length; i++ ) {
+			if ( currentValue[i] === null ) {
 				// Ignore empty values.
 				continue;
 			}
 			var found = false;
-			for( var j = 0; j < this.options.value.length; j++ ) {
-				if( currentValue[i].equals( this.options.value[j] ) ) {
+			for ( var j = 0; j < this.options.value.length; j++ ) {
+				if ( currentValue[i].equals( this.options.value[j] ) ) {
 					found = true;
 					break;
 				}
 			}
-			if( !found ) {
+			if ( !found ) {
 				return false;
 			}
 		}
@@ -376,7 +376,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.startEditing
 	 */
-	startEditing: function() {
+	startEditing: function () {
 		var self = this;
 
 		this._eventSingletonManager.register(

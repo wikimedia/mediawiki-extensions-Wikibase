@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 'use strict';
 
 var PARENT = $.ui.TemplatedWidget;
@@ -28,7 +28,7 @@ $.widget( 'wikibase.toolbaritem', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
+	_create: function () {
 		PARENT.prototype._create.call( this );
 		this.element
 		.addClass( 'wikibase-toolbar-item' )
@@ -38,7 +38,7 @@ $.widget( 'wikibase.toolbaritem', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		this.element
 		.removeClass( 'wikibase-toolbar-item' )
 		.removeData( 'wikibase-toolbar-item' );

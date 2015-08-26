@@ -1,4 +1,4 @@
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -81,8 +81,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
-	_create: function() {
-		if(
+	_create: function () {
+		if (
 			!this.options.claimGuidGenerator
 			|| !this.options.entityStore
 			|| !this.options.valueViewBuilder
@@ -96,11 +96,11 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 
 		this.$statementlistview = this.element.find( '.wikibase-statementlistview' );
 
-		if( !this.$statementlistview.length ) {
+		if ( !this.$statementlistview.length ) {
 			this.$statementlistview = $( '<div/>' ).appendTo( this.element );
 		}
 
-		if( this.options.value ) {
+		if ( this.options.value ) {
 			this._createPropertyLabel();
 		}
 		this._createStatementlistview();
@@ -109,8 +109,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	destroy: function() {
-		if( this.$statementlistview ) {
+	destroy: function () {
+		if ( this.$statementlistview ) {
 			this.$statementlistview.off( this.widgetName );
 			this.$statementlistview.data( 'statementlistview' ).destroy();
 		}
@@ -120,18 +120,18 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	/**
 	 * @private
 	 */
-	_createPropertyLabel: function() {
-		if( this.$propertyLabel.contents().length > 0 ) {
+	_createPropertyLabel: function () {
+		if ( this.$propertyLabel.contents().length > 0 ) {
 			return;
 		}
 
 		var self = this,
 			propertyId = this.options.value.getKey();
 
-		this.options.entityStore.get( propertyId ).done( function( property ) {
+		this.options.entityStore.get( propertyId ).done( function ( property ) {
 			var $title;
 
-			if( property ) {
+			if ( property ) {
 				$title = wb.utilities.ui.buildLinkToEntityPage(
 					property.getContent(),
 					property.getTitle()
@@ -150,22 +150,22 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	/**
 	 * @private
 	 */
-	_createStatementlistview: function() {
+	_createStatementlistview: function () {
 		var self = this,
 			prefix = $.wikibase.statementlistview.prototype.widgetEventPrefix;
 
 		this.$statementlistview
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+		.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
 			self.$property[error ? 'addClass' : 'removeClass']( 'wb-error' );
 		} )
-		.on( prefix + 'afterstopediting.' + this.widgetName, function( event, dropValue ) {
+		.on( prefix + 'afterstopediting.' + this.widgetName, function ( event, dropValue ) {
 			self.$property.removeClass( 'wb-error' ).removeClass( 'wb-edit' );
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} )
-		.on( prefix + 'afterstartediting.' + this.widgetName, function( event ) {
+		.on( prefix + 'afterstartediting.' + this.widgetName, function ( event ) {
 			self.$property.addClass( 'wb-edit' );
 		} )
-		.on( prefix + 'afterremove.' + this.widgetName, function( event ) {
+		.on( prefix + 'afterremove.' + this.widgetName, function ( event ) {
 			self.$property.removeClass( 'wb-error' ).removeClass( 'wb-edit' );
 			self._trigger( 'afterremove' );
 		} )
@@ -189,10 +189,10 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @param {wikibase.datamodel.StatementGroup} [statementGroupView]
 	 * @return {wikibase.datamodel.StatementGroup|null|undefined}
 	 */
-	value: function( statementGroupView ) {
-		if( statementGroupView === undefined ) {
+	value: function ( statementGroupView ) {
+		if ( statementGroupView === undefined ) {
 			var statementList = this.$statementlistview.data( 'statementlistview' ).value();
-			if( !statementList.length ) {
+			if ( !statementList.length ) {
 				return null;
 			}
 			// Use the first statement's main snak property id as the statementgroupview may have
@@ -214,9 +214,9 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @throws {Error} when trying to set the value passing something different than a
 	 *         `wikibase.datamodel.StatementGroup´ object.
 	 */
-	_setOption: function( key, value ) {
-		if( key === 'value' && !!value ) {
-			if( !( value instanceof wb.datamodel.StatementGroup ) ) {
+	_setOption: function ( key, value ) {
+		if ( key === 'value' && !!value ) {
+			if ( !( value instanceof wb.datamodel.StatementGroup ) ) {
 				throw new Error( 'value needs to be a wb.datamodel.StatementGroup instance' );
 			}
 			this.$statementlistview.data( 'statementlistview' ).value( value.getItemContainer() );
@@ -224,7 +224,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this.$statementlistview.data( 'statementlistview' ).option( key, value );
 		}
 
@@ -234,7 +234,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
+	focus: function () {
 		this.$statementlistview.data( 'statementlistview' ).focus();
 	}
 } );

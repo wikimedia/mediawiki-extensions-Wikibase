@@ -1,4 +1,4 @@
-( function( $, mw ) {
+( function ( $, mw ) {
 	'use strict';
 
 /**
@@ -11,13 +11,13 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 	id: 'statementview-snakview',
 	selector: '.wikibase-statementview-qualifiers',
 	events: {
-		'listviewcreate snaklistviewafterstartediting': function( event, toolbarController ) {
+		'listviewcreate snaklistviewafterstartediting': function ( event, toolbarController ) {
 			var $target = $( event.target ),
 				$qualifiers = $target.closest( '.wikibase-statementview-qualifiers' ),
 				listview = $target.closest( ':wikibase-listview' ).data( 'listview' ),
 				listviewInited = event.type === 'listviewcreate' && listview.items().length === 0;
 
-			if(
+			if (
 				( listviewInited || event.type === 'snaklistviewafterstartediting' )
 				&& !$qualifiers.data( 'addtoolbar' )
 			) {
@@ -27,11 +27,11 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					label: mw.msg( 'wikibase-addqualifier' )
 				} )
 				.off( '.addtoolbar' )
-				.on( 'addtoolbaradd.addtoolbar', function( e ) {
+				.on( 'addtoolbaradd.addtoolbar', function ( e ) {
 					listview.enterNewItem();
 
 					var snaklistview = listview.value()[listview.value().length - 1];
-					snaklistview.enterNewItem().done( function() {
+					snaklistview.enterNewItem().done( function () {
 						snaklistview.focus();
 					} );
 				} );
@@ -40,11 +40,11 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'listviewdestroy snaklistviewafterstopediting',
-					function( event, toolbarcontroller ) {
+					function ( event, toolbarcontroller ) {
 						var $target = $( event.target ),
 							$qualifiers = $target.closest( '.wikibase-statementview-qualifiers' );
 
-						if( $target.parent().get( 0 ) !== $qualifiers.get( 0 ) ) {
+						if ( $target.parent().get( 0 ) !== $qualifiers.get( 0 ) ) {
 							// Not the qualifiers main listview.
 							return;
 						}
@@ -57,17 +57,17 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'snaklistviewchange',
-					function( event ) {
+					function ( event ) {
 						var $target = $( event.target ),
 							$qualifiers = $target.closest( '.wikibase-statementview-qualifiers' ),
 							addToolbar = $qualifiers.data( 'addtoolbar' ),
 							$listview = $target.closest( ':wikibase-listview' ),
 							snaklistviews = $listview.data( 'listview' ).value();
 
-						if( addToolbar ) {
+						if ( addToolbar ) {
 							addToolbar.enable();
-							for( var i = 0; i < snaklistviews.length; i++ ) {
-								if( !snaklistviews[i].isValid() ) {
+							for ( var i = 0; i < snaklistviews.length; i++ ) {
+								if ( !snaklistviews[i].isValid() ) {
 									addToolbar.disable();
 									break;
 								}
@@ -81,7 +81,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.id,
 					// FIXME: When there are qualifiers, no state change events will be thrown.
 					'listviewdisable',
-					function( event ) {
+					function ( event ) {
 						var $qualifiers = $( event.target )
 								.closest( '.wikibase-statementview-qualifiers' ),
 							addToolbar = $qualifiers.data( 'addtoolbar' ),
@@ -90,7 +90,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 
 						// Toolbar might be removed from the DOM already after having stopped edit
 						// mode.
-						if( addToolbar ) {
+						if ( addToolbar ) {
 							addToolbar[statementview.option( 'disabled' ) ? 'disable' : 'enable']();
 						}
 					}
@@ -100,7 +100,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'listviewitemadded listviewitemremoved',
-					function( event ) {
+					function ( event ) {
 						// Enable "add" link when all qualifiers have been removed:
 						var $listviewNode = $( event.target ),
 							listview = $listviewNode.data( 'listview' ),
@@ -110,12 +110,12 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 
 						// Toolbar is not within the DOM when (re-)constructing the list in
 						// non-edit-mode.
-						if( !addToolbar ) {
+						if ( !addToolbar ) {
 							return;
 						}
 
 						// Disable "add" toolbar when the last qualifier has been removed:
-						if( !snaklistview.isValid() && listview.items().length ) {
+						if ( !snaklistview.isValid() && listview.items().length ) {
 							addToolbar.disable();
 						} else {
 							addToolbar.enable();

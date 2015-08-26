@@ -2,16 +2,16 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit, wb, dt, mw ) {
+( function ( $, QUnit, wb, dt, mw ) {
 'use strict';
 
 QUnit.module( 'jquery.wikibase.snakview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_snakview' ).each( function() {
+	teardown: function () {
+		$( '.test_snakview' ).each( function () {
 			var $snakview = $( this ),
 				snakview = $snakview.data( 'snakview' );
 
-			if( snakview ) {
+			if ( snakview ) {
 				snakview.destroy();
 			}
 
@@ -21,7 +21,7 @@ QUnit.module( 'jquery.wikibase.snakview', QUnit.newMwEnvironment( {
 } ) );
 
 var entityStore = {
-	get: function() {
+	get: function () {
 		return $.Deferred().resolve( new wb.store.FetchedContent( {
 			title: new mw.Title( 'Property:P1' ),
 			content: new wb.datamodel.Property(
@@ -43,7 +43,7 @@ var snakSerializer = new wb.serialization.SnakSerializer(),
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createSnakview = function( options, $node ) {
+var createSnakview = function ( options, $node ) {
 	options = $.extend( {
 		autoStartEditing: false,
 		entityStore: entityStore,
@@ -58,7 +58,7 @@ var createSnakview = function( options, $node ) {
 		.snakview( options );
 };
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -109,7 +109,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -173,7 +173,7 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'snak()', function( assert ) {
+QUnit.test( 'snak()', function ( assert ) {
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -213,7 +213,7 @@ QUnit.test( 'snak()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'propertyId()', function( assert ) {
+QUnit.test( 'propertyId()', function ( assert ) {
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -255,7 +255,7 @@ QUnit.test( 'propertyId()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'snakType()', function( assert ) {
+QUnit.test( 'snakType()', function ( assert ) {
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -297,7 +297,7 @@ QUnit.test( 'snakType()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isInitialValue()', function( assert ) {
+QUnit.test( 'isInitialValue()', function ( assert ) {
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -307,7 +307,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 	);
 
 	// Simulate change of value by overwriting output of value():
-	snakview.value = function() {
+	snakview.value = function () {
 		return $.extend( this.options.value, {
 			snaktype: 'novalue'
 		} );
@@ -318,7 +318,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 		'No proper Snak currently and on initialization is regarded FALSE.'
 	);
 
-	snakview.value = function() {
+	snakview.value = function () {
 		return snakSerializer.serialize( new wb.datamodel.PropertyNoValueSnak( 'P1' ) );
 	};
 
@@ -337,7 +337,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 		'Verified returning TRUE after initialization with a proper Snak object.'
 	);
 
-	snakview.value = function() {
+	snakview.value = function () {
 		var value = this.options.value;
 		delete value.propertyId;
 		return value;
@@ -348,7 +348,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 		'Returning FALSE after breaking serialization.'
 	);
 
-	snakview.value = function() {
+	snakview.value = function () {
 		return snakSerializer.serialize( new wb.datamodel.PropertySomeValueSnak( 'P1' ) );
 	};
 
@@ -357,7 +357,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 		'Returning FALSE after setting another Snak.'
 	);
 
-	snakview.value = function() {
+	snakview.value = function () {
 		return snakSerializer.serialize( new wb.datamodel.PropertyNoValueSnak( 'P1' ) );
 	};
 

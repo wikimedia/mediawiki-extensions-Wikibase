@@ -1,4 +1,4 @@
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 var PARENT = $.wikibase.singlebuttontoolbar;
@@ -36,10 +36,10 @@ $.widget( 'wikibase.removetoolbar', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_initDefaultButton: function( $scrapedButton ) {
+	_initDefaultButton: function ( $scrapedButton ) {
 		var $button = PARENT.prototype._initDefaultButton.call( this, $scrapedButton );
 
-		if( !this.options.icon ) {
+		if ( !this.options.icon ) {
 			return $button;
 		}
 

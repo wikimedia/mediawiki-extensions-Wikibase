@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;
@@ -24,10 +24,10 @@
 	 * @since 0.4
 	 */
 	var SELF = MODULE.FetchedContent = function WbFetchedContent( data ) {
-		if( typeof data !== 'object' || !data.hasOwnProperty( 'content' ) ) {
+		if ( typeof data !== 'object' || !data.hasOwnProperty( 'content' ) ) {
 			throw new Error( 'Can not create fetched content without content in field "content"' );
 		}
-		if( !( data.title instanceof mw.Title ) ) {
+		if ( !( data.title instanceof mw.Title ) ) {
 			throw new Error( 'Can not create fetched content without related title information in field "title"' );
 		}
 		data = $.extend( {}, data ); // kill reference, prevent from outside modification
@@ -43,7 +43,7 @@
 		 *
 		 * @return {*}
 		 */
-		getContent: function() {
+		getContent: function () {
 			return this._data.content;
 		},
 
@@ -62,7 +62,7 @@
 		 *
 		 * @return mw.Title
 		 */
-		getTitle: function() {
+		getTitle: function () {
 			return this._data.title;
 		}
 	} );

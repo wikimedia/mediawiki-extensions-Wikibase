@@ -1,4 +1,4 @@
-( function( $, wb ) {
+( function ( $, wb ) {
 	'use strict';
 
 var PARENT = $.wikibase.entityview;
@@ -49,17 +49,17 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_create: function() {
+	_create: function () {
 		this._createEntityview();
 
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element ).first();
-		if( this.$statements.length === 0 ) {
+		if ( this.$statements.length === 0 ) {
 			this.$statements = $( '<div/>' ).appendTo( this.element );
 		}
 
 		this.$siteLinks = $( '.wikibase-sitelinkgrouplistview', this.element );
 
-		if( !this.$siteLinks.length ) {
+		if ( !this.$siteLinks.length ) {
 			this.$siteLinks = $( '<div/>' ).appendTo( this.element );
 		}
 	},
@@ -68,7 +68,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_init: function() {
+	_init: function () {
 		this._initStatements();
 		this._initSiteLinks();
 		PARENT.prototype._init.call( this );
@@ -77,7 +77,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_initStatements: function() {
+	_initStatements: function () {
 		var claimGuidGenerator = new wb.utilities.ClaimGuidGenerator( this.options.value.getId() );
 
 		this.$statements
@@ -102,7 +102,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_initSiteLinks: function() {
+	_initSiteLinks: function () {
 		var self = this,
 			value = $( '.wikibase-sitelinkgrouplistview', this.element ).length
 				? scrapeSiteLinks( this.$siteLinks, this.options.value.getSiteLinks() )
@@ -120,7 +120,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_attachEventHandlers: function() {
+	_attachEventHandlers: function () {
 		PARENT.prototype._attachEventHandlers.call( this );
 
 		var self = this;
@@ -131,7 +131,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 			'referenceviewafterstartediting.' + this.widgetName,
 			'sitelinkgroupviewafterstartediting.' + this.widgetName
 		].join( ' ' ),
-		function( event ) {
+		function ( event ) {
 			self._trigger( 'afterstartediting' );
 		} );
 
@@ -143,7 +143,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 			'referenceviewafterstopediting.' + this.widgetName,
 			'sitelinkgroupviewafterstopediting.' + this.widgetName
 		].join( ' ' ),
-		function( event, dropValue ) {
+		function ( event, dropValue ) {
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} );
 	},
@@ -152,14 +152,14 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_setState: function( state ) {
+	_setState: function ( state ) {
 		PARENT.prototype._setState.call( this, state );
 
 		this.$statements.data( 'statementgrouplistview' )[state]();
 		// TODO: Resolve integration of referenceviews
-		this.$statements.find( '.wb-statement-references' ).each( function() {
+		this.$statements.find( '.wb-statement-references' ).each( function () {
 			var $listview = $( this ).children( ':wikibase-listview' );
-			if( $listview.length ) {
+			if ( $listview.length ) {
 				$listview.data( 'listview' )[state]();
 			}
 		} );
@@ -181,7 +181,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 	var value = [];
 
-	$siteLinks.find( '.wikibase-sitelinkgroupview' ).each( function() {
+	$siteLinks.find( '.wikibase-sitelinkgroupview' ).each( function () {
 		var $sitelinkgroupview = $( this ),
 			$sitelinklistview = $sitelinkgroupview.find( '.wikibase-sitelinklistview' ),
 			group = $sitelinkgroupview.data( 'wb-sitelinks-group' ),
@@ -189,13 +189,13 @@ function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 			siteLinkIds = siteLinkSet.getKeys(),
 			siteLinksOfGroup = [];
 
-		$sitelinklistview.find( '.wikibase-sitelinkview' ).each( function() {
+		$sitelinklistview.find( '.wikibase-sitelinkview' ).each( function () {
 			siteIdsOfGroup.push( $( this ).data( 'wb-siteid' ) );
 		} );
 
-		for( var i = 0; i < siteIdsOfGroup.length; i++ ) {
-			for( var j = 0; j < siteLinkIds.length; j++ ) {
-				if( siteLinkIds[j] === siteIdsOfGroup[i] ) {
+		for ( var i = 0; i < siteIdsOfGroup.length; i++ ) {
+			for ( var j = 0; j < siteLinkIds.length; j++ ) {
+				if ( siteLinkIds[j] === siteIdsOfGroup[i] ) {
 					siteLinksOfGroup.push( siteLinkSet.getItemByKey( siteLinkIds[j] ) );
 					break;
 				}
@@ -221,23 +221,23 @@ function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 function orderSiteLinksByGroup( siteLinkSet ) {
 	var value = [];
 
-	siteLinkSet.each( function( siteId, siteLink ) {
+	siteLinkSet.each( function ( siteId, siteLink ) {
 		var site = wb.sites.getSite( siteId ),
 			found = false;
 
-		if( !site ) {
+		if ( !site ) {
 			throw new Error( 'Site with id ' + siteId + ' is not registered' );
 		}
 
-		for( var i = 0; i < value.length; i++ ) {
-			if( value[i].group === site.getGroup() ) {
+		for ( var i = 0; i < value.length; i++ ) {
+			if ( value[i].group === site.getGroup() ) {
 				value[i].siteLinks.push( siteLink );
 				found = true;
 				break;
 			}
 		}
 
-		if( !found ) {
+		if ( !found ) {
 			value.push( {
 				group: site.getGroup(),
 				siteLinks: [siteLink]

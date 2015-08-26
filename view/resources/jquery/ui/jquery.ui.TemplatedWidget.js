@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT =  $.Widget;
@@ -73,13 +73,13 @@
 		 *
 		 * @throws {Error} if `template` option is not specified.
 		 */
-		_create: function() {
-			if( !this.options.template ) {
+		_create: function () {
+			if ( !this.options.template ) {
 				throw new Error( 'template needs to be specified' );
 			}
 
 			// FIXME: Find sane way to detect that template is applied already.
-			if( this.element.contents().length === 0 ) {
+			if ( this.element.contents().length === 0 ) {
 				this._applyTemplate();
 			}
 
@@ -97,7 +97,7 @@
 		 * @see jQuery.Widget._init
 		 * @protected
 		 */
-		_init: function() {
+		_init: function () {
 			PARENT.prototype._init.call( this );
 			this._trigger( 'init' );
 		},
@@ -106,13 +106,13 @@
 		 * @see jQuery.fn.applyTemplate
 		 * @private
 		 */
-		_applyTemplate: function() {
+		_applyTemplate: function () {
 			var templateParams = [],
 				self = this;
 
 			// template params which are functions are callbacks to be called in the widget's context
-			$.each( this.options.templateParams, function( i, value ) {
-				if( $.isFunction( value ) ) {
+			$.each( this.options.templateParams, function ( i, value ) {
+				if ( $.isFunction( value ) ) {
 					value = value.call( self );
 				}
 				templateParams.push( value );
@@ -131,14 +131,14 @@
 		 *
 		 * @throws {Error} if no DOM node is found using a specified selector.
 		 */
-		_createTemplateShortCuts: function() {
+		_createTemplateShortCuts: function () {
 			var shortCuts = this.options.templateShortCuts,
 				shortCut, shortCutSelector, $shortCutTarget;
 
-			for( shortCut in shortCuts ) {
+			for ( shortCut in shortCuts ) {
 				shortCutSelector = shortCuts[ shortCut ];
 				$shortCutTarget = this.element.find( shortCutSelector );
-				if( $shortCutTarget.length < 1 ) {
+				if ( $shortCutTarget.length < 1 ) {
 					throw new Error( 'Template "' + this.option( 'template' ) + '" has no DOM node '
 						+ ' selectable via the jQuery expression "' + shortCutSelector + '"' );
 				}
@@ -150,13 +150,13 @@
 		/**
 		 * @see jQuery.Widget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			PARENT.prototype.destroy.call( this );
 
 			this.element.removeClass( this.widgetBaseClass );
 
 			// nullify references to short-cut DOM nodes
-			for( var shortCut in this.options.templateShortCuts ) {
+			for ( var shortCut in this.options.templateShortCuts ) {
 				this[ shortCut ] = null;
 			}
 		},
@@ -172,8 +172,8 @@
 		 * @throws {Error} when trying to set `template`, `templateParams` or `templateShortCuts`
 		 *         option.
 		 */
-		_setOption: function( key, value ) {
-			switch( key ) {
+		_setOption: function ( key, value ) {
+			switch ( key ) {
 				case 'template':
 				case 'templateParams':
 				case 'templateShortCuts':
@@ -182,7 +182,7 @@
 
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 
-			if( key === 'disabled' ) {
+			if ( key === 'disabled' ) {
 				this._trigger( 'disable', null, [value] );
 			}
 
@@ -192,7 +192,7 @@
 		/**
 		 * Applies focus to the widget.
 		 */
-		focus: function() {
+		focus: function () {
 			this.element.focus();
 		},
 
@@ -208,7 +208,7 @@
 		 * @param {*} data
 		 * @return {boolean}
 		 */
-		_trigger: function( type, event, data ) {
+		_trigger: function ( type, event, data ) {
 			var prop,
 				orig,
 				callback = this.options[type];
@@ -224,9 +224,9 @@
 
 			// Copy original event properties over to the new event:
 			orig = event.originalEvent;
-			if( orig ) {
-				for( prop in orig ) {
-					if( !( prop in event ) ) {
+			if ( orig ) {
+				for ( prop in orig ) {
+					if ( !( prop in event ) ) {
 						event[prop] = orig[prop];
 					}
 				}

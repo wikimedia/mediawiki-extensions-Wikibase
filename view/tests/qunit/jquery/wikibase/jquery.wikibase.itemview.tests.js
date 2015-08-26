@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 /**
@@ -10,14 +10,14 @@
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createItemview = function( options, $node ) {
+var createItemview = function ( options, $node ) {
 	options = $.extend( {
 		entityStore: 'I am an EntityStore',
 		entityChangersFactory: {
-			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
-			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
-			getLabelsChanger: function() { return 'I am a LabelsChanger'; },
-			getSiteLinksChanger: function() { return 'I am a SiteLinksChanger'; }
+			getAliasesChanger: function () { return 'I am an AliasesChanger'; },
+			getDescriptionsChanger: function () { return 'I am a DescriptionsChanger'; },
+			getLabelsChanger: function () { return 'I am a LabelsChanger'; },
+			getSiteLinksChanger: function () { return 'I am a SiteLinksChanger'; }
 		},
 		api: 'I am an Api',
 		valueViewBuilder: 'I am a valueview builder',
@@ -32,7 +32,7 @@ var createItemview = function( options, $node ) {
 		.addClass( 'test_itemview' )
 		.itemview( options );
 
-	$itemview.data( 'itemview' )._save = function() {
+	$itemview.data( 'itemview' )._save = function () {
 		return $.Deferred().resolve( {
 			entity: {
 				lastrevid: 'I am a revision id'
@@ -44,12 +44,12 @@ var createItemview = function( options, $node ) {
 };
 
 QUnit.module( 'jquery.wikibase.itemview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_itemview' ).each( function() {
+	teardown: function () {
+		$( '.test_itemview' ).each( function () {
 			var $itemview = $( this ),
 				itemview = $itemview.data( 'itemview' );
 
-			if( itemview ) {
+			if ( itemview ) {
 				itemview.destroy();
 			}
 
@@ -58,16 +58,16 @@ QUnit.module( 'jquery.wikibase.itemview', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.throws(
-		function() {
+		function () {
 			createItemview( { value: null } );
 		},
 		'Throwing error when trying to initialize widget without a value.'
 	);
 
 	assert.throws(
-		function() {
+		function () {
 			createItemview( { languages: null } );
 		},
 		'Throwing error when trying to initialize widget without a language.'

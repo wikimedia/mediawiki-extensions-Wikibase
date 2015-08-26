@@ -1,4 +1,4 @@
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 	var PARENT = $.Widget;
@@ -52,7 +52,7 @@
 		 * @see jQuery.Widget._create
 		 * @protected
 		 */
-		_create: function() {
+		_create: function () {
 			var self = this,
 				widgetName = this.widgetName,
 				$menu = this._buildMenu().appendTo( 'body' ).hide();
@@ -64,10 +64,10 @@
 			// TODO: add a title message
 			this.element
 			.addClass( 'ui-state-default ' + this.widgetBaseClass )
-			.on( 'click.' + widgetName, function( event ) {
+			.on( 'click.' + widgetName, function ( event ) {
 				// don't show menu if selector is disabled!
 				// otherwise, simply toggle menu's visibility
-				if( self.options.disabled || $menu.is( ':visible' ) ) {
+				if ( self.options.disabled || $menu.is( ':visible' ) ) {
 					$menu.hide();
 					return;
 				}
@@ -79,16 +79,16 @@
 
 				// close the menu when clicking, regardless of whether the click is performed on the
 				// menu itself or outside of it:
-				var degrade = function( event ) {
+				var degrade = function ( event ) {
 					if ( event.target !== self.element[0] ) {
 						$menu.hide();
 						self.element.removeClass( 'ui-state-active' );
 					}
 					self._unbindGlobalListenersFn();
 				};
-				var repositionMenu = function( event ) { self.repositionMenu(); };
+				var repositionMenu = function ( event ) { self.repositionMenu(); };
 				// also make this available for destroy() function!
-				self._unbindGlobalListenersFn = function() {
+				self._unbindGlobalListenersFn = function () {
 					// unbind event after closing menu, explicitly unbind specific handler to
 					// support instantiation of multiple snaktypeselector widgets.
 					$( document ).off( 'mouseup.' + widgetName, degrade );
@@ -104,11 +104,11 @@
 				.appendTo( this.element );
 
 			// listen to clicks; after click on a menu item, select its type as active:
-			$menu.on( 'click', function( event ) {
+			$menu.on( 'click', function ( event ) {
 				var $li = $( event.target ).closest( 'li' ),
 					type = $li.data( 'snaktypeselector-menuitem-type' );
 
-				if( type ) {
+				if ( type ) {
 					self._setSnakType( type );
 				}
 			} );
@@ -117,7 +117,7 @@
 		/**
 		 * @see jQuery.Widget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			var $menu = this._menu.element;
 			this._menu.destroy();
 			$menu.remove();
@@ -140,8 +140,8 @@
 		 * @param {*} value
 		 * @return {jQuery.Widget}
 		 */
-		_setOption: function( key, value ) {
-			if( key === 'disabled' && value ) {
+		_setOption: function ( key, value ) {
+			if ( key === 'disabled' && value ) {
 				this._menu.element.hide();
 				this.element.removeClass( 'ui-state-active' );
 			}
@@ -154,12 +154,12 @@
 		 *
 		 * @return jQuery
 		 */
-		_buildMenu: function() {
+		_buildMenu: function () {
 			var classPrefix = this.widgetBaseClass + '-menuitem-',
 				$menu = $( '<ul/>' ).addClass( this.widgetBaseClass + '-menu' ),
 				snakTypes = $.wikibase.snakview.variations.getCoveredSnakTypes();
 
-			$.each( snakTypes, function( i, type ) {
+			$.each( snakTypes, function ( i, type ) {
 				$menu.append(
 					$( '<li/>' )
 					.addClass( classPrefix + type ) // type should only be lower case string anyhow!
@@ -167,7 +167,7 @@
 					.append(
 						$( '<a/>' )
 						.text( mw.msg( 'wikibase-snakview-snaktypeselector-' + type ) )
-						.on( 'click.' + this.widgetName, function( event ) {
+						.on( 'click.' + this.widgetName, function ( event ) {
 							event.preventDefault();
 						} )
 					)
@@ -183,8 +183,8 @@
 		 * @param {string|null} [snakType]
 		 * @return {string|null|undefined}
 		 */
-		snakType: function( snakType ) {
-			if( snakType === undefined ) {
+		snakType: function ( snakType ) {
+			if ( snakType === undefined ) {
 				var $snakTypeLi = this._menu.element.children( '.ui-state-active' ).first();
 				return $snakTypeLi.length
 					? $snakTypeLi.data( 'snaktypeselector-menuitem-type' )
@@ -199,14 +199,14 @@
 		 *
 		 * @param {string|null} snakType
 		 */
-		_setSnakType: function( snakType ) {
-			if( this.snakType() === snakType ) {
+		_setSnakType: function ( snakType ) {
+			if ( this.snakType() === snakType ) {
 				return;
 			}
 
 			this._menu.element.children( '.ui-state-active' ).removeClass( 'ui-state-active' );
 
-			if( snakType !== null ) {
+			if ( snakType !== null ) {
 				this._menu.element.children( '.' + this.widgetBaseClass + '-menuitem-' + snakType )
 					.addClass( 'ui-state-active' );
 			}
@@ -217,7 +217,7 @@
 		/**
 		 * (Re-)aligns the menu.
 		 */
-		repositionMenu: function() {
+		repositionMenu: function () {
 			var isRtl = $( 'body' ).hasClass( 'rtl' );
 
 			this._menu.element.position( {

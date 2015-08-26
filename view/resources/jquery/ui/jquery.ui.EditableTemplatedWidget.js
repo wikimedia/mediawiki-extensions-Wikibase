@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT =  $.ui.TemplatedWidget;
@@ -52,7 +52,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
+	_create: function () {
 		this.element.data( 'EditableTemplatedWidget', this );
 		PARENT.prototype._create.call( this );
 	},
@@ -60,7 +60,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		this.element.removeClass( 'wb-edit' );
 		PARENT.prototype.destroy.call( this );
 	},
@@ -83,10 +83,10 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         Rejected parameters:
 	 *         - {Error}
 	 */
-	startEditing: function() {
+	startEditing: function () {
 		var deferred = $.Deferred();
 
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			return deferred.resolve().promise();
 		}
 
@@ -95,11 +95,11 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 		self.element.addClass( 'wb-edit' );
 
 		this.draw()
-		.done( function() {
+		.done( function () {
 			self._trigger( 'afterstartediting' );
 			deferred.resolve();
 		} )
-		.fail( function( error ) {
+		.fail( function ( error ) {
 			deferred.reject( error );
 		} );
 
@@ -116,11 +116,11 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         Rejected parameters:
 	 *         - {Error}
 	 */
-	stopEditing: function( dropValue ) {
+	stopEditing: function ( dropValue ) {
 		var self = this,
 			deferred = $.Deferred();
 
-		if( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
 			return deferred.resolve().promise();
 		}
 
@@ -128,21 +128,21 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 
 		this.disable();
 
-		if( dropValue ) {
+		if ( dropValue ) {
 			return this._afterStopEditing( dropValue );
 		} else {
 			this._save()
-			.done( function() {
+			.done( function () {
 				self.options.value = self.value();
 				self._afterStopEditing( dropValue )
-				.done( function() {
+				.done( function () {
 					deferred.resolve( dropValue );
 				} )
-				.fail( function( error ) {
+				.fail( function ( error ) {
 					deferred.reject( error );
 				} );
 			} )
-			.fail( function( error ) {
+			.fail( function ( error ) {
 				self.setError( error );
 				deferred.reject( error );
 				self.enable();
@@ -167,19 +167,19 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         Rejected parameters:
 	 *         - {Error}
 	 */
-	_afterStopEditing: function( dropValue ) {
+	_afterStopEditing: function ( dropValue ) {
 		var self = this,
 			deferred = $.Deferred();
 
 		self.element.removeClass( 'wb-edit' );
 
 		this.draw()
-		.done( function() {
+		.done( function () {
 			self.enable();
 			self._trigger( 'afterstopediting', null, [dropValue] );
 			deferred.resolve( dropValue );
 		} )
-		.fail( function( error ) {
+		.fail( function ( error ) {
 			self.setError( error );
 			deferred.reject( error );
 		} );
@@ -190,14 +190,14 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	/**
 	 * Cancels the widget's edit mode.
 	 */
-	cancelEditing: function() {
+	cancelEditing: function () {
 		this.stopEditing( true );
 	},
 
 	/**
 	 * Returns whether the widget is in edit mode.
 	 */
-	isInEditMode: function() {
+	isInEditMode: function () {
 		return this.element.hasClass( 'wb-edit' );
 	},
 
@@ -238,8 +238,8 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *
 	 * @param {Error} [error]
 	 */
-	setError: function( error ) {
-		if( error ) {
+	setError: function ( error ) {
+		if ( error ) {
 			this.element.addClass( 'wb-error' );
 			this._trigger( 'toggleerror', null, [error] );
 		} else {
@@ -251,7 +251,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	/**
 	 * Removes error state without triggering an event.
 	 */
-	removeError: function() {
+	removeError: function () {
 		this.element.removeClass( 'wb-error' );
 	},
 
@@ -262,8 +262,8 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 * @param {string} [additionalCssClasses]
 	 * @return {jQuery|null}
 	 */
-	notification: function( $content, additionalCssClasses ) {
-		if( !this._$notification ) {
+	notification: function ( $content, additionalCssClasses ) {
+		if ( !this._$notification ) {
 			this._$notification = $( '<div/>' ).closeable( {
 				encapsulate: true
 			} );
@@ -280,7 +280,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         - {string}
 	 *         No rejected parameters.
 	 */
-	getHelpMessage: function() {
+	getHelpMessage: function () {
 		return $.Deferred().resolve( this.options.helpMessage ).promise();
 	}
 

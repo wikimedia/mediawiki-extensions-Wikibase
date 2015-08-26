@@ -1,4 +1,4 @@
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var MODULE = $.wikibase.snakview.variations,
@@ -22,7 +22,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		draw: function() {
+		draw: function () {
 			// display same message in edit and non-edit mode!
 			this.$viewPort.empty().text( mw.msg( 'wikibase-snakview-variations-somevalue-label' ) );
 			$( this ).trigger( 'afterdraw' );

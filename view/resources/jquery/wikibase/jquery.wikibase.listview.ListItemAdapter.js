@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	/**
@@ -39,18 +39,18 @@
 	 *         `value` function.
 	 */
 	var SELF = $.wikibase.listview.ListItemAdapter = function WbListviewListItemAdapter( options ) {
-		if(
+		if (
 			!$.isFunction( options.listItemWidget )
 			|| !options.listItemWidget.prototype.widgetName
 		) {
 			throw new Error( 'For a new ListItemAdapter, a jQuery Widget constructor is required' );
 		}
-		if( !$.isFunction( options.listItemWidget.prototype.value ) ) {
+		if ( !$.isFunction( options.listItemWidget.prototype.value ) ) {
 			throw new Error(
 				'For a new ListItemAdapter, the list item prototype needs a "value" method'
 			);
 		}
-		if( !$.isFunction( options.newItemOptionsFn ) ) {
+		if ( !$.isFunction( options.newItemOptionsFn ) ) {
 			throw new Error(
 				'For a new ListItemAdapter, the "newItemOptionsFn" option is required'
 			);
@@ -71,7 +71,7 @@
 		 * @param {string} [name]
 		 * @return {string}
 		 */
-		prefixedEvent: function( name ) {
+		prefixedEvent: function ( name ) {
 			return this._options.listItemWidget.prototype.widgetEventPrefix + ( name || '' );
 		},
 
@@ -81,7 +81,7 @@
 		 * @param {jQuery} $node
 		 * @return {*|null}
 		 */
-		liInstance: function( $node ) {
+		liInstance: function ( $node ) {
 			return $node.data( this._options.listItemWidget.prototype.widgetName ) || null;
 		},
 
@@ -91,7 +91,7 @@
 		 * @param {*} value
 		 * @return {Object}
 		 */
-		newListItemOptions: function( value ) {
+		newListItemOptions: function ( value ) {
 			// if the value is undefined, this is the same as null, which means empty value
 			value = value === undefined ? null : value;
 			return this._options.newItemOptionsFn.call( this, value );
@@ -106,7 +106,7 @@
 		 *        list item will be an empty one.
 		 * @return {jQuery.Widget}
 		 */
-		newListItem: function( $subject, value ) {
+		newListItem: function ( $subject, value ) {
 			return new this._options.listItemWidget(
 				this.newListItemOptions( value ),
 				// give DOM element, otherwise .data() will be assigned to jQuery object and can't
