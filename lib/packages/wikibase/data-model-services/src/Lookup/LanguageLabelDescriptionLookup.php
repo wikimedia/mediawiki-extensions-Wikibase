@@ -43,10 +43,15 @@ class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 	public function getLabel( EntityId $entityId ) {
 		try {
 			$text = $this->termLookup->getLabel( $entityId, $this->languageCode );
-			return new Term( $this->languageCode, $text );
 		} catch ( TermLookupException $ex ) {
 			throw new LabelDescriptionLookupException( $entityId, 'Failed to lookup label', $ex );
 		}
+
+		if ( $text === null ) {
+			return null;
+		}
+
+		return new Term( $this->languageCode, $text );
 	}
 
 	/**
@@ -58,10 +63,15 @@ class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 	public function getDescription( EntityId $entityId ) {
 		try {
 			$text = $this->termLookup->getDescription( $entityId, $this->languageCode );
-			return new Term( $this->languageCode, $text );
 		} catch ( TermLookupException $ex ) {
 			throw new LabelDescriptionLookupException( $entityId, 'Failed to lookup description', $ex );
 		}
+
+		if ( $text === null ) {
+			return null;
+		}
+
+		return new Term( $this->languageCode, $text );
 	}
 
 }
