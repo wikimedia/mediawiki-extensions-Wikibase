@@ -16,6 +16,24 @@
       "revId": "6af8557c7910e3cd27fe48c26efcd90c9b9b88e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_dc57f4cb",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T09:42:56Z",
+      "side": 0,
+      "message": "bah, rebase / merge issue",
+      "parentUuid": "6ec1af18_c6fde86a",
+      "revId": "6af8557c7910e3cd27fe48c26efcd90c9b9b88e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_bcb6a8f4",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T09:42:56Z",
+      "side": 1,
+      "message": "The Id formatter adds specific formatting for ids them removed that I don\u0027t really want to get rid of",
+      "parentUuid": "6ec1af18_0637704c",
+      "revId": "3c722bc1da6deaa85b50bfb2212dce9f44d54e4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_46e9f8a5",
         "filename": "repo/includes/specials/SpecialListProperties.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-25T17:07:01Z",
       "side": 1,
       "message": "This re-implements an EntityIdFormatter... why?",
+      "revId": "3c722bc1da6deaa85b50bfb2212dce9f44d54e4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5cc78467",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T09:42:56Z",
+      "side": 1,
+      "message": "This is different to the IdFormatter, this will not use the label at all, it will simply be a link.\n\nThis could perhaps be formatted out into another implementation of the IdFormatter, i\u0027m sure there is more than one place that does this.",
+      "parentUuid": "6ec1af18_46e9f8a5",
       "revId": "3c722bc1da6deaa85b50bfb2212dce9f44d54e4a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
