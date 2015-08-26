@@ -276,7 +276,7 @@ class ChangeOpTestMockProvider {
 	}
 
 	public function detectLabelConflictsForEntity( Entity $entity ) {
-		foreach ( $entity->getLabels() as $lang => $label ) {
+		foreach ( $entity->getFingerprint()->getLabels()->toTextArray() as $lang => $label ) {
 			if ( $label === 'DUPE' ) {
 				return Result::newError( array(
 					Error::newError(
@@ -298,12 +298,12 @@ class ChangeOpTestMockProvider {
 	}
 
 	public function detectLabelDescriptionConflictsForEntity( Entity $entity ) {
-		foreach ( $entity->getLabels() as $lang => $label ) {
-			$description = $entity->getDescription( $lang );
-
-			if ( $description === null ) {
+		foreach ( $entity->getFingerprint()->getLabels()->toTextArray() as $lang => $label ) {
+			if ( !$entity->getFingerprint()->hasDescription( $lang ) ) {
 				continue;
 			}
+
+			$description = $entity->getFingerprint()->getDescription( $lang )->getText();
 
 			if ( $label === 'DUPE' && $description === 'DUPE' ) {
 				return Result::newError( array(

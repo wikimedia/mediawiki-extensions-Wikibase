@@ -162,8 +162,9 @@ class ChangeOpsMerge {
 
 	private function generateLabelsChangeOps() {
 		foreach ( $this->fromItem->getFingerprint()->getLabels()->toTextArray() as $langCode => $label ) {
-			$toLabel = $this->toItem->getLabel( $langCode );
-			if ( $toLabel === false || $toLabel === $label ) {
+			if ( !$this->toItem->getFingerprint()->hasLabel( $langCode )
+				|| $this->toItem->getFingerprint()->getLabel( $langCode )->getText() === $label
+			) {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetLabelOp( $langCode, $label ) );
 			} else {
@@ -175,8 +176,9 @@ class ChangeOpsMerge {
 
 	private function generateDescriptionsChangeOps() {
 		foreach ( $this->fromItem->getFingerprint()->getDescriptions()->toTextArray() as $langCode => $desc ) {
-			$toDescription = $this->toItem->getDescription( $langCode );
-			if ( $toDescription === false || $toDescription === $desc ) {
+			if ( !$this->toItem->getFingerprint()->hasDescription( $langCode )
+				|| $this->toItem->getFingerprint()->getDescription( $langCode )->getText() === $desc
+			) {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveDescriptionOp( $langCode ) );
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetDescriptionOp( $langCode, $desc ) );
 			} else {
@@ -195,9 +197,9 @@ class ChangeOpsMerge {
 	}
 
 	private function generateSitelinksChangeOps() {
-		foreach ( $this->fromItem->getSiteLinks() as $fromSiteLink ) {
+		foreach ( $this->fromItem->getSiteLinkList()->toArray() as $fromSiteLink ) {
 			$siteId = $fromSiteLink->getSiteId();
-			if ( !$this->toItem->hasLinkToSite( $siteId ) ) {
+			if ( !$this->toItem->getSiteLinkList()->hasLinkWithSiteId( $siteId ) ) {
 				$this->generateSitelinksChangeOpsWithNoConflict( $fromSiteLink );
 			} else {
 				$this->generateSitelinksChangeOpsWithConflict( $fromSiteLink );

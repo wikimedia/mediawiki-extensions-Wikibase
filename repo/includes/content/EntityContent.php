@@ -425,7 +425,9 @@ abstract class EntityContent extends AbstractContent {
 
 		/* @var Language $language */
 		$language = $GLOBALS['wgLang'];
-		$description = $this->getEntity()->getDescription( $language->getCode() );
+		$fingerprint = $this->getEntity()->getFingerprint();
+		$description = $fingerprint->hasDescription( $language->getCode() )
+			? $fingerprint->getDescription( $language->getCode() )->getText() : '';
 		return substr( $description, 0, $maxLength );
 	}
 

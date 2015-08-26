@@ -802,15 +802,15 @@ class EditEntityActionTest extends ActionTestCase {
 		$item = $this->loadTestItem( $handle );
 
 		if ( isset( $expected['labels'] ) ) {
-			$this->assertArrayEquals( $expected['labels'], $item->getLabels(), false, true );
+			$this->assertArrayEquals( $expected['labels'], $item->getFingerprint()->getLabels()->toTextArray(), false, true );
 		}
 
 		if ( isset( $expected['descriptions'] ) ) {
-			$this->assertArrayEquals( $expected['descriptions'], $item->getDescriptions(), false, true );
+			$this->assertArrayEquals( $expected['descriptions'], $item->getFingerprint()->getDescriptions()->toTextArray(), false, true );
 		}
 
 		if ( isset( $expected['aliases'] ) ) {
-			$this->assertArrayEquals( $expected['aliases'], $item->getAllAliases(), false, true );
+			$this->assertArrayEquals( $expected['aliases'], $item->getFingerprint()->getAliasGroups()->toTextArray(), false, true );
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {

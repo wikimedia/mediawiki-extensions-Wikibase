@@ -126,8 +126,8 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$entity = new Item();
 
 		$changeOps->apply( $entity );
-		$this->assertEquals( $expectedLabel, $entity->getLabel( $language ) );
-		$this->assertEquals( $expectedDescription, $entity->getDescription( $language ) );
+		$this->assertEquals( $expectedLabel, $entity->getFingerprint()->getLabel( $language )->getText() );
+		$this->assertEquals( $expectedDescription, $entity->getFingerprint()->getDescription( $language )->getText() );
 	}
 
 	public function testValidate() {
@@ -165,7 +165,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 			->method( 'validate' )
 			->will( $this->returnCallback( function( Item $item ) {
 				// Fail when the label is already set (by a previous apply call).
-				return $item->getLabel( 'en' )
+				return $item->getFingerprint()->hasLabel( 'en' )
 					? Result::newError( array() )
 					: Result::newSuccess();
 			} ) );

@@ -61,7 +61,11 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOpDescription->apply( $entity );
 
-		$this->assertEquals( $expectedDescription, $entity->getDescription( 'en' ) );
+		if ( $expectedDescription === '' ) {
+			$this->assertFalse( $entity->getFingerprint()->hasDescription( 'en' ) );
+		} else {
+			$this->assertEquals( $expectedDescription, $entity->getFingerprint()->getDescription( 'en' )->getText() );
+		}
 	}
 
 	public function validateProvider() {
@@ -87,13 +91,14 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	public function testValidate( ChangeOp $changeOp, $valid ) {
 		$entity = $this->provideNewEntity();
 
-		$oldLabels = $entity->getDescriptions();
+		$oldDescriptions = $entity->getFingerprint()->getDescriptions()->toTextArray();
 
 		$result = $changeOp->validate( $entity );
 		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
 
-		// labels should not have changed during validation
-		$this->assertEquals( $oldLabels, $entity->getDescriptions(), 'Descriptions modified by validation!' );
+		// descriptions should not have changed during validation
+		$newDescriptions = $entity->getFingerprint()->getDescriptions()->toTextArray();
+		$this->assertEquals( $oldDescriptions, $newDescriptions, 'Descriptions modified by validation!' );
 	}
 
 	/**

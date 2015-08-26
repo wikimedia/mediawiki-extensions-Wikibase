@@ -516,7 +516,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 */
 	private function getItemWithAliases( ItemId $id, $languageCode, array $aliases ) {
 		$item = new Item( $id );
-		$item->addAliases( $languageCode, $aliases );
+		$item->setAliases( $languageCode, $aliases );
 
 		return $item;
 	}
