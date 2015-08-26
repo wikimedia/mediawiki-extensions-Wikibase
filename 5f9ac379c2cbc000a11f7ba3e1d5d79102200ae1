@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_552e778a",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T15:47:02Z",
+      "side": 1,
+      "message": "This is state and may change when getResult() is called. We however store the resulting EntityIdFormatter in a member permanently. Since the IDs are *probably* only used for prefetching, this will *hopefully* not be an issue, but it does seem rather nasty.\n\nIt seems to me that the entire information flow / call graph needs to be re-thought.",
+      "revId": "5f9ac379c2cbc000a11f7ba3e1d5d79102200ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_752b7378",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-26T15:47:02Z",
+      "side": 1,
+      "message": "Ugh, hidden information flow! The property IDs are passed from here to getEntityIdFormatter()  by way of a memebr variable. That is REALLY ugly.",
+      "revId": "5f9ac379c2cbc000a11f7ba3e1d5d79102200ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
