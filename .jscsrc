@@ -27,13 +27,6 @@
 	// ----
 	// Own rules
 
-	"disallowSpaceAfterKeywords": [
-		"catch",
-		"for",
-//		"if",
-		"switch",
-		"while"
-	],
 	"requireSpaceAfterKeywords": [
 		"else"
 	],

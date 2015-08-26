@@ -6,17 +6,17 @@
  * @licence GNU GPL v2+
  * @author Jens Ohlig
  */
-( function( $, mw, wb, undefined ) {
+( function ( $, mw, wb, undefined ) {
 	'use strict';
 
-	$( document ).ready( function() {
-		if( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemByTitle' ) ) {
+	$( document ).ready( function () {
+		if ( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemByTitle' ) ) {
 			return; // not the right special page
 		}
 
 		// this will build a drop-down for the language selection:
 		var siteList = [];
-		for( var siteId in wb.sites.getSites() ) {
+		for ( var siteId in wb.sites.getSites() ) {
 			var site = wb.sites.getSite( siteId );
 			siteList.push( site.getName() + ' (' + site.getId() + ')' );
 		}
@@ -25,7 +25,7 @@
 		.suggester( { source: siteList } );
 		// Hackety hack hack...
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
-		$( '#wb-itembytitle-form1' ).submit( function() {
+		$( '#wb-itembytitle-form1' ).submit( function () {
 			var $input = $( '#wb-itembytitle-sitename' );
 			var langID = String( $input.val().replace( /.*\(|\).*/gi, '' ) );
 			if ( wb.sites.getSite( langID ).getId() !== undefined ) {
