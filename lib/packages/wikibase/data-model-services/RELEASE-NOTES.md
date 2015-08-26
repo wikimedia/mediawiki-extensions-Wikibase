@@ -1,6 +1,6 @@
 # Wikibase DataModel Services release notes
 
-## Version 2.0 (2015-08-22)
+## Version 2.0 (2015-08-26)
 
 Moved over various classes and interfaces from Wikibase Lib:
 
