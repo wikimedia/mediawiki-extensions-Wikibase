@@ -1,8 +1,11 @@
 # Wikibase DataModel release notes
 
-## Version 4.2 (dev)
+## Version 4.2 (2015-08-26)
 
 * Added `EntityRedirect`
+* Added `EntityIdParser` and `EntityIdParsingException`
+* Added `BasicEntityIdParser`
+* Added `DispatchingEntityIdParser`
 * Removed no longer needed dependency on `diff/diff`
 
 ## Version 4.1 (2015-08-04)
