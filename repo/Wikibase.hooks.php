@@ -191,9 +191,9 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( $entityNamespaceLookup->isEntityNamespace( $ns ) ) {
+		if ( $namespaceLookup->isEntityNamespace( $ns ) ) {
 			$movable = false;
 		}
 
@@ -465,7 +465,7 @@ final class RepoHooks {
 				)
 			);
 
-			$s .= " " . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
+			$s .= ' ' . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
 		}
 
 		return true;
@@ -697,9 +697,9 @@ final class RepoHooks {
 	 */
 	public static function onShowSearchHitTitle( &$link_t, &$titleSnippet, SearchResult $result ) {
 		$title = $result->getTitle();
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			$titleSnippet = $title->getPrefixedText();
 		}
 
@@ -722,9 +722,9 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onTitleGetRestrictionTypes( Title $title, array &$types ) {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			// Remove create and move protection for Wikibase namespaces
 			$types = array_diff( $types, array( 'create', 'move' ) );
 		}
@@ -733,34 +733,39 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Handler for the TitleQuickPermissions hook.
-	 *
-	 * Implemented to point out that entity pages cannot be 'created' normally.
+	 * Handler for the TitleQuickPermissions hook, implemented to point out that entity pages cannot
+	 * be "created" normally.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleQuickPermissions
+	 *
+	 * @since 0.5
 	 *
 	 * @param Title $title The Title being checked
 	 * @param User $user The User performing the action
 	 * @param string $action The action being performed
-	 * @param array $errors Array of errors
+	 * @param array[] &$errors
 	 * @param bool $doExpensiveQueries Whether to do expensive DB queries
 	 * @param bool $short Whether to return immediately on first error
 	 *
 	 * @return bool
 	 */
 	public static function onTitleQuickPermissions(
-		Title $title, User $user, $action, array &$errors, $doExpensiveQueries, $short
+		Title $title,
+		User $user,
+		$action,
+		array &$errors,
+		$doExpensiveQueries,
+		$short
 	) {
-		if ( $action !== 'create' ) {
-			return true;
-		}
+		if ( $action === 'create' ) {
+			$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+			if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+				// Do not allow normal creation of pages in Wikibase namespaces
+				$errors[] = array( 'wikibase-no-direct-editing', $title->getNsText() );
 
-		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
-			// Do not allow "create" for Wikibase namespaces
-			$errors[] = array( 'wikibase-no-direct-editing', $title->getNsText() );
-			return false; // Bail out immediately
+				return false;
+			}
 		}
 
 		return true;
@@ -901,9 +906,9 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( !$entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
+		if ( !$namespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
@@ -928,11 +933,11 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentModelCanBeUsedOn( $contentModel, Title $title, &$ok ) {
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		$expectedModel = array_search(
 			$title->getNamespace(),
-			$entityNamespaceLookup->getEntityNamespaces()
+			$namespaceLookup->getEntityNamespaces()
 		);
 
 		// If the namespace is an entity namespace, the content model
@@ -1065,9 +1070,9 @@ final class RepoHooks {
 		array &$navigationUrls
 	) {
 		$title = $skinTemplate->getTitle();
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		if ( !$entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( !$namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			return true;
 		}
 
@@ -1111,10 +1116,10 @@ final class RepoHooks {
 	 */
 	public static function onSkinMinervaDefaultModules( Skin $skin, array &$modules ) {
 		$title = $skin->getTitle();
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
 		// remove the editor module so that it does not get loaded on entity pages
-		if ( $entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			unset( $modules['editor'] );
 		}
 
