@@ -25,7 +25,8 @@
 				self._viewNotifier.notify( 'change' );
 			},
 			{
-				language: self._options.language
+				language: self._options.language || null,
+				vocabularyLookupApiUrl: self._options.vocabularyLookupApiUrl || null
 			}
 		);
 

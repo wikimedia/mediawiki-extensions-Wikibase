@@ -20,8 +20,8 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 * @property {Object}
 	 */
 	options: {
-		url: 'https://www.wikidata.org/w/api.php',
 		language: null,
+		vocabularyLookupApiUrl: null,
 		timeout: 8000
 	},
 
@@ -171,7 +171,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 				data = self._getData( term );
 
 			$.ajax( {
-				url: self.options.url,
+				url: self.options.vocabularyLookupApiUrl || 'https://www.wikidata.org/w/api.php',
 				dataType: 'jsonp',
 				data: data,
 				timeout: self.options.timeout
@@ -293,9 +293,11 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	},
 
 	/**
-	 * Returns concept URI for an item for example:
-	 * http://www.wikidata.org/entity/Q650
-	 * @return {string}
+	 * Returns the URL of the selected entity. URLs pointing to items on wikidata.org are normalized
+	 * to their canonical concept URI, e.g. https://wikidata.org/wiki/Q650 is returned as
+	 * http://www.wikidata.org/entity/Q650.
+	 * @fixme Teach wbsearchentities to return concept URIs, then remove this normalization.
+	 * @return {string|null}
 	 */
 	getSelectedConceptUri: function() {
 		return this._selectedUrl && this._selectedUrl.replace(
