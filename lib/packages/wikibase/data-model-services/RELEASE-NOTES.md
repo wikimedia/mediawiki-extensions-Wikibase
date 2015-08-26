@@ -1,26 +1,26 @@
 # Wikibase DataModel Services release notes
 
-## Version 2.0 (Development)
+## Version 2.0 (2015-08-22)
 
 Moved over various classes and interfaces from Wikibase Lib:
 
 * Added `Lookup\RedirectResolvingEntityLookup`
 * Added `Lookup\RestrictedEntityLookup`
-* Added `Diff\EntityTypeAwareDiffOpFactory`, Was called WikibaseDiffOpFactory in Lib
+* Added `Diff\EntityTypeAwareDiffOpFactory` (previously called WikibaseDiffOpFactory in Lib)
 
 Changed all Lookup contracts:
 
 * All lookups now return null when there is no value found as a result of the lookup.
 * All lookups now throw exceptions in exceptional circumstances.
 
+* Removed `Lookup\ItemNotFoundException`
+* Removed `Lookup\PropertyNotFoundException`
 * Added `Lookup\EntityLookupException`
 * Added `Lookup\EntityRedirectLookupException`
 * Added `Lookup\LabelDescriptionLookupException`
 * Added `Lookup\TermLookupException`
 * Added `Lookup\ItemLookupException`
 * Added `Lookup\PropertyLookupException`
-* Removed `Lookup\ItemNotFoundException`
-* Removed `Lookup\PropertyNotFoundException`
 
 ## Version 1.1 (2015-08-10)
 
