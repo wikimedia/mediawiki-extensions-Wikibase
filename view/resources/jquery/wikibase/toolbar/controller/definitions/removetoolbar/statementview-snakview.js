@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -11,12 +11,12 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 	id: 'statementview-snakview',
 	selector: '.wikibase-statementview-qualifiers',
 	events: {
-		snakviewafterstartediting: function( event, toolbarController ) {
+		snakviewafterstartediting: function ( event, toolbarController ) {
 			var $snakview = $( event.target ),
 				$snaklistview = $snakview.closest( '.wikibase-snaklistview' ),
 				snaklistview = $snaklistview.data( 'snaklistview' );
 
-			if( !snaklistview ) {
+			if ( !snaklistview ) {
 				return;
 			}
 
@@ -27,8 +27,8 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 			.removetoolbar( {
 				$container: $( '<div/>' ).appendTo( $snakview )
 			} )
-			.on( 'removetoolbarremove.removetoolbar', function( event ) {
-				if( event.target === $snakview.get( 0 ) ) {
+			.on( 'removetoolbarremove.removetoolbar', function ( event ) {
+				if ( event.target === $snakview.get( 0 ) ) {
 					qualifierPorpertyGroupListview.removeItem( $snakview );
 				}
 			} );
@@ -37,13 +37,13 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				event.data.toolbar.type,
 				event.data.toolbar.id,
 				'snaklistviewafterstopediting',
-				function( event, toolbarcontroller ) {
+				function ( event, toolbarcontroller ) {
 					// Destroy the snakview toolbars:
 					var $snaklistviewNode = $( event.target ),
 						listview = $snaklistviewNode.data( 'snaklistview' )._listview,
 						lia = listview.listItemAdapter();
 
-					$.each( listview.items(), function( i, item ) {
+					$.each( listview.items(), function ( i, item ) {
 						var snakview = lia.liInstance( $( item ) );
 						toolbarcontroller.destroyToolbar(
 							snakview.element.data( 'removetoolbar' )
@@ -56,20 +56,20 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				event.data.toolbar.type,
 				event.data.toolbar.id,
 				'snaklistviewdisable',
-				function( event ) {
+				function ( event ) {
 					var $snaklistviewNode = $( event.target ),
 						listview = $snaklistviewNode.data( 'snaklistview' )._listview,
 						lia = listview.listItemAdapter(),
 						$statementview = $snaklistviewNode.closest( ':wikibase-statementview' ),
 						statementview = $statementview.data( 'statementview' );
 
-					$.each( listview.items(), function( i, node ) {
+					$.each( listview.items(), function ( i, node ) {
 						var $snakview = $( node ),
 							snakview = lia.liInstance( $snakview ),
 							removeToolbar = $snakview.data( 'removetoolbar' );
 
 						// Item might be about to be removed not being a list item instance.
-						if( !snakview || !removeToolbar ) {
+						if ( !snakview || !removeToolbar ) {
 							return;
 						}
 

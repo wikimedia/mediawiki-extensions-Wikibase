@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;
@@ -29,11 +29,11 @@
 		 *         - {wikibase.store.FetchedContent|undefined|null}
 		 *         No rejected parameters.
 		 */
-		get: function( entityId ) {
+		get: function ( entityId ) {
 			var deferred = $.Deferred();
 
 			this.getMultiple( [ entityId ] )
-			.done( function( entities ) {
+			.done( function ( entities ) {
 				deferred.resolve( entities[ 0 ] );
 			} )
 			// FIXME: Evaluate failing promise
@@ -52,15 +52,15 @@
 		 *         - {wikibase.store.FetchedContent|undefined|null[]}
 		 *         No rejected parameters.
 		 */
-		getMultiple: function( entityIds ) {
+		getMultiple: function ( entityIds ) {
 			var deferred = $.Deferred();
 
 			$.when.apply( $, this.getMultipleRaw( entityIds ) )
-			.done( function( /*…*/ ) {
+			.done( function ( /*…*/ ) {
 				deferred.resolve( $.makeArray( arguments ) );
 			} )
 			// FIXME: Evaluate failing promise
-			.fail( function() {
+			.fail( function () {
 				deferred.reject();
 			} );
 
@@ -77,7 +77,7 @@
 		 *         - {wikibase.store.FetchedContent|undefined|null}
 		 *         No rejected parameters.
 		 */
-		getMultipleRaw: function( entityIds ) {
+		getMultipleRaw: function ( entityIds ) {
 			return $.map( entityIds, $.proxy( this.get, this ) );
 		}
 	} );

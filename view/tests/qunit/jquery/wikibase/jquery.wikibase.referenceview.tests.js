@@ -2,13 +2,13 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
-( function( $, mw, wb, vv, vf, QUnit ) {
+( function ( $, mw, wb, vv, vf, QUnit ) {
 	'use strict';
 
 	// We need an entity store for the instances of jquery.wikibase.referenceview
 	// and jquery.wikibase.snakview created by jquery.wikibase.referenceview.
 	var entityStore = {
-		get: function() {
+		get: function () {
 			return $.Deferred().resolve( new wb.store.FetchedContent( {
 				title: new mw.Title( 'Property:P1' ),
 				content: new wb.datamodel.Property(
@@ -50,12 +50,12 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.referenceview', window.QUnit.newMwEnvironment( {
-		teardown: function() {
-			$( '.test_referenceview' ).each( function( i, node ) {
+		teardown: function () {
+			$( '.test_referenceview' ).each( function ( i, node ) {
 				var $node = $( node ),
 					referenceview = $node.data( 'referenceview' );
 
-				if( referenceview ) {
+				if ( referenceview ) {
 					referenceview.destroy();
 				}
 
@@ -64,7 +64,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Initialize and destroy', function( assert ) {
+	QUnit.test( 'Initialize and destroy', function ( assert ) {
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -110,7 +110,7 @@
 		);
 	} );
 
-	QUnit.test( 'is initialized with a value', function( assert ) {
+	QUnit.test( 'is initialized with a value', function ( assert ) {
 		var $node = createReferenceview( {
 				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
 					new wb.datamodel.PropertyNoValueSnak( 'P1' )
@@ -125,7 +125,7 @@
 		);
 	} );
 
-	QUnit.test( 'allows to enter new item', function( assert ) {
+	QUnit.test( 'allows to enter new item', function ( assert ) {
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -150,7 +150,7 @@
 		);
 	} );
 
-	QUnit.test( 'allows to stop editing', function( assert ) {
+	QUnit.test( 'allows to stop editing', function ( assert ) {
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -176,7 +176,7 @@
 		);
 	} );
 
-	QUnit.test( 'recognizes initial value', function( assert ) {
+	QUnit.test( 'recognizes initial value', function ( assert ) {
 		var $node = createReferenceview( {
 				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
 					new wb.datamodel.PropertyNoValueSnak( 'P1' )

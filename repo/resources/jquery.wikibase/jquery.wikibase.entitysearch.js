@@ -2,7 +2,7 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT = $.wikibase.entityselector;
@@ -26,15 +26,15 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	/**
 	 * @see jQuery.wikibase.entityselector._create
 	 */
-	_create: function() {
+	_create: function () {
 		var self = this;
 
 		PARENT.prototype._create.call( this );
 
 		this.element
-		.on( 'eachchange.' + this.widgetName, function() {
+		.on( 'eachchange.' + this.widgetName, function () {
 			var menu = self.options.menu;
-			if(
+			if (
 				self.options.suggestionsPlaceholder
 				&& ( !menu.option( 'items' ).length || !menu.element.is( ':visible' ) )
 			) {
@@ -49,7 +49,7 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	/**
 	 *@see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
 	 */
-	_createMenuItemFromSuggestion: function( suggestion ) {
+	_createMenuItemFromSuggestion: function ( suggestion ) {
 		var $label = this._createLabelFromSuggestion( suggestion ),
 			value = suggestion.label || suggestion.id;
 
@@ -59,13 +59,13 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	/**
 	 * @see jQuery.ui.suggester._setOption
 	 */
-	_setOption: function( key, value ) {
-		if( key === 'suggestionsPlaceholder' ) {
+	_setOption: function ( key, value ) {
+		if ( key === 'suggestionsPlaceholder' ) {
 			var customItems = this.options.menu.option( 'customItems' );
 
 			customItems.splice( $.inArray( this.options.suggestionsPlaceholder, customItems ), 1 );
 
-			if( value instanceof $.ui.ooMenu.CustomItem ) {
+			if ( value instanceof $.ui.ooMenu.CustomItem ) {
 				customItems.unshift( value );
 			}
 
@@ -77,10 +77,10 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	/**
 	 * @see jQuery.wikibase.entityselector._initMenu
 	 */
-	_initMenu: function( ooMenu ) {
+	_initMenu: function ( ooMenu ) {
 		PARENT.prototype._initMenu.apply( this, arguments );
 
-		if( this.options.suggestionsPlaceholder ) {
+		if ( this.options.suggestionsPlaceholder ) {
 			ooMenu.option( 'customItems' ).unshift( this.options.suggestionsPlaceholder );
 		}
 
@@ -88,8 +88,8 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 
 		$( ooMenu )
 		.off( 'selected' )
-		.on( 'selected.entitysearch', function( event, item ) {
-			if(
+		.on( 'selected.entitysearch', function ( event, item ) {
+			if (
 				event.originalEvent
 				&& /^key/.test( event.originalEvent.type )
 				&& !( item instanceof $.ui.ooMenu.CustomItem )
@@ -104,8 +104,8 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	/**
 	 * @see jQuery.ui.suggester._updateMenuVisibility
 	 */
-	_updateMenuVisibility: function() {
-		if( this._term ) {
+	_updateMenuVisibility: function () {
+		if ( this._term ) {
 			this._open();
 			this.repositionMenu();
 		} else {
@@ -116,12 +116,12 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	/**
 	 * @see jQuery.wikibase.entityselector._getSuggestions
 	 */
-	_getSuggestions: function( term ) {
+	_getSuggestions: function ( term ) {
 		var self = this,
 			promise = PARENT.prototype._getSuggestions.call( this, term );
 
-		return promise.done( function( suggestions, searchTerm ) {
-			if( self.options.suggestionsPlaceholder ) {
+		return promise.done( function ( suggestions, searchTerm ) {
+			if ( self.options.suggestionsPlaceholder ) {
 				self.options.suggestionsPlaceholder.setVisibility( false );
 			}
 		} );

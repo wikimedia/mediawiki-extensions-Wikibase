@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -73,8 +73,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
-		if(
+	_create: function () {
+		if (
 			!$.isArray( this.options.value )
 			|| !this.options.entityId
 			|| !this.options.entityChangersFactory
@@ -92,13 +92,13 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		// When destroying a widget not initialized properly, shortcuts will not have been created.
-		if( this.$listview ) {
+		if ( this.$listview ) {
 			// When destroying a widget not initialized properly, listview will not have been created.
 			var listview = this.$listview.data( 'listview' );
 
-			if( listview ) {
+			if ( listview ) {
 				listview.destroy();
 			}
 		}
@@ -110,18 +110,18 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * Creates the listview widget managing the entitytermsforlanguageview widgets
 	 */
-	_createListView: function() {
+	_createListView: function () {
 		var self = this,
 			listItemWidget = $.wikibase.entitytermsforlanguageview,
 			prefix = listItemWidget.prototype.widgetEventPrefix;
 
 		// Fully encapsulate child widgets by suppressing their events:
 		this.element
-		.on( prefix + 'change.' + this.widgetName, function( event ) {
+		.on( prefix + 'change.' + this.widgetName, function ( event ) {
 			event.stopPropagation();
 			self._trigger( 'change' );
 		} )
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+		.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
 			event.stopPropagation();
 			self.setError( error );
 		} )
@@ -133,7 +133,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 				prefix + 'afterstopediting.' + this.widgetName,
 				prefix + 'disable.' + this.widgetName
 			].join( ' ' ),
-			function( event ) {
+			function ( event ) {
 				event.stopPropagation();
 			}
 		);
@@ -142,7 +142,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: listItemWidget,
-				newItemOptionsFn: function( value ) {
+				newItemOptionsFn: function ( value ) {
 					return {
 						value: value,
 						entityId: self.options.entityId,
@@ -162,19 +162,19 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isEmpty: function() {
+	isEmpty: function () {
 		return !!this.$listview.data( 'listview' ).items().length;
 	},
 
 	/**
 	 * @return {boolean}
 	 */
-	isValid: function() {
+	isValid: function () {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
 			isValid = true;
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			isValid = lia.liInstance( $( this ) ).isValid();
 			return isValid === true;
 		} );
@@ -185,23 +185,23 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
 			currentValue = [];
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			var entitytermsforlanguageview = lia.liInstance( $( this ) );
 			currentValue.push( entitytermsforlanguageview.value() );
 		} );
 
-		if( currentValue.length !== this.options.value.length ) {
+		if ( currentValue.length !== this.options.value.length ) {
 			return false;
 		}
 
 		// TODO: Implement and use Fingerprint in DataModelJavaScript component
-		for( var i = 0; i < currentValue.length; i++ ) {
-			if(
+		for ( var i = 0; i < currentValue.length; i++ ) {
+			if (
 				currentValue[i].language !== this.options.value[i].language
 				|| !currentValue[i].label.equals( this.options.value[i].label )
 				|| !currentValue[i].description.equals( this.options.value[i].description )
@@ -214,8 +214,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		return true;
 	},
 
-	startEditing: function() {
-		if( this._isInEditMode ) {
+	startEditing: function () {
+		if ( this._isInEditMode ) {
 			return;
 		}
 
@@ -225,7 +225,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			var entitytermsforlanguageview = lia.liInstance( $( this ) );
 			entitytermsforlanguageview.startEditing();
 		} );
@@ -238,10 +238,10 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @param {boolean} [dropValue]
 	 */
-	stopEditing: function( dropValue ) {
+	stopEditing: function ( dropValue ) {
 		var self = this;
 
-		if( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
 			return;
 		}
 
@@ -266,16 +266,16 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		 * @param {boolean} dropValue
 		 */
 		function addStopEditToQueue( $queue, entitytermsforlanguageview, dropValue ) {
-			$queue.queue( 'stopediting', function( next ) {
+			$queue.queue( 'stopediting', function ( next ) {
 				entitytermsforlanguageview.element
 				.one( 'entitytermsforlanguageviewafterstopediting.' + eventNamespace,
-					function( event ) {
+					function ( event ) {
 						entitytermsforlanguageview.element.off( '.' + eventNamespace );
 						setTimeout( next, 0 );
 					}
 				)
 				.one( 'entitytermsforlanguageviewtoggleerror.' + eventNamespace,
-					function( event ) {
+					function ( event ) {
 						entitytermsforlanguageview.element.off( '.' + eventNamespace );
 						$queue.clearQueue();
 						self._resetEditMode();
@@ -285,7 +285,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			} );
 		}
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			var entitytermsforlanguageview = lia.liInstance( $( this ) );
 			addStopEditToQueue(
 				$queue,
@@ -294,20 +294,20 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			);
 		} );
 
-		$queue.queue( 'stopediting', function() {
+		$queue.queue( 'stopediting', function () {
 			self._afterStopEditing( dropValue );
 		} );
 
 		$queue.dequeue( 'stopediting' );
 	},
 
-	_resetEditMode: function() {
+	_resetEditMode: function () {
 		this.enable();
 
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			lia.liInstance( $( this ) ).startEditing();
 		} );
 	},
@@ -315,8 +315,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @param {boolean} dropValue
 	 */
-	_afterStopEditing: function( dropValue ) {
-		if( !dropValue ) {
+	_afterStopEditing: function ( dropValue ) {
+		if ( !dropValue ) {
 			this.options.value = this.value();
 		}
 		this._isInEditMode = false;
@@ -325,7 +325,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		this._trigger( 'afterstopediting', null, [dropValue] );
 	},
 
-	cancelEditing: function() {
+	cancelEditing: function () {
 		this.stopEditing( true );
 	},
 
@@ -333,18 +333,18 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * Updates the size of the input boxes by triggering the inputautoexpand plugin's `expand()`
 	 * function.
 	 */
-	updateInputSize: function() {
+	updateInputSize: function () {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			var entitytermsforlanguageview = lia.liInstance( $( this ) );
 
-			$.each( ['label', 'description', 'aliases'], function() {
+			$.each( ['label', 'description', 'aliases'], function () {
 				var $view = entitytermsforlanguageview['$' + this + 'view'],
 					autoExpandInput = $view.find( 'input,textarea' ).data( 'inputautoexpand' );
 
-				if( autoExpandInput ) {
+				if ( autoExpandInput ) {
 					autoExpandInput.options( {
 						maxWidth: $view.width()
 					} );
@@ -357,11 +357,11 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.focus
 	 */
-	focus: function() {
+	focus: function () {
 		var listview = this.$listview.data( 'listview' ),
 			$items = listview.items();
 
-		if( $items.length ) {
+		if ( $items.length ) {
 			listview.listItemAdapter().liInstance( $items.first() ).focus();
 		} else {
 			this.element.focus();
@@ -373,8 +373,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 *
 	 * @param {Error} [error]
 	 */
-	setError: function( error ) {
-		if( error ) {
+	setError: function ( error ) {
+		if ( error ) {
 			this.element.addClass( 'wb-error' );
 			this._trigger( 'toggleerror', null, [error] );
 		} else {
@@ -383,13 +383,13 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		}
 	},
 
-	removeError: function() {
+	removeError: function () {
 		this.element.removeClass( 'wb-error' );
 
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			lia.liInstance( $( this ) ).removeError();
 		} );
 	},
@@ -398,8 +398,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @param {Object[]} [value]
 	 * @return {Object[]|*}
 	 */
-	value: function( value ) {
-		if( value !== undefined ) {
+	value: function ( value ) {
+		if ( value !== undefined ) {
 			return this.option( 'value', value );
 		}
 
@@ -408,7 +408,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 
 		value = [];
 
-		listview.items().each( function() {
+		listview.items().each( function () {
 			var entitytermsforlanguageview = lia.liInstance( $( this ) );
 			value.push( entitytermsforlanguageview.value() );
 		} );
@@ -419,14 +419,14 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
-	_setOption: function( key, value ) {
-		if( key === 'value' ) {
+	_setOption: function ( key, value ) {
+		if ( key === 'value' ) {
 			throw new Error( 'Impossible to set value after initialization' );
 		}
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this.$listview.data( 'listview' ).option( key, value );
 		}
 

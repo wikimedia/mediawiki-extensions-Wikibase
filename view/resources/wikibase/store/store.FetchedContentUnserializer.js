@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( mw, wb, util ) {
+( function ( mw, wb, util ) {
 	'use strict';
 
 	var PARENT = wb.serialization.Deserializer;
@@ -22,7 +22,7 @@
 	wb.store.FetchedContentUnserializer = util.inherit(
 		'WbFetchedContentUnserializer',
 		PARENT,
-		function( contentDeserializer ) {
+		function ( contentDeserializer ) {
 			this._contentDeserializer = contentDeserializer;
 		}, {
 
@@ -36,7 +36,7 @@
 		 *
 		 * @return {wikibase.store.FetchedContent}
 		 */
-		deserialize: function( serialization ) {
+		deserialize: function ( serialization ) {
 			var title = new mw.Title( serialization.title );
 
 			// If content deserializer is not given, take plain content value.

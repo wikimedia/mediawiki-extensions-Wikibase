@@ -2,14 +2,14 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 /**
  * @param {Object} [options]
  * @return {jQuery}
  */
-var createTestItem = function( options ) {
+var createTestItem = function ( options ) {
 	return $( '<span/>' )
 		.text( 'text' )
 		.addClass( 'test_toolbaritem' )
@@ -17,12 +17,12 @@ var createTestItem = function( options ) {
 };
 
 QUnit.module( 'jquery.wikibase.toolbaritem', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_toolbaritem' ).each( function() {
+	teardown: function () {
+		$( '.test_toolbaritem' ).each( function () {
 			var $item = $( this ).data( 'toolbaritem' ),
 				item = $item.data( 'toolbaritem' );
 
-			if( item ) {
+			if ( item ) {
 				item.destroy();
 			}
 
@@ -31,7 +31,7 @@ QUnit.module( 'jquery.wikibase.toolbaritem', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $item = createTestItem(),
 		item = $item.data( 'toolbaritem' );
 

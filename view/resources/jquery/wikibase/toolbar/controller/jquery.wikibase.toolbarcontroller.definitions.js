@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var MODULE = $.wikibase.toolbarcontroller;
@@ -56,17 +56,17 @@
 	 *          }
 	 * @return {Object|null} Toolbar definition or null if there is no definition with the given ID.
 	 */
-	MODULE.definition = function( type, definitionOrId ) {
+	MODULE.definition = function ( type, definitionOrId ) {
 		if ( typeof definitionOrId === 'string' ) {
 			// GET existing definition
 			return toolbarDefinitions[type] && toolbarDefinitions[type][definitionOrId]
 				|| null;
 		}
 
-		if( !definitionOrId.id || !definitionOrId.events ) {
+		if ( !definitionOrId.id || !definitionOrId.events ) {
 			throw new Error( 'id and events need to be specified to register a toolbar '
 				+ 'definition' );
-		} else if( !definitionOrId.selector ) {
+		} else if ( !definitionOrId.selector ) {
 			definitionOrId.selector = null;
 		}
 

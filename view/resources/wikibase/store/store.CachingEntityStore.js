@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;
@@ -19,7 +19,7 @@
 	MODULE.CachingEntityStore = util.inherit(
 		'WbCachingEntityStore',
 		wb.store.EntityStore,
-		function( store ) {
+		function ( store ) {
 			this._deferreds = {};
 			this._store = store;
 		},
@@ -37,14 +37,14 @@
 		/**
 		 * @see wikibase.store.EntityStore.getMultipleRaw
 		 */
-		getMultipleRaw: function( entityIds ) {
+		getMultipleRaw: function ( entityIds ) {
 			var deferreds = [],
 				self = this,
 				entityIdsToFetch = [],
 				entityIdToIndex = {};
 
-			$.each( entityIds, function( i, entityId ) {
-				if( self._deferreds.hasOwnProperty( entityId ) ) {
+			$.each( entityIds, function ( i, entityId ) {
+				if ( self._deferreds.hasOwnProperty( entityId ) ) {
 					deferreds[i] = self._deferreds[ entityId ];
 				} else {
 					entityIdsToFetch.push( entityId );
@@ -52,14 +52,14 @@
 				}
 			} );
 
-			if( entityIdsToFetch.length > 0 ) {
-				$.each( this._store.getMultipleRaw( entityIdsToFetch ), function( idx, promise ) {
+			if ( entityIdsToFetch.length > 0 ) {
+				$.each( this._store.getMultipleRaw( entityIdsToFetch ), function ( idx, promise ) {
 					deferreds[ entityIdToIndex[ entityIdsToFetch[ idx ] ] ] = promise;
 					self._deferreds[ entityIdsToFetch[ idx ] ] = promise;
 				} );
 			}
 
-			return $.map( deferreds, function( deferred ) {
+			return $.map( deferreds, function ( deferred ) {
 				return deferred.promise();
 			} );
 		}

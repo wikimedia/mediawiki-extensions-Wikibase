@@ -1,4 +1,4 @@
-( function( $, mw, wb ) {
+( function ( $, mw, wb ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -50,8 +50,8 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
-	_create: function() {
-		if(
+	_create: function () {
+		if (
 			!( this.options.value instanceof wb.datamodel.Term )
 			|| !this.options.entityId
 			|| !this.options.labelsChanger
@@ -66,8 +66,8 @@ $.widget( 'wikibase.labelview', PARENT, {
 		.on(
 			'labelviewafterstartediting.' + this.widgetName
 			+ ' eachchange.' + this.widgetName,
-		function( event ) {
-			if( self.value().getText() === '' ) {
+		function ( event ) {
+			if ( self.value().getText() === '' ) {
 				// Since the widget shall not be in view mode when there is no value, triggering
 				// the event without a proper value is only done when creating the widget. Disabling
 				// other edit buttons shall be avoided.
@@ -81,7 +81,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 
 		PARENT.prototype._create.call( this );
 
-		if( this.$text.text() === '' ) {
+		if ( this.$text.text() === '' ) {
 			this.draw();
 		}
 	},
@@ -89,11 +89,11 @@ $.widget( 'wikibase.labelview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	destroy: function() {
-		if( this.isInEditMode() ) {
+	destroy: function () {
+		if ( this.isInEditMode() ) {
 			var self = this;
 
-			this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
+			this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
 				PARENT.prototype.destroy.call( self );
 			} );
 
@@ -106,17 +106,17 @@ $.widget( 'wikibase.labelview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	draw: function() {
+	draw: function () {
 		var self = this,
 			deferred = $.Deferred(),
 			languageCode = this.options.value.getLanguageCode(),
 			labelText = this.options.value.getText();
 
-		if( labelText === '' ) {
+		if ( labelText === '' ) {
 			labelText = null;
 		}
 
-		if( this.options.showEntityId && !( this.isInEditMode() && labelText ) ) {
+		if ( this.options.showEntityId && !( this.isInEditMode() && labelText ) ) {
 			this.$entityId.text( mw.msg( 'parentheses', this.options.entityId ) );
 		} else {
 			this.$entityId.empty();
@@ -124,7 +124,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 
 		this.element[labelText ? 'removeClass' : 'addClass']( 'wb-empty' );
 
-		if( !this.isInEditMode() && !labelText ) {
+		if ( !this.isInEditMode() && !labelText ) {
 			this.$text.text( mw.msg( 'wikibase-label-empty' ) );
 			// Apply lang and dir of UI language
 			// instead language of that row
@@ -139,7 +139,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 		.attr( 'lang', languageCode )
 		.attr( 'dir', $.util.getDirectionality( languageCode ) );
 
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			this.$text.text( labelText );
 			return deferred.resolve().promise();
 		}
@@ -156,20 +156,20 @@ $.widget( 'wikibase.labelview', PARENT, {
 		)
 		.attr( 'lang', languageCode )
 		.attr( 'dir', $.util.getDirectionality( languageCode ) )
-		.on( 'keydown.' + this.widgetName, function( event ) {
-			if( event.keyCode === $.ui.keyCode.ENTER ) {
+		.on( 'keydown.' + this.widgetName, function ( event ) {
+			if ( event.keyCode === $.ui.keyCode.ENTER ) {
 				event.preventDefault();
 			}
 		} )
-		.on( 'eachchange.' + this.widgetName, function( event ) {
+		.on( 'eachchange.' + this.widgetName, function ( event ) {
 			self._trigger( 'change' );
 		} );
 
-		if( labelText ) {
+		if ( labelText ) {
 			$input.val( labelText );
 		}
 
-		if( $.fn.inputautoexpand ) {
+		if ( $.fn.inputautoexpand ) {
 			$input.inputautoexpand( {
 				expandHeight: true,
 				suppressNewLine: true
@@ -185,11 +185,11 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_save: function() {
+	_save: function () {
 		var deferred = $.Deferred();
 
 		this.options.labelsChanger.setLabel( this.value() )
-		.done( function( label ) {
+		.done( function ( label ) {
 			deferred.resolve();
 		} )
 		.fail( deferred.reject );
@@ -201,8 +201,8 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_afterStopEditing: function( dropValue ) {
-		if( dropValue && this.options.value.getText() === '' ) {
+	_afterStopEditing: function ( dropValue ) {
+		if ( dropValue && this.options.value.getText() === '' ) {
 			this.$text.children( '.' + this.widgetFullName + '-input' ).val( '' );
 		}
 		return PARENT.prototype._afterStopEditing.call( this, dropValue );
@@ -211,14 +211,14 @@ $.widget( 'wikibase.labelview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	isValid: function() {
+	isValid: function () {
 		return true;
 	},
 
 	/**
 	 * @inheritdoc
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		return this.value().equals( this.options.value );
 	},
 
@@ -229,14 +229,14 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 * @throws {Error} when trying to set the widget's value to something other than a
 	 *         `wikibase.datamodel.Term` instance.
 	 */
-	_setOption: function( key, value ) {
-		if( key === 'value' && !( value instanceof wb.datamodel.Term ) ) {
+	_setOption: function ( key, value ) {
+		if ( key === 'value' && !( value instanceof wb.datamodel.Term ) ) {
 			throw new Error( 'Value needs to be a wb.datamodel.Term instance' );
 		}
 
 		var response = PARENT.prototype._setOption.call( this, key, value );
 
-		if( key === 'disabled' && this.isInEditMode() ) {
+		if ( key === 'disabled' && this.isInEditMode() ) {
 			this.$text.children( '.' + this.widgetFullName + '-input' ).prop( 'disabled', value );
 		}
 
@@ -249,13 +249,13 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 * @param {wikibase.datamodel.Term} [value]
 	 * @return {wikibase.datamodel.Term|undefined}
 	 */
-	value: function( value ) {
-		if( value !== undefined ) {
+	value: function ( value ) {
+		if ( value !== undefined ) {
 			this.option( 'value', value );
 			return;
 		}
 
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			return this.option( 'value' );
 		}
 
@@ -268,8 +268,8 @@ $.widget( 'wikibase.labelview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
-		if( this.isInEditMode() ) {
+	focus: function () {
+		if ( this.isInEditMode() ) {
 			this.$text.children( '.' + this.widgetFullName + '-input' ).focus();
 		} else {
 			this.element.focus();

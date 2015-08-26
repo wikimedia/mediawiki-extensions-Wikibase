@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 var PARENT = $.wikibase.singlebuttontoolbar;

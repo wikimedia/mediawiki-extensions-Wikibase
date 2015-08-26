@@ -2,24 +2,24 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 var htmlDir = null;
 
 QUnit.module( 'jquery.util.getDirectionality', {
-	setup: function() {
+	setup: function () {
 		htmlDir = $( 'html' ).prop( 'dir' );
 	},
-	teardown: function() {
+	teardown: function () {
 		$( 'html' ).prop( 'dir', htmlDir );
 	}
 } );
 
-QUnit.test( 'Basic tests', function( assert ) {
+QUnit.test( 'Basic tests', function ( assert ) {
 	var $html = $( 'html' );
 
-	if( $.uls && $.uls.data ) {
+	if ( $.uls && $.uls.data ) {
 		assert.equal(
 			$.util.getDirectionality( 'fa' ),
 			'rtl',

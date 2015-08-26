@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -47,23 +47,23 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	options: {
 		template: 'wikibase-sitelinkview',
 		templateParams: [
-			function() {
+			function () {
 				var site = this._getSite();
 				return site ? site.getId() : 'new';
 			},
-			function() {
+			function () {
 				var site = this._getSite();
 				return site ? site.getLanguageCode() : '';
 			},
-			function() {
+			function () {
 				var site = this._getSite();
 				return site ? site.getLanguageDirection() : '';
 			},
-			function() {
+			function () {
 				var site = this._getSite();
 				return site ? site.getId() : '';
 			},
-			function() {
+			function () {
 				var site = this._getSite();
 				return site ? site.getShortName() : '';
 			},
@@ -75,7 +75,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			$link: '.wikibase-sitelinkview-link'
 		},
 		value: null,
-		getAllowedSites: function() { return []; },
+		getAllowedSites: function () { return []; },
 		entityStore: null,
 		helpMessage: mw.msg( 'wikibase-sitelinks-input-help-message' )
 	},
@@ -93,14 +93,14 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
-		if( !this.options.entityStore || !this.options.helpMessage ) {
+	_create: function () {
+		if ( !this.options.entityStore || !this.options.helpMessage ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
 		PARENT.prototype._create.call( this );
 
-		if( !this.$link.children().length ) {
+		if ( !this.$link.children().length ) {
 			// sitelinkview is created dynamically, in contrast to being initialized on pre-existing
 			// DOM.
 			this._draw();
@@ -114,15 +114,15 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
-	destroy: function() {
-		if( this._badgeselector ) {
+	destroy: function () {
+		if ( this._badgeselector ) {
 			this._badgeselector.destroy();
 		}
 
-		if( this._isInEditMode ) {
+		if ( this._isInEditMode ) {
 			var self = this;
 
-			this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
+			this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
 				PARENT.prototype.destroy.call( self );
 			} );
 
@@ -132,12 +132,12 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		}
 	},
 
-	_createBadgeSelector: function() {
+	_createBadgeSelector: function () {
 		var self = this,
 			$badgeselector = this.$link.find( '.wikibase-sitelinkview-badges' ),
 			badges = mw.config.get( 'wbBadgeItems' );
 
-		if( $.isEmptyObject( badges ) ) {
+		if ( $.isEmptyObject( badges ) ) {
 			return;
 		}
 
@@ -156,7 +156,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			},
 			encapsulate: true
 		} )
-		.on( 'badgeselectorchange', function( event ) {
+		.on( 'badgeselectorchange', function ( event ) {
 			// Adding/removing badges decreases/increases available space:
 			self.updatePageNameInputAutoExpand();
 			self._trigger( 'change' );
@@ -168,8 +168,8 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * Main rendering function.
 	 */
-	_draw: function() {
-		if( !this.$link.children().length ) {
+	_draw: function () {
+		if ( !this.$link.children().length ) {
 			var siteLink = this.options.value,
 				site = this._getSite();
 
@@ -184,11 +184,11 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			);
 		}
 
-		if( !this._badgeselector ) {
+		if ( !this._badgeselector ) {
 			this._createBadgeSelector();
 		}
 
-		if( this._isInEditMode ) {
+		if ( this._isInEditMode ) {
 			this.element.addClass( 'wb-edit' );
 			this._drawEditMode();
 		} else {
@@ -202,8 +202,8 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * wrapping.
 	 * @private
 	 */
-	_shortenPageName: function() {
-		if( this._isInEditMode ) {
+	_shortenPageName: function () {
+		if ( this._isInEditMode ) {
 			return;
 		}
 		var $a = this.$link.find( 'a' ),
@@ -216,11 +216,11 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 
 		$a.text( text );
 
-		if( this.element.height() <= lineHeight ) {
+		if ( this.element.height() <= lineHeight ) {
 			return;
 		}
 
-		while( this.element.height() > lineHeight && text.length > 0 ) {
+		while ( this.element.height() > lineHeight && text.length > 0 ) {
 			text = text.substring( 0, text.length - 1 );
 			$a.text( text + '…' );
 		}
@@ -231,12 +231,12 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * Draws the edit mode context.
 	 */
-	_drawEditMode: function() {
+	_drawEditMode: function () {
 		var self = this,
 			pageNameInputOptions = {},
 			dir = $( 'html' ).prop( 'dir' );
 
-		if( this.options.value ) {
+		if ( this.options.value ) {
 			pageNameInputOptions = {
 				siteId: this.options.value.getSiteId(),
 				pageName: this.options.value.getPageName()
@@ -256,8 +256,8 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		var pagesuggester = $pageNameInput.data( 'pagesuggester' );
 
 		$pageNameInput
-		.on( 'pagesuggesterchange.' + this.widgetName, function( event ) {
-			if( !pagesuggester.isSearching() ) {
+		.on( 'pagesuggesterchange.' + this.widgetName, function ( event ) {
+			if ( !pagesuggester.isSearching() ) {
 				self.setError();
 				self._trigger( 'change' );
 			}
@@ -267,7 +267,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			.attr( 'dir', dir )
 			.empty().append( $pageNameInput );
 
-		if( this.options.value ) {
+		if ( this.options.value ) {
 			this.updatePageNameInputAutoExpand();
 			// Site of an existing site link is not supposed to be changeable.
 			return;
@@ -286,17 +286,17 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		pagesuggester.disable();
 		$pageNameInput.hide();
 
-		if(
+		if (
 			this._badgeselector && ( !this.options.value || !this.options.value.getBadges().length )
 		) {
 			this._badgeselector.element.hide();
 		}
 
 		$siteIdInput
-		.on( 'siteselectorselected.' + this.widgetName, function( event, siteId ) {
+		.on( 'siteselectorselected.' + this.widgetName, function ( event, siteId ) {
 			var site = wb.sites.getSite( siteId );
 
-			if( site ) {
+			if ( site ) {
 				$pageNameInput
 				.attr( 'lang', site.getLanguageCode() )
 				.attr( 'dir', site.getLanguageDirection() )
@@ -305,7 +305,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 				$pageNameInput.hide();
 			}
 
-			if( self._badgeselector ) {
+			if ( self._badgeselector ) {
 				self._badgeselector.element[site ? 'show' : 'hide']();
 			}
 
@@ -316,10 +316,10 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		} )
 		.on(
 			'siteselectorselected.' + this.widgetName + ' siteselectorchange.' + this.widgetName,
-			function( event, siteId ) {
+			function ( event, siteId ) {
 				var inputautoexpand = $siteIdInput.data( 'inputautoexpand' );
 
-				if( inputautoexpand ) {
+				if ( inputautoexpand ) {
 					inputautoexpand.expand();
 				}
 
@@ -338,8 +338,8 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		this.updatePageNameInputAutoExpand();
 
 		$pageNameInput
-		.on( 'keydown.' + this.widgetName, function( event ) {
-			if( event.keyCode === $.ui.keyCode.BACKSPACE && $pageNameInput.val() === '' ) {
+		.on( 'keydown.' + this.widgetName, function ( event ) {
+			if ( event.keyCode === $.ui.keyCode.BACKSPACE && $pageNameInput.val() === '' ) {
 				event.stopPropagation();
 				$siteIdInput.val( '' ).focus();
 				$siteIdInput.data( 'siteselector' ).setSelectedSite( null );
@@ -350,10 +350,10 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * Updates the maximum width the page name input element may grow to.
 	 */
-	updatePageNameInputAutoExpand: function() {
+	updatePageNameInputAutoExpand: function () {
 		var $pageNameInput = this.$link.find( 'input' );
 
-		if( !$pageNameInput.length ) {
+		if ( !$pageNameInput.length ) {
 			return;
 		}
 
@@ -369,8 +369,8 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isEmpty: function() {
-		if( !this._isInEditMode ) {
+	isEmpty: function () {
+		if ( !this._isInEditMode ) {
 			return !this.options.value;
 		}
 
@@ -382,17 +382,17 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isValid: function() {
+	isValid: function () {
 		return !!this.value();
 	},
 
 	/**
 	 * @return {boolean}
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		var currentValue = this.value();
 
-		if( !this.options.value || !currentValue ) {
+		if ( !this.options.value || !currentValue ) {
 			return false;
 		}
 
@@ -402,18 +402,18 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * Puts the widget into edit mode.
 	 */
-	startEditing: function() {
-		if( this._isInEditMode ) {
+	startEditing: function () {
+		if ( this._isInEditMode ) {
 			return;
 		}
 
 		this._isInEditMode = true;
 		this._draw();
-		if( this._badgeselector ) {
+		if ( this._badgeselector ) {
 			this._badgeselector.startEditing();
 		}
 
-		if( this.option( 'disabled' ) ) {
+		if ( this.option( 'disabled' ) ) {
 			this._setState( 'disable' );
 		}
 
@@ -425,15 +425,15 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 *
 	 * @param {boolean} dropValue
 	 */
-	stopEditing: function( dropValue ) {
+	stopEditing: function ( dropValue ) {
 		var self = this;
 
-		if( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
 			return;
 		}
 
-		this._trigger( 'stopediting', null, [dropValue, function() {
-			if( self._badgeselector ) {
+		this._trigger( 'stopediting', null, [dropValue, function () {
+			if ( self._badgeselector ) {
 				self._badgeselector.stopEditing( dropValue );
 			}
 			self._afterStopEditing( dropValue );
@@ -443,7 +443,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * Cancels editing.
 	 */
-	cancelEditing: function() {
+	cancelEditing: function () {
 		this.stopEditing( true );
 	},
 
@@ -452,8 +452,8 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 *
 	 * @param {boolean} dropValue
 	 */
-	_afterStopEditing: function( dropValue ) {
-		if( !dropValue ) {
+	_afterStopEditing: function ( dropValue ) {
+		if ( !dropValue ) {
 			this.options.value = this.value();
 		}
 
@@ -466,7 +466,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * @return {wikibase.Site|null}
 	 */
-	_getSite: function() {
+	_getSite: function () {
 		var siteLink = this.value();
 		return siteLink ? wb.sites.getSite( siteLink.getSiteId() ) : null;
 	},
@@ -477,9 +477,9 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * @param {wikibase.datamodel.SiteLink|null} [siteLink]
 	 * @return {wikibase.datamodel.SiteLink|undefined}
 	 */
-	value: function( siteLink ) {
-		if( siteLink === undefined ) {
-			if( !this._isInEditMode ) {
+	value: function ( siteLink ) {
+		if ( siteLink === undefined ) {
+			if ( !this._isInEditMode ) {
 				return this.option( 'value' );
 			}
 
@@ -487,7 +487,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 				$pagesuggester = this.element.find( ':wikibase-pagesuggester' ),
 				siteId;
 
-			if( siteselector ) {
+			if ( siteselector ) {
 				var site = siteselector.getSelectedSite();
 				siteId = site ? site.getId() : null;
 			} else {
@@ -495,7 +495,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			}
 
 			// TODO: Do not allow null values for siteId and pageName in wikibase.datamodel.SiteLink
-			if( !siteId || $pagesuggester.val() === '' ) {
+			if ( !siteId || $pagesuggester.val() === '' ) {
 				return null;
 			}
 
@@ -504,7 +504,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 				$pagesuggester.val(),
 				this._badgeselector ? this._badgeselector.value() : []
 			);
-		} else if( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
+		} else if ( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
 			throw new Error( 'Value needs to be a SiteLink instance' );
 		}
 
@@ -516,8 +516,8 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 *
 	 * @throws {Error} when trying to set a site link with a new site id.
 	 */
-	_setOption: function( key, value ) {
-		if(
+	_setOption: function ( key, value ) {
+		if (
 			key === 'value'
 			&& this.options.value
 			&& value.getSiteId() !== this.options.value.getSiteId()
@@ -527,9 +527,9 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'value' ) {
+		if ( key === 'value' ) {
 			this._draw();
-		} else if( key === 'disabled' ) {
+		} else if ( key === 'disabled' ) {
 			this._setState( value ? 'disable' : 'enable' );
 		}
 
@@ -539,21 +539,21 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * @param {string} state
 	 */
-	_setState: function( state ) {
-		if( this._isInEditMode ) {
+	_setState: function ( state ) {
+		if ( this._isInEditMode ) {
 			var $siteInput = this.$siteId.find( 'input' ),
 				hasSiteId = !!( this.options.value && this.options.value.getSiteId() );
 
-			if( $siteInput.length ) {
+			if ( $siteInput.length ) {
 				var siteselector = $siteInput.data( 'siteselector' );
 				hasSiteId = !!siteselector.getSelectedSite();
 				siteselector[state]();
 			}
 
 			// Do not enable page input if no site is set:
-			if( state === 'disable' || hasSiteId ) {
+			if ( state === 'disable' || hasSiteId ) {
 				this.$link.find( 'input' ).data( 'pagesuggester' )[state]();
-				if( this._badgeselector ) {
+				if ( this._badgeselector ) {
 					this._badgeselector[state]();
 				}
 			}
@@ -563,16 +563,16 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.focus
 	 */
-	focus: function() {
+	focus: function () {
 		var $siteselector = this.element.find( ':wikibase-siteselector' ),
 			$pagesuggester = this.element.find( ':wikibase-pagesuggester' );
 
-		if(
+		if (
 			$pagesuggester.length
 			&& !$pagesuggester.data( 'pagesuggester' ).option( 'disabled' )
 		) {
 			$pagesuggester.focus();
-		} else if( $siteselector.length ) {
+		} else if ( $siteselector.length ) {
 			$siteselector.focus();
 		} else {
 			this.element.focus();
@@ -584,11 +584,11 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 *
 	 * @param {Error} [error]
 	 */
-	setError: function( error ) {
-		if( error ) {
+	setError: function ( error ) {
+		if ( error ) {
 			this.element.addClass( 'wb-error' );
 			this._trigger( 'toggleerror', null, [error] );
-		} else if( this.element.hasClass( 'wb-error' ) ) {
+		} else if ( this.element.hasClass( 'wb-error' ) ) {
 			this.element.removeClass( 'wb-error' );
 			this._trigger( 'toggleerror' );
 		}

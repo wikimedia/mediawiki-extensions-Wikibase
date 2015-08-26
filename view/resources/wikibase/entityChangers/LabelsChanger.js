@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.entityChangers;
@@ -41,7 +41,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setLabel: function( label ) {
+		setLabel: function ( label ) {
 			var self = this,
 				deferred = $.Deferred(),
 				language = label.getLanguageCode();
@@ -52,7 +52,7 @@
 				label.getText(),
 				language
 			)
-			.done( function( result ) {
+			.done( function ( result ) {
 				var savedLabel = result.entity.labels[language].value;
 
 				// Update revision store:
@@ -64,7 +64,7 @@
 
 				deferred.resolve( savedLabel );
 			} )
-			.fail( function( errorCode, error ) {
+			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 			} );
 

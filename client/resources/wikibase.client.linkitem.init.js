@@ -6,7 +6,7 @@
  * @licence GNU GPL v2+
  * @author: Marius Hoch < hoo@online.de >
  */
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 	function initLinkItem( elem ) {
@@ -23,7 +23,7 @@
 				'mw.config.values.wbRepo',
 				'wikibase.client.getMwApiForRepo'
 			],
-			function() {
+			function () {
 				$spinner.remove();
 
 				var repoConfig = mw.config.get( 'wbRepo' );
@@ -44,21 +44,21 @@
 				var widgetName = $linkItemLink.data( 'linkitem' ).widgetName;
 
 				$linkItemLink
-				.on( 'linkitemdialogclose.' + widgetName, function( event ) {
+				.on( 'linkitemdialogclose.' + widgetName, function ( event ) {
 					$linkItemLink
 					.off( '.' + widgetName )
 					.data( 'linkitem' ).destroy();
 				} )
-				.on( 'linkitemsuccess.' + widgetName, function( event ) {
+				.on( 'linkitemsuccess.' + widgetName, function ( event ) {
 					// Don't reshow the "Add links" link but reload the page on dialog close:
 					$linkItemLink
 					.off( '.' + widgetName )
-					.on( 'linkitemdialogclose.' + widgetName, function() {
+					.on( 'linkitemdialogclose.' + widgetName, function () {
 						window.location.reload( true );
 					} );
 				} );
 			},
-			function() {
+			function () {
 				// Failure: This isn't very likely, but who knows
 				$spinner.remove();
 				$linkItemLink.show();
@@ -70,7 +70,7 @@
 	/**
 	 * Displays the link which opens the dialog (using jquery.wikibase.linkitem)
 	 */
-	$( document ).ready( function() {
+	$( document ).ready( function () {
 		if ( !$.support.cors ) {
 			// This will fail horribly w/o CORS support on WMF-like setups (different domains for repo and client)
 			// Just leave the no-JS edit link in place.
@@ -78,7 +78,7 @@
 		}
 
 		$( '.wb-langlinks-link > a' ).eq( 0 )
-		.click( function( event ) {
+		.click( function ( event ) {
 			event.preventDefault();
 			initLinkItem( this );
 		} );

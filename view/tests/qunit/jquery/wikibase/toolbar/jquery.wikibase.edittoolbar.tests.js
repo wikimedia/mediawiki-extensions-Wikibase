@@ -2,38 +2,38 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.wikibase.edittoolbar', QUnit.newMwEnvironment( {
-	setup: function() {
+	setup: function () {
 		$.widget( 'wikibasetest.editablewidget', {
-			getHelpMessage: function() {
+			getHelpMessage: function () {
 				return $.Deferred().resolve( 'help message' ).promise();
 			},
-			startEditing: function() {
+			startEditing: function () {
 				this._trigger( 'afterstartediting' );
 			},
-			stopEditing: function( dropValue ) {
+			stopEditing: function ( dropValue ) {
 				var self = this;
 				this._trigger( 'stopediting', null, [dropValue] );
-				setTimeout( function() {
+				setTimeout( function () {
 					self._trigger( 'afterstopediting', null, [dropValue] );
 				}, 0 );
 			},
-			setError: function() {
+			setError: function () {
 				this._trigger( 'toggleerror' );
 			}
 		} );
 	},
-	teardown: function() {
+	teardown: function () {
 		delete( $.wikibasetest.editablewidget );
 
-		$( '.test_edittoolbar' ).each( function() {
+		$( '.test_edittoolbar' ).each( function () {
 			var $edittoolbar = $( this ),
 				edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
-			if( edittoolbar ) {
+			if ( edittoolbar ) {
 				edittoolbar.destroy();
 			}
 
@@ -54,7 +54,7 @@ function createEdittoolbar( options ) {
 		}, options || {} ) );
 }
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $edittoolbar = createEdittoolbar(),
 		edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
@@ -71,7 +71,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 
 	$edittoolbar = createEdittoolbar( {
-		onRemove: function() {}
+		onRemove: function () {}
 	} );
 	edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
@@ -88,7 +88,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Deferred button initialization', function( assert ) {
+QUnit.test( 'Deferred button initialization', function ( assert ) {
 	var $edittoolbar = createEdittoolbar(),
 		edittoolbar = $edittoolbar.data( 'edittoolbar' ),
 		deferredButtons = ['save', 'remove', 'cancel'];
@@ -98,7 +98,7 @@ QUnit.test( 'Deferred button initialization', function( assert ) {
 		'Created "edit" button.'
 	);
 
-	for( var i = 0; i < deferredButtons.length; i++ ) {
+	for ( var i = 0; i < deferredButtons.length; i++ ) {
 		assert.ok(
 			edittoolbar._buttons[deferredButtons[i]] === undefined,
 			'"' + deferredButtons[i] + '" not yet initialized.'
@@ -123,7 +123,7 @@ QUnit.test( 'Deferred button initialization', function( assert ) {
 	);
 } );
 
-QUnit.test( 'toEditMode(), toNonEditMode()', function( assert ) {
+QUnit.test( 'toEditMode(), toNonEditMode()', function ( assert ) {
 	var $edittoolbar = createEdittoolbar(),
 		edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
@@ -173,7 +173,7 @@ QUnit.test( 'toEditMode(), toNonEditMode()', function( assert ) {
 		'Verified toolbar\'s button being the "edit" button.'
 	);
 
-	edittoolbar.option( 'onRemove', function() {} );
+	edittoolbar.option( 'onRemove', function () {} );
 
 	edittoolbar.toEditMode();
 
@@ -190,19 +190,19 @@ QUnit.test( 'toEditMode(), toNonEditMode()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'afterstartediting and afterstopediting events', 2, function( assert ) {
+QUnit.test( 'afterstartediting and afterstopediting events', 2, function ( assert ) {
 	var $edittoolbar = createEdittoolbar(),
 		edittoolbar = $edittoolbar.data( 'edittoolbar' ),
 		widget = edittoolbar.option( 'interactionWidget' );
 
 	$edittoolbar
-	.on( 'edittoolbarafterstartediting', function() {
+	.on( 'edittoolbarafterstartediting', function () {
 		assert.ok(
 			true,
 			'Triggered "afterstartediting" event.'
 		);
 	} )
-	.on( 'edittoolbarafterstopediting', function() {
+	.on( 'edittoolbarafterstopediting', function () {
 		QUnit.start();
 
 		assert.ok(

@@ -1,4 +1,4 @@
-( function( $, wb ) {
+( function ( $, wb ) {
 	'use strict';
 
 	var MODULE = wb.view;
@@ -129,7 +129,7 @@
 	 * @return {jQuery.wikibase.entityview} The constructed entity view
 	 * @throws {Error} If there is no view for the given entity type
 	 **/
-	SELF.prototype.getEntityView = function( entity, $dom ) {
+	SELF.prototype.getEntityView = function ( entity, $dom ) {
 		return this._getView(
 			entity.getType() + 'view',
 			$dom,
@@ -148,7 +148,7 @@
 	 * @private
 	 * @return {wikibase.ValueViewBuilder}
 	 **/
-	SELF.prototype._getValueViewBuilder = function() {
+	SELF.prototype._getValueViewBuilder = function () {
 		return new wb.ValueViewBuilder(
 			this._expertStore,
 			this._formatterStore,
@@ -165,8 +165,8 @@
 	 * @return {Object} The constructed view
 	 * @throws {Error} If there is no view with the given name
 	 **/
-	SELF.prototype._getView = function( viewName, $dom, options ) {
-		if( !$.wikibase[ viewName ] ) {
+	SELF.prototype._getView = function ( viewName, $dom, options ) {
+		if ( !$.wikibase[ viewName ] ) {
 			throw new Error( 'View ' + viewName + ' does not exist' );
 		}
 

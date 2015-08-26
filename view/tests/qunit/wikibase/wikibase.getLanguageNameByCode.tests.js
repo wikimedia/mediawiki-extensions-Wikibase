@@ -3,14 +3,14 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
-( function( wb, $, QUnit ) {
+( function ( wb, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.getLanguageNameByCode' );
 
-	QUnit.test( 'wikibase.getLanguageNameByCode()', 2, function( assert ) {
+	QUnit.test( 'wikibase.getLanguageNameByCode()', 2, function ( assert ) {
 		// TODO: Don't assume global state, control what languages are available for this test!
-		if( $.uls !== undefined ) {
+		if ( $.uls !== undefined ) {
 			assert.strictEqual(
 				wb.getLanguageNameByCode( 'de' ),
 				'Deutsch',
