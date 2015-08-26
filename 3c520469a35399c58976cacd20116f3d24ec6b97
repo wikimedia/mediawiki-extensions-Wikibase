@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_7a4cc043",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-26T14:38:12Z",
+      "side": 0,
+      "message": "i don\u0027t think we should remove this here, as long as ApiMain::execute calls this:\n\nhttps://github.com/wikimedia/mediawiki/blob/master/includes/api/ApiMain.php#L1068\n\nhere, for xml printer, getNeedsRawData is always true and then raw mode is set before the $module is executed.\n\nWe might put a @todo here, to remove it in the future (when raw mode is removed in core), and probably such core change will break wikibase so we notice anyway :/\n\nanyway, adding this back in, the tests with this patch still pass :)\n\n(PS. it would be nicer to not need this code at all to mimic ApiMain::executeAction and have to maintain this)",
+      "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
