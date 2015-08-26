@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 	/**
@@ -18,7 +18,7 @@
 		options = $.extend( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibasetest.valuewidget,
-				newItemOptionsFn: function( value ) {
+				newItemOptionsFn: function ( value ) {
 					return { value: value || null };
 				}
 			} ),
@@ -39,7 +39,7 @@
 	function getListItemStrings( listview ) {
 		var value = '';
 
-		$.each( listview.value(), function( i, valueWidget ) {
+		$.each( listview.value(), function ( i, valueWidget ) {
 			value += valueWidget.value();
 		} );
 
@@ -47,25 +47,25 @@
 	}
 
 	QUnit.module( 'jquery.wikibase.listview', QUnit.newMwEnvironment( {
-		setup: function() {
+		setup: function () {
 			/**
 			 * Basic widget to be used as list item.
 			 */
 			$.widget( 'wikibasetest.valuewidget', {
-				value: function( value ) {
-					if( value ) {
+				value: function ( value ) {
+					if ( value ) {
 						this.options.value = value;
 					}
 					return this.options.value;
 				}
 			} );
 		},
-		teardown: function() {
-			$( '.test_listview' ).each( function( i, node ) {
+		teardown: function () {
+			$( '.test_listview' ).each( function ( i, node ) {
 				var $node = $( node ),
 					listview = $node.data( 'listview' );
 
-				if( listview ) {
+				if ( listview ) {
 					listview.destroy();
 				}
 
@@ -76,7 +76,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Initialize and destroy', function( assert ) {
+	QUnit.test( 'Initialize and destroy', function ( assert ) {
 
 		/**
 		 * Runs assertions testing initialization and destruction of a listview widget initialized
@@ -134,7 +134,7 @@
 		testInitAndDestroy( assert, ['a', 'b'] );
 	} );
 
-	QUnit.test( 'value()', function( assert ) {
+	QUnit.test( 'value()', function ( assert ) {
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = [
@@ -173,13 +173,13 @@
 		);
 	} );
 
-	QUnit.test( 'addItem() and removeItem()', function( assert ) {
+	QUnit.test( 'addItem() and removeItem()', function ( assert ) {
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = ['a', 'b', 'c'],
 			listItems = [];
 
-		for( var i = 0; i < values.length; i++ ) {
+		for ( var i = 0; i < values.length; i++ ) {
 			listview.addItem( values[i] );
 
 			assert.strictEqual(
@@ -222,7 +222,7 @@
 		);
 	} );
 
-	QUnit.test( 'enterNewItem()', function( assert ) {
+	QUnit.test( 'enterNewItem()', function ( assert ) {
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = ['a', 'b', 'c'];
@@ -298,7 +298,7 @@
 		);
 	} );
 
-	QUnit.test( 'listItemNodeName option', function( assert ) {
+	QUnit.test( 'listItemNodeName option', function ( assert ) {
 		var $node = createListview( ['a', 'b', 'c'], { listItemNodeName: 'SPAN' } ),
 			listview = $node.data( 'listview' );
 
@@ -318,11 +318,11 @@
 		);
 	} );
 
-	QUnit.test( 'indexOf()', function( assert ) {
+	QUnit.test( 'indexOf()', function ( assert ) {
 		var $node = createListview( ['a', 'b', 'c'] ),
 			listview = $node.data( 'listview' );
 
-		for( var i = 0; i < listview.items().length; i++ ) {
+		for ( var i = 0; i < listview.items().length; i++ ) {
 			assert.strictEqual(
 				listview.indexOf( listview.items().eq( i ) ),
 				i,
@@ -331,7 +331,7 @@
 		}
 	} );
 
-	QUnit.test( 'move()', 56, function( assert ) {
+	QUnit.test( 'move()', 56, function ( assert ) {
 		var values = ['a', 'b', 'c', 'd'],
 			$node,
 			listview;
@@ -365,11 +365,11 @@
 			[3, 4, 'abcd'] // no event
 		];
 
-		$.each( testCases, function( i, testCase ) {
+		$.each( testCases, function ( i, testCase ) {
 			$node = createListview( values );
 			listview = $node.data( 'listview' );
 
-			$node.one( 'listviewafteritemmove', function( event, newIndex, listLength ) {
+			$node.one( 'listviewafteritemmove', function ( event, newIndex, listLength ) {
 				assert.ok(
 					true,
 					'Triggered "afteritemmove" event.'
@@ -401,7 +401,7 @@
 		} );
 	} );
 
-	QUnit.test( 'moveUp() and moveDown()', function( assert ) {
+	QUnit.test( 'moveUp() and moveDown()', function ( assert ) {
 		var values = ['a', 'b', 'c', 'd'];
 
 		/**
@@ -426,8 +426,8 @@
 
 		var $node, listview;
 
-		$.each( testCases, function( methodName, expectedResults ) {
-			$.each( expectedResults, function( i, expected ) {
+		$.each( testCases, function ( methodName, expectedResults ) {
+			$.each( expectedResults, function ( i, expected ) {
 				$node = createListview( values );
 				listview = $node.data( 'listview' );
 

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.entityChangers;
@@ -42,7 +42,7 @@
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setSiteLink: function( siteLink, language ) {
+		setSiteLink: function ( siteLink, language ) {
 			var self = this,
 				deferred = $.Deferred();
 
@@ -53,7 +53,7 @@
 				siteLink.getPageName(),
 				siteLink.getBadges()
 			)
-			.done( function( result ) {
+			.done( function ( result ) {
 				var savedSiteLink = new wb.datamodel.SiteLink(
 					siteLink.getSiteId(),
 					result.entity.sitelinks[siteLink.getSiteId()].title
@@ -71,7 +71,7 @@
 
 				deferred.resolve( savedSiteLink );
 			} )
-			.fail( function( errorCode, error ) {
+			.fail( function ( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse(
 					error,
 					siteLink.getPageName() === '' ? 'remove' : 'save' )

@@ -1,4 +1,4 @@
-( function( $, mw, wb ) {
+( function ( $, mw, wb ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -45,8 +45,8 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
-	_create: function() {
-		if(
+	_create: function () {
+		if (
 			!( this.options.value instanceof wb.datamodel.MultiTerm )
 			|| !this.options.aliasesChanger
 		) {
@@ -57,7 +57,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 
 		this.element.removeClass( 'wb-empty' );
 
-		if( this.$list.children( 'li' ).length !== this.options.value.getTexts().length ) {
+		if ( this.$list.children( 'li' ).length !== this.options.value.getTexts().length ) {
 			this.draw();
 		} else {
 			var languageCode = this.options.value.getLanguageCode();
@@ -72,8 +72,8 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	destroy: function() {
-		if( this.$list ) {
+	destroy: function () {
+		if ( this.$list ) {
 			this.$list.removeClass( this.widgetFullName + '-input' );
 		}
 		PARENT.prototype.destroy.call( this );
@@ -82,16 +82,16 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	draw: function() {
+	draw: function () {
 		this.$list.off( '.' + this.widgetName );
 
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			this._initTagadata();
 		} else {
 			var self = this,
 				tagadata = this.$list.data( 'tagadata' );
 
-			if( tagadata ) {
+			if ( tagadata ) {
 				tagadata.destroy();
 			}
 
@@ -100,7 +100,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 			.prop( 'lang', this.options.value.getLanguageCode() )
 			.prop( 'dir', $.util.getDirectionality( this.options.value.getLanguageCode() ) );
 
-			$.each( this.options.value.getTexts(), function() {
+			$.each( this.options.value.getTexts(), function () {
 				self.$list.append( mw.wbTemplate( 'wikibase-aliasesview-list-item', this ) );
 			} );
 		}
@@ -112,7 +112,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * Creates and initializes the `jQuery.ui.tagadata` widget.
 	 * @private
 	 */
-	_initTagadata: function() {
+	_initTagadata: function () {
 		var self = this;
 
 		this.$list
@@ -123,7 +123,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 		.on(
 			'tagadatatagremoved.' + this.widgetName
 			+ ' tagadatatagchanged.' + this.widgetName
-			+ ' tagadatatagremoved.' + this.widgetName, function( event ) {
+			+ ' tagadatatagremoved.' + this.widgetName, function ( event ) {
 				self._trigger( 'change' );
 			}
 		);
@@ -131,7 +131,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 		var expansionOptions = {
 			expandOnResize: false,
 			comfortZone: 16, // width of .ui-icon
-			maxWidth: function() {
+			maxWidth: function () {
 				// TODO/FIXME: figure out why this requires at least -17, can't be because of padding + border
 				// which is only 6 for both sides
 				return self.$list.width() - 20;
@@ -158,7 +158,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 			.find( 'input' ).inputautoexpand( expansionOptions );
 
 		// also make sure that new helper tags will calculate size correctly:
-		this.$list.on( 'tagadatahelpertagadded.' + this.widgetName, function( event, tag ) {
+		this.$list.on( 'tagadatahelpertagadded.' + this.widgetName, function ( event, tag ) {
 			$( tag ).find( 'input' ).inputautoexpand( expansionOptions );
 		} );
 	},
@@ -167,21 +167,21 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_save: function() {
+	_save: function () {
 		return this.options.aliasesChanger.setAliases( this.value() );
 	},
 
 	/**
 	 * @inheritdoc
 	 */
-	isValid: function() {
+	isValid: function () {
 		return true;
 	},
 
 	/**
 	 * @inheritdoc
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		return this.value().equals( this.options.value );
 	},
 
@@ -192,14 +192,14 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @throws {Error} when trying to set the widget's value to something other than a
 	 *         `wikibase.datamodel.MultiTerm` instance.
 	 */
-	_setOption: function( key, value ) {
-		if( key === 'value' && !( value instanceof wb.datamodel.MultiTerm ) ) {
+	_setOption: function ( key, value ) {
+		if ( key === 'value' && !( value instanceof wb.datamodel.MultiTerm ) ) {
 			throw new Error( 'Value needs to be a wb.datamodel.MultiTerm instance' );
 		}
 
 		var response = PARENT.prototype._setOption.call( this, key, value );
 
-		if( key === 'disabled' && this.isInEditMode() ) {
+		if ( key === 'disabled' && this.isInEditMode() ) {
 			this.$list.data( 'tagadata' ).option( 'disabled', value );
 		}
 
@@ -212,13 +212,13 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @param {wikibase.datamodel.MultiTerm} [value]
 	 * @return {wikibase.datamodel.MultiTerm|undefined}
 	 */
-	value: function( value ) {
-		if( value !== undefined ) {
+	value: function ( value ) {
+		if ( value !== undefined ) {
 			this.option( 'value', value );
 			return;
 		}
 
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			return this.option( 'value' );
 		}
 
@@ -226,7 +226,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 
 		return new wb.datamodel.MultiTerm(
 			this.options.value.getLanguageCode(),
-			$.map( tagadata.getTags(), function( tag ) {
+			$.map( tagadata.getTags(), function ( tag ) {
 				return tagadata.getTagLabel( $( tag ) );
 			} )
 		);
@@ -235,8 +235,8 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
-		if( this.isInEditMode() ) {
+	focus: function () {
+		if ( this.isInEditMode() ) {
 			this.$list.data( 'tagadata' ).getHelperTag().find( 'input' ).focus();
 		} else {
 			this.element.focus();

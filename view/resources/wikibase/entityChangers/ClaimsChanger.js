@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 var MODULE = wb.entityChangers;
@@ -72,19 +72,19 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	removeStatement: function( statement ) {
+	removeStatement: function ( statement ) {
 		var deferred = $.Deferred(),
 			self = this,
 			guid = statement.getClaim().getGuid();
 
 		this._api.removeClaim( guid, this._revisionStore.getClaimRevision( guid ) )
-		.done( function( response ) {
+		.done( function ( response ) {
 			self._revisionStore.setClaimRevision( response.pageinfo.lastrevid, guid );
 
 			// FIXME: Set statement on this._entity
 			deferred.resolve();
 		} )
-		.fail( function( errorCode, error ) {
+		.fail( function ( errorCode, error ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
 		} );
 
@@ -100,7 +100,7 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	setClaim: function( claim, index ) {
+	setClaim: function ( claim, index ) {
 		var self = this,
 			deferred = $.Deferred();
 
@@ -109,7 +109,7 @@ $.extend( SELF.prototype, {
 			this._revisionStore.getClaimRevision( claim.getGuid() ),
 			index
 		)
-		.done( function( result ) {
+		.done( function ( result ) {
 			var savedClaim = self._claimDeserializer.deserialize( result.claim ),
 				pageInfo = result.pageinfo;
 
@@ -120,7 +120,7 @@ $.extend( SELF.prototype, {
 
 			deferred.resolve( savedClaim );
 		} )
-		.fail( function( errorCode, error ) {
+		.fail( function ( errorCode, error ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 		} );
 
@@ -136,7 +136,7 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	setStatement: function( statement, index ) {
+	setStatement: function ( statement, index ) {
 		var self = this,
 			deferred = $.Deferred();
 
@@ -145,7 +145,7 @@ $.extend( SELF.prototype, {
 			this._revisionStore.getClaimRevision( statement.getClaim().getGuid() ),
 			index
 		)
-		.done( function( result ) {
+		.done( function ( result ) {
 			var savedStatement = self._statementDeserializer.deserialize( result.claim ),
 				pageInfo = result.pageinfo;
 
@@ -158,7 +158,7 @@ $.extend( SELF.prototype, {
 
 			deferred.resolve( savedStatement );
 		} )
-		.fail( function( errorCode, error ) {
+		.fail( function ( errorCode, error ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 		} );
 

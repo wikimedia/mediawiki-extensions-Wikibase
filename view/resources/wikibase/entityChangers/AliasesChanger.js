@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 var MODULE = wb.entityChangers;
@@ -44,7 +44,7 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	setAliases: function( aliases ) {
+	setAliases: function ( aliases ) {
 		var deferred = $.Deferred(),
 			self = this,
 			language = aliases.getLanguageCode(),
@@ -57,14 +57,14 @@ $.extend( SELF.prototype, {
 			this._getRemovedAliasesTexts( aliases, initialAliases ),
 			language
 		)
-		.done( function( response ) {
+		.done( function ( response ) {
 			self._revisionStore.setAliasesRevision( response.entity.lastrevid );
 
 			self._entity.getFingerprint().setAliases( language, aliases );
 
 			deferred.resolve();
 		} )
-		.fail( function( errorCode, errorObject ) {
+		.fail( function ( errorCode, errorObject ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( errorObject, 'save' ) );
 		} );
 
@@ -75,7 +75,7 @@ $.extend( SELF.prototype, {
 	 * @param {string} language
 	 * @return {wikibase.datamodel.MultiTerm}
 	 */
-	_getInitialAliases: function( language ) {
+	_getInitialAliases: function ( language ) {
 		return this._entity.getFingerprint().getAliasesFor( language )
 			|| new wb.datamodel.MultiTerm( language, [] );
 	},
@@ -85,13 +85,13 @@ $.extend( SELF.prototype, {
 	 * @param {wikibase.datamodel.MultiTerm} initialAliases
 	 * @return {string[]}
 	 */
-	_getNewAliasesTexts: function( currentAliases, initialAliases ) {
+	_getNewAliasesTexts: function ( currentAliases, initialAliases ) {
 		var currentTexts = currentAliases.getTexts(),
 			initialTexts = initialAliases.getTexts(),
 			newAliases = [];
 
-		for( var i = 0; i < currentTexts.length; i++ ) {
-			if( $.inArray( currentTexts[i], initialTexts ) === -1 ) {
+		for ( var i = 0; i < currentTexts.length; i++ ) {
+			if ( $.inArray( currentTexts[i], initialTexts ) === -1 ) {
 				newAliases.push( currentTexts[i] );
 			}
 		}
@@ -104,13 +104,13 @@ $.extend( SELF.prototype, {
 	 * @param {wikibase.datamodel.MultiTerm} initialAliases
 	 * @return {string[]}
 	 */
-	_getRemovedAliasesTexts: function( currentAliases, initialAliases ) {
+	_getRemovedAliasesTexts: function ( currentAliases, initialAliases ) {
 		var currentTexts = currentAliases.getTexts(),
 			initialTexts = initialAliases.getTexts(),
 			removedAliases = [];
 
-		for( var i = 0; i < initialTexts.length; i++ ) {
-			if( $.inArray( initialTexts[i], currentTexts ) === -1 ) {
+		for ( var i = 0; i < initialTexts.length; i++ ) {
+			if ( $.inArray( initialTexts[i], currentTexts ) === -1 ) {
 				removedAliases.push( initialTexts[i] );
 			}
 		}

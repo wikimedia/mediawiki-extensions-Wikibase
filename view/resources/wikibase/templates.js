@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 	/*
@@ -16,7 +16,7 @@
 	 *
 	 * @constructor
 	 */
-	mw.WbTemplate = function() { mw.Message.apply( this, arguments ); };
+	mw.WbTemplate = function () { mw.Message.apply( this, arguments ); };
 	mw.WbTemplate.prototype = $.extend(
 		{},
 		mw.Message.prototype,
@@ -30,7 +30,7 @@
 	 *
 	 * @return {string}
 	 */
-	mw.WbTemplate.prototype.plain = function() {
+	mw.WbTemplate.prototype.plain = function () {
 		return this.parser();
 	};
 
@@ -61,7 +61,7 @@
 	 *
 	 * @throws {Error} if the generated template's HTML is invalid.
 	 */
-	mw.wbTemplate = function( key, parameter1 /* [, parameter2[, ...]] */ ) {
+	mw.wbTemplate = function ( key, parameter1 /* [, parameter2[, ...]] */ ) {
 		var i,
 			params = [],
 			template,
@@ -69,8 +69,8 @@
 			tempParams = [],
 			delayedParams = [];
 
-		if( parameter1 !== undefined ) {
-			if( $.isArray( parameter1 ) ) {
+		if ( parameter1 !== undefined ) {
+			if ( $.isArray( parameter1 ) ) {
 				params = parameter1;
 			} else { // support variadic arguments
 				params = Array.prototype.slice.call( arguments );
@@ -80,13 +80,13 @@
 
 		// Pre-parse the template inserting strings and placeholder nodes for jQuery objects jQuery
 		// objects will be appended after the template has been parsed to not lose any references:
-		for( i = 0; i < params.length; i++ ) {
-			if( typeof params[i] === 'string' || params[i] instanceof String ) {
+		for ( i = 0; i < params.length; i++ ) {
+			if ( typeof params[i] === 'string' || params[i] instanceof String ) {
 				// insert strings into the template directly but have them parsed by the browser
 				// to detect HTML entities properly (e.g. a &nbsp; in Firefox would show up as a
 				// space instead of an entity which would cause an invalid HTML error)
 				tempParams.push( $( '<div/>' ).html( mw.html.escape( params[i] ) ).html() );
-			} else if( params[i] instanceof jQuery ) {
+			} else if ( params[i] instanceof jQuery ) {
 				// construct temporary placeholder nodes
 				// (using an actual invalid class name to not interfere with any other node)
 				var nodeName = params[i][0].nodeName.toLowerCase();
@@ -103,8 +103,8 @@
 		// insert any jQuery objects:
 		$wrappedTemplate = $( '<html/>' ).html( template.plain() );
 
-		if( !areCachedParameterTypes( key, params ) ) {
-			if( !isValidHtml( template, $wrappedTemplate ) ) {
+		if ( !areCachedParameterTypes( key, params ) ) {
+			if ( !isValidHtml( template, $wrappedTemplate ) ) {
 				throw new Error( 'mw.wbTemplate: Tried to generate invalid HTML for template "'
 					+ key + '"' );
 			}
@@ -112,7 +112,7 @@
 		}
 
 		// Replace temporary nodes with actual jQuery nodes:
-		$wrappedTemplate.find( '.--mwTemplate' ).each( function( i ) {
+		$wrappedTemplate.find( '.--mwTemplate' ).each( function ( i ) {
 			$( this ).replaceWith( delayedParams[i] );
 		} );
 
@@ -135,10 +135,10 @@
 	 *        arguments, an array may be passed as first parameter.
 	 * @return {jQuery}
 	 */
-	$.fn.applyTemplate = function( template, parameter1 /*[, parameter2[, ...]] */ ) {
+	$.fn.applyTemplate = function ( template, parameter1 /*[, parameter2[, ...]] */ ) {
 		var $template = mw.wbTemplate.apply( null, arguments );
 
-		if( $template.length !== 1 ) {
+		if ( $template.length !== 1 ) {
 			throw new Error( 'Can not apply a template with more or less than one root node.' );
 		}
 
@@ -146,7 +146,7 @@
 		this.addClass( $template.prop( 'class' ) );
 
 		// Copy dir attribute if set:
-		if( $template.prop( 'dir' ) !== '' ) {
+		if ( $template.prop( 'dir' ) !== '' ) {
 			this.prop( 'dir', $template.prop( 'dir' ) );
 		}
 
@@ -171,13 +171,13 @@
 	function addToCache( key, params ) {
 		var paramTypes = [];
 
-		if( !cache[key] ) {
+		if ( !cache[key] ) {
 			cache[key] = [];
 		}
 
-		for( var i = 0; i < params.length; i++ ) {
+		for ( var i = 0; i < params.length; i++ ) {
 			var parameterType = getParameterType( params[i] );
-			if( parameterType === 'object' ) {
+			if ( parameterType === 'object' ) {
 				// Cannot handle some generic object.
 				return;
 			} else {
@@ -207,17 +207,17 @@
 	 * @return {boolean}
 	 */
 	function areCachedParameterTypes( key, params ) {
-		if( !cache[key] ) {
+		if ( !cache[key] ) {
 			return false;
 		}
 
-		for( var i = 0; i < cache[key].length; i++ ) {
-			if( params.length !== cache[key][i].length ) {
+		for ( var i = 0; i < cache[key].length; i++ ) {
+			if ( params.length !== cache[key][i].length ) {
 				return false;
 			}
 
-			for( var j = 0; j < params.length; j++ ) {
-				if( getParameterType( params[j] ) !== cache[key][i][j] ) {
+			for ( var j = 0; j < params.length; j++ ) {
+				if ( getParameterType( params[j] ) !== cache[key][i][j] ) {
 					return false;
 				}
 			}
@@ -264,7 +264,7 @@
 			filteredString = '',
 			character = '';
 
-		$.each( tagsToIgnore, function( i, tag ) {
+		$.each( tagsToIgnore, function ( i, tag ) {
 			// ignore case since IE8 will convert tag names to upper case
 			var re = new RegExp( '<\\/?' + tag + '[^>]*>', 'gi' );
 			string = string.replace( re, '' );
@@ -284,36 +284,36 @@
 		// However, it does not work in IE8 and may cause errors for certain DOM structures in other
 		// browsers as well:
 		// string = string.replace( /(<\S+)(?:[^<>"']+(?:(["'])[^\2]*\2)?)*?\/?(>)/g, '$1$3' );
-		for( var i = 0; i < string.length; i++ ) {
+		for ( var i = 0; i < string.length; i++ ) {
 			character = string[i];
-			if( !inTag && !readTag && character === '<' ) {
+			if ( !inTag && !readTag && character === '<' ) {
 				tag = '';
 				inTag = true;
 				readTag = true;
 				filteredString += character;
-			} else if( inTag && ( character === ' ' || character === '/' && string[i + 1] === '>' ) ) {
+			} else if ( inTag && ( character === ' ' || character === '/' && string[i + 1] === '>' ) ) {
 				readTag = false;
-			} else if( inTag && ( character === '\'' || character === '"' ) ) {
+			} else if ( inTag && ( character === '\'' || character === '"' ) ) {
 				// skip all characters within an attribute's value
 				i++;
-				while( string[i] !== character ) {
+				while ( string[i] !== character ) {
 					i++;
 				}
-			} else if( inTag && character === '>' ) {
+			} else if ( inTag && character === '>' ) {
 				inTag = false;
 				readTag = false;
 				outTag = true;
 				filteredString += character;
-			} else if( outTag && /\s/.test( character ) ) {
+			} else if ( outTag && /\s/.test( character ) ) {
 				continue; // omit white space between tag and text (IE8)
-			} else if(
+			} else if (
 				( !inTag || inTag && readTag )
 				// Strip line breaks inserted by IE8 that are not stripped by the regular expression
 				// before the for loop:
 				&& character.charCodeAt( 0 ) !== 10 && character.charCodeAt( 0 ) !== 13
 			) {
 				filteredString += character;
-				if( outTag ) {
+				if ( outTag ) {
 					outTag = false;
 				}
 			}

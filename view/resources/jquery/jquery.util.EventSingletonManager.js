@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 $.util = $.util || {};
@@ -40,15 +40,15 @@ $.extend( SELF.prototype, {
 	 *        - {number} [debounce] Debounce delay
 	 *          Default: undefined (no debouncing)
 	 */
-	register: function( source, target, event, handler, options ) {
+	register: function ( source, target, event, handler, options ) {
 		var namespacedEvents = event.split( ' ' );
 
 		options = options || {};
 
-		for( var i = 0; i < namespacedEvents.length; i++ ) {
+		for ( var i = 0; i < namespacedEvents.length; i++ ) {
 			var registration = this._getRegistration( target, namespacedEvents[i] );
 
-			if( registration ) {
+			if ( registration ) {
 				registration.sources.push( source );
 			} else {
 				this._attach( source, target, namespacedEvents[i], handler, options );
@@ -66,28 +66,28 @@ $.extend( SELF.prototype, {
 	 *        Instead of white-space separated list of event names, a single namespace may be passed
 	 *        to remove all events attached to target and registered on source.
 	 */
-	unregister: function( source, target, event ) {
+	unregister: function ( source, target, event ) {
 		var registrations = [],
 			i;
 
-		if( event.indexOf( '.' ) === 0 ) {
+		if ( event.indexOf( '.' ) === 0 ) {
 			registrations = this._getRegistrations( target, event.split( '.' )[1] );
 		} else {
 			var events = event.split( ' ' );
-			for( i = 0; i < events.length; i++ ) {
+			for ( i = 0; i < events.length; i++ ) {
 				var registration = this._getRegistration( target, events[i] );
-				if( registration ) {
+				if ( registration ) {
 					registrations.push( registration );
 				}
 			}
 		}
 
-		for( i = 0; i < registrations.length; i++ ) {
+		for ( i = 0; i < registrations.length; i++ ) {
 			var index = $.inArray( source, registrations[i].sources );
-			if( index !== -1 ) {
+			if ( index !== -1 ) {
 				registrations[i].sources.splice( index, 1 );
 			}
-			if( !registrations[i].sources.length ) {
+			if ( !registrations[i].sources.length ) {
 				this._detach( registrations[i] );
 			}
 		}
@@ -98,11 +98,11 @@ $.extend( SELF.prototype, {
 	 * @param {string} event
 	 * @return {Object}
 	 */
-	_getRegistration: function( target, event ) {
+	_getRegistration: function ( target, event ) {
 		var eventSegments = event.split( '.' );
 
-		for( var i = 0; i < this._registry.length; i++ ) {
-			if(
+		for ( var i = 0; i < this._registry.length; i++ ) {
+			if (
 				this._registry[i].target === target
 				&& this._registry[i].event === eventSegments[0]
 				&& this._registry[i].namespace === eventSegments[1]
@@ -117,11 +117,11 @@ $.extend( SELF.prototype, {
 	 * @param {string} namespace
 	 * @return {Object[]}
 	 */
-	_getRegistrations: function( target, namespace ) {
+	_getRegistrations: function ( target, namespace ) {
 		var registered = [];
 
-		for( var i = 0; i < this._registry.length; i++ ) {
-			if( this._registry[i].target === target && this._registry[i].namespace === namespace ) {
+		for ( var i = 0; i < this._registry.length; i++ ) {
+			if ( this._registry[i].target === target && this._registry[i].namespace === namespace ) {
 				registered.push( this._registry[i] );
 			}
 		}
@@ -136,17 +136,17 @@ $.extend( SELF.prototype, {
 	 * @param {Function} handler
 	 * @param {Object} options
 	 */
-	_attach: function( source, target, event, handler, options ) {
+	_attach: function ( source, target, event, handler, options ) {
 		var self = this,
 			eventSegments = event.split( '.' ),
-			actualHandler = function( actualEvent ) {
+			actualHandler = function ( actualEvent ) {
 				self._triggerHandler( target, event, actualEvent );
 			},
 			alteredHandler;
 
-		if( options.throttle ) {
+		if ( options.throttle ) {
 			alteredHandler = $.throttle( options.throttle, actualHandler );
-		} else if( options.debounce ) {
+		} else if ( options.debounce ) {
 			alteredHandler = $.debounce( options.debounce, actualHandler );
 		}
 
@@ -164,15 +164,15 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {Object} registration
 	 */
-	_detach: function( registration ) {
+	_detach: function ( registration ) {
 		var namespaced = registration.event;
-		if( registration.namespace ) {
+		if ( registration.namespace ) {
 			namespaced += '.' + registration.namespace;
 		}
 		$( registration.target ).off( namespaced );
 
-		for( var i = 0; i < this._registry.length; i++ ) {
-			if(
+		for ( var i = 0; i < this._registry.length; i++ ) {
+			if (
 				this._registry[i].target === registration.target
 				&& this._registry[i].event === registration.event
 				&& this._registry[i].namespace === registration.namespace
@@ -187,11 +187,11 @@ $.extend( SELF.prototype, {
 	 * @param {string} event
 	 * @param {jQuery.Event} actualEvent
 	 */
-	_triggerHandler: function( target, event, actualEvent ) {
+	_triggerHandler: function ( target, event, actualEvent ) {
 		var registration = this._getRegistration( target, event );
 
-		if( registration ) {
-			for( var i = 0; i < registration.sources.length; i++ ) {
+		if ( registration ) {
+			for ( var i = 0; i < registration.sources.length; i++ ) {
 				registration.handler( actualEvent, registration.sources[i] );
 			}
 		}

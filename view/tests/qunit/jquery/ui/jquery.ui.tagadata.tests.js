@@ -3,7 +3,7 @@
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 'use strict';
 
 /**
@@ -21,12 +21,12 @@ function createTagadata( options ) {
 }
 
 QUnit.module( 'jquery.ui.tagadata', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_tagadata' ).each( function() {
+	teardown: function () {
+		$( '.test_tagadata' ).each( function () {
 			var $tagadata = $( this ),
 				tagadata = $( this ).data( 'tagadata' );
 
-			if( tagadata ) {
+			if ( tagadata ) {
 				tagadata.destroy();
 			}
 
@@ -35,7 +35,7 @@ QUnit.module( 'jquery.ui.tagadata', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
@@ -52,7 +52,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Widget interaction', function( assert ) {
+QUnit.test( 'Widget interaction', function ( assert ) {
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
@@ -94,13 +94,13 @@ QUnit.test( 'Widget interaction', function( assert ) {
 	);
 } );
 
-QUnit.test( 'removeTag()', function( assert ) {
+QUnit.test( 'removeTag()', function ( assert ) {
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
 	QUnit.stop();
 
-	$tagadata.one( 'tagadatatagremoved', function() {
+	$tagadata.one( 'tagadatatagremoved', function () {
 		QUnit.start();
 
 		assert.ok(
@@ -118,15 +118,15 @@ QUnit.test( 'removeTag()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'removeAll()', 1, function( assert ) {
+QUnit.test( 'removeAll()', 1, function ( assert ) {
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' ),
 		i = tagadata.getTags().length;
 
 	QUnit.stop();
 
-	$tagadata.on( 'tagadatatagremoved', function() {
-		if( --i === 0 ) {
+	$tagadata.on( 'tagadatatagremoved', function () {
+		if ( --i === 0 ) {
 			QUnit.start();
 
 			assert.ok(
@@ -139,7 +139,7 @@ QUnit.test( 'removeAll()', 1, function( assert ) {
 	tagadata.removeAll();
 } );
 
-QUnit.test( 'disable(), enable()', function( assert ) {
+QUnit.test( 'disable(), enable()', function ( assert ) {
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
@@ -158,7 +158,7 @@ QUnit.test( 'disable(), enable()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'hasConflict()', function( assert ) {
+QUnit.test( 'hasConflict()', function ( assert ) {
 	var $tagadata = createTagadata( { animate: false } ),
 		tagadata = $tagadata.data( 'tagadata' );
 

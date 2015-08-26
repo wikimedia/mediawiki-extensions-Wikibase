@@ -2,16 +2,16 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-( function( $, mw, wb, dv, QUnit, sinon ) {
+( function ( $, mw, wb, dv, QUnit, sinon ) {
 'use strict';
 
 QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_statementview' ).each( function() {
+	teardown: function () {
+		$( '.test_statementview' ).each( function () {
 			var $statementview = $( this ),
 				statementview = $statementview.data( 'statementview' );
 
-			if( statementview ) {
+			if ( statementview ) {
 				statementview.destroy();
 			}
 
@@ -21,7 +21,7 @@ QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
 } ) );
 
 var entityStore = {
-	get: function() {
+	get: function () {
 		return $.Deferred().resolve( new wb.store.FetchedContent( {
 			title: new mw.Title( 'Property:P1' ),
 			content: new wb.datamodel.Property(
@@ -40,7 +40,7 @@ var entityStore = {
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createStatementview = function( options, $node ) {
+var createStatementview = function ( options, $node ) {
 	options = $.extend( {
 		entityStore: entityStore,
 		valueViewBuilder: 'I am a valueview builder',
@@ -57,7 +57,7 @@ var createStatementview = function( options, $node ) {
 		.statementview( options );
 };
 
-QUnit.test( 'Create & destroy without value', function( assert ) {
+QUnit.test( 'Create & destroy without value', function ( assert ) {
 	var $statementview = createStatementview(),
 		statementview = $statementview.data( 'statementview' );
 
@@ -74,7 +74,7 @@ QUnit.test( 'Create & destroy without value', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Create & destroy with value', function( assert ) {
+QUnit.test( 'Create & destroy with value', function ( assert ) {
 	var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
@@ -99,7 +99,7 @@ QUnit.test( 'Create & destroy with value', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isValid', function( assert ) {
+QUnit.test( 'isValid', function ( assert ) {
 	var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
@@ -114,16 +114,16 @@ QUnit.test( 'isValid', function( assert ) {
 	assert.ok( statementview.isValid(), 'isValid should return true' );
 } );
 
-QUnit.test( 'isValid on new statementview is false', function( assert ) {
+QUnit.test( 'isValid on new statementview is false', function ( assert ) {
 	var $statementview = createStatementview(),
 		statementview = $statementview.data( 'statementview' );
 
 	assert.ok( statementview.isValid() === false, 'isValid should return false' );
 } );
 
-QUnit.test( 'remove', function( assert ) {
+QUnit.test( 'remove', function ( assert ) {
 	var referencesChanger = {
-			removeReference: sinon.spy( function() { return $.Deferred().resolve().promise(); } )
+			removeReference: sinon.spy( function () { return $.Deferred().resolve().promise(); } )
 		},
 		reference = new wb.datamodel.Reference(),
 		$statementview = createStatementview( {
@@ -144,18 +144,18 @@ QUnit.test( 'remove', function( assert ) {
 	sinon.assert.calledWith( referencesChanger.removeReference, 'guid', reference );
 } );
 
-QUnit.test( 'Using the generic tooltip for new claims', 1, function( assert ) {
+QUnit.test( 'Using the generic tooltip for new claims', 1, function ( assert ) {
 	var $statementview = createStatementview(),
 		statementview = $statementview.data( 'statementview' );
 
 	var done = assert.async();
-	statementview.getHelpMessage().done( function( helpMessage ) {
+	statementview.getHelpMessage().done( function ( helpMessage ) {
 		assert.equal( mw.msg( 'wikibase-claimview-snak-new-tooltip' ), helpMessage );
 		done();
 	} );
 } );
 
-QUnit.test( 'Using tooltip specific for existing claims', 1, function( assert ) {
+QUnit.test( 'Using tooltip specific for existing claims', 1, function ( assert ) {
 	var $statementview = createStatementview( {
 		value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1', new dv.StringValue( 'g' ) )
@@ -165,13 +165,13 @@ QUnit.test( 'Using tooltip specific for existing claims', 1, function( assert ) 
 	var statementview = $statementview.data( 'statementview' );
 	var done = assert.async();
 
-	statementview.getHelpMessage().done( function( helpMessage ) {
+	statementview.getHelpMessage().done( function ( helpMessage ) {
 		assert.equal( mw.msg( 'wikibase-claimview-snak-tooltip', 'P1' ), helpMessage );
 		done();
 	} );
 } );
 
-QUnit.test( 'value with empty reference', function( assert ) {
+QUnit.test( 'value with empty reference', function ( assert ) {
 	var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
@@ -188,10 +188,10 @@ QUnit.test( 'value with empty reference', function( assert ) {
 	assert.ok( statementview.value(), 'value should return a value' );
 } );
 
-QUnit.test( 'performs correct claimsChanger call', function( assert ) {
+QUnit.test( 'performs correct claimsChanger call', function ( assert ) {
 	var guid = 'GUID',
 		snak = new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-		setStatement = sinon.spy( function() {
+		setStatement = sinon.spy( function () {
 			return $.Deferred().resolve().promise();
 		} ),
 		$statementview = createStatementview( {
@@ -199,10 +199,10 @@ QUnit.test( 'performs correct claimsChanger call', function( assert ) {
 				setStatement: setStatement
 			},
 			dataTypeStore: {
-				getDataType: function() { return null; }
+				getDataType: function () { return null; }
 			},
 			guidGenerator: {
-				newGuid: function() { return guid; }
+				newGuid: function () { return guid; }
 			}
 		} ),
 		statementview = $statementview.data( 'statementview' );
@@ -214,7 +214,7 @@ QUnit.test( 'performs correct claimsChanger call', function( assert ) {
 
 	QUnit.stop();
 
-	statementview.stopEditing( false ).then( function() {
+	statementview.stopEditing( false ).then( function () {
 		QUnit.start();
 		sinon.assert.calledWith(
 			setStatement,

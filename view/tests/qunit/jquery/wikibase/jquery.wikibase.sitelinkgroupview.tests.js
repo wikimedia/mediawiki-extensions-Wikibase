@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 /**
@@ -23,8 +23,8 @@ function createSitelinkgroupview( options ) {
 	var sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 		sitelinklistview = sitelinkgroupview.$sitelinklistview.data( 'sitelinklistview' );
 
-	sitelinklistview._saveSiteLink = function( siteLink ) {
-		if( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
+	sitelinklistview._saveSiteLink = function ( siteLink ) {
+		if ( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
 			throw new Error( 'SiteLink object expected' );
 		} else {
 			return ( new $.Deferred() ).resolve().promise();
@@ -66,12 +66,12 @@ QUnit.module( 'jquery.wikibase.sitelinkgroupview', QUnit.newWbEnvironment( {
 			}
 		}
 	},
-	teardown: function() {
-		$( '.test_sitelinkgroupview' ).each( function() {
+	teardown: function () {
+		$( '.test_sitelinkgroupview' ).each( function () {
 			var $sitelinkgroupview = $( this ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
-			if( sitelinkgroupview ) {
+			if ( sitelinkgroupview ) {
 				sitelinkgroupview.destroy();
 			}
 
@@ -80,7 +80,7 @@ QUnit.module( 'jquery.wikibase.sitelinkgroupview', QUnit.newWbEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create and destroy', function( assert ) {
+QUnit.test( 'Create and destroy', function ( assert ) {
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 		$sitelinkgroupview = createSitelinkgroupview( {
 			value: { group: 'group1', siteLinks: [siteLink] }
@@ -99,14 +99,14 @@ QUnit.test( 'Create and destroy', function( assert ) {
 		'Destroyed widget.'
 	);
 
-	assert.throws( function() {
+	assert.throws( function () {
 			$sitelinkgroupview = createSitelinkgroupview();
 		},
 		'Widget does not accept an empty value.'
 	);
 } );
 
-QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
+QUnit.test( 'startEditing() & stopEditing()', 4, function ( assert ) {
 	var $sitelinkgroupview = createSitelinkgroupview( {
 			value: {
 				group: 'group1',
@@ -116,13 +116,13 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
 	$sitelinkgroupview
-	.on( 'sitelinkgroupviewafterstartediting', function( event ) {
+	.on( 'sitelinkgroupviewafterstartediting', function ( event ) {
 		assert.ok(
 			true,
 			'Started edit mode.'
 		);
 	} )
-	.on( 'sitelinkgroupviewafterstopediting', function( event, dropValue ) {
+	.on( 'sitelinkgroupviewafterstopediting', function ( event, dropValue ) {
 		assert.ok(
 			true,
 			'Stopped edit mode.'
@@ -137,19 +137,19 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 	function testEditModeChange( func, expectingEvent ) {
 		var deferred = $.Deferred();
 
-		if( !expectingEvent ) {
+		if ( !expectingEvent ) {
 			func();
 			return deferred.resolve().promise();
 		}
 
 		$sitelinkgroupview
-		.one( 'sitelinkgroupviewafterstartediting.sitelinkgroupviewtest', function( event ) {
+		.one( 'sitelinkgroupviewafterstartediting.sitelinkgroupviewtest', function ( event ) {
 			$sitelinkgroupview.off( '.sitelinkgroupviewtest' );
 			deferred.resolve();
 		} )
 		.one(
 			'sitelinkgroupviewafterstopediting.sitelinkgroupviewtest',
-			function( event, dropValue ) {
+			function ( event, dropValue ) {
 				$sitelinkgroupview.off( '.sitelinkgroupviewtest' );
 				deferred.resolve();
 			}
@@ -168,43 +168,43 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 	 * @param {boolean} [expectingEvent]
 	 */
 	function addToQueue( $queue, func, expectingEvent ) {
-		if( expectingEvent === undefined ) {
+		if ( expectingEvent === undefined ) {
 			expectingEvent = true;
 		}
-		$queue.queue( 'tests', function( next ) {
+		$queue.queue( 'tests', function ( next ) {
 			QUnit.stop();
-			testEditModeChange( func, expectingEvent ).always( function() {
+			testEditModeChange( func, expectingEvent ).always( function () {
 				QUnit.start();
 				next();
 			} );
 		} );
 	}
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinkgroupview.startEditing();
 	} );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinkgroupview.startEditing();
 	}, false );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinkgroupview.stopEditing( true );
 	} );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinkgroupview.stopEditing( true );
 	}, false );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinkgroupview.stopEditing();
 	}, false );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		sitelinkgroupview.startEditing();
 	} );
 
-	addToQueue( $queue, function() {
+	addToQueue( $queue, function () {
 		// Mock adding a new item:
 		var sitelinklistview = sitelinkgroupview.$sitelinklistview.data( 'sitelinklistview' ),
 			listview = sitelinklistview.$listview.data( 'listview' ),
@@ -219,7 +219,7 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 	$queue.dequeue( 'tests' );
 } );
 
-QUnit.test( 'setError()', 1, function( assert ) {
+QUnit.test( 'setError()', 1, function ( assert ) {
 	var $sitelinkgroupview = createSitelinkgroupview( {
 			value: { group: 'group1', siteLinks: [] }
 		} ),
@@ -227,7 +227,7 @@ QUnit.test( 'setError()', 1, function( assert ) {
 
 	$sitelinkgroupview
 	.addClass( 'wb-error' )
-	.on( 'sitelinkgroupviewtoggleerror', function( event, error ) {
+	.on( 'sitelinkgroupviewtoggleerror', function ( event, error ) {
 		assert.ok(
 			true,
 			'Triggered toggleerror event.'
@@ -237,7 +237,7 @@ QUnit.test( 'setError()', 1, function( assert ) {
 	sitelinkgroupview.setError();
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 		value = { group: 'group1', siteLinks: [siteLink] },
 		$sitelinkgroupview = createSitelinkgroupview( {

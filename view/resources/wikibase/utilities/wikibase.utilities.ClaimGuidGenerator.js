@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 /**
@@ -33,7 +33,7 @@ $.extend( wb.utilities.ClaimGuidGenerator.prototype, {
 	 *
 	 * @returns {string} GUID
 	 */
-	newGuid: function() {
+	newGuid: function () {
 		return this._entityId + '$' + this._baseGenerator.newGuid();
 	}
 } );

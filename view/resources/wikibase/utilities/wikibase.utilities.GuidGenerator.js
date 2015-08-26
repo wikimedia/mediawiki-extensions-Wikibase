@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, util, $ ) {
+( function ( wb, util, $ ) {
 	'use strict';
 
 /**
@@ -40,19 +40,19 @@ wb.utilities.V4GuidGenerator = util.inherit(
 		 * @param {number} max Maximum number
 		 * @return {string}
 		 */
-		_getRandomHex: function( min, max ) {
+		_getRandomHex: function ( min, max ) {
 			return ( Math.floor( Math.random() * ( max - min + 1 ) ) + min ).toString( 16 );
 		},
 
 		/**
 		 * @see wb.utilities.GuidGenerator
 		 */
-		newGuid: function() {
+		newGuid: function () {
 			var self = this,
 				template = 'xx-x-x-x-xxx',
 				guid = '';
 
-			for( var i = 0; i < template.length; i++ ) {
+			for ( var i = 0; i < template.length; i++ ) {
 				var character = template.charAt( i );
 
 				if ( character === '-' ) {
@@ -69,7 +69,7 @@ wb.utilities.V4GuidGenerator = util.inherit(
 					hex = self._getRandomHex( 0, 65535 );
 				}
 
-				while( hex.length < 4 ) {
+				while ( hex.length < 4 ) {
 					hex = '0' +  hex;
 				}
 
