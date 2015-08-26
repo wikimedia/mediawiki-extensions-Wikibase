@@ -330,7 +330,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			'create+update' => $create_update, // merged create and update
 			'update/other' => $updateX,        // update by another user
 			'update-link/local' => $updateLink,  // change the link to this client wiki
-			'update-link/local/basges' => $updateLinkBadges,  // change the link to this client wiki
+			'update-link/local/badges' => $updateLinkBadges,  // change the link to this client wiki
 			'update-link/other' => $updateXLink, // change the link to some other client wiki
 			'create+update+update-link/other' => $create_update_link, // merged create and update and update link to other wiki
 			'delete' => $delete, // delete item

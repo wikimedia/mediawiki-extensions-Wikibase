@@ -108,7 +108,7 @@ class BotEditTest extends WikibaseApiTestCase {
 				'p' => array( 'action' => 'wbmergeitems', 'fromid' => 'Leipzig', 'toid' => 'Empty',
 					'ignoreconflicts' => 'description' ),
 				'e' => array( 'bot' => false, 'new' => false ) ),
-			//todo claims, references, qualifiers
+			// TODO: Claims, references, qualifiers.
 		);
 	}
 

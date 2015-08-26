@@ -732,7 +732,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * Modifies the provided terms to use the field names expected by the interface
 	 * rather then the table field names. Also ensures the values are of the correct type.
 	 *
-	 * @param Iterator|array $obtainedTerms PHP fails for not having a common iterator/array thing :<0
+	 * @param array[]|Iterator $obtainedTerms
 	 *
 	 * @return TermIndexEntry[]
 	 */

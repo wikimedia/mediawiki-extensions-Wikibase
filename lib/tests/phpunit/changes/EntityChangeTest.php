@@ -82,7 +82,7 @@ class EntityChangeTest extends DiffChangeTest {
 	}
 
 	public function entityProvider() {
-		$entityClass = $this->getEntityClass(); // PHP fail
+		$entityClass = $this->getEntityClass();
 
 		$entities = array_filter(
 			TestChanges::getEntities(),
@@ -102,7 +102,7 @@ class EntityChangeTest extends DiffChangeTest {
 	}
 
 	public function changeProvider() {
-		$rowClass = $this->getRowClass(); // PHP fail
+		$rowClass = $this->getRowClass();
 
 		$changes = array_filter(
 			TestChanges::getChanges(),

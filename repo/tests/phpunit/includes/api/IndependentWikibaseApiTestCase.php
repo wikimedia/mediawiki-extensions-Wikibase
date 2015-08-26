@@ -35,7 +35,7 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->getUser() );
 
 		if ( !$isSetup ) {
-			//TODO remove me once everything that needs this is overridden
+			// TODO: Remove me once everything that needs this is overridden.
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( \TestSites::getSites() );
