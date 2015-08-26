@@ -88,6 +88,24 @@
       "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ba9ea856",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T14:53:04Z",
+      "side": 0,
+      "message": "Well, if we really want it in a separate patch to get this merged I am fine with that, but as said, this makes no difference",
+      "parentUuid": "6ec1af18_5a78e425",
+      "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
