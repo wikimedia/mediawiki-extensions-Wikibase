@@ -70,6 +70,24 @@
       "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5a78e425",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-26T14:50:53Z",
+      "side": 0,
+      "message": "@anomie i see... still would prefer removing this here be a separate patch. i\u0027ll gladly approve such patch :)",
+      "parentUuid": "6ec1af18_1aa81c89",
+      "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
