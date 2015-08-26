@@ -71,7 +71,10 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		foreach ( $res as $row ) {
 			$title = Title::makeTitle( $row->page_namespace, $row->page_title );
 
-			$ids[] = $this->entityIdLookup->getEntityIdForTitle( $title );
+			$id = $this->entityIdLookup->getEntityIdForTitle( $title );
+			if ( $id !== null ) {
+				$ids[] = $id;
+			}
 		}
 
 		return $ids;
