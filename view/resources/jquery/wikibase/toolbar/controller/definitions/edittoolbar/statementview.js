@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -12,7 +12,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 	selector: ':' + $.wikibase.statementview.prototype.namespace
 		+ '-' + $.wikibase.statementview.prototype.widgetName,
 	events: {
-		statementviewcreate: function( event, toolbarcontroller ) {
+		statementviewcreate: function ( event, toolbarcontroller ) {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' ),
 				options = {
@@ -20,18 +20,18 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				},
 				$container = $statementview.children( '.wikibase-toolbar-container' );
 
-			if( !$container.length ) {
+			if ( !$container.length ) {
 				$container = $( '<div/>' ).appendTo( $statementview );
 			}
 
 			options.$container = $container;
 
-			if( !!statementview.value() ) {
-				options.onRemove = function() {
+			if ( !!statementview.value() ) {
+				options.onRemove = function () {
 					var $statementlistview
 							= $statementview.closest( ':wikibase-statementlistview' ),
 						statementlistview = $statementlistview.data( 'statementlistview' );
-					if( statementlistview ) {
+					if ( statementlistview ) {
 						statementlistview.remove( statementview );
 					}
 				};
@@ -39,23 +39,23 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			$statementview.edittoolbar( options );
 
-			$statementview.on( 'keydown.edittoolbar', function( event ) {
-				if( statementview.option( 'disabled' ) ) {
+			$statementview.on( 'keydown.edittoolbar', function ( event ) {
+				if ( statementview.option( 'disabled' ) ) {
 					return;
 				}
-				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
+				if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 					statementview.stopEditing( true );
-				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
+				} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					statementview.stopEditing( false );
 				}
 			} );
 		},
-		statementviewdestroy: function( event, toolbarController ) {
+		statementviewdestroy: function ( event, toolbarController ) {
 			var $statementview = $( event.target );
 			toolbarController.destroyToolbar( $statementview.data( 'edittoolbar' ) );
 			$statementview.off( '.edittoolbar' );
 		},
-		'statementviewchange statementviewafterstartediting': function( event ) {
+		'statementviewchange statementviewafterstartediting': function ( event ) {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' ),
 				edittoolbar = $statementview.data( 'edittoolbar' ),
@@ -76,9 +76,9 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 						: [],
 					areInitialQualifiers = true;
 
-				if( enable && snaklistviews.length ) {
-					for( var i = 0; i < snaklistviews.length; i++ ) {
-						if( !snaklistviews[i].isInitialValue() ) {
+				if ( enable && snaklistviews.length ) {
+					for ( var i = 0; i < snaklistviews.length; i++ ) {
+						if ( !snaklistviews[i].isInitialValue() ) {
 							areInitialQualifiers = false;
 						}
 					}
@@ -89,7 +89,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[shouldEnableSaveButton( statementview ) ? 'enable' : 'disable']();
 		},
-		statementviewdisable: function( event ) {
+		statementviewdisable: function ( event ) {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' ),
 				edittoolbar = $statementview.data( 'edittoolbar' ),
@@ -98,11 +98,11 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[enable ? 'enable' : 'disable']();
 		},
-		edittoolbaredit: function( event, toolbarcontroller ) {
+		edittoolbaredit: function ( event, toolbarcontroller ) {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' );
 
-			if( !statementview ) {
+			if ( !statementview ) {
 				return;
 			}
 

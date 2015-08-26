@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 'use strict';
 
 /**
@@ -16,12 +16,12 @@ function createCloseable( options ) {
 }
 
 QUnit.module( 'jquery.ui.closeable', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_closeable' ).each( function() {
+	teardown: function () {
+		$( '.test_closeable' ).each( function () {
 			var $closeable = $( this ),
 				closeable = $( this ).data( 'closeable' );
 
-			if( closeable ) {
+			if ( closeable ) {
 				closeable.destroy();
 			}
 
@@ -30,7 +30,7 @@ QUnit.module( 'jquery.ui.closeable', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $closeable = createCloseable(),
 		closeable = $closeable.data( 'closeable' );
 
@@ -47,7 +47,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Close when clicking "close" anchor', function( assert ) {
+QUnit.test( 'Close when clicking "close" anchor', function ( assert ) {
 	var $closeable = createCloseable( {
 			$content: $( '<span>test</span>' )
 		} ),
@@ -67,12 +67,12 @@ QUnit.test( 'Close when clicking "close" anchor', function( assert ) {
 	);
 } );
 
-QUnit.test( 'setContent()', 7, function( assert ) {
+QUnit.test( 'setContent()', 7, function ( assert ) {
 	var $closeable = createCloseable(),
 		closeable = $closeable.data( 'closeable' ),
 		$content = $( '<span>test</span>' );
 
-	$closeable.on( 'closeableupdate', function() {
+	$closeable.on( 'closeableupdate', function () {
 		assert.ok(
 			true,
 			'Triggered "update" event.'

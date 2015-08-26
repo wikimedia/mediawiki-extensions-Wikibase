@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 /**
@@ -10,7 +10,7 @@
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createStatementlistview = function( options, $node ) {
+var createStatementlistview = function ( options, $node ) {
 	options = $.extend( {
 		claimGuidGenerator: 'I am a ClaimGuidGenerator',
 		entityStore: {
@@ -20,10 +20,10 @@ var createStatementlistview = function( options, $node ) {
 		},
 		valueViewBuilder: 'I am a ValueViewBuilder',
 		entityChangersFactory: {
-			getClaimsChanger: function() {
+			getClaimsChanger: function () {
 				return 'I am a ClaimsChanger';
 			},
-			getReferencesChanger: function() {
+			getReferencesChanger: function () {
 				return 'I am a ReferencesChanger';
 			}
 		},
@@ -39,12 +39,12 @@ var createStatementlistview = function( options, $node ) {
 };
 
 QUnit.module( 'jquery.wikibase.statementlistview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_statementlistview' ).each( function() {
+	teardown: function () {
+		$( '.test_statementlistview' ).each( function () {
 			var $statementlistview = $( this ),
 				statementlistview = $statementlistview.data( 'statementlistview' );
 
-			if( statementlistview ) {
+			if ( statementlistview ) {
 				statementlistview.destroy();
 			}
 
@@ -53,7 +53,7 @@ QUnit.module( 'jquery.wikibase.statementlistview', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );
 
@@ -84,7 +84,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	var statementList1 = new wb.datamodel.StatementList( [new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		)] ),
@@ -116,7 +116,7 @@ QUnit.test( 'value()', function( assert ) {
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
 		);
 
-	statementview.value = function() {
+	statementview.value = function () {
 		return statement;
 	};
 
@@ -132,7 +132,7 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isEmpty()', function( assert ) {
+QUnit.test( 'isEmpty()', function ( assert ) {
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );
 
@@ -176,7 +176,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'enterNewItem', function( assert ) {
+QUnit.test( 'enterNewItem', function ( assert ) {
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );
 
@@ -200,7 +200,7 @@ QUnit.test( 'enterNewItem', function( assert ) {
 		statementview = statementlistviewListviewLia.liInstance( $statementview );
 
 	// Hack statementview to return a value for mocking "saving" action:
-	statementview.value = function() {
+	statementview.value = function () {
 		return new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		);

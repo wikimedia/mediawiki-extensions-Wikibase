@@ -1,4 +1,4 @@
-( function( wb, vv ) {
+( function ( wb, vv ) {
 	'use strict';
 
 var MODULE = wb.experts,
@@ -19,7 +19,7 @@ var SELF = MODULE.Item = vv.expert( 'wikibaseitem', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	_init: function() {
+	_init: function () {
 		PARENT.prototype._initEntityExpert.call( this );
 	}
 } );

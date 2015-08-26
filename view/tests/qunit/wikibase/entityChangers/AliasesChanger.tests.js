@@ -2,14 +2,14 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
-( function( sinon, wb, $ ) {
+( function ( sinon, wb, $ ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.entityChangers.AliasesChanger' );
 
 	var SUBJECT = wikibase.entityChangers.AliasesChanger;
 
-	QUnit.test( 'is a function', function( assert ) {
+	QUnit.test( 'is a function', function ( assert ) {
 		assert.equal(
 			typeof SUBJECT,
 			'function',
@@ -17,19 +17,19 @@
 		);
 	} );
 
-	QUnit.test( 'is a constructor', function( assert ) {
+	QUnit.test( 'is a constructor', function ( assert ) {
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
-	QUnit.test( 'setAliases performs correct API call', function( assert ) {
+	QUnit.test( 'setAliases performs correct API call', function ( assert ) {
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				return $.Deferred().promise();
 			} )
 		};
 		var aliasesChanger = new SUBJECT(
 			api,
-			{ getAliasesRevision: function() { return 0; } },
+			{ getAliasesRevision: function () { return 0; } },
 			new wb.datamodel.Item( 'Q1' )
 		);
 
@@ -38,9 +38,9 @@
 		assert.ok( api.setAliases.calledOnce );
 	} );
 
-	QUnit.test( 'setAliases correctly handles API response', function( assert ) {
+	QUnit.test( 'setAliases correctly handles API response', function ( assert ) {
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				return $.Deferred().resolve( {
 					entity: {}
 				} ).promise();
@@ -49,8 +49,8 @@
 		var aliasesChanger = new SUBJECT(
 			api,
 			{
-				getAliasesRevision: function() { return 0; },
-				setAliasesRevision: function() {}
+				getAliasesRevision: function () { return 0; },
+				setAliasesRevision: function () {}
 			},
 			new wb.datamodel.Item( 'Q1' )
 		);
@@ -58,18 +58,18 @@
 		QUnit.stop();
 
 		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
-		.done( function( savedAliases ) {
+		.done( function ( savedAliases ) {
 			QUnit.start();
 			assert.ok( true, 'setAliases succeeded' );
 		} )
-		.fail( function() {
+		.fail( function () {
 			assert.ok( false, 'setAliases failed' );
 		} );
 	} );
 
-	QUnit.test( 'setAliases correctly handles API failure', function( assert ) {
+	QUnit.test( 'setAliases correctly handles API failure', function ( assert ) {
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				return $.Deferred()
 					.reject( 'errorCode', { error: { code: 'errorCode' } } )
 					.promise();
@@ -78,8 +78,8 @@
 		var aliasesChanger = new SUBJECT(
 			api,
 			{
-				getAliasesRevision: function() { return 0; },
-				setAliasesRevision: function() {}
+				getAliasesRevision: function () { return 0; },
+				setAliasesRevision: function () {}
 			},
 			new wb.datamodel.Item( 'Q1' )
 		);
@@ -87,10 +87,10 @@
 		QUnit.stop();
 
 		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
-		.done( function( savedAliases ) {
+		.done( function ( savedAliases ) {
 			assert.ok( false, 'setAliases succeeded' );
 		} )
-		.fail( function( error ) {
+		.fail( function ( error ) {
 			QUnit.start();
 
 			assert.ok(
@@ -102,9 +102,9 @@
 		} );
 	} );
 
-	QUnit.test( 'setAliases correctly removes aliases', function( assert ) {
+	QUnit.test( 'setAliases correctly removes aliases', function ( assert ) {
 		var api = {
-			setAliases: sinon.spy( function() {
+			setAliases: sinon.spy( function () {
 				return $.Deferred().resolve( {
 					entity: {}
 				} ).promise();
@@ -122,8 +122,8 @@
 		var aliasesChanger = new SUBJECT(
 			api,
 			{
-				getAliasesRevision: function() { return 0; },
-				setAliasesRevision: function() {}
+				getAliasesRevision: function () { return 0; },
+				setAliasesRevision: function () {}
 			},
 			item
 		);
@@ -131,7 +131,7 @@
 		QUnit.stop();
 
 		aliasesChanger.setAliases( new wb.datamodel.MultiTerm( 'language', [] ) )
-		.done( function() {
+		.done( function () {
 			QUnit.start();
 
 			assert.ok( true, 'setAliases succeeded' );
@@ -150,7 +150,7 @@
 				'language'
 			);
 		} )
-		.fail( function() {
+		.fail( function () {
 			assert.ok( false, 'setAliases failed' );
 		} );
 	} );

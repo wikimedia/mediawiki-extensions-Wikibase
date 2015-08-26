@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var WIDGET_NAME = 'statementgrouplabelscroll';
@@ -18,13 +18,13 @@
 	var activeInstances = [];
 
 	function updateActiveInstances() {
-		for( var i in activeInstances ) {
+		for ( var i in activeInstances ) {
 			activeInstances[i].update();
 		}
 	}
 
 	function registerWidgetInstance( instance ) {
-		if( activeInstances.length === 0 ) {
+		if ( activeInstances.length === 0 ) {
 			$( window ).on(
 				'scroll resize'.replace( /(\w+)/g, '$1.' + WIDGET_NAME ),
 				updateActiveInstances
@@ -35,10 +35,10 @@
 
 	function unregisterWidgetInstance( instance ) {
 		var index = $.inArray( instance );
-		if( index ) {
+		if ( index ) {
 			activeInstances.splice( index, 1 );
 		}
-		if( activeInstances.length === 0 ) {
+		if ( activeInstances.length === 0 ) {
 			$( window ).off( '.' + WIDGET_NAME );
 		}
 	}
@@ -88,11 +88,11 @@
 		/**
 		 * @see jQuery.Widget._create
 		 */
-		_create: function() {
+		_create: function () {
 			registerWidgetInstance( this );
 
 			// Assume that all labels are in the proper place if no scrolling has happened yet.
-			if( window.pageYOffset ) {
+			if ( window.pageYOffset ) {
 				this.update();
 			}
 		},
@@ -100,7 +100,7 @@
 		/**
 		 * @see jQuery.Widget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			unregisterWidgetInstance( this );
 		},
 
@@ -109,7 +109,7 @@
 		 *
 		 * @since 0.4
 		 */
-		update: function() {
+		update: function () {
 			var startTime = new Date().getTime();
 
 			expensiveChecks = 0;
@@ -118,7 +118,7 @@
 				= findFirstVisibleMainSnakElementsWithinStatementlistview( this.element )
 					.closest( '.wikibase-statementview' );
 
-			for( var i = 0; i < $visibleStatementviews.length; i++ ) {
+			for ( var i = 0; i < $visibleStatementviews.length; i++ ) {
 				var $visibleClaim = $visibleStatementviews.eq( i ),
 					$statementGroup = $visibleClaim.closest( '.wikibase-statementgroupview' ),
 					$groupname
@@ -127,7 +127,7 @@
 							'.wikibase-statementgroupview-property-label'
 						);
 
-				if( !$groupname.length ) {
+				if ( !$groupname.length ) {
 					// Statement likely is pending.
 					continue;
 				}
@@ -155,9 +155,9 @@
 		 * If the "logger" option is set, then this method will forward any given arguments
 		 * to its "log" function.
 		 */
-		_log: function() {
+		_log: function () {
 			var logger = this.option( 'logger' );
-			if( logger ) {
+			if ( logger ) {
 				logger.log.apply( logger, arguments );
 			}
 		}
@@ -169,7 +169,7 @@
 	 *
 	 * @return $.wikibase.statementgrouplabelscroll[]
 	 */
-	$.wikibase[ WIDGET_NAME ].activeInstances = function() {
+	$.wikibase[ WIDGET_NAME ].activeInstances = function () {
 		return activeInstances.slice();
 	};
 
@@ -192,8 +192,8 @@
 		//      obviously not within the viewport.
 		//  (2) remember last visible node, start checking there and depending on scroll movement
 		//      (up/down) on its neighbouring nodes.
-		$statementGroups.each( function( i, statementGroupNode ) {
-			if( elementPartlyVerticallyInViewport( statementGroupNode ) ) {
+		$statementGroups.each( function ( i, statementGroupNode ) {
+			if ( elementPartlyVerticallyInViewport( statementGroupNode ) ) {
 				var $mainSnakElement = findFirstVisibleMainSnakElement( $( statementGroupNode ) );
 				$visibleStatementGroups = $visibleStatementGroups.add( $mainSnakElement );
 			}
@@ -219,16 +219,16 @@
 			'.wikibase-statementview-mainsnak .wikibase-snakview-value-container'
 		);
 
-		$mainSnaks.each( function( i, mainSnakNode ) {
+		$mainSnaks.each( function ( i, mainSnakNode ) {
 			// Take first Main Snak value in viewport. If value is not fully visible in viewport,
 			// check whether the next one is fully visible, if so, take that one.
-			if( elementPartlyVerticallyInViewport( mainSnakNode ) ) {
+			if ( elementPartlyVerticallyInViewport( mainSnakNode ) ) {
 				result = mainSnakNode;
 
-				if( !elementFullyVerticallyInViewport( mainSnakNode ) ) {
+				if ( !elementFullyVerticallyInViewport( mainSnakNode ) ) {
 					// Current element would be ok, but maybe the next one is even better
 					var nextMainSnakNode = $mainSnaks.get( i + 1 );
-					if( nextMainSnakNode && elementFullyVerticallyInViewport( nextMainSnakNode ) ) {
+					if ( nextMainSnakNode && elementFullyVerticallyInViewport( nextMainSnakNode ) ) {
 						result = nextMainSnakNode;
 					}
 				}
@@ -238,7 +238,7 @@
 			return !result;
 		} );
 
-		if( result ) {
+		if ( result ) {
 			// Don't forget to get the actual Snak node rather than the value container.
 			result = $( result ).closest( '.wikibase-statementview-mainsnak' );
 		}
@@ -262,7 +262,7 @@
 			at: side + ' top',
 			of: $target,
 			within: $within,
-			using: function( css, calc ) {
+			using: function ( css, calc ) {
 				$( this ).animate( css, {
 					queue: ANIMATION_QUEUE,
 					easing: 'easeInOutCubic'

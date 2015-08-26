@@ -3,7 +3,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	/**
@@ -18,7 +18,7 @@
 	 */
 	var IS_RTL = false;
 
-	$( document ).ready( function() {
+	$( document ).ready( function () {
 		// have to wait for document to be loaded for this, otherwise 'rtl' might not yet be there!
 		IS_RTL = $( 'body' ).hasClass( 'rtl' );
 	} );
@@ -40,7 +40,7 @@
 	 * @param {Title} title
 	 * @return {jQuery} An 'a' element
 	 */
-	wb.utilities.ui.buildLinkToEntityPage = function( entity, title ) {
+	wb.utilities.ui.buildLinkToEntityPage = function ( entity, title ) {
 		return $( '<a>' )
 			.attr( 'href', title.getUrl() )
 			.attr( 'title', title.getPrefixedText() )
@@ -66,13 +66,13 @@
 	 * @param {wb.datamodel.Entity} entity
 	 * @return {jQuery} Construct of one or many HTML elements
 	 */
-	wb.utilities.ui.buildPrettyEntityLabel = function( entity ) {
+	wb.utilities.ui.buildPrettyEntityLabel = function ( entity ) {
 		var label = getEntityLabelForUserLang( entity ),
 			text = wb.utilities.ui.buildPrettyEntityLabelText( entity ),
 			$label = $( document.createTextNode( text ) );
 
-		if( !label ) {
-			if( text ) { // empty if entity without ID
+		if ( !label ) {
+			if ( text ) { // empty if entity without ID
 				$label[0].nodeValue += SPACE;
 			}
 			var $undefinedInfo = $( '<span/>', {
@@ -94,7 +94,7 @@
 	 * @param {wb.datamodel.Entity} [entity]
 	 * @return {string} Either the label, ID or empty string
 	 */
-	wb.utilities.ui.buildPrettyEntityLabelText = function( entity ) {
+	wb.utilities.ui.buildPrettyEntityLabelText = function ( entity ) {
 		return entity && ( getEntityLabelForUserLang( entity ) || entity.getId() ) || '';
 	};
 
@@ -109,7 +109,7 @@
 	 *        as string.
 	 * @return jQuery
 	 */
-	wb.utilities.ui.buildMissingEntityInfo = function( entityId, entityType ) {
+	wb.utilities.ui.buildMissingEntityInfo = function ( entityId, entityType ) {
 		entityType = typeof entityType === 'string' ? entityType : entityType.TYPE;
 
 		return $( '<span/>' ).text( entityId + SPACE ).append(
@@ -142,7 +142,7 @@
 	 * @return {jQuery} The formatted counter output. Does not have a root node, collection of
 	 *         multiple DOM elements.
 	 */
-	wb.utilities.ui.buildPendingCounter = function(
+	wb.utilities.ui.buildPendingCounter = function (
 		fixedQuantity, pendingQuantity, kindOfQuantityMessage, pendingQuantityTooltipMessage
 	) {
 		var fqNumMsg = mw.language.convertNumber( fixedQuantity ),
@@ -162,7 +162,7 @@
 		var $msg = $( ( '<span>' + msg + '</span>' ).replace( /__3__/g, '<span/>' ) ),
 			$msgSpan = $msg.children( 'span' );
 
-		if( $msgSpan.length > 0 ) {
+		if ( $msgSpan.length > 0 ) {
 			$msgSpan.attr(
 				'title', // the message displayed in the tooltip
 				mw.msg( pendingQuantityTooltipMessage, pqNumMsg, fqNumMsg, tqNumMsg )

@@ -2,16 +2,16 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.wikibase.singlebuttontoolbar', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_singlebuttontoolbar' ).each( function() {
+	teardown: function () {
+		$( '.test_singlebuttontoolbar' ).each( function () {
 			var $singlebuttontoolbar = $( this ),
 				singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
 
-			if( singlebuttontoolbar ) {
+			if ( singlebuttontoolbar ) {
 				singlebuttontoolbar.destroy();
 			}
 
@@ -30,7 +30,7 @@ function createSinglebuttontoolbar( options ) {
 		.singlebuttontoolbar( options || {} );
 }
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $singlebuttontoolbar = createSinglebuttontoolbar(),
 		singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
 

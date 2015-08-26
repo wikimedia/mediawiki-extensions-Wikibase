@@ -2,12 +2,12 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $, QUnit ) {
+( function ( mw, $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.ui.TemplatedWidget' );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var testSets = [
 		[
 			'<div><span>$1</span></div>',
@@ -24,7 +24,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	 * @param {Object} templateShortCuts
 	 */
 	function checkShortCuts( templateShortCuts ) {
-		$.each( templateShortCuts, function( key, selector ) {
+		$.each( templateShortCuts, function ( key, selector ) {
 			assert.ok(
 				$subject.data( 'TemplatedWidget' )[key] instanceof $,
 				'Assigned templateShortCut: ' + key + '.'
@@ -32,7 +32,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		} );
 	}
 
-	for( var i = 0; i < testSets.length; i++ ) {
+	for ( var i = 0; i < testSets.length; i++ ) {
 		mw.wbTemplates.store.set( 'templatedWidget-test', testSets[i][0] );
 
 		var $subject = $( '<div/>' );
@@ -56,7 +56,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 			'Verified generated HTML.'
 		);
 
-		if( testSets[i][1].templateShortCuts ) {
+		if ( testSets[i][1].templateShortCuts ) {
 			checkShortCuts( testSets[i][1].templateShortCuts );
 		}
 

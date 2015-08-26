@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 var PARENT = $.wikibase.toolbar;
@@ -33,12 +33,12 @@ $.widget( 'wikibase.movetoolbar', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbar._create
 	 */
-	_create: function() {
+	_create: function () {
 		PARENT.prototype._create.call( this );
 
 		this._buttons = {};
 
-		if( !this.options.$content.length ) {
+		if ( !this.options.$content.length ) {
 			this.options.$content
 				= this._createDefaultButton( 'up' ).add( this._createDefaultButton( 'down' ) )
 					.appendTo( this.getContainer() );
@@ -50,7 +50,7 @@ $.widget( 'wikibase.movetoolbar', PARENT, {
 	 * @param {string} direction "up"|"down"
 	 * @return {jQuery}
 	 */
-	_createDefaultButton: function( direction ) {
+	_createDefaultButton: function ( direction ) {
 		var self = this;
 
 		this._buttons[direction] = $( '<span/>' ).toolbarbutton( {
@@ -61,7 +61,7 @@ $.widget( 'wikibase.movetoolbar', PARENT, {
 			} ),
 			cssClassSuffix: 'move'
 		} )
-		.on( 'toolbarbuttonaction.' + this.widgetName, function() {
+		.on( 'toolbarbuttonaction.' + this.widgetName, function () {
 			self._trigger( direction );
 		} );
 
@@ -74,20 +74,20 @@ $.widget( 'wikibase.movetoolbar', PARENT, {
 	 * @param {string} buttonName "up"|"down"
 	 * @return {jQuery.wikibase.toolbarbutton}
 	 */
-	getButton: function( buttonName ) {
+	getButton: function ( buttonName ) {
 		return this._buttons[buttonName].data( 'toolbarbutton' );
 	},
 
 	/**
 	 * @see jQuery.wikibase.toolbar.focus
 	 */
-	focus: function() {
+	focus: function () {
 		var buttonUp = this._buttons.up && this._buttons.up.data( 'toolbarbutton' ),
 			buttonDown = this._buttons.down && this._buttons.down.data( 'toolbarbutton' );
 
-		if( buttonUp && !buttonUp.option( 'disabled' ) ) {
+		if ( buttonUp && !buttonUp.option( 'disabled' ) ) {
 			buttonUp.focus();
-		} else if( buttonDown && !buttonDown.option( 'disabled' ) ) {
+		} else if ( buttonDown && !buttonDown.option( 'disabled' ) ) {
 			buttonDown.focus();
 		} else {
 			this.element.focus();

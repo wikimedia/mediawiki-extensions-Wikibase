@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 /**
@@ -53,12 +53,12 @@ QUnit.module( 'jquery.wikibase.sitelinkgrouplistview', QUnit.newWbEnvironment( {
 			}
 		}
 	},
-	teardown: function() {
-		$( '.test_sitelinkgrouplistview' ).each( function() {
+	teardown: function () {
+		$( '.test_sitelinkgrouplistview' ).each( function () {
 			var $sitelinkgrouplistview = $( this ),
 				sitelinkgrouplistview = $sitelinkgrouplistview.data( 'sitelinkgrouplistview' );
 
-			if( sitelinkgrouplistview ) {
+			if ( sitelinkgrouplistview ) {
 				sitelinkgrouplistview.destroy();
 			}
 
@@ -67,7 +67,7 @@ QUnit.module( 'jquery.wikibase.sitelinkgrouplistview', QUnit.newWbEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var value = [
 		{
 			group: 'group1',
@@ -98,7 +98,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		'Destroyed widget.'
 	);
 
-	assert.throws( function() {
+	assert.throws( function () {
 			$sitelinkgrouplistview = createSitelinkgrouplistview();
 		},
 		'Widget does not accept an empty value.'

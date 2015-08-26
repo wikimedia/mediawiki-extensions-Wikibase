@@ -1,4 +1,4 @@
-( function( wb, $, mw ) {
+( function ( wb, $, mw ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -88,7 +88,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 *
 	 * @throws {Error} when called.
 	 */
-	_create: function() {
+	_create: function () {
 		throw new Error( 'Abstract entityview cannot be created directly' );
 	},
 
@@ -97,7 +97,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 * @protected
 	 */
-	_createEntityview: function() {
+	_createEntityview: function () {
 		PARENT.prototype._create.call( this );
 	},
 
@@ -107,8 +107,8 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 *
 	 * @throws {Error} if a required options is missing.
 	 */
-	_init: function() {
-		if(
+	_init: function () {
+		if (
 			!this.options.value
 			|| !this.options.languages
 			|| !this.options.entityStore
@@ -132,12 +132,12 @@ $.widget( 'wikibase.entityview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_initEntityTerms: function() {
+	_initEntityTerms: function () {
 		var i;
 
 		this.$entityTerms = $( '.wikibase-entitytermsview', this.element );
 
-		if( !this.$entityTerms.length ) {
+		if ( !this.$entityTerms.length ) {
 			this.$entityTerms = $( '<div/>' ).prependTo( this.$main );
 		} else {
 			var $entitytermsforlanguageview = this.$entityTerms
@@ -145,10 +145,10 @@ $.widget( 'wikibase.entityview', PARENT, {
 
 			// Scrape languages from static HTML:
 			var scrapedLanguages = [];
-			if( $entitytermsforlanguageview.length > 0 ) {
-				$entitytermsforlanguageview.each( function() {
-					$.each( $( this ).attr( 'class' ).split( ' ' ), function() {
-						if( this.indexOf( 'wikibase-entitytermsforlanguageview-' ) === 0 ) {
+			if ( $entitytermsforlanguageview.length > 0 ) {
+				$entitytermsforlanguageview.each( function () {
+					$.each( $( this ).attr( 'class' ).split( ' ' ), function () {
+						if ( this.indexOf( 'wikibase-entitytermsforlanguageview-' ) === 0 ) {
 							scrapedLanguages.push(
 								this.split( 'wikibase-entitytermsforlanguageview-' )[1]
 							);
@@ -160,16 +160,16 @@ $.widget( 'wikibase.entityview', PARENT, {
 
 			var mismatch = scrapedLanguages.length !== this.options.languages.length;
 
-			if( !mismatch ) {
-				for( i = 0; i < scrapedLanguages.length; i++ ) {
-					if( scrapedLanguages[i] !== this.options.languages[i] ) {
+			if ( !mismatch ) {
+				for ( i = 0; i < scrapedLanguages.length; i++ ) {
+					if ( scrapedLanguages[i] !== this.options.languages[i] ) {
 						mismatch = true;
 						break;
 					}
 				}
 			}
 
-			if( mismatch ) {
+			if ( mismatch ) {
 				// TODO: While this triggers rebuilding the whole DOM structure, the user interface
 				// language is always rendered statically and would not need to be re-rendered.
 				// However, that requires additional logic in respective widgets.
@@ -180,7 +180,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 		var fingerprint = this.options.value.getFingerprint(),
 			value = [];
 
-		for( i = 0; i < this.options.languages.length; i++ ) {
+		for ( i = 0; i < this.options.languages.length; i++ ) {
 			value.push( {
 				language: this.options.languages[i],
 				label: fingerprint.getLabelFor( this.options.languages[i] )
@@ -203,7 +203,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_attachEventHandlers: function() {
+	_attachEventHandlers: function () {
 		var self = this;
 
 		this.element
@@ -213,7 +213,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 			'aliasesviewafterstartediting.' + this.widgetName,
 			'entitytermsviewafterstartediting.' + this.widgetName
 		].join( ' ' ),
-		function( event ) {
+		function ( event ) {
 			self._trigger( 'afterstartediting' );
 		} );
 
@@ -224,7 +224,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 			'aliasesviewafterstopediting.' + this.widgetName,
 			'entitytermsviewafterstopediting.' + this.widgetName
 		].join( ' ' ),
-		function( event, dropValue ) {
+		function ( event, dropValue ) {
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} );
 	},
@@ -234,18 +234,18 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 *
 	 * @throws {Error} when trying to set an option to an improper value.
 	 */
-	_setOption: function( key, value ) {
-		if( key === 'languages' ) {
-			if( typeof this.options.languages === 'string' ) {
+	_setOption: function ( key, value ) {
+		if ( key === 'languages' ) {
+			if ( typeof this.options.languages === 'string' ) {
 				this.options.languages = [this.options.languages];
-			} else if( !$.isArray( this.options.languages ) ) {
+			} else if ( !$.isArray( this.options.languages ) ) {
 				throw new Error( 'languages need to be supplied as string or array' );
 			}
 		}
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this._setState( value ? 'disable' : 'enable' );
 		}
 
@@ -257,11 +257,11 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 *
 	 * @param {string} state "disable" or "enable"
 	 */
-	_setState: function( state ) {
+	_setState: function ( state ) {
 		this.$label.data( 'labelview' )[state]();
 		this.$description.data( 'descriptionview' )[state]();
 		this.$aliases.data( 'aliasesview' )[state]();
-		if( this.$entityTerms ) {
+		if ( this.$entityTerms ) {
 			this.$entityTerms.data( 'entitytermsview' )[state]();
 		}
 	},
@@ -269,7 +269,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
+	focus: function () {
 		this.$label.data( 'labelview' ).focus();
 	}
 } );
@@ -283,10 +283,10 @@ $.widget( 'wikibase.entityview', PARENT, {
 $.wikibase.entityview.TYPES = [];
 
 $.expr[':'][$.wikibase.entityview.prototype.widgetFullName]
-	= $.expr.createPseudo( function( fullName ) {
-		return function( elem ) {
-			for( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
-				if( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
+	= $.expr.createPseudo( function ( fullName ) {
+		return function ( elem ) {
+			for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
+				if ( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
 					return true;
 				}
 			}

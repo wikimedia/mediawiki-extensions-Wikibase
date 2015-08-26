@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;
@@ -20,7 +20,7 @@
 	MODULE.ApiEntityStore = util.inherit(
 		'WbApiEntityStore',
 		MODULE.EntityStore,
-		function( repoApi, fetchedEntityUnserializer, languages ) {
+		function ( repoApi, fetchedEntityUnserializer, languages ) {
 			this._fetchedEntityUnserializer = fetchedEntityUnserializer;
 			this._languages = languages;
 			this._repoApi = repoApi;
@@ -45,24 +45,24 @@
 		/**
 		 * @see wikibase.store.EntityStore.getMultipleRaw
 		 */
-		getMultipleRaw: function( entityIds ) {
-			var deferreds = $.map( entityIds, function() { return $.Deferred(); } ),
+		getMultipleRaw: function ( entityIds ) {
+			var deferreds = $.map( entityIds, function () { return $.Deferred(); } ),
 				self = this,
 				entityIdToIndex = {};
 
-			$.each( entityIds, function( i, entityId ) {
+			$.each( entityIds, function ( i, entityId ) {
 				entityIdToIndex[ entityId ] = i;
 			} );
 
 			this._repoApi.getEntities( entityIds, null, this._languages )
-			.done( function( result ) {
-				$.each( result.entities, function( id, entityData ) {
+			.done( function ( result ) {
+				$.each( result.entities, function ( id, entityData ) {
 					// return entities not found (e.g. deleted) as null, and allow
 					// valueViewBuilder to select appropriate expert for such case.
 					var entity = null,
 						entityId = id;
 
-					if( entityData.missing !== '' ) {
+					if ( entityData.missing !== '' ) {
 						entity = self._fetchedEntityUnserializer.deserialize( {
 							title: entityData.title,
 							content: entityData
@@ -75,13 +75,13 @@
 				} );
 			} )
 			// FIXME: Evaluate failing promise
-			.fail( function() {
-				$.each( entityIds, function( i, entityId ) {
+			.fail( function () {
+				$.each( entityIds, function ( i, entityId ) {
 					deferreds[ entityIdToIndex[ entityId ] ].reject();
 				} );
 			} );
 
-			return $.map( deferreds, function( deferred ) {
+			return $.map( deferreds, function ( deferred ) {
 				return deferred.promise();
 			} );
 		}

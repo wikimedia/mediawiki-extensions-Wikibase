@@ -2,45 +2,45 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $, QUnit ) {
+( function ( mw, $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
-	setup: function() {
+	setup: function () {
 		$.widget( 'test.editablewidget', {
-			_create: function() {
+			_create: function () {
 				this._initialValue = this.options.value;
 			},
-			_draw: function() {},
-			_save: function() {
+			_draw: function () {},
+			_save: function () {
 				return $.Deferred().resolve().promise();
 			},
-			value: function( value ) {
-				if( value === undefined ) {
+			value: function ( value ) {
+				if ( value === undefined ) {
 					this.option( 'value', value );
 				} else {
 					return this.option( 'value' );
 				}
 			},
-			isEmpty: function() {
+			isEmpty: function () {
 				return !this.option( 'value' );
 			},
-			isValid: function() {
+			isValid: function () {
 				return !!this.option( 'value' );
 			},
-			isInitialValue: function() {
+			isInitialValue: function () {
 				return this.option( 'value' ) === this._initialValue;
 			}
 		} );
 	},
-	teardown: function() {
+	teardown: function () {
 		delete( $.test.editablewidget );
 
-		$( '.test_edittoolbar' ).each( function() {
+		$( '.test_edittoolbar' ).each( function () {
 			var $edittoolbar = $( this ),
 				edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
-			if( edittoolbar ) {
+			if ( edittoolbar ) {
 				edittoolbar.destroy();
 			}
 
@@ -49,7 +49,7 @@ QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var testSets = [
 		[
 			'<div><span>$1</span></div>',
@@ -59,7 +59,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		]
 	];
 
-	for( var i = 0; i < testSets.length; i++ ) {
+	for ( var i = 0; i < testSets.length; i++ ) {
 		mw.wbTemplates.store.set( 'templatedWidget-test', testSets[i][0] );
 
 		var $subject = $( '<div/>' );

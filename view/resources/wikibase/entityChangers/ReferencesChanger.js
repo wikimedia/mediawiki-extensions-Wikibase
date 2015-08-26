@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 var MODULE = wb.entityChangers;
@@ -65,7 +65,7 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	removeReference: function( statementGuid, reference ) {
+	removeReference: function ( statementGuid, reference ) {
 		var deferred = $.Deferred(),
 			self = this;
 
@@ -74,13 +74,13 @@ $.extend( SELF.prototype, {
 			reference.getHash(),
 			this._revisionStore.getClaimRevision( statementGuid )
 		)
-		.done( function( result ) {
+		.done( function ( result ) {
 			self._revisionStore.setClaimRevision( result.pageinfo.lastrevid, statementGuid );
 
 			// FIXME: Update self._entity
 			deferred.resolve();
 		} )
-		.fail( function( errorCode, error ) {
+		.fail( function ( errorCode, error ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'remove' ) );
 		} );
 
@@ -97,7 +97,7 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	setReference: function( statementGuid, reference, index ) {
+	setReference: function ( statementGuid, reference, index ) {
 		var deferred = $.Deferred(),
 			self = this;
 
@@ -108,7 +108,7 @@ $.extend( SELF.prototype, {
 			reference.getHash(),
 			index
 		)
-		.done( function( result ) {
+		.done( function ( result ) {
 			var savedReference = self._referenceDeserializer.deserialize( result.reference ),
 				pageInfo = result.pageinfo;
 
@@ -119,7 +119,7 @@ $.extend( SELF.prototype, {
 
 			deferred.resolve( savedReference );
 		} )
-		.fail( function( errorCode, error ) {
+		.fail( function ( errorCode, error ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
 		} );
 

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.wikibase.entitysearch' );
@@ -33,7 +33,7 @@ var entityStubs = [
  * @param {Object} [options]
  * @return {jQuery}
  */
-var newEntitysearch = function( options ) {
+var newEntitysearch = function ( options ) {
 	options = $.extend( {
 		source: entityStubs
 	}, options || {} );
@@ -43,7 +43,7 @@ var newEntitysearch = function( options ) {
 		.entitysearch( options );
 };
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $entitysearch = newEntitysearch();
 
 	assert.ok(

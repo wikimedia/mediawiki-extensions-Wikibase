@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;
@@ -16,9 +16,9 @@
 		var deferred = $.Deferred(),
 			returnsExpected = arr.length;
 
-		$.each( arr, function( i, promise ) {
-			promise.always( function() {
-				if( --returnsExpected <= 0 ) {
+		$.each( arr, function ( i, promise ) {
+			promise.always( function () {
+				if ( --returnsExpected <= 0 ) {
 					deferred.resolve();
 				}
 			} );
@@ -36,12 +36,12 @@
 			previousValue = initialValue;
 
 		function tryNext() {
-			if( arr.length <= index ) {
+			if ( arr.length <= index ) {
 				deferred.resolve( previousValue );
 				return;
 			}
 			callback( previousValue, arr[ index++ ] ).fail( deferred.reject )
-			.done( function( newState ) {
+			.done( function ( newState ) {
 				previousValue = newState;
 				tryNext();
 			} );
@@ -57,24 +57,24 @@
 	 * for every item
 	 */
 	function asyncMapFallback( arr, arrHandlers ) {
-		var deferreds = $.map( arr, function() { return $.Deferred(); } );
-		asyncReduce( arrHandlers, function( state, arrHandler ) {
+		var deferreds = $.map( arr, function () { return $.Deferred(); } );
+		asyncReduce( arrHandlers, function ( state, arrHandler ) {
 			var deferred = $.Deferred();
-			if( state.unresolvedArr.length === 0 ) {
+			if ( state.unresolvedArr.length === 0 ) {
 				return deferred.reject( state ).promise();
 			}
 
 			var nextUnresolvedArr = [];
 			var nextUnresolvedDeferreds = [];
 			var promises = arrHandler( state.unresolvedArr );
-			$.each( promises, function( i, promise ) {
+			$.each( promises, function ( i, promise ) {
 				promise.done( state.unresolvedDeferreds[ i ].resolve )
-				.fail( function() {
+				.fail( function () {
 					nextUnresolvedArr.push( state.unresolvedArr[ i ] );
 					nextUnresolvedDeferreds.push( state.unresolvedDeferreds[ i ] );
 				} );
 			} );
-			whenFinished( promises ).done( function() {
+			whenFinished( promises ).done( function () {
 				deferred.resolve( {
 					unresolvedArr: nextUnresolvedArr,
 					unresolvedDeferreds: nextUnresolvedDeferreds
@@ -87,7 +87,7 @@
 			unresolvedDeferreds: deferreds
 		} );
 
-		return $.map( deferreds, function( deferred ) {
+		return $.map( deferreds, function ( deferred ) {
 			return deferred.promise();
 		} );
 	}
@@ -103,7 +103,7 @@
 	MODULE.CombiningEntityStore = util.inherit(
 		'WbCombiningEntityStore',
 		wb.store.EntityStore,
-		function( stores ) {
+		function ( stores ) {
 			this._stores = stores;
 		},
 	{
@@ -115,9 +115,9 @@
 		/**
 		 * @see wikibase.store.EntityStore.getMultipleRaw
 		 */
-		getMultipleRaw: function( entityIds ) {
-			return asyncMapFallback( entityIds, $.map( this._stores, function( store ) {
-				return function( entityIds ) {
+		getMultipleRaw: function ( entityIds ) {
+			return asyncMapFallback( entityIds, $.map( this._stores, function ( store ) {
+				return function ( entityIds ) {
 					return store.getMultipleRaw( entityIds );
 				};
 			} ) );

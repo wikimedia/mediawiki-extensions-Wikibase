@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, vv, dv ) {
+( function ( wb, vv, dv ) {
 'use strict';
 
 var MODULE = wb.experts;
@@ -10,7 +10,7 @@ var MODULE = wb.experts;
 /**
  * @param {dataTypes.DataTypeStore} dataTypeStore
  */
-MODULE.getStore = function( dataTypeStore ) {
+MODULE.getStore = function ( dataTypeStore ) {
 	var expertStore = new vv.ExpertStore( vv.experts.UnsupportedValue );
 
 	expertStore.registerDataValueExpert(
@@ -50,9 +50,9 @@ MODULE.getStore = function( dataTypeStore ) {
 
 	};
 
-	for( var dataTypeId in dataTypeIdToExpertConstructor ) {
+	for ( var dataTypeId in dataTypeIdToExpertConstructor ) {
 		var dataType = dataTypeStore.getDataType( dataTypeId );
-		if( dataType ) {
+		if ( dataType ) {
 			expertStore.registerDataTypeExpert(
 				dataTypeIdToExpertConstructor[dataTypeId],
 				dataType.getId()

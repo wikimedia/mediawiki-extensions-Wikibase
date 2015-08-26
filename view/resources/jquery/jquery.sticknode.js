@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 var $window = $( window ),
@@ -34,13 +34,13 @@ var $window = $( window ),
  *        Triggered when the node the widget is initialized and updates its positioning behaviour.
  *        - {jQuery.Event}
  */
-$.fn.sticknode = function( options ) {
+$.fn.sticknode = function ( options ) {
 	options = options || {};
 
-	this.each( function() {
+	this.each( function () {
 		var $node = $( this );
 
-		if( $node.data( PLUGIN_NAME ) ) {
+		if ( $node.data( PLUGIN_NAME ) ) {
 			return;
 		}
 
@@ -50,8 +50,8 @@ $.fn.sticknode = function( options ) {
 			stickyNode,
 			window,
 			'scroll.' + PLUGIN_NAME + ' ' + 'touchmove.' + PLUGIN_NAME,
-			function( event, stickyNode ) {
-				if( stickyNode.update( $window.scrollTop() ) ) {
+			function ( event, stickyNode ) {
+				if ( stickyNode.update( $window.scrollTop() ) ) {
 					stickyNode.$node.triggerHandler( PLUGIN_NAME + 'update' );
 				}
 			},
@@ -64,8 +64,8 @@ $.fn.sticknode = function( options ) {
 			stickyNode,
 			window,
 			'resize.' + PLUGIN_NAME,
-			function( event, stickyNode ) {
-				if( stickyNode.update( $window.scrollTop(), true ) ) {
+			function ( event, stickyNode ) {
+				if ( stickyNode.update( $window.scrollTop(), true ) ) {
 					stickyNode.$node.triggerHandler( PLUGIN_NAME + 'update' );
 				}
 			},
@@ -84,7 +84,7 @@ $.fn.sticknode = function( options ) {
  * @param {jQuery} $node
  * @param {Object} options
  */
-var StickyNode = function( $node, options ) {
+var StickyNode = function ( $node, options ) {
 	this.$node = $node;
 	this.$node.data( PLUGIN_NAME, this );
 
@@ -126,7 +126,7 @@ $.extend( StickyNode.prototype, {
 	/**
 	 * Destroys and unregisters the plugin.
 	 */
-	destroy: function() {
+	destroy: function () {
 		eventSingleton.unregister(
 			this.$node.data( PLUGIN_NAME ),
 			window,
@@ -134,7 +134,7 @@ $.extend( StickyNode.prototype, {
 		);
 		this.$node.removeData( PLUGIN_NAME );
 
-		if( this._$clone ) {
+		if ( this._$clone ) {
 			this._$clone.remove();
 			this._$clone = null;
 		}
@@ -143,8 +143,8 @@ $.extend( StickyNode.prototype, {
 	/**
 	 * @return {boolean}
 	 */
-	_clipsContainer: function() {
-		if( !this._options.$container || !this.isFixed() ) {
+	_clipsContainer: function () {
+		if ( !this._options.$container || !this.isFixed() ) {
 			return false;
 		}
 
@@ -159,8 +159,8 @@ $.extend( StickyNode.prototype, {
 	/**
 	 * @return {boolean}
 	 */
-	_isScrolledAfterContainer: function() {
-		if( !this._options.$container ) {
+	_isScrolledAfterContainer: function () {
+		if ( !this._options.$container ) {
 			return false;
 		}
 
@@ -174,8 +174,8 @@ $.extend( StickyNode.prototype, {
 	 * @param {number} scrollTop
 	 * @return {boolean}
 	 */
-	_isScrolledBeforeContainer: function( scrollTop ) {
-		if( !this._initialAttributes.offset ) {
+	_isScrolledBeforeContainer: function ( scrollTop ) {
+		if ( !this._initialAttributes.offset ) {
 			return false;
 		}
 
@@ -185,8 +185,8 @@ $.extend( StickyNode.prototype, {
 			|| this._changesDocumentHeight && scrollTop < initTopOffset - this.$node.outerHeight();
 	},
 
-	_fix: function() {
-		if( this.isFixed() ) {
+	_fix: function () {
+		if ( this.isFixed() ) {
 			return;
 		}
 
@@ -213,24 +213,24 @@ $.extend( StickyNode.prototype, {
 		.css( 'position', 'fixed' )
 		.css( 'z-index', this._options.zIndex );
 
-		if( this._$clone.css( 'display' ) === 'table-header-group' ) {
+		if ( this._$clone.css( 'display' ) === 'table-header-group' ) {
 			var $original = this._$clone.find( '*' );
 
-			this.$node.find( '*' ).each( function( i ) {
+			this.$node.find( '*' ).each( function ( i ) {
 				var $node = $( this );
-				if( $node.css( 'display' ) === 'table-cell' ) {
+				if ( $node.css( 'display' ) === 'table-cell' ) {
 					$node.width( $original.eq( i ).width() + 'px' );
 				}
 			} );
 		}
 	},
 
-	_unfix: function() {
-		if( !this.isFixed() ) {
+	_unfix: function () {
+		if ( !this.isFixed() ) {
 			return;
 		}
 
-		if( this._$clone ) {
+		if ( this._$clone ) {
 			this._$clone.remove();
 			this._$clone = null;
 		}
@@ -249,7 +249,7 @@ $.extend( StickyNode.prototype, {
 	 *
 	 * @return {boolean}
 	 */
-	isFixed: function() {
+	isFixed: function () {
 		return this.$node.css( 'position' ) === 'fixed';
 	},
 
@@ -260,14 +260,14 @@ $.extend( StickyNode.prototype, {
 	 * @param {boolean} force
 	 * @return {boolean}
 	 */
-	update: function( scrollTop, force ) {
+	update: function ( scrollTop, force ) {
 		var changedState = false;
 
-		if( force && this.isFixed() ) {
+		if ( force && this.isFixed() ) {
 			this._unfix();
 		}
 
-		if(
+		if (
 			!this.isFixed()
 			&& scrollTop > this.$node.offset().top
 			&& !this._isScrolledAfterContainer()
@@ -276,7 +276,7 @@ $.extend( StickyNode.prototype, {
 			changedState = true;
 		}
 
-		if(
+		if (
 			this.isFixed() && this._isScrolledBeforeContainer( scrollTop )
 			|| this._clipsContainer()
 		) {
@@ -291,8 +291,8 @@ $.extend( StickyNode.prototype, {
 	 * Re-fixes the node if it is fixed, properly updating scroll position. Should be called
 	 * whenever the node's content has been updated.
 	 */
-	refresh: function() {
-		if( this.isFixed() ) {
+	refresh: function () {
+		if ( this.isFixed() ) {
 			this._unfix();
 			this._fix();
 			this.$node.triggerHandler( PLUGIN_NAME + 'update' );

@@ -2,12 +2,12 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function ( wb, QUnit ) {
 	'use strict';
 
 QUnit.module( 'wikibase.utilities.GuidGenerator' );
 
-QUnit.test( 'V4GuidGenerator', function( assert ) {
+QUnit.test( 'V4GuidGenerator', function ( assert ) {
 	var generator = new wb.utilities.V4GuidGenerator();
 
 	assert.equal(

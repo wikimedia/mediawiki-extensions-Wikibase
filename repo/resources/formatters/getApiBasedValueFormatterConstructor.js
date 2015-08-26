@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, vf, util ) {
+( function ( $, wb, vf, util ) {
 	'use strict';
 
 	wb.formatters = wb.formatters || {};
@@ -18,7 +18,7 @@
 	 *
 	 * @param {wikibase.api.FormatValueCaller} apiValueFormatter
 	 */
-	wb.formatters.getApiBasedValueFormatterConstructor = function( apiValueFormatter ) {
+	wb.formatters.getApiBasedValueFormatterConstructor = function ( apiValueFormatter ) {
 		/**
 		 * Base constructor for objects representing a value formatter which is doing an API request to
 		 * the FormatSnakValue API module for formatting a value.
@@ -41,7 +41,7 @@
 			 *         Rejected parameters:
 			 *         - {string} HTML error message.
 			 */
-			format: function( dataValue, dataTypeId, outputType ) {
+			format: function ( dataValue, dataTypeId, outputType ) {
 				var deferred = $.Deferred();
 
 				// Since dataTypeId and outputType are optional parameters to this function as well as
@@ -50,10 +50,10 @@
 					apiValueFormatter,
 					$.makeArray( arguments ).concat( [this._options] )
 				)
-				.done( function( formattedValue ) {
+				.done( function ( formattedValue ) {
 					deferred.resolve( formattedValue, dataValue );
 				} )
-				.fail( function( error ) {
+				.fail( function ( error ) {
 					deferred.reject( error.detailedMessage || error.code );
 				} );
 
