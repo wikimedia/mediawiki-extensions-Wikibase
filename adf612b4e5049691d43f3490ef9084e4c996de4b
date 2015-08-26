@@ -33,6 +33,24 @@
       "revId": "adf612b4e5049691d43f3490ef9084e4c996de4b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_bf3d3adc",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-26T14:09:16Z",
+      "side": 1,
+      "message": "think is_array would be good to have.",
+      "parentUuid": "6ec1af18_694de0c6",
+      "revId": "adf612b4e5049691d43f3490ef9084e4c996de4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
