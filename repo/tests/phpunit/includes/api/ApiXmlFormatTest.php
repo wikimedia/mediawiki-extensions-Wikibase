@@ -86,6 +86,19 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setlabel' ), $actual );
+
+		$params = array(
+			'action' => 'wbsetlabel',
+			'id' => $entityId,
+			'language' => 'en-gb',
+			'value' => '',
+		);
+
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetLabel', 'wbsetlabel', $params, true );
+		$result = $this->executeApiModule( $module );
+		$actual = $this->removePageInfoAttributes( $result, $entityId );
+
+		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setlabel-removed' ), $actual );
 	}
 
 	public function testSetDescriptionXmlFormat() {
@@ -104,6 +117,19 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setdescription' ), $actual );
+
+		$params = array(
+			'action' => 'wbsetdescription',
+			'id' => $entityId,
+			'language' => 'en-gb',
+			'value' => '',
+		);
+
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetDescription', 'wbsetdescription', $params, true );
+		$result = $this->executeApiModule( $module );
+		$actual = $this->removePageInfoAttributes( $result, $entityId );
+
+		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setdescription-removed' ), $actual );
 	}
 
 	public function testSetAliasesXmlFormat() {
@@ -122,6 +148,19 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setaliases' ), $actual );
+
+		$params = array(
+			'action' => 'wbsetaliases',
+			'id' => $entityId,
+			'language' => 'en-gb',
+			'remove' => 'BB|CC',
+		);
+
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetAliases', 'wbsetaliases', $params, true );
+		$result = $this->executeApiModule( $module );
+		$actual = $this->removePageInfoAttributes( $result, $entityId );
+
+		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setaliases-removed' ), $actual );
 	}
 
 	public function testSetSitelinkXmlFormat() {
@@ -133,19 +172,34 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			'id' => $entityId,
 			'linksite' => 'enwiki',
 			'linktitle' => 'Japan',
-			//TODO test basges in output
+			//TODO test badges in output
 		);
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetSiteLink', 'wbsetsitelink', $params, true );
-		$siteTaregtProvider = new SiteLinkTargetProvider( MockSiteStore::newFromTestSites(), array() );
-		$module->setServices( $siteTaregtProvider );
+		$siteTargetProvider = new SiteLinkTargetProvider( MockSiteStore::newFromTestSites(), array() );
+		$module->setServices( $siteTargetProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 		//If a URL has been added just remove it as it is not always present
 		$actual = str_replace( 'url="https://en.wikipedia.org/wiki/Japan"', '', $actual );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setsitelink' ), $actual );
+
+		$params = array(
+			'action' => 'wbsetsitelink',
+			'id' => $entityId,
+			'linksite' => 'enwiki',
+			//TODO test badges in output
+		);
+
+		/** @var SetSiteLink $module */
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetSiteLink', 'wbsetsitelink', $params, true );
+		$module->setServices( $siteTargetProvider );
+		$result = $this->executeApiModule( $module );
+		$actual = $this->removePageInfoAttributes( $result, $entityId );
+
+		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'setsitelink-removed' ), $actual );
 	}
 
 	public function testSetClaimXmlFormat() {

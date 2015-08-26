@@ -1,0 +1,9 @@
+<api success="1">
+	<entity id="$itemIdUnderTest" type="item">
+		<sitelinks>
+			<sitelink site="enwiki" title="Japan" removed="">
+				<badges/>
+			</sitelink>
+		</sitelinks>
+	</entity>
+</api>
