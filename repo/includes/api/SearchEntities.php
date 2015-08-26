@@ -69,6 +69,11 @@ class SearchEntities extends ApiBase {
 	private $entityTypes;
 
 	/**
+	 * @var string
+	 */
+	private $conceptBaseUri;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -90,7 +95,8 @@ class SearchEntities extends ApiBase {
 				$repo->getTermLookup(),
 				$repo->getLanguageFallbackChainFactory()
 				->newFromLanguageCode( $this->getLanguage()->getCode() )
-			)
+			),
+			$repo->getSettings()->getSetting( 'conceptBaseUri' )
 		);
 	}
 
@@ -104,6 +110,7 @@ class SearchEntities extends ApiBase {
 	 * @param TermIndexSearchInteractor $termIndexSearchInteractor
 	 * @param TermIndex $termIndex
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param string $conceptBaseUri
 	 */
 	public function setServices(
 		EntityTitleLookup $titleLookup,
@@ -112,7 +119,8 @@ class SearchEntities extends ApiBase {
 		ContentLanguages $termLanguages,
 		TermIndexSearchInteractor $termIndexSearchInteractor,
 		TermIndex $termIndex,
-		LabelDescriptionLookup $labelDescriptionLookup
+		LabelDescriptionLookup $labelDescriptionLookup,
+		$conceptBaseUri
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->idParser = $idParser;
@@ -121,6 +129,7 @@ class SearchEntities extends ApiBase {
 		$this->termIndexSearchInteractor = $termIndexSearchInteractor;
 		$this->termIndex = $termIndex;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->conceptBaseUri = $conceptBaseUri;
 	}
 
 	/**
@@ -175,6 +184,7 @@ class SearchEntities extends ApiBase {
 			$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
 			$entry = array();
 			$entry['id'] = $match->getEntityId()->getSerialization();
+			$entry['concepturi'] = $this->conceptBaseUri . $match->getEntityId()->getSerialization();
 			$entry['url'] = $title->getFullUrl();
 			$entry['title'] = $title->getPrefixedText();
 			$entry['pageid'] = $title->getArticleID();
