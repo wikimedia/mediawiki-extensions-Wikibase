@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_fc319057",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-26T10:46:07Z",
+      "side": 1,
+      "message": "getTitleForId is executed twice now. Can\u0027t the code be rearranged to save one of these calls?",
+      "revId": "1166f07903c62f4fad1528f76f0bb75ee461b000",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_7cf6008e",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-26T10:46:07Z",
+      "side": 1,
+      "message": "These fallbacks are odd. Are they even needed? Whats the point in having an \u003ca\u003e element with no title and no href? I suggest to fall back to the plain id serialization in this case.",
+      "revId": "1166f07903c62f4fad1528f76f0bb75ee461b000",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
