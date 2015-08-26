@@ -122,7 +122,8 @@ class MWTimeIsoParser extends StringValueParser {
 				//FIXME: Use the language passed in options!
 				//The only reason we are not currently doing this is due to the formatting not currently Localizing
 				//See the fix me in: MwTimeIsoFormatter::getMessage
-				//$msg->inLanguage( $this->lang ); // todo check other translations?
+				// TODO: Check other translations?
+				//$msg->inLanguage( $this->lang );
 				$msg->inLanguage( 'en' );
 				$msgText = $msg->text();
 				$isBceMsg = $this->isBceMsg( $msgKey );

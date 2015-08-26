@@ -381,7 +381,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	}
 
 	public function provideExceptionData() {
-		//todo more exception checks should be added once bug T55038 is resolved
+		// TODO: More exception checks should be added once bug T55038 is resolved.
 		return array(
 			array( //0 no params
 				'p' => array(),

@@ -1545,7 +1545,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$to = 'Berlin';
 		$expected = array(
 			'normalized' => array(
-				//todo this is JUST SILLY
 				'n' => array(
 					'from' => 'berlin',
 					'to' => 'Berlin'

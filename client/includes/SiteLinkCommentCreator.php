@@ -133,7 +133,7 @@ class SiteLinkCommentCreator {
 				$args
 			);
 
-			// todo handle if there are multiple diffOps here
+			// TODO: Handle if there are multiple DiffOp's here.
 			break;
 		}
 

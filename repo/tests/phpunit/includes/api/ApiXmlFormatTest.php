@@ -133,13 +133,13 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			'id' => $entityId,
 			'linksite' => 'enwiki',
 			'linktitle' => 'Japan',
-			//TODO test basges in output
+			// TODO: Test badges in output
 		);
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetSiteLink', 'wbsetsitelink', $params, true );
-		$siteTaregtProvider = new SiteLinkTargetProvider( MockSiteStore::newFromTestSites(), array() );
-		$module->setServices( $siteTaregtProvider );
+		$targetProvider = new SiteLinkTargetProvider( MockSiteStore::newFromTestSites(), array() );
+		$module->setServices( $targetProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 		//If a URL has been added just remove it as it is not always present

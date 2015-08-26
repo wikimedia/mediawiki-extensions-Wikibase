@@ -238,7 +238,7 @@ class PageTerms extends ApiQueryBase {
 				self::PARAM_TYPE => 'integer',
 			),
 			'terms' => array(
-				// XXX Ought to get this list from Wikibase\TermIndexEntry, its setType() also hardcodes it.
+				// XXX: Ought to get this list from Wikibase\TermIndexEntry, its setType() also hardcodes it.
 				self::PARAM_TYPE => array(
 					TermIndexEntry::TYPE_ALIAS,
 					TermIndexEntry::TYPE_DESCRIPTION,

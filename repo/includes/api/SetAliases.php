@@ -146,7 +146,7 @@ class SetAliases extends ModifyEntity {
 	 * @return string[]
 	 */
 	private function normalizeAliases( array $aliases ) {
-		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
+		$stringNormalizer = $this->stringNormalizer;
 
 		$aliases = array_map(
 			function( $str ) use ( $stringNormalizer ) {
