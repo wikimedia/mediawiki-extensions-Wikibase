@@ -34,6 +34,24 @@
       "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_1aa81c89",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2015-08-26T14:49:07Z",
+      "side": 0,
+      "message": "\"as long as ApiMain::execute calls this\" will not be very long. Ic8259649 will remove the call, and is just waiting on Wikibase to remove its dependence on raw mode first.\n\nFurther, no non-deprecated methods care about the raw mode setting anymore, so skipping setting it in the narrow window between merging this patch and merging Ic8259649 won\u0027t make any difference.",
+      "parentUuid": "6ec1af18_7a4cc043",
+      "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
