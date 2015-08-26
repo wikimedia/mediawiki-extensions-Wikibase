@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_759e1368",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-26T16:16:45Z",
+      "side": 1,
+      "message": "Invalid property value \nit actually uses url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22…%22%20fill%3D%22%23777%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A);",
+      "revId": "d2b666b720a7ad24f85d19af98663169ad13b4de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
