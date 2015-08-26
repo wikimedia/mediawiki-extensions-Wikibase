@@ -56,10 +56,10 @@ class DispatchChanges extends Maintenance {
 					. "Default: 1 if --max-time is not set, infinite if it is.", false, true );
 		$this->addOption( 'max-time', "The number of seconds to run before exiting, "
 					. "if --max-passes is not reached. Default: infinite.", false, true );
-		$this->addOption( 'max-chunks', "Max number of chunks / passes per wiki "
-					. "when selecting pending changes. Default: 15", false, true );
-		$this->addOption( 'batch-size', "Max number of changes to pass to a client at a time. "
-					. "Default: 1000", false, true );
+		$this->addOption( 'max-chunks', 'Maximum number of chunks or passes per wiki when '
+			. 'selecting pending changes. Default: 15', false, true );
+		$this->addOption( 'batch-size', 'Maximum number of changes to pass to a client at a time. '
+			. 'Default: 1000', false, true );
 	}
 
 	/**
