@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Term;
 
+use ArrayIterator;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
@@ -51,10 +52,10 @@ class AliasGroupList implements Countable, IteratorAggregate {
 
 	/**
 	 * @see IteratorAggregate::getIterator
-	 * @return Traversable
+	 * @return Traversable|AliasGroup[]
 	 */
 	public function getIterator() {
-		return new \ArrayIterator( $this->groups );
+		return new ArrayIterator( $this->groups );
 	}
 
 	/**
