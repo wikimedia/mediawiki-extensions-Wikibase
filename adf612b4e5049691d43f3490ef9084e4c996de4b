@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_895a8c83",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-26T07:33:25Z",
+      "side": 1,
+      "message": "\"mixed[]\" is actually identical to \"array\". ;-)",
+      "revId": "adf612b4e5049691d43f3490ef9084e4c996de4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_694de0c6",
+        "filename": "client/includes/store/AddUsagesForPageJob.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-26T07:33:25Z",
+      "side": 1,
+      "message": "From what I see in the base class and other subclasses this *could* be pretended by a\n\n if ( is_array( $info[\u0027params\u0027] ) ) {\n\nbut I think this is optional because unset will not complain.\n\nBut please add a comment to the unset: why it\u0027s ok to unset this.",
+      "revId": "adf612b4e5049691d43f3490ef9084e4c996de4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
