@@ -53,8 +53,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$propertyInfoStore = new MockPropertyInfoStore();
 
 		$propertyInfoStore->setPropertyInfo(
-			new PropertyId( 'P123' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'wikibase-item' )
+			new PropertyId( 'P789' ),
+			array( PropertyInfoStore::KEY_DATA_TYPE => 'string' )
 		);
 
 		$propertyInfoStore->setPropertyInfo(
@@ -63,8 +63,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		);
 
 		$propertyInfoStore->setPropertyInfo(
-			new PropertyId( 'P789' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'string' )
+			new PropertyId( 'P123' ),
+			array( PropertyInfoStore::KEY_DATA_TYPE => 'wikibase-item' )
 		);
 
 		return $propertyInfoStore;
@@ -135,9 +135,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$this->assertContains( 'wikibase-listproperties-summary', $output );
 		$this->assertContains( 'wikibase-listproperties-legend', $output );
 		$this->assertNotContains( 'wikibase-listproperties-invalid-datatype', $output );
-		$this->assertContains( 'P123', $output );
-		$this->assertContains( 'P456', $output );
-		$this->assertContains( 'P789', $output );
+		$this->assertRegExp( '/P123.*P456.*P789/', $output ); // order is relevant
 	}
 
 	public function testOffsetAndLimit() {
