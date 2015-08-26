@@ -1,6 +1,6 @@
 # Wikibase DataModel Services release notes
 
-## Version 2.0 (dev)
+## Version 2.0.0 (2015-08-27)
 
 Moved `EntityIdParser` back to Wikibase DataModel:
 
@@ -11,9 +11,25 @@ Moved `EntityIdParser` back to Wikibase DataModel:
 
 Changed all Lookup contracts:
 
-* All lookups now return null when there is no value found as a result of the lookup.
-* All lookups now throw exceptions in exceptional circumstances.
-
+* All lookups now return null when there is no value found as a result of the lookup:
+  * `EntityRetrievingTermLookup` returns null instead of throwing `OutOfBoundsException`.
+  * `LanguageLabelDescriptionLookup` returns null instead of throwing `OutOfBoundsException`.
+  * `ItemLookup` implementations should return null instead of throwing `ItemNotFoundException`.
+  * `LabelDescriptionLookup` implementations should return null instead of `OutOfBoundsException`.
+  * `PropertyLookup` implementations should return null instead of `PropertyNotFoundException`.
+  * `TermLookup` implementations should return null instead of `OutOfBoundsException`.
+* All lookups now throw exceptions in exceptional circumstances:
+  * `EntityLookup` implementations should throw `EntityLookupException` instead of returning null.
+  * `EntityRedirectLookup` implementations should throw `EntityRedirectLookupException` instead of returning false.
+  * `EntityRetrievingDataTypeLookup` throws `PropertyDataTypeLookupException` instead of `PropertyNotFoundException`.
+  * `EntityRetrievingTermLookup` throws `TermLookupException` instead of `OutOfBoundsException`.
+  * `InMemoryDataTypeLookup` throws `PropertyDataTypeLookupException` instead of `PropertyNotFoundException`.
+  * `ItemLookup` implementations should throw `ItemLookupException` instead of `ItemNotFoundException`.
+  * `LabelDescriptionLookup` implementations should throw `LabelDescriptionLookupException` instead of `OutOfBoundsException`.
+  * `LanguageLabelDescriptionLookup` throws `LabelDescriptionLookupException` instead of `OutOfBoundsException`.
+  * `PropertyDataTypeLookup` implementations should throw `PropertyDataTypeLookupException` instead of `PropertyNotFoundException`.
+  * `PropertyLookup` implementations should throw `PropertyLookupException` instead of `PropertyNotFoundException`.
+  * `OutOfBoundsException` implementations should throw `TermLookupException` instead of `OutOfBoundsException`.
 * Removed `Lookup\ItemNotFoundException`
 * Removed `Lookup\PropertyNotFoundException`
 * Added `Lookup\EntityLookupException`
@@ -29,7 +45,11 @@ Moved over various classes and interfaces from Wikibase Lib:
 * Added `Lookup\RestrictedEntityLookup`
 * Added `Diff\EntityTypeAwareDiffOpFactory` (previously called WikibaseDiffOpFactory in Lib)
 
-## Version 1.1 (2015-08-10)
+Other additions:
+
+* Added `Lookup\InMemoryEntityLookup`
+
+## Version 1.1.0 (2015-08-10)
 
 Moved over various classes and interfaces from Wikibase Lib:
 
@@ -58,7 +78,7 @@ cases using dependencies that have similarly been moved.
 
 * Added `Entity\UnresolvedRedirectException`, similar to the one in Wikibase Lib, though without revision info
 
-## Version 1.0 (2015-07-28)
+## Version 1.0.0 (2015-07-28)
 
 Initial release containing
 
