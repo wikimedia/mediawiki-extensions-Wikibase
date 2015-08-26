@@ -52,6 +52,24 @@
       "revId": "d2b666b720a7ad24f85d19af98663169ad13b4de",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ebb69ff5",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-08-26T19:41:13Z",
+      "side": 1,
+      "message": "Oh, now I see. This is what the /* @embed */ magic line above does. MediaWiki\u0027s resource loader automatically replaces the pencil.svg by an embedded version of that file which saves http requests. For more information see https://www.mediawiki.org/wiki/ResourceLoader/Features#Resource:_Styles :-)",
+      "parentUuid": "6ec1af18_955a9f83",
+      "revId": "d2b666b720a7ad24f85d19af98663169ad13b4de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
