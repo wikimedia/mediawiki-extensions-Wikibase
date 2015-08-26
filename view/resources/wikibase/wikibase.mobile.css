@@ -69,6 +69,12 @@
 	margin-bottom: 10px;
 }
 
+.wikibase-statementview-rankselector .ui-icon.ui-icon-rankselector {
+	display: block;
+	float: left;
+	margin: 5px 5px 0 0;
+}
+
 .wikibase-statementview-mainsnak .wikibase-snakview-value {
 	font-size: 1.2em;
 }

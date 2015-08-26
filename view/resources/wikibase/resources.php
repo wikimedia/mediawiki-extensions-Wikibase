@@ -42,6 +42,9 @@ return call_user_func( function() {
 			'styles' => array(
 				'wikibase.mobile.css'
 			),
+			'dependencies' => array(
+				'jquery.wikibase.statementview.RankSelector.styles'
+			),
 			'targets' => 'mobile'
 		),
 
