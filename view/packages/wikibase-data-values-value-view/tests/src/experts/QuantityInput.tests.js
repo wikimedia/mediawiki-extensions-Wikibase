@@ -33,6 +33,11 @@
 			characteristics.unit === null || typeof characteristics.unit === 'string',
 			'unit is null or a string'
 		);
+
+		assert.ok(
+			!characteristics.hasOwnProperty( 'applyUnit' ) || characteristics.applyUnit === true,
+			'applyUnit either does not exist or is true'
+		);
 	} );
 
 }( jQuery, QUnit, jQuery.valueview ) );
