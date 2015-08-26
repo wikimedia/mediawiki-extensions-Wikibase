@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_8987ecb9",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-26T08:05:50Z",
+      "side": 1,
+      "message": "\"@var int Maximum number of chunks/passes per wiki ...\"",
+      "revId": "40e27267cf78ce18e0713a85d23cb57104ceb23e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e99eb009",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-26T08:05:50Z",
+      "side": 1,
+      "message": "\".... Defaults to 15.\"",
+      "revId": "40e27267cf78ce18e0713a85d23cb57104ceb23e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a98428b5",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-26T08:05:50Z",
+      "side": 1,
+      "message": "\"Maximum number of ...\"",
+      "revId": "40e27267cf78ce18e0713a85d23cb57104ceb23e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
