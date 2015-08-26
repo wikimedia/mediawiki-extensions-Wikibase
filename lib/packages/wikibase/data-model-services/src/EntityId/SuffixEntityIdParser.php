@@ -3,6 +3,8 @@
 namespace Wikibase\DataModel\Services\EntityId;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * EntityIdParser that strips a fixed prefix and parses the remaining suffix as an EntityId.
