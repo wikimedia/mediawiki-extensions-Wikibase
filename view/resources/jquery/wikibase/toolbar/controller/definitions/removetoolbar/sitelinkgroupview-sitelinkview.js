@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -12,7 +12,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 	selector: ':' + $.wikibase.sitelinkgroupview.prototype.namespace
 		+ '-' + $.wikibase.sitelinkgroupview.prototype.widgetName,
 	events: {
-		'sitelinkgroupviewafterstartediting sitelinkgroupviewchange': function( event ) {
+		'sitelinkgroupviewafterstartediting sitelinkgroupviewchange': function ( event ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				$sitelinklistview = sitelinkgroupview.$sitelinklistview,
@@ -23,7 +23,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				return;
 			}
 
-			sitelinklistviewListview.items().each( function() {
+			sitelinklistviewListview.items().each( function () {
 				var $sitelinkview = $( this ),
 					sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -36,7 +36,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 						renderItemSeparators: false,
 						icon: true
 					} )
-					.on( 'removetoolbarremove.removetoolbar', function( event ) {
+					.on( 'removetoolbarremove.removetoolbar', function ( event ) {
 						if ( event.target !== $sitelinkview.get( 0 ) ) {
 							return;
 						}
@@ -71,26 +71,26 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				sitelinkview.updatePageNameInputAutoExpand();
 			} );
 		},
-		sitelinkgroupviewafterstopediting: function( event, toolbarcontroller ) {
+		sitelinkgroupviewafterstopediting: function ( event, toolbarcontroller ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				$sitelinklistview = sitelinkgroupview.$sitelinklistview,
 				sitelinklistview = $sitelinklistview.data( 'sitelinklistview' ),
 				sitelinklistviewListview = sitelinklistview.$listview.data( 'listview' );
 
-			sitelinklistviewListview.items().each( function() {
+			sitelinklistviewListview.items().each( function () {
 				var $sitelinkview = $( this );
 				toolbarcontroller.destroyToolbar( $sitelinkview.data( 'removetoolbar' ) );
 			} );
 		},
-		sitelinkgroupviewdisable: function( event ) {
+		sitelinkgroupviewdisable: function ( event ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				$sitelinklistview = sitelinkgroupview.$sitelinklistview,
 				sitelinklistview = $sitelinklistview.data( 'sitelinklistview' ),
 				sitelinklistviewListview = sitelinklistview.$listview.data( 'listview' );
 
-			sitelinklistviewListview.items().each( function() {
+			sitelinklistviewListview.items().each( function () {
 				var $sitelinkview = $( this ),
 					removetoolbar = $sitelinkview.data( 'removetoolbar' );
 

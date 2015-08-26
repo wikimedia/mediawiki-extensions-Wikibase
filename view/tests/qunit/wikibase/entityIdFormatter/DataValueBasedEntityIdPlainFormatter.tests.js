@@ -1,4 +1,4 @@
-( function( $, sinon, QUnit, wb, mw ) {
+( function ( $, sinon, QUnit, wb, mw ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter' );
@@ -7,51 +7,51 @@
 		var parser, formatter;
 		if ( repoType === 'parsefail' ) {
 			parser = {
-				parse: function() { return $.Deferred().reject( 'parse error' ).promise(); }
+				parse: function () { return $.Deferred().reject( 'parse error' ).promise(); }
 			};
 			formatter = null;
 		} else if ( repoType === 'formatfail' ) {
 			parser = {
-				parse: function() { return $.Deferred().resolve( 'parsed DataValue' ).promise(); }
+				parse: function () { return $.Deferred().resolve( 'parsed DataValue' ).promise(); }
 			};
 			formatter = {
-				format: function() { return $.Deferred().reject( 'format error' ).promise(); }
+				format: function () { return $.Deferred().reject( 'format error' ).promise(); }
 			};
 		} else if ( repoType === 'success' ) {
 			parser = {
-				parse: function() { return $.Deferred().resolve( 'parsed DataValue' ).promise(); }
+				parse: function () { return $.Deferred().resolve( 'parsed DataValue' ).promise(); }
 			};
 			formatter = {
-				format: function() { return $.Deferred().resolve( 'formatted value' ).promise(); }
+				format: function () { return $.Deferred().resolve( 'formatted value' ).promise(); }
 			};
 		}
-		return function() {
+		return function () {
 			return new wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter( parser, formatter );
 		};
 	}
 
-	QUnit.test( 'format returns formatter return value', function( assert ) {
+	QUnit.test( 'format returns formatter return value', function ( assert ) {
 		var formatter = newFormatterGetter( 'success' )();
 		var done = assert.async();
-		formatter.format( 'Q1' ).done( function( res ) {
+		formatter.format( 'Q1' ).done( function ( res ) {
 			assert.equal( res, 'formatted value' );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'format falls back to plain id on parse error', function( assert ) {
+	QUnit.test( 'format falls back to plain id on parse error', function ( assert ) {
 		var formatter = newFormatterGetter( 'parsefail' )();
 		var done = assert.async();
-		formatter.format( 'Q1' ).done( function( res ) {
+		formatter.format( 'Q1' ).done( function ( res ) {
 			assert.equal( res, 'Q1' );
 			done();
 		} );
 	} );
 
-	QUnit.test( 'format falls back to plain id on formatter error', function( assert ) {
+	QUnit.test( 'format falls back to plain id on formatter error', function ( assert ) {
 		var formatter = newFormatterGetter( 'formatfail' )();
 		var done = assert.async();
-		formatter.format( 'Q1' ).done( function( res ) {
+		formatter.format( 'Q1' ).done( function ( res ) {
 			assert.equal( res, 'Q1' );
 			done();
 		} );

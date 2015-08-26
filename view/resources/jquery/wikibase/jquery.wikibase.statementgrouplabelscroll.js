@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var WIDGET_NAME = 'statementgrouplabelscroll';
@@ -88,7 +88,7 @@
 			'.wikibase-statementview-mainsnak .wikibase-snakview-value-container'
 		);
 
-		$mainSnaks.each( function( i, mainSnakNode ) {
+		$mainSnaks.each( function ( i, mainSnakNode ) {
 			// Take first Main Snak value in viewport. If value is not fully visible in viewport,
 			// check whether the next one is fully visible, if so, take that one.
 			if ( elementPartlyVerticallyInViewport( mainSnakNode ) ) {
@@ -133,7 +133,7 @@
 		//      obviously not within the viewport.
 		//  (2) remember last visible node, start checking there and depending on scroll movement
 		//      (up/down) on its neighbouring nodes.
-		$statementGroups.each( function( i, statementGroupNode ) {
+		$statementGroups.each( function ( i, statementGroupNode ) {
 			if ( elementPartlyVerticallyInViewport( statementGroupNode ) ) {
 				var $mainSnakElement = findFirstVisibleMainSnakElement( $( statementGroupNode ) );
 				$visibleStatementGroups = $visibleStatementGroups.add( $mainSnakElement );
@@ -160,7 +160,7 @@
 			at: side + ' top',
 			of: $target,
 			within: $within,
-			using: function( css, calc ) {
+			using: function ( css, calc ) {
 				$( this ).animate( css, {
 					queue: ANIMATION_QUEUE,
 					easing: 'easeInOutCubic'
@@ -203,7 +203,7 @@
 		/**
 		 * @see jQuery.Widget._create
 		 */
-		_create: function() {
+		_create: function () {
 			registerWidgetInstance( this );
 
 			// Assume that all labels are in the proper place if no scrolling has happened yet.
@@ -215,7 +215,7 @@
 		/**
 		 * @see jQuery.Widget.destroy
 		 */
-		destroy: function() {
+		destroy: function () {
 			unregisterWidgetInstance( this );
 		},
 
@@ -224,7 +224,7 @@
 		 *
 		 * @since 0.4
 		 */
-		update: function() {
+		update: function () {
 			var startTime = new Date().getTime();
 
 			expensiveChecks = 0;
@@ -270,7 +270,7 @@
 		 * If the "logger" option is set, then this method will forward any given arguments
 		 * to its "log" function.
 		 */
-		_log: function() {
+		_log: function () {
 			var logger = this.option( 'logger' );
 			if ( logger ) {
 				logger.log.apply( logger, arguments );
@@ -284,7 +284,7 @@
 	 *
 	 * @return $.wikibase.statementgrouplabelscroll[]
 	 */
-	$.wikibase[ WIDGET_NAME ].activeInstances = function() {
+	$.wikibase[ WIDGET_NAME ].activeInstances = function () {
 		return activeInstances.slice();
 	};
 

@@ -1,4 +1,4 @@
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -83,7 +83,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !this.options.claimGuidGenerator
 			|| !this.options.entityIdHtmlFormatter
 			|| !this.options.entityStore
@@ -105,7 +105,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	destroy: function() {
+	destroy: function () {
 		if ( this.statementlistview ) {
 			this.statementlistview.element.off( this.widgetName );
 			this.statementlistview.destroy();
@@ -116,7 +116,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	/**
 	 * @private
 	 */
-	_createPropertyLabel: function() {
+	_createPropertyLabel: function () {
 		if ( this.$propertyLabel.contents().length > 0 ) {
 			return;
 		}
@@ -124,7 +124,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 		var self = this,
 			propertyId = this.options.value.getKey();
 
-		this.options.entityIdHtmlFormatter.format( propertyId ).done( function( title ) {
+		this.options.entityIdHtmlFormatter.format( propertyId ).done( function ( title ) {
 			self.$propertyLabel.append( title );
 		} );
 	},
@@ -132,7 +132,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	/**
 	 * @private
 	 */
-	_createStatementlistview: function() {
+	_createStatementlistview: function () {
 		var self = this,
 			prefix;
 
@@ -159,17 +159,17 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 		prefix = this.statementlistview.widgetEventPrefix;
 
 		$statementlistview
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+		.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
 			self.$property.toggleClass( 'wb-error', error );
 		} )
-		.on( prefix + 'afterstopediting.' + this.widgetName, function( event, dropValue ) {
+		.on( prefix + 'afterstopediting.' + this.widgetName, function ( event, dropValue ) {
 			self.$property.removeClass( 'wb-error' ).removeClass( 'wb-edit' );
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} )
-		.on( prefix + 'afterstartediting.' + this.widgetName, function( event ) {
+		.on( prefix + 'afterstartediting.' + this.widgetName, function ( event ) {
 			self.$property.addClass( 'wb-edit' );
 		} )
-		.on( prefix + 'afterremove.' + this.widgetName, function( event ) {
+		.on( prefix + 'afterremove.' + this.widgetName, function ( event ) {
 			self.$property.removeClass( 'wb-error' ).removeClass( 'wb-edit' );
 			self._trigger( 'afterremove' );
 		} );
@@ -182,7 +182,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @param {wikibase.datamodel.StatementGroup} [statementGroupView]
 	 * @return {wikibase.datamodel.StatementGroup|null|undefined}
 	 */
-	value: function( statementGroupView ) {
+	value: function ( statementGroupView ) {
 		if ( statementGroupView === undefined ) {
 			var statementList = this.statementlistview.value();
 			if ( !statementList.length ) {
@@ -207,7 +207,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @throws {Error} when trying to set the value passing something different than a
 	 *         `wikibase.datamodel.StatementGroup´ object.
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'value' && !!value ) {
 			if ( !( value instanceof wb.datamodel.StatementGroup ) ) {
 				throw new Error( 'value needs to be a wb.datamodel.StatementGroup instance' );
@@ -227,7 +227,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
+	focus: function () {
 		this.statementlistview.focus();
 	},
 
@@ -239,7 +239,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @return {Function} return.done
 	 * @return {jQuery} return.done.$statementview
 	 */
-	enterNewItem: function() {
+	enterNewItem: function () {
 		return this.statementlistview.enterNewItem();
 	}
 

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 	/**
@@ -66,7 +66,7 @@
 			filteredString = '',
 			character = '';
 
-		$.each( tagsToIgnore, function( i, tag ) {
+		$.each( tagsToIgnore, function ( i, tag ) {
 			// ignore case since IE8 will convert tag names to upper case
 			var re = new RegExp( '<\\/?' + tag + '[^>]*>', 'gi' );
 			string = string.replace( re, '' );
@@ -188,7 +188,7 @@
 	 *
 	 * @constructor
 	 */
-	mw.WbTemplate = function() { mw.Message.apply( this, arguments ); };
+	mw.WbTemplate = function () { mw.Message.apply( this, arguments ); };
 	mw.WbTemplate.prototype = $.extend(
 		{},
 		mw.Message.prototype,
@@ -202,7 +202,7 @@
 	 *
 	 * @return {string}
 	 */
-	mw.WbTemplate.prototype.plain = function() {
+	mw.WbTemplate.prototype.plain = function () {
 		return this.parser();
 	};
 
@@ -233,7 +233,7 @@
 	 *
 	 * @throws {Error} if the generated template's HTML is invalid.
 	 */
-	mw.wbTemplate = function( key, parameter1 /* [, parameter2[, ...]] */ ) {
+	mw.wbTemplate = function ( key, parameter1 /* [, parameter2[, ...]] */ ) {
 		var i,
 			params = [],
 			template,
@@ -284,7 +284,7 @@
 		}
 
 		// Replace temporary nodes with actual jQuery nodes:
-		$wrappedTemplate.find( '.--mwTemplate' ).each( function( i ) {
+		$wrappedTemplate.find( '.--mwTemplate' ).each( function ( i ) {
 			$( this ).replaceWith( delayedParams[i] );
 		} );
 
@@ -307,7 +307,7 @@
 	 *        arguments, an array may be passed as first parameter.
 	 * @return {jQuery}
 	 */
-	$.fn.applyTemplate = function( template, parameter1 /*[, parameter2[, ...]] */ ) {
+	$.fn.applyTemplate = function ( template, parameter1 /*[, parameter2[, ...]] */ ) {
 		var $template = mw.wbTemplate.apply( null, arguments );
 
 		if ( $template.length !== 1 ) {

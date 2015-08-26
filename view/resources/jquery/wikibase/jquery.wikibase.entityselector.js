@@ -1,4 +1,4 @@
-( function( $, util, mw ) {
+( function ( $, util, mw ) {
 	'use strict';
 
 // TODO: Get rid of MediaWiki context detection by submitting a message provider as option.
@@ -119,7 +119,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_create: function() {
+	_create: function () {
 		var self = this;
 
 		this._cache = {};
@@ -147,7 +147,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 
 		this.element
 		.off( 'blur' )
-		.on( 'eachchange.' + this.widgetName, function( event ) {
+		.on( 'eachchange.' + this.widgetName, function ( event ) {
 			self._search( event );
 		} );
 	},
@@ -155,7 +155,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	/**
 	 * @inheritdoc
 	 */
-	destroy: function() {
+	destroy: function () {
 		this.element.removeClass( 'ui-entityselector-input' );
 
 		this._cache = {};
@@ -168,16 +168,16 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 *
 	 * @param {jQuery.Event} event
 	 */
-	_search: function( event ) {
+	_search: function ( event ) {
 		var self = this;
 
 		this._cache = {};
 		this._select( null );
 
 		clearTimeout( this._searching );
-		this._searching = setTimeout( function() {
+		this._searching = setTimeout( function () {
 			self.search( event )
-			.done( function( suggestions, requestTerm ) {
+			.done( function ( suggestions, requestTerm ) {
 				if ( !suggestions.length || self.element.val() !== requestTerm ) {
 					return;
 				}
@@ -197,7 +197,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @param {Object} suggestion
 	 * @return {boolean}
 	 */
-	_termMatchesSuggestion: function( term, suggestion ) {
+	_termMatchesSuggestion: function ( term, suggestion ) {
 		var label = suggestion.label || suggestion.id;
 		return label === term
 			|| !this.options.caseSensitive && label.toLowerCase() === term.toLowerCase()
@@ -211,7 +211,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @param {string} term
 	 * @return {Object}
 	 */
-	_getData: function( term ) {
+	_getData: function ( term ) {
 		return {
 			action: 'wbsearchentities',
 			search: term,
@@ -231,10 +231,10 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 *
 	 * @return {Function}
 	 */
-	_initDefaultSource: function() {
+	_initDefaultSource: function () {
 		var self = this;
 
-		return function( term ) {
+		return function ( term ) {
 			var deferred = $.Deferred(),
 				data = self._getData( term );
 
@@ -250,14 +250,14 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 				dataType: 'json',
 				data: data
 			} )
-			.done( function( response ) {
+			.done( function ( response ) {
 				deferred.resolve(
 					response.search,
 					response.searchinfo.search,
 					response['search-continue']
 				);
 			} )
-			.fail( function( jqXHR, textStatus ) {
+			.fail( function ( jqXHR, textStatus ) {
 				deferred.reject( textStatus );
 			} );
 
@@ -269,7 +269,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_updateMenu: function( suggestions ) {
+	_updateMenu: function ( suggestions ) {
 		var scrollTop = this.options.menu.element.scrollTop();
 
 		$.ui.suggester.prototype._updateMenu.apply( this, arguments );
@@ -284,7 +284,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @param {Object} entityStub
 	 * @return {jQuery}
 	 */
-	_createLabelFromSuggestion: function( entityStub ) {
+	_createLabelFromSuggestion: function ( entityStub ) {
 		var $suggestion = $( '<span class="ui-entityselector-itemcontent"/>' ),
 				$label = $( '<span class="ui-entityselector-label"/>' ).text( entityStub.label || entityStub.id );
 
@@ -310,7 +310,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_createMenuItemFromSuggestion: function( suggestion ) {
+	_createMenuItemFromSuggestion: function ( suggestion ) {
 		var $label = this._createLabelFromSuggestion( suggestion ),
 			value = suggestion.label || suggestion.id;
 
@@ -321,14 +321,14 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_initMenu: function( ooMenu ) {
+	_initMenu: function ( ooMenu ) {
 		var self = this;
 
 		$.ui.suggester.prototype._initMenu.apply( this, arguments );
 
 		$( this.options.menu )
 		.off( 'selected.suggester' )
-		.on( 'selected.entityselector', function( event, item ) {
+		.on( 'selected.entityselector', function ( event, item ) {
 			if ( item.getEntityStub ) {
 				if ( !self.options.caseSensitive
 					&& item.getValue().toLowerCase() === self._term.toLowerCase()
@@ -352,19 +352,19 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 		var customItems = ooMenu.option( 'customItems' );
 		customItems.unshift( new $.ui.ooMenu.CustomItem(
 			this.options.messages.more,
-			function() {
+			function () {
 				var cached = self._cache[self._term];
 				return cached
 					&& cached.nextSuggestionOffset
 					&& cached.nextSuggestionOffset > cached.suggestions.length - 1;
 			},
-			function() {
+			function () {
 				self.search( $.Event( 'programmatic' ) );
 			},
 			'ui-entityselector-more'
 		) );
 
-		ooMenu._evaluateVisibility = function( customItem ) {
+		ooMenu._evaluateVisibility = function ( customItem ) {
 			if ( customItem instanceof $.ui.ooMenu.CustomItem ) {
 				return customItem.getVisibility( ooMenu );
 			} else {
@@ -381,11 +381,11 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_getSuggestions: function( term ) {
+	_getSuggestions: function ( term ) {
 		var self = this;
 
 		return $.ui.suggester.prototype._getSuggestions.apply( this, arguments )
-		.then( function( suggestions, searchTerm, nextSuggestionOffset ) {
+		.then( function ( suggestions, searchTerm, nextSuggestionOffset ) {
 			var deferred = $.Deferred();
 
 			if ( self._cache[searchTerm] ) {
@@ -408,11 +408,11 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_getSuggestionsFromArray: function( term, source ) {
+	_getSuggestionsFromArray: function ( term, source ) {
 		var deferred = $.Deferred(),
 			matcher = new RegExp( this._escapeRegex( term ), 'i' );
 
-		deferred.resolve( $.grep( source, function( item ) {
+		deferred.resolve( $.grep( source, function ( item ) {
 			if ( item.aliases ) {
 				for ( var i = 0; i < item.aliases.length; i++ ) {
 					if ( matcher.test( item.aliases[i] ) ) {
@@ -433,7 +433,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 *
 	 * @param {Object} entityStub
 	 */
-	_select: function( entityStub ) {
+	_select: function ( entityStub ) {
 		var id = entityStub && entityStub.id;
 		this._selectedEntity = entityStub;
 		if ( id ) {
@@ -446,7 +446,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	 *
 	 * @return {Object} Plain object featuring `Entity` stub data.
 	 */
-	selectedEntity: function() {
+	selectedEntity: function () {
 		return this._selectedEntity;
 	}
 } );
@@ -464,7 +464,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
  *
  * @throws {Error} if a required parameter is not specified properly.
  */
-var Item = function( label, value, entityStub ) {
+var Item = function ( label, value, entityStub ) {
 	if ( !label || !value || !entityStub ) {
 		throw new Error( 'Required parameter(s) not specified properly' );
 	}
@@ -488,7 +488,7 @@ Item = util.inherit(
 		/**
 		 * @return {Object}
 		 */
-		getEntityStub: function() {
+		getEntityStub: function () {
 			return this._entityStub;
 		}
 	}

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-( function( wb, mw, $ ) {
+( function ( wb, mw, $ ) {
 'use strict';
 
 /**
@@ -85,7 +85,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @see jQuery.Widget._create
 	 */
-	_create: function() {
+	_create: function () {
 		var self = this,
 			$dialogSpinner = $.createSpinner();
 
@@ -97,7 +97,7 @@ $.widget( 'wikibase.linkitem', {
 			action: 'query',
 			meta: 'userinfo'
 		} )
-		.done( function( data ) {
+		.done( function ( data ) {
 			$dialogSpinner.remove();
 
 			if ( data.query.userinfo.anon !== undefined ) {
@@ -109,7 +109,7 @@ $.widget( 'wikibase.linkitem', {
 			self._createDialog();
 			$( '#wbclient-linkItem-site' ).focus();
 		} )
-		.fail( function( errorCode, errorInfo ) {
+		.fail( function ( errorCode, errorInfo ) {
 			$dialogSpinner.remove();
 			self.element.show();
 
@@ -120,7 +120,7 @@ $.widget( 'wikibase.linkitem', {
 			} );
 
 			self.element.data( 'wbtooltip' ).show();
-			self.element.one( 'click.' + self.widgetName, function() {
+			self.element.one( 'click.' + self.widgetName, function () {
 				// Remove the tooltip by the time the user clicks the link again.
 				self.element.data( 'wbtooltip' ).destroy();
 			} );
@@ -130,7 +130,7 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * Show an error to the user in case he isn't logged in on both the client and the repo
 	 */
-	_notLoggedIn: function() {
+	_notLoggedIn: function () {
 		var self = this;
 
 		var userLogin = this._linkRepoTitle( 'Special:UserLogin' );
@@ -141,7 +141,7 @@ $.widget( 'wikibase.linkitem', {
 			height: 200,
 			resizable: true
 		} )
-		.on( 'dialogclose', function() {
+		.on( 'dialogclose', function () {
 			self._trigger( 'dialogclose' );
 		} )
 		.append(
@@ -154,7 +154,7 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * Create the dialog asking for a page the user wants to link with the current one
 	 */
-	_createDialog: function() {
+	_createDialog: function () {
 		this.$dialog = $( '<div>' )
 			.attr( 'id', 'wbclient-linkItem-dialog' )
 			.dialog( {
@@ -172,7 +172,7 @@ $.widget( 'wikibase.linkitem', {
 			} )
 			// Use .on instead of passing this to dialog() as close as we want to be able to remove
 			// it later:
-			.on( 'dialogclose', $.proxy( function() {
+			.on( 'dialogclose', $.proxy( function () {
 				this.element.show();
 				this._trigger( 'dialogclose' );
 			}, this ) )
@@ -185,7 +185,7 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * @see jQuery.Widget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		if ( this.$dialog && this.$dialog.length ) {
 			this.$dialog.remove();
 		}
@@ -209,7 +209,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @return {jQuery}
 	 */
-	_createSiteLinkForm: function() {
+	_createSiteLinkForm: function () {
 		return $( '<form>' )
 		.attr( 'name', 'wikibase-linkItem-form' )
 		.append( this._createSiteInput() )
@@ -222,7 +222,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @return {jQuery}
 	 */
-	_createSiteInput: function() {
+	_createSiteInput: function () {
 		return $( '<label>' )
 		.attr( 'for', 'wbclient-linkItem-site' )
 		.text( mw.msg( 'wikibase-linkitem-input-site' ) )
@@ -249,7 +249,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @return {object}
 	 */
-	_getLinkableSites: function() {
+	_getLinkableSites: function () {
 		var sites,
 			linkableSites = [],
 			site,
@@ -270,7 +270,7 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * Handles changes to the siteselector
 	 */
-	_onSiteSelectorChangeHandler: function() {
+	_onSiteSelectorChangeHandler: function () {
 		var apiUrl,
 			$page = $( '#wbclient-linkItem-page' );
 
@@ -291,7 +291,7 @@ $.widget( 'wikibase.linkitem', {
 		$page
 		.removeAttr( 'disabled' )
 		.suggester( {
-			source: function( term ) {
+			source: function ( term ) {
 				var deferred = $.Deferred();
 
 				$.ajax( {
@@ -303,10 +303,10 @@ $.widget( 'wikibase.linkitem', {
 					},
 					timeout: 8000
 				} )
-				.done( function( response ) {
+				.done( function ( response ) {
 					deferred.resolve( response[1], response[0] );
 				} )
-				.fail( function( jqXHR, textStatus ) {
+				.fail( function ( jqXHR, textStatus ) {
 					deferred.reject( textStatus );
 				} );
 
@@ -320,7 +320,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @return {jQuery}
 	 */
-	_createPageInput: function() {
+	_createPageInput: function () {
 		var self = this;
 
 		return $( '<label>' )
@@ -338,7 +338,7 @@ $.widget( 'wikibase.linkitem', {
 				// Enable the button if the field has a value
 				self.$goButton.button( $( this ).val() === '' ? 'disable' : 'enable' );
 			} )
-			.on( 'keydown', function( e ) {
+			.on( 'keydown', function ( e ) {
 				if ( !self.$goButton.prop( 'disabled' ) && e.which === 13 ) {
 					// Enter should submit
 					self.$goButton.trigger( 'click' );
@@ -351,7 +351,7 @@ $.widget( 'wikibase.linkitem', {
 	 * Called after the user specified site and a page name. Looks up any existing items or tries to
 	 * link the currently viewed page with an existing item.
 	 */
-	_secondStep: function() {
+	_secondStep: function () {
 		this.targetSite = $( '#wbclient-linkItem-site' ).siteselector( 'getSelectedSite' ).getId();
 		this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
@@ -375,7 +375,7 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * Replaces the $goButton button with a loading spinner.
 	 */
-	_showSpinner: function() {
+	_showSpinner: function () {
 		this.$spinner = $.createSpinner();
 		this.$goButton
 			.hide()
@@ -385,7 +385,7 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * Removes the spinner created with _showSpinner and shows the original button again.
 	 */
-	_removeSpinner: function() {
+	_removeSpinner: function () {
 		if ( !this.$spinner || !this.$spinner.length ) {
 			return;
 		}
@@ -399,7 +399,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @param {object} entity
 	 */
-	_onConfirmationDataLoad: function( entity ) {
+	_onConfirmationDataLoad: function ( entity ) {
 		var i, itemLink;
 
 		if ( entity && entity.sitelinks ) {
@@ -450,7 +450,7 @@ $.widget( 'wikibase.linkitem', {
 	 * @param {number} siteLinkCount Number of sitelinks attached to the entity
 	 * @param {string} itemLink Link to the entity on the repo
 	 */
-	_userConfirmEntity: function( entity, siteLinkCount, itemLink ) {
+	_userConfirmEntity: function ( entity, siteLinkCount, itemLink ) {
 		var self = this,
 			confirmationMsg = mw.message(
 				'wikibase-linkitem-confirmitem-text',
@@ -467,7 +467,7 @@ $.widget( 'wikibase.linkitem', {
 		this.$goButton
 			.off( 'click' )
 			.button( 'option', 'label', mw.msg( 'wikibase-linkitem-confirmitem-button' ) )
-			.click( function() {
+			.click( function () {
 				// The user confirmed that this is the right item...
 				self._showSpinner();
 				self._pageConnector.linkPages()
@@ -483,7 +483,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @return {jQuery}
 	 */
-	_createSiteLinkTable: function( entity ) {
+	_createSiteLinkTable: function ( entity ) {
 		var i, $siteLinks;
 
 		$siteLinks = $( '<div>' )
@@ -524,7 +524,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @return {jQuery}
 	 */
-	_createSiteLinkRow: function( site, entitySitelinks ) {
+	_createSiteLinkRow: function ( site, entitySitelinks ) {
 		return $( '<tr>' )
 			.append(
 				$( '<td>' )
@@ -544,7 +544,7 @@ $.widget( 'wikibase.linkitem', {
 	 * Called after an entity has successfully been linked or created. Replaces the dialog content
 	 * with a useful message linking the (new) item.
 	 */
-	_onSuccess: function() {
+	_onSuccess: function () {
 		var mwApi = new mw.Api(),
 			itemUri = this._linkRepoTitle(
 				'Special:ItemByTitle/' + this.options.globalSiteId + '/' + this.options.pageTitle
@@ -564,7 +564,7 @@ $.widget( 'wikibase.linkitem', {
 		// Replace the button with one asking to close the dialog and reload the current page
 		this.$goButton
 			.off( 'click' )
-			.click( $.proxy( function() {
+			.click( $.proxy( function () {
 				this._showSpinner();
 				window.location.reload( true );
 			}, this ) )
@@ -589,7 +589,7 @@ $.widget( 'wikibase.linkitem', {
 	 * @param {string} errorCode
 	 * @param {Object} [errorInfo]
 	 */
-	_onError: function( errorCode, errorInfo ) {
+	_onError: function ( errorCode, errorInfo ) {
 		var error = errorInfo
 			? wb.api.RepoApiError.newFromApiResponse( errorInfo )
 			: errorCode;
@@ -610,7 +610,7 @@ $.widget( 'wikibase.linkitem', {
 
 		// Remove the tooltip if the user clicks onto the dialog trying to correct the input
 		// Also remove the tooltip in case the dialog is getting closed
-		this.$dialog.one( 'dialogclose click', function() {
+		this.$dialog.one( 'dialogclose click', function () {
 			if ( $elem.data( 'wbtooltip' ) ) {
 				$elem.data( 'wbtooltip' ).destroy();
 			}
@@ -624,7 +624,7 @@ $.widget( 'wikibase.linkitem', {
 	 *
 	 * @return {string}
 	 */
-	_linkRepoTitle: function( title ) {
+	_linkRepoTitle: function ( title ) {
 		return this.options.repoArticlePath.replace( /\$1/g, mw.util.wikiUrlencode( title ) );
 	}
 } );

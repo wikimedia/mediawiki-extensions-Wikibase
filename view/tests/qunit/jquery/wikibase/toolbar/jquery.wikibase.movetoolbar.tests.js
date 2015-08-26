@@ -2,13 +2,13 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.wikibase.movetoolbar', QUnit.newMwEnvironment( {
-	setup: function() {
+	setup: function () {
 		$.widget( 'wikibasetest.valuewidget', {
-			value: function( value ) {
+			value: function ( value ) {
 				if ( value ) {
 					this.options.value = value;
 				}
@@ -16,13 +16,13 @@ QUnit.module( 'jquery.wikibase.movetoolbar', QUnit.newMwEnvironment( {
 			}
 		} );
 	},
-	teardown: function() {
-		$( '.test_listview' ).each( function() {
+	teardown: function () {
+		$( '.test_listview' ).each( function () {
 			var $listview = $( this ),
 				listview = $listview.data( 'listview' );
 
 			if ( listview ) {
-				listview.items().each( function() {
+				listview.items().each( function () {
 					var $movetoolbar = $( this ),
 						movetoolbar = $movetoolbar.data( 'movetoolbar' );
 
@@ -51,7 +51,7 @@ function createListview( value ) {
 	$listview.listview( {
 		listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibasetest.valuewidget,
-			newItemOptionsFn: function( value ) {
+			newItemOptionsFn: function ( value ) {
 				return { value: value || null };
 			}
 		} ),
@@ -69,14 +69,14 @@ function createListViewWithMovetoolbar( listviewValue ) {
 	var $listview = createListview( listviewValue ),
 		listview = $listview.data( 'listview' );
 
-	listview.items().each( function( i, itemNode ) {
+	listview.items().each( function ( i, itemNode ) {
 		$( itemNode ).movetoolbar( { listView: listview } );
 	} );
 
 	return $listview;
 }
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var items = ['a', 'b', 'c'],
 		$listview = createListViewWithMovetoolbar( items ),
 		listview = $listview.data( 'listview' ),
@@ -120,21 +120,21 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Button events', 2, function( assert ) {
+QUnit.test( 'Button events', 2, function ( assert ) {
 	var items = ['a', 'b', 'c'],
 		$listview = createListViewWithMovetoolbar( items ),
 		listview = $listview.data( 'listview' ),
 		$movetoolbar = listview.items().first(),
 		movetoolbar = $movetoolbar.data( 'movetoolbar' );
 
-	$movetoolbar.on( 'movetoolbarup', function( event ) {
+	$movetoolbar.on( 'movetoolbarup', function ( event ) {
 		assert.ok(
 			true,
 			'Triggered "up" event.'
 		);
 	} );
 
-	$movetoolbar.on( 'movetoolbardown', function( event ) {
+	$movetoolbar.on( 'movetoolbardown', function ( event ) {
 		assert.ok(
 			true,
 			'Triggered "down" event.'

@@ -2,12 +2,12 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.wikibase.toolbar', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_toolbar' ).each( function() {
+	teardown: function () {
+		$( '.test_toolbar' ).each( function () {
 			var $toolbar = $( this ),
 				toolbar = $toolbar.data( 'toolbar' );
 
@@ -30,7 +30,7 @@ function createTestToolbar( options ) {
 		.toolbar( options || {} );
 }
 
-QUnit.test( 'Create & destroy empty toolbar', function( assert ) {
+QUnit.test( 'Create & destroy empty toolbar', function ( assert ) {
 	var $toolbar = createTestToolbar(),
 		toolbar = $toolbar.data( 'toolbar' );
 
@@ -53,7 +53,7 @@ QUnit.test( 'Create & destroy empty toolbar', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Create & destroy toolbar with initial content', function( assert ) {
+QUnit.test( 'Create & destroy toolbar with initial content', function ( assert ) {
 	var $container = $( '<span/>' ),
 		$button = $( '<span/>' ).toolbarbutton( {
 			$label: 'label'
@@ -91,7 +91,7 @@ QUnit.test( 'Create & destroy toolbar with initial content', function( assert ) 
 	);
 } );
 
-QUnit.test( 'Create & destroy with renderItemSeparators=true', function( assert ) {
+QUnit.test( 'Create & destroy with renderItemSeparators=true', function ( assert ) {
 	var $button = $( '<span/>' ).toolbarbutton( {
 			$label: 'label'
 		} ),
@@ -115,7 +115,7 @@ QUnit.test( 'Create & destroy with renderItemSeparators=true', function( assert 
 	);
 } );
 
-QUnit.test( 'Set content dynamically via option()', function( assert ) {
+QUnit.test( 'Set content dynamically via option()', function ( assert ) {
 	var $toolbar = createTestToolbar(),
 		toolbar = $toolbar.data( 'toolbar' ),
 		$button = $( '<span/>' ).toolbarbutton( {

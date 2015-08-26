@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 /**
@@ -10,7 +10,7 @@
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createLabelview = function( options, $node ) {
+var createLabelview = function ( options, $node ) {
 	options = $.extend( {
 		labelsChanger: 'I am a LabelsChanger',
 		value: new wb.datamodel.Term( 'en', 'test label' )
@@ -22,7 +22,7 @@ var createLabelview = function( options, $node ) {
 		.addClass( 'test_labelview' )
 		.labelview( options );
 
-	$labelview.data( 'labelview' )._save = function() {
+	$labelview.data( 'labelview' )._save = function () {
 		return $.Deferred().resolve( {
 			entity: {
 				lastrevid: 'I am a revision id'
@@ -34,8 +34,8 @@ var createLabelview = function( options, $node ) {
 };
 
 QUnit.module( 'jquery.wikibase.labelview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_labelview' ).each( function() {
+	teardown: function () {
+		$( '.test_labelview' ).each( function () {
 			var $labelview = $( this ),
 				labelview = $labelview.data( 'labelview' );
 
@@ -48,9 +48,9 @@ QUnit.module( 'jquery.wikibase.labelview', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.throws(
-		function() {
+		function () {
 			createLabelview( { value: null } );
 		},
 		'Throwing error when trying to initialize widget without a value.'
@@ -72,7 +72,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
+QUnit.test( 'startEditing() & stopEditing()', 5, function ( assert ) {
 	var $labelview = createLabelview( {
 			labelsChanger: {
 				setLabel: function () { return $.Deferred().resolve(); }
@@ -81,13 +81,13 @@ QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
 		labelview = $labelview.data( 'labelview' );
 
 	$labelview
-	.on( 'labelviewafterstartediting', function( event ) {
+	.on( 'labelviewafterstartediting', function ( event ) {
 		assert.ok(
 			true,
 			'Started edit mode.'
 		);
 	} )
-	.on( 'labelviewafterstopediting', function( event, dropValue ) {
+	.on( 'labelviewafterstopediting', function ( event, dropValue ) {
 		assert.ok(
 			true,
 			'Stopped edit mode.'
@@ -112,7 +112,7 @@ QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
 	labelview.stopEditing();
 } );
 
-QUnit.test( 'isInitialValue()', function( assert ) {
+QUnit.test( 'isInitialValue()', function ( assert ) {
 	var $labelview = createLabelview(),
 		labelview = $labelview.data( 'labelview' );
 
@@ -138,12 +138,12 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'setError()', function( assert ) {
+QUnit.test( 'setError()', function ( assert ) {
 	var $labelview = createLabelview(),
 		labelview = $labelview.data( 'labelview' );
 
 	$labelview
-	.on( 'labelviewtoggleerror', function( event, error ) {
+	.on( 'labelviewtoggleerror', function ( event, error ) {
 		assert.ok(
 			true,
 			'Triggered "toggleerror" event.'
@@ -153,13 +153,13 @@ QUnit.test( 'setError()', function( assert ) {
 	labelview.setError();
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	var $labelview = createLabelview(),
 		labelview = $labelview.data( 'labelview' ),
 		newValue = null;
 
 	assert.throws(
-		function() {
+		function () {
 			labelview.value( newValue );
 		},
 		'Trying to set no value fails.'

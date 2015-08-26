@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -12,7 +12,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 	selector: ':' + $.wikibase.statementview.prototype.namespace
 		+ '-' + $.wikibase.statementview.prototype.widgetName,
 	events: {
-		statementviewcreate: function( event, toolbarcontroller ) {
+		statementviewcreate: function ( event, toolbarcontroller ) {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' ),
 				options = {
@@ -27,7 +27,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			options.$container = $container;
 
 			if ( !!statementview.value() ) {
-				options.onRemove = function() {
+				options.onRemove = function () {
 					var $statementlistview
 							= $statementview.closest( ':wikibase-statementlistview' ),
 						statementlistview = $statementlistview.data( 'statementlistview' );
@@ -39,7 +39,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			$statementview.edittoolbar( options );
 
-			$statementview.on( 'keydown.edittoolbar', function( event ) {
+			$statementview.on( 'keydown.edittoolbar', function ( event ) {
 				if ( statementview.option( 'disabled' ) ) {
 					return;
 				}
@@ -50,12 +50,12 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				}
 			} );
 		},
-		statementviewdestroy: function( event, toolbarController ) {
+		statementviewdestroy: function ( event, toolbarController ) {
 			var $statementview = $( event.target );
 			toolbarController.destroyToolbar( $statementview.data( 'edittoolbar' ) );
 			$statementview.off( '.edittoolbar' );
 		},
-		'statementviewchange statementviewafterstartediting': function( event ) {
+		'statementviewchange statementviewafterstartediting': function ( event ) {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' ),
 				edittoolbar = $statementview.data( 'edittoolbar' ),
@@ -89,7 +89,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[shouldEnableSaveButton( statementview ) ? 'enable' : 'disable']();
 		},
-		statementviewdisable: function( event ) {
+		statementviewdisable: function ( event ) {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' ),
 				edittoolbar = $statementview.data( 'edittoolbar' ),
@@ -98,7 +98,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[enable ? 'enable' : 'disable']();
 		},
-		edittoolbaredit: function( event, toolbarcontroller ) {
+		edittoolbaredit: function ( event, toolbarcontroller ) {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' );
 

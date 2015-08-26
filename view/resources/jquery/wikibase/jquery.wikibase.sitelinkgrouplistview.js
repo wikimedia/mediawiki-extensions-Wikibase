@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, $, mw ) {
+( function ( wb, $, mw ) {
 	'use strict';
 
 /**
@@ -18,7 +18,7 @@
 function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 	var value = [];
 
-	$siteLinks.find( '.wikibase-sitelinkgroupview' ).each( function() {
+	$siteLinks.find( '.wikibase-sitelinkgroupview' ).each( function () {
 		var $sitelinkgroupview = $( this ),
 			$sitelinklistview = $sitelinkgroupview.find( '.wikibase-sitelinklistview' ),
 			group = $sitelinkgroupview.data( 'wb-sitelinks-group' ),
@@ -26,7 +26,7 @@ function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 			siteLinkIds = siteLinkSet.getKeys(),
 			siteLinksOfGroup = [];
 
-		$sitelinklistview.find( '.wikibase-sitelinkview' ).each( function() {
+		$sitelinklistview.find( '.wikibase-sitelinkview' ).each( function () {
 			siteIdsOfGroup.push( $( this ).data( 'wb-siteid' ) );
 		} );
 
@@ -58,7 +58,7 @@ function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 function orderSiteLinksByGroup( siteLinkSet ) {
 	var value = [];
 
-	siteLinkSet.each( function( siteId, siteLink ) {
+	siteLinkSet.each( function ( siteId, siteLink ) {
 		var site = wb.sites.getSite( siteId ),
 			found = false;
 
@@ -123,7 +123,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !this.options.value || !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required option(s) missing' );
 		}
@@ -140,7 +140,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		if ( this.$listview ) {
 			var listview = this.$listview.data( 'listview' );
 			if ( listview ) {
@@ -153,7 +153,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 		PARENT.prototype.destroy.call( this );
 	},
 
-	_createListview: function() {
+	_createListview: function () {
 		var self = this,
 			prefix = $.wikibase.sitelinkgroupview.prototype.widgetEventPrefix;
 
@@ -171,7 +171,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 		.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibase.sitelinkgroupview,
-				newItemOptionsFn: function( value ) {
+				newItemOptionsFn: function ( value ) {
 					return {
 						value: value,
 						siteLinksChanger: self.options.siteLinksChanger,
@@ -184,7 +184,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 			value: value,
 			encapsulate: true
 		} )
-		.on( prefix + 'disable.' + this.widgetName, function( event ) {
+		.on( prefix + 'disable.' + this.widgetName, function ( event ) {
 			event.stopPropagation();
 		} );
 	},
@@ -192,7 +192,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'disabled' ) {
@@ -205,7 +205,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.focus
 	 */
-	focus: function() {
+	focus: function () {
 		var listview = this.$listview.data( 'listview' ),
 			$items = listview.items();
 

@@ -1,4 +1,4 @@
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 	/**
@@ -77,7 +77,7 @@
 		 * @param {string} [name]
 		 * @return {string}
 		 */
-		prefixedEvent: function( name ) {
+		prefixedEvent: function ( name ) {
 			return this._options.listItemWidget.prototype.widgetEventPrefix + ( name || '' );
 		},
 
@@ -87,7 +87,7 @@
 		 * @param {jQuery} $node
 		 * @return {*|null}
 		 */
-		liInstance: function( $node ) {
+		liInstance: function ( $node ) {
 			return $node.data( this._options.listItemWidget.prototype.widgetName ) || null;
 		},
 
@@ -100,7 +100,7 @@
 		 *        list item will be an empty one.
 		 * @return {jQuery.Widget}
 		 */
-		newListItem: function( $subject, value ) {
+		newListItem: function ( $subject, value ) {
 			return new this._options.listItemWidget(
 				this._options.newItemOptionsFn.call( this, value === undefined ? null : value ),
 				// give DOM element, otherwise .data() will be assigned to jQuery object and can't

@@ -79,7 +79,7 @@
  *        - {jQuery.Event}
  *        - {jQuery} $tag
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 $.widget( 'ui.tagadata', {
@@ -109,7 +109,7 @@ $.widget( 'ui.tagadata', {
 	/**
 	 * @see jQuery.Widget._create
 	 */
-	_create: function() {
+	_create: function () {
 		var self = this;
 
 		this._$tagList = this.element.find( 'ul, ol' ).addBack().last();
@@ -118,7 +118,7 @@ $.widget( 'ui.tagadata', {
 		this._$tagList
 		.addClass( 'tagadata' )
 		.addClass( 'ui-widget ui-widget-content ui-corner-all' )
-		.on( 'click.tagadata', function( event ) {
+		.on( 'click.tagadata', function ( event ) {
 			var target = $( event.target );
 			if ( target.hasClass( 'tagadata-label' ) ) {
 				self._trigger( 'tagClicked', event, target.closest( '.tagadata-choice' ) );
@@ -126,7 +126,7 @@ $.widget( 'ui.tagadata', {
 		} );
 
 		// Add existing tags from the list, if any
-		this._$tagList.children( 'li' ).each( function() {
+		this._$tagList.children( 'li' ).each( function () {
 			var newTagLabel = $( this ).text();
 			if ( self._formatLabel( newTagLabel ) !== '' ) { // don't initialize empty tags here
 				var $newTag = self.createTag( newTagLabel, $( this ).attr( 'class' ) );
@@ -142,7 +142,7 @@ $.widget( 'ui.tagadata', {
 	/**
 	 * @see jQuery.Widget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		var self = this;
 
 		this._$tagList
@@ -150,7 +150,7 @@ $.widget( 'ui.tagadata', {
 			+ 'tagadata-disabled' )
 		.off( '.tagadata' );
 
-		this._$tagList.children( 'li' ).each( function() {
+		this._$tagList.children( 'li' ).each( function () {
 			var $tag = $( this ),
 				text = self.getTagLabel( $tag );
 
@@ -180,12 +180,12 @@ $.widget( 'ui.tagadata', {
 	 *
 	 * @return {jQuery}
 	 */
-	getTags: function() {
+	getTags: function () {
 		var self = this,
 			$tags = $(),
 			usedLabels = [];
 
-		this._$tagList.children( '.tagadata-choice' ).each( function() {
+		this._$tagList.children( '.tagadata-choice' ).each( function () {
 			var $tag = $( this );
 
 			// Check if already removed but still assigned till animations end:
@@ -207,11 +207,11 @@ $.widget( 'ui.tagadata', {
 	 * @param {string} label
 	 * @return {jQuery|null}
 	 */
-	getTag: function( label ) {
+	getTag: function ( label ) {
 		var self = this,
 			result = null;
 
-		this._$tagList.children( '.tagadata-choice' ).each( function() {
+		this._$tagList.children( '.tagadata-choice' ).each( function () {
 			var $tag = $( this );
 			if ( self._formatLabel( label ) === self._formatLabel( self.getTagLabel( $tag ) ) ) {
 				result = $tag;
@@ -228,11 +228,11 @@ $.widget( 'ui.tagadata', {
 	 * @param {string} label
 	 * @return {jQuery}
 	 */
-	_getTags: function( label ) {
+	_getTags: function ( label ) {
 		var self = this;
 		label = this._formatLabel( label );
 
-		return this._$tagList.children( '.tagadata-choice' ).filter( function() {
+		return this._$tagList.children( '.tagadata-choice' ).filter( function () {
 			return self.getTagLabel( $( this ) ) === label;
 		} );
 	},
@@ -243,7 +243,7 @@ $.widget( 'ui.tagadata', {
 	 * @param {jQuery} $tag
 	 * @return {string}
 	 */
-	getTagLabel: function( $tag ) {
+	getTagLabel: function ( $tag ) {
 		var $input = $tag.find( 'input[type=text]' );
 		return this._formatLabel(
 			$input.length ? $input.val() : $tag.find( '.tagadata-label' ).text()
@@ -254,7 +254,7 @@ $.widget( 'ui.tagadata', {
 	 * @param {string} string
 	 * @return {string}
 	 */
-	_formatLabel: function( string ) {
+	_formatLabel: function ( string ) {
 		string = $.trim( string );
 		if ( this.options.caseSensitive ) {
 			return string;
@@ -267,13 +267,13 @@ $.widget( 'ui.tagadata', {
 	 *
 	 * @param {jQuery} $tag
 	 */
-	highlightTag: function( $tag ) {
+	highlightTag: function ( $tag ) {
 		$tag.switchClass(
 			'',
 			'tagadata-choice-existing ui-state-highlight',
 			150,
 			'linear',
-			function() {
+			function () {
 				// also remove 'remove' class to avoid confusion
 				$tag.switchClass(
 					'tagadata-choice-existing ui-state-highlight remove',
@@ -294,7 +294,7 @@ $.widget( 'ui.tagadata', {
 	 * @param {boolean} [forceTextInput]
 	 * @return {jQuery}
 	 */
-	createTag: function( value, additionalClasses, forceTextInput ) {
+	createTag: function ( value, additionalClasses, forceTextInput ) {
 		value = this._formatLabel( value );
 
 		var $tag = this.getTag( value );
@@ -350,7 +350,7 @@ $.widget( 'ui.tagadata', {
 	/**
 	 *  @return {jQuery}
 	 */
-	_createTagNode: function() {
+	_createTagNode: function () {
 		var self = this;
 
 		var $tag = $( '<li>' )
@@ -359,7 +359,7 @@ $.widget( 'ui.tagadata', {
 		var $removeTag = $( '<a><span class="text-icon">\xd7</span></a>' )// \xd7 is an X
 			.addClass( 'tagadata-close' )
 			.append( $( '<span/>' ).addClass( 'ui-icon ui-icon-close' ) )
-			.click( function() {
+			.click( function () {
 				if ( !self.option( 'disabled' ) ) {
 					self.removeTag( $tag );
 				}
@@ -372,15 +372,15 @@ $.widget( 'ui.tagadata', {
 	/**
 	 * @param {jQuery} $tag
 	 */
-	_initTagEvents: function( $tag ) {
+	_initTagEvents: function ( $tag ) {
 		var self = this,
 			$input = $tag.find( 'input' );
 
 		$input
-		.on( 'focus.' + this.widgetName, function() {
+		.on( 'focus.' + this.widgetName, function () {
 			$tag.addClass( 'tagadata-choice-active' );
 		} )
-		.on( 'blur.' + this.widgetName, function() {
+		.on( 'blur.' + this.widgetName, function () {
 			// remove tag if it is empty already:
 			if ( self._formatLabel( $input.val() ) === ''
 				&& self.getTags().length > 1
@@ -389,7 +389,7 @@ $.widget( 'ui.tagadata', {
 				self.removeTag( $tag );
 			}
 		} )
-		.on( 'eachchange.' + this.widgetName, function( event, oldValue ) {
+		.on( 'eachchange.' + this.widgetName, function ( event, oldValue ) {
 			// input change registered, check whether tag was really changed...
 			var oldNormalValue = self._formatLabel( oldValue ),
 				newNormalValue = self._formatLabel( $input.val() );
@@ -400,7 +400,7 @@ $.widget( 'ui.tagadata', {
 				self._trigger( 'tagChanged', null, [$tag, oldNormalValue] );
 			}
 		} )
-		.on( 'keydown.' + this.widgetName, function( event ) {
+		.on( 'keydown.' + this.widgetName, function ( event ) {
 			if ( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
 				// Key for finishing tag input was hit (e.g. ENTER)
 
@@ -420,7 +420,7 @@ $.widget( 'ui.tagadata', {
 
 		$tag
 		.on( this.widgetEventPrefix + 'tagchanged.' + this.widgetName,
-			function( event, oldValue ) {
+			function ( event, oldValue ) {
 				var tagLabel = self.getTagLabel( $tag );
 
 				// Handle non-unique tags (conflicts):
@@ -461,7 +461,7 @@ $.widget( 'ui.tagadata', {
 	 *
 	 * @return {jQuery}
 	 */
-	getHelperTag: function() {
+	getHelperTag: function () {
 		var $tag = this._$tagList.find( '.tagadata-choice:last' );
 
 		if ( !$tag.length || this.getTagLabel( $tag ) !== '' ) {
@@ -481,7 +481,7 @@ $.widget( 'ui.tagadata', {
 	/**
 	 * @return {jQuery}
 	 */
-	_createHelperTag: function() {
+	_createHelperTag: function () {
 		var $tag = this.createTag( '', '', true ),
 			input = $tag.find( 'input' );
 
@@ -498,7 +498,7 @@ $.widget( 'ui.tagadata', {
 		// Make sure a new helper will be created when something is inserted into helper:
 		var self = this;
 
-		var detectHelperInput = function() {
+		var detectHelperInput = function () {
 			if ( self.getTagLabel( $tag ) !== '' ) {
 				// Remove placeholder.
 				// NOTE: Can't do this on blurring the input because when clicking a button, the
@@ -530,7 +530,7 @@ $.widget( 'ui.tagadata', {
 	 * @param {boolean} [animate]
 	 * @return {boolean}
 	 */
-	removeTag: function( $tag, animate ) {
+	removeTag: function ( $tag, animate ) {
 		var self = this;
 
 		animate = animate || this.options.animate;
@@ -551,7 +551,7 @@ $.widget( 'ui.tagadata', {
 
 		if ( animate ) {
 			$tag.addClass( 'tagadata-choice-removed' );
-			$tag.fadeOut( 'fast' ).hide( 'blind', { direction: 'horizontal' }, 'fast', function() {
+			$tag.fadeOut( 'fast' ).hide( 'blind', { direction: 'horizontal' }, 'fast', function () {
 				$tag.remove();
 				self._trigger( 'tagRemoved', null, $tag );
 			} );
@@ -566,9 +566,9 @@ $.widget( 'ui.tagadata', {
 	/**
 	 * Removes all tags.
 	 */
-	removeAll: function() {
+	removeAll: function () {
 		var self = this;
-		this._$tagList.children( '.tagadata-choice' ).each( function() {
+		this._$tagList.children( '.tagadata-choice' ).each( function () {
 			self.removeTag( $( this ), false );
 		} );
 	},
@@ -578,11 +578,11 @@ $.widget( 'ui.tagadata', {
 	 *
 	 * @return {boolean}
 	 */
-	hasConflict: function() {
+	hasConflict: function () {
 		var self = this,
 			hasConflict = false;
 
-		this.getTags().each( function() {
+		this.getTags().each( function () {
 			var $tag = $( this ),
 				label = self.getTagLabel( $tag );
 
@@ -599,7 +599,7 @@ $.widget( 'ui.tagadata', {
 	/**
 	 * @see jQuery.Widget._setOption
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'disabled' ) {
 			var $input = this._$tagList.find( 'input' );
 

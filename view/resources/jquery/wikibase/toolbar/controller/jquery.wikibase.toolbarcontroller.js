@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	/**
@@ -40,13 +40,13 @@
 		 *
 		 * @throws {Error} in case a given toolbar ID is not registered for the toolbar type given.
 		 */
-		_create: function() {
+		_create: function () {
 			var self = this;
 
 			this.options.toolbars = this.options.toolbars || {};
 
-			$.each( this.options.toolbars, function( type, ids ) {
-				$.each( ids, function( index, id ) {
+			$.each( this.options.toolbars, function ( type, ids ) {
+				$.each( ids, function ( index, id ) {
 					var def = $.wikibase.toolbarcontroller.definition( type, id );
 
 					if ( !def ) {
@@ -54,7 +54,7 @@
 							+ type + '" with id "' + id + '"' );
 					}
 
-					$.each( def.events, function( eventNames, callback ) {
+					$.each( def.events, function ( eventNames, callback ) {
 						self.registerEventHandler( type, id, eventNames, callback );
 					} );
 				} );
@@ -75,7 +75,7 @@
 		 *
 		 * @throws {Error} if the callback provided in an event definition is not a function.
 		 */
-		registerEventHandler: function( toolbarType, toolbarId, eventNames, callback ) {
+		registerEventHandler: function ( toolbarType, toolbarId, eventNames, callback ) {
 			if ( !$.isFunction( callback ) ) {
 				throw new Error( 'No callback or known default action given for event "'
 					+ eventNames + '"' );
@@ -84,7 +84,7 @@
 			var self = this;
 			var def = $.wikibase.toolbarcontroller.definition( toolbarType, toolbarId );
 
-			this.element.on( eventNames, def.selector, function( event ) {
+			this.element.on( eventNames, def.selector, function ( event ) {
 				event.data = event.data || {};
 				event.data.toolbar = {
 					id: toolbarId,
@@ -101,7 +101,7 @@
 		 *
 		 * @param {jQuery.wikibase.toolbar} toolbar
 		 */
-		destroyToolbar: function( toolbar ) {
+		destroyToolbar: function ( toolbar ) {
 			// Toolbar might have been removed from the DOM already by some other destruction
 			// mechanism.
 			if ( toolbar ) {

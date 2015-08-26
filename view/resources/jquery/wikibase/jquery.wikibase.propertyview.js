@@ -1,4 +1,4 @@
-( function( $, mw ) {
+( function ( $, mw ) {
 	'use strict';
 
 var PARENT = $.wikibase.entityview;
@@ -43,7 +43,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_create: function() {
+	_create: function () {
 		this._createEntityview();
 
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element );
@@ -58,7 +58,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_init: function() {
+	_init: function () {
 		if ( !this.options.statementGroupListViewBuilder ) {
 			throw new Error( 'Required option(s) missing' );
 		}
@@ -70,7 +70,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_createDataType: function() {
+	_createDataType: function () {
 		// TODO: Implement propertyview template to have static HTML rendered by the back-end match
 		// the HTML rendered here without having to invoke templating mechanism here.
 
@@ -90,7 +90,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_initStatements: function() {
+	_initStatements: function () {
 		this.options.statementGroupListViewBuilder( this.options.value, this.$statements );
 
 		// This is here to be sure there is never a duplicate id:
@@ -104,7 +104,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_attachEventHandlers: function() {
+	_attachEventHandlers: function () {
 		PARENT.prototype._attachEventHandlers.call( this );
 
 		var self = this;
@@ -114,7 +114,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 			'statementviewafterstartediting.' + this.widgetName,
 			'referenceviewafterstartediting.' + this.widgetName
 		].join( ' ' ),
-		function( event ) {
+		function ( event ) {
 			self._trigger( 'afterstartediting' );
 		} );
 
@@ -125,7 +125,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 			'statementviewafterremove.' + this.widgetName,
 			'referenceviewafterstopediting.' + this.widgetName
 		].join( ' ' ),
-		function( event, dropValue ) {
+		function ( event, dropValue ) {
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} );
 	},
@@ -134,7 +134,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_setState: function( state ) {
+	_setState: function ( state ) {
 		PARENT.prototype._setState.call( this, state );
 
 		this.$statements.data( 'statementgrouplistview' )[state]();

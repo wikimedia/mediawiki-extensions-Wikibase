@@ -5,7 +5,7 @@
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 'use strict';
 
 /**
@@ -28,35 +28,35 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns the base revision id.
 	 */
-	getBaseRevision: function() {
+	getBaseRevision: function () {
 		return this._revisions.baseRevision;
 	},
 
 	/**
 	 * Returns the label revision id.
 	 */
-	getLabelRevision: function() {
+	getLabelRevision: function () {
 		return this._revisions.labelRevision;
 	},
 
 	/**
 	 * Returns the description revision id.
 	 */
-	getDescriptionRevision: function() {
+	getDescriptionRevision: function () {
 		return this._revisions.descriptionRevision;
 	},
 
 	/**
 	 * Returns the aliases revision id.
 	 */
-	getAliasesRevision: function() {
+	getAliasesRevision: function () {
 		return this._revisions.aliasesRevision;
 	},
 
 	/**
 	 * Returns the sitelinks revision id.
 	 */
-	getSitelinksRevision: function( lang ) {
+	getSitelinksRevision: function ( lang ) {
 		if ( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, lang ) ) {
 			return this._revisions.sitelinksRevision[lang];
 		}
@@ -66,7 +66,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns the claim revision id.
 	 */
-	getClaimRevision: function( claimGuid ) {
+	getClaimRevision: function ( claimGuid ) {
 		if ( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, claimGuid ) ) {
 			return this._revisions.claimRevisions[claimGuid];
 		}
@@ -76,35 +76,35 @@ $.extend( SELF.prototype, {
 	/**
 	 * Saves the label revision id.
 	 */
-	setLabelRevision: function( rev ) {
+	setLabelRevision: function ( rev ) {
 		this._revisions.labelRevision = rev;
 	},
 
 	/**
 	 * Saves the description revision id.
 	 */
-	setDescriptionRevision: function( rev ) {
+	setDescriptionRevision: function ( rev ) {
 		this._revisions.descriptionRevision = rev;
 	},
 
 	/**
 	 * Saves the aliases revision id.
 	 */
-	setAliasesRevision: function( rev ) {
+	setAliasesRevision: function ( rev ) {
 		this._revisions.aliasesRevision = rev;
 	},
 
 	/**
 	 * Saves the sitelinks revision id.
 	 */
-	setSitelinksRevision: function( rev, lang ) {
+	setSitelinksRevision: function ( rev, lang ) {
 		this._revisions.sitelinksRevision[lang] = rev;
 	},
 
 	/**
 	 * Saves the claim revision id.
 	 */
-	setClaimRevision: function( rev, claimGuid ) {
+	setClaimRevision: function ( rev, claimGuid ) {
 		this._revisions.claimRevisions[claimGuid] = rev;
 	}
 

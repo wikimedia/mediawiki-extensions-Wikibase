@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 /**
@@ -53,8 +53,8 @@ QUnit.module( 'jquery.wikibase.sitelinkgrouplistview', QUnit.newWbEnvironment( {
 			}
 		}
 	},
-	teardown: function() {
-		$( '.test_sitelinkgrouplistview' ).each( function() {
+	teardown: function () {
+		$( '.test_sitelinkgrouplistview' ).each( function () {
 			var $sitelinkgrouplistview = $( this ),
 				sitelinkgrouplistview = $sitelinkgrouplistview.data( 'sitelinkgrouplistview' );
 
@@ -67,7 +67,7 @@ QUnit.module( 'jquery.wikibase.sitelinkgrouplistview', QUnit.newWbEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var value = new wb.datamodel.SiteLinkSet( [
 		new wb.datamodel.SiteLink( 'aawiki', 'page1' ),
 		new wb.datamodel.SiteLink( 'dewiki', 'page1' ),
@@ -91,7 +91,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		'Destroyed widget.'
 	);
 
-	assert.throws( function() {
+	assert.throws( function () {
 			$sitelinkgrouplistview = createSitelinkgrouplistview();
 		},
 		'Widget does not accept an empty value.'

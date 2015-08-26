@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 $.util = $.util || {};
@@ -40,7 +40,7 @@ $.extend( SELF.prototype, {
 	 *        - {number} [debounce] Debounce delay
 	 *          Default: undefined (no debouncing)
 	 */
-	register: function( source, target, event, handler, options ) {
+	register: function ( source, target, event, handler, options ) {
 		var namespacedEvents = event.split( ' ' );
 
 		options = options || {};
@@ -66,7 +66,7 @@ $.extend( SELF.prototype, {
 	 *        Instead of white-space separated list of event names, a single namespace may be passed
 	 *        to remove all events attached to target and registered on source.
 	 */
-	unregister: function( source, target, event ) {
+	unregister: function ( source, target, event ) {
 		var registrations = [],
 			i;
 
@@ -98,7 +98,7 @@ $.extend( SELF.prototype, {
 	 * @param {string} event
 	 * @return {Object}
 	 */
-	_getRegistration: function( target, event ) {
+	_getRegistration: function ( target, event ) {
 		var eventSegments = event.split( '.' );
 
 		for ( var i = 0; i < this._registry.length; i++ ) {
@@ -116,7 +116,7 @@ $.extend( SELF.prototype, {
 	 * @param {string} namespace
 	 * @return {Object[]}
 	 */
-	_getRegistrations: function( target, namespace ) {
+	_getRegistrations: function ( target, namespace ) {
 		var registered = [];
 
 		for ( var i = 0; i < this._registry.length; i++ ) {
@@ -135,10 +135,10 @@ $.extend( SELF.prototype, {
 	 * @param {Function} handler
 	 * @param {Object} options
 	 */
-	_attach: function( source, target, event, handler, options ) {
+	_attach: function ( source, target, event, handler, options ) {
 		var self = this,
 			eventSegments = event.split( '.' ),
-			actualHandler = function( actualEvent ) {
+			actualHandler = function ( actualEvent ) {
 				self._triggerHandler( target, event, actualEvent );
 			},
 			alteredHandler;
@@ -163,7 +163,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {Object} registration
 	 */
-	_detach: function( registration ) {
+	_detach: function ( registration ) {
 		var namespaced = registration.event;
 		if ( registration.namespace ) {
 			namespaced += '.' + registration.namespace;
@@ -185,7 +185,7 @@ $.extend( SELF.prototype, {
 	 * @param {string} event
 	 * @param {jQuery.Event} actualEvent
 	 */
-	_triggerHandler: function( target, event, actualEvent ) {
+	_triggerHandler: function ( target, event, actualEvent ) {
 		var registration = this._getRegistration( target, event );
 
 		if ( registration ) {

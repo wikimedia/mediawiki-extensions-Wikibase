@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;
@@ -19,7 +19,7 @@
 	MODULE.CachingEntityStore = util.inherit(
 		'WbCachingEntityStore',
 		wb.store.EntityStore,
-		function( store ) {
+		function ( store ) {
 			this._deferreds = {};
 			this._store = store;
 		},
@@ -37,7 +37,7 @@
 		/**
 		 * @see wikibase.store.EntityStore.get
 		 */
-		get: function( entityId ) {
+		get: function ( entityId ) {
 			if ( !this._deferreds.hasOwnProperty( entityId ) ) {
 				this._deferreds[ entityId ] = this._store.get( entityId );
 			}

@@ -1,4 +1,4 @@
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -81,13 +81,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 	options: {
 		template: 'wikibase-statementview',
 		templateParams: [
-			function() { // GUID
+			function () { // GUID
 				return ( this.options.value && this.options.value.getClaim().getGuid() ) || 'new';
 			},
-			function() { // Rank selector
+			function () { // Rank selector
 				return $( '<div/>' );
 			},
-			function() { // Main snak
+			function () { // Main snak
 				return $( '<div/>' );
 			},
 			'', // Qualifiers
@@ -144,7 +144,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !this.options.entityStore
 			|| !this.options.valueViewBuilder
 			|| !this.options.claimsChanger
@@ -166,7 +166,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @param {number} rank
 	 */
-	_createRankSelector: function( rank ) {
+	_createRankSelector: function ( rank ) {
 		if ( this._rankSelector ) {
 			return;
 		}
@@ -182,7 +182,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var self = this,
 			changeEvent = ( this._rankSelector.widgetEventPrefix + 'afterchange' ).toLowerCase();
 
-		this.$rankSelector.on( changeEvent + '.' + this.widgetName, function( event ) {
+		this.$rankSelector.on( changeEvent + '.' + this.widgetName, function ( event ) {
 			if ( self.value() ) {
 				self._trigger( 'change' );
 			}
@@ -194,7 +194,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Snak|null} [snak=null]
 	 */
-	_createMainSnak: function( snak ) {
+	_createMainSnak: function ( snak ) {
 		if ( this.$mainSnak.data( 'snakview' ) ) {
 			return;
 		}
@@ -202,11 +202,11 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var self = this;
 
 		this.$mainSnak
-		.on( 'snakviewchange.' + this.widgetName, function( event, status ) {
+		.on( 'snakviewchange.' + this.widgetName, function ( event, status ) {
 			event.stopPropagation();
 			self._trigger( 'change' );
 		} )
-		.on( 'snakviewstopediting.' + this.widgetName, function( event ) {
+		.on( 'snakviewstopediting.' + this.widgetName, function ( event ) {
 			event.stopPropagation();
 		} );
 
@@ -228,7 +228,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.SnakList|null} [qualifiers=null]
 	 */
-	_createQualifiersListview: function( qualifiers ) {
+	_createQualifiersListview: function ( qualifiers ) {
 		if ( this._qualifiers ) {
 			return;
 		}
@@ -256,7 +256,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		$qualifiers.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibase.snaklistview,
-				newItemOptionsFn: function( value ) {
+				newItemOptionsFn: function ( value ) {
 					return {
 						value: value || undefined,
 						singleProperty: true,
@@ -270,17 +270,17 @@ $.widget( 'wikibase.statementview', PARENT, {
 			} ),
 			value: groupedQualifierSnaks
 		} )
-		.on( 'snaklistviewstopediting.' + this.widgetName, function( event, dropValue ) {
+		.on( 'snaklistviewstopediting.' + this.widgetName, function ( event, dropValue ) {
 			event.stopPropagation();
 		} )
 		.on( 'snaklistviewchange.' + this.widgetName
 			+ ' listviewafteritemmove.' + this.widgetName,
-			function( event ) {
+			function ( event ) {
 				event.stopPropagation();
 				self._trigger( 'change' );
 			}
 		)
-		.on( 'listviewitemremoved.' + this.widgetName, function( event, value, $itemNode ) {
+		.on( 'listviewitemremoved.' + this.widgetName, function ( event, value, $itemNode ) {
 			if ( event.target === self._qualifiers.element.get( 0 ) ) {
 				self._trigger( 'change' );
 				return;
@@ -304,7 +304,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Reference[]} [references]
 	 */
-	_createReferencesListview: function( references ) {
+	_createReferencesListview: function ( references ) {
 		var self = this;
 
 		var $listview = this.$references.children();
@@ -317,7 +317,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		$listview.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibase.referenceview,
-				newItemOptionsFn: function( value ) {
+				newItemOptionsFn: function ( value ) {
 					return {
 						value: value || null,
 						statementGuid: self.options.value
@@ -340,12 +340,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var lia = this._referencesListview.listItemAdapter();
 
 		$listview
-		.on( 'listviewitemadded listviewitemremoved', function( event, value, $li ) {
+		.on( 'listviewitemadded listviewitemremoved', function ( event, value, $li ) {
 			if ( event.target === $listview[0] ) {
 				self._drawReferencesCounter();
 			}
 		} )
-		.on( 'listviewenternewitem', function( event, $newLi ) {
+		.on( 'listviewenternewitem', function ( event, $newLi ) {
 			if ( event.target !== $listview[0] ) {
 				return;
 			}
@@ -357,7 +357,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 			if ( !liInstance.value() ) {
 				$newLi
-				.on( lia.prefixedEvent( 'afterstopediting' ), function( event, dropValue ) {
+				.on( lia.prefixedEvent( 'afterstopediting' ), function ( event, dropValue ) {
 					if ( dropValue ) {
 						liInstance.destroy();
 						$newLi.remove();
@@ -397,7 +397,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	getHelpMessage: function() {
+	getHelpMessage: function () {
 		var deferred = $.Deferred(),
 			helpMessage = this.options.helpMessage;
 
@@ -409,7 +409,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 				: this.options.predefined.mainSnak.property;
 
 			if ( property ) {
-				this.options.entityIdPlainFormatter.format( property ).done( function( formattedEntityId ) {
+				this.options.entityIdPlainFormatter.format( property ).done( function ( formattedEntityId ) {
 					deferred.resolve( mw.msg( 'wikibase-claimview-snak-tooltip', formattedEntityId ) );
 				} );
 			} else {
@@ -423,7 +423,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	destroy: function() {
+	destroy: function () {
 		this._rankSelector.destroy();
 		this.$rankSelector.off( '.' + this.widgetName );
 
@@ -439,7 +439,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @private
 	 */
-	_destroyQualifiersListView: function() {
+	_destroyQualifiersListView: function () {
 		if ( this._qualifiers ) {
 			this._qualifiers.destroy();
 			this.$qualifiers
@@ -452,7 +452,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @private
 	 */
-	_destroyReferencesListview: function() {
+	_destroyReferencesListview: function () {
 		if ( this._referencesListview ) {
 			this._referencesListview.destroy();
 			this.$references
@@ -465,7 +465,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	draw: function() {
+	draw: function () {
 		this._createRankSelector( this.options.value
 			? this.options.value.getRank()
 			: wb.datamodel.Statement.RANK.NORMAL
@@ -500,7 +500,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		var i;
 
 		if ( this.options.value ) {
@@ -546,7 +546,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @param {string} guid
 	 * @return {wikibase.datamodel.Statement|null}
 	 */
-	_instantiateStatement: function( guid ) {
+	_instantiateStatement: function ( guid ) {
 		var mainSnak = this.$mainSnak.data( 'snakview' ).snak();
 
 		if ( !mainSnak ) {
@@ -574,7 +574,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @param {wikibase.datamodel.Reference} reference
 	 */
-	_addReference: function( reference ) {
+	_addReference: function ( reference ) {
 		this._referencesListview.addItem( reference );
 	},
 
@@ -584,7 +584,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @return {wikibase.datamodel.Reference[]}
 	 */
-	_getReferences: function() {
+	_getReferences: function () {
 		var references = [];
 
 		// If the statement is pending (not yet stored), the listview widget for the references is
@@ -595,7 +595,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		var lia = this._referencesListview.listItemAdapter();
 
-		$.each( this._referencesListview.items(), function( i, item ) {
+		$.each( this._referencesListview.items(), function ( i, item ) {
 			var referenceview = lia.liInstance( $( item ) ),
 				reference = referenceview ? referenceview.value() : null;
 			if ( reference ) {
@@ -611,7 +611,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @param {jQuery.wikibase.referenceview} referenceview
 	 */
-	remove: function( referenceview ) {
+	remove: function ( referenceview ) {
 		var self = this;
 
 		referenceview.disable();
@@ -620,10 +620,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 			this.value().getClaim().getGuid(),
 			referenceview.value()
 		)
-		.done( function() {
+		.done( function () {
 			self._referencesListview.removeItem( referenceview.element );
 			self._trigger( 'afterremove' );
-		} ).fail( function( error ) {
+		} ).fail( function ( error ) {
 			referenceview.enable();
 			referenceview.setError( error );
 		} );
@@ -635,7 +635,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @return {wikibase.datamodel.Statement|null}
 	 */
-	value: function() {
+	value: function () {
 		var guid = this.options.value ? this.options.value.getClaim().getGuid() : null;
 		return this._instantiateStatement( guid );
 	},
@@ -644,7 +644,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * Updates the visual `Reference`s counter.
 	 * @private
 	 */
-	_drawReferencesCounter: function() {
+	_drawReferencesCounter: function () {
 		var numberOfValues = 0,
 			numberOfPendingValues = 0;
 
@@ -667,12 +667,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	startEditing: function() {
+	startEditing: function () {
 		var self = this,
 			deferred = $.Deferred();
 
-		this.$mainSnak.one( 'snakviewafterstartediting', function() {
-			PARENT.prototype.startEditing.call( self ).done( function() {
+		this.$mainSnak.one( 'snakviewafterstartediting', function () {
+			PARENT.prototype.startEditing.call( self ).done( function () {
 				var snaklistviews,
 					i;
 
@@ -702,7 +702,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_afterStopEditing: function( dropValue ) {
+	_afterStopEditing: function ( dropValue ) {
 		if ( this.$mainSnak.data( 'snakview' ) ) {
 			this.$mainSnak.data( 'snakview' ).stopEditing( dropValue );
 		}
@@ -717,7 +717,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @param {boolean} [dropValue=false]
 	 */
-	_stopEditingQualifiers: function( dropValue ) {
+	_stopEditingQualifiers: function ( dropValue ) {
 		var snaklistviews,
 			i;
 
@@ -762,7 +762,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @throws {Error} if unable to instantiate a `Statement` from the current view state.
 	 */
-	_save: function() {
+	_save: function () {
 		var self = this,
 			guid = this.options.value
 				? this.options.value.getClaim().getGuid()
@@ -774,7 +774,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 
 		return this.option( 'claimsChanger' ).setStatement( statement )
-		.done( function( savedStatement ) {
+		.done( function ( savedStatement ) {
 			// Update model of represented Statement:
 			self.options.value = savedStatement;
 		} );
@@ -783,7 +783,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	isEmpty: function() {
+	isEmpty: function () {
 		return false;
 		// TODO: Supposed to do at least...
 		// this.$mainSnak.data( 'snakview' ).isEmpty(); (does not exist at the moment of writing)
@@ -792,7 +792,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isValid: function() {
+	isValid: function () {
 		var snaklistviews,
 			i;
 
@@ -821,7 +821,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @throws {Error} when tyring to set `value` option.
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'value' ) {
 			throw new Error( 'Can not set value after initialization' );
 		}
@@ -843,7 +843,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
+	focus: function () {
 		this.$mainSnak.data( 'snakview' ).focus();
 	}
 } );

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 /**
@@ -10,11 +10,11 @@
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createPropertyview = function( options, $node ) {
+var createPropertyview = function ( options, $node ) {
 	options = $.extend( {
 		value: new wb.datamodel.Property( 'P1', 'someDataType' ),
-		entityTermsViewBuilder: function() {},
-		statementGroupListViewBuilder: function() {}
+		entityTermsViewBuilder: function () {},
+		statementGroupListViewBuilder: function () {}
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -27,8 +27,8 @@ var createPropertyview = function( options, $node ) {
 };
 
 QUnit.module( 'jquery.wikibase.propertyview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_propertyview' ).each( function() {
+	teardown: function () {
+		$( '.test_propertyview' ).each( function () {
 			var $propertyview = $( this ),
 				propertyview = $propertyview.data( 'propertyview' );
 
@@ -41,9 +41,9 @@ QUnit.module( 'jquery.wikibase.propertyview', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.throws(
-		function() {
+		function () {
 			createPropertyview( { value: null } );
 		},
 		'Throwing error when trying to initialize widget without a value.'

@@ -1,4 +1,4 @@
-( function( mw, wb, $, dv ) {
+( function ( mw, wb, $, dv ) {
 	'use strict';
 
 	var MODULE = $.wikibase.snakview.variations,
@@ -39,7 +39,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		destroy: function() {
+		destroy: function () {
 			this.$viewPort.css( 'height', 'auto' );
 			if ( this._valueView ) {
 				this._valueView.element.off( '.' + this.variationBaseClass );
@@ -52,7 +52,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_setValue: function( value ) {
+		_setValue: function ( value ) {
 			this._newDataValue = null;
 			if ( value.datavalue ) {
 				this._newDataValue = dv.newDataValue( value.datavalue.type, value.datavalue.value );
@@ -63,7 +63,7 @@
 		 * @inheritdoc
 		 * @protected
 		 */
-		_getValue: function() {
+		_getValue: function () {
 			var dataValue = null;
 
 			if ( this._newDataValue !== false ) {
@@ -82,7 +82,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		draw: function() {
+		draw: function () {
 			var self = this,
 				newValue = this._newDataValue;
 
@@ -175,7 +175,7 @@
 				this.__currentNewValue = newValue;
 				this._entityStore
 				.get( this._viewState.propertyId() )
-				.done( function( fetchedProperty ) {
+				.done( function ( fetchedProperty ) {
 					if ( newValue !== self.__currentNewValue ) {
 						// If the API response is not for the most recent newValue, discard it
 						return;
@@ -224,7 +224,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		startEditing: function() {
+		startEditing: function () {
 			if ( !this._valueView || this._valueView.isInEditMode() ) {
 				return;
 			}
@@ -233,7 +233,7 @@
 
 			this._valueView.element.one(
 				this._valueView.widgetEventPrefix + 'afterstartediting',
-				function() {
+				function () {
 					$( self ).triggerHandler( 'afterstartediting' );
 				}
 			);
@@ -246,7 +246,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		stopEditing: function( dropValue ) {
+		stopEditing: function ( dropValue ) {
 			if ( !this._valueView || !this._valueView.isInEditMode() ) {
 				return;
 			}
@@ -259,7 +259,7 @@
 		 * Attaches event handlers to the `valueview` widget's element.
 		 * @private
 		 */
-		_attachEventHandlers: function() {
+		_attachEventHandlers: function () {
 			var self = this,
 				$viewPort = this.$viewPort,
 				heightAnimationQueue = self.variationBaseClass + 'height';
@@ -267,14 +267,14 @@
 			this._removeEventHandlers();
 
 			this._valueView.element
-			.on( 'valueviewparse.' + this.variationBaseClass, function( event ) {
+			.on( 'valueviewparse.' + this.variationBaseClass, function ( event ) {
 				self._viewState.notify( 'invalid' );
 			} )
-			.on( 'valueviewafterparse.' + this.variationBaseClass, function( event ) {
+			.on( 'valueviewafterparse.' + this.variationBaseClass, function ( event ) {
 				self._viewState.notify( ( self._valueView.value() ) ? 'valid' : 'invalid' );
 			} )
-			.on( 'inputextenderanimation.' + this.variationBaseClass, function( animationEvent ) {
-				animationEvent.animationCallbacks.add( 'done', function() {
+			.on( 'inputextenderanimation.' + this.variationBaseClass, function ( animationEvent ) {
+				animationEvent.animationCallbacks.add( 'done', function () {
 					var $input = $( animationEvent.target ),
 						$extension = $input.data( 'inputextender' ).extension(),
 						newHeight = 0;
@@ -295,20 +295,20 @@
 						{
 							queue: heightAnimationQueue,
 							duration: 'fast', // defaults to 200
-							progress: function( animation, progress, remainingMs ) {
+							progress: function ( animation, progress, remainingMs ) {
 								$.ui.inputextender.redrawVisibleExtensions();
 							}
 						}
 					).dequeue( heightAnimationQueue );
 				} );
 			} )
-			.on( 'inputextendercontentanimation.' + this.variationBaseClass, function( animationEvent ) {
+			.on( 'inputextendercontentanimation.' + this.variationBaseClass, function ( animationEvent ) {
 				var $input = $( animationEvent.target ),
 					inputHeight = $input.outerHeight(),
 					$extension = $input.data( 'inputextender' ).extension();
 
 				animationEvent.animationCallbacks
-				.add( 'progress', function() {
+				.add( 'progress', function () {
 					var newHeight = inputHeight + $extension.outerHeight();
 					$viewPort.height( newHeight );
 				} );
@@ -319,7 +319,7 @@
 		 * Removes event handlers from the `valueview` widget's element.
 		 * @private
 		 */
-		_removeEventHandlers: function() {
+		_removeEventHandlers: function () {
 			this._valueView.element.off( '.' + this.variationBaseClass );
 		},
 
@@ -333,7 +333,7 @@
 		 *        `jQuery.valueview`.
 		 * @return {boolean} Whether a `jQuery.valueview` has actually been instantiated.
 		 */
-		_createNewValueView: function( dataValue, dataType ) {
+		_createNewValueView: function ( dataValue, dataType ) {
 			var $valueViewDom;
 
 			if ( this._valueView ) {
@@ -371,7 +371,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		disable: function() {
+		disable: function () {
 			if ( this._valueView ) {
 				this._valueView.disable();
 			}
@@ -380,7 +380,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		enable: function() {
+		enable: function () {
 			if ( this._valueView ) {
 				this._valueView.enable();
 			}
@@ -389,14 +389,14 @@
 		/*
 		 * @inheritdoc
 		 */
-		isFocusable: function() {
+		isFocusable: function () {
 			return true;
 		},
 
 		/**
 		 * @inheritdoc
 		 */
-		focus: function() {
+		focus: function () {
 			if ( this._valueView && this._viewState.isDisabled() === false ) {
 				this._valueView.focus();
 			}
@@ -405,7 +405,7 @@
 		/**
 		 * @inheritdoc
 		 */
-		blur: function() {
+		blur: function () {
 			if ( this._valueView ) {
 				this._valueView.blur();
 			}

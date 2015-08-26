@@ -4,10 +4,10 @@
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, mw ) {
+( function ( $, mw ) {
 	'use strict';
 
-	$( function() {
+	$( function () {
 		var $form = $( '#searchform ' ),
 			$input = $( '#searchInput' ),
 			// Both inputs must be named "search" to support Firefox' smart keyword feature (T60467)
@@ -23,7 +23,7 @@
 
 			href += href.indexOf( '?' ) === -1 ? '?' : '&';
 
-			$.each( $form.serializeArray(), function( i, param ) {
+			$.each( $form.serializeArray(), function ( i, param ) {
 				params[param.name] = param.value;
 			} );
 
@@ -51,7 +51,7 @@
 		 */
 		function removeSuggestionContext( input ) {
 			// Native fetch() updates/re-sets the data attribute with the suggestion context.
-			$.data( input, 'suggestionsContext' ).config.fetch = function() {};
+			$.data( input, 'suggestionsContext' ).config.fetch = function () {};
 			$.removeData( input, 'suggestionsContext' );
 		}
 
@@ -69,7 +69,7 @@
 					.addClass( 'special-query' )
 			);
 
-		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, function() {
+		var searchContaining = new $.ui.ooMenu.CustomItem( $searchContaining, null, function () {
 			$form.submit();
 		}, 'wb-entitysearch-suggestions' );
 
@@ -81,14 +81,14 @@
 		$input.before( $hiddenInput );
 
 		$input
-		.one( 'focus', function( event ) {
+		.one( 'focus', function ( event ) {
 			if ( $.data( this, 'suggestionsContext' ) ) {
 				removeSuggestionContext( this );
 			} else {
 				// Suggestion context might not be initialized when focusing the search box while
 				// the page is still rendered.
 				var $input = $( this );
-				$input.on( 'keypress.entitysearch', function( event ) {
+				$input.on( 'keypress.entitysearch', function ( event ) {
 					if ( $.data( this, 'suggestionsContext' ) ) {
 						removeSuggestionContext( this );
 						$input.off( '.entitysearch' );
@@ -107,14 +107,14 @@
 			confineMinWidthTo: $form,
 			suggestionsPlaceholder: suggestionsPlaceholder
 		} )
-		.on( 'entityselectoropen', function( event ) {
+		.on( 'entityselectoropen', function ( event ) {
 			updateSuggestionSpecial( searchContaining );
 		} )
-		.on( 'eachchange', function( event, oldVal ) {
+		.on( 'eachchange', function ( event, oldVal ) {
 			$hiddenInput.val( '' );
 			updateSuggestionSpecial( searchContaining );
 		} )
-		.on( 'entityselectorselected', function( event, entityId ) {
+		.on( 'entityselectorselected', function ( event, entityId ) {
 			$hiddenInput.val( entityId );
 		} );
 
@@ -122,7 +122,7 @@
 		// before. However, this will require triggering the entity selector's API call and waiting
 		// for its response.
 
-		$( '#searchGoButton' ).on( 'click keydown', function( event ) {
+		$( '#searchGoButton' ).on( 'click keydown', function ( event ) {
 			if ( !$input.data( 'entityselector' ) ) {
 				return;
 			}
@@ -146,7 +146,7 @@
 		// in a hidden input element (which has ripped the "name" attribute from the original search
 		// box). Therefore, the entity id needs to be replaced by the actual search box (entity
 		// selector) content.
-		$form.on( 'submit', function( event ) {
+		$form.on( 'submit', function ( event ) {
 			$( this ).find( 'input[name="search"]' ).val( $input.val() );
 		} );
 

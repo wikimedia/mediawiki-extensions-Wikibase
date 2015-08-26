@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
-( function( wb, sinon, QUnit ) {
+( function ( wb, sinon, QUnit ) {
 	'use strict';
 
 	function getValueViewAndDom() {
@@ -10,10 +10,10 @@
 				option: sinon.spy()
 			},
 			$dom = {
-				valueview: sinon.spy( function() {
+				valueview: sinon.spy( function () {
 					return this;
 				} ),
-				data: function() {
+				data: function () {
 					return valueView;
 				}
 			};
@@ -23,7 +23,7 @@
 
 	QUnit.module( 'wikibase.ValueViewBuilder' );
 
-	QUnit.test( 'initValueView returns a ValueView', function( assert ) {
+	QUnit.test( 'initValueView returns a ValueView', function ( assert ) {
 		var vvAndDom = getValueViewAndDom(),
 			valueView = vvAndDom.vv,
 			$dom = vvAndDom.$dom;
@@ -35,7 +35,7 @@
 		assert.strictEqual( returnValue, valueView );
 	} );
 
-	QUnit.test( 'initValueView passes stores', function( assert ) {
+	QUnit.test( 'initValueView passes stores', function ( assert ) {
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			expertStore = {},
@@ -59,7 +59,7 @@
 		} ) );
 	} );
 
-	QUnit.test( 'initValueView passes language', function( assert ) {
+	QUnit.test( 'initValueView passes language', function ( assert ) {
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom;
 
@@ -78,7 +78,7 @@
 		} ) );
 	} );
 
-	QUnit.test( 'initValueView passes messageProvider', function( assert ) {
+	QUnit.test( 'initValueView passes messageProvider', function ( assert ) {
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			messageProvider = {};
@@ -98,12 +98,12 @@
 		} ) );
 	} );
 
-	QUnit.test( 'initValueView passes dataValue', function( assert ) {
+	QUnit.test( 'initValueView passes dataValue', function ( assert ) {
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			dataValueType = {},
 			dataValue = {
-				getType: sinon.spy( function() { return dataValueType; } )
+				getType: sinon.spy( function () { return dataValueType; } )
 			};
 
 		var valueViewBuilder = new wb.ValueViewBuilder();
@@ -116,14 +116,14 @@
 		} ) );
 	} );
 
-	QUnit.test( 'initValueView infers types from dataType', function( assert ) {
+	QUnit.test( 'initValueView infers types from dataType', function ( assert ) {
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			dataTypeDataValueType = {},
 			dataTypeId = {},
 			dataType = {
-				getId: sinon.spy( function() { return dataTypeId; } ),
-				getDataValueType: sinon.spy( function() { return dataTypeDataValueType; } )
+				getId: sinon.spy( function () { return dataTypeId; } ),
+				getDataValueType: sinon.spy( function () { return dataTypeDataValueType; } )
 			};
 
 		var valueViewBuilder = new wb.ValueViewBuilder();

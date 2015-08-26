@@ -1,14 +1,14 @@
-( function( $, QUnit, wb ) {
+( function ( $, QUnit, wb ) {
 	'use strict';
 
 	wb.entityIdFormatter.testEntityIdHtmlFormatter = {
-		all: function( constructor, getInstance ) {
+		all: function ( constructor, getInstance ) {
 			this.constructorTests( constructor, getInstance );
 			this.formatTests( getInstance );
 		},
 
-		constructorTests: function( constructor, getInstance ) {
-			QUnit.test( 'Constructor', function( assert ) {
+		constructorTests: function ( constructor, getInstance ) {
+			QUnit.test( 'Constructor', function ( assert ) {
 				var instance = getInstance();
 
 				assert.ok(
@@ -23,31 +23,31 @@
 			} );
 		},
 
-		formatTests: function( getInstance ) {
-			QUnit.test( 'format returns some non-empty string', function( assert ) {
+		formatTests: function ( getInstance ) {
+			QUnit.test( 'format returns some non-empty string', function ( assert ) {
 				var instance = getInstance();
 				var done = assert.async();
 
-				instance.format( 'Q1' ).done( function( res ) {
+				instance.format( 'Q1' ).done( function ( res ) {
 					assert.equal( typeof res, 'string' );
 					assert.notEqual( res, '' );
 					done();
 				} );
 			} );
-			QUnit.test( 'format correctly escapes ampersands in the entity id', function( assert ) {
+			QUnit.test( 'format correctly escapes ampersands in the entity id', function ( assert ) {
 				var instance = getInstance();
 				var done = assert.async();
 
-				instance.format( '&' ).done( function( res ) {
+				instance.format( '&' ).done( function ( res ) {
 					assert.equal( res.match( /&($|[^a])/ ), null );
 					done();
 				} );
 			} );
-			QUnit.test( 'format correctly escapes HTML in the entity id', function( assert ) {
+			QUnit.test( 'format correctly escapes HTML in the entity id', function ( assert ) {
 				var instance = getInstance();
 				var done = assert.async();
 
-				instance.format( '<script>' ).done( function( res ) {
+				instance.format( '<script>' ).done( function ( res ) {
 					assert.equal( $( document.createElement( 'span' ) ).html( res ).find( 'script' ).length, 0 );
 					done();
 				} );

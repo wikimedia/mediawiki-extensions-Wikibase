@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, vf, dv ) {
+( function ( wb, vf, dv ) {
 	'use strict';
 
 	wb.formatters = wb.formatters || {};
@@ -11,7 +11,7 @@
 	 * @param {wikibase.api.RepoApi} api
 	 * @param {dataTypes.DataTypeStore} dataTypeStore
 	 */
-	wb.formatters.getStore = function( api, dataTypeStore ) {
+	wb.formatters.getStore = function ( api, dataTypeStore ) {
 		var apiCaller = new wb.api.FormatValueCaller(
 			api,
 			dataTypeStore

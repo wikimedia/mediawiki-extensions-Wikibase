@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 	/**
@@ -10,7 +10,7 @@
 	 *
 	 * @param {Object} [options]
 	 */
-	var newTestPageSuggester = function( options ) {
+	var newTestPageSuggester = function ( options ) {
 		return $( '<input />' )
 			.addClass( 'test_pagesuggester' )
 			.appendTo( 'body' )
@@ -18,7 +18,7 @@
 	};
 
 	QUnit.module( 'jquery.wikibase.pagesuggester', {
-		teardown: function() {
+		teardown: function () {
 			var $pageSuggester = $( '.test_pagesuggester' ),
 				pageSuggester = $pageSuggester.data( 'pagesuggester' );
 			if ( pageSuggester ) {
@@ -28,7 +28,7 @@
 		}
 	} );
 
-	QUnit.test( 'Create', function( assert ) {
+	QUnit.test( 'Create', function ( assert ) {
 		var $pageSuggester = newTestPageSuggester();
 
 		assert.ok(
@@ -37,26 +37,26 @@
 		);
 	} );
 
-	QUnit.test( 'Try searching for suggestions without a site', 1, function( assert ) {
+	QUnit.test( 'Try searching for suggestions without a site', 1, function ( assert ) {
 		var $pageSuggester = newTestPageSuggester(),
 			pageSuggester = $pageSuggester.data( 'pagesuggester' );
 
 		QUnit.stop();
 
 		pageSuggester.search()
-		.done( function() {
+		.done( function () {
 			assert.ok(
 				false,
 				'Searching successful although supposed to fail.'
 			);
 		} )
-		.fail( function() {
+		.fail( function () {
 			assert.ok(
 				true,
 				'Searching failed as expected.'
 			);
 		} )
-		.always( function() {
+		.always( function () {
 			QUnit.start();
 		} );
 

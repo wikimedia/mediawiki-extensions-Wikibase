@@ -3,7 +3,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( mw, wb, $ ) {
+( function ( mw, wb, $ ) {
 	'use strict';
 
 var MODULE = wb;
@@ -15,7 +15,7 @@ var PARENT = util.ContentLanguages;
 var SELF = MODULE.WikibaseContentLanguages = util.inherit(
 	'WbContentLanguages',
 	PARENT,
-	function() {
+	function () {
 		this._languageMap = mw.config.get( 'wgULSLanguages' );
 	}
 );
@@ -36,10 +36,10 @@ $.extend( SELF.prototype, {
 	/**
 	 * @inheritdoc
 	 */
-	getAll: function() {
+	getAll: function () {
 		// Cache language codes
 		if ( !this._languageCodes && this._languageMap ) {
-			this._languageCodes = $.map( this._languageMap, function( val, key ) {
+			this._languageCodes = $.map( this._languageMap, function ( val, key ) {
 				return key;
 			} );
 		}
@@ -49,7 +49,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * @inheritdoc
 	 */
-	getName: function( code ) {
+	getName: function ( code ) {
 		return this._languageMap ? this._languageMap[ code ] : null;
 	}
 } );

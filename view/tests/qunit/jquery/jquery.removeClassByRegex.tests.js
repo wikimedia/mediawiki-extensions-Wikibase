@@ -2,12 +2,12 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( $, QUnit ) {
+( function ( $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'jquery.removeClassByRegex' );
 
-QUnit.test( 'Basics', function( assert ) {
+QUnit.test( 'Basics', function ( assert ) {
 	var classes = [ 'a11a', 'bbb', 'c333', 'dddd', 'e', '6', '7' ];
 	var subject = $( '<div/>', {
 		'class': classes.join( '   ' ) // should also work with more than one space
@@ -43,7 +43,7 @@ QUnit.test( 'Basics', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Multiple elements', function( assert ) {
+QUnit.test( 'Multiple elements', function ( assert ) {
 
 	var subject = $(
 		'<div/>', { 'class': 'A B C 1 2 3' }

@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-( function( util, wb, $ ) {
+( function ( util, wb, $ ) {
 	'use strict';
 
 	var MODULE = wb.store;

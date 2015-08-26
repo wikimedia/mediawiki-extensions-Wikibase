@@ -1,27 +1,27 @@
-( function( $, sinon, QUnit, wb, ViewFactory ) {
+( function ( $, sinon, QUnit, wb, ViewFactory ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.view.ViewFactory' );
 
-	QUnit.test( 'is constructable', function( assert ) {
+	QUnit.test( 'is constructable', function ( assert ) {
 		assert.ok( new ViewFactory() instanceof ViewFactory );
 	} );
 
 	function getEntityStub( type ) {
 		return {
-			getType: function() {
+			getType: function () {
 				return type;
 			}
 		};
 	}
 
-	QUnit.test( 'getEntityView constructs correct views', function( assert ) {
+	QUnit.test( 'getEntityView constructs correct views', function ( assert ) {
 		var entityStore = new wb.store.EntityStore(),
 			viewFactory = new ViewFactory( null, null, null, null, null, entityStore ),
 			fooView = {},
 			$dom = $( '<div/>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
-		$dom.data = sinon.spy( function() { return fooView; } );
+		$dom.data = sinon.spy( function () { return fooView; } );
 
 		var res = viewFactory.getEntityView( getEntityStub( 'foo' ), $dom );
 
@@ -29,19 +29,19 @@
 		sinon.assert.calledOnce( FooView );
 	} );
 
-	QUnit.test( 'getEntityView throws on incorrect views', function( assert ) {
+	QUnit.test( 'getEntityView throws on incorrect views', function ( assert ) {
 		var entityStore = new wb.store.EntityStore(),
 			viewFactory = new ViewFactory( null, null, null, null, null, entityStore );
 
 		assert.throws(
-			function() {
+			function () {
 				viewFactory.getEntityView( getEntityStub( 'unknown' ) );
 			},
 			new Error( 'View unknownview does not exist' )
 		);
 	} );
 
-	QUnit.test( 'getEntityView passes correct options to views', function( assert ) {
+	QUnit.test( 'getEntityView passes correct options to views', function ( assert ) {
 		var entity = getEntityStub( 'foo' ),
 			viewFactory = new ViewFactory(),
 			$dom = $( '<div/>' ),
@@ -57,10 +57,10 @@
 		} ) );
 	} );
 
-	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function( assert ) {
+	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function ( assert ) {
 		var sitelinkSet = new wb.datamodel.SiteLinkSet( [] ),
 			siteLinksChanger = {},
-			entityChangersFactory = { getSiteLinksChanger: function() { return siteLinksChanger; } },
+			entityChangersFactory = { getSiteLinksChanger: function () { return siteLinksChanger; } },
 			entityIdPlainFormatter = {},
 			viewFactory = new ViewFactory(
 				null,
@@ -85,7 +85,7 @@
 		$.wikibase.sitelinkgrouplistview.restore();
 	} );
 
-	QUnit.test( 'getStatementGroupListView passes correct options to views', function( assert ) {
+	QUnit.test( 'getStatementGroupListView passes correct options to views', function ( assert ) {
 		var contentLanguages = {},
 			entity = new wb.datamodel.Item( 'Q1' ),
 			dataTypeStore = {},
@@ -143,12 +143,12 @@
 		$.wikibase.statementgrouplistview.restore();
 	} );
 
-	QUnit.test( 'getEntityTermsView passes correct options to views', function( assert ) {
+	QUnit.test( 'getEntityTermsView passes correct options to views', function ( assert ) {
 		var contentLanguages = [],
 			fingerprint = new wb.datamodel.Fingerprint(),
 			entityChangersFactory = {},
 			message = 'message',
-			messageProvider = { getMessage: function() { return message; } },
+			messageProvider = { getMessage: function () { return message; } },
 			userLanguages = [],
 			viewFactory = new ViewFactory(
 				contentLanguages,

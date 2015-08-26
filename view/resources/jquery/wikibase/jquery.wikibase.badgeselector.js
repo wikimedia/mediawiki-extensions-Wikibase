@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, mw ) {
+( function ( $, mw ) {
 	'use strict';
 
 var PARENT = $.ui.TemplatedWidget;
@@ -72,7 +72,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	/**
 	 * @see jQuery.Widget._create
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !this.options.entityIdPlainFormatter || !this.options.languageCode ) {
 			throw new Error( 'Required option(s) missing' );
 		}
@@ -86,7 +86,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	/**
 	 * @see jQuery.Widget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		if ( $( '.' + this.widgetBaseClass ).length === 0 ) {
 			this._detachMenuEventListeners();
 
@@ -101,11 +101,11 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		PARENT.prototype.destroy.call( this );
 	},
 
-	_attachEventHandlers: function() {
+	_attachEventHandlers: function () {
 		var self = this;
 
 		this.element
-		.on( 'click.' + this.widgetName, function( event ) {
+		.on( 'click.' + this.widgetName, function ( event ) {
 			if ( !self.isInEditMode() || self.option( 'disabled' ) ) {
 				return;
 			}
@@ -117,7 +117,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 			}
 
 			self._initMenu()
-			.done( function() {
+			.done( function () {
 				if ( self.option( 'disabled' ) || $menu.is( ':visible' ) ) {
 					$menu.hide();
 					return;
@@ -133,16 +133,16 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		} );
 	},
 
-	_hideMenu: function() {
+	_hideMenu: function () {
 		$menu.hide();
 		this._detachMenuEventListeners();
 
 		this.element.removeClass( 'ui-state-active' );
 	},
 
-	_attachMenuEventListeners: function() {
+	_attachMenuEventListeners: function () {
 		var self = this;
-		var degrade = function( event ) {
+		var degrade = function ( event ) {
 			if ( !$( event.target ).closest( self.element ).length &&
 				!$( event.target ).closest( $menu ).length ) {
 				self._hideMenu();
@@ -150,9 +150,9 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		};
 
 		$( document ).on( 'mouseup.' + this.widgetName, degrade );
-		$( window ).on( 'resize.' + this.widgetName, function( event ) { self.repositionMenu(); } );
+		$( window ).on( 'resize.' + this.widgetName, function ( event ) { self.repositionMenu(); } );
 
-		$menu.on( 'click.' + this.widgetName, function( event ) {
+		$menu.on( 'click.' + this.widgetName, function ( event ) {
 			var $li = $( event.target ).closest( 'li' ),
 				badge = $li.data( self.widgetName + '-menuitem-badge' );
 
@@ -163,7 +163,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		} );
 	},
 
-	_detachMenuEventListeners: function() {
+	_detachMenuEventListeners: function () {
 		$( document ).add( $( window ) ).off( '.' + this.widgetName );
 		$menu.off( 'click.' + this.widgetName );
 	},
@@ -171,7 +171,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	/**
 	 * Creates the individual badges' DOM structures.
 	 */
-	_createBadges: function() {
+	_createBadges: function () {
 		if ( this.element.children( '.wb-badge' ).length ) {
 			return;
 		}
@@ -185,7 +185,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 *
 	 * @return {jQuery}
 	 */
-	_getMenu: function() {
+	_getMenu: function () {
 		if ( $menu ) {
 			return $menu;
 		}
@@ -205,7 +205,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 *         No resolved parameters.
 	 *         No rejected parameters.
 	 */
-	_initMenu: function() {
+	_initMenu: function () {
 		var self = this,
 			deferred = $.Deferred(),
 			$menu = this._getMenu();
@@ -213,8 +213,8 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		self.repositionMenu();
 
 		this._fillMenu()
-		.done( function() {
-			$menu.children( 'li' ).each( function() {
+		.done( function () {
+			$menu.children( 'li' ).each( function () {
 				var $li = $( this ),
 					badgeId = $li.data( self.widgetName + '-menuitem-badge' );
 
@@ -227,7 +227,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 
 			deferred.resolve();
 		} )
-		.fail( function() {
+		.fail( function () {
 			deferred.reject();
 		} );
 
@@ -241,23 +241,23 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 *         No resolved parameters.
 	 *         No rejected parameters.
 	 */
-	_fillMenu: function() {
+	_fillMenu: function () {
 		var self = this,
 			deferred = $.Deferred(),
-			badgeIds = $.map( this.options.badges, function( cssClasses, itemId ) {
+			badgeIds = $.map( this.options.badges, function ( cssClasses, itemId ) {
 				return itemId;
 			} );
 
-		$.when.apply( $, $.map( badgeIds, function( badgeId ) {
+		$.when.apply( $, $.map( badgeIds, function ( badgeId ) {
 			return self.options.entityIdPlainFormatter.format( badgeId );
-		} ) ).done( function( /*…*/ ) {
+		} ) ).done( function ( /*…*/ ) {
 			var badgeLabels = arguments;
 			$menu.empty();
 
-			$.each( badgeIds, function( index, itemId ) {
+			$.each( badgeIds, function ( index, itemId ) {
 				var badgeLabel = badgeLabels[ index ];
 				var $item = $( '<a/>' )
-					.on( 'click.' + self.widgetName, function( event ) {
+					.on( 'click.' + self.widgetName, function ( event ) {
 						event.preventDefault();
 					} )
 					.text( badgeLabel );
@@ -277,7 +277,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 
 			deferred.resolve();
 		} )
-		.fail( function() {
+		.fail( function () {
 			// TODO: Display error message.
 			deferred.reject();
 		} );
@@ -291,7 +291,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @param {string} badgeId
 	 * @param {boolean} targetState
 	 */
-	_toggleBadge: function( badgeId, targetState ) {
+	_toggleBadge: function ( badgeId, targetState ) {
 		if ( targetState ) {
 			this.element.children( '.wb-badge-' + badgeId ).remove();
 		} else {
@@ -301,9 +301,9 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		this._trigger( 'change' );
 	},
 
-	_addBadges: function() {
+	_addBadges: function () {
 		var self = this;
-		$.each( this.options.value, function( index, badgeId ) {
+		$.each( this.options.value, function ( index, badgeId ) {
 			self._addBadge( badgeId );
 		} );
 	},
@@ -313,7 +313,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 *
 	 * @param {string} badgeId
 	 */
-	_addBadge: function( badgeId ) {
+	_addBadge: function ( badgeId ) {
 		var self = this,
 			$badge;
 
@@ -336,7 +336,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		// First add a placeholder without a nice label
 		addBadgeDom( badgeId );
 
-		this.options.entityIdPlainFormatter.format( badgeId ).done( function( badgeLabel ) {
+		this.options.entityIdPlainFormatter.format( badgeId ).done( function ( badgeLabel ) {
 			// Now add a badge with the right label
 			addBadgeDom( badgeLabel );
 		} );
@@ -348,7 +348,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * An empty badge is needed when in edit mode and no other badges are selected.
 	 * The empty badge acts as a menu anchor in this case.
 	 */
-	_updateEmptyBadge: function() {
+	_updateEmptyBadge: function () {
 		var $badges = this.element.children( '.wb-badge' ),
 			needEmptyBadge = this.isInEditMode() && $badges.length === 0,
 			$emptyBadge = $badges.filter( '[data-wb-badge=""]' );
@@ -364,7 +364,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		}
 	},
 
-	startEditing: function() {
+	startEditing: function () {
 		if ( this.isInEditMode() ) {
 			return;
 		}
@@ -379,7 +379,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	/**
 	 * @param {boolean} dropValue
 	 */
-	stopEditing: function( dropValue ) {
+	stopEditing: function ( dropValue ) {
 		if ( !this.isInEditMode() ) {
 			return;
 		}
@@ -405,7 +405,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isInEditMode: function() {
+	isInEditMode: function () {
 		return this.element.hasClass( 'wb-edit' );
 	},
 
@@ -413,14 +413,14 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @param {string[]} value
 	 * @return {string[]|*}
 	 */
-	value: function( value ) {
+	value: function ( value ) {
 		if ( value !== undefined ) {
 			return this.option( 'value', value );
 		}
 
 		value = [];
 
-		this.element.children( '.wb-badge' ).each( function() {
+		this.element.children( '.wb-badge' ).each( function () {
 			var v = $( this ).data( 'wb-badge' );
 			if ( v ) {
 				value.push( v );
@@ -433,7 +433,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'disabled' && $menu && $menu.data( this.widgetName ) === this ) {
@@ -448,7 +448,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	/**
 	 * Aligns the menu to the element the widget is initialized on.
 	 */
-	repositionMenu: function() {
+	repositionMenu: function () {
 		$menu.position( {
 			of: this.element,
 			my: ( this.options.isRtl ? 'right' : 'left' ) + ' top',

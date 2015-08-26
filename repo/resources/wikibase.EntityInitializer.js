@@ -4,7 +4,7 @@
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  * @author: H. Snater < mediawiki@snater.com >
  */
-( function( $, mw, wb ) {
+( function ( $, mw, wb ) {
 	'use strict';
 
 	/**
@@ -17,7 +17,7 @@
 	 *
 	 * @throws {Error} if required parameter is not specified properly.
 	 */
-	var EntityInitializer = wb.EntityInitializer = function( configVarName ) {
+	var EntityInitializer = wb.EntityInitializer = function ( configVarName ) {
 		if ( typeof configVarName !== 'string' ) {
 			throw new Error( 'Config variable name needs to be specified' );
 		}
@@ -44,7 +44,7 @@
 		 *         - {wikibase.datamodel.Entity}
 		 *         No rejected parameters.
 		 */
-		getEntity: function() {
+		getEntity: function () {
 			var self = this,
 				deferred = $.Deferred();
 
@@ -53,7 +53,7 @@
 			}
 
 			this._getFromConfig()
-			.done( function( value ) {
+			.done( function ( value ) {
 				self._value = value;
 				deferred.resolve( self._value );
 			} )
@@ -68,11 +68,11 @@
 		 *         - {wikibase.datamodel.Entity}
 		 *         No rejected parameters.
 		 */
-		_getFromConfig: function() {
+		_getFromConfig: function () {
 			var self = this,
 				deferred = $.Deferred();
 
-			mw.hook( 'wikipage.content' ).add( function() {
+			mw.hook( 'wikipage.content' ).add( function () {
 				var serializedEntity = mw.config.get( self._configVarName );
 
 				if ( serializedEntity === null ) {

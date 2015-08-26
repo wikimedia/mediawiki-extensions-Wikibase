@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -12,7 +12,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 	selector: ':' + $.wikibase.sitelinkgroupview.prototype.namespace
 		+ '-' + $.wikibase.sitelinkgroupview.prototype.widgetName,
 	events: {
-		sitelinkgroupviewcreate: function( event ) {
+		sitelinkgroupviewcreate: function ( event ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				$headingContainer = $sitelinkgroupview.find(
@@ -29,7 +29,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				interactionWidget: sitelinkgroupview
 			} );
 
-			$sitelinkgroupview.on( 'keydown.edittoolbar', function( event ) {
+			$sitelinkgroupview.on( 'keydown.edittoolbar', function ( event ) {
 				if ( sitelinkgroupview.option( 'disabled' ) ) {
 					return;
 				}
@@ -40,7 +40,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				}
 			} );
 		},
-		'sitelinkgroupviewchange sitelinkgroupviewafterstartediting': function( event ) {
+		'sitelinkgroupviewchange sitelinkgroupviewafterstartediting': function ( event ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				edittoolbar = $sitelinkgroupview.data( 'edittoolbar' );
@@ -54,7 +54,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[enable ? 'enable' : 'disable']();
 		},
-		sitelinkgroupviewdisable: function( event ) {
+		sitelinkgroupviewdisable: function ( event ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				edittoolbar = $sitelinkgroupview.data( 'edittoolbar' ),
@@ -63,7 +63,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[enable ? 'enable' : 'disable']();
 		},
-		edittoolbaredit: function( event, toolbarcontroller ) {
+		edittoolbaredit: function ( event, toolbarcontroller ) {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 

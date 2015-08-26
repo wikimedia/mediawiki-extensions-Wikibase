@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-( function( wb, $ ) {
+( function ( wb, $ ) {
 'use strict';
 
 /**
@@ -64,13 +64,13 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {jQuery.promise}
 	 */
-	getNewlyLinkedPages: function() {
+	getNewlyLinkedPages: function () {
 		var self = this,
 			deferred = new $.Deferred();
 
 		this._getEntityForPage( this._secondSiteId, this._secondPageName )
 		.fail( deferred.reject )
-		.done( function( data ) {
+		.done( function ( data ) {
 			var entity, siteLinkCount;
 
 			if ( data.entities['-1'] ) {
@@ -97,7 +97,7 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {jQuery.Promise}
 	 */
-	_getEntityForPage: function( siteId, pageName ) {
+	_getEntityForPage: function ( siteId, pageName ) {
 		return this._repoApi.getEntitiesByPage(
 			siteId,
 			pageName,
@@ -116,7 +116,7 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {object|undefined} Entity as returned by the API
 	 */
-	_extractEntity: function( apiResult ) {
+	_extractEntity: function ( apiResult ) {
 		for ( var i in apiResult.entities ) {
 			if ( apiResult.entities[ i ].sitelinks ) {
 				return apiResult.entities[ i ];
@@ -131,7 +131,7 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {number}
 	 */
-	_countSiteLinks: function( entity ) {
+	_countSiteLinks: function ( entity ) {
 		var siteLinkCount = 0,
 			i;
 
@@ -150,12 +150,12 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {jQuery.Promise}
 	 */
-	linkPages: function() {
+	linkPages: function () {
 		var self = this,
 			deferred = new $.Deferred();
 
 		this._getEntityForPage( self._firstSiteId, self._firstPageName )
-		.done( function( data ) {
+		.done( function ( data ) {
 			// Use the normalized title from now on (e.g. for creating a new item with proper
 			// titles).
 			if ( data.normalized ) {
@@ -189,12 +189,12 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {jQuery.Promise}
 	 */
-	_linkOrMergeSecondPage: function( entity ) {
+	_linkOrMergeSecondPage: function ( entity ) {
 		var self = this,
 			deferred = new $.Deferred();
 
 		this._getEntityForPage( self._secondSiteId, self._secondPageName )
-		.done( function( data ) {
+		.done( function ( data ) {
 			if ( data.normalized ) {
 				// Use the normalized title from now on (e.g. for creating a new item with proper
 				// titles).
@@ -224,13 +224,13 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {jQuery.Promise}
 	 */
-	_linkFirstPageOrCreateItem: function() {
+	_linkFirstPageOrCreateItem: function () {
 		var self = this,
 			deferred = new $.Deferred();
 
 		this._getEntityForPage( self._secondSiteId, self._secondPageName )
 		.fail( deferred.reject )
-		.done( function( data ) {
+		.done( function ( data ) {
 			// Use the normalized title from now on (e.g. for creating a new item with proper
 			// titles).
 			if ( data.normalized ) {
@@ -270,7 +270,7 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {jQuery.Promise}
 	 */
-	_setSiteLink: function( entity, siteId, pageName ) {
+	_setSiteLink: function ( entity, siteId, pageName ) {
 		return this._repoApi.setSitelink(
 			entity.id,
 			entity.lastrevid,
@@ -287,7 +287,7 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {jQuery.Promise}
 	 */
-	_mergeEntities: function( firstEntity, secondEntity ) {
+	_mergeEntities: function ( firstEntity, secondEntity ) {
 		var firstSiteLinkCount = this._countSiteLinks( firstEntity ),
 			secondSiteLinkCount = this._countSiteLinks( secondEntity ),
 			fromId,
@@ -322,7 +322,7 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @return {jQuery.Promise}
 	 */
-	_createItem: function( firstSiteId, firstPageName, secondSiteId, secondPageName ) {
+	_createItem: function ( firstSiteId, firstPageName, secondSiteId, secondPageName ) {
 		// JSON data for the new entity
 		var entityData = {
 				labels: {},

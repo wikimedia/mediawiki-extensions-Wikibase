@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $ ) {
+( function ( mw, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -88,7 +88,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !$.isArray( this.options.value )
 			|| !this.options.entityChangersFactory
 		) {
@@ -103,8 +103,8 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		.on(
 			this.widgetEventPrefix + 'change.' + this.widgetName
 				+ ' ' + this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
-			function() {
-				$.each( self.value(), function() {
+			function () {
+				$.each( self.value(), function () {
 					if ( this.language !== self.options.value[0].language ) {
 						return true;
 					}
@@ -146,7 +146,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		// When destroying a widget not initialized properly, entitytermsforlanguagelistview will
 		// not have been created.
 		if ( this.$entitytermsforlanguagelistview ) {
@@ -175,7 +175,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	draw: function() {
+	draw: function () {
 		var self = this,
 			deferred = $.Deferred();
 
@@ -203,7 +203,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		if ( !this._$notification ) {
 			this.notification()
 				.appendTo( this._getEntitytermsforlanguagelistview().$header )
-				.on( 'closeableupdate.' + this.widgetName, function() {
+				.on( 'closeableupdate.' + this.widgetName, function () {
 					var sticknode = self.element.data( 'sticknode' );
 					if ( sticknode ) {
 						sticknode.refresh();
@@ -221,7 +221,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	 * menu.
 	 * @private
 	 */
-	_createEntitytermsforlanguagelistviewToggler: function() {
+	_createEntitytermsforlanguagelistviewToggler: function () {
 		var self = this,
 			api = new mw.Api();
 
@@ -232,7 +232,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 				$subject: this.$entitytermsforlanguagelistviewContainer,
 				duration: 'fast'
 			} )
-			.on( 'toggleranimation.' + this.widgetName, function( event, params ) {
+			.on( 'toggleranimation.' + this.widgetName, function ( event, params ) {
 				if ( mw.user.isAnon() ) {
 					$.cookie(
 						'wikibase-entitytermsview-showEntitytermslistview',
@@ -245,7 +245,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 						optionname: 'wikibase-entitytermsview-showEntitytermslistview',
 						optionvalue: params.visible ? '1' : '0'
 					} )
-					.done( function() {
+					.done( function () {
 						mw.user.options.set(
 							'wikibase-entitytermsview-showEntitytermslistview',
 							params.visible ? '1' : '0'
@@ -309,23 +309,23 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	 * @return {jQuery.wikibase.entitytermsforlanguagelistview}
 	 * @private
 	 */
-	_getEntitytermsforlanguagelistview: function() {
+	_getEntitytermsforlanguagelistview: function () {
 		return this.$entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 	},
 
 	/**
 	 * Creates and initializes the entitytermsforlanguagelistview widget.
 	 */
-	_createEntitytermsforlanguagelistview: function() {
+	_createEntitytermsforlanguagelistview: function () {
 		var self = this,
 			prefix = $.wikibase.entitytermsforlanguagelistview.prototype.widgetEventPrefix;
 
 		this.$entitytermsforlanguagelistview
-		.on( prefix + 'change.' + this.widgetName, function( event ) {
+		.on( prefix + 'change.' + this.widgetName, function ( event ) {
 			event.stopPropagation();
 			self._trigger( 'change' );
 		} )
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+		.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
 			event.stopPropagation();
 			self.setError( error );
 		} )
@@ -337,7 +337,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 				prefix + 'afterstopediting.' + this.widgetName,
 				prefix + 'disable.' + this.widgetName
 			].join( ' ' ),
-			function( event ) {
+			function ( event ) {
 				event.stopPropagation();
 			}
 		)
@@ -355,21 +355,21 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isValid: function() {
+	isValid: function () {
 		return this._getEntitytermsforlanguagelistview().isValid();
 	},
 
 	/**
 	 * @return {boolean}
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		return this._getEntitytermsforlanguagelistview().isInitialValue();
 	},
 
 	/**
 	 * @inheritdoc
 	 */
-	startEditing: function() {
+	startEditing: function () {
 		this._getEntitytermsforlanguagelistview().startEditing();
 
 		return PARENT.prototype.startEditing.call( this );
@@ -378,7 +378,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	stopEditing: function( dropValue ) {
+	stopEditing: function ( dropValue ) {
 		var self = this,
 			deferred = $.Deferred();
 
@@ -393,7 +393,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		this.$entitytermsforlanguagelistview
 		.one(
 			'entitytermsforlanguagelistviewafterstopediting.entitytermsviewstopediting',
-			function( event, dropValue ) {
+			function ( event, dropValue ) {
 				self._afterStopEditing( dropValue );
 				self.$entitytermsforlanguagelistview.off( '.entitytermsviewstopediting' );
 				deferred.resolve();
@@ -401,7 +401,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		)
 		.one(
 			'entitytermsforlanguagelistviewtoggleerror.entitytermsviewstopediting',
-			function( event, error ) {
+			function ( event, error ) {
 				self.enable();
 				self.$entitytermsforlanguagelistview.off( '.entitytermsviewstopediting' );
 				deferred.reject( error );
@@ -416,7 +416,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	_save: function() {
+	_save: function () {
 		// Currently unused.
 		// TODO: Implement function directly saving all (updated) entity terms instead of deferring
 		// the functionality to sub-components.
@@ -425,7 +425,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @param {boolean} dropValue
 	 */
-	_afterStopEditing: function( dropValue ) {
+	_afterStopEditing: function ( dropValue ) {
 		this.notification();
 		if ( !dropValue ) {
 			this.options.value = this.value();
@@ -436,14 +436,14 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
+	focus: function () {
 		this._getEntitytermsforlanguagelistview().focus();
 	},
 
 	/**
 	 * @inheritdoc
 	 */
-	removeError: function() {
+	removeError: function () {
 		this.element.removeClass( 'wb-error' );
 		this._getEntitytermsforlanguagelistview().removeError();
 	},
@@ -454,7 +454,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	 * @param {Object[]} [value]
 	 * @return {Object[]|*}
 	 */
-	value: function( value ) {
+	value: function ( value ) {
 		if ( value !== undefined ) {
 			return this.option( 'value', value );
 		}
@@ -465,14 +465,14 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	isEmpty: function() {
+	isEmpty: function () {
 		return this._getEntitytermsforlanguagelistview().isEmpty();
 	},
 
 	/**
 	 * @inheritdoc
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'value' ) {
 			throw new Error( 'Impossible to set value after initialization' );
 		}
@@ -489,7 +489,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	notification: function( $content, additionalCssClasses ) {
+	notification: function ( $content, additionalCssClasses ) {
 		if ( !this._$notification ) {
 			var $closeable = $( '<div/>' ).closeable();
 

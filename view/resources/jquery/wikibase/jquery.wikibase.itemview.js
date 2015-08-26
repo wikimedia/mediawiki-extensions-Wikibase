@@ -1,4 +1,4 @@
-( function( $, wb ) {
+( function ( $, wb ) {
 	'use strict';
 
 var PARENT = $.wikibase.entityview;
@@ -39,7 +39,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_create: function() {
+	_create: function () {
 		this._createEntityview();
 
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element );
@@ -57,7 +57,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_init: function() {
+	_init: function () {
 		if ( !this.options.sitelinkGroupListViewBuilder ||
 			!this.options.statementGroupListViewBuilder
 		) {
@@ -72,7 +72,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_initStatements: function() {
+	_initStatements: function () {
 		this.options.statementGroupListViewBuilder( this.options.value, this.$statements );
 
 		// This is here to be sure there is never a duplicate id:
@@ -85,7 +85,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_initSiteLinks: function() {
+	_initSiteLinks: function () {
 		this.options.sitelinkGroupListViewBuilder( this.options.value.getSiteLinks(), this.$siteLinks );
 	},
 
@@ -93,7 +93,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_attachEventHandlers: function() {
+	_attachEventHandlers: function () {
 		PARENT.prototype._attachEventHandlers.call( this );
 
 		var self = this;
@@ -104,7 +104,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 			'referenceviewafterstartediting.' + this.widgetName,
 			'sitelinkgroupviewafterstartediting.' + this.widgetName
 		].join( ' ' ),
-		function( event ) {
+		function ( event ) {
 			self._trigger( 'afterstartediting' );
 		} );
 
@@ -116,7 +116,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 			'referenceviewafterstopediting.' + this.widgetName,
 			'sitelinkgroupviewafterstopediting.' + this.widgetName
 		].join( ' ' ),
-		function( event, dropValue ) {
+		function ( event, dropValue ) {
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} );
 	},
@@ -125,7 +125,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_setState: function( state ) {
+	_setState: function ( state ) {
 		PARENT.prototype._setState.call( this, state );
 
 		this.$statements.data( 'statementgrouplistview' )[state]();

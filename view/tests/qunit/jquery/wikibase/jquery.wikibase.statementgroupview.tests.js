@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 /**
@@ -10,7 +10,7 @@
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createStatementgroupview = function( options, $node ) {
+var createStatementgroupview = function ( options, $node ) {
 	options = $.extend( {
 		claimGuidGenerator: 'I am a ClaimGuidGenerator',
 		entityStore: {
@@ -30,10 +30,10 @@ var createStatementgroupview = function( options, $node ) {
 		},
 		valueViewBuilder: 'I am a ValueViewBuilder',
 		entityChangersFactory: {
-			getClaimsChanger: function() {
+			getClaimsChanger: function () {
 				return 'I am a ClaimsChanger';
 			},
-			getReferencesChanger: function() {
+			getReferencesChanger: function () {
 				return 'I am a ReferencesChanger';
 			}
 		},
@@ -48,8 +48,8 @@ var createStatementgroupview = function( options, $node ) {
 };
 
 QUnit.module( 'jquery.wikibase.statementgroupview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_statementgroupview' ).each( function() {
+	teardown: function () {
+		$( '.test_statementgroupview' ).each( function () {
 			var $statementgroupview = $( this ),
 				statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
@@ -62,7 +62,7 @@ QUnit.module( 'jquery.wikibase.statementgroupview', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $statementgroupview = createStatementgroupview(),
 		statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
@@ -93,7 +93,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	var statementGroup1 = new wb.datamodel.StatementGroup( 'P1', new wb.datamodel.StatementList( [
 			new wb.datamodel.Statement(
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
@@ -172,7 +172,7 @@ QUnit.test( 'value()', function( assert ) {
 	statementlistview.value( statementList3 );
 
 	assert.throws(
-		function() {
+		function () {
 			statementgroupview.value();
 		},
 		'Property of Statements in statementlistview differ resulting in not being able to '

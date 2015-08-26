@@ -6,10 +6,10 @@
  * @licence GNU GPL v2+
  * @author Jens Ohlig
  */
-( function( $, mw, OO, wb, undefined ) {
+( function ( $, mw, OO, wb, undefined ) {
 	'use strict';
 
-	$( document ).ready( function() {
+	$( document ).ready( function () {
 		if ( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemByTitle' ) ) {
 			return; // not the right special page
 		}
@@ -30,7 +30,7 @@
 		.suggester( { source: siteList } );
 		// Hackety hack hack...
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
-		$( '#wb-itembytitle-form1' ).submit( function() {
+		$( '#wb-itembytitle-form1' ).submit( function () {
 			var langID = String( $input.val().replace( /.*\(|\).*/gi, '' ) );
 			if ( wb.sites.getSite( langID ).getId() !== undefined ) {
 				$input.val( wb.sites.getSite( langID ).getId() );

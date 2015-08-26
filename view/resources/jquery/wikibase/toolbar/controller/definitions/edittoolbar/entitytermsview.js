@@ -1,4 +1,4 @@
-( function( $, mw ) {
+( function ( $, mw ) {
 	'use strict';
 
 /**
@@ -12,7 +12,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 	selector: ':' + $.wikibase.entitytermsview.prototype.namespace
 		+ '-' + $.wikibase.entitytermsview.prototype.widgetName,
 	events: {
-		entitytermsviewcreate: function( event, toolbarcontroller ) {
+		entitytermsviewcreate: function ( event, toolbarcontroller ) {
 			var $entitytermsview = $( event.target ),
 				entitytermsview = $entitytermsview.data( 'entitytermsview' ),
 				$container = $entitytermsview.children( '.wikibase-toolbar-container' );
@@ -32,14 +32,14 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				autoWidth: true,
 				zIndex: 2
 			} )
-			.on( 'sticknodeupdate', function( event ) {
+			.on( 'sticknodeupdate', function ( event ) {
 				if ( !$( event.target ).data( 'sticknode' ).isFixed() ) {
 					$entitytermsview.data( 'edittoolbar' )
 						.option( '$container' ).css( 'width', 'auto' );
 				}
 			} );
 
-			$entitytermsview.on( 'keyup.edittoolbar', function( event ) {
+			$entitytermsview.on( 'keyup.edittoolbar', function ( event ) {
 				if ( entitytermsview.option( 'disabled' ) ) {
 					return;
 				}
@@ -50,7 +50,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				}
 			} );
 		},
-		'entitytermsviewchange entitytermsviewafterstartediting': function( event ) {
+		'entitytermsviewchange entitytermsviewafterstartediting': function ( event ) {
 			var $entitytermsview = $( event.target ),
 				entitytermsview = $entitytermsview.data( 'entitytermsview' ),
 				edittoolbar = $entitytermsview.data( 'edittoolbar' ),
@@ -62,7 +62,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			$entitytermsview.data( 'edittoolbar' )
 				.option( '$container' ).data( 'sticknode' ).refresh();
 		},
-		entitytermsviewafterstopediting: function( event ) {
+		entitytermsviewafterstopediting: function ( event ) {
 			var $entitytermsview = $( event.target ),
 				entitytermsview = $entitytermsview.data( 'entitytermsview' ),
 				showEntitytermslistviewValue = mw.user.isAnon()
@@ -75,7 +75,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				&& !showEntitytermslistview
 			) {
 				entitytermsview.$entitytermsforlanguagelistviewContainer.slideUp( {
-					complete: function() {
+					complete: function () {
 						entitytermsview.$entitytermsforlanguagelistviewToggler.data( 'toggler' )
 							.refresh();
 					},
@@ -86,7 +86,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			$entitytermsview.data( 'edittoolbar' )
 				.option( '$container' ).data( 'sticknode' ).refresh();
 		},
-		entitytermsviewdisable: function( event ) {
+		entitytermsviewdisable: function ( event ) {
 			var $entitytermsview = $( event.target ),
 				entitytermsview = $entitytermsview.data( 'entitytermsview' ),
 				edittoolbar = $entitytermsview.data( 'edittoolbar' ),
@@ -95,7 +95,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[enable ? 'enable' : 'disable']();
 		},
-		edittoolbaredit: function( event, toolbarcontroller ) {
+		edittoolbaredit: function ( event, toolbarcontroller ) {
 			var $entitytermsview = $( event.target ),
 				entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
@@ -105,7 +105,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			if ( !entitytermsview.$entitytermsforlanguagelistviewContainer.is( ':visible' ) ) {
 				entitytermsview.$entitytermsforlanguagelistviewContainer.slideDown( {
-					complete: function() {
+					complete: function () {
 						entitytermsview.$entitytermsforlanguagelistview
 							.data( 'entitytermsforlanguagelistview' ).updateInputSize();
 						entitytermsview.$entitytermsforlanguagelistviewToggler.data( 'toggler' )

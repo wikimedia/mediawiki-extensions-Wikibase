@@ -1,4 +1,4 @@
-( function( wb, util ) {
+( function ( wb, util ) {
 	'use strict';
 
 	/**
@@ -7,7 +7,7 @@
 	wb.entityIdFormatter.CachingEntityIdPlainFormatter = util.inherit(
 		'CachingEntityIdPlainFormatter',
 		wb.entityIdFormatter.EntityIdPlainFormatter,
-		function( entityIdFormatter ) {
+		function ( entityIdFormatter ) {
 			this._entityIdFormatter = entityIdFormatter;
 			this._cache = {};
 		},
@@ -16,7 +16,7 @@
 
 			_cache: null,
 
-			format: function( entityId ) {
+			format: function ( entityId ) {
 				if ( !this._cache.hasOwnProperty( entityId ) ) {
 					this._cache[ entityId ] = this._entityIdFormatter.format( entityId );
 				}

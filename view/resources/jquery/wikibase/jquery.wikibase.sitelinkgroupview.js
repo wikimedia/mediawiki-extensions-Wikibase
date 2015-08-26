@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, mw, wb ) {
+( function ( $, mw, wb ) {
 	'use strict';
 
 	var PARENT = $.ui.EditableTemplatedWidget;
@@ -13,7 +13,7 @@
  */
 function getSiteIdsOfGroup( group ) {
 	var siteIds = [];
-	$.each( wb.sites.getSitesOfGroup( group ), function( siteId, site ) {
+	$.each( wb.sites.getSitesOfGroup( group ), function ( siteId, site ) {
 		siteIds.push( siteId );
 	} );
 	return siteIds;
@@ -82,7 +82,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required parameter(s) missing' );
 		}
@@ -109,7 +109,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		if ( this.$sitelinklistview ) {
 			this.$sitelinklistview.data( 'sitelinklistview' ).destroy();
 		}
@@ -119,7 +119,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.draw
 	 */
-	draw: function() {
+	draw: function () {
 		var self = this,
 			deferred = $.Deferred();
 
@@ -140,7 +140,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		if ( !this._$notification ) {
 			this.notification()
 			.appendTo( this.$headingSection )
-			.on( 'closeableupdate.' + this.widgetName, function() {
+			.on( 'closeableupdate.' + this.widgetName, function () {
 				var sticknode = self.element.data( 'sticknode' );
 				if ( sticknode ) {
 					sticknode.refresh();
@@ -163,15 +163,15 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * Creates and initializes the sitelinklistview widget.
 	 */
-	_createSitelinklistview: function() {
+	_createSitelinklistview: function () {
 		var self = this,
 			prefix = $.wikibase.sitelinklistview.prototype.widgetEventPrefix;
 
 		this.$sitelinklistview
-		.on( prefix + 'change.' + this.widgetName, function( event ) {
+		.on( prefix + 'change.' + this.widgetName, function ( event ) {
 			self._trigger( 'change' );
 		} )
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+		.on( prefix + 'toggleerror.' + this.widgetName, function ( event, error ) {
 			self.setError( error );
 		} )
 		.sitelinklistview( {
@@ -190,14 +190,14 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @return {wikibase.datamodel.SiteLink[]}
 	 */
-	_getSiteLinksOfGroup: function() {
+	_getSiteLinksOfGroup: function () {
 		var self = this;
 
 		if ( !this.options.value ) {
 			return [];
 		}
 
-		return $.grep( this.options.value.siteLinks, function( siteLink ) {
+		return $.grep( this.options.value.siteLinks, function ( siteLink ) {
 			return $.inArray(
 				siteLink.getSiteId(),
 				getSiteIdsOfGroup( self.options.value.group )
@@ -211,7 +211,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 *
 	 * @throws {Error} if value is not defined properly.
 	 */
-	_checkValue: function( value ) {
+	_checkValue: function ( value ) {
 		if ( !$.isPlainObject( value ) ) {
 			throw new Error( 'Value needs to be an object' );
 		} else if ( !value.group ) {
@@ -228,11 +228,11 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.startEditing
 	 */
-	startEditing: function() {
+	startEditing: function () {
 		var self = this,
 			deferred = $.Deferred();
 
-		this.$sitelinklistview.one( 'sitelinklistviewafterstartediting', function() {
+		this.$sitelinklistview.one( 'sitelinklistviewafterstartediting', function () {
 			PARENT.prototype.startEditing.call( self )
 				.done( deferred.resolve )
 				.fail( deferred.reject );
@@ -246,7 +246,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.stopEditing
 	 */
-	stopEditing: function( dropValue ) {
+	stopEditing: function ( dropValue ) {
 		var self = this,
 			deferred = $.Deferred();
 
@@ -261,14 +261,14 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		this.$sitelinklistview
 		.one(
 			'sitelinklistviewafterstopediting.sitelinkgroupviewstopediting',
-			function( event, dropValue ) {
+			function ( event, dropValue ) {
 				self._afterStopEditing( dropValue );
 				self.$sitelinklistview.off( '.sitelinkgroupviewstopediting' );
 				self.notification();
 				deferred.resolve();
 			}
 		)
-		.one( 'sitelinklistviewtoggleerror.sitelinkgroupviewstopediting', function( event, error ) {
+		.one( 'sitelinklistviewtoggleerror.sitelinkgroupviewstopediting', function ( event, error ) {
 			self.enable();
 			self.$sitelinklistview.off( '.sitelinkgroupviewstopediting' );
 			deferred.reject( error );
@@ -285,7 +285,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @param {Object} [value]
 	 * @return {Object|*}
 	 */
-	value: function( value ) {
+	value: function ( value ) {
 		if ( value === undefined ) {
 			return this.option( 'value' );
 		}
@@ -295,35 +295,35 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isEmpty
 	 */
-	isEmpty: function() {
+	isEmpty: function () {
 		return !this.value().siteLinks.length;
 	},
 
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isValid
 	 */
-	isValid: function() {
+	isValid: function () {
 		return this.$sitelinklistview.data( 'sitelinklistview' ).isValid();
 	},
 
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		return this.$sitelinklistview.data( 'sitelinklistview' ).isInitialValue();
 	},
 
 	/**
 	 * @see jQuery.ui.TemplatedWidget.focus
 	 */
-	focus: function() {
+	focus: function () {
 		this.$sitelinklistview.data( 'sitelinklistview' ).focus();
 	},
 
 	/**
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'value' ) {
 			value = this._checkValue( value );
 		}
@@ -346,12 +346,12 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.setError
 	 */
-	setError: function( error ) {
+	setError: function ( error ) {
 		if ( error ) {
 			var self = this;
 
 			var $error = wb.buildErrorOutput( error, {
-				progress: function() {
+				progress: function () {
 					self.$headingSection.data( 'sticknode' ).refresh();
 				}
 			} );

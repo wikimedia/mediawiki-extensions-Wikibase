@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -11,7 +11,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 	id: 'referenceview-snakview',
 	selector: '.wikibase-statementview-references .wikibase-referenceview',
 	events: {
-		'snakviewafterstartediting snakviewchange': function( event, toolbarcontroller ) {
+		'snakviewafterstartediting snakviewchange': function ( event, toolbarcontroller ) {
 			var $snakview = $( event.target ),
 				$referenceview = $snakview.closest( ':wikibase-referenceview' ),
 				referenceview = $referenceview.data( 'referenceview' );
@@ -28,7 +28,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				$snakview.removetoolbar( {
 					$container: $( '<div/>' ).appendTo( $snakview )
 				} )
-				.on( 'removetoolbarremove.removetoolbar', function( event ) {
+				.on( 'removetoolbarremove.removetoolbar', function ( event ) {
 					if ( event.target === $snakview[0] ) {
 						snakviewPropertyGroupListview.removeItem( $snakview );
 					}
@@ -38,12 +38,12 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'referenceviewafterstopediting',
-					function( event, toolbarcontroller ) {
+					function ( event, toolbarcontroller ) {
 						// Destroy the snakview toolbars:
 						var $referenceviewNode = $( event.target );
 						$.each(
 							$referenceviewNode.find( '.wikibase-snakview' ),
-							function( i, snakviewNode ) {
+							function ( i, snakviewNode ) {
 								toolbarcontroller.destroyToolbar(
 									$( snakviewNode ).data( 'removetoolbar' )
 								);
@@ -56,7 +56,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'referenceviewdisable listviewitemremoved',
-					function( event ) {
+					function ( event ) {
 						var $referenceview = event.type.indexOf( 'referenceview' ) !== -1
 							? $( event.target )
 							: $( event.target ).closest( ':wikibase-referenceview' );

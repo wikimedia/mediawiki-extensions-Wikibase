@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 	'use strict';
 
 	/**
@@ -53,8 +53,8 @@
 				}
 			}
 		},
-		teardown: function() {
-			$( '.test_sitelinkview' ).each( function() {
+		teardown: function () {
+			$( '.test_sitelinkview' ).each( function () {
 				var $sitelinkview = $( this ),
 					sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -67,7 +67,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'Create and destroy', function( assert ) {
+	QUnit.test( 'Create and destroy', function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -84,7 +84,7 @@
 		);
 	} );
 
-	QUnit.test( 'Create and destroy with initial value', function( assert ) {
+	QUnit.test( 'Create and destroy with initial value', function ( assert ) {
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
@@ -104,21 +104,21 @@
 		);
 	} );
 
-	QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
+	QUnit.test( 'startEditing() & stopEditing()', 4, function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.on( 'sitelinkviewafterstartediting', function( event ) {
+		.on( 'sitelinkviewafterstartediting', function ( event ) {
 			assert.ok(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkviewstopediting', function( event, dropValue, callback ) {
+		.on( 'sitelinkviewstopediting', function ( event, dropValue, callback ) {
 			callback();
 		} )
-		.on( 'sitelinkviewafterstopediting', function( event, dropValue ) {
+		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
 			assert.ok(
 				true,
 				'Stopped edit mode.'
@@ -145,7 +145,7 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.test( 'startEditing(), stopEditing() with initial value', 5, function( assert ) {
+	QUnit.test( 'startEditing(), stopEditing() with initial value', 5, function ( assert ) {
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
@@ -153,16 +153,16 @@
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
-		.on( 'sitelinkviewafterstartediting', function( event ) {
+		.on( 'sitelinkviewafterstartediting', function ( event ) {
 			assert.ok(
 				true,
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkviewstopediting', function( event, dropValue, callback ) {
+		.on( 'sitelinkviewstopediting', function ( event, dropValue, callback ) {
 			callback();
 		} )
-		.on( 'sitelinkviewafterstopediting', function( event, dropValue ) {
+		.on( 'sitelinkviewafterstopediting', function ( event, dropValue ) {
 			assert.ok(
 				true,
 				'Stopped edit mode.'
@@ -189,7 +189,7 @@
 		sitelinkview.stopEditing();
 	} );
 
-	QUnit.test( 'value()', function( assert ) {
+	QUnit.test( 'value()', function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -213,7 +213,7 @@
 		);
 	} );
 
-	QUnit.test( 'isEmpty()', function( assert ) {
+	QUnit.test( 'isEmpty()', function ( assert ) {
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
@@ -266,7 +266,7 @@
 		);
 	} );
 
-	QUnit.test( 'isValid()', function( assert ) {
+	QUnit.test( 'isValid()', function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -303,7 +303,7 @@
 		);
 	} );
 
-	QUnit.test( 'isInitialValue()', function( assert ) {
+	QUnit.test( 'isInitialValue()', function ( assert ) {
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
@@ -332,13 +332,13 @@
 		);
 	} );
 
-	QUnit.test( 'setError()', 1, function( assert ) {
+	QUnit.test( 'setError()', 1, function ( assert ) {
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
 		$sitelinkview
 		.addClass( 'wb-error' )
-		.on( 'sitelinkviewtoggleerror', function( event, error ) {
+		.on( 'sitelinkviewtoggleerror', function ( event, error ) {
 			assert.ok(
 				true,
 				'Triggered toggleerror event.'

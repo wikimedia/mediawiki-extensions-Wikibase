@@ -1,4 +1,4 @@
-( function( $, mw ) {
+( function ( $, mw ) {
 	'use strict';
 
 /**
@@ -11,7 +11,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 	id: 'statementview-referenceview',
 	selector: '.wikibase-statementview-references',
 	events: {
-		listviewcreate: function( event, toolbarController ) {
+		listviewcreate: function ( event, toolbarController ) {
 			var $listview = $( event.target ),
 				listview = $listview.data( 'listview' ),
 				lia = listview.listItemAdapter(),
@@ -26,19 +26,19 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				$container: $( '<div/>' ).appendTo( $node ),
 				label: mw.msg( 'wikibase-addreference' )
 			} )
-			.on( 'addtoolbaradd.addtoolbar', function( e ) {
+			.on( 'addtoolbaradd.addtoolbar', function ( e ) {
 				if ( e.target !== $node.get( 0 ) ) {
 					return;
 				}
 
-				listview.enterNewItem().done( function( $referenceview ) {
+				listview.enterNewItem().done( function ( $referenceview ) {
 					var referenceview = lia.liInstance( $referenceview );
 					referenceview.focus();
 				} );
 
 				// Re-focus "add" button after having added or having cancelled adding a reference:
 				var eventName = lia.prefixedEvent( 'afterstopediting.addtoolbar' );
-				$listview.one( eventName, function( event ) {
+				$listview.one( eventName, function ( event ) {
 					$node.data( 'addtoolbar' ).focus();
 				} );
 
@@ -46,7 +46,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'listviewdestroy',
-					function( event, toolbarController ) {
+					function ( event, toolbarController ) {
 						var $listview = $( event.target ),
 							$node = $listview.parent();
 
@@ -64,7 +64,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				event.data.toolbar.type,
 				event.data.toolbar.id,
 				'listviewdisable',
-				function( event ) {
+				function ( event ) {
 					if ( event.target !== $listview.get( 0 ) ) {
 						return;
 					}

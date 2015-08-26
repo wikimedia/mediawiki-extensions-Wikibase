@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, util ) {
+( function ( $, wb, util ) {
 	'use strict';
 
 /**
@@ -25,7 +25,7 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 	/**
 	 * @see jQuery.ui.suggester._create
 	 */
-	_create: function() {
+	_create: function () {
 		var self = this;
 
 		if ( this.option( 'pageName' ) ) {
@@ -39,7 +39,7 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 		$.ui.suggester.prototype._create.call( this );
 
 		this.element
-		.on( this.widgetEventPrefix + 'change.' + this.widgetName, function( event ) {
+		.on( this.widgetEventPrefix + 'change.' + this.widgetName, function ( event ) {
 			var value = $.trim( self.element.val() );
 			if ( value !== self.option( 'pageName' ) ) {
 				self.option( 'pageName', value );
@@ -50,7 +50,7 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 	/**
 	 * @see jQuery.ui.suggester._setOption
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		$.ui.suggester.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'siteId' ) {
@@ -66,7 +66,7 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 	/**
 	 * @see $.ui.suggester.search
 	 */
-	search: function( event ) {
+	search: function ( event ) {
 		// Reject searching when there is no siteId specified:
 		if ( !this.option( 'siteId' ) ) {
 			var deferred = $.Deferred();
@@ -85,10 +85,10 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 	 *         Rejected parameters:
 	 *         - {string}
 	 */
-	_request: function() {
+	_request: function () {
 		var self = this;
 
-		return function( term ) {
+		return function ( term ) {
 			var deferred = $.Deferred();
 
 			$.ajax( {
@@ -100,10 +100,10 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 				},
 				timeout: 8000
 			} )
-			.done( function( response ) {
+			.done( function ( response ) {
 				deferred.resolve( response[1], response[0] );
 			} )
-			.fail( function( jqXHR, textStatus ) {
+			.fail( function ( jqXHR, textStatus ) {
 				// Since this is a JSONP request, this will always fail with a timeout...
 				deferred.reject( textStatus );
 			} );
@@ -115,7 +115,7 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 	/**
 	 * @see jQuery.ui.suggester._createMenuItemFromSuggestion
 	 */
-	_createMenuItemFromSuggestion: function( suggestion, requestTerm ) {
+	_createMenuItemFromSuggestion: function ( suggestion, requestTerm ) {
 		return new $.ui.ooMenu.Item(
 			util.highlightSubstring( requestTerm, suggestion ),
 			suggestion

@@ -3,7 +3,7 @@
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
 
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 /**
@@ -11,26 +11,26 @@
  * @param {jQuery} [$node]
  * @return {jQuery}
  */
-var createStatementgrouplistview = function( options, $node ) {
+var createStatementgrouplistview = function ( options, $node ) {
 	options = $.extend( {
 		claimGuidGenerator: 'I am a ClaimGuidGenerator',
 		entityIdHtmlFormatter: {
-			format: function( entityId ) {
+			format: function ( entityId ) {
 				return $.Deferred().resolve( entityId ).promise();
 			}
 		},
 		entityIdPlainFormatter: {
-			format: function( entityId ) {
+			format: function ( entityId ) {
 				return $.Deferred().resolve( entityId ).promise();
 			}
 		},
 		entityStore: 'I am an EntityStore',
 		valueViewBuilder: 'I am a ValueViewBuilder',
 		entityChangersFactory: {
-			getClaimsChanger: function() {
+			getClaimsChanger: function () {
 				return 'I am a ClaimsChanger';
 			},
-			getReferencesChanger: function() {
+			getReferencesChanger: function () {
 				return 'I am a ReferencesChanger';
 			}
 		},
@@ -46,8 +46,8 @@ var createStatementgrouplistview = function( options, $node ) {
 };
 
 QUnit.module( 'jquery.wikibase.statementgrouplistview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_statementgrouplistview' ).each( function() {
+	teardown: function () {
+		$( '.test_statementgrouplistview' ).each( function () {
 			var $statementgrouplistview = $( this ),
 				statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
@@ -60,7 +60,7 @@ QUnit.module( 'jquery.wikibase.statementgrouplistview', QUnit.newMwEnvironment( 
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	var $statementgrouplistview = createStatementgrouplistview(),
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
@@ -89,7 +89,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'enterNewItem', function( assert ) {
+QUnit.test( 'enterNewItem', function ( assert ) {
 	var $statementgrouplistview = createStatementgrouplistview(),
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
@@ -108,7 +108,7 @@ QUnit.test( 'enterNewItem', function( assert ) {
 	);
 } );
 
-QUnit.test( 'enterNewItem & save', function( assert ) {
+QUnit.test( 'enterNewItem & save', function ( assert ) {
 	var $statementgrouplistview = createStatementgrouplistview(),
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' ),
 		statementgrouplistviewListview = statementgrouplistview.listview,
@@ -121,7 +121,7 @@ QUnit.test( 'enterNewItem & save', function( assert ) {
 		$statementlistview = statementgroupview.statementlistview.element;
 
 	// Simulate having altered snakview's value:
-	$statementlistview.find( ':wikibase-snakview' ).data( 'snakview' ).snak = function() {
+	$statementlistview.find( ':wikibase-snakview' ).data( 'snakview' ).snak = function () {
 		return new wb.datamodel.PropertyNoValueSnak( 'P1' );
 	};
 

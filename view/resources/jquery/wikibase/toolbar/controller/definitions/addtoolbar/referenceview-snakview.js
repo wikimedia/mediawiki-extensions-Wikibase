@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -11,7 +11,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 	id: 'referenceview-snakview',
 	selector: '.wikibase-statementview-references .wikibase-referenceview',
 	events: {
-		referenceviewafterstartediting: function( event, toolbarController ) {
+		referenceviewafterstartediting: function ( event, toolbarController ) {
 			var $referenceview = $( event.target ),
 				referenceview = $referenceview.data( 'referenceview' ),
 				lia = referenceview.$listview.data( 'listview' ).listItemAdapter();
@@ -19,9 +19,9 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 			$referenceview.addtoolbar( {
 				$container: $( '<div/>' ).appendTo( $referenceview )
 			} )
-			.on( 'addtoolbaradd.addtoolbar', function() {
+			.on( 'addtoolbaradd.addtoolbar', function () {
 				$referenceview.data( 'referenceview' ).enterNewItem()
-					.done( function( $snaklistview ) {
+					.done( function ( $snaklistview ) {
 						lia.liInstance( $snaklistview ).focus();
 					} );
 			} );
@@ -30,7 +30,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				event.data.toolbar.type,
 				event.data.toolbar.id,
 				'referenceviewafterstopediting',
-				function( event, toolbarController ) {
+				function ( event, toolbarController ) {
 					var $referenceview = $( event.target );
 					toolbarController.destroyToolbar( $referenceview.data( 'addtoolbar' ) );
 					$referenceview.off( '.addtoolbar' );
@@ -41,7 +41,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				event.data.toolbar.type,
 				event.data.toolbar.id,
 				'referenceviewchange',
-				function( event ) {
+				function ( event ) {
 					var $referenceview = $( event.target ).closest( ':wikibase-referenceview' ),
 						referenceview = $referenceview.data( 'referenceview' ),
 						addToolbar = $referenceview.data( 'addtoolbar' );
@@ -55,7 +55,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				event.data.toolbar.type,
 				event.data.toolbar.id,
 				'referenceviewdisable',
-				function( event ) {
+				function ( event ) {
 					var referenceview = $( event.target ).data( 'referenceview' ),
 						addToolbar = $( event.target ).data( 'addtoolbar' );
 

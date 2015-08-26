@@ -1,4 +1,4 @@
-( function( $, mw ) {
+( function ( $, mw ) {
 	'use strict';
 
 /**
@@ -11,7 +11,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 	id: 'statementview-snakview',
 	selector: '.wikibase-statementview-qualifiers',
 	events: {
-		'listviewcreate snaklistviewafterstartediting': function( event, toolbarController ) {
+		'listviewcreate snaklistviewafterstartediting': function ( event, toolbarController ) {
 			var $target = $( event.target ),
 				$qualifiers = $target.closest( '.wikibase-statementview-qualifiers' ),
 				listview = $target.closest( ':wikibase-listview' ).data( 'listview' ),
@@ -26,11 +26,11 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					label: mw.msg( 'wikibase-addqualifier' )
 				} )
 				.off( '.addtoolbar' )
-				.on( 'addtoolbaradd.addtoolbar', function( e ) {
+				.on( 'addtoolbaradd.addtoolbar', function ( e ) {
 					listview.enterNewItem();
 
 					var snaklistview = listview.value()[listview.value().length - 1];
-					snaklistview.enterNewItem().done( function() {
+					snaklistview.enterNewItem().done( function () {
 						snaklistview.focus();
 					} );
 				} );
@@ -39,7 +39,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'listviewdestroy snaklistviewafterstopediting',
-					function( event, toolbarcontroller ) {
+					function ( event, toolbarcontroller ) {
 						var $target = $( event.target ),
 							$qualifiers = $target.closest( '.wikibase-statementview-qualifiers' );
 
@@ -56,7 +56,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'snaklistviewchange',
-					function( event ) {
+					function ( event ) {
 						var $target = $( event.target ),
 							$qualifiers = $target.closest( '.wikibase-statementview-qualifiers' ),
 							addToolbar = $qualifiers.data( 'addtoolbar' ),
@@ -80,7 +80,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.id,
 					// FIXME: When there are qualifiers, no state change events will be thrown.
 					'listviewdisable',
-					function( event ) {
+					function ( event ) {
 						var $qualifiers = $( event.target )
 								.closest( '.wikibase-statementview-qualifiers' ),
 							addToolbar = $qualifiers.data( 'addtoolbar' ),
@@ -99,7 +99,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					event.data.toolbar.type,
 					event.data.toolbar.id,
 					'listviewitemadded listviewitemremoved',
-					function( event ) {
+					function ( event ) {
 						// Enable "add" link when all qualifiers have been removed:
 						var $listviewNode = $( event.target ),
 							listview = $listviewNode.data( 'listview' ),

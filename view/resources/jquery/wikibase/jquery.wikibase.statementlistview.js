@@ -1,4 +1,4 @@
-( function( wb, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -117,7 +117,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !this.options.claimGuidGenerator
 			|| !this.options.entityStore
 			|| !this.options.valueViewBuilder
@@ -143,12 +143,12 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			toggleErrorEvent = lia.prefixedEvent( 'toggleerror.' + this.widgetName );
 
 		this.element
-		.on( afterStartEditingEvent, function( event ) {
+		.on( afterStartEditingEvent, function ( event ) {
 			// Forward "afterstartediting" event for higher components (e.g. statementgrouplistview)
 			// to recognize that edit mode has been started.
 			self._trigger( 'afterstartediting' );
 		} )
-		.on( afterStopEditingEvent, function( event, dropValue ) {
+		.on( afterStopEditingEvent, function ( event, dropValue ) {
 			var $statementview = $( event.target ),
 				statementview = lia.liInstance( $statementview );
 
@@ -158,7 +158,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 				self._trigger( 'afterstopediting', null, [dropValue] );
 			}
 		} )
-		.on( toggleErrorEvent, function( event, error ) {
+		.on( toggleErrorEvent, function ( event, error ) {
 			self._trigger( 'toggleerror' );
 		} );
 	},
@@ -167,7 +167,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	destroy: function() {
+	destroy: function () {
 		this._listview.destroy();
 		PARENT.prototype.destroy.call( this );
 	},
@@ -177,7 +177,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @since 0.5
 	 * @private
 	 */
-	_createListView: function() {
+	_createListView: function () {
 		var self = this,
 			propertyId;
 
@@ -192,7 +192,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 		.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: $.wikibase.statementview,
-				newItemOptionsFn: function( value ) {
+				newItemOptionsFn: function ( value ) {
 					return {
 						value: value || null,
 						predefined: {
@@ -231,13 +231,13 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @param {wikibase.datamodel.StatementList} [statementList]
 	 * @return {wikibase.datamodel.StatementList|undefined}
 	 */
-	value: function( statementList ) {
+	value: function ( statementList ) {
 		if ( statementList === undefined ) {
 			var lia = this._listview.listItemAdapter();
 
 			statementList = new wb.datamodel.StatementList();
 
-			this._listview.items().each( function() {
+			this._listview.items().each( function () {
 				var statement = lia.liInstance( $( this ) ).value();
 				if ( statement ) {
 					statementList.addItem( statement );
@@ -255,7 +255,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 *
 	 * @return {boolean}
 	 */
-	isEmpty: function() {
+	isEmpty: function () {
 		return !this._listview.items().length;
 	},
 
@@ -267,17 +267,17 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @return {Function} return.done
 	 * @return {jQuery} return.done.$statementview
 	 */
-	enterNewItem: function() {
+	enterNewItem: function () {
 		var self = this,
 			lia = this._listview.listItemAdapter(),
 			afterStopEditingEvent = lia.prefixedEvent( 'afterstopediting.' + self.widgetName );
 
-		return this._listview.enterNewItem().done( function( $statementview ) {
+		return this._listview.enterNewItem().done( function ( $statementview ) {
 			var statementview = lia.liInstance( $statementview );
 
 			$statementview
 			.addClass( 'wb-new' )
-			.one( afterStopEditingEvent, function( event, dropValue ) {
+			.one( afterStopEditingEvent, function ( event, dropValue ) {
 				var statement = statementview.value();
 
 				self._listview.removeItem( $statementview );
@@ -298,17 +298,17 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 *
 	 * @param {jQuery.wikibase.statementview} statementview
 	 */
-	remove: function( statementview ) {
+	remove: function ( statementview ) {
 		var self = this;
 
 		statementview.disable();
 
 		this._claimsChanger.removeStatement( statementview.value() )
-		.done( function() {
+		.done( function () {
 			self._listview.removeItem( statementview.element );
 
 			self._trigger( 'afterremove' );
-		} ).fail( function( error ) {
+		} ).fail( function ( error ) {
 			statementview.enable();
 			statementview.setError( error );
 		} );
@@ -318,7 +318,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'value' && !!value ) {
 			if ( !( value instanceof wb.datamodel.StatementList ) ) {
 				throw new Error( 'value needs to be a wb.datamodel.StatementList instance' );
@@ -338,7 +338,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
+	focus: function () {
 		var $items = this._listview.items();
 
 		if ( $items.length ) {

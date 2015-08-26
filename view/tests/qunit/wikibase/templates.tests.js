@@ -8,12 +8,12 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( mw, $, QUnit ) {
+( function ( mw, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'templates', QUnit.newMwEnvironment() );
 
-	QUnit.test( 'mw.wbTemplate()', function( assert ) {
+	QUnit.test( 'mw.wbTemplate()', function ( assert ) {
 
 		assert.equal(
 			typeof mw.wbTemplates,
@@ -159,7 +159,7 @@
 		 * @param {String} template
 		 * @param {String|Array} expected
 		 */
-		var verifyTemplate = function( params, template, expected ) {
+		var verifyTemplate = function ( params, template, expected ) {
 			var key = 'test';
 
 			/**
@@ -184,7 +184,7 @@
 			mw.wbTemplates.store.set( key, template );
 
 			var paramMessage = '';
-			$.each( params, function( i, param ) {
+			$.each( params, function ( i, param ) {
 				if ( i > 0 ) {
 					paramMessage += ', ';
 				}
@@ -201,7 +201,7 @@
 
 			if ( expected === '' ) {
 				assert.throws(
-					function() { $( '<div/>' ).append( mw.wbTemplate( key, params ) ).html(); },
+					function () { $( '<div/>' ).append( mw.wbTemplate( key, params ) ).html(); },
 					'Triggered error when trying to create invalid HTML filling single param template "' + template + '" with "' + paramMessage + '"'
 				);
 			} else {
@@ -215,9 +215,9 @@
 		};
 
 		// Loop through testsData and params to run the tests
-		$.each( testsData, function( numberOfParams, testData ) {
-			$.each( testData, function( template, expectedResults ) {
-				$.each( params[ numberOfParams ], function( i, params ) {
+		$.each( testsData, function ( numberOfParams, testData ) {
+			$.each( testData, function ( template, expectedResults ) {
+				$.each( params[ numberOfParams ], function ( i, params ) {
 					verifyTemplate( params, template, expectedResults[ i ] );
 				} );
 			} );

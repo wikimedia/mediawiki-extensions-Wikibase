@@ -2,19 +2,19 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, wb, QUnit ) {
+( function ( $, wb, QUnit ) {
 'use strict';
 
 /**
  * @param {Object} [options]
  * @return {jQuery}
  */
-var createEntitytermsforlanguagelistview = function( options ) {
+var createEntitytermsforlanguagelistview = function ( options ) {
 	options = $.extend( {
 		entityChangersFactory: {
-			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
-			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
-			getLabelsChanger: function() { return 'I am a LabelsChanger'; }
+			getAliasesChanger: function () { return 'I am an AliasesChanger'; },
+			getDescriptionsChanger: function () { return 'I am a DescriptionsChanger'; },
+			getLabelsChanger: function () { return 'I am a LabelsChanger'; }
 		},
 		value: [
 			{
@@ -38,8 +38,8 @@ var createEntitytermsforlanguagelistview = function( options ) {
 };
 
 QUnit.module( 'jquery.wikibase.entitytermsforlanguagelistview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_entitytermsforlanguagelistview' ).each( function() {
+	teardown: function () {
+		$( '.test_entitytermsforlanguagelistview' ).each( function () {
 			var $entitytermsforlanguagelistview = $( this ),
 				entitytermsforlanguagelistview
 					= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
@@ -53,9 +53,9 @@ QUnit.module( 'jquery.wikibase.entitytermsforlanguagelistview', QUnit.newMwEnvir
 	}
 } ) );
 
-QUnit.test( 'Create & destroy', function( assert ) {
+QUnit.test( 'Create & destroy', function ( assert ) {
 	assert.throws(
-		function() {
+		function () {
 			createEntitytermsforlanguagelistview( { value: null } );
 		},
 		'Throwing error when trying to initialize widget without a value.'
@@ -78,7 +78,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isInitialValue()', function( assert ) {
+QUnit.test( 'isInitialValue()', function ( assert ) {
 	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 		entitytermsforlanguagelistview
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
@@ -116,13 +116,13 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 // overwritten (see entitytermsforlanguage tests).
 // QUnit.test( 'startEditing() & stopEditing()', function( assert ) {} );
 
-QUnit.test( 'setError()', function( assert ) {
+QUnit.test( 'setError()', function ( assert ) {
 	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 		entitytermsforlanguagelistview
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
 	$entitytermsforlanguagelistview
-	.on( 'entitytermsforlanguagelistviewtoggleerror', function( event, error ) {
+	.on( 'entitytermsforlanguagelistviewtoggleerror', function ( event, error ) {
 		assert.ok(
 			true,
 			'Triggered "toggleerror" event.'
@@ -132,7 +132,7 @@ QUnit.test( 'setError()', function( assert ) {
 	entitytermsforlanguagelistview.setError();
 } );
 
-QUnit.test( 'value()', function( assert ) {
+QUnit.test( 'value()', function ( assert ) {
 	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 		entitytermsforlanguagelistview
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
@@ -146,7 +146,7 @@ QUnit.test( 'value()', function( assert ) {
 	);
 
 	assert.throws(
-		function() {
+		function () {
 			entitytermsforlanguagelistview.value( [] );
 		},
 		'Throwing error when trying to set a new value.'

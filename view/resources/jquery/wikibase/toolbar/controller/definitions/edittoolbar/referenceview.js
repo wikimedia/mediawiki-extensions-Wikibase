@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 /**
@@ -12,7 +12,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 	selector: ':' + $.wikibase.referenceview.prototype.namespace
 		+ '-' + $.wikibase.referenceview.prototype.widgetName,
 	events: {
-		referenceviewcreate: function( event ) {
+		referenceviewcreate: function ( event ) {
 			var $referenceview = $( event.target ),
 				referenceview = $referenceview.data( 'referenceview' ),
 				options = {
@@ -29,7 +29,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			options.$container = $container;
 
 			if ( !!referenceview.value() ) {
-				options.onRemove = function() {
+				options.onRemove = function () {
 					var $statementview = $referenceview.closest( ':wikibase-statementview' ),
 						statementview = $statementview.data( 'statementview' );
 					if ( statementview ) {
@@ -40,7 +40,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			$referenceview.edittoolbar( options );
 
-			$referenceview.on( 'keydown.edittoolbar', function( event ) {
+			$referenceview.on( 'keydown.edittoolbar', function ( event ) {
 				if ( referenceview.option( 'disabled' ) ) {
 					return;
 				}
@@ -51,7 +51,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				}
 			} );
 		},
-		'referenceviewchange referenceviewafterstartediting': function( event ) {
+		'referenceviewchange referenceviewafterstartediting': function ( event ) {
 			var $referenceview = $( event.target ),
 				referenceview = $referenceview.data( 'referenceview' ),
 				edittoolbar = $referenceview.data( 'edittoolbar' ),
@@ -60,7 +60,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			btnSave[enableSave ? 'enable' : 'disable']();
 		},
-		referenceviewdisable: function( event ) {
+		referenceviewdisable: function ( event ) {
 			var $referenceview = $( event.target ),
 				referenceview = $referenceview.data( 'referenceview' );
 

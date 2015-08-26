@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $ ) {
+( function ( $ ) {
 'use strict';
 
 var PARENT = $.wikibase.toolbaritem;
@@ -42,7 +42,7 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem._create
 	 */
-	_create: function() {
+	_create: function () {
 		PARENT.prototype._create.call( this );
 
 		var self = this;
@@ -56,7 +56,7 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 		}
 
 		this.$link
-		.on( 'click.toolbarbutton keydown.toolbarbutton', function( event ) {
+		.on( 'click.toolbarbutton keydown.toolbarbutton', function ( event ) {
 			if ( event.type === 'click' || event.keyCode === $.ui.keyCode.ENTER ) {
 				event.preventDefault();
 
@@ -70,7 +70,7 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		this.$link.off( '.toolbarbutton' );
 		PARENT.prototype.destroy.call( this );
 	},
@@ -78,7 +78,7 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem._setOption
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'cssClassSuffix' ) {
 			if ( this.options.cssClassSuffix ) {
 				this.element
@@ -98,7 +98,7 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @return {jQuery}
 	 */
-	_getLabel: function() {
+	_getLabel: function () {
 		return typeof this.options.$label === 'string'
 			? $( document.createTextNode( this.options.$label ) )
 			: this.options.$label;
@@ -107,14 +107,14 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	/**
 	 * @see jQuery.wikibase.toolbaritem.focus
 	 */
-	focus: function() {
+	focus: function () {
 		this.$link.focus();
 	},
 
 	/**
 	 * Main drawing routine.
 	 */
-	draw: function() {}
+	draw: function () {}
 } );
 
 } )( jQuery );

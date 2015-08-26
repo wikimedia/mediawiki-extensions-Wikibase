@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT =  $.ui.TemplatedWidget;
@@ -92,7 +92,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
-	_create: function() {
+	_create: function () {
 		this._lia = this.options.listItemAdapter;
 
 		if ( typeof this._lia !== 'object'
@@ -112,7 +112,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	destroy: function() {
+	destroy: function () {
 		this._lia = null;
 		this._reusedItems = null;
 		PARENT.prototype.destroy.call( this );
@@ -125,13 +125,13 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *
 	 * @throws {Error} when trying to set `listItemAdapter` option.
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		var self = this;
 
 		if ( key === 'listItemAdapter' ) {
 			throw new Error( 'Can not change the ListItemAdapter after initialization' );
 		} else if ( key === 'value' ) {
-			this.items().each( function( i, node ) {
+			this.items().each( function ( i, node ) {
 				var $node = $( node );
 				self._lia.liInstance( $node ).destroy();
 				$node.remove();
@@ -145,7 +145,7 @@ $.widget( 'wikibase.listview', PARENT, {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'disabled' ) {
-			this.items().each( function() {
+			this.items().each( function () {
 				var liInstance = self._lia.liInstance( $( this ) );
 				// Check if instance got destroyed in the meantime:
 				if ( liInstance ) {
@@ -161,7 +161,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * Fills the list element with DOM structure for each list item.
 	 * @private
 	 */
-	_createList: function() {
+	_createList: function () {
 		var i, items = this.option( 'value' );
 
 		// initialize view for each of the list item values:
@@ -177,12 +177,12 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @param {*[]} [value] List containing a value for each list item widget.
 	 * @return {*[]|undefined}
 	 */
-	value: function( value ) {
+	value: function ( value ) {
 		if ( value === undefined ) {
 			var self = this,
 				values = [];
 
-			this.items().each( function() {
+			this.items().each( function () {
 				values.push( self._lia.liInstance( $( this ) ) );
 			} );
 
@@ -198,7 +198,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *
 	 * @return {jQuery}
 	 */
-	items: function() {
+	items: function () {
 		return this.element.children( '.' + this.widgetName + '-item' );
 	},
 
@@ -207,9 +207,9 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *
 	 * @return {jQuery}
 	 */
-	nonEmptyItems: function() {
+	nonEmptyItems: function () {
 		var lia = this._lia;
-		return this.items().filter( function( i ) {
+		return this.items().filter( function ( i ) {
 			return !!lia.liInstance( $( this ) ).value();
 		} );
 	},
@@ -221,7 +221,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @param {jQuery} $itemNode
 	 * @return {number}
 	 */
-	indexOf: function( $itemNode ) {
+	indexOf: function ( $itemNode ) {
 		var $items = this.items(),
 			itemNode = $itemNode.get( 0 );
 
@@ -240,7 +240,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @param {jQuery} $itemNode
 	 * @param {number} toIndex
 	 */
-	move: function( $itemNode, toIndex ) {
+	move: function ( $itemNode, toIndex ) {
 		var currIndex = this.indexOf( $itemNode ),
 			items = this.items();
 
@@ -270,7 +270,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *
 	 * @param {jQuery} $itemNode
 	 */
-	moveUp: function( $itemNode ) {
+	moveUp: function ( $itemNode ) {
 		if ( this.indexOf( $itemNode ) !== 0 ) {
 			this.move( $itemNode, this.indexOf( $itemNode ) - 1 );
 		}
@@ -281,7 +281,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *
 	 * @param {jQuery} $itemNode
 	 */
-	moveDown: function( $itemNode ) {
+	moveDown: function ( $itemNode ) {
 		// Adding 2 to the index to move the element to before the element after the next element:
 		this.move( $itemNode, this.indexOf( $itemNode ) + 2 );
 	},
@@ -291,7 +291,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *
 	 * @return {jQuery.wikibase.listview.ListItemAdapter}
 	 */
-	listItemAdapter: function() {
+	listItemAdapter: function () {
 		return this._lia;
 	},
 
@@ -301,7 +301,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @param {*} liValue One list item widget's value.
 	 * @return {jQuery} New list item's node.
 	 */
-	addItem: function( liValue ) {
+	addItem: function ( liValue ) {
 		var $li = this._addLiValue( liValue );
 		this._trigger( 'itemadded', null, [liValue, $li] );
 		return $li;
@@ -314,7 +314,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @param {*} liValue One list item widget's value.
 	 * @return {jQuery} New list item's node.
 	 */
-	_addLiValue: function( liValue ) {
+	_addLiValue: function ( liValue ) {
 		var $newLi = this._reusedItems.length > 0
 			? $( this._reusedItems.shift() )
 			: $( '<' + this.option( 'listItemNodeName' ) + '/>' );
@@ -344,7 +344,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *
 	 * @throws {Error} if the node provided is not a list item.
 	 */
-	removeItem: function( $li ) {
+	removeItem: function ( $li ) {
 		if ( !$li.parent( this.element ).length ) {
 			throw new Error( 'The given node is not an element in this list' );
 		}
@@ -365,7 +365,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @return {jQuery} return.done.$newLi The new list item node. Use
 	 *         `listItemAdapter().liInstance( $newLi )` to receive the widget instance.
 	 */
-	enterNewItem: function() {
+	enterNewItem: function () {
 		var $newLi = this.addItem();
 		this._trigger( 'enternewitem', null, [$newLi] );
 		return $.Deferred().resolve( $newLi ).promise();
@@ -374,7 +374,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	focus: function() {
+	focus: function () {
 		var $items = this.items();
 
 		if ( $items.length ) {

@@ -1,4 +1,4 @@
-( function( $ ) {
+( function ( $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -64,7 +64,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 *
 	 * @throws {Error} when called.
 	 */
-	_create: function() {
+	_create: function () {
 		throw new Error( 'Abstract entityview cannot be created directly' );
 	},
 
@@ -73,7 +73,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 * @protected
 	 */
-	_createEntityview: function() {
+	_createEntityview: function () {
 		PARENT.prototype._create.call( this );
 	},
 
@@ -83,7 +83,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 *
 	 * @throws {Error} if a required options is missing.
 	 */
-	_init: function() {
+	_init: function () {
 		if ( !this.options.value || !this.options.entityTermsViewBuilder ) {
 			throw new Error( 'Required option(s) missing' );
 		}
@@ -100,7 +100,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_initEntityTerms: function() {
+	_initEntityTerms: function () {
 		this.$entityTerms = $( '.wikibase-entitytermsview', this.element );
 
 		if ( !this.$entityTerms.length ) {
@@ -113,7 +113,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_attachEventHandlers: function() {
+	_attachEventHandlers: function () {
 		var self = this;
 
 		this.element
@@ -123,7 +123,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 			'aliasesviewafterstartediting.' + this.widgetName,
 			'entitytermsviewafterstartediting.' + this.widgetName
 		].join( ' ' ),
-		function( event ) {
+		function ( event ) {
 			self._trigger( 'afterstartediting' );
 		} );
 
@@ -134,7 +134,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 			'aliasesviewafterstopediting.' + this.widgetName,
 			'entitytermsviewafterstopediting.' + this.widgetName
 		].join( ' ' ),
-		function( event, dropValue ) {
+		function ( event, dropValue ) {
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} );
 	},
@@ -144,7 +144,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 *
 	 * @throws {Error} when trying to set an option to an improper value.
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'disabled' ) {
@@ -159,7 +159,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 *
 	 * @param {string} state "disable" or "enable"
 	 */
-	_setState: function( state ) {
+	_setState: function ( state ) {
 		if ( this.$entityTerms ) {
 			this.$entityTerms.data( 'entitytermsview' )[state]();
 		}
@@ -176,8 +176,8 @@ $.widget( 'wikibase.entityview', PARENT, {
 $.wikibase.entityview.TYPES = [];
 
 $.expr[':'][$.wikibase.entityview.prototype.widgetFullName]
-	= $.expr.createPseudo( function( fullName ) {
-		return function( elem ) {
+	= $.expr.createPseudo( function ( fullName ) {
+		return function ( elem ) {
 			for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
 				if ( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
 					return true;

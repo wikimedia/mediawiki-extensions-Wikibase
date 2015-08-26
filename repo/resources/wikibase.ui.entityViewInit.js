@@ -4,7 +4,7 @@
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-( function( $, mw, wb, dataTypeStore, getExpertsStore, getFormatterStore, getParserStore ) {
+( function ( $, mw, wb, dataTypeStore, getExpertsStore, getFormatterStore, getParserStore ) {
 	'use strict';
 
 	/**
@@ -116,7 +116,7 @@
 				getExpertsStore( dataTypeStore ),
 				formatterStore,
 				{
-					getMessage: function( key, params ) {
+					getMessage: function ( key, params ) {
 						return mw.msg.apply( mw, [ key ].concat( params ) );
 					}
 				},
@@ -140,7 +140,7 @@
 			return;
 		}
 
-		$entityview.on( viewName + 'afterstartediting', function() {
+		$entityview.on( viewName + 'afterstartediting', function () {
 			if ( !$.find( '.mw-notification-content' ).length
 				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
 			) {
@@ -184,16 +184,16 @@
 				prop: 'info',
 				inprop: 'watched',
 				pageids: pageId
-			} ).done( function( data ) {
+			} ).done( function ( data ) {
 				var watched = data.query && data.query.pages[pageId]
 					&& data.query.pages[pageId].watched !== undefined;
 				update( $link, watched ? 'unwatch' : 'watch' );
-			} ).fail( function() {
+			} ).fail( function () {
 				update( $link, 'watch' );
 			} );
 		}
 
-		$entityview.on( viewName + 'afterstopediting', function( event, dropValue ) {
+		$entityview.on( viewName + 'afterstopediting', function ( event, dropValue ) {
 			if ( !dropValue ) {
 				updateWatchLink();
 			}
@@ -238,7 +238,7 @@
 		) {
 			editableTemplatedWidget.notification( $message, 'wb-edit' );
 
-			$hideMessage.on( 'click', function( event ) {
+			$hideMessage.on( 'click', function ( event ) {
 				event.preventDefault();
 				editableTemplatedWidget.notification();
 				if ( mw.user.isAnon() ) {
@@ -275,7 +275,7 @@
 				$anchor: edittoolbar.getContainer()
 			} );
 
-		$hideMessage.on( 'click', function( event ) {
+		$hideMessage.on( 'click', function ( event ) {
 			event.preventDefault();
 			$messageAnchor.data( 'wbtooltip' ).degrade( true );
 			$( window ).off( '.wbCopyrightTooltip' );
@@ -295,7 +295,7 @@
 
 		// destroy tooltip after edit mode gets closed again:
 		$entityview
-		.one( 'entityviewafterstopediting.wbCopyRightTooltip', function( event, origin ) {
+		.one( 'entityviewafterstopediting.wbCopyRightTooltip', function ( event, origin ) {
 			var tooltip = $messageAnchor.data( 'wbtooltip' );
 			if ( tooltip ) {
 				tooltip.degrade( true );
@@ -305,7 +305,7 @@
 
 		$( window ).one(
 			'scroll.wbCopyrightTooltip touchmove.wbCopyrightTooltip resize.wbCopyrightTooltip',
-			function() {
+			function () {
 				var tooltip = $messageAnchor.data( 'wbtooltip' );
 				if ( tooltip ) {
 					$messageAnchor.data( 'wbtooltip' ).hide();
@@ -319,7 +319,7 @@
 	 * @param {jQuery} $entityview
 	 */
 	function attachCopyrightTooltip( $entityview ) {
-		$entityview.on( 'edittoolbarafterstartediting', function( event ) {
+		$entityview.on( 'edittoolbarafterstartediting', function ( event ) {
 			var $target = $( event.target ),
 				gravity = 'sw';
 
@@ -333,7 +333,7 @@
 		} );
 	}
 
-	mw.hook( 'wikipage.content' ).add( function() {
+	mw.hook( 'wikipage.content' ).add( function () {
 		if ( mw.config.get( 'wbEntity' ) === null ) {
 			return;
 		}
@@ -347,7 +347,7 @@
 			initToolbarController( $entityview );
 		}
 
-		entityInitializer.getEntity().done( function( entity ) {
+		entityInitializer.getEntity().done( function ( entity ) {
 			var viewName = createEntityView( entity, $entityview.first() );
 
 			if ( canEdit ) {
@@ -358,11 +358,11 @@
 
 		if ( canEdit ) {
 			$entityview
-			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event ) {
+			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function ( event ) {
 				var $entitytermsview = $( event.target ),
 					entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-				$.each( entitytermsview.value(), function() {
+				$.each( entitytermsview.value(), function () {
 					if ( this.language !== mw.config.get( 'wgUserLanguage' ) ) {
 						return true;
 					}

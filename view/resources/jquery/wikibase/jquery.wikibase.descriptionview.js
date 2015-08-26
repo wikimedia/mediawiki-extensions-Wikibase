@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, mw, wb ) {
+( function ( $, mw, wb ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -52,7 +52,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 *
 	 * @throws {Error} if required parameters are not specified properly.
 	 */
-	_create: function() {
+	_create: function () {
 		if ( !( this.options.value instanceof wb.datamodel.Term )
 			|| !this.options.descriptionsChanger
 			|| this.options.inputNodeName !== 'INPUT' && this.options.inputNodeName !== 'TEXTAREA'
@@ -66,7 +66,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		.on(
 			'descriptionviewafterstartediting.' + this.widgetName
 			+ ' eachchange.' + this.widgetName,
-		function( event ) {
+		function ( event ) {
 			if ( self.value().getText() === '' ) {
 				// Since the widget shall not be in view mode when there is no value, triggering
 				// the event without a proper value is only done when creating the widget. Disabling
@@ -89,11 +89,11 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
-	destroy: function() {
+	destroy: function () {
 		if ( this._isInEditMode ) {
 			var self = this;
 
-			this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
+			this.element.one( this.widgetEventPrefix + 'afterstopediting', function ( event ) {
 				PARENT.prototype.destroy.call( self );
 			} );
 
@@ -106,7 +106,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
 	 * Main draw routine.
 	 */
-	_draw: function() {
+	_draw: function () {
 		var self = this,
 			languageCode = this.options.value.getLanguageCode(),
 			descriptionText = this.options.value.getText();
@@ -149,12 +149,12 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		)
 		.attr( 'lang', languageCode )
 		.attr( 'dir', $.util.getDirectionality( languageCode ) )
-		.on( 'keydown.' + this.widgetName, function( event ) {
+		.on( 'keydown.' + this.widgetName, function ( event ) {
 			if ( event.keyCode === $.ui.keyCode.ENTER ) {
 				event.preventDefault();
 			}
 		} )
-		.on( 'eachchange.' + this.widgetName, function( event ) {
+		.on( 'eachchange.' + this.widgetName, function ( event ) {
 			self._trigger( 'change' );
 		} );
 
@@ -175,7 +175,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
 	 * Starts the widget's edit mode.
 	 */
-	startEditing: function() {
+	startEditing: function () {
 		if ( this._isInEditMode ) {
 			return;
 		}
@@ -190,7 +190,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 *
 	 * @param {boolean} dropValue
 	 */
-	stopEditing: function( dropValue ) {
+	stopEditing: function ( dropValue ) {
 		var self = this;
 
 		if ( !this._isInEditMode ) {
@@ -207,11 +207,11 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		this._trigger( 'stopediting', null, [dropValue] );
 
 		this.options.descriptionsChanger.setDescription( this.value() )
-		.done( function( description ) {
+		.done( function ( description ) {
 			self.enable();
 			self._afterStopEditing( dropValue );
 		} )
-		.fail( function( error ) {
+		.fail( function ( error ) {
 			self.setError( error );
 			self.enable();
 		} );
@@ -220,7 +220,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
 	 * Cancels the widget's edit mode.
 	 */
-	cancelEditing: function() {
+	cancelEditing: function () {
 		this.stopEditing( true );
 	},
 
@@ -229,7 +229,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 *
 	 * @param {boolean} dropValue
 	 */
-	_afterStopEditing: function( dropValue ) {
+	_afterStopEditing: function ( dropValue ) {
 		if ( !dropValue ) {
 			this.options.value = this.value();
 		} else if ( this.options.value.getText() === '' ) {
@@ -246,7 +246,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isValid: function() {
+	isValid: function () {
 		// Function is required by edittoolbar definition.
 		return true;
 	},
@@ -254,7 +254,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
 	 * @return {boolean}
 	 */
-	isInitialValue: function() {
+	isInitialValue: function () {
 		return this.value().equals( this.options.value );
 	},
 
@@ -263,7 +263,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 *
 	 * @param {Error} error
 	 */
-	setError: function( error ) {
+	setError: function ( error ) {
 		if ( error ) {
 			this.element.addClass( 'wb-error' );
 			this._trigger( 'toggleerror', null, [error] );
@@ -273,14 +273,14 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		}
 	},
 
-	removeError: function() {
+	removeError: function () {
 		this.element.removeClass( 'wb-error' );
 	},
 
 	/**
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
-	_setOption: function( key, value ) {
+	_setOption: function ( key, value ) {
 		if ( key === 'value' && !( value instanceof wb.datamodel.Term ) ) {
 			throw new Error( 'Value needs to be a wb.datamodel.Term instance' );
 		}
@@ -300,7 +300,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 * @param {wikibase.datamodel.Term} [value]
 	 * @return {wikibase.datamodel.Term|undefined}
 	 */
-	value: function( value ) {
+	value: function ( value ) {
 		if ( value !== undefined ) {
 			this.option( 'value', value );
 			return;
@@ -319,7 +319,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
 	 * @see jQuery.ui.TemplatedWidget.focus
 	 */
-	focus: function() {
+	focus: function () {
 		if ( this._isInEditMode ) {
 			this.$text.children( '.' + this.widgetFullName + '-input' ).focus();
 		} else {

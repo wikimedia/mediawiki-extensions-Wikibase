@@ -1,4 +1,4 @@
-( function( mw, $, wb, util ) {
+( function ( mw, $, wb, util ) {
 	'use strict';
 
 	/**
@@ -8,7 +8,7 @@
 	wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter = util.inherit(
 		'DataValueBasedEntityIdHtmlFormatter',
 		wb.entityIdFormatter.EntityIdHtmlFormatter,
-		function( parser, formatter ) {
+		function ( parser, formatter ) {
 			this._parser = parser;
 			this._formatter = formatter;
 		},
@@ -17,16 +17,16 @@
 
 			_formatter: null,
 
-			format: function( entityId ) {
+			format: function ( entityId ) {
 				var deferred = $.Deferred(),
 					self = this;
-				this._parser.parse( entityId ).done( function( parsed ) {
-					return self._formatter.format( parsed, null, 'text/html' ).done( function( response ) {
+				this._parser.parse( entityId ).done( function ( parsed ) {
+					return self._formatter.format( parsed, null, 'text/html' ).done( function ( response ) {
 						deferred.resolve( response );
-					} ).fail( function() {
+					} ).fail( function () {
 						deferred.resolve( mw.html.escape( entityId ) );
 					} );
-				} ).fail( function() {
+				} ).fail( function () {
 					deferred.resolve( mw.html.escape( entityId ) );
 				} );
 
