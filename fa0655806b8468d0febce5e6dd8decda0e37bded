@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_091f7c72",
+        "filename": "lib/includes/serialization/CallbackFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T08:22:40Z",
+      "side": 1,
+      "message": "To provide a callback to set the array type, used in Resultbuilder!",
+      "parentUuid": "6ec1af18_464d78c6",
+      "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_8657e05a",
         "filename": "lib/includes/serialization/CallbackFactory.php",
         "patchSetId": 19
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-25T17:23:10Z",
       "side": 1,
       "message": "why is this check now needed? and why fail silently if $array isn\u0027t an array?",
+      "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_49310400",
+        "filename": "lib/includes/serialization/CallbackFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T08:22:40Z",
+      "side": 1,
+      "message": "This is needed due to all of the extra metadata that we are adding.\nDepending on the order of when metadata is added some may already exist, thus when going over all elements in an array sometimes some of them are strings instead.",
+      "parentUuid": "6ec1af18_8657e05a",
       "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_e919d089",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T08:22:40Z",
+      "side": 1,
+      "message": "Indeed that probably sounds better, Will tackle this in a followup! This would probably lead to less confusion too!",
+      "parentUuid": "6ec1af18_e6eca490",
+      "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_06f2106b",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 19
@@ -64,6 +118,24 @@
       "writtenOn": "2015-08-25T17:23:10Z",
       "side": 1,
       "message": "regardless of $this-\u003eaddMetaData?",
+      "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_89128c62",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T08:22:40Z",
+      "side": 1,
+      "message": "This method is only called when $this-\u003emetaData is true (see line 936)",
+      "parentUuid": "6ec1af18_06f2106b",
       "revId": "fa0655806b8468d0febce5e6dd8decda0e37bded",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
