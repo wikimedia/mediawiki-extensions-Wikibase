@@ -13,10 +13,12 @@
 			"Mordecool",
 			"Fasouzafreitas",
 			"Macofe",
-			"TheEduGobi"
+			"TheEduGobi",
+			"Almondega"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
+	"wikibase-entity": "entidade",
 	"wikibase-entity-item": "item",
 	"wikibase-entity-property": "propriedade",
 	"wikibase-entity-query": "consulta",
@@ -25,7 +27,7 @@
 	"wikibase-cancel": "cancelar",
 	"wikibase-add": "adicionar",
 	"wikibase-addqualifier": "adicionar qualificador",
-	"wikibase-addreference": "adicionar fonte",
+	"wikibase-addreference": "adicionar referência",
 	"wikibase-save-inprogress": "Salvando...",
 	"wikibase-remove-inprogress": "Removendo...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Em mais idiomas",
@@ -71,7 +73,6 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entrada|entradas}}",
 	"wikibase-disambiguation-title": "Desambiguação para \"$1\"",
 	"wb-special-newitem-new-item-notification": "Novo item $1 criado e redirecionado para sua página. Voltar à $2.",
-	"wikibase-aliases-label": "Também conhecido como:",
 	"wikibase-aliases-input-help-message": "Se esse conjunto de dados é conhecido por mais de um nome específico, você pode inserir nomes alternativos e sinônimos; dessa forma, ele poderá ser encontrado por seus outros nomes.",
 	"wikibase-aliases-empty": "Não há nomes alternativos definidos.",
 	"wikibase-propertypage-datatype": "Tipo de dados",

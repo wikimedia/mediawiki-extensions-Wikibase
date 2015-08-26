@@ -1,16 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"Naudefj"
+			"Naudefj",
+			"Arnobarnard"
 		]
 	},
 	"wikibase-client-desc": "Kliënt vir die Wikibase-uitbreiding",
+	"tooltip-t-wikibase": "Skakel na gekonnekteerde databank item",
 	"wikibase-after-page-move": "U kan ook die gekoppelde Wikidata-item [$1 wysig] om die taalskakels op die geskuifde bladsy by te werk.",
 	"wikibase-comment-remove": "Die gekoppelde Wikidata-item is geskrap. Taalskakels is verwyder.",
 	"wikibase-comment-linked": "'n Wikidata-item is aan hierdie bladsy gekoppel.",
 	"wikibase-comment-unlink": "Hierdie bladsy is ontkoppel van die Wikidata-item. Die taalskakels is verwyder.",
 	"wikibase-comment-restore": "Die gekoppelde Wikidata-item is teruggeplaas. Taalskakels is herstel.",
-	"wikibase-comment-update": "{{WBREPONAME}} is bygewerk",
+	"wikibase-comment-update": "{{WBREPONAME}}-item is bygewerk",
 	"wikibase-comment-sitelink-add": "Taalskakel bygevoeg: $1",
 	"wikibase-comment-sitelink-change": "Taalskakel is van $1 na $2 verander",
 	"wikibase-comment-sitelink-remove": "Taalskakel is verwyder: $1",
@@ -42,8 +44,7 @@
 	"wikibase-replicationnote": "Let daarop dat dit verskeie minute dan duur voor die wysigings op alle wiki's sigbaar sal wees.",
 	"wikibase-watchlist-show-changes-pref": "Wys Wikidata-wysigings in u dophoulys",
 	"wikibase-error-invalid-entity-id": "Die opgegewe ID is nie in die stelsel nie. Gebruik 'n geldig entiteit-ID.",
-	"special-unconnectedpages": "Bladsye wat nie aan items gekoppel is nie",
-	"wikibase-unconnectedpages-legend": "Voorkeure vir ongekoppelde bladsye",
+	"unconnectedpages": "Bladsye wat nie aan items gekoppel is nie",
 	"wikibase-unconnectedpages-page": "Begin resultaatlys met bladsy:",
 	"wikibase-unconnectedpages-submit": "OK",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" is nie 'n geldige taalkode nie.",

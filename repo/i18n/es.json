@@ -385,7 +385,7 @@
 	"apihelp-wbmergeitems-example-2": "Fusiona datos desde Q555 en Q3",
 	"apihelp-wbmergeitems-example-3": "Fusiona datos desde Q66 en Q99 ignorando cualquier etiqueta conflitiva",
 	"apihelp-wbmergeitems-example-4": "Fusiona datos desde Q66 en Q99 ignorando cualquier etiqueta o descriciones conflitivas",
-	"apihelp-wbparsevalue-param-parser": "Identificador del ValueParser que usar. DESACONSEJADO. En su lugar usa el parámetro datatype.",
+	"apihelp-wbparsevalue-param-parser": "Identificador del ValueParser que usar. <span class=\"apihelp-deprecated\">Desaconsejado</span>. En su lugar usa el parámetro datatype.",
 	"apihelp-wbparsevalue-example-1": "Analizar una cadena sin formato en un objeto StringValue.",
 	"apihelp-wbsearchentities-description": "Busca entidades que usen etiquetas y alias.\nDevuelve una etiqueta y una descripción de la entidad en el idioma del usuario, si es posible.\nDevuelve detalles del término coincidente.\nEl texto del término coincidente también está presente en la clave de alias si es diferente de la etiqueta de visualización.",
 	"apihelp-wbsearchentities-param-search": "Buscar este texto.",

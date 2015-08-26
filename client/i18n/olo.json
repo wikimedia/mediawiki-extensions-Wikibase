@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Denö"
+			"Denö",
+			"Ilja.mos"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} elementu",
+	"wikibase-editlinks": "Korjata linkit",
+	"wikibase-editlinkstitle": "Korjata kielienvälizet linkit",
 	"wikibase-rc-hide-wikidata-hide": "Peittiä",
-	"wikibase-rc-hide-wikidata-show": "Ozuttua"
+	"wikibase-rc-hide-wikidata-show": "Ozuttua",
+	"wikibase-rc-wikibase-edit-letter": "K"
 }

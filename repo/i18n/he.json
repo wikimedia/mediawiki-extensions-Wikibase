@@ -528,7 +528,7 @@
 	"apihelp-wbsearchentities-param-language": "חיפוש עבור שפה זו.",
 	"apihelp-wbsearchentities-param-strictlanguage": "האם לכבות את גיבוי השפה",
 	"apihelp-wbsearchentities-param-type": "חיפוש הסוג הזה של ישות.",
-	"apihelp-wbsearchentities-param-limit": "מספר מירבי של תוצאות",
+	"apihelp-wbsearchentities-param-limit": "מספר מרבי של תוצאות",
 	"apihelp-wbsearchentities-param-continue": "היסט לתחילת החיפוש",
 	"apihelp-wbsearchentities-example-1": "חיפוש \"abc\" בשפה האנגלית, עם בררות מחדל לסוג ומגבלה",
 	"apihelp-wbsearchentities-example-2": "חיפוש עבור \"abc\" בשפה אנגלית עם מגבלה של 50",
