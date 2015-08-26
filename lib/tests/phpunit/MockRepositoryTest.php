@@ -415,7 +415,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$actual = array();
 		foreach ( $entities as $key => $e ) {
 			if ( is_object( $e ) ) {
-				$actual[ $e->getId()->getSerialization() ] = $e->getLabels();
+				$actual[ $e->getId()->getSerialization() ] = $e->getFingerprint()->getLabels()->toTextArray();
 			} else {
 				$actual[ $key ] = $e;
 			}

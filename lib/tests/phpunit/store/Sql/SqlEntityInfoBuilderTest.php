@@ -53,9 +53,9 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 				null
 			);
 
-			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'label', $entity->getLabels() ) );
-			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'description', $entity->getDescriptions() ) );
-			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'alias', $entity->getAllAliases() ) );
+			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'label', $entity->getFingerprint()->getLabels()->toTextArray() ) );
+			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'description', $entity->getFingerprint()->getDescriptions()->toTextArray() ) );
+			$termRows = array_merge( $termRows, $this->getTermRows( $entity->getId(), 'alias', $entity->getFingerprint()->getAliasGroups()->toTextArray() ) );
 
 			if ( $entity instanceof Property ) {
 				$infoRows[] = array(

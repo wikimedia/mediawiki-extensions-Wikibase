@@ -122,7 +122,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$args[] = array( $entity, new ChangeOpLabel( 'de', null, $validatorFactory ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->removeLabel( 'de' );
+		$entity->getFingerprint()->removeLabel( 'de' );
 		$args[] = array( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory
 		), 'add', 'de' );
 

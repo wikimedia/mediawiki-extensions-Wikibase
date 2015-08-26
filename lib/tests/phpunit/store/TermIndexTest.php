@@ -509,7 +509,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$deFooBarP6 = Property::newFromType( 'string' );
 		$deFooBarP6->setId( new PropertyId( 'P6' ) );
 		$deFooBarP6->setLabel( 'de', 'Foo' );
-		$deFooBarP6->addAliases( 'de', array( 'AFoo' ) );
+		$deFooBarP6->setAliases( 'de', array( 'AFoo' ) );
 		$deFooBarP6->setDescription( 'de', 'Bar' );
 
 		$entities = array(
