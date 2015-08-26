@@ -13,8 +13,6 @@ namespace Wikibase\DataModel\Entity;
 interface EntityIdParser {
 
 	/**
-	 * @since 1.0
-	 *
 	 * @param string $idSerialization
 	 *
 	 * @return EntityId
