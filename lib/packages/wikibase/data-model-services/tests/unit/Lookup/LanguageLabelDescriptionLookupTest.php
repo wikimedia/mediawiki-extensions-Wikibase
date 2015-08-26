@@ -14,7 +14,7 @@ use Wikibase\DataModel\Term\Term;
  */
 class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 
-	public function testGetLabel() {
+	public function testGetLabelCallsTermLookupAndReturnsStringAsTerm() {
 		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 
 		$termLookup->expects( $this->once() )
@@ -30,7 +30,7 @@ class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetDescription() {
+	public function testGetDescriptionCallsTermLookupAndReturnsStringAsTerm() {
 		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 
 		$termLookup->expects( $this->once() )
@@ -44,6 +44,30 @@ class LanguageLabelDescriptionLookupTest extends \PHPUnit_Framework_TestCase {
 			new Term( 'language_code', 'term_text' ),
 			$lookup->getDescription( new ItemId( 'Q42' ) )
 		);
+	}
+
+	public function testWhenGettingNull_getLabelReturnsNull() {
+		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
+
+		$termLookup->expects( $this->once() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( null ) );
+
+		$lookup = new LanguageLabelDescriptionLookup( $termLookup, 'language_code' );
+
+		$this->assertNull( $lookup->getLabel( new ItemId( 'Q42' ) ) );
+	}
+
+	public function testWhenGettingNull_getDescriptionReturnsNull() {
+		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
+
+		$termLookup->expects( $this->once() )
+			->method( 'getDescription' )
+			->will( $this->returnValue( null ) );
+
+		$lookup = new LanguageLabelDescriptionLookup( $termLookup, 'language_code' );
+
+		$this->assertNull( $lookup->getDescription( new ItemId( 'Q42' ) ) );
 	}
 
 }
