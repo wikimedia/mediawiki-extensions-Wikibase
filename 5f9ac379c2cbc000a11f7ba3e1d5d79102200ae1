@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_d5510712",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T15:50:14Z",
+      "side": 1,
+      "message": "I think SpecialWikibaseQueryPage needs to be re factored really.",
+      "parentUuid": "6ec1af18_552e778a",
+      "revId": "5f9ac379c2cbc000a11f7ba3e1d5d79102200ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_752b7378",
         "filename": "repo/includes/specials/SpecialListProperties.php",
         "patchSetId": 6
