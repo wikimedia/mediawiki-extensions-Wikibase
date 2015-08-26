@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_3cd5d8e9",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-26T10:39:28Z",
+      "side": 1,
+      "message": "This is already done in SpecialWikibaseQueryPage::showQuery (line 131). Please remove it here.",
+      "revId": "a0d9c21d3875bf3e6037f56cbff44228efec5b4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
