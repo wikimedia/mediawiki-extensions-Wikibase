@@ -52,6 +52,24 @@
       "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_7a9e0068",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-26T14:49:29Z",
+      "side": 0,
+      "message": "I would keep this for now. this is how core executes and formats xml api results.\n\nif we want to remove, then let\u0027s do in a follow up. I prefer to see the tests pass with this test file unchanged. (except the intentional changes in the various xml test files)",
+      "parentUuid": "6ec1af18_5aca2472",
+      "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
