@@ -140,9 +140,10 @@
 	 * @throws {Error} if no widget to render the entity exists.
 	 */
 	function createEntityView( entity, $entityview ) {
-		var repoConfig = mw.config.get( 'wbRepo' );
-		var mwApi = wb.api.getLocationAgnosticMwApi( repoConfig.url + repoConfig.scriptPath + '/api.php' );
-		var repoApi = new wb.api.RepoApi( mwApi ),
+		var repoConfig = mw.config.get( 'wbRepo' ),
+			repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php',
+			mwApi = wb.api.getLocationAgnosticMwApi( repoApiUrl ),
+			repoApi = new wb.api.RepoApi( mwApi ),
 			userLanguages = getUserLanguages(),
 			entityStore = buildEntityStore( repoApi, userLanguages[0] ),
 			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
@@ -165,7 +166,8 @@
 					}
 				},
 				getParserStore( repoApi ),
-				userLanguages
+				userLanguages,
+				repoApiUrl
 			);
 
 		var entityView = viewFactory.getEntityView( entity, $entityview );

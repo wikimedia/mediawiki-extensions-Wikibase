@@ -34,6 +34,7 @@
 	 * @param {string[]} userLanguages An array of language codes, the first being the UI language
 	 *        Required for showing the user interface in the correct language and for showing terms
 	 *        in all languages requested by the user.
+	 * @param {string|null} [vocabularyLookupApiUrl=null]
 	 */
 	var SELF = MODULE.ViewFactory = function ViewFactory(
 		contentLanguages,
@@ -44,7 +45,8 @@
 		formatterStore,
 		messageProvider,
 		parserStore,
-		userLanguages
+		userLanguages,
+		vocabularyLookupApiUrl
 	) {
 		this._contentLanguages = contentLanguages;
 		this._dataTypeStore = dataTypeStore;
@@ -56,6 +58,7 @@
 		this._parserStore = parserStore;
 		// Maybe make userLanguages an argument to getEntityView instead of to the constructor
 		this._userLanguages = userLanguages;
+		this._vocabularyLookupApiUrl = vocabularyLookupApiUrl || null;
 	};
 
 	/**
@@ -113,6 +116,12 @@
 	SELF.prototype._userLanguages = null;
 
 	/**
+	 * @property {string|null}
+	 * @private
+	 **/
+	SELF.prototype._vocabularyLookupApiUrl = null;
+
+	/**
 	 * Construct a suitable view for the given entity on the given DOM element
 	 *
 	 * @param {wikibase.datamodel.Entity} entity
@@ -146,7 +155,8 @@
 			this._parserStore,
 			this._userLanguages && this._userLanguages[0],
 			this._messageProvider,
-			this._contentLanguages
+			this._contentLanguages,
+			this._vocabularyLookupApiUrl
 		);
 	};
 
