@@ -6,7 +6,6 @@ use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
-use Wikibase\DataModel\Services\ByPropertyIdGrouper;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
@@ -69,26 +68,18 @@ class StatementListSerializer implements DispatchableSerializer {
 	private function getSerialized( StatementList $statementList ) {
 		$serialization = array();
 
-		$byPropertyIdGrouper = new ByPropertyIdGrouper( $statementList );
+		foreach ( $statementList->toArray() as $statement ) {
+			$idSerialization = $statement->getPropertyId()->getSerialization();
 
-		foreach ( $byPropertyIdGrouper->getPropertyIds() as $propertyId ) {
-			$serialization[$propertyId->getSerialization()] = $this->getSerializedStatements(
-				$byPropertyIdGrouper->getByPropertyId( $propertyId )
-			);
+			if ( !array_key_exists( $idSerialization, $serialization ) ) {
+				$serialization[$idSerialization] = array();
+			}
+
+			$serialization[$idSerialization][] = $this->statementSerializer->serialize( $statement );
 		}
 
 		if ( $this->useObjectsForMaps ) {
 			$serialization = (object)$serialization;
-		}
-
-		return $serialization;
-	}
-
-	private function getSerializedStatements( array $statements ) {
-		$serialization = array();
-
-		foreach ( $statements as $statement ) {
-			$serialization[] = $this->statementSerializer->serialize( $statement );
 		}
 
 		return $serialization;
