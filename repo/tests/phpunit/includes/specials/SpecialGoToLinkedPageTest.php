@@ -145,6 +145,8 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @dataProvider requestWithoutRedirectProvider
 	 */
 	public function testExecuteWithoutRedirect( $sub, $target, $site, $item, $error ) {
+		$this->setMwGlobals( 'wgUseMediaWikiUIEverywhere', false );
+
 		/* @var FauxResponse $response */
 		list( $output, $response ) = $this->executeSpecialPage( $sub );
 
