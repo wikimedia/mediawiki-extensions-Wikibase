@@ -16,6 +16,24 @@
       "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5aca2472",
+        "filename": "repo/tests/phpunit/includes/api/ApiXmlFormatTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-26T14:43:44Z",
+      "side": 0,
+      "message": "The setting of raw mode already has no effect in core.\n\nThe only reason that this was set in our API tests is that our ResultBuilder would only add this metadata stuff when the api was in / needed raw mode, thus XML output could only be tested when it was true.\n\nFor api output the resultbuilder now always adds this metadata, hence this is no longer needed!",
+      "parentUuid": "6ec1af18_7a4cc043",
+      "revId": "3c520469a35399c58976cacd20116f3d24ec6b97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
