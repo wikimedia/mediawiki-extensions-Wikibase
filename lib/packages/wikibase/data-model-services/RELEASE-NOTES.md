@@ -2,11 +2,12 @@
 
 ## Version 2.0 (dev)
 
-Moved over various classes and interfaces from Wikibase Lib:
+Moved `EntityIdParser` back to Wikibase DataModel:
 
-* Added `Lookup\RedirectResolvingEntityLookup`
-* Added `Lookup\RestrictedEntityLookup`
-* Added `Diff\EntityTypeAwareDiffOpFactory` (previously called WikibaseDiffOpFactory in Lib)
+* Removed `EntityIdParser`
+* Removed `EntityIdParsingException`
+* Removed `BasicEntityIdParser`
+* Removed `DispatchingEntityIdParser`
 
 Changed all Lookup contracts:
 
@@ -21,6 +22,12 @@ Changed all Lookup contracts:
 * Added `Lookup\TermLookupException`
 * Added `Lookup\ItemLookupException`
 * Added `Lookup\PropertyLookupException`
+
+Moved over various classes and interfaces from Wikibase Lib:
+
+* Added `Lookup\RedirectResolvingEntityLookup`
+* Added `Lookup\RestrictedEntityLookup`
+* Added `Diff\EntityTypeAwareDiffOpFactory` (previously called WikibaseDiffOpFactory in Lib)
 
 ## Version 1.1 (2015-08-10)
 
