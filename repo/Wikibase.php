@@ -102,11 +102,11 @@ call_user_func( function() {
 
 	// rights
 	// names should be according to other naming scheme
-	$wgGroupPermissions['*']['item-term']			= true;
-	$wgGroupPermissions['*']['property-term']		= true;
-	$wgGroupPermissions['*']['item-merge']			= true;
-	$wgGroupPermissions['*']['item-redirect']		= true;
-	$wgGroupPermissions['*']['property-create']		= true;
+	$wgGroupPermissions['*']['item-term'] = true;
+	$wgGroupPermissions['*']['property-term'] = true;
+	$wgGroupPermissions['*']['item-merge'] = true;
+	$wgGroupPermissions['*']['item-redirect'] = true;
+	$wgGroupPermissions['*']['property-create'] = true;
 
 	$wgAvailableRights[] = 'item-term';
 	$wgAvailableRights[] = 'property-term';
@@ -115,9 +115,9 @@ call_user_func( function() {
 	$wgAvailableRights[] = 'property-create';
 
 	// i18n
-	$wgMessagesDirs['Wikibase']                         = __DIR__ . '/i18n';
-	$wgExtensionMessagesFiles['WikibaseAlias'] 			= __DIR__ . '/Wikibase.i18n.alias.php';
-	$wgExtensionMessagesFiles['WikibaseNS'] 			= __DIR__ . '/Wikibase.i18n.namespaces.php';
+	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
+	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
+	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
 
 	// This is somewhat hackish, make WikibaseValueParserBuilders, analogous to WikibaseValueFormatterBuilders
 	$newEntityIdParser = function( ValueParsers\ParserOptions $options ) {
@@ -167,41 +167,41 @@ call_user_func( function() {
 	$wgValueParsers['null'] = 'ValueParsers\NullParser';
 
 	// API module registration
-	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Repo\Api\GetEntities';
-	$wgAPIModules['wbsetlabel'] 						= 'Wikibase\Repo\Api\SetLabel';
-	$wgAPIModules['wbsetdescription'] 					= 'Wikibase\Repo\Api\SetDescription';
-	$wgAPIModules['wbsearchentities'] 					= 'Wikibase\Repo\Api\SearchEntities';
-	$wgAPIModules['wbsetaliases'] 						= 'Wikibase\Repo\Api\SetAliases';
-	$wgAPIModules['wbeditentity'] 						= 'Wikibase\Repo\Api\EditEntity';
-	$wgAPIModules['wblinktitles'] 						= 'Wikibase\Repo\Api\LinkTitles';
-	$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\Repo\Api\SetSiteLink';
-	$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\Repo\Api\CreateClaim';
-	$wgAPIModules['wbgetclaims'] 						= 'Wikibase\Repo\Api\GetClaims';
-	$wgAPIModules['wbremoveclaims'] 					= 'Wikibase\Repo\Api\RemoveClaims';
-	$wgAPIModules['wbsetclaimvalue'] 					= 'Wikibase\Repo\Api\SetClaimValue';
-	$wgAPIModules['wbsetreference'] 					= 'Wikibase\Repo\Api\SetReference';
-	$wgAPIModules['wbremovereferences'] 				= 'Wikibase\Repo\Api\RemoveReferences';
-	$wgAPIModules['wbsetclaim'] 						= 'Wikibase\Repo\Api\SetClaim';
-	$wgAPIModules['wbremovequalifiers']					= 'Wikibase\Repo\Api\RemoveQualifiers';
-	$wgAPIModules['wbsetqualifier']						= 'Wikibase\Repo\Api\SetQualifier';
-	$wgAPIModules['wbmergeitems']						= 'Wikibase\Repo\Api\MergeItems';
-	$wgAPIModules['wbformatvalue']						= 'Wikibase\Repo\Api\FormatSnakValue';
-	$wgAPIModules['wbparsevalue']						= 'Wikibase\Repo\Api\ParseValue';
-	$wgAPIModules['wbavailablebadges']					= 'Wikibase\Repo\Api\AvailableBadges';
-	$wgAPIModules['wbcreateredirect']					= 'Wikibase\Repo\Api\CreateRedirect';
+	$wgAPIModules['wbgetentities'] = 'Wikibase\Repo\Api\GetEntities';
+	$wgAPIModules['wbsetlabel'] = 'Wikibase\Repo\Api\SetLabel';
+	$wgAPIModules['wbsetdescription'] = 'Wikibase\Repo\Api\SetDescription';
+	$wgAPIModules['wbsearchentities'] = 'Wikibase\Repo\Api\SearchEntities';
+	$wgAPIModules['wbsetaliases'] = 'Wikibase\Repo\Api\SetAliases';
+	$wgAPIModules['wbeditentity'] = 'Wikibase\Repo\Api\EditEntity';
+	$wgAPIModules['wblinktitles'] = 'Wikibase\Repo\Api\LinkTitles';
+	$wgAPIModules['wbsetsitelink'] = 'Wikibase\Repo\Api\SetSiteLink';
+	$wgAPIModules['wbcreateclaim'] = 'Wikibase\Repo\Api\CreateClaim';
+	$wgAPIModules['wbgetclaims'] = 'Wikibase\Repo\Api\GetClaims';
+	$wgAPIModules['wbremoveclaims'] = 'Wikibase\Repo\Api\RemoveClaims';
+	$wgAPIModules['wbsetclaimvalue'] = 'Wikibase\Repo\Api\SetClaimValue';
+	$wgAPIModules['wbsetreference'] = 'Wikibase\Repo\Api\SetReference';
+	$wgAPIModules['wbremovereferences'] = 'Wikibase\Repo\Api\RemoveReferences';
+	$wgAPIModules['wbsetclaim'] = 'Wikibase\Repo\Api\SetClaim';
+	$wgAPIModules['wbremovequalifiers'] = 'Wikibase\Repo\Api\RemoveQualifiers';
+	$wgAPIModules['wbsetqualifier'] = 'Wikibase\Repo\Api\SetQualifier';
+	$wgAPIModules['wbmergeitems'] = 'Wikibase\Repo\Api\MergeItems';
+	$wgAPIModules['wbformatvalue'] = 'Wikibase\Repo\Api\FormatSnakValue';
+	$wgAPIModules['wbparsevalue'] = 'Wikibase\Repo\Api\ParseValue';
+	$wgAPIModules['wbavailablebadges'] = 'Wikibase\Repo\Api\AvailableBadges';
+	$wgAPIModules['wbcreateredirect'] = 'Wikibase\Repo\Api\CreateRedirect';
 
 	// Special page registration
-	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';
-	$wgSpecialPages['NewProperty'] 						= 'Wikibase\Repo\Specials\SpecialNewProperty';
-	$wgSpecialPages['ItemByTitle'] 						= 'Wikibase\Repo\Specials\SpecialItemByTitle';
-	$wgSpecialPages['GoToLinkedPage']					= 'Wikibase\Repo\Specials\SpecialGoToLinkedPage';
-	$wgSpecialPages['ItemDisambiguation'] 				= 'Wikibase\Repo\Specials\SpecialItemDisambiguation';
-	$wgSpecialPages['ItemsWithoutSitelinks']			= 'Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks';
-	$wgSpecialPages['SetLabel'] 						= 'Wikibase\Repo\Specials\SpecialSetLabel';
-	$wgSpecialPages['SetDescription'] 					= 'Wikibase\Repo\Specials\SpecialSetDescription';
-	$wgSpecialPages['SetAliases'] 						= 'Wikibase\Repo\Specials\SpecialSetAliases';
-	$wgSpecialPages['SetLabelDescriptionAliases'] 		= 'Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases';
-	$wgSpecialPages['SetSiteLink']						= 'Wikibase\Repo\Specials\SpecialSetSiteLink';
+	$wgSpecialPages['NewItem'] = 'Wikibase\Repo\Specials\SpecialNewItem';
+	$wgSpecialPages['NewProperty'] = 'Wikibase\Repo\Specials\SpecialNewProperty';
+	$wgSpecialPages['ItemByTitle'] = 'Wikibase\Repo\Specials\SpecialItemByTitle';
+	$wgSpecialPages['GoToLinkedPage'] = 'Wikibase\Repo\Specials\SpecialGoToLinkedPage';
+	$wgSpecialPages['ItemDisambiguation'] = 'Wikibase\Repo\Specials\SpecialItemDisambiguation';
+	$wgSpecialPages['ItemsWithoutSitelinks'] = 'Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks';
+	$wgSpecialPages['SetLabel'] = 'Wikibase\Repo\Specials\SpecialSetLabel';
+	$wgSpecialPages['SetDescription'] = 'Wikibase\Repo\Specials\SpecialSetDescription';
+	$wgSpecialPages['SetAliases'] = 'Wikibase\Repo\Specials\SpecialSetAliases';
+	$wgSpecialPages['SetLabelDescriptionAliases'] = 'Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases';
+	$wgSpecialPages['SetSiteLink'] = 'Wikibase\Repo\Specials\SpecialSetSiteLink';
 	$wgSpecialPages['EntitiesWithoutLabel'] = array(
 		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
 		'newSpecialEntitiesWithoutLabel'
@@ -210,34 +210,34 @@ call_user_func( function() {
 		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
 		'newSpecialEntitiesWithoutDescription'
 	);
-	$wgSpecialPages['ListDatatypes']					= 'Wikibase\Repo\Specials\SpecialListDatatypes';
-	$wgSpecialPages['ListProperties']					= 'Wikibase\Repo\Specials\SpecialListProperties';
-	$wgSpecialPages['DispatchStats']					= 'Wikibase\Repo\Specials\SpecialDispatchStats';
-	$wgSpecialPages['EntityData'] 						= 'Wikibase\Repo\Specials\SpecialEntityData';
-	$wgSpecialPages['MyLanguageFallbackChain'] 			= 'Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain';
-	$wgSpecialPages['MergeItems'] 						= 'Wikibase\Repo\Specials\SpecialMergeItems';
-	$wgSpecialPages['RedirectEntity'] 					= 'Wikibase\Repo\Specials\SpecialRedirectEntity';
+	$wgSpecialPages['ListDatatypes'] = 'Wikibase\Repo\Specials\SpecialListDatatypes';
+	$wgSpecialPages['ListProperties'] = 'Wikibase\Repo\Specials\SpecialListProperties';
+	$wgSpecialPages['DispatchStats'] = 'Wikibase\Repo\Specials\SpecialDispatchStats';
+	$wgSpecialPages['EntityData'] = 'Wikibase\Repo\Specials\SpecialEntityData';
+	$wgSpecialPages['MyLanguageFallbackChain'] = 'Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain';
+	$wgSpecialPages['MergeItems'] = 'Wikibase\Repo\Specials\SpecialMergeItems';
+	$wgSpecialPages['RedirectEntity'] = 'Wikibase\Repo\Specials\SpecialRedirectEntity';
 
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob';
 	$wgJobClasses['UpdateRepoOnDelete'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob';
 
 	// Hooks
-	$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
-	$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
-	$wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
+	$wgHooks['BeforePageDisplay'][] = 'Wikibase\RepoHooks::onBeforePageDisplay';
+	$wgHooks['LoadExtensionSchemaUpdates'][] = 'Wikibase\RepoHooks::onSchemaUpdate';
+	$wgHooks['UnitTestsList'][] = 'Wikibase\RepoHooks::registerUnitTests';
 	$wgHooks['ResourceLoaderTestModules'][] = 'Wikibase\RepoHooks::registerQUnitTests';
 
-	$wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable';
-	$wgHooks['NewRevisionFromEditComplete'][]			= 'Wikibase\RepoHooks::onNewRevisionFromEditComplete';
-	$wgHooks['SkinTemplateNavigation'][] 				= 'Wikibase\RepoHooks::onPageTabs';
-	$wgHooks['RecentChange_save'][]						= 'Wikibase\RepoHooks::onRecentChangeSave';
-	$wgHooks['ArticleDeleteComplete'][] 				= 'Wikibase\RepoHooks::onArticleDeleteComplete';
-	$wgHooks['ArticleUndelete'][]						= 'Wikibase\RepoHooks::onArticleUndelete';
-	$wgHooks['GetPreferences'][]						= 'Wikibase\RepoHooks::onGetPreferences';
-	$wgHooks['LinkBegin'][] 							= 'Wikibase\Repo\Hooks\LinkBeginHookHandler::onLinkBegin';
-	$wgHooks['ChangesListInitRows'][] 					= 'Wikibase\Repo\Hooks\LabelPrefetchHookHandlers::onChangesListInitRows';
-	$wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
+	$wgHooks['NamespaceIsMovable'][] = 'Wikibase\RepoHooks::onNamespaceIsMovable';
+	$wgHooks['NewRevisionFromEditComplete'][] = 'Wikibase\RepoHooks::onNewRevisionFromEditComplete';
+	$wgHooks['SkinTemplateNavigation'][] = 'Wikibase\RepoHooks::onPageTabs';
+	$wgHooks['RecentChange_save'][] = 'Wikibase\RepoHooks::onRecentChangeSave';
+	$wgHooks['ArticleDeleteComplete'][] = 'Wikibase\RepoHooks::onArticleDeleteComplete';
+	$wgHooks['ArticleUndelete'][] = 'Wikibase\RepoHooks::onArticleUndelete';
+	$wgHooks['GetPreferences'][] = 'Wikibase\RepoHooks::onGetPreferences';
+	$wgHooks['LinkBegin'][] = 'Wikibase\Repo\Hooks\LinkBeginHookHandler::onLinkBegin';
+	$wgHooks['ChangesListInitRows'][] = 'Wikibase\Repo\Hooks\LabelPrefetchHookHandlers::onChangesListInitRows';
+	$wgHooks['OutputPageBodyAttributes'][] = 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
 	//FIXME: handle other types of entities with autocomments too!
 	$wgHooks['FormatAutocomments'][] = array(
 		'Wikibase\RepoHooks::onFormat',
@@ -247,25 +247,25 @@ call_user_func( function() {
 		'Wikibase\RepoHooks::onFormat',
 		array( CONTENT_MODEL_WIKIBASE_PROPERTY, 'wikibase-property' )
 	);
-	$wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
-	$wgHooks['ApiCheckCanExecute'][] 					= 'Wikibase\RepoHooks::onApiCheckCanExecute';
-	$wgHooks['SetupAfterCache'][] 						= 'Wikibase\RepoHooks::onSetupAfterCache';
-	$wgHooks['ShowSearchHit'][] 						= 'Wikibase\RepoHooks::onShowSearchHit';
-	$wgHooks['ShowSearchHitTitle'][]					= 'Wikibase\RepoHooks::onShowSearchHitTitle';
-	$wgHooks['TitleGetRestrictionTypes'][]				= 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
-	$wgHooks['AbuseFilter-contentToString'][]			= 'Wikibase\RepoHooks::onAbuseFilterContentToString';
-	$wgHooks['SpecialPage_reorderPages'][]				= 'Wikibase\RepoHooks::onSpecialPageReorderPages';
-	$wgHooks['OutputPageParserOutput'][]				= 'Wikibase\RepoHooks::onOutputPageParserOutput';
-	$wgHooks['ContentModelCanBeUsedOn'][]				= 'Wikibase\RepoHooks::onContentModelCanBeUsedOn';
-	$wgHooks['OutputPageBeforeHTML'][]				= 'Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler::onOutputPageBeforeHTML';
-	$wgHooks['OutputPageBeforeHTML'][]				= 'Wikibase\RepoHooks::onOutputPageBeforeHtmlRegisterConfig';
-	$wgHooks['ContentHandlerForModelID'][]			= 'Wikibase\RepoHooks::onContentHandlerForModelID';
-	$wgHooks['APIQuerySiteInfoStatisticsInfo'][]	= 'Wikibase\RepoHooks::onAPIQuerySiteInfoStatisticsInfo';
-	$wgHooks['ImportHandleRevisionXMLTag'][]	    = 'Wikibase\RepoHooks::onImportHandleRevisionXMLTag';
-	$wgHooks['BaseTemplateToolbox'][]               = 'Wikibase\RepoHooks::onBaseTemplateToolbox';
+	$wgHooks['PageHistoryLineEnding'][] = 'Wikibase\RepoHooks::onPageHistoryLineEnding';
+	$wgHooks['ApiCheckCanExecute'][] = 'Wikibase\RepoHooks::onApiCheckCanExecute';
+	$wgHooks['SetupAfterCache'][] = 'Wikibase\RepoHooks::onSetupAfterCache';
+	$wgHooks['ShowSearchHit'][] = 'Wikibase\RepoHooks::onShowSearchHit';
+	$wgHooks['ShowSearchHitTitle'][] = 'Wikibase\RepoHooks::onShowSearchHitTitle';
+	$wgHooks['TitleGetRestrictionTypes'][] = 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
+	$wgHooks['AbuseFilter-contentToString'][] = 'Wikibase\RepoHooks::onAbuseFilterContentToString';
+	$wgHooks['SpecialPage_reorderPages'][] = 'Wikibase\RepoHooks::onSpecialPageReorderPages';
+	$wgHooks['OutputPageParserOutput'][] = 'Wikibase\RepoHooks::onOutputPageParserOutput';
+	$wgHooks['ContentModelCanBeUsedOn'][] = 'Wikibase\RepoHooks::onContentModelCanBeUsedOn';
+	$wgHooks['OutputPageBeforeHTML'][] = 'Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler::onOutputPageBeforeHTML';
+	$wgHooks['OutputPageBeforeHTML'][] = 'Wikibase\RepoHooks::onOutputPageBeforeHtmlRegisterConfig';
+	$wgHooks['ContentHandlerForModelID'][] = 'Wikibase\RepoHooks::onContentHandlerForModelID';
+	$wgHooks['APIQuerySiteInfoStatisticsInfo'][] = 'Wikibase\RepoHooks::onAPIQuerySiteInfoStatisticsInfo';
+	$wgHooks['ImportHandleRevisionXMLTag'][] = 'Wikibase\RepoHooks::onImportHandleRevisionXMLTag';
+	$wgHooks['BaseTemplateToolbox'][] = 'Wikibase\RepoHooks::onBaseTemplateToolbox';
 	$wgHooks['SkinTemplateBuildNavUrlsNav_urlsAfterPermalink'][] = 'Wikibase\RepoHooks::onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink';
-	$wgHooks['SkinMinervaDefaultModules'][]			= 'Wikibase\RepoHooks::onSkinMinervaDefaultModules';
-	$wgHooks['ResourceLoaderRegisterModules'][]			= 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
+	$wgHooks['SkinMinervaDefaultModules'][] = 'Wikibase\RepoHooks::onSkinMinervaDefaultModules';
+	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';

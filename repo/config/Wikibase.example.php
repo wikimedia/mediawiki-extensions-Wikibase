@@ -101,14 +101,14 @@ $wgWBRepoSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUER
 // user can edit everything. An other interesting alternative is to let the anonymous user
 // do everything except creating items and properties and setting rank.
 // First block sets all rights for anonymous to false, that is they have no rights.
-$wgGroupPermissions['*']['item-term']			= false;
-$wgGroupPermissions['*']['item-merge']			= false;
-$wgGroupPermissions['*']['property-term']		= false;
-$wgGroupPermissions['*']['property-create']		= false;
+$wgGroupPermissions['*']['item-term'] = false;
+$wgGroupPermissions['*']['item-merge'] = false;
+$wgGroupPermissions['*']['property-term'] = false;
+$wgGroupPermissions['*']['property-create'] = false;
 // Second block sets all rights for anonymous to true, that is they hold the rights.
-$wgGroupPermissions['user']['item-term']			= true;
-$wgGroupPermissions['user']['item-merge']			= true;
-$wgGroupPermissions['user']['property-term']		= true;
-$wgGroupPermissions['user']['property-create']		= true;
+$wgGroupPermissions['user']['item-term'] = true;
+$wgGroupPermissions['user']['item-merge'] = true;
+$wgGroupPermissions['user']['property-term'] = true;
+$wgGroupPermissions['user']['property-create'] = true;
 
 */
