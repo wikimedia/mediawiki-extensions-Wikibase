@@ -83,7 +83,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	 * @since 0.5
 	 *
 	 * @param EntityId $entityId
-	 * @paran string $forUpdate
+	 * @param string $forUpdate
 	 *
 	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
 	 *         does not refer to a redirect, or false if $entityId is not known.
