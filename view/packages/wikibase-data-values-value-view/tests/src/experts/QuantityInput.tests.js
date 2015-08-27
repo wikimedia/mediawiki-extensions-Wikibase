@@ -35,8 +35,8 @@
 		);
 
 		assert.ok(
-			!characteristics.hasOwnProperty( 'applyUnit' ) || characteristics.applyUnit === true,
-			'applyUnit either does not exist or is true'
+			!characteristics.hasOwnProperty( 'applyUnit' ) || characteristics.applyUnit === false,
+			'applyUnit either does not exist or is false'
 		);
 	} );
 
