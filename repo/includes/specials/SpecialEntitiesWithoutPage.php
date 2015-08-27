@@ -90,7 +90,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$this->setForm();
 
 		if ( $this->language !== '' ) {
-			$this->showQuery();
+			$this->showQuery( array( 'language' => $this->language, 'type' => $this->type ) );
 		}
 	}
 
@@ -213,15 +213,6 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		return $this->entityPerPage->getEntitiesWithoutTerm( $this->termType, $this->language, $this->type, $limit, $offset );
-	}
-
-	/**
-	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
-	 *
-	 * @since 0.4
-	 */
-	protected function getTitleForNavigation() {
-		return $this->getPageTitle( $this->language . '/' . $this->type );
 	}
 
 }
