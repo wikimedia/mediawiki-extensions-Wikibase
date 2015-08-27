@@ -242,7 +242,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertTag( array(
+		DOMTestUtils::assertTagSimple( $this, array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-page',
