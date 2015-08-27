@@ -35,8 +35,13 @@
 		);
 
 		assert.ok(
-			!characteristics.hasOwnProperty( 'applyUnit' ) || characteristics.applyUnit === false,
-			'applyUnit either does not exist or is false'
+			characteristics.applyUnit === false,
+			'applyUnit must be false'
+		);
+
+		assert.ok(
+			characteristics.applyRounding === false,
+			'applyRounding must be false'
 		);
 	} );
 
