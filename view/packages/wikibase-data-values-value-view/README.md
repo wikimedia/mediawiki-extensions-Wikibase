@@ -105,6 +105,13 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.15.2 (2015-08-27)
+
+#### Enhancements
+* Use concepturi value from wbsearchentities (if present) to identify selected entity
+* Add applyUnit and applyRounding options to QuantityInput to allow round trip
+* Use vocabularyLookupApiUrl option to allow lookups on 3rd party repos
+
 ### 0.15.1 (2015-08-20)
 
 #### Enhancements
