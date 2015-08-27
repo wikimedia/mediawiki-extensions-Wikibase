@@ -356,7 +356,6 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 	 */
 	private function executeApiModule( ApiBase $module ) {
 		$printer = $module->getMain()->createPrinterByName( 'xml' );
-		$module->getResult()->setRawMode( true );
 
 		$module->execute();
 
