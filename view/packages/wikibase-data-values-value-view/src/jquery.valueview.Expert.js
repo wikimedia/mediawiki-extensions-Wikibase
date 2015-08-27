@@ -243,9 +243,11 @@ jQuery.valueview = jQuery.valueview || {};
 		 *
 		 * This method should allow to be called statically, i. e. without a useful `this` context.
 		 *
+		 * @param {string} [format='text/html'] Typically "text/plain". Implementations should
+		 * fall back to "text/html" when the format is undefined.
 		 * @return {Object}
 		 */
-		valueCharacteristics: function() {
+		valueCharacteristics: function( format ) {
 			return {};
 		},
 
