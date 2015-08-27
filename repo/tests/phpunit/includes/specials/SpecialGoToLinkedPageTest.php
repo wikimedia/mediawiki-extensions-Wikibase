@@ -176,7 +176,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 			)
 		);
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output for: " . $key );
+			$this->assertTagSimple( $matcher, $output, "Failed to match html output for: " . $key );
 		}
 
 		$errorMatch = array(
