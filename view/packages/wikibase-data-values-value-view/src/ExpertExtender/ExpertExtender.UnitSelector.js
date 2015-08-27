@@ -14,7 +14,8 @@
 	 * @param {Function} getUpstreamValue
 	 * @param {Function} onValueChange
 	 * @param {Object} [options={}]
-	 * @param {string} [options.language=null]
+	 * @param {string|null} [options.language=null]
+	 * @param {string|null} [options.vocabularyLookupApiUrl=null]
 	 */
 	ExpertExtender.UnitSelector = function(
 		messageProvider,
@@ -73,6 +74,7 @@
 			);
 			this.$selector.unitsuggester( {
 				language: this._options.language || null,
+				vocabularyLookupApiUrl: this._options.vocabularyLookupApiUrl || null,
 				change: this._onValueChange
 			} );
 			$extender

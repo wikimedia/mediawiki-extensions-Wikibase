@@ -47,6 +47,7 @@ function expertProxy( fnName ) {
  * @param {string} options.language
  *        Language code of the language the `valueview` shall interact with parsers and
  *        formatters.
+ * @param {string|null} [options.vocabularyLookupApiUrl=null]
  * @param {string|null} [options.dataTypeId=null]
  *        If set, an expert (`jQuery.valueview.Expert`), a parser (`valueParsers.ValueParser`) and a
  *        formatter (`valueFormatters.ValueFormatter`) will be determined from the provided
@@ -182,6 +183,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		dataValueType: null,
 		value: null,
 		language: null,
+		vocabularyLookupApiUrl: null,
 		autoStartEditing: false,
 		parseDelay: 300,
 		messageProvider: null,
@@ -556,6 +558,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				this.viewNotifier(),
 				{
 					language: this.options.language,
+					vocabularyLookupApiUrl: this.options.vocabularyLookupApiUrl || null,
 					contentLanguages: this.options.contentLanguages,
 					messageProvider: this.options.messageProvider
 				}

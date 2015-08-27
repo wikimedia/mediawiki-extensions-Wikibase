@@ -105,6 +105,14 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.15.2 (2015-08-27)
+
+#### Enhancements
+* `jQuery.valueview.experts.QuantityInput` explicitely asks `QuantityFormatter` to not apply rounding and units.
+* `jQuery.valueview.valueview` passes a `vocabularyLookupApiUrl` option to all experts.
+* `jQuery.valueview.experts.QuantityInput` and `jQuery.valueview.ExpertExtender.UnitSelector` now pass a `vocabularyLookupApiUrl` option to `jQuery.ui.unitsuggester`.
+* `jQuery.ui.unitsuggester` uses the `concepturi` from `wbsearchentities` results, if available.
+
 ### 0.15.1 (2015-08-20)
 
 #### Enhancements
