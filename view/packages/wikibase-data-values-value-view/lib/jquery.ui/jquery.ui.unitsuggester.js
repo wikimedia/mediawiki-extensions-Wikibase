@@ -230,7 +230,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 			value = suggestion.label || suggestion.id;
 
 		var item = new $.ui.ooMenu.Item( $label, value );
-		item._link = suggestion.url;
+		item._link = suggestion.concepturi || suggestion.url;
 
 		return item;
 	},
