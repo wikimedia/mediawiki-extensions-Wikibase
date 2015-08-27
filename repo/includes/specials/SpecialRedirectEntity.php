@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Exception;
+use HTMLForm;
 use Html;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
@@ -149,7 +150,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 * @param EntityId $toId
 	 */
 	private function redirectEntity( EntityId $fromId, EntityId $toId ) {
-		$this->tokenCheck->checkRequestToken( $this->getRequest(), 'token' );
+		$this->tokenCheck->checkRequestToken( $this->getRequest(), 'wpEditToken' );
 
 		$this->interactor->createRedirect( $fromId, $toId, false );
 
@@ -164,67 +165,38 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 * Creates the HTML form for redirecting an entity
 	 */
 	protected function createForm() {
-		$out = $this->getOutput();
-		$out->addModuleStyles( array( 'wikibase.special' ) );
+		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
+		$pre = '';
 		if ( $this->getUser()->isAnon() ) {
-			$out->addHTML(
-				Html::rawElement(
-					'p',
-					array( 'class' => 'warning' ),
-					$this->msg(
-						'wikibase-anonymouseditwarning',
-						$this->msg( 'wikibase-entity' )->text()
-					)->parse()
-				)
+			$pre = Html::rawElement(
+				'p',
+				array( 'class' => 'warning' ),
+				$this->msg(
+					'wikibase-anonymouseditwarning',
+					$this->msg( 'wikibase-entity' )->text()
+				)->parse()
 			);
 		}
 
-		// Form header
-		$out->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'method' => 'post',
-					'action' => $this->getPageTitle()->getFullUrl(),
-					'name' => 'redirectentity',
-					'id' => 'wb-redirectentity-form1',
-					'class' => 'wb-form'
-				)
-			)
-			. Html::openElement(
-				'fieldset',
-				array( 'class' => 'wb-fieldset' )
-			)
-			. Html::element(
-				'legend',
-				array( 'class' => 'wb-legend' ),
-				$this->msg( 'special-redirectentity' )->text()
-			)
-		);
-
 		// Form elements
-		$out->addHTML( $this->getFormElements() );
+		$formDescriptor = $this->getFormElements();
 
-		// Form body
-		$out->addHTML(
-			Html::input(
-				'wikibase-redirectentity-submit',
-				$this->msg( 'wikibase-redirectentity-submit' )->text(),
-				'submit',
-				array(
-					'id' => 'wb-redirectentity-submit',
-					'class' => 'wb-button'
-				)
-			)
-			. Html::input(
-				'token',
-				$this->getUser()->getEditToken(),
-				'hidden'
-			)
-			. Html::closeElement( 'fieldset' )
-			. Html::closeElement( 'form' )
+		$formDescriptor['submit'] = array(
+			'name' => 'wikibase-redirectentity-submit',
+			'section' => 'redirectentity', // special-redirectentity
+			'default' => $this->msg( 'wikibase-redirectentity-submit' )->text(),
+			'type' => 'submit',
+			'id' => 'wb-redirectentity-submit',
+			'cssclass' => 'wb-button'
 		);
+
+		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext(), 'special' )
+			->setId( 'wb-redirectentity-form1' )
+			->setPreText( $pre )
+			->suppressDefaultSubmit()
+			->setSubmitCallback( function () {// no-op
+			} )->show();
 	}
 
 	/**
@@ -233,42 +205,26 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 * @return string
 	 */
 	protected function getFormElements() {
-		return Html::element(
-			'label',
-			array(
-				'for' => 'wb-redirectentity-fromid',
-				'class' => 'wb-label'
+		return array(
+			'fromid' => array(
+				'name' => 'fromid',
+				'section' => 'redirectentity', // special-redirectentity
+				'default' => $this->getRequest()->getVal( 'fromid' ),
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => 'wb-redirectentity-fromid',
+				'label-message' => 'wikibase-redirectentity-fromid'
 			),
-			$this->msg( 'wikibase-redirectentity-fromid' )->text()
-		)
-		. Html::input(
-			'fromid',
-			$this->getRequest()->getVal( 'fromid' ),
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => 'wb-redirectentity-fromid'
+			'toid' => array(
+				'name' => 'toid',
+				'section' => 'redirectentity', // special-redirectentity
+				'default' => $this->getRequest()->getVal( 'toid' ),
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => 'wb-redirectentity-toid',
+				'label-message' => 'wikibase-redirectentity-toid'
 			)
-		)
-		. Html::element( 'br' )
-		. Html::element(
-			'label',
-			array(
-				'for' => 'wb-redirectentity-toid',
-				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-redirectentity-toid' )->text()
-		)
-		. Html::input(
-			'toid',
-			$this->getRequest()->getVal( 'toid' ),
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => 'wb-redirectentity-toid'
-			)
-		)
-		. Html::element( 'br' );
+		);
 	}
 
 }

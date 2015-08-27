@@ -138,8 +138,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		// HACK: we need this in newSpecialPage, but executeSpecialPage doesn't pass the context on.
 		$this->user = $user;
 
-		if ( !isset( $params['token'] ) ) {
-			$params['token'] = $user->getEditToken();
+		if ( !isset( $params['wpEditToken'] ) ) {
+			$params['wpEditToken'] = $user->getEditToken();
 		}
 
 		$request = new FauxRequest( $params, true );
@@ -149,26 +149,41 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 	public function testForm() {
 		$matchers['fromid'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-redirectentity-fromid',
 				'class' => 'wb-input',
-				'name' => 'fromid',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'fromid',
+				)
 			) );
 		$matchers['toid'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-redirectentity-toid',
 				'class' => 'wb-input',
-				'name' => 'toid',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'toid',
+				)
 			) );
 		$matchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-redirectentity-submit',
 				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'wikibase-redirectentity-submit',
+			),
+			'child' => array(
+				'tag' => 'button',
+				'attributes' => array(
+					'type' => 'submit',
+					'name' => 'wikibase-redirectentity-submit',
+				)
 			) );
 
 		$output = $this->executeSpecialEntityRedirect( array() );
@@ -257,7 +272,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
 				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),
 			array( //bad token
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q2', 'token' => 'BAD' ),
+				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q2', 'wpEditToken' => 'BAD' ),
 				'e' => 'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ),
 		);
 	}
