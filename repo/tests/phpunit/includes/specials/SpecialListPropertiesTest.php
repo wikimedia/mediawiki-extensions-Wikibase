@@ -14,8 +14,8 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
+use Wikibase\Store\BufferingTermLookup;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialListProperties
@@ -71,25 +71,20 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return TermLookup
+	 * @return BufferingTermLookup
 	 */
-	private function getTermLookup() {
-		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
-		$termLookup->expects( $this->any() )
+	private function getBufferingTermLookup() {
+		$lookup = $this->getMockBuilder( 'Wikibase\Store\BufferingTermLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+		$lookup->expects( $this->any() )
+			->method( 'prefetchTerms' );
+		$lookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {
 				return array( 'en' => 'Property with label ' . $propertyId->getSerialization() );
 			} ) );
-
-		return $termLookup;
-	}
-
-	private function getTermBuffer() {
-		$termBuffer = $this->getMock( 'Wikibase\Store\TermBuffer' );
-		$termBuffer->expects( $this->any() )
-			->method( 'prefetchTerms' );
-
-		return $termBuffer;
+		return $lookup;
 	}
 
 	/**
@@ -115,12 +110,9 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			$this->getDataTypeFactory(),
 			$this->getPropertyInfoStore(),
 			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), new LanguageNameLookup() ),
-			new LanguageFallbackLabelDescriptionLookupFactory(
-				new LanguageFallbackChainFactory(),
-				$this->getTermLookup(),
-				$this->getTermBuffer()
-			),
-			$this->getEntityTitleLookup()
+			new LanguageFallbackChainFactory(),
+			$this->getEntityTitleLookup(),
+			$this->getBufferingTermLookup()
 		);
 
 		return $specialPage;
