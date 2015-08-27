@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_343de329",
+        "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-27T14:43:08Z",
+      "side": 0,
+      "message": "this was meant as an explanation why we need this apparently pointless local variable...",
+      "revId": "12d6b50dda2cdb2f6908c4f1f4a2a2bac904f18a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
