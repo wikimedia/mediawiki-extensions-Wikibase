@@ -22,13 +22,13 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 	private $repoDB;
 
 	/**
-	 * @var array
+	 * @var string[] Mapping of site IDs to database names.
 	 */
 	private $wikiDBNames;
 
 	/**
 	 * @param string $repoDB
-	 * @param array $wikiDBNames An associative array mapping site IDs to logical DB names.
+	 * @param string[] $wikiDBNames An associative array mapping site IDs to logical database names.
 	 */
 	public function __construct( $repoDB, array $wikiDBNames = array() ) {
 		$this->repoDB = $repoDB;

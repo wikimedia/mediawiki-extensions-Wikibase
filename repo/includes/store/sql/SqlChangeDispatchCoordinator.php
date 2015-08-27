@@ -46,25 +46,25 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $isClientLockUsedOverride = null;
 
 	/**
-	 * @var int: the number of changes to pass to a client wiki at once.
+	 * @var int The number of changes to pass to a client wiki at once.
 	 */
 	private $batchSize = 1000;
 
 	/**
-	 * @var int: Number of seconds to wait before dispatching to the same wiki again.
+	 * @var int Number of seconds to wait before dispatching to the same wiki again.
 	 *           This affects the effective batch size, and this influences how changes
 	 *           can be coalesced.
 	 */
 	private $dispatchInterval = 60;
 
 	/**
-	 * @var int: Number of seconds to wait before testing a lock. Any target with a lock
+	 * @var int Number of seconds to wait before testing a lock. Any target with a lock
 	 *           timestamp newer than this will not be considered for selection.
 	 */
 	private $lockGraceInterval = 60;
 
 	/**
-	 * @var int: Number of target wikis to select as a base set for random selection.
+	 * @var int Number of target wikis to select as a base set for random selection.
 	 *           Setting this to 1 causes strict "oldest first" behavior, with the possibility
 	 *           of grind/starvation if dispatching to the oldest wiki fails.
 	 *           Setting this equal to (or greater than) the number of target wikis
@@ -74,13 +74,13 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $randomness = 10;
 
 	/**
-	 * @var string: the name of the database table used to record state.
+	 * @var string The name of the database table used to record state.
 	 */
 	private $stateTable = 'wb_changes_dispatch';
 
 	/**
 	 * @todo This shouldn't be here.
-	 * @var string: name of the changes table
+	 * @var string Name of the changes table.
 	 */
 	private $changesTable = 'wb_changes';
 
@@ -90,19 +90,19 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $messageReporter;
 
 	/**
-	 * @var string: the logical name of the repository's database
+	 * @var string The logical name of the repository's database
 	 */
 	private $repoDB;
 
 	/**
-	 * @var array: Logical names of local client wiki databases, provided as a mapping of
+	 * @var string[] Logical names of local client wiki databases, provided as a mapping of
 	 *             global site ID to database name for each client wiki.
 	 */
 	private $clientWikis;
 
 	/**
 	 * @param string $repoDB
-	 * @param string[] $clientWikis
+	 * @param string[] $clientWikis Mapping of site IDs to database names.
 	 */
 	public function __construct( $repoDB, array $clientWikis ) {
 		$this->repoDB = $repoDB;
