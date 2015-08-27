@@ -3,14 +3,11 @@
 namespace Wikibase\Repo\Specials;
 
 use DataTypes\DataTypeFactory;
-use HTMLForm;
 use Html;
+use HTMLForm;
 use OutOfBoundsException;
-use Title;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataTypeSelector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -196,7 +193,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 *
 	 * @return string
 	 */
-	protected function formatRow( $propertyId ) {
+	protected function formatRow( PropertyId $propertyId ) {
 		$title = $this->titleLookup->getTitleForId( $propertyId );
 		if ( !$title->exists() ) {
 			return $this->entityIdFormatter->formatEntityId( $propertyId );
