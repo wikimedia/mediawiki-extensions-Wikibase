@@ -170,7 +170,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->getMockContentLanguages(),
 			$searchInteractor,
 			$this->getMockTermIndex(),
-			$this->getMockLabelDescriptionLookup()
+			$this->getMockLabelDescriptionLookup(),
+			'concept:'
 		);
 
 		$module->execute();
@@ -230,6 +231,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		);
 		$q222Result = array(
 			'id' => 'Q222',
+			'concepturi' => 'concept:Q222',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -244,6 +246,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		);
 		$q333Result = array(
 			'id' => 'Q333',
+			'concepturi' => 'concept:Q333',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -267,6 +270,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				array(
 					array(
 						'id' => 'Q111',
+						'concepturi' => 'concept:Q111',
 						'url' => 'http://fullTitleUrl',
 						'title' => 'Prefixed:Title',
 						'pageid' => 42,
@@ -328,6 +332,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		foreach ( $result['search'] as $key => $searchresult ) {
 			$this->assertInternalType( 'integer', $key );
 			$this->assertArrayHasKey( 'id', $searchresult );
+			$this->assertArrayHasKey( 'concepturi', $searchresult );
 			$this->assertArrayHasKey( 'url', $searchresult );
 		}
 	}
