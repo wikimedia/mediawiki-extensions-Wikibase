@@ -108,9 +108,10 @@ Other methods an `Expert` needs to provide:
 ### 0.15.2 (2015-08-27)
 
 #### Enhancements
-* Use concepturi value from wbsearchentities (if present) to identify selected entity
-* Add applyUnit and applyRounding options to QuantityInput to allow round trip
-* Use vocabularyLookupApiUrl option to allow lookups on 3rd party repos
+* `jQuery.valueview.experts.QuantityInput` explicitely asks `QuantityFormatter` to not apply rounding and units.
+* `jQuery.valueview.valueview` passes a `vocabularyLookupApiUrl` option to all experts.
+* `jQuery.valueview.experts.QuantityInput` and `jQuery.valueview.ExpertExtender.UnitSelector` now pass a `vocabularyLookupApiUrl` option to `jQuery.ui.unitsuggester`.
+* `jQuery.ui.unitsuggester` uses the `concepturi` from `wbsearchentities` results, if available.
 
 ### 0.15.1 (2015-08-20)
 
