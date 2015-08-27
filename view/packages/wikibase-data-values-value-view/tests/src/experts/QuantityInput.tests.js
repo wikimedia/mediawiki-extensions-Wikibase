@@ -33,6 +33,16 @@
 			characteristics.unit === null || typeof characteristics.unit === 'string',
 			'unit is null or a string'
 		);
+
+		assert.ok(
+			characteristics.applyUnit === false,
+			'applyUnit must be false'
+		);
+
+		assert.ok(
+			characteristics.applyRounding === false,
+			'applyRounding must be false'
+		);
 	} );
 
 }( jQuery, QUnit, jQuery.valueview ) );
