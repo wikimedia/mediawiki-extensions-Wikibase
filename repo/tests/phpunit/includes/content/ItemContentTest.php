@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use ContentHandler;
+use DOMTestTrait;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
@@ -38,6 +39,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 class ItemContentTest extends EntityContentTest {
+	use DOMTestTrait;
 
 	/**
 	 * @return ItemId
@@ -401,8 +403,11 @@ class ItemContentTest extends EntityContentTest {
 
 		$html = $parserOutput->getText();
 
-		$this->assertTag( array( 'tag' => 'div', 'class' => 'redirectMsg' ), $html, 'redirect message' );
-		$this->assertTag( array( 'tag' => 'a', 'content' => 'Q123' ), $html, 'redirect target' );
+		$this->assertTagSimple(
+			array( 'tag' => 'div', 'attributes' => array( 'class' => 'redirectMsg' ) ),
+			$html,
+			'redirect message' );
+		$this->assertTagSimple( array( 'tag' => 'a', 'content' => 'Q123' ), $html, 'redirect target' );
 	}
 
 	public function provideGetEntityId() {

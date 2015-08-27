@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DOMTestTrait;
 use FauxResponse;
 use Site;
 use SiteStore;
@@ -24,6 +25,7 @@ use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
  * @author Jan Zerebecki
  */
 class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
+	use DOMTestTrait;
 
 	/**
 	 * @return SiteLinkLookup
@@ -176,7 +178,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 			)
 		);
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output for: " . $key );
+			$this->assertTagSimple( $matcher, $output, "Failed to match html output for: " . $key );
 		}
 
 		$errorMatch = array(
@@ -188,7 +190,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		);
 
 		if ( !empty( $error ) ) {
-			$this->assertTag( $errorMatch, $output, "Failed to match error: " . $error );
+			$this->assertTagSimple( $errorMatch, $output, "Failed to match error: " . $error );
 		}
 	}
 
