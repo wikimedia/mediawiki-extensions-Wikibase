@@ -16,6 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @since 0.3
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 
@@ -27,35 +28,6 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @type integer
 	 */
 	const CACHE_TTL_IN_SECONDS = 10;
-
-	/**
-	 * The offset in use
-	 *
-	 * @since 0.3
-	 *
-	 * @var integer
-	 */
-	protected $offset = 0;
-
-	/**
-	 * The limit in use
-	 *
-	 * @since 0.3
-	 *
-	 * @var integer
-	 */
-	protected $limit = 0;
-
-	/**
-	 * The number of rows returned by the query. Reading this variable
-	 * only makes sense in functions that are run after the query has been
-	 * done.
-	 *
-	 * @since 0.3
-	 *
-	 * @var integer
-	 */
-	protected $numRows;
 
 	/**
 	 * @var EntityTitleLookup
@@ -70,7 +42,13 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	public function __construct( $name = '', $restriction = '', $listed = true ) {
 		parent::__construct( $name, $restriction, $listed );
 
-		$this->entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$this->setQueryPageServices(
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+		);
+	}
+
+	public function setQueryPageServices( EntityTitleLookup $entityTitleLookup ) {
+		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
 	/**
@@ -96,7 +74,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @return string HTML
 	 */
-	protected function formatRow( $entityId ) {
+	protected function formatRow( EntityId $entityId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 		return Linker::linkKnown( $title );
 	}
@@ -121,84 +99,50 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 * @since 0.3
 	 */
 	protected function showQuery( array $query = array() ) {
-		$paging = false;
-		$out = $this->getOutput();
+		list( $limit, $offset ) = $this->getRequest()->getLimitOffset();
+		$result = $this->getResult( $offset, $limit + 1 );
 
-		if ( $this->limit == 0 && $this->offset == 0 ) {
-			list( $this->limit, $this->offset ) = $this->getRequest()->getLimitOffset();
+		if ( empty( $result ) ) {
+			$this->getOutput()->addWikiMsg( 'specialpage-empty' );
+			return;
 		}
 
-		$entityIds = $this->getResult( $this->offset, $this->limit + 1 );
+		$numRows = count( $result );
 
-		$this->numRows = count( $entityIds );
+		$html = $this->msg( 'showingresults' )
+			->numParams( min( $numRows, $limit ), $offset + 1 )
+			->parseAsBlock();
 
-		$out->addHTML( Html::openElement( 'div', array( 'class' => 'mw-spcontent' ) ) );
-
-		if ( $this->numRows > 0 ) {
-			$out->addHTML( $this->msg( 'showingresults' )->numParams(
-				// do not format the one extra row, if exist
-				min( $this->numRows, $this->limit ),
-				$this->offset + 1 )->parseAsBlock() );
-			// Disable the "next" link when we reach the end
-			$paging = $this->getLanguage()->viewPrevNext(
-				$this->getTitleForNavigation(),
-				$this->offset,
-				$this->limit,
-				$query,
-				$this->numRows <= $this->limit
-			);
-			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
-		} else {
-			// No results to show, so don't bother with "showing X of Y" etc.
-			// -- just let the user know and give up now
-			$out->addWikiMsg( 'specialpage-empty' );
-		}
-
-		$this->outputResults(
-			$entityIds,
-			// do not format the one extra row, if it exist
-			min( $this->numRows, $this->limit ),
-			$this->offset
+		$paging = $this->getLanguage()->viewPrevNext(
+			$this->getPageTitle(),
+			$offset,
+			$limit,
+			$query,
+			$numRows <= $limit
 		);
 
-		if ( $paging ) {
-			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
-		}
+		$html .= Html::rawElement( 'p', array(), $paging );
+		$html .= $this->formatResult( array_slice( $result, 0, $limit, true ), $offset );
+		$html .= Html::rawElement( 'p', array(), $paging );
 
-		$out->addHTML( Html::closeElement( 'div' ) );
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**
-	 * Format and output report results using the given information plus OutputPage
-	 *
-	 * @since 0.3
-	 *
 	 * @param EntityId[] $entityIds
-	 * @param integer $num number of available result rows
 	 * @param integer $offset paging offset
+	 *
+	 * @return string
 	 */
-	protected function outputResults( array $entityIds, $num, $offset ) {
-		if ( $num > 0 ) {
-			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
-			for ( $i = 0; $i < $num; $i++ ) {
-				$row = $this->formatRow( $entityIds[$i] );
-				$html .= Html::rawElement( 'li', array(), $row );
-			}
-			$html .= Html::closeElement( 'ol' );
+	protected function formatResult( array $entityIds, $offset ) {
+		$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
 
-			$this->getOutput()->addHTML( $html );
+		foreach ( $entityIds as $entityId ) {
+			$html .= Html::rawElement( 'li', array(), $this->formatRow( $entityId ) );
 		}
-	}
 
-	/**
-	 * Return the Title of the special page with full subpages informations in order to be used for navigation.
-	 *
-	 * @since 0.3
-	 *
-	 * @return Title
-	 */
-	protected function getTitleForNavigation() {
-		return $this->getPageTitle();
+		$html .= Html::closeElement( 'ol' );
+		return $html;
 	}
 
 }
