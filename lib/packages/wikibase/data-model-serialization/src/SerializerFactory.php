@@ -7,7 +7,6 @@ use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\AliasGroupListSerializer;
 use Wikibase\DataModel\Serializers\AliasGroupSerializer;
-use Wikibase\DataModel\Serializers\ClaimsSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Serializers\ReferenceListSerializer;
@@ -126,17 +125,6 @@ class SerializerFactory {
 	}
 
 	/**
-	 * Returns a Serializer that can serialize Claims objects.
-	 *
-	 * @deprecated since 1.5, use newStatementListSerializer instead
-	 *
-	 * @return Serializer
-	 */
-	public function newClaimsSerializer() {
-		return new ClaimsSerializer( $this->newStatementSerializer(), $this->shouldUseObjectsForMaps() );
-	}
-
-	/**
 	 * Returns a Serializer that can serialize StatementList objects.
 	 *
 	 * @since 1.4
@@ -163,17 +151,6 @@ class SerializerFactory {
 			$this->newSnakListSerializer( $this->shouldSerializeQualifierSnaksWithHash() ),
 			$this->newReferencesSerializer()
 		);
-	}
-
-	/**
-	 * Returns a Serializer that can serialize Claim objects.
-	 *
-	 * @deprecated since 1.4, use newStatementSerializer instead
-	 *
-	 * @return Serializer
-	 */
-	public function newClaimSerializer() {
-		return $this->newStatementSerializer();
 	}
 
 	/**
@@ -212,17 +189,6 @@ class SerializerFactory {
 			$this->newSnakSerializer( $serializeSnaksWithHash ),
 			$this->shouldUseObjectsForMaps()
 		);
-	}
-
-	/**
-	 * b/c alias for newSnakListSerializer
-	 *
-	 * @deprecated since 1.4 - use newSnakListSerializer instead
-	 *
-	 * @return Serializer
-	 */
-	public function newSnaksSerializer() {
-		return $this->newSnakListSerializer();
 	}
 
 	/**

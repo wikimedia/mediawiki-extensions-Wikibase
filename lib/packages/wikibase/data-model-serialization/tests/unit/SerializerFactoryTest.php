@@ -4,7 +4,6 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Serializers\DataValueSerializer;
 use Serializers\Serializer;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
@@ -14,8 +13,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\TypedSnak;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\Statement;use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -56,10 +54,10 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewClaimsSerializer() {
+	public function testNewStatementSerializer() {
 		$this->assertSerializesWithoutException(
-			$this->buildSerializerFactory()->newClaimsSerializer(),
-			new Claims()
+			$this->buildSerializerFactory()->newStatementSerializer(),
+			new Statement( new PropertyNoValueSnak( 42 ) )
 		);
 	}
 
@@ -67,13 +65,6 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newStatementListSerializer(),
 			new StatementList()
-		);
-	}
-
-	public function testNewClaimSerializer() {
-		$this->assertSerializesWithoutException(
-			$this->buildSerializerFactory()->newClaimSerializer(),
-			new Statement( new PropertyNoValueSnak( 42 ) )
 		);
 	}
 
@@ -91,9 +82,9 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewSnaksSerializer() {
+	public function testNewSnakListSerializer() {
 		$this->assertSerializesWithoutException(
-			$this->buildSerializerFactory()->newSnaksSerializer(),
+			$this->buildSerializerFactory()->newSnakListSerializer(),
 			new SnakList( array() )
 		);
 	}
@@ -110,9 +101,9 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		new SerializerFactory( new DataValueSerializer(), 1.0 );
 	}
 
-	public function testNewSnaksSerializerWithUseObjectsForMaps() {
+	public function testNewSnakListSerializerWithUseObjectsForMaps() {
 		$factory = new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_OBJECTS_FOR_MAPS );
-		$serializer = $factory->newSnaksSerializer();
+		$serializer = $factory->newSnakListSerializer();
 		$this->assertAttributeSame( true, 'useObjectsForMaps' , $serializer );
 	}
 
