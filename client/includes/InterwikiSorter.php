@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use MWException;
+use InvalidArgumentException;
 
 /**
  * Language sorting utility functions.
@@ -12,6 +12,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class InterwikiSorter {
 
@@ -31,9 +32,9 @@ class InterwikiSorter {
 	private $sortPrepend;
 
 	/**
-	 * @var int[]
+	 * @var int[]|null
 	 */
-	private $sortOrder;
+	private $sortOrder = null;
 
 	/**
 	 * @since 0.4
@@ -41,8 +42,16 @@ class InterwikiSorter {
 	 * @param string $sort
 	 * @param array[] $sortOrders
 	 * @param string[] $sortPrepend
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $sort, array $sortOrders, array $sortPrepend ) {
+		if ( !array_key_exists( 'alphabetic', $sortOrders ) ) {
+			throw new InvalidArgumentException(
+				'alphabetic interwiki sorting order is missing from Wikibase Client settings.'
+			);
+		}
+
 		$this->sort = $sort;
 		$this->sortOrders = $sortOrders;
 		$this->sortPrepend = $sortPrepend;
@@ -59,12 +68,9 @@ class InterwikiSorter {
 	 * @return string[]
 	 */
 	public function sortLinks( array $links ) {
-		// Prepare the sorting array.
-		$this->sortOrder = $this->buildSortOrder(
-			$this->sort,
-			$this->sortOrders,
-			$this->sortPrepend
-		);
+		if ( $this->sortOrder === null ) {
+			$this->sortOrder = $this->buildSortOrder( $this->sort, $this->sortOrders );
+		}
 
 		// Prepare the array for sorting.
 		foreach ( $links as $k => $langLink ) {
@@ -93,16 +99,25 @@ class InterwikiSorter {
 		$a = $a[0];
 		$b = $b[0];
 
-		if ( $a == $b ) {
+		if ( $a === $b ) {
 			return 0;
 		}
 
 		$aIndex = array_key_exists( $a, $this->sortOrder ) ? $this->sortOrder[$a] : null;
 		$bIndex = array_key_exists( $b, $this->sortOrder ) ? $this->sortOrder[$b] : null;
 
-		// If we encounter an unknown language, which may happen if the sort table is not updated,
-		// we list it alphabetically.
-		return $aIndex === null || $bIndex === null ? strcmp( $a, $b ) : $aIndex - $bIndex;
+		if ( $aIndex === $bIndex ) {
+			// If we encounter multiple unknown languages, which may happen if the sort table is not
+			// updated, we list them alphabetically.
+			return strcmp( $a, $b );
+		} elseif ( $aIndex === null ) {
+			// Unknown languages must go under the known languages.
+			return 1;
+		} elseif ( $bIndex === null ) {
+			return -1;
+		} else {
+			return $aIndex - $bIndex;
+		}
 	}
 
 	/**
@@ -110,16 +125,10 @@ class InterwikiSorter {
 	 *
 	 * @param string $sort
 	 * @param array[] $sortOrders
-	 * @param string[] $sortPrepend
 	 *
-	 * @throws MWException
 	 * @return int[]
 	 */
-	private function buildSortOrder( $sort, array $sortOrders, array $sortPrepend ) {
-		if ( !array_key_exists( 'alphabetic', $sortOrders ) ) {
-			throw new MWException( 'alphabetic interwiki sorting order is missing from Wikibase Client settings.' );
-		}
-
+	private function buildSortOrder( $sort, array $sortOrders ) {
 		$sortOrder = $sortOrders['alphabetic'];
 
 		if ( $sort === 'alphabetic' ) {
@@ -137,8 +146,8 @@ class InterwikiSorter {
 			}
 		}
 
-		if ( $sortPrepend !== array() ) {
-			$sortOrder = array_unique( array_merge( $sortPrepend, $sortOrder ) );
+		if ( $this->sortPrepend !== array() ) {
+			$sortOrder = array_unique( array_merge( $this->sortPrepend, $sortOrder ) );
 		}
 
 		return array_flip( $sortOrder );
