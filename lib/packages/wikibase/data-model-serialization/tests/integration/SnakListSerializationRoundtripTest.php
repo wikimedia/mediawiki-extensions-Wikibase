@@ -28,8 +28,8 @@ class SnakListSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			new BasicEntityIdParser()
 		);
 
-		$serialization = $serializerFactory->newSnaksSerializer()->serialize( $snaks );
-		$newSnaks = $deserializerFactory->newSnaksDeserializer()->deserialize( $serialization );
+		$serialization = $serializerFactory->newSnakListSerializer()->serialize( $snaks );
+		$newSnaks = $deserializerFactory->newSnakListDeserializer()->deserialize( $serialization );
 		$this->assertEquals( $snaks, $newSnaks );
 	}
 

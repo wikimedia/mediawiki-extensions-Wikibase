@@ -4,32 +4,32 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ClaimsSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
+class StatementListSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider snaksProvider
 	 */
-	public function testSnakSerializationRoundtrips( Claims $claims ) {
+	public function testSnakSerializationRoundtrips( StatementList $statements ) {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(),
 			new BasicEntityIdParser()
 		);
 
-		$serialization = $serializerFactory->newClaimsSerializer()->serialize( $claims );
-		$newClaims = $deserializerFactory->newClaimsDeserializer()->deserialize( $serialization );
-		$this->assertEquals( $claims, $newClaims );
+		$serialization = $serializerFactory->newStatementListSerializer()->serialize( $statements );
+		$newStatements = $deserializerFactory->newStatementListDeserializer()->deserialize( $serialization );
+		$this->assertEquals( $statements, $newStatements );
 	}
 
 	public function snaksProvider() {
@@ -41,15 +41,15 @@ class ClaimsSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				new Claims()
+				new StatementList()
 			),
 			array(
-				new Claims( array(
+				new StatementList( array(
 					$statement
 				) )
 			),
 			array(
-				new Claims( array(
+				new StatementList( array(
 					$statement,
 					$statement2
 				) )

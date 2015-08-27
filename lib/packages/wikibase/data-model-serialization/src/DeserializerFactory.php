@@ -6,7 +6,6 @@ use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
 use Wikibase\DataModel\Deserializers\AliasGroupListDeserializer;
-use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
 use Wikibase\DataModel\Deserializers\ItemDeserializer;
 use Wikibase\DataModel\Deserializers\PropertyDeserializer;
@@ -84,17 +83,6 @@ class DeserializerFactory {
 	}
 
 	/**
-	 * Returns a Deserializer that can deserialize Claims objects.
-	 *
-	 * @deprecated since 1.5, use newStatementListDeserializer instead
-	 *
-	 * @return Deserializer
-	 */
-	public function newClaimsDeserializer() {
-		return new ClaimsDeserializer( $this->newStatementDeserializer() );
-	}
-
-	/**
 	 * Returns a Deserializer that can deserialize StatementList objects.
 	 *
 	 * @since 1.4
@@ -118,17 +106,6 @@ class DeserializerFactory {
 			$this->newSnakListDeserializer(),
 			$this->newReferencesDeserializer()
 		);
-	}
-
-	/**
-	 * Returns a Deserializer that can deserialize claims.
-	 *
-	 * @deprecated since 1.4, use newStatementDeserializer instead
-	 *
-	 * @return DispatchableDeserializer
-	 */
-	public function newClaimDeserializer() {
-		return $this->newStatementDeserializer();
 	}
 
 	/**
@@ -158,17 +135,6 @@ class DeserializerFactory {
 	 */
 	public function newSnakListDeserializer() {
 		return new SnakListDeserializer( $this->newSnakDeserializer() );
-	}
-
-	/**
-	 * b/c alias for newSnakListDeserializer
-	 *
-	 * @deprecated since 1.4 - use newSnakListDeserializer instead
-	 *
-	 * @return Deserializer
-	 */
-	public function newSnaksDeserializer() {
-		return $this->newSnakListDeserializer();
 	}
 
 	/**
