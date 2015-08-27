@@ -1,5 +1,13 @@
 # Wikibase DataModel Serialization release notes
 
+## 1.9.1 (2015-08-27)
+
+* Revert of breaking changes, will be added in 2.0 again
+
+## 1.9.0 (2015-08-26)
+
+* Dropped dependence on Wikibase DataModel Services
+
 ## 1.8.0 (2015-07-28)
 
 * Added compatibility with Wikibase DataModel 4.x
