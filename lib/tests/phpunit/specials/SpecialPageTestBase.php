@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DOMDocument;
 use DerivativeContext;
 use Exception;
 use FauxRequest;
@@ -173,6 +174,39 @@ abstract class SpecialPageTestBase extends MediaWikiTestCase {
 		ob_end_clean();
 
 		return $html;
+	}
+
+	protected function assertTagSimple( array $matcher, $actual, $message = '', $isHtml = true ) {
+		$doc = new DOMDocument();
+		if ( $isHtml ) {
+			$doc->loadHTML( $actual );
+		} else {
+			$doc->loadXML( $actual );
+		}
+		$found = false;
+		$elements = $doc->getElementsByTagName( $matcher['tag'] );
+		foreach ( $elements as $node ) {
+			$valid = true;
+			foreach ( $matcher['attributes'] as $name => $value ) {
+				if ( $name === 'class' ) {
+					$expected = preg_split( '/\s+/', $value, null, PREG_SPLIT_NO_EMPTY );
+					$got = preg_split( '/\s+/', $node->getAttribute( $name ), null, PREG_SPLIT_NO_EMPTY );
+					// make sure each class given is in the actual node
+					if ( array_diff( $expected, $got ) ) {
+						$valid = false;
+						break;
+					}
+				} elseif ( $node->getAttribute( $name ) !== $value ) {
+					$valid = false;
+					break;
+				}
+			}
+			if ( $valid ) {
+				$found = true;
+				break;
+			}
+		}
+		$this->assertTrue( $found, $message );
 	}
 
 }
