@@ -176,7 +176,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 			)
 		);
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output for: " . $key );
+			DOMTestUtils::assertTagSimple( $this, $matcher, $output, "Failed to match html output for: " . $key );
 		}
 
 		$errorMatch = array(
@@ -188,7 +188,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		);
 
 		if ( !empty( $error ) ) {
-			$this->assertTag( $errorMatch, $output, "Failed to match error: " . $error );
+			DOMTestUtils::assertTagSimple( $this, $errorMatch, $output, "Failed to match error: " . $error );
 		}
 	}
 

@@ -401,8 +401,8 @@ class ItemContentTest extends EntityContentTest {
 
 		$html = $parserOutput->getText();
 
-		$this->assertTag( array( 'tag' => 'div', 'class' => 'redirectMsg' ), $html, 'redirect message' );
-		$this->assertTag( array( 'tag' => 'a', 'content' => 'Q123' ), $html, 'redirect target' );
+		DOMTestUtils::assertTagSimple( $this, array( 'tag' => 'div', 'class' => 'redirectMsg' ), $html, 'redirect message' );
+		DOMTestUtils::assertTagSimple( $this, array( 'tag' => 'a', 'content' => 'Q123' ), $html, 'redirect target' );
 	}
 
 	public function provideGetEntityId() {
