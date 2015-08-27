@@ -172,7 +172,7 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 			'id' => $entityId,
 			'linksite' => 'enwiki',
 			'linktitle' => 'Japan',
-			//TODO test badges in output
+			// TODO: Test badges in output.
 		);
 
 		/** @var SetSiteLink $module */
