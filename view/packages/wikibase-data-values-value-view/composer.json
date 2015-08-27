@@ -27,5 +27,10 @@
 		"files": [
 			"ValueView.php"
 		]
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "0.15.x-dev"
+		}
 	}
 }
