@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DOMTestTrait;
 use FauxRequest;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\Item;
@@ -17,6 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
+	use DOMTestTrait;
 
 	/**
 	 * Creates a new item and returns its id.
@@ -79,7 +81,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		// execute with no subpage value
 		list( $output, ) = $this->executeSpecialPage( '', null, 'en' );
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
+			$this->assertTagSimple( $matcher, $output, "Failed to match html output with tag '{$key}'" );
 		}
 
 		// execute with one subpage value
@@ -103,7 +105,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 			) );
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
+			$this->assertTagSimple( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
 		}
 
 		// execute with two subpage values
@@ -112,7 +114,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$matchers['value']['attributes']['value'] = 'foo';
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
+			$this->assertTagSimple( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
 		}
 	}
 
@@ -125,7 +127,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertTag( array(
+		$this->assertTagSimple( array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-modifyterm-value',
