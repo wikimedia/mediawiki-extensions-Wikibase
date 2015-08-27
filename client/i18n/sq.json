@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liridon"
+		]
+	},
+	"wikibase-comment-update": "Artikulli {{WBREPONAME}} u ndryshua",
+	"wikibase-dataitem": "Artikulli {{WBREPONAME}}",
+	"wikibase-editlinks": "Redakto lidhjet",
+	"wikibase-editlinkstitle": "Redakto lidhjet ndërgjuhësore",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Fshih",
+	"wikibase-rc-hide-wikidata-show": "Shfaq",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Redakto {{WBREPONAME}}",
+	"wikibase-otherprojects": "Projekte të tjera"
+}

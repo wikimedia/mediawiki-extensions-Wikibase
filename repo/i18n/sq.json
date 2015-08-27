@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liridon"
+		]
+	},
+	"wikibase-edit": "redakto",
+	"wikibase-add": "shto",
+	"wikibase-description-empty": "Asnjë përshkrim i përcaktuar",
+	"wikibase-statements": "Deklaratat",
+	"wikibase-sitelinks-special": "Faqe të tjera",
+	"wikibase-aliases-empty": "Nuk ka emërtim të përkufizuar",
+	"wikibase-statementview-rank-normal": "Rangimi normal",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referencë|referenca}}"
+}

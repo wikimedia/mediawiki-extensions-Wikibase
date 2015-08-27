@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"GretaDoci"
+			"GretaDoci",
+			"Liridon"
 		]
 	},
 	"wikibase-timedetails-time": "Koha",
@@ -13,5 +14,6 @@
 	"wikibase-globedetails-longitude": "Gjatësia gjeografike",
 	"wikibase-globedetails-latitude": "Gjerësia gjeografike",
 	"wikibase-globedetails-precision": "Saktësi",
-	"wikibase-globedetails-globe": "Globit"
+	"wikibase-globedetails-globe": "Globit",
+	"wikibase-sitelinks-wikipedia": "Wikipedia"
 }

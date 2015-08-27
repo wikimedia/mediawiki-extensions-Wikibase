@@ -10,5 +10,6 @@
 	"wikibase-editlinkstitle": "Korjata kielienvälizet linkit",
 	"wikibase-rc-hide-wikidata-hide": "Peittiä",
 	"wikibase-rc-hide-wikidata-show": "Ozuttua",
-	"wikibase-rc-wikibase-edit-letter": "K"
+	"wikibase-rc-wikibase-edit-letter": "K",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} korjavus"
 }
