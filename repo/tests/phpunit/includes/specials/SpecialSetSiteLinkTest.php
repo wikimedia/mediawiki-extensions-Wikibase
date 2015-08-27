@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DOMTestTrait;
 use FauxRequest;
 use FauxResponse;
 use SpecialPageTestBase;
@@ -31,6 +32,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Marius Hoch < hoo@online.de >
  */
 class SpecialSetSiteLinkTest extends SpecialPageTestBase {
+	use DOMTestTrait;
 
 	/**
 	 * @var array
@@ -268,7 +270,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertTag( array(
+		$this->assertTagSimple( array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-page',
