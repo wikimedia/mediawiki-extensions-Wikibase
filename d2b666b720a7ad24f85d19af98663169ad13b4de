@@ -70,6 +70,24 @@
       "revId": "d2b666b720a7ad24f85d19af98663169ad13b4de",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_1a67b34b",
+        "filename": "view/resources/wikibase/wikibase.mobile.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-27T08:24:19Z",
+      "side": 1,
+      "message": "Oh *magic*, so why the original line is still in the css then? Is it a loader bug? It should replace it ...",
+      "parentUuid": "6ec1af18_ebb69ff5",
+      "revId": "d2b666b720a7ad24f85d19af98663169ad13b4de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
