@@ -733,7 +733,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			clearTimeout( this._parseTimer );
 		}
 
-		var valueParser = this._instantiateParser( this.valueCharacteristics() );
+		var valueParser = this._instantiateParser( this.valueCharacteristics( 'text/plain' ) );
 
 		self.__lastUpdateValue = rawValue;
 		this._parseTimer = setTimeout( function() {
@@ -860,6 +860,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	_updateTextValue: function() {
 		var self = this,
 			deferred = $.Deferred(),
+			format = 'text/plain',
 			valueFormatter,
 			dataTypeId = this.options.dataTypeId || null,
 			dataValue = this._value;
@@ -870,9 +871,9 @@ $.widget( 'valueview.valueview', PARENT, {
 			return deferred.promise();
 		}
 
-		valueFormatter = this._instantiateFormatter( this.valueCharacteristics() );
+		valueFormatter = this._instantiateFormatter( this.valueCharacteristics( format ) );
 
-		valueFormatter.format( dataValue, dataTypeId, 'text/plain' )
+		valueFormatter.format( dataValue, dataTypeId, format )
 			.done( function( formattedValue, formattedDataValue ) {
 				if( dataValue === formattedDataValue ) {
 					self._textValue = formattedValue;
@@ -992,14 +993,15 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * @see jQuery.valueview.Expert.valueCharacteristics
 	 *
+	 * @param {string} [format='text/html']
 	 * @return {Object}
 	 */
-	valueCharacteristics: function() {
+	valueCharacteristics: function( format ) {
 		if( this._expert ) {
-			return this._expert.valueCharacteristics();
+			return this._expert.valueCharacteristics( format );
 		}
 		if( this._expertConstructor ) {
-			return this._expertConstructor.prototype.valueCharacteristics();
+			return this._expertConstructor.prototype.valueCharacteristics( format );
 		}
 		return {};
 	}
