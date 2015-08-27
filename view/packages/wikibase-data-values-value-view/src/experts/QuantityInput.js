@@ -50,7 +50,7 @@
 		valueCharacteristics: function() {
 			return {
 				unit: this._unitSelector && this._unitSelector.getConceptUri() || null,
-				applyUnit: true
+				applyUnit: false
 			};
 		},
 
