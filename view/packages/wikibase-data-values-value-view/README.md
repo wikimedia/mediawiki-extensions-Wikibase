@@ -105,6 +105,9 @@ Other methods an `Expert` needs to provide:
 
 ## Release notes
 
+### 0.15.3 (2015-08-27)
+* Fixed `jQuery.valueview.experts.QuantityInput` test.
+
 ### 0.15.2 (2015-08-27)
 
 #### Enhancements

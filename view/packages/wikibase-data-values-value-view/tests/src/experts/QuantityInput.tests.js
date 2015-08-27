@@ -35,13 +35,28 @@
 		);
 
 		assert.ok(
+			!characteristics.hasOwnProperty( 'applyUnit' ),
+			'applyUnit does not exist'
+		);
+
+		assert.ok(
+			!characteristics.hasOwnProperty( 'applyRounding' ),
+			'applyRounding does not exist'
+		);
+	} );
+
+	QUnit.test( 'valueCharacteristics( \'text/plain\' )', function( assert ) {
+		var expert = newExpert(),
+			characteristics = expert.valueCharacteristics( 'text/plain' );
+
+		assert.ok(
 			characteristics.applyUnit === false,
-			'applyUnit must be false'
+			'applyUnit is false'
 		);
 
 		assert.ok(
 			characteristics.applyRounding === false,
-			'applyRounding must be false'
+			'applyRounding is false'
 		);
 	} );
 
