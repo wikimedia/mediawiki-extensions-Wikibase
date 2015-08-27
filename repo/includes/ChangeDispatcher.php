@@ -37,6 +37,11 @@ class ChangeDispatcher {
 	private $batchChunkFactor = 3;
 
 	/**
+	 * @var int: max chunks / passes per wiki when selecting pending changes.
+	 */
+	private $maxChunks = 15;
+
+	/**
 	 * @var bool: whether output should be verbose.
 	 */
 	private $verbose = false;
@@ -155,6 +160,20 @@ class ChangeDispatcher {
 	 */
 	public function getBatchChunkFactor() {
 		return $this->batchChunkFactor;
+	}
+
+	/**
+	 * @param int $maxChunks Max number of chunks / passes per wiki when selecting pending changes.
+	 */
+	public function setMaxChunks( $maxChunks ) {
+		$this->maxChunks = $maxChunks;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getMaxChunks() {
+		return $this->maxChunks;
 	}
 
 	/**
@@ -282,7 +301,7 @@ class ChangeDispatcher {
 		// Note that this is non-trivial due to programmatic filtering.
 		$lastIdSeen = $after;
 
-		while ( $batchSize < $this->batchSize && $chunksExamined < 15 ) {
+		while ( $batchSize < $this->batchSize && $chunksExamined < $this->maxChunks ) {
 			// get a chunk of changes
 			$chunk = $this->chunkedChangesAccess->loadChunk( $after+1, $chunkSize );
 
