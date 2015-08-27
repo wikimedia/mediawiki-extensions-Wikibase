@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a0d42e18",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-27T12:46:32Z",
+      "side": 1,
+      "message": "please rename to vocabularyLookupApiUrl",
+      "revId": "a49f8cda38ce9d157a962156d5042f83dccfce19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
