@@ -29,7 +29,7 @@ Changed all Lookup contracts:
   * `LanguageLabelDescriptionLookup` throws `LabelDescriptionLookupException` instead of `OutOfBoundsException`.
   * `PropertyDataTypeLookup` implementations should throw `PropertyDataTypeLookupException` instead of `PropertyNotFoundException`.
   * `PropertyLookup` implementations should throw `PropertyLookupException` instead of `PropertyNotFoundException`.
-  * `OutOfBoundsException` implementations should throw `TermLookupException` instead of `OutOfBoundsException`.
+  * `TermLookup` implementations should throw `TermLookupException` instead of `OutOfBoundsException`.
 * Removed `Lookup\ItemNotFoundException`
 * Removed `Lookup\PropertyNotFoundException`
 * Added `Lookup\EntityLookupException`
