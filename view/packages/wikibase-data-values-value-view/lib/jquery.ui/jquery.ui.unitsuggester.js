@@ -296,7 +296,6 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	 * Returns the URL of the selected entity. URLs pointing to items on wikidata.org are normalized
 	 * to their canonical concept URI, e.g. https://wikidata.org/wiki/Q650 is returned as
 	 * http://www.wikidata.org/entity/Q650.
-	 * @fixme Teach wbsearchentities to return concept URIs, then remove this normalization.
 	 * @return {string|null}
 	 */
 	getSelectedConceptUri: function() {
