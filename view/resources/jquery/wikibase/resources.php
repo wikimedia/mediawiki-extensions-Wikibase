@@ -468,6 +468,7 @@ return call_user_func( function() {
 			'styles' => array(
 				'themes/default/jquery.wikibase.statementview.RankSelector.css',
 			),
+			'targets' => array( 'desktop', 'mobile' ),
 		),
 
 	);
