@@ -138,8 +138,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		// HACK: we need this in newSpecialPage, but executeSpecialPage doesn't pass the context on.
 		$this->user = $user;
 
-		if ( !isset( $params['token'] ) ) {
-			$params['token'] = $user->getEditToken();
+		if ( !isset( $params['wpEditToken'] ) ) {
+			$params['wpEditToken'] = $user->getEditToken();
 		}
 
 		$request = new FauxRequest( $params, true );
@@ -257,7 +257,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
 				'e' => 'Wikibase\Repo\Interactors\RedirectCreationException:target-is-incompatible' ),
 			array( //bad token
-				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q2', 'token' => 'BAD' ),
+				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q2', 'wpEditToken' => 'BAD' ),
 				'e' => 'Wikibase\Repo\Interactors\TokenCheckException:wikibase-tokencheck-badtoken' ),
 		);
 	}
