@@ -78,7 +78,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		// execute with no subpage value
 		list( $output, ) = $this->executeSpecialPage( '', null, 'en' );
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
+			DOMTestUtils::assertTagSimple( $this, $matcher, $output, "Failed to match html output with tag '{$key}'" );
 		}
 
 		// execute with one subpage value
@@ -102,7 +102,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 			) );
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
+			DOMTestUtils::assertTagSimple( $this, $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
 		}
 
 		// execute with two subpage values
@@ -111,7 +111,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$matchers['value']['attributes']['value'] = 'foo';
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
+			DOMTestUtils::assertTagSimple( $this, $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
 		}
 	}
 
@@ -124,7 +124,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertTag( array(
+		DOMTestUtils::assertTagSimple( $this, array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-modifyterm-value',
