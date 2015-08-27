@@ -196,7 +196,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 *
 	 * @return string
 	 */
-	protected function formatRow( $propertyId ) {
+	protected function formatRow( EntityId $propertyId ) {
 		$title = $this->titleLookup->getTitleForId( $propertyId );
 		if ( !$title->exists() ) {
 			return $this->entityIdFormatter->formatEntityId( $propertyId );
