@@ -51,6 +51,24 @@
       "revId": "5f9ac379c2cbc000a11f7ba3e1d5d79102200ae1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a51e800f",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-08-27T09:59:31Z",
+      "side": 1,
+      "message": "Why not set the entityIdFormatter here already? It\u0027s not much better but avoids having another member variable and a function.",
+      "parentUuid": "6ec1af18_752b7378",
+      "revId": "5f9ac379c2cbc000a11f7ba3e1d5d79102200ae1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
