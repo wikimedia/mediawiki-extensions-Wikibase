@@ -165,8 +165,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	 * Creates the HTML form for redirecting an entity
 	 */
 	protected function createForm() {
-		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
-
 		$pre = '';
 		if ( $this->getUser()->isAnon() ) {
 			$pre = Html::rawElement(
