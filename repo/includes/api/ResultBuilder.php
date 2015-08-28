@@ -525,8 +525,7 @@ class ResultBuilder {
 				$serialization,
 				$path,
 				$this->callbackFactory->getCallbackToSetArrayType(
-					( $keyName === null ? 'array' : 'kvp' ),
-					$keyName
+					'kvp'
 				)
 			);
 		}
