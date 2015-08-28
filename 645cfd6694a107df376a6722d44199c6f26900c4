@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_6afa97db",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-28T13:56:04Z",
+      "side": 0,
+      "message": "is $keyName supposed to be removed here?",
+      "revId": "645cfd6694a107df376a6722d44199c6f26900c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
