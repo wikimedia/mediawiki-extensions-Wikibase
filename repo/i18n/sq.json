@@ -6,6 +6,7 @@
 	},
 	"wikibase-edit": "redakto",
 	"wikibase-add": "shto",
+	"wikibase-label-empty": "Nuk ka emërtim të përkufizuar",
 	"wikibase-description-empty": "Asnjë përshkrim i përcaktuar",
 	"wikibase-statements": "Deklaratat",
 	"wikibase-sitelinks-special": "Faqe të tjera",

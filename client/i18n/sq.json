@@ -4,6 +4,7 @@
 			"Liridon"
 		]
 	},
+	"tooltip-t-wikibase": "Link deri tek artikulli i depos të të dhënave të lidhura",
 	"wikibase-comment-update": "Artikulli {{WBREPONAME}} u ndryshua",
 	"wikibase-dataitem": "Artikulli {{WBREPONAME}}",
 	"wikibase-editlinks": "Redakto lidhjet",
