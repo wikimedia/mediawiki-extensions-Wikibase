@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_0400ac37",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-28T10:53:27Z",
+      "side": 1,
+      "message": "Should explicitly set the fallback mode.\n\nThe mode used by LanguageFallbackLabelDescriptionLookupFactory is:\n\nLanguageFallbackChainFactory::FALLBACK_SELF\n\t\t\t| LanguageFallbackChainFactory::FALLBACK_VARIANTS\n\t\t\t| LanguageFallbackChainFactory::FALLBACK_OTHERS;\n\nThat\u0027s different from the internal default used by the fallback chain factory, which uses FALLBACK_ALL.\n\n\nOr perhaps we could just use newFromContext, using the user\u0027s interface language.",
+      "revId": "0c2f150d2982b5d87e3ca84e8088df83f974e287",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
