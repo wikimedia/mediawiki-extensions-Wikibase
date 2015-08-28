@@ -524,10 +524,7 @@ class ResultBuilder {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
 				$path,
-				$this->callbackFactory->getCallbackToSetArrayType(
-					( $keyName === null ? 'array' : 'kvp' ),
-					$keyName
-				)
+				$this->callbackFactory->getCallbackToSetArrayType( 'kvp' )
 			);
 		}
 		$indexTags = array(
