@@ -37,25 +37,26 @@ class SuffixEntityIdParser implements EntityIdParser {
 	}
 
 	/**
-	 * Parses the given $prefixedEntityId into an EntityId by first stripping a fixed prefix.
-	 * If $prefixedEntityId does nto start with the expected prefix, a EntityIdParsingException
+	 * Parses the given string into an EntityId by first stripping a fixed prefix.
+	 * If the string does not start with the expected prefix, an EntityIdParsingException
 	 * is thrown.
 	 *
-	 * @param string $idSerialization An EntityId with some prefix attached, e.g. an entity URI.
+	 * @param string $idSerialization An entity ID with some prefix attached, e.g. an entity URI.
 	 *
-	 * @throws EntityIdParsingException If $prefixedEntityId doesn't start with the expected prefix,
+	 * @throws EntityIdParsingException If the string does not start with the expected prefix,
 	 *         or the remaining suffix is not a valid entity ID string.
-	 *
 	 * @return EntityId
 	 */
 	public function parse( $idSerialization ) {
-		if ( strncmp( $this->prefix, $idSerialization, strlen( $this->prefix ) ) === 0 ) {
-			$suffix = substr( $idSerialization, strlen( $this->prefix ) );
+		$prefixLength = strlen( $this->prefix );
 
-			return $this->idParser->parse( $suffix );
+		if ( strncmp( $idSerialization, $this->prefix, $prefixLength ) !== 0 ) {
+			throw new EntityIdParsingException( 'Missing expected prefix "' . $this->prefix
+				. '" in "' . $idSerialization . '"' );
 		}
 
-		throw new EntityIdParsingException( "Missing expected prefix `{$this->prefix}` in `{$idSerialization}`" );
+		$idSerialization = substr( $idSerialization, $prefixLength );
+		return $this->idParser->parse( $idSerialization );
 	}
 
 }
