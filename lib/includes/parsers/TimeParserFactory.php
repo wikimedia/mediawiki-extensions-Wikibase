@@ -21,6 +21,13 @@ use ValueParsers\ValueParser;
  */
 class TimeParserFactory {
 
+	const BASE_LANGUAGE_CODE = 'en';
+
+	/**
+	 * @var array[]
+	 */
+	private static $monthNameReplacements = array();
+
 	/**
 	 * @var ParserOptions
 	 */
@@ -32,7 +39,7 @@ class TimeParserFactory {
 	public function __construct( ParserOptions $options = null ) {
 		$this->options = $options ?: new ParserOptions();
 
-		$this->options->defaultOption( ValueParser::OPT_LANG, 'en' );
+		$this->options->defaultOption( ValueParser::OPT_LANG, self::BASE_LANGUAGE_CODE );
 	}
 
 	/**
@@ -74,15 +81,30 @@ class TimeParserFactory {
 	 */
 	public function getMonthNameUnlocalizer() {
 		$languageCode = $this->options->getOption( ValueParser::OPT_LANG );
-		$baseLanguageCode = 'en';
 
-		$replacements = array();
-
-		if ( $languageCode !== $baseLanguageCode ) {
-			$replacements = $this->getMwMonthNameReplacements( $languageCode, $baseLanguageCode );
+		if ( $languageCode === self::BASE_LANGUAGE_CODE ) {
+			$replacements = array();
+		} else {
+			$replacements = $this->getMonthNameReplacements( $languageCode );
 		}
 
 		return new MonthNameUnlocalizer( $replacements );
+	}
+
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return string[]
+	 */
+	private function getMonthNameReplacements( $languageCode ) {
+		// Caching these arrays usually needs 1 KB but reduces test run time by about 50 %.
+		if ( !isset( self::$monthNameReplacements[$languageCode] ) ) {
+			self::$monthNameReplacements[$languageCode] = $this->getMwMonthNameReplacements(
+				$languageCode
+			);
+		}
+
+		return self::$monthNameReplacements[$languageCode];
 	}
 
 	/**
@@ -90,13 +112,12 @@ class TimeParserFactory {
 	 * Language object. Takes full month names, genitive names and abbreviations into account.
 	 *
 	 * @param string $languageCode
-	 * @param string $baseLanguageCode
 	 *
 	 * @return string[]
 	 */
-	private function getMwMonthNameReplacements( $languageCode, $baseLanguageCode ) {
+	private function getMwMonthNameReplacements( $languageCode ) {
 		$language = Language::factory( $languageCode );
-		$baseLanguage = Language::factory( $baseLanguageCode );
+		$baseLanguage = Language::factory( self::BASE_LANGUAGE_CODE );
 
 		$replacements = array();
 
