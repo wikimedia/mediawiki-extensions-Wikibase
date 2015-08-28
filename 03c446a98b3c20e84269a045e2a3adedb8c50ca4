@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a46e78fc",
+        "filename": "repo/resources/wikibase.special/wikibase.special.itemByTitle.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-28T11:01:41Z",
+      "side": 1,
+      "message": "Why not:\n\n $.each( wb.sites.getSites(), function ( siteId, site ) {\n \tsiteList.push( site.getName() + \u0027 (\u0027 + siteId + \u0027)\u0027 );\n } );",
+      "revId": "03c446a98b3c20e84269a045e2a3adedb8c50ca4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
