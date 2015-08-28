@@ -89,8 +89,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			 */
 			'+0000000000000000-01-01T00:00:00Z (Gregorian)' =>
 				array( '+0000-01-01T00:00:00Z' ),
-			'+0-00-20T00:00:00Z' =>
-				array( '+0000-00-20T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
+			'+0-01-20T00:00:00Z' =>
+				array( '+0000-01-20T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'-10100-02-29' =>
 				array( '-10100-02-29T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 			'+2015-01-00T00:00:00Z' =>
@@ -215,6 +215,9 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			array( '1980America/New_York' ),
 			// A format YDM does not exist.
 			array( '1991 20 1' ),
+			// No date parser should ever accept a day with no month.
+			array( '2015-00-01' ),
+			array( '+0-00-01T00:00:00Z' ),
 			// No date parser should ever magically turn HMS times into dates.
 			array( '12:31:59' ),
 			array( '23:12:31' ),
