@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_84db3c24",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-28T10:28:57Z",
+      "side": 1,
+      "message": "This will drop the string \"0\". Not relevant and not introduced in this patch, just wanted to point that out.",
+      "revId": "e8454a96d1246b2ff463d79d7e06db7eb6d8d231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
