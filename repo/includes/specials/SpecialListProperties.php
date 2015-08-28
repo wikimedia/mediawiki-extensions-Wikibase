@@ -290,14 +290,21 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		return $propertyIds;
 	}
 
+	/**
+	 * @return array[] An associative array mapping property IDs to info arrays.
+	 */
 	private function getPropertyInfo() {
 		if ( $this->dataType === '' ) {
-			return $this->propertyInfoStore->getAllPropertyInfo();
+			$propertyInfo = $this->propertyInfoStore->getAllPropertyInfo();
 		} else {
-			return $this->propertyInfoStore->getPropertyInfoForDataType(
+			$propertyInfo = $this->propertyInfoStore->getPropertyInfoForDataType(
 				$this->dataType
 			);
 		}
+
+		// NOTE: $propertyInfo uses numerical property IDs as keys!
+		ksort( $propertyInfo );
+		return $propertyInfo;
 	}
 
 }
