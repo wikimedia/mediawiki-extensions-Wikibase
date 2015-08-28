@@ -34,6 +34,24 @@
       "revId": "0c2f150d2982b5d87e3ca84e8088df83f974e287",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_87fd7e06",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-28T11:08:33Z",
+      "side": 1,
+      "message": "If we use that we have the information flow hidden.\nThis patch is specifically moving away from using that factory :P",
+      "parentUuid": "6ec1af18_44b0f488",
+      "revId": "0c2f150d2982b5d87e3ca84e8088df83f974e287",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
