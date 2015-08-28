@@ -690,7 +690,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$language = $term->getLanguage();
 
-		if ( $language !== null ) {
+		if ( $language !== '' ) {
 			$conditions['term_language'] = $language;
 		}
 
