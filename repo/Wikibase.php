@@ -171,6 +171,7 @@ call_user_func( function() {
 	$wgAPIModules['wbsetlabel'] = 'Wikibase\Repo\Api\SetLabel';
 	$wgAPIModules['wbsetdescription'] = 'Wikibase\Repo\Api\SetDescription';
 	$wgAPIModules['wbsearchentities'] = 'Wikibase\Repo\Api\SearchEntities';
+	$wgAPIModules['wbmwsearchentities'] = 'Wikibase\Repo\Api\MediawikiSearchEntities';
 	$wgAPIModules['wbsetaliases'] = 'Wikibase\Repo\Api\SetAliases';
 	$wgAPIModules['wbeditentity'] = 'Wikibase\Repo\Api\EditEntity';
 	$wgAPIModules['wblinktitles'] = 'Wikibase\Repo\Api\LinkTitles';
