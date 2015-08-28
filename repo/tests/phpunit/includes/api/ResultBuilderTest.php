@@ -205,7 +205,10 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'value' => 'Longer Description For An Item'
 						),
 						'_element' => 'description',
-						'_type' => 'array',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'language',
+						'_kvpmerge' => true,
+
 					),
 					'labels' => array(
 						'de' => array(
@@ -217,7 +220,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'value' => 'Longer Label'
 						),
 						'_element' => 'label',
-						'_type' => 'array',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'language',
+						'_kvpmerge' => true,
 					),
 					'claims' => array(
 						'P65' => array(
@@ -318,7 +323,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							)
 						),
 						'_element' => 'sitelink',
-						'_type' => 'array',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'site',
+						'_kvpmerge' => true,
 					),
 				),
 				'_element' => 'entity',
@@ -429,7 +436,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'for-language' => 'zh-my'
 						),
 						'_element' => 'label',
-						'_type' => 'array',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'language',
+						'_kvpmerge' => true,
 					),
 					'descriptions' => array(
 						'es' => array(
@@ -447,7 +456,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'source-language' => 'zh-sg',
 						),
 						'_element' => 'description',
-						'_type' => 'array',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'language',
+						'_kvpmerge' => true,
 					),
 				),
 				'_element' => 'entity',
@@ -628,7 +639,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							),
 						),
 						'_element' => 'sitelink',
-						'_type' => 'array',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'site',
+						'_kvpmerge' => true,
 					),
 				),
 				'_element' => 'entity',
