@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_24d12826",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-28T10:29:10Z",
+      "side": 1,
+      "message": "This is actually a breaking change, isn\u0027t it?",
+      "revId": "4c93d7ba13f14f95bd724fd6581f7cdc938bded5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c4a624a8",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-28T10:29:10Z",
+      "side": 1,
+      "message": "This does not do anything now and should be removed.",
+      "revId": "4c93d7ba13f14f95bd724fd6581f7cdc938bded5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
