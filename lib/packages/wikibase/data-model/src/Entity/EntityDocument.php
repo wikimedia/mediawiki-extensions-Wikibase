@@ -43,7 +43,7 @@ interface EntityDocument {
 	public function setId( $id );
 
 	/**
-	 * Returns if the entity has no content.
+	 * Returns true if the entity has no content.
 	 * Having an id set does not count as having content.
 	 *
 	 * @since 4.3
