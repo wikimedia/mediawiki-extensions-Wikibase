@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Language;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
+use Wikibase\Client\DataAccess\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
@@ -13,6 +14,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
@@ -34,6 +36,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
+	 * @param EntityLookup $entityLookup
 	 * @param string $languageCode
 	 *
 	 * @return LanguageAwareRenderer
@@ -41,6 +44,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	private function getRenderer(
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
+		EntityLookup $entityLookup,
 		$languageCode
 	) {
 		$targetLanguage = Language::factory( $languageCode );
@@ -50,7 +54,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			$propertyIdResolver,
 			$snaksFinder,
 			$this->getSnakFormatter(),
-			$this->getEntityLookup()
+			$entityLookup
 		);
 
 		return new LanguageAwareRenderer(
@@ -69,6 +73,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder( $snaks ),
+			$this->getEntityLookup( 100 ),
 			'en'
 		);
 
@@ -77,6 +82,47 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 		$expected = 'a kitten!, two kittens!!';
 		$this->assertEquals( $expected, $result );
+	}
+
+	public function testRenderForPropertyNotFound() {
+		$renderer = $this->getRenderer(
+			$this->getPropertyIdResolverForPropertyNotFound(),
+			$this->getSnaksFinder( array() ),
+			$this->getEntityLookup( 100 ),
+			'qqx'
+		);
+		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
+
+		$this->assertRegExp(
+			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
+			$result
+		);
+
+		$this->assertRegExp(
+			'/wikibase-property-render-error.*invalidLabel.*qqx/',
+			$result
+		);
+	}
+
+	public function testRender_exceededEntityAccessLimit() {
+		$renderer = $this->getRenderer(
+			$this->getPropertyIdResolver(),
+			$this->getSnaksFinder( array() ),
+			$this->getEntityLookup( 0 ),
+			'qqx'
+		);
+
+		$result = $renderer->render( new ItemId( 'Q4' ), 'tooManyEntities' );
+
+		$this->assertRegExp(
+			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
+			$result
+		);
+
+		$this->assertRegExp(
+			'/wikibase-property-render-error.*tooManyEntities.*/',
+			$result
+		);
 	}
 
 	/**
@@ -137,25 +183,6 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		return $propertyIdResolver;
 	}
 
-	public function testRenderForPropertyNotFound() {
-		$renderer = $this->getRenderer(
-			$this->getPropertyIdResolverForPropertyNotFound(),
-			$this->getSnaksFinder( array() ),
-			'qqx'
-		);
-		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
-
-		$this->assertRegExp(
-			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
-			$result
-		);
-
-		$this->assertRegExp(
-			'/wikibase-property-render-error.*invalidLabel.*qqx/',
-			$result
-		);
-	}
-
 	private function getPropertyIdResolverForPropertyNotFound() {
 		$propertyIdResolver = $this->getMockBuilder(
 				'Wikibase\Client\DataAccess\PropertyIdResolver'
@@ -173,7 +200,10 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		return $propertyIdResolver;
 	}
 
-	private function getEntityLookup() {
+	/**
+	 * @param int $entityAccessLimit
+	 */
+	private function getEntityLookup( $entityAccessLimit ) {
 		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$lookup->expects( $this->any() )
 			->method( 'getEntity' )
@@ -181,7 +211,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 				$this->getMock( 'Wikibase\DataModel\StatementListProvider' )
 			) );
 
-		return $lookup;
+		return new RestrictedEntityLookup( $lookup, $entityAccessLimit );
 	}
 
 	/**
