@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a7775a9a",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-28T12:16:31Z",
+      "side": 1,
+      "message": "This could get a @param doc",
+      "revId": "0a19c29a857d68751c8dda56b511f450ad160691",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
