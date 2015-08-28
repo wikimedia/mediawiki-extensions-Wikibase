@@ -225,11 +225,9 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	protected function outputForm( $site, $itemString ) {
 		$this->getOutput()->addModules( 'wikibase.special.goToLinkedPage' );
 
-		// The message for the fieldset's legend is <wikibase-gotolinkedpage-lookup-fieldset>
 		$formDescriptor = array(
 			'site' => array(
 				'name' => 'site',
-				'section' => 'gotolinkedpage-lookup-fieldset',
 				'default' => $site ?: '',
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-sitename',
@@ -238,7 +236,6 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			),
 			'itemid' => array(
 				'name' => 'itemid',
-				'section' => 'gotolinkedpage-lookup-fieldset',
 				'default' => $itemString ?: '',
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-itemid',
@@ -248,7 +245,6 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			),
 			'submit' => array(
 				'name' => 'submit',
-				'section' => 'gotolinkedpage-lookup-fieldset',
 				'default' => $this->msg( 'wikibase-gotolinkedpage-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wb-gotolinkedpage-submit',
@@ -256,9 +252,10 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			)
 		);
 
-		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext(), 'wikibase' )
+		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
 			->setId( 'wb-gotolinkedpage-form1' )
 			->setMethod( 'get' )
+			->setWrapperLegendMsg( 'wikibase-gotolinkedpage-lookup-fieldset' )
 			->suppressDefaultSubmit()
 			->setSubmitCallback( function () {// no-op
 			} )->show();
