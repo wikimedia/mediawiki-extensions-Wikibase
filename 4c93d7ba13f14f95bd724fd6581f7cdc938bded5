@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_e489e0cb",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-28T10:57:29Z",
+      "side": 1,
+      "message": "breaking change? no...\nThis is a special page, the user only had 2 input boxes and a button, they do not care about the token!",
+      "parentUuid": "6ec1af18_64fdf068",
+      "revId": "4c93d7ba13f14f95bd724fd6581f7cdc938bded5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c4a624a8",
         "filename": "repo/includes/specials/SpecialRedirectEntity.php",
         "patchSetId": 5
