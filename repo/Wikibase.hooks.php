@@ -460,8 +460,8 @@ final class RepoHooks {
 				$history->msg( 'wikibase-restoreold' )->escaped(),
 				array(),
 				array(
-					'action'	=> 'edit',
-					'restore'	=> $rev->getId()
+					'action' => 'edit',
+					'restore' => $rev->getId()
 				)
 			);
 
