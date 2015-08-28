@@ -16,6 +16,24 @@
       "revId": "03c446a98b3c20e84269a045e2a3adedb8c50ca4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e72a4273",
+        "filename": "repo/resources/wikibase.special/wikibase.special.itemByTitle.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-08-28T11:13:08Z",
+      "side": 1,
+      "message": "Matter of taste. I guess map() will also work. Go for it and upload a new patch set on top of this, if you want.",
+      "parentUuid": "6ec1af18_a46e78fc",
+      "revId": "03c446a98b3c20e84269a045e2a3adedb8c50ca4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
