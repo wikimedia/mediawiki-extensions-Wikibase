@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_30c5e240",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-08-28T18:12:04Z",
+      "side": 1,
+      "message": "That doesn\u0027t work since then the url also points to the label... Gnah :S",
+      "revId": "a4b1df5e9c68d5117fd76d0033abd476bc0689ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
