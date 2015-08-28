@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_64fdf068",
+        "filename": "repo/includes/specials/SpecialRedirectEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-08-28T10:40:44Z",
+      "side": 1,
+      "message": "HTMLForm is a bit intrusive and adds the edit token whenever the form\u0027s method is POST, so...",
+      "parentUuid": "6ec1af18_24d12826",
+      "revId": "4c93d7ba13f14f95bd724fd6581f7cdc938bded5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c4a624a8",
         "filename": "repo/includes/specials/SpecialRedirectEntity.php",
         "patchSetId": 5
