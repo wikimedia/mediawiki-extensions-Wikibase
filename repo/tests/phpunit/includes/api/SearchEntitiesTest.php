@@ -14,6 +14,7 @@ use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchInteractor;
@@ -105,72 +106,54 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 * @param array $params
 	 * @param TermSearchResult[] $returnResults
 	 *
-	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
+	 * @return EntitySearchHelper|\PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getMockSearchInteractor( array $params, array $returnResults = array() ) {
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\TermIndexSearchInteractor' )
+	private function getMockEntitySearchHelper( array $params, array $returnResults = array() ) {
+		// defaults from SearchEntities
+		$params = array_merge( array(
+			'strictlanguage' => false,
+			'type' => 'item',
+			'limit' => 7,
+			'continue' => 0
+		), $params );
+
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Api\EntitySearchHelper' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->atLeastOnce() )
-			->method( 'searchForEntities' )
+			->method( 'getRankedSearchResults' )
 			->with(
 				$this->equalTo( $params['search'] ),
 				$this->equalTo( $params['language'] ),
 				$this->equalTo( $params['type'] ),
-				$this->equalTo( array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ) )
+				$this->equalTo( $params['continue'] + $params['limit'] + 1 ),
+				$this->equalTo( $params['strictlanguage'] )
 			)
 			->will( $this->returnValue( $returnResults ) );
 		return $mock;
 	}
 
 	/**
-	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
-	 *
-	 * @return LanguageLabelDescriptionLookup
-	 */
-	private function getMockLabelDescriptionLookup() {
-		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->returnValue( new Term( 'pt', 'ptLabel' ) ) );
-		$mock->expects( $this->any() )
-			->method( 'getDescription' )
-			->will( $this->returnValue( new Term( 'pt', 'ptDescription' ) ) );
-		return $mock;
-	}
-
-	private function getMockTermIndex() {
-		return new MockTermIndex(
-			array()
-		);
-	}
-
-	/**
 	 * @param array $params
-	 * @param TermSearchInteractor|null $searchInteractor
+	 * @param EntitySearchHelper|null $entitySearchHelper
 	 *
 	 * @return array[]
 	 */
-	private function callApiModule( array $params, $searchInteractor = null ) {
+	private function callApiModule( array $params, EntitySearchHelper $entitySearchHelper = null ) {
 		$module = new SearchEntities(
 			$this->getApiMain( $params ),
 			'wbsearchentities'
 		);
 
-		if ( $searchInteractor == null ) {
-			$searchInteractor = $this->getMockSearchInteractor( $params );
+		if ( $entitySearchHelper == null ) {
+			$entitySearchHelper = $this->getMockEntitySearchHelper( $params );
 		}
 
 		$module->setServices(
+			$entitySearchHelper,
 			$this->getMockTitleLookup(),
-			new BasicEntityIdParser(),
-			array( 'item', 'property' ),
 			$this->getMockContentLanguages(),
-			$searchInteractor,
-			$this->getMockTermIndex(),
-			$this->getMockLabelDescriptionLookup(),
+			array( 'item', 'property' ),
 			'concept:'
 		);
 
@@ -184,51 +167,57 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		) );
 	}
 
-	public function provideBooleanValues() {
-		return array(
-			array( true ),
-			array( false ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideBooleanValues
-	 */
-	public function testSearchStrictLanguage_passedToSearchInteractor( $boolean ) {
+	public function testSearchStrictLanguage_passedToSearchInteractor() {
 		$params = array(
 			'action' => 'wbsearchentities',
 			'search' => 'Foo',
 			'type' => 'item',
 			'language' => 'de-ch',
+			'strictlanguage' => true
 		);
-		if ( $boolean ) {
-			$params['strictlanguage'] = true;
-		}
 
-		$searchInteractor = $this->getMockSearchInteractor( $params );
-		$searchInteractor->expects( $this->atLeastOnce() )
-			->method( 'setUseLanguageFallback' )
-			->with( $this->equalTo( !$boolean ) );
-
-		$this->callApiModule( $params, $searchInteractor );
+		$this->callApiModule( $params );
 	}
 
 	public function provideTestSearchEntities() {
-		$multipleInteractorReturnValues = array(
-			new TermSearchResult(
-				new Term( 'en-gb', 'Fooooo' ),
-				'label',
-				new ItemId( 'Q222' ),
-				new Term( 'en-gb', 'FooHeHe' ),
-				new Term( 'en', 'FooHeHe en description' )
-			),
-			new TermSearchResult(
-				new Term( 'de', 'AMatchedTerm' ),
-				'alias',
-				new ItemId( 'Q333' ),
-				new Term( 'fr', 'ADisplayLabel' )
+		$q111Match = new TermSearchResult(
+			new Term( 'qid', 'Q111' ),
+			'entityId',
+			new ItemId( 'Q111' ),
+			new Term( 'pt', 'ptLabel' ),
+			new Term( 'pt', 'ptDescription' )
+		);
+
+		$q222Match = new TermSearchResult(
+			new Term( 'en-gb', 'Fooooo' ),
+			'label',
+			new ItemId( 'Q222' ),
+			new Term( 'en-gb', 'FooHeHe' ),
+			new Term( 'en', 'FooHeHe en description' )
+		);
+
+		$q333Match = new TermSearchResult(
+			new Term( 'de', 'AMatchedTerm' ),
+			'alias',
+			new ItemId( 'Q333' ),
+			new Term( 'fr', 'ADisplayLabel' )
+		);
+
+		$q111Result = array(
+			'id' => 'Q111',
+			'concepturi' => 'concept:Q111',
+			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'label' => 'ptLabel',
+			'description' => 'ptDescription',
+			'aliases' => array( 'Q111' ),
+			'match' => array(
+				'type' => 'entityId',
+				'text' => 'Q111',
 			),
 		);
+
 		$q222Result = array(
 			'id' => 'Q222',
 			'concepturi' => 'concept:Q222',
@@ -244,6 +233,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				'text' => 'Fooooo',
 			),
 		);
+
 		$q333Result = array(
 			'id' => 'Q333',
 			'concepturi' => 'concept:Q333',
@@ -258,6 +248,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				'text' => 'AMatchedTerm',
 			),
 		);
+
 		return array(
 			'No exact match' => array(
 				array( 'search' => 'Q999' ),
@@ -266,37 +257,22 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			),
 			'Exact EntityId match' => array(
 				array( 'search' => 'Q111' ),
-				array(),
-				array(
-					array(
-						'id' => 'Q111',
-						'concepturi' => 'concept:Q111',
-						'url' => 'http://fullTitleUrl',
-						'title' => 'Prefixed:Title',
-						'pageid' => 42,
-						'label' => 'ptLabel',
-						'description' => 'ptDescription',
-						'aliases' => array( 'Q111' ),
-						'match' => array(
-							'type' => 'entityId',
-							'text' => 'Q111',
-						),
-					),
-				),
+				array( $q111Match ),
+				array( $q111Result ),
 			),
 			'Multiple Results' => array(
 				array(),
-				$multipleInteractorReturnValues,
+				array( $q222Match, $q333Match ),
 				array( $q222Result, $q333Result ),
 			),
 			'Multiple Results (limited)' => array(
 				array( 'limit' => 1 ),
-				$multipleInteractorReturnValues,
+				array( $q222Match, $q333Match ),
 				array( $q222Result ),
 			),
 			'Multiple Results (limited-continue)' => array(
 				array( 'limit' => 1, 'continue' => 1 ),
-				$multipleInteractorReturnValues,
+				array( $q222Match, $q333Match ),
 				array( $q333Result ),
 			),
 		);
@@ -306,17 +282,14 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideTestSearchEntities
 	 */
 	public function testSearchEntities( array $overrideParams, array $interactorReturn, array $expected ) {
-		$params = array(
+		$params = array_merge( array(
 			'action' => 'wbsearchentities',
 			'search' => 'Foo',
 			'type' => 'item',
 			'language' => 'en'
-		);
-		foreach ( $overrideParams as $key => $param ) {
-			$params[$key] = $param;
-		}
+		), $overrideParams );
 
-		$searchInteractor = $this->getMockSearchInteractor( $params, $interactorReturn );
+		$searchInteractor = $this->getMockEntitySearchHelper( $params, $interactorReturn );
 
 		$result = $this->callApiModule( $params, $searchInteractor );
 
@@ -334,6 +307,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			$this->assertArrayHasKey( 'id', $searchresult );
 			$this->assertArrayHasKey( 'concepturi', $searchresult );
 			$this->assertArrayHasKey( 'url', $searchresult );
+			$this->assertArrayHasKey( 'title', $searchresult );
+			$this->assertArrayHasKey( 'pageid', $searchresult );
 		}
 	}
 
