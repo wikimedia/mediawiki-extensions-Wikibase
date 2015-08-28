@@ -16,6 +16,24 @@
       "revId": "0a19c29a857d68751c8dda56b511f450ad160691",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_27ccca64",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-28T12:44:17Z",
+      "side": 1,
+      "message": "Probably doesn\u0027t need one as all parameters are typehinted.",
+      "parentUuid": "6ec1af18_a7775a9a",
+      "revId": "0a19c29a857d68751c8dda56b511f450ad160691",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
