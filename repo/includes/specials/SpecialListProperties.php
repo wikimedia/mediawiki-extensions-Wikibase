@@ -4,9 +4,14 @@ namespace Wikibase\Repo\Specials;
 
 use DataTypes\DataTypeFactory;
 use Html;
+use OutOfBoundsException;
+use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataTypeSelector;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -18,6 +23,7 @@ use Wikibase\View\EntityIdFormatterFactory;
  * @since 0.5
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Adam Shorland
  */
 class SpecialListProperties extends SpecialWikibaseQueryPage {
 
@@ -49,6 +55,11 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private $labelDescriptionLookupFactory;
 
 	/**
+	 * @var LanguageFallbackLabelDescriptionLookup
+	 */
+	private $labelDescriptionLookup;
+
+	/**
 	 * @var string
 	 */
 	private $dataType;
@@ -63,6 +74,11 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private $entityIdFormatter;
 
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $titleLookup;
+
 	public function __construct() {
 		parent::__construct( 'ListProperties' );
 
@@ -72,7 +88,8 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			$wikibaseRepo->getDataTypeFactory(),
 			$wikibaseRepo->getStore()->getPropertyInfoStore(),
 			$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
-			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory()
+			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory(),
+			$wikibaseRepo->getEntityTitleLookup()
 		);
 	}
 
@@ -84,12 +101,14 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoStore $propertyInfoStore,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		EntityTitleLookup $titleLookup
 	) {
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyInfoStore = $propertyInfoStore;
 		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
+		$this->titleLookup = $titleLookup;
 	}
 
 	/**
@@ -192,18 +211,60 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 * @return string
 	 */
 	protected function formatRow( $propertyId ) {
-		$entityIdFormatter = $this->getEntityIdFormatter();
-		return $entityIdFormatter->formatEntityId( $propertyId );
+		$labelDescriptionLookup = $this->getLabelDescriptionLookup();
+
+		$title = $this->titleLookup->getTitleForId( $propertyId );
+		if ( !$title->exists() ) {
+			return $this->getEntityIdFormater()->formatEntityId( $propertyId );
+		}
+
+		$row = $this->getIdHtml( $propertyId, $title );
+		try {
+			$label = $labelDescriptionLookup->getLabel( $propertyId )->getText();
+			$row .= wfMessage( 'colon-separator' )->escaped() . $label;
+		} catch ( OutOfBoundsException $e ) {
+			// If there is no label do not add it
+		}
+
+		return $row;
 	}
 
-	private function getEntityIdFormatter() {
-		if ( !isset( $this->entityIdFormatter ) ) {
-			$labelDescriptionLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
+	/**
+	 * Returns HTML representing the label in the display language (or an appropriate fallback).
+	 *
+	 * @param EntityId|null $entityId
+	 * @param Title|null $title
+	 *
+	 * @return string HTML
+	 */
+	private function getIdHtml( EntityId $entityId = null, $title ) {
+		$idElement =  Html::element(
+			'a',
+			array(
+				'title' => $title ? $title->getPrefixedText() : $entityId->getSerialization(),
+				'href' => $title ? $title->getLocalURL() : '',
+				'class' => 'wb-itemlink-id'
+			),
+			$entityId->getSerialization()
+		);
+
+		return $idElement;
+	}
+
+	private function getLabelDescriptionLookup() {
+		if ( !isset( $this->labelDescriptionLookup ) ) {
+			$this->labelDescriptionLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
 				$this->getLanguage(),
 				$this->propertyIds
 			);
+		}
+		return $this->labelDescriptionLookup;
+	}
+
+	private function getEntityIdFormater() {
+		if ( !isset( $this->entityIdFormatter ) ) {
 			$this->entityIdFormatter = $this->entityIdFormatterFactory->getEntityIdFormater(
-				$labelDescriptionLookup
+				$this->getLabelDescriptionLookup()
 			);
 		}
 		return $this->entityIdFormatter;
