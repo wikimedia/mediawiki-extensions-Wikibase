@@ -184,16 +184,16 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 
 		$formDescriptor['submit'] = array(
 			'name' => 'wikibase-redirectentity-submit',
-			'section' => 'redirectentity', // special-redirectentity
 			'default' => $this->msg( 'wikibase-redirectentity-submit' )->text(),
 			'type' => 'submit',
 			'id' => 'wb-redirectentity-submit',
 			'cssclass' => 'wb-button'
 		);
 
-		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext(), 'special' )
+		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-redirectentity-form1' )
 			->setPreText( $pre )
+			->setWrapperLegendMsg( 'special-redirectentity' )
 			->suppressDefaultSubmit()
 			->setSubmitCallback( function () {// no-op
 			} )->show();
@@ -208,7 +208,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		return array(
 			'fromid' => array(
 				'name' => 'fromid',
-				'section' => 'redirectentity', // special-redirectentity
 				'default' => $this->getRequest()->getVal( 'fromid' ),
 				'type' => 'text',
 				'cssclass' => 'wb-input',
@@ -217,7 +216,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 			),
 			'toid' => array(
 				'name' => 'toid',
-				'section' => 'redirectentity', // special-redirectentity
 				'default' => $this->getRequest()->getVal( 'toid' ),
 				'type' => 'text',
 				'cssclass' => 'wb-input',
