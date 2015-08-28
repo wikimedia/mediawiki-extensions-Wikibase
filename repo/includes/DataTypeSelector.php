@@ -77,6 +77,23 @@ class DataTypeSelector {
 	}
 
 	/**
+	 * Builds and returns the array for the options of the DataType selector.
+	 *
+	 * @return array
+	 */
+	public function getOptionsArray() {
+		$dataTypes = array();
+
+		foreach ( $this->dataTypes as $dataType ) {
+			$dataTypes[$dataType->getId()] = $dataType->getLabel( $this->languageCode );
+		}
+
+		natcasesort( $dataTypes );
+
+		return $dataTypes;
+	}
+
+	/**
 	 * Builds and returns the html for the options of the DataType selector.
 	 *
 	 * @since 0.5
@@ -86,13 +103,7 @@ class DataTypeSelector {
 	 * @return string
 	 */
 	public function getOptionsHtml( $selectedTypeId = '' ) {
-		$dataTypes = array();
-
-		foreach ( $this->dataTypes as $dataType ) {
-			$dataTypes[$dataType->getId()] = $dataType->getLabel( $this->languageCode );
-		}
-
-		natcasesort( $dataTypes );
+		$dataTypes = $this->getOptionsArray();
 
 		$html = '';
 
