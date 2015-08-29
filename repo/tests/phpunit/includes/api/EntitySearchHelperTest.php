@@ -1,0 +1,192 @@
+<?php
+
+
+namespace Wikibase\Test\Repo\Api;
+
+use Title;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
+use Wikibase\Repo\Interactors\TermSearchResult;
+use Wikibase\TermIndexEntry;
+use Wikibase\Test\MockTermIndex;
+
+/**
+ * @covers Wikibase\Repo\Api\EntitySearchHelper
+ *
+ * @group Wikibase
+ * @group WikibaseAPI
+ * @group WikibaseRepo
+ *
+ * @licence GNU GPL v2+
+ * @author Bene* < benestar.wikimedia@gmail.com >
+ */
+class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @return EntityTitleLookup|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getMockTitleLookup() {
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$testCase = $this;
+		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
+				if ( $id->getSerialization() === 'Q111' ) {
+					return $testCase->getMockTitle( true );
+				} else {
+					return $testCase->getMockTitle( false );
+				}
+			} ) );
+		return $titleLookup;
+	}
+
+	/**
+	 * @param bool $exists
+	 *
+	 * @return Title|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	public function getMockTitle( $exists ) {
+		$mock = $this->getMockBuilder( '\Title' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'exists' )
+			->will( $this->returnValue( $exists ) );
+		return $mock;
+	}
+
+	/**
+	 * @param string $search
+	 * @param string $language
+	 * @param string $type
+	 * @param TermSearchResult[] $returnResults
+	 *
+	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getMockSearchInteractor( $search, $language, $type, array $returnResults = array() ) {
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\TermIndexSearchInteractor' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->atLeastOnce() )
+			->method( 'searchForEntities' )
+			->with(
+				$this->equalTo( $search ),
+				$this->equalTo( $language ),
+				$this->equalTo( $type ),
+				$this->equalTo( array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ) )
+			)
+			->will( $this->returnValue( $returnResults ) );
+		return $mock;
+	}
+
+	/**
+	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
+	 *
+	 * @return LanguageLabelDescriptionLookup
+	 */
+	private function getMockLabelDescriptionLookup() {
+		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( new Term( 'pt', 'ptLabel' ) ) );
+		$mock->expects( $this->any() )
+			->method( 'getDescription' )
+			->will( $this->returnValue( new Term( 'pt', 'ptDescription' ) ) );
+		return $mock;
+	}
+
+	private function getMockTermIndex() {
+		return new MockTermIndex(
+			array()
+		);
+	}
+
+	private function newEntitySearchHelper( TermIndexSearchInteractor $searchInteractor ) {
+		return new EntitySearchHelper(
+			$this->getMockTitleLookup(),
+			new BasicEntityIdParser(),
+			$searchInteractor,
+			$this->getMockTermIndex(),
+			$this->getMockLabelDescriptionLookup()
+		);
+	}
+
+	public function provideBooleanValues() {
+		return array(
+			array( true ),
+			array( false ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideBooleanValues
+	 */
+	public function testSearchStrictLanguage_passedToSearchInteractor( $boolean ) {
+		$searchInteractor = $this->getMockSearchInteractor( 'Foo', 'de-ch', 'item' );
+		$searchInteractor->expects( $this->atLeastOnce() )
+			->method( 'setUseLanguageFallback' )
+			->with( $this->equalTo( !$boolean ) );
+
+		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
+		$entitySearchHelper->getRankedSearchResults( 'Foo', 'de-ch', 'item', 10, $boolean );
+	}
+
+	public function provideTestGetRankedSearchResults() {
+		$q111Result = new TermSearchResult(
+			new Term( 'qid', 'Q111' ),
+			'entityId',
+			new ItemId( 'Q111' ),
+			new Term( 'pt', 'ptLabel' ),
+			new Term( 'pt', 'ptDescription' )
+		);
+
+		$q222Result = new TermSearchResult(
+			new Term( 'en-gb', 'Fooooo' ),
+			'label',
+			new ItemId( 'Q222' ),
+			new Term( 'en-gb', 'FooHeHe' ),
+			new Term( 'en', 'FooHeHe en description' )
+		);
+
+		$q333Result = new TermSearchResult(
+			new Term( 'de', 'AMatchedTerm' ),
+			'alias',
+			new ItemId( 'Q333' ),
+			new Term( 'fr', 'ADisplayLabel' )
+		);
+
+		return array(
+			'No exact match' => array(
+				'Q999', 10, array(), array()
+			),
+			'Exact EntityId match' => array(
+				'Q111', 10, array(), array( 'Q111' => $q111Result )
+			),
+			'Multiple Results' => array(
+				'Foo', 10, array( $q222Result, $q333Result ), array( 'Q222' => $q222Result, 'Q333' => $q333Result )
+			),
+			'Multiple Results (limited)' => array(
+				'Foo', 1, array( $q222Result ), array( 'Q222' => $q222Result )
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideTestGetRankedSearchResults
+	 */
+	public function testGetRankedSearchResults( $search, $limit, array $interactorReturn, array $expected ) {
+		$searchInteractor = $this->getMockSearchInteractor( $search, 'en', 'item', $interactorReturn );
+		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
+
+		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false );
+		$this->assertEquals( $expected, $results );
+	}
+
+}
