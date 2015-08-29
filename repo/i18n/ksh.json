@@ -121,7 +121,7 @@
 	"wikibase-redirectentity-submit": "Ömleide",
 	"wikibase-mylanguagefallbackchain-babel": "Do kanns se ändere. Don derför <nowiki>{{#babel:}}</nowiki> en {{GENDER:$1|Ding}} [[Special:MyPage|Metmaachersigg]] enboue.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, ömjewanndelt vun $3 - $4",
-	"wikibase-api-unresolved-redirect": "De aanjejovve Kännong betrick sesch obb_en Ömleidong, wat heh en däm Zosammehang nit ongerschtöz weed.",
+	"wikibase-api-unresolved-redirect": "De aanjejovve Kännong betrek sesch obb_en Ömleidong, wat heh en däm Zosammehang nit ongerschtöz weed.",
 	"wikibase-api-target-is-redirect": "Dä Omleidong ier zihl darf sällver kein Ömleidong sin.",
 	"wikibase-restoreold": "zeröckholle",
 	"wikibase-restore-summary": "Holl de Väsjohn $1 {{GENDER:$2|dä|dat|dä Metmaacher|de|dat}} [[Special:Contributions/$2|$2]] zerök.",

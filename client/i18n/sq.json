@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liridon"
+			"Liridon",
+			"Olsi"
 		]
 	},
 	"tooltip-t-wikibase": "Link deri tek artikulli i depos të të dhënave të lidhura",
@@ -13,6 +14,6 @@
 	"wikibase-rc-hide-wikidata-hide": "Fshih",
 	"wikibase-rc-hide-wikidata-show": "Shfaq",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Redakto {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "Redaktim {{WBREPONAME}}",
 	"wikibase-otherprojects": "Projekte të tjera"
 }

@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liridon"
+			"Liridon",
+			"Ammartivari"
 		]
 	},
 	"wikibase-edit": "redakto",
 	"wikibase-add": "shto",
 	"wikibase-label-empty": "Nuk ka emërtim të përkufizuar",
 	"wikibase-description-empty": "Asnjë përshkrim i përcaktuar",
-	"wikibase-statements": "Deklaratat",
+	"wikibase-statements": "Qëndrime",
 	"wikibase-sitelinks-special": "Faqe të tjera",
 	"wikibase-aliases-empty": "Nuk ka emërtim të përkufizuar",
 	"wikibase-statementview-rank-normal": "Rangimi normal",
