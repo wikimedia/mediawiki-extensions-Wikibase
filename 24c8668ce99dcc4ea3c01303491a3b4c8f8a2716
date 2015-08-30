@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_d47fa9a4",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-30T21:10:52Z",
+      "side": 1,
+      "message": "why the global here?",
+      "revId": "24c8668ce99dcc4ea3c01303491a3b4c8f8a2716",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
