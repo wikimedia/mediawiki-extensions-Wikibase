@@ -21,41 +21,194 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
-	/**
-	 * @dataProvider newFromRecentChangeProvider
-	 */
-	public function testNewFromRecentChange( $expected, RecentChange $recentChange ) {
+	public function testNewFromRecentChange_itemUpdated() {
+		$commentData = 'wikibase-comment-update';
+
+		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', false );
+
 		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
-		$externalChange = $externalChangeFactory->newFromRecentChange( $recentChange );
 
-		$this->assertEquals( $expected, $externalChange );
-	}
-
-	public function newFromRecentChangeProvider() {
-		$rev = new RevisionData( 'Cat', 5, 92, 90, '20130819111741',
-			array( 'key' => 'wikibase-comment-update' ), 'testrepo'
-		);
-
-		$externalChange = new ExternalChange( new ItemId( 'Q4' ), $rev, 'update' );
-
-		return array(
-			array( $externalChange, $this->getEditRecentChange( true ), 'bot edit' ),
-			array( $externalChange, $this->getEditRecentChange( false ), 'non bot edit' )
+		$this->assertEquals(
+			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
+			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
 	}
 
-	/**
-	 * @param boolean $bot
-	 * @return RecentChange
-	 */
-	protected function getEditRecentChange( $bot ) {
+	public function testNewFromRecentChange_siteLinkChange() {
+		// at the moment, we don't do anything with this info :( and just say
+		// 'wikibase-comment-update' for these changes.
+		$commentData = array(
+			'message' => 'wikibase-comment-sitelink-add',
+			'sitelink' => array(
+				'newlink' => array( 'site' => 'dewiki', 'page' => 'Kanada' )
+			)
+		);
+
+		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', false );
+
+		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+
+		$this->assertEquals(
+			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
+	public function testNewFromRecentChange_pageLinkedOnRepo() {
+		$commentData = array(
+			'message' => 'wikibase-comment-linked'
+		);
+
+		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~add', false );
+
+		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+
+		$this->assertEquals(
+			$this->makeExpectedExternalChange( 'wikibase-comment-linked', 'add' ),
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
+	public function testNewFromRecentChange_withRepoComment() {
+		$commentData = '/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]';
+
+		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', false );
+
+		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+
+		$this->assertEquals(
+			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
+	public function testNewFromRecentChange_compositeComment() {
+		$commentData = 'wikibase-comment-update';
+
 		$recentChange = new RecentChange();
 		$recentChange->counter = 2;
 
-		$params = array(
+		$rcParams = $this->makeRCParams( $commentData, 'wikibase-item~update', false );
+
+		$rcParams['wikibase-repo-change']['composite-comment'] = array(
+			'wikibase-comment-update',
+			'wikibase-comment-update'
+		);
+
+		$recentChange->setAttribs( $this->makeAttribs( $rcParams, false ) );
+
+		$expected = new ExternalChange(
+			new ItemId( 'Q4' ),
+			$this->makeRevisionData( array(
+				'key' => 'wikibase-comment-multi',
+				'numparams' => 2
+			) ),
+			'update'
+		);
+
+		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+
+		$this->assertEquals(
+			$expected,
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
+	public function testNewFromRecentChange_botEdit() {
+		$commentData = 'wikibase-comment-update';
+
+		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', true );
+
+		$expected = new ExternalChange(
+			new ItemId( 'Q4' ),
+			$this->makeRevisionData( array(
+				'key' => 'wikibase-comment-update'
+			) ),
+			'update'
+		);
+
+		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+
+		$this->assertEquals(
+			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
+	public function testNewFromRecentChange_nonBotEdit() {
+		$commentData = 'wikibase-comment-update';
+
+		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', false );
+
+		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+
+		$this->assertEquals(
+			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
+	/**
+	 * @param string $expectedComment
+	 * @param string $expectedType
+	 *
+	 * @return ExternalChange
+	 */
+	private function makeExpectedExternalChange( $expectedComment, $expectedType ) {
+		return new ExternalChange(
+			new ItemId( 'Q4' ),
+			$this->makeRevisionData( array(
+				'key' => $expectedComment
+			) ),
+			$expectedType
+		);
+	}
+
+	private function makeRevisionData( array $comment ) {
+		return new RevisionData(
+			'Cat',
+			5,
+			92,
+			90,
+			'20130819111741',
+			$comment,
+			'testrepo'
+	  	);
+	}
+
+	/**
+	 * @param array|string $commentData
+	 * @param string $changeType
+	 * @param bool $isBot
+	 *
+	 * @return RecentChange
+	 */
+	private function makeRecentChange( $commentData, $changeType, $isBot ) {
+		$recentChange = new RecentChange();
+		$recentChange->counter = 2;
+
+		$attribs = $this->makeAttribs(
+			$this->makeRCParams( $commentData, $changeType, $isBot ),
+			$isBot
+		);
+
+		$recentChange->setAttribs( $attribs );
+
+		return $recentChange;
+	}
+
+	/**
+	 * @param array|string $commentData
+	 * @param string $changeType
+	 * @param boolean $bot
+	 *
+	 * @return array
+	 */
+	private function makeRCParams( $commentData, $changeType, $bot ) {
+		return array(
 			'wikibase-repo-change' => array(
 				'id' => 4,
-				'type' => 'wikibase-item~update',
+				'type' => $changeType,
 				'time' => '20130819111741',
 				'object_id' => 'q4',
 				'user_id' => 1,
@@ -66,16 +219,13 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 				'page_id' => 5,
 				'rev_id' => 92,
 				'parent_id' => 90,
-				'comment' => array(
-					'message' => 'wikibase-comment-sitelink-add',
-					'sitelink' => array(
-						'newlink' => array( 'site' => 'dewiki', 'page' => 'Kanada' )
-					)
-				)
+				'comment' => $commentData
 			)
 		);
+	}
 
-		$attribs = array(
+	private function makeAttribs( array $rcParams, $bot ) {
+		return array(
 			'rc_id' => 315,
 			'rc_timestamp' => '20130819111741',
 			'rc_user' => 0,
@@ -98,12 +248,8 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 			'rc_logid' => 0,
 			'rc_log_type' => null,
 			'rc_log_action' => '',
-			'rc_params' => serialize( $params )
+			'rc_params' => serialize( $rcParams )
 		);
-
-		$recentChange->setAttribs( $attribs );
-
-		return $recentChange;
 	}
 
 }
