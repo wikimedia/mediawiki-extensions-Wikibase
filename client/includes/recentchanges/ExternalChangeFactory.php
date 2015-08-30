@@ -163,8 +163,6 @@ class ExternalChangeFactory {
 			} else {
 				$newComment['key'] = $comment['message'];
 			}
-		} elseif ( is_string( $comment ) ) {
-			$newComment['key'] = $comment;
 		}
 
 		return $newComment;
