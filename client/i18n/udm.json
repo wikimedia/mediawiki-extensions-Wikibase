@@ -6,6 +6,6 @@
 		]
 	},
 	"wikibase-editlinks": "Чӧлсконъёсыз тупатыны",
-	"wikibase-rc-wikibase-edit-title": "Тупатон {{grammar:genitive|{{WBREPONAME}}}}",
+	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} тупатон",
 	"wikibase-otherprojects": "Мукет проектъёсын"
 }

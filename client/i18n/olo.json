@@ -5,6 +5,7 @@
 			"Ilja.mos"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} on muutettu",
 	"wikibase-dataitem": "{{WBREPONAME}} elementu",
 	"wikibase-editlinks": "Korjata linkit",
 	"wikibase-editlinkstitle": "Korjata kielienvälizet linkit",
