@@ -6,7 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use SplFileInfo;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @group slow
