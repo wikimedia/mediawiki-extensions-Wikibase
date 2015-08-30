@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_943cc1e0",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-30T21:19:56Z",
+      "side": 1,
+      "message": "DataValue is unused here",
+      "revId": "77f21d4025f864b81cedb26fdeb7c8d2399ff6bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
