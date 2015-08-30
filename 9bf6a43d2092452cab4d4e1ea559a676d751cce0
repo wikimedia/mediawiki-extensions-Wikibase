@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_9eb940c9",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-30T10:43:44Z",
+      "side": 1,
+      "message": "why do we need the global here?",
+      "revId": "9bf6a43d2092452cab4d4e1ea559a676d751cce0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
