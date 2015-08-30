@@ -4,7 +4,7 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;

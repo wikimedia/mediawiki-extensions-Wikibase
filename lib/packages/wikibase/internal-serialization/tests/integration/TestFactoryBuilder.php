@@ -6,7 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\LegacyDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;

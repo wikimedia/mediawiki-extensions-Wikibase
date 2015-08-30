@@ -7,8 +7,8 @@ use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\LegacyIdInterpreter;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * @licence GNU GPL v2+
