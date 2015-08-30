@@ -16,6 +16,24 @@
       "revId": "3668fffef372bf7f067e73ff4fb7e78de3c4bced",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_147f7111",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-30T19:57:33Z",
+      "side": 1,
+      "message": "yes, that\u0027s correct.\n\ni added explanation of how this all works here, what kind of input that is possible for this method and why/how comments are handled as such here.\n\nand expect this code to be removed soonish, once we have full support for handling the autocomments from the repo here and once we are sure that client databases don\u0027t have legacy comments any longer.",
+      "parentUuid": "6ec1af18_748ef534",
+      "revId": "3668fffef372bf7f067e73ff4fb7e78de3c4bced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
