@@ -139,30 +139,26 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function insertLinksInternal( Item $item, $links, DatabaseBase $dbw ) {
+	public function insertLinksInternal( Item $item, array $links, DatabaseBase $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting links for ' . $item->getId()->getSerialization() );
 
-		$success = true;
-		foreach ( $links as $link ) {
-			$success = $dbw->insert(
-				$this->table,
-				array(
-					'ips_item_id' => $item->getId()->getNumericId(),
-					'ips_site_id' => $link->getSiteId(),
-					'ips_site_page' => $link->getPageName()
-				),
-				__METHOD__,
-				array( 'IGNORE' )
+		$insert = array();
+		foreach ( $links as $siteLink ) {
+			$insert[] = array(
+				'ips_item_id' => $item->getId()->getNumericId(),
+				'ips_site_id' => $siteLink->getSiteId(),
+				'ips_site_page' => $siteLink->getPageName()
 			);
-
-			$success = $success && $dbw->affectedRows();
-
-			if ( !$success ) {
-				break;
-			}
 		}
 
-		return $success;
+		$success = $dbw->insert(
+			$this->table,
+			$insert,
+			__METHOD__,
+			array( 'IGNORE' )
+		);
+
+		return $success && $dbw->affectedRows();
 	}
 
 	/**
@@ -179,26 +175,22 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteLinksInternal( Item $item, $links, DatabaseBase $dbw ) {
+	public function deleteLinksInternal( Item $item, array $links, DatabaseBase $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting links for ' . $item->getId()->getSerialization() );
 
-		//TODO: We can do this in a single query by collecting all the site IDs into a set.
-
-		$success = true;
-		foreach ( $links as $link ) {
-			$success = $dbw->delete(
-				$this->table,
-				array(
-					'ips_item_id' => $item->getId()->getNumericId(),
-					'ips_site_id' => $link->getSiteId()
-				),
-				__METHOD__
-			);
-
-			if ( !$success ) {
-				break;
-			}
+		$siteIds = array();
+		foreach ( $links as $siteLink ) {
+			$siteIds[] = $siteLink->getSiteId();
 		}
+
+		$success = $dbw->delete(
+			$this->table,
+			array(
+				'ips_item_id' => $item->getId()->getNumericId(),
+				'ips_site_id' => $siteIds
+			),
+			__METHOD__
+		);
 
 		return $success;
 	}
@@ -227,6 +219,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 		);
 
 		$this->releaseConnection( $dbw );
+
 		return $ok;
 	}
 
