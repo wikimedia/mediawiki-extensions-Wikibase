@@ -13,6 +13,8 @@ use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Wikibase\Lib\Store\BadgeStore;
+use Wikibase\Lib\Store\BadgeTable;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -315,7 +317,9 @@ class SqlStore implements Store {
 				$this->getUpdateScriptPath( 'AddBadgesPerSiteLink', $db->getType() )
 			);
 
-			// TODO populate table
+			$updater->addPostDatabaseUpdateMaintenance(
+				'Wikibase\Repo\Maintenance\RebuildItemsPerSite'
+			);
 		}
 	}
 
@@ -536,7 +540,7 @@ class SqlStore implements Store {
 	 * @return SiteLinkStore
 	 */
 	public function newSiteLinkStore() {
-		return new SiteLinkTable( 'wb_items_per_site', false );
+		return new SiteLinkTable( 'wb_items_per_site', false, $this->newBadgeStore() );
 	}
 
 	/**
@@ -771,7 +775,7 @@ class SqlStore implements Store {
 	 * @return SiteLinkConflictLookup
 	 */
 	public function getSiteLinkConflictLookup() {
-		return new SiteLinkTable( 'wb_items_per_site', false );
+		return new SiteLinkTable( 'wb_items_per_site', false, $this->newBadgeStore() );
 	}
 
 	/**
@@ -785,6 +789,13 @@ class SqlStore implements Store {
 		}
 
 		return $this->entityPrefetcher;
+	}
+
+	/**
+	 * @return BadgeStore
+	 */
+	public function newBadgeStore() {
+		return new BadgeTable( 'wb_badges_per_sitelink', false );
 	}
 
 }

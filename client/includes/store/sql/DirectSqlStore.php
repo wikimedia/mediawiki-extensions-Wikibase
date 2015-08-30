@@ -19,6 +19,7 @@ use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\BadgeTable;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -278,8 +279,9 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getSiteLinkLookup() {
 		if ( $this->siteLinkLookup === null ) {
+			$badgeTable = new BadgeTable( 'wb_badges_per_sitelink', true );
 			$this->siteLinkLookup = new CachingSiteLinkLookup(
-				new SiteLinkTable( 'wb_items_per_site', true, $this->repoWiki ),
+				new SiteLinkTable( 'wb_items_per_site', true, $badgeTable, $this->repoWiki ),
 				new HashBagOStuff()
 			);
 		}
