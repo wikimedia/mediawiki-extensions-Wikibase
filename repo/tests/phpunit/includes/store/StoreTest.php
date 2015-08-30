@@ -77,4 +77,12 @@ class StoreTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\IdGenerator', $store->newIdGenerator() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testNewBadgeStore( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\Lib\Store\BadgeStore', $store->newBadgeStore() );
+	}
+
 }

@@ -22,30 +22,32 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConflictLookup {
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var string
 	 */
-	protected $table;
+	private $table;
 
 	/**
-	 * @since 0.3
-	 *
 	 * @var bool
 	 */
-	protected $readonly;
+	private $readonly;
+
+	/**
+	 * @var BadgeStore
+	 */
+	private $badgeStore;
 
 	/**
 	 * @since 0.1
 	 *
 	 * @param string $table The table to use for the sitelinks
 	 * @param bool $readonly Whether the table can be modified.
+	 * @param BadgeStore $badgeStore A badge store to access badges
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws MWException
 	 */
-	public function __construct( $table, $readonly, $wiki = false ) {
+	public function __construct( $table, $readonly, BadgeStore $badgeStore, $wiki = false ) {
 		if ( !is_string( $table ) ) {
 			throw new MWException( '$table must be a string.' );
 		}
@@ -58,6 +60,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 
 		$this->table = $table;
 		$this->readonly = $readonly;
+		$this->badgeStore = $badgeStore;
 		$this->wiki = $wiki;
 	}
 
@@ -151,14 +154,30 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 			);
 		}
 
-		$success = $dbw->insert(
+		$ok = $dbw->insert(
 			$this->table,
 			$insert,
 			__METHOD__,
 			array( 'IGNORE' )
 		);
 
-		return $success && $dbw->affectedRows();
+		$ok = $ok && $dbw->affectedRows();
+
+		if ( !$ok ) {
+			return $ok;
+		}
+
+		return $this->saveBadges( $links );
+	}
+
+	private function saveBadges( array $links ) {
+		foreach ( $links as $siteLink ) {
+			if ( !$this->badgeStore->saveBadgesOfSiteLink( $siteLink ) ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -183,7 +202,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 			$siteIds[] = $siteLink->getSiteId();
 		}
 
-		$success = $dbw->delete(
+		$ok = $dbw->delete(
 			$this->table,
 			array(
 				'ips_item_id' => $item->getId()->getNumericId(),
@@ -192,7 +211,21 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 			__METHOD__
 		);
 
-		return $success;
+		if ( !$ok ) {
+			return $ok;
+		}
+
+		return $this->deleteBadges( $links );
+	}
+
+	private function deleteBadges( array $links ) {
+		foreach ( $links as $siteLink ) {
+			if ( !$this->badgeStore->deleteBadgesOfSiteLink( $siteLink ) ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -210,6 +243,8 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 			throw new MWException( 'Cannot write when in readonly mode' );
 		}
 
+		$links = $this->getSiteLinksForItem( $itemId );
+
 		$dbw = $this->getConnection( DB_MASTER );
 
 		$ok = $dbw->delete(
@@ -220,7 +255,11 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 
 		$this->releaseConnection( $dbw );
 
-		return $ok;
+		if ( !$ok ) {
+			return $ok;
+		}
+
+		return $this->deleteBadges( $links );
 	}
 
 	/**
@@ -351,7 +390,8 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 		$ok = $dbw->delete( $this->table, '*', __METHOD__ );
 
 		$this->releaseConnection( $dbw );
-		return $ok;
+
+		return $this->badgeStore->clear();
 	}
 
 	/**
