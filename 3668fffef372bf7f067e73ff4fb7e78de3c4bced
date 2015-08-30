@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_748ef534",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-08-30T19:24:22Z",
+      "side": 1,
+      "message": "This function handles legacy comments, doesn\u0027t it? If so, please add a comment saying that",
+      "revId": "3668fffef372bf7f067e73ff4fb7e78de3c4bced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
