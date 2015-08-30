@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\EntityIdPager;
 
 /**
- * Utility class for rebuilding the wb_items_per_site table.
+ * Utility class for rebuilding the wb_items_per_site and wb_badges_per_sitelink table.
  *
  * @since 0.5
  *

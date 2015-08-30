@@ -20,18 +20,14 @@ use Wikibase\DataModel\SiteLink;
 class BadgeTable extends DBAccessBase implements BadgeStore {
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string
 	 */
-	protected $table;
+	private $table;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var bool
 	 */
-	protected $readonly;
+	private $readonly;
 
 	/**
 	 * @param string $table The table to use for the badges

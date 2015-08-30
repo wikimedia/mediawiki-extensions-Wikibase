@@ -4,6 +4,8 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\BadgeStore;
 use Wikibase\Lib\Store\SiteLinkTable;
 
 /**
@@ -21,19 +23,49 @@ use Wikibase\Lib\Store\SiteLinkTable;
  */
 class SiteLinkTableTest extends \MediaWikiTestCase {
 
-	/**
-	 * @var SiteLinkTable
-	 */
-	private $siteLinkTable;
-
 	protected function setUp() {
 		parent::setUp();
 
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local site link table." );
 		}
+	}
 
-		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+	/**
+	 * @param SiteLink[] $updatedLinks
+	 * @param SiteLink[] $removedLinks
+	 * @param bool $clear
+	 * @return BadgeStore
+	 */
+	private function newBadgeStore( array $updatedLinks, array $removedLinks, $clear ) {
+		$badgeStore = $this->getMock( 'Wikibase\Lib\Store\BadgeStore' );
+
+		$i = 0;
+		foreach ( $removedLinks as $siteLink ) {
+			$badgeStore->expects( $this->at( $i++ ) )
+				->method( 'deleteBadgesOfSiteLink' )
+				->with( $siteLink )
+				->will( $this->returnValue( true ) );
+		}
+
+		foreach ( $updatedLinks as $siteLink ) {
+			$badgeStore->expects( $this->at( $i++ ) )
+				->method( 'saveBadgesOfSiteLink' )
+				->with( $siteLink )
+				->will( $this->returnValue( true ) );
+		}
+
+		if ( $clear ) {
+			$badgeStore->expects( $this->once() )
+				->method( 'clear' )
+				->will( $this->returnValue( true ) );
+		}
+
+		return $badgeStore;
+	}
+
+	private function newSiteLinkTable( array $updatedLinks = array(), array $removedLinks = array(), $clear = false ) {
+		return new SiteLinkTable( 'wb_items_per_site', false, $this->newBadgeStore( $updatedLinks, $removedLinks, $clear ) );
 	}
 
 	public function itemProvider() {
@@ -61,7 +93,8 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testSaveLinksOfItem( Item $item ) {
-		$res = $this->siteLinkTable->saveLinksOfItem( $item );
+		$siteLinkTable = $this->newSiteLinkTable( $item->getSiteLinkList()->toArray() );
+		$res = $siteLinkTable->saveLinksOfItem( $item );
 		$this->assertTrue( $res );
 	}
 
@@ -69,10 +102,11 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @depends testSaveLinksOfItem
 	 */
 	public function testSaveLinksOfItem_duplicate() {
+		$siteLinkTable = $this->newSiteLinkTable();
 		$item = new Item( new ItemId( 'Q2' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Beer' );
 
-		$res = $this->siteLinkTable->saveLinksOfItem( $item );
+		$res = $siteLinkTable->saveLinksOfItem( $item );
 		$this->assertFalse( $res );
 	}
 
@@ -83,22 +117,31 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
 		$item->getSiteLinkList()->addNewSiteLink( 'svwiki', 'Börk' );
 
-		$this->siteLinkTable->saveLinksOfItem( $item );
+		$siteLinkTable = $this->newSiteLinkTable( $item->getSiteLinkList()->toArray() );
+		$siteLinkTable->saveLinksOfItem( $item );
 
 		// modify links, and save again
-		$item->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'FooK' );
+		$item->getSiteLinkList()->setNewSiteLink( 'enwiki', 'FooK' );
 		$item->getSiteLinkList()->removeLinkWithSiteId( 'dewiki' );
 		$item->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'GrooK' );
 
-		$this->siteLinkTable->saveLinksOfItem( $item );
+		$updated = array(
+			new SiteLink( 'enwiki', 'FooK' ),
+			new SiteLink( 'nlwiki', 'GrooK' )
+		);
+		$removed = array(
+			new SiteLink( 'enwiki', 'FooK' ),
+			new SiteLink( 'dewiki', 'Bar' )
+		);
+		$siteLinkTable = $this->newSiteLinkTable( $updated, $removed );
+		$siteLinkTable->saveLinksOfItem( $item );
 
 		// check that the update worked correctly
-		$actualLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
+		$actualLinks = $siteLinkTable->getSiteLinksForItem( $item->getId() );
 		$expectedLinks = $item->getSiteLinkList()->toArray();
 
-		$missingLinks = array_udiff( $expectedLinks, $actualLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
-		$extraLinks = array_udiff( $actualLinks, $expectedLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
+		$missingLinks = array_udiff( $expectedLinks, $actualLinks, array( $siteLinkTable, 'compareSiteLinks' ) );
+		$extraLinks = array_udiff( $actualLinks, $expectedLinks, array( $siteLinkTable, 'compareSiteLinks' ) );
 
 		$this->assertEmpty( $missingLinks, 'Missing links' );
 		$this->assertEmpty( $extraLinks, 'Extra links' );
@@ -109,7 +152,8 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGetSiteLinksOfItem( Item $item ) {
-		$siteLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
+		$siteLinkTable = $this->newSiteLinkTable();
+		$siteLinks = $siteLinkTable->getSiteLinksForItem( $item->getId() );
 
 		$this->assertArrayEquals(
 			$item->getSiteLinkList()->toArray(),
@@ -122,10 +166,12 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGetItemIdForSiteLink( Item $item ) {
+		$siteLinkTable = $this->newSiteLinkTable();
+
 		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
-				$this->siteLinkTable->getItemIdForSiteLink( $siteLink )
+				$siteLinkTable->getItemIdForSiteLink( $siteLink )
 			);
 		}
 	}
@@ -135,10 +181,12 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGetItemIdForLink( Item $item ) {
+		$siteLinkTable = $this->newSiteLinkTable();
+
 		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
-				$this->siteLinkTable->getItemIdForLink( $siteLink->getSiteId(), $siteLink->getPageName() )
+				$siteLinkTable->getItemIdForLink( $siteLink->getSiteId(), $siteLink->getPageName() )
 			);
 		}
 	}
@@ -148,12 +196,14 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testDeleteLinksOfItem( Item $item ) {
+		$siteLinkTable = $this->newSiteLinkTable( array(), $item->getSiteLinkList()->toArray() );
+
 		$this->assertTrue(
-			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
+			$siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
 		);
 
 		$this->assertEmpty(
-			$this->siteLinkTable->getSiteLinksForItem( $item->getId() )
+			$siteLinkTable->getSiteLinksForItem( $item->getId() )
 		);
 	}
 
@@ -162,12 +212,14 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testClear( Item $item ) {
+		$siteLinkTable = $this->newSiteLinkTable( array(), array(), true );
+
 		$this->assertTrue(
-			$this->siteLinkTable->clear()
+			$siteLinkTable->clear()
 		);
 
 		$this->assertEmpty(
-			$this->siteLinkTable->getSiteLinksForItem( $item->getId() )
+			$siteLinkTable->getSiteLinksForItem( $item->getId() )
 		);
 	}
 
