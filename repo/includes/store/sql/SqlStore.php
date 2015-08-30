@@ -279,13 +279,11 @@ class SqlStore implements Store {
 		$this->updateTermsTable( $updater, $db );
 		$this->updateItemsPerSiteTable( $updater, $db );
 		$this->updateChangesTable( $updater, $db );
+		$this->updateBadgesPerSiteLinkTable( $updater, $db );
 
 		$this->registerPropertyInfoTableUpdates( $updater );
 	}
 
-	/**
-	 * @param DatabaseUpdater $updater
-	 */
 	private function updateItemsPerSiteTable( DatabaseUpdater $updater, DatabaseBase $db ) {
 		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
@@ -298,9 +296,6 @@ class SqlStore implements Store {
 		}
 	}
 
-	/**
-	 * @param DatabaseUpdater $updater
-	 */
 	private function updateChangesTable( DatabaseUpdater $updater, DatabaseBase $db ) {
 		// Make wb_changes.change_info MEDIUMBLOB - T108246
 		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
@@ -310,6 +305,17 @@ class SqlStore implements Store {
 				'change_info',
 				$this->getUpdateScriptPath( 'MakeChangeInfoLarger', $db->getType() )
 			);
+		}
+	}
+
+	private function updateBadgesPerSiteLinkTable( DatabaseUpdater $updater, DatabaseBase $db ) {
+		if ( !$db->tableExists( 'wb_badges_per_sitelink' ) ) {
+			$updater->addExtensionTable(
+				'wb_badges_per_sitelink',
+				$this->getUpdateScriptPath( 'AddBadgesPerSiteLink', $db->getType() )
+			);
+
+			// TODO populate table
 		}
 	}
 
