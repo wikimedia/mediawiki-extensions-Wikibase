@@ -64,6 +64,7 @@ CREATE INDEX /*i*/term_search_key ON /*_*/wb_terms (term_search_key, term_langua
 CREATE INDEX /*i*/term_search ON /*_*/wb_terms (term_language, term_entity_id, term_type, term_search_key(16));
 
 
+
 -- Links id+type to page ids.
 CREATE TABLE IF NOT EXISTS /*_*/wb_entity_per_page (
   epp_entity_id                  INT unsigned        NOT NULL, -- Id of the entity
@@ -75,3 +76,16 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_entity_per_page (
 CREATE UNIQUE INDEX /*i*/wb_epp_entity ON /*_*/wb_entity_per_page (epp_entity_id, epp_entity_type);
 CREATE UNIQUE INDEX /*i*/wb_epp_page ON /*_*/wb_entity_per_page (epp_page_id);
 CREATE INDEX /*i*/epp_redirect_target ON /*_*/wb_entity_per_page (epp_redirect_target);
+
+
+
+-- Badges to site links
+CREATE TABLE IF NOT EXISTS /*_*/wb_badges_per_sitelink (
+  bps_row_id                     BIGINT unsigned     NOT NULL PRIMARY KEY AUTO_INCREMENT, -- row ID
+  bps_badge_id                   VARBINARY(32)       NOT NULL, -- Id of badge item
+  bps_site_id                    VARBINARY(32)       NOT NULL, -- Site of the page that has the badge
+  bps_site_page                  VARCHAR(310)        NOT NULL -- Name of the page
+) /*$wgDBTableOptions*/;
+
+CREATE UNIQUE INDEX /*i*/wb_bps_badges ON /*_*/wb_badges_per_sitelink (bps_badge_id, bps_site_id, bps_site_page);
+CREATE INDEX /*i*/wb_bps_badges_per_site ON /*_*/wb_badges_per_sitelink (bps_badge_id, bps_site_id);
