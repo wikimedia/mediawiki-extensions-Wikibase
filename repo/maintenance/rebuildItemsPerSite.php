@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Wikibase\Lib\Store\BadgeTable;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
@@ -14,7 +15,7 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * Maintenance script for rebuilding the items_per_site table.
+ * Maintenance script for rebuilding the items_per_site and badges_per_sitelink tables.
  *
  * @since 0.5
  *
@@ -26,7 +27,7 @@ class RebuildItemsPerSite extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Rebuild the items_per_site table';
+		$this->mDescription = 'Rebuild the items_per_site and badges_per_sitelink tables';
 
 		$this->addOption( 'batch-size', "Number of rows to update per batch (100 by default)", false, true );
 	}
@@ -47,7 +48,8 @@ class RebuildItemsPerSite extends Maintenance {
 			array( $this, 'report' )
 		);
 
-		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$badgeTable = new BadgeTable( 'wb_badges_per_sitelink', false );
+		$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false, $badgeTable );
 		// Use an uncached EntityLookup here to avoid memory leaks
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
 		$entityPrefetcher = WikibaseRepo::getDefaultInstance()->getStore()->getEntityPrefetcher();

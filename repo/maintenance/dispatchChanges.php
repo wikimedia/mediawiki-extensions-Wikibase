@@ -7,6 +7,7 @@ use Maintenance;
 use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
+use Wikibase\Lib\Store\BadgeTable;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
@@ -229,7 +230,8 @@ class DispatchChanges extends Maintenance {
 			|| $subscriptionLookupMode === 'subscriptions+sitelinks'
 		) {
 			$this->log( "Using sitelinks to target notifications." );
-			$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', true, $repoDB );
+			$badgeTable = new BadgeTable( 'wb_badges_per_sitelink', true );
+			$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', true, $badgeTable, $repoDB );
 			$lookup = $siteLinkSubscriptionLookup = new SiteLinkSubscriptionLookup( $siteLinkTable );
 		}
 
