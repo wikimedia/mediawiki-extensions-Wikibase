@@ -24,7 +24,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	/**
 	 * @var SiteLinkTable
 	 */
-	protected $siteLinkTable;
+	private $siteLinkTable;
 
 	protected function setUp() {
 		parent::setUp();
@@ -76,9 +76,6 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		$this->assertFalse( $res );
 	}
 
-	/**
-	 * @dataProvider itemProvider
-	 */
 	public function testUpdateLinksOfItem() {
 		// save initial links
 		$item = new Item( new ItemId( 'Q177' ) );
@@ -98,10 +95,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 
 		// check that the update worked correctly
 		$actualLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
-		$expectedLinks = $item->getSiteLinks();
+		$expectedLinks = $item->getSiteLinkList()->toArray();
 
 		$missingLinks = array_udiff( $expectedLinks, $actualLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
-		$extraLinks =   array_udiff( $actualLinks, $expectedLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
+		$extraLinks = array_udiff( $actualLinks, $expectedLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
 
 		$this->assertEmpty( $missingLinks, 'Missing links' );
 		$this->assertEmpty( $extraLinks, 'Extra links' );
@@ -114,8 +111,8 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	public function testGetSiteLinksOfItem( Item $item ) {
 		$siteLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
 
-		$this->assertEquals(
-			$item->getSiteLinks(),
+		$this->assertArrayEquals(
+			$item->getSiteLinkList()->toArray(),
 			$siteLinks
 		);
 	}
@@ -125,9 +122,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGetItemIdForSiteLink( Item $item ) {
-		$siteLinks = $item->getSiteLinks();
-
-		foreach ( $siteLinks as $siteLink ) {
+		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
 				$this->siteLinkTable->getItemIdForSiteLink( $siteLink )
@@ -140,9 +135,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGetItemIdForLink( Item $item ) {
-		$siteLinks = $item->getSiteLinks();
-
-		foreach ( $siteLinks as $siteLink ) {
+		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
 				$this->siteLinkTable->getItemIdForLink( $siteLink->getSiteId(), $siteLink->getPageName() )
@@ -157,6 +150,20 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	public function testDeleteLinksOfItem( Item $item ) {
 		$this->assertTrue(
 			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
+		);
+
+		$this->assertEmpty(
+			$this->siteLinkTable->getSiteLinksForItem( $item->getId() )
+		);
+	}
+
+	/**
+	 * @depends testSaveLinksOfItem
+	 * @dataProvider itemProvider
+	 */
+	public function testClear( Item $item ) {
+		$this->assertTrue(
+			$this->siteLinkTable->clear() !== false
 		);
 
 		$this->assertEmpty(
