@@ -1,6 +1,6 @@
 # Wikibase DataModel Serialization release notes
 
-## 2.0.0 (2015-08-27)
+## 2.0.0 (2015-08-30)
 
 * Dropped dependency on Wikibase DataModel Services
 * Removed `newClaimSerializer`, `newClaimsSerializer` and `newSnaksSerializer` from `SerializerFactory`
