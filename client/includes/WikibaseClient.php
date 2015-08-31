@@ -841,7 +841,7 @@ final class WikibaseClient {
 		if ( $this->restrictedEntityLookup === null ) {
 			$this->restrictedEntityLookup = new RestrictedEntityLookup(
 				$this->getEntityLookup(),
-				PHP_INT_MAX // Don't throw any exceptions, yet
+				$this->settings->getSetting( 'entityAccessLimit' )
 			);
 		}
 

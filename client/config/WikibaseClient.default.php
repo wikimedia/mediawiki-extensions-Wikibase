@@ -45,6 +45,10 @@ return call_user_func( function() {
 		'badgeClassNames' => array(),
 		// Allow accessing data from other items in the parser functions and via Lua
 		'allowArbitraryDataAccess' => true,
+		// Maximum number of full entities that can be accessed on a page. This does
+		// not include convenience functions like mw.wikibase.label that use TermLookup
+		// instead of loading a full entity.
+		'entityAccessLimit' => 250,
 		// Allow accessing data in the user's language rather than the content language
 		// in the parser functions and via Lua.
 		// Allows users to split the ParserCache by user language.

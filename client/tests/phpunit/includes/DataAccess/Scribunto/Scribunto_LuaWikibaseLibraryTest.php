@@ -115,6 +115,16 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary->getEntity( 'X888', false );
 	}
 
+	public function testGetEntity_entityAccessLimitExceeded() {
+		$this->setExpectedException( 'ScribuntoException' );
+
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
+		$luaWikibaseLibrary->getEntity( 'Q32487' );
+		$luaWikibaseLibrary->getEntity( 'Q32488' );
+		$luaWikibaseLibrary->getEntity( 'Q199024' );
+	}
+
 	public function testGetEntityId() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$entityId = $luaWikibaseLibrary->getEntityId( 'CanHazKitten123' );
