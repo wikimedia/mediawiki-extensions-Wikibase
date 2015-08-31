@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\DataModel\Entity\EntityRedirect;
 
 /**
  * Represents a revision of a Wikibase redirect.

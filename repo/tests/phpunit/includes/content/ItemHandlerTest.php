@@ -5,11 +5,11 @@ namespace Wikibase\Test;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\SettingsArray;
 
