@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_0f4bd7cd",
+        "filename": "lib/includes/store/BadgeLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-31T09:33:38Z",
+      "side": 1,
+      "message": "This should probably be in datamodel services?",
+      "revId": "1a1d563f8d65ddb2cd56776a6996c7150f310b46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
