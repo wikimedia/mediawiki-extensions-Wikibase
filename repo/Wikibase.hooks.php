@@ -798,9 +798,9 @@ final class RepoHooks {
 	 * @param string[] $data Extra data supplied when registering the hook function,
 	 *        matches list( $contentModel, $messagePrefix ).
 	 * @param string &$comment reference to the autocomment text
-	 * @param string|bool $pre content before the autocomment
+	 * @param bool $pre true if there is content before the autocomment
 	 * @param string $auto the autocomment unformatted
-	 * @param string|bool $post content after the autocomment
+	 * @param bool $post true if there is content after the autocomment
 	 * @param Title|null $title use for further information
 	 * @param bool $local shall links be generated locally or globally
 	 *
@@ -821,10 +821,10 @@ final class RepoHooks {
 		}
 
 		$formatter = new AutoCommentFormatter( $wgLang, $messagePrefix );
-		$formattedComment = $formatter->formatAutoComment( $pre, $auto, $post );
+		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {
-			$comment = $formattedComment;
+			$comment = $formatter->wrapAutoComment( $pre, $formattedComment, $post );
 		}
 	}
 
