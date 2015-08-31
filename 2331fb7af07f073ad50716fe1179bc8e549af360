@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_2fa1f335",
+        "filename": "repo/includes/api/QueryBadges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-31T10:16:55Z",
+      "side": 1,
+      "message": "example i18n message keys are wrong",
+      "revId": "2331fb7af07f073ad50716fe1179bc8e549af360",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
