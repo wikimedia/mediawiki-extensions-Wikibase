@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_32595c2d",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T11:19:49Z",
+      "side": 1,
+      "message": "Should say \"Wikibase entities\". This will be shown inline in rendered page output. Without context, \"entity\" could be anything.",
+      "revId": "d9e9246eba4bd1b052fdfaf2c516a0f3c8ba1f0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_f2a6740c",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T11:19:49Z",
+      "side": 1,
+      "message": "Shoudl mention that this is shown inline in rendered page output (or is it?).",
+      "revId": "d9e9246eba4bd1b052fdfaf2c516a0f3c8ba1f0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
