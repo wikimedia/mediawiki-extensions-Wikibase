@@ -16,6 +16,24 @@
       "revId": "68c7ded411f1ab26d2ed4ea8de26548b15367744",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8f3d87dc",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-31T10:32:49Z",
+      "side": 1,
+      "message": "+1, yes it could logically be split into 3 methods",
+      "parentUuid": "6ec1af18_6f613bff",
+      "revId": "68c7ded411f1ab26d2ed4ea8de26548b15367744",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
