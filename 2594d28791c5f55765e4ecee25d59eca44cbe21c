@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_ef23ebb2",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T10:44:36Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "2594d28791c5f55765e4ecee25d59eca44cbe21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8f14a752",
+        "filename": "client/tests/phpunit/includes/DataAccess/WikibaseDataAccessTestItemSetUpHelper.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T10:44:36Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "2594d28791c5f55765e4ecee25d59eca44cbe21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_4f123f65",
+        "filename": "lib/tests/phpunit/store/EntityInfoBuilderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T10:44:36Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "2594d28791c5f55765e4ecee25d59eca44cbe21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6f0ffb3a",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T10:44:36Z",
+      "side": 1,
+      "message": "deprecated",
+      "revId": "2594d28791c5f55765e4ecee25d59eca44cbe21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_2f2ed3a0",
+        "filename": "repo/tests/phpunit/includes/content/EntityHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T10:44:36Z",
+      "side": 1,
+      "message": "This is also deprecated",
+      "revId": "2594d28791c5f55765e4ecee25d59eca44cbe21c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
