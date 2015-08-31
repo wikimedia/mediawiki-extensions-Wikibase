@@ -1159,7 +1159,6 @@ final class RepoHooks {
 					'resources/wikibase.special/wikibase.special.languageSuggester.js',
 				),
 				'dependencies' => array(
-					'wikibase.special',
 					'jquery.ui.suggester',
 				),
 			),

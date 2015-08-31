@@ -190,6 +190,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param string|null $label
 	 */
 	private function switchForm( $languageCode, $label ) {
+		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 		$this->getOutput()->addModules( 'wikibase.special.languageSuggester' );
 
 		$this->getOutput()->addHTML(
