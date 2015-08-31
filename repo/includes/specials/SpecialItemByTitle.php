@@ -227,7 +227,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				)
 			)
 			. Html::input(
-				'submit',
+				'',
 				$this->msg( 'wikibase-itembytitle-submit' )->text(),
 				'submit',
 				array(
