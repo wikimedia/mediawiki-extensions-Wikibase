@@ -66,7 +66,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		$summary = new Summary( 'wbsetaliases' );
 
 		if ( $value === '' ) {
-			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $languageCode, $entity->getAliases( $languageCode ) );
+			$aliases = $entity->getFingerprint()->getAliasGroup( $languageCode )->getAliases();
+			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $languageCode, $aliases );
 		} else {
 			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $languageCode, explode( '|', $value ) );
 		}

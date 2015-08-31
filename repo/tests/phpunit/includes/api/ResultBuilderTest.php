@@ -347,12 +347,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		//Basic
 		$item->setLabel( 'de', 'foo' );
 		$item->setLabel( 'zh_classical', 'Longer Label' );
-		$item->addAliases( 'en', array( 'bar', 'baz' ) );
-		$item->addAliases( 'zh', array( '????????' ) );
+		$item->setAliases( 'en', array( 'bar', 'baz' ) );
+		$item->setAliases( 'zh', array( '????????' ) );
 		$item->setDescription( 'pt', 'ptDesc' );
 		$item->setDescription( 'pl', 'Longer Description For An Item' );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) ) );
-		$item->addSiteLink( new SiteLink( 'zh_classicalwiki', 'User:Addshore', array() ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', array() );
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
 

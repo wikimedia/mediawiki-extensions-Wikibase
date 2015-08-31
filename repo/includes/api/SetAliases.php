@@ -128,7 +128,11 @@ class SetAliases extends ModifyEntity {
 			$summary->setLanguage( $language );
 
 			// Get the full list of current aliases
-			$summary->addAutoSummaryArgs( $entity->getAliases( $language ) );
+			$fingerprint = $entity->getFingerprint();
+			$aliases = $fingerprint->hasAliasGroup( $language )
+				? $fingerprint->getAliasGroup( $language )->getAliases()
+				: array();
+			$summary->addAutoSummaryArgs( $aliases );
 		}
 
 		$fingerprint = $entity->getFingerprint();

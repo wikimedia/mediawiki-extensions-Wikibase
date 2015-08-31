@@ -61,7 +61,11 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOpLabel->apply( $entity );
 
-		$this->assertEquals( $expectedLabel, $entity->getLabel( 'en' ) );
+		if ( $expectedLabel === '' ) {
+			$this->assertFalse( $entity->getFingerprint()->hasLabel( 'en' ) );
+		} else {
+			$this->assertEquals( $expectedLabel, $entity->getFingerprint()->getLabel( 'en' )->getText() );
+		}
 	}
 
 	public function validateProvider() {
@@ -87,13 +91,14 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	public function testValidate( ChangeOp $changeOp, $valid ) {
 		$entity = $this->provideNewEntity();
 
-		$oldLabels = $entity->getLabels();
+		$oldLabels = $entity->getFingerprint()->getLabels()->toTextArray();
 
 		$result = $changeOp->validate( $entity );
 		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
 
 		// labels should not have changed during validation
-		$this->assertEquals( $oldLabels, $entity->getLabels(), 'Labels modified by validation!' );
+		$newLabels = $entity->getFingerprint()->getLabels()->toTextArray();
+		$this->assertEquals( $oldLabels, $newLabels, 'Labels modified by validation!' );
 	}
 
 	/**
@@ -122,7 +127,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$args[] = array( $entity, new ChangeOpLabel( 'de', null, $validatorFactory ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->removeLabel( 'de' );
+		$entity->getFingerprint()->removeLabel( 'de' );
 		$args[] = array( $entity, new ChangeOpLabel( 'de', 'Zusammenfassung', $validatorFactory
 		), 'add', 'de' );
 

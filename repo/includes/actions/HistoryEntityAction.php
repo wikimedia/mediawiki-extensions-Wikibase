@@ -76,7 +76,8 @@ class HistoryEntityAction extends \HistoryAction {
 		$entity = $content->getEntity();
 
 		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $entity->getLabels() );
+		$labels = $entity->getFingerprint()->getLabels()->toTextArray();
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $labels );
 
 		if ( $labelData ) {
 			$labelText = $labelData['value'];

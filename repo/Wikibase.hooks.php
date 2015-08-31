@@ -667,10 +667,10 @@ final class RepoHooks {
 
 			if ( $content && !$content->isRedirect() ) {
 				$entity = $content->getEntity();
-				$language = $searchPage->getLanguage();
-				$description = $entity->getDescription( $language->getCode() ); // TODO: language fallback!
+				$languageCode = $searchPage->getLanguage()->getCode(); // TODO: language fallback!
 
-				if ( $description !== false && $description !== '' ) {
+				if ( $entity->getFingerprint()->hasDescription( $languageCode ) ) {
+					$description = $entity->getFingerprint()->getDescription( $languageCode )->getText();
 					$attr = array( 'class' => 'wb-itemlink-description' );
 					$link .= wfMessage( 'colon-separator' )->text();
 					$link .= Html::element( 'span', $attr, $description );

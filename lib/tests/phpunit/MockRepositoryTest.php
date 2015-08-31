@@ -84,13 +84,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item = $this->repo->getEntity( $itemId );
 		$this->assertNotNull( $item, "Entity " . $itemId );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $item, "Entity " . $itemId );
-		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
-		$this->assertEquals( 'bar', $item->getLabel( 'de' ) );
+		$this->assertEquals( 'foo', $item->getFingerprint()->getLabel( 'en' )->getText() );
+		$this->assertEquals( 'bar', $item->getFingerprint()->getLabel( 'de' )->getText() );
 
 		// test we can't mess with entities in the repo
 		$item->setLabel( 'en', 'STRANGE' );
 		$item = $this->repo->getEntity( $itemId );
-		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
+		$this->assertEquals( 'foo', $item->getFingerprint()->getLabel( 'en' )->getText() );
 
 		// test latest prop
 		$prop = $this->repo->getEntity( $propId );
@@ -415,7 +415,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$actual = array();
 		foreach ( $entities as $key => $e ) {
 			if ( is_object( $e ) ) {
-				$actual[ $e->getId()->getSerialization() ] = $e->getLabels();
+				$actual[ $e->getId()->getSerialization() ] = $e->getFingerprint()->getLabels()->toTextArray();
 			} else {
 				$actual[ $key ] = $e;
 			}
@@ -533,14 +533,16 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $entity->getId()->getSerialization(), $logEntry['entity'] );
 		$this->assertEquals( 'f00', $logEntry['summary'] );
 
-		$this->assertEquals( $entity->getLabels(), $rev->getEntity()->getLabels() );
-		$this->assertEquals( $entity->getLabels(), $this->repo->getEntity( $entity->getId() )->getLabels() );
+		$savedEntity = $this->repo->getEntity( $entity->getId() );
+
+		$this->assertTrue( $entity->getFingerprint()->equals( $rev->getEntity()->getFingerprint() ) );
+		$this->assertTrue( $entity->getFingerprint()->equals( $savedEntity->getFingerprint() ) );
 
 		// test we can't mess with entities in the repo
 		$entity->getFingerprint()->setLabel( 'en', 'STRANGE' );
 		$entity = $this->repo->getEntity( $entity->getId() );
 		$this->assertNotNull( $entity );
-		$this->assertNotEquals( 'STRANGE', $entity->getLabel( 'en' ) );
+		$this->assertNotEquals( 'STRANGE', $entity->getFingerprint()->getLabel( 'en' )->getText() );
 	}
 
 	public function testSaveRedirect() {

@@ -107,7 +107,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 */
 	public function contentProvider() {
 		$content = $this->newEntityContent();
-		$content->getEntity()->addAliases( 'en', array( 'foo' ) );
+		$content->getEntity()->setAliases( 'en', array( 'foo' ) );
 		$content->getEntity()->setDescription( 'de', 'foobar' );
 		$content->getEntity()->setDescription( 'en', 'baz' );
 		$content->getEntity()->setLabel( 'nl', 'o_O' );
