@@ -11,10 +11,10 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 
 /**
@@ -56,7 +56,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( ItemContent::newEmpty() ) );
 		$entityContentFactory->expects( $this->any() )
 			->method( 'newFromRedirect' )
-			->with( $this->isInstanceOf( 'Wikibase\Lib\Store\EntityRedirect' ) )
+			->with( $this->isInstanceOf( 'Wikibase\DataModel\Entity\EntityRedirect' ) )
 			->will( $this->returnValue( ItemContent::newEmpty() ) );
 
 		return new EditFilterHookRunner(

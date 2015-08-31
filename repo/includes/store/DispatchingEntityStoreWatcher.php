@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\GenericEventDispatcher;
 
