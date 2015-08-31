@@ -45,14 +45,13 @@ class AutoCommentFormatter {
 	 * strings that may be in the database.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/FormatAutocomments
+	 * @see docs/summaries.txt
 	 *
-	 * @param string|false $pre content before the autocomment
 	 * @param string $auto the autocomment unformatted
-	 * @param string|false $post content after the autocomment
 	 *
-	 * @return string|null
+	 * @return string|null The localized summary, or null
 	 */
-	public function formatAutoComment( $pre, $auto, $post ) {
+	public function formatAutoComment( $auto ) {
 		if ( !preg_match( '/^([a-z\-]+)\s*(:\s*(.*?)\s*)?$/', $auto, $matches ) ) {
 			return null;
 		}
@@ -69,29 +68,34 @@ class AutoCommentFormatter {
 
 		// parse the autocomment
 		$auto = $msg->params( $args )->parse();
+		return $auto;
+	}
 
-		// add pre and post fragments
-		if ( $pre === true ) {
-			// written summary $presep autocomment (summary /* section */)
-			$pre = wfMessage( 'autocomment-prefix' )->escaped();
-		} elseif ( $pre !== '' && $pre !== false ) {
-			// written summary $presep autocomment (summary /* section */)
-			$pre .= wfMessage( 'autocomment-prefix' )->escaped();
-		} elseif ( $pre === false ) {
-			$pre = '';
+	/**
+	 * Wrapps a comment by applying the appropriate directionality markers and pre and/or postfix
+	 * separators.
+	 *
+	 * @note This code should be kept in sync with what Linker::formatAutocomments does.
+	 *
+	 * @param boolean $pre True if there is text before the comment, so a prefix separator is needed.
+	 * @param string $comment the localized comment, as returned by formatAutoComment()
+	 * @param boolean $post True if there is text after the comment, so a postfix separator is needed.
+	 *
+	 * @return string
+	 */
+	public function wrapAutoComment( $pre, $comment, $post ) {
+		if ( $pre ) {
+			# written summary $presep autocomment (summary /* section */)
+			$pre = wfMessage( 'autocomment-prefix' )->inLanguage( $this->language )->escaped();
 		}
-		if ( $post !== '' && $post !== false ) {
-			// autocomment $postsep written summary (/* section */ summary)
-			$auto .= wfMessage( 'colon-separator' )->escaped();
-			if ( $post === true ) {
-				$post = '';
-			}
-		} elseif ( $post === false ) {
-			$post = '';
+		if ( $post ) {
+			# autocomment $postsep written summary (/* section */ summary)
+			$comment .= wfMessage( 'colon-separator' )->inLanguage( $this->language )->escaped();
 		}
-
-		$auto = '<span class="autocomment">' . $auto . '</span>';
-		$comment = $pre . $this->language->getDirMark() . '<span dir="auto">' . $auto . '</span>' . $post;
+		$comment = '<span class="autocomment">' . $comment . '</span>';
+		$comment = $pre . $this->language->getDirMark()
+			. '<span dir="auto">' . $comment;
+		$comment .= '</span>';
 
 		return $comment;
 	}
