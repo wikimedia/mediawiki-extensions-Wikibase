@@ -8,8 +8,8 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Repo\WikibaseRepo;
 

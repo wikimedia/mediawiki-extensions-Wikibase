@@ -13,7 +13,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use WikiPage;

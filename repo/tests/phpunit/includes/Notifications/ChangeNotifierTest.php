@@ -8,11 +8,11 @@ use Revision;
 use RuntimeException;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\WikibaseRepo;
 
