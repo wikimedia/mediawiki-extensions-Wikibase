@@ -130,7 +130,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 				'id' => 'wb-itembytitle-submit',
 				'class' => 'wb-button',
 				'type' => 'submit',
-				'name' => 'submit',
+				'name' => '',
 			) );
 
 		$cases['empty'] = array( '', null, $matchers );
