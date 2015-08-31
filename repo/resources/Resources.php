@@ -144,9 +144,6 @@ return call_user_func( function() {
 			'styles' => array(
 				'wikibase.special/wikibase.special.css'
 			),
-			'dependencies' => array(
-				'wikibase'
-			)
 		),
 
 		'wikibase.special.itemByTitle' => $moduleTemplate + array(
@@ -155,7 +152,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.sites',
-				'wikibase.special',
 				'jquery.ui.suggester',
 				'oojs-ui'
 			)
