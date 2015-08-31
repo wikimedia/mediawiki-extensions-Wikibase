@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_8f0ee78f",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-31T09:35:07Z",
+      "side": 1,
+      "message": "tried to explain better.",
+      "parentUuid": "6ec1af18_2fc7b368",
+      "revId": "013b777444f94f9637d11df618b3fd3eda4def9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_efac4b9f",
         "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-31T08:57:22Z",
       "side": 1,
       "message": "We should keep a TODO here, so we don\u0027t forget to re-add $newComment[\u0027key\u0027] \u003d $comment; when we introduce summary translation.",
+      "revId": "013b777444f94f9637d11df618b3fd3eda4def9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_af13a3b7",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-31T09:35:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_efac4b9f",
       "revId": "013b777444f94f9637d11df618b3fd3eda4def9e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
