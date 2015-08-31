@@ -4,8 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use DataTypes\DataTypeFactory;
 use Html;
-use OutOfBoundsException;
-use Title;
+use Linker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -47,29 +46,14 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	private $propertyInfoStore;
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookup
-	 */
-	private $labelDescriptionLookup;
-
-	/**
 	 * @var string
 	 */
 	private $dataType;
 
 	/**
-	 * @var EntityIdFormatter
-	 */
-	private $entityIdFormatter;
-
-	/**
 	 * @var EntityTitleLookup
 	 */
 	private $titleLookup;
-
-	/**
-	 * @var BufferingTermLookup
-	 */
-	private $bufferingTermLookup;
 
 	public function __construct() {
 		parent::__construct( 'ListProperties' );
@@ -79,10 +63,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$this->initServices(
 			$wikibaseRepo->getDataTypeFactory(),
 			$wikibaseRepo->getStore()->getPropertyInfoStore(),
-			$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getBufferingTermLookup()
+			$wikibaseRepo->getEntityTitleLookup()
 		);
 	}
 
@@ -93,28 +74,11 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	public function initServices(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoStore $propertyInfoStore,
-		EntityIdFormatterFactory $entityIdFormatterFactory,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		EntityTitleLookup $titleLookup,
-		BufferingTermLookup $bufferingTermLookup
+		EntityTitleLookup $titleLookup
 	) {
-		$this->labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			$bufferingTermLookup,
-			$languageFallbackChainFactory->newFromLanguage(
-				$this->getLanguage(),
-				LanguageFallbackChainFactory::FALLBACK_SELF
-				| LanguageFallbackChainFactory::FALLBACK_VARIANTS
-				| LanguageFallbackChainFactory::FALLBACK_OTHERS
-			)
-		);
-
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyInfoStore = $propertyInfoStore;
-		$this->entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormater(
-			$this->labelDescriptionLookup
-		);
 		$this->titleLookup = $titleLookup;
-		$this->bufferingTermLookup = $bufferingTermLookup;
 	}
 
 	/**
@@ -217,42 +181,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 * @return string
 	 */
 	protected function formatRow( $propertyId ) {
-		$title = $this->titleLookup->getTitleForId( $propertyId );
-		if ( !$title->exists() ) {
-			return $this->entityIdFormatter->formatEntityId( $propertyId );
-		}
-
-		$row = $this->getIdHtml( $propertyId, $title );
-		try {
-			$label = $this->labelDescriptionLookup->getLabel( $propertyId )->getText();
-			$row .= wfMessage( 'colon-separator' )->escaped() . $label;
-		} catch ( OutOfBoundsException $e ) {
-			// If there is no label do not add it
-		}
-
-		return $row;
-	}
-
-	/**
-	 * Returns HTML representing the label in the display language (or an appropriate fallback).
-	 *
-	 * @param EntityId|null $entityId
-	 * @param Title|null $title
-	 *
-	 * @return string HTML
-	 */
-	private function getIdHtml( EntityId $entityId = null, $title ) {
-		$idElement =  Html::element(
-			'a',
-			array(
-				'title' => $title ? $title->getPrefixedText() : $entityId->getSerialization(),
-				'href' => $title ? $title->getLocalURL() : '',
-				'class' => 'wb-itemlink-id'
-			),
-			$entityId->getSerialization()
-		);
-
-		return $idElement;
+		return Linker::link( $this->titleLookup->getTitleForId( $propertyId ) );
 	}
 
 	/**
@@ -270,7 +199,8 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			$propertyIds[] = PropertyId::newFromNumber( $numericId );
 		}
 
-		$this->bufferingTermLookup->prefetchTerms( $propertyIds );
+		$globalBufferingTermLookup = WikibaseRepo::getDefaultInstance()->getBufferingTermLookup();
+		$globalBufferingTermLookup->prefetchTerms( $propertyIds );
 
 		return $propertyIds;
 	}

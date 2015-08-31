@@ -9,13 +9,9 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\PropertyInfoStore;
-use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
-use Wikibase\Store\BufferingTermLookup;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialListProperties
@@ -71,23 +67,6 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return BufferingTermLookup
-	 */
-	private function getBufferingTermLookup() {
-		$lookup = $this->getMockBuilder( 'Wikibase\Store\BufferingTermLookup' )
-			->disableOriginalConstructor()
-			->getMock();
-		$lookup->expects( $this->any() )
-			->method( 'prefetchTerms' );
-		$lookup->expects( $this->any() )
-			->method( 'getLabels' )
-			->will( $this->returnCallback( function( PropertyId $propertyId ) {
-				return array( 'en' => 'Property with label ' . $propertyId->getSerialization() );
-			} ) );
-		return $lookup;
-	}
-
-	/**
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
@@ -109,10 +88,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$specialPage->initServices(
 			$this->getDataTypeFactory(),
 			$this->getPropertyInfoStore(),
-			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), new LanguageNameLookup() ),
-			new LanguageFallbackChainFactory(),
-			$this->getEntityTitleLookup(),
-			$this->getBufferingTermLookup()
+			$this->getEntityTitleLookup()
 		);
 
 		return $specialPage;
