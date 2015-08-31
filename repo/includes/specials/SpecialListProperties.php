@@ -222,37 +222,40 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			return $this->entityIdFormatter->formatEntityId( $propertyId );
 		}
 
-		$row = $this->getIdHtml( $propertyId, $title );
+		$labelTerm = null;
 		try {
-			$label = $this->labelDescriptionLookup->getLabel( $propertyId )->getText();
-			$row .= wfMessage( 'colon-separator' )->escaped() . $label;
+			$labelTerm = $this->labelDescriptionLookup->getLabel( $propertyId );
 		} catch ( OutOfBoundsException $e ) {
 			// If there is no label do not add it
 		}
 
-		return $row;
-	}
-
-	/**
-	 * Returns HTML representing the label in the display language (or an appropriate fallback).
-	 *
-	 * @param EntityId|null $entityId
-	 * @param Title|null $title
-	 *
-	 * @return string HTML
-	 */
-	private function getIdHtml( EntityId $entityId = null, $title ) {
-		$idElement =  Html::element(
+		$row = Html::rawElement(
 			'a',
 			array(
-				'title' => $title ? $title->getPrefixedText() : $entityId->getSerialization(),
-				'href' => $title ? $title->getLocalURL() : '',
-				'class' => 'wb-itemlink-id'
+				'title' => $title ? $title->getPrefixedText() : $propertyId->getSerialization(),
+				'href' => $title ? $title->getLocalURL() : ''
 			),
-			$entityId->getSerialization()
+			Html::rawElement(
+				'span',
+				array( 'class' => 'wb-itemlink' ),
+				Html::element(
+					'span',
+					array(
+						'class' => 'wb-itemlink-label',
+						'lang' => $labelTerm ? $labelTerm->getLanguageCode() : '',
+					),
+					$labelTerm ? $labelTerm->getText() : ''
+				) .
+				( $labelTerm ? ' ' : '' ) .
+				Html::element(
+					'span',
+					array( 'class' => 'wb-itemlink-id' ),
+					'(' . $propertyId->getSerialization() . ')'
+				)
+			)
 		);
 
-		return $idElement;
+		return $row;
 	}
 
 	/**
