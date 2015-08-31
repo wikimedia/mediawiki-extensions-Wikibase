@@ -49,7 +49,7 @@ class ParserOutputDataUpdaterTest extends \MediaWikiTestCase {
 		$links = $item->getSiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'Talk:Foo de' );
 		$links->addNewSiteLink( 'enwiki', 'Talk:Foo en' );
-		$links->addNewSiteLink( 'srwiki', 'Talk:Foo sr' );
+		$links->addNewSiteLink( 'srwiki', 'Talk:Foo sr', array( new ItemId( 'Q17' ) ) );
 		$items[] = $item;
 
 		return $items;
@@ -69,6 +69,7 @@ class ParserOutputDataUpdaterTest extends \MediaWikiTestCase {
 
 		return new ParserOutputDataUpdater(
 			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
+			$this->mockRepo,
 			$this->mockRepo,
 			'srwiki'
 		);
@@ -189,6 +190,29 @@ class ParserOutputDataUpdaterTest extends \MediaWikiTestCase {
 				'Foo xx'
 			)
 		);
+	}
+
+	public function testUpdateBadgesProperty() {
+		$parserOutput = new ParserOutput();
+
+		$title = Title::newFromText( 'Talk:Foo sr' );
+
+		$parserOutputDataUpdater = $this->getParserOutputDataUpdater();
+
+		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		$this->assertTrue( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
+	}
+
+	public function testUpdateBadgesPropertyRemovesPreviousData() {
+		$parserOutput = new ParserOutput();
+		$parserOutput->setProperty( 'wikibase-badge-Q17', true );
+
+		$title = Title::newFromText( 'Foo sr' );
+
+		$parserOutputDataUpdater = $this->getParserOutputDataUpdater();
+
+		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		$this->assertFalse( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
 	}
 
 }
