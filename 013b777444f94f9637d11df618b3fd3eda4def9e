@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_2fc7b368",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T08:57:22Z",
+      "side": 1,
+      "message": "What is meant by \"legacy\" here? When a sitelink is added or removed, and when the item is created or deleted, we should keep showing specialized local messages instead of the message from the repo. Everything except \u0027wikibase-comment-update\u0027 shoudl stay the same.",
+      "revId": "013b777444f94f9637d11df618b3fd3eda4def9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_efac4b9f",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T08:57:22Z",
+      "side": 1,
+      "message": "We should keep a TODO here, so we don\u0027t forget to re-add $newComment[\u0027key\u0027] \u003d $comment; when we introduce summary translation.",
+      "revId": "013b777444f94f9637d11df618b3fd3eda4def9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
