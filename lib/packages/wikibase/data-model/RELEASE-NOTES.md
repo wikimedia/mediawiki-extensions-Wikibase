@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 4.3 (dev)
+
+* Added `isEmpty` to `EntityDocument`
+
 ## Version 4.2 (2015-08-26)
 
 * Added `EntityRedirect`

@@ -323,17 +323,6 @@ abstract class Entity implements \Comparable, FingerprintHolder, EntityDocument 
 	}
 
 	/**
-	 * Returns if the Entity has no content.
-	 * Having an id set does not count as having content.
-	 *
-	 * @since 0.1
-	 * @deprecated since 1.0
-	 *
-	 * @return bool
-	 */
-	public abstract function isEmpty();
-
-	/**
 	 * Removes all content from the Entity.
 	 * The id is not part of the content.
 	 *
