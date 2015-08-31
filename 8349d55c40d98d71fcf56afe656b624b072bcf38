@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_d2d6d853",
+        "filename": "repo/tests/phpunit/data/api/getentities.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T11:33:21Z",
+      "side": 1,
+      "message": "Err, is there any proper reason for this? The order is really insignificant, right?",
+      "revId": "8349d55c40d98d71fcf56afe656b624b072bcf38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
