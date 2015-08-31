@@ -186,7 +186,7 @@ class WikibaseRepo {
 	/**
 	 * @var TermLookup|null
 	 */
-	private $termLookup;
+	private $termLookup = null;
 
 	/**
 	 * @var ContentLanguages|null
@@ -592,7 +592,7 @@ class WikibaseRepo {
 	 * @return TermBuffer
 	 */
 	public function getTermBuffer() {
-		return $this->getTermLookup();
+		return $this->getBufferingTermLookup();
 	}
 
 	/**
