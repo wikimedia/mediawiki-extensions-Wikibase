@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_efc52b65",
+        "filename": "repo/sql/AddBadgesPerSitelink.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-08-31T08:54:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_8f0907e2",
+      "revId": "329be4892a2c00fe6985d3df27ca9bb3857ac3b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_2f11f3fb",
         "filename": "repo/sql/AddBadgesPerSitelink.sql",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-31T08:49:46Z",
       "side": 1,
       "message": "What use case does this cover?",
+      "revId": "329be4892a2c00fe6985d3df27ca9bb3857ac3b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8fb6e7f4",
+        "filename": "repo/sql/AddBadgesPerSitelink.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-08-31T08:54:34Z",
+      "side": 1,
+      "message": "Updated the index. It is used to find badges per site but was set wrong for some reason.",
+      "parentUuid": "6ec1af18_2f11f3fb",
       "revId": "329be4892a2c00fe6985d3df27ca9bb3857ac3b1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
