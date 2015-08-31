@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_2f76d301",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-08-31T09:43:37Z",
+      "side": 1,
+      "message": "Personally I see little point in this change.\nInfact, more lines means less chances of merge conflicts.",
+      "revId": "f572d6a50e1db637e3138703a022984d7de2a205",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
