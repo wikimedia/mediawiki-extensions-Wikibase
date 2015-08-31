@@ -582,6 +582,7 @@ final class WikibaseClient {
 			$this->parserOutputDataUpdater = new ParserOutputDataUpdater(
 				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getStore()->getSiteLinkLookup(),
+				$this->getStore()->getEntityLookup(),
 				$this->settings->getSetting( 'siteGlobalID' )
 			);
 		}

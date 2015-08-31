@@ -168,6 +168,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$parserOutputDataUpdater = new ParserOutputDataUpdater(
 			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
 			$mockRepo,
+			$mockRepo,
 			$settings->getSetting( 'siteGlobalID' )
 		);
 
