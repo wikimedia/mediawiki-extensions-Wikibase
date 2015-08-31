@@ -39,9 +39,9 @@ use Wikibase\DataModel\Services\EntityId\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\DirectSqlStore;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
@@ -60,6 +60,7 @@ use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
+use Wikibase\Store\BufferingTermLookup;
 use Wikibase\StringNormalizer;
 
 /**
@@ -164,6 +165,13 @@ final class WikibaseClient {
 	private $dataTypeDefinitions;
 
 	/**
+	 * @var TermLookup|null
+	 */
+	private $termLookup = null;
+
+	/**
+	 * @since 0.4
+	 *
 	 * @param SettingsArray $settings
 	 * @param Language $contentLanguage
 	 * @param DataTypeDefinitions $dataTypeDefinitions
@@ -216,10 +224,31 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return TermBuffer
+	 */
+	public function getTermBuffer() {
+		return $this->getBufferingTermLookup();
+	}
+
+	/**
 	 * @return TermLookup
 	 */
-	private function getTermLookup() {
-		return new EntityRetrievingTermLookup( $this->getEntityLookup() );
+	public function getTermLookup() {
+		return $this->getBufferingTermLookup();
+	}
+
+	/**
+	 * @return BufferingTermLookup
+	 */
+	public function getBufferingTermLookup() {
+		if ( !$this->termLookup ) {
+			$this->termLookup = new BufferingTermLookup(
+				$this->getStore()->getTermIndex(),
+				1000 // @todo: configure buffer size
+			);
+		}
+
+		return $this->termLookup;
 	}
 
 	/**

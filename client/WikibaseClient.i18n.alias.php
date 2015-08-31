@@ -15,6 +15,7 @@ $specialPageAliases = array();
 /** English (English) */
 $specialPageAliases['en'] = array(
 	'UnconnectedPages' => array( 'UnconnectedPages', 'WithoutConnection', 'WithoutSitelinks' ),
+	'PagesWithBadges' => array( 'PagesWithBadges', 'QueryBadges' ),
 );
 
 /** Arabic (العربية) */

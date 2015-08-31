@@ -90,6 +90,7 @@ class MockClientStore implements ClientStore {
 	 */
 	public function getTermIndex() {
 		// FIXME: Incomplete
+		return new MockTermIndex( array() );
 	}
 
 	/**
