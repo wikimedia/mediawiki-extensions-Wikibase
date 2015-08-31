@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_838560d5",
+        "filename": "client/includes/ParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T18:08:22Z",
+      "side": 1,
+      "message": "This is potentially expensive. But it should only happen for the connected item, which should already be cached locally, so ok.",
+      "revId": "773afb9dd4f8f147aaa1b3ae8414742e9005fa73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
