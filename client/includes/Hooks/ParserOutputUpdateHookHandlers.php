@@ -134,6 +134,7 @@ class ParserOutputUpdateHookHandlers {
 
 		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
 		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutput );
+		$this->parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
 
 		if ( $useRepoLinks || $this->alwaysSort ) {
 			$interwikiLinks = $parserOutput->getLanguageLinks();

@@ -7,7 +7,9 @@ use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -27,6 +29,11 @@ class ParserOutputDataUpdater {
 	private $otherProjectsSidebarGeneratorFactory;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @var SiteLinkLookup
 	 */
 	private $siteLinkLookup;
@@ -40,11 +47,13 @@ class ParserOutputDataUpdater {
 	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
 	 *            Use the factory here to defer initialization of things like Site objects.
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param EntityLookup $entityLookup
 	 * @param string $siteId The global site ID for the local wiki
 	 */
 	public function __construct(
 		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
 		SiteLinkLookup $siteLinkLookup,
+		EntityLookup $entityLookup,
 		$siteId
 	) {
 		if ( !is_string( $siteId ) ) {
@@ -52,6 +61,7 @@ class ParserOutputDataUpdater {
 		}
 
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
+		$this->entityLookup = $entityLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
 	}
@@ -83,13 +93,38 @@ class ParserOutputDataUpdater {
 		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId ) {
-			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory->
-				getOtherProjectsSidebarGenerator();
+			$otherProjectsSidebarGenerator = $this->otherProjectsSidebarGeneratorFactory
+				->getOtherProjectsSidebarGenerator();
 
 			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
 			$out->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
 		} else {
 			$out->setExtensionData( 'wikibase-otherprojects-sidebar', array() );
+		}
+	}
+
+	/**
+	 * @param Title $title
+	 * @param ParserOutput $out
+	 */
+	public function updateBadgesProperty( Title $title, ParserOutput $out ) {
+		$itemId = $this->getItemIdForTitle( $title );
+
+		// first reset all badges in case one got removed
+		foreach ( $out->getProperties() as $name => $property ) {
+			if ( strpos( $name, 'wikibase-badge-' ) === 0 ) {
+				$out->unsetProperty( $name );
+			}
+		}
+
+		if ( $itemId ) {
+			/** @var Item $item */
+			$item = $this->entityLookup->getEntity( $itemId );
+			$siteLink = $item->getSiteLinkList()->getBySiteId( $this->siteId );
+
+			foreach ( $siteLink->getBadges() as $badge ) {
+				$out->setProperty( 'wikibase-badge-' . $badge->getSerialization(), true );
+			}
 		}
 	}
 
