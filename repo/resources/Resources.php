@@ -143,6 +143,17 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.special.itemByTitle' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.special/wikibase.special.itemByTitle.js',
+			),
+			'dependencies' => array(
+				'wikibase.sites',
+				'jquery.ui.suggester',
+				'oojs-ui-widgets'
+			)
+		),
+
 		'wikibase.special' => $moduleTemplate + array(
 			'position' => 'top',
 			'styles' => array(
