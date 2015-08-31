@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_72d12425",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-31T12:16:32Z",
+      "side": 1,
+      "message": "hmm, should at least be \"Wikibase\" but not sure most users would understand what \"Wikibase\" is.\n\nI prefer my original working (the idea there is a limit is useful to know) and we could add \"from {{WBREPONAME}}\" so it would say \"from Wikidata\" or could say \"Exceeded limit for number of {{WBREPONAME}} entities...\"",
+      "revId": "76d522b10e1dd277e37365c0b256169ed0eb1236",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
