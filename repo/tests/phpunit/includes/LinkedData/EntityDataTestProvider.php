@@ -2,10 +2,10 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * Provider class for EntityData tests.

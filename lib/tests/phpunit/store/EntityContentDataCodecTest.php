@@ -6,13 +6,13 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * @covers Wikibase\Lib\Store\EntityContentDataCodec

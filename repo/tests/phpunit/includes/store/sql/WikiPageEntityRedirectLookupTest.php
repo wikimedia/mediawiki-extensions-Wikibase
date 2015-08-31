@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Store\SQL\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\WikibaseRepo;
 

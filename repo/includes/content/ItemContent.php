@@ -9,8 +9,8 @@ use MWException;
 use Title;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\ItemSearchTextGenerator;
 
 /**
