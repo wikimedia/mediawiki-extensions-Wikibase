@@ -14,24 +14,63 @@
 			return; // not the right special page
 		}
 
-		// this will build a drop-down for the language selection:
-		var sites = wb.sites.getSites(),
-			siteList = [];
+		function getSite( input ) {
+			return wb.sites.getSite( input.replace( /.*\(|\).*/gi, '' ) );
+		}
+
+		// this will build a drop-down for the site selection:
+		var api,
+			sites = wb.sites.getSites(),
+			siteList = [],
+			$input = $( '#wb-itembytitle-sitename' );
 		for( var siteId in sites ) {
 			if( sites.hasOwnProperty( siteId ) ) {
 				siteList.push( sites[ siteId ].getName() + ' (' + siteId + ')' );
 			}
 		}
-		$( '#wb-itembytitle-sitename' )
+		$input
 		.attr( 'autocomplete', 'off' )
-		.suggester( { source: siteList } );
+		.suggester( { source: siteList } )
+		.on( 'change', function () {
+			var site = getSite( $input.val() );
+			if ( site ) {
+				var apiUrl = site.getApi();
+				if ( !api || apiUrl !== api.apiUrl ) {
+					api = new mw.Api( {
+						ajax: {
+							url: apiUrl,
+							dataType: 'jsonp'
+						}
+					} );
+				}
+			} else {
+				api = null;
+			}
+		} );
+		$( '#pagename' )
+		.attr( 'autocomplete', 'off' )
+		.on( 'input', function () {
+			if ( api ) {
+				var $pagename = $( this );
+				api.get( {
+					action: 'query',
+					list: 'allpages',
+					apprefix: $pagename.val()
+				} ).done( function ( data ) {
+					$pagename.suggester( {
+						source: $.map( data.query.allpages, function ( item ) {
+							return item.title;
+						} )
+					} );
+				} );
+			}
+		} );
 		// Hackety hack hack...
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
 		$( '#wb-itembytitle-form1' ).submit( function() {
-			var $input = $( '#wb-itembytitle-sitename' );
-			var langID = String( $input.val().replace( /.*\(|\).*/gi, '' ) );
-			if ( wb.sites.getSite( langID ).getId() !== undefined ) {
-				$input.val( wb.sites.getSite( langID ).getId() );
+			var site = getSite( $input.val() );
+			if ( site ) {
+				$input.val( site.getId() );
 			}
 		} );
 	} );
