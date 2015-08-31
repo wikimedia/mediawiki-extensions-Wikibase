@@ -141,7 +141,27 @@ class ExternalChangeFactory {
 	}
 
 	/**
-	 * @fixme refactor comments handling!
+	 * This method transforms the comments field into rc_params into an appropriate
+	 * comment value for ExternalChange.
+	 *
+	 * $comment can be a string or an array with some additional data.
+	 *
+	 * String comments are either 'wikibase-comment-update' (legacy) or have
+	 * comments from the repo, such as '/ wbsetclaim-update:2||1 / [[Property:P213]]: [[Q850]]'.
+	 *
+	 * We don't yet parse repo comments in the client, so for now, we use the
+	 * generic 'wikibase-comment-update' for these.
+	 *
+	 * Comment arrays may contain a message key that provide autocomments for stuff
+	 * like log actions (item deletion) or edits that have no meaningful summary
+	 * to use in the client.
+	 *
+	 *  - 'wikibase-comment-unlinked' (when the sitelink to the given page is removed on the repo)
+	 *  - 'wikibase-comment-add' (when the item is created, with sitelink to the given page)
+	 *  - 'wikibase-comment-remove' (when the item is deleted, the page becomes unconnected)
+	 *  - 'wikibase-comment-restore' (when the item is undeleted and reconnected to the page)
+	 *  - 'wikibase-comment-sitelink-add' (and other sitelink messages, unused)
+	 *  - 'wikibase-comment-update' (legacy, generic, item updated commment)
 	 *
 	 * @param array|string $comment
 	 * @param string $type
@@ -163,9 +183,10 @@ class ExternalChangeFactory {
 			} else {
 				$newComment['key'] = $comment['message'];
 			}
-		} elseif ( is_string( $comment ) ) {
-			$newComment['key'] = $comment;
 		}
+
+		// @todo handle $comment values that are strings or whatever format
+		// that we use to transfer autocomments from repo to client.
 
 		return $newComment;
 	}
