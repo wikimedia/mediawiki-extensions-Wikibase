@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_8f0907e2",
+        "filename": "repo/sql/AddBadgesPerSitelink.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-08-31T08:47:30Z",
+      "side": 1,
+      "message": "we should have a primary key in the table, such as bps_row_id with autoincrement\n\nsuch columns are important for whenever schema changes get done (can be done without putting site into read only, using online schema change tool)",
+      "revId": "329be4892a2c00fe6985d3df27ca9bb3857ac3b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
