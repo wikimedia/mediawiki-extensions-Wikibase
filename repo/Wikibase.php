@@ -189,6 +189,7 @@ call_user_func( function() {
 	$wgAPIModules['wbparsevalue'] = 'Wikibase\Repo\Api\ParseValue';
 	$wgAPIModules['wbavailablebadges'] = 'Wikibase\Repo\Api\AvailableBadges';
 	$wgAPIModules['wbcreateredirect'] = 'Wikibase\Repo\Api\CreateRedirect';
+	$wgAPIModules['wbquerybadges'] = 'Wikibase\Repo\Api\QueryBadges';
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] = 'Wikibase\Repo\Specials\SpecialNewItem';
