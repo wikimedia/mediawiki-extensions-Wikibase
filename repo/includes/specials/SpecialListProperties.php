@@ -292,4 +292,13 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		return $propertyInfo;
 	}
 
+	/**
+	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
+	 *
+	 * @since 0.4
+	 */
+	protected function getTitleForNavigation() {
+		return $this->getPageTitle( $this->dataType );
+	}
+
 }
