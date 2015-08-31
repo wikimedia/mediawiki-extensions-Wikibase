@@ -66,7 +66,7 @@ class ItemByTitleHelper {
 	 * @param bool $normalize
 	 *
 	 * @throws UsageException
-	 * @return array( ItemId[], array() )
+	 * @return array( ItemId[], array[] )
 	 *         List containing valid ItemIds and MissingItem site title combinations
 	 */
 	public function getItemIds( array $sites, array $titles, $normalize ) {
