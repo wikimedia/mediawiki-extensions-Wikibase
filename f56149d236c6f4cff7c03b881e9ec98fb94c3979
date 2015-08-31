@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_529bc878",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T12:24:01Z",
+      "side": 0,
+      "message": "Rationale: if there is no site link diff, this class should not be used at all.",
+      "revId": "f56149d236c6f4cff7c03b881e9ec98fb94c3979",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

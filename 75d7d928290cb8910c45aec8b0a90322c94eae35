@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_f2ac349f",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T12:24:01Z",
+      "side": 1,
+      "message": "Rationale: consolidate logic for generating the comment in a single function",
+      "revId": "75d7d928290cb8910c45aec8b0a90322c94eae35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_b2b22cf7",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T12:24:01Z",
+      "side": 1,
+      "message": "Rationale: Clear fallback logic: first try to generate a comment from the SiteLink diff. Then try to use the original comment. If all fails, use a generic ocmment message.",
+      "revId": "75d7d928290cb8910c45aec8b0a90322c94eae35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_7298447b",
+        "filename": "client/includes/recentchanges/ExternalRecentChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T12:24:01Z",
+      "side": 1,
+      "message": "Rationale: If we have a comment, store it in RC, as usual.\nNote that this assumes any formatting will take place before writing to the RC table. \nThis implies that formatting will be done in the wiki\u0027s content language.\nIf formatting in the user language is needed, it has to be re-done upon display, based on the data in rc_info.",
+      "revId": "75d7d928290cb8910c45aec8b0a90322c94eae35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_12a1c09e",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentCreatorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T12:24:01Z",
+      "side": 1,
+      "message": "Rationale: Trigger use of the programmatic default. Should not change the outcome.",
+      "revId": "75d7d928290cb8910c45aec8b0a90322c94eae35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_9284d010",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T12:24:01Z",
+      "side": 1,
+      "message": "Rationale: prettify",
+      "revId": "75d7d928290cb8910c45aec8b0a90322c94eae35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_329e3c67",
+        "filename": "lib/tests/phpunit/changes/TestChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-08-31T12:24:01Z",
+      "side": 1,
+      "message": "Rationale: completeness/consistency",
+      "revId": "75d7d928290cb8910c45aec8b0a90322c94eae35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
