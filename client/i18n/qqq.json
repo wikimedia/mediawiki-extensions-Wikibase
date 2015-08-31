@@ -74,7 +74,7 @@
 	"wikibase-error-deserialize-error": "Generic error when invalid (undeserializable) data has been given.",
 	"wikibase-error-serialize-error": "Generic error for when entity data failed to serialize or cannot be handled.",
 	"wikibase-error-invalid-entity-id": "Generic error message when an invalid entity ID was entered.",
-	"wikibase-error-exceeded-entity-access-limit": "Error message for when the entity access limit is exceeded on a page. There is a limit on the number of full entities that can be loaded on any given page, via Scribunto and/or the property parser function.",
+	"wikibase-error-exceeded-entity-access-limit": "Error message shown in rendered page output when too many entities are accessed on the page. The limit on the number of full entities that can be loaded on any given page, via Scribunto and/or the property parser function, is controlled by the <tt>entityAccessLimit</tt> configuration setting.",
 	"unconnectedpages": "{{doc-special|UnconnectedPages}}",
 	"unconnectedpages-summary": "Introductory text used on Special:UnconnectedPages.",
 	"wikibase-unconnectedpages-page": "Label for the input field to specify the title of the article at which the search result list should start. This belongs to the options box of the special page for pages not connected to sitelinks.",
