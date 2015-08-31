@@ -437,6 +437,10 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 	}
 
 	/**
+	 * Tests the FormatAutocomment hook provided by RepoHooks.
+	 *
+	 * @todo move to RepoHooksTest
+	 *
 	 * @dataProvider providerOnFormat
 	 */
 	public function testOnFormat( $model, $root, $pre, $auto, $post, $title, $local, $expected ) {
@@ -459,7 +463,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'', '', '',
+				false, '', false,
 				'Title',
 				false,
 				null
@@ -467,7 +471,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'foo', '', 'bar',
+				false, '', false,
 				'Title',
 				false,
 				null
@@ -475,50 +479,50 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'foo', 'wbeditentity', 'bar',
+				true, 'wbeditentity', true,
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?</span></span>bar!'
+				'!<span dir="auto"><span class="autocomment">.*?: </span></span>!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|en', 'bar',
+				true, 'wbsetlabel-set:1|en', true,
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[en\].*?</span></span>bar!'
+				'!<span dir="auto"><span class="autocomment">.*?\[en\].*?: </span></span>!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|<>', 'bar',
+				false, 'wbsetlabel-set:1|<>', false,
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>bar!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|&lt;&gt;', 'bar',
+				false, 'wbsetlabel-set:1|&lt;&gt;', false,
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>bar!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|&', 'bar',
+				false, 'wbsetlabel-set:1|&', false,
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span></span>bar!'
+				'!<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span></span>!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'foo', 'wbsetlabel-set:1|…', 'bar',
+				false, 'wbsetlabel-set:1|…', false,
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[…\].*?</span></span>bar!'
+				'!<span dir="auto"><span class="autocomment">.*?\[…\].*?</span></span>!'
 			)
 		);
 	}
