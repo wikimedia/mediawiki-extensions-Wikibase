@@ -168,6 +168,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$parserOutputDataUpdater = new ParserOutputDataUpdater(
 			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
 			$mockRepo,
+			$mockRepo,
 			$settings->getSetting( 'siteGlobalID' )
 		);
 
@@ -176,7 +177,6 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$namespaceChecker,
 			$mockRepo,
 			$mockRepo,
-			$parserOutputDataUpdater,
 			$this->getSiteStore(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'languageLinkSiteGroup' )
@@ -191,6 +191,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		return new ParserOutputUpdateHookHandlers(
 			$namespaceChecker,
 			$langLinkHandler,
+			$parserOutputDataUpdater,
 			$interwikiSorter,
 			$settings->getSetting( 'alwaysSort' )
 		);

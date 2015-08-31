@@ -47,11 +47,6 @@ class LangLinkHandler {
 	private $entityLookup;
 
 	/**
-	 * @var ParserOutputDataUpdater
-	 */
-	private $parserOutputDataUpdater;
-
-	/**
 	 * @var SiteStore
 	 */
 	private $siteStore;
@@ -71,7 +66,6 @@ class LangLinkHandler {
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
 	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
 	 * @param EntityLookup $entityLookup An entity lookup service
-	 * @param ParserOutputDataUpdater $parserOutputDataUpdater
 	 * @param SiteStore $sites
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
@@ -81,7 +75,6 @@ class LangLinkHandler {
 		NamespaceChecker $namespaceChecker,
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
-		ParserOutputDataUpdater $parserOutputDataUpdater,
 		SiteStore $siteStore,
 		$siteId,
 		$siteGroup
@@ -90,7 +83,6 @@ class LangLinkHandler {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityLookup = $entityLookup;
-		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
 		$this->siteStore = $siteStore;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
@@ -420,30 +412,6 @@ class LangLinkHandler {
 	 */
 	public function getInterwikiCodeFromSite( Site $site ) {
 		return $site->getLanguageCode();
-	}
-
-	/**
-	 * Add wikibase_item parser output property
-	 *
-	 * @since 0.4
-	 *
-	 * @param Title $title
-	 * @param ParserOutput $out
-	 *
-	 * @deprecated instead use ParserOutputDataUpdater::updateItemIdProperty
-	 */
-	public function updateItemIdProperty( Title $title, ParserOutput $out ) {
-		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $out );
-	}
-
-	/**
-	 * @param Title $title
-	 * @param ParserOutput $out
-	 *
-	 * @deprecated instead use ParserOutputDataUpdater::updateOtherProjectsLinksData
-	 */
-	public function updateOtherProjectsLinksData( Title $title, ParserOutput $out ) {
-		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $out );
 	}
 
 }
