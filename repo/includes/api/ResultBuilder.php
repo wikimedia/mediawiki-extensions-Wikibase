@@ -516,20 +516,36 @@ class ResultBuilder {
 			'claims/*/*/references/*/snaks' => 'id',
 			'claims/*/*/qualifiers' => 'id',
 			'claims' => 'id',
-			'descriptions' => null,
-			'labels' => null,
-			'sitelinks' => null,
+			'descriptions' => 'language',
+			'labels' => 'language',
+			'sitelinks' => 'site',
 		);
 		foreach ( $arrayTypes as $path => $keyName ) {
 			$serialization = $this->modifier->modifyUsingCallback(
 				$serialization,
 				$path,
-				$this->callbackFactory->getCallbackToSetArrayType(
-					( $keyName === null ? 'array' : 'kvp' ),
-					$keyName
-				)
+				$this->callbackFactory->getCallbackToSetArrayType( 'kvp', $keyName )
 			);
 		}
+
+		$kvpMergeArrays = array(
+			'descriptions',
+			'labels',
+			'sitelinks',
+		);
+		foreach ( $kvpMergeArrays as $path ) {
+			$serialization = $this->modifier->modifyUsingCallback(
+				$serialization,
+				$path,
+				function( $array ) {
+					if ( is_array( $array ) ) {
+						$array[ApiResult::META_KVP_MERGE] = true;
+					}
+					return $array;
+				}
+			);
+		}
+
 		$indexTags = array(
 			'labels' => 'label',
 			'descriptions' => 'description',
@@ -554,6 +570,7 @@ class ResultBuilder {
 				$this->callbackFactory->getCallbackToIndexTags( $tag )
 			);
 		}
+
 		return $serialization;
 	}
 
@@ -723,8 +740,9 @@ class ResultBuilder {
 		$array = $this->modifier->modifyUsingCallback(
 			$array,
 			null,
-			$this->callbackFactory->getCallbackToSetArrayType( 'array' )
+			$this->callbackFactory->getCallbackToSetArrayType( 'kvp', 'site' )
 		);
+		$array[ApiResult::META_KVP_MERGE] = true;
 		$array = $this->modifier->modifyUsingCallback(
 			$array,
 			'*/badges',
@@ -753,8 +771,9 @@ class ResultBuilder {
 			$values = $this->modifier->modifyUsingCallback(
 				$values,
 				null,
-				$this->callbackFactory->getCallbackToSetArrayType( 'array' )
+				$this->callbackFactory->getCallbackToSetArrayType( 'kvp', 'site' )
 			);
+			$values[ApiResult::META_KVP_MERGE] = true;
 		}
 		$this->setList( $path, 'sitelinks', $values, 'sitelink' );
 	}
