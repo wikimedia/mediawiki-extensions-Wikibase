@@ -58,6 +58,7 @@
 	"wikibase-error-deserialize-error": "Andmejadastuse tagasipööramine ebaõnnestus.",
 	"wikibase-error-serialize-error": "Andmete jadastamine ebaõnnestus.",
 	"wikibase-error-invalid-entity-id": "Sisestatud identifikaator on süsteemis tundmatu. Palun sisesta sobiv olemi identifikaator.",
+	"wikibase-error-exceeded-entity-access-limit": "Pöördutud Vikiandmetes liiga paljude olemite poole.",
 	"unconnectedpages": "Üksustega ühendamata leheküljed",
 	"unconnectedpages-summary": "Sellel leheküljel on loetletud leheküljed, mis pole andmeüksusega ühendatud (nimeruumis, kus on ühendatud üksuste tugi). See loend on järjestatud laskuvalt lehekülje identifikaatori järgi, nii et uuemad leheküljed on eespool.",
 	"wikibase-unconnectedpages-page": "Tulemused alates leheküljest:",

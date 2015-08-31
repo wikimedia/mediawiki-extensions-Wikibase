@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "تعديل",
-	"wikibase-add": "ضيف"
+	"wikibase-add": "ضيف",
+	"wikibase-statements": "بيانات",
+	"wikibase-statementview-rank-normal": "ترتيب طبيعى",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|مرجع واحد|مرجعين|$1 مراجع|$1 مراجع|$1 مرجع|0=مافيش مراجع}}"
 }

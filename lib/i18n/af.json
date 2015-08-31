@@ -19,5 +19,9 @@
 	"wikibase-tooltip-error-details": "Details",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-commonsMedia": "Medialêer van Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-item-summary-wbsetitem": "Nuwe item geskep",
+	"wikibase-item-summary-wbeditentity": "Nuwe item geskep",
+	"wikibase-item-summary-wbeditentity-create": "Nuwe item geskep",
+	"wikibase-item-summary-wbeditentity-update": "Item bygewerk"
 }

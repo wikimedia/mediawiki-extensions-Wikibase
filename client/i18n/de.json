@@ -62,6 +62,7 @@
 	"wikibase-error-deserialize-error": "Daten konnten nicht deserialisiert werden.",
 	"wikibase-error-serialize-error": "Die Daten konnten nicht serialisiert werden",
 	"wikibase-error-invalid-entity-id": "Die eingegebene Kennung ist für das System unbekannt. Bitte verwende eine gültige Objektkennung.",
+	"wikibase-error-exceeded-entity-access-limit": "Auf zu viele {{WBREPONAME}}-Objekte zugegriffen.",
 	"unconnectedpages": "Seiten, die nicht mit Objekten verbunden sind",
 	"unconnectedpages-summary": "Diese Seite listet Seiten ohne verbundenes Datenobjekt auf (in Namensräumen, die verbundene Objekte unterstützen). Die Liste wird absteigend nach der Seitenkennung sortiert, so dass neue Seiten zuerst aufgeführt werden.",
 	"wikibase-unconnectedpages-page": "Ergebnisliste mit Seite starten:",

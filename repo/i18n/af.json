@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Naudefj",
-			"Macofe"
+			"Macofe",
+			"Fwolff"
 		]
 	},
 	"wikibase-desc": "Databank vir gestruktureerde data",
@@ -46,7 +47,7 @@
 	"wikibase-undo-firstrev": "Dit is nie moontlik om die skep van die bladsy ongedaan te maak nie.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Een waarde|$1 waarde}} nog nie gestoor nie",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|inskrywing|inskrywings}}",
-	"wikibase-aliases-empty": "Geen aliases gestel nie",
+	"wikibase-aliases-empty": "Geen aliase gestel nie",
 	"wikibase-propertypage-datatype": "Datatipe",
 	"wikibase-statementview-rank-normal": "Normale rang",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|bron|bronne}}",
@@ -122,10 +123,6 @@
 	"wikibase-entitydata-not-found": "Geen entiteit met ID $1 gevind nie.",
 	"wikibase-entitydata-title": "Entiteitsdata",
 	"wikibase-noentity-createone": "U kan ook [[$1|'n nuwe een skep]].",
-	"wikibase-item-summary-wbsetitem": "Nuwe item geskep",
-	"wikibase-item-summary-wbeditentity": "Nuwe item geskep",
-	"wikibase-item-summary-wbeditentity-create": "Nuwe item geskep",
-	"wikibase-item-summary-wbeditentity-update": "Item bygewerk",
 	"wikibase-listdatatypes-wikibase-item-head": "Item",
 	"wikibase-listdatatypes-commonsmedia-head": "Commons media",
 	"wikibase-listdatatypes-globe-coordinate-head": "Geo-koördinaat",

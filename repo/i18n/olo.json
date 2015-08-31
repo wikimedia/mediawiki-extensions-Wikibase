@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Denö"
+			"Denö",
+			"Ilja.mos"
 		]
 	},
-	"wikibase-edit": "korjata"
+	"wikibase-edit": "korjata",
+	"wikibase-add": "ližätä"
 }

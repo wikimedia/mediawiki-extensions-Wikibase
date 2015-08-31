@@ -4,7 +4,9 @@
 			"Ghaly"
 		]
 	},
+	"tooltip-t-wikibase": "الربط بعنصر مرتبط ف مستودع البيانات",
 	"wikibase-comment-update": "تغيير عنصر {{WBREPONAME}}",
+	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الوصلات",
 	"wikibase-editlinkstitle": "تعديل الروابط ما بين اللغات",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

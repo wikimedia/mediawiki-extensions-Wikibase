@@ -1,18 +1,27 @@
 {
 	"@metadata": {
 		"authors": [
-			"C.R."
+			"C.R.",
+			"Candalua"
 		]
 	},
 	"tooltip-t-wikibase": "Cullegamento d' 'o link a n'elemento 'e ll'archivio 'e date",
 	"wikibase-comment-update": "Elemento {{WBREPONAME}} cagnato",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|cagnamiento|cagnamiente}}",
 	"wikibase-dataitem": "Elemento {{WBREPONAME}}",
 	"wikibase-editlinks": "Cagna 'e cullegamiente",
 	"wikibase-editlinkstitle": "Càgna 'e cullegamente nterlenguistece",
+	"wikibase-linkitem-title": "Collega â paggena",
+	"wikibase-linkitem-linkpage": "Collega â paggena",
+	"wikibase-linkitem-input-site": "Lengua:",
+	"wikibase-linkitem-input-page": "Paggena:",
+	"wikibase-linkitem-confirmitem-button": "Cunferma",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Annascunne",
 	"wikibase-rc-hide-wikidata-show": "Fà veré",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} cagnato",
+	"wikibase-unconnectedpages-submit": "Vàje",
+	"wikibase-pageinfo-entity-id-none": "Nisciuno",
 	"wikibase-otherprojects": "Ati pruggette"
 }

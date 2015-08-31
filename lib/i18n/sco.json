@@ -24,5 +24,8 @@
 	"wikibase-time-precision-annum": "in $1 year",
 	"wikibase-time-precision-millennium": "$1. millennium",
 	"wikibase-time-precision-century": "$1. yearhunner",
-	"wikibase-time-precision-10annum": "$1s"
+	"wikibase-time-precision-10annum": "$1s",
+	"wikibase-item-summary-wbcreateredirect": "Redguidit tae $4",
+	"wikibase-item-summary-wblinktitles-create": "Cræftit this eetem fer tae connect pages",
+	"wikibase-item-summary-wblinktitles-connect": "Eikit ae leid airtin fer tae connect pages"
 }
