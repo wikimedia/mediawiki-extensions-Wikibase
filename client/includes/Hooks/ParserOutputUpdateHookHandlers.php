@@ -6,6 +6,7 @@ use Content;
 use ParserOutput;
 use StubUserLang;
 use Title;
+use Wikibase\Client\ParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
@@ -33,6 +34,11 @@ class ParserOutputUpdateHookHandlers {
 	private $langLinkHandler;
 
 	/**
+	 * @var ParserOutputDataUpdater
+	 */
+	private $parserOutputDataUpdater;
+
+	/**
 	 * @var InterwikiSorter
 	 */
 	private $interwikiSorter;
@@ -58,6 +64,7 @@ class ParserOutputUpdateHookHandlers {
 		return new ParserOutputUpdateHookHandlers(
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLangLinkHandler(),
+			$wikibaseClient->getParserOutputDataUpdater(),
 			$interwikiSorter,
 			$settings->getSetting( 'alwaysSort' )
 		);
@@ -84,18 +91,21 @@ class ParserOutputUpdateHookHandlers {
 	/**
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param LangLinkHandler $langLinkHandler
+	 * @param ParserOutputDataUpdater $parserOutputDataUpdater
 	 * @param InterwikiSorter $sorter
 	 * @param boolean $alwaysSort
 	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandler $langLinkHandler,
+		ParserOutputDataUpdater $parserOutputDataUpdater,
 		InterwikiSorter $sorter,
 		$alwaysSort
 	) {
 
 		$this->namespaceChecker = $namespaceChecker;
 		$this->langLinkHandler = $langLinkHandler;
+		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
 		$this->interwikiSorter = $sorter;
 		$this->alwaysSort = $alwaysSort;
 	}
@@ -122,8 +132,8 @@ class ParserOutputUpdateHookHandlers {
 			$this->langLinkHandler->addLinksFromRepository( $title, $parserOutput );
 		}
 
-		$this->langLinkHandler->updateItemIdProperty( $title, $parserOutput );
-		$this->langLinkHandler->updateOtherProjectsLinksData( $title, $parserOutput );
+		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
+		$this->parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutput );
 
 		if ( $useRepoLinks || $this->alwaysSort ) {
 			$interwikiLinks = $parserOutput->getLanguageLinks();
