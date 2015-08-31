@@ -153,6 +153,7 @@ call_user_func( function() {
 
 	// Special page registration
 	$wgSpecialPages['UnconnectedPages'] = 'Wikibase\Client\Specials\SpecialUnconnectedPages';
+	$wgSpecialPages['PagesWithBadges'] = 'Wikibase\Client\Specials\SpecialPagesWithBadges';
 	$wgHooks['wgQueryPages'][] = 'Wikibase\ClientHooks::onwgQueryPages';
 
 	// Resource loader modules
