@@ -174,6 +174,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
 
+		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
 
 		$this->getOutput()->addHTML(
