@@ -173,7 +173,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
 
-		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
+		$this->getOutput()->addModules( 'wikibase.special.siteSuggester' );
 
 		$this->getOutput()->addHTML(
 			Html::openElement(
@@ -203,7 +203,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				htmlspecialchars( $siteId ),
 				'text',
 				array(
-					'class' => 'wb-input',
+					'class' => 'wb-input wb-site-suggester',
 					'id' => 'wb-itembytitle-sitename',
 					'size' => 12
 				)

@@ -149,9 +149,9 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.special.itemByTitle' => $moduleTemplate + array(
+		'wikibase.special.siteSuggester' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.special/wikibase.special.itemByTitle.js'
+				'wikibase.special/wikibase.special.siteSuggester.js'
 			),
 			'dependencies' => array(
 				'wikibase.sites',

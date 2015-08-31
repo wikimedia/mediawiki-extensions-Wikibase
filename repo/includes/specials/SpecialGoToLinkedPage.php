@@ -223,7 +223,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * @param string $itemString
 	 */
 	protected function outputForm( $site, $itemString ) {
-		$this->getOutput()->addModules( 'wikibase.special.goToLinkedPage' );
+		$this->getOutput()->addModules( 'wikibase.special.siteSuggester' );
 
 		$formDescriptor = array(
 			'site' => array(
@@ -231,6 +231,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				'default' => $site ?: '',
 				'type' => 'text',
 				'id' => 'wb-gotolinkedpage-sitename',
+				'cssclass' => 'wb-site-suggester',
 				'size' => 12,
 				'label-message' => 'wikibase-gotolinkedpage-lookup-site'
 			),
