@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_72c5a43f",
+        "filename": "repo/includes/api/EntitySearchHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T15:20:51Z",
+      "side": 1,
+      "message": "The following lines look very suspicious in the means of code duplication and unnecessary nesting. Furthermore they break the rule that a method should do only one thing and should be as short as possible. So I would propose a refactor here.",
+      "revId": "2674688bdc042b0737987875f0407a448900e4cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_32d2bc01",
+        "filename": "repo/includes/api/EntitySearchHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T15:20:51Z",
+      "side": 1,
+      "message": "I would propose making this safer and easier to read.",
+      "revId": "2674688bdc042b0737987875f0407a448900e4cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_35faa6b6",
+        "filename": "repo/includes/api/EntitySearchHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T15:20:51Z",
+      "side": 1,
+      "message": "Parameter is misleading. One could assume that $limit limits the number of newSearchResults added to searchResults. \n\nIt should be clear that $limit limits the total amount of what will be returned.",
+      "revId": "2674688bdc042b0737987875f0407a448900e4cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_f2075483",
+        "filename": "repo/includes/api/EntitySearchHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T15:20:51Z",
+      "side": 1,
+      "message": "type hints should be inserted",
+      "revId": "2674688bdc042b0737987875f0407a448900e4cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_b50e96e6",
+        "filename": "repo/includes/api/EntitySearchHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T15:20:51Z",
+      "side": 1,
+      "message": "Why not if(!isset($searchResults[$entityIdString])) ?",
+      "revId": "2674688bdc042b0737987875f0407a448900e4cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_15f3ead2",
+        "filename": "repo/includes/api/EntitySearchHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T15:20:51Z",
+      "side": 1,
+      "message": "Using bools as method parameters should be avoided",
+      "revId": "2674688bdc042b0737987875f0407a448900e4cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_759eee59",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-08-31T15:20:51Z",
+      "side": 1,
+      "message": "One additional line vs. indent.\nI would prefer the line instead of the indent, because you can add more lines than indents.",
+      "revId": "2674688bdc042b0737987875f0407a448900e4cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
