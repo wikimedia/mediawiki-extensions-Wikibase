@@ -9,6 +9,7 @@ use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\BadgeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Store\EntityIdLookup;
@@ -30,6 +31,13 @@ interface ClientStore {
 	 * @return SiteLinkLookup
 	 */
 	public function getSiteLinkLookup();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return BadgeLookup
+	 */
+	public function getBadgeLookup();
 
 	/**
 	 * @since 0.5
