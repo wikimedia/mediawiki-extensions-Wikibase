@@ -16,6 +16,24 @@
       "revId": "f572d6a50e1db637e3138703a022984d7de2a205",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_3bc85059",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-01T08:28:26Z",
+      "side": 1,
+      "message": "Readability. Look at all the add() calls above, they all look the same, except for this one. We already had this dispute. I will not stop making code more readable. If you run into a merge conflict I\u0027m involved in, please kindly ask me and I will happily do the rebase for you.",
+      "parentUuid": "6ec1af18_2f76d301",
+      "revId": "f572d6a50e1db637e3138703a022984d7de2a205",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
