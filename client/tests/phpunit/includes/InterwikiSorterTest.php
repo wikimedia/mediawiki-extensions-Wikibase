@@ -101,6 +101,13 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 				array( 'e' ), // prepend
 				array( 'e', 'a', 'b', 'c', 'd', 'f' )
 			),
+			'Code w/o alphabetic' => array(
+				array( 'c', 'b', 'a' ),
+				'code',
+				array(),
+				array(),
+				array( 'a', 'b', 'c' )
+			),
 			array(
 				array( 'a', 'b', 'k', 'x' ),
 				'alphabetic',
@@ -108,6 +115,13 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 				array(),
 				array( 'x', 'k', 'a', 'b' )
 			),
+			'Fall back to code order' => array(
+				array( 'b', 'a' ),
+				'invalid',
+				array(),
+				array(),
+				array( 'a', 'b' )
+			)
 		);
 	}
 

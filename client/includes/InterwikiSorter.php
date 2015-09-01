@@ -2,8 +2,6 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
-
 /**
  * Language sorting utility functions.
  *
@@ -15,6 +13,11 @@ use InvalidArgumentException;
  * @author Thiemo Mättig
  */
 class InterwikiSorter {
+
+	/**
+	 * @see Documentation of "sort" and "interwikiSortOrders" options in docs/options.wiki.
+	 */
+	const SORT_CODE = 'code';
 
 	/**
 	 * @var array[]
@@ -42,16 +45,8 @@ class InterwikiSorter {
 	 * @param string $sort
 	 * @param array[] $sortOrders
 	 * @param string[] $sortPrepend
-	 *
-	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $sort, array $sortOrders, array $sortPrepend ) {
-		if ( !array_key_exists( 'alphabetic', $sortOrders ) ) {
-			throw new InvalidArgumentException(
-				'alphabetic interwiki sorting order is missing from Wikibase Client settings.'
-			);
-		}
-
+	public function __construct( $sort, array $sortOrders = array(), array $sortPrepend = array() ) {
 		$this->sort = $sort;
 		$this->sortOrders = $sortOrders;
 		$this->sortPrepend = $sortPrepend;
@@ -129,22 +124,16 @@ class InterwikiSorter {
 	 * @return int[]
 	 */
 	private function buildSortOrder( $sort, array $sortOrders ) {
-		$sortOrder = $sortOrders['alphabetic'];
-
-		if ( $sort === 'alphabetic' ) {
-			// do nothing
-		} elseif ( $sort === 'code' ) {
+		if ( $sort === self::SORT_CODE ) {
 			// The concept of known/unknown languages is irrelevant in strict code order.
 			$sortOrder = array();
+		} elseif ( !array_key_exists( $sort, $sortOrders ) ) {
+			// Something went wrong, but we can use default "code" order.
+			wfDebugLog( __CLASS__, __FUNCTION__
+				. ': Invalid or unknown sort order specified for interwiki links.' );
+			$sortOrder = array();
 		} else {
-			if ( array_key_exists( $sort, $sortOrders ) ) {
-				$sortOrder = $sortOrders[$sort];
-			} else {
-				// something went wrong but we can use default order
-				trigger_error( __CLASS__
-					. ' : invalid or unknown sort order specified for interwiki links.', E_USER_WARNING );
-				sort( $sortOrder );
-			}
+			$sortOrder = $sortOrders[$sort];
 		}
 
 		if ( $this->sortPrepend !== array() ) {
