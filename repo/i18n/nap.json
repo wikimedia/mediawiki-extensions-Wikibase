@@ -6,11 +6,14 @@
 			"Candalua"
 		]
 	},
+	"wikibase-entity": "entità",
 	"wikibase-entity-item": "oggietto",
+	"wikibase-entity-property": "proprietà",
 	"wikibase-edit": "càgna",
 	"wikibase-save": "sarva",
 	"wikibase-cancel": "canciella",
 	"wikibase-add": "azzecca",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configura",
 	"wikibase-entitytermsforlanguagelistview-description": "Descrizzione",
 	"wikibase-entitytermsforlanguagelistview-label": "Etichetta",
 	"wikibase-entitytermsforlanguagelistview-language": "Lengua",
@@ -30,6 +33,7 @@
 	"wikibase-aliases-empty": "Nun se trovano ll'aliasse. Nun se so' definite.",
 	"wikibase-statementview-rank-normal": "Classificato normale",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|riferimento|riferimente}}",
+	"wikibase-snakview-property-input-placeholder": "proprietà",
 	"wikibase-entityselector-more": "cchiù",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 è nu redirect.",
 	"wikibase-itembytitle-lookup-site": "Sito:",
@@ -56,6 +60,7 @@
 	"wikibase-dispatchstats-site-id": "Sito",
 	"wikibase-dispatchstats-pos": "Pusizzione",
 	"wikibase-dispatchstats-average": "Medio",
+	"wikibase-history-title-with-label": "Cronologgia d' 'e cagnamiente de \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Cronologgia d' 'e cagnamiente de ($1)",
 	"wikibase-listproperties-submit": "Truòva",
 	"wikibase-entitieswithoutlabel-label-language": "Codece lengua:",
@@ -64,8 +69,11 @@
 	"wikibase-entitieswithoutlabel-submit": "Truòva",
 	"wikibase-restoreold": "arrepiglia",
 	"wikibase-listdatatypes-wikibase-item-head": "Oggietto",
+	"wikibase-listdatatypes-wikibase-property-head": "Proprietà",
 	"wikibase-listdatatypes-string-head": "Stringa",
 	"wikibase-listdatatypes-time-head": "Tiempo",
 	"wikibase-listdatatypes-url-head": "URL",
-	"datatypes-type-url": "URL"
+	"datatypes-type-url": "URL",
+	"content-model-wikibase-item": "Oggietto Wikibase",
+	"content-model-wikibase-property": "Proprietà Wikibase"
 }

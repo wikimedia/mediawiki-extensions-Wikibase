@@ -71,6 +71,7 @@
 	"wikibase-error-deserialize-error": "Échec à la désérialisation des données.",
 	"wikibase-error-serialize-error": "Échec à la sérialisation des données",
 	"wikibase-error-invalid-entity-id": "L’ID saisi est inconnu du système. Veuillez utiliser un ID d’entité valide.",
+	"wikibase-error-exceeded-entity-access-limit": "Trop d’entités {{WBREPONAME}} accédées.",
 	"unconnectedpages": "Pages non reliées à un élément",
 	"unconnectedpages-summary": "Cette page répertorie les pages non reliées à un élément de données (dans les espaces de noms qui prennent en charge les éléments connectés). La liste est triée par ID de page décroissant, afin que les nouvelles pages apparaissent en premier.",
 	"wikibase-unconnectedpages-page": "Début de la liste des résultats avec la page :",

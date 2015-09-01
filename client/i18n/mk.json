@@ -58,6 +58,7 @@
 	"wikibase-error-deserialize-error": "Не успеав да ги децентрализирам податоците",
 	"wikibase-error-serialize-error": "Не успеав да ги серијализирам податоците",
 	"wikibase-error-invalid-entity-id": "Назнаката не му е позната на системот. Внесете важечка назнака.",
+	"wikibase-error-exceeded-entity-access-limit": "Пристапени се премногу единици на {{WBREPONAME}}.",
 	"unconnectedpages": "Страници што не се врзани со предмети",
 	"unconnectedpages-summary": "Оваа страница без сврзан податочен предмет (во именски простори што поддржуваат сврзани предмети). Списокот е подреден надолно по назнака, од понови кон постари страници.",
 	"wikibase-unconnectedpages-page": "Почни го списокот на резултати со страницата:",

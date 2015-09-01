@@ -2,16 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Denö",
-			"Ilja.mos"
+			"Ilja.mos",
+			"Mashoi7"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} on muutettu",
 	"wikibase-dataitem": "{{WBREPONAME}} elementu",
-	"wikibase-editlinks": "Korjata linkit",
-	"wikibase-editlinkstitle": "Korjata kielienvälizet linkit",
+	"wikibase-editlinks": "Korjua linkit",
+	"wikibase-editlinkstitle": "Korjua kielienvälizet linkit",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Peittiä",
-	"wikibase-rc-hide-wikidata-show": "Ozuttua",
+	"wikibase-rc-hide-wikidata-hide": "Peitä",
+	"wikibase-rc-hide-wikidata-show": "Ozuta",
 	"wikibase-rc-wikibase-edit-letter": "K",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} korjavus"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} korjavus",
+	"wikibase-otherprojects": "Muut projektat"
 }
