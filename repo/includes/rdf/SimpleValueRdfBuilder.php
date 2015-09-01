@@ -4,7 +4,7 @@ namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
 use DataValues\DecimalValue;
-use DataValues\GlobeCoordinateValue;
+use DataValues\Geo\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;

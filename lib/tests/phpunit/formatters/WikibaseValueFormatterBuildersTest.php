@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\DataValue;
 use DataValues\Geo\Values\LatLongValue;
-use DataValues\GlobeCoordinateValue;
+use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
