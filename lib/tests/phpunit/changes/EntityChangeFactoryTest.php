@@ -15,6 +15,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -31,7 +33,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -170,6 +171,31 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			) ),
 			$change->getDiff()->getSiteLinkDiff(),
 			'diff'
+		);
+	}
+
+	public function testNewFromUpdate_excludeStatementsInDiffs() {
+		$factory = $this->getEntityChangeFactory();
+
+		$item = new Item( new ItemId( 'Q3' ) );
+		$statementList = new StatementList( array(
+			new Statement( new PropertyNoValueSnak( 9000 ) )
+		) );
+
+		$item->setStatements( $statementList );
+
+		$updatedItem = new Item( new ItemId( 'Q3' ) );
+		$statementList = new StatementList( array(
+			new Statement( new PropertyNoValueSnak( 10 ) )
+		) );
+
+		$updatedItem->setStatements( $statementList );
+
+		$change = $factory->newFromUpdate( EntityChange::UPDATE, $item, $updatedItem );
+
+		$this->assertTrue(
+			$change->getDiff()->isEmpty(),
+			'Diff excludes statement changes and is empty'
 		);
 	}
 
