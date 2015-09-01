@@ -21,4 +21,8 @@ class EntityOfUnknownType implements EntityDocument {
 	public function setId( $id ) {
 	}
 
+	public function isEmpty() {
+		return true;
+	}
+
 }

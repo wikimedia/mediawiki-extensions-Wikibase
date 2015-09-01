@@ -29,4 +29,8 @@ class FakeEntityDocument implements EntityDocument {
 		$this->id = $id;
 	}
 
+	public function isEmpty() {
+		return true;
+	}
+
 }
