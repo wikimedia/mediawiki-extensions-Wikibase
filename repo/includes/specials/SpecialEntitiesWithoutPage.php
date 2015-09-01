@@ -2,12 +2,11 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
+use HTMLForm;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Store\EntityPerPage;
-use XmlSelect;
 
 /**
  * Base page for pages listing entities without a specific value.
@@ -132,74 +131,49 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * Build the HTML form
 	 */
 	private function setForm() {
-		$typeSelect = new XmlSelect( 'type', 'wb-entitieswithoutpage-type', $this->type );
-		$typeSelect->addOption( $this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text(), '' );
+		$options = array(
+			$this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text() => ''
+		);
 		foreach ( $this->entityFactory->getEntityTypes() as $type ) {
 			// Messages: wikibase-entity-item, wikibase-entity-property, wikibase-entity-query
-			$typeSelect->addOption( $this->msg( 'wikibase-entity-' . $type )->text(), $type );
+			$options[$this->msg( 'wikibase-entity-' . $type )->text()] = $type;
 		}
 
 		$this->getOutput()->addModules( 'wikibase.special.languageSuggester' );
 
-		$this->getOutput()->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'action' => $this->getPageTitle()->getLocalURL(),
-					'name' => 'entitieswithoutpage',
-					'id' => 'wb-entitieswithoutpage-form'
-				)
-			) .
-			Html::input(
-				'title',
-				$this->getPageTitle()->getPrefixedText(),
-				'hidden',
-				array()
-			) .
-			Html::openElement( 'fieldset' ) .
-			Html::element(
-				'legend',
-				array(),
-				$this->msg( $this->legendMsg )->text()
-			) .
-			Html::openElement( 'p' ) .
-			Html::element(
-				'label',
-				array(
-					'for' => 'wb-entitieswithoutpage-language'
-				),
-				$this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text()
-			) . ' ' .
-			Html::input(
-				'language',
-				$this->language,
-				'text',
-				array(
-					'id' => 'wb-entitieswithoutpage-language',
-					'class' => 'wb-language-suggester'
-				)
-			) . ' ' .
-			Html::element(
-				'label',
-				array(
-					'for' => 'wb-entitieswithoutpage-type'
-				),
-				$this->msg( 'wikibase-entitieswithoutlabel-label-type' )->text()
-			) . ' ' .
-			$typeSelect->getHTML() . ' ' .
-			Html::input(
-				'submit',
-				$this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
-				'submit',
-				array(
-					'id' => 'wikibase-entitieswithoutpage-submit',
-					'class' => 'wb-input-button'
-				)
-			) .
-			Html::closeElement( 'p' ) .
-			Html::closeElement( 'fieldset' ) .
-			Html::closeElement( 'form' )
+		$formDescriptor = array(
+			'language' => array(
+				'name' => 'language',
+				'default' => $this->language,
+				'type' => 'text',
+				'cssclass' => 'wb-language-suggester',
+				'id' => 'wb-entitieswithoutpage-language',
+				'label-message' => 'wikibase-entitieswithoutlabel-label-language'
+			),
+			'type' => array(
+				'name' => 'type',
+				'options' => $options,
+				'default' => $this->type,
+				'type' => 'select',
+				'id' => 'wb-entitieswithoutpage-type',
+				'label-message' => 'wikibase-entitieswithoutlabel-label-type'
+			),
+			'submit' => array(
+				'name' => 'submit',
+				'default' => $this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
+				'type' => 'submit',
+				'id' => 'wikibase-entitieswithoutpage-submit',
+				'cssclass' => 'wb-input-button'
+			)
 		);
+
+		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
+			->setId( 'wb-entitieswithoutpage-form' )
+			->setMethod( 'get' )
+			->setWrapperLegendMsg( $this->legendMsg )
+			->suppressDefaultSubmit()
+			->setSubmitCallback( function () {// no-op
+			} )->show();
 	}
 
 	/**
