@@ -101,6 +101,13 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 				array( 'e' ), // prepend
 				array( 'e', 'a', 'b', 'c', 'd', 'f' )
 			),
+			'Code w/o alphabetic' => array(
+				array( 'c', 'b', 'a' ),
+				'code',
+				array(),
+				array(),
+				array( 'a', 'b', 'c' )
+			),
 			array(
 				array( 'a', 'b', 'k', 'x' ),
 				'alphabetic',
@@ -118,6 +125,12 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 		$interwikiSorter = new InterwikiSorter( $sort, $sortOrders, $sortPrepend );
 		$sortedLinks = $interwikiSorter->sortLinks( $links );
 		$this->assertEquals( $expected, $sortedLinks );
+	}
+
+	public function testGivenInvalidSort_sortLinksTriggersError() {
+		$interwikiSorter = new InterwikiSorter( 'invalid' );
+		$this->setExpectedException( 'PHPUnit_Framework_Error_Warning' );
+		$interwikiSorter->sortLinks( array() );
 	}
 
 }
