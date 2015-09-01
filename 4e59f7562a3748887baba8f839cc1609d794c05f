@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_cc84f0da",
+        "filename": "client/includes/specials/SpecialPagesWithBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-01T17:11:57Z",
+      "side": 1,
+      "message": "parent::execute( $this-\u003ebadgeId )",
+      "revId": "4e59f7562a3748887baba8f839cc1609d794c05f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_0c767801",
+        "filename": "client/includes/specials/SpecialPagesWithBadges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-01T17:11:57Z",
+      "side": 1,
+      "message": "That\u0027s a pretty big TODO. There should be a follow up or at least a ticket for that before this change is merged.",
+      "revId": "4e59f7562a3748887baba8f839cc1609d794c05f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
