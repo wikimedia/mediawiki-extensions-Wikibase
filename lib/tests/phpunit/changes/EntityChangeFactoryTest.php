@@ -2,6 +2,9 @@
 
 namespace Wikibase\Lib\Test\Change;
 
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 use Wikibase\ChangesTable;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -10,6 +13,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -26,6 +31,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -78,38 +84,93 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $entityId, $change->getEntityId() );
 	}
 
-	public function newFromUpdateProvider() {
-		$item1 = new Item( new ItemId( 'Q1' ) );
-		$item2 = new Item( new ItemId( 'Q2' ) );
+	public function testNewFromUpdate() {
+		$itemId = new ItemId( 'Q1' );
 
-		$prop1 = Property::newFromType( 'string' );
-		$prop1->setId( new PropertyId( 'P1' ) );
+		$item = new Item( $itemId );
+		$item->setLabel( 'en', 'kitten' );
 
-		return array(
-			'add item' => array( EntityChange::ADD, null, $item1, 'wikibase-item~add' ),
-			'update item' => array( EntityChange::UPDATE, $item1, $item2, 'wikibase-item~update' ),
-			'remove property' => array( EntityChange::REMOVE, $prop1, null, 'wikibase-property~remove' ),
+		$updatedItem = new Item( $itemId );
+		$updatedItem->setLabel( 'en', 'kitten' );
+		$updatedItem->setLabel( 'es', 'gato' );
+
+		$factory = $this->getEntityChangeFactory();
+
+		$change = $factory->newFromUpdate( EntityChange::UPDATE, $item, $updatedItem );
+
+		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
+		$this->assertEquals( 'q1', $change->getObjectId(), 'object id' );
+		$this->assertEquals( 'wikibase-item~update', $change->getType(), 'type' );
+
+		$this->assertEquals(
+			new Diff( array( 'es' => new DiffOpAdd( 'gato' ) ) ),
+			$change->getDiff()->getLabelsDiff(),
+			'diff'
 		);
 	}
 
-	/**
-	 * @dataProvider newFromUpdateProvider
-	 *
-	 * @param string $action
-	 * @param Entity $oldEntity
-	 * @param Entity $newEntity
-	 * @param string $expectedType
-	 */
-	public function testNewFromUpdate( $action, $oldEntity, $newEntity, $expectedType ) {
+	public function testNewFromUpdate_add() {
+		$itemId = new ItemId( 'Q1' );
+
+		$item = new Item( $itemId );
+		$item->setLabel( 'en', 'kitten' );
+
 		$factory = $this->getEntityChangeFactory();
+		$change = $factory->newFromUpdate( EntityChange::ADD, null, $item );
 
-		$entityId = ( $newEntity === null ) ? $oldEntity->getId() : $newEntity->getId();
+		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
+		$this->assertEquals( 'q1', $change->getObjectId(), 'object id' );
+		$this->assertEquals( 'wikibase-item~add', $change->getType(), 'type' );
 
-		$change = $factory->newFromUpdate( $action, $oldEntity, $newEntity );
+		$this->assertEquals(
+			new Diff( array( 'en' => new DiffOpAdd( 'kitten' ) ) ),
+			$change->getDiff()->getLabelsDiff(),
+			'diff'
+		);
+	}
 
-		$this->assertEquals( $action, $change->getAction() );
-		$this->assertEquals( $entityId, $change->getEntityId() );
-		$this->assertEquals( $expectedType, $change->getType() );
+	public function testNewFromUpdate_remove() {
+		$propertyId = new PropertyId( 'P2' );
+
+		$property = new Property( $propertyId, null, 'string' );
+		$property->setLabel( 'de', 'Katze' );
+
+		$factory = $this->getEntityChangeFactory();
+		$change = $factory->newFromUpdate( EntityChange::REMOVE, $property, null );
+
+		$this->assertEquals( $propertyId, $change->getEntityId(), 'entity id' );
+		$this->assertEquals( 'p2', $change->getObjectId(), 'object id' );
+		$this->assertEquals( 'wikibase-property~remove', $change->getType(), 'type' );
+
+		$this->assertEquals(
+			new Diff( array( 'de' => new DiffOpRemove( 'Katze' ) ) ),
+			$change->getDiff()->getLabelsDiff(),
+			'diff'
+		);
+	}
+
+	public function testNewFromUpdate_restore() {
+		$itemId = new ItemId( 'Q4' );
+
+		$item = new Item( $itemId );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Kitten' ) );
+
+		$factory = $this->getEntityChangeFactory();
+		$change = $factory->newFromUpdate( EntityChange::RESTORE, null, $item );
+
+		$this->assertEquals( $itemId, $change->getEntityId(), 'entity id' );
+		$this->assertEquals( 'q4', $change->getObjectId(), 'object id' );
+		$this->assertEquals( 'wikibase-item~restore', $change->getType(), 'type' );
+
+		$this->assertEquals(
+			new Diff( array(
+				'enwiki' => new Diff( array(
+					'name' => new DiffOpAdd( 'Kitten' )
+				) )
+			) ),
+			$change->getDiff()->getSiteLinkDiff(),
+			'diff'
+		);
 	}
 
 }
