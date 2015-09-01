@@ -8,6 +8,7 @@ use Wikibase\ChangesTable;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 
@@ -130,6 +131,11 @@ class EntityChangeFactory {
 		} else {
 			$theEntity = $newEntity;
 		}
+
+		// don't include statements diff, since those are unused and not helpful
+		// performance-wise to the dispatcher and change handling.
+		$oldEntity->setStatements( new StatementList() );
+		$newEntity->setStatements( new StatementList() );
 
 		$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
 
