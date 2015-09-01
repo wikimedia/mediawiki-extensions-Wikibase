@@ -94,6 +94,13 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 				array( 'e' ),
 				array( 'e', 'c', 'a', 'b', 'd', 'f' )
 			),
+			'Strict code order' => array(
+				array( 'f', 'd', 'b', 'a', 'c', 'e' ),
+				'code',
+				array( 'alphabetic' => array( 'c', 'a' ) ), // this should be ignored
+				array( 'e' ), // prepend
+				array( 'e', 'a', 'b', 'c', 'd', 'f' )
+			),
 			array(
 				array( 'a', 'b', 'k', 'x' ),
 				'alphabetic',

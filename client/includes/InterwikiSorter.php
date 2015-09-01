@@ -134,7 +134,8 @@ class InterwikiSorter {
 		if ( $sort === 'alphabetic' ) {
 			// do nothing
 		} elseif ( $sort === 'code' ) {
-			sort( $sortOrder );
+			// The concept of known/unknown languages is irrelevant in strict code order.
+			$sortOrder = array();
 		} else {
 			if ( array_key_exists( $sort, $sortOrders ) ) {
 				$sortOrder = $sortOrders[$sort];
