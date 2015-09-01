@@ -580,8 +580,11 @@ final class WikibaseClient {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	protected function newValueFormatterFactory() {
-		$callbacks = $this->getFormatterFactoryCallbacksByType();
-		$factory = new OutputFormatValueFormatterFactory( $callbacks, $this->contentLanguage );
+		$factory = new OutputFormatValueFormatterFactory(
+			$this->getFormatterFactoryCallbacksByType(),
+			$this->contentLanguage,
+			$this->getLanguageFallbackChainFactory()
+		);
 
 		return $factory;
 	}

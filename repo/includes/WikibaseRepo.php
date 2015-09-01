@@ -807,10 +807,11 @@ class WikibaseRepo {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	protected function newValueFormatterFactory() {
-		$callbacks = $this->getFormatterFactoryCallbacksByType();
-		$factory = new OutputFormatValueFormatterFactory( $callbacks, $this->getDefaultLanguage() );
-
-		return $factory;
+		return new OutputFormatValueFormatterFactory(
+			$this->getFormatterFactoryCallbacksByType(),
+			$this->getDefaultLanguage(),
+			new LanguageFallbackChainFactory()
+		);
 	}
 
 	/**
