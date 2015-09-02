@@ -27,17 +27,15 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'New York City', $label );
 	}
 
-	public function testGetLabel_notFoundThrowsException() {
+	public function testWhenLabelNotFound_getLabelReturnsNull() {
 		$termLookup = $this->getEntityInfoTermLookup();
-
-		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getLabel( new ItemId( 'Q117' ), 'fr' );
+		$this->assertNull( $termLookup->getLabel( new ItemId( 'Q117' ), 'fr' ) );
 	}
 
-	public function testGetLabel_noEntityThrowsException() {
+	public function testWhenEntityNotFound_getLabelThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
 		$termLookup->getLabel( new ItemId( 'Q90000' ), 'en' );
 	}
 
@@ -87,17 +85,15 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $description );
 	}
 
-	public function testGetDescription_notFoundThrowsException() {
+	public function testWhenDescriptionNotFound_getDescriptionReturnsNull() {
 		$termLookup = $this->getEntityInfoTermLookup();
-
-		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getDescription( new ItemId( 'Q117' ), 'fr' );
+		$this->assertNull( $termLookup->getDescription( new ItemId( 'Q117' ), 'fr' ) );
 	}
 
-	public function testGetDescription_noEntityThrowsException() {
+	public function testWhenEntityNotFound_getDescriptionThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
 		$termLookup->getDescription( new ItemId( 'Q90000' ), 'en' );
 	}
 
