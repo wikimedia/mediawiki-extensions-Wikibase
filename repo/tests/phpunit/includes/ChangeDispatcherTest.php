@@ -288,6 +288,36 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedSeen, $pending[1] );
 	}
 
+	public function testGetPendingChanges_maxChunks() {
+		$chunkAccess = $this->getMock( 'Wikibase\ChunkAccess' );
+
+		$chunkAccess->expects( $this->exactly( 1 ) )
+			->method( 'loadChunk' )
+			->will( $this->returnCallback( array( $this, 'getChanges' ) ) );
+
+		$chunkAccess->expects( $this->any() )
+			->method( 'getRecordId' )
+			->will( $this->returnCallback( function ( Change $change ) {
+				return $change->getId();
+			} ) );
+
+		$dispatcher = new ChangeDispatcher(
+			$this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' ),
+			$this->getNotificationSender(),
+			$chunkAccess,
+			$this->getSubscriptionLookup()
+		);
+
+		// 2 changes are loaded in each chunk
+		$dispatcher->setBatchSize( 2 );
+		$dispatcher->setBatchChunkFactor( 1 );
+
+		// only process 1 chunk
+		$dispatcher->setMaxChunks( 1 );
+
+		$pending = $dispatcher->getPendingChanges( 'dewiki', 0 );
+	}
+
 	public function provideDispatchTo() {
 		$changes = $this->getAllChanges();
 
