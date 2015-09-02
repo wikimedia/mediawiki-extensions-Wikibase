@@ -32,26 +32,40 @@ class SpecialNewPropertyTest extends SpecialPageTestBase {
 		$this->setMwGlobals( 'wgGroupPermissions', array( '*' => array( 'property-create' => true ) ) );
 
 		$matchers['label'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-newentity-label',
 				'class' => 'wb-input',
-				'name' => 'label',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'label',
+				)
 			) );
 		$matchers['description'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-newentity-description',
 				'class' => 'wb-input',
-				'name' => 'description',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'description',
+				)
 			) );
 		$matchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-newentity-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => 'submit',
+			),
+			'child' => array(
+				'tag' => 'button',
+				'attributes' => array(
+					'type' => 'submit',
+					'name' => 'submit',
+				)
 			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
@@ -60,8 +74,8 @@ class SpecialNewPropertyTest extends SpecialPageTestBase {
 		}
 
 		list( $output, ) = $this->executeSpecialPage( 'LabelText/DescriptionText' );
-		$matchers['label']['attributes']['value'] = 'LabelText';
-		$matchers['description']['attributes']['value'] = 'DescriptionText';
+		$matchers['label']['child'][0]['attributes']['value'] = 'LabelText';
+		$matchers['description']['child'][0]['attributes']['value'] = 'DescriptionText';
 
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
