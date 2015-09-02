@@ -51,6 +51,7 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	_create: function() {
 		var self = this;
 
+		this._selectedUrl = this.options.defaultSelectedUrl;
 		this._cache = {};
 		this.options.source = this._initDefaultSource();
 
