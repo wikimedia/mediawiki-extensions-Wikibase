@@ -16,6 +16,7 @@ use StubObject;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
@@ -62,6 +63,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\PropertyInfoBuilder;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -1129,6 +1131,7 @@ class WikibaseRepo {
 		$constraintProvider = $this->getEntityConstraintProvider();
 		$errorLocalizer = $this->getValidatorErrorLocalizer();
 		$propertyInfoStore = $this->getStore()->getPropertyInfoStore();
+		$propertyInfoBuilder = $this->newPropertyInfoBuilder();
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		$handler = new PropertyHandler(
@@ -1139,10 +1142,24 @@ class WikibaseRepo {
 			$errorLocalizer,
 			$this->getEntityIdParser(),
 			$propertyInfoStore,
+			$propertyInfoBuilder,
 			$legacyFormatDetector
 		);
 
 		return $handler;
+	}
+
+	/**
+	 * @return PropertyInfoBuilder
+	 */
+	public function newPropertyInfoBuilder() {
+		$formatterUrlProperty = $this->getSettings()->getSetting( 'formatterUrlProperty' );
+
+		if ( $formatterUrlProperty !== null ) {
+			$formatterUrlProperty = new PropertyId( $formatterUrlProperty );
+		}
+
+		return new PropertyInfoBuilder( $formatterUrlProperty );
 	}
 
 	private function getLegacyFormatDetectorCallback() {
