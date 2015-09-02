@@ -7,7 +7,7 @@ use DBAccessBase;
 use DBQueryError;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**

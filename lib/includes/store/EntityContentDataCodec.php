@@ -12,8 +12,8 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\LegacyIdInterpreter;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * A codec for use by EntityContent resp EntityHandler subclasses for the
