@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HTMLForm;
 use Html;
 use Language;
 use Wikibase\ItemDisambiguation;
@@ -192,71 +193,47 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private function switchForm( $languageCode, $label ) {
 		$this->getOutput()->addModules( 'wikibase.special.languageSuggester' );
 
-		$this->getOutput()->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'method' => 'get',
-					'action' => $this->getPageTitle()->getFullUrl(),
-					'name' => 'itemdisambiguation',
-					'id' => 'wb-itemdisambiguation-form1'
-				)
+		$formDescriptor = array(
+			'language' => array(
+				'name' => 'language',
+				'default' => $languageCode ?: '',
+				'type' => 'text',
+				'id' => 'wb-itemdisambiguation-languagename',
+				'size' => 12,
+				'cssclass' => 'wb-input-text wb-language-suggester',
+				'label-message' => 'wikibase-itemdisambiguation-lookup-language'
+			),
+			'label' => array(
+				'name' => 'label',
+				'default' => $label ?: '',
+				'type' => 'text',
+				'id' => 'labelname',
+				'size' => 36,
+				'cssclass' => 'wb-input-text',
+				'autofocus',
+				'label-message' => 'wikibase-itemdisambiguation-lookup-label'
+			),
+			'submit' => array(
+				'name' => 'submit',
+				'default' => $this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
+				'type' => 'submit',
+				'id' => 'wb-itembytitle-submit',
+				'cssclass' => 'wb-input-button'
 			)
-			. Html::openElement( 'fieldset' )
-			. Html::element(
-				'legend',
-				array(),
-				$this->msg( 'wikibase-itemdisambiguation-lookup-fieldset' )->text()
-			)
-			. Html::element(
-				'label',
-				array( 'for' => 'wb-itemdisambiguation-languagename' ),
-				$this->msg( 'wikibase-itemdisambiguation-lookup-language' )->text()
-			)
-			. Html::input(
-				'language',
-				$languageCode ?: '',
-				'text',
-				array(
-					'id' => 'wb-itemdisambiguation-languagename',
-					'size' => 12,
-					'class' => 'wb-input-text wb-language-suggester'
-				)
-			)
-			. ' '
-			. Html::element(
-				'label',
-				array( 'for' => 'labelname' ),
-				$this->msg( 'wikibase-itemdisambiguation-lookup-label' )->text()
-			)
-			. Html::input(
-				'label',
-				$label ?: '',
-				'text',
-				array(
-					'id' => 'labelname',
-					'size' => 36,
-					'class' => 'wb-input-text',
-					'autofocus'
-				)
-			)
-			. Html::input(
-				'submit',
-				$this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
-				'submit',
-				array(
-					'id' => 'wb-itembytitle-submit',
-					'class' => 'wb-input-button'
-				)
-			)
-			. Html::element(
+		);
+
+		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
+			->setId( 'wb-itemdisambiguation-form1' )
+			->setMethod( 'get' )
+			->setFooterText( Html::element(
 				'p',
 				array(),
 				$this->msg( 'wikibase-itemdisambiguation-form-hints' )->numParams( $this->limit )->text()
-			)
-			. Html::closeElement( 'fieldset' )
-			. Html::closeElement( 'form' )
-		);
+			) )
+			->setWrapperLegendMsg( 'wikibase-itemdisambiguation-lookup-fieldset' )
+			->suppressDefaultSubmit()
+			->setSubmitCallback( function () {// no-op
+			} )->show();
 	}
 
 }
