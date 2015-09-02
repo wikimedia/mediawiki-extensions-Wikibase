@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_892d71a5",
+        "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-09-02T15:02:49Z",
+      "side": 1,
+      "message": "php doc says array, something is therefore wrong here, either the doc or this typehint",
+      "revId": "ee116123d43b796fc87ea57d1d3ca906ea777dd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c434c0dc",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-09-02T15:02:49Z",
+      "side": 1,
+      "message": "well changing this to null everywhere just seems odd.\nWhy are we not keeping the default array()?",
+      "revId": "ee116123d43b796fc87ea57d1d3ca906ea777dd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
