@@ -12,7 +12,7 @@ use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
@@ -120,7 +120,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 *
 	 * @param Snak $snak
 	 *
-	 * @throws PropertyNotFoundException
+	 * @throws PropertyDataTypeLookupException
 	 * @throws InvalidArgumentException
 	 * @throws MismatchingDataValueTypeException
 	 * @throws FormattingException
@@ -139,7 +139,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 			$expectedDataValueType = $this->getDataValueTypeForPropertyDataType( $propertyType );
 
 			$warning = $this->checkForWarning( $value, $expectedDataValueType );
-		} catch ( PropertyNotFoundException $ex ) {
+		} catch ( PropertyDataTypeLookupException $ex ) {
 			if ( $this->failOnErrors() ) {
 				throw $ex;
 			}
@@ -190,7 +190,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 * @param DataValue $value
 	 * @param string $expectedDataValueType
 	 *
-	 * @throws PropertyNotFoundException
+	 * @throws PropertyDataTypeLookupException
 	 * @throws MismatchingDataValueTypeException
 	 * @return Message|null
 	 */
