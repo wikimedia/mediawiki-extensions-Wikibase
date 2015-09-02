@@ -265,6 +265,7 @@ class WikibaseRepo {
 			$this->getEntityLookup(),
 			$this->getEntityIdParser(),
 			$urlSchemes,
+			$this->getVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages()
 		);
 	}
@@ -719,6 +720,15 @@ class WikibaseRepo {
 			$this->getSettings()->getSetting( 'conceptBaseUri' ),
 			$this->getEntityIdParser()
 		);
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getVocabularyBaseUri() {
+		//@todo: We currently use the local repo concept URI here. This should be configurable,
+		// to e.g. allow 3rd parties to use Wikidata as their vocab repo.
+		return $this->getSettings()->getSetting( 'conceptBaseUri' );
 	}
 
 	/**
