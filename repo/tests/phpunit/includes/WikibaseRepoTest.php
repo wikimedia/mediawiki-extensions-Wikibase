@@ -262,4 +262,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $service );
 	}
 
+	public function testNewPropertyInfoBuilder() {
+		$builder = $this->getWikibaseRepo()->newPropertyInfoBuilder();
+		$this->assertInstanceOf( 'Wikibase\PropertyInfoBuilder', $builder );
+	}
+
 }

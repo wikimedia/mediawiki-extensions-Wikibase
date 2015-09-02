@@ -118,14 +118,10 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
 		$this->releaseConnection( $dbr );
 
-		if ( $res === false ) {
-			$info = null;
-		} else {
-			$info = $this->decodeBlob( $res );
+		$info = $this->decodeBlob( $res );
 
-			if ( $info === null ) {
-				wfLogWarning( "failed to decode property info blob for " . $propertyId . ": " . substr( $res, 0, 200 ) );
-			}
+		if ( $info === null ) {
+			wfLogWarning( "failed to decode property info blob for " . $propertyId . ": " . substr( $res, 0, 200 ) );
 		}
 
 		return $info;
