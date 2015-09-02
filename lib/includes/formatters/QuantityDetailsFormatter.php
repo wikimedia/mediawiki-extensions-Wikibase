@@ -11,7 +11,6 @@ use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\QuantityFormatter;
-use ValueFormatters\QuantityUnitFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -36,21 +35,25 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	protected $quantityFormatter;
 
 	/**
-	 * @var QuantityUnitFormatter
+	 * @var ValueFormatter|null
 	 */
-	protected $unitFormatter;
+	protected $vocabularyUriFormatter;
 
 	/**
 	 * @param NumberLocalizer $numberLocalizer
-	 * @param QuantityUnitFormatter $unitFormatter
+	 * @param ValueFormatter|null $vocabularyUriFormatter
 	 * @param FormatterOptions|null $options
 	 */
-	public function __construct( NumberLocalizer $numberLocalizer, QuantityUnitFormatter $unitFormatter, FormatterOptions $options = null ) {
+	public function __construct(
+		NumberLocalizer $numberLocalizer,
+		ValueFormatter $vocabularyUriFormatter = null,
+		FormatterOptions $options = null
+	) {
 		parent::__construct( $options );
 
-		$this->unitFormatter = $unitFormatter;
+		$this->vocabularyUriFormatter = $vocabularyUriFormatter;
 		$this->decimalFormatter = new DecimalFormatter( $this->options, $numberLocalizer );
-		$this->quantityFormatter = new QuantityFormatter( $this->decimalFormatter, $unitFormatter, $this->options );
+		$this->quantityFormatter = new QuantityFormatter( $this->decimalFormatter, $vocabularyUriFormatter, $this->options );
 	}
 
 	/**
@@ -92,9 +95,17 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	}
 
 	private function formatNumber( DecimalValue $number, $unit ) {
-		$text = $this->decimalFormatter->format( $number );
-		$text = $this->unitFormatter->applyUnit( $unit, $text );
-		return htmlspecialchars( $text );
+		$html = htmlspecialchars( $this->decimalFormatter->format( $number ) );
+
+		if ( $this->vocabularyUriFormatter !== null ) {
+			$label = $this->vocabularyUriFormatter->format( $unit );
+
+			if ( $label !== null ) {
+				$html .= ' ' . htmlspecialchars( $label );
+			}
+		}
+
+		return $html;
 	}
 
 	/**
