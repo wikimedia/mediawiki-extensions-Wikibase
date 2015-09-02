@@ -22,7 +22,7 @@ interface EntityRedirectLookup {
 	 * @param EntityId $targetId
 	 *
 	 * @return EntityId[]
-	 * @throws EntityRedirectLookupException if $targetId is not known
+	 * @throws EntityRedirectLookupException
 	 */
 	public function getRedirectIds( EntityId $targetId );
 
@@ -37,7 +37,7 @@ interface EntityRedirectLookup {
 	 *
 	 * @return EntityId|null The ID of the redirect target, or null if $entityId does not refer to a
 	 * redirect.
-	 * @throws EntityRedirectLookupException if $entityId is not known
+	 * @throws EntityRedirectLookupException
 	 */
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' );
 
