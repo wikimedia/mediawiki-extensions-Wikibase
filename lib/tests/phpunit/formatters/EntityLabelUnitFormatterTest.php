@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\EntityLabelUnitFormatter;
+use Wikibase\Lib\VocabularyUriFormatter;
 
 /**
  * @covers Wikibase\Lib\EntityLabelUnitFormatter
@@ -52,7 +53,8 @@ class EntityLabelUnitFormatterTest extends PHPUnit_Framework_TestCase {
 
 		$idParser = new BasicEntityIdParser();
 
-		$formatter = new EntityLabelUnitFormatter( $idParser, $labelLookup, array( 'NotAUnit' ) );
+		$vocabularyUriFormatter = new VocabularyUriFormatter( $idParser, $labelLookup, array( 'NotAUnit' ) );
+		$formatter = new EntityLabelUnitFormatter( $vocabularyUriFormatter );
 		$this->assertEquals( $expected, $formatter->applyUnit( $unit, $number ) );
 	}
 

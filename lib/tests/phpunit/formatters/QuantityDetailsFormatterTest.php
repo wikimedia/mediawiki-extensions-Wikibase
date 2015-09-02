@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Test;
 use DataValues\NumberValue;
 use DataValues\QuantityValue;
 use ValueFormatters\BasicNumberLocalizer;
-use ValueFormatters\BasicQuantityUnitFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\QuantityDetailsFormatter;
@@ -24,10 +23,13 @@ class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	private function newFormatter( FormatterOptions $options = null ) {
 		$numberLocalizer = new BasicNumberLocalizer();
-		$unitFormatter = new BasicQuantityUnitFormatter();
-		$formatter = new QuantityDetailsFormatter( $numberLocalizer, $unitFormatter, $options );
 
-		return $formatter;
+		$vocabularyUriFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$vocabularyUriFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnValue( null ) );
+
+		return new QuantityDetailsFormatter( $numberLocalizer, $vocabularyUriFormatter, $options );
 	}
 
 	/**
