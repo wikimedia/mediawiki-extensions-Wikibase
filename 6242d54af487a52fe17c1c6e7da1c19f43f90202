@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_0f6d01c7",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2015-09-02T16:01:24Z",
+      "side": 0,
+      "message": "The removal of these 5 message looks weird, I see no relation to badges",
+      "revId": "6242d54af487a52fe17c1c6e7da1c19f43f90202",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
