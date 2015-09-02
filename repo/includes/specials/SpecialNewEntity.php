@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HTMLForm;
 use Html;
 use Language;
 use Status;
@@ -99,7 +100,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$uiLanguageCode = $this->getLanguage()->getCode();
 
 		if ( $this->getRequest()->wasPosted()
-			&& $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) )
+			&& $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'wpEditToken' ) )
 		) {
 			if ( $this->hasSufficientArguments() ) {
 				$entity = $this->createEntity();
@@ -114,7 +115,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$status = $this->saveEntity(
 						$entity,
 						$summary,
-						$this->getRequest()->getVal( 'token' ),
+						$this->getRequest()->getVal( 'wpEditToken' ),
 						EDIT_NEW
 					);
 
@@ -225,79 +226,53 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$langCode = $this->contentLanguage->getCode();
 		$langName = Language::fetchLanguageName( $langCode );
 		$langDir = $this->contentLanguage->getDir();
-		return Html::hidden(
-			'lang',
-			$langCode
-		)
-		. Html::element(
-			'label',
-			array(
-				'for' => 'wb-newentity-label',
-				'class' => 'wb-label'
+		return array(
+			'lang' => array(
+				'name' => 'lang',
+				'default' => $langCode,
+				'type' => 'hidden'
 			),
-			$this->msg( 'wikibase-newentity-label' )->text()
-		)
-		. Html::input(
-			'label',
-			$this->label ?: '',
-			'text',
-			array(
+			'label' => array(
+				'name' => 'label',
+				'default' => $this->label ?: '',
+				'type' => 'text',
 				'id' => 'wb-newentity-label',
-				'class' => 'wb-input',
+				'cssclass' => 'wb-input',
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
 					'wikibase-label-edit-placeholder-language-aware',
 					$langName
 				)->text(),
-			)
-		)
-		. Html::element( 'br' )
-		. Html::element(
-			'label',
-			array(
-				'for' => 'wb-newentity-description',
-				'class' => 'wb-label'
+				'label-message' => 'wikibase-newentity-label'
 			),
-			$this->msg( 'wikibase-newentity-description' )->text()
-		)
-		. Html::input(
-			'description',
-			$this->description ?: '',
-			'text',
-			array(
+			'description' => array(
+				'name' => 'description',
+				'default' => $this->description ?: '',
+				'type' => 'text',
 				'id' => 'wb-newentity-description',
-				'class' => 'wb-input',
+				'cssclass' => 'wb-input',
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
 					'wikibase-description-edit-placeholder-language-aware',
 					$langName
 				)->text(),
-			)
-		)
-		. Html::element( 'br' )
-		. Html::element(
-			'label',
-			array(
-				'for' => 'wb-newentity-aliases',
-				'class' => 'wb-label'
+				'label-message' => 'wikibase-newentity-description'
 			),
-			$this->msg( 'wikibase-newentity-aliases' )->text()
-		)
-		. Html::input(
-			'aliases',
-			$this->aliases ? implode( '|', $this->aliases ) : '',
-			'text',
-			array(
+			'aliases' => array(
+				'name' => 'aliases',
+				'default' => $this->aliases ? implode( '|', $this->aliases ) : '',
+				'type' => 'text',
 				'id' => 'wb-newentity-aliases',
-				'class' => 'wb-input',
+				'cssclass' => 'wb-input',
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
 					'wikibase-aliases-edit-placeholder-language-aware',
 					$langName
 				)->text(),
+				'label-message' => 'wikibase-newentity-aliases'
 			)
 		);
 	}
@@ -306,49 +281,19 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * Building the HTML form for creating a new item.
 	 *
 	 * @param string|null $legend initial value for the label input box
-	 * @param string $additionalHtml initial value for the description input box
+	 * @param array $additionalFormElements initial value for the description input box
 	 */
-	private function createForm( $legend = null, $additionalHtml = '' ) {
+	private function createForm( $legend = null, $additionalFormElements = array() ) {
 		$this->addCopyrightText();
 
-		$this->getOutput()->addHTML(
-				Html::openElement(
-					'form',
-					array(
-						'method' => 'post',
-						'action' => $this->getPageTitle()->getFullUrl(),
-						'name' => 'newentity',
-						'id' => 'mw-newentity-form1',
-						'class' => 'wb-form'
-					)
-				)
-				. Html::openElement(
-					'fieldset',
-					array( 'class' => 'wb-fieldset' )
-				)
-				. Html::element(
-					'legend',
-					array( 'class' => 'wb-legend' ),
-					$legend
-				)
-				. Html::hidden(
-					'token',
-					$this->getUser()->getEditToken()
-				)
-				. $additionalHtml
-				. Html::element( 'br' )
-				. Html::input(
-					'submit',
-					$this->msg( 'wikibase-newentity-submit' )->text(),
-					'submit',
-					array(
-						'id' => 'wb-newentity-submit',
-						'class' => 'wb-button'
-					)
-				)
-				. Html::closeElement( 'fieldset' )
-				. Html::closeElement( 'form' )
-		);
+		HTMLForm::factory( 'ooui', $additionalFormElements, $this->getContext() )
+			->setId( 'mw-newentity-form1' )
+			->setSubmitID( 'wb-newentity-submit' )
+			->setSubmitName( 'submit' )
+			->setSubmitTextMsg( 'wikibase-newentity-submit' )
+			->setWrapperLegendMsg( $legend )
+			->setSubmitCallback( function () {// no-op
+			} )->show();
 	}
 
 	/**
