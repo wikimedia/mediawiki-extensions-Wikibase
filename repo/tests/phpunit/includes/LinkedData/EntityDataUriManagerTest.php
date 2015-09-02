@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 
 /**

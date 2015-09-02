@@ -13,7 +13,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -174,7 +174,7 @@ class DumpRdfTest extends MediaWikiTestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {
 				if ( $propertyId->getSerialization() === 'P999' ) {
-					throw new PropertyNotFoundException( $propertyId );
+					throw new PropertyDataTypeLookupException( $propertyId );
 				}
 				return 'DtIdFor_' . $propertyId->getSerialization();
 			} ) );

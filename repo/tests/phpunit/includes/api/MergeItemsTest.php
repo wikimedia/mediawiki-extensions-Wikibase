@@ -9,7 +9,7 @@ use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;

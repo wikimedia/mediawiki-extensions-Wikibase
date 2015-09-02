@@ -12,7 +12,7 @@ use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
@@ -161,7 +161,7 @@ class SnakValidator implements ValueValidator {
 			} else {
 				$result = Result::newSuccess();
 			}
-		} catch ( PropertyNotFoundException $ex ) {
+		} catch ( PropertyDataTypeLookupException $ex ) {
 			$result = Result::newError( array(
 				Error::newError( "Property $propertyId not found!", null, 'no-such-property', array( $propertyId ) )
 			) );

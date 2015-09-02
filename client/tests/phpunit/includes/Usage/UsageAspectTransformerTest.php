@@ -6,7 +6,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageAspectTransformer;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @covers Wikibase\Client\Usage\UsageAspectTransformer

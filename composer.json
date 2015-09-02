@@ -36,11 +36,11 @@
 		"data-values/value-view": "~0.15.3",
 
 		"wikibase/data-model": "~4.0",
+		"wikibase/data-model-serialization": "~2.0",
+		"wikibase/internal-serialization": "~2.0",
+		"wikibase/data-model-services": "~2.0",
 		"wikibase/data-model-javascript": "^1.0.2",
-		"wikibase/data-model-serialization": "~1.7",
-		"wikibase/data-model-services": "~1.1",
 		"wikibase/javascript-api": "~1.0",
-		"wikibase/internal-serialization": "~1.4",
 		"wikibase/serialization-javascript": "~2.0",
 
 		"diff/diff": "~2.0|~1.0"
