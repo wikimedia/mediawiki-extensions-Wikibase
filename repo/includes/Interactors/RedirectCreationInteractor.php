@@ -6,6 +6,7 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
@@ -192,17 +193,20 @@ class RedirectCreationInteractor {
 	 * @throws RedirectCreationException
 	 */
 	private function checkExistsNoRedirect( EntityId $entityId ) {
-		$redirect = $this->entityRedirectLookup->getRedirectForEntityId(
-			$entityId,
-			'for update'
-		);
-
-		if ( $redirect === false ) {
-			throw new RedirectCreationException(
-				"Entity $entityId not found",
-				'no-such-entity'
+		try {
+			$redirect = $this->entityRedirectLookup->getRedirectForEntityId(
+				$entityId,
+				'for update'
 			);
-		} elseif ( $redirect !== null ) {
+		} catch ( EntityRedirectLookupException $ex ) {
+			throw new RedirectCreationException(
+				$ex->getMessage(),
+				'no-such-entity',
+				$ex
+			);
+		}
+
+		if ( $redirect !== null ) {
 			throw new RedirectCreationException(
 				"Entity $entityId is a redirect",
 				'target-is-redirect'

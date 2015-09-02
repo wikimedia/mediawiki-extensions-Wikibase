@@ -400,6 +400,7 @@ class EntityDataRequestHandler {
 		try {
 			return $this->entityRedirectLookup->getRedirectIds( $id );
 		} catch ( StorageException $ex ) {
+			// FIXME: this is catching the wrong exception type
 			$prefixedId = $id->getSerialization();
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load incoming redirects of $prefixedId: $ex" );
 			return array();
