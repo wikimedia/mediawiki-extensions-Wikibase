@@ -64,8 +64,7 @@ class ValueParserFactory {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $parserId
-	 * @param ParserOptions $parserOptions
+	 * @param string $parserIdy
 	 *
 	 * @throws OutOfBoundsException If no parser was registered for $parserId
 	 * @return ValueParser
