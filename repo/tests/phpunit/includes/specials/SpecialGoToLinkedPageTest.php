@@ -6,7 +6,7 @@ use FauxResponse;
 use Site;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -89,7 +89,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	 * @return EntityIdParser
 	 */
 	private function getEntityIdParser() {
-		$mock = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdParser' );
+		$mock = $this->getMock( 'Wikibase\DataModel\Entity\EntityIdParser' );
 		$mock->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->returnCallback( function( $itemString ) {

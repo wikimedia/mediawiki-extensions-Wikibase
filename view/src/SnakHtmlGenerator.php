@@ -5,7 +5,7 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\Template\TemplateFactory;
@@ -124,7 +124,7 @@ class SnakHtmlGenerator {
 			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
 		} catch ( FormattingException $ex ) {
 			return $this->getInvalidSnakMessage();
-		} catch ( PropertyNotFoundException $ex ) {
+		} catch ( PropertyDataTypeLookupException $ex ) {
 			return $this->getPropertyNotFoundMessage();
 		} catch ( InvalidArgumentException $ex ) {
 			return $this->getInvalidSnakMessage();

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Store;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
 
 /**
  * TermLookup based on plain array data structures.
@@ -38,17 +38,16 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException if no label in that language is known
-	 * @return string
+	 * @throws TermLookupException
+	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		$label = $this->entityInfo->getLabel( $entityId, $languageCode );
-
-		if ( $label === null ) {
-			throw new OutOfBoundsException( "No label found for language '$languageCode'" );
+		try {
+			return $this->entityInfo->getLabel( $entityId, $languageCode );
 		}
-
-		return $label;
+		catch ( \OutOfBoundsException $ex ) {
+			throw new TermLookupException( $entityId, array( $languageCode ), $ex->getMessage(), $ex );
+		}
 	}
 
 	/**
@@ -57,7 +56,7 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languages
 	 *
-	 * @throws OutOfBoundsException
+	 * @throws TermLookupException
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId, array $languages ) {
@@ -70,17 +69,16 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException if no description in that language is known
-	 * @return string
+	 * @throws TermLookupException
+	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		$description = $this->entityInfo->getDescription( $entityId, $languageCode );
-
-		if ( $description === null ) {
-			throw new OutOfBoundsException( "No description found for language '$languageCode'" );
+		try {
+			return $this->entityInfo->getDescription( $entityId, $languageCode );
 		}
-
-		return $description;
+		catch ( \OutOfBoundsException $ex ) {
+			throw new TermLookupException( $entityId, array( $languageCode ), $ex->getMessage(), $ex );
+		}
 	}
 
 	/**
@@ -89,7 +87,7 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languages
 	 *
-	 * @throws OutOfBoundsException
+	 * @throws TermLookupException
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId, array $languages ) {

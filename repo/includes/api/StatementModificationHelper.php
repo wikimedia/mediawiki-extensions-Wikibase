@@ -14,9 +14,9 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
@@ -129,7 +129,7 @@ class StatementModificationHelper {
 			$this->errorReporter->dieException( $ex, 'invalid-snak' );
 		} catch ( OutOfBoundsException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-snak' );
-		} catch ( PropertyNotFoundException $ex ) {
+		} catch ( PropertyDataTypeLookupException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-snak' );
 		}
 
