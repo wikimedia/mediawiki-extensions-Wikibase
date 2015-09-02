@@ -181,12 +181,10 @@ class SpecialPagesWithBadges extends QueryPage {
 		$html = '';
 
 		foreach ( $this->badgeIds as $badgeId ) {
-			try {
-				$label = $labelLookup->getLabel( new ItemId( $badgeId ) )->getText();
-			} catch ( OutOfBoundsException $ex ) {
-				// show plain id if no label has been found
-				$label = $badgeId;
-			}
+			$label = $labelLookup->getLabel( new ItemId( $badgeId ) );
+
+			// show plain id if no label has been found
+			$label = $label === null ? $badgeId : $label->getText();
 
 			$html .= Html::element(
 				'option',

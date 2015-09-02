@@ -202,12 +202,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 			return $this->entityIdFormatter->formatEntityId( $propertyId );
 		}
 
-		$labelTerm = null;
-		try {
-			$labelTerm = $this->labelDescriptionLookup->getLabel( $propertyId );
-		} catch ( OutOfBoundsException $e ) {
-			// If there is no label do not add it
-		}
+		$labelTerm = $this->labelDescriptionLookup->getLabel( $propertyId );
 
 		$row = Html::rawElement(
 			'a',

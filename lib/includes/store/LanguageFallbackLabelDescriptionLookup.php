@@ -2,10 +2,11 @@
 
 namespace Wikibase\Lib\Store;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
@@ -44,37 +45,37 @@ class LanguageFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException
-	 * @return Term
+	 * @throws LabelDescriptionLookupException
+	 * @return Term|null
 	 */
 	public function getLabel( EntityId $entityId ) {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
-		$labels = $this->termLookup->getLabels( $entityId, $fetchLanguages );
-		$termFallback = $this->getTermFallback( $labels, $fetchLanguages );
 
-		if ( $termFallback === null ) {
-			throw new OutOfBoundsException( 'Label not found for fallback chain.' );
+		try {
+			$labels = $this->termLookup->getLabels( $entityId, $fetchLanguages );
+		} catch ( TermLookupException $ex ) {
+			throw new LabelDescriptionLookupException( $entityId, $ex->getMessage(), $ex );
 		}
 
-		return $termFallback;
+		return $this->getTermFallback( $labels, $fetchLanguages );
 	}
 
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException
-	 * @return Term
+	 * @throws LabelDescriptionLookupException
+	 * @return Term|null
 	 */
 	public function getDescription( EntityId $entityId ) {
 		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
-		$descriptions = $this->termLookup->getDescriptions( $entityId, $fetchLanguages );
-		$termFallback = $this->getTermFallback( $descriptions, $fetchLanguages );
 
-		if ( $termFallback === null ) {
-			throw new OutOfBoundsException( 'Description not found for fallback chain.' );
+		try {
+			$descriptions = $this->termLookup->getDescriptions( $entityId, $fetchLanguages );
+		} catch ( TermLookupException $ex ) {
+			throw new LabelDescriptionLookupException( $entityId, $ex->getMessage(), $ex );
 		}
 
-		return $termFallback;
+		return $this->getTermFallback( $descriptions, $fetchLanguages );
 	}
 
 	/**

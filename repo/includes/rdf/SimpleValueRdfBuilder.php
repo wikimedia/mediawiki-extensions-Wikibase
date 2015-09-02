@@ -12,7 +12,7 @@ use DataValues\TimeValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -97,7 +97,7 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 			// for any other types
 			try {
 				$dataType = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
-			} catch ( PropertyNotFoundException $e ) {
+			} catch ( PropertyDataTypeLookupException $e ) {
 				// keep "unknown"
 			}
 		}
