@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c9dff96a",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T13:54:18Z",
+      "side": 1,
+      "message": "WikibaseClient.datatypes.php I suppose",
+      "revId": "d7c9766e6626554032e7dadaf7bf2c123534302c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_69c12582",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T13:54:18Z",
+      "side": 1,
+      "message": "Can we somehow avoid hardcoding the same fallback modes at several places?",
+      "revId": "d7c9766e6626554032e7dadaf7bf2c123534302c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
