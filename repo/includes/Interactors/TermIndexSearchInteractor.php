@@ -322,11 +322,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @return null|Term
 	 */
 	private function getLabelDisplayTerm( EntityId $entityId ) {
-		try {
-			return $this->labelDescriptionLookup->getLabel( $entityId );
-		} catch ( OutOfBoundsException $e ) {
-			return null;
-		}
+		return $this->labelDescriptionLookup->getLabel( $entityId );
 	}
 
 	/**
@@ -335,11 +331,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @return null|Term
 	 */
 	private function getDescriptionDisplayTerm( EntityId $entityId ) {
-		try {
-			return $this->labelDescriptionLookup->getDescription( $entityId );
-		} catch ( OutOfBoundsException $e ) {
-			return null;
-		}
+		return $this->labelDescriptionLookup->getDescription( $entityId );
 	}
 
 	/**
