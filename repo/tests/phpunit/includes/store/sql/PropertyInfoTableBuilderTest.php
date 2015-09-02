@@ -2,8 +2,11 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\PropertyInfoBuilder;
 use Wikibase\PropertyInfoStore;
 use Wikibase\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
@@ -28,10 +31,10 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 	private function initProperties() {
 		$infos = array(
 			array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'one' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'two' ),
+			array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'two', PropertyInfoStore::KEY_FORMATTER_URL => 'foo' ),
 			array( PropertyInfoStore::KEY_DATA_TYPE => 'time', 'test' => 'three' ),
 			array( PropertyInfoStore::KEY_DATA_TYPE => 'time', 'test' => 'four' ),
-			array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'five' ),
+			array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'five', PropertyInfoStore::KEY_FORMATTER_URL => 'bar' ),
 		);
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
@@ -40,6 +43,11 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		foreach ( $infos as $info ) {
 			$property = Property::newFromType( $info[PropertyInfoStore::KEY_DATA_TYPE] );
 			$property->setDescription( 'en', $info['test'] );
+
+			if ( isset( $info[PropertyInfoStore::KEY_FORMATTER_URL] ) ) {
+				$mainSnak = new PropertyValueSnak( 1630, new StringValue( $info[PropertyInfoStore::KEY_FORMATTER_URL] ) );
+				$property->getStatements()->addNewStatement( $mainSnak );
+			}
 
 			$revision = $store->saveEntity( $property, "test", $GLOBALS['wgUser'], EDIT_NEW );
 
@@ -64,10 +72,12 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
 		//       so we should also use the EntityLookup from WikibaseRepo.
-		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
-		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
+		$useRedirectTargetColumn = $wikibaseRepo->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $useRedirectTargetColumn );
+		$propertyInfoBuilder = new PropertyInfoBuilder( new PropertyId( 'P1630' ) );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder, $useRedirectTargetColumn );
 		$builder->setBatchSize( 3 );
 
 		// rebuild all ----
@@ -113,13 +123,19 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$builder->setRebuildAll( false );
 
 		$c = $builder->rebuildPropertyInfo();
-		$this->assertEquals( 0, $c, "Thre should be nothing left to rebuild" );
+		$this->assertEquals( 0, $c, "There should be nothing left to rebuild" );
 	}
 
 	private function assertTableHasProperties( array $properties, PropertyInfoTable $table ) {
 		foreach ( $properties as $propId => $expected ) {
 			$info = $table->getPropertyInfo( new PropertyId( $propId ) );
 			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $propId" );
+
+			if ( isset( $expected[PropertyInfoStore::KEY_FORMATTER_URL] ) ) {
+				$this->assertEquals( $expected[PropertyInfoStore::KEY_FORMATTER_URL], $info[PropertyInfoStore::KEY_FORMATTER_URL] );
+			} else {
+				$this->assertArrayNotHasKey( PropertyInfoStore::KEY_FORMATTER_URL, $info );
+			}
 		}
 	}
 
