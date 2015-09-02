@@ -2,7 +2,9 @@
 
 namespace Wikibase\Lib\Store;
 
+use InvalidArgumentException;
 use MWException;
+use OutOfBoundsException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -30,6 +32,8 @@ interface EntityTitleLookup {
 	 * @param EntityId $id
 	 *
 	 * @throws MWException
+	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
 	 * @return Title|null
 	 */
 	public function getTitleForId( EntityId $id );
@@ -41,6 +45,7 @@ interface EntityTitleLookup {
 	 *
 	 * @param string $type the entity type to look up, as returned by Entity::getType()
 	 *
+	 * @throws OutOfBoundsException
 	 * @return int the namespace ID for this type
 	 */
 	public function getNamespaceForType( $type );
