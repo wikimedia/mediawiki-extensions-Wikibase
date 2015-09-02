@@ -13,11 +13,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityRevision;
@@ -494,7 +494,7 @@ class MockRepository implements
 	 * @param PropertyId $propertyId
 	 *
 	 * @return string
-	 * @throws PropertyNotFoundException
+	 * @throws PropertyDataTypeLookupException
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
 		$entity = $this->getEntity( $propertyId );
@@ -503,7 +503,7 @@ class MockRepository implements
 			return $entity->getDataTypeId();
 		}
 
-		throw new PropertyNotFoundException( $propertyId );
+		throw new PropertyDataTypeLookupException( $propertyId );
 	}
 
 	/**

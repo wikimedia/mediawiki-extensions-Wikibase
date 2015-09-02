@@ -103,7 +103,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		$expectedDataType
 	) {
 		if ( $expectedDataType === false ) {
-			$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException' );
+			$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException' );
 		}
 
 		$lookup = new PropertyInfoDataTypeLookup( $infoStore, $fallbackLookup );

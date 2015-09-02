@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Api;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -152,17 +152,8 @@ class EntitySearchHelper {
 	private function getDisplayTerms( EntityId $entityId ) {
 		$displayTerms = array();
 
-		try {
-			$displayTerms['label'] = $this->labelDescriptionLookup->getLabel( $entityId );
-		} catch ( OutOfBoundsException $e ) {
-			$displayTerms['label'] = null;
-		}
-
-		try {
-			$displayTerms['description'] = $this->labelDescriptionLookup->getDescription( $entityId );
-		} catch ( OutOfBoundsException $e ) {
-			$displayTerms['description'] = null;
-		}
+		$displayTerms['label'] = $this->labelDescriptionLookup->getLabel( $entityId );
+		$displayTerms['description'] = $this->labelDescriptionLookup->getDescription( $entityId );
 
 		return $displayTerms;
 	}

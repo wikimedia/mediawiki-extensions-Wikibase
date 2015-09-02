@@ -320,12 +320,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$idSerialization = $badgeId->getSerialization();
 			$name = 'badge-' . $idSerialization;
 
-			try {
-				$label = $labelLookup->getLabel( $badgeId )->getText();
-			} catch ( OutOfBoundsException $ex ) {
-				// show plain id if no label has been found
-				$label = $idSerialization;
-			}
+			$label = $labelLookup->getLabel( $badgeId );
+			$label = $label === null ? $idSerialization : $label->getText();
 
 			$options .= Html::rawElement(
 				'div',

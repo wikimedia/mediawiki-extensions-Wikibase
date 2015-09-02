@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\SnakFactory;
 
@@ -55,7 +55,7 @@ class SnakConstructionService {
 	 * @param mixed $rawValue
 	 *
 	 * @return Snak
-	 * @throws PropertyNotFoundException from getDataTypeIdForProperty
+	 * @throws PropertyDataTypeLookupException from getDataTypeIdForProperty
 	 * @throws OutOfBoundsException from getType
 	 * @throws InvalidArgumentException from newDataValue, newDataValue and newSnak
 	 */
