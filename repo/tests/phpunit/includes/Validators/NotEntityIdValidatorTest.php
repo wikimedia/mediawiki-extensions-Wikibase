@@ -3,7 +3,7 @@
 namespace Wikibase\Test\Repo\Validators;
 
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Validators\NotEntityIdValidator;
 
 /**

@@ -6,12 +6,12 @@ use ValueParsers\Test\StringValueParserTest;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\EntityIdValueParser;
 
 /**
  * @covers Wikibase\Lib\EntityIdValueParser
- * @uses Wikibase\DataModel\Services\EntityId\BasicEntityIdParser
+ * @uses Wikibase\DataModel\Entity\BasicEntityIdParser
  *
  * @group ValueParsers
  * @group WikibaseLib

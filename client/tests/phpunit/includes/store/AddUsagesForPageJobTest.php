@@ -6,7 +6,7 @@ use Title;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @covers Wikibase\Client\Store\AddUsagesForPageJob
