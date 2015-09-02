@@ -83,6 +83,9 @@ return call_user_func( function() {
 			return $uri;
 		},
 
+		// Property used as formatter to link identifiers
+		'formatterUrlProperty' => null,
+
 		// Determines how subscription lookup is handled. Possible values:
 		//
 		// - 'sitelinks': Use only sitelinks to determine which wiki is subscribed to which entity.

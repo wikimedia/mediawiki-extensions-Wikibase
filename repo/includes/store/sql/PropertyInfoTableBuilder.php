@@ -74,12 +74,13 @@ class PropertyInfoTableBuilder {
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,
 		EntityLookup $entityLookup,
+		PropertyInfoBuilder $propertyInfoBuilder,
 		$useRedirectTargetColumn = true
 	) {
 		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
+		$this->propertyInfoBuilder = $propertyInfoBuilder;
 		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
-		$this->propertyInfoBuilder = new PropertyInfoBuilder();
 	}
 
 	/**
