@@ -16,6 +16,24 @@
       "revId": "6242d54af487a52fe17c1c6e7da1c19f43f90202",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6fa285a5",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T16:29:58Z",
+      "side": 0,
+      "message": "This was just a side-effect of refactoring. I noticed that these messages are unused and thus removed them.",
+      "parentUuid": "6ec1af18_0f6d01c7",
+      "revId": "6242d54af487a52fe17c1c6e7da1c19f43f90202",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
