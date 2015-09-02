@@ -1,10 +1,10 @@
 # Wikibase DataModel release notes
 
-## Version 4.3 (dev)
+## Version 4.3.0 (dev)
 
 * Added `isEmpty` to `EntityDocument`
 
-## Version 4.2 (2015-08-26)
+## Version 4.2.0 (2015-08-26)
 
 * Added `EntityRedirect`
 * Added `EntityIdParser` and `EntityIdParsingException`
@@ -12,14 +12,14 @@
 * Added `DispatchingEntityIdParser`
 * Removed no longer needed dependency on `diff/diff`
 
-## Version 4.1 (2015-08-04)
+## Version 4.1.0 (2015-08-04)
 
 * Added `StatementList::filter`
 * Added `StatementFilter` and `ReferencedStatementFilter`
 * Added `LabelsProvider`, `DescriptionsProvider` and `AliasesProvider`
 * Added `FingerprintHolder`
 
-## Version 4.0 (2015-07-28)
+## Version 4.0.0 (2015-07-28)
 
 #### Breaking changes
 
@@ -205,7 +205,7 @@ Other breaking changes:
 * Deprecated `Claim::RANK_` enum in favour of `Statement::RANK_` enum
 * Deprecated `Claim::getRank`
 
-## Version 1.1 (2014-09-29)
+## Version 1.1.0 (2014-09-29)
 
 #### Additions
 
@@ -221,7 +221,7 @@ Other breaking changes:
 * The `Reference` constructor now accepts a `Snak` array
 * Added `ReferenceList::addNewReference`
 
-## Version 1.0 (2014-09-02)
+## Version 1.0.0 (2014-09-02)
 
 #### Breaking changes
 
@@ -309,7 +309,7 @@ Other breaking changes:
 
 * Fixed error caused by redeclaration of getType in `Entity`, after it already got defined in `EntityDocument`
 
-## Version 0.9 (2014-08-15)
+## Version 0.9.0 (2014-08-15)
 
 * Changed the signatures of `setLabel`, `setDescription` and `setAliasGroup` in `Fingerprint`
 * Added `hasLabel`, `hasDescription` and `hasAliasGroup` to `Fingerprint`
@@ -325,7 +325,7 @@ Other breaking changes:
 
 * Fixed fatal error when calling `Item::getSiteLinkList` on an `Item` right after constructing it
 
-## Version 0.8 (2014-06-05)
+## Version 0.8.0 (2014-06-05)
 
 #### Breaking changes
 
@@ -450,7 +450,7 @@ No description will be shown as part of its entry on Special:Version.
 * Removed DataValues Geo, DataValues Time and DataValues Number from the dependency list.
 They where no longer needed.
 
-## Version 0.7 (2014-03-07)
+## Version 0.7.0 (2014-03-07)
 
 #### Additions
 
@@ -473,7 +473,7 @@ They where no longer needed.
 * Removed PropertySnak interface
 * Removed Claims::getObjectType
 
-## Version 0.6 (2013-12-23)
+## Version 0.6.0 (2013-12-23)
 
 #### Improvements
 
@@ -494,7 +494,7 @@ Item::getSiteLinks. The old names remains as deprecated aliases.
 * Entity::getTerms was removed, as it returned objects of type Term, which is defined by a component
 Wikibase DataModel does not depend upon.
 
-## Version 0.5 (2013-12-11)
+## Version 0.5.0 (2013-12-11)
 
 Note that this list is incomplete. In particular, not all breaking changes are listed.
 
@@ -520,10 +520,10 @@ representing the identity of an entity.
 * Constructing an EntityId (rather then one of its derivatives) is now deprecated.
 * Wikibase\EntityId has been renamed to Wikibase\DataModel\Entity\EntityId. The old name is deprecated.
 
-## Version 0.4 (2013-06-17)
+## Version 0.4.0 (2013-06-17)
 
 Initial release as Wikibase DataModel component.
 
-## Version 0.1 (2012-11-01)
+## Version 0.1.0 (2012-11-01)
 
 Initial release as part of Wikibase.
