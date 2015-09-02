@@ -186,6 +186,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 
 		// Maybe the item is a redirect: Try to resolve the redirect and load
 		// the links from there.
+		// TODO: catch exception
 		$redirectTarget = $this->redirectLookup->getRedirectForEntityId( $itemId );
 
 		if ( $redirectTarget instanceof ItemId ) {
