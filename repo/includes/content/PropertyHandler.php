@@ -38,6 +38,11 @@ class PropertyHandler extends EntityHandler {
 	private $infoStore;
 
 	/**
+	 * @var PropertyInfoBuilder
+	 */
+	private $propertyInfoBuilder;
+
+	/**
 	 * @see EntityHandler::getContentClass
 	 *
 	 * @since 0.3
@@ -66,6 +71,7 @@ class PropertyHandler extends EntityHandler {
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
 		PropertyInfoStore $infoStore,
+		PropertyInfoBuilder $propertyInfoBuilder,
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(
@@ -80,6 +86,7 @@ class PropertyHandler extends EntityHandler {
 		);
 
 		$this->infoStore = $infoStore;
+		$this->propertyInfoBuilder = $propertyInfoBuilder;
 	}
 
 	/**
@@ -173,8 +180,7 @@ class PropertyHandler extends EntityHandler {
 		/** @var PropertyContent $content */
 		$updates = array();
 
-		$propertyInfoBuilder = new PropertyInfoBuilder();
-		$info = $propertyInfoBuilder->buildPropertyInfo( $content->getProperty() );
+		$info = $this->propertyInfoBuilder->buildPropertyInfo( $content->getProperty() );
 
 		$updates[] = new DataUpdateAdapter(
 			array( $this->infoStore, 'setPropertyInfo' ),
