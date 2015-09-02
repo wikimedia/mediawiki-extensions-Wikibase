@@ -11,7 +11,6 @@ use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\QuantityFormatter;
-use ValueFormatters\QuantityUnitFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -27,35 +26,49 @@ use ValueFormatters\ValueFormatterBase;
 class QuantityDetailsFormatter extends ValueFormatterBase {
 
 	/**
-	 * @var DecimalFormatter
-	 */
-	protected $decimalFormatter;
-
-	/**
 	 * @var QuantityFormatter
 	 */
 	protected $quantityFormatter;
 
 	/**
-	 * @var QuantityUnitFormatter
+	 * @var QuantityFormatter
 	 */
-	protected $unitFormatter;
+	protected $numberFormatter;
 
 	/**
-	 * @param NumberLocalizer $numberLocalizer
-	 * @param QuantityUnitFormatter $unitFormatter
+	 * @var ValueFormatter|null
+	 */
+	protected $vocabularyUriFormatter;
+
+	/**
+	 * @param NumberLocalizer|null $numberLocalizer
+	 * @param ValueFormatter|null $vocabularyUriFormatter
 	 * @param FormatterOptions|null $options
 	 */
 	public function __construct(
-		NumberLocalizer $numberLocalizer,
-		QuantityUnitFormatter $unitFormatter,
+		NumberLocalizer $numberLocalizer = null,
+		ValueFormatter $vocabularyUriFormatter = null,
 		FormatterOptions $options = null
 	) {
 		parent::__construct( $options );
 
-		$this->unitFormatter = $unitFormatter;
-		$this->decimalFormatter = new DecimalFormatter( $this->options, $numberLocalizer );
-		$this->quantityFormatter = new QuantityFormatter( $this->decimalFormatter, $unitFormatter, $this->options );
+		$decimalFormatter = new DecimalFormatter( $this->options, $numberLocalizer );
+		$this->vocabularyUriFormatter = $vocabularyUriFormatter;
+
+		$this->quantityFormatter = new QuantityFormatter(
+			$this->options,
+			$decimalFormatter,
+			$this->vocabularyUriFormatter
+		);
+
+		$this->numberFormatter = new QuantityFormatter(
+			new FormatterOptions( array(
+				QuantityFormatter::OPT_SHOW_UNCERTAINTY_MARGIN => false,
+				QuantityFormatter::OPT_APPLY_ROUNDING => false,
+			) ),
+			$decimalFormatter,
+			$this->vocabularyUriFormatter
+		);
 	}
 
 	/**
@@ -103,9 +116,9 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function formatNumber( DecimalValue $number, $unit ) {
-		$text = $this->decimalFormatter->format( $number );
-		$text = $this->unitFormatter->applyUnit( $unit, $text );
-		return htmlspecialchars( $text );
+		return htmlspecialchars( $this->numberFormatter->format(
+			new QuantityValue( $number, $unit, $number, $number )
+		) );
 	}
 
 	/**
@@ -114,10 +127,9 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function formatUnit( $unit ) {
-		// FIXME: Use VocabularyUriFormatter introduced in https://gerrit.wikimedia.org/r/235495
-		$formattedUnit = trim( $this->unitFormatter->applyUnit( $unit, '' ) );
+		$formattedUnit = $this->vocabularyUriFormatter->format( $unit );
 
-		if ( $formattedUnit === '' || $formattedUnit === $unit ) {
+		if ( $formattedUnit === null || $formattedUnit === $unit ) {
 			return htmlspecialchars( $unit );
 		}
 

@@ -23,23 +23,18 @@ use Wikibase\Lib\QuantityDetailsFormatter;
 class QuantityDetailsFormatterTest extends PHPUnit_Framework_TestCase {
 
 	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
-		$unitFormatter = $this->getMockBuilder( 'ValueFormatters\QuantityUnitFormatter' )
-			->disableOriginalConstructor()
-			->getMock();
-		$unitFormatter->expects( $this->any() )
-			->method( 'applyUnit' )
-			->will( $this->returnCallback( function( $unit, $numberText ) {
-				if ( $unit === '1' ) {
-					return $numberText;
-				} elseif ( preg_match( '@^http://www\.wikidata\.org/entity/(.*)@', $unit, $matches ) ) {
-					$unit = $matches[1];
-				}
-				return $numberText . ' ' . $unit;
+		$vocabularyUriFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$vocabularyUriFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnCallback( function( $value ) {
+				return preg_match( '@^http://www\.wikidata\.org/entity/(.*)@', $value, $matches )
+					? $matches[1]
+					: $value;
 			} ) );
 
 		return new QuantityDetailsFormatter(
 			$numberLocalizer ?: new BasicNumberLocalizer(),
-			$unitFormatter
+			$vocabularyUriFormatter
 		);
 	}
 
