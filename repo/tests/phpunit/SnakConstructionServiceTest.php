@@ -79,17 +79,17 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 			'novalue/badprop' => array(
 				66, 'novalue', null,
 				'Wikibase\DataModel\Snak\PropertyNoValueSnak',
-				'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException'
+				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
 			),
 			'somevalue/badprop' => array(
 				66, 'somevalue', null,
 				'Wikibase\DataModel\Snak\PropertySomeValueSnak',
-				'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException'
+				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
 			),
 			'value/badprop' => array(
 				66, 'value', '"hello"',
 				'Wikibase\DataModel\Snak\PropertyValueSnak',
-				'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException'
+				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
 			),
 			'value/badvalue' => array(
 				1, 'value', array( 'foo' ),

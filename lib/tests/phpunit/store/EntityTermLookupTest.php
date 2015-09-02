@@ -24,11 +24,9 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'New York City', $label );
 	}
 
-	public function testGetLabel_noLabelFoundThrowsException() {
+	public function testWhenNoLabelFound_getLabelReturnsNull() {
 		$termLookup = $this->getEntityTermLookup();
-
-		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getLabel( new ItemId( 'Q116' ), 'fa' );
+		$this->assertNull( $termLookup->getLabel( new ItemId( 'Q116' ), 'fa' ) );
 	}
 
 	public function provideGetLabels() {
@@ -77,11 +75,9 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $description );
 	}
 
-	public function testGetDescription_descriptionNotFoundThrowsException() {
+	public function testWhenNoDescriptionFound_getDescriptionReturnsNull() {
 		$termLookup = $this->getEntityTermLookup();
-
-		$this->setExpectedException( 'OutOfBoundsException' );
-		$termLookup->getDescription( new ItemId( 'Q116' ), 'fr' );
+		$this->assertNull( $termLookup->getDescription( new ItemId( 'Q116' ), 'fr' ) );
 	}
 
 	public function provideGetDescriptions() {

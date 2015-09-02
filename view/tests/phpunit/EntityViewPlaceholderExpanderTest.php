@@ -47,7 +47,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 
 		$language = Language::factory( 'en' );
 
-		$idParser = $this->getMockBuilder( 'Wikibase\DataModel\Services\EntityId\EntityIdParser' )
+		$idParser = $this->getMockBuilder( 'Wikibase\DataModel\Entity\EntityIdParser' )
 			->disableOriginalConstructor()
 			->getMock();
 		$idParser->expects( $this->any() )
