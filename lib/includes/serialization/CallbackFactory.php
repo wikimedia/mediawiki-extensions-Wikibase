@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Serialization;
 use ApiResult;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
  * @since 0.5
@@ -75,7 +75,7 @@ class CallbackFactory {
 					foreach ( $snakGroup as &$snak ) {
 						$snak['datatype'] = $dataType;
 					}
-				} catch ( PropertyNotFoundException $e ) {
+				} catch ( PropertyDataTypeLookupException $e ) {
 					//XXX: shall we set $serialization['datatype'] = 'bad' ??
 				}
 			}
@@ -89,7 +89,7 @@ class CallbackFactory {
 				try {
 					$dataType = $dataTypeLookup->getDataTypeIdForProperty( new PropertyId( $array['property'] ) );
 					$array['datatype'] = $dataType;
-				} catch ( PropertyNotFoundException $e ) {
+				} catch ( PropertyDataTypeLookupException $e ) {
 					//XXX: shall we set $serialization['datatype'] = 'bad' ??
 				}
 			}
