@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_2adb0b56",
+        "filename": "lib/includes/formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T17:44:03Z",
+      "side": 1,
+      "message": "Hm, combining number and unit should really be done by a UnitFormatter, no?",
+      "revId": "d20f1cdc40aa53258cfa1e64a5cdacd843736942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8aef9fe3",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T17:44:03Z",
+      "side": 1,
+      "message": "where is QuantityHtmlFormatter?",
+      "revId": "d20f1cdc40aa53258cfa1e64a5cdacd843736942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
