@@ -1,10 +1,10 @@
-( function( $, util ) {
+( function( $ ) {
 	'use strict';
 
 var PARENT = $.ui.suggester;
 
 /**
- * @class jQuery.ui.languagesuggester
+ * @class jQuery.ui.unitsuggester
  * @extends jQuery.ui.suggester
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
@@ -12,8 +12,7 @@ var PARENT = $.ui.suggester;
  *
  * @constructor
  */
-
-$.widget( 'wikibase.unitsuggester', PARENT, {
+$.widget( 'ui.unitsuggester', PARENT, {
 
 	/**
 	 * Options
@@ -306,4 +305,4 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 	}
 } );
 
-}( jQuery, util ) );
+}( jQuery ) );
