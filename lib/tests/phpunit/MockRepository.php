@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\SiteLink;
@@ -778,8 +779,9 @@ class MockRepository implements
 	 * @param EntityId $entityId
 	 * @param string $forUpdate
 	 *
-	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
-	 *         does not refer to a redirect, or false if $entityId is not known.
+	 * @return EntityId|null The ID of the redirect target, or null if $entityId
+	 *         does not refer to a redirect
+	 * @throws EntityRedirectLookupException
 	 */
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
 		$key = $entityId->getSerialization();
@@ -792,7 +794,7 @@ class MockRepository implements
 			return null;
 		}
 
-		return false;
+		throw new EntityRedirectLookupException( $entityId );
 	}
 
 }
