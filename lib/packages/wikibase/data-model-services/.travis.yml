@@ -10,7 +10,7 @@ matrix:
       php: 5.3
     - env: DM=~4.2
       php: 5.4
-    - env: DM=~4.2
+    - env: DM=~4.3@dev
       php: 5.6
     - env: DM=~4.2
       php: 7
