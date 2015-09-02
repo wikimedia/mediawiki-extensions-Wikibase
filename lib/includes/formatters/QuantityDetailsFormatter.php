@@ -11,7 +11,6 @@ use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\NumberLocalizer;
 use ValueFormatters\QuantityFormatter;
-use ValueFormatters\QuantityUnitFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -37,25 +36,25 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	protected $quantityFormatter;
 
 	/**
-	 * @var QuantityUnitFormatter
+	 * @var ValueFormatter|null
 	 */
-	protected $unitFormatter;
+	protected $vocabularyUriFormatter;
 
 	/**
 	 * @param NumberLocalizer $numberLocalizer
-	 * @param QuantityUnitFormatter $unitFormatter
+	 * @param ValueFormatter|null $vocabularyUriFormatter
 	 * @param FormatterOptions|null $options
 	 */
 	public function __construct(
 		NumberLocalizer $numberLocalizer,
-		QuantityUnitFormatter $unitFormatter,
+		ValueFormatter $vocabularyUriFormatter = null,
 		FormatterOptions $options = null
 	) {
 		parent::__construct( $options );
 
-		$this->unitFormatter = $unitFormatter;
+		$this->vocabularyUriFormatter = $vocabularyUriFormatter;
 		$this->decimalFormatter = new DecimalFormatter( $this->options, $numberLocalizer );
-		$this->quantityFormatter = new QuantityFormatter( $this->decimalFormatter, $unitFormatter, $this->options );
+		$this->quantityFormatter = new QuantityFormatter( $this->decimalFormatter, $vocabularyUriFormatter, $this->options );
 	}
 
 	/**
@@ -103,9 +102,17 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function formatNumber( DecimalValue $number, $unit ) {
-		$text = $this->decimalFormatter->format( $number );
-		$text = $this->unitFormatter->applyUnit( $unit, $text );
-		return htmlspecialchars( $text );
+		$html = htmlspecialchars( $this->decimalFormatter->format( $number ) );
+
+		if ( $this->vocabularyUriFormatter !== null ) {
+			$label = $this->vocabularyUriFormatter->format( $unit );
+
+			if ( $label !== null ) {
+				$html .= ' ' . htmlspecialchars( $label );
+			}
+		}
+
+		return $html;
 	}
 
 	/**
@@ -114,10 +121,9 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function formatUnit( $unit ) {
-		// FIXME: Use VocabularyUriFormatter introduced in https://gerrit.wikimedia.org/r/235495
-		$formattedUnit = trim( $this->unitFormatter->applyUnit( $unit, '' ) );
+		$formattedUnit = $this->vocabularyUriFormatter->format( $unit );
 
-		if ( $formattedUnit === '' || $formattedUnit === $unit ) {
+		if ( $formattedUnit === null || $formattedUnit === $unit ) {
 			return htmlspecialchars( $unit );
 		}
 
