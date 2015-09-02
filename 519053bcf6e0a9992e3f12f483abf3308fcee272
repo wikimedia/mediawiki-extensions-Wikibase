@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_49e0e9c7",
+        "filename": "repo/resources/wikibase.special/wikibase.special.siteSuggester.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-02T14:41:10Z",
+      "side": 1,
+      "message": "Added by Thiemo in I8e0ef480d257a2d6f065e4c56670c3711cebe4a2",
+      "parentUuid": "6ec1af18_292c7d45",
+      "revId": "519053bcf6e0a9992e3f12f483abf3308fcee272",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_09e42109",
         "filename": "repo/resources/wikibase.special/wikibase.special.siteSuggester.js",
         "patchSetId": 1
