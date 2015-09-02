@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Usage;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
 
 /**
  * TermLookup decorator that records label usage in an TermLookup.
@@ -28,10 +28,6 @@ class UsageTrackingTermLookup implements TermLookup {
 	 */
 	private $usageAccumulator;
 
-	/**
-	 * @param TermLookup $termLookup
-	 * @param UsageAccumulator $usageAccumulator
-	 */
 	public function __construct( TermLookup $termLookup, UsageAccumulator $usageAccumulator ) {
 		$this->termLookup = $termLookup;
 		$this->usageAccumulator = $usageAccumulator;
@@ -43,8 +39,8 @@ class UsageTrackingTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException if no label in that language is known
-	 * @return string
+	 * @throws TermLookupException
+	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		$this->usageAccumulator->addLabelUsage( $entityId, $languageCode );
@@ -57,7 +53,7 @@ class UsageTrackingTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languages
 	 *
-	 * @throws OutOfBoundsException
+	 * @throws TermLookupException
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId, array $languages ) {
@@ -74,8 +70,8 @@ class UsageTrackingTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException if no description in that language is known
-	 * @return string
+	 * @throws TermLookupException
+	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		return $this->termLookup->getDescription( $entityId, $languageCode );
@@ -87,7 +83,7 @@ class UsageTrackingTermLookup implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languages
 	 *
-	 * @throws OutOfBoundsException
+	 * @throws TermLookupException
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId, array $languages ) {

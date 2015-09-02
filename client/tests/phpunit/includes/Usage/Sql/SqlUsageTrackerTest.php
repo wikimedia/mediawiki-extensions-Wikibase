@@ -8,7 +8,7 @@ use Wikibase\Client\Tests\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * @covers Wikibase\Client\Usage\Sql\SqlUsageTracker

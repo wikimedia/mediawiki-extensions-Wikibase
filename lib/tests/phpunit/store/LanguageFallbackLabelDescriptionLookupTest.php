@@ -60,8 +60,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
 
-		$this->setExpectedException( 'OutOfBoundsException' );
-		$labelDescriptionLookup->getLabel( new ItemId( 'Q120' ) );
+		$this->assertNull( $labelDescriptionLookup->getLabel( new ItemId( 'Q120' ) ) );
 	}
 
 	public function testGetDescription_entityNotFound() {
@@ -70,8 +69,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
 
-		$this->setExpectedException( 'OutOfBoundsException' );
-		$labelDescriptionLookup->getDescription( new ItemId( 'Q120' ) );
+		$this->assertNull( $labelDescriptionLookup->getDescription( new ItemId( 'Q120' ) ) );
 	}
 
 	public function testGetLabel_notFound() {
@@ -80,8 +78,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
 
-		$this->setExpectedException( 'OutOfBoundsException' );
-		$labelDescriptionLookup->getLabel( new ItemId( 'Q116' ) );
+		$this->assertNull( $labelDescriptionLookup->getLabel( new ItemId( 'Q116' ) ) );
 	}
 
 	public function testGetDescription_notFound() {
@@ -90,8 +87,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
 
-		$this->setExpectedException( 'OutOfBoundsException' );
-		$labelDescriptionLookup->getDescription( new ItemId( 'Q116' ) );
+		$this->assertNull( $labelDescriptionLookup->getDescription( new ItemId( 'Q116' ) ) );
 	}
 
 	private function getLanguageFallbackChain( $languageCode ) {

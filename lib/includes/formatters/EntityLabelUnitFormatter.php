@@ -2,10 +2,9 @@
 
 namespace Wikibase\Lib;
 
-use OutOfBoundsException;
 use ValueFormatters\QuantityUnitFormatter;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 
 /**
@@ -74,14 +73,12 @@ class EntityLabelUnitFormatter implements QuantityUnitFormatter {
 		try {
 			$entityId = $this->externalEntityIdParser->parse( $unit );
 
-			try {
-				// TODO: Ideally we would show unit *symbols*, taking from a config file,
-				// a system message, or a statement on the unit's item. Then the
-				// name "EntityLabelUnitFormatter" doesn't apply any more, though.
-				$label = $this->labelLookup->getLabel( $entityId )->getText();
-			} catch ( OutOfBoundsException $ex ) {
-				$label = $entityId->getSerialization();
-			}
+			// TODO: Ideally we would show unit *symbols*, taking from a config file,
+			// a system message, or a statement on the unit's item. Then the
+			// name "EntityLabelUnitFormatter" doesn't apply any more, though.
+
+			$label = $this->labelLookup->getLabel( $entityId );
+			$label = $label === null ? $entityId->getSerialization() : $label->getText();
 
 			// TODO: localizable pattern for placement (before/after, separator)
 			return "$numberText $label";

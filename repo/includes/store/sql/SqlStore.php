@@ -9,7 +9,7 @@ use HashBagOStuff;
 use MWException;
 use ObjectCache;
 use Revision;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;

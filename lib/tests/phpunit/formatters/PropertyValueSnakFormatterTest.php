@@ -9,7 +9,7 @@ use DataValues\UnDeserializableValue;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyNotFoundException;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\DispatchingValueFormatter;
@@ -59,7 +59,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 			$getDataTypeIdForPropertyResult = $this->returnValue( $dataType );
 		} else {
 			$getDataTypeIdForPropertyResult = $this->throwException(
-				new PropertyNotFoundException( new PropertyId( 'P666' ) ) );
+				new PropertyDataTypeLookupException( new PropertyId( 'P666' ) ) );
 		}
 
 		$typeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
@@ -256,7 +256,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				$formatters,
 				PropertyValueSnakFormatter::ON_ERROR_FAIL,
 				null,
-				'Wikibase\DataModel\Services\Lookup\PropertyNotFoundException'
+				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
 			),
 		);
 	}
