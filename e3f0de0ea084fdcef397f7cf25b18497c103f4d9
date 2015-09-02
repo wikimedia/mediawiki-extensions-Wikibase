@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_4a6e97ff",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-02T18:07:45Z",
+      "side": 1,
+      "message": "I found that the most simple way to do this is\n\n $regex \u003d \u0027\u003c^\u0027 . preg_quote( $prefix ) . \u0027\u003e\u0027;",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
