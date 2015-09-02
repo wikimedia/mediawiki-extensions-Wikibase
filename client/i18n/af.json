@@ -45,11 +45,6 @@
 	"wikibase-watchlist-show-changes-pref": "Wys Wikidata-wysigings in u dophoulys",
 	"wikibase-error-invalid-entity-id": "Die opgegewe ID is nie in die stelsel nie. Gebruik 'n geldig entiteit-ID.",
 	"unconnectedpages": "Bladsye wat nie aan items gekoppel is nie",
-	"wikibase-unconnectedpages-page": "Begin resultaatlys met bladsy:",
-	"wikibase-unconnectedpages-submit": "OK",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" is nie 'n geldige taalkode nie.",
-	"wikibase-unconnectedpages-page-warning": "Die bladsynaam kan nie vir die soekopdrag gebruik word nie en is geïgnoreer.",
-	"wikibase-unconnectedpages-iwdata-label": "Slegs bladsye met taalskakels",
 	"wikibase-unconnectedpages-format-row": "($1 taalskakel{{PLURAL:$1||s}} op die bladsy)",
 	"wikibase-otherprojects": "Ander projekte"
 }

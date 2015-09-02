@@ -6,6 +6,7 @@
 		]
 	},
 	"wikibase-client-desc": "Client par l'estension Wikibase",
+	"tooltip-t-wikibase": "Colegamento a l'elemento de l'archivio dati colegà",
 	"wikibase-after-page-move": "Te pol anca [$1 ajornar] l'elemento asocià su Wikidata par trasferir i interlink su la pagina nova.",
 	"wikibase-comment-remove": "L'elemento de Wikidata asocià el xe stà scancelà. I colegamenti interlenguìsteghi i xe stà cavà.",
 	"wikibase-comment-linked": "Un elemento de Wikidata el xe stà colegà a sta pagina.",
@@ -44,11 +45,6 @@
 	"wikibase-watchlist-show-changes-pref": "Mostra le modifiche de Wikidata sui osservati speciali",
 	"wikibase-error-invalid-entity-id": "L'ID specificà el xe sconossùo al sistema. Dòpara un ID de entità valido.",
 	"unconnectedpages": "Pagine mia colegà ai elementi",
-	"wikibase-unconnectedpages-page": "Taca l'elenco dei risultati da la pagina:",
-	"wikibase-unconnectedpages-submit": "Và",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" no xe un còdese de lengua valido.",
-	"wikibase-unconnectedpages-page-warning": "El titolo de la pagina no se pol dopararlo par la riserca e quindi el vien ignorà.",
-	"wikibase-unconnectedpages-iwdata-label": "Solo le pagine con colegamenti interlenguìsteghi",
 	"wikibase-unconnectedpages-format-row": "($1 colegamenti interlinguìsteghi in te la pagina)",
 	"wikibase-otherprojects": "Altri projeti"
 }

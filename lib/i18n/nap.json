@@ -24,6 +24,8 @@
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Lengua",
 	"wikibase-sitelinks-link-columnheading": "Paggena cullegata",
+	"wikibase-snakview-snaktypeselector-somevalue": "valore scanosciuto",
+	"wikibase-snakview-snaktypeselector-novalue": "nisciuno valore",
 	"wikibase-tooltip-error-details": "Dettaglie",
 	"datatypes-type-wikibase-item": "Oggietto",
 	"version-wikibase": "Wikibase",
