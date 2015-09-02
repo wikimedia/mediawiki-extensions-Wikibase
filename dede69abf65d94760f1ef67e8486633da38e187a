@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_de7ecc13",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T18:56:24Z",
+      "side": 0,
+      "message": "Why remove the use clause when OutOfBoundsException is still in use here?",
+      "revId": "dede69abf65d94760f1ef67e8486633da38e187a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
