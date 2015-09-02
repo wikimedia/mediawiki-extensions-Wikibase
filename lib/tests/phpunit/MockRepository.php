@@ -34,6 +34,9 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\RedirectRevision;
 
 /**
+ * @deprecated Try to use a simpler fake. The complexity and coupling of this
+ * test double are very high, so it is good to avoid binding to it.
+ *
  * Mock repository for use in tests.
  *
  * @since 0.4
