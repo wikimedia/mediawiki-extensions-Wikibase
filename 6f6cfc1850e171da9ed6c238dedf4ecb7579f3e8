@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_0a13afb9",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T17:59:54Z",
+      "side": 1,
+      "message": "Hm, that\u0027s pretty specific. Will this module be getting all these parameters too?",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_4a1d37c6",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T17:59:54Z",
+      "side": 1,
+      "message": "I\u0027m not happy with the module name, it\u0027s rather confusing.",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_aa2dbbef",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T17:59:54Z",
+      "side": 1,
+      "message": "Why is this needed here?",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_4a6bf715",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T17:59:54Z",
+      "side": 1,
+      "message": "Let\u0027s hope the result set isn\u0027t too big, count() can get expensive. It actually counts.",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
