@@ -724,14 +724,19 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$q5 = new ItemId( 'Q5' );
 		$q55 = new ItemId( 'Q55' );
-		$q77 = new ItemId( 'Q77' );
 
 		$mock->putEntity( new Item( $q5 ) );
 		$mock->putRedirect( new EntityRedirect( $q55, $q5 ) );
 
-		$this->assertFalse( $mock->getRedirectForEntityId( $q77 ), 'unknown id' );
 		$this->assertNull( $mock->getRedirectForEntityId( $q5 ), 'not a redirect' );
 		$this->assertEquals( $q5, $mock->getRedirectForEntityId( $q55 ) );
+	}
+
+	public function testGivenUnkownEntityId_getRedirectForEntityIdThrowsException() {
+		$mock = new MockRepository();
+
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException' );
+		$mock->getRedirectForEntityId( new ItemId( 'Q77' ) );
 	}
 
 }
