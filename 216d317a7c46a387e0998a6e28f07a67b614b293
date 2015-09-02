@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_afe4ed39",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-02T16:07:53Z",
+      "side": 1,
+      "message": "not really related to your patch, but curious what gpsnamespace does here? somehow restrict the results to the main namespace? (that doesn\u0027t work for me on wikidata)",
+      "revId": "216d317a7c46a387e0998a6e28f07a67b614b293",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
