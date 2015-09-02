@@ -352,6 +352,7 @@ class SqlStore implements Store {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
+		$formatterUrlProperty = $wikibaseRepo->getSettings()->getSetting( 'formatterUrlProperty' );
 		$useRedirectTargetColumn = $wikibaseRepo->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
@@ -362,8 +363,9 @@ class SqlStore implements Store {
 
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
+		$propertyInfoBuilder = new PropertyInfoBuilder( $formatterUrlProperty );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $useRedirectTargetColumn );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder, $useRedirectTargetColumn );
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
 
