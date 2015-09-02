@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
 use InvalidArgumentException;
 use Status;
 use Wikibase\DataModel\Entity\Entity;
@@ -90,50 +89,34 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @see SpecialNewEntity::additionalFormElements
 	 *
-	 * @return string
+	 * @return array
 	 */
 	protected function additionalFormElements() {
 		if ( $this->site === null || $this->page === null ) {
 			return parent::additionalFormElements();
 		}
 
-		return parent::additionalFormElements()
-		. Html::element(
-			'label',
-			array(
-				'for' => 'wb-newitem-site',
-				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-newitem-site' )->text()
-		)
-		. Html::input(
-			'site',
-			$this->site,
-			'text',
-			array(
-				'id' => 'wb-newitem-site',
-				'class' => 'wb-input',
-				'readonly' => 'readonly'
-			)
-		)
-		. Html::element(
-			'label',
-			array(
-				'for' => 'wb-newitem-page',
-				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-newitem-page' )->text()
-		)
-		. Html::input(
-			'page',
-			$this->page,
-			'text',
-			array(
-				'id' => 'wb-newitem-page',
-				'class' => 'wb-input',
-				'readonly' => 'readonly'
-			)
+		$formDescriptor = parent::additionalFormElements();
+		$formDescriptor['site'] = array(
+			'name' => 'site',
+			'default' => $this->site,
+			'type' => 'text',
+			'id' => 'wb-newitem-site',
+			'cssclass' => 'wb-input',
+			'readonly' => 'readonly',
+			'label-message' => 'wikibase-newitem-site'
 		);
+		$formDescriptor['page'] = array(
+			'name' => 'page',
+			'default' => $this->page,
+			'type' => 'text',
+			'id' => 'wb-newitem-page',
+			'cssclass' => 'wb-input',
+			'readonly' => 'readonly',
+			'label-message' => 'wikibase-newitem-page'
+		);
+
+		return $formDescriptor;
 	}
 
 	/**
