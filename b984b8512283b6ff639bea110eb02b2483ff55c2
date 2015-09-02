@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_81d6a5f4",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-09-02T19:44:00Z",
+      "side": 1,
+      "message": "indeed it is used here!",
+      "revId": "b984b8512283b6ff639bea110eb02b2483ff55c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
