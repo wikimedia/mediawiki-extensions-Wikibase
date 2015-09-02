@@ -37,19 +37,35 @@ use Wikibase\Repo\Validators\UrlValidator;
 class ValidatorBuilders {
 
 	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
-
-	/**
 	 * @var EntityLookup
 	 */
 	private $entityLookup;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
 	 * @var string[]
 	 */
 	private $urlSchemes;
+
+	/**
+	 * @var string The base URI for the vocabulary to use for units (and in the
+	 * future, globes and calendars).
+	 */
+	private $vocabularyBaseUri;
+
+	/**
+	 * @var string The base URI wikibase concepts, for use with the validators for time and globe
+	 * values. Our parsers for these data types currently have Wikidata URIs hardcoded, so we need
+	 * to hardcode the URI to check them against for now.
+	 *
+	 * @todo: use a configurable vocabulary for calendars and reference globes, instead of
+	 * hardcoding wikidata. Then replace usages of $wikidataBaseUri with $vocabularyBaseUri.
+	 */
+	private $wikidataBaseUri = 'http://www.wikidata.org/entity/';
 
 	/**
 	 *
@@ -62,17 +78,20 @@ class ValidatorBuilders {
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
 	 * @param ContentLanguages $contentLanguages
+	 * @param string $vocabularyBaseUri The base URI for vocabulary concepts.
 	 */
 	public function __construct(
 		EntityLookup $lookup,
 		EntityIdParser $idParser,
 		array $urlSchemes,
+		$vocabularyBaseUri,
 		ContentLanguages $contentLanguages
 	) {
-		$this->contentLanguages = $contentLanguages;
-		$this->entityIdParser = $idParser;
 		$this->entityLookup = $lookup;
+		$this->entityIdParser = $idParser;
 		$this->urlSchemes = $urlSchemes;
+		$this->vocabularyBaseUri = $vocabularyBaseUri;
+		$this->contentLanguages = $contentLanguages;
 	}
 
 	/**
@@ -187,7 +206,7 @@ class ValidatorBuilders {
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see TimeFormatter and TimeParser.
-		$urlValidator = $this->getUrlValidator( array( 'http', 'https' ), 255 );
+		$urlValidator = $this->getUrlValidator( array( 'http', 'https' ), $this->wikidataBaseUri, 255 );
 		//TODO: enforce well known calendar models from config
 
 		$validators[] = new DataFieldValidator( 'calendarmodel', $urlValidator );
@@ -235,7 +254,7 @@ class ValidatorBuilders {
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see GlobeCoordinateValue and GlobeCoordinateParser.
-		$urlValidator = $this->getUrlValidator( array( 'http', 'https' ), 255 );
+		$urlValidator = $this->getUrlValidator( array( 'http', 'https' ), $this->wikidataBaseUri, 255 );
 		//TODO: enforce well known reference globes from config
 
 		$validators[] = new DataFieldValidator( 'precision', new NumberValidator() );
@@ -251,13 +270,14 @@ class ValidatorBuilders {
 
 	/**
 	 * @param string[] $urlSchemes List of URL schemes, e.g. 'http'
+	 * @param string|null $prefix a required prefix
 	 * @param int $maxLength Defaults to 500 characters. Even if URLs are unlimited in theory they
 	 * should be limited to about 2000. About 500 is a reasonable compromise.
 	 * @see http://stackoverflow.com/a/417184
 	 *
 	 * @return CompositeValidator
 	 */
-	private function getUrlValidator( $urlSchemes, $maxLength = 500 ) {
+	private function getUrlValidator( array $urlSchemes, $prefix = null, $maxLength = 500 ) {
 		$validators = array();
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
@@ -266,7 +286,23 @@ class ValidatorBuilders {
 		$urlSchemeValidators = $urlValidators->getValidators( $urlSchemes );
 		$validators[] = new UrlValidator( $urlSchemeValidators );
 
+		if ( $prefix !== null ) {
+			//XXX: we may want to allow http AND https.
+			$validators[] = $this->getPrefixValidator( $prefix, 'bad-prefix' );
+		}
+
 		return new CompositeValidator( $validators ); //Note: each validator is fatal
+	}
+
+	/**
+	 * @param string $prefix
+	 * @param string $errorCode
+	 *
+	 * @return RegexValidator
+	 */
+	private function getPrefixValidator( $prefix, $errorCode ) {
+		$regex = '!^' . preg_quote( $prefix, '!' ) . '!';
+		return new RegexValidator( $regex, false, $errorCode );
 	}
 
 	/**
@@ -295,9 +331,9 @@ class ValidatorBuilders {
 		$unitValidators = new AlternativeValidator( array(
 			// NOTE: "1" is always considered legal for historical reasons,
 			// since we use it to represent "unitless" quantities. We could also use
-			// http://qudt.org/vocab/unit#Unitless or https://www.wikidata.org/entity/Q199
+			// http://qudt.org/vocab/unit#Unitless or http://www.wikidata.org/entity/Q199
 			new MembershipValidator( array( '1' ) ),
-			$this->getUrlValidator( array( 'http', 'https' ), 255 ),
+			$this->getUrlValidator( array( 'http', 'https' ), $this->vocabularyBaseUri, 255 ),
 		) );
 		$validators[] = new DataFieldValidator( 'unit', $unitValidators );
 
