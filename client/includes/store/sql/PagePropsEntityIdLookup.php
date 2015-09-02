@@ -5,7 +5,7 @@ namespace Wikibase\Client\Store\Sql;
 use LoadBalancer;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Store\EntityIdLookup;
 
 /**

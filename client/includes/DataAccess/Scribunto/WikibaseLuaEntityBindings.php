@@ -3,7 +3,7 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
