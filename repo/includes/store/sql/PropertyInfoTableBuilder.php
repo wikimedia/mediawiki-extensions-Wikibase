@@ -29,6 +29,11 @@ class PropertyInfoTableBuilder {
 	private $entityLookup;
 
 	/**
+	 * @var PropertyInfoBuilder
+	 */
+	private $propertyInfoBuilder;
+
+	/**
 	 * @var MessageReporter|null
 	 */
 	private $reporter = null;
@@ -74,6 +79,7 @@ class PropertyInfoTableBuilder {
 		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
 		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
+		$this->propertyInfoBuilder = new PropertyInfoBuilder();
 	}
 
 	/**
@@ -250,9 +256,7 @@ class PropertyInfoTableBuilder {
 		}
 
 		//FIXME: Needs to be in sync with what PropertyHandler::getEntityModificationUpdates does!
-		$info = array(
-			PropertyInfoStore::KEY_DATA_TYPE => $property->getDataTypeId()
-		);
+		$info = $this->propertyInfoBuilder->buildPropertyInfo( $property );
 
 		$this->propertyInfoTable->setPropertyInfo(
 			$property->getId(),
