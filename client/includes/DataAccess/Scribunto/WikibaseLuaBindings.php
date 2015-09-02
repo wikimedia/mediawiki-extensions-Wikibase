@@ -8,10 +8,11 @@ use ParserOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
@@ -147,8 +148,13 @@ class WikibaseLuaBindings {
 		try {
 			$term = $this->labelDescriptionLookup->getLabel( $entityId );
 		} catch ( StorageException $ex ) {
+			// TODO: verify this catch is still needed
 			return null;
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( LabelDescriptionLookupException $ex ) {
+			return null;
+		}
+
+		if ( $term === null ) {
 			return null;
 		}
 
@@ -172,8 +178,13 @@ class WikibaseLuaBindings {
 		try {
 			$term = $this->labelDescriptionLookup->getDescription( $entityId );
 		} catch ( StorageException $ex ) {
+			// TODO: verify this catch is still needed
 			return null;
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( LabelDescriptionLookupException $ex ) {
+			return null;
+		}
+
+		if ( $term === null ) {
 			return null;
 		}
 
