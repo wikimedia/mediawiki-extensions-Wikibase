@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -45,11 +44,11 @@ class EntityRetrievingTermLookup implements TermLookup {
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		$fingerprint = $this->getFingerprint( $entityId, array( $languageCode ) );
 
-		try {
+		if ( $fingerprint->hasLabel( $languageCode ) ) {
 			return $fingerprint->getLabel( $languageCode )->getText();
-		} catch ( OutOfBoundsException $ex ) {
-			return null;
 		}
+
+		return null;
 	}
 
 	/**
@@ -80,11 +79,11 @@ class EntityRetrievingTermLookup implements TermLookup {
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		$fingerprint = $this->getFingerprint( $entityId, array( $languageCode ) );
 
-		try {
+		if ( $fingerprint->hasDescription( $languageCode ) ) {
 			return $fingerprint->getDescription( $languageCode )->getText();
-		} catch ( OutOfBoundsException $ex ) {
-			return null;
 		}
+
+		return null;
 	}
 
 	/**
