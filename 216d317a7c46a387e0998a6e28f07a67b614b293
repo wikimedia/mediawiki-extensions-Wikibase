@@ -69,6 +69,24 @@
       "revId": "216d317a7c46a387e0998a6e28f07a67b614b293",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_efe2f5ce",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T16:38:12Z",
+      "side": 1,
+      "message": "This is something Jon suggested and I guess we need something like that when we want to use the mediawiki api. It is currently a hack only used by mobile frontend but we would need to add something like a display title or a search result match so that we have something else to display but just the plain id. Adding displayTitle or something similar to the core api output is required for adaption of it in our search modules.",
+      "parentUuid": "6ec1af18_cfc4d946",
+      "revId": "216d317a7c46a387e0998a6e28f07a67b614b293",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
