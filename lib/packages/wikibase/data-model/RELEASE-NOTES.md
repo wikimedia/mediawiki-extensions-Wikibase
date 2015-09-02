@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 4.3.0 (dev)
+## Version 4.3.0 (2015-09-02)
 
 * Added `isEmpty` to `EntityDocument`
 
