@@ -176,7 +176,6 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-redirectentity-submit',
-				'class' => 'wb-button',
 			),
 			'child' => array(
 				'tag' => 'button',
