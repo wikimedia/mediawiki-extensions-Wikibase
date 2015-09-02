@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_372613b7",
+        "filename": "repo/includes/PropertyInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T21:29:29Z",
+      "side": 1,
+      "message": "This should be a PropertyId already. The caller should do the conversion.",
+      "revId": "1a05526aa381b7ce940e272f05aab29ffcad57c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_972a6772",
+        "filename": "repo/tests/phpunit/includes/store/sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T21:29:29Z",
+      "side": 1,
+      "message": "The test case shouldn\u0027t use the real setting, but define it\u0027s own property for formatter URLs.",
+      "revId": "1a05526aa381b7ce940e272f05aab29ffcad57c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_9741073c",
+        "filename": "repo/tests/phpunit/includes/store/sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T21:29:29Z",
+      "side": 1,
+      "message": "We should also assert the formatterUrl here.",
+      "revId": "1a05526aa381b7ce940e272f05aab29ffcad57c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
