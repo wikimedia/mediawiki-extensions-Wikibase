@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_ca8367ab",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T18:09:46Z",
+      "side": 1,
+      "message": "At least for now we don\u0027t support thumbnails so these parameters won\u0027t be passed here for now but if we consider this is worth the effort we might decide to support some kind of prop\u003dpageimages for Wikibase as well.\n\nThe relevant parameters are the ones listed below, especially search and limit. Those will be passed from MobileFrontend.\n\nI still need to find a nice way to change the api call parameters there though. Either it will be a config variable with some placeholders or a javascript hook.",
+      "parentUuid": "6ec1af18_0a13afb9",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_4a1d37c6",
         "filename": "repo/includes/api/MediawikiSearchEntities.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-02T17:59:54Z",
       "side": 1,
       "message": "I\u0027m not happy with the module name, it\u0027s rather confusing.",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_aa7e1bab",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T18:09:46Z",
+      "side": 1,
+      "message": "*nod* provide a better one :-)",
+      "parentUuid": "6ec1af18_4a1d37c6",
       "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_ca7927c4",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T18:09:46Z",
+      "side": 1,
+      "message": "I guess because of a c\u0026p mistake. Will fix",
+      "parentUuid": "6ec1af18_aa2dbbef",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_4a6bf715",
         "filename": "repo/includes/api/MediawikiSearchEntities.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2015-09-02T17:59:54Z",
       "side": 1,
       "message": "Let\u0027s hope the result set isn\u0027t too big, count() can get expensive. It actually counts.",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_aa65bb0e",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-02T18:09:46Z",
+      "side": 1,
+      "message": "MobileFrontend at least works with a limit of 15 so that shouldn\u0027t be a problem. However we may define a fixed maximum of the limit parameter somewhere to avoid large result sets.",
+      "parentUuid": "6ec1af18_4a6bf715",
       "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
