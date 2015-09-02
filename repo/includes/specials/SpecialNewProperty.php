@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
 use InvalidArgumentException;
 use Status;
 use Wikibase\DataModel\Entity\Entity;
@@ -99,17 +98,17 @@ class SpecialNewProperty extends SpecialNewEntity {
 
 		$selector = new DataTypeSelector( $dataTypeFactory->getTypes(), $this->getLanguage()->getCode() );
 
-		return parent::additionalFormElements()
-			. Html::element( 'br' )
-			. Html::element(
-				'label',
-				array(
-					'for' => 'wb-newproperty-datatype',
-					'class' => 'wb-label'
-				),
-				$this->msg( 'wikibase-newproperty-datatype' )->text()
-			)
-			. $selector->getHtml( 'wb-newproperty-datatype' );
+		$formDescriptor = parent::additionalFormElements();
+		$formDescriptor['datatype'] = array(
+			'name' => 'datatype',
+			'type' => 'select',
+			'options' => array_flip( $selector->getOptionsArray() ),
+			'id' => 'wb-newproperty-datatype',
+			'cssclass' => 'wb-select',
+			'label-message' => 'wikibase-newproperty-datatype'
+		);
+
+		return $formDescriptor;
 	}
 
 	/**
