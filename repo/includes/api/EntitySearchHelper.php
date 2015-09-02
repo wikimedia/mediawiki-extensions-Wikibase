@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Api;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
-use Wikibase\DataModel\Services\EntityId\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityTitleLookup;
