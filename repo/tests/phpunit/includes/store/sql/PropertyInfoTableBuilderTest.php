@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\PropertyInfoBuilder;
 use Wikibase\PropertyInfoStore;
 use Wikibase\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
@@ -64,10 +65,13 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
 		//       so we should also use the EntityLookup from WikibaseRepo.
-		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
-		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
+		$formatterUrlProperty = $wikibaseRepo->getSettings()->getSetting( 'formatterUrlProperty' );
+		$useRedirectTargetColumn = $wikibaseRepo->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $useRedirectTargetColumn );
+		$propertyInfoBuilder = new PropertyInfoBuilder( $formatterUrlProperty );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder, $useRedirectTargetColumn );
 		$builder->setBatchSize( 3 );
 
 		// rebuild all ----
