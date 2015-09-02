@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_eaae6394",
+        "filename": "lib/includes/formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-02T17:49:09Z",
+      "side": 1,
+      "message": "No, why? It\u0027s a space. A *space*. Why does this need infrastructure? We *may* need code for this some day to support stuff like \"$100\", but not at the moment. Look up YAGNI.",
+      "parentUuid": "6ec1af18_2adb0b56",
+      "revId": "d20f1cdc40aa53258cfa1e64a5cdacd843736942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_8aef9fe3",
         "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 2
