@@ -5,7 +5,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 use Language;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Services\EntityId\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;

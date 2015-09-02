@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Store;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -22,17 +22,17 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException if no label in that language is known
-	 * @return string
+	 * @throws TermLookupException
+	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		$labels = $this->getLabels( $entityId, array( $languageCode ) );
 
-		if ( !isset( $labels[$languageCode] ) ) {
-			throw new OutOfBoundsException( 'No label found for language ' . $languageCode );
+		if ( isset( $labels[$languageCode] ) ) {
+			return $labels[$languageCode];
 		}
 
-		return $labels[$languageCode];
+		return null;
 	}
 
 	/**
@@ -41,6 +41,7 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The languages to get terms for
 	 *
+	 * @throws TermLookupException
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
@@ -53,17 +54,17 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
-	 * @throws OutOfBoundsException if no description in that language is known
-	 * @return string
+	 * @throws TermLookupException
+	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		$descriptions = $this->getDescriptions( $entityId, array( $languageCode ) );
 
-		if ( !isset( $descriptions[$languageCode] ) ) {
-			throw new OutOfBoundsException( 'No description found for language ' . $languageCode );
+		if ( isset( $descriptions[$languageCode] ) ) {
+			return $descriptions[$languageCode];
 		}
 
-		return $descriptions[$languageCode];
+		return null;
 	}
 
 	/**
@@ -72,6 +73,7 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes The languages to get terms for
 	 *
+	 * @throws TermLookupException
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
