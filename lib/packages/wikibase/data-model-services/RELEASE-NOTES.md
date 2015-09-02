@@ -1,6 +1,6 @@
 # Wikibase DataModel Services release notes
 
-## Version 2.0.0 (2015-08-27)
+## Version 2.0.0 (2015-09-02)
 
 Moved `EntityIdParser` back to Wikibase DataModel:
 
