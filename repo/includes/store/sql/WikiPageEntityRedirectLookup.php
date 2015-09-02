@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store\SQL;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Store\EntityIdLookup;
 
@@ -43,9 +44,10 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	 * @param EntityId $targetId
 	 *
 	 * @return EntityId[]
+	 * @throws EntityRedirectLookupException
 	 */
 	public function getRedirectIds( EntityId $targetId ) {
-		$title = $this->entityTitleLookup->getTitleForId( $targetId );
+		$title = $this->tryToGetTitleForId( $targetId );
 
 		$dbr = wfGetDB( DB_SLAVE );
 
@@ -77,6 +79,16 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		return $ids;
 	}
 
+	private function tryToGetTitleForId( EntityId $entityId ) {
+		try {
+			return $this->entityTitleLookup->getTitleForId( $entityId );
+		}
+		catch ( \Exception $ex ) {
+			// TODO: catch more specific exception as soon as getTitleForId stops throwing 3 types
+			throw new EntityRedirectLookupException( $entityId, $ex->getMessage(), $ex );
+		}
+	}
+
 	/**
 	 * @see EntityRedirectLookup::getRedirectForEntityId
 	 *
@@ -89,7 +101,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	 *         does not refer to a redirect, or false if $entityId is not known.
 	 */
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
-		$title = $this->entityTitleLookup->getTitleForId( $entityId );
+		$title = $this->tryToGetTitleForId( $entityId );
 
 		$dbr = wfGetDB(
 			$forUpdate === 'for update' ? DB_MASTER : DB_SLAVE
@@ -110,7 +122,10 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		);
 
 		if ( !$row ) {
-			return false;
+			throw new EntityRedirectLookupException(
+				$entityId,
+				'Cannot find the redirect target of a non existing entity'
+			);
 		}
 
 		if ( !$row->rd_namespace ) {
