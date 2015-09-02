@@ -34,6 +34,23 @@
       "revId": "216d317a7c46a387e0998a6e28f07a67b614b293",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_cfc4d946",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-02T16:35:37Z",
+      "side": 1,
+      "message": "where / how does displayTitle get set in ApiQueryPrefixSearch? or where does it come from?",
+      "revId": "216d317a7c46a387e0998a6e28f07a67b614b293",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
