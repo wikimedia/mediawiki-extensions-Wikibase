@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_5e518163",
+        "filename": "client/includes/specials/SpecialPagesWithBadges.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-02T12:53:58Z",
+      "side": 1,
+      "message": "bad indent",
+      "revId": "9b54b5e8d65315b8d4307256242e13ab0cc2f8d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
