@@ -8,10 +8,11 @@ use Language;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
+use ValueFormatters\QuantityHtmlFormatter;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -234,13 +235,18 @@ class WikibaseValueFormatterBuilders {
 		return new MediaWikiNumberLocalizer( $language );
 	}
 
-	private function getQuantityUnitFormatter( FormatterOptions $options ) {
-		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-
-		return new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup, $this->unitOneUris );
+	/**
+	 * @param FormatterOptions $options
+	 *
+	 * @return VocabularyUriFormatter
+	 */
+	private function getVocabularyUriFormatter( FormatterOptions $options ) {
+		$labelLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
+		return new VocabularyUriFormatter( $this->repoUriParser, $labelLookup, $this->unitOneUris );
 	}
 
 	/**
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 * @param FormatterOptions $options
 	 *
 	 * @return QuantityFormatter|null
@@ -248,13 +254,16 @@ class WikibaseValueFormatterBuilders {
 	public function newQuantityFormatter( $format, FormatterOptions $options ) {
 		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
 			$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
-			$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-			$unitFormatter = new EntityLabelUnitFormatter( $this->repoUriParser, $labelDescriptionLookup );
-			return new QuantityFormatter( $decimalFormatter, $unitFormatter, $options );
+			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
+			return new QuantityFormatter( $options, $decimalFormatter, $vocabularyUriFormatter );
+		} elseif ( $format === SnakFormatter::FORMAT_HTML ) {
+			$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
+			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
+			return new QuantityHtmlFormatter( $options, $decimalFormatter, $vocabularyUriFormatter );
 		} elseif ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
 			$localizer = $this->getNumberLocalizer( $options );
-			$unitFormatter = $this->getQuantityUnitFormatter( $options );
-			return new QuantityDetailsFormatter( $localizer, $unitFormatter, $options );
+			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
+			return new QuantityDetailsFormatter( $localizer, $vocabularyUriFormatter, $options );
 		} else {
 			return null;
 		}
