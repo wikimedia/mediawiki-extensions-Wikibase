@@ -16,6 +16,24 @@
       "revId": "c2133ed6510ced4be83054e8b9bbff36d5eb262f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c97939c4",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-02T14:56:39Z",
+      "side": 1,
+      "message": "I haven\u0027t :(\nI tried to keep close to the original designs, and used \u0027ooui\u0027 only when the HTMLForm version in \u0027table\u0027 mode was considerably worse than the \u0027old\u0027 Html one. Instead, HTMLForm in \u0027inline\u0027 mode already has better spacing than raw Html.",
+      "parentUuid": "6ec1af18_897571f6",
+      "revId": "c2133ed6510ced4be83054e8b9bbff36d5eb262f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
