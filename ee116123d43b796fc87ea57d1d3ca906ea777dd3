@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_8867a2b3",
+        "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T09:29:42Z",
+      "side": 1,
+      "message": "Ouch. Good catch! Thank you guys!",
+      "parentUuid": "6ec1af18_e862e6d3",
+      "revId": "ee116123d43b796fc87ea57d1d3ca906ea777dd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c434c0dc",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2015-09-02T15:02:49Z",
       "side": 1,
       "message": "well changing this to null everywhere just seems odd.\nWhy are we not keeping the default array()?",
+      "revId": "ee116123d43b796fc87ea57d1d3ca906ea777dd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c8712a74",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T09:29:42Z",
+      "side": 1,
+      "message": "The documentation says this can be null. In \\Wikibase\\Repo\\Api\\GetEntities::handleEntity this is called with null.\n\nWhen I add the \"array\" type hint but keep the \"array $var \u003d array()\" default it\u0027s not possible any more to call this with null. What I did here does make this possible: \"array $var \u003d null\" restricts the type to either array or null. Everything else will fail, just as I want it to be.",
+      "parentUuid": "6ec1af18_c434c0dc",
       "revId": "ee116123d43b796fc87ea57d1d3ca906ea777dd3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
