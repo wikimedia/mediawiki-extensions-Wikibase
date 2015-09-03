@@ -7,59 +7,6 @@
 ( function( $, mw, wb, dataTypeStore, getExpertsStore, getFormatterStore, getParserStore ) {
 	'use strict';
 
-	mw.hook( 'wikipage.content' ).add( function() {
-		if( mw.config.get( 'wbEntity' ) === null ) {
-			return;
-		}
-
-		var $entityview = $( '.wikibase-entityview' );
-		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
-		var canEdit = !mw.config.get( 'wbUserIsBlocked' ) && mw.config.get( 'wbUserCanEdit' )
-			&& mw.config.get( 'wbIsEditView' );
-
-		if( canEdit ) {
-			initToolbarController( $entityview );
-		}
-
-		entityInitializer.getEntity().done( function( entity ) {
-			var viewName = createEntityView( entity, $entityview.first() );
-
-			if( canEdit ) {
-				attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
-				attachWatchLinkUpdater( $entityview, viewName );
-			}
-		} );
-
-		if( canEdit ) {
-			$entityview
-			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event ) {
-				var $entitytermsview = $( event.target ),
-					entitytermsview = $entitytermsview.data( 'entitytermsview' );
-
-				$.each( entitytermsview.value(), function() {
-					if( this.language !== mw.config.get( 'wgUserLanguage' ) ) {
-						return true;
-					}
-
-					var label = this.label.getText();
-
-					$( 'title' ).text(
-						mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
-					);
-
-					$( 'h1' ).find( '.wikibase-title' )
-						.toggleClass( 'wb-empty', label === '' )
-						.find( '.wikibase-title-label' )
-						.text( label !== '' ? label : mw.msg( 'wikibase-label-empty' ) );
-
-					return false;
-				} );
-			} );
-
-			attachCopyrightTooltip( $entityview );
-		}
-	} );
-
 	/**
 	 * @param {jQuery} $entityview
 	 */
@@ -108,28 +55,6 @@
 
 			showCopyrightTooltip( $entityview, $target, gravity );
 		} );
-	}
-
-	/**
-	 * Builds an entity store.
-	 *
-	 * @param {wikibase.api.RepoApi} repoApi
-	 * @param {string} languageCode The language code of the ui language
-	 * @return {wikibase.store.CombiningEntityStore}
-	 */
-	function buildEntityStore( repoApi, languageCode ) {
-		// Deserializer for fetched content whose content is a wb.datamodel.Entity:
-		var fetchedEntityDeserializer = new wb.store.FetchedContentUnserializer(
-				new wb.serialization.EntityDeserializer()
-			);
-
-		return new wb.store.CachingEntityStore(
-			new wb.store.ApiEntityStore(
-				repoApi,
-				fetchedEntityDeserializer,
-				[ languageCode ]
-			)
-		);
 	}
 
 	/**
@@ -194,6 +119,28 @@
 		languages.unshift( mw.config.get( 'wgUserLanguage' ) );
 
 		return languages;
+	}
+
+	/**
+	 * Builds an entity store.
+	 *
+	 * @param {wikibase.api.RepoApi} repoApi
+	 * @param {string} languageCode The language code of the ui language
+	 * @return {wikibase.store.CombiningEntityStore}
+	 */
+	function buildEntityStore( repoApi, languageCode ) {
+		// Deserializer for fetched content whose content is a wb.datamodel.Entity:
+		var fetchedEntityDeserializer = new wb.store.FetchedContentUnserializer(
+				new wb.serialization.EntityDeserializer()
+			);
+
+		return new wb.store.CachingEntityStore(
+			new wb.store.ApiEntityStore(
+				repoApi,
+				fetchedEntityDeserializer,
+				[ languageCode ]
+			)
+		);
 	}
 
 	/**
@@ -380,6 +327,59 @@
 			}
 		);
 	}
+
+	mw.hook( 'wikipage.content' ).add( function() {
+		if( mw.config.get( 'wbEntity' ) === null ) {
+			return;
+		}
+
+		var $entityview = $( '.wikibase-entityview' );
+		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
+		var canEdit = !mw.config.get( 'wbUserIsBlocked' ) && mw.config.get( 'wbUserCanEdit' )
+			&& mw.config.get( 'wbIsEditView' );
+
+		if( canEdit ) {
+			initToolbarController( $entityview );
+		}
+
+		entityInitializer.getEntity().done( function( entity ) {
+			var viewName = createEntityView( entity, $entityview.first() );
+
+			if( canEdit ) {
+				attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
+				attachWatchLinkUpdater( $entityview, viewName );
+			}
+		} );
+
+		if( canEdit ) {
+			$entityview
+			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event ) {
+				var $entitytermsview = $( event.target ),
+					entitytermsview = $entitytermsview.data( 'entitytermsview' );
+
+				$.each( entitytermsview.value(), function() {
+					if( this.language !== mw.config.get( 'wgUserLanguage' ) ) {
+						return true;
+					}
+
+					var label = this.label.getText();
+
+					$( 'title' ).text(
+						mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
+					);
+
+					$( 'h1' ).find( '.wikibase-title' )
+						.toggleClass( 'wb-empty', label === '' )
+						.find( '.wikibase-title-label' )
+						.text( label !== '' ? label : mw.msg( 'wikibase-label-empty' ) );
+
+					return false;
+				} );
+			} );
+
+			attachCopyrightTooltip( $entityview );
+		}
+	} );
 
 } )(
 	jQuery,

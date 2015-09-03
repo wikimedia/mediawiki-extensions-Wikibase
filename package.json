@@ -12,6 +12,6 @@
 	"license": "GPL-2.0+",
 	"devDependencies": {
 		"jscs": "~2.1.0",
-		"jshint": "~2.8.0"
+		"jshint": "~2.9.0"
 	}
 }

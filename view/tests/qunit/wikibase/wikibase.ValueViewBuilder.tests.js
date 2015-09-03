@@ -5,6 +5,22 @@
 ( function( wb, sinon, QUnit ) {
 	'use strict';
 
+	function getValueViewAndDom() {
+		var valueView = {
+				option: sinon.spy()
+			},
+			$dom = {
+				valueview: sinon.spy( function() {
+					return this;
+				} ),
+				data: function() {
+					return valueView;
+				}
+			};
+
+		return { vv: valueView, $dom: $dom };
+	}
+
 	QUnit.module( 'wikibase.ValueViewBuilder' );
 
 	QUnit.test( 'initValueView returns a ValueView', function( assert ) {
@@ -119,21 +135,5 @@
 			dataValueType: dataTypeDataValueType
 		} ) );
 	} );
-
-	function getValueViewAndDom() {
-		var valueView = {
-				option: sinon.spy()
-			},
-			$dom = {
-				valueview: sinon.spy( function() {
-					return this;
-				} ),
-				data: function() {
-					return valueView;
-				}
-			};
-
-		return { vv: valueView, $dom: $dom };
-	}
 
 }( wikibase, sinon, QUnit ) );

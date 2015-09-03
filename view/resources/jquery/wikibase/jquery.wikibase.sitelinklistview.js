@@ -8,6 +8,15 @@
 	var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
+ * @param {string} eventNames
+ * @param {string} namespace
+ * @return {string}
+ */
+function namespaceEventNames( eventNames, namespace ) {
+	return eventNames.split( ' ' ).join( '.' + namespace + ' ' ) + '.' + namespace;
+}
+
+/**
  * Displays and allows editing multiple site links.
  * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
@@ -809,14 +818,5 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		} );
 	}
 } );
-
-/**
- * @param {string} eventNames
- * @param {string} namespace
- * @return {string}
- */
-function namespaceEventNames( eventNames, namespace ) {
-	return eventNames.split( ' ' ).join( '.' + namespace + ' ' ) + '.' + namespace;
-}
 
 }( mediaWiki, wikibase, jQuery ) );
