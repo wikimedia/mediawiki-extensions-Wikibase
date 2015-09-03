@@ -557,7 +557,8 @@ class SqlStore implements Store {
 
 		return new WikiPageEntityRedirectLookup(
 			$this->entityTitleLookup,
-			$this->entityIdLookup
+			$this->entityIdLookup,
+			wfGetLB()
 		);
 	}
 
