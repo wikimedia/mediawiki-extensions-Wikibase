@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_031075ab",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:00:32Z",
+      "side": 1,
+      "message": "This means we are not applying any checks for the URL structure. The idea of UrlSchemeValidators is that it knows what URLs using a specific scheme should look like.  We should still apply any checks that UrlSchemeValidators defines even if we have a prefix. Or we\u0027d need a full pattern here, not just a prefix - that would also work.",
+      "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c32d8def",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:00:32Z",
+      "side": 1,
+      "message": "Whut, why? And... \u003c and \u003e occurring in the prefix would break it, right?",
+      "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
