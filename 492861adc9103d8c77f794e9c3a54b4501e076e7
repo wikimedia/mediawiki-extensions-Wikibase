@@ -16,6 +16,24 @@
       "revId": "492861adc9103d8c77f794e9c3a54b4501e076e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_03b875e0",
+        "filename": "repo/includes/PropertyInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-03T12:33:25Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be an issue because we just use reset to get the first element but I will fix that to avoid the strict standards warning.",
+      "parentUuid": "6ec1af18_e3e9a9e1",
+      "revId": "492861adc9103d8c77f794e9c3a54b4501e076e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
