@@ -4,6 +4,8 @@ namespace Wikibase\Test;
 
 use LoadBalancer;
 use MediaWikiTestCase;
+use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -79,6 +81,74 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 		$res = $this->getWikiPageEntityRedirectLookup()->getRedirectForEntityId( $this->itemId );
 
 		$this->assertNull( $res );
+	}
+
+	public function testGetRedirectForEntityId_itemsInMainNamespace() {
+		$row = array(
+			'page_id' => 10,
+			'rd_namespace' => NS_MAIN,
+			'rd_title' => 'Q10'
+		);
+
+		$entityRedirectLookup = new WikiPageEntityRedirectLookup(
+			$this->getMockEntityTitleLookup(),
+			$this->getMockEntityIdLookup(),
+			$this->getMockLoadBalancer( $row )
+		);
+
+		$redirect = $entityRedirectLookup->getRedirectForEntityId( new ItemId( 'Q2' ) );
+
+		$this->assertEquals( new ItemId( 'Q10' ), $redirect );
+	}
+
+	private function getMockEntityTitleLookup() {
+		$entityTitleLookup = $this->getMock( '\Wikibase\Lib\Store\EntityTitleLookup' );
+
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				return Title::makeTitle( NS_MAIN, $entityId->getSerialization() );
+			} ) );
+
+		return $entityTitleLookup;
+	}
+
+	private function getMockEntityIdLookup() {
+		$entityIdLookup = $this->getMock( 'Wikibase\Store\EntityIdLookup' );
+
+		$entityIdLookup->expects( $this->any() )
+			->method( 'getEntityIdForTitle' )
+			->will( $this->returnCallback( function( Title $title ) {
+				return new ItemId( $title->getText() );
+			} ) );
+
+		return $entityIdLookup;
+	}
+
+	private function getMockLoadBalancer( array $row ) {
+		$db = $this->getMockDatabase( $row );
+
+		$loadBalancer = $this->getMockBuilder( 'LoadBalancer' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$loadBalancer->expects( $this->any() )
+			->method( 'getConnection' )
+			->will( $this->returnValue( $db ) );
+
+		return $loadBalancer;
+	}
+
+	private function getMockDatabase( array $row ) {
+		$db = $this->getMockBuilder( 'DatabaseMysql' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$db->expects( $this->any() )
+			->method( 'selectRow' )
+			->will( $this->returnValue( (object)$row ) );
+
+		return $db;
 	}
 
 	public function testGetRedirectIds() {
