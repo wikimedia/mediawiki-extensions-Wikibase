@@ -14,6 +14,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -177,15 +178,16 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 		$this->makeValidRequest( $params );
 
+		/** @var StatementListProvider $entity */
 		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
 
-		$claims = new Claims( $entity->getClaims() );
+		$statements = $entity->getStatements();
 
-		$claim = $claims->getClaimWithGuid( $params['claim'] );
+		$statement = $statements->getFirstStatementWithGuid( $params['claim'] );
 
-		$this->assertNotNull( $claim );
+		$this->assertNotNull( $statement );
 		$this->assertTrue(
-			$claim->getQualifiers()->hasSnak( $qualifier ),
+			$statement->getQualifiers()->hasSnak( $qualifier ),
 			'The qualifier should exist in the qualifier list after making the request'
 		);
 	}

@@ -107,8 +107,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			$obtainedItem = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
 			$obtainedStatements = $obtainedItem->getStatements();
 
-			$obtainedClaims = new Claims( $obtainedStatements->toArray() );
-			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $statement->getGuid() ) );
+			$this->assertNull( $obtainedStatements->getFirstStatementWithGuid( $statement->getGuid() ) );
 
 			$currentStatements = new StatementList( $statements );
 
