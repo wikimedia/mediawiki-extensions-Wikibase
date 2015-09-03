@@ -69,12 +69,10 @@ class ExternalChangeFactory {
 
 		return new RevisionData(
 			$recentChange->getAttribute( 'rc_user_text' ),
-			$changeParams['page_id'],
-			$changeParams['rev_id'],
-			$changeParams['parent_id'],
 			$recentChange->getAttribute( 'rc_timestamp' ),
 			$commentOverride ?: $recentChange->getAttribute( 'rc_comment' ),
-			$repoId
+			$repoId,
+			$changeParams
 		);
 	}
 
