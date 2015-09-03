@@ -128,7 +128,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			return false;
 		}
 
-		if ( !$row->rd_namespace ) {
+		if ( $row->rd_namespace === null ) {
 			return null;
 		}
 
