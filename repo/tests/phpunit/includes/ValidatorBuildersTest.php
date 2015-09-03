@@ -231,13 +231,6 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'monolingualtext', new MonolingualTextValue( 'en', 'text' ), false, 'Not a valid language' ),
 		);
 
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$cases = array_merge( $cases, array(
-
-				// ....
-			) );
-		}
-
 		return $cases;
 	}
 
