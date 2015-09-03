@@ -62,8 +62,8 @@ class SitesModuleWorker {
 	}
 
 	/**
-	 * Get a hash representing the sites table. (This should change
-	 * if eg. new sites get added to the sites table).
+	 * Get a hash representing the sites table. This must change if e.g. new sites get added to the
+	 * sites table.
 	 *
 	 * @return string
 	 */

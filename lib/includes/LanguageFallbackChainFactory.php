@@ -23,18 +23,18 @@ class LanguageFallbackChainFactory {
 	const FALLBACK_ALL = 0xff;
 
 	/**
-	 * The language itself. eg. 'en' for 'en'.
+	 * The language itself, e.g. 'en' for 'en'.
 	 */
 	const FALLBACK_SELF = 1;
 
 	/**
 	 * Other compatible languages that can be translated into the requested language
-	 * (and translation is automatically done). eg. 'sr', 'sr-ec' and 'sr-el' for 'sr'.
+	 * (and translation is automatically done), e.g. 'sr', 'sr-ec' and 'sr-el' for 'sr'.
 	 */
 	const FALLBACK_VARIANTS = 2;
 
 	/**
-	 * All other language from the system fallback chain. eg. 'de' and 'en' for 'de-formal'.
+	 * All other language from the system fallback chain, e.g. 'de' and 'en' for 'de-formal'.
 	 */
 	const FALLBACK_OTHERS = 4;
 

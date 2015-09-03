@@ -156,7 +156,8 @@ $.extend( wb.PageConnector.prototype, {
 
 		this._getEntityForPage( self._firstSiteId, self._firstPageName )
 		.done( function( data ) {
-			// Use the normalized title from now on (eg. for creating a new item with proper titles)
+			// Use the normalized title from now on (e.g. for creating a new item with proper
+			// titles).
 			if ( data.normalized ) {
 				self._firstPageName = data.normalized.n.to;
 			}
@@ -195,8 +196,8 @@ $.extend( wb.PageConnector.prototype, {
 		this._getEntityForPage( self._secondSiteId, self._secondPageName )
 		.done( function( data ) {
 			if ( data.normalized ) {
-				// Use the normalized title from now on (eg. for creating a new item with proper
-				// titles)
+				// Use the normalized title from now on (e.g. for creating a new item with proper
+				// titles).
 				self._secondPageName = data.normalized.n.to;
 			}
 
@@ -230,7 +231,8 @@ $.extend( wb.PageConnector.prototype, {
 		this._getEntityForPage( self._secondSiteId, self._secondPageName )
 		.fail( deferred.reject )
 		.done( function( data ) {
-			// Use the normalized title from now on (eg. for creating a new item with proper titles)
+			// Use the normalized title from now on (e.g. for creating a new item with proper
+			// titles).
 			if ( data.normalized ) {
 				self._secondPageName = data.normalized.n.to;
 			}
