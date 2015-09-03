@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_c3afcd25",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T13:24:20Z",
+      "side": 1,
+      "message": "Oh, you are right. The problem is that it\u0027s not just a \"scheme\" validator, it\u0027s more a \"looks like a valid URL that starts with this and that scheme\" validator. I will undo this change.",
+      "parentUuid": "6ec1af18_031075ab",
+      "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c32d8def",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-03T13:00:32Z",
       "side": 1,
       "message": "Whut, why? And... \u003c and \u003e occurring in the prefix would break it, right?",
+      "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e3aa0915",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T13:24:20Z",
+      "side": 1,
+      "message": "Because this way you do not have to encode explicit knowledge about the delimiter character over and over again. Brackets are always escaped by preg_quote: http://php.net/manual/en/function.preg-quote.php I started making use of this because of this line: https://github.com/DataValues/Time/pull/83/files#diff-a54cb473a84f2fa9b85ffc6945b9c840R167",
+      "parentUuid": "6ec1af18_c32d8def",
       "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
