@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_e3c44946",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T12:46:02Z",
+      "side": 1,
+      "message": "MobileSearchEntities? HackySearchEntities?",
+      "parentUuid": "6ec1af18_aa7e1bab",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_aa2dbbef",
         "filename": "repo/includes/api/MediawikiSearchEntities.php",
         "patchSetId": 6
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "MobileFrontend at least works with a limit of 15 so that shouldn\u0027t be a problem. However we may define a fixed maximum of the limit parameter somewhere to avoid large result sets.",
       "parentUuid": "6ec1af18_4a6bf715",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a3bac1b3",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T12:46:02Z",
+      "side": 1,
+      "message": "Or don\u0027t use count()...",
+      "parentUuid": "6ec1af18_aa65bb0e",
       "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
