@@ -19,6 +19,57 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_6393795b",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T12:53:14Z",
+      "side": 1,
+      "message": "Whooo, my mission to brainwash Daniel obviously succeeded. ;-)))",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e37e8913",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T12:53:14Z",
+      "side": 1,
+      "message": "Why did this move?",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_63e059c8",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T12:53:14Z",
+      "side": 1,
+      "message": "Having a list of schemes is pointless if there is a prefix. Both are prefix checks.",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_6d98481f",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 2
@@ -36,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_2398116c",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T12:53:14Z",
+      "side": 1,
+      "message": "Misplaced comment. This is a prefix validator, it does not know anything about URLs.",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_4a6e97ff",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 2
@@ -47,6 +115,40 @@
       "writtenOn": "2015-09-02T18:07:45Z",
       "side": 1,
       "message": "I found that the most simple way to do this is\n\n $regex \u003d \u0027\u003c^\u0027 . preg_quote( $prefix ) . \u0027\u003e\u0027;",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_63c5b963",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T12:53:14Z",
+      "side": 1,
+      "message": "Why does this not use the vocabulary base URI above?",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c3d02dfd",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T12:53:14Z",
+      "side": 1,
+      "message": "These lines are to long now, that\u0027s why Jenkins fails.",
       "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
