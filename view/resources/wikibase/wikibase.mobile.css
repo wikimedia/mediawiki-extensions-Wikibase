@@ -77,8 +77,11 @@
 	/* Prevent statementgroupview to be split among columns */
 	display: inline-block;
 	margin: 0 0 10px;
-	padding: 5px;
 	width: 100%;
+}
+
+.wikibase-statementgroupview > div {
+	padding: 2px 5px;
 }
 
 .wikibase-statementgroupview-property-label a,
