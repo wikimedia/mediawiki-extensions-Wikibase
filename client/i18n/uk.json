@@ -15,7 +15,8 @@
 			"Максим Підліснюк",
 			"Tkalyn",
 			"DixonD",
-			"Piramidion"
+			"Piramidion",
+			"Dars"
 		]
 	},
 	"wikibase-client-desc": "Клієнт для розширення Wikibase",
@@ -74,12 +75,8 @@
 	"wikibase-error-invalid-entity-id": "Введений ідентифікатор не відомий системі. Будь ласка, введіть коректний ідентифікатор сутності.",
 	"unconnectedpages": "Сторінки, не пов'язані з елементами",
 	"unconnectedpages-summary": "На цій сторінці перераховані сторінки без пов'язаних елементів даних (у просторах назв, які підтримують пов'язані елементи). Список сортується за спаданням ID сторінки, так що нові сторінки вказані першими.",
-	"wikibase-unconnectedpages-page": "Почати список результатів із сторінки:",
-	"wikibase-unconnectedpages-submit": "Виконати",
-	"wikibase-unconnectedpages-invalid-language": "«$1» — неправильний код мови.",
-	"wikibase-unconnectedpages-page-warning": "Ця назва сторінки не може бути використаною у запиті й ігнорована.",
-	"wikibase-unconnectedpages-iwdata-label": "Лише сторінки із міжмовними інтервікі-посиланнями",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|міжмовне посилання|міжмовні посилання|міжмовних посилань}} на сторінці)",
+	"pageswithbadges-summary": "На цій сторінці перераховані сторінки із позначками (наприклад хороша стаття або обрана стаття). Список сортується за спаданням ID сторінки, тому новіші сторінки будуть вказуватися спочатку.",
 	"wikibase-pageinfo-entity-id": "Ідентифікатор елемента у {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Нема",
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",

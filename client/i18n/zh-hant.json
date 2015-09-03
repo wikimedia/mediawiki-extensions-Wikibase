@@ -12,7 +12,8 @@
 			"Yfdyh000",
 			"乌拉跨氪",
 			"LNDDYL",
-			"Cwlin0416"
+			"Cwlin0416",
+			"MoonYaksha"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
@@ -59,12 +60,11 @@
 	"wikibase-error-serialize-error": "序列化資料失敗",
 	"wikibase-error-invalid-entity-id": "系統無法辨識輸入的 ID。請使用一個有效的 ID。",
 	"unconnectedpages": "頁面未連結至項目",
-	"wikibase-unconnectedpages-page": "從此頁面開始顯示結果：",
-	"wikibase-unconnectedpages-submit": "執行",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" 不是有效的語言代碼。",
-	"wikibase-unconnectedpages-page-warning": "該頁面標題無法用於查詢並已忽略。",
-	"wikibase-unconnectedpages-iwdata-label": "僅使用跨語言連結的頁面",
 	"wikibase-unconnectedpages-format-row": "(該頁面有 $1 個跨語言連結)",
+	"pageswithbadges": "含有徽章的頁面",
+	"wikibase-pageswithbadges-invalid-id": "“$1” 不是一個有效 ID 項目",
+	"wikibase-pageswithbadges-badge": "徽章：",
+	"wikibase-pageswithbadges-submit": "顯示頁面",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} 項目 ID",
 	"wikibase-pageinfo-entity-id-none": "無",
 	"wikibase-property-render-error": "顯示屬性 $1：$2 失敗",
