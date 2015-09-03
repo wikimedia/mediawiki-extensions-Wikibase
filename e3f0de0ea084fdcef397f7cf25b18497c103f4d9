@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_6384d9d8",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "yes.",
+      "parentUuid": "6ec1af18_4d954ce6",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_6393795b",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-03T12:53:14Z",
       "side": 1,
       "message": "Whooo, my mission to brainwash Daniel obviously succeeded. ;-)))",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_43819dc7",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "that\u0027S exactly what I thought when I did this.",
+      "parentUuid": "6ec1af18_6393795b",
       "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_038715dd",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "I think PHPStorm did this. No reason.",
+      "parentUuid": "6ec1af18_e37e8913",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_63e059c8",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-09-03T12:53:14Z",
       "side": 1,
       "message": "Having a list of schemes is pointless if there is a prefix. Both are prefix checks.",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c374adfd",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "No, because UrlSchemeValidators actually applies patterns to the entire URL, based on the scheme. It knows what URLs of a given scheme should look like.",
+      "parentUuid": "6ec1af18_63e059c8",
       "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_e36f6924",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "oops",
+      "parentUuid": "6ec1af18_6d98481f",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_2398116c",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2015-09-03T12:53:14Z",
       "side": 1,
       "message": "Misplaced comment. This is a prefix validator, it does not know anything about URLs.",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a375e1f5",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "Names can be changed :)",
+      "parentUuid": "6ec1af18_2398116c",
       "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_4368bd19",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "How is that simpler or more obvious? Also: are \u003c and \u003e always escaped?",
+      "parentUuid": "6ec1af18_4a6e97ff",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_63c5b963",
         "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
         "patchSetId": 2
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_2361f131",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "Because we use hardcoded wikidata URIs for Time and GlobeCoordinate. We can\u0027t just switch them to using the Vocab URI, because the hardcoded URIs are all over the place. So we check them agaionst the hardcoded wikidata URI prefix.",
+      "parentUuid": "6ec1af18_63c5b963",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c3d02dfd",
         "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
         "patchSetId": 2
@@ -149,6 +293,24 @@
       "writtenOn": "2015-09-03T12:53:14Z",
       "side": 1,
       "message": "These lines are to long now, that\u0027s why Jenkins fails.",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_636b7916",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T13:06:15Z",
+      "side": 1,
+      "message": "bah.",
+      "parentUuid": "6ec1af18_c3d02dfd",
       "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
