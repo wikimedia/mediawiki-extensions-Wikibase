@@ -381,14 +381,14 @@ class SetClaimTest extends WikibaseApiTestCase {
 		/** @var Item $item */
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
-		$claims = new Claims( $item->getClaims() );
-		$savedClaim = $claims->getClaimWithGuid( $statement->getGuid() );
-		$this->assertNotNull( $savedClaim, "Claims list does not have claim after {$requestLabel}" );
+		$statements = $item->getStatements();
+		$savedStatement = $statements->getFirstStatementWithGuid( $statement->getGuid() );
+		$this->assertNotNull( $savedStatement, "Statement list does not have statement after {$requestLabel}" );
 		if ( count( $statement->getQualifiers() ) ) {
-			$this->assertTrue( $statement->getQualifiers()->equals( $savedClaim->getQualifiers() ) );
+			$this->assertTrue( $statement->getQualifiers()->equals( $savedStatement->getQualifiers() ) );
 		}
 
-		$this->assertSame( $expectedCount, $claims->count(), "Claims count is wrong after {$requestLabel}" );
+		$this->assertSame( $expectedCount, $statements->count(), "Statements count is wrong after {$requestLabel}" );
 	}
 
 	/**
