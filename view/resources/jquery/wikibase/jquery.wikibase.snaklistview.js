@@ -82,7 +82,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	/**
 	 * Short-cut to the `listview` widget used by the `snaklistview` to manage the `snakview`
 	 * widgets.
-	 * @property {$.wikibase.listview}
+	 * @property {jQuery.wikibase.listview}
 	 * @private
 	 */
 	_listview: null,

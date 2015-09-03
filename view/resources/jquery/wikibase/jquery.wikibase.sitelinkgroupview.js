@@ -8,6 +8,18 @@
 	var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
+ * @param {string} group
+ * @return {string[]}
+ */
+function getSiteIdsOfGroup( group ) {
+	var siteIds = [];
+	$.each( wb.sites.getSitesOfGroup( group ), function( siteId, site ) {
+		siteIds.push( siteId );
+	} );
+	return siteIds;
+}
+
+/**
  * Manages a sitelinklistview widget specific to a particular site link group.
  * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
@@ -355,17 +367,5 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		PARENT.prototype.setError.call( this, error );
 	}
 } );
-
-/**
- * @param {string} group
- * @return {string[]}
- */
-function getSiteIdsOfGroup( group ) {
-	var siteIds = [];
-	$.each( wb.sites.getSitesOfGroup( group ), function( siteId, site ) {
-		siteIds.push( siteId );
-	} );
-	return siteIds;
-}
 
 }( jQuery, mediaWiki, wikibase ) );
