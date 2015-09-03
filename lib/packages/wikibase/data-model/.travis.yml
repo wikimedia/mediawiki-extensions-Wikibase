@@ -10,7 +10,7 @@ php:
 
 sudo: false
 
-install: travis_retry composer install --prefer-source
+install: travis_retry composer install
 
 script: composer ci
 
