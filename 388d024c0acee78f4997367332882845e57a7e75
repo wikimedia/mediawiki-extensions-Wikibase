@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_481a1ad2",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T10:28:06Z",
+      "side": 1,
+      "message": "Addshore asked the same in PS5: https://gerrit.wikimedia.org/r/#/c/232695/5/repo/includes/api/ResultBuilder.php",
+      "parentUuid": "6ec1af18_c8d04afd",
+      "revId": "388d024c0acee78f4997367332882845e57a7e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_28e6aee3",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 6
@@ -30,6 +48,23 @@
       "writtenOn": "2015-09-03T10:07:59Z",
       "side": 1,
       "message": "why make this null?\n\nactually, it appears unused to me.  if so, would be nice to remove",
+      "revId": "388d024c0acee78f4997367332882845e57a7e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c82daaef",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T10:28:06Z",
+      "side": 1,
+      "message": "It\u0027s used here.",
       "revId": "388d024c0acee78f4997367332882845e57a7e75",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
