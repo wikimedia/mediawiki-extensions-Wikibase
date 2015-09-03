@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_a3a3a195",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T12:43:16Z",
+      "side": 1,
+      "message": "This actually causes the test to fail. PropertyInfoStoreTestHelper::testGetPropertyInfo has this line:\n\n$this-\u003etest-\u003eassertNull( $table-\u003egetPropertyInfo( $p23 ), \"not set yet, should be null\" );\n\nSince getPropertyInfo( $p23 ) now triggers a warning for that case, the test fails.",
+      "parentUuid": "6ec1af18_8379c52b",
+      "revId": "492861adc9103d8c77f794e9c3a54b4501e076e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_e3e9a9e1",
         "filename": "repo/includes/PropertyInfoBuilder.php",
         "patchSetId": 6
