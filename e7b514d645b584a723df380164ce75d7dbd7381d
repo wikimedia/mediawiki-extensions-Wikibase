@@ -69,6 +69,24 @@
       "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8c6011fd",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T18:57:02Z",
+      "side": 1,
+      "message": "Hm, ok, but why is it better to rely on arcane special case behavior than to just explicitly say which delimiter to escape? We know *exactly* which delimiter to escape here, it\u0027s not like we are dragging in knowledge from elsewhere.",
+      "parentUuid": "6ec1af18_e3aa0915",
+      "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
