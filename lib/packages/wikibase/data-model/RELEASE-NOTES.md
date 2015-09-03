@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 4.4.0 (2015-09-03)
+## Version 4.4.0 (dev)
 
 * Added `ItemIdParser`
 
