@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_e862e6d3",
+        "filename": "client/includes/Hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-03T08:20:46Z",
+      "side": 1,
+      "message": "As noted in the comment above, this will break on MediaWiki \u003c1.22 and on mobile wikidata.",
+      "parentUuid": "6ec1af18_892d71a5",
+      "revId": "ee116123d43b796fc87ea57d1d3ca906ea777dd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c434c0dc",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 5
