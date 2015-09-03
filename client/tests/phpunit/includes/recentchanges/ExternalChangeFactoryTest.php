@@ -38,10 +38,29 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
-		$this->assertEquals(
+		$this->assertExternalChangeEquals(
 			$this->makeExpectedExternalChange( '(wikibase-comment-update)', 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
+	}
+
+	private function assertExternalChangeEquals( ExternalChange $expected, ExternalChange $actual, $message = '' ) {
+		if ( $message !== '' ) {
+			$message .= "\n";
+		}
+
+		$this->assertEquals( $expected->getChangeType(), $actual->getChangeType(), $message . 'getChangeType' );
+		$this->assertEquals( $expected->getEntityId(), $actual->getEntityId(), $message . 'getEntityId' );
+
+		$expectedRev = $expected->getRev();
+		$actualRev = $actual->getRev();
+
+		$this->assertEquals( $expectedRev->getPageId(), $actualRev->getPageId(), $message . 'rev:getPageId' );
+		$this->assertEquals( $expectedRev->getParentId(), $actualRev->getParentId(), $message . 'rev:getParentId' );
+		$this->assertEquals( $expectedRev->getRevId(), $actualRev->getRevId(), $message . 'rev:getRevId' );
+		$this->assertEquals( $expectedRev->getSiteId(), $actualRev->getSiteId(), $message . 'rev:getSiteId' );
+		$this->assertEquals( $expectedRev->getTimestamp(), $actualRev->getTimestamp(), $message . 'rev:getTimestamp' );
+		$this->assertEquals( $expectedRev->getUserName(), $actualRev->getUserName(), $message . 'rev:getUserName' );
 	}
 
 	public function testNewFromRecentChange_siteLinkChange() {
@@ -62,7 +81,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
-		$this->assertEquals(
+		$this->assertExternalChangeEquals(
 			$this->makeExpectedExternalChange( '(wikibase-comment-update)', 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
@@ -81,7 +100,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
-		$this->assertEquals(
+		$this->assertExternalChangeEquals(
 			$this->makeExpectedExternalChange( '(wikibase-comment-linked)', 'add' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
@@ -102,7 +121,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
-		$this->assertEquals(
+		$this->assertExternalChangeEquals(
 			$this->makeExpectedExternalChange( $comment, 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
@@ -128,7 +147,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
-		$this->assertEquals(
+		$this->assertExternalChangeEquals(
 			$expected,
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
@@ -145,7 +164,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
-		$this->assertEquals(
+		$this->assertExternalChangeEquals(
 			$this->makeExpectedExternalChange( '(wikibase-comment-update)', 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
@@ -162,7 +181,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
-		$this->assertEquals(
+		$this->assertExternalChangeEquals(
 			$this->makeExpectedExternalChange( '(wikibase-comment-update)', 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
@@ -185,12 +204,24 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	private function makeRevisionData( $comment ) {
 		return new RevisionData(
 			'Cat',
-			5,
-			92,
-			90,
 			'20130819111741',
 			strval( $comment ),
-			'testrepo'
+			'testrepo',
+			array(
+				'page_id' => 5,
+				'rev_id' => 92,
+				'parent_id' => 90,
+				'id' => 4,
+				'type' => 'wikibase-item~update',
+				'time' => '20130819111741',
+				'object_id' => 'q4',
+				'user_id' => 1,
+				'revision_id' => 92,
+				'entity_type' => 'item',
+				'user_text' => 'Cat',
+				'bot' => 0,
+				'comment' => strval( $comment ),
+ 			)
 	  	);
 	}
 
