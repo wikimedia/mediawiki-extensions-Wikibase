@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_6802760e",
+        "filename": "repo/includes/specials/SpecialListProperties.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-09-03T08:07:10Z",
+      "side": 1,
+      "message": "Could we not typehint against PropertyId here as suggested in the doc?",
+      "revId": "f79e5076b348703ab8c4a213790c63d5f35434c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
