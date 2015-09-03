@@ -61,4 +61,11 @@ class ExternalChange {
 		return $this->changeType;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getSiteId() {
+		return $this->rev->getSiteId();
+	}
+
 }
