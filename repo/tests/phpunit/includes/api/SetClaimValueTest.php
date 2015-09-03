@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\SnakFormatter;
@@ -143,17 +144,18 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( $value, $claim['mainsnak']['datavalue']['value'] );
 
+		/** @var StatementListProvider $obtainedEntity */
 		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
 
 		$page = new WikiPage( WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $entity->getId() ) );
 		$generatedSummary = $page->getRevision()->getComment( Revision::RAW );
 		$this->assertEquals( $expectedSummary, $generatedSummary, 'Summary mismatch' );
 
-		$claims = new Claims( $obtainedEntity->getClaims() );
+		$statements = $obtainedEntity->getStatements();
 
-		$this->assertEquals( $claimCount, $claims->count(), 'Claim count should not change after doing a setclaimvalue request' );
+		$this->assertEquals( $claimCount, $statements->count(), 'Claim count should not change after doing a setclaimvalue request' );
 
-		$obtainedClaim = $claims->getClaimWithGuid( $guid );
+		$obtainedClaim = $statements->getFirstStatementWithGuid( $guid );
 
 		$this->assertNotNull( $obtainedClaim );
 

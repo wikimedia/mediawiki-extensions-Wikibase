@@ -78,9 +78,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
 
-		$claims = new Claims( $item->getClaims() );
-
-		$this->assertTrue( $claims->hasClaimWithGuid( $claim['id'] ) );
+		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $claim['id'] ) );
 	}
 
 	public function invalidRequestProvider() {
@@ -285,10 +283,8 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
 
-		$claims = new Claims( $item->getClaims() );
-
-		$this->assertTrue( $claims->hasClaimWithGuid( $firstGuid ) );
-		$this->assertTrue( $claims->hasClaimWithGuid( $secondGuid ) );
+		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $firstGuid ) );
+		$this->assertNotNull( $item->getStatements()->getFirstStatementWithGuid( $secondGuid ) );
 	}
 
 }
