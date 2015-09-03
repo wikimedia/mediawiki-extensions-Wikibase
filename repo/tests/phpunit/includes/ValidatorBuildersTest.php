@@ -79,7 +79,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'commonsMedia', 'Foo.jpg', false, 'StringValue expected, string supplied' ),
 			array( 'commonsMedia', new NumberValue( 7 ), false, 'StringValue expected' ),
 			array( 'commonsMedia', new StringValue( '' ), false, 'empty string should be invalid' ),
-			array( 'commonsMedia', new StringValue( str_repeat( 'x', 250 ) . '.jpg' ), false, 'name too long' ),
+			array( 'commonsMedia', new StringValue( str_repeat( 'x', 237 ) . '.jpg' ), false, 'name too long' ),
 			array( 'commonsMedia', new StringValue( 'Foo' ), false, 'no file extension' ),
 			array( 'commonsMedia', new StringValue( 'Foo.jpg' ), true, 'this should be good' ),
 			array( 'commonsMedia', new StringValue( 'Foo#bar.jpg' ), false, 'illegal character: hash' ),
@@ -96,7 +96,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'string', new StringValue( '' ), false, 'empty string should be invalid' ),
 			array( 'string', new StringValue( 'Foo' ), true, 'simple string' ),
 			array( 'string', new StringValue( 'Äöü' ), true, 'Unicode support' ),
-			array( 'string', new StringValue( str_repeat( 'x', 390 ) ), true, 'long, but not too long' ),
+			array( 'string', new StringValue( str_repeat( 'x', 400 ) ), true, 'long, but not too long' ),
 			array( 'string', new StringValue( str_repeat( 'x', 401 ) ), false, 'too long' ),
 			array( 'string', new StringValue( ' Foo' ), false, 'string with leading space' ),
 			array( 'string', new StringValue( 'Foo ' ), false, 'string with trailing space' ),
@@ -115,7 +115,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array(
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
-					'http://www.wikidata.org/entity/Q' . str_repeat( '6', 256 ) ),
+					'http://www.wikidata.org/entity/Q' . str_repeat( '6', 224 ) ),
 				false,
 				'calendar: too long'
 			),
@@ -191,11 +191,36 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 			//globe-coordinate[globe]
 			// FIXME: this is testing unimplemented behaviour? Probably broken...
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, '' ), false, 'globe: empty string should be invalid' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, 'http://www.wikidata.org/entity/Q' . str_repeat( '6', 256 ) ), false, 'globe: too long' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, 'http://www.wikidata.org/entity/Q2' ), true, 'globe: URL' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, ' http://www.wikidata.org/entity/Q2 ' ), false, 'globe: untrimmed' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, ' javascript:alert(1) ' ), false, 'globe: bad URL scheme' ),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, '' ),
+				false,
+				'globe: empty string should be invalid'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, 'http://www.wikidata.org/entity/Q' . str_repeat( '6', 224 ) ),
+				false,
+				'globe: too long'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, 'http://www.wikidata.org/entity/Q2' ),
+				true,
+				'globe: URL'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, ' http://www.wikidata.org/entity/Q2 ' ),
+				false,
+				'globe: untrimmed'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, ' javascript:alert(1) ' ),
+				false,
+				'globe: bad URL scheme'
+			),
 			//TODO: globe must be an item reference
 			//TODO: globe must be from a list of configured values
 
@@ -214,7 +239,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'url', new StringValue( 'just stuff' ), false, 'just words' ),
 			array( 'url', new StringValue( 'javascript:alert("evil")' ), false, 'JavaScript URL' ),
 			array( 'url', new StringValue( 'http://' ), false, 'bad http URL' ),
-			array( 'url', new StringValue( 'http://' . str_repeat( 'x', 505 ) ), false, 'URL too long' ),
+			array( 'url', new StringValue( 'http://' . str_repeat( 'x', 494 ) ), false, 'URL too long' ),
 
 			array( 'url', new StringValue( ' http://acme.com' ), false, 'URL with leading space' ),
 			array( 'url', new StringValue( 'http://acme.com ' ), false, 'URL with trailing space' ),
