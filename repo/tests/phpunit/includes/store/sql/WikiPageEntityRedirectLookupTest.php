@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use LoadBalancer;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -92,12 +93,13 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 		$this->assertSame( array(), $res );
 	}
 
-	private function getWikiPageEntityRedirectLookup() {
+	private function getWikiPageEntityRedirectLookup( LoadBalancer $loadBalancer = null ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new WikiPageEntityRedirectLookup(
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getEntityIdLookup()
+			$wikibaseRepo->getEntityIdLookup(),
+			$loadBalancer ?: wfGetLB()
 		);
 	}
 

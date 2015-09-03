@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\SQL;
 
+use LoadBalancer;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
@@ -27,12 +28,23 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	private $entityIdLookup;
 
 	/**
+	 * @var LoadBalancer
+	 */
+	private $loadBalancer;
+
+	/**
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdLookup $entityIdLookup
+	 * @param LoadBalancer $loadBalancer
 	 */
-	public function __construct( EntityTitleLookup $entityTitleLookup, EntityIdLookup $entityIdLookup ) {
+	public function __construct(
+		EntityTitleLookup $entityTitleLookup,
+		EntityIdLookup $entityIdLookup,
+		LoadBalancer $loadBalancer
+	) {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdLookup = $entityIdLookup;
+		$this->loadBalancer = $loadBalancer;
 	}
 
 	/**
@@ -47,7 +59,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	public function getRedirectIds( EntityId $targetId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $targetId );
 
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = $this->loadBalancer->getConnection( DB_SLAVE );
 
 		$res = $dbr->select(
 			array( 'page', 'redirect' ),
@@ -62,6 +74,8 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 				'LIMIT' => 1000 // everything should have a hard limit
 			)
 		);
+
+		$this->loadBalancer->reuseConnection( $dbr );
 
 		if ( !$res ) {
 			return array();
@@ -91,11 +105,10 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
-		$dbr = wfGetDB(
-			$forUpdate === 'for update' ? DB_MASTER : DB_SLAVE
-		);
+		$forUpdate === 'for update' ? DB_MASTER : DB_SLAVE;
+		$db = $this->loadBalancer->getConnection( $forUpdate );
 
-		$row = $dbr->selectRow(
+		$row = $db->selectRow(
 			array( 'page', 'redirect' ),
 			array( 'page_id', 'rd_namespace', 'rd_title' ),
 			array(
@@ -108,6 +121,8 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 				'redirect' => array( 'LEFT JOIN', 'rd_from=page_id' )
 			)
 		);
+
+		$this->loadBalancer->reuseConnection( $db );
 
 		if ( !$row ) {
 			return false;
