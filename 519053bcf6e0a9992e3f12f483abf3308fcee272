@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_28830e58",
+        "filename": "repo/resources/wikibase.special/wikibase.special.siteSuggester.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-03T08:44:52Z",
+      "side": 1,
+      "message": "That just doesn\u0027t make sense. Please remove that redundant check ;-)",
+      "parentUuid": "6ec1af18_49e0e9c7",
+      "revId": "519053bcf6e0a9992e3f12f483abf3308fcee272",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_09e42109",
         "filename": "repo/resources/wikibase.special/wikibase.special.siteSuggester.js",
         "patchSetId": 1
