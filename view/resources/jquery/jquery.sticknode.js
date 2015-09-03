@@ -10,75 +10,6 @@ var $window = $( window ),
 	PLUGIN_NAME = 'sticknode';
 
 /**
- * jQuery sticknode plugin.
- * Sticks a node with "position: fixed" when vertically scrolling it out of the viewport.
- * Be aware that plugin does not handle dynamic height changes (e.g. if the node contains
- * interactive elements that wipe out additional content). The code applying the widget needs to be
- * aware of dynamic height changes. Consequently, whenever the height of the node the plugin is
- * initialized on changes, a call to the refresh() function should be made to avoid undesired
- * clipping.
- *
- * @param {Object} [options]
- * @param {jQuery} [options.$container]
- *        Node specifying the bottom boundary for the node the plugin is initialized on. If the
- *        node the plugin is initialized on clips out of the container, it is reset to static
- *        position.
- * @param {boolean} [options.autoWidth=false]
- *        When not fixed, apply "auto" width attribute instead of width computed from the unfixed
- *        state.
- * @param {number} [options.zIndex=1]
- *        Custom z-index attribute.
- * @return {jQuery}
- *
- * @event sticknodeupdate
- *        Triggered when the node the widget is initialized and updates its positioning behaviour.
- *        - {jQuery.Event}
- */
-$.fn.sticknode = function( options ) {
-	options = options || {};
-
-	this.each( function() {
-		var $node = $( this );
-
-		if( $node.data( PLUGIN_NAME ) ) {
-			return;
-		}
-
-		var stickyNode = new StickyNode( $( this ), options );
-
-		eventSingleton.register(
-			stickyNode,
-			window,
-			'scroll.' + PLUGIN_NAME + ' ' + 'touchmove.' + PLUGIN_NAME,
-			function( event, stickyNode ) {
-				if( stickyNode.update( $window.scrollTop() ) ) {
-					stickyNode.$node.triggerHandler( PLUGIN_NAME + 'update' );
-				}
-			},
-			{
-				throttle: 150
-			}
-		);
-
-		eventSingleton.register(
-			stickyNode,
-			window,
-			'resize.' + PLUGIN_NAME,
-			function( event, stickyNode ) {
-				if( stickyNode.update( $window.scrollTop(), true ) ) {
-					stickyNode.$node.triggerHandler( PLUGIN_NAME + 'update' );
-				}
-			},
-			{
-				throttle: 150
-			}
-		);
-	} );
-
-	return this;
-};
-
-/**
  * @constructor
  *
  * @param {jQuery} $node
@@ -299,5 +230,74 @@ $.extend( StickyNode.prototype, {
 		}
 	}
 } );
+
+/**
+ * jQuery sticknode plugin.
+ * Sticks a node with "position: fixed" when vertically scrolling it out of the viewport.
+ * Be aware that plugin does not handle dynamic height changes (e.g. if the node contains
+ * interactive elements that wipe out additional content). The code applying the widget needs to be
+ * aware of dynamic height changes. Consequently, whenever the height of the node the plugin is
+ * initialized on changes, a call to the refresh() function should be made to avoid undesired
+ * clipping.
+ *
+ * @param {Object} [options]
+ * @param {jQuery} [options.$container]
+ *        Node specifying the bottom boundary for the node the plugin is initialized on. If the
+ *        node the plugin is initialized on clips out of the container, it is reset to static
+ *        position.
+ * @param {boolean} [options.autoWidth=false]
+ *        When not fixed, apply "auto" width attribute instead of width computed from the unfixed
+ *        state.
+ * @param {number} [options.zIndex=1]
+ *        Custom z-index attribute.
+ * @return {jQuery}
+ *
+ * @event sticknodeupdate
+ *        Triggered when the node the widget is initialized and updates its positioning behaviour.
+ *        - {jQuery.Event}
+ */
+$.fn.sticknode = function( options ) {
+	options = options || {};
+
+	this.each( function() {
+		var $node = $( this );
+
+		if( $node.data( PLUGIN_NAME ) ) {
+			return;
+		}
+
+		var stickyNode = new StickyNode( $( this ), options );
+
+		eventSingleton.register(
+			stickyNode,
+			window,
+			'scroll.' + PLUGIN_NAME + ' ' + 'touchmove.' + PLUGIN_NAME,
+			function( event, stickyNode ) {
+				if( stickyNode.update( $window.scrollTop() ) ) {
+					stickyNode.$node.triggerHandler( PLUGIN_NAME + 'update' );
+				}
+			},
+			{
+				throttle: 150
+			}
+		);
+
+		eventSingleton.register(
+			stickyNode,
+			window,
+			'resize.' + PLUGIN_NAME,
+			function( event, stickyNode ) {
+				if( stickyNode.update( $window.scrollTop(), true ) ) {
+					stickyNode.$node.triggerHandler( PLUGIN_NAME + 'update' );
+				}
+			},
+			{
+				throttle: 150
+			}
+		);
+	} );
+
+	return this;
+};
 
 }( jQuery ) );
