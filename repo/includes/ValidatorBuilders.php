@@ -77,8 +77,8 @@ class ValidatorBuilders {
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
-	 * @param ContentLanguages $contentLanguages
 	 * @param string $vocabularyBaseUri The base URI for vocabulary concepts.
+	 * @param ContentLanguages $contentLanguages
 	 */
 	public function __construct(
 		EntityLookup $lookup,
@@ -282,12 +282,12 @@ class ValidatorBuilders {
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
 
-		$urlValidators = new UrlSchemeValidators();
-		$urlSchemeValidators = $urlValidators->getValidators( $urlSchemes );
-		$validators[] = new UrlValidator( $urlSchemeValidators );
+		$urlValidatorsBuilder = new UrlSchemeValidators();
+		$urlValidators = $urlValidatorsBuilder->getValidators( $urlSchemes );
+		$validators[] = new UrlValidator( $urlValidators );
 
 		if ( $prefix !== null ) {
-			//XXX: we may want to allow http AND https.
+			// FIXME: It's currently not possible to allow both http and https at this point.
 			$validators[] = $this->getPrefixValidator( $prefix, 'bad-prefix' );
 		}
 
@@ -301,7 +301,7 @@ class ValidatorBuilders {
 	 * @return RegexValidator
 	 */
 	private function getPrefixValidator( $prefix, $errorCode ) {
-		$regex = '!^' . preg_quote( $prefix, '!' ) . '!';
+		$regex = '/^' . preg_quote( $prefix, '/' ) . '/';
 		return new RegexValidator( $regex, false, $errorCode );
 	}
 
