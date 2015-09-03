@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_c3010d3e",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-03T13:16:52Z",
+      "side": 1,
+      "message": "Gnah, that happens when one tries to do refactoring as a side-effect :S",
+      "parentUuid": "6ec1af18_a3a3a195",
+      "revId": "492861adc9103d8c77f794e9c3a54b4501e076e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_e3e9a9e1",
         "filename": "repo/includes/PropertyInfoBuilder.php",
         "patchSetId": 6
