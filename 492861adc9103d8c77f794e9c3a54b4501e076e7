@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_8379c52b",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T12:38:39Z",
+      "side": 1,
+      "message": "This will now happen when looking up a property that is not know. \nPreviously, we\u0027d just return null in that case, with no warning.\nWe could consider returning an empty array, even.",
+      "revId": "492861adc9103d8c77f794e9c3a54b4501e076e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_e3e9a9e1",
         "filename": "repo/includes/PropertyInfoBuilder.php",
         "patchSetId": 6
