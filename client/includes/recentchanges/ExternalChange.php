@@ -15,6 +15,11 @@ use Wikibase\DataModel\Entity\EntityId;
 class ExternalChange {
 
 	/**
+	 * @var string
+	 */
+	private $siteId;
+
+	/**
 	 * @var EntityId
 	 */
 	private $entityId;
@@ -59,6 +64,13 @@ class ExternalChange {
 	 */
 	public function getChangeType() {
 		return $this->changeType;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSiteId() {
+		return $this->rev->getSiteId();
 	}
 
 }
