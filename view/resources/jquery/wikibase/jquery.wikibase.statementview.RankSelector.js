@@ -11,6 +11,27 @@
 	var $menu = null;
 
 	/**
+	 * Returns a `RANK`'s serialized string.
+	 * @see wikibase.datamodel.Statement.RANK
+	 * @ignore
+	 *
+	 * @param {number} rank
+	 * @return {string|null}
+	 */
+	function getRankString( rank ) {
+		var rankString = null;
+
+		$.each( wb.datamodel.Statement.RANK, function( rankId, i ) {
+			if( rank === i ) {
+				rankString = rankId.toLowerCase();
+			}
+			return rankString === null;
+		} );
+
+		return rankString;
+	}
+
+	/**
 	 * Selector for choosing a `Statement` rank.
 	 * @see wikibase.datamodel.Statement.RANK
 	 * @class jQuery.wikibase.statementview.RankSelector
@@ -330,26 +351,5 @@
 			return this.value() === this.options.value;
 		}
 	} );
-
-	/**
-	 * Returns a `RANK`'s serialized string.
-	 * @see wikibase.datamodel.Statement.RANK
-	 * @ignore
-	 *
-	 * @param {number} rank
-	 * @return {string|null}
-	 */
-	function getRankString( rank ) {
-		var rankString = null;
-
-		$.each( wb.datamodel.Statement.RANK, function( rankId, i ) {
-			if( rank === i ) {
-				rankString = rankId.toLowerCase();
-			}
-			return rankString === null;
-		} );
-
-		return rankString;
-	}
 
 }( mediaWiki, wikibase, jQuery, util ) );

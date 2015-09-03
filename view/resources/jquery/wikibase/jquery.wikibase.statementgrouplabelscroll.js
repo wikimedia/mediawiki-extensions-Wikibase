@@ -8,6 +8,12 @@
 	var WIDGET_NAME = 'statementgrouplabelscroll';
 
 	/**
+	 * Name of the animation queue used for animations moving the `Statement` group labels around.
+	 * @type {string}
+	 */
+	var ANIMATION_QUEUE = 'wikibase-' + WIDGET_NAME;
+
+	/**
 	 * For keeping track of currently active statementgrouplabelscroll widgets which need updates on
 	 * certain browser window events.
 	 *
@@ -16,6 +22,12 @@
 	 * @type {jQuery.wikibase.statementgrouplabelscroll[]}
 	 */
 	var activeInstances = [];
+
+	/**
+	 * Counter for expensive checks done in an update. Used for debugging output.
+	 * @type {number}
+	 */
+	var expensiveChecks = 0;
 
 	function updateActiveInstances() {
 		for( var i in activeInstances ) {
@@ -43,17 +55,120 @@
 		}
 	}
 
-	/**
-	 * Name of the animation queue used for animations moving the `Statement` group labels around.
-	 * @type {string}
-	 */
-	var ANIMATION_QUEUE = 'wikibase-' + WIDGET_NAME;
+	function elementPartlyVerticallyInViewport( elem ) {
+		var top = $( elem ).offset().top;
+		return (
+			top < ( window.pageYOffset + window.innerHeight )
+			&& ( top + elem.offsetHeight ) > window.pageYOffset
+		);
+	}
+
+	function elementFullyVerticallyInViewport( elem ) {
+		var top = $( elem ).offset().top;
+		return (
+			top >= window.pageYOffset
+			&& ( top + elem.offsetHeight ) <= ( window.pageYOffset + window.innerHeight )
+		);
+	}
 
 	/**
-	 * Counter for expensive checks done in an update. Used for debugging output.
-	 * @type {number}
+	 * Checks an element for Main Snak elements and returns the first one visible in the browser's
+	 * viewport.
+	 *
+	 * @param {jQuery} $searchRange
+	 * @return {null|jQuery}
 	 */
-	var expensiveChecks = 0;
+	function findFirstVisibleMainSnakElement( $searchRange ) {
+		var result = null;
+
+		// Caring about the visibility of ".wikibase-snakview-value-container" is better than about
+		// ".wikibase-statementview" or ".wikibase-statementview-mainsnak" since the label will
+		// align with the .wikibase-snakview-value-container.
+		var $mainSnaks = $searchRange.find(
+			'.wikibase-statementview-mainsnak .wikibase-snakview-value-container'
+		);
+
+		$mainSnaks.each( function( i, mainSnakNode ) {
+			// Take first Main Snak value in viewport. If value is not fully visible in viewport,
+			// check whether the next one is fully visible, if so, take that one.
+			if( elementPartlyVerticallyInViewport( mainSnakNode ) ) {
+				result = mainSnakNode;
+
+				if( !elementFullyVerticallyInViewport( mainSnakNode ) ) {
+					// Current element would be ok, but maybe the next one is even better
+					var nextMainSnakNode = $mainSnaks.get( i + 1 );
+					if( nextMainSnakNode && elementFullyVerticallyInViewport( nextMainSnakNode ) ) {
+						result = nextMainSnakNode;
+					}
+				}
+			}
+
+			// Stop iterating as soon as we have a result
+			return !result;
+		} );
+
+		if( result ) {
+			// Don't forget to get the actual Snak node rather than the value container.
+			result = $( result ).closest( '.wikibase-statementview-mainsnak' );
+		}
+		return result;
+	}
+
+	/**
+	 * Checks an Claim Group's element for Main Snak elements and returns all that are visible in
+	 * the browser's viewport.
+	 * This is an optimized version of "findFirstVisibleMainSnakElement" in case Claim groups
+	 * are expected within the DOM that should be searched for Main Snaks.
+	 *
+	 * @param {jQuery} $searchRange
+	 * @return {jQuery}
+	 */
+	function findFirstVisibleMainSnakElementsWithinStatementlistview( $searchRange ) {
+		var $statementGroups = $searchRange.find( '.wikibase-statementlistview' ),
+			$visibleStatementGroups = $();
+
+		// TODO: Optimize! E.g.:
+		//  (1) don't walk them top to bottom, instead, take the one in the middle, check whether
+		//      it is within/above/below viewport and exclude following/preceding ones which are
+		//      obviously not within the viewport.
+		//  (2) remember last visible node, start checking there and depending on scroll movement
+		//      (up/down) on its neighbouring nodes.
+		$statementGroups.each( function( i, statementGroupNode ) {
+			if( elementPartlyVerticallyInViewport( statementGroupNode ) ) {
+				var $mainSnakElement = findFirstVisibleMainSnakElement( $( statementGroupNode ) );
+				$visibleStatementGroups = $visibleStatementGroups.add( $mainSnakElement );
+			}
+		} );
+
+		return $visibleStatementGroups;
+	}
+
+	/**
+	 * Takes an element and positions it to be vertically at the same position as another given
+	 * element. Animates the element to move towards that position.
+	 *
+	 * @param {jQuery} $element
+	 * @param {jQuery} $target
+	 * @param {jQuery} $within
+	 */
+	function positionElementInOneLineWithAnother( $element, $target, $within ) {
+		var side = $( 'html' ).prop( 'dir' ) === 'ltr' ? 'left' : 'right';
+		$element
+		.stop( ANIMATION_QUEUE, true, false ) // stop all queued animations, don't jump to end
+		.position( {
+			my: side + ' top',
+			at: side + ' top',
+			of: $target,
+			within: $within,
+			using: function( css, calc ) {
+				$( this ).animate( css, {
+					queue: ANIMATION_QUEUE,
+					easing: 'easeInOutCubic'
+				} );
+			}
+		} )
+		.dequeue( ANIMATION_QUEUE ); // run animations in queue
+	}
 
 	/**
 	 * Widget which will reposition labels of `Statement` groups while scrolling through the page.
@@ -172,120 +287,5 @@
 	$.wikibase[ WIDGET_NAME ].activeInstances = function() {
 		return activeInstances.slice();
 	};
-
-	/**
-	 * Checks an Claim Group's element for Main Snak elements and returns all that are visible in
-	 * the browser's viewport.
-	 * This is an optimized version of "findFirstVisibleMainSnakElement" in case Claim groups
-	 * are expected within the DOM that should be searched for Main Snaks.
-	 *
-	 * @param {jQuery} $searchRange
-	 * @return {jQuery}
-	 */
-	function findFirstVisibleMainSnakElementsWithinStatementlistview( $searchRange ) {
-		var $statementGroups = $searchRange.find( '.wikibase-statementlistview' ),
-			$visibleStatementGroups = $();
-
-		// TODO: Optimize! E.g.:
-		//  (1) don't walk them top to bottom, instead, take the one in the middle, check whether
-		//      it is within/above/below viewport and exclude following/preceding ones which are
-		//      obviously not within the viewport.
-		//  (2) remember last visible node, start checking there and depending on scroll movement
-		//      (up/down) on its neighbouring nodes.
-		$statementGroups.each( function( i, statementGroupNode ) {
-			if( elementPartlyVerticallyInViewport( statementGroupNode ) ) {
-				var $mainSnakElement = findFirstVisibleMainSnakElement( $( statementGroupNode ) );
-				$visibleStatementGroups = $visibleStatementGroups.add( $mainSnakElement );
-			}
-		} );
-
-		return $visibleStatementGroups;
-	}
-
-	/**
-	 * Checks an element for Main Snak elements and returns the first one visible in the browser's
-	 * viewport.
-	 *
-	 * @param {jQuery} $searchRange
-	 * @return {null|jQuery}
-	 */
-	function findFirstVisibleMainSnakElement( $searchRange ) {
-		var result = null;
-
-		// Caring about the visibility of ".wikibase-snakview-value-container" is better than about
-		// ".wikibase-statementview" or ".wikibase-statementview-mainsnak" since the label will
-		// align with the .wikibase-snakview-value-container.
-		var $mainSnaks = $searchRange.find(
-			'.wikibase-statementview-mainsnak .wikibase-snakview-value-container'
-		);
-
-		$mainSnaks.each( function( i, mainSnakNode ) {
-			// Take first Main Snak value in viewport. If value is not fully visible in viewport,
-			// check whether the next one is fully visible, if so, take that one.
-			if( elementPartlyVerticallyInViewport( mainSnakNode ) ) {
-				result = mainSnakNode;
-
-				if( !elementFullyVerticallyInViewport( mainSnakNode ) ) {
-					// Current element would be ok, but maybe the next one is even better
-					var nextMainSnakNode = $mainSnaks.get( i + 1 );
-					if( nextMainSnakNode && elementFullyVerticallyInViewport( nextMainSnakNode ) ) {
-						result = nextMainSnakNode;
-					}
-				}
-			}
-
-			// Stop iterating as soon as we have a result
-			return !result;
-		} );
-
-		if( result ) {
-			// Don't forget to get the actual Snak node rather than the value container.
-			result = $( result ).closest( '.wikibase-statementview-mainsnak' );
-		}
-		return result;
-	}
-
-	/**
-	 * Takes an element and positions it to be vertically at the same position as another given
-	 * element. Animates the element to move towards that position.
-	 *
-	 * @param {jQuery} $element
-	 * @param {jQuery} $target
-	 * @param {jQuery} $within
-	 */
-	function positionElementInOneLineWithAnother( $element, $target, $within ) {
-		var side = $( 'html' ).prop( 'dir' ) === 'ltr' ? 'left' : 'right';
-		$element
-		.stop( ANIMATION_QUEUE, true, false ) // stop all queued animations, don't jump to end
-		.position( {
-			my: side + ' top',
-			at: side + ' top',
-			of: $target,
-			within: $within,
-			using: function( css, calc ) {
-				$( this ).animate( css, {
-					queue: ANIMATION_QUEUE,
-					easing: 'easeInOutCubic'
-				} );
-			}
-		} )
-		.dequeue( ANIMATION_QUEUE ); // run animations in queue
-	}
-
-	function elementFullyVerticallyInViewport( elem ) {
-		var top = $( elem ).offset().top;
-		return (
-			top >= window.pageYOffset
-			&& ( top + elem.offsetHeight ) <= ( window.pageYOffset + window.innerHeight )
-		);
-	}
-
-	function elementPartlyVerticallyInViewport( elem ) {
-		var top = $( elem ).offset().top;
-		return (
-			top < ( window.pageYOffset + window.innerHeight )
-			&& ( top + elem.offsetHeight ) > window.pageYOffset
-		);
-	}
 
 }( jQuery ) );
