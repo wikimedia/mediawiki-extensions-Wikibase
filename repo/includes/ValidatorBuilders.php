@@ -62,7 +62,7 @@ class ValidatorBuilders {
 	 * values. Our parsers for these data types currently have Wikidata URIs hardcoded, so we need
 	 * to hardcode the URI to check them against for now.
 	 *
-	 * @todo: use a configurable vocabulary for claendards and reference globes, instead of
+	 * @todo: use a configurable vocabulary for calendars and reference globes, instead of
 	 * hardcoding wikidata. Then replace usages of $wikidataBaseUri with $vocabularyBaseUri.
 	 */
 	private $wikidataBaseUri = 'http://www.wikidata.org/entity/';
@@ -77,8 +77,8 @@ class ValidatorBuilders {
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
-	 * @param ContentLanguages $contentLanguages
 	 * @param string $vocabularyBaseUri The base URI for vocabulary concepts.
+	 * @param ContentLanguages $contentLanguages
 	 */
 	public function __construct(
 		EntityLookup $lookup,
@@ -273,21 +273,22 @@ class ValidatorBuilders {
 	 * @param string|null $prefix a required prefix
 	 * @param int $maxLength Defaults to 500 characters. Even if URLs are unlimited in theory they
 	 * should be limited to about 2000. About 500 is a reasonable compromise.
+	 * @see http://stackoverflow.com/a/417184
 	 *
 	 * @return CompositeValidator
-	 * @see http://stackoverflow.com/a/417184
 	 */
 	private function getUrlValidator( array $urlSchemes, $prefix = null, $maxLength = 500 ) {
 		$validators = array();
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
 
-		$urlValidators = new UrlSchemeValidators();
-		$urlSchemeValidators = $urlValidators->getValidators( $urlSchemes );
-		$validators[] = new UrlValidator( $urlSchemeValidators );
+		$urlValidatorsBuilder = new UrlSchemeValidators();
+		$urlValidators = $urlValidatorsBuilder->getValidators( $urlSchemes );
+		$validators[] = new UrlValidator( $urlValidators );
 
 		if ( $prefix !== null ) {
-			$validators[] = $this->getPrefixValidator( $prefix, 'bad-perefix' );
+			// FIXME: It's currently not possible to allow both http and https at this point.
+			$validators[] = $this->getPrefixValidator( $prefix, 'bad-prefix' );
 		}
 
 		return new CompositeValidator( $validators ); //Note: each validator is fatal
@@ -300,8 +301,7 @@ class ValidatorBuilders {
 	 * @return RegexValidator
 	 */
 	private function getPrefixValidator( $prefix, $errorCode ) {
-		//XXX: we may want to allow http AND https.
-		$regex = '!^' . preg_quote( $prefix, '!' ) . '!';
+		$regex = '<^' . preg_quote( $prefix ) . '>';
 		return new RegexValidator( $regex, false, $errorCode );
 	}
 
