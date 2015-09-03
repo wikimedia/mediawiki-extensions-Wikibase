@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_e8d0a623",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T10:05:36Z",
+      "side": 1,
+      "message": "Usually I prefer $entityId over $id, but in this case it\u0027s more confusing to have lots of variables all starting with $entity. $id can not be confused with anything else in this context.",
+      "parentUuid": "6ec1af18_88f482ba",
+      "revId": "b268db8ec8ea9b6b6c149e026c6a9abc3c13bf82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c8ee0aeb",
         "filename": "lib/includes/changes/EntityChangeFactory.php",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "ok :/ anyway, not directly related to this patch",
       "parentUuid": "6ec1af18_e89d065c",
+      "revId": "b268db8ec8ea9b6b6c149e026c6a9abc3c13bf82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_88bfa2a6",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T10:05:36Z",
+      "side": 1,
+      "message": "We started doing this recently with multiple interfaces. There is a \"provider\" interface with nothing but a getter, relevant for immutable objects. And a \"holder\" interface with an additional setter.\n\nIf you think these names are bad and you have a better suggestion, please open a ticket and assign it to the #Wikibase-DataModel project. Thanks.",
+      "parentUuid": "6ec1af18_c8ee0aeb",
       "revId": "b268db8ec8ea9b6b6c149e026c6a9abc3c13bf82",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
