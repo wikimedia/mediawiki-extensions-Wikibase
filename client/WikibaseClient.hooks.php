@@ -143,7 +143,8 @@ final class ClientHooks {
 		if ( $type == RC_EXTERNAL ) {
 			$wikibaseClient = WikibaseClient::getDefaultInstance();
 			$changeFactory = new ExternalChangeFactory(
-				$wikibaseClient->getSettings()->getSetting( 'repoSiteId' )
+				$wikibaseClient->getSettings()->getSetting( 'repoSiteId' ),
+				$wikibaseClient->getContentLanguage()
 			);
 
 			try {
