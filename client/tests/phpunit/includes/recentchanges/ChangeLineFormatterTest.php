@@ -57,7 +57,7 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		$context = $this->getTestContext();
 
 		$changesList = ChangesList::newFromContext( $context );
-		$changeFactory = new ExternalChangeFactory( 'testrepo' );
+		$changeFactory = new ExternalChangeFactory( 'testrepo', Language::factory( 'en' ) );
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
 
 		$formatter = new ChangeLineFormatter(
@@ -74,7 +74,7 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		);
 
 		foreach ( $expectedTags as $key => $tag ) {
-			$this->assertTag( $tag, $formattedLine, $key );
+			$this->assertTag( $tag, $formattedLine, $key . "\n\t" . $formattedLine );
 		}
 
 		foreach ( $patterns as $pattern ) {
