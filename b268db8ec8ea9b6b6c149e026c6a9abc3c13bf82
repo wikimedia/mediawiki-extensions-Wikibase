@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c8ee0aeb",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-03T09:43:41Z",
+      "side": 1,
+      "message": "ugh, why do we have StatementListHolder and StatementListProvider?",
+      "revId": "b268db8ec8ea9b6b6c149e026c6a9abc3c13bf82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
