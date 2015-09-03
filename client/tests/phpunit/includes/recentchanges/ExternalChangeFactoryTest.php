@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\RecentChanges;
 
+use Language;
 use RecentChange;
 use Wikibase\Client\RecentChanges\ExternalChange;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
@@ -21,12 +22,16 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
+	private function getExternalChangeFactory() {
+		return new ExternalChangeFactory( 'testrepo', Language::factory( 'qqx' ) );
+	}
+
 	public function testNewFromRecentChange_itemUpdated() {
 		$commentData = 'wikibase-comment-update';
 
 		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', false );
 
-		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
 			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
@@ -46,7 +51,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', false );
 
-		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
 			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
@@ -61,7 +66,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~add', false );
 
-		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
 			$this->makeExpectedExternalChange( 'wikibase-comment-linked', 'add' ),
@@ -74,7 +79,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', false );
 
-		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
 			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
@@ -99,14 +104,11 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$expected = new ExternalChange(
 			new ItemId( 'Q4' ),
-			$this->makeRevisionData( array(
-				'key' => 'wikibase-comment-multi',
-				'numparams' => 2
-			) ),
+			$this->makeRevisionData( '(wikibase-comment-multi: 2)' ),
 			'update'
 		);
 
-		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
 			$expected,
@@ -119,15 +121,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', true );
 
-		$expected = new ExternalChange(
-			new ItemId( 'Q4' ),
-			$this->makeRevisionData( array(
-				'key' => 'wikibase-comment-update'
-			) ),
-			'update'
-		);
-
-		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
 			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
@@ -140,7 +134,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$recentChange = $this->makeRecentChange( $commentData, 'wikibase-item~update', false );
 
-		$externalChangeFactory = new ExternalChangeFactory( 'testrepo' );
+		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
 			$this->makeExpectedExternalChange( 'wikibase-comment-update', 'update' ),
@@ -149,29 +143,27 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param string $expectedComment
+	 * @param string $expectedCommentKey
 	 * @param string $expectedType
 	 *
 	 * @return ExternalChange
 	 */
-	private function makeExpectedExternalChange( $expectedComment, $expectedType ) {
+	private function makeExpectedExternalChange( $expectedCommentKey, $expectedType ) {
 		return new ExternalChange(
 			new ItemId( 'Q4' ),
-			$this->makeRevisionData( array(
-				'key' => $expectedComment
-			) ),
+			$this->makeRevisionData( '(' . $expectedCommentKey . ')' ),
 			$expectedType
 		);
 	}
 
-	private function makeRevisionData( array $comment ) {
+	private function makeRevisionData( $comment ) {
 		return new RevisionData(
 			'Cat',
 			5,
 			92,
 			90,
 			'20130819111741',
-			$comment,
+			strval( $comment ),
 			'testrepo'
 	  	);
 	}
