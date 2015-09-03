@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_e3e9a9e1",
+        "filename": "repo/includes/PropertyInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-03T12:30:26Z",
+      "side": 1,
+      "message": "Strict standards: Only variables should be passed by reference in /var/www/html/daniel/wikidata/extensions/Wikibase/repo/includes/PropertyInfoBuilder.php on line 67\n\nPHP 5.5.9",
+      "revId": "492861adc9103d8c77f794e9c3a54b4501e076e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
