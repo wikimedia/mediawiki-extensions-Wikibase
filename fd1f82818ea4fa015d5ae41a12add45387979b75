@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a84b7e2a",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T09:20:14Z",
+      "side": 1,
+      "message": "Currently all our entity types do have this method, but this may change in the future. Fixed in I56dc68c.",
+      "revId": "fd1f82818ea4fa015d5ae41a12add45387979b75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
