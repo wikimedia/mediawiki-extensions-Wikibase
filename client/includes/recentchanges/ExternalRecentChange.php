@@ -33,6 +33,13 @@ class ExternalRecentChange {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getAttributes() {
+		return $this->mAttribs;
+	}
+
+	/**
 	 * Builds the attribute array for saving into recentchanges table
 	 *
 	 * @param array $attribs
