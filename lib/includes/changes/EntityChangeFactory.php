@@ -2,13 +2,13 @@
 
 namespace Wikibase\Lib\Changes;
 
-use InvalidArgumentException;
 use MWException;
 use Wikibase\ChangesTable;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 
@@ -23,7 +23,7 @@ use Wikibase\EntityFactory;
 class EntityChangeFactory {
 
 	/**
-	 * @var array maps entity type IDs to subclasses of EntityChange
+	 * @var string[] Maps entity type IDs to subclasses of EntityChange.
 	 */
 	private $changeClasses;
 
@@ -46,14 +46,15 @@ class EntityChangeFactory {
 	 * @param ChangesTable $changesTable
 	 * @param EntityFactory $entityFactory
 	 * @param EntityDiffer $entityDiffer
-	 * @param array $changeClasses maps entity type IDs to subclasses of EntityChange.
+	 * @param string[] $changeClasses Maps entity type IDs to subclasses of EntityChange.
 	 * Entity types not mapped explicitly are assumed to use EntityChange itself.
-	 *
-	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( ChangesTable $changesTable, EntityFactory $entityFactory,
-		EntityDiffer $entityDiffer, array $changeClasses = array() ) {
-
+	public function __construct(
+		ChangesTable $changesTable,
+		EntityFactory $entityFactory,
+		EntityDiffer $entityDiffer,
+		array $changeClasses = array()
+	) {
 		$this->changeClasses = $changeClasses;
 		$this->changesTable = $changesTable;
 		$this->entityFactory = $entityFactory;
@@ -90,8 +91,7 @@ class EntityChangeFactory {
 		}
 
 		if ( !$instance->hasField( 'info' ) ) {
-			$info = array();
-			$instance->setField( 'info', $info );
+			$instance->setField( 'info', array() );
 		}
 
 		// Note: the change type determines how the client will
@@ -115,34 +115,39 @@ class EntityChangeFactory {
 	 * @return EntityChange
 	 * @throws MWException
 	 */
-	public function newFromUpdate( $action, EntityDocument $oldEntity = null, EntityDocument $newEntity = null, array $fields = null ) {
+	public function newFromUpdate(
+		$action,
+		EntityDocument $oldEntity = null,
+		EntityDocument $newEntity = null,
+		array $fields = null
+	) {
 		if ( $oldEntity === null && $newEntity === null ) {
-			throw new MWException( 'Either $oldEntity or $newEntity must be give.' );
+			throw new MWException( 'Either $oldEntity or $newEntity must be given' );
 		}
 
 		if ( $oldEntity === null ) {
 			$oldEntity = $this->entityFactory->newEmpty( $newEntity->getType() );
-			$theEntity = $newEntity;
+			$id = $newEntity->getId();
 		} elseif ( $newEntity === null ) {
 			$newEntity = $this->entityFactory->newEmpty( $oldEntity->getType() );
-			$theEntity = $oldEntity;
+			$id = $oldEntity->getId();
 		} elseif ( $oldEntity->getType() !== $newEntity->getType() ) {
 			throw new MWException( 'Entity type mismatch' );
 		} else {
-			$theEntity = $newEntity;
+			$id = $newEntity->getId();
 		}
 
 		// don't include statements diff, since those are unused and not helpful
 		// performance-wise to the dispatcher and change handling.
-		$oldEntity->setStatements( new StatementList() );
-		$newEntity->setStatements( new StatementList() );
+		if ( $oldEntity instanceof StatementListHolder ) {
+			$oldEntity->setStatements( new StatementList() );
+			$newEntity->setStatements( new StatementList() );
+		}
 
 		$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
 
-		/**
-		 * @var EntityChange $instance
-		 */
-		$instance = self::newForEntity( $action, $theEntity->getId(), $fields );
+		/** @var EntityChange $instance */
+		$instance = self::newForEntity( $action, $id, $fields );
 		$instance->setDiff( $diff );
 
 		return $instance;
