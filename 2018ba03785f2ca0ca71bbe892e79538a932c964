@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_0355d425",
+        "filename": "view/tests/qunit/jquery/ui/jquery.ui.TemplatedWidget.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-03T15:31:10Z",
+      "side": 1,
+      "message": "Should probably be {jQuery}.",
+      "revId": "2018ba03785f2ca0ca71bbe892e79538a932c964",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
