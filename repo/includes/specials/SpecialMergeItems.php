@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Exception;
+use HTMLForm;
 use Html;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -177,7 +178,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	 * @param string $summary
 	 */
 	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
-		$this->tokenCheck->checkRequestToken( $this->getRequest(), 'token' );
+		$this->tokenCheck->checkRequestToken( $this->getRequest(), 'wpEditToken' );
 
 		/** @var EntityRevision $newRevisionFrom  */
 		/** @var EntityRevision $newRevisionTo */
@@ -199,112 +200,52 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	protected function createForm() {
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
+		$pre = '';
 		if ( $this->getUser()->isAnon() ) {
-			$this->getOutput()->addHTML(
-				Html::rawElement(
-					'p',
-					array( 'class' => 'warning' ),
-					$this->msg(
-						'wikibase-anonymouseditwarning',
-						$this->msg( 'wikibase-entity-item' )->text()
-					)->parse()
-				)
+			$pre = Html::rawElement(
+				'p',
+				array( 'class' => 'warning' ),
+				$this->msg(
+					'wikibase-anonymouseditwarning',
+					$this->msg( 'wikibase-entity-item' )->text()
+				)->parse()
 			);
 		}
 
-		// Form header
-		$this->getOutput()->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'method' => 'post',
-					'action' => $this->getPageTitle()->getFullUrl(),
-					'name' => 'mergeitems',
-					'id' => 'wb-mergeitems-form1',
-					'class' => 'wb-form'
-				)
-			)
-			. Html::openElement(
-				'fieldset',
-				array( 'class' => 'wb-fieldset' )
-			)
-			. Html::element(
-				'legend',
-				array( 'class' => 'wb-legend' ),
-				$this->msg( 'special-mergeitems' )->text()
-			)
-		);
-
-		// Form elements
-		$this->getOutput()->addHTML( $this->getFormElements() );
-
-		// Form body
-		$this->getOutput()->addHTML(
-			Html::element( 'br' )
-			. Html::input(
-				'wikibase-mergeitems-submit',
-				$this->msg( 'wikibase-mergeitems-submit' )->text(),
-				'submit',
-				array(
-					'id' => 'wb-mergeitems-submit',
-					'class' => 'wb-button'
-				)
-			)
-			. Html::input(
-				'token',
-				$this->getUser()->getEditToken(),
-				'hidden'
-			)
-			. Html::closeElement( 'fieldset' )
-			. Html::closeElement( 'form' )
-		);
+		HTMLForm::factory( 'ooui', $this->getFormElements(), $this->getContext() )
+			->setId( 'wb-mergeitems-form1' )
+			->setPreText( $pre )
+			->setHeaderText( $this->msg( 'wikibase-mergeitems-intro' )->parse() )
+			->setSubmitID( 'wb-mergeitems-submit' )
+			->setSubmitName( 'wikibase-mergeitems-submit' )
+			->setSubmitTextMsg( 'wikibase-mergeitems-submit' )
+			->setWrapperLegendMsg( 'special-mergeitems' )
+			->setSubmitCallback( function () {// no-op
+			} )->show();
 	}
 
 	/**
 	 * Returns the form elements.
 	 *
-	 * @return string
+	 * @return array
 	 */
 	protected function getFormElements() {
-		return Html::rawElement(
-			'p',
-			array(),
-			// Message: wikibase-mergeitems-intro
-			$this->msg( 'wikibase-mergeitems-intro' )->parse()
-		)
-		. Html::element(
-			'label',
-			array(
-				'for' => 'wb-mergeitems-fromid',
-				'class' => 'wb-label'
+		return array(
+			'fromid' => array(
+				'name' => 'fromid',
+				'default' => $this->getRequest()->getVal( 'fromid' ),
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => 'wb-mergeitems-fromid',
+				'label-message' => 'wikibase-mergeitems-fromid'
 			),
-			$this->msg( 'wikibase-mergeitems-fromid' )->text()
-		)
-		. Html::input(
-			'fromid',
-			$this->getRequest()->getVal( 'fromid' ),
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => 'wb-mergeitems-fromid'
-			)
-		)
-		. Html::element( 'br' )
-		. Html::element(
-			'label',
-			array(
-				'for' => 'wb-mergeitems-toid',
-				'class' => 'wb-label'
-			),
-			$this->msg( 'wikibase-mergeitems-toid' )->text()
-		)
-		. Html::input(
-			'toid',
-			$this->getRequest()->getVal( 'toid' ),
-			'text',
-			array(
-				'class' => 'wb-input',
-				'id' => 'wb-mergeitems-toid'
+			'toid' => array(
+				'name' => 'toid',
+				'default' => $this->getRequest()->getVal( 'toid' ),
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => 'wb-mergeitems-toid',
+				'label-message' => 'wikibase-mergeitems-toid'
 			)
 		);
 		// TODO: Selector for ignoreconflicts
