@@ -646,6 +646,8 @@ class ResultBuilder {
 	private function addTermList( TermList $termList, $name, $tag, $path ) {
 		$serializer = $this->serializerFactory->newTermListSerializer();
 		$value = $serializer->serialize( $termList );
+		ApiResult::setArrayType( $value, 'kvp', 'language' );
+		$value[ApiResult::META_KVP_MERGE] = true;
 		$this->setList( $path, $name, $value, $tag );
 	}
 
@@ -662,6 +664,8 @@ class ResultBuilder {
 				'removed' => '',
 			)
 		);
+		ApiResult::setArrayType( $value, 'kvp', 'language' );
+		$value[ApiResult::META_KVP_MERGE] = true;
 		$this->setList( $path, $name, $value, $tag );
 	}
 
