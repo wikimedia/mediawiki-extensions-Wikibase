@@ -646,6 +646,7 @@ class ResultBuilder {
 	private function addTermList( TermList $termList, $name, $tag, $path ) {
 		$serializer = $this->serializerFactory->newTermListSerializer();
 		$value = $serializer->serialize( $termList );
+		ApiResult::setArrayType( $value, 'assoc' );
 		$this->setList( $path, $name, $value, $tag );
 	}
 
@@ -662,6 +663,7 @@ class ResultBuilder {
 				'removed' => '',
 			)
 		);
+		ApiResult::setArrayType( $value, 'assoc' );
 		$this->setList( $path, $name, $value, $tag );
 	}
 
