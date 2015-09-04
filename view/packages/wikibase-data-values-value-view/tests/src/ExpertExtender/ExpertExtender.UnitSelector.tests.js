@@ -19,8 +19,7 @@
 
 	var messageProvider = {
 		getMessage: function( key, params ) {
-			return params && params.length > 0 ?
-					params.join( ' ' ) : key;
+			return params && params.length > 0 ? params.join( ' ' ) : key;
 		}
 	};
 

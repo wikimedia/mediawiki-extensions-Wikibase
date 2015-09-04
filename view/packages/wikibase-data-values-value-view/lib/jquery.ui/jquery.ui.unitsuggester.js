@@ -247,11 +247,11 @@ $.widget( 'wikibase.unitsuggester', PARENT, {
 		$( this.options.menu )
 		.off( 'selected.suggester' )
 		.on( 'selected.unitsuggester', function( event, item ) {
-				self._term = item.getValue();
-				self._selectedUrl = item._link;
-				self.element.val( item.getValue() );
-				self._close();
-				self._trigger( 'change' );
+			self._term = item.getValue();
+			self._selectedUrl = item._link;
+			self.element.val( item.getValue() );
+			self._close();
+			self._trigger( 'change' );
 		} );
 
 		this.options.menu.element
