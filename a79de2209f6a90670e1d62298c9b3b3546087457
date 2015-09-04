@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_8213f566",
+        "filename": "repo/includes/ValueParserFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T12:21:39Z",
+      "side": 1,
+      "message": "Uh, what?",
+      "revId": "a79de2209f6a90670e1d62298c9b3b3546087457",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_05ff0ffe",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T12:21:39Z",
+      "side": 1,
+      "message": "\"vocab\"? \"vocabulary\" please.",
+      "revId": "a79de2209f6a90670e1d62298c9b3b3546087457",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
