@@ -30,6 +30,7 @@
 	"globals": {
 		"jQuery": false,
 		"mediaWiki": false,
+		"OO": false,
 		"wikibase": true,
 		"dataValues": false,
 		"dataTypes": false,
