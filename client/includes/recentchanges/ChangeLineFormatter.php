@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class ChangeLineFormatter {
 
@@ -74,7 +75,7 @@ class ChangeLineFormatter {
 
 		$line .= $this->formatTimestamp( $rev->getTimestamp() );
 		$line .= $this->formatUserLinks( $rev->getUserName() );
-		$line .= Sanitizer::removeHTMLtags( $rev->getComment() );
+		$line .= Linker::commentBlock( $rev->getComment(), $title, false, $externalChange->getSiteId() );
 
 		return $line;
 	}
