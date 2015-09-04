@@ -20,5 +20,6 @@
 	"wikibase-snakview-snaktypeselector-novalue": "بې ارزښته",
 	"wikibase-tooltip-error-details": "تفصيلات",
 	"wikibase-validator-no-such-entity": "$1 و نه موندل شو",
-	"datatypes-type-wikibase-item": "توکی"
+	"datatypes-type-wikibase-item": "توکی",
+	"datatypes-type-wikibase-property": "ځانتيا"
 }

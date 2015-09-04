@@ -31,8 +31,7 @@
 	"wikibase-replicationnote": "Pe piacere te 'mbormame ca ponne passà diverse minute fine ca le cangiaminde ponne essere 'ndrucate sus a tutte le uicchi",
 	"wikibase-watchlist-show-changes-pref": "Fà vedè le cangiaminde de {{WBREPONAME}} jndr'à l'elenghe de le pàggene condrollate",
 	"wikibase-error-serialize-error": "'A serializzazzione de le date ave sciute a male.",
-	"wikibase-unconnectedpages-submit": "Véje",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" non g'è 'nu codece de lènghe valide.",
+	"wikibase-pageswithbadges-badge": "Badge:",
 	"wikibase-pageinfo-entity-id-none": "Ninde",
 	"wikibase-otherprojects": "Otre pruggette"
 }
