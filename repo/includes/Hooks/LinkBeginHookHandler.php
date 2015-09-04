@@ -163,7 +163,10 @@ class LinkBeginHookHandler {
 		// if custom link text is given, there is no point in overwriting it
 		// but not if it is similar to the plain title
 		if ( $html !== null && $target->getFullText() !== $html ) {
-			return;
+			$titleFromHtml = Title::newFromText( $html );
+			if ( !is_object( $titleFromHtml ) || !$titleFromHtml->equals( $target ) ) {
+				return;
+			}
 		}
 
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $target );
