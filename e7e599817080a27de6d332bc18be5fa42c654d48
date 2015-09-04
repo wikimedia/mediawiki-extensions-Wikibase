@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_223a4194",
+        "filename": "repo/includes/store/sql/WikiPageEntityRedirectLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-04T10:28:38Z",
+      "side": 1,
+      "message": "oh duh!",
+      "revId": "e7e599817080a27de6d332bc18be5fa42c654d48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
