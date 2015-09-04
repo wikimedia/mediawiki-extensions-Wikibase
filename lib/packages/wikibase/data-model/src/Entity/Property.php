@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
@@ -264,15 +263,6 @@ class Property extends Entity implements StatementListHolder {
 	 */
 	public function getClaims() {
 		return $this->statements->toArray();
-	}
-
-	/**
-	 * @deprecated since 1.0, use setStatements instead
-	 *
-	 * @param Claims $claims
-	 */
-	public function setClaims( Claims $claims ) {
-		$this->statements = new StatementList( iterator_to_array( $claims ) );
 	}
 
 }

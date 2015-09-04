@@ -3,12 +3,9 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 
@@ -230,24 +227,6 @@ class PropertyTest extends EntityTest {
 		$property->setStatements( $this->newNonEmptyStatementList() );
 
 		$this->assertFalse( $property->isEmpty() );
-	}
-
-	public function testSetClaims() {
-		$property = Property::newFromType( 'string' );
-
-		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement0->setGuid( 'TEST$NVS42' );
-
-		$statement1 = new Statement( new PropertySomeValueSnak( 42 ) );
-		$statement1->setGuid( 'TEST$SVS42' );
-
-		$statements = array( $statement0, $statement1 );
-
-		$property->setClaims( new Claims( $statements ) );
-		$this->assertEquals( count( $statements ), $property->getStatements()->count(), 'added some statements' );
-
-		$property->setClaims( new Claims() );
-		$this->assertTrue( $property->getStatements()->isEmpty(), 'should be empty again' );
 	}
 
 }
