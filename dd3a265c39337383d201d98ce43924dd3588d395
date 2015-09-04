@@ -16,6 +16,24 @@
       "revId": "dd3a265c39337383d201d98ce43924dd3588d395",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c20a5dd4",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T10:36:36Z",
+      "side": 1,
+      "message": "I already explained this in PS5 https://gerrit.wikimedia.org/r/#/c/232695/5/repo/includes/api/ResultBuilder.php and PS6.",
+      "parentUuid": "6ec1af18_af6cda99",
+      "revId": "dd3a265c39337383d201d98ce43924dd3588d395",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
