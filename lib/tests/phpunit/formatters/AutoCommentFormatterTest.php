@@ -112,4 +112,42 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $value );
 	}
 
+	public function provideExpandAutoComments() {
+		return array(
+			'empty' => array(
+				'',
+				''
+			),
+			'no comment block' => array(
+				'foo bar',
+				'foo bar'
+			),
+			'unparsable comment block' => array(
+				'foo /* who likes kittens */ bar',
+				'foo /* who likes kittens */ bar'
+			),
+			'simple comment block' => array(
+				'/* test-message */ bar',
+				'/* (testing-summary-test-message) */ bar'
+			),
+			'comment block with params' => array(
+				'foo /* test-message:one|two */',
+				'foo /* (testing-summary-test-message: one, two) */'
+			),
+			'multiple comment blocks' => array(
+				'foo /* test-message-one */ bar /* test-message-two */ zap',
+				'foo /* (testing-summary-test-message-one) */ bar /* (testing-summary-test-message-two) */ zap'
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideExpandAutoComments
+	 */
+	public function testExpandAutoComments( $summary, $expected ) {
+		$formatter = new AutoCommentFormatter( $this->language, 'testing' );
+		$value = $formatter->expandAutoComments( $summary );
+		$this->assertEquals( $expected, $value );
+	}
+
 }
