@@ -87,7 +87,7 @@ class AutoCommentFormatter {
 	 *
 	 * @param string $auto the autocomment unformatted
 	 *
-	 * @return string|null The localized summary, or null
+	 * @return string|null The localized summary (HTML), or null
 	 */
 	public function formatAutoComment( $auto ) {
 		// Split $auto into a message name and parameters.
