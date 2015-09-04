@@ -9,6 +9,8 @@ use Title;
 /**
  * @since 0.5
  *
+ * @todo test case!
+ *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
@@ -61,6 +63,12 @@ class ExternalRecentChange {
 		}
 
 		$time = isset( $metadata['time'] ) ? $metadata['time'] : wfTimestamp( TS_MW );
+		$comment = isset( $attribs['comment'] ) ? $attribs['comment'] : '';
+
+		// Unset the 'comment' field, so ExternalChangeFactory::extractCommentOverride doesn't
+		// trigger and replaces the actual comment.
+		// TODO: put $metadata into rc_params, not $attribs; See ExternalChangeFactory::extractChangeData
+		unset( $attribs['comment'] );
 
 		$this->mAttribs = array(
 			'rc_namespace' => $title->getNamespace(),
@@ -77,7 +85,7 @@ class ExternalRecentChange {
 			'rc_last_oldid' => $title->getLatestRevID(),
 			'rc_params' => serialize( $attribs ),
 			'rc_cur_id' => $title->getArticleID(),
-			'rc_comment' => '',
+			'rc_comment' => $comment,
 			'rc_timestamp' => $time,
 			'rc_log_action' => '',
 			'rc_source' => 'wb'
