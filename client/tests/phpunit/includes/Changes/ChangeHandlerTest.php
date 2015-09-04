@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
+use Language;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\Change;
@@ -74,6 +75,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			$updater ?: new MockPageUpdater(),
 			$changeListTransformer,
+			Language::factory( 'qqx' ),
 			'enwiki',
 			true
 		);
@@ -246,87 +248,61 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 				$changes['item-deletion-linked'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				array( 'message' => 'wikibase-comment-remove' )
+				'(wikibase-comment-remove)'
 			),
 			array( // #1
 				$changes['set-de-label'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				'set-de-label:1|'
+				'/* set-de-label:1| */ bla bla'
 			),
 			array( // #2
 				$changes['add-claim'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				'add-claim:1|'
+				'/* add-claim:1| */ bla bla'
 			),
 			array( // #3
 				$changes['remove-claim'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				'remove-claim:1|'
+				'/* remove-claim:1| */ bla bla'
 			),
 			array( // #4
 				$changes['set-dewiki-sitelink'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				array(
-					'sitelink' => array(
-						'newlink' => array( 'site' => 'dewiki', 'page' => 'Dummy' ),
-					),
-					'message' => 'wikibase-comment-sitelink-add'
-				)
+				'(wikibase-comment-sitelink-add: [[:dewiki:Dummy]])'
 			),
 			array( // #5
 				$changes['change-dewiki-sitelink'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				array(
-					'sitelink' => array(
-						'oldlink' => array( 'site' => 'dewiki', 'page' => 'Dummy' ),
-						'newlink' => array( 'site' => 'dewiki', 'page' => 'Dummy2' ),
-					),
-					'message' => 'wikibase-comment-sitelink-change'
-				)
+				'(wikibase-comment-sitelink-change: [[:dewiki:Dummy]], [[:dewiki:Dummy2]])',
 			),
 			array( // #6
 				$changes['change-enwiki-sitelink'],
 				$dummy,
 				array( 'q100' => array( 'Emmy' ) ),
-				array(
-					'sitelink' => array(
-						'oldlink' => array( 'site' => 'enwiki', 'page' => 'Emmy' ),
-						'newlink' => array( 'site' => 'enwiki', 'page' => 'Emmy2' ),
-					),
-					'message' => 'wikibase-comment-sitelink-change'
-				)
+				'(wikibase-comment-sitelink-change: [[:enwiki:Emmy]], [[:enwiki:Emmy2]])',
 			),
 			array( // #7
 				$changes['remove-dewiki-sitelink'],
 				$dummy,
 				array( 'q100' => array( 'Emmy2' ) ),
-				array(
-					'sitelink' => array(
-						'oldlink' => array( 'site' => 'dewiki', 'page' => 'Dummy2' ),
-					),
-					'message' => 'wikibase-comment-sitelink-remove'
-				)
+				'(wikibase-comment-sitelink-remove: [[:dewiki:Dummy2]])',
 			),
 			array( // #8
 				$changes['remove-enwiki-sitelink'],
 				$dummy,
 				array( 'q100' => array( 'Emmy2' ) ),
-				array(
-					'message' => 'wikibase-comment-unlink'
-				)
+				'(wikibase-comment-unlink)',
 			),
 			array( // #9
 				$changes['remove-enwiki-sitelink'],
 				$dummy,
 				array( 'q100' => array() ),
-				array(
-					'message' => 'wikibase-comment-unlink'
-				)
+				'(wikibase-comment-unlink)',
 			),
 		);
 	}

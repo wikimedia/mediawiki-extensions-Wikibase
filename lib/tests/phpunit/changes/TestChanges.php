@@ -199,7 +199,7 @@ final class TestChanges {
 					'rev_id' => $rev,
 					'parent_id' => $rev -1,
 					'user_text' => 'Some User',
-					'comment' => "$key:1|",
+					'comment' => "/* $key:1| */ bla bla",
 				);
 
 				$change->setMetadata( $meta );
