@@ -54,6 +54,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			$entityLookup,
 			$entityIdParser,
 			$urlSchemes,
+			'http://qudt.org/vocab/',
 			$contentLanguages
 		);
 
@@ -62,6 +63,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 	public function provideDataTypeValidation() {
 		$latLonValue = new LatLongValue( 0, 0 );
+		$wikidataUri = 'http://www.wikidata.org/entity/';
 
 		$cases = array(
 			//wikibase-item
@@ -114,21 +116,21 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array(
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
-					'http://' . str_repeat( 'x', 256 ) ),
+					$wikidataUri . 'Q' . str_repeat( '6', 256 ) ),
 				false,
 				'calendar: too long'
 			),
 			array(
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
-					'http://acme.com/calendar' ),
+					$wikidataUri . 'Q1985727' ),
 				true,
 				'calendar: URL'
 			),
 			array(
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY,
-					' http://acme.com/calendar ' ),
+					' ' . $wikidataUri . 'Q1985727 ' ),
 				false,
 				'calendar: untrimmed'
 			),
@@ -144,14 +146,14 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array(
 				'time',
 				new TimeValue( '+2013-06-06T11:22:33Z', 0, 0, 0, TimeValue::PRECISION_DAY,
-					'http://acme.com/calendar' ),
+					$wikidataUri . 'Q1985727' ),
 				false,
 				'time given to the second'
 			),
 			array(
 				'time',
 				new TimeValue( '+2013-06-06T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND,
-					'http://acme.com/calendar' ),
+					$wikidataUri . 'Q1985727' ),
 				false,
 				'precision: second'
 			),
@@ -171,30 +173,55 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			//globe-coordinate[precision]
 			array(
 				'globe-coordinate',
-				new GlobeCoordinateValue( $latLonValue, 1, 'http://www.wikidata.org/entity/Q2' ),
+				new GlobeCoordinateValue( $latLonValue, 1, $wikidataUri . 'Q2' ),
 				true,
 				'integer precision is valid'
 			),
 			array(
 				'globe-coordinate',
-				new GlobeCoordinateValue( $latLonValue, 0.2, 'http://www.wikidata.org/entity/Q2' ),
+				new GlobeCoordinateValue( $latLonValue, 0.2, $wikidataUri . 'Q2' ),
 				true,
 				'float precision is valid'
 			),
 			array(
 				'globe-coordinate',
-				new GlobeCoordinateValue( $latLonValue, null, 'http://www.wikdiata.org/entity/Q2' ),
+				new GlobeCoordinateValue( $latLonValue, null, $wikidataUri . 'Q2' ),
 				false,
 				'null precision is invalid'
 			),
 
 			//globe-coordinate[globe]
 			// FIXME: this is testing unimplemented behaviour? Probably broken...
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, '' ), false, 'globe: empty string should be invalid' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, 'http://' . str_repeat( 'x', 256 ) ), false, 'globe: too long' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, 'http://acme.com/globe' ), true, 'globe: URL' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, ' http://acme.com/globe ' ), false, 'globe: untrimmed' ),
-			array( 'globe-coordinate', new GlobeCoordinateValue( $latLonValue, 1, ' javascript:alert(1) ' ), false, 'globe: bad URL scheme' ),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, '' ),
+				false,
+				'globe: empty string should be invalid'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, $wikidataUri . 'Q' . str_repeat( '6', 256 ) ),
+				false,
+				'globe: too long'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, $wikidataUri . 'Q2' ),
+				true,
+				'globe: URL'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, ' ' . $wikidataUri . 'Q2 ' ),
+				false,
+				'globe: untrimmed'
+			),
+			array(
+				'globe-coordinate',
+				new GlobeCoordinateValue( $latLonValue, 1, ' javascript:alert(1) ' ),
+				false,
+				'globe: bad URL scheme'
+			),
 			//TODO: globe must be an item reference
 			//TODO: globe must be from a list of configured values
 
@@ -221,7 +248,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			//quantity
 			array( 'quantity', QuantityValue::newFromNumber( 5 ), true, 'Simple integer' ),
 			array( 'quantity', QuantityValue::newFromNumber( 5, 'http://qudt.org/vocab/unit#Meter' ), true, 'Vocabulary URI' ),
-			array( 'quantity', QuantityValue::newFromNumber( 5, 'https://www.wikidata.org/entity/Q11573' ), true, 'Wikidata URI' ),
+			array( 'quantity', QuantityValue::newFromNumber( 5, $wikidataUri . 'Q11573' ), false, 'Wikidata URI' ),
 			array( 'quantity', QuantityValue::newFromNumber( 5, '1' ), true, '1 means unitless' ),
 			array( 'quantity', QuantityValue::newFromNumber( 5, 'kittens' ), false, 'Bad unit URI' ),
 			array( 'quantity', QuantityValue::newFromNumber( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
