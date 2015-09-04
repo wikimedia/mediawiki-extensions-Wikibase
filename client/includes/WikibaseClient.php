@@ -56,7 +56,6 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
@@ -519,15 +518,13 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function newSnakFormatterFactory() {
-		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
-
-		$builders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
+		$factory = new OutputFormatSnakFormatterFactory(
+			$this->getValueFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
 
-		return new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		return $factory;
 	}
 
 	/**
@@ -545,11 +542,38 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * Constructs an array of factory callbacks for ValueFormatters, keyed by property type
+	 * (data type) prefixed with "PT:", or value type prefixed with "VT:". This matches to
+	 * convention used by OutputFormatValueFormatterFactory and DispatchingValueFormatter.
+	 *
+	 * @return callable[]
+	 */
+	private function getFormatterFactoryCallbacksByType() {
+		$callbacks = array();
+
+		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
+		$valueTypeFormatters = $valueFormatterBuilders->getFormatterFactoryCallbacksByValueType();
+		$dataTypeFormatters = $valueFormatterBuilders->getFormatterFactoryCallbacksByDataType();
+
+		foreach ( $valueTypeFormatters as $key => $formatter ) {
+			$callbacks["VT:$key"] = $formatter;
+		}
+
+		foreach ( $dataTypeFormatters as $key => $formatter ) {
+			$callbacks["PT:$key"] = $formatter;
+		}
+
+		return $callbacks;
+	}
+
+	/**
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	private function newValueFormatterFactory() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-		return new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+		return new OutputFormatValueFormatterFactory(
+			$this->getFormatterFactoryCallbacksByType(),
+			$this->getContentLanguage()
+		);
 	}
 
 	private function newWikibaseValueFormatterBuilders() {
