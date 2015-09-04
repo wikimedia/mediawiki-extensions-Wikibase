@@ -112,32 +112,46 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$matchers = array();
 
 		$matchers['site'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-itembytitle-sitename',
-				'name' => 'site',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'site',
+				)
 			) );
 		$matchers['page'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'pagename',
 				'class' => 'wb-input',
-				'name' => 'page',
+			),
+			'child' => array(
+				'tag' => 'input',
+				'attributes' => array(
+					'name' => 'page',
+				)
 			) );
 		$matchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-itembytitle-submit',
-				'class' => 'wb-button',
-				'type' => 'submit',
-				'name' => '',
+			),
+			'child' => array(
+				'tag' => 'button',
+				'attributes' => array(
+					'type' => 'submit',
+					'name' => '',
+				)
 			) );
 
 		$cases['empty'] = array( '', null, $matchers );
 
 		// enwiki/NotFound  (mock returns null for everything but dewiki)
-		$matchers['site']['attributes']['value'] = 'enwiki';
-		$matchers['page']['attributes']['value'] = 'NotFound';
+		$matchers['site']['child'][0]['attributes']['value'] = 'enwiki';
+		$matchers['page']['child'][0]['attributes']['value'] = 'NotFound';
 
 		$cases['enwiki/NotFound'] = array( 'enwiki/NotFound', null, $matchers );
 
