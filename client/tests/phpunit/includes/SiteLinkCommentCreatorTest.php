@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
+use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemChange;
@@ -25,9 +26,9 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getEditCommentProvider
 	 */
-	public function testGetEditComment( Diff $siteLinkDiff, $action, $comment, $expected ) {
-		$commentCreator = new SiteLinkCommentCreator( 'enwiki' );
-		$comment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
+	public function testGetEditComment( Diff $siteLinkDiff, $action, $expected ) {
+		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), 'enwiki' );
+		$comment = $commentCreator->getEditComment( $siteLinkDiff, $action );
 
 		$this->assertEquals( $expected, $comment );
 	}
@@ -41,7 +42,6 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 			$changes[] = array(
 				$update[0],
 				ItemChange::UPDATE,
-				'wikibase-comment-update',
 				$update[1]
 			);
 		}
@@ -49,15 +49,13 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$changes[] = array(
 			$this->getDeleteDiff(),
 			ItemChange::REMOVE,
-			'wikibase-comment-remove',
-			array( 'message' => 'wikibase-comment-remove' )
+			'(wikibase-comment-remove)'
 		);
 
 		$changes[] = array(
 			$this->getRestoreDiff(),
 			ItemChange::RESTORE,
-			'wikibase-comment-restore',
-			array( 'message' => 'wikibase-comment-restore' )
+			'(wikibase-comment-restore)'
 		);
 
 		return $changes;
@@ -209,101 +207,47 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 		$updates[] = array(
 			$this->getConnectDiff(),
-			array( 'message' => 'wikibase-comment-linked' )
+			'(wikibase-comment-linked)',
 		);
 
 		$updates[] = array(
 			$this->getUnlinkDiff(),
-			array( 'message' => 'wikibase-comment-unlink' ),
+			'(wikibase-comment-unlink)',
 		);
 
 		$updates[] = array(
 			$this->getLinkChangeDiff(),
-			array(
-				'message' => 'wikibase-comment-sitelink-change',
-				'sitelink' => array(
-					'oldlink' => array(
-						'site' => 'enwiki',
-						'page' => 'Japan'
-					),
-					'newlink' => array(
-						'site' => 'enwiki',
-						'page' => 'Tokyo'
-					)
-				)
-			)
+			'(wikibase-comment-sitelink-change: [[:enwiki:Japan]], [[:enwiki:Tokyo]])',
 		);
 
 		$updates[] = array(
 			$this->getOldLinkChangeDiff(),
-			array(
-				'message' => 'wikibase-comment-sitelink-change',
-				'sitelink' => array(
-					'oldlink' => array(
-						'site' => 'enwiki',
-						'page' => 'Japan'
-					),
-					'newlink' => array(
-						'site' => 'enwiki',
-						'page' => 'Tokyo'
-					)
-				)
-			)
+			'(wikibase-comment-sitelink-change: [[:enwiki:Japan]], [[:enwiki:Tokyo]])',
 		);
 
 		$updates[] = array(
 			$this->getBadgeChangeDiff(),
-			'wikibase-comment-update',
+			null, // changes to badges do not get a special message
 		);
 
 		$updates[] = array(
 			$this->getAddLinkDiff(),
-			array(
-				'message' => 'wikibase-comment-sitelink-add',
-				'sitelink' => array(
-					'newlink' => array(
-						'site' => 'dewiki',
-						'page' => 'Japan'
-					)
-				)
-			)
+			'(wikibase-comment-sitelink-add: [[:dewiki:Japan]])',
 		);
 
 		$updates[] = array(
 			$this->getAddMultipleLinksDiff(),
-			array(
-				'message' => 'wikibase-comment-update'
-			)
+			null, // currently multi-link diffs are not supported
 		);
 
 		$updates[] = array(
 			$this->getRemoveLinkDiff(),
-			array(
-				'message' => 'wikibase-comment-sitelink-remove',
-				'sitelink' => array(
-					'oldlink' => array(
-						'site' => 'dewiki',
-						'page' => 'Japan'
-					)
-				)
-			)
+			'(wikibase-comment-sitelink-remove: [[:dewiki:Japan]])',
 		);
 
 		$updates[] = array(
 			$this->getChangeLinkDiff(),
-			array(
-				'message' => 'wikibase-comment-sitelink-change',
-				'sitelink' => array(
-					'oldlink' => array(
-						'site' => 'dewiki',
-						'page' => 'Japan'
-					),
-					'newlink' => array(
-						'site' => 'dewiki',
-						'page' => 'Tokyo'
-					)
-				)
-			)
+			'(wikibase-comment-sitelink-change: [[:dewiki:Japan]], [[:dewiki:Tokyo]])',
 		);
 
 		return $updates;
