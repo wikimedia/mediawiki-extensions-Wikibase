@@ -156,7 +156,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.sites',
 				'wikibase.special',
-				'jquery.ui.suggester'
+				'jquery.ui.suggester',
+				'oojs-ui'
 			)
 		),
 
