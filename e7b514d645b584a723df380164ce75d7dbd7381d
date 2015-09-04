@@ -87,6 +87,24 @@
       "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_42150de8",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T10:42:02Z",
+      "side": 1,
+      "message": "Correct. The use case I quoted is for using preg_quote in array_map. Having an explicit \u0027/^\u0027 . preg_quote( $prefix, \u0027/\u0027 ) . \u0027/\u0027 with the default delimiter is perfectly fine in this case. I just do not like it when each regex uses a different delimiter character.",
+      "parentUuid": "6ec1af18_8c6011fd",
+      "revId": "e7b514d645b584a723df380164ce75d7dbd7381d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
