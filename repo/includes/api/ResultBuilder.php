@@ -646,6 +646,10 @@ class ResultBuilder {
 	private function addTermList( TermList $termList, $name, $tag, $path ) {
 		$serializer = $this->serializerFactory->newTermListSerializer();
 		$value = $serializer->serialize( $termList );
+		// if ( $this->addMetaData ) {
+		// 	ApiResult::setArrayType( $value, 'kvp', 'language' );
+		// 	$value[ApiResult::META_KVP_MERGE] = true;
+		// }
 		$this->setList( $path, $name, $value, $tag );
 	}
 
@@ -662,6 +666,10 @@ class ResultBuilder {
 				'removed' => '',
 			)
 		);
+		// if ( $this->addMetaData ) {
+		// 	ApiResult::setArrayType( $value, 'kvp', 'language' );
+		// 	$value[ApiResult::META_KVP_MERGE] = true;
+		// }
 		$this->setList( $path, $name, $value, $tag );
 	}
 

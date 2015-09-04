@@ -8,7 +8,6 @@ use FauxRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\Api\SetSiteLink;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -27,17 +26,7 @@ use Wikibase\Test\MockSiteStore;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Adam Shorland
  */
-class ApiXmlFormatTest extends \MediaWikiTestCase {
-
-	/**
-	 * @var PropertyId|null
-	 */
-	private $lastPropertyId;
-
-	/**
-	 * @var PropertyId|null
-	 */
-	private $lastItemId;
+class ApiXmlFormatTest extends ApiFormatTestCase {
 
 	public function testGetEntitiesXmlFormat() {
 		$entityRevision = $this->getNewEntityRevision( true );
@@ -330,26 +319,6 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param string $moduleClass
-	 * @param string $moduleName
-	 * @param array $params
-	 * @param bool $needsToken
-	 *
-	 * @return ApiMain
-	 */
-	private function getApiModule( $moduleClass, $moduleName, array $params, $needsToken = false ) {
-		global $wgUser;
-
-		if ( $needsToken ) {
-			$params['token'] = $wgUser->getEditToken();
-		}
-		$request = new FauxRequest( $params, true );
-		$main = new ApiMain( $request );
-
-		return new $moduleClass( $main, $moduleName );
-	}
-
-	/**
 	 * This mimics ApiMain::executeAction with the relevant parts,
 	 * including setupExternalResponse where the printer is set.
 	 * The module is then executed and results printed.
@@ -366,62 +335,6 @@ class ApiXmlFormatTest extends \MediaWikiTestCase {
 		$printer->execute();
 
 		return $printer->getBuffer();
-	}
-
-	private function getNewEntityRevision( $withData = false ) {
-		$entityRevision = $this->storeNewItem();
-
-		if ( $withData ) {
-			$this->storeNewProperty();
-			$entityRevision = $this->storePresetDataInStatement( $entityRevision, $this->lastPropertyId );
-		}
-
-		return $entityRevision;
-	}
-
-	private function storeNewProperty() {
-		global $wgUser;
-
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
-		$property = Property::newFromType( 'string' );
-		$entityRevision = $store->saveEntity( $property, 'testing', $wgUser, EDIT_NEW );
-		$this->lastPropertyId = $entityRevision->getEntity()->getId();
-	}
-
-	private function storeNewItem() {
-		global $wgUser;
-
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
-		$item = new Item();
-		$entityRevision = $store->saveEntity( $item, 'testing', $wgUser, EDIT_NEW );
-		$this->lastItemId = $entityRevision->getEntity()->getId();
-
-		return $entityRevision;
-	}
-
-	private function storePresetDataInStatement( EntityRevision $entityRevision, PropertyId $propertyId ) {
-		global $wgUser;
-
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
-		/** @var Item $item */
-		$item = $entityRevision->getEntity();
-		$snak = new PropertyNoValueSnak( $propertyId );
-		$guid = $item->getId()->getSerialization() . '$1111AAAA-43cb-ed6d-3adb-760e85bd17ee';
-		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
-
-		$item->setLabel( 'en', 'en-label' );
-		$item->setLabel( 'de', 'de-label' );
-		$item->setDescription( 'de', 'de-desc' );
-		$item->setDescription( 'es', 'es-desc' );
-		$item->setAliases( 'pt', array( 'AA', 'BB' ) );
-		$item->setAliases( 'en', array( 'AA-en', 'BB-en' ) );
-
-		$entityRevision = $store->saveEntity( $item, 'testing more!', $wgUser );
-
-		return $entityRevision;
 	}
 
 }
