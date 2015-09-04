@@ -56,7 +56,6 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
@@ -519,15 +518,13 @@ final class WikibaseClient {
 	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function newSnakFormatterFactory() {
-		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
-
-		$builders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
+		$factory = new OutputFormatSnakFormatterFactory(
+			$this->getValueFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
 		);
 
-		return new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		return $factory;
 	}
 
 	/**
@@ -549,7 +546,10 @@ final class WikibaseClient {
 	 */
 	private function newValueFormatterFactory() {
 		$builders = $this->newWikibaseValueFormatterBuilders();
-		return new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+		return new OutputFormatValueFormatterFactory(
+			$builders->getFormatterFactoryCallbacksByDataType(),
+			$this->getContentLanguage()
+		);
 	}
 
 	private function newWikibaseValueFormatterBuilders() {
