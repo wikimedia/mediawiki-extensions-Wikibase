@@ -4,7 +4,6 @@ namespace Wikibase\Client\RecentChanges;
 
 use Language;
 use Linker;
-use Sanitizer;
 use Title;
 use User;
 use Wikibase\Client\RepoLinker;
@@ -18,6 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Daniel Kinzler
  */
 class ChangeLineFormatter {
 
@@ -74,7 +74,9 @@ class ChangeLineFormatter {
 
 		$line .= $this->formatTimestamp( $rev->getTimestamp() );
 		$line .= $this->formatUserLinks( $rev->getUserName() );
-		$line .= Sanitizer::removeHTMLtags( $rev->getComment() );
+
+		//NOTE: the $wikiId parameter needs I757f2b91f3. It's ignored otherwise.
+		$line .= Linker::formatComment( $rev->getComment(), $title, false, $externalChange->getWikiId() );
 
 		return $line;
 	}

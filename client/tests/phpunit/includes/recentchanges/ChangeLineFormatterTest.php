@@ -376,4 +376,9 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		return $recentChange;
 	}
 
+	// DO NOT SUBMIT without new tests:
+	//FIXME: check injection in comments
+	//FIXME: check auto-comment stying
+
+
 }

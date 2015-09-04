@@ -112,4 +112,42 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $value );
 	}
 
+	public function provideExpandAutoComments() {
+		return array(
+			'empty' => array(
+				'',
+				''
+			),
+			'no comment block' => array(
+				'foo bar',
+				'foo bar'
+			),
+			'unparsable comment block' => array(
+				'foo /* who likes kittens */ bar',
+				'foo (autocomment-prefix)‎<span dir="auto"><span class="autocomment">who likes kittens(colon-separator)</span></span> bar'
+			),
+			'simple comment block' => array(
+				'/* test-message */ bar',
+				'‎<span dir="auto"><span class="autocomment">(testing-summary-test-message)(colon-separator)</span></span> bar'
+			),
+			'comment block with params' => array(
+				'foo /* test-message:one|two */',
+				'foo (autocomment-prefix)‎<span dir="auto"><span class="autocomment">(testing-summary-test-message: one, two)</span></span>'
+			),
+			'multiple comment blocks' => array(
+				'foo /* test-message-one */ bar /* test-message-two */ zap',
+				'foo (autocomment-prefix)‎<span dir="auto"><span class="autocomment">(testing-summary-test-message-one)(colon-separator)</span></span> bar (autocomment-prefix)‎<span dir="auto"><span class="autocomment">(testing-summary-test-message-two)(colon-separator)</span></span> zap'
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideExpandAutoComments
+	 */
+	public function testExpandAutoComments( $summary, $expected ) {
+		$formatter = new AutoCommentFormatter( $this->language, 'testing' );
+		$value = $formatter->expandAutoComments( $summary );
+		$this->assertEquals( $expected, $value );
+	}
+
 }

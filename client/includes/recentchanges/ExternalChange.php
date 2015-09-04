@@ -61,4 +61,10 @@ class ExternalChange {
 		return $this->changeType;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getWikiId() {
+		return $this->rev->getSiteId();
+	}
 }

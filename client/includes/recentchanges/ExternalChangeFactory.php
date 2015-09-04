@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\RecentChanges;
 
+use Guzzle\Common\Exception\RuntimeException;
 use InvalidArgumentException;
 use Language;
 use Linker;
@@ -65,6 +66,8 @@ class ExternalChangeFactory {
 		$repoId = isset( $changeParams['site_id'] )
 			? $changeParams['site_id'] : $this->repoSiteId;
 
+		// NOTE: "comment overrides" are legacy behavior.
+		//@todo remove this once all old entries have cleared from the job queue and recentchanges.
 		$commentOverride = $this->extractCommentOverride( $changeParams );
 
 		return new RevisionData(
@@ -224,6 +227,7 @@ class ExternalChangeFactory {
 	/**
 	 * @param array $changeParams
 	 *
+	 * @todo remove this once all old entries have cleared from the job queue and recentchanges.
 	 * @return string
 	 */
 	private function extractCommentOverride( array $changeParams ) {
