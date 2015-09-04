@@ -799,12 +799,12 @@ $.widget( 'valueview.valueview', PARENT, {
 		);
 
 		var parserOptions = $.extend(
-				{
-					lang: this.options.language
-				},
-				Parser.prototype.getOptions(),
-				additionalParserOptions || {}
-			);
+			{
+				lang: this.options.language
+			},
+			Parser.prototype.getOptions(),
+			additionalParserOptions || {}
+		);
 
 		return new Parser( parserOptions );
 	},

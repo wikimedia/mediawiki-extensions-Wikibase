@@ -88,8 +88,8 @@
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
 			if( value === '1' ||
-					value === 'http://qudt.org/vocab/unit#Unitless' ||
-					/^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/Q199$/i.test( value )
+				value === 'http://qudt.org/vocab/unit#Unitless' ||
+				/^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/Q199$/i.test( value )
 			) {
 				value = null;
 			}
@@ -115,7 +115,7 @@
 		getConceptUri: function() {
 			var unitSuggester = this.$selector.data( 'unitsuggester' );
 			return ( unitSuggester && unitSuggester.getSelectedConceptUri() ) ||
-					this.$selector.val();
+				this.$selector.val();
 		}
 	} );
 
