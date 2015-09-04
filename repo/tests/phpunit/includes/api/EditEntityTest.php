@@ -331,6 +331,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 					. '"descriptions":{"en":{"language":"en","value":"A description"}}}' ),
 				'e' => array( 'type' => 'item' )
 			),
+			'make a null edit' => array(
+				'p' => array( 'data' => '{}' ),
+				'e' => array( 'nochange' => '' )
+			),
 			'remove all stuff in another way' => array(
 				'p' => array( 'clear' => true, 'data' => '{}' ),
 				'e' => array(
@@ -400,6 +404,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 		$this->assertArrayHasKey( 'id', $result['entity'], "Missing 'id' section in entity in response." );
 		$this->assertEntityEquals( $expected, $result['entity'] );
+
+		// -- check null edits ---------------------------------------------
+		if ( isset( $expected['nochange'] ) ) {
+			$this->assertArrayHasKey( 'nochange', $result['entity'] );
+		}
 
 		// -- check the item in the database -------------------------------
 		$dbEntity = $this->loadEntity( $result['entity']['id'] );

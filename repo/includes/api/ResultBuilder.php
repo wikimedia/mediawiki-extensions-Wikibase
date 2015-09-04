@@ -1044,7 +1044,8 @@ class ResultBuilder {
 	 * Adds the ID of the new revision from the Status object to the API result structure.
 	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
 	 * resp WikiPage::doEditContent() do it: as an array, with an EntityRevision or Revision
-	 *  object in the 'revision' field.
+	 *  object in the 'revision' field. If $oldRevId is set and the latest edit was null,
+	 * a 'nochange' flag is also added.
 	 *
 	 * If no revision is found the the Status object, this method does nothing.
 	 *
@@ -1054,8 +1055,10 @@ class ResultBuilder {
 	 *
 	 * @param Status $status The status to get the revision ID from.
 	 * @param string|null|array $path Where in the result to put the revision id
+	 * @param int|null $oldRevId The id of the latest revision of the entity before
+	 *        the last (possibly null) edit
 	 */
-	public function addRevisionIdFromStatusToResult( Status $status, $path ) {
+	public function addRevisionIdFromStatusToResult( Status $status, $path, $oldRevId = null ) {
 		$value = $status->getValue();
 
 		if ( isset( $value['revision'] ) ) {
@@ -1068,6 +1071,11 @@ class ResultBuilder {
 			}
 
 			$this->setValue( $path, 'lastrevid', empty( $revisionId ) ? 0 : $revisionId );
+
+			if ( $oldRevId && $oldRevId === $revisionId ) {
+				// like core's ApiEditPage
+				$this->setValue( $path, 'nochange', true );
+			}
 		}
 	}
 
