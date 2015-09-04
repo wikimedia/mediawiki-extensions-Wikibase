@@ -1,0 +1,13 @@
+{
+	"entity": {
+		"labels": {
+			"en-gb": {
+				"language": "en-gb",
+				"removed": ""
+			}
+		},
+		"id": "$itemIdUnderTest",
+		"type": "item"
+	},
+	"success": 1
+}
