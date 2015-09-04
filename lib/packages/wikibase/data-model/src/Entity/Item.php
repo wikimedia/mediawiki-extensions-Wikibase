@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -298,15 +297,6 @@ class Item extends Entity implements StatementListHolder {
 	 */
 	public function setStatements( StatementList $statements ) {
 		$this->statements = $statements;
-	}
-
-	/**
-	 * @deprecated since 1.0, use getStatements()->toArray() instead.
-	 *
-	 * @return Statement[]
-	 */
-	public function getClaims() {
-		return $this->statements->toArray();
 	}
 
 	/**

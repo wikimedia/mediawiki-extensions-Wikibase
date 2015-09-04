@@ -187,7 +187,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 	/**
 	 * Returns a list of all Snaks on this StatementList. This includes at least the main snaks of
-	 * Claims, the snaks from Claim qualifiers, and the snaks from Statement References.
+	 * all statements, the snaks from qualifiers, and the snaks from references.
 	 *
 	 * This is a convenience method for use in code that needs to operate on all snaks, e.g.
 	 * to find all referenced Entities.
