@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HTMLForm;
 use Html;
 use Site;
 use SiteStore;
@@ -176,69 +177,35 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
 
-		$this->getOutput()->addHTML(
-			Html::openElement(
-				'form',
-				array(
-					'method' => 'get',
-					'action' => $this->getPageTitle()->getFullUrl(),
-					'name' => 'itembytitle',
-					'id' => 'wb-itembytitle-form1'
-				)
+		$formDescriptor = array(
+			'site' => array(
+				'name' => 'site',
+				'default' => $siteId,
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => 'wb-itembytitle-sitename',
+				'size' => 12,
+				'label-message' => 'wikibase-itembytitle-lookup-site'
+			),
+			'page' => array(
+				'name' => 'page',
+				'default' => $page ?: '',
+				'type' => 'text',
+				'cssclass' => 'wb-input',
+				'id' => 'pagename',
+				'size' => 36,
+				'label-message' => 'wikibase-itembytitle-lookup-page'
 			)
-			. Html::openElement( 'fieldset' )
-			. Html::element(
-				'legend',
-				array(),
-				$this->msg( 'wikibase-itembytitle-lookup-fieldset' )->text()
-			)
-			. Html::label(
-				$this->msg( 'wikibase-itembytitle-lookup-site' )->text(),
-				'wb-itembytitle-sitename',
-				array(
-					'class' => 'wb-label'
-				)
-			)
-			. Html::input(
-				'site',
-				htmlspecialchars( $siteId ),
-				'text',
-				array(
-					'class' => 'wb-input',
-					'id' => 'wb-itembytitle-sitename',
-					'size' => 12
-				)
-			)
-			. ' '
-			. Html::label(
-				$this->msg( 'wikibase-itembytitle-lookup-page' )->text(),
-				'pagename',
-				array(
-					'class' => 'wb-label'
-				)
-			)
-			. Html::input(
-				'page',
-				$page ? htmlspecialchars( $page ) : '',
-				'text',
-				array(
-					'class' => 'wb-input',
-					'id' => 'pagename',
-					'size' => 36
-				)
-			)
-			. Html::input(
-				'',
-				$this->msg( 'wikibase-itembytitle-submit' )->text(),
-				'submit',
-				array(
-					'id' => 'wb-itembytitle-submit',
-					'class' => 'wb-button'
-				)
-			)
-			. Html::closeElement( 'fieldset' )
-			. Html::closeElement( 'form' )
 		);
+
+		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
+			->setId( 'wb-itembytitle-form1' )
+			->setMethod( 'get' )
+			->setSubmitID( 'wb-itembytitle-submit' )
+			->setSubmitTextMsg( 'wikibase-itembytitle-submit' )
+			->setWrapperLegendMsg( 'wikibase-itembytitle-lookup-fieldset' )
+			->setSubmitCallback( function () {// no-op
+			} )->show();
 
 		if ( $siteId && !$siteExists ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-site' ) );
