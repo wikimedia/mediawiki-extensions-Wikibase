@@ -253,19 +253,13 @@ class ResultBuilder {
 	 *     info Will default to the entity's serialized ID if null. If given this must be the
 	 *     entity id before any redirects were resolved.
 	 * @param EntityRevision $entityRevision
-	 * @param string[]|string $props a list of fields to include, or "all"
-	 * @param string[] $filterSiteIds A list of site IDs to filter by
-	 * @param string[] $filterLangCodes A list of language codes to filter by
+	 * @param EntitySerializationFilter $filter a filter for the serialization
 	 * @param LanguageFallbackChain[] $fallbackChains with keys of the origional language
-	 *
-	 * @since 0.5
 	 */
-	public function addEntityRevision(
+	public function addEntityRevisionWithFilter(
 		$sourceEntityIdSerialization,
 		EntityRevision $entityRevision,
-		$props = 'all',
-		$filterSiteIds = array(),
-		$filterLangCodes = array(),
+		EntitySerializationFilter $filter,
 		$fallbackChains = array()
 	) {
 		$entity = $entityRevision->getEntity();
@@ -277,6 +271,7 @@ class ResultBuilder {
 
 		$record = array();
 
+		$props = $filter->getProps();
 		//if there are no props defined only return type and id..
 		if ( $props === array() ) {
 			$record['id'] = $entityId->getSerialization();
@@ -297,13 +292,7 @@ class ResultBuilder {
 				);
 			}
 
-			$entitySerialization = $this->getEntityArray(
-				$entity,
-				$props,
-				$filterSiteIds,
-				$filterLangCodes,
-				$fallbackChains
-			);
+			$entitySerialization = $this->getEntityArray( $entity, $filter, $fallbackChains );
 
 			$record = array_merge( $record, $entitySerialization );
 		}
@@ -312,6 +301,41 @@ class ResultBuilder {
 		if ( $this->addMetaData ) {
 			$this->result->addArrayType( array( 'entities' ), 'array' );
 		}
+	}
+
+	/**
+	 * Get serialized entity for the EntityRevision and add it to the result
+	 *
+	 * @param string|null $sourceEntityIdSerialization EntityId used to retreive $entityRevision
+	 *        Used as the key for the entity in the 'entities' structure and for adding redirect
+	 *     info Will default to the entity's serialized ID if null. If given this must be the
+	 *     entity id before any redirects were resolved.
+	 * @param EntityRevision $entityRevision
+	 * @param string[]|string $props a list of fields to include, or "all"
+	 * @param string[] $filterSiteIds A list of site IDs to filter by
+	 * @param string[] $filterLangCodes A list of language codes to filter by
+	 * @param LanguageFallbackChain[] $fallbackChains with keys of the origional language
+	 *
+	 * @since 0.5
+	 */
+	public function addEntityRevision(
+		$sourceEntityIdSerialization,
+		EntityRevision $entityRevision,
+		$props = 'all',
+		$filterSiteIds = array(),
+		$filterLangCodes = array(),
+		$fallbackChains = array()
+	) {
+		$filter = new EntitySerializationFilter();
+		$filter->setProps( $props );
+		$filter->setSiteIds( $filterSiteIds );
+		$filter->setLangCodes( $filterLangCodes );
+		$this->addEntityRevisionWithFilter(
+			$sourceEntityIdSerialization,
+			$entityRevision,
+			$filter,
+			$fallbackChains
+		);
 	}
 
 	/**
@@ -327,61 +351,30 @@ class ResultBuilder {
 	 */
 	private function getEntityArray(
 		Entity $entity,
-		$props,
-		$filterSiteIds,
-		$filterLangCodes,
+		EntitySerializationFilter $filter,
 		$fallbackChains
 	) {
 		$entitySerializer = $this->serializerFactory->newEntitySerializer();
 		$serialization = $entitySerializer->serialize( $entity );
 
-		$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
+		$props = $filter->getProps();
+		$serialization = $filter->filterByProps( $serialization );
 
 		if ( $props == 'all' || in_array( 'sitelinks/urls', $props ) ) {
 			$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
 		}
 		$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
 		$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
-		$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
+		$serialization = $filter->filterBySiteIds( $serialization );
 		if ( !empty( $fallbackChains ) ) {
 			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
 		}
-		$serialization = $this->filterEntitySerializationUsingLangCodes(
-			$serialization,
-			$filterLangCodes
-		);
+		$serialization = $filter->filterByLangCodes( $serialization );
 
 		if ( $this->addMetaData ) {
 			$serialization = $this->getEntitySerializationWithMetaData( $serialization );
 		}
 
-		return $serialization;
-	}
-
-	/**
-	 * @param array $serialization
-	 * @param string|array $props
-	 *
-	 * @return array
-	 */
-	private function filterEntitySerializationUsingProps( array $serialization, $props ) {
-		if ( $props !== 'all' ) {
-			if ( !in_array( 'labels', $props ) ) {
-				unset( $serialization['labels'] );
-			}
-			if ( !in_array( 'descriptions', $props ) ) {
-				unset( $serialization['descriptions'] );
-			}
-			if ( !in_array( 'aliases', $props ) ) {
-				unset( $serialization['aliases'] );
-			}
-			if ( !in_array( 'claims', $props ) ) {
-				unset( $serialization['claims'] );
-			}
-			if ( !in_array( 'sitelinks', $props ) ) {
-				unset( $serialization['sitelinks'] );
-			}
-		}
 		return $serialization;
 	}
 
@@ -413,17 +406,6 @@ class ResultBuilder {
 			$serialization,
 			'claims/*/*/references/*/snaks'
 		);
-		return $serialization;
-	}
-
-	private function filterEntitySerializationUsingSiteIds( array $serialization, $siteIds ) {
-		if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $serialization ) ) {
-			foreach ( $serialization['sitelinks'] as $siteId => $siteLink ) {
-				if ( is_array( $siteLink ) && !in_array( $siteLink['site'], $siteIds ) ) {
-					unset( $serialization['sitelinks'][$siteId] );
-				}
-			}
-		}
 		return $serialization;
 	}
 
@@ -481,33 +463,6 @@ class ResultBuilder {
 			}
 		}
 		return $newSerialization;
-	}
-
-	private function filterEntitySerializationUsingLangCodes( array $serialization, $langCodes ) {
-		if ( !empty( $langCodes ) ) {
-			if ( array_key_exists( 'labels', $serialization ) ) {
-				foreach ( $serialization['labels'] as $langCode => $languageArray ) {
-					if ( !in_array( $langCode, $langCodes ) ) {
-						unset( $serialization['labels'][$langCode] );
-					}
-				}
-			}
-			if ( array_key_exists( 'descriptions', $serialization ) ) {
-				foreach ( $serialization['descriptions'] as $langCode => $languageArray ) {
-					if ( !in_array( $langCode, $langCodes ) ) {
-						unset( $serialization['descriptions'][$langCode] );
-					}
-				}
-			}
-			if ( array_key_exists( 'aliases', $serialization ) ) {
-				foreach ( $serialization['aliases'] as $langCode => $languageArray ) {
-					if ( !in_array( $langCode, $langCodes ) ) {
-						unset( $serialization['aliases'][$langCode] );
-					}
-				}
-			}
-		}
-		return $serialization;
 	}
 
 	private function getEntitySerializationWithMetaData( $serialization ) {
