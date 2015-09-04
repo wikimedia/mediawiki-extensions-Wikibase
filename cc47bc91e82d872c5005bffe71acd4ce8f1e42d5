@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_82d53515",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T10:47:18Z",
+      "side": 1,
+      "message": "Duplicate slash. Space missing.",
+      "revId": "cc47bc91e82d872c5005bffe71acd4ce8f1e42d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a2d07122",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T10:47:18Z",
+      "side": 1,
+      "message": "Space missing.",
+      "revId": "cc47bc91e82d872c5005bffe71acd4ce8f1e42d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_42cbcd74",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T10:47:18Z",
+      "side": 1,
+      "message": "Space missing.",
+      "revId": "cc47bc91e82d872c5005bffe71acd4ce8f1e42d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_62c6096d",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T10:47:18Z",
+      "side": 1,
+      "message": "Space missing.",
+      "revId": "cc47bc91e82d872c5005bffe71acd4ce8f1e42d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_02a9458d",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T10:47:18Z",
+      "side": 1,
+      "message": "Space missing.",
+      "revId": "cc47bc91e82d872c5005bffe71acd4ce8f1e42d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e2b199f4",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-04T10:47:18Z",
+      "side": 1,
+      "message": "Space missing everywhere. I will stop here.",
+      "revId": "cc47bc91e82d872c5005bffe71acd4ce8f1e42d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
