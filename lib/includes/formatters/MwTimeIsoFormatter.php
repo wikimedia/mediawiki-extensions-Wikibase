@@ -279,7 +279,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 
 		if ( empty( $msg ) ) {
 			// TODO: This needs a message.
-			return $number . ( $isBCE ? ' BCE' : '' );
+			return number_format( $number, 0, '.', '' ) . ( $isBCE ? ' BCE' : '' );
 		}
 
 		return $this->getMessage(
