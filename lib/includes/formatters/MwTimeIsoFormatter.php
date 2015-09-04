@@ -201,8 +201,8 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @return string
 	 */
 	private function getLocalizedYear( $isoTimestamp, $precision ) {
-		$shift = 1e+0;
-		$unshift = 1e-0;
+		$shift = 1.0;
+		$unshift = 1.0;
 		$func = 'round';
 
 		switch ( $precision ) {
@@ -252,34 +252,42 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 				break;
 		}
 
-		$isBCE = substr( $isoTimestamp, 0, 1 ) === '-';
-		$year = abs( floatval( $isoTimestamp ) );
+		preg_match( '/^(\D*)(\d*)/', $isoTimestamp, $matches );
+		list( , $sign, $year ) = $matches;
+		$isBCE = $sign === '-';
+		$year = str_pad( ltrim( $year, '0' ), 4, '0', STR_PAD_LEFT );
 
-		switch ( $func ) {
-			case 'ceil':
-				$number = round( ceil( $year / $shift ) * $unshift );
-				break;
-			case 'floor':
-				$number = round( floor( $year / $shift ) * $unshift );
-				break;
-			default:
-				$number = round( round( $year / $shift ) * $unshift );
+		if ( $shift === 1.0 && $unshift === 1.0 ) {
+			$number = $year;
+		} else {
+			switch ( $func ) {
+				case 'ceil':
+					$number = ceil( $year / $shift ) * $unshift;
+					break;
+				case 'floor':
+					$number = floor( $year / $shift ) * $unshift;
+					break;
+				default:
+					$number = round( $year / $shift ) * $unshift;
+			}
+
+			$number = number_format( $number, 0, '.', '' );
 		}
 
 		// Year to small for precision, fall back to year
-		if ( empty( $number )
+		if ( $number === '0'
 			&& ( $precision < TimeValue::PRECISION_YEAR
 				|| ( $isBCE && $precision === TimeValue::PRECISION_YEAR )
 			)
 		) {
 			$msg = null;
 			$number = $year;
-			$isBCE = $isBCE && !empty( $number );
+			$isBCE = $isBCE && $number !== '0000';
 		}
 
 		if ( empty( $msg ) ) {
 			// TODO: This needs a message.
-			return $number . ( $isBCE ? ' BCE' : '' );
+			return $number . ( $isBCE && $number !== '0000' ? ' BCE' : '' );
 		}
 
 		return $this->getMessage(
