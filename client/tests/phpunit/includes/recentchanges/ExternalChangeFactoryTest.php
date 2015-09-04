@@ -108,6 +108,34 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testNewFromRecentChange_commentOverride() {
+		$commentData = 'wikibase-comment-update';
+
+		$recentChange = new RecentChange();
+		$recentChange->counter = 1;
+
+		$rcParams = $this->makeRCParams( $commentData, 'wikibase-item~update', false );
+
+		$rcParams['wikibase-repo-change']['comment'] = array(
+			'message' => 'wikibase-comment-update'
+		);
+
+		$recentChange->setAttribs( $this->makeAttribs( $rcParams, false ) );
+
+		$expected = new ExternalChange(
+			new ItemId( 'Q4' ),
+			$this->makeRevisionData( ' <span class="comment">((wikibase-comment-update))</span>' ),
+			'update'
+		);
+
+		$externalChangeFactory = $this->getExternalChangeFactory();
+
+		$this->assertEquals(
+			$expected,
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
 	public function testNewFromRecentChange_compositeComment() {
 		$recentChange = $this->makeRecentChange(
 			'',
