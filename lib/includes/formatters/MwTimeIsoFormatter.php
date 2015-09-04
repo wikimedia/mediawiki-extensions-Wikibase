@@ -201,8 +201,12 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @return string
 	 */
 	private function getLocalizedYear( $isoTimestamp, $precision ) {
+		preg_match( '/^(\D*)(\d*)/', $isoTimestamp, $matches );
+		list( , $sign, $year ) = $matches;
+		$isBCE = $sign === '-';
+
 		$shift = 1e+0;
-		$unshift = 1e-0;
+		$unshift = 1e+0;
 		$func = 'round';
 
 		switch ( $precision ) {
@@ -252,39 +256,42 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 				break;
 		}
 
-		$isBCE = substr( $isoTimestamp, 0, 1 ) === '-';
-		$year = abs( floatval( $isoTimestamp ) );
+		if ( $shift !== 1e+0 || $unshift !== 1e+0 ) {
+			switch ( $func ) {
+				case 'ceil':
+					$shifted = ceil( $year / $shift ) * $unshift;
+					break;
+				case 'floor':
+					$shifted = floor( $year / $shift ) * $unshift;
+					break;
+				default:
+					$shifted = round( $year / $shift ) * $unshift;
+			}
 
-		switch ( $func ) {
-			case 'ceil':
-				$number = round( ceil( $year / $shift ) * $unshift );
-				break;
-			case 'floor':
-				$number = round( floor( $year / $shift ) * $unshift );
-				break;
-			default:
-				$number = round( round( $year / $shift ) * $unshift );
+			// Year to small for precision, fall back to year
+			if ( $shifted == 0
+				&& ( $precision < TimeValue::PRECISION_YEAR
+					|| ( $isBCE && $precision === TimeValue::PRECISION_YEAR )
+				)
+			) {
+				$msg = null;
+			} else {
+				$year = sprintf( '%.0f', $shifted );
+			}
 		}
 
-		// Year to small for precision, fall back to year
-		if ( empty( $number )
-			&& ( $precision < TimeValue::PRECISION_YEAR
-				|| ( $isBCE && $precision === TimeValue::PRECISION_YEAR )
-			)
-		) {
-			$msg = null;
-			$number = $year;
-			$isBCE = $isBCE && !empty( $number );
+		if ( $precision >= TimeValue::PRECISION_YEAR ) {
+			$year = str_pad( $year, 4, '0', STR_PAD_LEFT );
 		}
 
 		if ( empty( $msg ) ) {
 			// TODO: This needs a message.
-			return $number . ( $isBCE ? ' BCE' : '' );
+			return $year . ( $isBCE ? ' BCE' : '' );
 		}
 
 		return $this->getMessage(
 			'wikibase-time-precision-' . ( $isBCE ? 'BCE-' : '' ) . $msg,
-			$number
+			$year
 		);
 	}
 
