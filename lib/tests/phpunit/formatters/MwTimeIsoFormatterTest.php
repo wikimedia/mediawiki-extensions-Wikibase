@@ -344,6 +344,10 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'1996',
 			),
 			array(
+				'+5-01-00T00:00:00Z', TimeValue::PRECISION_MONTH,
+				'January 5',
+			),
+			array(
 				'+00000001996-01-00T00:00:00Z', TimeValue::PRECISION_MONTH,
 				'January 1996',
 			),
@@ -375,9 +379,27 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'+2147483648-00-00T00:00:00Z', TimeValue::PRECISION_YEAR,
 				'2147483648',
 			),
+
+			// No exponents (e.g. 1.0E+16) please
 			array(
-				'+9999999999999999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR,
+				'+9999999999999999-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10K,
+				'10000000000000000 years CE',
+			),
+			array(
+				'+9999999999999999-01-01T00:00:00Z', TimeValue::PRECISION_YEAR100,
+				'100000000000000. century',
+			),
+			array(
+				'+9999999999999999-01-01T00:00:00Z', TimeValue::PRECISION_YEAR,
 				'9999999999999999',
+			),
+			array(
+				'+9999999999999999-01-01T00:00:00Z', TimeValue::PRECISION_MONTH,
+				'January 9999999999999999',
+			),
+			array(
+				'+9999999999999999-01-01T00:00:00Z', TimeValue::PRECISION_DAY,
+				'1 January 9999999999999999',
 			),
 
 			// Precision to low, falling back to year
@@ -421,11 +443,11 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			// Better than the raw ISO string
 			array(
 				'-00000000000-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
-				'0',
+				'0 BCE',
 			),
 			array(
 				'-0-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
-				'0',
+				'0 BCE',
 			),
 			array(
 				'+100000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G,
@@ -457,7 +479,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			),
 			array(
 				'-0-00-00T00:00:42Z', TimeValue::PRECISION_YEAR,
-				'0',
+				'0 BCE',
 			),
 
 			// Stuff we do not want to format so must return it :<
@@ -527,7 +549,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 		$formatter = new MwTimeIsoFormatter( $options );
 		$actual = $formatter->format( $timeValue );
 
-		$this->assertEquals( $expected, $actual, 'Testing ' . $timeValue->getTime() . ', precision ' . $timeValue->getPrecision() );
+		$this->assertSame( $expected, $actual, 'Testing ' . $timeValue->getTime() . ', precision ' . $timeValue->getPrecision() );
 	}
 
 }
