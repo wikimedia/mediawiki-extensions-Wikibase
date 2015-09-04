@@ -273,15 +273,26 @@ class GetEntities extends ApiBase {
 			$this->resultBuilder->addMissingEntity( $sourceEntityId, array( 'id' => $sourceEntityId ) );
 		} else {
 			list( $languageCodeFilter, $fallbackChains ) = $this->getLanguageCodesAndFallback( $params );
-			$this->resultBuilder->addEntityRevision(
+			$filter = $this->getSerializationFilter( $languageCodeFilter );
+			$filter->setLangCodes( $languageCodeFilter );
+			$this->resultBuilder->addEntityRevisionWithFilter(
 				$sourceEntityId,
 				$entityRevision,
-				$this->getPropsFromParams( $params ),
-				$params['sitefilter'],
-				$languageCodeFilter,
+				$filter,
 				$fallbackChains
 			);
 		}
+	}
+
+	private function getSerializationFilter() {
+		$params = $this->extractRequestParams();
+
+		$filter = new EntitySerializationFilter();
+		$filter->setProps( $this->getPropsFromParams( $params ) );
+		if ( isset( $params['sitefilter'] ) && $params['sitefilter'] !== 'all' ) {
+			$filter->setSiteIds( $params['sitefilter'] );
+		}
+		return $filter;
 	}
 
 	/**
