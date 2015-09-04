@@ -840,6 +840,7 @@ final class WikibaseClient {
 				$this->getEntityChangeFactory(),
 				$siteId
 			),
+			$this->getContentLanguage(),
 			$siteId,
 			$this->settings->getSetting( 'injectRecentChanges' )
 		);

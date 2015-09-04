@@ -6,15 +6,20 @@ use Exception;
 use Hooks;
 use InvalidArgumentException;
 use IORMRow;
+use Language;
+use Message;
 use MWException;
 use Title;
 use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
+use Wikibase\Lib\AutoCommentFormatter;
 use Wikibase\SiteLinkCommentCreator;
+use Wikimedia\Assert\Assert;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -74,6 +79,11 @@ class ChangeHandler {
 	private $changeListTransformer;
 
 	/**
+	 * @var Language
+	 */
+	private $language;
+
+	/**
 	 * @var string
 	 */
 	private $localSiteId;
@@ -88,16 +98,17 @@ class ChangeHandler {
 	 * @param TitleFactory $titleFactory
 	 * @param PageUpdater $updater
 	 * @param ChangeListTransformer $changeListTransformer
+	 * @param Language $language
 	 * @param string $localSiteId
 	 * @param bool $injectRecentChanges
 	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,
 		TitleFactory $titleFactory,
 		PageUpdater $updater,
 		ChangeListTransformer $changeListTransformer,
+		Language $language,
 		$localSiteId,
 		$injectRecentChanges = true
 	) {
@@ -113,6 +124,7 @@ class ChangeHandler {
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->changeListTransformer = $changeListTransformer;
+		$this->language = $language;
 		$this->localSiteId = $localSiteId;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
@@ -311,70 +323,131 @@ class ChangeHandler {
 	/**
 	 * Constructs RC attributes for the given change
 	 *
+	 * @see ExternalRecentChange::buildAttributes
+	 *
 	 * @param EntityChange $change The Change that caused the update
 	 *
 	 * @return array[]|bool an array of RC attributes,
-	 *         or false if the change does not provide edit meta data
+	 *         as understood by ExternalRecentChange::buildAttributes.
 	 */
 	private function getRCAttributes( EntityChange $change ) {
 		$rcinfo = $change->getMetadata();
-
-		if ( empty( $rcinfo ) ) {
-			return false;
-		}
 
 		//@todo: add getFields() to the interface, or provide getters!
 		$fields = $change->getFields();
 		$fields['entity_type'] = $change->getEntityId()->getEntityType();
 
-		if ( $change instanceof ItemChange ) {
-			$rcinfo['comment'] = $this->getEditComment( $change );
-
-			if ( isset( $fields['info']['changes'] ) ) {
-				$rcinfo['composite-comment'] = array();
-
-				foreach ( $fields['info']['changes'] as $part ) {
-					$rcinfo['composite-comment'][] = $this->getEditComment( $part );
-				}
-			}
-		}
-
 		unset( $fields['info'] );
 
-		$rcinfo = array_merge( $fields, $rcinfo );
+		if ( isset( $fields['info']['changes'] ) ) {
+			$changesForComment = $fields['info']['changes'];
+		} else {
+			$changesForComment = array( $change );
+		}
 
+		$comment = $this->getEditCommentMulti( $changesForComment );
+
+		// Use keys known to ExternalRecentChange::buildAttributes.
 		return array(
-			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
+			'wikibase-repo-change' => array_merge( $fields, $rcinfo ),
+			'comment' => $comment
 		);
 	}
 
 	/**
-	 * Returns the comment as structured array of information, to be
-	 * stored in recent change entries and used to display formatted
-	 * comments for wikibase changes in recent changes, watchlist, etc.
+	 * Returns a human readable comment representing the given changes.
+	 *
+	 * @param EntityChange[] $changes
+	 *
+	 * @throws MWException
+	 * @return string
+	 */
+	private function getEditCommentMulti( array $changes ) {
+		$comments = array();
+
+		foreach ( $changes as $change ) {
+			$comments[] = $this->getEditComment( $change );
+		}
+
+		//@todo: handle overly long lists nicely!
+		return $this->language->semicolonList( $comments );
+	}
+
+	/**
+	 * Returns a human readable comment representing the change.
 	 *
 	 * @since 0.4
 	 *
 	 * @param EntityChange $change the change to get a comment for
 	 *
 	 * @throws MWException
-	 * @return array|string
+	 * @return string
 	 */
 	public function getEditComment( EntityChange $change ) {
 		$siteLinkDiff = $change instanceof ItemChange
 			? $change->getSiteLinkDiff()
 			: null;
-		$action = $change->getAction();
-		$comment = $change->getComment();
 
-		$commentCreator = new SiteLinkCommentCreator( $this->localSiteId );
-		$editComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $comment );
+		$editComment = '';
 
-		if ( is_array( $editComment ) && !isset( $editComment['message'] ) ) {
-			throw new MWException( 'getEditComment returned an empty comment' );
+		if ( !empty( $siteLinkDiff ) ) {
+			$action = $change->getAction();
+			$commentCreator = new SiteLinkCommentCreator( $this->language, $this->localSiteId );
+			$siteLinkComment = $commentCreator->getEditComment( $siteLinkDiff, $action );
+			$editComment = $siteLinkComment === null ? '' : $siteLinkComment;
 		}
 
+		if ( $editComment == '' ) {
+			$editComment = $this->expandAutoComments( $change->getComment(), $change->getEntityId() );
+		}
+
+		if ( $editComment == '' ) {
+			// If there is no comment, use something generic. This shouldn't happen.
+			$editComment = $this->msg( 'wikibase-comment-update' );
+		}
+
+		Assert::postcondition( is_string( $editComment ), '$editComment must be a string' );
 		return $editComment;
+	}
+
+	/**
+	 * @param string $entityType
+	 *
+	 * @return string The message key prefix to use for the given entity type
+	 */
+	private function getMessagePrefix( $entityType ) {
+		return 'wikibase-' . $entityType;
+	}
+
+	/**
+	 * @param string $summary An edit summary string, possibly containing a
+	 *        localizable auto-comment block.
+	 * @param EntityId $entityId The ID of the entity the edit summary applies to
+	 *
+	 * @return string An edit summary string with the localizable auto-comment block
+	 *         expanded to human readable form.
+	 */
+	private function expandAutoComments( $summary, EntityId $entityId ) {
+		$messagePrefix = $this->getMessagePrefix( $entityId->getEntityType() );
+
+		$commentFormatter = new AutoCommentFormatter( $this->language, $messagePrefix );
+		return $commentFormatter->expandAutoComments( $summary );
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return Message
+	 * @throws MWException
+	 */
+	private function msg( $key ) {
+		$params = func_get_args();
+		array_shift( $params );
+		if ( isset( $params[0] ) && is_array( $params[0] ) ) {
+			$params = $params[0];
+		}
+
+		return wfMessage( $key, $params )->inLanguage( $this->language );
 	}
 
 }
