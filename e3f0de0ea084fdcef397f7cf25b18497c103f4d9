@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_62f929c0",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-04T10:43:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_6384d9d8",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_6393795b",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "I think PHPStorm did this. No reason.",
       "parentUuid": "6ec1af18_e37e8913",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a2f391e1",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-04T10:43:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_038715dd",
       "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -177,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_82f8d5c0",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-04T10:43:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_e36f6924",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_2398116c",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 2
@@ -212,6 +266,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_e20d19ec",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-04T10:43:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_a375e1f5",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_4a6e97ff",
         "filename": "repo/includes/ValidatorBuilders.php",
         "patchSetId": 2
@@ -241,6 +313,24 @@
       "side": 1,
       "message": "How is that simpler or more obvious? Also: are \u003c and \u003e always escaped?",
       "parentUuid": "6ec1af18_4a6e97ff",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_222fa13b",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-04T10:43:40Z",
+      "side": 1,
+      "message": "I\u0027ll leave that as it is for now. I like it better to explicitly say which delimiter to escape. Since the knowledge is local to that line, that seems more straight forward.",
+      "parentUuid": "6ec1af18_4368bd19",
       "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -311,6 +401,24 @@
       "side": 1,
       "message": "bah.",
       "parentUuid": "6ec1af18_c3d02dfd",
+      "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_821f750c",
+        "filename": "repo/tests/phpunit/includes/ValidatorBuildersTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-04T10:43:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_636b7916",
       "revId": "e3f0de0ea084fdcef397f7cf25b18497c103f4d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
