@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTermLookup;
+use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Lib\Store\EntityTermLookup
@@ -124,28 +125,28 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 
 	protected function getTermIndex() {
 		$terms = array(
-			new \Wikibase\TermIndexEntry( array(
+			new TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'en',
 				'termText' => 'New York City'
 			) ),
-			new \Wikibase\TermIndexEntry( array(
+			new TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'label',
 				'termLanguage' => 'es',
 				'termText' => 'Nueva York'
 			) ),
-			new \Wikibase\TermIndexEntry( array(
+			new TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'description',
 				'termLanguage' => 'en',
 				'termText' => 'largest city in New York and the United States of America'
 			) ),
-			new \Wikibase\TermIndexEntry( array(
+			new TermIndexEntry( array(
 				'entityId' => 116,
 				'entityType' => 'item',
 				'termType' => 'description',
