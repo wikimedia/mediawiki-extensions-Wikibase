@@ -167,15 +167,13 @@ class EntityTermsView {
 	 * @param Fingerprint $fingerprint
 	 * @param string[] $languageCodes The languages the user requested to be shown
 	 * @param Title|null $title
-	 * @param boolean $showEntitytermslistview
 	 *
 	 * @return string
 	 */
 	public function getEntityTermsForLanguageListView(
 		Fingerprint $fingerprint,
 		$languageCodes,
-		Title $title = null,
-		$showEntitytermslistview = false
+		Title $title = null
 	) {
 		$entityTermsForLanguageViewsHtml = '';
 
