@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_ff784b27",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-05T09:40:34Z",
+      "side": 1,
+      "message": "WikibaseClient.datatypes.php?",
+      "revId": "055292251206b6466e693adbdf53f17f7d5f792a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
