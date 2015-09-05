@@ -4,6 +4,7 @@ namespace Wikibase\Client\Serializer;
 
 use DataValues\Serializers\DataValueSerializer;
 use Serializers\Exceptions\SerializationException;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -17,7 +18,7 @@ use Wikibase\Lib\Serialization\SerializationModifier;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class ClientEntitySerializer implements \Serializers\Serializer{
+class ClientEntitySerializer implements Serializer {
 
 	/**
 	 * @var PropertyDataTypeLookup
