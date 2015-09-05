@@ -263,6 +263,8 @@ class EntityViewPlaceholderExpander {
 			$this->languageNameLookup,
 			$this->uiLanguage->getCode()
 		);
+
+		// FIXME: assumes all entities have a fingerprint
 		$html = $entityTermsView->getEntityTermsForLanguageListView(
 			$entity->getFingerprint(),
 			$languages,
