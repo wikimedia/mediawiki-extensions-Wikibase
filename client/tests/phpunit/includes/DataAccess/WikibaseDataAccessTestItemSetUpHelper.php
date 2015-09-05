@@ -16,7 +16,6 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
 use Wikibase\Test\MockRepository;
