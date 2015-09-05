@@ -378,6 +378,7 @@ class EntityPerPageTable implements EntityPerPage {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		if ( $after ) {
+			// FIXME: this will fatal for non numeric ids
 			$numericId = (int)$after->getNumericId();
 
 			if ( $entityType === null ) {
