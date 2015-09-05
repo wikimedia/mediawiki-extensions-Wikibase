@@ -207,7 +207,8 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		if ( !empty( $site ) || !empty( $itemString ) ) {
 			$url = $this->getTargetUrl( $site, $itemString );
 			if ( null !== $url ) {
-				return $this->getOutput()->redirect( $url );
+				$this->getOutput()->redirect( $url );
+				return;
 			}
 		}
 
