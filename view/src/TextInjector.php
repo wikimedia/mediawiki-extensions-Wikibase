@@ -39,7 +39,7 @@ class TextInjector {
 		$this->markers = $markers;
 
 		// idea stolen from Parser class in core
-		$this->uniqPrefix = "\x7fUNIQ" . wfRandom( 16 );
+		$this->uniqPrefix = "\x7fUNIQ" . wfRandomString( 16 );
 		$this->markerIndex = 0;
 	}
 
