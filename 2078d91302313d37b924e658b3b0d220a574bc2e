@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_ae6ccfcb",
+        "filename": "view/src/TextInjector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-09-06T08:54:29Z",
+      "side": 1,
+      "message": "I have a feeling this was actually meant to be using wfRandomString",
+      "revId": "2078d91302313d37b924e658b3b0d220a574bc2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
