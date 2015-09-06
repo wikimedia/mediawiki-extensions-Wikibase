@@ -268,29 +268,32 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$this->languageCode = null;
 		}
 
-		if ( $this->languageCode !== null
-			&& $this->entityRevision !== null
-			&& $this->entityRevision->getEntity() instanceof FingerprintProvider
+		if ( $this->languageCode !== null && $this->entityRevision !== null ) {
+			$entity = $this->entityRevision->getEntity();
+
+			if ( $entity instanceof FingerprintProvider ) {
+				$this->setFingerprintFields( $entity->getFingerprint() );
+			}
+		}
+	}
+
+	private function setFingerprintFields( Fingerprint $fingerprint ) {
+		if ( !$this->getRequest()->getCheck( 'label' )
+			&& $fingerprint->hasLabel( $this->languageCode )
 		) {
-			$fingerprint = $this->entityRevision->getEntity()->getFingerprint();
+			$this->label = $fingerprint->getLabel( $this->languageCode )->getText();
+		}
 
-			if ( !$request->getCheck( 'label' )
-				&& $fingerprint->hasLabel( $this->languageCode )
-			) {
-				$this->label = $fingerprint->getLabel( $this->languageCode )->getText();
-			}
+		if ( !$this->getRequest()->getCheck( 'description' )
+			&& $fingerprint->hasDescription( $this->languageCode )
+		) {
+			$this->description = $fingerprint->getDescription( $this->languageCode )->getText();
+		}
 
-			if ( !$request->getCheck( 'description' )
-				&& $fingerprint->hasDescription( $this->languageCode )
-			) {
-				$this->description = $fingerprint->getDescription( $this->languageCode )->getText();
-			}
-
-			if ( !$request->getCheck( 'aliases' )
-				&& $fingerprint->hasAliasGroup( $this->languageCode )
-			) {
-				$this->aliases = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
-			}
+		if ( !$this->getRequest()->getCheck( 'aliases' )
+			&& $fingerprint->hasAliasGroup( $this->languageCode )
+		) {
+			$this->aliases = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
 		}
 	}
 
