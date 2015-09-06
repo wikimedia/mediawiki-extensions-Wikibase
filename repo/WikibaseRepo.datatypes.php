@@ -77,7 +77,7 @@ return call_user_func( function() {
 			},
 			'parser-factory-callback' => function( ValueParsers\ParserOptions $options ) {
 				$language = Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
-				$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer( $language);
+				$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer( $language );
 				return new QuantityParser( $options, $unlocalizer );
 			},
 		),
