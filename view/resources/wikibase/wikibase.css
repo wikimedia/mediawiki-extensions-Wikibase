@@ -30,7 +30,7 @@ h1 .wikibase-title .wikibase-title-id:before {
 }
 
 .wb-entitypage .ui-state-disabled input,
-.wb-entitypage input.ui-state-disabled
+.wb-entitypage input.ui-state-disabled,
 .wb-entitypage .ui-state-disabled textarea {
 	background-color: #F0F0F0;
 	color: #565656;
