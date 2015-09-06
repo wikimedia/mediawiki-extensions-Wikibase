@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_4eb68b3d",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-06T08:58:11Z",
+      "side": 1,
+      "message": "Which line(s) exactly?",
+      "parentUuid": "6ec1af18_6e0d8738",
+      "revId": "142b870491a955b7fb02c0bdf76e2fda2af1e81a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_0e188378",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-06T08:44:58Z",
       "side": 1,
       "message": "This should be wrapped in an if( $this-\u003eaddMetaData )",
+      "revId": "142b870491a955b7fb02c0bdf76e2fda2af1e81a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6eb10741",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-06T08:58:11Z",
+      "side": 1,
+      "message": "Which line(s) exactly?",
+      "parentUuid": "6ec1af18_0e188378",
       "revId": "142b870491a955b7fb02c0bdf76e2fda2af1e81a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
