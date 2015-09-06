@@ -14,7 +14,7 @@
 	/* @embed */
 	background-image: linear-gradient(transparent, transparent), url(images/wb-badges-default.svg);
 	background-repeat: no-repeat;
-	background-position: 0% center;
+	background-position: 0 center;
 	display: inline;
 	padding: 0 8px;
 }
