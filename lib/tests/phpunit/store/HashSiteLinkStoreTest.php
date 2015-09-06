@@ -185,8 +185,6 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$siteLinkStore->deleteLinksOfItem( $itemId );
 
-		$siteLinks = $siteLinkStore->getSiteLinksForItem( $itemId );
-
 		$this->assertEmpty(
 			$siteLinkStore->getSiteLinksForItem( $itemId ),
 			'get by item id'
