@@ -554,8 +554,6 @@ class SqlStore implements Store {
 	 * @return EntityRedirectLookup
 	 */
 	public function getEntityRedirectLookup() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		return new WikiPageEntityRedirectLookup(
 			$this->entityTitleLookup,
 			$this->entityIdLookup,
