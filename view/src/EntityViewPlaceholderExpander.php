@@ -266,8 +266,7 @@ class EntityViewPlaceholderExpander {
 		$html = $entityTermsView->getEntityTermsForLanguageListView(
 			$entity->getFingerprint(),
 			$languages,
-			$this->targetPage,
-			$this->user->getOption( 'wikibase-entitytermsview-showEntitytermslistview' )
+			$this->targetPage
 		);
 
 		return $html;
