@@ -222,16 +222,6 @@ class EditEntity {
 	}
 
 	/**
-	 * Returns the new entity object to be saved. May be different from the entity supplied
-	 * to the constructor in case the entity was patched to resolve edit conflicts.
-	 *
-	 * @return Entity
-	 */
-	public function getNewEntity() {
-		return $this->newEntity;
-	}
-
-	/**
 	 * Returns the Title of the page holding the entity that is being edited.
 	 *
 	 * @return Title|null

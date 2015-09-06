@@ -292,6 +292,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$entityId = new ItemId( 'Q17' );
 		$revision = $repo->getEntityRevision( $entityId, $baseRevisionId );
 		$entity = $revision->getEntity( $entityId );
+		$originalEntity = unserialize( serialize( $entity ) );
 
 		// NOTE: The user name must be the one used in getMockRepository().
 		$user = $this->getUser( 'EditEntityTestUser1' );
@@ -332,7 +333,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		if ( $expectedData !== null ) {
-			$data = $this->fingerprintToPartialArray( $editEntity->getNewEntity()->getFingerprint() );
+			$data = $this->fingerprintToPartialArray( $originalEntity->getFingerprint() );
 
 			foreach ( $expectedData as $key => $expectedValue ) {
 				$actualValue = $data[$key];
