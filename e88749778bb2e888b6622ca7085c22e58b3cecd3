@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_8e21d34c",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-06T13:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_8ef6b3f4",
+      "revId": "e88749778bb2e888b6622ca7085c22e58b3cecd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_aef92fe6",
         "filename": "repo/includes/api/ResultBuilder.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-06T11:39:20Z",
       "side": 1,
       "message": "following on from PS8 both of these lines should be inside the if I mentioned there",
+      "revId": "e88749778bb2e888b6622ca7085c22e58b3cecd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ae24cf5a",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-06T13:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_aef92fe6",
       "revId": "e88749778bb2e888b6622ca7085c22e58b3cecd3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
