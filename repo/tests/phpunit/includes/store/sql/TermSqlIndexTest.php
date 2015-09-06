@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
@@ -102,13 +103,13 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	public function getMatchingTermsOptionsProvider() {
 		$labels = array(
-			'en' => new \Wikibase\DataModel\Term\Term( 'en', 'Foo' ),
-			'de' => new \Wikibase\DataModel\Term\Term( 'de', 'Fuh' ),
+			'en' => new Term( 'en', 'Foo' ),
+			'de' => new Term( 'de', 'Fuh' ),
 		);
 
 		$descriptions = array(
-			'en' => new \Wikibase\DataModel\Term\Term( 'en', 'Bar' ),
-			'de' => new \Wikibase\DataModel\Term\Term( 'de', 'Bär' ),
+			'en' => new Term( 'en', 'Bar' ),
+			'de' => new Term( 'de', 'Bär' ),
 		);
 
 		$fingerprint = new Fingerprint(
