@@ -42,12 +42,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 */
 	private $entityIdParser;
 
-	private function newEntityPerPageTable() {
-		$idParser = $this->getEntityIdParser();
-		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
-		return new EntityPerPageTable( $idParser, $useRedirectTargetColumn );
-	}
-
 	/**
 	 * @see EntityLookupTest::newEntityLoader()
 	 *
