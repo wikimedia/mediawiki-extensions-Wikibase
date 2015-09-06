@@ -118,13 +118,6 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	}
 
 	/**
-	 * @param callable $referenceSeenCallback
-	 */
-	public function setReferenceSeenCallback( $referenceSeenCallback ) {
-		$this->referenceSeenCallback = $referenceSeenCallback;
-	}
-
-	/**
 	 * @return boolean
 	 */
 	public function getProduceQualifiers() {
