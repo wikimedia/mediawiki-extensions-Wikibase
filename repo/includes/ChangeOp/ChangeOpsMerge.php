@@ -259,7 +259,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateStatementsChangeOps() {
-		foreach ( $this->fromItem->getStatements() as $fromStatement ) {
+		foreach ( $this->fromItem->getStatements()->toArray() as $fromStatement ) {
 			$this->fromChangeOps->add( $this->getStatementChangeOpFactory()->newRemoveStatementOp( $fromStatement->getGuid() ) );
 
 			$toStatement = clone $fromStatement;
