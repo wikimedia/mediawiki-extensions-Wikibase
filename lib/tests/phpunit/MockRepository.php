@@ -90,13 +90,6 @@ class MockRepository implements
 	private $watchlist = array();
 
 	/**
-	 * "$globalSiteId:$pageTitle" => item id integer
-	 *
-	 * @var string[]
-	 */
-	private $itemByLink = array();
-
-	/**
 	 * @var int
 	 */
 	private $maxEntityId = 0;
