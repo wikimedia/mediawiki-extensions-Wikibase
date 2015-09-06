@@ -133,7 +133,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	/**
 	 * @dataProvider emptyFingerprintProvider
 	 */
-	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint, $expectedPlaceholder ) {
+	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint ) {
 		$entityTermsView = $this->getEntityTermsView();
 		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
