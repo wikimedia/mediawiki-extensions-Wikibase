@@ -54,7 +54,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	public function testGetEntity() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$entity = $luaWikibaseLibrary->getEntity( 'Q888', false );
+		$entity = $luaWikibaseLibrary->getEntity( 'Q888' );
 		$this->assertEquals( array( null ), $entity );
 	}
 
@@ -64,7 +64,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		) );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$entityArray = $luaWikibaseLibrary->getEntity( 'Q885588', false );
+		$entityArray = $luaWikibaseLibrary->getEntity( 'Q885588' );
 
 		$expected = array(
 			array(
@@ -106,13 +106,13 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testGetEntityInvalidIdType() {
 		$this->setExpectedException( 'ScribuntoException' );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->getEntity( array(), false );
+		$luaWikibaseLibrary->getEntity( array() );
 	}
 
 	public function testGetEntityInvalidEntityId() {
 		$this->setExpectedException( 'ScribuntoException' );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->getEntity( 'X888', false );
+		$luaWikibaseLibrary->getEntity( 'X888' );
 	}
 
 	public function testGetEntity_entityAccessLimitExceeded() {
@@ -133,7 +133,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	public function testRenderSnak() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488', false );
+		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
 
 		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
 		$this->assertSame(
@@ -157,7 +157,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	public function testRenderSnaks() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487', false );
+		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487' );
 
 		$snaks = $entityArr[0]['claims']['P342'][1]['qualifiers'];
 		$this->assertSame(
