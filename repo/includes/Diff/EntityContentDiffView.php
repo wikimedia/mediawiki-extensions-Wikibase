@@ -40,22 +40,22 @@ class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * @var EntityDiffVisualizer
 	 */
-	protected $diffVisualizer;
+	private $diffVisualizer;
 
 	/**
 	 * @var SnakFormatter
 	 */
-	protected $detailedSnakFormatter;
+	private $detailedSnakFormatter;
 
 	/**
 	 * @var SnakFormatter
 	 */
-	protected $terseSnakFormatter;
+	private $terseSnakFormatter;
 
 	/**
 	 * @var EntityIdFormatter
 	 */
-	protected $propertyNameFormatter;
+	private $propertyNameFormatter;
 
 	/**
 	 * @see DifferenceEngine::__construct

@@ -22,33 +22,33 @@ class TermSearchKeyBuilder {
 	 *
 	 * @var TermSqlIndex
 	 */
-	protected $table;
+	private $table;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var MessageReporter|null
 	 */
-	protected $reporter = null;
+	private $reporter = null;
 
 	/**
 	 * Whether all keys should be updated, or only missing keys
 	 *
 	 * @var bool
 	 */
-	protected $all = true;
+	private $all = true;
 
 	/**
 	 * @var int
 	 */
-	protected $fromId = 1;
+	private $fromId = 1;
 
 	/**
 	 * The batch size, giving the number of rows to be updated in each database transaction.
 	 *
 	 * @var int
 	 */
-	protected $batchSize = 100;
+	private $batchSize = 100;
 
 	/**
 	 * @since 0.4

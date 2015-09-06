@@ -23,7 +23,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 *
 	 * @var string|null
 	 */
-	protected $dataType = null;
+	private $dataType = null;
 
 	/**
 	 * @since 0.2

@@ -18,17 +18,17 @@ class EntityPerPageIdPager implements EntityIdPager {
 	/**
 	 * @var EntityPerPage
 	 */
-	protected $entityPerPage;
+	private $entityPerPage;
 
 	/**
 	 * @var string|null
 	 */
-	protected $entityType;
+	private $entityType;
 
 	/**
 	 * @var EntityId|null
 	 */
-	protected $position = null;
+	private $position = null;
 
 	/**
 	 * @var mixed

@@ -21,17 +21,17 @@ class EntityIdReader implements EntityIdPager, Disposable {
 	/**
 	 * @var LineReader
 	 */
-	protected $reader;
+	private $reader;
 
 	/**
 	 * @var ExceptionHandler
 	 */
-	protected $exceptionHandler;
+	private $exceptionHandler;
 
 	/**
 	 * @var string|null
 	 */
-	protected $entityType;
+	private $entityType;
 
 	/**
 	 * @param LineReader $reader

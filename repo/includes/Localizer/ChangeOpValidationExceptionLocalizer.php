@@ -19,7 +19,7 @@ class ChangeOpValidationExceptionLocalizer implements ExceptionLocalizer {
 	/**
 	 * @var ValidatorErrorLocalizer
 	 */
-	protected $validatorErrorLocalizer;
+	private $validatorErrorLocalizer;
 
 	/**
 	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters

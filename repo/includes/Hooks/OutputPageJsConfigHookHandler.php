@@ -17,12 +17,12 @@ class OutputPageJsConfigHookHandler {
 	/**
 	 * @var SettingsArray
 	 */
-	protected $settings;
+	private $settings;
 
 	/**
 	 * @var OutputPageJsConfigBuilder
 	 */
-	protected $outputPageConfigBuilder;
+	private $outputPageConfigBuilder;
 
 	/**
 	 * @todo: don't pass around SettingsArray, just take specific constructor params.

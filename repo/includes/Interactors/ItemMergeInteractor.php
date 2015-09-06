@@ -32,7 +32,7 @@ class ItemMergeInteractor {
 	/**
 	 * @var MergeChangeOpsFactory
 	 */
-	protected $changeOpFactory;
+	private $changeOpFactory;
 
 	/**
 	 * @var EntityRevisionLookup

@@ -25,42 +25,42 @@ class EntityPerPageBuilder {
 	 *
 	 * @var EntityPerPage
 	 */
-	protected $entityPerPageTable;
+	private $entityPerPageTable;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var EntityContentFactory
 	 */
-	protected $entityContentFactory;
+	private $entityContentFactory;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var EntityIdParser
 	 */
-	protected $entityIdParser;
+	private $entityIdParser;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var MessageReporter
 	 */
-	protected $reporter;
+	private $reporter;
 
 	/**
 	 * The batch size, giving the number of rows to be updated in each database transaction.
 	 *
 	 * @var int
 	 */
-	protected $batchSize = 100;
+	private $batchSize = 100;
 
 	/**
 	 * Rebuild the entire table
 	 *
 	 * @var bool
 	 */
-	protected $rebuildAll = false;
+	private $rebuildAll = false;
 
 	/**
 	 * @var EntityNamespaceLookup
@@ -72,7 +72,7 @@ class EntityPerPageBuilder {
 	 *
 	 * @var array
 	 */
-	protected $contentModels;
+	private $contentModels;
 
 	/**
 	 * @param EntityPerPage $entityPerPageTable

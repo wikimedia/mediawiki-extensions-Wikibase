@@ -24,7 +24,7 @@ class ValueParserFactory {
 	 *
 	 * @var callable[]
 	 */
-	protected $parsers = array();
+	private $parsers = array();
 
 	/**
 	 * @since 0.5

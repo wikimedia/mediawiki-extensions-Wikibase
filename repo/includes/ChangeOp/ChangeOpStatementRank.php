@@ -24,14 +24,14 @@ class ChangeOpStatementRank extends ChangeOpBase {
 	 *
 	 * @var string
 	 */
-	protected $statementGuid;
+	private $statementGuid;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var integer
 	 */
-	protected $rank;
+	private $rank;
 
 	/**
 	 * Constructs a new statement rank change operation

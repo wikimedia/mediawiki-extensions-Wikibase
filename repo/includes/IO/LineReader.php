@@ -19,31 +19,31 @@ class LineReader implements Iterator, Disposable {
 	/**
 	 * @var resource
 	 */
-	protected $fileHandle;
+	private $fileHandle;
 
 	/**
 	 * Whether dispose() will close the file handle.
 	 *
 	 * @var bool
 	 */
-	protected $canClose;
+	private $canClose;
 
 	/**
 	 * Whether dispose() is called automatically when the end of file is reached.
 	 *
 	 * @var bool
 	 */
-	protected $autoDispose;
+	private $autoDispose;
 
 	/**
 	 * @var string|null
 	 */
-	protected $current = null;
+	private $current = null;
 
 	/**
 	 * @var int
 	 */
-	protected $line = 0;
+	private $line = 0;
 
 	/**
 	 * @param resource $fileHandle The file to read from.

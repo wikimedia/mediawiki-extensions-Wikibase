@@ -21,7 +21,7 @@ class ChangeOpValidationException extends ChangeOpException {
 	/**
 	 * @var Result
 	 */
-	protected $result;
+	private $result;
 
 	/**
 	 * @param Result $result

@@ -21,7 +21,7 @@ class OutputPageJsConfigBuilder {
 	/**
 	 * @var CopyrightMessageBuilder
 	 */
-	protected $copyrightMessageBuilder;
+	private $copyrightMessageBuilder;
 
 	public function __construct() {
 		$this->copyrightMessageBuilder = new CopyrightMessageBuilder();

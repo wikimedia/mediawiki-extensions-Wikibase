@@ -19,12 +19,12 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @var string|null
 	 */
-	protected $site;
+	private $site;
 
 	/**
 	 * @var string|null
 	 */
-	protected $page;
+	private $page;
 
 	/**
 	 * @since 0.1

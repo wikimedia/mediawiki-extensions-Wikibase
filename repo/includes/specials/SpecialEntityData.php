@@ -30,7 +30,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	/**
 	 * @var EntityDataRequestHandler|null
 	 */
-	protected $requestHandler = null;
+	private $requestHandler = null;
 
 	/**
 	 * @since 0.4
