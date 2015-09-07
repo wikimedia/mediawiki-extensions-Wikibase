@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_9160132f",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-07T18:58:23Z",
+      "side": 1,
+      "message": "How can this override anything from repo. This only uses stuff from client and lib.",
+      "revId": "1dc7e1ed93cac68ed173f2cbdbdbc8904ae0e3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_715d677d",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-07T18:58:23Z",
+      "side": 1,
+      "message": "Why protected?",
+      "revId": "1dc7e1ed93cac68ed173f2cbdbdbc8904ae0e3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
