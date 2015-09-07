@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Test;
 use DataValues\NumberValue;
 use DataValues\QuantityValue;
 use ValueFormatters\BasicNumberLocalizer;
-use ValueFormatters\BasicQuantityUnitFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\QuantityDetailsFormatter;
@@ -19,15 +18,23 @@ use Wikibase\Lib\QuantityDetailsFormatter;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	private function newFormatter( FormatterOptions $options = null ) {
 		$numberLocalizer = new BasicNumberLocalizer();
-		$unitFormatter = new BasicQuantityUnitFormatter();
-		$formatter = new QuantityDetailsFormatter( $numberLocalizer, $unitFormatter, $options );
 
-		return $formatter;
+		$unitFormatter = $this->getMockBuilder( 'ValueFormatters\QuantityUnitFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+		$unitFormatter->expects( $this->any() )
+			->method( 'applyUnit' )
+			->will( $this->returnCallback( function( $unit, $numberText ) {
+				return $numberText . ' ' . $unit;
+			} ) );
+
+		return new QuantityDetailsFormatter( $numberLocalizer, $unitFormatter, $options );
 	}
 
 	/**
@@ -51,11 +58,11 @@ class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				$options,
 				'@' . implode( '.*',
 					array(
-						'<h4[^<>]*>[^<>]*5[^<>]*1[^<>]*</h4>',
-						'<td[^<>]*>[^<>]*5[^<>]*</td>',
-						'<td[^<>]*>[^<>]*6[^<>]*</td>',
-						'<td[^<>]*>[^<>]*4[^<>]*</td>',
-						'<td[^<>]*>[^<>]*1[^<>]*</td>',
+						'<h4[^<>]*>[^<>]*\b5\b[^<>]*1[^<>]*</h4>',
+						'<td[^<>]*>[^<>]*\b5\b[^<>]*</td>',
+						'<td[^<>]*>[^<>]*\b6\b[^<>]*</td>',
+						'<td[^<>]*>[^<>]*\b4\b[^<>]*</td>',
+						'<td[^<>]*>[^<>]*\b1\b[^<>]*</td>',
 					)
 				) . '@s'
 			),
