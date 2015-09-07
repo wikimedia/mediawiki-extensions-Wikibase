@@ -47,4 +47,9 @@ interface ChangeOp {
 	 */
 	public function apply( Entity $entity, Summary $summary = null );
 
+	/**
+	 * @return string|null
+	 */
+	public function getModuleName();
+
 }

@@ -51,4 +51,11 @@ abstract class ChangeOpBase implements ChangeOp {
 		return Result::newSuccess();
 	}
 
+	/**
+	 * @see ChangeOp::getModuleName()
+	 */
+	public function getModuleName() {
+		return null;
+	}
+
 }

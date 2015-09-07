@@ -118,4 +118,11 @@ class ChangeOps implements ChangeOp {
 		return $result;
 	}
 
+	/**
+	 * @see ChangeOp::getModuleName()
+	 */
+	public function getModuleName() {
+		return null;
+	}
+
 }
