@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use MediaWikiSite;
 use MediaWikiTestCase;
+use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -195,13 +195,16 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 	 * @return SiteList
 	 */
 	private function newSiteList() {
-		$dummySite = MediaWikiSite::newFromGlobalId( 'enwiki' );
+		$dummySite = new Site();
+		$dummySite->setGlobalId( 'enwiki' );
 		$dummySite->setGroup( 'wikipedia' );
 
-		$dummySite2 = MediaWikiSite::newFromGlobalId( 'specialwiki' );
+		$dummySite2 = new Site();
+		$dummySite2->setGlobalId( 'specialwiki' );
 		$dummySite2->setGroup( 'special group' );
 
-		$dummySite3 = MediaWikiSite::newFromGlobalId( 'dewiki' );
+		$dummySite3 = new Site();
+		$dummySite3->setGlobalId( 'dewiki' );
 		$dummySite3->setGroup( 'wikipedia' );
 
 		return new SiteList( array( $dummySite, $dummySite2, $dummySite3 ) );
