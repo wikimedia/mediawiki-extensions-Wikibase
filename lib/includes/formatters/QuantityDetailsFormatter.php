@@ -45,7 +45,11 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 * @param QuantityUnitFormatter $unitFormatter
 	 * @param FormatterOptions|null $options
 	 */
-	public function __construct( NumberLocalizer $numberLocalizer, QuantityUnitFormatter $unitFormatter, FormatterOptions $options = null ) {
+	public function __construct(
+		NumberLocalizer $numberLocalizer,
+		QuantityUnitFormatter $unitFormatter,
+		FormatterOptions $options = null
+	) {
 		parent::__construct( $options );
 
 		$this->unitFormatter = $unitFormatter;
@@ -99,7 +103,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param string $fieldName
-	 * @param string $valueHtml
+	 * @param string $valueHtml HTML
 	 *
 	 * @return string HTML for the label/value pair
 	 */
@@ -108,7 +112,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 
 		$html .= Html::element( 'th', array( 'class' => 'wb-quantity-' . $fieldName ),
 			$this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'td', array( 'class' => 'wb-quantity-' . $fieldName ),
+		$html .= Html::rawElement( 'td', array( 'class' => 'wb-quantity-' . $fieldName ),
 			$valueHtml );
 
 		$html .= Html::closeElement( 'tr' );
