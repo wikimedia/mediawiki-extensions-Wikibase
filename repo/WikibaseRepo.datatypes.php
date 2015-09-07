@@ -24,11 +24,12 @@
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use ValueFormatters\FormatterOptions;
-use ValueParsers\NullParser;
 use ValueParsers\QuantityParser;
+use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\EntityIdValueParser;
 use Wikibase\Lib\Parsers\TimeParserFactory;
+use Wikibase\Lib\WikibaseStringValueNormalizer;
 use Wikibase\Parsers\MonolingualTextParser;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -50,8 +51,10 @@ return call_user_func( function() {
 		return new EntityIdValueParser( $repo->getEntityIdParser() );
 	};
 
-	$newNullParser = function( ValueParsers\ParserOptions $options ) {
-		return new NullParser();
+	$newStringParser = function( ValueParsers\ParserOptions $options ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		$normalizer = new WikibaseStringValueNormalizer( $repo->getStringNormalizer() );
+		return new StringParser( $normalizer );
 	};
 
 	return array(
@@ -60,7 +63,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
 			},
-			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
+			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultFormatterBuilders();
 				return $factory->newCommonsMediaFormatter( $format, $options );
@@ -112,7 +115,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
 			},
-			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
+			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				return null; // rely on formatter for string value type
 			},
@@ -136,7 +139,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildUrlValidators();
 			},
-			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
+			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseRepo::getDefaultFormatterBuilders();
 				return $factory->newUrlFormatter( $format, $options );
