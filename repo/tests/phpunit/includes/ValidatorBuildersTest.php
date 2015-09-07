@@ -17,7 +17,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\ValidatorBuilders;
 
 /**

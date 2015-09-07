@@ -7,7 +7,6 @@ use Site;
 use SiteStore;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\ParserOutputDataUpdater;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;

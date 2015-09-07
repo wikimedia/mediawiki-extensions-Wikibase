@@ -6,7 +6,6 @@ namespace Wikibase\Client\Specials;
 use Html;
 use InvalidArgumentException;
 use Linker;
-use OutOfBoundsException;
 use QueryPage;
 use Skin;
 use Title;

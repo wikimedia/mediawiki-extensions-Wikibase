@@ -2,13 +2,11 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use Language;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;

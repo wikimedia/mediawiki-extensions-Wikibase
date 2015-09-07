@@ -30,8 +30,6 @@
  * @licence GNU GPL v2+
  */
 
-use ValueParsers\ValueParser;
-
 if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }

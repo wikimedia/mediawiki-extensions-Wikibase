@@ -4,20 +4,10 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use OutOfBoundsException;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
-use Wikibase\Repo\Interactors\TermSearchResult;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
 
 /**
  * API module to search for Wikibase entities.
