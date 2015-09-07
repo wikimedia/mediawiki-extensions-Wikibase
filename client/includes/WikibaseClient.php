@@ -554,7 +554,7 @@ final class WikibaseClient {
 	/**
 	 * @return OutputFormatSnakFormatterFactory
 	 */
-	protected function newSnakFormatterFactory() {
+	private function newSnakFormatterFactory() {
 		$factory = new OutputFormatSnakFormatterFactory(
 			$this->getValueFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
