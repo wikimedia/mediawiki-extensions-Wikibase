@@ -100,8 +100,8 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 			.prop( 'lang', this.options.value.getLanguageCode() )
 			.prop( 'dir', $.util.getDirectionality( this.options.value.getLanguageCode() ) );
 
-			$.each( this.options.value.getTexts(), function() {
-				self.$list.append( mw.wbTemplate( 'wikibase-aliasesview-list-item', this ) );
+			$.each( this.options.value.getTexts(), function( index, text ) {
+				self.$list.append( mw.wbTemplate( 'wikibase-aliasesview-list-item', text ) );
 			} );
 		}
 

@@ -46,9 +46,8 @@
 			this.options.toolbars = this.options.toolbars || {};
 
 			$.each( this.options.toolbars, function( type, ids ) {
-				$.each( ids, function() {
-					var id = this,
-						def = $.wikibase.toolbarcontroller.definition( type, id );
+				$.each( ids, function( index, id ) {
+					var def = $.wikibase.toolbarcontroller.definition( type, id );
 
 					if( !def ) {
 						throw new Error( 'Missing toolbar controller definition for type "'
