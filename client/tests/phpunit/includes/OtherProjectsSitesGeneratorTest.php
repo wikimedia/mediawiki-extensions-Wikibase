@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests;
 
-use MediaWikiSite;
 use Site;
 use Wikibase\Client\OtherProjectsSitesGenerator;
 use Wikibase\Test\MockSiteStore;
@@ -107,43 +106,43 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 		$site->setLanguageCode( 'fr' );
 		$sites[] = $site;
 
-		$site = new MediaWikiSite();
+		$site = new Site();
 		$site->setGlobalId( 'enwiki' );
 		$site->setGroup( 'wikipedia' );
 		$site->setLanguageCode( 'en' );
 		$sites[] = $site;
 
-		$site = new MediaWikiSite();
+		$site = new Site();
 		$site->setGlobalId( 'frwiki' );
 		$site->setGroup( 'wikipedia' );
 		$site->setLanguageCode( 'fr' );
 		$sites[] = $site;
 
-		$site = new MediaWikiSite();
+		$site = new Site();
 		$site->setGlobalId( 'frwikisource' );
 		$site->setGroup( 'wikisource' );
 		$site->setLanguageCode( 'fr' );
 		$sites[] = $site;
 
-		$site = new MediaWikiSite();
+		$site = new Site();
 		$site->setGlobalId( 'nlwikisource' );
 		$site->setGroup( 'wikisource' );
 		$site->setLanguageCode( 'nl' );
 		$sites[] = $site;
 
-		$site = new MediaWikiSite();
+		$site = new Site();
 		$site->setGlobalId( 'eswiki' );
 		$site->setGroup( 'wikipedia' );
 		$site->setLanguageCode( 'es' );
 		$sites[] = $site;
 
-		$site = new MediaWikiSite();
+		$site = new Site();
 		$site->setGlobalId( 'commonswiki' );
 		$site->setGroup( 'commons' );
 		$site->setLanguageCode( 'en' );
 		$sites[] = $site;
 
-		$site = new MediaWikiSite();
+		$site = new Site();
 		$site->setGlobalId( 'wikidatawiki' );
 		$site->setGroup( 'wikidata' );
 		$site->setLanguageCode( 'en' );
