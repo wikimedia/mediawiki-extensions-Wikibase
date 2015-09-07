@@ -609,7 +609,8 @@ final class WikibaseClient {
 	private function newValueFormatterFactory() {
 		return new OutputFormatValueFormatterFactory(
 			$this->getFormatterFactoryCallbacksByType(),
-			$this->getContentLanguage()
+			$this->getContentLanguage(),
+			$this->getLanguageFallbackChainFactory()
 		);
 	}
 
