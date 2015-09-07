@@ -12,6 +12,8 @@ use SiteList;
 use Title;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpLabel;
+use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
@@ -252,10 +254,15 @@ class EditEntity extends ModifyEntity {
 
 		$changeOps = $this->getChangeOps( $data, $entity );
 
-		$this->applyChangeOp( $changeOps, $entity );
+		$applied = false;
+		$summary = $this->getSummary( $params, $entity, $changeOps->getChangeOps(), $applied );
+
+		if ( !$applied ) {
+			$this->applyChangeOp( $changeOps, $entity );
+		}
 
 		$this->buildResult( $entity );
-		return $this->getSummary( $params );
+		return $summary;
 	}
 
 	/**
@@ -263,12 +270,23 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @return Summary
 	 */
-	private function getSummary( array $params ) {
+	private function getSummary( array $params, Entity &$entity, array $changeOps, &$applied ) {
 		//TODO: Construct a nice and meaningful summary from the changes that get applied!
 		//      Perhaps that could be based on the resulting diff?]
 		$summary = $this->createSummary( $params );
 		if ( isset( $params['id'] ) xor ( isset( $params['site'] ) && isset( $params['title'] ) ) ) {
-			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
+			if ( $params['clear'] !== false ) {
+				$summary->setAction( 'override' );
+			} elseif (
+				count( $changeOps ) === 1 &&
+				( $changeOps[0] instanceof ChangeOpLabel || $changeOps[0] instanceof ChangeOpDescription )
+			) {
+				$summary->setModuleName( $changeOps[0] instanceof ChangeOpLabel ? 'wbsetlabel' : 'wbsetdescription' );
+				$this->applyChangeOp( $changeOps[0], $entity, $summary );
+				$applied = true;
+			} else {
+				$summary->setAction( 'update' );
+			}
 		} else {
 			$summary->setAction( 'create' );
 		}#
