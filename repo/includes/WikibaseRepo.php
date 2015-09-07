@@ -819,12 +819,11 @@ class WikibaseRepo {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	protected function newValueFormatterFactory() {
-		$factory = new OutputFormatValueFormatterFactory(
+		return new OutputFormatValueFormatterFactory(
 			$this->getFormatterFactoryCallbacksByType(),
-			$this->getDefaultLanguage()
+			$this->getDefaultLanguage(),
+			new LanguageFallbackChainFactory()
 		);
-
-		return $factory;
 	}
 
 	/**

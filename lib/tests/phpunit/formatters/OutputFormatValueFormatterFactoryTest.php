@@ -37,7 +37,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	public function testConstructorErrors( $builder, $error ) {
 		$language = Language::factory( 'en' );
 		$this->setExpectedException( $error );
-		new OutputFormatValueFormatterFactory( $builder, $language );
+		new OutputFormatValueFormatterFactory( $builder, $language, new LanguageFallbackChainFactory() );
 	}
 
 	public function constructorErrorsProvider() {
@@ -77,8 +77,11 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 			},
 		);
 
-		$language = Language::factory( 'en' );
-		return new OutputFormatValueFormatterFactory( $factoryCallbacks, $language );
+		return new OutputFormatValueFormatterFactory(
+			$factoryCallbacks,
+			Language::factory( 'en' ),
+			new LanguageFallbackChainFactory()
+		);
 	}
 
 	/**
