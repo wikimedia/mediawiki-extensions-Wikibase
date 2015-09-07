@@ -22,6 +22,7 @@ use ValueFormatters\ValueFormatterBase;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class QuantityDetailsFormatter extends ValueFormatterBase {
 
@@ -88,17 +89,39 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 			$this->formatNumber( $value->getUpperBound(), $value->getUnit() ) );
 		$html .= $this->renderLabelValuePair( 'lowerBound',
 			$this->formatNumber( $value->getLowerBound(), $value->getUnit() ) );
-		$html .= $this->renderLabelValuePair( 'unit', htmlspecialchars( $value->getUnit() ) );
+		$html .= $this->renderLabelValuePair( 'unit', $this->formatUnit( $value->getUnit() ) );
 
 		$html .= Html::closeElement( 'table' );
 
 		return $html;
 	}
 
+	/**
+	 * @param DecimalValue $number
+	 * @param string $unit URI
+	 *
+	 * @return string HTML
+	 */
 	private function formatNumber( DecimalValue $number, $unit ) {
 		$text = $this->decimalFormatter->format( $number );
 		$text = $this->unitFormatter->applyUnit( $unit, $text );
 		return htmlspecialchars( $text );
+	}
+
+	/**
+	 * @param string $unit URI
+	 *
+	 * @return string HTML
+	 */
+	private function formatUnit( $unit ) {
+		// FIXME: Use VocabularyUriFormatter introduced in https://gerrit.wikimedia.org/r/235495
+		$formattedUnit = trim( $this->unitFormatter->applyUnit( $unit, '' ) );
+
+		if ( $formattedUnit === '' || $formattedUnit === $unit ) {
+			return htmlspecialchars( $unit );
+		}
+
+		return Html::element( 'a', array( 'href' => $unit ), $formattedUnit );
 	}
 
 	/**
