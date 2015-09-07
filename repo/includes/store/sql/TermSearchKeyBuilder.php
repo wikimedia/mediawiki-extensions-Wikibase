@@ -18,15 +18,11 @@ use Wikibase\Lib\Reporting\MessageReporter;
 class TermSearchKeyBuilder {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var TermSqlIndex
 	 */
 	private $table;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var MessageReporter|null
 	 */
 	private $reporter = null;

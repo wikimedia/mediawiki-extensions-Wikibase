@@ -25,15 +25,11 @@ use Wikibase\Summary;
 class ChangeOpMainSnak extends ChangeOpBase {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $statementGuid;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var Snak
 	 */
 	private $snak;

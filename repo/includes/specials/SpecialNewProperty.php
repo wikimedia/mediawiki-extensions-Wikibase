@@ -19,8 +19,6 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialNewProperty extends SpecialNewEntity {
 
 	/**
-	 * @since 0.2
-	 *
 	 * @var string|null
 	 */
 	private $dataType = null;

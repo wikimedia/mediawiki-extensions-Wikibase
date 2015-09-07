@@ -54,8 +54,6 @@ class SqlIdGenerator implements IdGenerator {
 	/**
 	 * Generates and returns a new ID.
 	 *
-	 * @since 0.1
-	 *
 	 * @param DatabaseBase $database
 	 * @param string $type
 	 * @param bool $retry Retry once in case of e.g. race conditions. Defaults to true.

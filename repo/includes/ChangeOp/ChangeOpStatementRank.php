@@ -20,15 +20,11 @@ use Wikibase\Summary;
 class ChangeOpStatementRank extends ChangeOpBase {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
 	private $statementGuid;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var integer
 	 */
 	private $rank;

@@ -20,8 +20,6 @@ class ValueParserFactory {
 	/**
 	 * Maps parser id to ValueParser class or builder callback.
 	 *
-	 * @since 0.5
-	 *
 	 * @var callable[]
 	 */
 	private $parsers = array();

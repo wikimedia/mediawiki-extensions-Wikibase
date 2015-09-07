@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\MessageReporter;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
@@ -21,29 +20,16 @@ use Wikibase\Repo\Store\EntityPerPage;
 class EntityPerPageBuilder {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var EntityPerPage
 	 */
 	private $entityPerPageTable;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var EntityContentFactory
-	 */
-	private $entityContentFactory;
-
-	/**
-	 * @since 0.4
-	 *
 	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var MessageReporter
 	 */
 	private $reporter;
@@ -68,8 +54,6 @@ class EntityPerPageBuilder {
 	private $entityNamespaceLookup;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var array
 	 */
 	private $contentModels;

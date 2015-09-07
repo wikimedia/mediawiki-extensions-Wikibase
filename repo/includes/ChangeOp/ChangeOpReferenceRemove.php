@@ -20,15 +20,11 @@ use Wikibase\Summary;
 class ChangeOpReferenceRemove extends ChangeOpBase {
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string
 	 */
 	private $statementGuid;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var string
 	 */
 	private $referenceHash;
