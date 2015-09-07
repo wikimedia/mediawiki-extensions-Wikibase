@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_9bbb5270",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-07T14:21:52Z",
+      "side": 1,
+      "message": "eww, special case code with instanceof.",
+      "revId": "3ca6298b49c97e6cd4a62b250b63c9907548c810",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
