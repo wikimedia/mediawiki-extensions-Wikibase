@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\StringValue;

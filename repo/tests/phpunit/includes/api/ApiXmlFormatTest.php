@@ -3,15 +3,8 @@
 namespace Wikibase\Test\Repo\Api;
 
 use ApiBase;
-use ApiMain;
-use FauxRequest;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityRevision;
 use Wikibase\Repo\Api\SetSiteLink;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\MockSiteStore;
 
 /**

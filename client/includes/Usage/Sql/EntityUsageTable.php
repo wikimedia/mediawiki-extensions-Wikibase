@@ -4,7 +4,6 @@ namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
 use DatabaseBase;
-use Exception;
 use InvalidArgumentException;
 use Iterator;
 use Wikibase\Client\Usage\EntityUsage;

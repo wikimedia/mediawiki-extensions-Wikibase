@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Repo\Api;
 
 use UsageException;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
