@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_d601b108",
+        "filename": "repo/includes/PropertyInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-07T14:46:21Z",
+      "side": 1,
+      "message": "reset() doesn\u0027t work on ArrayObject, it seems. At least not in PHP 5.3...",
+      "revId": "2033c57d5525a792adb3499f79e6d60021858ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
