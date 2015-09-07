@@ -19,11 +19,12 @@
  */
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
-use ValueParsers\NullParser;
 use ValueParsers\QuantityParser;
+use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\EntityIdValueParser;
 use Wikibase\Lib\Parsers\TimeParserFactory;
+use Wikibase\Lib\WikibaseStringValueNormalizer;
 use Wikibase\Parsers\MonolingualTextParser;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -39,8 +40,10 @@ return call_user_func( function() {
 		return new EntityIdValueParser( $repo->getEntityIdParser() );
 	};
 
-	$newNullParser = function( ValueParsers\ParserOptions $options ) {
-		return new NullParser();
+	$newStringParser = function( ValueParsers\ParserOptions $options ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		$normalizer = new WikibaseStringValueNormalizer( $repo->getStringNormalizer() );
+		return new StringParser( $normalizer );
 	};
 
 	return array(
@@ -49,7 +52,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
 			},
-			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
+			'parser-factory-callback' => $newStringParser,
 
 		),
 		'globe-coordinate' => array(
@@ -86,7 +89,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
 			},
-			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
+			'parser-factory-callback' => $newStringParser,
 		),
 		'time' => array(
 			'validator-factory-callback' => function () {
@@ -103,7 +106,7 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildUrlValidators();
 			},
-			'parser-factory-callback' => $newNullParser, //TODO: use StringParser
+			'parser-factory-callback' => $newStringParser,
 		),
 		'wikibase-item' => array(
 			'validator-factory-callback' => function () {
