@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_fb405637",
+        "filename": "repo/includes/PropertyInfoBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-07T12:40:56Z",
+      "side": 1,
+      "message": "The \"\u003d null\" is not needed here because this gets overwritten in the constructor anyway.",
+      "revId": "a6f2c8fce5771f29d90341d71585c6ee5da205b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_3bb1fe41",
+        "filename": "repo/includes/content/PropertyHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-07T12:40:56Z",
+      "side": 1,
+      "message": "Doc missing.",
+      "revId": "a6f2c8fce5771f29d90341d71585c6ee5da205b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
