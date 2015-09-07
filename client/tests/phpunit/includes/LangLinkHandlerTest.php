@@ -2,12 +2,10 @@
 
 namespace Wikibase\Client\Tests;
 
-use MediaWikiSite;
 use ParserOutput;
+use Site;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -70,11 +68,9 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param string[] $otherProjects
-	 *
 	 * @return LangLinkHandler
 	 */
-	private function getLangLinkHandler( array $otherProjects = array() ) {
+	private function getLangLinkHandler() {
 		$this->mockRepo = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
@@ -92,44 +88,6 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			'srwiki',
 			'wikipedia'
 		);
-	}
-
-	/**
-	 * @param string[] $otherProjects
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ) {
-		$otherProjectsSidebarGenerator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
-
-		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
-				'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory'
-			)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
-			->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
-
-		return $otherProjectsSidebarGeneratorFactory;
-	}
-
-	/**
-	 * @param string[] $otherProjects
-	 *
-	 * @return OtherProjectsSidebarGenerator
-	 */
-	private function getOtherProjectsSidebarGenerator( array $otherProjects ) {
-		$otherProjectsSidebarGenerator = $this->getMockBuilder( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$otherProjectsSidebarGenerator->expects( $this->any() )
-			->method( 'buildProjectLinkSidebar' )
-			->will( $this->returnValue( $otherProjects ) );
-
-		return $otherProjectsSidebarGenerator;
 	}
 
 	/**
@@ -605,15 +563,15 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function getInterwikiCodeFromSiteProvider() {
-		$enwiki = new MediaWikiSite();
+		$enwiki = new Site();
 		$enwiki->setGlobalId( 'enwiki' );
 		$enwiki->setLanguageCode( 'en' );
 
-		$bexold = new MediaWikiSite();
+		$bexold = new Site();
 		$bexold->setGlobalId( 'be_x_oldwiki' );
 		$bexold->setLanguageCode( 'be-x-old' );
 
-		$dewikivoyage = new MediaWikiSite();
+		$dewikivoyage = new Site();
 		$dewikivoyage->setGlobalId( 'dewikivoyage' );
 		$dewikivoyage->setLanguageCode( 'de' );
 
