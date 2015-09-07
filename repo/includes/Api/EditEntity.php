@@ -266,11 +266,18 @@ class EditEntity extends ModifyEntity {
 		}
 
 		$changeOps = $this->getChangeOps( $data, $entity );
+		$summary = $this->getSummary( $params, $entity );
 
-		$this->applyChangeOp( $changeOps, $entity );
+		$changeOpsArray = $changeOps->getChangeOps();
+		if ( count( $changeOpsArray ) === 1 && $changeOpsArray[0]->getModuleName() !== null ) {
+			$summary->setModuleName( $changeOpsArray[0]->getModuleName() );
+			$this->applyChangeOp( $changeOpsArray[0], $entity, $summary );
+		} else {
+			$this->applyChangeOp( $changeOps, $entity );
+		}
 
 		$this->buildResult( $entity );
-		return $this->getSummary( $params );
+		return $summary;
 	}
 
 	/**

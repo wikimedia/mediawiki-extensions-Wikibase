@@ -145,4 +145,11 @@ class ChangeOpDescription extends ChangeOpBase {
 		return $result;
 	}
 
+	/**
+	 * @see ChangeOp::getModuleName()
+	 */
+	public function getModuleName() {
+		return 'wbsetdescription';
+	}
+
 }
