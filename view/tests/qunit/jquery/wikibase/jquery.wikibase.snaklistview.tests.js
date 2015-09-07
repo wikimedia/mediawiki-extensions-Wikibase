@@ -675,7 +675,7 @@
 		/**
 		 * Returns a string representing the state a snaklistview's snakviews are in.
 		 *
-		 * @param {$.wikibase.snaklistview} snaklistview
+		 * @param {jQuery.wikibase.snaklistview} snaklistview
 		 * @return {string}
 		 */
 		function getSnakviewStates( snaklistview ) {
