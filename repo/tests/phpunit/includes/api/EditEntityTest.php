@@ -115,7 +115,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 							'badges' => array( '%Q42%', '%Q149%' )
 						)
 					),
-					'labels' => array( 'en' => 'A Label' )
+					'labels' => array( 'en' => 'A Label' ),
+					'summary' => 'wbsetlabel-add'
 				)
 			),
 			'add a description..' => array(
@@ -129,7 +130,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 						)
 					),
 					'labels' => array( 'en' => 'A Label' ),
-					'descriptions' => array( 'en' => 'DESC' )
+					'descriptions' => array( 'en' => 'DESC' ),
+					'summary' => 'wbsetdescription-add'
 				)
 			),
 			'remove a sitelink..' => array(
@@ -137,10 +139,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
 			'remove a label..' => array(
 				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":""}}}' ),
-				'e' => array( 'descriptions' => array( 'en' => 'DESC' ) ) ),
+				'e' => array( 'descriptions' => array( 'en' => 'DESC' ), 'summary' => 'wbsetlabel-remove' ) ),
 			'remove a description..' => array(
 				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":""}}}' ),
-				'e' => array( 'type' => 'item' ) ),
+				'e' => array( 'type' => 'item', 'summary' => 'wbsetdescription-remove' ) ),
 			'clear an item with some new value' => array(
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}', 'clear' => '' ),
 				'e' => array(
@@ -163,7 +165,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'labels' => array( 'en' => 'A Label', 'sv' => 'SVLabel' ) ) ),
 			'remove a label with remove' => array(
 				'p' => array( 'data' => '{"labels":{"en":{"language":"en","remove":true}}}' ),
-				'e' => array( 'labels' => array( 'sv' => 'SVLabel' ) ) ),
+				'e' => array( 'labels' => array( 'sv' => 'SVLabel' ), 'summary' => 'wbsetlabel-remove' ) ),
 			'override and add 2 descriptions' => array(
 				'p' => array( 'clear' => '', 'data' => '{"descriptions":{'
 					. '"en":{"language":"en","value":"DESC1"},'
@@ -171,7 +173,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'descriptions' => array( 'en' => 'DESC1', 'de' => 'DESC2' ) ) ),
 			'remove a description with remove' => array(
 				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","remove":true}}}' ),
-				'e' => array( 'descriptions' => array( 'de' => 'DESC2' ) ) ),
+				'e' => array( 'descriptions' => array( 'de' => 'DESC2' ), 'summary' => 'wbsetdescription-remove' ) ),
 			'override and add 2 sitelinks..' => array(
 				'p' => array( 'data' => '{"sitelinks":{'
 					. '"dewiki":{"site":"dewiki","title":"BAA"},'
@@ -416,7 +418,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 		// -- check the edit summary --------------------------------------------
 		if ( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ) {
-			$this->assertRevisionSummary( array( 'wbeditentity' ), $result['entity']['lastrevid'] );
+			$this->assertRevisionSummary(
+				array( isset( $expected['summary'] ) ? $expected['summary'] : 'wbeditentity' ),
+				$result['entity']['lastrevid']
+			);
 			if ( array_key_exists( 'summary', $params ) ) {
 				$this->assertRevisionSummary( '/' . $params['summary'] . '/', $result['entity']['lastrevid'] );
 			}
