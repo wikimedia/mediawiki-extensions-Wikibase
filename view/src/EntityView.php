@@ -2,10 +2,8 @@
 
 namespace Wikibase\View;
 
-use Html;
 use InvalidArgumentException;
 use Language;
-use ParserOutput;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityRevision;

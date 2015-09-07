@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Repo\Api;
 
-use ApiBase;
 use ApiMain;
 use FauxRequest;
 use Wikibase\DataModel\Entity\Item;

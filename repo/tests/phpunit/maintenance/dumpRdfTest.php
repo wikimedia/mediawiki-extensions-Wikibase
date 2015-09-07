@@ -98,7 +98,7 @@ class DumpRdfTest extends MediaWikiTestCase {
 					new Statement(
 						new PropertySomeValueSnak( new PropertyId( 'P12' ) ),
 						$snakList,
-						new Referencelist( array(
+						new ReferenceList( array(
 							new Reference( array(
 								new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'refSnakVal' ) ),
 								new PropertyNoValueSnak( new PropertyId( 'P12' ) ),

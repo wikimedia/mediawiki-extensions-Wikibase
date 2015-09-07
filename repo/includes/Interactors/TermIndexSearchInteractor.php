@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Interactors;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;

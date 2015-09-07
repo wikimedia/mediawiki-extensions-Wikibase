@@ -7,7 +7,6 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use FormatJson;
 use UsageException;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
