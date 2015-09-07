@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests;
 
 use Language;
-use MediaWikiSite;
+use Site;
 use SiteStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
@@ -136,7 +136,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	private function getSiteStore() {
 		$siteStore = new MockSiteStore();
 
-		$site = new MediaWikiSite();
+		$site = new Site();
 		$site->setGlobalId( 'enwiki' );
 		$site->setGroup( 'wikipedia' );
 
