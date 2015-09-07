@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_9804b8ca",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-07T09:42:56Z",
+      "side": 1,
+      "message": "@since tags for private properties should be removed. Done in Iaf3a380.",
+      "revId": "b47c27588f6370cca90393f9f4e2d10c72f26f96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_f8613c9e",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-07T09:42:56Z",
+      "side": 1,
+      "message": "Unused. Fixed in Iaf3a380.",
+      "revId": "b47c27588f6370cca90393f9f4e2d10c72f26f96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
