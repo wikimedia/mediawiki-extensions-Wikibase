@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_18cbe8a7",
+        "filename": "view/tests/phpunit/EntityTermsViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-07T08:59:45Z",
+      "side": 1,
+      "message": "Just a few months ago I got a -1 for doing exactly that. I was told that the provider returns exactly these two arguments and all tests using the provider should list all parameters, even if they are unused in the test. Today I agree with that: list all arguments. Not really relevant in this case, but this makes me wonder: will we change details like this back and forth every time somebody feels like?",
+      "revId": "4f2537d6d1d3c87337e54f40ab660d3784d970d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_38c6e49d",
+        "filename": "view/tests/phpunit/StatementGroupListViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-07T08:59:45Z",
+      "side": 1,
+      "message": "Similar problem. getHtmlForClaim does have these two parameters. They should (in my opinion they *must*) all be listed. Otherwise it\u0027s harder to find such stuff, if it looks slightly different everywhere.",
+      "revId": "4f2537d6d1d3c87337e54f40ab660d3784d970d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
