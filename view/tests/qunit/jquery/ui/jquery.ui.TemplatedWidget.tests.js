@@ -22,8 +22,9 @@ QUnit.test( 'Create & destroy', function( assert ) {
 
 	/**
 	 * @param {Object} templateShortCuts
+	 * @param {jQuery} $subject
 	 */
-	function checkShortCuts( templateShortCuts ) {
+	function checkShortCuts( templateShortCuts, $subject ) {
 		$.each( templateShortCuts, function( key, selector ) {
 			assert.ok(
 				$subject.data( 'TemplatedWidget' )[key] instanceof $,
@@ -57,7 +58,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		);
 
 		if( testSets[i][1].templateShortCuts ) {
-			checkShortCuts( testSets[i][1].templateShortCuts );
+			checkShortCuts( testSets[i][1].templateShortCuts, $subject );
 		}
 
 		$subject.data( 'TemplatedWidget' ).destroy();
