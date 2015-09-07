@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_fbee16e7",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-07T13:26:44Z",
+      "side": 1,
+      "message": "Why not? See wikibase.special.languageLabelDescriptionAliases.js",
+      "parentUuid": "6ec1af18_3bf33ee4",
+      "revId": "68ba328da9363f79539da712abcda0ff5620bfa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_9b04b2ca",
         "filename": "repo/includes/specials/SpecialNewEntity.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-07T13:00:18Z",
       "side": 1,
       "message": "Please avoid access to global state. We don\u0027t have proper dependency injection in this class yet, but please at least move access to global state to the constructor.",
+      "revId": "68ba328da9363f79539da712abcda0ff5620bfa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_3b9d7e5b",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-07T13:26:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_9b04b2ca",
       "revId": "68ba328da9363f79539da712abcda0ff5620bfa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_1bd52213",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-07T13:26:44Z",
+      "side": 1,
+      "message": "What to do then?",
+      "parentUuid": "6ec1af18_bb072ecc",
+      "revId": "68ba328da9363f79539da712abcda0ff5620bfa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_1bf8c2be",
         "filename": "repo/includes/specials/SpecialNewEntity.php",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2015-09-07T13:00:18Z",
       "side": 1,
       "message": "The logic constructing $options should be in a separate private method.\nAnd $options is not a good name, it should be $languageOptions.",
+      "revId": "68ba328da9363f79539da712abcda0ff5620bfa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_fb737646",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-07T13:26:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_1bf8c2be",
       "revId": "68ba328da9363f79539da712abcda0ff5620bfa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
