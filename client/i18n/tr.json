@@ -7,7 +7,8 @@
 			"Sayginer",
 			"Ömer Berkay",
 			"Stultiwikia",
-			"Mavrikant"
+			"Mavrikant",
+			"KorkmazO"
 		]
 	},
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
@@ -35,12 +36,8 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} değişikliği",
 	"wikibase-watchlist-show-changes-pref": "İzleme listemde {{WBREPONAME}} değişikliklerini göster",
-	"special-unconnectedpages": "Öğelerine bağlanmamış sayfalar",
-	"wikibase-unconnectedpages-legend": "Bağlanmamış sayfa seçenekleri",
-	"wikibase-unconnectedpages-page": "Sonuç listesini şu sayfadan başlat:",
-	"wikibase-unconnectedpages-submit": "Git",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" geçerli bir dil kodu değil.",
-	"wikibase-unconnectedpages-iwdata-label": "Sadece dillerarası bağlantıları olan sayfalar",
+	"unconnectedpages": "Öğelerine bağlanmamış sayfalar",
+	"wikibase-pageswithbadges-submit": "Sayfaları göster",
 	"wikibase-otherprojects": "Diğer projeler",
 	"wikibase-otherprojects-beta-message": "Diğer projeler kenar çubuğu",
 	"wikibase-otherprojects-beta-description": "Kenar çubuğuna, {{WBREPONAME}} bilgilerine dayalı olarak diğer Wikimedia projelerine bağlantı veren bir \"{{int:wikibase-otherprojects}}\" ekler."
