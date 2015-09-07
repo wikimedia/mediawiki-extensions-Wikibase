@@ -16,6 +16,24 @@
       "revId": "2033c57d5525a792adb3499f79e6d60021858ee2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8789b1f0",
+        "filename": "repo/includes/PropertyInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-09-07T22:47:25Z",
+      "side": 1,
+      "message": "Not an ArrayObject. You\u0027re correct this won\u0027t work though",
+      "parentUuid": "6ec1af18_d601b108",
+      "revId": "2033c57d5525a792adb3499f79e6d60021858ee2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
