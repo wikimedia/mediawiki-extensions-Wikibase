@@ -4,9 +4,9 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\NumberValue;
 use DataValues\QuantityValue;
+use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
+use ValueFormatters\NumberLocalizer;
 use Wikibase\Lib\QuantityDetailsFormatter;
 
 /**
@@ -20,11 +20,9 @@ use Wikibase\Lib\QuantityDetailsFormatter;
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */
-class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
+class QuantityDetailsFormatterTest extends PHPUnit_Framework_TestCase {
 
-	private function newFormatter( FormatterOptions $options = null ) {
-		$numberLocalizer = new BasicNumberLocalizer();
-
+	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
 		$unitFormatter = $this->getMockBuilder( 'ValueFormatters\QuantityUnitFormatter' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -34,28 +32,26 @@ class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 				return $numberText . ' ' . $unit;
 			} ) );
 
-		return new QuantityDetailsFormatter( $numberLocalizer, $unitFormatter, $options );
+		return new QuantityDetailsFormatter(
+			$numberLocalizer ?: new BasicNumberLocalizer(),
+			$unitFormatter
+		);
 	}
 
 	/**
 	 * @dataProvider quantityFormatProvider
 	 */
-	public function testFormat( $value, $options, $pattern ) {
-		$formatter = $this->newFormatter( $options );
+	public function testFormat( $value, $pattern ) {
+		$formatter = $this->newFormatter();
 
 		$html = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $html );
 	}
 
 	public function quantityFormatProvider() {
-		$options = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => 'en'
-		) );
-
 		return array(
 			array(
 				QuantityValue::newFromNumber( '+5', '1', '+6', '+4' ),
-				$options,
 				'@' . implode( '.*',
 					array(
 						'<h4[^<>]*>[^<>]*\b5\b[^<>]*1[^<>]*</h4>',
@@ -66,7 +62,28 @@ class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 					)
 				) . '@s'
 			),
+			'HTML injection' => array(
+				QuantityValue::newFromNumber( '+5', '<a>m</a>', '+6', '+4' ),
+				'@\b5 &lt;a&gt;m&lt;/a&gt;@'
+			),
 		);
+	}
+
+	public function testGivenHtmlCharacters_formatEscapesHtmlCharacters() {
+		$unitFormatter = $this->getMockBuilder( 'ValueFormatters\NumberLocalizer' )
+			->disableOriginalConstructor()
+			->getMock();
+		$unitFormatter->expects( $this->any() )
+			->method( 'localizeNumber' )
+			->will( $this->returnValue( '<a>+2</a>' ) );
+
+		$formatter = $this->newFormatter( $unitFormatter );
+		$value = QuantityValue::newFromNumber( '+2', '<a>m</a>', '+2', '+2' );
+
+		$html = $formatter->format( $value );
+		$this->assertNotContains( '<a>', $html );
+		$this->assertContains( '&lt;a&gt;', $html );
+		$this->assertNotContains( '&amp;', $html );
 	}
 
 	public function testFormatError() {
