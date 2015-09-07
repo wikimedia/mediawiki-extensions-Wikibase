@@ -7,7 +7,6 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
@@ -23,7 +22,7 @@ class PropertyInfoBuilder {
 	/**
 	 * @var PropertyId|null
 	 */
-	private $formatterUrlProperty = null;
+	private $formatterUrlProperty;
 
 	/**
 	 * @param PropertyId|null $formatterUrlProperty
@@ -33,8 +32,12 @@ class PropertyInfoBuilder {
 	}
 
 	/**
+	 * @see PropertyInfoTable::setPropertyInfo
+	 *
 	 * @param Property $property
-	 * @return array
+	 *
+	 * @return array Information to be stored in the "pi_info" column of the "wb_property_info"
+	 * table. Must be an array and can contain anything that can be encoded by json_encode.
 	 */
 	public function buildPropertyInfo( Property $property ) {
 		$info = array(
@@ -51,7 +54,9 @@ class PropertyInfoBuilder {
 
 	/**
 	 * @param StatementList $statements
-	 * @return string|null
+	 *
+	 * @return string|null The string value of the main snak of the first best
+	 * "formatterUrlProperty" statements, if such exists. Null otherwise.
 	 */
 	private function getFormatterUrl( StatementList $statements ) {
 		if ( $this->formatterUrlProperty === null ) {
@@ -63,7 +68,6 @@ class PropertyInfoBuilder {
 			return null;
 		}
 
-		/** @var Statement $statement */
 		$statementArray = $bestStatements->toArray();
 		$mainSnak = $statementArray[0]->getMainSnak();
 		if ( !( $mainSnak instanceof PropertyValueSnak ) ) {
