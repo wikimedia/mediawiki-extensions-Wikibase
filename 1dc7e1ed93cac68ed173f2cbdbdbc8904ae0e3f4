@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_f1df17d9",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-07T19:05:58Z",
+      "side": 1,
+      "message": "Oh, right, this is now pointless. Previously, repo and client were using the same global array.\n\nHm, now I have to opposite problem: when repo and client are active on the same wiki, the client code doesn\u0027t benefot from the repo-aware formatter...",
+      "parentUuid": "6ec1af18_9160132f",
+      "revId": "1dc7e1ed93cac68ed173f2cbdbdbc8904ae0e3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_715d677d",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 28
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-07T18:58:23Z",
       "side": 1,
       "message": "Why protected?",
+      "revId": "1dc7e1ed93cac68ed173f2cbdbdbc8904ae0e3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_71e3279c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-07T19:05:58Z",
+      "side": 1,
+      "message": "Hell if I know. Whut?",
+      "parentUuid": "6ec1af18_715d677d",
       "revId": "1dc7e1ed93cac68ed173f2cbdbdbc8904ae0e3f4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
