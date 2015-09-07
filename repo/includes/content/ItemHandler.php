@@ -78,7 +78,7 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
 	public function getActionOverrides() {
 		return array(

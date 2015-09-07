@@ -71,6 +71,12 @@ class PropertyInfoTableBuilder {
 	 */
 	private $batchSize = 100;
 
+	/**
+	 * @param PropertyInfoTable $propertyInfoTable
+	 * @param EntityLookup $entityLookup
+	 * @param PropertyInfoBuilder $propertyInfoBuilder
+	 * @param bool $useRedirectTargetColumn
+	 */
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,
 		EntityLookup $entityLookup,
@@ -264,6 +270,9 @@ class PropertyInfoTableBuilder {
 		);
 	}
 
+	/**
+	 * @param string $msg
+	 */
 	private function reportMessage( $msg ) {
 		if ( $this->reporter ) {
 			$this->reporter->reportMessage( $msg );

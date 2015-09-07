@@ -61,6 +61,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser
 	 * @param PropertyInfoStore $infoStore
+	 * @param PropertyInfoBuilder $propertyInfoBuilder
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
@@ -108,7 +109,7 @@ class PropertyHandler extends EntityHandler {
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
 	public function getActionOverrides() {
 		return array(
