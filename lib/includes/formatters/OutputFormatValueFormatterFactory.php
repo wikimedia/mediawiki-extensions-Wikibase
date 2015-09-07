@@ -41,6 +41,11 @@ class OutputFormatValueFormatterFactory {
 	private $defaultLanguage;
 
 	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	private $languageFallbackChainFactory;
+
+	/**
 	 * @param callable[] $factoryFunctions An associative array mapping types to factory
 	 * functions. Type names must use the "PT:" prefix for property types (data types),
 	 * and "VT:" for value types, to be compatible with the convention used by
@@ -51,12 +56,14 @@ class OutputFormatValueFormatterFactory {
 	 * format, or null if no formatter for the requested target format is known.
 	 *
 	 * @param Language $defaultLanguage
+	 * @param LanguageFallbackChainFactory $fallbackChainFactory
 	 */
-	public function __construct( array $factoryFunctions, Language $defaultLanguage ) {
+	public function __construct( array $factoryFunctions, Language $defaultLanguage, LanguageFallbackChainFactory $fallbackChainFactory ) {
 		Assert::parameterElementType( 'callable', $factoryFunctions, '$factoryFunctions' );
 
 		$this->factoryFunctions = $factoryFunctions;
 		$this->defaultLanguage = $defaultLanguage;
+		$this->languageFallbackChainFactory = $fallbackChainFactory;
 	}
 
 	/**
@@ -90,8 +97,6 @@ class OutputFormatValueFormatterFactory {
 	 * @todo: this shouldn't be public at all. Perhaps factor it out into a helper class.
 	 */
 	public function applyLanguageDefaults( FormatterOptions $options ) {
-		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
-
 		if ( !$options->hasOption( ValueFormatter::OPT_LANG ) ) {
 			$options->setOption( ValueFormatter::OPT_LANG, $this->defaultLanguage->getCode() );
 		}
@@ -111,7 +116,7 @@ class OutputFormatValueFormatterFactory {
 
 			$options->setOption(
 				FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN,
-				$languageFallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode )
+				$this->languageFallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode )
 			);
 		}
 

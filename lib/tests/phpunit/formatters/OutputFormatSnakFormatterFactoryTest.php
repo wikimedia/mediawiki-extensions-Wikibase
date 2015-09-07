@@ -9,6 +9,7 @@ use Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
@@ -43,7 +44,12 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );
 
-		$valueFormatterFactory = new OutputFormatValueFormatterFactory( $callbacks, Language::factory( 'en' ) );
+		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
+			$callbacks,
+			Language::factory( 'en' ),
+			new LanguageFallbackChainFactory()
+		);
+		
 		return new OutputFormatSnakFormatterFactory( $valueFormatterFactory, $dataTypeLookup, $dataTypeFactory );
 	}
 
