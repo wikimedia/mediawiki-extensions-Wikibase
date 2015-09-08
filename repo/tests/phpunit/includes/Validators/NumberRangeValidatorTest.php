@@ -8,7 +8,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 /**
  * @covers \Wikibase\Repo\Validators\NumberRangeValidator
  *
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *

@@ -9,7 +9,7 @@ use Wikibase\Repo\Validators\NotEntityIdValidator;
 /**
  * @covers \Wikibase\Repo\Validators\NotEntityIdValidator
  *
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
