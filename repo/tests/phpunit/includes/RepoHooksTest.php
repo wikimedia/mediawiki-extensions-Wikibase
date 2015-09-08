@@ -128,7 +128,7 @@ XML
     <revision>
       <contributor><username>Tester</username><id>0</id></contributor>
       <comment>Test</comment>
-      <text>{ "id":"Q123" }</text>
+      <text>{ "type": "item", "id":"Q123" }</text>
       <model>wikibase-item</model>
       <format>application/json</format>
     </revision>
@@ -150,7 +150,7 @@ XML
     <revision>
       <contributor><username>Tester</username><id>0</id></contributor>
       <comment>Test</comment>
-      <text>{ "id":"Q123" }</text>
+      <text>{ "type": "item", "id":"Q123" }</text>
       <model>wikibase-item</model>
       <format>application/json</format>
     </revision>
