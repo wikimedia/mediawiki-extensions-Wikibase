@@ -3,6 +3,7 @@
 
 namespace Wikibase\Client\Specials;
 
+use HTMLForm;
 use Html;
 use InvalidArgumentException;
 use Linker;
@@ -120,50 +121,37 @@ class SpecialPagesWithBadges extends QueryPage {
 	 * @return string
 	 */
 	public function getPageHeader() {
-		return Html::openElement(
-			'form',
-			array(
-				'action' => $this->getPageTitle()->getLocalURL()
-			)
-		) .
-		Html::openElement( 'fieldset' ) .
-		Html::element(
-			'legend',
-			array(),
-			$this->msg( 'wikibase-pageswithbadges-legend' )->text()
-		) .
-		Html::openElement( 'p' ) .
-		Html::element(
-			'label',
-			array(
-				'for' => 'wb-pageswithbadges-badge'
-			),
-			$this->msg( 'wikibase-pageswithbadges-badge' )->text()
-		) . ' ' .
-		Html::rawElement(
-			'select',
-			array(
+		$formDescriptor = array(
+			'badge' => array(
 				'name' => 'badge',
+				'type' => 'select',
 				'id' => 'wb-pageswithbadges-badge',
-				'class' => 'wb-select'
+				'cssclass' => 'wb-select',
+				'label-message' => 'wikibase-pageswithbadges-badge',
+				'options' => $this->getOptionsArray()
 			),
-			$this->getOptionsHtml()
-		) . ' ' .
-		Html::input(
-			'',
-			$this->msg( 'wikibase-pageswithbadges-submit' )->text(),
-			'submit',
-			array(
+			'submit' => array(
+				'name' => '',
+				'type' => 'submit',
 				'id' => 'wikibase-pageswithbadges-submit',
-				'class' => 'wb-input-button'
+				'cssclass' => 'wb-input-button',
+				'default' => $this->msg( 'wikibase-pageswithbadges-submit' )->text()
 			)
-		) .
-		Html::closeElement( 'p' ) .
-		Html::closeElement( 'fieldset' ) .
-        Html::closeElement( 'form' );
+		);
+
+		if ( $this->badgeId !== null ) {
+			$formDescriptor['badge']['default'] = $this->badgeId->getSerialization();
+		}
+
+		return HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
+			->setMethod( 'get' )
+			->setWrapperLegendMsg( 'wikibase-pageswithbadges-legend' )
+			->suppressDefaultSubmit()
+			->prepareForm()
+			->getHTML( '' );
 	}
 
-	private function getOptionsHtml() {
+	private function getOptionsArray() {
 		/** @var ItemId[] $badgeItemIds */
 		$badgeItemIds = array_map(
 			function( $badgeId ) {
@@ -177,7 +165,7 @@ class SpecialPagesWithBadges extends QueryPage {
 			$badgeItemIds
 		);
 
-		$html = '';
+		$options = array();
 
 		foreach ( $this->badgeIds as $badgeId ) {
 			$label = $labelLookup->getLabel( new ItemId( $badgeId ) );
@@ -185,17 +173,10 @@ class SpecialPagesWithBadges extends QueryPage {
 			// show plain id if no label has been found
 			$label = $label === null ? $badgeId : $label->getText();
 
-			$html .= Html::element(
-				'option',
-				array(
-					'value' => $badgeId,
-					'selected' => $this->badgeId !== null && $this->badgeId->getSerialization() === $badgeId
-				),
-				$label
-			);
+			$options[$label] = $badgeId;
 		}
 
-		return $html;
+		return $options;
 	}
 
 	/**
