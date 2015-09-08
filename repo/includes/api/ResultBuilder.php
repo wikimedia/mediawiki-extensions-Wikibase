@@ -85,7 +85,7 @@ class ResultBuilder {
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteStore $siteStore
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param bool $addMetaData when special elements such as '_element' are needed
+	 * @param bool|null $addMetaData when special elements such as '_element' are needed
 	 */
 	public function __construct(
 		ApiResult $result,
@@ -101,6 +101,7 @@ class ResultBuilder {
 		$this->siteStore = $siteStore;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->addMetaData = $addMetaData;
+
 		$this->modifier = new SerializationModifier();
 		$this->callbackFactory = new CallbackFactory();
 	}
@@ -483,7 +484,16 @@ class ResultBuilder {
 		return $newSerialization;
 	}
 
-	private function filterEntitySerializationUsingLangCodes( array $serialization, $langCodes ) {
+	/**
+	 * @param array $serialization
+	 * @param string[] $langCodes
+	 *
+	 * @return array
+	 */
+	private function filterEntitySerializationUsingLangCodes(
+		array $serialization,
+		array $langCodes
+	) {
 		if ( !empty( $langCodes ) ) {
 			if ( array_key_exists( 'labels', $serialization ) ) {
 				foreach ( $serialization['labels'] as $langCode => $languageArray ) {
@@ -510,7 +520,7 @@ class ResultBuilder {
 		return $serialization;
 	}
 
-	private function getEntitySerializationWithMetaData( $serialization ) {
+	private function getEntitySerializationWithMetaData( array $serialization ) {
 		$arrayTypes = array(
 			'aliases' => 'id',
 			'claims/*/*/references/*/snaks' => 'id',
@@ -981,7 +991,7 @@ class ResultBuilder {
 		);
 	}
 
-	private function getReferenceArrayWithMetaData( $array ) {
+	private function getReferenceArrayWithMetaData( array $array ) {
 		$array = $this->modifier->modifyUsingCallback( $array, 'snaks-order', function ( $array ) {
 			ApiResult::setIndexedTagName( $array, 'property' );
 			return $array;

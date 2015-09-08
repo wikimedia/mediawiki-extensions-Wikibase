@@ -42,7 +42,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param TitleFactory $titleFactory
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $clientSiteId, SiteLinkLookup $siteLinkLookup, TitleFactory $titleFactory ) {
 		if ( !is_string( $clientSiteId ) ) {
@@ -175,7 +175,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 *
 	 * @return ItemId[]
 	 */
-	private function makeItemIds( $numericIds ) {
+	private function makeItemIds( array $numericIds ) {
 		return array_map(
 			function ( $numericId ) {
 				return ItemId::newFromNumber( $numericId );

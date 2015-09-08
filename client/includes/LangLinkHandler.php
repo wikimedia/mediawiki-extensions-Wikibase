@@ -65,7 +65,7 @@ class LangLinkHandler {
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
 	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
 	 * @param EntityLookup $entityLookup An entity lookup service
-	 * @param SiteStore $sites
+	 * @param SiteStore $siteStore
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
 	 */
@@ -128,7 +128,7 @@ class LangLinkHandler {
 	 *
 	 * @return SiteLink[] The SiteLinks in $links, indexed by site ID
 	 */
-	private function indexLinksBySiteId( $links ) {
+	private function indexLinksBySiteId( array $links ) {
 		$indexed = array();
 
 		foreach ( $links as $link ) {
@@ -144,7 +144,7 @@ class LangLinkHandler {
 	 *
 	 * @return SiteLink[] The SiteLinks in $links, indexed by interwiki prefix.
 	 */
-	private function indexLinksByInterwiki( $links ) {
+	private function indexLinksByInterwiki( array $links ) {
 		$indexed = array();
 
 		foreach ( $links as $link ) {

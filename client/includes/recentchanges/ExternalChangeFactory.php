@@ -87,7 +87,7 @@ class ExternalChangeFactory {
 	}
 
 	/**
-	 * @param array $changeParams
+	 * @param mixed $changeParams
 	 *
 	 * @throws UnexpectedValueException
 	 * @return bool
@@ -198,7 +198,7 @@ class ExternalChangeFactory {
 	 *
 	 * @return string
 	 */
-	private function extractComment( $changeParams ) {
+	private function extractComment( array $changeParams ) {
 		$comment = array(
 			'key' => 'wikibase-comment-update'
 		);
@@ -223,7 +223,7 @@ class ExternalChangeFactory {
 	 *
 	 * @return int
 	 */
-	private function countCompositeComments( $comments ) {
+	private function countCompositeComments( array $comments ) {
 		$compositeComments = array_filter( $comments );
 
 		return count( $compositeComments );
