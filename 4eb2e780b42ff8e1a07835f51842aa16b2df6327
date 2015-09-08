@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_8d80efc5",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-08T10:45:37Z",
+      "side": 1,
+      "message": "Do we still need this class at all? The functionality of applyUnit() is now covered by QuantityFormatter, right?",
+      "revId": "4eb2e780b42ff8e1a07835f51842aa16b2df6327",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ad836bcf",
+        "filename": "lib/includes/formatters/VocabularyUriFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-08T10:45:37Z",
+      "side": 1,
+      "message": "What\u0027s a \"unitless unit\"? Mathematically, 1 is \"the unit\", but that\u0027s even more confusing. I\u0027d probably say \"if the URI represents the absence of a unit\", or some such.",
+      "revId": "4eb2e780b42ff8e1a07835f51842aa16b2df6327",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8d678f49",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-08T10:45:37Z",
+      "side": 1,
+      "message": "This registration array no longer exists, it was replaced by the callback definitions in WikibaseRepo.datatypes.php and WikibaseClient.datatypes.php (formatetrs should be registered in both).",
+      "revId": "4eb2e780b42ff8e1a07835f51842aa16b2df6327",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
