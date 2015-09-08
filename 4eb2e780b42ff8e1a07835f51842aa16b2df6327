@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_bb508561",
+        "filename": "lib/includes/formatters/EntityLabelUnitFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-08T14:50:47Z",
+      "side": 1,
+      "message": "Let me please do this in an other patch. Deprecated for now.",
+      "parentUuid": "6ec1af18_8d80efc5",
+      "revId": "4eb2e780b42ff8e1a07835f51842aa16b2df6327",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_ad836bcf",
         "filename": "lib/includes/formatters/VocabularyUriFormatter.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-08T10:45:37Z",
       "side": 1,
       "message": "What\u0027s a \"unitless unit\"? Mathematically, 1 is \"the unit\", but that\u0027s even more confusing. I\u0027d probably say \"if the URI represents the absence of a unit\", or some such.",
+      "revId": "4eb2e780b42ff8e1a07835f51842aa16b2df6327",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_dbda31e9",
+        "filename": "lib/includes/formatters/VocabularyUriFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-08T14:50:47Z",
+      "side": 1,
+      "message": "The term \"unitlessUnitIds\" is not invented in this patch, it already was in your patch Ia6c66f7.",
+      "parentUuid": "6ec1af18_ad836bcf",
       "revId": "4eb2e780b42ff8e1a07835f51842aa16b2df6327",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
