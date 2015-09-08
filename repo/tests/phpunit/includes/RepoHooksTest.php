@@ -40,20 +40,32 @@ class RepoHooksTest extends \MediaWikiTestCase {
 
 	public function revisionInfoProvider() {
 		return array(
-			'empty' => array( array() ),
-			'wikitext' => array( array( 'model' => CONTENT_MODEL_WIKITEXT ) ),
-			'item' => array( array( 'model' => CONTENT_MODEL_WIKIBASE_ITEM ), 'MWException' ),
+			'empty_allowimport' => array( array(), true ),
+			'empty_noimport' => array( array(), true ),
+			'wikitext' => array( array( 'model' => CONTENT_MODEL_WIKITEXT ), true ),
+			'wikitext' => array( array( 'model' => CONTENT_MODEL_WIKITEXT ), false ),
+			'item' => array( array( 'model' => CONTENT_MODEL_WIKIBASE_ITEM ), false, 'MWException' ),
+			'item' => array( array( 'model' => CONTENT_MODEL_WIKIBASE_ITEM ), true )
 		);
 	}
 
 	/**
 	 * @dataProvider revisionInfoProvider
 	 */
-	public function testOnImportHandleRevisionXMLTag( array $revisionInfo, $expectedException = null ) {
+	public function testOnImportHandleRevisionXMLTag(
+		array $revisionInfo,
+		$allowEntityImport,
+		$expectedException = null
+	) {
 		//NOTE: class is unclear, see Bug T66657. But we don't use that object anyway.
 		$importer = $this->getMockBuilder( 'Import' )
 			->disableOriginalConstructor()
 			->getMock();
+
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
+			'allowEntityImport',
+			$allowEntityImport
+		);
 
 		if ( $expectedException !== null ) {
 			$this->setExpectedException( $expectedException );
