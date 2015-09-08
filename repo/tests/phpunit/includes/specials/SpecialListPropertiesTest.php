@@ -18,9 +18,10 @@ use Wikibase\Store\BufferingTermLookup;
 /**
  * @covers Wikibase\Repo\Specials\SpecialListProperties
  *
+ * @group Database
+ * @group SpecialPage
  * @group Wikibase
  * @group WikibaseRepo
- * @group SpecialPage
  * @group WikibaseSpecialPage
  *
  * @licence GNU GPL v2+
