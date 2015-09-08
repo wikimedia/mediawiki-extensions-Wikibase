@@ -10,7 +10,7 @@ use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
  * @covers Wikibase\Repo\Localizer\GenericExceptionLocalizer
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

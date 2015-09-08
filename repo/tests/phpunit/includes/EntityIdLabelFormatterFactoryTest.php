@@ -10,7 +10,7 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
  * @covers Wikibase\Repo\EntityIdLabelFormatterFactory
  *
  * @group ValueFormatters
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  *
  * @licence GNU GPL v2+

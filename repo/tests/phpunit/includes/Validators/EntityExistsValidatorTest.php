@@ -16,7 +16,7 @@ use Wikibase\Test\MockRepository;
  *
  * @license GPL 2+
  *
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
