@@ -10,7 +10,8 @@
 			"Peadara",
 			"Tarawneh",
 			"زكريا",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Hiba Alshawi"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
@@ -56,6 +57,9 @@
 	"wikibase-error-invalid-entity-id": "المعرِّف الذي أدخلته يجهله النظام. يرجى إدخال معرِّف كائن صالح.",
 	"unconnectedpages": "صفحات غير متصلة بعناصر",
 	"wikibase-unconnectedpages-format-row": "يوجد ({{PLURAL:$1|وصلة بين اللغات|وصلتان بين اللغات|$1 وصلات بين اللغات|$1 وصلة بين اللغات}} في هذه الصفحة)",
+	"pageswithbadges": "الصفحات التي تحوي على باجات",
+	"wikibase-pageswithbadges-legend": "قائمة الصفحات مع باج معين",
+	"wikibase-pageswithbadges-badge": "باج",
 	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
 	"wikibase-otherprojects": "مشاريع أخرى",
