@@ -108,10 +108,6 @@ class GetEntities extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		if ( isset( $params['props'] ) && !empty( $params['props'] ) ) {
-			$this->logFeatureUsage( 'action=wbgetentities&props=' . implode( '|', $params['props'] ) );
-		}
-
 		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
 			$this->errorReporter->dieError(
 				'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages',
