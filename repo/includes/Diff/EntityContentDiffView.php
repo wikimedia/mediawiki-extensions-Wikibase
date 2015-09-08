@@ -18,11 +18,10 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\EntityContent;
-use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -55,7 +54,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * @var EntityIdFormatter
 	 */
-	private $propertyNameFormatter;
+	private $entityIdFormatter;
 
 	/**
 	 * @see DifferenceEngine::__construct
@@ -81,10 +80,17 @@ class EntityContentDiffView extends DifferenceEngine {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
-		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, $langCode );
+		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
+			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$termLookup
+		);
+		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
+			$this->getLanguage(),
+			array() // TODO: populate ids of entities to prefetch
+		);
 
 		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
-		$this->propertyNameFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
+		$this->entityIdFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
 
 		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
 		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
@@ -96,7 +102,7 @@ class EntityContentDiffView extends DifferenceEngine {
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer(
 				new DifferencesSnakVisualizer(
-					$this->propertyNameFormatter,
+					$this->entityIdFormatter,
 					$this->detailedSnakFormatter,
 					$this->terseSnakFormatter,
 					$langCode
@@ -104,11 +110,7 @@ class EntityContentDiffView extends DifferenceEngine {
 				$langCode
 			),
 			$wikibaseRepo->getSiteStore(),
-			new EntityIdHtmlLinkFormatter(
-				$labelDescriptionLookup,
-				$wikibaseRepo->getEntityTitleLookup(),
-				new LanguageNameLookup()
-			)
+			$this->entityIdFormatter
 		);
 	}
 
