@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_36a82cd7",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-09-08T15:23:36Z",
+      "side": 1,
+      "message": "lol",
+      "parentUuid": "6ec1af18_7b3f8682",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_aa2dbbef",
         "filename": "repo/includes/api/MediawikiSearchEntities.php",
         "patchSetId": 6
@@ -208,6 +226,24 @@
       "side": 1,
       "message": "Could just make the foreach give you a key and then use $key + 1?",
       "parentUuid": "6ec1af18_a3bac1b3",
+      "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_76f0f4fa",
+        "filename": "repo/includes/api/MediawikiSearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-09-08T15:23:36Z",
+      "side": 1,
+      "message": "Are u sure about that? https://stackoverflow.com/questions/5835241/phps-count-o1-or-on-for-arrays",
+      "parentUuid": "6ec1af18_4a6bf715",
       "revId": "6f6cfc1850e171da9ed6c238dedf4ecb7579f3e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
