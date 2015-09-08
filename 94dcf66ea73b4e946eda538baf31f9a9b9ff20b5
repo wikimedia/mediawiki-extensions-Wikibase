@@ -16,6 +16,24 @@
       "revId": "94dcf66ea73b4e946eda538baf31f9a9b9ff20b5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5c887722",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-08T18:33:41Z",
+      "side": 1,
+      "message": "Have you really seen what HTMLMultiSelectField looks like?",
+      "parentUuid": "6ec1af18_5c24f759",
+      "revId": "94dcf66ea73b4e946eda538baf31f9a9b9ff20b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
