@@ -104,7 +104,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $format ) );
 
 		$formatterFactory->expects( $this->any() )
-			->method( 'getEntityIdFormater' )
+			->method( 'getEntityIdFormatter' )
 			->will( $this->returnValue( $entityIdFormatter ) );
 
 		return $formatterFactory;

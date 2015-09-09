@@ -173,7 +173,7 @@ class EntityViewFactory {
 					$this->templateFactory,
 					$this->siteStore->getSites(),
 					$editSectionGenerator,
-					$this->plainTextIdFormatterFactory->getEntityIdFormater( $labelDescriptionLookup ),
+					$this->plainTextIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup ),
 					$this->languageNameLookup,
 					$this->badgeItems,
 					$this->specialSiteLinkGroups
@@ -214,7 +214,7 @@ class EntityViewFactory {
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormater( $labelDescriptionLookup );
+		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,

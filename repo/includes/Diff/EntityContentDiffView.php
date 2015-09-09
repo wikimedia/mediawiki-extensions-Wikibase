@@ -84,7 +84,7 @@ class EntityContentDiffView extends DifferenceEngine {
 		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, $langCode );
 
 		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
-		$this->propertyNameFormatter = $htmlFormatterFactory->getEntityIdFormater( $labelDescriptionLookup );
+		$this->propertyNameFormatter = $htmlFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
 
 		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
 		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );

@@ -25,13 +25,13 @@ class EntityIdLabelFormatterFactory implements EntityIdFormatterFactory {
 	}
 
 	/**
-	 * @see EntityIdFormatterFactory::getEntityIdFormater
+	 * @see EntityIdFormatterFactory::getEntityIdFormatter
 	 *
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return EntityIdLabelFormatter
 	 */
-	public function getEntityIdFormater( LabelDescriptionLookup $labelDescriptionLookup ) {
+	public function getEntityIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
 		return new EntityIdLabelFormatter( $labelDescriptionLookup );
 	}
 

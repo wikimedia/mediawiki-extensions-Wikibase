@@ -49,13 +49,13 @@ class EntityIdHtmlLinkFormatterFactory implements EntityIdFormatterFactory {
 	}
 
 	/**
-	 * @see EntityIdFormatterFactory::getEntityIdFormater
+	 * @see EntityIdFormatterFactory::getEntityIdFormatter
 	 *
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 *
 	 * @return EntityIdHtmlLinkFormatter
 	 */
-	public function getEntityIdFormater( LabelDescriptionLookup $labelDescriptionLookup ) {
+	public function getEntityIdFormatter( LabelDescriptionLookup $labelDescriptionLookup ) {
 		return new EntityIdHtmlLinkFormatter(
 			$labelDescriptionLookup,
 			$this->titleLookup,

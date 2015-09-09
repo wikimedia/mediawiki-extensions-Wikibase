@@ -107,7 +107,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyInfoStore = $propertyInfoStore;
-		$this->entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormater(
+		$this->entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter(
 			$this->labelDescriptionLookup
 		);
 		$this->titleLookup = $titleLookup;
