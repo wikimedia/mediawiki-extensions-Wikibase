@@ -3,7 +3,8 @@
 		"authors": [
 			"Amir a57",
 			"Koroğlu",
-			"Mousa"
+			"Mousa",
+			"Alp Er Tunqa"
 		]
 	},
 	"tooltip-t-wikibase": "آیتمه باغلانتی وئری مخزنی ایله ایلگی سی وار",
@@ -15,6 +16,6 @@
 	"wikibase-rc-hide-wikidata-hide": "گیزلت",
 	"wikibase-rc-hide-wikidata-show": "گؤرست",
 	"wikibase-rc-wikibase-edit-letter": "د",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دَییشیکلیغی",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دَییشیکلیگی",
 	"wikibase-otherprojects": "آیری پروژه‌لر"
 }
