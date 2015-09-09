@@ -1,0 +1,66 @@
+{
+	"entities": {
+		"$itemIdUnderTest": {
+			"type": "item",
+			"id": "$itemIdUnderTest",
+			"labels": {
+				"en": {
+					"language": "en",
+					"value": "en-label"
+				},
+				"de": {
+					"language": "de",
+					"value": "de-label"
+				}
+			},
+			"descriptions": {
+				"de": {
+					"language": "de",
+					"value": "de-desc"
+				},
+				"es": {
+					"language": "es",
+					"value": "es-desc"
+				}
+			},
+			"aliases": {
+				"pt": [
+					{
+						"language": "pt",
+						"value": "AA"
+					},
+					{
+						"language": "pt",
+						"value": "BB"
+					}
+				],
+				"en": [
+					{
+						"language": "en",
+						"value": "AA-en"
+					},
+					{
+						"language": "en",
+						"value": "BB-en"
+					}
+				]
+			},
+			"claims": {
+				"$propertyIdUnderTest": [
+					{
+						"mainsnak": {
+							"snaktype": "novalue",
+							"property": "$propertyIdUnderTest",
+							"datatype": "string"
+						},
+						"type": "statement",
+						"id": "$itemIdUnderTest$1111AAAA-43cb-ed6d-3adb-760e85bd17ee",
+						"rank": "normal"
+					}
+				]
+			},
+			"sitelinks": {}
+		}
+	},
+	"success": 1
+}
