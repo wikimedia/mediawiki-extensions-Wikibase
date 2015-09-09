@@ -10,7 +10,7 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
  * @covers Wikibase\Repo\Localizer\MessageExceptionLocalizer
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

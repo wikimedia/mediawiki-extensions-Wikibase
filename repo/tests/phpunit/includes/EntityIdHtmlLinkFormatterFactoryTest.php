@@ -10,7 +10,7 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
  * @covers Wikibase\Repo\EntityIdHtmlLinkFormatterFactory
  *
  * @group ValueFormatters
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  *
  * @licence GNU GPL v2+

@@ -9,7 +9,7 @@ use Wikibase\Repo\Validators\NumberValidator;
  *
  * @license GPL 2+
  *
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
