@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a414dded",
+        "filename": "repo/includes/Diff/EntityContentDiffView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-09-09T02:35:24Z",
+      "side": 1,
+      "message": "The above stuff could be in a factory function. Also seems to suffer from feature envy of WikibaseRepo",
+      "revId": "3bfd0865dddb7513db58412680c4bdb6091f0b16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
