@@ -69,15 +69,18 @@
 		 * @param {jQuery} $extender
 		 */
 		init: function( $extender ) {
-			var label = this._messageProvider.getMessage(
-				'valueview-expertextender-unitsuggester-label'
-			);
+			var upstreamValue = this._getUpstreamValue(),
+				label = this._messageProvider.getMessage(
+					'valueview-expertextender-unitsuggester-label'
+				);
+
 			this.$selector.unitsuggester( {
 				language: this._options.language || null,
 				vocabularyLookupApiUrl: this._options.vocabularyLookupApiUrl || null,
 				change: this._onValueChange,
-				defaultSelectedUrl: this._getUpstreamValue().conceptUri
+				defaultSelectedUrl: upstreamValue ? upstreamValue.conceptUri : null
 			} );
+
 			$extender
 				.append( $( '<span>' ).text( label ) )
 				.append( this.$selector );
@@ -87,13 +90,16 @@
 		 * Callback for the `onInitialShow` `ExpertExtender` event.
 		 */
 		onInitialShow: function() {
-			var value = this._getUpstreamValue().label;
+			var upstreamValue = this._getUpstreamValue(),
+				value = upstreamValue ? upstreamValue.label : null;
+
 			if( value === '1' ||
 				value === 'http://qudt.org/vocab/unit#Unitless' ||
 				/^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/Q199$/i.test( value )
 			) {
 				value = null;
 			}
+
 			this.$selector.val( value );
 		},
 

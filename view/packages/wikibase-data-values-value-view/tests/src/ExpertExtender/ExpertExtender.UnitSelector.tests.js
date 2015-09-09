@@ -28,17 +28,18 @@
 		function() {
 			return new ExpertExtender.UnitSelector(
 				messageProvider,
-				function() { }
+				function() {
+					return {};
+				}
 			);
 		}
 	);
 
 	QUnit.test( 'getConceptUri() does change if input value changes', function( assert ) {
-		var upstreamValue = 'en';
 		var unitSelector = new ExpertExtender.UnitSelector(
 			messageProvider,
 			function() {
-				return upstreamValue;
+				return { label: 'Ultrameter' };
 			}
 		);
 		var $extender = $( '<div />' );
@@ -53,7 +54,7 @@
 			unitSelector.draw();
 		}
 
-		assert.equal( unitSelector.getConceptUri(), 'en' );
+		assert.equal( unitSelector.getConceptUri(), 'Ultrameter' );
 
 		$extender.find( 'input' ).val( 'foobar' );
 
@@ -64,7 +65,7 @@
 		var unitSelector = new ExpertExtender.UnitSelector(
 			messageProvider,
 			function() {
-				return 'en';
+				return { conceptUri: 'Ultrameter' };
 			}
 		);
 		var $extender = $( '<div />' );
@@ -79,7 +80,7 @@
 			unitSelector.draw();
 		}
 
-		assert.equal( unitSelector.getConceptUri(), 'en' );
+		assert.equal( unitSelector.getConceptUri(), 'Ultrameter' );
 	} );
 
 } )(
