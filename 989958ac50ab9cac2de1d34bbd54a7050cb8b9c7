@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_eddc057a",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-09T14:50:24Z",
+      "side": 1,
+      "message": "We do not need this class any more, right?",
+      "revId": "989958ac50ab9cac2de1d34bbd54a7050cb8b9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
