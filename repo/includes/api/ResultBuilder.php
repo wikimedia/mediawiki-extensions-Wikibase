@@ -311,7 +311,13 @@ class ResultBuilder {
 
 		$this->appendValue( array( 'entities' ), $sourceEntityIdSerialization, $record, 'entity' );
 		if ( $this->addMetaData ) {
-			$this->result->addArrayType( array( 'entities' ), 'array' );
+			$this->result->addArrayType( array( 'entities' ), 'kvp', 'id' );
+			$this->result->addValue(
+				array( 'entities' ),
+				ApiResult::META_KVP_MERGE,
+				true,
+				ApiResult::OVERRIDE
+			);
 		}
 	}
 
@@ -1041,6 +1047,13 @@ class ResultBuilder {
 
 		if ( $this->addMetaData ) {
 			$this->result->addIndexedTagName( 'entities', 'entity' );
+			$this->result->addArrayType( array( 'entities' ), 'kvp', 'id' );
+			$this->result->addValue(
+				array( 'entities' ),
+				ApiResult::META_KVP_MERGE,
+				true,
+				ApiResult::OVERRIDE
+			);
 		}
 
 		$this->missingEntityCounter--;
