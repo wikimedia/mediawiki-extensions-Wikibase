@@ -1,5 +1,11 @@
 # ValueView release notes
 
+## 0.15.4 (2015-09-09)
+
+* `jQuery.valueview.experts.QuantityInput` extracts an optional `.wb-unit` node from the formatted value and passes it to the UnitSelector.
+* Both QuantityInput and UnitSelector use a different format in the `getUpstreamValue` callback.
+* `jQuery.ui.unitsuggester` now supports a `defaultSelectedUrl` option.
+
 ## 0.15.3 (2015-08-27)
 
 * Fixed `jQuery.valueview.experts.QuantityInput` test.
