@@ -329,7 +329,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					),
 				),
 				'_element' => 'entity',
-				'_type' => 'array',
+				'_type' => 'kvp',
+				'_kvpkeyname' => 'id',
+				'_kvpmerge' => true,
 			),
 			'_type' => 'assoc',
 		);
@@ -462,7 +464,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					),
 				),
 				'_element' => 'entity',
-				'_type' => 'array',
+				'_type' => 'kvp',
+				'_kvpkeyname' => 'id',
+				'_kvpmerge' => true,
 			),
 			'_type' => 'assoc',
 		);
@@ -645,7 +649,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					),
 				),
 				'_element' => 'entity',
-				'_type' => 'array',
+				'_type' => 'kvp',
+				'_kvpkeyname' => 'id',
+				'_kvpmerge' => true,
 			),
 			'_type' => 'assoc',
 		);
@@ -1286,6 +1292,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'missing' => '',
 						),
 						'_element' => 'entity',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'id',
+						'_kvpmerge' => true,
 					),
 					'_type' => 'assoc',
 				)
@@ -1301,6 +1310,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'missing' => '',
 						),
 						'_element' => 'entity',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'id',
+						'_kvpmerge' => true,
 					),
 					'_type' => 'assoc',
 				)
@@ -1316,6 +1328,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'missing' => '',
 						),
 						'_element' => 'entity',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'id',
+						'_kvpmerge' => true,
 					),
 					'_type' => 'assoc',
 				)
@@ -1338,6 +1353,9 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'missing' => '',
 						),
 						'_element' => 'entity',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'id',
+						'_kvpmerge' => true,
 					),
 					'_type' => 'assoc',
 				)
