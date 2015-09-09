@@ -18,8 +18,7 @@ module.exports = function ( grunt ) {
 			options: {
 				disallowBlankTranslations: false,
 				disallowDuplicateTranslations: false,
-				disallowUnusedTranslations: false,
-				requireCompleteMessageDocumentation: false
+				disallowUnusedTranslations: false
 			},
 			all: [
 				'client/i18n/',
