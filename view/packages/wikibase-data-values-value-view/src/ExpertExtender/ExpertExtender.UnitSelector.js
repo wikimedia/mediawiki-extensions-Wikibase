@@ -75,7 +75,8 @@
 			this.$selector.unitsuggester( {
 				language: this._options.language || null,
 				vocabularyLookupApiUrl: this._options.vocabularyLookupApiUrl || null,
-				change: this._onValueChange
+				change: this._onValueChange,
+				defaultSelectedUrl: this._getUpstreamValue().conceptUri
 			} );
 			$extender
 				.append( $( '<span>' ).text( label ) )
@@ -86,7 +87,7 @@
 		 * Callback for the `onInitialShow` `ExpertExtender` event.
 		 */
 		onInitialShow: function() {
-			var value = this._getUpstreamValue();
+			var value = this._getUpstreamValue().label;
 			if( value === '1' ||
 				value === 'http://qudt.org/vocab/unit#Unitless' ||
 				/^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/Q199$/i.test( value )
