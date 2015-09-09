@@ -1,5 +1,9 @@
 # ValueView release notes
 
+## 0.15.5 (2015-09-09)
+
+* Fixed `jQuery.valueview.ExpertExtender.UnitSelector` test.
+
 ## 0.15.4 (2015-09-09)
 
 * `jQuery.valueview.experts.QuantityInput` extracts an optional `.wb-unit` node from the formatted value and passes it to the UnitSelector.
