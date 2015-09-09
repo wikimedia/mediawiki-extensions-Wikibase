@@ -34,10 +34,26 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		}
 		if ( $replacements ) {
 			foreach ( $array as $key => $val ) {
-				if ( is_string( $val ) && isset( $replacements[$val] ) ) {
-					$array[$key] = $replacements[$val];
-				} elseif ( is_array( $val ) ) {
-					$array[$key] = $this->replaceIdsInArray( $val );
+				$newKey = null;
+				$newVal = null;
+				foreach ( $replacements as $before => $after ) {
+					if ( is_string( $key ) && strstr( $key, $before ) !== false ) {
+						// replace keys...
+						$newKey = str_replace( $before, $after, $key );
+					}
+					if ( is_string( $val ) && strstr( $val, $before ) !== false ) {
+						// ...and values
+						$newVal = str_replace( $before, $after, $val );
+					} elseif ( is_array( $val ) ) {
+						// recursively
+						$newVal = $this->replaceIdsInArray( $val );
+					}
+				}
+				if ( $newKey !== null ) {
+					$array[$newKey] = $newVal === null ? $val : $newVal;
+					unset( $array[$key] );
+				} elseif ( $newVal !== null ) {
+					$array[$key] = $newVal;
 				}
 			}
 		}
@@ -45,10 +61,16 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 	}
 
 	private function removePageInfoAttributes( array $result, $entityId = null ) {
-		$attributesToRemove = array( 'lastrevid' );
+		$attributesToRemove = array( 'pageid', 'lastrevid', 'modified', 'title', 'ns' );
 
 		foreach ( $attributesToRemove as $attributeToRemove ) {
-			unset( $result['entity'][$attributeToRemove] );
+			if ( isset( $result['entity'] ) ) {
+				unset( $result['entity'][$attributeToRemove] );
+			} elseif ( isset( $result['entities'] ) ) {
+				foreach ( $result['entities'] as $entityId => $serialization ) {
+					unset( $result['entities'][$entityId][$attributeToRemove] );
+				}
+			}
 		}
 
 		return $result;
@@ -70,6 +92,22 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		$printer->execute();
 
 		return json_decode( $printer->getBuffer(), true );
+	}
+
+	public function testGetEntitiesJsonFormat() {
+		$entityRevision = $this->getNewEntityRevision( true );
+		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
+
+		$params = array(
+			'action' => 'wbgetentities',
+			'ids' => $entityId
+		);
+
+		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetEntities', 'wbgetentities', $params );
+		$result = $this->executeApiModule( $module );
+		$actual = $this->removePageInfoAttributes( $result, $entityId );
+
+		$this->assertEquals( $this->getExpectedJson( 'getentities' ), $actual );
 	}
 
 	public function testSetLabelJsonFormat() {
