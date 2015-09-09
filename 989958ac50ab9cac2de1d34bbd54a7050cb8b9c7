@@ -16,6 +16,24 @@
       "revId": "989958ac50ab9cac2de1d34bbd54a7050cb8b9c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_0d5391e3",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-09T14:59:57Z",
+      "side": 1,
+      "message": "It\u0027s actually used in wikibase.special.languageLabelDescriptionAliases.js to find the div to infuse.\nDo you think we can rely on \u0027oo-ui-widget\u0027 instead?",
+      "parentUuid": "6ec1af18_eddc057a",
+      "revId": "989958ac50ab9cac2de1d34bbd54a7050cb8b9c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
