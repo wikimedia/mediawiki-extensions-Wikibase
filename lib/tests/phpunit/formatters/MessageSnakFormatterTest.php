@@ -36,7 +36,7 @@ class MessageSnakFormatterTest extends \MediaWikiTestCase {
 	 */
 	private function getFormatter( $snakType, $format ) {
 		$message = $this->getMockBuilder( 'Message' )
-			->disableOriginalConstructor()
+			->setConstructorArgs( array( 'message') )
 			->getMock();
 
 		foreach ( array( 'parse', 'text', 'plain' ) as $method ) {
