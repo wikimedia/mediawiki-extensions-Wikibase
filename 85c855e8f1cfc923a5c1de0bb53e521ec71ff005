@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_99057ec7",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-10T11:55:37Z",
+      "side": 1,
+      "message": "Can you avoid the backslashes and list all classes in the use section please?",
+      "revId": "85c855e8f1cfc923a5c1de0bb53e521ec71ff005",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
