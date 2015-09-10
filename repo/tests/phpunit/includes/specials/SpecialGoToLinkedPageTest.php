@@ -179,16 +179,9 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 			$this->assertTag( $matcher, $output, "Failed to match html output for: " . $key );
 		}
 
-		$errorMatch = array(
-			'tag' => 'p',
-			'content' => $error,
-			'attributes' => array(
-				'class' => 'error'
-			)
-		);
-
 		if ( !empty( $error ) ) {
-			$this->assertTag( $errorMatch, $output, "Failed to match error: " . $error );
+			$this->assertContains( '<p class="error">' . $error . '</p>', $output,
+				'Failed to match error: ' . $error );
 		}
 	}
 
