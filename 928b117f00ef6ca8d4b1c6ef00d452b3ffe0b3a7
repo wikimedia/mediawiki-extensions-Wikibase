@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_56d2855e",
+        "filename": "view/src/TextInjector.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-10T08:03:48Z",
+      "side": 1,
+      "message": "An array of arrays?",
+      "revId": "928b117f00ef6ca8d4b1c6ef00d452b3ffe0b3a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
