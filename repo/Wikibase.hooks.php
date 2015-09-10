@@ -820,7 +820,7 @@ final class RepoHooks {
 			return;
 		}
 
-		$formatter = new AutoCommentFormatter( $wgLang, $messagePrefix );
+		$formatter = new AutoCommentFormatter( $wgLang, array( 'wikibase-entity', $messagePrefix ) );
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {
