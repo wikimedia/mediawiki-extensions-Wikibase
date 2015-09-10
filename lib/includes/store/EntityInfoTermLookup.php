@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
@@ -44,8 +45,13 @@ class EntityInfoTermLookup implements TermLookup {
 	public function getLabel( EntityId $entityId, $languageCode ) {
 		try {
 			return $this->entityInfo->getLabel( $entityId, $languageCode );
-		} catch ( \OutOfBoundsException $ex ) {
-			throw new TermLookupException( $entityId, array( $languageCode ), $ex->getMessage(), $ex );
+		} catch ( OutOfBoundsException $ex ) {
+			throw new TermLookupException(
+				$entityId,
+				array( $languageCode ),
+				$ex->getMessage(),
+				$ex
+			);
 		}
 	}
 
@@ -53,13 +59,17 @@ class EntityInfoTermLookup implements TermLookup {
 	 * Gets all labels of an Entity with the specified EntityId.
 	 *
 	 * @param EntityId $entityId
-	 * @param string[] $languages
+	 * @param string[] $languageCodes
 	 *
 	 * @throws TermLookupException
 	 * @return string[]
 	 */
-	public function getLabels( EntityId $entityId, array $languages ) {
-		return $this->entityInfo->getLabels( $entityId, $languages );
+	public function getLabels( EntityId $entityId, array $languageCodes ) {
+		try {
+			return $this->entityInfo->getLabels( $entityId, $languageCodes );
+		} catch ( OutOfBoundsException $ex ) {
+			throw new TermLookupException( $entityId, $languageCodes, $ex->getMessage(), $ex );
+		}
 	}
 
 	/**
@@ -74,8 +84,13 @@ class EntityInfoTermLookup implements TermLookup {
 	public function getDescription( EntityId $entityId, $languageCode ) {
 		try {
 			return $this->entityInfo->getDescription( $entityId, $languageCode );
-		} catch ( \OutOfBoundsException $ex ) {
-			throw new TermLookupException( $entityId, array( $languageCode ), $ex->getMessage(), $ex );
+		} catch ( OutOfBoundsException $ex ) {
+			throw new TermLookupException(
+				$entityId,
+				array( $languageCode ),
+				$ex->getMessage(),
+				$ex
+			);
 		}
 	}
 
@@ -83,13 +98,17 @@ class EntityInfoTermLookup implements TermLookup {
 	 * Gets all descriptions of an Entity with the specified EntityId.
 	 *
 	 * @param EntityId $entityId
-	 * @param string[] $languages
+	 * @param string[] $languageCodes
 	 *
 	 * @throws TermLookupException
 	 * @return string[]
 	 */
-	public function getDescriptions( EntityId $entityId, array $languages ) {
-		return $this->entityInfo->getDescriptions( $entityId, $languages );
+	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
+		try {
+			return $this->entityInfo->getDescriptions( $entityId, $languageCodes );
+		} catch ( OutOfBoundsException $ex ) {
+			throw new TermLookupException( $entityId, $languageCodes, $ex->getMessage(), $ex );
+		}
 	}
 
 }
