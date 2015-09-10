@@ -1358,6 +1358,13 @@ class WikibaseRepo {
 		);
 	}
 
+	/**
+	 * @return DataTypeDefinitions
+	 */
+	public function getDataTypeDefinitions() {
+		return $this->dataTypeDefinitions;
+	}
+
 	private function getMonolingualTextLanguages() {
 		if ( $this->monolingualTextLanguages === null ) {
 			$this->monolingualTextLanguages = new WikibaseContentLanguages();
