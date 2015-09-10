@@ -2,12 +2,12 @@
 
 namespace Wikibase\DataModel\Services\Tests\EntityId;
 
-use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 
 /**
@@ -65,7 +65,7 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 				if ( $entityId->getSerialization() === 'Q42' && $languageCode === 'es' ) {
 					return new Term( 'es', 'foo' );
 				} else {
-					throw new OutOfBoundsException( 'Label not found' );
+					throw new LabelDescriptionLookupException( $entityId, 'Label not found' );
 				}
 			} ) );
 

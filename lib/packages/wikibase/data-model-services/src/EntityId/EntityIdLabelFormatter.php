@@ -2,9 +2,9 @@
 
 namespace Wikibase\DataModel\Services\EntityId;
 
-use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 
 /**
@@ -51,12 +51,12 @@ class EntityIdLabelFormatter implements EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return Term|null Null if no label was found in the language or language fallback chain.
+	 * @return Term|null Null if no label was found or the entity does not exist
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
 		try {
 			return $this->labelDescriptionLookup->getLabel( $entityId );
-		} catch ( OutOfBoundsException $e ) {
+		} catch ( LabelDescriptionLookupException $e ) {
 			return null;
 		}
 	}

@@ -1,5 +1,9 @@
 # Wikibase DataModel Services release notes
 
+## Version 2.0.1 (2015-09-10)
+
+* Fixed uncaught exception in EntityIdLabelFormatter::formatEntityId ([T112003](https://phabricator.wikimedia.org/T112003))
+
 ## Version 2.0.0 (2015-09-02)
 
 Moved `EntityIdParser` back to Wikibase DataModel:
