@@ -3,9 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Html;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -45,8 +43,9 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			$propertyIdFormatter
 		);
 
-		$html = $snakHtmlGenerator->getSnakHtml( $snak );
+		$html = $snakHtmlGenerator->getSnakHtml( $snak, true );
 
+		$this->assertContains( '<ID>', $html );
 		foreach ( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
 		}
@@ -117,11 +116,7 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$lookup->expects( $this->any() )
 			->method( 'formatEntityId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
-				$name = $id->getEntityType() . ':' . $id->getSerialization();
-				$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-				return Html::element( 'a', array( 'href' => $url ), $name );
-			} ) );
+			->will( $this->returnValue( '<ID>' ) );
 
 		return $lookup;
 	}

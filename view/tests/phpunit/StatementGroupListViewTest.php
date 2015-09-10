@@ -3,9 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Html;
 use MediaWikiLangTestCase;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -50,17 +48,15 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 		$statements = $this->makeStatements( $propertyId );
 
 		$propertyIdFormatter = $this->getEntityIdFormatter();
-		$link = $this->getLinkForId( $propertyId );
 
 		$statementGroupListView = $this->newStatementGroupListView( $propertyIdFormatter );
 
 		$html = $statementGroupListView->getHtml( $statements );
 
+		$this->assertContains( '<ID>', $html );
 		foreach ( $statements as $statement ) {
 			$this->assertContains( $statement->getGuid(), $html );
 		}
-
-		$this->assertContains( $link, $html );
 	}
 
 	/**
@@ -149,25 +145,14 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @param EntityId $id
-	 *
-	 * @return string HTML
-	 */
-	public function getLinkForId( EntityId $id ) {
-		$name = $id->getEntityType() . ':' . $id->getSerialization();
-		$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-		return Html::element( 'a', array( 'href' => $url ), $name );
-	}
-
-	/**
 	 * @return EntityIdFormatter
 	 */
 	private function getEntityIdFormatter() {
 		$lookup = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 
-		$lookup->expects( $this->any() )
+		$lookup->expects( $this->once() )
 			->method( 'formatEntityId' )
-			->will( $this->returnCallback( array( $this, 'getLinkForId' ) ) );
+			->will( $this->returnValue( '<ID>' ) );
 
 		return $lookup;
 	}
