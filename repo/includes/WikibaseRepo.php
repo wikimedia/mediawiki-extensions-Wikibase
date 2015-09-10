@@ -880,16 +880,18 @@ class WikibaseRepo {
 
 		// Create a new ValueFormatterFactory, and override the formatter for entity IDs.
 		$valueFormatterFactory = $this->newValueFormatterFactory();
-		$valueFormatterFactory->setFormatterFactoryCallback(
-			'VT:wikibase-entityid',
-			function ( $format, FormatterOptions $options ) use ( $idFormatter ) {
-				if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-					return new EntityIdValueFormatter( $idFormatter );
-				} else {
-					return null;
+		foreach ( $this->getEntityFactory()->getEntityTypes() as $entityType ) {
+			$valueFormatterFactory->setFormatterFactoryCallback(
+				"PT:wikibase-$entityType",
+				function ( $format, FormatterOptions $options ) use ( $idFormatter ) {
+					if ( $format === SnakFormatter::FORMAT_PLAIN ) {
+						return new EntityIdValueFormatter( $idFormatter );
+					} else {
+						return null;
+					}
 				}
-			}
-		);
+			);
+		}
 
 		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
