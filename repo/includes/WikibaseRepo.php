@@ -795,9 +795,11 @@ class WikibaseRepo {
 	 * (data type) prefixed with "PT:", or value type prefixed with "VT:". This matches to
 	 * convention used by OutputFormatValueFormatterFactory and DispatchingValueFormatter.
 	 *
+	 * @param string[] $skip Keys to skip default callbacks
+	 *
 	 * @return callable[]
 	 */
-	private function getFormatterFactoryCallbacksByType() {
+	private function getFormatterFactoryCallbacksByType( array $skip = array() ) {
 		$callbacks = array();
 
 		$valueFormatterBuilders = $this->newWikibaseValueFormatterBuilders();
@@ -812,15 +814,17 @@ class WikibaseRepo {
 			$callbacks["PT:$key"] = $formatter;
 		}
 
+		$callbacks = array_diff_key( $callbacks, array_flip( $skip ) );
+
 		return $callbacks;
 	}
 
 	/**
 	 * @return OutputFormatValueFormatterFactory
 	 */
-	protected function newValueFormatterFactory() {
+	protected function newValueFormatterFactory( array $skip = array() ) {
 		return new OutputFormatValueFormatterFactory(
-			$this->getFormatterFactoryCallbacksByType(),
+			$this->getFormatterFactoryCallbacksByType( $skip ),
 			$this->getDefaultLanguage(),
 			new LanguageFallbackChainFactory()
 		);
@@ -879,7 +883,9 @@ class WikibaseRepo {
 		$idFormatter = new EntityIdPlainLinkFormatter( $this->getEntityContentFactory() );
 
 		// Create a new ValueFormatterFactory, and override the formatter for entity IDs.
-		$valueFormatterFactory = $this->newValueFormatterFactory();
+		$valueFormatterFactory = $this->newValueFormatterFactory(
+			array( 'PT:wikibase-item', 'PT:wikibase-property' )
+		);
 		$valueFormatterFactory->setFormatterFactoryCallback(
 			'VT:wikibase-entityid',
 			function ( $format, FormatterOptions $options ) use ( $idFormatter ) {
