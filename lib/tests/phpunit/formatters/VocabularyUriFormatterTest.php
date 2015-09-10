@@ -4,13 +4,17 @@ namespace Wikibase\Lib\Test;
 
 use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\EntityId\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\VocabularyUriFormatter;
 
 /**
  * @covers Wikibase\Lib\VocabularyUriFormatter
+ *
+ * @group Wikibase
+ * @group WikibaseLIb
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -41,7 +45,7 @@ class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getNumericId() > 1000 ) {
-					throw new OutOfBoundsException( 'No such label!' );
+					throw new LabelDescriptionLookupException( $id, 'No such label!' );
 				}
 				return new Term( 'en', 'LABEL:' . $id->getSerialization() );
 			} ) );
