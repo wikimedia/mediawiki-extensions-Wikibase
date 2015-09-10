@@ -269,4 +269,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\PropertyInfoBuilder', $builder );
 	}
 
+	public function testGetDataTypeDefinitions() {
+		$dataTypeDefinitions = $this->getWikibaseRepo()->getDataTypeDefinitions();
+		$this->assertInstanceOf( 'Wikibase\Lib\DataTypeDefinitions', $dataTypeDefinitions );
+	}
+
 }
