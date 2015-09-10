@@ -833,7 +833,7 @@ final class RepoHooks {
 			StubUserLang::unstub( $wgLang );
 		}
 
-		$formatter = new AutoCommentFormatter( $wgLang, $messagePrefix );
+		$formatter = new AutoCommentFormatter( $wgLang, array( 'wikibase-entity', $messagePrefix ) );
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {
