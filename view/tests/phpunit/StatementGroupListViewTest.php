@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Html;
 use MediaWikiLangTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -155,8 +154,8 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 */
 	public function getLinkForId( EntityId $id ) {
 		$name = $id->getEntityType() . ':' . $id->getSerialization();
-		$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-		return Html::element( 'a', array( 'href' => $url ), $name );
+		return '<a href="http://wiki.acme.com/wiki/' . urlencode( $name ) . '">'
+			. htmlspecialchars( $name ) . '</a>';
 	}
 
 	/**

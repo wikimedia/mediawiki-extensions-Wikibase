@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Html;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
@@ -57,8 +56,8 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			->method( 'formatEntityId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				$name = $id->getEntityType() . ':' . $id->getSerialization();
-				$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-				return Html::element( 'a', array( 'href' => $url ), $name );
+				return '<a href="http://wiki.acme.com/wiki/' . urlencode( $name ) . '">'
+					. htmlspecialchars( $name ) . '</a>';
 			} ) );
 
 		return $lookup;
