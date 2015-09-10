@@ -16,6 +16,24 @@
       "revId": "6aea6987f70b6c4db6e35d11088e2a021526bdd3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_19266e12",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-10T13:20:45Z",
+      "side": 1,
+      "message": "i\u0027ll stick to how we had it originally, but add the exception handling here to be consistent with the interface, etc.",
+      "parentUuid": "6ec1af18_99049e82",
+      "revId": "6aea6987f70b6c4db6e35d11088e2a021526bdd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
