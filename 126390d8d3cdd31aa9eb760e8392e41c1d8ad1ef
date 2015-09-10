@@ -16,6 +16,24 @@
       "revId": "126390d8d3cdd31aa9eb760e8392e41c1d8ad1ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_d6e6753f",
+        "filename": "lib/includes/formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-10T08:01:27Z",
+      "side": 1,
+      "message": "We use private by default.",
+      "parentUuid": "6ec1af18_ce8dc886",
+      "revId": "126390d8d3cdd31aa9eb760e8392e41c1d8ad1ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
