@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_99049e82",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-10T13:13:15Z",
+      "side": 1,
+      "message": "Not sure if this change is problematic, but I don\u0027t see the reason for it. \nEntityInfo::getLabel could potentially be optimized internally, we\u0027d miss out on that,.",
+      "revId": "6aea6987f70b6c4db6e35d11088e2a021526bdd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
