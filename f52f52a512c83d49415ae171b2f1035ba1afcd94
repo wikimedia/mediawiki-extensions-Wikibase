@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_59e716e0",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-10T13:14:30Z",
+      "side": 1,
+      "message": "This won\u0027t work since getDesceiptions will return an array of strings, not a single string.",
+      "revId": "f52f52a512c83d49415ae171b2f1035ba1afcd94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
