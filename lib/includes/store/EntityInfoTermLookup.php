@@ -42,24 +42,24 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		try {
-			return $this->entityInfo->getLabel( $entityId, $languageCode );
-		} catch ( \OutOfBoundsException $ex ) {
-			throw new TermLookupException( $entityId, array( $languageCode ), $ex->getMessage(), $ex );
-		}
+		return $this->getLabels( $entityId, array( $languageCode ) );
 	}
 
 	/**
 	 * Gets all labels of an Entity with the specified EntityId.
 	 *
 	 * @param EntityId $entityId
-	 * @param string[] $languages
+	 * @param string[] $languageCodes
 	 *
 	 * @throws TermLookupException
 	 * @return string[]
 	 */
-	public function getLabels( EntityId $entityId, array $languages ) {
-		return $this->entityInfo->getLabels( $entityId, $languages );
+	public function getLabels( EntityId $entityId, array $languageCodes ) {
+		try {
+			return $this->entityInfo->getLabels( $entityId, $languageCodes );
+		} catch ( \OutOfBoundsException $ex ) {
+			throw new TermLookupException( $entityId, $languageCodes, $ex->getMessage(), $ex );
+		}
 	}
 
 	/**
@@ -72,24 +72,24 @@ class EntityInfoTermLookup implements TermLookup {
 	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		try {
-			return $this->entityInfo->getDescription( $entityId, $languageCode );
-		} catch ( \OutOfBoundsException $ex ) {
-			throw new TermLookupException( $entityId, array( $languageCode ), $ex->getMessage(), $ex );
-		}
+		return $this->getDescriptions( $entityId, array( $languageCode ) );
 	}
 
 	/**
 	 * Gets all descriptions of an Entity with the specified EntityId.
 	 *
 	 * @param EntityId $entityId
-	 * @param string[] $languages
+	 * @param string[] $languageCodes
 	 *
 	 * @throws TermLookupException
 	 * @return string[]
 	 */
-	public function getDescriptions( EntityId $entityId, array $languages ) {
-		return $this->entityInfo->getDescriptions( $entityId, $languages );
+	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
+		try {
+			return $this->entityInfo->getDescriptions( $entityId, $languageCodes );
+		} catch ( \OutOfBoundsException $ex ) {
+			throw new TermLookupException( $entityId, $languageCodes, $ex->getMessage(), $ex );
+		}
 	}
 
 }
