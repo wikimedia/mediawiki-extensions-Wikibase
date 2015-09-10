@@ -2,11 +2,11 @@
 
 namespace Wikibase\DataModel\Tests;
 
+use ArrayObject;
 use DataValues\StringValue;
 use ReflectionClass;
 use ReflectionMethod;
 use Wikibase\DataModel\ByPropertyIdArray;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -33,10 +33,10 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$statement2 = new Statement( new PropertyNoValueSnak( 2 ) );
 		$statement2->setGuid( '2' );
 
-		$claims = new Claims();
-		$claims->append( $statement1 );
+		$object = new ArrayObject();
+		$object->append( $statement1 );
 
-		$byPropertyIdArray = new ByPropertyIdArray( $claims );
+		$byPropertyIdArray = new ByPropertyIdArray( $object );
 		// According to the documentation append() "cannot be called when the ArrayObject was
 		// constructed from an object." This test makes sure it was not constructed from an object.
 		$byPropertyIdArray->append( $statement2 );
