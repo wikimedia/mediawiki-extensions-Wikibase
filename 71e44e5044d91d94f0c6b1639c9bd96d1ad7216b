@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_80d3bb63",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-09-10T19:48:44Z",
+      "side": 1,
+      "message": "please provide a comment",
+      "revId": "71e44e5044d91d94f0c6b1639c9bd96d1ad7216b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
