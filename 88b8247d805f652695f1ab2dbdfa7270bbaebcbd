@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c1bc646a",
+        "filename": "view/tests/phpunit/StatementGroupListViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-11T09:57:26Z",
+      "side": 0,
+      "message": "Nice again.",
+      "revId": "88b8247d805f652695f1ab2dbdfa7270bbaebcbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

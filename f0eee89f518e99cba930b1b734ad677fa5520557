@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_61b1f08c",
+        "filename": "view/tests/phpunit/ClaimHtmlGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-11T09:57:26Z",
+      "side": 1,
+      "message": "Great!",
+      "revId": "f0eee89f518e99cba930b1b734ad677fa5520557",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_418154a3",
+        "filename": "view/tests/phpunit/SnakHtmlGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-11T09:57:26Z",
+      "side": 1,
+      "message": "This actually changes what\u0027s tested. Maybe rather test both variants?",
+      "revId": "f0eee89f518e99cba930b1b734ad677fa5520557",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_018b4cc5",
+        "filename": "view/tests/phpunit/SnakHtmlGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-11T09:57:26Z",
+      "side": 1,
+      "message": "Nice.",
+      "revId": "f0eee89f518e99cba930b1b734ad677fa5520557",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
