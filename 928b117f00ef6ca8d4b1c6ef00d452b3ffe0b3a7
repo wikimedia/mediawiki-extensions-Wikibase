@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_2ac41d94",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T15:29:11Z",
+      "side": 1,
+      "message": "Having this optional means I can ask this class to render it\u0027s HTML without a placeholder for the \"wikibase-entitytermsview-entitytermsforlanguagelistview-collapsed\" CSS class name. This is useful in cases where I already know I do not need it collapsed.",
+      "revId": "928b117f00ef6ca8d4b1c6ef00d452b3ffe0b3a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_56d2855e",
         "filename": "view/src/TextInjector.php",
         "patchSetId": 2
@@ -13,6 +30,24 @@
       "writtenOn": "2015-09-10T08:03:48Z",
       "side": 1,
       "message": "An array of arrays?",
+      "revId": "928b117f00ef6ca8d4b1c6ef00d452b3ffe0b3a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ea8ff576",
+        "filename": "view/src/TextInjector.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T15:29:11Z",
+      "side": 1,
+      "message": "Yes, see above. It was already documented as such.",
+      "parentUuid": "6ec1af18_56d2855e",
       "revId": "928b117f00ef6ca8d4b1c6ef00d452b3ffe0b3a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
