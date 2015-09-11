@@ -65,7 +65,8 @@ class SiteLinkUsageLookup implements UsageLookup {
 	public function getUsagesForPage( $pageId ) {
 		$usages = array();
 
-		$id = $this->siteLinkLookup->getItemIdForLink( $this->clientSiteId, $pageId );
+		$title = $this->titleFactory->newFromID( $pageId );
+		$id = $this->siteLinkLookup->getItemIdForLink( $this->clientSiteId, $title->getPrefixedText() );
 
 		if ( $id !== null ) {
 			$usages[] = new EntityUsage( $id, EntityUsage::SITELINK_USAGE );

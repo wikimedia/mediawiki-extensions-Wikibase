@@ -33,13 +33,16 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookup( array $links ) {
+		$titleFactory = $this->getTitleFactory();
 		$siteLinkLookup = new HashSiteLinkStore();
 
-		foreach ( $links as $name => $itemId ) {
+		foreach ( $links as $pageId => $itemId ) {
+			$title = $titleFactory->newFromID( $pageId );
+
 			$item = new Item( $itemId );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'testwiki', "$name" ) );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'badwiki', "$name" ) );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'sadwiki', "42" ) );
+			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'testwiki', $title->getPrefixedText() ) );
+			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'badwiki', $title->getPrefixedText() ) );
+			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'sadwiki', "Other stuff" ) );
 
 			$siteLinkLookup->saveLinksOfItem( $item );
 		}
@@ -63,13 +66,27 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @return TitleFactory
+	 */
 	private function getTitleFactory() {
 		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
 			->will( $this->returnCallback( function ( $text ) {
+				if ( !preg_match( '/^Page number (\d+)$/', $text, $match ) ) {
+					throw new \InvalidArgumentException( 'Bad title text: ' . $text );
+				}
+
 				$title = Title::newFromText( $text );
-				$title->resetArticleID( $text );
+				$title->resetArticleID( intval( $match[1] ) );
+				return $title;
+			} ) );
+		$titleFactory->expects( $this->any() )
+			->method( 'newFromID' )
+			->will( $this->returnCallback( function ( $id ) {
+				$title = Title::newFromText( "Page number $id" );
+				$title->resetArticleID( $id );
 				return $title;
 			} ) );
 
