@@ -267,6 +267,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return EntityId
 	 */
 	protected function getEntityIdFromSiteTitleCombination( $site, $title ) {
+		// FIXME: Normalization missing, see T47282.
 		$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
 
 		if ( $itemId === null ) {
