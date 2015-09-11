@@ -14,6 +14,7 @@ use Html;
 use Linker;
 use LogEntryBase;
 use MWException;
+use MWExceptionHandler;
 use OutputPage;
 use ParserOutput;
 use RecentChange;
@@ -23,6 +24,7 @@ use SearchResult;
 use Skin;
 use SkinTemplate;
 use SpecialSearch;
+use StubUserLang;
 use Title;
 use User;
 use Wikibase\Lib\AutoCommentFormatter;
@@ -818,6 +820,17 @@ final class RepoHooks {
 
 		if ( !( $title instanceof Title ) || $title->getContentModel() !== $contentModel ) {
 			return;
+		}
+
+		if ( $wgLang instanceof StubUserLang ) {
+			wfDebugLog(
+				'wikibase-debug',
+				'Bug: T112070: ' . MWExceptionHandler::prettyPrintTrace(
+					MWExceptionHandler::redactTrace( debug_backtrace() )
+				)
+			);
+
+			StubUserLang::unstub( $wgLang );
 		}
 
 		$formatter = new AutoCommentFormatter( $wgLang, $messagePrefix );
