@@ -50,6 +50,23 @@
       "revId": "71e44e5044d91d94f0c6b1639c9bd96d1ad7216b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_cf924ba2",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-11T13:30:42Z",
+      "side": 1,
+      "message": "how about an explicit check here?\n\nif ( $msg !\u003d\u003d false ) {\n\nor maybe:\n\nif ( $msg instanceof Message ) {\n  return $msg-\u003eparams( $args )-\u003eparse();\n}\n\nreturn null;",
+      "revId": "71e44e5044d91d94f0c6b1639c9bd96d1ad7216b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
