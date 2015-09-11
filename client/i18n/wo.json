@@ -5,7 +5,10 @@
 		]
 	},
 	"tooltip-t-wikibase": "Lëkkalekaay biy jëme ci mbir mi lonkook dàttub njoxe bi",
+	"wikibase-comment-update": "Soppi nañ {{WBREPONAME}}",
 	"wikibase-dataitem": "Yëf {{WBREPONAME}}",
 	"wikibase-editlinks": "Soppi lëkkalekaay yi",
-	"wikibase-editlinkstitle": "Soppi lëkkalekaay diggante-làkk yi"
+	"wikibase-editlinkstitle": "Soppi lëkkalekaay diggante-làkk yi",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Coppiteg {{WBREPONAME}}"
 }

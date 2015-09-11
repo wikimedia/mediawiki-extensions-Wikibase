@@ -6,6 +6,7 @@
 			"Mashoi7"
 		]
 	},
+	"tooltip-t-wikibase": "Linku yhtistettyh data-arhiivutuotteheh",
 	"wikibase-comment-update": "{{WBREPONAME}} on muutettu",
 	"wikibase-dataitem": "{{WBREPONAME}} elementu",
 	"wikibase-editlinks": "Korjua linkit",

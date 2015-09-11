@@ -2,9 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"Denö",
-			"Ilja.mos"
+			"Ilja.mos",
+			"Mashoi7"
 		]
 	},
 	"wikibase-edit": "korjata",
-	"wikibase-add": "ližiä"
+	"wikibase-add": "ližiä",
+	"wikibase-label-empty": "Ei merkii miäritetty",
+	"wikibase-description-empty": "Ei kuvavustu miäritelty",
+	"wikibase-statements": "Tovendus",
+	"wikibase-sitelinks-special": "Toizii sivuloi",
+	"wikibase-aliases-empty": "Ei sinounimoi miäritetty",
+	"wikibase-statementview-rank-normal": "Normuali listusijoitus",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|lähteh|lähtehty}}"
 }
