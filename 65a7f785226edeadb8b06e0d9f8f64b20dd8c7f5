@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_446de22c",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T12:35:02Z",
+      "side": 1,
+      "message": "I find this scary because it calls mocked code to create a test set up. Also, you do not need a Title object here, just the concatenated string.",
+      "revId": "65a7f785226edeadb8b06e0d9f8f64b20dd8c7f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e4ec0ebb",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T12:35:02Z",
+      "side": 1,
+      "message": "Not correct any more.",
+      "revId": "65a7f785226edeadb8b06e0d9f8f64b20dd8c7f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_e4796ef3",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T12:35:02Z",
+      "side": 1,
+      "message": "This is not necessary for the test, along with the preg_match above.",
+      "revId": "65a7f785226edeadb8b06e0d9f8f64b20dd8c7f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
