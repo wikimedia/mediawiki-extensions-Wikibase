@@ -1161,4 +1161,29 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Add link to Special:NewItem in search results.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialSearchCreateLink
+	 *
+	 * @param Title $title
+	 * @param array $params
+	 *
+	 * @return bool
+	 */
+	public static function onSpecialSearchCreateLink( Title $title, array &$params ) {
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		if ( !$title->isExternal() && !$title->isKnown() && $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
+			/** @var EntityHandler $entityHandler */
+			$entityHandler = ContentHandler::getForTitle( $title );
+
+			$params[0] = 'wikibase-search-newentity';
+			$params[1] = wfEscapeWikiText( $title->getText() );
+			$params[3] = $entityHandler->getSpecialPageForCreation();
+			$params[4] = wfMessage( 'wikibase-entity-' . $entityHandler->getEntityType() )->escaped();
+		}
+
+		return true;
+	}
+
 }

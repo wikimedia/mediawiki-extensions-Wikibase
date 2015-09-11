@@ -271,7 +271,7 @@ class EditEntity extends ModifyEntity {
 			$summary->setAction( $params['clear'] === false ? 'update' : 'override' );
 		} else {
 			$summary->setAction( 'create' );
-		}#
+		}
 		return $summary;
 	}
 
