@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_01c82c76",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-11T08:12:56Z",
+      "side": 1,
+      "message": "Add a fieldset with legend?",
+      "revId": "6dd5b45f0a3a1708fc375dbd9ac08bfd24382ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c1a9c48e",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-11T08:12:56Z",
+      "side": 1,
+      "message": "Use a custom message?",
+      "revId": "6dd5b45f0a3a1708fc375dbd9ac08bfd24382ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
