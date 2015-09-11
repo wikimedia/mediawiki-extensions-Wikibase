@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_0fe05324",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-11T13:34:27Z",
+      "side": 1,
+      "message": "RepoHooks :)",
+      "revId": "0cfb44edde513cff2c78413c5372b42b8b7c7bf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8fec4328",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-11T13:34:27Z",
+      "side": 1,
+      "message": "I think we should unstub $wgContLang, though not totally sure that has the same issues as $wgLang. (see T112070)",
+      "revId": "0cfb44edde513cff2c78413c5372b42b8b7c7bf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
