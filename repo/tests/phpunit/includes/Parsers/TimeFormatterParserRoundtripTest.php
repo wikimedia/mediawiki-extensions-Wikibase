@@ -10,7 +10,7 @@ use ValueParsers\IsoTimestampParser;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParserFactory;
+use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**
  * @covers Wikibase\Lib\MwTimeIsoFormatter

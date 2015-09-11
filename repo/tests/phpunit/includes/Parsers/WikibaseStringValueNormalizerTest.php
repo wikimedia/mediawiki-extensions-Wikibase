@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Repo\Tests\Parsers;
 
-use Wikibase\Lib\WikibaseStringValueNormalizer;
+use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
 
 /**
- * @covers Wikibase\Lib\WikibaseStringValueNormalizer
+ * @covers Wikibase\Repo\Parsers\WikibaseStringValueNormalizer
  *
  * @group ValueParsers
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  *
  * @licence GNU GPL v2+

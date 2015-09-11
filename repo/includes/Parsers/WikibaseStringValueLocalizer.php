@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Repo\Parsers;
 
 use InvalidArgumentException;
 use ValueParsers\Normalizers\StringNormalizer;
