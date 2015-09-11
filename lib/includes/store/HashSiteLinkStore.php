@@ -134,6 +134,8 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @see SiteLinkStore::saveLinksOfItem
 	 *
 	 * @param Item $item
+	 *
+	 * @return bool
 	 */
 	public function saveLinksOfItem( Item $item ) {
 		$itemId = $item->getId();
@@ -144,12 +146,16 @@ class HashSiteLinkStore implements SiteLinkStore {
 			$this->indexByLink( $itemId, $siteLink );
 			$this->indexByItemId( $itemId, $siteLink );
 		}
+
+		return true;
 	}
 
 	/**
 	 * See SiteLinkStore::deleteLinksOfItem
 	 *
 	 * @param ItemId $itemId
+	 *
+	 * @return bool
 	 */
 	public function deleteLinksOfItem( ItemId $itemId ) {
 		$prefixedId = $itemId->getSerialization();
@@ -161,6 +167,8 @@ class HashSiteLinkStore implements SiteLinkStore {
 		}
 
 		unset( $this->linksByItemId[$prefixedId] );
+
+		return true;
 	}
 
 	/**
