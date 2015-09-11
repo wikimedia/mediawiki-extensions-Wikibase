@@ -3,12 +3,9 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Html;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -35,7 +32,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return SnakHtmlGenerator
 	 */
-	protected function getSnakHtmlGeneratorMock() {
+	private function getSnakHtmlGeneratorMock() {
 		$snakHtmlGenerator = $this->getMockBuilder( 'Wikibase\View\SnakHtmlGenerator' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -45,23 +42,6 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( 'SNAK HTML' ) );
 
 		return $snakHtmlGenerator;
-	}
-
-	/**
-	 * @return EntityIdFormatter
-	 */
-	protected function getPropertyIdFormatterMock() {
-		$lookup = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
-
-		$lookup->expects( $this->any() )
-			->method( 'formatEntityId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
-				$name = $id->getEntityType() . ':' . $id->getSerialization();
-				$url = 'http://wiki.acme.com/wiki/' . urlencode( $name );
-				return Html::element( 'a', array( 'href' => $url ), $name );
-			} ) );
-
-		return $lookup;
 	}
 
 	/**
