@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Lib\Parsers\Test;
+namespace Wikibase\Test;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use Wikibase\Lib\Parsers\YearTimeParser;
+use Wikibase\Repo\Parsers\YearTimeParser;
 
 /**
- * @covers Wikibase\Lib\Parsers\YearTimeParser
+ * @covers Wikibase\Repo\Parsers\YearTimeParser
  *
  * @group ValueParsers
  * @group WikibaseLib

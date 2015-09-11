@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Parsers;
+namespace Wikibase\Repo\Parsers;
 
 use DataValues\TimeValue;
 use Language;

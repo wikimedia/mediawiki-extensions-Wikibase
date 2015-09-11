@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Parsers\Test;
+namespace Wikibase\Test;
 
 use ValueParsers\ParserOptions;
-use Wikibase\Parsers\MonolingualTextParser;
+use Wikibase\Repo\Parsers\MonolingualTextParser;
 
 /**
- * @covers Wikibase\Parsers\MonolingualTextParser
+ * @covers Wikibase\Repo\Parsers\MonolingualTextParser
  *
  * @group ValueParsers
  * @group WikibaseLib

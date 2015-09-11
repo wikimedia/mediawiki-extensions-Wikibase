@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Lib\Parsers\Test;
+namespace Wikibase\Test;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use Wikibase\Lib\Parsers\MWTimeIsoParser;
+use Wikibase\Repo\Parsers\MWTimeIsoParser;
 
 /**
- * @covers Wikibase\Lib\Parsers\MWTimeIsoParser
+ * @covers Wikibase\Repo\Parsers\MWTimeIsoParser
  *
  * @group ValueParsers
  * @group WikibaseLib
