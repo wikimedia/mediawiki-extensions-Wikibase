@@ -1,23 +1,23 @@
 <?php
 
-namespace Wikibase\Lib\Parsers\Test;
+namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
-use Wikibase\Lib\Parsers\MWTimeIsoParser;
+use Wikibase\Repo\Parsers\MwTimeIsoParser;
 
 /**
- * @covers Wikibase\Lib\Parsers\MWTimeIsoParser
+ * @covers Wikibase\Repo\Parsers\MwTimeIsoParser
  *
  * @group ValueParsers
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  * @group TimeParsers
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class MWTimeIsoParserTest extends StringValueParserTest {
+class MwTimeIsoParserTest extends StringValueParserTest {
 
 	/**
 	 * @deprecated since 0.3, just use getInstance.
@@ -29,10 +29,10 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 	/**
 	 * @see ValueParserTestBase::getInstance
 	 *
-	 * @return MWTimeIsoParser
+	 * @return MwTimeIsoParser
 	 */
 	protected function getInstance() {
-		return new MWTimeIsoParser();
+		return new MwTimeIsoParser();
 	}
 
 	/**

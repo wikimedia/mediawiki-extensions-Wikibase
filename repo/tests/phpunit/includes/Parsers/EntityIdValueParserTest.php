@@ -1,20 +1,20 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Repo\Tests\Parsers;
 
 use ValueParsers\Test\StringValueParserTest;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\EntityIdValueParser;
+use Wikibase\Repo\Parsers\EntityIdValueParser;
 
 /**
- * @covers Wikibase\Lib\EntityIdValueParser
+ * @covers Wikibase\Repo\Parsers\EntityIdValueParser
  * @uses Wikibase\DataModel\Entity\BasicEntityIdParser
  *
  * @group ValueParsers
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  * @group EntityIdValueParserTest
  *

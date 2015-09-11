@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Parsers;
+namespace Wikibase\Repo\Parsers;
 
 use DataValues\IllegalValueException;
 use DataValues\MonolingualTextValue;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Parsers;
+namespace Wikibase\Repo\Parsers;
 
 use Language;
 use ValueParsers\CalendarModelParser;
@@ -57,7 +57,7 @@ class TimeParserFactory {
 		// Year-month parser must be first, otherwise "May 2014" may be parsed as "2014-05-01".
 		$parsers[] = new YearMonthTimeParser( $this->options );
 		$parsers[] = $isoTimestampParser;
-		$parsers[] = new MWTimeIsoParser( $this->options );
+		$parsers[] = new MwTimeIsoParser( $this->options );
 		$parsers[] = new PhpDateTimeParser(
 			$this->getMonthNameUnlocalizer(),
 			$eraParser,
