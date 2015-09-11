@@ -117,10 +117,20 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 					'/\(Associated .*? item deleted\. Language links removed\.\)/'
 				),
 				$this->getEditSiteLinkRecentChange(
+					null,
 					array(
 						'message' => 'wikibase-comment-remove',
 					),
 					null
+				)
+			),
+			'comment-injection' => array(
+				array(),
+				array(
+					'/\(&lt;script&gt;evil&lt;\/script&gt;\)/'
+				),
+				$this->getEditSiteLinkRecentChange(
+					'<script>evil</script>'
 				)
 			),
 		);
@@ -215,7 +225,7 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		);
 	}
 
-	protected function getEditSiteLinkRecentChange( $commentOverride = null, $compositeCommentOverride = null ) {
+	protected function getEditSiteLinkRecentChange( $comment = null, $commentOverride = null, $compositeCommentOverride = null ) {
 		$params = array(
 			'wikibase-repo-change' => array(
 				'id' => 4,
@@ -233,6 +243,10 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 			)
 		);
 
+		if ( $comment === null ) {
+			$comment = '/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]';
+		}
+
 		if ( $commentOverride ) {
 			$params['wikibase-repo-change']['comment'] = $commentOverride;
 		}
@@ -242,7 +256,7 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		}
 
 		$title = $this->makeTitle( NS_MAIN, 'Canada', 52, 114 );
-		return $this->makeRecentChange( $params, $title, '/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]' );
+		return $this->makeRecentChange( $params, $title, $comment );
 	}
 
 	protected function getLogChangeTagMatchers() {
