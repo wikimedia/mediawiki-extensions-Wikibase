@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_2a817da4",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T16:23:36Z",
+      "side": 1,
+      "message": "\"false\" is not a type, please use \"bool\".",
+      "revId": "5c49324ba2882df8727878a4d54ee042b3d636ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6ab6a587",
+        "filename": "lib/tests/phpunit/formatters/AutoCommentFormatterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T16:23:36Z",
+      "side": 1,
+      "message": "Please use an empty array if these values are irrelevant for the test.",
+      "revId": "5c49324ba2882df8727878a4d54ee042b3d636ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8a667125",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T16:23:36Z",
+      "side": 1,
+      "message": "This is the wrong order, isn\u0027t it?",
+      "revId": "5c49324ba2882df8727878a4d54ee042b3d636ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
