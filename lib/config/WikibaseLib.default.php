@@ -70,10 +70,7 @@ $wgWBLibDefaultSettings = array(
 		'url',
 		'wikibase-item',
 		'wikibase-property',
-	),
-
-	// URL schemes allowed for URL values. See UrlSchemeValidators for a full list.
-	'urlSchemes' => array( 'ftp', 'http', 'https', 'irc', 'mailto' )
+	)
 );
 
 // experimental stuff

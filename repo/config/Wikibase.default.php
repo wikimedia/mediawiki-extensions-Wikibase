@@ -32,6 +32,9 @@ return call_user_func( function() {
 			'length' => 250, // length constraint
 		),
 
+		// URL schemes allowed for URL values. See UrlSchemeValidators for a full list.
+		'urlSchemes' => array( 'ftp', 'http', 'https', 'irc', 'mailto' ),
+
 		// Items allowed to be used as badges pointing to their CSS class names
 		'badgeItems' => array(),
 
@@ -40,8 +43,8 @@ return call_user_func( function() {
 		'dataSquidMaxage' => $wgSquidMaxage,
 
 		// Settings for change dispatching
-	        'dispatchBatchChunkFactor' => 3,
-	        'dispatchBatchCacheFactor' => 3,
+		'dispatchBatchChunkFactor' => 3,
+		'dispatchBatchCacheFactor' => 3,
 
 		// Formats that shall be available via SpecialEntityData.
 		// The first format will be used as the default.

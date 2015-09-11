@@ -19,8 +19,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :* NOTE: The default may change in order to use the repo's database name automatically.
 ;sharedCacheDuration: The default duration of entries in the shared object cache, in seconds. Default is 3600 seconds = 1 hour.
 ;sharedCacheType: The type of cache to use for the shared object cache. Defaults to $wgMainCacheType. Use CACHE_XXX constants.
-;urlSchemes: Which URL schemes should be allowed in URL data values. The default is array( 'http', 'https' ). Other supported schemes are 'ftp' and 'mailto'. Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding 'mailto' will work, while adding 'gopher' will do nothing.
-:* NOTE: This setting is only really meaningful for the repository, it's shared with the client extension for technical reasons.
 ;entityPrefixes: ID prefixes to use for the different entity types, as an associative array mapping prefixes to entity type constants. Default:
 <poem>
           array(
@@ -56,6 +54,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
 :;length: the maximum length of the string, in characters.
 :Default: <code>array( 'length' => 250 )</code>
+;urlSchemes: Which URL schemes should be allowed in URL data values. The default is array( 'http', 'https' ). Other supported schemes are 'ftp' and 'mailto'. Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding 'mailto' will work, while adding 'gopher' will do nothing.
 ;useRedirectTargetColumn: Whether to use the epp_redirect_target column in the wb_entity_per_page table for detecting redirects. True per default, can be set to false in an environment where the necessary database update can't be deployed right away. To set up the table manually, run repo/sql/AddEppRedirectTarget.sql to create it, then use repo/maintenance/rebuildEntityPerPage.php to rebuild the table if neccessary.
 ;formatterUrlProperty: Property to be used on properties that defines a formatter URL which is used to link identifiers. The placeholder <code>$1</code> will be replaced by the identifier. Example: <code>https://www.wikidata.org/entity/$1</code>
 ;transformLegacyFormatOnExport: Whether entity revisions stored in a legacy format should be converted on the fly while exporting. Enabled per default.
