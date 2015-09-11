@@ -168,4 +168,19 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$this->assertContains( 'Property with label P789', $output );
 	}
 
+	public function testSearchSubpages() {
+		$specialPage = $this->newSpecialPage();
+		$this->assertEmpty(
+			$specialPage->prefixSearchSubpages( 'g', 10, 0 )
+		);
+		$this->assertEquals(
+			array( 'string' ),
+			$specialPage->prefixSearchSubpages( 'st', 10, 0 )
+		);
+		$this->assertEquals(
+			array( 'wikibase-item' ),
+			$specialPage->prefixSearchSubpages( 'wik', 10, 0 )
+		);
+	}
+
 }
