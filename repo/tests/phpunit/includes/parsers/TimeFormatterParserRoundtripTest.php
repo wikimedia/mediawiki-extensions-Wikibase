@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Test;
 
 use DataValues\TimeValue;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParserFactory;
+use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**
  * @group WikibaseLib

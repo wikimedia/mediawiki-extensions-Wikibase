@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Test;
 
 use Language;
 use Wikibase\Lib\MediaWikiNumberLocalizer;
-use Wikibase\Lib\MediaWikiNumberUnlocalizer;
+use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 
 /**
  * @covers Wikibase\Lib\MediaWikiNumberLocalizer
- * @covers Wikibase\Lib\MediaWikiNumberUnlocalizer
+ * @covers Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer
  *
  * @group ValueParsers
  * @group WikibaseLib

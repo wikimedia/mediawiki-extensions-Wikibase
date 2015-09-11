@@ -27,10 +27,11 @@ use ValueFormatters\FormatterOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
-use Wikibase\Lib\EntityIdValueParser;
-use Wikibase\Lib\Parsers\TimeParserFactory;
-use Wikibase\Lib\WikibaseStringValueNormalizer;
-use Wikibase\Parsers\MonolingualTextParser;
+use Wikibase\Repo\Parsers\EntityIdValueParser;
+use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
+use Wikibase\Repo\Parsers\MonolingualTextParser;
+use Wikibase\Repo\Parsers\TimeParserFactory;
+use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 return call_user_func( function() {
@@ -102,7 +103,7 @@ return call_user_func( function() {
 			},
 			'parser-factory-callback' => function( ValueParsers\ParserOptions $options ) {
 				$language = Language::factory( $options->getOption( ValueParser::OPT_LANG ) );
-				$unlocalizer = new Wikibase\Lib\MediaWikiNumberUnlocalizer( $language );
+				$unlocalizer = new MediaWikiNumberUnlocalizer( $language );
 				return new QuantityParser( $options, $unlocalizer );
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {

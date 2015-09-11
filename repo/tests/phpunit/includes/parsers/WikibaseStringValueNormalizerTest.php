@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Test;
 
-use Wikibase\Lib\WikibaseStringValueNormalizer;
+use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
 
 /**
- * @covers Wikibase\Lib\WikibaseStringValueNormalizer
+ * @covers Wikibase\Repo\Parsers\WikibaseStringValueNormalizer
  *
  * @group ValueParsers
  * @group WikibaseLib
