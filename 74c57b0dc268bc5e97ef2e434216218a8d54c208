@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a44da6a0",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-11T13:02:21Z",
+      "side": 1,
+      "message": "Please move this up, next to \u0027TitleQuickPermissions\u0027 that removes the default link.",
+      "revId": "74c57b0dc268bc5e97ef2e434216218a8d54c208",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
