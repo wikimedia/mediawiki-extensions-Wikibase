@@ -1,17 +1,17 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Repo\Tests\Parsers;
 
 use Language;
 use Wikibase\Lib\MediaWikiNumberLocalizer;
-use Wikibase\Lib\MediaWikiNumberUnlocalizer;
+use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 
 /**
  * @covers Wikibase\Lib\MediaWikiNumberLocalizer
- * @covers Wikibase\Lib\MediaWikiNumberUnlocalizer
+ * @covers Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer
  *
  * @group ValueParsers
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  *
  * @licence GNU GPL v2+

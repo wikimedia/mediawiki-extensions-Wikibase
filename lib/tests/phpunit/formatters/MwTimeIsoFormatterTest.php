@@ -6,11 +6,7 @@ use DataValues\TimeValue;
 use MediaWikiTestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueParsers\IsoTimestampParser;
-use ValueParsers\ParserOptions;
-use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParserFactory;
 
 /**
  * @covers Wikibase\Lib\MwTimeIsoFormatter
@@ -27,11 +23,6 @@ use Wikibase\Lib\Parsers\TimeParserFactory;
  */
 class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 
-	/**
-	 * Returns an array of test parameters.
-	 *
-	 * @return array
-	 */
 	public function formatProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
 
@@ -40,22 +31,18 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			array(
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 August 2013',
-				true
 			),
 			array(
 				'+00000002013-07-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 July 2013',
-				true
 			),
 			array(
 				'+00000000001-01-14T00:00:00Z', TimeValue::PRECISION_DAY,
 				'14 January 1',
-				true
 			),
 			array(
 				'+00000010000-01-01T00:00:00Z', TimeValue::PRECISION_DAY,
 				'1 January 10000',
-				true
 			),
 			array(
 				'+00000002013-07-16T00:00:00Z', TimeValue::PRECISION_MONTH,
@@ -214,22 +201,18 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			array(
 				'-2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 August 2013 BCE',
-				true
 			),
 			array(
 				'-00000002013-07-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 July 2013 BCE',
-				true
 			),
 			array(
 				'-00000000001-01-14T00:00:00Z', TimeValue::PRECISION_DAY,
 				'14 January 1 BCE',
-				true
 			),
 			array(
 				'-00000010000-01-01T00:00:00Z', TimeValue::PRECISION_DAY,
 				'1 January 10000 BCE',
-				true
 			),
 			array(
 				'-00000002013-07-16T00:00:00Z', TimeValue::PRECISION_MONTH,
@@ -331,7 +314,6 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				// Nominative is "Augustus", genitive is "Augusti".
 				'16 Augusti 2013',
-				true,
 				'la'
 			),
 
@@ -339,19 +321,16 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			array(
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 Avgust, 2013',
-				true,
 				'kaa'
 			),
 			array(
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 agosto 2013',
-				true,
 				'pt'
 			),
 			array(
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
 				'16 8月 2013',
-				true,
 				'yue'
 			),
 
@@ -496,13 +475,11 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			$timestamp = $args[0];
 			$precision = $args[1];
 			$expected = isset( $args[2] ) ? $args[2] : $timestamp;
-			$roundtrip = isset( $args[3] );
-			$languageCode = isset( $args[4] ) ? $args[4] : 'en';
+			$languageCode = isset( $args[3] ) ? $args[3] : 'en';
 
 			$argLists[] = array(
 				$expected,
 				new TimeValue( $timestamp, 0, 0, 0, $precision, $gregorian ),
-				$roundtrip,
 				$languageCode
 			);
 		}
@@ -525,7 +502,6 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 					TimeValue::PRECISION_YEAR,
 					$gregorian
 				),
-				false,
 				$languageCode
 			);
 		}
@@ -538,13 +514,11 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 	 *
 	 * @param string $expected
 	 * @param TimeValue $timeValue
-	 * @param bool $roundtrip
 	 * @param string $languageCode
 	 */
 	public function testFormat(
 		$expected,
 		TimeValue $timeValue,
-		$roundtrip = false,
 		$languageCode = 'en'
 	) {
 		$options = new FormatterOptions( array(
@@ -554,36 +528,6 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 		$actual = $formatter->format( $timeValue );
 
 		$this->assertEquals( $expected, $actual, 'Testing ' . $timeValue->getTime() . ', precision ' . $timeValue->getPrecision() );
-		if ( $roundtrip ) {
-			$this->assertCanRoundTrip( $actual, $timeValue, $languageCode );
-		}
-	}
-
-	private function assertCanRoundTrip( $formattedTime, TimeValue $timeValue, $languageCode ) {
-		$options = new ParserOptions( array(
-			ValueParser::OPT_LANG => $languageCode,
-			IsoTimestampParser::OPT_PRECISION => $timeValue->getPrecision(),
-			IsoTimestampParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
-		) );
-
-		$factory = new TimeParserFactory( $options );
-		$timeParser = $factory->getTimeParser();
-		$parsedTimeValue = $timeParser->parse( $formattedTime );
-
-		/**
-		 * TODO: all of the below can be removed once TimeValue has an equals method
-		 */
-		$parsedTime = $parsedTimeValue->getTime();
-		$expectedTime = $timeValue->getTime();
-		$this->assertRegExp(
-			'/^' . preg_quote( substr( $expectedTime, 0, 1 ), '/' ) . '0*' . preg_quote( substr( $expectedTime, 1 ), '/' ) . '$/',
-			$parsedTime
-		);
-		$this->assertEquals( $timeValue->getBefore(), $parsedTimeValue->getBefore() );
-		$this->assertEquals( $timeValue->getAfter(), $parsedTimeValue->getAfter() );
-		$this->assertEquals( $timeValue->getPrecision(), $parsedTimeValue->getPrecision() );
-		$this->assertEquals( $timeValue->getTimezone(), $parsedTimeValue->getTimezone() );
-		$this->assertEquals( $timeValue->getCalendarModel(), $parsedTimeValue->getCalendarModel() );
 	}
 
 }
