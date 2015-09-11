@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
+use MediaWikiTestCase;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
@@ -25,7 +26,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
+class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 
 	/**
 	 * @param ItemId[] $links
@@ -33,16 +34,15 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookup( array $links ) {
-		$titleFactory = $this->getTitleFactory();
 		$siteLinkLookup = new HashSiteLinkStore();
 
 		foreach ( $links as $pageId => $itemId ) {
-			$title = $titleFactory->newFromID( $pageId );
+			$pageName = "Page number $pageId";
 
 			$item = new Item( $itemId );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'testwiki', $title->getPrefixedText() ) );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'badwiki', $title->getPrefixedText() ) );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'sadwiki', "Other stuff" ) );
+			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'testwiki', $pageName ) );
+			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'badwiki', $pageName ) );
+			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'sadwiki', 'Other stuff' ) );
 
 			$siteLinkLookup->saveLinksOfItem( $item );
 		}
@@ -51,8 +51,6 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @note Assumptions: page titles are the same as page IDs.
-	 *
 	 * @param SiteLinkLookup $siteLinks
 	 * @param TitleFactory $titleFactory
 	 *
@@ -74,19 +72,14 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
 			->will( $this->returnCallback( function ( $text ) {
-				if ( !preg_match( '/^Page number (\d+)$/', $text, $match ) ) {
-					throw new \InvalidArgumentException( 'Bad title text: ' . $text );
-				}
-
 				$title = Title::newFromText( $text );
-				$title->resetArticleID( intval( $match[1] ) );
 				return $title;
 			} ) );
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
-			->will( $this->returnCallback( function ( $id ) {
-				$title = Title::newFromText( "Page number $id" );
-				$title->resetArticleID( $id );
+			->will( $this->returnCallback( function ( $pageId ) {
+				$title = Title::newFromText( "Page number $pageId" );
+				$title->resetArticleID( $pageId );
 				return $title;
 			} ) );
 
