@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_cf79ebf3",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-11T15:03:11Z",
+      "side": 1,
+      "message": "new Message is also a global function. constructors are just syntactic sugar on static functions. \n\nWe could introduce a MessageFactory object, and inject that. I have wondered about that before. Would be helpful for tests.",
+      "parentUuid": "6ec1af18_de8d23da",
+      "revId": "71e44e5044d91d94f0c6b1639c9bd96d1ad7216b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_80d3bb63",
         "filename": "lib/includes/formatters/AutoCommentFormatter.php",
         "patchSetId": 5
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_ef762701",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-11T15:03:11Z",
+      "side": 1,
+      "message": "// I stole this from somewhere, don\u0027t know what it does",
+      "parentUuid": "6ec1af18_80d3bb63",
+      "revId": "71e44e5044d91d94f0c6b1639c9bd96d1ad7216b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_cf924ba2",
         "filename": "lib/includes/formatters/AutoCommentFormatter.php",
         "patchSetId": 5
@@ -64,6 +100,24 @@
       "writtenOn": "2015-09-11T13:30:42Z",
       "side": 1,
       "message": "how about an explicit check here?\n\nif ( $msg !\u003d\u003d false ) {\n\nor maybe:\n\nif ( $msg instanceof Message ) {\n  return $msg-\u003eparams( $args )-\u003eparse();\n}\n\nreturn null;",
+      "revId": "71e44e5044d91d94f0c6b1639c9bd96d1ad7216b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_cf500b64",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-11T15:03:11Z",
+      "side": 1,
+      "message": "I find explicit checks pointless and hard to read in situations where the value can only be an object or nothing. Explicit checks are mostly important for scalars.",
+      "parentUuid": "6ec1af18_cf924ba2",
       "revId": "71e44e5044d91d94f0c6b1639c9bd96d1ad7216b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
