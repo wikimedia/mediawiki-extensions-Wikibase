@@ -124,6 +124,15 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 					null
 				)
 			),
+			'comment-injection' => array(
+				array(),
+				array(
+					'/\(&lt;script&gt;evil&lt;\/script&gt;\)/'
+				),
+				$this->getEditSiteLinkRecentChange(
+					'<script>evil</script>'
+				)
+			),
 		);
 	}
 
