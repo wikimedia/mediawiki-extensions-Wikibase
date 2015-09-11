@@ -86,8 +86,8 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 		);
 
 		$item = new Item( new ItemId( 'Q1' ) );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'en test', array( new ItemId( 'Q42' ) ) ) );
-		$item->addSiteLink( new SiteLink( 'dewiki', 'de test', array( new ItemId( 'Q42' ), new ItemId( 'Q12' ) ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'en test', array( new ItemId( 'Q42' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'de test', array( new ItemId( 'Q42' ), new ItemId( 'Q12' ) ) );
 
 		$testCases[] = array(
 			$item,

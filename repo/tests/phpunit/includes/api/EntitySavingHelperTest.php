@@ -98,7 +98,7 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 		$entity = new Item();
 		$entity->setId( new ItemId( 'Q444' ) );
 		$entity->getFingerprint()->setLabel( 'en', 'Foo' );
-		$entity->getSiteLinkList()->addSiteLink( new SiteLink( 'enwiki', 'APage' ) );
+		$entity->getSiteLinkList()->addNewSiteLink( 'enwiki', 'APage' );
 		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( new PropertyId( 'P8' ) ) );
 
 		$summary = 'A String Summary';
