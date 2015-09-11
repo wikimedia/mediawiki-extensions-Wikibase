@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_de8d23da",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-11T04:57:07Z",
+      "side": 1,
+      "message": "Could also be new Message( $key ) to reduce reliance on global functions?",
+      "revId": "71e44e5044d91d94f0c6b1639c9bd96d1ad7216b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_80d3bb63",
         "filename": "lib/includes/formatters/AutoCommentFormatter.php",
         "patchSetId": 5
