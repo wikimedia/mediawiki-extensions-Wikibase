@@ -115,6 +115,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		// If there are enough data, then try to lookup the item content
 		if ( $site !== '' && $page !== '' ) {
+			// FIXME: This code is duplicated in ItemByTitleHelper::getItemId!
 			// Try to get a item content
 			$siteId = $this->stringNormalizer->trimToNFC( $site ); // no stripping of underscores here!
 			$pageName = $this->stringNormalizer->trimToNFC( $page );
