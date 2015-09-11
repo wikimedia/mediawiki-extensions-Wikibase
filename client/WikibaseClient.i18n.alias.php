@@ -66,6 +66,7 @@ $specialPageAliases['he'] = array(
 /** Italian (italiano) */
 $specialPageAliases['it'] = array(
 	'UnconnectedPages' => array( 'PagineNonConnesse' ),
+	'PagesWithBadges' => array( 'PagineConDistintivi' ),
 );
 
 /** Japanese (日本語) */
