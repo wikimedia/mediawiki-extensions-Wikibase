@@ -123,6 +123,7 @@ class ItemByTitleHelper {
 	 * @return ItemId|null
 	 */
 	private function getItemId( $siteId, $title, $normalize ) {
+		// FIXME: This code is duplicated in SpecialItemByTitle::execute!
 		$title = $this->stringNormalizer->trimToNFC( $title );
 		$id = $this->siteLinkLookup->getItemIdForLink( $siteId, $title );
 
