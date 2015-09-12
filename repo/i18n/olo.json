@@ -14,5 +14,6 @@
 	"wikibase-sitelinks-special": "Toizii sivuloi",
 	"wikibase-aliases-empty": "Ei sinounimoi miäritetty",
 	"wikibase-statementview-rank-normal": "Normuali listusijoitus",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|lähteh|lähtehty}}"
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|lähteh|lähtehty}}",
+	"wikibase-newentity-language": "Kieli:"
 }
