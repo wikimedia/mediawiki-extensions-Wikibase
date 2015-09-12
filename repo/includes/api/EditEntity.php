@@ -768,7 +768,7 @@ class EditEntity extends ModifyEntity {
 					self::PARAM_DFLT => false
 				),
 				'new' => array(
-					self::PARAM_TYPE => 'string',
+					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getEntityFactory()->getEntityTypes(),
 				),
 			)
 		);
