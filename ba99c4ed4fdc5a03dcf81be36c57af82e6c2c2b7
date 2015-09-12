@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_38ea32d8",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-12T13:07:53Z",
+      "side": 1,
+      "message": "locally?",
+      "revId": "ba99c4ed4fdc5a03dcf81be36c57af82e6c2c2b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
