@@ -16,7 +16,6 @@ module.exports = function ( grunt ) {
 		},
 		banana: {
 			options: {
-				disallowBlankTranslations: false,
 				disallowDuplicateTranslations: false,
 				disallowUnusedTranslations: false
 			},
