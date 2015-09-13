@@ -11,7 +11,8 @@
 			"Nemo bis",
 			"FRacco",
 			"Federico Mugnaini",
-			"Fringio"
+			"Fringio",
+			"Ricordisamoa"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
@@ -60,12 +61,10 @@
 	"wikibase-error-invalid-entity-id": "L'ID specificato è sconosciuto al sistema. Utilizza un ID di entità valido.",
 	"unconnectedpages": "Pagine non collegate agli elementi",
 	"unconnectedpages-summary": "Questa pagina elenca le pagine non connessi ad un elemento data (nei namespace che supportano il collegamento tra elementi) Questa lista è ordinata in ordine decrescente secondo l'ID della pagina, cosicché le nuove voci siano elencate per prime.",
-	"wikibase-unconnectedpages-page": "Inizia l'elenco dei risultati dalla pagina:",
-	"wikibase-unconnectedpages-submit": "Vai",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" non è un codice di lingua valido.",
-	"wikibase-unconnectedpages-page-warning": "Il titolo della pagina non può essere utilizzato per la query e viene ignorato.",
-	"wikibase-unconnectedpages-iwdata-label": "Solo le pagine con collegamenti interlinguistici",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|collegamento interlinguistico|collegamenti interlinguistici}} nella pagina)",
+	"pageswithbadges": "Pagine con distintivi",
+	"wikibase-pageswithbadges-badge": "Distintivo:",
+	"wikibase-pageswithbadges-submit": "Mostra pagine",
 	"wikibase-pageinfo-entity-id": "ID elemento {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nessuno",
 	"wikibase-property-render-error": "Errore durante il rendering della proprietà $1: $2",
