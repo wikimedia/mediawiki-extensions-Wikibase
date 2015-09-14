@@ -214,7 +214,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'label-message' => 'wikibase-itemdisambiguation-lookup-label'
 			),
 			'submit' => array(
-				'name' => 'submit',
+				'name' => '',
 				'default' => $this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wb-itembytitle-submit',
