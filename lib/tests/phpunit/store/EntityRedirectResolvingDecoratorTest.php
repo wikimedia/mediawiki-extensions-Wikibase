@@ -10,7 +10,7 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
-use Wikibase\PropertyLabelResolver;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 
 /**
  * @covers Wikibase\Lib\Store\EntityRedirectResolvingDecorator
@@ -118,7 +118,7 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNoEntityId() {
-		$target = $this->getMock( 'Wikibase\PropertyLabelResolver' );
+		$target = $this->getMock( 'Wikibase\DataModel\Services\Term\PropertyLabelResolver' );
 		$target->expects( $this->once() )
 			->method( 'getPropertyIdsForLabels' )
 			->will( $this->throwException( new UnresolvedRedirectException( new ItemId( 'Q12' ) ) ) );
@@ -131,7 +131,7 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testError() {
-		$target = $this->getMock( 'Wikibase\PropertyLabelResolver' );
+		$target = $this->getMock( 'Wikibase\DataModel\Services\Term\PropertyLabelResolver' );
 		$target->expects( $this->once() )
 			->method( 'getPropertyIdsForLabels' )
 			->will( $this->throwException( new RuntimeException( 'Boo!' ) ) );
