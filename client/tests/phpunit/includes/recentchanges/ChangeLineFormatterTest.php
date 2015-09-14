@@ -11,7 +11,6 @@ use Title;
 use User;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
-use Wikibase\Client\RecentChanges\ExternalRecentChange;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 
@@ -366,6 +365,7 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 				'page_id' => 0,
 				'rev_id' => 0,
 				'parent_id' => 0,
+				'bot' => false
 			)
 		);
 
@@ -412,14 +412,35 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 	}
 
 	private function makeRecentChange( array $params, Title $title, $comment ) {
-		$recentChange = new RecentChange();
+		$attribs = array(
+			'rc_id' => 1234,
+			'rc_timestamp' => $params['wikibase-repo-change']['time'],
+			'rc_user' => 0,
+			'rc_user_text' => $params['wikibase-repo-change']['user_text'],
+			'rc_namespace' => $title->getNamespace(),
+			'rc_title' => $title->getDBkey(),
+			'rc_comment' => $comment,
+			'rc_minor' => true,
+			'rc_bot' => $params['wikibase-repo-change']['bot'],
+			'rc_new' => false,
+			'rc_cur_id' => $title->getArticleID(),
+			'rc_this_oldid' => $title->getLatestRevID(),
+			'rc_last_oldid' => $title->getLatestRevID(),
+			'rc_type' => RC_EXTERNAL,
+			'rc_source' => 'wb',
+			'rc_patrolled' => true,
+			'rc_ip' => '127.0.0.1',
+			'rc_old_len' => 123,
+			'rc_new_len' => 123,
+			'rc_deleted' => false,
+			'rc_logid' => 0,
+			'rc_log_type' => null,
+			'rc_log_action' => '',
+			'rc_params' => serialize( $params ),
+		);
+
+		$recentChange = RecentChange::newFromRow( (object)$attribs );
 		$recentChange->counter = 1;
-
-		$externalChange = ExternalRecentChange::newFromAttribs( $params, $title );
-		$attribs = $externalChange->getAttributes();
-
-		$attribs['rc_comment'] = $comment;
-		$recentChange->setAttribs( $attribs );
 
 		return $recentChange;
 	}
