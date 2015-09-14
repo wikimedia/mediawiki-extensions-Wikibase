@@ -22,7 +22,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
-use Wikibase\Client\DataAccess\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;

@@ -4,7 +4,7 @@ namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 
 use Parser;
 use PPFrame;
-use Wikibase\Client\DataAccess\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
