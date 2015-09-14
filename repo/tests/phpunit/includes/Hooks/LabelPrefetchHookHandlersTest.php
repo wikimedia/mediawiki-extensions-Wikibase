@@ -63,7 +63,7 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 	 * @return LabelPrefetchHookHandlers
 	 */
 	private function getLabelPrefetchHookHandlers( $prefetchTerms, array $termTypes, array $languageCodes ) {
-		$termBuffer = $this->getMock( 'Wikibase\Store\TermBuffer' );
+		$termBuffer = $this->getMock( 'Wikibase\DataModel\Services\Term\TermBuffer' );
 		$termBuffer->expects( $this->atLeastOnce() )
 			->method( 'prefetchTerms' )
 			->will( $this->returnCallback( $prefetchTerms ) );

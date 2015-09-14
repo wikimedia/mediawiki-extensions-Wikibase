@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Store\TermBuffer;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 
 /**
  * Factory to provide an LabelDescriptionLookup which does automatic prefetching

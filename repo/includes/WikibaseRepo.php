@@ -94,7 +94,7 @@ use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\Store\TermBuffer;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\View\EntityViewFactory;

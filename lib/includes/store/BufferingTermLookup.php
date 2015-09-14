@@ -4,6 +4,7 @@ namespace Wikibase\Store;
 
 use MapCacheLRU;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\TermIndexEntry;

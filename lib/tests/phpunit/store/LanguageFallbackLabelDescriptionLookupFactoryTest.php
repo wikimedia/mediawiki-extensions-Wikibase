@@ -34,7 +34,7 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framewo
 	}
 
 	private function getTermBufferMock() {
-		$termBuffer = $this->getMock( 'Wikibase\Store\TermBuffer' );
+		$termBuffer = $this->getMock( 'Wikibase\DataModel\Services\Term\TermBuffer' );
 		$termBuffer->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(
