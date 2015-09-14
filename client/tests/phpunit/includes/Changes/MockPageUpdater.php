@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Changes;
 
 use Title;
 use Wikibase\Client\Changes\PageUpdater;
+use Wikibase\EntityChange;
 
 /**
  * Mock version of the service object for triggering different kinds of page updates
@@ -57,12 +58,12 @@ class MockPageUpdater implements PageUpdater {
 
 	/**
 	 * @param Title[] $titles
-	 * @param array $attribs
+	 * @param EntityChange $change
 	 */
-	public function injectRCRecords( array $titles, array $attribs ) {
+	public function injectRCRecords( array $titles, EntityChange $change ) {
 		foreach ( $titles as $title ) {
 			$key = $title->getPrefixedDBkey();
-			$this->updates['injectRCRecord'][ $key ] = $attribs;
+			$this->updates['injectRCRecord'][ $key ] = $change;
 		}
 	}
 
