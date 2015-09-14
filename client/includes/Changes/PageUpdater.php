@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Changes;
 
 use Title;
+use Wikibase\EntityChange;
 
 /**
  * Service interface for triggering different kinds of page updates
@@ -51,8 +52,8 @@ interface PageUpdater {
 	 * @since 0.5
 	 *
 	 * @param Title[] $titles
-	 * @param array $attribs
+	 * @param EntityChange $change
 	 */
-	public function injectRCRecords( array $titles, array $attribs );
+	public function injectRCRecords( array $titles, EntityChange $change );
 
 }
