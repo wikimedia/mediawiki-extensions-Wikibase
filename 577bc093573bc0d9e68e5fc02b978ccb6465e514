@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_b715cc4f",
+        "filename": "repo/tests/phpunit/includes/Parsers/TimeFormatterParserRoundtripTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-14T11:30:32Z",
+      "side": 1,
+      "message": "This is a glitch. It\u0027s already fixed in the next patch in this chain.",
+      "revId": "577bc093573bc0d9e68e5fc02b978ccb6465e514",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
