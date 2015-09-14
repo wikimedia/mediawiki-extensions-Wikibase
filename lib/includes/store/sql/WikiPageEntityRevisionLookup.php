@@ -7,6 +7,7 @@ use MWContentSerializationException;
 use Revision;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\EntityRevision;
 

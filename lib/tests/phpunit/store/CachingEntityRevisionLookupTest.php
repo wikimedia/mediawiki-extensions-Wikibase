@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Lib\Store\CachingEntityRevisionLookup

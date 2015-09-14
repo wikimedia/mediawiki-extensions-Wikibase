@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 use Wikibase\EntityRevision;
 
 /**

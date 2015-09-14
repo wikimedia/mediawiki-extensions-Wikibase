@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 use Wikibase\PropertyLabelResolver;
 
 /**
@@ -110,7 +110,7 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 	public function testRedirectResolutionFailure( EntityId $id, $levels ) {
 		$target = $this->getEntityRevisionLookup();
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Entity\UnresolvedRedirectException' );
 
 		/* @var EntityRevisionLookup $decorator */
 		$decorator = new EntityRedirectResolvingDecorator( $target, $levels );
@@ -123,7 +123,7 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getPropertyIdsForLabels' )
 			->will( $this->throwException( new UnresolvedRedirectException( new ItemId( 'Q12' ) ) ) );
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Entity\UnresolvedRedirectException' );
 
 		/* @var PropertyLabelResolver $decorator */
 		$decorator = new EntityRedirectResolvingDecorator( $target );
