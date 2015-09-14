@@ -11,7 +11,7 @@ use Title;
 use User;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
-use Wikibase\Client\RecentChanges\ExternalRecentChange;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 
@@ -382,7 +382,7 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		$recentChange = new RecentChange();
 		$recentChange->counter = 1;
 
-		$externalChange = ExternalRecentChange::newFromAttribs( $params, $title );
+		$externalChange = RecentChangeFactory::newFromAttribs( $params, $title );
 		$attribs = $externalChange->getAttributes();
 
 		$attribs['rc_comment'] = $comment;
