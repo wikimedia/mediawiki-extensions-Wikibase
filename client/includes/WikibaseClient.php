@@ -7,6 +7,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use Exception;
 use Hooks;
+use JobQueueGroup;
 use Language;
 use LogicException;
 use MediaWikiSite;
@@ -22,6 +23,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -60,6 +62,7 @@ use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
+use Wikibase\SiteLinkCommentCreator;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\StringNormalizer;
 
@@ -893,20 +896,53 @@ final class WikibaseClient {
 	 * @return ChangeHandler
 	 */
 	public function getChangeHandler() {
-		$siteId = $this->getSite()->getGlobalId();
-
 		return new ChangeHandler(
 			$this->getAffectedPagesFinder(),
 			new TitleFactory(),
-			new WikiPageUpdater(),
-			new ChangeRunCoalescer(
-				$this->getStore()->getEntityRevisionLookup(),
-				$this->getEntityChangeFactory(),
-				$siteId
-			),
-			$this->getContentLanguage(),
-			$siteId,
+			$this->getWikiPageUpdater(),
+			$this->getChangeRunCoalescer(),
 			$this->settings->getSetting( 'injectRecentChanges' )
+		);
+	}
+
+	/**
+	 * @return WikiPageUpdater
+	 */
+	private function getWikiPageUpdater() {
+		return new WikiPageUpdater(
+			JobQueueGroup::singleton(),
+			$this->getRecentChangeFactory()
+		);
+	}
+
+	/**
+	 * @return ChangeRunCoalescer
+	 */
+	private function getChangeRunCoalescer() {
+		return new ChangeRunCoalescer(
+			$this->getStore()->getEntityRevisionLookup(),
+			$this->getEntityChangeFactory(),
+			$this->settings->getSetting( 'siteGlobalID' )
+		);
+	}
+
+	/**
+	 * @return RecentChangeFactory
+	 */
+	private function getRecentChangeFactory() {
+		return new RecentChangeFactory(
+			$this->getContentLanguage(),
+			$this->getSiteLinkCommentCreator()
+		);
+	}
+
+	/**
+	 * @return SiteLinkCommentCreator
+	 */
+	private function getSiteLinkCommentCreator() {
+		return new SiteLinkCommentCreator(
+			$this->getContentLanguage(),
+			$this->settings->getSetting( 'siteGlobalID' )
 		);
 	}
 
