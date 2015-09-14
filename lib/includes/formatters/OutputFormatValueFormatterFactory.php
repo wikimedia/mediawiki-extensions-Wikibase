@@ -303,7 +303,7 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @see WikibaseValueFormatterBuilders::$valueFormatterSpecs
 	 *
-	 * @param string $format
+	 * @param string $format One of the SnakFormatter::FORMAT_... constants.
 	 * @param FormatterOptions $options
 	 * @param string[] $skip A list of types to be skipped. Useful when the caller already
 	 *        has formatters for some types.
