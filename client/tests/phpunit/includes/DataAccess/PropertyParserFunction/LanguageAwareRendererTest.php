@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use Language;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
-use Wikibase\Client\DataAccess\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
@@ -108,10 +108,11 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		$renderer = $this->getRenderer(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder( array() ),
-			$this->getEntityLookup( 0 ),
+			$this->getEntityLookup( 1 ),
 			'qqx'
 		);
 
+		$renderer->render( new ItemId( 'Q3' ), 'tooManyEntities' );
 		$result = $renderer->render( new ItemId( 'Q4' ), 'tooManyEntities' );
 
 		$this->assertRegExp(

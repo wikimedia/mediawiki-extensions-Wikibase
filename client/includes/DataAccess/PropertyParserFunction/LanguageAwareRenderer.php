@@ -5,10 +5,10 @@ namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 use InvalidArgumentException;
 use Language;
 use Status;
-use Wikibase\Client\DataAccess\EntityAccessLimitException;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 
 /**
  * PropertyClaimsRenderer of the {{#property}} parser function.
@@ -63,7 +63,7 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 		} catch ( PropertyLabelNotResolvedException $ex ) {
 			// @fixme use ExceptionLocalizer
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
-		} catch ( EntityAccessLimitException $ex ) {
+		} catch ( EntityLookupException $ex ) {
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		} catch ( InvalidArgumentException $ex ) {
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
