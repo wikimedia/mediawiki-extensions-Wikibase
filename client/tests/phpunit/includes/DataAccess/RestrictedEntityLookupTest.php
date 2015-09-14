@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
-use Wikibase\Client\DataAccess\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\Client\DataAccess\RestrictedEntityLookup
+ * @covers Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup
  *
  * @group Wikibase
  * @group WikibaseClient
