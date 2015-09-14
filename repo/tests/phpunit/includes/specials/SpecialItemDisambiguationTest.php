@@ -125,7 +125,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				'id' => 'wb-itembytitle-submit',
 				'class' => 'wb-input-button',
 				'type' => 'submit',
-				'name' => 'submit',
+				'name' => '',
 			) );
 
 		$cases['empty'] = array( '', array(), null, $matchers );
