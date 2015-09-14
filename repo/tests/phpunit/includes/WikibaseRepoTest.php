@@ -244,7 +244,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetTermBuffer() {
 		$service = $this->getWikibaseRepo()->getTermBuffer();
-		$this->assertInstanceOf( 'Wikibase\Store\TermBuffer', $service );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Term\TermBuffer', $service );
 	}
 
 	public function testGetTermBuffer_instance() {
