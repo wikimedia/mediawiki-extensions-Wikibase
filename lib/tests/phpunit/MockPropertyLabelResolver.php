@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\PropertyLabelResolver;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 
 /**
  * Mock resolver, based on a MockRepository
