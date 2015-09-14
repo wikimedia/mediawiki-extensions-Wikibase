@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_9a3f9520",
+        "filename": "lib/includes/formatters/AutoCommentFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-14T13:19:27Z",
+      "side": 1,
+      "message": "But the return value can never be true. PHPStorm actualyl stopped complaining about \"false\" not being a type at some point, I assume because it\u0027s common and useful to allow false but not true as a value.\n\nYou are right that false isn\u0027t a type. But the hint is more clear and more useful if it sais false instead of bool, I think. What harm does it do?",
+      "parentUuid": "6ec1af18_2a817da4",
+      "revId": "5c49324ba2882df8727878a4d54ee042b3d636ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_6ab6a587",
         "filename": "lib/tests/phpunit/formatters/AutoCommentFormatterTest.php",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_da143da3",
+        "filename": "lib/tests/phpunit/formatters/AutoCommentFormatterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-14T13:19:27Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "6ec1af18_6ab6a587",
+      "revId": "5c49324ba2882df8727878a4d54ee042b3d636ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_8a667125",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 7
@@ -47,6 +83,24 @@
       "writtenOn": "2015-09-11T16:23:36Z",
       "side": 1,
       "message": "This is the wrong order, isn\u0027t it?",
+      "revId": "5c49324ba2882df8727878a4d54ee042b3d636ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_9a26b510",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-14T13:19:27Z",
+      "side": 1,
+      "message": "right, thanks, good catch!",
+      "parentUuid": "6ec1af18_8a667125",
       "revId": "5c49324ba2882df8727878a4d54ee042b3d636ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
