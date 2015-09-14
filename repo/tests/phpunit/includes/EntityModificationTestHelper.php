@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

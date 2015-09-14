@@ -30,7 +30,7 @@ use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 use Wikibase\RedirectRevision;
 
 /**
@@ -133,11 +133,7 @@ class MockRepository implements
 
 		if ( isset( $this->redirects[$key] ) ) {
 			$redirRev = $this->redirects[$key];
-			throw new UnresolvedRedirectException(
-				$redirRev->getRedirect()->getTargetId(),
-				$redirRev->getRevisionId(),
-				$redirRev->getTimestamp()
-			);
+			throw new UnresolvedRedirectException( $redirRev->getRedirect()->getTargetId() );
 		}
 
 		if ( empty( $this->entities[$key] ) ) {

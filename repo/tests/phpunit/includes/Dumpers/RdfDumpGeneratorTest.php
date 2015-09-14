@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 use Wikibase\Test\Rdf\RdfBuilderTest;
 
 /**
