@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
-use Language;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\Change;
@@ -74,9 +73,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			$updater ?: new MockPageUpdater(),
 			$changeListTransformer,
-			Language::factory( 'qqx' ),
 			$this->getMock( 'SiteStore' ),
-			'enwiki',
 			'repowiki',
 			true
 		);
@@ -239,75 +236,6 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$this->assertEmpty( array_values( $unexpected ), 'unexpected actions: ' . implode( '|', $unexpected ) );
 	}
 
-	public function provideGetEditComment() {
-		$changes = TestChanges::getChanges();
-
-		$dummy = Title::newFromText( 'Dummy' );
-
-		return array(
-			array( // #0
-				$changes['item-deletion-linked'],
-				$dummy,
-				array( 'q100' => array( 'Emmy' ) ),
-				'(wikibase-comment-remove)'
-			),
-			array( // #1
-				$changes['set-de-label'],
-				$dummy,
-				array( 'q100' => array( 'Emmy' ) ),
-				'/* set-de-label:1| */ bla bla'
-			),
-			array( // #2
-				$changes['add-claim'],
-				$dummy,
-				array( 'q100' => array( 'Emmy' ) ),
-				'/* add-claim:1| */ bla bla'
-			),
-			array( // #3
-				$changes['remove-claim'],
-				$dummy,
-				array( 'q100' => array( 'Emmy' ) ),
-				'/* remove-claim:1| */ bla bla'
-			),
-			array( // #4
-				$changes['set-dewiki-sitelink'],
-				$dummy,
-				array( 'q100' => array( 'Emmy' ) ),
-				'(wikibase-comment-sitelink-add: [[:dewiki:Dummy]])'
-			),
-			array( // #5
-				$changes['change-dewiki-sitelink'],
-				$dummy,
-				array( 'q100' => array( 'Emmy' ) ),
-				'(wikibase-comment-sitelink-change: [[:dewiki:Dummy]], [[:dewiki:Dummy2]])',
-			),
-			array( // #6
-				$changes['change-enwiki-sitelink'],
-				$dummy,
-				array( 'q100' => array( 'Emmy' ) ),
-				'(wikibase-comment-sitelink-change: [[:enwiki:Emmy]], [[:enwiki:Emmy2]])',
-			),
-			array( // #7
-				$changes['remove-dewiki-sitelink'],
-				$dummy,
-				array( 'q100' => array( 'Emmy2' ) ),
-				'(wikibase-comment-sitelink-remove: [[:dewiki:Dummy2]])',
-			),
-			array( // #8
-				$changes['remove-enwiki-sitelink'],
-				$dummy,
-				array( 'q100' => array( 'Emmy2' ) ),
-				'(wikibase-comment-unlink)',
-			),
-			array( // #9
-				$changes['remove-enwiki-sitelink'],
-				$dummy,
-				array( 'q100' => array() ),
-				'(wikibase-comment-unlink)',
-			),
-		);
-	}
-
 	/**
 	 * Returns a map of fake local page IDs to the corresponding local page names.
 	 * The fake page IDs are the IDs of the items that have a sitelink to the
@@ -425,16 +353,6 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 				} ) );
 
 		return $usageLookup;
-	}
-
-	/**
-	 * @dataProvider provideGetEditComment
-	 */
-	public function testGetEditComment( Change $change, Title $title, array $pageNamesPerItemId, $expected ) {
-		$handler = $this->getChangeHandler( $pageNamesPerItemId );
-		$comment = $handler->getEditComment( $change, $title );
-
-		$this->assertEquals( $expected, $comment );
 	}
 
 	/**
