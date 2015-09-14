@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Parsers;
+namespace Wikibase\Repo\Parsers;
 
 use DataValues\TimeValue;
 use Language;
@@ -24,7 +24,7 @@ use ValueParsers\ValueParser;
  *
  * @todo move me to DataValues-time
  */
-class MWTimeIsoParser extends StringValueParser {
+class MwTimeIsoParser extends StringValueParser {
 
 	const FORMAT_NAME = 'mw-time-iso';
 

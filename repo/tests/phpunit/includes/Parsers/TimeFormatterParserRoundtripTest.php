@@ -1,19 +1,28 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
+use PHPUnit_Framework_TestCase;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use ValueParsers\IsoTimestampParser;
+use ValueParsers\ParserOptions;
+use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Lib\Parsers\TimeParserFactory;
+use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**
- * @group WikibaseLib
+ * @covers Wikibase\Lib\MwTimeIsoFormatter
+ * @covers Wikibase\Repo\Parsers\TimeParserFactory
+ *
+ * @group WikibaseRepo
  * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
+class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 
 	public function isoTimestampProvider() {
 		return array(
@@ -48,7 +57,6 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider timeValueProvider
-	 * @param TimeValue $expected
 	 */
 	public function testFormatterParserRoundtrip( TimeValue $expected ) {
 		$formatter = new MwTimeIsoFormatter();
@@ -89,7 +97,6 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider formattedTimeProvider
-	 * @param string $expected
 	 */
 	public function testParserFormatterRoundtrip( $expected ) {
 		$factory = new TimeParserFactory();
@@ -101,6 +108,109 @@ class TimeFormatterParserRoundtripTest extends \MediaWikiTestCase {
 		$formatted = $formatter->format( $timeValue );
 
 		$this->assertSame( $expected, $formatted );
+	}
+
+	/**
+	 * @dataProvider precisionDayProvider
+	 */
+	public function testPrecisionDayRoundtrip( TimeValue $timeValue, $formatted, $languageCode ) {
+		$formatterOptions = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => $languageCode,
+		) );
+		$formatter = new MwTimeIsoFormatter( $formatterOptions );
+
+		$parserOptions = new ParserOptions( array(
+			ValueParser::OPT_LANG => $languageCode,
+			IsoTimestampParser::OPT_PRECISION => $timeValue->getPrecision(),
+			IsoTimestampParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
+		) );
+		$factory = new TimeParserFactory( $parserOptions );
+		$parser = $factory->getTimeParser();
+
+		$this->assertSame( $formatted, $formatter->format( $timeValue ) );
+		$this->assertEquals( $timeValue, $parser->parse( $formatted ) );
+	}
+
+	public function precisionDayProvider() {
+		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
+		$cases = array();
+
+		$tests = array(
+			// Positive dates
+			array(
+				'+2013-08-16T00:00:00Z',
+				'16 August 2013',
+			),
+			array(
+				'+00000002013-07-16T00:00:00Z',
+				'16 July 2013',
+			),
+			array(
+				'+00000000001-01-14T00:00:00Z',
+				'14 January 1',
+			),
+			array(
+				'+00000010000-01-01T00:00:00Z',
+				'1 January 10000',
+			),
+
+			// Negative dates
+			array(
+				'-2013-08-16T00:00:00Z',
+				'16 August 2013 BCE',
+			),
+			array(
+				'-00000002013-07-16T00:00:00Z',
+				'16 July 2013 BCE',
+			),
+			array(
+				'-00000000001-01-14T00:00:00Z',
+				'14 January 1 BCE',
+			),
+			array(
+				'-00000010000-01-01T00:00:00Z',
+				'1 January 10000 BCE',
+			),
+
+			// Some languages default to genitive month names
+			array(
+				'+2013-08-16T00:00:00Z',
+				// Nominative is "Augustus", genitive is "Augusti".
+				'16 Augusti 2013',
+				'la'
+			),
+
+			// Preserve punctuation as given in MessagesXx.php but skip suffixes and words
+			array(
+				'+2013-08-16T00:00:00Z',
+				'16 Avgust, 2013',
+				'kaa'
+			),
+			array(
+				'+2013-08-16T00:00:00Z',
+				'16 agosto 2013',
+				'pt'
+			),
+			array(
+				'+2013-08-16T00:00:00Z',
+				'16 8月 2013',
+				'yue'
+			),
+		);
+
+		foreach ( $tests as $args ) {
+			$timestamp = $args[0];
+			$formatted = $args[1];
+			$languageCode = isset( $args[2] ) ? $args[2] : 'en';
+
+			$cases[] = array(
+				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $gregorian ),
+				$formatted,
+				$languageCode
+			);
+		}
+
+		return $cases;
 	}
 
 }

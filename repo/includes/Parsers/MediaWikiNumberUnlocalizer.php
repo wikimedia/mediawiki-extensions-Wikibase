@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib;
+namespace Wikibase\Repo\Parsers;
 
 use Language;
 use ValueParsers\BasicNumberUnlocalizer;

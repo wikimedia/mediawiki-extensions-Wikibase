@@ -1,19 +1,19 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Parsers;
+namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
 use Language;
 use PHPUnit_Framework_TestCase;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
-use Wikibase\Lib\Parsers\TimeParserFactory;
+use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**
- * @covers Wikibase\Lib\Parsers\TimeParserFactory
+ * @covers Wikibase\Repo\Parsers\TimeParserFactory
  *
  * @group ValueParsers
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group Wikibase
  * @group TimeParsers
  *
@@ -33,8 +33,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider validInputProvider
 	 */
-	public function testParse( $value, TimeValue $expected ) {
-		$factory = new TimeParserFactory();
+	public function testParse( $value, TimeValue $expected, $languageCode ) {
+		$factory = new TimeParserFactory( new ParserOptions( array( ValueParser::OPT_LANG => $languageCode ) ) );
 		$parser = $factory->getTimeParser();
 
 		$this->assertTrue( $expected->equals( $parser->parse( $value ) ) );
@@ -46,8 +46,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$valid = array(
 			/**
-			 * @see Wikibase\Lib\Parsers\YearTimeParser
-			 * @see Wikibase\Lib\Parsers\Test\YearTimeParserTest
+			 * @see Wikibase\Repo\Parsers\YearTimeParser
+			 * @see Wikibase\Test\YearTimeParserTest
 			 */
 			'1999' =>
 				array( '+1999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
@@ -73,8 +73,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '-1000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, $julian ),
 
 			/**
-			 * @see Wikibase\Lib\Parsers\YearMonthTimeParser
-			 * @see Wikibase\Lib\Parsers\Test\YearMonthTimeParserTest
+			 * @see Wikibase\Repo\Parsers\YearMonthTimeParser
+			 * @see Wikibase\Test\YearMonthTimeParserTest
 			 */
 			'1 1999' =>
 				array( '+1999-01-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
@@ -103,8 +103,8 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '+2015-00-00T00:00:00Z', TimeValue::PRECISION_YEAR ),
 
 			/**
-			 * @see Wikibase\Lib\Parsers\MWTimeIsoParser
-			 * @see Wikibase\Lib\Parsers\Test\MWTimeIsoParserTest
+			 * @see Wikibase\Repo\Parsers\MwTimeIsoParser
+			 * @see Wikibase\Test\MwTimeIsoParserTest
 			 */
 			'13 billion years CE' =>
 				array( '+13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G ),
@@ -151,6 +151,18 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '+1991-01-20T00:00:00Z' ),
 			'2001 1 1' =>
 				array( '+2001-01-01T00:00:00Z' ),
+
+			/**
+			 * @see ValueFormatters\Test\MwTimeIsoFormatterTest
+			 */
+			'16 Augusti 2013' =>
+				array( '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'la' ),
+			'16 Avgust, 2013' =>
+				array( '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'kaa' ),
+			'16 agosto 2013' =>
+				array( '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'pt' ),
+			'16 8月 2013' =>
+				array( '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'yue' ),
 		);
 
 		$argLists = array();
@@ -159,10 +171,12 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			$timestamp = $expected[0];
 			$precision = isset( $expected[1] ) ? $expected[1] : TimeValue::PRECISION_DAY;
 			$calendarModel = isset( $expected[2] ) ? $expected[2] : $gregorian;
+			$languageCode = isset( $expected[3] ) ? $expected[3] : 'en';
 
 			$argLists[] = array(
 				(string)$value,
-				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel )
+				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel ),
+				$languageCode
 			);
 		}
 
