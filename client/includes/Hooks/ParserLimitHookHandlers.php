@@ -8,7 +8,7 @@ use Parser;
 use ParserOutput;
 use StubObject;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Client\DataAccess\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 
 /**
  * @since 0.5.
