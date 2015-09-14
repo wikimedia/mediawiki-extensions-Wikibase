@@ -5,10 +5,10 @@ namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 use InvalidArgumentException;
 use Language;
 use Status;
-use Wikibase\Client\DataAccess\EntityAccessLimitException;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 
 /**
  * PropertyClaimsRenderer of the {{#property}} parser function.
