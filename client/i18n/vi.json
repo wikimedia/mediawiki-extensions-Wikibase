@@ -55,6 +55,7 @@
 	"unconnectedpages": "Trang không kết nối với khoản mục",
 	"unconnectedpages-summary": "Danh sách này có các trang không có khoản mục dữ liệu được liên kết (trong các không gian tên hỗ trợ khoản mục được kết nối). Danh sách được sắp xếp theo số trang trở xuống, cho nên các trang mới hơn được liệt kê trước.The list is sorted by descending page ID, so that newer pages are listed first.",
 	"wikibase-unconnectedpages-format-row": "($1 liên kết ngôn ngữ trên trang)",
+	"wikibase-unconnectedpages-submit": "Xem",
 	"wikibase-pageinfo-entity-id": "ID khoản mục {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Không có",
 	"wikibase-property-render-error": "Thất bại khi kết xuất thuộc tính $1: $2",

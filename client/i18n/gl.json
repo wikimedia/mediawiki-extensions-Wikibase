@@ -64,6 +64,7 @@
 	"unconnectedpages": "Páxinas non conectadas con elementos",
 	"unconnectedpages-summary": "Esta páxina lista páxinas sen conexión a un elemento de datos (nos espazos de nomes que admiten elementos conectados). A lista está ordenada por identificador de páxina descendente, polo que as páxinas máis novas móstranse primeiro.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|ligazón interlingüística|ligazóns interlingüísticas}} na páxina)",
+	"wikibase-unconnectedpages-submit": "Mostrar as páxinas",
 	"pageswithbadges": "Páxinas con distintivos",
 	"pageswithbadges-summary": "Esta páxina mostra as páxinas con distintivos (p. ex., artgo bo ou artigo destacado). A lista está ordenada por identificador de páxina descendente, polo que as páxinas novas móstranse primeiro.",
 	"wikibase-pageswithbadges-invalid-id": "$1 non é un identificador de elemento válido",

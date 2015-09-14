@@ -363,7 +363,7 @@
 	"apihelp-wbeditentity-param-summary": "Zusammenfassung für die Bearbeitung. \nEs wird ein automatisch generierter Kommentar vorangestellt. Die maximale Länge des automatischen Kommentars und der Zusammenfassung darf 260 Zeichen nicht überschreiten. Alles über dieser Begrenzung wird abgeschnitten.",
 	"apihelp-wbeditentity-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „Bot“ angehört.",
 	"apihelp-wbeditentity-param-data": "Das serialisierte Objekt, das als Datenquelle verwendet wird.\nEinem neu erstellten Objekt wird eine „Kennung“ zugewiesen.",
-	"apihelp-wbeditentity-param-new": "Wenn dies festgelegt wird, wird ein neues Objekt angelegt. \nLegt dies als den gewünschten zu erstellenden Objekttyp fest – aktuell „item“|„property“.\nEs ist nicht erlaubt, dies festzulegen, wenn „id“ ebenfalls festgelegt ist.",
+	"apihelp-wbeditentity-param-new": "Wenn dies festgelegt wird, wird ein neues Objekt angelegt. \nLegt dies als den gewünschten zu erstellenden Objekttyp fest.\nEs ist nicht erlaubt, dies festzulegen, wenn „id“ ebenfalls festgelegt ist.",
 	"apihelp-wbeditentity-example-1": "Erstellt ein neues leeres Datenobjekt, gibt die gesamte Objektstruktur zurück",
 	"apihelp-wbeditentity-example-2": "Erstellt ein neues Objekt und legt die Bezeichnungen für de und en fest",
 	"apihelp-wbeditentity-example-3": "Erstellt eine neue Eigenschaft mit den JSON-Daten, gibt die volle Objektstruktur zurück",

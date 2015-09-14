@@ -347,7 +347,7 @@
 	"apihelp-wbeditentity-param-bot": "Nzegna stu cagnamiento comm'a nu bot. Sta bannera 'URL sarrà surtanto rispettata si l'utente appartene a 'o gruppo \"bot\".",
 	"apihelp-wbeditentity-param-data": "L'oggetto serializzato ca s'ausasse comm' 'a fonte 'e date.\nN'entità criata mò mò sarrà nzegnata na 'id' dinto.",
 	"apihelp-wbeditentity-param-clear": "Si se mpustasse, l'entità sana sana fosse sbacantata primm' 'e prucedere.\nL'entità nun sarrà sarvata primma 'e se ghienchere ch' 'e \"date\", può darse ca se fossero luvat'a miezo cocche parte.",
-	"apihelp-wbeditentity-param-new": "Se si mpustasse, n'entità nova se criasse.\nMpustate chesto a 'o tipo 'entità ca vulite crià - mo' mo' 'item'|'property'.\nNun è premmesso 'e n'avé sta mpustaziona quanno l' 'id' è pure mpustato.",
+	"apihelp-wbeditentity-param-new": "Se si mpustasse, n'entità nova se criasse.\nMpustate chesto a 'o tipo 'entità ca vulite crià.\nNun è premmesso 'e n'avé sta mpustaziona quanno l' 'id' è pure mpustato.",
 	"apihelp-wbeditentity-example-1": "Crèa n'element nuovo abbacante, tòrna 'a struttura entità sana sana",
 	"apihelp-wbeditentity-example-2": "Crè n'elemento nuovo 'e mpusta 'etichette pe' de e en",
 	"apihelp-wbeditentity-example-3": "Crèa na pruprietà nova cuntenenno 'e date json, turnanno na struttura entità nova",

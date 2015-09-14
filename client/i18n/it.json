@@ -62,6 +62,7 @@
 	"unconnectedpages": "Pagine non collegate agli elementi",
 	"unconnectedpages-summary": "Questa pagina elenca le pagine non connessi ad un elemento data (nei namespace che supportano il collegamento tra elementi) Questa lista è ordinata in ordine decrescente secondo l'ID della pagina, cosicché le nuove voci siano elencate per prime.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|collegamento interlinguistico|collegamenti interlinguistici}} nella pagina)",
+	"wikibase-unconnectedpages-submit": "Vai",
 	"pageswithbadges": "Pagine con distintivi",
 	"wikibase-pageswithbadges-badge": "Distintivo:",
 	"wikibase-pageswithbadges-submit": "Mostra pagine",

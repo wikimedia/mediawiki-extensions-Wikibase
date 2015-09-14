@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Denö"
+			"Denö",
+			"Mashoi7"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "Wikipedii"
+	"wikibase-timedetails-time": "Aigu",
+	"wikibase-timedetails-before": "Enne",
+	"wikibase-timedetails-after": "Jälgeh",
+	"wikibase-sitelinks-wikipedia": "Wikipedii",
+	"wikibase-sitelinks-sitename-columnheading": "Kieli"
 }

@@ -11,11 +11,15 @@
 	"wikibase-dataitem": "{{WBREPONAME}} elementu",
 	"wikibase-editlinks": "Korjua linkit",
 	"wikibase-editlinkstitle": "Korjua kielienvälizet linkit",
+	"wikibase-linkitem-input-site": "Kieli:",
+	"wikibase-linkitem-input-page": "Sivu:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Peitä",
 	"wikibase-rc-hide-wikidata-show": "Ozuta",
 	"wikibase-rc-wikibase-edit-letter": "K",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} korjavus",
+	"wikibase-unconnectedpages-submit": "Ozuta sivut",
 	"wikibase-pageswithbadges-submit": "Ozuta sivut",
+	"wikibase-pageinfo-entity-id-none": "Nimidä",
 	"wikibase-otherprojects": "Muut projektat"
 }

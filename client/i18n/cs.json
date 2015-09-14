@@ -57,6 +57,7 @@
 	"unconnectedpages": "Stránky nepropojené s položkou",
 	"unconnectedpages-summary": "Tato stránka obsahuje seznam stránek, které nejsou propojeny s datovou položkou (ve jmenných prostorech, které toto propojení umožňují). Seznam je seřazen sestupně podle ID stránky, takže novější stránky se zobrazují první.",
 	"wikibase-unconnectedpages-format-row": "(stránka obsahuje $1 {{PLURAL:$1|mezijazykový odkaz|mezijazykové odkazy|mezijazykových odkazů}})",
+	"wikibase-unconnectedpages-submit": "Provést",
 	"pageswithbadges-summary": "Tato stránka obsahuje seznam stránek s odznaky (např. dobrý článek nebo nejlepší článek). Je seřazený sestupně podle ID stránky, takže novější stránky jsou zobrazeny jako první.",
 	"wikibase-pageinfo-entity-id": "ID položky {{grammar:2sg|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Žádná",

@@ -37,6 +37,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} değişikliği",
 	"wikibase-watchlist-show-changes-pref": "İzleme listemde {{WBREPONAME}} değişikliklerini göster",
 	"unconnectedpages": "Öğelerine bağlanmamış sayfalar",
+	"wikibase-unconnectedpages-submit": "Git",
 	"wikibase-pageswithbadges-submit": "Sayfaları göster",
 	"wikibase-otherprojects": "Diğer projeler",
 	"wikibase-otherprojects-beta-message": "Diğer projeler kenar çubuğu",

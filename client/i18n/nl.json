@@ -57,6 +57,7 @@
 	"wikibase-error-invalid-entity-id": "Het opgegeven ID is niet bekend in het systeem. Gebruik een geldig entiteits-ID.",
 	"unconnectedpages": "Pagina's die niet gekoppeld zijn aan items",
 	"wikibase-unconnectedpages-format-row": "($1 intertaalkoppeling{{PLURAL:$1||en}} op de pagina)",
+	"wikibase-unconnectedpages-submit": "OK",
 	"pageswithbadges": "Pagina's met badges",
 	"wikibase-pageswithbadges-legend": "Lijst van pagina's met een opgegeven badge",
 	"wikibase-pageswithbadges-badge": "Badge:",

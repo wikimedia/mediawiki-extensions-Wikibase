@@ -9,6 +9,7 @@
 			"Gwenn-Ael"
 		]
 	},
+	"tooltip-t-wikibase": "Liamm war-zu elfenn dave ar roadennoù kevreet",
 	"wikibase-comment-update": "Elfenn {{WBREPONAME}} kemmet",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|kemm|kemm}}",
 	"wikibase-dataitem": "Elfenn {{WBREPONAME}}",
