@@ -30,7 +30,7 @@ use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 use Wikibase\RedirectRevision;
 
 /**
