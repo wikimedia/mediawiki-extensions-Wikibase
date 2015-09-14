@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use Language;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
-use Wikibase\Client\DataAccess\RestrictedEntityLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
