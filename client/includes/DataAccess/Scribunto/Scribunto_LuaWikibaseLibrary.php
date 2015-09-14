@@ -7,7 +7,6 @@ use Language;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Client\DataAccess\EntityAccessLimitException;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -15,6 +14,7 @@ use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\Usage\UsageTrackingTermLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -262,7 +262,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			return array( $entityArr );
 		} catch ( EntityIdParsingException $ex ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
-		} catch ( EntityAccessLimitException $ex ) {
+		} catch ( EntityLookupException $ex ) {
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit' );
 		} catch ( Exception $ex ) {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
