@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_3a51c165",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-14T13:32:21Z",
+      "side": 0,
+      "message": "Uh, SiteLinkUsageLookup::getPageEntityUsagesFromSiteLinkRows() calls TitleFactory::newFromText, and then calls getArticleID on the resulting Title. If that returns 0, the tests should fail. Apparently they don\u0027t. This needs investigation.",
+      "revId": "b4853909726f2b8b3b3b5c36a103271d197bc745",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
