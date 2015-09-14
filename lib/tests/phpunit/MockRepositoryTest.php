@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Test\MockRepository
@@ -562,7 +562,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $redirect->getEntityId()->getSerialization(), $logEntry['entity'] );
 		$this->assertEquals( 'redirected Q10 to Q1', $logEntry['summary'] );
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Entity\UnresolvedRedirectException' );
 		$this->repo->getEntity( $q10 );
 	}
 
@@ -630,8 +630,6 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 			$this->fail( 'getEntityRevision() should fail for redirects' );
 		} catch ( UnresolvedRedirectException $ex ) {
 			$this->assertEquals( 'Q1', $ex->getRedirectTargetId()->getSerialization() );
-			$this->assertGreaterThan( 0, $ex->getRevisionId() );
-			$this->assertNotEmpty( $ex->getRevisionTimestamp() );
 		}
 
 		$this->repo->putRedirect( $redirect, 117, '20150505000000' );
@@ -641,8 +639,6 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 			$this->fail( 'getEntityRevision() should fail for redirects' );
 		} catch ( UnresolvedRedirectException $ex ) {
 			$this->assertEquals( 'Q1', $ex->getRedirectTargetId()->getSerialization() );
-			$this->assertEquals( 117, $ex->getRevisionId() );
-			$this->assertEquals( '20150505000000', $ex->getRevisionTimestamp() );
 		}
 	}
 
@@ -650,7 +646,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
 		$this->repo->putRedirect( $redirect );
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Entity\UnresolvedRedirectException' );
 		$this->repo->deleteEntity( $redirect->getEntityId(), 'testing', $GLOBALS['wgUser'] );
 	}
 

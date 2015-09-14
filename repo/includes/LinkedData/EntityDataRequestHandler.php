@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 use Wikibase\RedirectRevision;
 
 /**
@@ -363,7 +363,7 @@ class EntityDataRequestHandler {
 		} catch ( UnresolvedRedirectException $ex ) {
 			$redirectRevision = new RedirectRevision(
 				new EntityRedirect( $id, $ex->getRedirectTargetId() ),
-				$ex->getRevisionId(), $ex->getRevisionTimestamp()
+				0, ''
 			);
 
 			if ( is_string( $revision ) ) {

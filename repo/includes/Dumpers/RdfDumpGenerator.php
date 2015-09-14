@@ -9,10 +9,10 @@ use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
@@ -117,8 +117,8 @@ class RdfDumpGenerator extends DumpGenerator {
 			if ( $e->getRevisionId() > 0 ) {
 				$this->rdfBuilder->addEntityRevisionInfo(
 					$entityId,
-					$e->getRevisionId(),
-					$e->getRevisionTimestamp()
+					0,
+					''
 				);
 			}
 

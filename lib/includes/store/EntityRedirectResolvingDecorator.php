@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Entity\UnresolvedRedirectException;
 
 /**
  * Generic decorator class for transparently resolving EntityRedirects.
