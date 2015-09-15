@@ -35,22 +35,22 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 
 	public function provideTestAutoComment() {
 		return array(
-			'Empty comment' => array( '', '', null ),
-			'Non existant message' => array( 'wikibase', '##########', null ),
+			'Empty comment' => array( array( '' ), '', null ),
+			'Non existant message' => array( array( 'wikibase' ), '##########', null ),
 			'Existing message with no params' => array(
-				'wikibase-item',
+				array( 'wikibase-item' ),
 				'wbsetitem',
 				'(wikibase-item-summary-wbsetitem)',
 			),
 			'Existing message with 1 parameter' => array(
-				'wikibase-item',
+				array( 'wikibase-item', 'wikibase-entity' ),
 				'wbsetlabel-add:|FOO',
 				'(wikibase-item-summary-wbsetlabel-add: , FOO)',
 			),
 			'Existing message with 2 parameters' => array(
-				'wikibase-item',
+				array( 'wikibase-entity' ),
 				'wbsetaliases-set:10|FOO',
-				'(wikibase-item-summary-wbsetaliases-set: 10, FOO)',
+				'(wikibase-entity-summary-wbsetaliases-set: 10, FOO)',
 			),
 		);
 	}
@@ -58,8 +58,8 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideTestAutoComment
 	 */
-	public function testFormatAutoComment( $prefix, $auto, $expected ) {
-		$formatter = new AutoCommentFormatter( $this->language, $prefix );
+	public function testFormatAutoComment( array $prefixes, $auto, $expected ) {
+		$formatter = new AutoCommentFormatter( $this->language, $prefixes );
 		$value = $formatter->formatAutoComment( $auto );
 		$this->assertEquals( $expected, $value );
 	}
@@ -107,7 +107,7 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider provideWrapAutoComment
 	 */
 	public function testWrapAutoComment( $pre, $comment, $post, $expected ) {
-		$formatter = new AutoCommentFormatter( $this->language, 'DUMMY' );
+		$formatter = new AutoCommentFormatter( $this->language, array() );
 		$value = $formatter->wrapAutoComment( $pre, $comment, $post );
 		$this->assertEquals( $expected, $value );
 	}
