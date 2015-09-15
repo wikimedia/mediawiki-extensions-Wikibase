@@ -229,10 +229,7 @@ class ChangeOpTestMockProvider {
 	 * @return ValueValidator
 	 */
 	public function getMockTermValidator() {
-		$mock = $this->getMockBuilder( 'ValueValidators\ValueValidator' )
-			->disableOriginalConstructor()
-			->getMock();
-
+		$mock = $this->getMock( 'ValueValidators\ValueValidator' );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'validate' )
 			->will( PHPUnit_Framework_TestCase::returnCallback( function( $text ) {
