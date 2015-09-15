@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "Soppi",
-	"wikibase-add": "yokk"
+	"wikibase-add": "yokk",
+	"wikibase-statements": "Kàddu",
+	"wikibase-sitelinks-special": "Yeneeni dal",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|delluwaay}}"
 }

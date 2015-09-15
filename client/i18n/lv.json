@@ -29,9 +29,8 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Labojums {{WBREPONAME}}",
 	"wikibase-watchlist-show-changes-pref": "Rādīt labojumus Vikidatos uzraugāmo lapu sarakstā",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" nav derīgs valodas kods.",
-	"wikibase-unconnectedpages-iwdata-label": "Tikai lapas ar starpvalodu saitēm",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
+	"wikibase-unconnectedpages-submit": "Rādīt lapas",
 	"wikibase-pageinfo-entity-id": "Wikidata ieraksta ID",
 	"wikibase-otherprojects": "Citi projekti"
 }

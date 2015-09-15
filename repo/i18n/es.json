@@ -321,6 +321,7 @@
 	"apihelp-wbavailablebadges-description": "Consulta los elementos de insignias disponibles.",
 	"apihelp-wbcreateredirect-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
 	"apihelp-wbeditentity-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
+	"apihelp-wbeditentity-param-new": "Si se establece, se creará una entidad nueva.\nEstablece esto al tipo de entidad que quieres crear.\nNo está permitido establecer esto, cuando 'id' también se establece.",
 	"apihelp-wblinktitles-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
 	"apihelp-wbmergeitems-description": "Fusiona varios elementos.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",

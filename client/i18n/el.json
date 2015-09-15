@@ -51,7 +51,7 @@
 	"wikibase-error-invalid-entity-id": "Το κωδικός που θέσατε δεν αναγνωρίστηκε από το σύστημα. Παρακαλούμε χρησιμοποιήστε έναν έγκυρο κωδικό.",
 	"unconnectedpages": "Οι σελίδες δεν συνδέθηκαν με τα αντικείμενα.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|διαγλωσσικός σύνδεσμος|διαγλωσσικοί σύνδεσμοι}} για τη σελίδα)",
-	"wikibase-unconnectedpages-submit": "Μετάβαση",
+	"wikibase-unconnectedpages-submit": "Εμφάνιση σελίδων",
 	"wikibase-pageinfo-entity-id": "Αναγνωριστικό αντικειμένου {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Κανένα",
 	"wikibase-property-render-error": "Αποτυχία απόδοσης της ιδιότητας $1: $2",

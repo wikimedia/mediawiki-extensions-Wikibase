@@ -14,7 +14,8 @@
 			"Waldir",
 			555,
 			"He7d3r",
-			"Fúlvio"
+			"Fúlvio",
+			"Macofe"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -63,7 +64,7 @@
 	"unconnectedpages": "Páginas não conectadas a itens",
 	"unconnectedpages-summary": "Esta lista contém páginas sem itens conectados (em domínios com suporte a itens conectados). A lista está ordenada pelo ID da página descendente, de modo que as páginas mais novas são mostradas primeiro.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|ligação interlínguas|ligações interlínguas}} na página)",
-	"wikibase-unconnectedpages-submit": "Ir",
+	"wikibase-unconnectedpages-submit": "Mostrar páginas",
 	"pageswithbadges": "Páginas com emblemas",
 	"pageswithbadges-summary": "Esta página lista páginas com emblemas (ex: artigo bom ou artigo destacado). A lista é ordenada pelo identificador de página descendente, de modo que as páginas mais recentes são listadas primeiro.",
 	"wikibase-pageswithbadges-legend": "Lista de páginas com um determinado emblema",
