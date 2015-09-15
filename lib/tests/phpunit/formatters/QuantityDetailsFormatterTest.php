@@ -98,9 +98,7 @@ class QuantityDetailsFormatterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenHtmlCharacters_formatEscapesHtmlCharacters() {
-		$unitFormatter = $this->getMockBuilder( 'ValueFormatters\NumberLocalizer' )
-			->disableOriginalConstructor()
-			->getMock();
+		$unitFormatter = $this->getMock( 'ValueFormatters\NumberLocalizer' );
 		$unitFormatter->expects( $this->any() )
 			->method( 'localizeNumber' )
 			->will( $this->returnValue( '<a>+2</a>' ) );
