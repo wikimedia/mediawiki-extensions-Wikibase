@@ -16,6 +16,24 @@
       "revId": "b4853909726f2b8b3b3b5c36a103271d197bc745",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_2979742a",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-15T09:27:03Z",
+      "side": 0,
+      "message": "I did the investigation and found why the test does not fail without the setter: The Title object comes from Title::$titleCache with the ID preset, most probably because the corresponding newFromID is called first. So you are right, the article ID *should* be set here. I will re-add the setter.",
+      "parentUuid": "6ec1af18_3a51c165",
+      "revId": "b4853909726f2b8b3b3b5c36a103271d197bc745",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
