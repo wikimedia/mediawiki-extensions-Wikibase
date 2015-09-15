@@ -9,6 +9,7 @@
  * @see wikibase.datamodel.StatementGroup
  * @see wikibase.datamodel.StatementGroupSet
  * @uses jQuery.wikibase.statementgroupview
+ * @uses jQuery.wikibase.statementgrouplabelscroll
  * @uses jQuery.wikibase.listview
  * @uses jQuery.wikibase.listview.ListItemAdapter
  * @since 0.5
@@ -98,6 +99,9 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 				listview.removeItem( $statementgroupview );
 			}
 		} );
+
+		this.element.statementgrouplabelscroll();
+
 	},
 
 	/**

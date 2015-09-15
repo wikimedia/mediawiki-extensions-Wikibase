@@ -1,4 +1,4 @@
-( function( wb, $, mw ) {
+( function( $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -16,12 +16,7 @@
  *
  * @param {Object} options
  * @param {wikibase.datamodel.Entity} options.value
- * @param {string[]|string} languages
- *        Language codes of the languages to display label-/description-/aliasesview in. Other
- *        components of the entityview will use the first language code for rendering. May just be a
- *        single language code.
- * @param {wikibase.entityChangers.EntityChangersFactory} options.entityChangersFactory
- *        Required to be able to store changes applied to the entity.
+ * @param {Function} options.entityTermsViewBuilder
  */
 /**
  * @event afterstartediting
@@ -41,6 +36,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @protected
 	 */
 	options: {
+		entityTermsViewBuilder: null,
 		template: 'wikibase-entityview',
 		templateParams: [
 			'', // entity type
@@ -54,9 +50,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 			$main: '.wikibase-entityview-main',
 			$side: '.wikibase-entityview-side'
 		},
-		value: null,
-		languages: null,
-		entityChangersFactory: null
+		value: null
 	},
 
 	/**
@@ -90,17 +84,9 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @throws {Error} if a required options is missing.
 	 */
 	_init: function() {
-		if(
-			!this.options.value
-			|| !this.options.languages
-			|| !this.options.entityStore
-			|| !this.options.valueViewBuilder
-			|| !this.options.entityChangersFactory
-		) {
+		if( !this.options.value || !this.options.entityTermsViewBuilder ) {
 			throw new Error( 'Required option(s) missing' );
 		}
-
-		this.option( 'languages', this.options.languages );
 
 		this.element.data( $.wikibase.entityview.prototype.widgetName, this );
 
@@ -115,34 +101,13 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @protected
 	 */
 	_initEntityTerms: function() {
-		var i;
-
 		this.$entityTerms = $( '.wikibase-entitytermsview', this.element );
 
 		if( !this.$entityTerms.length ) {
 			this.$entityTerms = $( '<div/>' ).prependTo( this.$main );
 		}
 
-		var fingerprint = this.options.value.getFingerprint(),
-			value = [];
-
-		for( i = 0; i < this.options.languages.length; i++ ) {
-			value.push( {
-				language: this.options.languages[i],
-				label: fingerprint.getLabelFor( this.options.languages[i] )
-					|| new wb.datamodel.Term( this.options.languages[i], '' ),
-				description: fingerprint.getDescriptionFor( this.options.languages[i] )
-					|| new wb.datamodel.Term( this.options.languages[i], '' ),
-				aliases: fingerprint.getAliasesFor( this.options.languages[i] )
-					|| new wb.datamodel.MultiTerm( this.options.languages[i], [] )
-			} );
-		}
-
-		this.$entityTerms.entitytermsview( {
-			value: value,
-			entityChangersFactory: this.options.entityChangersFactory,
-			helpMessage: mw.msg( 'wikibase-entitytermsview-input-help-message' )
-		} );
+		this.options.entityTermsViewBuilder( this.options.value.getFingerprint(), this.$entityTerms );
 	},
 
 	/**
@@ -180,14 +145,6 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @throws {Error} when trying to set an option to an improper value.
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'languages' ) {
-			if( typeof this.options.languages === 'string' ) {
-				this.options.languages = [this.options.languages];
-			} else if( !$.isArray( this.options.languages ) ) {
-				throw new Error( 'languages need to be supplied as string or array' );
-			}
-		}
-
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if( key === 'disabled' ) {
@@ -231,4 +188,4 @@ $.expr[':'][$.wikibase.entityview.prototype.widgetFullName]
 	}
 );
 
-}( wikibase, jQuery, mediaWiki ) );
+}( jQuery ) );

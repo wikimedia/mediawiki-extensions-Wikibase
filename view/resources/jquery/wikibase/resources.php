@@ -67,6 +67,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
+				'jquery.wikibase.statementgrouplabelscroll',
 				'jquery.wikibase.statementgroupview',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.Item',
@@ -156,17 +157,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
-				'jquery.wikibase.aliasesview',
-				'jquery.wikibase.descriptionview',
-				'jquery.wikibase.entitytermsview',
-				'jquery.wikibase.labelview',
-				'wikibase.datamodel.MultiTerm',
-				'wikibase.datamodel.Term',
-				'wikibase.getLanguageNameByCode',
-				'wikibase.templates',
-			),
-			'messages' => array(
-				'wikibase-entitytermsview-input-help-message',
 			),
 		),
 
@@ -244,11 +234,8 @@ return call_user_func( function() {
 				'jquery.wikibase.itemview.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.statementgrouplabelscroll',
-				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.sitelinkgrouplistview',
-				'wikibase.utilities.ClaimGuidGenerator',
 			),
 		),
 
@@ -302,10 +289,8 @@ return call_user_func( function() {
 				'jquery.wikibase.propertyview.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.statementgrouplabelscroll',
-				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.entityview',
-				'wikibase.utilities.ClaimGuidGenerator',
+				'wikibase.templates',
 			),
 		),
 

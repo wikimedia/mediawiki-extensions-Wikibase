@@ -1,4 +1,4 @@
-( function( $, wb, mw ) {
+( function( $, mw ) {
 	'use strict';
 
 var PARENT = $.wikibase.entityview;
@@ -8,28 +8,15 @@ var PARENT = $.wikibase.entityview;
  * @see wikibase.datamodel.Property
  * @class jQuery.wikibase.propertyview
  * @extends jQuery.wikibase.entityview
- * @uses jQuery.wikibase.statementgrouplistview
- * @uses jQuery.wikibase.statementgrouplabelscroll
- * @uses wikibase.utilities.ClaimGuidGenerator
  * @since 0.5
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
+ * @param {Object} options
+ * @param {Function} options.statementGroupListViewBuilder
+ *
  * @constructor
  *
- * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
- *        Required for dynamically rendering links to `Entity`s.
- * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
- *        Required for dynamically rendering plain text references to `Entity`s.
- * @param {wikibase.store.EntityStore} options.entityStore
- *        Required by sub-components of the `entityview` to enable those to dynamically query for
- *        `Entity` objects.
- * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
- *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
- *        `jQuery.valueview`.
- * @param {dataTypes.DataTypeStore} options.dataTypeStore
- *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
- *        object when interacting on a "value" `Variation`.
  */
 $.widget( 'wikibase.propertyview', PARENT, {
 	/**
@@ -37,10 +24,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @protected
 	 */
 	options: {
-		entityIdPlainFormatter: null,
-		entityStore: null,
-		valueViewBuilder: null,
-		dataTypeStore: null
+		statementGroupListViewBuilder: null
 	},
 
 	/**
@@ -75,6 +59,10 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @protected
 	 */
 	_init: function() {
+		if( !this.options.statementGroupListViewBuilder ) {
+			throw new Error( 'Required option(s) missing' );
+		}
+
 		this._initStatements();
 		PARENT.prototype._init.call( this );
 	},
@@ -103,20 +91,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @protected
 	 */
 	_initStatements: function() {
-		var claimGuidGenerator = new wb.utilities.ClaimGuidGenerator( this.options.value.getId() );
-
-		this.$statements
-		.statementgrouplistview( {
-			value: this.options.value.getStatements(),
-			claimGuidGenerator: claimGuidGenerator,
-			dataTypeStore: this.option( 'dataTypeStore' ),
-			entityIdHtmlFormatter: this.options.entityIdHtmlFormatter,
-			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-			entityStore: this.options.entityStore,
-			valueViewBuilder: this.options.valueViewBuilder,
-			entityChangersFactory: this.options.entityChangersFactory
-		} )
-		.statementgrouplabelscroll();
+		this.options.statementGroupListViewBuilder( this.options.value, this.$statements );
 
 		// This is here to be sure there is never a duplicate id:
 		$( '.wikibase-statementgrouplistview' )
@@ -175,4 +150,4 @@ $.widget( 'wikibase.propertyview', PARENT, {
 
 $.wikibase.entityview.TYPES.push( $.wikibase.propertyview.prototype.widgetName );
 
-}( jQuery, wikibase, mediaWiki ) );
+}( jQuery, mediaWiki ) );
