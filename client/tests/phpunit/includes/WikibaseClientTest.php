@@ -56,6 +56,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\LanguageFallbackChainFactory', $returnValue );
 	}
 
+	public function testGetLanguageFallbackLabelDescriptionLookupFactory() {
+		$returnValue = $this->getWikibaseClient()->getLanguageFallbackLabelDescriptionLookupFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory', $returnValue );
+	}
+
 	public function testGetStoreReturnType() {
 		$returnValue = $this->getWikibaseClient()->getStore();
 		$this->assertInstanceOf( 'Wikibase\ClientStore', $returnValue );
