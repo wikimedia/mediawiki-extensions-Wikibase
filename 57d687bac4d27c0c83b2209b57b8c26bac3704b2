@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_69c77c9b",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-15T08:33:51Z",
+      "side": 1,
+      "message": "mh... not sure we can conclude that from the (very generic) exception.",
+      "revId": "57d687bac4d27c0c83b2209b57b8c26bac3704b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
