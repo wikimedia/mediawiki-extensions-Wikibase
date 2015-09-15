@@ -78,15 +78,15 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	/**
-	 * @expectedException \Wikibase\DataModel\Services\Lookup\EntityLookupException
-	 */
 	public function testGetEntity_exception() {
 		$lookup = new RestrictedEntityLookup( $this->getEntityLookup(), 3 );
 
-		for ( $i = 1; $i < 6; $i++ ) {
-			$lookup->getEntity( new ItemId( 'Q' . $i ) );
-		}
+		$lookup->getEntity( new ItemId( 'Q1' ) );
+		$lookup->getEntity( new ItemId( 'Q2' ) );
+		$lookup->getEntity( new ItemId( 'Q3' ) );
+
+		$this->setExpectedException( '\Wikibase\DataModel\Services\Lookup\EntityAccessLimitException' );
+		$lookup->getEntity( new ItemId( 'Q4' ) );
 	}
 
 	public function testHasEntityBeenAccessed() {
