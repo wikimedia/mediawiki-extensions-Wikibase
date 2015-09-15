@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Test;
 
-use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
