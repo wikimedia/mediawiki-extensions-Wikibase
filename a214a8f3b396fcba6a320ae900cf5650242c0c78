@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_9fcc5a3a",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-15T14:59:11Z",
+      "side": 1,
+      "message": "Is this line really needed?",
+      "revId": "a214a8f3b396fcba6a320ae900cf5650242c0c78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
