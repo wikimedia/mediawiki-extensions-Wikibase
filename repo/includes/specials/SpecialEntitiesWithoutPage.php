@@ -159,7 +159,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				'label-message' => 'wikibase-entitieswithoutlabel-label-type'
 			),
 			'submit' => array(
-				'name' => 'submit',
+				'name' => '',
 				'default' => $this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wikibase-entitieswithoutpage-submit',
