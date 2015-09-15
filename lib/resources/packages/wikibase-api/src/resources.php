@@ -40,6 +40,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'mediawiki.api',
+				'mediawiki.ForeignApi',
 				'wikibase.api.__namespace',
 			),
 		),
