@@ -12,17 +12,9 @@
  */
 var createPropertyview = function( options, $node ) {
 	options = $.extend( {
-		entityStore: new wb.store.EntityStore(),
-		entityChangersFactory: {
-			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
-			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
-			getLabelsChanger: function() { return 'I am a LabelsChanger'; }
-		},
-		api: 'I am an Api',
-		valueViewBuilder: 'I am a valueview builder',
-		dataTypeStore: 'I am a DataTypeStore',
 		value: new wb.datamodel.Property( 'P1', 'someDataType' ),
-		languages: 'en'
+		entityTermsViewBuilder: function() {},
+		statementGroupListViewBuilder: function() {}
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -57,13 +49,6 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		'Throwing error when trying to initialize widget without a value.'
 	);
 
-	assert.throws(
-		function() {
-			createPropertyview( { languages: null } );
-		},
-		'Throwing error when trying to initialize widget without a language.'
-	);
-
 	var $propertyview = createPropertyview(),
 		propertyview = $propertyview.data( 'propertyview' );
 
@@ -79,13 +64,6 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		'Destroyed widget.'
 	);
 
-	$propertyview = createPropertyview( { languages: ['ku'] } );
-	propertyview = $propertyview.data( 'propertyview' );
-
-	assert.ok(
-		propertyview instanceof $.wikibase.propertyview,
-		'Created widget with a language.'
-	);
 } );
 
 }( jQuery, wikibase, QUnit ) );
