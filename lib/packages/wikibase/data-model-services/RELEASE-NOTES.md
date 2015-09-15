@@ -1,5 +1,10 @@
 # Wikibase DataModel Services release notes
 
+## Version 2.1.0 (dev)
+
+* Added `EntityAccessLimitException`
+* `RestrictedEntityLookup` now throws `EntityAccessLimitException` (non breaking change)
+
 ## Version 2.0.1 (2015-09-10)
 
 * Fixed uncaught exception in EntityIdLabelFormatter::formatEntityId ([T112003](https://phabricator.wikimedia.org/T112003))
