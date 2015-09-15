@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Services\Lookup;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Entity\EntityRedirectResolvingDecorator;
 
 /**
  * Implementation of EntityLookup that opaquely resolves one level
@@ -30,7 +29,7 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 * @param EntityLookup $lookup The lookup to use
 	 */
 	public function __construct( EntityLookup $lookup ) {
-		$this->lookup = new EntityRedirectResolvingDecorator( $lookup );
+		$this->lookup = $lookup;
 	}
 
 	/**
@@ -48,7 +47,11 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 * @throws EntityLookupException
 	 */
 	public function getEntity( EntityId $entityId ) {
-		return $this->lookup->getEntity( $entityId );
+		try {
+			return $this->lookup->getEntity( $entityId );
+		} catch ( UnresolvedEntityRedirectException $ex ) {
+			return $this->lookup->getEntity( $ex->getRedirectTargetId() );
+		}
 	}
 
 	/**
@@ -62,7 +65,11 @@ class RedirectResolvingEntityLookup implements EntityLookup {
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
-		return $this->lookup->hasEntity( $entityId );
+		try {
+			return $this->lookup->hasEntity( $entityId );
+		} catch ( UnresolvedEntityRedirectException $ex ) {
+			return $this->lookup->hasEntity( $ex->getRedirectTargetId() );
+		}
 	}
 
 }
