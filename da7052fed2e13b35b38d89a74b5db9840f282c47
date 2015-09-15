@@ -16,6 +16,24 @@
       "revId": "da7052fed2e13b35b38d89a74b5db9840f282c47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5f8b5172",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-09-15T15:30:08Z",
+      "side": 1,
+      "message": "yeah. This commit does not introduce new issues, it just highlights them",
+      "parentUuid": "6ec1af18_5f7fd211",
+      "revId": "da7052fed2e13b35b38d89a74b5db9840f282c47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
