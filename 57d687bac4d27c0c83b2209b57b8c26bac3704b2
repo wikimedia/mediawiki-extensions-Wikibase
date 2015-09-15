@@ -34,6 +34,24 @@
       "revId": "57d687bac4d27c0c83b2209b57b8c26bac3704b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_29a2d4a4",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-09-15T09:13:25Z",
+      "side": 1,
+      "message": "Here you go https://github.com/wmde/WikibaseDataModelServices/pull/66",
+      "parentUuid": "6ec1af18_2915f4e9",
+      "revId": "57d687bac4d27c0c83b2209b57b8c26bac3704b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
