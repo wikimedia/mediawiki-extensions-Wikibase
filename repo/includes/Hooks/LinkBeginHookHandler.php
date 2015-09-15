@@ -138,7 +138,7 @@ class LinkBeginHookHandler {
 		}
 
 		// Only continue on pages with edit summaries (histories / diffs) or on special pages.
-		if ( !$this->shouldConvert( $out->getTitle(), $context ) ) {
+		if ( defined( 'MW_API' ) || !$this->shouldConvert( $out->getTitle(), $context ) ) {
 			return;
 		}
 
