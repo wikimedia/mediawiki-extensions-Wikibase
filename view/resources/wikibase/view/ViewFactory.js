@@ -154,16 +154,95 @@
 			entity.getType() + 'view',
 			$dom,
 			{
-				dataTypeStore: this._dataTypeStore,
-				entityChangersFactory: this._entityChangersFactory,
-				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				entityStore: this._entityStore,
-				languages: this._userLanguages,
-				value: entity,
-				valueViewBuilder: this._getValueViewBuilder()
+				entityTermsViewBuilder: $.proxy( this.getEntityTermsView, this ),
+				sitelinkGroupListViewBuilder: $.proxy( this.getSitelinkGroupListView, this ),
+				statementGroupListViewBuilder: $.proxy( this.getStatementGroupListView, this ),
+				value: entity
 			}
 		);
+	};
+
+	/**
+	 * Construct a suitable terms view for the given entity on the given DOM element
+	 *
+	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {jQuery} $dom
+	 * @return {jQuery.wikibase.entitytermsview} The constructed entity terms view
+	 **/
+	SELF.prototype.getEntityTermsView = function( entity, $dom ) {
+		var fingerprint = entity.getFingerprint(),
+			value = $.map(
+				this._userLanguages,
+				function( language ) {
+					return {
+						language: language,
+						label: fingerprint.getLabelFor( language )
+							|| new wb.datamodel.Term( language, '' ),
+						description: fingerprint.getDescriptionFor( language )
+							|| new wb.datamodel.Term( language, '' ),
+						aliases: fingerprint.getAliasesFor( language )
+							|| new wb.datamodel.MultiTerm( language, [] )
+					};
+				}
+			);
+
+		return this._getView(
+			'entitytermsview',
+			$dom,
+			{
+				value: value,
+				entityId: entity.getId(),
+				entityChangersFactory: this._entityChangersFactory,
+				helpMessage: this._messageProvider.getMessage( 'wikibase-entitytermsview-input-help-message' )
+			}
+		);
+	};
+
+	/**
+	 * Construct a suitable view for the given sitelink set on the given DOM element
+	 *
+	 * @param {wikibase.datamodel.SiteLinkSet} sitelinkSet
+	 * @param {jQuery} $dom
+	 * @return {jQuery.wikibase.sitelinkgrouplistview} The constructed sitelinkgrouplistview
+	 **/
+	SELF.prototype.getSitelinkGroupListView = function( sitelinkSet, $dom ) {
+		return this._getView(
+			'sitelinkgrouplistview',
+			$dom,
+			{
+				value: sitelinkSet,
+				siteLinksChanger: this._entityChangersFactory.getSiteLinksChanger(),
+				entityIdPlainFormatter: this._entityIdPlainFormatter
+			}
+		);
+	};
+
+	/**
+	 * Construct a suitable view for the list of statement groups for the given entity on the given DOM element
+	 *
+	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {jQuery} $dom
+	 * @return {jQuery.wikibase.statementgrouplistview} The constructed statementgrouplistview
+	 **/
+	SELF.prototype.getStatementGroupListView = function( entity, $dom ) {
+		var view = this._getView(
+			'statementgrouplistview',
+			$dom,
+			{
+				value: entity.getStatements(),
+				claimGuidGenerator: new wb.utilities.ClaimGuidGenerator( entity.getId() ),
+				dataTypeStore: this._dataTypeStore,
+				entityStore: this._entityStore,
+				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+				entityIdPlainFormatter: this._entityIdPlainFormatter,
+				valueViewBuilder: this._getValueViewBuilder(),
+				entityChangersFactory: this._entityChangersFactory
+			}
+		);
+
+		$dom.statementgrouplabelscroll();
+
+		return view;
 	};
 
 	/**

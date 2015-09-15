@@ -8,29 +8,16 @@ var PARENT = $.wikibase.entityview;
  * @see wikibase.datamodel.Item
  * @class jQuery.wikibase.itemview
  * @extends jQuery.wikibase.entityview
- * @uses jQuery.wikibase.statementgrouplistview
- * @uses jQuery.wikibase.statementgrouplabelscroll
- * @uses jQuery.wikibase.sitelinkgrouplistview
- * @uses wikibase.utilities.ClaimGuidGenerator
  * @since 0.5
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
+ * @param {Object} options
+ * @param {Function} options.sitelinkGroupListViewBuilder
+ * @param {Function} options.statementGroupListViewBuilder
+ *
  * @constructor
  *
- * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
- *        Required for dynamically rendering links to `Entity`s.
- * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
- *        Required for dynamically rendering plain text references to `Entity`s.
- * @param {wikibase.store.EntityStore} options.entityStore
- *        Required by sub-components of the `entityview` to enable those to dynamically query for
- *        `Entity` objects.
- * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
- *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
- *        `jQuery.valueview`.
- * @param {dataTypes.DataTypeStore} options.dataTypeStore
- *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
- *        object when interacting on a "value" `Variation`.
  */
 $.widget( 'wikibase.itemview', PARENT, {
 	/**
@@ -38,11 +25,8 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	options: {
-		entityIdHtmlFormatter: null,
-		entityIdPlainFormatter: null,
-		entityStore: null,
-		valueViewBuilder: null,
-		dataTypeStore: null
+		sitelinkGroupListViewBuilder: null,
+		statementGroupListViewBuilder: null
 	},
 
 	/**
@@ -74,6 +58,13 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_init: function() {
+		if(
+			!this.options.sitelinkGroupListViewBuilder ||
+			!this.options.statementGroupListViewBuilder
+		) {
+			throw new Error( 'Required option(s) missing' );
+		}
+
 		this._initStatements();
 		this._initSiteLinks();
 		PARENT.prototype._init.call( this );
@@ -83,20 +74,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_initStatements: function() {
-		var claimGuidGenerator = new wb.utilities.ClaimGuidGenerator( this.options.value.getId() );
-
-		this.$statements
-		.statementgrouplistview( {
-			value: this.options.value.getStatements(),
-			claimGuidGenerator: claimGuidGenerator,
-			dataTypeStore: this.option( 'dataTypeStore' ),
-			entityStore: this.options.entityStore,
-			entityIdHtmlFormatter: this.options.entityIdHtmlFormatter,
-			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-			valueViewBuilder: this.options.valueViewBuilder,
-			entityChangersFactory: this.options.entityChangersFactory
-		} )
-		.statementgrouplabelscroll();
+		this.options.statementGroupListViewBuilder( this.options.value, this.$statements );
 
 		// This is here to be sure there is never a duplicate id:
 		$( '.wikibase-statementgrouplistview' )
@@ -109,11 +87,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_initSiteLinks: function() {
-		this.$siteLinks.sitelinkgrouplistview( {
-			value: this.options.value.getSiteLinks(),
-			siteLinksChanger: this.options.entityChangersFactory.getSiteLinksChanger(),
-			entityIdPlainFormatter: this.options.entityIdPlainFormatter
-		} );
+		this.options.sitelinkGroupListViewBuilder( this.options.value.getSiteLinks(), this.$siteLinks );
 	},
 
 	/**
