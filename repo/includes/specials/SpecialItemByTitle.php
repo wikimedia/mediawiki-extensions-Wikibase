@@ -149,6 +149,8 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				$title = $this->titleLookup->getTitleForId( $itemId );
 				$query = $request->getValues();
 				unset( $query['title'] );
+				unset( $query['site'] );
+				unset( $query['page'] );
 				$itemUrl = $title->getFullUrl( $query );
 				$this->getOutput()->redirect( $itemUrl );
 				return;
