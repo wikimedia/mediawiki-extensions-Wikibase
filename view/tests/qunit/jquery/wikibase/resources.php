@@ -263,7 +263,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.snaklistview',
-				'wikibase.store.FetchedContent',
 				'wikibase.ValueViewBuilder',
 				'wikibase.datamodel',
 				'mediawiki.Title',
