@@ -26,7 +26,7 @@ abstract class DumpGenerator {
 	 * @var int The max number of entities to process in a single batch.
 	 *      Also controls the interval for progress reports.
 	 */
-	public $batchSize = 100;
+	private $batchSize = 100;
 
 	/**
 	 * @var resource File handle for output
