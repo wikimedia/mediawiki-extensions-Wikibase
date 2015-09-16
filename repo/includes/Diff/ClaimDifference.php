@@ -121,9 +121,8 @@ class ClaimDifference implements Comparable {
 		}
 
 		return $this->mainSnakChange == $target->mainSnakChange
-			// FIXME: Use Diff::equals when released.
-			&& $this->getQualifierChanges()->getArrayCopy() == $target->getQualifierChanges()->getArrayCopy()
-			&& $this->getReferenceChanges()->getArrayCopy() == $target->getReferenceChanges()->getArrayCopy()
+			&& $this->getQualifierChanges()->equals( $target->getQualifierChanges() )
+			&& $this->getReferenceChanges()->equals( $target->getReferenceChanges() )
 			&& $this->rankChange == $target->rankChange;
 	}
 
