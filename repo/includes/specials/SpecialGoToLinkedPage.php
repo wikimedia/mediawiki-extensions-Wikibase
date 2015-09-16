@@ -245,7 +245,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				'label-message' => 'wikibase-gotolinkedpage-lookup-item'
 			),
 			'submit' => array(
-				'name' => 'submit',
+				'name' => '',
 				'default' => $this->msg( 'wikibase-gotolinkedpage-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wb-gotolinkedpage-submit',
