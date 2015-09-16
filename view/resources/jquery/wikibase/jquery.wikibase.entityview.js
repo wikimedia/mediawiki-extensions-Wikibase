@@ -139,42 +139,6 @@ $.widget( 'wikibase.entityview', PARENT, {
 
 		if( !this.$entityTerms.length ) {
 			this.$entityTerms = $( '<div/>' ).prependTo( this.$main );
-		} else {
-			var $entitytermsforlanguageview = this.$entityTerms
-				.find( '.wikibase-entitytermsforlanguageview' );
-
-			// Scrape languages from static HTML:
-			var scrapedLanguages = [];
-			if( $entitytermsforlanguageview.length > 0 ) {
-				$entitytermsforlanguageview.each( function() {
-					$.each( $( this ).attr( 'class' ).split( ' ' ), function() {
-						if( this.indexOf( 'wikibase-entitytermsforlanguageview-' ) === 0 ) {
-							scrapedLanguages.push(
-								this.split( 'wikibase-entitytermsforlanguageview-' )[1]
-							);
-							return false;
-						}
-					} );
-				} );
-			}
-
-			var mismatch = scrapedLanguages.length !== this.options.languages.length;
-
-			if( !mismatch ) {
-				for( i = 0; i < scrapedLanguages.length; i++ ) {
-					if( scrapedLanguages[i] !== this.options.languages[i] ) {
-						mismatch = true;
-						break;
-					}
-				}
-			}
-
-			if( mismatch ) {
-				// TODO: While this triggers rebuilding the whole DOM structure, the user interface
-				// language is always rendered statically and would not need to be re-rendered.
-				// However, that requires additional logic in respective widgets.
-				$entitytermsforlanguageview.remove();
-			}
 		}
 
 		var fingerprint = this.options.value.getFingerprint(),
