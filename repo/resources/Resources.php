@@ -101,7 +101,6 @@ return call_user_func( function() {
 				'wikibase.store.ApiEntityStore',
 				'wikibase.store.CachingEntityStore',
 				'wikibase.store.CombiningEntityStore',
-				'wikibase.store.FetchedContentUnserializer',
 				'wikibase.view.ViewFactory',
 				'wikibase.WikibaseContentLanguages'
 			),
