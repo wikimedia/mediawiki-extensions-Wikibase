@@ -81,7 +81,7 @@ if ( !defined( 'PURTLE_VERSION' ) ) {
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
-	global $wgAPIModules, $wgSpecialPages, $wgHooks, $wgAvailableRights;
+	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks, $wgAvailableRights;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
 	global $wgWBRepoDataTypes;
 
@@ -164,6 +164,7 @@ call_user_func( function() {
 	$wgAPIModules['wbparsevalue'] = 'Wikibase\Repo\Api\ParseValue';
 	$wgAPIModules['wbavailablebadges'] = 'Wikibase\Repo\Api\AvailableBadges';
 	$wgAPIModules['wbcreateredirect'] = 'Wikibase\Repo\Api\CreateRedirect';
+	$wgAPIListModules['wbsearch'] = 'Wikibase\Repo\Api\QuerySearchEntities';
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] = 'Wikibase\Repo\Specials\SpecialNewItem';
