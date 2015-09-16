@@ -22,16 +22,15 @@ QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
 
 var entityStore = {
 	get: function() {
-		return $.Deferred().resolve( new wb.store.FetchedContent( {
-			title: new mw.Title( 'Property:P1' ),
-			content: new wb.datamodel.Property(
+		return $.Deferred().resolve(
+			new wb.datamodel.Property(
 				'P1',
 				'string',
 				new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( [
 					new wb.datamodel.Term( 'en', 'P1' )
 				] ) )
 			)
-		} ) );
+		);
 	}
 };
 
