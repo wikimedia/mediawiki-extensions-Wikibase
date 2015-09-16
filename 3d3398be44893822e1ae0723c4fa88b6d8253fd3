@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_ebccb63a",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-16T14:16:51Z",
+      "side": 1,
+      "message": "This and the two functions below don\u0027t test anything touched in this patch.",
+      "revId": "3d3398be44893822e1ae0723c4fa88b6d8253fd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
