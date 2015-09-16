@@ -315,7 +315,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		// only process 1 chunk
 		$dispatcher->setMaxChunks( 1 );
 
-		$pending = $dispatcher->getPendingChanges( 'dewiki', 0 );
+		$dispatcher->getPendingChanges( 'dewiki', 0 );
 	}
 
 	public function provideDispatchTo() {
