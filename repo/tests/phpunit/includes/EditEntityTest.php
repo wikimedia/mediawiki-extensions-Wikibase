@@ -291,7 +291,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$entityId = new ItemId( 'Q17' );
 		$revision = $repo->getEntityRevision( $entityId, $baseRevisionId );
-		$entity = $revision->getEntity( $entityId );
+		$entity = $revision->getEntity();
 
 		// NOTE: The user name must be the one used in getMockRepository().
 		$user = $this->getUser( 'EditEntityTestUser1' );
