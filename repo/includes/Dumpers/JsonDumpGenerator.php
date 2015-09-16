@@ -31,7 +31,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	/**
 	 * @var int flags to use with json_encode as a bit field, see PHP's JSON_XXX constants.
 	 */
-	public $jsonFlags = 0;
+	private $jsonFlags = 0;
 
 	/**
 	 * @var Serializer
