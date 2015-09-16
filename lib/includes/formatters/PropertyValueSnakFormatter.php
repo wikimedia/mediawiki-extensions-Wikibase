@@ -11,10 +11,12 @@ use Message;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\PropertyInfoStore;
 
 /**
  * PropertyValueSnakFormatter is a formatter for PropertyValueSnaks. It allows formatters to
@@ -64,9 +66,14 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	private $valueFormatter;
 
 	/**
+	 * @var PropertyInfoStore
+	 */
+	private $propertyInfoStore;
+
+	/**
 	 * @var PropertyDataTypeLookup
 	 */
-	private $typeLookup;
+	private $fallbackLookup;
 
 	/**
 	 * @var DataTypeFactory
@@ -78,7 +85,8 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 *        Use the FORMAT_XXX constants defined in SnakFormatter.
 	 * @param FormatterOptions|null $options
 	 * @param TypedValueFormatter $valueFormatter
-	 * @param PropertyDataTypeLookup $typeLookup
+	 * @param PropertyInfoStore $propertyInfoStore
+	 * @param PropertyDataTypeLookup $fallbackLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 *
 	 * @throws InvalidArgumentException
@@ -87,7 +95,8 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		$format,
 		FormatterOptions $options = null,
 		TypedValueFormatter $valueFormatter,
-		PropertyDataTypeLookup $typeLookup,
+		PropertyInfoStore $propertyInfoStore,
+		PropertyDataTypeLookup $fallbackLookup,
 		DataTypeFactory $dataTypeFactory
 	) {
 		if ( !is_string( $format ) ) {
@@ -97,7 +106,8 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		$this->format = $format;
 		$this->options = $options ?: new FormatterOptions();
 		$this->valueFormatter = $valueFormatter;
-		$this->typeLookup = $typeLookup;
+		$this->propertyInfoStore = $propertyInfoStore;
+		$this->fallbackLookup = $fallbackLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
 
 		$this->options->defaultOption( self::OPT_LANG, 'en' );
@@ -131,12 +141,12 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 			throw new InvalidArgumentException( "Not a PropertyValueSnak: " . get_class( $snak ) );
 		}
 
-		$propertyType = null;
+		$dataTypeId = null;
 		$value = $snak->getDataValue();
 
 		try {
-			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
-			$expectedDataValueType = $this->getDataValueTypeForPropertyDataType( $propertyType );
+			$dataTypeId = $this->fetchDataTypeFromPropertyInfo( $snak->getPropertyId() );
+			$expectedDataValueType = $this->getDataValueTypeForPropertyDataType( $dataTypeId );
 
 			$warning = $this->checkForWarning( $value, $expectedDataValueType );
 		} catch ( PropertyDataTypeLookupException $ex ) {
@@ -153,7 +163,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		if ( isset( $warning ) && !$this->ignoreErrors() ) {
 			$text = $this->formatValueWithWarning( $value, $warning );
 		} else {
-			$text = $this->formatValue( $value, $propertyType );
+			$text = $this->formatValue( $value, $dataTypeId );
 		}
 
 		return $text;
@@ -253,6 +263,46 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		}
 
 		return $text;
+	}
+
+	/**
+	 * Fetches the property info for the given property id and returns the data type.
+	 * If the data type isn't set it tries to fallback to a data type lookup.
+	 * As a side effect, the formatter url gets put into the FormatterOptions.
+	 *
+	 * @param PropertyId $propertyId
+	 *
+	 * @return string
+	 */
+	private function fetchDataTypeFromPropertyInfo( PropertyId $propertyId ) {
+		$dataTypeId = null;
+		$propertyInfo = $this->propertyInfoStore->getPropertyInfo( $propertyId );
+
+		if ( $propertyInfo !== null ) {
+			if ( isset( $propertyInfo[PropertyInfoStore::KEY_FORMATTER_URL] ) ) {
+				$this->options->setOption(
+					PropertyInfoStore::KEY_FORMATTER_URL,
+					$propertyInfo[PropertyInfoStore::KEY_FORMATTER_URL]
+				);
+			}
+
+			if ( isset( $propertyInfo[PropertyInfoStore::KEY_DATA_TYPE] ) ) {
+				$dataTypeId = $propertyInfo[PropertyInfoStore::KEY_DATA_TYPE];
+			}
+		}
+
+		if ( $dataTypeId === null && $this->fallbackLookup !== null ) {
+			$dataTypeId = $this->fallbackLookup->getDataTypeIdForProperty( $propertyId );
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': No property info found for '
+				. $propertyId . ', but property ID could be retrieved from fallback store!' );
+		}
+
+		if ( $dataTypeId === null ) {
+			throw new PropertyDataTypeLookupException( $propertyId );
+		}
+
+		return $dataTypeId;
 	}
 
 	/**
