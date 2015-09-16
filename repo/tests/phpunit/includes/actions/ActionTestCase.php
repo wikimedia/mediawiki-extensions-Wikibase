@@ -218,27 +218,6 @@ class ActionTestCase extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Returns a token
-	 *
-	 * @param Title $title the page to return the token for
-	 * @param String $for the action to return the token for, e.g. 'edit'.
-	 *
-	 * @throws MWException
-	 * @return String the token
-	 */
-	protected function getToken( Title $title, $for = 'edit' ) {
-		global $wgUser;
-
-		switch ( $for ) {
-			case 'edit':
-				return $wgUser->getEditToken();
-
-			default:
-				throw new MWException( "unknown token action: $for" );
-		}
-	}
-
-	/**
 	 * Changes wgUser and resets any associated state
 	 *
 	 * @param User $user the desired user
