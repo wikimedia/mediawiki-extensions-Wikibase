@@ -4,7 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use Content;
 use JobQueueGroup;
-use ManualLogEntry;
+use LogEntry;
 use MWException;
 use Title;
 use User;
@@ -125,30 +125,26 @@ class UpdateRepoHookHandlers {
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
 	 *
-	 * @param WikiPage $article
-	 * @param User $user
+	 * @param WikiPage &$wikiPage
+	 * @param User &$user
 	 * @param string $reason
 	 * @param int $id id of the article that was deleted
 	 * @param Content $content
-	 * @param ManualLogEntry $logEntry
-	 *
-	 * @return bool
+	 * @param LogEntry $logEntry
 	 */
 	public static function onArticleDeleteComplete(
-		WikiPage &$article,
+		WikiPage &$wikiPage,
 		User &$user,
 		$reason,
 		$id,
-		Content $content,
-		ManualLogEntry $logEntry
+		Content $content = null,
+		LogEntry $logEntry
 	) {
 		$handler = self::newFromGlobalState();
 
 		if ( $handler ) {
-			$handler->doArticleDeleteComplete( $article->getTitle(), $user );
+			$handler->doArticleDeleteComplete( $wikiPage->getTitle(), $user );
 		}
-
-		return true;
 	}
 
 	/**
