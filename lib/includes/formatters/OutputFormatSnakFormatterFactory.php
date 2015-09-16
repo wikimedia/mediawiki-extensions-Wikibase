@@ -9,6 +9,7 @@ use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\PropertyInfoStore;
 
 /**
  * Service for obtaining a SnakFormatter for a desired output format.
@@ -29,23 +30,31 @@ class OutputFormatSnakFormatterFactory {
 	private $dataTypeFactory;
 
 	/**
-	 * @var PropertyDataTypeLookup
+	 * @var PropertyInfoStore
 	 */
-	private $propertyDataTypeLookup;
+	private $propertyInfoStore;
+
+	/**
+	 * @var PropertyDataTypeLookup|null
+	 */
+	private $fallbackLookup;
 
 	/**
 	 * @param OutputFormatValueFormatterFactory $valueFormatterFactory
-	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param DataTypeFactory $dataTypeFactory
+	 * @param PropertyInfoStore $propertyInfoStore
+	 * @param PropertyDataTypeLookup|null $fallbackLookup
 	 */
 	public function __construct(
 		OutputFormatValueFormatterFactory $valueFormatterFactory,
-		PropertyDataTypeLookup $propertyDataTypeLookup,
-		DataTypeFactory $dataTypeFactory
+		DataTypeFactory $dataTypeFactory,
+		PropertyInfoStore $propertyInfoStore,
+		PropertyDataTypeLookup $fallbackLookup = null
 	) {
 		$this->valueFormatterFactory = $valueFormatterFactory;
 		$this->dataTypeFactory = $dataTypeFactory;
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->propertyInfoStore = $propertyInfoStore;
+		$this->fallbackLookup = $fallbackLookup;
 	}
 
 	/**
@@ -79,7 +88,8 @@ class OutputFormatSnakFormatterFactory {
 			$format,
 			$options,
 			$valueFormatter,
-			$this->propertyDataTypeLookup,
+			$this->propertyInfoStore,
+			$this->fallbackLookup,
 			$this->dataTypeFactory
 		);
 

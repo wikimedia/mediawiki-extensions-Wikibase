@@ -30,7 +30,7 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 
 	/**
 	 * @param PropertyInfoStore $infoStore
-	 * @param PropertyDataTypeLookup $fallbackLookup
+	 * @param PropertyDataTypeLookup|null $fallbackLookup
 	 */
 	public function __construct( PropertyInfoStore $infoStore, PropertyDataTypeLookup $fallbackLookup = null ) {
 		$this->infoStore = $infoStore;
@@ -56,13 +56,8 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 		if ( $dataTypeId === null && $this->fallbackLookup !== null ) {
 			$dataTypeId = $this->fallbackLookup->getDataTypeIdForProperty( $propertyId );
 
-			if ( $dataTypeId !== null ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': No property info found for '
-					. $propertyId . ', but property ID could be retrieved from fallback store!' );
-
-				//TODO: Automatically update the info store?
-				//TODO: Suggest to run rebuildPropertyInfo.php
-			}
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': No property info found for '
+				. $propertyId . ', but property ID could be retrieved from fallback store!' );
 		}
 
 		if ( $dataTypeId === null ) {
