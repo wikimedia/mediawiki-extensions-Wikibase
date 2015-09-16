@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_6118e77a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-16T16:09:21Z",
+      "side": 1,
+      "message": "Not sure this is worth warning... as an anonymous user with ULS enabled I get this all the time.",
+      "revId": "22776b0c2788dec8566acb50de22344c1368afa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
