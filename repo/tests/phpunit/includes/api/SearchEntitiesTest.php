@@ -50,30 +50,19 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getMockTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
-		$testCase = $this;
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
-				if ( $id->getSerialization() === 'Q111' ) {
-					return $testCase->getMockTitle( true );
-				} else {
-					return $testCase->getMockTitle( false );
-				}
-			} ) );
+			->will( $this->returnValue( $this->getMockTitle() ) );
+
 		return $titleLookup;
 	}
 
 	/**
-	 * @param bool $exists
-	 *
 	 * @return Title|\PHPUnit_Framework_MockObject_MockObject
 	 */
-	public function getMockTitle( $exists ) {
+	public function getMockTitle() {
 		$mock = $this->getMockBuilder( '\Title' )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'exists' )
-			->will( $this->returnValue( $exists ) );
 		$mock->expects( $this->any() )
 			->method( 'getFullUrl' )
 			->will( $this->returnValue( 'http://fullTitleUrl' ) );
@@ -83,6 +72,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$mock->expects( $this->any() )
 			->method( 'getArticleID' )
 			->will( $this->returnValue( 42 ) );
+
 		return $mock;
 	}
 
@@ -93,6 +83,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
 		$contentLanguages->expects( $this->any() )->method( 'getLanguages' )
 			->will( $this->returnValue( array( 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' ) ) );
+
 		return $contentLanguages;
 	}
 
@@ -124,6 +115,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				$this->equalTo( $params['strictlanguage'] )
 			)
 			->will( $this->returnValue( $returnResults ) );
+
 		return $mock;
 	}
 
