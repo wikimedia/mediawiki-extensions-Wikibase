@@ -16,7 +16,7 @@
 	ExpertExtender.Preview = function( getUpstreamValue, messageProvider ) {
 		this._getUpstreamValue = getUpstreamValue;
 
-		var messageProvider = new PrefixingMessageProvider(
+		messageProvider = new PrefixingMessageProvider(
 			'valueview-preview-',
 			messageProvider
 		);
