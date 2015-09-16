@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_deabba6b",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-16T15:33:51Z",
+      "side": 1,
+      "message": "this might be somewhat weird when an alias is matched.\n\nin our suggester, we show \"label (matched alias)\" or \"label (matched fallback label\". for mobile maybe that\u0027s too long or maybe ok?",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5e790a29",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-16T15:33:51Z",
+      "side": 1,
+      "message": "i realize that wbsearchentities does this way and maybe it\u0027s the least evil option, but it\u0027s ugly if I want say offset 2000 and limit \u003d 5, then it requests 2000+ results to get the 5 :/\n\nI think there is an (apparently undocumented) limit in how much offset one can do in wbsearchentities.  not sure about here.",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_9ec53244",
+        "filename": "repo/tests/phpunit/includes/api/QuerySearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-16T15:33:51Z",
+      "side": 1,
+      "message": "really? :)",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_feb0f6d9",
+        "filename": "repo/tests/phpunit/includes/api/QuerySearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-16T15:33:51Z",
+      "side": 1,
+      "message": ":(",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
