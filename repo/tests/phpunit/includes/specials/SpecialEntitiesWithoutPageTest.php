@@ -60,7 +60,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 				'id' => 'wikibase-entitieswithoutpage-submit',
 				'class' => 'wb-input-button',
 				'type' => 'submit',
-				'name' => 'submit',
+				'name' => '',
 			) );
 
 		list( $output, ) = $this->executeSpecialPage( '' );
