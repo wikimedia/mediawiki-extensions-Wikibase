@@ -81,27 +81,4 @@
 		} );
 	} );
 
-	QUnit.test( 'upstream store is called for a batch', 2, function( assert ) {
-		var store = new wb.store.EntityStore();
-		store.getMultipleRaw = sinon.spy( function( entityIds ) {
-			var deferreds = $.map( entityIds, function() { return $.Deferred(); } );
-			setTimeout( function() {
-				$.each( deferreds, function( k, deferred ) {
-					deferred.resolve();
-				} );
-			}, 0 );
-			return $.map( deferreds, function( deferred ) { return deferred.promise(); } );
-		} );
-		var entityStore = new wb.store.CachingEntityStore( store );
-
-		var promise = entityStore.getMultiple( [ 'id1', 'id2', 'id3' ] );
-
-		QUnit.stop();
-		promise.done( function( entities ) {
-			QUnit.start();
-			sinon.assert.calledOnce( store.getMultipleRaw );
-			sinon.assert.calledWith( store.getMultipleRaw, [ 'id1', 'id2', 'id3' ] );
-		} );
-	} );
-
 } )( jQuery, wikibase, sinon );
