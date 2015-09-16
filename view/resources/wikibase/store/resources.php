@@ -58,29 +58,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.store.FetchedContent' => $moduleTemplate + array(
-			'scripts' => array(
-				'store.FetchedContent.js',
-			),
-			'dependencies' => array(
-				'mediawiki.Title',
-				'wikibase.store',
-			),
-		),
-
-		'wikibase.store.FetchedContentUnserializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'store.FetchedContentUnserializer.js',
-			),
-			'dependencies' => array(
-				'mediawiki.Title',
-				'util.inherit',
-				'wikibase.serialization.Deserializer',
-				'wikibase.store',
-				'wikibase.store.FetchedContent',
-			),
-		),
-
 		'wikibase.store' => $moduleTemplate + array(
 			'scripts' => array(
 				'store.js',
