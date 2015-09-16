@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_fe3d562a",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-16T15:38:38Z",
+      "side": 1,
+      "message": "I don\u0027t know but messing with strings here seems to be a bad idea as well :S",
+      "parentUuid": "6ec1af18_deabba6b",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_5e790a29",
         "filename": "repo/includes/api/QuerySearchEntities.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-16T15:33:51Z",
       "side": 1,
       "message": "i realize that wbsearchentities does this way and maybe it\u0027s the least evil option, but it\u0027s ugly if I want say offset 2000 and limit \u003d 5, then it requests 2000+ results to get the 5 :/\n\nI think there is an (apparently undocumented) limit in how much offset one can do in wbsearchentities.  not sure about here.",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_bef02e8f",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-16T15:38:38Z",
+      "side": 1,
+      "message": "The limit is set to LIMIT_SML1/LIMIT_SML2 below which is 50 for normal users and 500 for bots afaik.",
+      "parentUuid": "6ec1af18_5e790a29",
       "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_7e4966d2",
+        "filename": "repo/tests/phpunit/includes/api/QuerySearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-16T15:38:38Z",
+      "side": 1,
+      "message": "Ups :)",
+      "parentUuid": "6ec1af18_9ec53244",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_feb0f6d9",
         "filename": "repo/tests/phpunit/includes/api/QuerySearchEntitiesTest.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-09-16T15:33:51Z",
       "side": 1,
       "message": ":(",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_3e1bded5",
+        "filename": "repo/tests/phpunit/includes/api/QuerySearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-09-16T15:38:38Z",
+      "side": 1,
+      "message": "Bah, who needs tests? :P",
+      "parentUuid": "6ec1af18_feb0f6d9",
       "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
