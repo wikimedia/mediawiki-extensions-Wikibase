@@ -6,7 +6,7 @@ use Content;
 use EnqueueJob;
 use JobQueueGroup;
 use LinksUpdate;
-use ManualLogEntry;
+use LogEntry;
 use ParserCache;
 use ParserOptions;
 use ParserOutput;
@@ -66,22 +66,22 @@ class DataUpdateHookHandlers {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
 	 * @see doArticleDeleteComplete
 	 *
-	 * @param WikiPage $article
-	 * @param User $user
+	 * @param WikiPage &$wikiPage
+	 * @param User &$user
 	 * @param string $reason
 	 * @param int $id id of the article that was deleted
 	 * @param Content $content
-	 * @param ManualLogEntry $logEntry
+	 * @param LogEntry $logEntry
 	 */
 	public static function onArticleDeleteComplete(
-		WikiPage &$article,
+		WikiPage &$wikiPage,
 		User &$user,
 		$reason,
 		$id,
-		Content $content,
-		ManualLogEntry $logEntry
+		Content $content = null,
+		LogEntry $logEntry
 	) {
-		$title = $article->getTitle();
+		$title = $wikiPage->getTitle();
 
 		$handler = self::newFromGlobalState();
 		$handler->doArticleDeleteComplete( $title->getNamespace(), $id, $logEntry->getTimestamp() );
