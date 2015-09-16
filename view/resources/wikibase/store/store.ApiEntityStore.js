@@ -43,47 +43,32 @@
 		_repoApi: null,
 
 		/**
-		 * @see wikibase.store.EntityStore.getMultipleRaw
+		 * @see wikibase.store.EntityStore.get
 		 */
-		getMultipleRaw: function( entityIds ) {
-			var deferreds = $.map( entityIds, function() { return $.Deferred(); } ),
-				self = this,
-				entityIdToIndex = {};
+		get: function( entityId ) {
+			var deferred = $.Deferred(),
+				self = this;
 
-			$.each( entityIds, function( i, entityId ) {
-				entityIdToIndex[ entityId ] = i;
-			} );
-
-			this._repoApi.getEntities( entityIds, null, this._languages )
+			this._repoApi.getEntities( [ entityId ], null, this._languages )
 			.done( function( result ) {
-				$.each( result.entities, function( id, entityData ) {
-					// return entities not found (e.g. deleted) as null, and allow
-					// valueViewBuilder to select appropriate expert for such case.
-					var entity = null,
-						entityId = id;
+				var entityData = result.entities[ entityId ];
+				var entity = null;
 
-					if( entityData.missing !== '' ) {
-						entity = self._fetchedEntityUnserializer.deserialize( {
-							title: entityData.title,
-							content: entityData
-						} );
+				if( entityData.missing !== '' ) {
+					entity = self._fetchedEntityUnserializer.deserialize( {
+						title: entityData.title,
+						content: entityData
+					} );
+				}
 
-						entityId = entity.getContent().getId();
-					}
-
-					deferreds[ entityIdToIndex[ entityId ] ].resolve( entity );
-				} );
+				deferred.resolve( entity );
 			} )
 			// FIXME: Evaluate failing promise
 			.fail( function() {
-				$.each( entityIds, function( i, entityId ) {
-					deferreds[ entityIdToIndex[ entityId ] ].reject();
-				} );
+				deferred.reject();
 			} );
 
-			return $.map( deferreds, function( deferred ) {
-				return deferred.promise();
-			} );
+			return deferred.promise();
 		}
 	} );
 }( wikibase, jQuery ) );
