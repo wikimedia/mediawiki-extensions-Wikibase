@@ -668,7 +668,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->adjustRevisionParam( 'restore', $params, $page );
 
 		if ( isset( $params['wpEditToken'] ) && $params['wpEditToken'] === true ) {
-			$params['wpEditToken'] = $this->getToken( $page->getTitle(), 'edit' ); //TODO: $user
+			$params['wpEditToken'] = $this->getEditToken(); //TODO: $user
 		}
 
 		$out = $this->callAction( $action, $page, $params, $post );
@@ -788,7 +788,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->adjustRevisionParam( 'restore', $params, $page );
 
 		if ( !isset( $params['wpEditToken'] ) ) {
-			$params['wpEditToken'] = $this->getToken( $page->getTitle(), 'edit' );
+			$params['wpEditToken'] = $this->getEditToken();
 		}
 
 		if ( !isset( $params['wpSave'] ) ) {
@@ -861,7 +861,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$page = $this->getTestItemPage( $handle );
 
 		$params = array(
-			'wpEditToken' => $this->getToken( $page->getTitle(), 'edit' ),
+			'wpEditToken' => $this->getEditToken(),
 			'wpSave' => 1,
 			'undo' => $page->getLatest(),
 		);
@@ -882,6 +882,11 @@ class EditEntityActionTest extends ActionTestCase {
 	private function getItemNamespace() {
 		 $entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 		 return $entityNamespaceLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+	}
+
+	private function getEditToken() {
+		global $wgUser;
+		return $wgUser->getEditToken();
 	}
 
 }
