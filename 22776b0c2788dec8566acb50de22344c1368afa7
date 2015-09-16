@@ -16,6 +16,24 @@
       "revId": "22776b0c2788dec8566acb50de22344c1368afa7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_52ea5b06",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-16T20:28:24Z",
+      "side": 1,
+      "message": "Yeah, I noticed that, too, but I think it\u0027s quite wrong and I want to investigate it.",
+      "parentUuid": "6ec1af18_6118e77a",
+      "revId": "22776b0c2788dec8566acb50de22344c1368afa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
