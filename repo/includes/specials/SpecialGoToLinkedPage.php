@@ -243,21 +243,15 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 				'size' => 36,
 				'cssclass' => 'wb-input-text',
 				'label-message' => 'wikibase-gotolinkedpage-lookup-item'
-			),
-			'submit' => array(
-				'name' => 'submit',
-				'default' => $this->msg( 'wikibase-gotolinkedpage-submit' )->text(),
-				'type' => 'submit',
-				'id' => 'wb-gotolinkedpage-submit',
-				'cssclass' => 'wb-input-button'
 			)
 		);
 
 		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
 			->setId( 'wb-gotolinkedpage-form1' )
 			->setMethod( 'get' )
+			->setSubmitID( 'wb-gotolinkedpage-submit' )
+			->setSubmitTextMsg( 'wikibase-gotolinkedpage-submit' )
 			->setWrapperLegendMsg( 'wikibase-gotolinkedpage-lookup-fieldset' )
-			->suppressDefaultSubmit()
 			->setSubmitCallback( function () {// no-op
 			} )->show();
 	}
