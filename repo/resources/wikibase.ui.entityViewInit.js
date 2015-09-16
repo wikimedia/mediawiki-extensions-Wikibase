@@ -68,15 +68,10 @@
 	 * @return {wikibase.store.CombiningEntityStore}
 	 */
 	function buildEntityStore( repoApi, languageCode ) {
-		// Deserializer for fetched content whose content is a wb.datamodel.Entity:
-		var fetchedEntityDeserializer = new wb.store.FetchedContentUnserializer(
-				new wb.serialization.EntityDeserializer()
-			);
-
 		return new wb.store.CachingEntityStore(
 			new wb.store.ApiEntityStore(
 				repoApi,
-				fetchedEntityDeserializer,
+				new wb.serialization.EntityDeserializer(),
 				[ languageCode ]
 			)
 		);
