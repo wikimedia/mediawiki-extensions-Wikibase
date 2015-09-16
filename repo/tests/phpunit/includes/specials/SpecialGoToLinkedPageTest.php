@@ -172,7 +172,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 				'id' => 'wb-gotolinkedpage-submit',
 				'class' => 'wb-input-button',
 				'type' => 'submit',
-				'name' => 'submit'
+				'name' => ''
 			)
 		);
 		foreach ( $matchers as $key => $matcher ) {
