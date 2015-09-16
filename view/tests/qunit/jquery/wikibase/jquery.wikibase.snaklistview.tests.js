@@ -29,22 +29,10 @@
 	// We need a filled entity store for the instances of jQuery.wikibase.snakview.variations.Value
 	// and jQuery.wikibase.snakview created by jQuery.wikibase.snaklistview.
 	var entities = {
-		p1: new wb.store.FetchedContent( {
-			title: new mw.Title( 'Property:P1' ),
-			content: new wb.datamodel.Property( 'P1', 'string' )
-		} ),
-		p2: new wb.store.FetchedContent( {
-			title: new mw.Title( 'Property:P2' ),
-			content: new wb.datamodel.Property( 'P2', 'string' )
-		} ),
-		p3: new wb.store.FetchedContent( {
-			title: new mw.Title( 'Property:P3' ),
-			content: new wb.datamodel.Property( 'P3', 'string' )
-		} ),
-		p4: new wb.store.FetchedContent( {
-			title: new mw.Title( 'Property:P4' ),
-			content: new wb.datamodel.Property( 'P4', 'string' )
-		} )
+		p1: new wb.datamodel.Property( 'P1', 'string' ),
+		p2: new wb.datamodel.Property( 'P2', 'string' ),
+		p3: new wb.datamodel.Property( 'P3', 'string' ),
+		p4: new wb.datamodel.Property( 'P4', 'string' )
 	};
 
 	var entityStore = {
