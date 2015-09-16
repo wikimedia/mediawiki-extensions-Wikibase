@@ -46,6 +46,7 @@ interface EntityLookup {
 	 * @param EntityId $entityId
 	 *
 	 * @return bool
+	 * @throws EntityLookupException
 	 */
 	public function hasEntity( EntityId $entityId );
 

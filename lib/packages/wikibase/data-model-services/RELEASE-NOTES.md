@@ -1,9 +1,18 @@
 # Wikibase DataModel Services release notes
 
-## Version 2.1.0 (dev)
+## Version 3.0.0 (dev)
 
+Breaking changes:
+
+* Removed `EntityRedirectResolvingDecorator`
+* Removed `UnresolvedRedirectException`
+* `EntityLookup::hasEntity` now throws `EntityLookupException`
+
+Non breaking changes:
+
+* Added `UnresolvedEntityRedirectException`
 * Added `EntityAccessLimitException`
-* `RestrictedEntityLookup` now throws `EntityAccessLimitException` (non breaking change)
+* `RestrictedEntityLookup` now throws `EntityAccessLimitException`
 
 ## Version 2.0.1 (2015-09-10)
 
