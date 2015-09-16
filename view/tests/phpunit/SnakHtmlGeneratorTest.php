@@ -3,8 +3,9 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -24,101 +25,77 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider getSnakHtmlProvider
+	 * @param PHPUnit_Framework_MockObject_Matcher_Invocation $formatPropertyIdMatcher
+	 *
+	 * @return SnakHtmlGenerator
 	 */
-	public function testGetSnakHtml(
-		SnakFormatter $snakFormatter,
-		EntityIdFormatter $propertyIdFormatter,
-		Snak $snak,
-		$patterns
+	private function getSnakHtmlGenerator(
+		PHPUnit_Framework_MockObject_Matcher_Invocation $formatPropertyIdMatcher
 	) {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$templateFactory,
-			$snakFormatter,
-			$propertyIdFormatter
-		);
-
-		$html = $snakHtmlGenerator->getSnakHtml( $snak, true );
-
-		$this->assertContains( '<ID>', $html );
-		foreach ( $patterns as $message => $pattern ) {
-			$this->assertRegExp( $pattern, $html, $message );
-		}
-	}
-
-	public function getSnakHtmlProvider() {
-		$snakFormatter = $this->getSnakFormatter();
-
-		$propertyIdFormatter = $this->getEntityIdFormatter();
-
-		$testCases = array();
-
-		$testCases[] = array(
-			$snakFormatter,
-			$propertyIdFormatter,
-			new PropertySomeValueSnak( 42 ),
-			array(
-				'snak variation css' => '/wikibase-snakview-variation-somevalue/',
-				'formatted snak' => '/a snak!/'
-			)
-		);
-
-		$testCases[] = array(
-			$snakFormatter,
-			$propertyIdFormatter,
-			new PropertySomeValueSnak( 42 ),
-			array(
-				'snak variation css' => '/wikibase-snakview-variation-somevalue/',
-				'formatted snak' => '/a snak!/s'
-			)
-		);
-
-		$testCases[] = array(
-			$snakFormatter,
-			$propertyIdFormatter,
-			new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
-			array(
-				'snak variation css' => '/wikibase-snakview-variation-value/',
-				'formatted snak' => '/a snak!/s'
-			)
-		);
-
-		return $testCases;
-	}
-
-	/**
-	 * @return SnakFormatter
-	 */
-	private function getSnakFormatter() {
 		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
-
-		$snakFormatter->expects( $this->any() )
+		$snakFormatter->expects( $this->once() )
 			->method( 'formatSnak' )
-			->will( $this->returnValue( 'a snak!' ) );
-
-		$snakFormatter->expects( $this->any() )
+			->will( $this->returnValue( '<SNAK>' ) );
+		$snakFormatter->expects( $this->once() )
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
-		return $snakFormatter;
-	}
-
-	/**
-	 * @return EntityIdFormatter
-	 */
-	private function getEntityIdFormatter() {
-		$lookup = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
-
-		$lookup->expects( $this->any() )
+		$propertyIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+		$propertyIdFormatter->expects( $formatPropertyIdMatcher )
 			->method( 'formatEntityId' )
 			->will( $this->returnValue( '<ID>' ) );
 
-		return $lookup;
+		return new SnakHtmlGenerator(
+			TemplateFactory::getDefaultInstance(),
+			$snakFormatter,
+			$propertyIdFormatter
+		);
+	}
+
+	/**
+	 * @dataProvider getSnakHtmlProvider
+	 */
+	public function testGetSnakHtmlWithPropertyLink( Snak $snak, $className ) {
+		$generator = $this->getSnakHtmlGenerator( $this->once() );
+		$html = $generator->getSnakHtml( $snak, true );
+
+		$this->assertContains( '<ID>', $html );
+		$this->assertContains( $className, $html, 'snak variation css' );
+		$this->assertContains( '<SNAK>', $html, 'formatted snak' );
+	}
+
+	/**
+	 * @dataProvider getSnakHtmlProvider
+	 */
+	public function testGetSnakHtmlWithoutPropertyLink( Snak $snak, $className ) {
+		$generator = $this->getSnakHtmlGenerator( $this->never() );
+		$html = $generator->getSnakHtml( $snak, false );
+
+		$this->assertNotContains( '<ID>', $html );
+		$this->assertContains( $className, $html, 'snak variation css' );
+		$this->assertContains( '<SNAK>', $html, 'formatted snak' );
+	}
+
+	public function getSnakHtmlProvider() {
+		return array(
+			array(
+				new PropertyNoValueSnak( 1 ),
+				'wikibase-snakview-variation-novalue',
+			),
+			array(
+				new PropertySomeValueSnak( 2 ),
+				'wikibase-snakview-variation-somevalue',
+			),
+			array(
+				new PropertyValueSnak( 3, new StringValue( 'chocolate!' ) ),
+				'wikibase-snakview-variation-value',
+			)
+		);
 	}
 
 }
