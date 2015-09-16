@@ -166,6 +166,7 @@
 	"wikibase-newitem-page": "نام نخستین صفحهٔ پیوندداده‌شده",
 	"wikibase-newitem-no-external-page": "صفحهٔ مشخص‌شده را نمی‌توان در وب‌گاه مربوطه یافت.",
 	"wikibase-newitem-not-recognized-siteid": "شناسۀ وبگاه درخواستی یافت نشد.",
+	"wikibase-newentity-language": "زبان:",
 	"wikibase-newentity-label": "نام:",
 	"wikibase-newentity-description": "توضیحات:",
 	"wikibase-newentity-submit": "ایجاد",

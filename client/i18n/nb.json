@@ -3,7 +3,8 @@
 		"authors": [
 			"Danmichaelo",
 			"Event",
-			"Jeblad"
+			"Jeblad",
+			"Tarjeimo"
 		]
 	},
 	"wikibase-client-desc": "Klient for Wikibase-utvidelsen",
@@ -56,12 +57,8 @@
 	"wikibase-error-invalid-entity-id": "ID-en du la inn er ukjent for systemet. Legg inn en gyldig ID.",
 	"unconnectedpages": "Sider som ikke er knyttet til elementer.",
 	"unconnectedpages-summary": "Denne siden lister sider uten tilknyttet data element (i navnerom som støtter tilknyttede elementer). Listen er sortert på fallende side id, slik at nyere sider er listet først.",
-	"wikibase-unconnectedpages-page": "Start resultatlisten med siden:",
-	"wikibase-unconnectedpages-submit": "Kjør",
-	"wikibase-unconnectedpages-invalid-language": "«$1» er ikke en gyldig språkkode.",
-	"wikibase-unconnectedpages-page-warning": "Sidetittelen kunne ikke brukes for søket og er ignorert.",
-	"wikibase-unconnectedpages-iwdata-label": "Bare sider med språklenker",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|språklenke|språklenker}} på siden)",
+	"wikibase-unconnectedpages-submit": "Vis sider",
 	"wikibase-pageinfo-entity-id": "ID for {{WBREPONAME}}-element",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-property-render-error": "Klarte ikke å gjengi egenskapen $1: $2",

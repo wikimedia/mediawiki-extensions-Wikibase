@@ -49,6 +49,7 @@
 	"wikibase-error-invalid-entity-id": "D'ID déi Dir aginn hutt ass am System net bekannt. Benotzt w.e.g. en valabel ID.",
 	"unconnectedpages": "Säiten déi net mat Elementer verbonn sinn",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|Link mat enger anerer Sprooch|Linke mat anere Sproochen}} op der Säit)",
+	"wikibase-unconnectedpages-submit": "Säite weisen",
 	"pageswithbadges": "Säite mat Badgen",
 	"wikibase-pageswithbadges-legend": "Lëscht vu Säite mat engem bestëmmte Badge",
 	"wikibase-pageswithbadges-badge": "Badge:",
