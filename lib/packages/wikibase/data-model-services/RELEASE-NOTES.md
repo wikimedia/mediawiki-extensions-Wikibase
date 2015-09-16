@@ -1,6 +1,6 @@
 # Wikibase DataModel Services release notes
 
-## Version 3.0.0 (dev)
+## Version 3.0.0 (2015-09-16)
 
 Breaking changes:
 
