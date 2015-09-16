@@ -84,6 +84,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 
 		PARENT.prototype._create.call( this );
 
+		this._verifyExistingDom();
 		this._createListView();
 
 		this.element.addClass( 'wikibase-entitytermsforlanguagelistview' );
@@ -105,6 +106,46 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 
 		this.element.removeClass( 'wikibase-entitytermsforlanguagelistview' );
 		PARENT.prototype.destroy.call( this );
+	},
+
+	_verifyExistingDom: function() {
+		var $entitytermsforlanguageview = this.element
+			.find( '.wikibase-entitytermsforlanguageview' );
+
+		if( $entitytermsforlanguageview.length === 0 ) {
+			// No need to verify an empty DOM
+			return;
+		}
+
+		// Scrape languages from static HTML:
+		var scrapedLanguages = [],
+			i;
+		$entitytermsforlanguageview.each( function() {
+			$.each( $( this ).attr( 'class' ).split( ' ' ), function() {
+				if( this.indexOf( 'wikibase-entitytermsforlanguageview-' ) === 0 ) {
+					scrapedLanguages.push(
+						this.split( 'wikibase-entitytermsforlanguageview-' )[1]
+					);
+					return false;
+				}
+			} );
+		} );
+
+		var mismatch = scrapedLanguages.length !== this.options.value.length;
+
+		if( !mismatch ) {
+			for( i = 0; i < scrapedLanguages.length; i++ ) {
+				if( scrapedLanguages[i] !== this.options.value[i].language ) {
+					mismatch = true;
+					break;
+				}
+			}
+		}
+
+		if( mismatch ) {
+			mw.log.warn( 'Existing entitytermsforlanguagelistview DOM does not match configured languages' );
+			$entitytermsforlanguageview.remove();
+		}
 	},
 
 	/**
