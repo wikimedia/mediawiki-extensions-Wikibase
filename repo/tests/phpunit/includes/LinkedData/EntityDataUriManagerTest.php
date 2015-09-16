@@ -111,7 +111,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	public function testParseDocName( $doc, $expected ) {
 		$uriManager = $this->makeUriManager();
 
-		$actual = $uriManager->parseDocName( $doc, $expected );
+		$actual = $uriManager->parseDocName( $doc );
 		$this->assertEquals( $expected, $actual );
 	}
 
