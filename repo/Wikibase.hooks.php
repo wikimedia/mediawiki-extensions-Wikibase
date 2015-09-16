@@ -1096,4 +1096,23 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * ResourceLoaderGetConfigVars hook handler
+	 * This should be used for variables which vary with the html
+	 * and for variables this should work cross skin including anonymous users
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderGetConfigVars
+	 *
+	 * @param array $vars
+	 * @return boolean
+	 */
+	public static function onResourceLoaderGetConfigVars( &$vars ) {
+		// use custom generator for search on mobile
+		$vars['wgMFSearchGenerator'] = array(
+			'name' => 'wbsearch',
+			'prefix' => 'wbs'
+		);
+
+		return true;
+	}
+
 }
