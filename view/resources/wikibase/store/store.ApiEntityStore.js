@@ -14,23 +14,23 @@
 	 * @since 0.5
 	 *
 	 * @param {wikibase.api.RepoApi} repoApi
-	 * @param {wikibase.store.FetchedContentUnserializer} fetchedEntityUnserializer;
+	 * @param {wikibase.serialization.EntityDeserializer} entityDeserializer;
 	 * @param {string[]} languages
 	 */
 	MODULE.ApiEntityStore = util.inherit(
 		'WbApiEntityStore',
 		MODULE.EntityStore,
-		function( repoApi, fetchedEntityUnserializer, languages ) {
-			this._fetchedEntityUnserializer = fetchedEntityUnserializer;
+		function( repoApi, entityDeserializer, languages ) {
+			this._entityDeserializer = entityDeserializer;
 			this._languages = languages;
 			this._repoApi = repoApi;
 		},
 	{
 
 		/**
-		 * @type {wikibase.store.FetchedContentUnserializer}
+		 * @type {wikibase.serialization.EntityDeserializer}
 		 */
-		_fetchedEntityUnserializer: null,
+		_entityDeserializer: null,
 
 		/**
 		 * @type {string[]}
@@ -55,10 +55,7 @@
 				var entity = null;
 
 				if( entityData.missing !== '' ) {
-					entity = self._fetchedEntityUnserializer.deserialize( {
-						title: entityData.title,
-						content: entityData
-					} );
+					entity = self._entityDeserializer.deserialize( entityData );
 				}
 
 				deferred.resolve( entity );

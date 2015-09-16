@@ -110,14 +110,14 @@
 			/**
 			 * @private
 			 *
-			 * @param {wikibase.store.FetchedContent|undefined|null} property
+			 * @param {wikibase.datamodel.Property|undefined|null} property
 			 * @return {dataTypes.DataType|null}
 			 */
 			function _getDataType( property ) {
 				// If the set property is not there, we have to display a warning. This can happen
 				// if a property got deleted but the Snaks using it didn't change the property.
 				var dataTypeId = property
-					? property.getContent().getDataTypeId()
+					? property.getDataTypeId()
 					: false;
 
 				if( dataTypeId ) {
