@@ -229,8 +229,9 @@ class EntityModificationTestHelper {
 	 *
 	 * @param string $regex|array The regex to match, or an array to build a regex from
 	 * @param int $revid
+	 * @param string $message
 	 */
-	public function assertRevisionSummary( $regex, $revid ) {
+	public function assertRevisionSummary( $regex, $revid, $message = '' ) {
 		if ( is_array( $regex ) ) {
 			$r = '';
 
@@ -247,7 +248,7 @@ class EntityModificationTestHelper {
 
 		$entry = $this->mockRepository->getLogEntry( $revid );
 		Assert::assertNotNull( $entry, "revision not found: $revid" );
-		Assert::assertRegExp( $regex, $entry['summary'] );
+		Assert::assertRegExp( $regex, $entry['summary'], $message );
 	}
 
 }
