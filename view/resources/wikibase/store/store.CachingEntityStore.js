@@ -35,33 +35,13 @@
 		_store: null,
 
 		/**
-		 * @see wikibase.store.EntityStore.getMultipleRaw
+		 * @see wikibase.store.EntityStore.get
 		 */
-		getMultipleRaw: function( entityIds ) {
-			var deferreds = [],
-				self = this,
-				entityIdsToFetch = [],
-				entityIdToIndex = {};
-
-			$.each( entityIds, function( i, entityId ) {
-				if( self._deferreds.hasOwnProperty( entityId ) ) {
-					deferreds[i] = self._deferreds[ entityId ];
-				} else {
-					entityIdsToFetch.push( entityId );
-					entityIdToIndex[ entityId ] = i;
-				}
-			} );
-
-			if( entityIdsToFetch.length > 0 ) {
-				$.each( this._store.getMultipleRaw( entityIdsToFetch ), function( idx, promise ) {
-					deferreds[ entityIdToIndex[ entityIdsToFetch[ idx ] ] ] = promise;
-					self._deferreds[ entityIdsToFetch[ idx ] ] = promise;
-				} );
+		get: function( entityId ) {
+			if( !this._deferreds.hasOwnProperty( entityId ) ) {
+				this._deferreds[ entityId ] = this._store.get( entityId );
 			}
-
-			return $.map( deferreds, function( deferred ) {
-				return deferred.promise();
-			} );
+			return this._deferreds[ entityId ];
 		}
 	} );
 }( wikibase, jQuery ) );
