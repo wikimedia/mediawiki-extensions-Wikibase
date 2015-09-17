@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\RedirectRevision;
 
 /**
@@ -360,7 +360,7 @@ class EntityDataRequestHandler {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId" );
 				throw new HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
 			}
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$redirectRevision = new RedirectRevision(
 				new EntityRedirect( $id, $ex->getRedirectTargetId() ),
 				$ex->getRevisionId(), $ex->getRevisionTimestamp()

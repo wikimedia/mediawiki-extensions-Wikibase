@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * Functionality needed to expose Entities to Lua.
@@ -121,7 +121,7 @@ class EntityAccessor {
 
 		try {
 			$entityObject = $this->entityLookup->getEntity( $entityId );
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			// We probably hit a double redirect
 			wfLogWarning(
 				'Encountered a UnresolvedRedirectException when trying to load ' . $prefixedEntityId

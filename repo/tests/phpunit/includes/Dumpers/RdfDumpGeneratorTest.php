@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Test\Rdf\RdfBuilderTest;
 
 /**
@@ -79,7 +79,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 				$key = $id->getSerialization();
 
 				if ( isset( $redirects[$key] ) ) {
-					throw new UnresolvedRedirectException( $id, $redirects[$key] );
+					throw new RevisionedUnresolvedRedirectException( $id, $redirects[$key] );
 				}
 
 				if ( isset( $entities[$key] ) ) {

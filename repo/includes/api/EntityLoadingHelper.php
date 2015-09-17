@@ -9,7 +9,7 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * Helper class for api modules to load entities.
@@ -68,7 +68,7 @@ class EntityLoadingHelper {
 			}
 
 			return $revision;
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
 		} catch ( BadRevisionException $ex ) {
 			$this->errorReporter->dieException( $ex, 'nosuchrevid' );
