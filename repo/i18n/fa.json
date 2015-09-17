@@ -69,7 +69,6 @@
 	"wikibase-entitytermsview-input-help-message": "برچسپی برای این موجودیت، یک توضیح کوتاه و نام مستعار برای هر زبان وارد کنید.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "برچسپی برای این موجودیت، یک توضیح کوتاه و نام مستعار برای هر زبان در $1 وارد کنید.",
 	"wikibase-statements": "اظهارات",
-	"wikibase-terms": "به زبان‌های دیگر",
 	"wikibase-sitelinks": "پیوند وب‌گاه‌ها",
 	"wikibase-sitelinkgroupview-input-help-message": "پیوندی به مشخص کردن وب‌گاه و صفحهٔ آن وب‌گاه بیافزایید، پیوندهای وب‌گاه‌های موجود را ویرایش یا حذف کنید.",
 	"wikibase-sitelinks-empty": "این آیتم به هیچ صفحه‌ای پیوند ندارد.",

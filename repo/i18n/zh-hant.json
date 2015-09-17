@@ -61,7 +61,6 @@
 	"wikibase-entitytermsview-input-help-message": "輸入此實體的標籤，各種語言的簡短描述與別名。",
 	"wikibase-entitytermsforlanguageview-input-help-message": "使用 $1 輸入此實體的標籤，簡短描述與別名。",
 	"wikibase-statements": "陳述",
-	"wikibase-terms": "其他語言",
 	"wikibase-sitelinks": "網站連結",
 	"wikibase-sitelinkgroupview-input-help-message": "加入網站連結透過指定網站與頁面，編輯或移除已存在的網站連結。",
 	"wikibase-sitelinks-empty": "尚無頁面連結至此項目。",

@@ -60,7 +60,7 @@
 	"wikibase-entity-summary-wbsetdescription-add": " वर्णन [$2] जोडले",
 	"wikibase-entity-summary-wbsetdescription-set": "[$2] चे वर्णन बदलले",
 	"wikibase-entity-summary-wbsetdescription-remove": "[$2] चे वर्णन काढले",
-	"wikibase-entity-summary-wbsetsitelink-add": "!!FUZZY!![$2] ला दुवा जोडला",
+	"wikibase-entity-summary-wbsetsitelink-add": "[$2] ला दुवा जोडला",
 	"wikibase-entity-summary-wbsetsitelink-set": "[$2]स दुवा नेला",
 	"wikibase-entity-summary-wbsetsitelink-remove": "[$2] चा दुवा काढला",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|क्वालिफायर|क्वालिफायर्स}} बदलविले",

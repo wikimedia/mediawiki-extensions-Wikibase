@@ -54,7 +54,6 @@
 	"wikibase-entitytermsview-input-help-message": "この実体のラベルおよび簡潔な説明、別名を言語ごとに入力します。",
 	"wikibase-entitytermsforlanguageview-input-help-message": "この実体のラベルおよび簡潔な説明、別名を$1で入力します。",
 	"wikibase-statements": "文",
-	"wikibase-terms": "他の言語",
 	"wikibase-sitelinks": "サイトリンク",
 	"wikibase-sitelinkgroupview-input-help-message": "サイトとそのサイトのページを指定することによりサイトリンクを追加し、既存のサイトへのリンクを編集または削除します。",
 	"wikibase-sitelinks-empty": "この項目にリンクしているページはありません。",

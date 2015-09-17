@@ -75,7 +75,6 @@
 	"wikibase-label-input-help-message": "Escribe la etiqueta de esta entidad en $1.",
 	"wikibase-description-input-help-message": "Escribe una breve descripción para esta entidad en $1.",
 	"wikibase-statements": "Declaraciones",
-	"wikibase-terms": "En otros idiomas",
 	"wikibase-sitelinks": "Enlaces a sitios",
 	"wikibase-sitelinkgroupview-input-help-message": "Añadir vínculo a un sitio mediante la especificación de un sitio web y una página de ese sitio, editar o eliminar los vínculos a sitios existentes.",
 	"wikibase-sitelinks-empty": "Ninguna página está enlazada con este elemento.",

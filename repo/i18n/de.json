@@ -70,7 +70,6 @@
 	"wikibase-entitytermsview-input-help-message": "Gib eine Bezeichnung für dieses Objekt, eine kurze Beschreibung und Aliasse pro Sprache ein.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Gib die Bezeichnung für dieses Objekt, eine kurze Beschreibung und Aliasse auf $1 ein.",
 	"wikibase-statements": "Aussagen",
-	"wikibase-terms": "In anderen Sprachen",
 	"wikibase-sitelinks": "Websitelinks",
 	"wikibase-sitelinkgroupview-input-help-message": "Ergänzt einen Websitelink durch die Angabe einer Website und einer Seite dieser Website, bearbeitet oder entfernt vorhandene Websitelinks.",
 	"wikibase-sitelinks-empty": "Keine Seite ist mit diesem Datenobjekt verknüpft.",

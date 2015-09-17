@@ -90,7 +90,6 @@
 	"wikibase-entitytermsview-input-help-message": "Indiquez pour cette entité un libellé, une courte description et des alias par langues.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Entrer le libellé de cette entité, une courte description et ses alias dans $1.",
 	"wikibase-statements": "Déclarations",
-	"wikibase-terms": "Autres langues",
 	"wikibase-sitelinks": "Liens de site",
 	"wikibase-sitelinkgroupview-input-help-message": "Ajouter un lien de site en spécifiant un site et une page de ce site, modifier ou supprimer des liens de site existants.",
 	"wikibase-sitelinks-empty": "Aucune page n’est liée à cet élément.",

@@ -47,7 +47,6 @@
 	"wikibase-label-input-help-message": "Introduïu el títol d'aquest conjunt de dades en $1.",
 	"wikibase-description-input-help-message": "Introduïu una breu descripció en $1.",
 	"wikibase-statements": "Declaracions",
-	"wikibase-terms": "En altres llengües",
 	"wikibase-sitelinks": "Llista de les pàgines vinculades a aquest element",
 	"wikibase-sitelinks-empty": "Encara no hi ha enllaços del lloc per aquest element.",
 	"wikibase-sitelinks-input-help-message": "Definiu un enllaç a una pàgina relacionada amb aquest element.",

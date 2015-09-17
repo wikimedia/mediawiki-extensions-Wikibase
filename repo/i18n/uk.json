@@ -66,7 +66,6 @@
 	"wikibase-entitytermsview-input-help-message": "Введіть назву для цієї сутності, короткий опис та додаткові назви для кожної мови.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Введіть назву для цієї сутності, короткий опис та додаткові назви мовою $1.",
 	"wikibase-statements": "Твердження",
-	"wikibase-terms": "Іншими мовами",
 	"wikibase-sitelinks": "Посилання на сайти",
 	"wikibase-sitelinkgroupview-input-help-message": "Додайте посилання на сайт, вказавши сайт та сторінку на цьому сайті, виправте або вилучіть наявні посилання.",
 	"wikibase-sitelinks-empty": "Жодна сторінка не зв'язана з цим елементом.",
