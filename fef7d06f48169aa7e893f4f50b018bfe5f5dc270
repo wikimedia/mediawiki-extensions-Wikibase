@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_74af3e79",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-17T14:52:55Z",
+      "side": 1,
+      "message": "$skin-\u003egetTitle() twice isn\u0027t the nicest but at least there is in-process caching for this",
+      "revId": "fef7d06f48169aa7e893f4f50b018bfe5f5dc270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
