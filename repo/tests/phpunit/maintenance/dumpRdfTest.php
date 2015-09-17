@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use MediaWikiTestCase;
+use MediaWikiLangTestCase;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -39,7 +39,7 @@ use Wikibase\Repo\Test\MockEntityPerPage;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class DumpRdfTest extends MediaWikiTestCase {
+class DumpRdfTest extends MediaWikiLangTestCase {
 
 	public function testScript() {
 		$dumpScript = new DumpRdf();
