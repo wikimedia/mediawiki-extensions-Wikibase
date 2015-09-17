@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
+use Exception;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -23,9 +24,15 @@ class UnresolvedEntityRedirectException extends EntityLookupException {
 	/**
 	 * @param EntityId $entityId
 	 * @param EntityId $redirectTargetId The ID of the target Entity of the redirect
+	 * @param string|null $message
+	 * @param Exception|null $previous
 	 */
-	public function __construct( EntityId $entityId, EntityId $redirectTargetId ) {
-		parent::__construct( $entityId, 'Unresolved redirect to ' . $redirectTargetId->getSerialization() );
+	public function __construct( EntityId $entityId, EntityId $redirectTargetId, $message = null, Exception $previous = null ) {
+		parent::__construct(
+			$entityId,
+			$message !== null ? $message : 'Unresolved redirect to ' . $redirectTargetId->getSerialization(),
+			$previous
+		);
 
 		$this->redirectTargetId = $redirectTargetId;
 	}
