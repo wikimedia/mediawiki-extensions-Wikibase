@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_8e641747",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-17T11:00:09Z",
+      "side": 1,
+      "message": "Over here you suddenly have spaces in your brackets",
+      "revId": "fe2039a405d03b5d2ee6ddabba719ec518c1e9b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6ed0cbcc",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-17T11:00:09Z",
+      "side": 1,
+      "message": "You could also use changes/ expected as array keys",
+      "revId": "fe2039a405d03b5d2ee6ddabba719ec518c1e9b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ce51bf66",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-17T11:00:09Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "fe2039a405d03b5d2ee6ddabba719ec518c1e9b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
