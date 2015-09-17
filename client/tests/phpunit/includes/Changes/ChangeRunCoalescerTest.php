@@ -3,13 +3,20 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use Diff\Differ\MapDiffer;
+use Diff\DiffOp\AtomicDiffOp;
+use Traversable;
 use Wikibase\Change;
 use Wikibase\ChangesTable;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\ItemDiffer;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
+use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\TestChanges;
@@ -48,39 +55,34 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 	private function getEntityRevisionLookup() {
 		$repo = new MockRepository();
 
-		// entity 1, revision 11
-		$entity1 = new Item( new ItemId( 'Q1' ) );
-		$entity1->setLabel( 'en', 'one' );
-		$repo->putEntity( $entity1, 11 );
+		$offsets = array( 'Q1' => 1100, 'Q2' => 1200 );
+		foreach ( $offsets as $qid => $offset ) {
+			// entity 1, revision 1111
+			$entity1 = new Item( new ItemId( $qid ) );
+			$entity1->setLabel( 'en', 'ORIGINAL' );
+			$entity1->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Original' );
+			$repo->putEntity( $entity1, $offset + 11 );
 
-		// entity 1, revision 12
-		$entity1->setLabel( 'de', 'eins' );
-		$repo->putEntity( $entity1, 12 );
+			// entity 1, revision 1112
+			$entity1->setLabel( 'de', 'HINZUGEFÜGT' );
+			$repo->putEntity( $entity1, $offset + 12 );
 
-		// entity 1, revision 13
-		$entity1->setLabel( 'it', 'uno' );
-		$repo->putEntity( $entity1, 13 );
+			// entity 1, revision 1113
+			$entity1->setLabel( 'nl', 'Addiert' );
+			$repo->putEntity( $entity1, $offset + 13 );
 
-		// entity 1, revision 1111
-		$entity1->setDescription( 'en', 'the first' );
-		$repo->putEntity( $entity1, 1111 );
+			// entity 1, revision 1114
+			$entity1->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Testen' );
+			$repo->putEntity( $entity1, $offset + 14 );
 
-		// entity 2, revision 21
-		$entity1 = new Item( new ItemId( 'Q2' ) );
-		$entity1->setLabel( 'en', 'two' );
-		$repo->putEntity( $entity1, 21 );
+			// entity 1, revision 1117
+			$entity1->getSiteLinkList()->setSiteLink( new SiteLink( 'enwiki', 'Spam', array( new ItemId( 'Q12345' ) ) ) );
+			$repo->putEntity( $entity1, $offset + 17 );
 
-		// entity 2, revision 22
-		$entity1->setLabel( 'de', 'zwei' );
-		$repo->putEntity( $entity1, 22 );
-
-		// entity 2, revision 23
-		$entity1->setLabel( 'it', 'due' );
-		$repo->putEntity( $entity1, 23 );
-
-		// entity 2, revision 1211
-		$entity1->setDescription( 'en', 'the second' );
-		$repo->putEntity( $entity1, 1211 );
+			// entity 1, revision 1118
+			$entity1->getSiteLinkList()->setSiteLink( new SiteLink( 'enwiki', 'Spam', array( new ItemId( 'Q54321' ) ) ) );
+			$repo->putEntity( $entity1, $offset + 18 );
+		}
 
 		return $repo;
 	}
@@ -91,7 +93,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityChange
 	 */
-	private function makeChange( array $values, EntityDiff $diff = null ) {
+	private function makeChange( array $values ) {
 		if ( !isset( $values['info'] ) ) {
 			$values['info'] = array();
 		}
@@ -116,26 +118,70 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			$values['info']['metadata']['parent_id'] = 0;
 		}
 
+		if ( !isset( $values['info']['metadata']['comment'] ) && isset( $values['comment'] ) ) {
+			$values['info']['metadata']['comment'] = $values['comment'];
+		}
+
+		if ( !isset( $values['info']['metadata']['comment'] ) ) {
+			$values['info']['metadata']['comment'] = str_replace( '~', '-', $values['type'] );
+		}
+
+		$diff = $this->makeDiff( $values['object_id'], $values['info']['metadata']['parent_id'], $values[ 'revision_id' ] );
 		$values['info'] = serialize( $values['info'] );
 
 		/* @var EntityChange $change */
 		$table = ChangesTable::singleton();
 		$change = $table->newRow( $values, true );
-
-		if ( $diff ) {
-			$change->setDiff( $diff );
-		}
+		$change->setDiff( $diff );
 
 		return $change;
 	}
 
-	private function makeDiff( $type, $before, $after ) {
-		$differ = new MapDiffer( true );
+	private function combineChanges( EntityChange $first, EntityChange $last ) {
+		$firstmeta = $first->getMetadata();
+		$lastmeta = $last->getMetadata();
 
-		$diffOps = $differ->doDiff( $before, $after );
-		$diff = EntityDiff::newForType( $type, $diffOps );
+		return $this->makeChange( array(
+			'id' => null,
+			'type' => $first->getField( 'type' ), // because the first change has no parent
+			'time' => $last->getField( 'time' ), // last change's timestamp
+			'object_id' => $last->getField( 'object_id' ),
+			'revision_id' => $last->getField( 'revision_id' ), // last changes rev id
+			'user_id' => $last->getField( 'user_id' ),
+			'info' => array(
+				'metadata' => array(
+					'bot' => 0,
+					'comment' => $lastmeta['comment'],
+					'parent_id' => $firstmeta['parent_id'],
+				)
+			)
+		) );
+	}
 
-		return $diff;
+	private function makeDiff( $objectId, $revA, $revB ) {
+		$entityClasses = array(
+			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
+		);
+
+		$lookup = $this->getEntityRevisionLookup();
+		$entityFactory = new EntityFactory( $entityClasses );
+
+		$itemId = new ItemId( $objectId );
+
+		if ( $revA === 0 ) {
+			$oldEntity = $entityFactory->newEmpty( Item::ENTITY_TYPE );
+		} else {
+			$oldEntity = $lookup->getEntityRevision( $itemId, $revA )->getEntity();
+		}
+
+		if ( $revB === 0 ) {
+			$newEntity = $entityFactory->newEmpty( Item::ENTITY_TYPE );
+		} else {
+			$newEntity = $lookup->getEntityRevision( $itemId, $revB )->getEntity();
+		}
+
+		$differ = new ItemDiffer();
+		return $differ->diffEntities( $oldEntity, $newEntity );
 	}
 
 	private function assertChangeEquals( Change $expected, Change $actual, $message = null ) {
@@ -156,226 +202,190 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expected->getAction(), $actual->getAction(), $message . 'Action' );
 			$this->assertArrayEquals( $expected->getMetadata(), $actual->getMetadata(), false, true );
 		}
+
+		$this->assertDiffsEqual( $expected->getDiff(), $actual->getDiff() );
 	}
 
-	/**
-	 * @todo: move to TestChanges, unify with TestChanges::getChanges()
-	 */
-	private function makeTestChanges( $userId, $numericId ) {
-		$prefixedId = 'Q' . $numericId;
+	private function assertDiffsEqual( $expected, $actual, $path = '' ) {
+		if ( $expected instanceof AtomicDiffOp ) {
+			//$this->assertEquals( $expected->getType(), $actual->getType(), $path . ' DiffOp.type' );
+			$this->assertEquals( serialize( $expected ), serialize( $actual ), $path . ' DiffOp' );
+			return;
+		}
 
-		$offset = 100 * $numericId + 1000 * $userId;
+		if ( $expected instanceof Traversable ) {
+			$expected = iterator_to_array( $expected );
+			$actual = iterator_to_array( $actual );
+		}
 
-		// create with a label and site link set
-		$create = $this->makeChange( array(
-			'id' => $offset + 1,
-			'type' => 'wikibase-item~add',
-			'time' => '20130101010101',
-			'object_id' => $prefixedId,
-			'revision_id' => $offset + 11,
-			'user_id' => $userId,
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(),
-			array(
-				'label' => array( 'en' => 'Test' ),
-				'links' => array( 'enwiki' => 'Test' ), // old style sitelink representation
-			)
-		) );
+		foreach ( $expected as $key => $expectedValue ) {
+			$currentPath = "$path/$key";
+			$this->assertArrayHasKey( $key, $actual, $currentPath . " missing key" );
+			$this->assertDiffsEqual( $expectedValue, $actual[$key], $currentPath );
+		}
 
-		// set a label
-		$update = $this->makeChange( array(
-			'id' => $offset + 23,
-			'type' => 'wikibase-item~update',
-			'time' => '20130102020202',
-			'object_id' => $prefixedId,
-			'revision_id' => $offset + 12,
-			'user_id' => $userId,
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(),
-			array(
-				'label' => array( 'de' => 'Test' ),
-			)
-		) );
-
-		// merged change consisting of $create and $update
-		$create_update = $this->makeChange( array(
-			'id' => null,
-			'type' => $create->getField( 'type' ), // because the first change has no parent
-			'time' => $update->getField( 'time' ), // last change's timestamp
-			'object_id' => $update->getField( 'object_id' ),
-			'revision_id' => $update->getField( 'revision_id' ), // last changes rev id
-			'user_id' => $update->getField( 'user_id' ),
-			'info' => array(
-				'metadata' => array(
-					'bot' => 0,
-					'comment' => 'wikibase-comment-add' // this assumes a specific 'type'
-				)
-			)
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(),
-			array(
-				'label' => array( 'en' => 'Test', 'de' => 'Test' ),
-				'links' => array( 'enwiki' => 'Test' ), // old style sitelink representation
-			)
-		) );
-
-		// change link to other wiki
-		$updateXLink = $this->makeChange( array(
-			'id' => $offset + 14,
-			'type' => 'wikibase-item~update',
-			'time' => '20130101020304',
-			'object_id' => $prefixedId,
-			'revision_id' => $offset + 13,
-			'user_id' => $userId,
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(),
-			array(
-				'links' => array( 'dewiki' => array( 'name' => 'Testen', 'badges' => array() ) ),
-			)
-		) );
-
-		// merged change consisting of $create, $update and $updateXLink
-		$create_update_link = $this->makeChange( array(
-			'id' => null,
-			'type' => $create->getField( 'type' ), // because the first change has no parent
-			'time' => $updateXLink->getField( 'time' ), // last change's timestamp
-			'object_id' => $updateXLink->getField( 'object_id' ),
-			'revision_id' => $updateXLink->getField( 'revision_id' ), // last changes rev id
-			'user_id' => $updateXLink->getField( 'user_id' ),
-			'info' => array(
-				'metadata' => array(
-					'bot' => 0,
-					'comment' => 'wikibase-comment-add' // this assumes a specific 'type'
-				)
-			)
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(),
-			array(
-				'label' => array( 'en' => 'Test', 'de' => 'Test' ),
-				'links' => array(
-					'enwiki' => array( 'name' => 'Test' ), // incomplete new style sitelink representation
-					'dewiki' => array( 'name' => 'Test' ), // incomplete new style sitelink representation
-				),
-			)
-		) );
-
-		// some other user changed a label
-		$updateX = $this->makeChange( array(
-			'id' => $offset + 12,
-			'type' => 'wikibase-item~update',
-			'time' => '20130103030303',
-			'object_id' => $prefixedId,
-			'revision_id' => $offset + 14,
-			'user_id' => $userId + 17,
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(),
-			array(
-				'label' => array( 'fr' => array( 'name' => 'Test', 'badges' => array() ) ),
-			)
-		) );
-
-		// change link to local wiki
-		$updateLink = $this->makeChange( array(
-			'id' => $offset + 13,
-			'type' => 'wikibase-item~update',
-			'time' => '20130102030405',
-			'object_id' => $prefixedId,
-			'revision_id' => $offset + 17,
-			'user_id' => $userId,
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(
-				'links' => array( 'enwiki' => array( 'name' => 'Test', 'badges' => array( 'Q555' ) ) ),
-			),
-			array(
-				'links' => array( 'enwiki' => array( 'name' => 'Spam', 'badges' => array( 'Q12345' ) ) ),
-			)
-		) );
-
-		// change only badges in link to local wiki
-		$updateLinkBadges = $this->makeChange( array(
-			'id' => $offset + 14,
-			'type' => 'wikibase-item~update',
-			'time' => '20130102030405',
-			'object_id' => $prefixedId,
-			'revision_id' => $offset + 18,
-			'user_id' => $userId,
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(
-				'links' => array( 'enwiki' => array( 'name' => 'Test', 'badges' => array( 'Q555' ) ) ),
-			),
-			array(
-				'links' => array( 'enwiki' => array( 'name' => 'Test', 'badges' => array( 'Q12345' ) ) ),
-			)
-		) );
-
-		// item deleted
-		$delete = $this->makeChange( array(
-			'id' => $offset + 35,
-			'type' => 'wikibase-item~remove',
-			'time' => '20130105050505',
-			'object_id' => $prefixedId,
-			'revision_id' => 0,
-			'user_id' => $userId,
-		), $this->makeDiff( Item::ENTITY_TYPE,
-			array(
-				'label' => array( 'en' => 'Test', 'de' => 'Test' ),
-				'links' => array( 'enwiki' => 'Test', 'dewiki' => 'Test' ),
-			),
-			array()
-		) );
-
-		return array(
-			'create' => $create,  // create item
-			'update' => $update,  // update item
-			'create+update' => $create_update, // merged create and update
-			'update/other' => $updateX,        // update by another user
-			'update-link/local' => $updateLink,  // change the link to this client wiki
-			'update-link/local/badges' => $updateLinkBadges,  // change the link to this client wiki
-			'update-link/other' => $updateXLink, // change the link to some other client wiki
-			'create+update+update-link/other' => $create_update_link, // merged create and update and update link to other wiki
-			'delete' => $delete, // delete item
-		);
+		$extraKeys = array_diff( array_keys( $actual), array_keys( $expected ) );
+		$this->assertEquals( array(), $extraKeys, $path . " extra keys" );
 	}
 
 	public function provideCoalesceChanges() {
-		$changes11 = $this->makeTestChanges( 1, 1 );
+		$id = 0;
 
-		$create11 = $changes11['create']; // create item
-		$update11 = $changes11['update']; // update item
-		$updateXLink11 = $changes11['update-link/other']; // change the link to some other client wiki
-		$create_update_link11 = $changes11['create+update+update-link/other']; // merged create and update and update link to other wiki
-		$delete11 = $changes11['delete']; // delete item
+		// create with a label and site link set
+		$create11 = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~add',
+			'time' => '20130101010101',
+			'object_id' => 'Q1',
+			'revision_id' => 1111,
+			'user_id' => 1,
+		) );
 
-		$changes12 = $this->makeTestChanges( 1, 2 );
+		// set a label
+		$update11 = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~update',
+			'time' => '20130102020202',
+			'object_id' => 'Q1',
+			'revision_id' => 1112,
+			'user_id' => 1,
+			'parent_id' => 1111,
+		) );
 
-		$create12 = $changes12['create']; // create item
-		$update12 = $changes12['update']; // update item
-		$create_update12 = $changes12['create+update']; // merged create and update
+		// set another label
+		$anotherUpdate11 = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~update',
+			'time' => '20130102020203',
+			'object_id' => 'Q1',
+			'revision_id' => 1113,
+			'user_id' => 1,
+			'parent_id' => 1112,
+		) );
+
+		// set another label, by another user
+		$anotherUpdate21 = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~update',
+			'time' => '20130102020203',
+			'object_id' => 'Q1',
+			'revision_id' => 1113,
+			'user_id' => 2,
+			'parent_id' => 1112,
+		) );
+
+		// change link to other wiki
+		$update11XLink = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~update',
+			'time' => '20130101020304',
+			'object_id' => 'Q1',
+			'revision_id' => 1114,
+			'user_id' => 1,
+			'parent_id' => 1113,
+		) );
+
+		// change link to local wiki
+		$update11Link = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~update',
+			'time' => '20130102030407',
+			'object_id' => 'Q1',
+			'revision_id' => 1117,
+			'user_id' => 1,
+			'parent_id' => 1114,
+		) );
+
+		// delete
+		$delete11 = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~remove',
+			'time' => '20130102030409',
+			'object_id' => 'Q1',
+			'revision_id' => 0,
+			'user_id' => 1,
+			'parent_id' => 1118,
+		) );
+
+		// set a label
+		$update12 = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~update',
+			'time' => '20130102020102',
+			'object_id' => 'Q2',
+			'revision_id' => 1212,
+			'user_id' => 1,
+			'parent_id' => 1211,
+		) );
+
+		// set another label
+		$anotherUpdate12 = $this->makeChange( array(
+			'id' => ++$id,
+			'type' => 'wikibase-item~update',
+			'time' => '20130102020303',
+			'object_id' => 'Q2',
+			'revision_id' => 1213,
+			'user_id' => 1,
+			'parent_id' => 1213,
+		) );
 
 		return array(
-			array( // #0: empty
+			'empty' => array(
 				array(), // $changes
 				array(), // $expected
 			),
 
-			array( // #1: single
+			'single' => array(
 				array( $create11 ), // $changes
 				array( $create11 ), // $expected
 			),
 
-			array( // #2: unrelated
-				array( $create11, $update12 ), // $changes
-				array( $create11, $update12 ), // $expected
+			'simple run' => array(
+				array( $update11, $anotherUpdate11 ), // $changes
+				array( $this->combineChanges( $update11, $anotherUpdate11 ) ), // $expected
 			),
 
-			array( // #3: reversed
+			'long run' => array( // create counts as update, delete doesn't
+				array( $create11, $update11, $anotherUpdate11 ), // $changes
+				array( $this->combineChanges( $create11, $anotherUpdate11 ) ), // $expected
+			),
+
+			'different items' => array(
+				array( $update11, $anotherUpdate12 ), // $changes
+				array( $update11, $anotherUpdate12 ), // $changes
+			),
+
+			'different users' => array(
+				array( $update11, $anotherUpdate21 ), // $changes
+				array( $update11, $anotherUpdate21 ), // $changes
+			),
+
+			'reversed' => array( // result is sorted by timestamp
 				array( $update12, $create11 ), // $changes
 				array( $create11, $update12 ), // $expected
 			),
 
-			array( // #4: mixed
-				array( $create11, $create12, $update11, $update12, $updateXLink11, $delete11 ), // $changes
-				array( $create_update_link11, $create_update12, $delete11 ), // $expected
+			'mingled' => array(
+				array( $update12, $update11, $anotherUpdate11, $anotherUpdate12 ), // $changes
+				array( // result is sorted by timestamp
+					$this->combineChanges( $update11, $anotherUpdate11 ),
+					$this->combineChanges( $update12, $anotherUpdate12 ),
+				), // $expected
+			),
+
+			'different action' => array( // create counts as update, delete doesn't
+				array( $update11, $delete11 ), // $changes
+				array( $update11, $delete11 ), // $expected
+			),
+
+			'local link breaks' => array(
+				array( $update11, $update11Link ), // $changes
+				array( $update11, $update11Link ), // $expected
+			),
+
+			'other link merges' => array(
+				array( $update11, $update11XLink ), // $changes
+				array( $this->combineChanges( $update11, $update11XLink ) ), // $expected
 			),
 		);
 	}
@@ -387,12 +397,25 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$coalescer = $this->getChangeRunCoalescer();
 		$coalesced = $coalescer->transformChangeList( $changes );
 
-		$this->assertEquals( count( $expected ), count( $coalesced ), 'number of changes' );
+		$this->assertEquals( $this->getChangeIds( $expected ), $this->getChangeIds( $coalesced ) );
 
-		$i = 0;
-		while ( next( $coalesced ) && next( $expected ) ) {
-			$this->assertChangeEquals( current( $expected ), current( $coalesced ), 'expected[' . $i++ . ']' );
+		// We know the arrays have the same length, but know nothing about they keys.
+		$expected = array_values( $expected );
+		$coalesced = array_values( $coalesced );
+
+		foreach ( $expected as $i => $expectedChange ) {
+			$actualChange = $coalesced[$i];
+			$this->assertChangeEquals( $expectedChange, $actualChange );
 		}
+	}
+
+	private function getChangeIds( array $changes ) {
+		return array_map(
+			function( Change $change ) {
+				return $change->getId();
+			},
+			$changes
+		);
 	}
 
 }

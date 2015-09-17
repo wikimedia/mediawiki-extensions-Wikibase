@@ -149,7 +149,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		$entityId = $first->getEntityId();
 
 		$parentRevId = $firstmeta['parent_id'];
-		$latestRevId = $firstmeta['rev_id'];
+		$latestRevId = $lastmeta['rev_id'];
 
 		$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $latestRevId );
 
@@ -233,15 +233,12 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 				if ( !$break && ( $change instanceof ItemChange ) ) {
 					$siteLinkDiff = $change->getSiteLinkDiff();
 					if ( isset( $siteLinkDiff[ $this->localSiteId ] ) ) {
+						// TODO: don't break if only the link's badges changed
 						$break = true;
 						$breakNext = true;
 					}
 				}
 
-				// FIXME: We should call changeNeedsRendering() and see if the needs-rendering
-				//        stays the same, and break the run if not. This way, uninteresting
-				//        changes can be sorted out more cleanly later.
-				// FIXME: Perhaps more easily, get rid of them here and now!
 				if ( $break ) {
 					if ( !empty( $currentRun ) ) {
 						try {
