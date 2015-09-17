@@ -45,7 +45,7 @@ interface EntityRevisionLookup {
 	 *        to indicate that the latest revision is required. LATEST_FROM_MASTER would force the
 	 *        revision to be determined from the canonical master database.
 	 *
-	 * @throws StorageException|UnresolvedRedirectException
+	 * @throws StorageException|RevisionedUnresolvedRedirectException
 	 * @return EntityRevision|null
 	 */
 	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE );

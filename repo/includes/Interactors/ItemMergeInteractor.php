@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -213,7 +213,7 @@ class ItemMergeInteractor {
 			return $revision->getEntity();
 		} catch ( StorageException $ex ) {
 			throw new ItemMergeException( $ex->getMessage(), 'cant-load-entity-content', $ex );
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			throw new ItemMergeException( $ex->getMessage(), 'cant-load-entity-content', $ex );
 		}
 	}

@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\JsonDumpGenerator;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -118,7 +118,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 					return null;
 				}
 				if ( in_array( $id, $redirectedIds ) ) {
-					throw new UnresolvedRedirectException( $id, new ItemId( 'Q123' ) );
+					throw new RevisionedUnresolvedRedirectException( $id, new ItemId( 'Q123' ) );
 				}
 
 				$key = $id->getSerialization();

@@ -15,7 +15,7 @@ use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * JsonDumpGenerator generates an JSON dump of a given set of entities, excluding
@@ -137,7 +137,7 @@ class JsonDumpGenerator extends DumpGenerator {
 			}
 		} catch ( MWContentSerializationException $ex ) {
 			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
-		} catch ( UnresolvedRedirectException $e ) {
+		} catch ( RevisionedUnresolvedRedirectException $e ) {
 			return null;
 		}
 

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Lib\Store\CachingEntityRevisionLookup
@@ -168,7 +168,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		try {
 			$lookup->getEntityRevision( $id );
 			$this->fail( 'UnresolvedRedirectException expected; perhaps the cache did not get purged properly.' );
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( $targetId, $ex->getRedirectTargetId() );
 		}
 	}

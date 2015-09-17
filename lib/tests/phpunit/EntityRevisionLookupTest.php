@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * Base class for testing EntityRevisionLookup implementations
@@ -170,7 +170,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 		try {
 			$lookup->getEntityRevision( $entityId );
 			$this->fail( 'Expected an UnresolvedRedirectException exception when looking up a redirect.' );
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( $expectedRedirect, $ex->getRedirectTargetId() );
 			$this->assertGreaterThan( 0, $ex->getRevisionId() );
 			$this->assertNotEmpty( $ex->getRevisionTimestamp() );

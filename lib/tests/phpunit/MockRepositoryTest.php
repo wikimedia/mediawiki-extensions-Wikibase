@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Test\MockRepository
@@ -628,7 +628,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		try {
 			$this->repo->getEntityRevision( new ItemId( 'Q11' ) );
 			$this->fail( 'getEntityRevision() should fail for redirects' );
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( 'Q1', $ex->getRedirectTargetId()->getSerialization() );
 			$this->assertGreaterThan( 0, $ex->getRevisionId() );
 			$this->assertNotEmpty( $ex->getRevisionTimestamp() );
@@ -639,7 +639,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		try {
 			$this->repo->getEntityRevision( new ItemId( 'Q11' ) );
 			$this->fail( 'getEntityRevision() should fail for redirects' );
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( 'Q1', $ex->getRedirectTargetId()->getSerialization() );
 			$this->assertEquals( 117, $ex->getRevisionId() );
 			$this->assertEquals( '20150505000000', $ex->getRevisionTimestamp() );

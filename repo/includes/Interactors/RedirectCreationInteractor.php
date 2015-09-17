@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
@@ -179,7 +179,7 @@ class RedirectCreationInteractor {
 					'target-not-empty'
 				);
 			}
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			// Nothing to do. It's ok to override a redirect with a redirect.
 		} catch ( StorageException $ex ) {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-load-entity-content', $ex );

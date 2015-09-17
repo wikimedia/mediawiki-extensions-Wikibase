@@ -16,7 +16,7 @@ use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -169,7 +169,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 					'Entity id is unknown'
 				);
 			}
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-unresolved-redirect',
 				array( $id->getSerialization() ),
