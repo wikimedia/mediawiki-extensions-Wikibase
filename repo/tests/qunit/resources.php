@@ -41,6 +41,7 @@ return call_user_func( function() {
 				'experts/Item.tests.js',
 			),
 			'dependencies' => array(
+				'jquery.valueview.tests.testExpert',
 				'wikibase.experts.Item',
 				'wikibase.tests.qunit.testrunner',
 			),
@@ -51,6 +52,7 @@ return call_user_func( function() {
 				'experts/Property.tests.js',
 			),
 			'dependencies' => array(
+				'jquery.valueview.tests.testExpert',
 				'wikibase.experts.Property',
 				'wikibase.tests.qunit.testrunner',
 			),
