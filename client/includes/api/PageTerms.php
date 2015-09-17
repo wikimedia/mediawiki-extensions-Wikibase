@@ -262,8 +262,4 @@ class PageTerms extends ApiQueryBase {
 		);
 	}
 
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client/API';
-	}
-
 }
