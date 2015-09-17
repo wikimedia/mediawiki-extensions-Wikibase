@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_9a8bf11a",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-17T18:02:41Z",
+      "side": 1,
+      "message": "PARAM_HELP_MSG is needed which indicates an i18n message that provides a description. (see pageterms as one example how it\u0027s done)",
+      "revId": "3e4e649990ccc9b401c68b5659cc7f94e4b940d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ba8eed28",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-17T18:02:41Z",
+      "side": 1,
+      "message": "we need i18n (en.json and qqq.json) messages for each of these",
+      "revId": "3e4e649990ccc9b401c68b5659cc7f94e4b940d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_fa4b152a",
         "filename": "repo/tests/phpunit/includes/api/QuerySearchEntitiesTest.php",
         "patchSetId": 4
