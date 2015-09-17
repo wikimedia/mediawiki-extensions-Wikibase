@@ -227,7 +227,7 @@ final class ClientHooks {
 		if ( $idString !== null ) {
 			$entityIdParser = $wikibaseClient->getEntityIdParser();
 			$entityId = $entityIdParser->parse( $idString );
-		} elseif ( Action::getActionName( $skin ) !== 'view' ) {
+		} elseif ( Action::getActionName( $skin ) !== 'view' && $skin->getTitle()->exists() ) {
 			// Try to load the item ID from Database, but only do so on non-article views,
 			// (where the article's OutputPage isn't available to us).
 			$entityId = self::getEntityIdForTitle( $skin->getTitle() );
