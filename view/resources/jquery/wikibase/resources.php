@@ -248,7 +248,6 @@ return call_user_func( function() {
 				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.sitelinkgrouplistview',
-				'wikibase.sites',
 				'wikibase.utilities.ClaimGuidGenerator',
 			),
 		),
@@ -334,6 +333,7 @@ return call_user_func( function() {
 				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.sitelinkgroupview',
+				'wikibase.sites',
 			),
 			'messages' => array(
 				'wikibase-sitelinkgroupview-input-help-message',
