@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_fa4b152a",
+        "filename": "repo/tests/phpunit/includes/api/QuerySearchEntitiesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-17T17:42:07Z",
+      "side": 1,
+      "message": "huh? :)",
+      "revId": "3e4e649990ccc9b401c68b5659cc7f94e4b940d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
