@@ -24,7 +24,7 @@ use Wikibase\Test\MockRepository;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class ParserOutputDataUpdaterTest extends \MediaWikiTestCase {
+class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 
 	/**
 	 * @var MockRepository|null
