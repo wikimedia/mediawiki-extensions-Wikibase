@@ -219,7 +219,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.sitelinkgrouplistview',
-				'wikibase.datamodel',
+				'wikibase.datamodel.SiteLink',
+				'wikibase.datamodel.SiteLinkSet',
 				'wikibase.tests.qunit.testrunner',
 			),
 		),
