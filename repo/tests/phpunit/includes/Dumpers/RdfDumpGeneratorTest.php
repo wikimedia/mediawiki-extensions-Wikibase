@@ -79,7 +79,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 				$key = $id->getSerialization();
 
 				if ( isset( $redirects[$key] ) ) {
-					throw new UnresolvedRedirectException( $redirects[$key] );
+					throw new UnresolvedRedirectException( $id, $redirects[$key] );
 				}
 
 				if ( isset( $entities[$key] ) ) {

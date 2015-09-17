@@ -37,15 +37,15 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function getEntity( EntityId $id ) {
 		if ( $id->getSerialization() == 'Q11' ) {
-			throw new UnresolvedRedirectException( new ItemId( 'Q10' ) );
+			throw new UnresolvedRedirectException( new ItemId( 'Q11' ), new ItemId( 'Q10' ) );
 		}
 
 		if ( $id->getSerialization() == 'Q12' ) {
-			throw new UnresolvedRedirectException( new ItemId( 'Q11' ) );
+			throw new UnresolvedRedirectException( new ItemId( 'Q12' ), new ItemId( 'Q11' ) );
 		}
 
 		if ( $id->getSerialization() == 'Q21' ) {
-			throw new UnresolvedRedirectException( new ItemId( 'Q20' ) );
+			throw new UnresolvedRedirectException( new ItemId( 'Q21' ), new ItemId( 'Q20' ) );
 		}
 
 		if ( $id->getSerialization() == 'Q10' ) {
