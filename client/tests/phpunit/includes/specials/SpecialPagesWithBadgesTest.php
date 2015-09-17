@@ -86,7 +86,10 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		list( $result, ) = $this->executeSpecialPage( 'FooBar' );
 
 		$this->assertContains( '<p class="error"', $result );
-		$this->assertContains( 'FooBar is not a valid item id', $result );
+		$this->assertContains(
+			wfMessage( 'wikibase-pageswithbadges-invalid-id', 'FooBar' )->text(),
+			$result
+		);
 	}
 
 }
