@@ -61,7 +61,6 @@
 	"wikibase-entitytermsview-input-help-message": "Enter a label of this entity, a short description and aliases per language.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Enter the label of this entity, a short description and aliases in $1.",
 	"wikibase-statements": "Statements",
-	"wikibase-terms": "In other languages",
 	"wikibase-sitelinks": "Sitelinks",
 	"wikibase-sitelinkgroupview-input-help-message": "Add a sitelink by specifying a site and a page of that site, edit or remove existing sitelinks.",
 	"wikibase-sitelinks-empty": "No page is linked to this item.",
