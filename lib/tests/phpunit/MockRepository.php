@@ -134,6 +134,7 @@ class MockRepository implements
 		if ( isset( $this->redirects[$key] ) ) {
 			$redirRev = $this->redirects[$key];
 			throw new UnresolvedRedirectException(
+				$entityId,
 				$redirRev->getRedirect()->getTargetId(),
 				$redirRev->getRevisionId(),
 				$redirRev->getTimestamp()

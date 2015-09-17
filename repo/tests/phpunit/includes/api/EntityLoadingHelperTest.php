@@ -90,7 +90,10 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 
 	public function testUnresolvedRedirectException_callsErrorReporter() {
 		$helper = new EntityLoadingHelper(
-			$this->getMockEntityRevisionLookup( new UnresolvedRedirectException( new ItemId( 'Q1' ) ) ),
+			$this->getMockEntityRevisionLookup( new UnresolvedRedirectException(
+				new ItemId( 'Q1' ),
+				new ItemId( 'Q1' )
+			) ),
 			$this->getMockErrorReporter( 'unresolved-redirect' )
 		);
 

@@ -43,11 +43,11 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 
 	public function getEntityRevision( EntityId $id ) {
 		if ( $id->getSerialization() === 'Q1' ) {
-			throw new UnresolvedRedirectException( new ItemId( 'Q5' ) );
+			throw new UnresolvedRedirectException( new ItemId( 'Q1' ), new ItemId( 'Q5' ) );
 		}
 
 		if ( $id->getSerialization() === 'Q5' ) {
-			throw new UnresolvedRedirectException( new ItemId( 'Q10' ) );
+			throw new UnresolvedRedirectException( new ItemId( 'Q5' ), new ItemId( 'Q10' ) );
 		}
 
 		return new EntityRevision( new Item( $id ), 777 );
@@ -121,7 +121,10 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 		$target = $this->getMock( 'Wikibase\DataModel\Services\Term\PropertyLabelResolver' );
 		$target->expects( $this->once() )
 			->method( 'getPropertyIdsForLabels' )
-			->will( $this->throwException( new UnresolvedRedirectException( new ItemId( 'Q12' ) ) ) );
+			->will( $this->throwException( new UnresolvedRedirectException(
+				new ItemId( 'Q1' ),
+				new ItemId( 'Q12' )
+			) ) );
 
 		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
 

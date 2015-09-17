@@ -118,7 +118,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 					return null;
 				}
 				if ( in_array( $id, $redirectedIds ) ) {
-					throw new UnresolvedRedirectException( new ItemId( 'Q123' ) );
+					throw new UnresolvedRedirectException( $id, new ItemId( 'Q123' ) );
 				}
 
 				$key = $id->getSerialization();

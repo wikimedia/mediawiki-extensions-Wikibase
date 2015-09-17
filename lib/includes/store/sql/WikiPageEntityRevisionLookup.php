@@ -85,7 +85,12 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			list( $entityRevision, $redirect ) = $this->loadEntity( $row );
 
 			if ( $redirect !== null ) {
-				throw new UnresolvedRedirectException( $redirect->getTargetId(), (int)$row->rev_id, $row->rev_timestamp );
+				throw new UnresolvedRedirectException(
+					$entityId,
+					$redirect->getTargetId(),
+					(int)$row->rev_id,
+					$row->rev_timestamp
+				);
 			}
 
 			if ( $entityRevision === null ) {

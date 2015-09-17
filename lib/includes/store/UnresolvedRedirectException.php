@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Store;
 
-use Exception;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 
 /**
  * Exception indicating that an attempt was made to access a redirected EntityId
@@ -12,12 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class UnresolvedRedirectException extends Exception {
-
-	/**
-	 * @var EntityId
-	 */
-	private $redirectTargetId;
+class UnresolvedRedirectException extends UnresolvedEntityRedirectException {
 
 	/**
 	 * @var int
@@ -30,25 +25,16 @@ class UnresolvedRedirectException extends Exception {
 	private $revisionTimestamp;
 
 	/**
+	 * @param EntityId $entityId
 	 * @param EntityId $redirectTargetId The ID of the target Entity of the redirect
 	 * @param int $revisionId
 	 * @param string $revisionTimestamp
 	 */
-	public function __construct( EntityId $redirectTargetId, $revisionId = 0, $revisionTimestamp = '' ) {
-		parent::__construct( "Unresolved redirect to " . $redirectTargetId->getSerialization() );
+	public function __construct( EntityId $entityId, EntityId $redirectTargetId, $revisionId = 0, $revisionTimestamp = '' ) {
+		parent::__construct( $entityId, $redirectTargetId );
 
-		$this->redirectTargetId = $redirectTargetId;
 		$this->revisionId = $revisionId;
 		$this->revisionTimestamp = $revisionTimestamp;
-	}
-
-	/**
-	 * Returns the ID of the entity referenced by the redirect.
-	 *
-	 * @return EntityId
-	 */
-	public function getRedirectTargetId() {
-		return $this->redirectTargetId;
 	}
 
 	/**
