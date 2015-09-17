@@ -50,6 +50,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
@@ -342,6 +343,17 @@ final class WikibaseClient {
 		}
 
 		return $this->languageFallbackChainFactory;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	public function getLanguageFallbackLabelDescriptionLookupFactory() {
+		return new LanguageFallbackLabelDescriptionLookupFactory(
+				$this->getLanguageFallbackChainFactory(), $this->getTermLookup(), $this->getTermBuffer()
+		);
 	}
 
 	/**
