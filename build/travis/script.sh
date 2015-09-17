@@ -2,10 +2,10 @@
 
 set -x
 
-cd ../phase3/tests/phpunit
+cd ../phase3/tests/phpunit &&
 
-php phpunit.php --group Wikibase,Purtle
+php phpunit.php --group Wikibase,Purtle &&
 
-cd ../../extensions/Wikibase
+cd ../../extensions/Wikibase &&
 
 composer test
