@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_ffbc6703",
+        "filename": "build/travis/script.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-09-17T16:04:40Z",
+      "side": 0,
+      "message": "use the following here instead of all other changes:\nset -ex",
+      "revId": "431cc8c54b3c328635d183141e211d8af7d35106",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
