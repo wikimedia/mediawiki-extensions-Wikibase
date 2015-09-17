@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -x
+set -ex
 
 cd ../phase3/tests/phpunit
 
