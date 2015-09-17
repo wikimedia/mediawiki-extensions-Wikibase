@@ -109,7 +109,7 @@ class EntitySearchHelper {
 					$text,
 					$languageCode,
 					$entityType,
-					$missing,
+					$limit, // needs to be the full limit as exact matches are also contained in the prefix search
 					true,
 					$strictLanguage
 				);
