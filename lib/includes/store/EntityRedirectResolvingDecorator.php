@@ -77,7 +77,7 @@ class EntityRedirectResolvingDecorator {
 			try {
 				$method = array( $this->targetObject, $name );
 				return call_user_func_array( $method, $arguments );
-			} catch ( UnresolvedRedirectException $ex ) {
+			} catch ( RevisionedUnresolvedRedirectException $ex ) {
 				// If the first argument was an EntityId, replace it and retry.
 				// Otherwise, give up.
 				if ( !isset( $arguments[0] ) || !( $arguments[0] instanceof EntityId ) ) {

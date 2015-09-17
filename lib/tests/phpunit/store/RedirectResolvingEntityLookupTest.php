@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Lib\Store\RedirectResolvingEntityLookup
@@ -33,19 +33,19 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityId $id
 	 *
 	 * @return null|Item
-	 * @throws UnresolvedRedirectException
+	 * @throws RevisionedUnresolvedRedirectException
 	 */
 	public function getEntity( EntityId $id ) {
 		if ( $id->getSerialization() == 'Q11' ) {
-			throw new UnresolvedRedirectException( new ItemId( 'Q11' ), new ItemId( 'Q10' ) );
+			throw new RevisionedUnresolvedRedirectException( new ItemId( 'Q11' ), new ItemId( 'Q10' ) );
 		}
 
 		if ( $id->getSerialization() == 'Q12' ) {
-			throw new UnresolvedRedirectException( new ItemId( 'Q12' ), new ItemId( 'Q11' ) );
+			throw new RevisionedUnresolvedRedirectException( new ItemId( 'Q12' ), new ItemId( 'Q11' ) );
 		}
 
 		if ( $id->getSerialization() == 'Q21' ) {
-			throw new UnresolvedRedirectException( new ItemId( 'Q21' ), new ItemId( 'Q20' ) );
+			throw new RevisionedUnresolvedRedirectException( new ItemId( 'Q21' ), new ItemId( 'Q20' ) );
 		}
 
 		if ( $id->getSerialization() == 'Q10' ) {
@@ -113,7 +113,7 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$id = new ItemId( 'Q12' ); // Q12 is a double redirect
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
+		$this->setExpectedException( 'Wikibase\Lib\Store\RevisionedUnresolvedRedirectException' );
 		$lookup->getEntity( $id );
 	}
 

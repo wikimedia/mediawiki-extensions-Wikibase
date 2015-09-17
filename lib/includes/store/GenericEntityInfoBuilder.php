@@ -98,7 +98,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		try {
 			$rev = $this->entityRevisionLookup->getEntityRevision( $id );
 			return $rev === null ? null : $rev->getEntity();
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			return null;
 		}
 	}
@@ -107,7 +107,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		try {
 			$this->entityRevisionLookup->getEntityRevision( $id );
 			return null;
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			return $ex->getRedirectTargetId();
 		}
 	}
@@ -294,7 +294,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 
 			try {
 				$rev = $this->entityRevisionLookup->getEntityRevision( $id );
-			} catch ( UnresolvedRedirectException $ex ) {
+			} catch ( RevisionedUnresolvedRedirectException $ex ) {
 				if ( $redirects === 'keep-redirects' ) {
 					continue;
 				} else {

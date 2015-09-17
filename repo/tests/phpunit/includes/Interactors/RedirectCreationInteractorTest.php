@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
@@ -165,7 +165,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		try {
 			$this->mockRepository->getEntity( $fromId );
 			$this->fail( 'getEntity( ' . $fromId->getSerialization() . ' ) did not throw an UnresolvedRedirectException' );
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
 		}
 	}

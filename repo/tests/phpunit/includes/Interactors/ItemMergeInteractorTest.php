@@ -7,7 +7,7 @@ use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
@@ -312,7 +312,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			try {
 				$this->testHelper->getEntity( $fromId );
 				$this->fail( 'getEntity( ' . $fromId->getSerialization() . ' ) did not throw an UnresolvedRedirectException' );
-			} catch ( UnresolvedRedirectException $ex ) {
+			} catch ( RevisionedUnresolvedRedirectException $ex ) {
 				$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
 			}
 

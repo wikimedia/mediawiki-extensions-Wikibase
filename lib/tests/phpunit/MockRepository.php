@@ -30,7 +30,7 @@ use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\RedirectRevision;
 
 /**
@@ -125,7 +125,7 @@ class MockRepository implements
 	 * @param EntityId $entityId
 	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
 	 *
-	 * @throws StorageException|UnresolvedRedirectException
+	 * @throws StorageException|RevisionedUnresolvedRedirectException
 	 * @return EntityRevision|null
 	 */
 	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
@@ -133,7 +133,7 @@ class MockRepository implements
 
 		if ( isset( $this->redirects[$key] ) ) {
 			$redirRev = $this->redirects[$key];
-			throw new UnresolvedRedirectException(
+			throw new RevisionedUnresolvedRedirectException(
 				$entityId,
 				$redirRev->getRedirect()->getTargetId(),
 				$redirRev->getRevisionId(),
@@ -514,7 +514,7 @@ class MockRepository implements
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
 		try {
 			$revision = $this->getEntityRevision( $entityId, $mode );
-		} catch ( UnresolvedRedirectException $e ) {
+		} catch ( RevisionedUnresolvedRedirectException $e ) {
 			return false;
 		}
 

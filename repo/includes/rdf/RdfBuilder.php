@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -415,7 +415,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 				}
 
 				$this->addEntityStub( $entity );
-			} catch ( UnresolvedRedirectException $ex ) {
+			} catch ( RevisionedUnresolvedRedirectException $ex ) {
 				// NOTE: this may add more entries to the end of entitiesResolved
 				$target = $ex->getRedirectTargetId();
 				$this->addEntityRedirect( $value, $target );

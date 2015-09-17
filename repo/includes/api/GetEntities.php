@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
@@ -243,7 +243,7 @@ class GetEntities extends ApiBase {
 
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
-		} catch ( UnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			if ( $resolveRedirects ) {
 				$entityId = $ex->getRedirectTargetId();
 				$entityRevision = $this->getEntityRevision( $entityId, false );

@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
@@ -113,7 +113,7 @@ class RdfDumpGenerator extends DumpGenerator {
 
 		} catch ( MWContentSerializationException $ex ) {
 			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
-		} catch ( UnresolvedRedirectException $e ) {
+		} catch ( RevisionedUnresolvedRedirectException $e ) {
 			if ( $e->getRevisionId() > 0 ) {
 				$this->rdfBuilder->addEntityRevisionInfo(
 					$entityId,

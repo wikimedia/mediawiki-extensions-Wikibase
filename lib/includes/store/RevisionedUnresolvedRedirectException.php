@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class UnresolvedRedirectException extends UnresolvedEntityRedirectException {
+class RevisionedUnresolvedRedirectException extends UnresolvedEntityRedirectException {
 
 	/**
 	 * @var int
