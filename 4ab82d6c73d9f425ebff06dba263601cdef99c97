@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_f3c25a88",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-18T14:41:52Z",
+      "side": 1,
+      "message": "I think another solution would be to remove the \u0027submit\u0027 field description above  and not suppress it here. (and we would need to add/move setSubmitTextMsg)",
+      "revId": "4ab82d6c73d9f425ebff06dba263601cdef99c97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
