@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_7c8077c4",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-09-18T19:03:34Z",
+      "side": 1,
+      "message": "^^",
+      "parentUuid": "6ec1af18_9a8bf11a",
+      "revId": "3e4e649990ccc9b401c68b5659cc7f94e4b940d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_ba8eed28",
         "filename": "repo/includes/api/QuerySearchEntities.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-17T18:02:41Z",
       "side": 1,
       "message": "we need i18n (en.json and qqq.json) messages for each of these",
+      "revId": "3e4e649990ccc9b401c68b5659cc7f94e4b940d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_dc708b09",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-09-18T19:03:34Z",
+      "side": 1,
+      "message": "^^",
+      "parentUuid": "6ec1af18_ba8eed28",
       "revId": "3e4e649990ccc9b401c68b5659cc7f94e4b940d2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
