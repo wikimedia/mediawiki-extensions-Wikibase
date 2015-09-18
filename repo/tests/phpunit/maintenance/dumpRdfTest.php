@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use MediaWikiTestCase;
+use MediaWikiLangTestCase;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -39,7 +39,16 @@ use Wikibase\Repo\Test\MockEntityPerPage;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class DumpRdfTest extends MediaWikiTestCase {
+class DumpRdfTest extends MediaWikiLangTestCase {
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->setMwGlobals( array(
+			'wgCanonicalServer' => 'http://dump.rdf.test',
+			'wgArticlePath' => '/DumpRdfTest/$1',
+		) );
+	}
 
 	public function testScript() {
 		$dumpScript = new DumpRdf();
@@ -145,11 +154,6 @@ class DumpRdfTest extends MediaWikiTestCase {
 		$actualOut = preg_replace(
 			'/<http:\/\/wikiba.se\/ontology-beta#Dump> <http:\/\/schema.org\/dateModified> "[^"]+"/',
 			"<http://wikiba.se/ontology-beta#Dump> <http://schema.org/dateModified> \"2015-01-01T00:00:00Z\"",
-			$actualOut
-		);
-		$actualOut = preg_replace(
-			'/<[^>]+\/Special:EntityData\//',
-			"<http://localhost/w/index.php/Special:EntityData/",
 			$actualOut
 		);
 
