@@ -57,7 +57,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	_create: function() {
 		this._createEntityview();
 
-		this.$statements = $( '.wikibase-statementgrouplistview', this.element ).first();
+		this.$statements = $( '.wikibase-statementgrouplistview', this.element );
 		if( this.$statements.length === 0 ) {
 			this.$statements = $( '<div/>' ).appendTo( this.element );
 		}
