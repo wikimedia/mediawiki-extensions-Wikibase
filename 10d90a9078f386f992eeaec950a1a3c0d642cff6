@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_275738cf",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-09-18T19:39:13Z",
+      "side": 1,
+      "message": "it would be nice if namespace was also an option that could be used instead of type.\n\nappears this is what mobile prefix search uses.  as long as we have direct mapping from namespace to a type, I think we could handle that.",
+      "revId": "10d90a9078f386f992eeaec950a1a3c0d642cff6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
