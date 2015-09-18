@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_fdf78a54",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 110
+      },
+      "writtenOn": "2015-09-18T06:07:53Z",
+      "side": 1,
+      "message": "I don\u0027t think this will work. Any relative path to core is bad practice. Images need to be self contained in a RL module with a defined ResourceFileModulePaths",
+      "revId": "42beae6d20a95be49f31353f9eb8b68823a7ce42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
