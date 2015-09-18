@@ -16,6 +16,24 @@
       "revId": "210b68de1c5e18881eb8c14721e22a163227185c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_d38f1f2d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-18T12:15:05Z",
+      "side": 1,
+      "message": "For consistency. All other edit summaries on the client are in the content language. And these summaries get mixed in with \"normal\" entries in the watchlist.\n\nIt\u0027s easy to change this in the future, if we want to.",
+      "parentUuid": "6ec1af18_f92d67a4",
+      "revId": "210b68de1c5e18881eb8c14721e22a163227185c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
