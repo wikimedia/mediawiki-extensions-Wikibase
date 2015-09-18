@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_dcd16b28",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-09-18T18:45:26Z",
+      "side": 0,
+      "message": "Do the changes in this file have anything to do with the goal of the patch?",
+      "revId": "70012b01c4402515f0021ed97333e3e2f0126e5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
