@@ -24,14 +24,6 @@ var createDescriptionview = function( options, $node ) {
 		.addClass( 'test_descriptionview' )
 		.descriptionview( options );
 
-	$descriptionview.data( 'descriptionview' )._save = function() {
-		return $.Deferred().resolve( {
-			entity: {
-				lastrevid: 'I am a revision id'
-			}
-		} ).promise();
-	};
-
 	return $descriptionview;
 };
 

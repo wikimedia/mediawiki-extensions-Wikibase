@@ -60,24 +60,6 @@ $.widget( 'wikibase.entityview', PARENT, {
 	},
 
 	/**
-	 * @property {jQuery}
-	 * @readonly
-	 */
-	$label: null,
-
-	/**
-	 * @property {jQuery}
-	 * @readonly
-	 */
-	$description: null,
-
-	/**
-	 * @property {jQuery}
-	 * @readonly
-	 */
-	$aliases: null,
-
-	/**
 	 * @property {jQuery|null}
 	 * @readonly
 	 */
@@ -222,20 +204,11 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @param {string} state "disable" or "enable"
 	 */
 	_setState: function( state ) {
-		this.$label.data( 'labelview' )[state]();
-		this.$description.data( 'descriptionview' )[state]();
-		this.$aliases.data( 'aliasesview' )[state]();
 		if( this.$entityTerms ) {
 			this.$entityTerms.data( 'entitytermsview' )[state]();
 		}
-	},
-
-	/**
-	 * @inheritdoc
-	 */
-	focus: function() {
-		this.$label.data( 'labelview' ).focus();
 	}
+
 } );
 
 /**

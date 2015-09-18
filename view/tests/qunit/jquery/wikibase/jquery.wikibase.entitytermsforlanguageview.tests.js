@@ -44,7 +44,6 @@ var createEntitytermsforlanguageview = function( options, $node ) {
 		= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
 
 	entitytermsforlanguageview.$labelview.data( 'labelview' )._save
-		= entitytermsforlanguageview.$descriptionview.data( 'descriptionview' )._save
 		= entitytermsforlanguageview.$aliasesview.data( 'aliasesview' )._save
 		= function() {
 			return $.Deferred().resolve( {
