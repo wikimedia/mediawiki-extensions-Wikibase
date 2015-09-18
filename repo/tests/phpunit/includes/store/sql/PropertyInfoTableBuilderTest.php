@@ -74,10 +74,9 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		//       so we should also use the EntityLookup from WikibaseRepo.
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
-		$useRedirectTargetColumn = $wikibaseRepo->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
 		$propertyInfoBuilder = new PropertyInfoBuilder( new PropertyId( 'P1630' ) );
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder, $useRedirectTargetColumn );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder );
 		$builder->setBatchSize( 3 );
 
 		// rebuild all ----

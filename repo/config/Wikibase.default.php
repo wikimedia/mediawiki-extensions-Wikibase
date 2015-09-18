@@ -76,8 +76,6 @@ return call_user_func( function() {
 
 		'transformLegacyFormatOnExport' => true,
 
-		'useRedirectTargetColumn' => true,
-
 		'conceptBaseUri' => function() {
 			$uri = $GLOBALS['wgServer'];
 			$uri = preg_replace( '!^//!', 'http://', $uri );
