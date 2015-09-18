@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_9cd683f5",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-09-18T19:03:24Z",
+      "side": 1,
+      "message": "Why would that be a bad idea?",
+      "parentUuid": "6ec1af18_fe3d562a",
+      "revId": "0af8383bfa92d37cb82fc29a2648e8f8c6e405a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_5e790a29",
         "filename": "repo/includes/api/QuerySearchEntities.php",
         "patchSetId": 1
