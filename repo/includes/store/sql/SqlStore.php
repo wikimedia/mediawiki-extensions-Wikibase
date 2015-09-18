@@ -135,11 +135,6 @@ class SqlStore implements Store {
 	private $cacheDuration;
 
 	/**
-	 * @var bool
-	 */
-	private $useRedirectTargetColumn;
-
-	/**
 	 * @var int[]
 	 */
 	private $idBlacklist;
@@ -167,7 +162,6 @@ class SqlStore implements Store {
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$this->useRedirectTargetColumn = $settings->getSetting( 'useRedirectTargetColumn' );
 		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
 	}
 
@@ -353,7 +347,6 @@ class SqlStore implements Store {
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
-		$useRedirectTargetColumn = $wikibaseRepo->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
@@ -364,7 +357,7 @@ class SqlStore implements Store {
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder, $useRedirectTargetColumn );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder );
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
 
@@ -450,7 +443,7 @@ class SqlStore implements Store {
 			$updater->addPostDatabaseUpdateMaintenance(
 				'Wikibase\Repo\Maintenance\RebuildEntityPerPage'
 			);
-		} elseif ( $this->useRedirectTargetColumn ) {
+		} else {
 			$updater->addExtensionField(
 				'wb_entity_per_page',
 				'epp_redirect_target',
@@ -542,10 +535,7 @@ class SqlStore implements Store {
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage() {
-		return new EntityPerPageTable(
-			$this->entityIdParser,
-			$this->useRedirectTargetColumn
-		);
+		return new EntityPerPageTable( $this->entityIdParser );
 	}
 
 	/**
@@ -711,7 +701,7 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilderFactory
 	 */
 	private function newEntityInfoBuilderFactory() {
-		return new SqlEntityInfoBuilderFactory( $this->useRedirectTargetColumn );
+		return new SqlEntityInfoBuilderFactory();
 	}
 
 	/**

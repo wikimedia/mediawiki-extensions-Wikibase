@@ -49,10 +49,6 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	}
 
 	public function testAddRedirectPage() {
-		if ( !$this->isRedirectTargetColumnSupported() ) {
-			$this->markTestSkipped( 'Redirects not supported' );
-		}
-
 		$epp = $this->newEntityPerPageTable();
 		$epp->clear();
 
@@ -66,10 +62,6 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->assertEmpty( $ids, 'Redirects must not show up in ID listings' );
 	}
 
-	private function isRedirectTargetColumnSupported() {
-		return WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
-	}
-
 	/**
 	 * @param Entity[] $entities
 	 * @param EntityRedirect[] $redirects
@@ -77,10 +69,9 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	 * @return EntityPerPageTable
 	 */
 	private function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
-		$useRedirectTargetColumn = $this->isRedirectTargetColumnSupported();
 		$idParser = new BasicEntityIdParser();
 
-		$table = new EntityPerPageTable( $idParser, $useRedirectTargetColumn );
+		$table = new EntityPerPageTable( $idParser );
 		$table->clear();
 
 		foreach ( $entities as $entity ) {

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
- * Represents a lookup database table that make the link between entities and pages.
+ * Represents a lookup database table that makes the link between entities and pages.
  * Corresponds to the wb_entities_per_page table.
  *
  * @since 0.2
@@ -30,24 +30,10 @@ class EntityPerPageTable implements EntityPerPage {
 	private $entityIdParser;
 
 	/**
-	 * @var bool
-	 * @todo Drop this backwards compat flag.
-	 */
-	private $useRedirectTargetColumn;
-
-	/**
 	 * @param EntityIdParser $entityIdParser
-	 * @param bool $useRedirectTargetColumn
-	 *
-	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $entityIdParser, $useRedirectTargetColumn = true ) {
-		if ( !is_bool( $useRedirectTargetColumn ) ) {
-			throw new InvalidArgumentException( '$useRedirectTargetColumn must be true or false' );
-		}
-
+	public function __construct( EntityIdParser $entityIdParser ) {
 		$this->entityIdParser = $entityIdParser;
-		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
 	}
 
 	/**
@@ -97,11 +83,8 @@ class EntityPerPageTable implements EntityPerPage {
 			'epp_entity_id' => $entityId->getNumericId(),
 			'epp_entity_type' => $entityId->getEntityType(),
 			'epp_page_id' => $pageId,
+			'epp_redirect_target' => $redirectTarget
 		);
-
-		if ( $this->useRedirectTargetColumn ) {
-			$values['epp_redirect_target'] = $redirectTarget;
-		}
 
 		$this->addRowInternal( $values );
 	}
@@ -239,11 +222,8 @@ class EntityPerPageTable implements EntityPerPage {
 
 		$joinConditions = 'term_entity_id = epp_entity_id' .
 			' AND term_entity_type = epp_entity_type' .
-			' AND term_type = ' . $dbr->addQuotes( $termType );
-
-		if ( $this->useRedirectTargetColumn ) {
-			$joinConditions .= ' AND epp_redirect_target IS NULL';
-		}
+			' AND term_type = ' . $dbr->addQuotes( $termType ) .
+			' AND epp_redirect_target IS NULL';
 
 		if ( $language !== null ) {
 			$joinConditions .= ' AND term_language = ' . $dbr->addQuotes( $language );
@@ -300,11 +280,7 @@ class EntityPerPageTable implements EntityPerPage {
 		);
 		$conditions['epp_entity_type'] = Item::ENTITY_TYPE;
 
-		$joinConditions = 'ips_item_id = epp_entity_id';
-
-		if ( $this->useRedirectTargetColumn ) {
-			$joinConditions .= ' AND epp_redirect_target IS NULL';
-		}
+		$joinConditions = 'ips_item_id = epp_entity_id AND epp_redirect_target IS NULL';
 
 		if ( $siteId !== null ) {
 			$joinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
@@ -363,12 +339,10 @@ class EntityPerPageTable implements EntityPerPage {
 			$orderBy = array( 'epp_entity_id' );
 		}
 
-		if ( $this->useRedirectTargetColumn ) {
-			if ( $redirects === self::NO_REDIRECTS ) {
-				$where[] = 'epp_redirect_target IS NULL';
-			} elseif ( $redirects === self::ONLY_REDIRECTS ) {
-				$where[] = 'epp_redirect_target IS NOT NULL';
-			}
+		if ( $redirects === self::NO_REDIRECTS ) {
+			$where[] = 'epp_redirect_target IS NULL';
+		} elseif ( $redirects === self::ONLY_REDIRECTS ) {
+			$where[] = 'epp_redirect_target IS NOT NULL';
 		}
 
 		if ( !is_int( $limit ) || $limit < 1 ) {

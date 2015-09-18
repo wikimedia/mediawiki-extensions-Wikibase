@@ -53,11 +53,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $entityPerPageTable;
 
 	/**
-	 * @var bool
-	 */
-	private $useRedirectTargetColumn;
-
-	/**
 	 * EntityId objects indexed by serialized ID. This allows us to re-use
 	 * the original EntityId object and avoids parsing the string again.
 	 *
@@ -121,13 +116,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * @param EntityId[] $ids
-	 * @param bool $useRedirectTargetColumn
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( array $ids, $useRedirectTargetColumn = true, $wiki = false ) {
+	public function __construct( array $ids, $wiki = false ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
@@ -137,7 +131,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->termTable = 'wb_terms';
 		$this->propertyInfoTable = 'wb_property_info';
 		$this->entityPerPageTable = 'wb_entity_per_page';
-		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
 
 		$this->idParser = new BasicEntityIdParser();
 
@@ -541,9 +534,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			'epp_entity_type',
 			'epp_entity_id',
 			'epp_page_id',
-			$this->useRedirectTargetColumn
-				? 'epp_redirect_target'
-				: 'NULL AS epp_redirect_target'
+			'epp_redirect_target'
 		);
 
 		$res = $dbw->select(

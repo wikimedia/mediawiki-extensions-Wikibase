@@ -21,19 +21,12 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
  */
 class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 
-	/**
-	 * @var bool
-	 */
-	private $useRedirectTargetColumn;
-
 	protected function setUp() {
 		parent::setUp();
 
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( 'Entity info tables are not available locally on the client' );
 		}
-
-		$this->useRedirectTargetColumn = $GLOBALS['wgWBRepoSettings']['useRedirectTargetColumn'];
 
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->tablesUsed[] = 'wb_terms';
@@ -91,11 +84,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 			array( 'pi_property_id', 'pi_type', 'pi_info' ),
 			$infoRows );
 
-		$eppColumns = array( 'epp_entity_type', 'epp_entity_id', 'epp_page_id' );
-
-		if ( $this->useRedirectTargetColumn ) {
-			$eppColumns[] = 'epp_redirect_target';
-		}
+		$eppColumns = array( 'epp_entity_type', 'epp_entity_id', 'epp_page_id', 'epp_redirect_target' );
 
 		$this->insertRows(
 			'wb_entity_per_page',
@@ -147,7 +136,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	 * @return SqlEntityInfoBuilder
 	 */
 	protected function newEntityInfoBuilder( array $ids ) {
-		return new SqlEntityInfoBuilder( $ids, $this->useRedirectTargetColumn );
+		return new SqlEntityInfoBuilder( $ids );
 	}
 
 }

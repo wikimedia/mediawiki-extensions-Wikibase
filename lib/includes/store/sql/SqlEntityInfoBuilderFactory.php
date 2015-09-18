@@ -20,28 +20,21 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 
 	/**
-	 * @var bool
-	 */
-	private $useRedirectTargetColumn;
-
-	/**
 	 * @var string|bool
 	 */
 	private $wiki;
 
 	/**
-	 * @param bool $useRedirectTargetColumn
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $useRedirectTargetColumn = true, $wiki = false ) {
+	public function __construct( $wiki = false ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 
-		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
 		$this->wiki = $wiki;
 	}
 
@@ -53,7 +46,7 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	 * @return EntityInfoBuilder
 	 */
 	public function newEntityInfoBuilder( array $entityIds ) {
-		return new SqlEntityInfoBuilder( $entityIds, $this->useRedirectTargetColumn, $this->wiki );
+		return new SqlEntityInfoBuilder( $entityIds, $this->wiki );
 	}
 
 }
