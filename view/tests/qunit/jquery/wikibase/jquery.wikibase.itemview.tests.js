@@ -32,14 +32,6 @@ var createItemview = function( options, $node ) {
 		.addClass( 'test_itemview' )
 		.itemview( options );
 
-	$itemview.data( 'itemview' )._save = function() {
-		return $.Deferred().resolve( {
-			entity: {
-				lastrevid: 'I am a revision id'
-			}
-		} ).promise();
-	};
-
 	return $itemview;
 };
 
