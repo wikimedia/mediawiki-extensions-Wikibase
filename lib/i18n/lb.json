@@ -72,6 +72,7 @@
 	"wikibase-entity-summary-wbsetsitelink-add": "Huet e Link op [$2] derbäigesat",
 	"wikibase-entity-summary-wbsetsitelink-set": "Huet de Link op [$2] geännert",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Huet e Link op [$2] ewechgeholl",
+	"wikibase-entity-summary-wblinktitles-connect": "E Sproochlink derbäigesat fir Sàiten ze verbannen",
 	"wikibase-entity-summary-special-create-item": "Huet en Element op [$2] ugeluecht mat {{PLURAL:$1|dem Wäert|de Wäerter}}",
 	"wikibase-entity-summary-clientsitelink-update": "Säit geréckelt vu(n) [$3] op [$4]",
 	"wikibase-entity-summary-wbmergeitems-from": "Element vu(n) $3 fusionéiert",
