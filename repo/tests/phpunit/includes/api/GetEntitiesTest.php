@@ -388,13 +388,13 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //1 bad id
 				'p' => array( 'ids' => 'ABCD' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity', 'id' => 'ABCD' ) ) ),
 			array( //2 bad site
 				'p' => array( 'sites' => 'qwertyuiop', 'titles' => 'Berlin' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //3 bad and good id
 				'p' => array( 'ids' => 'q1|aaaa' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity', 'id' => 'aaaa' ) ) ),
 			array( //4 site and no title
 				'p' => array( 'sites' => 'enwiki' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
