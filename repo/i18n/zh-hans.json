@@ -367,7 +367,7 @@
 	"apihelp-wbeditentity-param-title": "要结合的页面标题。\n与“site”一起使用以制作一个完整的网站链接。",
 	"apihelp-wbeditentity-param-summary": "编辑摘要。\n将按照自动生成的评论。自动评论与摘要的长度限制是260个字符。需要小心任何超出上述限定的东西将被裁剪掉。",
 	"apihelp-wbeditentity-param-bot": "将此编辑标记为机器人编辑。此URL标记将只在用户属于“bot”用户组时受尊重。",
-	"apihelp-wbeditentity-param-new": "如果设定，将会新建一个实体。\n将此设置为您希望创建的实体类型 - 目前为'item'|'property'。\n不允许在“id”也被设置的情况下拥有此设置。",
+	"apihelp-wbeditentity-param-new": "如果设定，将会新建一个实体。\n将此设置为您希望创建的实体类型。\n不允许在“id”也被设置的情况下拥有此设置。",
 	"apihelp-wbeditentity-example-1": "创建一个新的空项，返回完整的项结构",
 	"apihelp-wbeditentity-example-2": "创建一个新项，并设置de和en的标签",
 	"apihelp-wbeditentity-example-3": "创建一个包含json数据的新属性，返回完整的实体结构",

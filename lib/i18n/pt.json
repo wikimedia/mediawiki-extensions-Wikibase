@@ -12,7 +12,8 @@
 			"Sarilho1",
 			"He7d3r",
 			"Imperadeiro90",
-			"Fúlvio"
+			"Fúlvio",
+			"Jkb8"
 		]
 	},
 	"wikibase-lib-desc": "Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client",
@@ -95,6 +96,7 @@
 	"wikibase-entity-summary-wbeditentity": "Nova entidade criada",
 	"wikibase-entity-summary-wbeditentity-create": "Nova entidade criada",
 	"wikibase-entity-summary-wbeditentity-update": "Alterou uma entidade",
+	"wikibase-entity-summary-wbeditentity-override": "Limpou uma entidade",
 	"wikibase-entity-summary-wbsetreference": "Definir uma fonte",
 	"wikibase-entity-summary-wbsetreference-add": "Adicionou uma fonte à alegação",
 	"wikibase-entity-summary-wbsetreference-set": "Alterou a fontes da alegação",
@@ -115,6 +117,8 @@
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "Alterou emblemas para [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "Alterou ligação e emblemas para [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Removeu ligação para [$2]",
+	"wikibase-entity-summary-wblinktitles-create": "Criou-se esta entidade para ligar as páginas",
+	"wikibase-entity-summary-wblinktitles-connect": "Adicionou uma ligação de idioma para páginas ligadas",
 	"wikibase-entity-summary-wbcreateclaim-value": "Criou {{PLURAL:$1|uma alegação|alegações}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "Criou {{PLURAL:$1|uma alegação|alegações}}",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "Criou {{PLURAL:$1|uma alegação|alegações}}",

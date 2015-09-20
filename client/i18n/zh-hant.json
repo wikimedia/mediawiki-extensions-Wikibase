@@ -61,6 +61,7 @@
 	"wikibase-error-invalid-entity-id": "系統無法辨識輸入的 ID。請使用一個有效的 ID。",
 	"unconnectedpages": "頁面未連結至任何項目",
 	"wikibase-unconnectedpages-format-row": "(該頁面有 $1 個跨語言連結)",
+	"wikibase-unconnectedpages-submit": "顯示頁面",
 	"pageswithbadges": "含有徽章的頁面",
 	"wikibase-pageswithbadges-invalid-id": "“$1” 不是一個有效 ID 項目",
 	"wikibase-pageswithbadges-badge": "徽章：",

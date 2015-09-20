@@ -13,7 +13,8 @@
 			"Vivaelcelta",
 			"He7d3r",
 			"Macofe",
-			"Imperadeiro90"
+			"Imperadeiro90",
+			"Jkb8"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -276,6 +277,7 @@
 	"action-item-merge": "fundir itens",
 	"action-property-create": "criar propriedades",
 	"apihelp-wbcreateclaim-description": "Cria alegações do Wikidata.",
+	"apihelp-wbeditentity-param-new": "Se definido, uma nova entidade será criada.\nDefinir o tipo de entidade que você deseja criar.\nNão é permitido ter isso definido quando o \" id \" é também definido.",
 	"apihelp-wbmergeitems-description": "Faz a fusão de vários itens.",
 	"apihelp-wbremoveclaims-description": "Remove alegações do Wikidata.",
 	"apihelp-wbsetdescription-param-language": "Idioma da descrição"
