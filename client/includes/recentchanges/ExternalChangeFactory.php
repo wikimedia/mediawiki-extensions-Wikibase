@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\RecentChanges;
 
+use Content;
 use InvalidArgumentException;
 use Language;
 use RecentChange;
@@ -45,11 +46,20 @@ class ExternalChangeFactory {
 	 * @return ExternalChange
 	 */
 	public function newFromRecentChange( RecentChange $recentChange ) {
-		$changeParams = $this->extractChangeData( $recentChange );
+		$rc_params = $recentChange->parseParams();
+
+		if ( !is_array( $rc_params ) || !array_key_exists( 'wikibase-repo-change', $rc_params ) ) {
+			throw new UnexpectedValueException( 'Not a Wikibase change' );
+		}
+
+		$changeParams = $this->extractChangeData( $rc_params );
+
+		// If a pre-formatted comment exists, pass it on.
+		$changeHtml = isset( $rc_params['comment-html'] ) ? $rc_params['comment-html'] : null;
 
 		$itemId = $this->extractItemId( $changeParams['object_id'] );
 		$changeType = $this->extractChangeType( $changeParams['type'] );
-		$rev = $this->newRevisionData( $recentChange, $changeParams );
+		$rev = $this->newRevisionData( $recentChange, $changeParams, $changeHtml );
 
 		return new ExternalChange( $itemId, $rev, $changeType );
 	}
@@ -57,10 +67,11 @@ class ExternalChangeFactory {
 	/**
 	 * @param RecentChange $recentChange
 	 * @param array $changeParams
+	 * @param string|null $commentHtml Pre-formatted comment HTML
 	 *
 	 * @return RevisionData
 	 */
-	private function newRevisionData( RecentChange $recentChange, array $changeParams ) {
+	private function newRevisionData( RecentChange $recentChange, array $changeParams, $commentHtml = null ) {
 		$repoId = isset( $changeParams['site_id'] )
 			? $changeParams['site_id'] : $this->repoSiteId;
 
@@ -74,25 +85,20 @@ class ExternalChangeFactory {
 			$recentChange->getAttribute( 'rc_user_text' ),
 			$recentChange->getAttribute( 'rc_timestamp' ),
 			$comment,
+			$commentHtml,
 			$repoId,
 			$changeParams
 		);
 	}
 
 	/**
-	 * @param RecentChange $recentChange
+	 * @param array Content of rc_params
 	 *
 	 * @throws UnexpectedValueException
 	 * @return array
 	 */
-	private function extractChangeData( RecentChange $recentChange ) {
-		$params = unserialize( $recentChange->getAttribute( 'rc_params' ) );
-
-		if ( !is_array( $params ) || !array_key_exists( 'wikibase-repo-change', $params ) ) {
-			throw new UnexpectedValueException( 'Not a Wikibase change' );
-		}
-
-		$changeParams = $params['wikibase-repo-change'];
+	private function extractChangeData( array $rc_params ) {
+		$changeParams = $rc_params['wikibase-repo-change'];
 
 		$this->validateChangeData( $changeParams );
 

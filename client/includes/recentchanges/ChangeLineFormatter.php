@@ -74,9 +74,27 @@ class ChangeLineFormatter {
 
 		$line .= $this->formatTimestamp( $rev->getTimestamp() );
 		$line .= $this->formatUserLinks( $rev->getUserName() );
-		$line .= Linker::commentBlock( $rev->getComment(), $title, false, $externalChange->getSiteId() );
+
+		$commentHtml = $rev->getCommentHtml();
+
+		if ( $commentHtml === null || $commentHtml === '' ) {
+			$commentHtml = Linker::formatComment( $rev->getComment(), $title, false, $externalChange->getSiteId() );
+		}
+
+		$line .= $this->wrapCommentBlock( $commentHtml );
 
 		return $line;
+	}
+
+	/**
+	 * @param string $commentHtml Formatted comment HTML
+	 *
+	 * @return string Formatted comment HTML wrapped as comment block
+	 */
+	private function wrapCommentBlock( $commentHtml ) {
+		//NOTE: keep in sync with Linker::commentBlock
+		$formatted = wfMessage( 'parentheses' )->rawParams( $commentHtml )->escaped();
+		return " <span class=\"comment\">$formatted</span>";
 	}
 
 	/**
