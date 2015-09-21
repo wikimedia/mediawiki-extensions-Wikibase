@@ -6,6 +6,30 @@
 ( function( $, wb, QUnit ) {
 'use strict';
 
+function simpleWidget( name, fn ) {
+	var widget = function( options, element ) {
+		$.Widget.apply( this, arguments );
+		this._createWidget( options, element );
+		fn.apply( this );
+	};
+
+	widget.prototype = new $.Widget();
+
+	widget.prototype.widgetFullName = name;
+	widget.prototype.widgetName = name;
+	widget.prototype.widgetEventPrefix = name;
+	widget.prototype.value = function() {};
+
+	return widget;
+}
+
+var Statementgroupview = simpleWidget(
+	'statementgroupview',
+	function() {
+		this.enterNewItem = function() {};
+	}
+);
+
 /**
  * @param {Object} [options={}]
  * @param {jQuery} [$node]
@@ -13,28 +37,10 @@
  */
 var createStatementgrouplistview = function( options, $node ) {
 	options = $.extend( {
-		claimGuidGenerator: 'I am a ClaimGuidGenerator',
-		entityIdHtmlFormatter: {
-			format: function( entityId ) {
-				return $.Deferred().resolve( entityId ).promise();
-			}
-		},
-		entityIdPlainFormatter: {
-			format: function( entityId ) {
-				return $.Deferred().resolve( entityId ).promise();
-			}
-		},
-		entityStore: 'I am an EntityStore',
-		valueViewBuilder: 'I am a ValueViewBuilder',
-		entityChangersFactory: {
-			getClaimsChanger: function() {
-				return 'I am a ClaimsChanger';
-			},
-			getReferencesChanger: function() {
-				return 'I am a ReferencesChanger';
-			}
-		},
-		dataTypeStore: 'I am a DataTypeStore',
+		listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: Statementgroupview,
+			newItemOptionsFn: function() { return {}; }
+		} ),
 		value: new wb.datamodel.StatementGroupSet()
 	}, options || {} );
 
@@ -110,30 +116,22 @@ QUnit.test( 'enterNewItem', function( assert ) {
 
 QUnit.test( 'enterNewItem & save', function( assert ) {
 	var $statementgrouplistview = createStatementgrouplistview(),
-		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' ),
-		statementgrouplistviewListview = statementgrouplistview.listview,
-		statementgrouplistviewListviewLia = statementgrouplistviewListview.listItemAdapter();
+		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
 	statementgrouplistview.enterNewItem();
 
-	var $statementgroupview = statementgrouplistviewListview.items().first(),
-		statementgroupview = statementgrouplistviewListviewLia.liInstance( $statementgroupview ),
-		$statementlistview = statementgroupview.statementlistview.element;
-
-	// Simulate having altered snakview's value:
-	$statementlistview.find( ':wikibase-snakview' ).data( 'snakview' ).snak = function() {
-		return new wb.datamodel.PropertyNoValueSnak( 'P1' );
-	};
+	var $statementgroupview = statementgrouplistview.listview.items().first();
 
 	assert.ok(
 		$statementgroupview.hasClass( 'wb-new' ),
 		'Verified statementgroupview widget being pending.'
 	);
 
-	$statementlistview.data( 'statementlistview' )._trigger( 'afterstopediting', null, [false] );
+	$statementgroupview.wrap( '<div/>' );
+	$statementgroupview.trigger( 'afterstopediting', [false] );
 
 	assert.ok(
-		!statementgrouplistview.listview.items().eq( 0 ).hasClass( 'wb-new' ),
+		!statementgrouplistview.listview.items().first().hasClass( 'wb-new' ),
 		'Verified new statementgroupview not being pending after saving.'
 	);
 } );

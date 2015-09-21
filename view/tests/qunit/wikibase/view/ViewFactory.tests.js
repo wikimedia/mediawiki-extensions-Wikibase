@@ -86,8 +86,25 @@
 	} );
 
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function( assert ) {
+		var entity = new wb.datamodel.Item( 'Q1' ),
+			viewFactory = new ViewFactory(),
+			$dom = $( '<div/>' );
+
+		$dom.statementgrouplistview = sinon.stub( $.wikibase, 'statementgrouplistview' );
+
+		viewFactory.getStatementGroupListView( entity, $dom );
+
+		sinon.assert.calledWith( $.wikibase.statementgrouplistview, sinon.match( {
+			value: entity.getStatements(),
+			listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
+		} ) );
+
+		$.wikibase.statementgrouplistview.restore();
+	} );
+
+	QUnit.test( 'getListItemAdapterForStatementGroupView passes correct options to ListItemAdapter', function( assert ) {
 		var contentLanguages = {},
-			entity = new wb.datamodel.Item( 'Q1' ),
+			entityId = 'Q1',
 			dataTypeStore = {},
 			entityChangersFactory = {},
 			entityIdHtmlFormatter = {},
@@ -111,13 +128,22 @@
 				parserStore,
 				userLanguages
 			),
-			$dom = $( '<div/>' );
+			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
+			value = {};
 
-		sinon.spy( $.wikibase, 'statementgrouplistview' );
-		$dom.statementgrouplistview = $.wikibase.statementgrouplistview;
 		sinon.spy( wb, 'ValueViewBuilder' );
 
-		viewFactory.getStatementGroupListView( entity, $dom );
+		viewFactory.getListItemAdapterForStatementGroupView( entityId );
+
+		sinon.assert.calledWith(
+			ListItemAdapter,
+			sinon.match( {
+				listItemWidget: $.wikibase.statementgroupview,
+				newItemOptionsFn: sinon.match.func
+			} )
+		);
+
+		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
 
 		sinon.assert.calledWith( wb.ValueViewBuilder,
 			expertStore,
@@ -128,19 +154,23 @@
 			contentLanguages
 		);
 
-		sinon.assert.calledWith( $.wikibase.statementgrouplistview, sinon.match( {
-			value: entity.getStatements(),
-			claimGuidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator ),
-			dataTypeStore: dataTypeStore,
-			entityStore: entityStore,
-			entityIdHtmlFormatter: entityIdHtmlFormatter,
-			entityIdPlainFormatter: entityIdPlainFormatter,
-			valueViewBuilder: wb.ValueViewBuilder.returnValues[0],
-			entityChangersFactory: entityChangersFactory
-		} ) );
+		assert.deepEqual(
+			result,
+			{
+				value: value,
+				claimGuidGenerator: result.claimGuidGenerator, // Hack for ignoring this field
+				dataTypeStore: dataTypeStore,
+				entityStore: entityStore,
+				entityIdHtmlFormatter: entityIdHtmlFormatter,
+				entityIdPlainFormatter: entityIdPlainFormatter,
+				valueViewBuilder: wb.ValueViewBuilder.returnValues[0],
+				entityChangersFactory: entityChangersFactory
+			}
+		);
+		assert.ok( result.claimGuidGenerator instanceof wb.utilities.ClaimGuidGenerator );
 
 		wb.ValueViewBuilder.restore();
-		$.wikibase.statementgrouplistview.restore();
+		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
 	QUnit.test( 'getEntityTermsView passes correct options to views', function( assert ) {
