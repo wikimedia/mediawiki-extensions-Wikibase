@@ -16,6 +16,24 @@
       "revId": "d084be1d1713f466fac614889d4f47cfc67224d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_6100c36d",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-21T10:57:50Z",
+      "side": 1,
+      "message": "So, instead of asking the current $entityChanges for the entityId, we repeatedly ask the first change for the entity ID, and then pass it through explicitly. I don\u0027t see what that gains us.",
+      "parentUuid": "6ec1af18_19d3ced8",
+      "revId": "d084be1d1713f466fac614889d4f47cfc67224d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
