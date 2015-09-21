@@ -88,6 +88,11 @@ class ChangeHandler {
 	private $localSiteId;
 
 	/**
+	 * @var string
+	 */
+	private $repoId;
+
+	/**
 	 * @var bool
 	 */
 	private $injectRecentChanges;
@@ -99,8 +104,8 @@ class ChangeHandler {
 	 * @param ChangeListTransformer $changeListTransformer
 	 * @param Language $language
 	 * @param string $localSiteId
+	 * @param string $repoId
 	 * @param bool $injectRecentChanges
-	 *
 	 */
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,
@@ -109,6 +114,7 @@ class ChangeHandler {
 		ChangeListTransformer $changeListTransformer,
 		Language $language,
 		$localSiteId,
+		$repoId,
 		$injectRecentChanges = true
 	) {
 		if ( !is_string( $localSiteId ) ) {
@@ -125,6 +131,7 @@ class ChangeHandler {
 		$this->changeListTransformer = $changeListTransformer;
 		$this->language = $language;
 		$this->localSiteId = $localSiteId;
+		$this->repoId = $repoId;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
@@ -344,6 +351,10 @@ class ChangeHandler {
 
 		unset( $fields['info'] );
 		$changeParams = array_merge( $fields, $rcinfo );
+
+		if ( !isset( $changeParams['site_id'] ) ) {
+			$changeParams['site_id'] = $this->repoId;
+		}
 
 		$comment = $this->getEditCommentMulti( $changesForComment );
 
