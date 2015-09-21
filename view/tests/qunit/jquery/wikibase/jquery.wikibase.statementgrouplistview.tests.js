@@ -115,7 +115,7 @@ QUnit.test( 'value()', function( assert ) {
 		'Retrieved value after setting a new value.'
 	);
 
-	var statementgrouplistviewListview = statementgrouplistview.$listview.data( 'listview' ),
+	var statementgrouplistviewListview = statementgrouplistview.listview,
 		statementgrouplistviewListviewLia = statementgrouplistviewListview.listItemAdapter(),
 		$statementgroupview = statementgrouplistviewListview.items().first(),
 		statementgroupview = statementgrouplistviewListviewLia.liInstance( $statementgroupview ),
@@ -148,7 +148,7 @@ QUnit.test( 'enterNewItem', function( assert ) {
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
 	assert.equal(
-		statementgrouplistview.$listview.data( 'listview' ).items().length,
+		statementgrouplistview.listview.items().length,
 		0,
 		'Plain widget has no items.'
 	);
@@ -156,7 +156,7 @@ QUnit.test( 'enterNewItem', function( assert ) {
 	statementgrouplistview.enterNewItem();
 
 	assert.equal(
-		statementgrouplistview.$listview.data( 'listview' ).items().length,
+		statementgrouplistview.listview.items().length,
 		1,
 		'Increased number of items after calling enterNewItem().'
 	);
@@ -165,8 +165,7 @@ QUnit.test( 'enterNewItem', function( assert ) {
 QUnit.test( 'enterNewItem & save', function( assert ) {
 	var $statementgrouplistview = createStatementgrouplistview(),
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' ),
-		$statementgrouplistviewListview = statementgrouplistview.$listview,
-		statementgrouplistviewListview = $statementgrouplistviewListview.data( 'listview' ),
+		statementgrouplistviewListview = statementgrouplistview.listview,
 		statementgrouplistviewListviewLia = statementgrouplistviewListview.listItemAdapter();
 
 	statementgrouplistview.enterNewItem();
@@ -188,7 +187,7 @@ QUnit.test( 'enterNewItem & save', function( assert ) {
 	$statementlistview.data( 'statementlistview' )._trigger( 'afterstopediting', null, [false] );
 
 	assert.ok(
-		!statementgrouplistview.$listview.data( 'listview' ).items().eq( 0 ).hasClass( 'wb-new' ),
+		!statementgrouplistview.listview.items().eq( 0 ).hasClass( 'wb-new' ),
 		'Verified new statementgroupview not being pending after saving.'
 	);
 } );
