@@ -80,6 +80,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$changeListTransformer,
 			Language::factory( 'qqx' ),
 			'enwiki',
+			'repowiki',
 			true
 		);
 
