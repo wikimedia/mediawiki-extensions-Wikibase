@@ -894,6 +894,7 @@ final class WikibaseClient {
 	 */
 	public function getChangeHandler() {
 		$siteId = $this->getSite()->getGlobalId();
+		$repoId = $this->settings->getSetting( 'repoSiteId' );
 
 		return new ChangeHandler(
 			$this->getAffectedPagesFinder(),
@@ -907,6 +908,7 @@ final class WikibaseClient {
 			$this->getContentLanguage(),
 			$this->getSiteStore(),
 			$siteId,
+			$repoId,
 			$this->settings->getSetting( 'injectRecentChanges' )
 		);
 	}

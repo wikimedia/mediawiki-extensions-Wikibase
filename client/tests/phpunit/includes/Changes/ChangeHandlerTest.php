@@ -77,6 +77,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			Language::factory( 'qqx' ),
 			$this->getMock( 'SiteStore' ),
 			'enwiki',
+			'repowiki',
 			true
 		);
 
