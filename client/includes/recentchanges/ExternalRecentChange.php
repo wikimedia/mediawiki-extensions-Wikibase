@@ -3,6 +3,7 @@
 namespace Wikibase\Client\RecentChanges;
 
 use DatabaseBase;
+use Linker;
 use MWException;
 use Title;
 
@@ -62,13 +63,14 @@ class ExternalRecentChange {
 			$userText = $metadata['rc_user_text'];
 		}
 
+		$repoId = isset( $metadata['site_id'] ) ? $metadata['site_id'] : null;
 		$time = isset( $metadata['time'] ) ? $metadata['time'] : wfTimestamp( TS_MW );
 		$comment = isset( $attribs['comment'] ) ? $attribs['comment'] : '';
 
-		// Unset the 'comment' field, so ExternalChangeFactory::extractCommentOverride doesn't
-		// trigger and replaces the actual comment.
-		// TODO: put $metadata into rc_params, not $attribs; See ExternalChangeFactory::extractChangeData
-		unset( $attribs['comment'] );
+		if ( !isset( $attribs['comment-html'] ) ) {
+			//XXX: wrap Linker in something we can inject here
+			$attribs['comment-html'] = Linker::formatComment( $comment, $title, false, $repoId );
+		}
 
 		$this->mAttribs = array(
 			'rc_namespace' => $title->getNamespace(),

@@ -30,6 +30,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	public function testNewFromRecentChange_itemUpdated() {
 		$recentChange = $this->makeRecentChange(
 			'',
+			null,
 			'wikibase-comment-update',
 			null,
 			'wikibase-item~update',
@@ -39,7 +40,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
-			$this->makeExpectedExternalChange( '(wikibase-comment-update)', 'update' ),
+			$this->makeExpectedExternalChange( '(wikibase-comment-update)', null, 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
 	}
@@ -49,6 +50,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		// 'wikibase-comment-update' for these changes.
 		$recentChange = $this->makeRecentChange(
 			'',
+			null,
 			array(
 				'message' => 'wikibase-comment-sitelink-add',
 				'sitelink' => array(
@@ -63,7 +65,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
-			$this->makeExpectedExternalChange( '(wikibase-comment-update)', 'update' ),
+			$this->makeExpectedExternalChange( '(wikibase-comment-update)', null, 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
 	}
@@ -71,6 +73,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	public function testNewFromRecentChange_pageLinkedOnRepo() {
 		$recentChange = $this->makeRecentChange(
 			'',
+			null,
 			array(
 				'message' => 'wikibase-comment-linked'
 			),
@@ -82,7 +85,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
-			$this->makeExpectedExternalChange( '(wikibase-comment-linked)', 'add' ),
+			$this->makeExpectedExternalChange( '(wikibase-comment-linked)', null, 'add' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
 	}
@@ -92,6 +95,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$recentChange = $this->makeRecentChange(
 			$comment,
+			null,
 			array(
 				'message' => 'this-shall-be-ignored'
 			),
@@ -103,7 +107,30 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
-			$this->makeExpectedExternalChange( $comment, 'update' ),
+			$this->makeExpectedExternalChange( $comment, null, 'update' ),
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
+	public function testNewFromRecentChange_withHtmlComment() {
+		$comment = '/* wbsetclaim-update:2||1 */ this shall be ignored';
+		$commentHtml = '<span><a href="http://acme.test">Linky</a> <script>we can run scripts here</script><span/>';
+
+		$recentChange = $this->makeRecentChange(
+			$comment,
+			$commentHtml,
+			array(
+				'message' => 'this-shall-be-ignored'
+			),
+			null,
+			'wikibase-item~update',
+			false
+		);
+
+		$externalChangeFactory = $this->getExternalChangeFactory();
+
+		$this->assertEquals(
+			$this->makeExpectedExternalChange( $comment, $commentHtml, 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
 	}
@@ -111,6 +138,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	public function testNewFromRecentChange_compositeComment() {
 		$recentChange = $this->makeRecentChange(
 			'',
+			null,
 			null,
 			array(
 				'wikibase-comment-update',
@@ -122,7 +150,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 		$expected = new ExternalChange(
 			new ItemId( 'Q4' ),
-			$this->makeRevisionData( '(wikibase-comment-multi: 2)' ),
+			$this->makeRevisionData( '(wikibase-comment-multi: 2)', null ),
 			'update'
 		);
 
@@ -137,6 +165,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	public function testNewFromRecentChange_botEdit() {
 		$recentChange = $this->makeRecentChange(
 			'',
+			null,
 			'wikibase-comment-update',
 			null,
 			'wikibase-item~update',
@@ -146,7 +175,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
-			$this->makeExpectedExternalChange( '(wikibase-comment-update)', 'update' ),
+			$this->makeExpectedExternalChange( '(wikibase-comment-update)', null, 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
 	}
@@ -154,6 +183,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	public function testNewFromRecentChange_nonBotEdit() {
 		$recentChange = $this->makeRecentChange(
 			'',
+			null,
 			'wikibase-comment-update',
 			null,
 			'wikibase-item~update',
@@ -163,7 +193,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$externalChangeFactory = $this->getExternalChangeFactory();
 
 		$this->assertEquals(
-			$this->makeExpectedExternalChange( '(wikibase-comment-update)', 'update' ),
+			$this->makeExpectedExternalChange( '(wikibase-comment-update)', null, 'update' ),
 			$externalChangeFactory->newFromRecentChange( $recentChange )
 		);
 	}
@@ -174,15 +204,15 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	 *
 	 * @return ExternalChange
 	 */
-	private function makeExpectedExternalChange( $expectedComment, $expectedType ) {
+	private function makeExpectedExternalChange( $expectedComment, $commentHtml, $expectedType ) {
 		return new ExternalChange(
 			new ItemId( 'Q4' ),
-			$this->makeRevisionData( $expectedComment ),
+			$this->makeRevisionData( $expectedComment, $commentHtml ),
 			$expectedType
 		);
 	}
 
-	private function makeRevisionData( $comment ) {
+	private function makeRevisionData( $comment, $commentHtml = null ) {
 		return new RevisionData(
 			'Cat',
 			5,
@@ -190,25 +220,26 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 			90,
 			'20130819111741',
 			strval( $comment ),
+			$commentHtml,
 			'testrepo'
 	  	);
 	}
 
 	/**
 	 * @param string $comment
-	 * @param null|string|array $commentOverride
-	 * @param null|string|array $compositeCommentOverride
+	 * @param null|string|array $legacyComment
+	 * @param null|string|array $compositeLegacyComment
 	 * @param string $changeType
 	 * @param bool $isBot
 	 *
 	 * @return RecentChange
 	 */
-	private function makeRecentChange( $comment, $commentOverride, $compositeCommentOverride, $changeType, $isBot ) {
+	private function makeRecentChange( $comment, $commentHtml, $legacyComment, $compositeLegacyComment, $changeType, $isBot ) {
 		$recentChange = new RecentChange();
 		$recentChange->counter = 2;
 
 		$attribs = $this->makeAttribs(
-			$this->makeRCParams( $comment, $commentOverride, $compositeCommentOverride, $changeType, $isBot ),
+			$this->makeRCParams( $comment, $commentHtml, $legacyComment, $compositeLegacyComment, $changeType, $isBot ),
 			$isBot
 		);
 
@@ -220,14 +251,15 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $comment
-	 * @param null|string|array $commentOverride
-	 * @param null|string|array $compositeCommentOverride
+	 * @param null|string $commentHtml
+	 * @param null|string|array $legacyComment
+	 * @param null|string|array $compositeLegacyComment
 	 * @param string $changeType
 	 * @param boolean $bot
 	 *
 	 * @return array
 	 */
-	private function makeRCParams( $comment, $commentOverride, $compositeCommentOverride, $changeType, $bot ) {
+	private function makeRCParams( $comment, $commentHtml, $legacyComment, $compositeLegacyComment, $changeType, $bot ) {
 		$params = array(
 			'wikibase-repo-change' => array(
 				'id' => 4,
@@ -243,15 +275,19 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 				'rev_id' => 92,
 				'parent_id' => 90,
 			),
-			'comment' => $comment
+			'comment' => $comment,
 		);
 
-		if ( $commentOverride ) {
-			$params['wikibase-repo-change']['comment'] = $commentOverride;
+		if ( $commentHtml !== null ) {
+			$params['comment-html'] = $commentHtml;
 		}
 
-		if ( $compositeCommentOverride ) {
-			$params['wikibase-repo-change']['composite-comment'] = $compositeCommentOverride;
+		if ( $legacyComment ) {
+			$params['wikibase-repo-change']['comment'] = $legacyComment;
+		}
+
+		if ( $compositeLegacyComment ) {
+			$params['wikibase-repo-change']['composite-comment'] = $compositeLegacyComment;
 		}
 
 		return $params;

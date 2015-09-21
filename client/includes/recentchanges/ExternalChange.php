@@ -15,11 +15,6 @@ use Wikibase\DataModel\Entity\EntityId;
 class ExternalChange {
 
 	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
 	 * @var EntityId
 	 */
 	private $entityId;
