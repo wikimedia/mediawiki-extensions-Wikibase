@@ -93,6 +93,11 @@ class ChangeHandler {
 	private $localSiteId;
 
 	/**
+	 * @var string
+	 */
+	private $repoId;
+
+	/**
 	 * @var bool
 	 */
 	private $injectRecentChanges;
@@ -105,8 +110,8 @@ class ChangeHandler {
 	 * @param Language $language
 	 * @param SiteStore $siteStore
 	 * @param string $localSiteId
+	 * @param string $repoId
 	 * @param bool $injectRecentChanges
-	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
@@ -117,6 +122,7 @@ class ChangeHandler {
 		Language $language,
 		SiteStore $siteStore,
 		$localSiteId,
+		$repoId,
 		$injectRecentChanges = true
 	) {
 		if ( !is_string( $localSiteId ) ) {
@@ -134,6 +140,7 @@ class ChangeHandler {
 		$this->language = $language;
 		$this->siteStore = $siteStore;
 		$this->localSiteId = $localSiteId;
+		$this->repoId = $repoId;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
@@ -353,6 +360,10 @@ class ChangeHandler {
 
 		unset( $fields['info'] );
 		$changeParams = array_merge( $fields, $rcinfo );
+
+		if ( !isset( $changeParams['site_id'] ) ) {
+			$changeParams['site_id'] = $this->repoId;
+		}
 
 		$comment = $this->getEditCommentMulti( $changesForComment );
 
