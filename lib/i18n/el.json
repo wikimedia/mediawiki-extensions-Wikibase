@@ -24,7 +24,7 @@
 	"wikibase-error-remove-timeout": "Αντιμετωπίζουμε τεχνικές δυσκολίες, και εξαιτίας αυτού η \"Κατάργηση\" δεν ήταν δυνατό να ολοκληρωθεί.",
 	"wikibase-error-autocomplete-response": "Απόκριση διακομιστή:$1",
 	"wikibase-error-ui-no-external-page": "Η συγκεκριμένη σελίδα δεν βρέθηκε στην αντίστοιχη ιστοσελίδα.",
-	"wikibase-error-ui-edit-conflict": "Υπάρχει σύγκρουση επεξεργασίας. Παρακαλούμε  φορτώσετε εκ νέου και αποθηκεύστε ξανά.",
+	"wikibase-error-ui-edit-conflict": "Υπάρχει σύγκρουση επεξεργασίας. Παρακαλούμε αποθηκεύστε τοπικά τις αλλαγές σας, φορτώσετε εκ νέου τη σελίδα και αποθηκεύστε ξανά.",
 	"wikibase-quantitydetails-upperbound": "Άνωτατο όριο",
 	"wikibase-quantitydetails-lowerbound": "Κατώτερο όριο",
 	"wikibase-quantitydetails-unit": "Μονάδα",

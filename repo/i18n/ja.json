@@ -39,6 +39,7 @@
 	"wikibase-description-empty": "説明は設定されていません",
 	"wikibase-description-edit-placeholder": "説明を入力",
 	"wikibase-description-edit-placeholder-language-aware": "説明を $1 で入力",
+	"wikibase-aliases-edit-placeholder": "いくつかの別名を入力",
 	"wikibase-diffview-reference": "情報源",
 	"wikibase-diffview-rank": "ランク",
 	"wikibase-diffview-qualifier": "修飾子",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Papuass"
+			"Papuass",
+			"Edgars2007"
 		]
 	},
 	"wikibase-deletedentity-item": "Dzēsts ieraksts",
@@ -16,5 +17,16 @@
 	"wikibase-snakview-snaktypeselector-novalue": "nav vērtības",
 	"wikibase-validator-not-allowed": "Neatļauta vērtība: $1",
 	"datatypes-type-wikibase-item": "Ieraksts",
-	"datatypes-type-commonsMedia": "Commons multivides fails"
+	"datatypes-type-commonsMedia": "Commons multivides fails",
+	"wikibase-entity-summary-wbsetitem": "Izveidots jauns ieraksts",
+	"wikibase-entity-summary-wbcreate-new": "Izveidots jauns ieraksts",
+	"wikibase-entity-summary-wbeditentity": "Izveidots jauns ieraksts",
+	"wikibase-entity-summary-wbeditentity-create": "Izveidots jauns ieraksts",
+	"wikibase-entity-summary-wbeditentity-update": "Mainīts ieraksts",
+	"wikibase-entity-summary-wbeditentity-override": "Nodzēsts ieraksts",
+	"wikibase-entity-summary-wbsetlabel-set": "Izmainīja [$2] nosaukumu",
+	"wikibase-entity-summary-wbsetdescription-set": "Izmainīja [$2] aprakstu",
+	"wikibase-entity-summary-wbsetdescription-remove": "Nodzēsa [$2] aprakstu",
+	"wikibase-item-summary-wbeditentity-create": "Izveidots jauns ieraksts",
+	"wikibase-item-summary-wblinktitles-connect": "Pievienoja valodas saiti, lai savienotu lapas"
 }
