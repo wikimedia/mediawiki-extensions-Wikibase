@@ -227,6 +227,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.descriptionview',
 				'jquery.wikibase.labelview',
 				'mediawiki.Title',
