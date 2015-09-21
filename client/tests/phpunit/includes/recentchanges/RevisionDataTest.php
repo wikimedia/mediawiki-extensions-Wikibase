@@ -42,7 +42,12 @@ class RevisionDataTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetComment() {
 		$revisionData = $this->newRevisionData();
-		$this->assertEquals( array( 'key' => 'wikibase-comment-update' ), $revisionData->getComment() );
+		$this->assertEquals( 'Kitten Comment', $revisionData->getComment() );
+	}
+
+	public function testGetCommentHtml() {
+		$revisionData = $this->newRevisionData();
+		$this->assertEquals( '<span>Kitten Comment</span>', $revisionData->getCommentHtml() );
 	}
 
 	public function testGetSiteId() {
@@ -51,8 +56,9 @@ class RevisionDataTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newRevisionData() {
-		$comment = array( 'key' => 'wikibase-comment-update' );
-		return new RevisionData( 'Cat', 5, 92, 90, '20130819111741', $comment, 'testrepo' );
+		$comment = 'Kitten Comment';
+		$commentHtml = '<span>' . htmlspecialchars( $comment ) . '</span>';
+		return new RevisionData( 'Cat', 5, 92, 90, '20130819111741', $comment, $commentHtml, 'testrepo' );
 	}
 
 }
