@@ -29,8 +29,10 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.entitytermsview',
 				'jquery.wikibase.itemview',
+				'jquery.wikibase.listview', // For ListItemAdapter
 				'jquery.wikibase.propertyview',
 				'jquery.wikibase.statementgrouplistview',
+				'jquery.wikibase.statementgroupview',
 				'wikibase.datamodel.MultiTerm',
 				'wikibase.datamodel.Term',
 				'wikibase.utilities.ClaimGuidGenerator',

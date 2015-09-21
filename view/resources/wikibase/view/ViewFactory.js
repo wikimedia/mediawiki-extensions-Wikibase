@@ -228,16 +228,33 @@
 			$dom,
 			{
 				value: entity.getStatements(),
-				claimGuidGenerator: new wb.utilities.ClaimGuidGenerator( entity.getId() ),
-				dataTypeStore: this._dataTypeStore,
-				entityStore: this._entityStore,
-				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				valueViewBuilder: this._getValueViewBuilder(),
-				entityChangersFactory: this._entityChangersFactory
+				listItemAdapter: this.getListItemAdapterForStatementGroupView( entity.getId() )
 			}
 		);
+	};
 
+	/**
+	 * Construct a `ListItemAdapter` for `statementgroupview`s
+	 *
+	 * @param {string} entityId
+	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
+	 **/
+	SELF.prototype.getListItemAdapterForStatementGroupView = function( entityId ) {
+		return new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: $.wikibase.statementgroupview,
+			newItemOptionsFn: $.proxy( function( value ) {
+				return {
+					value: value,
+					claimGuidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
+					dataTypeStore: this._dataTypeStore,
+					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+					entityIdPlainFormatter: this._entityIdPlainFormatter,
+					entityStore: this._entityStore,
+					valueViewBuilder: this._getValueViewBuilder(),
+					entityChangersFactory: this._entityChangersFactory
+				};
+			}, this )
+		} );
 	};
 
 	/**
