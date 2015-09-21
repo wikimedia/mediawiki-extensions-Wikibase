@@ -222,25 +222,6 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 	},
 
 	/**
-	 * Sets the widget's value or retrieves the widget's current value (including any pending
-	 * changes). The value the widget was initialized with may be retrieve using
-	 * `this.option( 'value' )`.
-	 *
-	 * @param {wikibase.datamodel.StatementGroupSet} [statementGroupSet]
-	 * @return {wikibase.datamodel.StatementGroupSet|undefined}
-	 */
-	value: function( statementGroupSet ) {
-		if( statementGroupSet === undefined ) {
-			return new wb.datamodel.StatementGroupSet(
-				$.map( this.$listview.data( 'listview' ).value(), function( statementGroup ) {
-					return statementGroup.value();
-				} )
-			);
-		}
-		this.option( 'value', statementGroupSet );
-	},
-
-	/**
 	 * @inheritdoc
 	 * @protected
 	 */
