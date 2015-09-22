@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jyllanj"
+		]
+	},
+	"tooltip-t-wikibase": "Link te tilknøtten emn i Wikidata",
+	"wikibase-comment-update": "{{WBREPONAME}}-emne ä øndan",
+	"wikibase-dataitem": "{{WBREPONAME}}-emn",
+	"wikibase-editlinks": "Redigiir links",
+	"wikibase-editlinkstitle": "Redigiir sprawlinks",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Sjul",
+	"wikibase-rc-hide-wikidata-show": "Wis",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-redigiireng",
+	"wikibase-otherprojects": "Anje projekte"
+}

@@ -54,6 +54,7 @@
 	"wikibase-unconnectedpages-format-row": "(на старонцы $1 {{PLURAL:$1|міжмоўная спасылка|міжмоўныя спасылкі|міжмоўных спасылак}})",
 	"wikibase-unconnectedpages-submit": "Паказаць",
 	"pageswithbadges": "Старонкі з адзнакамі",
+	"wikibase-pageswithbadges-legend": "Сьпіс старонак з адзнакамі",
 	"wikibase-pageinfo-entity-id": "Ідэнтыфікатар аб’екта ў Вікізьвестках",
 	"wikibase-pageinfo-entity-id-none": "Няма",
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласьцівасьць $1: $2",

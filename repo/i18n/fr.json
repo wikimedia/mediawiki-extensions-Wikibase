@@ -41,7 +41,8 @@
 			"TomT0m",
 			"Pathe",
 			"Wladek92",
-			"Ash Crow"
+			"Ash Crow",
+			"Orlodrim"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -71,6 +72,7 @@
 	"wikibase-description-empty": "Aucune description fournie",
 	"wikibase-description-edit-placeholder": "saisir une description",
 	"wikibase-description-edit-placeholder-language-aware": "entrer la description en $1",
+	"wikibase-aliases-edit-placeholder": "saisissez des alias",
 	"wikibase-aliases-edit-placeholder-language-aware": "entrer certains des alias dans $1",
 	"wikibase-diffview-reference": "référence",
 	"wikibase-diffview-rank": "rang",
@@ -384,7 +386,7 @@
 	"apihelp-wbeditentity-param-bot": "Marquer cette modification comme robot. Cette marque d’URL ne sera respectée que si l’utilisateur appartient au groupe « bot ».",
 	"apihelp-wbeditentity-param-data": "L’objet sérialisé qui est utilisé comme source de données.\nUne entité nouvellement créée se verra affectée un 'id'.",
 	"apihelp-wbeditentity-param-clear": "Si positionné, l’entité complète est vidée avant le traitement.\nL’entité ne sera pas enregistrée avant d’être remplie avec les « données », éventuellement avec des parties exclues.",
-	"apihelp-wbeditentity-param-new": "Si positionné, une nouvelle entité sera créée.\nY mettre le type de l’entité que vous voulez créer — actuellement 'item'|'property'.\nIl n’est pas permis de le positionner quand 'id' est déjà mis.",
+	"apihelp-wbeditentity-param-new": "Si défini, une nouvelle entité sera créée.\nY mettre le type de l’entité que vous voulez créer.\nIl n’est pas permis de définir simultanément ce paramètre et 'id'.",
 	"apihelp-wbeditentity-example-1": "Créer un nouvel élément vide, renvoyer la structure complète de l’entité",
 	"apihelp-wbeditentity-example-2": "Créer un nouvel élément et définir des libellés pour de et en",
 	"apihelp-wbeditentity-example-3": "Créer une nouvelle propriété contenant les données json, retourner la structure complète de l’élément",
