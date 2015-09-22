@@ -80,13 +80,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
-				'jquery.wikibase.listview',
-				'jquery.wikibase.statementlistview',
-				'wikibase.datamodel.Item',
-				'wikibase.datamodel.Property',
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementList',
-				'wikibase.utilities.ClaimGuidGenerator',
 			),
 		),
 
