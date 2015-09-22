@@ -8,9 +8,6 @@
  * `Property` id by managing a list of `jQuery.wikibase.statementview` widgets encapsulated by a
  * `jquery.wikibase.statementlistview` widget.
  * @see wikibase.datamodel.StatementGroup
- * @uses jQuery.wikibase.statementlistview
- * @uses jQuery.wikibase.listview
- * @uses jQuery.wikibase.listview.ListItemAdapter
  * @since 0.5
  * @extends jQuery.ui.TemplatedWidget
  * @licence GNU GPL v2+
@@ -22,23 +19,9 @@
  * @param {wikibase.datamodel.StatementGroup} [options.value=null]
  *        The `Statements` to be displayed by this view. If `null`, the view will only display an
  *        "add" button to add new `Statements`.
- * @param {wikibase.utilities.ClaimGuidGenerator} options.claimGuidGenerator
- *        Required for dynamically generating GUIDs for new `Statement`s.
  * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
  *        Required for dynamically rendering links to `Entity`s.
- * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
- *        Required for dynamically rendering plain text references to `Entity`s.
- * @param {wikibase.store.EntityStore} options.entityStore
- *        Required for dynamically gathering `Entity`/`Property` information.
- * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
- *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
- *        `jQuery.valueview`.
- * @param {wikibase.entityChangers.EntityChangersFactory} options.entityChangersFactory
- *        Required to store the `Reference`s gathered from the `referenceview`s aggregated by the
- *        `statementview`.
- * @param {dataTypes.DataTypeStore} options.dataTypeStore
- *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
- *        object when interacting on a "value" `Variation`.
+ * @param {Function} options.buildStatementListView
  */
 /**
  * @event afterremove
@@ -63,13 +46,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 			$propertyLabel: '.wikibase-statementgroupview-property-label'
 		},
 		value: null,
-		claimGuidGenerator: null,
-		entityIdHtmlFormatter: null,
-		entityIdPlainFormatter: null,
-		entityStore: null,
-		valueViewBuilder: null,
-		entityChangersFactory: null,
-		dataTypeStore: null
+		buildStatementListView: null,
+		entityIdHtmlFormatter: null
 	},
 
 	/**
@@ -84,13 +62,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.claimGuidGenerator
-			|| !this.options.entityIdHtmlFormatter
-			|| !this.options.entityStore
-			|| !this.options.valueViewBuilder
-			|| !this.options.entityChangersFactory
-			|| !this.options.dataTypeStore
-		) {
+		if ( !this.options.entityIdHtmlFormatter || !this.options.buildStatementListView ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
@@ -142,20 +114,10 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 			$statementlistview = $( '<div/>' ).appendTo( this.element );
 		}
 
-		$statementlistview.statementlistview( {
-			value: this.options.value
-				? this.options.value.getItemContainer()
-				: new wb.datamodel.StatementList(),
-			claimGuidGenerator: this.options.claimGuidGenerator,
-			entityIdHtmlFormatter: this.options.entityIdHtmlFormatter,
-			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-			entityStore: this.options.entityStore,
-			valueViewBuilder: this.options.valueViewBuilder,
-			entityChangersFactory: this.options.entityChangersFactory,
-			dataTypeStore: this.options.dataTypeStore
-		} );
-
-		this.statementlistview = $statementlistview.data( 'statementlistview' );
+		this.statementlistview = this.options.buildStatementListView(
+			this.options.value ? this.options.value.getItemContainer() : new wb.datamodel.StatementList(),
+			$statementlistview
+		);
 		prefix = this.statementlistview.widgetEventPrefix;
 
 		$statementlistview
@@ -233,7 +195,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 
 	/**
 	 * Adds a new, pending `statementview` to the encapsulated `statementlistview`.
-	 * @see jQuery.wikibase.listview.enterNewItem
+	 * @see jQuery.wikibase.statementlistview.enterNewItem
 	 *
 	 * @return {Object} jQuery.Promise
 	 * @return {Function} return.done

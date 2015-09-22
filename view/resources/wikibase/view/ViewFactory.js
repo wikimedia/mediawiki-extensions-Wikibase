@@ -245,16 +245,38 @@
 			newItemOptionsFn: $.proxy( function( value ) {
 				return {
 					value: value,
-					claimGuidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
-					dataTypeStore: this._dataTypeStore,
 					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-					entityIdPlainFormatter: this._entityIdPlainFormatter,
-					entityStore: this._entityStore,
-					valueViewBuilder: this._getValueViewBuilder(),
-					entityChangersFactory: this._entityChangersFactory
+					buildStatementListView: $.proxy( this.getStatementListView, this, entityId )
 				};
 			}, this )
 		} );
+	};
+
+	/**
+	 * Construct a suitable view for the given list of statements on the given DOM element
+	 *
+	 * @param {wikibase.datamodel.EntityId} entityId
+	 * @param {wikibase.datamodel.StatementList} value
+	 * @param {jQuery} $dom
+	 * @return {jQuery.wikibase.statementgroupview} The constructed statementlistview
+	 **/
+	SELF.prototype.getStatementListView = function( entityId, value, $dom ) {
+		var view = this._getView(
+			'statementlistview',
+			$dom,
+			{
+				value: value,
+				claimGuidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
+				dataTypeStore: this._dataTypeStore,
+				entityChangersFactory: this._entityChangersFactory,
+				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+				entityIdPlainFormatter: this._entityIdPlainFormatter,
+				entityStore: this._entityStore,
+				valueViewBuilder: this._getValueViewBuilder()
+			}
+		);
+
+		return view;
 	};
 
 	/**
