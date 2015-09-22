@@ -34,6 +34,24 @@
       "revId": "d084be1d1713f466fac614889d4f47cfc67224d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eceab4c_92febcaa",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-22T09:42:16Z",
+      "side": 1,
+      "message": "Nah, it\u0027s asking the current $entityChanges instead of each change in $entityChanges.",
+      "parentUuid": "6ec1af18_6100c36d",
+      "revId": "d084be1d1713f466fac614889d4f47cfc67224d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
