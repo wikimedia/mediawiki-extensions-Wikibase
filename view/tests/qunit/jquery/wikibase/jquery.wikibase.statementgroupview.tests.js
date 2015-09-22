@@ -12,32 +12,24 @@
  */
 var createStatementgroupview = function( options, $node ) {
 	options = $.extend( {
-		claimGuidGenerator: 'I am a ClaimGuidGenerator',
-		entityStore: {
-			get: function () {
-				return $.Deferred().resolve().promise();
-			}
-		},
 		entityIdHtmlFormatter: {
 			format: function ( entityId ) {
 				return $.Deferred().resolve( 'Link to entity' ).promise();
 			}
 		},
-		entityIdPlainFormatter: {
-			format: function ( entityId ) {
-				return $.Deferred().resolve( entityId ).promise();
-			}
-		},
-		valueViewBuilder: 'I am a ValueViewBuilder',
-		entityChangersFactory: {
-			getClaimsChanger: function() {
-				return 'I am a ClaimsChanger';
-			},
-			getReferencesChanger: function() {
-				return 'I am a ReferencesChanger';
-			}
-		},
-		dataTypeStore: 'I am a DataTypeStore'
+		buildStatementListView: function( value ) {
+			return {
+				_value: value,
+				destroy: function() {}, // FIXME: There should be a test spying on this
+				element: { off: function() {} }, // FIXME: There should be a test spying on this
+				value: function() {
+					if ( arguments.length ) {
+						this._value = arguments[0];
+					}
+					return this._value;
+				}
+			};
+		}
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );

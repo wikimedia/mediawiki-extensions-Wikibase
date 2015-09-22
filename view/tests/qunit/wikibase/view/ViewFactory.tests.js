@@ -103,10 +103,47 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForStatementGroupView passes correct options to ListItemAdapter', function( assert ) {
+		var entityId = 'Q1',
+			entityIdHtmlFormatter = {},
+			viewFactory = new ViewFactory( null, null, null, entityIdHtmlFormatter ),
+			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
+			value = {};
+
+		viewFactory.getListItemAdapterForStatementGroupView( entityId );
+
+		sinon.assert.calledWith(
+			ListItemAdapter,
+			sinon.match( {
+				listItemWidget: $.wikibase.statementgroupview,
+				newItemOptionsFn: sinon.match.func
+			} )
+		);
+
+		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+
+		assert.deepEqual(
+			result,
+			{
+				value: value,
+				entityIdHtmlFormatter: entityIdHtmlFormatter,
+				buildStatementListView: result.buildStatementListView // Hack
+			}
+		);
+
+		assert.ok( result.buildStatementListView instanceof Function );
+
+		$.wikibase.listview.ListItemAdapter.restore();
+	} );
+
+	QUnit.test( 'getStatementListView passes correct options to views', function( assert ) {
 		var contentLanguages = {},
 			entityId = 'Q1',
+			value = new wb.datamodel.StatementList(),
 			dataTypeStore = {},
-			entityChangersFactory = {},
+			entityChangersFactory = {
+				getClaimsChanger: function() {},
+				getReferencesChanger: function() {}
+			},
 			entityIdHtmlFormatter = {},
 			entityIdPlainFormatter = {},
 			entityStore = {},
@@ -128,22 +165,26 @@
 				parserStore,
 				userLanguages
 			),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
-			value = {};
+			$dom = $( '<div/>' );
 
+		$dom.statementlistview = sinon.spy( $.wikibase, 'statementlistview' );
 		sinon.spy( wb, 'ValueViewBuilder' );
 
-		viewFactory.getListItemAdapterForStatementGroupView( entityId );
+		viewFactory.getStatementListView( entityId, value, $dom );
 
 		sinon.assert.calledWith(
-			ListItemAdapter,
+			$.wikibase.statementlistview,
 			sinon.match( {
-				listItemWidget: $.wikibase.statementgroupview,
-				newItemOptionsFn: sinon.match.func
+				value: value,
+				claimGuidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator ),
+				dataTypeStore: dataTypeStore,
+				entityStore: entityStore,
+				entityIdHtmlFormatter: entityIdHtmlFormatter,
+				entityIdPlainFormatter: entityIdPlainFormatter,
+				valueViewBuilder: wb.ValueViewBuilder.returnValues[0],
+				entityChangersFactory: entityChangersFactory
 			} )
 		);
-
-		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
 
 		sinon.assert.calledWith( wb.ValueViewBuilder,
 			expertStore,
@@ -154,23 +195,8 @@
 			contentLanguages
 		);
 
-		assert.deepEqual(
-			result,
-			{
-				value: value,
-				claimGuidGenerator: result.claimGuidGenerator, // Hack for ignoring this field
-				dataTypeStore: dataTypeStore,
-				entityStore: entityStore,
-				entityIdHtmlFormatter: entityIdHtmlFormatter,
-				entityIdPlainFormatter: entityIdPlainFormatter,
-				valueViewBuilder: wb.ValueViewBuilder.returnValues[0],
-				entityChangersFactory: entityChangersFactory
-			}
-		);
-		assert.ok( result.claimGuidGenerator instanceof wb.utilities.ClaimGuidGenerator );
-
 		wb.ValueViewBuilder.restore();
-		$.wikibase.listview.ListItemAdapter.restore();
+		$.wikibase.statementlistview.restore();
 	} );
 
 	QUnit.test( 'getEntityTermsView passes correct options to views', function( assert ) {
