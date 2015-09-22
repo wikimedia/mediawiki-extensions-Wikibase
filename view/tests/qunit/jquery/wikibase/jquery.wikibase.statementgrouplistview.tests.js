@@ -173,7 +173,7 @@ QUnit.test( 'enterNewItem & save', function( assert ) {
 
 	var $statementgroupview = statementgrouplistviewListview.items().first(),
 		statementgroupview = statementgrouplistviewListviewLia.liInstance( $statementgroupview ),
-		$statementlistview = statementgroupview.$statementlistview;
+		$statementlistview = statementgroupview.statementlistview.element;
 
 	// Simulate having altered snakview's value:
 	$statementlistview.find( ':wikibase-snakview' ).data( 'snakview' ).snak = function() {

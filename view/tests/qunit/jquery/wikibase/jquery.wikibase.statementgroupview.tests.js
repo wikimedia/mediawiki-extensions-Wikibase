@@ -111,7 +111,7 @@ QUnit.test( 'value()', function( assert ) {
 		'Retrieved value after setting a new value.'
 	);
 
-	var statementlistview = statementgroupview.$statementlistview.data( 'statementlistview' ),
+	var statementlistview = statementgroupview.statementlistview,
 		statementList1 = new wb.datamodel.StatementList( [
 			new wb.datamodel.Statement(
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
