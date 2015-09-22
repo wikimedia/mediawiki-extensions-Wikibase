@@ -150,18 +150,18 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 	/**
 	 * Triggers adding a new `statementgroupview` to the `statementgrouplistview`. This involves
 	 * triggering the corresponding process for the new pending `statementgroupview` by instantly
-	 * triggering the `enterNewItem()` function of the `statementgroupview`'s `statemenlistview`.
-	 * @see jQuery.wikibase.statementlistview.enterNewItem
+	 * triggering the `enterNewItem()` function of the `statementgroupview`.
+	 * @see jQuery.wikibase.statementgroupview.enterNewItem
 	 * @see jQuery.wikibase.listview.enterNewItem
 	 *
 	 * @return {Object} jQuery.Promise
 	 * @return {Function} return.done
-	 * @return {jQuery} return.done.$statementlistview
+	 * @return {jQuery} return.done.$statementgroupview
 	 */
 	enterNewItem: function() {
 		var self = this,
 			listview = this.$listview.data( 'listview' ),
-			lia = this.$listview.data( 'listview' ).listItemAdapter();
+			lia = listview.listItemAdapter();
 
 		return this.$listview.data( 'listview' ).enterNewItem()
 			.done( function( $statementgroupview ) {
@@ -183,10 +183,8 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 					}
 				);
 
-				var statementgroupview = lia.liInstance( $statementgroupview ),
-					$statementlistview = statementgroupview.$statementlistview,
-					statementlistview = $statementlistview.data( 'statementlistview' );
-				statementlistview.enterNewItem();
+				var statementgroupview = lia.liInstance( $statementgroupview );
+				statementgroupview.enterNewItem();
 		} );
 	},
 
