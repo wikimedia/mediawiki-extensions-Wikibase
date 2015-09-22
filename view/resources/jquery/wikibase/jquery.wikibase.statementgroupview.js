@@ -236,7 +236,21 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 */
 	focus: function() {
 		this.$statementlistview.data( 'statementlistview' ).focus();
+	},
+
+	/**
+	 * Adds a new, pending `statementview` to the encapsulated `statementlistview`.
+	 * @see jQuery.wikibase.listview.enterNewItem
+	 *
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {jQuery} return.done.$statementview
+	 */
+	enterNewItem: function() {
+		var statementlistview = this.$statementlistview.data( 'statementlistview' );
+		return statementlistview.enterNewItem();
 	}
+
 } );
 
 }( wikibase, jQuery ) );
