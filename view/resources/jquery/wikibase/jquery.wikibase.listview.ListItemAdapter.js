@@ -1,4 +1,4 @@
-( function( $ ) {
+( function( mw, $ ) {
 	'use strict';
 
 	/**
@@ -24,8 +24,7 @@
 	 * @param {Object} options
 	 * @param {Function} options.listItemWidget
 	 *        The constructor of the jQuery widget which should represent items in a `listview`.
-	 *        The widget is required to feature a `value` method that allows setting and retrieving
-	 *        the widget's value.
+	 *        The widget is required to feature `value`, `destroy` and `option` methods.
 	 * @param {Function} options.newItemOptionsFn
 	 *        A function called when the related `listview` is instantiating a new list item. The
 	 *        function has to return an `Object` which will then be used as `options` object for a
@@ -36,18 +35,27 @@
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 * @throws {Error} if the widget specified in the `listItemWidget` option does not feature a
-	 *         `value` function.
+	 *         `value` method.
 	 */
 	var SELF = $.wikibase.listview.ListItemAdapter = function WbListviewListItemAdapter( options ) {
 		if(
 			!$.isFunction( options.listItemWidget )
 			|| !options.listItemWidget.prototype.widgetName
+			|| !options.listItemWidget.prototype.widgetEventPrefix
 		) {
 			throw new Error( 'For a new ListItemAdapter, a jQuery Widget constructor is required' );
 		}
 		if( !$.isFunction( options.listItemWidget.prototype.value ) ) {
 			throw new Error(
 				'For a new ListItemAdapter, the list item prototype needs a "value" method'
+			);
+		}
+		if(
+			!$.isFunction( options.listItemWidget.prototype.destroy ) ||
+			!$.isFunction( options.listItemWidget.prototype.option )
+		) {
+			mw.log.warn(
+				'For a new ListItemAdapter, the list item prototype needs "destroy" and "option" methods'
 			);
 		}
 		if( !$.isFunction( options.newItemOptionsFn ) ) {
@@ -86,18 +94,6 @@
 		},
 
 		/**
-		 * Returns the options suitable for a new list item widget.
-		 *
-		 * @param {*} value
-		 * @return {Object}
-		 */
-		newListItemOptions: function( value ) {
-			// if the value is undefined, this is the same as null, which means empty value
-			value = value === undefined ? null : value;
-			return this._options.newItemOptionsFn.call( this, value );
-		},
-
-		/**
 		 * Returns a new list item. If the `value` parameter is omitted or `null`, an empty list
 		 * item which can be displayed for the user to insert a new value will be returned.
 		 *
@@ -108,7 +104,7 @@
 		 */
 		newListItem: function( $subject, value ) {
 			return new this._options.listItemWidget(
-				this.newListItemOptions( value ),
+				this._options.newItemOptionsFn.call( this, value === undefined ? null : value ),
 				// give DOM element, otherwise .data() will be assigned to jQuery object and can't
 				// be accessed via $.fn.data() which is checking for the data of the DOM element.
 				$subject[0]
@@ -116,4 +112,4 @@
 		}
 	} );
 
-}( jQuery ) );
+}( mediaWiki, jQuery ) );
