@@ -23,8 +23,6 @@
  *        The `Statements` to be displayed by this view.
  * @param {wikibase.utilities.ClaimGuidGenerator} options.claimGuidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
- * @param {string} [options.entityType=wikibase.datamodel.Item.TYPE]
- *        Type of the `Entity` the `statementgrouplistview` refers to.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
@@ -50,7 +48,6 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 		templateShortCuts: {},
 		value: null,
 		claimGuidGenerator: null,
-		entityType: wb.datamodel.Item.TYPE,
 		entityStore: null,
 		valueViewBuilder: null,
 		entityChangersFactory: null,
@@ -127,7 +124,6 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 					return {
 						value: value,
 						claimGuidGenerator: self.options.claimGuidGenerator,
-						entityType: self.options.entityType,
 						dataTypeStore: self.options.dataTypeStore,
 						entityStore: self.options.entityStore,
 						valueViewBuilder: self.options.valueViewBuilder,

@@ -25,8 +25,6 @@
  *        "add" button to add new `Statements`.
  * @param {wikibase.utilities.ClaimGuidGenerator} options.claimGuidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
- * @param {string} [entityType=wikibase.datamodel.Item.TYPE]
- *        Type of the entity that the widget refers to.
  * @param {wikibase.store.EntityStore} options.entityStore
  *        Required for dynamically gathering `Entity`/`Property` information.
  * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
@@ -63,7 +61,6 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 		},
 		value: null,
 		claimGuidGenerator: null,
-		entityType: wb.datamodel.Item.TYPE,
 		entityStore: null,
 		valueViewBuilder: null,
 		entityChangersFactory: null,
@@ -174,7 +171,6 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 				? this.options.value.getItemContainer()
 				: new wb.datamodel.StatementList(),
 			claimGuidGenerator: self.options.claimGuidGenerator,
-			entityType: self.options.entityType,
 			entityStore: self.options.entityStore,
 			valueViewBuilder: self.options.valueViewBuilder,
 			entityChangersFactory: self.options.entityChangersFactory,
