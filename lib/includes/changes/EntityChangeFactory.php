@@ -137,8 +137,9 @@ class EntityChangeFactory {
 			$id = $newEntity->getId();
 		}
 
-		// don't include statements diff, since those are unused and not helpful
+		// HACK: don't include statements diff, since those are unused and not helpful
 		// performance-wise to the dispatcher and change handling.
+		// For a better solution, see T113468.
 		if ( $oldEntity instanceof StatementListHolder ) {
 			$oldEntity->setStatements( new StatementList() );
 			$newEntity->setStatements( new StatementList() );
