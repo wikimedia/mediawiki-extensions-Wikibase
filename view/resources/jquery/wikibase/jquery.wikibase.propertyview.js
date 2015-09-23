@@ -105,7 +105,6 @@ $.widget( 'wikibase.propertyview', PARENT, {
 			value: this.options.value.getStatements(),
 			claimGuidGenerator: claimGuidGenerator,
 			dataTypeStore: this.option( 'dataTypeStore' ),
-			entityType: this.options.value.getType(),
 			entityStore: this.options.entityStore,
 			valueViewBuilder: this.options.valueViewBuilder,
 			entityChangersFactory: this.options.entityChangersFactory
