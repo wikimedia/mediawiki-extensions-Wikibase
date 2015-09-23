@@ -53,7 +53,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "значение неизвестно",
 	"wikibase-snakview-snaktypeselector-novalue": "значение отсутствует",
 	"wikibase-tooltip-error-details": "Подробности",
-	"wikibase-undeserializable-value": "Значение является недопустимым и не может быть отображено.",
+	"wikibase-undeserializable-value": "Значение некорректно и не может быть отображено.",
 	"wikibase-validator-invalid": "Недопустимое значение",
 	"wikibase-validator-missing-field": "Отсутствует обязательное поле '$1'",
 	"wikibase-validator-bad-type": "$2 вместо $1",

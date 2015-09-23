@@ -55,6 +55,7 @@
 	"wikibase-unconnectedpages-submit": "Паказаць",
 	"pageswithbadges": "Старонкі з адзнакамі",
 	"wikibase-pageswithbadges-legend": "Сьпіс старонак з адзнакамі",
+	"wikibase-pageswithbadges-badge": "Адзнака:",
 	"wikibase-pageinfo-entity-id": "Ідэнтыфікатар аб’екта ў Вікізьвестках",
 	"wikibase-pageinfo-entity-id-none": "Няма",
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласьцівасьць $1: $2",
