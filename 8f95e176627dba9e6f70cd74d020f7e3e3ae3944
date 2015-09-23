@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_63101d05",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2015-09-23T15:30:48Z",
+      "side": 1,
+      "message": "Well I this repo has multiple entry points in sub folders. You can do Wikibase/client not sure why we did this. But I didn\u0027t change it just in case it broke it. But maybe if we change it it might work.",
+      "parentUuid": "2ecb373e_23977595",
+      "revId": "8f95e176627dba9e6f70cd74d020f7e3e3ae3944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_43f721f3",
         "filename": "client/WikibaseClient.php",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-23T15:23:22Z",
       "side": 1,
       "message": "Why is this needed? Do I understand correctly that this causes the extension to be initialized immediately?",
+      "revId": "8f95e176627dba9e6f70cd74d020f7e3e3ae3944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_03f599c7",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2015-09-23T15:30:48Z",
+      "side": 1,
+      "message": "Not sure.",
+      "parentUuid": "2ecb373e_43f721f3",
       "revId": "8f95e176627dba9e6f70cd74d020f7e3e3ae3944",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
