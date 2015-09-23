@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
+use DataValues\DataValue;
+use DataValues\StringValue;
 use Title;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Store\TitleFactory;
@@ -11,6 +13,9 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\SiteLinkUsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Test\TestChanges;
@@ -157,7 +162,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			)
 		);
 
-		$cases['other language label change on Q1'] = array(
+		$cases['alias change on Q1'] = array(
 			array( EntityUsage::OTHER_USAGE ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -181,6 +186,15 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			$changeFactory->newFromUpdate( ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ), $badges ) )
+		);
+
+		$cases['statement change on Q1'] = array(
+			array( EntityUsage::OTHER_USAGE ),
+			$changeFactory->newFromUpdate(
+				ItemChange::UPDATE,
+				new Item( $q1 ),
+				$this->getItemWithStatement( $q1, new PropertyId( 'P5' ), new StringValue( 'Hello' ) )
+			)
 		);
 
 		return $cases;
@@ -517,6 +531,22 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	private function getItemWithAliases( ItemId $id, $languageCode, array $aliases ) {
 		$item = new Item( $id );
 		$item->setAliases( $languageCode, $aliases );
+
+		return $item;
+	}
+
+	/**
+	 * @param ItemId $qid
+	 * @param PropertyId $pid
+	 * @param DataValue $value
+	 *
+	 * @return Item
+	 */
+	private function getItemWithStatement( ItemId $qid, PropertyId $pid, DataValue $value ) {
+		$snak = new PropertyValueSnak( $pid, $value );
+
+		$item = new Item( $qid );
+		$item->getStatements()->addNewStatement( $snak );
 
 		return $item;
 	}
