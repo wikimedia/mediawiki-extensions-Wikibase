@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class VariantsAwareRenderer implements PropertyClaimsRenderer {
+class VariantsAwareRenderer implements StatementGroupRenderer {
 
 	/**
 	 * @var string[]

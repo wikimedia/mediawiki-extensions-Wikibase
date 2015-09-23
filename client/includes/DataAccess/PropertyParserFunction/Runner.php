@@ -28,7 +28,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class Runner {
 
 	/**
-	 * @var PropertyClaimsRendererFactory
+	 * @var StatementGroupRendererFactory
 	 */
 	private $rendererFactory;
 
@@ -58,7 +58,7 @@ class Runner {
 	private $allowArbitraryDataAccess;
 
 	/**
-	 * @param PropertyCLaimsRendererFactory $rendererFactory
+	 * @param StatementGroupRendererFactory $rendererFactory
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param RestrictedEntityLookup $restrictedEntityLookup
@@ -66,7 +66,7 @@ class Runner {
 	 * @param bool $allowArbitraryDataAccess
 	 */
 	public function __construct(
-		PropertyClaimsRendererFactory $rendererFactory,
+		StatementGroupRendererFactory $rendererFactory,
 		SiteLinkLookup $siteLinkLookup,
 		EntityIdParser $entityIdParser,
 		RestrictedEntityLookup $restrictedEntityLookup,

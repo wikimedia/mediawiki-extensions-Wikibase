@@ -20,7 +20,7 @@ use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
-use Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
+use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
@@ -827,9 +827,9 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return PropertyClaimsRendererFactory
+	 * @return StatementGroupRendererFactory
 	 */
-	private function getPropertyClaimsRendererFactory() {
+	private function getStatementGroupRendererFactory() {
 		$entityLookup = $this->getRestrictedEntityLookup();
 
 		$propertyIdResolver = new PropertyIdResolver(
@@ -837,7 +837,7 @@ final class WikibaseClient {
 			$this->getStore()->getPropertyLabelResolver()
 		);
 
-		return new PropertyClaimsRendererFactory(
+		return new StatementGroupRendererFactory(
 			$propertyIdResolver,
 			new SnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
@@ -851,7 +851,7 @@ final class WikibaseClient {
 	 */
 	public function getPropertyParserFunctionRunner() {
 		return new Runner(
-			$this->getPropertyClaimsRendererFactory(),
+			$this->getStatementGroupRendererFactory(),
 			$this->getStore()->getSiteLinkLookup(),
 			$this->getEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
