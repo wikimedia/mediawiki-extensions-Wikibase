@@ -128,6 +128,15 @@ class AffectedPagesFinder {
 		$diff = $change->getDiff();
 		$remainingDiffOps = count( $diff ); // this is a "deep" count!
 
+		if ( $remainingDiffOps === 0 ) {
+			// HACK: assume an empty diff implies that some "other" aspect of the entity was changed.
+			// This is needed since EntityChangeFactory::newFromUpdate suppresses statement diffs for
+			// performance reasons.
+			// For a better solution, see T113468.
+			$aspects[] = EntityUsage::OTHER_USAGE;
+			return $aspects;
+		}
+
 		if ( $diff instanceof ItemDiff && !$diff->getSiteLinkDiff()->isEmpty() ) {
 			$siteLinkDiff = $diff->getSiteLinkDiff();
 
