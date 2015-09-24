@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 
