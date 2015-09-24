@@ -33,6 +33,24 @@
       "revId": "f47ed908edfd5eac80da040bd930c3717b575558",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_09f5aeb5",
+        "filename": "client/includes/recentchanges/ExternalChange.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-24T08:36:07Z",
+      "side": 1,
+      "message": "indeed",
+      "parentUuid": "2ecb373e_09512edd",
+      "revId": "f47ed908edfd5eac80da040bd930c3717b575558",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
