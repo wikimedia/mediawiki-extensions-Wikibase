@@ -39,12 +39,9 @@ use Wikibase\Test\TestChanges;
 class ChangeHandlerTest extends MediaWikiTestCase {
 
 	private function getAffectedPagesFinder( UsageLookup $usageLookup, TitleFactory $titleFactory ) {
-		$namespaceChecker = new NamespaceChecker( array(), array( NS_MAIN ) );
-
 		// @todo: mock the finder directly
 		return new AffectedPagesFinder(
 			$usageLookup,
-			$namespaceChecker,
 			$titleFactory,
 			'enwiki',
 			'en',
@@ -509,6 +506,13 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			'injectRCRecord' => array( 'Emmy2' => true ),
 		);
 
+		$userEmmy2PurgeParser = array(
+			'purgeParserCache' => array( 'User:Emmy2' => true ),
+			'scheduleRefreshLinks' => array(),
+			'purgeWebCache' => array( 'User:Emmy2' => true ),
+			'injectRCRecord' => array( 'User:Emmy2' => true ),
+		);
+
 		$emmyUpdateLinks = array(
 			'purgeParserCache' => array( 'Emmy' => true ),
 			'scheduleRefreshLinks' => array( 'Emmy' => true ),
@@ -575,8 +579,8 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			),
 			array( // #8
 				$changes['set-en-label'],
-				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // bad namespace
-				$empty
+				array( 'q100' => array( 'enwiki' => 'User:Emmy2' ) ), // user namespace
+				$userEmmy2PurgeParser
 			),
 			array( // #9
 				$changes['set-en-aliases'],

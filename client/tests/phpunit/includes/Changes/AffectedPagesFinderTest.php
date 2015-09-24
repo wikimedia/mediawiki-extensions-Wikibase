@@ -76,7 +76,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$affectedPagesFinder = new AffectedPagesFinder(
 			$usageLookup,
-			$this->getNamespaceChecker(),
 			$this->getTitleFactory(),
 			'enwiki',
 			'en',
@@ -84,17 +83,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		);
 
 		return $affectedPagesFinder;
-	}
-
-	private function getNamespaceChecker() {
-		$namespaceChecker = $this->getMockBuilder( 'Wikibase\NamespaceChecker' )
-			->disableOriginalConstructor()->getMock();
-
-		$namespaceChecker->expects( $this->any() )
-			->method( 'isWikibaseEnabled' )
-			->will( $this->returnValue( true ) );
-
-		return $namespaceChecker;
 	}
 
 	public function getChangedAspectsProvider() {
@@ -450,7 +438,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$affectedPagesFinder = new AffectedPagesFinder(
 			$this->getSiteLinkUsageLookup( $pageTitle ),
-			$this->getNamespaceChecker(),
 			new TitleFactory(),
 			'enwiki',
 			'en',
