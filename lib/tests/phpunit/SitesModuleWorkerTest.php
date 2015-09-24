@@ -99,6 +99,8 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider getModifiedHashProvider
 	 */
 	public function testGetModifiedHash( array $workerLists ) {
+
+		$this->markTestSkipped( 'Temporarily disabled. See T113665.' );
 		$results = array();
 
 		/** @var SitesModuleWorker[] $workers */

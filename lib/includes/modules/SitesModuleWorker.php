@@ -175,13 +175,11 @@ class SitesModuleWorker {
 	 * @return string
 	 */
 	public function getModifiedHash() {
-		$data = array(
-				$this->getSiteLinkGroups(),
-				$this->getSpecialSiteLinkGroups(),
-				$this->getSitesHash()
-		);
-
-		return sha1( json_encode( $data ) );
+		// Increment me whenever the roster of sites is changed.
+		// Or, alternately, make automatic cache invalidation less expensive
+		// by having fewer abstractions involved in hashing the site lists.
+		// See T113665 and Ie38527e56.
+		return '2015-09-24';
 	}
 
 }
