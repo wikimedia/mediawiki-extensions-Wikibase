@@ -246,7 +246,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->getOutput()->addModules( 'wikibase.special.languageLabelDescriptionAliases' );
 
 		$langCode = $this->contentLanguage->getCode();
-		$langName = Language::fetchLanguageName( $langCode );
 		$langDir = $this->contentLanguage->getDir();
 		return array(
 			'lang' => array(
