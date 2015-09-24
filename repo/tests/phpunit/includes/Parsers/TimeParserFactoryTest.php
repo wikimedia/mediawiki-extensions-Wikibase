@@ -37,7 +37,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		$factory = new TimeParserFactory( new ParserOptions( array( ValueParser::OPT_LANG => $languageCode ) ) );
 		$parser = $factory->getTimeParser();
 
-		$this->assertTrue( $expected->equals( $parser->parse( $value ) ) );
+		$this->assertEquals($expected->toArray(), $parser->parse( $value )->toArray() );
 	}
 
 	public function validInputProvider() {
@@ -114,6 +114,13 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '-13000000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1G, $julian ),
 			'1980s' =>
 				array( '+1980-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10 ),
+
+			/**
+			 * @see ValueParsers\YearMonthDayTimeParser
+			 * @see  ValueParsers\Test\YearMonthDayTimeParserTest
+			 */
+			'29.02.1500' =>
+				array( '+1500-02-29T00:00:00Z', TimeValue::PRECISION_DAY, $julian ),
 
 			/**
 			 * @see ValueParsers\PhpDateTimeParser
