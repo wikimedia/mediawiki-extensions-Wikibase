@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_bc35b6f5",
+        "filename": "repo/Wikibase.i18n.namespaces.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-09-24T11:43:51Z",
+      "side": 1,
+      "message": "Please use tabs for indentation. This would be consistent with the rest of this file.",
+      "revId": "ce91c00bd09a6ff0c0aa207f0d27e331442c3f0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
