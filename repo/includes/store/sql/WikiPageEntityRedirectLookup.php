@@ -6,6 +6,7 @@ use LoadBalancer;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Store\EntityIdLookup;
 
@@ -55,11 +56,21 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	 * @param EntityId $targetId
 	 *
 	 * @return EntityId[]
+	 * @throws EntityRedirectLookupException
 	 */
 	public function getRedirectIds( EntityId $targetId ) {
-		$title = $this->entityTitleLookup->getTitleForId( $targetId );
+		try {
+			$title = $this->entityTitleLookup->getTitleForId( $targetId );
+		} catch ( \Exception $ex ) {
+			// TODO: catch more specific type of exception once EntityTitleLookup contract is clarified
+			throw new EntityRedirectLookupException( $targetId, null, $ex );
+		}
 
-		$dbr = $this->loadBalancer->getConnection( DB_SLAVE );
+		try {
+			$dbr = $this->loadBalancer->getConnection( DB_SLAVE );
+		} catch ( \MWException $ex ) {
+			throw new EntityRedirectLookupException( $targetId, null, $ex );
+		}
 
 		$res = $dbr->select(
 			array( 'page', 'redirect' ),
@@ -75,7 +86,11 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			)
 		);
 
-		$this->loadBalancer->reuseConnection( $dbr );
+		try {
+			$this->loadBalancer->reuseConnection( $dbr );
+		} catch ( \MWException $ex ) {
+			throw new EntityRedirectLookupException( $targetId, null, $ex );
+		}
 
 		if ( !$res ) {
 			return array();
@@ -99,14 +114,25 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	 * @param EntityId $entityId
 	 * @param string $forUpdate
 	 *
-	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
-	 *         does not refer to a redirect, or false if $entityId is not known.
+	 * @return EntityId|null The ID of the redirect target, or null if $entityId
+	 *         does not refer to a redirect
+	 * @throws EntityRedirectLookupException
 	 */
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
-		$title = $this->entityTitleLookup->getTitleForId( $entityId );
+		try {
+			$title = $this->entityTitleLookup->getTitleForId( $entityId );
+		} catch ( \Exception $ex ) {
+			// TODO: catch more specific type of exception once EntityTitleLookup contract is clarified
+			throw new EntityRedirectLookupException( $entityId, null, $ex );
+		}
 
-		$forUpdate === 'for update' ? DB_MASTER : DB_SLAVE;
-		$db = $this->loadBalancer->getConnection( $forUpdate );
+		$forUpdate = $forUpdate === 'for update' ? DB_MASTER : DB_SLAVE;
+
+		try {
+			$db = $this->loadBalancer->getConnection( $forUpdate );
+		} catch ( \MWException $ex ) {
+			throw new EntityRedirectLookupException( $entityId, null, $ex );
+		}
 
 		$row = $db->selectRow(
 			array( 'page', 'redirect' ),
@@ -122,7 +148,11 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			)
 		);
 
-		$this->loadBalancer->reuseConnection( $db );
+		try {
+			$this->loadBalancer->reuseConnection( $db );
+		} catch ( \MWException $ex ) {
+			throw new EntityRedirectLookupException( $entityId, null, $ex );
+		}
 
 		if ( !$row ) {
 			return false;
