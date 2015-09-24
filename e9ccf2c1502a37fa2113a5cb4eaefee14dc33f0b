@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ecb373e_355eb418",
+        "filename": "repo/tests/phpunit/includes/DOMTestUtils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-09-24T19:46:39Z",
+      "side": 1,
+      "message": "Base class? There is not even instance code in here, which makes this line even more odd.",
+      "revId": "e9ccf2c1502a37fa2113a5cb4eaefee14dc33f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_22442a6e",
         "filename": "repo/tests/phpunit/includes/DOMTestUtils.php",
         "patchSetId": 6
