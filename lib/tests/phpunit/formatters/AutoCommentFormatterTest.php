@@ -3,7 +3,9 @@
 namespace Wikibase\Lib\Test;
 
 use Language;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * @covers Wikibase\Lib\AutoCommentFormatter
@@ -23,6 +25,16 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	public $language;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $titleLookup;
+
+	/**
 	 * @var string LEFT-TO-RIGHT MARK, commonly abbreviated LRM from Language.php
 	 */
 	private static $lrm = "\xE2\x80\x8E";
@@ -31,6 +43,9 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 		parent::setUp();
 		$this->language = Language::factory( 'qqx' );
 		$this->setMwGlobals( 'wgLang', $this->language );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$this->idParser = $wikibaseRepo->getEntityIdParser();
+		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 	}
 
 	public function provideTestAutoComment() {
@@ -59,7 +74,12 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider provideTestAutoComment
 	 */
 	public function testFormatAutoComment( array $prefixes, $auto, $expected ) {
-		$formatter = new AutoCommentFormatter( $this->language, $prefixes );
+		$formatter = new AutoCommentFormatter(
+			$this->language,
+			$prefixes,
+			$this->idParser,
+			$this->titleLookup
+		);
 		$value = $formatter->formatAutoComment( $auto );
 		$this->assertEquals( $expected, $value );
 	}
@@ -107,7 +127,12 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider provideWrapAutoComment
 	 */
 	public function testWrapAutoComment( $pre, $comment, $post, $expected ) {
-		$formatter = new AutoCommentFormatter( $this->language, array() );
+		$formatter = new AutoCommentFormatter(
+			$this->language,
+			array(),
+			$this->idParser,
+			$this->titleLookup
+		);
 		$value = $formatter->wrapAutoComment( $pre, $comment, $post );
 		$this->assertEquals( $expected, $value );
 	}
