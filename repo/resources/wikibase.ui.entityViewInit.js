@@ -161,7 +161,7 @@
 		function updateWatchLink() {
 			// All four supported skins are using the same ID, the other selectors
 			// in mediawiki.page.watch.ajax.js are undocumented and probably legacy stuff
-			var $link = $( '#ca-watch a' );
+			var $link = $( '#ca-watch' ).find( 'a' );
 
 			// Skip if page is already watched and there is no "watch this page" link
 			// Note: The exposed function fails for empty jQuery collections
