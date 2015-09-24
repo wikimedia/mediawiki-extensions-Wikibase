@@ -43,7 +43,7 @@ class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				if ( $id->getNumericId() > 1000 ) {
+				if ( $id->getSerialization() === 'Q112233' ) {
 					throw new LabelDescriptionLookupException( $id, 'No such label!' );
 				}
 				return new Term( 'en', 'LABEL:' . $id->getSerialization() );
