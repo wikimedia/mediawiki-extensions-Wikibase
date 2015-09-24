@@ -39,6 +39,11 @@ class SidebarHookHandlers {
 	private $badgeDisplay;
 
 	/**
+	 * @var OtherProjectsSidebarGeneratorFactory
+	 */
+	private $otherProjectsSidebarGeneratorFactory;
+
+	/**
 	 * @var bool
 	 */
 	private $otherProjectsLinksBeta;
