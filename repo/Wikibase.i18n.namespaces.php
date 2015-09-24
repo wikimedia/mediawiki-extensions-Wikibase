@@ -92,6 +92,20 @@ $namespaceNames['he'] = array(
 	WB_NS_QUERY_TALK => 'שיחת_שאילתה',
 );
 
+$namespaceNames['it'] = array(
+	WB_NS_DATA      => 'Dati',             // legacy
+	WB_NS_DATA_TALK => 'Discussioni_dati', // legacy
+
+	WB_NS_ITEM      => 'Elemento',
+	WB_NS_ITEM_TALK => 'Discussioni_elemento',
+
+	WB_NS_PROPERTY      => 'Proprietà',
+	WB_NS_PROPERTY_TALK => 'Discussioni_proprietà',
+
+	WB_NS_QUERY      => 'Query',
+	WB_NS_QUERY_TALK => 'Discussioni_query',
+);
+
 $namespaceNames['ru'] = array(
 	WB_NS_DATA      => 'Данные',            // legacy
 	WB_NS_DATA_TALK => 'Обсуждение_данных', // legacy
