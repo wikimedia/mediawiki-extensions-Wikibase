@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_696b1283",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-24T08:23:39Z",
+      "side": 0,
+      "message": "Still does so?",
+      "revId": "210b68de1c5e18881eb8c14721e22a163227185c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_09684e83",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-24T08:23:39Z",
+      "side": 0,
+      "message": "Remove bool from type hint.",
+      "revId": "210b68de1c5e18881eb8c14721e22a163227185c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

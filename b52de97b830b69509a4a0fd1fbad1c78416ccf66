@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_c9280635",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-24T08:23:39Z",
+      "side": 1,
+      "message": "Would prefer if this would not be variadic but instead just take an array of params.",
+      "revId": "b52de97b830b69509a4a0fd1fbad1c78416ccf66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
