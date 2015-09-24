@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -399,7 +400,7 @@ class EntityDataRequestHandler {
 	private function getIncomingRedirects( EntityId $id ) {
 		try {
 			return $this->entityRedirectLookup->getRedirectIds( $id );
-		} catch ( StorageException $ex ) {
+		} catch ( EntityRedirectLookupException $ex ) {
 			$prefixedId = $id->getSerialization();
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load incoming redirects of $prefixedId: $ex" );
 			return array();
