@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 
 /**
- * PropertyClaimsRenderer of the {{#property}} parser function.
+ * StatementGroupRenderer of the {{#property}} parser function.
  *
  * @since 0.5
  *
@@ -22,7 +22,7 @@ use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
  * @author Liangent < liangent@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class LanguageAwareRenderer implements PropertyClaimsRenderer {
+class LanguageAwareRenderer implements StatementGroupRenderer {
 
 	/**
 	 * @var Language

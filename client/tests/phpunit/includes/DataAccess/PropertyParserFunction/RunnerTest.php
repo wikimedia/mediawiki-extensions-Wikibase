@@ -34,7 +34,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'Q3' );
 
 		$runner = new Runner(
-			$this->getPropertyClaimsRendererFactory( $itemId, 'Cat' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
 			$this->getSiteLinkLookup( $itemId ),
 			new BasicEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
@@ -61,7 +61,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'Q42' );
 
 		$runner = new Runner(
-			$this->getPropertyClaimsRendererFactory( $itemId, 'Cat' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
 			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
 			new BasicEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
@@ -93,7 +93,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$restrictedEntityLookup->getEntity( $itemId );
 
 		$runner = new Runner(
-			$this->getPropertyClaimsRendererFactory( $itemId, 'Cat' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
 			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
 			new BasicEntityIdParser(),
 			$restrictedEntityLookup,
@@ -111,7 +111,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunPropertyParserFunction_arbitraryAccessNotFound() {
 		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
+				'Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -199,11 +199,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		return $frame;
 	}
 
-	private function getPropertyClaimsRendererFactory( $entityId, $propertyLabelOrId ) {
+	private function getStatementGroupRendererFactory( $entityId, $propertyLabelOrId ) {
 		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId );
 
 		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
+				'Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -217,7 +217,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 	private function getRenderer( $entityId, $propertyLabelOrId ) {
 		$renderer = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRenderer'
+				'Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRenderer'
 			)
 			->disableOriginalConstructor()
 			->getMock();

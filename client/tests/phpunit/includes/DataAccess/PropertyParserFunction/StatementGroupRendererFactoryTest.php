@@ -7,7 +7,7 @@ use Parser;
 use ParserOptions;
 use Title;
 use User;
-use Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
+use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -19,7 +19,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
- * @covers Wikibase\Client\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory
+ * @covers Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -29,12 +29,12 @@ use Wikibase\LanguageFallbackChainFactory;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
+class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewRendererForInterfaceMessage() {
 		$parser = $this->getParser( 'zh', true, false, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -46,7 +46,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_contentConversionDisabled() {
 		$parser = $this->getParser( 'zh', false, true, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -58,7 +58,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_titleConversionDisabled() {
 		$parser = $this->getParser( 'zh', false, false, true, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -73,7 +73,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_forParserFormat( $languageCode, $format ) {
 		$parser = $this->getParser( $languageCode, false, false, false, $format );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -93,7 +93,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_forNonVariantLanguage() {
 		$parser = $this->getParser( 'en', true, false, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -105,7 +105,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRender_forVariantLanguage() {
 		$parser = $this->getParser( 'zh', false, false, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$this->assertInstanceOf(
@@ -117,7 +117,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testNewRenderer_usageTracking() {
 		$parser = $this->getParser( 'en', true, false, false, Parser::OT_HTML );
 
-		$rendererFactory = $this->getPropertyClaimsRendererFactory();
+		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
@@ -128,8 +128,8 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertArrayHasKey( 'Q7#T', $usages );
 	}
 
-	private function getPropertyClaimsRendererFactory() {
-		return new PropertyClaimsRendererFactory(
+	private function getStatementGroupRendererFactory() {
+		return new StatementGroupRendererFactory(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),

@@ -25,7 +25,7 @@ use Wikibase\Lib\SnakFormatter;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class PropertyClaimsRendererFactory {
+class StatementGroupRendererFactory {
 
 	/**
 	 * @var PropertyIdResolver
@@ -81,7 +81,7 @@ class PropertyClaimsRendererFactory {
 	/**
 	 * @param Parser $parser
 	 *
-	 * @return PropertyClaimsRenderer
+	 * @return StatementGroupRenderer
 	 */
 	public function newRendererFromParser( Parser $parser ) {
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
