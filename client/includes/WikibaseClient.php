@@ -871,7 +871,6 @@ final class WikibaseClient {
 	public function getAffectedPagesFinder() {
 		return new AffectedPagesFinder(
 			$this->getStore()->getUsageLookup(),
-			$this->getNamespaceChecker(),
 			new TitleFactory(),
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->getContentLanguage()->getCode()
