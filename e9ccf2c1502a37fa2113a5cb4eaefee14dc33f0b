@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_75d2fc2d",
+        "filename": "repo/tests/phpunit/includes/DOMTestUtils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-24T20:13:42Z",
+      "side": 1,
+      "message": "I don\u0027t like it as static class either. Can we make it a trait?",
+      "parentUuid": "2ecb373e_355eb418",
+      "revId": "e9ccf2c1502a37fa2113a5cb4eaefee14dc33f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_22442a6e",
         "filename": "repo/tests/phpunit/includes/DOMTestUtils.php",
         "patchSetId": 6
