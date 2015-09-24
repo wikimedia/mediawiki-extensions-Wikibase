@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_49473623",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-24T08:14:10Z",
+      "side": 1,
+      "message": "Not actually used.",
+      "revId": "f47ed908edfd5eac80da040bd930c3717b575558",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_09512edd",
+        "filename": "client/includes/recentchanges/ExternalChange.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-24T08:14:10Z",
+      "side": 1,
+      "message": "Unused?",
+      "revId": "f47ed908edfd5eac80da040bd930c3717b575558",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

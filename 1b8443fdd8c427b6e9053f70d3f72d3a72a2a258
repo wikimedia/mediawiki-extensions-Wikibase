@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_6944721d",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-24T08:14:10Z",
+      "side": 0,
+      "message": "This FIXME is lost. Is that bad?",
+      "revId": "1b8443fdd8c427b6e9053f70d3f72d3a72a2a258",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
