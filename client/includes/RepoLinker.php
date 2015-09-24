@@ -177,7 +177,7 @@ class RepoLinker {
 	}
 
 	/**
-	 * @return string;
+	 * @return string
 	 */
 	public function getApiUrl() {
 		return $this->getBaseUrl() . $this->scriptPath . '/api.php';
