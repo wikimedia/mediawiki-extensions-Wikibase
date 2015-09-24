@@ -434,8 +434,6 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getPropertyInfoStore() {
 		if ( $this->propertyInfoTable === null ) {
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-
 			$propertyInfoStore = new PropertyInfoTable( true, $this->repoWiki );
 			$cacheKey = $this->cacheKeyPrefix . ':CachingPropertyInfoStore';
 
