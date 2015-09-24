@@ -122,7 +122,7 @@
 	"wikibase-wikibaserepopage-not-itemid": "«$1» — некорректный идентификатор элемента.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Неизвестный код языка «$1». Пожалуйста, используйте один из известных системе языковых кодов, например «ru».",
 	"wikibase-wikibaserepopage-invalid-id": "Системе неизвестен идентификатор «$1». Пожалуйста, используйте один из существующих идентификаторов.",
-	"wikibase-wikibaserepopage-unresolved-redirect": "$1 является перенаправлением.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 — это перенаправление.",
 	"wikibase-wikibaserepopage-storage-exception": "Произошла ошибка при попытке загрузить $1: $2.",
 	"special-itembytitle": "Элементы по заголовку",
 	"wikibase-itembytitle-lookup-fieldset": "Искать элементы по сайту и заголовку",

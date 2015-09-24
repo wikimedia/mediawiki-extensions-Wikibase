@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Angpradesh"
+		]
+	},
+	"tooltip-t-wikibase": "सम्बद्ध डाटा भण्डार प्रविष्टि केरऽ कड़ी",
+	"wikibase-dataitem": "{{WBREPONAME}} प्रविष्टि",
+	"wikibase-editlinks": "कड़ी संपादित करऽ",
+	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी संपादित करऽ"
+}
