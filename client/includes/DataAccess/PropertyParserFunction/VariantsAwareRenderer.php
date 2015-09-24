@@ -53,7 +53,7 @@ class VariantsAwareRenderer implements StatementGroupRenderer {
 	 * @param EntityId $entityId
 	 * @param string $propertyLabelOrId
 	 *
-	 * @return string[], key by variant codes
+	 * @return string[] key by variant codes
 	 */
 	private function buildRenderedVariantsArray( EntityId $entityId, $propertyLabelOrId ) {
 		$renderedVariantsArray = array();
