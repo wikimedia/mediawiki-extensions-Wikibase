@@ -25,10 +25,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				}
 
 				statementgrouplistview.enterNewItem().done( function( $statementgroupview ) {
-					var statementgroupview = $statementgroupview.data( 'statementgroupview' ),
-						$statementlistview = statementgroupview.$statementlistview,
-						statementlistview = $statementlistview.data( 'statementlistview' );
-					statementlistview.focus();
+					$statementgroupview.data( 'statementgroupview' ).focus();
 				} );
 
 				toolbarcontroller.registerEventHandler(
