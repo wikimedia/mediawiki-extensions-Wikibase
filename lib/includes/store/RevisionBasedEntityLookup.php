@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 
 /**
  * An implementation of EntityLookup based on an EntityRevisionLookup.
@@ -35,12 +36,18 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
+	 * @throws EntityLookupException
 	 * @return EntityDocument|null
 	 */
 	public function getEntity( EntityId $entityId ) {
-		$revision = $this->lookup->getEntityRevision( $entityId );
-		return ( $revision === null ) ? null : $revision->getEntity();
+		try {
+			$revision = $this->lookup->getEntityRevision( $entityId );
+		} catch ( \Exception $ex ) {
+			// TODO: catch more specific exception once EntityRevisionLookup contract gets clarified
+			throw new EntityLookupException( $entityId, null, $ex );
+		}
+
+		return $revision === null ? null : $revision->getEntity();
 	}
 
 	/**
@@ -48,12 +55,16 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
+	 * @throws EntityLookupException
 	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
-		return $this->lookup->getLatestRevisionId( $entityId ) !== false;
-
+		try {
+			return $this->lookup->getLatestRevisionId( $entityId ) !== false;
+		} catch ( \Exception $ex ) {
+			// TODO: catch more specific exception once EntityRevisionLookup contract gets clarified
+			throw new EntityLookupException( $entityId, null, $ex );
+		}
 	}
 
 }
