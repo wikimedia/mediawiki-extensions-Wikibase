@@ -161,6 +161,8 @@ function wikibase.setupInterface()
 		return php.resolvePropertyId( propertyLabelOrId )
 	end
 
+	wikibase.getEntityIdForCurrentPage = getEntityIdForCurrentPage
+
 	mw = mw or {}
 	mw.wikibase = wikibase
 	package.loaded['mw.wikibase'] = wikibase

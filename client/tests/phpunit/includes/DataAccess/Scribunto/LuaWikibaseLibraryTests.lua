@@ -150,6 +150,10 @@ local tests = {
 	  args = { 'foo' },
 	  expect = { nil }
 	},
+	{ name = 'mw.wikibase.getEntityIdForCurrentPage', func = mw.wikibase.getEntityIdForCurrentPage,
+	  args = {},
+	  expect = { 'Q32487' }
+	},
 }
 
 return testframework.getTestProvider( tests )
