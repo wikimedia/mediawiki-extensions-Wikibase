@@ -4,7 +4,8 @@
 			"Eitvys200",
 			"Hugo.arg",
 			"Salpusnis",
-			"Albertas"
+			"Albertas",
+			"Zygimantus"
 		]
 	},
 	"wikibase-lib-desc": "Apima bendrą Wikibase ir Wikibase kliento išplėtimų funkcionalumą.",
@@ -115,8 +116,8 @@
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "Atnaujintas [$2] ženkliukas",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "Atnaujinta [$2] nuoroda ir ženkliukai",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Pašalinta nuoroda į [$2]",
-	"wikibase-entity-summary-wblinktitles-create": "Ši esybė buvo sukurta, kad būtų sujungti puslapiai",
-	"wikibase-entity-summary-wblinktitles-connect": "Pridėta kalbos nuoroda, kad būtų sujungti puslapiai",
+	"wikibase-entity-summary-wblinktitles-create": "Ši esybė buvo sukurta sujungti puslapiams",
+	"wikibase-entity-summary-wblinktitles-connect": "Pridėta kalbos nuoroda puslapių sujungimui",
 	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|Sukurtas priekaištas|Sukurti priekaištai}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "{{PLURAL:$1|Sukurtas priekaištas|Sukurti priekaištai}}",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "{{PLURAL:$1|Sukurtas priekaištas|Sukurti priekaištai}}",
