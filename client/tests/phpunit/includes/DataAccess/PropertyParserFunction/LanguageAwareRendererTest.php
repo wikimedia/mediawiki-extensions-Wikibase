@@ -127,31 +127,6 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param EntityUsage[] $expected
-	 * @param EntityUsage[] $actual
-	 * @param string $message
-	 */
-	private function assertSameUsages( array $expected, array $actual, $message = '' ) {
-		$expected = $this->getUsageStrings( $expected );
-		$actual = $this->getUsageStrings( $actual );
-
-		$this->assertEquals( $expected, $actual, $message );
-	}
-
-	/**
-	 * @param EntityUsage[] $usages
-	 *
-	 * @return string[]
-	 */
-	private function getUsageStrings( array $usages ) {
-		return array_values(
-			array_map( function( EntityUsage $usage ) {
-				return $usage->getIdentityString();
-			}, $usages )
-		);
-	}
-
-	/**
 	 * @param Snak[] $snaks
 	 *
 	 * @return SnaksFinder
