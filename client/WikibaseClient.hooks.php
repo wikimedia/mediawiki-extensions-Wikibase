@@ -605,7 +605,7 @@ final class ClientHooks {
 
 	public static function onwgQueryPages( &$queryPages ) {
 		$queryPages[] = array( 'Wikibase\Client\Specials\SpecialUnconnectedPages', 'UnconnectedPages' );
-		$queryPages[] = array( 'Wikibase\Client\Specials\SpecialPagesWithBadges', 'Badges' );
+		$queryPages[] = array( 'Wikibase\Client\Specials\SpecialPagesWithBadges', 'PagesWithBadges' );
 		return true;
 	}
 
