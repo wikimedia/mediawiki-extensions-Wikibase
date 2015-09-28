@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_fe27925d",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-28T08:20:18Z",
+      "side": 1,
+      "message": "Some documentation here would be nice (see the other public functions above).",
+      "revId": "381fdb4defeef8af53ba860d8eb53fb0016f7842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
