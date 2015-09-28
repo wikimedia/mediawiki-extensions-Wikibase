@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_d9e430a6",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-28T11:35:12Z",
+      "side": 1,
+      "message": "This shouldn\u0027t happen in real-world usage. I suppose it wouldn\u0027t qualify as illegal usage of a `snakview` to give it no property and lock the property, though. I\u0027m in favor of limiting the set of valid option combinations to (value: Snak, locked.property: false), (value: Snak, locked.property: true), (value: null, locked.property: false). We could also add (value.property: PropertyId, locked.property: true). The point would be to exclude (value.property: null, locked.property: true).",
+      "parentUuid": "2ecb373e_f921ec9a",
+      "revId": "9a41cf215c5fc0a645911ed72c938bf620ef6351",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_f9aecce3",
         "filename": "view/tests/qunit/wikibase/entityIdFormatter/SimpleEntityIdHtmlFormatter.tests.js",
         "patchSetId": 12
