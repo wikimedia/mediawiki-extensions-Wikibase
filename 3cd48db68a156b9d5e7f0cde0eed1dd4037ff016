@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ecb373e_03100652",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-09-28T16:17:40Z",
+      "side": 1,
+      "message": "Should this be \"ItemsMetMeesteSitekoppelingen\"?",
+      "revId": "3cd48db68a156b9d5e7f0cde0eed1dd4037ff016",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_e3bdbafe",
+        "filename": "repo/i18n/nl.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-09-28T16:17:40Z",
+      "side": 1,
+      "message": "sitelink -\u003e sitekoppeling.",
+      "revId": "3cd48db68a156b9d5e7f0cde0eed1dd4037ff016",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_288b85e9",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 13
