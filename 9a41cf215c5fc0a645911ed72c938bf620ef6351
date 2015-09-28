@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_2fdac678",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-28T13:48:48Z",
+      "side": 1,
+      "message": "that sounds good to me",
+      "parentUuid": "2ecb373e_d9e430a6",
+      "revId": "9a41cf215c5fc0a645911ed72c938bf620ef6351",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_f9aecce3",
         "filename": "view/tests/qunit/wikibase/entityIdFormatter/SimpleEntityIdHtmlFormatter.tests.js",
         "patchSetId": 12
