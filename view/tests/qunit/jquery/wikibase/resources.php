@@ -51,11 +51,11 @@ return call_user_func( function() {
 				'jquery.wikibase.statementgrouplistview.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.listview', // For ListItemAdapter
 				'jquery.wikibase.statementgrouplistview',
 				'wikibase.datamodel.StatementGroup',
 				'wikibase.datamodel.StatementGroupSet',
 				'wikibase.datamodel.StatementList',
+				'wikibase.tests.getMockListItemAdapter',
 			),
 		),
 
@@ -84,6 +84,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.Statement',
 				'wikibase.datamodel.StatementList',
+				'wikibase.tests.getMockListItemAdapter',
 			),
 		),
 
