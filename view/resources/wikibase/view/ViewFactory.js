@@ -246,7 +246,7 @@
 				return {
 					value: value,
 					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-					buildStatementListView: $.proxy( this.getStatementListView, this, entityId )
+					buildStatementListView: $.proxy( this.getStatementListView, this, entityId, value && value.getKey() )
 				};
 			}, this )
 		} );
@@ -256,27 +256,61 @@
 	 * Construct a suitable view for the given list of statements on the given DOM element
 	 *
 	 * @param {wikibase.datamodel.EntityId} entityId
+	 * @param {wikibase.datamodel.EntityId|null} propertyId Optionally specifies a property
+	 *                                                      all statements should be on or are on
 	 * @param {wikibase.datamodel.StatementList} value
 	 * @param {jQuery} $dom
 	 * @return {jQuery.wikibase.statementgroupview} The constructed statementlistview
 	 **/
-	SELF.prototype.getStatementListView = function( entityId, value, $dom ) {
+	SELF.prototype.getStatementListView = function( entityId, propertyId, value, $dom ) {
 		var view = this._getView(
 			'statementlistview',
 			$dom,
 			{
 				value: value,
-				claimGuidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
-				dataTypeStore: this._dataTypeStore,
-				entityChangersFactory: this._entityChangersFactory,
-				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				entityStore: this._entityStore,
-				valueViewBuilder: this._getValueViewBuilder()
+				listItemAdapter: this.getListItemAdapterForStatementView( entityId, propertyId ),
+				claimsChanger: this._entityChangersFactory.getClaimsChanger()
 			}
 		);
 
 		return view;
+	};
+
+	/**
+	 * Construct a `ListItemAdapter` for `statementview`s
+	 *
+	 * @param {string} entityId
+	 * @param {string|null} [propertyId] Optionally a property all statements are or should be on
+	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
+	 **/
+	SELF.prototype.getListItemAdapterForStatementView = function( entityId, propertyId ) {
+		return new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: $.wikibase.statementview,
+			newItemOptionsFn: $.proxy( function( value ) {
+				return {
+					value: value,
+					locked: {
+						mainSnak: {
+							property: Boolean( value || propertyId )
+						}
+					},
+					predefined: {
+						mainSnak: {
+							property: ( value ? value.getClaim().getMainSnak().getPropertyId() : propertyId ) || undefined
+						}
+					},
+
+					claimsChanger: this._entityChangersFactory.getClaimsChanger(),
+					dataTypeStore: this._dataTypeStore,
+					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+					entityIdPlainFormatter: this._entityIdPlainFormatter,
+					entityStore: this._entityStore,
+					guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
+					referencesChanger: this._entityChangersFactory.getReferencesChanger(),
+					valueViewBuilder: this._getValueViewBuilder()
+				};
+			}, this )
+		} );
 	};
 
 	/**

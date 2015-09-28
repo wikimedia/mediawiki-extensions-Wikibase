@@ -13,9 +13,6 @@
  * @extends jQuery.ui.TemplatedWidget
  * @uses jQuery.wikibase.listview
  * @uses jQuery.wikibase.listview.ListItemAdapter
- * @uses jQuery.wikibase.statementview
- * @uses mediaWiki
- * @uses wikibase.utilities
  * @since 0.4
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
@@ -26,23 +23,8 @@
  * @param {wikibase.datamodel.StatementList} options.value
  *        The list of `Statement`s to be displayed by this view. If null, the view will initialize
  *        with edit mode being started.
- * @param {wikibase.utilities.ClaimGuidGenerator} options.claimGuidGenerator
- *        Required for dynamically generating GUIDs for new `Statement`s.
- * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
- *        Required for dynamically rendering links to `Entity`s.
- * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
- *        Required for dynamically rendering plain text references to `Entity`s.
- * @param {wikibase.store.EntityStore} options.entityStore
- *        Required for dynamically gathering `Entity`/`Property` information.
- * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
- *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
- *        `jQuery.valueview`.
- * @param {wikibase.entityChangers.EntityChangersFactory} options.entityChangersFactory
- *        Required to store the `Reference`s gathered from the `referenceview`s aggregated by the
- *        `statementview`.
- * @param {dataTypes.DataTypeStore} options.dataTypeStore
- *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
- *        object when interacting on a "value" `Variation`.
+ * @param {wikibase.entityChangers.ClaimsChanger} options.claimsChanger
+ * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
 /**
  * @event afterstartediting
  * Triggered when edit mode has been started for one of the `statementview` widgets managed by the
@@ -84,13 +66,8 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			$listview: '.wikibase-statementlistview-listview'
 		},
 		value: null,
-		claimGuidGenerator: null,
-		entityIdHtmlFormatter: null,
-		entityIdPlainFormatter: null,
-		entityStore: null,
-		valueViewBuilder: null,
-		entityChangersFactory: null,
-		dataTypeStore: null
+		claimsChanger: null,
+		listItemAdapter: null
 	},
 
 	/**
@@ -100,38 +77,20 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	_listview: null,
 
 	/**
-	 * @type {wikibase.entityChangers.ClaimsChanger}
-	 * @private
-	 */
-	_claimsChanger: null,
-
-	/**
-	 * @type {wikibase.entityChangers.ReferencesChanger}
-	 * @private
-	 */
-	_referencesChanger: null,
-
-	/**
 	 * @inheritdoc
 	 * @protected
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.claimGuidGenerator
-			|| !this.options.entityStore
-			|| !this.options.valueViewBuilder
-			|| !this.options.entityChangersFactory
-			|| !this.options.dataTypeStore
+		if ( !this.options.claimsChanger
+			|| !this.options.listItemAdapter
 			|| !( this.options.value instanceof wb.datamodel.StatementList )
 		) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
 		PARENT.prototype._create.call( this );
-
-		this._claimsChanger = this.options.entityChangersFactory.getClaimsChanger();
-		this._referencesChanger = this.options.entityChangersFactory.getReferencesChanger();
 
 		this._createListView();
 
@@ -178,46 +137,8 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @private
 	 */
 	_createListView: function() {
-		var self = this,
-			propertyId;
-
-		if ( $.expr[':']['wikibase-statementgroupview'] ) {
-			var $statementgroupview = this.element.closest( ':wikibase-statementgroupview' ),
-				statementgroupview = $statementgroupview.data( 'statementgroupview' ),
-				statementGroup = statementgroupview && statementgroupview.option( 'value' );
-			propertyId = statementGroup && statementGroup.getKey();
-		}
-
-		this.$listview
-		.listview( {
-			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-				listItemWidget: $.wikibase.statementview,
-				newItemOptionsFn: function( value ) {
-					return {
-						value: value || null,
-						predefined: {
-							mainSnak: {
-								property: value
-									? value.getClaim().getMainSnak().getPropertyId()
-									: propertyId
-							}
-						},
-						locked: {
-							mainSnak: {
-								property: !!( value || propertyId )
-							}
-						},
-						dataTypeStore: self.options.dataTypeStore,
-						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
-						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
-						entityStore: self.options.entityStore,
-						valueViewBuilder: self.options.valueViewBuilder,
-						claimsChanger: self._claimsChanger,
-						referencesChanger: self._referencesChanger,
-						guidGenerator: self.options.claimGuidGenerator
-					};
-				}
-			} ),
+		this.$listview.listview( {
+			listItemAdapter: this.options.listItemAdapter,
 			value: this.options.value.toArray()
 		} );
 
@@ -303,7 +224,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 		statementview.disable();
 
-		this._claimsChanger.removeStatement( statementview.value() )
+		this.options.claimsChanger.removeStatement( statementview.value() )
 		.done( function() {
 			self._listview.removeItem( statementview.element );
 
