@@ -107,7 +107,7 @@
 			entityIdHtmlFormatter = {},
 			viewFactory = new ViewFactory( null, null, null, entityIdHtmlFormatter ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
-			value = {};
+			value = new wb.datamodel.StatementGroup( 'P1' );
 
 		viewFactory.getListItemAdapterForStatementGroupView( entityId );
 
@@ -136,13 +136,41 @@
 	} );
 
 	QUnit.test( 'getStatementListView passes correct options to views', function( assert ) {
+		var value = new wb.datamodel.StatementList(),
+			entityId = 'entityId',
+			claimsChanger = {},
+			entityChangersFactory = {
+				getClaimsChanger: function() { return claimsChanger; }
+			},
+			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
+			$dom = $( '<div/>' );
+
+		$dom.statementlistview = sinon.stub( $.wikibase, 'statementlistview' );
+
+		viewFactory.getStatementListView( entityId, null, value, $dom );
+
+		sinon.assert.calledWith(
+			$.wikibase.statementlistview,
+			sinon.match( {
+				value: value,
+				claimsChanger: claimsChanger,
+				listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
+			} )
+		);
+
+		$.wikibase.statementlistview.restore();
+	} );
+
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to ListItemAdapter', function( assert ) {
 		var contentLanguages = {},
 			entityId = 'Q1',
-			value = new wb.datamodel.StatementList(),
+			value = null,
 			dataTypeStore = {},
+			claimsChanger = {},
+			referencesChanger = {},
 			entityChangersFactory = {
-				getClaimsChanger: function() {},
-				getReferencesChanger: function() {}
+				getClaimsChanger: function() { return claimsChanger; },
+				getReferencesChanger: function() { return referencesChanger; }
 			},
 			entityIdHtmlFormatter = {},
 			entityIdPlainFormatter = {},
@@ -165,26 +193,49 @@
 				parserStore,
 				userLanguages
 			),
-			$dom = $( '<div/>' );
+			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
-		$dom.statementlistview = sinon.spy( $.wikibase, 'statementlistview' );
 		sinon.spy( wb, 'ValueViewBuilder' );
 
-		viewFactory.getStatementListView( entityId, value, $dom );
+		viewFactory.getListItemAdapterForStatementView( entityId, null );
 
 		sinon.assert.calledWith(
-			$.wikibase.statementlistview,
+			ListItemAdapter,
 			sinon.match( {
-				value: value,
-				claimGuidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator ),
-				dataTypeStore: dataTypeStore,
-				entityStore: entityStore,
-				entityIdHtmlFormatter: entityIdHtmlFormatter,
-				entityIdPlainFormatter: entityIdPlainFormatter,
-				valueViewBuilder: wb.ValueViewBuilder.returnValues[0],
-				entityChangersFactory: entityChangersFactory
+				listItemWidget: $.wikibase.statementview,
+				newItemOptionsFn: sinon.match.func
 			} )
 		);
+
+		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+
+		assert.deepEqual(
+			result,
+			{
+				value: value,
+				predefined: {
+					mainSnak: {
+						property: undefined
+					}
+				},
+				locked: {
+					mainSnak: {
+						property: false
+					}
+				},
+
+				claimsChanger: claimsChanger,
+				dataTypeStore: dataTypeStore,
+				entityIdHtmlFormatter: entityIdHtmlFormatter,
+				entityIdPlainFormatter: entityIdPlainFormatter,
+				entityStore: entityStore,
+				guidGenerator: result.guidGenerator, // Hack
+				referencesChanger: referencesChanger,
+				valueViewBuilder: wb.ValueViewBuilder.returnValues[0]
+			}
+		);
+
+		assert.ok( result.guidGenerator instanceof wb.utilities.ClaimGuidGenerator );
 
 		sinon.assert.calledWith( wb.ValueViewBuilder,
 			expertStore,
@@ -196,7 +247,55 @@
 		);
 
 		wb.ValueViewBuilder.restore();
-		$.wikibase.statementlistview.restore();
+		$.wikibase.listview.ListItemAdapter.restore();
+	} );
+
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for pre-set property id', function( assert ) {
+		var entityId = 'Q1',
+			propertyId = 'propertyId',
+			value = null,
+			entityChangersFactory = {
+				getClaimsChanger: function() { return {}; },
+				getReferencesChanger: function() { return {}; }
+			},
+			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
+			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+
+		sinon.spy( wb, 'ValueViewBuilder' );
+
+		viewFactory.getListItemAdapterForStatementView( entityId, propertyId );
+
+		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+
+		assert.equal( result.predefined.mainSnak.property, propertyId );
+		assert.equal( result.locked.mainSnak.property, true );
+
+		wb.ValueViewBuilder.restore();
+		$.wikibase.listview.ListItemAdapter.restore();
+	} );
+
+	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', function( assert ) {
+		var entityId = new wb.datamodel.EntityId( 'type', 1 ),
+			propertyId = 'P1',
+			value = new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( propertyId ) ) ),
+			entityChangersFactory = {
+				getClaimsChanger: function() { return {}; },
+				getReferencesChanger: function() { return {}; }
+			},
+			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
+			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+
+		sinon.spy( wb, 'ValueViewBuilder' );
+
+		viewFactory.getListItemAdapterForStatementView( entityId, null );
+
+		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+
+		assert.equal( result.predefined.mainSnak.property, propertyId );
+		assert.equal( result.locked.mainSnak.property, true );
+
+		wb.ValueViewBuilder.restore();
+		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
 	QUnit.test( 'getEntityTermsView passes correct options to views', function( assert ) {
