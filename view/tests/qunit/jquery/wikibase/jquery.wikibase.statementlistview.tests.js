@@ -5,6 +5,20 @@
 ( function( $, wb, QUnit ) {
 'use strict';
 
+var statementviewListItemAdapter = wb.tests.getMockListItemAdapter(
+	'statementview',
+	function() {
+		var _value = this.options.value;
+		this.startEditing = function() {};
+		this.value = function( newValue ) {
+			if ( arguments.length ) {
+				_value = newValue;
+			}
+			return _value;
+		};
+	}
+);
+
 /**
  * @param {Object} [options={}]
  * @param {jQuery} [$node]
@@ -12,27 +26,8 @@
  */
 var createStatementlistview = function( options, $node ) {
 	options = $.extend( {
-		claimGuidGenerator: 'I am a ClaimGuidGenerator',
-		entityIdPlainFormatter: {
-			format: function ( entityId ) {
-				return $.Deferred().resolve( entityId ).promise();
-			}
-		},
-		entityStore: {
-			get: function () {
-				return $.Deferred().resolve().promise();
-			}
-		},
-		valueViewBuilder: 'I am a ValueViewBuilder',
-		entityChangersFactory: {
-			getClaimsChanger: function() {
-				return 'I am a ClaimsChanger';
-			},
-			getReferencesChanger: function() {
-				return 'I am a ReferencesChanger';
-			}
-		},
-		dataTypeStore: 'I am a DataTypeStore',
+		claimsChanger: 'I am a ClaimsChanger',
+		listItemAdapter: statementviewListItemAdapter,
 		value: new wb.datamodel.StatementList()
 	}, options || {} );
 
