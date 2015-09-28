@@ -1,29 +1,11 @@
 /**
  * @licence GNU GPL v2+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-
 ( function( $, wb, QUnit ) {
 'use strict';
 
-function simpleWidget( name, fn ) {
-	var widget = function( options, element ) {
-		$.Widget.apply( this, arguments );
-		this._createWidget( options, element );
-		fn.apply( this );
-	};
-
-	widget.prototype = new $.Widget();
-
-	widget.prototype.widgetFullName = name;
-	widget.prototype.widgetName = name;
-	widget.prototype.widgetEventPrefix = name;
-	widget.prototype.value = function() {};
-
-	return widget;
-}
-
-var Statementgroupview = simpleWidget(
+var statementgroupviewListItemAdapter = wb.tests.getMockListItemAdapter(
 	'statementgroupview',
 	function() {
 		this.enterNewItem = function() {};
@@ -37,10 +19,7 @@ var Statementgroupview = simpleWidget(
  */
 var createStatementgrouplistview = function( options, $node ) {
 	options = $.extend( {
-		listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-			listItemWidget: Statementgroupview,
-			newItemOptionsFn: function() { return {}; }
-		} ),
+		listItemAdapter: statementgroupviewListItemAdapter,
 		value: new wb.datamodel.StatementGroupSet()
 	}, options || {} );
 

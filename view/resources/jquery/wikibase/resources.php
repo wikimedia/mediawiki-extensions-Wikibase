@@ -93,9 +93,7 @@ return call_user_func( function() {
 				'jquery.ui.TemplatedWidget',
 				'jquery.ui.widget',
 				'jquery.wikibase.listview',
-				'jquery.wikibase.statementview',
 				'wikibase.datamodel.StatementList',
-				'wikibase.utilities.ClaimGuidGenerator',
 			),
 		),
 
