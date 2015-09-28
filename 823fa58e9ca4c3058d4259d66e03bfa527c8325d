@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_d43dd78b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-09-28T12:17:58Z",
+      "side": 1,
+      "message": "Should \"Site:\" and \"Item id\" be a localised string per https://www.mediawiki.org/wiki/Localisation#Messages_quoting_each_other ?\n\nThe same could be true for key wikibase-itembytitle-summary.",
+      "revId": "823fa58e9ca4c3058d4259d66e03bfa527c8325d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
