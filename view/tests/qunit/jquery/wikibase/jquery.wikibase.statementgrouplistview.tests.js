@@ -83,66 +83,6 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'value()', function( assert ) {
-	var statementGroupSet1 = new wb.datamodel.StatementGroupSet( [
-			new wb.datamodel.StatementGroup( 'P1',
-				new wb.datamodel.StatementList( [new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-				)] )
-			)
-		] ),
-		statementGroupSet2 = new wb.datamodel.StatementGroupSet( [
-			new wb.datamodel.StatementGroup( 'P2',
-				new wb.datamodel.StatementList( [new wb.datamodel.Statement(
-					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
-				)] )
-			)
-		] ),
-		$statementgrouplistview = createStatementgrouplistview( {
-			value: statementGroupSet1
-		} ),
-		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
-
-	assert.ok(
-		statementgrouplistview.value().equals( statementGroupSet1 ),
-		'Retrieved value.'
-	);
-
-	statementgrouplistview.value( statementGroupSet2 );
-
-	assert.ok(
-		statementgrouplistview.value().equals( statementGroupSet2 ),
-		'Retrieved value after setting a new value.'
-	);
-
-	var statementgrouplistviewListview = statementgrouplistview.listview,
-		statementgrouplistviewListviewLia = statementgrouplistviewListview.listItemAdapter(),
-		$statementgroupview = statementgrouplistviewListview.items().first(),
-		statementgroupview = statementgrouplistviewListviewLia.liInstance( $statementgroupview ),
-		statementGroup = new wb.datamodel.StatementGroup( 'P3',
-			new wb.datamodel.StatementList( [new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
-			)] )
-		);
-
-	statementgroupview.value = function() {
-		return statementGroup;
-	};
-
-	assert.ok(
-		statementgrouplistview.value().equals(
-			new wb.datamodel.StatementGroupSet( [statementGroup] )
-		),
-		'Retrieved current value after setting a new value on the statementview encapsulated by '
-			+ 'the statementlistview.'
-	);
-
-	assert.ok(
-		statementgrouplistview.option( 'value' ).equals( statementGroupSet2 ),
-		'Retrieved value still persisting via option().'
-	);
-} );
-
 QUnit.test( 'enterNewItem', function( assert ) {
 	var $statementgrouplistview = createStatementgrouplistview(),
 		statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
