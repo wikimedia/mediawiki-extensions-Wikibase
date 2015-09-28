@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_f921ec9a",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-28T09:44:55Z",
+      "side": 1,
+      "message": "Hm... how can this possibly happen? Can you please comment on this? In case it shouldn\u0027t happen, it should at least warn.",
+      "revId": "9a41cf215c5fc0a645911ed72c938bf620ef6351",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_f9aecce3",
+        "filename": "view/tests/qunit/wikibase/entityIdFormatter/SimpleEntityIdHtmlFormatter.tests.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-28T09:44:55Z",
+      "side": 1,
+      "message": "Might be worth splitting this up into one function for each entityStoreType?",
+      "revId": "9a41cf215c5fc0a645911ed72c938bf620ef6351",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_59bda015",
+        "filename": "view/tests/qunit/wikibase/entityIdFormatter/SimpleEntityIdPlainFormatter.tests.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-28T09:44:55Z",
+      "side": 1,
+      "message": "Might be worth splitting this up into one function for each entityStoreType?",
+      "revId": "9a41cf215c5fc0a645911ed72c938bf620ef6351",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
