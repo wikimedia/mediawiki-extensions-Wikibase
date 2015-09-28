@@ -491,6 +491,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 
 	public function provideHandleChange() {
 		$changes = TestChanges::getChanges();
+		$userEmmy2 = Title::newFromText( 'User:Emmy2' )->getFullText();
 
 		$empty = array(
 			'purgeParserCache' => array(),
@@ -507,10 +508,10 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		);
 
 		$userEmmy2PurgeParser = array(
-			'purgeParserCache' => array( 'User:Emmy2' => true ),
+			'purgeParserCache' => array( $userEmmy2 => true ),
 			'scheduleRefreshLinks' => array(),
-			'purgeWebCache' => array( 'User:Emmy2' => true ),
-			'injectRCRecord' => array( 'User:Emmy2' => true ),
+			'purgeWebCache' => array( $userEmmy2 => true ),
+			'injectRCRecord' => array( $userEmmy2 => true ),
 		);
 
 		$emmyUpdateLinks = array(
