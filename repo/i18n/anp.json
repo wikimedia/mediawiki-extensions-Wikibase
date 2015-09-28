@@ -1,8 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Samyo"
+			"Samyo",
+			"Angpradesh"
 		]
 	},
-	"wikibase-edit": "संपादन"
+	"wikibase-edit": "संपादन",
+	"wikibase-add": "जोड़ऽ",
+	"wikibase-statements": "कथन",
+	"wikibase-sitelinks-special": "अन्य वेबसाइट",
+	"wikibase-aliases-empty": "कोय उर्फ परिभाषित नै",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|स्रोत}}"
 }
