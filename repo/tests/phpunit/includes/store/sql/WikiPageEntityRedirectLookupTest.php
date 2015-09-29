@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use LoadBalancer;
 use MediaWikiTestCase;
 use Title;
+use WikiPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -40,6 +41,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 
 		if ( $this->itemId === null ) {
 			$this->setUpEntities();
+			$this->setUpNonEntityRedirect();
 		}
 	}
 
@@ -63,6 +65,22 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 
 		$this->itemId = $item->getId();
 		$this->redirectItemIds = array( $redirectItem1->getId(), $redirectItem2->getId() );
+	}
+
+	/**
+	 * Create a redirect from a non-Entity NS to the entity created, to make sure this doesn't
+	 * interfere with WikiPageEntityRedirectLookup (especially getRedirectIds).
+	 */
+	private function setUpNonEntityRedirect() {
+		global $wgUser;
+
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$title = $entityTitleLookup->getTitleForId( $this->itemId );
+
+		$wikiText = '#REDIRECT [[' . $title->getFullText() . ']]';
+
+		$page = WikiPage::factory( Title::newFromText( 'Help:WikiPageEntityMetaDataLookupTest' ) );
+		$page->doEdit( $wikiText, 'test', 0, false, $wgUser );
 	}
 
 	public function testGetRedirectForEntityId() {
