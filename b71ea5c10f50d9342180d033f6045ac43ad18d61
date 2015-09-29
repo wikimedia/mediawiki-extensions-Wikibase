@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_20816b92",
+        "filename": "repo/includes/Parsers/TimeParserFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-29T08:54:45Z",
+      "side": 1,
+      "message": "+2 for this. I think this is the correct position: absolutely *must* be before the PHP parser, but should be after the MwTimeIsoParser.",
+      "revId": "b71ea5c10f50d9342180d033f6045ac43ad18d61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_0086afac",
+        "filename": "repo/tests/phpunit/includes/Parsers/TimeParserFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-29T08:54:45Z",
+      "side": 1,
+      "message": "What\u0027s the reason for this change?",
+      "revId": "b71ea5c10f50d9342180d033f6045ac43ad18d61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_20588b58",
+        "filename": "repo/tests/phpunit/includes/Parsers/TimeParserFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-29T08:54:45Z",
+      "side": 1,
+      "message": "The new YearMonthDayTimeParser can only recognize numbers, but no month names. We could teach it to also accept month names.\n\nFor this patch I suggest to change the test to \u002729.02.1500\u0027.\n\nAnd please move this line out of the PhpDateTimeParser section.",
+      "revId": "b71ea5c10f50d9342180d033f6045ac43ad18d61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
