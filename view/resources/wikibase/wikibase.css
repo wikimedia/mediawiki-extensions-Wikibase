@@ -490,8 +490,8 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	clear: both;
 }
 
-/* References are initially hidden if JS is enabled */
-.client-js .wikibase-statementview-references {
+/* Some UI elements are initially hidden if JS is enabled */
+.client-js .wikibase-initially-collapsed {
 	display: none;
 }
 
