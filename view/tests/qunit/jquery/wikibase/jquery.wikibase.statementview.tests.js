@@ -20,20 +20,6 @@ QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
 	}
 } ) );
 
-var entityStore = {
-	get: function() {
-		return $.Deferred().resolve(
-			new wb.datamodel.Property(
-				'P1',
-				'string',
-				new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( [
-					new wb.datamodel.Term( 'en', 'P1' )
-				] ) )
-			)
-		);
-	}
-};
-
 /**
  * @param {Object} [options]
  * @param {jQuery} [$node]
@@ -41,22 +27,54 @@ var entityStore = {
  */
 var createStatementview = function( options, $node ) {
 	options = $.extend( {
-		entityStore: entityStore,
-		entityIdHtmlFormatter: {
-			format: function( entityId ) {
-				return $.Deferred().resolve( entityId ).promise();
-			}
+		buildReferenceListItemAdapter: function() {
+			return wb.tests.getMockListItemAdapter(
+				'mytestreferenceview',
+				function() {
+					this.value = function() {
+						return this.options.value;
+					};
+				}
+			);
 		},
+		buildSnakView: function( options, value, $dom ) {
+			var _value = value;
+			return {
+				destroy: function() {},
+				isInitialValue: function() {
+					return true;
+				},
+				isValid: function() {
+					return true;
+				},
+				option: function() {},
+				snak: function() {
+					return _value;
+				},
+				startEditing: function() {
+					$dom.trigger( 'snakviewafterstartediting' );
+				},
+				stopEditing: function() {}
+			};
+		},
+		claimsChanger: 'I am a ClaimsChanger',
 		entityIdPlainFormatter: {
 			format: function( entityId ) {
 				return $.Deferred().resolve( entityId ).promise();
 			}
 		},
-		valueViewBuilder: 'I am a valueview builder',
-		claimsChanger: 'I am a ClaimsChanger',
-		referencesChanger: 'I am a ReferencesChanger',
-		dataTypeStore: 'I am a DataTypeStore',
-		guidGenerator: 'I am a ClaimGuidGenerator'
+		guidGenerator: 'I am a ClaimGuidGenerator',
+		locked: 'I am a',
+		predefined: 'I am a',
+		qualifiersListItemAdapter: wb.tests.getMockListItemAdapter(
+			'mytestqualifiersview',
+			function() {
+				this.value = function() {
+					return this.options.value;
+				};
+			}
+		),
+		referencesChanger: 'I am a ReferencesChanger'
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -222,8 +240,12 @@ QUnit.test( 'performs correct claimsChanger call', function( assert ) {
 		assert.ok( statementview.isInEditMode(), 'should be in edit mode after starting editing' );
 
 		// Change main snak
-		statementview.$mainSnak.find( ':wikibase-entityselector' ).data( 'wikibase-entityselector' )._select( { id: 'P1' } );
-		statementview.$mainSnak.find( ':wikibase-snaktypeselector' ).data( 'snaktypeselector' ).snakType( 'novalue' );
+		statementview._mainSnakSnakView.snak = function() {
+			return snak;
+		};
+		statementview._mainSnakSnakView.isInitialValue = function() {
+			return false;
+		};
 
 		QUnit.stop();
 		return statementview.stopEditing( false );

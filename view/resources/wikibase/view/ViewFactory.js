@@ -301,17 +301,93 @@
 						}
 					},
 
+					buildReferenceListItemAdapter: $.proxy( this.getListItemAdapterForReferenceView, this ),
+					buildSnakView: $.proxy(
+						this.getSnakView,
+						this,
+						':' + $.wikibase.statementview.prototype.widgetFullName.toLowerCase()
+					),
 					claimsChanger: this._entityChangersFactory.getClaimsChanger(),
+					entityIdPlainFormatter: this._entityIdPlainFormatter,
+					guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
+					qualifiersListItemAdapter: this.getListItemAdapterForSnakListView(),
+					referencesChanger: this._entityChangersFactory.getReferencesChanger()
+				};
+			}, this )
+		} );
+	};
+
+	/**
+	 * Construct a `ListItemAdapter` for `referenceview`s
+	 *
+	 * @param {string} statementGuid
+	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
+	 */
+	SELF.prototype.getListItemAdapterForReferenceView = function( statementGuid ) {
+		return new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: $.wikibase.referenceview,
+			newItemOptionsFn: $.proxy( function( value ) {
+				return {
+					value: value || null,
+					statementGuid: statementGuid,
 					dataTypeStore: this._dataTypeStore,
 					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
 					entityIdPlainFormatter: this._entityIdPlainFormatter,
 					entityStore: this._entityStore,
-					guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
 					referencesChanger: this._entityChangersFactory.getReferencesChanger(),
 					valueViewBuilder: this._getValueViewBuilder()
 				};
 			}, this )
 		} );
+	};
+
+	/**
+	 * Construct a `ListItemAdapter` for `snaklistview`s
+	 *
+	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
+	 */
+	SELF.prototype.getListItemAdapterForSnakListView = function() {
+		return new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: $.wikibase.snaklistview,
+			newItemOptionsFn: $.proxy( function( value ) {
+				return {
+					value: value || undefined,
+					singleProperty: true,
+					dataTypeStore: this._dataTypeStore,
+					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+					entityIdPlainFormatter: this._entityIdPlainFormatter,
+					entityStore: this._entityStore,
+					valueViewBuilder: this._getValueViewBuilder()
+				};
+			}, this )
+		} );
+	};
+
+	/**
+	 * Construct a suitable view for the given snak on the given DOM element
+	 *
+	 * @param {string|null} encapsulatedBy A jQuery selector for getting the encapsulating view
+	 * @param {Object} options An object with keys `locked` and `autoStartEditing`
+	 * @param {wikibase.datamodel.Snak|null} snak
+	 * @param {jQuery} $dom
+	 * @return {jQuery.wikibase.snakview} The constructed snakview
+	 */
+	SELF.prototype.getSnakView = function( encapsulatedBy, options, snak, $dom ) {
+		return this._getView(
+			'snakview',
+			$dom,
+			{
+				value: snak || undefined,
+				locked: options.locked,
+				autoStartEditing: options.autoStartEditing,
+				dataTypeStore: this._dataTypeStore,
+				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+				entityIdPlainFormatter: this._entityIdPlainFormatter,
+				entityStore: this._entityStore,
+				valueViewBuilder: this._getValueViewBuilder(),
+				encapsulatedBy: encapsulatedBy
+			}
+		);
 	};
 
 	/**
