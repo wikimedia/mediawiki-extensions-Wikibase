@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_b8110bfe",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-29T16:27:39Z",
+      "side": 1,
+      "message": "When $changes  is empty. Shouldn\u0027t happen, but there is no guaranteed.",
+      "parentUuid": "2ecb373e_f65ec916",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_76aad9d2",
         "filename": "client/includes/Changes/ChangeHandler.php",
         "patchSetId": 20
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-29T10:59:37Z",
       "side": 1,
       "message": "Comparing with empty string should really use \u003d\u003d\u003d",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_b8f02bc5",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-29T16:27:39Z",
+      "side": 1,
+      "message": "will do",
+      "parentUuid": "2ecb373e_76aad9d2",
       "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_58bfc7cd",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-29T16:27:39Z",
+      "side": 1,
+      "message": "will do",
+      "parentUuid": "2ecb373e_36b45133",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_b687e165",
         "filename": "client/includes/Changes/ChangeHandler.php",
         "patchSetId": 20
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_78dba354",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-29T16:27:39Z",
+      "side": 1,
+      "message": "Maybe, possibly, not sure. This isn\u0027t horrible. Would pointlessly swamp the logs in production. I\u0027ll add a dev warning.",
+      "parentUuid": "2ecb373e_b687e165",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_5696bd98",
         "filename": "client/includes/Changes/ChangeHandler.php",
         "patchSetId": 20
@@ -81,6 +153,24 @@
       "writtenOn": "2015-09-29T10:59:37Z",
       "side": 1,
       "message": "Above you set $editComment to the return value of self::msg which returns a Message object. Please fix that.",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_d8ebb7d9",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-29T16:27:39Z",
+      "side": 1,
+      "message": "Ooops! Good catch.",
+      "parentUuid": "2ecb373e_5696bd98",
       "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
