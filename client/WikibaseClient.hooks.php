@@ -297,13 +297,8 @@ final class ClientHooks {
 		}
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
-		return $siteLinkLookup->getItemIdForSiteLink(
-			new SiteLink(
-				$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
-				$title->getFullText()
-			)
-		);
+		$entityIdLookup = $wikibaseClient->getStore()->getEntityIdLookup();
+		return $entityIdLookup->getEntityIdForTitle( $title );
 	}
 
 	/**
