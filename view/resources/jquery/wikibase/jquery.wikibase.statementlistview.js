@@ -94,6 +94,12 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	},
 
 	/**
+	 * @type {jQuery.wikibase.listview}
+	 * @private
+	 */
+	_listview: null,
+
+	/**
 	 * @type {wikibase.entityChangers.ClaimsChanger}
 	 * @private
 	 */
@@ -131,7 +137,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 		this._createListView();
 
 		var self = this,
-			lia = this.listview().listItemAdapter(),
+			lia = this._listview.listItemAdapter(),
 			afterStartEditingEvent
 				= lia.prefixedEvent( 'afterstartediting.' + this.widgetName ),
 			afterStopEditingEvent = lia.prefixedEvent( 'afterstopediting.' + this.widgetName ),
@@ -163,7 +169,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @protected
 	 */
 	destroy: function() {
-		this.listview().destroy();
+		this._listview.destroy();
 		PARENT.prototype.destroy.call( this );
 	},
 
@@ -215,16 +221,8 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			} ),
 			value: this.options.value.toArray()
 		} );
-	},
 
-	/**
-	 * Returns a reference to the `listview` widget used to manage the `statementview`s.
-	 * @since 0.5
-	 *
-	 * @return {jQuery.wikibase.listview}
-	 */
-	listview: function() {
-		return this.$listview.data( 'listview' );
+		this._listview = this.$listview.data( 'listview' );
 	},
 
 	/**
@@ -236,12 +234,11 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 */
 	value: function( statementList ) {
 		if( statementList === undefined ) {
-			var listview = this.$listview.data( 'listview' ),
-				lia = listview.listItemAdapter();
+			var lia = this._listview.listItemAdapter();
 
 			statementList = new wb.datamodel.StatementList();
 
-			listview.items().each( function() {
+			this._listview.items().each( function() {
 				var statement = lia.liInstance( $( this ) ).value();
 				if( statement ) {
 					statementList.addItem( statement );
@@ -260,7 +257,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isEmpty: function() {
-		return !this.listview().items().length;
+		return !this._listview.items().length;
 	},
 
 	/**
@@ -273,10 +270,10 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 */
 	enterNewItem: function() {
 		var self = this,
-			lia = this.listview().listItemAdapter(),
+			lia = this._listview.listItemAdapter(),
 			afterStopEditingEvent = lia.prefixedEvent( 'afterstopediting.' + self.widgetName );
 
-		return this.listview().enterNewItem().done( function( $statementview ) {
+		return this._listview.enterNewItem().done( function( $statementview ) {
 			var statementview = lia.liInstance( $statementview );
 
 			$statementview
@@ -284,10 +281,10 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			.one( afterStopEditingEvent, function( event, dropValue ) {
 				var statement = statementview.value();
 
-				self.listview().removeItem( $statementview );
+				self._listview.removeItem( $statementview );
 
 				if( !dropValue && statement ) {
-					self.listview().addItem( statement );
+					self._listview.addItem( statement );
 				}
 
 				self._trigger( 'afterstopediting', null, [dropValue] );
@@ -309,7 +306,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 		this._claimsChanger.removeStatement( statementview.value() )
 		.done( function() {
-			self.listview().removeItem( statementview.element );
+			self._listview.removeItem( statementview.element );
 
 			self._trigger( 'afterremove' );
 		} ).fail( function( error ) {
@@ -327,13 +324,13 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			if( !( value instanceof wb.datamodel.StatementList ) ) {
 				throw new Error( 'value needs to be a wb.datamodel.StatementList instance' );
 			}
-			this.$listview.data( 'listview' ).value( value.toArray() );
+			this._listview.value( value.toArray() );
 		}
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if( key === 'disabled' ) {
-			this.listview().option( key, value );
+			this._listview.option( key, value );
 		}
 
 		return response;
@@ -343,11 +340,10 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @inheritdoc
 	 */
 	focus: function() {
-		var listview = this.listview(),
-			$items = listview.items();
+		var $items = this._listview.items();
 
 		if( $items.length ) {
-			listview.listItemAdapter().liInstance( $items.first() ).focus();
+			this._listview.listItemAdapter().liInstance( $items.first() ).focus();
 		} else {
 			this.element.focus();
 		}
