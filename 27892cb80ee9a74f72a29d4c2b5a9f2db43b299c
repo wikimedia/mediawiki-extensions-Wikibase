@@ -16,6 +16,24 @@
       "revId": "27892cb80ee9a74f72a29d4c2b5a9f2db43b299c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_605e934a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.propertyview.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-09-29T08:54:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_c068a7f4",
+      "revId": "27892cb80ee9a74f72a29d4c2b5a9f2db43b299c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
