@@ -23,7 +23,6 @@ use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\DataValue\ValuesFinder;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -63,11 +62,11 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
-use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
+use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
@@ -1340,11 +1339,11 @@ class WikibaseRepo {
 			$entityViewFactory,
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
-			new ValuesFinder( $this->getPropertyDataTypeLookup() ),
 			$this->getLanguageFallbackChainFactory(),
-			new ReferencedEntitiesFinder( $this->getLocalEntityUriParser() ),
 			$templateFactory,
-			$entityDataFormatProvider
+			$entityDataFormatProvider,
+			$this->getPropertyDataTypeLookup(),
+			$this->getLocalEntityUriParser()
 		);
 	}
 
