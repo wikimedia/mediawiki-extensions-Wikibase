@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use BagOStuff;
 use MediaWikiSite;
 use Site;
 use SiteList;
@@ -32,12 +33,19 @@ class SitesModuleWorker {
 	private $siteStore;
 
 	/**
+	 * @var BagOStuff
+	 */
+	private $cache;
+
+	/**
 	 * @param SettingsArray $settings
 	 * @param SiteStore $siteStore
+	 * @param BagOStuff $cache
 	 */
-	public function __construct( SettingsArray $settings, SiteStore $siteStore ) {
+	public function __construct( SettingsArray $settings, SiteStore $siteStore, BagOStuff $cache ) {
 		$this->settings = $settings;
 		$this->siteStore = $siteStore;
+		$this->cache = $cache;
 	}
 
 	/**
@@ -170,18 +178,37 @@ class SitesModuleWorker {
 	}
 
 	/**
+	 * @return string
+	 */
+	private function computeModifiedHash() {
+		$data = array(
+			$this->getSiteLinkGroups(),
+			$this->getSpecialSiteLinkGroups(),
+			$this->getSitesHash()
+		);
+
+		return sha1( json_encode( $data ) );
+	}
+
+	/**
+	 * This returns a hash which should change whenever either a relevant setting
+	 * or the list of sites changes. Because computing this list is quite heavy and
+	 * it barely changes, cache that hash for a short bit.
+	 *
 	 * @see ResourceLoaderModule::getModifiedHash
 	 *
 	 * @return string
 	 */
 	public function getModifiedHash() {
-		$data = array(
-				$this->getSiteLinkGroups(),
-				$this->getSpecialSiteLinkGroups(),
-				$this->getSitesHash()
-		);
+		$cacheKey = wfMemcKey( 'wikibase-sites-module-modified-hash' );
+		$hash = $this->cache->get( $cacheKey );
 
-		return sha1( json_encode( $data ) );
+		if ( $hash === false ) {
+			$hash = $this->computeModifiedHash();
+			$this->cache->set( $cacheKey, $hash, 10 * 60 );
+		}
+
+		return $hash;
 	}
 
 }
