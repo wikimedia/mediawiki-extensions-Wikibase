@@ -256,6 +256,14 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertEntityPerPage( true, $oneId );
 	}
 
+	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
+		$entityRedirectLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRedirectLookup();
+
+		$targetId = $entityRedirectLookup->getRedirectForEntityId( $entityId );
+
+		$this->assertEquals( $expected, $targetId );
+	}
+
 	public function unsupportedRedirectProvider() {
 		$p1 = new PropertyId( 'P1' );
 		$p2 = new PropertyId( 'P2' );
@@ -571,14 +579,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		}
 
 		return $pageId = (int)$row->epp_page_id;
-	}
-
-	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
-		$entityRedirectLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRedirectLookup();
-
-		$targetId = $entityRedirectLookup->getRedirectForEntityId( $entityId );
-
-		$this->assertEquals( $expected, $targetId );
 	}
 
 }
