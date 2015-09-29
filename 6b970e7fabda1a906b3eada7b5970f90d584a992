@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_f17a531e",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.statementgrouplistview.tests.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T14:27:50Z",
+      "side": 1,
+      "message": "Unused!",
+      "revId": "6b970e7fabda1a906b3eada7b5970f90d584a992",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
