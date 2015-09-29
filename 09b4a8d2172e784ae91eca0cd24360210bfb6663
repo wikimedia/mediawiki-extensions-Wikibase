@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_7895e3e5",
+        "filename": "client/includes/recentchanges/ExternalRecentChange.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T16:56:15Z",
+      "side": 1,
+      "message": "Doh, now I get it... you want to store $metadata in rc_params and not $attribs. That makes sense.",
+      "parentUuid": "2ecb373e_788163c7",
+      "revId": "09b4a8d2172e784ae91eca0cd24360210bfb6663",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_f853136d",
         "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
         "patchSetId": 21
