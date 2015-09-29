@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_f65ec916",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T10:59:37Z",
+      "side": 1,
+      "message": "How can we get here?",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_76aad9d2",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T10:59:37Z",
+      "side": 1,
+      "message": "Comparing with empty string should really use \u003d\u003d\u003d",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_36b45133",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T10:59:37Z",
+      "side": 1,
+      "message": "Comparing with empty string should really use \u003d\u003d\u003d",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_b687e165",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T10:59:37Z",
+      "side": 1,
+      "message": "If this shouldn\u0027t happen, it should probably log a warning?",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_5696bd98",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T10:59:37Z",
+      "side": 1,
+      "message": "Above you set $editComment to the return value of self::msg which returns a Message object. Please fix that.",
+      "revId": "013ab52b35e878c28f3d8c0f5fdcae7d9f267868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
