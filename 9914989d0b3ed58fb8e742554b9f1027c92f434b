@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_29bcefd4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T19:16:26Z",
+      "side": 1,
+      "message": "I think you need to negate this... you want to scrape site links if there are any.",
+      "revId": "9914989d0b3ed58fb8e742554b9f1027c92f434b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
