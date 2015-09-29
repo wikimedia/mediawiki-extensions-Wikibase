@@ -3,9 +3,14 @@
 namespace Wikibase;
 
 use ParserOptions;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\DataValue\ValuesFinder;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\PropertyDataTypeMatcher;
+use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
+use Wikibase\Repo\DataUpdates\ParserOutputDataUpdatesFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
@@ -39,16 +44,6 @@ class EntityParserOutputGeneratorFactory {
 	private $entityTitleLookup;
 
 	/**
-	 * @var ValuesFinder
-	 */
-	private $valuesFinder;
-
-	/**
-	 * @var ReferencedEntitiesFinder
-	 */
-	private $referencedEntitiesFinder;
-
-	/**
 	 * @var LanguageFallbackChainFactory
 	 */
 	private $languageFallbackChainFactory;
@@ -58,24 +53,34 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	private $entityDataFormatProvider;
 
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $externalEntityIdParser;
+
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
-		ValuesFinder $valuesFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		ReferencedEntitiesFinder $referencedEntitiesFinder,
 		TemplateFactory $templateFactory,
-		EntityDataFormatProvider $entityDataFormatProvider
+		EntityDataFormatProvider $entityDataFormatProvider,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityIdParser $externalEntityIdParser
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->valuesFinder = $valuesFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->externalEntityIdParser = $externalEntityIdParser;
 	}
 
 	/**
@@ -88,17 +93,26 @@ class EntityParserOutputGeneratorFactory {
 	public function getEntityParserOutputGenerator( ParserOptions $options ) {
 		$languageCode = $options->getUserLang();
 
+		$parserOutputDataUpdatesFactory = new ParserOutputDataUpdatesFactory(
+			new PropertyDataTypeMatcher( $this->propertyDataTypeLookup ),
+			$this->entityTitleLookup,
+			$this->externalEntityIdParser
+		);
+
+		$parserOutputDataUpdater = new EntityParserOutputDataUpdater(
+			$parserOutputDataUpdatesFactory->getDataUpdates()
+		);
+
 		return new EntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
-			$this->valuesFinder,
 			$this->entityInfoBuilderFactory,
 			$this->getLanguageFallbackChain( $languageCode ),
-			$languageCode,
-			$this->referencedEntitiesFinder,
 			$this->templateFactory,
-			$this->entityDataFormatProvider
+			$this->entityDataFormatProvider,
+			$parserOutputDataUpdater,
+			$languageCode
 		);
 	}
 
