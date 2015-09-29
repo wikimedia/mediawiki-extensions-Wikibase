@@ -6,11 +6,6 @@
 ( function( $, wb, QUnit ) {
 'use strict';
 
-var entityStore = new wb.store.EntityStore();
-entityStore.get = function () {
-	return $.Deferred().resolve().promise();
-};
-
 /**
  * @param {Object} [options={}]
  * @param {jQuery} [$node]
