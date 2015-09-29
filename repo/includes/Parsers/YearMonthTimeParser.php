@@ -16,6 +16,7 @@ use ValueParsers\ValueParser;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Thiemo Mättig
  *
  * @todo move me to DataValues-time
  * @todo match BCE dates in here
@@ -25,9 +26,9 @@ class YearMonthTimeParser extends StringValueParser {
 	const FORMAT_NAME = 'yearmonth';
 
 	/**
-	 * @var Language
+	 * @var int[]
 	 */
-	private $lang;
+	private $monthNameUnlocalizations;
 
 	/**
 	 * @var ValueParser
@@ -40,11 +41,32 @@ class YearMonthTimeParser extends StringValueParser {
 	public function __construct( ParserOptions $options = null ) {
 		parent::__construct( $options );
 
-		$this->lang = Language::factory( $this->getOption( ValueParser::OPT_LANG ) );
+		$languageCode = $this->getOption( ValueParser::OPT_LANG );
+		$this->monthNameUnlocalizations = $this->getMonthNameUnlocalizations( $languageCode );
 		$this->isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser( $this->options ),
 			$this->options
 		);
+	}
+
+	/**
+	 * @see TimeParserFactory::getMwMonthNameReplacements
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return int[]
+	 */
+	private function getMonthNameUnlocalizations( $languageCode ) {
+		$language = Language::factory( $languageCode );
+
+		$replacements = array();
+
+		for ( $i = 1; $i <= 12; $i++ ) {
+			$replacements[$language->getMonthName( $i )] = $i;
+			$replacements[$language->getMonthAbbreviation( $i )] = $i;
+		}
+
+		return $replacements;
 	}
 
 	/**
@@ -118,20 +140,13 @@ class YearMonthTimeParser extends StringValueParser {
 	 * Check for both the full name and abbreviations
 	 *
 	 * @param string|int $year
-	 * @param string|int $month
+	 * @param string $month
 	 *
 	 * @return TimeValue|bool
 	 */
 	private function parseYearMonth( $year, $month ) {
-		$names = $this->lang->getMonthNamesArray();
-		for ( $i = 1; $i <= 12; $i++ ) {
-			if ( strcasecmp( $names[$i], $month ) === 0 ) {
-				return $this->getTimeFromYearMonth( $year, $i );
-			}
-		}
-		$nameAbbrevs = $this->lang->getMonthAbbreviationsArray();
-		for ( $i = 1; $i <= 12; $i++ ) {
-			if ( strcasecmp( $nameAbbrevs[$i], $month ) === 0 ) {
+		foreach ( $this->monthNameUnlocalizations as $monthName => $i ) {
+			if ( strcasecmp( $monthName, $month ) === 0 ) {
 				return $this->getTimeFromYearMonth( $year, $i );
 			}
 		}
