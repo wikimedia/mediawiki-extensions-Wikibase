@@ -11,6 +11,7 @@ use ValueParsers\MonthNameUnlocalizer;
 use ValueParsers\ParserOptions;
 use ValueParsers\PhpDateTimeParser;
 use ValueParsers\ValueParser;
+use ValueParsers\YearMonthDayTimeParser;
 
 /**
  * @since 0.5
@@ -58,6 +59,7 @@ class TimeParserFactory {
 		$parsers[] = new YearMonthTimeParser( $this->options );
 		$parsers[] = $isoTimestampParser;
 		$parsers[] = new MwTimeIsoParser( $this->options );
+		$parsers[] = new YearMonthDayTimeParser( $eraParser );
 		$parsers[] = new PhpDateTimeParser(
 			$this->getMonthNameUnlocalizer(),
 			$eraParser,
