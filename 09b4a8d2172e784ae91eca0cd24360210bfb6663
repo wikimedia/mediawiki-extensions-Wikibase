@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_788163c7",
+        "filename": "client/includes/recentchanges/ExternalRecentChange.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T16:54:49Z",
+      "side": 1,
+      "message": "$attribs is being put into rc_params... I don\u0027t get your comment.",
+      "revId": "09b4a8d2172e784ae91eca0cd24360210bfb6663",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_f853136d",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeHandlerTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T16:54:49Z",
+      "side": 1,
+      "message": "This if is superfluous now",
+      "revId": "09b4a8d2172e784ae91eca0cd24360210bfb6663",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
