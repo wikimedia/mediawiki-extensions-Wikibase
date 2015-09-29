@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_5b6a667f",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-29T10:05:03Z",
+      "side": 1,
+      "message": "Apparently we don\u0027t have an isEmpty function here, so counting seems like a valid thing :S",
+      "revId": "9ae0eb2899c509c259f09762f51f0f64db98328d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
