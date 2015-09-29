@@ -7,10 +7,13 @@ use DerivativeContext;
 use Language;
 use RecentChange;
 use RequestContext;
+use Title;
 use User;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
+use Wikibase\Client\RecentChanges\ExternalRecentChange;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Wikibase\Client\RecentChanges\ChangeLineFormatter
@@ -23,7 +26,7 @@ use Wikibase\Client\RepoLinker;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ChangeLineFormatterTest extends \MediaWikiTestCase {
+class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 
 	protected $repoLinker;
 
@@ -56,8 +59,12 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 	public function testFormat( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$context = $this->getTestContext();
 
+		// Use the actual setting, because out handler for the FormatAutocomment hook will check
+		// the wiki id against this setting.
+		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
+
 		$changesList = ChangesList::newFromContext( $context );
-		$changeFactory = new ExternalChangeFactory( 'testrepo' );
+		$changeFactory = new ExternalChangeFactory( $repoWikiId, Language::factory( 'en' ) );
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
 
 		$formatter = new ChangeLineFormatter(
@@ -74,7 +81,7 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		);
 
 		foreach ( $expectedTags as $key => $tag ) {
-			$this->assertTag( $tag, $formattedLine, $key );
+			$this->assertTag( $tag, $formattedLine, $key . "\n\t" . $formattedLine );
 		}
 
 		foreach ( $patterns as $pattern ) {
@@ -92,27 +99,46 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 
 	public function formatProvider() {
 		return array(
-			array(
-				$this->getEditChangeTagMatchers(),
-				$this->getEditPatterns(),
-				$this->getEditRecentChange()
+			'edit-change' => array(
+				$this->getEditSiteLinkChangeTagMatchers(),
+				$this->getEditSiteLinkPatterns(),
+				$this->getEditSiteLinkRecentChange()
 			),
-			array(
+			'log-change' => array(
 				$this->getLogChangeTagMatchers(),
-				array(),
+				array(
+					'/Log Change Comment/',
+				),
 				$this->getLogRecentChange()
-			)
+			),
+			'comment-fallback' => array(
+				array(),
+				array(
+					'/\(Associated .*? item deleted\. Language links removed\.\)/'
+				),
+				$this->getEditSiteLinkRecentChange(
+					'',
+					array(
+						'message' => 'wikibase-comment-remove',
+					),
+					null
+				)
+			),
 		);
 	}
 
-	public function getEditPatterns() {
+	public function getEditSiteLinkPatterns() {
 		return array(
 			'/title=Q4&amp;curid=5&amp;action=history/',
-			'/title=Q4&amp;curid=5&amp;diff=92&amp;oldid=90/'
+			'/title=Q4&amp;curid=5&amp;diff=92&amp;oldid=90/',
+			'/<span class="comment">\('
+				. '‎<span dir="auto"><span class="autocomment">Changed claim: <\/span><\/span> '
+				. '<a .*?>Property:P213<\/a>: <a .*?>Q850<\/a>'
+				. '\)<\/span>/',
 		);
 	}
 
-	public function getEditChangeTagMatchers() {
+	public function getEditSiteLinkChangeTagMatchers() {
 		return array(
 			'edit-difflink' => array(
 				'tag' => 'a',
@@ -190,10 +216,7 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		);
 	}
 
-	protected function getEditRecentChange() {
-		$recentChange = new RecentChange();
-		$recentChange->counter = 2;
-
+	protected function getEditSiteLinkRecentChange( $comment = null, $legacyComment = null, $compositeLegacyComment = null ) {
 		$params = array(
 			'wikibase-repo-change' => array(
 				'id' => 4,
@@ -208,44 +231,23 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 				'page_id' => 5,
 				'rev_id' => 92,
 				'parent_id' => 90,
-				'comment' => array(
-					'message' => 'wikibase-comment-sitelink-add',
-					'sitelink' => array(
-						'newlink' => array( 'site' => 'dewiki', 'page' => 'Kanada' )
-					)
-				)
 			)
 		);
 
-		$attribs = array(
-			'rc_id' => 315,
-			'rc_timestamp' => '20130819111741',
-			'rc_user' => 0,
-			'rc_user_text' => 'Cat',
-			'rc_namespace' => 0,
-			'rc_title' => 'Canada',
-			'rc_comment' => '',
-			'rc_minor' => 1,
-			'rc_bot' => 0,
-			'rc_new' => 0,
-			'rc_cur_id' => 52,
-			'rc_this_oldid' => 114,
-			'rc_last_oldid' => 114,
-			'rc_type' => 5,
-			'rc_patrolled' => 1,
-			'rc_ip' => '',
-			'rc_old_len' => 2,
-			'rc_new_len' => 2,
-			'rc_deleted' => 0,
-			'rc_logid' => 0,
-			'rc_log_type' => null,
-			'rc_log_action' => '',
-			'rc_params' => serialize( $params )
-		);
+		if ( !is_string( $comment ) ) {
+			$comment = '/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]';
+		}
 
-		$recentChange->setAttribs( $attribs );
+		if ( $legacyComment ) {
+			$params['wikibase-repo-change']['comment'] = $legacyComment;
+		}
 
-		return $recentChange;
+		if ( $compositeLegacyComment ) {
+			$params['wikibase-repo-change']['composite-comment'] = $compositeLegacyComment;
+		}
+
+		$title = $this->makeTitle( NS_MAIN, 'Canada', 52, 114 );
+		return $this->makeRecentChange( $params, $title, $comment );
 	}
 
 	protected function getLogChangeTagMatchers() {
@@ -323,9 +325,6 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 	}
 
 	protected function getLogRecentChange() {
-		$recentChange = new RecentChange();
-		$recentChange->counter = 1;
-
 		$params = array(
 			'wikibase-repo-change' => array(
 				'id' => 20,
@@ -339,38 +338,59 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 				'page_id' => 0,
 				'rev_id' => 0,
 				'parent_id' => 0,
-				'comment' => array(
-					'message' => 'wikibase-comment-remove'
-				)
 			)
 		);
 
-		$attribs = array(
-			'rc_id' => 316,
-			'rc_timestamp' => '20130820151835',
-			'rc_user' => 0,
-			'rc_user_text' => 'Cat',
-			'rc_namespace' => 0,
-			'rc_title' => 'Canada',
-			'rc_comment' => '',
-			'rc_minor' => 1,
-			'rc_bot' => 0,
-			'rc_new' => 0,
-			'rc_cur_id' => 12,
-			'rc_this_oldid' => 53,
-			'rc_last_oldid' => 53,
-			'rc_type' => 5,
-			'rc_patrolled' => 1,
-			'rc_ip' => '',
-			'rc_old_len' => 5,
-			'rc_new_len' => 5,
-			'rc_deleted' => 0,
-			'rc_logid' => 0,
-			'rc_log_type' => null,
-			'rc_log_action' => '',
-			'rc_params' => serialize( $params )
-		);
+		$title = $this->makeTitle( NS_MAIN, 'Canada', 12, 53 );
+		return $this->makeRecentChange( $params, $title, 'Log Change Comment' );
+	}
 
+	/**
+	 * @param int $ns
+	 * @param string $text
+	 * @param int $pageId
+	 * @param int $currentRevision
+	 *
+	 * @return Title
+	 */
+	private function makeTitle( $ns, $text, $pageId, $currentRevision ) {
+		$title = $this->getMock( 'Title' );
+
+		$title->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( $ns ) );
+
+		$title->expects( $this->any() )
+			->method( 'getText' )
+			->will( $this->returnValue( $text ) );
+
+		$title->expects( $this->any() )
+			->method( 'getDBKey' )
+			->will( $this->returnValue( str_replace( ' ', '_', $text ) ) );
+
+		$title->expects( $this->any() )
+			->method( 'getArticleID' )
+			->will( $this->returnValue( $pageId ) );
+
+		$title->expects( $this->any() )
+			->method( 'getLatestRevID' )
+			->will( $this->returnValue( $currentRevision ) );
+
+		$title->expects( $this->any() )
+			->method( 'getLength' )
+			->will( $this->returnValue( 1234 ) );
+
+		return $title;
+	}
+
+	private function makeRecentChange( array $params, Title $title, $comment ) {
+		$recentChange = new RecentChange();
+		$recentChange->counter = 1;
+
+		$externalChange = ExternalRecentChange::newFromAttribs( $params, $title );
+		$attribs = $externalChange->getAttributes();
+
+		$attribs['rc_comment'] = $comment;
 		$recentChange->setAttribs( $attribs );
 
 		return $recentChange;
