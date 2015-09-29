@@ -24,7 +24,7 @@
 		 * @param {string} entityId
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
-		 *         - {wikibase.store.FetchedContent|undefined|null}
+		 *         - {wikibase.datamodel.Entity|undefined|null}
 		 *         No rejected parameters.
 		 */
 		get: util.abstractMember
