@@ -293,6 +293,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Reference',
 				'wikibase.datamodel.ReferenceList',
 				'wikibase.datamodel.Statement',
+				'wikibase.tests.getMockListItemAdapter',
 			),
 		),
 
