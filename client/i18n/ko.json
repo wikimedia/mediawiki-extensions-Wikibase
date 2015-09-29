@@ -7,7 +7,8 @@
 			"아라",
 			"Revi",
 			"IRTC1015",
-			"관인생략"
+			"관인생략",
+			"Hwangjy9"
 		]
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",
@@ -54,12 +55,9 @@
 	"wikibase-error-serialize-error": "데이터를 직렬화할 수 없습니다.",
 	"wikibase-error-invalid-entity-id": "입력한 ID는 시스템에서 알 수 없습니다. 올바른 개체 ID를 사용하세요.",
 	"unconnectedpages": "위키데이터 항목에 연결되지 않은 문서",
-	"wikibase-unconnectedpages-page": "결과 목록의 앞에 있는 문서:",
-	"wikibase-unconnectedpages-submit": "보기",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\"(은)는 올바른 언어 코드가 아닙니다.",
-	"wikibase-unconnectedpages-page-warning": "문서 제목은 쿼리에 사용할 수 없고 무시됩니다.",
-	"wikibase-unconnectedpages-iwdata-label": "언어 인터위키 링크가 있는 문서만",
 	"wikibase-unconnectedpages-format-row": "(문서에 있는 {{PLURAL:$1|언어 인터위키 링크}} $1개)",
+	"wikibase-unconnectedpages-submit": "보기",
+	"wikibase-pageswithbadges-badge": "배지:",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} 항목 ID",
 	"wikibase-pageinfo-entity-id-none": "없음",
 	"wikibase-property-render-error": "$1 속성 표시 실패: $2",
