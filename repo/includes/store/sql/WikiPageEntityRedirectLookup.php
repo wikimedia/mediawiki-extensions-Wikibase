@@ -78,6 +78,8 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 			array(
 				'rd_title' => $title->getDBkey(),
 				'rd_namespace' => $title->getNamespace(),
+				// Entity redirects are guaranteed to be in the same namespace
+				'page_namespace' => $title->getNamespace(),
 				'page_id = rd_from'
 			),
 			__METHOD__,
