@@ -25,28 +25,22 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.entityIdFormatter.SimpleEntityIdHtmlFormatter.tests' => $moduleTemplate + array(
+		'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'SimpleEntityIdHtmlFormatter.tests.js',
+				'DataValueBasedEntityIdHtmlFormatter.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.datamodel.Item',
-				'wikibase.datamodel.Term',
-				'wikibase.store.FetchedContent',
-				'wikibase.entityIdFormatter.SimpleEntityIdHtmlFormatter',
+				'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter',
 				'wikibase.entityIdFormatter.testEntityIdHtmlFormatter',
 			),
 		),
 
-		'wikibase.entityIdFormatter.SimpleEntityIdPlainFormatter.tests' => $moduleTemplate + array(
+		'wikibase.entityIdFormatter.DataValueBasedEntityIdPlainFormatter.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'SimpleEntityIdPlainFormatter.tests.js',
+				'DataValueBasedEntityIdPlainFormatter.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.datamodel.Item',
-				'wikibase.datamodel.Term',
-				'wikibase.store.FetchedContent',
-				'wikibase.entityIdFormatter.SimpleEntityIdPlainFormatter',
+				'wikibase.entityIdFormatter.DataValueBasedEntityIdPlainFormatter',
 			),
 		),
 
