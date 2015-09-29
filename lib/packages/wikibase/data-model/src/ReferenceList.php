@@ -241,4 +241,11 @@ class ReferenceList extends HashableObjectStorage {
 		$this->__construct( unserialize( $data ) );
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return $this->count() === 0;
+	}
+
 }
