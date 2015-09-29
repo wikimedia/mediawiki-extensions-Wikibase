@@ -33,29 +33,22 @@
  *        The `Statement` displayed by the view. May be set initially only and gets updated
  *        automatically if changes to the `Statement` are saved.
  *        If `null`, the view will be switched to edit mode initially.
+ * @param {Function} options.buildReferenceListItemAdapter
+ * @param {Function} options.buildSnakView
  * @param {wikibase.utilities.ClaimGuidGenerator} options.guidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
  * @param {wikibase.entityChangers.ClaimsChanger} options.claimsChanger
  *        Required to store the view's `Statement`.
- * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
- *        Required for dynamically rendering links to `Entity`s.
  * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
  *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {wikibase.entityChangers.ReferencesChanger} options.referencesChanger
  *        Required to store the `Reference`s gathered from the `referenceview`s aggregated by the
  *        `statementview`.
- * @param {wikibase.store.EntityStore} options.entityStore
- *        Required for dynamically gathering `Entity`/`Property` information.
- * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
- *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
- *        `jQuery.valueview`.
- * @param {dataTypes.DataTypeStore} options.dataTypeStore
- *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
- *        object when interacting on a "value" `Variation`.
  * @param {Object} [options.predefined={ mainSnak: false }]
  *        Allows to predefine certain aspects of the `Statement` to be created from the view. If
  *        this option is omitted, an empty view is created. A common use-case is adding a value to a
  *        property existing already by specifying, for example: `{ mainSnak.property: 'P1' }`.
+ * @param {jQuery.wikibase.listview.ListItemAdapter} options.qualifiersListItemAdapter
  * @param {Object} [options.locked={ mainSnak: false }]
  *        Elements that shall be locked and may not be changed by user interaction.
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-claimview-snak-new-tooltip' )]
@@ -106,8 +99,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		value: null,
 		claimsChanger: null,
 		referencesChanger: null,
-		dataTypeStore: null,
-		entityIdHtmlFormatter: null,
 		entityIdPlainFormatter: null,
 		predefined: {
 			mainSnak: false
@@ -151,12 +142,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.entityStore
-			|| !this.options.valueViewBuilder
+		if ( !this.options.buildReferenceListItemAdapter
+			|| !this.options.buildSnakView
 			|| !this.options.claimsChanger
 			|| !this.options.referencesChanger
-			|| !this.options.dataTypeStore
+			|| !this.options.entityIdPlainFormatter
 			|| !this.options.guidGenerator
+			|| !this.options.qualifiersListItemAdapter
 		) {
 			throw new Error( 'Required option not specified properly' );
 		}
@@ -217,17 +209,14 @@ $.widget( 'wikibase.statementview', PARENT, {
 			event.stopPropagation();
 		} );
 
-		this._mainSnakSnakView = this.$mainSnak.snakview( {
-			value: snak || undefined,
-			locked: this.options.locked.mainSnak,
-			autoStartEditing: false,
-			dataTypeStore: this.options.dataTypeStore,
-			entityIdHtmlFormatter: this.options.entityIdHtmlFormatter,
-			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-			entityStore: this.options.entityStore,
-			valueViewBuilder: this.options.valueViewBuilder,
-			encapsulatedBy: ':' + this.widgetFullName.toLowerCase()
-		} ).data( 'snakview' );
+		this._mainSnakSnakView = this.options.buildSnakView(
+			{
+				locked: this.options.locked.mainSnak,
+				autoStartEditing: false
+			},
+			snak,
+			this.$mainSnak
+		);
 	},
 
 	/**
@@ -261,20 +250,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			$qualifiers = $( '<div/>' ).prependTo( this.$qualifiers );
 		}
 		$qualifiers.listview( {
-			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-				listItemWidget: $.wikibase.snaklistview,
-				newItemOptionsFn: function( value ) {
-					return {
-						value: value || undefined,
-						singleProperty: true,
-						dataTypeStore: self.options.dataTypeStore,
-						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
-						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
-						entityStore: self.options.entityStore,
-						valueViewBuilder: self.options.valueViewBuilder
-					};
-				}
-			} ),
+			listItemAdapter: this.options.qualifiersListItemAdapter,
 			value: groupedQualifierSnaks
 		} )
 		.on( 'snaklistviewstopediting.' + this.widgetName, function( event, dropValue ) {
@@ -321,23 +297,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return;
 		}
 
-		var lia = new $.wikibase.listview.ListItemAdapter( {
-			listItemWidget: $.wikibase.referenceview,
-			newItemOptionsFn: function( value ) {
-				return {
-					value: value || null,
-					statementGuid: self.options.value
-						? self.options.value.getClaim().getGuid()
-						: null,
-					dataTypeStore: self.options.dataTypeStore,
-					entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
-					entityIdPlainFormatter: self.options.entityIdPlainFormatter,
-					entityStore: self.options.entityStore,
-					valueViewBuilder: self.options.valueViewBuilder,
-					referencesChanger: self.options.referencesChanger
-				};
-			}
-		} );
+		var lia = this.options.buildReferenceListItemAdapter(
+			this.options.value ? this.options.value.getClaim().getGuid() : null
+		);
 
 		$listview.listview( {
 			listItemAdapter: lia,
