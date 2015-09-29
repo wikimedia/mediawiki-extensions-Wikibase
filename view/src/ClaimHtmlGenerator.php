@@ -88,9 +88,8 @@ class ClaimHtmlGenerator {
 
 		$referencesHeading = $this->getReferencesHeading( $statement );
 
-		$referencesHtml = $this->getHtmlForReferences(
-			$statement->getReferences()
-		);
+		$references = $statement->getReferences();
+		$referencesHtml = $this->getHtmlForReferences( $references );
 
 		return $this->templateFactory->render(
 			'wikibase-statementview',
@@ -100,7 +99,8 @@ class ClaimHtmlGenerator {
 			$this->getHtmlForQualifiers( $statement->getQualifiers() ),
 			$editSectionHtml,
 			$referencesHeading,
-			$referencesHtml
+			$referencesHtml,
+			count( $references ) ? 'wikibase-initially-collapsed' : ''
 		);
 	}
 

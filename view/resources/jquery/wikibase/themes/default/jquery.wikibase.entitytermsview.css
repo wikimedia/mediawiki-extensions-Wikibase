@@ -34,10 +34,6 @@
 .wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview {
 	margin-top: 1em;
 }
-.wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-collapsed {
-	display: none;
-}
-
 
 .wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-toggler {
 	display: inline-block;

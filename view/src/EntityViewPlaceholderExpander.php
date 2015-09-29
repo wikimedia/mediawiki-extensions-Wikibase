@@ -219,7 +219,7 @@ class EntityViewPlaceholderExpander {
 					|| $this->user->isAnon()
 						&& isset( $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] )
 						&& $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] === 'true'
-					? '' : 'wikibase-entitytermsview-entitytermsforlanguagelistview-collapsed';
+					? '' : 'wikibase-initially-collapsed';
 
 			default:
 				wfWarn( "Unknown placeholder: $name" );

@@ -98,7 +98,7 @@ HTML;
 	<!-- wikibase-toolbar -->$5
 	<div class="wikibase-statementview-references-container">
 		<div class="wikibase-statementview-references-heading">$6</div>
-		<div class="wikibase-statementview-references"><!-- wikibase-listview -->$7</div>
+		<div class="wikibase-statementview-references $8"><!-- wikibase-listview -->$7</div>
 	</div>
 </div>
 HTML;

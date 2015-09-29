@@ -89,7 +89,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 			'', // Qualifiers
 			'', // Toolbar placeholder
 			'', // References heading
-			'' // List of references
+			'', // List of references
+			'' // wikibase-initially-collapsed for wikibase-statementview-references
 		],
 		templateShortCuts: {
 			$rankSelector: '.wikibase-statementview-rankselector',
@@ -365,9 +366,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} );
 
 		// Collapse references if there is at least one.
-		if ( this._referencesListview.items().length > 0 ) {
-			this.$references.css( 'display', 'none' );
-		}
+		this.$references.toggleClass(
+			'wikibase-initially-hidden',
+			this._referencesListview.items().length > 0
+		);
 
 		// toggle for references section:
 		var $toggler = $( '<a/>' ).toggler( { $subject: this.$references } );
