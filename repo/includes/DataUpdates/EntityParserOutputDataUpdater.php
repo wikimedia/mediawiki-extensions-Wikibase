@@ -8,6 +8,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
+ * @todo have ItemParserOutputDataUpdate, etc. instead.
+ *
  * @since 0.5
  *
  * @license GNU GPL v2+
