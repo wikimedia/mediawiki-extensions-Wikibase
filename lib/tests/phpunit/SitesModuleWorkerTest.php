@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use BagOStuff;
+use HashBagOStuff;
 use MediaWikiSite;
 use PHPUnit_Framework_TestCase;
 use Site;
@@ -27,13 +29,15 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 * @param Site[] $sites
 	 * @param string[] $groups
 	 * @param string[] $specialGroups
+	 * @param BagOStuff $cache
 	 *
 	 * @return SitesModuleWorker
 	 */
 	private function newSitesModuleWorker(
 		array $sites = array(),
 		array $groups = array(),
-		array $specialGroups = array()
+		array $specialGroups = array(),
+		BagOStuff $cache = null
 	) {
 		$siteStore = $this->getMock( '\SiteStore' );
 		$siteStore->expects( $this->any() )
@@ -44,7 +48,9 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 			new SettingsArray( array(
 			'siteLinkGroups' => $groups,
 			'specialSiteLinkGroups' => $specialGroups
-			) ), $siteStore
+			) ),
+			$siteStore,
+			$cache ?: new HashBagOStuff()
 		);
 	}
 
@@ -155,6 +161,22 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 				)
 			)
 		);
+	}
+
+	public function testGetModifiedHash_caching() {
+		$cacheKey = wfMemcKey( 'wikibase-sites-module-modified-hash' );
+		$cache = new HashBagOStuff();
+		$worker = $this->newSitesModuleWorker( array(), array( 'foo' ), array(), $cache );
+
+		// Make sure whatever hash is computed ends up in the cache
+		$hash = $worker->getModifiedHash();
+		$this->assertSame( $hash, $cache->get( $cacheKey ) );
+
+		$cache->set( $cacheKey, 'cache all the things!' );
+
+		// Verify that cached results are returned
+		$hash = $worker->getModifiedHash();
+		$this->assertSame( 'cache all the things!', $hash );
 	}
 
 }

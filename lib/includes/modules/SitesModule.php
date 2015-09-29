@@ -26,7 +26,8 @@ class SitesModule extends ResourceLoaderModule {
 	public function __construct() {
 		$this->worker = new SitesModuleWorker(
 			Settings::singleton(),
-			SiteSQLStore::newInstance()
+			SiteSQLStore::newInstance(),
+			wfGetCache( CACHE_ACCEL )
 		);
 	}
 
