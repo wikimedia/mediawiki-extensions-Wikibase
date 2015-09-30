@@ -84,11 +84,6 @@ class StatementTransclusionInteractor {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
-			// We probably hit a double redirect
-			wfLogWarning(
-				'Encountered a UnresolvedRedirectException when trying to load ' . $entityId->getSerialization()
-			);
-
 			return '';
 		}
 

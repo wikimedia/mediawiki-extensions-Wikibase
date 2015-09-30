@@ -10,12 +10,15 @@ use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Client\DataAccess\StatementTransclusionInteractor
@@ -83,6 +86,26 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'Wikibase\Client\PropertyLabelNotResolvedException' );
 		$renderer->render( new ItemId( 'Q42' ), 'blah' );
+	}
+
+	public function testRender_unresolvedRedirect() {
+		$renderer = $this->getInteractor(
+			$this->getPropertyIdResolverForPropertyNotFound(),
+			$this->getSnaksFinder( array() ),
+			'en'
+		);
+
+		$this->assertEquals( '', $renderer->render( new ItemId( 'Q43' ), 'P1337' ) );
+	}
+
+	public function testRender_unknownEntity() {
+		$renderer = $this->getInteractor(
+			$this->getPropertyIdResolverForPropertyNotFound(),
+			$this->getSnaksFinder( array() ),
+			'en'
+		);
+
+		$this->assertEquals( '', $renderer->render( new ItemId( 'Q43333' ), 'P1337' ) );
 	}
 
 	/**
@@ -164,9 +187,20 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$lookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnValue(
-				$this->getMock( 'Wikibase\DataModel\StatementListProvider' )
-			) );
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				if ( $entityId->getSerialization() === 'Q42' ) {
+					return $this->getMock( 'Wikibase\DataModel\StatementListProvider' );
+				} elseif ( $entityId->getSerialization() === 'Q43' ) {
+					// Unresolved redirect
+					throw new RevisionedUnresolvedRedirectException(
+						$entityId,
+						new ItemId( 'Q42' )
+					);
+				} else {
+					return null;
+				}
+			} )
+		);
 
 		return $lookup;
 	}
