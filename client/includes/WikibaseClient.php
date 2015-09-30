@@ -864,14 +864,14 @@ final class WikibaseClient {
 	 * @return OtherProjectsSitesProvider
 	 */
 	public function getOtherProjectsSitesProvider() {
-		$otherProjectsSitesProvider = new OtherProjectsSitesGenerator(
-			$this->getSiteStore(),
-			$this->settings->getSetting( 'siteGlobalID' ),
-			$this->settings->getSetting( 'specialSiteLinkGroups' )
-		);
-
 		return new CachingOtherProjectsSitesProvider(
-			$otherProjectsSitesProvider,
+			new OtherProjectsSitesGenerator(
+				$this->getSiteStore(),
+				$this->settings->getSetting( 'siteGlobalID' ),
+				$this->settings->getSetting( 'specialSiteLinkGroups' )
+			),
+			// TODO: Make configurable? Should be similar, maybe identical to sharedCacheType and
+			// sharedCacheDuration, but can not reuse these because this here is not shared.
 			wfGetMainCache(),
 			60 * 60
 		);
