@@ -39,7 +39,7 @@ QUnit.module( 'jquery.wikibase.labelview', QUnit.newMwEnvironment( {
 			var $labelview = $( this ),
 				labelview = $labelview.data( 'labelview' );
 
-			if( labelview ) {
+			if ( labelview ) {
 				labelview.destroy();
 			}
 

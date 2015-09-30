@@ -33,7 +33,7 @@ QUnit.module( 'jquery.wikibase.edittoolbar', QUnit.newMwEnvironment( {
 			var $edittoolbar = $( this ),
 				edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
-			if( edittoolbar ) {
+			if ( edittoolbar ) {
 				edittoolbar.destroy();
 			}
 
@@ -98,7 +98,7 @@ QUnit.test( 'Deferred button initialization', function( assert ) {
 		'Created "edit" button.'
 	);
 
-	for( var i = 0; i < deferredButtons.length; i++ ) {
+	for ( var i = 0; i < deferredButtons.length; i++ ) {
 		assert.ok(
 			edittoolbar._buttons[deferredButtons[i]] === undefined,
 			'"' + deferredButtons[i] + '" not yet initialized.'

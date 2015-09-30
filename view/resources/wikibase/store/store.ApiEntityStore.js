@@ -54,7 +54,7 @@
 				var entityData = result.entities[ entityId ];
 				var entity = null;
 
-				if( entityData.missing !== '' ) {
+				if ( entityData.missing !== '' ) {
 					entity = self._entityDeserializer.deserialize( entityData );
 				}
 

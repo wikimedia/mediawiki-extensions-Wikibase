@@ -49,7 +49,7 @@
 				$.each( ids, function( index, id ) {
 					var def = $.wikibase.toolbarcontroller.definition( type, id );
 
-					if( !def ) {
+					if ( !def ) {
 						throw new Error( 'Missing toolbar controller definition for type "'
 							+ type + '" with id "' + id + '"' );
 					}
@@ -76,7 +76,7 @@
 		 * @throws {Error} if the callback provided in an event definition is not a function.
 		 */
 		registerEventHandler: function( toolbarType, toolbarId, eventNames, callback ) {
-			if( !$.isFunction( callback ) ) {
+			if ( !$.isFunction( callback ) ) {
 				throw new Error( 'No callback or known default action given for event "'
 					+ eventNames + '"' );
 			}
@@ -104,9 +104,9 @@
 		destroyToolbar: function( toolbar ) {
 			// Toolbar might have been removed from the DOM already by some other destruction
 			// mechanism.
-			if( toolbar ) {
+			if ( toolbar ) {
 				toolbar.destroy();
-				if( toolbar.option( '$container' ).get( 0 ) !== toolbar.element.get( 0 ) ) {
+				if ( toolbar.option( '$container' ).get( 0 ) !== toolbar.element.get( 0 ) ) {
 					toolbar.option( '$container' ).remove();
 				}
 				toolbar.element.off( '.' + toolbar.widgetName );

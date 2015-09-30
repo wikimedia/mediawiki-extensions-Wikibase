@@ -7,19 +7,19 @@
 
 	function newFormatterGetter( repoType ) {
 		var parser, formatter;
-		if( repoType === 'parsefail' ) {
+		if ( repoType === 'parsefail' ) {
 			parser = {
 				parse: function() { return $.Deferred().reject( 'parse error' ).promise(); }
 			};
 			formatter = null;
-		} else if( repoType === 'formatfail' ) {
+		} else if ( repoType === 'formatfail' ) {
 			parser = {
 				parse: function() { return $.Deferred().resolve( 'parsed DataValue' ).promise(); }
 			};
 			formatter = {
 				format: function() { return $.Deferred().reject( 'format error' ).promise(); }
 			};
-		} else if( repoType === 'success' ) {
+		} else if ( repoType === 'success' ) {
 			parser = {
 				parse: function( input ) { return $.Deferred().resolve( input ).promise(); }
 			};

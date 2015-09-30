@@ -43,7 +43,7 @@ QUnit.module( 'jquery.wikibase.entitytermsview', QUnit.newMwEnvironment( {
 			var $entitytermsview = $( this ),
 				entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-			if( entitytermsview ) {
+			if ( entitytermsview ) {
 				entitytermsview.destroy();
 			}
 

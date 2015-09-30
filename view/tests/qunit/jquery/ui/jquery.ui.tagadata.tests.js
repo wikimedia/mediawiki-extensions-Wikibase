@@ -26,7 +26,7 @@ QUnit.module( 'jquery.ui.tagadata', QUnit.newMwEnvironment( {
 			var $tagadata = $( this ),
 				tagadata = $( this ).data( 'tagadata' );
 
-			if( tagadata ) {
+			if ( tagadata ) {
 				tagadata.destroy();
 			}
 
@@ -126,7 +126,7 @@ QUnit.test( 'removeAll()', 1, function( assert ) {
 	QUnit.stop();
 
 	$tagadata.on( 'tagadatatagremoved', function() {
-		if( --i === 0 ) {
+		if ( --i === 0 ) {
 			QUnit.start();
 
 			assert.ok(

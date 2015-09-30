@@ -33,7 +33,7 @@ QUnit.module( 'jquery.wikibase.descriptionview', QUnit.newMwEnvironment( {
 			var $descriptionview = $( this ),
 				descriptionview = $descriptionview.data( 'descriptionview' );
 
-			if( descriptionview ) {
+			if ( descriptionview ) {
 				descriptionview.destroy();
 			}
 

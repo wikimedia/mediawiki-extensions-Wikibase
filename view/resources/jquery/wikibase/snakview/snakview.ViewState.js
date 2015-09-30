@@ -21,7 +21,7 @@
 	 * @throws {Error} if a required parameter is not specified properly.
 	 */
 	var SELF =  $.wikibase.snakview.ViewState = function WbSnakviewViewState( snakView ) {
-		if( !( snakView instanceof $.wikibase.snakview ) ) {
+		if ( !( snakView instanceof $.wikibase.snakview ) ) {
 			throw new Error( 'Can not create a snakview ViewState object without a snakview' );
 		}
 		this._view = snakView;

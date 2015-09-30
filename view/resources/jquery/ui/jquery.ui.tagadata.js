@@ -120,7 +120,7 @@ $.widget( 'ui.tagadata', {
 		.addClass( 'ui-widget ui-widget-content ui-corner-all' )
 		.on( 'click.tagadata', function( event ) {
 			var target = $( event.target );
-			if( target.hasClass( 'tagadata-label' ) ) {
+			if ( target.hasClass( 'tagadata-label' ) ) {
 				self._trigger( 'tagClicked', event, target.closest( '.tagadata-choice' ) );
 			}
 		} );
@@ -128,7 +128,7 @@ $.widget( 'ui.tagadata', {
 		// Add existing tags from the list, if any
 		this._$tagList.children( 'li' ).each( function() {
 			var newTagLabel = $( this ).text();
-			if( self._formatLabel( newTagLabel ) !== '' ) { // don't initialize empty tags here
+			if ( self._formatLabel( newTagLabel ) !== '' ) { // don't initialize empty tags here
 				var $newTag = self.createTag( newTagLabel, $( this ).attr( 'class' ) );
 				self._initialTagLabels.push( self.getTagLabel( $newTag ) );
 				$( this ).remove(); // remove empty tag
@@ -189,10 +189,10 @@ $.widget( 'ui.tagadata', {
 			var $tag = $( this );
 
 			// Check if already removed but still assigned till animations end:
-			if( !$tag.hasClass( 'tagadata-choice-removed' ) ) {
+			if ( !$tag.hasClass( 'tagadata-choice-removed' ) ) {
 				var tagLabel = self.getTagLabel( $tag );
 
-				if( tagLabel !== '' && $.inArray( tagLabel, usedLabels ) === -1 ) {
+				if ( tagLabel !== '' && $.inArray( tagLabel, usedLabels ) === -1 ) {
 					$tags = $tags.add( this );
 					usedLabels.push( tagLabel );
 				}
@@ -213,7 +213,7 @@ $.widget( 'ui.tagadata', {
 
 		this._$tagList.children( '.tagadata-choice' ).each( function() {
 			var $tag = $( this );
-			if( self._formatLabel( label ) === self._formatLabel( self.getTagLabel( $tag ) ) ) {
+			if ( self._formatLabel( label ) === self._formatLabel( self.getTagLabel( $tag ) ) ) {
 				result = $tag;
 			}
 
@@ -256,7 +256,7 @@ $.widget( 'ui.tagadata', {
 	 */
 	_formatLabel: function( string ) {
 		string = $.trim( string );
-		if( this.options.caseSensitive ) {
+		if ( this.options.caseSensitive ) {
 			return string;
 		}
 		return string.toLowerCase();
@@ -299,8 +299,8 @@ $.widget( 'ui.tagadata', {
 
 		var $tag = this.getTag( value );
 
-		if( $tag ) {
-			if( value !== '' ) {
+		if ( $tag ) {
+			if ( value !== '' ) {
 				// highlight the already existing tag, except if it is the new tag input
 				this.highlightTag( $tag );
 			}
@@ -315,7 +315,7 @@ $.widget( 'ui.tagadata', {
 
 		$tag = this._createTagNode().addClass( additionalClasses || '' ).append( $label );
 
-		if( this.options.editableTags || forceTextInput ) {
+		if ( this.options.editableTags || forceTextInput ) {
 			$input.attr( {
 				type: 'text',
 				value: value,
@@ -338,7 +338,7 @@ $.widget( 'ui.tagadata', {
 
 		this._$tagList.append( $tag );
 
-		if( value !== '' ) {
+		if ( value !== '' ) {
 			// only trigger if this isn't the helper tag
 			this._trigger( 'tagAdded', null, $tag );
 		}
@@ -360,7 +360,7 @@ $.widget( 'ui.tagadata', {
 			.addClass( 'tagadata-close' )
 			.append( $( '<span/>' ).addClass( 'ui-icon ui-icon-close' ) )
 			.click( function() {
-				if( !self.option( 'disabled' ) ) {
+				if ( !self.option( 'disabled' ) ) {
 					self.removeTag( $tag );
 				}
 			} )
@@ -382,7 +382,7 @@ $.widget( 'ui.tagadata', {
 		} )
 		.on( 'blur.' + this.widgetName, function() {
 			// remove tag if it is empty already:
-			if( self._formatLabel( $input.val() ) === ''
+			if ( self._formatLabel( $input.val() ) === ''
 				&& self.getTags().length > 1
 				&& !$tag.is( self.element.children( '.tagadata-choice' ).last() )
 			) {
@@ -394,22 +394,22 @@ $.widget( 'ui.tagadata', {
 			var oldNormalValue = self._formatLabel( oldValue ),
 				newNormalValue = self._formatLabel( $input.val() );
 
-			if( oldNormalValue !== newNormalValue ) {
+			if ( oldNormalValue !== newNormalValue ) {
 				// trigger once for widget, once for tag itself
 				$tag.triggerHandler( self.widgetEventPrefix + 'tagchanged', oldNormalValue );
 				self._trigger( 'tagChanged', null, [$tag, oldNormalValue] );
 			}
 		} )
 		.on( 'keydown.' + this.widgetName, function( event ) {
-			if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
+			if ( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
 				// Key for finishing tag input was hit (e.g. ENTER)
 
 				event.preventDefault();
 				var $targetTag = self.getHelperTag();
 
-				if( self.getTagLabel( $tag ) === '' ) {
+				if ( self.getTagLabel( $tag ) === '' ) {
 					// Remove tag if hit ENTER on an empty tag, except for the helper tag.
-					if( $targetTag.get( 0 ) !== $tag.get( 0 ) ) {
+					if ( $targetTag.get( 0 ) !== $tag.get( 0 ) ) {
 						self.removeTag( $tag );
 						self.highlightTag( $targetTag );
 					}
@@ -434,20 +434,20 @@ $.widget( 'ui.tagadata', {
 					? self._getTags( tagLabel )
 					: $(); // don't highlight anything if empty (will be removed anyhow)
 
-				if( equalTags.length > 1 ) {
+				if ( equalTags.length > 1 ) {
 					equalTags.addClass( 'tagadata-choice-equal' );
 				}
 
 				// if this is the tag before the helper and its value has just been emptied, remove
 				// it and jump into the helper:
-				if( tagLabel === '' && self.getHelperTag().prev( $tag ).length ) {
+				if ( tagLabel === '' && self.getHelperTag().prev( $tag ).length ) {
 					self.removeTag( $tag );
 					self.getHelperTag().find( 'input' ).focus();
 					return;
 				}
 
 				// Check whether the tag is modified/new compared to initial state:
-				if( $.inArray( tagLabel, self._initialTagLabels ) === -1 ) {
+				if ( $.inArray( tagLabel, self._initialTagLabels ) === -1 ) {
 					$tag.addClass( 'tagadata-choice-modified' );
 				} else {
 					$tag.removeClass( 'tagadata-choice-modified' );
@@ -464,7 +464,7 @@ $.widget( 'ui.tagadata', {
 	getHelperTag: function() {
 		var $tag = this._$tagList.find( '.tagadata-choice:last' );
 
-		if( !$tag.length || this.getTagLabel( $tag ) !== '' ) {
+		if ( !$tag.length || this.getTagLabel( $tag ) !== '' ) {
 			$tag = this._createHelperTag();
 		}
 
@@ -486,9 +486,9 @@ $.widget( 'ui.tagadata', {
 			input = $tag.find( 'input' );
 
 		// Add placeholder and auto-expand afterwards:
-		if( this.options.placeholderText ) {
+		if ( this.options.placeholderText ) {
 			input.attr( 'placeholder', this.options.placeholderText );
-			if( input.inputautoexpand ) {
+			if ( input.inputautoexpand ) {
 				input.inputautoexpand( {
 					expandOnResize: false
 				} );
@@ -499,13 +499,13 @@ $.widget( 'ui.tagadata', {
 		var self = this;
 
 		var detectHelperInput = function() {
-			if( self.getTagLabel( $tag ) !== '' ) {
+			if ( self.getTagLabel( $tag ) !== '' ) {
 				// Remove placeholder.
 				// NOTE: Can't do this on blurring the input because when clicking a button, the
 				// click might fail because of the input box resizing.
-				if( self.options.placeholderText && input.val() !== '' ) {
+				if ( self.options.placeholderText && input.val() !== '' ) {
 					input.removeAttr( 'placeholder' );
-					if( input.inputautoexpand ) {
+					if ( input.inputautoexpand ) {
 						input.inputautoexpand( {
 							expandOnResize: false
 						} );
@@ -535,8 +535,7 @@ $.widget( 'ui.tagadata', {
 
 		animate = animate || this.options.animate;
 
-		if(
-			!$tag.hasClass( 'tagadata-choice' )
+		if ( !$tag.hasClass( 'tagadata-choice' )
 			|| !this._$tagList[0].contains( $tag[0] )
 		) {
 			return false;
@@ -546,11 +545,11 @@ $.widget( 'ui.tagadata', {
 
 		// Resolve label conflicts:
 		var equalTags = this._getTags( this.getTagLabel( $tag ) );
-		if( equalTags.length === 2 ) {
+		if ( equalTags.length === 2 ) {
 			equalTags.removeClass( 'tagadata-choice-equal' );
 		}
 
-		if( animate ) {
+		if ( animate ) {
 			$tag.addClass( 'tagadata-choice-removed' );
 			$tag.fadeOut( 'fast' ).hide( 'blind', { direction: 'horizontal' }, 'fast', function() {
 				$tag.remove();
@@ -587,7 +586,7 @@ $.widget( 'ui.tagadata', {
 			var $tag = $( this ),
 				label = self.getTagLabel( $tag );
 
-			if( self._getTags( label ).length > 1 ) {
+			if ( self._getTags( label ).length > 1 ) {
 				hasConflict = true;
 			}
 
@@ -601,10 +600,10 @@ $.widget( 'ui.tagadata', {
 	 * @see jQuery.Widget._setOption
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			var $input = this._$tagList.find( 'input' );
 
-			if( value ) {
+			if ( value ) {
 				this.getHelperTag().remove();
 				$input.blur();
 			} else {

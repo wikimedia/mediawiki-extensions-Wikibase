@@ -11,7 +11,7 @@ QUnit.module( 'jquery.wikibase.singlebuttontoolbar', QUnit.newMwEnvironment( {
 			var $singlebuttontoolbar = $( this ),
 				singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
 
-			if( singlebuttontoolbar ) {
+			if ( singlebuttontoolbar ) {
 				singlebuttontoolbar.destroy();
 			}
 

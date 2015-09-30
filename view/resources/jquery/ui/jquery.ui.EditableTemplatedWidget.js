@@ -86,7 +86,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	startEditing: function() {
 		var deferred = $.Deferred();
 
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			return deferred.resolve().promise();
 		}
 
@@ -120,7 +120,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 		var self = this,
 			deferred = $.Deferred();
 
-		if( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
 			return deferred.resolve().promise();
 		}
 
@@ -128,7 +128,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 
 		this.disable();
 
-		if( dropValue ) {
+		if ( dropValue ) {
 			return this._afterStopEditing( dropValue );
 		} else {
 			this._save()
@@ -239,7 +239,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 * @param {Error} [error]
 	 */
 	setError: function( error ) {
-		if( error ) {
+		if ( error ) {
 			this.element.addClass( 'wb-error' );
 			this._trigger( 'toggleerror', null, [error] );
 		} else {
@@ -263,7 +263,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 * @return {jQuery|null}
 	 */
 	notification: function( $content, additionalCssClasses ) {
-		if( !this._$notification ) {
+		if ( !this._$notification ) {
 			this._$notification = $( '<div/>' ).closeable( {
 				encapsulate: true
 			} );

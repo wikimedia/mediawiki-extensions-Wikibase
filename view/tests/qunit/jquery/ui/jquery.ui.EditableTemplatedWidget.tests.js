@@ -16,7 +16,7 @@ QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
 				return $.Deferred().resolve().promise();
 			},
 			value: function( value ) {
-				if( value === undefined ) {
+				if ( value === undefined ) {
 					this.option( 'value', value );
 				} else {
 					return this.option( 'value' );
@@ -40,7 +40,7 @@ QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
 			var $edittoolbar = $( this ),
 				edittoolbar = $edittoolbar.data( 'edittoolbar' );
 
-			if( edittoolbar ) {
+			if ( edittoolbar ) {
 				edittoolbar.destroy();
 			}
 
@@ -59,7 +59,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		]
 	];
 
-	for( var i = 0; i < testSets.length; i++ ) {
+	for ( var i = 0; i < testSets.length; i++ ) {
 		mw.wbTemplates.store.set( 'templatedWidget-test', testSets[i][0] );
 
 		var $subject = $( '<div/>' );

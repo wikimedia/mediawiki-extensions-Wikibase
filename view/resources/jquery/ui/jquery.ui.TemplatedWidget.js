@@ -74,12 +74,12 @@
 		 * @throws {Error} if `template` option is not specified.
 		 */
 		_create: function() {
-			if( !this.options.template ) {
+			if ( !this.options.template ) {
 				throw new Error( 'template needs to be specified' );
 			}
 
 			// FIXME: Find sane way to detect that template is applied already.
-			if( this.element.contents().length === 0 ) {
+			if ( this.element.contents().length === 0 ) {
 				this._applyTemplate();
 			}
 
@@ -112,7 +112,7 @@
 
 			// template params which are functions are callbacks to be called in the widget's context
 			$.each( this.options.templateParams, function( i, value ) {
-				if( $.isFunction( value ) ) {
+				if ( $.isFunction( value ) ) {
 					value = value.call( self );
 				}
 				templateParams.push( value );
@@ -135,10 +135,10 @@
 			var shortCuts = this.options.templateShortCuts,
 				shortCut, shortCutSelector, $shortCutTarget;
 
-			for( shortCut in shortCuts ) {
+			for ( shortCut in shortCuts ) {
 				shortCutSelector = shortCuts[ shortCut ];
 				$shortCutTarget = this.element.find( shortCutSelector );
-				if( $shortCutTarget.length < 1 ) {
+				if ( $shortCutTarget.length < 1 ) {
 					throw new Error( 'Template "' + this.option( 'template' ) + '" has no DOM node '
 						+ ' selectable via the jQuery expression "' + shortCutSelector + '"' );
 				}
@@ -156,7 +156,7 @@
 			this.element.removeClass( this.widgetBaseClass );
 
 			// nullify references to short-cut DOM nodes
-			for( var shortCut in this.options.templateShortCuts ) {
+			for ( var shortCut in this.options.templateShortCuts ) {
 				this[ shortCut ] = null;
 			}
 		},
@@ -173,7 +173,7 @@
 		 *         option.
 		 */
 		_setOption: function( key, value ) {
-			switch( key ) {
+			switch ( key ) {
 				case 'template':
 				case 'templateParams':
 				case 'templateShortCuts':
@@ -182,7 +182,7 @@
 
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 
-			if( key === 'disabled' ) {
+			if ( key === 'disabled' ) {
 				this._trigger( 'disable', null, [value] );
 			}
 
@@ -224,9 +224,9 @@
 
 			// Copy original event properties over to the new event:
 			orig = event.originalEvent;
-			if( orig ) {
-				for( prop in orig ) {
-					if( !( prop in event ) ) {
+			if ( orig ) {
+				for ( prop in orig ) {
+					if ( !( prop in event ) ) {
 						event[prop] = orig[prop];
 					}
 				}

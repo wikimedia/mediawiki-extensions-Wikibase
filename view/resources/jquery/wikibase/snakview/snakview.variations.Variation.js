@@ -47,10 +47,10 @@
 		valueViewBuilder,
 		dataTypeStore
 	) {
-		if( !( viewState instanceof $.wikibase.snakview.ViewState ) ) {
+		if ( !( viewState instanceof $.wikibase.snakview.ViewState ) ) {
 			throw new Error( 'No ViewState object was provided to the snakview variation' );
 		}
-		if( !( $viewPort instanceof $ ) || $viewPort.length !== 1 ) {
+		if ( !( $viewPort instanceof $ ) || $viewPort.length !== 1 ) {
 			throw new Error( 'No sufficient DOM node provided for the snakview variation' );
 		}
 
@@ -152,7 +152,7 @@
 		 *         fields `snaktype` and `property`.
 		 */
 		value: function( value ) {
-			if( value === undefined ) {
+			if ( value === undefined ) {
 				return this._getValue();
 			}
 			this._setValue( value );

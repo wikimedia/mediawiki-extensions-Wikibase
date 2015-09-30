@@ -30,9 +30,9 @@ function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 			siteIdsOfGroup.push( $( this ).data( 'wb-siteid' ) );
 		} );
 
-		for( var i = 0; i < siteIdsOfGroup.length; i++ ) {
-			for( var j = 0; j < siteLinkIds.length; j++ ) {
-				if( siteLinkIds[j] === siteIdsOfGroup[i] ) {
+		for ( var i = 0; i < siteIdsOfGroup.length; i++ ) {
+			for ( var j = 0; j < siteLinkIds.length; j++ ) {
+				if ( siteLinkIds[j] === siteIdsOfGroup[i] ) {
 					siteLinksOfGroup.push( siteLinkSet.getItemByKey( siteLinkIds[j] ) );
 					break;
 				}
@@ -62,19 +62,19 @@ function orderSiteLinksByGroup( siteLinkSet ) {
 		var site = wb.sites.getSite( siteId ),
 			found = false;
 
-		if( !site ) {
+		if ( !site ) {
 			throw new Error( 'Site with id ' + siteId + ' is not registered' );
 		}
 
-		for( var i = 0; i < value.length; i++ ) {
-			if( value[i].group === site.getGroup() ) {
+		for ( var i = 0; i < value.length; i++ ) {
+			if ( value[i].group === site.getGroup() ) {
 				value[i].siteLinks.push( siteLink );
 				found = true;
 				break;
 			}
 		}
 
-		if( !found ) {
+		if ( !found ) {
 			value.push( {
 				group: site.getGroup(),
 				siteLinks: [siteLink]
@@ -124,7 +124,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if( !this.options.value || !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
+		if ( !this.options.value || !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -141,9 +141,9 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
 	destroy: function() {
-		if( this.$listview ) {
+		if ( this.$listview ) {
 			var listview = this.$listview.data( 'listview' );
-			if( listview ) {
+			if ( listview ) {
 				listview.destroy();
 			}
 			this.$listview.remove();
@@ -163,7 +163,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 
 		this.$listview = this.element.find( '.wikibase-listview' );
 
-		if( !this.$listview.length ) {
+		if ( !this.$listview.length ) {
 			this.$listview = $( '<div/>' ).appendTo( this.element );
 		}
 
@@ -195,7 +195,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	_setOption: function( key, value ) {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this.$listview.data( 'listview' ).option( key, value );
 		}
 
@@ -209,7 +209,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 		var listview = this.$listview.data( 'listview' ),
 			$items = listview.items();
 
-		if( $items.length ) {
+		if ( $items.length ) {
 			listview.listItemAdapter().liInstance( $items.first() ).focus();
 		} else {
 			this.element.focus();

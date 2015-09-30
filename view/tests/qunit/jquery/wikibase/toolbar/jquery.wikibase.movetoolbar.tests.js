@@ -9,7 +9,7 @@ QUnit.module( 'jquery.wikibase.movetoolbar', QUnit.newMwEnvironment( {
 	setup: function() {
 		$.widget( 'wikibasetest.valuewidget', {
 			value: function( value ) {
-				if( value ) {
+				if ( value ) {
 					this.options.value = value;
 				}
 				return this.options.value;
@@ -21,12 +21,12 @@ QUnit.module( 'jquery.wikibase.movetoolbar', QUnit.newMwEnvironment( {
 			var $listview = $( this ),
 				listview = $listview.data( 'listview' );
 
-			if( listview ) {
+			if ( listview ) {
 				listview.items().each( function() {
 					var $movetoolbar = $( this ),
 						movetoolbar = $movetoolbar.data( 'movetoolbar' );
 
-					if( movetoolbar ) {
+					if ( movetoolbar ) {
 						movetoolbar.destroy();
 					}
 				} );

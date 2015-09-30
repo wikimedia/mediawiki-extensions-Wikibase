@@ -21,7 +21,7 @@ QUnit.module( 'jquery.ui.closeable', QUnit.newMwEnvironment( {
 			var $closeable = $( this ),
 				closeable = $( this ).data( 'closeable' );
 
-			if( closeable ) {
+			if ( closeable ) {
 				closeable.destroy();
 			}
 

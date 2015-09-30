@@ -10,7 +10,7 @@ QUnit.module( 'jquery.wikibase.badgeselector', QUnit.newMwEnvironment( {
 		$( '.test_badgeselector' ).each( function() {
 			var $node = $( this ),
 				badgeselector = $node.data( 'badgeselector' );
-			if( badgeselector ) {
+			if ( badgeselector ) {
 				badgeselector.destroy();
 			}
 			$node.remove();

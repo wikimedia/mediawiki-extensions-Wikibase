@@ -83,7 +83,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if( !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
+		if ( !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required parameter(s) missing' );
 		}
 
@@ -96,7 +96,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 		this.$sitelinklistview = this.element.find( '.wikibase-sitelinklistview' );
 
-		if( !this.$sitelinklistview.length ) {
+		if ( !this.$sitelinklistview.length ) {
 			this.$sitelinklistview = $( '<table/>' ).appendTo( this.element );
 		}
 
@@ -110,7 +110,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.EditableTemplatedWidget.destroy
 	 */
 	destroy: function() {
-		if( this.$sitelinklistview ) {
+		if ( this.$sitelinklistview ) {
 			this.$sitelinklistview.data( 'sitelinklistview' ).destroy();
 		}
 		PARENT.prototype.destroy.call( this );
@@ -131,24 +131,24 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		.text( this.__headingText )
 		.append( this.$counter );
 
-		if( !this.$headingSection.data( 'sticknode' ) ) {
+		if ( !this.$headingSection.data( 'sticknode' ) ) {
 			this.$headingSection.sticknode( {
 				$container: this.element
 			} );
 		}
 
-		if( !this._$notification ) {
+		if ( !this._$notification ) {
 			this.notification()
 			.appendTo( this.$headingSection )
 			.on( 'closeableupdate.' + this.widgetName, function() {
 				var sticknode = self.element.data( 'sticknode' );
-				if( sticknode ) {
+				if ( sticknode ) {
 					sticknode.refresh();
 				}
 			} );
 		}
 
-		if( !this.$sitelinklistview.data( 'sitelinklistview' ) ) {
+		if ( !this.$sitelinklistview.data( 'sitelinklistview' ) ) {
 			this._createSitelinklistview();
 			deferred.resolve();
 		} else {
@@ -193,7 +193,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	_getSiteLinksOfGroup: function() {
 		var self = this;
 
-		if( !this.options.value ) {
+		if ( !this.options.value ) {
 			return [];
 		}
 
@@ -212,13 +212,13 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @throws {Error} if value is not defined properly.
 	 */
 	_checkValue: function( value ) {
-		if( !$.isPlainObject( value ) ) {
+		if ( !$.isPlainObject( value ) ) {
 			throw new Error( 'Value needs to be an object' );
-		} else if( !value.group ) {
+		} else if ( !value.group ) {
 			throw new Error( 'Value needs group id to be specified' );
 		}
 
-		if( !value.siteLinks ) {
+		if ( !value.siteLinks ) {
 			value.siteLinks = [];
 		}
 
@@ -250,7 +250,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		var self = this,
 			deferred = $.Deferred();
 
-		if( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
 			return deferred.resolve().promise();
 		}
 
@@ -286,7 +286,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @return {Object|*}
 	 */
 	value: function( value ) {
-		if( value === undefined ) {
+		if ( value === undefined ) {
 			return this.option( 'value' );
 		}
 		return this.option( 'value', value );
@@ -324,19 +324,19 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'value' ) {
+		if ( key === 'value' ) {
 			value = this._checkValue( value );
 		}
 
 		var response = PARENT.prototype._setOption.call( this, key, value );
 
-		if( key === 'value' ) {
+		if ( key === 'value' ) {
 			this.$sitelinklistview.data( 'sitelinklistview' )
 			.option( 'allowedSiteIds', getSiteIdsOfGroup( this.options.value.group ) )
 			.value( this.options.value.siteLinks );
 
 			this.draw();
-		} else if( key === 'disabled' ) {
+		} else if ( key === 'disabled' ) {
 			this.$sitelinklistview.data( 'sitelinklistview' ).option( key, value );
 		}
 
@@ -347,7 +347,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.EditableTemplatedWidget.setError
 	 */
 	setError: function( error ) {
-		if( error ) {
+		if ( error ) {
 			var self = this;
 
 			var $error = wb.buildErrorOutput( error, {
@@ -359,7 +359,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			this.element.addClass( 'wb-error' );
 			this.notification( $error, 'wb-error' );
 		} else {
-			if( this.$notification && this.$notification.hasClass( 'wb-error' ) ) {
+			if ( this.$notification && this.$notification.hasClass( 'wb-error' ) ) {
 				this.notification();
 			}
 		}

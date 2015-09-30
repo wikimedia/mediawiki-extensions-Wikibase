@@ -17,7 +17,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				lia = listview.listItemAdapter(),
 				$node = $listview.parent();
 
-			if( !$node.hasClass( 'wikibase-statementview-references' ) ) {
+			if ( !$node.hasClass( 'wikibase-statementview-references' ) ) {
 				return;
 			}
 
@@ -27,7 +27,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				label: mw.msg( 'wikibase-addreference' )
 			} )
 			.on( 'addtoolbaradd.addtoolbar', function( e ) {
-				if( e.target !== $node.get( 0 ) ) {
+				if ( e.target !== $node.get( 0 ) ) {
 					return;
 				}
 
@@ -50,7 +50,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 						var $listview = $( event.target ),
 							$node = $listview.parent();
 
-						if( !$node.hasClass( '.wikibase-statementview-references' ) ) {
+						if ( !$node.hasClass( '.wikibase-statementview-references' ) ) {
 							return;
 						}
 
@@ -65,7 +65,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				event.data.toolbar.id,
 				'listviewdisable',
 				function( event ) {
-					if( event.target !== $listview.get( 0 ) ) {
+					if ( event.target !== $listview.get( 0 ) ) {
 						return;
 					}
 					$node.data( 'addtoolbar' )[

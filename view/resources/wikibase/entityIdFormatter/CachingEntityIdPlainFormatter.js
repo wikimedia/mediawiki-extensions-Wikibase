@@ -17,7 +17,7 @@
 			_cache: null,
 
 			format: function( entityId ) {
-				if( !this._cache.hasOwnProperty( entityId ) ) {
+				if ( !this._cache.hasOwnProperty( entityId ) ) {
 					this._cache[ entityId ] = this._entityIdFormatter.format( entityId );
 				}
 				return this._cache[ entityId ];

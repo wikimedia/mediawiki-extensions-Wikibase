@@ -65,7 +65,7 @@ $.extend( StickyNode.prototype, {
 		);
 		this.$node.removeData( PLUGIN_NAME );
 
-		if( this._$clone ) {
+		if ( this._$clone ) {
 			this._$clone.remove();
 			this._$clone = null;
 		}
@@ -75,7 +75,7 @@ $.extend( StickyNode.prototype, {
 	 * @return {boolean}
 	 */
 	_clipsContainer: function() {
-		if( !this._options.$container || !this.isFixed() ) {
+		if ( !this._options.$container || !this.isFixed() ) {
 			return false;
 		}
 
@@ -91,7 +91,7 @@ $.extend( StickyNode.prototype, {
 	 * @return {boolean}
 	 */
 	_isScrolledAfterContainer: function() {
-		if( !this._options.$container ) {
+		if ( !this._options.$container ) {
 			return false;
 		}
 
@@ -106,7 +106,7 @@ $.extend( StickyNode.prototype, {
 	 * @return {boolean}
 	 */
 	_isScrolledBeforeContainer: function( scrollTop ) {
-		if( !this._initialAttributes.offset ) {
+		if ( !this._initialAttributes.offset ) {
 			return false;
 		}
 
@@ -117,7 +117,7 @@ $.extend( StickyNode.prototype, {
 	},
 
 	_fix: function() {
-		if( this.isFixed() ) {
+		if ( this.isFixed() ) {
 			return;
 		}
 
@@ -144,12 +144,12 @@ $.extend( StickyNode.prototype, {
 		.css( 'position', 'fixed' )
 		.css( 'z-index', this._options.zIndex );
 
-		if( this._$clone.css( 'display' ) === 'table-header-group' ) {
+		if ( this._$clone.css( 'display' ) === 'table-header-group' ) {
 			var $original = this._$clone.find( '*' );
 
 			this.$node.find( '*' ).each( function( i ) {
 				var $node = $( this );
-				if( $node.css( 'display' ) === 'table-cell' ) {
+				if ( $node.css( 'display' ) === 'table-cell' ) {
 					$node.width( $original.eq( i ).width() + 'px' );
 				}
 			} );
@@ -157,11 +157,11 @@ $.extend( StickyNode.prototype, {
 	},
 
 	_unfix: function() {
-		if( !this.isFixed() ) {
+		if ( !this.isFixed() ) {
 			return;
 		}
 
-		if( this._$clone ) {
+		if ( this._$clone ) {
 			this._$clone.remove();
 			this._$clone = null;
 		}
@@ -194,12 +194,11 @@ $.extend( StickyNode.prototype, {
 	update: function( scrollTop, force ) {
 		var changedState = false;
 
-		if( force && this.isFixed() ) {
+		if ( force && this.isFixed() ) {
 			this._unfix();
 		}
 
-		if(
-			!this.isFixed()
+		if ( !this.isFixed()
 			&& scrollTop > this.$node.offset().top
 			&& !this._isScrolledAfterContainer()
 		) {
@@ -207,8 +206,7 @@ $.extend( StickyNode.prototype, {
 			changedState = true;
 		}
 
-		if(
-			this.isFixed() && this._isScrolledBeforeContainer( scrollTop )
+		if ( this.isFixed() && this._isScrolledBeforeContainer( scrollTop )
 			|| this._clipsContainer()
 		) {
 			this._unfix();
@@ -223,7 +221,7 @@ $.extend( StickyNode.prototype, {
 	 * whenever the node's content has been updated.
 	 */
 	refresh: function() {
-		if( this.isFixed() ) {
+		if ( this.isFixed() ) {
 			this._unfix();
 			this._fix();
 			this.$node.triggerHandler( PLUGIN_NAME + 'update' );
@@ -262,7 +260,7 @@ $.fn.sticknode = function( options ) {
 	this.each( function() {
 		var $node = $( this );
 
-		if( $node.data( PLUGIN_NAME ) ) {
+		if ( $node.data( PLUGIN_NAME ) ) {
 			return;
 		}
 
@@ -273,7 +271,7 @@ $.fn.sticknode = function( options ) {
 			window,
 			'scroll.' + PLUGIN_NAME + ' ' + 'touchmove.' + PLUGIN_NAME,
 			function( event, stickyNode ) {
-				if( stickyNode.update( $window.scrollTop() ) ) {
+				if ( stickyNode.update( $window.scrollTop() ) ) {
 					stickyNode.$node.triggerHandler( PLUGIN_NAME + 'update' );
 				}
 			},
@@ -287,7 +285,7 @@ $.fn.sticknode = function( options ) {
 			window,
 			'resize.' + PLUGIN_NAME,
 			function( event, stickyNode ) {
-				if( stickyNode.update( $window.scrollTop(), true ) ) {
+				if ( stickyNode.update( $window.scrollTop(), true ) ) {
 					stickyNode.$node.triggerHandler( PLUGIN_NAME + 'update' );
 				}
 			},

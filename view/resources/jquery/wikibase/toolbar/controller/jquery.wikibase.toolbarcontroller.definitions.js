@@ -63,10 +63,10 @@
 				|| null;
 		}
 
-		if( !definitionOrId.id || !definitionOrId.events ) {
+		if ( !definitionOrId.id || !definitionOrId.events ) {
 			throw new Error( 'id and events need to be specified to register a toolbar '
 				+ 'definition' );
-		} else if( !definitionOrId.selector ) {
+		} else if ( !definitionOrId.selector ) {
 			definitionOrId.selector = null;
 		}
 

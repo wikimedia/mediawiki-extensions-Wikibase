@@ -20,7 +20,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				),
 				$container = $headingContainer.children( '.wikibase-toolbar-container' );
 
-			if( !$container.length ) {
+			if ( !$container.length ) {
 				$container = $( '<div/>' ).appendTo( $headingContainer );
 			}
 
@@ -30,12 +30,12 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			} );
 
 			$sitelinkgroupview.on( 'keydown.edittoolbar', function( event ) {
-				if( sitelinkgroupview.option( 'disabled' ) ) {
+				if ( sitelinkgroupview.option( 'disabled' ) ) {
 					return;
 				}
-				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
+				if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 					sitelinkgroupview.stopEditing( true );
-				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
+				} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					sitelinkgroupview.stopEditing( false );
 				}
 			} );
@@ -45,7 +45,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
 				edittoolbar = $sitelinkgroupview.data( 'edittoolbar' );
 
-			if( !edittoolbar ) {
+			if ( !edittoolbar ) {
 				return;
 			}
 
@@ -67,7 +67,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			var $sitelinkgroupview = $( event.target ),
 				sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
-			if( !sitelinkgroupview ) {
+			if ( !sitelinkgroupview ) {
 				return;
 			}
 

@@ -52,7 +52,7 @@ wb.parsers.getApiBasedValueParserConstructor = function( apiValueParser ) {
 				.done( function( results ) {
 					var result;
 
-					if( results.length === 0 ) {
+					if ( results.length === 0 ) {
 						deferred.reject( 'Parse API returned an empty result set.' );
 						return;
 					}
@@ -60,7 +60,7 @@ wb.parsers.getApiBasedValueParserConstructor = function( apiValueParser ) {
 					try {
 						result = dv.newDataValue( results[0].type, results[0].value );
 						deferred.resolve( result );
-					} catch( error ) {
+					} catch ( error ) {
 						deferred.reject( error.message );
 					}
 				} )

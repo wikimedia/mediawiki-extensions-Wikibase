@@ -11,7 +11,7 @@ QUnit.module( 'jquery.wikibase.addtoolbar', QUnit.newMwEnvironment( {
 			var $addtoolbar = $( this ),
 				addtoolbar = $addtoolbar.data( 'addtoolbar' );
 
-			if( addtoolbar ) {
+			if ( addtoolbar ) {
 				addtoolbar.destroy();
 			}
 

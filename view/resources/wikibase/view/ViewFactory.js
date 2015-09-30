@@ -188,7 +188,7 @@
 	 * @throws {Error} If there is no view with the given name
 	 **/
 	SELF.prototype._getView = function( viewName, $dom, options ) {
-		if( !$.wikibase[ viewName ] ) {
+		if ( !$.wikibase[ viewName ] ) {
 			throw new Error( 'View ' + viewName + ' does not exist' );
 		}
 

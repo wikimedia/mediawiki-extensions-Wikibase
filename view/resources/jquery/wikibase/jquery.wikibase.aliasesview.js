@@ -46,8 +46,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if(
-			!( this.options.value instanceof wb.datamodel.MultiTerm )
+		if ( !( this.options.value instanceof wb.datamodel.MultiTerm )
 			|| !this.options.aliasesChanger
 		) {
 			throw new Error( 'Required option not specified properly' );
@@ -57,7 +56,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 
 		this.element.removeClass( 'wb-empty' );
 
-		if( this.$list.children( 'li' ).length !== this.options.value.getTexts().length ) {
+		if ( this.$list.children( 'li' ).length !== this.options.value.getTexts().length ) {
 			this.draw();
 		} else {
 			var languageCode = this.options.value.getLanguageCode();
@@ -73,7 +72,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @inheritdoc
 	 */
 	destroy: function() {
-		if( this.$list ) {
+		if ( this.$list ) {
 			this.$list.removeClass( this.widgetFullName + '-input' );
 		}
 		PARENT.prototype.destroy.call( this );
@@ -85,13 +84,13 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	draw: function() {
 		this.$list.off( '.' + this.widgetName );
 
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			this._initTagadata();
 		} else {
 			var self = this,
 				tagadata = this.$list.data( 'tagadata' );
 
-			if( tagadata ) {
+			if ( tagadata ) {
 				tagadata.destroy();
 			}
 
@@ -193,13 +192,13 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 *         `wikibase.datamodel.MultiTerm` instance.
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'value' && !( value instanceof wb.datamodel.MultiTerm ) ) {
+		if ( key === 'value' && !( value instanceof wb.datamodel.MultiTerm ) ) {
 			throw new Error( 'Value needs to be a wb.datamodel.MultiTerm instance' );
 		}
 
 		var response = PARENT.prototype._setOption.call( this, key, value );
 
-		if( key === 'disabled' && this.isInEditMode() ) {
+		if ( key === 'disabled' && this.isInEditMode() ) {
 			this.$list.data( 'tagadata' ).option( 'disabled', value );
 		}
 
@@ -213,12 +212,12 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @return {wikibase.datamodel.MultiTerm|undefined}
 	 */
 	value: function( value ) {
-		if( value !== undefined ) {
+		if ( value !== undefined ) {
 			this.option( 'value', value );
 			return;
 		}
 
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			return this.option( 'value' );
 		}
 
@@ -236,7 +235,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @inheritdoc
 	 */
 	focus: function() {
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			this.$list.data( 'tagadata' ).getHelperTag().find( 'input' ).focus();
 		} else {
 			this.element.focus();

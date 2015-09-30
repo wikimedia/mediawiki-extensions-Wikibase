@@ -21,7 +21,7 @@ QUnit.module( 'jquery.wikibase.toolbarbutton', QUnit.newMwEnvironment( {
 			var $button = $( this ),
 				button = $button.data( 'toolbarbutton' );
 
-			if( button ) {
+			if ( button ) {
 				button.destroy();
 			}
 

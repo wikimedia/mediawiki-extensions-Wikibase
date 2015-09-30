@@ -47,20 +47,20 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 
 		var self = this;
 
-		if( this.options.cssClassSuffix ) {
+		if ( this.options.cssClassSuffix ) {
 			this.element.addClass( 'wikibase-toolbar-button-' + this.options.cssClassSuffix );
 		}
 
-		if( !this.$link.contents().length ) {
+		if ( !this.$link.contents().length ) {
 			this.$link.append( this._getLabel() );
 		}
 
 		this.$link
 		.on( 'click.toolbarbutton keydown.toolbarbutton', function( event ) {
-			if( event.type === 'click' || event.keyCode === $.ui.keyCode.ENTER ) {
+			if ( event.type === 'click' || event.keyCode === $.ui.keyCode.ENTER ) {
 				event.preventDefault();
 
-				if( !self.options.disabled ) {
+				if ( !self.options.disabled ) {
 					self._trigger( 'action' );
 				}
 			}
@@ -79,14 +79,14 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	 * @see jQuery.wikibase.toolbaritem._setOption
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'cssClassSuffix' ) {
-			if( this.options.cssClassSuffix ) {
+		if ( key === 'cssClassSuffix' ) {
+			if ( this.options.cssClassSuffix ) {
 				this.element
 				.removeClass( 'wikibase-toolbar-button-' + this.options.cssClassSuffix );
 			}
 			this.element.addClass( 'wikibase-toolbar-button-' + value );
-		} else if( key === 'disabled' ) {
-			if( value ) {
+		} else if ( key === 'disabled' ) {
+			if ( value ) {
 				this.$link.attr( 'tabIndex', '-1' );
 			} else {
 				this.$link.removeAttr( 'tabIndex' );

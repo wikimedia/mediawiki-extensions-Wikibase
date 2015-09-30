@@ -47,7 +47,7 @@
 		);
 
 		var commonsMediaType = dataTypeStore.getDataType( 'commonsMedia' );
-		if( commonsMediaType ) {
+		if ( commonsMediaType ) {
 			formatterStore.registerDataTypeFormatter(
 				ApiBasedValueFormatter,
 				commonsMediaType.getId()
@@ -55,7 +55,7 @@
 		}
 
 		var urlType = dataTypeStore.getDataType( 'url' );
-		if( urlType ) {
+		if ( urlType ) {
 			formatterStore.registerDataTypeFormatter(
 				ApiBasedValueFormatter,
 				urlType.getId()
@@ -63,7 +63,7 @@
 		}
 
 		var monolingualTextType = dataTypeStore.getDataType( 'monolingualtext' );
-		if( monolingualTextType ) {
+		if ( monolingualTextType ) {
 			formatterStore.registerDataTypeFormatter(
 				ApiBasedValueFormatter,
 				monolingualTextType.getId()

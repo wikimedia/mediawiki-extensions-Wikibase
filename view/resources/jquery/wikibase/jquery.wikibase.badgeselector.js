@@ -73,7 +73,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
-		if( !this.options.entityIdPlainFormatter || !this.options.languageCode ) {
+		if ( !this.options.entityIdPlainFormatter || !this.options.languageCode ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -87,13 +87,13 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
-		if( $( '.' + this.widgetBaseClass ).length === 0 ) {
+		if ( $( '.' + this.widgetBaseClass ).length === 0 ) {
 			this._detachMenuEventListeners();
 
 			$menu.data( 'menu' ).destroy();
 			$menu.remove();
 			$menu = null;
-		} else if( $menu && ( $menu.data( this.widgetName ) === this ) ) {
+		} else if ( $menu && ( $menu.data( this.widgetName ) === this ) ) {
 			this._detachMenuEventListeners();
 		}
 		this.element.removeClass( 'ui-state-active' );
@@ -106,19 +106,19 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 
 		this.element
 		.on( 'click.' + this.widgetName, function( event ) {
-			if( !self.isInEditMode() || self.option( 'disabled' ) ) {
+			if ( !self.isInEditMode() || self.option( 'disabled' ) ) {
 				return;
 			}
 
 			// If the menu is already visible, hide it
-			if( $menu && $menu.data( self.widgetName ) === self && $menu.is( ':visible' ) ) {
+			if ( $menu && $menu.data( self.widgetName ) === self && $menu.is( ':visible' ) ) {
 				self._hideMenu();
 				return;
 			}
 
 			self._initMenu()
 			.done( function() {
-				if( self.option( 'disabled' ) || $menu.is( ':visible' ) ) {
+				if ( self.option( 'disabled' ) || $menu.is( ':visible' ) ) {
 					$menu.hide();
 					return;
 				}
@@ -143,7 +143,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	_attachMenuEventListeners: function() {
 		var self = this;
 		var degrade = function( event ) {
-			if( !$( event.target ).closest( self.element ).length &&
+			if ( !$( event.target ).closest( self.element ).length &&
 				!$( event.target ).closest( $menu ).length ) {
 				self._hideMenu();
 			}
@@ -156,7 +156,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 			var $li = $( event.target ).closest( 'li' ),
 				badge = $li.data( self.widgetName + '-menuitem-badge' );
 
-			if( badge ) {
+			if ( badge ) {
 				self._toggleBadge( badge, $li.hasClass( 'ui-state-active' ) );
 				$li.toggleClass( 'ui-state-active' );
 			}
@@ -172,7 +172,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * Creates the individual badges' DOM structures.
 	 */
 	_createBadges: function() {
-		if( this.element.children( '.wb-badge' ).length ) {
+		if ( this.element.children( '.wb-badge' ).length ) {
 			return;
 		}
 
@@ -186,7 +186,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @return {jQuery}
 	 */
 	_getMenu: function() {
-		if( $menu ) {
+		if ( $menu ) {
 			return $menu;
 		}
 
@@ -292,7 +292,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @param {boolean} targetState
 	 */
 	_toggleBadge: function( badgeId, targetState ) {
-		if( targetState ) {
+		if ( targetState ) {
 			this.element.children( '.wb-badge-' + badgeId ).remove();
 		} else {
 			this._addBadge( badgeId );
@@ -326,7 +326,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 				badgeId
 			);
 
-			if( $oldBadge ) {
+			if ( $oldBadge ) {
 				$oldBadge.replaceWith( $badge );
 			} else {
 				self.element.append( $badge );
@@ -353,19 +353,19 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 			needEmptyBadge = this.isInEditMode() && $badges.length === 0,
 			$emptyBadge = $badges.filter( '[data-wb-badge=""]' );
 
-		if( needEmptyBadge && $emptyBadge.length === 0 ) {
+		if ( needEmptyBadge && $emptyBadge.length === 0 ) {
 			this.element.append( mw.wbTemplate( 'wb-badge',
 				'empty',
 				this.options.messages['badge-placeholder-title'],
 				''
 			) );
-		} else if( !needEmptyBadge && $emptyBadge.length !== 0 ) {
+		} else if ( !needEmptyBadge && $emptyBadge.length !== 0 ) {
 			$emptyBadge.remove();
 		}
 	},
 
 	startEditing: function() {
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			return;
 		}
 
@@ -380,17 +380,17 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @param {boolean} dropValue
 	 */
 	stopEditing: function( dropValue ) {
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			return;
 		}
 
-		if( $menu ) {
+		if ( $menu ) {
 			$menu.hide();
 		}
 
 		this.element.removeClass( 'wb-edit' );
 
-		if( !dropValue ) {
+		if ( !dropValue ) {
 			this._updateEmptyBadge();
 
 		} else {
@@ -414,7 +414,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @return {string[]|*}
 	 */
 	value: function( value ) {
-		if( value !== undefined ) {
+		if ( value !== undefined ) {
 			return this.option( 'value', value );
 		}
 
@@ -422,7 +422,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 
 		this.element.children( '.wb-badge' ).each( function() {
 			var v = $( this ).data( 'wb-badge' );
-			if( v ) {
+			if ( v ) {
 				value.push( v );
 			}
 		} );
@@ -436,7 +436,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	_setOption: function( key, value ) {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' && $menu && $menu.data( this.widgetName ) === this ) {
+		if ( key === 'disabled' && $menu && $menu.data( this.widgetName ) === this ) {
 			$menu.hide();
 		} else if ( key === 'value' && this.isInEditMode() ) {
 			this._initMenu();

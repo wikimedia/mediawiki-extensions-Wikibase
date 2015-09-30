@@ -22,7 +22,7 @@ QUnit.module( 'jquery.wikibase.toolbaritem', QUnit.newMwEnvironment( {
 			var $item = $( this ).data( 'toolbaritem' ),
 				item = $item.data( 'toolbaritem' );
 
-			if( item ) {
+			if ( item ) {
 				item.destroy();
 			}
 

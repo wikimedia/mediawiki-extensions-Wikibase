@@ -39,7 +39,7 @@ $.widget( 'wikibase.removetoolbar', PARENT, {
 	_initDefaultButton: function( $scrapedButton ) {
 		var $button = PARENT.prototype._initDefaultButton.call( this, $scrapedButton );
 
-		if( !this.options.icon ) {
+		if ( !this.options.icon ) {
 			return $button;
 		}
 

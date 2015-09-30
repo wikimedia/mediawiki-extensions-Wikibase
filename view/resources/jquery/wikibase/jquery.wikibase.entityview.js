@@ -90,8 +90,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @throws {Error} if a required options is missing.
 	 */
 	_init: function() {
-		if(
-			!this.options.value
+		if ( !this.options.value
 			|| !this.options.languages
 			|| !this.options.entityStore
 			|| !this.options.valueViewBuilder
@@ -119,14 +118,14 @@ $.widget( 'wikibase.entityview', PARENT, {
 
 		this.$entityTerms = $( '.wikibase-entitytermsview', this.element );
 
-		if( !this.$entityTerms.length ) {
+		if ( !this.$entityTerms.length ) {
 			this.$entityTerms = $( '<div/>' ).prependTo( this.$main );
 		}
 
 		var fingerprint = this.options.value.getFingerprint(),
 			value = [];
 
-		for( i = 0; i < this.options.languages.length; i++ ) {
+		for ( i = 0; i < this.options.languages.length; i++ ) {
 			value.push( {
 				language: this.options.languages[i],
 				label: fingerprint.getLabelFor( this.options.languages[i] )
@@ -180,17 +179,17 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @throws {Error} when trying to set an option to an improper value.
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'languages' ) {
-			if( typeof this.options.languages === 'string' ) {
+		if ( key === 'languages' ) {
+			if ( typeof this.options.languages === 'string' ) {
 				this.options.languages = [this.options.languages];
-			} else if( !$.isArray( this.options.languages ) ) {
+			} else if ( !$.isArray( this.options.languages ) ) {
 				throw new Error( 'languages need to be supplied as string or array' );
 			}
 		}
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this._setState( value ? 'disable' : 'enable' );
 		}
 
@@ -203,7 +202,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @param {string} state "disable" or "enable"
 	 */
 	_setState: function( state ) {
-		if( this.$entityTerms ) {
+		if ( this.$entityTerms ) {
 			this.$entityTerms.data( 'entitytermsview' )[state]();
 		}
 	}
@@ -221,8 +220,8 @@ $.wikibase.entityview.TYPES = [];
 $.expr[':'][$.wikibase.entityview.prototype.widgetFullName]
 	= $.expr.createPseudo( function( fullName ) {
 		return function( elem ) {
-			for( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
-				if( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
+			for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
+				if ( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
 					return true;
 				}
 			}

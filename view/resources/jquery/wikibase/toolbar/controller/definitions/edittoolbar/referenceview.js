@@ -20,7 +20,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				},
 				$container = $referenceview.find( '.wikibase-toolbar-container' );
 
-			if( !$container.length ) {
+			if ( !$container.length ) {
 				$container = $( '<div/>' ).appendTo(
 					$referenceview.find( '.wikibase-referenceview-heading' )
 				);
@@ -28,11 +28,11 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			options.$container = $container;
 
-			if( !!referenceview.value() ) {
+			if ( !!referenceview.value() ) {
 				options.onRemove = function() {
 					var $statementview = $referenceview.closest( ':wikibase-statementview' ),
 						statementview = $statementview.data( 'statementview' );
-					if( statementview ) {
+					if ( statementview ) {
 						statementview.remove( referenceview );
 					}
 				};
@@ -41,12 +41,12 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			$referenceview.edittoolbar( options );
 
 			$referenceview.on( 'keydown.edittoolbar', function( event ) {
-				if( referenceview.option( 'disabled' ) ) {
+				if ( referenceview.option( 'disabled' ) ) {
 					return;
 				}
-				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
+				if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 					referenceview.stopEditing( true );
-				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
+				} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					referenceview.stopEditing( false );
 				}
 			} );
@@ -64,7 +64,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			var $referenceview = $( event.target ),
 				referenceview = $referenceview.data( 'referenceview' );
 
-			if( !referenceview ) {
+			if ( !referenceview ) {
 				return;
 			}
 
@@ -74,7 +74,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				enableSave = ( referenceview.isValid() && !referenceview.isInitialValue() );
 
 			edittoolbar.option( 'disabled', disable );
-			if( !disable ) {
+			if ( !disable ) {
 				btnSave.option( 'disabled', !enableSave );
 			}
 		}

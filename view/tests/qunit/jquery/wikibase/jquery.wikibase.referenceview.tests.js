@@ -48,7 +48,7 @@
 				var $node = $( node ),
 					referenceview = $node.data( 'referenceview' );
 
-				if( referenceview ) {
+				if ( referenceview ) {
 					referenceview.destroy();
 				}
 

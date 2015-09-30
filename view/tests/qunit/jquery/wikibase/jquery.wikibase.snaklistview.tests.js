@@ -119,7 +119,7 @@
 				var $node = $( node ),
 					snaklistview = $node.data( 'snaklistview' );
 
-				if( snaklistview ) {
+				if ( snaklistview ) {
 					snaklistview.destroy();
 				}
 
@@ -681,14 +681,14 @@
 				isDisabled = true,
 				isEnabled = true;
 
-			for( var i = 0; i < snakviews.length; i++ ) {
+			for ( var i = 0; i < snakviews.length; i++ ) {
 				isDisabled = isDisabled && snakviews[i].option( 'disabled' );
 				isEnabled = isEnabled && !snakviews[i].option( 'disabled' );
 			}
 
-			if( isDisabled && !isEnabled ) {
+			if ( isDisabled && !isEnabled ) {
 				return 'disabled';
-			} else if( !isDisabled && isEnabled ) {
+			} else if ( !isDisabled && isEnabled ) {
 				return 'enabled';
 			} else {
 				return 'mixed';
@@ -783,7 +783,7 @@
 		var $node,
 			snaklistview;
 
-		for( var i = 0; i < testCases.length; i++ ) {
+		for ( var i = 0; i < testCases.length; i++ ) {
 			$node = createSnaklistview( snakList );
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -838,7 +838,7 @@
 			['abcdegf', 'abcdefg' ]
 		];
 
-		for( var i = 0; i < testCases.length; i++ ) {
+		for ( var i = 0; i < testCases.length; i++ ) {
 			$node = createSnaklistview( snakList );
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -880,7 +880,7 @@
 				var $snakview = $( snakviewNode ),
 					snakview = snaklistview._lia.liInstance( $snakview );
 
-				if( i === 0 ) {
+				if ( i === 0 ) {
 					assert.ok(
 						snakview.propertyLabelIsVisible(),
 						'Topmost snakview\'s property label is visible.'

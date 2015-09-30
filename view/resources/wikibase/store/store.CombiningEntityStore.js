@@ -15,7 +15,7 @@
 			index = 0;
 
 		function tryNext() {
-			if( handlers.length <= index ) {
+			if ( handlers.length <= index ) {
 				deferred.reject();
 				return;
 			}

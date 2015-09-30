@@ -138,8 +138,8 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @protected
 	 */
 	_create: function() {
-		if( this.options.locked === true || this.options.locked.property === true ) {
-			if( !(
+		if ( this.options.locked === true || this.options.locked.property === true ) {
+			if ( !(
 				this.options.value instanceof wb.datamodel.Snak || ( this.options.value && this.options.value.property )
 			) ) {
 				mw.log.warn( 'You cannot lock the property without specifying a property' );
@@ -158,19 +158,19 @@ $.widget( 'wikibase.snakview', PARENT, {
 			snakTypeSelectorIsEmpty = !this.$snakTypeSelector.contents().length,
 			snakValueIsEmpty = !this.$snakValue.contents().length;
 
-		if( propertyIsEmpty && !this._isEncapsulated() ) {
+		if ( propertyIsEmpty && !this._isEncapsulated() ) {
 			this.drawProperty();
 		}
 
-		if( snakTypeSelectorIsEmpty ) {
+		if ( snakTypeSelectorIsEmpty ) {
 			this.drawSnakTypeSelector();
 		}
 
-		if( snakValueIsEmpty ) {
+		if ( snakValueIsEmpty ) {
 			this.drawVariation();
 		}
 
-		if( this.option( 'autoStartEditing' ) && !this.snak() ) {
+		if ( this.option( 'autoStartEditing' ) && !this.snak() ) {
 			// If no Snak is represented, offer UI to build one.
 			// This clearly implies draw() since it requires visual changes!
 			this.startEditing();
@@ -196,15 +196,15 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @throws {Error} when trying to set an invalid value.
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'value' ) {
-			if(
-				value !== null
-				&& !$.isPlainObject( value ) && !( value instanceof wb.datamodel.Snak )
+		if ( key === 'value' ) {
+			if ( value !== null
+				&& !$.isPlainObject( value )
+				&& !( value instanceof wb.datamodel.Snak )
 			) {
 				throw new Error( 'The given value has to be a plain object, an instance of '
 					+ 'wikibase.datamodel.Snak, or null' );
 			}
-		} else if( key === 'locked' && typeof value === 'boolean' ) {
+		} else if ( key === 'locked' && typeof value === 'boolean' ) {
 			var locked = value;
 			value = $.extend( {}, $.wikibase.snakview.prototype.options.locked );
 			$.each( $.wikibase.snakview.prototype.options.locked, function( k, v ) {
@@ -214,22 +214,22 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'value' ) {
+		if ( key === 'value' ) {
 			this.updateVariation();
 			this.draw();
-		} else if( key === 'disabled' ) {
+		} else if ( key === 'disabled' ) {
 			var propertySelector = this._getPropertySelector(),
 				snakTypeSelector = this._getSnakTypeSelector();
 
-			if( propertySelector ) {
+			if ( propertySelector ) {
 				propertySelector.option( 'disabled', key );
 			}
 
-			if( snakTypeSelector ) {
+			if ( snakTypeSelector ) {
 				snakTypeSelector.option( 'disabled', key );
 			}
 
-			if( this._variation ) {
+			if ( this._variation ) {
 				this._variation[value ? 'disable' : 'enable']();
 			}
 		}
@@ -255,7 +255,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 		.prop( 'placeholder', mw.msg( 'wikibase-snakview-property-input-placeholder' ) )
 		.on( 'eachchange', function( event, oldValue ) {
 			// remove out-dated variations
-			if( self._variation ) {
+			if ( self._variation ) {
 				self.drawSnakTypeSelector();
 				self.updateVariation();
 				self.drawVariation();
@@ -299,7 +299,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 */
 	destroy: function() {
 		var snakTypeSelector = this._getSnakTypeSelector();
-		if( snakTypeSelector ) {
+		if ( snakTypeSelector ) {
 			snakTypeSelector.destroy();
 			snakTypeSelector.element.remove();
 		}
@@ -310,7 +310,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * Starts the widget's edit mode.
 	 */
 	startEditing: function() {
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			return;
 		}
 
@@ -318,7 +318,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 		this._isInEditMode = true;
 
-		if( this._variation ) {
+		if ( this._variation ) {
 			$( this._variation ).one( 'afterstartediting', function() {
 				self._trigger( 'afterstartediting' );
 			} );
@@ -334,11 +334,11 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @inheritdoc
 	 */
 	focus: function() {
-		if( this._variation && this._variation.isFocusable() ) {
+		if ( this._variation && this._variation.isFocusable() ) {
 			this._variation.focus();
 		} else {
 			var propertySelector = this._getPropertySelector();
-			if( propertySelector ) {
+			if ( propertySelector ) {
 				propertySelector.element.focus();
 			} else {
 				this.element.focus();
@@ -353,7 +353,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 *        from before edit mode was started.
 	 */
 	stopEditing: function( dropValue ) {
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			return;
 		}
 
@@ -363,17 +363,17 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 		this._isInEditMode = false;
 
-		if( this._variation ) {
+		if ( this._variation ) {
 			this._variation.stopEditing( dropValue );
 
-			if( !dropValue ) {
+			if ( !dropValue ) {
 				// TODO: "this.snak( this.snak() )" is supposed to work to update the Snak. However,
 				// the Variation asking the ValueView returns null as soon as edit mode is left.
 				this.snak( snak );
 			}
 		}
 
-		if( !this._variation || dropValue ) {
+		if ( !this._variation || dropValue ) {
 			this.value( this.options.value );
 		}
 
@@ -430,18 +430,18 @@ $.widget( 'wikibase.snakview', PARENT, {
 		var currentSnak = this.snak(),
 			initialSnak;
 
-		if( this.options.value instanceof wb.datamodel.Snak ) {
+		if ( this.options.value instanceof wb.datamodel.Snak ) {
 			initialSnak = this.options.value;
 		} else {
 			var snakDeserializer = new wb.serialization.SnakDeserializer();
 			try {
 				initialSnak = snakDeserializer.deserialize( this.options.value );
-			} catch( e ) {
+			} catch ( e ) {
 				initialSnak = null;
 			}
 		}
 
-		if( !initialSnak && !currentSnak ) {
+		if ( !initialSnak && !currentSnak ) {
 			return true;
 		}
 		return currentSnak && currentSnak.equals( initialSnak );
@@ -462,7 +462,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @return {jQuery.wikibase.entityselector|null}
 	 */
 	_getPropertySelector: function() {
-		if( this.$property ) {
+		if ( this.$property ) {
 			return this.$property.children().first().data( 'entityselector' ) || null;
 		}
 		return null;
@@ -476,7 +476,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @return {jQuery.wikibase.snakview.SnakTypeSelector|null}
 	 */
 	_getSnakTypeSelector: function() {
-		if( this.$snakTypeSelector ) {
+		if ( this.$snakTypeSelector ) {
 			return this.$snakTypeSelector.children().first().data( 'snaktypeselector' ) || null;
 		}
 		return null;
@@ -493,7 +493,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 *         set the value.
 	 */
 	value: function( value ) {
-		if( value !== undefined ) {
+		if ( value !== undefined ) {
 			this.option( 'value', value );
 			return;
 		}
@@ -503,28 +503,28 @@ $.widget( 'wikibase.snakview', PARENT, {
 				? snakSerializer.serialize( this.options.value )
 				: this.options.value;
 
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			return serialization;
 		}
 
 		value = {};
 
-		if( this.options.locked.property && serialization.property !== undefined ) {
+		if ( this.options.locked.property && serialization.property !== undefined ) {
 			value.property = serialization.property;
-		} else if( !this.options.locked.property ) {
+		} else if ( !this.options.locked.property ) {
 			var propertySelector = this._getPropertySelector(),
 				propertyStub = propertySelector && propertySelector.selectedEntity();
-			if( propertyStub && propertyStub.id !== undefined ) {
+			if ( propertyStub && propertyStub.id !== undefined ) {
 				value.property = propertyStub.id;
 			}
 		}
 
-		if( this.options.locked.snaktype && serialization.snaktype !== undefined ) {
+		if ( this.options.locked.snaktype && serialization.snaktype !== undefined ) {
 			value.snaktype = serialization.snaktype;
-		} else if( !this.options.locked.snaktype ) {
+		} else if ( !this.options.locked.snaktype ) {
 			var snakTypeSelector = this._getSnakTypeSelector(),
 				snakType = snakTypeSelector && snakTypeSelector.snakType();
-			if( snakType ) {
+			if ( snakType ) {
 				value.snaktype = snakType;
 			}
 		}
@@ -542,13 +542,13 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @return {wikibase.datamodel.Snak|null|undefined}
 	 */
 	snak: function( snak ) {
-		if( snak !== undefined ) {
+		if ( snak !== undefined ) {
 			this.value( snak || {} );
 			return;
 		}
 
 		var value = this.value();
-		if( value.datavalue instanceof dv.DataValue ) {
+		if ( value.datavalue instanceof dv.DataValue ) {
 			value.datavalue = {
 				type: value.datavalue.getType(),
 				value: value.datavalue.toJSON()
@@ -558,7 +558,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 		var snakDeserializer =  new wb.serialization.SnakDeserializer();
 		try {
 			return snakDeserializer.deserialize( value );
-		} catch( e ) {
+		} catch ( e ) {
 			return null;
 		}
 	},
@@ -572,13 +572,13 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @return {string|null|undefined}
 	 */
 	propertyId: function( propertyId ) {
-		if( propertyId === undefined ) {
+		if ( propertyId === undefined ) {
 			return this.value().property || null;
 		} else {
 			var value = this.value();
 
-			if( propertyId !== value.property ) {
-				if( propertyId === null ) {
+			if ( propertyId !== value.property ) {
+				if ( propertyId === null ) {
 					delete value.property;
 				} else {
 					value.property = propertyId;
@@ -600,13 +600,13 @@ $.widget( 'wikibase.snakview', PARENT, {
 	snakType: function( snakType ) {
 		var value = this.value();
 
-		if( snakType === undefined ) {
+		if ( snakType === undefined ) {
 			return value.snaktype || null;
-		} else if( snakType === value.snaktype ) {
+		} else if ( snakType === value.snaktype ) {
 			return;
 		}
 
-		if( snakType === null ) {
+		if ( snakType === null ) {
 			delete value.snaktype;
 		} else {
 			// TODO: check whether given snak type is actually valid!
@@ -638,12 +638,12 @@ $.widget( 'wikibase.snakview', PARENT, {
 			variationsFactory = $.wikibase.snakview.variations,
 			VariationConstructor = snakType ? variationsFactory.getVariation( snakType ) : null;
 
-		if( this._variation
+		if ( this._variation
 			&& ( !propertyId || this._variation.constructor !== VariationConstructor )
 		) {
 			var variationValue = this._variation.value();
 
-			if( variationValue.datavalue ) {
+			if ( variationValue.datavalue ) {
 				variationValue.datavalue = {
 					type: variationValue.datavalue.getType(),
 					value: variationValue.datavalue.toJSON()
@@ -659,7 +659,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 			this._variation = null;
 		}
 
-		if( !this._variation && propertyId && VariationConstructor ) {
+		if ( !this._variation && propertyId && VariationConstructor ) {
 			// Snak type has changed so we need another variation Object!
 			this._variation = new VariationConstructor(
 				new $.wikibase.snakview.ViewState( this ),
@@ -669,7 +669,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 				this.options.dataTypeStore
 			);
 
-			if( !value.datavalue
+			if ( !value.datavalue
 				&& this._cachedValues[snakType] && this._cachedValues[snakType].datavalue
 			) {
 				value.datavalue = $.extend( {}, this._cachedValues[snakType].datavalue );
@@ -710,7 +710,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 			deferred = $.Deferred(),
 			propertyId = this.value().property;
 
-		if( this.options.locked.property
+		if ( this.options.locked.property
 			&& ( this.$property.contents().length || this._isEncapsulated() )
 		) {
 			return deferred.resolve().promise();
@@ -745,14 +745,14 @@ $.widget( 'wikibase.snakview', PARENT, {
 			deferred = $.Deferred(),
 			editable = !this.options.locked.property && this.isInEditMode();
 
-		if( !propertyId ) {
-			if( editable ) {
+		if ( !propertyId ) {
+			if ( editable ) {
 				deferred.resolve( this._createPropertyDOM( '' ) );
 			} else {
 				deferred.resolve( '' );
 			}
 		} else {
-			if( editable ) {
+			if ( editable ) {
 				this.options.entityIdPlainFormatter.format( propertyId ).done( function( propertyLabel ) {
 					deferred.resolve( self._createPropertyDOM( propertyLabel ) );
 				} );
@@ -779,11 +779,11 @@ $.widget( 'wikibase.snakview', PARENT, {
 		var propertySelector = this._getPropertySelector();
 
 		// TODO: use selectedEntity() or other command to set selected entity in both cases!
-		if( propertySelector ) {
+		if ( propertySelector ) {
 			// property selector in DOM already, just replace current value
 			var currentValue = propertySelector.widget().val();
 			// Impose case-insensitivity:
-			if( propertyLabel.toLowerCase() !== currentValue.toLocaleLowerCase() ) {
+			if ( propertyLabel.toLowerCase() !== currentValue.toLocaleLowerCase() ) {
 				propertySelector.widget().val( propertyLabel );
 			}
 		} else {
@@ -802,26 +802,25 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @since 0.4
 	 */
 	drawSnakTypeSelector: function() {
-		if( this.options.locked.snaktype && this.$snakTypeSelector.contents().length ) {
+		if ( this.options.locked.snaktype && this.$snakTypeSelector.contents().length ) {
 			return;
 		}
 
 		var snakTypes = $.wikibase.snakview.variations.getCoveredSnakTypes(),
 			selector = this._getSnakTypeSelector();
 
-		if(
-			!this.isInEditMode()
+		if ( !this.isInEditMode()
 			|| snakTypes.length <= 1
 			|| this.options.locked.snaktype
 		) {
-			if( selector ) {
+			if ( selector ) {
 				selector.destroy();
 			}
 			this.$snakTypeSelector.empty();
 			return; // No type selector required!
 		}
 
-		if( !selector ) {
+		if ( !selector ) {
 			var $selector = this._buildSnakTypeSelector();
 			this.$snakTypeSelector.empty().append( $selector );
 			selector = $selector.data( 'snaktypeselector' );
@@ -852,9 +851,9 @@ $.widget( 'wikibase.snakview', PARENT, {
 			value = this.value(),
 			propertyId = value ? value.property : null;
 
-		if( propertyId && this._variation ) {
+		if ( propertyId && this._variation ) {
 			$( this._variation ).one( 'afterdraw', function() {
-				if( self.isInEditMode() ) {
+				if ( self.isInEditMode() ) {
 					self.variation().startEditing();
 				}
 			} );
@@ -863,7 +862,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 			// remove any remains from previous rendering or initial template (e.g. '$4')
 			this.$snakValue.empty();
 
-			if( propertyId ) {
+			if ( propertyId ) {
 				// property ID selected but apparently no variation available to handle it
 				$( '<span/>' ).text( mw.msg( 'wikibase-snakview-choosesnaktype' ) )
 				.addClass( this.widgetBaseClass + '-unsupportedsnaktype' )
@@ -898,7 +897,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 		$anchor.on( changeEvent + '.' + this.widgetName, function( event ) {
 			self.updateVariation();
 			self.drawVariation();
-			if( self._variation ) {
+			if ( self._variation ) {
 				self._variation.focus();
 			}
 			self._trigger( 'change' );

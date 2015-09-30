@@ -53,7 +53,7 @@
 			 */
 			$.widget( 'wikibasetest.valuewidget', {
 				value: function( value ) {
-					if( value ) {
+					if ( value ) {
 						this.options.value = value;
 					}
 					return this.options.value;
@@ -65,7 +65,7 @@
 				var $node = $( node ),
 					listview = $node.data( 'listview' );
 
-				if( listview ) {
+				if ( listview ) {
 					listview.destroy();
 				}
 
@@ -179,7 +179,7 @@
 			values = ['a', 'b', 'c'],
 			listItems = [];
 
-		for( var i = 0; i < values.length; i++ ) {
+		for ( var i = 0; i < values.length; i++ ) {
 			listview.addItem( values[i] );
 
 			assert.strictEqual(
@@ -322,7 +322,7 @@
 		var $node = createListview( ['a', 'b', 'c'] ),
 			listview = $node.data( 'listview' );
 
-		for( var i = 0; i < listview.items().length; i++ ) {
+		for ( var i = 0; i < listview.items().length; i++ ) {
 			assert.strictEqual(
 				listview.indexOf( listview.items().eq( i ) ),
 				i,

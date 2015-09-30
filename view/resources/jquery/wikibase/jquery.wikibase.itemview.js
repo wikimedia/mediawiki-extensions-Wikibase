@@ -59,12 +59,12 @@ $.widget( 'wikibase.itemview', PARENT, {
 		this._createEntityview();
 
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element );
-		if( this.$statements.length === 0 ) {
+		if ( this.$statements.length === 0 ) {
 			this.$statements = $( '<div/>' ).appendTo( this.element );
 		}
 
 		this.$siteLinks = $( '.wikibase-sitelinkgrouplistview', this.element );
-		if( this.$siteLinks.length === 0 ) {
+		if ( this.$siteLinks.length === 0 ) {
 			this.$siteLinks = $( '<div/>' ).appendTo( this.element );
 		}
 	},
@@ -159,7 +159,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 		// TODO: Resolve integration of referenceviews
 		this.$statements.find( '.wb-statement-references' ).each( function() {
 			var $listview = $( this ).children( ':wikibase-listview' );
-			if( $listview.length ) {
+			if ( $listview.length ) {
 				$listview.data( 'listview' )[state]();
 			}
 		} );

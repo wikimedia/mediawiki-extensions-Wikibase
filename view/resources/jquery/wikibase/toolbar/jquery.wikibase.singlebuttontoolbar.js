@@ -45,10 +45,10 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	_create: function() {
 		PARENT.prototype._create.call( this );
 
-		if( !this.options.$content.length ) {
+		if ( !this.options.$content.length ) {
 			var $scrapedButton = this._scrapeButton();
 			this.options.$content = this._initDefaultButton( $scrapedButton );
-			if( !$scrapedButton ) {
+			if ( !$scrapedButton ) {
 				this.draw();
 			}
 		}
@@ -80,7 +80,7 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 
 		this.getContainer().children( '.wikibase-toolbar-button' ).each( function() {
 			var $button = $( this );
-			if( $button.text() === self.options.label ) {
+			if ( $button.text() === self.options.label ) {
 				$defaultButton = $button;
 				return false;
 			}
@@ -94,7 +94,7 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	 */
 	focus: function() {
 		var button = this.options.$content.first().data( 'toolbarbutton' );
-		if( button ) {
+		if ( button ) {
 			button.focus();
 		} else {
 			this.element.focus();

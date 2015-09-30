@@ -20,18 +20,18 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				},
 				$container = $statementview.children( '.wikibase-toolbar-container' );
 
-			if( !$container.length ) {
+			if ( !$container.length ) {
 				$container = $( '<div/>' ).appendTo( $statementview );
 			}
 
 			options.$container = $container;
 
-			if( !!statementview.value() ) {
+			if ( !!statementview.value() ) {
 				options.onRemove = function() {
 					var $statementlistview
 							= $statementview.closest( ':wikibase-statementlistview' ),
 						statementlistview = $statementlistview.data( 'statementlistview' );
-					if( statementlistview ) {
+					if ( statementlistview ) {
 						statementlistview.remove( statementview );
 					}
 				};
@@ -40,12 +40,12 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			$statementview.edittoolbar( options );
 
 			$statementview.on( 'keydown.edittoolbar', function( event ) {
-				if( statementview.option( 'disabled' ) ) {
+				if ( statementview.option( 'disabled' ) ) {
 					return;
 				}
-				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
+				if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 					statementview.stopEditing( true );
-				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
+				} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					statementview.stopEditing( false );
 				}
 			} );
@@ -76,9 +76,9 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 						: [],
 					areInitialQualifiers = true;
 
-				if( enable && snaklistviews.length ) {
-					for( var i = 0; i < snaklistviews.length; i++ ) {
-						if( !snaklistviews[i].isInitialValue() ) {
+				if ( enable && snaklistviews.length ) {
+					for ( var i = 0; i < snaklistviews.length; i++ ) {
+						if ( !snaklistviews[i].isInitialValue() ) {
 							areInitialQualifiers = false;
 						}
 					}
@@ -102,7 +102,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			var $statementview = $( event.target ),
 				statementview = $statementview.data( 'statementview' );
 
-			if( !statementview ) {
+			if ( !statementview ) {
 				return;
 			}
 
