@@ -19,21 +19,10 @@
  * @param {Object} options
  * @param {wikibase.datamodel.SnakList} [value=new wikibase.datamodel.SnakList()]
  *        The `SnakList` to be displayed by this view.
+ * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
  * @param {boolean} [singleProperty=true]
  *        If `true`, it is assumed that the widget is filled with `Snak`s featuring a single common
  *        property.
- * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
- *        Required for dynamically rendering links to `Entity`s.
- * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
- *        Required for dynamically rendering plain text references to `Entity`s.
- * @param {wikibase.store.EntityStore} options.entityStore
- *        Required for dynamically gathering `Entity`/`Property` information.
- * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
- *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
- *        `jQuery.valueview`.
- * @param {dataTypes.DataTypeStore} options.dataTypeStore
- *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
- *        object when interacting on a "value" `Variation`.
  * @param {string} [optionshelpMessage=mw.msg( 'wikibase-claimview-snak-new-tooltip' )]
  *        End-user message explaining how to use the `snaklistview` widget. The message is most
  *        likely to be used inside the tooltip of the toolbar corresponding to the `snaklistview`.
@@ -77,12 +66,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		},
 		value: null,
 		singleProperty: false,
-		helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' ),
-		entityIdHtmlFormatter: null,
-		entityIdPlainFormatter: null,
-		entityStore: null,
-		valueViewBuilder: null,
-		dataTypeStore: null
+		listItemAdapter: null,
+		helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' )
 	},
 
 	/**
@@ -116,11 +101,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	_create: function() {
 		this.options.value = this.options.value || new wb.datamodel.SnakList();
 
-		if ( !this.options.entityStore
-			|| !this.options.valueViewBuilder
-			|| !this.options.dataTypeStore
-			|| !( this.options.value instanceof wb.datamodel.SnakList )
-		) {
+		if ( !this.options.listItemAdapter || !( this.options.value instanceof wb.datamodel.SnakList ) ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
@@ -152,26 +133,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		}
 
 		this.$listview.listview( {
-			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-				listItemWidget: $.wikibase.snakview,
-				newItemOptionsFn: function( value ) {
-					return {
-						value: value || {
-							property: null,
-							snaktype: wb.datamodel.PropertyValueSnak.TYPE
-						},
-						locked: {
-							// Do not allow changing the property when editing existing an snak.
-							property: !!value
-						},
-						dataTypeStore: self.option( 'dataTypeStore' ),
-						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
-						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
-						entityStore: self.option( 'entityStore' ),
-						valueViewBuilder: self.option( 'valueViewBuilder' )
-					};
-				}
-			} ),
+			listItemAdapter: this.options.listItemAdapter,
 			value: this.options.value.toArray()
 		} );
 
@@ -185,14 +147,6 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 
 		this.$listview
 		.off( '.' + this.widgetName )
-		.on( 'listviewitemadded.' + this.widgetName, function( event, value, $newLi ) {
-			// Listen to all the snakview "change" events to be able to determine whether the
-			// snaklistview itself is valid.
-			$newLi.on( self._lia.prefixedEvent( 'change' ), function( event ) {
-				// Forward the "change" event to external components (e.g. the edit toolbar).
-				self._trigger( 'change' );
-			} );
-		} )
 		.on( this._lia.prefixedEvent( 'change.' ) + this.widgetName
 			+ ' listviewafteritemmove.' + this.widgetName
 			+ ' listviewitemremoved.' + this.widgetName, function( event ) {

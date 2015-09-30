@@ -918,15 +918,8 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 */
 	showPropertyLabel: function() {
 		this.$property.show();
-	},
-
-	/**
-	 * Returns whether the property label currently is visible.
-	 * @since 0.5
-	 */
-	propertyLabelIsVisible: function() {
-		return this.$property.is( ':visible' );
 	}
+
 } );
 
 $.extend( $.wikibase.snakview, existingSnakview );
