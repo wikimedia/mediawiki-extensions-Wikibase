@@ -16,7 +16,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				$referenceview = $snakview.closest( ':wikibase-referenceview' ),
 				referenceview = $referenceview.data( 'referenceview' );
 
-			if( !referenceview ) {
+			if ( !referenceview ) {
 				return;
 			}
 
@@ -29,7 +29,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					$container: $( '<div/>' ).appendTo( $snakview )
 				} )
 				.on( 'removetoolbarremove.removetoolbar', function( event ) {
-					if( event.target === $snakview[0] ) {
+					if ( event.target === $snakview[0] ) {
 						snakviewPropertyGroupListview.removeItem( $snakview );
 					}
 				} );
@@ -63,7 +63,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 
 						var referenceview = $referenceview.data( 'referenceview' );
 
-						if( !referenceview ) {
+						if ( !referenceview ) {
 							return;
 						}
 
@@ -71,18 +71,18 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 							lia = listview.listItemAdapter(),
 							$snaklistviews = listview.items();
 
-						for( var i = 0; i < $snaklistviews.length; i++ ) {
+						for ( var i = 0; i < $snaklistviews.length; i++ ) {
 							var snaklistview = lia.liInstance( $snaklistviews.eq( i ) );
 
 							// Item might be about to be removed not being a list item instance.
-							if( snaklistview ) {
+							if ( snaklistview ) {
 								var $snakviews = snaklistview._listview.items();
 
-								for( var j = 0; j < $snakviews.length; j++ ) {
+								for ( var j = 0; j < $snakviews.length; j++ ) {
 									var $snakview = $snakviews.eq( j ),
 										removetoolbar = $snakview.data( 'removetoolbar' );
 
-									if( removetoolbar ) {
+									if ( removetoolbar ) {
 										removetoolbar[
 											referenceview.option( 'disabled' )
 											|| $snakviews.length === 1 && $snaklistviews.length === 1
@@ -104,7 +104,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				lia = listview.listItemAdapter(),
 				$snaklistviews = listview.items();
 
-			if( !$snaklistviews.length ) {
+			if ( !$snaklistviews.length ) {
 				return;
 			}
 
@@ -114,21 +114,21 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				removetoolbar = $firstSnakview.data( 'removetoolbar' ),
 				numberOfSnakviews = 0;
 
-			for( var i = 0; i < $snaklistviews.length; i++ ) {
+			for ( var i = 0; i < $snaklistviews.length; i++ ) {
 				var snaklistviewWidget = lia.liInstance( $snaklistviews.eq( i ) ),
 					snaklistviewListview = snaklistviewWidget.$listview.data( 'listview' ),
 					snaklistviewListviewLia = snaklistviewListview.listItemAdapter(),
 					$snakviews = snaklistviewListview.items();
 
-				for( var j = 0; j < $snakviews.length; j++ ) {
+				for ( var j = 0; j < $snakviews.length; j++ ) {
 					var snakview = snaklistviewListviewLia.liInstance( $snakviews.eq( j ) );
-					if( snakview.snak() ) {
+					if ( snakview.snak() ) {
 						numberOfSnakviews++;
 					}
 				}
 			}
 
-			if( removetoolbar ) {
+			if ( removetoolbar ) {
 				removetoolbar[ numberOfSnakviews > 1 ? 'enable' : 'disable' ]();
 			}
 		}

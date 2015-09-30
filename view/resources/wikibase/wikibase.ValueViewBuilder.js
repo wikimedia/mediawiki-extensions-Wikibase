@@ -66,7 +66,7 @@
 				value: dataValue
 			} );
 
-			if( !dataType || ( dataValue && dataValue.getType() === 'undeserializable' ) ) {
+			if ( !dataType || ( dataValue && dataValue.getType() === 'undeserializable' ) ) {
 				// FIXME: For now, treat value with unknown data type (e.g. the property is
 				// deleted) in same way as undeserializable and not allow it to be editable.
 				// If we allow it to be edited, it might be something like commons media but

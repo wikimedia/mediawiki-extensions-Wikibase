@@ -49,7 +49,7 @@ QUnit.module( 'jquery.wikibase.statementlistview', QUnit.newMwEnvironment( {
 			var $statementlistview = $( this ),
 				statementlistview = $statementlistview.data( 'statementlistview' );
 
-			if( statementlistview ) {
+			if ( statementlistview ) {
 				statementlistview.destroy();
 			}
 

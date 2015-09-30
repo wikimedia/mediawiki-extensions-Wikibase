@@ -51,7 +51,7 @@ QUnit.module( 'jquery.wikibase.statementgrouplistview', QUnit.newMwEnvironment( 
 			var $statementgrouplistview = $( this ),
 				statementgrouplistview = $statementgrouplistview.data( 'statementgrouplistview' );
 
-			if( statementgrouplistview ) {
+			if ( statementgrouplistview ) {
 				statementgrouplistview.destroy();
 			}
 

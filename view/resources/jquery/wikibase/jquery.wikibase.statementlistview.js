@@ -118,8 +118,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if(
-			!this.options.claimGuidGenerator
+		if ( !this.options.claimGuidGenerator
 			|| !this.options.entityStore
 			|| !this.options.valueViewBuilder
 			|| !this.options.entityChangersFactory
@@ -155,7 +154,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 			// Cancelling edit mode or having stopped edit mode after saving an existing (not
 			// pending) statement.
-			if( dropValue || !statementview || statementview.value() ) {
+			if ( dropValue || !statementview || statementview.value() ) {
 				self._trigger( 'afterstopediting', null, [dropValue] );
 			}
 		} )
@@ -182,7 +181,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 		var self = this,
 			propertyId;
 
-		if( $.expr[':']['wikibase-statementgroupview'] ) {
+		if ( $.expr[':']['wikibase-statementgroupview'] ) {
 			var $statementgroupview = this.element.closest( ':wikibase-statementgroupview' ),
 				statementgroupview = $statementgroupview.data( 'statementgroupview' ),
 				statementGroup = statementgroupview && statementgroupview.option( 'value' );
@@ -233,14 +232,14 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @return {wikibase.datamodel.StatementList|undefined}
 	 */
 	value: function( statementList ) {
-		if( statementList === undefined ) {
+		if ( statementList === undefined ) {
 			var lia = this._listview.listItemAdapter();
 
 			statementList = new wb.datamodel.StatementList();
 
 			this._listview.items().each( function() {
 				var statement = lia.liInstance( $( this ) ).value();
-				if( statement ) {
+				if ( statement ) {
 					statementList.addItem( statement );
 				}
 			} );
@@ -283,7 +282,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 				self._listview.removeItem( $statementview );
 
-				if( !dropValue && statement ) {
+				if ( !dropValue && statement ) {
 					self._listview.addItem( statement );
 				}
 
@@ -320,8 +319,8 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @protected
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'value' && !!value ) {
-			if( !( value instanceof wb.datamodel.StatementList ) ) {
+		if ( key === 'value' && !!value ) {
+			if ( !( value instanceof wb.datamodel.StatementList ) ) {
 				throw new Error( 'value needs to be a wb.datamodel.StatementList instance' );
 			}
 			this._listview.value( value.toArray() );
@@ -329,7 +328,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this._listview.option( key, value );
 		}
 
@@ -342,7 +341,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	focus: function() {
 		var $items = this._listview.items();
 
-		if( $items.length ) {
+		if ( $items.length ) {
 			this._listview.listItemAdapter().liInstance( $items.first() ).focus();
 		} else {
 			this.element.focus();

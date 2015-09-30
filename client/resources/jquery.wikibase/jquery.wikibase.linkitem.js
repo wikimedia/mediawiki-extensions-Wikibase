@@ -258,7 +258,7 @@ $.widget( 'wikibase.linkitem', {
 		currentSiteId = this.options.globalSiteId;
 		sites = wb.sites.getSitesOfGroup( this.options.langLinkSiteGroup );
 
-		for( site in sites ) {
+		for ( site in sites ) {
 			if ( sites[ site ].getId() !== currentSiteId ) {
 				linkableSites.push( sites[ site ] );
 			}
@@ -278,7 +278,7 @@ $.widget( 'wikibase.linkitem', {
 
 		try {
 			apiUrl = $( '#wbclient-linkItem-site' ).siteselector( 'getSelectedSite' ).getApi();
-		} catch( e ) {
+		} catch ( e ) {
 			// Invalid input (likely incomplete). Disable the page input an re-disable to button
 			$page.attr( 'disabled', 'disabled' );
 			this.$goButton.button( 'disable' );
@@ -410,7 +410,7 @@ $.widget( 'wikibase.linkitem', {
 
 			// Count site links and abort in case the entity already is linked with a page on this
 			// wiki:
-			for( i in entity.sitelinks ) {
+			for ( i in entity.sitelinks ) {
 				if ( entity.sitelinks[ i ].site ) {
 					siteLinkCount += 1;
 					if ( entity.sitelinks[ i ].site === this.options.globalSiteId ) {
@@ -500,7 +500,7 @@ $.widget( 'wikibase.linkitem', {
 		.appendTo( $siteLinks.find( 'table' ) );
 
 		// Table body
-		for( i in entity.sitelinks ) {
+		for ( i in entity.sitelinks ) {
 			if ( entity.sitelinks[ i ].site ) {
 				// Show a row for each page that is linked with the current entity
 				$siteLinks

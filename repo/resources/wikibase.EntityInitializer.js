@@ -18,7 +18,7 @@
 	 * @throws {Error} if required parameter is not specified properly.
 	 */
 	var EntityInitializer = wb.EntityInitializer = function( configVarName ) {
-		if( typeof configVarName !== 'string' ) {
+		if ( typeof configVarName !== 'string' ) {
 			throw new Error( 'Config variable name needs to be specified' );
 		}
 		this._configVarName = configVarName;
@@ -48,7 +48,7 @@
 			var self = this,
 				deferred = $.Deferred();
 
-			if( this._value ) {
+			if ( this._value ) {
 				return deferred.resolve( this._value ).promise();
 			}
 
@@ -75,7 +75,7 @@
 			mw.hook( 'wikipage.content' ).add( function() {
 				var serializedEntity = mw.config.get( self._configVarName );
 
-				if( serializedEntity === null ) {
+				if ( serializedEntity === null ) {
 					deferred.reject();
 					return;
 				}

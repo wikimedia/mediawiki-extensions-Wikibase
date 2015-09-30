@@ -80,10 +80,10 @@
 		 */
 		destroy: function() {
 			// Prevent error when issuing destroy twice:
-			if( this.$input ) {
+			if ( this.$input ) {
 				// The entityselector may have already been destroyed by a parent component:
 				var entityselector = this.$input.data( 'entityselector' );
-				if( entityselector ) {
+				if ( entityselector ) {
 					entityselector.destroy();
 				}
 			}

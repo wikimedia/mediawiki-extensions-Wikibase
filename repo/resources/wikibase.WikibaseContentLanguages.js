@@ -38,7 +38,7 @@ $.extend( SELF.prototype, {
 	 */
 	getAll: function() {
 		// Cache language codes
-		if( !this._languageCodes && this._languageMap ) {
+		if ( !this._languageCodes && this._languageMap ) {
 			this._languageCodes = $.map( this._languageMap, function( val, key ) {
 				return key;
 			} );

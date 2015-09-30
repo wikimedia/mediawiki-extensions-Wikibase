@@ -128,9 +128,9 @@
 			}
 
 			// If an entity is selected, redirect to that entity's page.
-			if (
-				event.type === 'click'
-				|| event.keyCode === $.ui.keyCode.ENTER || event.keyCode === $.ui.keyCode.SPACE
+			if ( event.type === 'click'
+				|| event.keyCode === $.ui.keyCode.ENTER
+				|| event.keyCode === $.ui.keyCode.SPACE
 			) {
 				var entity = $input.data( 'entityselector' ).selectedEntity();
 				if ( entity && entity.url ) {

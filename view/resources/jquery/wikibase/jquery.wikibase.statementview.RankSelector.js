@@ -22,7 +22,7 @@
 		var rankString = null;
 
 		$.each( wb.datamodel.Statement.RANK, function( rankId, i ) {
-			if( rank === i ) {
+			if ( rank === i ) {
 				rankString = rankId.toLowerCase();
 			}
 			return rankString === null;
@@ -92,14 +92,14 @@
 
 			PARENT.prototype._create.call( this );
 
-			if( !$menu ) {
+			if ( !$menu ) {
 				$menu = this._buildMenu().appendTo( 'body' ).hide();
 
 				$menu.on( 'click.' + this.widgetName, function( event ) {
 					var $li = $( event.target ).closest( 'li' ),
 						rank = $li.data( self.widgetName + '-menuitem-rank' );
 
-					if( rank !== undefined ) {
+					if ( rank !== undefined ) {
 						$.data( this, self.widgetName ).value( rank );
 					}
 				} );
@@ -108,17 +108,17 @@
 			this.element
 			.addClass( this.widgetFullName )
 			.on( 'mouseover.' + this.widgetName, function( event ) {
-				if( !self.option( 'disabled' ) && self.isInEditMode() ) {
+				if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
 					self.element.addClass( 'ui-state-hover' );
 				}
 			} )
 			.on( 'mouseout.' + this.widgetName, function( event ) {
-				if( !self.option( 'disabled' ) && self.isInEditMode() ) {
+				if ( !self.option( 'disabled' ) && self.isInEditMode() ) {
 					self.element.removeClass( 'ui-state-hover' );
 				}
 			} )
 			.on( 'click.' + this.widgetName, function( event ) {
-				if( self.option( 'disabled' ) || !self.isInEditMode() || $menu.is( ':visible' ) ) {
+				if ( self.option( 'disabled' ) || !self.isInEditMode() || $menu.is( ':visible' ) ) {
 					$menu.hide();
 					return;
 				}
@@ -151,7 +151,7 @@
 		 * @inheritdoc
 		 */
 		destroy: function() {
-			if( $( '.' + this.widgetFullName ).length === 0 ) {
+			if ( $( '.' + this.widgetFullName ).length === 0 ) {
 				$menu.data( 'menu' ).destroy();
 				$menu.remove();
 				$menu = null;
@@ -171,10 +171,10 @@
 		 */
 		_setOption: function( key, value ) {
 			var response = PARENT.prototype._setOption.apply( this, arguments );
-			if( key === 'rank' ) {
+			if ( key === 'rank' ) {
 				this._setRank( value );
 				this._trigger( 'afterchange' );
-			} else if( key === 'disabled' ) {
+			} else if ( key === 'disabled' ) {
 				this.draw();
 			}
 			return response;
@@ -226,7 +226,7 @@
 		 * @return {number|undefined}
 		 */
 		value: function( rank ) {
-			if( rank === undefined ) {
+			if ( rank === undefined ) {
 				return this._rank;
 			}
 
@@ -244,7 +244,7 @@
 		_setRank: function( rank ) {
 			this._rank = rank;
 
-			if( $menu && $menu.data( this.widgetName ) === this ) {
+			if ( $menu && $menu.data( this.widgetName ) === this ) {
 				this._updateMenuCss();
 			}
 
@@ -296,7 +296,7 @@
 		 * @inheritdoc
 		 */
 		draw: function() {
-			if( this.isInEditMode() ) {
+			if ( this.isInEditMode() ) {
 				this.element
 				.addClass( 'ui-state-default ui-state-active' )
 				.removeClass( 'ui-state-disabled' );
@@ -313,11 +313,11 @@
 		 * @inheritdoc
 		 */
 		stopEditing: function( dropValue ) {
-			if( dropValue ) {
+			if ( dropValue ) {
 				this._setRank( this.options.value );
 			}
 			// Hide the menu the rank selector currently references to:
-			if( $menu && $menu.data( this.widgetName ) === this ) {
+			if ( $menu && $menu.data( this.widgetName ) === this ) {
 				$menu.hide();
 			}
 			return PARENT.prototype.stopEditing.call( this, dropValue );

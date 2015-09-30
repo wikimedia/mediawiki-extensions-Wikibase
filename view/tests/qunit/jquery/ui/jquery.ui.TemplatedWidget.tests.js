@@ -33,7 +33,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		} );
 	}
 
-	for( var i = 0; i < testSets.length; i++ ) {
+	for ( var i = 0; i < testSets.length; i++ ) {
 		mw.wbTemplates.store.set( 'templatedWidget-test', testSets[i][0] );
 
 		var $subject = $( '<div/>' );
@@ -57,7 +57,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 			'Verified generated HTML.'
 		);
 
-		if( testSets[i][1].templateShortCuts ) {
+		if ( testSets[i][1].templateShortCuts ) {
 			checkShortCuts( testSets[i][1].templateShortCuts, $subject );
 		}
 

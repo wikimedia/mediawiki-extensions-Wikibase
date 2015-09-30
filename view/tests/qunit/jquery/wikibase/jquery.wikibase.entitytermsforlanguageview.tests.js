@@ -62,7 +62,7 @@ QUnit.module( 'jquery.wikibase.entitytermsforlanguageview', QUnit.newMwEnvironme
 				entitytermsforlanguageview
 					= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
 
-			if( entitytermsforlanguageview ) {
+			if ( entitytermsforlanguageview ) {
 				entitytermsforlanguageview.destroy();
 			}
 
@@ -123,7 +123,7 @@ QUnit.test( 'startEditing() & stopEditing()', 6, function( assert ) {
 	function testEditModeChange( func, expectingEvent ) {
 		var deferred = $.Deferred();
 
-		if( !expectingEvent ) {
+		if ( !expectingEvent ) {
 			func();
 			return deferred.resolve().promise();
 		}
@@ -157,7 +157,7 @@ QUnit.test( 'startEditing() & stopEditing()', 6, function( assert ) {
 	 * @param {boolean} [expectingEvent]
 	 */
 	function addToQueue( $queue, func, expectingEvent ) {
-		if( expectingEvent === undefined ) {
+		if ( expectingEvent === undefined ) {
 			expectingEvent = true;
 		}
 		$queue.queue( 'tests', function( next ) {

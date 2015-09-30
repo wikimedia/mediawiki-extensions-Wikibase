@@ -11,7 +11,7 @@ QUnit.module( 'jquery.wikibase.snakview', QUnit.newMwEnvironment( {
 			var $snakview = $( this ),
 				snakview = $snakview.data( 'snakview' );
 
-			if( snakview ) {
+			if ( snakview ) {
 				snakview.destroy();
 			}
 

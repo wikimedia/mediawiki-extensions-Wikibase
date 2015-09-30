@@ -45,7 +45,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					var $referenceview = $( event.target ).closest( ':wikibase-referenceview' ),
 						referenceview = $referenceview.data( 'referenceview' ),
 						addToolbar = $referenceview.data( 'addtoolbar' );
-					if( addToolbar ) {
+					if ( addToolbar ) {
 						addToolbar[referenceview.isValid() ? 'enable' : 'disable']();
 					}
 				}
@@ -59,7 +59,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					var referenceview = $( event.target ).data( 'referenceview' ),
 						addToolbar = $( event.target ).data( 'addtoolbar' );
 
-					if( addToolbar ) {
+					if ( addToolbar ) {
 						addToolbar[referenceview.option( 'disabled' )
 							? 'disable'
 							: 'enable'

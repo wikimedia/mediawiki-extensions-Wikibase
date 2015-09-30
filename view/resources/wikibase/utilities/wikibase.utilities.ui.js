@@ -64,7 +64,7 @@
 		var $msg = $( ( '<span>' + msg + '</span>' ).replace( /__3__/g, '<span/>' ) ),
 			$msgSpan = $msg.children( 'span' );
 
-		if( $msgSpan.length > 0 ) {
+		if ( $msgSpan.length > 0 ) {
 			$msgSpan.attr(
 				'title', // the message displayed in the tooltip
 				mw.msg( pendingQuantityTooltipMessage, pqNumMsg, fqNumMsg, tqNumMsg )

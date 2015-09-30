@@ -44,7 +44,7 @@ QUnit.module( 'jquery.wikibase.entitytermsforlanguagelistview', QUnit.newMwEnvir
 				entitytermsforlanguagelistview
 					= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-			if( entitytermsforlanguagelistview ) {
+			if ( entitytermsforlanguagelistview ) {
 				entitytermsforlanguagelistview.destroy();
 			}
 

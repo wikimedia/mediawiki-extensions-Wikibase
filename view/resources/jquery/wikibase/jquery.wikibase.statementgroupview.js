@@ -84,8 +84,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if(
-			!this.options.claimGuidGenerator
+		if ( !this.options.claimGuidGenerator
 			|| !this.options.entityIdHtmlFormatter
 			|| !this.options.entityStore
 			|| !this.options.valueViewBuilder
@@ -97,7 +96,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 
 		PARENT.prototype._create.call( this );
 
-		if( this.options.value ) {
+		if ( this.options.value ) {
 			this._createPropertyLabel();
 		}
 		this._createStatementlistview();
@@ -107,7 +106,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @inheritdoc
 	 */
 	destroy: function() {
-		if( this.statementlistview ) {
+		if ( this.statementlistview ) {
 			this.statementlistview.element.off( this.widgetName );
 			this.statementlistview.destroy();
 		}
@@ -118,7 +117,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @private
 	 */
 	_createPropertyLabel: function() {
-		if( this.$propertyLabel.contents().length > 0 ) {
+		if ( this.$propertyLabel.contents().length > 0 ) {
 			return;
 		}
 
@@ -139,7 +138,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 
 		var $statementlistview = this.element.find( '.wikibase-statementlistview' );
 
-		if( !$statementlistview.length ) {
+		if ( !$statementlistview.length ) {
 			$statementlistview = $( '<div/>' ).appendTo( this.element );
 		}
 
@@ -184,9 +183,9 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @return {wikibase.datamodel.StatementGroup|null|undefined}
 	 */
 	value: function( statementGroupView ) {
-		if( statementGroupView === undefined ) {
+		if ( statementGroupView === undefined ) {
 			var statementList = this.statementlistview.value();
-			if( !statementList.length ) {
+			if ( !statementList.length ) {
 				return null;
 			}
 			// Use the first statement's main snak property id as the statementgroupview may have
@@ -209,8 +208,8 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 *         `wikibase.datamodel.StatementGroup´ object.
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'value' && !!value ) {
-			if( !( value instanceof wb.datamodel.StatementGroup ) ) {
+		if ( key === 'value' && !!value ) {
+			if ( !( value instanceof wb.datamodel.StatementGroup ) ) {
 				throw new Error( 'value needs to be a wb.datamodel.StatementGroup instance' );
 			}
 			this.statementlistview.value( value.getItemContainer() );
@@ -218,7 +217,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this.statementlistview.option( key, value );
 		}
 

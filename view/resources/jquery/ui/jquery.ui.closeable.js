@@ -71,16 +71,16 @@ $.widget( 'ui.closeable', PARENT, {
 	 * @inheritdoc
 	 */
 	_setOption: function( key, value ) {
-		if( key === '$content' ) {
+		if ( key === '$content' ) {
 			this.$content.empty();
 
-			if( !value ) {
+			if ( !value ) {
 				this.element.hide();
 			} else {
 				this.$content.append( value );
 				this.element.show();
 			}
-		} else if( key === 'cssClass' ) {
+		} else if ( key === 'cssClass' ) {
 			value = value || '';
 			this.element.removeClass( this.options.cssClass );
 			this.element.addClass( value );

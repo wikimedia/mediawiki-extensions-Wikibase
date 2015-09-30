@@ -38,7 +38,7 @@ $.widget( 'wikibase.movetoolbar', PARENT, {
 
 		this._buttons = {};
 
-		if( !this.options.$content.length ) {
+		if ( !this.options.$content.length ) {
 			this.options.$content
 				= this._createDefaultButton( 'up' ).add( this._createDefaultButton( 'down' ) )
 					.appendTo( this.getContainer() );
@@ -85,9 +85,9 @@ $.widget( 'wikibase.movetoolbar', PARENT, {
 		var buttonUp = this._buttons.up && this._buttons.up.data( 'toolbarbutton' ),
 			buttonDown = this._buttons.down && this._buttons.down.data( 'toolbarbutton' );
 
-		if( buttonUp && !buttonUp.option( 'disabled' ) ) {
+		if ( buttonUp && !buttonUp.option( 'disabled' ) ) {
 			buttonUp.focus();
-		} else if( buttonDown && !buttonDown.option( 'disabled' ) ) {
+		} else if ( buttonDown && !buttonDown.option( 'disabled' ) ) {
 			buttonDown.focus();
 		} else {
 			this.element.focus();

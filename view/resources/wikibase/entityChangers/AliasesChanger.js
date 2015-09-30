@@ -90,8 +90,8 @@ $.extend( SELF.prototype, {
 			initialTexts = initialAliases.getTexts(),
 			newAliases = [];
 
-		for( var i = 0; i < currentTexts.length; i++ ) {
-			if( $.inArray( currentTexts[i], initialTexts ) === -1 ) {
+		for ( var i = 0; i < currentTexts.length; i++ ) {
+			if ( $.inArray( currentTexts[i], initialTexts ) === -1 ) {
 				newAliases.push( currentTexts[i] );
 			}
 		}
@@ -109,8 +109,8 @@ $.extend( SELF.prototype, {
 			initialTexts = initialAliases.getTexts(),
 			removedAliases = [];
 
-		for( var i = 0; i < initialTexts.length; i++ ) {
-			if( $.inArray( initialTexts[i], currentTexts ) === -1 ) {
+		for ( var i = 0; i < initialTexts.length; i++ ) {
+			if ( $.inArray( initialTexts[i], currentTexts ) === -1 ) {
 				removedAliases.push( initialTexts[i] );
 			}
 		}

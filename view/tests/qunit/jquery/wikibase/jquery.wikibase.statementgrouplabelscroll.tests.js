@@ -15,7 +15,7 @@
 	function newTestNode() {
 		var $body = $( 'body' );
 
-		if( !$body.length ) {
+		if ( !$body.length ) {
 			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
 		}
 

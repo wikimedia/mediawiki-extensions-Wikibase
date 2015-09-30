@@ -20,7 +20,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				$container: $( '<div/>' ).appendTo( $statementgrouplistview )
 			} )
 			.on( 'addtoolbaradd.addtoolbar', function( e ) {
-				if( e.target !== $statementgrouplistview.get( 0 ) ) {
+				if ( e.target !== $statementgrouplistview.get( 0 ) ) {
 					return;
 				}
 

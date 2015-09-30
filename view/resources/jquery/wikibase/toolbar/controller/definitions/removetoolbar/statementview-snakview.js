@@ -16,7 +16,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				$snaklistview = $snakview.closest( '.wikibase-snaklistview' ),
 				snaklistview = $snaklistview.data( 'snaklistview' );
 
-			if( !snaklistview ) {
+			if ( !snaklistview ) {
 				return;
 			}
 
@@ -28,7 +28,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				$container: $( '<div/>' ).appendTo( $snakview )
 			} )
 			.on( 'removetoolbarremove.removetoolbar', function( event ) {
-				if( event.target === $snakview.get( 0 ) ) {
+				if ( event.target === $snakview.get( 0 ) ) {
 					qualifierPorpertyGroupListview.removeItem( $snakview );
 				}
 			} );
@@ -69,7 +69,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 							removeToolbar = $snakview.data( 'removetoolbar' );
 
 						// Item might be about to be removed not being a list item instance.
-						if( !snakview || !removeToolbar ) {
+						if ( !snakview || !removeToolbar ) {
 							return;
 						}
 

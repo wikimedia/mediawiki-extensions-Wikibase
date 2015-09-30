@@ -10,15 +10,15 @@
 	'use strict';
 
 	$( document ).ready( function() {
-		if( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemByTitle' ) ) {
+		if ( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemByTitle' ) ) {
 			return; // not the right special page
 		}
 
 		// this will build a drop-down for the language selection:
 		var sites = wb.sites.getSites(),
 			siteList = [];
-		for( var siteId in sites ) {
-			if( sites.hasOwnProperty( siteId ) ) {
+		for ( var siteId in sites ) {
+			if ( sites.hasOwnProperty( siteId ) ) {
 				siteList.push( sites[ siteId ].getName() + ' (' + siteId + ')' );
 			}
 		}

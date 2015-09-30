@@ -44,7 +44,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 	_create: function() {
 		PARENT.prototype._create.call( this );
 
-		if( this._getItems().length !== this.options.$content.length ) {
+		if ( this._getItems().length !== this.options.$content.length ) {
 			this.draw();
 		}
 
@@ -57,7 +57,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 	 * @see jQuery.wikibase.toolbaritem.destroy
 	 */
 	destroy: function() {
-		if( this.options.renderItemSeparators ) {
+		if ( this.options.renderItemSeparators ) {
 			// Re-render without separators to have them removed.
 			this.option( 'renderItemSeparators', false );
 		}
@@ -76,7 +76,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 		.removeClass( 'ui-state-disabled' )
 		.off( '.' + this.widgetName );
 
-		if( $container.get( 0 ) !== this.element.get( 0 ) ) {
+		if ( $container.get( 0 ) !== this.element.get( 0 ) ) {
 			$container.remove();
 		}
 
@@ -90,7 +90,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 		var items = [];
 		this.getContainer().children().each( function() {
 			var item = $( this ).data( 'wikibase-toolbar-item' );
-			if( item ) {
+			if ( item ) {
 				items.push( item );
 			}
 		} );
@@ -120,19 +120,19 @@ $.widget( 'wikibase.toolbar', PARENT, {
 		this.options.$content.each( function( i ) {
 			var $item = $( this );
 
-			if( i !== 0 && self.options.renderItemSeparators ) {
+			if ( i !== 0 && self.options.renderItemSeparators ) {
 				$children = $children.add( $( document.createTextNode( '|' ) ) );
 			}
 
 			$children = $children.add( $item );
 
 			var item = $item.data( 'wikibase-toolbar-item' );
-			if( item ) {
+			if ( item ) {
 				item.draw();
 			}
 		} );
 
-		if( this.options.renderItemSeparators && this.options.$content.length ) {
+		if ( this.options.renderItemSeparators && this.options.$content.length ) {
 			$container.append( mw.wbTemplate( 'wikibase-toolbar-bracketed', $children ) );
 		} else {
 			$container.append( $children );
@@ -143,7 +143,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 	 * @see jQuery.wikibase.toolbaritem._setOption
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this._setState( value );
 			this.options[key] = value;
 			return this;
@@ -151,7 +151,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === '$content' || key === 'renderItemSeparators' ) {
+		if ( key === '$content' || key === 'renderItemSeparators' ) {
 			this.draw();
 		}
 
@@ -176,8 +176,8 @@ $.widget( 'wikibase.toolbar', PARENT, {
 	focus: function() {
 		var items = this._getItems();
 
-		for( var i = 0; i < items.length; i++ ) {
-			if( !items[i].option( 'disabled' ) ) {
+		for ( var i = 0; i < items.length; i++ ) {
+			if ( !items[i].option( 'disabled' ) ) {
 				items[i].focus();
 				return;
 			}

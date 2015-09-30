@@ -58,7 +58,7 @@
 				var $sitelinkview = $( this ),
 					sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
-				if( sitelinkview ) {
+				if ( sitelinkview ) {
 					sitelinkview.destroy();
 				}
 

@@ -67,7 +67,7 @@
 			.on( 'click.' + widgetName, function( event ) {
 				// don't show menu if selector is disabled!
 				// otherwise, simply toggle menu's visibility
-				if( self.options.disabled || $menu.is( ':visible' ) ) {
+				if ( self.options.disabled || $menu.is( ':visible' ) ) {
 					$menu.hide();
 					return;
 				}
@@ -108,7 +108,7 @@
 				var $li = $( event.target ).closest( 'li' ),
 					type = $li.data( 'snaktypeselector-menuitem-type' );
 
-				if( type ) {
+				if ( type ) {
 					self._setSnakType( type );
 				}
 			} );
@@ -141,7 +141,7 @@
 		 * @return {jQuery.Widget}
 		 */
 		_setOption: function( key, value ) {
-			if( key === 'disabled' && value ) {
+			if ( key === 'disabled' && value ) {
 				this._menu.element.hide();
 				this.element.removeClass( 'ui-state-active' );
 			}
@@ -184,7 +184,7 @@
 		 * @return {string|null|undefined}
 		 */
 		snakType: function( snakType ) {
-			if( snakType === undefined ) {
+			if ( snakType === undefined ) {
 				var $snakTypeLi = this._menu.element.children( '.ui-state-active' ).first();
 				return $snakTypeLi.length
 					? $snakTypeLi.data( 'snaktypeselector-menuitem-type' )
@@ -200,13 +200,13 @@
 		 * @param {string|null} snakType
 		 */
 		_setSnakType: function( snakType ) {
-			if( this.snakType() === snakType ) {
+			if ( this.snakType() === snakType ) {
 				return;
 			}
 
 			this._menu.element.children( '.ui-state-active' ).removeClass( 'ui-state-active' );
 
-			if( snakType !== null ) {
+			if ( snakType !== null ) {
 				this._menu.element.children( '.' + this.widgetBaseClass + '-menuitem-' + snakType )
 					.addClass( 'ui-state-active' );
 			}

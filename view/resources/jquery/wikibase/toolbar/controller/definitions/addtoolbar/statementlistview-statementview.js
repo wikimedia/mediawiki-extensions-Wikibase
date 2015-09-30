@@ -18,18 +18,18 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				$container = $statementlistview.children( '.wikibase-toolbar-wrapper' )
 					.children( '.wikibase-toolbar-container' );
 
-			if( !statementlistview.value().length ) {
+			if ( !statementlistview.value().length ) {
 				return;
 			}
 
-			if( !$container.length ) {
+			if ( !$container.length ) {
 				// TODO: Remove layout-specific toolbar wrapper
 				$container = $( '<div/>' ).appendTo(
 					mw.wbTemplate( 'wikibase-toolbar-wrapper', '' ).appendTo( $statementlistview )
 				);
 			}
 
-			if( !statementlistview.value() ) {
+			if ( !statementlistview.value() ) {
 				return;
 			}
 
@@ -37,7 +37,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				$container: $container
 			} )
 			.on( 'addtoolbaradd.addtoolbar', function( e ) {
-				if( e.target !== $statementlistview.get( 0 ) ) {
+				if ( e.target !== $statementlistview.get( 0 ) ) {
 					return;
 				}
 
@@ -71,7 +71,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				'statementlistviewdisable',
 				function() {
 					var addtoolbar = $statementlistview.data( 'addtoolbar' );
-					if( addtoolbar ) {
+					if ( addtoolbar ) {
 						addtoolbar[statementlistview.option( 'disabled' ) ? 'disable' : 'enable']();
 					}
 				}

@@ -104,7 +104,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if( !this.options.entityChangersFactory ) {
+		if ( !this.options.entityChangersFactory ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -122,20 +122,20 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 		var self = this;
 
 		function degrade() {
-			if( self.$labelview ) {
+			if ( self.$labelview ) {
 				self.$labelview.data( 'labelview' ).destroy();
 			}
-			if( self.$descriptionview ) {
+			if ( self.$descriptionview ) {
 				self.$descriptionview.data( 'descriptionview' ).destroy();
 			}
-			if( self.$aliasesview ) {
+			if ( self.$aliasesview ) {
 				self.$aliasesview.data( 'aliasesview' ).destroy();
 			}
 
 			PARENT.prototype.destroy.call( self );
 		}
 
-		if( this._isInEditMode ) {
+		if ( this._isInEditMode ) {
 			this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
 				degrade();
 			} );
@@ -157,7 +157,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 
 			self['$' + widgetName] = self['$' + subjectName].children( '.wikibase-' + widgetName );
 
-			if( !self['$' + widgetName].length ) {
+			if ( !self['$' + widgetName].length ) {
 				self['$' + widgetName] = $( '<div/>' ).appendTo( self['$' + subjectName] );
 			}
 
@@ -192,11 +192,11 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 				)
 			};
 
-			if( widgetName === 'aliasesview' ) {
+			if ( widgetName === 'aliasesview' ) {
 				options.aliasesChanger = self.options.entityChangersFactory.getAliasesChanger();
-			} else if( widgetName === 'descriptionview' ) {
+			} else if ( widgetName === 'descriptionview' ) {
 				options.descriptionsChanger = self.options.entityChangersFactory.getDescriptionsChanger();
-			} else if( widgetName === 'labelview' ) {
+			} else if ( widgetName === 'labelview' ) {
 				options.labelsChanger = self.options.entityChangersFactory.getLabelsChanger();
 			}
 
@@ -226,7 +226,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * Puts the widget into edit mode.
 	 */
 	startEditing: function() {
-		if( this._isInEditMode ) {
+		if ( this._isInEditMode ) {
 			return;
 		}
 
@@ -248,7 +248,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	stopEditing: function( dropValue ) {
 		var self = this;
 
-		if( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
 			return;
 		}
 
@@ -323,7 +323,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * @param {boolean} [dropValue]
 	 */
 	_afterStopEditing: function( dropValue ) {
-		if( !dropValue ) {
+		if ( !dropValue ) {
 			this.options.value = this.value();
 		}
 		this._isInEditMode = false;
@@ -346,7 +346,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * @return {Object|*}
 	 */
 	value: function( value ) {
-		if( value !== undefined ) {
+		if ( value !== undefined ) {
 			return this.option( 'value', value );
 		}
 
@@ -364,10 +364,10 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * @throws {Error} when trying to set value with a new language.
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'value' ) {
+		if ( key === 'value' ) {
 			value = this._checkValue( value );
 
-			if( value.language !== this.options.value.language ) {
+			if ( value.language !== this.options.value.language ) {
 				throw new Error( 'Cannot alter language' );
 			}
 
@@ -378,7 +378,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this.$labelview.data( 'labelview' ).option( key, value );
 			this.$descriptionview.data( 'descriptionview' ).option( key, value );
 			this.$aliasesview.data( 'aliasesview' ).option( key, value );
@@ -394,21 +394,21 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * @throws {Error} if value is not defined properly.
 	 */
 	_checkValue: function( value ) {
-		if( !$.isPlainObject( value ) ) {
+		if ( !$.isPlainObject( value ) ) {
 			throw new Error( 'Value needs to be an object' );
-		} else if( !value.language ) {
+		} else if ( !value.language ) {
 			throw new Error( 'Value needs language to be specified' );
 		}
 
-		if( !value.label ) {
+		if ( !value.label ) {
 			throw new Error( 'label needs to be a wb.datamodel.Term instance' );
 		}
 
-		if( !value.description ) {
+		if ( !value.description ) {
 			throw new Error( 'description needs to be a wb.datamodel.Term instance' );
 		}
 
-		if( !value.aliases ) {
+		if ( !value.aliases ) {
 			throw new Error( 'aliases need to be a wb.datamodel.MultiTerm instance' );
 		}
 
@@ -428,7 +428,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * @param {Error} [error]
 	 */
 	setError: function( error ) {
-		if( error ) {
+		if ( error ) {
 			this.element.addClass( 'wb-error' );
 			this._trigger( 'toggleerror', null, [error] );
 		} else {

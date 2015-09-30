@@ -32,7 +32,7 @@ QUnit.module( 'jquery.wikibase.propertyview', QUnit.newMwEnvironment( {
 			var $propertyview = $( this ),
 				propertyview = $propertyview.data( 'propertyview' );
 
-			if( propertyview ) {
+			if ( propertyview ) {
 				propertyview.destroy();
 			}
 

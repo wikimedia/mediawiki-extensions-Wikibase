@@ -11,7 +11,7 @@ QUnit.module( 'jquery.wikibase.removetoolbar', QUnit.newMwEnvironment( {
 			var $removetoolbar = $( this ),
 				removetoolbar = $removetoolbar.data( 'removetoolbar' );
 
-			if( removetoolbar ) {
+			if ( removetoolbar ) {
 				removetoolbar.destroy();
 			}
 

@@ -50,9 +50,9 @@ MODULE.getStore = function( dataTypeStore ) {
 
 	};
 
-	for( var dataTypeId in dataTypeIdToExpertConstructor ) {
+	for ( var dataTypeId in dataTypeIdToExpertConstructor ) {
 		var dataType = dataTypeStore.getDataType( dataTypeId );
-		if( dataType ) {
+		if ( dataType ) {
 			expertStore.registerDataTypeExpert(
 				dataTypeIdToExpertConstructor[dataTypeId],
 				dataType.getId()

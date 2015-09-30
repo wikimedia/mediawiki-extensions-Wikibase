@@ -41,7 +41,7 @@
 		 */
 		destroy: function() {
 			this.$viewPort.css( 'height', 'auto' );
-			if( this._valueView ) {
+			if ( this._valueView ) {
 				this._valueView.element.off( '.' + this.variationBaseClass );
 				this._valueView.destroy();
 			}
@@ -54,7 +54,7 @@
 		 */
 		_setValue: function( value ) {
 			this._newDataValue = null;
-			if( value.datavalue ) {
+			if ( value.datavalue ) {
 				this._newDataValue = dv.newDataValue( value.datavalue.type, value.datavalue.value );
 			}
 		},
@@ -66,13 +66,13 @@
 		_getValue: function() {
 			var dataValue = null;
 
-			if( this._newDataValue !== false ) {
+			if ( this._newDataValue !== false ) {
 				// draw() leaves the variable alone if it is an invalid value! In that case there
 				// won't be a valueview where we can take the value from, but this is still the
 				// actual value set as the Snak's value.
 				// Also if draw has not been called yet, this will hold the current value.
 				dataValue = this._newDataValue;
-			} else if( this._valueView ) {
+			} else if ( this._valueView ) {
 				dataValue = this._valueView.value();
 			}
 
@@ -87,17 +87,17 @@
 				newValue = this._newDataValue;
 
 			function _render() {
-				if( self._valueView ) {
+				if ( self._valueView ) {
 					// We have a valueview now, so it can take over rendering until next
 					// _setValue().
 					self._newDataValue = false;
 
-					if( !self._viewState.isInEditMode() ) {
+					if ( !self._viewState.isInEditMode() ) {
 						self.$viewPort.css( 'height', 'auto' );
 					}
 
 					// Set state
-					if( self._viewState.isDisabled() ) {
+					if ( self._viewState.isDisabled() ) {
 						self._valueView.disable();
 					} else {
 						self._valueView.enable();
@@ -120,7 +120,7 @@
 					? property.getDataTypeId()
 					: false;
 
-				if( dataTypeId ) {
+				if ( dataTypeId ) {
 					return self._dataTypeStore.getDataType( dataTypeId );
 				}
 
@@ -137,7 +137,7 @@
 			 * @param {string} intendedDataValueType
 			 */
 			function handleDataValueTypeMismatch( actualDataValueType, intendedDataValueType ) {
-				if( self._viewState.isInEditMode() ) {
+				if ( self._viewState.isInEditMode() ) {
 					// Doesn't make sense to edit the value of the wrong data value type directly,
 					// this will set the value to empty and create a valueview for entering an
 					// entirely new value instead.
@@ -145,7 +145,7 @@
 					self.draw();
 				} else {
 					// Not in edit mode, we just display a note:
-					if( self._valueView ) {
+					if ( self._valueView ) {
 						self._valueView.destroy();
 						self._valueView = null;
 					}
@@ -171,12 +171,12 @@
 
 			// if _setValue() wasn't called and this isn't initial draw(), changes done to valueview
 			// directly (also by user interaction) are always rendered immediately
-			if( newValue !== false ) { // newValue could also be null for empty value
+			if ( newValue !== false ) { // newValue could also be null for empty value
 				this.__currentNewValue = newValue;
 				this._entityStore
 				.get( this._viewState.propertyId() )
 				.done( function( fetchedProperty ) {
-					if( newValue !== self.__currentNewValue ) {
+					if ( newValue !== self.__currentNewValue ) {
 						// If the API response is not for the most recent newValue, discard it
 						return;
 					}
@@ -185,7 +185,7 @@
 
 					// If the new value's type is not the data value type used by the Snak's
 					// property data type, something is very wrong. Display warning!
-					if( newValue && dataType && newValue.getType() !== dataType.getDataValueType()
+					if ( newValue && dataType && newValue.getType() !== dataType.getDataValueType()
 						&& newValue.getType() !== dv.UnDeserializableValue.TYPE ) {
 						handleDataValueTypeMismatch(
 							newValue.getType(),
@@ -196,7 +196,7 @@
 
 					// Check whether valueview exists and if so, whether it is suitable for creating
 					// a new data value valid against the given data type.
-					if( self._valueView
+					if ( self._valueView
 						// can't check whether current valueview is most suitable for empty value if
 						// no indication for what kind of value (specified by the data type) is
 						// available
@@ -225,7 +225,7 @@
 		 * @inheritdoc
 		 */
 		startEditing: function() {
-			if( !this._valueView || this._valueView.isInEditMode() ) {
+			if ( !this._valueView || this._valueView.isInEditMode() ) {
 				return;
 			}
 
@@ -247,7 +247,7 @@
 		 * @inheritdoc
 		 */
 		stopEditing: function( dropValue ) {
-			if( !this._valueView || !this._valueView.isInEditMode() ) {
+			if ( !this._valueView || !this._valueView.isInEditMode() ) {
 				return;
 			}
 			this._valueView.stopEditing( dropValue );
@@ -281,7 +281,7 @@
 
 					$viewPort.stop( heightAnimationQueue, true );
 
-					if( $extension ) {
+					if ( $extension ) {
 						newHeight = $input.outerHeight() + $extension.outerHeight();
 					} else {
 						var currentHeight = $viewPort.height();
@@ -336,7 +336,7 @@
 		_createNewValueView: function( dataValue, dataType ) {
 			var $valueViewDom;
 
-			if( this._valueView ) {
+			if ( this._valueView ) {
 				this._valueView.destroy();
 				this._valueView = null;
 				this.$viewPort.empty();
@@ -347,7 +347,7 @@
 			// definition which kind of value should be creatable by the new valueview.
 			// NOTE: We run into this situation if we have a Snak which is using a deleted property,
 			//  so the DataType can not be determined while we still want to display the valueview.
-			if( !dataType && dataValue === null ) {
+			if ( !dataType && dataValue === null ) {
 				// This message will be shown if the initial value uses a different Snak type but
 				// the user tries to change the snak type to value Snak. This simply doesn't make
 				// any sense since we have no indicator for what kind of value should be entered
@@ -372,7 +372,7 @@
 		 * @inheritdoc
 		 */
 		disable: function() {
-			if( this._valueView ) {
+			if ( this._valueView ) {
 				this._valueView.disable();
 			}
 		},
@@ -381,7 +381,7 @@
 		 * @inheritdoc
 		 */
 		enable: function() {
-			if( this._valueView ) {
+			if ( this._valueView ) {
 				this._valueView.enable();
 			}
 		},
@@ -397,7 +397,7 @@
 		 * @inheritdoc
 		 */
 		focus: function() {
-			if( this._valueView && this._viewState.isDisabled() === false ) {
+			if ( this._valueView && this._viewState.isDisabled() === false ) {
 				this._valueView.focus();
 			}
 		},
@@ -406,7 +406,7 @@
 		 * @inheritdoc
 		 */
 		blur: function() {
-			if( this._valueView ) {
+			if ( this._valueView ) {
 				this._valueView.blur();
 			}
 		}

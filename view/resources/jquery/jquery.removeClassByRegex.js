@@ -14,7 +14,7 @@
 	$.fn.removeClassByRegex = function( classNameRegex ) {
 		this.each( function() {
 			var subject = $( this );
-			if( !subject.attr( 'class' ) ) {
+			if ( !subject.attr( 'class' ) ) {
 				return;
 			}
 
@@ -22,7 +22,7 @@
 
 			$.each( subject.attr( 'class' ).split( /\s+/ ), function( i, className ) {
 				// check for each class whether it matches...
-				if( !className.match( classNameRegex ) ) {
+				if ( !className.match( classNameRegex ) ) {
 					// ...if not, we re-add it
 					newClasses += ' ' + className;
 				}

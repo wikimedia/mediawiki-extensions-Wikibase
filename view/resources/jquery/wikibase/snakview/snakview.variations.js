@@ -41,14 +41,14 @@
 		 * @return {jQuery.snakview.variations.Variation} The new `Variation`'s constructor.
 		 */
 		variation: function( snakConstructor, baseOrDefinition, definition ) {
-			if( !$.isFunction( snakConstructor ) || !snakConstructor.TYPE ) {
+			if ( !$.isFunction( snakConstructor ) || !snakConstructor.TYPE ) {
 				throw new Error( 'Snak constructor required for registering a snakview variation' );
 			}
 
-			if( !definition ) {
+			if ( !definition ) {
 				definition = baseOrDefinition;
 				baseOrDefinition = SELF.Variation;
-			} else if( typeof baseOrDefinition === 'string' ) {
+			} else if ( typeof baseOrDefinition === 'string' ) {
 				baseOrDefinition = SELF.getVariation( baseOrDefinition );
 			}
 
@@ -77,8 +77,8 @@
 		getCoveredSnakTypes: function() {
 			var types = [];
 
-			for( var key in variations ) {
-				if( variations.hasOwnProperty( key ) ) {
+			for ( var key in variations ) {
+				if ( variations.hasOwnProperty( key ) ) {
 					types.push( key );
 				}
 			}
@@ -117,10 +117,10 @@
 		 * @return {jQuery.wikibase.snakview.variations.Variation|null}
 		 */
 		newFromSnakType: function( snakType, viewState, $variationViewPort ) {
-			if( typeof snakType !== 'string' ) {
+			if ( typeof snakType !== 'string' ) {
 				throw new Error( 'Snak type required for choosing a suitable variation' );
 			}
-			if( !SELF.hasVariation( snakType ) ) {
+			if ( !SELF.hasVariation( snakType ) ) {
 				return null;
 			}
 			return new ( SELF.getVariation( snakType ) )( viewState, $variationViewPort );

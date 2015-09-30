@@ -95,7 +95,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	_create: function() {
 		this._lia = this.options.listItemAdapter;
 
-		if( typeof this._lia !== 'object'
+		if ( typeof this._lia !== 'object'
 			|| !( this._lia instanceof $.wikibase.listview.ListItemAdapter )
 		) {
 			throw new Error( 'Option "listItemAdapter" has to be an instance of '
@@ -128,27 +128,27 @@ $.widget( 'wikibase.listview', PARENT, {
 	_setOption: function( key, value ) {
 		var self = this;
 
-		if( key === 'listItemAdapter' ) {
+		if ( key === 'listItemAdapter' ) {
 			throw new Error( 'Can not change the ListItemAdapter after initialization' );
-		} else if( key === 'value' ) {
+		} else if ( key === 'value' ) {
 			this.items().each( function( i, node ) {
 				var $node = $( node );
 				self._lia.liInstance( $node ).destroy();
 				$node.remove();
 			} );
 
-			for( var i = 0; i < value.length; i++ ) {
+			for ( var i = 0; i < value.length; i++ ) {
 				this._addLiValue( value[i] );
 			}
 		}
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this.items().each( function() {
 				var liInstance = self._lia.liInstance( $( this ) );
 				// Check if instance got destroyed in the meantime:
-				if( liInstance ) {
+				if ( liInstance ) {
 					liInstance.option( key, value );
 				}
 			} );
@@ -165,7 +165,7 @@ $.widget( 'wikibase.listview', PARENT, {
 		var i, items = this.option( 'value' );
 
 		// initialize view for each of the list item values:
-		for( i in items ) {
+		for ( i in items ) {
 			this.addItem( items[i] );
 		}
 	},
@@ -178,7 +178,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @return {*[]|undefined}
 	 */
 	value: function( value ) {
-		if( value === undefined ) {
+		if ( value === undefined ) {
 			var self = this,
 				values = [];
 
@@ -225,8 +225,8 @@ $.widget( 'wikibase.listview', PARENT, {
 		var $items = this.items(),
 			itemNode = $itemNode.get( 0 );
 
-		for( var i = 0; i < $items.length; i++ ) {
-			if( $items.get( i ) === itemNode ) {
+		for ( var i = 0; i < $items.length; i++ ) {
+			if ( $items.get( i ) === itemNode ) {
 				return i;
 			}
 		}
@@ -246,17 +246,16 @@ $.widget( 'wikibase.listview', PARENT, {
 
 		// No need to move if the item has the index already or if it should be moved to after the
 		// last item although it is at the end already:
-		if(
-			currIndex < 0
+		if ( currIndex < 0
 			|| currIndex === toIndex
 			|| currIndex === items.length - 1 && toIndex >= items.length
 		) {
 			return;
 		}
 
-		if( toIndex >= items.length ) {
+		if ( toIndex >= items.length ) {
 			$itemNode.insertAfter( items.last() );
-		} else if( items.eq( toIndex ).prev().get( 0 ) === $itemNode.get( 0 ) ) {
+		} else if ( items.eq( toIndex ).prev().get( 0 ) === $itemNode.get( 0 ) ) {
 			// Item already is at the position it shall be moved to.
 			return;
 		} else {
@@ -272,7 +271,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @param {jQuery} $itemNode
 	 */
 	moveUp: function( $itemNode ) {
-		if( this.indexOf( $itemNode ) !== 0 ) {
+		if ( this.indexOf( $itemNode ) !== 0 ) {
 			this.move( $itemNode, this.indexOf( $itemNode ) - 1 );
 		}
 	},
@@ -322,11 +321,11 @@ $.widget( 'wikibase.listview', PARENT, {
 
 		$newLi.addClass( this.widgetName + '-item' );
 
-		if( !$newLi.parent( this.element ).length ) {
+		if ( !$newLi.parent( this.element ).length ) {
 			// Insert DOM first, to allow events bubbling up the DOM tree.
 			var items = this.items();
 
-			if( items.length ) {
+			if ( items.length ) {
 				items.last().after( $newLi );
 			} else {
 				this.element.append( $newLi );
@@ -346,7 +345,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @throws {Error} if the node provided is not a list item.
 	 */
 	removeItem: function( $li ) {
-		if( !$li.parent( this.element ).length ) {
+		if ( !$li.parent( this.element ).length ) {
 			throw new Error( 'The given node is not an element in this list' );
 		}
 
@@ -378,9 +377,9 @@ $.widget( 'wikibase.listview', PARENT, {
 	focus: function() {
 		var $items = this.items();
 
-		if( $items.length ) {
+		if ( $items.length ) {
 			var item = this._lia.liInstance( $items.first() );
-			if( item.focus ) {
+			if ( item.focus ) {
 				item.focus();
 				return;
 			}

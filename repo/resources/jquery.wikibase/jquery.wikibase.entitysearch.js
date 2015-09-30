@@ -34,8 +34,7 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 		this.element
 		.on( 'eachchange.' + this.widgetName, function() {
 			var menu = self.options.menu;
-			if(
-				self.options.suggestionsPlaceholder
+			if ( self.options.suggestionsPlaceholder
 				&& ( !menu.option( 'items' ).length || !menu.element.is( ':visible' ) )
 			) {
 				self.options.suggestionsPlaceholder.setVisibility( true );
@@ -60,12 +59,12 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	 * @see jQuery.ui.suggester._setOption
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'suggestionsPlaceholder' ) {
+		if ( key === 'suggestionsPlaceholder' ) {
 			var customItems = this.options.menu.option( 'customItems' );
 
 			customItems.splice( $.inArray( this.options.suggestionsPlaceholder, customItems ), 1 );
 
-			if( value instanceof $.ui.ooMenu.CustomItem ) {
+			if ( value instanceof $.ui.ooMenu.CustomItem ) {
 				customItems.unshift( value );
 			}
 
@@ -80,7 +79,7 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	_initMenu: function( ooMenu ) {
 		PARENT.prototype._initMenu.apply( this, arguments );
 
-		if( this.options.suggestionsPlaceholder ) {
+		if ( this.options.suggestionsPlaceholder ) {
 			ooMenu.option( 'customItems' ).unshift( this.options.suggestionsPlaceholder );
 		}
 
@@ -89,8 +88,7 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 		$( ooMenu )
 		.off( 'selected' )
 		.on( 'selected.entitysearch', function( event, item ) {
-			if(
-				event.originalEvent
+			if ( event.originalEvent
 				&& /^key/.test( event.originalEvent.type )
 				&& !( item instanceof $.ui.ooMenu.CustomItem )
 			) {
@@ -105,7 +103,7 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 	 * @see jQuery.ui.suggester._updateMenuVisibility
 	 */
 	_updateMenuVisibility: function() {
-		if( this._term ) {
+		if ( this._term ) {
 			this._open();
 			this.repositionMenu();
 		} else {
@@ -121,7 +119,7 @@ $.widget( 'wikibase.entitysearch', PARENT, {
 			promise = PARENT.prototype._getSuggestions.call( this, term );
 
 		return promise.done( function( suggestions, searchTerm ) {
-			if( self.options.suggestionsPlaceholder ) {
+			if ( self.options.suggestionsPlaceholder ) {
 				self.options.suggestionsPlaceholder.setVisibility( false );
 			}
 		} );

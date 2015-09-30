@@ -53,7 +53,7 @@ QUnit.module( 'jquery.wikibase.statementgroupview', QUnit.newMwEnvironment( {
 			var $statementgroupview = $( this ),
 				statementgroupview = $statementgroupview.data( 'statementgroupview' );
 
-			if( statementgroupview ) {
+			if ( statementgroupview ) {
 				statementgroupview.destroy();
 			}
 

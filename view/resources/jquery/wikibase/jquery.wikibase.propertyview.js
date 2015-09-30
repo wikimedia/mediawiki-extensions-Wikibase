@@ -47,7 +47,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 		this._createEntityview();
 
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element );
-		if( this.$statements.length === 0 ) {
+		if ( this.$statements.length === 0 ) {
 			this.$statements = $( '<div/>' ).appendTo( this.element );
 		}
 
@@ -59,7 +59,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @protected
 	 */
 	_init: function() {
-		if( !this.options.statementGroupListViewBuilder ) {
+		if ( !this.options.statementGroupListViewBuilder ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -74,13 +74,13 @@ $.widget( 'wikibase.propertyview', PARENT, {
 		// TODO: Implement propertyview template to have static HTML rendered by the back-end match
 		// the HTML rendered here without having to invoke templating mechanism here.
 
-		if( this.$dataType ) {
+		if ( this.$dataType ) {
 			return;
 		}
 
 		this.$dataType = $( '.wikibase-propertyview-datatype', this.element );
 
-		if( !this.$dataType.length ) {
+		if ( !this.$dataType.length ) {
 			this.$dataType = mw.wbTemplate( 'wikibase-propertyview-datatype',
 				this.options.value.getDataTypeId()
 			).appendTo( this.element );

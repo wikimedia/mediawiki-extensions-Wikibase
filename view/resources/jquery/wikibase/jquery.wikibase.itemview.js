@@ -43,12 +43,12 @@ $.widget( 'wikibase.itemview', PARENT, {
 		this._createEntityview();
 
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element );
-		if( this.$statements.length === 0 ) {
+		if ( this.$statements.length === 0 ) {
 			this.$statements = $( '<div/>' ).appendTo( this.element );
 		}
 
 		this.$siteLinks = $( '.wikibase-sitelinkgrouplistview', this.element );
-		if( this.$siteLinks.length === 0 ) {
+		if ( this.$siteLinks.length === 0 ) {
 			this.$siteLinks = $( '<div/>' ).appendTo( this.element );
 		}
 	},
@@ -58,8 +58,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_init: function() {
-		if(
-			!this.options.sitelinkGroupListViewBuilder ||
+		if ( !this.options.sitelinkGroupListViewBuilder ||
 			!this.options.statementGroupListViewBuilder
 		) {
 			throw new Error( 'Required option(s) missing' );

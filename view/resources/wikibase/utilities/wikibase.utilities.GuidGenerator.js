@@ -52,7 +52,7 @@ wb.utilities.V4GuidGenerator = util.inherit(
 				template = 'xx-x-x-x-xxx',
 				guid = '';
 
-			for( var i = 0; i < template.length; i++ ) {
+			for ( var i = 0; i < template.length; i++ ) {
 				var character = template.charAt( i );
 
 				if ( character === '-' ) {
@@ -69,7 +69,7 @@ wb.utilities.V4GuidGenerator = util.inherit(
 					hex = self._getRandomHex( 0, 65535 );
 				}
 
-				while( hex.length < 4 ) {
+				while ( hex.length < 4 ) {
 					hex = '0' +  hex;
 				}
 

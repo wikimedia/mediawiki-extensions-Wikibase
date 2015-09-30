@@ -19,7 +19,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				sitelinklistview = $sitelinklistview.data( 'sitelinklistview' ),
 				sitelinklistviewListview = sitelinklistview.$listview.data( 'listview' );
 
-			if( !$sitelinkgroupview.length || !sitelinkgroupview.isInEditMode() ) {
+			if ( !$sitelinkgroupview.length || !sitelinkgroupview.isInEditMode() ) {
 				return;
 			}
 
@@ -27,7 +27,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				var $sitelinkview = $( this ),
 					sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
-				if( !$sitelinkview.data( 'removetoolbar' ) ) {
+				if ( !$sitelinkview.data( 'removetoolbar' ) ) {
 					$sitelinkview
 					.removetoolbar( {
 						$container: $( '<span/>' ).appendTo(
@@ -37,7 +37,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 						icon: true
 					} )
 					.on( 'removetoolbarremove.removetoolbar', function( event ) {
-						if( event.target !== $sitelinkview.get( 0 ) ) {
+						if ( event.target !== $sitelinkview.get( 0 ) ) {
 							return;
 						}
 						sitelinklistview.$listview.data( 'listview' ).removeItem( $sitelinkview );
@@ -49,9 +49,9 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					isValid = sitelinkview.isValid(),
 					isEmpty = sitelinkview.isEmpty();
 
-				if( ( !isValid || isEmpty ) && !isDisabled ) {
+				if ( ( !isValid || isEmpty ) && !isDisabled ) {
 					removetoolbar.disable();
-				} else if( isValid && !isEmpty && isDisabled ) {
+				} else if ( isValid && !isEmpty && isDisabled ) {
 					removetoolbar.enable();
 				}
 
@@ -60,7 +60,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					inputautoexpand = $siteIdInput.length
 						? $siteIdInput.data( 'inputautoexpand' )
 						: null;
-				if( inputautoexpand ) {
+				if ( inputautoexpand ) {
 					$siteIdInput.inputautoexpand( {
 						maxWidth: $sitelinkview.width() - (
 							sitelinkview.$siteIdContainer.outerWidth( true ) - $siteIdInput.width()
@@ -94,7 +94,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				var $sitelinkview = $( this ),
 					removetoolbar = $sitelinkview.data( 'removetoolbar' );
 
-				if( !removetoolbar ) {
+				if ( !removetoolbar ) {
 					return;
 				}
 

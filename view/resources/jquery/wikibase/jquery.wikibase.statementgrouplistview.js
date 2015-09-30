@@ -74,8 +74,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if(
-			!this.options.claimGuidGenerator
+		if ( !this.options.claimGuidGenerator
 			|| !this.options.entityStore
 			|| !this.options.valueViewBuilder
 			|| !this.options.entityChangersFactory
@@ -95,7 +94,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 			var $statementgroupview = $( event.target ),
 				statementgroupview = lia.liInstance( $statementgroupview );
 
-			if( !statementgroupview.value() ) {
+			if ( !statementgroupview.value() ) {
 				listview.removeItem( $statementgroupview );
 			}
 		} );
@@ -121,7 +120,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 
 		var $listview = this.element.children( '.wikibase-listview' );
 
-		if( !$listview.length ) {
+		if ( !$listview.length ) {
 			$listview = $( '<div/>' ).appendTo( this.element );
 		}
 
@@ -186,7 +185,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 
 						self.listview.removeItem( $statementgroupview );
 
-						if( dropValue ) {
+						if ( dropValue ) {
 							return;
 						}
 
@@ -215,7 +214,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 			var statementgroupview = lia.liInstance( $( this ) ),
 				statementGroup = statementgroupview.value();
 
-			if( statementGroup.getKey() === propertyId ) {
+			if ( statementGroup.getKey() === propertyId ) {
 				newStatementGroup.getItemContainer().each( function() {
 					statementGroup.addItem( this );
 				} );
@@ -226,7 +225,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 			return !found;
 		} );
 
-		if( !found ) {
+		if ( !found ) {
 			this.listview.addItem( newStatementGroup );
 		}
 	},
@@ -236,8 +235,8 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 	 * @protected
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'value' && value !== undefined ) {
-			if( !( value instanceof wb.datamodel.StatementGroupSet ) ) {
+		if ( key === 'value' && value !== undefined ) {
+			if ( !( value instanceof wb.datamodel.StatementGroupSet ) ) {
 				throw new Error(
 					'value needs to be an instance of wb.datamodel.StatementGroupSet'
 				);
@@ -249,7 +248,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this.listview.option( key, value );
 		}
 
@@ -263,7 +262,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 		var lia = this.listview.listItemAdapter(),
 			$items = this.listview.items();
 
-		if( $items.length ) {
+		if ( $items.length ) {
 			lia.liInstance( $items.first() ).focus();
 		} else {
 			this.element.focus();

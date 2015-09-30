@@ -24,7 +24,7 @@ function createSitelinklistview( options ) {
 	var sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 	sitelinklistview._saveSiteLink = function( siteLink ) {
-		if( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
+		if ( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
 			throw new Error( 'SiteLink object expected' );
 		} else {
 			return ( new $.Deferred() ).resolve().promise();
@@ -71,7 +71,7 @@ QUnit.module( 'jquery.wikibase.sitelinklistview', QUnit.newWbEnvironment( {
 			var $sitelinklistview = $( this ),
 				sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
-			if( sitelinklistview ) {
+			if ( sitelinklistview ) {
 				sitelinklistview.destroy();
 			}
 
@@ -228,7 +228,7 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 	function testEditModeChange( func, expectingEvent ) {
 		var deferred = $.Deferred();
 
-		if( !expectingEvent ) {
+		if ( !expectingEvent ) {
 			func();
 			return deferred.resolve().promise();
 		}
@@ -259,7 +259,7 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 	 * @param {boolean} [expectingEvent]
 	 */
 	function addToQueue( $queue, func, expectingEvent ) {
-		if( expectingEvent === undefined ) {
+		if ( expectingEvent === undefined ) {
 			expectingEvent = true;
 		}
 		$queue.queue( 'tests', function( next ) {

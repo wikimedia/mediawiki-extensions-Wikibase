@@ -38,27 +38,25 @@
 	 *         `value` method.
 	 */
 	var SELF = $.wikibase.listview.ListItemAdapter = function WbListviewListItemAdapter( options ) {
-		if(
-			!$.isFunction( options.listItemWidget )
+		if ( !$.isFunction( options.listItemWidget )
 			|| !options.listItemWidget.prototype.widgetName
 			|| !options.listItemWidget.prototype.widgetEventPrefix
 		) {
 			throw new Error( 'For a new ListItemAdapter, a jQuery Widget constructor is required' );
 		}
-		if( !$.isFunction( options.listItemWidget.prototype.value ) ) {
+		if ( !$.isFunction( options.listItemWidget.prototype.value ) ) {
 			throw new Error(
 				'For a new ListItemAdapter, the list item prototype needs a "value" method'
 			);
 		}
-		if(
-			!$.isFunction( options.listItemWidget.prototype.destroy ) ||
+		if ( !$.isFunction( options.listItemWidget.prototype.destroy ) ||
 			!$.isFunction( options.listItemWidget.prototype.option )
 		) {
 			mw.log.warn(
 				'For a new ListItemAdapter, the list item prototype needs "destroy" and "option" methods'
 			);
 		}
-		if( !$.isFunction( options.newItemOptionsFn ) ) {
+		if ( !$.isFunction( options.newItemOptionsFn ) ) {
 			throw new Error(
 				'For a new ListItemAdapter, the "newItemOptionsFn" option is required'
 			);

@@ -28,11 +28,11 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 	_create: function() {
 		var self = this;
 
-		if( this.option( 'pageName' ) ) {
+		if ( this.option( 'pageName' ) ) {
 			this.element.val( this.option( 'pageName' ) );
 		}
 
-		if( !this.option( 'source' ) ) {
+		if ( !this.option( 'source' ) ) {
 			this.option( 'source', this._request() );
 		}
 
@@ -41,7 +41,7 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 		this.element
 		.on( this.widgetEventPrefix + 'change.' + this.widgetName, function( event ) {
 			var value = $.trim( self.element.val() );
-			if( value !== self.option( 'pageName' ) ) {
+			if ( value !== self.option( 'pageName' ) ) {
 				self.option( 'pageName', value );
 			}
 		} );
@@ -53,11 +53,11 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 	_setOption: function( key, value ) {
 		$.ui.suggester.prototype._setOption.apply( this, arguments );
 
-		if( key === 'siteId' ) {
+		if ( key === 'siteId' ) {
 			this._trigger( 'change' );
 		}
 
-		if( key === 'pageName' && this.element.val() !== value ) {
+		if ( key === 'pageName' && this.element.val() !== value ) {
 			this.element.val( value );
 			this._trigger( 'change' );
 		}
@@ -68,7 +68,7 @@ $.widget( 'wikibase.pagesuggester', $.ui.suggester, {
 	 */
 	search: function( event ) {
 		// Reject searching when there is no siteId specified:
-		if( !this.option( 'siteId' ) ) {
+		if ( !this.option( 'siteId' ) ) {
 			var deferred = $.Deferred();
 			return deferred.reject( 'siteId-undefined' ).promise();
 		}

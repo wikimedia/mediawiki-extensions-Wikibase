@@ -17,8 +17,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				listview = $target.closest( ':wikibase-listview' ).data( 'listview' ),
 				listviewInited = event.type === 'listviewcreate' && listview.items().length === 0;
 
-			if(
-				( listviewInited || event.type === 'snaklistviewafterstartediting' )
+			if ( ( listviewInited || event.type === 'snaklistviewafterstartediting' )
 				&& !$qualifiers.data( 'addtoolbar' )
 			) {
 				$qualifiers
@@ -44,7 +43,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 						var $target = $( event.target ),
 							$qualifiers = $target.closest( '.wikibase-statementview-qualifiers' );
 
-						if( $target.parent().get( 0 ) !== $qualifiers.get( 0 ) ) {
+						if ( $target.parent().get( 0 ) !== $qualifiers.get( 0 ) ) {
 							// Not the qualifiers main listview.
 							return;
 						}
@@ -64,10 +63,10 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 							$listview = $target.closest( ':wikibase-listview' ),
 							snaklistviews = $listview.data( 'listview' ).value();
 
-						if( addToolbar ) {
+						if ( addToolbar ) {
 							addToolbar.enable();
-							for( var i = 0; i < snaklistviews.length; i++ ) {
-								if( !snaklistviews[i].isValid() ) {
+							for ( var i = 0; i < snaklistviews.length; i++ ) {
+								if ( !snaklistviews[i].isValid() ) {
 									addToolbar.disable();
 									break;
 								}
@@ -90,7 +89,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 
 						// Toolbar might be removed from the DOM already after having stopped edit
 						// mode.
-						if( addToolbar ) {
+						if ( addToolbar ) {
 							addToolbar[statementview.option( 'disabled' ) ? 'disable' : 'enable']();
 						}
 					}
@@ -110,12 +109,12 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 
 						// Toolbar is not within the DOM when (re-)constructing the list in
 						// non-edit-mode.
-						if( !addToolbar ) {
+						if ( !addToolbar ) {
 							return;
 						}
 
 						// Disable "add" toolbar when the last qualifier has been removed:
-						if( !snaklistview.isValid() && listview.items().length ) {
+						if ( !snaklistview.isValid() && listview.items().length ) {
 							addToolbar.disable();
 						} else {
 							addToolbar.enable();

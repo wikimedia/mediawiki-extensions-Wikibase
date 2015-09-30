@@ -84,7 +84,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @throws {Error} if a required options is missing.
 	 */
 	_init: function() {
-		if( !this.options.value || !this.options.entityTermsViewBuilder ) {
+		if ( !this.options.value || !this.options.entityTermsViewBuilder ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -103,7 +103,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	_initEntityTerms: function() {
 		this.$entityTerms = $( '.wikibase-entitytermsview', this.element );
 
-		if( !this.$entityTerms.length ) {
+		if ( !this.$entityTerms.length ) {
 			this.$entityTerms = $( '<div/>' ).prependTo( this.$main );
 		}
 
@@ -147,7 +147,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	_setOption: function( key, value ) {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if( key === 'disabled' ) {
+		if ( key === 'disabled' ) {
 			this._setState( value ? 'disable' : 'enable' );
 		}
 
@@ -160,7 +160,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @param {string} state "disable" or "enable"
 	 */
 	_setState: function( state ) {
-		if( this.$entityTerms ) {
+		if ( this.$entityTerms ) {
 			this.$entityTerms.data( 'entitytermsview' )[state]();
 		}
 	}
@@ -178,8 +178,8 @@ $.wikibase.entityview.TYPES = [];
 $.expr[':'][$.wikibase.entityview.prototype.widgetFullName]
 	= $.expr.createPseudo( function( fullName ) {
 		return function( elem ) {
-			for( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
-				if( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
+			for ( var i = 0; i < $.wikibase.entityview.TYPES.length; i++ ) {
+				if ( !!$.data( elem, $.wikibase.entityview.TYPES[i] ) ) {
 					return true;
 				}
 			}

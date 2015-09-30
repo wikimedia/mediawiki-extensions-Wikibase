@@ -17,7 +17,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				entitytermsview = $entitytermsview.data( 'entitytermsview' ),
 				$container = $entitytermsview.children( '.wikibase-toolbar-container' );
 
-			if( !$container.length ) {
+			if ( !$container.length ) {
 				$container = $( '<div/>' ).appendTo( $container );
 			}
 
@@ -33,19 +33,19 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				zIndex: 2
 			} )
 			.on( 'sticknodeupdate', function( event ) {
-				if( !$( event.target ).data( 'sticknode' ).isFixed() ) {
+				if ( !$( event.target ).data( 'sticknode' ).isFixed() ) {
 					$entitytermsview.data( 'edittoolbar' )
 						.option( '$container' ).css( 'width', 'auto' );
 				}
 			} );
 
 			$entitytermsview.on( 'keyup.edittoolbar', function( event ) {
-				if( entitytermsview.option( 'disabled' ) ) {
+				if ( entitytermsview.option( 'disabled' ) ) {
 					return;
 				}
-				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
+				if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 					entitytermsview.stopEditing( true );
-				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
+				} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					entitytermsview.stopEditing( false );
 				}
 			} );
@@ -71,8 +71,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				showEntitytermslistview = showEntitytermslistviewValue === 'true'
 					|| showEntitytermslistviewValue === '1';
 
-			if(
-				entitytermsview.$entitytermsforlanguagelistviewContainer.is( ':visible' )
+			if ( entitytermsview.$entitytermsforlanguagelistviewContainer.is( ':visible' )
 				&& !showEntitytermslistview
 			) {
 				entitytermsview.$entitytermsforlanguagelistviewContainer.slideUp( {
@@ -100,11 +99,11 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			var $entitytermsview = $( event.target ),
 				entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-			if( !entitytermsview ) {
+			if ( !entitytermsview ) {
 				return;
 			}
 
-			if( !entitytermsview.$entitytermsforlanguagelistviewContainer.is( ':visible' ) ) {
+			if ( !entitytermsview.$entitytermsforlanguagelistviewContainer.is( ':visible' ) ) {
 				entitytermsview.$entitytermsforlanguagelistviewContainer.slideDown( {
 					complete: function() {
 						entitytermsview.$entitytermsforlanguagelistview

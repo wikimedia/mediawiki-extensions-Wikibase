@@ -21,7 +21,7 @@
 		teardown: function() {
 			var $pageSuggester = $( '.test_pagesuggester' ),
 				pageSuggester = $pageSuggester.data( 'pagesuggester' );
-			if( pageSuggester ) {
+			if ( pageSuggester ) {
 				pageSuggester.destroy();
 			}
 			$pageSuggester.remove();

@@ -58,7 +58,7 @@ QUnit.module( 'jquery.wikibase.sitelinkgrouplistview', QUnit.newWbEnvironment( {
 			var $sitelinkgrouplistview = $( this ),
 				sitelinkgrouplistview = $sitelinkgrouplistview.data( 'sitelinkgrouplistview' );
 
-			if( sitelinkgrouplistview ) {
+			if ( sitelinkgrouplistview ) {
 				sitelinkgrouplistview.destroy();
 			}
 

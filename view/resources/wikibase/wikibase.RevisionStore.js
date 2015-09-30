@@ -57,7 +57,7 @@ $.extend( SELF.prototype, {
 	 * Returns the sitelinks revision id.
 	 */
 	getSitelinksRevision: function( lang ) {
-		if( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, lang ) ) {
+		if ( Object.prototype.hasOwnProperty.call( this._revisions.sitelinksRevision, lang ) ) {
 			return this._revisions.sitelinksRevision[lang];
 		}
 		return this._revisions.baseRevision;
@@ -67,7 +67,7 @@ $.extend( SELF.prototype, {
 	 * Returns the claim revision id.
 	 */
 	getClaimRevision: function( claimGuid ) {
-		if( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, claimGuid ) ) {
+		if ( Object.prototype.hasOwnProperty.call( this._revisions.claimRevisions, claimGuid ) ) {
 			return this._revisions.claimRevisions[claimGuid];
 		}
 		return this._revisions.baseRevision;
