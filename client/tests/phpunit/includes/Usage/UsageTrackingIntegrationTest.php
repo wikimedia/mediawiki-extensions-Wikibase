@@ -141,9 +141,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	private function waitForNextTimestamp() {
 		$timestamp = wfTimestampNow();
 
-		while ( ( $now = wfTimestampNow() ) === $timestamp ) {
+		do {
 			usleep( 100 * 1000 );
-		}
+		} while ( wfTimestampNow() === $timestamp );
 	}
 
 	/**
