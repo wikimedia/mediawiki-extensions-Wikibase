@@ -229,7 +229,6 @@ class EntityTermsView {
 					? $labels->getByLanguage( $languageCode )->getText()
 					: $this->msg( 'wikibase-label-empty' )->text()
 				),
-				'',
 				''
 			),
 			$this->templateFactory->render( 'wikibase-descriptionview',

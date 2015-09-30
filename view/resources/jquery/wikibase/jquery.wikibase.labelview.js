@@ -17,8 +17,6 @@
  * @param {wikibase.datamodel.Term} options.value
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-label-input-help-message' )]
  * @param {wikibase.entityChangers.LabelsChanger} options.labelsChanger
- * @param {string} options.entityId
- * @param {boolean} [options.showEntityId=false]
  */
 $.widget( 'wikibase.labelview', PARENT, {
 	/**
@@ -30,17 +28,14 @@ $.widget( 'wikibase.labelview', PARENT, {
 		templateParams: [
 			'', // additional class
 			'', // text
-			'', // entity id
 			'' // toolbar
 		],
 		templateShortCuts: {
-			$text: '.wikibase-labelview-text',
-			$entityId: '.wikibase-labelview-entityid'
+			$text: '.wikibase-labelview-text'
 		},
 		value: null,
 		inputNodeName: 'TEXTAREA',
 		helpMessage: mw.msg( 'wikibase-label-input-help-message' ),
-		entityId: null,
 		showEntityId: false
 	},
 
@@ -53,7 +48,6 @@ $.widget( 'wikibase.labelview', PARENT, {
 	_create: function() {
 		if(
 			!( this.options.value instanceof wb.datamodel.Term )
-			|| !this.options.entityId
 			|| !this.options.labelsChanger
 			|| this.options.inputNodeName !== 'INPUT' && this.options.inputNodeName !== 'TEXTAREA'
 		) {
@@ -116,13 +110,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 			labelText = null;
 		}
 
-		if( this.options.showEntityId && !( this.isInEditMode() && labelText ) ) {
-			this.$entityId.text( mw.msg( 'parentheses', this.options.entityId ) );
-		} else {
-			this.$entityId.empty();
-		}
-
-		this.element[labelText ? 'removeClass' : 'addClass']( 'wb-empty' );
+		this.element.toggleClass( 'wb-empty', !labelText );
 
 		if( !this.isInEditMode() && !labelText ) {
 			this.$text.text( mw.msg( 'wikibase-label-empty' ) );
