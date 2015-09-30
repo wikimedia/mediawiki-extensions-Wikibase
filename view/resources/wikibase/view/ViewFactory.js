@@ -331,15 +331,12 @@
 					value: value || null,
 					statementGuid: statementGuid,
 					dataTypeStore: this._dataTypeStore,
-					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-					entityIdPlainFormatter: this._entityIdPlainFormatter,
-					entityStore: this._entityStore,
-					referencesChanger: this._entityChangersFactory.getReferencesChanger(),
-					valueViewBuilder: this._getValueViewBuilder()
+					listItemAdapter: this.getListItemAdapterForSnakListView(),
+					referencesChanger: this._entityChangersFactory.getReferencesChanger()
 				};
 			}, this )
 		} );
-	}
+	};
 
 	/**
 	 * Construct a `ListItemAdapter` for `snaklistview`s
