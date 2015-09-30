@@ -3,6 +3,7 @@
 ## Version 4.4.0 (dev)
 
 * Added `ItemIdParser`
+* Added `ReferenceList::isEmpty`
 
 ## Version 4.3.0 (2015-09-02)
 

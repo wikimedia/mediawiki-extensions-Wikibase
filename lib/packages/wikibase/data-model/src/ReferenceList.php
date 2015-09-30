@@ -243,6 +243,8 @@ class ReferenceList extends HashableObjectStorage {
 	}
 
 	/**
+	 * @since 4.4
+	 *
 	 * @return bool
 	 */
 	public function isEmpty() {
