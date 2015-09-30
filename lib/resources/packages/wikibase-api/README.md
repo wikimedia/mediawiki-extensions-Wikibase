@@ -6,6 +6,11 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 1.0.4 (2015-09-30)
+
+* Use mw.ForeignApi for remote API endpoints (T50389)
+* Pass `uselang` parameter to `wbsearchentities` api call
+
 ### 1.0.3 (2015-05-21)
 
 * Made installable with DataValues JavaScript 0.7.0.
