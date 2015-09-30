@@ -140,7 +140,6 @@ $.widget( 'wikibase.entityview', PARENT, {
 
 		this.$entityTerms.entitytermsview( {
 			value: value,
-			entityId: this.options.value.getId(),
 			entityChangersFactory: this.options.entityChangersFactory,
 			helpMessage: mw.msg( 'wikibase-entitytermsview-input-help-message' )
 		} );

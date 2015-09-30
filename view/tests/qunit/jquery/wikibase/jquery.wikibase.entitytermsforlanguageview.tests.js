@@ -12,7 +12,6 @@
  */
 var createEntitytermsforlanguageview = function( options, $node ) {
 	options = $.extend( {
-		entityId: 'I am an EntityId',
 		entityChangersFactory: {
 			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
 			getDescriptionsChanger: function() {

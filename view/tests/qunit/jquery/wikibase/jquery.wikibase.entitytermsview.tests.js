@@ -24,7 +24,6 @@ var createEntitytermsview = function( options ) {
 				aliases: new wb.datamodel.MultiTerm( 'en', [] )
 			}
 		],
-		entityId: 'I am an EntityId',
 		entityChangersFactory: {
 			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
 			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
