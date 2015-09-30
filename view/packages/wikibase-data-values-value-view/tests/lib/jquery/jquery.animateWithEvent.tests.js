@@ -109,11 +109,11 @@
 			var elem = animationEvent.animation.elem;
 			$confirmedElems = $confirmedElems.add( elem );
 
-			if( $.inArray( animationEvent, animationEventInstances ) < 0 ) {
+			if ( $.inArray( animationEvent, animationEventInstances ) < 0 ) {
 				animationEventInstances.push( animationEvent );
 			}
 
-			if( $confirmedElems.length >= $elems.length ) {
+			if ( $confirmedElems.length >= $elems.length ) {
 				QUnit.start();
 			}
 		} ).promise().done( function() {

@@ -43,7 +43,7 @@ this.util = this.util || {};
 		callExtensions: function( callName, args ) {
 			args = args || [];
 			$.each( this._extensions, function( key, ext ) {
-				if( ext[callName] ) {
+				if ( ext[callName] ) {
 					ext[callName].apply( ext, args );
 				}
 			} );

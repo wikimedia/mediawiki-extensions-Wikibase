@@ -30,8 +30,8 @@ jQuery.fn.focusAt = ( function( $ ) {
 		// non-input element, there will still an error be thrown for consistence.
 		var normalizedPosition = normalizePosition( position, $elem );
 
-		if( $elem.length ) {
-			if( !$elem.is( ':input' ) ) {
+		if ( $elem.length ) {
+			if ( !$elem.is( ':input' ) ) {
 				$elem.focus(); // simple focus suffices since this is not an input element
 			} else {
 				setCaretPosition( $elem[0], normalizedPosition );
@@ -54,11 +54,11 @@ jQuery.fn.focusAt = ( function( $ ) {
 	function normalizePosition( position, $forElem ) {
 		var textLength = $forElem.val().length;
 
-		if( typeof position === 'number' ) {
+		if ( typeof position === 'number' ) {
 			return calculateAbsolutePosition( position, textLength );
-		} else if( position === 'end' ) {
+		} else if ( position === 'end' ) {
 			return textLength; // behind last character
-		} else if( position === 'start' ) {
+		} else if ( position === 'start' ) {
 			return 0;
 		}
 		throw new Error( 'Focus Position has to be a number or string "start" or "end"' );
@@ -75,7 +75,7 @@ jQuery.fn.focusAt = ( function( $ ) {
 	 * @return {number}
 	 */
 	function calculateAbsolutePosition( relativePosition, totalLength ) {
-		if( relativePosition < 0 ) {
+		if ( relativePosition < 0 ) {
 			relativePosition = totalLength + relativePosition;
 			return relativePosition < 0 ? 0 : relativePosition;
 		} else {
@@ -94,13 +94,13 @@ jQuery.fn.focusAt = ( function( $ ) {
 	function setCaretPosition( elem, caretPos ) {
 		var range;
 
-		if( elem.createTextRange ) {
+		if ( elem.createTextRange ) {
 			range = elem.createTextRange();
 			range.move( 'character', caretPos );
 			range.select();
 		} else {
 			elem.focus();
-			if( elem.selectionStart !== undefined ) {
+			if ( elem.selectionStart !== undefined ) {
 				elem.setSelectionRange( caretPos, caretPos );
 			}
 		}

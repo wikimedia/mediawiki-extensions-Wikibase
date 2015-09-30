@@ -29,7 +29,7 @@
 	QUnit.module( 'jquery.ui.toggler', {
 		teardown: function() {
 			$( '.test_toggler' ).each( function( i, node ) {
-				if( $( node ).data( 'toggler' ) ) {
+				if ( $( node ).data( 'toggler' ) ) {
 					$( node ).data( 'toggler' ).destroy();
 				}
 				$( node ).remove();

@@ -141,10 +141,10 @@
 				precision = this.precisionRotator && this.precisionRotator.getValue() || null,
 				calendarUri = this.calendarRotator && this.calendarRotator.getValue() || null;
 
-			if( precision !== null ) {
+			if ( precision !== null ) {
 				options.precision = precision;
 			}
-			if( calendarUri !== null ) {
+			if ( calendarUri !== null ) {
 				options.calendar = calendarUri;
 			}
 
@@ -161,7 +161,7 @@
 		var precisionValues = [],
 			dayPrecision = TimeValue.getPrecisionById( 'DAY' );
 		$.each( TimeValue.PRECISIONS, function( precisionValue, precision ) {
-			if( precisionValue <= dayPrecision ) {
+			if ( precisionValue <= dayPrecision ) {
 				// TODO: Remove this check as soon as time values are supported.
 				precisionValues.unshift( { value: precisionValue, label: precision.text } );
 			}

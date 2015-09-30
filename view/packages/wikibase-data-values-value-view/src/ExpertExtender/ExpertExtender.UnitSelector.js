@@ -93,7 +93,7 @@
 			var upstreamValue = this._getUpstreamValue(),
 				value = upstreamValue ? upstreamValue.label : null;
 
-			if( value === '1' ||
+			if ( value === '1' ||
 				value === 'http://qudt.org/vocab/unit#Unitless' ||
 				/^(?:https?:)?\/\/(?:www\.)?wikidata\.org\/\w+\/Q199$/i.test( value )
 			) {

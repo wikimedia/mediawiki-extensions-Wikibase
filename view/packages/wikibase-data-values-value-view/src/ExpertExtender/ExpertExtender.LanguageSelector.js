@@ -84,7 +84,7 @@
 
 			var self = this;
 
-			if( languages !== null ) {
+			if ( languages !== null ) {
 				this._labels = {};
 				$.each( languages, function( i, code ) {
 					self._labels[code] = self._messageProvider.getMessage(
@@ -103,7 +103,7 @@
 		init: function( $extender ) {
 			this._initLabels();
 
-			if( this._labels ) {
+			if ( this._labels ) {
 				this.$selector.languagesuggester( {
 					source: $.map( this._labels, function( label, code ) {
 						return { code: code, label: label };
@@ -123,7 +123,7 @@
 		 */
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
-			if( this._labels ) {
+			if ( this._labels ) {
 				// Necessary for mapping to the language code if the language is not changed.
 				// FIXME: This is obviously an access violation, and it's probably not a good idea
 				// to track this through the suggester given the current design.

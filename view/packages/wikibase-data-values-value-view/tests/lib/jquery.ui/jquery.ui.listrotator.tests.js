@@ -31,7 +31,7 @@
 			$( '.test_listrotator' ).each( function( i, node ) {
 				var $node = $( node ),
 					listRotator = $node.data( 'listrotator' );
-				if( listRotator ) {
+				if ( listRotator ) {
 					listRotator.destroy();
 				}
 				$node.remove();

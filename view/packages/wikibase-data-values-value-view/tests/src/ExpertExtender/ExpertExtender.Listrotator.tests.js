@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.Listrotator' );
 
-	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
+	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest( ExpertExtender.Listrotator.prototype, function( cur, tester, path ) {
 			return false;
 		} );

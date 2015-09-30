@@ -97,10 +97,10 @@ $.widget( 'ui.unitsuggester', PARENT, {
 		this._searchTimeoutHandle = setTimeout( function() {
 			self.search()
 			.done( function( suggestions, requestTerm ) {
-				if( requestTerm !== self.element.val() ) {
+				if ( requestTerm !== self.element.val() ) {
 					return;
 				}
-				if( self.options.menu.element.is( ':visible' ) ) {
+				if ( self.options.menu.element.is( ':visible' ) ) {
 					self._selectFirstUnit();
 				} else {
 					self._trigger( 'selected', null, [null] );
@@ -114,12 +114,12 @@ $.widget( 'ui.unitsuggester', PARENT, {
 			menuItems = menu.option( 'items' ),
 			url = null;
 
-		if( menuItems.length > 0 && menu.element.is( ':visible' ) ) {
+		if ( menuItems.length > 0 && menu.element.is( ':visible' ) ) {
 			this.options.menu.activate( menuItems[0] );
 			url = menuItems[0]._link;
 		}
 
-		if( this._selectedUrl !== url ) {
+		if ( this._selectedUrl !== url ) {
 			this._selectedUrl = url;
 			this._trigger( 'selected', null, [url] );
 		}
@@ -203,7 +203,7 @@ $.widget( 'ui.unitsuggester', PARENT, {
 		var $suggestion = $( '<span class="ui-unitsuggester-itemcontent">' ),
 			$label = $( '<span class="ui-unitsuggester-label">' ).text( entityStub.label || entityStub.id );
 
-		if( entityStub.aliases ) {
+		if ( entityStub.aliases ) {
 			$label.append(
 				$( '<span class="ui-unitsuggester-aliases">' ).text( ' (' + entityStub.aliases.join( ', ' ) +  ')' )
 			);
@@ -211,7 +211,7 @@ $.widget( 'ui.unitsuggester', PARENT, {
 
 		$suggestion.append( $label );
 
-		if( entityStub.description ) {
+		if ( entityStub.description ) {
 			$suggestion.append(
 				$( '<span class="ui-unitsuggester-description">' )
 					.text( entityStub.description )
@@ -256,7 +256,7 @@ $.widget( 'ui.unitsuggester', PARENT, {
 
 		this.options.menu.element
 		.on( 'mouseleave', function() {
-			if( self.options.menu.element.is( ':visible' ) ) {
+			if ( self.options.menu.element.is( ':visible' ) ) {
 				self._selectedSite = null;
 				self._selectFirstUnit();
 			}
@@ -276,7 +276,7 @@ $.widget( 'ui.unitsuggester', PARENT, {
 		.then( function( suggestions, searchTerm, nextSuggestionOffset ) {
 			var deferred = $.Deferred();
 
-			if( self._cache[searchTerm] ) {
+			if ( self._cache[searchTerm] ) {
 				self._cache[searchTerm].suggestions = self._cache[searchTerm].suggestions.concat( suggestions );
 				self._cache[searchTerm].nextSuggestionOffset = nextSuggestionOffset;
 			} else {

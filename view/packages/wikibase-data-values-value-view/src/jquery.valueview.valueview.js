@@ -14,7 +14,7 @@ var PARENT = $.Widget;
  */
 function expertProxy( fnName ) {
 	return function() {
-		if( this._expert && this.isInEditMode() ) {
+		if ( this._expert && this.isInEditMode() ) {
 			return this._expert[ fnName ].apply( this._expert, arguments );
 		}
 	};
@@ -197,8 +197,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if(
-			!this.options.expertStore
+		if ( !this.options.expertStore
 			|| !this.options.parserStore
 			|| !this.options.formatterStore
 			|| typeof this.options.language !== 'string'
@@ -215,7 +214,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		// Set initial value if provided in options:
 		this._initValue( this.option( 'value' ) || null );
 
-		if( this.option( 'autoStartEditing' ) && this.isEmpty() ) {
+		if ( this.option( 'autoStartEditing' ) && this.isEmpty() ) {
 			// If no data value is represented, offer UI to build one.
 			this.startEditing();
 		}
@@ -233,7 +232,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				+ this.widgetBaseClass + '-ineditmode '
 		);
 
-		if( this._expert ) {
+		if ( this._expert ) {
 			this._destroyExpert();
 		}
 
@@ -247,7 +246,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @throws {Error} when trying to set an option that cannot be set after initialization.
 	 */
 	_setOption: function( key, value ) {
-		switch( key ) {
+		switch ( key ) {
 			case 'autoStartEditing':
 				// doesn't make sense to change this after initialization
 				throw new Error( 'Can not change jQuery.valueview option "' + key
@@ -256,7 +255,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		PARENT.prototype._setOption.call( this, key, value );
 
-		switch( key ) {
+		switch ( key ) {
 			case 'expertStore':
 			case 'dataTypeId': // TODO: make this work properly and test
 			case 'dataValueType':
@@ -277,7 +276,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	startEditing: function() {
 		var self = this;
 
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			return; // return nothing to allow chaining
 		}
 
@@ -303,7 +302,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *        started will be reinstated.
 	 */
 	stopEditing: function( dropValue ) {
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			return;
 		}
 
@@ -311,7 +310,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		var self = this;
 
-		if( dropValue ) {
+		if ( dropValue ) {
 			// reinstate initial value from before edit mode
 			this.value( this.initialValue() );
 		}
@@ -319,7 +318,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		this._initialValue = null;
 		this._isInEditMode = false;
 		delete this.__lastValueCharacteristics;
-		if( this._expert ) {
+		if ( this._expert ) {
 			this._destroyExpert();
 		}
 
@@ -353,7 +352,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * If its not in edit mode, the current value will be returned.
 	 */
 	initialValue: function() {
-		if( !this.isInEditMode() ) {
+		if ( !this.isInEditMode() ) {
 			return this.value();
 		}
 		return this._initialValue;
@@ -386,10 +385,10 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @throws {Error} if value provided is not a `dataValues.DataValue` instance.
 	 */
 	value: function( value ) {
-		if( value === undefined ) {
+		if ( value === undefined ) {
 			return this._value;
 		}
-		if( value !== null && !( value instanceof dv.DataValue ) ) {
+		if ( value !== null && !( value instanceof dv.DataValue ) ) {
 			throw new Error( 'The given value has to be an instance of dataValues.DataValue or '
 				+ 'null' );
 		}
@@ -404,7 +403,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 */
 	_initValue: function( value ) {
 		var formattedValue = this.element.html();
-		if( !formattedValue ) {
+		if ( !formattedValue ) {
 			return this.value( value );
 		} else {
 			this._value = value;
@@ -424,14 +423,13 @@ $.widget( 'valueview.valueview', PARENT, {
 	 */
 	_setValue: function( value ) {
 		// Check whether given value is actually suitable for the widget:
-		if(
-			value !== null // null represents empty value
-			&& ( !( value instanceof dv.DataValue ) )
+		if ( value !== null // null represents empty value
+			&& !( value instanceof dv.DataValue )
 		) {
 			throw new Error( 'Instance of dataValues.DataValue required for setting a value' );
 		}
 
-		if( this._value && value && JSON.stringify( value.toJSON() ) === JSON.stringify( this._value.toJSON() ) ) {
+		if ( this._value && value && JSON.stringify( value.toJSON() ) === JSON.stringify( this._value.toJSON() ) ) {
 			return;
 		}
 
@@ -444,7 +442,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		var self = this;
 
-		if( this._value === null ) {
+		if ( this._value === null ) {
 			this._formattedValue = null;
 			this.draw();
 		} else {
@@ -456,7 +454,7 @@ $.widget( 'valueview.valueview', PARENT, {
 					self.draw();
 				} )
 				.fail( function( message ) {
-					if( message ) {
+					if ( message ) {
 						self._renderError( message );
 					}
 				} );
@@ -481,7 +479,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @throws {Error} if current text value is null.
 	 */
 	getTextValue: function() {
-		if( this._textValue === null ) {
+		if ( this._textValue === null ) {
 			throw new Error( 'This cannot happen' );
 		}
 		return this._textValue;
@@ -515,7 +513,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *         set in the options.
 	 */
 	_updateExpertConstructor: function() {
-		if( !( this.options.expertStore instanceof $.valueview.ExpertStore ) ) {
+		if ( !( this.options.expertStore instanceof $.valueview.ExpertStore ) ) {
 			throw new Error( 'No ExpertStore set in valueview\'s "expertStore" option' );
 		}
 
@@ -523,7 +521,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		this._expertConstructor = $.valueview.experts.EmptyValue;
 
-		if( dataValueType || this.options.dataTypeId ) {
+		if ( dataValueType || this.options.dataTypeId ) {
 			this._expertConstructor = this.options.expertStore.getExpert(
 				dataValueType,
 				this.options.dataTypeId
@@ -538,8 +536,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @private
 	 */
 	_updateExpert: function() {
-		if(
-			this._expert && this._expertConstructor
+		if ( this._expert && this._expertConstructor
 			&& this._expert.constructor === this._expertConstructor.prototype.constructor
 		) {
 			return; // fully compatible expert
@@ -547,11 +544,11 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		// Previous expert not suitable for the new task!
 		// Destroy old expert, create new one suitable for value:
-		if( this._expert ) {
+		if ( this._expert ) {
 			this._destroyExpert();
 		}
 
-		if( this._expertConstructor ) {
+		if ( this._expertConstructor ) {
 			this._expert = new this._expertConstructor(
 				this.$value,
 				this.viewState(),
@@ -604,9 +601,9 @@ $.widget( 'valueview.valueview', PARENT, {
 		var self = this,
 			deferred = $.Deferred();
 
-		if( this.isInEditMode() ) {
+		if ( this.isInEditMode() ) {
 			this._updateTextValue().then( function () {
-				if( !self.isInEditMode() ) {
+				if ( !self.isInEditMode() ) {
 					// edit mode was left while formatting text value
 					return;
 				}
@@ -615,7 +612,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 				// TODO: Display message that data value type is unsupported or no expert indicator
 				//  and no value at the same time:
-				// if( !self._expert ) { ... }
+				// if ( !self._expert ) { ... }
 
 				self._expert.draw()
 				.done( function() {
@@ -662,7 +659,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			.done( function( parsedValue ) {
 				self._value = parsedValue;
 
-				if( self._value === null ) {
+				if ( self._value === null ) {
 					self._formattedValue = null;
 					self.drawContent();
 					return;
@@ -674,7 +671,7 @@ $.widget( 'valueview.valueview', PARENT, {
 						self.drawContent();
 					} )
 					.fail( function( message ) {
-						if( message ) {
+						if ( message ) {
 							self._formattedValue = null;
 							self._renderError( message );
 						}
@@ -682,7 +679,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 			} )
 			.fail( function( message ) {
-				if( message ) {
+				if ( message ) {
 					self._value = null;
 					self._renderError( message );
 				}
@@ -696,7 +693,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @param {string} message HTML error message.
 	 */
 	_renderError: function( message ) {
-		if( this._expert && this._expert.preview ) {
+		if ( this._expert && this._expert.preview ) {
 			this._expert.preview.update( message );
 		}
 	},
@@ -722,14 +719,14 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		this._trigger( 'parse' );
 
-		if( rawValue === null || rawValue instanceof dv.DataValue ) {
+		if ( rawValue === null || rawValue instanceof dv.DataValue ) {
 			this.__lastUpdateValue = undefined;
 			self._trigger( 'afterparse' );
 			deferred.resolve( rawValue );
 			return deferred.promise();
 		}
 
-		if( this._parseTimer ) {
+		if ( this._parseTimer ) {
 			clearTimeout( this._parseTimer );
 		}
 
@@ -742,18 +739,18 @@ $.widget( 'valueview.valueview', PARENT, {
 			//  for previews out of the experts. The preview should be handled in the same place for
 			//  all value types, could perhaps move into its own widget, listening to valueview
 			//  events.
-			if( expert && expert.preview ) {
+			if ( expert && expert.preview ) {
 				expert.preview.showSpinner();
 			}
 
 			valueParser.parse( rawValue )
 				.done( function( parsedValue ) {
 					// Paranoia check against ValueParser interface:
-					if( parsedValue !== null && !( parsedValue instanceof dv.DataValue ) ) {
+					if ( parsedValue !== null && !( parsedValue instanceof dv.DataValue ) ) {
 						throw new Error( 'Unexpected value parser result' );
 					}
 
-					if( self.__lastUpdateValue === undefined || self.__lastUpdateValue !== rawValue ) {
+					if ( self.__lastUpdateValue === undefined || self.__lastUpdateValue !== rawValue ) {
 						// latest update job is done, this one must be a late response for some weird
 						// reason, or the value has since been updated, so should be re-parsed
 						// and this result be rejected and ignored.
@@ -789,7 +786,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *         set in the options.
 	 */
 	_instantiateParser: function( additionalParserOptions ) {
-		if( !( this.options.parserStore instanceof vp.ValueParserStore ) ) {
+		if ( !( this.options.parserStore instanceof vp.ValueParserStore ) ) {
 			throw new Error( 'No value parser store in valueview\'s options specified' );
 		}
 
@@ -829,7 +826,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		valueFormatter.format( dataValue, dataTypeId, 'text/html' )
 			.done( function( formattedValue, formattedDataValue ) {
-				if( dataValue === formattedDataValue ) {
+				if ( dataValue === formattedDataValue ) {
 					deferred.resolve( formattedValue );
 				} else {
 					// Late response that should be ignored.
@@ -865,7 +862,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			dataTypeId = this.options.dataTypeId || null,
 			dataValue = this._value;
 
-		if( !dataValue ) {
+		if ( !dataValue ) {
 			self._textValue = '';
 			deferred.resolve();
 			return deferred.promise();
@@ -875,7 +872,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 		valueFormatter.format( dataValue, dataTypeId, format )
 			.done( function( formattedValue, formattedDataValue ) {
-				if( dataValue === formattedDataValue ) {
+				if ( dataValue === formattedDataValue ) {
 					self._textValue = formattedValue;
 					deferred.resolve();
 				} else {
@@ -900,7 +897,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *         `valueFormatters.ValueFormatterStore` is set in the options.
 	 */
 	_instantiateFormatter: function( additionalFormatterOptions ) {
-		if( !( this.options.formatterStore instanceof vf.ValueFormatterStore ) ) {
+		if ( !( this.options.formatterStore instanceof vf.ValueFormatterStore ) ) {
 			throw new Error( 'No value formatter store in valueview\'s options specified' );
 		}
 
@@ -956,7 +953,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			change: function() {
 				var i;
 
-				if( !self._expert ) {
+				if ( !self._expert ) {
 					// someone notified about change while there couldn't have been one since there
 					// is no expert which allows for any change currently...
 					return;
@@ -969,11 +966,11 @@ $.widget( 'valueview.valueview', PARENT, {
 					newValueCharacteristics = self._expert.valueCharacteristics(),
 					lastValueCharacteristics = self.__lastValueCharacteristics || {};
 
-				for( i in newValueCharacteristics ) {
+				for ( i in newValueCharacteristics ) {
 					differentValueCharacteristics = differentValueCharacteristics
 					|| newValueCharacteristics[i] !== lastValueCharacteristics[i];
 				}
-				for( i in lastValueCharacteristics ) {
+				for ( i in lastValueCharacteristics ) {
 					differentValueCharacteristics = differentValueCharacteristics
 					|| newValueCharacteristics[i] !== lastValueCharacteristics[i];
 				}
@@ -981,7 +978,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				var changeDetected
 					= differentValueCharacteristics || self.getTextValue() !== self._expert.rawValue();
 
-				if( changeDetected ) {
+				if ( changeDetected ) {
 					self.__lastValueCharacteristics = newValueCharacteristics;
 					self._trigger( 'change' );
 					self._updateValue();
@@ -997,10 +994,10 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {Object}
 	 */
 	valueCharacteristics: function( format ) {
-		if( this._expert ) {
+		if ( this._expert ) {
 			return this._expert.valueCharacteristics( format );
 		}
-		if( this._expertConstructor ) {
+		if ( this._expertConstructor ) {
 			return this._expertConstructor.prototype.valueCharacteristics( format );
 		}
 		return {};

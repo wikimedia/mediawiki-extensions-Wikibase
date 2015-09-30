@@ -21,7 +21,7 @@ jQuery.valueview.tests.MockViewState = ( function( $, ViewState, util ) {
 	 * @throws {Error} if definition is not a plain object.
 	 */
 	return util.inherit( 'ValueviewMockViewState', ViewState, function ( definition ) {
-		if( definition !== undefined && !$.isPlainObject( definition ) ) {
+		if ( definition !== undefined && !$.isPlainObject( definition ) ) {
 			throw new Error( 'Given definition needs to be a plain object' );
 		}
 		this._view = definition || {};

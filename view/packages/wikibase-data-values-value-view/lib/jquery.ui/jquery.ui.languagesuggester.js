@@ -57,11 +57,11 @@ $.widget( 'ui.languagesuggester', PARENT, {
 		deferred.resolve( $.grep( source, function( item ) {
 			return matcher.test( item.code ) || matcher.test( item.label );
 		} ).sort( function( a, b ) {
-			for( var i = 0; i < promoters.length; i++ ) {
+			for ( var i = 0; i < promoters.length; i++ ) {
 				var promoterA = promoters[i]( a ),
 					promoterB = promoters[i]( b );
 
-				if( promoterA !== promoterB ) {
+				if ( promoterA !== promoterB ) {
 					return promoterB - promoterA;
 				}
 			}

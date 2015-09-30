@@ -47,7 +47,7 @@
 		 */
 		valueCharacteristics: function() {
 			var options = {};
-			if( this._languageSelector ) {
+			if ( this._languageSelector ) {
 				options.valuelang = this._languageSelector.getValue();
 			}
 			return options;

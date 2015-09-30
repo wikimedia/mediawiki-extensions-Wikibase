@@ -570,7 +570,7 @@
 			['label', null, function() { return 'action'; }, 'cssClass', 'someLink']
 		];
 
-		for( var i = 0; i < testSets.length; i++ ) {
+		for ( var i = 0; i < testSets.length; i++ ) {
 			var args = testSets[i].concat( new Array( 5 - testSets[i].length ) ),
 				item = new $.ui.ooMenu.CustomItem( args[0], args[1], args[2], args[3], args[4] );
 
@@ -581,9 +581,9 @@
 
 			var expectedVisibility = true;
 
-			if( $.isFunction( testSets[i][1] ) ) {
+			if ( $.isFunction( testSets[i][1] ) ) {
 				expectedVisibility = testSets[i][1]();
-			} else if( typeof testSets[i][1] === 'boolean' ) {
+			} else if ( typeof testSets[i][1] === 'boolean' ) {
 				expectedVisibility = testSets[i][1];
 			}
 

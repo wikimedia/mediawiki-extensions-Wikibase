@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.UnitSelector' );
 
-	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
+	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest(
 			ExpertExtender.UnitSelector.prototype,
 			function( cur, tester, path ) {
@@ -46,11 +46,11 @@
 
 		unitSelector.init( $extender );
 
-		if( unitSelector.onInitialShow ) {
+		if ( unitSelector.onInitialShow ) {
 			unitSelector.onInitialShow();
 		}
 
-		if( unitSelector.draw ) {
+		if ( unitSelector.draw ) {
 			unitSelector.draw();
 		}
 
@@ -72,11 +72,11 @@
 
 		unitSelector.init( $extender );
 
-		if( unitSelector.onInitialShow ) {
+		if ( unitSelector.onInitialShow ) {
 			unitSelector.onInitialShow();
 		}
 
-		if( unitSelector.draw ) {
+		if ( unitSelector.draw ) {
 			unitSelector.draw();
 		}
 

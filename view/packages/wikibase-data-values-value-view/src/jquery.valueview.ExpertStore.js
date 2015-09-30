@@ -56,11 +56,11 @@ jQuery.valueview = jQuery.valueview || {};
 		registerDataTypeExpert: function( Expert, dataTypeId ) {
 			assertIsExpertConstructor( Expert );
 
-			if( dataTypeId === undefined ) {
+			if ( dataTypeId === undefined ) {
 				throw new Error( 'No proper data type id provided to register the expert for' );
 			}
 
-			if( this._expertsForDataTypes[dataTypeId] ) {
+			if ( this._expertsForDataTypes[dataTypeId] ) {
 				throw new Error( 'Expert for data type "' + dataTypeId + '" is registered already' );
 			}
 
@@ -79,11 +79,11 @@ jQuery.valueview = jQuery.valueview || {};
 		registerDataValueExpert: function( Expert, dataValueType ) {
 			assertIsExpertConstructor( Expert );
 
-			if( dataValueType === undefined ) {
+			if ( dataValueType === undefined ) {
 				throw new Error( 'No proper data value type provided to register the expert for' );
 			}
 
-			if( this._expertsForDataValueTypes[dataValueType] ) {
+			if ( this._expertsForDataValueTypes[dataValueType] ) {
 				throw new Error( 'Expert for data value type "' + dataValueType + '" is registered '
 					+ 'already' );
 			}
@@ -105,13 +105,13 @@ jQuery.valueview = jQuery.valueview || {};
 		getExpert: function( dataValueType, dataTypeId ) {
 			var expert;
 
-			if( typeof dataTypeId === 'string' ) {
+			if ( typeof dataTypeId === 'string' ) {
 				expert = this._expertsForDataTypes[dataTypeId];
 			}
 
-			if( !expert && typeof dataValueType === 'string' ) {
+			if ( !expert && typeof dataValueType === 'string' ) {
 				expert = this._expertsForDataValueTypes[dataValueType];
-			} else if( !expert ) {
+			} else if ( !expert ) {
 				throw new Error( 'No sufficient purpose provided for choosing an expert' );
 			}
 
@@ -126,7 +126,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @throws {Error} if the provided argument is not a `jQuery.valueview.Expert` constructor.
 	 */
 	function assertIsExpertConstructor( Expert ) {
-		if( !( $.isFunction( Expert ) && Expert.prototype instanceof $.valueview.Expert ) ) {
+		if ( !( $.isFunction( Expert ) && Expert.prototype instanceof $.valueview.Expert ) ) {
 			throw new Error( 'Invalid jQuery.valueview.Expert constructor' );
 		}
 	}

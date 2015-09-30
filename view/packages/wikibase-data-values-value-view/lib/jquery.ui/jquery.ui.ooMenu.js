@@ -94,14 +94,13 @@ $.widget( 'ui.ooMenu', {
 	 * @throws {Error} when trying to set `items` or `customItems` option with improper values.
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'items' || key === 'customItems' ) {
-			if( !$.isArray( value ) ) {
+		if ( key === 'items' || key === 'customItems' ) {
+			if ( !$.isArray( value ) ) {
 				throw new Error( key + ' needs to be an array' );
 			}
 
-			for( var i = 0; i < value.length; i++ ) {
-				if(
-					key === 'items' && !( value[i] instanceof $.ui.ooMenu.Item )
+			for ( var i = 0; i < value.length; i++ ) {
+				if ( key === 'items' && !( value[i] instanceof $.ui.ooMenu.Item )
 					|| key === 'customItems' && !( value[i] instanceof $.ui.ooMenu.CustomItem )
 				) {
 					throw new Error( key + ' may only feature specific instances' );
@@ -111,9 +110,9 @@ $.widget( 'ui.ooMenu', {
 
 		$.Widget.prototype._setOption.apply( this, arguments );
 
-		if( key === 'items' || key === 'customItems' ) {
+		if ( key === 'items' || key === 'customItems' ) {
 			this._refresh();
-		} else if( key === 'maxItems' ) {
+		} else if ( key === 'maxItems' ) {
 			this.scale();
 		}
 	},
@@ -125,12 +124,12 @@ $.widget( 'ui.ooMenu', {
 	_refresh: function() {
 		this.element.empty();
 		this.element.scrollTop( 0 );
-		for( var i = 0; i < this.options.items.length; i++ ) {
+		for ( var i = 0; i < this.options.items.length; i++ ) {
 			this._appendItem( this.options.items[i] );
 		}
 
-		for( var j = 0; j < this.options.customItems.length; j++ ) {
-			if( this._evaluateVisibility( this.options.customItems[j] ) ) {
+		for ( var j = 0; j < this.options.customItems.length; j++ ) {
+			if ( this._evaluateVisibility( this.options.customItems[j] ) ) {
 				this._appendItem( this.options.customItems[j] );
 			}
 		}
@@ -166,7 +165,7 @@ $.widget( 'ui.ooMenu', {
 			.attr( 'tabindex', -1 )
 			.html( label );
 
-		if( item.getLink() ) {
+		if ( item.getLink() ) {
 			$a.attr( 'href', item.getLink() );
 		}
 
@@ -176,14 +175,14 @@ $.widget( 'ui.ooMenu', {
 			.data( 'ui-ooMenu-item', item )
 			.append( $a );
 
-		if( item instanceof $.ui.ooMenu.CustomItem ) {
+		if ( item instanceof $.ui.ooMenu.CustomItem ) {
 			$item.addClass( 'ui-ooMenu-customItem' );
 
-			if( $.isFunction( item.getAction() ) ) {
+			if ( $.isFunction( item.getAction() ) ) {
 				$item.addClass( 'ui-ooMenu-customItem-action' );
 			}
 
-			if( item.getCssClass() ) {
+			if ( item.getCssClass() ) {
 				$item.addClass( item.getCssClass() );
 			}
 		}
@@ -196,7 +195,7 @@ $.widget( 'ui.ooMenu', {
 			self.deactivate();
 		} )
 		.on( 'mousedown.ooMenu', function( e ) {
-			if( !( e.which !== 1 || e.altKey || e.ctrlKey || e.shiftKey || e.metaKey ) ) {
+			if ( !( e.which !== 1 || e.altKey || e.ctrlKey || e.shiftKey || e.metaKey ) ) {
 				self.select( e );
 			}
 		} );
@@ -211,16 +210,16 @@ $.widget( 'ui.ooMenu', {
 	 * @return {boolean}
 	 */
 	hasVisibleItems: function( includeCustomItems ) {
-		if( this.options.items.length ) {
+		if ( this.options.items.length ) {
 			return true;
 		}
 
-		if( !includeCustomItems ) {
+		if ( !includeCustomItems ) {
 			return false;
 		}
 
-		for( var i = 0; i < this.options.customItems.length; i++ ) {
-			if( this._evaluateVisibility( this.options.customItems[i] ) ) {
+		for ( var i = 0; i < this.options.customItems.length; i++ ) {
+			if ( this._evaluateVisibility( this.options.customItems[i] ) ) {
 				return true;
 			}
 		}
@@ -239,13 +238,13 @@ $.widget( 'ui.ooMenu', {
 		.css( 'overflowY', 'visible' );
 
 		// Constrain height:
-		if( this.options.maxItems ) {
+		if ( this.options.maxItems ) {
 			var $children = this.element.children();
 
-			if( $children.length > this.options.maxItems ) {
+			if ( $children.length > this.options.maxItems ) {
 				var fixedHeight = 0;
 
-				for( var i = 0; i < this.options.maxItems; i++ ) {
+				for ( var i = 0; i < this.options.maxItems; i++ ) {
 					fixedHeight += $children.eq( i ).outerHeight();
 				}
 
@@ -256,7 +255,7 @@ $.widget( 'ui.ooMenu', {
 		}
 
 		// Constrain width if menu reaches out of the browser viewport:
-		if( this.element.offset().left + this.element.outerWidth( true ) > $( window ).width() ) {
+		if ( this.element.offset().left + this.element.outerWidth( true ) > $( window ).width() ) {
 			this.element.width(
 				$( window ).width()
 					- this.element.offset().left
@@ -286,11 +285,11 @@ $.widget( 'ui.ooMenu', {
 	activate: function( item ) {
 		var $item;
 
-		if( item instanceof $.ui.ooMenu.Item ) {
+		if ( item instanceof $.ui.ooMenu.Item ) {
 			$item = this.element.children( '.ui-ooMenu-item' ).filter( function() {
 				return $( this ).data( 'ui-ooMenu-item' ) === item;
 			} );
-		} else if( item instanceof jQuery && item.data( 'ui-ooMenu-item' ) ) {
+		} else if ( item instanceof jQuery && item.data( 'ui-ooMenu-item' ) ) {
 			$item = item;
 		} else {
 			throw new Error( 'Need $.ui.ooMenu.Item instance or menu item jQuery object to '
@@ -303,9 +302,9 @@ $.widget( 'ui.ooMenu', {
 			scroll = this.element.scrollTop(),
 			elementHeight = this.element.height();
 
-		if( offset < 0 ) {
+		if ( offset < 0 ) {
 			this.element.scrollTop( scroll + offset );
-		} else if( offset >= elementHeight ) {
+		} else if ( offset >= elementHeight ) {
 			this.element.scrollTop( scroll + offset - elementHeight + $item.height() );
 		}
 
@@ -318,7 +317,7 @@ $.widget( 'ui.ooMenu', {
 	 * Deactivates the menu (resets activated item).
 	 */
 	deactivate: function() {
-		if( this._isActive() ) {
+		if ( this._isActive() ) {
 			this.element.children( '.ui-state-hover' ).removeClass( 'ui-state-hover' );
 			$( this ).trigger( 'blur' );
 		}
@@ -356,20 +355,20 @@ $.widget( 'ui.ooMenu', {
 	 * @param {jQuery} $edge
 	 */
 	_move: function( direction, $edge ) {
-		if( !this.element.children().length ) {
+		if ( !this.element.children().length ) {
 			return;
 		}
 
 		var $active = this.element.children( '.ui-state-hover' );
 
-		if( !$active.length ) {
+		if ( !$active.length ) {
 			this.activate( $edge );
 			return;
 		}
 
 		var $nextItem = $active[direction + 'All']( '.ui-ooMenu-item' ).eq( 0 );
 
-		if( $nextItem.length ) {
+		if ( $nextItem.length ) {
 			this.activate( $nextItem );
 		} else {
 			this.activate( $edge );
@@ -384,9 +383,9 @@ $.widget( 'ui.ooMenu', {
 
 		var item = !$item.length ? null : $item.data( 'ui-ooMenu-item' );
 
-		if( item instanceof $.ui.ooMenu.CustomItem ) {
+		if ( item instanceof $.ui.ooMenu.CustomItem ) {
 			var action = item.getAction();
-			if( $.isFunction( action ) ) {
+			if ( $.isFunction( action ) ) {
 				action();
 			}
 		}
@@ -415,7 +414,7 @@ $.widget( 'ui.ooMenu', {
  * @throws {Error} if any required parameter is not specified properly.
  */
 var Item = function( label, value, link ) {
-	if( !label ) {
+	if ( !label ) {
 		throw new Error( 'Label needs to be specified' );
 	}
 
@@ -491,7 +490,7 @@ $.extend( Item.prototype, {
  * @throws {Error} if any required parameter is not specified properly.
  */
 var CustomItem = function( label, visibility, action, cssClass, link ) {
-	if( !label ) {
+	if ( !label ) {
 		throw new Error( 'Label needs to be specified' );
 	}
 
@@ -535,7 +534,7 @@ CustomItem = util.inherit(
 		 * @return {Function|boolean}
 		 */
 		getVisibility: function( menu ) {
-			if( $.isFunction( this._visibility ) ) {
+			if ( $.isFunction( this._visibility ) ) {
 				return this._visibility( menu );
 			}
 			return this._visibility !== false;

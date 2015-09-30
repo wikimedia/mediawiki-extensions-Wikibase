@@ -20,7 +20,7 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @throws {Error} if no `jQuery.valueview` instance is provided.
 	 */
 	var SELF = vv.ViewState = function ValueviewViewState( valueview ) {
-		if( !( valueview instanceof vv.valueview ) ) {
+		if ( !( valueview instanceof vv.valueview ) ) {
 			throw new Error( 'Can not create a valueview ViewState object without a valueview' );
 		}
 		this._view = valueview;

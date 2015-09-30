@@ -37,7 +37,7 @@
 			},
 			function() {
 				var value = self.viewState().value();
-				if( !value ) {
+				if ( !value ) {
 					return value;
 				}
 				value = value.getValue().getPrecision();
@@ -94,14 +94,14 @@
 		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
-			if( !this.precisionRotator ) { // happens when called statically
+			if ( !this.precisionRotator ) { // happens when called statically
 				return {};
 			}
 
 			var options = {},
 				precision = this.precisionRotator.getValue();
 
-			if( precision !== null ) {
+			if ( precision !== null ) {
 				options.precision = precision;
 			}
 
@@ -141,7 +141,7 @@
 			roundedPrecision = roundPrecision( precision );
 
 		$.each( PRECISIONS, function( i, precision ) {
-			if( roundPrecision( precision ) === roundedPrecision ) {
+			if ( roundPrecision( precision ) === roundedPrecision ) {
 				actualPrecision = roundedPrecision;
 				return false;
 			}

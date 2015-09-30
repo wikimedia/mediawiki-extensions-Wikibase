@@ -35,7 +35,7 @@
 			.val( this.viewState().getTextValue() )
 			.on( 'keydown', function( event ) {
 				// Prevent Enter key from adding a new line character:
-				if( event.keyCode === $.ui.keyCode.ENTER ) {
+				if ( event.keyCode === $.ui.keyCode.ENTER ) {
 					event.preventDefault();
 				}
 			} )
@@ -51,7 +51,7 @@
 		 * @inheritdoc
 		 */
 		destroy: function() {
-			if( this.$input ) {
+			if ( this.$input ) {
 				this.$input.off( 'eachchange' );
 				this.$input = null;
 			}

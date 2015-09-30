@@ -47,11 +47,11 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 	 * @throws {Error} if purpose is unknown.
 	 */
 	var SELF = function PurposedCallbacks( predefinedPurposes, callbackOptions ) {
-		if( !( this instanceof SELF ) ) {
+		if ( !( this instanceof SELF ) ) {
 			return new SELF( predefinedPurposes, callbackOptions );
 		}
 
-		if( typeof predefinedPurposes === 'string' ) {
+		if ( typeof predefinedPurposes === 'string' ) {
 			callbackOptions = predefinedPurposes;
 			predefinedPurposes = undefined;
 		}
@@ -81,11 +81,11 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		 *         one of them.
 		 */
 		this.add = function( purpose, callbacks ) {
-			if( predefinedPurposes && !this.has( purpose ) ) {
+			if ( predefinedPurposes && !this.has( purpose ) ) {
 				throw new Error( 'Unknown purpose "' + purpose + '".' );
 			}
 
-			if( !callbacksPerPurpose[ purpose ] ) {
+			if ( !callbacksPerPurpose[ purpose ] ) {
 				callbacksPerPurpose[ purpose ] = $.Callbacks( callbackOptions );
 			}
 			callbacksPerPurpose[ purpose ].add( callbacks );
@@ -102,7 +102,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		 */
 		this.remove = function( purpose, callbacks ) {
 			var callbackForPurpose = callbacksPerPurpose[ purpose ];
-			if( callbackForPurpose ) {
+			if ( callbackForPurpose ) {
 				// NOTE: We can't remove( callbacks ) even though it is documented to work this way.
 				//  This is a bug (behavior not according to jQuery API documentation) which is
 				//  still present in jQuery 2.0
@@ -121,7 +121,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		 * @return {boolean}
 		 */
 		this.has = function( purpose, callback ) {
-			if( callback ) {
+			if ( callback ) {
 				var callbacksForPurpose = callbacksPerPurpose[ purpose ];
 				return callbacksForPurpose && callbacksForPurpose.has( callback );
 			}
@@ -138,11 +138,11 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		 * @return {string[]}
 		 */
 		this.purposes = function() {
-			if( predefinedPurposes ) {
+			if ( predefinedPurposes ) {
 				return predefinedPurposes.slice();
 			}
 			var usedPurposes = [];
-			for( var purpose in callbacksPerPurpose ) {
+			for ( var purpose in callbacksPerPurpose ) {
 				usedPurposes.push( purpose );
 			}
 			return usedPurposes;
@@ -173,7 +173,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		 *         here is not one of them.
 		 */
 		this.fireWith = function( context, purposes, args ) {
-			if( !$.isArray( purposes ) ) {
+			if ( !$.isArray( purposes ) ) {
 				purposes = [ purposes ];
 			}
 			args = args || [];
@@ -181,16 +181,16 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 
 			$.each( purposes, function( i, purpose ) {
 				var callbacksForPurpose = callbacksPerPurpose[ purpose ];
-				if( callbacksForPurpose ) {
+				if ( callbacksForPurpose ) {
 					callbacksForPurpose.fireWith( context, args );
 				} else {
 					missingPurposes.push( purpose );
 				}
 			} );
 
-			if( predefinedPurposes && missingPurposes.length ) {
+			if ( predefinedPurposes && missingPurposes.length ) {
 				var unknownPurposes = $( missingPurposes ).not( predefinedPurposes );
-				if( unknownPurposes.length ) {
+				if ( unknownPurposes.length ) {
 					throw new Error( 'Can not fire callbacks for unknown purposes.' );
 				}
 			}
@@ -208,7 +208,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 		 * @return {jQuery.PurposedCallbacks.Facade}
 		 */
 		this.facade = function() {
-			if( !facade ) {
+			if ( !facade ) {
 				facade = SELF.Facade( this );
 			}
 			return facade;
@@ -229,7 +229,7 @@ jQuery.PurposedCallbacks = ( function( $ ) {
 	 * @return {jQuery.PurposedCallbacks.Facade} Can be instantiated without `new`.
 	 */
 	SELF.Facade = function PurposedCallbacksFacade( base ) {
-		if( !( this instanceof SELF.Facade ) ) {
+		if ( !( this instanceof SELF.Facade ) ) {
 			return new SELF.Facade( base );
 		}
 		var self = this;

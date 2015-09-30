@@ -45,7 +45,7 @@
 				unsupportedIndicator,
 				unsupportedMsg;
 
-			if( !value && this.viewState().option( 'dataTypeId' ) ) {
+			if ( !value && this.viewState().option( 'dataTypeId' ) ) {
 				unsupportedIndicator = this.viewState().option( 'dataTypeId' );
 				unsupportedMsg = this._messageProvider.getMessage(
 					'valueview-expert-unsupportedvalue-unsupporteddatatype',
@@ -53,7 +53,7 @@
 				);
 				// NOTE: Of course, this also implies that the data value type is unsupported but
 				//  the message is actually more detailed than that.
-			} else if( value || this.viewState().option( 'dataValueType' ) ) {
+			} else if ( value || this.viewState().option( 'dataValueType' ) ) {
 				var dataValueType = ( value )
 					? value.getType()
 					: this.viewState().option( 'dataValueType' );
