@@ -51,7 +51,7 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 		startCallback
 	) {
 		var animationFunction;
-		if( typeof animationProperties !== 'string' ) {
+		if ( typeof animationProperties !== 'string' ) {
 			// Custom animation, forward to jQuery.fn.animate( animationProperties, options )
 			animationFunction = 'animate';
 			animationProperties = animationProperties || {}; // allow "empty" animation
@@ -59,12 +59,12 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 			// Predefined animation, e.g. "fadeIn" would forward to jQuery.fn.fadeIn( options )
 			animationFunction = animationProperties;
 			animationProperties = false;
-			if( !$.isFunction( $.fn[ animationFunction ] ) ) {
+			if ( !$.isFunction( $.fn[ animationFunction ] ) ) {
 				throw new Error( 'jQuery.fn."' + animationFunction + '" is not a function.' );
 			}
 		}
 
-		if( $.isFunction( options ) || !options ) {
+		if ( $.isFunction( options ) || !options ) {
 			startCallback = options;
 			options = {};
 		}
@@ -82,13 +82,13 @@ jQuery.fn.animateWithEvent = ( function( $ ) {
 					// All event listeners can then register their callbacks for different animation
 					// stages to animationEvent.animationCallbacks.
 					startCallback.call( this, animationEvent );
-					if( options.start ) {
+					if ( options.start ) {
 						options.start.apply( this, arguments );
 					}
 				}
 			} ) );
 
-			if( animationProperties ) {
+			if ( animationProperties ) {
 				// animate()
 				$( elem )[ animationFunction ]( animationProperties, animationOptions );
 			} else {

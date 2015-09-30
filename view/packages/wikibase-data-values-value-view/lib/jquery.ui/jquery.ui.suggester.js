@@ -161,12 +161,12 @@ $.widget( 'ui.suggester', {
 		this.element
 		.addClass( 'ui-suggester-input' )
 		.on( 'blur.' + this.widgetName, function() {
-			if( !self.options.menu.element.is( ':focus' ) ) {
+			if ( !self.options.menu.element.is( ':focus' ) ) {
 				self._close();
 			}
 		} );
 
-		if( !( this.options.menu instanceof $.ui.ooMenu ) ) {
+		if ( !( this.options.menu instanceof $.ui.ooMenu ) ) {
 			var $menu = $( '<ul/>' ).ooMenu();
 			this.options.menu = $menu.data( 'ooMenu' );
 		}
@@ -189,7 +189,7 @@ $.widget( 'ui.suggester', {
 		this.option( 'menu', null );
 
 		// About to remove the last suggester instance on the page:
-		if( $( ':' + this.widgetBaseClass ).length === 1 ) {
+		if ( $( ':' + this.widgetBaseClass ).length === 1 ) {
 			$( window ).off( '.' + this.widgetBaseClass );
 		}
 
@@ -205,19 +205,19 @@ $.widget( 'ui.suggester', {
 	 * @protected
 	 */
 	_setOption: function( key, value ) {
-		if( key === 'menu' ) {
+		if ( key === 'menu' ) {
 			this.options.menu.destroy();
 			this.options.menu.element.remove();
 		}
 
 		var response = $.Widget.prototype._setOption.apply( this, arguments );
 
-		if( key === 'menu' && value instanceof $.ui.ooMenu ) {
+		if ( key === 'menu' && value instanceof $.ui.ooMenu ) {
 			this.options.menu = this._initMenu( value );
 		}
 
-		if( key === 'disabled' ) {
-			if( value ) {
+		if ( key === 'disabled' ) {
+			if ( value ) {
 				this._close();
 			}
 			this.element.prop( 'disabled', value );
@@ -243,13 +243,13 @@ $.widget( 'ui.suggester', {
 
 		$( ooMenu )
 		.on( 'selected.suggester', function( event, item ) {
-			if( item instanceof $.ui.ooMenu.Item && !( item instanceof $.ui.ooMenu.CustomItem ) ) {
+			if ( item instanceof $.ui.ooMenu.Item && !( item instanceof $.ui.ooMenu.CustomItem ) ) {
 				self._term = item.getValue();
 				self.element.val( item.getValue() );
 				self._close();
 				self._trigger( 'change' );
 
-				if( !event.originalEvent || !/^key/.test( event.originalEvent.type ) ) {
+				if ( !event.originalEvent || !/^key/.test( event.originalEvent.type ) ) {
 					setTimeout( function() {
 						// Run refocusing out of the execution chain to allow redrawing in IE.
 						self.element.focus();
@@ -273,7 +273,7 @@ $.widget( 'ui.suggester', {
 		.on( 'keydown.suggester', function( event ) {
 			var isDisabled = self.element.hasClass( 'ui-state-disabled' );
 
-			if( isDisabled || self.element.prop( 'readOnly' ) ) {
+			if ( isDisabled || self.element.prop( 'readOnly' ) ) {
 				return;
 			}
 
@@ -283,7 +283,7 @@ $.widget( 'ui.suggester', {
 
 			var keyCode = $.ui.keyCode;
 
-			switch( event.keyCode ) {
+			switch ( event.keyCode ) {
 				case keyCode.UP:
 					self._keyMove( 'previous', event );
 					break;
@@ -294,7 +294,7 @@ $.widget( 'ui.suggester', {
 
 				case keyCode.ENTER:
 				case keyCode.NUMPAD_ENTER:
-					if( self.options.menu.getActiveItem() ) {
+					if ( self.options.menu.getActiveItem() ) {
 						// Prevent form submission and select currently active item.
 						event.preventDefault();
 						event.stopPropagation();
@@ -304,7 +304,7 @@ $.widget( 'ui.suggester', {
 					break;
 
 				case keyCode.TAB:
-					if( !self.options.menu.getActiveItem() ) {
+					if ( !self.options.menu.getActiveItem() ) {
 						return;
 					}
 					self.options.menu.select( event );
@@ -312,14 +312,14 @@ $.widget( 'ui.suggester', {
 
 				case keyCode.ESCAPE:
 					self.element.val( self._term );
-					if( self.options.menu.element.is( ':visible' ) ) {
+					if ( self.options.menu.element.is( ':visible' ) ) {
 						event.stopPropagation();
 						self._close();
 					}
 					break;
 
 				default:
-					if( self.element.val() === ''
+					if ( self.element.val() === ''
 						&& (
 							event.keyCode === keyCode.BACKSPACE
 							|| event.keyCode === keyCode.DELETE
@@ -336,7 +336,7 @@ $.widget( 'ui.suggester', {
 			self._trigger( 'change' );
 		} )
 		.on( 'keypress.suggester', function( event ) {
-			if( suppressKeyPress ) {
+			if ( suppressKeyPress ) {
 				suppressKeyPress = false;
 				event.preventDefault();
 			}
@@ -364,8 +364,7 @@ $.widget( 'ui.suggester', {
 			$( ':' + self.widgetBaseClass ).each( function( i, node ) {
 				var suggester = $( node ).data( self.widgetName );
 				// Close suggester if not clicked on suggester or corresponding list:
-				if(
-					$target.closest( suggester.element ).length === 0
+				if ( $target.closest( suggester.element ).length === 0
 					&& $target.closest( suggester.options.menu.element ).length === 0
 				) {
 					suggester._close();
@@ -384,11 +383,11 @@ $.widget( 'ui.suggester', {
 
 		this._searching = setTimeout( function() {
 			// Only search if the value has changed:
-			if( self._term !== self.element.val() ) {
+			if ( self._term !== self.element.val() ) {
 				self.search()
 				.done( function() {
 					// Widget might have been destroyed in the meantime.
-					if( self.element.data( self.widgetName ) ) {
+					if ( self.element.data( self.widgetName ) ) {
 						self._trigger( 'change' );
 					}
 				} );
@@ -416,7 +415,7 @@ $.widget( 'ui.suggester', {
 		// Prevent moving cursor to beginning/end of the text field in some browsers:
 		event.preventDefault();
 
-		if( !this.options.menu.element.is( ':visible' ) ) {
+		if ( !this.options.menu.element.is( ':visible' ) ) {
 			this.search();
 			return;
 		}
@@ -424,7 +423,7 @@ $.widget( 'ui.suggester', {
 		var allItems = $.merge( [], this.options.menu.option( 'items' ) );
 		$.merge( allItems, this.options.menu.option( 'customItems' ) );
 
-		if( allItems.length > 0 ) {
+		if ( allItems.length > 0 ) {
 			this._move( direction, this.options.menu.getActiveItem(), allItems );
 		}
 	},
@@ -442,15 +441,15 @@ $.widget( 'ui.suggester', {
 			isFirst = activeItem === allItems[0],
 			isLast = activeItem === allItems[allItems.length - 1];
 
-		if( isFirst && direction === 'previous' || isLast && direction === 'next' ) {
+		if ( isFirst && direction === 'previous' || isLast && direction === 'next' ) {
 			this._moveOffEdge( direction );
 		} else {
 			$( this.options.menu ).one( 'focus.suggester', function( event, item ) {
 				var isCustomMenuItem = item instanceof $.ui.ooMenu.CustomItem;
 
-				if( item instanceof $.ui.ooMenu.Item && !isCustomMenuItem ) {
+				if ( item instanceof $.ui.ooMenu.Item && !isCustomMenuItem ) {
 					self.element.val( item.getValue() );
-				} else if( isCustomMenuItem ) {
+				} else if ( isCustomMenuItem ) {
 					self.element.val( self._term );
 				}
 				self._trigger( 'change' );
@@ -488,7 +487,7 @@ $.widget( 'ui.suggester', {
 
 		this._term = this.element.val();
 
-		if( this._term.length < this.options.minTermLength ) {
+		if ( this._term.length < this.options.minTermLength ) {
 			this._close();
 			return deferred.resolve( [], this._term ).promise();
 		}
@@ -500,11 +499,11 @@ $.widget( 'ui.suggester', {
 		.done( function( suggestions, requestTerm ) {
 			self._searching = false;
 
-			if( typeof requestTerm === 'string' && requestTerm !== self._term ) {
+			if ( typeof requestTerm === 'string' && requestTerm !== self._term ) {
 				// Skip request since it does not correspond to the current search term.
 				return;
 			}
-			if( self.options.menu ) {
+			if ( self.options.menu ) {
 				// Suggester (including the menu) might have been destroyed in the meantime.
 				self._updateMenu( suggestions, requestTerm );
 			}
@@ -514,7 +513,7 @@ $.widget( 'ui.suggester', {
 			self._trigger( 'error', null, [message] );
 		} )
 		.always( function() {
-			if( --self._pending === 0 ) {
+			if ( --self._pending === 0 ) {
 				self.element.removeClass( 'ui-suggester-loading' );
 			}
 		} );
@@ -525,7 +524,7 @@ $.widget( 'ui.suggester', {
 	 * @protected
 	 */
 	_clearTimeout: function() {
-		if( typeof this._searching !== 'boolean' ) {
+		if ( typeof this._searching !== 'boolean' ) {
 			clearTimeout( this._searching );
 		}
 	},
@@ -552,7 +551,7 @@ $.widget( 'ui.suggester', {
 	_updateMenuItems: function( suggestions, requestTerm ) {
 		var menuItems = [];
 
-		for( var i = 0; i < suggestions.length; i++ ) {
+		for ( var i = 0; i < suggestions.length; i++ ) {
 			menuItems.push( this._createMenuItemFromSuggestion( suggestions[i], requestTerm ) );
 		}
 
@@ -564,7 +563,7 @@ $.widget( 'ui.suggester', {
 	 * @protected
 	 */
 	_updateMenuVisibility: function() {
-		if( !this.options.menu.hasVisibleItems( true ) ) {
+		if ( !this.options.menu.hasVisibleItems( true ) ) {
 			this._close();
 		} else {
 			this._open();
@@ -597,7 +596,7 @@ $.widget( 'ui.suggester', {
 	 * @return {string} return.fail.message
 	 */
 	_getSuggestions: function( term ) {
-		if( typeof this.options.source === 'function' ) {
+		if ( typeof this.options.source === 'function' ) {
 			return this.options.source( term );
 		}
 
@@ -645,7 +644,7 @@ $.widget( 'ui.suggester', {
 	 * @protected
 	 */
 	_open: function() {
-		if( this.options.menu.element.is( ':visible' ) ) {
+		if ( this.options.menu.element.is( ':visible' ) ) {
 			return;
 		}
 
@@ -660,7 +659,7 @@ $.widget( 'ui.suggester', {
 	 * @protected
 	 */
 	_close: function() {
-		if( !this.options.menu.element.is( ':visible' ) ) {
+		if ( !this.options.menu.element.is( ':visible' ) ) {
 			return;
 		}
 
@@ -681,7 +680,7 @@ $.widget( 'ui.suggester', {
 		var position = $.extend( {}, this.options.position ),
 			$menu = this.options.menu.element;
 
-		if( dir === 'rtl' ) {
+		if ( dir === 'rtl' ) {
 			position = flipPosition( position );
 		}
 
@@ -691,14 +690,14 @@ $.widget( 'ui.suggester', {
 
 		$menu.zIndex( this.element.zIndex() + 1 );
 
-		if( this.element.attr( 'lang' ) ) {
+		if ( this.element.attr( 'lang' ) ) {
 			$menu.attr( 'lang', this.element.attr( 'lang' ) );
 		}
 		$menu.attr( 'dir', dir );
 
 		this.options.menu.scale();
 
-		if( this.options.confineMinWidthTo !== null ) {
+		if ( this.options.confineMinWidthTo !== null ) {
 			var $minWidthConfinement = this.options.confineMinWidthTo || this.element;
 
 			$menu.css(
@@ -719,7 +718,7 @@ $.widget( 'ui.suggester', {
  */
 function flipPosition( position ) {
 	function flipOrientation( orientation ) {
-		if( /right/i.test( orientation ) ) {
+		if ( /right/i.test( orientation ) ) {
 			return orientation.replace( /right/i, 'left' );
 		} else {
 			return orientation.replace( /left/i, 'right' );
@@ -737,7 +736,7 @@ function flipPosition( position ) {
 	position.my = flipOrientation( position.my );
 	position.at = flipOrientation( position.at );
 
-	if( position.offset ) {
+	if ( position.offset ) {
 		position.offset = flipHorizontalOffset( position.offset );
 	}
 

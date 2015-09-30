@@ -17,7 +17,7 @@
 	 * @param {jQuery} [$input] Subject node for the widget.
 	 */
 	var newTestInputextender = function( options, $input ) {
-		if( $input === undefined && options instanceof $ ) {
+		if ( $input === undefined && options instanceof $ ) {
 			$input = options;
 			options = undefined;
 		}
@@ -55,7 +55,7 @@
 	 */
 	function showAndHideExtensionAgain( instance, hideControl, callbacks ) {
 		var deferred = $.Deferred();
-		if( !hideControl.done ) {
+		if ( !hideControl.done ) {
 			callbacks = hideControl;
 			// We will do the hideExtension() immediately in this case:
 			hideControl = $.Deferred().resolve().promise();
@@ -93,7 +93,7 @@
 		teardown: function() {
 			$( '.test_inputextender' ).each( function( i, node ) {
 				var inputextender = $( node ).data( 'inputextender' );
-				if( inputextender ) {
+				if ( inputextender ) {
 					inputextender.destroy();
 				}
 				$( node ).remove();
@@ -117,7 +117,7 @@
 
 	QUnit.test( 'Initialization on focused input', function( assert ) {
 		var $input = $( '<input/>' ).appendTo( $( 'body' ) ).focus();
-		if( !$input.is( ':focus' ) ) {
+		if ( !$input.is( ':focus' ) ) {
 			assert.ok( true, 'Could not test since focussing does not work.' );
 			return;
 		}
@@ -252,7 +252,7 @@
 		// one will be made inactive and so on.
 		var hideControl = $.Deferred();
 
-		if( inactiveExtenders.length < 1 ) {
+		if ( inactiveExtenders.length < 1 ) {
 			return hideControl.resolve().promise();
 		}
 
@@ -292,7 +292,7 @@
 
 		// Build a few instances for the test:
 		var extenders = [];
-		while( extenders.length < 5 ) {
+		while ( extenders.length < 5 ) {
 			extenders.push( newTestInputextender() );
 		}
 		testGetInstancesWithVisibleExtensions( assert, extenders );

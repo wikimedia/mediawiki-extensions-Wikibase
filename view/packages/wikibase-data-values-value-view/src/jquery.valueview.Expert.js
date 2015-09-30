@@ -32,13 +32,13 @@ jQuery.valueview = jQuery.valueview || {};
 	vv.expert = function( name, base, constructorOrExpertDefinition, expertDefinition ) {
 		var constructor = null;
 
-		if( expertDefinition ) {
+		if ( expertDefinition ) {
 			constructor = constructorOrExpertDefinition;
 		} else {
 			expertDefinition = constructorOrExpertDefinition;
 		}
 
-		if( !$.isFunction( base ) ) {
+		if ( !$.isFunction( base ) ) {
 			throw new Error( 'The expert\'s base must be a constructor function' );
 		}
 
@@ -93,23 +93,23 @@ jQuery.valueview = jQuery.valueview || {};
 	 * @throws {Error} if neither `messages` nor `messageProvider` is given.
 	 */
 	vv.Expert = function( viewPortNode, relatedViewState, valueViewNotifier, options ) {
-		if( !( relatedViewState instanceof vv.ViewState ) ) {
+		if ( !( relatedViewState instanceof vv.ViewState ) ) {
 			throw new Error( 'No ViewState object was provided to the valueview expert' );
 		}
 
-		if( !valueViewNotifier ) {
+		if ( !valueViewNotifier ) {
 			valueViewNotifier = util.Notifier();
-		} else if( !( valueViewNotifier instanceof util.Notifier ) ) {
+		} else if ( !( valueViewNotifier instanceof util.Notifier ) ) {
 			throw new Error( 'No Notifier object was provided to the valueview expert' );
 		}
 
-		if( viewPortNode instanceof $
+		if ( viewPortNode instanceof $
 			&& viewPortNode.length === 1
 		) {
 			viewPortNode = viewPortNode.get( 0 );
 		}
 
-		if( !( viewPortNode.nodeType ) ) { // IE8 can't check for instanceof HTMLElement
+		if ( !( viewPortNode.nodeType ) ) { // IE8 can't check for instanceof HTMLElement
 			throw new Error( 'No sufficient DOM node provided for the valueview expert' );
 		}
 
@@ -120,16 +120,16 @@ jQuery.valueview = jQuery.valueview || {};
 
 		this._options = $.extend( ( !this._options ) ? {} : this._options, options || {} );
 
-		if( this._options.messages ) {
+		if ( this._options.messages ) {
 			this._messageProvider = new util.HashMessageProvider( this._options.messages );
 		}
-		if( this._options.messageProvider ) {
+		if ( this._options.messageProvider ) {
 			this._messageProvider = new util.CombiningMessageProvider(
 				this._options.messageProvider,
 				this._messageProvider
 			);
 		}
-		if( !this._messageProvider ) {
+		if ( !this._messageProvider ) {
 			throw new Error( 'No message provider and no messages were provided to the valueview expert' );
 		}
 
@@ -223,7 +223,7 @@ jQuery.valueview = jQuery.valueview || {};
 		 * construction, let the responsible controller use a value formatter for that.
 		 */
 		destroy: function() {
-			if( !this.$viewPort ) {
+			if ( !this.$viewPort ) {
 				return; // destroyed already
 			}
 			this._extendable.callExtensions( 'destroy' );

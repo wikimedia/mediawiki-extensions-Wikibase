@@ -65,7 +65,7 @@
 		 */
 		destroy: function() {
 			var toggler = this.$toggler.data( 'toggler' );
-			if( toggler ) {
+			if ( toggler ) {
 				toggler.destroy();
 			}
 			this.$toggler = null;

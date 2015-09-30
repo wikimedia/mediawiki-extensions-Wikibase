@@ -21,17 +21,17 @@ jQuery.util.adaptlettercase = ( function( $ ) {
 	 * @throws {Error} if destination and/or source string is/are not specified.
 	 */
 	return function( destination, source, method ) {
-		if( !destination || !source ) {
+		if ( !destination || !source ) {
 			throw new Error( 'Destination and source need to be specified.' );
 		}
 
-		if( source.toLowerCase().indexOf( destination.toLowerCase() ) !== 0 ) {
+		if ( source.toLowerCase().indexOf( destination.toLowerCase() ) !== 0 ) {
 			return destination;
 		}
 
-		if( method === 'all' ) {
+		if ( method === 'all' ) {
 			return source.substr( 0, destination.length );
-		} else if( method === 'first' ) {
+		} else if ( method === 'first' ) {
 			return source.substr( 0, 1 ) + destination.substr( 1 );
 		} else {
 			return destination;

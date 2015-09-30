@@ -55,7 +55,7 @@ $.widget( 'ui.preview', {
 	 */
 	_create: function() {
 		var hashBasedMessageProvider = new util.HashMessageProvider( this.options.messages );
-		if( this.options.messageProvider ) {
+		if ( this.options.messageProvider ) {
 			this._messageProvider = new util.CombiningMessageProvider(
 				this.options.messageProvider,
 				hashBasedMessageProvider
@@ -100,11 +100,11 @@ $.widget( 'ui.preview', {
 	update: function( value ) {
 		// No need to update the preview when the input value is clear(ed) since the preview
 		// will be hidden anyway.
-		if( this.options.$input && this.options.$input.val() === '' ) {
+		if ( this.options.$input && this.options.$input.val() === '' ) {
 			return;
 		}
 
-		if( value === null ) {
+		if ( value === null ) {
 			this.$value
 			.addClass( this.widgetBaseClass + '-novalue' )
 			.text( this._messageProvider.getMessage( 'novalue' ) );

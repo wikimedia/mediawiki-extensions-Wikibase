@@ -144,7 +144,7 @@
 		// Execute all other generated step callbacks as well, verify that they execute and that
 		// they do not trigger the testStep's callback again.
 		$.each( AnimationEvent.ANIMATION_STEPS, function( i, step ) {
-			if( step !== testStep ) {
+			if ( step !== testStep ) {
 				options[ step ]();
 			}
 		} );

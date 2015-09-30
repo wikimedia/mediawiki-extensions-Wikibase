@@ -78,15 +78,16 @@
 	// ----
 	// Own rules
 
-	"disallowSpaceAfterKeywords": [
-		"catch",
-		"for",
-		"if",
-		"switch",
-		"while"
-	],
 	"requireSpaceAfterKeywords": [
-		"else"
+		"if",
+		"else",
+		"for",
+		"while",
+		"do",
+		"switch",
+		"return",
+		"try",
+		"catch"
 	],
 
 	"excludeFiles": [ "node_modules/**", "vendor/**" ]

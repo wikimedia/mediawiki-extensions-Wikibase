@@ -44,7 +44,7 @@
  *        Namespace used for the events the plugin attaches handlers to.
  */
 $.fn.inputautoexpand = function( options ) {
-	if( !options ) {
+	if ( !options ) {
 		options = {};
 	}
 
@@ -65,9 +65,9 @@ $.fn.inputautoexpand = function( options ) {
 	this.filter( 'input:text, textarea' ).each( function() {
 		var instance = $.data( this, 'inputautoexpand' );
 
-		if( instance ) {
+		if ( instance ) {
 			// AutoExpand initialized already, update options only (will also expand):
-			if( options ) {
+			if ( options ) {
 				instance.options( options );
 			}
 			instance.expand();
@@ -103,7 +103,7 @@ $.AutoExpandInput = function( element, options ) {
 	this._nodeName = element.nodeName;
 
 	this.$input.on( 'eachchange', function( event, oldValue ) {
-		if( self._options.suppressNewLine ) {
+		if ( self._options.suppressNewLine ) {
 			self.$input.val( self.$input.val().replace( /\r?\n/g, '' ) );
 		}
 		self.expand();
@@ -121,7 +121,7 @@ $.AutoExpandInput = function( element, options ) {
 	.on( 'resize.' + this._options.eventNamespace, function( event ) {
 		$( 'input:text, textarea' ).each( function() {
 			var instance = $.data( this, 'inputautoexpand' );
-			if( instance ) {
+			if ( instance ) {
 				instance.expand();
 			}
 		} );
@@ -167,15 +167,15 @@ $.extend( $.AutoExpandInput.prototype, {
 	expand: function( force ) {
 		var newVal = this.$input.val();
 
-		if( !force && newVal === this._previousVal ) {
+		if ( !force && newVal === this._previousVal ) {
 			return;
 		}
 
-		if( this._options.expandWidth ) {
+		if ( this._options.expandWidth ) {
 			this._expandWidth();
 		}
 
-		if( this._options.expandHeight && this._nodeName === 'TEXTAREA' ) {
+		if ( this._options.expandHeight && this._nodeName === 'TEXTAREA' ) {
 			this._expandHeight();
 		}
 
@@ -195,16 +195,16 @@ $.extend( $.AutoExpandInput.prototype, {
 
 		// Since the minimum width may have been calculated dynamically using the placeholder,
 		// the minimum width may be greater than the maximum width.
-		if( minWidth > maxWidth ) {
+		if ( minWidth > maxWidth ) {
 			minWidth = maxWidth;
 		}
 
 		var valWidth = this._getWidthFor( this.$input.val() ),
 			newWidth = valWidth + comfortZone;
 
-		if( newWidth < minWidth ) {
+		if ( newWidth < minWidth ) {
 			newWidth = minWidth;
-		} else if( newWidth >= maxWidth  ) {
+		} else if ( newWidth >= maxWidth  ) {
 			newWidth = maxWidth;
 		}
 
@@ -223,11 +223,11 @@ $.extend( $.AutoExpandInput.prototype, {
 			minHeight = this._options.minHeight || 0,// keeps at least one single line
 			maxHeight = this._options.maxHeight;
 
-		if( maxHeight && newHeight > maxHeight ) {
+		if ( maxHeight && newHeight > maxHeight ) {
 			input.style.height = maxHeight + 'px';
 			input.style.overflow = 'scroll';
 		} else {
-			if( minHeight && newHeight < minHeight ) {
+			if ( minHeight && newHeight < minHeight ) {
 				input.style.height = minHeight + 'px';
 			} else {
 				input.style.height = ( !isNaN( newHeight ) ? newHeight : 0 ) + 'px';
@@ -257,13 +257,13 @@ $.extend( $.AutoExpandInput.prototype, {
 	 * @return {number}
 	 */
 	_getMinWidth: function() {
-		if( this._options.minWidth ) {
+		if ( this._options.minWidth ) {
 			return this._options.minWidth;
 		}
 
 		// If there is no static minimum width, the placeholder is used to detect the minimum width
 		// Since the placeholder may change, its width is calculated always.
-		if( !this.$input.attr( 'placeholder' ) ) {
+		if ( !this.$input.attr( 'placeholder' ) ) {
 			return 0;
 		}
 		// Don't need comfort zone in this case, just some sane space:
@@ -279,7 +279,7 @@ $.extend( $.AutoExpandInput.prototype, {
 	 * @return {number}
 	 */
 	_getHeightFor: function( text ) {
-		if( text === '' ) {
+		if ( text === '' ) {
 			text = ' ';
 		}
 
@@ -288,12 +288,12 @@ $.extend( $.AutoExpandInput.prototype, {
 
 		// Update the width in case the original textarea width has changed:
 		var width = this._options.maxWidth;
-		if( !this._options.expandWidth || this.$input.width() > this._options.maxWidth ) {
+		if ( !this._options.expandWidth || this.$input.width() > this._options.maxWidth ) {
 			width = Math.ceil( this.$input.width() ) - 1;
 		}
 
 		// Catch miscalculation:
-		if( width < 0 ) {
+		if ( width < 0 ) {
 			width = 0;
 		}
 
@@ -329,11 +329,11 @@ $.extend( $.AutoExpandInput.prototype, {
 	 *         initialization.
 	 */
 	options: function( options ) {
-		if( !options ) {
+		if ( !options ) {
 			return this._options;
 		}
 
-		if( options.eventNamespace ) {
+		if ( options.eventNamespace ) {
 			throw new Error( 'Cannot alter eventNamespace after initialization.' );
 		}
 
@@ -349,13 +349,13 @@ $.extend( $.AutoExpandInput.prototype, {
 		var hasRemainingInstances = false;
 
 		$( 'input' ).each( function() {
-			if( $.data( this, 'inputautoexpand' ) ) {
+			if ( $.data( this, 'inputautoexpand' ) ) {
 				hasRemainingInstances = true;
 				return false;
 			}
 		} );
 
-		if( !hasRemainingInstances ) {
+		if ( !hasRemainingInstances ) {
 			$( 'window' ).off( this._options.eventNamespace );
 			destroyRulers();
 		}
@@ -374,7 +374,7 @@ var $rulerX, $rulerY;
  * @ignore
  */
 function initRulers() {
-	if( !$rulerX ) {
+	if ( !$rulerX ) {
 		$rulerX = $( '<div/>' )
 			.css( {
 				width: 'auto',
@@ -387,11 +387,11 @@ function initRulers() {
 			} );
 	}
 
-	if( !$rulerX.closest( 'body' ).length ) {
+	if ( !$rulerX.closest( 'body' ).length ) {
 		$rulerX.appendTo( 'body' );
 	}
 
-	if( !$rulerY ) {
+	if ( !$rulerY ) {
 		$rulerY = $( '<textarea style="min-height: 0!important; height: 0!important;"/>' )
 			.attr( 'tabindex', '-1' )
 			.css( {
@@ -403,7 +403,7 @@ function initRulers() {
 			} );
 	}
 
-	if( !$rulerY.closest( 'body' ).length ) {
+	if ( !$rulerY.closest( 'body' ).length ) {
 		$rulerY.appendTo( 'body' );
 	}
 }
@@ -413,11 +413,11 @@ function initRulers() {
  * @ignore
  */
 function destroyRulers() {
-	if( $rulerX ) {
+	if ( $rulerX ) {
 		$rulerX.remove();
 		$rulerX = null;
 	}
-	if( $rulerY ) {
+	if ( $rulerY ) {
 		$rulerY.remove();
 		$rulerY.remove();
 	}
@@ -445,7 +445,7 @@ function copySpaceAffectingStyles( $from, $to ) {
 		'wordWrap'
 	];
 
-	for( var i = 0; i < stylesToCopy.length; i++ ) {
+	for ( var i = 0; i < stylesToCopy.length; i++ ) {
 		$to.css( stylesToCopy[i], $from.css( stylesToCopy[i] ) );
 	}
 

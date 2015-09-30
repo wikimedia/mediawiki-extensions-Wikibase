@@ -80,7 +80,7 @@
 		 * Public method for replacing the preview with a spinner.
 		 */
 		showSpinner: function() {
-			if( this._preview ) {
+			if ( this._preview ) {
 				this._preview.showSpinner();
 			}
 		}

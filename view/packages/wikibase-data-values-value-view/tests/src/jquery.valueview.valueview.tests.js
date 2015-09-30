@@ -12,7 +12,7 @@
 
 	QUnit.module( 'jquery.valueview.valueview' );
 
-	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
+	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest( vv.prototype, function( cur, tester, path ) {
 			// Don't check code coverage for options
 			return path[path.length - 1] === 'options';
@@ -25,7 +25,7 @@
 		$vvElem = opts.generateDom();
 		vvInst = $vvElem.valueview( opts.vvArgs ).data( 'valueview' );
 
-		if( opts.withExpert ) {
+		if ( opts.withExpert ) {
 			vvInst.startEditing();
 		}
 	}

@@ -62,7 +62,7 @@
 		 * Callback for expert `draw`.
 		 */
 		draw: function() {
-			if( this._inputextender.extensionIsVisible() ) {
+			if ( this._inputextender.extensionIsVisible() ) {
 				this._extendable.callExtensions( 'draw' );
 			}
 		},
@@ -72,7 +72,7 @@
 		 */
 		destroy: function() {
 			// Since inputextender is created in init, it might not be set
-			if( this._inputextender ) {
+			if ( this._inputextender ) {
 				this._inputextender.destroy();
 				this._inputextender = null;
 			}

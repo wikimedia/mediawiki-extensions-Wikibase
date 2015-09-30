@@ -187,11 +187,11 @@ $.widget( 'ui.listrotator', {
 			iconClasses = ['ui-icon ui-icon-triangle-1-w', 'ui-icon ui-icon-triangle-1-e'];
 
 		// Flip triangle arrows in rtl context:
-		if( this._isRtl() ) {
+		if ( this._isRtl() ) {
 			iconClasses.reverse();
 		}
 
-		if( this.options.values.length === 0 ) {
+		if ( this.options.values.length === 0 ) {
 			throw new Error( 'List of values required to initialize list rotator.' );
 		}
 
@@ -199,7 +199,7 @@ $.widget( 'ui.listrotator', {
 
 		// Construct "auto" link:
 		this.$auto = this._createSection( 'auto', function( event ) {
-			if( self.autoActive() ) {
+			if ( self.autoActive() ) {
 				return;
 			}
 			self.activate( self.$auto );
@@ -210,7 +210,7 @@ $.widget( 'ui.listrotator', {
 
 		// Construct the basic sections:
 		this.$curr = this._createSection( 'curr', function( event ) {
-			if( !self.$menu.is( ':visible' ) ) {
+			if ( !self.$menu.is( ':visible' ) ) {
 				self._showMenu();
 			} else {
 				self._hideMenu();
@@ -228,7 +228,7 @@ $.widget( 'ui.listrotator', {
 		} )
 		.append( $( '<span/>' ).addClass( iconClasses[1] ) );
 
-		if( this.$auto ) {
+		if ( this.$auto ) {
 			this.element.append( this.$auto );
 		}
 		this.element.append( this.$prev ).append( this.$curr ).append( this.$next );
@@ -246,7 +246,7 @@ $.widget( 'ui.listrotator', {
 
 				// Hide the menu if it is neither the "current" node nor the menu's node that
 				// has been clicked.
-				if( !$target.closest( listrotator.$curr.add( listrotator.$menu ) ).length ) {
+				if ( !$target.closest( listrotator.$curr.add( listrotator.$menu ) ).length ) {
 					listrotator.$menu.hide();
 				}
 
@@ -256,7 +256,7 @@ $.widget( 'ui.listrotator', {
 		// Focus on first element:
 		this.value( this.options.values[0].value );
 
-		if( !this.options.deferInit ) {
+		if ( !this.options.deferInit ) {
 			this.initWidths();
 		}
 
@@ -267,7 +267,7 @@ $.widget( 'ui.listrotator', {
 	 */
 	destroy: function() {
 		var menu = this.$menu.data( 'menu' );
-		if( menu ) {
+		if ( menu ) {
 			menu.destroy();
 		}
 
@@ -282,7 +282,7 @@ $.widget( 'ui.listrotator', {
 		$.Widget.prototype.destroy.call( this );
 
 		// Remove event attached to the html node if no instances of the widget exist anymore:
-		if( $( ':' + this.widgetBaseClass ).length === 0 ) {
+		if ( $( ':' + this.widgetBaseClass ).length === 0 ) {
 			$( 'html' ).off( '.' + this.widgetBaseClass );
 		}
 	},
@@ -308,13 +308,13 @@ $.widget( 'ui.listrotator', {
 			labels
 		);
 		$.each( stringWidths, function( i, width ) {
-			if( width > currMaxWidth ) {
+			if ( width > currMaxWidth ) {
 				currMaxWidth = width;
 			}
-			if( i < stringWidths.length && width > prevMaxWidth ) {
+			if ( i < stringWidths.length && width > prevMaxWidth ) {
 				prevMaxWidth = width;
 			}
-			if( i > 0 && width > nextMaxWidth ) {
+			if ( i > 0 && width > nextMaxWidth ) {
 				nextMaxWidth = width;
 			}
 		} );
@@ -346,7 +346,7 @@ $.widget( 'ui.listrotator', {
 		.addClass( this.widgetBaseClass + '-' + classSuffix )
 		.on( 'click.' + this.widgetBaseClass, function( event ) {
 			event.preventDefault();
-			if( !$( this ).hasClass( 'ui-state-disabled' ) ) {
+			if ( !$( this ).hasClass( 'ui-state-disabled' ) ) {
 				clickCallback( event );
 			}
 		} )
@@ -406,7 +406,7 @@ $.widget( 'ui.listrotator', {
 	 */
 	value: function( value ) {
 		// Get the current value:
-		if( value === undefined || value === this.$curr.data( 'value' ) ) {
+		if ( value === undefined || value === this.$curr.data( 'value' ) ) {
 			return this.$curr.data( 'value' );
 		}
 
@@ -418,7 +418,7 @@ $.widget( 'ui.listrotator', {
 
 		// Retrieve the index of the new value within the list of predefined values:
 		$.each( values, function( i, v ) {
-			if( value === v.value ) {
+			if ( value === v.value ) {
 				index = i;
 				return false;
 			}
@@ -430,14 +430,14 @@ $.widget( 'ui.listrotator', {
 		.children( '.' + this.widgetBaseClass + '-label' )
 		.text( values[index].label );
 
-		if( index > 0 ) {
+		if ( index > 0 ) {
 			this.$prev
 			.data( 'value', values[index - 1].value )
 			.children( '.' + this.widgetBaseClass + '-label' )
 			.text( values[index - 1].label );
 		}
 
-		if( index < values.length - 1 ) {
+		if ( index < values.length - 1 ) {
 			this.$next
 			.data( 'value', values[index + 1].value )
 			.children( '.' + this.widgetBaseClass + '-label' )
@@ -453,7 +453,7 @@ $.widget( 'ui.listrotator', {
 		this.$menu.children( 'li' ).each( function( i, li ) {
 			var $li = $( li );
 			$li.removeClass( 'ui-state-active' );
-			if( $li.data( 'value' ) === value ) {
+			if ( $li.data( 'value' ) === value ) {
 				$li.addClass( 'ui-state-active' );
 			}
 		} );
@@ -470,7 +470,7 @@ $.widget( 'ui.listrotator', {
 	_setValue: function( newValue ) {
 		var self = this;
 
-		if( this.$curr.data( 'value' ) === newValue ) {
+		if ( this.$curr.data( 'value' ) === newValue ) {
 			// Value is set already.
 			return;
 		}
@@ -504,8 +504,7 @@ $.widget( 'ui.listrotator', {
 	 * @param {string} newValue
 	 */
 	rotate: function( newValue ) {
-		if(
-			newValue === this._rotatingTo
+		if ( newValue === this._rotatingTo
 			|| !this._rotatingTo && newValue === this.$curr.data( 'value' )
 		) {
 			// Rotation is to the given target is in progress or has been performed already.
@@ -527,20 +526,20 @@ $.widget( 'ui.listrotator', {
 		// Figure out whether rotating to the right or to the left:
 		var beforeCurrent = true;
 		$.each( this.options.values, function( i, v ) {
-			if( v.value === newValue ) {
+			if ( v.value === newValue ) {
 				return false;
 			}
-			if( v.value === self.$curr.data( 'value' ) ) {
+			if ( v.value === self.$curr.data( 'value' ) ) {
 				beforeCurrent = false;
 				return false;
 			}
 		} );
 
-		if( beforeCurrent ) {
+		if ( beforeCurrent ) {
 			margins.reverse();
 		}
 
-		if( this._isRtl() ) {
+		if ( this._isRtl() ) {
 			margins.reverse();
 		}
 
@@ -559,7 +558,7 @@ $.widget( 'ui.listrotator', {
 					} );
 
 					// Rotation target changed in the meantime, just abort selecting:
-					if( self._rotatingTo !== newValue ) {
+					if ( self._rotatingTo !== newValue ) {
 						return;
 					}
 
@@ -592,7 +591,7 @@ $.widget( 'ui.listrotator', {
 	activate: function( $section ) {
 		this.$curr.add( this.$auto ).removeClass( 'ui-state-hover ui-state-active' );
 
-		if( $section === undefined ) {
+		if ( $section === undefined ) {
 			$section = this.$curr;
 		}
 

@@ -13,7 +13,7 @@
 	 * @return {jQuery.ui.preview}
 	 */
 	var newTestPreview = function( options ) {
-		if( !options ) {
+		if ( !options ) {
 			options = $.extend( {}, options );
 		}
 
@@ -28,7 +28,7 @@
 	QUnit.module( 'jquery.ui.preview', {
 		teardown: function() {
 			$( '.test_preview' ).each( function( i, node ) {
-				if( $( node ).data( 'preview' ) ) {
+				if ( $( node ).data( 'preview' ) ) {
 					$( node ).data( 'preview' ).destroy();
 				}
 				$( node ).remove();

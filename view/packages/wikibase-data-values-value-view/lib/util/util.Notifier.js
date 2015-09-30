@@ -40,13 +40,13 @@ util.Notifier = ( function() {
 	 */
 	var SELF = function Notifier( notificationMap ) {
 		// allow instance without "new":
-		if( !( this instanceof SELF ) ) {
+		if ( !( this instanceof SELF ) ) {
 			return new SELF( notificationMap );
 		}
 
-		if( !notificationMap ) {
+		if ( !notificationMap ) {
 			notificationMap = {};
-		} else if( typeof notificationMap !== 'object' ) {
+		} else if ( typeof notificationMap !== 'object' ) {
 			throw new Error( 'Notifier requires a notification map in form of an object' );
 		}
 
@@ -62,7 +62,7 @@ util.Notifier = ( function() {
 		this.notify = function( notification, args ) {
 			var notifyCallback = notificationMap[ notification ];
 
-			if( !notifyCallback ) {
+			if ( !notifyCallback ) {
 				return false;
 			}
 

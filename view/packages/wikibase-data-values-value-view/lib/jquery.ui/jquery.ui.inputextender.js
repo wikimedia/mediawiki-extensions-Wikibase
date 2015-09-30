@@ -24,13 +24,13 @@ var inputExtendersWithVisibleExtension = ( function() {
 	return {
 		add: function( inputExtenderInstance ) {
 			var index = $.inArray( inputExtenderInstance, inputExtenders );
-			if( index < 0 ) {
+			if ( index < 0 ) {
 				inputExtenders.push( inputExtenderInstance );
 			}
 		},
 		remove: function( inputExtenderInstance ) {
 			var index = $.inArray( inputExtenderInstance, inputExtenders );
-			if( index > -1 ) {
+			if ( index > -1 ) {
 				inputExtenders.splice( index, 1 );
 			}
 		},
@@ -170,7 +170,7 @@ $.widget( 'ui.inputextender', {
 		//  leave enough time to tab again, by mouse the extension can be shown immediately.
 		this.element
 		.on( 'focus.' + this.widgetName, function( event ) {
-			if( !self.options.hideWhenInputEmpty || self.element.val() !== '' ) {
+			if ( !self.options.hideWhenInputEmpty || self.element.val() !== '' ) {
 				clearTimeout( self._animationTimeout );
 				self._animationTimeout = setTimeout( function() {
 					self.showExtension();
@@ -178,7 +178,7 @@ $.widget( 'ui.inputextender', {
 			}
 		} )
 		.on( 'blur.' + this.widgetName, function( event ) {
-			if( self.__extensionFocused ) {
+			if ( self.__extensionFocused ) {
 				delete self.__extensionFocused;
 				return;
 			}
@@ -188,26 +188,26 @@ $.widget( 'ui.inputextender', {
 			}, 250 ); // TODO: Fixed values can't be changed nor turned off
 		} )
 		.on( 'keydown.' + this.widgetName, function( event ) {
-			if( event.keyCode === $.ui.keyCode.ESCAPE ) {
+			if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 				self.hideExtension();
-			} else if(
-				self.extensionIsVisible()
-				&& event.keyCode === $.ui.keyCode.TAB && !event.shiftKey
+			} else if ( self.extensionIsVisible()
+				&& event.keyCode === $.ui.keyCode.TAB
+				&& !event.shiftKey
 			) {
 				event.preventDefault();
 				// When tabbing out of the input element, focus the first focusable element
 				// within the extension.
 				var $focusable = self._$extension.find( ':focusable' );
-				if( $focusable.length ) {
+				if ( $focusable.length ) {
 					$focusable.first().focus();
 					clearTimeout( self._animationTimeout );
 				}
 			}
 		} );
 
-		if( this.options.hideWhenInputEmpty ) {
+		if ( this.options.hideWhenInputEmpty ) {
 			this.element.on( 'eachchange', function( event, oldValue ) {
-				if( self.element.val() === '' ) {
+				if ( self.element.val() === '' ) {
 					self.hideExtension();
 				} else {
 					self.showExtension();
@@ -226,14 +226,14 @@ $.widget( 'ui.inputextender', {
 
 				// Hide the extension neither it nor the corresponding input element is
 				// clicked:
-				if( !$target.closest( widget.element.add( widget._$extension ) ).length ) {
+				if ( !$target.closest( widget.element.add( widget._$extension ) ).length ) {
 					widget.hideExtension();
 				}
 
 			} );
 		} );
 
-		if( this.element.is( ':focus' ) ) {
+		if ( this.element.is( ':focus' ) ) {
 			this.showExtension();
 		} else {
 			this.draw();
@@ -244,12 +244,12 @@ $.widget( 'ui.inputextender', {
 	 * @see jQuery.Widget.destroy
 	 */
 	destroy: function() {
-		if( this.extensionIsActive() ) {
+		if ( this.extensionIsActive() ) {
 			// Hide extension the official way, make sure events getting triggered.
 			this.hideExtension();
 		}
 
-		if( this._$extension ) {
+		if ( this._$extension ) {
 			// Stop any ongoing extension hiding animation immediately, jump to its end.
 			this._$extension.stop( false, true );
 			this._$extension.remove();
@@ -265,7 +265,7 @@ $.widget( 'ui.inputextender', {
 	 * @param {Function} [callback] Invoked as soon as the extension's show animation is done.
 	 */
 	showExtension: function( callback ) {
-		if( !this._isExtended ) {
+		if ( !this._isExtended ) {
 			this._isExtended = true;
 			this.draw( callback );
 			this._trigger( 'aftertoggle' );
@@ -278,7 +278,7 @@ $.widget( 'ui.inputextender', {
 	 * @param {Function} [callback] Invoked as soon as the extension's hide animation is done.
 	 */
 	hideExtension: function( callback ) {
-		if( this._isExtended ) {
+		if ( this._isExtended ) {
 			this._isExtended = false;
 			this.draw( callback );
 			this._trigger( 'aftertoggle' );
@@ -311,7 +311,7 @@ $.widget( 'ui.inputextender', {
 	 * @return {boolean}
 	 */
 	extensionIsVisible: function() {
-		if( !this._$extension ) {
+		if ( !this._$extension ) {
 			return false;
 		}
 		return this._extensionIsVisible;
@@ -338,16 +338,16 @@ $.widget( 'ui.inputextender', {
 		var extensionIsVisible = this.extensionIsVisible(),
 			$extension = this._$extension;
 
-		if( !extensionIsVisible && !this._isExtended ) {
+		if ( !extensionIsVisible && !this._isExtended ) {
 			// Extension not displayed and not supposed to be displayed.
 			return;
 		}
 
-		if( !$extension ) {
+		if ( !$extension ) {
 			this._$extension = $extension = this._buildExtension();
 			$extension.appendTo( $( 'body' ) );
 
-			if( $.isFunction( this.options.initCallback ) ) {
+			if ( $.isFunction( this.options.initCallback ) ) {
 				$extension.show();
 				this.options.initCallback.call( this, $extension );
 				$extension.hide();
@@ -355,7 +355,7 @@ $.widget( 'ui.inputextender', {
 		}
 
 		// Element needs to be visible to use jquery.ui.position.
-		if( !extensionIsVisible ) {
+		if ( !extensionIsVisible ) {
 			$extension.show();
 			this._reposition();
 			$extension.hide();
@@ -363,9 +363,9 @@ $.widget( 'ui.inputextender', {
 			this._reposition();
 		}
 
-		if( extensionIsVisible !== this._isExtended ) {
+		if ( extensionIsVisible !== this._isExtended ) {
 			// Represent actual expansion status:
-			if( this._isExtended ) {
+			if ( this._isExtended ) {
 				this._drawExtensionExpansion( callback );
 			} else {
 				this._drawExtensionRemoval( callback );
@@ -385,7 +385,7 @@ $.widget( 'ui.inputextender', {
 		// When blurring the browser viewport and an re-focusing, Chrome is firing the "focus"
 		// event twice. jQuery fadeIn sets the opacity to 0 for the first fadeIn but does not
 		// pick up the value when triggering fadeIn the second time.
-		if( this._$extension.css( 'opacity' ) === '0' ) {
+		if ( this._$extension.css( 'opacity' ) === '0' ) {
 			this._$extension.css( 'opacity', '1' );
 		}
 
@@ -395,7 +395,7 @@ $.widget( 'ui.inputextender', {
 			{
 				duration: 150, // TODO: Fixed values can't be changed nor turned off
 				complete: function() {
-					if( $.isFunction( callback ) ) {
+					if ( $.isFunction( callback ) ) {
 						callback();
 					}
 				}
@@ -423,7 +423,7 @@ $.widget( 'ui.inputextender', {
 				duration: 150, // TODO: Fixed values can't be changed nor turned off
 				complete: function() {
 					inputExtendersWithVisibleExtension.remove( self );
-					if( $.isFunction( callback ) ) {
+					if ( $.isFunction( callback ) ) {
 						callback();
 					}
 				}
@@ -444,7 +444,7 @@ $.widget( 'ui.inputextender', {
 			hOffsetChanged = this._offset && ( offset.left !== this._offset.left
 				|| IS_RTL && offset.right !== this._offset.right );
 
-		if( this._offset && ( vOffsetChanged || hOffsetChanged ) ) {
+		if ( this._offset && ( vOffsetChanged || hOffsetChanged ) ) {
 			return; // Position has not changed.
 		}
 
@@ -454,7 +454,7 @@ $.widget( 'ui.inputextender', {
 		 * @return {string}
 		 */
 		function evaluateRtl( string ) {
-			if( IS_RTL ) {
+			if ( IS_RTL ) {
 				string = ( string.indexOf( 'left' ) !== -1 )
 					? string.replace( /left/ig, 'right' )
 					: string.replace( /right/ig, 'left' );
@@ -493,7 +493,7 @@ $.widget( 'ui.inputextender', {
 		$extension
 		.append( $closeButton )
 		.on( 'mousedown.' + this.widgetName, function( event ) {
-			if( !$( event.target ).closest( $closeButton ).length ) {
+			if ( !$( event.target ).closest( $closeButton ).length ) {
 				self.__extensionFocused = true;
 				clearTimeout( self._animationTimeout );
 				self.showExtension();
@@ -505,20 +505,20 @@ $.widget( 'ui.inputextender', {
 		} )
 		.on( 'keydown.' + this.widgetName, function( event ) {
 			// Take care of tabbing out of the extension again:
-			if( event.keyCode === $.ui.keyCode.TAB ) {
+			if ( event.keyCode === $.ui.keyCode.TAB ) {
 				var $focusable = self._$extension.find( ':focusable' );
 
-				if( $focusable.first().is( event.target ) && event.shiftKey ) {
+				if ( $focusable.first().is( event.target ) && event.shiftKey ) {
 					event.preventDefault();
 					// Tab back to the input element:
 					self.element.focus();
-				} else if( $focusable.last().is( event.target ) && !event.shiftKey ) {
+				} else if ( $focusable.last().is( event.target ) && !event.shiftKey ) {
 					event.preventDefault();
 					// Tabbing forward out of the extension: Focus the next focusable element
 					// after the input element.
 					$focusable = $( ':focusable' );
 					$focusable.each( function( i, node ) {
-						if( self.element.is( node ) ) {
+						if ( self.element.is( node ) ) {
 							self.hideExtension();
 							$focusable[ ( i + 1 >= $focusable.length ) ? 0 : i + 1 ].focus();
 						}

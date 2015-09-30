@@ -90,13 +90,13 @@
 		 */
 		draw: function() {
 			var value = this._getUpstreamValue();
-			if( !value ) {
+			if ( !value ) {
 				return;
 			}
 
 			var assumeCalendar = value.getYear() <= 1581 || value.getYear() >= 1930;
 
-			if( assumeCalendar || value.getOption( 'precision' ) <= 10 ) {
+			if ( assumeCalendar || value.getOption( 'precision' ) <= 10 ) {
 				this.$calendarhint.hide();
 				return;
 			}
@@ -106,7 +106,7 @@
 					this._prefix + '-' + TimeValue.getCalendarModelKeyByUri( calendarModel )
 				);
 
-			if( !msg ) {
+			if ( !msg ) {
 				return;
 			}
 
@@ -119,7 +119,7 @@
 			msg = this._messageProvider.getMessage(
 				this._prefix + '-switch-' + TimeValue.getCalendarModelKeyByUri( this._otherCalendar )
 			);
-			if( msg ) {
+			if ( msg ) {
 				this.$calendarhint.children( '.' + this._prefix + '-switch' ).html( msg );
 			}
 

@@ -73,7 +73,7 @@
 		 * @param {*[]} [args]
 		 */
 		_callChild: function( method, args ) {
-			if( this._child[method] ) {
+			if ( this._child[method] ) {
 				this._child[method].apply( this._child, args || [] );
 			}
 		}

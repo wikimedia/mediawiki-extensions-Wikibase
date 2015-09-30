@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender.LanguageSelector' );
 
-	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
+	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest(
 			ExpertExtender.LanguageSelector.prototype,
 			function( cur, tester, path ) {
@@ -53,11 +53,11 @@
 
 		languageSelector.init( $extender );
 
-		if( languageSelector.onInitialShow ) {
+		if ( languageSelector.onInitialShow ) {
 			languageSelector.onInitialShow();
 		}
 
-		if( languageSelector.draw ) {
+		if ( languageSelector.draw ) {
 			languageSelector.draw();
 		}
 
@@ -65,7 +65,7 @@
 
 		upstreamValue = 'de';
 
-		if( languageSelector.draw ) {
+		if ( languageSelector.draw ) {
 			languageSelector.draw();
 		}
 
@@ -87,11 +87,11 @@
 
 		languageSelector.init( $extender );
 
-		if( languageSelector.onInitialShow ) {
+		if ( languageSelector.onInitialShow ) {
 			languageSelector.onInitialShow();
 		}
 
-		if( languageSelector.draw ) {
+		if ( languageSelector.draw ) {
 			languageSelector.draw();
 		}
 

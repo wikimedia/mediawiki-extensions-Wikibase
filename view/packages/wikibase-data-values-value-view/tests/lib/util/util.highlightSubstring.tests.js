@@ -18,7 +18,7 @@ QUnit.test( 'Highlight with default options', function( assert ) {
 		['ABCDEF', 'abc', '<span class="highlight">ABC</span>DEF']
 	];
 
-	for( var i = 0; i < testCases.length; i++ ) {
+	for ( var i = 0; i < testCases.length; i++ ) {
 		var string = testCases[i][0],
 			substring = testCases[i][1],
 			expected = testCases[i][2];
@@ -39,7 +39,7 @@ QUnit.test( 'Highlight (caseSensitive === true)', function( assert ) {
 		['ABCDEF', 'ABC', '<span class="highlight">ABC</span>DEF']
 	];
 
-	for( var i = 0; i < testCases.length; i++ ) {
+	for ( var i = 0; i < testCases.length; i++ ) {
 		var string = testCases[i][0],
 			substring = testCases[i][1],
 			expected = testCases[i][2];
@@ -59,7 +59,7 @@ QUnit.test( 'Highlight (withinString === true)', function( assert ) {
 		['abcdef', 'abc', '<span class="highlight">abc</span>def']
 	];
 
-	for( var i = 0; i < testCases.length; i++ ) {
+	for ( var i = 0; i < testCases.length; i++ ) {
 		var string = testCases[i][0],
 			substring = testCases[i][1],
 			expected = testCases[i][2];
@@ -87,7 +87,7 @@ QUnit.test( 'Highlight (wrapperNodeName, wrapperNodeClass)', function( assert ) 
 		}]
 	];
 
-	for( var i = 0; i < testCases.length; i++ ) {
+	for ( var i = 0; i < testCases.length; i++ ) {
 		var string = testCases[i][0],
 			substring = testCases[i][1],
 			expected = testCases[i][2];

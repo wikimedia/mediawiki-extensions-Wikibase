@@ -16,8 +16,8 @@ jQuery.fn.autocompletestring = ( function( $ ) {
 	 * @return {jQuery}
 	 */
 	var autocompletestring = function( incomplete, complete ) {
-		if(
-			!incomplete || !complete
+		if ( !incomplete
+			|| !complete
 			|| complete.toLowerCase().indexOf( incomplete.toLowerCase() ) !== 0
 		) {
 			return this;
@@ -27,7 +27,7 @@ jQuery.fn.autocompletestring = ( function( $ ) {
 			var $this = $( this );
 
 			// Only auto-complete when incomplete string actually is a part of the complete string:
-			if( incomplete === complete.substr( 0, incomplete.length ) ) {
+			if ( incomplete === complete.substr( 0, incomplete.length ) ) {
 				$this.val( incomplete + complete.substr( incomplete.length ) );
 			}
 
@@ -45,25 +45,25 @@ jQuery.fn.autocompletestring = ( function( $ ) {
 	 * @return {number} Text selection length.
 	 */
 	autocompletestring.selectText = function( node, start, end ) {
-		if( end > node.value.length ) {
+		if ( end > node.value.length ) {
 			end = node.value.length;
 		}
 
-		if( start > end ) {
+		if ( start > end ) {
 			return 0;
 		}
 
-		if( node.createTextRange ) { // Opera < 10.5 and IE
+		if ( node.createTextRange ) { // Opera < 10.5 and IE
 			var selRange = node.createTextRange();
 			selRange.collapse( true );
 			selRange.moveStart( 'character', start );
 			selRange.moveEnd( 'character', end );
 			selRange.select();
-		} else if( node.setSelectionRange ) { // major modern browsers
+		} else if ( node.setSelectionRange ) { // major modern browsers
 			// Make a 'backward' selection so pressing arrow left won't put the cursor near the
 			// selections end but rather at the typing position:
 			node.setSelectionRange( start, end, 'backward' );
-		} else if( node.selectionStart ) {
+		} else if ( node.selectionStart ) {
 			node.selectionStart = start;
 			node.selectionEnd = end;
 		}

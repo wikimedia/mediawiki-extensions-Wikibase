@@ -29,7 +29,7 @@
 	 * @return {string}
 	 */
 	function getTypeInfo( purpose ) {
-		if( purpose instanceof DataTypeMock ) {
+		if ( purpose instanceof DataTypeMock ) {
 			return 'DataType with data value type "' + purpose.getDataValueType() + '"';
 		}
 		return 'constructor for DataValue of type "' + purpose.TYPE + '"';
@@ -227,7 +227,7 @@
 			var purpose = registerPair[0],
 				Expert = registerPair[1];
 
-			if( purpose instanceof DataTypeMock ) {
+			if ( purpose instanceof DataTypeMock ) {
 				expertStore.registerDataTypeExpert( Expert, purpose.getId() );
 			} else {
 				expertStore.registerDataValueExpert( Expert, purpose.TYPE );
@@ -245,7 +245,7 @@
 				Expert = expectPair[1],
 				RetrievedExpert;
 
-			if( purpose instanceof DataTypeMock ) {
+			if ( purpose instanceof DataTypeMock ) {
 				RetrievedExpert = expertStore.getExpert(
 					purpose.getDataValueType(), purpose.getId()
 				);

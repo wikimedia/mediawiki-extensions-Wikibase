@@ -59,7 +59,7 @@
 				unit: this._unitSelector && this._unitSelector.getConceptUri() || null
 			};
 
-			if( format === 'text/plain' ) {
+			if ( format === 'text/plain' ) {
 				options.applyRounding = false;
 				options.applyUnit = false;
 			}

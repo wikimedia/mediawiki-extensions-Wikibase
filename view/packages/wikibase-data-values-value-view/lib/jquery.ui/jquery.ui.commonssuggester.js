@@ -19,7 +19,7 @@
 		 * @protected
 		 */
 		_create: function() {
-			if( !this.options.source ) {
+			if ( !this.options.source ) {
 				this.options.source = this._initDefaultSource();
 			}
 			$.ui.suggester.prototype._create.call( this );
@@ -66,7 +66,7 @@
 
 			var label = suggestion;
 
-			if( requestTerm ) {
+			if ( requestTerm ) {
 				label = util.highlightSubstring( requestTerm, suggestion );
 			}
 

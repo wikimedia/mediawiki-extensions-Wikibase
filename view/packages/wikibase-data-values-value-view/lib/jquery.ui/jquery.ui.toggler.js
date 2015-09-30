@@ -87,7 +87,7 @@ $.widget( 'ui.toggler', {
 	_create: function() {
 		var self = this;
 
-		if( !this.options.$subject ) {
+		if ( !this.options.$subject ) {
 			throw new Error( 'No subject given: Nothing to toggle.' );
 		}
 
@@ -107,7 +107,7 @@ $.widget( 'ui.toggler', {
 		.on( 'click.' + this.widgetName, function( event ) {
 			event.preventDefault();
 
-			if( !self.element.hasClass( 'ui-state-disabled' ) ) {
+			if ( !self.element.hasClass( 'ui-state-disabled' ) ) {
 				// Change toggle icon to reflect current state of toggle subject visibility:
 				var visible = self._reflectVisibilityOnToggleIcon( true );
 
@@ -158,14 +158,14 @@ $.widget( 'ui.toggler', {
 			dir = ( isRtl === undefined ? $( 'body' ).hasClass( 'rtl' ) : isRtl ) ? 'w' : 'e',
 		// Don't use is( ':visible' ) which would be misleading if element not yet in DOM!
 			visible = this.options.$subject.css( 'display' ) !== 'none';
-		if( inverted ) {
+		if ( inverted ) {
 			visible = !visible;
 		}
 
 		this.$toggleIcon.removeClass( iconClass + 'e ' + iconClass + 's ' + iconClass + 'w '
 			+ this.widgetBaseClass + '-icon3dtrans' );
 		// Add classes displaying rotated icon. If CSS3 transform is available, use it:
-		if( !browserSupportsTransform || !$.speed().duration ) {
+		if ( !browserSupportsTransform || !$.speed().duration ) {
 			this.$toggleIcon.addClass( iconClass + ( visible ? 's' : dir ) );
 		} else {
 			this.$toggleIcon.addClass( iconClass + 's '

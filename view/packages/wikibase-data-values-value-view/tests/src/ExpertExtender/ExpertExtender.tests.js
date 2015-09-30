@@ -8,7 +8,7 @@
 
 	QUnit.module( 'jquery.valueview.ExpertExtender' );
 
-	if( QUnit.urlParams.completenesstest && CompletenessTest ) {
+	if ( QUnit.urlParams.completenesstest && CompletenessTest ) {
 		new CompletenessTest( ExpertExtender.prototype, function( cur, tester, path ) {
 			return false;
 		} );
@@ -60,7 +60,7 @@
 		// inputextender immediately extends if $input has focus
 		// If, after focussing, $input does not have focus, we are running in phantomjs
 		// or an unfocused firefox window. Force showing the extension, then.
-		if( !$input.is( ':focus' ) ) {
+		if ( !$input.is( ':focus' ) ) {
 			expertExtender._inputextender.showExtension();
 		}
 

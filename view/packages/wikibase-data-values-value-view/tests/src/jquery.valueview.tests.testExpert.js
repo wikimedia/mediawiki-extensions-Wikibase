@@ -171,7 +171,7 @@ function testExpert( testDefinition ) {
 				true,
 				memberName + '() has been called'
 			);
-			if( additionalAssertionsFn ) {
+			if ( additionalAssertionsFn ) {
 				additionalAssertionsFn( args, assert );
 			}
 		} );
@@ -188,7 +188,7 @@ function testExpert( testDefinition ) {
 	expertCasesTestAndCleanup( 'focus', function( args, assert ) {
 		try {
 			args.expert.focus();
-		} catch( e ) {
+		} catch ( e ) {
 			assert.ok(
 				e.name === 'NS_ERROR_FAILURE' && e.result === 0x80004005,
 				'Unable to focus since browser requires element to be in the DOM.'
@@ -227,7 +227,7 @@ testExpert.basicTestDefinition = {
   *         jQuery.valueview.Expert.
   */
 testExpert.verifyTestDefinition = function( testDefinition ) {
-	if( !testDefinition.expertConstructor
+	if ( !testDefinition.expertConstructor
 		|| !( testDefinition.expertConstructor.prototype instanceof valueview.Expert )
 	) {
 		throw new Error( 'Test definition\'s "expertConstructor" field has to hold a constructor '

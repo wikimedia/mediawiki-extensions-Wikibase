@@ -45,7 +45,7 @@
 		teardown: function() {
 			var $suggester = $( '.test_suggester' ),
 				suggester = $suggester.data( 'suggester' );
-			if( suggester ) {
+			if ( suggester ) {
 				suggester.destroy();
 			}
 			$suggester.remove();

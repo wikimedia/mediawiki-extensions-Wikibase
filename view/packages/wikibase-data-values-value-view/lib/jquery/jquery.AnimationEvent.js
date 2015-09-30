@@ -47,10 +47,10 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 	 * @throws {Error} when the animation purpose is not specified.
 	 */
 	var SELF = function AnimationEvent( animationPurpose, props ) {
-		if( !( this instanceof SELF ) ) {
+		if ( !( this instanceof SELF ) ) {
 			return new SELF( animationPurpose, props );
 		}
-		if( typeof animationPurpose !== 'string' || $.trim( animationPurpose ) === '' ) {
+		if ( typeof animationPurpose !== 'string' || $.trim( animationPurpose ) === '' ) {
 			throw new Error( 'An animation purpose has to be stated' );
 		}
 
@@ -108,7 +108,7 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 		 *         `animationOptions()` for two different animations.
 		 */
 		this.animationOptions = function( baseOptions ) {
-			if( this.animation ) {
+			if ( this.animation ) {
 				throw new Error( 'The AnimationEvent instance\'s generated animation options are ' +
 					'used within some animation already, they can not be used in two animations.' );
 			}
@@ -119,18 +119,18 @@ jQuery.AnimationEvent = ( function( $, PurposedCallbacks ) {
 				// Consider callbacks defined in the given options, they should be called first.
 				var baseCallback = baseOptions[ purpose ];
 				var finalCallback = function() {
-					if( baseCallback ) {
+					if ( baseCallback ) {
 						baseCallback.apply( this, arguments );
 					}
 					callbacksList.fireWith( this, [ purpose ], arguments );
 				};
-				if( purpose === 'start' ) {
+				if ( purpose === 'start' ) {
 					options.start = function() {
 						// If "start" gets called, this means the generated options are used within
 						// an jQuery.Animation. Tell the AnimationEvent instance which has created
 						// these options which jQuery.Animation object it is related to.
 						var animation = arguments[0];
-						if( self.animation && self.animation !== animation ) {
+						if ( self.animation && self.animation !== animation ) {
 							throw new Error( 'Can not use the same AnimationEvent instance\'s '
 								+ 'animationOptions() for two different animations.' );
 						}

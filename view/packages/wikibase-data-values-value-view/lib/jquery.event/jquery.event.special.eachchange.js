@@ -50,7 +50,7 @@
 				eventId = EVENT_ID + handleObj.namespace,
 				eventNameString = assignNamespace( inputEvent, eventId );
 
-			if( !eventData ) {
+			if ( !eventData ) {
 				eventData = { handlers: [], prevVal: getValue( $elem ) };
 				$( document ).on( eventNameString, function( event ) {
 					eventData = $.data( $elem[0], eventId );
@@ -68,7 +68,7 @@
 			$elem.on( eventNameString, function( event ) {
 				eventData = $.data( this, eventId );
 
-				if( !eventData ) {
+				if ( !eventData ) {
 					// Event has been removed but event handler is in the loop.
 					return;
 				}
@@ -95,7 +95,7 @@
 				prevVal = getValue( $( this ) );
 
 			$.each( $.data( this ), function( eventId, eventData ) {
-				if( eventId.indexOf( EVENT_ID ) === 0 ) {
+				if ( eventId.indexOf( EVENT_ID ) === 0 ) {
 					eventData.prevVal = prevVal;
 					$.data( self, eventId, eventData );
 				}
@@ -106,9 +106,9 @@
 		},
 
 		handle: function( event, data ) {
-			if( event.namespace !== '' ) {
+			if ( event.namespace !== '' ) {
 				var eventData = $.data( this, EVENT_ID + event.namespace );
-				if( eventData ) {
+				if ( eventData ) {
 					event.handleObj.handler.call( this, event, eventData.prevVal );
 				}
 
@@ -116,15 +116,15 @@
 				var self = this;
 
 				$.each( $.data( this ), function( eventId, eventData ) {
-					if( eventId.indexOf( EVENT_ID ) !== 0 ) {
+					if ( eventId.indexOf( EVENT_ID ) !== 0 ) {
 						// Event is not an eachchange event.
 						return true;
 					}
 
 					var handlers = $.data( self, eventId ).handlers;
 
-					for( var i = 0; i < handlers.length; i++ ) {
-						if( !alreadyTriggered( eventId, i ) ) {
+					for ( var i = 0; i < handlers.length; i++ ) {
+						if ( !alreadyTriggered( eventId, i ) ) {
 							handlers[i].call( self, event, eventData.prevVal );
 
 							triggeredHandlers.push( {
@@ -153,8 +153,8 @@
 	 *        event id.
 	 */
 	function alreadyTriggered( eventId, index ) {
-		for( var i = 0; i < triggeredHandlers.length; i++ ) {
-			if( eventId === triggeredHandlers[i].id && index === triggeredHandlers[i].index ) {
+		for ( var i = 0; i < triggeredHandlers.length; i++ ) {
+			if ( eventId === triggeredHandlers[i].id && index === triggeredHandlers[i].index ) {
 				return true;
 			}
 		}
@@ -174,7 +174,7 @@
 		// jQuery mechanism trying to retrieve the value.
 		try {
 			return $elem.val();
-		} catch( e ) {
+		} catch ( e ) {
 			return null;
 		}
 	}
@@ -191,7 +191,7 @@
 		var names = eventNames.split( ' ' ),
 			namespacedNames = [];
 
-		for( var i = 0; i < names.length; i++ ) {
+		for ( var i = 0; i < names.length; i++ ) {
 			namespacedNames.push( names[i] + '.' + namespace );
 		}
 
@@ -208,7 +208,7 @@
 	function getInputEvent() {
 		// IE (at least <= version 9) does not trigger input event when pressing backspace
 		// (version <= 8 does not support input event at all anyway)
-		if( $.client.profile().name === 'msie' && $.client.profile().versionNumber >= 9 ) {
+		if ( $.client.profile().name === 'msie' && $.client.profile().versionNumber >= 9 ) {
 			return 'input keyup';
 		}
 

@@ -14,7 +14,7 @@
 	function getDomInsertionTestViewport() {
 		var body = $( 'body' );
 
-		if( !body.length ) {
+		if ( !body.length ) {
 			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
 		}
 		return body;
@@ -87,7 +87,7 @@
 		var $dom = getDomInsertionTestViewport(),
 			elem = params.elem;
 
-		if( !$dom.length ) {
+		if ( !$dom.length ) {
 			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
 		}
 
@@ -96,7 +96,7 @@
 				elem.focusAt( 0 ),
 				'Can call focusAt on element not in DOM yet.'
 			);
-		} catch( e ) {
+		} catch ( e ) {
 			assert.ok(
 				e.name === 'NS_ERROR_FAILURE' && e.result === 0x80004005,
 				'Unable to focus since browser requires element to be in the DOM.'
@@ -121,7 +121,7 @@
 			elem = params.elem,
 			isOk;
 
-		if( !$dom.length ) {
+		if ( !$dom.length ) {
 			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );
 		}
 
@@ -130,7 +130,7 @@
 
 		// Check if focussing actually works
 		elem.focus();
-		if( !elem.is( ':focus' ) ) {
+		if ( !elem.is( ':focus' ) ) {
 			assert.ok( 'Could not test because focussing does not work.' );
 			return;
 		}
@@ -142,7 +142,7 @@
 			'Can call focusAt on element in DOM'
 		);
 
-		if( !params.focusable ) {
+		if ( !params.focusable ) {
 			assert.equal(
 				$( ':focus' ).length,
 				0,

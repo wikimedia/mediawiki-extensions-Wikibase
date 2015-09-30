@@ -70,7 +70,7 @@
 
 			this.rotator.element
 			.on( listrotatorEvents, function( event, newValue ) {
-				if( newValue !== self._getUpstreamValue() ) {
+				if ( newValue !== self._getUpstreamValue() ) {
 					self._onValueChange( newValue );
 				}
 			} )
@@ -84,26 +84,26 @@
 		 */
 		draw: function() {
 			var value = this._getUpstreamValue();
-			if( value === undefined || value === null ) {
+			if ( value === undefined || value === null ) {
 				return;
 			}
 
-			if( this._$customItem ) {
+			if ( this._$customItem ) {
 				this.rotator.options.values.splice( this._customValueIndex, 1 );
 				this._$customItem.remove();
 				this._$customItem = null;
 				this._customValueIndex = null;
 			}
-			if( value.custom ) {
+			if ( value.custom ) {
 				this._customValueIndex = this.rotator.options.values.push( value ) - 1;
 				this._$customItem = this.rotator._addMenuItem( value );
 				value = value.value;
 			}
 
-			if( this.rotator.autoActive() || this._$customItem ) {
+			if ( this.rotator.autoActive() || this._$customItem ) {
 				this.rotator.value( value );
 				this.rotator._setValue( value );
-				if( this._$customItem ) {
+				if ( this._$customItem ) {
 					this.rotator.$menu.data( 'menu' ).refresh();
 					this.rotator.activate(); // disables autoActive state
 				}
@@ -114,7 +114,7 @@
 		 * Callback for the `destroy` `ExpertExtender` event.
 		 */
 		destroy: function() {
-			if( this.rotator ) {
+			if ( this.rotator ) {
 				this.rotator.destroy();
 				this.rotator = null;
 			}

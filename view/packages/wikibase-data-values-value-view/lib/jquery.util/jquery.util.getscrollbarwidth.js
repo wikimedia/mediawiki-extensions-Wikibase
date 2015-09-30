@@ -15,7 +15,7 @@ jQuery.util.getscrollbarwidth = ( function( $ ) {
 	var scrollbarWidth;
 
 	return function() {
-		if( scrollbarWidth ) {
+		if ( scrollbarWidth ) {
 			return scrollbarWidth;
 		}
 
