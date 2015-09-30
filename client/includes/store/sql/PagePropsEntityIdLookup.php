@@ -15,7 +15,6 @@ use Wikibase\Store\EntityIdLookup;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 class PagePropsEntityIdLookup implements EntityIdLookup {
 

@@ -68,7 +68,6 @@ class ValidatorBuilders {
 	private $wikidataBaseUri = 'http://www.wikidata.org/entity/';
 
 	/**
-	 *
 	 * @var ContentLanguages
 	 */
 	private $contentLanguages;

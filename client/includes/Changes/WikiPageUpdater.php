@@ -18,7 +18,6 @@ use Wikibase\Client\RecentChanges\ExternalRecentChange;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 class WikiPageUpdater implements PageUpdater {
 

@@ -30,9 +30,9 @@ class BuilderBasedDataTypeValidatorFactory implements DataTypeValidatorFactory {
 	}
 
 	/**
-	 *
 	 * @param string $dataTypeId
 	 *
+	 * @throws OutOfBoundsException
 	 * @return ValueValidator[]
 	 */
 	public function getValidators( $dataTypeId ) {

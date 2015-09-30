@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\StorageException;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 interface EntityIdLookup {
 

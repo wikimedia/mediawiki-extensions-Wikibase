@@ -93,7 +93,6 @@ class DataUpdateHookHandlers {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserCacheSaveComplete
 	 * @see doParserCacheSaveComplete
 	 *
-	 *
 	 * @param ParserCache $parserCache
 	 * @param ParserOutput $pout
 	 * @param Title $title

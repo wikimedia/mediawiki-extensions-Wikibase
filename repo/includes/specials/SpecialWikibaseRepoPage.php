@@ -156,7 +156,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @throws MessageException
 	 * @throws UserInputException
 	 * @return EntityRevision
-	 *
 	 */
 	protected function loadEntity( EntityId $id, $revisionId = EntityRevisionLookup::LATEST_FROM_MASTER ) {
 		try {
