@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_90ead69a",
+        "filename": ".jscsrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-30T20:42:56Z",
+      "side": 1,
+      "message": "Other than \"function\" it also supports \"case\", \"void\", \"with\" and \"typeof\":\nhttp://jscs.info/rule/requireSpaceAfterKeywords.html",
+      "revId": "aaa6ec9380343eea126494f511e996db7706b921",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_b044b2be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-30T20:42:56Z",
+      "side": 1,
+      "message": "requireSpaceAfterKeywords is actually already enabled for \"else\".\nYou may want to mention it is not being enabled for \"function\" right in the headline.",
+      "revId": "aaa6ec9380343eea126494f511e996db7706b921",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_70d88a22",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-09-30T20:42:56Z",
+      "side": 1,
+      "message": "This and similar cases could be left on two lines for cleaner diffs.",
+      "revId": "aaa6ec9380343eea126494f511e996db7706b921",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
