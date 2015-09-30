@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_b2f83f47",
+        "filename": "repo/includes/rdf/SnakRdfBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T10:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_b74d91e2",
+      "revId": "e138dfd64c520f2363dae737ef93d381e0968922",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_f7f47985",
         "filename": "repo/includes/rdf/SnakRdfBuilder.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-30T07:58:41Z",
       "side": 1,
       "message": "missing type hint",
+      "revId": "e138dfd64c520f2363dae737ef93d381e0968922",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_d2f38b67",
+        "filename": "repo/includes/rdf/SnakRdfBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T10:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_f7f47985",
       "revId": "e138dfd64c520f2363dae737ef93d381e0968922",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_7292d701",
+        "filename": "repo/includes/rdf/SnakRdfBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T10:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_9733b55e",
+      "revId": "e138dfd64c520f2363dae737ef93d381e0968922",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_77308953",
         "filename": "repo/includes/rdf/SnakRdfBuilder.php",
         "patchSetId": 13
@@ -64,6 +118,24 @@
       "writtenOn": "2015-09-30T07:58:41Z",
       "side": 1,
       "message": "no type? According to the type hint of addSnakValue this is supposed to be a string.",
+      "revId": "e138dfd64c520f2363dae737ef93d381e0968922",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_929503e9",
+        "filename": "repo/includes/rdf/SnakRdfBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T10:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_77308953",
       "revId": "e138dfd64c520f2363dae737ef93d381e0968922",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
