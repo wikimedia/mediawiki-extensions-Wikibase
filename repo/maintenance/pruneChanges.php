@@ -62,28 +62,33 @@ class PruneChanges extends Maintenance {
 		$pidLock->removeLock(); // delete lockfile on normal exit
 	}
 
+	/**
+	 * @return int
+	 */
 	private function getKeepSeconds() {
-		$keepSeconds = 0;
-		$keepSeconds += (int)$this->getOption( 'number-of-days', 0 ) * 24 * 60 * 60;
-		$keepSeconds += (int)$this->getOption( 'keep-days', 0 ) * 24 * 60 * 60;
-		$keepSeconds += (int)$this->getOption( 'keep-hours', 0 ) * 60 * 60;
-		$keepSeconds += (int)$this->getOption( 'keep-minutes', 0 ) * 60;
+		$oneHour = 60 * 60;
+		$oneDay = 24 * $oneHour;
+		$keepSeconds = (int)$this->getOption( 'number-of-days', 0 ) * $oneDay
+			+ (int)$this->getOption( 'keep-days', 0 ) * $oneDay
+			+ (int)$this->getOption( 'keep-hours', 0 ) * $oneHour
+			+ (int)$this->getOption( 'keep-minutes', 0 ) * 60;
 
 		if ( $keepSeconds === 0 ) {
-			// one day
-			$keepSeconds = 1 * 24 * 60 * 60;
+			$keepSeconds = $oneDay;
 		}
 
 		return $keepSeconds;
 	}
 
+	/**
+	 * @return int
+	 */
 	private function getGraceSeconds() {
-		$graceSeconds = 0;
-		$graceSeconds += (int)$this->getOption( 'grace-minutes', 0 ) * 60;
+		$oneHour = 60 * 60;
+		$graceSeconds = (int)$this->getOption( 'grace-minutes', 0 ) * 60;
 
 		if ( $graceSeconds === 0 ) {
-			// one hour
-			$graceSeconds = 1 * 60 * 60;
+			$graceSeconds = $oneHour;
 		}
 
 		return $graceSeconds;
