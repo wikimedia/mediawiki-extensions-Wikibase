@@ -8,7 +8,6 @@ use FauxRequest;
 use ReflectionMethod;
 
 /**
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseAPI

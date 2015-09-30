@@ -11,7 +11,6 @@ use Wikibase\SettingsArray;
 use Xml;
 
 /**
- *
  * @since 0.5
  *
  * @licence GNU GPL v2+

@@ -12,7 +12,6 @@ use WebRequest;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 class TokenCheckInteractor {
 

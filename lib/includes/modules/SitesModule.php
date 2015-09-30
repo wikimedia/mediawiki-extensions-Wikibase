@@ -8,7 +8,6 @@ use SiteSQLStore;
 use Wikibase\Lib\SitesModuleWorker;
 
 /**
- *
  * @since 0.2
  *
  * @licence GNU GPL v2+

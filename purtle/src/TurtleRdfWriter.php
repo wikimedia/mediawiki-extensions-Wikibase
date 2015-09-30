@@ -15,7 +15,6 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	private $trustIRIs = true;
 
 	/**
-	 *
 	 * @return bool
 	 */
 	public function getTrustIRIs() {
@@ -23,7 +22,6 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 	}
 
 	/**
-	 *
 	 * @param bool $trustIRIs
 	 */
 	public function setTrustIRIs( $trustIRIs ) {

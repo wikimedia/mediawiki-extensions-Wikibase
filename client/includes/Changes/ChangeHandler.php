@@ -101,6 +101,7 @@ class ChangeHandler {
 	 * @param string $localSiteId
 	 * @param bool $injectRecentChanges
 	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		AffectedPagesFinder $affectedPagesFinder,

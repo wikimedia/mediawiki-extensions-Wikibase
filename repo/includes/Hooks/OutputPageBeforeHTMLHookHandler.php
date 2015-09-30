@@ -61,7 +61,6 @@ class OutputPageBeforeHTMLHookHandler {
 	private $entityContentFactory;
 
 	/**
-	 *
 	 * @param TemplateFactory $templateFactory
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages

@@ -72,7 +72,6 @@ interface EntityInfoBuilder {
 	 *
 	 * After calling this, the entity records in the EntityInfo returned by getEntityInfo
 	 * will have a 'datatype' field if they represent a Property entity.
-	 *
 	 */
 	public function collectDataTypes();
 

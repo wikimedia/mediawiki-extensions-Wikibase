@@ -252,7 +252,6 @@ class EntityDataRequestHandler {
 	 *
 	 * @return string
 	 * @throws HttpError code 415 if the format is not supported.
-	 *
 	 */
 	public function getCanonicalFormat( $format ) {
 		$format = strtolower( $format );

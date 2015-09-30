@@ -121,7 +121,6 @@ class UsageLookupContractTester {
 	}
 
 	/**
-	 *
 	 * @param PageEntityUsages[] $expected
 	 * @param PageEntityUsages[] $actual
 	 * @param string $message
