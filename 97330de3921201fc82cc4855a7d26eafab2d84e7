@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_874dc241",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T16:25:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_e86ed892",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_c863dca5",
         "filename": "client/includes/recentchanges/RecentChangeFactory.php",
         "patchSetId": 9
@@ -47,6 +65,24 @@
       "writtenOn": "2015-09-30T14:14:55Z",
       "side": 1,
       "message": "no need to use the qualified class name here",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_275c0ef4",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T16:25:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_c863dca5",
       "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_c76aea7d",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T16:25:58Z",
+      "side": 1,
+      "message": "EntityChange needs a rewrite. Never mind.",
+      "parentUuid": "2ecb373e_e8f578c8",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_08180422",
         "filename": "client/includes/recentchanges/RecentChangeFactory.php",
         "patchSetId": 9
@@ -81,6 +135,24 @@
       "writtenOn": "2015-09-30T14:14:55Z",
       "side": 1,
       "message": "$change is unused",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_2703aec3",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T16:25:58Z",
+      "side": 1,
+      "message": "Currently, yes, but we\u0027ll need it to implement the TODO below.",
+      "parentUuid": "2ecb373e_08180422",
       "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_e70cc6f2",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T16:25:58Z",
+      "side": 1,
+      "message": "Since it uses DatabaseBase, it could.",
+      "parentUuid": "2ecb373e_48fe0c68",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_8804f481",
         "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
         "patchSetId": 9
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_a7f6bed2",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T16:25:58Z",
+      "side": 1,
+      "message": "old code, i just moved it. but I\u0027ll fix",
+      "parentUuid": "2ecb373e_8804f481",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_e82a58d6",
         "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
         "patchSetId": 9
@@ -132,6 +240,24 @@
       "writtenOn": "2015-09-30T14:14:55Z",
       "side": 1,
       "message": "This results in the same object being unserialized again",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_07279260",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-09-30T16:25:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_e82a58d6",
       "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
