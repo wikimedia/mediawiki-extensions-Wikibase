@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo;
 
+use InvalidArgumentException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 
@@ -43,8 +44,22 @@ class ChangePruner {
 	 * @param int $keepSeconds
 	 * @param int $graceSeconds
 	 * @param bool $ignoreDispatch
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $batchSize, $keepSeconds, $graceSeconds, $ignoreDispatch ) {
+		if ( !is_int( $batchSize ) || $batchSize < 0 ) {
+			throw new InvalidArgumentException( '$batchSize must be a non-negative integer' );
+		}
+
+		if ( !is_int( $keepSeconds ) || $keepSeconds < 0 ) {
+			throw new InvalidArgumentException( '$keepSeconds must be a non-negative integer' );
+		}
+
+		if ( !is_int( $graceSeconds ) || $graceSeconds < 0 ) {
+			throw new InvalidArgumentException( '$graceSeconds must be a non-negative integer' );
+		}
+
 		$this->batchSize = $batchSize;
 		$this->keepSeconds = $keepSeconds;
 		$this->graceSeconds = $graceSeconds;
