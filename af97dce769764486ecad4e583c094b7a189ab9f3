@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_2db39297",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T13:04:42Z",
+      "side": 1,
+      "message": "Why public and static?",
+      "revId": "af97dce769764486ecad4e583c094b7a189ab9f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
