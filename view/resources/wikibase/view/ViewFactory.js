@@ -350,12 +350,34 @@
 				return {
 					value: value || undefined,
 					singleProperty: true,
-					dataTypeStore: this._dataTypeStore,
-					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-					entityIdPlainFormatter: this._entityIdPlainFormatter,
-					entityStore: this._entityStore,
-					valueViewBuilder: this._getValueViewBuilder()
+					listItemAdapter: this.getListItemAdapterForSnakView()
 				};
+			}, this )
+		} );
+	};
+
+	/**
+	 * Construct a `ListItemAdapter` for `snakview`s
+	 *
+	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
+	 */
+	SELF.prototype.getListItemAdapterForSnakView = function() {
+		return new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: $.wikibase.snakview,
+			newItemOptionsFn: $.proxy( function( value ) {
+				return this._getSnakViewOptions(
+					null,
+					{
+						locked: {
+							// Do not allow changing the property when editing existing an snak.
+							property: Boolean( value )
+						}
+					},
+					value || {
+						property: null,
+						snaktype: wb.datamodel.PropertyValueSnak.TYPE
+					}
+				);
 			}, this )
 		} );
 	};
@@ -373,18 +395,27 @@
 		return this._getView(
 			'snakview',
 			$dom,
-			{
-				value: snak || undefined,
-				locked: options.locked,
-				autoStartEditing: options.autoStartEditing,
-				dataTypeStore: this._dataTypeStore,
-				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				entityStore: this._entityStore,
-				valueViewBuilder: this._getValueViewBuilder(),
-				encapsulatedBy: encapsulatedBy
-			}
+			this._getSnakViewOptions( encapsulatedBy, options, snak )
 		);
+	};
+
+	/**
+	 * @param {string|null} encapsulatedBy A jQuery selector for getting the encapsulating view
+	 * @param {Object} options An object with keys `locked` and `autoStartEditing`
+	 * @param {wikibase.datamodel.Snak|null} snak
+	 */
+	SELF.prototype._getSnakViewOptions = function( encapsulatedBy, options, snak ) {
+		return {
+			value: snak || undefined,
+			locked: options.locked,
+			autoStartEditing: options.autoStartEditing,
+			dataTypeStore: this._dataTypeStore,
+			entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+			entityIdPlainFormatter: this._entityIdPlainFormatter,
+			entityStore: this._entityStore,
+			valueViewBuilder: this._getValueViewBuilder(),
+			encapsulatedBy: encapsulatedBy
+		};
 	};
 
 	/**

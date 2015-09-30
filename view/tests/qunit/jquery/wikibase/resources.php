@@ -262,11 +262,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.snaklistview',
-				'wikibase.ValueViewBuilder',
 				'wikibase.datamodel',
-				'mediawiki.Title',
-				'jquery.valueview',
-				'valueFormatters'
+				'wikibase.tests.getMockListItemAdapter',
 			),
 		),
 
