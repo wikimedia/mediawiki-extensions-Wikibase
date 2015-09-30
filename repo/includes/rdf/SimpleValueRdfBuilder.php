@@ -10,9 +10,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -24,22 +22,12 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
+class SimpleValueRdfBuilder implements DataValueRdfBuilder {
 
 	/**
 	 * @var EntityMentionListener
 	 */
 	private $mentionedEntityTracker;
-
-	/**
-	 * @var RdfVocabulary
-	 */
-	protected $vocabulary;
-
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyLookup;
 
 	/**
 	 * @var DateTimeValueCleaner
@@ -74,38 +62,6 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	}
 
 	/**
-	 * Adds the value of the given property to the RDF graph.
-	 *
-	 * @param RdfWriter $writer
-	 * @param PropertyId $propertyId
-	 * @param DataValue $value
-	 * @param string $propertyNamespace The property namespace for this snak
-	 */
-	public function addSnakValue(
-		RdfWriter $writer,
-		PropertyId $propertyId,
-		DataValue $value,
-		$propertyNamespace
-	) {
-		$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
-
-		$typeId = $value->getType();
-		$dataType = null;
-
-		if ( $typeId === 'string' ) {
-			// We only care about the actual data type of strings, so we can save time but not asking
-			// for any other types
-			try {
-				$dataType = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
-			} catch ( PropertyDataTypeLookupException $e ) {
-				// keep "unknown"
-			}
-		}
-
-		$this->addValueForDataType( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value );
-	}
-
-	/**
 	 * Adds specific value
 	 *
 	 * @param RdfWriter $writer
@@ -114,7 +70,7 @@ class SimpleValueRdfBuilder implements SnakValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param DataValue $value
 	 */
-	protected function addValueForDataType(
+	public function addValue(
 		RdfWriter $writer,
 		$propertyValueNamespace,
 		$propertyValueLName,

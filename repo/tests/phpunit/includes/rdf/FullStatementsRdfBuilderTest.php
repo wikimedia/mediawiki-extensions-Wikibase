@@ -10,6 +10,7 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\SimpleValueRdfBuilder;
+use Wikibase\Rdf\SnakRdfBuilder;
 
 /**
  * @covers Wikibase\Rdf\FullStatementRdfBuilder
@@ -72,11 +73,13 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$statementValueBuilder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
 		}
 
-		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $statementValueBuilder );
+		$snakRdfBuilder = new SnakRdfBuilder( $vocabulary, $statementValueBuilder, $this->getTestData()->getMockRepository() );
+		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $snakRdfBuilder );
 		$statementBuilder->setDedupeBag( $dedupe ?: new NullDedupeBag() );
 
 		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES ) {
-			$statementBuilder->setEntityMentionListener( $mentionTracker );
+			$snakRdfBuilder->setEntityMentionListener( $mentionTracker );
+			$statementValueBuilder->setEntityMentionListener( $mentionTracker );
 		}
 
 		$statementBuilder->setProduceQualifiers( $flavor & RdfProducer::PRODUCE_QUALIFIERS );
