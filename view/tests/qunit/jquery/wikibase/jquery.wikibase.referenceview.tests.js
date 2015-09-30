@@ -2,15 +2,8 @@
  * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-( function( $, wb, vv, vf, QUnit ) {
+( function( $, wb, QUnit ) {
 	'use strict';
-
-	var valueViewBuilder = new wb.ValueViewBuilder(
-		new vv.ExpertStore(),
-		new vf.ValueFormatterStore( vf.NullFormatter ),
-		'I am a ParserStore',
-		'I am a language code'
-	);
 
 	/**
 	 * Generates a referenceview widget suitable for testing.
@@ -21,20 +14,22 @@
 	function createReferenceview( options ) {
 		options = $.extend( {
 			statementGuid: 'testGuid',
-			entityIdHtmlFormatter: {
-				format: function() {
-					return $.Deferred().resolve( 'P1' ).promise();
-				}
-			},
-			entityIdPlainFormatter: {
-				format: function() {
-					return $.Deferred().resolve( 'P1' ).promise();
-				}
-			},
-			entityStore: 'I am an EntityStore',
-			valueViewBuilder: valueViewBuilder,
 			referencesChanger: 'I am a ReferencesChanger',
-			dataTypeStore: 'I am a DataTypeStore'
+			listItemAdapter: wb.tests.getMockListItemAdapter(
+				'snaklistview',
+				function() {
+					this.enterNewItem = function() {
+						return $.Deferred().resolve().promise();
+					};
+					this.isValid = function() {
+						return false;
+					};
+					this.stopEditing = function() {};
+					this.value = function() {
+						return this.options.value;
+					};
+				}
+			)
 		}, options );
 
 		return $( '<div/>' )
@@ -184,4 +179,4 @@
 		);
 	} );
 
-} )( jQuery, wikibase, jQuery.valueview, valueFormatters, QUnit );
+} )( jQuery, wikibase, QUnit );
