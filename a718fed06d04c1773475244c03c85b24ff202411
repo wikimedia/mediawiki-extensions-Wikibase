@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_a85e9015",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T13:33:09Z",
+      "side": 1,
+      "message": "This could have been defined in the if below, or just inline IMO",
+      "revId": "a718fed06d04c1773475244c03c85b24ff202411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
