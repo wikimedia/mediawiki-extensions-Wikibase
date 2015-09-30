@@ -381,8 +381,6 @@ class EntityDataSerializationService {
 				return RdfProducer::PRODUCE_TRUTHY_STATEMENTS
 					| RdfProducer::PRODUCE_SITELINKS
 					| RdfProducer::PRODUCE_VERSION_INFO;
-			case 'full':
-				return RdfProducer::PRODUCE_ALL;
 			case 'dump':
 				return RdfProducer::PRODUCE_ALL_STATEMENTS
 					| RdfProducer::PRODUCE_TRUTHY_STATEMENTS
@@ -396,8 +394,9 @@ class EntityDataSerializationService {
 					| RdfProducer::PRODUCE_REFERENCES
 					| RdfProducer::PRODUCE_SITELINKS
 					| RdfProducer::PRODUCE_VERSION_INFO;
-			case null: // No flavor given
-				return RdfProducer::PRODUCE_SITELINKS;
+			case 'full':
+			case null:
+				return RdfProducer::PRODUCE_ALL;
 		}
 
 		throw new MWException( "Unsupported flavor: $flavorName" );
