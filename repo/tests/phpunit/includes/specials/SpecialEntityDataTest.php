@@ -83,7 +83,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			new MockSiteStore()
 		);
 
-		$maxAge = 60*60;
 		$formats = array( 'json', 'rdfxml', 'ntriples' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
@@ -110,7 +109,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$serializationService,
 			$entityDataFormatProvider,
 			$defaultFormat,
-			$maxAge,
+			0,
 			$useSquid,
 			$apiFrameOptions
 		);
