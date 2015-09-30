@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_e89a58bc",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T14:14:55Z",
+      "side": 1,
+      "message": "Ok",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_e86ed892",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T14:14:55Z",
+      "side": 1,
+      "message": "Seems this has test cases by now.",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_c863dca5",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T14:14:55Z",
+      "side": 1,
+      "message": "no need to use the qualified class name here",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_e8f578c8",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T14:14:55Z",
+      "side": 1,
+      "message": "??? Has this been done?",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_08180422",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T14:14:55Z",
+      "side": 1,
+      "message": "$change is unused",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_48fe0c68",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T14:14:55Z",
+      "side": 1,
+      "message": "Does it?",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_8804f481",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T14:14:55Z",
+      "side": 1,
+      "message": "strict compare?",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_e82a58d6",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T14:14:55Z",
+      "side": 1,
+      "message": "This results in the same object being unserialized again",
+      "revId": "97330de3921201fc82cc4855a7d26eafab2d84e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
