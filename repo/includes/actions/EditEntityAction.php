@@ -451,7 +451,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$label = null;
 		if ( $labelText ) {
-			$label = Html::element( 'label', $inputAttrs['id'] ? array( 'for' => $inputAttrs['id'] ) : null, $labelText );
+			$label = Html::label( $labelText, $inputAttrs['id'] );
 			$label = Html::rawElement( 'span', $spanLabelAttrs, $label );
 		}
 
@@ -499,17 +499,19 @@ abstract class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getEditButton() {
-		return Html::element( 'input', array(
-			'id'        => 'wpSave',
-			'name'      => 'wpSave',
-			'type'      => 'submit',
-			'value'     => $this->msg( 'savearticle' )->text(),
-			'accesskey' => $this->msg( 'accesskey-save' )->text(),
-			'title'     => $this->msg( 'tooltip-save' )->text() . ' [' . $this->msg( 'accesskey-save' )->text() . ']',
-		) );
+		return Html::input(
+			'wpSave',
+			$this->msg( 'savearticle' )->text(),
+			'submit',
+			array(
+				'id' => 'wpSave',
+				'accesskey' => $this->msg( 'accesskey-save' )->text(),
+				'title' => $this->msg( 'tooltip-save' )->text() . ' [' . $this->msg( 'accesskey-save' )->text() . ']',
+			)
+		);
 	}
 
 	/**
