@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
  */
 class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 
-	public function provideParse() {
+	public function validInputProvider() {
 		return array(
 			'base URI' => array( 'http://acme.test/entity/', 'http://acme.test/entity/Q14', new ItemId( 'Q14' ) ),
 			'interwiki prefix' => array( 'wikidata:', 'wikidata:P14', new PropertyId( 'P14' ) ),
@@ -23,14 +23,14 @@ class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideParse
+	 * @dataProvider validInputProvider
 	 */
 	public function testParse( $prefix, $input, $expected ) {
 		$parser = new SuffixEntityIdParser( $prefix, new BasicEntityIdParser() );
 		$this->assertEquals( $expected, $parser->parse( $input ) );
 	}
 
-	public function provideParse_invalid() {
+	public function invalidInputProvider() {
 		return array(
 			'mismatching prefix' => array( 'http://acme.test/entity/', 'http://www.wikidata.org/entity/Q14' ),
 			'incomplete prefix' => array( 'http://acme.test/entity/', 'http://acme.test/Q14' ),
@@ -44,7 +44,7 @@ class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideParse_invalid
+	 * @dataProvider invalidInputProvider
 	 */
 	public function testParse_invalid( $prefix, $input ) {
 		$parser = new SuffixEntityIdParser( $prefix, new BasicEntityIdParser() );
