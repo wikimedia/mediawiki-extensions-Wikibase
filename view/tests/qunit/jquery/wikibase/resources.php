@@ -203,11 +203,11 @@ return call_user_func( function() {
 				'jquery.wikibase.referenceview.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.valueview.ExpertStore',
 				'jquery.wikibase.referenceview',
-				'wikibase.datamodel',
-				'wikibase.ValueViewBuilder',
-				'valueFormatters'
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Reference',
+				'wikibase.datamodel.SnakList',
+				'wikibase.tests.getMockListItemAdapter',
 			),
 		),
 

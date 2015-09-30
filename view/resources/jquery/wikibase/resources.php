@@ -292,7 +292,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.removeClassByRegex',
 				'jquery.wikibase.listview',
-				'jquery.wikibase.snaklistview',
 				'wikibase.datamodel',
 			),
 		),

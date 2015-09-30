@@ -305,8 +305,6 @@
 			} )
 		);
 
-		sinon.spy( wb, 'ValueViewBuilder' );
-
 		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
 
 		assert.deepEqual(
@@ -315,24 +313,13 @@
 				value: value || null,
 				statementGuid: statementGuid,
 				dataTypeStore: dataTypeStore,
-				entityIdHtmlFormatter: entityIdHtmlFormatter,
-				entityIdPlainFormatter: entityIdPlainFormatter,
-				entityStore: entityStore,
-				referencesChanger: referencesChanger,
-				valueViewBuilder: wb.ValueViewBuilder.returnValues[0]
+				listItemAdapter: result.listItemAdapter, // Hack
+				referencesChanger: referencesChanger
 			}
 		);
 
-		sinon.assert.calledWith( wb.ValueViewBuilder,
-			expertStore,
-			formatterStore,
-			parserStore,
-			userLanguages[0],
-			messageProvider,
-			contentLanguages
-		);
+		assert.ok( result.listItemAdapter instanceof $.wikibase.listview.ListItemAdapter );
 
-		wb.ValueViewBuilder.restore();
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
