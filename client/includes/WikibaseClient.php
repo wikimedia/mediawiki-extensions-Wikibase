@@ -872,8 +872,8 @@ final class WikibaseClient {
 
 		return new CachingOtherProjectsSitesProvider(
 			$otherProjectsSitesProvider,
-			wfGetMainCache(),
-			60 * 60
+			wfGetCache( $this->settings->getSetting( 'sharedCacheType' ) ),
+			$this->settings->getSetting( 'sharedCacheDuration' )
 		);
 	}
 
