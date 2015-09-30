@@ -224,8 +224,6 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * @param string $itemString
 	 */
 	protected function outputForm( $site, $itemString ) {
-		$this->getOutput()->addModules( 'wikibase.special.goToLinkedPage' );
-
 		$formDescriptor = array(
 			'site' => array(
 				'name' => 'site',
