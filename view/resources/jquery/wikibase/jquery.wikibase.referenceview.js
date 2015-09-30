@@ -16,19 +16,11 @@
  *
  * @param {Object} options
  * @param {wikibase.datamodel.Reference|null} options.value
- * @param {string} options.statementGuid
- *        The GUID of the `Statement` the `Reference` represented by the widget instance belongs to.
- * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} options.entityIdHtmlFormatter
- *        Required for dynamically rendering links to `Entity`s.
- * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
- *        Required for dynamically rendering plain text references to `Entity`s.
- * @param {wikibase.store.EntityStore} options.entityStore
- *        Required for dynamically gathering `Entity`/`Property` information.
- * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
- *        Required by the `snakview` interfacing a `snakview` "value" `Variation` to
- *        `jQuery.valueview`.
+ * @param {jQuery.wikibase.listview.ListItemAdapater} options.listItemAdapter
  * @param {wikibase.entityChangers.ReferencesChanger} options.referencesChanger
  *        Required for saving the `Reference` represented by the widget instance.
+ * @param {string} options.statementGuid
+ *        The GUID of the `Statement` the `Reference` represented by the widget instance belongs to.
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-claimview-snak-new-tooltip' )]
  *        End-user message explaining how to interact with the widget. The message is most likely to
  *        be used inside the tooltip of the toolbar corresponding to the widget.
@@ -77,12 +69,9 @@ $.widget( 'wikibase.referenceview', PARENT, {
 			$listview: '.wikibase-referenceview-listview'
 		},
 		value: null,
-		statementGuid: null,
-		entityIdHtmlFormatter: null,
-		entityIdPlainFormatter: null,
-		entityStore: null,
-		valueViewBuilder: null,
+		listItemAdapter: null,
 		referencesChanger: null,
+		statementGuid: null,
 		helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' )
 	},
 
@@ -100,33 +89,14 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.statementGuid
-			|| !this.options.entityStore
-			|| !this.options.valueViewBuilder
-			|| !this.options.referencesChanger
-		) {
+		if ( !this.options.statementGuid || !this.options.listItemAdapter || !this.options.referencesChanger ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
 		PARENT.prototype._create.call( this );
 
-		var self = this;
-
 		this.$listview.listview( {
-			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-				listItemWidget: $.wikibase.snaklistview,
-				newItemOptionsFn: function( value ) {
-					return {
-						value: value || undefined,
-						singleProperty: true,
-						dataTypeStore: self.options.dataTypeStore,
-						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
-						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
-						entityStore: self.options.entityStore,
-						valueViewBuilder: self.options.valueViewBuilder
-					};
-				}
-			} ),
+			listItemAdapter: this.options.listItemAdapter,
 			value: this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : []
 		} );
 
@@ -139,11 +109,12 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 */
 	_attachEditModeEventHandlers: function() {
 		var self = this,
-			lia = this.$listview.data( 'listview' ).listItemAdapter();
+			listview = this.$listview.data( 'listview' ),
+			lia = listview.listItemAdapter();
 
 		var changeEvents = [
 			'snakviewchange.' + this.widgetName,
-			'snaklistviewchange.' + this.widgetName,
+			lia.prefixedEvent( 'change.' + this.widgetName ),
 			'listviewafteritemmove.' + this.widgetName,
 			'listviewitemadded.' + this.widgetName,
 			'listviewitemremoved.' + this.widgetName
@@ -155,10 +126,10 @@ $.widget( 'wikibase.referenceview', PARENT, {
 				// Check if last snaklistview item (snakview) has been removed and remove the
 				// listview item (the snaklistview itself) if so:
 				var $snaklistview = $( event.target ).closest( ':wikibase-snaklistview' ),
-					snaklistview = $snaklistview.data( 'snaklistview' );
+					snaklistview = lia.liInstance( $snaklistview );
 
 				if ( snaklistview && !snaklistview.value().length ) {
-					self.$listview.data( 'listview' ).removeItem( snaklistview.element );
+					listview.removeItem( $snaklistview );
 				}
 			}
 
