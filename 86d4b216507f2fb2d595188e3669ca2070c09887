@@ -51,6 +51,24 @@
       "revId": "86d4b216507f2fb2d595188e3669ca2070c09887",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_921ae3ce",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-09-30T09:39:06Z",
+      "side": 1,
+      "message": "Yeah, that sounds good to me.",
+      "parentUuid": "2ecb373e_b2eeffaf",
+      "revId": "86d4b216507f2fb2d595188e3669ca2070c09887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
