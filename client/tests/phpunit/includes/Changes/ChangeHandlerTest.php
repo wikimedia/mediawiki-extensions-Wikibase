@@ -19,7 +19,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\NamespaceChecker;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\TestChanges;
 
@@ -433,11 +432,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$handler = $this->getChangeHandler( $pageNamesPerItemId );
 		$comment = $handler->getEditComment( $change, $title );
 
-		if ( is_array( $comment ) && is_array( $expected ) ) {
-			$this->assertArrayEquals( $expected, $comment, false, true );
-		} else {
-			$this->assertEquals( $expected, $comment );
-		}
+		$this->assertEquals( $expected, $comment );
 	}
 
 	/**
