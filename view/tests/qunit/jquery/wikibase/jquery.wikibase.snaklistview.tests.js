@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( mw, $, wb, dv, vf, vv, QUnit ) {
+( function( $, wb, dv, QUnit ) {
 	'use strict';
 
 	var snakLists = [
@@ -26,27 +26,29 @@
 		new wb.datamodel.PropertyValueSnak( 'p4',  new dv.StringValue( 'g' ) )
 	];
 
-	// We need a filled entity store for the instances of jQuery.wikibase.snakview.variations.Value
-	// and jQuery.wikibase.snakview created by jQuery.wikibase.snaklistview.
-	var entities = {
-		p1: new wb.datamodel.Property( 'P1', 'string' ),
-		p2: new wb.datamodel.Property( 'P2', 'string' ),
-		p3: new wb.datamodel.Property( 'P3', 'string' ),
-		p4: new wb.datamodel.Property( 'P4', 'string' )
-	};
+	var listItemAdapter = wb.tests.getMockListItemAdapter( 'snakview', function() {
+		var _value = this.options.value;
+		this.options.locked = this.options.locked || {};
+		this.snak = function( value ) {
+			if ( arguments.length ) {
+				_value = value;
+			}
+			return _value;
+		};
+		this.isValid = function() {};
+		this.startEditing = function() {
+			this._trigger( 'change' );
+			this._trigger( 'afterstartediting' );
+		};
+		this.stopEditing = function() {};
 
-	var entityStore = {
-		get: function( entityId ) {
-			return $.Deferred().resolve( entities[entityId] );
-		}
-	};
-
-	var valueViewBuilder = new wb.ValueViewBuilder(
-		new vv.ExpertStore(),
-		new vf.ValueFormatterStore( vf.NullFormatter ),
-		'I am a ParserStore',
-		'I am a language code'
-	);
+		this.showPropertyLabel = function() {
+			this._propertyLabelVisible = true;
+		};
+		this.hidePropertyLabel = function() {
+			this._propertyLabelVisible = false;
+		};
+	} );
 
 	/**
 	 * Generates a snaklistview widget suitable for testing.
@@ -58,21 +60,7 @@
 	function createSnaklistview( value, additionalOptions ) {
 		var options = $.extend( additionalOptions, {
 			value: value || undefined,
-			dataTypeStore: {
-				getDataType: function() {}
-			},
-			entityIdHtmlFormatter: {
-				format: function() {
-					return $.Deferred().resolve( 'P1' ).promise();
-				}
-			},
-			entityIdPlainFormatter: {
-				format: function( entityId ) {
-					return $.Deferred().resolve( entityId ).promise();
-				}
-			},
-			entityStore: entityStore,
-			valueViewBuilder: valueViewBuilder
+			listItemAdapter: listItemAdapter
 		} );
 
 		return $( '<div/>' )
@@ -867,9 +855,6 @@
 		var $node = createSnaklistview( snakLists[0], { singleProperty: true } ),
 			snaklistview = $node.data( 'snaklistview' );
 
-		// Append node to body in order to correctly detect visibility:
-		$node.appendTo( 'body' );
-
 		assert.ok(
 			snaklistview._listview.items().length > 0,
 			'Initialized snaklistview with more than one item.'
@@ -882,12 +867,12 @@
 
 				if ( i === 0 ) {
 					assert.ok(
-						snakview.propertyLabelIsVisible(),
+						snakview._propertyLabelVisible,
 						'Topmost snakview\'s property label is visible.'
 					);
 				} else {
 					assert.ok(
-						!snakview.propertyLabelIsVisible(),
+						!snakview._propertyLabelVisible,
 						'Property label of snakview that is not on top of the snaklistview is not '
 							+ 'visible.'
 					);
@@ -907,4 +892,4 @@
 		testPropertyLabelVisibility( assert, snaklistview );
 	} );
 
-} )( mediaWiki, jQuery, wikibase, dataValues, valueFormatters, jQuery.valueview, QUnit );
+} )( jQuery, wikibase, dataValues, QUnit );
