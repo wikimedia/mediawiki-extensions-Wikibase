@@ -17,6 +17,7 @@ use Wikibase\DataModel\Snak\Snak;
  *
  * @since 0.1
  * Does not implement References anymore since 2.0
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
