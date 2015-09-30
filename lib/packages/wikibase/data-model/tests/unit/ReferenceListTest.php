@@ -351,4 +351,26 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $references->equals( unserialize( $serialized ) ) );
 	}
 
+	public function testGivenEmptyList_isEmpty() {
+		$references = new ReferenceList();
+		$this->assertTrue( $references->isEmpty() );
+	}
+
+	public function testGivenNonEmptyList_isNotEmpty() {
+		$references = new ReferenceList();
+		$references->addNewReference( new PropertyNoValueSnak( 1 ) );
+
+		$this->assertFalse( $references->isEmpty() );
+	}
+
+	public function testGivenNonEmptyListWithForwardedIterator_isNotEmpty() {
+		$references = new ReferenceList();
+		$references->addNewReference( new PropertyNoValueSnak( 1 ) );
+		$references->next();
+
+		$this->assertFalse( $references->valid(), 'post condition' );
+		$this->assertFalse( $references->isEmpty() );
+		$this->assertFalse( $references->valid(), 'pre condition' );
+	}
+
 }
