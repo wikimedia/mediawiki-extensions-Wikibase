@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Lib\Store\RevisionBasedEntityLookup
@@ -79,6 +80,68 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$actual = $entityLookup->hasEntity( $id );
 
 		$this->assertEquals( $exists, $actual );
+	}
+
+	public function testWhenEntityLookupExceptionIsThrown_getEntityPassesItAlong() {
+		$entityLookup = new RevisionBasedEntityLookup( $this->newEntityLookupExceptionThrowingRevisionLookup() );
+
+		$this->setExpectedException( 'Wikibase\Lib\Store\RevisionedUnresolvedRedirectException' );
+		$entityLookup->getEntity( new ItemId( 'Q1' ) );
+	}
+
+	private function newEntityLookupExceptionThrowingRevisionLookup() {
+		$revisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+
+		$revisionLookup->expects( $this->any() )
+			->method( 'getEntityRevision' )
+			->will( $this->throwException( new RevisionedUnresolvedRedirectException(
+				new ItemId( 'Q1' ),
+				new ItemId( 'Q2' )
+			) ) );
+
+		$revisionLookup->expects( $this->any() )
+			->method( 'getLatestRevisionId' )
+			->will( $this->throwException( new RevisionedUnresolvedRedirectException(
+				new ItemId( 'Q1' ),
+				new ItemId( 'Q2' )
+			) ) );
+
+		return $revisionLookup;
+	}
+
+	public function testWhenEntityLookupExceptionIsThrown_hasEntityPassesItAlong() {
+		$entityLookup = new RevisionBasedEntityLookup( $this->newEntityLookupExceptionThrowingRevisionLookup() );
+
+		$this->setExpectedException( 'Wikibase\Lib\Store\RevisionedUnresolvedRedirectException' );
+		$entityLookup->hasEntity( new ItemId( 'Q1' ) );
+	}
+
+	public function testWhenBadExceptionIsThrown_hasEntityRethrowsAsEntityLookupException() {
+		$entityLookup = new RevisionBasedEntityLookup( $this->newBadExceptionThrowingRevisionLookup() );
+
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityLookupException' );
+		$entityLookup->hasEntity( new ItemId( 'Q1' ) );
+	}
+
+	private function newBadExceptionThrowingRevisionLookup() {
+		$revisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+
+		$revisionLookup->expects( $this->any() )
+			->method( 'getEntityRevision' )
+			->will( $this->throwException( new \Exception( 'Someone killed a kitten' ) ) );
+
+		$revisionLookup->expects( $this->any() )
+			->method( 'getLatestRevisionId' )
+			->will( $this->throwException( new \Exception( 'Someone killed a kitten' ) ) );
+
+		return $revisionLookup;
+	}
+
+	public function testWhenBadExceptionIsThrown_getEntityRethrowsAsEntityLookupException() {
+		$entityLookup = new RevisionBasedEntityLookup( $this->newBadExceptionThrowingRevisionLookup() );
+
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityLookupException' );
+		$entityLookup->getEntity( new ItemId( 'Q1' ) );
 	}
 
 }
