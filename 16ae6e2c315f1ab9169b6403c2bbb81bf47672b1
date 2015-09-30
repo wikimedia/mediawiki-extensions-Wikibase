@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_0d6d762d",
+        "filename": "lib/includes/modules/SitesModuleWorker.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-09-30T13:01:59Z",
+      "side": 1,
+      "message": "Please use named constants for literals like this one.",
+      "revId": "16ae6e2c315f1ab9169b6403c2bbb81bf47672b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
