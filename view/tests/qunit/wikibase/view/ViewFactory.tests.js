@@ -324,6 +324,37 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', function( assert ) {
+		var value = null,
+			viewFactory = new ViewFactory(),
+			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+
+		viewFactory.getListItemAdapterForSnakListView();
+
+		sinon.assert.calledWith(
+			ListItemAdapter,
+			sinon.match( {
+				listItemWidget: $.wikibase.snaklistview,
+				newItemOptionsFn: sinon.match.func
+			} )
+		);
+
+		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+
+		assert.deepEqual(
+			result,
+			{
+				value: value || undefined,
+				singleProperty: true,
+				listItemAdapter: result.listItemAdapter // Hack
+			}
+		);
+
+		assert.ok( result.listItemAdapter instanceof $.wikibase.listview.ListItemAdapter );
+
+		$.wikibase.listview.ListItemAdapter.restore();
+	} );
+
+	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', function( assert ) {
 		var contentLanguages = {},
 			value = null,
 			dataTypeStore = {},
@@ -356,12 +387,12 @@
 			),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
-		viewFactory.getListItemAdapterForSnakListView();
+		viewFactory.getListItemAdapterForSnakView();
 
 		sinon.assert.calledWith(
 			ListItemAdapter,
 			sinon.match( {
-				listItemWidget: $.wikibase.snaklistview,
+				listItemWidget: $.wikibase.snakview,
 				newItemOptionsFn: sinon.match.func
 			} )
 		);
@@ -373,12 +404,19 @@
 		assert.deepEqual(
 			result,
 			{
-				value: value || undefined,
-				singleProperty: true,
+				value: value || {
+					property: null,
+					snaktype: 'value'
+				},
+				autoStartEditing: undefined,
 				dataTypeStore: dataTypeStore,
+				encapsulatedBy: null,
 				entityIdHtmlFormatter: entityIdHtmlFormatter,
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				entityStore: entityStore,
+				locked: {
+					property: false
+				},
 				valueViewBuilder: wb.ValueViewBuilder.returnValues[0]
 			}
 		);
