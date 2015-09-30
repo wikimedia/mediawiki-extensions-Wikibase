@@ -10,12 +10,17 @@ use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\RevisionBasedEntityLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Client\DataAccess\StatementTransclusionInteractor
@@ -31,29 +36,6 @@ use Wikibase\Lib\SnakFormatter;
  */
 class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * @param PropertyIdResolver $propertyIdResolver
-	 * @param SnaksFinder $snaksFinder
-	 * @param string $languageCode
-	 *
-	 * @return StatementTransclusionInteractor
-	 */
-	private function getInteractor(
-		PropertyIdResolver $propertyIdResolver,
-		SnaksFinder $snaksFinder,
-		$languageCode
-	) {
-		$targetLanguage = Language::factory( $languageCode );
-
-		return new StatementTransclusionInteractor(
-			$targetLanguage,
-			$propertyIdResolver,
-			$snaksFinder,
-			$this->getSnakFormatter(),
-			$this->getEntityLookup()
-		);
-	}
-
 	public function testRender() {
 		$propertyId = new PropertyId( 'P1337' );
 		$snaks = array(
@@ -63,8 +45,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 
 		$renderer = $this->getInteractor(
 			$this->getPropertyIdResolver(),
-			$this->getSnaksFinder( $snaks ),
-			'en'
+			$snaks
 		);
 
 		$q42 = new ItemId( 'Q42' );
@@ -77,12 +58,50 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	public function testRender_PropertyLabelNotResolvedException() {
 		$renderer = $this->getInteractor(
 			$this->getPropertyIdResolverForPropertyNotFound(),
-			$this->getSnaksFinder( array() ),
-			'en'
+			array()
 		);
 
 		$this->setExpectedException( 'Wikibase\Client\PropertyLabelNotResolvedException' );
 		$renderer->render( new ItemId( 'Q42' ), 'blah' );
+	}
+
+	public function testRender_unresolvedRedirect() {
+		$renderer = $this->getInteractor(
+			$this->getPropertyIdResolver(),
+			array()
+		);
+
+		$this->assertEquals( '', $renderer->render( new ItemId( 'Q43' ), 'P1337' ) );
+	}
+
+	public function testRender_unknownEntity() {
+		$renderer = $this->getInteractor(
+			$this->getPropertyIdResolver(),
+			array()
+		);
+
+		$this->assertEquals( '', $renderer->render( new ItemId( 'Q43333' ), 'P1337' ) );
+	}
+
+	/**
+	 * @param PropertyIdResolver $propertyIdResolver
+	 * @param Snak[] $snaks
+	 *
+	 * @return StatementTransclusionInteractor
+	 */
+	private function getInteractor(
+		PropertyIdResolver $propertyIdResolver,
+		array $snaks
+	) {
+		$targetLanguage = Language::factory( 'en' );
+
+		return new StatementTransclusionInteractor(
+			$targetLanguage,
+			$propertyIdResolver,
+			$this->getSnaksFinder( $snaks ),
+			$this->getSnakFormatter(),
+			$this->getEntityLookup()
+		);
 	}
 
 	/**
@@ -161,12 +180,30 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getEntityLookup() {
-		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
+		return new RevisionBasedEntityLookup( $this->getEntityRevisionLookup() );
+	}
+
+	private function getEntityRevisionLookup() {
+		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+
 		$lookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnValue(
-				$this->getMock( 'Wikibase\DataModel\StatementListProvider' )
-			) );
+			->method( 'getEntityRevision' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				if ( $entityId->getSerialization() === 'Q42' ) {
+					return new EntityRevision(
+						new Item( new ItemId( 'Q42' ) )
+					);
+				} elseif ( $entityId->getSerialization() === 'Q43' ) {
+					// Unresolved redirect, derived from EntityLookupException
+					throw new RevisionedUnresolvedRedirectException(
+						$entityId,
+						new ItemId( 'Q404' )
+					);
+				} else {
+					return null;
+				}
+			} )
+		);
 
 		return $lookup;
 	}
