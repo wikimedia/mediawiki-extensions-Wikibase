@@ -13,9 +13,9 @@
 var createItemview = function( options, $node ) {
 	options = $.extend( {
 		value: new wb.datamodel.Item( 'Q1' ),
-		entityTermsViewBuilder: function() {},
-		statementGroupListViewBuilder: function() {},
-		sitelinkGroupListViewBuilder: function() {}
+		buildEntityTermsView: function() {},
+		buildStatementGroupListView: function() {},
+		buildSitelinkGroupListView: function() {}
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );
