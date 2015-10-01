@@ -13,8 +13,8 @@ var PARENT = $.wikibase.entityview;
  * @author H. Snater < mediawiki@snater.com >
  *
  * @param {Object} options
- * @param {Function} options.sitelinkGroupListViewBuilder
- * @param {Function} options.statementGroupListViewBuilder
+ * @param {Function} options.buildSitelinkGroupListView
+ * @param {Function} options.buildStatementGroupListView
  *
  * @constructor
  *
@@ -25,8 +25,8 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	options: {
-		sitelinkGroupListViewBuilder: null,
-		statementGroupListViewBuilder: null
+		buildSitelinkGroupListView: null,
+		buildStatementGroupListView: null
 	},
 
 	/**
@@ -59,8 +59,8 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 */
 	_init: function() {
 		if(
-			!this.options.sitelinkGroupListViewBuilder ||
-			!this.options.statementGroupListViewBuilder
+			!this.options.buildSitelinkGroupListView ||
+			!this.options.buildStatementGroupListView
 		) {
 			throw new Error( 'Required option(s) missing' );
 		}
@@ -74,7 +74,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_initStatements: function() {
-		this.options.statementGroupListViewBuilder( this.options.value, this.$statements );
+		this.options.buildStatementGroupListView( this.options.value, this.$statements );
 
 		// This is here to be sure there is never a duplicate id:
 		$( '.wikibase-statementgrouplistview' )
@@ -87,7 +87,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_initSiteLinks: function() {
-		this.options.sitelinkGroupListViewBuilder( this.options.value.getSiteLinks(), this.$siteLinks );
+		this.options.buildSitelinkGroupListView( this.options.value.getSiteLinks(), this.$siteLinks );
 	},
 
 	/**

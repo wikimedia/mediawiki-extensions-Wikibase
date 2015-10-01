@@ -154,9 +154,9 @@
 			entity.getType() + 'view',
 			$dom,
 			{
-				entityTermsViewBuilder: $.proxy( this.getEntityTermsView, this ),
-				sitelinkGroupListViewBuilder: $.proxy( this.getSitelinkGroupListView, this ),
-				statementGroupListViewBuilder: $.proxy( this.getStatementGroupListView, this ),
+				buildEntityTermsView: $.proxy( this.getEntityTermsView, this ),
+				buildSitelinkGroupListView: $.proxy( this.getSitelinkGroupListView, this ),
+				buildStatementGroupListView: $.proxy( this.getStatementGroupListView, this ),
 				value: entity
 			}
 		);
