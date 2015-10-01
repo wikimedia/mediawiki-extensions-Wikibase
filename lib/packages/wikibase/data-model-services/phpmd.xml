@@ -5,18 +5,16 @@
          xsi:noNamespaceSchemaLocation=" http://pmd.sf.net/ruleset_xml_schema.xsd">
 
     <rule ref="rulesets/codesize.xml">
-        <exclude name="TooManyMethods" />
         <exclude name="ExcessiveClassComplexity" />
     </rule>
-    <rule ref="rulesets/codesize.xml/TooManyMethods">
-        <properties>
-            <property name="maxmethods" value="20" />
-        </properties>
-    </rule>
 
-    <!-- todo: enable the camel case method rule for non-tests -->
     <rule ref="rulesets/controversial.xml">
         <exclude name="CamelCaseMethodName" />
+    </rule>
+    <rule ref="rulesets/controversial.xml/CamelCaseMethodName">
+        <properties>
+            <property name="allow-underscore-test" value="true" />
+        </properties>
     </rule>
 
     <rule ref="rulesets/design.xml" />
