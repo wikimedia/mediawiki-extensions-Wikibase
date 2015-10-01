@@ -12,19 +12,10 @@
  */
 var createItemview = function( options, $node ) {
 	options = $.extend( {
-		entityIdPlainFormatter: 'I am an EntityIdPlainFormatter',
-		entityStore: new wb.store.EntityStore(),
-		entityChangersFactory: {
-			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
-			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
-			getLabelsChanger: function() { return 'I am a LabelsChanger'; },
-			getSiteLinksChanger: function() { return 'I am a SiteLinksChanger'; }
-		},
-		api: 'I am an Api',
-		valueViewBuilder: 'I am a valueview builder',
-		dataTypeStore: 'I am a DataTypeStore',
 		value: new wb.datamodel.Item( 'Q1' ),
-		languages: 'en'
+		entityTermsViewBuilder: function() {},
+		statementGroupListViewBuilder: function() {},
+		sitelinkGroupListViewBuilder: function() {}
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -59,13 +50,6 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		'Throwing error when trying to initialize widget without a value.'
 	);
 
-	assert.throws(
-		function() {
-			createItemview( { languages: null } );
-		},
-		'Throwing error when trying to initialize widget without a language.'
-	);
-
 	var $itemview = createItemview(),
 		itemview = $itemview.data( 'itemview' );
 
@@ -81,13 +65,6 @@ QUnit.test( 'Create & destroy', function( assert ) {
 		'Destroyed widget.'
 	);
 
-	$itemview = createItemview( { languages: ['ku'] } );
-	itemview = $itemview.data( 'itemview' );
-
-	assert.ok(
-		itemview instanceof $.wikibase.itemview,
-		'Created widget with a language.'
-	);
 } );
 
 }( jQuery, wikibase, QUnit ) );

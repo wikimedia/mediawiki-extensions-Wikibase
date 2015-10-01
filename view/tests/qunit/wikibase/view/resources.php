@@ -20,6 +20,8 @@ return call_user_func( function() {
 				'ViewFactory.tests.js',
 			),
 			'dependencies' => array(
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.Item',
 				'wikibase.store.EntityStore',
 				'wikibase.entityIdFormatter.EntityIdPlainFormatter',
 				'wikibase.view.ViewFactory',

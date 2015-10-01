@@ -27,10 +27,18 @@ return call_user_func( function() {
 				'ViewFactory.js'
 			),
 			'dependencies' => array(
+				'jquery.wikibase.entitytermsview',
 				'jquery.wikibase.itemview',
 				'jquery.wikibase.propertyview',
+				'jquery.wikibase.statementgrouplistview',
+				'wikibase.datamodel.MultiTerm',
+				'wikibase.datamodel.Term',
+				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.view.__namespace',
 				'wikibase.ValueViewBuilder'
+			),
+			'messages' => array(
+				'wikibase-entitytermsview-input-help-message',
 			)
 		),
 	);
