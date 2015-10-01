@@ -13,7 +13,8 @@
 			"Federico Mugnaini",
 			"Fringio",
 			"Ricordisamoa",
-			"Macofe"
+			"Macofe",
+			"Lucas2"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
@@ -34,7 +35,7 @@
 	"wikibase-comment-sitelink-remove": "Collegamento linguistico rimosso: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|modifica|modifiche}}",
 	"wikibase-dataitem": "Elemento {{WBREPONAME}}",
-	"wikibase-editlinks": "Modifica link",
+	"wikibase-editlinks": "Modifica collegamenti",
 	"wikibase-editlinkstitle": "Modifica collegamenti interlinguistici",
 	"wikibase-addlinkstitle": "Aggiungi collegamento interlinguistico",
 	"wikibase-linkitem-addlinks": "Aggiungi collegamenti",

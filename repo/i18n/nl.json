@@ -155,6 +155,7 @@
 	"wikibase-newitem-page": "Naam van de eerste gekoppelde pagina",
 	"wikibase-newitem-no-external-page": "De opgegeven pagina kon niet worden gevonden op de overeenkomende site.",
 	"wikibase-newitem-not-recognized-siteid": "Het opgegeven site-ID is niet herkend.",
+	"wikibase-newentity-language": "Taal:",
 	"wikibase-newentity-label": "Label:",
 	"wikibase-newentity-description": "Beschrijving:",
 	"wikibase-newentity-aliases": "Aliassen, gescheiden door pipes:",
