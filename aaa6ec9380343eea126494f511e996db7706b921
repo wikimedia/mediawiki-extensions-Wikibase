@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_3cec198e",
+        "filename": ".jscsrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-01T08:38:26Z",
+      "side": 1,
+      "message": "This is, for now, a copy from https://github.com/jscs-dev/node-jscs/blob/master/presets/google.json#L27 I did a quick regex search in our code base and could not find a single issue with these additional keywords. However, good to know. Thanks. We can refine this rule later.",
+      "parentUuid": "2ecb373e_90ead69a",
+      "revId": "aaa6ec9380343eea126494f511e996db7706b921",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_b044b2be",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -64,6 +82,24 @@
       "writtenOn": "2015-09-30T20:42:56Z",
       "side": 1,
       "message": "This and similar cases could be left on two lines for cleaner diffs.",
+      "revId": "aaa6ec9380343eea126494f511e996db7706b921",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_9cf42d52",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-01T08:38:26Z",
+      "side": 1,
+      "message": "What do you mean with \"two lines\"? This code style issue is so closely related that I really want to fix it in one go.",
+      "parentUuid": "2ecb373e_70d88a22",
       "revId": "aaa6ec9380343eea126494f511e996db7706b921",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
