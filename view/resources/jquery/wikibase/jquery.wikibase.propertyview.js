@@ -13,7 +13,7 @@ var PARENT = $.wikibase.entityview;
  * @author H. Snater < mediawiki@snater.com >
  *
  * @param {Object} options
- * @param {Function} options.statementGroupListViewBuilder
+ * @param {Function} options.buildStatementGroupListView
  *
  * @constructor
  *
@@ -24,7 +24,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @protected
 	 */
 	options: {
-		statementGroupListViewBuilder: null
+		buildStatementGroupListView: null
 	},
 
 	/**
@@ -59,7 +59,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @protected
 	 */
 	_init: function() {
-		if ( !this.options.statementGroupListViewBuilder ) {
+		if ( !this.options.buildStatementGroupListView ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -91,7 +91,7 @@ $.widget( 'wikibase.propertyview', PARENT, {
 	 * @protected
 	 */
 	_initStatements: function() {
-		this.options.statementGroupListViewBuilder( this.options.value, this.$statements );
+		this.options.buildStatementGroupListView( this.options.value, this.$statements );
 
 		// This is here to be sure there is never a duplicate id:
 		$( '.wikibase-statementgrouplistview' )

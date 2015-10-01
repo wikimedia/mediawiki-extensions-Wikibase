@@ -13,8 +13,8 @@
 var createPropertyview = function( options, $node ) {
 	options = $.extend( {
 		value: new wb.datamodel.Property( 'P1', 'someDataType' ),
-		entityTermsViewBuilder: function() {},
-		statementGroupListViewBuilder: function() {}
+		buildEntityTermsView: function() {},
+		buildStatementGroupListView: function() {}
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );

@@ -50,9 +50,9 @@
 		viewFactory.getEntityView( entity, $dom );
 
 		sinon.assert.calledWith( FooView, sinon.match( {
-			entityTermsViewBuilder: sinon.match.func,
-			sitelinkGroupListViewBuilder: sinon.match.func,
-			statementGroupListViewBuilder: sinon.match.func,
+			buildEntityTermsView: sinon.match.func,
+			buildSitelinkGroupListView: sinon.match.func,
+			buildStatementGroupListView: sinon.match.func,
 			value: entity
 		} ) );
 	} );

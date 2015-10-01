@@ -16,7 +16,7 @@
  *
  * @param {Object} options
  * @param {wikibase.datamodel.Entity} options.value
- * @param {Function} options.entityTermsViewBuilder
+ * @param {Function} options.buildEntityTermsView
  */
 /**
  * @event afterstartediting
@@ -36,7 +36,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @protected
 	 */
 	options: {
-		entityTermsViewBuilder: null,
+		buildEntityTermsView: null,
 		template: 'wikibase-entityview',
 		templateParams: [
 			'', // entity type
@@ -84,7 +84,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @throws {Error} if a required options is missing.
 	 */
 	_init: function() {
-		if ( !this.options.value || !this.options.entityTermsViewBuilder ) {
+		if ( !this.options.value || !this.options.buildEntityTermsView ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -107,7 +107,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 			this.$entityTerms = $( '<div/>' ).prependTo( this.$main );
 		}
 
-		this.options.entityTermsViewBuilder( this.options.value.getFingerprint(), this.$entityTerms );
+		this.options.buildEntityTermsView( this.options.value.getFingerprint(), this.$entityTerms );
 	},
 
 	/**
