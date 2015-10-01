@@ -131,7 +131,7 @@ $.widget( 'wikibase.itemview', PARENT, {
 
 		this.$statements.data( 'statementgrouplistview' )[state]();
 		// TODO: Resolve integration of referenceviews
-		this.$statements.find( '.wb-statement-references' ).each( function() {
+		this.$statements.find( '.wikibase-statementview-references' ).each( function() {
 			var $listview = $( this ).children( ':wikibase-listview' );
 			if( $listview.length ) {
 				$listview.data( 'listview' )[state]();
