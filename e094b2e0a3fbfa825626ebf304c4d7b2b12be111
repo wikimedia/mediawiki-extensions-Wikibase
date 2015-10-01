@@ -16,6 +16,24 @@
       "revId": "e094b2e0a3fbfa825626ebf304c4d7b2b12be111",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_53a7934c",
+        "filename": "client/tests/phpunit/includes/DataAccess/StatementTransclusionInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-01T12:16:46Z",
+      "side": 1,
+      "message": "Q404 is the redirect target (which is hypothetically unresolved, non existing)\n\nQ43 is the redirect.",
+      "parentUuid": "2ecb373e_13ecab8d",
+      "revId": "e094b2e0a3fbfa825626ebf304c4d7b2b12be111",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
