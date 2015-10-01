@@ -14,7 +14,6 @@ use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
