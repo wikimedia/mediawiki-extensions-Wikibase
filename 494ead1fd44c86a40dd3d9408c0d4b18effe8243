@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_10a101f5",
+        "filename": "client/tests/phpunit/includes/DataAccess/StatementTransclusionInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-01T09:03:04Z",
+      "side": 1,
+      "message": "This setup code is now copy pasted 3 times. Maybe introduce a private function?",
+      "revId": "494ead1fd44c86a40dd3d9408c0d4b18effe8243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_f06eb5c3",
+        "filename": "client/tests/phpunit/includes/DataAccess/StatementTransclusionInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-01T09:03:04Z",
+      "side": 1,
+      "message": "Q43!",
+      "revId": "494ead1fd44c86a40dd3d9408c0d4b18effe8243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_bc632909",
+        "filename": "lib/includes/store/RevisionBasedEntityLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-01T09:03:04Z",
+      "side": 1,
+      "message": "This change should have tests, probably very similar to what Jeroen did in I5fd0c37.",
+      "revId": "494ead1fd44c86a40dd3d9408c0d4b18effe8243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
