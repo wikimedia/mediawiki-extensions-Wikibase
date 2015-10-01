@@ -835,6 +835,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 				this._qualifiers.option( key, value );
 			}
 			this._rankSelector.option( key, value );
+			this._referencesListview.option( key, value );
 		}
 
 		return response;
