@@ -103,6 +103,24 @@
       "revId": "aaa6ec9380343eea126494f511e996db7706b921",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_3f3ac6e4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-10-01T19:43:57Z",
+      "side": 1,
+      "message": "I see value in producing the shortest diff that still makes the rule pass.",
+      "parentUuid": "2ecb373e_9cf42d52",
+      "revId": "aaa6ec9380343eea126494f511e996db7706b921",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
