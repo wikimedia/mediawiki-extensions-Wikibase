@@ -112,8 +112,9 @@ class ByPropertyIdArray extends \ArrayObject {
 	 *
 	 * @param PropertyId $propertyId
 	 *
+	 * @throws OutOfBoundsException
+	 * @throws RuntimeException
 	 * @return object[]
-	 * @throws RuntimeException|OutOfBoundsException
 	 */
 	public function getByPropertyId( PropertyId $propertyId ) {
 		$this->assertIndexIsBuild();
@@ -365,7 +366,8 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @param object $object
 	 * @param int $toIndex Absolute index where to move the object to.
 	 *
-	 * @throws RuntimeException|OutOfBoundsException
+	 * @throws OutOfBoundsException
+	 * @throws RuntimeException
 	 */
 	public function moveObjectToIndex( $object, $toIndex ) {
 		$this->assertIndexIsBuild();
