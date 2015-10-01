@@ -54,10 +54,10 @@ $.widget( 'wikibase.entityview', PARENT, {
 	},
 
 	/**
-	 * @property {jQuery|null}
+	 * @property {jQuery.wikibase.entitytermsview}
 	 * @readonly
 	 */
-	$entityTerms: null,
+	_entityTerms: null,
 
 	/**
 	 * @inheritdoc
@@ -75,6 +75,8 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 */
 	_createEntityview: function() {
 		PARENT.prototype._create.call( this );
+
+		this.element.data( $.wikibase.entityview.prototype.widgetName, this );
 	},
 
 	/**
@@ -88,8 +90,6 @@ $.widget( 'wikibase.entityview', PARENT, {
 			throw new Error( 'Required option(s) missing' );
 		}
 
-		this.element.data( $.wikibase.entityview.prototype.widgetName, this );
-
 		this._initEntityTerms();
 
 		PARENT.prototype._init.call( this );
@@ -101,41 +101,32 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @protected
 	 */
 	_initEntityTerms: function() {
-		this.$entityTerms = $( '.wikibase-entitytermsview', this.element );
+		var $entityTerms = $( '.wikibase-entitytermsview', this.element );
 
-		if ( !this.$entityTerms.length ) {
-			this.$entityTerms = $( '<div/>' ).prependTo( this.$main );
+		if ( !$entityTerms.length ) {
+			$entityTerms = $( '<div/>' ).prependTo( this.$main );
 		}
 
-		this.options.buildEntityTermsView( this.options.value.getFingerprint(), this.$entityTerms );
+		this._entityTerms = this.options.buildEntityTermsView(
+			this.options.value.getFingerprint(),
+			$entityTerms
+		);
 	},
 
 	/**
 	 * @protected
 	 */
 	_attachEventHandlers: function() {
-		var self = this;
+		this._on( {
+			entitytermsviewafterstartediting: function( event ) {
+				event.stopPropagation();
+				this._trigger( 'afterstartediting' );
+			},
 
-		this.element
-		.on( [
-			'labelviewafterstartediting.' + this.widgetName,
-			'descriptionviewafterstartediting.' + this.widgetName,
-			'aliasesviewafterstartediting.' + this.widgetName,
-			'entitytermsviewafterstartediting.' + this.widgetName
-		].join( ' ' ),
-		function( event ) {
-			self._trigger( 'afterstartediting' );
-		} );
-
-		this.element
-		.on( [
-			'labelviewafterstopediting.' + this.widgetName,
-			'descriptionviewafterstopediting.' + this.widgetName,
-			'aliasesviewafterstopediting.' + this.widgetName,
-			'entitytermsviewafterstopediting.' + this.widgetName
-		].join( ' ' ),
-		function( event, dropValue ) {
-			self._trigger( 'afterstopediting', null, [dropValue] );
+			entitytermsviewafterstopediting: function( event, dropValue ) {
+				event.stopPropagation();
+				this._trigger( 'afterstopediting', null, [dropValue] );
+			}
 		} );
 	},
 
@@ -160,9 +151,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @param {string} state "disable" or "enable"
 	 */
 	_setState: function( state ) {
-		if ( this.$entityTerms ) {
-			this.$entityTerms.data( 'entitytermsview' )[state]();
-		}
+		this._entityTerms[state]();
 	}
 
 } );
