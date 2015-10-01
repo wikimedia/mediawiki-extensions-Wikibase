@@ -56,7 +56,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @param EntityId $entityId
 	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
 	 *
-	 * @throws StorageException|RevisionedUnresolvedRedirectException
+	 * @throws RevisionedUnresolvedRedirectException
+	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
 	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
