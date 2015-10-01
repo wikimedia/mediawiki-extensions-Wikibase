@@ -130,14 +130,6 @@ $.widget( 'wikibase.itemview', PARENT, {
 		PARENT.prototype._setState.call( this, state );
 
 		this.$statements.data( 'statementgrouplistview' )[state]();
-		// TODO: Resolve integration of referenceviews
-		this.$statements.find( '.wikibase-statementview-references' ).each( function() {
-			var $listview = $( this ).children( ':wikibase-listview' );
-			if( $listview.length ) {
-				$listview.data( 'listview' )[state]();
-			}
-		} );
-
 		this.$siteLinks.data( 'sitelinkgrouplistview' )[state]();
 	}
 } );
