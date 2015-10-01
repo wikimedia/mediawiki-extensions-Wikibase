@@ -27,16 +27,21 @@
 	// ----
 	// Own rules
 
+	// not required for function
 	"requireSpaceAfterKeywords": [
+		"do",
+		"for",
 		"if",
 		"else",
-		"for",
-		"while",
-		"do",
 		"switch",
-		"return",
+		"case",
 		"try",
-		"catch"
+		"catch",
+		"void",
+		"while",
+		"with",
+		"return",
+		"typeof",
 	],
 
 	"excludeFiles": [ "node_modules/**", "vendor/**", "extensions/**" ]
