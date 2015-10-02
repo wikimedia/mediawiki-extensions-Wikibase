@@ -188,7 +188,7 @@ class AffectedPagesFinder {
 			// @todo: more than one entity at once!
 			array( $entityId ),
 			// Look up pages that are marked as either using one of the changed or all aspects
-			$changedAspects + array( EntityUsage::ALL_USAGE )
+			array_merge( $changedAspects, array( EntityUsage::ALL_USAGE ) )
 		);
 
 		// @todo: use iterators throughout!

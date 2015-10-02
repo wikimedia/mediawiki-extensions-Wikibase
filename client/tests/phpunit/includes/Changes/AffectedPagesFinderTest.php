@@ -442,8 +442,8 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 * @dataProvider getAffectedUsagesByPageProvider
 	 */
 	public function testGetAffectedUsagesByPage( array $expected, array $expectedAspects, array $usage, ItemChange $change ) {
-		// @FIXME: All changes should affect pages with ALL_USAGE!
-		// $expectedAspects = array_merge( $expectedAspects, array( EntityUsage::ALL_USAGE ) );
+		// Everything will affect pages with ALL_USAGE.
+		$expectedAspects = array_merge( $expectedAspects, array( EntityUsage::ALL_USAGE ) );
 
 		$referencedPagesFinder = $this->getAffectedPagesFinder( $usage, $expectedAspects );
 
