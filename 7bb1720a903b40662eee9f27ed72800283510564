@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_bc3a3f31",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.variations.Variation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-10-02T01:20:01Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this one. Please check at http://usejsdoc.org/tags-event.html",
+      "revId": "7bb1720a903b40662eee9f27ed72800283510564",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
