@@ -37,6 +37,7 @@ class InMemoryEntityLookup implements EntityLookup {
 	}
 
 	/**
+	 * Registers an exception that will be thrown when a entity with the id in the exception is requested.
 	 * If an exception with the same EntityId was already present it will be replaced by the new one.
 	 *
 	 * @since 3.1
