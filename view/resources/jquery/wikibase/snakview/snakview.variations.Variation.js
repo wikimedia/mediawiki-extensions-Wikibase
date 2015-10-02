@@ -38,7 +38,7 @@
 	/**
 	 * @event afterdraw
 	 * Triggered on the `Variation` object after drawing the `Variation`.
-	 * @param {jQuery.Event} event
+	 * @type {jQuery.Event}
 	 */
 	var SELF = $.wikibase.snakview.variations.Variation = function WbSnakviewVariationsVariation(
 		viewState,

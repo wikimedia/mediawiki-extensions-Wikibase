@@ -19,12 +19,12 @@
 	 * @param {dataTypes.DataTypeStore} dataTypeStore
 	 *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
 	 *        object when interacting on a "value" `Variation`.
+	 * @param {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
+	 *        Required to store changed data.
 	 * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} entityIdHtmlFormatter
 	 *        Required by several views for rendering links to entities.
 	 * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
 	 *        Required by several views for rendering plain text references to entities.
-	 * @param {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
-	 *        Required to store changed data.
 	 * @param {wikibase.store.EntityStore} entityStore
 	 *        Required for dynamically gathering `Entity`/`Property` information.
 	 * @param {jQuery.valueview.ExpertStore} expertStore
