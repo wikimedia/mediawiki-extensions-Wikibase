@@ -65,7 +65,7 @@
 	 *
 	 * @param {wikibase.api.RepoApi} repoApi
 	 * @param {string} languageCode The language code of the ui language
-	 * @return {wikibase.store.CombiningEntityStore}
+	 * @return {wikibase.store.CachingEntityStore}
 	 */
 	function buildEntityStore( repoApi, languageCode ) {
 		return new wb.store.CachingEntityStore(
