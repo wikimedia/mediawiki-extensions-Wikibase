@@ -328,7 +328,7 @@
 	"apihelp-wbcreateclaim-description": "Crea asserzioni Wikibase.",
 	"apihelp-wbcreateclaim-param-entity": "ID dell'entità a cui stai aggiungendo l'asserzione",
 	"apihelp-wbcreateredirect-example-1": "Trasforma Q11 in un redirect a Q12",
-	"apihelp-wbparsevalue-param-values": "I valori d'analizzare",
+	"apihelp-wbparsevalue-param-values": "I valori da analizzare",
 	"apihelp-wbremoveclaims-description": "Rimuove asserzioni Wikibase.",
 	"apihelp-wbremovequalifiers-description": "Rimuove un qualificatore da un'asserzione.",
 	"apihelp-wbsearchentities-param-search": "Ricerca di questo testo.",
