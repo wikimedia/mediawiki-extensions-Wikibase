@@ -151,7 +151,6 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-redirectentity-fromid',
-				'class' => 'wb-input',
 			),
 			'child' => array(
 				'tag' => 'input',
@@ -163,7 +162,6 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-redirectentity-toid',
-				'class' => 'wb-input',
 			),
 			'child' => array(
 				'tag' => 'input',

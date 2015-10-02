@@ -255,7 +255,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'default' => $langCode,
 				'type' => 'select',
 				'id' => 'wb-newentity-language',
-				'cssclass' => 'wb-input',
 				'label-message' => 'wikibase-newentity-language'
 			),
 			'label' => array(
@@ -263,7 +262,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'default' => $this->label ?: '',
 				'type' => 'text',
 				'id' => 'wb-newentity-label',
-				'cssclass' => 'wb-input',
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
@@ -276,7 +274,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'default' => $this->description ?: '',
 				'type' => 'text',
 				'id' => 'wb-newentity-description',
-				'cssclass' => 'wb-input',
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(
@@ -289,7 +286,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'default' => $this->aliases ? implode( '|', $this->aliases ) : '',
 				'type' => 'text',
 				'id' => 'wb-newentity-aliases',
-				'cssclass' => 'wb-input',
 				'lang' => $langCode,
 				'dir' => $langDir,
 				'placeholder' => $this->msg(

@@ -200,7 +200,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'type' => 'text',
 				'id' => 'wb-itemdisambiguation-languagename',
 				'size' => 12,
-				'cssclass' => 'wb-input-text wb-language-suggester',
+				'cssclass' => 'wb-language-suggester',
 				'label-message' => 'wikibase-itemdisambiguation-lookup-language'
 			),
 			'label' => array(
@@ -209,7 +209,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'type' => 'text',
 				'id' => 'labelname',
 				'size' => 36,
-				'cssclass' => 'wb-input-text',
 				'autofocus',
 				'label-message' => 'wikibase-itemdisambiguation-lookup-label'
 			),
@@ -218,7 +217,6 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 				'default' => $this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
 				'type' => 'submit',
 				'id' => 'wb-itembytitle-submit',
-				'cssclass' => 'wb-input-button'
 			)
 		);
 

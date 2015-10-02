@@ -171,7 +171,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Label for the textfield holding the site ID. See also the Wikidata glossary for [[d:Wikidata:Glossary#sitelinks|sitelinks]].\n{{Identical|Site}}",
 	"wikibase-gotolinkedpage-lookup-item": "Label for the textfield holding the item ID. See also the Wikidata glossary for [[d:Wikidata:Glossary#Items|items]].",
 	"wikibase-gotolinkedpage-submit": "Text for the submit button in the search form which if successfully will go (redirect) to the specified linked page (sitelink).\n{{Identical|Go}}",
-	"wikibase-gotolinkedpage-summary": "Summary and explanation of the GoToLinkedPage.\n\nFor right-to-left languages swap \"right\" and \"left\".\n\n\"Site\" is {{msg-mw|wikibase-gotolinkedpage-lookup-site}}.\n\n\"item id\" is {{msg-mw|wikibase-gotolinkedpage-lookup-item}}.",
+	"wikibase-gotolinkedpage-summary": "Summary and explanation of the GoToLinkedPage.\n\n\"Site\" is {{msg-mw|wikibase-gotolinkedpage-lookup-site}}.\n\n\"item id\" is {{msg-mw|wikibase-gotolinkedpage-lookup-item}}.",
 	"wikibase-gotolinkedpage-error-page-not-found": "Error message when no page was found for the given input",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "Error message when the syntax of the ID is invalid",
 	"wikibase-gotolinkedpage-error-item-not-found": "Error message when there is no item with the given ID",

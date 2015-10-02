@@ -199,7 +199,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 				'name' => 'fromid',
 				'default' => $this->getRequest()->getVal( 'fromid' ),
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => 'wb-redirectentity-fromid',
 				'label-message' => 'wikibase-redirectentity-fromid'
 			),
@@ -207,7 +206,6 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 				'name' => 'toid',
 				'default' => $this->getRequest()->getVal( 'toid' ),
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => 'wb-redirectentity-toid',
 				'label-message' => 'wikibase-redirectentity-toid'
 			)

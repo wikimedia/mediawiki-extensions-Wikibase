@@ -162,7 +162,6 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-gotolinkedpage-itemid',
-				'class' => 'wb-input-text',
 				'name' => 'itemid',
 				'value' => $item
 			) );

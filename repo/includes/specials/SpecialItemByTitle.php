@@ -184,7 +184,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				'name' => 'site',
 				'default' => $siteId,
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => 'wb-itembytitle-sitename',
 				'size' => 12,
 				'label-message' => 'wikibase-itembytitle-lookup-site'
@@ -193,7 +192,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				'name' => 'page',
 				'default' => $page ?: '',
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => 'pagename',
 				'size' => 36,
 				'label-message' => 'wikibase-itembytitle-lookup-page'

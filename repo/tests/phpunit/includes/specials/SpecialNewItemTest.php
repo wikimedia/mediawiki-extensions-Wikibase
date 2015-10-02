@@ -36,7 +36,6 @@ class SpecialNewItemTest extends SpecialPageTestBase {
 			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-newentity-label',
-				'class' => 'wb-input',
 			),
 			'child' => array(
 				'tag' => 'input',
@@ -48,7 +47,6 @@ class SpecialNewItemTest extends SpecialPageTestBase {
 			'tag' => 'div',
 			'attributes' => array(
 				'id' => 'wb-newentity-description',
-				'class' => 'wb-input',
 			),
 			'child' => array(
 				'tag' => 'input',

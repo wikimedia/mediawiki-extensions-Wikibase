@@ -235,7 +235,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 				'name' => 'fromid',
 				'default' => $this->getRequest()->getVal( 'fromid' ),
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => 'wb-mergeitems-fromid',
 				'label-message' => 'wikibase-mergeitems-fromid'
 			),
@@ -243,7 +242,6 @@ class SpecialMergeItems extends SpecialWikibasePage {
 				'name' => 'toid',
 				'default' => $this->getRequest()->getVal( 'toid' ),
 				'type' => 'text',
-				'cssclass' => 'wb-input',
 				'id' => 'wb-mergeitems-toid',
 				'label-message' => 'wikibase-mergeitems-toid'
 			)
