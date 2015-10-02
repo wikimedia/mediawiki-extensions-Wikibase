@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_9ff175dc",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-02T07:33:33Z",
+      "side": 1,
+      "message": "Do we document the fact that this is null before _init is called?",
+      "revId": "81561995e5376857e0a0f6e6f99bce674e960e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
