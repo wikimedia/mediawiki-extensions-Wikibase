@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ecb373e_a89c3913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-02T15:19:07Z",
+      "side": 1,
+      "message": "What does this mean? Improve how? Also this patch touches way more files. Please be expressive and specific. Thanks.",
+      "revId": "5fee51a4f0fa947421c726f9b3a9563c67bd975c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_49e53b31",
         "filename": "repo/includes/specials/SpecialListProperties.php",
         "patchSetId": 8
@@ -13,6 +30,23 @@
       "writtenOn": "2015-09-03T17:28:31Z",
       "side": 1,
       "message": "I\u0027m noticing this due to seeing addshores comment asking to change this to PropertyId. That is not valid PHP though, as the method in the parent class has type hint EntityId. I\u0027m not sure why the code is not failing on the CI. Perhaps it does not run is strict mode?",
+      "revId": "5fee51a4f0fa947421c726f9b3a9563c67bd975c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_e89241ff",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialItemsWithoutSitelinksTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-02T15:19:07Z",
+      "side": 1,
+      "message": "What\u0027s the benefit of the start\u003d\"1\". This is the default anyway, as far as I know.",
       "revId": "5fee51a4f0fa947421c726f9b3a9563c67bd975c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
