@@ -27,7 +27,7 @@
 	 * Falls back to the language code.
 	 *
 	 * @param {string} langCode
-	 * @return string
+	 * @return {string}
 	 */
 	var getNativeLanguageName = function( langCode ) {
 		var languages = getLanguages();
@@ -40,7 +40,7 @@
 	 * Falls back to getNativeLanguageName, which may fall back to the language code.
 	 *
 	 * @param {string} langCode
-	 * @return string
+	 * @return {string}
 	 */
 	wb.getLanguageNameByCode = function( langCode ) {
 		var ulsLanguages = mw.config.get( 'wgULSLanguages' );
