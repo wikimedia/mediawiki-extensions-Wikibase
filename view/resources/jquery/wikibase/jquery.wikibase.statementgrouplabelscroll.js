@@ -282,7 +282,7 @@
 	 * Returns an array with the active instances of the widget. A widget instance is considered
 	 * active after its first initialization and inactive after its "destroy" function got called.
 	 *
-	 * @return $.wikibase.statementgrouplabelscroll[]
+	 * @return {$.wikibase.statementgrouplabelscroll[]}
 	 */
 	$.wikibase[ WIDGET_NAME ].activeInstances = function() {
 		return activeInstances.slice();
