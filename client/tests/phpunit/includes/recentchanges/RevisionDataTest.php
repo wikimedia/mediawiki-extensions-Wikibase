@@ -50,9 +50,25 @@ class RevisionDataTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'testrepo', $revisionData->getSiteId() );
 	}
 
+	public function testGetChangeParams() {
+		$revisionData = $this->newRevisionData();
+		$expected = array(
+			'page_id' => 5,
+			'rev_id' => 92,
+			'parent_id' => 90,
+		);
+		$this->assertEquals( $expected, $revisionData->getChangeParams() );
+	}
+
 	private function newRevisionData() {
 		$comment = 'Kitten Comment';
-		return new RevisionData( 'Cat', 5, 92, 90, '20130819111741', $comment, 'testrepo' );
+		$changeParams = array(
+			'page_id' => 5,
+			'rev_id' => 92,
+			'parent_id' => 90,
+		);
+
+		return new RevisionData( 'Cat', '20130819111741', $comment, 'testrepo', $changeParams );
 	}
 
 }
