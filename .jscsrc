@@ -20,8 +20,9 @@
 		"checkRedundantReturns": true,
 		//"requireReturnTypes": true,
 		//"checkTypes": "capitalizedNativeCase",
-		"checkRedundantAccess": true
-		//"requireNewlineAfterDescription": true
+		"checkRedundantAccess": true,
+		//"requireNewlineAfterDescription": true,
+		"requireReturnTypes": true
 	},
 
 	// ----

@@ -152,7 +152,7 @@
 		 * Returns a DOM structure for the selector's menu the `Snak` type can be chosen from.
 		 * @private
 		 *
-		 * @return jQuery
+		 * @return {jQuery}
 		 */
 		_buildMenu: function() {
 			var classPrefix = this.widgetBaseClass + '-menuitem-',
