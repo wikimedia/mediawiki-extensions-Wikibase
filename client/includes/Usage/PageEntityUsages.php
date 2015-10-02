@@ -85,7 +85,7 @@ class PageEntityUsages {
 	 *
 	 * @see getAspectKeys()
 	 *
-	 * string[] Sorted list of aspect names (without modifiers).
+	 * @return string[] Sorted list of aspect names (without modifiers).
 	 */
 	public function getAspects() {
 		$aspects = array();
@@ -105,7 +105,7 @@ class PageEntityUsages {
 	 *
 	 * @see getAspects()
 	 *
-	 * string[] Sorted list of full aspect names with modifiers.
+	 * @return string[] Sorted list of full aspect names with modifiers.
 	 */
 	public function getAspectKeys() {
 		$aspects = array();
@@ -174,6 +174,9 @@ class PageEntityUsages {
 		return $aspects;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function __toString() {
 		$s = 'Page ' . $this->getPageId() . ' uses (';
 		$s .= implode( '|', array_keys( $this->getUsages() ) );
