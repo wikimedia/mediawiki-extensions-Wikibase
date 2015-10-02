@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_1fdca54a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.propertyview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-02T07:45:40Z",
+      "side": 1,
+      "message": "I messed this up in my rebase.",
+      "revId": "f37b72f274e431723c0f1f1dd47a1e976ee8b8a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
