@@ -55,7 +55,7 @@ class SitesModuleWorker {
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
 	private function getSpecialSiteLinkGroups() {
 		return $this->settings->getSetting( 'specialSiteLinkGroups' );
