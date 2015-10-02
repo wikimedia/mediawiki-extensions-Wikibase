@@ -11,6 +11,7 @@ var PARENT = vp.ValueParser;
 
 /**
  * Returns a constructor for a ValueParser which parses using the given wb.api.ParseValueCaller.
+ *
  * @since 0.5
  *
  * This is necessary since valueParser.ValueParserStore returns a constructor, not an instance, and

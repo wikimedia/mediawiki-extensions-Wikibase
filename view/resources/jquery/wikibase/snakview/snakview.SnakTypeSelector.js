@@ -150,6 +150,7 @@
 
 		/**
 		 * Returns a DOM structure for the selector's menu the `Snak` type can be chosen from.
+		 *
 		 * @private
 		 *
 		 * @return {jQuery}
@@ -195,6 +196,7 @@
 
 		/**
 		 * Activates a `Snak` type in the menu.
+		 *
 		 * @private
 		 *
 		 * @param {string|null} snakType

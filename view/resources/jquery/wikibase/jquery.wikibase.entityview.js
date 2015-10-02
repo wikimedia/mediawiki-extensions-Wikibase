@@ -70,6 +70,7 @@ $.widget( 'wikibase.entityview', PARENT, {
 
 	/**
 	 * Main initialization actually calling parent's _create().
+	 *
 	 * @see jQuery.ui.TemplatedWidget._create
 	 * @protected
 	 */

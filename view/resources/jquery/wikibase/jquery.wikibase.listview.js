@@ -159,6 +159,7 @@ $.widget( 'wikibase.listview', PARENT, {
 
 	/**
 	 * Fills the list element with DOM structure for each list item.
+	 *
 	 * @private
 	 */
 	_createList: function() {
@@ -314,6 +315,7 @@ $.widget( 'wikibase.listview', PARENT, {
 
 	/**
 	 * Adds one list item into the list and renders it in the view.
+	 *
 	 * @private
 	 *
 	 * @param {*} liValue One list item widget's value.

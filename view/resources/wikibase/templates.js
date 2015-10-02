@@ -194,6 +194,7 @@
 	/**
 	 * Returns the parsed plain template. (Overridden due to IE8 returning objects instead of
 	 * strings from mw.Message's native plain() method.)
+	 *
 	 * @see mw.Message.plain
 	 *
 	 * @return {string}
@@ -217,6 +218,7 @@
 
 	/**
 	 * Returns a template filled with the specified parameters, similar to wfTemplate().
+	 *
 	 * @see mw.message
 	 *
 	 * @since 0.2
@@ -293,6 +295,7 @@
 	 * Fetches a template and fills it with specified parameters. The template has to have a single
 	 * root DOM element. All of its child nodes will then be appended to the jQuery object's DOM
 	 * nodes.
+	 *
 	 * @see mw.template
 	 *
 	 * @since 0.3

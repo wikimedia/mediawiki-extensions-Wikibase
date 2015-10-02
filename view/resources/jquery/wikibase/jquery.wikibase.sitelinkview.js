@@ -200,6 +200,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * Shortens the page name using the ellipsis character in order to prevent the page name from
 	 * wrapping.
+	 *
 	 * @private
 	 */
 	_shortenPageName: function() {

@@ -11,6 +11,7 @@ $.util = $.util || {};
  * Manages attaching an event handler to a target only once for a set of source objects.
  * Since an event is attached only once, the initial event handler (for the combination of target/
  * event name/event namespace) may not be overwritten later on.
+ *
  * @constructor
  */
 var SELF = $.util.EventSingletonManager = function UtilEventSingletonManager() {

@@ -8,6 +8,7 @@
 	 * Interface to a `jQuery.wikibase.snakview` instance that allows querying the `snakview` for
 	 * information as well as updating the `snakview`. Does not provide functions to actively change
 	 * the view but acts as a state object.
+	 *
 	 * @see jQuery.wikibase.snakview
 	 * @class jQuery.wikibase.snakview.ViewState
 	 * @since 0.4
@@ -35,6 +36,7 @@
 
 		/**
 		 * Notifies the `snakview` of a status update.
+		 *
 		 * @see jQuery.wikibase.snakview.updateStatus
 		 *
 		 * @param {string} status

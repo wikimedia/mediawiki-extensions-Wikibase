@@ -7,6 +7,7 @@ $.util = $.util || {};
  * Returns the directionality of a language by querying the Universal Language Selector. If ULS is
  * not available the HTML element's `dir` attribute is evaluated. If that is unset, `auto` is
  * returned.
+ *
  * @method jQuery.util.getDirectionality
  * @member jQuery.util
  * @licence GNU GPL v2+

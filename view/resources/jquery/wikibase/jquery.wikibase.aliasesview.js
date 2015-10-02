@@ -109,6 +109,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 
 	/**
 	 * Creates and initializes the `jQuery.ui.tagadata` widget.
+	 *
 	 * @private
 	 */
 	_initTagadata: function() {

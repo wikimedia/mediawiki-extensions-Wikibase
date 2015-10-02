@@ -239,6 +239,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 	/**
 	 * Returns an input element with initialized `entityselector` for selecting entities.
+	 *
 	 * @private
 	 *
 	 * @return {jQuery}
@@ -394,6 +395,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 	/**
 	 * Updates this `snakview`'s status.
+	 *
 	 * @since 0.4
 	 *
 	 * @param {string} status May either be 'valid' or 'invalid'
@@ -411,6 +413,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 	/**
 	 * Returns whether the `snakview`'s `Snak` is valid in its current state.
+	 *
 	 * @since 0.4
 	 *
 	 * @return {boolean}
@@ -422,6 +425,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Returns whether the current value matches the one the `snakview` was initialized with by
 	 * comparing the (deserialized) `Snak` objects of that stages.
+	 *
 	 * @since 0.5
 	 *
 	 * @return {boolean}
@@ -457,6 +461,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Returns the `entityselector` for choosing the `Snak`'s `Property`. Returns `null` if the
 	 * `Snak` is created and has a `Property` already. (Once created, the `Property` is immutable.)
+	 *
 	 * @private
 	 *
 	 * @return {jQuery.wikibase.entityselector|null}
@@ -471,6 +476,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Returns the `snaktypeselector` for choosing the `Snak`'s type. Returns `null` if the `Snak`
 	 * is created and has a `Property` already. (Once created, the `Property` is immutable.)
+	 *
 	 * @private
 	 *
 	 * @return {jQuery.wikibase.snakview.SnakTypeSelector|null}
@@ -536,6 +542,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * If a `wikibase.datamodel.Snak` instance is passed, the `snakview` is updated to represent the
 	 * `Snak`. If no parameter is supplied, the current `Snak` represented by the `snakview` is
 	 * returned.
+	 *
 	 * @since 0.4
 	 *
 	 * @param {wikibase.datamodel.Snak|null} [snak]
@@ -566,6 +573,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Sets/Gets the ID of the `Property` for the `Snak` represented by the `snakview`. If no
 	 * `Property` is set, `null` is returned.
+	 *
 	 * @since 0.3 (setter since 0.4)
 	 *
 	 * @param {string|null} [propertyId]
@@ -591,6 +599,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Sets/Gets the ID of the `Snak` type for the `Snak` represented by the `snakview`. If no
 	 * `Snak` type is set, `null` is returned.
+	 *
 	 * @see wikibase.datamodel.Snak.TYPE
 	 * @since 0.4
 	 *
@@ -619,6 +628,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Returns the `snakview`'s `Variation` object required for presenting the current `Snak` type.
 	 * If a `Snak` type has not been defined yet, `null` is returned.
+	 *
 	 * @since 0.4
 	 *
 	 * @return {jQuery.wikibase.snakview.variations.Variation|null}
@@ -629,6 +639,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 	/**
 	 * Updates the `Variation` according to the widget's current value.
+	 *
 	 * @since 0.5
 	 */
 	updateVariation: function() {
@@ -687,6 +698,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 	/**
 	 * (Re-)renders the widget.
+	 *
 	 * @since 0.4
 	 */
 	draw: function() {
@@ -699,6 +711,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * (Re-)renders the Property DOM structure according to the current value. The `Property` DOM
 	 * is not (re-)rendered if changing the `Property` is locked via the `locked` option and
 	 * previously generated HTML is detected.
+	 *
 	 * @since 0.5
 	 *
 	 * @return {Object} jQuery.Promise
@@ -732,6 +745,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Retrieves the DOM structure representing the `Property` of the `Snak` represented by the
 	 * `snakview`.
+	 *
 	 * @private
 	 *
 	 * @param {string} [propertyId]
@@ -767,6 +781,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	/**
 	 * Creates the DOM structure specific for a `Property`, a generic DOM
 	 * structure or an input element.
+	 *
 	 * @private
 	 *
 	 * @param {string} propertyLabel Rendered label for the `Property`
@@ -799,6 +814,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * Updates the `SnakTypeSelector` for choosing the `Snak` type. The `SnakTypeSelector` DOM
 	 * is not (re-)rendered if changing the `Snak` type is locked via the `locked` option and
 	 * previously generated HTML is detected.
+	 *
 	 * @since 0.4
 	 */
 	drawSnakTypeSelector: function() {
@@ -842,6 +858,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 	/**
 	 * Renders the `Variation` or placeholder text if no proper `Variation` is available.
+	 *
 	 * @since 0.4
 	 */
 	drawVariation: function() {

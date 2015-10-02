@@ -219,6 +219,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	 * supposed to be removed as soon as drop-down edit buttons are implemented with the mechanism
 	 * toggling the list's visibility while not starting edit mode will be part of the drop-down
 	 * menu.
+	 *
 	 * @private
 	 */
 	_createEntitytermsforlanguagelistviewToggler: function() {

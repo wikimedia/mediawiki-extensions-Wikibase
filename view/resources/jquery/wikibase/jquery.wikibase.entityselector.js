@@ -23,6 +23,7 @@ var IS_MODULE_LOADED = (
 /**
  * Returns a message from the MediaWiki context if the `entityselector` module has been loaded.
  * If it has not been loaded, the corresponding string defined in the options will be returned.
+ *
  * @ignore
  *
  * @param {string} msgKey
@@ -191,6 +192,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 
 	/**
 	 * Determines whether a term matches a label considering the `caseSensitive` option.
+	 *
 	 * @protected
 	 *
 	 * @param {string} term
@@ -206,6 +208,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 
 	/**
 	 * Create and return the data object for the api call.
+	 *
 	 * @protected
 	 *
 	 * @param {string} term
@@ -227,6 +230,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	/**
 	 * Initializes the default source pointing the the `wbsearchentities` API module via the URL
 	 * provided in the options.
+	 *
 	 * @protected
 	 *
 	 * @return {Function}
@@ -279,6 +283,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 
 	/**
 	 * Generates the label for a suggester entity.
+	 *
 	 * @protected
 	 *
 	 * @param {Object} entityStub
@@ -429,6 +434,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 
 	/**
 	 * Selects an entity.
+	 *
 	 * @protected
 	 *
 	 * @param {Object} entityStub
@@ -453,6 +459,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 
 /**
  * Default `entityselector` suggestion menu item.
+ *
  * @class jQuery.wikibase.entityselector.Item
  * @extends jQuery.ui.ooMenu.Item
  *
