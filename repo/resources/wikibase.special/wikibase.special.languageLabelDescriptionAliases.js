@@ -13,7 +13,7 @@
 			return;
 		}
 
-		$lang = $( document.getElementsByName( 'lang' ) ).closest( '.wb-input' );
+		$lang = $( document.getElementsByName( 'lang' ) ).closest( '.oo-ui-inputWidget' );
 		if ( $lang.length === 0 ) {
 			return;
 		}
@@ -39,7 +39,7 @@
 		fieldCount = 0;
 		$.each( fields, function ( i ) {
 			fields[ i ].$element = $( document.getElementsByName( fields[ i ].name ) )
-				.closest( '.wb-input' );
+				.closest( '.oo-ui-inputWidget' );
 			fieldCount += fields[ i ].$element.length;
 		} );
 		if ( fieldCount === 0 ) {
