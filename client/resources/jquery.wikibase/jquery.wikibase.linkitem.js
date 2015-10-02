@@ -247,7 +247,7 @@ $.widget( 'wikibase.linkitem', {
 	 * Gets an object with all linkable sites despite the current one (as pages on the same wiki
 	 * cannot be linked).
 	 *
-	 * @return {object}
+	 * @return {Object}
 	 */
 	_getLinkableSites: function() {
 		var sites,
@@ -397,7 +397,7 @@ $.widget( 'wikibase.linkitem', {
 	 * Handles the data from getNewlyLinkedPages and either creates a new item or shows the user a
 	 * confirmation form in case an item exists already.
 	 *
-	 * @param {object} entity
+	 * @param {Object} entity
 	 */
 	_onConfirmationDataLoad: function( entity ) {
 		var i, itemLink;
@@ -446,7 +446,7 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * Let the user verify this is indeed the entity to link with and link it after.
 	 *
-	 * @param {object} entity
+	 * @param {Object} entity
 	 * @param {number} siteLinkCount Number of sitelinks attached to the entity
 	 * @param {string} itemLink Link to the entity on the repo
 	 */
@@ -520,7 +520,7 @@ $.widget( 'wikibase.linkitem', {
 	 * Creates a table row for a site link.
 	 *
 	 * @param {wb.Site} site
-	 * @param {object} entitySitelinks
+	 * @param {Object} entitySitelinks
 	 *
 	 * @return {jQuery}
 	 */

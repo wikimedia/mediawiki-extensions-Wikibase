@@ -156,8 +156,8 @@
 		 * Verifies if mw.wbTemplate() delivers an expected result.
 		 *
 		 * @param {Array} params
-		 * @param {String} template
-		 * @param {String|Array} expected
+		 * @param {string} template
+		 * @param {string|Array} expected
 		 */
 		var verifyTemplate = function( params, template, expected ) {
 			var key = 'test';
@@ -170,8 +170,8 @@
 			 * which seems to be intended. However, for the need of cross-browser comparison we just
 			 * convert each < and > character.
 			 *
-			 * @param {String} string
-			 * @return {String}
+			 * @param {string} string
+			 * @return {string}
 			 */
 			function replaceChevrons( string ) {
 				return string.replace( /</g, '&lt;' ).replace( />/g, '&gt;' );
