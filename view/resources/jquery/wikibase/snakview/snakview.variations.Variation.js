@@ -35,11 +35,6 @@
 	 *
 	 * @throws {Error} if a required parameter is not specified properly.
 	 */
-	/**
-	 * @event afterdraw
-	 * Triggered on the `Variation` object after drawing the `Variation`.
-	 * @param {jQuery.Event} event
-	 */
 	var SELF = $.wikibase.snakview.variations.Variation = function WbSnakviewVariationsVariation(
 		viewState,
 		$viewPort,
@@ -64,6 +59,11 @@
 
 		this._init();
 	};
+	/**
+	 * @event afterdraw
+	 * Triggered on the `Variation` object after drawing the `Variation`.
+	 * @param {jQuery.Event} event
+	 */
 	$.extend( SELF.prototype, {
 		/**
 		 * A unique class for this `Variation`, applied to the `Variation` DOM's `class` attribute.
