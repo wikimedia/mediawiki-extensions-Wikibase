@@ -62,16 +62,14 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 	public function provideGetByPropertyId() {
 		$cases = array();
 
-		$propertyIdProviders = $this->getPropertyIdProviders();
-
 		$cases[] = array(
-			$propertyIdProviders,
+			$this->getPropertyIdProviders(),
 			'P42',
 			array( 'abc', 'jkl' )
 		);
 
 		$cases[] = array(
-			$propertyIdProviders,
+			$this->getPropertyIdProviders(),
 			'P23',
 			array( 'def' )
 		);
@@ -105,13 +103,11 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 	public function provideHasPropertyId() {
 		$cases = array();
 
-		$propertyIdProviders = $this->getPropertyIdProviders();
-
-		$cases[] = array( $propertyIdProviders, 'P42', true );
-		$cases[] = array( $propertyIdProviders, 'P23', true );
-		$cases[] = array( $propertyIdProviders, 'P15', true );
-		$cases[] = array( $propertyIdProviders, 'P10', true );
-		$cases[] = array( $propertyIdProviders, 'P11', false );
+		$cases[] = array( $this->getPropertyIdProviders(), 'P42', true );
+		$cases[] = array( $this->getPropertyIdProviders(), 'P23', true );
+		$cases[] = array( $this->getPropertyIdProviders(), 'P15', true );
+		$cases[] = array( $this->getPropertyIdProviders(), 'P10', true );
+		$cases[] = array( $this->getPropertyIdProviders(), 'P11', false );
 
 		return $cases;
 	}
