@@ -7,9 +7,9 @@
 
 	var MODULE = wb.entityChangers;
 	/**
-	 * @param {wikibase.api.RepoApi}
-	 * @param {wikibase.RevisionStore}
-	 * @param {wikibase.datamodel.Entity}
+	 * @param {wikibase.api.RepoApi} api
+	 * @param {wikibase.RevisionStore} revisionStore
+	 * @param {wikibase.datamodel.Entity} entity
 	 */
 	var SELF = MODULE.LabelsChanger = function WbEntityChangersLabelsChanger( api, revisionStore, entity ) {
 		this._api = api;

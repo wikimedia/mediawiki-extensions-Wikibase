@@ -13,7 +13,7 @@
 	"jsDoc": {
 		// what we don't yet follow is commented out
 		//"checkAnnotations": "jsduck5",
-		//"checkParamNames": true,
+		"checkParamNames": true,
 		"requireParamTypes": true,
 		"checkRedundantParams": true,
 		//"checkReturnTypes": true,
