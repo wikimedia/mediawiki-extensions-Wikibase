@@ -10,6 +10,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Language;
 use Message;
 use MWException;
+use SiteStore;
 
 /**
  * Creates an array structure with comment information for storing
@@ -25,21 +26,28 @@ use MWException;
 class SiteLinkCommentCreator {
 
 	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
 	 * @var Language
 	 */
 	private $language;
 
 	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
+	 * @var string
+	 */
+	private $siteId;
+
+	/**
 	 * @param Language $language
+	 * @param SiteStore $siteStore
 	 * @param string $siteId
 	 */
-	public function __construct( Language $language, $siteId ) {
+	public function __construct( Language $language, SiteStore $siteStore, $siteId ) {
 		$this->siteId = $siteId;
+		$this->siteStore = $siteStore;
 		$this->language = $language;
 	}
 
@@ -239,8 +247,18 @@ class SiteLinkCommentCreator {
 	 * @return string wikitext interwiki link
 	 */
 	private function getSitelinkWikitext( $siteId, $pageTitle ) {
-		//TODO: make this nicer; The siteId may not be the nav ID!
-		return "[[:$siteId:$pageTitle]]";
+		$interwikiId = $siteId;
+
+		// Try getting the interwiki id from the Site object of the link target
+		$site = $this->siteStore->getSite( $siteId );
+		if ( $site ) {
+			$iw_ids = $site->getInterwikiIds();
+			if ( isset( $iw_ids[0] ) ) {
+				$interwikiId = $iw_ids[0];
+			}
+		}
+
+		return "[[:$interwikiId:$pageTitle]]";
 	}
 
 	/**

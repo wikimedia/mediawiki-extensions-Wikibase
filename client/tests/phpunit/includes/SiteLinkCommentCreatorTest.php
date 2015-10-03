@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
+use Wikibase\Test\MockSiteStore;
 use Wikibase\Test\TestChanges;
 
 /**
@@ -27,7 +28,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getEditCommentProvider
 	 */
 	public function testGetEditComment( Diff $siteLinkDiff, $action, $expected ) {
-		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), 'enwiki' );
+		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), MockSiteStore::newFromTestSites(), 'enwiki' );
 		$comment = $commentCreator->getEditComment( $siteLinkDiff, $action );
 
 		$this->assertEquals( $expected, $comment );
@@ -217,12 +218,12 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 		$updates[] = array(
 			$this->getLinkChangeDiff(),
-			'(wikibase-comment-sitelink-change: [[:enwiki:Japan]], [[:enwiki:Tokyo]])',
+			'(wikibase-comment-sitelink-change: [[:en:Japan]], [[:en:Tokyo]])',
 		);
 
 		$updates[] = array(
 			$this->getOldLinkChangeDiff(),
-			'(wikibase-comment-sitelink-change: [[:enwiki:Japan]], [[:enwiki:Tokyo]])',
+			'(wikibase-comment-sitelink-change: [[:en:Japan]], [[:en:Tokyo]])',
 		);
 
 		$updates[] = array(
@@ -232,7 +233,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 		$updates[] = array(
 			$this->getAddLinkDiff(),
-			'(wikibase-comment-sitelink-add: [[:dewiki:Japan]])',
+			'(wikibase-comment-sitelink-add: [[:de:Japan]])',
 		);
 
 		$updates[] = array(
@@ -242,12 +243,12 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 		$updates[] = array(
 			$this->getRemoveLinkDiff(),
-			'(wikibase-comment-sitelink-remove: [[:dewiki:Japan]])',
+			'(wikibase-comment-sitelink-remove: [[:de:Japan]])',
 		);
 
 		$updates[] = array(
 			$this->getChangeLinkDiff(),
-			'(wikibase-comment-sitelink-change: [[:dewiki:Japan]], [[:dewiki:Tokyo]])',
+			'(wikibase-comment-sitelink-change: [[:de:Japan]], [[:de:Tokyo]])',
 		);
 
 		return $updates;
