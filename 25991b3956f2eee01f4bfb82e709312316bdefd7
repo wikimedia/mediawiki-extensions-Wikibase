@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_b8624235",
+        "filename": "client/tests/phpunit/includes/Changes/AffectedPagesFinderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-10-03T02:41:18Z",
+      "side": 1,
+      "message": "Why not pass in the full expected value?",
+      "revId": "25991b3956f2eee01f4bfb82e709312316bdefd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
