@@ -31,6 +31,7 @@
 	"wikibase-description-empty": "Апісаньне ня вызначанае",
 	"wikibase-description-edit-placeholder": "увядзіце апісаньне",
 	"wikibase-description-edit-placeholder-language-aware": "увядзіце апісаньне мовай: $1",
+	"wikibase-aliases-edit-placeholder": "увядзіце сынонімы",
 	"wikibase-aliases-edit-placeholder-language-aware": "увядзіце сынонімы мовай: $1",
 	"wikibase-diffview-reference": "крыніца",
 	"wikibase-diffview-rank": "ранг",

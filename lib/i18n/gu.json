@@ -3,10 +3,12 @@
 		"authors": [
 			"KartikMistry",
 			"NehalDaveND",
-			"Ashok modhvadia"
+			"Ashok modhvadia",
+			"Dsvyas"
 		]
 	},
 	"wikibase-error-unexpected": "ક્ષતિ: $1",
+	"wikibase-language-fallback-transliteration-hint": "$1 (લિપ્યંતરિત)",
 	"wikibase-quantitydetails-amount": "રકમ",
 	"wikibase-timedetails-time": "સમય",
 	"wikibase-timedetails-timezone": "સમયવિસ્તાર",
@@ -24,5 +26,11 @@
 	"wikibase-tooltip-error-details": "વિવરણ",
 	"wikibase-validator-invalid": "અમાન્ય મૂલ્ય",
 	"datatypes-type-wikibase-property": "ગુણધર્મ",
-	"wikibase-time-precision-10annum": "$1s"
+	"wikibase-time-precision-10annum": "$1s",
+	"wikibase-entity-summary-wbsetitem": "નવી વસ્તુ બનાવવામાં આવી",
+	"wikibase-entity-summary-wbsetreference": "સંદર્ભ ગોઠવો",
+	"wikibase-item-summary-wbcreate-new": "નવી વસ્તુ બનાવવામાં આવી",
+	"wikibase-item-summary-wbeditentity": "નવી વસ્તુ બનાવવામાં આવી",
+	"wikibase-item-summary-wbeditentity-create": "નવી વસ્તુ બનાવવામાં આવી",
+	"wikibase-item-summary-wbeditentity-override": "વસ્તુ બનાવવામાં આવી"
 }
