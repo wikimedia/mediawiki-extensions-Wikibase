@@ -118,13 +118,28 @@ class ParserOutputDataUpdater {
 		}
 
 		if ( $itemId ) {
-			/** @var Item $item */
-			$item = $this->entityLookup->getEntity( $itemId );
-			$siteLink = $item->getSiteLinkList()->getBySiteId( $this->siteId );
+			$this->setBadgesProperty( $itemId, $out );
+		}
+	}
 
-			foreach ( $siteLink->getBadges() as $badge ) {
-				$out->setProperty( 'wikibase-badge-' . $badge->getSerialization(), true );
-			}
+	private function setBadgesProperty( ItemId $itemId, ParserOutput $out ) {
+		/** @var Item $item */
+		$item = $this->entityLookup->getEntity( $itemId );
+
+		if ( !$item->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
+			// Probably some sort of race condition or data inconsistency, better log a warning
+			wfLogWarning(
+				'According to a SiteLinkLookup ' . $itemId->getSerialization() .
+				' is linked to ' . $this->siteId . ' while it apparently is not.'
+			);
+
+			return;
+		}
+
+		$siteLink = $item->getSiteLinkList()->getBySiteId( $this->siteId );
+
+		foreach ( $siteLink->getBadges() as $badge ) {
+			$out->setProperty( 'wikibase-badge-' . $badge->getSerialization(), true );
 		}
 	}
 
