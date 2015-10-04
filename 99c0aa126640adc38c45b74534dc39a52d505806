@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_6cc97c54",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-10-04T09:25:00Z",
+      "side": 1,
+      "message": "addNewSiteLink is nicer :)",
+      "revId": "99c0aa126640adc38c45b74534dc39a52d505806",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_0cd8f820",
+        "filename": "client/tests/phpunit/includes/Usage/SiteLinkUsageLookupTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-10-04T09:25:00Z",
+      "side": 1,
+      "message": "You could put this thing in a class constant, so you do not have it both here and in getSiteLinkLookup, and don\u0027t have have to use the use.",
+      "revId": "99c0aa126640adc38c45b74534dc39a52d505806",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
