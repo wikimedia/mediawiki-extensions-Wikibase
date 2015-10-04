@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Test\TestChanges;
@@ -67,11 +66,12 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		return $titleFactory;
 	}
 
-	private function getAffectedPagesFinder( array $usage ) {
+	private function getAffectedPagesFinder( array $usage, array $expectedAspects = array() ) {
 		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
 
 		$usageLookup->expects( $this->any() )
 			->method( 'getPagesUsing' )
+			->with( $this->anything(), $expectedAspects )
 			->will( $this->returnValue( new ArrayIterator( $usage ) ) );
 
 		$affectedPagesFinder = new AffectedPagesFinder(
@@ -202,6 +202,9 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	public function getAffectedUsagesByPageProvider() {
+		$labelUsageDe = EntityUsage::LABEL_USAGE . '.de';
+		$labelUsageEn = EntityUsage::LABEL_USAGE . '.en';
+
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
 		$q1 = new ItemId( 'Q1' );
@@ -259,6 +262,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array(
 				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
 			),
+			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array(), // No usages recorded yet
 			$changeFactory->newFromUpdate(
 				ItemChange::ADD,
@@ -272,6 +276,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
 				new PageEntityUsages( 2, array( $q1TitleUsage ) ),
 			),
+			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array( $page1Q1Usages, $page2Q1Usages ), // "1" was recorded to be linked to Q1 and the local title used on page "2"
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -285,6 +290,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				new PageEntityUsages( 1, array( $q2TitleUsage ) ),
 				new PageEntityUsages( 2, array( $q2TitleUsage, $q2SitelinkUsage ) ),
 			),
+			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -298,6 +304,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
 				new PageEntityUsages( 2, array( $q1SitelinkUsage ) ),
 			),
+			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array(),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -311,6 +318,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
 				new PageEntityUsages( 2, array( $q1SitelinkUsage, $q1TitleUsage ) ),
 			),
+			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -324,6 +332,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array(
 				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
 			),
+			array( EntityUsage::SITELINK_USAGE  ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate( ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
@@ -335,6 +344,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				new PageEntityUsages( 1, array( $q2TitleUsage ) ),
 				new PageEntityUsages( 2, array( $q2TitleUsage, $q2SitelinkUsage ) ),
 			),
+			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::REMOVE,
@@ -348,6 +358,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array(
 				new PageEntityUsages( 2, array( $q2SitelinkUsage ) ),
 			),
+			array( EntityUsage::SITELINK_USAGE ),
 			array( $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -361,6 +372,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$cases['other language label change on Q1 (not used on any page)'] = array(
 			array(),
+			array( $labelUsageDe ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -373,6 +385,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array(
 				new PageEntityUsages( 2, array( $q2OtherUsage ) ),
 			),
+			array( EntityUsage::OTHER_USAGE ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -386,6 +399,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				new PageEntityUsages( 1, array( $q2LabelUsage_de ) ),
 				new PageEntityUsages( 2, array( $q2LabelUsage_de ) ),
 			),
+			array( $labelUsageDe ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -398,6 +412,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array(
 				new PageEntityUsages( 2, array( $q1LabelUsage_en ) ),
 			),
+			array( $labelUsageEn ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -411,6 +426,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				new PageEntityUsages( 1, array( $q2LabelUsage_en ) ),
 				new PageEntityUsages( 2, array( $q2LabelUsage_en ) ),
 			),
+			array( $labelUsageEn ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
@@ -425,8 +441,11 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getAffectedUsagesByPageProvider
 	 */
-	public function testGetAffectedUsagesByPage( array $expected, array $usage, ItemChange $change ) {
-		$referencedPagesFinder = $this->getAffectedPagesFinder( $usage );
+	public function testGetAffectedUsagesByPage( array $expected, array $expectedAspects, array $usage, ItemChange $change ) {
+		// @FIXME: All changes should affect pages with ALL_USAGE!
+		// $expectedAspects = array_merge( $expectedAspects, array( EntityUsage::ALL_USAGE ) );
+
+		$referencedPagesFinder = $this->getAffectedPagesFinder( $usage, $expectedAspects );
 
 		$actual = $referencedPagesFinder->getAffectedUsagesByPage( $change );
 
