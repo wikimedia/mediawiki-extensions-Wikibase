@@ -11,6 +11,7 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -203,7 +204,7 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 		$this->assertTrue( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
 	}
 
-	public function testUpdateBadgesPropertyRemovesPreviousData() {
+	public function testUpdateBadgesProperty_removesPreviousData() {
 		$parserOutput = new ParserOutput();
 		$parserOutput->setProperty( 'wikibase-badge-Q17', true );
 
@@ -213,6 +214,38 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 
 		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
 		$this->assertFalse( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
+	}
+
+	public function testUpdateBadgesProperty_inconsistentSiteLinkLookup() {
+		$parserOutput = new ParserOutput();
+
+		$title = Title::newFromText( 'Foo sr' );
+
+		$siteLinkLookup = new MockRepository();
+		$mockRepoNoSiteLinks = new MockRepository();
+		foreach ( $this->getItems() as $item ) {
+			$siteLinkLookup->putEntity( $item );
+
+			$itemNoSiteLinks = unserialize( serialize( $item ) );
+			$itemNoSiteLinks->setSiteLinkList( new SiteLinkList() );
+
+			$mockRepoNoSiteLinks->putEntity( $itemNoSiteLinks );
+		}
+
+		$parserOutputDataUpdater = new ParserOutputDataUpdater(
+			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
+			$siteLinkLookup,
+			$mockRepoNoSiteLinks,
+			'srwiki'
+		);
+
+		// Suppress warnings as this is supposed to throw one.
+		\MediaWiki\suppressWarnings();
+		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		\MediaWiki\restoreWarnings();
+
+		// Stuff didn't blow up
+		$this->assertTrue( true );
 	}
 
 }
