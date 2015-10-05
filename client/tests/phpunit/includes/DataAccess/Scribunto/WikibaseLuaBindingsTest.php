@@ -49,15 +49,12 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param UsageAccumulator|null $usageAccumulator
-	 * @param ParserOptions|null $parserOptions
-	 *
 	 * @return WikibaseLuaBindings
 	 */
 	private function getWikibaseLuaBindings(
 		EntityLookup $entityLookup,
 		SiteLinkLookup $siteLinkLookup,
-		UsageAccumulator $usageAccumulator = null,
-		ParserOptions $parserOptions = null
+		UsageAccumulator $usageAccumulator = null
 	) {
 		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelDescriptionLookup->expects( $this->any() )
@@ -75,7 +72,6 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			new SettingsArray(),
 			$labelDescriptionLookup,
 			$usageAccumulator ?: new HashUsageAccumulator(),
-			$parserOptions ?: new ParserOptions(),
 			"enwiki" // siteId
 		);
 	}
@@ -242,31 +238,6 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ), 'title usage' );
 		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::LABEL_USAGE ), 'label usage' );
 		$this->assertFalse( $this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::ALL_USAGE ), 'all usage' );
-	}
-
-	public function testGetUserLang() {
-		$parserOptions = new ParserOptions();
-		$parserOptions->setUserLang( Language::factory( 'ru' ) );
-
-		$self = $this;  // PHP 5.3 ...
-		$cacheSplit = false;
-		$parserOptions->registerWatcher(
-			function( $optionName ) use ( $self, &$cacheSplit ) {
-				$self->assertSame( 'userlang', $optionName );
-				$cacheSplit = true;
-			}
-		);
-
-		$wikibaseLuaBindings = $this->getWikibaseLuaBindings(
-			new MockRepository(),
-			new HashSiteLinkStore(),
-			new HashUsageAccumulator(),
-			$parserOptions
-		);
-
-		$userLang = $wikibaseLuaBindings->getUserLang();
-		$this->assertSame( 'ru', $userLang );
-		$this->assertTrue( $cacheSplit );
 	}
 
 	protected function getItem() {
