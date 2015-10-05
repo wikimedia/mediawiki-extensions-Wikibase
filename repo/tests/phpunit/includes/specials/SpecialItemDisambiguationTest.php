@@ -6,7 +6,7 @@ use FauxRequest;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndexEntry;
 
@@ -64,7 +64,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				),
 			),
 		);
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\TermIndexSearchInteractor' )
+		$mock = $this->getMockBuilder( 'Wikibase\Lib\Interactors\TermIndexSearchInteractor' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
