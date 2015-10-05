@@ -1,5 +1,9 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.1.0 (dev)
+
+* Added `InMemoryEntityLookup::addException`
+
 ## Version 3.0.0 (2015-09-16)
 
 Breaking changes:
