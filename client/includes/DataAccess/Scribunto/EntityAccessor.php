@@ -119,6 +119,8 @@ class EntityAccessor {
 
 		$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 
+		$this->usageAccumulator->addAllUsage( $entityId );
+
 		try {
 			$entityObject = $this->entityLookup->getEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
@@ -140,7 +142,6 @@ class EntityAccessor {
 		$this->renumber( $entityArr );
 		$entityArr['schemaVersion'] = 2;
 
-		$this->usageAccumulator->addAllUsage( $entityId );
 		return $entityArr;
 	}
 

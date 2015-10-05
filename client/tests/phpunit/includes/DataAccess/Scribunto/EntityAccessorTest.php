@@ -102,7 +102,6 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$itemId = $item->getId();
 
 		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $item );
 
 		$usages = new HashUsageAccumulator();
 		$entityAccessor = $this->getEntityAccessor( $entityLookup, $usages );
