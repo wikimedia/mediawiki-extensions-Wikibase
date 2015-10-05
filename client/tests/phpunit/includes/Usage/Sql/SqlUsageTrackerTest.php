@@ -73,10 +73,6 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 		$this->trackerTester->testTrackUsedEntities();
 	}
 
-	public function testRemoveEntities() {
-		$this->trackerTester->testRemoveEntities();
-	}
-
 	public function testPruneStaleUsages() {
 		$this->trackerTester->testPruneStaleUsages();
 	}

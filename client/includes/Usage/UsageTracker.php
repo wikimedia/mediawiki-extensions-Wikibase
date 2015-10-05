@@ -41,15 +41,4 @@ interface UsageTracker {
 	 */
 	public function pruneStaleUsages( $pageId, $lastUpdatedBefore );
 
-	/**
-	 * Removes usage tracking for the given set of entities.
-	 * This is used typically when entities were deleted.
-	 * Calling this method more than once on the same entity has no effect.
-	 *
-	 * @param EntityId[] $entityIds
-	 *
-	 * @throws UsageTrackerException
-	 */
-	public function removeEntities( array $entityIds );
-
 }

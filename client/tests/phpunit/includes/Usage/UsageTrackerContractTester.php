@@ -88,32 +88,6 @@ class UsageTrackerContractTester {
 		// the provided usage entries will be tracked, and are updated to the new timestamp.
 	}
 
-	public function testRemoveEntities() {
-		$q3 = new ItemId( 'Q3' );
-		$q4 = new ItemId( 'Q4' );
-		$q5 = new ItemId( 'Q5' );
-
-		$usages = array(
-			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
-			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
-
-		$entitiesToRemove = array( $q3, $q5 );
-		$expectedUsage = array(
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
-		);
-
-		$this->tracker->trackUsedEntities( 23, $usages, '20150102030405' );
-		$this->tracker->removeEntities( $entitiesToRemove );
-
-		$oldUsages = $this->getUsages( 23, '20150102030405' );
-		$this->assertSameUsages( $expectedUsage, $oldUsages );
-
-		$this->tracker->trackUsedEntities( 24, array(), '20150102030405' );
-	}
-
 	public function testPruneStaleUsages() {
 		$t1 = '20150111000000';
 		$t2 = '20150222000000';

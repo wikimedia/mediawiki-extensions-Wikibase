@@ -38,15 +38,6 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::removeEntities
-	 *
-	 * @param EntityId[] $entityIds
-	 */
-	public function removeEntities( array $entityIds ) {
-		// no-op
-	}
-
-	/**
 	 * @see UsageTracker::getUsagesForPage
 	 *
 	 * @param int $pageId
