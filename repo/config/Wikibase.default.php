@@ -38,6 +38,10 @@ return call_user_func( function() {
 		// Items allowed to be used as badges pointing to their CSS class names
 		'badgeItems' => array(),
 
+		// List of image property id strings, in order of preference, that should be considered for
+		// the "page_image" page property.
+		'preferredPageImagesProperties' => array(),
+
 		// Number of seconds for which data output shall be cached.
 		// Note: keep that low, because such caches cannot always be purged easily.
 		'dataSquidMaxage' => $wgSquidMaxage,
