@@ -5,7 +5,6 @@ namespace Wikibase\Lib;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
-use Html;
 use InvalidArgumentException;
 use Message;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
@@ -17,36 +16,13 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
- * PropertyValueSnakFormatter is a formatter for PropertyValueSnaks. It allows formatters to
- * be applied either per property data type or, as a fallback, per data value type.
+ * PropertyValueSnakFormatter is a formatter for PropertyValueSnaks. This is essentially a
+ * SnakFormatter adapter for TypedValueFormatter.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
-
-	/**
-	 * Options key for controlling error handling.
-	 */
-	const OPT_ON_ERROR = 'on-error';
-
-	/**
-	 * Value for the OPT_ON_ERROR option indicating that recoverable
-	 * errors should be ignored.
-	 */
-	const ON_ERROR_IGNORE = 'ignore';
-
-	/**
-	 * Value for the OPT_ON_ERROR option indicating that recoverable
-	 * errors should cause a warning to be show to the user.
-	 */
-	const ON_ERROR_WARN = 'warn';
-
-	/**
-	 * Value for the OPT_ON_ERROR option indicating that recoverable
-	 * errors should cause the formatting to fail with an exception
-	 */
-	const ON_ERROR_FAIL = 'fail';
+class PropertyValueSnakFormatter implements SnakFormatter {
 
 	/**
 	 * @var string
@@ -99,19 +75,6 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		$this->valueFormatter = $valueFormatter;
 		$this->typeLookup = $typeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
-
-		$this->options->defaultOption( self::OPT_LANG, 'en' );
-		$this->options->defaultOption( self::OPT_ON_ERROR, self::ON_ERROR_WARN );
-	}
-
-	private function failOnErrors() {
-		return $this->options->getOption( self::OPT_ON_ERROR )
-			=== self::ON_ERROR_FAIL;
-	}
-
-	private function ignoreErrors() {
-		return $this->options->getOption( self::OPT_ON_ERROR )
-			=== self::ON_ERROR_IGNORE;
 	}
 
 	/**
@@ -137,44 +100,15 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		try {
 			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
 			$expectedDataValueType = $this->getDataValueTypeForPropertyDataType( $propertyType );
-
-			$warning = $this->checkForWarning( $value, $expectedDataValueType );
 		} catch ( PropertyDataTypeLookupException $ex ) {
-			if ( $this->failOnErrors() ) {
-				throw $ex;
-			}
-
-			$warning = new Message(
-				'wikibase-snakformatter-property-not-found',
-				array( $snak->getPropertyId()->getSerialization() )
-			);
+			// @todo: wrap PropertyDataTypeLookupException in a FormatterException,
+			// handle that exception in ErrorHandlingSnakFormatter
+			throw $ex;
 		}
 
-		if ( isset( $warning ) && !$this->ignoreErrors() ) {
-			$text = $this->formatValueWithWarning( $value, $warning );
-		} else {
-			$text = $this->formatValue( $value, $propertyType );
-		}
+		$this->checkValueType( $value, $expectedDataValueType );
 
-		return $text;
-	}
-
-	/**
-	 * @param DataValue $value
-	 * @param Message $warning
-	 *
-	 * @return string
-	 */
-	private function formatValueWithWarning( DataValue $value, Message $warning ) {
-		$text = $this->formatValue( $value );
-
-		if ( $text !== '' ) {
-			$text .= ' ';
-		}
-
-		$text .= $this->formatWarning( $warning );
-
-		return $text;
+		return $this->formatValue( $value, $propertyType );
 	}
 
 	/**
@@ -194,65 +128,24 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 * @throws MismatchingDataValueTypeException
 	 * @return Message|null
 	 */
-	private function checkForWarning( DataValue $value, $expectedDataValueType ) {
+	private function checkValueType( DataValue $value, $expectedDataValueType ) {
 		$warning = null;
 
 		if ( $this->isUnDeserializableValue( $value ) ) {
-			if ( $this->failOnErrors() ) {
-				throw new MismatchingDataValueTypeException(
-					$expectedDataValueType,
-					$value->getType(),
-					'Encountered undeserializable value'
-				);
-			}
-
-			$warning = new Message( 'wikibase-undeserializable-value' );
+			throw new MismatchingDataValueTypeException(
+				$expectedDataValueType,
+				$value->getType(),
+				'Encountered undeserializable value'
+			);
 		} elseif ( $expectedDataValueType !== $value->getType() ) {
-			if ( $this->failOnErrors() ) {
-				throw new MismatchingDataValueTypeException(
-					$expectedDataValueType,
-					$value->getType(),
-					'The DataValue\'s type mismatches the property\'s DataType.'
-				);
-			}
-
-			$warning = new Message(
-				'wikibase-snakformatter-valuetype-mismatch',
-				array( $value->getType(), $expectedDataValueType )
+			throw new MismatchingDataValueTypeException(
+				$expectedDataValueType,
+				$value->getType(),
+				'The DataValue\'s type mismatches the property\'s DataType.'
 			);
 		}
 
 		return $warning;
-	}
-
-	/**
-	 * @param Message $warning
-	 *
-	 * @return string
-	 */
-	private function formatWarning( Message $warning ) {
-		$attributes = array( 'class' => 'error wb-format-error' );
-
-		$lang = $this->options->getOption( self::OPT_LANG );
-		$warning = $warning->inLanguage( $lang );
-
-		//NOTE: format identifiers are MIME types, so we can just check the prefix.
-		if ( strpos( $this->format, SnakFormatter::FORMAT_HTML ) === 0 ) {
-			$text = $warning->parse();
-			$text = Html::rawElement( 'span', $attributes, $text );
-
-		} elseif ( $this->format === SnakFormatter::FORMAT_WIKI ) {
-			$text = $warning->text();
-			$text = Html::rawElement( 'span', $attributes, $text );
-
-		} elseif ( $this->format === SnakFormatter::FORMAT_PLAIN ) {
-			$text = '(' . $warning->text() . ')';
-
-		} else {
-			$text = '';
-		}
-
-		return $text;
 	}
 
 	/**
@@ -268,11 +161,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	}
 
 	/**
-	 * @see ValueFormatter::format
-	 *
-	 * Implemented by delegating to the TypedValueFormatter passed to the constructor.
-	 *
-	 * @see TypedValueFormatter::formatValue
+	 * Calls the TypedValueFormatter passed to the constructor.
 	 *
 	 * @param DataValue $value
 	 * @param string $dataTypeId
@@ -280,7 +169,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 * @throws FormattingException
 	 * @return string
 	 */
-	public function formatValue( DataValue $value, $dataTypeId = null ) {
+	private function formatValue( DataValue $value, $dataTypeId = null ) {
 		if ( !$this->isUnDeserializableValue( $value ) ) {
 			$text = $this->valueFormatter->formatValue( $value, $dataTypeId );
 		} else {

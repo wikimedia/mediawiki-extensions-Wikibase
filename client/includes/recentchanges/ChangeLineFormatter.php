@@ -68,9 +68,7 @@ class ChangeLineFormatter {
 		$line .= $flag . ' ';
 		$line .= Linker::link( $title );
 
-		if ( $changeType !== 'remove' ) {
-			$line .= $this->formatEntityLink( $entityId );
-		}
+		$line .= $this->formatEntityLink( $entityId );
 
 		$line .= $this->formatTimestamp( $rev->getTimestamp() );
 		$line .= $this->formatUserLinks( $rev->getUserName() );
