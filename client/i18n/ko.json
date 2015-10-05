@@ -56,7 +56,7 @@
 	"wikibase-error-invalid-entity-id": "입력한 ID는 시스템에서 알 수 없습니다. 올바른 개체 ID를 사용하세요.",
 	"unconnectedpages": "위키데이터 항목에 연결되지 않은 문서",
 	"wikibase-unconnectedpages-format-row": "(문서에 있는 {{PLURAL:$1|언어 인터위키 링크}} $1개)",
-	"wikibase-unconnectedpages-submit": "보기",
+	"wikibase-unconnectedpages-submit": "문서 보기",
 	"wikibase-pageswithbadges-badge": "배지:",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} 항목 ID",
 	"wikibase-pageinfo-entity-id-none": "없음",

@@ -19,7 +19,7 @@
 	"wikibase-error-autocomplete-connection": "संकेतस्थळाच्या API ला पृच्छा करू शकलो नाही. कृपया नंतर पुन्हा प्रयत्न करा.",
 	"wikibase-error-autocomplete-response": "विदागाराने प्रतिसाद दिला:$1",
 	"wikibase-error-ui-no-external-page": "सुसंगत संकेतस्थळावर नमूद लेख सापडला नाही.",
-	"wikibase-error-ui-edit-conflict": "संपादन विसंवाद. कृपया पुनर्भारण करून जतन करा.",
+	"wikibase-error-ui-edit-conflict": "संपादन विसंवाद. कृपया आपले बदल स्थानिकरित्या जतन करा,या पानाचे पुनर्भारण करा व पुन्हा जतन करा.",
 	"wikibase-quantitydetails-amount": "रक्कम",
 	"wikibase-quantitydetails-upperbound": "उच्चतम मर्यादा",
 	"wikibase-quantitydetails-lowerbound": "निम्नतम मर्यादा",
