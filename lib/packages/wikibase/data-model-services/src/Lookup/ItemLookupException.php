@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
+use Exception;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -12,7 +13,12 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class ItemLookupException extends EntityLookupException {
 
-	public function __construct( ItemId $itemId, $message = null, \Exception $previous = null ) {
+	/**
+	 * @param ItemId $itemId
+	 * @param string|null $message
+	 * @param Exception|null $previous
+	 */
+	public function __construct( ItemId $itemId, $message = null, Exception $previous = null ) {
 		parent::__construct(
 			$itemId,
 			$message ?: 'Item lookup failed for: ' . $itemId,

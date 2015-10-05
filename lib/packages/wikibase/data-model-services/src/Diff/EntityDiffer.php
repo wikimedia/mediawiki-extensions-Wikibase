@@ -48,6 +48,12 @@ class EntityDiffer {
 		}
 	}
 
+	/**
+	 * @param string $entityType
+	 *
+	 * @throws RuntimeException
+	 * @return EntityDifferStrategy
+	 */
 	private function getDiffStrategy( $entityType ) {
 		foreach ( $this->differStrategies as $diffStrategy ) {
 			if ( $diffStrategy->canDiffEntityType( $entityType ) ) {

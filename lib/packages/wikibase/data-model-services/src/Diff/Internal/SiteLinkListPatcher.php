@@ -54,6 +54,11 @@ class SiteLinkListPatcher {
 		return $patchedSiteLinks;
 	}
 
+	/**
+	 * @param string[] $siteLinkData
+	 *
+	 * @return ItemId[]|null
+	 */
 	private function getBadgesFromSiteLinkData( array $siteLinkData ) {
 		if ( !array_key_exists( 'badges', $siteLinkData ) ) {
 			return null;

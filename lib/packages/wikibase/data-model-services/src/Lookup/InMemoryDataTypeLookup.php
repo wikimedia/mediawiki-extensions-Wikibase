@@ -17,6 +17,9 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 
+	/**
+	 * @var string[]
+	 */
 	private $dataTypeIds = array();
 
 	/**
@@ -36,12 +39,19 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 	 *
 	 * @param PropertyId $propertyId
 	 * @param string $dataTypeId
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setDataTypeForProperty( PropertyId $propertyId, $dataTypeId ) {
 		$this->verifyDataTypeIdType( $dataTypeId );
 		$this->dataTypeIds[$propertyId->getSerialization()] = $dataTypeId;
 	}
 
+	/**
+	 * @param PropertyId $propertyId
+	 *
+	 * @throws PropertyDataTypeLookupException
+	 */
 	private function verifyDataTypeIsSet( PropertyId $propertyId ) {
 		$numericId = $propertyId->getSerialization();
 
@@ -50,6 +60,11 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 		}
 	}
 
+	/**
+	 * @param string $dataTypeId
+	 *
+	 * @throws InvalidArgumentException
+	 */
 	private function verifyDataTypeIdType( $dataTypeId ) {
 		if ( !is_string( $dataTypeId ) ) {
 			throw new InvalidArgumentException( '$dataTypeId must be a string; got ' . gettype( $dataTypeId ) );

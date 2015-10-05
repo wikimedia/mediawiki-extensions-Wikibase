@@ -40,6 +40,12 @@ class EntityPatcher {
 		$this->getPatcherStrategy( $entity->getType() )->patchEntity( $entity, $patch );
 	}
 
+	/**
+	 * @param string $entityType
+	 *
+	 * @throws RuntimeException
+	 * @return EntityPatcherStrategy
+	 */
 	private function getPatcherStrategy( $entityType ) {
 		foreach ( $this->patcherStrategies as $patcherStrategy ) {
 			if ( $patcherStrategy->canPatchEntityType( $entityType ) ) {

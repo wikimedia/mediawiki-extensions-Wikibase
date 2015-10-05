@@ -16,6 +16,9 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 
+	/**
+	 * @var EntityLookup
+	 */
 	private $entityLookup;
 
 	public function __construct( EntityLookup $entityLookup ) {

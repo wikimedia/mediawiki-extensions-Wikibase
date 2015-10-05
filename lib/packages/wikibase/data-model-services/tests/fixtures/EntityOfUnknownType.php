@@ -10,6 +10,9 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 class EntityOfUnknownType implements EntityDocument {
 
+	/**
+	 * @return null
+	 */
 	public function getId() {
 		return null;
 	}
@@ -18,9 +21,15 @@ class EntityOfUnknownType implements EntityDocument {
 		return 'unknown-entity-type';
 	}
 
+	/**
+	 * @param mixed $id Ignored.
+	 */
 	public function setId( $id ) {
 	}
 
+	/**
+	 * @return bool Always true.
+	 */
 	public function isEmpty() {
 		return true;
 	}

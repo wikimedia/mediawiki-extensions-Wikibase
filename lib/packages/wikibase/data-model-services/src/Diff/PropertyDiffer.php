@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Diff;
 
 use Diff\Differ\MapDiffer;
+use Diff\DiffOp\DiffOp;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
@@ -72,10 +73,21 @@ class PropertyDiffer implements EntityDifferStrategy {
 		return new EntityDiff( $diffOps );
 	}
 
+	/**
+	 * @param array[] $from
+	 * @param array[] $to
+	 *
+	 * @return DiffOp[]
+	 */
 	private function diffPropertyArrays( array $from, array $to ) {
 		return $this->recursiveMapDiffer->doDiff( $from, $to );
 	}
 
+	/**
+	 * @param Property $property
+	 *
+	 * @return array[]
+	 */
 	private function toDiffArray( Property $property ) {
 		$array = array();
 
