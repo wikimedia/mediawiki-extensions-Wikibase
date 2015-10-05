@@ -84,7 +84,7 @@ class EntityUsageTable {
 		}
 
 		$rowIds = $this->getAffectedRowIds( $pageId, $usages );
-		$batches  = array_chunk( $rowIds, $this->batchSize );
+		$batches = array_chunk( $rowIds, $this->batchSize );
 
 		foreach ( $batches as $batch ) {
 			$this->touchUsageBatch( $batch, $touched );
@@ -462,7 +462,8 @@ class EntityUsageTable {
 			$this->tableName,
 			array( 'eu_entity_id' ),
 			$where,
-			__METHOD__
+			__METHOD__,
+			array( 'DISTINCT' )
 		);
 
 		return $this->extractProperty( $res, 'eu_entity_id' );
