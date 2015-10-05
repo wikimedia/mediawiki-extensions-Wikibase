@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
 use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
+use Wikibase\Repo\DataUpdates\GeoDataDataUpdate;
 use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -65,6 +66,11 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	private $externalEntityIdParser;
 
+	/**
+	 * @var string[]
+	 */
+	private $preferredGeoDataProperties;
+
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
@@ -73,7 +79,8 @@ class EntityParserOutputGeneratorFactory {
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		EntityIdParser $externalEntityIdParser
+		EntityIdParser $externalEntityIdParser,
+		array $preferredGeoDataProperties
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -83,6 +90,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->externalEntityIdParser = $externalEntityIdParser;
+		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 	}
 
 	/**
@@ -134,7 +142,7 @@ class EntityParserOutputGeneratorFactory {
 	private function getDataUpdates() {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
 
-		return array(
+		$dataUpdates = array(
 			new ReferencedEntitiesDataUpdate(
 				$this->entityTitleLookup,
 				$this->externalEntityIdParser
@@ -142,6 +150,15 @@ class EntityParserOutputGeneratorFactory {
 			new ExternalLinksDataUpdate( $propertyDataTypeMatcher ),
 			new ImageLinksDataUpdate( $propertyDataTypeMatcher )
 		);
+
+		if ( class_exists( 'GeoData' ) ) {
+			$dataUpdates[] = new GeoDataDataUpdate(
+				$propertyDataTypeMatcher,
+				$this->preferredGeoDataProperties
+			);
+		}
+
+		return $dataUpdates;
 	}
 
 }
