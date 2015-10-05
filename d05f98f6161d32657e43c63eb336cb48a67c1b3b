@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_a103ea0e",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-05T08:18:01Z",
+      "side": 1,
+      "message": "OK now I get confused a proxy inside a proxy inside of a proxy. I am not sure that this is meant to be used like this ... \n\n\u0027This method is most useful for attaching event handlers to an element where the context is pointing back to a different object. \u0027 https://api.jquery.com/jQuery.proxy/",
+      "revId": "d05f98f6161d32657e43c63eb336cb48a67c1b3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
