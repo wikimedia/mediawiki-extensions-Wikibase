@@ -14,7 +14,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\Repo\Interactors\TermSearchResult;
+use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
  * @covers Wikibase\Repo\Api\SearchEntities
