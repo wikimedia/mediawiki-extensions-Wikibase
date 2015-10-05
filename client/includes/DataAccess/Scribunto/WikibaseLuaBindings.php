@@ -3,7 +3,6 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
-use ParserOptions;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -59,11 +58,6 @@ class WikibaseLuaBindings {
 	private $usageAccumulator;
 
 	/**
-	 * @var ParserOptions
-	 */
-	private $parserOptions;
-
-	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -75,7 +69,6 @@ class WikibaseLuaBindings {
 	 * @param SettingsArray $settings
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator $usageAccumulator for tracking title usage via getEntityId.
-	 * @param ParserOptions $parserOptions
 	 * @param string $siteId
 	 *
 	 * @note: label usage is not tracked in $usageAccumulator. This should be done inside
@@ -88,7 +81,6 @@ class WikibaseLuaBindings {
 		SettingsArray $settings,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator,
-		ParserOptions $parserOptions,
 		$siteId
 	) {
 		$this->entityIdParser = $entityIdParser;
@@ -97,7 +89,6 @@ class WikibaseLuaBindings {
 		$this->settings = $settings;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->usageAccumulator = $usageAccumulator;
-		$this->parserOptions = $parserOptions;
 		$this->siteId = $siteId;
 	}
 
@@ -219,20 +210,6 @@ class WikibaseLuaBindings {
 		}
 
 		return null;
-	}
-
-	/**
-	 * Get the user's language.
-	 * Side effect: Splits the parser cache by user language!
-	 *
-	 * @since 0.5
-	 *
-	 * @return string Language code
-	 */
-	public function getUserLang() {
-		// Note: We can't just inject the user language, as getting it from ParserOptions
-		// already splits the cache (which also is an intended side effect here).
-		return $this->parserOptions->getUserLang();
 	}
 
 }
