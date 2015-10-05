@@ -31,7 +31,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		$self = $this;
 		$callbacks = array(
 			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $format === SnakFormatter::FORMAT_PLAIN ? $self->makeMockValueFormatter( 'TEST' ) : null;
+				return $format === SnakFormatter::FORMAT_PLAIN ? $self->makeMockValueFormatter() : null;
 			},
 		);
 
@@ -53,10 +53,10 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new OutputFormatSnakFormatterFactory( $valueFormatterFactory, $dataTypeLookup, $dataTypeFactory );
 	}
 
-	public function makeMockValueFormatter( $value ) {
+	public function makeMockValueFormatter() {
 		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
 
-		$mock->expects( $this->atLeastOnce() )
+		$mock->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback(
 				function( DataValue $value ) {
@@ -95,6 +95,33 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P5' ), $value );
 		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );
+	}
+
+	public function getSnakFormatterProvider_options() {
+		return array(
+			'default' => array(
+				array(),
+				'Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter'
+			),
+			'OPT_ON_ERROR => ON_ERROR_WARN' => array(
+				array( SnakFormatter::OPT_ON_ERROR => SnakFormatter::ON_ERROR_WARN ),
+				'Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter'
+			),
+			'OPT_ON_ERROR => ON_ERROR_FAIL' => array(
+				array( SnakFormatter::OPT_ON_ERROR => SnakFormatter::ON_ERROR_FAIL ),
+				'Wikibase\Lib\DispatchingSnakFormatter'
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider getSnakFormatterProvider_options
+	 */
+	public function testGetSnakFormatter_options( $options, $expectedType ) {
+		$factory = $this->newOutputFormatSnakFormatterFactory();
+		$formatter = $factory->getSnakFormatter( SnakFormatter::FORMAT_WIKI, new FormatterOptions( $options ) );
+
+		$this->assertInstanceOf( $expectedType, $formatter );
 	}
 
 }
