@@ -28,6 +28,18 @@
 			"ValueView.php"
 		]
 	},
+	"require-dev": {
+		"jakub-onderka/php-parallel-lint": "0.9",
+		"mediawiki/mediawiki-codesniffer": "0.4.0"
+	},
+	"scripts": {
+		"test": [
+			"parallel-lint . --exclude vendor"
+		],
+		"cs": [
+			"phpcs -p -s"
+		]
+	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "0.15.x-dev"
