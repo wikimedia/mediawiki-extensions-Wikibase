@@ -1343,7 +1343,8 @@ class WikibaseRepo {
 			$templateFactory,
 			$entityDataFormatProvider,
 			$this->getPropertyDataTypeLookup(),
-			$this->getLocalEntityUriParser()
+			$this->getLocalEntityUriParser(),
+			$this->settings->getSetting( 'preferredGeoDataProperties' )
 		);
 	}
 

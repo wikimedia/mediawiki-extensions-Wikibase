@@ -143,6 +143,12 @@ return call_user_func( function() {
 				'de-formal'   => 'de-x-formal',
 				'nl-informal' => 'nl-x-informal',
 		),
+
+		// List of globe-coordinate properties (listed by id string), in order of preference,
+		// to consider for primary coordinates when extracting coordinates from an Entity
+		// for the GeoData extension.
+		// e.g. array( 'P625', 'P1259' )
+		'preferredGeoDataProperties' => array(),
 	);
 
 	return $defaults;
