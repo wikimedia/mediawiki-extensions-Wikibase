@@ -319,15 +319,28 @@ class EntityUsageTable {
 
 		$old = $this->queryUsages( $pageId, '<', $lastUpdatedBefore );
 
-		// XXX: we may want to batch this, based on the data in $old
-		$this->connection->delete(
-			$this->tableName,
-			array(
-				'eu_page_id' => (int)$pageId,
-				'eu_touched < ' . $this->connection->addQuotes( $lastUpdatedBefore ),
-			),
-			__METHOD__
-		);
+		do {
+			$res = $this->connection->selectFieldValues(
+				$this->tableName,
+				'eu_row_id',
+				array(
+					'eu_page_id' => (int)$pageId,
+					'eu_touched < ' . $this->connection->addQuotes( $lastUpdatedBefore ),
+				),
+				__METHOD__,
+				array( 'LIMIT' => $this->batchSize )
+			);
+
+			if ( $res ) {
+				$this->connection->delete(
+					$this->tableName,
+					array(
+						'eu_row_id' => $res,
+					),
+					__METHOD__
+				);
+			}
+		} while ( $res && count( $res ) === $this->batchSize );
 
 		return $old;
 	}
