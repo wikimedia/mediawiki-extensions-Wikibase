@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_8fea95d4",
+        "filename": "lib/includes/formatters/ErrorHandlingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-05T15:10:15Z",
+      "side": 1,
+      "message": "Hm... are those still relevant?",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_efa799b8",
+        "filename": "lib/includes/formatters/ErrorHandlingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-05T15:10:15Z",
+      "side": 1,
+      "message": "Should use \u003d\u003d\u003d ... also this probably should never be equal (unless I overlook something) ... so log a warning?",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_0f3d45db",
+        "filename": "lib/tests/phpunit/formatters/ErrorHandlingSnakFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-05T15:10:15Z",
+      "side": 1,
+      "message": "nope",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_6f2ba993",
+        "filename": "lib/tests/phpunit/formatters/ErrorHandlingSnakFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-05T15:10:15Z",
+      "side": 1,
+      "message": "missing space after null",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_2a17cf4b",
+        "filename": "lib/tests/phpunit/formatters/ErrorHandlingSnakFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-05T15:10:15Z",
+      "side": 1,
+      "message": "We decided to not start our provider names with provide at some point. I suggest formatSnakErrorProvider",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
