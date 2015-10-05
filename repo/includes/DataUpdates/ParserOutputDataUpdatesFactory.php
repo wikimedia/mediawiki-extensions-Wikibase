@@ -50,38 +50,27 @@ class ParserOutputDataUpdatesFactory {
 	 */
 	public function getDataUpdates() {
 		if ( $this->dataUpdates === null ) {
-			$this->initDataUpdates();
+			$this->dataUpdates = $this->newDataUpdates();
 		}
 
 		return $this->dataUpdates;
 	}
 
-	private function initDataUpdates() {
-		$dataUpdates = array();
-
-		// @todo document the hook!
-		Hooks::run( 'WikibaseParserOutputDataUpdates', array( $this, &$dataUpdates ) );
-
-		$propertyDataTypeMatcher = $this->getPropertyDataTypeMatcher();
-
-		$this->dataUpdates = array_merge(
-			array(
-				new ReferencedEntitiesDataUpdate(
-					$this->entityTitleLookup,
-					$this->externalEntityIdParser
-				),
-				new ExternalLinksDataUpdate( $propertyDataTypeMatcher ),
-				new ImageLinksDataUpdate( $propertyDataTypeMatcher )
+	private function newDataUpdates() {
+		$dataUpdates = array(
+			new ReferencedEntitiesDataUpdate(
+				$this->entityTitleLookup,
+				$this->externalEntityIdParser
 			),
-			$dataUpdates
+			new ExternalLinksDataUpdate( $this->propertyDataTypeMatcher ),
+			new ImageLinksDataUpdate( $this->propertyDataTypeMatcher )
 		);
-	}
 
-	/**
-	 * @return PropertyDataTypeMatcher
-	 */
-	public function getPropertyDataTypeMatcher() {
-		return $this->propertyDataTypeMatcher;
+		if ( class_exists( 'CoordinatesOutput' ) ) {
+			$dataUpdates[] = new GeoDataDataUpdate( $this->propertyDataTypeMatcher );
+		}
+
+		return $dataUpdates;
 	}
 
 }
