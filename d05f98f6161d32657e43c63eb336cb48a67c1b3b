@@ -16,6 +16,24 @@
       "revId": "d05f98f6161d32657e43c63eb336cb48a67c1b3b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_e4d6e053",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-05T10:45:01Z",
+      "side": 1,
+      "message": "Well, it\u0027s just a proprietary bind (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).We could replace the outer call with capturing `this` as `self`, but I think that\u0027s just a matter of taste.",
+      "parentUuid": "2ecb373e_a103ea0e",
+      "revId": "d05f98f6161d32657e43c63eb336cb48a67c1b3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
