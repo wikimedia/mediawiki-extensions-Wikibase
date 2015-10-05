@@ -33,6 +33,24 @@
       "revId": "8ee1ccb9ecfa1f1c63b18cf16577d49e705ced94",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_10948241",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-05T20:17:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_214ffa3a",
+      "revId": "8ee1ccb9ecfa1f1c63b18cf16577d49e705ced94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
