@@ -9,6 +9,7 @@ use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter;
 
 /**
  * Service for obtaining a SnakFormatter for a desired output format.
@@ -60,6 +61,9 @@ class OutputFormatSnakFormatterFactory {
 	 * @return SnakFormatter
 	 */
 	public function getSnakFormatter( $format, FormatterOptions $options ) {
+		$options->defaultOption( SnakFormatter::OPT_LANG, 'en' );
+		$options->defaultOption( SnakFormatter::OPT_ON_ERROR, SnakFormatter::ON_ERROR_WARN );
+
 		$this->valueFormatterFactory->applyLanguageDefaults( $options );
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 
@@ -89,7 +93,17 @@ class OutputFormatSnakFormatterFactory {
 			'value' => $valueSnakFormatter,
 		);
 
-		return new DispatchingSnakFormatter( $format, $formatters );
+		$snakFormatter = new DispatchingSnakFormatter( $format, $formatters );
+
+		if ( $options->getOption( SnakFormatter::OPT_ON_ERROR ) === SnakFormatter::ON_ERROR_WARN ) {
+			$snakFormatter = new ErrorHandlingSnakFormatter(
+				$snakFormatter,
+				$valueFormatter,
+				$lang
+			);
+		}
+
+		return $snakFormatter;
 	}
 
 	/**
