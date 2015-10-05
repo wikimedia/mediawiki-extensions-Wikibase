@@ -363,35 +363,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$this->assertUsageTableContains( $rowsT2 );
 	}
 
-	public function testRemoveEntities() {
-		$touched = wfTimestamp( TS_MW );
-
-		$q3 = new ItemId( 'Q3' );
-		$q4 = new ItemId( 'Q4' );
-		$q5 = new ItemId( 'Q5' );
-
-		$usages = array(
-			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
-
-		$usageTable = $this->getEntityUsageTable();
-		$usageTable->addUsages( 23, $usages, $touched );
-
-		$rows = $this->getUsageRows( 23, $usages, $touched );
-		$itemsToRemove = array( $q4, $q5 );
-
-		$retainedRows = array_intersect_key( $rows, array( 'Q3#S' => 1, 'Q3#L' => 1 ) );
-		$removedRows = array_intersect_key( $rows, array( 'Q4#L' => 1, 'Q5#X' => 1 ) );
-
-		$usageTable->removeEntities( $itemsToRemove );
-
-		$this->assertUsageTableContains( $retainedRows );
-		$this->assertUsageTableDoesNotContain( $removedRows );
-	}
-
 	public function testAddTouchUsages_batching() {
 		$t1 = '20150111000000';
 		$t2 = '20150222000000';
@@ -409,24 +380,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		// touching more rows than fit into a single batch
 		$usageTable->touchUsages( 7, $usages, $t2 );
 		$this->assertUsageTableContains( $rowsT2 );
-	}
-
-	public function testRemoveEntities_batching() {
-		$touched = wfTimestamp( TS_MW );
-		$usages = $this->makeUsages( 10 );
-		$rows7 = $this->getUsageRows( 7, $usages, $touched );
-		$rows8 = $this->getUsageRows( 8, $usages, $touched );
-
-		$usageTable = $this->getEntityUsageTable( 3 );
-		$usageTable->addUsages( 7, $usages, $touched );
-		$usageTable->addUsages( 8, $usages, $touched );
-
-		// removing more rows than fit into a single batch
-		$entitiesToRemove = array_slice( $this->getItemIds( $usages ), 0, 5 );
-		$usageTable->removeEntities( $entitiesToRemove );
-
-		$this->assertUsageTableContains( $this->removeRowsForEntities( $rows7, $entitiesToRemove ) );
-		$this->assertUsageTableContains( $this->removeRowsForEntities( $rows8, $entitiesToRemove ) );
 	}
 
 	public function testGetPagesUsing() {
