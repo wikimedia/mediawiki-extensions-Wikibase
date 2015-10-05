@@ -140,13 +140,46 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
+	 * Returns the language to use. If we are on a multilingual wiki
+	 * (allowDataAccessInUserLanguage is true) this will be the user's interface
+	 * language, otherwise it will be the content language.
+	 * In a perfect world, this would equal Parser::getTargetLanguage.
+	 *
+	 * This doesn't split the ParserCache by language yet, please see
+	 * self::splitParserCacheIfMultilingual for that.
+	 *
 	 * @return Language
 	 */
 	private function getLanguage() {
-		// For the language we need $wgContLang, not parser target language or anything else.
-		// See Scribunto_LuaLanguageLibrary::getContLangCode().
 		global $wgContLang;
+
+		if ( $this->allowDataAccessInUserLanguage() ) {
+			// Can't use ParserOptions::getUserLang as that already splits the ParserCache
+			$userLang = $this->getParserOptions()->getUser()->getOption( 'language' );
+
+			return Language::factory( $userLang );
+		}
+
 		return $wgContLang;
+	}
+
+	/**
+	 * Splits the page's ParserCache in case we're on a multilingual wiki
+	 */
+	private function splitParserCacheIfMultilingual() {
+		if ( $this->allowDataAccessInUserLanguage() ) {
+			// ParserOptions::getUserLang splits the ParserCache
+			$this->getParserOptions()->getUserLang();
+		}
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function allowDataAccessInUserLanguage() {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		return $settings->getSetting( 'allowDataAccessInUserLanguage' );
 	}
 
 	private function newEntityAccessor() {
@@ -209,7 +242,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getSettings(),
 			$labelDescriptionLookup,
 			$usageAccumulator,
-			$this->getParserOptions(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
@@ -256,6 +288,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getEntity( $prefixedEntityId ) {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
+		$this->splitParserCacheIfMultilingual();
 
 		try {
 			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId );
@@ -308,6 +341,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getLabel( $prefixedEntityId ) {
 		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
+		$this->splitParserCacheIfMultilingual();
+
 		return array( $this->getLuaBindings()->getLabel( $prefixedEntityId ) );
 	}
 
@@ -322,6 +357,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getDescription( $prefixedEntityId ) {
 		$this->checkType( 'getDescription', 1, $prefixedEntityId, 'string' );
+		$this->splitParserCacheIfMultilingual();
+
 		return array( $this->getLuaBindings()->getDescription( $prefixedEntityId ) );
 	}
 
@@ -351,6 +388,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function renderSnak( $snakSerialization ) {
 		$this->checkType( 'renderSnak', 1, $snakSerialization, 'table' );
+		$this->splitParserCacheIfMultilingual();
+
 		try {
 			$ret = array( $this->getSnakSerializationRenderer()->renderSnak( $snakSerialization ) );
 			return $ret;
@@ -371,6 +410,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function renderSnaks( $snaksSerialization ) {
 		$this->checkType( 'renderSnaks', 1, $snaksSerialization, 'table' );
+		$this->splitParserCacheIfMultilingual();
+
 		try {
 			$ret = array( $this->getSnakSerializationRenderer()->renderSnaks( $snaksSerialization ) );
 			return $ret;
@@ -389,27 +430,16 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function resolvePropertyId( $propertyLabelOrId ) {
+		global $wgContLang;
+
 		$this->checkType( 'resolvePropertyId', 1, $propertyLabelOrId, 'string' );
 		try {
-			$languageCode = $this->getLanguage()->getCode();
-			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId( $propertyLabelOrId, $languageCode );
+			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId( $propertyLabelOrId, $wgContLang->getCode() );
 			$ret = array( $propertyId->getSerialization() );
 			return $ret;
 		} catch ( PropertyLabelNotResolvedException $e ) {
 			return array( null );
 		}
-	}
-
-	/**
-	 * Wrapper for getUserLang in WikibaseLuaBindings
-	 * Side effect: Splits the parser cache by user language!
-	 *
-	 * @since 0.5
-	 *
-	 * @return string[]
-	 */
-	public function getUserLang() {
-		return array( $this->getLuaBindings()->getUserLang() );
 	}
 
 }
