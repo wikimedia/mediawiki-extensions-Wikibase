@@ -48,6 +48,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;badgeItems: Items allowed to be used as badges. This setting expects an array of serialized item ids pointing to their CSS class names, like <code>array( 'Q101' => 'wb-badge-goodarticle' )</code>. With this class name it is possible to change the icon of a specific badge.
 ;preferredPageImagesProperties: List of image property id strings, in order of preference, that should be considered for the <code>page_image</code> page property. Defaults to an empty array.
 ;conceptBaseUri: Base URI for building concept URIs (for example used in Rdf output). This has to include the protocol and domain, only an entity identifier will be appended.
+;preferredGeoDataProperties: List of properties (by id string), in order of preference, that are considered when finding primary coordinates for the GeoData extension on an entity. Defaults to an empty array.
 
 === Expert Settings ===
 ;dispatchBatchChunkFactor: Chunk factor used internally by the <code>dispatchChanges.php</code> script. The default is 3. If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
