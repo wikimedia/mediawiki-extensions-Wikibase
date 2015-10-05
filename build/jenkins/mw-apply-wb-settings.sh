@@ -35,16 +35,19 @@ function apply_client_settings {
 
 function apply_repo_settings {
   echo '$wgEnableWikibaseRepo = true;' >> LocalSettings.php
-  echo '$wgEnableWikibaseClient = false;' >> LocalSettings.php
+  echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = true;' >> LocalSettings.php
-  echo '$wmgUseWikibaseClient = false;' >> LocalSettings.php
+  echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
   if [ $BUILD = true ]
   then
     echo 'require_once __DIR__ . "/extensions/Wikidata/Wikidata.php";' >> LocalSettings.php
     echo 'require_once __DIR__ . "/extensions/Wikidata/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
+    echo 'require_once __DIR__ . "/extensions/Wikidata/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
   else
     echo 'require_once __DIR__ . "/extensions/Wikibase/repo/Wikibase.php";' >> LocalSettings.php
     echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
+    echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
+    echo 'require_once __DIR__ . "/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
   fi
 }
 
