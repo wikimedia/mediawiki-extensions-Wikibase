@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_2956f433",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-06T14:50:32Z",
+      "side": 1,
+      "message": "think i am going to change this to work on the statement level, so to also consider ranks and get just the main snaks\n\nthis is just an initial version :)",
+      "parentUuid": "2ecb373e_e9b54c79",
+      "revId": "8fd914d2681d4181a2345ded541c80ecaf18f4ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_29c034e3",
         "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
         "patchSetId": 3
@@ -116,6 +134,24 @@
       "writtenOn": "2015-10-06T14:40:13Z",
       "side": 1,
       "message": "So there is no primary in this case?",
+      "revId": "8fd914d2681d4181a2345ded541c80ecaf18f4ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_c9465080",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-06T14:50:32Z",
+      "side": 1,
+      "message": "not yet",
+      "parentUuid": "2ecb373e_498d80d7",
       "revId": "8fd914d2681d4181a2345ded541c80ecaf18f4ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
