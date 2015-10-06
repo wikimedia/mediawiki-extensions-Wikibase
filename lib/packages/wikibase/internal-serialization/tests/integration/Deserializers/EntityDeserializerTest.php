@@ -69,7 +69,7 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$item->setLabel( 'en', 'foo' );
 		$item->setLabel( 'de', 'bar' );
 
-		$item->addSiteLink( new SiteLink( 'wiki', 'page' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'wiki', 'page' );
 
 		return $item;
 	}
