@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_c9cbb01f",
+        "filename": "repo/includes/DataUpdates/ParserOutputDataUpdatesFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-06T14:40:13Z",
+      "side": 0,
+      "message": "You just added this hook in the previous patch. I wonder if it\u0027s worth to amend the previous patch?",
+      "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
