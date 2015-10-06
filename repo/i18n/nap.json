@@ -119,7 +119,7 @@
 	"wikibase-itembytitle-error-site": "Pe' piacere ausate n'identificatore 'e sito, e.g. \"enwiki\" p' 'a wikipedia ngrese.",
 	"wikibase-itembytitle-error-item": "N'elemento ca cullegasse 'a paggena data nun se truvava.",
 	"wikibase-itembytitle-create": "Putite pure [$1 crià l'elemento].",
-	"wikibase-itembytitle-summary": "Special:ItemByTitle fosse ausàto pe' truvà l'elemento currispunnente pe' na paggena data dint'a nu sito collegato.<br />'O primmo campo, \"Site:\", fosse addò vuje mettite 'a lengua e 'o codece 'e sito.<br />P' 'o siconno campo, \"Paggena:\", vuje avit'a miette 'o titolo eguale eguale d' 'a paggena comme cumpare dint' 'o sito cullegato.",
+	"wikibase-itembytitle-summary": "Special:ItemByTitle fosse ausàto pe' truvà l'elemento currispunnente pe' na paggena data dint'a nu sito collegato.<br />'O primmo campo, \"{{int:wikibase-itembytitle-lookup-site}}\", fosse addò vuje mettite 'a lengua e 'o codece 'e sito.<br />P' 'o siconno campo, \"{{int:wikibase-itembytitle-lookup-site}}\"\", vuje avit'a miette 'o titolo eguale eguale d' 'a paggena comme cumpare dint' 'o sito cullegato.",
 	"special-gotolinkedpage": "Jate 'a paggena cullegata",
 	"wikibase-gotolinkedpage-lookup-fieldset": "Jate 'a paggena cullegata pe' sito 'elemento",
 	"wikibase-gotolinkedpage-lookup-site": "Sito:",

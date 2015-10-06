@@ -123,7 +123,7 @@
 	"wikibase-api-unresolved-redirect": "De aanjejovve Kännong betrek sesch obb_en Ömleidong, wat heh en däm Zosammehang nit ongerschtöz weed.",
 	"wikibase-api-target-is-redirect": "Dä Omleidong ier zihl darf sällver kein Ömleidong sin.",
 	"wikibase-restoreold": "zeröckholle",
-	"wikibase-restore-summary": "Holl de Väsjohn $1 {{GENDER:$2|dä|dat|dä Metmaacher|de|dat}} [[Special:Contributions/$2|$2]] zerök.",
+	"wikibase-restore-summary": "Holl de Väsjohn $1 {{GENDER:$2|vum|vum|vumm Metmaacher|vun dä|vum}} [[Special:Contributions/$2|$2]] zerök.",
 	"wikibase-no-direct-editing": "Tiräk jät ze Ändere es am Appachtemang $1 affjeschalldt.",
 	"wikibase-noentity-createone": "Mer kann och e [[$1|neu aanlääje]].",
 	"wikibase-listdatatypes-wikibase-property-head": "Eijeschaff",
