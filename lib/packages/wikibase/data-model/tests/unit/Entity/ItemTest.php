@@ -191,7 +191,7 @@ class ItemTest extends EntityTest {
 
 	public function testHasLinkToSiteForFalse() {
 		$item = new Item();
-		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'ENWIKI', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'ENWIKI', 'Wikidata', array( new ItemId( 'Q42' ) ) );
 
 		$this->assertFalse( $item->getSiteLinkList()->hasLinkWithSiteId( 'enwiki' ) );
 		$this->assertFalse( $item->getSiteLinkList()->hasLinkWithSiteId( 'dewiki' ) );
@@ -200,9 +200,9 @@ class ItemTest extends EntityTest {
 
 	public function testHasLinkToSiteForTrue() {
 		$item = new Item();
-		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) ) );
-		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'dewiki', 'Wikidata' ) );
-		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'foo bar', 'Wikidata' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Wikidata', array( new ItemId( 'Q42' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Wikidata' );
+		$item->getSiteLinkList()->addNewSiteLink( 'foo bar', 'Wikidata' );
 
 		$this->assertTrue( $item->getSiteLinkList()->hasLinkWithSiteId( 'enwiki' ) );
 		$this->assertTrue( $item->getSiteLinkList()->hasLinkWithSiteId( 'dewiki' ) );
@@ -236,7 +236,7 @@ class ItemTest extends EntityTest {
 	public function testAddSiteLinkOverridesOldLinks() {
 		$item = new Item();
 
-		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'kittens', 'foo' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'kittens', 'foo' );
 
 		$newLink = new SiteLink( 'kittens', 'bar' );
 		$item->addSiteLink( $newLink );

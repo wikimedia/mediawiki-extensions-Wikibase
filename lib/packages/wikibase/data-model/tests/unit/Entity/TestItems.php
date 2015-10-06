@@ -36,13 +36,13 @@ final class TestItems {
 		$items[] = $item;
 
 		$item = new Item();
-		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'enwiki', 'spam' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'spam' );
 
 		$items[] = $item;
 
 		$item = new Item();
-		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'enwiki', 'spamz' ) );
-		$item->getSiteLinkList()->addSiteLink( new SiteLink( 'dewiki', 'foobar' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'spamz' );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foobar' );
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );
