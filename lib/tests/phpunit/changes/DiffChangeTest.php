@@ -55,38 +55,4 @@ class DiffChangeTest extends ChangeRowTest {
 		return '\Wikibase\DiffChange';
 	}
 
-	public function provideNewFromDiff() {
-		$diffs = TestChanges::getDiffs();
-		$cases = array();
-
-		foreach ( $diffs as $diff ) {
-			$cases[] = array( $diff );
-		}
-
-		return $cases;
-	}
-
-	/**
-	 * @param Diff $diff
-	 * @dataProvider provideNewFromDiff
-	 */
-	public function testNewFromDiff( Diff $diff ) {
-		$change = DiffChange::newFromDiff( $diff );
-
-		$this->assertEquals( $diff->isEmpty(), $change->isEmpty() );
-
-		$change->setDiff( new Diff() );
-
-		$this->assertTrue( $change->isEmpty() );
-
-		$differ = new MapDiffer();
-		$diff = new Diff( $differ->doDiff( array(), array( 'en' => 'foo' ) ), true );
-
-		$change->setDiff( $diff );
-
-		$this->assertFalse( $change->isEmpty() );
-
-		$this->assertEquals( $diff, $change->getDiff() );
-	}
-
 }

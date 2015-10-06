@@ -58,29 +58,6 @@ class DiffChange extends ChangeRow {
 	}
 
 	/**
-	 * @since 0.1
-	 *
-	 * @param Diff $diff
-	 * @param array|null $fields
-	 *
-	 * @return DiffChange
-	 */
-	public static function newFromDiff( Diff $diff, array $fields = null ) {
-		/**
-		 * @var self $instance
-		 */
-		$instance = new static(
-			ChangesTable::singleton(),
-			$fields,
-			true
-		);
-
-		$instance->setDiff( $diff );
-
-		return $instance;
-	}
-
-	/**
 	 * Returns whether the change is empty.
 	 * If it's empty, it can be ignored.
 	 *
