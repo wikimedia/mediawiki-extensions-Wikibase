@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_d3991f23",
+        "filename": "view/tests/qunit/resources.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-06T08:40:46Z",
+      "side": 1,
+      "message": "missing parentheses",
+      "revId": "b971480263c3980ac8da6f6ffc58863646cd5a94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
