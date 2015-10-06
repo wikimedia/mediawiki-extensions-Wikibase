@@ -20,7 +20,7 @@ class StorageException extends \MWException {
 	/**
 	 * @param string|Status $status
 	 * @param int $code
-	 * @param Exception $previous
+	 * @param Exception|null $previous
 	 */
 	public function __construct( $status = "", $code = 0, Exception $previous = null ) {
 		if ( $status instanceof Status ) {

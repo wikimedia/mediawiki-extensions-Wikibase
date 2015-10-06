@@ -25,7 +25,7 @@ class ChangeOpValidationException extends ChangeOpException {
 
 	/**
 	 * @param Result $result
-	 * @param Exception $previous
+	 * @param Exception|null $previous
 	 *
 	 * @throws InvalidArgumentException
 	 */

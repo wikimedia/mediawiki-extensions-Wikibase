@@ -28,7 +28,7 @@ class MessageException extends Exception {
 	 * @param string $key
 	 * @param array $params
 	 * @param string $message
-	 * @param Exception $previous
+	 * @param Exception|null $previous
 	 */
 	public function __construct( $key, array $params, $message, Exception $previous = null ) {
 		parent::__construct( $message, 0, $previous );
