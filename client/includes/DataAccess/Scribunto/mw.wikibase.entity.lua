@@ -45,6 +45,7 @@ end
 
 -- Get the label for a given language code
 --
+-- @param entity
 -- @param langCode
 methodtable.getLabel = function( entity, langCode )
 	checkTypeMulti( 'getLabel', 1, langCode, { 'string', 'number', 'nil' } )
@@ -70,6 +71,7 @@ end
 
 -- Get the sitelink title linking to the given site id
 --
+-- @param entity
 -- @param globalSiteId
 methodtable.getSitelink = function( entity, globalSiteId )
 	checkTypeMulti( 'getSitelink', 1, globalSiteId, { 'string', 'number', 'nil' } )
@@ -95,6 +97,7 @@ end
 
 -- Get the best statements with the given property id
 --
+-- @param entity
 -- @param propertyId
 methodtable.getBestStatements = function( entity, propertyId )
 	if entity.claims == nil or not entity.claims[propertyId] then
@@ -136,6 +139,7 @@ end
 
 -- Get the formatted value of the claims with the given property id
 --
+-- @param entity
 -- @param propertyLabelOrId
 -- @param acceptableRanks
 methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptableRanks )
