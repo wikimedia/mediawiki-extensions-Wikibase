@@ -16,6 +16,24 @@
       "revId": "8fd914d2681d4181a2345ded541c80ecaf18f4ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_89b5a831",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-06T12:26:07Z",
+      "side": 1,
+      "message": "needs geodata",
+      "parentUuid": "2ecb373e_5331afff",
+      "revId": "8fd914d2681d4181a2345ded541c80ecaf18f4ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
