@@ -65,7 +65,7 @@ class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$entities[] = array( $entity );
 
 		$item = new Item();
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
 		$entities[] = array( $item );
 
 		$entities[] = array( Property::newFromType( 'string' ) );

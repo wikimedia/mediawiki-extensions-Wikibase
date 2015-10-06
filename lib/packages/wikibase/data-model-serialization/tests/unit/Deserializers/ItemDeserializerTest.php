@@ -203,7 +203,7 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$item = new Item();
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
 		$provider[] = array(
 			$item,
 			array(
