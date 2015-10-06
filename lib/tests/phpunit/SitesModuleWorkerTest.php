@@ -46,8 +46,8 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 
 		return new SitesModuleWorker(
 			new SettingsArray( array(
-			'siteLinkGroups' => $groups,
-			'specialSiteLinkGroups' => $specialGroups
+				'siteLinkGroups' => $groups,
+				'specialSiteLinkGroups' => $specialGroups
 			) ),
 			$siteStore,
 			$cache ?: new HashBagOStuff()

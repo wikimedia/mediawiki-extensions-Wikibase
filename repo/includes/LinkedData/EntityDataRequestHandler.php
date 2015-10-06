@@ -34,9 +34,13 @@ use Wikibase\RedirectRevision;
 class EntityDataRequestHandler {
 
 	/**
-	 * @var int Cache duration in seconds
+	 * Allowed smallest and bigest number of seconds for the "max-age=..." and "s-maxage=..." cache
+	 * control parameters.
+	 *
+	 * @todo Hard maximum could be configurable somehow.
 	 */
-	private $maxAge = 0;
+	const MINIMUM_MAX_AGE = 0;
+	const MAXIMUM_MAX_AGE = 2678400; // 31 days
 
 	/**
 	 * @var EntityDataSerializationService
@@ -79,6 +83,11 @@ class EntityDataRequestHandler {
 	private $defaultFormat;
 
 	/**
+	 * @var int Number of seconds to cache entity data.
+	 */
+	private $maxAge;
+
+	/**
 	 * @var bool
 	 */
 	private $useSquids;
@@ -97,7 +106,8 @@ class EntityDataRequestHandler {
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityRedirectLookup $entityRedirectLookup
 	 * @param EntityDataSerializationService $serializationService
-	 * @param string $defaultFormat
+	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 * @param string $defaultFormat The format as a file extension or MIME type.
 	 * @param int $maxAge number of seconds to cache entity data
 	 * @param bool $useSquids do we have web caches configured?
 	 * @param string|null $frameOptionsHeader for X-Frame-Options
@@ -475,13 +485,12 @@ class EntityDataRequestHandler {
 		// NOTE: similar code as in RawAction::onView, keep in sync.
 
 		//FIXME: do not cache if revision was requested explicitly!
-		$maxage = $request->getInt( 'maxage', $this->maxAge );
-		$smaxage = $request->getInt( 'smaxage', $this->maxAge );
+		$maxAge = $request->getInt( 'maxage', $this->maxAge );
+		$sMaxAge = $request->getInt( 'smaxage', $this->maxAge );
 
 		// XXX: do we want public caching even for data from old revisions?
-		// Sanity: 0 to 31 days. // todo: Hard maximum could be configurable somehow.
-		$maxage  = max( 0, min( 60 * 60 * 24 * 31, $maxage ) );
-		$smaxage = max( 0, min( 60 * 60 * 24 * 31, $smaxage ) );
+		$maxAge  = max( self::MINIMUM_MAX_AGE, min( self::MAXIMUM_MAX_AGE, $maxAge ) );
+		$sMaxAge = max( self::MINIMUM_MAX_AGE, min( self::MAXIMUM_MAX_AGE, $sMaxAge ) );
 
 		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
 		$response->header( 'Access-Control-Allow-Origin: *' );
@@ -497,7 +506,7 @@ class EntityDataRequestHandler {
 
 		// allow the client to cache this
 		$mode = 'public';
-		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $smaxage . ', max-age=' . $maxage );
+		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $sMaxAge . ', max-age=' . $maxAge );
 
 		ob_clean(); // remove anything that might already be in the output buffer.
 

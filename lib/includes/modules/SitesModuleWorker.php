@@ -22,6 +22,11 @@ use Xml;
 class SitesModuleWorker {
 
 	/**
+	 * How many seconds the result of self::getModifiedHash is cached.
+	 */
+	const SITES_HASH_CACHE_DURATION = 600; // 10 minutes
+
+	/**
 	 * @var SettingsArray
 	 */
 	private $settings;
@@ -121,6 +126,7 @@ class SitesModuleWorker {
 	/**
 	 * @param MediaWikiSite $site
 	 * @param string[] $specialGroups
+	 *
 	 * @return string[]
 	 */
 	private function getSiteDetails( MediaWikiSite $site, array $specialGroups ) {
@@ -168,7 +174,7 @@ class SitesModuleWorker {
 	 * Whether it's needed to add a Site to the JS variable.
 	 *
 	 * @param Site $site
-	 * @param array $groups
+	 * @param string[] $groups
 	 *
 	 * @return bool
 	 */
@@ -204,7 +210,7 @@ class SitesModuleWorker {
 
 		if ( $hash === false ) {
 			$hash = $this->computeModifiedHash();
-			$this->cache->set( $cacheKey, $hash, 10 * 60 );
+			$this->cache->set( $cacheKey, $hash, self::SITES_HASH_CACHE_DURATION );
 		}
 
 		return $hash;
