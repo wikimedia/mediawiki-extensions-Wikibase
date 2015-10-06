@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_f313fbb6",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-06T08:21:23Z",
+      "side": 1,
+      "message": "Unrelated to this patch, but: The way this code is ordered means the count is also increased for an entity that could not be found (see the \"return nil\" below). Is this intended?",
+      "revId": "8773a4d8772ce17a9ad80cd1297342a4cdefc371",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_d30eff90",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-06T08:21:23Z",
+      "side": 1,
+      "message": "Is this check even necessary? I do not think so and found this line confusing. The code above guarantees this is set and does have the correct type.",
+      "revId": "8773a4d8772ce17a9ad80cd1297342a4cdefc371",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
