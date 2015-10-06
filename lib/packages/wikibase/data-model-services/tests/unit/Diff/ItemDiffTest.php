@@ -36,25 +36,21 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// add link ------------------------------
 		$a = new Item();
-		$a->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' ),
-					new ItemId( 'Q3' )
-				)
+		$a->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' ),
+				new ItemId( 'Q3' )
 			)
 		);
 
 		$b = $a->copy();
-		$b->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'dewiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' )
-				)
+		$b->getSiteLinkList()->addNewSiteLink(
+			'dewiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' )
 			)
 		);
 
@@ -62,25 +58,21 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// add badges
 		$a = new Item();
-		$a->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' ),
-				)
+		$a->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' ),
 			)
 		);
 
 		$b = new Item();
-		$b->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' ),
-					new ItemId( 'Q3' )
-				)
+		$b->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' ),
+				new ItemId( 'Q3' )
 			)
 		);
 
@@ -88,50 +80,42 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// remove badges
 		$a = new Item();
-		$a->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' ),
-					new ItemId( 'Q3' )
-				)
+		$a->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' ),
+				new ItemId( 'Q3' )
 			)
 		);
 
 		$b = new Item();
-		$b->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' )
-				)
+		$b->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' )
 			)
 		);
 
 		// modify badges
 		$a = new Item();
-		$a->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q41' ),
-					new ItemId( 'Q3' )
-				)
+		$a->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q41' ),
+				new ItemId( 'Q3' )
 			)
 		);
 
 		$b = new Item();
-		$b->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' ),
-					new ItemId( 'Q3' )
-				)
+		$b->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' ),
+				new ItemId( 'Q3' )
 			)
 		);
 
@@ -139,22 +123,18 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// remove link
 		$a = new Item();
-		$a->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' )
-				)
+		$a->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' )
 			)
 		);
-		$a->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'dewiki',
-				'Test',
-				array(
-					new ItemId( 'Q3' )
-				)
+		$a->getSiteLinkList()->addNewSiteLink(
+			'dewiki',
+			'Test',
+			array(
+				new ItemId( 'Q3' )
 			)
 		);
 
@@ -165,26 +145,22 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 		// change link
 		$a = new Item();
-		$a->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test',
-				array(
-					new ItemId( 'Q42' ),
-					new ItemId( 'Q3' )
-				)
+		$a->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test',
+			array(
+				new ItemId( 'Q42' ),
+				new ItemId( 'Q3' )
 			)
 		);
 
 		$b = new Item();
-		$b->getSiteLinkList()->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Test!!!',
-				array(
-					new ItemId( 'Q42' ),
-					new ItemId( 'Q3' )
-				)
+		$b->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Test!!!',
+			array(
+				new ItemId( 'Q42' ),
+				new ItemId( 'Q3' )
 			)
 		);
 
