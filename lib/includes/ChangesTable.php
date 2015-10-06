@@ -121,6 +121,7 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 		$infoField = $this->getPrefixedField( 'info' );
 		$revisionIdField = $this->getPrefixedField( 'revision_id' );
 		$userIdField = $this->getPrefixedField( 'user_id' );
+		$timeField = $this->getPrefixedField( 'time' );
 
 		if ( isset( $values[$infoField] ) ) {
 			if ( !( $row instanceof ChangeRow ) ) {
@@ -136,6 +137,10 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 
 		if ( !isset( $values[$userIdField] ) ) {
 			$values[$userIdField] = 0;
+		}
+
+		if ( !isset( $values[$timeField] ) ) {
+			$values[$timeField] = wfTimestampNow();
 		}
 
 		return $values;
