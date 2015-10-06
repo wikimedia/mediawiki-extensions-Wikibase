@@ -102,7 +102,7 @@ class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 		$db->delete( $tableName, '*', __METHOD__ );
 		$this->tablesUsed[] = $tableName;
 
-		$channel = new DatabaseChangeTransmitter();
+		$channel = new DatabaseChangeTransmitter( $db );
 		$channel->transmitChange( $change );
 
 		$res = $db->select( $tableName, '*', array(), __METHOD__ );
