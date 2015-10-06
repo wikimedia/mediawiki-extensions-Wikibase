@@ -97,7 +97,13 @@ class ItemChangeTest extends EntityChangeTest {
 
 			$diff = new Diff();
 
-			$change = ItemChange::newFromDiff( $diff, array( 'type' => 'test' ) );
+			$change = new ItemChange(
+				$this->getMock( 'IORMTable' ),
+				array( 'type' => 'test' ),
+				false
+			);
+			$change->setDiff( $diff );
+
 			$cases['plain-diff'] = array( $change );
 
 			// --------
@@ -116,8 +122,13 @@ class ItemChangeTest extends EntityChangeTest {
 			assert( $diff->getSiteLinkDiff() !== null );
 
 			//NOTE: ItemChange's constructor may or may not already fix the bad diff.
+			$change = new ItemChange(
+				$this->getMock( 'IORMTable' ),
+				array( 'type' => 'test' ),
+				false
+			);
+			$change->setDiff( $diff );
 
-			$change = ItemChange::newFromDiff( $diff, array( 'type' => 'test' ) );
 			$cases['atomic-sitelink-diff'] = array( $change );
 
 			$wgDevelopmentWarnings = true;
