@@ -1011,7 +1011,7 @@ class WikibaseRepo {
 		$transmitters[] = new HookChangeTransmitter( 'WikibaseChangeNotification' );
 
 		if ( $this->settings->getSetting( 'useChangesTable' ) ) {
-			$transmitters[] = new DatabaseChangeTransmitter();
+			$transmitters[] = new DatabaseChangeTransmitter( wfGetLB() );
 		}
 
 		return $transmitters;
