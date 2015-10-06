@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_6e1f22bb",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-06T10:41:38Z",
+      "side": 1,
+      "message": "Overly long line is overly long,",
+      "revId": "15d63aa91266d40a1628feff67eec0c470b07c93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
