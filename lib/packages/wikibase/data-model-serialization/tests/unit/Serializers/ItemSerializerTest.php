@@ -224,7 +224,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 		);
 
 		$item = new Item();
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
 		$provider[] = array(
 			array(
 				'type' => 'item',
@@ -250,7 +250,7 @@ class ItemSerializerTest extends SerializerBaseTest {
 		$serializer = $this->buildSerializer( true );
 
 		$item = new Item();
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );
 
 		$sitelinks = new \stdClass();
 		$sitelinks->enwiki = array(
