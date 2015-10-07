@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_b6fa37b4",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-07T13:35:23Z",
+      "side": 1,
+      "message": "ok :)",
+      "parentUuid": "2ecb373e_36572707",
+      "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_897da8b2",
         "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
         "patchSetId": 4
