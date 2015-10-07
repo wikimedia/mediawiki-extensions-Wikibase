@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_82a49a9f",
+        "filename": "repo/includes/Notifications/DatabaseChangeTransmitter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T12:01:56Z",
+      "side": 1,
+      "message": "Please don\u0027t hog db connections by passing them to constructors. Connections are \"leased\" from the LoadBaqlancer, and we should try to hold the lease only for as short a time as possible. \n\nI suggest to use a ConsistentReadConnectionManager instead.",
+      "revId": "8d62e2921de0a5008d98890025f9ebcc93050d7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_e2aa3e68",
+        "filename": "repo/includes/Notifications/DatabaseChangeTransmitter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T12:01:56Z",
+      "side": 1,
+      "message": "Technically, this is a violation of the interface\u0027s contract. Not sure how strict we need to be about this, considering that a DB error probably means the request will fail anyway.",
+      "revId": "8d62e2921de0a5008d98890025f9ebcc93050d7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_a2c8b65a",
+        "filename": "repo/includes/Notifications/DatabaseChangeTransmitter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T12:01:56Z",
+      "side": 1,
+      "message": "the serializeInfo method should probably also be moved here.",
+      "revId": "8d62e2921de0a5008d98890025f9ebcc93050d7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
