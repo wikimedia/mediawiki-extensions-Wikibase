@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_0c1bfc73",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-07T16:11:56Z",
+      "side": 1,
+      "message": "Please enhance this description and describe the fact that this class does heavy (and very critical for the performance) caching.",
+      "revId": "e588c2772463547e1630985b26084afc98831fb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_ec3c70bd",
+        "filename": "repo/includes/DataUpdates/ReferencedEntitiesDataUpdate.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-07T16:11:56Z",
+      "side": 1,
+      "message": "Please add a comment that describes where this is used.",
+      "revId": "e588c2772463547e1630985b26084afc98831fb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_ac42e83c",
+        "filename": "repo/includes/DataUpdates/SiteLinkDataUpdate.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-07T16:11:56Z",
+      "side": 1,
+      "message": "-\"is called\"",
+      "revId": "e588c2772463547e1630985b26084afc98831fb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_19157c4d",
+        "filename": "repo/includes/DataUpdates/StatementDataUpdate.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-07T16:11:56Z",
+      "side": 1,
+      "message": "-\"is called\"\n-\"an\"",
+      "revId": "e588c2772463547e1630985b26084afc98831fb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_f90f5038",
+        "filename": "repo/includes/DataUpdates/StatementDataUpdate.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-07T16:11:56Z",
+      "side": 1,
+      "message": "\"for all Statements on an Entity that supports Statements.\"",
+      "revId": "e588c2772463547e1630985b26084afc98831fb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_ec6310d7",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-07T16:11:56Z",
+      "side": 1,
+      "message": "Please add a comment that describes where this is set.",
+      "revId": "e588c2772463547e1630985b26084afc98831fb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
