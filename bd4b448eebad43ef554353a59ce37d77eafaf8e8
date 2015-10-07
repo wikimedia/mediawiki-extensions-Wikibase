@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_d6ca63a2",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-07T13:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_534befcc",
+      "revId": "bd4b448eebad43ef554353a59ce37d77eafaf8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_3308a394",
         "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_b6bd57ff",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-07T13:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_82d25aff",
+      "revId": "bd4b448eebad43ef554353a59ce37d77eafaf8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_73486bcf",
         "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
         "patchSetId": 1
@@ -83,6 +119,24 @@
       "side": 1,
       "message": "Yes, we probably do want begin/commit here.",
       "parentUuid": "2ecb373e_73486bcf",
+      "revId": "bd4b448eebad43ef554353a59ce37d77eafaf8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_563673b1",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-07T13:27:01Z",
+      "side": 1,
+      "message": "Will do in a follow-up",
+      "parentUuid": "2ecb373e_2203667b",
       "revId": "bd4b448eebad43ef554353a59ce37d77eafaf8e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
