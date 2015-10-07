@@ -27,7 +27,7 @@ entity.claimRanks = {
 
 -- Create new entity object from given data
 --
--- @param data
+-- @param {table} data
 entity.create = function( data )
 	if type( data ) ~= 'table' or type( data.schemaVersion ) ~= 'number' then
 		error( 'The entity data must be a table obtained via mw.wikibase.getEntityObject' )
@@ -45,7 +45,7 @@ end
 
 -- Get the label for a given language code
 --
--- @param langCode
+-- @param {string|number} [langCode]
 methodtable.getLabel = function( entity, langCode )
 	checkTypeMulti( 'getLabel', 1, langCode, { 'string', 'number', 'nil' } )
 
@@ -70,7 +70,7 @@ end
 
 -- Get the sitelink title linking to the given site id
 --
--- @param globalSiteId
+-- @param {string|number} [globalSiteId]
 methodtable.getSitelink = function( entity, globalSiteId )
 	checkTypeMulti( 'getSitelink', 1, globalSiteId, { 'string', 'number', 'nil' } )
 
@@ -95,7 +95,7 @@ end
 
 -- Get the best statements with the given property id
 --
--- @param propertyId
+-- @param {string} propertyId
 methodtable.getBestStatements = function( entity, propertyId )
 	if entity.claims == nil or not entity.claims[propertyId] then
 		return {}
@@ -136,8 +136,8 @@ end
 
 -- Get the formatted value of the claims with the given property id
 --
--- @param propertyLabelOrId
--- @param acceptableRanks
+-- @param {string} propertyLabelOrId
+-- @param {table} [acceptableRanks]
 methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptableRanks )
 	acceptableRanks = acceptableRanks or nil
 

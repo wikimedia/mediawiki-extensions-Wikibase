@@ -72,7 +72,7 @@ function wikibase.setupInterface()
 	-- Get the mw.wikibase.entity object for the current page or for the
 	-- specified id.
 	--
-	-- @param id
+	-- @param {string} [id]
 	wikibase.getEntity = function( id )
 		checkTypeMulti( 'getEntity', 1, id, { 'string', 'nil' } )
 
@@ -95,7 +95,7 @@ function wikibase.setupInterface()
 	-- Get the label for the given entity id, if specified, or of the
 	-- connected entity, if exists. (in content language)
 	--
-	-- @param id
+	-- @param {string} [id]
 	wikibase.label = function( id )
 		checkTypeMulti( 'label', 1, id, { 'string', 'nil' } )
 
@@ -111,7 +111,7 @@ function wikibase.setupInterface()
 	-- Get the description for the given entity id, if specified, or of the
 	-- connected entity, if exists. (in content language)
 	--
-	-- @param id
+	-- @param {string} [id]
 	wikibase.description = function( id )
 		checkTypeMulti( 'description', 1, id, { 'string', 'nil' } )
 
@@ -126,7 +126,7 @@ function wikibase.setupInterface()
 
 	-- Get the local sitelink title for the given entity id.
 	--
-	-- @param id
+	-- @param {string} id
 	wikibase.sitelink = function( id )
 		checkType( 'sitelink', 1, id, 'string' )
 
@@ -136,7 +136,7 @@ function wikibase.setupInterface()
 
 	-- Render a Snak from its serialization
 	--
-	-- @param snakSerialization
+	-- @param {table} snakSerialization
 	wikibase.renderSnak = function( snakSerialization )
 		checkType( 'renderSnak', 1, snakSerialization, 'table' )
 
@@ -145,7 +145,7 @@ function wikibase.setupInterface()
 
 	-- Render a list of Snaks from their serialization
 	--
-	-- @param snaksSerialization
+	-- @param {table} snaksSerialization
 	wikibase.renderSnaks = function( snaksSerialization )
 		checkType( 'renderSnaks', 1, snaksSerialization, 'table' )
 
@@ -154,7 +154,7 @@ function wikibase.setupInterface()
 
 	-- Returns a property id for the given label or id
 	--
-	-- @param propertyLabelOrId
+	-- @param {string} propertyLabelOrId
 	wikibase.resolvePropertyId = function( propertyLabelOrId )
 		checkType( 'resolvePropertyId', 1, propertyLabelOrId, 'string' )
 
