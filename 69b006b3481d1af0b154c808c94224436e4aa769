@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_2a26d863",
+        "filename": "repo/includes/DataUpdates/PageImagesDataUpdate.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-07T19:33:52Z",
+      "side": 1,
+      "message": "How can you grantee this in the future from that position? I don\u0027t see that the  constant name is giving that promise.",
+      "revId": "69b006b3481d1af0b154c808c94224436e4aa769",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_6adce073",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-07T19:33:52Z",
+      "side": 1,
+      "message": "I would prefer preferredImage to bestImage :) \n\nBTW:\nNot your fault, just realized that most methods use ParserOutput as parameter and wondered why there is no such member used instead.",
+      "revId": "69b006b3481d1af0b154c808c94224436e4aa769",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
