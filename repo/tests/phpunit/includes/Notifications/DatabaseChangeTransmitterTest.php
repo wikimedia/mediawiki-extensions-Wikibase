@@ -102,7 +102,7 @@ class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 		$db->delete( $tableName, '*', __METHOD__ );
 		$this->tablesUsed[] = $tableName;
 
-		$channel = new DatabaseChangeTransmitter();
+		$channel = new DatabaseChangeTransmitter( wfGetLB() );
 		$channel->transmitChange( $change );
 
 		$res = $db->select( $tableName, '*', array(), __METHOD__ );
@@ -125,7 +125,7 @@ class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $expected, $row );
 
-		$this->assertNotNull( $change->getId() );
+		$this->assertType( 'int', $change->getId() );
 	}
 
 }
