@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_22a84689",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-07T12:02:53Z",
+      "side": 1,
+      "message": "do you not like there to be any caching?",
+      "parentUuid": "2ecb373e_296fd4fb",
+      "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_897da8b2",
         "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
         "patchSetId": 4
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_e2ad5e99",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-07T12:02:53Z",
+      "side": 1,
+      "message": "this is moved here from EntityParserOutputGenerator\n\nwe should not be changing such details in this patch. go ahead and make a follow up if you like.",
+      "parentUuid": "2ecb373e_a97ae4b5",
+      "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_69807c8e",
         "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
         "patchSetId": 4
@@ -64,6 +100,24 @@
       "writtenOn": "2015-10-06T15:07:40Z",
       "side": 1,
       "message": "I find this filter odd.\n* Should be done above, when collecting the strings.\n* Can be replaced with an \"instanceof StringValue\" in my opinion.",
+      "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_02b3cafd",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-07T12:02:53Z",
+      "side": 1,
+      "message": "this is moved here from EntityParserOutputGenerator\n\nwe should not be changing such details in this patch. go ahead and make a follow up if you like.",
+      "parentUuid": "2ecb373e_69807c8e",
       "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_a29bd677",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-07T12:02:53Z",
+      "side": 1,
+      "message": "this is moved here from EntityParserOutputGenerator\n\nwe should not be changing such details in this patch.",
+      "parentUuid": "2ecb373e_0938d8ea",
+      "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_293d94db",
         "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
         "patchSetId": 4
@@ -98,6 +170,24 @@
       "writtenOn": "2015-10-06T15:07:40Z",
       "side": 1,
       "message": "As before: Do this when collecting. Do an instanceof instead.",
+      "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_c298627d",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-07T12:02:53Z",
+      "side": 1,
+      "message": "this is moved here from EntityParserOutputGenerator\n\nwe should not be changing such details in this patch.",
+      "parentUuid": "2ecb373e_293d94db",
       "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -149,6 +239,24 @@
       "writtenOn": "2015-10-06T15:07:40Z",
       "side": 1,
       "message": "What is this line for? If this information is required somewhere else, a comment should make this obvious.\n\nWait. Does this track full EntityId objects (in serialized form?) in the parser output?",
+      "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_62788e26",
+        "filename": "repo/includes/DataUpdates/ReferencedEntitiesDataUpdate.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-07T12:02:53Z",
+      "side": 1,
+      "message": "this code is just moved, but wonder if it is still needed at all or forget why",
+      "parentUuid": "2ecb373e_091f7872",
       "revId": "0fe35954a10032e964b2cb60775d83784e14b7f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
