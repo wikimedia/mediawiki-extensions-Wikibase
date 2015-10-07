@@ -905,6 +905,7 @@ final class WikibaseClient {
 				$siteId
 			),
 			$this->getContentLanguage(),
+			$this->getSiteStore(),
 			$siteId,
 			$this->settings->getSetting( 'injectRecentChanges' )
 		);

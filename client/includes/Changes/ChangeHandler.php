@@ -9,6 +9,7 @@ use IORMRow;
 use Language;
 use Message;
 use MWException;
+use SiteStore;
 use Title;
 use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
@@ -82,6 +83,11 @@ class ChangeHandler {
 	private $language;
 
 	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * @var string
 	 */
 	private $localSiteId;
@@ -97,6 +103,7 @@ class ChangeHandler {
 	 * @param PageUpdater $updater
 	 * @param ChangeListTransformer $changeListTransformer
 	 * @param Language $language
+	 * @param SiteStore $siteStore
 	 * @param string $localSiteId
 	 * @param bool $injectRecentChanges
 	 *
@@ -108,6 +115,7 @@ class ChangeHandler {
 		PageUpdater $updater,
 		ChangeListTransformer $changeListTransformer,
 		Language $language,
+		SiteStore $siteStore,
 		$localSiteId,
 		$injectRecentChanges = true
 	) {
@@ -124,6 +132,7 @@ class ChangeHandler {
 		$this->updater = $updater;
 		$this->changeListTransformer = $changeListTransformer;
 		$this->language = $language;
+		$this->siteStore = $siteStore;
 		$this->localSiteId = $localSiteId;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
@@ -403,7 +412,7 @@ class ChangeHandler {
 
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$action = $change->getAction();
-			$commentCreator = new SiteLinkCommentCreator( $this->language, $this->localSiteId );
+			$commentCreator = new SiteLinkCommentCreator( $this->language, $this->siteStore, $this->localSiteId );
 			$siteLinkComment = $commentCreator->getEditComment( $siteLinkDiff, $action );
 			$editComment = $siteLinkComment === null ? '' : $siteLinkComment;
 		}

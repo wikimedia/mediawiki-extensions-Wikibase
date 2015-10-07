@@ -75,6 +75,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$updater ?: new MockPageUpdater(),
 			$changeListTransformer,
 			Language::factory( 'qqx' ),
+			$this->getMock( 'SiteStore' ),
 			'enwiki',
 			true
 		);
