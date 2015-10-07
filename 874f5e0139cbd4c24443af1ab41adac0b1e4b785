@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_02fe6a66",
+        "filename": "client/includes/Changes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T12:13:55Z",
+      "side": 1,
+      "message": "This is starting to look like we want a SiteLinkCommentCreatorFactory",
+      "revId": "874f5e0139cbd4c24443af1ab41adac0b1e4b785",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
