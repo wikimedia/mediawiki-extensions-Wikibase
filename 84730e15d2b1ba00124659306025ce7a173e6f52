@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_36e88776",
+        "filename": "repo/includes/DataUpdates/PageImagesDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-07T14:36:29Z",
+      "side": 1,
+      "message": "\u003cstring, int\u003e  propertyId \u003d\u003e priority",
+      "revId": "84730e15d2b1ba00124659306025ce7a173e6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_f6fd1f38",
+        "filename": "repo/includes/DataUpdates/PageImagesDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-07T14:36:29Z",
+      "side": 1,
+      "message": "ordered list",
+      "revId": "84730e15d2b1ba00124659306025ce7a173e6f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
