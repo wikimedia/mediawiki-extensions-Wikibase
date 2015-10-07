@@ -20,7 +20,7 @@ use Wikibase\Repo\Specials\SpecialMergeItems;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\Specials\SpecialMergeItems
+ * @covers Wikibase\Repo\Specials\SpecialMergeItems
  *
  * @group Wikibase
  * @group SpecialPage

@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Validators\NotEntityIdValidator;
 
 /**
- * @covers \Wikibase\Repo\Validators\NotEntityIdValidator
+ * @covers Wikibase\Repo\Validators\NotEntityIdValidator
  *
  * @group WikibaseRepo
  * @group Wikibase
