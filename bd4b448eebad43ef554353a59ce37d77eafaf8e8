@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_82d25aff",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T12:10:08Z",
+      "side": 1,
+      "message": "I think this, since it keeps the \"happy\" code path at the top level.",
+      "parentUuid": "2ecb373e_3308a394",
+      "revId": "bd4b448eebad43ef554353a59ce37d77eafaf8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_73486bcf",
         "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2015-10-06T07:51:50Z",
       "side": 1,
       "message": "All 3 other methods (touchUsageBatch, addUsages and removeEntities) do a \"begin\" and \"commit\" for each batch. This code does not. Is this intended? Is this a problem?\n\nNot a reason for a -1 because there was no commit before and this change does not make the situation worse.",
+      "revId": "bd4b448eebad43ef554353a59ce37d77eafaf8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_2203667b",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T12:10:08Z",
+      "side": 1,
+      "message": "Yes, we probably do want begin/commit here.",
+      "parentUuid": "2ecb373e_73486bcf",
       "revId": "bd4b448eebad43ef554353a59ce37d77eafaf8e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
