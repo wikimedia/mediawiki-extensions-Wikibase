@@ -53,12 +53,10 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 	 */
 	private static function doMock() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
-		$store = $wikibaseClient->getStore();
 
-		if ( ! $store instanceof MockClientStore ) {
-			$store = new MockClientStore( 'de' );
-			$wikibaseClient->overrideStore( $store );
-		}
+		$store = new MockClientStore( 'de' );
+		$store->setEntityLookup( static::getEntityLookup() );
+		$wikibaseClient->overrideStore( $store );
 
 		$settings = $wikibaseClient->getSettings();
 		if ( self::$oldAllowArbitraryDataAccess === null ) {
@@ -73,7 +71,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 
 		$settings->setSetting(
 			'entityAccessLimit',
-			2
+			static::getEntityAccessLimit()
 		);
 
 		$testHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
@@ -100,9 +98,9 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$this->assertInstanceOf(
-			'Wikibase\Test\MockRepository',
-			$wikibaseClient->getStore()->getEntityLookup(),
-			'Mocking the default client EntityLookup failed'
+			'Wikibase\Test\MockClientStore',
+			$wikibaseClient->getStore(),
+			'Mocking the default ClientStore failed'
 		);
 
 		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
@@ -126,6 +124,20 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 	 */
 	protected function getTestTitle() {
 		return Title::newFromText( 'WikibaseClientDataAccessTest' );
+	}
+
+	/**
+	 * @return EntityLookup|null
+	 */
+	protected static function getEntityLookup() {
+		return null;
+	}
+
+	/**
+	 * @return int
+	 */
+	protected static function getEntityAccessLimit() {
+		return PHP_INT_MAX;
 	}
 
 }

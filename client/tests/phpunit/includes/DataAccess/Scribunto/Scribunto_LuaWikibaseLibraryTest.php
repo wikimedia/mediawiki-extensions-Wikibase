@@ -31,6 +31,14 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		);
 	}
 
+	/**
+	 * @return int
+	 */
+	protected static function getEntityAccessLimit() {
+		// testGetEntity_entityAccessLimitExceeded needs this to be 2
+		return 2;
+	}
+
 	public function testConstructor() {
 		$engine = Scribunto::newDefaultEngine( array() );
 		$luaWikibaseLibrary = new Scribunto_LuaWikibaseLibrary( $engine );
