@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_a5b8bb25",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-07T20:23:24Z",
+      "side": 1,
+      "message": "Should I investigate this and if needed start a discussion on phabricator?",
+      "revId": "086d9e4466806c75cb0eae5c46546746f9892c55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
