@@ -28,6 +28,7 @@
 	"wikibase-rc-wikibase-edit-letter": "اومتوک",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون",
 	"unconnectedpages": "توکو سره ناتړلي مخونه",
+	"unconnectedpages-summary": "په دې مخ د هغو مخونو لړليک دی چې بل اومتوک سره لا نه دي تړل شوي (په نومتشيالونو کې چې د تړل شويو توکو ملاتړ کوي). دا لړليک د مخښکته مخ پېژند له مخې اوډل شوی چې نوي مخونه په سر کې راشي.",
 	"wikibase-unconnectedpages-submit": "ورځه",
 	"pageswithbadges": "نښان لرونکي مخونه",
 	"wikibase-pageswithbadges-legend": "د نښان لرونکيو مخونو لړليک",
