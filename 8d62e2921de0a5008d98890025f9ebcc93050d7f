@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_36b3a7fe",
+        "filename": "repo/includes/Notifications/DatabaseChangeTransmitter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-07T13:53:39Z",
+      "side": 1,
+      "message": "ConsistentReadConnectionManager is in client, due to that I switched to passing in a LoadBalancer. I guess this will change again once this code has been refactored into a ChangeStore.",
+      "parentUuid": "2ecb373e_82a49a9f",
+      "revId": "8d62e2921de0a5008d98890025f9ebcc93050d7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_e2aa3e68",
         "filename": "repo/includes/Notifications/DatabaseChangeTransmitter.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_b675572e",
+        "filename": "repo/includes/Notifications/DatabaseChangeTransmitter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-07T13:53:39Z",
+      "side": 1,
+      "message": "Yeah :/ After moving this code out of here, this will be fixed, so I guess this is not to much of an issue.",
+      "parentUuid": "2ecb373e_e2aa3e68",
+      "revId": "8d62e2921de0a5008d98890025f9ebcc93050d7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_a2c8b65a",
         "filename": "repo/includes/Notifications/DatabaseChangeTransmitter.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2015-10-07T12:01:56Z",
       "side": 1,
       "message": "the serializeInfo method should probably also be moved here.",
+      "revId": "8d62e2921de0a5008d98890025f9ebcc93050d7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_16946b38",
+        "filename": "repo/includes/Notifications/DatabaseChangeTransmitter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-07T13:53:39Z",
+      "side": 1,
+      "message": "Maybe not here, but outside of the ChangeRow, yes. That should be done in a follow up.",
+      "parentUuid": "2ecb373e_a2c8b65a",
       "revId": "8d62e2921de0a5008d98890025f9ebcc93050d7f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
