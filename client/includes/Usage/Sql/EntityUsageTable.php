@@ -336,6 +336,8 @@ class EntityUsageTable {
 				break;
 			}
 
+			$this->connection->begin( __METHOD__ );
+
 			$this->connection->delete(
 				$this->tableName,
 				array(
@@ -343,6 +345,8 @@ class EntityUsageTable {
 				),
 				__METHOD__
 			);
+
+			$this->connection->commit( __METHOD__ );
 		} while ( count( $res ) === $this->batchSize );
 
 		return $old;
