@@ -122,7 +122,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$item = new Item();
-		$item->addSiteLink( new SiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) );
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$redirect = new EntityRedirect( new ItemId( 'Q12345678' ), $item->getId() );

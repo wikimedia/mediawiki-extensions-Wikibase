@@ -154,7 +154,7 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'Q4' );
 
 		$item = new Item( $itemId );
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Kitten' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
 
 		$factory = $this->getEntityChangeFactory();
 		$change = $factory->newFromUpdate( EntityChange::RESTORE, null, $item );

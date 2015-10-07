@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage\Sql;
 
+use MediaWikiTestCase;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
@@ -25,7 +26,9 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
+class SiteLinkUsageLookupTest extends MediaWikiTestCase {
+
+	const PAGE_NAME_PREFIX = 'Page number ';
 
 	/**
 	 * @param ItemId[] $links
@@ -33,16 +36,15 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookup( array $links ) {
-		$titleFactory = $this->getTitleFactory();
 		$siteLinkLookup = new HashSiteLinkStore();
 
 		foreach ( $links as $pageId => $itemId ) {
-			$title = $titleFactory->newFromID( $pageId );
+			$pageName = self::PAGE_NAME_PREFIX . $pageId;
 
 			$item = new Item( $itemId );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'testwiki', $title->getPrefixedText() ) );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'badwiki', $title->getPrefixedText() ) );
-			$item->getSiteLinkList()->addSiteLink( new SiteLink( 'sadwiki', "Other stuff" ) );
+			$item->getSiteLinkList()->addNewSiteLink( 'testwiki', $pageName );
+			$item->getSiteLinkList()->addNewSiteLink( 'badwiki', $pageName );
+			$item->getSiteLinkList()->addNewSiteLink( 'sadwiki', 'Other stuff' );
 
 			$siteLinkLookup->saveLinksOfItem( $item );
 		}
@@ -51,8 +53,6 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @note Assumptions: page titles are the same as page IDs.
-	 *
 	 * @param SiteLinkLookup $siteLinks
 	 * @param TitleFactory $titleFactory
 	 *
@@ -73,20 +73,18 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
-			->will( $this->returnCallback( function ( $text ) {
-				if ( !preg_match( '/^Page number (\d+)$/', $text, $match ) ) {
-					throw new \InvalidArgumentException( 'Bad title text: ' . $text );
-				}
-
+			->will( $this->returnCallback( function( $text ) {
 				$title = Title::newFromText( $text );
-				$title->resetArticleID( intval( $match[1] ) );
+				$title->resetArticleID(
+					substr( $text, strlen( SiteLinkUsageLookupTest::PAGE_NAME_PREFIX ) )
+				);
 				return $title;
 			} ) );
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
-			->will( $this->returnCallback( function ( $id ) {
-				$title = Title::newFromText( "Page number $id" );
-				$title->resetArticleID( $id );
+			->will( $this->returnCallback( function( $pageId ) {
+				$title = Title::newFromText( SiteLinkUsageLookupTest::PAGE_NAME_PREFIX . $pageId );
+				$title->resetArticleID( $pageId );
 				return $title;
 			} ) );
 
@@ -123,31 +121,37 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 
 		$actual = $lookup->getPagesUsing( array( $q42, $p11 ) );
 		$this->assertInstanceOf( 'Iterator', $actual );
-
-		$actual = iterator_to_array( $actual );
-		$this->assertEmpty( $actual );
+		$this->assertCount( 0, $actual );
 
 		$actual = $lookup->getPagesUsing( array( $q23 ), array( EntityUsage::OTHER_USAGE ) );
 		$this->assertInstanceOf( 'Iterator', $actual );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\Client\Usage\PageEntityUsages', $actual );
+		$this->assertCount( 1, $actual );
 
-		$actual = iterator_to_array( $actual );
-		$usages = $actual[0]->getUsages();
+		/** @var PageEntityUsages[] $actual */
+		$pageUsageObject = $actual[0];
+		$this->assertEquals( 23, $pageUsageObject->getPageId() );
+
+		$usages = $pageUsageObject->getUsages();
+		$this->assertInternalType( 'array', $usages );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\Client\Usage\EntityUsage', $usages );
+		$this->assertCount( 1, $usages );
+
 		$usage = reset( $usages );
+		$this->assertEquals( EntityUsage::ALL_USAGE, $usage->getAspect() );
 		$this->assertEquals( $q23, $usage->getEntityId() );
 
 		$actual = $lookup->getPagesUsing( array( $q42, $q23, $p11 ) );
 		$this->assertInstanceOf( 'Iterator', $actual );
-
-		$actual = iterator_to_array( $actual );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\Client\Usage\PageEntityUsages', $actual );
 		$this->assertCount( 1, $actual );
-		$this->assertInstanceOf( 'Wikibase\Client\Usage\PageEntityUsages', $actual[0] );
 
-		/** @var PageEntityUsages $pageUsageObject */
-		/** @var EntityUsage[] $usages */
-		$pageUsageObject = reset( $actual );
-		$usages = $pageUsageObject->getUsages();
-
+		$pageUsageObject = $actual[0];
 		$this->assertEquals( 23, $pageUsageObject->getPageId() );
+
+		$usages = $pageUsageObject->getUsages();
+		$this->assertInternalType( 'array', $usages );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\Client\Usage\EntityUsage', $usages );
 		$this->assertCount( 1, $usages );
 
 		$usage = reset( $usages );
@@ -197,6 +201,7 @@ class SiteLinkUsageLookupTest extends \MediaWikiTestCase {
 		$usages = $lookup->getPagesUsing( array( $itemId ), array() );
 
 		$this->assertInstanceOf( 'Iterator', $usages );
+		$this->assertCount( 0, $usages );
 	}
 
 }
