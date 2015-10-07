@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_87802c8f",
+        "filename": "lib/includes/formatters/ErrorHandlingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T09:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_8fea95d4",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_efa799b8",
         "filename": "lib/includes/formatters/ErrorHandlingSnakFormatter.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-05T15:10:15Z",
       "side": 1,
       "message": "Should use \u003d\u003d\u003d ... also this probably should never be equal (unless I overlook something) ... so log a warning?",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_2751383b",
+        "filename": "lib/includes/formatters/ErrorHandlingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T09:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_efa799b8",
       "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_a7644812",
+        "filename": "lib/tests/phpunit/formatters/ErrorHandlingSnakFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T09:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_0f3d45db",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_6f2ba993",
         "filename": "lib/tests/phpunit/formatters/ErrorHandlingSnakFormatterTest.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "2ecb373e_c7615401",
+        "filename": "lib/tests/phpunit/formatters/ErrorHandlingSnakFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T09:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_6f2ba993",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ecb373e_2a17cf4b",
         "filename": "lib/tests/phpunit/formatters/ErrorHandlingSnakFormatterTest.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2015-10-05T15:10:15Z",
       "side": 1,
       "message": "We decided to not start our provider names with provide at some point. I suggest formatSnakErrorProvider",
+      "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_c77ab4b7",
+        "filename": "lib/tests/phpunit/formatters/ErrorHandlingSnakFormatterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-07T09:44:07Z",
+      "side": 1,
+      "message": "But core does it this way. And I like this a lot better, for the nice symmetry of  testFoo and provideFoo.\n\nAlso, getFooProvider sounds like it should return a FooProvider, while it\u0027s a provider for testGetFoo - so it should really be called testGetFooProvider... or would that be a test for the provider?\n\nFunction names should start with a verb that describes what the function does. In this case, it provides test cases. \n\nI stopped following the xyzProvider pattern a while ago, I suggest we drop it, it\u0027s counter-intuitive and misleading.",
+      "parentUuid": "2ecb373e_2a17cf4b",
       "revId": "331f32dd6b7f527b976e054aa61f326c65c3fec8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
