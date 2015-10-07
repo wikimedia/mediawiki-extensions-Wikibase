@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_42a79209",
+        "filename": "client/includes/recentchanges/ChangeLineFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-07T10:29:51Z",
+      "side": 0,
+      "message": "Unrelated?",
+      "revId": "66503d99b7b983d4c6e081a4caab510941c585bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
