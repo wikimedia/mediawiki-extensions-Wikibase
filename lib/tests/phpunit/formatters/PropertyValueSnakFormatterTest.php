@@ -92,7 +92,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider formatSnakProvider
 	 */
 	public function testFormatSnak(
-		$snak, $dataType, $valueType, $targetFormat, $formatters, $onError,
+		$snak, $dataType, $valueType, $targetFormat, $formatters,
 		$expected, $expectedException = null
 	) {
 		if ( $expectedException !== null ) {
@@ -104,7 +104,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 
 		$options = new FormatterOptions( array(
 			PropertyValueSnakFormatter::OPT_LANG => 'en',
-			PropertyValueSnakFormatter::OPT_ON_ERROR => $onError,
 		) );
 
 		$formatter = new PropertyValueSnakFormatter(
@@ -143,7 +142,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'string',
 				SnakFormatter::FORMAT_PLAIN,
 				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_WARN,
 				'/^PT:commonsMedia$/'
 			),
 
@@ -153,75 +151,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'string',
 				SnakFormatter::FORMAT_WIKI,
 				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_WARN,
 				'/^VT:string$/'
-			),
-
-			'UnDeserializableValue' => array(
-				new PropertyValueSnak( 7,
-					new UnDeserializableValue( 'cookie', 'globecoordinate', 'cannot understand!' )
-				),
-				'globe-coordinate',
-				'globecoordinate',
-				SnakFormatter::FORMAT_HTML,
-				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_WARN,
-				// message key: wikibase-undeserializable-value
-				'/value is invalid/'
-			),
-
-			'VT mismatching PT' => array(
-				new PropertyValueSnak( 7, new StringValue( 'dummy' ) ),
-				'url',
-				'iri', // url expects an iri, but will get a string
-				SnakFormatter::FORMAT_WIKI,
-				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_WARN,
-				// message key: wikibase-snakformatter-valuetype-mismatch
-				'@^VT:string <span class="error wb-format-error">.*does not match.*</span>$@'
-			),
-
-			'property not found' => array(
-				new PropertyValueSnak( 7, new StringValue( 'dummy' ) ),
-				'', // triggers an exception from the mock PropertyDataTypeLookup
-				'xxx', // should not be used
-				SnakFormatter::FORMAT_HTML,
-				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_WARN,
-				// message key: wikibase-snakformatter-property-not-found
-				'@^VT:string <span class="error wb-format-error">.*not found.*</span>$@'
-			),
-
-			'UnDeserializableValue, ignored' => array(
-				new PropertyValueSnak( 7,
-					new UnDeserializableValue( 'cookie', 'globecoordinate', 'cannot understand!' )
-				),
-				'globe-coordinate',
-				'globecoordinate',
-				SnakFormatter::FORMAT_HTML,
-				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_IGNORE,
-				'/^$/'
-			),
-
-			'VT mismatching PT, ignored' => array(
-				new PropertyValueSnak( 7, new StringValue( 'dummy' ) ),
-				'url',
-				'iri', // url expects an iri, but will get a string
-				SnakFormatter::FORMAT_WIKI,
-				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_IGNORE,
-				'@^VT:string$@'
-			),
-
-			'property not found, ignored' => array(
-				new PropertyValueSnak( 7, new StringValue( 'dummy' ) ),
-				'', // triggers an exception from the mock PropertyDataTypeLookup
-				'xxx', // should not be used
-				SnakFormatter::FORMAT_HTML,
-				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_IGNORE,
-				'@^VT:string$@'
 			),
 
 			'UnDeserializableValue, fail' => array(
@@ -232,7 +162,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'globecoordinate',
 				SnakFormatter::FORMAT_HTML,
 				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_FAIL,
 				null,
 				'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
 			),
@@ -243,7 +172,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'iri', // url expects an iri, but will get a string
 				SnakFormatter::FORMAT_WIKI,
 				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_FAIL,
 				null,
 				'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
 			),
@@ -254,7 +182,6 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'xxx', // should not be used
 				SnakFormatter::FORMAT_HTML,
 				$formatters,
-				PropertyValueSnakFormatter::ON_ERROR_FAIL,
 				null,
 				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
 			),
