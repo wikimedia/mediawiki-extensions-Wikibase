@@ -56,6 +56,39 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	 * @return Change[]
 	 */
 	public function loadChunk( $start, $size ) {
+		Assert::parameterType( 'integer', $start, '$start' );
+		Assert::parameterType( 'integer', $size, '$size' );
+
+		return $this->loadChanges(
+			array( 'change_id >= ' . (int)$start ),
+			array(
+				'ORDER BY' => 'change_id ASC',
+				'LIMIT' => $size
+			),
+			__METHOD__
+		);
+	}
+
+	/**
+	 * @param int $ids
+	 *
+	 * @return Change[]
+	 */
+	public function loadByChangeIds( $ids ) {
+		Assert::parameterElementType( 'integer', $ids, '$ids' );
+
+		return $this->loadChanges(
+			array( 'change_id' => $ids ),
+			array(),
+			__METHOD__
+		);
+	}
+
+	/**
+	 * @param array $where
+	 * @return Change[]
+	 */
+	private function loadChanges( array $where, array $options, $method ) {
 		$dbr = $this->getConnection( DB_SLAVE );
 
 		$rows = $dbr->select(
@@ -64,14 +97,9 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 				'change_id', 'change_type', 'change_time', 'change_object_id',
 				'change_revision_id', 'change_user_id', 'change_info'
 			),
-			array(
-				'change_id >= ' . (int)$start,
-			),
-			__METHOD__,
-			array(
-				'LIMIT' => $size,
-				'ORDER BY' => 'change_id ASC'
-			)
+			$where,
+			$method,
+			$options
 		);
 
 		return $this->changesFromRows( $rows );

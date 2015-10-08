@@ -31,37 +31,7 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 	}
 
 	public function loadChunkProvider() {
-		$changeOne = array(
-			'type' => 'wikibase-item~remove',
-			'time' => '20121026200049',
-			'object_id' => 'q42',
-			'revision_id' => '0',
-			'user_id' => '0',
-			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
-		);
-
-		$changeTwo = array(
-			'type' => 'wikibase-item~remove',
-			'time' => '20151008161232',
-			'object_id' => 'q4662',
-			'revision_id' => '0',
-			'user_id' => '0',
-			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
-		);
-
-		$changeThree = array(
-			'type' => 'wikibase-item~remove',
-			'time' => '20141008161232',
-			'object_id' => 'q123',
-			'revision_id' => '343',
-			'user_id' => '34',
-			'info' => '{"metadata":{"user_text":"BlackMagicIsEvil","bot":0,"page_id":2354,"rev_id":343,' .
-				'"parent_id":897,"comment":"Fake data!"}}',
-		);
-
-		$changeOne = new EntityChange( null, $changeOne, false );
-		$changeTwo = new EntityChange( null, $changeTwo, false );
-		$changeThree = new EntityChange( null, $changeThree, false );
+		list( $changeOne, $changeTwo, $changeThree ) = $this->getEntityChanges();
 
 		return array(
 			'Get one change' => array(
@@ -106,6 +76,33 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 
 		$changes = $lookup->loadChunk( $start, $size );
 
+		$this->assertChangesEqual( $expected, $changes, $start );
+	}
+
+	/**
+	 * @depends testLoadChunk
+	 */
+	public function testLoadByChangeIds() {
+		$start = $this->offsetStart( 3 );
+
+		$lookup = new ChangeLookup(
+			array( 'wikibase-item~remove' => 'Wikibase\EntityChange' ),
+			wfWikiID()
+		);
+
+		$changes = $lookup->loadByChangeIds( array( $start, $start + 1, $start + 4 ) );
+		list( $changeOne, $changeTwo, $changeThree ) = $this->getEntityChanges();
+
+		$this->assertChangesEqual(
+			array(
+				$changeOne, $changeTwo, $changeThree
+			),
+			$changes,
+			$start
+		);
+	}
+	
+	private function assertChangesEqual( array $expected, array $changes, $start ) {
 		$this->assertCount( count( $expected ), $changes );
 
 		$i = 0;
@@ -113,7 +110,7 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 			$expectedFields = $expected[$i]->getFields();
 			$actualFields = $change->getFields();
 
-			$this->assertEquals( $start + $i, $actualFields['id'] );
+			$this->assertGreaterThanOrEqual( $start, $actualFields['id'] );
 			unset( $expectedFields['id'] );
 			unset( $actualFields['id'] );
 
@@ -145,4 +142,39 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 		return $start;
 	}
 
+	private function getEntityChanges() {
+		$changeOne = array(
+			'type' => 'wikibase-item~remove',
+			'time' => '20121026200049',
+			'object_id' => 'q42',
+			'revision_id' => '0',
+			'user_id' => '0',
+			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
+		);
+
+		$changeTwo = array(
+			'type' => 'wikibase-item~remove',
+			'time' => '20151008161232',
+			'object_id' => 'q4662',
+			'revision_id' => '0',
+			'user_id' => '0',
+			'info' => '{"diff":{"type":"diff","isassoc":null,"operations":[]}}',
+		);
+
+		$changeThree = array(
+			'type' => 'wikibase-item~remove',
+			'time' => '20141008161232',
+			'object_id' => 'q123',
+			'revision_id' => '343',
+			'user_id' => '34',
+			'info' => '{"metadata":{"user_text":"BlackMagicIsEvil","bot":0,"page_id":2354,"rev_id":343,' .
+				'"parent_id":897,"comment":"Fake data!"}}',
+		);
+
+		$changeOne = new EntityChange( null, $changeOne, false );
+		$changeTwo = new EntityChange( null, $changeTwo, false );
+		$changeThree = new EntityChange( null, $changeThree, false );
+
+		return array( $changeOne, $changeTwo, $changeThree );
+	}
 }
