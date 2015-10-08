@@ -7,8 +7,8 @@ use Html;
 use Language;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
-use Wikibase\Repo\Interactors\TermSearchResult;
+use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 
