@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_b9064b22",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T19:30:51Z",
+      "side": 1,
+      "message": "Maybe add @throws InvalidArgumentException?",
+      "revId": "45dc007409403c4613d1accf0594ac1272843e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e40e5637",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T19:30:51Z",
+      "side": 1,
+      "message": "two spaces after isset(",
+      "revId": "45dc007409403c4613d1accf0594ac1272843e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a4185e7b",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T19:30:51Z",
+      "side": 1,
+      "message": "two spaces after isset(",
+      "revId": "45dc007409403c4613d1accf0594ac1272843e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_84275ab1",
+        "filename": "lib/tests/phpunit/formatters/DispatchingSnakFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T19:30:51Z",
+      "side": 1,
+      "message": "$format undocumented",
+      "revId": "45dc007409403c4613d1accf0594ac1272843e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
