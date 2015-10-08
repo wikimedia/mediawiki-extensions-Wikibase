@@ -108,17 +108,4 @@ class MessageSnakFormatter implements SnakFormatter {
 		throw new RuntimeException( 'Unknown format' );
 	}
 
-	/**
-	 * Checks whether the snak type supplied to the constructor matches the given snak.
-	 *
-	 * @see SnakFormatter::canFormatSnak
-	 *
-	 * @param Snak $snak
-	 *
-	 * @return bool
-	 */
-	public function canFormatSnak( Snak $snak ) {
-		return $snak->getType() === $this->snakType;
-	}
-
 }

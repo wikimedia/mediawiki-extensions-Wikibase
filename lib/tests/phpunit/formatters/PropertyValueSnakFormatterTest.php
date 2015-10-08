@@ -211,14 +211,4 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 
-	public function testCanFormatSnak() {
-		$formatter = $this->getDummyPropertyValueSnakFormatter();
-
-		$snak = new PropertyValueSnak( new PropertyId( "P23" ), new StringValue( 'test' ) );
-		$this->assertTrue( $formatter->canFormatSnak( $snak ), $snak->getType() );
-
-		$snak = new PropertySomeValueSnak( new PropertyId( "P24" ) );
-		$this->assertFalse( $formatter->canFormatSnak( $snak ), $snak->getType() );
-	}
-
 }

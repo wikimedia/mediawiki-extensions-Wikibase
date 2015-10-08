@@ -105,22 +105,6 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testCanFormatSnak() {
-		$novalue = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
-
-		$formatters = array(
-			'novalue' => new MessageSnakFormatter( 'novalue', $novalue, SnakFormatter::FORMAT_PLAIN ),
-		);
-
-		$formatter = new DispatchingSnakFormatter( SnakFormatter::FORMAT_PLAIN, $formatters );
-
-		$snak = new PropertyNoValueSnak( new PropertyId( "P23" ) );
-		$this->assertTrue( $formatter->canFormatSnak( $snak ), $snak->getType() );
-
-		$snak = new PropertySomeValueSnak( new PropertyId( "P23" ) );
-		$this->assertFalse( $formatter->canFormatSnak( $snak ), $snak->getType() );
-	}
-
 	public function testGetFormat() {
 		$formatter = new DispatchingSnakFormatter( 'test', array() );
 		$this->assertEquals( 'test', $formatter->getFormat() );

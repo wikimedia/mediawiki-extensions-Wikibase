@@ -78,21 +78,6 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 		$this->assertEmpty( $acc->getUsages(), 'string value' );
 	}
 
-	public function testCanFormatSnak() {
-		$p1 = new PropertyId( 'P1' );
-		$q1 = new ItemId( 'Q1' );
-		$itemSnak = new PropertyValueSnak( $p1, new EntityIdValue( $q1 ) );
-
-		$mockFormatter = $this->getMockSnakFormatter( 'canFormatSnak', true );
-
-		$acc = new HashUsageAccumulator();
-
-		$formatter = new UsageTrackingSnakFormatter( $mockFormatter, $acc, array( 'ru', 'en' ) );
-
-		$this->assertTrue( $formatter->canFormatSnak( $itemSnak ), 'canFormatSnak' );
-		$this->assertCount( 0, $acc->getUsages() );
-	}
-
 	public function testGetFormat() {
 		$mockFormatter = $this->getMockSnakFormatter( 'getFormat', 'TEST' );
 

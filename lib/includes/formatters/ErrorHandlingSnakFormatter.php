@@ -148,17 +148,4 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 		return $this->snakFormatter->getFormat();
 	}
 
-	/**
-	 * Checks whether the given snak's type is 'value'.
-	 *
-	 * @see SnakFormatter::canFormatSnak
-	 *
-	 * @param Snak $snak
-	 *
-	 * @return bool
-	 */
-	public function canFormatSnak( Snak $snak ) {
-		return $this->snakFormatter->canFormatSnak( $snak );
-	}
-
 }

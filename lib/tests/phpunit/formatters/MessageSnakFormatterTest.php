@@ -54,17 +54,6 @@ class MessageSnakFormatterTest extends \MediaWikiTestCase {
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 
-	public function testCanFormatSnak() {
-		$id = new PropertyId( 'P1' );
-		$formatter = $this->getFormatter( 'novalue', 'test' );
-
-		$snak = new PropertyNoValueSnak( $id );
-		$this->assertTrue( $formatter->canFormatSnak( $snak ), $snak->getType() );
-
-		$snak = new PropertySomeValueSnak( $id );
-		$this->assertFalse( $formatter->canFormatSnak( $snak ), $snak->getType() );
-	}
-
 	/**
 	 * @dataProvider snakProvider
 	 */
