@@ -87,13 +87,23 @@ class OutputFormatSnakFormatterFactory {
 			$this->dataTypeFactory
 		);
 
-		$formatters = array(
+		$formattersBySnakType = array(
 			'novalue' => $noValueSnakFormatter,
 			'somevalue' => $someValueSnakFormatter,
-			'value' => $valueSnakFormatter,
+			// for 'value' snaks, rely on $formattersByDataType
 		);
 
-		$snakFormatter = new DispatchingSnakFormatter( $format, $formatters );
+		$formattersByDataType = array(
+			// TODO: get specialized SnakFormatters from factory functions.
+			'*' => $valueSnakFormatter
+		);
+
+		$snakFormatter = new DispatchingSnakFormatter(
+			$format,
+			$this->propertyDataTypeLookup,
+			$formattersBySnakType,
+			$formattersByDataType
+		);
 
 		if ( $options->getOption( SnakFormatter::OPT_ON_ERROR ) === SnakFormatter::ON_ERROR_WARN ) {
 			$snakFormatter = new ErrorHandlingSnakFormatter(
