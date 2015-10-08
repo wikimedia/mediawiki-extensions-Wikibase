@@ -38,9 +38,9 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		}
 
 		$this->assertInstanceOf(
-			'Wikibase\Test\MockRepository',
-			$wikibaseClient->getStore()->getEntityLookup(),
-			'Mocking the default client EntityLookup failed'
+			'Wikibase\Test\MockClientStore',
+			$wikibaseClient->getStore(),
+			'Mocking the default ClientStore failed'
 		);
 
 		$this->setMwGlobals( 'wgContLang', Language::factory( 'de' ) );
