@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_b3c8aa78",
+        "filename": "repo/tests/phpunit/includes/Notifications/DatabaseChangeTransmitterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-08T15:14:11Z",
+      "side": 1,
+      "message": "20s enough?",
+      "revId": "70df6692d8c252574046b2c88325f3ace20c2bf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
