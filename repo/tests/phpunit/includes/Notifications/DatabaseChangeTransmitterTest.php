@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests\Repo;
 
+use MWTimestamp;
 use RecentChange;
 use Diff\DiffOp\Diff\Diff;
 use Wikibase\DataModel\Entity\ItemId;
@@ -112,12 +113,11 @@ class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 		$row = (array)$res->current();
 		$this->assertTrue( is_numeric( $row['change_id'] ) );
 
-		$this->assertEquals(
-			$expected['change_time'],
-			$row['change_time'],
-			'Change time',
-			120 // Two minutes
-		);
+		$actualTime = new MWTimestamp( $row['change_time'] );
+		$expectedTime = new MWTimestamp( $expected['change_time'] );
+		$timeDiff = $actualTime->getTimestamp( TS_UNIX ) - $expectedTime->getTimestamp( TS_UNIX );
+
+		$this->assertEquals( 0, $timeDiff, 'Change time', 20 );
 
 		unset( $row['change_id'] );
 		unset( $row['change_time'] );
