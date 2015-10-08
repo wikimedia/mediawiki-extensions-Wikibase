@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_fe6a697d",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-08T16:40:49Z",
+      "side": 1,
+      "message": "Should not be used, because it handles every StringValue as image link.",
+      "revId": "8fae1040de68c5bcaa517f3e4b21adcb7031f860",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
