@@ -16,6 +16,24 @@
       "revId": "8fae1040de68c5bcaa517f3e4b21adcb7031f860",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7116a7ae",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-08T22:08:57Z",
+      "side": 1,
+      "message": "agree. please check the property type\n\nthough the value check in addition is ok, to help guard against mismatching data values vs. the property (i\u0027m sure we have some such bad data in wikidata, which might get parsed when something unrelated is changed on an item)",
+      "parentUuid": "0ebaf39b_fe6a697d",
+      "revId": "8fae1040de68c5bcaa517f3e4b21adcb7031f860",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
