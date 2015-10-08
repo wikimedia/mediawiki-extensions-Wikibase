@@ -113,10 +113,10 @@ class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 		$this->assertTrue( is_numeric( $row['change_id'] ) );
 
 		$this->assertEquals(
-			$expected['change_time'],
-			$row['change_time'],
+			wfTimestamp( TS_UNIX, $expected['change_time'] ),
+			wfTimestamp( TS_UNIX, $row['change_time'] ),
 			'Change time',
-			120 // Two minutes
+			20 // 20s tolerance
 		);
 
 		unset( $row['change_id'] );
