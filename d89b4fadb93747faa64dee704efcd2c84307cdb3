@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_be815194",
+        "filename": "lib/includes/store/sql/ChangeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T18:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_3eb1e1dc",
+      "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_7eb759d4",
         "filename": "lib/includes/store/sql/ChangeLookup.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2015-10-08T17:14:06Z",
       "side": 1,
       "message": "Why not Assert::parameterType?",
+      "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5e4e159d",
+        "filename": "lib/includes/store/sql/ChangeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T18:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_7eb759d4",
       "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_9e324d05",
+        "filename": "lib/includes/store/sql/ChangeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T18:01:17Z",
+      "side": 1,
+      "message": "SELECT * is considered evil... although here I guess it would be ok",
+      "parentUuid": "0ebaf39b_5ed9352b",
+      "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_decc4569",
         "filename": "lib/includes/store/sql/ChangeLookup.php",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2015-10-08T17:14:06Z",
       "side": 1,
       "message": "Callbacks would be a lot nicer.",
+      "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1e165d5b",
+        "filename": "lib/includes/store/sql/ChangeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T18:01:17Z",
+      "side": 1,
+      "message": "I presume this will become a factory at some point.",
+      "parentUuid": "0ebaf39b_decc4569",
       "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_792773b2",
+        "filename": "lib/tests/phpunit/store/Sql/ChangeLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T18:01:17Z",
+      "side": 1,
+      "message": "I copied this from real world use... I could construct these per hand, but I don\u0027t see the point right now.",
+      "parentUuid": "0ebaf39b_9ed6cdf5",
+      "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_5e00556d",
         "filename": "lib/tests/phpunit/store/Sql/ChangeLookupTest.php",
         "patchSetId": 1
@@ -115,6 +205,24 @@
       "writtenOn": "2015-10-08T17:14:06Z",
       "side": 1,
       "message": "please use descriptive keys",
+      "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7900d304",
+        "filename": "lib/tests/phpunit/store/Sql/ChangeLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T18:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_5e00556d",
       "revId": "d89b4fadb93747faa64dee704efcd2c84307cdb3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
