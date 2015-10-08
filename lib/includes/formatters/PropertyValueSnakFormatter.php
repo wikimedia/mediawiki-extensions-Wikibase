@@ -188,17 +188,4 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 		return $this->format;
 	}
 
-	/**
-	 * Checks whether the given snak's type is 'value'.
-	 *
-	 * @see SnakFormatter::canFormatSnak
-	 *
-	 * @param Snak $snak
-	 *
-	 * @return bool
-	 */
-	public function canFormatSnak( Snak $snak ) {
-		return $snak->getType() === 'value';
-	}
-
 }

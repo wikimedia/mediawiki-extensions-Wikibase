@@ -107,17 +107,4 @@ class DispatchingSnakFormatter implements SnakFormatter {
 		return $this->format;
 	}
 
-	/**
-	 * Checks whether a SnakFormatter for the given snak was provided to the constructor.
-	 *
-	 * @see SnakFormatter::canFormatSnak()
-	 *
-	 * @param Snak $snak
-	 *
-	 * @return bool
-	 */
-	public function canFormatSnak( Snak $snak ) {
-		return array_key_exists( $snak->getType(), $this->formatters );
-	}
-
 }
