@@ -165,12 +165,12 @@ class DataUpdateHookHandlers {
 	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
-		// The parser output should tell us when it was parsed. If not, ask the Title object.
-		// These timestamps should usually be the same, but asking $title may cause a database query.
-		$touched = $parserOutput->getTimestamp() ?: $title->getTouched();
+		// Note: ParserOutput::getTimestamp() is unreliable and "sometimes" contains an old timestamp.
+		// Note: getTouched() returns false if $title doesn't exist.
+		$touched = $title->getTouched();
 
-		if ( count( $usageAcc->getUsages() ) === 0 ) {
-			// no usages, bail out
+		if ( !$touched || count( $usageAcc->getUsages() ) === 0 ) {
+			// no usages or no title, bail out
 			return;
 		}
 

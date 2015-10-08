@@ -185,6 +185,38 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param int $id
+	 * @param int $ns
+	 * @param string $text
+	 * @param string $touched
+	 *
+	 * @return Title
+	 */
+	private function newTitle( $id, $ns, $text, $touched ) {
+		$title = $this->getMockBuilder( 'Title' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$title->expects( $this->any() )
+			->method( 'getArticleID' )
+			->will( $this->returnValue( $id ) );
+
+		$title->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( $ns ) );
+
+		$title->expects( $this->any() )
+			->method( 'getDBKey' )
+			->will( $this->returnValue( $text ) );
+
+		$title->expects( $this->any() )
+			->method( 'getTouched' )
+			->will( $this->returnValue( $touched ) );
+
+		return $title;
+	}
+
+	/**
 	 * @param Title $title
 	 * @param EntityUsage[]|null $usages
 	 * @param string $touched
@@ -217,7 +249,6 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	public function provideLinksUpdateComplete() {
 		return array(
 			'usage' => array(
-				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				array(
 					'Q1#S' => new EntityUsage( new ItemId( 'Q1' ), EntityUsage::SITELINK_USAGE ),
 					'Q2#T' => new EntityUsage( new ItemId( 'Q2' ), EntityUsage::TITLE_USAGE ),
@@ -226,7 +257,6 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			),
 
 			'no usage' => array(
-				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				array(),
 			),
 		);
@@ -235,9 +265,9 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideLinksUpdateComplete
 	 */
-	public function testLinksUpdateComplete( Title $title, $usage ) {
-		$title->resetArticleID( 23 );
+	public function testLinksUpdateComplete( $usage ) {
 		$timestamp = '20150505000000';
+		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen', $timestamp );
 
 		$linksUpdate = $this->newLinksUpdate( $title, $usage, $timestamp );
 
@@ -249,11 +279,11 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideLinksUpdateComplete
 	 */
-	public function testDoParserCacheSaveComplete( Title $title, $usage ) {
-		$title->resetArticleID( 23 );
+	public function testDoParserCacheSaveComplete( $usage ) {
 		$timestamp = '20150505000000';
 
 		$parserOutput = $this->newParserOutput( $usage, $timestamp );
+		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen', $timestamp );
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, false, true );
@@ -261,9 +291,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	public function testDoArticleDeleteComplete() {
-		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
-		$title->resetArticleID( 23 );
 		$timestamp = '20150505000000';
+		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen', $timestamp );
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, null, $timestamp, true, false );
