@@ -125,7 +125,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Sito:",
 	"wikibase-gotolinkedpage-lookup-item": "ID elemento:",
 	"wikibase-gotolinkedpage-submit": "Vàje",
-	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage s'ausa pe' truva 'a paggena 'e n'item dint'a nu sito cullegato.<br /> 'O campo a smèrza, \"Site:\", è addò vuje mettite 'a lengua e codece d' 'o sito.<br />  P' 'o campo a dritta, \"Item id:\", vuje avit'a miette l'ID item ca jate truvanno.",
+	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage s'ausa pe' truva 'a paggena 'e n'item dint'a nu sito cullegato.<br /> 'O primmo campo a smèrza, \"{{int:wikibase-gotolinkedpage-lookup-site}}\", è addò vuje mettite 'a lengua e codece d' 'o sito.<br />  P' 'o campo secondo, \"{{int:wikibase-gotolinkedpage-lookup-item}}\", vuje avit'a miette l'ID item ca jate truvanno.",
 	"wikibase-gotolinkedpage-error-page-not-found": "Nun ce sta nisciuna paggena asciata ca pe' sta combinazione 'item-sito",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "L'ID c'avite miso nun è buono",
 	"wikibase-gotolinkedpage-error-item-not-found": "L'elemento nun se truvava",
