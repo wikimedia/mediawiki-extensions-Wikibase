@@ -94,18 +94,15 @@ class DatabaseChangeTransmitterTest extends \MediaWikiTestCase {
 	 * @dataProvider transmitChangeProvider
 	 */
 	public function testTransmitChange( array $expected, EntityChange $change ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$db = wfGetDB( DB_MASTER );
-		$tableName = $wikibaseRepo->getStore()->getChangesTable()->getName();
 
-		$db->delete( $tableName, '*', __METHOD__ );
-		$this->tablesUsed[] = $tableName;
+		$db->delete( 'wb_changes', '*', __METHOD__ );
+		$this->tablesUsed[] = 'wb_changes';
 
 		$channel = new DatabaseChangeTransmitter( wfGetLB() );
 		$channel->transmitChange( $change );
 
-		$res = $db->select( $tableName, '*', array(), __METHOD__ );
+		$res = $db->select( 'wb_changes', '*', array(), __METHOD__ );
 
 		$this->assertEquals( 1, $res->numRows(), 'row count' );
 

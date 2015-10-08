@@ -14,6 +14,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -140,6 +141,11 @@ class SqlStore implements Store {
 	private $idBlacklist;
 
 	/**
+	 * @var string[]
+	 */
+	private $changeHandlerClasses;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdLookup $entityIdLookup
@@ -163,6 +169,7 @@ class SqlStore implements Store {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->idBlacklist = $settings->getSetting( 'idBlacklist' );
+		$this->changeHandlerClasses = $settings->getSetting( 'changeHandlers' );
 	}
 
 	/**
@@ -769,6 +776,15 @@ class SqlStore implements Store {
 		}
 
 		return $this->entityPrefetcher;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ChangeLookup
+	 */
+	public function getChangeLookup() {
+		return new ChangeLookup( $this->changeHandlerClasses );
 	}
 
 }
