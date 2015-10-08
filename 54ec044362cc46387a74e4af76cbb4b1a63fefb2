@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_9e180d7c",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-08T16:09:01Z",
+      "side": 1,
+      "message": "what did you change in these? the split is good, but it somewhat is annoying not to have a diff now :(",
+      "revId": "54ec044362cc46387a74e4af76cbb4b1a63fefb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
