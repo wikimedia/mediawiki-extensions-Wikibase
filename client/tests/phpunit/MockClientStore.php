@@ -214,4 +214,8 @@ class MockClientStore implements ClientStore {
 		);
 	}
 
+	public function getChangeLookup() {
+		// FIXME: Incomplete
+	}
+
 }
