@@ -75,11 +75,11 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
-	 * @param IORMTable $table
+	 * @param IORMTable|null $table
 	 * @param array|null $fields
 	 * @param boolean $loadDefaults
 	 */
-	public function __construct( IORMTable $table, $fields = null, $loadDefaults = false ) {
+	public function __construct( IORMTable $table = null, $fields = null, $loadDefaults = false ) {
 		parent::__construct( $table, $fields, $loadDefaults );
 
 		$this->postConstruct();
