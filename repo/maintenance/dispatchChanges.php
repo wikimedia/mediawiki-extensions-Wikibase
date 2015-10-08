@@ -7,6 +7,7 @@ use Maintenance;
 use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
+use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
@@ -65,14 +66,13 @@ class DispatchChanges extends Maintenance {
 	/**
 	 * Initializes members from command line options and configuration settings.
 	 *
+	 * @param ChangeLookup $changeLookup
 	 * @param SettingsArray $settings
 	 *
 	 * @return ChangeDispatcher
 	 * @throws MWException
 	 */
-	private function newChangeDispatcher( SettingsArray $settings ) {
-		$changesTable = new ChangesTable(); //TODO: allow injection of a mock instance for testing
-
+	private function newChangeDispatcher( ChangeLookup $changeLookup, SettingsArray $settings ) {
 		$repoDB = $settings->getSetting( 'changesDatabase' );
 		$clientWikis = $settings->getSetting( 'localClientDatabases' );
 		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
@@ -89,7 +89,7 @@ class DispatchChanges extends Maintenance {
 
 		$cacheChunkSize = $batchSize * $batchChunkFactor;
 		$cacheSize = $cacheChunkSize * $batchCacheFactor;
-		$changesCache = new ChunkCache( $changesTable, $cacheChunkSize, $cacheSize );
+		$changesCache = new ChunkCache( $changeLookup, $cacheChunkSize, $cacheSize );
 
 		// make sure we have a mapping from siteId to database name in clientWikis:
 		foreach ( $clientWikis as $siteID => $dbName ) {
@@ -157,8 +157,11 @@ class DispatchChanges extends Maintenance {
 		$maxPasses = (int)$this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 );
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$dispatcher = $this->newChangeDispatcher( $settings );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$dispatcher = $this->newChangeDispatcher(
+			$wikibaseRepo->getStore()->getChangeLookup(),
+			$wikibaseRepo->getSettings()
+		);
 
 		$dispatcher->getDispatchCoordinator()->initState();
 
