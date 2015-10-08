@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_cd57bd5b",
+        "filename": "client/includes/recentchanges/RevisionData.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T08:59:51Z",
+      "side": 1,
+      "message": "string|null, given you allow null in the constructor",
+      "revId": "eacd44b77574fc6b963d5825dc9e252c6be9757c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_0d5e357c",
+        "filename": "client/includes/recentchanges/RevisionData.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-08T08:59:51Z",
+      "side": 1,
+      "message": "string|null, given you allow null in the constructor",
+      "revId": "eacd44b77574fc6b963d5825dc9e252c6be9757c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
