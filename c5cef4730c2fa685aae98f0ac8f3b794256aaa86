@@ -16,6 +16,24 @@
       "revId": "c5cef4730c2fa685aae98f0ac8f3b794256aaa86",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_33583a35",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-08T14:34:35Z",
+      "side": 1,
+      "message": "these still go into elastic and geo_tags.  they just don\u0027t show up in Special:Nearby but one can still search for them and obtain them with ApiQuery as a prop.\n\nhttps://en.wikipedia.org/w/api.php?action\u003dquery\u0026titles\u003dNational_Register_of_Historic_Places_listings_in_Boulder_County,_Colorado\u0026prop\u003dcoordinates\u0026format\u003djson\u0026coprimary\u003dall\n\npossibly we might also want to add qualifier coordinates (and maybe references?) also as secondary.  should mark @todo for that",
+      "parentUuid": "0ebaf39b_50b84474",
+      "revId": "c5cef4730c2fa685aae98f0ac8f3b794256aaa86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
