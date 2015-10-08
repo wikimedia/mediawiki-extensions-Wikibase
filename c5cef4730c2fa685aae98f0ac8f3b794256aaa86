@@ -34,6 +34,23 @@
       "revId": "c5cef4730c2fa685aae98f0ac8f3b794256aaa86",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_135416c9",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-08T15:01:04Z",
+      "side": 1,
+      "message": "called php maintenance/refreshLinks.php -\u003e\n Call to undefined method DataValues\\StringValue::getLatitude()",
+      "revId": "c5cef4730c2fa685aae98f0ac8f3b794256aaa86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
