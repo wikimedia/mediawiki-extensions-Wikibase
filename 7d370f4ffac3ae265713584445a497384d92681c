@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_0ae850dc",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-09T11:49:17Z",
+      "side": 1,
+      "message": "The name is so wrong... these are not ChangeHandlers...",
+      "revId": "7d370f4ffac3ae265713584445a497384d92681c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_67c3450b",
         "filename": "client/tests/phpunit/MockClientStore.php",
         "patchSetId": 2
