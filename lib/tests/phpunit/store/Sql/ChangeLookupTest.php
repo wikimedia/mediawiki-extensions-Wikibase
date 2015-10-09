@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\ChangeLookup;
-use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
+use Wikibase\Repo\Store\Sql\SqlChangeStore;
 
 /**
  * @covers Wikibase\Lib\Store\ChangeLookup
@@ -63,9 +63,10 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
-		$databaseChangeTransmitter = new DatabaseChangeTransmitter( wfGetLB() );
+		$changeStore = new SqlChangeStore( wfGetLB() );
 		foreach ( $changesToStore as $change ) {
-			$databaseChangeTransmitter->transmitChange( $change );
+			$change->setField( 'id', null ); // Null the id as we save the same changes multiple times
+			$changeStore->saveChange( $change );
 		}
 		$start = $this->offsetStart( $start );
 
@@ -109,9 +110,10 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 
 		list( $expected ) = $this->getEntityChanges();
 		$expected->setField( 'revision_id', 342342 );
+		$expected->setField( 'id', null ); // Null the id as we save the same changes multiple times
 
-		$databaseChangeTransmitter = new DatabaseChangeTransmitter( wfGetLB() );
-		$databaseChangeTransmitter->transmitChange( $expected );
+		$changeStore = new SqlChangeStore( wfGetLB() );
+		$changeStore->saveChange( $expected );
 
 		$lookup = new ChangeLookup(
 			array( 'wikibase-item~remove' => 'Wikibase\EntityChange' ),
