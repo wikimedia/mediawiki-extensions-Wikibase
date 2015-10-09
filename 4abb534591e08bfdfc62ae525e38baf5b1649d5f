@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_ea0e1c37",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T10:28:37Z",
+      "side": 1,
+      "message": "passing the StatementListProvider sounds ok then. I would still rename the methods accordingly.\n\nprocessStatementListProvider\n\nprocessItem  (and then also in follow up, would be nice to split this more and have this instead in an ItemParserOutputDataUpdater)",
+      "parentUuid": "0ebaf39b_471ba182",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c758f15b",
         "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
         "patchSetId": 2
