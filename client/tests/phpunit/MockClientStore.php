@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangesTable;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
@@ -105,15 +104,6 @@ class MockClientStore implements ClientStore {
 	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup() {
-		// FIXME: Incomplete
-	}
-
-	/**
-	 * @see ClientStore::newChangesTable
-	 *
-	 * @return ChangesTable
-	 */
-	public function newChangesTable() {
 		// FIXME: Incomplete
 	}
 

@@ -84,7 +84,7 @@ class ChangeNotificationJob extends Job {
 	/**
 	 * Returns the batch of changes that should be processed.
 	 *
-	 * Change objects are loaded using a ChangesTable instance.
+	 * Change objects are loaded using a ChangeLookup.
 	 *
 	 * @return Change[] the changes to process.
 	 */
