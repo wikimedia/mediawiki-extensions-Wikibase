@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_4005c712",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-09T16:23:00Z",
+      "side": 1,
+      "message": "The intent of this method is to process the statements in the entity. That\u0027s what it does and that\u0027s how it should be called.\n\nNot sure where \"item\" comes from. This method does not know anything about items.",
+      "parentUuid": "0ebaf39b_ea0e1c37",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c758f15b",
         "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
         "patchSetId": 2
@@ -107,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_200c533d",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-09T16:23:00Z",
+      "side": 1,
+      "message": "The value is meaningless. I picked what probably wastes least space.",
+      "parentUuid": "0ebaf39b_ca155842",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_6a222ca4",
         "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
         "patchSetId": 2
@@ -118,6 +154,24 @@
       "writtenOn": "2015-10-09T10:31:12Z",
       "side": 1,
       "message": "null[] is not so nice. please at least describe the contents of the array keys",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e015db41",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-09T16:23:00Z",
+      "side": 1,
+      "message": "This is a mistake, should be string[].",
+      "parentUuid": "0ebaf39b_6a222ca4",
       "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
