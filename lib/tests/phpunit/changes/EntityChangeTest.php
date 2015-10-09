@@ -26,34 +26,7 @@ use Wikibase\ItemContent;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityChangeTest extends DiffChangeTest {
-
-	public function __construct( $name = null, $data = array(), $dataName = '' ) {
-		parent::__construct( $name, $data, $dataName );
-
-		// don't include entity data, it's skipped during serialization!
-		// $this->allowedInfoKeys[] = 'entity';
-
-		$this->allowedChangeKeys = array( // see TestChanges::getChanges()
-			'property-creation',
-			'property-deletion',
-			'property-set-label',
-			'item-creation',
-			'item-deletion',
-			'set-dewiki-sitelink',
-			'set-enwiki-sitelink',
-			'change-dewiki-sitelink',
-			'change-enwiki-sitelink',
-			'remove-dewiki-sitelink',
-			'set-de-label',
-			'set-en-label',
-			'set-en-aliases',
-			'add-claim',
-			'remove-claim',
-			'item-deletion-linked',
-			'remove-enwiki-sitelink',
-		);
-	}
+class EntityChangeTest extends ChangeRowTest {
 
 	/**
 	 * @see ORMRowTest::getRowClass
