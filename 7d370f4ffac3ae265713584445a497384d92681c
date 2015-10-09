@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_67c3450b",
+        "filename": "client/tests/phpunit/MockClientStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T09:33:54Z",
+      "side": 1,
+      "message": "meh, but ok",
+      "revId": "7d370f4ffac3ae265713584445a497384d92681c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
