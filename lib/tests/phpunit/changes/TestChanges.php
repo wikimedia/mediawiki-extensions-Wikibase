@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeRow;
-use Wikibase\ChangesTable;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
