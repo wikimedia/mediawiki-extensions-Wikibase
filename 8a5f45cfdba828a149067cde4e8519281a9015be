@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_60424b15",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T17:12:29Z",
+      "side": 1,
+      "message": "please document more completely",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e0be3bfa",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T17:12:29Z",
+      "side": 1,
+      "message": "please document the structure of the array",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
