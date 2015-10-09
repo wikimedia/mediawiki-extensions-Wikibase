@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeRow;
-use Wikibase\ChangesTable;
 
 /**
  * @covers Wikibase\ChangeRow
@@ -18,8 +17,9 @@ use Wikibase\ChangesTable;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
-class ChangeRowTest extends \ORMRowTest {
+class ChangeRowTest extends \MediaWikiTestCase {
 
 	/**
 	 * A list of names of test changes to use. Refers to keys in the array
@@ -60,74 +60,29 @@ class ChangeRowTest extends \ORMRowTest {
 		);
 	}
 
-	protected function setUp() {
-		if ( !defined( 'WB_VERSION' ) ) {
-			//TODO: remove this once ChangeRow no longer needs the ChangesTable as a factory.
-			$this->markTestSkipped( "Skipping because cannot test changes table on client" );
-		}
-
-		parent::setUp();
+	public function changeProvider() {
+		return array(
+			array(
+				new ChangeRow(
+					null,
+					array(
+						'user_id' => 1,
+						'time' => '20130101000000'
+					)
+				)
+			)
+		);
 	}
 
 	/**
-	 * @since 1.20
-	 * @return array
-	 */
-	protected function getMockValues() {
-		$values = parent::getMockValues();
-
-		// register special "data" type
-		$values['data'] = array( "foo", 'bar' );
-		return $values;
-	}
-
-	/**
-	 * @see ORMRowTest::getRowClass
-	 * @since 0.2
-	 * @return string
-	 */
-	protected function getRowClass() {
-		return '\Wikibase\ChangeRow';
-	}
-
-	/**
-	 * @see ORMRowTest::getRowClass
-	 * @since 0.2
-	 * @return string
-	 */
-	protected function getTableInstance() {
-		return ChangesTable::singleton();
-	}
-
-	protected function getTestChanges() {
-		$changes = TestChanges::getChanges( $this->allowedChangeKeys, $this->allowedInfoKeys );
-		return $changes;
-	}
-
-	public function constructorTestProvider() {
-		$changes = $this->getTestChanges();
-		$cases = array();
-
-		/* @var \Wikibase\EntityChange $change */
-		foreach ( $changes as $change ) {
-			$cases[] = array(
-				$change->toArray(),
-				true
-			);
-		}
-
-		return $cases;
-	}
-
-	/**
-	 * @dataProvider instanceProvider
+	 * @dataProvider changeProvider
 	 */
 	public function testGetUser( ChangeRow $changeRow ) {
 		$this->assertInstanceOf( '\User', $changeRow->getUser() );
 	}
 
 	/**
-	 * @dataProvider instanceProvider
+	 * @dataProvider changeProvider
 	 */
 	public function testGetAge( ChangeRow $changeRow ) {
 		// Don't assert on equalness because all previous code takes time!
@@ -139,7 +94,7 @@ class ChangeRowTest extends \ORMRowTest {
 	}
 
 	/**
-	 * @dataProvider instanceProvider
+	 * @dataProvider changeProvider
 	 */
 	public function testGetTime( ChangeRow $changeRow ) {
 		$this->assertEquals(
@@ -150,30 +105,12 @@ class ChangeRowTest extends \ORMRowTest {
 
 	public function testGetObjectId() {
 		$data = array( 'object_id' => 'p100' );
-		$change = $this->getRowInstance( $data, true );
+		$change = new ChangeRow( null, $data );
 
 		$this->assertEquals(
 			'p100',
 			$change->getObjectId()
 		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSaveAndLoad( ChangeRow $changeRow ) {
-		$changeRow->save();
-		$id = $changeRow->getId();
-
-		/* @var ChangesTable $table */
-		$table = $this->getTableInstance();
-		$rows = $table->selectObjects( null, array( 'id' => $id ) );
-
-		$this->assertEquals( 1, count( $rows ), "Expected exactly one object with the given ID" );
-		$loadedRow = reset( $rows );
-
-		$expected = $changeRow->getFields();
-		$this->verifyFields( $loadedRow, $expected );
 	}
 
 }
