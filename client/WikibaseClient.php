@@ -149,10 +149,22 @@ call_user_func( function() {
 	$wgAPIPropModules['pageterms'] = array(
 		'class' => 'Wikibase\Client\Api\PageTerms',
 		'factory' => function ( ApiQuery $query, $moduleName ) {
-			$client = \Wikibase\Client\WikibaseClient::getDefaultInstance();
+			//FIXME: HACK: make pageterms work directly on entity pages on the repo.
+			// We should use an EntityIdLookup that combines the repo and the client implementation.
+			// See T115117
+			if ( class_exists( '\Wikibase\Repo\WikibaseRepo' ) ) {
+				$repo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+				$termIndex = $repo->getStore()->getTermIndex();
+				$entityIdLookup = $repo->getEntityContentFactory();
+			} else {
+				$client = \Wikibase\Client\WikibaseClient::getDefaultInstance();
+				$termIndex = $client->getStore()->getTermIndex();
+				$entityIdLookup = $client->getStore()->getEntityIdLookup();
+			}
+
 			return new Wikibase\Client\Api\PageTerms(
-				$client->getStore()->getTermIndex(),
-				$client->getStore()->getEntityIdLookup(),
+				$termIndex,
+				$entityIdLookup,
 				$query,
 				$moduleName
 			);
