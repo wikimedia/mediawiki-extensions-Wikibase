@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_80edff24",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T17:11:35Z",
+      "side": 1,
+      "message": "ok, probably easier and more clear to do renames in a follow up. (and there were other changes in mind that i wanted to do yesterday)",
+      "parentUuid": "0ebaf39b_4005c712",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c758f15b",
         "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
         "patchSetId": 2
@@ -137,6 +155,41 @@
       "side": 1,
       "message": "The value is meaningless. I picked what probably wastes least space.",
       "parentUuid": "0ebaf39b_ca155842",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a0f28301",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T17:11:35Z",
+      "side": 1,
+      "message": "please document whereever this gets used",
+      "parentUuid": "0ebaf39b_200c533d",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_40ce27bb",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T17:11:35Z",
+      "side": 1,
+      "message": "is this correct. please document in some more detail the structurre of the array",
       "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
