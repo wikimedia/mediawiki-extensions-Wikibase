@@ -87,6 +87,40 @@
       "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ca155842",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T10:31:12Z",
+      "side": 1,
+      "message": "i understand that array keys might have better performance, but not so nice to have null values :/",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_6a222ca4",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-09T10:31:12Z",
+      "side": 1,
+      "message": "null[] is not so nice. please at least describe the contents of the array keys",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
