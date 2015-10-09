@@ -3,10 +3,11 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
-use Wikibase\ChangesTable;
+use Wikibase\EntityChange;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Repo\ChangePruner;
+use Wikibase\Repo\Store\Sql\SqlChangeStore;
 
 /**
  * @covers Wikibase\Repo\ChangePruner
@@ -50,13 +51,13 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	}
 
 	private function addTestChanges() {
-		$changesTable = new ChangesTable( false );
+		$changeStore = new SqlChangeStore( wfGetLB() );
 
-		$change = $changesTable->newRow( $this->getChangeRowData( '20150101000005' ), true );
-		$change->save();
+		$change = new EntityChange( null, $this->getChangeRowData( '20150101000005' ) );
+		$changeStore->saveChange( $change );
 
-		$change = $changesTable->newRow( $this->getChangeRowData( '20150101000300' ), true );
-		$change->save();
+		$change = new EntityChange( null, $this->getChangeRowData( '20150101000300' ) );
+		$changeStore->saveChange( $change );
 	}
 
 	private function getChangeRowData( $timestamp ) {
