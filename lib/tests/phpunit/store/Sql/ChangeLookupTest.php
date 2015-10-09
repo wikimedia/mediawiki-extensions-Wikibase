@@ -102,7 +102,45 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 		);
 	}
 
-	private function assertChangesEqual( array $expected, array $changes, $start ) {
+	public function testLoadByRevisionId() {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
+		}
+
+		list( $expected ) = $this->getEntityChanges();
+		$expected->setField( 'revision_id', 342342 );
+
+		$databaseChangeTransmitter = new DatabaseChangeTransmitter( wfGetLB() );
+		$databaseChangeTransmitter->transmitChange( $expected );
+
+		$lookup = new ChangeLookup(
+			array( 'wikibase-item~remove' => 'Wikibase\EntityChange' ),
+			wfWikiID()
+		);
+
+		$change = $lookup->loadByRevisionId( 342342 );
+
+		$this->assertChangesEqual(
+			array( $expected ),
+			array( $change )
+		);
+	}
+
+	public function testLoadByRevisionId_notFound() {
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
+		}
+
+		$lookup = new ChangeLookup(
+			array( 'wikibase-item~remove' => 'Wikibase\EntityChange' ),
+			wfWikiID()
+		);
+
+		$changes = $lookup->loadByRevisionId( PHP_INT_MAX );
+		$this->assertNull( $changes );
+	}
+
+	private function assertChangesEqual( array $expected, array $changes, $start = 0 ) {
 		$this->assertCount( count( $expected ), $changes );
 
 		$i = 0;
