@@ -45,6 +45,11 @@ class RevisionDataTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'Kitten Comment', $revisionData->getComment() );
 	}
 
+	public function testGetCommentHtml() {
+		$revisionData = $this->newRevisionData();
+		$this->assertEquals( '<span>Kitten Comment</span>', $revisionData->getCommentHtml() );
+	}
+
 	public function testGetSiteId() {
 		$revisionData = $this->newRevisionData();
 		$this->assertEquals( 'testrepo', $revisionData->getSiteId() );
@@ -62,13 +67,14 @@ class RevisionDataTest extends \PHPUnit_Framework_TestCase {
 
 	private function newRevisionData() {
 		$comment = 'Kitten Comment';
+		$commentHtml = '<span>' . htmlspecialchars( $comment ) . '</span>';
 		$changeParams = array(
 			'page_id' => 5,
 			'rev_id' => 92,
 			'parent_id' => 90,
 		);
 
-		return new RevisionData( 'Cat', '20130819111741', $comment, 'testrepo', $changeParams );
+		return new RevisionData( 'Cat', '20130819111741', $comment, $commentHtml, 'testrepo', $changeParams );
 	}
 
 }

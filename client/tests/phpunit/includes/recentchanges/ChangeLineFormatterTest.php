@@ -98,11 +98,15 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 	}
 
 	public function formatProvider() {
+		$commentHtml = '<span><a href="http://acme.test">Linky</a> <script>we can run scripts here</script><span/>';
+
 		return array(
 			'edit-change' => array(
 				$this->getEditSiteLinkChangeTagMatchers(),
 				$this->getEditSiteLinkPatterns(),
-				$this->getEditSiteLinkRecentChange()
+				$this->getEditSiteLinkRecentChange(
+					'/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]'
+				)
 			),
 			'log-change' => array(
 				$this->getLogChangeTagMatchers(),
@@ -114,10 +118,11 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 			'comment-fallback' => array(
 				array(),
 				array(
-					'/\(Associated .*? item deleted\. Language links removed\.\)/'
+					'/<span class=\"comment\">.*\(Associated .*? item deleted\. Language links removed\.\)/'
 				),
 				$this->getEditSiteLinkRecentChange(
 					'',
+					null,
 					array(
 						'message' => 'wikibase-comment-remove',
 					),
@@ -131,6 +136,20 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 				),
 				$this->getEditSiteLinkRecentChange(
 					'<script>evil</script>'
+				)
+			),
+			'comment-html' => array(
+				array(),
+				array(
+					'/<span class=\"comment\">.*' . preg_quote( $commentHtml, '/' ) . '/',
+				),
+				$this->getEditSiteLinkRecentChange(
+					'this shall be ignored',
+					$commentHtml,
+					array(
+						'message' => 'this-shall-be-ignored',
+					),
+					null
 				)
 			),
 		);
@@ -225,7 +244,7 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 		);
 	}
 
-	protected function getEditSiteLinkRecentChange( $comment = null, $legacyComment = null, $compositeLegacyComment = null ) {
+	protected function getEditSiteLinkRecentChange( $comment, $commentHtml = null, $legacyComment = null, $compositeLegacyComment = null ) {
 		$params = array(
 			'wikibase-repo-change' => array(
 				'id' => 4,
@@ -243,12 +262,12 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 			)
 		);
 
-		if ( !is_string( $comment ) ) {
-			$comment = '/* wbsetclaim-update:2||1 */ [[Property:P213]]: [[Q850]]';
-		}
-
 		if ( $legacyComment ) {
 			$params['wikibase-repo-change']['comment'] = $legacyComment;
+		}
+
+		if ( $commentHtml ) {
+			$params['comment-html'] = $commentHtml;
 		}
 
 		if ( $compositeLegacyComment ) {

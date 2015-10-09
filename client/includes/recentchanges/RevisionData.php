@@ -27,9 +27,14 @@ class RevisionData {
 	protected $timestamp;
 
 	/**
-	 * @var string
+	 * @var string wikitext
 	 */
 	protected $comment;
+
+	/**
+	 * @var string|null HTML
+	 */
+	protected $commentHtml;
 
 	/**
 	 * @var array
@@ -40,15 +45,22 @@ class RevisionData {
 	 * @param string $userName
 	 * @param string $timestamp
 	 * @param string $comment
+	 * @param string|null $commentHtml
 	 * @param string $siteId
 	 * @param array $changeParams
 	 */
-	public function __construct( $userName, $timestamp,
-		$comment, $siteId, array $changeParams
+	public function __construct(
+		$userName,
+		$timestamp,
+		$comment,
+		$commentHtml,
+		$siteId,
+		array $changeParams
 	) {
 		$this->userName = $userName;
 		$this->timestamp = $timestamp;
 		$this->comment = $comment;
+		$this->commentHtml = $commentHtml;
 		$this->siteId = $siteId;
 		$this->changeParams = $changeParams;
 	}
@@ -93,6 +105,13 @@ class RevisionData {
 	 */
 	public function getComment() {
 		return $this->comment;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCommentHtml() {
+		return $this->commentHtml;
 	}
 
 	/**
