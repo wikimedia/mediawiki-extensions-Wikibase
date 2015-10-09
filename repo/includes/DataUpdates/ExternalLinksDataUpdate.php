@@ -8,11 +8,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 
 /**
  * Add url data values as external links in ParserOutput.
- *
- * @fixme This basic version does not do filtering based on the property data type!
  *
  * @since 0.5
  *
@@ -24,9 +23,21 @@ use Wikibase\DataModel\Statement\StatementList;
 class ExternalLinksDataUpdate implements StatementDataUpdate {
 
 	/**
+	 * @var PropertyDataTypeMatcher
+	 */
+	private $propertyDataTypeMatcher;
+
+	/**
 	 * @var null[]
 	 */
 	private $urls = array();
+
+	/**
+	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher
+	 */
+	function __construct( PropertyDataTypeMatcher $propertyDataTypeMatcher ) {
+		$this->propertyDataTypeMatcher = $propertyDataTypeMatcher;
+	}
 
 	/**
 	 * @param StatementList $statements
@@ -57,9 +68,12 @@ class ExternalLinksDataUpdate implements StatementDataUpdate {
 	 */
 	private function processSnak( Snak $snak ) {
 		if ( $snak instanceof PropertyValueSnak ) {
+			$id = $snak->getPropertyId();
 			$value = $snak->getDataValue();
 
-			if ( $value instanceof StringValue ) {
+			if ( $value instanceof StringValue
+				&& $this->propertyDataTypeMatcher->isMatchingDataType( $id, 'url' )
+			) {
 				$url = $value->getValue();
 
 				if ( $url !== '' ) {
