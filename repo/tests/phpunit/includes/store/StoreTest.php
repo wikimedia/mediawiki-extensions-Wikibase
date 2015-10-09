@@ -85,4 +85,12 @@ class StoreTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\Lib\Store\ChangeLookup', $store->getChangeLookup() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testGetChangeStore( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\Repo\Store\ChangeStore', $store->getChangeStore() );
+	}
+
 }

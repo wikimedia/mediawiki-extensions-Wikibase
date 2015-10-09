@@ -19,6 +19,13 @@ use Wikimedia\Assert\Assert;
 class ChangeLookup extends DBAccessBase implements ChunkAccess {
 
 	/**
+	 * Flag to indicate that we need to query a master database.
+	 */
+	const FROM_MASTER = 'master';
+
+	const FROM_SLAVE = 'slave';
+
+	/**
 	 * @var string[]
 	 */
 	private $changeHandlers;
@@ -86,19 +93,20 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 
 	/**
 	 * @param int $revisionId
+	 * @param string $mode (ChangeLookup::FROM_SLAVE or ChangeLookup::FROM_MASTER)
 	 *
 	 * @return Change|null
 	 */
-	public function loadByRevisionId( $revisionId ) {
+	public function loadByRevisionId( $revisionId, $mode = ChangeLookup::FROM_SLAVE ) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 
 		$change = $this->loadChanges(
 			array( 'change_revision_id' => $revisionId ),
-			array(),
-			__METHOD__,
 			array(
 				'LIMIT' => 1
-			)
+			),
+			__METHOD__,
+			$mode === ChangeLookup::FROM_MASTER ? DB_MASTER : DB_SLAVE
 		);
 
 		if ( isset( $change[0] ) ) {
@@ -112,11 +120,12 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	 * @param array $where
 	 * @param array $options
 	 * @param string $method
+	 * @param int $mode (DB_SLAVE or DB_MASTER)
 	 *
 	 * @return Change[]
 	 */
-	private function loadChanges( array $where, array $options, $method ) {
-		$dbr = $this->getConnection( DB_SLAVE );
+	private function loadChanges( array $where, array $options, $method, $mode = DB_SLAVE ) {
+		$dbr = $this->getConnection( $mode );
 
 		$rows = $dbr->select(
 			'wb_changes',

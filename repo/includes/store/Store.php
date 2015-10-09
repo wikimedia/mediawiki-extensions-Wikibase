@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\ChangeStore;
 
 /**
  * Store interface. All interaction with store Wikibase does on top
@@ -157,5 +158,12 @@ interface Store {
 	 * @return ChangeLookup
 	 */
 	public function getChangeLookup();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ChangeStore
+	 */
+	public function getChangeStore();
 
 }

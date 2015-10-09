@@ -28,6 +28,7 @@ use StubUserLang;
 use Title;
 use User;
 use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
@@ -363,22 +364,15 @@ final class RepoHooks {
 		}
 
 		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
-			$changesTable = ChangesTable::singleton();
+			$changeLookup = WikibaseRepo::getDefaultInstance()->getStore()->getChangeLookup();
 
-			$slave = $changesTable->getReadDb();
-			$changesTable->setReadDb( DB_MASTER );
-
-			/** @var EntityChange $change */
-			$change = $changesTable->selectRow(
-				null,
-				array( 'revision_id' => $revId )
-			);
-
-			$changesTable->setReadDb( $slave );
+			$change = $changeLookup->loadByRevisionId( $revId, ChangeLookup::FROM_MASTER );
 
 			if ( $change ) {
+				$changeStore = WikibaseRepo::getDefaultInstance()->getStore()->getChangeStore();
+
 				$change->setMetadataFromRC( $recentChange );
-				$change->save();
+				$changeStore->saveChange( $change );
 			}
 		}
 
