@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_471ba182",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-09T10:21:21Z",
+      "side": 1,
+      "message": "This method processes statements, but only if there is a visitor interested in statements. Otherwise getStatements is never called, which may become critical when we introduce lazy loading. That\u0027s why I do not pass a StatementList but the entity.",
+      "parentUuid": "0ebaf39b_e7617502",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c758f15b",
         "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-09T10:10:52Z",
       "side": 1,
       "message": "these are no longer site links",
+      "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e70f353a",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-09T10:21:21Z",
+      "side": 1,
+      "message": "As above, this describes what the method does.",
+      "parentUuid": "0ebaf39b_c758f15b",
       "revId": "4abb534591e08bfdfc62ae525e38baf5b1649d5f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
