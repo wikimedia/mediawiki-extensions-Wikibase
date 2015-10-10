@@ -36,6 +36,8 @@ class InMemoryDataTypeLookup implements PropertyDataTypeLookup {
 	 *
 	 * @param PropertyId $propertyId
 	 * @param string $dataTypeId
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setDataTypeForProperty( PropertyId $propertyId, $dataTypeId ) {
 		$this->verifyDataTypeIdType( $dataTypeId );
