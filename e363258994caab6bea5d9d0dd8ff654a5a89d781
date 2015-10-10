@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_413aa6c1",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-10T12:32:42Z",
+      "side": 1,
+      "message": "if we have isMatchingDataType throw an exception then not sure I see so much the point of factoring this out and checking for it in all the places.\n\nbut moving this to isMatchingDataType could be ok. (though that loses in-process caching)",
+      "parentUuid": "0ebaf39b_7eb18bdb",
+      "revId": "e363258994caab6bea5d9d0dd8ff654a5a89d781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_debf57a6",
         "filename": "lib/tests/phpunit/store/PropertyDataTypeMatcherTest.php",
         "patchSetId": 2
