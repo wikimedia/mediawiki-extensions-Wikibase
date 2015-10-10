@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_1ecdef62",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-10T09:39:18Z",
+      "side": 1,
+      "message": "It feels wrong to me to filter every time you call that method. It should be filtered only once in the constructor. Same with SiteLinkDataUpdates.",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_60424b15",
         "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
         "patchSetId": 3
