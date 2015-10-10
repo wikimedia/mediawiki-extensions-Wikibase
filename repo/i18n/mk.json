@@ -359,6 +359,8 @@
 	"apihelp-wbgetclaims-description": "Дава тврдења од Викибазата.",
 	"apihelp-wbgetclaims-example-1": "Дај тврдења за предмет со назнака Q42",
 	"apihelp-wbgetclaims-example-2": "Дај тврдења за предмет со назнака Q42 и својство со назнака P2",
+	"apihelp-wbmergeitems-param-fromid": "Назнака од која се спојува",
+	"apihelp-wbmergeitems-param-toid": "Назнака во која се спојува",
 	"apihelp-wbmergeitems-example-1": "Ги спојува податоците од Q42 во Q222",
 	"apihelp-wbmergeitems-example-2": "Ги спојува податоците од Q555 во Q3",
 	"apihelp-wbmergeitems-example-3": "Ги спојува податоците од Q66 во Q99, занемарувајќи ги можните спротиставени натписи",

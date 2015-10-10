@@ -5,7 +5,8 @@
 			"Rsocol",
 			"Stelistcristi",
 			"Danutz",
-			"Macofe"
+			"Macofe",
+			"Wintereu"
 		]
 	},
 	"wikibase-desc": "Depozit de date structurate",
@@ -63,7 +64,7 @@
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|intrare|intrări|de intrări}}",
 	"wikibase-disambiguation-title": "Dezambiguizare pentru „$1”",
 	"wb-special-newitem-new-item-notification": "Noul element $1 a fost creat și redirecționat către pagina sa. Revenire la $2.",
-	"wikibase-aliases-empty": "Niciun alias definit.",
+	"wikibase-aliases-empty": "Niciun alias definit",
 	"wikibase-propertypage-datatype": "Tip de date",
 	"wikibase-statementview-rank-preferred": "Rang preferat",
 	"wikibase-statementview-rank-normal": "Rang normal",

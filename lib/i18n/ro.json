@@ -72,5 +72,22 @@
 	"datatypes-type-commonsMedia": "Fișier multimedia de la Commons",
 	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-valuetype-mismatch": "Tipul valorii „$1” nu corespunde tipului proprietății „$2”.",
-	"wikibase-snakformatter-property-not-found": "Proprietatea $1 nu a fost găsită; imposibil de identificat tipul de date pentru utilizare."
+	"wikibase-snakformatter-property-not-found": "Proprietatea $1 nu a fost găsită; imposibil de identificat tipul de date pentru utilizare.",
+	"wikibase-entity-summary-wbsetitem": "A creat un element nou",
+	"wikibase-entity-summary-wbcreateredirect": "Redirecționat către $4",
+	"wikibase-entity-summary-wbsetreference": "A indicat o referință",
+	"wikibase-entity-summary-wbsetlabel-add": "Adăugat etichetă în [$2]",
+	"wikibase-entity-summary-wbsetlabel-set": "Modificat eticheta [$2]",
+	"wikibase-entity-summary-wbsetlabel-remove": "Înlăturat eticheta [$2]",
+	"wikibase-entity-summary-wbsetdescription-add": "Adăugat descriere în [$2]",
+	"wikibase-entity-summary-wbsetdescription-set": "Modificat descrierea [$2]",
+	"wikibase-entity-summary-wbsetdescription-remove": "Înlăturat descrierea [$2]",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "Adăugat și eliminat {{PLURAL:$1|alias|aliasuri}} în [$2]",
+	"wikibase-entity-summary-wbsetsitelink-add": "Adăugat legătură către [$2]",
+	"wikibase-entity-summary-wbsetqualifier-add": "Adăugat {{PLURAL:$1|calificativ|calificative}}",
+	"wikibase-item-summary-wbcreate-new": "A creat un element nou",
+	"wikibase-item-summary-wbeditentity": "A creat un element nou",
+	"wikibase-item-summary-wbeditentity-create": "A creat un element nou",
+	"wikibase-item-summary-wbeditentity-update": "A modificat un element",
+	"wikibase-item-summary-wblinktitles-connect": "Adăugat o legătură linguală pentru a conecta paginile"
 }
