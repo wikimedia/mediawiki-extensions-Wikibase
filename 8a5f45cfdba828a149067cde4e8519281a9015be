@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_015b4e27",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-10T12:42:44Z",
+      "side": 1,
+      "message": "we might have some ParserOutputDataUpdates that are neither SiteLinkDataUpdate or StatementDataUpdate.\n\nso i\u0027m not sure about passing both of those in separately, though suppose we could and don\u0027t like so much the idea of filtering in the constructor.",
+      "parentUuid": "0ebaf39b_1ecdef62",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_60424b15",
         "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
         "patchSetId": 3
