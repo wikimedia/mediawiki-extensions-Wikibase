@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Spiritia",
-			"DCLXVI"
+			"DCLXVI",
+			"Termininja"
 		]
 	},
 	"wikibase-error-unexpected": "Възникна неочаквана грешка.",
@@ -19,7 +20,7 @@
 	"wikibase-sitelinks-wikipedia": "Уикипедия",
 	"wikibase-sitelinks-sitename-columnheading": "Език",
 	"wikibase-sitelinks-link-columnheading": "Свързана статия",
-	"wikibase-snakview-snaktypeselector-somevalue": "неразпозната стойност",
+	"wikibase-snakview-snaktypeselector-somevalue": "неизвестна стойност",
 	"wikibase-tooltip-error-details": "Подробности",
 	"datatypes-type-wikibase-item": "Обект",
 	"datatypes-type-commonsMedia": "Файл от Общомедия"
