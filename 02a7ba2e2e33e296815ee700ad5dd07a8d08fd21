@@ -16,6 +16,24 @@
       "revId": "02a7ba2e2e33e296815ee700ad5dd07a8d08fd21",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_60a31240",
+        "filename": "repo/includes/DataUpdates/PageImagesDataUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T18:35:48Z",
+      "side": 1,
+      "message": "I think this is supposed to go with I1618217b0 at some point.",
+      "parentUuid": "0ebaf39b_350a3e2a",
+      "revId": "02a7ba2e2e33e296815ee700ad5dd07a8d08fd21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
