@@ -52,7 +52,12 @@ class FingerprintPatcher {
 		$this->patchAliases( $fingerprint, $patch->getAliasesDiff() );
 	}
 
-	private function newTermListFromArray( $termArray ) {
+	/**
+	 * @param string[] $termArray
+	 *
+	 * @return TermList
+	 */
+	private function newTermListFromArray( array $termArray ) {
 		$termList = new TermList();
 
 		foreach ( $termArray as $language => $labelText ) {
@@ -84,6 +89,11 @@ class FingerprintPatcher {
 		return $textLists;
 	}
 
+	/**
+	 * @param array[] $patchedAliases
+	 *
+	 * @return AliasGroupList
+	 */
 	private function getAliasesFromArrayForPatching( array $patchedAliases ) {
 		$aliases = new AliasGroupList();
 

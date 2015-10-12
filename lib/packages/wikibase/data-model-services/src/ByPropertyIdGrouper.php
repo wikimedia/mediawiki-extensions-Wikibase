@@ -47,7 +47,10 @@ class ByPropertyIdGrouper {
 		}
 	}
 
-	private function indexPropertyIdProviders( $propertyIdProviders ) {
+	/**
+	 * @param PropertyIdProvider[] $propertyIdProviders
+	 */
+	private function indexPropertyIdProviders( array $propertyIdProviders ) {
 		foreach ( $propertyIdProviders as $propertyIdProvider ) {
 			$this->addPropertyIdProvider( $propertyIdProvider );
 		}

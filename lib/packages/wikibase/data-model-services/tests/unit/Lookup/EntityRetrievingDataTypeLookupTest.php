@@ -16,6 +16,9 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
  */
 class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @var string[]
+	 */
 	private $propertiesAndTypes = array(
 		'P1' => 'NyanData all the way across the sky',
 		'P42' => 'string',

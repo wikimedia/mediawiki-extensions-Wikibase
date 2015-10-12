@@ -126,7 +126,6 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 *
 	 * @dataProvider provideApplyData
 	 */
 	public function testApply( Entity $a, Entity $b ) {

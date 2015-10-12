@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
+use Exception;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -12,7 +13,12 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class PropertyLookupException extends EntityLookupException {
 
-	public function __construct( PropertyId $propertyId, $message = null, \Exception $previous = null ) {
+	/**
+	 * @param PropertyId $propertyId
+	 * @param string|null $message
+	 * @param Exception|null $previous
+	 */
+	public function __construct( PropertyId $propertyId, $message = null, Exception $previous = null ) {
 		parent::__construct(
 			$propertyId,
 			$message ?: 'Property lookup failed for: ' . $propertyId,

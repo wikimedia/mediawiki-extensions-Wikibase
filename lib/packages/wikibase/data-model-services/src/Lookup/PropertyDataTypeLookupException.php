@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
+use Exception;
+use RuntimeException;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -10,11 +12,19 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class PropertyDataTypeLookupException extends \RuntimeException {
+class PropertyDataTypeLookupException extends RuntimeException {
 
+	/**
+	 * @var PropertyId
+	 */
 	private $propertyId;
 
-	public function __construct( PropertyId $propertyId, $message = null, \Exception $previous = null ) {
+	/**
+	 * @param PropertyId $propertyId
+	 * @param string|null $message
+	 * @param Exception|null $previous
+	 */
+	public function __construct( PropertyId $propertyId, $message = null, Exception $previous = null ) {
 		$this->propertyId = $propertyId;
 
 		parent::__construct(

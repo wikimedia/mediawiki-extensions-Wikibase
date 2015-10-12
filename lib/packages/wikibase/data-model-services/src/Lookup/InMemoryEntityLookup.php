@@ -20,7 +20,14 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class InMemoryEntityLookup implements EntityLookup {
 
+	/**
+	 * @var EntityDocument[]
+	 */
 	private $entities = array();
+
+	/**
+	 * @var EntityLookupException[]
+	 */
 	private $exceptions = array();
 
 	/**

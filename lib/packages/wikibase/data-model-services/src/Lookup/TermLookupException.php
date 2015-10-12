@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
+use Exception;
+use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -10,15 +12,24 @@ use Wikibase\DataModel\Entity\EntityId;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class TermLookupException extends \RuntimeException {
+class TermLookupException extends RuntimeException {
 
+	/**
+	 * @var EntityId
+	 */
 	private $entityId;
 
+	/**
+	 * @param EntityId $entityId
+	 * @param string[] $languageCodes
+	 * @param string|null $message
+	 * @param Exception|null $previous
+	 */
 	public function __construct(
 		EntityId $entityId,
 		array $languageCodes,
 		$message = null,
-		\Exception $previous = null
+		Exception $previous = null
 	) {
 		$this->entityId = $entityId;
 
