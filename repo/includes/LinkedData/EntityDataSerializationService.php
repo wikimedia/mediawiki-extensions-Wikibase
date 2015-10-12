@@ -473,8 +473,6 @@ class EntityDataSerializationService {
 	 * expose internal implementation details.
 	 *
 	 * @param EntityRevision $entityRevision the entity to output.
-	 * @param EntityRedirect|null $followedRedirect a redirect leading to the entity for use in the output
-	 * @param EntityId[] $incomingRedirects Incoming redirects to include in the output
 	 * @param ApiFormatBase $printer the printer to use to generate the output
 	 *
 	 * @return string the serialized data
