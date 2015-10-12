@@ -254,12 +254,19 @@ class PageTerms extends ApiQueryBase {
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
-		return array(
-			'action=query&prop=pageterms&titles=London'
-				=> 'apihelp-query+pageterms-example-simple',
-			'action=query&prop=pageterms&titles=London&wbptterms=label|alias&uselang=en'
-				=> 'apihelp-query+pageterms-example-label-en',
-		);
+		if ( defined( 'WB_VERSION' ) ) {
+			return array(
+				'action=query&prop=pageterms&titles=Q84'
+					=> 'apihelp-query+pageterms-example-item',
+			);
+		} else {
+			return array(
+				'action=query&prop=pageterms&titles=London'
+					=> 'apihelp-query+pageterms-example-simple',
+				'action=query&prop=pageterms&titles=London&wbptterms=label|alias&uselang=en'
+					=> 'apihelp-query+pageterms-example-label-en',
+			);
+		}
 	}
 
 }
