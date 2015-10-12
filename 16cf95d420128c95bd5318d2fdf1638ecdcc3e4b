@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_f5d4a64d",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-12T14:11:16Z",
+      "side": 1,
+      "message": "I will do this for sure, but not in this patch because this will cause horrible merge conflicts with Audes patches.",
+      "parentUuid": "0ebaf39b_95b0ca3f",
+      "revId": "16cf95d420128c95bd5318d2fdf1638ecdcc3e4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_35bd5e17",
         "filename": "repo/includes/EntityParserOutputGenerator.php",
         "patchSetId": 6
