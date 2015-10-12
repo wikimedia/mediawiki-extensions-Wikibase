@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_9a555955",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-12T12:50:08Z",
+      "side": 1,
+      "message": "The goal of all this refactoring is that this is called only once. Therefor I do not think this needs investigation and refactoring.",
+      "parentUuid": "0ebaf39b_015b4e27",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_60424b15",
         "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_1a6ac912",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-12T12:50:08Z",
+      "side": 1,
+      "message": "Private, internal thingy, see the two lines that use this array in the code below.",
+      "parentUuid": "0ebaf39b_60424b15",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_e0be3bfa",
         "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
         "patchSetId": 3
@@ -65,6 +101,41 @@
       "writtenOn": "2015-10-09T17:12:29Z",
       "side": 1,
       "message": "please document the structure of the array",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5a2121f5",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-12T12:50:08Z",
+      "side": 1,
+      "message": "It\u0027s an array of nulls, as the comment says, with image file names as keys.",
+      "parentUuid": "0ebaf39b_e0be3bfa",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9a6eb929",
+        "filename": "repo/includes/DataUpdates/ParserOutputDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-12T12:50:08Z",
+      "side": 1,
+      "message": "The ParserOutput should be a constructor parameter. That way many visitors can save the possibly memory-consuming collection of all the values they found. Instead the \"process\" methods are able to (but do not have to) push stuff directly to the ParserOutput.\n\nHowever, all this should be done in later patches.",
       "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
