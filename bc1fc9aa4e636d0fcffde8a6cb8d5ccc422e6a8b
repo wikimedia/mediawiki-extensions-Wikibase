@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_ad76e2d3",
+        "filename": "repo/includes/store/ChangeStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-10-12T22:26:50Z",
+      "side": 1,
+      "message": "This is the kind of interface that invites adding new stuff to it. \"Have some other read or write persistence stuff for changes - put it here!\" Which is then bad ISP wise for the consumers. If you only need to save changes, then you don\u0027t need all those other things to be added.",
+      "revId": "bc1fc9aa4e636d0fcffde8a6cb8d5ccc422e6a8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
