@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_ba161d59",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T13:26:02Z",
+      "side": 1,
+      "message": "The split between EntityParserOutputDataUpdater and EntityParserOutputGenerator seems a bit arbitrary. Which concerns belong where, and how is that reflected by the name and interface?",
+      "revId": "fc5a46aafec5a2ba872909fe621be496d28c60c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7a10a55b",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T13:26:02Z",
+      "side": 1,
+      "message": "If $this-\u003eparserOutputDataUpdater acts as an accumulator anyway, can\u0027t we get the info we need here directly from parserOutputDataUpdater? Why do we need to loop it through ParserOutput?",
+      "revId": "fc5a46aafec5a2ba872909fe621be496d28c60c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b505ce15",
+        "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T13:26:02Z",
+      "side": 1,
+      "message": "These \"updates\" are reaally \"updaters\", right?\nTo reduce the awkwardness, I suggest to construct the EntityParserOutputDataUpdaterinside this method, instead of passing around arrays.",
+      "revId": "fc5a46aafec5a2ba872909fe621be496d28c60c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
