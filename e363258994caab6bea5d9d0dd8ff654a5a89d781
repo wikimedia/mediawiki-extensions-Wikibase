@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_fa91f5fb",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T13:04:13Z",
+      "side": 1,
+      "message": "This seems rather odd, I\u0027d prefer to put the expected data type into the constructor. Then this class can act as a filter for property ids. As it is, the entire class this is just a lot of fluff around \n\n  propertyDataTypeLookup-\u003egetDataTypeIdForProperty( $propertyId ) \u003d\u003d\u003d $dataType.\n\nNot sure that alone is worth the trouble. Pushing the expected data type to the constructor would allow us to define and use a more generic interface (PropertyMatcher or PropertyFilter).",
+      "revId": "e363258994caab6bea5d9d0dd8ff654a5a89d781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_7eb18bdb",
         "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
         "patchSetId": 2
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "if we have isMatchingDataType throw an exception then not sure I see so much the point of factoring this out and checking for it in all the places.\n\nbut moving this to isMatchingDataType could be ok. (though that loses in-process caching)",
       "parentUuid": "0ebaf39b_7eb18bdb",
+      "revId": "e363258994caab6bea5d9d0dd8ff654a5a89d781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_daa0b140",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T13:04:13Z",
+      "side": 1,
+      "message": "I agree that the exception should be handled inside this class. However, handing the exception in isMatchingDataType would be a bit more tidy than handling it here.",
+      "parentUuid": "0ebaf39b_413aa6c1",
       "revId": "e363258994caab6bea5d9d0dd8ff654a5a89d781",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
