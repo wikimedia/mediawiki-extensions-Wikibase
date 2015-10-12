@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_3519de7e",
+        "filename": "repo/includes/DataUpdates/.GeoDataDataUpdate.php.swp",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T13:28:40Z",
+      "side": 1,
+      "message": "This is an accident, I assume.",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
