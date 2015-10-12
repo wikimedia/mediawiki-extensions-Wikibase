@@ -25,6 +25,7 @@
 	"apihelp-query+pageterms-description": "{{doc-apihelp-description|query+pageterms}}",
 	"apihelp-query+pageterms-example-simple": "{{doc-apihelp-example|query+pageterms}}",
 	"apihelp-query+pageterms-example-label-en": "{{doc-apihelp-example|query+pageterms}}",
+	"apihelp-query+pageterms-example-item": "{{doc-apihelp-example|query+pageterms}}",
 	"apihelp-query+pageterms-param-terms": "{{doc-apihelp-param|query+pageterms|terms}}",
 	"apihelp-query+wikibase-description": "{{doc-apihelp-description|query+wikibase}}",
 	"apihelp-query+wikibase-example": "{{doc-apihelp-example|query+wikibase}}",
