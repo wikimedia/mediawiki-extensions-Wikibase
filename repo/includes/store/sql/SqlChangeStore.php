@@ -41,10 +41,10 @@ class SqlChangeStore implements ChangeStore {
 	public function saveChange( Change $change ) {
 		Assert::parameterType( 'Wikibase\ChangeRow', $change, '$change' );
 
-		if ( $change->getId() !== null ) {
-			$this->updateChange( $change );
-		} else {
+		if ( $change->getId() === null ) {
 			$this->insertChange( $change );
+		} else {
+			$this->updateChange( $change );
 		}
 	}
 
