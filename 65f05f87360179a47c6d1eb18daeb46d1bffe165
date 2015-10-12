@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_7b474723",
+        "filename": "repo/includes/store/sql/SqlChangeStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T18:56:55Z",
+      "side": 1,
+      "message": "Yeah :/ That restriction is not new, but still awry. After all the refactoring is done, that should be fixable by slightly extending the Change interface.",
+      "parentUuid": "0ebaf39b_3b30efe4",
+      "revId": "65f05f87360179a47c6d1eb18daeb46d1bffe165",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_db58b337",
         "filename": "repo/tests/phpunit/includes/ChangePrunerTest.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-12T18:52:40Z",
       "side": 1,
       "message": "missing space",
+      "revId": "65f05f87360179a47c6d1eb18daeb46d1bffe165",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9b447b1e",
+        "filename": "repo/tests/phpunit/includes/ChangePrunerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T18:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_db58b337",
       "revId": "65f05f87360179a47c6d1eb18daeb46d1bffe165",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
