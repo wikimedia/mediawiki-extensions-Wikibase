@@ -126,7 +126,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Võrgukoht:",
 	"wikibase-gotolinkedpage-lookup-item": "Üksuse ID:",
 	"wikibase-gotolinkedpage-submit": "Mine",
-	"wikibase-gotolinkedpage-summary": "Lehekülje Special:GoToLinkedPage abil saab leida etteantud üksusele vastava lehekülje ühendatud võrgukohas.<br /> Vasakpoolsele väljale \"{{int:wikibase-gotolinkedpage-lookup-site}}\" tuleb kirjutada keele ja võrgukoha kood.<br /> Parempoolsele väljale \"{{int:wikibase-gotolinkedpage-lookup-item}}\" tuleb kirjutada huvipakkuva üksuse identifikaator.",
+	"wikibase-gotolinkedpage-summary": "Lehekülje Special:GoToLinkedPage abil saab leida etteantud üksusele vastava lehekülje ühendatud võrgukohas.<br /> Esimesele väljale \"{{int:wikibase-gotolinkedpage-lookup-site}}\" tuleb kirjutada keele ja võrgukoha kood.<br /> Teisele väljale \"{{int:wikibase-gotolinkedpage-lookup-item}}\" tuleb kirjutada huvipakkuva üksuse identifikaator.",
 	"wikibase-gotolinkedpage-error-page-not-found": "Antud võrgukohast ei leitud lehekülge, mis viitab antud üksusele.",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "Üksuse identifikaator, mille sisestasid, ei sobi.",
 	"wikibase-gotolinkedpage-error-item-not-found": "Üksust ei leitud",
