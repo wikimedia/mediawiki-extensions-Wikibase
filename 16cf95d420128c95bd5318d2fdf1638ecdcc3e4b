@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_95b0ca3f",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T13:49:54Z",
+      "side": 1,
+      "message": "Global state makes baby kittens cry! Just inject PageImagesDataUpdate instead of creating it here.",
+      "revId": "16cf95d420128c95bd5318d2fdf1638ecdcc3e4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_35bd5e17",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T13:49:54Z",
+      "side": 1,
+      "message": "Sounds like the best name of the file, instead of the name of the best file. Just omit \"Name\" from the name. Should be ok for the same reason the data type is called \"commonsMedia\" and not \"ReferenceToCommonsMedia\"...",
+      "revId": "16cf95d420128c95bd5318d2fdf1638ecdcc3e4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
