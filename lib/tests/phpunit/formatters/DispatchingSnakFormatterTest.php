@@ -3,10 +3,13 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
+use ValueFormatters\StringFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\MessageSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
@@ -25,12 +28,54 @@ use Wikibase\Lib\SnakFormatter;
 class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @param string $dataType
+	 *
+	 * @return PropertyDataTypeLookup
+	 */
+	private function getDataTypeLookup( $dataType = 'string' ) {
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( $dataType ) );
+
+		return $dataTypeLookup;
+	}
+
+	/**
+	 * @param string $output the return value for formatSnak
+	 * @param string $format the return value for getFormat
+	 *
+	 * @return SnakFormatter
+	 */
+	private function makeSnakFormatter( $output, $format = SnakFormatter::FORMAT_PLAIN ) {
+		$formatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+
+		$formatter->expects( $this->any() )
+			->method( 'formatSnak' )
+			->will( $this->returnValue( $output ) );
+
+		$formatter->expects( $this->any() )
+			->method( 'getFormat' )
+			->will( $this->returnValue( $format ) );
+
+		return $formatter;
+	}
+
+	/**
 	 * @dataProvider constructorErrorsProvider
 	 */
-	public function testConstructorErrors( $format, array $formatters, $error ) {
-		$this->setExpectedException( $error );
+	public function testConstructorErrors( $format, array $formattersBySnakType, array $formattersByDataType ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
 
-		new DispatchingSnakFormatter( $format, $formatters );
+		$dataTypeLookup = $this->getDataTypeLookup();
+
+		new DispatchingSnakFormatter(
+			$format,
+			$dataTypeLookup,
+			$formattersBySnakType,
+			$formattersByDataType
+		);
 	}
 
 	public function constructorErrorsProvider() {
@@ -44,69 +89,94 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			'format must be a string' => array(
 				17,
 				array(),
-				'InvalidArgumentException'
+				array(),
 			),
-			'keys must be strings' => array(
+			'snak types must be strings' => array(
 				SnakFormatter::FORMAT_PLAIN,
 				array( 17 => $formatter ),
-				'InvalidArgumentException'
+				array( 'string' => $formatter ),
 			),
-			'formatters must be instances of SnakFormatter' => array(
+			'data types must be strings' => array(
+				SnakFormatter::FORMAT_PLAIN,
+				array(),
+				array( 17 => $formatter ),
+			),
+			'snak type formatters must be SnakFormatters' => array(
 				SnakFormatter::FORMAT_PLAIN,
 				array( 'novalue' => 17 ),
-				'InvalidArgumentException'
+				array( 'string' => $formatter ),
 			),
-			'mismatching output format' => array(
+			'data type formatters must be SnakFormatters' => array(
+				SnakFormatter::FORMAT_PLAIN,
+				array(),
+				array( 'string' => 17 ),
+			),
+			'snak type formatters mismatches output format' => array(
 				SnakFormatter::FORMAT_HTML,
 				array( 'novalue' => $formatter ),
-				'InvalidArgumentException'
+				array( 'string' => $formatter ),
+			),
+			'data type formatters mismatches output format' => array(
+				SnakFormatter::FORMAT_HTML,
+				array(),
+				array( 'string' => $formatter ),
 			),
 		);
 	}
 
-	public function testFormatSnak() {
-		$novalue = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
-		$somevalue = wfMessage( 'wikibase-snakview-snaktypeselector-somevalue' );
-		$value = wfMessage( 'wikibase-snakview-snaktypeselector-value' );
+	public function provideFormatSnak() {
+		$p23 = new PropertyId( 'P23' );
 
-		$formatter = new DispatchingSnakFormatter( SnakFormatter::FORMAT_PLAIN, array(
-			'novalue' => new MessageSnakFormatter( 'novalue', $novalue, SnakFormatter::FORMAT_PLAIN ),
-			'somevalue' => new MessageSnakFormatter( 'somevalue', $somevalue, SnakFormatter::FORMAT_PLAIN ),
-			'value' => new MessageSnakFormatter( 'value', $value, SnakFormatter::FORMAT_PLAIN ),
-		) );
-
-		$novalueSnak = new PropertyNoValueSnak( new PropertyId( 'P23' ) );
-		$somevalueSnak = new PropertySomeValueSnak( new PropertyId( 'P23' ) );
-		$valueSnak = new PropertyValueSnak( new PropertyId( 'P23' ), new StringValue( 'test' ) );
-
-		$this->assertEquals( $novalue->text(), $formatter->formatSnak( $novalueSnak ) );
-		$this->assertEquals( $somevalue->text(), $formatter->formatSnak( $somevalueSnak ) );
-		$this->assertEquals( $value->text(), $formatter->formatSnak( $valueSnak ) );
+		return array(
+			'novalue' => array(
+				'NO VALUE',
+				new PropertyNoValueSnak( $p23 ),
+				'string'
+			),
+			'somevalue' => array(
+				'SOME VALUE',
+				new PropertySomeValueSnak( $p23 ),
+				'string'
+			),
+			'string value' => array(
+				'STRING VALUE',
+				new PropertyValueSnak( $p23, new StringValue( 'dummy' ) ),
+				'string'
+			),
+			'other value' => array(
+				'OTHER VALUE',
+				new PropertyValueSnak( $p23, new StringValue( 'dummy' ) ),
+				'url'
+			),
+		);
 	}
 
-	public function testGetSnakTypes() {
-		$novalue = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
-		$somevalue = wfMessage( 'wikibase-snakview-snaktypeselector-somevalue' );
-		$value = wfMessage( 'wikibase-snakview-snaktypeselector-value' );
-
-		$formatters = array(
-			'novalue' => new MessageSnakFormatter( 'novalue', $novalue, SnakFormatter::FORMAT_PLAIN ),
-			'somevalue' => new MessageSnakFormatter( 'somevalue', $somevalue, SnakFormatter::FORMAT_PLAIN ),
-			'value' => new MessageSnakFormatter( 'value', $value, SnakFormatter::FORMAT_PLAIN ),
+	/**
+	 * @dataProvider provideFormatSnak
+	 */
+	public function testFormatSnak( $expected, Snak $snak, $dataType ) {
+		$formattersBySnakType = array(
+			'novalue' => $this->makeSnakFormatter( 'NO VALUE' ),
+			'somevalue' => $this->makeSnakFormatter( 'SOME VALUE' ),
 		);
 
-		$formatter = new DispatchingSnakFormatter( SnakFormatter::FORMAT_PLAIN, $formatters );
+		$formattersByDataType = array(
+			'string' =>  $this->makeSnakFormatter( 'STRING VALUE' ),
+			'*' => $this->makeSnakFormatter( 'OTHER VALUE' ),
+		);
 
-		$this->assertEquals( array_keys( $formatters ), $formatter->getSnakTypes() );
+		$formatter = new DispatchingSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN,
+			$this->getDataTypeLookup( $dataType ),
+			$formattersBySnakType,
+			$formattersByDataType
+		);
 
-		foreach ( $formatters as $type => $expected ) {
-			$actual = $formatter->getFormatter( $type );
-			$this->assertSame( $formatters[$type], $actual );
-		}
+		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );
 	}
 
 	public function testGetFormat() {
-		$formatter = new DispatchingSnakFormatter( 'test', array() );
+		$formatter = new DispatchingSnakFormatter( 'test', $this->getDataTypeLookup(), array(), array() );
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 
