@@ -103,7 +103,7 @@ class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 
 		$isValid = $validator->validate( $guid );
 
-		$this->assertFalse( $isValid, "Assert that statement guid prefix is invalid" );
+		$this->assertFalse( $isValid, 'Assert that statement guid prefix is invalid' );
 	}
 
 	public function validateInvalidPrefixedIdProvider() {

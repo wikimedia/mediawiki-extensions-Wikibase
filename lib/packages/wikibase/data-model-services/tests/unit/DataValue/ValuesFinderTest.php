@@ -35,53 +35,53 @@ class ValuesFinderTest extends \PHPUnit_Framework_TestCase {
 		$p44 = new PropertyId( 'p44' );
 		$p404 = new PropertyId( 'P404' );
 
-		$argLists["empty"] = array(
+		$argLists['empty'] = array(
 			array(),
 			'url',
 			array() );
 
-		$argLists["PropertyNoValueSnak"] = array(
+		$argLists['PropertyNoValueSnak'] = array(
 			array( new PropertyNoValueSnak( $p42 ) ),
 			'url',
 			array() );
 
-		$argLists["PropertySomeValueSnak"] = array(
+		$argLists['PropertySomeValueSnak'] = array(
 			array( new PropertySomeValueSnak( $p42 ) ),
 			'url',
 			array() );
 
-		$argLists["PropertyValueSnak with string value and unknown data type"] = array(
+		$argLists['PropertyValueSnak with string value and unknown data type'] = array(
 			array( new PropertyValueSnak( $p404, new StringValue( 'not an url' ) ) ),
 			'url',
 			array() );
 
-		$argLists["PropertyValueSnak with string value and wrong data type"] = array(
+		$argLists['PropertyValueSnak with string value and wrong data type'] = array(
 			array( new PropertyValueSnak( $p23, new StringValue( 'not an url' ) ) ),
 			'url',
 			array() );
 
-		$argLists["PropertyValueSnak with string value and correct data type"] = array(
+		$argLists['PropertyValueSnak with string value and correct data type'] = array(
 			array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ),
 			'url',
 			array( 'http://acme.com/test' ) );
 
-		$argLists["PropertyValueSnak with boolean value"] = array(
+		$argLists['PropertyValueSnak with boolean value'] = array(
 			array( new PropertyValueSnak( $p42, new BooleanValue( true ) ) ),
 			'url',
 			array( true ) );
 
-		$argLists["PropertyValueSnak with string values and correct data type"] = array(
+		$argLists['PropertyValueSnak with string values and correct data type'] = array(
 			array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ),
 					new PropertyValueSnak( $p42, new StringValue( 'http://foo.bar/' ) ) ),
 			'url',
 			array( 'http://acme.com/test', 'http://foo.bar/' ) );
 
-		$argLists["PropertyValueSnak with boolean value and correct data type"] = array(
+		$argLists['PropertyValueSnak with boolean value and correct data type'] = array(
 			array( new PropertyValueSnak( $p44, new BooleanValue( false ) ) ),
 			'boolean',
 			array( false ) );
 
-		$argLists["PropertyValueSnak with boolean value and wrong data type"] = array(
+		$argLists['PropertyValueSnak with boolean value and wrong data type'] = array(
 			array( new PropertyValueSnak( $p44, new BooleanValue( false ) ) ),
 			'url',
 			array() );
