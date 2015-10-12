@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_4d10865b",
+        "filename": "repo/includes/store/sql/SqlChangeStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-10-12T22:33:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_4d62c607",
+      "revId": "bc1fc9aa4e636d0fcffde8a6cb8d5ccc422e6a8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_8d48be8d",
         "filename": "repo/includes/store/sql/SqlChangeStore.php",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2015-10-12T22:28:55Z",
       "side": 1,
       "message": "The not needed state is real",
+      "revId": "bc1fc9aa4e636d0fcffde8a6cb8d5ccc422e6a8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ad1b4281",
+        "filename": "repo/includes/store/sql/SqlChangeStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-10-12T22:33:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_8d48be8d",
       "revId": "bc1fc9aa4e636d0fcffde8a6cb8d5ccc422e6a8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
