@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_9aca3949",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "Why have all the updaters in a single list, we later pull them apart using an awkward instanceof construction? Either they all have the same interface and are trerated the same, or they should be in two separate lists.",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_fad9f52c",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "processStatements should get only the statements, not the entity.",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1adf2912",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "processSiteLinks should get only the SitelInks, not the entity.",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_1ecdef62",
         "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
         "patchSetId": 3
@@ -55,6 +106,41 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_bafa9d71",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "Using instanceof to determine  which method to call on an object is rather awkward. The two kinds of handlers we have here operate on completely different kinds of information. They should be in separate lists. We might at some point have more or different DataUpdates - but using an \"amorphous\" approach from the start to accommodate these seems backwards. We should use the guarantees we have to avoid conditionals. That can easily be done by putting the different kinds of DataUpdates into separate lists.",
+      "parentUuid": "0ebaf39b_015b4e27",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9af1d994",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "I\u0027d like it better of the DataUpdates would simply wrap around a ParserOutput they get in the constructor. No extra call needed here (or just a generic flush()). No need to know where the information goes. No need for the dependency on ParserOutput at all.",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_60424b15",
         "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
         "patchSetId": 3
@@ -84,6 +170,23 @@
       "side": 1,
       "message": "Private, internal thingy, see the two lines that use this array in the code below.",
       "parentUuid": "0ebaf39b_60424b15",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_fa2fb5f1",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "What is the purpose of this method?",
       "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -125,6 +228,23 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_ba393d40",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "What is the purpose of this method?",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9a6eb929",
         "filename": "repo/includes/DataUpdates/ParserOutputDataUpdate.php",
         "patchSetId": 3
@@ -136,6 +256,40 @@
       "writtenOn": "2015-10-12T12:50:08Z",
       "side": 1,
       "message": "The ParserOutput should be a constructor parameter. That way many visitors can save the possibly memory-consuming collection of all the values they found. Instead the \"process\" methods are able to (but do not have to) push stuff directly to the ParserOutput.\n\nHowever, all this should be done in later patches.",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7a43c5b6",
+        "filename": "repo/includes/DataUpdates/ReferencedEntitiesDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "Why do we need this?",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1a83a9d2",
+        "filename": "repo/includes/DataUpdates/ReferencedEntitiesDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-12T12:56:52Z",
+      "side": 1,
+      "message": "Why do we do this? Aren\u0027t the Title objects returned by getTitleForId()  already fully loaded?",
       "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
