@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_9561aad2",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "this seems to have been done",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_15a5ba00",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "This could refer to T107722",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_55133205",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "How is this target specific?",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_55a0129a",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "If $attribs[\u0027rc_params\u0027] is not unserialized already, you should do that here. Otherwise you will unserialize the same content twice.",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7599967f",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "Two spaces in function call",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f58ca63c",
+        "filename": "client/includes/recentchanges/RecentChangesDuplicateDetector.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "If you look at the above comment, that is probably superfluous in here",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d5e882b1",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesDuplicateDetectorTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "Over here you do is_string on the result of isset (which is bool). Given this is private that check is probably not needed at all.",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_15dffa11",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesDuplicateDetectorTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "shouldn\u0027t use qualified class names here",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_75fe7637",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "Probably not true.",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_35eebeb2",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "array|null",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f52fc6f1",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "$diff is not documented above",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_95f1aa94",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "On master $table can also be null.",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_95d44ac0",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "Should be there now on master AFAIR",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_55ded2df",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d563a239",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFactoryTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-12T15:25:32Z",
+      "side": 1,
+      "message": "Could have array type hints",
+      "revId": "31f8d6b0ce8609fbc8075d7d97a8918961396565",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
