@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_95ca0a49",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-12T15:04:14Z",
+      "side": 1,
+      "message": "As already explained in https://gerrit.wikimedia.org/r/#/c/244643/2/repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+      "parentUuid": "0ebaf39b_fad9f52c",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_1adf2912",
         "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
         "patchSetId": 3
@@ -290,6 +308,24 @@
       "writtenOn": "2015-10-12T12:56:52Z",
       "side": 1,
       "message": "Why do we do this? Aren\u0027t the Title objects returned by getTitleForId()  already fully loaded?",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_75cd1662",
+        "filename": "repo/includes/DataUpdates/ReferencedEntitiesDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-12T15:04:14Z",
+      "side": 1,
+      "message": "I do not know. This is existing code, created by Aude, see Ie58704b.",
+      "parentUuid": "0ebaf39b_1a83a9d2",
       "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
