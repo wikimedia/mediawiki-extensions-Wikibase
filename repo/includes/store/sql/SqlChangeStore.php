@@ -82,19 +82,13 @@ class SqlChangeStore implements ChangeStore {
 	private function getValues( ChangeRow $change ) {
 		$fields = $change->getFields();
 
-		$time = isset( $fields['time'] ) ? $fields['time'] : wfTimestampNow();
-		$objectId = isset( $fields['object_id'] ) ? $fields['object_id'] : '';
-		$revId = isset( $fields['revision_id'] ) ? $fields['revision_id'] : '0';
-		$userId = isset( $fields['user_id'] ) ? $fields['user_id'] : '0';
-		$info = $change->serializeInfo( $fields['info'] );
-
 		return array(
 			'change_type' => $fields['type'],
-			'change_time' => $time,
-			'change_object_id' => $objectId,
-			'change_revision_id' => $revId,
-			'change_user_id' => $userId,
-			'change_info' => $info
+			'change_time' => isset( $fields['time'] ) ? $fields['time'] : wfTimestampNow(),
+			'change_object_id' => isset( $fields['object_id'] ) ? $fields['object_id'] : '',
+			'change_revision_id' => isset( $fields['revision_id'] ) ? $fields['revision_id'] : '0',
+			'change_user_id' => isset( $fields['user_id'] ) ? $fields['user_id'] : '0',
+			'change_info' => $change->serializeInfo( $fields['info'] )
 		);
 	}
 
