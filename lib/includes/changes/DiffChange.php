@@ -14,7 +14,7 @@ use Diff\DiffOp\DiffOp;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class DiffChange extends ChangeRow {
+abstract class DiffChange extends ChangeRow {
 
 	/**
 	 * @since 0.1

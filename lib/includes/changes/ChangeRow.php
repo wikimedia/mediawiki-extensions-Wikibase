@@ -58,17 +58,6 @@ class ChangeRow implements Change {
 
 	public function __construct( array $fields = array() ) {
 		$this->setFields( $fields );
-
-		$this->postConstruct();
-	}
-
-	/**
-	 * @since 0.1
-	 */
-	protected function postConstruct() {
-		if ( !$this->hasField( 'type' ) ) {
-			$this->setField( 'type', $this->getType() );
-		}
 	}
 
 	/**

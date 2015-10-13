@@ -146,13 +146,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @see ChangeRow::postConstruct
-	 */
-	protected function postConstruct() {
-		// This implementation should not set the type field.
-	}
-
-	/**
 	 * @param RecentChange $rc
 	 *
 	 * @todo rename to setRecentChangeInfo
