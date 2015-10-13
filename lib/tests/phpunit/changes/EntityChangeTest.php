@@ -29,7 +29,6 @@ use Wikibase\ItemContent;
 class EntityChangeTest extends ChangeRowTest {
 
 	/**
-	 * @see ORMRowTest::getRowClass
 	 * @since 0.4
 	 * @return string
 	 */

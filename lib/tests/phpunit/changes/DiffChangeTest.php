@@ -19,7 +19,6 @@ namespace Wikibase\Test;
 class DiffChangeTest extends ChangeRowTest {
 
 	/**
-	 * @see ORMRowTest::getRowClass
 	 * @since 0.4
 	 * @return string
 	 */

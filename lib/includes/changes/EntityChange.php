@@ -36,8 +36,6 @@ class EntityChange extends DiffChange {
 	private $entityId = null;
 
 	/**
-	 * @see ORMRow::setField
-	 *
 	 * @todo FIXME use uppecase ID, like everywhere else!
 	 *
 	 * @param string $name
