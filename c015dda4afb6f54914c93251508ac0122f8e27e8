@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_bd85a9b3",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-13T16:53:59Z",
+      "side": 1,
+      "message": "i recommend the approach in the pull request instead of this, which combines things in a way i don\u0027t want.\n\nI wish we didn\u0027t end up with this huge chain like this, as i was reworking things already on thursday / friday to deal with some of the concerns that i had and that have been raised.",
+      "parentUuid": "0ebaf39b_bd1cc919",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9af22bcc",
         "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "But it\u0027s specific to datatypes. It would be nice to have a common interface for filtering that is no bound to a specific aspect to filter by.",
       "parentUuid": "0ebaf39b_7ad737f3",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_dd789dc1",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-13T16:53:59Z",
+      "side": 1,
+      "message": "please not specific to Statements. for many of the things we put in parser output, we just care about all the snaks and then filter based on data type :)",
+      "parentUuid": "0ebaf39b_dd197d28",
       "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
