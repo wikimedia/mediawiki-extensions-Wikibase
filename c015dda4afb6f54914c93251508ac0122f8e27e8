@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_3a8d3f37",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T15:08:40Z",
+      "side": 1,
+      "message": "I\u0027m sorry? Can you please be more specific? How to do better? Quite a lot of the code we introduced here can make use of this. There could be a matcher combining other matchers, for example one that strips out deprecated statements, one that strips statements based on snak type and so on.\n\nOriginally, this was suggested in a comment by Daniel. I agree.",
+      "parentUuid": "0ebaf39b_9af22bcc",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9ac9cb7d",
         "filename": "repo/includes/DataUpdates/ParserOutputDataUpdate.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2015-10-13T15:07:11Z",
       "side": 1,
       "message": "imho, at minimum, the naming is then wrong if we rename the method.",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_fa86c717",
+        "filename": "repo/includes/DataUpdates/ParserOutputDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T15:08:40Z",
+      "side": 1,
+      "message": "I\u0027m also not very happy with \"flush\". Could also be \"commit\". What do you suggest?",
+      "parentUuid": "0ebaf39b_9ac9cb7d",
       "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
