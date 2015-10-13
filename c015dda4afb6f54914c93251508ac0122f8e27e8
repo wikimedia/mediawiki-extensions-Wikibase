@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_fab807e4",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-13T15:03:42Z",
+      "side": 1,
+      "message": "BagOStuff means dependency on MediaWiki and it would not go in DataModelSerivces",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9af22bcc",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-13T15:03:42Z",
+      "side": 1,
+      "message": "ugh! this sounds ugly",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
