@@ -194,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_b4eb86da",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-13T11:39:47Z",
+      "side": 1,
+      "message": "Still, null[] makes no sense. This is using the keys of the array to implement a set of urls. Just say so.",
+      "parentUuid": "0ebaf39b_1a6ac912",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_fa2fb5f1",
         "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
         "patchSetId": 3
