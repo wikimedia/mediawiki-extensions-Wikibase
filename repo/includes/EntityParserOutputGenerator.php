@@ -8,7 +8,9 @@ use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\StatementList;
@@ -19,9 +21,13 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
+use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
+use Wikibase\Repo\DataUpdates\GeoDataDataUpdate;
+use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\PageImagesDataUpdate;
-use Wikibase\Repo\DataUpdates\ParserOutputDataUpdate;
+use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\WikibaseRepo;
@@ -80,15 +86,38 @@ class EntityParserOutputGenerator {
 	private $entityDataFormatProvider;
 
 	/**
-	 * @var ParserOutputDataUpdate[]
+	 * @var PropertyDataTypeLookup
 	 */
-	private $dataUpdates;
+	private $propertyDataTypeLookup;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $externalEntityIdParser;
+
+	/**
+	 * @var string[]
+	 */
+	private $preferredGeoDataProperties;
 
 	/**
 	 * @var string
 	 */
 	private $languageCode;
 
+	/**
+	 * @param EntityViewFactory $entityViewFactory
+	 * @param ParserOutputJsConfigBuilder $configBuilder
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TemplateFactory $templateFactory
+	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param EntityIdParser $externalEntityIdParser
+	 * @param string[] $preferredGeoDataProperties
+	 * @param string $languageCode
+	 */
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
@@ -97,7 +126,9 @@ class EntityParserOutputGenerator {
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
-		array $dataUpdates,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityIdParser $externalEntityIdParser,
+		array $preferredGeoDataProperties,
 		$languageCode
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -108,7 +139,9 @@ class EntityParserOutputGenerator {
 		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
-		$this->dataUpdates = $dataUpdates;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->externalEntityIdParser = $externalEntityIdParser;
+		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->languageCode = $languageCode;
 	}
 
@@ -146,7 +179,7 @@ class EntityParserOutputGenerator {
 
 		$entity = $entityRevision->getEntity();
 
-		$dataUpdater = new EntityParserOutputDataUpdater( $parserOutput, $this->dataUpdates );
+		$dataUpdater = $this->getEntityParserOutputDataUpdater( $parserOutput );
 		$dataUpdater->processEntity( $entity );
 		$dataUpdater->flush();
 
@@ -194,6 +227,36 @@ class EntityParserOutputGenerator {
 		return $parserOutput;
 	}
 
+	private function getEntityParserOutputDataUpdater( ParserOutput $parserOutput ) {
+		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
+
+		/**
+		 * @fixme Each updater should get the ParserOutput as its first constructor parameter. Thats
+		 * the reason why this array is constructed here and not in the factory.
+		 * @see ParserOutputDataUpdate
+		 */
+		$dataUpdaters = array(
+			new ReferencedEntitiesDataUpdate(
+				$this->entityTitleLookup,
+				$this->externalEntityIdParser
+			),
+			new ExternalLinksDataUpdate( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdate( $propertyDataTypeMatcher )
+		);
+
+		if ( class_exists( 'GeoData' ) ) {
+			$dataUpdaters[] = new GeoDataDataUpdate(
+				$propertyDataTypeMatcher,
+				$this->preferredGeoDataProperties
+			);
+		}
+
+		return new EntityParserOutputDataUpdater( $parserOutput, $dataUpdaters );
+	}
+
+	/**
+	 * @fixme Turn this into an updater and add it to the updaters array above.
+	 */
 	private function addBestImageToParserOutput( ParserOutput $parserOutput, StatementList $statements ) {
 		$repo = WikibaseRepo::getDefaultInstance();
 		// TODO: Inject this setting!
@@ -215,7 +278,13 @@ class EntityParserOutputGenerator {
 	 * @return EntityInfo
 	 */
 	private function getEntityInfo( ParserOutput $parserOutput ) {
-		// set in ReferencedEntitiesDataUpdate
+		/**
+		 * Set in ReferencedEntitiesDataUpdate.
+		 *
+		 * @see ReferencedEntitiesDataUpdate::updateParserOutput
+		 * @fixme Simply add a public method ReferencedEntitiesDataUpdate::getEntityIds or similar
+		 * to the data updater that does the job of finding all used entities.
+		 */
 		$entityIds = $parserOutput->getExtensionData( 'referenced-entities' );
 
 		if ( !is_array( $entityIds ) ) {
@@ -272,7 +341,7 @@ class EntityParserOutputGenerator {
 		if ( !is_string( $titleText ) ) {
 			$entityId = $entity->getId();
 
-			if ( $entityId !== null ) {
+			if ( $entityId instanceof EntityId ) {
 				$titleText = $entityId->getSerialization();
 			}
 		}

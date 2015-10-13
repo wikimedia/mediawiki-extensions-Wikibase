@@ -10,6 +10,16 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
  * Check if a PropertyId is for a Property with a specific data type.
  * As well, in-process caching of the lookups is done for performance reasons.
  *
+ * @fixme The caching aspect of this class should be extracted to a
+ * CachingPropertyDataTypeLookup( PropertyDataTypeLookup, BagOStuff )
+ * This new class should live in Data Model Services.
+ * @see https://github.com/wmde/WikibaseDataModelServices/pull/75
+ *
+ * @fixme The matching aspect of this class should be reworked into a StatementMatcher interface.
+ * The only method in this interface would be a matches( Statement ). One implementation of this
+ * interface can be a DataTypeStatementMatcher, other uses include a CommonsMediaStatementMatcher
+ * and an ImageStatementMatcher.
+ *
  * @since 0.5
  *
  * @license GNU GPL v2+
