@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -25,8 +24,6 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
-use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
-use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
@@ -188,18 +185,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
-		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
-
 		$entityIdParser = new BasicEntityIdParser();
-
-		$dataUpdaters = [
-			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ReferencedEntitiesDataUpdater(
-				$entityTitleLookup,
-				$entityIdParser
-			)
-		];
 
 		return new EntityParserOutputGenerator(
 			$this->getEntityViewFactory( $createView ),
@@ -214,7 +200,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			TemplateFactory::getDefaultInstance(),
 			$this->getMock( LocalizedTextProvider::class ),
 			$entityDataFormatProvider,
-			$dataUpdaters,
+			$this->getPropertyDataTypeLookup(),
+			new BasicEntityIdParser(),
+			[],
+			[],
+			[],
 			'en'
 		);
 	}
@@ -381,10 +371,6 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 		$entityIdParser = new BasicEntityIdParser();
 
-		$dataUpdaters = [
-			new ReferencedEntitiesDataUpdater( $entityTitleLookup, $entityIdParser )
-		];
-
 		return new EntityParserOutputGenerator(
 			$this->getViewFactoryForRedirectTest(),
 			$this->getConfigBuilderMock(),
@@ -402,7 +388,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			TemplateFactory::getDefaultInstance(),
 			$this->getMock( LocalizedTextProvider::class ),
 			new EntityDataFormatProvider(),
-			$dataUpdaters,
+			$this->getPropertyDataTypeLookup(),
+			$entityIdParser,
+			[],
+			[],
+			[],
 			'en'
 		);
 	}
