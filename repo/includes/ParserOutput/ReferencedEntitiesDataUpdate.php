@@ -129,8 +129,13 @@ class ReferencedEntitiesDataUpdate implements StatementDataUpdate, SiteLinkDataU
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		// needed and used in EntityParserOutputGenerator, for getEntityInfo,
-		// to allow this data to be accessed later in processing.
+		/**
+		 * Needed and used in EntityParserOutputGenerator, for getEntityInfo, to allow this data to
+		 * be accessed later in processing.
+		 *
+		 * @see EntityParserOutputGenerator::getEntityInfo
+		 * @fixme Simply add a public method self::getEntityIds or similar instead.
+		 */
 		$parserOutput->setExtensionData( 'referenced-entities', $this->entityIds );
 		$this->addLinksToParserOutput( $parserOutput );
 	}
