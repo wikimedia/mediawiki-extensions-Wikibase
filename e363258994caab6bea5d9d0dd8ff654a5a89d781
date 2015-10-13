@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_5271fd09",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:29:29Z",
+      "side": 1,
+      "message": "Aude is already proposing an alternative to this in https://github.com/wmde/WikibaseDataModelServices/pull/75 . Lets focus on commenting there.",
+      "parentUuid": "0ebaf39b_fa91f5fb",
+      "revId": "e363258994caab6bea5d9d0dd8ff654a5a89d781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_7eb18bdb",
         "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
         "patchSetId": 2
