@@ -7,6 +7,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * Check if a PropertyId is for a Property with a specific data type.
  *
+ * @since 3.1
+ *
  * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
@@ -25,6 +27,8 @@ class PropertyDataTypeMatcher {
 	}
 
 	/**
+	 * Returns if the property with the specified property id has the provided data type.
+	 *
 	 * @param PropertyId $propertyId
 	 * @param string $dataType
 	 *

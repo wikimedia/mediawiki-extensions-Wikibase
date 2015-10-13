@@ -3,6 +3,8 @@
 ## Version 3.1.0 (dev)
 
 * Added `InMemoryEntityLookup::addException`
+* Added `PropertyDataTypeMatcher`
+* Added `PropertyDataTypeLookup`
 
 ## Version 3.0.0 (2015-09-16)
 
