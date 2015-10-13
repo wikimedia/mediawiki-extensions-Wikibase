@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\DataUpdates;
 
+use InvalidArgumentException;
 use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -24,9 +25,32 @@ class EntityParserOutputDataUpdater {
 	private $dataUpdates;
 
 	/**
+	 * @var StatementDataUpdate[]
+	 */
+	private $statementDataUpdates = array();
+
+	/**
+	 * @var SiteLinkDataUpdate[]
+	 */
+	private $siteLinkDataUpdates = array();
+
+	/**
 	 * @param ParserOutputDataUpdate[] $dataUpdates
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $dataUpdates ) {
+		foreach ( $dataUpdates as $dataUpdate ) {
+			if ( $dataUpdate instanceof StatementDataUpdate ) {
+				$this->statementDataUpdates[] = $dataUpdate;
+			} elseif ( $dataUpdate instanceof SiteLinkDataUpdate ) {
+				$this->siteLinkDataUpdates[] = $dataUpdate;
+			} else {
+				throw new InvalidArgumentException( 'Each $dataUpdates element must be a '
+					. 'StatementDataUpdate, SiteLinkDataUpdate or both' );
+			}
+		}
+
 		$this->dataUpdates = $dataUpdates;
 	}
 
@@ -35,26 +59,24 @@ class EntityParserOutputDataUpdater {
 	 */
 	public function processEntity( EntityDocument $entity ) {
 		if ( $entity instanceof StatementListProvider ) {
-			$this->processStatements( $entity );
+			$this->processStatementListProvider( $entity );
 		}
 
 		if ( $entity instanceof Item ) {
-			$this->processSiteLinks( $entity );
+			$this->processItem( $entity );
 		}
 	}
 
 	/**
 	 * @param StatementListProvider $entity
 	 */
-	private function processStatements( StatementListProvider $entity ) {
-		$dataUpdates = $this->getStatementDataUpdates();
-
-		if ( empty( $dataUpdates ) ) {
+	private function processStatementListProvider( StatementListProvider $entity ) {
+		if ( empty( $this->statementDataUpdates ) ) {
 			return;
 		}
 
 		foreach ( $entity->getStatements() as $statement ) {
-			foreach ( $dataUpdates as $dataUpdate ) {
+			foreach ( $this->statementDataUpdates as $dataUpdate ) {
 				$dataUpdate->processStatement( $statement );
 			}
 		}
@@ -63,48 +85,16 @@ class EntityParserOutputDataUpdater {
 	/**
 	 * @param Item $item
 	 */
-	private function processSiteLinks( Item $item ) {
-		$dataUpdates = $this->getSiteLinkDataUpdates();
-
-		if ( empty( $dataUpdates ) ) {
+	private function processItem( Item $item ) {
+		if ( empty( $this->siteLinkDataUpdates ) ) {
 			return;
 		}
 
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			foreach ( $dataUpdates as $dataUpdate ) {
+			foreach ( $this->siteLinkDataUpdates as $dataUpdate ) {
 				$dataUpdate->processSiteLink( $siteLink );
 			}
 		}
-	}
-
-	/**
-	 * @return StatementDataUpdate[]
-	 */
-	private function getStatementDataUpdates() {
-		$statementDataUpdates = array();
-
-		foreach ( $this->dataUpdates as $dataUpdate ) {
-			if ( $dataUpdate instanceof StatementDataUpdate ) {
-				$statementDataUpdates[] = $dataUpdate;
-			}
-		}
-
-		return $statementDataUpdates;
-	}
-
-	/**
-	 * @return SiteLinkDataUpdate[]
-	 */
-	private function getSiteLinkDataUpdates() {
-		$siteLinkDataUpdates = array();
-
-		foreach ( $this->dataUpdates as $dataUpdate ) {
-			if ( $dataUpdate instanceof SiteLinkDataUpdate ) {
-				$siteLinkDataUpdates[] = $dataUpdate;
-			}
-		}
-
-		return $siteLinkDataUpdates;
 	}
 
 	/**
