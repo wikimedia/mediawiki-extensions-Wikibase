@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_9df5454f",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-13T16:50:21Z",
+      "side": 1,
+      "message": "Assert::parameterElementType( \u0027Wikibase\\Repo\\DataUpdates\\StatementDataUpdate|Wikibase\\Repo\\DataUpdates\\SiteLinkDataUpdate\u0027,  $dataUpdates, \u0027$dataUpdates\u0027 )",
+      "revId": "48b74de3a73654a1db2997bd940f449c72bfa178",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
