@@ -8,7 +8,9 @@ use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -19,6 +21,7 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
@@ -76,9 +79,29 @@ class EntityParserOutputGenerator {
 	private $entityDataFormatProvider;
 
 	/**
-	 * @var ParserOutputDataUpdater[]
+	 * @var PropertyDataTypeLookup
 	 */
-	private $dataUpdaters;
+	private $propertyDataTypeLookup;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $externalEntityIdParser;
+
+	/**
+	 * @var string[]
+	 */
+	private $preferredGeoDataProperties;
+
+	/**
+	 * @var string[]
+	 */
+	private $preferredPageImagesProperties;
+
+	/**
+	 * @var string[] Mapping of globe uris to string names, as recognized by GeoData.
+	 */
+	private $globeUris;
 
 	/**
 	 * @var string
@@ -93,7 +116,11 @@ class EntityParserOutputGenerator {
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
-	 * @param ParserOutputDataUpdater[] $dataUpdaters
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param EntityIdParser $externalEntityIdParser
+	 * @param string[] $preferredGeoDataProperties
+	 * @param string[] $preferredPageImagesProperties
+	 * @param string[] $globeUris Mapping of globe uris to string names.
 	 * @param string $languageCode
 	 */
 	public function __construct(
@@ -104,7 +131,11 @@ class EntityParserOutputGenerator {
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
-		array $dataUpdaters,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityIdParser $externalEntityIdParser,
+		array $preferredGeoDataProperties = array(),
+		array $preferredPageImagesProperties = array(),
+		array $globeUris = array(),
 		$languageCode
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -115,7 +146,11 @@ class EntityParserOutputGenerator {
 		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
-		$this->dataUpdaters = $dataUpdaters;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->externalEntityIdParser = $externalEntityIdParser;
+		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
+		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
+		$this->globeUris = $globeUris;
 		$this->languageCode = $languageCode;
 	}
 
@@ -153,7 +188,7 @@ class EntityParserOutputGenerator {
 
 		$entity = $entityRevision->getEntity();
 
-		$updater = new EntityParserOutputDataUpdater( $parserOutput, $this->dataUpdaters );
+		$updater = $this->getEntityParserOutputDataUpdater( $parserOutput );
 		$updater->processEntity( $entity );
 		$updater->finish();
 
@@ -194,6 +229,38 @@ class EntityParserOutputGenerator {
 		}
 
 		return $parserOutput;
+	}
+
+	private function getEntityParserOutputDataUpdater( ParserOutput $parserOutput ) {
+		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
+
+		/**
+		 * @fixme Each updater should get the ParserOutput as its first constructor parameter. Thats
+		 * the reason why this array is constructed here and not in the factory.
+		 * @see ParserOutputDataUpdater
+		 */
+		$updaters = array(
+			new ReferencedEntitiesDataUpdater(
+				$this->entityTitleLookup,
+				$this->externalEntityIdParser
+			),
+			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
+		);
+
+		if ( !empty( $this->preferredPageImagesProperties ) ) {
+			$updaters[] = new PageImagesDataUpdater( $this->preferredPageImagesProperties );
+		}
+
+		if ( class_exists( 'GeoData' ) ) {
+			$updaters[] = new GeoDataDataUpdater(
+				$propertyDataTypeMatcher,
+				$this->preferredGeoDataProperties,
+				$this->globeUris
+			);
+		}
+
+		return new EntityParserOutputDataUpdater( $parserOutput, $updaters );
 	}
 
 	/**
