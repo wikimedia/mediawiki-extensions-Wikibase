@@ -155,7 +155,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 				'revision_id' => $row->change_revision_id,
 			);
 
-			$changes[] = new $class( null, $data, false );
+			$changes[] = new $class( $data );
 		}
 
 		return $changes;
