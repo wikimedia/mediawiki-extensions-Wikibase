@@ -82,7 +82,7 @@
 		 * Runs assertions testing initialization and destruction of a listview widget initialized
 		 * with the values passed.
 		 *
-		 * @param {Object} assert
+		 * @param {QUnit.assert} assert
 		 * @param {string[]} [values]
 		 */
 		function testInitAndDestroy( assert, values ) {
