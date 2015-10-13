@@ -12,6 +12,7 @@ use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
 use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\GeoDataDataUpdate;
 use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
+use Wikibase\Repo\DataUpdates\ParserOutputDataUpdate;
 use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\EntityViewFactory;
