@@ -19,7 +19,6 @@ use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
-use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
 use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
@@ -161,7 +160,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$entityDataFormatProvider,
-			new EntityParserOutputDataUpdater( $dataUpdates ),
+			$dataUpdates,
 			'en'
 		);
 	}
