@@ -133,7 +133,8 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 		$context->setRequest( new FauxRequest() );
 		$context->setTitle( new Title( NS_SPECIAL, 'Watchlist' ) );
 
-		$changesList = new ChangesList( $context );
+		/** @var ChangesList $changesList */
+		$changesList = $this->getMock( 'ChangesList' );
 
 		$linkBeginHookHandler->doChangesListInitRows(
 			$changesList,
