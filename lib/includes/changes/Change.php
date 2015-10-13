@@ -64,7 +64,7 @@ interface Change {
 	 *
 	 * @since 0.2
 	 *
-	 * @return integer
+	 * @return int|null
 	 */
 	public function getId();
 
