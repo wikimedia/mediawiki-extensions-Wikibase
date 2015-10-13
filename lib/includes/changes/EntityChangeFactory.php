@@ -72,9 +72,7 @@ class EntityChangeFactory {
 
 		/** @var EntityChange $instance  */
 		$instance = new $class(
-			null,
-			$fields,
-			false
+			$fields
 		);
 
 		if ( !$instance->hasField( 'object_id' ) ) {

@@ -25,7 +25,6 @@ class ChangeRowTest extends \MediaWikiTestCase {
 		return array(
 			array(
 				new ChangeRow(
-					null,
 					array(
 						'user_id' => 1,
 						'time' => '20130101000000'
@@ -65,8 +64,7 @@ class ChangeRowTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetObjectId() {
-		$data = array( 'object_id' => 'p100' );
-		$change = new ChangeRow( null, $data );
+		$change = new ChangeRow( array( 'object_id' => 'p100' ) );
 
 		$this->assertEquals(
 			'p100',

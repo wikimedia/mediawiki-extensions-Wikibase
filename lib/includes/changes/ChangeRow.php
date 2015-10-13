@@ -81,10 +81,9 @@ class ChangeRow implements Change {
 	}
 
 	/**
-	 * @param null $table Ignored
 	 * @param array|null $fields
 	 */
-	public function __construct( $table = null, $fields = null ) {
+	public function __construct( array $fields = null ) {
 		$this->setFields( is_array( $fields ) ? $fields : array() );
 
 		$this->postConstruct();
