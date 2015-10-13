@@ -2,11 +2,9 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use GeoData\GeoData;
 use Language;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -148,7 +146,11 @@ class EntityParserOutputGeneratorFactory {
 			$this->templateFactory,
 			new MediaWikiLocalizedTextProvider( $userLanguageCode ),
 			$this->entityDataFormatProvider,
-			$this->getDataUpdaters(),
+			$this->propertyDataTypeLookup,
+			$this->externalEntityIdParser,
+			$this->preferredGeoDataProperties,
+			$this->preferredPageImagesProperties,
+			$this->globeUris,
 			$userLanguageCode,
 			$editable
 		);
@@ -172,36 +174,6 @@ class EntityParserOutputGeneratorFactory {
 		return $this->languageFallbackChainFactory->newFromLanguage(
 			$language
 		);
-	}
-
-	/**
-	 * @return ParserOutputDataUpdater[]
-	 */
-	private function getDataUpdaters() {
-		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
-
-		$updaters = array(
-			new ReferencedEntitiesDataUpdater(
-				$this->entityTitleLookup,
-				$this->externalEntityIdParser
-			),
-			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
-		);
-
-		if ( !empty( $this->preferredPageImagesProperties ) ) {
-			$updaters[] = new PageImagesDataUpdater( $this->preferredPageImagesProperties );
-		}
-
-		if ( class_exists( GeoData::class ) ) {
-			$updaters[] = new GeoDataDataUpdater(
-				$propertyDataTypeMatcher,
-				$this->preferredGeoDataProperties,
-				$this->globeUris
-			);
-		}
-
-		return $updaters;
 	}
 
 }

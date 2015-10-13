@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
@@ -22,10 +21,7 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
-use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
-use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
-use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\View\EntityView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -182,18 +178,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
-		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
-
 		$entityIdParser = new BasicEntityIdParser();
-
-		$dataUpdaters = array(
-			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ReferencedEntitiesDataUpdater(
-				$entityTitleLookup,
-				$entityIdParser
-			)
-		);
 
 		return new EntityParserOutputGenerator(
 			$this->getEntityViewFactory( $createView ),
@@ -204,7 +189,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			TemplateFactory::getDefaultInstance(),
 			$this->getMock( LocalizedTextProvider::class ),
 			$entityDataFormatProvider,
-			$dataUpdaters,
+			$this->getPropertyDataTypeLookup(),
+			new BasicEntityIdParser(),
+			array(),
+			array(),
+			array(),
 			'en',
 			true
 		);
