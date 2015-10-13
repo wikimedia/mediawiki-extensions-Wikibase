@@ -19,11 +19,10 @@ class InProcessCachingDataTypeLookup implements PropertyDataTypeLookup {
 	 */
 	private $propertyIds = array();
 
-	/**
-	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
-	 */
+	private $lookup;
+
 	public function __construct( PropertyDataTypeLookup $propertyDataTypeLookup ) {
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->lookup = $propertyDataTypeLookup;
 	}
 
 	/**
@@ -36,8 +35,7 @@ class InProcessCachingDataTypeLookup implements PropertyDataTypeLookup {
 		$serializedId = $propertyId->getSerialization();
 
 		if ( !array_key_exists( $serializedId, $this->propertyIds ) ) {
-			$dataTypeId = $this->propertyDataTypeLookup->getDataTypeIdFOrProperty( $propertyId );
-			$this->propertyIds[$serializedId] = $dataTypeId;
+			$this->propertyIds[$serializedId] = $this->lookup->getDataTypeIdFOrProperty( $propertyId );
 		}
 
 		return $this->propertyIds[$serializedId];
