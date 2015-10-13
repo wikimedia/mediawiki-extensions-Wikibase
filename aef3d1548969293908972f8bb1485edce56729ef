@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_da3ae3bf",
+        "filename": "repo/includes/DataUpdates/ReferencedEntitiesDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-13T14:40:56Z",
+      "side": 1,
+      "message": "The concern and purpose for this method is now even more unclear, and the name even more misleading. Can we just drop it?",
+      "revId": "aef3d1548969293908972f8bb1485edce56729ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
