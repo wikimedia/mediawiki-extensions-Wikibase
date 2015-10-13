@@ -2,13 +2,19 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use ExtensionRegistry;
+use GeoData\GeoData;
 use InvalidArgumentException;
+use PageImages;
 use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
@@ -80,9 +86,29 @@ class EntityParserOutputGenerator {
 	private $entityDataFormatProvider;
 
 	/**
-	 * @var ParserOutputDataUpdater[]
+	 * @var PropertyDataTypeLookup
 	 */
-	private $dataUpdaters;
+	private $propertyDataTypeLookup;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $externalEntityIdParser;
+
+	/**
+	 * @var string[]
+	 */
+	private $preferredGeoDataProperties;
+
+	/**
+	 * @var string[]
+	 */
+	private $preferredPageImagesProperties;
+
+	/**
+	 * @var string[] Mapping of globe uris to string names, as recognized by GeoData.
+	 */
+	private $globeUris;
 
 	/**
 	 * @var string
@@ -98,7 +124,11 @@ class EntityParserOutputGenerator {
 	 * @param TemplateFactory $templateFactory
 	 * @param LocalizedTextProvider $textProvider
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
-	 * @param ParserOutputDataUpdater[] $dataUpdaters
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param EntityIdParser $externalEntityIdParser
+	 * @param string[] $preferredGeoDataProperties
+	 * @param string[] $preferredPageImagesProperties
+	 * @param string[] $globeUris Mapping of globe uris to string names.
 	 * @param string $languageCode
 	 */
 	public function __construct(
@@ -110,7 +140,11 @@ class EntityParserOutputGenerator {
 		TemplateFactory $templateFactory,
 		LocalizedTextProvider $textProvider,
 		EntityDataFormatProvider $entityDataFormatProvider,
-		array $dataUpdaters,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityIdParser $externalEntityIdParser,
+		array $preferredGeoDataProperties = array(),
+		array $preferredPageImagesProperties = array(),
+		array $globeUris = array(),
 		$languageCode
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -121,7 +155,11 @@ class EntityParserOutputGenerator {
 		$this->templateFactory = $templateFactory;
 		$this->textProvider = $textProvider;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
-		$this->dataUpdaters = $dataUpdaters;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->externalEntityIdParser = $externalEntityIdParser;
+		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
+		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
+		$this->globeUris = $globeUris;
 		$this->languageCode = $languageCode;
 	}
 
@@ -140,7 +178,7 @@ class EntityParserOutputGenerator {
 	) {
 		$parserOutput = new ParserOutput();
 
-		$updater = new EntityParserOutputDataUpdater( $parserOutput, $this->dataUpdaters );
+		$updater = $this->getEntityParserOutputDataUpdater( $parserOutput );
 		$updater->processEntity( $entity );
 		$updater->finish();
 
@@ -179,6 +217,38 @@ class EntityParserOutputGenerator {
 		}
 
 		return $parserOutput;
+	}
+
+	private function getEntityParserOutputDataUpdater( ParserOutput $parserOutput ) {
+		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
+
+		$updaters = [
+			new ReferencedEntitiesDataUpdater(
+				$this->entityTitleLookup,
+				$this->externalEntityIdParser
+			),
+			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
+		];
+
+		if ( !empty( $this->preferredPageImagesProperties )
+			&& ExtensionRegistry::getInstance()->isLoaded( 'PageImages' )
+		) {
+			$updaters[] = new PageImagesDataUpdater(
+				$this->preferredPageImagesProperties,
+				PageImages::PROP_NAME_FREE
+			);
+		}
+
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'GeoData' ) ) {
+			$updaters[] = new GeoDataDataUpdater(
+				$propertyDataTypeMatcher,
+				$this->preferredGeoDataProperties,
+				$this->globeUris
+			);
+		}
+
+		return new EntityParserOutputDataUpdater( $parserOutput, $updaters );
 	}
 
 	/**
