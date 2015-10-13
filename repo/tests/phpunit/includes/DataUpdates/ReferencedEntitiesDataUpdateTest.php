@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
@@ -77,16 +78,24 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider entityIdProvider
 	 */
-	public function testGetExternalLinks( StatementList $statements, array $expected ) {
+	public function testGetEntityIds(
+		StatementList $statements,
+		SiteLinkList $siteLinks = null,
+		array $expected
+	) {
 		$instance = $this->newInstance();
-		$actual = $instance->getEntityIds( $statements );
+		$actual = $instance->getEntityIds( $statements, $siteLinks );
 		$this->assertEquals( $expected, $actual );
 	}
 
 	/**
 	 * @dataProvider entityIdProvider
 	 */
-	public function testUpdateParserOutput( StatementList $statements, array $expected ) {
+	public function testUpdateParserOutput(
+		StatementList $statements,
+		SiteLinkList $siteLinks = null,
+		array $expected
+	) {
 		$parserOutput = $this->getMockBuilder( 'ParserOutput' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -94,9 +103,17 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 			->method( 'addLink' );
 
 		$instance = $this->newInstance( count( $expected ) );
+
 		foreach ( $statements as $statement ) {
 			$instance->processStatement( $statement );
 		}
+
+		if ( $siteLinks !== null ) {
+			foreach ( $siteLinks as $siteLink ) {
+				$instance->processSiteLink( $siteLink );
+			}
+		}
+
 		$instance->updateParserOutput( $parserOutput );
 	}
 
@@ -111,14 +128,35 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 			new PropertyValueSnak( 1, QuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q22' ) )
 		);
 
+		$siteLinks = new SiteLinkList();
+		$siteLinks->addNewSiteLink( 'siteId', 'pageName', array( new ItemId( 'Q1' ) ) );
+
 		return array(
-			array( new StatementList(), array() ),
-			array( $set1, array( new PropertyId( 'P1' ), new ItemId( 'Q1' ) ) ),
-			array( $set2, array(
+			array( new StatementList(), null, array(
+			) ),
+			array( $set1, null, array(
+				new PropertyId( 'P1' ),
+				new ItemId( 'Q1' ),
+			) ),
+			array( new StatementList(), $siteLinks, array(
+				new ItemId( 'Q1' ),
+			) ),
+			array( $set1, $siteLinks, array(
+				new PropertyId( 'P1' ),
+				new ItemId( 'Q1' ),
+			) ),
+			array( $set2, null, array(
 				new PropertyId( 'P1' ),
 				new ItemId( 'Q20' ),
 				new ItemId( 'Q21' ),
 				new ItemId( 'Q22' ),
+			) ),
+			array( $set2, $siteLinks, array(
+				new PropertyId( 'P1' ),
+				new ItemId( 'Q20' ),
+				new ItemId( 'Q21' ),
+				new ItemId( 'Q22' ),
+				new ItemId( 'Q1' ),
 			) ),
 		);
 	}
