@@ -22,7 +22,7 @@ class ChangeRow implements Change {
 	 * @since 0.1
 	 * @var User|bool
 	 */
-	protected $user = false;
+	private $user = false;
 
 	/**
 	 * The fields of the object.
@@ -30,7 +30,7 @@ class ChangeRow implements Change {
 	 *
 	 * @var array
 	 */
-	protected $fields = array( 'id' => null );
+	private $fields = array( 'id' => null );
 
 	/**
 	 * @see Change::getUser
