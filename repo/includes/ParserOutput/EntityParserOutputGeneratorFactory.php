@@ -134,7 +134,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->getLanguageFallbackChain( $languageCode ),
 			$this->templateFactory,
 			$this->entityDataFormatProvider,
-			new EntityParserOutputDataUpdater( $this->getDataUpdates() ),
+			$this->getDataUpdates(),
 			$languageCode
 		);
 	}

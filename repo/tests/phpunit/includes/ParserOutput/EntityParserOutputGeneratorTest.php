@@ -15,15 +15,14 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
-use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdater;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdate;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdate;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdate;
-use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -161,7 +160,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$entityDataFormatProvider,
-			new EntityParserOutputDataUpdater( $dataUpdates ),
+			$dataUpdates,
 			'en'
 		);
 	}
