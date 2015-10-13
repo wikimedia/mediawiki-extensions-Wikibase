@@ -97,9 +97,8 @@ class ChangeNotificationJob extends Job {
 
 			// load actual change records from the changes table
 			// TODO: allow mock store for testing!
-			// FIXME: This only works when executed on the client! check WBC_VERSION first!
-			$table = WikibaseClient::getDefaultInstance()->getStore()->newChangesTable();
-			$this->changes = $table->selectObjects( null, array( 'id' => $ids ), array(), __METHOD__ );
+			$changeLookup = WikibaseClient::getDefaultInstance()->getStore()->getChangeLookup();
+			$this->changes = $changeLookup->loadByChangeIds( $ids );
 
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": loaded " . count( $this->changes )
 				. " of " . count( $ids ) . " changes." );

@@ -22,6 +22,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
+use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
@@ -156,6 +157,11 @@ class DirectSqlStore implements ClientStore {
 	private $siteId;
 
 	/**
+	 * @var string[]
+	 */
+	private $changeHandlerClasses;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
@@ -181,6 +187,7 @@ class DirectSqlStore implements ClientStore {
 		$this->useLegacyUsageIndex = $settings->getSetting( 'useLegacyUsageIndex' );
 		$this->useLegacyChangesSubscription = $settings->getSetting( 'useLegacyChangesSubscription' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
+		$this->changeHandlerClasses = $settings->getSetting( 'changeHandlers' );
 	}
 
 	/**
@@ -474,6 +481,15 @@ class DirectSqlStore implements ClientStore {
 			$this->getUsageLookup(),
 			$this->getSubscriptionManager()
 		);
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ChangeLookup
+	 */
+	public function getChangeLookup() {
+		return new ChangeLookup( $this->changeHandlerClasses, $this->repoWiki );
 	}
 
 }

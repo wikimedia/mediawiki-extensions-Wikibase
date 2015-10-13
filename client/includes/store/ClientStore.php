@@ -10,6 +10,7 @@ use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Store\EntityIdLookup;
@@ -133,5 +134,12 @@ interface ClientStore {
 	 * @return UsageUpdater
 	 */
 	public function getUsageUpdater();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ChangeLookup
+	 */
+	public function getChangeLookup();
 
 }
