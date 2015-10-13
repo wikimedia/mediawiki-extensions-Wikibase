@@ -14,15 +14,6 @@ namespace Wikibase;
 interface Change {
 
 	/**
-	 * Returns the user that made the change.
-	 *
-	 * @since 0.1
-	 *
-	 * @return \User
-	 */
-	public function getUser();
-
-	/**
 	 * Returns the age of the change in seconds.
 	 *
 	 * @since 0.1

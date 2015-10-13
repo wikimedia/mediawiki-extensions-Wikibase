@@ -37,13 +37,6 @@ class ChangeRowTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider changeProvider
 	 */
-	public function testGetUser( ChangeRow $changeRow ) {
-		$this->assertInstanceOf( '\User', $changeRow->getUser() );
-	}
-
-	/**
-	 * @dataProvider changeProvider
-	 */
 	public function testGetAge( ChangeRow $changeRow ) {
 		// Don't assert on equalness because all previous code takes time!
 		$this->assertTrue(
