@@ -44,10 +44,10 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$siteLinkDataUpdate->expects( $this->once() )
 			->method( 'updateParserOutput' );
 
-		$instance = new EntityParserOutputDataUpdater( array(
-			$statementDataUpdate,
-			$siteLinkDataUpdate,
-		) );
+		$instance = new EntityParserOutputDataUpdater(
+			array( $statementDataUpdate ),
+			array( $siteLinkDataUpdate)
+		);
 		foreach ( $entities as $entity ) {
 			$instance->processEntity( $entity );
 		}

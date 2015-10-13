@@ -6,6 +6,7 @@ use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikimedia\Assert\Assert;
 
 /**
  * @todo have ItemParserOutputDataUpdate, etc. instead.
@@ -19,15 +20,25 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 class EntityParserOutputDataUpdater {
 
 	/**
-	 * @var ParserOutputDataUpdate[]
+	 * @var StatementDataUpdate[]
 	 */
-	private $dataUpdates;
+	private $statementUpdates;
 
 	/**
-	 * @param ParserOutputDataUpdate[] $dataUpdates
+	 * @var SiteLinkDataUpdate[]
 	 */
-	public function __construct( array $dataUpdates ) {
-		$this->dataUpdates = $dataUpdates;
+	private $siteLinkUpdates;
+
+	/**
+	 * @param StatementDataUpdate[] $statementUpdates
+	 * @param SiteLinkDataUpdate[] $siteLinkUpdates
+	 */
+	public function __construct( array $statementUpdates, array $siteLinkUpdates ) {
+		Assert::parameterElementType( 'Wikibase\Repo\DataUpdates\StatementDataUpdate', $statementUpdates, '$statementUpdates' );
+		Assert::parameterElementType( 'Wikibase\Repo\DataUpdates\SiteLinkDataUpdate', $siteLinkUpdates, '$siteLinkUpdates' );
+
+		$this->statementUpdates = $statementUpdates;
+		$this->siteLinkUpdates = $siteLinkUpdates;
 	}
 
 	/**
@@ -47,14 +58,12 @@ class EntityParserOutputDataUpdater {
 	 * @param StatementListProvider $entity
 	 */
 	private function processStatements( StatementListProvider $entity ) {
-		$dataUpdates = $this->getStatementDataUpdates();
-
-		if ( empty( $dataUpdates ) ) {
+		if ( empty( $this->statementUpdates ) ) {
 			return;
 		}
 
 		foreach ( $entity->getStatements() as $statement ) {
-			foreach ( $dataUpdates as $dataUpdate ) {
+			foreach ( $this->statementUpdates as $dataUpdate ) {
 				$dataUpdate->processStatement( $statement );
 			}
 		}
@@ -64,54 +73,25 @@ class EntityParserOutputDataUpdater {
 	 * @param Item $item
 	 */
 	private function processSiteLinks( Item $item ) {
-		$dataUpdates = $this->getSiteLinkDataUpdates();
-
-		if ( empty( $dataUpdates ) ) {
+		if ( empty( $this->siteLinkUpdates ) ) {
 			return;
 		}
 
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			foreach ( $dataUpdates as $dataUpdate ) {
+			foreach ( $this->siteLinkUpdates as $dataUpdate ) {
 				$dataUpdate->processSiteLink( $siteLink );
 			}
 		}
 	}
 
 	/**
-	 * @return StatementDataUpdate[]
-	 */
-	private function getStatementDataUpdates() {
-		$statementDataUpdates = array();
-
-		foreach ( $this->dataUpdates as $dataUpdate ) {
-			if ( $dataUpdate instanceof StatementDataUpdate ) {
-				$statementDataUpdates[] = $dataUpdate;
-			}
-		}
-
-		return $statementDataUpdates;
-	}
-
-	/**
-	 * @return SiteLinkDataUpdate[]
-	 */
-	private function getSiteLinkDataUpdates() {
-		$siteLinkDataUpdates = array();
-
-		foreach ( $this->dataUpdates as $dataUpdate ) {
-			if ( $dataUpdate instanceof SiteLinkDataUpdate ) {
-				$siteLinkDataUpdates[] = $dataUpdate;
-			}
-		}
-
-		return $siteLinkDataUpdates;
-	}
-
-	/**
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		foreach ( $this->dataUpdates as $dataUpdate ) {
+		/* @var ParserOutputDataUpdate[] $allUpdates */
+		$allUpdates = array_merge( $this->statementUpdates, $this->siteLinkUpdates );
+
+		foreach ( $allUpdates as $dataUpdate ) {
 			$dataUpdate->updateParserOutput( $parserOutput );
 		}
 	}

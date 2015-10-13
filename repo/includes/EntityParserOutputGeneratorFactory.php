@@ -13,6 +13,7 @@ use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
 use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
+use Wikibase\Repo\DataUpdates\StatementDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
@@ -129,9 +130,9 @@ class EntityParserOutputGeneratorFactory {
 	}
 
 	/**
-	 * @return ParserOutputDataUpdate[]
+	 * @return StatementDataUpdate[]
 	 */
-	private function getDataUpdates() {
+	private function getStatementDataUpdates() {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
 
 		return array(
