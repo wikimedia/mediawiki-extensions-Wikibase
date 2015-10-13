@@ -1,8 +1,10 @@
 <?php
 
-namespace Wikibase\DataModel\Services\Lookup;
+namespace Wikibase\DataModel\Services\Entity;
 
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
  * Check if a PropertyId is for a Property with a specific data type.
