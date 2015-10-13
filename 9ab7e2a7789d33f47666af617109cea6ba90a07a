@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_52ac9d32",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "What exactly does \"by\" property mean? Also, why is this a constructor parameter? Isn\u0027t processStatement supposed to get the statements, one at a time? How do these statements work together? Are they supposed to be the same? As far as I can see the fact that this made it to the constructor parameters is a mistake.",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b263993a",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "This should have a big fat comment where this \"geoData\" property is declared (or if it is not declared it should state that) and where this property is used.",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_753676e6",
         "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
         "patchSetId": 13
@@ -30,6 +64,23 @@
       "writtenOn": "2015-10-12T13:34:58Z",
       "side": 1,
       "message": "That sounds very cofnusing. Whut?",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1252a56a",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "This is not needed, the foreach loop below will just do nothing in this case.",
       "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +104,91 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_72d441bf",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "Why not do if ( $bestStatements-\u003ecount() !\u003d\u003d 1 ) instead? Isn\u0027t this what should happen here?",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d2b88d76",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "The continue does not do anything at this point.",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9271b5df",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "As far as I can see this will also include coordinates from deprecated snaks. In my opinion deprecated stuff should always be skipped, possibly via an early check in the initial processStatement.",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f296f1f2",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "Known to be a PropertyValueSnak at this point.",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_728201ab",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "Why throw? Just return null, the interface of the caller (extractMainSnakCoord) already supports this.",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_b5538e19",
         "filename": "repo/includes/EntityParserOutputGeneratorFactory.php",
         "patchSetId": 13
@@ -64,6 +200,40 @@
       "writtenOn": "2015-10-12T13:34:58Z",
       "side": 1,
       "message": "This is getting a bit too huge for my taste...",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7278c1bf",
+        "filename": "repo/tests/phpunit/includes/DataUpdates/GeoDataDataUpdateTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "These coordinates are deprecated and should not be in the output, in my opinion.",
+      "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1285c59f",
+        "filename": "repo/tests/phpunit/includes/DataUpdates/GeoDataDataUpdateTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-13T08:52:38Z",
+      "side": 1,
+      "message": "As said, I do not think deprecated stuff should ever be in any output.",
       "revId": "9ab7e2a7789d33f47666af617109cea6ba90a07a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
