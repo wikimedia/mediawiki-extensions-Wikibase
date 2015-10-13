@@ -676,6 +676,8 @@ class ResultBuilder {
 	 * Adds fake serialization to show a term has been removed
 	 *
 	 * @param string $language
+	 * @param string $name
+	 * @param string $tag
 	 * @param array|string $path where the data is located
 	 */
 	private function addRemovedTerm( $language, $name, $tag, $path ) {

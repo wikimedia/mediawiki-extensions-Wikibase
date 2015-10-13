@@ -46,9 +46,11 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param EntityLookup|null $entityLookup
+	 * @param EntityLookup $entityLookup
+	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param UsageAccumulator|null $usageAccumulator
 	 * @param ParserOptions|null $parserOptions
+	 *
 	 * @return WikibaseLuaBindings
 	 */
 	private function getWikibaseLuaBindings(

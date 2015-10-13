@@ -45,8 +45,6 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param UsageAccumulator $usageAccumulator
-	 *
 	 * @return SnakSerializationRenderer
 	 */
 	private function getSnakRenderer() {

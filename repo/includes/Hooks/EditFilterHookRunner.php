@@ -68,6 +68,7 @@ class EditFilterHookRunner {
 	 * @param User $user the user performing the edit
 	 * @param string $summary The edit summary
 	 *
+	 * @throws RuntimeException
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */

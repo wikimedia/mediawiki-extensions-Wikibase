@@ -131,9 +131,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider changeOpSiteLinkProvider
-	 * @param SiteLink[] $existingSitelinks
-	 * @param ChangeOpSiteLink $changeOpSiteLink
-	 * @param SiteLink[] $expectedSiteLinks
 	 */
 	public function testApply( array $existingSiteLinks, ChangeOpSiteLink $changeOpSiteLink, array $expectedSiteLinks ) {
 		$item = new Item();
@@ -247,10 +244,6 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider summaryTestProvider
-	 * @param string $expectedAction
-	 * @param array $expectedArguments
-	 * @param Item $entity
-	 * @param ChangeOpSiteLink $changeOpSiteLink
 	 */
 	public function testApplySummary(
 		$expectedAction,

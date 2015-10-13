@@ -143,6 +143,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
+	 * @param string $full
+	 *
 	 * @return SnakRdfBuilder
 	 */
 	private function newSnakBuilder( $full ) {

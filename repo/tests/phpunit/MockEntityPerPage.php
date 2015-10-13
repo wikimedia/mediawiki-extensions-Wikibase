@@ -116,7 +116,7 @@ class MockEntityPerPage implements EntityPerPage {
 	 * @param EntityId $entityId
 	 * @param int $pageId
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws BadMethodCallException always
 	 * @return boolean Success indicator
 	 */
 	public function deleteEntityPage( EntityId $entityId, $pageId ) {
@@ -130,6 +130,7 @@ class MockEntityPerPage implements EntityPerPage {
 	 *
 	 * @param EntityId $entityId
 	 *
+	 * @throws BadMethodCallException always
 	 * @return boolean Success indicator
 	 */
 	public function deleteEntity( EntityId $entityId ) {
@@ -161,6 +162,7 @@ class MockEntityPerPage implements EntityPerPage {
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.
 	 *
+	 * @throws BadMethodCallException always
 	 * @return EntityId[]
 	 */
 	public function getEntitiesWithoutTerm(
@@ -184,6 +186,7 @@ class MockEntityPerPage implements EntityPerPage {
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.
 	 *
+	 * @throws BadMethodCallException always
 	 * @return EntityId[]
 	 */
 	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 ) {

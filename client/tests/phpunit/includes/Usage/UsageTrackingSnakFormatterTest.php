@@ -25,6 +25,9 @@ use Wikibase\Lib\SnakFormatter;
 class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 
 	/**
+	 * @param string $method
+	 * @param string $return
+	 *
 	 * @return SnakFormatter
 	 */
 	private function getMockSnakFormatter( $method, $return ) {

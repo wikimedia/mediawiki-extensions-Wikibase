@@ -44,11 +44,12 @@ class LabelDescriptionDuplicateDetector {
 	 * @param string $entityType The type of entity to search for conflicts.
 	 * @param string[] $labels An associative array of labels,
 	 *        with language codes as the keys.
-	 * @param string[][]|null $aliases Aliases to be considered to be conflicting with labels.
+	 * @param array[]|null $aliases Aliases to be considered to be conflicting with labels.
 	 *        Ignored if descriptions are given.
 	 * @param EntityId|null $ignoreEntityId Conflicts with this entity will be
 	 *        considered self-conflicts and ignored.
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Result
 	 */
 	public function detectLabelConflicts(
@@ -100,6 +101,7 @@ class LabelDescriptionDuplicateDetector {
 	 * @param EntityId|null $ignoreEntityId Conflicts with this entity will be
 	 *        considered self-conflicts and ignored.
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Result
 	 */
 	public function detectLabelDescriptionConflicts(

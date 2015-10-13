@@ -55,6 +55,7 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
+	 * @throws ChangeOpException
 	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {

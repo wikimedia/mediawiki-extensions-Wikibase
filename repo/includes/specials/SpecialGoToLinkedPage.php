@@ -79,6 +79,8 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 * @param SiteStore $siteStore
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityRedirectLookup $redirectLookup
+	 * @param EntityIdParser $idParser
+	 * @param EntityLookup $entityLookup
 	 */
 	public function initServices(
 		SiteStore $siteStore,

@@ -286,6 +286,7 @@ class SqlStore implements Store {
 
 	/**
 	 * @param DatabaseUpdater $updater
+	 * @param DatabaseBase $db
 	 */
 	private function updateItemsPerSiteTable( DatabaseUpdater $updater, DatabaseBase $db ) {
 		// Make wb_items_per_site.ips_site_page VARCHAR(310) - T99459
@@ -301,6 +302,7 @@ class SqlStore implements Store {
 
 	/**
 	 * @param DatabaseUpdater $updater
+	 * @param DatabaseBase $db
 	 */
 	private function updateChangesTable( DatabaseUpdater $updater, DatabaseBase $db ) {
 		// Make wb_changes.change_info MEDIUMBLOB - T108246
