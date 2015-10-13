@@ -8,18 +8,21 @@ use MediaWikiTestCase;
 use ParserOptions;
 use SpecialPage;
 use Title;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\DataValue\ValuesFinder;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
-use Wikibase\ReferencedEntitiesFinder;
+use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
+use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
+use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
+use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -132,24 +135,34 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function newEntityParserOutputGenerator() {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-		$referencedEntitiesFinder = new ReferencedEntitiesFinder( new BasicEntityIdParser() );
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 
 		$formats = array( 'json', 'ntriples' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
+		$entityTitleLookup = $this->getEntityTitleLookupMock();
+
+		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
+
+		$dataUpdates = array(
+			new ExternalLinksDataUpdate( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdate( $propertyDataTypeMatcher ),
+			new ReferencedEntitiesDataUpdate(
+				$entityTitleLookup,
+				new BasicEntityIdParser()
+			)
+		);
+
 		return new EntityParserOutputGenerator(
 			$this->getEntityViewFactory(),
 			$this->getConfigBuilderMock(),
-			$this->getEntityTitleLookupMock(),
-			$this->getValuesFinder(),
+			$entityTitleLookup,
 			new SqlEntityInfoBuilderFactory(),
 			$this->newLanguageFallbackChain(),
-			'en',
-			$referencedEntitiesFinder,
-			$templateFactory,
-			$entityDataFormatProvider
+			TemplateFactory::getDefaultInstance(),
+			$entityDataFormatProvider,
+			new EntityParserOutputDataUpdater( $dataUpdates ),
+			'en'
 		);
 	}
 
@@ -242,13 +255,13 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		return $entityTitleLookup;
 	}
 
-	private function getValuesFinder() {
+	private function getPropertyDataTypeLookup() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P42' ), 'url' );
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'commonsMedia' );
 
-		return new ValuesFinder( $dataTypeLookup );
+		return $dataTypeLookup;
 	}
 
 	private function getParserOptions() {

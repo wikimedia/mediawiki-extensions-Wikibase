@@ -55,6 +55,8 @@ class ExternalLinksDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
+	 * Add DataValue to list of used urls, if Snak property has 'url' data type.
+	 *
 	 * @param Statement $statement
 	 */
 	public function processStatement( Statement $statement ) {

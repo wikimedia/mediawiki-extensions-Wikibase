@@ -3,18 +3,14 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use LinkBatch;
 use ParserOptions;
 use ParserOutput;
 use SpecialPage;
-use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\DataValue\ValuesFinder;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -23,6 +19,7 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
 use Wikibase\Repo\DataUpdates\PageImagesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
@@ -62,11 +59,6 @@ class EntityParserOutputGenerator {
 	private $entityTitleLookup;
 
 	/**
-	 * @var ValuesFinder
-	 */
-	private $valuesFinder;
-
-	/**
 	 * @var EntityInfoBuilderFactory
 	 */
 	private $entityInfoBuilderFactory;
@@ -75,16 +67,6 @@ class EntityParserOutputGenerator {
 	 * @var LanguageFallbackChain
 	 */
 	private $languageFallbackChain;
-
-	/**
-	 * @var string
-	 */
-	private $languageCode;
-
-	/**
-	 * @var ReferencedEntitiesFinder
-	 */
-	private $referencedEntitiesFinder;
 
 	/**
 	 * @var TemplateFactory
@@ -96,28 +78,37 @@ class EntityParserOutputGenerator {
 	 */
 	private $entityDataFormatProvider;
 
+	/**
+	 * @var EntityParserOutputDataUpdater
+	 */
+	private $parserOutputDataUpdater;
+
+	/**
+	 * @var string
+	 */
+	private $languageCode;
+
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
-		ValuesFinder $valuesFinder,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		LanguageFallbackChain $languageFallbackChain,
-		$languageCode,
-		ReferencedEntitiesFinder $referencedEntitiesFinder,
 		TemplateFactory $templateFactory,
-		EntityDataFormatProvider $entityDataFormatProvider
+		EntityDataFormatProvider $entityDataFormatProvider,
+		EntityParserOutputDataUpdater $parserOutputDataUpdater,
+		$languageCode
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->valuesFinder = $valuesFinder;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->languageCode = $languageCode;
-		$this->referencedEntitiesFinder = $referencedEntitiesFinder;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
+		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
+		$this->languageCode = $languageCode;
 	}
 
 	/**
@@ -154,30 +145,16 @@ class EntityParserOutputGenerator {
 
 		$entity = $entityRevision->getEntity();
 
-		if ( $entity instanceof StatementListProvider ) {
-			$snaks = $entity->getStatements()->getAllSnaks();
-		} else {
-			$snaks = array();
-		}
-
-		$editable = $options->getEditSection();
-
-		$usedEntityIds = $this->referencedEntitiesFinder->findSnakLinks( $snaks );
-
-		// FIXME: Bad
-		if ( $entity instanceof Item ) {
-			foreach ( $entity->getSiteLinkList()->getIterator() as $sitelink ) {
-				$usedEntityIds = array_merge( $usedEntityIds, $sitelink->getBadges() );
-			}
-		}
-
-		$entityInfo = $this->getEntityInfo( $usedEntityIds );
+		$this->parserOutputDataUpdater->processEntity( $entity );
+		$this->parserOutputDataUpdater->updateParserOutput( $parserOutput );
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
 
-		$this->addBestImageToParserOutput( $parserOutput, $entity->getStatements() );
-		$this->addLinksToParserOutput( $parserOutput, $usedEntityIds, $snaks );
+		// FIXME: Rework this to use the visitor infrastructure above!
+		if ( $entity instanceof StatementListProvider ) {
+			$this->addBestImageToParserOutput( $parserOutput, $entity->getStatements() );
+		}
 
 		// FIXME: OCP violation - https://phabricator.wikimedia.org/T75495
 		if ( $entity instanceof Item ) {
@@ -190,8 +167,8 @@ class EntityParserOutputGenerator {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
 				$entityRevision,
-				$entityInfo,
-				$editable
+				$this->getEntityInfo( $parserOutput ),
+				$options->getEditSection()
 			);
 		}
 
@@ -229,82 +206,22 @@ class EntityParserOutputGenerator {
 	}
 
 	/**
-	 * @param ParserOutput $parserOutput
-	 * @param EntityId[] $usedEntityIds
-	 * @param Snak[] $snaks
-	 */
-	private function addLinksToParserOutput( ParserOutput $parserOutput, array $usedEntityIds,
-		array $snaks
-	) {
-		$this->addEntityLinksToParserOutput( $parserOutput, $usedEntityIds );
-		$this->addExternalLinksToParserOutput( $parserOutput, $snaks );
-		$this->addImageLinksToParserOutput( $parserOutput, $snaks );
-	}
-
-	/**
-	 * @param ParserOutput $parserOutput
-	 * @param EntityId[] $entityIds
-	 */
-	private function addEntityLinksToParserOutput( ParserOutput $parserOutput, array $entityIds ) {
-		$linkBatch = new LinkBatch();
-
-		foreach ( $entityIds as $entityId ) {
-			$linkBatch->addObj( $this->entityTitleLookup->getTitleForId( $entityId ) );
-		}
-
-		$pages = $linkBatch->doQuery();
-
-		if ( $pages === false ) {
-			return;
-		}
-
-		foreach ( $pages as $page ) {
-			$title = Title::makeTitle( $page->page_namespace, $page->page_title );
-			$parserOutput->addLink( $title, $page->page_id );
-		}
-	}
-
-	/**
-	 * @param ParserOutput $parserOutput
-	 * @param Snak[] $snaks
-	 */
-	private function addExternalLinksToParserOutput( ParserOutput $parserOutput, array $snaks ) {
-		// treat URL values as external links ------
-		$usedUrls = $this->valuesFinder->findFromSnaks( $snaks, 'url' );
-
-		foreach ( $usedUrls as $url ) {
-			$value = $url->getValue();
-			if ( is_string( $value ) ) {
-				$parserOutput->addExternalLink( $value );
-			}
-		}
-	}
-
-	/**
-	 * Treat CommonsMedia values as file transclusions
-	 *
-	 * @param ParserOutput $parserOutput
-	 * @param array $snaks
-	 */
-	private function addImageLinksToParserOutput( ParserOutput $parserOutput, array $snaks ) {
-		$usedImages = $this->valuesFinder->findFromSnaks( $snaks, 'commonsMedia' );
-
-		foreach ( $usedImages as $image ) {
-			$value = $image->getValue();
-			if ( is_string( $value ) ) {
-				$parserOutput->addImage( str_replace( ' ', '_', $value ) );
-			}
-		}
-	}
-
-	/**
 	 * Fetches some basic entity information from a set of entity IDs.
 	 *
-	 * @param EntityId[] $entityIds
+	 * @param ParserOutput $parserOutput
 	 *
 	 * @return EntityInfo
 	 */
-	private function getEntityInfo( array $entityIds ) {
+	private function getEntityInfo( ParserOutput $parserOutput ) {
+		// set in ReferencedEntitiesDataUpdate
+		$entityIds = $parserOutput->getExtensionData( 'referenced-entities' );
+
+		if ( !is_array( $entityIds ) ) {
+			wfLogWarning( '$entityIds from ParserOutput "referenced-entities" extension data'
+				. ' expected to be an array' );
+			$entityIds = array();
+		}
+
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
 		$entityInfoBuilder->resolveRedirects();
@@ -373,7 +290,6 @@ class EntityParserOutputGenerator {
 		EntityInfo $entityInfo,
 		$editable = true
 	) {
-
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			new EntityInfoTermLookup( $entityInfo ),
 			$this->languageFallbackChain

@@ -75,6 +75,8 @@ class ReferencedEntitiesDataUpdate implements SiteLinkDataUpdate, StatementDataU
 	}
 
 	/**
+	 * Finds linked entities in a Statement.
+	 *
 	 * @param Statement $statement
 	 */
 	public function processStatement( Statement $statement ) {
@@ -134,6 +136,9 @@ class ReferencedEntitiesDataUpdate implements SiteLinkDataUpdate, StatementDataU
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
+		// needed and used in EntityParserOutputGenerator, for getEntityInfo,
+		// to allow this data to be accessed later in processing.
+		$parserOutput->setExtensionData( 'referenced-entities', $this->entityIds );
 		$this->addLinksToParserOutput( $parserOutput );
 	}
 
