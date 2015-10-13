@@ -17,14 +17,6 @@ use User;
 class ChangeRow implements Change {
 
 	/**
-	 * Field for caching the linked user.
-	 *
-	 * @since 0.1
-	 * @var User|bool
-	 */
-	private $user = false;
-
-	/**
 	 * The fields of the object.
 	 * field name (w/o prefix) => value
 	 *
