@@ -221,10 +221,10 @@ class ItemTest extends EntityTest {
 		$statements = array( $statement0, $statement1 );
 
 		$item->setClaims( new Claims( $statements ) );
-		$this->assertEquals( count( $statements ), $item->getStatements()->count(), "added some statements" );
+		$this->assertEquals( count( $statements ), $item->getStatements()->count(), 'added some statements' );
 
 		$item->setClaims( new Claims() );
-		$this->assertTrue( $item->getStatements()->isEmpty(), "should be empty again" );
+		$this->assertTrue( $item->getStatements()->isEmpty(), 'should be empty again' );
 	}
 
 
