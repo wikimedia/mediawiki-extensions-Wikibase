@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_ce8221a9",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2015-10-13T20:57:31Z",
+      "side": 1,
+      "message": "This wouldn\u0027t explode right now due to unconditional overwriting of CoordinatesOutput, however you must really check if a primary coordinate is already present to avoid an excpetion.",
+      "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_09a11342",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2015-10-13T20:57:31Z",
+      "side": 1,
+      "message": "I\u0027m currently rethinking secondary coordinates as having a particular place in page HTML, so not sure how useful is this, especially since you don\u0027t have a text description for coordinates.",
+      "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4e6ab113",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2015-10-13T20:57:31Z",
+      "side": 1,
+      "message": "This is slightly scary. Would kinda work short term on a repo wiki, but unconditional overwriting is prone to breakages in the long run.",
+      "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_db3d028c",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2015-10-13T20:57:31Z",
+      "side": 1,
+      "message": "I\u0027m concerned that this would result in primary coordinate being set for entities that are not supposed to have a priimary coordinate. For example:\n\nEntity: John Foobarson\n* coordinate: x,y\n** Qualifier: instance of -\u003e location of burial (Q18857007)",
+      "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
