@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_7ad737f3",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-13T15:18:35Z",
+      "side": 1,
+      "message": "suppose we can give a try, but i am not yet convinced.\n\nall i wanted to do here is factor out one method and it\u0027s not specific to be used with statements.  it can be used with Snak objects or elsewhere.",
+      "parentUuid": "0ebaf39b_3a8d3f37",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9ac9cb7d",
         "filename": "repo/includes/DataUpdates/ParserOutputDataUpdate.php",
         "patchSetId": 1
