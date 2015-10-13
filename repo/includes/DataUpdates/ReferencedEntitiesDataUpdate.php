@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
@@ -61,14 +62,21 @@ class ReferencedEntitiesDataUpdate implements SiteLinkDataUpdate, StatementDataU
 
 	/**
 	 * @param StatementList $statements
+	 * @param SiteLinkList|null $siteLinks
 	 *
-	 * @return EntityId[] Associative array mapping entity id serializations to EntityId objects.
+	 * @return EntityId[] Numerically indexed non-sparse array.
 	 */
-	public function getEntityIds( StatementList $statements ) {
+	public function getEntityIds( StatementList $statements, SiteLinkList $siteLinks = null ) {
 		$this->entityIds = array();
 
 		foreach ( $statements as $statement ) {
 			$this->processStatement( $statement );
+		}
+
+		if ( $siteLinks !== null ) {
+			foreach ( $siteLinks as $siteLink ) {
+				$this->processSiteLink( $siteLink );
+			}
 		}
 
 		return array_values( $this->entityIds );
@@ -129,7 +137,9 @@ class ReferencedEntitiesDataUpdate implements SiteLinkDataUpdate, StatementDataU
 	 * @param SiteLink $siteLink
 	 */
 	public function processSiteLink( SiteLink $siteLink ) {
-		$this->entityIds = array_merge( $this->entityIds, $siteLink->getBadges() );
+		foreach ( $siteLink->getBadges() as $badge ) {
+			$this->entityIds[$badge->getSerialization()] = $badge;
+		}
 	}
 
 	/**
