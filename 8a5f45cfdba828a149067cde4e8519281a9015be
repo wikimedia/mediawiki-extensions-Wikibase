@@ -347,6 +347,24 @@
       "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_dd0dfd42",
+        "filename": "repo/includes/DataUpdates/ReferencedEntitiesDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-13T17:01:39Z",
+      "side": 1,
+      "message": "this code was not created by me. like the other update code (ImageLinksDataUpdate, ExternalLinksDataUpdate) it\u0027s simply moved here from EntityParserOutputGenerator.\n\nimho, we should not combine refactoring of moved code together with moving it within the same patch.",
+      "parentUuid": "0ebaf39b_75cd1662",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
