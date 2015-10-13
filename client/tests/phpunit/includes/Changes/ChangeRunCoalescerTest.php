@@ -130,7 +130,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			$class = 'Wikibase\ItemChange';
 		}
 
-		$change = new $class( null, $values, false );
+		$change = new $class( $values );
 		$change->setDiff( $diff );
 
 		return $change;

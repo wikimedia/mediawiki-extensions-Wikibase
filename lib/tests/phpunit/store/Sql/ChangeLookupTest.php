@@ -211,9 +211,9 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 				'"parent_id":897,"comment":"Fake data!"}}',
 		);
 
-		$changeOne = new EntityChange( null, $changeOne, false );
-		$changeTwo = new EntityChange( null, $changeTwo, false );
-		$changeThree = new EntityChange( null, $changeThree, false );
+		$changeOne = new EntityChange( $changeOne );
+		$changeTwo = new EntityChange( $changeTwo );
+		$changeThree = new EntityChange( $changeThree );
 
 		return array( $changeOne, $changeTwo, $changeThree );
 	}

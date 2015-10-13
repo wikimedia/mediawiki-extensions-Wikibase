@@ -53,10 +53,10 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	private function addTestChanges() {
 		$changeStore = new SqlChangeStore( wfGetLB() );
 
-		$change = new EntityChange( null, $this->getChangeRowData( '20150101000005' ) );
+		$change = new EntityChange( $this->getChangeRowData( '20150101000005' ) );
 		$changeStore->saveChange( $change );
 
-		$change = new EntityChange( null, $this->getChangeRowData( '20150101000300' ) );
+		$change = new EntityChange( $this->getChangeRowData( '20150101000300' ) );
 		$changeStore->saveChange( $change );
 	}
 
