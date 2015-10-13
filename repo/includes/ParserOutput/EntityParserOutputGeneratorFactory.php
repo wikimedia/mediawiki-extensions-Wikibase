@@ -10,7 +10,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
@@ -102,7 +101,7 @@ class EntityParserOutputGeneratorFactory {
 		EntityIdParser $externalEntityIdParser,
 		array $preferredGeoDataProperties = array(),
 		array $preferredPageImagesProperties = array(),
-		array $globeUris
+		array $globeUris = array()
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -135,7 +134,11 @@ class EntityParserOutputGeneratorFactory {
 			$this->getLanguageFallbackChain( $language ),
 			$this->templateFactory,
 			$this->entityDataFormatProvider,
-			$this->getDataUpdaters(),
+			$this->propertyDataTypeLookup,
+			$this->externalEntityIdParser,
+			$this->preferredGeoDataProperties,
+			$this->preferredPageImagesProperties,
+			$this->globeUris,
 			$language->getCode()
 		);
 	}
@@ -158,36 +161,6 @@ class EntityParserOutputGeneratorFactory {
 		return $this->languageFallbackChainFactory->newFromLanguage(
 			$language
 		);
-	}
-
-	/**
-	 * @return ParserOutputDataUpdater[]
-	 */
-	private function getDataUpdaters() {
-		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
-
-		$updaters = array(
-			new ReferencedEntitiesDataUpdater(
-				$this->entityTitleLookup,
-				$this->externalEntityIdParser
-			),
-			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
-		);
-
-		if ( !empty( $this->preferredPageImagesProperties ) ) {
-			$updaters[] = new PageImagesDataUpdater( $this->preferredPageImagesProperties );
-		}
-
-		if ( class_exists( 'GeoData' ) ) {
-			$updaters[] = new GeoDataDataUpdater(
-				$propertyDataTypeMatcher,
-				$this->preferredGeoDataProperties,
-				$this->globeUris
-			);
-		}
-
-		return $updaters;
 	}
 
 }
