@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_4e915149",
+        "filename": "repo/includes/DataUpdates/ExternalLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-10-13T19:57:52Z",
+      "side": 1,
+      "message": "\"Continue sentences belonging to an annotation on the next line, indented with one additional space.\"\nhttps://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP#Comments_and_documentation",
+      "revId": "d4df9c83acf8e3703bc8e37ba4acdd7ee14d8811",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_eeacc586",
+        "filename": "repo/includes/DataUpdates/ImageLinksDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-10-13T19:57:52Z",
+      "side": 1,
+      "message": "\"Continue sentences belonging to an annotation on the next line, indented with one additional space.\"\nhttps://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP#Comments_and_documentation",
+      "revId": "d4df9c83acf8e3703bc8e37ba4acdd7ee14d8811",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
