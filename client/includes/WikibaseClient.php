@@ -825,7 +825,6 @@ final class WikibaseClient {
 		);
 
 		return new EntityChangeFactory(
-			$this->getStore()->newChangesTable(),
 			$this->getEntityFactory(),
 			new EntityDiffer(),
 			$changeClasses

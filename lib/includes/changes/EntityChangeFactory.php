@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Changes;
 
 use MWException;
-use Wikibase\ChangesTable;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -28,11 +27,6 @@ class EntityChangeFactory {
 	private $changeClasses;
 
 	/**
-	 * @var ChangesTable
-	 */
-	private $changesTable;
-
-	/**
 	 * @var EntityFactory
 	 */
 	private $entityFactory;
@@ -43,20 +37,17 @@ class EntityChangeFactory {
 	private $entityDiffer;
 
 	/**
-	 * @param ChangesTable $changesTable
 	 * @param EntityFactory $entityFactory
 	 * @param EntityDiffer $entityDiffer
 	 * @param string[] $changeClasses Maps entity type IDs to subclasses of EntityChange.
 	 * Entity types not mapped explicitly are assumed to use EntityChange itself.
 	 */
 	public function __construct(
-		ChangesTable $changesTable,
 		EntityFactory $entityFactory,
 		EntityDiffer $entityDiffer,
 		array $changeClasses = array()
 	) {
 		$this->changeClasses = $changeClasses;
-		$this->changesTable = $changesTable;
 		$this->entityFactory = $entityFactory;
 		$this->entityDiffer = $entityDiffer;
 	}
@@ -81,9 +72,9 @@ class EntityChangeFactory {
 
 		/** @var EntityChange $instance  */
 		$instance = new $class(
-			$this->changesTable,
+			null,
 			$fields,
-			true
+			false
 		);
 
 		if ( !$instance->hasField( 'object_id' ) ) {

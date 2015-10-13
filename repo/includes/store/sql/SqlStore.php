@@ -91,11 +91,6 @@ class SqlStore implements Store {
 	private $propertyInfoStore = null;
 
 	/**
-	 * @var ChangesTable|null
-	 */
-	private $changesTable = null;
-
-	/**
 	 * @var string|bool false for local, or a database id that wfGetLB understands.
 	 */
 	private $changesDatabase;
@@ -741,21 +736,6 @@ class SqlStore implements Store {
 			$this->cacheDuration,
 			$cacheKey
 		);
-	}
-
-	/**
-	 * Returns an ChangesTable
-	 *
-	 * @since 0.5
-	 *
-	 * @return ChangesTable
-	 */
-	public function getChangesTable() {
-		if ( $this->changesTable === null ) {
-			$this->changesTable = new ChangesTable( $this->changesDatabase );
-		}
-
-		return $this->changesTable;
 	}
 
 	/**

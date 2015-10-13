@@ -137,13 +137,6 @@ interface Store {
 	/**
 	 * @since 0.5
 	 *
-	 * @return ChangesTable
-	 */
-	public function getChangesTable();
-
-	/**
-	 * @since 0.5
-	 *
 	 * @return SiteLinkConflictLookup
 	 */
 	public function getSiteLinkConflictLookup();

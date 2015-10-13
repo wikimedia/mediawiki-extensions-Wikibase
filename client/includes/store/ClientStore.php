@@ -92,14 +92,6 @@ interface ClientStore {
 	/**
 	 * @since 0.4
 	 *
-	 * @throws MWException if no changes table can be supplied.
-	 * @return ChangesTable
-	 */
-	public function newChangesTable();
-
-	/**
-	 * @since 0.4
-	 *
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore();

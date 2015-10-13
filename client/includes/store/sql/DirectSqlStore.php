@@ -408,15 +408,6 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @see ClientStore::newChangesTable
-	 *
-	 * @return ChangesTable
-	 */
-	public function newChangesTable() {
-		return new ChangesTable( $this->repoWiki );
-	}
-
-	/**
 	 * @see ClientStore::clear
 	 *
 	 * Does nothing.
