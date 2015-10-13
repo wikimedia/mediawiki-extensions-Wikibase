@@ -20,6 +20,11 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 class EntityParserOutputDataUpdater {
 
 	/**
+	 * @var ParserOutput
+	 */
+	private $parserOutput;
+
+	/**
 	 * @var ParserOutputDataUpdate[]
 	 */
 	private $dataUpdates;
@@ -35,11 +40,12 @@ class EntityParserOutputDataUpdater {
 	private $siteLinkDataUpdates = array();
 
 	/**
+	 * @param ParserOutput $parserOutput
 	 * @param ParserOutputDataUpdate[] $dataUpdates
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $dataUpdates ) {
+	public function __construct( ParserOutput $parserOutput, array $dataUpdates ) {
 		foreach ( $dataUpdates as $dataUpdate ) {
 			if ( $dataUpdate instanceof StatementDataUpdate ) {
 				$this->statementDataUpdates[] = $dataUpdate;
@@ -51,6 +57,7 @@ class EntityParserOutputDataUpdater {
 			}
 		}
 
+		$this->parserOutput = $parserOutput;
 		$this->dataUpdates = $dataUpdates;
 	}
 
@@ -97,12 +104,9 @@ class EntityParserOutputDataUpdater {
 		}
 	}
 
-	/**
-	 * @param ParserOutput $parserOutput
-	 */
-	public function updateParserOutput( ParserOutput $parserOutput ) {
+	public function finish() {
 		foreach ( $this->dataUpdates as $dataUpdate ) {
-			$dataUpdate->updateParserOutput( $parserOutput );
+			$dataUpdate->updateParserOutput( $this->parserOutput );
 		}
 	}
 
