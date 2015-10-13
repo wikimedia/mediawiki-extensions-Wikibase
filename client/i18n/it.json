@@ -22,6 +22,7 @@
 	"apihelp-query+pageterms-description": "Ottieni termini associati a una pagina tramite un elemento dati associato.",
 	"apihelp-query+pageterms-example-simple": "Ottieni tutti i termini associati alla pagina 'London', nella lingua dell'utente.",
 	"apihelp-query+pageterms-example-label-en": "Ottieni etichette ed alias associati alla pagina 'London', in inglese.",
+	"apihelp-query+pageterms-example-item": "Ottieni le etichette e gli alias dell'elemento Q84.",
 	"wikibase-after-page-move": "Puoi anche [$1 aggiornare] l'elemento associato su {{WBREPONAME}} per trasferire gli interlink sulla nuova pagina.",
 	"wikibase-after-page-move-queued": "L'[$1 elemento {{WBREPONAME}}] associato a questa pagina sarà presto aggiornato automaticamente. Si noti che potrebbe non accadere istantaneamente.",
 	"wikibase-comment-add": "Un elemento di {{WBREPONAME}} è stato creato.",
