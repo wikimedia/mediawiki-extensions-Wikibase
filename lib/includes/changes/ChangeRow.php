@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use MWException;
-use User;
 
 /**
  * Class representing a single change (ie a row in the wb_changes).
@@ -15,14 +14,6 @@ use User;
  * @author Daniel Kinzler
  */
 class ChangeRow implements Change {
-
-	/**
-	 * Field for caching the linked user.
-	 *
-	 * @since 0.1
-	 * @var User|bool
-	 */
-	private $user = false;
 
 	/**
 	 * The fields of the object.
