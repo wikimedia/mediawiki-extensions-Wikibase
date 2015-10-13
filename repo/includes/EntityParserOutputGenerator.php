@@ -21,6 +21,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
 use Wikibase\Repo\DataUpdates\PageImagesDataUpdate;
+use Wikibase\Repo\DataUpdates\ParserOutputDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\WikibaseRepo;
@@ -79,9 +80,9 @@ class EntityParserOutputGenerator {
 	private $entityDataFormatProvider;
 
 	/**
-	 * @var EntityParserOutputDataUpdater
+	 * @var ParserOutputDataUpdate[]
 	 */
-	private $parserOutputDataUpdater;
+	private $dataUpdates;
 
 	/**
 	 * @var string
@@ -96,7 +97,7 @@ class EntityParserOutputGenerator {
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
-		EntityParserOutputDataUpdater $parserOutputDataUpdater,
+		array $dataUpdates,
 		$languageCode
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -107,7 +108,7 @@ class EntityParserOutputGenerator {
 		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
-		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
+		$this->dataUpdates = $dataUpdates;
 		$this->languageCode = $languageCode;
 	}
 
@@ -145,8 +146,9 @@ class EntityParserOutputGenerator {
 
 		$entity = $entityRevision->getEntity();
 
-		$this->parserOutputDataUpdater->processEntity( $entity );
-		$this->parserOutputDataUpdater->updateParserOutput( $parserOutput );
+		$dataUpdater = new EntityParserOutputDataUpdater( $parserOutput, $this->dataUpdates );
+		$dataUpdater->processEntity( $entity );
+		$dataUpdater->flush();
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );

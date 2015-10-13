@@ -8,7 +8,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
-use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
 use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\GeoDataDataUpdate;
 use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
@@ -111,7 +110,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->getLanguageFallbackChain( $languageCode ),
 			$this->templateFactory,
 			$this->entityDataFormatProvider,
-			new EntityParserOutputDataUpdater( $this->getDataUpdates() ),
+			$this->getDataUpdates(),
 			$languageCode
 		);
 	}
