@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeNotificationJob;
-use Wikibase\ChangesTable;
 
 /**
  * @covers Wikibase\ChangeNotificationJob
@@ -22,16 +21,6 @@ class ChangeNotificationJobTest extends \MediaWikiTestCase {
 	// TODO: testRun
 
 	public function provideToString() {
-		$change1 = ChangesTable::singleton()->newRow( array(
-			'id' => 1,
-			'type' => 'add~item',
-		) );
-
-		$change2 = ChangesTable::singleton()->newRow( array(
-			'id' => 2,
-			'type' => 'update~item',
-		) );
-
 		return array(
 			array( // #0: empty
 				array(),
@@ -39,8 +28,8 @@ class ChangeNotificationJobTest extends \MediaWikiTestCase {
 			),
 			array( // #1: some changes
 				array(
-					$change1,
-					$change2,
+					$this->getMock( 'Wikibase\Change' ),
+					$this->getMock( 'Wikibase\Change' ),
 				),
 				'/^ChangeNotification/'
 			),
