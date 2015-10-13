@@ -33,21 +33,6 @@ class ChangeRow implements Change {
 	private $fields = array( 'id' => null );
 
 	/**
-	 * @see Change::getUser
-	 *
-	 * @since 0.1
-	 *
-	 * @return User
-	 */
-	public function getUser() {
-		if ( $this->user === false ) {
-			$this->user = User::newFromId( $this->getField( 'user_id' ) );
-		}
-
-		return $this->user;
-	}
-
-	/**
 	 * @see Change::getAge
 	 *
 	 * @since 0.1
