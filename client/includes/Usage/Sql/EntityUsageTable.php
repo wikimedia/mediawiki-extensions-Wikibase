@@ -349,36 +349,6 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * Removes usage tracking for the given set of entities.
-	 * This is used typically when entities were deleted.
-	 *
-	 * @see UsageTracker::removeEntities
-	 *
-	 * @param EntityId[] $entityIds
-	 */
-	public function removeEntities( array $entityIds ) {
-		if ( empty( $entityIds ) ) {
-			return;
-		}
-
-		$idStrings = $this->getEntityIdStrings( $entityIds );
-
-		$batches = array_chunk( $idStrings, $this->batchSize );
-
-		foreach ( $batches as $batch ) {
-			$this->connection->begin( __METHOD__ );
-			$this->connection->delete(
-				$this->tableName,
-				array(
-					'eu_entity_id' => $batch,
-				),
-				__METHOD__
-			);
-			$this->connection->commit( __METHOD__ );
-		}
-	}
-
-	/**
 	 * @see UsageLookup::getPagesUsing
 	 *
 	 * @param EntityId[] $entityIds

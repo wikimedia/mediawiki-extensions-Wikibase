@@ -192,39 +192,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::removeEntities
-	 *
-	 * @param EntityId[] $entityIds
-	 *
-	 * @throws UsageTrackerException
-	 * @throws Exception
-	 */
-	public function removeEntities( array $entityIds ) {
-		if ( empty( $entityIds ) ) {
-			return;
-		}
-
-		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
-		// transaction to prevent long lock retention during big updates.
-		$db = $this->connectionManager->getWriteConnection();
-
-		try {
-			$usageTable = $this->newUsageTable( $db );
-			$usageTable->removeEntities( $entityIds );
-
-			$this->connectionManager->releaseConnection( $db );
-		} catch ( Exception $ex ) {
-			$this->connectionManager->releaseConnection( $db );
-
-			if ( $ex instanceof DBError ) {
-				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-			} else {
-				throw $ex;
-			}
-		}
-	}
-
-	/**
 	 * @see UsageLookup::getUsagesForPage
 	 *
 	 * @param int $pageId
