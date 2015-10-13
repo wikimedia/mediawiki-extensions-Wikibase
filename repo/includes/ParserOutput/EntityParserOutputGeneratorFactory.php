@@ -9,7 +9,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
@@ -101,7 +100,7 @@ class EntityParserOutputGeneratorFactory {
 		EntityIdParser $externalEntityIdParser,
 		array $preferredGeoDataProperties = array(),
 		array $preferredPageImagesProperties = array(),
-		array $globeUris
+		array $globeUris = array()
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -134,7 +133,11 @@ class EntityParserOutputGeneratorFactory {
 			$this->getLanguageFallbackChain( $languageCode ),
 			$this->templateFactory,
 			$this->entityDataFormatProvider,
-			$this->getDataUpdates(),
+			$this->propertyDataTypeLookup,
+			$this->externalEntityIdParser,
+			$this->preferredGeoDataProperties,
+			$this->preferredPageImagesProperties,
+			$this->globeUris,
 			$languageCode
 		);
 	}
@@ -157,36 +160,6 @@ class EntityParserOutputGeneratorFactory {
 		return $this->languageFallbackChainFactory->newFromLanguageCode(
 			$languageCode
 		);
-	}
-
-	/**
-	 * @return ParserOutputDataUpdate[]
-	 */
-	private function getDataUpdates() {
-		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
-
-		$dataUpdates = array(
-			new ReferencedEntitiesDataUpdate(
-				$this->entityTitleLookup,
-				$this->externalEntityIdParser
-			),
-			new ExternalLinksDataUpdate( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdate( $propertyDataTypeMatcher )
-		);
-
-		if ( !empty( $this->preferredPageImagesProperties ) ) {
-			$dataUpdates[] = new PageImagesDataUpdate( $this->preferredPageImagesProperties );
-		}
-
-		if ( class_exists( 'GeoData' ) ) {
-			$dataUpdates[] = new GeoDataDataUpdate(
-				$propertyDataTypeMatcher,
-				$this->preferredGeoDataProperties,
-				$this->globeUris
-			);
-		}
-
-		return $dataUpdates;
 	}
 
 }
