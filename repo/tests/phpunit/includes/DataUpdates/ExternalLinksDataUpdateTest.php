@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\DataUpdates;
 
 use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
@@ -20,18 +21,37 @@ use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
 class ExternalLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * @return ExternalLinksDataUpdate
+	 */
+	private function newInstance() {
+		$matcher = $this->getMockBuilder( 'Wikibase\Lib\Store\PropertyDataTypeMatcher' )
+			->disableOriginalConstructor()
+			->getMock();
+		$matcher->expects( $this->any() )
+			->method( 'isMatchingDataType' )
+			->will( $this->returnCallback( function( PropertyId $id, $type ) {
+				return $id->getSerialization() === 'P1';
+			} ) );
+
+		return new ExternalLinksDataUpdate( $matcher );
+	}
+
+	/**
 	 * @param StatementList $statements
 	 * @param string $string
+	 * @param int $propertyId
 	 */
-	private function addStatement( StatementList $statements, $string ) {
-		$statements->addNewStatement( new PropertyValueSnak( 1, new StringValue( $string ) ) );
+	private function addStatement( StatementList $statements, $string, $propertyId = 1 ) {
+		$statements->addNewStatement(
+			new PropertyValueSnak( $propertyId, new StringValue( $string ) )
+		);
 	}
 
 	/**
 	 * @dataProvider externalLinksProvider
 	 */
 	public function testGetExternalLinks( StatementList $statements, array $expected ) {
-		$instance = new ExternalLinksDataUpdate();
+		$instance = $this->newInstance();
 		$actual = $instance->getExternalLinks( $statements );
 		$this->assertSame( $expected, $actual );
 	}
@@ -46,7 +66,7 @@ class ExternalLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 		$parserOutput->expects( $this->exactly( count( $expected ) ) )
 			->method( 'addExternalLink' );
 
-		$instance = new ExternalLinksDataUpdate();
+		$instance = $this->newInstance();
 		foreach ( $statements as $statement ) {
 			$instance->processStatement( $statement );
 		}
@@ -57,6 +77,7 @@ class ExternalLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 		$set1 = new StatementList();
 		$this->addStatement( $set1, 'http://1.de' );
 		$this->addStatement( $set1, '' );
+		$this->addStatement( $set1, 'no url property', 2 );
 
 		$set2 = new StatementList();
 		$this->addStatement( $set2, 'http://2a.de' );
