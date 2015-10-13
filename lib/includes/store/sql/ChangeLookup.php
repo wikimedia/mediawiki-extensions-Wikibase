@@ -70,7 +70,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	}
 
 	/**
-	 * @param int $ids
+	 * @param int[] $ids
 	 *
 	 * @return Change[]
 	 */
@@ -85,7 +85,34 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	}
 
 	/**
+	 * @param int $revisionId
+	 *
+	 * @return Change|null
+	 */
+	public function loadByRevisionId( $revisionId ) {
+		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
+
+		$change = $this->loadChanges(
+			array( 'change_revision_id' => $revisionId ),
+			array(),
+			__METHOD__,
+			array(
+				'LIMIT' => 1
+			)
+		);
+
+		if ( isset( $change[0] ) ) {
+			return $change[0];
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * @param array $where
+	 * @param array $options
+	 * @param string $method
+	 *
 	 * @return Change[]
 	 */
 	private function loadChanges( array $where, array $options, $method ) {
