@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: JanZerebecki <jan.wikimedia@zerebecki.de>
+Code-Review+2: Jonas Kress (WMDE) <jonas.kress@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Tue, 13 Oct 2015 19:06:42 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/245869
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
