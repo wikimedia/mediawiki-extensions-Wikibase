@@ -5,7 +5,6 @@ namespace Wikibase\Client\Changes;
 use Exception;
 use Hooks;
 use InvalidArgumentException;
-use IORMRow;
 use Language;
 use Message;
 use MWException;
@@ -323,8 +322,8 @@ class ChangeHandler {
 	 * @return string
 	 */
 	private function getChangeIdForLog( Change $change ) {
-		if ( $change instanceof IORMRow ) {
-			//@todo: add getFields() to the interface, or provide getters!
+		if ( $change instanceof EntityChange ) {
+			//@todo: add getFields() to the Change interface, or provide getters!
 			$fields = $change->getFields();
 
 			if ( isset( $fields['info']['change-ids'] ) ) {
