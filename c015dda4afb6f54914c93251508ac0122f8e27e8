@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_bd1cc919",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-13T16:39:02Z",
+      "side": 1,
+      "message": "That\u0027s easy to fix: defiene a cache interface for use in DMServices.\nCaching and filtering probably shouldn\u0027t be combined in the same class.",
+      "parentUuid": "0ebaf39b_fab807e4",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9af22bcc",
         "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
         "patchSetId": 1
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_dd197d28",
+        "filename": "lib/includes/store/PropertyDataTypeMatcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-13T16:39:02Z",
+      "side": 1,
+      "message": "But it\u0027s specific to datatypes. It would be nice to have a common interface for filtering that is no bound to a specific aspect to filter by.",
+      "parentUuid": "0ebaf39b_7ad737f3",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9ac9cb7d",
         "filename": "repo/includes/DataUpdates/ParserOutputDataUpdate.php",
         "patchSetId": 1
@@ -101,6 +137,41 @@
       "side": 1,
       "message": "I\u0027m also not very happy with \"flush\". Could also be \"commit\". What do you suggest?",
       "parentUuid": "0ebaf39b_9ac9cb7d",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_bdeb69da",
+        "filename": "repo/includes/DataUpdates/ParserOutputDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-13T16:39:02Z",
+      "side": 1,
+      "message": "In RdfWriter, I called  it finish().\nI don\u0027t see how \"flush\" would be wrong, though.",
+      "parentUuid": "0ebaf39b_fa86c717",
+      "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_bdc6094d",
+        "filename": "repo/includes/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-13T16:39:02Z",
+      "side": 1,
+      "message": "Not sure what this buys us. I suggested instantiating the DataUpdate here, but whether this makes sense or not depends a lot on which services and other knowledge they need.  Will have to think about this some more.\n\nAnyway, this refactoring should be in a separate patch, so we can discuss it separately.",
       "revId": "c015dda4afb6f54914c93251508ac0122f8e27e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
