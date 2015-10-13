@@ -28,7 +28,6 @@ class ChangeRow implements Change {
 	 * The fields of the object.
 	 * field name (w/o prefix) => value
 	 *
-	 * @since 1.20
 	 * @var array
 	 */
 	protected $fields = array( 'id' => null );
