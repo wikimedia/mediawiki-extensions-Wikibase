@@ -80,11 +80,16 @@ class WikiPageUpdater implements PageUpdater {
 	 * Injects an RC entry into the recentchanges, using the the given title and attribs
 	 *
 	 * @param Title[] $titles
-	 * @param array $attribs
+	 * @param array $attribsByTitle Page id -> array of rc attribs
 	 */
-	public function injectRCRecords( array $titles, array $attribs ) {
+	public function injectRCRecords( array $titles, array $attribsByTitle ) {
 		foreach ( $titles as $title ) {
 			if ( !$title->exists() ) {
+				continue;
+			}
+
+			$attribs = $attribsByTitle[ $title->getArticleID() ];
+			if ( $attribs === false ) {
 				continue;
 			}
 
