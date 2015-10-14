@@ -8,9 +8,6 @@
         <exclude name="ExcessiveClassComplexity" />
         <exclude name="TooManyPublicMethods" />
     </rule>
-    <rule name="rulesets/codesize.xml/TooManyPublicMethods">
-        <exclude-pattern>tests/unit/</exclude-pattern>
-    </rule>
 
     <rule ref="rulesets/controversial.xml">
         <exclude name="CamelCaseMethodName" />
