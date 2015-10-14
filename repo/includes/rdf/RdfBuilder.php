@@ -493,9 +493,11 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		// TODO: this should point to "this document"
 		$this->writer->about( RdfVocabulary::NS_ONTOLOGY, 'Dump' )
 			->a( RdfVocabulary::NS_SCHEMA_ORG, "Dataset" )
+			->a( 'owl', 'Ontology' )
 			->say( RdfVocabulary::NS_CC, 'license' )->is( RdfVocabulary::LICENSE )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION )
-			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $timestamp ), 'xsd', 'dateTime' );
+			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $timestamp ), 'xsd', 'dateTime' )
+			->say( 'owl', 'imports' )->is( RdfVocabulary::getOntologyURI() );
 	}
 
 }

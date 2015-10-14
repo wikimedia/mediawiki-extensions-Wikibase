@@ -22,6 +22,7 @@ class RdfVocabulary {
 
 	// Change this when changing data format!
 	const FORMAT_VERSION = '0.0.1';
+	const ONTOLOGY_VERSION = '1.0';
 
 	const ONTOLOGY_BASE_URI = 'http://wikiba.se/ontology';
 	const NS_ONTOLOGY = 'wikibase'; // wikibase ontology (shared)
@@ -251,6 +252,14 @@ class RdfVocabulary {
 
 		self::$canonicalLanguageCodeCache[$languageCode] = wfBCP47( $languageCode );
 		return self::$canonicalLanguageCodeCache[$languageCode];
+	}
+
+	/**
+	 * Return current ontology version URI
+	 * @return string
+	 */
+	public static function getOntologyURI() {
+		return self::ONTOLOGY_BASE_URI . "-" . self::ONTOLOGY_VERSION . ".owl";
 	}
 
 }
