@@ -1344,7 +1344,8 @@ class WikibaseRepo {
 			$entityDataFormatProvider,
 			$this->getPropertyDataTypeLookup(),
 			$this->getLocalEntityUriParser(),
-			$this->settings->getSetting( 'preferredGeoDataProperties' )
+			$this->settings->getSetting( 'preferredGeoDataProperties' ),
+			$this->settings->getSetting( 'preferredPageImagesProperties' )
 		);
 	}
 

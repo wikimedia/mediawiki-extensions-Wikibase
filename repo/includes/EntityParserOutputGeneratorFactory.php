@@ -12,6 +12,7 @@ use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
 use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
 use Wikibase\Repo\DataUpdates\GeoDataDataUpdate;
 use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
+use Wikibase\Repo\DataUpdates\PageImagesDataUpdate;
 use Wikibase\Repo\DataUpdates\ParserOutputDataUpdate;
 use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -71,6 +72,23 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	private $preferredGeoDataProperties;
 
+	/**
+	 * @var string[]
+	 */
+	private $preferredPageImagesProperties;
+
+	/**
+	 * @param EntityViewFactory $entityViewFactory
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param TemplateFactory $templateFactory
+	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param EntityIdParser $externalEntityIdParser
+	 * @param string[] $preferredGeoDataProperties
+	 * @param string[] $preferredPageImagesProperties
+	 */
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
@@ -80,7 +98,8 @@ class EntityParserOutputGeneratorFactory {
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $externalEntityIdParser,
-		array $preferredGeoDataProperties
+		array $preferredGeoDataProperties = array(),
+		array $preferredPageImagesProperties = array()
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -91,6 +110,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->externalEntityIdParser = $externalEntityIdParser;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
+		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 	}
 
 	/**
@@ -150,6 +170,10 @@ class EntityParserOutputGeneratorFactory {
 			new ExternalLinksDataUpdate( $propertyDataTypeMatcher ),
 			new ImageLinksDataUpdate( $propertyDataTypeMatcher )
 		);
+
+		if ( !empty( $this->preferredPageImagesProperties ) ) {
+			$dataUpdates[] = new PageImagesDataUpdate( $this->preferredPageImagesProperties );
+		}
 
 		if ( class_exists( 'GeoData' ) ) {
 			$dataUpdates[] = new GeoDataDataUpdate(

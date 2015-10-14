@@ -11,8 +11,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -20,10 +18,8 @@ use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
-use Wikibase\Repo\DataUpdates\PageImagesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EmptyEditSectionGenerator;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
@@ -151,11 +147,6 @@ class EntityParserOutputGenerator {
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
 
-		// FIXME: Rework this to use the visitor infrastructure above!
-		if ( $entity instanceof StatementListProvider ) {
-			$this->addBestImageToParserOutput( $parserOutput, $entity->getStatements() );
-		}
-
 		// FIXME: OCP violation - https://phabricator.wikimedia.org/T75495
 		if ( $entity instanceof Item ) {
 			$this->addBadgesToParserOutput( $parserOutput, $entity->getSiteLinkList() );
@@ -190,19 +181,6 @@ class EntityParserOutputGenerator {
 		}
 
 		return $parserOutput;
-	}
-
-	private function addBestImageToParserOutput( ParserOutput $parserOutput, StatementList $statements ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		// TODO: Inject this setting!
-		$propertyIds = $repo->getSettings()->getSetting( 'preferredPageImagesProperties' );
-
-		if ( !empty( $propertyIds ) ) {
-			$dataUpdate = new PageImagesDataUpdate( $propertyIds );
-			$fileName = $dataUpdate->getBestImageFileName( $statements );
-			// This property name is the only "soft dependency" on the PageImages extension.
-			$parserOutput->setProperty( 'page_image', $fileName );
-		}
 	}
 
 	/**
