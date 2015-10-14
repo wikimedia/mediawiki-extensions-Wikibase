@@ -42,6 +42,11 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 	private $preferredPropertiesIds;
 
 	/**
+	 * @var string[]
+	 */
+	private $globeUris;
+
+	/**
 	 * @var Coord[]
 	 */
 	private $coordinates = array();
@@ -49,11 +54,13 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 	/**
 	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher
 	 * @param string[] $preferredPropertiesIds
+	 * @param string[] $globeUris
 	 * @throws RuntimeException
 	 */
 	public function __construct(
 		PropertyDataTypeMatcher $propertyDataTypeMatcher,
-		array $preferredPropertiesIds
+		array $preferredPropertiesIds,
+		array $globeUris
 	) {
 		if ( !class_exists( 'GeoData' ) ) {
 			throw new RuntimeException( 'GeoDataDataUpdate requires the GeoData extension '
@@ -62,6 +69,7 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 
 		$this->propertyDataTypeMatcher = $propertyDataTypeMatcher;
 		$this->preferredPropertiesIds = $preferredPropertiesIds;
+		$this->globeUris = $globeUris;
 	}
 
 	/**
@@ -213,7 +221,18 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 			return null;
 		}
 
-		return new Coord( $dataValue->getLatitude(), $dataValue->getLongitude() );
+		$globeUri = $dataValue->getGlobe();
+
+		if ( !isset( $this->globeUris[$globeUri] ) ) {
+			// Unknown globe
+			return null;
+		}
+
+		return new Coord(
+			$dataValue->getLatitude(),
+			$dataValue->getLongitude(),
+			$this->globeUris[$globeUri]
+		);
 	}
 
 }

@@ -1345,7 +1345,8 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup(),
 			$this->getLocalEntityUriParser(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
-			$this->settings->getSetting( 'preferredPageImagesProperties' )
+			$this->settings->getSetting( 'preferredPageImagesProperties' ),
+			$this->settings->getSetting( 'globeUris' )
 		);
 	}
 
