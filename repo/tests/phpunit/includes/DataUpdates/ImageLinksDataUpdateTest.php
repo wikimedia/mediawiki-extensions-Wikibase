@@ -50,25 +50,17 @@ class ImageLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider imageLinksProvider
 	 */
-	public function testGetImageLinks( StatementList $statements, array $expected ) {
-		$instance = $this->newInstance();
-
-		foreach ( $statements as $statement ) {
-			$instance->processStatement( $statement );
-		}
-
-		$this->assertSame( $expected, $instance->getImageLinks() );
-	}
-
-	/**
-	 * @dataProvider imageLinksProvider
-	 */
 	public function testUpdateParserOutput( StatementList $statements, array $expected ) {
+		$actual = array();
+
 		$parserOutput = $this->getMockBuilder( 'ParserOutput' )
 			->disableOriginalConstructor()
 			->getMock();
 		$parserOutput->expects( $this->exactly( count( $expected ) ) )
-			->method( 'addImage' );
+			->method( 'addImage' )
+			->will( $this->returnCallback( function( $name ) use ( &$actual ) {
+				$actual[] = $name;
+			} ) );
 
 		$instance = $this->newInstance();
 
@@ -77,6 +69,7 @@ class ImageLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 		}
 
 		$instance->updateParserOutput( $parserOutput );
+		$this->assertSame( $expected, $actual );
 	}
 
 	public function imageLinksProvider() {

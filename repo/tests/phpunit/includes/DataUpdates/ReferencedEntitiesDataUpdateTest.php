@@ -8,7 +8,6 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
@@ -95,7 +94,10 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 			}
 		}
 
-		$this->assertEquals( $expected, $instance->getEntityIds() );
+		$actual = array_map( function( EntityId $id ) {
+			return $id->getSerialization();
+		}, $instance->getEntityIds() );
+		$this->assertSame( $expected, $actual );
 	}
 
 	/**
@@ -106,11 +108,16 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 		SiteLinkList $siteLinks = null,
 		array $expected
 	) {
+		$actual = array();
+
 		$parserOutput = $this->getMockBuilder( 'ParserOutput' )
 			->disableOriginalConstructor()
 			->getMock();
 		$parserOutput->expects( $this->exactly( count( $expected ) ) )
-			->method( 'addLink' );
+			->method( 'addLink' )
+			->will( $this->returnCallback( function( Title $title ) use ( &$actual ) {
+				$actual[] = $title->getText();
+			} ) );
 
 		$instance = $this->newInstance( count( $expected ) );
 
@@ -125,6 +132,7 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 		}
 
 		$instance->updateParserOutput( $parserOutput );
+		$this->assertArrayEquals( $expected, $actual );
 	}
 
 	public function entityIdProvider() {
@@ -145,28 +153,28 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 			array( new StatementList(), null, array(
 			) ),
 			array( $set1, null, array(
-				new PropertyId( 'P1' ),
-				new ItemId( 'Q1' ),
+				'P1',
+				'Q1',
 			) ),
 			array( new StatementList(), $siteLinks, array(
-				new ItemId( 'Q1' ),
+				'Q1',
 			) ),
 			array( $set1, $siteLinks, array(
-				new PropertyId( 'P1' ),
-				new ItemId( 'Q1' ),
+				'P1',
+				'Q1',
 			) ),
 			array( $set2, null, array(
-				new PropertyId( 'P1' ),
-				new ItemId( 'Q20' ),
-				new ItemId( 'Q21' ),
-				new ItemId( 'Q22' ),
+				'P1',
+				'Q20',
+				'Q21',
+				'Q22',
 			) ),
 			array( $set2, $siteLinks, array(
-				new PropertyId( 'P1' ),
-				new ItemId( 'Q20' ),
-				new ItemId( 'Q21' ),
-				new ItemId( 'Q22' ),
-				new ItemId( 'Q1' ),
+				'P1',
+				'Q20',
+				'Q21',
+				'Q22',
+				'Q1',
 			) ),
 		);
 	}
