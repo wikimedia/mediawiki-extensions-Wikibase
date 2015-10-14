@@ -6,6 +6,10 @@
 
     <rule ref="rulesets/codesize.xml">
         <exclude name="ExcessiveClassComplexity" />
+        <exclude name="TooManyPublicMethods" />
+    </rule>
+    <rule name="rulesets/codesize.xml/TooManyPublicMethods">
+        <exclude-pattern>tests/unit/</exclude-pattern>
     </rule>
 
     <rule ref="rulesets/controversial.xml">
