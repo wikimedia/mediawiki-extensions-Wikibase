@@ -11,6 +11,7 @@ use Language;
 use Message;
 use MWException;
 use SiteStore;
+use Title;
 
 /**
  * Creates an array structure with comment information for storing
@@ -59,13 +60,15 @@ class SiteLinkCommentCreator {
 	 *
 	 * @param Diff|null $siteLinkDiff
 	 * @param string $action e.g. 'remove', see the constants in EntityChange
+	 * @param Title|null $title The page we create an edit summary for. Taken into account
+	 *         when creating an article specific edit summary on site link changes. Ignored otherwise.
 	 *
 	 * @return string|null A human readable edit summary (limited wikitext),
 	 *         or null if no summary could be created for the sitelink change.
 	 */
-	public function getEditComment( Diff $siteLinkDiff = null, $action ) {
+	public function getEditComment( Diff $siteLinkDiff = null, $action, Title $title = null ) {
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
-			$siteLinkMessage = $this->getSiteLinkMessage( $action, $siteLinkDiff );
+			$siteLinkMessage = $this->getSiteLinkMessage( $action, $siteLinkDiff, $title );
 
 			if ( !empty( $siteLinkMessage ) ) {
 				return $this->generateComment( $siteLinkMessage );
@@ -81,10 +84,11 @@ class SiteLinkCommentCreator {
 	 *
 	 * @param string $action e.g. 'remove', see the constants in EntityChange
 	 * @param Diff $siteLinkDiff The change's site link diff
+	 * @param Title|null $title The page we create an edit summary for
 	 *
 	 * @return array|null
 	 */
-	private function getSiteLinkMessage( $action, Diff $siteLinkDiff ) {
+	private function getSiteLinkMessage( $action, Diff $siteLinkDiff, Title $title = null ) {
 		if ( $siteLinkDiff->isEmpty() ) {
 			return null;
 		}
@@ -110,7 +114,7 @@ class SiteLinkCommentCreator {
 				}
 			}
 
-			$params = $this->getSiteLinkAddRemoveParams( $diffOp, $action, $siteId );
+			$params = $this->getSiteLinkAddRemoveParams( $diffOp, $action, $siteId, $title );
 		} else {
 			$diffOpCount = count( $diffOps );
 			if ( $diffOpCount === 1 ) {
@@ -206,10 +210,11 @@ class SiteLinkCommentCreator {
 	 * @param DiffOp $diffOp
 	 * @param string $action e.g. 'remove', see the constants in EntityChange
 	 * @param string $siteId
+	 * @param Title|null $title The page we create an edit summary for
 	 *
 	 * @return array|null
 	 */
-	private function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId ) {
+	private function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId, Title $title = null ) {
 		$params = array();
 
 		if ( in_array( $action, array( 'remove', 'restore' ) ) ) {
@@ -220,18 +225,24 @@ class SiteLinkCommentCreator {
 		} elseif ( $diffOp instanceof DiffOpRemove ) {
 			$params['message'] = 'wikibase-comment-unlink';
 		} elseif ( $diffOp instanceof DiffOpChange ) {
-			$params['message'] = 'wikibase-comment-sitelink-change';
+			if ( $title && $title->getFullText() === $diffOp->getOldValue() ) {
+				$params['message'] = 'wikibase-comment-unlink';
+			} elseif ( $title && $title->getFullText() === $diffOp->getNewValue() ) {
+				$params['message'] = 'wikibase-comment-linked';
+			} else {
+				$params['message'] = 'wikibase-comment-sitelink-change';
 
-			$params['sitelink'] = array(
-				'oldlink' => array(
-					'site' => $siteId,
-					'page' => $diffOp->getOldValue()
-				),
-				'newlink' => array(
-					'site' => $siteId,
-					'page' => $diffOp->getNewValue()
-				)
-			);
+				$params['sitelink'] = array(
+					'oldlink' => array(
+						'site' => $siteId,
+						'page' => $diffOp->getOldValue()
+					),
+					'newlink' => array(
+						'site' => $siteId,
+						'page' => $diffOp->getNewValue()
+					)
+				);
+			}
 		} else {
 			// whatever
 			$params = null;
