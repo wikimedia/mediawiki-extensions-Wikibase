@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_7be5eb05",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 43
+      },
+      "writtenOn": "2015-10-14T19:59:28Z",
+      "side": 1,
+      "message": "If there are lots of local variables, short names are indeed harmful, however here it\u0027s different and I personally find $propertyIdString less readable.",
+      "parentUuid": "0ebaf39b_9801c573",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_f859e12d",
         "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
         "patchSetId": 1
