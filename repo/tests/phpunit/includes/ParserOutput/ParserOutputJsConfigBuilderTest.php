@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
 use MediaWikiTestCase;
@@ -13,11 +13,11 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\ParserOutputJsConfigBuilder;
+use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\ParserOutputJsConfigBuilder
+ * @covers Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder
  *
  * @since 0.5
  *

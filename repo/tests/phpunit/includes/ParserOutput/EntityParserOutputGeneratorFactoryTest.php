@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use Language;
 use ParserOptions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\EntityParserOutputGeneratorFactory
+ * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -23,11 +23,11 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 
 		$testUser = new \TestUser( 'Wikibase User' );
 
-		$parserOutputGenerator = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
+		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
 			new ParserOptions( $testUser->getUser(), Language::factory( 'en' ) )
 		);
 
-		$this->assertInstanceOf( 'Wikibase\EntityParserOutputGenerator', $parserOutputGenerator );
+		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\EntityParserOutputGenerator', $instance );
 	}
 
 	public function testGetEntityParserOutputGenerator_noParserOptionLanguage() {
@@ -35,11 +35,11 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 
 		$testUser = new \TestUser( 'Wikibase User' );
 
-		$parserOutputGenerator = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
+		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
 			new ParserOptions( $testUser->getUser() )
 		);
 
-		$this->assertInstanceOf( 'Wikibase\EntityParserOutputGenerator', $parserOutputGenerator );
+		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\EntityParserOutputGenerator', $instance );
 	}
 
 	private function getEntityParserOutputGeneratorFactory() {

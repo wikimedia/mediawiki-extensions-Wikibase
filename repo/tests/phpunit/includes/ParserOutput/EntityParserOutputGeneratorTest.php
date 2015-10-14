@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
 use Language;
@@ -15,19 +15,19 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\EntityParserOutputGenerator;
+use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
-use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
-use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
-use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
-use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
+use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdater;
+use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdate;
+use Wikibase\Repo\ParserOutput\ImageLinksDataUpdate;
+use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\EntityParserOutputGenerator
+ * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -229,7 +229,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function getConfigBuilderMock() {
-		$configBuilder = $this->getMockBuilder( 'Wikibase\ParserOutputJsConfigBuilder' )
+		$configBuilder = $this->getMockBuilder( 'Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder' )
 			->disableOriginalConstructor()
 			->getMock();
 

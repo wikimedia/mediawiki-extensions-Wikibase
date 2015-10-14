@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\DataUpdates;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\BooleanValue;
 use DataValues\StringValue;
@@ -10,10 +10,10 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\DataUpdates\PageImagesDataUpdate;
+use Wikibase\Repo\ParserOutput\PageImagesDataUpdate;
 
 /**
- * @covers Wikibase\Repo\DataUpdates\PageImagesDataUpdate
+ * @covers Wikibase\Repo\ParserOutput\PageImagesDataUpdate
  *
  * @since 0.5
  *
@@ -58,7 +58,7 @@ class PageImagesDataUpdateTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructor( $propertyIds ) {
 		$instance = $this->newInstance( $propertyIds );
-		$this->assertInstanceOf( 'Wikibase\Repo\DataUpdates\PageImagesDataUpdate', $instance );
+		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\PageImagesDataUpdate', $instance );
 	}
 
 	public function constructorArgumentsProvider() {

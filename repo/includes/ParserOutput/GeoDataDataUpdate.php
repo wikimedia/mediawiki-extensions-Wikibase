@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\DataUpdates;
+namespace Wikibase\Repo\ParserOutput;
 
 use Coord;
 use CoordinatesOutput;

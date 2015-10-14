@@ -1,16 +1,16 @@
 <?php
 
-namespace Wikibase\Repo\Tests\DataUpdates;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
+use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdater;
 
 /**
- * @covers Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater
+ * @covers Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdater
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -28,13 +28,13 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$statementDataUpdate = $this->getMock( 'Wikibase\Repo\DataUpdates\StatementDataUpdate' );
+		$statementDataUpdate = $this->getMock( 'Wikibase\Repo\ParserOutput\StatementDataUpdate' );
 		$statementDataUpdate->expects( $this->exactly( $statements ) )
 			->method( 'processStatement' );
 		$statementDataUpdate->expects( $this->once() )
 			->method( 'updateParserOutput' );
 
-		$siteLinkDataUpdate = $this->getMock( 'Wikibase\Repo\DataUpdates\SiteLinkDataUpdate' );
+		$siteLinkDataUpdate = $this->getMock( 'Wikibase\Repo\ParserOutput\SiteLinkDataUpdate' );
 		$siteLinkDataUpdate->expects( $this->exactly( $siteLinks ) )
 			->method( 'processSiteLink' );
 		$siteLinkDataUpdate->expects( $this->once() )
@@ -79,7 +79,7 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		return array(
 			array( array( null ) ),
 			array( array( 'notAnObject' ) ),
-			array( array( $this->getMock( 'Wikibase\Repo\DataUpdates\ParserOutputDataUpdate' ) ) ),
+			array( array( $this->getMock( 'Wikibase\Repo\ParserOutput\ParserOutputDataUpdate' ) ) ),
 		);
 	}
 
