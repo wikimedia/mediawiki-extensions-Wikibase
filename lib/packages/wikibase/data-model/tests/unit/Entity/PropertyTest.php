@@ -244,10 +244,10 @@ class PropertyTest extends EntityTest {
 		$statements = array( $statement0, $statement1 );
 
 		$property->setClaims( new Claims( $statements ) );
-		$this->assertEquals( count( $statements ), $property->getStatements()->count(), "added some statements" );
+		$this->assertEquals( count( $statements ), $property->getStatements()->count(), 'added some statements' );
 
 		$property->setClaims( new Claims() );
-		$this->assertTrue( $property->getStatements()->isEmpty(), "should be empty again" );
+		$this->assertTrue( $property->getStatements()->isEmpty(), 'should be empty again' );
 	}
 
 }

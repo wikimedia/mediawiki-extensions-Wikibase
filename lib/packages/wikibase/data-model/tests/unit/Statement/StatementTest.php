@@ -279,7 +279,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 			$c += count( $reference->getSnaks() );
 		}
 
-		$this->assertGreaterThanOrEqual( $c, count( $snaks ), "At least one snak per Qualifier and Reference" );
+		$this->assertGreaterThanOrEqual( $c, count( $snaks ), 'At least one snak per Qualifier and Reference' );
 	}
 
 	public function testGivenNonStatement_equalsReturnsFalse() {

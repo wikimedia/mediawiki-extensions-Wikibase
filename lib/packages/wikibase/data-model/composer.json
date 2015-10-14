@@ -27,7 +27,7 @@
 		"data-values/data-values": "~0.1|~1.0"
 	},
 	"require-dev": {
-		"squizlabs/php_codesniffer": "~2.1",
+		"squizlabs/php_codesniffer": "~2.3",
 		"phpmd/phpmd": "~2.3"
 	},
 	"autoload": {
