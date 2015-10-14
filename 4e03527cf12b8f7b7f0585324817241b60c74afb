@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_d8d73df1",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-14T19:46:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_982305a6",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_3860d9cb",
         "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-14T18:53:39Z",
       "side": 1,
       "message": "Uncle Bod says, \"short scope, short variable names\", so $id is probably sufficient in this case. Also a matter of taste. Just a hint.",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9801c573",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-14T19:46:46Z",
+      "side": 1,
+      "message": "and I disagree with uncle bob here.\n\neven in short scope, I think clear variable names are better, especially here where there is potential for confusion regarding serialized ids here or objects.",
+      "parentUuid": "0ebaf39b_3860d9cb",
       "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_58fb4d77",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-14T19:46:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_f859e12d",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_18b4f532",
         "filename": "repo/tests/phpunit/includes/DataUpdates/GeoDataDataUpdateTest.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-10-14T18:53:39Z",
       "side": 1,
       "message": "With \"$rank \u003d Statement::RANK_NORMAL\" the two methods can be melted into one.",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_38c9b955",
+        "filename": "repo/tests/phpunit/includes/DataUpdates/GeoDataDataUpdateTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-14T19:46:46Z",
+      "side": 1,
+      "message": "i don\u0027t think that is needed at this point, since normal rank is the default.  And, not sure it would be nicer / more clear.",
+      "parentUuid": "0ebaf39b_18b4f532",
       "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
