@@ -64,9 +64,9 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $entityId ) use ( $exists ) {
-				$title = Title::newFromText( $entityId->getSerialization() );
-				$title->resetArticleID( $exists ? $entityId->getNumericId() : 0 );
+			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists ) {
+				$title = Title::newFromText( $id->getSerialization() );
+				$title->resetArticleID( $exists ? $id->getNumericId() : 0 );
 
 				return $title;
 			} )

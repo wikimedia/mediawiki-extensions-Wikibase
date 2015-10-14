@@ -20,14 +20,14 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framewo
 		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
-				return $entityId->getSerialization() . '\'s label';
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return $id->getSerialization() . '\'s label';
 			} ) );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
-				return array( 'en' => $entityId->getSerialization() . '\'s label' );
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return array( 'en' => $id->getSerialization() . '\'s label' );
 			} ) );
 
 		return $termLookup;

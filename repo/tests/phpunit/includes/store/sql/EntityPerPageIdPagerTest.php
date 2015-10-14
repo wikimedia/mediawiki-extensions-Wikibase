@@ -81,11 +81,9 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 	}
 
 	protected function getIdStrings( array $entities ) {
-		$ids = array_map( function ( EntityId $entityId ) {
-			return $entityId->getSerialization();
+		return array_map( function( EntityId $id ) {
+			return $id->getSerialization();
 		}, $entities );
-
-		return $ids;
 	}
 
 	protected function assertEqualIds( array $expected,array $actual, $msg = null ) {

@@ -123,8 +123,8 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
-				return Title::makeTitle( NS_MAIN, $entityId->getSerialization() );
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
 			} ) );
 
 		return $entityTitleLookup;

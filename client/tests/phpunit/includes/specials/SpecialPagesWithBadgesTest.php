@@ -31,8 +31,8 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		$labelLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnCallback( function( ItemId $itemId ) {
-				return new Term( 'en', 'Label of ' . $itemId->getSerialization() );
+			->will( $this->returnCallback( function( ItemId $id ) {
+				return new Term( 'en', 'Label of ' . $id->getSerialization() );
 			} ) );
 
 		return $labelLookup;
