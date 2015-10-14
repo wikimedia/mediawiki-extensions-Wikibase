@@ -7,7 +7,6 @@ use ParserOutput;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 
 /**
@@ -41,17 +40,9 @@ class ImageLinksDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
-	 * @param StatementList $statements
-	 *
 	 * @return string[]
 	 */
-	public function getImageLinks( StatementList $statements ) {
-		$this->fileNames = array();
-
-		foreach ( $statements as $statement ) {
-			$this->processStatement( $statement );
-		}
-
+	public function getImageLinks() {
 		return array_keys( $this->fileNames );
 	}
 

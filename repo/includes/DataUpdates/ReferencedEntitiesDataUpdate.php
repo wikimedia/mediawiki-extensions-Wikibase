@@ -12,11 +12,9 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -61,24 +59,9 @@ class ReferencedEntitiesDataUpdate implements StatementDataUpdate, SiteLinkDataU
 	}
 
 	/**
-	 * @param StatementList $statements
-	 * @param SiteLinkList|null $siteLinks
-	 *
 	 * @return EntityId[] Numerically indexed non-sparse array.
 	 */
-	public function getEntityIds( StatementList $statements, SiteLinkList $siteLinks = null ) {
-		$this->entityIds = array();
-
-		foreach ( $statements as $statement ) {
-			$this->processStatement( $statement );
-		}
-
-		if ( $siteLinks !== null ) {
-			foreach ( $siteLinks as $siteLink ) {
-				$this->processSiteLink( $siteLink );
-			}
-		}
-
+	public function getEntityIds() {
 		return array_values( $this->entityIds );
 	}
 

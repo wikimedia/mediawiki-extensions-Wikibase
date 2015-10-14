@@ -52,8 +52,12 @@ class ImageLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetImageLinks( StatementList $statements, array $expected ) {
 		$instance = $this->newInstance();
-		$actual = $instance->getImageLinks( $statements );
-		$this->assertSame( $expected, $actual );
+
+		foreach ( $statements as $statement ) {
+			$instance->processStatement( $statement );
+		}
+
+		$this->assertSame( $expected, $instance->getImageLinks() );
 	}
 
 	/**
@@ -67,9 +71,11 @@ class ImageLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 			->method( 'addImage' );
 
 		$instance = $this->newInstance();
+
 		foreach ( $statements as $statement ) {
 			$instance->processStatement( $statement );
 		}
+
 		$instance->updateParserOutput( $parserOutput );
 	}
 

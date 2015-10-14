@@ -84,8 +84,18 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 		array $expected
 	) {
 		$instance = $this->newInstance();
-		$actual = $instance->getEntityIds( $statements, $siteLinks );
-		$this->assertEquals( $expected, $actual );
+
+		foreach ( $statements as $statement ) {
+			$instance->processStatement( $statement );
+		}
+
+		if ( $siteLinks !== null ) {
+			foreach ( $siteLinks as $siteLink ) {
+				$instance->processSiteLink( $siteLink );
+			}
+		}
+
+		$this->assertEquals( $expected, $instance->getEntityIds() );
 	}
 
 	/**

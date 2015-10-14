@@ -52,8 +52,12 @@ class ExternalLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetExternalLinks( StatementList $statements, array $expected ) {
 		$instance = $this->newInstance();
-		$actual = $instance->getExternalLinks( $statements );
-		$this->assertSame( $expected, $actual );
+
+		foreach ( $statements as $statement ) {
+			$instance->processStatement( $statement );
+		}
+
+		$this->assertSame( $expected, $instance->getExternalLinks() );
 	}
 
 	/**
@@ -67,9 +71,11 @@ class ExternalLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 			->method( 'addExternalLink' );
 
 		$instance = $this->newInstance();
+
 		foreach ( $statements as $statement ) {
 			$instance->processStatement( $statement );
 		}
+
 		$instance->updateParserOutput( $parserOutput );
 	}
 
