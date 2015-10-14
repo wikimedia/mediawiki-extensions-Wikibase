@@ -16,6 +16,24 @@
       "revId": "48b74de3a73654a1db2997bd940f449c72bfa178",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_548f9fd1",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-14T07:58:47Z",
+      "side": 1,
+      "message": "That would mean it\u0027s looped twice, which I always want to avoid.",
+      "parentUuid": "0ebaf39b_9df5454f",
+      "revId": "48b74de3a73654a1db2997bd940f449c72bfa178",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
