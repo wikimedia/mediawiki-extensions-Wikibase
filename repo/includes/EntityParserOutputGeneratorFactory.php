@@ -71,6 +71,11 @@ class EntityParserOutputGeneratorFactory {
 	 */
 	private $preferredGeoDataProperties;
 
+	/**
+	 * @var string[] Mapping of globe uris to string names, as recognized by GeoData.
+	 */
+	private $globeUris;
+
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
@@ -80,7 +85,8 @@ class EntityParserOutputGeneratorFactory {
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $externalEntityIdParser,
-		array $preferredGeoDataProperties
+		array $preferredGeoDataProperties,
+		array $globeUris
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -91,6 +97,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->externalEntityIdParser = $externalEntityIdParser;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
+		$this->globeUris = $globeUris;
 	}
 
 	/**
@@ -154,7 +161,8 @@ class EntityParserOutputGeneratorFactory {
 		if ( class_exists( 'GeoData' ) ) {
 			$dataUpdates[] = new GeoDataDataUpdate(
 				$propertyDataTypeMatcher,
-				$this->preferredGeoDataProperties
+				$this->preferredGeoDataProperties,
+				$this->globeUris
 			);
 		}
 
