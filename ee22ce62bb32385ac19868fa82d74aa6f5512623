@@ -33,6 +33,40 @@
       "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e685bea0",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-14T21:40:45Z",
+      "side": 1,
+      "message": "This also needs to setExtra array( \u0027pageStatus\u0027 \u003d\u003e \u0027changed\u0027 ) (or something along these lins)... RecentChange::save expects that to be in place.",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c66bdaec",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-14T21:40:45Z",
+      "side": 1,
+      "message": "missing rc_log_type",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
