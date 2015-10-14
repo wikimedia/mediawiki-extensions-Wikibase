@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_4a1616f8",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-14T11:00:04Z",
+      "side": 1,
+      "message": "This is a pretty generic name for a hook. It doesn\u0027t really tell what it does. Can you please try to find a more descriptive name?",
+      "revId": "596957befeada1a2d6ef8114369cd38a91e2aa4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4afff6a7",
+        "filename": "repo/includes/Hooks/ApiQueryDisplayTextHookHander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-14T11:00:04Z",
+      "side": 1,
+      "message": "* $entityId can be null but TermLookup does not accept null.\n* TermLookup may throw a TermLookupException.\n* TermLookup may return null, which means a previously set value in the array will be removed. I don\u0027t think this is intended.",
+      "revId": "596957befeada1a2d6ef8114369cd38a91e2aa4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
