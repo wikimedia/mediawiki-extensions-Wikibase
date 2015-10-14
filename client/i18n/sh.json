@@ -1,9 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kolega2357"
+			"Kolega2357",
+			"OC Ripper"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
-	"specialpages-group-wikibaseclient": "{{doc-special-group|that=is related to Wikidata clients|like=[[Special:UnconnectedPages]]}}"
+	"tooltip-t-wikibase": "Link na povezane podatke spremišnih stavki",
+	"wikibase-comment-update": "{{WBREPONAME}} promijenjena stavka",
+	"wikibase-dataitem": "{{WBREPONAME}} stavka",
+	"wikibase-editlinks": "Uredi veze",
+	"wikibase-editlinkstitle": "Uredi međujezične poveznice",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Sakrij",
+	"wikibase-rc-hide-wikidata-show": "Prikaži",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
+	"wikibase-otherprojects": "Drugi projekti"
 }

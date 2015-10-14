@@ -20,7 +20,8 @@
 			"Vogone",
 			"Zolo",
 			"Sebastian Wallroth",
-			"Tiin"
+			"Tiin",
+			"Yellowcard"
 		]
 	},
 	"wikibase-desc": "Ermöglicht ein Repositorium strukturierter Daten",
@@ -102,7 +103,7 @@
 	"wikibase-statementview-rank-preferred": "Bevorzugter Rang",
 	"wikibase-statementview-rank-normal": "Normaler Rang",
 	"wikibase-statementview-rank-deprecated": "Missbilligter Rang",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Einzelnachweis|Einzelnachweise}}",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Fundstelle|Fundstellen}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Ein Beleg wurde|$1 Belege wurden}} noch nicht gespeichert",
 	"wikibase-snakview-property-input-placeholder": "Eigenschaft",
 	"wikibase-snakview-unsupportedsnaktype": "Snak des Typs „$1“. Das Bearbeiten für diese Snakart wird noch nicht unterstützt.",

@@ -2,12 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"Sindhu",
-			"Mehtab ahmed"
+			"Mehtab ahmed",
+			"Aursani"
 		]
 	},
-	"tooltip-t-wikibase": "ڳنڍيل مواد جي ذخيري جي آئٽم ڏانهن لنڪ",
-	"wikibase-dataitem": "{{WBREPONAME}} آئٽم",
-	"wikibase-editlinks": "لنڪس کي ترميم ڪريو",
-	"wikibase-editlinkstitle": "ترميم ڪريو اندرونِ ٻولي ڳنڍڻا يا لنڪس",
-	"wikibase-unconnectedpages-submit": "صفحا ڏيکاريو"
+	"tooltip-t-wikibase": "جُڙيل اعدادي ذخيري جي وَٿَ ڏانهن ڳنڍڻو",
+	"wikibase-dataitem": "{{WBREPONAME}} وَٿَ",
+	"wikibase-editlinks": "ڳنڍڻن کي سنواريو",
+	"wikibase-editlinkstitle": "بين‌الزباني ڳنڍڻا سنواريو",
+	"wikibase-rc-hide-wikidata-hide": "لڪايو",
+	"wikibase-rc-hide-wikidata-show": "نمايو",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ترميم",
+	"wikibase-unconnectedpages-submit": "صفحا ڏيکاريو",
+	"wikibase-otherprojects": "ٻيون رٿائون"
 }

@@ -8,7 +8,8 @@
 			"Se4598",
 			"TMg",
 			"Sebastian Wallroth",
-			"Flow"
+			"Flow",
+			"Yellowcard"
 		]
 	},
 	"wikibase-lib-desc": "Stellt dem Repositorium strukturierter Daten gemeinsam nutzbare Funktionen bereit",
@@ -100,7 +101,7 @@
 	"wikibase-entity-summary-wbeditentity-update": "Ein Objekt geändert",
 	"wikibase-entity-summary-wbeditentity-override": "Ein Objekt geleert",
 	"wikibase-entity-summary-wbsetreference": "Referenz festgelegt",
-	"wikibase-entity-summary-wbsetreference-add": "Einzelnachweis der Aussage hinzugefügt",
+	"wikibase-entity-summary-wbsetreference-add": "Fundstelle der Aussage hinzugefügt",
 	"wikibase-entity-summary-wbsetreference-set": "Einzelnachweis der Aussage geändert",
 	"wikibase-entity-summary-wbsetlabel-add": "Bezeichnung für [$2] hinzugefügt",
 	"wikibase-entity-summary-wbsetlabel-set": "Bezeichnung für [$2] geändert",
@@ -140,7 +141,7 @@
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|Qualifikator|Qualifikatoren}} hinzugefügt",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|Qualifikator|Qualifikatoren}} geändert",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|Qualifikator|Qualifikatoren}} entfernt",
-	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|Einzelnachweis|Einzelnachweise}} von der Aussage entfernt",
+	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|Fundstelle|Fundstellen}} von der Aussage entfernt",
 	"wikibase-entity-summary-wbmergeitems-from": "Datenobjekt von $3 zusammengeführt",
 	"wikibase-entity-summary-wbmergeitems-to": "Datenobjekt nach $3 zusammengeführt",
 	"wikibase-item-summary-wbcreate-new": "Ein neues Datenobjekt erstellt",
