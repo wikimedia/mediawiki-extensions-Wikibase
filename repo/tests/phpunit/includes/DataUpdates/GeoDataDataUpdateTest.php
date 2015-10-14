@@ -55,166 +55,258 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 
 		$this->assertAttributeEquals(
 			$expected,
-			'statementsByGeoProperty',
+			'coordinates',
 			$dataUpdate,
 			$message
 		);
 	}
 
-	public function testUpdateParserOutput() {
-		$statements = $this->getStatements();
-
-		$statementsByGeoProperty = array(
-			'P625' => new StatementList( array(
-				$statements['geo-property-P625']
-			) ),
-			'P10' => new StatementList( array(
-				$statements['geo-property-P10-A'],
-				$statements['geo-property-P10-B'],
-				$statements['mismatch-P10']
-			) ),
-			'P9000' => new StatementList( array(
-				$statements['geo-property-P9000']
-			) ),
-			'P20' => new StatementList( array(
-				$statements['some-value-P20']
-			) ),
-			'P17' => new StatementList( array(
-				$statements['deprecated-geo-P17']
-			) )
-		);
-
-		$dataUpdate = new GeoDataDataUpdate(
-			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
-			array( 'P17', 'P404', 'P10', 'P20', 'P9000', 'P625' ),
-			$statementsByGeoProperty
-		);
-
-		$parserOutput = new ParserOutput();
-
-		$dataUpdate->updateParserOutput( $parserOutput );
-
-		$expected = new CoordinatesOutput();
-
-		// P9000 statement
-		$coord = new Coord( 33.643664, 20.464222 );
-		$coord->primary = true;
-
-		$expected->addPrimary( $coord );
-		$expected->addSecondary( new Coord( 35.690278, 139.700556 ) );
-		$expected->addSecondary( new Coord( 40.748433, -73.985655 ) );
-		$expected->addSecondary( new Coord( 44.264464, 52.643666 ) );
-		$expected->addSecondary( new Coord( 10.0234, 11.52352 ) );
-
-		$this->assertEquals( $expected, $parserOutput->geoData );
-	}
-
 	public function processStatementProvider() {
 		$statements = $this->getStatements();
+		$coords = $this->getCoords();
 
 		return array(
 			array(
 				array(),
-				array( $statements['string-property'] ),
-				'non-geo property'
+				array( $statements['P42-string'] ),
+				'non-geo statement'
 			),
 			array(
 				array(
-					'P625' => new StatementList(
-						array( $statements['geo-property-P625'] )
-					)
+					'P625-1' => array( $coords['P625-geo'] )
 				),
-				array( $statements['geo-property-P625'] ),
-				'geo property'
+				array( $statements['P625-geo'] ),
+				'one normal geo statement'
 			),
 			array(
-				array(
-					'P17' => new StatementList(
-						array( $statements['deprecated-geo-P17'] )
-					)
-				),
-				array( $statements['deprecated-geo-P17'] ),
+				array(),
+				array( $statements['P17-geo-deprecated'] ),
 				'deprecated geo statement'
 			),
 			array(
 				array(
-					'P10' => new StatementList(
-						array(
-							$statements['geo-property-P10-A'],
-							$statements['geo-property-P10-B']
-						)
+					'P10-1' => array(
+						$coords['P10-geo-A'],
+						$coords['P10-geo-B']
 					)
 				),
-				array( $statements['geo-property-P10-A'], $statements['geo-property-P10-B'] ),
-				'multiple geo statements'
+				array(
+					$statements['P10-geo-A'],
+					$statements['P10-geo-B']
+				),
+				'multiple normal statements'
 			),
 			array(
 				array(
-					'P20' => new StatementList(
-						array( $statements['some-value-P20'] )
+					'P10-1' => array(
+						$coords['P10-geo-A']
+					),
+					'P10-2' => array(
+						$coords['P10-geo-preferred-A'],
+						$coords['P10-geo-preferred-B']
 					)
 				),
-				array( $statements['some-value-P20'] ),
-				'some value snak, still added during initial processing'
+				array(
+					$statements['P10-geo-A'],
+					$statements['P10-geo-preferred-A'],
+					$statements['P10-geo-preferred-B']
+				),
+				'multiple preferred, one normal'
+			),
+			array(
+				array(
+					'P10-1' => array(
+						$coords['P10-geo-A'],
+						$coords['P10-geo-B']
+					),
+					'P10-2' => array(
+						$coords['P10-geo-preferred-A']
+					)
+				),
+				array(
+					$statements['P10-geo-A'],
+					$statements['P10-geo-B'],
+					$statements['P10-geo-preferred-A']
+				),
+				'multiple normal, one preferred'
 			),
 			array(
 				array(),
-				array( $statements['unknown-property'] ),
+				array( $statements['P20-some-value'] ),
+				'geo property with some value snak'
+			),
+			array(
+				array(),
+				array( $statements['P404-unknown-property'] ),
 				'statement with unknown property, not in PropertyDataTypeLookup'
 			)
 		);
 	}
 
+	public function testUpdateParserOutput_withPrimaryCoordPreferredStatement() {
+		$dataUpdate = new GeoDataDataUpdate(
+			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
+			array( 'P9000', 'P625' )
+		);
+
+		foreach ( $this->getStatements() as $statement ) {
+			$dataUpdate->processStatement( $statement );
+		}
+
+		$coords = $this->getCoords();
+
+		$expected = new CoordinatesOutput();
+
+		$primaryCoordinate = $coords['P9000-geo-preferred'];
+		$primaryCoordinate->primary = true;
+
+		$expected->addPrimary( $primaryCoordinate );
+		unset( $coords['P9000-geo-preferred'] );
+
+		foreach ( $coords as $coord ) {
+			$expected->addSecondary( $coord );
+		}
+
+		$parserOutput = new ParserOutput();
+		$dataUpdate->updateParserOutput( $parserOutput );
+
+		$this->assertEquals( $expected, $parserOutput->geoData );
+	}
+
+	public function testUpdateParserOutput_withPrimaryCoordNormalStatement() {
+		$dataUpdate = new GeoDataDataUpdate(
+			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
+			array( 'P625', 'P10' )
+		);
+
+		foreach ( $this->getStatements() as $statement ) {
+			$dataUpdate->processStatement( $statement );
+		}
+
+		$expected = new CoordinatesOutput();
+		$coords = $this->getCoords();
+
+		$primaryCoordinate = $coords['P625-geo'];
+		$primaryCoordinate->primary = true;
+
+		$expected->addPrimary( $primaryCoordinate );
+		unset( $coords['P625-geo'] );
+
+		foreach ( $coords as $coord ) {
+			$expected->addSecondary( $coord );
+		}
+
+		$parserOutput = new ParserOutput();
+		$dataUpdate->updateParserOutput( $parserOutput );
+
+		$this->assertEquals( $expected, $parserOutput->geoData );
+	}
+
+	public function testUpdateParserOutput_noPrimaryCoord() {
+		$dataUpdate = new GeoDataDataUpdate(
+			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
+			array( 'P17', 'P404', 'P10', 'P20', 'P9000', 'P9001', 'P625' )
+		);
+
+		foreach ( $this->getStatements() as $statement ) {
+			$dataUpdate->processStatement( $statement );
+		}
+
+		$expected = new CoordinatesOutput();
+
+		foreach ( $this->getCoords() as $coord ) {
+			$expected->addSecondary( $coord );
+		}
+
+		$parserOutput = new ParserOutput();
+		$dataUpdate->updateParserOutput( $parserOutput );
+
+		$this->assertEquals( $expected, $parserOutput->geoData );
+	}
+
 	private function getStatements() {
 		$statements = array();
 
-		$statements['string-property'] = $this->newStatement(
+		$statements['P42-string'] = $this->newStatement(
 			new PropertyId( 'P42' ),
 			new StringValue( 'kittens!' )
 		);
 
-		$statements['geo-property-P625'] = $this->newStatement(
+		$statements['P625-geo'] = $this->newStatement(
 			new PropertyId( 'P625' ),
 			$this->newGlobeCoordinateValue( 35.690278, 139.700556 )
 		);
 
-		$statements['geo-property-P10-A'] = $this->newStatement(
+		$statements['P10-geo-A'] = $this->newStatement(
 			new PropertyId( 'P10' ),
 			$this->newGlobeCoordinateValue( 40.748433, -73.985655 )
 		);
 
-		$statements['geo-property-P10-B'] = $this->newStatement(
+		$statements['P10-geo-B'] = $this->newStatement(
 			new PropertyId( 'P10' ),
 			$this->newGlobeCoordinateValue( 44.264464, 52.643666 )
 		);
 
-		$statements['geo-property-P9000'] = $this->newStatement(
+		$statements['P10-geo-preferred-A'] = $this->newStatementWithRank(
+			new PropertyId( 'P10' ),
+			$this->newGlobeCoordinateValue( 50.02440, 41.50202 ),
+			Statement::RANK_PREFERRED
+		);
+
+		$statements['P10-geo-preferred-B'] = $this->newStatementWithRank(
+			new PropertyId( 'P10' ),
+			$this->newGlobeCoordinateValue( 70.0144, 30.0015 ),
+			Statement::RANK_PREFERRED
+		);
+
+		$statements['P9000-geo-A'] = $this->newStatement(
 			new PropertyId( 'P9000' ),
 			$this->newGlobeCoordinateValue( 33.643664, 20.464222 )
 		);
 
-		$deprecatedGeoValueStatement = $this->newStatement(
-			new PropertyId( 'P17' ),
-			$this->newGlobeCoordinateValue( 10.0234, 11.52352 )
+		$statements['P9000-geo-B'] = $this->newStatement(
+			new PropertyId( 'P9000' ),
+			$this->newGlobeCoordinateValue( 11.1234, 12.5678 )
 		);
 
-		$deprecatedGeoValueStatement->setRank( Statement::RANK_DEPRECATED );
+		$statements['P9000-geo-preferred'] = $this->newStatementWithRank(
+			new PropertyId( 'P9000' ),
+			$this->newGlobeCoordinateValue( 77.7777, 33.3333 ),
+			Statement::RANK_PREFERRED
+		);
 
-		$statements['deprecated-geo-P17'] = $deprecatedGeoValueStatement;
+		$statements['P17-geo-deprecated'] = $this->newStatementWithRank(
+			new PropertyId( 'P17' ),
+			$this->newGlobeCoordinateValue( 10.0234, 11.52352 ),
+			Statement::RANK_DEPRECATED
+		);
 
-		$statements['some-value-P20'] = $this->newStatement( new PropertyId( 'P20' ) );
+		$statements['P20-some-value'] = $this->newStatement( new PropertyId( 'P20' ) );
 
-		$statements['mismatch-P10'] = $this->newStatement(
+		$statements['P10-mismatch'] = $this->newStatement(
 			new PropertyId( 'P10' ),
 			new StringValue( 'omg! wrong value type' )
 		);
 
-		$statements['unknown-property'] = $this->newStatement(
+		$statements['P404-unknown-property'] = $this->newStatement(
 			new PropertyId( 'P404' ),
 			$this->newGlobeCoordinateValue( 40.733643, -72.352153 )
 		);
 
 		return $statements;
+	}
+
+	private function getCoords() {
+		return array(
+			'P625-geo' => new Coord( 35.690278, 139.700556 ),
+			'P10-geo-A' => new Coord( 40.748433, -73.985655 ),
+			'P10-geo-B' => new Coord( 44.264464, 52.643666 ),
+			'P10-geo-preferred-A' => new Coord( 50.02440, 41.50202 ),
+			'P10-geo-preferred-B' => new Coord( 70.0144, 30.0015 ),
+			'P9000-geo-A' => new Coord( 33.643664, 20.464222 ),
+			'P9000-geo-B' => new Coord( 11.1234, 12.5678 ),
+			'P9000-geo-preferred' => new Coord( 77.7777, 33.3333 )
+		);
 	}
 
 	private function newStatement( PropertyId $propertyId, DataValue $dataValue = null ) {
@@ -229,6 +321,17 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 		$guid = $guidGenerator->newGuid( new ItemId( 'Q64' ) );
 
 		return new Statement( $snak, null, null, $guid );
+	}
+
+	private function newStatementWithRank(
+		PropertyId $propertyId,
+		DataValue $dataValue,
+		$rank
+	 ) {
+		$rankedStatement = $this->newStatement( $propertyId, $dataValue );
+		$rankedStatement->setRank( $rank );
+
+		return $rankedStatement;
 	}
 
 	private function newGlobeCoordinateValue( $lat, $lon ) {
@@ -246,6 +349,7 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P20' ), 'globe-coordinate' );
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P625' ), 'globe-coordinate' );
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P9000' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P9001' ), 'globe-coordinate' );
 
 		return $dataTypeLookup;
 	}
