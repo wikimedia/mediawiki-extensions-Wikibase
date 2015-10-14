@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_80106d5c",
+        "filename": "repo/tests/phpunit/data/rdf/dump_empty.nt",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-14T15:29:34Z",
+      "side": 1,
+      "message": "Hm, http://wikiba.se/ontology-beta#Dump is the URI for the dump, right? But the dump is not an ontology... or if it is, what isn\u0027t?",
+      "revId": "7fa55144013104a4ddf34897e9d9a3940ea534cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
