@@ -55,7 +55,7 @@ class RecentChangeFactory {
 	 */
 	public function newRecentChange( EntityChange $change, Title $target, array $preparedAttribs = null ) {
 		if ( $preparedAttribs === null ) {
-			$preparedAttribs = $this->prepareChangeAttributes( $change );
+			$preparedAttribs = $this->prepareChangeAttributes( $change, $target );
 		}
 
 		$targetSpecificAttributes = $this->buildTargetSpecificAttributes( $change, $target );
@@ -71,11 +71,12 @@ class RecentChangeFactory {
 	 * with respect to a batch of affected target pages.
 	 *
 	 * @param EntityChange $change
+	 * @param Title $target The title of a page affected by the change
 	 *
 	 * @return array Associative array of prepared change attributes, for use with the
 	 *      $preparedAttribs of newRecentChange().
 	 */
-	public function prepareChangeAttributes( EntityChange $change ) {
+	public function prepareChangeAttributes( EntityChange $change, Title $target ) {
 		$rcinfo = $change->getMetadata();
 
 		$fields = $change->getFields();
@@ -92,7 +93,7 @@ class RecentChangeFactory {
 		//      plays in the change, e.g. when a sitelink changes from one page to another,
 		//      the link was effectively removed from one and added to the other page.
 		//      This should be handled in buildTargetSpecificAttributes().
-		$comment = $this->getEditCommentMulti( $changesForComment );
+		$comment = $this->getEditCommentMulti( $changesForComment, $target );
 
 		unset( $fields['info'] );
 		$metadata = array_merge( $fields, $rcinfo );
@@ -161,17 +162,18 @@ class RecentChangeFactory {
 	 * Returns a human readable comment representing the given changes.
 	 *
 	 * @param EntityChange[] $changes
+	 * @param Title $target The page we create an edit summary for
 	 *
 	 * @throws MWException
 	 * @return string
 	 */
-	private function getEditCommentMulti( array $changes ) {
+	private function getEditCommentMulti( array $changes, Title $target ) {
 		$comments = array();
 		$c = 0;
 
 		foreach ( $changes as $change ) {
 			$c++;
-			$comments[] = $this->getEditComment( $change );
+			$comments[] = $this->getEditComment( $change, $target );
 		}
 
 		if ( $c === 0 ) {
@@ -190,11 +192,12 @@ class RecentChangeFactory {
 	 * @since 0.4
 	 *
 	 * @param EntityChange $change the change to get a comment for
+	 * @param Title $target The page we create an edit summary for
 	 *
 	 * @throws MWException
 	 * @return string
 	 */
-	private function getEditComment( EntityChange $change ) {
+	private function getEditComment( EntityChange $change, Title $target ) {
 		$siteLinkDiff = $change instanceof ItemChange
 			? $change->getSiteLinkDiff()
 			: null;
@@ -203,7 +206,7 @@ class RecentChangeFactory {
 
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$action = $change->getAction();
-			$siteLinkComment = $this->siteLinkCommentCreator->getEditComment( $siteLinkDiff, $action );
+			$siteLinkComment = $this->siteLinkCommentCreator->getEditComment( $siteLinkDiff, $action, $target );
 			$editComment = $siteLinkComment === null ? '' : $siteLinkComment;
 		}
 

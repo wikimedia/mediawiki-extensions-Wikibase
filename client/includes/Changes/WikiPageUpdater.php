@@ -117,14 +117,13 @@ class WikiPageUpdater implements PageUpdater {
 	 * @param EntityChange $change
 	 */
 	public function injectRCRecords( array $titles, EntityChange $change ) {
-		$rcAttribs = $this->recentChangeFactory->prepareChangeAttributes( $change );
-
 		// TODO: do this via the job queue, in batches, see T107722
 		foreach ( $titles as $title ) {
 			if ( !$title->exists() ) {
 				continue;
 			}
 
+			$rcAttribs = $this->recentChangeFactory->prepareChangeAttributes( $change, $title );
 			$rc = $this->recentChangeFactory->newRecentChange( $change, $title, $rcAttribs );
 
 			if ( $this->recentChangesDuplicateDetector && $this->recentChangesDuplicateDetector->changeExists( $rc )  ) {
