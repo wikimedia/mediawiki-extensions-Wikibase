@@ -78,6 +78,11 @@ class EntityParserOutputGeneratorFactory {
 	private $preferredPageImagesProperties;
 
 	/**
+	 * @var string[] Mapping of globe uris to string names, as recognized by GeoData.
+	 */
+	private $globeUris;
+
+	/**
 	 * @param EntityViewFactory $entityViewFactory
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -88,6 +93,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param EntityIdParser $externalEntityIdParser
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
+	 * @param string[] $globeUris Mapping of globe uris to string names.
 	 */
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
@@ -100,6 +106,7 @@ class EntityParserOutputGeneratorFactory {
 		EntityIdParser $externalEntityIdParser,
 		array $preferredGeoDataProperties = array(),
 		array $preferredPageImagesProperties = array()
+		array $globeUris
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
@@ -111,6 +118,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->externalEntityIdParser = $externalEntityIdParser;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
+		$this->globeUris = $globeUris;
 	}
 
 	/**
@@ -178,7 +186,8 @@ class EntityParserOutputGeneratorFactory {
 		if ( class_exists( 'GeoData' ) ) {
 			$dataUpdates[] = new GeoDataDataUpdate(
 				$propertyDataTypeMatcher,
-				$this->preferredGeoDataProperties
+				$this->preferredGeoDataProperties,
+				$this->globeUris
 			);
 		}
 
