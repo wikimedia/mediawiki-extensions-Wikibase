@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_80fe2d34",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-14T15:19:55Z",
+      "side": 1,
+      "message": "this is repo only but can change this",
+      "parentUuid": "0ebaf39b_ce8221a9",
+      "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_09a11342",
         "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
         "patchSetId": 17
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-13T20:57:31Z",
       "side": 1,
       "message": "I\u0027m currently rethinking secondary coordinates as having a particular place in page HTML, so not sure how useful is this, especially since you don\u0027t have a text description for coordinates.",
+      "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_60a3f93f",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-14T15:19:55Z",
+      "side": 1,
+      "message": "we could provide a link to the statement (or group of statements) with the relevant property id, though not sure how we would store that with the coordinates. there is gt_name, but don\u0027t think that is the right place for this informatin.",
+      "parentUuid": "0ebaf39b_09a11342",
       "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_e0a04940",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-14T15:19:55Z",
+      "side": 1,
+      "message": "can change this",
+      "parentUuid": "0ebaf39b_4e6ab113",
+      "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_db3d028c",
         "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
         "patchSetId": 17
@@ -64,6 +118,24 @@
       "writtenOn": "2015-10-13T20:57:31Z",
       "side": 1,
       "message": "I\u0027m concerned that this would result in primary coordinate being set for entities that are not supposed to have a priimary coordinate. For example:\n\nEntity: John Foobarson\n* coordinate: x,y\n** Qualifier: instance of -\u003e location of burial (Q18857007)",
+      "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c09bc519",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-14T15:19:55Z",
+      "side": 1,
+      "message": "to start with, we are only indexing coordinates that are in the main snak value.\n\nburial locations are usually handled with \"place of burial\" property (https://www.wikidata.org/wiki/Property:P119) which refers to an item (e.g. https://www.wikidata.org/wiki/Q216344, \"Arlington National Cemetery\") for John F. Kennedy (https://www.wikidata.org/wiki/Q9696)\n\nsometimes there might be a qualifier with coordinates. If/when we include qualifier coordinates, then this is definitely something to consider.",
+      "parentUuid": "0ebaf39b_db3d028c",
       "revId": "b7d1a9b3eaabac724893303619a7e9c9588dafd7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
