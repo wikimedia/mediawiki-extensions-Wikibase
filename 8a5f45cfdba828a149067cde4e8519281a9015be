@@ -365,6 +365,24 @@
       "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_45bda715",
+        "filename": "repo/includes/DataUpdates/ReferencedEntitiesDataUpdate.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-14T12:31:40Z",
+      "side": 1,
+      "message": "I was not referring to the move in this patch but to Ie58704b, which looks like you introduced the LinkBatch related code in EntityParserOutputGenerator. I do not understand what it does and Daniel thinks it is not necessary. Can you help us understand?",
+      "parentUuid": "0ebaf39b_dd0dfd42",
+      "revId": "8a5f45cfdba828a149067cde4e8519281a9015be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
