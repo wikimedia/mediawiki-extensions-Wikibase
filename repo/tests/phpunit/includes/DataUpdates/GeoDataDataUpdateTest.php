@@ -45,8 +45,7 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 	 * @dataProvider processStatementProvider
 	 */
 	public function testProcessStatement( array $expected, array $statements, $message ) {
-		$dataUpdate = new GeoDataDataUpdate(
-			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
+		$dataUpdate = $this->newGeoDataDataUpdate(
 			array( 'P625', 'P9000' )
 		);
 
@@ -140,13 +139,17 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 				array(),
 				array( $statements['P404-unknown-property'] ),
 				'statement with unknown property, not in PropertyDataTypeLookup'
+			),
+			array(
+				array(),
+				array( $statements['P9002-unknown-globe'] ),
+				'statement with unknown globe'
 			)
 		);
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordPreferredStatement() {
-		$dataUpdate = new GeoDataDataUpdate(
-			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
+		$dataUpdate = $this->newGeoDataDataUpdate(
 			array( 'P9000', 'P625' )
 		);
 
@@ -175,8 +178,7 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordNormalStatement() {
-		$dataUpdate = new GeoDataDataUpdate(
-			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
+		$dataUpdate = $this->newGeoDataDataUpdate(
 			array( 'P625', 'P10' )
 		);
 
@@ -204,8 +206,7 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateParserOutput_noPrimaryCoord() {
-		$dataUpdate = new GeoDataDataUpdate(
-			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
+		$dataUpdate = $this->newGeoDataDataUpdate(
 			array( 'P17', 'P404', 'P10', 'P20', 'P9000', 'P9001', 'P625' )
 		);
 
@@ -225,6 +226,17 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $parserOutput->geoData );
 	}
 
+	private function newGeoDataDataUpdate( array $preferredProperties ) {
+		return new GeoDataDataUpdate(
+			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
+			$preferredProperties,
+			array(
+				'http://www.wikidata.org/entity/Q2' => 'earth',
+				'http://www.wikidata.org/entity/Q111' => 'mars'
+			)
+		);
+	}
+
 	private function getStatements() {
 		$statements = array();
 
@@ -235,7 +247,7 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 
 		$statements['P625-geo'] = $this->newStatement(
 			new PropertyId( 'P625' ),
-			$this->newGlobeCoordinateValue( 35.690278, 139.700556 )
+			$this->newGlobeCoordinateValue( 19.7, 306.8, 'Q111' )
 		);
 
 		$statements['P10-geo-A'] = $this->newStatement(
@@ -300,12 +312,17 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 			$this->newGlobeCoordinateValue( 40.733643, -72.352153 )
 		);
 
+		$statements['P9002-unknown-globe'] = $this->newStatement(
+			new PropertyId( 'P9002' ),
+			$this->newGlobeCoordinateValue( 9.017, 14.0987, 'Q147' )
+		);
+
 		return $statements;
 	}
 
 	private function getCoords() {
 		return array(
-			'P625-geo' => new Coord( 35.690278, 139.700556 ),
+			'P625-geo' => new Coord( 19.7, 306.8, 'mars' ),
 			'P10-geo-A' => new Coord( 40.748433, -73.985655 ),
 			'P10-geo-B' => new Coord( 44.264464, 52.643666 ),
 			'P10-geo-preferred-A' => new Coord( 50.02440, 41.50202 ),
@@ -352,10 +369,13 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 		return $statement;
 	}
 
-	private function newGlobeCoordinateValue( $lat, $lon ) {
+	private function newGlobeCoordinateValue( $lat, $lon, $globeId = 'Q2' ) {
 		$latLongValue = new LatLongValue( $lat, $lon );
 
-		return new GlobeCoordinateValue( $latLongValue, 0.001 );
+		// default globe is 'Q2' (earth)
+		$globe = "http://www.wikidata.org/entity/$globeId";
+
+		return new GlobeCoordinateValue( $latLongValue, 0.001, $globe );
 	}
 
 	private function getPropertyDataTypeLookup() {
@@ -368,6 +388,7 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P625' ), 'globe-coordinate' );
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P9000' ), 'globe-coordinate' );
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P9001' ), 'globe-coordinate' );
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P9002' ), 'globe-coordinate' );
 
 		return $dataTypeLookup;
 	}

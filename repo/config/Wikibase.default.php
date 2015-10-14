@@ -149,6 +149,38 @@ return call_user_func( function() {
 		// for the GeoData extension.
 		// e.g. array( 'P625', 'P1259' )
 		'preferredGeoDataProperties' => array(),
+
+		// Mapping of globe uris to names, as recognized and used by GeoData extension
+		// when indexing and querying for coordinates.
+		'globeUris' => array(
+			'http://www.wikidata.org/entity/Q2' => 'earth',
+			'http://www.wikidata.org/entity/Q308' => 'mercury',
+			'http://www.wikidata.org/entity/Q313' => 'venus',
+			'http://www.wikidata.org/entity/Q405' => 'moon',
+			'http://www.wikidata.org/entity/Q111' => 'mars',
+			'http://www.wikidata.org/entity/Q7547' => 'phobos',
+			'http://www.wikidata.org/entity/Q7548' => 'deimos',
+			'http://www.wikidata.org/entity/Q3169' => 'ganymede',
+			'http://www.wikidata.org/entity/Q3134' => 'callisto',
+			'http://www.wikidata.org/entity/Q3123' => 'io',
+			'http://www.wikidata.org/entity/Q3143' => 'europa',
+			'http://www.wikidata.org/entity/Q15034' => 'mimas',
+			'http://www.wikidata.org/entity/Q3303' => 'enceladus',
+			'http://www.wikidata.org/entity/Q15047' => 'tethys',
+			'http://www.wikidata.org/entity/Q15040' => 'dione',
+			'http://www.wikidata.org/entity/Q15050' => 'rhea',
+			'http://www.wikidata.org/entity/Q2565' => 'titan',
+			'http://www.wikidata.org/entity/Q15037' => 'hyperion',
+			'http://www.wikidata.org/entity/Q17958' => 'iapetus',
+			'http://www.wikidata.org/entity/Q17975' => 'phoebe',
+			'http://www.wikidata.org/entity/Q3352' => 'miranda',
+			'http://www.wikidata.org/entity/Q3343' => 'ariel',
+			'http://www.wikidata.org/entity/Q3338' => 'umbriel',
+			'http://www.wikidata.org/entity/Q3322' => 'titania',
+			'http://www.wikidata.org/entity/Q3332' => 'oberon',
+			'http://www.wikidata.org/entity/Q3359' => 'triton',
+			'http://www.wikidata.org/entity/Q339' => 'pluto'
+		),
 	);
 
 	return $defaults;
