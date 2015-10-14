@@ -39,23 +39,21 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 	/**
 	 * @var string[]
 	 */
-	private $preferredProperties;
+	private $preferredPropertiesIds;
 
 	/**
-	 * @var StatementList[]
+	 * @var Coord[]
 	 */
-	private $statementsByGeoProperty;
+	private $coordinates = array();
 
 	/**
 	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher
-	 * @param string[] $preferredProperties
-	 * @param StatementList[] $statementsByGeoProperty Statements by globe-coordinate property
+	 * @param string[] $preferredPropertiesIds
 	 * @throws RuntimeException
 	 */
 	public function __construct(
 		PropertyDataTypeMatcher $propertyDataTypeMatcher,
-		array $preferredProperties,
-		array $statementsByGeoProperty = array()
+		array $preferredPropertiesIds
 	) {
 		if ( !class_exists( 'GeoData' ) ) {
 			throw new RuntimeException( 'GeoDataDataUpdate requires the GeoData extension '
@@ -63,8 +61,7 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 		}
 
 		$this->propertyDataTypeMatcher = $propertyDataTypeMatcher;
-		$this->preferredProperties = $preferredProperties;
-		$this->statementsByGeoProperty = $statementsByGeoProperty;
+		$this->preferredPropertiesIds = $preferredPropertiesIds;
 	}
 
 	/**
@@ -79,13 +76,16 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 			$propertyId,
 			'globe-coordinate'
 		) ) {
-			$serializedId = $propertyId->getSerialization();
+			$rank = $statement->getRank();
 
-			if ( !array_key_exists( $serializedId, $this->statementsByGeoProperty ) ) {
-				$this->statementsByGeoProperty[$serializedId] = new StatementList();
+			if ( $rank !== Statement::RANK_DEPRECATED ) {
+				$coordinate = $this->extractMainSnakCoord( $statement );
+
+				if ( $coordinate instanceof Coord ) {
+					$key = $this->makeCoordinateKey( $propertyId->getSerialization(), $rank );
+					$this->coordinates[$key][] = $coordinate;
+				}
 			}
-
-			$this->statementsByGeoProperty[$serializedId]->addStatement( $statement );
 		}
 	}
 
@@ -93,69 +93,47 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		if ( $this->statementsByGeoProperty === array() ) {
-			return;
+		$coordinatesOutput = isset( $parserOutput->geoData ) ?: new CoordinatesOutput();
+
+		if ( $coordinatesOutput->getPrimary() === false ) {
+			$primaryCoordKey = $this->findPrimaryCoordinateKey();
+
+			if ( $primaryCoordKey !== null ) {
+				$this->addPrimaryCoordinate(
+					$coordinatesOutput,
+					$primaryCoordKey
+				);
+			}
 		}
 
-		$coordinatesOutput = new CoordinatesOutput();
-
-		$secondaryCoordinates = $this->extractMainSnakCoords();
-		$primaryCoordinate = $this->findPrimaryCoordinate( $secondaryCoordinates );
-
-		if ( $primaryCoordinate !== null ) {
-			$primaryCoordinate->primary = true;
-			$coordinatesOutput->addPrimary( $primaryCoordinate );
-		}
-
-		foreach ( $secondaryCoordinates as $coordinate ) {
-			$coordinatesOutput->addSecondary( $coordinate );
-		}
+		$this->addSecondaryCoordinates( $coordinatesOutput, $primaryCoordKey );
 
 		$parserOutput->geoData = $coordinatesOutput;
 	}
 
 	/**
-	 * @param Coord[] &$secondaryCoordinates Primary coordinate gets removed.
-	 *
-	 * @return Coord|null
+	 * @return string|null Array key for Coord selected as primary.
 	 */
-	private function findPrimaryCoordinate( array &$secondaryCoordinates ) {
+	private function findPrimaryCoordinateKey() {
+		foreach ( $this->preferredPropertiesIds as $id ) {
+			$key = $this->makeCoordinateKey( $id, Statement::RANK_PREFERRED );
+			$preferredCount = $this->getCoordinatesGroupCount( $key );
 
-		foreach ( $this->preferredProperties as $propertyId ) {
-			$primaryCoordinate = null;
+			if ( $preferredCount === 1 ) {
+				return $key;
+			} elseif ( $preferredCount === 0 ) {
+				$key = $this->makeCoordinateKey( $id, Statement::RANK_NORMAL );
+				$normalCount = $this->getCoordinatesGroupCount( $key );
 
-			if ( array_key_exists( $propertyId, $this->statementsByGeoProperty ) ) {
-				$bestStatements = $this->statementsByGeoProperty[$propertyId]->getBestStatements();
-
-				// maybe the only statements have deprecated rank
-				if ( $bestStatements->isEmpty() ) {
-					continue;
+				if ( $normalCount === 1 ) {
+					return $key;
+				} elseif ( $normalCount > 1 ) {
+					// multiple normal coordinates
+					return null;
 				}
-
-				foreach ( $bestStatements as $bestStatement ) {
-					if ( $primaryCoordinate instanceof Coord ) {
-						// already set and there are multiple best statements, so
-						// can't just (somewhat) arbitrarily pick one. Instead, don't
-						// mark any as primary and consider them all as secondary.
-						$primaryCoordinate = null;
-						break;
-					}
-
-					try {
-						$primaryCoordinate = $this->extractMainSnakCoord( $bestStatement );
-						$guid = $bestStatement->getGuid();
-					} catch ( UnexpectedValueException $ex ) {
-						// could be a mismatching snak value, and then should just skip it.
-						continue;
-					}
-				}
-			}
-
-			if ( $primaryCoordinate !== null ) {
-				// primary coordinate is only primary and not secondary
-				unset( $secondaryCoordinates[$guid] );
-
-				return $primaryCoordinate;
+			} else {
+				// multiple preferred coordinates
+				return null;
 			}
 		}
 
@@ -163,28 +141,57 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
-	 * @return Coord[]
+	 * @param string $key
+	 *
+	 * @return int
 	 */
-	private function extractMainSnakCoords() {
-		$coordinates = array();
+	private function getCoordinatesGroupCount( $key ) {
+		if ( isset( $this->coordinates[$key] ) ) {
+			return count( $this->coordinates[$key] );
+		}
 
-		foreach ( $this->statementsByGeoProperty as $propertyId => $statements ) {
-			foreach ( $statements as $statement ) {
-				try {
-					$coord = $this->extractMainSnakCoord( $statement );
+		return 0;
+	}
 
-					if ( $coord instanceof Coord ) {
-						$guid = $statement->getGuid();
-						$coordinates[$guid] = $coord;
-					}
-				} catch ( UnexpectedValueException $ex ) {
-					// can happen if there is a mismatch between property and value type.
-					continue;
+	/**
+	 * @param CoordinatesOutput $coordinatesOutput
+	 * @param string $key
+	 */
+	private function addPrimaryCoordinate(
+		CoordinatesOutput $coordinatesOutput,
+		$primaryCoordKey
+	) {
+		$primaryCoordinate = $this->coordinates[$primaryCoordKey][0];
+		$primaryCoordinate->primary = true;
+
+		$coordinatesOutput->addPrimary( $primaryCoordinate );
+	}
+
+	/**
+	 * @param CoordinatesOutput $coordinatesOutput
+	 * @param string|null $primaryCoordKey
+	 */
+	private function addSecondaryCoordinates(
+		CoordinatesOutput $coordinatesOutput,
+		$primaryCoordKey
+	) {
+		foreach ( $this->coordinates as $key => $coords ) {
+			if ( $key !== $primaryCoordKey ) {
+				foreach ( $coords as $coord ) {
+					$coordinatesOutput->addSecondary( $coord );
 				}
 			}
 		}
+	}
 
-		return $coordinates;
+	/**
+	 * @param string $propertyIdString
+	 * @param int $rank
+	 *
+	 * @return string
+	 */
+	private function makeCoordinateKey( $propertyIdString, $rank ) {
+		return $propertyIdString . '|' . $rank;
 	}
 
 	/**
@@ -199,22 +206,11 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 			return null;
 		}
 
-		return $this->extractCoordFromSnak( $snak );
-	}
-
-	/**
-	 * @param Snak $snak
-	 *
-	 * @return Coord
-	 * @throws UnexpectedValueException
-	 */
-	private function extractCoordFromSnak( Snak $snak ) {
 		$dataValue = $snak->getDataValue();
 
 		if ( !$dataValue instanceof GlobeCoordinateValue ) {
-			throw new UnexpectedValueException(
-				'$dataValue expected to be a GlobeCoordinateValue'
-			);
+			// Property data type - value mismatch
+			return null;
 		}
 
 		return new Coord( $dataValue->getLatitude(), $dataValue->getLongitude() );
