@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_467cca1b",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-14T20:51:14Z",
+      "side": 1,
+      "message": "Still? :(",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e67a9e1e",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-14T20:51:14Z",
+      "side": 1,
+      "message": "Unused variable.",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
