@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\RecentChanges;
 
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpChange;
 use Diff\MapDiffer;
 use Language;
 use Title;
@@ -87,6 +88,11 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getDBKey' )
 			->will( $this->returnValue( str_replace( ' ', '_', $text ) ) );
 
+		// XXX: This assumes NS_MAIN. Getting namespace names right nicely is hard, they depend on the lang.
+		$title->expects( $this->any() )
+			->method( 'getFullText' )
+			->will( $this->returnValue( $text ) );
+
 		$title->expects( $this->any() )
 			->method( 'getArticleID' )
 			->will( $this->returnValue( $pageId ) );
@@ -120,6 +126,12 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$emptyDiff = new ItemDiff();
 		$change = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $emptyDiff, $fields );
 		$change->setMetadata( $metadata );
+
+		$diffOp = new Diff( array( 'testwiki' => new DiffOpChange( 'RecentChangeFactoryTest', 'Bar' ) ) );
+
+		$siteLinkDiff = new ItemDiff( array( 'links' => $diffOp ) );
+		$siteLinkChange = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $siteLinkDiff, $fields );
+		$siteLinkChange->setMetadata( $metadata );
 
 		$fields = $change->getFields();
 		unset( $fields['info'] );
@@ -171,13 +183,19 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				),
 				'comment-html' => 'Override Comment HTML',
 			) ),
-			'rc_comment' => 'Override Comment',
+			'rc_comment' => 'prepared Comment',
 			'rc_timestamp' => '20150606050505',
 			'rc_log_action' => '',
 			'rc_log_type' => null,
 			'rc_source' => 'wb',
 			'rc_deleted' => false,
 		);
+
+		$siteLinkChangeExpected_currentPage = array_merge( $preparedAttr, $targetAttr );
+		$siteLinkChangeExpected_currentPage['rc_comment'] = '(wikibase-comment-unlink)';
+
+		$siteLinkChangeExpected_otherPage = array_merge( $preparedAttr, $targetAttr );
+		$siteLinkChangeExpected_otherPage['rc_title'] = 'RecentChangeFactoryTest-OtherPage';
 
 		return array(
 			'no prepared' => array(
@@ -194,8 +212,20 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				$preparedAttr
 			),
 
-			//TODO:
-			//'sitelink change' => array(),
+			'sitelink change, affects current page' => array(
+				$siteLinkChangeExpected_currentPage,
+				$siteLinkChange,
+				$target,
+				$preparedAttr
+			),
+
+			'sitelink change, does not affect current page' => array(
+				$siteLinkChangeExpected_otherPage,
+				$siteLinkChange,
+				$this->newTitle( NS_MAIN, 'RecentChangeFactoryTest-OtherPage', 7, 77, 210 ),
+				$preparedAttr
+			),
+
 			//'composite change' => array(),
 		);
 	}
