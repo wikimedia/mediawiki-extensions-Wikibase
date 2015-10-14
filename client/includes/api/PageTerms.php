@@ -146,8 +146,8 @@ class PageTerms extends ApiQueryBase {
 	 */
 	private function getEntityToPageMap( array $entityIds ) {
 		$entityIdsStrings = array_map(
-			function ( EntityId $entityId ) {
-				return $entityId->getSerialization();
+			function( EntityId $id ) {
+				return $id->getSerialization();
 			},
 			$entityIds
 		);

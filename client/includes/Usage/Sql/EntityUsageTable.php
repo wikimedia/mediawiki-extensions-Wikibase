@@ -270,8 +270,8 @@ class EntityUsageTable {
 	 * @return string[]
 	 */
 	private function getEntityIdStrings( array $entityIds ) {
-		return array_map( function( EntityId $entityId ) {
-			return $entityId->getSerialization();
+		return array_map( function( EntityId $id ) {
+			return $id->getSerialization();
 		}, $entityIds );
 	}
 

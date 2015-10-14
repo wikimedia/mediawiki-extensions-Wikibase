@@ -57,21 +57,21 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnCallback( function ( EntityId $entityId, $language ) {
+			->will( $this->returnCallback( function ( EntityId $id, $language ) {
 				switch ( $language ) {
 					case 'de':
-						return 'Name für ' . $entityId->getSerialization();
+						return 'Name für ' . $id->getSerialization();
 					default:
-						return 'Label for ' . $entityId->getSerialization();
+						return 'Label for ' . $id->getSerialization();
 				}
 			} ) );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
-			->will( $this->returnCallback( function ( EntityId $entityId ) {
+			->will( $this->returnCallback( function( EntityId $id ) {
 				return array(
-					'de' => 'Name für ' . $entityId->getSerialization(),
-					'en' => 'Label for ' . $entityId->getSerialization(),
+					'de' => 'Name für ' . $id->getSerialization(),
+					'en' => 'Label for ' . $id->getSerialization(),
 				);
 			} ) );
 

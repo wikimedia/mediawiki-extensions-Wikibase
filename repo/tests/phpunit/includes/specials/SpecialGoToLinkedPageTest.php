@@ -74,8 +74,8 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityRedirectLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getRedirectForEntityId' )
-			->will( $this->returnCallback( function( ItemId $itemId ) {
-				if ( $itemId->getSerialization() === 'Q24' ) {
+			->will( $this->returnCallback( function( ItemId $id ) {
+				if ( $id->getSerialization() === 'Q24' ) {
 					return new ItemId( 'Q23' );
 				} else {
 					return null;

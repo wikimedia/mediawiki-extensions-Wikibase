@@ -39,8 +39,8 @@ class ScribuntoLuaWikibaseInProcessEntityCacheTest extends Scribunto_LuaWikibase
 		$entityLookup->expects( $phpunit->exactly( 20 ) )
 			->method( 'getEntity' )
 			->will( $phpunit->returnCallback(
-				function( ItemId $itemId ) {
-					return new Item( $itemId );
+				function( ItemId $id ) {
+					return new Item( $id );
 				}
 			) );
 

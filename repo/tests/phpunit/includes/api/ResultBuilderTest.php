@@ -66,8 +66,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( PropertyId $propertyId ) {
-				return 'DtIdFor_' . $propertyId->getSerialization();
+			->will( $this->returnCallback( function( PropertyId $id ) {
+				return 'DtIdFor_' . $id->getSerialization();
 			} ) );
 
 		$serializerFactory = new SerializerFactory(

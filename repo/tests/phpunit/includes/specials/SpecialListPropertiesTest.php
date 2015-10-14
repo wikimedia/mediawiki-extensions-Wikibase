@@ -80,8 +80,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			->method( 'prefetchTerms' );
 		$lookup->expects( $this->any() )
 			->method( 'getLabels' )
-			->will( $this->returnCallback( function( PropertyId $propertyId ) {
-				return array( 'en' => 'Property with label ' . $propertyId->getSerialization() );
+			->will( $this->returnCallback( function( PropertyId $id ) {
+				return array( 'en' => 'Property with label ' . $id->getSerialization() );
 			} ) );
 		return $lookup;
 	}

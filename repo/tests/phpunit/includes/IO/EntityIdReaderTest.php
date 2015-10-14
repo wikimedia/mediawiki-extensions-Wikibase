@@ -34,11 +34,9 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	protected function getIdStrings( array $entityIds ) {
-		$ids = array_map( function ( EntityId $entityId ) {
-			return $entityId->getSerialization();
+		return array_map( function( EntityId $id ) {
+			return $id->getSerialization();
 		}, $entityIds );
-
-		return $ids;
 	}
 
 	protected function assertEqualIds( array $expected,array $actual, $msg = null ) {

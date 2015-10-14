@@ -157,11 +157,11 @@ class DumpJsonTest extends MediaWikiTestCase {
 		);
 		$mockDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnCallback( function( PropertyId $propertyId ) {
-				if ( $propertyId->getSerialization() === 'P999' ) {
-					throw new PropertyDataTypeLookupException( $propertyId );
+			->will( $this->returnCallback( function( PropertyId $id ) {
+				if ( $id->getSerialization() === 'P999' ) {
+					throw new PropertyDataTypeLookupException( $id );
 				}
-				return 'DtIdFor_' . $propertyId->getSerialization();
+				return 'DtIdFor_' . $id->getSerialization();
 			} ) );
 		return $mockDataTypeLookup;
 	}

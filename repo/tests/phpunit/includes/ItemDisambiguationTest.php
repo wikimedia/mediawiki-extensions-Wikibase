@@ -33,8 +33,8 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$entityIdFormatter->expects( $this->any() )
 			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( ItemId $itemId ) {
-				return Title::makeTitle( NS_MAIN, $itemId->getSerialization() );
+			->will( $this->returnCallback( function( ItemId $id ) {
+				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
 			} ) );
 		return $entityIdFormatter;
 	}
