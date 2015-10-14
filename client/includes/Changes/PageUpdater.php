@@ -50,8 +50,8 @@ interface PageUpdater {
 	 * @since 0.5
 	 *
 	 * @param Title[] $titles
-	 * @param array $attribs
+	 * @param array $attribsByTitle Page id -> array of rc attribs
 	 */
-	public function injectRCRecords( array $titles, array $attribs );
+	public function injectRCRecords( array $titles, array $attribsByTitle );
 
 }

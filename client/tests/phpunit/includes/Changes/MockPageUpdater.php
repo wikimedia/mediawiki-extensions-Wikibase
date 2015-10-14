@@ -57,11 +57,17 @@ class MockPageUpdater implements PageUpdater {
 
 	/**
 	 * @param Title[] $titles
-	 * @param array $attribs
+	 * @param array $attribsByTitle Page id -> array of rc attribs
 	 */
-	public function injectRCRecords( array $titles, array $attribs ) {
+	public function injectRCRecords( array $titles, array $attribsByTitle ) {
 		foreach ( $titles as $title ) {
 			$key = $title->getPrefixedDBkey();
+
+			$attribs = $attribsByTitle[ $title->getArticleID() ];
+			if ( $attribs === false ) {
+				continue;
+			}
+
 			$this->updates['injectRCRecord'][ $key ] = $attribs;
 		}
 	}

@@ -276,14 +276,17 @@ class ChangeHandler {
 				break;
 
 			case self::RC_ENTRY_ACTION:
-				$rcAttribs = $this->getRCAttributes( $change );
+				if ( !$this->injectRecentChanges ) {
+					break;
+				}
+				$rcAttribsByPage = $this->getRCAttributes( $change, $titlesToUpdate );
 
-				if ( $rcAttribs !== false && $this->injectRecentChanges ) {
+				if ( $rcAttribsByPage !== array() ) {
 					//FIXME: The same change may be reported to several target pages;
 					//       The comment we generate should be adapted to the role that page
 					//       plays in the change, e.g. when a sitelink changes from one page to another,
 					//       the link was effectively removed from one and added to the other page.
-					$this->updater->injectRCRecords( $titlesToUpdate, $rcAttribs );
+					$this->updater->injectRCRecords( $titlesToUpdate, $rcAttribsByPage );
 				}
 
 				break;
@@ -335,16 +338,33 @@ class ChangeHandler {
 	}
 
 	/**
+	 * @param EntityChange $change The Change that caused the update
+	 * @param Title[] $titles
+	 *
+	 * @return array[] Page id -> array of RC attributes
+	 */
+	private function getRCAttributes( EntityChange $change, array $titles ) {
+		$res = array();
+
+		foreach ( $titles as $title ) {
+			$res[ $title->getArticleID() ] = $this->getRCAttributesForTitle( $change, $title );
+		}
+
+		return $res;
+	}
+
+	/**
 	 * Constructs RC attributes for the given change
 	 *
 	 * @see ExternalRecentChange::buildAttributes
 	 *
 	 * @param EntityChange $change The Change that caused the update
+	 * @param Title $title The page we get attribs for
 	 *
 	 * @return array[]|bool an array of RC attributes,
 	 *         as understood by ExternalRecentChange::buildAttributes.
 	 */
-	private function getRCAttributes( EntityChange $change ) {
+	private function getRCAttributesForTitle( EntityChange $change, Title $title ) {
 		$rcinfo = $change->getMetadata();
 
 		//@todo: add getFields() to the interface, or provide getters!
@@ -364,7 +384,7 @@ class ChangeHandler {
 			$changeParams['site_id'] = $this->repoId;
 		}
 
-		$comment = $this->getEditCommentMulti( $changesForComment );
+		$comment = $this->getEditCommentMulti( $changesForComment, $title );
 
 		// Use keys known to ExternalRecentChange::buildAttributes.
 		// FIXME: Simplify the way this is passed around.
@@ -380,17 +400,18 @@ class ChangeHandler {
 	 * Returns a human readable comment representing the given changes.
 	 *
 	 * @param EntityChange[] $changes
+	 * @param Title $title The page we create an edit summary for
 	 *
 	 * @throws MWException
 	 * @return string
 	 */
-	private function getEditCommentMulti( array $changes ) {
+	private function getEditCommentMulti( array $changes, Title $title ) {
 		$comments = array();
 		$c = 0;
 
 		foreach ( $changes as $change ) {
 			$c++;
-			$comments[] = $this->getEditComment( $change );
+			$comments[] = $this->getEditComment( $change , $title );
 		}
 
 		if ( $c === 0 ) {
@@ -409,11 +430,12 @@ class ChangeHandler {
 	 * @since 0.4
 	 *
 	 * @param EntityChange $change the change to get a comment for
+	 * @param Title $title The page we create an edit summary for
 	 *
 	 * @throws MWException
 	 * @return string
 	 */
-	public function getEditComment( EntityChange $change ) {
+	public function getEditComment( EntityChange $change, Title $title ) {
 		$siteLinkDiff = $change instanceof ItemChange
 			? $change->getSiteLinkDiff()
 			: null;
@@ -423,7 +445,7 @@ class ChangeHandler {
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$action = $change->getAction();
 			$commentCreator = new SiteLinkCommentCreator( $this->language, $this->siteStore, $this->localSiteId );
-			$siteLinkComment = $commentCreator->getEditComment( $siteLinkDiff, $action );
+			$siteLinkComment = $commentCreator->getEditComment( $siteLinkDiff, $action, $title );
 			$editComment = $siteLinkComment === null ? '' : $siteLinkComment;
 		}
 
