@@ -114,7 +114,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'parent_id' => 3,
 			'bot' => false,
 			'user_text' => 'RecentChangeFactoryTestUser',
-			'comment' => 'Actual Comment'
+			'comment' => 'Metadata comment'
 		);
 
 		$emptyDiff = new ItemDiff();
@@ -135,6 +135,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'rc_this_oldid' => $target->getLatestRevID(),
 			'rc_last_oldid' => $target->getLatestRevID(),
 			'rc_cur_id' => $target->getArticleID(),
+			'rc_comment' => $metadata['comment'],
 		);
 
 		$changeAttr = array(
@@ -148,7 +149,6 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'wikibase-repo-change' => $metadata,
 				//'comment-html' => 'Generated Comment HTML', // later
 			) ),
-			'rc_comment' => $metadata['comment'],
 			'rc_timestamp' => $metadata['time'],
 			'rc_log_action' => '',
 			'rc_source' => 'wb',
@@ -170,7 +170,6 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				),
 				'comment-html' => 'Override Comment HTML',
 			) ),
-			'rc_comment' => 'Override Comment',
 			'rc_timestamp' => '20150606050505',
 			'rc_log_action' => '',
 			'rc_source' => 'wb',

@@ -81,19 +81,6 @@ class RecentChangeFactory {
 		$fields = $change->getFields();
 		$fields['entity_type'] = $change->getEntityId()->getEntityType();
 
-		if ( isset( $fields['info']['changes'] ) ) {
-			$changesForComment = $fields['info']['changes'];
-		} else {
-			$changesForComment = array( $change );
-		}
-
-		//TODO: The same change may be reported to several target pages;
-		//      The comment we generate should be adapted to the role that page
-		//      plays in the change, e.g. when a sitelink changes from one page to another,
-		//      the link was effectively removed from one and added to the other page.
-		//      This should be handled in buildTargetSpecificAttributes().
-		$comment = $this->getEditCommentMulti( $changesForComment );
-
 		unset( $fields['info'] );
 		$metadata = array_merge( $fields, $rcinfo );
 
@@ -125,7 +112,6 @@ class RecentChangeFactory {
 			'rc_bot' => $isBot,
 			'rc_patrolled' => true,
 			'rc_params' => serialize( $params ),
-			'rc_comment' => $comment,
 			'rc_timestamp' => $time,
 			'rc_log_action' => '',
 			'rc_source' => 'wb',
@@ -142,6 +128,16 @@ class RecentChangeFactory {
 	 * @return array
 	 */
 	private function buildTargetSpecificAttributes( EntityChange $change, Title $target ) {
+		$fields = $change->getFields();
+
+		if ( isset( $fields['info']['changes'] ) ) {
+			$changesForComment = $fields['info']['changes'];
+		} else {
+			$changesForComment = array( $change );
+		}
+
+		$comment = $this->getEditCommentMulti( $changesForComment, $target );
+
 		$attribs = array(
 			'rc_namespace' => $target->getNamespace(),
 			'rc_title' => $target->getDBkey(),
@@ -150,6 +146,7 @@ class RecentChangeFactory {
 			'rc_this_oldid' => $target->getLatestRevID(),
 			'rc_last_oldid' => $target->getLatestRevID(),
 			'rc_cur_id' => $target->getArticleID(),
+			'rc_comment' => $comment,
 		);
 
 		//TODO: override for "special" changes (e.g. link/unlink, by edit or create/restore/delete)
@@ -161,17 +158,18 @@ class RecentChangeFactory {
 	 * Returns a human readable comment representing the given changes.
 	 *
 	 * @param EntityChange[] $changes
+	 * @param Title $target The page we create an edit summary for
 	 *
 	 * @throws MWException
 	 * @return string
 	 */
-	private function getEditCommentMulti( array $changes ) {
+	private function getEditCommentMulti( array $changes, Title $target ) {
 		$comments = array();
 		$c = 0;
 
 		foreach ( $changes as $change ) {
 			$c++;
-			$comments[] = $this->getEditComment( $change );
+			$comments[] = $this->getEditComment( $change, $target );
 		}
 
 		if ( $c === 0 ) {
@@ -190,11 +188,12 @@ class RecentChangeFactory {
 	 * @since 0.4
 	 *
 	 * @param EntityChange $change the change to get a comment for
+	 * @param Title $target The page we create an edit summary for
 	 *
 	 * @throws MWException
 	 * @return string
 	 */
-	private function getEditComment( EntityChange $change ) {
+	private function getEditComment( EntityChange $change, Title $target ) {
 		$siteLinkDiff = $change instanceof ItemChange
 			? $change->getSiteLinkDiff()
 			: null;
@@ -203,7 +202,7 @@ class RecentChangeFactory {
 
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$action = $change->getAction();
-			$siteLinkComment = $this->siteLinkCommentCreator->getEditComment( $siteLinkDiff, $action );
+			$siteLinkComment = $this->siteLinkCommentCreator->getEditComment( $siteLinkDiff, $action, $target );
 			$editComment = $siteLinkComment === null ? '' : $siteLinkComment;
 		}
 
