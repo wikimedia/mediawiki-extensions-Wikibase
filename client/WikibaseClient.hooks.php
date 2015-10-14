@@ -31,7 +31,6 @@ use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\AutoCommentFormatter;
 
 /**

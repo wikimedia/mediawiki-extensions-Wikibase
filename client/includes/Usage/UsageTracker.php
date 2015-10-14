@@ -2,8 +2,6 @@
 
 namespace Wikibase\Client\Usage;
 
-use Wikibase\DataModel\Entity\EntityId;
-
 /**
  * Service interface for tracking the usage of entities across pages on the local wiki.
  *

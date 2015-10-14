@@ -13,7 +13,6 @@ use MWException;
 use OutputPage;
 use RequestContext;
 use RuntimeException;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;

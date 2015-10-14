@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
-use ValueFormatters\StringFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

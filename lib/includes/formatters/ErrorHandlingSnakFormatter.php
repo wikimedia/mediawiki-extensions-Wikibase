@@ -2,16 +2,12 @@
 
 namespace Wikibase\Lib\Formatters;
 
-use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
 use Html;
 use InvalidArgumentException;
-use Language;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;

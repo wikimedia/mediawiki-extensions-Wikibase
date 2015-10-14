@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use MWException;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
