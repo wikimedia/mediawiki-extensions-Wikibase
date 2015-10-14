@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\RecentChanges;
 
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpRemove;
 use Diff\MapDiffer;
 use Language;
 use Title;
@@ -121,6 +122,12 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $emptyDiff, $fields );
 		$change->setMetadata( $metadata );
 
+		$diffOp = new Diff( array( 'foowiki' => new DiffOpRemove( 'bar' ) ) );
+
+		$siteLinkDiff = new ItemDiff( array( 'links' => $diffOp ) );
+		$siteLinkChange = $this->newEntityChange( 'change', new ItemId( 'Q17' ), $siteLinkDiff, $fields );
+		$siteLinkChange->setMetadata( $metadata );
+
 		$fields = $change->getFields();
 		unset( $fields['info'] );
 
@@ -171,13 +178,16 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				),
 				'comment-html' => 'Override Comment HTML',
 			) ),
-			'rc_comment' => 'Override Comment',
+			'rc_comment' => 'prepared Comment',
 			'rc_timestamp' => '20150606050505',
 			'rc_log_action' => '',
 			'rc_log_type' => null,
 			'rc_source' => 'wb',
 			'rc_deleted' => false,
 		);
+
+		$siteLinkChangeExpected = array_merge( $preparedAttr, $targetAttr );
+		$siteLinkChangeExpected['rc_comment'] = '(wikibase-comment-sitelink-remove: [[:foowiki:bar]])';
 
 		return array(
 			'no prepared' => array(
@@ -194,8 +204,13 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				$preparedAttr
 			),
 
-			//TODO:
-			//'sitelink change' => array(),
+			'sitelink change' => array(
+				$siteLinkChangeExpected,
+				$siteLinkChange,
+				$target,
+				$preparedAttr
+			),
+
 			//'composite change' => array(),
 		);
 	}

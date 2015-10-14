@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Language;
+use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemChange;
@@ -29,7 +30,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetEditComment( Diff $siteLinkDiff, $action, $expected ) {
 		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), MockSiteStore::newFromTestSites(), 'enwiki' );
-		$comment = $commentCreator->getEditComment( $siteLinkDiff, $action );
+		$comment = $commentCreator->getEditComment( $siteLinkDiff, $action, Title::newFromText( 'A fancy page' ) );
 
 		$this->assertEquals( $expected, $comment );
 	}
@@ -168,13 +169,13 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		return $change->getSiteLinkDiff();
 	}
 
-	protected function getChangeLinkDiff() {
+	protected function getChangeLinkDiff( $oldName = 'Japan', $newName = 'Japan' ) {
 		$item = $this->getNewItem();
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', $oldName );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
 
 		$item2 = $this->getNewItem();
-		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
+		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', $newName );
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Tokyo' );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
@@ -249,6 +250,16 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$updates[] = array(
 			$this->getChangeLinkDiff(),
 			'(wikibase-comment-sitelink-change: [[:de:Japan]], [[:de:Tokyo]])',
+		);
+
+		$updates['Current page gets linked via link change'] = array(
+			$this->getChangeLinkDiff( 'Japan', 'A fancy page' ),
+			'(wikibase-comment-linked)',
+		);
+
+		$updates['Current page gets unlinked via link change'] = array(
+			$this->getChangeLinkDiff( 'A fancy page', 'Japan' ),
+			'(wikibase-comment-unlink)',
 		);
 
 		return $updates;
