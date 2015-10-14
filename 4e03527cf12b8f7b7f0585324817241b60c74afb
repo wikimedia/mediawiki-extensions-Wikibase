@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_982305a6",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-14T18:53:39Z",
+      "side": 1,
+      "message": "We discussed this in\nhttps://gerrit.wikimedia.org/r/#/c/243673/4/repo/includes/DataUpdates/PageImagesDataUpdate.php\nand in person and decided it\u0027s better to do a \"!\u003d\u003d DEPRECATED\" comparison. Personally I\u0027m fine with greater-than. Just to let you know.\n\nThis was also the motivation for\nhttps://github.com/wmde/WikibaseDataModel/pull/562",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3860d9cb",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-14T18:53:39Z",
+      "side": 1,
+      "message": "Uncle Bod says, \"short scope, short variable names\", so $id is probably sufficient in this case. Also a matter of taste. Just a hint.",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f859e12d",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-14T18:53:39Z",
+      "side": 1,
+      "message": "This relies on the knowledge that our current ids can not contain dashes, but may be in the future. Better use \u0027|\u0027 (invalid in titles) or \u0027$\u0027 (as in GUIDs).",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_18b4f532",
+        "filename": "repo/tests/phpunit/includes/DataUpdates/GeoDataDataUpdateTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-14T18:53:39Z",
+      "side": 1,
+      "message": "With \"$rank \u003d Statement::RANK_NORMAL\" the two methods can be melted into one.",
+      "revId": "4e03527cf12b8f7b7f0585324817241b60c74afb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
