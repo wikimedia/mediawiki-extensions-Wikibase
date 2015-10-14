@@ -40,13 +40,6 @@ class ExternalLinksDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
-	 * @return string[]
-	 */
-	public function getExternalLinks() {
-		return array_keys( $this->urls );
-	}
-
-	/**
 	 * Add DataValue to list of used urls, if Snak property has 'url' data type.
 	 *
 	 * @param Statement $statement

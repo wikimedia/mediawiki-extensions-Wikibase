@@ -49,15 +49,6 @@ class PageImagesDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
-	 * Returns the one "best" image file name found after processing all statements.
-	 *
-	 * @return string|null The file's page name without the NS_FILE namespace, or null if not found.
-	 */
-	public function getBestImageFileName() {
-		return $this->bestFileName;
-	}
-
-	/**
 	 * @see StatementDataUpdate::processStatement
 	 *
 	 * @param Statement $statement

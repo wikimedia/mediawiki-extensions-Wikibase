@@ -40,13 +40,6 @@ class ImageLinksDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
-	 * @return string[]
-	 */
-	public function getImageLinks() {
-		return array_keys( $this->fileNames );
-	}
-
-	/**
 	 * Add DataValue to list of used images if Snak property data type is commonsMedia.
 	 *
 	 * @param Statement $statement

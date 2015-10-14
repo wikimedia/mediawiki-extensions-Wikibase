@@ -73,23 +73,6 @@ class PageImagesDataUpdateTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider bestImageProvider
 	 */
-	public function testGetBestImageFileName(
-		StatementList $statements,
-		array $propertyIds,
-		$expected
-	) {
-		$instance = $this->newInstance( $propertyIds );
-
-		foreach ( $statements as $statement ) {
-			$instance->processStatement( $statement );
-		}
-
-		$this->assertSame( $expected, $instance->getBestImageFileName() );
-	}
-
-	/**
-	 * @dataProvider bestImageProvider
-	 */
 	public function testUpdateParserOutput(
 		StatementList $statements,
 		array $propertyIds,
