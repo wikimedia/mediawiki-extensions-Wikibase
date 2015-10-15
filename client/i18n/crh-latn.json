@@ -28,6 +28,5 @@
 	"wikibase-watchlist-show-changes-pref": "Közetüv cedvelimde {{WBREPONAME}} deñiştirilmelerini köster",
 	"wikibase-error-serialize-error": "Malümat serializatsiya etilip olamadı.",
 	"wikibase-error-invalid-entity-id": "Yazılğan ID sistemağa belli degil. Keçerli IDlerden birini qullanıñız.",
-	"special-unconnectedpages": "Elementlerge bağlanmağan saifeler",
-	"wikibase-unconnectedpages-legend": "Bağlanmağan saifeler parametrleri"
+	"unconnectedpages": "Elementlerge bağlanmağan saifeler"
 }

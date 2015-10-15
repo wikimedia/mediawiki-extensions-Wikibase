@@ -29,9 +29,7 @@
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ویرایشت",
 	"wikibase-watchlist-show-changes-pref": "نشو دئن ویرایشتیا ویکی دیتا د سیل برگ تو",
-	"wikibase-unconnectedpages-page": "نوم گه نتیجه نه وا بلگه شرو کو",
 	"wikibase-unconnectedpages-submit": "رو",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" کد زون معتوری نئ.",
 	"wikibase-pageinfo-entity-id-none": "هيش كوم",
 	"wikibase-otherprojects": "پروجه یا هنی"
 }

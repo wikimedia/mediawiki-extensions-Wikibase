@@ -25,7 +25,6 @@
 	"wikibase-alias-edit-placeholder": "ਕੋਈ ਉਰਫ਼ ਭਰੋ",
 	"wikibase-description-input-help-message": "$1 ਵਿਚ ਕੋਈ ਛੋਟਾ ਵੇਰਵਾ ਭਰੋ",
 	"wikibase-statements": "ਬਿਆਨ",
-	"wikibase-terms": "ਹੋਰ ਬੋਲੀਆਂ ਵਿਚ",
 	"wikibase-sitelinks-special": "ਹੋਰ ਸਾਈਟਾਂ",
 	"wikibase-badgeselector-badge-placeholder-title": "ਬਿੱਲਾ ਮੁਕੱਰਰ ਕਰਨ ਵਾਸਤੇ ਨੱਪੋ।",
 	"wikibase-remove": "ਹਟਾਓ",
@@ -60,11 +59,5 @@
 	"wikibase-entitieswithoutlabel-label-type": "ਕਿਸਮ:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "ਸਾਰੇ",
 	"wikibase-entitieswithoutlabel-submit": "ਲੱਭੋ",
-	"wikibase-item-summary-wbsetitem": "ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ",
-	"wikibase-item-summary-wbcreate-new": "ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ",
-	"wikibase-item-summary-wbeditentity": "ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ",
-	"wikibase-item-summary-wbeditentity-create": "ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ",
-	"wikibase-item-summary-wbeditentity-update": "ਇੱਕ ਮੱਦ ਨਵੀਂ ਕੀਤੀ ਗਈ",
-	"wikibase-item-summary-wbeditentity-override": "ਇੱਕ ਮੱਦ ਸਾਫ਼ ਕੀਤੀ ਗਈ",
 	"wikibase-listdatatypes-time-head": "ਵਕਤ"
 }

@@ -41,7 +41,6 @@
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Isang halaga|$1 mga halaga}} ang hindi pa nasasagip",
 	"wikibase-disambiguation-title": "Paglilinaw para sa \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nilikha ang bagong bagay na $1 at muling pinapunta sa pahina nito. Bumalik sa $2.",
-	"wikibase-aliases-label": "Nakikilala rin bilang:",
 	"wikibase-aliases-input-help-message": "Kung nakikilala ang pangkat ng dato sa ilalim na mas mahigit kaysa sa isang partikular na pangalan, makakapagpasok ka ng mga bansag at mga kasingkahulugan, upang matagpuan ito sa pamamagitan ng kasalit na mga pangalan nito.",
 	"wikibase-aliases-empty": "Walang bansag na nabigyan ng kahulugan.",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|sanggunian|mga sanggunian}}",
@@ -73,17 +72,5 @@
 	"wikibase-mergeitems-submit": "Ipagsama ang mga bagay",
 	"wikibase-entitieswithoutlabel-label-language": "Kodigong pang-wika:",
 	"wikibase-restoreold": "itakdang muli",
-	"wikibase-restore-summary": "Ipanumbalik ang rebisyong $1 ni [[Special:Contributions/$2|$2]]",
-	"wikibase-item-summary-wbsetitem": "Nilikha ang isang bagong bagay",
-	"wikibase-item-summary-wbeditentity": "Nilikha ang isang bagong bagay",
-	"wikibase-item-summary-wbsetlabel-set": "Binago ang [$2] katatakan",
-	"wikibase-item-summary-wbsetlabel-remove": "Tinanggal ang [$2] katatakan",
-	"wikibase-item-summary-wbsetdescription-set": "Binago ang [$2] paglalarawan",
-	"wikibase-item-summary-wbsetdescription-remove": "Tinanggal ang [$2] paglalarawan",
-	"wikibase-item-summary-wbsetaliases-set": "Itinatakda ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
-	"wikibase-item-summary-wbsetaliases-add-remove": "Idinagdag at tinanggal ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
-	"wikibase-item-summary-wbsetaliases-add": "Idinagdag ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
-	"wikibase-item-summary-wbsetaliases-remove": "Tinanggal ang [$2] {{PLURAL:$1|bansag|mga bansag}}",
-	"wikibase-item-summary-wbsetsitelink-add": "Idinagdag ang kawing [$2] na pangtiyak na pook",
-	"wikibase-item-summary-wbsetsitelink-remove": "Tinanggal ang kawing [$2] sa tiyak na pook"
+	"wikibase-restore-summary": "Ipanumbalik ang rebisyong $1 ni [[Special:Contributions/$2|$2]]"
 }

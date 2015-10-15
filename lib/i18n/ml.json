@@ -83,5 +83,15 @@
 	"wikibase-time-precision-BCE-annum": "$1 വർഷങ്ങൾ ബി.സി.ഇ.",
 	"wikibase-time-precision-BCE-millennium": "$1. സഹസ്രാബ്ദം ബി.സി.ഇ.",
 	"wikibase-time-precision-BCE-century": "$1. നൂറ്റാണ്ട് ബി.സി.ഇ.",
-	"wikibase-time-precision-BCE-10annum": "$1കൾ ബി.സി.ഇ."
+	"wikibase-time-precision-BCE-10annum": "$1കൾ ബി.സി.ഇ.",
+	"wikibase-entity-summary-wbsetitem": "പുതിയ ഇനം സൃഷ്ടിച്ചു",
+	"wikibase-entity-summary-wbsetreference": "ഒരു അവലംബം സജ്ജീകരിക്കുക",
+	"wikibase-entity-summary-wbsetdescription-set": "[$2] വിവരണത്തിൽ മാറ്റംവരുത്തി",
+	"wikibase-entity-summary-wbsetdescription-remove": "[$2] വിവരണം നീക്കം ചെയ്തു",
+	"wikibase-entity-summary-wbsetsitelink-add": "[$2] എന്നതിലേയ്ക്കുള്ള കണ്ണി ചേർത്തു",
+	"wikibase-entity-summary-wbsetsitelink-remove": "[$2] എന്നതിലേയ്ക്കുള്ള കണ്ണി നീക്കം ചെയ്തു",
+	"wikibase-item-summary-wbcreate-new": "ഒരു പുതിയ ഇനം സൃഷ്ടിച്ചിരിക്കുന്നു",
+	"wikibase-item-summary-wbeditentity": "പുതിയ ഇനം സൃഷ്ടിച്ചു",
+	"wikibase-item-summary-wbeditentity-create": "പുതിയ ഇനം സൃഷ്ടിച്ചു",
+	"wikibase-item-summary-wbeditentity-update": "ഒരിനം പുതുക്കി"
 }

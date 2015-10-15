@@ -12,6 +12,5 @@
 	"wikibase-sitelinks-special": "Tranonkala hafa",
 	"wikibase-aliases-empty": "Tsy misy solonanarana voafaritra",
 	"wikibase-statementview-rank-normal": "Filaharana tsotra",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|tsiahy}}",
-	"wikibase-item-summary-wblinktitles-connect": "Nanampy rohim-piteny hampifandray pejy"
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|tsiahy}}"
 }

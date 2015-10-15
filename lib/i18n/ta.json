@@ -12,5 +12,9 @@
 	"wikibase-sitelinks-link-columnheading": "இணைத்த கட்டுரை",
 	"wikibase-tooltip-error-details": "விவரங்கள்",
 	"datatypes-type-wikibase-item": "உருப்படி",
-	"datatypes-type-commonsMedia": "பொதுவூடகக் கோப்பு"
+	"datatypes-type-commonsMedia": "பொதுவூடகக் கோப்பு",
+	"wikibase-entity-summary-wbsetitem": "ஒரு புதிய உருப்படி உருவாக்கப்பட்டது",
+	"wikibase-entity-summary-wbsetdescription-set": "[$2] விளக்கம் மாற்றப்பட்டது",
+	"wikibase-entity-summary-wbsetdescription-remove": "[$2] விளக்கம் நீக்கப்பட்டது",
+	"wikibase-item-summary-wbeditentity": "ஒரு புதிய உருப்படி உருவாக்கப்பட்டது"
 }

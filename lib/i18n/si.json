@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"පසිඳු කාවින්ද",
-			"හරිත"
+			"හරිත",
+			"Sahan.ssw"
 		]
 	},
 	"wikibase-error-autocomplete-response": "සර්වරය ප්‍රතිචාර දක්වන ලදී: $1",
@@ -12,5 +13,29 @@
 	"wikibase-sitelinks-link-columnheading": "සබැඳිගත ලිපිය",
 	"wikibase-tooltip-error-details": "විස්තර",
 	"datatypes-type-wikibase-item": "අයිතමය",
-	"datatypes-type-commonsMedia": "කොමන්ස් මාධ්‍ය ගොනුව"
+	"datatypes-type-commonsMedia": "කොමන්ස් මාධ්‍ය ගොනුව",
+	"wikibase-entity-summary-wbsetitem": "නව අයිතමයක් තනන ලදී",
+	"wikibase-entity-summary-wbsetlabel-set": "[$2] ලේබලය වෙනස් කරන ලදී",
+	"wikibase-entity-summary-wbsetlabel-remove": "[$2] ලේබලය ඉවත් කරන ලදී",
+	"wikibase-entity-summary-wbsetdescription-set": "[$2] විස්තරය වෙනස් කරන ලදී",
+	"wikibase-entity-summary-wbsetdescription-remove": "[$2] විස්තරය ඉවත් කරන ලදී",
+	"wikibase-entity-summary-wbsetaliases-set": "{{PLURAL:$1|අන්වර්ථ නාම}} [$2] සකසමින්",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|අන්වර්ථ නාම}} [$2] එක් කරන සහ ඉවත් කරන ලදී",
+	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|අන්වර්ථ නාම}} [$2] එක් කරන ලදී",
+	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|අන්වර්ථ නාම}} [$2] ඉවත් කරන ලදී",
+	"wikibase-entity-summary-wbsetsitelink-add": "අඩවි-විශේෂී [$2] සබැඳිය එක් කරන ලදී",
+	"wikibase-entity-summary-wbsetsitelink-remove": "අඩවි-විශේෂී [$2] සබැඳිය ඉවත් කරන ලදී",
+	"wikibase-entity-summary-wbcreateclaim-value": "තනන ලදී {{PLURAL:$1|a value claim|value claims}}",
+	"wikibase-entity-summary-wbcreateclaim-novalue": "තනන ලදී {{PLURAL:$1|a novalue claim|novalue claims}}",
+	"wikibase-entity-summary-wbcreateclaim-somevalue": "තනන ලදී {{PLURAL:$1|a somevalue claim|somevalue claims}}",
+	"wikibase-entity-summary-special-create-item": "[$2] අයිතමය සමඟ {{PLURAL:$1|value|values}} තනන ලදී",
+	"wikibase-item-summary-wbeditentity": "නව අයිතමයක් තනන ලදී",
+	"wikibase-item-summary-wbeditentity-create": "නව අයිතමයක් තනන ලදී",
+	"wikibase-item-summary-wbeditentity-update": "අයිතමය යාවත්කාලීන කරන ලදී",
+	"wikibase-item-summary-wbeditentity-override": "අයිතමය ප්‍රතික්ෂේප කරන ලදී",
+	"wikibase-item-summary-wblinktitles-connect": "පිටු සම්බන්ධ කිරීම සඳහා භාෂා ඈඳනයක් එක් කර ඇත.",
+	"wikibase-property-summary-wbeditentity-create": "නව අයිතියක් තනන ලදී",
+	"wikibase-property-summary-wbeditentity-update": "අයිතිය යාවත්කාලීන කරන ලදී",
+	"wikibase-property-summary-wbeditentity-override": "අයිතිය ප්‍රතික්ෂේප කරන ලදී",
+	"wikibase-property-summary-special-create-property": "තනන ලදී [$2] වත්කමක් සමඟ {{PLURAL:$1|value|values}}"
 }

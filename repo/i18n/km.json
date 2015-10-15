@@ -10,7 +10,6 @@
 	"wikibase-addreference": "បន្ថែម​ឯកសារ​យោង",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ជាភាសាដទៃទៀត",
 	"wikibase-entitytermsforlanguagelistview-language": "ភាសា",
-	"wikibase-terms": "ជាភាសាដទៃទៀត",
 	"wikibase-sitelinks-special": "វិបសាយផ្សេងទៀត",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "មិន​ទាន់​បាន​រក្សា​ទុក {{PLURAL:$1|ឯកសារ​យោង​មួយ|ឯកសារ​យោង $1}}"

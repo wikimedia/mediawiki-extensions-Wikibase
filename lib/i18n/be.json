@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Дзяніс Тутэйшы"
 		]
 	},
 	"wikibase-lib-desc": "Утрымлівае агульны функцыянал пашырэнняў Wikibase і Wikibase Client.",
@@ -24,5 +25,30 @@
 	"wikibase-snakview-snaktypeselector-novalue": "значэнне не зададзена",
 	"wikibase-tooltip-error-details": "Падрабязнасці",
 	"datatypes-type-wikibase-item": "Элемент",
-	"datatypes-type-commonsMedia": "Медыяфайл з Вікісховішча"
+	"datatypes-type-commonsMedia": "Медыяфайл з Вікісховішча",
+	"wikibase-entity-summary-wbsetitem": "Новы элемент створаны",
+	"wikibase-entity-summary-wbsetreference": "Вызначана спасылка на крыніцу",
+	"wikibase-entity-summary-wbsetlabel-set": "Зменена назва [$2]",
+	"wikibase-entity-summary-wbsetlabel-remove": "Выдалена назва [$2]",
+	"wikibase-entity-summary-wbsetdescription-set": "Зменена апісанне [$2]",
+	"wikibase-entity-summary-wbsetdescription-remove": "Выдалена апісанне [$2]",
+	"wikibase-entity-summary-wbsetaliases-set": "{{PLURAL:$1|Зададзена|Зададзены}} дад. {{PLURAL:$1|назва|назвы}} [$2]",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Дададзена ці выдалена|Дададзены ці выдалены}} дад. {{PLURAL:$1|назва|назвы}} [$2]",
+	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Дададзена|Дададзены}} дад. {{PLURAL:$1|назва|назвы}} [$2]",
+	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Выдалена|Выдалены}} дад. {{PLURAL:$1|назва|назвы}} [$2]",
+	"wikibase-entity-summary-wbsetsitelink-add": "Дададзена спасылка на праект [$2]",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Выдалена спасылка на праект [$2]",
+	"wikibase-entity-summary-special-create-item": "Створаны элемент [$2] са {{PLURAL:$1|значэннем|значэннямі}}",
+	"wikibase-entity-summary-wbcreateclaim-create": "Створана заява",
+	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|1=Зменена заява|Зменены заявы}}",
+	"wikibase-item-summary-wbcreate-new": "Новы элемент створаны",
+	"wikibase-item-summary-wbeditentity": "Новы элемент створаны",
+	"wikibase-item-summary-wbeditentity-create": "Новы элемент створаны",
+	"wikibase-item-summary-wbeditentity-update": "Элемент абноўлены",
+	"wikibase-item-summary-wbeditentity-override": "Элемент перавызначаны",
+	"wikibase-item-summary-wblinktitles-connect": "Дабаўлена моўная спасылка для сувязі старонак",
+	"wikibase-property-summary-wbeditentity-create": "Створана новая ўласцівасць",
+	"wikibase-property-summary-wbeditentity-update": "Абноўлена ўласцівасць",
+	"wikibase-property-summary-wbeditentity-override": "Перакрыта існая ўласцівасць",
+	"wikibase-property-summary-special-create-property": "Створана ўласцівасць [$2] са {{PLURAL:$1|значэннем|значэннямі}}"
 }

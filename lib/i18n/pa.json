@@ -5,5 +5,11 @@
 		]
 	},
 	"specialpages-group-wikibase": "ਵਿਕੀਬੇਸ ਦਾ ਖ਼ਜ਼ਾਨਾ",
-	"wikibase-sitelinks-wikipedia": "ਵਿਕੀਪੀਡੀਆ"
+	"wikibase-sitelinks-wikipedia": "ਵਿਕੀਪੀਡੀਆ",
+	"wikibase-entity-summary-wbsetitem": "ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ",
+	"wikibase-item-summary-wbcreate-new": "ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ",
+	"wikibase-item-summary-wbeditentity": "ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ",
+	"wikibase-item-summary-wbeditentity-create": "ਇੱਕ ਨਵੀਂ ਮੱਦ ਬਣਾਈ ਗਈ",
+	"wikibase-item-summary-wbeditentity-update": "ਇੱਕ ਮੱਦ ਨਵੀਂ ਕੀਤੀ ਗਈ",
+	"wikibase-item-summary-wbeditentity-override": "ਇੱਕ ਮੱਦ ਸਾਫ਼ ਕੀਤੀ ਗਈ"
 }
