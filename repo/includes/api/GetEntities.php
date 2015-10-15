@@ -295,14 +295,10 @@ class GetEntities extends ApiBase {
 		$fallbackChains = array();
 
 		if ( $params['languagefallback'] ) {
-			$fallbackMode = (
-				LanguageFallbackChainFactory::FALLBACK_VARIANTS
-				| LanguageFallbackChainFactory::FALLBACK_OTHERS
-				| LanguageFallbackChainFactory::FALLBACK_SELF );
+			$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
 			foreach ( $languageCodes as $languageCode ) {
-				$fallbackChain = $this->languageFallbackChainFactory
+				$fallbackChains[$languageCode] = $this->languageFallbackChainFactory
 					->newFromLanguageCode( $languageCode, $fallbackMode );
-				$fallbackChains[$languageCode] = $fallbackChain;
 			}
 		}
 

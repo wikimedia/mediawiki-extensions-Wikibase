@@ -90,17 +90,13 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
-		$fallbackMode = (
-			LanguageFallbackChainFactory::FALLBACK_VARIANTS
-			| LanguageFallbackChainFactory::FALLBACK_OTHERS
-			| LanguageFallbackChainFactory::FALLBACK_SELF );
-
-		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
+		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
+		$fallbackChainFactory = new LanguageFallbackChainFactory();
+		$fallbackChain = $fallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode );
 
 		return new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $lang,
-			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN =>
-				$languageFallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode )
+			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
 		) );
 	}
 

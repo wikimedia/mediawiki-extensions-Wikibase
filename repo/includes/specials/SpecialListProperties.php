@@ -95,14 +95,10 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		EntityTitleLookup $titleLookup,
 		BufferingTermLookup $bufferingTermLookup
 	) {
+		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
 		$this->labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$bufferingTermLookup,
-			$languageFallbackChainFactory->newFromLanguage(
-				$this->getLanguage(),
-				LanguageFallbackChainFactory::FALLBACK_SELF
-				| LanguageFallbackChainFactory::FALLBACK_VARIANTS
-				| LanguageFallbackChainFactory::FALLBACK_OTHERS
-			)
+			$languageFallbackChainFactory->newFromLanguage( $this->getLanguage(), $fallbackMode )
 		);
 
 		$this->dataTypeFactory = $dataTypeFactory;

@@ -493,10 +493,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entityRevision = new EntityRevision( $item );
 
 		$fallbackChainFactory = new LanguageFallbackChainFactory();
-		$fallbackMode = (
-			LanguageFallbackChainFactory::FALLBACK_VARIANTS
-			| LanguageFallbackChainFactory::FALLBACK_OTHERS
-			| LanguageFallbackChainFactory::FALLBACK_SELF );
+		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
 		$fallbackChains = array(
 			'de-formal' => $fallbackChainFactory->newFromLanguageCode( 'de-formal', $fallbackMode ),
 			'es' => $fallbackChainFactory->newFromLanguageCode( 'es', $fallbackMode ),

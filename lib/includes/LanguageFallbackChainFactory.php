@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use IContextSource;
+use InvalidArgumentException;
 use Language;
 use LanguageConverter;
 use MWException;
@@ -80,7 +81,6 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromLanguage( Language $language, $mode = self::FALLBACK_ALL ) {
-
 		if ( isset( $this->languageCache[$language->getCode()][$mode] ) ) {
 			return $this->languageCache[$language->getCode()][$mode];
 		}
@@ -102,7 +102,6 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromLanguageCode( $languageCode, $mode = self::FALLBACK_ALL ) {
-
 		$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
 
 		if ( isset( $this->languageCache[$languageCode][$mode] ) ) {
@@ -125,9 +124,14 @@ class LanguageFallbackChainFactory {
 	 * @param LanguageFallbackChain[] $chain for recursive calls
 	 * @param array $fetched for recursive calls
 	 *
+	 * @throws InvalidArgumentException
 	 * @return LanguageWithConversion[]
 	 */
-	public function buildFromLanguage( $language, $mode, &$chain = array(), &$fetched = array() ) {
+	private function buildFromLanguage( $language, $mode, &$chain = array(), &$fetched = array() ) {
+		if ( !is_int( $mode ) ) {
+			throw new InvalidArgumentException( '$mode must be an integer' );
+		}
+
 		if ( is_string( $language ) ) {
 			$languageCode = $language;
 		} else {
@@ -318,8 +322,11 @@ class LanguageFallbackChainFactory {
 				} catch ( MWException $e ) {
 					continue;
 				}
-				$this->buildFromLanguage( $languageCode,
-					self::FALLBACK_OTHERS | self::FALLBACK_VARIANTS, $chain, $fetched
+				$this->buildFromLanguage(
+					$languageCode,
+					self::FALLBACK_OTHERS | self::FALLBACK_VARIANTS,
+					$chain,
+					$fetched
 				);
 			}
 		}
