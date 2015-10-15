@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\SiteLink;
 
 /**
  * Holds Item objects for testing proposes.
@@ -15,44 +14,35 @@ final class TestItems {
 
 	/**
 	 * @since 0.1
+	 *
 	 * @return Item[]
 	 */
 	public static function getItems() {
-		$items = array();
+		$withTerms = new Item();
+		$withTerms->setDescription( 'en', 'foo' );
+		$withTerms->setLabel( 'en', 'bar' );
 
-		$items[] = new Item();
+		$withAlias = new Item();
+		$withAlias->addAliases( 'en', array( 'foobar', 'baz' ) );
 
-		$item = new Item();
-
-		$item->setDescription( 'en', 'foo' );
-		$item->setLabel( 'en', 'bar' );
-
-		$items[] = $item;
-
-		$item = new Item();
-
-		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
-
-		$items[] = $item;
-
-		$item = new Item();
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'spam' );
-
-		$items[] = $item;
+		$withSiteLink = new Item();
+		$withSiteLink->getSiteLinkList()->addNewSiteLink( 'enwiki', 'spam' );
 
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'spamz' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foobar' );
-
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );
-
 		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
 		$item->addAliases( 'de', array( 'foobar', 'spam' ) );
 
-		$items[] = $item;
-
-		return $items;
+		return array(
+			'Empty' => new Item(),
+			'Label and description' => $withTerms,
+			'Alias only' => $withAlias,
+			'SiteLink only' => $withSiteLink,
+			'Everything but statements' => $item,
+		);
 	}
 
 }
