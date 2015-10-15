@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\Client\Hooks\MovePageNoticeCreator
+ * @covers Wikibase\Client\Hooks\MovePageNotice
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -20,7 +20,7 @@ use Wikibase\DataModel\SiteLink;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class MovePageNoticeCreatorTest extends \MediaWikiTestCase {
+class MovePageNoticeTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();

@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Sites\SiteMatrixParser;
 
 /**
- * @covers SiteMatrixParser
+ * @covers Wikibase\Lib\Sites\SiteMatrixParser
  *
  * @group Wikibase
  *

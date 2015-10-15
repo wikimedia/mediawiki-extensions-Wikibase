@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 
 /**
- * @covers Wikibase\Repo\LinkedData\EntityDataSerializationService
+ * @covers Wikibase\Repo\LinkedData\EntityDataFormatProvider
  *
  * @group Database
  * @group Wikibase
