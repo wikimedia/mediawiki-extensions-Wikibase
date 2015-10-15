@@ -7,7 +7,7 @@ use ParserOutput;
 use Wikibase\Client\Hooks\ParserLimitHookHandlers;
 
 /**
- * @covers Wikibase\Client\Hooks\ParserLimitHookHandlersTest
+ * @covers Wikibase\Client\Hooks\ParserLimitHookHandlers
  *
  * @group WikibaseClient
  * @group Wikibase

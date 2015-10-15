@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- * @covers Wikibase\Rep\Notifications\JobQueueChangeNotificationSender
+ * @covers Wikibase\Repo\Notifications\JobQueueChangeNotificationSender
  *
  * @group Wikibase
  * @group WikibaseStore

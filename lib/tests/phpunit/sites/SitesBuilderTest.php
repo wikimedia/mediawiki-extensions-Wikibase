@@ -8,7 +8,7 @@ use SiteList;
 use Wikibase\Lib\Sites\SitesBuilder;
 
 /**
- * @covers SitesBuilder
+ * @covers Wikibase\Lib\Sites\SitesBuilder
  *
  * @group Wikibase
  *
