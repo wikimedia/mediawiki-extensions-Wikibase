@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_dcbc0a6a",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-15T12:26:23Z",
+      "side": 1,
+      "message": "addPrimaryCoordinate is a strange mix - it manipulates the CoordinatesOutput that is passed in, and returns information about that manipulation.\n\nHow about just returning the $primaryCoordKey? The you just add an else-block to the loop below, and set the primary coordinate there.",
+      "revId": "a365c02d98d06f99b413fe90cd435a2a1b75217e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_673a2835",
         "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
         "patchSetId": 4
@@ -31,6 +48,23 @@
       "side": 1,
       "message": "agree, but prefer not to do in this patch",
       "parentUuid": "0ebaf39b_673a2835",
+      "revId": "a365c02d98d06f99b413fe90cd435a2a1b75217e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5ca81a1d",
+        "filename": "repo/includes/DataUpdates/GeoDataDataUpdate.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-15T12:26:23Z",
+      "side": 1,
+      "message": "As suggested above, just return $key here, and do coordinatesOutput-\u003eaddPrimary() in the loop in updateParserOutput()",
       "revId": "a365c02d98d06f99b413fe90cd435a2a1b75217e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
