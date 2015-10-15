@@ -2,12 +2,13 @@
 
 namespace Wikibase\Lib\Store;
 
+use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\LanguageFallbackChainFactory;
 
 /**
  * Factory to provide an LabelDescriptionLookup which does automatic prefetching
@@ -34,7 +35,6 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 	private $termBuffer;
 
 	/**
-	 * @see LanguageFallbackChainFactory::FALLBACK_
 	 * @var int
 	 */
 	private $fallbackMode;
@@ -43,20 +43,25 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param TermLookup $termLookup
 	 * @param TermBuffer|null $termBuffer
-	 * @param int $fallbackMode
+	 * @param int $fallbackMode Either 0 or a combination of the
+	 *  LanguageFallbackChainFactory::FALLBACK_... constants.
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		TermLookup $termLookup,
 		TermBuffer $termBuffer = null,
-		$fallbackMode = -1
+		$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL
 	) {
+		if ( !is_int( $fallbackMode ) ) {
+			throw new InvalidArgumentException( '$fallbackMode must be an integer' );
+		}
+
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->termLookup = $termLookup;
 		$this->termBuffer = $termBuffer;
-		$this->fallbackMode = $fallbackMode >= 0 ? $fallbackMode : LanguageFallbackChainFactory::FALLBACK_SELF
-			| LanguageFallbackChainFactory::FALLBACK_VARIANTS
-			| LanguageFallbackChainFactory::FALLBACK_OTHERS;
+		$this->fallbackMode = $fallbackMode;
 	}
 
 	/**
@@ -64,12 +69,18 @@ class LanguageFallbackLabelDescriptionLookupFactory {
 	 * entity ids with a language fallback chain applied for the given language.
 	 *
 	 * @param Language $language
-	 * @param EntityId[] $entityIds
-	 * @param string[] $termTypes default is only labels
+	 * @param EntityId[] $entityIds Array of entity ids that should be prefetched. Only relevant
+	 *  when a TermBuffer was set in the constructor. Default is no prefetching.
+	 * @param string[] $termTypes Array with one or more of the types 'label', 'alias' and
+	 *  'description'. Default is only 'label'.
 	 *
 	 * @return LabelDescriptionLookup
 	 */
-	public function newLabelDescriptionLookup( Language $language, array $entityIds, array $termTypes = array( 'label' ) ) {
+	public function newLabelDescriptionLookup(
+		Language $language,
+		array $entityIds = array(),
+		array $termTypes = array( 'label' )
+	) {
 		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
 			$language,
 			$this->fallbackMode
