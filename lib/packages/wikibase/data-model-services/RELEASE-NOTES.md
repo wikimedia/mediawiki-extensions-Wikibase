@@ -5,7 +5,8 @@
 * Added `InMemoryEntityLookup::addException`
 * Added `PropertyDataTypeMatcher`
 * Added `PropertyDataTypeLookup`
-* Added optional message and previous exception parameters to `UnresolvedEntityRedirectException` constructor
+* Added optional message and previous exception parameters to the `UnresolvedEntityRedirectException` constructor
+* Fixed bug that caused a fatal error when passing a `Traversable` to the `ByPropertyIdGrouper` constructor
 
 ## Version 3.0.0 (2015-09-16)
 
