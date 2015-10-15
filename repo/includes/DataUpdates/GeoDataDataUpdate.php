@@ -104,41 +104,37 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 		$coordinatesOutput = isset( $parserOutput->geoData ) ?: new CoordinatesOutput();
 
 		if ( $coordinatesOutput->getPrimary() === false ) {
-			$primaryCoordKey = $this->addPrimaryCoordinate( $coordinatesOutput );
-		}
+			$primaryCoordKey = $this->findPrimaryCoordinateKey();
 
-		foreach ( $this->coordinates as $key => $coordinates ) {
-			if ( $key !== $primaryCoordKey ) {
-				foreach ( $coordinates as $coordinate ) {
-					$coordinatesOutput->addSecondary( $coordinate );
-				}
+			if ( $primaryCoordKey !== null ) {
+				$this->addPrimaryCoordinate(
+					$coordinatesOutput,
+					$primaryCoordKey
+				);
 			}
 		}
+
+		$this->addSecondaryCoordinates( $coordinatesOutput, $primaryCoordKey );
 
 		$parserOutput->geoData = $coordinatesOutput;
 	}
 
 	/**
-	 * @param CoordinatesOutput $coordinatesOutput
-	 *
 	 * @return string|null Array key for Coord selected as primary.
 	 */
-	private function addPrimaryCoordinate( CoordinatesOutput $coordinatesOutput ) {
+	private function findPrimaryCoordinateKey() {
 		foreach ( $this->preferredProperties as $propertyIdString ) {
 			$key = $this->makeCoordinateKey( $propertyIdString, Statement::RANK_PREFERRED );
-
-			$preferred = isset( $this->coordinates[$key] ) ? $this->coordinates[$key] : array();
-			$preferredCount = count( $preferred );
+			$preferredCount = $this->getCoordinatesGroupCount( $key );
 
 			if ( $preferredCount === 1 ) {
-				$primaryCoordinate = $preferred[0];
+				return $key;
 			} elseif ( $preferredCount === 0 ) {
 				$key = $this->makeCoordinateKey( $propertyIdString, Statement::RANK_NORMAL );
-				$normal = isset( $this->coordinates[$key] ) ? $this->coordinates[$key] : array();
-				$normalCount = count( $normal );
+				$normalCount = $this->getCoordinatesGroupCount( $key );
 
 				if ( $normalCount === 1 ) {
-					$primaryCoordinate = $normal[0];
+					return $key;
 				} elseif ( $normalCount > 1 ) {
 					// multiple normal coordinates
 					return null;
@@ -147,16 +143,53 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 				// multiple preferred coordinates
 				return null;
 			}
-
-			if ( isset( $primaryCoordinate ) ) {
-				$primaryCoordinate->primary = true;
-				$coordinatesOutput->addPrimary( $primaryCoordinate );
-
-				return $key;
-			}
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return int
+	 */
+	private function getCoordinatesGroupCount( $key ) {
+		if ( isset( $this->coordinates[$key] ) ) {
+			return count( $this->coordinates[$key] );
+		}
+
+		return 0;
+	}
+
+	/**
+	 * @param CoordinatesOutput $coordinatesOutput
+	 * @param string $key
+	 */
+	private function addPrimaryCoordinate(
+		CoordinatesOutput $coordinatesOutput,
+		$primaryCoordKey
+	) {
+		$primaryCoordinate = $this->coordinates[$primaryCoordKey][0];
+		$primaryCoordinate->primary = true;
+
+		$coordinatesOutput->addPrimary( $primaryCoordinate );
+	}
+
+	/**
+	 * @param CoordinatesOutput $coordinatesOutput
+	 * @param string|null $primaryCoordKey
+	 */
+	private function addSecondaryCoordinates(
+		CoordinatesOutput $coordinatesOutput,
+		$primaryCoordKey
+	) {
+		foreach ( $this->coordinates as $key => $coords ) {
+			if ( $key !== $primaryCoordKey ) {
+				foreach ( $coords as $coord ) {
+					$coordinatesOutput->addSecondary( $coord );
+				}
+			}
+		}
 	}
 
 	/**
