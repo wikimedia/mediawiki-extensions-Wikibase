@@ -17,7 +17,7 @@ use Wikibase\Rdf\JulianDateTimeValueCleaner;
  * @licence GNU GPL v2+
  * @author Stas Malyshev
  */
-class DateValueCleanerTest extends \PHPUnit_Framework_TestCase {
+class DateTimeValueCleanerTest extends \PHPUnit_Framework_TestCase {
 
 	public function getDates() {
 		return array(
