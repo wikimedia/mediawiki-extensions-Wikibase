@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_2c7c17b4",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-15T07:31:25Z",
+      "side": 1,
+      "message": "Should this be added as RdfVocabulary::NS_OWL? Not meant as a -1, only a question.",
+      "revId": "7fa55144013104a4ddf34897e9d9a3940ea534cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4c770bd0",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-15T07:31:25Z",
+      "side": 1,
+      "message": "Please prefer single over double quotes for consistency. Thanks.",
+      "revId": "7fa55144013104a4ddf34897e9d9a3940ea534cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_80106d5c",
         "filename": "repo/tests/phpunit/data/rdf/dump_empty.nt",
         "patchSetId": 4
