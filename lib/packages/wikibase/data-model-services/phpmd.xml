@@ -9,6 +9,12 @@
         <exclude name="TooManyPublicMethods" />
     </rule>
 
+    <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+        <properties>
+            <property name="ignorepattern" value="(^(set|get|test))i" />
+        </properties>
+    </rule>
+
     <rule ref="rulesets/controversial.xml">
         <exclude name="CamelCaseMethodName" />
     </rule>
