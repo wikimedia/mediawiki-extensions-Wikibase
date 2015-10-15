@@ -2,10 +2,12 @@
 
 namespace Wikibase\DataModel\Services\Tests;
 
+use ArrayObject;
 use OutOfBoundsException;
-use Wikibase\DataModel\Services\ByPropertyIdGrouper;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
+use Wikibase\DataModel\Services\ByPropertyIdGrouper;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
@@ -13,8 +15,45 @@ use Wikibase\DataModel\Snak\Snak;
  *
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
-class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
+class ByPropertyIdGrouperTest extends PHPUnit_Framework_TestCase {
+
+	/**
+	 * @dataProvider validConstructorArgumentProvider
+	 */
+	public function testConstructor( $argument ) {
+		$instance = new ByPropertyIdGrouper( $argument );
+		$this->assertCount( count( $argument ), $instance->getPropertyIds() );
+	}
+
+	public function validConstructorArgumentProvider() {
+		return array(
+			array( array() ),
+			array( array( $this->getPropertyIdProviderMock( 'P1' ) ) ),
+			array( new ArrayObject() ),
+			array( new ArrayObject( array( $this->getPropertyIdProviderMock( 'P1' ) ) ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidConstructorArgumentProvider
+	 */
+	public function testConstructorThrowsException( $argument ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new ByPropertyIdGrouper( $argument );
+	}
+
+	public function invalidConstructorArgumentProvider() {
+		return array(
+			array( null ),
+			array( 'notAnObject' ),
+			array( array( null ) ),
+			array( array( 'notAnObject' ) ),
+			array( new ArrayObject( array( null ) ) ),
+			array( new ArrayObject( array( 'notAnObject' ) ) ),
+		);
+	}
 
 	public function provideGetPropertyIds() {
 		$cases = array();
@@ -79,9 +118,6 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideGetByPropertyId
-	 * @param PropertyIdProvider[] $propertyIdProviders
-	 * @param string $propertyId
-	 * @param string[] $expectedValues
 	 */
 	public function testGetByPropertyId( array $propertyIdProviders, $propertyId, array $expectedValues ) {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
@@ -114,9 +150,6 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideHasPropertyId
-	 * @param PropertyIdProvider[] $propertyIdProviders
-	 * @param string $propertyId
-	 * @param bool $expectedValue
 	 */
 	public function testHasPropertyId( array $propertyIdProviders, $propertyId, $expectedValue ) {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $propertyIdProviders );
@@ -141,12 +174,13 @@ class ByPropertyIdGrouperTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param string $propertyId
 	 * @param string|null $type
+	 *
 	 * @return PropertyIdProvider
 	 */
 	private function getPropertyIdProviderMock( $propertyId, $type = null ) {
 		$propertyIdProvider = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
 
-		$propertyIdProvider->expects( $this->any() )
+		$propertyIdProvider->expects( $this->once() )
 			->method( 'getPropertyId' )
 			->will( $this->returnValue( new PropertyId( $propertyId ) ) );
 
