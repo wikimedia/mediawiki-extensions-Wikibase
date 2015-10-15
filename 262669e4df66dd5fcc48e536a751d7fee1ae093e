@@ -33,6 +33,23 @@
       "revId": "262669e4df66dd5fcc48e536a751d7fee1ae093e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3e48b631",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2015-10-15T23:22:45Z",
+      "side": 1,
+      "message": "I think using \u0027Maintenance script\u0027 is a better idea. 127.0.0.1 looks like a bug and people who aren\u0027t overly familiar with IPs will think it\u0027s just another anonymous user, while \u0027Maintenance script\u0027 makes it obvious it\u0027s software.",
+      "revId": "262669e4df66dd5fcc48e536a751d7fee1ae093e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
