@@ -1,15 +1,15 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\DataModel\Services\Tests\Entity;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeMatcher;
+use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 
 /**
- * @covers Wikibase\DataModel\Services\Lookup\PropertyDataTypeMatcher
+ * @covers Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
