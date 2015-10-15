@@ -5,5 +5,23 @@
 		]
 	},
 	"wikibase-snakview-snaktypeselector-somevalue": "nilai indak dikatahui",
-	"wikibase-snakview-snaktypeselector-novalue": "indak ado nilai"
+	"wikibase-snakview-snaktypeselector-novalue": "indak ado nilai",
+	"wikibase-entity-summary-wbsetitem": "Buek item baru",
+	"wikibase-entity-summary-wbsetlabel-set": "Mangubah [$2] label",
+	"wikibase-entity-summary-wbsetlabel-remove": "Manghapuih [$2] label",
+	"wikibase-entity-summary-wbsetdescription-set": "Mangubah [$2] deskripsi",
+	"wikibase-entity-summary-wbsetdescription-remove": "Manghapuih [$2] deskripsi",
+	"wikibase-entity-summary-wbsetaliases-set": "Mambuek [$2] {{PLURAL:$1|namo lain}}",
+	"wikibase-entity-summary-wbsetaliases-add-remove": "Tambah dan hapuih [$2] {{PLURAL:$1|namo lain}}",
+	"wikibase-entity-summary-wbsetaliases-add": "Manambah [$2] {{PLURAL:$1|namo lain}}",
+	"wikibase-entity-summary-wbsetaliases-remove": "Manghapuih [$2] {{PLURAL:$1|namo lain}}",
+	"wikibase-entity-summary-wbsetsitelink-add": "Tambah pautan ka [$2]",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Hapuih pautan ka [$2]",
+	"wikibase-item-summary-wbeditentity": "Buek item baru",
+	"wikibase-item-summary-wbeditentity-create": "Buek item baru",
+	"wikibase-item-summary-wbeditentity-update": "Pabarui item",
+	"wikibase-item-summary-wbeditentity-override": "Timpo item",
+	"wikibase-property-summary-wbeditentity-create": "Buek properti",
+	"wikibase-property-summary-wbeditentity-update": "Pabarui properti",
+	"wikibase-property-summary-wbeditentity-override": "Timpo properti"
 }

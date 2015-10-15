@@ -19,6 +19,7 @@
 	"wikibase-label-input-help-message": "Gib dr Name fir dää Datesatz in $1 aa.",
 	"wikibase-description-input-help-message": "Gib e churzi Bschryybig in $1 aa.",
 	"wikibase-statements": "Uussage",
+	"wikibase-sitelinks": "{{SITENAME}}-Syte, wu mit däm Datenelemänt verchnipft sin",
 	"wikibase-sitelinks-empty": "Bishär sin kei {{SITENAME}}-Syte mit däm Datenelemänt verchnipft.",
 	"wikibase-sitelinks-special": "Anderi Websyte",
 	"wikibase-remove": "uuseneh",

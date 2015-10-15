@@ -28,5 +28,14 @@
 	"datatypes-type-commonsMedia": "فایل پرنمون رسانه",
 	"wikibase-time-precision-Gannum": "د $1 بیلیون سال",
 	"wikibase-time-precision-Mannum": "د $1 میلیون سال",
-	"wikibase-time-precision-annum": "د سالیا $1"
+	"wikibase-time-precision-annum": "د سالیا $1",
+	"wikibase-entity-summary-wbsetitem": "یه گل قلم تازه دروس بیه",
+	"wikibase-entity-summary-wbcreateredirect": "واگردونی د $4 انجوم گرت",
+	"wikibase-entity-summary-wbsetreference": "میزونکاری یه گل سرچشمه",
+	"wikibase-entity-summary-clientsitelink-update": "بلگه د[$3] تا [$4] جا وه جا بیه",
+	"wikibase-item-summary-wbcreate-new": "یه گل قلم تازه دروس بیه",
+	"wikibase-item-summary-wbeditentity": "یه گل قلم تازه دروس بیه",
+	"wikibase-item-summary-wbeditentity-create": "یه گل قلم تازه دروس بیه",
+	"wikibase-item-summary-wbeditentity-update": "یه گل قلم آلشت دئه بیه",
+	"wikibase-item-summary-wbeditentity-override": "یه گل قلم پاک بیه"
 }

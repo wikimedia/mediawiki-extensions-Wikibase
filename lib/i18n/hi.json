@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Siddhartha Ghai",
-			"NehalDaveND"
+			"NehalDaveND",
+			"Vivek Rai"
 		]
 	},
 	"wikibase-error-unexpected": "त्रुटि : $1",
@@ -26,5 +27,18 @@
 	"datatypes-type-wikibase-item": "वस्तु",
 	"datatypes-type-wikibase-property": "गुणधर्म",
 	"wikibase-time-precision-century": "$1. देश",
-	"wikibase-time-precision-10annum": "$1s"
+	"wikibase-time-precision-10annum": "$1s",
+	"wikibase-entity-summary-wbsetitem": "नई वस्तु बनाएँ",
+	"wikibase-entity-summary-wbcreateredirect": "$4 के प्रति भेजा",
+	"wikibase-entity-summary-wbsetlabel-add": "जाड़ा [$2] लेबल",
+	"wikibase-entity-summary-wbsetlabel-set": "बलदा [$2] लेबल",
+	"wikibase-entity-summary-wbsetlabel-remove": "हटाया [$2] लेबल",
+	"wikibase-entity-summary-wbsetdescription-add": "जोडा [$2] विवरण",
+	"wikibase-entity-summary-wbsetdescription-set": "बदला [$2] विवरण",
+	"wikibase-entity-summary-wbsetdescription-remove": "निकाला [$2] विवरण",
+	"wikibase-item-summary-wbcreate-new": "नई वस्तु बनाई",
+	"wikibase-item-summary-wbeditentity": "नई वस्तु बनाई",
+	"wikibase-item-summary-wbeditentity-create": "नई वस्तु बनाई",
+	"wikibase-item-summary-wblinktitles-create": "पन्नों से कनेक्ट करने के लिए इस आइटम बनाया",
+	"wikibase-item-summary-wblinktitles-connect": "पन्नों से कनेक्ट करने के लिए एक भाषा लिंक जोड़े"
 }

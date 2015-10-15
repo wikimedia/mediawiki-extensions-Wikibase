@@ -7,5 +7,6 @@
 	"wikibase-sitelinks-wikipedia": "Wîkîpediya",
 	"wikibase-sitelinks-sitename-columnheading": "Ziman",
 	"wikibase-sitelinks-link-columnheading": "Rûpela girêdayî",
-	"wikibase-tooltip-error-details": "Detay"
+	"wikibase-tooltip-error-details": "Detay",
+	"wikibase-entity-summary-wbsetsitelink-add": "Girêdanê li [$2] zêde bike"
 }

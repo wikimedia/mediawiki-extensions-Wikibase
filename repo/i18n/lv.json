@@ -37,7 +37,6 @@
 	"wikibase-label-input-help-message": "Ievadiet šīs datu kopas $1 nosaukumu.",
 	"wikibase-description-input-help-message": "Ievadiet īsu $1 aprakstu.",
 	"wikibase-statements": "Apgalvojumi",
-	"wikibase-terms": "Citās valodās",
 	"wikibase-sitelinks-special": "Citas vietnes",
 	"wikibase-remove": "dzēst",
 	"wikibase-undo-title": "Atceļ \"$1\" labojumu",
@@ -105,15 +104,5 @@
 	"wikibase-restoreold": "atjaunot",
 	"wikibase-no-direct-editing": "Vārdtelpā $1 tieša labošana ir atslēgta",
 	"wikibase-noentity-createone": "Jūs varat arī [[$1|izveidot jaunu]].",
-	"wikibase-item-summary-wbsetitem": "Izveidots jauns ieraksts",
-	"wikibase-item-summary-wbeditentity-create": "Izveidots jauns ieraksts",
-	"wikibase-item-summary-wbsetlabel-set": "Izmainīja [$2] nosaukumu",
-	"wikibase-item-summary-wbsetdescription-set": "Izmainīja [$2] aprakstu",
-	"wikibase-item-summary-wbsetdescription-remove": "Nodzēsa [$2] aprakstu",
-	"wikibase-item-summary-wblinktitles-connect": "Pievienoja valodas saiti, lai savienotu lapas",
-	"wikibase-property-summary-wbsetlabel-set": "Izmainīja [$2] nosaukumu",
-	"wikibase-property-summary-wbsetlabel-remove": "Nodzēsa [$2] nosaukumu",
-	"wikibase-property-summary-wbsetdescription-set": "Izmainīja [$2] aprakstu",
-	"wikibase-property-summary-wbsetdescription-remove": "Nodzēsa [$2] aprakstu",
 	"wikibase-listdatatypes-globe-coordinate-head": "Ģeogrāfiskās koordinātas"
 }

@@ -2,9 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"පසිඳු කාවින්ද",
-			"عثمان خان شاہ"
+			"عثمان خان شاہ",
+			"Noor2020"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "ویکیپیڈیا",
-	"wikibase-tooltip-error-details": "تفصیلات"
+	"wikibase-tooltip-error-details": "تفصیلات",
+	"wikibase-entity-summary-wbsetclaim-update": "تبدیل کر دیا گیا  {{PLURAL:$3| دعوی|دعوے}}",
+	"wikibase-entity-summary-wbsetclaim-create": "تخلیق کر دیا گیا  {{PLURAL:$3| دعوی|دعوے}}",
+	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "تبدیل کر دیا گیا  {{PLURAL:$4|تصفیہ کار کا| $4  تصفیہ کاران کے}}  {{PLURAL:$3| دعوی|دعوے}}",
+	"wikibase-entity-summary-wbsetclaim-update-references": "تبدیل کر دیا گیا  {{PLURAL:$4| ایک حوالہ کا| $4  حوالہ جات کے}}  {{PLURAL:$3| دعوی|دعوے}}",
+	"wikibase-entity-summary-wbsetclaim-update-rank": "درجہ تبدیل کر دیا گیا  {{PLURAL:$3| دعوی کا|دعوے کے }}",
+	"wikibase-item-summary-wbcreate-new": "نئی شے کو تخلیق کیا",
+	"wikibase-property-summary-wbcreate-new": "ایک نئی خاصیت پیدا کیا"
 }

@@ -37,10 +37,8 @@
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}} حالیہ تبدیلیوں میں ترامیم دیکھیں",
 	"wikibase-error-deserialize-error": "ڈیٹا کے تسلسل میں خامی۔",
 	"wikibase-error-serialize-error": "ڈیٹا کے سلسلہ میں خامی ہے۔",
-	"special-unconnectedpages": "ویکی ڈیٹا میں غیر شریک صفحات",
-	"wikibase-unconnectedpages-page": "نتائج فہرست اس صفحہ سے شروع کریں:",
+	"unconnectedpages": "ویکی ڈیٹا میں غیر شریک صفحات",
 	"wikibase-unconnectedpages-submit": "چلو",
-	"wikibase-unconnectedpages-invalid-language": "\"$1\" زبان کا رمز (کوڈ) درست نہیں",
 	"wikibase-pageinfo-entity-id-none": "کوئی نہیں",
 	"wikibase-otherprojects": "دیگر منصوبے"
 }

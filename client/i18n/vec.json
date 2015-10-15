@@ -46,5 +46,6 @@
 	"wikibase-error-invalid-entity-id": "L'ID specificà el xe sconossùo al sistema. Dòpara un ID de entità valido.",
 	"unconnectedpages": "Pagine mia colegà ai elementi",
 	"wikibase-unconnectedpages-format-row": "($1 colegamenti interlinguìsteghi in te la pagina)",
+	"wikibase-unconnectedpages-submit": "Và",
 	"wikibase-otherprojects": "Altri projeti"
 }

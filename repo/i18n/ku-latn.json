@@ -21,11 +21,9 @@
 	"wikibase-sitelink-page-edit-placeholder": "rûpel",
 	"wikibase-description-input-help-message": "Danasîneka kurt têkeve $1",
 	"wikibase-statements": "Vegotin",
-	"wikibase-terms": "Bi zimanên din",
 	"wikibase-sitelinks": "Lînkên malperê",
 	"wikibase-sitelinks-special": "Sîteyên din",
 	"wikibase-remove": "jê bibe",
-	"wikibase-aliases-label": "Herwiha tê zanîn wek:",
 	"wikibase-statementview-rank-normal": "Normal rank",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referans}}",
 	"wikibase-itembytitle-lookup-page": "Rûpel:",
@@ -39,6 +37,5 @@
 	"wikibase-listproperties-submit": "Bibîne",
 	"wikibase-entitieswithoutlabel-label-language": "Koda ziman:",
 	"wikibase-entitieswithoutlabel-label-type": "Cure:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "hemû",
-	"wikibase-item-summary-wbsetsitelink-add": "Girêdanê li [$2] zêde bike"
+	"wikibase-entitieswithoutlabel-label-alltypes": "hemû"
 }

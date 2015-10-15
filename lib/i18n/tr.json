@@ -6,7 +6,9 @@
 			"Violetanka",
 			"Fitoschido",
 			"Arystanbek",
-			"Meelo"
+			"Meelo",
+			"McAang",
+			"Stultiwikia"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase veri deposu",
@@ -55,5 +57,20 @@
 	"wikibase-time-precision-BCE-annum": "MÖ $1 yıl",
 	"wikibase-time-precision-BCE-millennium": "MÖ $1. bin yıl",
 	"wikibase-time-precision-BCE-century": "MÖ $1. yüzyıl",
-	"wikibase-time-precision-BCE-10annum": "MÖ $1ler"
+	"wikibase-time-precision-BCE-10annum": "MÖ $1ler",
+	"wikibase-entity-summary-wbsetitem": "Yeni bir öge oluşturuldu",
+	"wikibase-entity-summary-wbcreateredirect": "$4'e yönlendirildi",
+	"wikibase-entity-summary-wbsetreference": "Bir kaynak ayarla",
+	"wikibase-entity-summary-wbsetreference-add": "İddiaya kaynak eklendi",
+	"wikibase-entity-summary-wbsetreference-set": "İddianın kaynağı değiştirildi",
+	"wikibase-entity-summary-wbsetlabel-add": "Etiket [$2] eklendi",
+	"wikibase-entity-summary-wbsetlabel-set": "Etiket [$2] değişti",
+	"wikibase-entity-summary-wbsetlabel-remove": "Etiket [$2] kaldırıldı",
+	"wikibase-entity-summary-wbsetdescription-add": "Açıklama [$2] eklendi",
+	"wikibase-entity-summary-wbsetdescription-set": "Açıklama [$2] değişti",
+	"wikibase-item-summary-wbcreate-new": "Yeni bir öge oluşturuldu",
+	"wikibase-item-summary-wbeditentity": "Yeni bir öge oluşturuldu",
+	"wikibase-item-summary-wbeditentity-create": "Yeni bir öge oluşturuldu",
+	"wikibase-item-summary-wbeditentity-update": "Bir öğe değiştirildi",
+	"wikibase-item-summary-wbeditentity-override": "Bir öge temizlendi"
 }

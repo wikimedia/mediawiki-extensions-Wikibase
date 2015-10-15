@@ -40,9 +40,5 @@
 	"wikibase-modifyentity-id": "அடையாளவிலக்கம்",
 	"wikibase-modifyterm-language": "மொழிக் குறியீடு:",
 	"wikibase-entitieswithoutlabel-label-language": "மொழிக் குறியீடு:",
-	"wikibase-entitieswithoutlabel-submit": "கண்டுபிடி",
-	"wikibase-item-summary-wbsetitem": "ஒரு புதிய உருப்படி உருவாக்கப்பட்டது",
-	"wikibase-item-summary-wbeditentity": "ஒரு புதிய உருப்படி உருவாக்கப்பட்டது",
-	"wikibase-item-summary-wbsetdescription-set": "[$2] விளக்கம் மாற்றப்பட்டது",
-	"wikibase-item-summary-wbsetdescription-remove": "[$2] விளக்கம் நீக்கப்பட்டது"
+	"wikibase-entitieswithoutlabel-submit": "கண்டுபிடி"
 }

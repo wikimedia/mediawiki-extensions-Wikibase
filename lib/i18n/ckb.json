@@ -18,5 +18,18 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "نرخی نەزانراو",
 	"wikibase-snakview-snaktypeselector-novalue": "بێ نرخ",
 	"wikibase-tooltip-error-details": "وردەکارییەکان",
-	"datatypes-type-wikibase-item": "بەند"
+	"datatypes-type-wikibase-item": "بەند",
+	"wikibase-entity-summary-wbsetitem": "بەندێکی نوێ دروست کرا",
+	"wikibase-entity-summary-wbsetlabel-set": "سەرناوی [$2] گۆڕدرا",
+	"wikibase-entity-summary-wbsetlabel-remove": "سەرناوی [$2] سڕایەوە",
+	"wikibase-entity-summary-wbsetdescription-set": "شیکردنەوەی [$2] گۆڕدرا",
+	"wikibase-entity-summary-wbsetaliases-set": "دانانی {{PLURAL:$1|نازناو|نازناوەکان}}ی [$2]",
+	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|نازناو|نازناوەکان}}ی [$2] زیاد کرا",
+	"wikibase-entity-summary-wbsetsitelink-add": "بەستەر بە [$2] زیاد کرا",
+	"wikibase-entity-summary-wbsetsitelink-remove": "بەستەری [$2] سڕایەوە",
+	"wikibase-item-summary-wbeditentity": "بەندێکی نوێ دروست کرا",
+	"wikibase-item-summary-wbeditentity-create": "بەندێکی نوێ دروست کرا",
+	"wikibase-item-summary-wbeditentity-update": "بەندێک نوێ کرایەوە",
+	"wikibase-property-summary-wbeditentity-create": "تایبەتمەندییەکی نوێ دروست کرا",
+	"wikibase-property-summary-wbeditentity-update": "تایبەتمەندییەک سڕایەوە"
 }

@@ -48,7 +48,6 @@
 	"wikibase-replicationnote": "A változtatás néhány percen belül minden wikin látható lesz.",
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-változások mutatása a figyelőlistádon",
 	"unconnectedpages": "Wikidata-hivatkozás nélküli lapok",
-	"wikibase-unconnectedpages-iwdata-label": "Csak nyelvközi hivatkozást tartalmazó lapok",
 	"wikibase-unconnectedpages-format-row": "($1 nyelvközi hivatkozás a lapon)",
 	"wikibase-pageinfo-entity-id-none": "Nincs",
 	"wikibase-otherprojects": "Társlapok",
