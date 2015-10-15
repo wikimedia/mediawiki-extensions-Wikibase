@@ -76,7 +76,7 @@ class EditEntityFactory {
 
 	/**
 	 * @param User $user the user performing the edit
-	 * @param Entity $newEntity the new entity object
+	 * @param Entity $entity the new entity object
 	 * @param int|bool $baseRevId the base revision ID for conflict checking.
 	 *        Defaults to false, disabling conflict checks.
 	 *        `true` can be used to set the base revision to the latest revision:

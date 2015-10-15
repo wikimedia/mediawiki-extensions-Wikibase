@@ -49,6 +49,8 @@ class ParserOutputDataUpdater {
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityLookup $entityLookup
 	 * @param string $siteId The global site ID for the local wiki
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,

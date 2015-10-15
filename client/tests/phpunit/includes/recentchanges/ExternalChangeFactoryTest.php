@@ -219,6 +219,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $expectedComment
+	 * @param string|null $commentHtml
 	 * @param string $expectedType
 	 *
 	 * @return ExternalChange
@@ -231,6 +232,12 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @param string $comment
+	 * @param string|null $commentHtml
+	 *
+	 * @return RevisionData
+	 */
 	private function makeRevisionData( $comment, $commentHtml = null ) {
 		return new RevisionData(
 			'Cat',
@@ -258,6 +265,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $comment
+	 * @param string|null $commentHtml
 	 * @param null|string|array $legacyComment
 	 * @param null|string|array $compositeLegacyComment
 	 * @param string $changeType

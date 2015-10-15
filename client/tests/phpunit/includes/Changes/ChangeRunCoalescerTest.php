@@ -85,7 +85,6 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param array $values
-	 * @param EntityDiff|null $diff
 	 *
 	 * @return EntityChange
 	 */

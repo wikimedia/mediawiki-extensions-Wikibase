@@ -787,8 +787,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param string $entityType
 	 * @param string[] $labels
-	 * @param string[][]|null $aliases
+	 * @param array[]|null $aliases
 	 *
+	 * @throws InvalidArgumentException
 	 * @return TermIndexEntry[]
 	 */
 	public function getLabelConflicts( $entityType, array $labels, array $aliases = null ) {
@@ -904,7 +905,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * @param string[]|string[][] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
+	 * @param string[]|array[] $textsByLanguage A list of texts, or a list of lists of texts (keyed
+	 * by language on the top level).
 	 * @param string[] $types
 	 *
 	 * @throws InvalidArgumentException

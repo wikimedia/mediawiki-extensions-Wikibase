@@ -143,11 +143,14 @@ abstract class RdfWriterBase implements RdfWriter {
 	 *
 	 * @param string $prefix
 	 * @param string $iri The base IRI
+	 *
+	 * @throws LogicException
 	 */
 	public function prefix( $prefix, $iri ) {
 		if ( $this->prefixesLocked ) {
-			throw new \LogicException( "Prefixes can not be added after start()" );
+			throw new LogicException( 'Prefixes can not be added after start()' );
 		}
+
 		$this->prefixes[$prefix] = $iri;
 	}
 

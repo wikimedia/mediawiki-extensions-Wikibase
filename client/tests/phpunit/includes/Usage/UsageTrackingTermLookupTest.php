@@ -20,13 +20,17 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 class UsageTrackingTermLookupTest extends \MediaWikiTestCase {
 
 	/**
+	 * @param string $method Method name expected to be called once.
+	 * @param ItemId $entityId Expected entity id.
+	 * @param string|string[] $languageCode Expected language code or array of language codes.
+	 *
 	 * @return TermLookup
 	 */
-	private function getMockTermLookup( $method, $p1, $p2 ) {
+	private function getMockTermLookup( $method, ItemId $entityId, $languageCode ) {
 		$mockLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 		$mockLookup->expects( $this->once() )
 			->method( $method )
-			->with( $p1, $p2 )
+			->with( $entityId, $languageCode )
 			->will( $this->returnValue( 'TEST' ) );
 
 		return $mockLookup;

@@ -322,6 +322,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @param EntityId $after Only return entities with IDs greater than this.
 	 * @param mixed $redirects A XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityId[]
 	 */
 	public function listEntities( $entityType, $limit, EntityId $after = null, $redirects = self::NO_REDIRECTS ) {

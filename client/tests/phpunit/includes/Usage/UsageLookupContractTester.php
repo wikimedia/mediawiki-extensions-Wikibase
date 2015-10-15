@@ -31,6 +31,8 @@ class UsageLookupContractTester {
 	/**
 	 * @param UsageLookup $lookup The lookup under test
 	 * @param callable $putUsagesCallback function( $pageId, EntityUsage[] $usages, $timestamp )
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( UsageLookup $lookup, $putUsagesCallback ) {
 		if ( !is_callable( $putUsagesCallback ) ) {

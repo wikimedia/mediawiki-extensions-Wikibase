@@ -44,8 +44,9 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @param string[] $entityType The relevant entity type
 	 * @param string[] $labels The label to look for
-	 * @param string[][] $aliases
+	 * @param array[] $aliases
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityId[]
 	 */
 	public function getLabelConflicts( $entityType, array $labels, array $aliases = null ) {

@@ -177,6 +177,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param int $entityAccessLimit
+	 *
+	 * @return EntityLookup
 	 */
 	private function getEntityLookup( $entityAccessLimit ) {
 		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
