@@ -5,6 +5,7 @@
 * Added `InMemoryEntityLookup::addException`
 * Added `PropertyDataTypeMatcher`
 * Added `PropertyDataTypeLookup`
+* Added optional message and previous exception parameters to `UnresolvedEntityRedirectException` constructor
 
 ## Version 3.0.0 (2015-09-16)
 

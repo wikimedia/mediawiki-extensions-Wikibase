@@ -24,8 +24,8 @@ class UnresolvedEntityRedirectException extends EntityLookupException {
 	/**
 	 * @param EntityId $entityId
 	 * @param EntityId $redirectTargetId The ID of the target Entity of the redirect
-	 * @param string|null $message
-	 * @param Exception|null $previous
+	 * @param string|null $message Added in 3.1
+	 * @param Exception|null $previous Added in 3.1
 	 */
 	public function __construct( EntityId $entityId, EntityId $redirectTargetId, $message = null, Exception $previous = null ) {
 		parent::__construct(
