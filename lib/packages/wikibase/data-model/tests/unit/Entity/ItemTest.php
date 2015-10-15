@@ -45,17 +45,23 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testGetId() {
-		foreach ( TestItems::getItems() as $item ) {
-			$id = $item->getId();
-			$this->assertTrue( $id === null || $id instanceof ItemId );
-		}
+		$item = new Item();
+		$this->assertNull( $item->getId() );
+
+		$item->setId( new ItemId( 'Q1' ) );
+		$this->assertEquals( new ItemId( 'Q1' ), $item->getId() );
+
+		$item->setId( null );
+		$this->assertNull( $item->getId() );
+
+		$item = new Item( new ItemId( 'Q2' ) );
+		$this->assertEquals( new ItemId( 'Q2' ), $item->getId() );
 	}
 
 	public function testSetIdUsingNumber() {
-		foreach ( TestItems::getItems() as $item ) {
-			$item->setId( 42 );
-			$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
-		}
+		$item = new Item();
+		$item->setId( 42 );
+		$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
 	}
 
 	public function itemProvider() {
