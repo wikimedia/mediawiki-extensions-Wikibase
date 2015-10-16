@@ -73,7 +73,6 @@
     <rule ref="Squiz.Functions.GlobalFunction" />
     <rule ref="Squiz.Scope" />
 
-
     <rule ref="Squiz.Strings.DoubleQuoteUsage" />
     <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
         <severity>0</severity>

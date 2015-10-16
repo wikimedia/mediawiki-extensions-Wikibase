@@ -1,12 +1,11 @@
 # Wikibase DataModel Services release notes
 
-## Version 3.1.0 (2015-10-15)
+## Version 3.1.0 (2015-10-16)
 
 * Added `InMemoryEntityLookup::addException`
 * Added `PropertyDataTypeMatcher`
-* Added `PropertyDataTypeLookup`
+* Added `InProcessCachingDataTypeLookup`
 * Added optional message and previous exception parameters to the `UnresolvedEntityRedirectException` constructor
-* Fixed bug that caused a fatal error when passing a `Traversable` to the `ByPropertyIdGrouper` constructor
 
 ## Version 3.0.0 (2015-09-16)
 
