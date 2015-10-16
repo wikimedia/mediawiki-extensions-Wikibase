@@ -22,36 +22,36 @@ class EntityParserOutputDataUpdater {
 	/**
 	 * @var ParserOutputDataUpdate[]
 	 */
-	private $dataUpdates;
+	private $dataUpdaters;
 
 	/**
 	 * @var StatementDataUpdate[]
 	 */
-	private $statementDataUpdates = array();
+	private $statementDataUpdaters = array();
 
 	/**
 	 * @var SiteLinkDataUpdate[]
 	 */
-	private $siteLinkDataUpdates = array();
+	private $siteLinkDataUpdaters = array();
 
 	/**
-	 * @param ParserOutputDataUpdate[] $dataUpdates
+	 * @param ParserOutputDataUpdate[] $dataUpdaters
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $dataUpdates ) {
-		foreach ( $dataUpdates as $dataUpdate ) {
+	public function __construct( array $dataUpdaters ) {
+		foreach ( $dataUpdaters as $dataUpdate ) {
 			if ( $dataUpdate instanceof StatementDataUpdate ) {
-				$this->statementDataUpdates[] = $dataUpdate;
+				$this->statementDataUpdaters[] = $dataUpdate;
 			} elseif ( $dataUpdate instanceof SiteLinkDataUpdate ) {
-				$this->siteLinkDataUpdates[] = $dataUpdate;
+				$this->siteLinkDataUpdaters[] = $dataUpdate;
 			} else {
-				throw new InvalidArgumentException( 'Each $dataUpdates element must be a '
+				throw new InvalidArgumentException( 'Each $dataUpdaters element must be a '
 					. 'StatementDataUpdate, SiteLinkDataUpdate or both' );
 			}
 		}
 
-		$this->dataUpdates = $dataUpdates;
+		$this->dataUpdaters = $dataUpdaters;
 	}
 
 	/**
@@ -71,12 +71,12 @@ class EntityParserOutputDataUpdater {
 	 * @param StatementListProvider $entity
 	 */
 	private function processStatementListProvider( StatementListProvider $entity ) {
-		if ( empty( $this->statementDataUpdates ) ) {
+		if ( empty( $this->statementDataUpdaters ) ) {
 			return;
 		}
 
 		foreach ( $entity->getStatements() as $statement ) {
-			foreach ( $this->statementDataUpdates as $dataUpdate ) {
+			foreach ( $this->statementDataUpdaters as $dataUpdate ) {
 				$dataUpdate->processStatement( $statement );
 			}
 		}
@@ -86,12 +86,12 @@ class EntityParserOutputDataUpdater {
 	 * @param Item $item
 	 */
 	private function processItem( Item $item ) {
-		if ( empty( $this->siteLinkDataUpdates ) ) {
+		if ( empty( $this->siteLinkDataUpdaters ) ) {
 			return;
 		}
 
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			foreach ( $this->siteLinkDataUpdates as $dataUpdate ) {
+			foreach ( $this->siteLinkDataUpdaters as $dataUpdate ) {
 				$dataUpdate->processSiteLink( $siteLink );
 			}
 		}
@@ -101,7 +101,7 @@ class EntityParserOutputDataUpdater {
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		foreach ( $this->dataUpdates as $dataUpdate ) {
+		foreach ( $this->dataUpdaters as $dataUpdate ) {
 			$dataUpdate->updateParserOutput( $parserOutput );
 		}
 	}
